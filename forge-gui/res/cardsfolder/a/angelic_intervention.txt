@@ -1,0 +1,7 @@
+Name:Angelic Intervention
+ManaCost:1 W
+Types:Instant
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | TgtPrompt$ Select target creature or planeswalker you control | SubAbility$ DBCounter | Gains$ Choice | Choices$ AnyColor,colorless | SpellDescription$ Target creature or planeswalker you control gains protection from colorless or from the color of your choice until end of turn. If it's a creature, put a +1/+1 counter on it. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything with that quality.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature
+DeckHas:Ability$Counters
+Oracle:Target creature or planeswalker you control gains protection from colorless or from the color of your choice until end of turn. If it's a creature, put a +1/+1 counter on it. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything with that quality.)

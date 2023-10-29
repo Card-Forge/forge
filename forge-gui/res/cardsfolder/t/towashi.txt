@@ -1,0 +1,11 @@
+Name:Towashi
+ManaCost:no cost
+Types:Plane Kamigawa
+S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Trample | EffectZone$ Command | AddTrigger$ DrawTrig | Description$ Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card." (Equipment, Auras you control, and counters are modifications.)
+SVar:DrawTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.
+SVar:RolledChaos:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+DeckHas:Ability$Counters
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Modified creatures you control have trample and "Whenever this creature deals combat damage to a player or planeswalker, draw a card."(Equipment, Auras you control, and counters are modifications.)\nWhenever chaos ensues, distribute three +1/+1 counters among one, two, or three target creatures you control.

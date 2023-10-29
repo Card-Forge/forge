@@ -1,0 +1,15 @@
+Name:Obyra's Attendants
+ManaCost:4 U
+Types:Creature Faerie Wizard
+PT:3/4
+K:Flying
+AlternateMode:Adventure
+Oracle:Flying
+
+ALTERNATE
+
+Name:Desperate Parry
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-0 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gets -4/-0 until end of turn. (Then exile this card. You may cast the creature later from exile.)

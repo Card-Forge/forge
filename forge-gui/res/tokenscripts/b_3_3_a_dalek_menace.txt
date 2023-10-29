@@ -1,0 +1,7 @@
+Name:Dalek Token
+ManaCost:no cost
+Types:Artifact Creature Dalek
+Colors:black
+PT:3/3
+K:Menace
+Oracle:Menace

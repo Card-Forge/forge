@@ -1,4 +1,5 @@
 Name:Ryu, World Warrior
+AltName:Vikya, Scorching Stalwart
 ManaCost:2 W
 Types:Legendary Creature Human Warrior
 PT:2/4

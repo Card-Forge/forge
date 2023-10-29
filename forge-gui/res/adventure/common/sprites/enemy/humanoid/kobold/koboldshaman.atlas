@@ -1,0 +1,110 @@
+koboldshaman.png
+size: 256,288
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 142, 110
+  size: 14, 14     
+Idle 
+  xy: 0, 12
+  size: 32, 20   
+Idle 
+  xy: 32, 12
+  size: 32, 20   
+Idle 
+  xy: 64, 12
+  size: 32, 20  
+Idle 
+  xy: 96, 12
+  size: 32, 20
+Idle 
+  xy: 128, 12
+  size: 32, 20   
+Idle 
+  xy: 160, 12
+  size: 32, 20  
+Idle 
+  xy: 192, 12
+  size: 32, 20
+Idle 
+  xy: 224, 12
+  size: 32, 20
+Wake 
+  xy: 0, 108
+  size: 32, 20   
+Wake 
+  xy: 32, 108
+  size: 32, 20
+Wake 
+  xy: 64, 108
+  size: 32, 20 
+Wake 
+  xy: 96, 108
+  size: 32, 20
+Walk
+  xy: 0,42
+  size: 32, 22   
+Walk
+  xy: 32, 42
+  size: 32, 22      
+Walk
+  xy: 64, 42
+  size: 32, 22      
+Walk
+  xy: 96, 42
+  size: 32, 22      
+Walk
+  xy: 128, 42
+  size: 32, 22      
+Walk
+  xy: 160, 42
+  size: 32, 22      
+Walk
+  xy: 192, 42
+  size: 32, 22      
+Walk
+  xy: 224, 42
+  size: 32, 22      
+Attack 
+  xy: 0, 76
+  size: 32, 20  
+Attack 
+  xy: 32, 76
+  size: 32, 20  
+Attack 
+  xy: 64, 76
+  size: 32, 20  
+Attack 
+  xy: 96, 76
+  size: 32, 20  
+Attack 
+  xy: 128, 76
+  size: 32, 20  
+Attack 
+  xy: 160, 76
+  size: 32, 20  
+Attack 
+  xy: 192, 76
+  size: 32, 20  
+Attack 
+  xy: 224, 76
+  size: 32, 20           
+Death 
+  xy: 0, 128
+  size: 32, 32  
+Death 
+  xy: 32, 128
+  size: 32, 32  
+Death 
+  xy: 64, 128
+  size: 32, 32  
+Death 
+  xy: 96, 128
+  size: 32, 32  
+Death 
+  xy: 128, 128
+  size: 32, 32  
+Death 
+  xy: 160, 128
+  size: 32, 32  

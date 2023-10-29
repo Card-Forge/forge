@@ -1,0 +1,13 @@
+Name:Doomskar Warrior
+ManaCost:2 G G
+Types:Creature Human Warrior
+PT:4/3
+K:Backup:1:BackupAbilities
+SVar:BackupAbilities:DB$ Animate | Keywords$ Trample | Triggers$ DamageTrig
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, look at that many cards from the top of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | ChangeValid$ Creature,Land | Optional$ True | DestinationZone$ Hand | RestRandomOrder$ True
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player or battle, look at that many cards from the top of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters
+Oracle:Backup 1\nTrample\nWhenever this creature deals combat damage to a player or battle, look at that many cards from the top of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

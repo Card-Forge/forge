@@ -3,7 +3,7 @@ ManaCost:2 W U
 Types:Legendary Enchantment Creature God
 PT:6/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and blue is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and blue is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.White.Blue
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | CheckSVar$ Y | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each upkeep, if you had another creature enter the battlefield under your control last turn, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1

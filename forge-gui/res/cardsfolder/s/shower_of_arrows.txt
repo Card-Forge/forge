@@ -1,0 +1,7 @@
+Name:Shower of Arrows
+ManaCost:2 G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | SubAbility$ DBScry | TgtPrompt$ Select target artifact, enchantment, or creature with flying | SpellDescription$ Destroy target artifact, enchantment, or creature with flying.
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
+AI:RemoveDeck:Random
+Oracle:Destroy target artifact, enchantment, or creature with flying. Scry 1.

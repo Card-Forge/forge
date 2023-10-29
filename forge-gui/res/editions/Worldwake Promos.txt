@@ -6,8 +6,6 @@ Type=Promo
 ScryfallCode=PWWK
 
 [cards]
-38 R Hada Freeblade @Cyril Van Der Haegen
-39 R Kalastria Highborn @D. Alexander Gregory
 65★ C Ruthless Cullblade @rk post
 76★ M Comet Storm @Tomasz Jedruszek
 106★ R Joraga Warcaller @Kev Walker

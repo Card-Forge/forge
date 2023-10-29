@@ -1,0 +1,15 @@
+Name:The Watcher in the Water
+ManaCost:3 U U
+Types:Legendary Creature Kraken
+PT:9/9
+K:ETBReplacement:Other:ETBTapped
+SVar:ETBTapped:DB$ Tap | Defined$ Self | SubAbility$ DBAddCounter | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped with nine stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 9
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever you draw a card during an opponent's turn, create a 1/1 blue Tentacle creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_tentacle
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Tentacle.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Tentacle you control dies, untap up to one target Kraken and put a stun counter on up to one target nonland permanent.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Kraken | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target Kraken | SubAbility$ DBStunCounter
+SVar:DBStunCounter:DB$ PutCounter | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target nonland permanent | CounterType$ Stun | CounterNum$ 1
+DeckHints:Type$Kraken
+DeckHas:Type$Tentacle & Ability$Counters
+Oracle:The Watcher in the Water enters the battlefield tapped with nine stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nWhenever you draw a card during an opponent's turn, create a 1/1 blue Tentacle creature token.\nWhenever a Tentacle you control dies, untap up to one target Kraken and put a stun counter on up to one target nonland permanent.

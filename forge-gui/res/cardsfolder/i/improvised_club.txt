@@ -1,0 +1,8 @@
+Name:Improvised Club
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nImprovised Club deals 4 damage to any target.

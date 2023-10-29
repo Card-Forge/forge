@@ -1,0 +1,13 @@
+Name:Bad Wolf Bay
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigExile | TriggerDescription$ At the beginning of combat on your turn, exile up to one target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When chaos ensues, cards can't enter the battlefield from exile this turn. Then planeswalk.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ETBPrevent | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk
+SVar:ETBPrevent:Event$ Moved | ActiveZones$ Battlefield | Origin$ Exile | Destination$ Battlefield | ValidLKI$ Card | Prevent$ True | Layer$ CantHappen | Description$ cards can't enter the battlefield from exile this turn.
+Oracle:At the beginning of combat on your turn, exile up to one target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nWhen chaos ensues, cards can't enter the battlefield from exile this turn. Then planeswalk.

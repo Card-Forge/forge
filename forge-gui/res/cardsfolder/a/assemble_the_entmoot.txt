@@ -1,0 +1,12 @@
+Name:Assemble the Entmoot
+ManaCost:3 G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Reach | Description$ Creatures you control have reach.
+A:AB$ Token | Cost$ Sac<1/CARDNAME> | TokenAmount$ 3 | TokenScript$ g_x_x_treefolk | TokenPower$ X | TokenToughness$ X | RememberTokens$ True | TokenTapped$ True | SubAbility$ DBReach | SpellDescription$ Create three tapped X/X green Treefolk creature tokens, where X is the amount of life you gained this turn. Put a reach counter on each of them.
+SVar:DBReach:DB$ PutCounter | Defined$ Remembered | CounterType$ Reach | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Sacrifice|Token & Type$Treefolk
+DeckNeeds:Ability$LifeGain
+Oracle:Creatures you control have reach.\nSacrifice Assemble the Entmoot: Create three tapped X/X green Treefolk creature tokens, where X is the amount of life you gained this turn. Put a reach counter on each of them.

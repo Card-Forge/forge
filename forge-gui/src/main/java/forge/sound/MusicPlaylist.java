@@ -1,26 +1,30 @@
 package forge.sound;
 
+import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.MyRandom;
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.File;
 import java.io.FilenameFilter;
 
-import forge.util.MyRandom;
-
 public enum MusicPlaylist {
-    BLACK   ("black/"),
-    BLUE    ("blue/"),
-    RED     ("red/"),
-    GREEN   ("green/"),
-    WHITE   ("white/"),
-    CASTLE  ("castle/"),
-    CAVE    ("cave/"),
-    TOWN    ("town/"),
-    BOSS    ("boss/"),
-    MENUS   ("menus/"),
-    MATCH   ("match/");
+    BLACK       ("black/"),
+    BLUE        ("blue/"),
+    RED         ("red/"),
+    GREEN       ("green/"),
+    WHITE       ("white/"),
+    COLORLESS   ("colorless/"),
+    CASTLE      ("castle/"),
+    CAVE        ("cave/"),
+    TOWN        ("town/"),
+    BOSS        ("boss/"),
+    MENUS       ("menus/"),
+    MATCH       ("match/");
 
     private final String subDir;
     private int mostRecentTrackIdx = -1;
-    private String[] filenames;
+    private File[] filenames;
     private static boolean isInvalidated = false;
 
     MusicPlaylist(String subDir0) {
@@ -32,20 +36,21 @@ public enum MusicPlaylist {
     }
 
     public String getRandomFilename() {
+        String path = SoundSystem.instance.getMusicDirectory() + subDir;
         if (filenames == null || isInvalidated) {
             try {
-                FilenameFilter filter = new FilenameFilter(){
-                    @Override
-                    public boolean accept(File file, String name) {
-                        return name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
-                    }
-                };
-                filenames = new File(SoundSystem.instance.getMusicDirectory() + subDir).list(filter);
-                if (filenames == null) filenames = new String[0];
+                FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
+                filenames = new File(path).listFiles(filter);
+                if (GuiBase.isAdventureMode() && (filenames == null || ArrayUtils.isEmpty(filenames))) {
+                    path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
+                    filenames = new File(path).listFiles(filter);
+                }
+                if (filenames == null)
+                    filenames = new File[0];
             }
             catch (Exception e) {
                 e.printStackTrace();
-                filenames = new String[0];
+                filenames = new File[0];
             }
             isInvalidated = false;
         }
@@ -64,21 +69,21 @@ public enum MusicPlaylist {
             mostRecentTrackIdx = newIndex;
         }
 
-        return SoundSystem.instance.getMusicDirectory() + subDir + filenames[mostRecentTrackIdx];
+        return filenames[mostRecentTrackIdx].getPath();
     }
 
     public String getNewRandomFilename() {
-        String[] music;
+        File[] music;
+        String path = SoundSystem.instance.getMusicDirectory() + subDir;
         try {
-            FilenameFilter filter = new FilenameFilter(){
-                @Override
-                public boolean accept(File file, String name) {
-                    return name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
-                }
-            };
-            music = new File(SoundSystem.instance.getMusicDirectory() + subDir).list(filter);
+            FilenameFilter filter = (file, name) -> name.endsWith(".mp3") || name.endsWith(".wav") || name.endsWith(".m4a");
+            music = new File(path).listFiles(filter);
+            if (GuiBase.isAdventureMode() && (music == null || ArrayUtils.isEmpty(music))) {
+                path = ForgeConstants.ADVENTURE_COMMON_MUSIC_DIR + subDir;
+                music = new File(path).listFiles(filter);
+            }
             if (music == null)
-                return null;
+               return null;
         }
         catch (Exception e) {
             return null;
@@ -87,6 +92,7 @@ public enum MusicPlaylist {
             return null;
 
         int index = MyRandom.getRandom().nextInt(music.length);
-        return SoundSystem.instance.getMusicDirectory() + subDir + music[index];
+        System.out.println("Looking up " +path + ForgeConstants.PATH_SEPARATOR + music[index]);
+        return music[index].getPath();
     }
 }

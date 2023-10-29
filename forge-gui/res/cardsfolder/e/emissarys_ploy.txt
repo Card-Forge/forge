@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Conspiracy
 Text:(Start the game with this conspiracy face up in the command zone.)
 K:Before drawing your opening hand, choose 1, 2, or 3.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+cmcChosen | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast creature spells with mana value equal to the chosen number.
+S:Mode$ ManaConvert | EffectZone$ Command | ValidPlayer$ You | ValidCard$ Creature.YouCtrl+cmcChosen | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast creature spells with mana value equal to the chosen number.
 Oracle:(Start the game with this conspiracy face up in the command zone.)\nBefore drawing your opening hand, choose 1, 2, or 3.\nYou may spend mana as though it were mana of any color to cast creature spells with mana value equal to the chosen number.

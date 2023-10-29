@@ -1,0 +1,7 @@
+Name:Rootrider Faun
+ManaCost:1 G
+Types:Creature Satyr Scout
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:{T}: Add {G}.\n{1}, {T}: Add one mana of any color.

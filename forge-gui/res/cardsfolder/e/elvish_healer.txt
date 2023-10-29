@@ -2,9 +2,8 @@ Name:Elvish Healer
 ManaCost:2 W
 Types:Creature Elf Cleric
 PT:1/2
-A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ X | RememberTargets$ True | SubAbility$ DBCleanup | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn. If it's a green creature, prevent the next 2 damage instead.
-SVar:X:Remembered$Valid Creature.Green/Plus.1
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ PreventDamage | Cost$ T | ValidTgts$ Any | Amount$ X | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn. If it's a green creature, prevent the next 2 damage instead.
+SVar:X:Targeted$Valid Creature.Green/Plus.1
 AI:RemoveDeck:Random
 DeckHints:Color$Green
 Oracle:{T}: Prevent the next 1 damage that would be dealt to any target this turn. If it's a green creature, prevent the next 2 damage instead.

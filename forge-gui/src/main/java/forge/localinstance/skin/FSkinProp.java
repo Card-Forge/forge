@@ -271,6 +271,7 @@ public enum FSkinProp {
     ICO_MANASHARD         (new int[] {2, 304, 100, 100}, PropType.ADVENTURE),
     ICO_ADVLOGO           (new int[] {2, 2, 300, 300}, PropType.ADVENTURE),
     ICO_ADVDECKBOX        (new int[] {111, 365, 192, 240}, PropType.ADVENTURE),
+    ICO_ADVFLIP           (new int[] {10, 504, 80, 80}, PropType.ADVENTURE),
 
     //menu icon
     ICO_MENU_GALAXY       (new int[] {0, 1520, 80, 80}, PropType.ICON),
@@ -488,6 +489,7 @@ public enum FSkinProp {
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
     IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_RINGBEARER (new int[] {410, 822, 80, 80}, PropType.MANAICONS),
     //TOXIC
     IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
     //Ability Icons

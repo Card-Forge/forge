@@ -68,6 +68,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public boolean keyDown(int keycode) {
         if (MapStage.getInstance().isDialogOnlyInput()) {
+            MapStage.getInstance().stop();
             return MapStage.getInstance().dialogInput(keycode);
         }
         if (hud.keyDown(keycode))
@@ -80,6 +81,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public boolean keyUp(int keycode) {
         if (MapStage.getInstance().isDialogOnlyInput()) {
+            MapStage.getInstance().stop();
             return true;
         }
         if (hud.keyUp(keycode))

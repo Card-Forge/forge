@@ -1,0 +1,12 @@
+Name:Welcome to Sweettooth
+ManaCost:1 G
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBFood,DBPutCounter
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token.
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X |  SpellDescription$ Put X +1/+1 counters on target creature you control, where X is one plus the number of Foods you control.
+DeckHas:Ability$Token|Counters & Type$Human|Food
+SVar:X:Count$Valid Food.YouCtrl/Plus.1
+DeckHints:Type$Food
+DeckHints:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human creature token.\nII — Create a Food token.\nIII — Put X +1/+1 counters on target creature you control, where X is one plus the number of Foods you control.

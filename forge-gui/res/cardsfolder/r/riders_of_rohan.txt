@@ -1,0 +1,9 @@
+Name:Riders of Rohan
+ManaCost:3 R W
+Types:Creature Human Knight
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken| TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 red Human Knight creature tokens with trample and haste.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_2_2_human_knight_trample_haste | TokenOwner$ You
+K:Dash:4 R W
+DeckHas:Ability$Token
+Oracle:When Riders of Rohan enters the battlefield, create two 2/2 red Human Knight creature tokens with trample and haste.\nDash {4}{R}{W} (You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step.)

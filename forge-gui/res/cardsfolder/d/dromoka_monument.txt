@@ -2,7 +2,7 @@ Name:Dromoka Monument
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-A:AB$ Animate | Cost$ 4 G W | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Dragon | Colors$ Green,White | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 4/4 green and white Dragon artifact creature with flying until end of turn.
+A:AB$ Animate | Cost$ 4 G W | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Dragon | RemoveCreatureTypes$ True | Colors$ Green,White | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 4/4 green and white Dragon artifact creature with flying until end of turn.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green|White
 Oracle:{T}: Add {G} or {W}.\n{4}{G}{W}: Dromoka Monument becomes a 4/4 green and white Dragon artifact creature with flying until end of turn.

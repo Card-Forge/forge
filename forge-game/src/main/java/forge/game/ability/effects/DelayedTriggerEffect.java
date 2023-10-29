@@ -39,15 +39,14 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
+        if (mapParams.containsKey("SpellDescription") && !mapParams.containsKey("TriggerDescription")) {
+            mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
+        }
+        mapParams.remove("SpellDescription");
         mapParams.remove("Cost");
 
-        if (mapParams.containsKey("SpellDescription")) {
-            mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
-            mapParams.remove("SpellDescription");
-        }
-
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
-        delTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
+        delTrig.setSpawningAbility(sa.copy(host, true));
         delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
@@ -79,10 +78,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {
                 overridingSA.setSVar("StoredTransform", String.valueOf(host.getTransformedTimestamp()));
-            }
-
-            if (sa.hasParam("CopyTriggeringObjects")) {
-                overridingSA.setTriggeringObjects(sa.getTriggeringObjects());
             }
 
             delTrig.setOverridingAbility(overridingSA);

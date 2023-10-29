@@ -1,7 +1,7 @@
 Name:Bridge from Below
 ManaCost:B B B
 Types:Enchantment
-A:SP$ PermanentNoncreature | Cost$ B B B | AILogic$ DontCast
+A:SP$ PermanentNoncreature | Cost$ B B B | AILogic$ Never
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigToken | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | TriggerZones$ Graveyard | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, if CARDNAME is in your graveyard, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppOwn | Execute$ TrigChange | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | TriggerZones$ Graveyard | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is in your graveyard, exile CARDNAME.

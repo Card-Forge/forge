@@ -7,8 +7,6 @@ ScryfallCode=PMBS
 
 [cards]
 8★ M Hero of Bladehold @Scott Chou
-*14 R Mirran Crusader @Karl Kopinski
-34 U Treasure Mage @Greg Staples
-39 R Black Sun's Zenith @James Paick
+14★ R Mirran Crusader @Karl Kopinski
 96★ M Glissa, the Traitor @Steve Argyle
 140★ R Thopter Assembly @Volkan Baǵa

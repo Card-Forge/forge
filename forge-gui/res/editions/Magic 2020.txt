@@ -4,7 +4,7 @@ Date=2019-07-12
 Name=Core Set 2020
 Type=Core
 BoosterCovers=3
-Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 fromSheet("M20 Lands")
+Booster=10 Common:fromSheet("M20 cards"):!fromSheet("M20 Lands"), 3 Uncommon:fromSheet("M20 cards"), 1 RareMythic:fromSheet("M20 cards"), 1 fromSheet("M20 Lands")
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M20
@@ -290,7 +290,11 @@ ScryfallCode=M20
 278 L Forest @Steven Belledin
 279 L Forest @Jim Nelson
 280 L Forest @Adam Paquette
+
+[buy a box]
 281 M Rienne, Angel of Rebirth @Kieran Yanner
+
+[precon product]
 282 M Ajani, Inspiring Leader @Yongjae Choi
 283 R Goldmane Griffin @Paul Scott Canavan
 284 C Savannah Sage @Bayard Wu
@@ -354,6 +358,38 @@ ScryfallCode=M20
 342 C Prized Unicorn @Rudy Siswanto
 343 C Titanic Growth @Ryan Pancoast
 344 C Woodland Mystic @Uriah Voth
+
+[Lands]
+6 Bloodfell Caves|M20
+6 Blossoming Sands|M20
+6 Dismal Backwater|M20
+6 Jungle Hollow|M20
+6 Rugged Highlands|M20
+6 Scoured Barrens|M20
+6 Swiftwater Cliffs|M20
+6 Thornwood Falls|M20
+6 Tranquil Cove|M20
+6 Wind-Scarred Crag|M20
+3 Plains|M20|1
+3 Plains|M20|2
+3 Plains|M20|4
+3 Plains|M20|3
+3 Island|M20|1
+3 Island|M20|2
+3 Island|M20|4
+3 Island|M20|3
+3 Swamp|M20|1
+3 Swamp|M20|2
+3 Swamp|M20|4
+3 Swamp|M20|3
+3 Mountain|M20|1
+3 Mountain|M20|2
+3 Mountain|M20|4
+3 Mountain|M20|3
+3 Forest|M20|1
+3 Forest|M20|2
+3 Forest|M20|4
+3 Forest|M20|3
 
 [tokens]
 ajanis_pridemate

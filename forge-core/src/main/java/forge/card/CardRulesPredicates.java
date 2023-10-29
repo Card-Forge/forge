@@ -184,7 +184,7 @@ public final class CardRulesPredicates {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
-                return card.hasKeyword(keyword);
+                return card.hasStartOfKeyword(keyword);
             }
         };
     }

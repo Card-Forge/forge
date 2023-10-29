@@ -1,0 +1,9 @@
+Name:Not Dead After All
+ManaCost:B
+Types:Instant
+A:SP$ Animate | Triggers$ TrigChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it." (Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone2 | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it. (Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+SVar:TrigChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield |  Defined$ TriggeredNewCardLKICopy | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ TriggeredNewCardLKICopy 
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it." (Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

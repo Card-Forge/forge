@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="23" nextobjectid="201">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="15" name="Collision" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEbpwQDGMTAqs5EBjGHylgFdCvu3gQ/HhB+tgHwv5iCHEQfw0Nwx1k724e3PI7ibD/ORFpCQaQ050s0OynQD4jAwTjsh8UBjdEEWIcAsTZdR2Hu0B2gvwMsxOf/eiAWLtpAWhlNzF+x2U3KIxhmN4A2W5k++nhFnR7yQmDTaKE1RCyHxsbG9iIZtdRYfLspWVZRKz96OUNyM+vWejvDoJAaIDtpyGA2c89gOXhKBj6AACuZC0P
+  </data>
+ </layer>
+ <layer id="20" name="Background" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzdlk1qwzAQhb0IGMWbhOIcpKvSS/QQWWRtF3yvFgK9h13cRW+QRU4QiAf54fF4RrZMKaUDj8iKom/e6CeuXJJUio7pVDIumyR56sa+bn07pKIbU3Z6dsPvwWqZYtjE/cp9+7rz0tiYu1bYc76bri/bjUV9xLVk+Q+xOa9xQ/v0MK4vr9XLwfehHiEtYUvfxAaL5tC8STbPDyr6dbfY8MxFbESeejZ9cmk+aRwxz9l4v2hs6aHt15pzLbaWA/zOsa014mwE9tTSkGyaN8SU+0OyeA1iQ5s/JnidY/kWe20u/4XdOr2fx1s+6D2i7vwsWfnwtszlJ4Lmxh1i7XGtPrf9WNLHkuD3l3XO6v77TzdlQmv2icXmnvEfrPmFYs+ZvLfBxTPYH9n0nta01reWS2gdpB5nxs75LvvaLnkX+qv6jqjXb+sOadBWZA==
+  </data>
+ </layer>
+ <layer id="21" name="Ground" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJytlV9Kw0AQxrdWTDd58Q9epYKg3kF8FqEPPYGV4hm04qP3EHz3CgWF6Al8UMHXgjsmQ75MZjNJ8YOPtul2fvNNdpuZd+4imDUoX083nPtucR99bjdNOg/cma+vJf6XwUb+636dYXF5zfPIuZVgO4V9VrLuh3q21U71frpXt8YlHSbOjROb/aPMmfMiR4qvaWxNdK9vhk22Vpv42EMfDZRrt4G7UHynzJu5bZJz+dgsbCkzZtSH/ZhVNa26XdjMx9l3ZU+SwqyjsOePg0+8zsb6ktWFTfVefGFmT8Ref4+wZU3tWl72kItzcJl2Y1+n9fwxdtv95tmiSRY79/EamEVmj51z7NFiz9NqHfaADFkzJjpPsdwkydYkM2MPsif8DXE0NmpZfr7S/nAUtpyvxp1uNa2xWWNfuI2NPUg212b3YXP+A9+8339ZAuNht5kf+1iXjcJ1T1nFtp4b1D87Vpf05it32XOWkKsZ9zmyNS+N79H0rItllT2g2th9/R/zYa8zC0u/cITlEA==
+  </data>
+ </layer>
+ <layer id="19" name="Foreground" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJytlU9OwkAUxqGAhLCBSr2FB/AUxuhexQXRJQfwIP6LRyAsvIQu0brAxL0Lda/B+TJ86evrm2ZI/JJf2oIzv3mvM7LoNRoLg7pMtgtkmms+BzYMny0vaEa66brPws4QIbeVh76H3lfnOx56LneKe3y+cnOcrO917XXuUKSX7l83/6lj37nHQ/9M8D38/+G23rHOe1b1c50xPY91Yz6mPyj/jYbJWsW9dJ51C/Ke73Ff7E88w5f3qm7pr1u7jPRJrPnglO7btNhfd2m913JLP+t/U32HHz66JXyvqwg/6+h0PXTTR3cuwBjCz1DDj/Ndp55xhB/jp0nZLaPdjFwD3Vdp9VxZfUV/Ptp+LL3azZ6/CC/GAMsNZupMzbOqm3Nod+iMyZoxjj2TfUdmaxfdVp8lllvWLZMH+h/KSJ35Z/cPf7Llr/Jd67q51/U+1wm552L/0ytdGlmrPt+jlu1A8K5xrhtiX9ONeVEr0bHcMuxDyA83zxe5SQt3DJZb9wJ+9C+WTd1gr2bPhX7nLR7dudg1eGpX3csN5o1h0vFzc+/yet4pr0WOWSpYO+sIRdd3Idzfib9+JdU1Wr2x5jpIyiCHic1RUnVb/AEOUSan
+  </data>
+ </layer>
+ <layer id="22" name="Clutter 2" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFpIKpzAPtAvxg8iB33ygYBaNgFIyCUTAKRgExAADUUAEv
+  </data>
+ </layer>
+ <layer id="18" name="Clutter" width="31" height="22">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJydlstu00AYhf/YcSPLQHFoKngDWLCoxGUFvAESF1WwKVAkCiwRCwSvwE1qxSVlAeIFYAXvUJYBsckTIEEpIAUwlzmaOczviZ0LRzqKW3vmm/P/40l6qchKIv80cNebkcjnCfysI/JUGX9/m3DsiajMrlPd+CPzIkeNnxtmZHzMXN+NRe45fxnBhqZhfzVec/Mu5SLnnPel/poeV79pcoN7XzGlbe9dcOxl87ne9mP+OH5d/mlyb0WWC+av3DLBemL83tS727b8l50y/3xu+/Cpgn3FsN80x/ORucgtF/7tcoFLg78eGPw5c+9BwIewt3X2GztsL+hsp6vPrno27vEzdKGeXY3tfoEpsG8aZmdWZH7W/m8h9WwY87zoeDb7qaVrwLVodq8h8tYZc4OHuu9verMHi9tE9mSerWu6HLAb4vNrdlftiWuG992wfiaWDfVNxl5qr29t9z1AdvB3Z+U1wBD2FR3yWS+KmR/OiDw2PhVZn448mz2APjStoVdZuf5QmB21Ddk0Mx9oWTb3HN4fZOeZSjb3WxWbfIrv2yg2Mj+aGWZT/bScu4pN/t502FwXnmGd3zWq2R/deTUX22f6wffLQlrPLvJyz5mbXPBQy+uR7zXZ5EIXW5aPZ8KzDtk1mypUv3HOgc13iP39oVwknr2lzhfyN0ydryZ2HcebPjvZ0BKZ6vyGQh5ZoTVba0WtQ/NfZ/6Zbnt4HDLrno5yVW6yBwF/UoF90Iw5NMaHW559Ur3nVWcc748zxm+M+F4aJN4ccye2e36xYi7UQf8WGWXuW8yt13vG+GzQ37UJ5rrk6q9rcVnVpi7fpmMx0+24nOt/Ne73xsDViuwq/wWG9S4V
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="115" template="../../obj/gold.tx" x="460.713" y="311.037"/>
+  <object id="117" template="../../obj/enemy.tx" x="336.76" y="199.976">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="118" template="../../obj/enemy.tx" x="277.693" y="226.745">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="172,171"/>
+   </properties>
+  </object>
+  <object id="119" template="../../obj/enemy.tx" x="157.031" y="119.107">
+   <properties>
+    <property name="enemy" value="Phoenix"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="179,180,198,171,176,174,191"/>
+   </properties>
+  </object>
+  <object id="122" template="../../obj/enemy.tx" x="101.042" y="176.271">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="183,184"/>
+   </properties>
+  </object>
+  <object id="137" template="../../obj/enemy.tx" x="42.263" y="48.2299">
+   <properties>
+    <property name="enemy" value="Bandit"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="150" template="../../obj/enemy.tx" x="213.842" y="94.272">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="174,173"/>
+   </properties>
+  </object>
+  <object id="162" template="../../obj/enemy.tx" x="382.842" y="294.105">
+   <properties>
+    <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="163,165"/>
+   </properties>
+  </object>
+  <object id="163" template="../../obj/waypoint.tx" x="427.842" y="297.105"/>
+  <object id="165" template="../../obj/waypoint.tx" x="345.569" y="296.378"/>
+  <object id="167" template="../../obj/entry_up.tx" x="221.342" y="350.605">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="169" template="../../obj/enemy.tx" x="360.842" y="71.6053">
+   <properties>
+    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="175,176,177,176"/>
+   </properties>
+  </object>
+  <object id="170" template="../../obj/enemy.tx" x="236.842" y="199.605">
+   <properties>
+    <property name="enemy" value="Fire Giant"/>
+   </properties>
+  </object>
+  <object id="171" template="../../obj/waypoint.tx" x="271.342" y="264.105"/>
+  <object id="172" template="../../obj/waypoint.tx" x="274.842" y="162.105"/>
+  <object id="173" template="../../obj/waypoint.tx" x="244.342" y="135.605"/>
+  <object id="174" template="../../obj/waypoint.tx" x="242.342" y="55.1053"/>
+  <object id="175" template="../../obj/waypoint.tx" x="308.842" y="51.1053"/>
+  <object id="176" template="../../obj/waypoint.tx" x="394.342" y="83.1053"/>
+  <object id="177" template="../../obj/waypoint.tx" x="404.842" y="129.605"/>
+  <object id="178" template="../../obj/enemy.tx" x="363.342" y="141.605">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="179" template="../../obj/waypoint.tx" x="180.342" y="117.105"/>
+  <object id="180" template="../../obj/waypoint.tx" x="199.842" y="162.105"/>
+  <object id="181" template="../../obj/waypoint.tx" x="32.3421" y="14.1053"/>
+  <object id="183" template="../../obj/waypoint.tx" x="105.842" y="139.605"/>
+  <object id="184" template="../../obj/waypoint.tx" x="105.342" y="221.105"/>
+  <object id="185" template="../../obj/manashards.tx" x="402.887" y="196.423"/>
+  <object id="186" template="../../obj/manashards.tx" x="66.2966" y="27.7871"/>
+  <object id="188" template="../../obj/manashards.tx" x="50.2966" y="261.878"/>
+  <object id="189" template="../../obj/waypoint.tx" x="359.842" y="117.605"/>
+  <object id="190" template="../../obj/waypoint.tx" x="379.342" y="183.605"/>
+  <object id="191" template="../../obj/waypoint.tx" x="325.842" y="135.105"/>
+  <object id="192" template="../../obj/waypoint.tx" x="20.3421" y="77.1053"/>
+  <object id="193" template="../../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
+  <object id="194" template="../../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
+  <object id="195" template="../../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
+  <object id="196" template="../../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
+  <object id="197" template="../../obj/door_up.tx" x="284.738" y="75.1607" width="19.6667" height="20.7112">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f1.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
+  <object id="198" template="../../obj/waypoint.tx" x="225.342" y="221.105"/>
+  <object id="199" template="../../obj/waypoint.tx" x="202.342" y="251.605"/>
+ </objectgroup>
+</map>

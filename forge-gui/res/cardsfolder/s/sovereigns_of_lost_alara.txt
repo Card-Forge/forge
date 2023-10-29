@@ -5,6 +5,7 @@ PT:4/5
 K:Exalted
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ Whenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle.
 SVar:TrigSearch:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ DBMoveAura
-SVar:DBMoveAura:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantRemembered+YouCtrl | AttachedTo$ Remembered | ChangeNum$ 1 | Hidden$ True | ShuffleNonMandatory$ True
+SVar:DBMoveAura:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantRemembered+YouCtrl | AttachedTo$ Remembered | ChangeNum$ 1 | Hidden$ True | ShuffleNonMandatory$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhenever a creature you control attacks alone, you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle.

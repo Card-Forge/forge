@@ -1,6 +1,6 @@
 Name:Glissa Sunseeker
 ManaCost:2 G G
-Types:Legendary Creature Elf
+Types:Legendary Creature Elf Warrior
 PT:3/2
 K:First Strike
 A:AB$ Destroy | Cost$ T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQX | SpellDescription$ Destroy target artifact if its mana value is equal to the amount of unspent mana you have.

@@ -1,0 +1,10 @@
+Name:Goro-Goro and Satoru
+ManaCost:U B R
+Types:Legendary Creature Goblin Human
+PT:3/4
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+ThisTurnEntered  | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control that entered the battlefield this turn deal combat damage to a player, create a 5/5 red Dragon Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ r_5_5_dragon_spirit_flying
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+DeckHas:Ability$Token & Type$Dragon|Spirit
+DeckHints:Type$Equipment|Aura & Ability$Counters
+Oracle:Whenever one or more creatures you control that entered the battlefield this turn deal combat damage to a player, create a 5/5 red Dragon Spirit creature token with flying.\n{1}{R}: Creatures you control gain haste until end of turn.

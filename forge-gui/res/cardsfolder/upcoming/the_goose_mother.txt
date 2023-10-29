@@ -1,0 +1,15 @@
+Name:The Goose Mother
+ManaCost:X G U
+Types:Legendary Creature Bird Hydra
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create half X Food tokens, rounded up.
+SVar:TrigToken:DB$ Token | TokenAmount$ HalfXUp | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice a Food. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Food>
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+SVar:HalfXUp:Count$xPaid/HalfUp
+DeckHas:Ability$LifeGain|Token|Counters & Type$Food
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nThe Goose Mother enters the battlefield with X +1/+1 counters on it.\nWhen The Goose Mother enters the battlefield, create half X Food tokens, rounded up.\nWhenever The Goose Mother attacks, you may sacrifice a Food. If you do, draw a card.

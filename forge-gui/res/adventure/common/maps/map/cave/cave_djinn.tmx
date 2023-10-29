@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFNMerOAbeDaN4FI9i4vACdlRMSzvQxQba76N4+GMAPumv3g==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8APiVRwQmp4YZOdTOtuJDWtwMzCcAOJuroGx+yob/e0G2Quz+ySd/Q6zG4Q1ueljpzr3wNh7FMkeetqLbH8vMG6P08DeZ0C8EpiH3RkgfAYGwno6gW7pgmJK0hzMbmLUguw8BfR/LAsE44qDBewIvBxo9nNOBEZXi00Mm50aOOwF2XGUC4KR7fWiQnz3Ac3sAeJj3BAMi3tke7BhaqQ1bOmMlva6Q9OdK5F2wuQo9asH1F70+KJV2CLb+xSLvaRiAPyCxpE=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJydVMFtwzAM1FN2Ngm6RuLAj+5VJM0adpOuUaCdw02TMSpCOvjCipZSAgfbMM3TmUduG+e2ARJnX4d3H785pefvJoLvBcizwPHSOve1cm4frs/q3TU8v4VaU6p7aWKOxuBj7m2BU/BD9Z9W8fpJ3FLnRrmjj/wWZ4mPsUvcH4Hv2M7cUqs3zprj3jzAybysGdxTplfS20v6ZiD9uVwLXAMBzQjUg5eQD40daUb/2YMlrRL7tXOHtfsTfaoPPu7nzvBYrkcW7xA4x4DXdtaN+tLXa/IWe9biXeq35tUBzpO/n9MzzW9upkrehjdLnNoDNWcteUtz8+zXcuIbqdM3swfZjwD+nbzDThhJI7zLNS0+PuPUzGfFPevs6J3etTyfOd16H1r/JffPu0we54/+fkdCb02tpT1t8Vq+gPf1XOa0/sfL1tx1Bi/mGqj1Mvyk94Gl99H9r/ELMPnZtA==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBi6YCmVzGGjkjkk2cmMnU1rsIQZOxsXoFbYOLFgZ9MKwNIGctiuoL21cDtIDWdcYBmJ6mFhy8VAn3CmBJDqt6EIqFVGjQL6AlC8DUS9QC8AAO6qCRw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="10.3134" y="206.546"/>
+  <object id="50" template="../../obj/enemy.tx" x="116.672" y="28.1806">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="63,56,57,56,63,66"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/gold.tx" x="204.584" y="117.745"/>
+  <object id="53" template="../../obj/enemy.tx" x="321.994" y="132.721">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="58,57,62,56,57"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="58.6287" y="226.686">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="61,60,59,58,59,58,59"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="351.428" y="215.65">
+   <properties>
+    <property name="enemy" value="Turtle"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/waypoint.tx" x="196.858" y="29.5837"/>
+  <object id="57" template="../../obj/waypoint.tx" x="297.699" y="43.0821"/>
+  <object id="58" template="../../obj/waypoint.tx" x="320" y="160"/>
+  <object id="59" template="../../obj/waypoint.tx" x="192" y="176"/>
+  <object id="60" template="../../obj/waypoint.tx" x="122.22" y="210.621"/>
+  <object id="61" template="../../obj/waypoint.tx" x="20.8495" y="246.881"/>
+  <object id="62" template="../../obj/waypoint.tx" x="216.179" y="117.456"/>
+  <object id="63" template="../../obj/waypoint.tx" x="46.2582" y="35.9359"/>
+  <object id="64" template="../../obj/treasure.tx" x="25.349" y="130.16"/>
+  <object id="65" template="../../obj/booster.tx" x="354.339" y="24.5549">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AKH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AKH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AKH&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/waypoint.tx" x="88.6061" y="98.6637"/>
+  <object id="67" template="../../obj/manashards.tx" x="374.19" y="109.251"/>
+  <object id="68" template="../../obj/manashards.tx" x="25.8783" y="110.839"/>
+  <object id="69" template="../../obj/gold.tx" x="382.395" y="220.414"/>
+  <object id="70" template="../../obj/enemy.tx" x="330.254" y="26.937">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="43.0821" y="132.277">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

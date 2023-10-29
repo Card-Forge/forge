@@ -1,0 +1,11 @@
+Name:Frodo, Determined Hero
+ManaCost:1 W
+Types:Legendary Creature Halfling Warrior
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may attach target Equipment you control with mana value 2 or 3 to NICKNAME.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBAttach | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, you may attach target Equipment you control with mana value 2 or 3 to NICKNAME
+SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment.cmcEQ2+YouCtrl,Equipment.cmcEQ3+YouCtrl | Object$ Targeted | Defined$ Self
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.Self| PlayerTurn$ True | Description$ As long as it's your turn, prevent all damage that would be dealt to NICKNAME.
+DeckHints:Type$Equipment
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Frodo, Determined Hero enters the battlefield or attacks, you may attach target Equipment you control with mana value 2 or 3 to Frodo.\nAs long as it's your turn, prevent all damage that would be dealt to Frodo.

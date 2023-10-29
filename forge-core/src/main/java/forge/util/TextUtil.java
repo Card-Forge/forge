@@ -1,5 +1,6 @@
 package forge.util;
 
+import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,10 @@ public class TextUtil {
             return IPaperCard.NO_ARTIST_NAME;
         return Normalizer.normalize(text, Normalizer.Form.NFD);
 
+    }
+    private static final DecimalFormat df = new DecimalFormat("#.##");
+    public static String decimalFormat(float value) {
+        return df.format(value);
     }
     /**
      * Safely converts an object to a String.

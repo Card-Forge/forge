@@ -1,0 +1,8 @@
+Name:Descendants' Fury
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDigUntil | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If you do, reveal cards from the top of your library until you reveal a creature card that shares a creature type with the sacrificed creature. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:AB$ DigUntil | Cost$ Sac<1/Card.TriggeredSources> | Valid$ Creature.sharesCreatureTypeWith Sacrificed | ValidDescription$ creature that shares a creature type | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If you do, reveal cards from the top of your library until you reveal a creature card that shares a creature type with the sacrificed creature. Put that card onto the battlefield and the rest on the bottom of your library in a random order.

@@ -1,0 +1,9 @@
+Name:Lotho, Corrupt Shirriff
+ManaCost:W B
+Types:Legendary Creature Halfling Rogue
+PT:2/1
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts their second spell each turn, you lose 1 life and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:Whenever a player casts their second spell each turn, you lose 1 life and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

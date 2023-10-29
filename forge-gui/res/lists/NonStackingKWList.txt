@@ -1,7 +1,6 @@
 All creatures able to block CARDNAME do so.
 Banding
 CARDNAME's activated abilities can't be activated.
-CARDNAME can't be regenerated.
 CARDNAME must be blocked if able.
 CARDNAME doesn't untap during your untap step.
 Changeling

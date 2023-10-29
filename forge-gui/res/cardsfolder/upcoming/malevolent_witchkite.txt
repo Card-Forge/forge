@@ -1,0 +1,14 @@
+Name:Malevolent Witchkite
+ManaCost:4 B B
+Types:Creature Dragon Warlock
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice any number of artifacts, enchantments, and/or tokens, then draw that many cards.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Enchantment,Artifact,Card.token | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Enchantment.YouCtrl,Artifact.YouCtrl,Card.token+YouCtrl
+SVar:DrawX:Remembered$Amount
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token & Type$Enchantment|Artifact
+Oracle:Flying\nWhen Malevolent Witchkite enters the battlefield, sacrifice any number of artifacts, enchantments, and/or tokens, then draw that many cards.

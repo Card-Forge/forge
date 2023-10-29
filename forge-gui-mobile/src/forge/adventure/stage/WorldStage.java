@@ -12,6 +12,7 @@ import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.*;
+import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
@@ -43,6 +44,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
     private final static Float dieTimer = 20f;//todo config
     private Float globalTimer = 0f;
+    private transient boolean directlyEnterPOI = false;
 
     NavArrowActor navArrow;
     public WorldStage() {
@@ -116,6 +118,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     int duration = mob.getData().boss ? 400 : 200;
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(duration, 1);
+                    Forge.restrictAdvMenus = true;
+                    player.clearCollisionHeight();
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -124,7 +128,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
-                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
+                            }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });
@@ -201,6 +205,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                     try {
+                        WorldSave.getCurrentSave().autoSave();
                         TileMapScene.instance().load(point.getPointOfInterest());
                         stop();
                         Forge.switchScene(TileMapScene.instance());
@@ -223,6 +228,13 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (currentModifications.containsKey(PlayerModification.Fly))
             return false;
         return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
+    }
+
+    @Override
+    public Vector2 adjustMovement(Vector2 direction, Rectangle boundingRect) {
+        if (isColliding(boundingRect)) //if player is already colliding (after flying or teleport) allow to move off collision
+            return direction;
+        return super.adjustMovement(direction, boundingRect);
     }
 
     public boolean spawn(String enemy) {
@@ -330,22 +342,43 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
+    public void setDirectlyEnterPOI(){
+        directlyEnterPOI = true; //On a new game, we want to automatically enter any POI the player overlaps with.
+    }
+
+    public PointOfInterestMapSprite getMapSprite(PointOfInterest poi) {
+        if (poi == null)
+            return null;
+        for (Actor actor : foregroundSprites.getChildren()) {
+            if (actor.getClass() == PointOfInterestMapSprite.class) {
+                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                if (poi == point.getPointOfInterest() && poi.getPosition() == point.getPointOfInterest().getPosition())
+                    return point;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void enter() {
         getPlayerSprite().LoadPos();
         getPlayerSprite().setMovementDirection(Vector2.Zero);
-        for (Actor actor : foregroundSprites.getChildren()) {
-            if (actor.getClass() == PointOfInterestMapSprite.class) {
-                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
-                if (player.collideWith(point.getBoundingRect())) {
-                    collidingPoint = point;
+        if (directlyEnterPOI) {
+            directlyEnterPOI = false;
+        }
+        else {
+            for (Actor actor : foregroundSprites.getChildren()) {
+                if (actor.getClass() == PointOfInterestMapSprite.class) {
+                    PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
+                    if (player.collideWith(point.getBoundingRect())) {
+                        collidingPoint = point;
+                    }
                 }
             }
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
         background.loadChunk(pos.x, pos.y);
-        handlePointsOfInterestCollision();
     }
 
     @Override
@@ -396,7 +429,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         List<String> questStageIDs = new ArrayList<>();
         for (Pair<Float, EnemySprite> enemy : enemies) {
             timeouts.add(enemy.getKey());
-            names.add(enemy.getValue().getData().name);
+            names.add(enemy.getValue().getData().getName());
             x.add(enemy.getValue().getX());
             y.add(enemy.getValue().getY());
             questStageIDs.add(enemy.getValue().questStageID);

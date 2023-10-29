@@ -1,0 +1,12 @@
+Name:Talion, the Kindly Lord
+ManaCost:2 U B
+Types:Legendary Creature Faerie Noble
+PT:3/4
+K:Flying
+K:ETBReplacement:Other:ChooseNumber
+SVar:ChooseNumber:DB$ ChooseNumber | Min$ 1 | Max$ 10 | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a number between 1 and 10.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQX,Card.powerEQX,Card.toughnessEQX | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an opponent casts a spell with mana value, power, or toughness equal to the chosen number, that player loses 2 life and you draw a card.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:X:Count$ChosenNumber
+Oracle:Flying\nAs Talion, the Kindly Lord enters the battlefield, choose a number between 1 and 10.\nWhenever an opponent casts a spell with mana value, power, or toughness equal to the chosen number, that player loses 2 life and you draw a card.

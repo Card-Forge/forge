@@ -1,0 +1,15 @@
+Name:The Balrog of Moria
+ManaCost:4 B B R
+Types:Legendary Creature Avatar Demon
+PT:8/8
+K:Trample
+K:Haste
+K:Cycling:3 R
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME dies, you may exile it. When you do, for each opponent, exile up to one target creature that player controls.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileAnyGrave<1/Card.TriggeredNewCard> | Execute$ TrigExile | TriggerDescription$ When you do, for each opponent, exile up to one target creature that player controls.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ For each opponent, select up to one target creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True 
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When you cycle CARDNAME, create two Treasure tokens.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
+SVar:OneEach:PlayerCountOpponents$Amount
+DeckHas:Ability$Token|Discard & Type$Artifact|Treasure
+Oracle:Trample, haste\nWhen The Balrog of Moria dies, you may exile it. When you do, for each opponent, exile up to one target creature that player controls.\nCycling {3}{R} ({3}{R}, Discard this card: Draw a card.)\nWhen you cycle The Balrog of Moria, create two Treasure tokens.

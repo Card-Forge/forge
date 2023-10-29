@@ -1,0 +1,10 @@
+Name:Skittering Cicada
+ManaCost:3
+Types:Creature Insect
+PT:2/2
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Card.Colorless | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast colorless spells as though they had flash.
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a colorless spell, until end of turn, CARDNAME gains trample and gets +X/+X, where X is that spell's mana value.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X | KW$ Trample
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+Oracle:Flash\nYou may cast colorless spells as though they had flash.\nWhenever you cast a colorless spell, until end of turn, Skittering Cicada gains trample and gets +X/+X, where X is that spell's mana value.

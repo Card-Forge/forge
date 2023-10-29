@@ -6,7 +6,7 @@ A:AB$ ChooseCard | Cost$ T | ValidTgts$ Player.Opponent | MinAmount$ 0 | Amount$
 SVar:X:Count$Valid Creature.TargetedPlayerCtrl
 SVar:DBOracleEffect:DB$ Effect | EffectOwner$ TargetedPlayer | StaticAbilities$ ForceAttack,ForbidAttack | Triggers$ TrigDestroy | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:ForceAttack:Mode$ MustAttack | EffectZone$ Command | AffectedZone$ Battlefield | ValidCreature$ Creature.YouCtrl+ChosenCard | Description$ During that player's next turn, the chosen creatures attack if able, and other creatures can't attack.
-SVar:ForbidAttack:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl+nonChosenCard | AddHiddenKeyword$ CARDNAME can't attack.
+SVar:ForbidAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.YouCtrl+nonChosenCard | Description$ CARDNAME can't attack.
 SVar:TrigDestroy:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBDestroy | TriggerDescription$ At the beginning of that turn's end step, destroy each of the chosen creatures that didn't attack this turn.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.ChosenCard+notAttackedThisTurn
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

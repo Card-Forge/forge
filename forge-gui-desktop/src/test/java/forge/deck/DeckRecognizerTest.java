@@ -1268,7 +1268,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         tokenCard = cardToken.getCard();
         assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Counterspell");
-        assertEquals(tokenCard.getEdition(), "DMR");
+        assertEquals(tokenCard.getEdition(), "CMM");
         assertTrue(cardToken.cardRequestHasNoCode());
 
     }
@@ -1593,7 +1593,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         //assertEquals(cardToken.getTokenSection(), DeckSection.Main); //fix test since signature spell is allowed on commander section
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Counterspell");
-        assertEquals(tc.getEdition(), "DMR");
+        assertEquals(tc.getEdition(), "CMM");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         // Setting Original Core

@@ -1,0 +1,10 @@
+Name:The Irencrag
+ManaCost:2
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Legendary | TriggerZones$ Battlefield | Execute$ EverFlameCopy | TriggerDescription$ Whenever a legendary creature enters the battlefield under your control, you may have CARDNAME become a legendary Equipment artifact named Everflame, Heroes' Legacy. If you do, it gains equip {3} and "Equipped creature gets +3/+3" and loses all other abilities.
+SVar:EverFlameCopy:DB$ Animate | RemoveAllAbilities$ True | Keywords$ Equip:3 | staticAbilities$ EquipPump | Defined$ Self | Name$ Everflame, Heroes' Legacy | Types$ Legendary,Artifact,Equipment | Duration$ Permanent | Optional$ True | OptionQuestion$ TARGETS become a legendary Equipment artifact named Everflame, Heroes' Legacy.
+SVar:EquipPump:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Equipped creature gets +3/+3
+DeckHas:Type$Equipment
+DeckHints:Type$Legendary & Type$Creature
+Oracle:{T}: Add {C}.\nWhenever a legendary creature enters the battlefield under your control, you may have The Irencrag become a legendary Equipment artifact named Everflame, Heroes' Legacy. If you do, it gains equip {3} and "Equipped creature gets +3/+3" and loses all other abilities.

@@ -1,0 +1,9 @@
+Name:Farsight Ritual
+ManaCost:2 U U
+Types:Instant
+K:Bargain
+A:SP$ Dig | DigNum$ X | ChangeNum$ 2 | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.
+SVar:X:Count$Bargained.8.4
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nLook at the top four cards of your library. If this spell was bargained, look at the top eight cards of your library instead. Put two of them into your hand and the rest on the bottom of your library in a random order.

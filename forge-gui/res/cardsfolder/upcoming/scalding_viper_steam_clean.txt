@@ -1,0 +1,16 @@
+Name:Scalding Viper
+ManaCost:1 R
+Types:Creature Elemental Snake
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.cmcLE3 | TriggerZones$ Battlefield | ValidActivatingPlayer$ Opponent | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a spell with mana value 3 or less, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 1
+AlternateMode:Adventure
+Oracle:Whenever an opponent casts a spell with mana value 3 or less, Scalding Viper deals 1 damage to that player.
+
+ALTERNATE
+
+Name:Steam Clean
+ManaCost:1 U
+Types:Sorcery Adventure
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Return target nonland permanent to its owner's hand. (Then exile this card. You may cast the creature later from exile.)

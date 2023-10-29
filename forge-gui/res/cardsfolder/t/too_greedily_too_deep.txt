@@ -1,0 +1,8 @@
+Name:Too Greedily, Too Deep
+ManaCost:5 B R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBDealDamageAll | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature.
+SVar:DBDealDamageAll:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Graveyard
+Oracle:Put target creature card from a graveyard onto the battlefield under your control. That creature deals damage equal to its power to each other creature.

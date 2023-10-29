@@ -1,0 +1,104 @@
+bandittrapster.png
+size: 256,288
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 10, 6
+  size: 14, 14      
+Idle 
+  xy: 6,4
+  size: 22,23 
+Idle 
+  xy: 38,4
+  size: 22,23 
+Idle 
+  xy: 70,4
+  size: 22,23 
+Idle 
+  xy: 102,4
+  size: 22,23 
+Idle 
+  xy: 134,4
+  size: 22,23 
+Idle 
+  xy: 166,4
+  size: 22,23 
+Idle 
+  xy: 198,4
+  size: 22,23 
+Idle 
+  xy: 230,4
+  size: 22,23 
+Idle 
+  xy: 6,164
+  size: 22,23 
+Idle 
+  xy: 38,164
+  size: 22,23  
+Idle 
+  xy: 70,164
+  size: 22,23 
+Idle 
+  xy: 102,164
+  size: 22,23 
+Walk
+  xy: 6,34
+  size: 24,25 
+Walk
+  xy: 38,34
+  size: 24,25 
+Walk
+  xy: 70,34
+  size: 24,25 
+Walk
+  xy: 102,34
+  size: 24,25 
+Walk
+  xy: 134,34
+  size: 24,25 
+Walk
+  xy: 166,34
+  size: 24,25 
+Walk
+  xy: 198,34
+  size: 24,25 
+Walk
+  xy: 230,34
+  size: 24,25 
+Attack 
+  xy: 6,66
+  size: 24,25 
+Attack 
+  xy: 38,66
+  size: 24,25 
+Attack 
+  xy: 70,66
+  size: 24,25 
+Attack 
+  xy: 102,66
+  size: 24,25 
+Attack 
+  xy: 134,66
+  size: 24,25 
+Attack 
+  xy: 166,66
+  size: 24,25 
+Attack 
+  xy: 198,66
+  size: 24,25 
+Death 
+  xy: 6,194
+  size: 25,25 
+Death 
+  xy: 38,194
+  size: 25,25 
+Death 
+  xy: 70,194
+  size: 25,25 
+Death 
+  xy: 102,194
+  size: 25,25 
+Death 
+  xy: 134,194
+  size: 25,25 

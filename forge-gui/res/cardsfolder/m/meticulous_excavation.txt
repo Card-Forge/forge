@@ -6,6 +6,6 @@ SVar:Blink:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destinatio
 SVar:ReturnToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Return:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand 
-SVar:HasUnearth:Targeted$Permanent.HasUnearth
+SVar:HasUnearth:Targeted$Valid Permanent.withUnearth
 DeckHints:Keyword$Unearth
 Oracle:{2}{W}: Return target permanent you control to its owner's hand. If it has unearth, instead exile it, then return that card to its owner's hand. Activate only during your turn.

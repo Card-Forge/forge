@@ -3,6 +3,7 @@ ManaCost:1 R
 Types:Creature Eldrazi Drone
 PT:2/1
 K:Devoid
-A:AB$ PumpAll | Cost$ 2 C | ValidCards$ Creature.powerLTtoughness | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Each creature with toughness greater than its power can't block this turn.
+A:AB$ Effect | Cost$ 2 C | StaticAbilities$ CantBlock | SpellDescription$ Each creature with toughness greater than its power can't block this turn.
+SVar:CantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.powerLTtoughness | Description$ Each creature with toughness greater than its power can't block this turn.
 DeckHints:Ability$Mana.Colorless
 Oracle:Devoid (This card has no color.)\n{2}{C}: Each creature with toughness greater than its power can't block this turn. ({C} represents colorless mana.)

@@ -5,6 +5,6 @@ PT:1/3
 K:Ninjutsu:1 G
 K:etbCounter:Deathtouch:1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigImmediateTrig | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may remove a deathtouch counter from it. When you do, exile target artifact or enchantment that player controls.
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ SubCounter<1/Deathtouch> | Execute$ TrigExile | CopyTriggeringObjects$ True | TriggerDescription$ When you do, exile target artifact or enchantment that player controls.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.ControlledBy TriggeredTarget,Enchantment.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment creature that player controls | Origin$ Battlefield | Destination$ Exile
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ SubCounter<1/Deathtouch> | Execute$ TrigExile | TriggerDescription$ When you do, exile target artifact or enchantment that player controls.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.ControlledBy Spawner>TriggeredTarget,Enchantment.ControlledBy Spawner>TriggeredTarget | TgtPrompt$ Select target artifact or enchantment creature that player controls | Origin$ Battlefield | Destination$ Exile
 Oracle:Ninjutsu {1}{G}\nKappa Tech-Wrecker enters the battlefield with a deathtouch counter on it.\nWhenever Kappa Tech-Wrecker deals combat damage to a player, you may remove a deathtouch counter from it. When you do, exile target artifact or enchantment that player controls.

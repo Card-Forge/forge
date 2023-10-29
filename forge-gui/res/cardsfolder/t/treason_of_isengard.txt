@@ -1,0 +1,7 @@
+Name:Treason of Isengard
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZone | TgtPrompt$ Choose up to one target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Library | SubAbility$ DBAmass | SpellDescription$ Put up to one target instant or sorcery card from your graveyard on top of your library.
+SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 2 | SpellDescription$ Amass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+Oracle:Put up to one target instant or sorcery card from your graveyard on top of your library.\nAmass Orcs 2. (Put two +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

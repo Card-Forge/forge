@@ -1,0 +1,16 @@
+Name:Field-Tested Frying Pan
+ManaCost:2 W
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token, then create a 1/1 white Halfling creature token and attach CARDNAME to it.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_halfling | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | Object$ Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddTrigger$ GainLifeTrig | Description$ Equipped creature has "Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained."
+SVar:GainLifeTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:TriggerCount$LifeAmount
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food|Artifact|Halfling
+DeckHints:Ability$LifeGain
+Oracle:When Field-Tested Frying Pan enters the battlefield, create a Food token, then create a 1/1 white Halfling creature token and attach Field-Tested Frying Pan to it.\nEquipped creature has "Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained."\nEquip {2}

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
@@ -17,6 +18,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -65,7 +67,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-        if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
+        if (improvesPosition(ai, sa)) {
             return true;
         }
         if (!ph.is(PhaseType.MAIN2)) {
@@ -87,7 +89,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (logic.startsWith("ManaRitual")) {
              return ph.is(PhaseType.MAIN2, ai) || ph.is(PhaseType.MAIN1, ai);
         } else if ("AtOppEOT".equals(logic)) {
-            return !ai.getManaPool().hasBurn() && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
+            return (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) && ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
         }
         return super.checkPhaseRestrictions(ai, sa, ph, logic);
     }
@@ -109,12 +111,8 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true;
         }
 
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean moreManaNextTurn = ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
-                && canRampPool(ai, sa.getHostCard());
-
         return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && (moreManaNextTurn || ComputerUtil.playImmediately(ai, sa));
+                && sa.getSubAbility() == null && (improvesPosition(ai, sa) || ComputerUtil.playImmediately(ai, sa));
     }
 
     /**
@@ -260,6 +258,17 @@ public class ManaEffectAi extends SpellAbilityAi {
 
         // TODO: this will probably still waste the card from time to time. Somehow improve detection of castable material.
         return castableSpells.size() > 0;
+    }
+
+    private boolean improvesPosition(Player ai, SpellAbility sa) {
+        boolean activateForTrigger = (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) &&
+                Iterables.any(Iterables.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
+                t -> sa.getHostCard().getAbilityActivatedThisTurn(t.getOverridingAbility()) == 0);
+
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        // TODO if threatened use right away
+        return ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
+                && (activateForTrigger || canRampPool(ai, sa.getHostCard()));   
     }
 
     public static boolean canRampPool(Player ai, Card source) {

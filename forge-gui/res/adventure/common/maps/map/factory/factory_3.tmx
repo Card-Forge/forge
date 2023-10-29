@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVe0NAiEM7X85FiA3hR/D3M2ic+goEl3CibxGGytpoUWTewm5AI++3qMNAOthHgByaI9pqHOlfZzjuoQx2HOscZOwh3xpncc6L3k9IsBl+e7ia3iQFB9auvu3zjZ+dD36WvyW7oHF1/S8PiNuyvq9835zce7KvOUcra7KGpyEmiWOpwYJLZ+lvHPxD//Upbgev8vz2rxWz9Tbs3IPv8LqM6H0uMbVzvfoerhlfhyaLt7raWMbpHs08nFo/Wt5E6i/Ruad9T3RfLAihW/dnp5aW/cJSmlZMw==
+  </data>
+ </layer>
+ <layer id="7" name="Floor" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxTZWdgUB1API8TN6a1vYTYw83e0XAevuE8ikfxKB7FxGIAZfNnhA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNg8QuM9EeY7PXDChOLMCn1gSHnAkV7MUHhqO9AxXO+NReQkpHMIAvXZGSLsmNE1r6l5b2kgNonZ5paS85bhxs9k5nJB7L8kDMmkaCHhDGZi8pdQrMvzA/kFsn0cvegfIvur0AFC+Ruw==
+  </data>
+ </layer>
+ <layer id="8" name="Walls Supplementary" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4YMZEHbUmOORwiQ80kGdnYFACYgV2+tq7H2jfASA+SGd79wLti+NgYNhHZ3tpBXClK1LSMzXtpTUYrPloFNAWUKt8xgVG09XAAQDw5AcX
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjZ4IgGZfpLNBkYHqozMDwC4vVA9gZN0vSv0ITgWqA76rC4pRDJvGgkcUug+F+gnf+A+DSQfYZEey8D1V8B4plAO2fhCINiZtLMJAa8B9r5AYiDgPgNFnuR/fiH+tbjBTdY6GvfTzR+LBAHs0PYMVjkiAUXgWF7SROTRgcTSEwz2MBsoBlzyDTHFhj/dkBsD00HgjoIf57Twa93O9DOHUTaWwxV9xvKjwTaFwXE0Ujprx+q5pk6cWYiA1A6XoEjPeMDkVA6Tgc13WMDxWSE8XcktqQWA4OUFoQNKlNgeUuEQDiPAtwgbqAdQAEAAEykNB8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="112.181" y="166.351">
+   <properties>
+    <property name="enemy" value="Apprentice Red Wizard"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="79,78"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="21.1853" y="40.0443"/>
+  <object id="65" template="../../obj/gold.tx" x="321.724" y="170.529"/>
+  <object id="66" template="../../obj/gold.tx" x="25.3334" y="144"/>
+  <object id="67" template="../../obj/enemy.tx" x="214.171" y="208.358">
+   <properties>
+    <property name="enemy" value="Clay Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="88.678" y="42.5046">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="82,85,86,87"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="360.086" y="110.375">
+   <properties>
+    <property name="enemy" value="Apprentice Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,81,83,84"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/gold.tx" x="392.667" y="81.3333"/>
+  <object id="74" template="../../obj/booster.tx" x="27.5" y="107.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BRO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/treasure.tx" x="171.5" y="215.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/manashards.tx" x="289.333" y="52"/>
+  <object id="77" template="../../obj/manashards.tx" x="324" y="83.3333"/>
+  <object id="78" template="../../obj/waypoint.tx" x="67.3333" y="170.667"/>
+  <object id="79" template="../../obj/waypoint.tx" x="171.333" y="168"/>
+  <object id="80" template="../../obj/waypoint.tx" x="282" y="76.6667"/>
+  <object id="81" template="../../obj/waypoint.tx" x="290.667" y="138"/>
+  <object id="82" template="../../obj/waypoint.tx" x="176.833" y="41.5"/>
+  <object id="83" template="../../obj/waypoint.tx" x="361.333" y="136.667"/>
+  <object id="84" template="../../obj/waypoint.tx" x="361" y="86"/>
+  <object id="85" template="../../obj/waypoint.tx" x="165" y="109.5"/>
+  <object id="86" template="../../obj/waypoint.tx" x="30" y="103.5"/>
+  <object id="87" template="../../obj/waypoint.tx" x="23" y="45.5"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,10 @@
+Name:Tale of Tinuviel
+ManaCost:3 W W
+Types:Enchantment Saga
+K:Saga:3:DBPump,DBReturn,DBPumpLifeLink
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | KW$ Indestructible | Duration$ UntilLoseControlOfHost | SpellDescription$ Target creature you control gains indestructible for as long as you control CARDNAME.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:DBPumpLifeLink:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | TargetMin$ 0 | TargetMax$ 2 | KW$ Lifelink | SpellDescription$ Up to two target creatures you control each gain lifelink until end of turn.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Target creature you control gains indestructible for as long as you control Tale of Tinuviel.\nII — Return target creature card from your graveyard to the battlefield.\nIII — Up to two target creatures you control each gain lifelink until end of turn.

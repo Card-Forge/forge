@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Legendary Enchantment Creature God
 PT:5/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to white is less than five, CARDNAME is not a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to white is less than five, NICKNAME isn't a creature.
 SVar:X:Count$Devotion.White
 SVar:BuffedBy:Permanent.White
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on target creature or enchantment you control.

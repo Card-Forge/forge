@@ -1,0 +1,89 @@
+naga.png
+size: 512,320
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 19, 27
+  size: 20, 20      
+Idle 
+  xy: 12,24
+  size: 40,40 
+Idle 
+  xy: 76,24
+  size: 40,40 
+Idle 
+  xy: 140,24
+  size: 40,40 
+Idle 
+  xy: 204,24
+  size: 40,40  
+Walk
+  xy: 12,88
+  size: 45,40 
+Walk
+  xy: 76,88
+  size: 45,40 
+Walk
+  xy: 140,88
+  size: 45,40 
+Walk
+  xy: 204,88
+  size: 45,40 
+Walk
+  xy: 268,88
+  size: 45,40 
+Walk
+  xy: 332,88
+  size: 45,40 
+Walk
+  xy: 396,88
+  size: 45,40 
+Walk
+  xy: 460,88
+  size: 45,40 
+Attack 
+  xy: 12,150
+  size: 50,42
+Attack 
+  xy: 76,150
+  size: 50,42
+Attack 
+  xy: 140,150
+  size: 50,42
+Attack 
+  xy: 204,150
+  size: 50,42
+Attack 
+  xy: 268,150
+  size: 50,42
+Attack 
+  xy: 332,150
+  size: 50,42
+Attack 
+  xy: 396,150
+  size: 50,42
+Death 
+  xy: 0,279
+  size: 64,41 
+Death 
+  xy: 64,279
+  size: 64,41 
+Death 
+  xy: 128,279
+  size: 64,41 
+Death 
+  xy: 192,279
+  size: 64,41 
+Death 
+  xy: 256,279
+  size: 64,41 
+Death 
+  xy: 320,279
+  size: 64,41
+Death 
+  xy: 384,279
+  size: 64,41 
+Death 
+  xy: 448,279
+  size: 64,41 

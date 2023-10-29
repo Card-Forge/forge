@@ -1,0 +1,14 @@
+Name:Motivated Pony
+ManaCost:4 G
+Types:Creature Horse
+PT:3/3
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures get +1/+1 until end of turn. If a Food entered the battlefield under your control this turn, untap those creatures and they get an additional +2/+2 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUntapAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.attacking | ConditionCheckSVar$ Food | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 2 | ConditionCheckSVar$ Food | NumDef$ 2
+SVar:Food:Count$ThisTurnEntered_Battlefield_Food.YouCtrl
+SVar:HasAttackEffect:True
+DeckHints:Type$Food
+Oracle:Whenever Motivated Pony attacks, attacking creatures get +1/+1 until end of turn. If a Food entered the battlefield under your control this turn, untap those creatures and they get an additional +2/+2 until end of turn.

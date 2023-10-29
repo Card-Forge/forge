@@ -2,13 +2,10 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
-
-import static forge.adventure.util.Paths.ITEMS_ATLAS;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -49,16 +46,9 @@ public class ItemData {
         shardsNeeded      = cpy.shardsNeeded;
     }
 
-    public Sprite sprite()
-    {
-        if(itemAtlas==null)
-        {
-            itemAtlas=Config.instance().getAtlas(ITEMS_ATLAS);
-        }
-        return itemAtlas.createSprite(iconName);
+    public Sprite sprite() {
+        return Config.instance().getItemSprite(iconName);
     }
-
-    private static TextureAtlas itemAtlas;
     private static Array<ItemData> itemList;
     public static Array<ItemData> getAllItems() {
         if (itemList == null) {

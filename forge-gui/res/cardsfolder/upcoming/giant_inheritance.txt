@@ -1,0 +1,13 @@
+Name:Giant Inheritance
+ManaCost:4 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 5 | AddToughness$ 5 | AddTrigger$ AttackTrigger | Description$ Enchanted creature gets +5/+5 and has "Whenever this creature attacks, create a Monster Role token attached to up to one target attacking creature." (Enchanted creature gets +1/+1 and has trample.)
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature attacks, create a Monster Role token attached to up to one target attacking creature." (Enchanted creature gets +1/+1 and has trample.
+SVar:TrigToken:DB$ Token | TokenScript$ role_monster | AttachedTo$ Targeted | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target attacking creature | ValidTgts$ Creature.attacking
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
+SVar:SacMe:2
+DeckHas:Type$Aura|Role & Ability$Token
+Oracle:Enchant creature\nEnchanted creature gets +5/+5 and has "Whenever this creature attacks, create a Monster Role token attached to up to one target attacking creature." (Enchanted creature gets +1/+1 and has trample.)\nWhen Giant Inheritance is put into a graveyard from the battlefield, return it to its owner's hand.

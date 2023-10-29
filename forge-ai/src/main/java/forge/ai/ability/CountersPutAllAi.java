@@ -137,7 +137,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
         }
 
-        if (SpellAbilityAi.playReusable(ai, sa)) {
+        if (playReusable(ai, sa)) {
             return chance;
         }
 

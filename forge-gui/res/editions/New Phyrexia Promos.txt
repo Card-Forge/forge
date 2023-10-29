@@ -8,7 +8,5 @@ ScryfallCode=PNPH
 [cards]
 42★ R Phyrexian Metamorph @Jung Park
 73★ M Sheoldred, Whispering One @Jason Felix
-*74 R Surgical Extraction @Greg Staples
-90 U Priest of Urabrask @Clint Cearley
-146 R Myr Superion @Greg Staples
+74★ R Surgical Extraction @Greg Staples
 151 C Pristine Talisman @Matt Cavotta

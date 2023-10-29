@@ -95,8 +95,8 @@ public class CostExert extends CostPartWithTrigger {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-    	targetCard.exert();
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        targetCard.exert(payer);
         return targetCard;
     }
 

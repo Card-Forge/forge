@@ -2,8 +2,9 @@ Name:Lim-Dul's Cohort
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
-SVar:TrigBlocks:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN CARDNAME can't be regenerated.
-SVar:TrigBlocked:DB$ Pump | Defined$ TriggeredBlockerLKICopy | KW$ HIDDEN CARDNAME can't be regenerated.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+SVar:TrigBlocks:DB$ Effect | RememberObjects$ TriggeredAttackerLKICopy | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | AILogic$ CantRegenerate
+SVar:TrigBlocked:DB$ Effect | RememberObjects$ TriggeredBlockerLKICopy | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | AILogic$ CantRegenerate
+SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.

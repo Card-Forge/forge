@@ -1,0 +1,12 @@
+Name:Restless Fortress
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
+A:AB$ Animate | Cost$ 2 W B | Defined$ Self | Power$ 1 | Toughness$ 4 | Types$ Creature,Nightmare | Colors$ White,Black | SpellDescription$ CARDNAME becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, defending player loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain & Type$Nightmare
+SVar:HasAttackEffect:TRUE
+Oracle:Restless Fortress enters the battlefield tapped.\n{T}: Add {W} or {B}.\n\n{2}{W}{B}: Restless Fortress becomes a 1/4 white and black Nightmare creature until end of turn. It's still a land.\nWhenever Restless Fortress attacks, defending player loses 2 life and you gain 2 life.

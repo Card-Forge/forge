@@ -1,0 +1,6 @@
+Name:Dreadful as the Storm
+ManaCost:2 U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 5 | Toughness$ 5 | SubAbility$ TrigTempt | SpellDescription$ Target creature has base power and toughness 5/5 until end of turn. The Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:Target creature has base power and toughness 5/5 until end of turn. The Ring tempts you.

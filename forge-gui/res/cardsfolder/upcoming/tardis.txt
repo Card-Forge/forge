@@ -1,0 +1,15 @@
+Name:TARDIS
+ManaCost:2
+Types:Artifact Vehicle
+PT:2/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Time Lord+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ GrantCascade | Triggers$ ExileEffect | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk | Optional$ True
+SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next spell you cast this turn has cascade and you may planeswalk.
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.YouCtrl | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+K:Crew:2
+DeckNeeds:Type$Time Lord
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever TARDIS attacks, if you control a Time Lord, the next spell you cast this turn has cascade and you may planeswalk.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

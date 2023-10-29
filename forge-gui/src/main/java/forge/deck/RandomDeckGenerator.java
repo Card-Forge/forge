@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.gamemodes.quest.QuestController;
@@ -115,20 +116,14 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                             return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"), isAi);
                         case VINTAGE_CARDGEN_DECK:
                             return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"), isAi);
+                        case PAUPER_CARDGEN_DECK:
+                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPauper(), isAi);
                         case STANDARD_COLOR_DECK:
-                            colors = new ArrayList<>();
-                            count = Aggregates.randomInt(1, 3);
-                            for (int i = 1; i <= count; i++) {
-                                colors.add("Random " + i);
-                            }
-                            return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getStandard().getFilterPrinted(), isAi);
+                            return generateRandomColorDeckOfFormat(FModel.getFormats().getStandard());
                         case MODERN_COLOR_DECK:
-                            colors = new ArrayList<>();
-                            count = Aggregates.randomInt(1, 3);
-                            for (int i = 1; i <= count; i++) {
-                                colors.add("Random " + i);
-                            }
-                            return DeckgenUtil.buildColorDeck(colors, FModel.getFormats().getModern().getFilterPrinted(), isAi);
+                            return generateRandomColorDeckOfFormat(FModel.getFormats().getModern());
+                        case PAUPER_COLOR_DECK:
+                            return generateRandomColorDeckOfFormat(FModel.getFormats().getPauper());
                         case THEME_DECK:
                             return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
                         default:
@@ -136,6 +131,17 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                     }
                 }
         }
+    }
+
+    private Deck generateRandomColorDeckOfFormat(GameFormat format) {
+        int count;
+        List<String> colors;
+        colors = new ArrayList<>();
+        count = Aggregates.randomInt(1, 3);
+        for (int i = 1; i <= count; i++) {
+            colors.add("Random " + i);
+        }
+        return DeckgenUtil.buildColorDeck(colors, format.getFilterPrinted(), isAi);
     }
 
     private Deck getUserDeck() {

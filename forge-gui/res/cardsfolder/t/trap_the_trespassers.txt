@@ -1,0 +1,9 @@
+Name:Trap the Trespassers
+ManaCost:2 U
+Types:Instant
+A:SP$ Vote | Defined$ Player | Secret$ True | StoreVoteNum$ True | VoteCard$ Creature.YouDontCtrl | RememberVotedObjects$ True | AILogic$ Judgment | SubAbility$ DBRepeatStun | StackDescription$ SpellDescription | SpellDescription$ Secret council — Each player secretly votes for a creature you don't control, then those votes are revealed.
+SVar:DBRepeatStun:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ Remembered | RepeatSubAbility$ DBPutCounter | AmountFromVotes$ True | SubAbility$ DBCleanup | SpellDescription$ For each creature with one or more votes, put that many stun counters on it, then tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ STUN | CounterNum$ Votes | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Imprinted
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Secret council — Each player secretly votes for a creature you don't control, then those votes are revealed. For each creature with one or more votes, put that many stun counters on it, then tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

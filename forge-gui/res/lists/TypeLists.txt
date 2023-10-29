@@ -67,8 +67,10 @@ Cow:Cows
 Coward:Cowards
 Crab:Crabs
 Crocodile:Crocodiles
+Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
+Dalek:Daleks
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -76,6 +78,7 @@ Deserter:Deserters
 Devil:Devils
 Dinosaur:Dinosaurs
 Djinn:Djinns
+Doctor:Doctors
 Dog:Dogs
 Dragon:Dragons
 Drake:Drakes
@@ -273,6 +276,7 @@ Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
+Time Lord:Time Lords
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -311,6 +315,7 @@ Background
 Cartouche
 Class
 Curse
+Role
 Rune
 Saga
 Shrine
@@ -358,6 +363,7 @@ Freyalise
 Garruk
 Gideon
 Grist
+Guff
 Huatli
 Inzerva
 Jace
@@ -400,6 +406,7 @@ Urza
 Venser
 Vivien
 Vraska
+Vronos
 Will
 Windgrace
 Wrenn
@@ -411,3 +418,77 @@ Zariel
 Undercity
 [BattleTypes]
 Siege
+[PlanarTypes]
+Alara
+Alfava Metraxis
+Amonkhet
+Antausia
+Arcavios
+Arkhos
+Azgol
+Belenon
+Bolas's Meditation Realm
+Capenna
+Cridhe
+Dominaria
+Earth
+Echoir
+Eldraine
+Equilor
+Ergamon
+Fabacin
+Fiora
+Gallifrey
+Gargantikar
+Gobakhan
+Ikoria
+Innistrad
+Iquatana
+Ir
+Ixalan
+Kaladesh
+Kaldheim
+Kamigawa
+Karsus
+Kephalai
+Kinshala
+Kolbahan
+Kylem
+Kyneth
+Lorwyn
+Luvion
+Mars
+Mercadia
+Mirrodin
+Moag
+Mongseng
+Muraganda
+Necros
+New Earth
+New Phyrexia
+Phyrexia
+Pyrulea
+Rabiah
+Rath
+Ravnica
+Regatha
+Segovia
+Serra's Realm
+Shadowmoor
+Shandalar
+Shenmeng
+Skaro
+Spacecraft
+Tarkir
+The Abyss
+The Dalek Asylum
+The Library
+Theros
+Trenzalore
+Ulgrotha
+Valla
+Vryn
+Wildfire
+Xerex
+Zendikar
+Zhalfir

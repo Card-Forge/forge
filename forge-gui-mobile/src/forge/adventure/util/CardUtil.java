@@ -3,6 +3,7 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
@@ -14,6 +15,8 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
+import forge.game.GameFormat;
+import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.UnOpenedProduct;
@@ -299,6 +302,7 @@ public class CardUtil {
 
     public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r)
     {
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
 
         final List<PaperCard> result = new ArrayList<>();
         List<PaperCard> pool = getPredicateResult(cards, data);
@@ -306,7 +310,12 @@ public class CardUtil {
             for (int i = 0; i < count; i++) {
                 PaperCard candidate = pool.get(r.nextInt(pool.size()));
                 if (candidate != null) {
-                    result.add(candidate);
+                    if (allCardVariants) {
+                        PaperCard finalCandidate = CardUtil.getCardByName(candidate.getCardName()); // get a random set variant
+                        result.add(finalCandidate);
+                    } else {
+                        result.add(candidate);
+                    }
                 }
             }
         }
@@ -447,6 +456,8 @@ public class CardUtil {
         int colorLess=0;
         int cardCount=nonLands.size();
         List<PaperCard> cards=new ArrayList<>();
+        boolean allCardVariants=Config.instance().getSettingData().useAllCardVariants;
+
         for(PaperCard nonLand:nonLands)
         {
             red+=nonLand.getRules().getManaCost().getShardCount(ManaCostShard.RED);
@@ -460,6 +471,11 @@ public class CardUtil {
         int neededLands=template.count-cardCount;
         int neededDualLands= Math.round (neededLands*template.rares);
         int neededBase=neededLands-neededDualLands;
+        String edition = "";
+        if (allCardVariants) {
+            PaperCard templateLand = CardUtil.getCardByName("Plains");
+            edition = templateLand.getEdition();
+        }
         if(sum==0.)
         {
             cards.addAll(generateLands("Wastes",neededLands));
@@ -471,11 +487,11 @@ public class CardUtil {
             int forest=Math.round(neededBase*(green/sum));
             int plains=Math.round(neededBase*(white/sum));
             int swamp=Math.round(neededBase*(black/sum));
-            cards.addAll(generateLands("Plains",plains));
-            cards.addAll(generateLands("Island",island));
-            cards.addAll(generateLands("Forest",forest));
-            cards.addAll(generateLands("Mountain",mount));
-            cards.addAll(generateLands("Swamp",swamp));
+            cards.addAll(generateLands("Plains",plains,edition));
+            cards.addAll(generateLands("Island",island,edition));
+            cards.addAll(generateLands("Forest",forest,edition));
+            cards.addAll(generateLands("Mountain",mount,edition));
+            cards.addAll(generateLands("Swamp",swamp,edition));
             List<String> landTypes=new ArrayList<>();
             if(mount>0)
                 landTypes.add("Mountain");
@@ -591,10 +607,26 @@ public class CardUtil {
         return ret;
     }
 
-    private static Collection<PaperCard> generateLands(String landName,int count) {
-        Collection<PaperCard> ret=new ArrayList<>();
-        for(int i=0;i<count;i++)
-            ret.add(FModel.getMagicDb().getCommonCards().getCard(landName));
+    private static Collection<PaperCard> generateLands(String landName, int count) {
+        return generateLands(landName, count, "");
+    }
+
+    private static Collection<PaperCard> generateLands(String landName, int count, String edition) {
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+        Collection<PaperCard> ret = new ArrayList<>();
+
+        if (allCardVariants) {
+            if (edition.isEmpty()) {
+                PaperCard templateLand = getCardByName(landName);
+                edition = templateLand.getEdition();
+            }
+            for (int i = 0; i < count; i++) {
+                ret.add(getCardByNameAndEdition(landName, edition));
+            }
+        } else {
+            for (int i = 0; i < count; i++)
+                ret.add(FModel.getMagicDb().getCommonCards().getCard(landName));
+        }
 
         return ret;
     }
@@ -637,7 +669,7 @@ public class CardUtil {
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
         if(path.endsWith(".dck"))
-            return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
+            return DeckSerializer.fromFile(new File(Config.instance().getCommonFilePath(path)));
 
         if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
@@ -654,6 +686,85 @@ public class CardUtil {
 
     }
 
+    private static final GameFormat.Collection  formats   = FModel.getFormats();
 
+
+
+
+
+    private static final Predicate<CardEdition> filterPioneer = formats.getPioneer().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterModern= formats.getModern().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterVintage = formats.getVintage().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterStandard = formats.getStandard().editionLegalPredicate;
+    public static Deck generateStandardBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterStandard);
+    }
+    public static Deck generatePioneerBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterPioneer);
+    }
+    public static Deck generateModernBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterModern);
+    }
+    public static Deck generateVintageBoosterAsDeck(){
+        return generateRandomBoosterPackAsDeck(filterVintage);
+    }
+
+    public static Deck generateBoosterPackAsDeck(String code){
+
+        if (Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(code)){
+            System.err.println("Cannot generate booster pack, '" + code + "' is a restricted edition");
+        }
+
+        CardEdition edition = StaticData.instance().getEditions().get(code);
+        if (edition == null){
+            System.err.println("Set code '" + code + "' not found.");
+            return new Deck();
+        }
+        BoosterPack cards = BoosterPack.FN_FROM_SET.apply(edition);
+        return generateBoosterPackAsDeck(edition);
+    }
+
+    public static Deck generateBoosterPackAsDeck(CardEdition edition){
+        Deck d = new Deck("Booster pack");
+        d.setComment(edition.getCode());
+        d.getMain().add(BoosterPack.FN_FROM_SET.apply(edition).getCards());
+        return d;
+    }
+
+    public static Deck generateRandomBoosterPackAsDeck(final Predicate<CardEdition> editionFilter) {
+        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, editionFilter);
+        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+
+        if (!possibleEditions.iterator().hasNext()) {
+            System.err.println("No sets found matching edition filter that can create boosters.");
+            return null;
+        }
+
+        CardEdition edition = Aggregates.random(possibleEditions);
+        return generateBoosterPackAsDeck(edition);
+    }
+
+    public static PaperCard getCardByName(String cardName) {
+        List<PaperCard> validCards = Arrays.asList(Iterables.toArray(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName)), PaperCard.class));
+
+        return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
+    }
+
+    public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
+        List<PaperCard> validCards = Arrays.asList(Iterables.toArray(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)), PaperCard.class));
+
+        if (validCards.isEmpty()) {
+            System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");
+            return getCardByName(cardName);
+        }
+
+        return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
+    }
+
+    public static Collection<PaperCard> getFullCardPool(boolean allCardVariants) {
+        return allCardVariants ? FModel.getMagicDb().getCommonCards().getAllCards() : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+    }
 }
 

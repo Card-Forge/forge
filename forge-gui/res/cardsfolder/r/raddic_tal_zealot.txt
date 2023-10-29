@@ -2,7 +2,7 @@ Name:Raddic, Tal Zealot
 ManaCost:2 W B
 Types:Legendary Creature Human Knight
 PT:4/4
-K:Hexproof:Card.Black:white
+K:Hexproof:Card.White:white
 K:Hexproof:Card.Black:black
 T:Mode$ AttackersDeclared | ValidAttackers$ Knight.YouCtrl |Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Knights you control attack, draft a card from CARDNAME's spellbook.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Midnight Reaper,Guardian of Faith,Knight of the Ebon Legion,Cavalier of Dawn,Benalish Marshal,Cavalier of Night,Murderous Rider,Order of Midnight,Acclaimed Contender,Dauntless Bodyguard,Valiant Knight,Smitten Swordmaster,Blacklance Paragon,History of Benalia,The Circle of Loyalty

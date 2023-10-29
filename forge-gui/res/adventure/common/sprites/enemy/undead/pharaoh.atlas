@@ -1,0 +1,113 @@
+pharaoh.png
+size: 576,448
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 215, 32
+  size: 16, 16     
+Idle 
+  xy: 14, 28
+  size:34, 36 
+Idle 
+  xy: 78, 28
+  size:34, 36 
+Idle 
+  xy: 142, 28
+  size:34, 36 
+Idle 
+  xy: 206, 28
+  size:34, 36 
+Idle 
+  xy: 14, 220
+  size:34, 36 
+Idle 
+  xy: 78, 220
+  size:34, 36 
+Idle 
+  xy: 142, 220
+  size:34, 36 
+Idle 
+  xy: 206, 220
+  size:34, 36 
+Idle 
+  xy: 270, 220
+  size:34, 36 
+Idle 
+  xy: 334, 220
+  size:34, 36 
+Idle 
+  xy: 398, 220
+  size:34, 36 
+Idle 
+  xy: 462, 220
+  size:34, 36 
+Walk
+  xy: 12, 81
+  size: 36, 47 
+Walk 
+  xy: 76, 81
+  size: 36, 47  
+Walk 
+  xy: 140, 81
+  size: 36, 47 
+Walk 
+  xy: 204, 81
+  size: 36, 47   
+Walk
+  xy: 268, 81
+  size: 36, 47  
+Walk
+  xy: 332, 81
+  size: 36, 47 
+Walk
+  xy: 396, 81
+  size: 36, 47 
+Walk
+  xy: 460, 81
+  size: 36, 47 
+Attack 
+  xy: 1, 154
+  size: 61, 38     
+Attack 
+  xy: 65, 154
+  size: 61, 38  
+Attack 
+  xy: 129, 154
+  size: 61, 38  
+Attack 
+  xy: 193, 154
+  size: 61, 38 
+Attack 
+  xy: 257, 154
+  size: 61, 38 
+Attack 
+  xy: 321, 154
+  size: 61, 38 
+Death 
+  xy: 0, 345
+  size: 64, 39 
+Death 
+  xy: 64, 345
+  size: 64, 39 
+Death 
+  xy: 128, 345
+  size: 64, 39 
+Death 
+  xy: 192, 345
+  size: 64, 39 
+Death 
+  xy: 256, 345
+  size: 64, 39 
+Death 
+  xy: 320, 345
+  size: 64, 39 
+Death 
+  xy: 384, 345
+  size: 64, 39 
+Death 
+  xy: 448, 345
+  size: 64, 39 
+Death 
+  xy: 512, 345
+  size: 64, 39 

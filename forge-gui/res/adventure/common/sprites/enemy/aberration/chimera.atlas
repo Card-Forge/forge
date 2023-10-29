@@ -1,0 +1,104 @@
+chimera.png
+size: 384,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 86, 87
+  size: 32, 32   
+Idle 
+  xy: 0, 6
+  size: 28, 14
+Idle 
+  xy: 32, 6
+  size: 28, 14
+Idle 
+  xy: 64, 6
+  size: 28, 14
+Idle 
+  xy: 96, 6
+  size: 28, 14
+Idle 
+  xy: 128, 6
+  size: 28, 14
+Idle 
+  xy: 160, 6
+  size: 28, 14
+Idle 
+  xy: 192, 6
+  size: 28, 14
+Idle 
+  xy: 224, 6
+  size: 28, 14
+Idle 
+  xy: 256, 6
+  size: 28, 14
+Idle 
+  xy: 288, 6
+  size: 28, 14
+Idle 
+  xy: 320, 6
+  size: 28, 14
+Idle 
+  xy: 352, 6
+  size: 28, 14
+Walk
+  xy: 0, 25
+  size: 28, 14
+Walk
+  xy: 32, 25
+  size: 28, 14
+Walk
+  xy: 64, 25
+  size: 28, 14
+Walk
+  xy: 96, 25
+  size: 28, 14
+Walk
+  xy: 128, 25
+  size: 28, 14
+Walk
+  xy: 160, 25
+  size: 28, 14
+Attack
+  xy: 0, 45
+  size: 32, 20
+Attack
+  xy: 32, 45
+  size: 32, 20
+Attack
+  xy: 64, 45
+  size: 32, 20
+Attack
+  xy: 96, 45
+  size: 32, 20
+Attack
+  xy: 128, 45
+  size: 32, 20
+Attack
+  xy: 160, 45
+  size: 32, 20
+Attack
+  xy: 192, 45
+  size: 32, 20
+Attack
+  xy: 224, 45
+  size: 32, 20
+Death
+  xy: 0, 67
+  size: 32, 20
+Death
+  xy: 32, 67
+  size: 32, 20
+Death
+  xy: 64, 67
+  size: 32, 20
+Death
+  xy: 96, 67
+  size: 32, 20
+Death
+  xy: 128, 67
+  size: 32, 20
+Death
+  xy: 160, 67
+  size: 32, 20

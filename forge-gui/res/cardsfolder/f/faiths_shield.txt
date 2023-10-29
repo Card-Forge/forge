@@ -1,9 +1,8 @@
 Name:Faith's Shield
 ManaCost:W
 Types:Instant
-A:SP$ Protection | Cost$ W | CheckSVar$ FatefulHour | SVarCompare$ GT5 | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target permanent you control gains protection from the color of your choice until end of turn.
-A:SP$ ChooseColor | Cost$ W | CheckSVar$ FatefulHour | SVarCompare$ LE5 | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Fateful Hour — If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.
-SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Permanent.YouCtrl | ValidPlayers$ You | Gains$ ChosenColor
+A:SP$ Protection | Cost$ W | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ GT5 | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBProtection | SpellDescription$ Target permanent you control gains protection from the color of your choice until end of turn.
+SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Permanent.YouCtrl | ValidPlayers$ You | Gains$ Choice | Choices$ AnyColor | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:FatefulHour:Count$YourLifeTotal
 AI:RemoveDeck:All
 Oracle:Target permanent you control gains protection from the color of your choice until end of turn.\nFateful hour — If you have 5 or less life, instead you and each permanent you control gain protection from the color of your choice until end of turn.

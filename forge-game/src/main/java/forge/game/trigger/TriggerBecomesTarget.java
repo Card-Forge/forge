@@ -85,7 +85,7 @@ public class TriggerBecomesTarget extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObject(AbilityKey.Source, ((SpellAbility) runParams.get(AbilityKey.SourceSA)).getHostCard());
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.SourceSA, AbilityKey.Target);
-        sa.setTriggeringObject(AbilityKey.StackInstance, sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility((SpellAbility) runParams.get(AbilityKey.SourceSA)));
+        sa.setTriggeringObject(AbilityKey.StackInstance, sa.getHostCard().getGame().getStack().getInstanceMatchingSpellAbilityID((SpellAbility) runParams.get(AbilityKey.SourceSA)));
     }
 
     @Override

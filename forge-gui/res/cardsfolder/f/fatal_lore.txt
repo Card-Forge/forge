@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Cost$ 2 B B | Chooser$ Opponent | Choices$ DrawThree,DestroyAndDraw
 SVar:DrawThree:DB$ Draw | NumCards$ 3 | Defined$ You | SpellDescription$ You draw three cards.
 SVar:DestroyAndDraw:DB$ Destroy | ValidTgts$ Creature.ChosenCtrl | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | NoRegen$ True | SpellDescription$ You destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated. | SubAbility$ ChooserDraws
-SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer
+SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer | UpTo$ True
 AI:RemoveDeck:All
 Oracle:An opponent chooses one —\n• You draw three cards.\n• You destroy up to two target creatures that player controls. They can't be regenerated. That player draws up to three cards.

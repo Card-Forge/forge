@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Legendary Planeswalker Nissa
 Loyalty:5
 A:AB$ Untap | Cost$ AddCounter<2/LOYALTY> | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | Planeswalker$ True | SubAbility$ DBUntap | TgtPrompt$ Select target creature | SpellDescription$ Untap up to two target creatures and up to two target lands.
-SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target Land
+SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | AILogic$ Always | TgtPrompt$ Select target Land
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ Target creature gets +5/+5 until end of turn.
 A:AB$ Dig | Cost$ SubCounter<10/LOYALTY> | DigNum$ 10 | AnyNumber$ True | ChangeValid$ Creature,Land | DestinationZone$ Battlefield | Ultimate$ True | Planeswalker$ True | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SpellDescription$ Look at the top ten cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 DeckHints:Name$Nissa's Encouragement|Brambleweft Behemoth|Forest

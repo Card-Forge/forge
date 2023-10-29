@@ -50,7 +50,7 @@ public class GameStateEvaluator {
             return null;
         }
         GameCopier copier = new GameCopier(evalGame);
-        Game gameCopy = copier.makeCopy();
+        Game gameCopy = copier.makeCopy(null, aiPlayer);
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, new Runnable() {
             @Override
             public void run() {
@@ -209,7 +209,6 @@ public class GameStateEvaluator {
 
         // excess mana is valued less than getting enough to use everything
         value += max(0, max_total - statistics.maxCost) * 5;
-
 
         return value;
     }

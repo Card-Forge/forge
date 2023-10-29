@@ -1,0 +1,11 @@
+Name:The Flux
+ManaCost:2 R R
+Types:Enchantment Saga
+K:Saga:6:DBDamage,DBExile,DBExile,DBExile,DBExile,DBMana
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature an opponent controls.
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 6 | SpellDescription$ Add six {R}.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after VI.)\nI — The Flux deals 4 damage to target creature an opponent controls.\nII, III, IV, V — Exile the top card of your library. You may play that card this turn.\nVI — Add six {R}.

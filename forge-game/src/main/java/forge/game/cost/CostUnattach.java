@@ -97,7 +97,7 @@ public class CostUnattach extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.unattachFromEntity(targetCard.getEntityAttachedTo());
         return targetCard;
     }

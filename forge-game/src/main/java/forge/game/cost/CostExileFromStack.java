@@ -106,11 +106,11 @@ public class CostExileFromStack extends CostPart {
         Game game = ai.getGame();
         for (final SpellAbility sa : decision.sp) {
             ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled", true);
-            SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(sa);
+            SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
             if (si != null) {
                 game.getStack().remove(si);
             }
-            game.getAction().exile(sa.getHostCard(), null);
+            game.getAction().exile(sa.getHostCard(), null, null);
         }
         return true;
     }

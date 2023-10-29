@@ -1,0 +1,8 @@
+Name:Dreg Recycler
+ManaCost:1 B
+Types:Creature Phyrexian Beast
+PT:2/2
+A:AB$ LoseLife | Cost$ T Sac<1/Creature;Artifact/creature or artifact> | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:{T}, Sacrifice an artifact or creature: Each opponent loses 1 life and you gain 1 life.

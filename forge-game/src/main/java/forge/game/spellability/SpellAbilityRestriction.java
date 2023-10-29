@@ -189,7 +189,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setClassLevelOperator(params.get("ClassLevel").substring(0, 2));
             this.setClassLevel(params.get("ClassLevel").substring(2));
         }
-    } // end setRestrictions()
+    }
 
     /**
      * <p>
@@ -240,6 +240,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     || (this.getZone() != null && !this.getZone().equals(ZoneType.Hand))) {
                 return false;
             }
+            // Prevent AI from casting spells with "May be played" from the Stack
             if (cardZone != null && cardZone.is(ZoneType.Stack)) {
                 return false;
             }
@@ -361,15 +362,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkOtherRestrictions(final Card c, final SpellAbility sa, final Player activator) {
         final Game game = activator.getGame();
 
-        // legendary sorcery
-        if (c.isSorcery() && c.getType().isLegendary() && CardLists.getValidCardCount(
+        // 205.4e. Any instant or sorcery spell with the supertype "legendary" is subject to a casting restriction
+        if ((c.isSorcery() || c.isInstant()) && c.getType().isLegendary() && CardLists.getValidCardCount(
                 activator.getCardsIn(ZoneType.Battlefield),
                 "Creature.Legendary,Planeswalker.Legendary", c.getController(), c, sa) <= 0) {
             return false;
         }
 
         // Explicit Aftermath check there
-        if (sa.isAftermath() && !c.isInZone(ZoneType.Graveyard)) {
+        if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
             return false;
         }
 
@@ -482,7 +483,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // 702.36e
-        // If the permanent wouldn’t have a morph cost if it were face up, it can’t be turned face up this way.
+        // If the permanent wouldn't have a morph cost if it were face up, it can't be turned face up this way.
         if (sa.isMorphUp() && c.isInPlay()) {
             Card cp = c;
             if (!c.isLKI()) {
@@ -583,7 +584,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         // Special check for Lion's Eye Diamond
-        if (sa.isManaAbility() && c.getGame().getStack().isFrozen() && isInstantSpeed()) {
+        if (sa.isManaAbility() && c.getGame().costPaymentStack.peek() != null && isInstantSpeed()) {
             return false;
         }
 
@@ -606,21 +607,17 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getLimitToCheck() != null) {
-            String limit = this.getLimitToCheck();
-            int activationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setActivationLimit(activationLimit);
+            int limit = AbilityUtils.calculateAmount(c, getLimitToCheck(), sa);
 
-            if (this.getActivationLimit() != -1 && sa.getActivationsThisTurn() >= this.getActivationLimit()) {
+            if (sa.getActivationsThisTurn() >= limit) {
                 return false;
             }
         }
 
         if (this.getGameLimitToCheck() != null) {
-            String limit = this.getGameLimitToCheck();
-            int gameActivationLimit = AbilityUtils.calculateAmount(c, limit, sa);
-            this.setGameActivationLimit(gameActivationLimit);
+            int limit = AbilityUtils.calculateAmount(c, getGameLimitToCheck(), sa);
 
-            if (this.getGameActivationLimit() != -1 && sa.getActivationsThisGame() >= this.getGameActivationLimit()) {
+            if (sa.getActivationsThisGame() >= limit) {
                 return false;
             }
         }

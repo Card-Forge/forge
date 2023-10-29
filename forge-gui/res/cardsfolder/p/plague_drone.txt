@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Demon
 PT:3/3
 K:Flying
-R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RLoseLife | AiLogic$ LoseLife | Description$ Rot Fly — If an opponent would gain life, that player loses that much life instead.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ReplaceWith$ RLoseLife | AILogic$ LoseLife | Description$ Rot Fly — If an opponent would gain life, that player loses that much life instead.
 SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer
 SVar:X:ReplaceCount$LifeGained
 SVar:NonStackingEffect:True

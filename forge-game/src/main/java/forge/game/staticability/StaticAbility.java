@@ -25,7 +25,6 @@ import java.util.Set;
 
 import com.google.common.collect.*;
 
-import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -300,22 +299,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
     }
 
-    /**
-     * Check conditions for static abilities acting on a specific player. Also
-     * automatically check the general conditions.
-     *
-     * @param player a {@link Player}.
-     * @return true, if the static ability is applicable.
-     * @see {@link StaticAbility#checkConditions()}
-     */
-    public final boolean checkPlayerSpecificConditions(final Player player) {
-        if (!checkConditions()) {
-            return false;
-        }
-
-        return true;
-    }
-
     public final boolean checkMode(String mode) {
         return getParam("Mode").equals(mode);
     }
@@ -376,14 +359,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
                 }
             } else if (condition.equals("ExtraTurn")) {
                 if (!game.getPhaseHandler().getPlayerTurn().isExtraTurn()) {
-                    return false;
-                }
-            } else if (condition.equals("PermanentOfEachColor")) {
-                if ((controller.getColoredCardsInPlay(MagicColor.Constant.BLACK).isEmpty()
-                        || controller.getColoredCardsInPlay(MagicColor.Constant.BLUE).isEmpty()
-                        || controller.getColoredCardsInPlay(MagicColor.Constant.GREEN).isEmpty()
-                        || controller.getColoredCardsInPlay(MagicColor.Constant.RED).isEmpty()
-                        || controller.getColoredCardsInPlay(MagicColor.Constant.WHITE).isEmpty())) {
                     return false;
                 }
             } else if (condition.equals("FatefulHour")) {

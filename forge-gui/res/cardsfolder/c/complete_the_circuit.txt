@@ -1,0 +1,10 @@
+Name:Complete the Circuit
+ManaCost:5 U
+Types:Instant
+K:Convoke
+A:SP$ Effect | StaticAbilities$ STPlay | SubAbility$ DBDelayTrig | SpellDescription$ You may cast sorcery spells this turn as though they had flash.
+SVar:STPlay:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast sorcery spells this turn as though they had flash.
+SVar:DBDelayTrig:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you next cast an instant or sorcery spell this turn, copy that spell twice. You may choose new targets for the copies.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Amount$ 2 | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nYou may cast sorcery spells this turn as though they had flash.\nWhen you next cast an instant or sorcery spell this turn, copy that spell twice. You may choose new targets for the copies.

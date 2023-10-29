@@ -1,0 +1,8 @@
+Name:Teferi's Boss Effect
+ManaCost:no cost
+Colors:White,Blue
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigPhaseOut | TriggerDescription$ At the beginning of each upkeep, target creature or artifact you don't control phases out. 
+SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature.OppCtrl,Artifact.OppCtrl | TgtPrompt$ Select target creature or artifact an opponent controls
+S:Mode$ CastWithFlash | ValidCard$ Planeswalker.YouCtrl+Teferi | EffectZone$ Command | ValidSA$ Activated.Loyalty | Caster$ You | Description$ You may activate loyalty abilities of Teferi planeswalkers you control on any player's turn any time you could cast an instant 
+Oracle:At the beginning of each upkeep, target creature or artifact you don't control phases out. \nYou may activate loyalty abilities of Teferi planeswalkers you control on any player's turn any time you could cast an instant 

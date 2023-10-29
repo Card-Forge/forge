@@ -21,5 +21,5 @@ ManaCost:no cost
 Colors:red
 Types:Enchantment Creature Goblin Shaman
 PT:2/2
-A:AB$ CopyPermanent | Cost$ 1 T | ValidTgts$ Creature.YouCtrl+nonLegendary+Other | TgtPrompt$ Select another target nonlegendary creature you control | AddKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of another target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
+A:AB$ CopyPermanent | Cost$ 1 T | ValidTgts$ Creature.YouCtrl+nonLegendary+Other | TgtPrompt$ Select another target nonlegendary creature you control | AddKeywords$ Haste | AtEOT$ Sacrifice | AILogic$ Different | SpellDescription$ Create a token that's a copy of another target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.
 Oracle:{1}, {T}: Create a token that's a copy of another target nonlegendary creature you control, except it has haste. Sacrifice it at the beginning of the next end step.

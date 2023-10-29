@@ -179,20 +179,23 @@ public class AdventureQuestData implements Serializable {
         stage.initialize();
 
         switch  (stage.objective){
+            case Arena:
+                stage.setTargetPOI(poiTokens, this.name);
+                break;
             case Clear:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 break;
             case Defeat:
                 if (!stage.mixedEnemies)
                     stage.setTargetEnemyData(generateTargetEnemyData(stage));
                 break;
             case Delivery:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 //Set delivery item as a miscellaneous token
                 break;
             case Escort:
                 //add configuration of what is being escorted.
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 if (!stage.mixedEnemies)
                     stage.setTargetEnemyData(generateTargetEnemyData(stage));
                 break;
@@ -200,20 +203,22 @@ public class AdventureQuestData implements Serializable {
                 stage.setTargetSprite(generateTargetEnemySprite(stage));
                 break;
             case Leave:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 break;
             case MapFlag:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 break;
             case Patrol:
                 //Need ability to set a series of target coordinates that can be reached, point nav arrow to them
                 // This might get oddly complex.
                 break;
+            case QuestFlag:
+                break;
             case Rescue:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
                 break;
             case Travel:
-                stage.setTargetPOI(poiTokens);
+                stage.setTargetPOI(poiTokens, this.name);
         }
 
         if (stage.getTargetPOI() != null
@@ -363,6 +368,26 @@ public class AdventureQuestData implements Serializable {
         completed = done;
     }
 
+    public void updateCharacterFlag(String characterFlag, int flagValue){
+        boolean done = true;
+        for (AdventureQuestStage stage: stages) {
+            done = stage.updateCharacterFlag(characterFlag, flagValue) == AdventureQuestController.QuestStatus.Complete && done;
+            if (!done)
+                break;
+        }
+        completed = done;
+    }
+
+    public void updateQuestFlag(String questFlag, int flagValue){
+        boolean done = true;
+        for (AdventureQuestStage stage: stages) {
+            done = stage.updateQuestFlag(questFlag, flagValue) == AdventureQuestController.QuestStatus.Complete && done;
+            if (!done)
+                break;
+        }
+        completed = done;
+    }
+
     public void updateLeave(){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
@@ -402,6 +427,17 @@ public class AdventureQuestData implements Serializable {
             if(failed)
                 break;
             stage.updateArenaComplete(winner);
+            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            stage.updateEventComplete(completedEvent);
             failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
         }
         if (!failed)

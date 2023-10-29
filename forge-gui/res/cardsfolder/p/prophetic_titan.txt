@@ -3,7 +3,7 @@ ManaCost:4 U R
 Types:Creature Giant Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Delirium — When CARDNAME enters the battlefield, ABILITY
-SVar:TrigCharm:DB$ Charm | CharmNum$ X | Choices$ DBDealDamage,DBDig | AdditionalDescription$ If there are four or more card types in your graveyard, choose both.
+SVar:TrigCharm:DB$ Charm | CharmNum$ X | Choices$ DBDealDamage,DBDig | AdditionalDescription$ . If there are four or more card types in your graveyard, choose both.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 SVar:DBDig:DB$ Dig | DigNum$ 4 | RestRandomOrder$ True | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
 SVar:X:Count$Compare Y GE4.2.1

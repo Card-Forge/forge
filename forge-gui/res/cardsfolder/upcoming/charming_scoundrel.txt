@@ -1,0 +1,13 @@
+Name:Charming Scoundrel
+ManaCost:1 R
+Types:Creature Human Rogue
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBLoot,DBTreasure,DBToken
+SVar:DBLoot:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Wicked Role token attached to target creature you control.
+DeckHas:Ability$Token|Discard & Type$Aura|Enchantment|Role|Treasure
+Oracle:Haste\nWhen Charming Scoundrel enters the battlefield, choose one -\n• Discard a card, then draw a card.\n• Create a Treasure token.\n• Create a Wicked Role token attached to target creature you control.

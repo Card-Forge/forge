@@ -1,0 +1,5 @@
+Name:Nanogene Conversion
+ManaCost:3 U
+Types:Sorcery
+A:SP$ Clone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | Defined$ Targeted | CloneTarget$ Valid Creature.NotDefinedTargeted | NonLegendary$ True | Duration$ UntilEndOfTurn | StackDescription$ Each other creature becomes a copy of {c:Targeted} until end of turn, except those creatures aren't legendary. | SpellDescription$ Choose target creature you control. Each other creature becomes a copy of that creature until end of turn, except it isn't legendary.
+Oracle:Choose target creature you control. Each other creature becomes a copy of that creature until end of turn, except it isn't legendary.

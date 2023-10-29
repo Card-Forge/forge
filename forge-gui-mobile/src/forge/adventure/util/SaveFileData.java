@@ -183,6 +183,8 @@ public class SaveFileData extends HashMap<String,byte[]>
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             Forge.delayedSwitchBack();
+        } catch (ClassCastException e) { //this allows loading
+            System.err.println("Encountered problem loading object: " + key);
         }
         return null;
     }

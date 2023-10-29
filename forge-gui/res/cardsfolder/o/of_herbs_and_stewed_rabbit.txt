@@ -1,0 +1,12 @@
+Name:Of Herbs and Stewed Rabbit
+ManaCost:2 W
+Types:Enchantment Saga
+K:Saga:3:DBPutCounter,DBDraw,DBHalfing
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | CounterType$ P1P1 | SubAbility$ DBFood | SpellDescription$ Put a +1/+1 counter on up to one target creature. Create a Food token.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac
+SVar:DBDraw:DB$ Draw | SubAbility$ DBFood | SpellDescription$ Draw a card. Create a Food token.
+SVar:DBHalfing:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_halfling | SpellDescription$ Create a 1/1 white Halfling creature token for each Food you control.
+SVar:X:Count$Valid Food.YouCtrl
+DeckHas:Ability$Token|Sacrifice|Counters & Type$Artifact|Food|Halfling
+DeckHints:Type$Food
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Put a +1/+1 counter on up to one target creature. Create a Food token.\nII — Draw a card. Create a Food token.\nIII — Create a 1/1 white Halfling creature token for each Food you control.

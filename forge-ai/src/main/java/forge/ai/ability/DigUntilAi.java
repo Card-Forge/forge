@@ -23,7 +23,7 @@ public class DigUntilAi extends SpellAbilityAi {
         Card source = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
         double chance = .4; // 40 percent chance with instant speed stuff
-        if (SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+        if (isSorcerySpeed(sa, ai)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
                            // never activate EOT)
         }

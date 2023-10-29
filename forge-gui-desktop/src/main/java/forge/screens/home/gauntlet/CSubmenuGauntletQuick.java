@@ -82,7 +82,9 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         if (view.getBoxModernGenDecks().isSelected()) { allowedDeckTypes.add(DeckType.MODERN_CARDGEN_DECK); }
         if (view.getBoxLegacyGenDecks().isSelected()) { allowedDeckTypes.add(DeckType.LEGACY_CARDGEN_DECK); }
         if (view.getBoxVintageGenDecks().isSelected()) { allowedDeckTypes.add(DeckType.VINTAGE_CARDGEN_DECK); }
+        if (view.getBoxPauperGenDecks().isSelected()) { allowedDeckTypes.add(DeckType.PAUPER_CARDGEN_DECK); }
         if (view.getBoxModernColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.MODERN_COLOR_DECK); }
+        if (view.getBoxPauperColorDecks().isSelected()) { allowedDeckTypes.add(DeckType.PAUPER_COLOR_DECK); }
         if (view.getBoxThemeDecks().isSelected()) { allowedDeckTypes.add(DeckType.THEME_DECK); }
         if (view.getBoxUserDecks().isSelected()) { allowedDeckTypes.add(DeckType.CUSTOM_DECK); }
         if (view.getBoxQuestDecks().isSelected()) { allowedDeckTypes.add(DeckType.QUEST_OPPONENT_DECK); }

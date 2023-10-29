@@ -100,6 +100,9 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
 
                 String newKey = keySelector.apply(newDeck);
                 if (result.containsKey(newKey)) {
+                    newKey += "-" + file.getName();
+                }
+                if (result.containsKey(newKey)) {
                     System.err.println("StorageReaderFolder: Overwriting an object with key " + newKey);
                 }
                 result.put(newKey, newDeck);

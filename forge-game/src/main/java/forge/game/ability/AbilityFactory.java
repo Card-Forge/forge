@@ -63,6 +63,7 @@ public final class AbilityFactory {
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
+            "RegenerationAbility", // for Regeneration Effect
             "ReturnAbility" // for Delayed Trigger on Magpie
         );
 
@@ -176,7 +177,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final CardState state, final IHasSVars sVarHolder) {
-        return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(state, mapParams, type), state, sVarHolder);
+        return getAbility(type, type.getApiTypeOf(mapParams), mapParams, null, state, sVarHolder);
     }
 
     public static Cost parseAbilityCost(final CardState state, Map<String, String> mapParams, AbilityRecordType type) {
@@ -225,6 +226,9 @@ public final class AbilityFactory {
             }
         }
 
+        if (abCost == null) {
+            abCost = parseAbilityCost(state, mapParams, type);
+        }
         SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
 
         if (spellAbility == null) {
@@ -511,6 +515,7 @@ public final class AbilityFactory {
         totalCost.add(parseAbilityCost(rightState, rightMap, rightType));
 
         final SpellAbility left = getAbility(leftType, leftApi, leftMap, totalCost, leftState, leftState);
+        left.setCardState(card.getState(CardStateName.Original));
         final AbilitySub right = (AbilitySub) getAbility(AbilityRecordType.SubAbility, rightApi, rightMap, null, rightState, rightState);
         left.appendSubAbility(right);
         return left;

@@ -1,0 +1,11 @@
+Name:Adipose Offspring
+ManaCost:3 W
+Types:Creature Alien
+PT:2/2
+K:Emerge:5 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white Alien creature token. If CARDNAME’s emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature’s toughness.
+SVar:TrigToken:DB$ Token | TokenAmount$ N | TokenScript$ w_2_2_alien | TokenOwner$ You
+SVar:N:Count$Emerged.T.1
+SVar:T:Emerged$SumToughness
+DeckHas:Ability$Token
+Oracle:Emerge {5}{W} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature’s mana value.)\nWhen Adipose Offspring enters the battlefield, create a 2/2 white Alien creature token. If Adipose Offspring’s emerge cost was paid, instead create X of those tokens, where X is the sacrificed creature’s toughness.

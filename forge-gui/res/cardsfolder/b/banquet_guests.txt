@@ -1,0 +1,13 @@
+Name:Banquet Guests
+ManaCost:X G W
+Types:Creature Halfling Citizen
+PT:0/0
+K:Affinity:Food
+K:Trample
+K:etbCounter:P1P1:Y
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
+A:AB$ Pump | Cost$ 2 Sac<1/Food> | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+DeckHints:Type$Food
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Affinity for Food (This spell costs 1 less to cast for each Food you control.)\nTrample\nBanquet Guests enters the battlefield with twice X +1/+1 counters on it.\n{2}, Sacrifice a Food: Banquet Guests gains indestructible until end of turn.

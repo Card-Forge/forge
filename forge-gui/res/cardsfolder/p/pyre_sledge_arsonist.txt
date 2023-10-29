@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Viashino Shaman
 PT:2/2
 A:AB$ DealDamage | Cost$ 1 T | NumDmg$ X | ValidTgts$ Any | SpellDescription$ CARDNAME deals X damage to any target, where X is the number of permanents you've sacrificed this turn.
-SVar:X:Count$SacrificedThisTurn Permanent
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
 DeckNeeds:Ability$Sacrifice
 Oracle:{1}, {T}: Pyre-Sledge Arsonist deals X damage to any target, where X is the number of permanents you've sacrificed this turn.

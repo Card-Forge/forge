@@ -111,6 +111,9 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Surge")) {
                 this.surgeCostPaid = true;
             }
+            if (value.equals("Bargain")) {
+                this.bargain = true;
+            }
             if (value.equals("AllTargetsLegal")) {
                 this.setAllTargetsLegal(true);
             }
@@ -152,6 +155,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ConditionGameTypes")));
+        }
+
+        if (params.containsKey("ConditionActivationLimit")) {
+            this.setLimitToCheck(params.get("ConditionActivationLimit"));
         }
 
         if (params.containsKey("ConditionChosenColor")) {
@@ -243,7 +250,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (params.containsKey("ConditionTargetsSingleTarget")) {
             this.setTargetsSingleTarget(true);
         }
-    } // setConditions
+    }
 
     /**
      * <p>
@@ -278,6 +285,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
         if (this.altCostPaid && !sa.isOptionalCostPaid(OptionalCost.AltCost)) return false;
         if (this.surgeCostPaid && !sa.isSurged()) return false;
+        if (this.bargain && !sa.isBargain()) return false;
         if (this.foretold && !sa.isForetold()) return false;
 
         if (this.optionalCostPaid && this.optionalBoolean && !sa.isOptionalCostPaid(OptionalCost.Generic)) return false;
@@ -340,12 +348,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.getActivationLimit() != -1 && sa.getActivationsThisTurn() >= this.getActivationLimit()) {
-            return false;
-        }
-
-        if (this.getGameActivationLimit() != -1 && sa.getActivationsThisGame() >= this.getGameActivationLimit()) {
-            return false;
+        if (this.getLimitToCheck() != null) {
+            String comp = getLimitToCheck();
+            int right = Integer.parseInt(comp.substring(2));
+            int activationNum =  sa.getActivationsThisTurn();
+            if (!Expressions.compare(activationNum, comp, right)) {
+                return false;
+            }
         }
 
         if (this.getPhases().size() > 0) {

@@ -1,0 +1,12 @@
+Name:Gruff Triplets
+ManaCost:3 G G G
+Types:Creature Satyr Warrior
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+nonToken | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, if it isn't a token, create two tokens that are copies of it.
+SVar:TrigToken:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCounters | TriggerDescription$ When CARDNAME dies, put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+namedGruff Triplets | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Token|Counters
+Oracle:Trample\nWhen Gruff Triplets enters the battlefield, if it isn't a token, create two tokens that are copies of it.\nWhen Gruff Triplets dies, put a number of +1/+1 counters equal to its power on each creature you control named Gruff Triplets.

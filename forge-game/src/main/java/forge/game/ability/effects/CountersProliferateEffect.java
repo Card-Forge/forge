@@ -45,10 +45,11 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
         switch (game.getReplacementHandler().run(ReplacementType.Proliferate, repParams)) {
             case NotReplaced:
                 break;
-            case Updated: {
+            case Updated:
                 num = (int) repParams.get(AbilityKey.Num);
                 break;
-            }
+            default:
+                return;
         }
 
         PlayerController pc = p.getController();

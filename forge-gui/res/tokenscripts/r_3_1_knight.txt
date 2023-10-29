@@ -1,0 +1,6 @@
+Name:Knight Token
+ManaCost:no cost
+Types:Creature Knight
+Colors:red
+PT:3/1
+Oracle:

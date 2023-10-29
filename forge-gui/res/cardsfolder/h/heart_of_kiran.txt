@@ -6,5 +6,5 @@ K:Flying
 K:Vigilance
 K:Crew:3
 S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ KiranAnimate | Description$ You may remove a loyalty counter from a planeswalker you control rather than pay CARDNAME's crew cost.
-SVar:KiranAnimate:AB$ Animate | Cost$ SubCounter<1/LOYALTY/Planeswalker.YouCtrl/Planeswalker you Control> | Crew$ True | Secondary$ True | CostDesc$ | Defined$ Self | Types$ Creature,Artifact | RemoveCardTypes$ True | SpellDescription$ You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
+SVar:KiranAnimate:AB$ Animate | Cost$ SubCounter<1/LOYALTY/Planeswalker.YouCtrl/Planeswalker you Control> | Crew$ True | Secondary$ True | CostDesc$ | Defined$ Self | Types$ Creature,Artifact | SpellDescription$ You may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.
 Oracle:Flying, vigilance\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)\nYou may remove a loyalty counter from a planeswalker you control rather than pay Heart of Kiran's crew cost.

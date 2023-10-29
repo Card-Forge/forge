@@ -1,0 +1,10 @@
+Name:Gloin, Dwarf Emissary
+ManaCost:2 R
+Types:Legendary Creature Dwarf Advisor
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | ActivationLimit$ 1 | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, create a Treasure token. This ability triggers only once each turn. (Legendaries, artifacts, and Sagas are historic.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+A:AB$ Goad | Cost$ T  Sac<1/Treasure> | ValidTgts$ Creature | SpellDescription$ Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+DeckHints:Type$Legendary|Saga|Artifact
+Oracle:Whenever you cast a historic spell, create a Treasure token. This ability triggers only once each turn. (Legendaries, artifacts, and Sagas are historic.)\n{T}, Sacrifice a Treasure: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

@@ -3,12 +3,12 @@ ManaCost:3 U R
 Types:Legendary Enchantment Creature God
 PT:6/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to blue and red is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to blue and red is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Blue.Red
-T:Mode$ Drawn | ValidCard$ Card.YouOwn | Number$ 1 | Static$ True | Execute$ DBReveal | ForReveal$ True | TriggerZones$ Battlefield | PlayerTurn$ True | TriggerDescription$ Reveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. Whenever you reveal a nonland card this way, CARDNAME deals 3 damage to any target.
+T:Mode$ Drawn | ValidCard$ Card.YouOwn | Number$ 1 | Static$ True | Execute$ DBReveal | ForReveal$ True | TriggerZones$ Battlefield | PlayerTurn$ True | TriggerDescription$ Reveal the first card you draw on each of your turns. Whenever you reveal a land card this way, draw a card. Whenever you reveal a nonland card this way, NICKNAME deals 3 damage to any target.
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | RememberRevealed$ True | SubAbility$ DBTriggerLand
 SVar:DBTriggerLand:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Land+YouCtrl | SubAbility$ DBTriggerNonLand | Execute$ TrigDraw | TriggerDescription$ Whenever you reveal a land card this way, draw a card.
-SVar:DBTriggerNonLand:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand+YouCtrl | SubAbility$ DBCleanup | Execute$ TrigDmg | TriggerDescription$ Whenever you reveal a nonland card this way, CARDNAME deals 3 damage to any target.
+SVar:DBTriggerNonLand:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand+YouCtrl | SubAbility$ DBCleanup | Execute$ TrigDmg | TriggerDescription$ Whenever you reveal a nonland card this way, NICKNAME deals 3 damage to any target.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

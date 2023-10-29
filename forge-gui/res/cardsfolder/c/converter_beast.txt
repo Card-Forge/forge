@@ -1,0 +1,8 @@
+Name:Converter Beast
+ManaCost:3 G
+Types:Creature Phyrexian Beast
+PT:0/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME enters the battlefield, incubate 5. (Create an Incubator token with five +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
+SVar:TrigIncubate:DB$ Incubate | Amount$ 5
+DeckHas:Ability$Counters|Token & Type$Incubator|Artifact
+Oracle:When Converter Beast enters the battlefield, incubate 5. (Create an Incubator token with five +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

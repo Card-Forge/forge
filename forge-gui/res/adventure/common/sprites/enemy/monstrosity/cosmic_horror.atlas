@@ -1,0 +1,77 @@
+cosmic_horror.png
+size: 512,160
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar          
+  xy: 408, 42
+  size: 16, 16      
+Idle 
+  xy: 14,9
+  size: 36,23 
+Idle 
+  xy: 78,9
+  size: 36,23 
+Idle 
+  xy: 142,9
+  size: 36,23 
+Idle 
+  xy: 206,9
+  size: 36,23 
+Walk
+  xy: 14,40
+  size: 36,24 
+Walk
+  xy: 78,40
+  size: 36,24 
+Walk
+  xy: 142,40
+  size: 36,24 
+Walk
+  xy: 206,40
+  size: 36,24 
+Walk
+  xy: 270,40
+  size: 36,24 
+Walk
+  xy: 334,40
+  size: 36,24 
+Walk
+  xy: 398,40
+  size: 36,24 
+Walk
+  xy: 462,40
+  size: 36,24 
+Attack 
+  xy: 14, 68
+  size: 36,28 
+Attack 
+  xy: 78, 68
+  size: 36,28 
+Attack 
+  xy: 142, 68
+  size: 36,28 
+Attack 
+  xy: 206, 68
+  size: 36,28 
+Attack 
+  xy: 270, 68
+  size: 36,28 
+Attack 
+  xy: 334, 68
+  size: 36,28 
+Death 
+  xy: 14,132
+  size: 36,28 
+Death 
+  xy: 78,132
+  size: 36,28 
+Death 
+  xy: 142,132
+  size: 36,28 
+Death 
+  xy: 206,132
+  size: 36,28 
+Death 
+  xy: 270,132
+  size: 36,28 

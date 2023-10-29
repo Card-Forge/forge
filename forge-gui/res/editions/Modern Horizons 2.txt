@@ -592,7 +592,7 @@ ScryfallCode=MH2
 
 [tokens]
 b_0_0_phyrexian_germ
-b_0_0_zombie_army
+b_0_0_army
 b_2_2_zombie
 bg_1_1_insect
 c_0_0_a_construct_total_artifacts

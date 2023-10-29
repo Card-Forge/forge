@@ -18,6 +18,7 @@ public enum KeyBinding {
     Map("Map", Input.Keys.M,Input.Keys.BUTTON_SELECT),
     Equip("Equip", Input.Keys.E,Input.Keys.BUTTON_X),
     ExitToWorldMap("ExitToWorldMap", Input.Keys.F4,Input.Keys.BUTTON_L2),
+    Bookmark("Bookmark", Input.Keys.B, Input.Keys.BUTTON_R2),
     Use("Use", Input.Keys.ENTER,Input.Keys.BUTTON_A),
     Back("Back", Input.Keys.ESCAPE,Input.Keys.BUTTON_B),
     ScrollUp("ScrollUp", Input.Keys.PAGE_UP,Input.Keys.BUTTON_L1),

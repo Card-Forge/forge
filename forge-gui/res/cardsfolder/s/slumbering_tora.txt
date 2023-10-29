@@ -1,7 +1,7 @@
 Name:Slumbering Tora
 ManaCost:3
 Types:Artifact
-A:AB$ Animate | Cost$ 2 Discard<1/Spirit;Arcane/spirit or arcane card> | CostDesc$ {2}, Discard a Spirit or Arcane card: | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Cat | SpellDescription$ CARDNAME becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's mana value.
+A:AB$ Animate | Cost$ 2 Discard<1/Spirit;Arcane/spirit or arcane card> | CostDesc$ {2}, Discard a Spirit or Arcane card: | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Cat | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's mana value.
 SVar:X:Discarded$CardManaCost
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

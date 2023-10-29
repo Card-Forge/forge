@@ -1,0 +1,7 @@
+Name:Gandalf's Sanction
+ManaCost:1 U R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | ExcessDamage$ TargetedController | SpellDescription$ CARDNAME deals X damage to target creature, where X is the number of instant and sorcery spells in your graveyard. Excess damage is dealt to that creature's controller instead.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Ability$Graveyard|Mill & Type$Instant|Sorcery
+Oracle:Gandalf's Sanction deals X damage to target creature, where X is the number of instant and sorcery spells in your graveyard. Excess damage is dealt to that creature's controller instead.

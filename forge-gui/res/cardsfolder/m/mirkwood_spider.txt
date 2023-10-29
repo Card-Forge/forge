@@ -1,0 +1,10 @@
+Name:Mirkwood Spider
+ManaCost:G
+Types:Creature Spider
+PT:1/1
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target legendary creature you control gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target legendary creature you control | KW$ Deathtouch
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Creature & Type$Legendary
+Oracle:Deathtouch\nWhenever Mirkwood Spider attacks, target legendary creature you control gains deathtouch until end of turn.

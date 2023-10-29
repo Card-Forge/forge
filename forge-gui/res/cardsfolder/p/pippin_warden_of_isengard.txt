@@ -1,0 +1,10 @@
+Name:Pippin, Warden of Isengard
+ManaCost:B G
+Types:Legendary Creature Halfling Advisor
+PT:2/2
+K:Partner:Merry, Warden of Isengard:Merry
+A:AB$ Token | Cost$ 1 T | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food Token.
+A:AB$ PumpAll | Cost$ T Sac<4/Food> | ValidCards$ Creature.YouCtrl+StrictlyOther | NumAtt$ 3 | NumDef$ 3 | KW$ Haste | SorcerySpeed$ True | SpellDescription$ Other creatures you control get +3/+3 and gain haste until end of turn. Activate only as a sorcery.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Artifact
+Oracle:Partner with Merry, Warden of Isengard (When this creature enters the battlefield, target player may put Merry into their hand from their library, then shuffle)\n{1}, {T}: Create a Food token.\n{T}, Sacrifice four Foods: Other creatures you control get +3/+3 and gain haste until end of turn. Activate only as a sorcery.

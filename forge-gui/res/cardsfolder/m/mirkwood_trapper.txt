@@ -1,0 +1,11 @@
+Name:Mirkwood Trapper
+ManaCost:1 G U
+Types:Creature Elf Scout
+PT:1/4
+T:Mode$ AttackersDeclared | AttackedTarget$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player attacks you, target attacking creature gets -2/-0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | NumAtt$ -2 | IsCurse$ True
+T:Mode$ AttackersDeclared | Execute$ TrigChoose | IsPresent$ Creature.attackingYou | PresentCompare$ EQ0 | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.
+SVar:TrigChoose:DB$ ChooseCard | Chooser$ TriggeredAttackingPlayer | Choices$ Creature.attacking | SubAbility$ DBPump 
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | NumAtt$ +2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Whenever a player attacks you, target attacking creature gets -2/-0 until end of turn.\nWhenever a player attacks, if they aren't attacking you, that player chooses an attacking creature. It gets +2/+0 until end of turn.

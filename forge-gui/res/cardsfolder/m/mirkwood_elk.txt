@@ -1,0 +1,15 @@
+Name:Mirkwood Elk
+ManaCost:5 G
+Types:Creature Elk
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, return target Elf card from your graveyard to your hand. You gain life equal to that card's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, return target Elf card from your graveyard to your hand. You gain life equal to that card's power.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Elf.YouOwn | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+DeckHints:Type$Elf|Graveyard
+Oracle:Trample\nWhenever Mirkwood Elk enters the battlefield or attacks, return target Elf card from your graveyard to your hand. You gain life equal to that card's power.

@@ -1,0 +1,9 @@
+Name:Wreck and Rebuild
+ManaCost:1 R G
+Types:Sorcery
+A:SP$ Charm | CharmNum$ 1 | Choices$ DestroyArtifact,DBMill
+SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBMill:DB$ Mill | NumCards$ 5 | Defined$ You | SubAbility$ DBReturn | SpellDescription$ Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land.YouOwn | Hidden$ True | Tapped$ True
+K:Flashback:3 R G
+Oracle:Choose one —\n• Destroy target artifact or enchantment.\n• Mill five cards, then you may put a land card from your graveyard onto the battlefield tapped.\nFlashback {3}{R}{G}

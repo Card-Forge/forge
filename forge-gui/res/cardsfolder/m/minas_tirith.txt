@@ -1,0 +1,10 @@
+Name:Minas Tirith
+ManaCost:no cost
+Types:Legendary Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary creature.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Draw | Cost$ 1 W T | CheckSVar$ RaidTest | SVarCompare$ GE2 | SpellDescription$ Draw a card. Activate only if you attacked with two or more creatures this turn.
+SVar:RaidTest:Count$AttackersDeclared
+DeckHints:Type$Legendary
+Oracle:Minas Tirith enters the battlefield tapped unless you control a legendary creature.\n{T}: Add {W}.\n{1}{W}, {T}: Draw a card. Activate only if you attacked with two or more creatures this turn.

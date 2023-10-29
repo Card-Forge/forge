@@ -7,3 +7,11 @@ ScryfallCode=PW23
 
 [cards]
 1 R Norn's Annex @James Paick
+2 R Lifecrafter's Bestiary @Izzy
+3 R Beast Within @Dave Allsop
+4 R Drown in the Loch @John Stanko
+5 U Syr Konrad, the Grim @Anna Steinbauer
+6 R Cultivate @Nestor Ossandon Leal
+7 R Ice Out @Takuma Ebisu
+8 R Pyroblast @Takuma Ebisu
+9 R Rampant Growth @Lorenzo Lanfranconi

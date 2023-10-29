@@ -1,0 +1,7 @@
+Name:Mirrormere Guardian
+ManaCost:2 G
+Types:Creature Dwarf Soldier
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME dies, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+Oracle:When Mirrormere Guardian dies, the Ring tempts you.

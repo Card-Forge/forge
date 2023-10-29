@@ -22,7 +22,7 @@ Colors:white
 Types:Legendary Artifact Vehicle
 PT:2/3
 K:Living metal
-T:Mode$ ChangesZone | ValidCard$ Creature.Other,Vehicle | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another creature or Vehicle enters the battlefield under your control, put a +1/+1 counter on NICKNAME. If this is the second time this ability has resolved this turn, convert NICKNAME.
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+Other,Vehicle.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another creature or Vehicle enters the battlefield under your control, put a +1/+1 counter on NICKNAME. If this is the second time this ability has resolved this turn, convert NICKNAME.
 SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionCheckSVar$ TrigAmount | ConditionSVarCompare$ EQ2
 SVar:TrigAmount:Count$ResolvedThisTurn

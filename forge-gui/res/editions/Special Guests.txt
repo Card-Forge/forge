@@ -1,0 +1,22 @@
+[metadata]
+Code=SPG
+Date=2023-11-17
+Name=Special Guests
+Type=Collector_Edition
+ScryfallCode=SPG
+
+[cards]
+1 R Lord of Atlantis @Syd Mills
+2 U Malcolm, Keen-Eyed Navigator @Julie Dillon
+3 R Bridge from Below @Yeong-Hao Han
+9 R Underworld Breach @Piotr Dura
+13 M Kalamax, the Stormsire @Sam Burley
+16 R Thrasios, Triton Hero @Caroline Gariba
+17 M Mana Crypt @Dominik Mayer
+17a M Mana Crypt @Dominik Mayer
+17b M Mana Crypt @Dominik Mayer
+17c M Mana Crypt @Dominik Mayer
+17d M Mana Crypt @Dominik Mayer
+17e M Mana Crypt @Dominik Mayer
+17f M Mana Crypt @Dominik Mayer
+18 U Star Compass @Alix Branwyn

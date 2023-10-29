@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - March of the Machines #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/06/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible blocking decisions. Assume any cards you could draw are not relevant to the solution.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Grafted Butcher;Ironhoof Boar;Knight of Dusk's Shadow;Volcanic Spite
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Etched Familiar;Etched Familiar;Swamp;Swamp;Mountain;Mountain
+p1life=9
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Metropolis Reformer;Tomakul Honor Guard;Guardian of Ghirapur

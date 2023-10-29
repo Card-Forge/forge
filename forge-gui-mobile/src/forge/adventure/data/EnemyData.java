@@ -12,6 +12,7 @@ import java.io.Serializable;
  * contains the information of enemies
  */
 public class EnemyData implements Serializable {
+    private static final long serialVersionUID = -3317270785183936320L;
     public String name;
     public String nameOverride;
     public String sprite;
@@ -76,13 +77,15 @@ public class EnemyData implements Serializable {
         if (randomizeDeck) {
             return CardUtil.getDeck(Aggregates.random(deck), true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
         }
-        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.name, deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.getName(), deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
     }
 
     public String getName(){
         //todo: make this the default accessor for anything seen in UI
         if (nameOverride != null && !nameOverride.isEmpty())
             return nameOverride;
-        return name;
+        if (name != null && !name.isEmpty())
+            return name;
+        return "(Unnamed Enemy)";
     }
 }

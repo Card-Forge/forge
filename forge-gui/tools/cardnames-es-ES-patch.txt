@@ -877,6 +877,7 @@ Cursed Land|Tierra maldita|Encantamiento - Aura|Al comienzo del mantenimiento de
 Cursed Rack|El potro|Artefacto|Cuando el Potro maldito entra en juego, elige un oponente.
 Cursed Scroll|Pergamino maldito|Artefacto|{3}, {T}: nombra una carta. Un oponente elige una carta al azar de tu mano. Muestra esa carta. Si la carta es la carta nombrada, El Pergamino maldito hace 2 puntos de daño a la criatura o jugador objetivo.
 Cursed Totem|Tótem maldito|Artefacto|Los jugadores no pueden jugar habilidades activadas de las criaturas.
+Custodi Soulcaller|Custody Soulcaller|Criatura - Clérigo Humano|Siempre que el Custodi Soulcaller ataque, regresa la carta de criatura objetivo con valor de maná de X o menos de tu cementerio al campo de batalla, donde X es el número de jugadores a los que atacaste este combate.
 Customs Depot|Depósito aduanal|Encantamiento|Siempre que juegue un hechizo de criatura, puedes pagar {1}. Si lo haces, roba una carta, luego descártate una carta de tu mano.
 Cycle of Life|Ciclo de la vida|Encantamiento|Devuelve el Ciclo de la vida a la mano de su propietario: la criatura objetivo que jugastes este turno es 0/1 hasta el final de tu siguiente mantenimiento. Al comienzo de tu siguiente mantenimiento, pon un contador +1/+1 en esa criatura.
 Cyclopean Mummy|Momia ciclópea|Criatura - Zombie|Cuando la Momia ciclópea vaya el cementerio desde el juego, retira del juego la Momia ciclópea.
@@ -1014,6 +1015,7 @@ Devoted Hero|Héroe devoto|Criatura - Soldado Elfo|
 Devouring Rage|Cólera devoradora|instantáneo - Arcano|Como coste adicional para jugar la Cólera devoradora, puedes sacrificar cualquier cantidad de Espíritus.
 Devouring Strossus|Strossus Devorador|Criatura - Horror|Vuela, arrolla\nAl comienzo de tu mantenimiento, sacrifica una criatura.\nSacrificar una criatura: regenera el Strossus Devorador.
 Devout Harpist|Arpista devota|Criatura - Humano|{T}: destruye el encantamiento de criatura objetivo.
+Devout Monk|Monje devoto|Criatura - Clérigo Monje Humano|Cuando Monje devoto entra en el campo de batalla, ganas 1 vida.
 Devout Witness|Testigo devota|Criatura - Cambiahechizos Humano|{1}{W}, {T}, descartar una carta de tu mano: destruye el artefacto o encantamiento objetivo.
 Diabolic Intent|Intención Diabólica|Conjuro|Como coste adicional para jugar la Intención Diabólica, sacrifica una criatura.\nBusca una carta de tu biblioteca y pon esa carta en tu mano. Luego baraja tu biblioteca.
 Diabolic Machine|Máquina diabólica|Criatura Artefacto - Constructo|{3}: regenera la Máquina diabólica.
@@ -3143,6 +3145,7 @@ Simian Grunts|Soldados simiescos|Criatura - Simio|Puedes jugar los Soldados simi
 Simoon|Simun|Instantáneo|El Simun hace 1 punto de daño a cada criatura que el oponente objetivo controla.
 Simulacrum|Simulacro|Instantáneo|Ganas vida igual al daño recibido este turno. El Simulacro hace a la criatura objetivo que controlas daño igual al daño recibido este turno.
 Singe|Chamuscar|Instantáneo|El Chamuscar hace 1 punto de daño a la criatura objetivo. Esa criatura se convierte en negra hasta el final del turno.
+Sinister Concierge|Conserje siniestro|Criatura - Hechicero Humano|Cuando el Conserje siniestro muera, puedes exiliarlo y ponerle tres contadores de tiempo. Si lo haces, exilia hasta una criatura objetivo y ponle tres contadores de tiempo. Cada carta exiliada de esta manera que no tenga la habilidad de suspender gana la habilidad de suspender.
 Sinister Strength|Fuerza siniestra|Encantamiento - Aura|La criatura encnatda obtiene +3/+1 y es negra.
 Siren's Call|Canto de sirena|Instantáneo|Lanza el Canto de sirena sólo durante el turno de un oponente, antes de que los atacantes sean declarados.
 Sirocco|Siroco|Instantáneo|El jugador objetivo muestra su mano. Por cada carta de instantáneo azul mostrada, el jugador puede pagar 4 vidas o se descarta esa carta de su mano.

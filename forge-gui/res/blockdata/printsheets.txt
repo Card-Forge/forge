@@ -5997,60 +5997,60 @@ Kaya, Ghost Assassin|CN2|2
 1 Phyrexian Vindicator|ONE
 
 [MOM Brood 1]
-1 Essence of Orthodoxy
-1 Norn's Inquisitor
-1 Phyrexian Pegasus
-1 Alabaster Host Sanctifier
-1 Infected Defector
-1 Alabaster Host Intercessor
-1 Seedpod Caretaker
-1 Tiller of Flesh
-1 Sunder the Gateway
-1 Angelic Intervention
-1 Cut Short
-8 Plains
+1 Essence of Orthodoxy|MOM
+1 Norn's Inquisitor|MOM
+1 Phyrexian Pegasus|MOM
+1 Alabaster Host Sanctifier|MOM
+1 Infected Defector|MOM
+1 Alabaster Host Intercessor|MOM
+1 Seedpod Caretaker|MOM
+1 Tiller of Flesh|MOM
+1 Sunder the Gateway|MOM
+1 Angelic Intervention|MOM
+1 Cut Short|MOM
+8 Plains|MOM
 
 [MOM Brood 2]
-1 Essence of Orthodoxy
-1 Phyrexian Pegasus
-1 Seedpod Caretaker
-1 Norn's Inquisitor
-1 Alabaster Host Sanctifier
-1 Infected Defector
-1 Alabaster Host Intercessor
-1 Tiller of Flesh
-1 Aerial Boost
-1 Inspired Charge
-1 Seal from Existence
-8 Plains
+1 Essence of Orthodoxy|MOM
+1 Phyrexian Pegasus|MOM
+1 Seedpod Caretaker|MOM
+1 Norn's Inquisitor|MOM
+1 Alabaster Host Sanctifier|MOM
+1 Infected Defector|MOM
+1 Alabaster Host Intercessor|MOM
+1 Tiller of Flesh|MOM
+1 Aerial Boost|MOM
+1 Inspired Charge|MOM
+1 Seal from Existence|MOM
+8 Plains|MOM
 
 [MOM Overachiever 1]
-1 Zephyr Winder
-1 Expedition Lookout
-1 Preening Champion
-1 Thunderhead Squadron
-1 Tidal Terror
-1 Referee Squad
-1 Oracle of Tragedy
-1 Interdisciplinary Mascot
-1 Temporal Cleansing
-1 Ephara's Dispersal
-1 Meeting of Minds
-8 Island
+1 Zephyr Winder|MOM
+1 Expedition Lookout|MOM
+1 Preening Champion|MOM
+1 Thunderhead Squadron|MOM
+1 Tidal Terror|MOM
+1 Referee Squad|MOM
+1 Oracle of Tragedy|MOM
+1 Interdisciplinary Mascot|MOM
+1 Temporal Cleansing|MOM
+1 Ephara's Dispersal|MOM
+1 Meeting of Minds|MOM
+8 Island|MOM
 
 [MOM Overachiever 2]
-1 Zephyr Winder
-1 Expedition Lookout
-1 Xerex Strobe-Knight
-1 Thunderhead Squadron
-1 Tidal Terror
-1 Referee Squad
-1 Oracle of Tragedy
-1 Interdisciplinary Mascot
-1 Ephara's Dispersal
-1 Wicked Slumber
-1 Astral Wingspan
-8 Island
+1 Zephyr Winder|MOM
+1 Expedition Lookout|MOM
+1 Xerex Strobe-Knight|MOM
+1 Thunderhead Squadron|MOM
+1 Tidal Terror|MOM
+1 Referee Squad|MOM
+1 Oracle of Tragedy|MOM
+1 Interdisciplinary Mascot|MOM
+1 Ephara's Dispersal|MOM
+1 Wicked Slumber|MOM
+1 Astral Wingspan|MOM
+8 Island|MOM
 
 [MOM Expendable 1]
 1 Terror of Towashi|MOM
@@ -6119,7 +6119,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Arachnoid Adaptation|MOM
 1 Cosmic Hunger|MOM
 1 Fertilid's Favor|MOM
-8 Forest
+8 Forest|MOM
 
 [MOM Buff 2]
 1 Surrak and Goreclaw|MOM
@@ -6188,9 +6188,9 @@ Kaya, Ghost Assassin|CN2|2
 [MOM Red Inserts]
 1 Bloodfeather Phoenix|MOM
 1 City on Fire|MOM
-1 Etali, Primal Conquerer|MOM
+1 Etali, Primal Conqueror|MOM
 1 Into the Fire|MOM
-1 Invasion of Kaladheim|MOM
+1 Invasion of Kaldheim|MOM
 1 Invasion of Karsus|MOM
 1 Nahiri's Warcrafting|MOM
 1 Orthion, Hero of Lavabrink|MOM
@@ -6220,3 +6220,194 @@ Kaya, Ghost Assassin|CN2|2
 1 Invasion of Ravnica|MOM
 1 Monastery Mentor|MOM
 1 Sword of Once and Future|MOM
+
+[LTR Courageous 1]
+1 Saradoc, Master of Buckland|LTR
+1 Esquire of the King|LTR
+1 Samwise the Stouthearted|LTR
+1 Took Reaper|LTR
+1 Rosie Cotton of South Lane|LTR
+1 Errand-Rider of Gondor|LTR
+1 Bill the Pony|LTR
+1 Lost to Legend|LTR
+1 Fog on the Barrow-Downs|LTR
+1 Slip On the Ring|LTR
+1 Escape from Orthanc|LTR
+8 Plains|LTR
+
+[LTR Courageous 2]
+1 Saradoc, Master of Buckland|LTR
+1 Nimble Hobbit|LTR
+1 Samwise the Stouthearted|LTR
+1 Took Reaper|LTR
+1 Rosie Cotton of South Lane|LTR
+1 Eastfarthing Farmer|LTR
+1 Bill the Pony|LTR
+1 Reprieve|LTR
+1 Hobbit's Sting|LTR
+1 Slip On the Ring|LTR
+1 Escape from Orthanc|LTR
+8 Plains|LTR
+
+[LTR Tricksy 1]
+1 Elvish Mariner|LTR
+1 Nimrodel Watcher|LTR
+1 Pelargir Survivor|LTR
+1 Captain of Umbar|LTR
+1 Elrond, Lord of Rivendell|LTR
+1 Meneldor, Swift Savior|LTR
+1 Willow-Wind|LTR
+1 Council's Deliberation|LTR
+1 Glorious Gale|LTR
+1 Arwen's Gift|LTR
+1 Horses of the Bruinen|LTR
+8 Island|LTR
+
+[LTR Tricksy 2]
+1 Elvish Mariner|LTR
+1 Nimrodel Watcher|LTR
+1 Pelargir Survivor|LTR
+1 Ithilien Kingfisher|LTR
+1 Elrond, Lord of Rivendell|LTR
+1 Saruman the White|LTR
+1 Willow-Wind|LTR
+1 Saruman's Trickery|LTR
+1 Glorious Gale|LTR
+1 Arwen's Gift|LTR
+1 Horses of the Bruinen|LTR
+8 Island|LTR
+
+[LTR Mordor 1]
+1 Ringwraiths|LTR
+1 Gollum, Patient Plotter|LTR
+1 Uruk-hai Berserker|LTR
+1 Nazgul|LTR
+1 Gothmog, Morgul Lieutenant|LTR
+1 Cirith Ungol Patrol|LTR
+1 Nasty End|LTR
+1 Gollum's Bite|LTR
+1 Shelob's Ambush|LTR
+1 Mordor Muster|LTR
+1 Claim the Precious|LTR
+8 Swamp|LTR
+
+[LTR Mordor 2]
+1 Ringwraiths|LTR
+1 Gollum, Patient Plotter|LTR
+1 Dunland Crebain|LTR
+1 Grima Wormtongue|LTR
+1 Gothmog, Morgul Lieutenant|LTR
+1 Cirith Ungol Patrol|LTR
+1 Bitter Downfall|LTR
+1 Nasty End|LTR
+1 Orcish Medicine|LTR
+1 Mordor Muster|LTR
+1 Lash of the Balrog|LTR
+8 Swamp|LTR
+
+[LTR Marauders 1]
+1 Battle-Scarred Goblin|LTR
+1 Erebor Flamesmith|LTR
+1 Gimli, Counter of Kills|LTR
+1 Grishnakh, Brash Instigator|LTR
+1 Olog-hai Crusher|LTR
+1 Gimli's Fury|LTR
+1 Assault on Osgiliath|LTR
+1 Foray of Orcs|LTR
+1 Fear, Fire, Foes!|LTR
+1 Quarrel's End|LTR
+1 Swarming of Moria|LTR
+8 Mountain|LTR
+
+[LTR Marauders 2]
+1 Erebor Flamesmith|LTR
+1 Goblin Fireleaper|LTR
+1 Gimli, Counter of Kills|LTR
+1 Grishnakh, Brash Instigator|LTR
+1 Olog-hai Crusher|LTR
+1 Smite the Deathless|LTR
+1 Rush the Room|LTR
+1 Assault on Osgiliath|LTR
+1 Foray of Orcs|LTR
+1 Quarrel's End|LTR
+1 Swarming of Moria|LTR
+8 Mountain|LTR
+
+[LTR Journey 1]
+1 Brandywine Farmer|LTR
+1 Dunedain Rangers|LTR
+1 Elanor Gardner|LTR
+1 Meriadoc Brandybuck|LTR
+1 Mirkwood Spider|LTR
+1 Mirrormere Guardian|LTR
+1 Quickbeam, Upstart Ent|LTR
+1 Bombadil's Song|LTR
+1 Gift of Strands|LTR
+1 Ent's Fury|LTR
+1 Revive the Shire|LTR
+8 Forest|LTR
+
+[LTR Journey 2]
+1 Brandywine Farmer|LTR
+1 Elanor Gardner|LTR
+1 Enraged Huorn|LTR
+1 Meriadoc Brandybuck|LTR
+1 Peregrin Took|LTR
+1 Quickbeam, Upstart Ent|LTR
+1 Wose Pathfinder|LTR
+1 Pippin's Bravery|LTR
+1 Stew the Coneys|LTR
+1 Galadhrim Bow|LTR
+1 Revive the Shire|LTR
+8 Forest|LTR
+
+[LTR Black Inserts]
+Call of the Ring|LTR
+Isildur's Fateful Strike|LTR
+Lobelia Sackville-Baggins|LTR
+One Ring to Rule Them All|LTR
+Orcish Bowmasters|LTR
+Sauron, the Necromancer|LTR
+Shadow of the Enemy|LTR
+Witch-king of Angmar|LTR
+
+[LTR Blue Inserts]
+Borne Upon a Wind|LTR
+Goldberry, River-Daughter|LTR
+Lost Isle Calling|LTR
+Press the Enemy|LTR
+Rangers of Ithilien|LTR
+Scroll of Isildur|LTR
+Storm of Saruman|LTR
+The Watcher in the Water|LTR
+
+[LTR Green Inserts]
+Delighted Halfling|LTR
+Elven Chorus|LTR
+Fall of Gil-galad|LTR
+Fangorn, Tree Shepherd|LTR
+Legolas, Master Archer|LTR
+The Ring Goes South|LTR
+Last March of the Ents|LTR
+Radagast the Brown|LTR
+
+[LTR Red Inserts]
+Display of Power|LTR
+Eomer, Marshal of Rohan|LTR
+Fall of Cair Andros|LTR
+Gloin, Dwarf Emissary|LTR
+Moria Marauder|LTR
+There and Back Again|LTR
+Hew the Entwood|LTR
+Spiteful Banditry|LTR
+
+[LTR White Inserts]
+The Battle of Bywater|LTR
+Boromir, Warden of the Tower|LTR
+Flowering of the White Tree|LTR
+Forge Anew|LTR
+Frodo, Sauron's Bane|LTR
+War of the Last Alliance|LTR
+Dawn of a New Age|LTR
+Gandalf the White|LTR
+

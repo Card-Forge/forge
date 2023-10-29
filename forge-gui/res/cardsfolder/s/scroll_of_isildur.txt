@@ -1,0 +1,12 @@
+Name:Scroll of Isildur
+ManaCost:2 U
+Types:Enchantment Saga
+K:Saga:3:DBGainControl,DBTap,DBDraw
+SVar:DBGainControl:DB$ GainControl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target artifact | ValidTgts$ Artifact | SubAbility$ TrigTempt | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of up to one target artifact for as long as you control CARDNAME. The Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures. Put a stun counter on each of them.
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+SVar:DBDraw:DB$ Draw | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
+SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
+DeckHas:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Gain control of up to one target artifact for as long as you control Scroll of Isildur. The Ring tempts you.\nII — Tap up to two target creatures. Put a stun counter on each of them.\nIII — Draw a card for each tapped creature target opponent controls.

@@ -34,6 +34,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class CostAdjustment {
 
@@ -162,14 +163,14 @@ public class CostAdjustment {
         }
         if (count > 0) {
             Cost part = new Cost(scost, sa.isAbility(), sa.getHostCard().equals(hostCard));
-            cost.mergeTo(part, count);
+            cost.mergeTo(part, count, sa);
         }
     }
 
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        if (sa.isTrigger()) {
+        if (sa.isTrigger() || sa.isReplacementAbility()) {
             return;
         }
 
@@ -212,8 +213,10 @@ public class CostAdjustment {
             sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
         }
 
-        for (final StaticAbility stAb : reduceAbilities) {
-            sumGeneric += applyReduceCostAbility(stAb, sa, cost, sumGeneric);
+        while (!reduceAbilities.isEmpty()) {
+            StaticAbility choice = sa.getActivatingPlayer().getController().chooseSingleStaticAbility(Localizer.getInstance().getMessage("lblChooseCostReduction"), reduceAbilities);
+            reduceAbilities.remove(choice);
+            sumGeneric += applyReduceCostAbility(choice, sa, cost, sumGeneric);
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
@@ -249,7 +252,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null);
+                        final Card d = game.getAction().exile(c, null, null);
                         final Card host = sa.getHostCard();
                         host.addExiledCard(d);
                         d.setExiledWith(host);
@@ -293,10 +296,7 @@ public class CostAdjustment {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                conv.getKey().tap(true);
-                if (!improvise) {
-                    sa.getHostCard().addConvoked(conv.getKey());
-                }
+                conv.getKey().tap(true, sa, sa.getActivatingPlayer());
             }
         }
     }
@@ -405,13 +405,17 @@ public class CostAdjustment {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
 
+        if (staticAbility.hasParam("UpTo")) {
+            value = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, value);
+        }
+
         if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
                 minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
             }
 
-            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana - sumReduced);
+            final int maxReduction = manaCost.getConvertedManaCost() - minMana - sumReduced;
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }

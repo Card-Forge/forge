@@ -1,0 +1,8 @@
+Name:Imodane, the Pyrohammer
+ManaCost:2 R R
+Types:Legendary Creature Human Knight
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTarget$ Creature | ValidCause$ Spell.numTargets EQ1 | TargetRelativeToCause$ Creature.targetedBy | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an instant or sorcery spell you control that targets only a single creature deals damage to that creature, NICKNAME deals that much damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ Opponent
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever an instant or sorcery spell you control that targets only a single creature deals damage to that creature, Imodane deals that much damage to each opponent.

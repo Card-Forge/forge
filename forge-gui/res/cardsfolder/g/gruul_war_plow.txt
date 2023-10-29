@@ -2,5 +2,5 @@ Name:Gruul War Plow
 ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
-A:AB$ Animate | Cost$ 1 R G | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Juggernaut | SpellDescription$ CARDNAME becomes a 4/4 Juggernaut artifact creature until end of turn.
+A:AB$ Animate | Cost$ 1 R G | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Juggernaut | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 4/4 Juggernaut artifact creature until end of turn.
 Oracle:Creatures you control have trample.\n{1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.

@@ -1,0 +1,6 @@
+Name:Ringsight
+ManaCost:1 U B
+Types:Sorcery
+A:SP$ RingTemptsYou | SubAbility$ TrigSearch | SpellDescription$ The Ring tempts you. Search your library for a card that shares a color with a legendary creature you control, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.SharesColorWith Valid Creature.Legendary+YouCtrl
+Oracle:The Ring tempts you. Search your library for a card that shares a color with a legendary creature you control, reveal it, put it into your hand, then shuffle.

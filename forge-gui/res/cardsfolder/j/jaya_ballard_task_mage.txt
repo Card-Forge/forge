@@ -3,7 +3,8 @@ ManaCost:1 R R
 Types:Legendary Creature Human Spellshaper
 PT:2/2
 A:AB$ Destroy | Cost$ R T Discard<1/Card> | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
-A:AB$ DealDamage | Cost$ 1 R T Discard<1/Card> | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBNoRegen | SpellDescription$ CARDNAME deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
+A:AB$ DealDamage | Cost$ 1 R T Discard<1/Card> | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | SubAbility$ DBNoRegen | SpellDescription$ CARDNAME deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.
 A:AB$ DamageAll | Cost$ 5 R R T Discard<1/Card> | NumDmg$ 6 | ValidPlayers$ Player | ValidCards$ Creature | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
-SVar:DBNoRegen:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
+SVar:DBNoRegen:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | StackDescription$ None | AILogic$ CantRegenerate
+SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:{R}, {T}, Discard a card: Destroy target blue permanent.\n{1}{R}, {T}, Discard a card: Jaya Ballard, Task Mage deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.\n{5}{R}{R}, {T}, Discard a card: Jaya Ballard deals 6 damage to each creature and each player.

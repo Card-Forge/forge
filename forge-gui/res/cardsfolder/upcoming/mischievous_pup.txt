@@ -1,0 +1,8 @@
+Name:Mischievous Pup
+ManaCost:2 W
+Types:Creature Dog
+PT:3/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return up to one other target permanent you control to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.YouCtrl+Other | TgtPrompt$ Select up to one other target permanent you control 
+Oracle:Flash\nWhen Mischievous Pup enters the battlefield, return up to one other target permanent you control to its owner's hand.

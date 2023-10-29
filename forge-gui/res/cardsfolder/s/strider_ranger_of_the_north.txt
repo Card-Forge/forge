@@ -1,0 +1,8 @@
+Name:Strider, Ranger of the North
+ManaCost:2 R G
+Types:Legendary Creature Human Ranger
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, target creature gets +1/+1 until end of turn. Then if that creature has power 4 or greater, it gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBFerocious
+SVar:DBFerocious:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerGE4 | KW$ First Strike
+Oracle:Landfall — Whenever a land enters the battlefield under your control, target creature gets +1/+1 until end of turn. Then if that creature has power 4 or greater, it gains first strike until end of turn.

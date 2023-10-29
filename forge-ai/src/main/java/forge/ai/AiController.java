@@ -89,6 +89,7 @@ public class AiController {
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
+    private boolean useLivingEnd;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -276,6 +277,11 @@ public class AiController {
             // These triggers all care for ETB effects
 
             if (tr.getMode() != TriggerType.ChangesZone) {
+                continue;
+            }
+
+            // can't fetch partner isn't problematic
+            if (tr.getKeyword() != null && tr.getKeyword().getOriginal().startsWith("Partner")) {
                 continue;
             }
 
@@ -644,7 +650,6 @@ public class AiController {
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
         return predictSpellToCastInMain2(exceptSA, true);
     }
-
     private SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
         if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
             return null;
@@ -656,10 +661,11 @@ public class AiController {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
         try {
-            Collections.sort(all, saComparator); // put best spells first
+            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
 
@@ -684,15 +690,12 @@ public class AiController {
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
     }
-
     public boolean reserveManaSources(SpellAbility sa) {
         return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
@@ -788,7 +791,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.costHasX() || host.hasStartOfKeyword("Strive");
+        boolean xCost = sa.costHasX() || host.hasKeyword(Keyword.STRIVE);
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -810,29 +813,26 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (sa.usesTargeting() && (!sa.isSpell() || CardFactoryUtil.isCounterable(host))) {
-            for (Card tgt : sa.getTargets().getTargetCards()) {
-                // TODO some older cards don't use the keyword, so check for trigger instead
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
-                    int amount = 0;
-                    Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
-                    if (wardCost.hasManaCost()) {
-                        amount = wardCost.getTotalMana().getCMC();
-                        if (amount > 0 && !ComputerUtilCost.canPayCost(sa, player, true)) {
-                            return AiPlayDecision.CantAfford;
+        if (!sa.isSpell() || CardFactoryUtil.isCounterable(host)) {
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                for (Card tgt : tc.getTargetCards()) {
+                    // TODO some older cards don't use the keyword, so check for trigger instead
+                    if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
+                        Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
+                        if (wardCost.hasManaCost()) {
+                            xCost = wardCost.getTotalMana().getCMC() > 0;
                         }
-                    }
-                    SpellAbilityAi topAI = new SpellAbilityAi() {
-                    };
-                    if (!topAI.willPayCosts(player, sa, wardCost, host)) {
-                        return AiPlayDecision.CostNotAcceptable;
+                        SpellAbilityAi topAI = new SpellAbilityAi() {};
+                        if (!topAI.willPayCosts(player, sa, wardCost, host)) {
+                            return AiPlayDecision.CostNotAcceptable;
+                        }
                     }
                 }
             }
         }
 
         // check if some target raised cost
-        if (oldCMC > -1) {
+        if (!xCost && oldCMC > -1) {
             int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
             if (finalCMC > oldCMC) {
                 xCost = true;
@@ -1020,156 +1020,6 @@ public class AiController {
         return false;
     }
 
-    // not sure "playing biggest spell" matters?
-    private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            // sort from highest cost to lowest
-            // we want the highest costs first
-            int a1 = a.getPayCosts().getTotalMana().getCMC();
-            int b1 = b.getPayCosts().getTotalMana().getCMC();
-
-            // deprioritize SAs explicitly marked as preferred to be activated last compared to all other SAs
-            if (a.hasParam("AIActivateLast") && !b.hasParam("AIActivateLast")) {
-                return 1;
-            } else if (b.hasParam("AIActivateLast") && !a.hasParam("AIActivateLast")) {
-                return -1;
-            }
-
-            // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
-            if (ApiType.RollPlanarDice == a.getApi() && a.getHostCard() != null && a.getHostCard().hasSVar("AIRollPlanarDieParams") && a.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                return 1;
-            } else if (ApiType.RollPlanarDice == b.getApi() && b.getHostCard() != null && b.getHostCard().hasSVar("AIRollPlanarDieParams") && b.getHostCard().getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                return -1;
-            }
-
-            // deprioritize pump spells with pure energy cost (can be activated last,
-            // since energy is generally scarce, plus can benefit e.g. Electrostatic Pummeler)
-            int a2 = 0, b2 = 0;
-            if (a.getApi() == ApiType.Pump && a.getPayCosts().getCostEnergy() != null) {
-                if (a.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    a2 = a.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (b.getApi() == ApiType.Pump && b.getPayCosts().getCostEnergy() != null) {
-                if (b.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    b2 = b.getPayCosts().getCostEnergy().convertAmount();
-                }
-            }
-            if (a2 == 0 && b2 > 0) {
-                return -1;
-            } else if (b2 == 0 && a2 > 0) {
-                return 1;
-            }
-
-            // cast 0 mana cost spells first (might be a Mox)
-            if (a1 == 0 && b1 > 0 && ApiType.Mana != a.getApi()) {
-                return -1;
-            } else if (a1 > 0 && b1 == 0 && ApiType.Mana != b.getApi()) {
-                return 1;
-            }
-
-            if (a.getHostCard() != null && a.getHostCard().hasSVar("FreeSpellAI")) {
-                return -1;
-            } else if (b.getHostCard() != null && b.getHostCard().hasSVar("FreeSpellAI")) {
-                return 1;
-            }
-
-            if (a.getHostCard().equals(b.getHostCard()) && a.getApi() == b.getApi()) {
-                // Cheaper Spectacle costs should be preferred
-                // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
-                // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
-                if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
-                    return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
-                    return 1;
-                }
-            }
-
-            a1 += getSpellAbilityPriority(a);
-            b1 += getSpellAbilityPriority(b);
-
-            return b1 - a1;
-        }
-
-        private int getSpellAbilityPriority(SpellAbility sa) {
-            int p = 0;
-            Card source = sa.getHostCard();
-            final Player ai = source == null ? sa.getActivatingPlayer() : source.getController();
-            if (ai == null) {
-                System.err.println("Error: couldn't figure out the activating player and host card for SA: " + sa);
-                return 0;
-            }
-            final boolean noCreatures = ai.getCreaturesInPlay().isEmpty();
-
-            if (source != null) {
-                // puts creatures in front of spells
-                if (source.isCreature()) {
-                    p += 1;
-                }
-                if (source.hasSVar("AIPriorityModifier")) {
-                    p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
-                }
-                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
-                    p -= 10;
-                }
-                // don't play equipments before having any creatures
-                if (source.isEquipment() && noCreatures) {
-                    p -= 9;
-                }
-                // don't equip stuff in main 2 if there's more stuff to cast at the moment
-                if (sa.getApi() == ApiType.Attach && !sa.isCurse() && source.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    p -= 1;
-                }
-                // 1. increase chance of using Surge effects
-                // 2. non-surged versions are usually inefficient
-                if (source.getOracleText().contains("surge cost") && !sa.isSurged()) {
-                    p -= 9;
-                }
-                // move snap-casted spells to front
-                if (source.isInZone(ZoneType.Graveyard)) {
-                    if (sa.getMayPlay() != null && source.mayPlay(sa.getMayPlay()) != null) {
-                        p += 50;
-                    }
-                }
-                // if the profile specifies it, deprioritize Storm spells in an attempt to build up storm count
-                if (source.hasKeyword(Keyword.STORM) && ai.getController() instanceof PlayerControllerAi) {
-                    p -= (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.PRIORITY_REDUCTION_FOR_STORM_SPELLS));
-                }
-            }
-
-            // use Surge and Prowl costs when able to
-            if (sa.isSurged() || sa.isProwl()) {
-                p += 9;
-            }
-            // sort planeswalker abilities with most costly first
-            if (sa.isPwAbility()) {
-                final CostPart cost = sa.getPayCosts().getCostParts().get(0);
-                if (cost instanceof CostRemoveCounter) {
-                    p += cost.convertAmount() == null ? 1 : cost.convertAmount();
-                } else if (cost instanceof CostPutCounter) {
-                    p -= cost.convertAmount();
-                }
-                if (sa.hasParam("Ultimate")) {
-                    p += 9;
-                }
-            }
-
-            if (ApiType.DestroyAll == sa.getApi()) {
-                p += 4;
-            } else if (ApiType.Mana == sa.getApi()) {
-                p -= 9;
-            }
-
-            // try to cast mana ritual spells before casting spells to maximize potential mana
-            if ("ManaRitual".equals(sa.getParam("AILogic"))) {
-                p += 9;
-            }
-
-            return p;
-        }
-    };
-
     public CardCollection getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
         return getCardsToDiscard(numDiscard, uTypes, sa, CardCollection.EMPTY);
     }
@@ -1353,16 +1203,17 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        if (mode == PlayerActionConfirmMode.AlternativeDamageAssignment) {
+        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
+            System.err.printf("Overriding AI confirmAction decision for %s, defaulting to true.\n", mode);
             return true;
         }
 
-        ApiType api = sa.getApi();
+        ApiType api = sa == null ? null : sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
-        if (api == null) {
-            String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (api is null).",
-                    mode);
+        if (sa == null || api == null) {
+            String exMsg = String.format("AI confirmAction does not know what to decide about %s mode (%s is null).",
+                    mode, sa == null ? "SA" : "API");
             throw new IllegalArgumentException(exMsg);
         }
         return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, params);
@@ -1381,7 +1232,7 @@ public class AiController {
         return false;
     }
 
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+    public boolean confirmStaticApplication(Card hostCard, String logic) {
         return true;
     }
 
@@ -1457,6 +1308,9 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker); 
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
+        // Check if we can reinforce with Banding creatures
+        aiAtk.reinforceWithBanding(combat);
+
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
             combat.clearAttackers();
@@ -1482,10 +1336,7 @@ public class AiController {
         if (sa == null) {
             return null;
         }
-
-        final List<SpellAbility> abilities = Lists.newArrayList();
-        abilities.add(sa);
-        return abilities;
+        return Lists.newArrayList(sa);
     }
 
     public List<SpellAbility> chooseSpellAbilityToPlay() {
@@ -1540,7 +1391,7 @@ public class AiController {
 
                     // add mayPlay option
                     for (CardPlayOption o : land.mayPlay(player)) {
-                        la = new LandAbility(land, player, o.getAbility());
+                        la = new LandAbility(land, player, o);
                         la.setCardState(land.getCurrentState());
                         if (la.canPlay()) {
                             abilities.add(la);
@@ -1722,6 +1573,8 @@ public class AiController {
                 return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
             }
         });
+        //update LivingEndPlayer
+        useLivingEnd = Iterables.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
         SpellAbility chosenSa = chooseSpellAbilityToPlayFromList(saList, true);
 
@@ -1737,13 +1590,15 @@ public class AiController {
             return null;
 
         try {
-            Collections.sort(all, saComparator); // put best spells first
+            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(saComparator, all);
+            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
             Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
         }
-
+        //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
+        boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
             // Don't add Counterspells to the "normal" playcard lookups
             if (skipCounter && sa.getApi() == ApiType.Counter) {
@@ -1758,6 +1613,25 @@ public class AiController {
                     continue;
                 }
             }
+            //living end AI decks
+            AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
+            if (useLivingEnd) {
+                if (sa.isCycling() && sa.canCastTiming(player)) {
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
+                        aiPlayDecision = AiPlayDecision.WillPlay;
+                } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+                    if (isLifeInDanger) { //needs more tune up for certain conditions
+                        aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
+                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
+                        if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
+                            continue;
+                        else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
+                            aiPlayDecision = AiPlayDecision.WillPlay;// needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
+                    } else {
+                        continue;
+                    }
+                }
+            }
 
             sa.setActivatingPlayer(player, true);
             SpellAbility root = sa.getRootAbility();
@@ -1766,12 +1640,11 @@ public class AiController {
                 sa.setLastStateBattlefield(game.getLastStateBattlefield());
                 sa.setLastStateGraveyard(game.getLastStateGraveyard());
             }
-
-            AiPlayDecision opinion = canPlayAndPayFor(sa);
+            //override decision for living end player
+            AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
 
             // reset LastStateBattlefield
-            sa.setLastStateBattlefield(CardCollection.EMPTY);
-            sa.setLastStateGraveyard(CardCollection.EMPTY);
+            sa.clearLastState();
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
@@ -2285,19 +2158,19 @@ public class AiController {
     }
 
     // TODO move to more common place
-    private <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
+    private static <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
         List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
         input.removeAll(filtered);
         return filtered;
     }
 
     // TODO move to more common place
-    private List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
+    public static List<SpellAbility> filterListByApi(List<SpellAbility> input, ApiType type) {
         return filterList(input, SpellAbilityPredicates.isApi(type));
     }
 
     private <T extends CardTraitBase> List<T> filterListByAiLogic(List<T> list, final String logic) {
-        return filterList(list, CardTraitPredicates.hasParam("AiLogic", logic));
+        return filterList(list, CardTraitPredicates.hasParam("AILogic", logic));
     }
 
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> possible, int min, int num, boolean allowRepeat) {

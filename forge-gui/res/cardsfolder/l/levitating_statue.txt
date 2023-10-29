@@ -4,7 +4,7 @@ Types:Artifact
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 1 | Toughness$ 1 | Types$ Creature,Artifact,Construct | SpellDescription$ CARDNAME becomes a 1/1 Construct artifact creature until end of turn.
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 1 | Toughness$ 1 | Types$ Creature,Artifact,Construct | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 1/1 Construct artifact creature until end of turn.
 DeckHas:Ability$Counters & Type$Construct
 DeckHints:Type$Artifact|Instant|Sorcery|Enchantment
 Oracle:Flying\nWhenever you cast a noncreature spell, put a +1/+1 counter on Levitating Statue.\n{2}: Levitating Statue becomes a 1/1 Construct artifact creature until end of turn.

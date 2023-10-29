@@ -1,0 +1,18 @@
+Name:Bonded Herdbeast
+ManaCost:4 G
+Types:Creature Beast
+PT:4/5
+A:AB$ SetState | Cost$ 4 RP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({R/P} can be paid with either {R} or 2 life.)
+AlternateMode:DoubleFaced
+DeckHints:Color$Red
+Oracle:{4}{R/P}: Transform Bonded Herdbeast. Activate only as a sorcery. ({R/P} can be paid with either {R} or 2 life.)
+
+ALTERNATE
+
+Name:Plated Kilnbeast
+ManaCost:no cost
+Colors:red,green
+Types:Creature Phyrexian Beast
+PT:7/5
+K:Menace
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)

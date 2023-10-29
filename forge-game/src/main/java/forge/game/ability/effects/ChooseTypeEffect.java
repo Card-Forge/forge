@@ -111,14 +111,20 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 } else {
                     choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                 }
+
+                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+
                 if (sa.hasParam("Note")) {
                     card.addNotedType(choice);
-                } else if (!sa.hasParam("ChooseType2")) {
-                    card.setChosenType(choice);
-                } else {
-                    card.setChosenType2(choice);
+                    if (!sa.hasParam("ChooseNoted")) {
+                        continue;
+                    }
                 }
-                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+                if (sa.hasParam("ChooseType2")) {
+                    card.setChosenType2(choice);
+                } else {
+                    card.setChosenType(choice);
+                }
             }
         } else {
             throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");

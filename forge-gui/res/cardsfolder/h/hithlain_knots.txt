@@ -1,0 +1,7 @@
+Name:Hithlain Knots
+ManaCost:1 U
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBScry | SpellDescription$ Tap target creature. Scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Tap target creature. Scry 1.\nDraw a card.

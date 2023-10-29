@@ -324,6 +324,13 @@ public class SpellAbilityPicker {
     }
 
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
+        if (!sa.isLegalAfterStack()) {
+            return AiPlayDecision.CantPlaySa;
+        }
+        if (!sa.checkRestrictions(sa.getHostCard(), player)) {
+            return AiPlayDecision.CantPlaySa;
+        }
+
         if (sa instanceof LandAbility) {
             return AiPlayDecision.WillPlay;
         }

@@ -1,0 +1,7 @@
+Name:Bombadil's Song
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ TrigTempt | SpellDescription$ Target creature you control gets +1/+1 and gains hexproof until end of turn. The Ring tempts you. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
+SVar:TrigTempt:DB$ RingTemptsYou
+DeckHas:Keyword$Hexproof
+Oracle:Target creature you control gets +1/+1 and gains hexproof until end of turn. The Ring tempts you. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

@@ -35,14 +35,19 @@ public class AIDeckStatistics {
         this.numLands = numLands;
     }
 
-    public static AIDeckStatistics fromCardList(List<CardRules> cards) {
+    public static AIDeckStatistics fromCards(List<Card> cards) {
         int totalCMC = 0;
         int totalCount = 0;
         int numLands = 0;
         int maxCost = 0;
         int[] maxPips = new int[6];
         int maxColoredCost = 0;
-        for (CardRules rules : cards) {
+        for (Card c : cards) {
+            CardRules rules = c.getRules();
+            if (rules == null) {
+                System.err.println(c + " CardRules is null" + (c.isToken() ? "/token" : "."));
+                continue;
+            }
             CardType type = rules.getType();
             if (type.isLand()) {
                 numLands += 1;
@@ -80,15 +85,15 @@ public class AIDeckStatistics {
     }
 
 
-    public static AIDeckStatistics fromDeck(Deck deck) {
-        List<CardRules> rules_list = new ArrayList<>();
+    public static AIDeckStatistics fromDeck(Deck deck, Player player) {
+        List<Card> cardlist = new ArrayList<>();
         for (final Map.Entry<DeckSection, CardPool> deckEntry : deck) {
             switch (deckEntry.getKey()) {
                 case Main:
                 case Commander:
                     for (final Map.Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        CardRules rules = poolEntry.getKey().getRules();
-                        rules_list.add(rules);
+                        Card card = Card.fromPaperCard(poolEntry.getKey(), player);
+                        cardlist.add(card);
                     }
                     break;
                 default:
@@ -96,25 +101,25 @@ public class AIDeckStatistics {
             }
         }
 
-        return fromCardList(rules_list);
+        return fromCards(cardlist);
     }
 
     public static AIDeckStatistics fromPlayer(Player player) {
         Deck deck = player.getRegisteredPlayer().getDeck();
         if (deck.isEmpty()) {
             // we're in a test or some weird match, search through the hand and library and build the decklist
-            List<CardRules> rules_list = new ArrayList<>();
+            List<Card> cardlist = new ArrayList<>();
             for (Card c : player.getAllCards()) {
                 if (c.getPaperCard() == null) {
                     continue;
                 }
-                rules_list.add(c.getRules());
+                cardlist.add(c);
             }
 
-            return fromCardList(rules_list);
+            return fromCards(cardlist);
         }
 
-        return fromDeck(deck);
+        return fromDeck(deck, player);
 
     }
 

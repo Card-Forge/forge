@@ -1,0 +1,8 @@
+Name:Call Forth the Tempest
+ManaCost:5 R R R
+Types:Sorcery
+K:Cascade
+K:Cascade
+A:SP$ DamageAll | NumDmg$ X | ValidCards$ Creature.OppCtrl | ValidDescription$ each creature your opponents controls | SpellDescription$ CARDNAME deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+Other$SumCMC
+Oracle:Cascade, cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order. Then do it again.)\nCall Forth the Tempest deals damage to each creature your opponents control equal to the total mana value of other spells you've cast this turn.

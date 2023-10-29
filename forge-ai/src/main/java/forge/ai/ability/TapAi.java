@@ -21,7 +21,7 @@ public class TapAi extends TapAiBase {
         if (turn.isOpponentOf(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             // Tap things down if it's Human's turn
         } else if (turn.equals(ai)) {
-            if (SpellAbilityAi.isSorcerySpeed(sa, ai) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+            if (isSorcerySpeed(sa, ai) && phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
                 // Cast it if it's a sorcery.
             } else if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Aggro Brains are willing to use TapEffects aggressively instead of defensively
@@ -33,7 +33,7 @@ public class TapAi extends TapAiBase {
                 // Don't tap down after blockers
                 return false;
             }
-        } else if (!SpellAbilityAi.playReusable(ai, sa)) {
+        } else if (!playReusable(ai, sa)) {
             // Generally don't want to tap things with an Instant during Players turn outside of combat
             return false;
         }
@@ -46,8 +46,11 @@ public class TapAi extends TapAiBase {
         final Card source = sa.getHostCard();
         final Cost abCost = sa.getPayCosts();
 
-        if ("GoblinPolkaBand".equals(sa.getParam("AILogic"))) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if ("GoblinPolkaBand".equals(aiLogic)) {
             return SpecialCardAi.GoblinPolkaBand.consider(ai, sa);
+        } else if ("Arena".equals(aiLogic)) {
+            return SpecialCardAi.Arena.consider(ai, sa);
         }
 
         if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {

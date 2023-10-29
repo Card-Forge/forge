@@ -4,6 +4,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.gui.control.FControlGamePlayback;
+import forge.gui.control.PlaybackSpeed;
 
 public class InputPlaybackControl extends InputSyncronizedBase {
     private static final long serialVersionUID = 7979208993306642072L;
@@ -11,7 +12,8 @@ public class InputPlaybackControl extends InputSyncronizedBase {
     final FControlGamePlayback control;
 
     private boolean isPaused = false;
-    private boolean isFast = false;
+
+    private PlaybackSpeed speed = PlaybackSpeed.NORMAL;
 
     private final Game game;
     public InputPlaybackControl(final Game game0, final FControlGamePlayback fControlGamePlayback) {
@@ -46,7 +48,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         if (isPaused) {
             getController().getGui().updateButtons(null, "Resume", "Step", true, true, true);
         } else {
-            getController().getGui().updateButtons(null, "Pause", isFast ? "1x Speed" : "10x Faster", true, true, true);
+            getController().getGui().updateButtons(null, "Pause", speed.nextSpeedText(), true, true, true);
         }
         getController().getGui().setgamePause(isPaused);
     }
@@ -74,9 +76,10 @@ public class InputPlaybackControl extends InputSyncronizedBase {
             control.singleStep();
         }
         else {
-            isFast = !isFast;
-            control.setSpeed(isFast);
-            getController().getGui().setGameSpeed(isFast);
+            speed = speed.nextSpeed();
+
+            control.setSpeed(speed);
+            getController().getGui().setGameSpeed(speed);
             setPause(isPaused); // update message
         }
     }

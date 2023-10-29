@@ -1,0 +1,9 @@
+Name:Rankle's Prank
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,DBLoseLife,DBSac | MinCharmNum$ 1 | CharmNum$ 3
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | Defined$ Player | AILogic$ AnyPhaseIfFavored | SpellDescription$ Each player discards two cards.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ Player | AILogic$ AnyPhase | SpellDescription$ Each player loses 4 life
+SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | Amount$ 2 | SpellDescription$ Each player sacrifices two creatures.
+DeckHas:Ability$Sacrifice|Discard
+Oracle:Choose one or more —• Each player discards two cards.\n• Each player loses 4 life.\n• Each player sacrifices two creatures.

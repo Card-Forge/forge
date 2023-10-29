@@ -1,0 +1,11 @@
+Name:Centaur of Attention
+ManaCost:3 G G
+Types:Creature Centaur Performer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, roll five six-sided dice and store those results on it.
+SVar:TrigRollDice:DB$ RollDice | Amount$ 5 | StoreResults$ True
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigReroll | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may reroll any number of CARDNAME's stored results.
+SVar:TrigReroll:DB$ RollDice | RerollResults$ True
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ Centaur of Attention gets +X/+X, where X is the greatest number of stored results on it of the same value.
+SVar:X:Count$MaxSameStoredRolls
+Oracle:When Centaur of Attention enters the battlefield, roll five six-sided dice and store those results on it.\nAt the beginning of combat on your turn, you may reroll any number of Centaur of Attention's stored results.\nCentaur of Attention gets +X/+X, where X is the greatest number of stored results on it of the same value.

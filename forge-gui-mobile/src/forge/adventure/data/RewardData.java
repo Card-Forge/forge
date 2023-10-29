@@ -1,7 +1,6 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.util.CardUtil;
@@ -9,8 +8,8 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.model.FModel;
 
 import java.io.Serializable;
 import java.util.*;
@@ -23,6 +22,7 @@ import java.util.*;
  * Also used for deck generation and shops
  */
 public class RewardData implements Serializable {
+    private static final long serialVersionUID = 3158932532013393718L;
     public String type;
     public float probability;
     public int count;
@@ -45,6 +45,7 @@ public class RewardData implements Serializable {
     public RewardData[] cardUnion;
     public String[] deckNeeds;
     public RewardData[] rotation;
+    public Deck cardPack;
 
     public RewardData() { }
 
@@ -74,6 +75,7 @@ public class RewardData implements Serializable {
         cardUnion         =rewardData.cardUnion==null?null:rewardData.cardUnion.clone();
         rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
         deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
+        cardPack          = rewardData.cardPack;
     }
 
     private static Iterable<PaperCard> allCards;
@@ -81,33 +83,29 @@ public class RewardData implements Serializable {
 
     static private void initializeAllCards(){
         RewardData legals = Config.instance().getConfigData().legalCards;
-        if(legals==null)
-            allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
-        else
-            allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
-        //Filter out specific cards.
-        allCards = Iterables.filter(allCards,  new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input){
-                if(input == null)
-                    return false;
-                if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
-                   return false;
-                if(input.getRules().getAiHints().getRemNonCommanderDecks())
-                    return false;
-                if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
-                    return false;
 
-                return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
-            }
+        if(legals==null)
+            allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
+        else
+            allCards = Iterables.filter(CardUtil.getFullCardPool(false), new CardUtil.CardPredicate(legals, true));
+        //Filter out specific cards.
+        allCards = Iterables.filter(allCards, input -> {
+            if(input == null)
+                return false;
+            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+               return false;
+            if(input.getRules().getAiHints().getRemNonCommanderDecks())
+                return false;
+            if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
+                return false;
+            if(input.getRules().isCustom())
+                return false;
+            return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
-        allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input) {
-                if (input == null) return false;
-                return !input.getRules().getAiHints().getRemAIDecks();
-            }
+        allEnemyCards=Iterables.filter(allCards, input -> {
+            if (input == null) return false;
+            return !input.getRules().getAiHints().getRemAIDecks();
         });
     }
 
@@ -120,8 +118,17 @@ public class RewardData implements Serializable {
         return generate(isForEnemy, null, useSeedlessRandom);
     }
 
-    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom) {
+    public Array<Reward> generate(boolean isForEnemy, boolean useSeedlessRandom, boolean isNoSell) {
+        return generate(isForEnemy, null, useSeedlessRandom, isNoSell);
+    }
 
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom){
+        return generate(isForEnemy, cards, useSeedlessRandom, false);
+    }
+
+    public Array<Reward> generate(boolean isForEnemy, Iterable<PaperCard> cards, boolean useSeedlessRandom, boolean isNoSell) {
+
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
         Random rewardRandom = useSeedlessRandom?new Random():WorldSave.getCurrentSave().getWorld().getRandom();
         //Keep using same generation method for shop rewards, but fully randomize loot drops by not using the instance pre-seeded by the map
 
@@ -139,25 +146,45 @@ public class RewardData implements Serializable {
                 case "Union":
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
-                        pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                        if( r.cardName != null && !r.cardName.isEmpty() ) {
+                            PaperCard pc = allCardVariants ? CardUtil.getCardByName(r.cardName)
+                                    : StaticData.instance().getCommonCards().getCard(r.cardName);
+                            if (pc != null)
+                                pool.add(pc);
+                        } else {
+                            pool.addAll(CardUtil.getPredicateResult(allCards, r));
+                        }
                     }
                     ArrayList<PaperCard> finalPool = new ArrayList(pool);
 
                     if (finalPool.size() > 0){
                         for (int i = 0; i < count; i++) {
-                            ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size()))));
+                            if (allCardVariants) {
+                                PaperCard cardTemplate = finalPool.get(rewardRandom.nextInt(finalPool.size()));
+                                PaperCard finalCard = CardUtil.getCardByName(cardTemplate.getCardName());
+                                ret.add(new Reward(finalCard, isNoSell));
+                            } else {
+                                ret.add(new Reward(finalPool.get(rewardRandom.nextInt(finalPool.size())), isNoSell));
+                            }
                         }
                     }
                     break;
                 case "card":
                 case "randomCard":
                     if( cardName != null && !cardName.isEmpty() ) {
-                        for(int i = 0; i < count + addedCount; i++) {
-                            ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName)));
+                        if (allCardVariants) {
+                            PaperCard card = CardUtil.getCardByName(cardName);
+                            for (int i = 0; i < count + addedCount; i++) {
+                                ret.add(new Reward(CardUtil.getCardByNameAndEdition(cardName, card.getEdition()), isNoSell));
+                            }
+                        } else {
+                            for (int i = 0; i < count + addedCount; i++) {
+                                ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
+                            }
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {
-                            ret.add(new Reward(card));
+                            ret.add(new Reward(card, isNoSell));
                         }
                     }
                     break;
@@ -174,10 +201,19 @@ public class RewardData implements Serializable {
                         }
                     }
                     break;
+                case "cardPack":
+                    if(cardPack!=null)
+                    {
+                        if (isNoSell){
+                            cardPack.getTags().add("noSell");
+                        }
+                        ret.add(new Reward(cardPack, isNoSell));
+                    }
+                    break;
                 case "deckCard":
                     if(cards == null) return ret;
                     for(PaperCard card: CardUtil.generateCards(cards,this, count + addedCount + Current.player().bonusDeckCards() ,rewardRandom)) {
-                        ret.add(new Reward(card));
+                        ret.add(new Reward(card, isNoSell));
                     }
                     break;
                 case "gold":
@@ -206,8 +242,27 @@ public class RewardData implements Serializable {
     }
     static public List<PaperCard> rewardsToCards(Iterable<Reward> dataList) {
         ArrayList<PaperCard> ret=new ArrayList<PaperCard>();
-        for (Reward data:dataList) {
-            ret.add(data.getCard());
+
+        boolean allCardVariants = Config.instance().getSettingData().useAllCardVariants;
+
+        if (allCardVariants) {
+            String basicLandEdition = "";
+            for (Reward data : dataList) {
+                PaperCard card = data.getCard();
+                if (card.isVeryBasicLand()) {
+                    // ensure that all basid lands share the same edition so the deck doesn't look odd
+                    if (basicLandEdition.isEmpty()) {
+                        basicLandEdition = card.getEdition();
+                    }
+                    ret.add(CardUtil.getCardByNameAndEdition(card.getName(), basicLandEdition));
+                } else {
+                    ret.add(card);
+                }
+            }
+        } else {
+            for (Reward data : dataList) {
+                ret.add(data.getCard());
+            }
         }
         return ret;
     }

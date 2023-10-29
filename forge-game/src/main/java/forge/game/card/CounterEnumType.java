@@ -50,6 +50,8 @@ public enum CounterEnumType {
     AWAKENING("AWAKE", 0, 231, 79),
 
     BLAZE("BLAZE", 255, 124, 82),
+    
+    BLESSING("BLESS", 251, 0, 94),
 
     BLOOD("BLOOD", 255, 108, 111),
 
@@ -120,6 +122,8 @@ public enum CounterEnumType {
     EON("EON", 23, 194, 255),
 
     EMBER("EMBER", 247, 52, 43),
+    
+    EXPOSURE("EXPOSURE", 50, 180, 30),
 
     EYEBALL("EYE", 184, 202, 201),
 
@@ -135,7 +139,11 @@ public enum CounterEnumType {
 
     FILIBUSTER("FLBTR", 255, 179, 119),
 
+    FINALITY("FINAL", 255, 255, 255),
+
     FLAME("FLAME", 255, 143, 43),
+    
+    FLAVOR("FLAVOR", 208, 152, 97), ///adventure only
 
     FLOOD("FLOOD", 0, 203, 255),
 
@@ -170,6 +178,8 @@ public enum CounterEnumType {
     HIT("HIT", 255, 245, 195),
 
     HONE("HONE", 51, 227, 255),
+    
+    HOPE("HOPE", 232, 245, 245),
 
     HOOFPRINT("HOOF", 233, 189, 170),
 
@@ -186,6 +196,8 @@ public enum CounterEnumType {
     INCARNATION("INCRN", 247, 206, 64),
 
     INFECTION("INFCT", 0, 230, 66),
+    
+    INFLUENCE("INFL", 201, 99, 212),
 
     INGENUITY("INGTY", 67, 186, 205),
 
@@ -304,6 +316,8 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+    
+    RIBBON("RIBBON", 233, 245, 232),
 
     RITUAL("RITUAL", 155, 17, 30),
 
@@ -322,6 +336,8 @@ public enum CounterEnumType {
     SHRED("SHRED", 255, 165, 152),
 
     SILVER("SILVER", 192, 192, 192),
+    
+    SKEWER("SKEWER", 202, 192, 156),
 
     SLEEP("SLEEP", 178, 192, 255),
 
@@ -412,6 +428,7 @@ public enum CounterEnumType {
     REACH("Reach"),
     TRAMPLE("Trample"),
     VIGILANCE("Vigilance")
+    SHADOW("Shadow")
 //*/
     ;
 

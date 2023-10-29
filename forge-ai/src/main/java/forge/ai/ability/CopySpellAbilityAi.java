@@ -80,7 +80,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
                     // it can't be retargeted, no reason to copy this spell since it'll probably do the same thing and is useless as a copy
                     return false;
                 }
-            } else if (top.hasParam("ConditionManaSpent")) {
+            } else if (top.hasParam("ConditionManaSpent") || top.getHostCard().hasSVar("AINoCopy")) {
                 // Mana spent is not copied, so these spells generally do nothing when copied.
                 return false;
             } else if (ComputerUtilCard.isCardRemAIDeck(top.getHostCard())) {
@@ -90,12 +90,13 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
 
             // A copy is necessary to properly test the SA before targeting the copied spell, otherwise the copy SA will fizzle.
             final SpellAbility topCopy = top.copy(aiPlayer);
+            topCopy.clearManaPaid();
             topCopy.resetTargets();
 
             if (top.canBeTargetedBy(sa)) {
                 AiPlayDecision decision = AiPlayDecision.CantPlaySa;
                 if (top instanceof Spell) {
-                    decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, true, true);
+                    decision = ((PlayerControllerAi) aiPlayer.getController()).getAi().canPlayFromEffectAI((Spell) topCopy, false, true);
                 } else if (top.isActivatedAbility() && top.getActivatingPlayer().equals(aiPlayer)
                         && logic.contains("CopyActivatedAbilities")) {
                     decision = AiPlayDecision.WillPlay; // FIXME: we activated it once, why not again? Or bad idea?

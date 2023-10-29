@@ -7,7 +7,7 @@ ScryfallCode=PDGM
 
 [cards]
 84 R Melek, Izzet Paragon @Johann Bodin
-*96 R Render Silent @Kev Walker
+96★ R Render Silent @Kev Walker
 110 U Trostani's Summoner @Nils Hamm
 124★ R Breaking // Entering @Igor Kieryluk
 152★ M Maze's End @Cliff Childs

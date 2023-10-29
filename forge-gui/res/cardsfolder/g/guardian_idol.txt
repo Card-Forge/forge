@@ -3,5 +3,5 @@ ManaCost:2
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Golem | SpellDescription$ CARDNAME becomes a 2/2 Golem artifact creature until end of turn.
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Golem | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 2/2 Golem artifact creature until end of turn.
 Oracle:Guardian Idol enters the battlefield tapped.\n{T}: Add {C}.\n{2}: Guardian Idol becomes a 2/2 Golem artifact creature until end of turn.

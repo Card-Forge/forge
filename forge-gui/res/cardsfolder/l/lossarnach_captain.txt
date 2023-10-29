@@ -1,0 +1,14 @@
+Name:Lossarnach Captain
+ManaCost:3 W
+Types:Creature Human Soldier
+PT:3/1
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.YouCtrl+Other+Human | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME or another Human enters the battlefield under your control, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 1/1 white Human Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | TokenAmount$ 1
+SVar:BuffedBy:Creature
+SVar:PlayMain1:TRUE
+DeckHints:Type$Human
+DeckHas:Ability$Token
+Oracle:First strike\nWhenever Lossarnach Captain or another Human enters the battlefield under your control, tap target creature an opponent controls.\nAt the beginning of your upkeep, create a 1/1 white Human Soldier creature token.

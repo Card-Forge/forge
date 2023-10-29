@@ -1,4 +1,5 @@
 Name:Blanka, Ferocious Friend
+AltName:The Howling Abomination
 ManaCost:3 R G
 Types:Legendary Creature Human Beast Warrior
 PT:5/5

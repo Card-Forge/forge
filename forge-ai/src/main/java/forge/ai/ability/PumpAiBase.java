@@ -166,12 +166,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
             return ph.isPlayerTurn(ai) || (combat != null && combat.isAttacking(card) && card.getNetCombatDamage() > 0);
-        } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
-            if (card.getShieldCount() > 0) {
-                return true;
-            }
-            return card.hasKeyword("If CARDNAME would be destroyed, regenerate it.") && combat != null
-                    && (combat.isBlocked(card) || combat.isBlocking(card));
         } else return !keyword.endsWith("CARDNAME's activated abilities can't be activated."); //too complex
     }
 
@@ -350,7 +344,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS);
         } else if (keyword.endsWith("Wither")) {
-            if (newPower <= 0 || card.hasKeyword(Keyword.INFECT)) {
+            if (newPower <= 0 || card.isWitherDamage()) {
                 return false;
             }
             return combat != null && (combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)));
@@ -415,7 +409,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      */
     protected CardCollection getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack,
             final List<String> keywords, final boolean immediately) {
-        CardCollection list = ai.getCreaturesInPlay();
+        CardCollection list = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

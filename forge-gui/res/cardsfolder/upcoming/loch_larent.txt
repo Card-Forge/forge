@@ -1,0 +1,15 @@
+Name:Loch Larent
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Scry | Cost$ 1 U T | ScryNum$ 3 | GameActivationLimit$ 1 | PlayerTurn$ True | SubAbility$ DBEffect | SpellDescription$ Scry 3. Target opponent gets a one-time boon with "When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it." Activate only during your turn and only once.
+SVar:DBEffect:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | ValidTgts$ Opponent | EffectOwner$ Targeted
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ETBAddCounterTapped | RememberObjects$ TriggeredCard
+SVar:ETBAddCounterTapped:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ STUN | CounterNum$ 1 | SubAbility$ ETBTapped
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+DeckHas:Ability$Counters
+Oracle:Loch Larent enters the battlefield tapped.\n{T}: Add {U}.{1}{U}, {T}: Scry 3.\nTarget opponent gets a one-time boon with "When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it." Activate only during your turn and only once.

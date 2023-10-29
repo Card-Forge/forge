@@ -1,0 +1,37 @@
+[metadata]
+Code=LCC
+Date=2023-11-17
+Name=The Lost Caverns of Ixalan Commander
+Type=Commander
+ScryfallCode=LCC
+
+[cards]
+1 M Admiral Brass, Unsinkable @Jason Rainville
+2 M Clavileno, First of the Blessed @Matt Stewart
+3 M Hakbal of the Surging Soul @Tyler Walpole
+4 M Pantlaza, Sun-Favored @Sam Burley
+17 M Admiral Brass, Unsinkable @Michael Walsh
+18 M Clavileno, First of the Blessed @Chun Lo
+19 M Hakbal of the Surging Soul @Anditya Dita
+20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
+25 M Admiral Brass, Unsinkable @Jason Rainville
+27 M Clavileno, First of the Blessed @Matt Stewart
+29 M Hakbal of the Surging Soul @Tyler Walpole
+30 M Pantlaza, Sun-Favored @Sam Burley
+102 M Wedding Ring @J.P. Targete
+103 R Amulet of Vigor @Chris Seaman
+104 U Arcane Signet @J.P. Targete
+105 M Chalice of the Void @Julie Dillon
+107 M Chromatic Orrery @Gaboleps
+109 M Coercive Portal @Chris Ostrowski
+110 U Colossus Hammer @Julian Kok Joon Wen
+112 U Expedition Map @Julian Kok Joon Wen
+113 R Fist of Suns @J.P. Targete
+117 R Temple Bell @Jonas De Ro
+121 M Admiral Brass, Unsinkable @Jason Rainville
+122 M Clavileno, First of the Blessed @Matt Stewart
+123 M Hakbal of the Surging Soul @Tyler Walpole
+124 M Pantlaza, Sun-Favored @Sam Burley
+199 U Whispersilk Cloak @Julian Kok Joon Wen
+299 C Arcane Signet @Dan Scott
+346 C Path of Ancestry @Alayna Danner

@@ -18,6 +18,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
     private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
+    private Boolean isBookmarked;
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
@@ -62,6 +63,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
         shopModifiers.clear();
         shopModifiers.putAll((java.util.Map<Integer, Float>) data.readObject("shopModifiers"));
+        isBookmarked = (Boolean) data.readObject("isBookmarked");
     }
 
     @Override
@@ -72,6 +74,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("mapFlags", mapFlags);
         data.storeObject("shopSeeds", shopSeeds);
         data.storeObject("shopModifiers", shopModifiers);
+        data.storeObject("isBookmarked", isBookmarked);
         return data;
     }
 
@@ -117,23 +120,22 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     public float getShopPriceModifier(int objectID){
-        if (!shopModifiers.containsKey(objectID))
-        {
-            return -1.0f;
-        }
-        return shopModifiers.get(objectID);
+        int shopRep = reputation.getOrDefault(objectID, 0);
+
+        shopRep = Integer.min(maxRepToApply, (Integer.max(-maxRepToApply, shopRep)));
+
+        return 1.0f + (shopRep * priceModifierPerRep);
     }
 
-    public void setShopModifier(int objectID, float mod){
-        if (objectID!= 0) shopModifiers.put(objectID, mod);
-    }
+    int maxRepToApply = 20;
+    float priceModifierPerRep = 0.005f;
 
     public float getTownPriceModifier(){
-        if (!shopModifiers.containsKey(0))
-        {
-            return -1.0f;
-        }
-        return shopModifiers.get(0);
+        int townRep = reputation.getOrDefault(0, 0);
+
+        townRep = Integer.min(maxRepToApply, (Integer.max(-maxRepToApply, townRep)));
+
+        return 1.0f - Math.round((priceModifierPerRep * townRep) * 1000)/1000f;
     }
 
     public void addMapReputation(int delta)
@@ -159,6 +161,14 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
     public boolean hasDeletedObjects() {
         return deletedObjects != null && !deletedObjects.isEmpty();
+    }
+    public boolean isBookmarked() {
+        if (isBookmarked == null)
+            return false;
+        return isBookmarked;
+    }
+    public void setIsBookmarked(boolean val) {
+        isBookmarked = val;
     }
 
     public void clearDeletedObjects() {

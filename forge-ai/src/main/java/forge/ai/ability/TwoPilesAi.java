@@ -31,17 +31,19 @@ public class TwoPilesAi extends SpellAbilityAi {
             sa.resetTargets();
             if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
+            } else {
+                return false;
             }
         }
 
         final List<Player> tgtPlayers = sa.usesTargeting() && !sa.hasParam("Defined")
                 ? new FCollection<>(sa.getTargets().getTargetPlayers())
-                : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+                : AbilityUtils.getDefinedPlayers(card, sa.getParam("Defined"), sa);
 
         final Player p = tgtPlayers.get(0);
         CardCollectionView pool;
         if (sa.hasParam("DefinedCards")) {
-            pool = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
+            pool = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedCards"), sa);
         } else {
             pool = p.getCardsIn(zone);
         }

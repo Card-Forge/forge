@@ -1,0 +1,11 @@
+Name:Gwaihir the Windlord
+ManaCost:4 W U
+Types:Legendary Creature Bird Noble
+PT:4/4
+K:Flying
+K:Vigilance
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE2 | Description$ This spell costs {2} less to cast as long as you've drawn two or more cards this turn.
+S:Mode$ Continuous | Affected$ Bird.Other+YouCtrl | AddKeyword$ Vigilance | Description$ Other Birds you control have vigilance.
+SVar:X:Count$YouDrewThisTurn
+DeckHints:Type$Bird
+Oracle:This spell costs {2} less to cast as long as you've drawn two or more cards this turn.\nFlying, vigilance\nOther Birds you control have vigilance.

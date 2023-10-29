@@ -17,8 +17,43 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AdventureQuestController implements Serializable {
+
+    public Map<String, Float> getBoostedSpawns(List<EnemyData> localSpawns) {
+        Map<String,Float> boostedSpawns = new HashMap<>();
+        for (AdventureQuestData q : Current.player().getQuests()){
+            for (AdventureQuestStage c : q.stages){
+                if (c.getStatus().equals(QuestStatus.Active) && c.objective.equals(ObjectiveTypes.Defeat))
+                {
+                    List<String> toBoost = new ArrayList<>();
+                    if (c.mixedEnemies){
+                        for (EnemyData enemy : localSpawns){
+                            List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
+                            for (String targetTag : c.enemyTags) {
+                                if (!candidateTags.contains(targetTag)) {
+                                    continue;
+                                }
+                                toBoost.add(enemy.getName());
+                            }
+                        }
+                    }
+                    else{
+                        toBoost.add(c.getTargetEnemyData().getName());
+                    }
+                    if (!toBoost.isEmpty()) {
+                        float value = 2.0f / toBoost.size();
+                        for (String key : toBoost) {
+                            float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
+                                boostedSpawns.put(key, value + existingValue);
+                        }
+                    }
+                }
+            }
+        }
+        return boostedSpawns;
+    }
 
     public enum ObjectiveTypes{
         None,
@@ -27,10 +62,14 @@ public class AdventureQuestController implements Serializable {
         Defeat,
         Delivery,
         Escort,
+        EventFinish,
+        EventWin,
+        EventWinMatches,
         Fetch,
         Find,
         Gather,
         Give,
+        HaveReputation,
         Hunt,
         MapFlag,
         Leave,
@@ -171,6 +210,10 @@ public class AdventureQuestController implements Serializable {
         return object;
     }
 
+    public static void clear(){
+        object = null;
+    }
+
     private AdventureQuestController(){
 
     }
@@ -229,6 +272,20 @@ public class AdventureQuestController implements Serializable {
         }
     }
 
+    public void updateQuestsCharacterFlag(String updatedCharacterFlag, int updatedCharacterFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateCharacterFlag(updatedCharacterFlag, updatedCharacterFlagValue);
+        }
+    }
+
+    public void updateQuestsQuestFlag(String updatedQuestFlag, int updatedQuestFlagValue)
+    {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.updateQuestFlag(updatedQuestFlag, updatedQuestFlagValue);
+        }
+    }
+
     public void updateQuestsLeave(){
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateLeave();
@@ -277,6 +334,12 @@ public class AdventureQuestController implements Serializable {
     public void updateArenaComplete(boolean winner){
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateArenaComplete(winner);
+        }
+    }
+
+    public void updateEventComplete(AdventureEventData completedEvent) {
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateEventComplete(completedEvent);
         }
     }
 

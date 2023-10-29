@@ -65,12 +65,10 @@ public class InputAttack extends InputSyncronizedBase {
         playerAttacks = attacks0;
         combat = combat0;
         defenders = combat.getDefenders();
-        potentialBanding = isBandingPossible();
     }
 
     @Override
     public final void showMessage() {
-        // TODO still seems to have some issues with multiple planeswalkers
         setCurrentDefender(defenders.getFirst());
 
         if (currentDefender == null) {
@@ -295,6 +293,9 @@ public class InputAttack extends InputSyncronizedBase {
             else if (ge instanceof Player) {
                 getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
+        }
+        if (def != null) {
+            potentialBanding = isBandingPossible();
         }
 
         updateMessage();

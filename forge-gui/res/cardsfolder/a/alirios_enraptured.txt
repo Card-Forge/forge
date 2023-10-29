@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Legendary Creature Human
 PT:2/3
 K:CARDNAME enters the battlefield tapped.
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | IsPresent$ Reflection.YouCtrl | Description$ CARDNAME doesn't untap during your untap step if you control a Reflection.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/2 blue Reflection creature token.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | IsPresent$ Reflection.YouCtrl | Description$ NICKNAME doesn't untap during your untap step if you control a Reflection.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters the battlefield, create a 3/2 blue Reflection creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_3_2_reflection | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Alirios, Enraptured enters the battlefield tapped.\nAlirios doesn't untap during your untap step if you control a Reflection.\nWhen Alirios enters the battlefield, create a 3/2 blue Reflection creature token.

@@ -1,0 +1,6 @@
+Name:Cyber Conversion
+ManaCost:U U
+Types:Instant
+A:SP$ SetState | ValidTgts$ Creature | Mode$ TurnFaceDown | FaceDownSetType$ Artifact & Creature & Cyberman | FaceDownPower$ 2 | FaceDownToughness$ 2 | SpellDescription$ Turn target creature face down. It's a 2/2 Cyberman artifact creature.
+DeckHas:Type$Dalek|Artifact
+Oracle:Turn target creature face down. It's a 2/2 Cyberman artifact creature.

@@ -4,18 +4,23 @@ import java.util.*;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.trigger.TriggerType;
+import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollection;
 
@@ -58,8 +63,8 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             repeatSas = Lists.newArrayList();
             String[] restrictions = sa.getParam("RepeatSpellAbilities").split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
-                if (stackInstance.getSpellAbility(false).isValid(restrictions, source.getController(), source, sa)) {
-                    repeatSas.add(stackInstance.getSpellAbility(false));
+                if (stackInstance.getSpellAbility().isValid(restrictions, source.getController(), source, sa)) {
+                    repeatSas.add(stackInstance.getSpellAbility());
                 }
             }
 
@@ -81,9 +86,12 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChangeZoneTable")) {
             sa.setChangeZoneTable(new CardZoneTable());
         }
+        if (sa.hasParam("LoseLifeMap")) {
+            sa.setLoseLifeMap(Maps.newHashMap());
+        }
 
         if (loopOverCards) {
-            if (sa.hasParam("ChooseOrder") && repeatCards.size() >= 2) {
+            if (sa.hasParam("ChooseOrder") && repeatCards.size() > 1) {
                 final Player chooser = sa.getParam("ChooseOrder").equals("True") ? player :
                         AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
                 repeatCards = chooser.getController().orderMoveToZoneList(repeatCards, ZoneType.None, sa);
@@ -94,6 +102,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     source.addImprintedCard(card);
                 } else {
                     source.addRemembered(card);
+                }
+                if (sa.hasParam("AmountFromVotes")) {
+                    setVoteAmount(card, sa);
                 }
                 AbilityUtils.resolve(repeat);
                 if (useImprinted) {
@@ -193,6 +204,9 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
                     source.removeRemembered(tempRemembered);
                     source.addRemembered(p);
+                    if (sa.hasParam("AmountFromVotes")) {
+                        setVoteAmount(p, sa);
+                    }
                     AbilityUtils.resolve(repeat);
                     source.removeRemembered(p);
                     source.addRemembered(tempRemembered);
@@ -206,6 +220,29 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChangeZoneTable")) {
             sa.getChangeZoneTable().triggerChangesZoneAll(game, sa);
             sa.setChangeZoneTable(null);
+        }
+        if (sa.hasParam("LoseLifeMap")) {
+            Map<Player, Integer> lossMap = sa.getLoseLifeMap();
+            if (!lossMap.isEmpty()) {
+                final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams2, false);
+            }
+            sa.setLoseLifeMap(null);
+        }
+    }
+
+    private void setVoteAmount (Object o, SpellAbility sa) {
+        SpellAbility rootAbility = sa.getRootAbility();
+        if (rootAbility.isWrapper()) {
+            rootAbility = ((WrappedAbility) rootAbility).getWrappedAbility();
+        }
+        final SpellAbility saVote = rootAbility.getApi().equals(ApiType.Vote) ? rootAbility
+                : rootAbility.findSubAbilityByType(ApiType.Vote);
+        if (saVote == null) {
+            System.err.println(sa.getHostCard() + ": Bad vote amount for " + o + ", default to 0");
+            sa.setSVar("Votes", "Number$0");
+        } else {
+            sa.setSVar("Votes", saVote.getSVar("VoteNum" + o.toString()));
         }
     }
 }

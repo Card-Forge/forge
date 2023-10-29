@@ -1,0 +1,11 @@
+Name:Draconic Debut
+ManaCost:X R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | TargetMin$ 0 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals X damage to any target.The next Dragon creature spell you cast costs {X} less to cast.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | ValidCard$ Creature.Dragon | Amount$ X | Description$ The next Dragon creature spell you cast costs {X} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:X:Count$xPaid
+DeckNeeds:Type$Dragon
+Oracle:Draconic Debut deals X damage to any target.\nThe next Dragon creature spell you cast costs {X} less to cast.

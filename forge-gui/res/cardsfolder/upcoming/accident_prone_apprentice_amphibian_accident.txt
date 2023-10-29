@@ -1,0 +1,17 @@
+Name:Accident-Prone Apprentice
+ManaCost:1 R
+Types:Creature Otter Wizard
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield,Exile | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME perpetually gets +1/+1. This ability also triggers if CARDNAME is in exile.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Accident-Prone Apprentice's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1
+AlternateMode:Adventure
+Oracle:Whenever you cast a noncreature spell, Accident-Prone Apprentice perpetually gets +1/+1. This ability also triggers if Accident-Prone Apprentice is in exile.
+
+ALTERNATE
+
+Name:Amphibian Accident
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ Animate | ValidTgts$ Creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Frog | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.
+Oracle:Until end of turn, target creature loses all abilities and becomes a blue Frog with base power and toughness 1/1.

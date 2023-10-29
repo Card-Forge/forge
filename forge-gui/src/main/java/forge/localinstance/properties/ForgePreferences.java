@@ -118,7 +118,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
-        UI_TARGETING_OVERLAY ("0"),
+        UI_TARGETING_OVERLAY ("2"),
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
@@ -128,7 +128,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CURRENT_SOUND_SET("Default"),
         UI_CURRENT_MUSIC_SET("Default"),
         UI_CURRENT_AI_PROFILE ("Default"),
-        UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),

@@ -1660,7 +1660,8 @@ public class FSkin {
         w0 = tempCoords[2];
         h0 = tempCoords[3];
 
-        SkinImage.setImage(s0, bim.getSubimage(x0, y0, w0, h0));
+        if (bim != null)
+            SkinImage.setImage(s0, bim.getSubimage(x0, y0, w0, h0));
     }
 
     /**

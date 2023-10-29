@@ -1,0 +1,10 @@
+Name:Banish to Another Universe
+ManaCost:4 W
+Types:Enchantment
+K:Affinity:Permanent.Historic:historic permanent
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+DeckHints:Type$Artifact|Legendary|Saga
+Oracle:Affinity for historic permanents (This spell costs {1} less to cast for each artifact, legendary, and/or Saga permanent you control.)\nWhen Banish to Another Universe enters the battlefield, exile target nonland permanent an opponent controls until Banish to Another Universe leaves the battlefield.

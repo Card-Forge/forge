@@ -90,7 +90,7 @@ public class BoosterDraftAI {
             out[i] = new BoosterDeckBuilder(this.decks.get(i), this.playerColors.get(i)).buildDeck();
         }
         return out;
-    } // getDecks()
+    }
 
     public BoosterDraftAI() {
         // Initialize deck array and playerColors list
@@ -98,7 +98,7 @@ public class BoosterDraftAI {
             this.decks.add(new ArrayList<>());
             this.playerColors.add(new DeckColors());
         }
-    } // BoosterDraftAI()
+    }
 
     public IBoosterDraft getBd() {
         return this.bd;
@@ -107,4 +107,4 @@ public class BoosterDraftAI {
         this.bd = bd0;
     }
 
-} // BoosterDraftAI()
+}

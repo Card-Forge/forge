@@ -70,6 +70,9 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.setLifeLostLastTurn(0);
             p.resetCommanderStats();
             p.resetCompletedDungeons();
+            p.resetRingTemptedYou();
+            p.clearRingBearer();
+            p.clearTheRing();
             p.setBlessing(false);
             p.clearController();
 

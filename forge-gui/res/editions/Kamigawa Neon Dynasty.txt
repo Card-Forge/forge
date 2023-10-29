@@ -548,6 +548,7 @@ A95 U A-Dokuchi Silencer @David Rapoza
 A114 M A-Nashi, Moon Sage's Scion @Valera Lutfullina
 A116 U A-Nezumi Prowler @Joseph Weston
 A131 C A-Akki Ronin @Olivier Bernard
+A152 U A-Kumano Faces Kakkazan @Mike Bierek
 A156 C A-Peerless Samurai @Micah Epstein
 A215 U A-Asari Captain @Donato Giancola
 A232 R A-Raiyuu, Storm's Edge @Heonhwa Choe

@@ -4,8 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ Plains | RemoveLandTypes$ True | Description$ Lands you control are Plains.
 S:Mode$ Continuous | Affected$ Card.YouOwn+nonLand | SetColor$ White | AffectedZone$ Hand,Library,Graveyard,Exile,Command | Description$ Nonland permanents you control are white. The same is true for spells you control and nonland cards you own that aren't on the battlefield.
 S:Mode$ Continuous | Affected$ Card.YouCtrl+nonLand | SetColor$ White | AffectedZone$ Battlefield,Stack
-S:Mode$ Continuous | Affected$ You | ManaConversion$ White->AnyColor | Description$ You may spend white mana as though it were mana of any color.
-S:Mode$ Continuous | Affected$ You | ManaConversion$ UBRG<-C | Description$ You may spend other mana only as though it were colorless mana.
+S:Mode$ ManaConvert | ValidPlayer$ You | ManaConversion$ White->AnyColor nonWhite<-C | Description$ You may spend white mana as though it were mana of any color. You may spend other mana only as though it were colorless mana.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Lands you control are Plains.\nNonland permanents you control are white. The same is true for spells you control and nonland cards you own that aren't on the battlefield.\nYou may spend white mana as though it were mana of any color. You may spend other mana only as though it were colorless mana.

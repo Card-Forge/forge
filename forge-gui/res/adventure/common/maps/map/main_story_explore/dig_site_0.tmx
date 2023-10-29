@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value=""/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzL5GRgyETCT9nog2H2pQ2QvQPlX3rY6wbE7lBMT3uf0Ni/yP5Cxu3smPZR094nWMRw2YduLwig621lpzw8ifErPnCaG6LmuAkCExOe1AjnwxwQTCg805DKB2rYT6xfcNkJEj/JQbz9pIQfPn+C5FKA+AQHGDfgsptYu47h8AM2nM7J0JAGwSA2yemC2PjDpfcUCW4lFnOR4TZSwoyaYUArDACCZkuq
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAG24GBgsofsbGgBX0cTAw9HMg+JwaDAxcGtjVEguIsVeGk4FBlhPBVwXaqYZmb6Esde2NBuLH7AwMT9kRYrVAv1+RIc0eEEjTIs7eX1AaZK8ikp9rORhIApO4IBgZEBPOu4D27QNieSB2BrrhATt2ddiAPpL5pNoLs3s3J275iVj8BAJngObOAYrPJcO/xACQvyI5EWZZQO27BqSvo/l1JlD8FpK6NmD4ubPhxh543IVsLy77sPmVGAxzFzK4yA3ByOGJyz4YuAqUn8dFmt3YMMy+x0D8BAd+yoVp9zUS7IeFITKG+a8RSDfhwMtxpElC9hOKM3LtxRX2xNhHDXuR/U6sfdSyl1wgzwOspzghWFEJguF8HtrZO1gBAFtCbk0=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAODLmxi/dxMDD0A/FJTgaGU5yY8idwmIcLHCTSXh2gXbpY7CMVFAJxERZxZHtVGRga0OXreIkz/wSa3hqoPn5GBgYBRkw7cPmXWoALzV4YANkL9FMDMWY8YscUIxQe7EA7V+KwlxCohrqrlgO7/CQuVIwMsPkV2d5qNHdHo8WXDDCN7QFiWRLTGi57T3Njuheb2x8Dw/gJED/FEtb4wDos9h4hQh/MXeTaCwJZwLCTIjINoQNc9u5gYWCQxoF3sRA29zAa3xVovhsSVuDEtDcMyA5lZWBQV4H4RVUFgv+rQsRAcuggi0j/oWOYvaCwg9l7FGrvYRUIBoGjOOyFAWUsZRSyvfuB/mziQOBmtLwEMnuxGqZ+XP5VIdK/hNIRyGxWoL1L0exG9i+hsCXH3i+skDQkA8RcnBAsBU1X31jB4YkBsImRai8uQIofqWkvDAAAFLpYXA==
+  </data>
+ </layer>
+ <layer id="8" name="Test" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRAAJ/VAfaBQMHRrLfRxoAAHtNAkM=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="196" y="272" width="40" height="16"/>
+  <object id="60" template="../../obj/entry_down.tx" x="192" y="34.25" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/dig_site_1.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="408" y="209">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;I was just here to pick up some pieces of old machinery. I didn't expect them to try to pick ME up. But at least it wasn't snakes this time...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+    <property name="enemy" value="Archaeologist"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="63" template="../../obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+  <object id="64" template="../../obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="65" template="../../obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="66" template="../../obj/enemy.tx" x="200" y="57">
+   <properties>
+    <property name="enemy" value="Construct"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="67"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/waypoint.tx" name="67" x="200" y="56"/>
+ </objectgroup>
+</map>

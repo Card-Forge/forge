@@ -1,0 +1,9 @@
+Name:Erestor of the Council
+ManaCost:1 G U
+Types:Legendary Creature Elf Noble
+PT:2/4
+T:Mode$ Vote | TriggerZones$ Battlefield | Execute$ TrigTreasure | List$ OppVotedSame,OppVotedDiff | TriggerDescription$ Whenever players finish voting, each opponent who voted for a choice you voted for creates a Treasure token. You scry X, where X is the number of opponents who voted for a choice you didn't vote for. Draw a card.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredOpponentVotedSame | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ X
+SVar:X:TriggeredPlayersOpponentVotedDiff$Amount
+Oracle:Whenever players finish voting, each opponent who voted for a choice you voted for creates a Treasure token. You scry X, where X is the number of opponents who voted for a choice you didn't vote for. Draw a card.

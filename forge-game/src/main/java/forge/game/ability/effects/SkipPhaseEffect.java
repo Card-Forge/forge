@@ -107,7 +107,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    game.getAction().exile(eff, null);
+                    game.getAction().exile(eff, null, null);
                 }
             };
 

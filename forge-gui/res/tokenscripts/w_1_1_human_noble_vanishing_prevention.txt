@@ -1,0 +1,8 @@
+Name:Human Noble Token
+ManaCost:no cost
+Types:Creature Human Noble
+Colors:white
+PT:1/1
+K:Vanishing:3
+K:Prevent all damage that would be dealt to CARDNAME.
+Oracle:Vanishing 3\nPrevent all damage that would be dealt to this creature.

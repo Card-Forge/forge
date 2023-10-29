@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Carnage 2
+Title=Carnage
+Difficulty=medium
+Description=Mono R Grand Melee deck with Circle of Flame
+Icon=Carnage.jpg
+Deck Type=constructed
+[main]
+23 Mountain
+4 Grand Melee
+1 Bedlam
+4 Circle of Flame
+4 Fire at Will
+1 Ashen Monstrosity
+1 Avatar of Slaughter
+4 Battle-Mad Ronin
+1 Berserkers of Blood Ridge
+1 Bloodcrazed Neonate
+1 Bloodrock Cyclops
+1 Craven Giant
+1 Crazed Goblin
+1 Flameborn Hellion
+1 Galvanic Juggernaut
+1 Goblin Brigand
+1 Juggernaut
+2 Kuldotha Ringleader
+1 Orgg
+1 Reckless Brute
+1 Slumbering Dragon
+1 Tattermunge Maniac
+1 Thran War Machine
+1 Ulamog's Crusher
+1 Utvara Scalper
+[sideboard]

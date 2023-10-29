@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="115">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|EMA|1&quot; ],
+}</property>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG+QYi32gXfDYMNtbAwM7VhwBxt55qVwEKdOBUdcqNE4joaavZSmWXLthcmzyTIwsEPxOWmGBSAM43PI4tZ/CKj/MBBvl2BogGIw/wgBe09A5ZcAzeYWwI6X4bGXUjxS7NUiIZxBefowND5TkfI3SBzEh8mnEpH3YfHrJMfA4IwDu8jRLpxHMW0wABqfN7U=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyTEGBgkEDC0kC8A4il0MRhctugGJc8UG8DNjlsGNm87UAMAluRxNDlYPIq7GDxBqh8Az692NwiiWQerYD4qL2j9o7aSxV7YeWEFB3tRQe47H0sNjD20hrQM35r+RkYqoC4hn9g0zPMHbTEMD8ONAYA4q045A==
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAN9HEwMPRzkKiJymCbwMDaPwpGwWAFCzgZGJRUGBiUVVDFQfy5nLS19wDQjoNo9h6kg73YgJAsdezVdMFtLzBMG5DFlKB+p7V/D6LZe4AO9tpxMTDY48AOXLSzdxTQBgAAaz8SOw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYCAN9HEwMPRzkKiJCkCHk4FBlxO3vCoj6WZmizAw1PFC2EC6AcQHATV27OpVcIhTC9Da3hRgvB0GmpWKFn9HiLS3URyV34LGpxbA5V83MdrYR8heWgN0e5vQwrWZzuFMa3CUDHt3CFDfHaNgFIxUAADrfAye
+  </data>
+ </layer>
+ <layer id="8" name="Test" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_down.tx" x="193" y="35" width="31" height="16">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/main_story_explore/dig_site_0.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/block.tx" x="431.273" y="226.258" width="49" height="82.8333" visible="1"/>
+  <object id="79" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="176" width="16" height="16"/>
+  <object id="80" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="191.636" width="16" height="16"/>
+  <object id="81" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="207.818" width="16" height="16"/>
+  <object id="82" template="../../obj/booster.tx" x="451.354" y="171.792" width="9.3125" height="9.1875">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/manashards.tx" x="447.667" y="208"/>
+  <object id="84" template="../../obj/treasure.tx" x="80.1818" y="33.2727"/>
+  <object id="85" template="../../obj/enemy.tx" x="205.333" y="137">
+   <properties>
+    <property name="enemy" value="Blue Prototype"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r97-110-111-114"/>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/enemy.tx" x="336.667" y="99.6667">
+   <properties>
+    <property name="defeatDialog">[
+  { 
+    &quot;text&quot;:&quot;As the machine collapses to the ground in a heap of parts, several levers and gears come free from within its metal carapace.&quot;, 
+    &quot;options&quot;:[{ 
+		&quot;name&quot;:&quot;Perhaps these will be useful somewhere?&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}, {&quot;advanceMapFlag&quot;:&quot;hasGears&quot;}],
+	}]
+   }
+] 
+	</property>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Green Prototype"/>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/gold.tx" x="32.5" y="244.5"/>
+  <object id="88" template="../../obj/gold.tx" x="409" y="186"/>
+  <object id="89" template="../../obj/enemy.tx" x="308.5" y="235">
+   <properties>
+    <property name="enemy" value="Blue Prototype"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r93-99,r100-112,112"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/enemy.tx" x="305.5" y="175">
+   <properties>
+    <property name="enemy" value="Green Prototype"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="97,95,r96-98-99"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="52" y="103">
+   <properties>
+    <property name="enemy" value="Green Prototype"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r92-94, r94-109"/>
+   </properties>
+  </object>
+  <object id="104" template="../../obj/entry_down.tx" x="316" y="37" width="26" height="28">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/dig_site_2.tmx"/>
+    <property name="teleportObjectId" value="98"/>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/collision.tx" x="-16" y="-16" width="16" height="304"/>
+  <object id="106" template="../../obj/collision.tx" x="480" y="-16" width="16" height="304"/>
+  <object id="107" template="../../obj/collision.tx" x="0" y="272" width="480" height="16"/>
+  <object id="108" template="../../obj/collision.tx" x="0" y="-16" width="480" height="16"/>
+  <object id="101" template="../../obj/enemy.tx" x="117" y="178">
+   <properties>
+    <property name="enemy" value="Blue Prototype"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="113"/>
+   </properties>
+  </object>
+  <object id="102" name="switch" type="dialog" gid="4426" x="230.318" y="208.614" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A collection of gears appears through the remnants of this crumbling wall, but the lever before you spins freely.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;The connected machinery whirrs to life, and a hidden room to your east opens!&quot;,
+		&quot;condition&quot;:[{&quot;checkMapFlag&quot;:&quot;hasGears&quot;}],
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}],
+		&quot;name&quot;:&quot;Connect a gear from the golem to the lever.&quot; 
+			&quot;options&quot;:[{
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:78},{&quot;deleteMapObject&quot;:79},{&quot;deleteMapObject&quot;:80},{&quot;deleteMapObject&quot;:81}],
+			&quot;name&quot;:&quot;(Continue)&quot; }]
+	},
+	{ &quot;name&quot;:&quot;(Continue)&quot; } 	
+	] 
+	}
+] 
+	</property>
+   </properties>
+  </object>
+  <object id="103" name="switch" type="dialog" gid="4426" x="144.333" y="150" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;A collection of gears appears through the remnants of this crumbling wall, but you see no obvious way to turn them.&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You feel the floor begin to rumble under your feet as the ancient gears grind against one another, but nothing obvious appears to happen.&quot;,
+		&quot;condition&quot;:[{&quot;checkMapFlag&quot;:&quot;hasGears&quot;}],
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}],
+		&quot;name&quot;:&quot;Connect a lever from the golem to the gears.&quot; 
+			&quot;options&quot;:[{
+			&quot;name&quot;:&quot;(Continue)&quot; }]
+	},
+	{ &quot;name&quot;:&quot;(Continue)&quot; } 	
+	] 
+	}
+] 
+	</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Waypoints">
+  <object id="92" template="../../obj/waypoint.tx" name="92" x="53.5" y="238.5"/>
+  <object id="93" template="../../obj/waypoint.tx" name="93" x="164" y="238.5"/>
+  <object id="94" template="../../obj/waypoint.tx" name="94" x="50.5" y="117.5"/>
+  <object id="95" template="../../obj/waypoint.tx" name="95" x="269.5" y="100"/>
+  <object id="96" template="../../obj/waypoint.tx" name="96" x="331.5" y="180"/>
+  <object id="97" template="../../obj/waypoint.tx" name="97" x="241.5" y="183"/>
+  <object id="98" template="../../obj/waypoint.tx" name="98" x="278.5" y="177.5"/>
+  <object id="99" template="../../obj/waypoint.tx" name="99" x="234" y="233"/>
+  <object id="100" template="../../obj/waypoint.tx" name="100" x="376.5" y="232"/>
+  <object id="109" template="../../obj/waypoint.tx" name="109" x="112" y="80"/>
+  <object id="110" template="../../obj/waypoint.tx" name="110" x="224" y="112"/>
+  <object id="111" template="../../obj/waypoint.tx" name="111" x="192" y="176"/>
+  <object id="112" template="../../obj/waypoint.tx" name="112" x="400" y="96"/>
+  <object id="113" template="../../obj/waypoint.tx" name="113" x="120" y="172"/>
+  <object id="114" template="../../obj/waypoint.tx" name="114" x="144" y="112"/>
+ </objectgroup>
+</map>

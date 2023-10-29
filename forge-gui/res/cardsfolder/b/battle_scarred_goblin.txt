@@ -1,0 +1,7 @@
+Name:Battle-Scarred Goblin
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, it deals 1 damage to each creature blocking it.
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.blockingSource
+Oracle:Whenever Battle-Scarred Goblin becomes blocked, it deals 1 damage to each creature blocking it.

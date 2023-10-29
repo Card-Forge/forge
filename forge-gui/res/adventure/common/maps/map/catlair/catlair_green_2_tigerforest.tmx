@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyrZWFgqB3Fo3gUj+JRPIpH8YjAADIiAQ4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVcsKAjEMLFSlraD+5F49+JOrshcfH6ShBLPLNE0riANhD5tkptO0de7/MAbnLuF3dVx7jDlKPUr9fcp1m9TOG9KH9wp6S10IU9A11zgp1kD3Kdb9KP0fQf4Q55xorYSt0LYr+El+LzWzTyhXW6fEU3ht2cva3iCdpbzJMH+MQ9J5W8Ee1bT6Tl5tPV7hlOeNPUI5CDzjrfcB76nmBeegGZEeWbktnAR5hjRuy8wNlXOI+mrn0sLJWDXkSu67QSt5Tn6e37FP+XvrfBPoLnoYapf3qYze9+gbTgv3CxE0QwE=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyNVUFOw0AMtJCgh+wvGkhAlbhxKFde04e0gWyhXBDfaUpLS8t/OLImHsV1NimWrCS7Xo899jopEU1EH86Ipknzze+XjugqaObqfbse0/eL08q+SHBI4SGGVfDzEXTt6u+f8zjuUOygdwOitx5comNc9rmWJykebEwrg/MZ9DlpbPk57sFmX7Ng/5hQS6r20pFwDKx8vpJabKjhhIWx7wd1/poDxmXOymD3arDZ39zExGtF0IXY+6BPSc3zl2vzhxjA1VjwWbbBPg26dDUO8zWkpoYj5Q/85mLPeV4rzJmc14JeQR6Fqsc+nDsI/q1r1nYmDwjs7b7mLjfcVaoPNSeZ5P4dwfmv7CV2rjVztqN4/yPfkZxbR3xtTmDZM3u5d3rP4iLXF9U/XmowV/2jxas6zSP1jNlWEVzOeavqtJW6od6lwlkkTS/p/rJ9D7npmGngOW8f+RP070HNiIPqgZWK0fbFRHLII7iF8DSVuwNZdlMXlaxjnf12YS8FP8aTl7i8qTPiYr68qbGOmfdZ+/4j+OdgxqH/S5lJmeFxKvFUMluAgT3uZZ5XPtJXNm/EjTy0/cgd3yl9L0vJGfcD/8xTmJbzImKv802pPYMQN+ZxH+YvwFGxKg==
+  </data>
+ </layer>
+ <layer id="7" name="Grass" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgwmc52BguMhBf3u5uRgYeLnob+9AAFAY83NBMD3DGhTGV4D25XEyMPAB2RfoGNcguy9zQDDPCIrrkQZAaZue6QoGYGk7n5O+9sLsHk3PpAEAibMNBQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="368.136" y="55.0834"/>
+  <object id="52" template="../../obj/gold.tx" x="48.6663" y="28.5"/>
+  <object id="54" template="../../obj/enemy.tx" x="129.231" y="64.6277" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="68.1467" y="167.513" visible="1">
+   <properties>
+    <property name="enemy" value="Leonin Warrior"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,74,75,74,85,73,85,70,86,70,87"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="179.121" y="131.33">
+   <properties>
+    <property name="enemy" value="Leonin Weaponmaster"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="85,73,85,70,87,78,74,75"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/booster.tx" x="220.99" y="66.4783">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [  &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot;]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MH1&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot;,&quot;green&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/waypoint.tx" x="14.5406" y="146.152"/>
+  <object id="70" template="../../obj/waypoint.tx" x="104.802" y="140.285"/>
+  <object id="72" template="../../obj/waypoint.tx" x="369.842" y="77.3987"/>
+  <object id="73" template="../../obj/waypoint.tx" x="303.247" y="94.5807"/>
+  <object id="74" template="../../obj/waypoint.tx" x="338.647" y="204.372"/>
+  <object id="75" template="../../obj/waypoint.tx" x="371.953" y="160"/>
+  <object id="77" template="../../obj/enemy.tx" x="332.209" y="169.739" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="74,75,74,85,73,85,70,86,70,87,78"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/waypoint.tx" x="69.3126" y="202.696"/>
+  <object id="79" template="../../obj/manashards.tx" x="160.127" y="50.2487"/>
+  <object id="80" template="../../obj/enemy.tx" x="351.833" y="96.3333" visible="1">
+   <properties>
+    <property name="enemy" value="Tiger"/>
+    <property name="fleeRange" value="30"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/collision.tx" x="-15.5" y="0.028" width="16" height="273.444"/>
+  <object id="82" template="../../obj/collision.tx" x="481.5" y="-0.222" width="16" height="273.444"/>
+  <object id="83" template="../../obj/collision.tx" x="-15.73" y="-16.5" width="516.96" height="16"/>
+  <object id="84" template="../../obj/collision.tx" x="-14.48" y="273" width="516.96" height="16"/>
+  <object id="85" template="../../obj/waypoint.tx" x="276.333" y="134.333"/>
+  <object id="87" template="../../obj/waypoint.tx" x="67.3333" y="150.333"/>
+ </objectgroup>
+</map>

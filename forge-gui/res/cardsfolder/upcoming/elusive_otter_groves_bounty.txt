@@ -1,0 +1,19 @@
+Name:Elusive Otter
+ManaCost:U
+Types:Creature Otter
+K:Prowess
+PT:1/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTY | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:Y:Count$CardPower
+DeckHas:Ability$Counters
+AlternateMode:Adventure
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nCreatures with power less than Elusive Otter's power can't block it.
+
+ALTERNATE
+
+Name:Grove's Bounty
+ManaCost:X G
+Types:Sorcery Adventure
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X| SpellDescription$ Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)
+SVar:X:Count$xPaid
+Oracle:Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)

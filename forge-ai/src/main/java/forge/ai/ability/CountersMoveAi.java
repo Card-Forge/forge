@@ -36,7 +36,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
         }
 
-        if (!SpellAbilityAi.playReusable(ai, sa)) {
+        if (!playReusable(ai, sa)) {
             return false;
         }
 
@@ -475,8 +475,8 @@ public class CountersMoveAi extends SpellAbilityAi {
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional,
             Player targetedPlayer, Map<String, Object> params) {
-        if (sa.hasParam("AiLogic")) {
-            String logic = sa.getParam("AiLogic");
+        if (sa.hasParam("AILogic")) {
+            String logic = sa.getParam("AILogic");
 
             if ("ToValid".equals(logic)) {
                 // cards like Forgotten Ancient

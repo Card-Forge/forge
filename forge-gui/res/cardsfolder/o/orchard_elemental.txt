@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Creature Elemental
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Council's dilemma — When CARDNAME enters the battlefield, starting with you, each player votes for sprout or harvest. Put two +1/+1 counters on CARDNAME for each sprout vote. You gain 3 life for each harvest vote.
-SVar:TrigChangeZone:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Sprout,Harvest | SubAbility$ DBVoteSprout | AiLogic$ SproutOrHarvest
+SVar:TrigChangeZone:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Sprout,Harvest | SubAbility$ DBVoteSprout | AILogic$ SproutOrHarvest
 SVar:DBVoteSprout:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Counters | SubAbility$ DBVoteHarvest
 SVar:DBVoteHarvest:DB$ GainLife | LifeAmount$ Life | Defined$ You
 SVar:Counters:SVar$VoteNumSprout/Times.2

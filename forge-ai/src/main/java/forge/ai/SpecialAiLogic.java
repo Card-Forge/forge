@@ -46,7 +46,7 @@ public class SpecialAiLogic {
             return false;
         }
 
-        List<Card> targetable = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+        List<Card> targetable = CardUtil.getValidCardsToTarget(sa);
 
         CardCollection listOpp = CardLists.filterControlledBy(targetable, ai.getOpponents());
         if (isDestroy) {

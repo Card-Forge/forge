@@ -1,0 +1,7 @@
+Name:Copper Host Crusher
+ManaCost:6 G G
+Types:Creature Phyrexian Bear Rhino
+PT:8/8
+K:Trample
+K:Hexproof
+Oracle:Trample\nHexproof (This creature can't be the target of spells or abilities your opponents control.)

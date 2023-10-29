@@ -120,19 +120,8 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
-        if (hasParam("ValidCause")) {
-            if (!runParams.containsKey(AbilityKey.Cause)) {
-                return false;
-            }
-            SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
-            if (cause == null) {
-                return false;
-            }
-            if (!matchesValid(cause, getParam("ValidCause").split(","))) {
-                if (!matchesValid(cause.getHostCard(), getParam("ValidCause").split(","))) {
-                    return false;
-                }
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
 
         if (hasParam("Fizzle")) {

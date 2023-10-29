@@ -1,0 +1,10 @@
+Name:Last March of the Ents
+ManaCost:6 G G
+Types:Sorcery
+K:This spell can't be countered.
+A:SP$ Draw | Defined$ You | NumCards$ X | SubAbility$ CheatBattlefield | SpellDescription$ Draw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.
+SVar:CheatBattlefield:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ Y | StackDescription$ {p:You} puts any number of creature cards from their hand onto the battlefield 
+SVar:X:Count$Valid Creature.YouCtrl$GreatestToughness
+SVar:Y:Count$ValidHand Creature.YouCtrl
+DeckHints:Type$Wall|Plant|Treefolk
+Oracle:This spell can't be countered.\nDraw cards equal to the greatest toughness among creatures you control, then put any number of creature cards from your hand onto the battlefield.

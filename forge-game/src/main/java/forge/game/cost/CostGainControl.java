@@ -86,8 +86,8 @@ public class CostGainControl extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.addTempController(ability.getActivatingPlayer(), ability.getActivatingPlayer().getGame().getNextTimestamp());
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        targetCard.addTempController(payer, payer.getGame().getNextTimestamp());
         return targetCard;
     }
 

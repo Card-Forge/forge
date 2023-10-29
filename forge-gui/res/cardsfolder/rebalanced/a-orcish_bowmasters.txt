@@ -1,0 +1,10 @@
+Name:A-Orcish Bowmasters
+ManaCost:1 B
+Types:Creature Orc Archer
+PT:1/1
+K:Flash
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | FirstCardInDrawStep$ False | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card except the first one they draw in each of their draw steps, CARDNAME deals 1 damage to any target. Then amass Orcs 1.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | SubAbility$ DBAmass
+SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ 1
+DeckHas:Ability$Token|Counters & Type$Orc|Army
+Oracle:Flash\nWhenever an opponent draws a card except the first one they draw in each of their draw steps, Orcish Bowmasters deals 1 damage to any target. Then amass Orcs 1.

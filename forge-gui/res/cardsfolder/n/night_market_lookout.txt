@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Human Rogue
 PT:1/1
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME becomes tapped, each opponent loses 1 life and you gain 1 life.
-SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
 Oracle:Whenever Night Market Lookout becomes tapped, each opponent loses 1 life and you gain 1 life.

@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Robot
 PT:2/4
 K:More Than Meets the Eye:1 W
 K:Lifelink
-T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | NoResolvingCheck$ True | Execute$ TrigConvert | TriggerDescription$ Whenever you gain life, you may convert NICKNAME. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
+T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigConvert | TriggerDescription$ Whenever you gain life, you may convert NICKNAME. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform | SubAbility$ DBImmediateTrig | RememberChanged$ True
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | Execute$ DBReturn | TriggerDescription$ When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Artifact.cmcLEX+YouOwn | TgtPrompt$ Select target artifact card with mana value equal or less than the amount of life you gained this turn from your graveyard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBCleanup

@@ -1,0 +1,7 @@
+Name:Revive the Shire
+ManaCost:1 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | SubAbility$ DBFood | SpellDescription$ Return target permanent card from your graveyard to your hand. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac
+DeckHas:Ability$Token|LifeGain|Graveyard & Type$Artifact|Food
+Oracle:Return target permanent card from your graveyard to your hand. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

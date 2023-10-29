@@ -15,8 +15,6 @@ public class GameRules {
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
 
     // it's a preference, not rule... but I could hardly find a better place for it
-    private boolean canCloneUseTargetsImage;
-    // same for me
     private boolean useGrayText;
 
     // whether to warn about cards AI can't play well
@@ -97,13 +95,6 @@ public class GameRules {
                 || appliedVariants.contains(GameType.Oathbreaker)
                 || appliedVariants.contains(GameType.TinyLeaders)
                 || appliedVariants.contains(GameType.Brawl);
-    }
-
-    public boolean canCloneUseTargetsImage() {
-        return canCloneUseTargetsImage;
-    }
-    public void setCanCloneUseTargetsImage(final boolean canCloneUseTargetsImage) {
-        this.canCloneUseTargetsImage = canCloneUseTargetsImage;
     }
 
     public boolean useGrayText() {

@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - March of the Machines #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/04/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Battles are a new card type that you cast, and is then defended by your opponent. You can attack it and deal it damage like planeswalkers. When defeated, its owner casts it transformed. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0landsplayed=0
+p0landsplayedlastturn=0
+p0hand=Rampaging Raptor;Mountain;Into the Fire;Volcanic Spite
+p0battlefield=Invasion of Karsus|Counters:DEFENSE=2;Invasion of Kaldheim|Counters:DEFENSE=2;Dwarven Forge-Chanter;Mountain;Mountain;Mountain;Mountain
+p1life=8
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1battlefield=Invasion of Xerex|Counters:DEFENSE=2;Swordsworn Cavalier;Swordsworn Cavalier

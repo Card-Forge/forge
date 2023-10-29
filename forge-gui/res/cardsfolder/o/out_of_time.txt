@@ -11,5 +11,5 @@ SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
-K:Vanishing:0
+K:Vanishing
 Oracle:When Out of Time enters the battlefield, untap all creatures, then phase them out until Out of Time leaves the battlefield. Put a time counter on Out of Time for each creature phased out this way.\nVanishing (At the beginning of your upkeep, remove a time counter from this enchantment. When the last is removed, sacrifice it.)

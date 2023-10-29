@@ -1,0 +1,8 @@
+Name:Gimli, Counter of Kills
+ManaCost:3 R
+Types:Legendary Creature Dwarf Warrior
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature an opponent controls dies, CARDNAME deals 1 damage to that creature's controller.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1
+Oracle:Trample\nWhenever a creature an opponent controls dies, Gimli, Counter of Kills deals 1 damage to that creature's controller.

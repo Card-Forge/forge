@@ -1,0 +1,11 @@
+Name:Greta, Sweettooth Scourge
+ManaCost:1 B G
+Types:Legendary Creature Human Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+A:AB$ PutCounter | Cost$ G Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
+A:AB$ Draw | Cost$ 1 B Sac<1/Food> | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+DeckHas:Ability$LifeGain|Token|Food|Sacrifice|Counters & Type$Food|Artifact
+Oracle:When Greta, Sweettooth Scourge enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{G}, Sacrifice a Food: Put a +1/+1 counter on target creature. Activate only as a sorcery.\n{1}{B}, Sacrifice a Food: You draw a card and you lose 1 life.

@@ -293,6 +293,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         CardEdition upcomingSet = null;
         Date today = new Date();
 
+        // do this first so they're not considered missing
+        buildRenamedCards();
+
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
             boolean isCoreExpSet = coreOrExpSet || e.getType() == CardEdition.Type.REPRINT;
@@ -351,6 +354,38 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         reIndex();
+    }
+
+    private void buildRenamedCards() {
+        // for now just check Universes Within
+        for (CardInSet cis : editions.get("SLX").getCards()) {
+            String orgName = alternateName.get(cis.name);
+            if (orgName != null) {
+                // found original (beyond) print
+                CardRules org = getRules(orgName);
+
+                CardFace renamedMain = (CardFace) ((CardFace) org.getMainPart()).clone();
+                renamedMain.setName(renamedMain.getAltName());
+                renamedMain.setAltName(null);
+                // TODO this could mess up some "named ..." cardname literals but there's no printing like that currently
+                renamedMain.setOracleText(renamedMain.getOracleText().replace(orgName, renamedMain.getName()));
+                facesByName.put(renamedMain.getName(), renamedMain);
+                CardFace renamedOther = null;
+                if (org.getOtherPart() != null) {
+                    renamedOther = (CardFace) ((CardFace) org.getOtherPart()).clone();
+                    orgName = renamedOther.getName();
+                    renamedOther.setName(renamedOther.getAltName());
+                    renamedOther.setAltName(null);
+                    renamedOther.setOracleText(renamedOther.getOracleText().replace(orgName, renamedOther.getName()));
+                    facesByName.put(renamedOther.getName(), renamedOther);
+                }
+
+                CardRules within = new CardRules(new ICardFace[] { renamedMain, renamedOther, null, null, null, null, null }, org.getSplitType(), org.getAiHints());
+                // so workshop can edit same script
+                within.setNormalizedName(org.getNormalizedName());
+                rulesByName.put(cis.name, within);
+            }
+        }
     }
 
     public void addCard(PaperCard paperCard) {
@@ -919,7 +954,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardEdition edition = null;
                 try {
                     edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMO||edition.getType() == Type.REPRINT)
+                    if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
                         return false;
                 } catch (Exception ex) {
                     return false;
@@ -930,7 +965,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public String getName(final String cardName) {
-        if (alternateName.containsKey(cardName)) {
+        return getName(cardName, false);
+    }
+    public String getName(final String cardName, boolean engine) {
+        if (alternateName.containsKey(cardName) && engine) {
+            // TODO might want to implement GUI option so it always fetches the Within version
             return alternateName.get(cardName);
         }
         return cardName;

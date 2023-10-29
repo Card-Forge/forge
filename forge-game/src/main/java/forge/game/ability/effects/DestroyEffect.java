@@ -54,9 +54,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardCollectionView tgtCards = getTargetCards(sa);
         CardCollectionView untargetedCards = CardUtil.getRadiance(sa);
 
-        if (tgtCards.size() > 1) {
-            tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
-        }
+        tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
@@ -77,9 +75,7 @@ public class DestroyEffect extends SpellAbilityEffect {
             internalDestroy(gameCard, sa, table, cachedMap, params);
         }
 
-        if (untargetedCards.size() > 1) {
-            untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
-        }
+        untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         for (final Card unTgtC : untargetedCards) {
             if (unTgtC.isInPlay()) {

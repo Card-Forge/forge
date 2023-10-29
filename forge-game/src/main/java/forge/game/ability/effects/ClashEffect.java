@@ -83,7 +83,7 @@ public class ClashEffect extends SpellAbilityEffect {
         final PlayerZone pLib = player.getZone(lib);
         final PlayerZone oLib = opponent.getZone(lib);
 
-        if ((pLib.size() == 0) && (oLib.size() == 0)) {
+        if (pLib.isEmpty() && oLib.isEmpty()) {
             return null;
         }
 
@@ -91,56 +91,49 @@ public class ClashEffect extends SpellAbilityEffect {
         reveal.append("OVERRIDE "); //will return substring with the original message parsed here..
         Card pCard = null;
         Card oCard = null;
-
-        if (pLib.size() > 0) {
-            pCard = pLib.get(0);
-        }
-        if (oLib.size() > 0) {
-            oCard = oLib.get(0);
-        }
-
-        int pCMC = 0;
-        int oCMC = 0;
+        final CardCollection toReveal = new CardCollection();
+        int pCMC = -1;
+        int oCMC = -1;
 
         if (!pLib.isEmpty()) {
+            pCard = pLib.get(0);
             pCMC = pCard.getCMC();
+            toReveal.add(pCard);
 
             reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
             reveal.append("\n");
-            clashMoveToTopOrBottom(player, pCard, sa);
-        }
-        else {
-            pCMC = -1;
         }
         if (!oLib.isEmpty()) {
+            oCard = oLib.get(0);
             oCMC = oCard.getCMC();
+            toReveal.add(oCard);
 
             reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
             reveal.append("\n");
-            clashMoveToTopOrBottom(opponent, oCard, sa);
         }
-        else {
-            oCMC = -1;
-        }
-        final CardCollection toReveal = new CardCollection();
-        if (pCard != null)
-            toReveal.add(pCard);
-        if (oCard != null)
-            toReveal.add(oCard);
+
+        Player winner = null;
 
         // no winner, still show the revealed cards rather than do nothing
         if (pCMC == oCMC) {
             reveal.append(Localizer.getInstance().getMessage("lblNoWinner"));
-            player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
-            return null;
+        } else {
+            winner = pCMC > oCMC ? player : opponent;
+            reveal.append(winner + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
         }
 
-        reveal.append(pCMC > oCMC ? player + " " + Localizer.getInstance().getMessage("lblWinsClash") + "." : opponent + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
         player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
-        return pCMC > oCMC ? player : opponent;
+
+        clashMoveToTopOrBottom(player, pCard, sa);
+        clashMoveToTopOrBottom(opponent, oCard, sa);
+
+        return winner;
     }
 
     private static void clashMoveToTopOrBottom(final Player p, final Card c, final SpellAbility sa) {
+        if (c == null) {
+            return;
+        }
         final GameAction action = p.getGame().getAction();
         final boolean putOnTop = p.getController().willPutCardOnTop(c);
         final String location = putOnTop ? "top" : "bottom";

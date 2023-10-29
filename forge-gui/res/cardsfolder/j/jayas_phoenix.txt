@@ -1,0 +1,16 @@
+Name:Jaya's Phoenix
+ManaCost:4 R
+Types:Creature Phoenix
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ DamageDone | CombatDamage$ True | ValidTarget$ Player,Planeswalker | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDelayedTrigger | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, copy the next loyalty ability you activate this turn when you activate it. You may choose new targets for the copy.
+SVar:TrigDelayedTrigger:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellAbilityCast | ValidSA$ Activated.Loyalty | ValidActivatingPlayer$ You | SpellDescription$ Copy the next loyalty ability you activate this turn when you activate it.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True
+T:Mode$ SpellCast | ValidCard$ Card.Planeswalker | OptionalDecider$ You | ValidActivatingPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a planeswalker spell, you may return CARDNAME from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:SacMe:2
+SVar:DiscardMe:3
+DeckHas:Ability$Graveyard
+DeckHints:Type$Planeswalker
+Oracle:Flying, haste\nWhenever Jaya's Phoenix deals combat damage to a player or planeswalker, copy the next loyalty ability you activate this turn when you activate it. You may choose new targets for the copy.\nWhenever you cast a planeswalker spell, you may return Jaya's Phoenix from your graveyard to the battlefield.

@@ -1,0 +1,131 @@
+nightmare.png
+size: 512, 352
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 287,170
+  size: 14, 14
+Hidden
+  xy: 88, 111
+  size: 16, 17
+Hidden
+  xy: 152, 111
+  size: 16, 17
+Hidden
+  xy: 216, 111
+  size: 16, 17
+Wake
+  xy: 20, 64
+  size: 26, 32
+Wake
+  xy: 84, 64
+  size: 26, 32
+Wake
+  xy: 148, 64
+  size: 26, 32
+Wake
+  xy: 212, 64
+  size: 26, 32
+Wake
+  xy: 276, 64
+  size: 26, 32
+Wake
+  xy: 340, 64
+  size: 26, 32
+Wake
+  xy: 404, 64
+  size: 26, 32
+Wake
+  xy: 468, 64
+  size: 26, 32
+Idle
+  xy: 22, 134
+  size: 26, 26   
+Idle
+  xy: 86, 134
+  size: 26, 26    
+Idle
+  xy: 150, 134
+  size: 26, 26   
+Idle
+  xy: 214, 134
+  size: 26, 26   
+Idle
+  xy: 278, 134
+  size: 26, 26   
+Idle
+  xy: 342, 134
+  size: 26, 26   
+Idle
+  xy: 406, 134
+  size: 26, 26   
+Idle
+  xy: 470, 134
+  size: 26, 26  
+Walk
+  xy: 22, 166
+  size: 26, 26   
+Walk
+  xy: 86, 166
+  size: 26, 26    
+Walk
+  xy: 150, 166
+  size: 26, 26   
+Walk
+  xy: 214, 166
+  size: 26, 26   
+Walk
+  xy: 278, 166
+  size: 26, 26   
+Walk
+  xy: 342, 166
+  size: 26, 26   
+Attack
+  xy: 22, 198
+  size: 30, 26
+Attack
+  xy: 86, 198
+  size: 30, 26
+Attack
+  xy: 150, 198
+  size: 30, 26
+Attack
+  xy: 214, 198
+  size: 30, 26
+Attack
+  xy: 278, 198
+  size: 30, 26
+Attack
+   xy: 342, 198
+  size: 30, 26
+Attack
+  xy: 406, 198
+  size: 30, 26
+Attack
+  xy: 470, 198
+  size: 30, 26
+Death
+  xy: 20, 320
+  size: 30, 32
+Death
+  xy: 84, 320
+  size: 30, 32
+Death
+  xy: 148, 320
+  size: 30, 32
+Death
+  xy: 212, 320
+  size: 30, 32
+Death
+  xy: 276, 320
+  size: 30, 32
+Death
+  xy: 340, 320
+  size: 30, 32
+Death
+  xy: 404, 320
+  size: 30, 32
+Death
+  xy: 468, 320
+  size: 30, 32

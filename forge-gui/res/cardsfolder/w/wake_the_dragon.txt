@@ -1,0 +1,8 @@
+Name:Wake the Dragon
+ManaCost:4 B R
+Types:Sorcery
+K:Flashback:6 B R
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ br_6_6_dragon_flying_menace_steal | TokenOwner$ You | SpellDescription$ Create a 6/6 black and red Dragon creature token with flying, menace, and "Whenever this creature deals combat damage to a player, gain control of target artifact that player controls."
+DeckHas:Ability$Token|Graveyard & Type$Dragon
+DeckHints:Type$Artifact
+Oracle:Create a 6/6 black and red Dragon creature token with flying, menace, and "Whenever this creature deals combat damage to a player, gain control of target artifact that player controls."\nFlashback {6}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

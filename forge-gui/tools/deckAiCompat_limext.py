@@ -5,7 +5,7 @@ DECKFOLDER = "."
 
 import argparse, os, re
 
-print("Agetian's MTG Forge Deck AI Compatibility Analyzer v4.0\n")
+print("Agetian's MTG Forge Deck AI Compatibility Analyzer v5.0\n")
 
 parser = argparse.ArgumentParser(description="Analyze MTG Forge decks for AI compatibility.")
 parser.add_argument("-p", action="store_true", help="print only AI-playable decks")
@@ -40,7 +40,7 @@ limited_playable_cards = []
 if args.x:
     ff = open("ai_limitedplayable.lst").readlines()
     for line in ff:
-        limited_playable_cards.extend([line.replace("\n","")])
+        limited_playable_cards.extend([line.replace("\n","").lower()])
 
 # main algorithm
 print("Loading cards...")
@@ -56,18 +56,18 @@ for root, dirs, files in os.walk(CARDSFOLDER):
             for line in cardname_lines:
                 if line.strip().lower().startswith("name:"):
                     if line.count(':') == 1:
-                        cardname = line.split(':')[1].strip()
+                        cardname = line.split(':')[1].strip().lower()
                     break
             if cardname == "":
                 cardname_literal = cardtext.replace('\r','').split('\n')[0].split(':')
-                cardname = ":".join(cardname_literal[1:]).strip()
+                cardname = ":".join(cardname_literal[1:]).strip().lower()
             if (cardtext_lower.find("alternatemode:split") != -1) or (cardtext_lower.find("alternatemode: split") != -1):
                 # split card, special handling needed
                 cardsplittext = cardtext.replace('\r','').split('\n')
                 cardnames = []
                 for line in cardsplittext:
                     if line.lower().find("name:") != -1:
-                        cardnames.extend([line.split('\n')[0].split(':')[1]])
+                        cardnames.extend([line.split('\n')[0].split(':')[1].lower()])
                 cardname = " // ".join(cardnames)
             if (cardtext_lower.find("alternatemode:modal") != -1) or (cardtext_lower.find("alternatemode: modal") != -1):
                 # ZNR modal card, special handling needed
@@ -75,7 +75,7 @@ for root, dirs, files in os.walk(CARDSFOLDER):
                 cardnames = []
                 for line in cardsplittext:
                     if line.lower().find("name:") != -1:
-                        cardnames.extend([line.split('\n')[0].split(':')[1]])
+                        cardnames.extend([line.split('\n')[0].split(':')[1].lower()])
                 cardname = cardnames[0].strip()
             if cardtext.lower().find("remaideck") != -1 or cardtext.lower().find("ai:removedeck:all") != -1:
                 cardlist[cardname] = 0
@@ -107,7 +107,7 @@ for root, dirs, files in os.walk(DECKFOLDER):
                     cardname = regexobj.groups()[1].replace('\n','').replace('\r','').strip()
                     cardname = cardname.replace('\xC6', 'AE')
                     cardname = cardname.replace("AEther Mutation", "Aether Mutation")
-                    cardname = cardname.replace("AEther Membrane", "Aether Membrane")
+                    cardname = cardname.replace("AEther Membrane", "Aether Membrane").lower()
                     if cardlist[cardname] == 0:
                         if limited_playable_cards.count(cardname) > 0:
                             print("Found limited playable: " + cardname)

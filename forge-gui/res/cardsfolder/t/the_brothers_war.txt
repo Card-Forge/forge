@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Enchantment Saga
 K:Saga:3:DBPowerStone,DBEffect,DBDamage
 SVar:DBPowerStone:DB$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SpellDescription$ Create two tapped Powerstone tokens.
-SVar:DBEffect:DB$ Effect | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | Duration$ UntilYourNextTurn | StaticAbilities$ MustAttack | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
+SVar:DBEffect:DB$ Effect | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | RememberObjects$ Targeted | Duration$ UntilYourNextTurn | StaticAbilities$ MustAttack | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
 SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl+ActivePlayerCtrl | MustAttack$ Remembered.NonActive | Description$ Until your next turn, each creature the chosen player control attacks the other chosen player each combat if able.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select two different targets | NumDmg$ X | TargetMin$ 2 |  TargetMax$ 2 | TargetUnique$ True | SpellDescription$ CARDNAME deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl

@@ -1,0 +1,7 @@
+Name:Witch's Mark
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ DBToken | SpellDescription$ You may discard a card. If you do, draw two cards.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TargetMin$ 0 | TargetMax$ 1 | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | SpellDescription$ Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+DeckHas:Ability$Token|Discard & Type$Role|Aura
+Oracle:You may discard a card. If you do, draw two cards.\nCreate a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

@@ -1,0 +1,14 @@
+Name:Lord Skitter's Butcher
+ManaCost:2 B
+Types:Creature Rat Peasant
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBSacrifice,DBPumpAll
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | SpellDescription$ Create a 1/1 black Rat creature token with "This creature can't block."
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.Other | SacMessage$ another creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBScry | SpellDescription$ You may sacrifice another creature. If you do, scry 2, then draw a card.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | ConditionDefined$ Remembered | ConditionPresent$ Card
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Menace | SpellDescription$ Creatures you control gain menace until end of turn.
+DeckHas:Ability$Token|Sacrifice
+Oracle:When Lord Skitter's Butcher enters the battlefield, choose one —\n• Create a 1/1 black Rat creature token with "This creature can't block."\n• You may sacrifice another creature. If you do, scry 2, then draw a card.\n• Creatures you control gain menace until end of turn.

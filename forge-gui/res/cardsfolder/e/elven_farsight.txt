@@ -1,0 +1,8 @@
+Name:Elven Farsight
+ManaCost:G
+Types:Sorcery
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBPeekAndReveal | SpellDescription$ Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.
+SVar:DBPeekAndReveal:DB$ PeekAndReveal | RevealOptional$ True | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Scry 3, then you may reveal the top card of your library. If it's a creature card, draw a card.

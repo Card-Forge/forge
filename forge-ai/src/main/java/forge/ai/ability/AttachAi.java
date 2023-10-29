@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.*;
 
+import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -123,8 +124,7 @@ public class AttachAi extends SpellAbilityAi {
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
             effectExile.setActivatingPlayer(ai, true);
-            final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
-            final List<Card> targets = CardUtil.getValidCardsToTarget(exile_tgt, effectExile);
+            final List<Card> targets = CardUtil.getValidCardsToTarget(effectExile);
             return !targets.isEmpty();
         }
 
@@ -201,8 +201,7 @@ public class AttachAi extends SpellAbilityAi {
                 boolean dangerous = false;
                 int totalAtkPower = 0;
                 for (Card attacker : combat.getBlockers(attachTarget)) {
-                    if (attacker.hasKeyword(Keyword.DEATHTOUCH) || attacker.hasKeyword(Keyword.INFECT)
-                            || attacker.hasKeyword(Keyword.WITHER)) {
+                    if (attacker.hasKeyword(Keyword.DEATHTOUCH) || attacker.isWitherDamage()) {
                         dangerous = true;
                     }
                     totalAtkPower += attacker.getNetPower();
@@ -1037,8 +1036,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the attach source
      * @return the card
      */
-    private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
-            final Card attachSource) {
+    private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For choosing a Card to Pump
         Card c = null;
         List<Card> magnetList = null;
@@ -1185,7 +1183,7 @@ public class AttachAi extends SpellAbilityAi {
         CardCollection prefList = new CardCollection(list);
 
         // Filter AI-specific targets if provided
-        prefList = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+        prefList = ComputerUtil.filterAITgts(sa, ai, prefList, false);
 
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
@@ -1249,11 +1247,30 @@ public class AttachAi extends SpellAbilityAi {
         	}
 
         	// should not attach Auras to creatures that does leave the play
-        	// TODO also should not attach Auras to creatures cast with Dash
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     return !c.hasSVar("EndOfTurnLeavePlay");
+                }
+            });
+        }
+
+        // Should not attach things to crewed vehicles that will stop being creatures soon
+        // Equipping in Main 1 on creatures that actually attack is probably fine though
+        // TODO Somehow test for definitive advantage (e.g. opponent low on health, AI is attacking)
+        // to be able to deal the final blow with an enchanted vehicle like that
+        boolean canOnlyTargetCreatures = true;
+        for (String valid : ObjectUtils.firstNonNull(attachSource.getFirstAttachSpell(), sa).getTargetRestrictions().getValidTgts()) {
+            if (!valid.startsWith("Creature")) {
+                canOnlyTargetCreatures = false;
+                break;
+            }
+        }
+        if (canOnlyTargetCreatures && (attachSource.isAura() || attachSource.isEquipment())) {
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card card) {
+                    return card.getTimesCrewedThisTurn() == 0 || (attachSource.isEquipment() && attachSource.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai));
                 }
             });
         }
@@ -1328,11 +1345,9 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
                     return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
@@ -1341,7 +1356,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+            List<Card> list = CardUtil.getValidCardsToTarget(sa);
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1358,10 +1373,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         List<Card> list = null;
-        if (tgt == null) {
-            list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
+        if (sa.usesTargeting()) {
+            list = CardUtil.getValidCardsToTarget(sa);
         } else {
-            list = CardUtil.getValidCardsToTarget(tgt, sa);
+            list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         }
 
         if (list.isEmpty()) {

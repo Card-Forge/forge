@@ -112,7 +112,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         // Don't steal something if I can't Attack without, or prevent it from blocking at least
         if (lose.contains("EOT")
-                && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && !sa.isTrigger()) {
             return false;
         }

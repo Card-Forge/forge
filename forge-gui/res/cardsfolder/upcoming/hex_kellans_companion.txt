@@ -1,0 +1,14 @@
+Name:Hex, Kellan's Companion
+ManaCost:1 G
+Types:Legendary Creature Dog
+PT:1/1
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.Adventure | ValidActivatingPlayer$ You | TriggerZones$ Battlefield,Exile | Execute$ TrigEffect | TriggerDescription$ Whenever you cast an Adventure spell, if CARDNAME is on the battlefield or in exile, it perpetually gets +1/+1.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Hex, Kellan's Companion's Perpetual Effect | Duration$ Permanent | SubAbility$ DBChange
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1
+SVar:DBChange:DB$ ChangeZone | ConditionPresent$ Card.Self | ConditionZone$ Battlefield | Origin$ Battlefield  | Destination$ Exile | WithCountersType$ FETCH | SpellDescription$  Then if it's on the battlefield, exile it with a fetch counter on it. 
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigReturn | TriggerZones$ Exile | IsPresent$ Card.Self+counters_EQ1_FETCH | PresentZone$ Exile | TriggerDescription$ Whenever you cast a spell from exile, if NICKNAME is in exile with a fetch counter on it, put it onto the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile  | Destination$ Battlefield
+DeckHints:Type$Adventure
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever you cast an Adventure spell, if Hex, Kellan's Companion is on the battlefield or in exile, it perpetually gets +1/+1. Then if it's on the battlefield, exile it with a fetch counter on it.\nWhenever you cast a spell from exile, if Hex is in exile with a fetch counter on it, put it onto the battlefield.

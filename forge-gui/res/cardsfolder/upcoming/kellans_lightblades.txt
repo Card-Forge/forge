@@ -1,0 +1,10 @@
+Name:Kellan's Lightblades
+ManaCost:1 W
+Types:Instant
+K:Bargain
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 3 | SubAbility$ DBDestroy | ConditionCheckSVar$ Bargain | ConditionSVarCompare$ EQ0 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature. If this spell was bargained, destroy that creature instead.
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionCheckSVar$ Bargain | ConditionSVarCompare$ GE1 | ConditionDescription$ If this spell was bargained
+SVar:Bargain:Count$Bargained.1.0
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token & Type$Enchantment|Artifact
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nKellan's Lightblades deals 3 damage to target attacking or blocking creature. If this spell was bargained, destroy that creature instead.

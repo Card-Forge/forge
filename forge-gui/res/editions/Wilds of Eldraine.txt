@@ -1,0 +1,427 @@
+[metadata]
+Code=WOE
+Date=2023-09-08
+Name=Wilds of Eldraine
+Type=Expansion
+BoosterCovers=3
+Booster=9 Common:fromsheet("WOE cards"), 3 Uncommon:fromSheet("WOE cards"), 1 UncommonRareMythic:fromSheet("WOT cards"), 1 RareMythic:fromSheet("WOE cards"), 1 BasicLand:fromSheet("WOE cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+ScryfallCode=WOE
+
+[cards]
+1 R Archon of the Wild Rose @Chris Rahn
+2 C Archon's Glory @Anastasia Ovchinnikova
+3 C Armory Mice @Chris Seaman
+4 C Besotted Knight @Andreia Ugrai
+5 C Break the Spell @Miranda Meeks
+6 C Charmed Clothier @Winona Nelson
+7 U Cheeky House-Mouse @Uriah Voth
+8 C Cooped Up @Jodie Muir
+9 U Cursed Courtier @Tuan Duong Chu
+10 U Discerning Financier @Wayne Reynolds
+11 U Dutiful Griffin @Ilse Gort
+12 U Eerie Interference @Chris Rahn
+13 R Expel the Interlopers @Andreas Zafiratos
+14 C Frostbridge Guard @Paul Scott Canavan
+15 U Gallant Pie-Wielder @Matt Forsyth
+16 U Glass Casket @Raoul Vitale
+17 C Hopeful Vigil @Jake Murray
+18 C Kellan's Lightblades @Fajareka Setiawan
+19 U Knight of Doves @Volkan Baǵa
+20 C Moment of Valor @Joshua Cairos
+21 M Moonshaker Cavalry @Aldo Domínguez
+22 C Plunge into Winter @Vincent Christiaens
+23 U The Princess Takes Flight @Julia Metzger
+24 C Protective Parents @Matt Stewart
+25 R Regal Bunnicorn @Ilse Gort
+26 C Return Triumphant @Will Gist
+27 C Rimefur Reindeer @Lucas Graciano
+28 C Savior of the Sleeping @Valera Lutfullina
+29 C Slumbering Keepguard @Andreia Ugrai
+30 U Solitary Sanctuary @Kasia 'Kafis' Zielińska
+31 R Spellbook Vendor @Scott Murphy
+32 C Stockpiling Celebrant @Raluca Marinescu
+33 U Stroke of Midnight @Julia Metzger
+34 R A Tale for the Ages @Julie Dillon
+35 R Three Blind Mice @Andrew Mar
+36 C Tuinvale Guide @Anastasia Ovchinnikova
+37 C Unassuming Sage @Michele Giorgi
+38 M Virtue of Loyalty @Piotr Dura
+39 R Werefox Bodyguard @Nestor Ossandon Leal
+40 C Aquatic Alchemist @Uriah Voth
+41 U Archive Dragon @Tyler Walpole
+42 M Asinine Antics @Brent Hollowell
+43 C Beluna's Gatekeeper @Kai Carpenter
+44 U Bitter Chill @Julie Dillon
+45 U Chancellor of Tales @Joshua Raphael
+46 C Diminisher Witch @Fariba Khamseh
+47 U Disdainful Stroke @Eelis Kyttanen
+48 R Extraordinary Journey @Volkan Baǵa
+49 R Farsight Ritual @Randy Gallegos
+50 C Freeze in Place @Leanna Crossan
+51 U Gadwick's First Duel @Chris Seaman
+52 U Galvanic Giant @Borja Pindado
+53 R Horned Loch-Whale @Simon Dominic
+54 C Ice Out @Olivier Bernard
+55 U Icewrought Sentry @Brian Valeza
+56 R Ingenious Prodigy @Brian Valeza
+57 C Into the Fae Court @Anna Steinbauer
+58 C Johann's Stopgap @Christina Kraus
+59 C Living Lectern @Chris Seaman
+60 C Merfolk Coralsmith @Evyn Fong
+61 C Misleading Motes @Raoul Vitale
+62 C Mocking Sprite @Ben Hill
+63 C Obyra's Attendants @Andreas Zafiratos
+64 U Picklock Prankster @Iris Compiet
+65 C Quick Study @Iris Compiet
+66 R Sleep-Cursed Faerie @Heonhwa Choe
+67 C Sleight of Hand @Scott Murphy
+68 C Snaremaster Sprite @Christina Kraus
+69 C Spell Stutter @Liiga Smilshkalne
+70 U Splashy Spellcaster @Brian Valeza
+71 C Stormkeld Prowler @Zara Alfonso
+72 U Succumb to the Cold @Andrew Mar
+73 R Talion's Messenger @Marta Nael
+74 U Tenacious Tomeseeker @Kai Carpenter
+75 C Vantress Transmuter @Andrey Kuzinskiy
+76 M Virtue of Knowledge @Piotr Dura
+77 C Water Wings @Arash Radkia
+78 M Ashiok, Wicked Manipulator @Raymond Swanland
+79 U Ashiok's Reaper @Denis Zhbankov
+80 U Back for Seconds @Julia Metzger
+81 C Barrow Naughty @Matt Forsyth
+82 M Beseech the Mirror @Cynthia Sheppard
+83 C Candy Grapple @Konstantin Porubov
+84 C Conceited Witch @Anna Pavleeva
+85 U Dream Spoilers @Jodie Muir
+86 U Ego Drain @Valera Lutfullina
+87 R The End @Donato Giancola
+88 C Eriette's Whisper @Quintin Gleim
+89 U Faerie Dreamthief @Randy Vargas
+90 U Faerie Fencing @Evyn Fong
+91 C Feed the Cauldron @Marta Nael
+92 C Fell Horseman @Igor Krstic
+93 R Gumdrop Poisoner @Brian Valeza
+94 U High Fae Negotiator @Anna Christenson
+95 C Hopeless Nightmare @Dominik Mayer
+96 R Lich-Knights' Conquest @Denis Zhbankov
+97 R Lord Skitter, Sewer King @Jesper Ejsing
+98 R Lord Skitter's Blessing @Joseph Weston
+99 U Lord Skitter's Butcher @Leesha Hannigan
+100 C Mintstrosity @Slawomir Maniak
+101 C Not Dead After All @Randy Vargas
+102 R Rankle's Prank @Tyler Walpole
+103 C Rat Out @Michele Giorgi
+104 C Rowan's Grim Search @Aurore Folny
+105 C Scream Puff @Nicholas Gregory
+106 C Shatter the Oath @Dominik Mayer
+107 R Specter of Mortality @Daarken
+108 R Spiteful Hexmage @Anna Steinbauer
+109 C Stingblade Assassin @Nicholas Gregory
+110 C Sugar Rush @Brent Hollowell
+111 C Sweettooth Witch @Konstantin Porubov
+112 U Taken by Nightmares @Artur Treffner
+113 R Tangled Colony @Filip Burburan
+114 U Twisted Sewer-Witch @Scott Murphy
+115 M Virtue of Persistence @Piotr Dura
+116 C Voracious Vermin @Milivoj Ćeran
+117 C Warehouse Tabby @Steve Prescott
+118 C Wicked Visitor @Nicholas Gregory
+119 U The Witch's Vanity @Alix Branwyn
+120 U Belligerent of the Ball @Pascal Quidault
+121 C Bellowing Bruiser @Kai Carpenter
+122 C Bespoke Battlegarb @Nino Vecia
+123 U Boundary Lands Ranger @Pascal Quidault
+124 R Charming Scoundrel @Caroline Gariba
+125 C Cut In @Irina Nordsol
+126 C Edgewall Pack @Leesha Hannigan
+127 U Embereth Veteran @Andreia Ugrai
+128 C Flick a Coin @Andreia Ugrai
+129 R Food Fight @Filipe Pagliuso
+130 C Frantic Firebolt @Olivier Bernard
+131 C Gnawing Crescendo @Alexey Kruglov
+132 R Goddric, Cloaked Reveler @Jason A. Engle
+133 C Grabby Giant @Johann Bodin
+134 C Grand Ball Guest @Leanna Crossan
+135 C Harried Spearguard @Borja Pindado
+136 U Hearth Elemental @Nicholas Gregory
+137 R Imodane, the Pyrohammer @Chris Rahn
+138 C Kindled Heroism @Leanna Crossan
+139 U Korvold and the Noble Thief @Ben Hill
+140 C Merry Bards @Iris Compiet
+141 C Minecart Daredevil @Edgar Sánchez Hidalgo
+142 U Monstrous Rage @Borja Pindado
+143 R Raging Battle Mouse @Rudy Siswanto
+144 C Ratcatcher Trainee @Michele Giorgi
+145 M Realm-Scorcher Hellkite @Billy Christian
+146 R Redcap Gutter-Dweller @Alexey Kruglov
+147 C Redcap Thief @Vincent Christiaens
+148 R Rotisserie Elemental @Leonardo Santanna
+149 C Skewer Slinger @Edgar Sánchez Hidalgo
+150 R Song of Totentanz @Randy Gallegos
+151 U Stonesplitter Bolt @Alexandr Leskinen
+152 U Tattered Ratter @Tyler Walpole
+153 C Torch the Tower @Uriah Voth
+154 U Twisted Fealty @Mila Pesic
+155 U Two-Headed Hunter @Filip Burburan
+156 C Unruly Catapult @Vincent Christiaens
+157 M Virtue of Courage @Piotr Dura
+158 C Witch's Mark @Justyna Dura
+159 U Witchstalker Frenzy @Pascal Quidault
+160 U Agatha's Champion @Jason A. Engle
+161 C Beanstalk Wurm @Aldo Domínguez
+162 C Bestial Bloodline @Mila Pesic
+163 M Blossoming Tortoise @Simon Dominic
+164 R Bramble Familiar @Simon Dominic
+165 C Brave the Wilds @Lucas Graciano
+166 C Commune with Nature @Jodie Muir
+167 C Curse of the Werefox @Andrew Mar
+168 R Elvish Archivist @Mila Pesic
+169 R Feral Encounter @Fajareka Setiawan
+170 C Ferocious Werefox @Caroline Gariba
+171 U Graceful Takedown @Sidharth Chaturvedi
+172 R Gruff Triplets @Fajareka Setiawan
+173 C Hamlet Glutton @Edgar Sánchez Hidalgo
+174 C Hollow Scavenger @Michele Giorgi
+175 U Howling Galefang @Nestor Ossandon Leal
+176 R The Huntsman's Redemption @Magali Villeneuve
+177 C Leaping Ambush @Vincent Christiaens
+178 U Night of the Sweets' Revenge @Leonardo Santanna
+179 C Redtooth Genealogist @Gaboleps
+180 U Redtooth Vanguard @Joshua Cairos
+181 C Return from the Wilds @Julia Metzger
+182 C Rootrider Faun @Jesper Ejsing
+183 U Royal Treatment @Julia Metzger
+184 R Sentinel of Lost Lore @Cristi Balanescu
+185 C Skybeast Tracker @Andreas Zafiratos
+186 C Spider Food @Mila Pesic
+187 U Stormkeld Vanguard @Aldo Domínguez
+188 U Tanglespan Lookout @Dmitry Burmak
+189 C Territorial Witchstalker @Ilse Gort
+190 R Thunderous Debut @Aldo Domínguez
+191 C Titanic Growth @Iris Compiet
+192 C Toadstool Admirer @Julia Metzger
+193 U Tough Cookie @Milivoj Ćeran
+194 C Troublemaker Ouphe @Jesper Ejsing
+195 U Up the Beanstalk @Lucas Graciano
+196 C Verdant Outrider @Taras Susak
+197 M Virtue of Strength @Piotr Dura
+198 U Welcome to Sweettooth @Gaboleps
+199 M Agatha of the Vile Cauldron @Jason A. Engle
+200 R The Apprentice's Folly @Tuan Duong Chu
+201 U Ash, Party Crasher @Jason Rainville
+202 M Eriette of the Charmed Apple @Magali Villeneuve
+203 R Faunsbane Troll @Artur Nakhodkin
+204 R The Goose Mother @Jesper Ejsing
+205 U Greta, Sweettooth Scourge @Steve Prescott
+206 M Hylda of the Icy Crown @Ekaterina Burmak
+207 U Johann, Apprentice Sorcerer @Dmitry Burmak
+208 R Likeness Looter @Ben Hill
+209 U Neva, Stalked by Nightmares @Tyler Jacobson
+210 U Obyra, Dreaming Duelist @Evyn Fong
+211 M Rowan, Scion of War @Magali Villeneuve
+212 U Ruby, Daring Tracker @Ekaterina Burmak
+213 U Sharae of Numbing Depths @Evyn Fong
+214 U Syr Armont, the Redeemer @Magali Villeneuve
+215 M Talion, the Kindly Lord @Justyna Dura
+216 U Totentanz, Swarm Piper @Matt Stewart
+217 U Troyan, Gutsy Explorer @Jesper Ejsing
+218 M Will, Scion of Peace @Ryan Pancoast
+219 R Yenna, Redtooth Regent @Justyna Dura
+220 M Beluna Grandsquall @Victor Adame Minguez
+221 U Callous Sell-Sword @Valera Lutfullina
+222 R Cruel Somnophage @Jason A. Engle
+223 R Decadent Dragon @Wylie Beckert
+224 R Devouring Sugarmaw @Nino Vecia
+225 R Elusive Otter @Christina Kraus
+226 U Frolicking Familiar @Brian Valeza
+227 U Gingerbread Hunter @Milivoj Ćeran
+228 R Heartflame Duelist @Justyna Dura
+229 U Imodane's Recruiter @Nestor Ossandon Leal
+230 M Kellan, the Fae-Blooded @Anna Steinbauer
+231 R Mosswood Dreadknight @Ryan Pancoast
+232 U Picnic Ruiner @Edgar Sánchez Hidalgo
+233 R Pollen-Shield Hare @Olena Richards
+234 R Questing Druid @Jason A. Engle
+235 R Scalding Viper @Andrew Mar
+236 U Shrouded Shepherd @Randy Vargas
+237 U Spellscorn Coven @Uriah Voth
+238 U Tempest Hart @Aldo Domínguez
+239 U Threadbind Clique @Michal Ivan
+240 R Twining Twins @Fajareka Setiawan
+241 U Woodland Acolyte @Steve Prescott
+242 M Agatha's Soul Cauldron @Jason A. Engle
+243 C Candy Trail @Alix Branwyn
+244 U Collector's Vault @Artur Nakhodkin
+245 U Eriette's Tempting Apple @Alayna Danner
+246 C Gingerbrute @Carlos Palma Cruchaga
+247 R Hylda's Crown of Winter @Volkan Baǵa
+248 R The Irencrag @Adam Paquette
+249 C Prophetic Prism @Quintin Gleim
+250 C Scarecrow Guide @Carlos Palma Cruchaga
+251 U Soul-Guide Lantern @Iris Compiet
+252 R Syr Ginger, the Meal Ender @Michal Ivan
+253 U Three Bowls of Porridge @Edgar Sánchez Hidalgo
+254 C Crystal Grotto @Andreas Zafiratos
+255 U Edgewall Inn @Alayna Danner
+256 C Evolving Wilds @Alayna Danner
+257 R Restless Bivouac @Sergey Glushakov
+258 R Restless Cottage @Jesper Ejsing
+259 R Restless Fortress @Piotr Dura
+260 R Restless Spire @Sergey Glushakov
+261 R Restless Vinestalk @Sam Burley
+262 L Plains @Hari & Deepti
+263 L Island @Hari & Deepti
+264 L Swamp @Hari & Deepti
+265 L Mountain @Hari & Deepti
+266 L Forest @Hari & Deepti
+267 L Plains @Carlos Palma Cruchaga
+268 L Plains @Jonas De Ro
+269 L Island @Leanna Crossan
+270 L Island @Sarah Finnigan
+271 L Swamp @Jonas De Ro
+272 L Swamp @Julian Kok Joon Wen
+273 L Mountain @Sarah Finnigan
+274 L Mountain @Julian Kok Joon Wen
+275 L Forest @Jonas De Ro
+276 L Forest @Adam Paquette
+
+[showcase]
+277 M Virtue of Loyalty @Keith Garletts
+278 R Horned Loch-Whale @Nils Hamm
+279 M Virtue of Knowledge @Josu Hernaiz
+280 R Gumdrop Poisoner @Allen Williams
+281 M Virtue of Persistence @Allen Williams
+282 M Virtue of Courage @Nils Hamm
+283 R Bramble Familiar @Alayna Danner
+284 M Virtue of Strength @Danny Schwartz
+285 M Beluna Grandsquall @Kev Walker
+286 R Cruel Somnophage @Kev Walker
+287 R Decadent Dragon @Aaron Miller
+288 R Devouring Sugarmaw @Kev Walker
+289 R Elusive Otter @Andrea Sipl
+290 R Heartflame Duelist @Allen Williams
+291 M Kellan, the Fae-Blooded @Omar Rayyan
+292 R Mosswood Dreadknight @Keith Garletts
+293 R Pollen-Shield Hare @Greg Hildebrandt
+294 R Questing Druid @Greg Hildebrandt
+295 R Scalding Viper @Omar Rayyan
+296 R Twining Twins @Alayna Danner
+
+[borderless]
+297 M Ashiok, Wicked Manipulator @Serena Malyon
+298 M Kellan, the Fae-Blooded @Andreas Zafiratos
+299 M Eriette of the Charmed Apple @Zach Alexander
+300 M Rowan, Scion of War @Abigail Larson
+301 M Talion, the Kindly Lord @Olena Richards
+302 M Will, Scion of Peace @Matteo Marjoram
+303 R Restless Bivouac @Lucas Graciano
+304 R Restless Cottage @Sergey Glushakov
+305 R Restless Fortress @Alayna Danner
+306 R Restless Spire @Sergey Glushakov
+307 R Restless Vinestalk @Sergey Glushakov
+
+[jumpstart]
+308 U Food Coma @Iris Compiet
+309 R Lady of Laughter @Kai Carpenter
+310 U Pests of Honor @Quintin Gleim
+311 R Faerie Slumber Party @Lie Setiawan
+312 U Rowdy Research @Bram Sels
+313 U Storyteller Pixie @Peter Polach
+314 U Experimental Confectioner @Gaboleps
+315 R Malevolent Witchkite @Donato Giancola
+316 U Old Flitterfang @Chris Seaman
+317 U Become Brutes @Julia Griffin
+318 U Charging Hooligan @Tomas Duchek
+319 R Ogre Chitterlord @Piotr Foksowicz
+320 U Intrepid Trufflesnout @Kisung Koh
+321 U Provisions Merchant @Raluca Marinescu
+322 R Wildwood Mentor @Piotr Foksowicz
+
+[extended art]
+323 R Archon of the Wild Rose @Chris Rahn
+324 R Expel the Interlopers @Andreas Zafiratos
+325 M Moonshaker Cavalry @Aldo Domínguez
+326 R Regal Bunnicorn @Ilse Gort
+327 R Spellbook Vendor @Scott Murphy
+328 R A Tale for the Ages @Julie Dillon
+329 R Werefox Bodyguard @Nestor Ossandon Leal
+330 M Asinine Antics @Brent Hollowell
+331 R Extraordinary Journey @Volkan Baǵa
+332 R Farsight Ritual @Randy Gallegos
+333 R Ingenious Prodigy @Brian Valeza
+334 R Sleep-Cursed Faerie @Heonhwa Choe
+335 R Talion's Messenger @Marta Nael
+336 M Beseech the Mirror @Cynthia Sheppard
+337 R The End @Donato Giancola
+338 R Lich-Knights' Conquest @Denis Zhbankov
+339 R Lord Skitter, Sewer King @Jesper Ejsing
+340 R Lord Skitter's Blessing @Joseph Weston
+341 R Rankle's Prank @Tyler Walpole
+342 R Specter of Mortality @Daarken
+343 R Spiteful Hexmage @Anna Steinbauer
+344 R Tangled Colony @Filip Burburan
+345 R Charming Scoundrel @Caroline Gariba
+346 R Food Fight @Filipe Pagliuso
+347 R Goddric, Cloaked Reveler @Jason A. Engle
+348 R Imodane, the Pyrohammer @Chris Rahn
+349 R Raging Battle Mouse @Rudy Siswanto
+350 M Realm-Scorcher Hellkite @Billy Christian
+351 R Redcap Gutter-Dweller @Alexey Kruglov
+352 R Rotisserie Elemental @Leonardo Santanna
+353 R Song of Totentanz @Randy Gallegos
+354 M Blossoming Tortoise @Simon Dominic
+355 R Elvish Archivist @Mila Pesic
+356 R Feral Encounter @Fajareka Setiawan
+357 R Gruff Triplets @Fajareka Setiawan
+358 R Sentinel of Lost Lore @Cristi Balanescu
+359 R Thunderous Debut @Aldo Domínguez
+360 M Agatha of the Vile Cauldron @Jason A. Engle
+361 R Faunsbane Troll @Artur Nakhodkin
+362 R The Goose Mother @Jesper Ejsing
+363 M Hylda of the Icy Crown @Ekaterina Burmak
+364 R Likeness Looter @Ben Hill
+365 R Yenna, Redtooth Regent @Justyna Dura
+366 M Agatha's Soul Cauldron @Jason A. Engle
+367 R Hylda's Crown of Winter @Volkan Baǵa
+368 R The Irencrag @Adam Paquette
+369 R Syr Ginger, the Meal Ender @Michal Ivan
+370 R Lady of Laughter @Kai Carpenter
+371 R Faerie Slumber Party @Lie Setiawan
+372 R Malevolent Witchkite @Donato Giancola
+373 R Ogre Chitterlord @Piotr Foksowicz
+374 R Wildwood Mentor @Piotr Foksowicz
+
+[promo]
+375 U Stroke of Midnight @Julia Metzger
+376 C Sleight of Hand @Scott Murphy
+377 U Faerie Dreamthief @Randy Vargas
+378 C Torch the Tower @Uriah Voth
+379 U Tanglespan Lookout @Dmitry Burmak
+380 R Lich-Knights' Conquest @Kristina Carroll
+
+[buy a box]
+381 R Expel the Interlopers @Awanqi (Angela Wang)
+
+[tokens]
+b_1_1_nightmare_exile_counter
+b_1_1_rat_noblock
+c_a_food_sac
+c_a_food_sac
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+g_3_3_beast
+role_cursed
+role_monster
+role_royal
+role_sorcerer
+role_wicked
+role_young_hero
+u_1_1_faerie_flying_blockflying
+w_1_1_bird_flying
+w_1_1_human
+w_1_1_mouse
+w_2_2_knight_vigilance
+wu_4_4_elemental

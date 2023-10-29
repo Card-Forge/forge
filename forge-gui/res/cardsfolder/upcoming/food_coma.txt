@@ -1,0 +1,9 @@
+Name:Food Coma
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBFood | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food
+Oracle:When Food Coma enters the battlefield, exile target creature an opponent controls until Food Coma leaves the battlefield. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

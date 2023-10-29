@@ -1,0 +1,10 @@
+Name:Scrappy Bruiser
+ManaCost:3 R
+Types:Creature Raccoon Warrior
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, up to one target attacking creature gets +2/+0 and gains trample until end of turn. Return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SVar:TrigPump:DB$ Pump | TargetMin$ 0 | TargetMax 1 | ValidTgts$ Creature.attacking | TgtPrompt$ Select up to one target attacking creature | KW$ Trample | NumAtt$ +2 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigBounce | RememberObjects$ Targeted | TriggerDescription$ Return that creature to its owner's hand at end of combat.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Scrappy Bruiser attacks, up to one target attacking creature gets +2/+0 and gains trample until end of turn. Return that creature to its owner's hand at end of combat. (Return it only if it's on the battlefield.)

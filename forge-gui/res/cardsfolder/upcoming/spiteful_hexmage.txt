@@ -1,0 +1,8 @@
+Name:Spiteful Hexmage
+ManaCost:B
+Types:Creature Human Warlock
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Cursed Role token attached to target creature you control. (if you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_cursed | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | AILogic$ Curse | TgtPrompt$ Select target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:When Spiteful Hexmage enters the battlefield, create a Cursed Role token attached to target creature you control. (if you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1)

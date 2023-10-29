@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee 3
+Title=Crocodile Dundee
+Difficulty=hard
+Description=Mono R deck with Mudbrawler Cohort and Bloodmark Mentor
+Icon=Crocodile Dundee.jpg
+Deck Type=constructed
+[main]
+21 Mountain|M10
+1 Mox Ruby
+1 Ruby Medallion
+3 Bloodmark Mentor
+2 Cinder Pyromancer
+2 Mudbrawler Cohort
+2 Rockslide Ambush
+2 Spitting Earth
+3 Spire Barrage
+3 Flame Javelin
+2 Blood Knight
+4 Kargan Dragonlord
+1 Slith Firewalker
+1 Pyre Charger
+1 Feral Lightning
+4 Ball Lightning
+1 Blistering Firecat
+1 Kiki-Jiki, Mirror Breaker
+1 Rorix Bladewing
+4 Tarox Bladewing
+[sideboard]

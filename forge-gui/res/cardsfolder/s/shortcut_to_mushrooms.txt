@@ -1,0 +1,9 @@
+Name:Shortcut to Mushrooms
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTempt | TriggerDescription$ When CARDNAME enters the battlefield, the Ring tempts you.
+SVar:TrigTempt:DB$ RingTemptsYou
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Revolt$ True | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:When Shortcut to Mushrooms enters the battlefield, the Ring tempts you.\nAt the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on target creature you control.

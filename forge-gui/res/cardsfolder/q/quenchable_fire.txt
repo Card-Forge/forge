@@ -1,13 +1,9 @@
 Name:Quenchable Fire
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker. It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step.
-SVar:DBEffect:DB$ Effect | Name$ Quenchable Fire Effect | EffectOwner$ Targeted | Duration$ Permanent | Triggers$ UpkeepTrig | Abilities$ PayUp | RememberObjects$ SourceController | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker | ConditionCompare$ EQ0 | SubAbility$ DBEffect2
-SVar:DBEffect2:DB$ Effect | Name$ Quenchable Fire Effect | EffectOwner$ TargetedController | Duration$ Permanent | ForgetOnMoved$ Battlefield | Triggers$ UpkeepTrig2 | Abilities$ PayUp | RememberObjects$ SourceController,Targeted | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker
-SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ Bleed | TriggerDescription$ EFFECTSOURCE deals an additional 3 damage to you at the beginning of that player's next upkeep step unless you pay {U} before that step.
-SVar:Bleed:DB$ DealDamage | Defined$ You | NumDmg$ 3 | DamageSource$ EffectSource | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:PayUp:ST$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {U} to remove this effect.
-SVar:UpkeepTrig2:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ Bleed2 | TriggerDescription$ EFFECTSOURCE deals an additional 3 damage to that planeswalker at the beginning of that player's next upkeep step unless you pay {U} before that step.
-SVar:Bleed2:DB$ DamageAll | ValidCards$ Card.IsRemembered | NumDmg$ 3 | DamageSource$ EffectSource | SubAbility$ ExileEffect
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
+SVar:DBEffect:DB$ Effect | OneOff$ True | Duration$ Permanent | Abilities$ PayUp | Triggers$ DamageTrig | RememberObjects$ Targeted | SpellDescription$ It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step.
+SVar:PayUp:ST$ ChangeZone | Activator$ Player.IsRememberedOrController | ActivationZone$ Command | Cost$ U | Defined$ Self | Origin$ Command | Destination$ Exile | ActivationZone$ Command | AILogic$ Always | SpellDescription$ Pay {U} to avoid another 3 damage.
+SVar:DamageTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamage | SubAbility$ DBCleanup | StackDescription$ None | TriggerDescription$ It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ 3
 Oracle:Quenchable Fire deals 3 damage to target player or planeswalker. It deals an additional 3 damage to that player or planeswalker at the beginning of your next upkeep step unless that player or that planeswalker's controller pays {U} before that step.

@@ -1,0 +1,9 @@
+Name:Gandalf, Friend of the Shire
+ManaCost:3 U
+Types:Legendary Creature Avatar Wizard
+PT:2/4
+K:Flash
+S:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | Caster$ You | Description$ You may cast sorcery spells as though they had flash.
+T:Mode$ RingTemptsYou | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever the Ring tempts you, if you chose a creature other than CARDNAME as your Ring-bearer, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Flash\nYou may cast sorcery spells as though they had flash.\nWhenever the Ring tempts you, if you chose a creature other than Gandalf, Friend of the Shire as your Ring-bearer, draw a card.

@@ -1,0 +1,8 @@
+Name:Furnace Host Charger
+ManaCost:5 R
+Types:Creature Phyrexian Giant
+PT:5/5
+K:TypeCycling:Mountain:2
+K:Haste
+DeckHas:Ability$Discard
+Oracle:Haste\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)

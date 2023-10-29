@@ -3,6 +3,6 @@ ManaCost:U U
 Types:Enchantment
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a card name.
-A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with the chosen name. | ValidTgts$ Card.NamedCard | SpellDescription$ Counter target spell with the chosen name.
+A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with the chosen name | ValidTgts$ Card.NamedCard | SpellDescription$ Counter target spell with the chosen name.
 AI:RemoveDeck:Random
 Oracle:As Declaration of Naught enters the battlefield, choose a card name.\n{U}: Counter target spell with the chosen name.

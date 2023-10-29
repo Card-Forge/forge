@@ -1,0 +1,9 @@
+Name:The Gaffer
+ManaCost:2 W
+Types:Legendary Creature Halfling Peasant
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if you gained 3 or more life this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckNeeds:Ability$LifeGain
+Oracle:At the beginning of each end step, if you gained 3 or more life this turn, draw a card.

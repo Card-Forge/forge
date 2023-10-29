@@ -1,0 +1,12 @@
+[metadata]
+Code=PMDA
+Date=2023-09-08
+Name=Magic x Duel Masters Promos
+Type=Promo
+ScryfallCode=PMDA
+
+[cards]
+1 R Nicol Bolas @Toshiaki Takayama
+2 R Pouncing Jaguar @Nablange
+3 R Serra Angel @Mikio Masuda
+4 R Earthquake @Sansyu

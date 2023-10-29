@@ -1,5 +1,5 @@
 Name:Traumatic Prank
-ManaCost:2 R
+ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBEffect | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It perpetually gains haste, "This creature can't block," and "At the beginning of your upkeep, this creature deals 1 damage to you."
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ TraumaticPrank | Name$ Traumatic Prank's Perpetual Effect | Duration$ Permanent

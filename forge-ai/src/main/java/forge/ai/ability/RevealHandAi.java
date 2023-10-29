@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.MyRandom;
@@ -20,7 +19,7 @@ public class RevealHandAi extends RevealAiBase {
 
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
-        if (SpellAbilityAi.playReusable(ai, sa)) {
+        if (playReusable(ai, sa)) {
             randomReturn = true;
         }
 

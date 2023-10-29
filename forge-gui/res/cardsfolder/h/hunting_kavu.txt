@@ -2,6 +2,5 @@ Name:Hunting Kavu
 ManaCost:1 R G
 Types:Creature Kavu
 PT:2/3
-A:AB$ ChangeZone | Cost$ 1 R G T | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target creature without flying that's attacking you | Origin$ Battlefield | Destination$ Exile | SubAbility$ ExileSelf | SpellDescription$ Exile CARDNAME and target creature without flying that's attacking you.
-SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+A:AB$ ChangeZone | Cost$ 1 R G T | ValidTgts$ Creature.withoutFlying+attackingYou | ThisDefinedAndTgts$ Self | TgtPrompt$ Select target creature without flying that's attacking you | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile CARDNAME and target creature without flying that's attacking you.
 Oracle:{1}{R}{G}, {T}: Exile Hunting Kavu and target creature without flying that's attacking you.

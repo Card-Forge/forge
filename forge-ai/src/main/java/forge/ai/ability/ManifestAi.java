@@ -61,7 +61,7 @@ public class ManifestAi extends SpellAbilityAi {
                 if (!buff) {
                     return false;
                 }
-            } else if (!SpellAbilityAi.isSorcerySpeed(sa, ai)) {
+            } else if (!isSorcerySpeed(sa, ai)) {
                 return false;
             }
         } else {
@@ -152,7 +152,7 @@ public class ManifestAi extends SpellAbilityAi {
             }
         }
         // Probably should be a little more discerning on playing during OPPs turn
-        if (SpellAbilityAi.playReusable(ai, sa)) {
+        if (playReusable(ai, sa)) {
             return true;
         }
         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {

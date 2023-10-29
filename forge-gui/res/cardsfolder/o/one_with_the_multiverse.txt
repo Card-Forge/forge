@@ -1,4 +1,4 @@
-Name:One With the Multiverse
+Name:One with the Multiverse
 ManaCost:6 U U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | MayPlay$ True | Description$ You may look at the top card of your library any time. You may play lands and cast spells from the top of your library.

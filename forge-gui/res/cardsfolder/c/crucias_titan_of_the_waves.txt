@@ -1,7 +1,7 @@
 Name:Crucias, Titan of the Waves
 ManaCost:1 B R
 Types:Legendary Creature Human Pirate
-PT:3/3
+PT:3/1
 T:Mode$ Phase | Phase$ End of Turn | OptionalDecider$ You | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, you may discard a card. If you do, create a Treasure token and choose ambitious or expedient. If you chose ambitious, seek a card with greater mana value than the discarded card. If you chose expedient, seek a card with lesser mana value than the discarded card.
 SVar:TrigToken:AB$ Token | Cost$ Discard<1/Card> | TokenScript$ c_a_treasure_sac | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ Ambitious,Expedient | Defined$ You | AILogic$ Random

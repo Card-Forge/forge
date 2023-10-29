@@ -11,4 +11,5 @@ SVar:DBCopyCast:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Control
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TriggerRememberAmount
 DeckHas:Ability$Counters
+AI:RemoveDeck:All
 Oracle:Haste\nWhen Bloodthirsty Adversary enters the battlefield, you may pay {2}{R} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Bloodthirsty Adversary, then exile up to that many target instant and/or sorcery cards with mana value 3 or less from your graveyard and copy them. You may cast any number of the copies without paying their mana costs.

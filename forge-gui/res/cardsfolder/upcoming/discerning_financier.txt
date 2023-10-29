@@ -1,0 +1,13 @@
+Name:Discerning Financier
+ManaCost:2 W
+Types:Creature Human Noble
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTreasure | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ At the beginning of your upkeep, if an opponent controls more lands than you, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl
+A:AB$ ChoosePlayer | Cost$ 2 W | Choices$ Player.Other | ChoiceTitle$ Choose another player | SubAbility$ DBGainControl | SpellDescription$ Choose another player. That player gains control of target Treasure you control. You draw a card.
+SVar:DBGainControl:DB$ GainControl | NewController$ Player.Chosen | ValidTgts$ Treasure.YouCtrl | TgtPrompt$ Select target Treasure you control | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Token & Type$Treasure
+Oracle:At the beginning of your upkeep, if an opponent controls more lands than you, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n{2}{W}: Choose another player. That player gains control of target Treasure you control. You draw a card.

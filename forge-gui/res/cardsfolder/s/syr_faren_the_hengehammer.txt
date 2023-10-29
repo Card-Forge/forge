@@ -2,7 +2,7 @@ Name:Syr Faren, the Hengehammer
 ManaCost:G G
 Types:Legendary Creature Human Knight
 PT:2/2
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+X until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+X until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | NumDef$ X
 SVar:X:Count$CardPower
 Oracle:Whenever Syr Faren, the Hengehammer attacks, another target attacking creature gets +X/+X until end of turn, where X is Syr Faren's power.

@@ -1,0 +1,11 @@
+Name:Korvold and the Noble Thief
+ManaCost:3 R
+Types:Enchantment Saga
+K:Saga:3:DBToken,DBToken,ExileMayPlay
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:ExileMayPlay:DB$ Dig | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of target opponent's library. You may play those cards this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nIII — Exile the top three cards of target opponent's library. You may play those cards this turn.

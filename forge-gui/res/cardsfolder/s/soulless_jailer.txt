@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Phyrexian Golem
 PT:0/4
 R:Event$ Moved | Layer$ CantHappen | ActiveZones$ Battlefield | Origin$ Graveyard | Destination$ Battlefield | ValidLKI$ Permanent | Prevent$ True | Description$ Permanent cards in graveyards can't enter the battlefield.
-S:Mode$ CantBeCast | Origin$ Graveyard,Exile | Description$ Players can't cast spells from graveyards or exile.
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature | Origin$ Graveyard,Exile | Description$ Players can't cast noncreature spells from graveyards or exile.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Permanent cards in graveyards can't enter the battlefield.\nPlayers can't cast noncreature spells from graveyards or exile.

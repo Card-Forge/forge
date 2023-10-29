@@ -5,6 +5,6 @@ K:Kicker:Sac<2/Land>
 A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ WasKicked | Mode$ TgtChoose | SpellDescription$ Target player discards two cards. If CARDNAME was kicked, that player discards three cards instead.
 SVar:WasKicked:Count$Kicked.3.2
 SVar:NeedsToPlayKickedVar:Z GE3
-SVar:Z:Count$ValidHand Card.OppCtrl
+SVar:Z:Count$ValidHand Card.OppOwn
 SVar:AIPreference:SacCost$Land.basic+YouCtrl
 Oracle:Kicker—Sacrifice two lands. (You may sacrifice two lands in addition to any other costs as you cast this spell.)\nTarget player discards two cards. If this spell was kicked, that player discards three cards instead.

@@ -23,6 +23,7 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -126,6 +127,14 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     public List<SpellAbility> getChosenSa() { return chosenSa; }
+
+    @Override
+    protected final void onPlayerSelected(Player selected, final ITriggerEvent triggerEvent) {
+        PlayerController pc = selected.getController();
+        if (pc.isGuiPlayer()) {
+           pc.setFullControl(!pc.isFullControl());
+        }
+    }
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {

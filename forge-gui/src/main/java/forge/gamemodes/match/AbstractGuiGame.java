@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import forge.gui.control.PlaybackSpeed;
 import forge.trackable.TrackableCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,6 +46,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
     private boolean gameSpeed = false;
+    private PlaybackSpeed playbackSpeed = PlaybackSpeed.NORMAL;
     private String daytime = null;
     private boolean ignoreConcedeChain = false;
 
@@ -334,8 +336,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         gamePause = pause;
     }
 
-    public void setGameSpeed(boolean isFast) {
-        gameSpeed = isFast;
+    public void setGameSpeed(PlaybackSpeed speed) {
+        playbackSpeed = speed;
     }
 
     public void pauseMatch() {
@@ -368,6 +370,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             }
             if (concedeNeeded) {
+                if (gameView.isMulligan()) { //prevent UI freezing when conceding while the game is waiting for inputs/action
+                    showErrorDialog(Localizer.getInstance().getMessage("lblWaitingforActions"));
+                    return false;
+                }
                 if (showConfirmDialog(Localizer.getInstance().getMessage("lblConcedeCurrentGame"), Localizer.getInstance().getMessage("lblConcedeTitle"), Localizer.getInstance().getMessage("lblConcede"), Localizer.getInstance().getMessage("lblCancel"))) {
                     for (final IGameController c : getOriginalGameControllers()) {
                         // Concede each player on this Gui (except mind-controlled players)

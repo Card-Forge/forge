@@ -80,9 +80,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
             list = CardLists.filterControlledBy(list, AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Controller"), sa));
         }
 
-        if (list.size() > 1) {
-            list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
-        }
+        list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 
         CardZoneTable table = new CardZoneTable();
         Map<Integer, Card> cachedMap = Maps.newHashMap();

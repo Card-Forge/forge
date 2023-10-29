@@ -1,0 +1,12 @@
+Name:Gollum, Obsessed Stalker
+ManaCost:1 B
+Types:Legendary Creature Halfling Horror
+PT:1/1
+K:Skulk
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.namedGollum; Obsessed Stalker | ValidTarget$ Player | Static$ True | Execute$ NoteDamaged
+SVar:NoteDamaged:DB$ Effect | Name$ Damaged by Gollum, Obsessed Stalker | Duration$ Permanent | EffectOwner$ TriggeredTarget | Unique$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Opponent.HasCardsInCommand_Effect.namedDamaged by Gollum; Obsessed Stalker_GE1
+SVar:X:Count$LifeYouGainedThisTurn
+DeckNeeds:Ability$LifeGain
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nAt the beginning of your end step, each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.

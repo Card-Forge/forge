@@ -17,6 +17,7 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -31,6 +32,7 @@ import forge.localinstance.achievements.CardActivationAchievements;
 import forge.localinstance.achievements.PlaneswalkerAchievements;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Map;
@@ -39,9 +41,9 @@ public class PlayerStatisticScene extends UIScene {
     Image avatar, avatarBorder;
     Image colorFrame;
     TextraLabel money, life, shards;
-    TextraLabel wins, totalWins;
-    TextraLabel loss, totalLoss;
-    TextraLabel winloss, lossWinRatio;
+    TextraLabel wins, totalWins, eventWins, eventMatchWins;
+    TextraLabel loss, totalLoss, eventLosses, eventMatchLosses;
+    TextraLabel winloss, lossWinRatio, eventLossWinRatio, eventMatchLossWinRatio;
     TextraLabel playerName, headerAchievements, headerAvatar, headerName, headerWinLoss;
     TextraButton back, toggleAward;
     private final Table scrollContainer, achievementContainer;
@@ -55,7 +57,7 @@ public class PlayerStatisticScene extends UIScene {
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
         planeswalkers = PlaneswalkerAchievements.instance;
-        achievements = FModel.getAchievements(GameType.Constructed);
+        achievements = FModel.getAchievements(GameType.Adventure);
         cardActivation = CardActivationAchievements.instance;
         scrollContainer = new Table(Controls.getSkin());
         scrollContainer.row();
@@ -78,6 +80,22 @@ public class PlayerStatisticScene extends UIScene {
         totalLoss = ui.findActor("totalLoss");
         winloss = ui.findActor("winloss");
         lossWinRatio = ui.findActor("lossWinRatio");
+
+        eventMatchWins = ui.findActor("eventMatchWins");
+        eventMatchLosses = ui.findActor("eventMatchLosses");
+        eventMatchLossWinRatio = ui.findActor("eventMatchLossWinRatio");
+
+        eventWins = ui.findActor("eventWins");
+        eventLosses = ui.findActor("eventLosses");
+        eventLossWinRatio = ui.findActor("eventLossWinRatio");
+
+        totalWins = ui.findActor("totalWins");
+        loss = ui.findActor("loss");
+        totalLoss = ui.findActor("totalLoss");
+        winloss = ui.findActor("winloss");
+        lossWinRatio = ui.findActor("lossWinRatio");
+
+
         back = ui.findActor("return");
         toggleAward = ui.findActor("toggleAward");
         headerAchievements = Controls.newTextraLabel("[%110]" + Forge.getLocalizer().getMessage("lblAchievements"));
@@ -170,6 +188,7 @@ public class PlayerStatisticScene extends UIScene {
     @Override
     public void enter() {
         super.enter();
+        GameHUD.getInstance().switchAudio();
         achievementContainer.clear();
         updateAchievements(cardActivation, true);
         updateAchievements(planeswalkers, true);
@@ -198,8 +217,27 @@ public class PlayerStatisticScene extends UIScene {
             totalLoss.setText(String.valueOf(Current.player().getStatistic().totalLoss()));
         }
         if (lossWinRatio != null) {
-            lossWinRatio.setText(Float.toString(Current.player().getStatistic().winLossRatio()));
+            lossWinRatio.setText(TextUtil.decimalFormat(Current.player().getStatistic().winLossRatio()));
         }
+        if (eventMatchWins != null) {
+            eventMatchWins.setText(String.valueOf(Current.player().getStatistic().eventWins()));
+        }
+        if (eventMatchLosses != null) {
+            eventMatchLosses.setText(String.valueOf(Current.player().getStatistic().eventMatchLosses()));
+        }
+        if (eventMatchLossWinRatio != null) {
+            eventMatchLossWinRatio.setText(Float.toString(Current.player().getStatistic().eventMatchWinLossRatio()));
+        }
+        if (eventWins != null) {
+            eventWins.setText(String.valueOf(Current.player().getStatistic().eventWins()));
+        }
+        if (eventLosses != null) {
+            eventLosses.setText(String.valueOf(Current.player().getStatistic().eventLosses()));
+        }
+        if (eventLossWinRatio != null) {
+            eventLossWinRatio.setText(Float.toString(Current.player().getStatistic().eventWinLossRatio()));
+        }
+
         if (colorFrame != null) {
             colorFrame.setDrawable(new TextureRegionDrawable(getColorFrame(Current.player().getColorIdentity())));
         }
@@ -218,7 +256,7 @@ public class PlayerStatisticScene extends UIScene {
             enemyImage.setScaling(Scaling.stretch);
             scrollContainer.add(enemyImage).pad(5).size(16).fillY();
             scrollContainer.add().width(16);
-            scrollContainer.add((data.name)).fillX().pad(5).width(120);
+            scrollContainer.add(data.getName()).fillX().pad(5).width(120);
             scrollContainer.add(entry.getValue().getLeft().toString() + "/" + entry.getValue().getRight().toString()).pad(5);
             scrollContainer.row();
         }

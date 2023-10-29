@@ -152,6 +152,11 @@ public class SpellSmithScene extends UIScene {
             if (it.size() == 0)
                 return false;
             return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+        }).sorted(new Comparator<CardEdition>() {
+            @Override
+            public int compare(CardEdition e1, CardEdition e2) {
+                return e1.getName().compareTo(e2.getName());
+            }
         }).collect(Collectors.toList());
     }
 
@@ -368,7 +373,7 @@ public class SpellSmithScene extends UIScene {
         poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
-        pullUsingGold.setText("[+Pull][+gold]"+ currentPrice);
+        pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
         pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
@@ -377,7 +382,16 @@ public class SpellSmithScene extends UIScene {
 
     public void pullCard(boolean usingShards) {
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
-        Reward R = new Reward(P);
+        Reward R = null;
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            if (!edition.isEmpty()) {
+                R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+            } else {
+                R = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
+            }
+        } else {
+            R = new Reward(P);
+        }
         Current.player().addReward(R);
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
@@ -387,7 +401,7 @@ public class SpellSmithScene extends UIScene {
         if (Current.player().getGold() < currentPrice) pullUsingGold.setDisabled(true);
         if (Current.player().getShards() < currentShardPrice) pullUsingShards.setDisabled(true);
         if (rewardActor != null) rewardActor.remove();
-        rewardActor = new RewardActor(R, true, null);
+        rewardActor = new RewardActor(R, true, null, true);
         rewardActor.flip(); //Make it flip so it draws visual attention, why not.
         rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);

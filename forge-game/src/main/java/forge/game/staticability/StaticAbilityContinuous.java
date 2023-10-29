@@ -19,6 +19,7 @@ package forge.game.staticability;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,11 +38,11 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.card.RemoveType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
-import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -56,6 +57,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
@@ -146,13 +148,7 @@ public final class StaticAbilityContinuous {
         boolean removeAllAbilities = false;
         boolean removeNonMana = false;
         boolean addAllCreatureTypes = false;
-        boolean removeSuperTypes = false;
-        boolean removeCardTypes = false;
-        boolean removeSubTypes = false;
-        boolean removeLandTypes = false;
-        boolean removeCreatureTypes = false;
-        boolean removeArtifactTypes = false;
-        boolean removeEnchantmentTypes = false;
+        Set<RemoveType> remove = EnumSet.noneOf(RemoveType.class);
 
         boolean overwriteColors = false;
 
@@ -217,7 +213,7 @@ public final class StaticAbilityContinuous {
                         if (!hostCard.hasChosenPlayer() && input.contains("ChosenPlayer")) {
                             return true;
                         }
-                        if (!hostCard.hasChosenName() && input.contains("ChosenName")) {
+                        if (!hostCard.hasNamedCard() && input.contains("ChosenName")) {
                             return true;
                         }
                         if (!hostCard.hasChosenEvenOdd() && (input.contains("ChosenEvenOdd") || input.contains("chosenEvenOdd"))) {
@@ -301,8 +297,8 @@ public final class StaticAbilityContinuous {
                             input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
                             input = input.replaceAll("ChosenPlayerName", cp.getName());
                         }
-                        if (hostCard.hasChosenName()) {
-                            final String chosenName = hostCard.getChosenName().replace(",", ";");
+                        if (hostCard.hasNamedCard()) {
+                            final String chosenName = hostCard.getNamedCard().replace(",", ";");
                             input = input.replaceAll("ChosenName", "Card.named" + chosenName);
                         }
                         if (hostCard.hasChosenEvenOdd()) {
@@ -453,25 +449,25 @@ public final class StaticAbilityContinuous {
                 addAllCreatureTypes = true;
             }
             if (params.containsKey("RemoveSuperTypes")) {
-                removeSuperTypes = true;
+                remove.add(RemoveType.SuperTypes);
             }
             if (params.containsKey("RemoveCardTypes")) {
-                removeCardTypes = true;
+                remove.add(RemoveType.CardTypes);
             }
             if (params.containsKey("RemoveSubTypes")) {
-                removeSubTypes = true;
+                remove.add(RemoveType.SubTypes);
             }
             if (params.containsKey("RemoveLandTypes")) {
-                removeLandTypes = true;
+                remove.add(RemoveType.LandTypes);
             }
             if (params.containsKey("RemoveCreatureTypes")) {
-                removeCreatureTypes = true;
+                remove.add(RemoveType.CreatureTypes);
             }
             if (params.containsKey("RemoveArtifactTypes")) {
-                removeArtifactTypes = true;
+                remove.add(RemoveType.ArtifactTypes);
             }
             if (params.containsKey("RemoveEnchantmentTypes")) {
-                removeEnchantmentTypes = true;
+                remove.add(RemoveType.EnchantmentTypes);
             }
         }
 
@@ -597,10 +593,6 @@ public final class StaticAbilityContinuous {
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
-
-                if (params.containsKey("ManaConversion")) {
-                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params);
-                }
             }
         }
 
@@ -610,7 +602,10 @@ public final class StaticAbilityContinuous {
 
             // Gain control
             if (layer == StaticAbilityLayer.CONTROL && params.containsKey("GainControl")) {
-                affectedCard.addTempController(hostCard.getController(), hostCard.getTimestamp());
+                final PlayerCollection gain = AbilityUtils.getDefinedPlayers(hostCard, params.get("GainControl"), stAb);
+                if (!gain.isEmpty()) {
+                    affectedCard.addTempController(gain.get(0), hostCard.getTimestamp());
+                }
             }
 
             // Gain text from another card
@@ -630,40 +625,26 @@ public final class StaticAbilityContinuous {
                         List<KeywordInterface> keywords = Lists.newArrayList();
 
                         for (SpellAbility sa : state.getSpellAbilities()) {
-                            SpellAbility newSA = sa.copy(affectedCard, false);
-                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
-                            newSA.setGrantorStatic(stAb);
-                            //newSA.setIntrinsic(false); needs to be changed by CardTextChanges
-
-                            spellAbilities.add(newSA);
+                            spellAbilities.add(affectedCard.getSpellAbilityForStaticAbilityByText(sa, stAb));
                         }
                         if (params.containsKey("GainTextAbilities")) {
                             for (String ability : params.get("GainTextAbilities").split(" & ")) {
-                                final SpellAbility sa = AbilityFactory.getAbility(AbilityUtils.getSVar(stAb, ability), affectedCard, stAb);
-                                sa.setIntrinsic(true); // needs to be affected by Text
-                                sa.setGrantorStatic(stAb);
-                                spellAbilities.add(sa);
+                                spellAbilities.add(affectedCard.getSpellAbilityForStaticAbilityGainedByText(AbilityUtils.getSVar(stAb, ability), stAb));
                             }
                         }
                         for (Trigger tr : state.getTriggers()) {
-                            Trigger newTr = tr.copy(affectedCard, false);
-                            //newTr.setIntrinsic(false); needs to be changed by CardTextChanges
-                            trigger.add(newTr);
+                            trigger.add(affectedCard.getTriggerForStaticAbilityByText(tr, stAb));
                         }
                         for (ReplacementEffect re : state.getReplacementEffects()) {
-                            ReplacementEffect newRE = re.copy(affectedCard, false);
-                            //newRE.setIntrinsic(false); needs to be changed by CardTextChanges
-                            replacementEffects.add(newRE);
+                            replacementEffects.add(affectedCard.getReplacementEffectForStaticAbilityByText(re, stAb));
                         }
-                        for (StaticAbility sa : state.getStaticAbilities()) {
-                            StaticAbility newST = sa.copy(affectedCard, false);
-                            //newST.setIntrinsic(false);  needs to be changed by CardTextChanges
-                            staticAbilities.add(newST);
+                        for (StaticAbility st : state.getStaticAbilities()) {
+                            staticAbilities.add(affectedCard.getStaticAbilityForStaticAbilityByText(st, stAb));
                         }
+                        long kwIdx = 1;
                         for (KeywordInterface ki : state.getIntrinsicKeywords()) {
-                            KeywordInterface newKi = ki.copy(affectedCard, false);
-                            //newKi.setIntrinsic(false);  needs to be changed by CardTextChanges
-                            keywords.add(newKi);
+                            keywords.add(affectedCard.getKeywordForStaticAbilityByText(ki, stAb, kwIdx));
+                            kwIdx++;
                         }
 
                         // Volrath’s Shapeshifter has that card’s name, mana cost, color, types, abilities, power, and toughness.
@@ -673,7 +654,7 @@ public final class StaticAbilityContinuous {
                         // Mana cost
                         affectedCard.addChangedManaCost(state.getManaCost(), se.getTimestamp(), stAb.getId());
                         // color
-                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), i, i);
+                        affectedCard.addColorByText(ColorSet.fromMask(state.getColor()), se.getTimestamp(), stAb.getId());
                         // type
                         affectedCard.addChangedCardTypesByText(new CardType(state.getType()), se.getTimestamp(), stAb.getId());
                         // abilities
@@ -785,7 +766,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId());
+                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId(), false);
             }
 
             // add HIDDEN keywords
@@ -857,9 +838,6 @@ public final class StaticAbilityContinuous {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
-                                if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
-                                    newSA.putParam("ActivateIgnoreColor", params.get("GainsAbilitiesActivateIgnoreColor"));
-                                }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
                                 newSA.setIntrinsic(false);
@@ -915,10 +893,9 @@ public final class StaticAbilityContinuous {
 
             // add Types
             if (addTypes != null || removeTypes != null || addAllCreatureTypes
-                    || removeSuperTypes || removeCardTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
-                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                        removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
-                        hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
+                    || !remove.isEmpty()) {
+                affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
+                        hostCard.getTimestamp(), stAb.getId(), false, stAb.hasParam("CharacteristicDefining"));
             }
 
             // add colors

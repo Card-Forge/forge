@@ -4,12 +4,13 @@ import java.util.List;
 
 import forge.GameCommand;
 import forge.game.Game;
-import forge.game.GameObject;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -20,7 +21,7 @@ import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
-    public static void addPreventNextDamage(SpellAbility sa, GameObject o, int numDam) {
+    public static void addPreventNextDamage(SpellAbility sa, GameEntity o, int numDam) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player player = hostCard.getController();
@@ -40,9 +41,9 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         if (sa.hasParam("PreventionSubAbility")) {
             String subAbString = sa.getSVar(sa.getParam("PreventionSubAbility"));
             if (sa.hasParam("ShieldEffectTarget")) {
-                List<GameObject> effTgts = AbilityUtils.getDefinedObjects(hostCard, sa.getParam("ShieldEffectTarget"), sa);
+                List<GameEntity> effTgts = AbilityUtils.getDefinedEntities(hostCard, sa.getParam("ShieldEffectTarget"), sa);
                 String effTgtString = "";
-                for (final GameObject effTgt : effTgts) {
+                for (final GameEntity effTgt : effTgts) {
                     if (effTgt instanceof Card) {
                         effTgtString = "CardUID_" + String.valueOf(((Card) effTgt).getId());
                     } else if (effTgt instanceof Player) {
@@ -70,12 +71,21 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
+        o.getView().updatePreventNextDamage(o);
+        if (o instanceof Player) {
+            game.fireEvent(new GameEventPlayerStatsChanged((Player) o, false));
+        }
+
         game.getEndOfTurn().addUntil(new GameCommand() {
             private static final long serialVersionUID = 1L;
 
             @Override
             public void run() {
-                game.getAction().exile(eff, null);
+                game.getAction().exile(eff, null, null);
+                o.getView().updatePreventNextDamage(o);
+                if (o instanceof Player) {
+                    game.fireEvent(new GameEventPlayerStatsChanged((Player) o, false));
+                }
             }
         });
     }

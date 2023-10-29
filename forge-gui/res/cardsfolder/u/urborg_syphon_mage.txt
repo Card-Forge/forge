@@ -2,7 +2,7 @@ Name:Urborg Syphon-Mage
 ManaCost:2 B
 Types:Creature Human Spellshaper
 PT:2/2
-A:AB$ LoseLife | Cost$ 2 B T Discard<1/Card> | LifeAmount$ 2 | Defined$ Player.Other | SubAbility$ DBGainLife | SpellDescription$ Each other player loses 2 life. You gain life equal to the life lost this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+A:AB$ LoseLife | Cost$ 2 B T Discard<1/Card> | LifeAmount$ 2 | Defined$ Player.Other | SubAbility$ DBGainLife | SpellDescription$ Each other player loses 2 life. You gain life equal to the life lost this way. | StackDescription$ SpellDescription
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ None
 SVar:AFLifeLost:Number$0
 Oracle:{2}{B}, {T}, Discard a card: Each other player loses 2 life. You gain life equal to the life lost this way.

@@ -19,6 +19,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventPlayerStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -48,6 +49,11 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
                 ge.getGame().getTriggerHandler().runTrigger(TriggerType.DamagePreventedOnce, runParams, false);
+
+                ge.getView().updatePreventNextDamage(ge);
+                if (ge instanceof Player) {
+                    ge.getGame().fireEvent(new GameEventPlayerStatsChanged((Player) ge, false));
+                }
             }
         }
     }
@@ -112,6 +118,9 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             int sum = 0;
             for (Integer i : this.column(damaged.getKey()).values()) {
                 sum += i;
+            }
+            if (sum == 0) {
+                continue;
             }
 
             int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());

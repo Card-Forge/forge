@@ -1,0 +1,9 @@
+Name:Crack in Time
+ManaCost:3 W
+Types:Enchantment
+K:Vanishing:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
+DeckHas:Ability$Counters
+Oracle:Vanishing 3 (This enchantment enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Crack in Time enters the battlefield and at the beginning of your precombat main phase, exile target creature an opponent controls until Crack in Time leaves the battlefield.

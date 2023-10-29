@@ -485,7 +485,7 @@ public class TargetRestrictions {
         int num = 0;
         if (this.tgtZone.contains(ZoneType.Stack)) {
             for (final SpellAbilityStackInstance si : sa.getHostCard().getGame().getStack()) {
-                SpellAbility abilityOnStack = si.getSpellAbility(false);
+                SpellAbility abilityOnStack = si.getSpellAbility();
                 if (sa.canTargetSpellAbility(abilityOnStack)) {
                     num++;
                 }

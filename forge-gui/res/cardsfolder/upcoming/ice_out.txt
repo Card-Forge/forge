@@ -1,0 +1,9 @@
+Name:Ice Out
+ManaCost:1 U U
+Types:Instant
+K:Bargain
+S:Mode$ ReduceCost | ValidSpell$ Spell.Bargain | Type$ Spell | ValidCard$ Card.Self | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast if it's bargained.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token & Type$Enchantment|Artifact
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nThis spell costs {1} less to cast if it's bargained.\nCounter target spell.

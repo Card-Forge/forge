@@ -1,0 +1,10 @@
+Name:Lord Skitter, Sewer King
+ManaCost:2 B
+Types:Legendary Creature Rat Noble
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Rat.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExileN | TriggerDescription$ Whenever another Rat enters the battlefield under your control, exile up to one target card from an opponent's graveyard.
+SVar:TrigExileN:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card.OppOwn | TgtPrompt$ Select up to one target card from an opponent's graveyard 
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock
+DeckHas:Ability$Token|Graveyard
+Oracle:Whenever another Rat enters the battlefield under your control, exile up to one target card from an opponent's graveyard.\nAt the beginning of combat on your turn, create a 1/1 black Rat creature token with "This creature can't block."

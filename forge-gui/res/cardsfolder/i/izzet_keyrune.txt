@@ -2,7 +2,7 @@ Name:Izzet Keyrune
 ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
-A:AB$ Animate | Cost$ U R | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Artifact,Creature,Elemental | Colors$ Blue,Red | SpellDescription$ Until end of turn, CARDNAME becomes a 2/1 blue and red Elemental artifact creature.
+A:AB$ Animate | Cost$ U R | Defined$ Self | Power$ 2 | Toughness$ 1 | Types$ Artifact,Creature,Elemental | RemoveCreatureTypes$ True | Colors$ Blue,Red | SpellDescription$ Until end of turn, CARDNAME becomes a 2/1 blue and red Elemental artifact creature.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoot | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 AI:RemoveDeck:Random

@@ -1,0 +1,7 @@
+Name:Model of Unity
+ManaCost:3
+Types:Artifact
+T:Mode$ Vote | TriggerZones$ Battlefield | Execute$ TrigScry | List$ OppVotedSame | TriggerDescription$ Whenever players finish voting, you and each opponent who voted for a choice you voted for may scry 2.
+SVar:TrigScry:DB$ Scry | Defined$ TriggeredOpponentVotedSameAndYou | ScryNum$ 2 | Optional$ True
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Whenever players finish voting, you and each opponent who voted for a choice you voted for may scry 2.\n{T}: Add one mana of any color.

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BsiWIMbgQfCzoG2m972DnR8j+JRPIpH8SimPgYA9nSrWw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzVlF0OATEQxyc+29WewosHx0BE4kpOgDdnEB+PriKeEWziAkKCmYzJ7jZ4sF3in/zTbrftr52ZtKUBWn/iqQKYoecqe1atknQRALY6W/ayBDAMklxSFdtORrEki4Qv6mN/EPi9cxvdxb2PEQbWOLbRzCLTOUT1WCzScAsW4KDZr0Rccd3Jv4+70xkmivMpajjncbm+2K7K8BuuG++0cZ4+3oOrAchZHqN+vK6eSepf1nxSx/QenAy3Z8N9iivld/XizjucOwJe8wl7r7mGFrjHDXl5y76YqK56ltux4nqnf4vHN80NU9Svu75go/2FGb6Z79PCJjUzYrzLP8n3u/wt7h2Zm6aZ
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2MAqDgaG1VD8lJN+dtLLLmQAsvMoNwNDLxem3GM6uQdmPwgf50bY/QSK13DQxx3o4PEwsdudhHhcDrTzBZXiHZ+9IHuecyIwtewEAXz5yGsA8hgI0CsvjYJRQAgAAGNFGk8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="282" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/treasure.tx" x="225.25" y="49.75"/>
+  <object id="53" template="../../obj/gold.tx" x="103.5" y="96.75"/>
+  <object id="54" template="../../obj/gold.tx" x="327" y="201"/>
+  <object id="55" template="../../obj/treasure.tx" x="72.75" y="201"/>
+  <object id="56" template="../../obj/enemy.tx" x="288.549" y="206.005">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="122.5" y="200.75">
+   <properties>
+    <property name="enemy" value="Orc Hunter"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/enemy.tx" x="223.459" y="143.23">
+   <properties>
+    <property name="enemy" value="Orc Brute"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="168.203" y="111.132">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="63,64,65,66,67"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" x="207.709" y="224.384">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/enemy.tx" x="258.527" y="110.574">
+   <properties>
+    <property name="enemy" value="Orc Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="65,66,67,63,64"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/booster.tx" x="316.491" y="130.689">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/waypoint.tx" x="164.832" y="85.1653"/>
+  <object id="64" template="../../obj/waypoint.tx" x="243.441" y="85.1653"/>
+  <object id="65" template="../../obj/waypoint.tx" x="284.465" y="152.128"/>
+  <object id="66" template="../../obj/waypoint.tx" x="227.031" y="189.976"/>
+  <object id="67" template="../../obj/waypoint.tx" x="173.567" y="159.009"/>
+  <object id="68" template="../../obj/manashards.tx" x="177.801" y="57.1099"/>
+ </objectgroup>
+</map>

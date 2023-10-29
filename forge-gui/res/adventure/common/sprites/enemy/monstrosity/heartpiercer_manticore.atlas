@@ -1,0 +1,80 @@
+heartpiercer_manticore.png
+size: 104,112
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Avatar
+  xy: 0, 0
+  size: 32, 32
+Idle
+  xy: 52,0
+  size: 26, 16
+Idle
+  xy: 52,0
+  size: 26, 16
+Idle
+  xy: 78,0
+  size: 26, 16
+Idle
+  xy: 78,0
+  size: 26, 16
+Walk
+  xy:52,16
+  size:26, 16
+Walk
+  xy:78,16
+  size:26, 16
+Walk
+  xy:0,32
+  size:26, 16
+Walk
+  xy:26,32
+  size:26, 16
+Walk
+  xy:52,32
+  size:26, 16
+Walk
+  xy:78,32
+  size:26, 16
+Attack
+  xy:0,48
+  size:26, 16
+Attack
+  xy:26,48
+  size:26, 16
+Attack
+  xy:52,48
+  size:26, 16
+Attack
+  xy:78,48
+  size:26, 16
+Death
+  xy:0,64
+  size:26, 16
+Death
+  xy:26,64
+  size:26, 16
+Death
+  xy:52,64
+  size:26, 16
+Death
+  xy:78,64
+  size:26, 16
+Death
+  xy:0,80
+  size:26, 16
+Death
+  xy:26,80
+  size:26, 16
+Death
+  xy:52,80
+  size:26, 16
+Death
+  xy:78,80
+  size:26, 16
+Death
+  xy:0,96
+  size:26, 16
+Death
+  xy:26,96
+  size:26, 16

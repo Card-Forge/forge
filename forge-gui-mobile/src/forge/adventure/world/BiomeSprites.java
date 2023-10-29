@@ -1,32 +1,26 @@
 package forge.adventure.world;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import forge.adventure.data.BiomeSpriteData;
 import forge.adventure.util.Config;
-
-import java.util.HashMap;
 
 /**
  * class to load and buffer map sprites
  */
 public class BiomeSprites {
-    private final HashMap<String, Array<Sprite>> spriteBuffer = new HashMap<>();
+    private final ObjectMap<String, Array<Sprite>> spriteBuffer = new ObjectMap<>();
     public String textureAtlas;
     public BiomeSpriteData[] sprites;
-    private TextureAtlas textureAtlasBuffer;
 
     public Sprite getSprite(String name, int seed) {
-        if (textureAtlasBuffer == null) {
-            textureAtlasBuffer = Config.instance().getAtlas(textureAtlas);
-        }
         if (!spriteBuffer.containsKey(name)) {
-            spriteBuffer.put(name, new Array<Sprite>());
+            spriteBuffer.put(name, new Array<>());
         }
         Array<Sprite> sprites = spriteBuffer.get(name);
         if (sprites.isEmpty()) {
-            sprites.addAll(textureAtlasBuffer.createSprites(name));
+            sprites.addAll(Config.instance().getAtlas(textureAtlas).createSprites(name));
         }
         int index = seed % sprites.size;
         if (index >= sprites.size || index < 0) {

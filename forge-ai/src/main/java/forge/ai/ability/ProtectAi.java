@@ -163,7 +163,7 @@ public class ProtectAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final boolean notAiMain1 = !(ph.getPlayerTurn() == ai && ph.getPhase() == PhaseType.MAIN1);
         // sorceries can only give protection in order to create an unblockable attacker
-        return !SpellAbilityAi.isSorcerySpeed(sa, ai) || !notAiMain1;
+        return !isSorcerySpeed(sa, ai) || !notAiMain1;
     }
     
     @Override
@@ -258,7 +258,7 @@ public class ProtectAi extends SpellAbilityAi {
     private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
-        final List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
+        final List<Card> list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();

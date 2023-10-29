@@ -57,10 +57,9 @@ public class SetStateEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final CardCollection transformedCards = new CardCollection();
 
-        CardCollection cardsToTransform = new CardCollection();
+        CardCollectionView cardsToTransform;
         if (sa.hasParam("Choices")) {
-            CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), p, host, sa);
+            CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("Choices"), p, host, sa);
 
             final int validAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
             final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
@@ -71,8 +70,8 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
                     Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-            cardsToTransform.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
-                    !sa.hasParam("Mandatory"), null));
+            cardsToTransform = p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null);
         } else {
             cardsToTransform = getTargetCards(sa);
         }
@@ -92,13 +91,13 @@ public class SetStateEffect extends SpellAbilityEffect {
             // Cards which are not on the battlefield should not be able to transform.
             // TurnFace should be allowed in other zones like Exile too
             // Specialize and Unspecialize are allowed in other zones
-            if (!"TurnFace".equals(mode) && !"Unspecialize".equals(mode) && !"Specialize".equals(mode)
+            if (!"TurnFaceUp".equals(mode) && !"TurnFaceDown".equals(mode) && !"Unspecialize".equals(mode) && !"Specialize".equals(mode)
                     && !gameCard.isInPlay() && !sa.hasParam("ETB")) {
                 continue;
             }
 
             // facedown cards that are not Permanent, can't turn faceup there
-            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
+            if ("TurnFaceUp".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
                 if (gameCard.hasMergedCard()) {
                     boolean hasNonPermanent = false;
                     Card nonPermanentCard = null;
@@ -125,7 +124,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Merged faceup permanent that have double faced cards can't turn face down
-            if ("TurnFace".equals(mode) && !gameCard.isFaceDown() && gameCard.isInPlay()
+            if ("TurnFaceDown".equals(mode) && !gameCard.isFaceDown() && gameCard.isInPlay()
                     && gameCard.hasMergedCard()) {
                 boolean hasBackSide = false;
                 for (final Card c : gameCard.getMergedCards()) {
@@ -171,7 +170,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 host.setChosenColors(null);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
-                if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                if (hasTransformed && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
                         || sa.hasParam("FaceDownSetType"))) {
                     CardFactoryUtil.setFaceDownState(gameCard, sa);
                 }
@@ -185,8 +184,8 @@ public class SetStateEffect extends SpellAbilityEffect {
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
                     if (gameCard.hasKeyword("Double agenda")) {
-                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names " +
-                                gameCard.getNamedCard() + " and " + gameCard.getNamedCard2();
+                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names: " +
+                                gameCard.getNamedCards();
                         game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     } else {
                         String sb = p + " has revealed " + gameCard.getName() + " with the chosen name " + gameCard.getNamedCard();

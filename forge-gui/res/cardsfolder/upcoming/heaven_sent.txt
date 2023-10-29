@@ -1,0 +1,15 @@
+Name:Heaven Sent
+ManaCost:U R
+Types:Enchantment Saga
+K:Saga:3:DBInvestigate,DBInvestigate,DBDamage
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate.
+SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | SubAbility$ DBBranch | SpellDescription$ CARDNAME deals 1 damage to each opponent. Then if an opponent has 0 or less life, draw seven cards. Otherwise, exile CARDNAME and you may cast it this turn.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ LE0 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBCastAgain
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+SVar:DBDraw:DB$ Draw | NumCards$ 7
+SVar:DBCastAgain:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | SubAbility$ DBCleanup
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast it this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Clue|Artifact
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Investigate.\nIII — Heaven Sent deals 1 damage to each opponent. Then if an opponent has 0 or less life, draw seven cards. Otherwise, exile Heaven Sent and you may cast it this turn.

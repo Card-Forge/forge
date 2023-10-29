@@ -5,5 +5,4 @@ PT:1/1
 K:Banding
 A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ W W | Defined$ Self | NumDef$ +2 | SpellDescription$ CARDNAME gets +0/+2 until end of turn.
-AI:RemoveDeck:All
 Oracle:Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\n{1}{W}: Kjeldoran Knight gets +1/+0 until end of turn.\n{W}{W}: Kjeldoran Knight gets +0/+2 until end of turn.

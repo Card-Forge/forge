@@ -36,14 +36,6 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.hasParam("AILogic")) {
-            if ("OpponentOnly".equals(sa.getParam("AILogic"))) {
-                if (sa.getActivatingPlayer() == ai) {
-                	return false;
-                }
-            }
-        }
-
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something to sacrifice
 
@@ -56,6 +48,7 @@ public class SacrificeAi extends SpellAbilityAi {
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
         final boolean destroy = sa.hasParam("Destroy");
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {
             final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -78,15 +71,7 @@ public class SacrificeAi extends SpellAbilityAi {
             String num = sa.getParamOrDefault("Amount" , "1");
             final int amount = AbilityUtils.calculateAmount(source, num, sa);
 
-            List<Card> list = null;
-            try {
-                list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (list == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
+            List<Card> list = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
 
             for (Card c : list) {
                 if (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) > 3) {
@@ -120,14 +105,15 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         }
 
-        final String defined = sa.getParam("Defined");
-        final String valid = sa.getParam("SacValid");
-        if (defined == null) {
+        final String defined = sa.getParamOrDefault("Defined", "You");
+        final String targeted = sa.getParamOrDefault("ValidTgts", "");
+        final String valid = sa.getParamOrDefault("SacValid", "Self");
+        if (valid.equals("Self")) {
             // Self Sacrifice.
-        } else if (defined.equals("Player")
+        } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")
                 || ((defined.equals("Player.Opponent") || defined.equals("Opponent")) && !sa.isTrigger())) {
             // is either "Defined$ Player.Opponent" or "Defined$ Opponent" obsolete?
-            
+
             // If Sacrifice hits both players:
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
@@ -140,31 +126,30 @@ public class SacrificeAi extends SpellAbilityAi {
                 amount = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount);
             }
 
-            List<Card> humanList = null;
-            try {
-                humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (humanList == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
+            List<Card> humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
 
             // Since all of the cards have AI:RemoveDeck:All, I enabled 1 for 1
             // (or X for X) trades for special decks
             return humanList.size() >= amount;
         } else if (defined.equals("You")) {
-            List<Card> computerList = null;
-            try {
-                computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
-            } catch (NullPointerException e) {
-                return false;
-            } finally {
-                if (computerList == null)
-                    return false;
-            }//prevent NPE on MoJhoSto
-
+            List<Card> computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
             for (Card c : computerList) {
+                if ("Lethal".equals(aiLogic)) {
+                    boolean isLethal = false;
+                    for (Player opp : ai.getOpponents()) {
+                        if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife() && c.getNetPower() >= opp.getLife()) {
+                            isLethal = true;
+                            break;
+                        }
+                    }
+                    for (Card creature : ai.getOpponents().getCreaturesInPlay()) {
+                        if (creature.canBeDestroyed() && c.getNetPower() >= creature.getNetToughness()) {
+                            isLethal = true;
+                            break;
+                        }
+                    }
+                    return c.hasSVar("SacMe") || isLethal;
+                }
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return true;
                 }

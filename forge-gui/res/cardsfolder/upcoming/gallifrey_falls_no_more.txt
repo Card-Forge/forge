@@ -1,0 +1,17 @@
+Name:Gallifrey Falls
+ManaCost:4 R R
+Types:Instant
+K:Fuse
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 4 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 4 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:Split
+Oracle:Gallifrey Falls deals 4 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.\nFuse (You may cast one or both halves of this card from your hand.)
+
+ALTERNATE
+
+Name:No More
+ManaCost:2 W
+Types:Instant
+A:SP$ Phases | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control | TargetMin$ 0 | TargetMax$ MaxTgts | SpellDescription$ Any number of target creatures you control phase out.
+SVar:MaxTgts:Count$Valid Creature.YouCtrl
+Oracle:Any number of target creatures you control phase out.\nFuse (You may cast one or both halves of this card from your hand.)

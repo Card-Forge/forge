@@ -1,0 +1,101 @@
+nakedmolerat.png
+size: 256,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 41, 178
+  size: 15, 15  
+Idle 
+  xy: 4, 16
+  size: 20, 16    
+Idle 
+  xy: 36, 16
+  size: 20, 16   
+Idle 
+  xy: 68, 16
+  size: 20, 16   
+Idle 
+  xy: 100, 16
+  size: 20, 16   
+Idle 
+  xy: 132, 16
+  size: 20, 16    
+Idle 
+  xy: 164, 16
+  size: 20, 16   
+Idle 
+  xy: 196, 16
+  size: 20, 16   
+Idle 
+  xy: 228, 16
+  size: 20, 16   
+Walk 
+  xy: 2, 48
+  size: 24, 16    
+Walk 
+  xy: 34, 48
+  size: 24, 16    
+Walk 
+  xy: 66, 48
+  size: 24, 16    
+Walk 
+  xy: 98, 48
+  size: 24, 16
+Walk 
+  xy: 130, 48
+  size: 24, 16    
+Walk 
+  xy: 162, 48
+  size: 24, 16    
+Walk 
+  xy: 194, 48
+  size: 24, 16    
+Walk 
+  xy: 226, 48
+  size: 24, 16       
+Attack 
+  xy: 2, 80
+  size: 24, 16   
+Attack 
+  xy: 34, 80
+  size: 24, 16   
+Attack 
+  xy: 66, 80
+  size: 24, 16   
+Attack 
+  xy: 98, 80
+  size: 24, 16   
+Death
+  xy: 4, 112
+  size: 24, 16 
+Death
+  xy: 36, 112
+  size: 24, 16 
+Death
+  xy: 68, 112
+  size: 24, 16 
+Death
+  xy: 100, 112
+  size: 24, 16 
+Death
+  xy: 132, 112
+  size: 24, 16 
+Death
+  xy: 164, 112
+  size: 24, 16 
+Wake
+  xy: 0, 144
+  size: 32, 16
+Wake
+  xy: 32, 144
+  size: 24, 16
+Wake
+  xy: 64, 144
+  size: 24, 16
+Wake
+  xy: 96, 144
+  size: 24, 16
+Wake
+  xy: 128, 144
+  size: 24, 16

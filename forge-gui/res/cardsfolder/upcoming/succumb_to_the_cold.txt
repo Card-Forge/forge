@@ -1,0 +1,7 @@
+Name:Succumb to the Cold
+ManaCost:2 U
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Select one or two target creatures an opponent controls | SpellDescription$ Tap one or two target creatures an opponent controls. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Tap one or two target creatures an opponent controls. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)

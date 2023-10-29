@@ -69,6 +69,10 @@ public class WorldData implements Serializable {
             if(data.name.equals(enemy))
                 return data;
         }
+        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies())) {
+            if(data.getName() != null && data.getName().equals(enemy))
+                return data;
+        }
         return null;
     }
 

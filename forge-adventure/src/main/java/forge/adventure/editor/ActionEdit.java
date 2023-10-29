@@ -14,17 +14,21 @@ public class ActionEdit extends FormPanel {
     DialogData.ActionData currentData;
 
     JTextField issueQuest = new JTextField();
+    JTextField characterFlagName = new JTextField();
     JTextField mapFlagName = new JTextField();
     JTextField questFlagName = new JTextField();
+    JTextField advanceCharacterFlag = new JTextField();
     JTextField advanceMapFlag = new JTextField();
     JTextField advanceQuestFlag = new JTextField();
     JTextField battleWithActorID = new JTextField();
+    JTextField activateObjectID = new JTextField();
     JTextField deleteMapObject = new JTextField();
     JTextField setColorIdentity = new JTextField();
     JSpinner addReputation = new JSpinner(new SpinnerNumberModel(0, -1000, 1000, 1));
     JSpinner addLife = new JSpinner(new SpinnerNumberModel(0, -1000, 1000, 1));
     JTextField POIReference = new JTextField();
     JTextField removeItem = new JTextField();
+    JSpinner characterFlagValue = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
     JSpinner mapFlagValue = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
     JSpinner questFlagValue = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
 
@@ -40,9 +44,12 @@ public class ActionEdit extends FormPanel {
         add("Map Flag value to set:",mapFlagValue);
         add("Set Quest Flag name:",questFlagName);
         add("Quest Flag value to set:",questFlagValue);
+        add("Set Character Flag name:",characterFlagName);
+        add("Character Flag value to set:",characterFlagValue);
 
         add("Advance Map Flag name:",advanceMapFlag);
         add("Advance Quest Flag name:",advanceQuestFlag);
+        add("Advance Character Flag name:",advanceCharacterFlag);
         add("Battle with actor ID:",battleWithActorID);
         add("Delete map object:",deleteMapObject);
         add("Set color identity:",setColorIdentity);
@@ -59,6 +66,7 @@ public class ActionEdit extends FormPanel {
         advanceMapFlag.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
         advanceQuestFlag.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
         battleWithActorID.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
+        activateObjectID.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
         deleteMapObject.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
         setColorIdentity.getDocument().addDocumentListener(new DocumentChangeListener(ActionEdit.this::updateAction));
         addLife.getModel().addChangeListener(e -> ActionEdit.this.updateAction());
@@ -74,6 +82,11 @@ public class ActionEdit extends FormPanel {
         if (currentData == null)
             currentData = new DialogData.ActionData();
 
+        DialogData.ActionData.QuestFlag characterFlag = new DialogData.ActionData.QuestFlag();
+        characterFlag.key = characterFlagName.getText();
+        characterFlag.val = (int)characterFlagValue.getModel().getValue();
+        currentData.setCharacterFlag= characterFlag;
+
         DialogData.ActionData.QuestFlag mapFlag = new DialogData.ActionData.QuestFlag();
         mapFlag.key = mapFlagName.getText();
         mapFlag.val = (int)mapFlagValue.getModel().getValue();
@@ -84,10 +97,12 @@ public class ActionEdit extends FormPanel {
         questFlag.val = (int)questFlagValue.getModel().getValue();
         currentData.setQuestFlag= questFlag;
 
-        currentData.issueQuest = issueQuest.getText(); //This is currently a boolean effect, eventually needs arguments
+        currentData.issueQuest = issueQuest.getText();
         currentData.advanceMapFlag= advanceMapFlag.getText();
         currentData.advanceQuestFlag= advanceQuestFlag.getText();
+        currentData.advanceCharacterFlag= advanceCharacterFlag.getText();
         currentData.battleWithActorID= Integer.parseInt(battleWithActorID.getText());
+        currentData.activateMapObject= Integer.parseInt((activateObjectID.getText()));
         currentData.deleteMapObject= Integer.parseInt(deleteMapObject.getText());
         currentData.setColorIdentity= setColorIdentity.getText();
         currentData.addLife= (int) addLife.getModel().getValue();
@@ -141,8 +156,10 @@ public class ActionEdit extends FormPanel {
         issueQuest.setText(currentData.issueQuest);
         advanceMapFlag.setText(currentData.advanceMapFlag);
         advanceQuestFlag.setText(currentData.advanceQuestFlag);
+        advanceCharacterFlag.setText(currentData.advanceCharacterFlag);
 
         battleWithActorID.setText("" + currentData.battleWithActorID);
+        activateObjectID.setText("" + currentData.battleWithActorID);
         deleteMapObject.setText("" + currentData.deleteMapObject);
         setColorIdentity.setText(currentData.setColorIdentity);
         addLife.getModel().setValue(currentData.addLife);

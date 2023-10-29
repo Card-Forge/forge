@@ -4,7 +4,7 @@ Types:Legendary Creature Human Shaman
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a red spell, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ DBTransform | AILogic$ PingAfterAttack | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker. If CARDNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ DBTransform | AILogic$ PingAfterAttack | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker. If NICKNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | StackDescription$ If CARDNAME has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup | StackDescription$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -1,0 +1,23 @@
+[metadata]
+Name:Possibility Storm - Lord of the Rings #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/06/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your Fall of Gil-galad just got its second lore counter, and you are putting its second chapter ability on the stack. The Ring has tempted you once, but you currently don't have a Ring-Bearer. You and your opponent both have on-color basic lands in your deck. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+activephaseadvance=MAIN1
+p0life=5
+p0hand=Bushwhack|Set:BRO|Art:1;Grima Wormtongue|Set:LTR|Art:1;Claim the Precious|Set:LTR|Art:1;Storm the Seedcore|Set:MOM|Art:1;Thirsting Roots|Set:ONE|Art:1
+p0battlefield=Cankerbloom|Set:ONE|Art:3;Shelob, Child of Ungoliant|Set:LTR|Art:3;Fall of Gil-galad|Set:LTR|Art:1|Counters:LORE=1;Dunedain Rangers|Set:LTR|Art:1;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2
+p0library=Swamp;Swamp;Swamp;Swamp;Swamp;Forest;Forest;Forest;Forest;Forest
+p0numringtemptedyou=1
+p1life=21
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1numringtemptedyou=0
+p1battlefield=Smeagol, Helpful Guide|Set:LTR|Art:2;Eastfarthing Farmer|Set:LTR|Art:1;Braids's Frightful Return|Set:DMU|Art:1|Counters:LORE=1;Phyrexian Fleshgorger|Set:BRO|Art:2
+p1library=Swamp;Swamp;Swamp;Swamp;Swamp;Plains;Plains;Plains;Plains;Plains;Forest;Forest;Forest;Forest;Forest

@@ -11,23 +11,28 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.game.GameView;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
+import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
+import forge.util.ImageUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -46,6 +51,7 @@ public class CardZoom extends FOverlay {
     private static String currentActivateAction;
     private static Rectangle flipIconBounds;
     private static Rectangle mutateIconBounds;
+    private static FLabel specialize;
     private static boolean showAltState;
     private static boolean showBackSide = false;
     private static boolean showMerged = false;
@@ -90,6 +96,41 @@ public class CardZoom extends FOverlay {
     }
 
     private CardZoom() {
+        specialize = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblSpecialized")).font(FSkinFont.get(12)).selectable().command(e -> {
+            if (currentCard != null) {
+                final List<CardView> list = new ArrayList<>();
+                final PaperCard pc = ImageUtil.getPaperCardFromImageKey(currentCard.getCurrentState().getTrackableImageKey());
+                if (pc != null) {
+                    Card cardW = Card.fromPaperCard(pc, null);
+                    cardW.setState(CardStateName.SpecializeW, true);
+                    cardW.setImageKey(pc, CardStateName.SpecializeW);
+                    list.add(cardW.getView());
+
+                    Card cardU = Card.fromPaperCard(pc, null);
+                    cardU.setState(CardStateName.SpecializeU, true);
+                    cardU.setImageKey(pc, CardStateName.SpecializeU);
+                    list.add(cardU.getView());
+
+                    Card cardB = Card.fromPaperCard(pc, null);
+                    cardB.setState(CardStateName.SpecializeB, true);
+                    cardB.setImageKey(pc, CardStateName.SpecializeB);
+                    list.add(cardB.getView());
+
+                    Card cardR = Card.fromPaperCard(pc, null);
+                    cardR.setState(CardStateName.SpecializeR, true);
+                    cardR.setImageKey(pc, CardStateName.SpecializeR);
+                    list.add(cardR.getView());
+
+                    Card cardG = Card.fromPaperCard(pc, null);
+                    cardG.setState(CardStateName.SpecializeG, true);
+                    cardG.setImageKey(pc, CardStateName.SpecializeG);
+                    list.add(cardG.getView());
+                }
+                if (!list.isEmpty())
+                    show(list, 0, null);
+            }
+        }).buildAboveOverlay());
+        specialize.setVisible(false);
     }
 
     @Override
@@ -144,6 +185,10 @@ public class CardZoom extends FOverlay {
                     mutateIconBounds = new Rectangle();
         }
         showAltState = false;
+        if (currentCard != null && currentCard.canSpecialize() && currentCard.getCurrentState().getState() == CardStateName.Original)
+            specialize.setVisible(true);
+        else
+            specialize.setVisible(false);
     }
 
     private static CardView getCardView(Object item) {
@@ -362,6 +407,9 @@ public class CardZoom extends FOverlay {
         g.fillRect(FDialog.getMsgBackColor(), 0, h - messageHeight, w, messageHeight);
         g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
+        if (specialize.isVisible()) {
+            specialize.setBounds(w/2 - specialize.getAutoSizeBounds().width/2, h - specialize.getAutoSizeBounds().height - messageHeight, specialize.getAutoSizeBounds().width, specialize.getAutoSizeBounds().height);
+        }
         interrupt(false);
     }
 

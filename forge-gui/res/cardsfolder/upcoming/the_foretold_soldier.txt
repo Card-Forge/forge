@@ -1,0 +1,10 @@
+Name:The Foretold Soldier
+ManaCost:2 G G
+Types:Creature Alien Zombie Soldier
+PT:6/6
+K:Foretell:1 G
+K:CARDNAME must be blocked if able.
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals damage, exile it face down. It becomes foretold.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | ExileFaceDown$ True | Mandatory$ True | Foretold$ True
+Oracle:The Foretold Soldier must be blocked if able.\nThe Foretold Soldier can't be blocked by more than one creature.\nWhenever The Foretold Soldier deals damage, exile it face down. It becomes foretold.\nForetell {1}{G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

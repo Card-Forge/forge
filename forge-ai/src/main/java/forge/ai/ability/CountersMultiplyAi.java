@@ -20,6 +20,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -212,7 +213,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             sa.getTargets().add(c);
 
             // check if Spell with Strive is still playable
-            if (sa.isSpell() && sa.getHostCard().hasStartOfKeyword("Strive")) {
+            if (sa.isSpell() && sa.getHostCard().hasKeyword(Keyword.STRIVE)) {
                 // if not remove target again and break list
                 if (!ComputerUtilCost.canPayCost(sa, ai, false)) {
                     sa.getTargets().remove(c);

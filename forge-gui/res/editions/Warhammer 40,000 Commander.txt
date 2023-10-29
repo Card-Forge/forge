@@ -15,325 +15,165 @@ ScryfallCode=40K
 7 M Magus Lucea Kane @Bartek Fedyczak
 8 M Marneus Calgar @Slawomir Maniak
 9 U And They Shall Know No Fear @Games Workshop
-9★ U And They Shall Know No Fear @Games Workshop
 10 R Celestine, the Living Saint @Irina Nordsol
-10★ R Celestine, the Living Saint @Irina Nordsol
 11 R Defenders of Humanity @Games Workshop
-11★ R Defenders of Humanity @Games Workshop
 12 R For the Emperor! @Games Workshop
-12★ R For the Emperor! @Games Workshop
 13 U Grey Knight Paragon @Games Workshop
-13★ U Grey Knight Paragon @Games Workshop
 14 R Space Marine Devastator @Games Workshop
-14★ R Space Marine Devastator @Games Workshop
 15 U Space Marine Scout @Games Workshop
-15★ U Space Marine Scout @Games Workshop
 16 U Thunderwolf Cavalry @Oleg Shekhovtsov
-16★ U Thunderwolf Cavalry @Oleg Shekhovtsov
 17 R Triumph of Saint Katherine @David Astruga
-17★ R Triumph of Saint Katherine @David Astruga
 18 R Ultramarines Honour Guard @Games Workshop
-18★ R Ultramarines Honour Guard @Games Workshop
 19 R Vexilus Praetor @Zezhou Chen
-19★ R Vexilus Praetor @Zezhou Chen
 20 R Zephyrim @Anna Steinbauer
-20★ R Zephyrim @Anna Steinbauer
 21 U Genestealer Locus @Diego Gisbert
-21★ U Genestealer Locus @Diego Gisbert
 22 R Genestealer Patriarch @Games Workshop
-22★ R Genestealer Patriarch @Games Workshop
 23 U Heralds of Tzeentch @Games Workshop
-23★ U Heralds of Tzeentch @Games Workshop
 24 R Lord of Change @Games Workshop
-24★ R Lord of Change @Games Workshop
 25 U Sicarian Infiltrator @Games Workshop
-25★ U Sicarian Infiltrator @Games Workshop
 26 R Sister of Silence @Games Workshop
-26★ R Sister of Silence @Games Workshop
 27 R Vanguard Suppressor @Fajareka Setiawan
-27★ R Vanguard Suppressor @Fajareka Setiawan
 28 R Anrakyr the Traveller @L J Koh
-28★ R Anrakyr the Traveller @L J Koh
 29 R Arco-Flagellant @Games Workshop
-29★ R Arco-Flagellant @Games Workshop
 30 R Biotransference @Anthony Devine
-30★ R Biotransference @Anthony Devine
 31 R Blight Grenade @Alexey Kruglov
-31★ R Blight Grenade @Alexey Kruglov
 32 R Chronomancer @Alexey Kruglov
-32★ R Chronomancer @Alexey Kruglov
 33 R Cryptek @David Álvarez
-33★ R Cryptek @David Álvarez
 34 U Flayed One @David Sondered
-34★ U Flayed One @David Sondered
 35 R Great Unclean One @Helge C. Balzer
-35★ R Great Unclean One @Helge C. Balzer
 36 U Hexmark Destroyer @Wonchun Choi
-36★ U Hexmark Destroyer @Wonchun Choi
 37 R Illuminor Szeras @Darren Tan
-37★ R Illuminor Szeras @Darren Tan
 38 R Lokhust Heavy Destroyer @Adrián Rodríguez Pérez
-38★ R Lokhust Heavy Destroyer @Adrián Rodríguez Pérez
 39 R Lychguard @Games Workshop
-39★ R Lychguard @Games Workshop
 40 R Mandate of Abaddon @Games Workshop
-40★ R Mandate of Abaddon @Games Workshop
 41 R Mortarion, Daemon Primarch @Helge C. Balzer
-41★ R Mortarion, Daemon Primarch @Helge C. Balzer
 42 R Necron Deathmark @Games Workshop
-42★ R Necron Deathmark @Games Workshop
 43 R Necron Overlord @David Sondered
-43★ R Necron Overlord @David Sondered
 44 R Nurgle's Conscription @Ørjan Ruttenborg Svendsen
-44★ R Nurgle's Conscription @Ørjan Ruttenborg Svendsen
 45 U Nurgle's Rot @Roman Tishenin
-45★ U Nurgle's Rot @Roman Tishenin
 46 R Out of the Tombs @Games Workshop
-46★ R Out of the Tombs @Games Workshop
 47 R Plague Drone @Games Workshop
-47★ R Plague Drone @Games Workshop
 48 U Plasmancer @Bartek Fedyczak
-48★ U Plasmancer @Bartek Fedyczak
 49 R Poxwalkers @Games Workshop
-49★ R Poxwalkers @Games Workshop
 50 R Primaris Eliminator @Logan Feliciano
-50★ R Primaris Eliminator @Logan Feliciano
 51 U Psychomancer @Alex Konstad
-51★ U Psychomancer @Alex Konstad
 52 R Royal Warden @Artur Nakhodkin
-52★ R Royal Warden @Artur Nakhodkin
 53 U Sanguinary Priest @Games Workshop
-53★ U Sanguinary Priest @Games Workshop
 54 U Sautekh Immortal @Games Workshop
-54★ U Sautekh Immortal @Games Workshop
 55 R Shard of the Nightbringer @Pierre Loyvet
-55★ R Shard of the Nightbringer @Pierre Loyvet
 56 R Shard of the Void Dragon @Alex Konstad
-56★ R Shard of the Void Dragon @Alex Konstad
 57 U Skorpekh Destroyer @Games Workshop
-57★ U Skorpekh Destroyer @Games Workshop
 58 R Skorpekh Lord @Adrián Rodríguez Pérez
-58★ R Skorpekh Lord @Adrián Rodríguez Pérez
 59 R Sloppity Bilepiper @Ørjan Ruttenborg Svendsen
-59★ R Sloppity Bilepiper @Ørjan Ruttenborg Svendsen
 60 R Tallyman of Nurgle @Games Workshop
-60★ R Tallyman of Nurgle @Games Workshop
 61 R Technomancer @David Álvarez
-61★ R Technomancer @David Álvarez
 62 R Their Name Is Death @Evan Shipard
-62★ R Their Name Is Death @Evan Shipard
 63 R Their Number Is Legion @Games Workshop
-63★ R Their Number Is Legion @Games Workshop
 64 R Tomb Blade @Darren Tan
-64★ R Tomb Blade @Darren Tan
 65 R Trazyn the Infinite @Michał Miłkowski
-65★ R Trazyn the Infinite @Michał Miłkowski
 66 U Triarch Praetorian @Lucas Terryn
-66★ U Triarch Praetorian @Lucas Terryn
 67 R Triarch Stalker @JB Casacop
-67★ R Triarch Stalker @JB Casacop
 68 R Venomcrawler @Ivan Dedov
-68★ R Venomcrawler @Ivan Dedov
 69 R The War in Heaven @Darren Tan
-69★ R The War in Heaven @Darren Tan
 70 U Acolyte Hybrid @Slawomir Maniak
-70★ U Acolyte Hybrid @Slawomir Maniak
 71 R Aspiring Champion @Miguel Sacristan
-71★ R Aspiring Champion @Miguel Sacristan
 72 U Bloodcrusher of Khorne @Games Workshop
-72★ U Bloodcrusher of Khorne @Games Workshop
 73 R Bloodthirster @Games Workshop
-73★ R Bloodthirster @Games Workshop
 74 U Chaos Terminator Lord @Games Workshop
-74★ U Chaos Terminator Lord @Games Workshop
 75 R Dark Apostle @Games Workshop
-75★ R Dark Apostle @Games Workshop
 76 R Exocrine @Cory Trego-Erdner
-76★ R Exocrine @Cory Trego-Erdner
 77 U Herald of Slaanesh @Alexander Mokhov
-77★ U Herald of Slaanesh @Alexander Mokhov
 78 R Keeper of Secrets @Miguel Sacristan
-78★ R Keeper of Secrets @Miguel Sacristan
 79 R Kharn the Betrayer @Kekai Kotaki
-79★ R Kharn the Betrayer @Kekai Kotaki
 80 R Knight Rampager @Games Workshop
-80★ R Knight Rampager @Games Workshop
 81 R Let the Galaxy Burn @Evan Shipard
-81★ R Let the Galaxy Burn @Evan Shipard
 82 U Noise Marine @Johan Grenier
-82★ U Noise Marine @Johan Grenier
 83 R The Red Terror @Bryan Sola
-83★ R The Red Terror @Bryan Sola
 84 R Screamer-Killer @David Auden Nash
-84★ R Screamer-Killer @David Auden Nash
 85 U Seeker of Slaanesh @Games Workshop
-85★ U Seeker of Slaanesh @Games Workshop
 86 U Aberrant @Games Workshop
-86★ U Aberrant @Games Workshop
 87 R Biophagus @Teodora Dumitriu
-87★ R Biophagus @Teodora Dumitriu
 88 R Bone Sabres @David Auden Nash
-88★ R Bone Sabres @David Auden Nash
 89 R Broodlord @Mathias Kollros
-89★ R Broodlord @Mathias Kollros
 90 R Clamavus @Adrián Rodríguez Pérez
-90★ R Clamavus @Adrián Rodríguez Pérez
 91 R Haruspex @Helge C. Balzer
-91★ R Haruspex @Helge C. Balzer
 92 R Hierophant Bio-Titan @David Astruga
-92★ R Hierophant Bio-Titan @David Astruga
 93 R Hormagaunt Horde @Nikola Matkovic
-93★ R Hormagaunt Horde @Nikola Matkovic
 94 R Lictor @Games Workshop
-94★ R Lictor @Games Workshop
 95 R Nexos @Josu Hernaiz
-95★ R Nexos @Josu Hernaiz
 96 R Old One Eye @Mathias Kollros
-96★ R Old One Eye @Mathias Kollros
 97 U Purestrain Genestealer @Games Workshop
-97★ U Purestrain Genestealer @Games Workshop
 98 R Sporocyst @Fajareka Setiawan
-98★ R Sporocyst @Fajareka Setiawan
 99 R Termagant Swarm @Nikola Matkovic
-99★ R Termagant Swarm @Nikola Matkovic
 100 R Tervigon @Xavier Ribeiro
-100★ R Tervigon @Xavier Ribeiro
 101 R Toxicrene @Logan Feliciano
-101★ R Toxicrene @Logan Feliciano
 102 U Tyranid Invasion @Games Workshop
-102★ U Tyranid Invasion @Games Workshop
 103 R Tyrant Guard @Xavier Ribeiro
-103★ R Tyrant Guard @Xavier Ribeiro
 104 R Assault Intercessor @Steve Argyle
-104★ R Assault Intercessor @Steve Argyle
 105 R Atalan Jackal @David Astruga
-105★ R Atalan Jackal @David Astruga
 106 R Belisarius Cawl @Lie Setiawan
-106★ R Belisarius Cawl @Lie Setiawan
 107 R Birth of the Imperium @Zezhou Chen
-107★ R Birth of the Imperium @Zezhou Chen
 108 R Blood for the Blood God! @Artur Nakhodkin
-108★ R Blood for the Blood God! @Artur Nakhodkin
 109 R Callidus Assassin @Bryan Sola
-109★ R Callidus Assassin @Bryan Sola
 110 R Chaos Defiler @Games Workshop
-110★ R Chaos Defiler @Games Workshop
 111 R Chaos Mutation @Lie Setiawan
-111★ R Chaos Mutation @Lie Setiawan
 112 R Commissar Severina Raine @Jake Murray
-112★ R Commissar Severina Raine @Jake Murray
 113 R Company Commander @Ørjan Ruttenborg Svendsen
-113★ R Company Commander @Ørjan Ruttenborg Svendsen
 114 R Cybernetica Datasmith @Marina Ortega Lorente
-114★ R Cybernetica Datasmith @Marina Ortega Lorente
 115 R Deathleaper, Terror Weapon @Mirko Failoni
-115★ R Deathleaper, Terror Weapon @Mirko Failoni
 116 U Deny the Witch @Games Workshop
-116★ U Deny the Witch @Games Workshop
 117 R Drach'Nyen @Artur Nakhodkin
-117★ R Drach'Nyen @Artur Nakhodkin
 118 R Epistolary Librarian @Games Workshop
-118★ R Epistolary Librarian @Games Workshop
 119 R Exalted Flamer of Tzeentch @Alexey Kruglov
-119★ R Exalted Flamer of Tzeentch @Alexey Kruglov
 120 R Exterminatus @Games Workshop
-120★ R Exterminatus @Games Workshop
 121 R The First Tyrannic War @Antonio José Manzanedo
-121★ R The First Tyrannic War @Antonio José Manzanedo
 122 R The Flesh Is Weak @Games Workshop
-122★ R The Flesh Is Weak @Games Workshop
 123 R Gargoyle Flock @Nikola Matkovic
-123★ R Gargoyle Flock @Nikola Matkovic
 124 R Ghyrson Starn, Kelermorph @Aaron J. Riley
-124★ R Ghyrson Starn, Kelermorph @Aaron J. Riley
 125 R Helbrute @Anton Solovianchyk
-125★ R Helbrute @Anton Solovianchyk
 126 R The Horus Heresy @Roman Tishenin
-126★ R The Horus Heresy @Roman Tishenin
 127 R Inquisitor Eisenhorn @Jake Murray
-127★ R Inquisitor Eisenhorn @Jake Murray
 128 R Kill! Maim! Burn! @Anthony Devine
-128★ R Kill! Maim! Burn! @Anthony Devine
 129 U The Lost and the Damned @Henry Peters
-129★ U The Lost and the Damned @Henry Peters
 130 R Lucius the Eternal @Evan Shipard
-130★ R Lucius the Eternal @Evan Shipard
 131 R Magnus the Red @Wonchun Choi
-131★ R Magnus the Red @Wonchun Choi
 132 R Malanthrope @Ørjan Ruttenborg Svendsen
-132★ R Malanthrope @Ørjan Ruttenborg Svendsen
 133 R Mawloc @Mathias Kollros
-133★ R Mawloc @Mathias Kollros
 134 R Mutalith Vortex Beast @Kekai Kotaki
-134★ R Mutalith Vortex Beast @Kekai Kotaki
 135 R Neyam Shai Murad @Fajareka Setiawan
-135★ R Neyam Shai Murad @Fajareka Setiawan
 136 R Pink Horror @Games Workshop
-136★ R Pink Horror @Games Workshop
 137 U Primaris Chaplain @Diego Gisbert
-137★ U Primaris Chaplain @Diego Gisbert
 138 R Ravener @Xavier Ribeiro
-138★ R Ravener @Xavier Ribeiro
 139 R The Ruinous Powers @Lie Setiawan
-139★ R The Ruinous Powers @Lie Setiawan
 140 R Shadow in the Warp @Kim Sokol
-140★ R Shadow in the Warp @Kim Sokol
 141 R Sister Hospitaller @Games Workshop
-141★ R Sister Hospitaller @Games Workshop
 142 R Sister Repentia @Seseon Yoon
-142★ R Sister Repentia @Seseon Yoon
 143 U Trygon Prime @Mathias Kollros
-143★ U Trygon Prime @Mathias Kollros
 144 R Tyranid Harridan @Billy Christian
-144★ R Tyranid Harridan @Billy Christian
 145 R Tyranid Prime @Mathias Kollros
-145★ R Tyranid Prime @Mathias Kollros
 146 R Tzaangor Shaman @Wisnu Tan
-146★ R Tzaangor Shaman @Wisnu Tan
 147 U Venomthrope @Antonio José Manzanedo
-147★ U Venomthrope @Antonio José Manzanedo
 148 R Winged Hive Tyrant @Antonio José Manzanedo
-148★ R Winged Hive Tyrant @Antonio José Manzanedo
 149 R Zoanthrope @Billy Christian
-149★ R Zoanthrope @Billy Christian
 150 R Canoptek Scarab Swarm @Alexey Kruglov
-150★ R Canoptek Scarab Swarm @Alexey Kruglov
 151 R Canoptek Spyder @Wisnu Tan
-151★ R Canoptek Spyder @Wisnu Tan
 152 R Canoptek Tomb Sentinel @Ivan Dedov
-152★ R Canoptek Tomb Sentinel @Ivan Dedov
 153 R Canoptek Wraith @Hector Ortiz
-153★ R Canoptek Wraith @Hector Ortiz
 154 R Convergence of Dominion @David Álvarez
-154★ R Convergence of Dominion @David Álvarez
 155 R Cryptothrall @Henry Peters
-155★ R Cryptothrall @Henry Peters
 156 R Ghost Ark @Alexey Kruglov
-156★ R Ghost Ark @Alexey Kruglov
 157 R The Golden Throne @Games Workshop
-157★ R The Golden Throne @Games Workshop
 158 U Goliath Truck @Diego Gisbert
-158★ U Goliath Truck @Diego Gisbert
 159 R Inquisitorial Rosette @Álvaro Calvo Escudero
-159★ R Inquisitorial Rosette @Álvaro Calvo Escudero
 160 R Knight Paladin @Games Workshop
-160★ R Knight Paladin @Games Workshop
 161 R Necron Monolith @Anthony Devine
-161★ R Necron Monolith @Anthony Devine
 162 U Night Scythe @Calder Moore
-162★ U Night Scythe @Calder Moore
 163 R Reaver Titan @Philip Helliwell
-163★ R Reaver Titan @Philip Helliwell
 164 R Redemptor Dreadnought @Philip Helliwell
-164★ R Redemptor Dreadnought @Philip Helliwell
 165 R Resurrection Orb @Hector Ortiz
-165★ R Resurrection Orb @Hector Ortiz
 166 R Sceptre of Eternal Glory @Michał Miłkowski
-166★ R Sceptre of Eternal Glory @Michał Miłkowski
 167 R Thunderhawk Gunship @Games Workshop
-167★ R Thunderhawk Gunship @Games Workshop
 168 R Tomb Fortress @Josu Solano
-168★ R Tomb Fortress @Josu Solano
 169 M Imotekh the Stormlord @JB Casacop
 170 M Szarekh, the Silent King @Anton Solovianchyk
 171 M Abaddon the Despoiler @Johan Grenier
@@ -348,277 +188,141 @@ ScryfallCode=40K
 180 M The Swarmlord @Antonio José Manzanedo
 181 R Fabricate @Johan Grenier
 182 R Bastion Protector @Steve Argyle
-182★ R Bastion Protector @Steve Argyle
 183 R Collective Effort @Games Workshop
-183★ R Collective Effort @Games Workshop
 184 R Deploy to the Front @Aaron J. Riley
-184★ R Deploy to the Front @Aaron J. Riley
 185 R Entrapment Maneuver @Nikola Matkovic
-185★ R Entrapment Maneuver @Nikola Matkovic
 186 R Fell the Mighty @Steve Argyle
-186★ R Fell the Mighty @Steve Argyle
 187 R Hour of Reckoning @Games Workshop
-187★ R Hour of Reckoning @Games Workshop
 188 R Launch the Fleet @Games Workshop
-188★ R Launch the Fleet @Games Workshop
 189 R Martial Coup @Diego Gisbert
-189★ R Martial Coup @Diego Gisbert
 190 U Swords to Plowshares @Diego Gisbert
-190★ U Swords to Plowshares @Diego Gisbert
 191 U Aetherize @Xavier Ribeiro
-191★ U Aetherize @Xavier Ribeiro
 192 C Brainstorm @Alex Konstad
-192★ C Brainstorm @Alex Konstad
 193 U Reconnaissance Mission @Billy Christian
-193★ U Reconnaissance Mission @Billy Christian
 194 R Beacon of Unrest @Rafater
-194★ R Beacon of Unrest @Rafater
 195 U Bile Blight @Games Workshop
-195★ U Bile Blight @Games Workshop
 196 C Dark Ritual @Wonchun Choi
-196★ C Dark Ritual @Wonchun Choi
 197 C Darkness @Daarken
-197★ C Darkness @Daarken
 198 R Decree of Pain @Evan Shipard
-198★ R Decree of Pain @Evan Shipard
 199 U Defile @Stanton Feng
-199★ U Defile @Stanton Feng
 200 U Dread Return @L J Koh
-200★ U Dread Return @L J Koh
 201 C Go for the Throat @Nikola Matkovic
-201★ C Go for the Throat @Nikola Matkovic
 202 R Living Death @L J Koh
-202★ R Living Death @L J Koh
 203 R Mutilate @Games Workshop
-203★ R Mutilate @Games Workshop
 204 R Blasphemous Act @Games Workshop
-204★ R Blasphemous Act @Games Workshop
 205 R Chaos Warp @Heonhwa Choe
-205★ R Chaos Warp @Heonhwa Choe
 206 M Past in Flames @Johannes Mücke
-206★ M Past in Flames @Johannes Mücke
 207 R Reverberate @David Astruga
-207★ R Reverberate @David Astruga
 208 R Starstorm @Zhillustrator
-208★ R Starstorm @Zhillustrator
 209 R Warstorm Surge @Josu Solano
-209★ R Warstorm Surge @Josu Solano
 210 R Abundance @Irina Nordsol
-210★ R Abundance @Irina Nordsol
 211 C Cultivate @Slawomir Maniak
-211★ C Cultivate @Slawomir Maniak
 212 R Death's Presence @Josu Hernaiz
-212★ R Death's Presence @Josu Hernaiz
 213 C Explore @Games Workshop
-213★ C Explore @Games Workshop
 214 C Farseek @Irina Nordsol
-214★ C Farseek @Irina Nordsol
 215 R Hardened Scales @Mathias Kollros
-215★ R Hardened Scales @Mathias Kollros
 216 C Harrow @Filipe Pagliuso
-216★ C Harrow @Filipe Pagliuso
 217 U Inspiring Call @Irina Nordsol
-217★ U Inspiring Call @Irina Nordsol
 218 C New Horizons @Zhillustrator
-218★ C New Horizons @Zhillustrator
 219 C Overgrowth @Marina Ortega Lorente
-219★ C Overgrowth @Marina Ortega Lorente
 220 C Rampant Growth @Cory Trego-Erdner
-220★ C Rampant Growth @Cory Trego-Erdner
 221 U Bituminous Blast @JB Casacop
-221★ U Bituminous Blast @JB Casacop
 222 U Bred for the Hunt @David Astruga
-222★ U Bred for the Hunt @David Astruga
 223 C Deny Reality @Artur Nakhodkin
-223★ C Deny Reality @Artur Nakhodkin
 224 U Hull Breach @Sergio Cosmai
-224★ U Hull Breach @Sergio Cosmai
 225 U Mortify @Billy Christian
-225★ U Mortify @Billy Christian
 226 R Utter End @David Astruga
-226★ R Utter End @David Astruga
 227 C Arcane Signet @David Astruga
-227★ C Arcane Signet @David Astruga
 228 C Arcane Signet @Andrey Nyarl
-228★ C Arcane Signet @Andrey Nyarl
 229 C Arcane Signet @Kim Sokol
-229★ C Arcane Signet @Kim Sokol
 230 U Assault Suit @Games Workshop
-230★ U Assault Suit @Games Workshop
 231 R Caged Sun @Johan Grenier
-231★ R Caged Sun @Johan Grenier
 232 R Chromatic Lantern @Anton Solovianchyk
-232★ R Chromatic Lantern @Anton Solovianchyk
 233 C Commander's Sphere @Jake Murray
-233★ C Commander's Sphere @Jake Murray
 234 C Commander's Sphere @David Sondered
-234★ C Commander's Sphere @David Sondered
 235 C Commander's Sphere @Roman Tishenin
-235★ C Commander's Sphere @Roman Tishenin
 236 U Cranial Plating @L J Koh
-236★ U Cranial Plating @L J Koh
 237 R Endless Atlas @Pierre Loyvet
-237★ R Endless Atlas @Pierre Loyvet
 238 R Everflowing Chalice @Álvaro Calvo Escudero
-238★ R Everflowing Chalice @Álvaro Calvo Escudero
 239 R Gilded Lotus @Roman Tishenin
-239★ R Gilded Lotus @Roman Tishenin
 240 U Hedron Archive @Hector Ortiz
-240★ U Hedron Archive @Hector Ortiz
 241 U Herald's Horn @Artur Nakhodkin
-241★ U Herald's Horn @Artur Nakhodkin
 242 R Icon of Ancestry @Ivan Dedov
-242★ R Icon of Ancestry @Ivan Dedov
 243 U Mask of Memory @Roman Tishenin
-243★ U Mask of Memory @Roman Tishenin
 244 U Mind Stone @Steve Argyle
-244★ U Mind Stone @Steve Argyle
 245 U Mind Stone @David Sondered
-245★ U Mind Stone @David Sondered
 246 R Mystic Forge @Rafater
-246★ R Mystic Forge @Rafater
 247 R Sculpting Steel @Pierre Loyvet
-247★ R Sculpting Steel @Pierre Loyvet
 248 U Skullclamp @Helge C. Balzer
-248★ U Skullclamp @Helge C. Balzer
 249 U Sol Ring @Teodora Dumitriu
-249★ U Sol Ring @Teodora Dumitriu
 250 U Sol Ring @Kekai Kotaki
-250★ U Sol Ring @Kekai Kotaki
 251 U Sol Ring @Oleg Shekhovtsov
-251★ U Sol Ring @Oleg Shekhovtsov
 252 U Sol Ring @Lucas Terryn
-252★ U Sol Ring @Lucas Terryn
 253 U Talisman of Creativity @Hector Ortiz
-253★ U Talisman of Creativity @Hector Ortiz
 254 U Talisman of Dominance @Philip Helliwell
-254★ U Talisman of Dominance @Philip Helliwell
 255 U Talisman of Dominance @Miguel Sacristan
-255★ U Talisman of Dominance @Miguel Sacristan
 256 U Talisman of Hierarchy @Philip Helliwell
-256★ U Talisman of Hierarchy @Philip Helliwell
 257 U Talisman of Indulgence @Nikola Matkovic
-257★ U Talisman of Indulgence @Nikola Matkovic
 258 U Talisman of Progress @Philip Helliwell
-258★ U Talisman of Progress @Philip Helliwell
 259 C Thought Vessel @L J Koh
-259★ C Thought Vessel @L J Koh
 260 C Unstable Obelisk @Johannes Mücke
-260★ C Unstable Obelisk @Johannes Mücke
 261 C Wayfarer's Bauble @Helge C. Balzer
-261★ C Wayfarer's Bauble @Helge C. Balzer
 262 C Wayfarer's Bauble @Ivan Dedov
-262★ C Wayfarer's Bauble @Ivan Dedov
 263 U Worn Powerstone @David Sondered
-263★ U Worn Powerstone @David Sondered
 264 U Arcane Sanctum @Games Workshop
-264★ U Arcane Sanctum @Games Workshop
 265 U Ash Barrens @Sergei Leoluch Panin
-265★ U Ash Barrens @Sergei Leoluch Panin
 266 U Barren Moor @Rafater
-266★ U Barren Moor @Rafater
 267 C Cave of Temptation @Teodora Dumitriu
-267★ C Cave of Temptation @Teodora Dumitriu
 268 R Choked Estuary @LiXin Yin
-268★ R Choked Estuary @LiXin Yin
 269 R Cinder Glade @Sergio Cosmai
-269★ R Cinder Glade @Sergio Cosmai
 270 C Command Tower @Logan Feliciano
-270★ C Command Tower @Logan Feliciano
 271 C Command Tower @Games Workshop
-271★ C Command Tower @Games Workshop
 272 C Command Tower @Games Workshop
-272★ C Command Tower @Games Workshop
 273 U Crumbling Necropolis @David Álvarez
-273★ U Crumbling Necropolis @David Álvarez
 274 R Darkwater Catacombs @Eliz Roxs
-274★ R Darkwater Catacombs @Eliz Roxs
 275 C Desert of the Glorified @Stanton Feng
-275★ C Desert of the Glorified @Stanton Feng
 276 C Dismal Backwater @Henry Peters
-276★ C Dismal Backwater @Henry Peters
 277 C Evolving Wilds @Rafater
-277★ C Evolving Wilds @Rafater
 278 R Exotic Orchard @Filipe Pagliuso
-278★ R Exotic Orchard @Filipe Pagliuso
 279 R Foreboding Ruins @Josu Solano
-279★ R Foreboding Ruins @Josu Solano
 280 C Forgotten Cave @Andrey Nyarl
-280★ C Forgotten Cave @Andrey Nyarl
 281 U Frontier Bivouac @Álvaro Calvo Escudero
-281★ U Frontier Bivouac @Álvaro Calvo Escudero
 282 R Game Trail @LiXin Yin
-282★ R Game Trail @LiXin Yin
 283 U Memorial to Glory @Games Workshop
-283★ U Memorial to Glory @Games Workshop
 284 U Molten Slagheap @Anthony Devine
-284★ U Molten Slagheap @Anthony Devine
 285 U Myriad Landscape @Adrián Rodríguez Pérez
-285★ U Myriad Landscape @Adrián Rodríguez Pérez
 286 C Opal Palace @Logan Feliciano
-286★ C Opal Palace @Logan Feliciano
 287 C Path of Ancestry @Anthony Devine
-287★ C Path of Ancestry @Anthony Devine
 288 C Polluted Mire @Pierre Loyvet
-288★ C Polluted Mire @Pierre Loyvet
 289 R Port Town @Eliz Roxs
-289★ R Port Town @Eliz Roxs
 290 R Prairie Stream @Henry Peters
-290★ R Prairie Stream @Henry Peters
 291 U Reliquary Tower @Lucas Terryn
-291★ U Reliquary Tower @Lucas Terryn
 292 C Rugged Highlands @Oleg Shekhovtsov
-292★ C Rugged Highlands @Oleg Shekhovtsov
 293 C Scoured Barrens @Teodora Dumitriu
-293★ C Scoured Barrens @Teodora Dumitriu
 294 R Skycloud Expanse @Kamila Szutenberg
-294★ R Skycloud Expanse @Kamila Szutenberg
 295 R Sunken Hollow @Calder Moore
-295★ R Sunken Hollow @Calder Moore
 296 C Swiftwater Cliffs @David Álvarez
-296★ C Swiftwater Cliffs @David Álvarez
 297 R Temple of Abandon @Logan Feliciano
-297★ R Temple of Abandon @Logan Feliciano
 298 R Temple of Epiphany @Álvaro Calvo Escudero
-298★ R Temple of Epiphany @Álvaro Calvo Escudero
 299 R Temple of Mystery @Eliz Roxs
-299★ R Temple of Mystery @Eliz Roxs
 300 U Temple of the False God @Josu Hernaiz
-300★ U Temple of the False God @Josu Hernaiz
 301 C Terramorphic Expanse @Kekai Kotaki
-301★ C Terramorphic Expanse @Kekai Kotaki
 302 C Thornwood Falls @Josu Hernaiz
-302★ C Thornwood Falls @Josu Hernaiz
 303 C Tranquil Cove @Eliz Roxs
-303★ C Tranquil Cove @Eliz Roxs
 304 U Unclaimed Territory @Henry Peters
-304★ U Unclaimed Territory @Henry Peters
 305 C Vault of Whispers @Games Workshop
-305★ C Vault of Whispers @Games Workshop
 306 L Plains @Zhillustrator
-306★ L Plains @Zhillustrator
 307 L Island @Marina Ortega Lorente
-307★ L Island @Marina Ortega Lorente
 308 L Island @Calder Moore
-308★ L Island @Calder Moore
 309 L Island @LiXin Yin
-309★ L Island @LiXin Yin
 310 L Swamp @JB Casacop
-310★ L Swamp @JB Casacop
 311 L Swamp @Johan Grenier
-311★ L Swamp @Johan Grenier
 312 L Swamp @Calder Moore
-312★ L Swamp @Calder Moore
 313 L Swamp @Andrey Nyarl
-313★ L Swamp @Andrey Nyarl
 314 L Swamp @Kamila Szutenberg
-314★ L Swamp @Kamila Szutenberg
 315 L Mountain @Diego Gisbert
-315★ L Mountain @Diego Gisbert
 316 L Mountain @Evan Shipard
-316★ L Mountain @Evan Shipard
 317 L Forest @Kamila Szutenberg
-317★ L Forest @Kamila Szutenberg
 318 M Szarekh, the Silent King @Anton Solovianchyk
 319 M Abaddon the Despoiler @Johan Grenier
 320 M Inquisitor Greyfax @Lie Setiawan

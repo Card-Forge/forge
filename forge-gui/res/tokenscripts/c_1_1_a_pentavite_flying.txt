@@ -1,6 +1,6 @@
 Name:Pentavite Token
 ManaCost:no cost
-Types:Token Artifact Creature Pentavite
+Types:Artifact Creature Pentavite
 PT:1/1
 K:Flying
 Oracle:Flying

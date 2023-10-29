@@ -137,6 +137,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         // Protection
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE)) {
             value += addValue(70, "darksteel");
+        } else {
+            value += addValue(20 * c.getCounters(CounterEnumType.SHIELD), "shielded");
         }
         if (c.hasKeyword("Prevent all damage that would be dealt to CARDNAME.")) {
             value += addValue(60, "cho-manno");
@@ -183,6 +185,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
         } else if (c.hasKeyword("CARDNAME can't block.")) {
             value -= subValue(10, "cant-block");
+        } else if (c.isGoaded()) {
+            value -= subValue(5, "goaded");
         } else {
             List<GameEntity> mAEnt = StaticAbilityMustAttack.entitiesMustAttack(c);
             if (mAEnt.contains(c)) {
@@ -215,10 +219,12 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             } else {
                 value -= subValue(50, "doesnt-untap");
             }
+        } else {
+            value -= subValue(10 * c.getCounters(CounterEnumType.STUN), "stunned");
         }
         if (c.hasSVar("EndOfTurnLeavePlay")) {
             value -= subValue(50, "eot-leaves");
-        } else if (c.hasStartOfKeyword("Cumulative upkeep")) {
+        } else if (c.hasKeyword(Keyword.CUMULATIVE_UPKEEP)) {
             value -= subValue(30, "cupkeep");
         } else if (c.hasStartOfKeyword("UpkeepCost")) {
             value -= subValue(20, "sac-unless");
@@ -226,10 +232,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(10, "echo-unpaid");
         }
         if (c.hasKeyword(Keyword.FADING)) {
-            value -= subValue(20, "fading");
+            value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.FADE))), "fading");
         }
         if (c.hasKeyword(Keyword.VANISHING)) {
-            value -= subValue(20, "vanishing");
+            value -= subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
         }
         // use scaling because the creature is only available halfway
         if (c.hasKeyword(Keyword.PHASING)) {
@@ -243,8 +249,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         // card-specific evaluation modifier
         if (c.hasSVar("AIEvaluationModifier")) {
-            int mod = AbilityUtils.calculateAmount(c, c.getSVar("AIEvaluationModifier"), null);
-            value += mod;
+            value += AbilityUtils.calculateAmount(c, c.getSVar("AIEvaluationModifier"), null);
         }
 
         return value;

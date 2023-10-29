@@ -10,4 +10,5 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbil
 SVar:DBPhases:DB$ Phases | ValidTgts$ Creature.Other,Artifact.Other,Enchantment.Other | TgtPrompt$ Select up to that many other target artifacts, creatures, and/or enchantments | TargetMin$ 0 | TargetMax$ X
 SVar:X:Count$TriggerRememberAmount
 DeckHas:Ability$Counters
+AI:RemoveDeck:All
 Oracle:Flash\nFlying\nWhen Spectral Adversary enters the battlefield, you may pay {1}{U} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Spectral Adversary, then up to that many other target artifacts, creatures, and/or enchantments phase out.

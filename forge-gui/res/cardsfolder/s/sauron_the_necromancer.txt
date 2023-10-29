@@ -1,0 +1,15 @@
+Name:Sauron, the Necromancer
+ManaCost:3 B B
+Types:Legendary Creature Avatar Horror
+PT:4/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile target creature card from your graveyard. Create a tapped and attacking token that's a copy of that card, except it's a 3/3 black Wraith with menace. At the beginning of the next end step, exile that token unless NICKNAME is your Ring-bearer.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target creature card in your graveyard | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | TokenTapped$ True | TokenAttacking$ True | SetPower$ 3 | SetToughness$ 3 | SetColor$ Black | AtEOT$ Exile | AtEOTCondition$ Y | SetCreatureTypes$ Wraith | AddKeywords$ Menace | AtEOTDesc$ At the beginning of the next end step, exile that token unless Sauron is your Ring-bearer. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$Compare X EQ0.1.0
+SVar:X:Count$Valid Card.Self+IsRingbearer
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard|Token & Type$Wraith
+DeckHints:Ability$Mill|Discard
+Oracle:Menace\nWhenever Sauron, the Necromancer attacks, exile target creature card from your graveyard. Create a tapped and attacking token that's a copy of that card, except it's a 3/3 black Wraith with menace. At the beginning of the next end step, exile that token unless Sauron is your Ring-bearer.

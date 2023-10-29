@@ -36,19 +36,9 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Game game = ai.getGame();
 
         if ("Never".equals(aiLogic)) {
             return false;
-        } else if ("ZeroToughness".equals(aiLogic)) {
-            // If Creature has Zero Toughness, make sure some static ability is in play
-            // That will grant a toughness bonus
-
-            final Card copy = CardUtil.getLKICopy(sa.getHostCard());
-
-            ComputerUtilCard.applyStaticContPT(game, copy, null);
-
-            return copy.getNetToughness() > 0;
         }
         return true;
     }
@@ -77,6 +67,11 @@ public class PermanentCreatureAi extends PermanentAi {
             } else {
                 return false;
             }
+        }
+
+        // Blitz Keyword: avoid casting in Main2
+        if (sa.isBlitz() && ph.getPhase().isAfter(PhaseType.MAIN1)) {
+            return false;
         }
 
         // Prevent the computer from summoning Ball Lightning type creatures
@@ -230,11 +225,19 @@ public class PermanentCreatureAi extends PermanentAi {
          * worth it. Not sure what 4. is for. 5. needs to be updated to ensure
          * that the net toughness is still positive after static effects.
          */
+        // AiPlayDecision.WouldBecomeZeroToughnessCreature
+        if (card.hasStartOfKeyword("etbCounter") || mana.countX() != 0
+                || card.hasETBTrigger(false) || card.hasETBReplacement() || card.hasSVar("NoZeroToughnessAI")) {
+                return true;
+        }
+
         final Card copy = CardUtil.getLKICopy(card);
         ComputerUtilCard.applyStaticContPT(game, copy, null);
-        // AiPlayDecision.WouldBecomeZeroToughnessCreature
-        return copy.getNetToughness() > 0 || copy.hasStartOfKeyword("etbCounter") || mana.countX() != 0
-                || copy.hasETBTrigger(false) || copy.hasETBReplacement() || copy.hasSVar("NoZeroToughnessAI");
+        if (copy.getNetToughness() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
 }

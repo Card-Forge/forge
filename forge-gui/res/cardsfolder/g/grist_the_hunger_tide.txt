@@ -10,7 +10,7 @@ SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAb
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Insect | ConditionCompare$ EQ1
 SVar:MilledInsect:Remembered$Valid Card.Insect
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ ImmediateTrigger | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Execute$ TrigDestroy | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may sacrifice a creature. When you do, destroy target creature or planeswalker.
+A:AB$ ImmediateTrigger | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Execute$ TrigDestroy | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | AILogic$ WeakerCreature | SpellDescription$ You may sacrifice a creature. When you do, destroy target creature or planeswalker.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker
 A:AB$ LoseLife | Cost$ SubCounter<5/LOYALTY> | LifeAmount$ X | Defined$ Player.Opponent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Each opponent loses life equal to the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature

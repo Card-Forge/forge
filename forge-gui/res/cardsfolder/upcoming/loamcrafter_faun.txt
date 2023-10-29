@@ -1,0 +1,13 @@
+Name:Loamcrafter Faun
+ManaCost:2 G
+Types:Creature Satyr Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard one or more land cards. When you do, return up to that many target nonland permanent cards from your graveyard to your hand.
+SVar:TrigDiscard:DB$ Discard | DiscardValid$ Land | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberObjects$ Remembered | Execute$ TrigReturn | SubAbility$ DBCleanup | TriggerDescription$ When you do, return up to that many target nonland permanent cards from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | TgtPrompt$ Select up to that many target nonland permanents from your graveyard | TargetMin$ 0 | TargetMax$ X | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.nonLand+YouCtrl 
+SVar:X:TriggerRemembered$Amount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Ability$Mill
+Oracle:When Loamcrafter Faun enters the battlefield, you may discard one or more land cards. When you do, return up to that many target nonland permanent cards from your graveyard to your hand.

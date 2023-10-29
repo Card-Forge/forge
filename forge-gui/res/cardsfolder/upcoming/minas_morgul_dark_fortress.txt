@@ -1,0 +1,10 @@
+Name:Minas Morgul, Dark Fortress
+ManaCost:no cost
+Types:Legendary Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ PutCounter | Cost$ 3 B T | ValidTgts$ Creature | CounterType$ Shadow | CounterNum$ 1 | SubAbility$ DBEffect | SpellDescription$ Put a shadow counter on target creature. For as long as that creature has a shadow counter on it, it’s a Wraith in addition to its other types. (A creature with shadow can block or be blocked by only creatures with shadow.)
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ ShadowStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ Shadow | Duration$ Permanent
+SVar:ShadowStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Wraith | Description$ For as long as this creature has a shadow counter on it, it's a Wraith in addition to its other types. 
+DeckHas:Ability$Counters & Type$Wraith
+Oracle:Minas Morgul, Dark Fortress enters the battlefield tapped.\n{T}: Add {B}.\n{3}{B}, {T}: Put a shadow counter on target creature. For as long as that creature has a shadow counter on it, it's a Wraith in addition to its other types. (A creature with shadow can block or be blocked by only creatures with shadow.)

@@ -52,8 +52,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
             if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
                 if (n.equals("ChosenName")) {
-                    if (source.hasChosenName()) {
-                        names.add(source.getChosenName());
+                    if (source.hasNamedCard()) {
+                        names.addAll(source.getNamedCards());
                     } else {
                         System.err.println("Malformed MakeCard entry! - " + source.toString());
                     }
@@ -77,23 +77,40 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 for (String s : spellbook) {
                     // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                     s = s.replace(";", ",");
-                    faces.add(StaticData.instance().getCommonCards().getFaceByName(s));
+                    ICardFace face = StaticData.instance().getCommonCards().getFaceByName(s);
+                    if (face != null)
+                        faces.add(face);
+                    else
+                        throw new RuntimeException("MakeCardEffect didn't find card face by name: " + s);
                 }
             } else if (sa.hasParam("Booster")) {
                 SealedProduct.Template booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
-                    faces.add(pc.getRules().getMainPart());
+                    ICardFace face = pc.getRules().getMainPart();
+                    if (face != null)
+                        faces.add(face);
+                    else
+                        throw new RuntimeException("MakeCardEffect didn't find card face by name: " + pc);
                 }
             }
 
             if (!faces.isEmpty()) {
-                if (sa.hasParam("AtRandom")) {
-                    names.add(Aggregates.random(faces).getName());
-                } else {
-                    names.add(player.getController().chooseCardName(sa, faces,
-                            Localizer.getInstance().getMessage("lblChooseFromSpellbook",
-                                    CardTranslation.getTranslatedName(source.getName()))));
+                int i = sa.hasParam("SpellbookAmount") ?
+                        AbilityUtils.calculateAmount(source, sa.getParam("SpellbookAmount"), sa) : 1;
+                while (i > 0) {
+                    String chosen;
+                    if (sa.hasParam("AtRandom")) {
+                        chosen = Aggregates.random(faces).getName();
+                    } else {
+                        String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
+                                CardTranslation.getTranslatedName(source.getName());
+                        chosen = player.getController().chooseCardName(sa, faces,
+                                Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName));
+                    }
+                    names.add(chosen);
+                    faces.remove(StaticData.instance().getCommonCards().getFaceByName(chosen));
+                    i--;
                 }
             }
 

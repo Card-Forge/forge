@@ -1,0 +1,53 @@
+hedgehog.png
+size: 128, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 108, 20
+  size: 12, 12
+Idle
+  xy: 6, 16
+  size: 18, 16
+Idle
+  xy: 38, 16
+  size: 18, 16
+Idle
+  xy: 70, 16
+  size: 18, 16
+Idle
+  xy: 102, 16
+  size: 18, 16
+Walk
+  xy: 6, 48
+  size: 18, 16
+Walk
+  xy: 38, 48
+  size: 18, 16
+Walk
+  xy: 70, 48
+  size: 18, 16
+Walk
+  xy: 102, 48
+  size: 18, 16
+Attack
+  xy: 4, 80
+  size: 20, 16
+Attack
+  xy: 36, 80
+  size: 20, 16
+Attack
+  xy: 68, 80
+  size: 20, 16
+Attack
+  xy: 100, 80
+  size: 20, 16
+Death
+  xy: 6,112
+  size: 18, 16
+Death
+  xy: 38,112
+  size: 18, 16
+Death
+  xy: 70, 112
+  size: 18, 16

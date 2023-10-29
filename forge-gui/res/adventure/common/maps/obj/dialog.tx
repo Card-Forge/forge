@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../tileset/buildings.tsx"/>
+ <object name="dialog" type="dialog" gid="1418" width="16" height="16">
+  <properties>
+   <property name="dialog" value=""/>
+   <property name="hidden" type="bool" value="true"/>
+   <property name="type" value="dialog"/>
+  </properties>
+ </object>
+</template>

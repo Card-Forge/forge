@@ -16,9 +16,9 @@ import forge.util.MyRandom;
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private static final long serialVersionUID = 1L;
     private String name;
-    private CardEdition edition;
+    private transient CardEdition edition;
     private ArrayList<String> imageFileName = new ArrayList<>();
-    private CardRules cardRules;
+    private transient CardRules cardRules;
     private int artIndex = 1;
 
     // takes a string of the form "<colors> <power> <toughness> <name>" such as: "B 0 0 Germ"

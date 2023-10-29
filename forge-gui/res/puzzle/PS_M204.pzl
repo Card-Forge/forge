@@ -13,6 +13,6 @@ activeplayer=human
 activephase=MAIN1
 humanhand=Bleeding Edge;Maximize Altitude;Price of Betrayal;Enter the God-Eternals
 humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
-humanbattlefield=Tetsuko Umezawa, Fugitive;Teferi, Time Raveler|Counters:LOYALTY=3;Yarok's Fenlurker;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;t:Zombie Army,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Zombie-Army,Keywords:Trample,Image:b_0_0_zombie_army3_war|Counters:P1P1=2
+humanbattlefield=Tetsuko Umezawa, Fugitive;Teferi, Time Raveler|Counters:LOYALTY=3;Yarok's Fenlurker;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Watery Grave|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;Hallowed Fountain|NoETBTrigs;t:Zombie Army,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Zombie-Army,Keywords:Trample,Image:b_0_0_army3_war|Counters:P1P1=2
 aibattlefield=Shifting Ceratops;Apostle of Purifying Light;Hungering Hydra|Counters:P1P1=4;Ashes of the Abhorrent
 aipersistentmana=C C G

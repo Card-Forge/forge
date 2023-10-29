@@ -1,0 +1,23 @@
+{
+"width": 700,
+"height": 700,
+"playerStartPosX": 0.515,
+"playerStartPosY": 0.5,
+"noiseZoomBiome": 30,
+"tileSize": 16,
+"miniMapTileSize": 4,
+"roadTileset": {
+	"tilesetAtlas": "world/tilesets/terrain.atlas",
+	"tilesetName": "Road",
+	"color": "ffffff"
+},
+"biomesSprites": "world/sprites/map_sprites.json",
+"maxRoadDistance": 1000,
+"biomesNames": [
+	"world/biomes/outlands.json",
+	"world/biomes/ifnir.json",
+	"world/biomes/ramunap.json",
+	"world/biomes/shefet.json",
+	"world/biomes/naktamun.json"
+]
+}

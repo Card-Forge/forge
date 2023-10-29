@@ -7,6 +7,9 @@ import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.adventure.data.*;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.AdventureDeckEditor;
+import forge.adventure.scene.DeckEditScene;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
@@ -51,10 +54,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private EffectData blessing; //Blessing to apply for next battle.
     private final PlayerStatistic statistic = new PlayerStatistic();
     private final Map<String, Byte> questFlags = new HashMap<>();
+    private final Map<String, Byte> characterFlags = new HashMap<>();
+    private final Map<String, Byte> tutorialFlags = new HashMap<>();
 
     private final Array<String> inventoryItems = new Array<>();
+    private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, String> equippedItems = new HashMap<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
+    private final List<AdventureEventData> events = new ArrayList<>();
 
     // Fantasy/Chaos mode settings.
     private boolean fantasyMode = false;
@@ -69,6 +76,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     final SignalList onPlayerChangeList = new SignalList();
     final SignalList onEquipmentChange = new SignalList();
     final SignalList onBlessing = new SignalList();
+    private PointOfInterestChanges currentLocationChanges;
 
     public AdventurePlayer() {
         clear();
@@ -97,12 +105,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         shards = 0;
         clearDecks();
         inventoryItems.clear();
+        boostersOwned.clear();
         equippedItems.clear();
+        characterFlags.clear();
         questFlags.clear();
         quests.clear();
+        events.clear();
         cards.clear();
         statistic.clear();
         newCards.clear();
+        autoSellCards.clear();
+        noSellCards.clear();
+        AdventureEventController.clear();
+        AdventureQuestController.clear();
     }
 
 
@@ -111,7 +126,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     private final CardPool cards = new CardPool();
-    private final ItemPool<InventoryItem> newCards = new ItemPool<>(InventoryItem.class);
+
+    private final ItemPool<PaperCard> newCards = new ItemPool<>(PaperCard.class);
+    public final ItemPool<PaperCard> autoSellCards = new ItemPool<>(PaperCard.class);
+    public final ItemPool<PaperCard> noSellCards = new ItemPool<>(PaperCard.class);
 
     public void create(String n, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
         clear();
@@ -168,7 +186,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.enemyLifeFactor = diff.enemyLifeFactor;
         this.difficultyData.sellFactor = diff.sellFactor;
         this.difficultyData.shardSellRatio = diff.shardSellRatio;
-        fullHeal();
+        resetToMaxLife();
     }
 
     //Getters
@@ -182,6 +200,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public Array<String> getItems() {
         return inventoryItems;
+    }
+
+    public Array<Deck> getBoostersOwned() {
+        return boostersOwned;
     }
 
     public Deck getDeck(int index) {
@@ -228,7 +250,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return equippedItems.values();
     }
 
-    public ItemPool<InventoryItem> getNewCards() {
+    public ItemPool<PaperCard> getNewCards() {
         return newCards;
     }
 
@@ -272,16 +294,50 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (this.difficultyData.sellFactor == 0)
             this.difficultyData.sellFactor = 0.2f;
 
-        this.difficultyData.shardSellRatio = data.readFloat("sellFactor");
-        if (this.difficultyData.shardSellRatio == 0)
-            this.difficultyData.shardSellRatio = 0.8f;
+        //BEGIN SPECIAL CASES
+        //Previously these were not being read from or written to save files, causing defaults to appear after reload
+        //Pull from config if appropriate
+        DifficultyData configuredDifficulty = null;
+        for (DifficultyData candidate : Config.instance().getConfigData().difficulties) {
+            if (candidate.name.equals(this.difficultyData.name)) {
+                configuredDifficulty = candidate;
+                break;
+            }
+        }
+
+        if (configuredDifficulty != null && (this.difficultyData.shardSellRatio == data.readFloat("shardSellRatio") || data.readFloat("shardSellRatio") == 0))
+            this.difficultyData.shardSellRatio = configuredDifficulty.shardSellRatio;
+        else
+            this.difficultyData.shardSellRatio = data.readFloat("shardSellRatio");
+        if (configuredDifficulty != null && !data.containsKey("goldLoss"))
+            this.difficultyData.goldLoss = configuredDifficulty.goldLoss;
+        else
+            this.difficultyData.goldLoss = data.readFloat("goldLoss");
+        if (configuredDifficulty != null && !data.containsKey("lifeLoss"))
+            this.difficultyData.lifeLoss = configuredDifficulty.lifeLoss;
+        else
+            this.difficultyData.lifeLoss = data.readFloat("lifeLoss");
+        if (configuredDifficulty != null && !data.containsKey("spawnRank"))
+            this.difficultyData.spawnRank = configuredDifficulty.spawnRank;
+        else
+            this.difficultyData.spawnRank = data.readInt("spawnRank");
+        if (configuredDifficulty != null && !data.containsKey("rewardMaxFactor"))
+            this.difficultyData.rewardMaxFactor = configuredDifficulty.rewardMaxFactor;
+        else
+            this.difficultyData.rewardMaxFactor = data.readFloat("rewardMaxFactor");
+        // END SPECIAL CASES
 
         name = data.readString("name");
         heroRace = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale = data.readBool("isFemale");
-        if (data.containsKey("colorIdentity"))
-            setColorIdentity(data.readString("colorIdentity"));
+        if (data.containsKey("colorIdentity")) {
+            String temp = data.readString("colorIdentity");
+            if (temp != null)
+                setColorIdentity(temp);
+            else
+                colorIdentity = ColorSet.ALL_COLORS;
+        }
         else
             colorIdentity = ColorSet.ALL_COLORS;
 
@@ -292,7 +348,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         worldPosX = data.readFloat("worldPosX");
         worldPosY = data.readFloat("worldPosY");
 
-        if (data.containsKey("blessing")) blessing = (EffectData) data.readObject("blessing");
+        if (data.containsKey("blessing")) {
+            EffectData temp = (EffectData) data.readObject("blessing");
+            if (temp != null)
+                blessing = temp;
+        }
 
         if (data.containsKey("inventory")) {
             String[] inv = (String[]) data.readObject("inventory");
@@ -322,11 +382,31 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 }
             }
         }
+        if (data.containsKey("boosters")) {
+            Deck[] decks = (Deck[]) data.readObject("boosters");
+            for (Deck d : decks) {
+                if (d != null && !d.isEmpty()) {
+                    boostersOwned.add(d);
+                } else {
+                    System.err.printf("Null or empty booster %s\n", d);
+                    System.out.println("You have an empty booster pack in your inventory.");
+                }
+            }
+        }
 
         deck = new Deck(data.readString("deckName"));
         deck.getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards"))));
         if (data.containsKey("sideBoardCards"))
             deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("sideBoardCards"))));
+
+        if (data.containsKey("characterFlagsKey") && data.containsKey("characterFlagsValue")) {
+            String[] keys = (String[]) data.readObject("characterFlagsKey");
+            Byte[] values = (Byte[]) data.readObject("characterFlagsValue");
+            assert (keys.length == values.length);
+            for (int i = 0; i < keys.length; i++) {
+                characterFlags.put(keys[i], values[i]);
+            }
+        }
 
         if (data.containsKey("questFlagsKey") && data.containsKey("questFlagsValue")) {
             String[] keys = (String[]) data.readObject("questFlagsKey");
@@ -344,6 +424,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     quests.add((AdventureQuestData) itsReallyAQuest);
             }
         }
+        if (data.containsKey("events")) {
+            events.clear();
+            Object[] q = (Object[]) data.readObject("events");
+            if (q != null) {
+                for (Object itsReallyAnEvent : q) {
+                    events.add((AdventureEventData) itsReallyAnEvent);
+                }
+            }
+        }
 
         for (int i = 0; i < NUMBER_OF_DECKS; i++) {
             if (!data.containsKey("deck_name_" + i)) {
@@ -358,6 +447,30 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
         cards.addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards"))));
+
+        //newCards.addAll(InventoryItem data.readObject("cards"))));
+        data.storeObject("newCards", newCards.toFlatList().toArray(new InventoryItem[0]));
+        data.storeObject("autoSellCards", autoSellCards.toFlatList().toArray(new InventoryItem[0]));
+        data.storeObject("noSellCards", noSellCards.toFlatList().toArray(new InventoryItem[0]));
+
+//        if (data.containsKey("newCards")) {
+//            InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
+//            for (InventoryItem item : items){
+//                newCards.add((PaperCard)item);
+//            }
+//        }
+//        if (data.containsKey("noSellCards")) {
+//            PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
+//            for (PaperCard item : items){
+//                noSellCards.add(item);
+//            }
+//        }
+//        if (data.containsKey("autoSellCards")) {
+//            PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
+//            for (PaperCard item : items){
+//                autoSellCards.add(item);
+//            }
+//        }
 
         fantasyMode = data.containsKey("fantasyMode") && data.readBool("fantasyMode");
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");
@@ -382,6 +495,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("enemyLifeFactor", this.difficultyData.enemyLifeFactor);
         data.store("sellFactor", this.difficultyData.sellFactor);
         data.store("shardSellRatio", this.difficultyData.shardSellRatio);
+        data.store("goldLoss", this.difficultyData.goldLoss);
+        data.store("lifeLoss", this.difficultyData.lifeLoss);
+        data.store("spawnRank", this.difficultyData.spawnRank);
+        data.store("rewardMaxFactor", this.difficultyData.rewardMaxFactor);
 
         data.store("name", name);
         data.store("heroRace", heroRace);
@@ -413,7 +530,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("equippedSlots", slots.toArray(new String[0]));
         data.storeObject("equippedItems", items.toArray(new String[0]));
 
+        data.storeObject("boosters", boostersOwned.toArray(Deck.class));
+
         data.storeObject("blessing", blessing);
+
+        //Save character flags.
+        ArrayList<String> characterFlagsKey = new ArrayList<>();
+        ArrayList<Byte> characterFlagsValue = new ArrayList<>();
+        for (Map.Entry<String, Byte> entry : characterFlags.entrySet()) {
+            characterFlagsKey.add(entry.getKey());
+            characterFlagsValue.add(entry.getValue());
+        }
+        data.storeObject("characterFlagsKey", characterFlagsKey.toArray(new String[0]));
+        data.storeObject("characterFlagsValue", characterFlagsValue.toArray(new Byte[0]));
 
         //Save quest flags.
         ArrayList<String> questFlagsKey = new ArrayList<>();
@@ -425,6 +554,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("questFlagsKey", questFlagsKey.toArray(new String[0]));
         data.storeObject("questFlagsValue", questFlagsValue.toArray(new Byte[0]));
         data.storeObject("quests", quests.toArray());
+        data.storeObject("events", events.toArray());
 
         data.storeObject("deckCards", deck.getMain().toCardList("\n").split("\n"));
         if (deck.get(DeckSection.Sideboard) != null)
@@ -437,6 +567,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
+
+        data.storeObject("newCards", newCards.toFlatList().toArray(new PaperCard[0]));
+        data.storeObject("autoSellCards", autoSellCards.toFlatList().toArray(new PaperCard[0]));
+        data.storeObject("noSellCards", noSellCards.toFlatList().toArray(new PaperCard[0]));
 
         return data;
     }
@@ -463,6 +597,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case Card:
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
+                if (reward.isNoSell()) {
+                    noSellCards.add(reward.getCard());
+                    AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+                    if (editor != null)
+                        editor.refresh();
+                }
                 break;
             case Gold:
                 addGold(reward.getCount());
@@ -470,6 +610,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case Item:
                 if (reward.getItem() != null)
                     inventoryItems.add(reward.getItem().name);
+                break;
+            case CardPack:
+                if (reward.getDeck() != null) {
+                    boostersOwned.add(reward.getDeck());
+                }
                 break;
             case Life:
                 addMaxLife(reward.getCount());
@@ -517,11 +662,15 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean fullHeal() {
         if (life < maxLife) {
-            life = maxLife;
-            onLifeTotalChangeList.emit();
+            resetToMaxLife();
             return true;
         }
         return false;
+    }
+
+    public void resetToMaxLife() {
+        life = maxLife;
+        onLifeTotalChangeList.emit();
     }
 
     public boolean potionOfFalseLife() {
@@ -694,7 +843,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public int cardSellPrice(PaperCard card) {
-        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
+        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - currentLocationChanges.getTownPriceModifier()));
     }
 
     public void sellCard(PaperCard card, Integer result) {
@@ -762,6 +911,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return inventoryItems.contains(name, false);
     }
 
+    public int countItem(String name) {
+        int count = 0;
+        if (!hasItem(name))
+            return count;
+        for (String s : inventoryItems) {
+            if (s.equals(name))
+                count++;
+        }
+        return count;
+    }
+
     public boolean addItem(String name) {
         ItemData item = ItemData.getItem(name);
         if (item == null)
@@ -770,10 +930,49 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return true;
     }
 
+    public boolean addBooster(Deck booster) {
+        if (booster == null || booster.isEmpty())
+            return false;
+        boostersOwned.add(booster);
+        return true;
+    }
+
+    public void removeBooster(Deck booster) {
+        boostersOwned.removeValue(booster, true);
+    }
+
+    //Permanent character flags
+    public void setCharacterFlag(String key, int value) {
+        if (value != 0)
+            characterFlags.put(key, (byte) value);
+        else
+            characterFlags.remove(key);
+        AdventureQuestController.instance().updateQuestsCharacterFlag(key, value);
+    }
+
+    public void advanceCharacterFlag(String key) {
+        if (characterFlags.get(key) != null) {
+            characterFlags.put(key, (byte) (characterFlags.get(key) + 1));
+        } else {
+            characterFlags.put(key, (byte) 1);
+        }
+    }
+
+    public boolean checkCharacterFlag(String key) {
+        return characterFlags.get(key) != null;
+    }
+
+    public int getCharacterFlag(String key) {
+        return (int) characterFlags.getOrDefault(key, (byte) 0);
+    }
 
     // Quest functions.
     public void setQuestFlag(String key, int value) {
-        questFlags.put(key, (byte) value);
+        if (value != 0)
+            questFlags.put(key, (byte) value);
+        else
+            questFlags.remove(key);
+        AdventureQuestController.instance().updateQuestsQuestFlag(key, value);
     }
 
     public void advanceQuestFlag(String key) {
@@ -826,6 +1025,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return quests;
     }
 
+    public void addEvent(AdventureEventData e) {
+        events.add(e);
+    }
+
+    public List<AdventureEventData> getEvents() {
+        return events;
+    }
+
     public int getEnemyDeckNumber(String enemyName, int maxDecks) {
         int deckNumber = 0;
         if (statistic.getWinLossRecord().get(enemyName) != null) {
@@ -860,9 +1067,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
-        for (int i = 0; i < decks.length; i++ ){
+        for (int i = 0; i < decks.length; i++) {
             if (isEmptyDeck(i)) {
-                decks[i] = (Deck)deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")");
+                decks[i] = (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")");
                 return i;
             }
         }
@@ -872,5 +1079,75 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean isEmptyDeck(int deckIndex) {
         return decks[deckIndex].isEmpty() && decks[deckIndex].getName().equals(Forge.getLocalizer().getMessage("lblEmptyDeck"));
+    }
+
+    public void removeEvent(AdventureEventData completedEvent) {
+        events.remove(completedEvent);
+    }
+
+    public ItemPool<PaperCard> getAutoSellCards() {
+        return autoSellCards;
+    }
+
+    public ItemPool<PaperCard> getNoSellCards() {
+        return noSellCards;
+    }
+
+    public ItemPool<PaperCard> getSellableCards() {
+        ItemPool<PaperCard> sellableCards = new ItemPool<>(PaperCard.class);
+        sellableCards.addAllFlat(cards.toFlatList());
+
+        // 1. Remove cards you can't sell
+        sellableCards.removeAll(noSellCards);
+        // 1a. Potentially return here if we want to give config option to sell cards from decks
+        // but would need to update the decks on sell, not just the catalog
+
+        // 2. Count max cards across all decks in excess of unsellable
+        Map<PaperCard, Integer> maxCardCounts = new HashMap<>();
+        for (int i = 0; i < NUMBER_OF_DECKS; i++) {
+            for (final Map.Entry<PaperCard, Integer> cp : decks[i].getAllCardsInASinglePool()) {
+
+                int count = cp.getValue() - noSellCards.count(cp.getKey());
+
+                if (count <= 0) continue;
+
+                if (count > maxCardCounts.getOrDefault(cp.getKey(), 0)) {
+                    maxCardCounts.put(cp.getKey(), cp.getValue());
+                }
+            }
+        }
+
+        // 3. Remove the highest use count of each card, remainder can be sold safely
+        for (PaperCard card : maxCardCounts.keySet()) {
+            sellableCards.remove(card, maxCardCounts.get(card));
+        }
+
+        return sellableCards;
+    }
+
+
+    public CardPool getCollectionCards(boolean allCards) {
+        CardPool collectionCards = new CardPool();
+        collectionCards.addAll(cards);
+        if (!allCards) {
+            collectionCards.removeAll(autoSellCards);
+            collectionCards.removeAll(noSellCards);
+        }
+
+        return collectionCards;
+    }
+
+    public void loadChanges(PointOfInterestChanges changes) {
+        this.currentLocationChanges = changes;
+    }
+
+    public void doAutosell() {
+        int profit = 0;
+        for (PaperCard cardToSell : autoSellCards.toFlatList()) {
+            profit += AdventurePlayer.current().cardSellPrice(cardToSell);
+            autoSellCards.remove(cardToSell);
+            cards.remove(cardToSell, 1);
+        }
+        addGold(profit); //do this as one transaction so as not to get multiple copies of sound effect
     }
 }

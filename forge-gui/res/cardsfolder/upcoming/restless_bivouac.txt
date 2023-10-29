@@ -1,0 +1,11 @@
+Name:Restless Bivouac
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
+A:AB$ Animate | Cost$ 1 R W | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Ox | Colors$ Red,White | SpellDescription$ CARDNAME becomes  a 2/2 red and white Ox creature until end of turn. It's still a land.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters & Type$Ox
+SVar:HasAttackEffect:TRUE
+Oracle:Restless Bivouac enters the battlefield tapped.\n{T}: Add {R} or {W}.\n{1}{R}{W}: Restless Bivouac becomes a 2/2 red and white Ox creature until end of turn. It's still a land.\nWhenever Restless Bivouac attacks, put a +1/+1 counter on target creature you control.

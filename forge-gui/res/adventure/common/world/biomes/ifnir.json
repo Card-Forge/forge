@@ -1,0 +1,78 @@
+{
+"startPointX": 0.5,
+"startPointY": 0.5,
+"noiseWeight": 0.5,
+"distWeight": 1,
+"name": "ifnir",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Black",
+"terrain": [
+	{
+		"spriteName": "Black_2",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Black_3",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 1,
+"height": 1,
+"color": "110903",
+"spriteNames": [
+	"Skull"
+],
+"enemies": [
+	"Ammit",
+	"Angel Warrior",
+	"Archer",
+	"Bat",
+	"Big Zombie",
+	"Crocodile",
+	"Curselord",
+	"Demon",
+	"Dune Beetle",
+	"Giant Spider",
+	"Horror",
+	"Insect",
+	"Mummy",
+	"Plague Belcher",
+	"Scarab",
+	"Scorpion",
+	"Vulture",
+	"Wild Rat",
+	"Zombie",
+	"Zombie Aven",
+	"Zombie Bat",
+	"Zombie Camel",
+	"Zombie Jackal",
+	"Zombie Minotaur",
+	"Zombie Naga",
+	"Zombie Lord"
+],
+"pointsOfInterest": [],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/structures/structures.atlas",
+		"sourcePath": "world/structures/models/mountain.png",
+		"maskPath": "world/structures/masks/circle.png",
+		"height": 0.5,
+		"width": 0.5,
+		"symmetry": 8,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "mountain",
+				"color": "a07020",
+				"collision": true
+			}
+		]
+	}
+]
+}

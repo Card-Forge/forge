@@ -3,5 +3,7 @@ ManaCost:1 U
 Types:Creature Faerie
 PT:1/3
 K:Flying
-S:Mode$ Continuous | Affected$ You | AddKeyword$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll. | Description$ Grant an Advantage — If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+R:Event$ RollDice | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ PlusRoll | Description$ Grant an Advantage — If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreLowest
+SVar:IgnoreLowest:DB$ ReplaceEffect | VarName$ Ignore | VarValue$ ReplaceCount$Ignore/Plus.1
 Oracle:Flying\nGrant an Advantage — If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.

@@ -1,0 +1,11 @@
+Name:Monstrosity of the Lake
+ManaCost:4 U
+Types:Legendary Creature Kraken
+PT:4/6
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {5}. If you do, tap all creatures your opponents control, then put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTapAll:AB$ TapAll | Cost$ 5 | ValidCards$ Creature.OppCtrl | RememberTapped$ True | SubAbility$ DBStun
+SVar:DBStun:DB$ PutCounter | CounterType$ STUN | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+K:TypeCycling:Island:2
+DeckHas:Ability$Counters|Discard
+Oracle:When Monstrosity of the Lake enters the battlefield, you may pay {5}. If you do, tap all creatures your opponents control, then put a stun counter on each of those creatures. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

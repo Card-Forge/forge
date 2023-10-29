@@ -1,0 +1,9 @@
+Name:Troyan, Gutsy Explorer
+ManaCost:1 G U
+Types:Legendary Creature Vedalken Scout
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ G U | RestrictValid$  CostContainsX,Spell.cmcGE5 | SpellDescription$ Add {G}{U}. Spend this mana only to cast spells with mana value 5 or greater or spells with {X} in their mana costs.
+A:AB$ Draw | Cost$ U T | SubAbility$ DBDiscard | SpellDescription$  Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:{T}: Add {G}{U}. Spend this mana only to cast spells with mana value 5 or greater or spells with {X} in their mana costs.\n{U}, {T}: Draw a card, then discard a card.

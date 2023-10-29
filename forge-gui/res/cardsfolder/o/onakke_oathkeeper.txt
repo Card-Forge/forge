@@ -1,0 +1,8 @@
+Name:Onakke Oathkeeper
+ManaCost:1 W
+Types:Creature Ogre Spirit
+PT:0/4
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ Planeswalker.YouCtrl | Cost$ 1 | Description$ Creatures can't attack planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control.
+A:AB$ ChangeZone | Cost$ 4 W W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Planeswalker.YouOwn | SpellDescription$ Return target planeswalker card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+Oracle:Creatures can't attack planeswalkers you control unless their controller pays {1} for each creature they control that's attacking a planeswalker you control.\n{4}{W}{W}, Exile Onakke Oathkeeper from your graveyard: Return target planeswalker card from your graveyard to the battlefield.

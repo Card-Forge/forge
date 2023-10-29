@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
@@ -19,14 +20,15 @@ public class HeroListData {
     static private HeroListData instance;
     public HeroData[] heroes;
     public String avatar;
-    private TextureAtlas avatarSprites;
+    private TextureAtlas avatarAtlas;
+    private final ObjectMap<String, Array<Sprite>> avatarSprites = new ObjectMap<>();
 
     static private HeroListData read() {
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(Paths.HEROES);
         if (handle.exists()) {
             instance = json.fromJson(HeroListData.class, handle);
-            instance.avatarSprites = Config.instance().getAtlas(instance.avatar);
+            instance.avatarAtlas = Config.instance().getAtlas(instance.avatar);
 
          /*
             instance.avatarSprites.getTextures().first().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
@@ -47,15 +49,14 @@ public class HeroListData {
     }
 
     public static TextureRegion getAvatar(int heroRace, boolean isFemale, int avatarIndex) {
-
         if (instance == null)
             instance = read();
         HeroData data = instance.heroes[heroRace];
-        Array<Sprite> sprites;
-        if (isFemale)
-            sprites = instance.avatarSprites.createSprites(data.femaleAvatar);
-        else
-            sprites = instance.avatarSprites.createSprites(data.maleAvatar);
+        Array<Sprite> sprites = instance.avatarSprites.get(isFemale ? data.femaleAvatar : data.maleAvatar);
+        if (sprites == null) {
+            sprites = instance.avatarAtlas.createSprites(isFemale ? data.femaleAvatar : data.maleAvatar);
+            instance.avatarSprites.put(isFemale ? data.femaleAvatar : data.maleAvatar, sprites);
+        }
         avatarIndex %= sprites.size;
         if (avatarIndex < 0) {
             avatarIndex += sprites.size;

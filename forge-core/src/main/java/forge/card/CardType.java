@@ -45,7 +45,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
 
     public static final CardTypeView EMPTY = new CardType(false);
-    private static final Set<String> multiWordTypes = ImmutableSet.of("Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master");
 
     public enum CoreType {
         Artifact(true, "artifacts"),
@@ -622,6 +621,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isBattle()) {
             Iterables.removeIf(subtypes, Predicates.IS_BATTLE_TYPE);
         }
+        if (!isPlane()) {
+            Iterables.removeIf(subtypes, Predicates.IS_PLANAR_TYPE);
+        }
     }
 
     @Override
@@ -751,20 +753,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         final CardType result = new CardType(incomplete);
 
         int iTypeStart = 0;
-        int iSpace = typeText.indexOf(space);
-        boolean hasMoreTypes = typeText.length() > 0;
+        int max = typeText.length();
+        boolean hasMoreTypes = max > 0;
         while (hasMoreTypes) {
-            final String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
-            hasMoreTypes = iSpace != -1;
             final String rest = typeText.substring(iTypeStart);
-            if (isMultiwordType(rest)) {
-                result.add(rest);
-                break;
+            String type = getMultiwordType(rest);
+            if (type == null) {
+                int iSpace = typeText.indexOf(space, iTypeStart);
+                type = typeText.substring(iTypeStart, iSpace == -1 ? max : iSpace);
             }
-
-            iTypeStart = iSpace + 1;
             result.add(type);
-            iSpace = typeText.indexOf(space, iSpace + 1);
+            iTypeStart += type.length() + 1;
+            hasMoreTypes = iTypeStart < max;
         }
         return result;
     }
@@ -780,8 +780,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return result;
     }
 
-    private static boolean isMultiwordType(final String type) {
-        return multiWordTypes.contains(type);
+    private static String getMultiwordType(final String type) {
+        for (String multi : Constant.MultiwordTypes) {
+            if (type.startsWith(multi)) {
+                return multi;
+            }
+        }
+        return null;
     }
 
     public static class Constant {
@@ -795,6 +800,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
         public static final Set<String> DUNGEON_TYPES = Sets.newHashSet();
         public static final Set<String> BATTLE_TYPES = Sets.newHashSet();
+        public static final Set<String> PLANAR_TYPES = Sets.newHashSet();
+
+        public static final Set<String> MultiwordTypes = Sets.newHashSet();
 
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
@@ -866,6 +874,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return CardType.isABattleType(input);
             }
         };
+
+        public static Predicate<String> IS_PLANAR_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isAPlanarType(input);
+            }
+        };
     }
 
     ///////// Utility methods
@@ -900,6 +915,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             sortedSubTypes.addAll(Constant.WALKER_TYPES);
             sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
             sortedSubTypes.addAll(Constant.BATTLE_TYPES);
+            sortedSubTypes.addAll(Constant.PLANAR_TYPES);
             Collections.sort(sortedSubTypes);
         }
         return sortedSubTypes;
@@ -963,6 +979,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
     public static boolean isABattleType(final String cardType) {
         return Constant.BATTLE_TYPES.contains(cardType);
+    }
+    public static boolean isAPlanarType(final String cardType) {
+        return Constant.PLANAR_TYPES.contains(cardType);
     }
     /**
      * If the input is a plural type, return the corresponding singular form.
