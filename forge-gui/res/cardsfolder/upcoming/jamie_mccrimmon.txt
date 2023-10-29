@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Trig
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 K:Doctor's companion
+DeckHints:Type$Legendary|Saga|Artifact
 Oracle:Trample\nWhenever you cast a historic spell, Jamie McCrimmon gets +X/+X until end of turn, where X is that spell's mana value. (Artifacts, legendaries, and Sagas are historic.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)
