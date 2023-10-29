@@ -49,7 +49,7 @@
   </object>
   <object id="53" template="../../../obj/scroll.tx" x="209" y="77.6667">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
    </properties>
   </object>
   <object id="54" template="../../../obj/gate.tx" x="209" y="160">
