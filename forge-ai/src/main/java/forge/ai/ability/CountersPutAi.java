@@ -442,7 +442,6 @@ public class CountersPutAi extends CountersAi {
 
         final boolean hasSacCost = abCost.hasSpecificCostType(CostSacrifice.class);
         final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
-        final boolean shouldSacSelf = sacSelf && ComputerUtil.shouldSacrificeThreatenedCard(ai, source, sa);
 
         if (sa.usesTargeting()) {
             if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
