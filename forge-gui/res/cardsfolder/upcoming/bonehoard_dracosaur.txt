@@ -11,5 +11,5 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Land | TokenScript$ r_3_1_dinosaur | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token|Sacrifice & Type$Treasure|Dinosaur
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure|Dinosaur
 Oracle:Flying, first strike\nAt the beginning of your upkeep, exile the top two cards of your library. You may play them this turn. If you exiled a land card this way, create a 3/1 red Dinosaur creature token. If you exiled a nonland card this way, create a Treasure token.
