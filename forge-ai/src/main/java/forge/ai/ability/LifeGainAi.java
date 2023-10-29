@@ -193,7 +193,11 @@ public class LifeGainAi extends SpellAbilityAi {
                 || sa.getSubAbility() != null || playReusable(ai, sa)) {
             return true;
         }
-        
+
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            return true; // sac costs should be performed at Instant speed when able
+        }
+
         // Save instant-speed life-gain unless it is really worth it
         final float value = 0.9f * lifeAmount / life;
         if (value < 0.2f) {
