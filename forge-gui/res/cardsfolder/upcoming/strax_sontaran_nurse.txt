@@ -4,7 +4,7 @@ Types:Legendary Creature Alien Cleric
 PT:5/5
 K:Vigilance
 K:Trample
-A:AB$ ChoosePlayer | Cost$ 2 T Sac<1/Artifact> | Defined$ You | Choices$ Player | PreCostDesc$ Grenades! - | Random$ True | SubAbility$ DBImmeditateTrig | SpellDescription$ Choose a player at random. When you do, NICKNAME fights another target creature that player controls.
+A:AB$ ChoosePlayer | Cost$ 2 T Sac<1/Artifact> | Defined$ You | Choices$ Player | PrecostDesc$ Grenades! - | Random$ True | SubAbility$ DBImmediateTrig | SpellDescription$ Choose a player at random. When you do, NICKNAME fights another target creature that player controls.
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDamage | TriggerDescription$ When you do, NICKNAME fights another target creature that player controls.
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.ChosenPlayerCtrl | TgtPrompt$ Choose another target creature controlled by the chosen player | TargetMin$ 0 | TargetMax$ 1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Glory of Battle — Whenever NICKNAME deals damage to a creature, put a +1/+1 counter on NICKNAME.
