@@ -1,0 +1,12 @@
+Name:Weeping Angel
+ManaCost:1 U B
+Types:Artifact Creature Alien Angel
+PT:2/2
+K:Flash
+K:First Strike
+K:Vigilance
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | ReplaceWith$ ShuffleCreature | PreventionEffect$ True | Description$ If CARDNAME would deal combat damage to a creature, prevent that damage and that creature's owner shuffles it into their library.
+SVar:ShuffleCreature:DB$ ChangeZone | Defined$ ReplacedTarget | Origin$ Battlefield | Destination$ Library | Shuffle$ True
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever an opponent casts a creature spell, CARDNAME isn't a creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | RemoveTypes$ Creature
+Oracle:Flash\nFirst strike, vigilance\nWhenever an opponent casts a creature spell, Weeping Angel isn't a creature until end of turn.\nIf Weeping Angel would deal combat damage to a creature, prevent that damage and that creature's owner shuffles it into their library.
