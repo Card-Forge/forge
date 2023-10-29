@@ -138,7 +138,8 @@ public enum AiProps { /** */
     SACRIFICE_DEFAULT_PREF_ENABLE("true"),
     SACRIFICE_DEFAULT_PREF_MIN_CMC("0"),
     SACRIFICE_DEFAULT_PREF_MAX_CMC("2"),
-    SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS("true");
+    SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS("true"),
+    SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL("135");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

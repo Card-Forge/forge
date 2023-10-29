@@ -441,19 +441,24 @@ public class ComputerUtil {
                     if (enableDefaultPref) {
                         int minCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
                         int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
+                        int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
                         boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
                         List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
                         CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
                             @Override
                             public boolean apply(Card card) {
+                                if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
+                                    return false;
+                                }
+
                                 return (allowTokens && card.isToken())
                                         || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
                             }
                         });
                         if (!allowList.isEmpty()) {
                             sacMeList.addAll(typeList);
-                            CardLists.shuffle(sacMeList);
-                            return allowList.getFirst();
+                            CardLists.sortByCmcDesc(sacMeList);
+                            return allowList.getLast();
                         }
                     }
                 }

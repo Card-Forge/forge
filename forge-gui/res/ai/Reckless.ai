@@ -311,3 +311,5 @@ SACRIFICE_DEFAULT_PREF_MAX_CMC=3
 # If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
 # consider the sacrifice of a matching card is a token
 SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS=true
+# A creature should evaluate to no more than this much to be considered for default SacCost preference
+SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL=135
