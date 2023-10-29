@@ -1,4 +1,4 @@
-Name:Dinosaur
+Name:Dinosaur Token
 ManaCost:no cost
 Types:Creature Dinosaur
 Colors:red
