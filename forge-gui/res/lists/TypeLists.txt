@@ -161,6 +161,7 @@ Leviathan:Leviathans
 Lhurgoyf:Lhurgoyfs
 Licid:Licids
 Lizard:Lizards
+Llama:Llamas
 Lobster:Lobsters
 Mammoth:Mammoths
 Manticore:Manticores
@@ -330,6 +331,7 @@ Fortification
 Gold
 Incubator:Incubators
 Key:Keys
+Map
 Powerstone
 Treasure
 Vehicle

@@ -1,0 +1,12 @@
+Name:The Belligerent
+ManaCost:2 U R
+Types:Legendary Artifact Vehicle
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayLookAndPlay
+SVar:StaticMayLookAndPlay:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | MayPlay$ True | Description$ You may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.
+K:Crew:3
+DeckHas:Ability$Token & Type$Treasure
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever The Belligerent attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.\nCrew 3
