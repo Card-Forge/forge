@@ -6,4 +6,4 @@ T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlay
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
 K:Doctor's companion
 DeckHas:Ability$Token|Sacrifice & Type$Food
-Oracle: Paradox — Whenever you cast a spell from anywhere other than your hand, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nDoctor's companion (You can have two commanders if the other is the Doctor.)
+Oracle:Paradox — Whenever you cast a spell from anywhere other than your hand, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nDoctor's companion (You can have two commanders if the other is the Doctor.)
