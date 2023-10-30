@@ -69,7 +69,7 @@ public class DeckSelectScene extends UIScene {
         int index = Current.player().copyDeck();
         if (index == -1) {
             showDialog(createGenericDialog(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblNoAvailableSlots"),
-                Forge.getLocalizer().getMessage("lblOk"),
+                Forge.getLocalizer().getMessage("lblOK"),
                 null, this::removeDialog, null));
         }
         else {
@@ -82,7 +82,7 @@ public class DeckSelectScene extends UIScene {
     private void maybeDelete() {
         if (Current.player().isEmptyDeck(currentSlot)) return;
         Dialog deleteDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblAreYouSureProceedDelete"),
-            Forge.getLocalizer().getMessage("lblOk"),
+            Forge.getLocalizer().getMessage("lblOK"),
             Forge.getLocalizer().getMessage("lblAbort"), this::delete, this::removeDialog);
 
         showDialog(deleteDialog);
@@ -103,7 +103,7 @@ public class DeckSelectScene extends UIScene {
     private void showRenameDialog() {
         if (renameDialog == null) {
             renameDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblRenameDeck"), null,
-                    Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblOK"),
                     Forge.getLocalizer().getMessage("lblAbort"), () -> {
                         this.rename();
                         removeDialog();

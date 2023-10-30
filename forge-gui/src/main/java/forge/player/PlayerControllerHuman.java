@@ -1725,7 +1725,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     cardView = CardView.getCardForUi(iPaperCard);
                 else
                     cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOk")));
+                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOK")));
             } else {
                 getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
             }

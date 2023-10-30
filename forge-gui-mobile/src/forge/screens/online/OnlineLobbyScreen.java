@@ -57,7 +57,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         Forge.back();
         if (msg.length() > 0) {
             FThreads.invokeInBackgroundThread(() -> {
-                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOk")), 1) == 0;
+                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
                 if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
                     GuiBase.setInterrupted(false);
 

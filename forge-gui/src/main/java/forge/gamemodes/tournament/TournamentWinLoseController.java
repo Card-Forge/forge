@@ -67,7 +67,7 @@ abstract public class TournamentWinLoseController {
                     message2 = localizer.getMessage("lblThroughTournament");
 
                     view.getBtnContinue().setVisible(false);
-                    view.getBtnQuit().setText(localizer.getMessage("lblOk"));
+                    view.getBtnQuit().setText(localizer.getMessage("lblOK"));
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(TournamentIO.PREFIX_QUICK)) {

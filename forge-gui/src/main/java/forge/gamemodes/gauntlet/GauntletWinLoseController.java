@@ -68,7 +68,7 @@ public abstract class GauntletWinLoseController {
                     message2 = localizer.getMessage("lblGauntletTournament");
 
                     view.getBtnContinue().setVisible(false);
-                    view.getBtnQuit().setText(localizer.getMessage("lblOk"));
+                    view.getBtnQuit().setText(localizer.getMessage("lblOK"));
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {
