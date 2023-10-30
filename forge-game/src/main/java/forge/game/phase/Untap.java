@@ -31,6 +31,7 @@ import com.google.common.collect.Maps;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -44,6 +45,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantPhaseOut;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -270,6 +272,7 @@ public class Untap extends Phase {
         // will phase back in with it
         // If c is attached to something, it will phase out on its own, and try
         // to attach back to that thing when it comes back
+        CardCollection phasedOut = new CardCollection();
         for (final Card c : list) {
             if (c.isPhasedOut() && c.isDirectlyPhasedOut()) {
                 c.phase(true);
@@ -283,7 +286,13 @@ public class Untap extends Phase {
                     }
                 }
                 c.phase(true);
+                phasedOut.add(c);
             }
+        }
+        if (!phasedOut.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, phasedOut);
+            turn.getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
         }
     }
 
