@@ -83,6 +83,11 @@ public class TriggerDamageDone extends Trigger {
             }
         }
 
+        if (!matchesValidParam("TargetRelativeToSource", runParams.get(AbilityKey.DamageTarget),
+                (Card) runParams.get(AbilityKey.DamageSource))) {
+            return false;
+        }
+
         if (hasParam("DamageAmount")) {
             final String fullParam = getParam("DamageAmount");
 
