@@ -1,0 +1,7 @@
+Name:Truth or Consequences
+ManaCost:2 U R
+Types:Sorcery
+A:SP$ Vote | Defined$ Player | Secret$ True | VoteType$ Truth,Consequences | VoteTruth$ DBDraw | VoteConsequences$ DBDamage | EachVote$ True | SpellDescription$ Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. Truth or Consequences deals 3 damage to that player for each consequences vote.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 3 | TargetsAtRandom$ True | Defined$ Targeted
+Oracle:Secret council — Each player secretly votes for truth or consequences, then those votes are revealed. You draw cards equal to the number of truth votes. Then choose an opponent at random. Truth or Consequences deals 3 damage to that player for each consequences vote.
