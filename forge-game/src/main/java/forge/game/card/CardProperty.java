@@ -1583,6 +1583,9 @@ public class CardProperty {
             // check this always first to make sure lki is only used when the card provides it
             if (!(property.contains("LKI") ? lki : card).isAttacking()) return false;
             if (property.equals("attacking")) return true;
+            if (property.endsWith("Alone")) {
+                return CardLists.count(card.getGame().getLastStateBattlefield(), c -> c.isAttacking()) == 1;
+            }
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
@@ -1649,17 +1652,18 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("blocking")) {
-            if (null == combat) return false;
+            if (combat == null || !combat.isBlocking(card)) return false;
             String what = property.substring("blocking".length());
-
-            if (StringUtils.isEmpty(what)) return combat.isBlocking(card);
+            if (what.endsWith("Alone")) {
+                return CardLists.count(card.getGame().getLastStateBattlefield(), c -> c.getCombatLKI() != null && !c.getCombatLKI().isAttacker) == 1;
+            }
             if (what.startsWith("Source")) return combat.isBlocking(card, source);
             if (what.startsWith("CreatureYouCtrl")) {
                 for (final Card c : sourceController.getCreaturesInPlay())
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;
-            } else {
+            } else if (!StringUtils.isEmpty(what)) {
                 for (Card c : AbilityUtils.getDefinedCards(source, what, spellAbility)) {
                     if (combat.isBlocking(card, c)) {
                         return true;
