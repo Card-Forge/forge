@@ -4,7 +4,7 @@
 
 Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wiki) (Somewhat outdated)
 
-Discord channel [here](https://discord.gg/fWfNgCUNRq)
+[Discord channel](https://discord.gg/HcPJNyD66a)
 
 ## Requirements / Tools
 
