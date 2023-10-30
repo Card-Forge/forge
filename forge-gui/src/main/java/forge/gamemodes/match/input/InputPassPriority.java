@@ -114,7 +114,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                             if (player.getManaPool().hasBurn()) {
                                 message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                             }
-                            if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOk"), localizer.getMessage("lblCancel"))) {
+                            if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOK"), localizer.getMessage("lblCancel"))) {
                                 runnable.run();
                             }
                         }

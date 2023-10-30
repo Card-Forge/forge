@@ -203,7 +203,7 @@ public class SaveLoadScene extends UIScene {
                     textInput.setText(buttons.get(currentSlot).actor.getText());
                     if (saveDialog == null) {
                         saveDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblSave"), null,
-                                Forge.getLocalizer().getMessage("lblOk"),
+                                Forge.getLocalizer().getMessage("lblOK"),
                                 Forge.getLocalizer().getMessage("lblAbort"), () -> {
                                     this.save();
                                     removeDialog();

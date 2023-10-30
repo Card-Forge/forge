@@ -88,7 +88,7 @@ public class InputAttack extends InputSyncronizedBase {
     private void updatePrompt() {
         Localizer localizer = Localizer.getInstance();
         String alphaLabel = canCallBackAttackers() ? localizer.getMessage("lblCallBack") : localizer.getMessage("lblAlphaStrike");
-        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), alphaLabel, true, true, true);
+        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), alphaLabel, true, true, true);
     }
 
     private void disablePrompt() {

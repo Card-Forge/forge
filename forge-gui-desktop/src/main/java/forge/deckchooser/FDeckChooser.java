@@ -69,7 +69,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         final Dimension parentSize = JOptionPane.getRootFrame().getSize();
         chooser.setMinimumSize(new Dimension((int)(parentSize.getWidth() / 2), (int)parentSize.getHeight() - 200));
         final Localizer localizer = Localizer.getInstance();
-        final FOptionPane optionPane = new FOptionPane(null, title, null, chooser, ImmutableList.of(localizer.getMessage("lblOk"), localizer.getMessage("lblCancel")), 0);
+        final FOptionPane optionPane = new FOptionPane(null, title, null, chooser, ImmutableList.of(localizer.getMessage("lblOK"), localizer.getMessage("lblCancel")), 0);
         optionPane.setDefaultFocus(chooser);
         chooser.lstDecks.setItemActivateCommand(new UiCommand() {
             @Override
