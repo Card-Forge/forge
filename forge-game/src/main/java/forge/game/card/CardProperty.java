@@ -1675,9 +1675,7 @@ public class CardProperty {
                 return false;
             }
 
-            CardCollection sourceBlocking = new CardCollection(combat.getAttackersBlockedBy(source));
-            CardCollection thisBlocking = new CardCollection(combat.getAttackersBlockedBy(card));
-            if (Collections.disjoint(sourceBlocking, thisBlocking)) {
+            if (Collections.disjoint(combat.getAttackersBlockedBy(source), combat.getAttackersBlockedBy(card))) {
                 return false;
             }
         } else if (property.startsWith("notblocking")) {
@@ -1702,10 +1700,8 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            for (Card c : blocked) {
-                if (c.isValid(valid, card.getController(), source, spellAbility)) {
-                    return true;
-                }
+            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+                return true;
             }
             for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
                 if (blocked.contains(c)) {
@@ -1728,8 +1724,6 @@ public class CardProperty {
                 }
             }
             return false;
-        } else if (property.startsWith("blockedSource")) {
-            return null != combat && combat.isBlocking(card, source);
         } else if (property.startsWith("isBlockedByRemembered")) {
             if (null == combat) return false;
             for (final Object o : source.getRemembered()) {
