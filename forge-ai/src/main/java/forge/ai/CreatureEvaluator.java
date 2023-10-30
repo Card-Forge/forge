@@ -247,14 +247,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(20, "upkeep-dmg");
         } 
 
-        // evaluate abilities
-        // TODO: expand this for other scenarios where an ability may influence the priority
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            if (ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
-                value -= subValue(100, "sac-self-cost"); // FIXME: is 100 too much? too little?
-            }
-        }
-
         // card-specific evaluation modifier
         if (c.hasSVar("AIEvaluationModifier")) {
             value += AbilityUtils.calculateAmount(c, c.getSVar("AIEvaluationModifier"), null);
