@@ -71,6 +71,8 @@ public enum CounterEnumType {
 
     CHARGE("CHARG", 246, 192, 0),
 
+    CHORUS("CHRUS", 0, 192, 246),
+
     COIN("COIN",255,215,0),
 
     COLLECTION("CLLCT", 255, 215, 0),

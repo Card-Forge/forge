@@ -1,0 +1,14 @@
+Name:Malcolm, Alluring Scoundrel
+ManaCost:1 U
+Types:Legendary Creature Siren Pirate
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a chorus counter on it. Draw a card, then discard a card. If there are four or more chorus counters on NICKNAME, you may cast the discarded card without paying its mana cost.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHORUS | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | Optional$ True | Defined$ Remembered | ConditionPresent$ Card.Self+counters_GE4_CHORUS | DefinedDesc$ the exiled card | ValidZone$ Graveyard | Valid$ Card.IsRemembered | ValidSA$ Spell | WithoutManaCost$ True | IfDesc$ if there are four or more chorus counters on NICKNAME | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard
+Oracle:Flash\nFlying\nWhenever Malcolm, Alluring Scoundrel deals combat damage to a player, put a chorus counter on it. Draw a card, then discard a card. If there are four or more chorus counters on Malcolm, you may cast the discarded card without paying its mana cost.
