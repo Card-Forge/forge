@@ -217,7 +217,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
 
             // Don't cast during main1?
-            if (game.getPhaseHandler().is(PhaseType.MAIN1, ai)) {
+            if (game.getPhaseHandler().is(PhaseType.MAIN1, ai) && !"TRUE".equals(source.getSVar("PlayMain1"))) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
