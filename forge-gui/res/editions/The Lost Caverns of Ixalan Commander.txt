@@ -22,7 +22,9 @@ ScryfallCode=LCC
 103 R Amulet of Vigor @Chris Seaman
 104 U Arcane Signet @J.P. Targete
 105 M Chalice of the Void @Julie Dillon
+106 M Chimil, the Inner Sun @Gaboleps
 107 M Chromatic Orrery @Gaboleps
+108 R Coat of Arms @Volkan Baǵa
 109 M Coercive Portal @Chris Ostrowski
 110 U Colossus Hammer @Julian Kok Joon Wen
 112 U Expedition Map @Julian Kok Joon Wen
