@@ -377,7 +377,8 @@ public class ComputerUtil {
                     }
 
                     for (String validItem : prefValid[1].split(",")) {
-                        final CardCollection prefList = CardLists.getValidCards(typeList, validItem, activate.getController(), activate, null);
+                        CardCollection prefList = CardLists.getValidCards(typeList, validItem, activate.getController(), activate, null);
+                        prefList = CardLists.filter(prefList, card -> !card.hasSVar("AIDontSacrifice"));
                         int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold", sa);
                         int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold", sa);
 
@@ -443,7 +444,6 @@ public class ComputerUtil {
                         int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
                         int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
                         boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
-                        List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
                         CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
                             @Override
                             public boolean apply(Card card) {
@@ -452,11 +452,11 @@ public class ComputerUtil {
                                 }
 
                                 return (allowTokens && card.isToken())
-                                        || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                                        || (!card.hasSVar("AIDontSacrifice") && card.getCMC() >= minCMC && card.getCMC() <= maxCMC);
                             }
                         });
                         if (!allowList.isEmpty()) {
-                            sacMeList.addAll(typeList);
+                            sacMeList.addAll(allowList);
                             CardLists.sortByCmcDesc(sacMeList);
                             return allowList.getLast();
                         }
