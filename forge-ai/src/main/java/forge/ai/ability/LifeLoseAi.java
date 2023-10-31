@@ -157,7 +157,7 @@ public class LifeLoseAi extends SpellAbilityAi {
             return true;
         }
 
-        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+        if (isSacCost && ComputerUtil.shouldSacrificeThreatenedCard(ai, source, sa)) {
             return true; // sac costs should be performed at Instant speed when able
         }
 
