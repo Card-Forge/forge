@@ -303,8 +303,7 @@ public class CostAdjustment {
             sa.addTappedForConvoke(c);
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                c.tap(true, sa, activator);
-                if (c.isTapped()) tapped.add(c);
+                if (c.tap(true, sa, activator)) tapped.add(c);
             }
         }
         if (!tapped.isEmpty()) {

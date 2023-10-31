@@ -543,8 +543,7 @@ public class HumanPlay {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!manaInputCancelled) {
-                    c.tap(true, ability, ability.getActivatingPlayer());
-                    if (c.isTapped()) tapped.add(c);
+                    if (c.tap(true, ability, ability.getActivatingPlayer())) tapped.add(c);
                 }
             }
             game.getTriggerHandler().clearSuppression(TriggerType.Taps);

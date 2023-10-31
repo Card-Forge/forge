@@ -613,8 +613,7 @@ public class PhaseHandler implements java.io.Serializable {
             for (final Card attacker : combat.getAttackers()) {
                 if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
-                    attacker.tap(true, true, null, null);
-                    if (attacker.isTapped()) tapped.add(attacker);
+                    if (attacker.tap(true, true, null, null)) tapped.add(attacker);
                 }
             }
             if (!tapped.isEmpty()) {

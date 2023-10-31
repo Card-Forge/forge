@@ -56,8 +56,7 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                     tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
                 }
 
-                tgtC.tap(true, sa, tapper);
-                if (tgtC.isTapped()) tapped.add(tgtC);
+                if (tgtC.tap(true, sa, tapper)) tapped.add(tgtC);
             } else {
                 tgtC.untap(true);
             }

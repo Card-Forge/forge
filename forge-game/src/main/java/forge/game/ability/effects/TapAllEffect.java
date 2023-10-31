@@ -54,8 +54,7 @@ public class TapAllEffect extends SpellAbilityEffect {
             if (sa.hasParam("TapperController")) {
                 tapper = c.getController();
             }
-            c.tap(true, sa, tapper);
-            if (c.isTapped()) tapped.add(c);
+            if (c.tap(true, sa, tapper)) tapped.add(c);
         }
         if (!tapped.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

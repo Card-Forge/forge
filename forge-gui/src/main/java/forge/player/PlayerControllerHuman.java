@@ -2631,8 +2631,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!inp.hasCancelled()) {
                     CardCollection tapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        c.tap(true, null, null);
-                        if (c.isTapped()) tapped.add(c);
+                        if (c.tap(true, null, null)) tapped.add(c);
                     }
                     if (!tapped.isEmpty()) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
