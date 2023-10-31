@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import forge.ai.*;
 import forge.game.GameEntity;
@@ -11,13 +9,13 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.util.Expressions;
+
+import java.util.Map;
 
 public class BranchAi extends SpellAbilityAi {
     /* (non-Javadoc)
