@@ -670,8 +670,13 @@ public final class StaticAbilityContinuous {
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
                 if (stAb.hasParam("SetName")) {
-                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
-                            se.getTimestamp(), stAb.getId());
+                    String newName = stAb.getParam("SetName");
+                    if (newName.equals("ChosenName")) {
+                        newName = hostCard.getNamedCard();
+                    }
+                    if (!newName.isEmpty()) {
+                        affectedCard.addChangedName(newName, false, se.getTimestamp(), stAb.getId());
+                    }
                 }
 
                 // Change color words
