@@ -47,7 +47,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
 
-        if (sa.hasParam("RememberDestroyed") || sa.hasParam("RememberAttached")) {
+        if (sa.hasParam("RememberDestroyed")) {
             card.clearRemembered();
         }
 
@@ -89,18 +89,13 @@ public class DestroyEffect extends SpellAbilityEffect {
     protected void internalDestroy(Card gameCard, SpellAbility sa, CardZoneTable table, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
-
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
-        final boolean remAttached = sa.hasParam("RememberAttached");
         final boolean noRegen = sa.hasParam("NoRegen");
         final boolean sac = sa.hasParam("Sacrifice");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
-
         boolean destroyed = false;
         final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
-        if (remAttached) {
-            card.addRemembered(gameCard.getAttachedCards());
-        }
+
         if (sac) {
             destroyed = game.getAction().sacrifice(gameCard, sa, true, table, params) != null;
         } else {
