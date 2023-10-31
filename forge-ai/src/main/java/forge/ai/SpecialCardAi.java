@@ -1620,9 +1620,9 @@ public class SpecialCardAi {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             int lifeInDanger = aic.getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
             int numCtrs = sa.getHostCard().getCounters(CounterEnumType.BURDEN);
-            boolean notDangerous = !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife() || (ai.getLife() > numCtrs + 1 && ai.getLife() > lifeInDanger);
 
-            return notDangerous && ai.getMaxHandSize() >= ai.getCardsIn(ZoneType.Hand).size() + numCtrs + 1;
+            return ai.getLife() > numCtrs + 1 && ai.getLife() > lifeInDanger
+                    && ai.getMaxHandSize() >= ai.getCardsIn(ZoneType.Hand).size() + numCtrs + 1;
         }
     }
 
