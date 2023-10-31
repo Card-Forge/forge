@@ -2602,4 +2602,29 @@ public class ComputerUtilCombat {
         }
         return false;
     }
+
+    public static boolean isDangerousToSacInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (atk.hasKeyword(Keyword.TRAMPLE)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+                for (Card blk : combat.getBlockers(combatant)) {
+                    if (blk.hasKeyword(Keyword.TRAMPLE)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

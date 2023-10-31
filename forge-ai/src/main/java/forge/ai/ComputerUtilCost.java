@@ -361,10 +361,10 @@ public class ComputerUtilCost {
                         final Combat combat = ai.getGame().getCombat();
                         final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai);
                         final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false)
-                                && (combat == null || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat));
+                                && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger) {
+                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;

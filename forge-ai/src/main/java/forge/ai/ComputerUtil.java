@@ -3309,7 +3309,7 @@ public class ComputerUtil {
         Game game = ai.getGame();
         Combat combat = game.getCombat();
         return (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
-                && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat)))
+                && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat)))
                 || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
     }
 }
