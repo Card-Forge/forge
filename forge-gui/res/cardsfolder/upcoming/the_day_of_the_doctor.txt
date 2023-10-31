@@ -3,9 +3,9 @@ ManaCost:3 R W
 Types:Enchantment Saga
 K:Saga:4:DBDig,DBDig,DBDig,DBChoose
 SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Card.Legendary | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SubAbility$ DBEffect | SpellDescription$ Exile cards from the top of your library until you exile a legendary card. You may play that card for as long as CARDNAME remains on the battlefield. Put the rest of those exiled cards on the bottom of your library in a random order.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | ForgetOnMoved$ Battlefield | Duration$ Permanent | SubAbility$ DBRestRandomOrder
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | Duration$ UntilHostLeavesPlay | SubAbility$ DBRestRandomOrder
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$  You may play that card for as long a CARDNAME remains on the battlefield.
-SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotImprinted | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ 3 | Choices$ Doctor | ChoiceTitle$ Choose up to three doctors | SubAbility$ DBGenericChoice
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ DBExileAll,DBCleanupBis
