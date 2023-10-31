@@ -178,6 +178,10 @@ public class CardProperty {
             if (!card.isRingBearer()) {
                 return false;
             }
+        } else if (property.equals("IsDoctor")) {
+            if (!card.getRules().isDoctor()) {
+                return false;
+            }
         } else if (property.equals("IsTriggerRemembered")) {
             boolean found = false;
             for (Object o : spellAbility.getTriggerRemembered()) {
