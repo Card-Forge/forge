@@ -1,0 +1,9 @@
+Name:Dinotomaton
+ManaCost:3 R
+Types:Artifact Creature Dinosaur Gnome
+PT:4/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gains menace until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Menace
+SVar:PlayMain1:TRUE
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Dinotomaton enters the battlefield, target creature you control gains menace until end of turn.
