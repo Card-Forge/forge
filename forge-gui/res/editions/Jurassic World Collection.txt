@@ -7,13 +7,16 @@ ScryfallCode=REX
 
 [cards]
 1 R Don't Move @Inkognit
+4 R Hunting Velociraptor @Caio Monteiro
 5 R Life Finds a Way @Inkognit
 7 R Welcome to... @Villarrte
+8 R Blue, Loyal Raptor @Maaz Ali Khan
 9 R Compy Swarm @Izzy
 10 R Ellie and Alan, Paleontologists @Zoltan Boros
 13 R Ian Malcolm, Chaotician @Caio Monteiro
 14 R Indominus Rex, Alpha @Miro Petrov
 15 R Indoraptor, the Perfect Hybrid @Daren Bader
+16 R Owen Grady, Raptor Trainer @Jaroslav Kosmina
 18 R Ravenous Tyrannosaurus @Raymond Swanland
 20 R Dino DNA @Leonardo Santanna
 26 C Command Tower @Xabi Gaztelua
