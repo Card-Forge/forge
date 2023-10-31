@@ -3,5 +3,4 @@ ManaCost:0
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:PlayMain1:TRUE
-SVar:AIDontSacrifice:TRUE
 Oracle:{T}: Add {G}.
