@@ -1610,6 +1610,25 @@ public class SpecialCardAi {
         }
     }
 
+    // The One Ring
+    public static class TheOneRing {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            if (!ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) {
+                return true;
+            }
+
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            int lifeInDanger = aic.getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
+            int maxLifeInDanger = aic.getIntProperty(AiProps.AI_IN_DANGER_MAX_THRESHOLD);
+            int numCtrs = sa.getHostCard().getCounters(CounterEnumType.BURDEN);
+
+            boolean viable = !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()
+                    || (ai.getLife() > numCtrs && ai.getLife() > MyRandom.getRandom().nextInt(lifeInDanger) + (maxLifeInDanger - lifeInDanger));
+
+            return viable && ai.getMaxHandSize() >= ai.getCardsIn(ZoneType.Hand).size() + numCtrs + 1;
+        }
+    }
+
     // The Scarab God
     public static class TheScarabGod {
         public static boolean consider(final Player ai, final SpellAbility sa) {

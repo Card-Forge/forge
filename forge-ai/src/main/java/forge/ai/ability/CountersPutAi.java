@@ -308,8 +308,10 @@ public class CountersPutAi extends CountersAi {
         } else if (logic.equals("ChargeToBestCMC")) {
             return doChargeToCMCLogic(ai, sa);
         } else if (logic.equals("ChargeToBestOppControlledCMC")) {
-        return doChargeToOppCtrlCMCLogic(ai, sa);
-    }
+            return doChargeToOppCtrlCMCLogic(ai, sa);
+        } else if (logic.equals("TheOneRing")) {
+            return SpecialCardAi.TheOneRing.consider(ai, sa);
+        }
 
         if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false;
