@@ -5,6 +5,7 @@ Swamp:Swamps
 Mountain:Mountains
 Forest:Forests
 [LandTypes]
+Cave:Caves
 Desert:Deserts
 Gate:Gates
 Lair
