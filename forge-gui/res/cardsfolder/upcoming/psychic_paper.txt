@@ -1,0 +1,10 @@
+Name:Psychic Paper
+ManaCost:2
+Types:Artifact Equipment
+R:Event$ Attached | ValidCard$ Card.Self | ValidTarget$ Creature | ReplaceWith$ ChooseName | ActiveZones$ Battlefield | Description$ As CARDNAME becomes attached to a creature, choose a creature card name and a creature type.
+SVar:ChooseName:DB$ NameCard | Defined$ You | ValidCards$ Creature | ValidDesc$ creature card | SubAbility$ ChooseCT | SpellDescription$ Choose a creature card name.
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ Choose a creature type.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Ward:1 | SetName$ ChosenName | RemoveCreatureTypes$ True | AddType$ ChosenType | Description$ Equipped creature has ward {1}, it can't be blocked, and its name and creature type are the last chosen name and creature type.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy
+K:Equip:2
+Oracle:As Psychic Paper becomes attached to a creature, choose a creature card name and a creature type.\nEquipped creature has ward {1}, it can't be blocked, and its name and creature type are the last chosen name and creature type.\nEquip {2}
