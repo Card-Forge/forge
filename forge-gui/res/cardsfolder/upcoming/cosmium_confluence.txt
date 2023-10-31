@@ -1,0 +1,11 @@
+Name:Cosmium Confluence
+ManaCost:4 G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBChangeZone,DBPutCounter,DBDestroy | CharmNum$ 3 | CanRepeatModes$ True
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Card.Cave | ChangeNum$ 1 | SpellDescription$ Search your library for a Cave card, put it onto the battlefield tapped, then shuffle.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Cave.YouCtrl | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBAnimate | SpellDescription$ Put three +1/+1 counters on a Cave you control. It becomes a 0/0 Elemental creature with haste. It's still a land.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Keywords$ Haste | Duration$ Permanent
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+DeckNeeds:Type$Cave
+DeckHas:Ability$Counters
+Oracle:Choose three. You may choose the same mode more than once.\n• Search your library for a Cave card, put it onto the battlefield tapped, then shuffle.\n• Put three +1/+1 counters on a Cave you control. It becomes a 0/0 Elemental creature with haste. It's still a land.\n• Destroy target enchantment.
