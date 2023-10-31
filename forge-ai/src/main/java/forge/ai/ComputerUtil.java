@@ -456,8 +456,7 @@ public class ComputerUtil {
                             }
                         });
                         if (!allowList.isEmpty()) {
-                            sacMeList.addAll(allowList);
-                            CardLists.sortByCmcDesc(sacMeList);
+                            CardLists.sortByCmcDesc(allowList);
                             return allowList.getLast();
                         }
                     }
