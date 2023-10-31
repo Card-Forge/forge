@@ -31,6 +31,7 @@ public enum ReplacementType {
     GameLoss(ReplaceGameLoss.class),
     Learn(ReplaceLearn.class),
     LifeReduced(ReplaceLifeReduced.class),
+    LoseLife(ReplaceLoseLife.class),
     LoseMana(ReplaceLoseMana.class),
     Mill(ReplaceMill.class),
     Moved(ReplaceMoved.class),

@@ -555,6 +555,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (toLose > 0) {
             int oldLife = life;
             // Run applicable replacement effects
+            final Map<AbilityKey, Object> repParams1 = AbilityKey.mapFromAffected(this);
+            repParams1.put(AbilityKey.LifeAmount, toLose);
+
+            switch (getGame().getReplacementHandler().run(ReplacementType.LoseLife, repParams1)) {
+                case NotReplaced:
+                    break;
+                case Updated:
+                    toLose = (int) repParams1.get(AbilityKey.LifeAmount);
+            }
+
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Result, oldLife-toLose);
             repParams.put(AbilityKey.IsDamage, damage);
