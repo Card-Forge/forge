@@ -6,9 +6,8 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Bad Wolf — Whenever CARDNAME attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ Y
 SVar:X:Count$CardCounters.TIME
-SVar:SuspendCount:Count$ValidExile Card.suspended+YouOwn
-SVar:PermanentCount:Count$Valid Permanent.Other+YouCtrl+counters_GE1_TIME
-SVar:Y:Count$SuspendCount/Plus.PermanentCount
+SVar:Y:Count$ValidExile Card.suspended+YouOwn/Plus.Z
+SVar:Z:Count$Valid Permanent.Other+YouCtrl+counters_GE1_TIME
 K:Doctor's companion
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
