@@ -8,4 +8,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player
 DeckHas:Ability$Mill|Graveyard & Type$Shark & Color$Blue|Black
 SVar:HasAttackEffect:TRUE
-Oracle:Restless Anchorage enters the battlefield tapped.\n{T}: Add {W} or {U}\n{1}{W}{U}: Until end of turn, Restless Anchorage becomes a 2/3 white and blue Bird creature with flying. It's still a land.\nWhenever Restless Anchorage attacks, create a Map token.
+Oracle:Restless Reef enters the battlefield tapped.\n{T}: Add {U} or {B}.\n{2}{U}{B}: Restless Reef becomes a 4/4 blue and black Shark creature with deathtouch until end of turn. It's still a land.\nWhenever Restless Reef attacks, target player mills 4 cards.
