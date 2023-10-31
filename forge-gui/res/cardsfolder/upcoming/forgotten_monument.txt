@@ -1,0 +1,8 @@
+Name:Forgotten Monument
+ManaCost:no cost
+Types:Land Cave
+S:Mode$ Continuous | Affected$ Cave.YouCtrl+Other | AddAbility$ AnyMana | Description$ Other Caves you control have "{T}, Pay 1 life: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+DeckHints:Type$Cave
+Oracle:{T}: Add {C}.\nOther Caves you control have "{T}, Pay 1 life: Add one mana of any color."
