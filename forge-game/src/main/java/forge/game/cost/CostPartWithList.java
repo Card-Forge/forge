@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -24,7 +25,10 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
+
+import java.util.Map;
 
 /**
  * The Class CostPartWithList.
@@ -136,9 +140,17 @@ public abstract class CostPartWithList extends CostPart {
             }
             cardList.addAll(doListPayment(payer, ability, targetCards, effect));
         } else {
+            CardCollection tapped = new CardCollection();
+            boolean checkTapped = false;
             for (Card c : targetCards) {
+                if (c.isUntapped()) checkTapped = true;
                 executePayment(payer, ability, c, effect);
+                if (checkTapped && c.isTapped()) tapped.add(c);
             }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+
         }
         handleChangeZoneTrigger(payer, ability, targetCards);
         return true;

@@ -78,6 +78,12 @@ public class CostEnlist extends CostPartWithTrigger {
         // need to transfer info
         payTrig.addRemembered(targetCard);
 
+        if (targetCard.isTapped()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, new CardCollection(targetCard));
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+        }
+
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(payTrig.getHostCard());
         runParams.put(AbilityKey.Enlisted, targetCard);
         targetCard.getGame().getTriggerHandler().runTrigger(TriggerType.Enlisted, runParams, false);

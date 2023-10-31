@@ -609,11 +609,18 @@ public class PhaseHandler implements java.io.Serializable {
 
             } while (!success);
 
+            CardCollection tapped = new CardCollection();
             for (final Card attacker : combat.getAttackers()) {
                 if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
                     attacker.tap(true, true, null, null);
+                    if (attacker.isTapped()) tapped.add(attacker);
                 }
+            }
+            if (!tapped.isEmpty()) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Cards, tapped);
+                whoDeclares.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
             }
         }
 
