@@ -8,4 +8,4 @@ SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Salamander | ValidTarget$ Player
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredTarget | DamageSource$ TriggeredSource | NumDmg$ X | TgtPrompt$ Select target creature that player controls
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Token & Type$Salamander|Alien
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a 2/2 green Alien Salamander creature token with islandwalk. (It can't be blocked as long as defending player controls an Island.)\nIII —Until end of turn, whenever a Salamander deals combat damage to a player, it deals that much damage to target creature that player controls.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a 2/2 green Alien Salamander creature token with islandwalk. (It can't be blocked as long as defending player controls an Island.)\nIII — Until end of turn, whenever a Salamander deals combat damage to a player, it deals that much damage to target creature that player controls.
