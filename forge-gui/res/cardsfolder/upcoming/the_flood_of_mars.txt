@@ -1,0 +1,12 @@
+Name:The Flood of Mars
+ManaCost:2 U U
+Types:Creature Alien Zombie Horror
+PT:3/3
+K:Islandwalk
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBCounter | TriggerDescription$ Water Always Wins — Whenever CARDNAME attacks, put a flood counter on another target creature or land. If it's a creature, it becomes a copy of The Flood of Mars. If it's a land, it becomes an Island in addition to its other types.
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature.Other,Land.Other | AITgts$ Creature.OppCtrl,Land.OppCtrl | TgtPrompt$ Select target creature or land | CounterType$ FLOOD | SubAbility$ TrigCopy
+SVar:TrigCopy:DB$ Clone | ConditionDefined$ ParentTarget | ConditionPresent$ Card.Creature | Defined$ TriggeredSourceLKICopy | CloneZone$ Battlefield | CloneTarget$ ParentTarget | SubAbility$ TrigAnimate
+SVar:TrigAnimate:DB$ Animate | ConditionDefined$ ParentTarget | ConditionPresent$ Card.Land | Types$ Island | Duration$ Permanent | IsCurse$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWater Always Wins — Whenever The Flood of Mars attacks, put a flood counter on another target creature or land. If it's a creature, it becomes a copy of The Flood of Mars. If it's a land, it becomes an Island in addition to its other types.
