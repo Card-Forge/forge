@@ -360,10 +360,10 @@ public class ComputerUtilCost {
                         // e.g. Sakura Tribe-Elder
                         final Combat combat = ai.getGame().getCombat();
                         final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai);
-                        final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, true);
+                        final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false);
                         final int lifeThreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger && (combat == null || (ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, combat) || !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat)))) {
+                        if (creatureInDanger && (combat == null || ((ComputerUtilCombat.combatantWouldBeDestroyed(ai, source, combat) && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat))))) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;
