@@ -777,15 +777,6 @@ public class CardRenderer {
             CardFaceSymbols.drawSymbol("defend", g, combatXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
         }
 
-        if (onTop && card.isSick()) {
-            //only needed if on top since otherwise symbol will be hidden
-            CardFaceSymbols.drawSymbol("summonsick", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
-        }
-
-        if (card.isPhasedOut()) {
-            CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols, otherSymbolsSize, otherSymbolsSize);
-        }
-
         if (MatchController.instance.isUsedToPay(card)) {
             float sacSymbolSize = otherSymbolsSize * 1.2f;
             CardFaceSymbols.drawSymbol("sacrifice", g, (x + (w / 2)) - sacSymbolSize / 2, (y + (h / 2)) - sacSymbolSize / 2, otherSymbolsSize, otherSymbolsSize);
@@ -808,8 +799,8 @@ public class CardRenderer {
         if (unselectable) {
             g.setAlphaComposite(0.6f);
         }
-        if (onbattlefield && onTop && showAbilityIcons(card)) {
-            drawAbilityIcons(g, card, cx, cy, cw, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f);
+        if (onbattlefield && onTop) {
+            drawAbilityIcons(g, card, cx, cy, cw, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
         } else if (canShow && !onbattlefield && showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
@@ -866,13 +857,26 @@ public class CardRenderer {
         g.setAlphaComposite(oldAlpha);
     }
 
-    public static void drawAbilityIcons(Graphics g, CardView card, float cx, float cy, float cw, float abiX, float abiY, float abiScale, float abiSpace) {
+    public static void drawAbilityIcons(Graphics g, CardView card, float cx, float cy, float cw, float abiX, float abiY, float abiScale, float abiSpace, boolean showAbilityIcons) {
         float abiCount = 0;
+        //show token indicator as status
         if (card.isToken()) {
             CardFaceSymbols.drawSymbol("token", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }
+        if (card.isSick()) {
+            CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
+            abiY += abiSpace + 1.7f;
+            abiCount += 1;
+        }
+        if (card.isPhasedOut()) {
+            CardFaceSymbols.drawSymbol("phasing", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
+            abiY += abiSpace + 1.7f;
+            abiCount += 1;
+        }
+        if (!showAbilityIcons)
+            return;
         if (card.isCommander()) {
             CardFaceSymbols.drawSymbol("commander", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
