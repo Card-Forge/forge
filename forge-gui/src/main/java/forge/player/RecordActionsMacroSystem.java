@@ -6,10 +6,9 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.FinishTargetingAction;
 import forge.game.player.actions.PassPriorityAction;
+import forge.game.player.actions.PayManaFromPoolAction;
 import forge.game.player.actions.PlayerAction;
-import forge.gamemodes.match.input.Input;
-import forge.gamemodes.match.input.InputPassPriority;
-import forge.gamemodes.match.input.InputSelectTargets;
+import forge.gamemodes.match.input.*;
 import forge.interfaces.IMacroSystem;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -34,7 +33,17 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         this.playerControllerHuman = playerControllerHuman;
     }
 
+    @Override
     public boolean isRecording() { return recording; }
+
+    @Override
+    public String playbackText() {
+        if (playbackActions.isEmpty()) {
+            return null;
+        }
+
+        return new StringBuilder().append(actions.size() - playbackActions.size()).append(" / ").append(actions.size()).toString();
+    }
 
     public boolean startRecording() {
         if (recording) {
@@ -54,7 +63,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
 
         recording = false;
-        playbackActions.addAll(actions);
 
         return true;
     }
@@ -66,6 +74,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
 
         actions.add(action);
+        playbackActions.add(action);
     }
 
     @Override
@@ -126,15 +135,18 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     public void processAction(PlayerAction action) {
         // TODO Add Actions that haven't been covered yet
+        final Input inp = playerControllerHuman.getInputProxy().getInput();
         if (action instanceof PassPriorityAction) {
-            final Input inp = playerControllerHuman.getInputProxy().getInput();
             if (inp instanceof InputPassPriority) {
                 inp.selectButtonOK();
             }
         } else if (action instanceof FinishTargetingAction) {
-            final Input inp = playerControllerHuman.getInputProxy().getInput();
             if (inp instanceof InputSelectTargets) {
                 inp.selectButtonOK();
+            }
+        } else if (action instanceof PayManaFromPoolAction) {
+            if (inp instanceof InputPayMana) {
+                ((InputPayMana) inp).useManaFromPool(((PayManaFromPoolAction) action).getSelectedColor());
             }
         } else {
             GameEntityView gev = action.getGameEntityView();

@@ -144,5 +144,15 @@ public class NetGameController implements IGameController {
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
         }
+
+        @Override
+        public boolean isRecording() {
+            return false;
+        }
+
+        @Override
+        public String playbackText() {
+            return null;
+        }
     }
 }

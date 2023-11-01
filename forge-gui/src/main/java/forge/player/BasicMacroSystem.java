@@ -174,6 +174,19 @@ public class BasicMacroSystem implements IMacroSystem {
         sequenceIndex++;
     }
 
+    @Override
+    public boolean isRecording() {
+        return false;
+    }
+
+    @Override
+    public String playbackText() {
+        if (!"".equals(rememberedSequenceText)) {
+            return new StringBuilder().append(sequenceIndex).append(" / ").append(rememberedActions.size()).toString();
+        }
+        return null;
+    }
+
     private class DummyTriggerEvent implements ITriggerEvent {
         @Override
         public int getButton() {

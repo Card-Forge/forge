@@ -6,4 +6,6 @@ public interface IMacroSystem {
     void addRememberedAction(PlayerAction action);
     void setRememberedActions();
     void nextRememberedAction();
+    boolean isRecording();
+    String playbackText();
 }
