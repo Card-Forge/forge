@@ -7,4 +7,4 @@ SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Trig
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token & Type$Treasure
 K:Equip:2
-Oracle:Indestructible (Effects that say "destroy" don’t destroy this artifact.)\nEquipped creature gets +1/+1 and has "Whenever this creature attacks, create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nEquip {2}
+Oracle:Indestructible (Effects that say "destroy" don't destroy this artifact.)\nEquipped creature gets +1/+1 and has "Whenever this creature attacks, create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nEquip {2}
