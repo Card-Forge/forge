@@ -3311,13 +3311,13 @@ public class ComputerUtil {
         if (sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
-        ComputerUtilCost.suppressRecursiveSacCostCheck(true);
+        ComputerUtilCost.setSuppressRecursiveSacCostCheck(true);
         Game game = ai.getGame();
         Combat combat = game.getCombat();
         boolean isThreatened = (c.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa, false)
                 && (!ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, c, combat) && !ComputerUtilCombat.isDangerousToSacInCombat(ai, c, combat)))
                 || (!c.isCreature() && ComputerUtil.predictThreatenedObjects(ai, sa).contains(c));
-        ComputerUtilCost.suppressRecursiveSacCostCheck(false);
+        ComputerUtilCost.setSuppressRecursiveSacCostCheck(false);
         return isThreatened;
     }
 }

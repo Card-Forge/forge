@@ -35,9 +35,9 @@ import java.util.Set;
 
 
 public class ComputerUtilCost {
-    private static boolean avoidRecursiveSacCostCheck = false;
-    public static void suppressRecursiveSacCostCheck(boolean suppress) {
-        avoidRecursiveSacCostCheck = suppress;
+    private static boolean suppressRecursiveSacCostCheck = false;
+    public static void setSuppressRecursiveSacCostCheck(boolean shouldSuppress) {
+        suppressRecursiveSacCostCheck = shouldSuppress;
     }
 
     /**
@@ -348,7 +348,7 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
-                if (avoidRecursiveSacCostCheck) {
+                if (suppressRecursiveSacCostCheck) {
                     return false;
                 }
 
