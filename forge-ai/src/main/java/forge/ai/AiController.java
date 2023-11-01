@@ -1542,8 +1542,8 @@ public class AiController {
         // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
         boolean mustRespond = false;
         if (top != null) {
-            mustRespond = top != null && (top.hasParam("AIRespondsToOwnAbility")); // Forced combos (currently defined for Sensei's Divining Top)
-            mustRespond |= top != null && top.isTrigger() && top.getTrigger().getKeyword() != null
+            mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
+            mustRespond |= top.isTrigger() && top.getTrigger().getKeyword() != null
                     && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
         }
 
