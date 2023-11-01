@@ -2,7 +2,7 @@ Name:Jo Grant
 ManaCost:2 W
 Types:Legendary Creature Human Soldier
 PT:3/2
-S:Mode$ Continuous | Affected$ Card.Historic | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ Cycling:2 W | Description$ Each historic card in your hand has cycling {2}{W}. ({2}{W}, Discard that card: Draw a card.)
+S:Mode$ Continuous | Affected$ Card.Historic+YouOwn | EffectZone$ Battlefield | AffectedZone$ Hand | AddKeyword$ Cycling:2 W | Description$ Each historic card in your hand has cycling {2}{W}. ({2}{W}, Discard that card: Draw a card.)
 T:Mode$ Cycled | ValidCard$ Card.YouOwn | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cycle a card, put a +1/+1 counter on CARDNAME
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 K:Doctor's companion
