@@ -1538,7 +1538,14 @@ public class AiController {
             top = game.getStack().peekAbility();
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
-        final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
+
+        // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
+        boolean mustRespond = false;
+        if (top != null) {
+            mustRespond = top != null && (top.hasParam("AIRespondsToOwnAbility")); // Forced combos (currently defined for Sensei's Divining Top)
+            mustRespond |= top != null && top.isTrigger() && top.getTrigger().getKeyword() != null
+                    && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
+        }
 
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
