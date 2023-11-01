@@ -436,28 +436,30 @@ public class ComputerUtil {
                     return sacMeList.getFirst();
                 } else {
                     // empty sacMeList, so get some viable average preference if the option is enabled
-                    AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-                    boolean enableDefaultPref = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ENABLE);
-                    if (enableDefaultPref) {
-                        int minCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
-                        int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
-                        int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
-                        boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
-                        List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
-                        CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
-                            @Override
-                            public boolean apply(Card card) {
-                                if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
-                                    return false;
-                                }
+                    if (ai.getController().isAI()) {
+                        AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+                        boolean enableDefaultPref = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ENABLE);
+                        if (enableDefaultPref) {
+                            int minCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
+                            int maxCMC = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
+                            int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
+                            boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
+                            List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
+                            CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(Card card) {
+                                    if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
+                                        return false;
+                                    }
 
-                                return (allowTokens && card.isToken())
-                                        || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                                    return (allowTokens && card.isToken())
+                                            || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                                }
+                            });
+                            if (!allowList.isEmpty()) {
+                                CardLists.sortByCmcDesc(allowList);
+                                return allowList.getLast();
                             }
-                        });
-                        if (!allowList.isEmpty()) {
-                            CardLists.sortByCmcDesc(allowList);
-                            return allowList.getLast();
                         }
                     }
                 }
