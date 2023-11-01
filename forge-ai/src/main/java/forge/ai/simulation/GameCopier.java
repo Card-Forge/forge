@@ -431,7 +431,7 @@ public class GameCopier {
             if (c.hasChosenColor()) {
                 newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
             }
-            if (!c.getNamedCard().isEmpty()) {
+            if (c.hasNamedCard()) {
                 newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
             }
             newCard.setSVars(c.getSVars());
