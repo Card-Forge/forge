@@ -2,7 +2,7 @@ Name:The War Games
 ManaCost:2 W W
 Types:Enchantment Saga
 K:Saga:4:DBTokens,DBPutCounterAll,DBPutCounterAll,DBEffect
-SVar:DBTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_warrior | TokenOwner$ Player | RememberTokens$ True | SubAbility$ DBGoad | SpellDescription$ Each player creates three tapped 1/1 white Warrior creature tokens. The tokens are goaded for as long as CARDNAME remains on the battlefield.
+SVar:DBTokens:DB$ Token | TokenAmount$ 3 | TokenTapped$ True | TokenScript$ w_1_1_warrior | TokenOwner$ Player | RememberTokens$ True | SubAbility$ DBGoad | SpellDescription$ Each player creates three tapped 1/1 white Warrior creature tokens. The tokens are goaded for as long as CARDNAME remains on the battlefield.
 SVar:DBGoad:DB$ Goad | Defined$ Remembered | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Warrior | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Warrior creature.
