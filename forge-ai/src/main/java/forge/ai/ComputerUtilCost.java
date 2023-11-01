@@ -35,6 +35,10 @@ import java.util.Set;
 
 
 public class ComputerUtilCost {
+    private static boolean avoidRecursiveSacCostCheck = false;
+    public static void suppressRecursiveSacCostCheck(boolean suppress) {
+        avoidRecursiveSacCostCheck = suppress;
+    }
 
     /**
      * Check add m1 m1 counter cost.
@@ -344,6 +348,10 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
+                if (avoidRecursiveSacCostCheck) {
+                    return false;
+                }
+
                 final CostSacrifice sac = (CostSacrifice) part;
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 

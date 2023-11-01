@@ -2618,11 +2618,6 @@ public class ComputerUtilCombat {
                 if (combatant.hasKeyword(Keyword.BANDING)) {
                     return true;
                 }
-                for (Card blk : combat.getBlockers(combatant)) {
-                    if (blk.hasKeyword(Keyword.TRAMPLE)) {
-                        return true;
-                    }
-                }
             }
         }
         return false;
