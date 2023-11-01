@@ -2,13 +2,14 @@ Name:The Toymaker's Trap
 ManaCost:2 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseNumber | TriggerDescription$ At the beginning of your upkeep, secretly choose a number between 1 and 5 that hasn't been chosen. If you do, an opponent guesses which number you chose, then you reveal the number you chose. If they guessed wrong, they lose life equal to the number they guessed and you draw a card. If they guessed right, sacrifice CARDNAME.
-SVar:TrigChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 1 | Max$ 5 | ExcludeChosen$ True | SubAbility$ DBChoose
+SVar:TrigChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 1 | Max$ 5 | ExcludeChosen$ True | RememberNumber$ True | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to guess | SubAbility$ DBGuess
 SVar:DBGuess:DB$ ChooseNumber | Defined$ ChosenPlayer | Min$ 1 | Max$ 5 | ShowChoice$ True | SubAbility$ DBBranch
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQX | FalseSubAbility$ LoseLife | TrueSubAbility$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Y | BranchConditionSVarCompare$ EQX | FalseSubAbility$ LoseLife | TrueSubAbility$ Sacrifice | SubAbility$ DBCleanup
 SVar:LoseLife:DB$ LoseLife | Defined$ ChosenPlayer | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Sacrifice:DB$ Sacrifice | Defined$ Self
-SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearChosenNumber$ True
-SVar:X:Count$ChosenNumber
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True | ClearChosenNumber$ True | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+SVar:Y:Count$ChosenNumber
 Oracle:At the beginning of your upkeep, secretly choose a number between 1 and 5 that hasn't been chosen. If you do, an opponent guesses which number you chose, then you reveal the number you chose. If they guessed wrong, they lose life equal to the number they guessed and you draw a card. If they guessed right, sacrifice The Toymaker's Trap.
