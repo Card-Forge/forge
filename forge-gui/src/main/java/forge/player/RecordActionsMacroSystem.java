@@ -53,6 +53,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         recording = true;
         actions.clear();
         playbackActions.clear();
+        playerControllerHuman.getInputQueue().updateObservers();
 
         return true;
     }
@@ -63,6 +64,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         }
 
         recording = false;
+        playerControllerHuman.getInputQueue().updateObservers();
 
         return true;
     }
