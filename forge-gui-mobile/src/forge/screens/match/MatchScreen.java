@@ -967,7 +967,8 @@ public class MatchScreen extends FScreen {
             //overrideBG
             if (!Forge.isMobileAdventureMode) {
                 if (hasActivePlane()) {
-                    imageName = getPlaneName().replace(" ", "_").replace("'", "").replace("-", "");
+                    imageName = getPlaneName().replace(" ", "_").replace("'", "")
+                            .replace("-", "").replace("!", "");
                     if (!plane.equals(imageName)) {
                         plane = imageName;
                         bgAnimation.progress = 0;
@@ -976,8 +977,8 @@ public class MatchScreen extends FScreen {
                     String t = time == null ? "" : time > 0 ? "Day" : "Night";
                     if (!dt.equalsIgnoreCase(t))
                         bgAnimation.progress = 0;
-                    if (FSkinTexture.getValues().contains(imageName))
-                        matchBG = FSkinTexture.valueOf(imageName);
+                    if (FSkinTexture.GENERIC_PLANE.load(imageName))
+                        matchBG = FSkinTexture.GENERIC_PLANE;
                     else {
                         if (daytime == null) {
                             matchBG = FSkinTexture.BG_MATCH;
