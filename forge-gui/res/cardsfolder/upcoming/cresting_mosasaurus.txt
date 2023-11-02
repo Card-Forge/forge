@@ -1,6 +1,7 @@
 Name:Cresting Mosasaurus
 ManaCost:6 U U
 Types:Creature Dinosaur
+PT:4/8
 K:Emerge:6 U
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigBounceAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return each non-Dinosaur creature to its owner's hand.
 SVar:TrigBounceAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonDinosaur | Origin$ Battlefield | Destination$ Hand
