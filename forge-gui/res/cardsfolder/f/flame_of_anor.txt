@@ -1,7 +1,7 @@
 Name:Flame of Anor
 ManaCost:1 U R
 Types:Instant
-A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBDraw,DBDestroy,DBDamage | SpellDescription$ Choose one. If you control a Wizard as you cast this spell, you may choose two instead.
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBDraw,DBDestroy,DBDamage | AdditionalDescription$ . If you control a Wizard as you cast this spell, you may choose two instead.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | SpellDescription$ Target player draws two cards.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.

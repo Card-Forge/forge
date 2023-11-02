@@ -9,8 +9,18 @@ ScryfallCode=SPG
 1 R Lord of Atlantis @Syd Mills
 2 U Malcolm, Keen-Eyed Navigator @Julie Dillon
 3 R Bridge from Below @Yeong-Hao Han
+4 R Mephidross Vampire @Samuel Araya
+5 U Pitiless Plunderer @Johan Grenier
+6 U Breeches, Brazen Plunderer @Filip Burburan
+7 U Dargo, the Shipwrecker @Kai Carpenter
+8 R Rampaging Ferocidon @Dan Scott
 9 R Underworld Breach @Piotr Dura
+10 M Carnage Tyrant @Monztre
+11 R Ghalta, Primal Hunger @Joshua Raphael
+12 M Polyraptor @Yeong-Hao Han
 13 M Kalamax, the Stormsire @Sam Burley
+14 M Lord Windgrace @April Prime
+15 R Mirri, Weatherlight Duelist @Michele Giorgi
 16 R Thrasios, Triton Hero @Caroline Gariba
 17 M Mana Crypt @Dominik Mayer
 17a M Mana Crypt @Dominik Mayer
