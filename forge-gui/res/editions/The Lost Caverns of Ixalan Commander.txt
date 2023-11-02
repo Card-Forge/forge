@@ -10,14 +10,65 @@ ScryfallCode=LCC
 2 M Clavileno, First of the Blessed @Matt Stewart
 3 M Hakbal of the Surging Soul @Tyler Walpole
 4 M Pantlaza, Sun-Favored @Sam Burley
+5 M Carmen, Cruel Skymarcher @Randy Vargas
+6 M Don Andres, the Renegade @Daarken
+7 M Wayta, Trainer Prodigy @Magali Villeneuve
+8 M Xolatoyac, the Smiling Flood @Campbell White
+9 R Illustrious Wanderglyph @Erikas Perl
+10 R Altar of the Wretched @Helge C. Balzer
+11 R Ore-Rich Stalactite @Tomek Larek
+12 R Contest of Claws @Cristi Balanescu
+13 R Tetzin, Gnome Champion @Kekai Kotaki
+14 R Xavier Sal, Infested Captain @Bryan Sola
+15 M Eye of Ojer Taq @Erikas Perl
+16 M Paleontologist's Pick-Axe @Ernanda Souza
 17 M Admiral Brass, Unsinkable @Michael Walsh
 18 M Clavileno, First of the Blessed @Chun Lo
 19 M Hakbal of the Surging Soul @Anditya Dita
 20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
+21 R Illustrious Wanderglyph @Erikas Perl
+23 R Ore-Rich Stalactite @Tomek Larek
+24 R Contest of Claws @Cristi Balanescu
 25 M Admiral Brass, Unsinkable @Jason Rainville
 27 M Clavileno, First of the Blessed @Matt Stewart
 29 M Hakbal of the Surging Soul @Tyler Walpole
 30 M Pantlaza, Sun-Favored @Sam Burley
+31 R Tetzin, Gnome Champion @Kekai Kotaki
+33 R Xavier Sal, Infested Captain @Bryan Sola
+35 M Eye of Ojer Taq @Erikas Perl
+36 M Paleontologist's Pick-Axe @Ernanda Souza
+43 R The Indomitable @Samuel Perin
+46 R Storm Fleet Negotiator @Nino Vecia
+49 R Francisco, Fowl Marauder @Rudy Siswanto
+50 R The Grim Captain's Locker @Bruce Brenneise
+53 R Skeleton Crew @Camille Alquier
+54 R Broadside Bombardiers @Tomek Larek
+55 R Gemcutter Buccaneer @Helge C. Balzer
+67 R Arm-Mounted Anchor @Nino Vecia
+69 R Bronzebeak Foragers @Brian Valeza
+70 R Charismatic Conqueror @Bram Sels
+71 R Elenda's Hierophant @Miranda Meeks
+72 R From the Rubble @Ryan Valle
+73 R March of the Canonized @Dominik Mayer
+74 R Redemption Choir @Michele Giorgi
+76 R Mist Dancer @Christina Kraus
+77 R Ripples of Potential @Sam Hogg
+79 R Wave Goodbye @Sam Hogg
+80 R Dusk Legion Sergeant @Igor Kieryluk
+83 R Master of Dark Rites @Igor Kieryluk
+84 R Promise of Aclazotz @Lixin Yin
+88 R Wrathful Raptors @April Prime
+89 R Bygone Marvels @Constantin Marin
+90 R Curious Altisaur @Simon Dominic
+91 R Deeproot Historian @Stella Spente
+92 R Dinosaur Egg @Alessandra Pisano
+93 R Scion of Calamity @Crystal Sully
+94 R Sunfrill Imitator @Brian Valeza
+95 R Topography Tracker @Lindsey Look
+96 R Tributary Instructor @Christina Kraus
+97 R Order of Sacred Dusk @Bartek Fedyczak
+98 R Singer of Swift Rivers @Gabor Szikszai
+100 R Progenitor's Icon @Stella Spente
 102 M Wedding Ring @J.P. Targete
 103 R Amulet of Vigor @Chris Seaman
 104 U Arcane Signet @J.P. Targete
@@ -27,13 +78,19 @@ ScryfallCode=LCC
 108 R Coat of Arms @Volkan Baǵa
 109 M Coercive Portal @Chris Ostrowski
 110 U Colossus Hammer @Julian Kok Joon Wen
+111 U Everflowing Chalice @Chris Seaman
 112 U Expedition Map @Julian Kok Joon Wen
 113 R Fist of Suns @J.P. Targete
+114 U Lightning Greaves @Chris Seaman
+115 R Mimic Vat @Chris Seaman
+116 R Strionic Resonator @Jonas De Ro
 117 R Temple Bell @Jonas De Ro
+118 U Thought Vessel @Julie Dillon
+119 U Whispersilk Cloak @Julian Kok Joon Wen
+120 U Worn Powerstone @Chris Ostrowski
 121 M Admiral Brass, Unsinkable @Jason Rainville
 122 M Clavileno, First of the Blessed @Matt Stewart
 123 M Hakbal of the Surging Soul @Tyler Walpole
 124 M Pantlaza, Sun-Favored @Sam Burley
-199 U Whispersilk Cloak @Julian Kok Joon Wen
 299 C Arcane Signet @Dan Scott
 346 C Path of Ancestry @Alayna Danner

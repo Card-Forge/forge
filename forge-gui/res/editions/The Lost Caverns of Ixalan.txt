@@ -10,24 +10,30 @@ ScryfallCode=LCI
 6 U Clay-Fired Bricks @Steve Ellis
 8 U Dauntless Dismantler @Dibujante Nocturno
 10 U Dusk Rose Reliquary @Samuel Araya
+12 R Fabrication Foundry @Racrufi
 14 R Get Lost @Eli Minaya
 16 U Guardian of the Great Door @Justyna Dura
 17 U Helping Hand @Aldo Domínguez
 19 U Kinjalli's Dawnrunner @Arash Radkia
+20 R Kutzil's Flanker @Michele Giorgi
 21 U Malamet War Scribe @Nicholas Gregory
 22 U Market Gnome @Gaboleps
 24 C Miner's Guidewing @Allen Douglas
 25 U Mischievous Pup @Devin Platts
 26 M Ojer Taq, Deepest Foundation @Cristi Balanescu
 28 C Oltec Cloud Guard @Evyn Fong
+30 C Petrify @Samuel Araya
 32 M Resplendent Angel @Victor Adame Minguez
 33 U Ruin-Lurker Bat @Camille Alquier
 34 R Sanguine Evangelist @Zezhou Chen
 36 U Spring-Loaded Sawblades @Wayne Reynolds
+39 R Thousand Moons Smithy @Manuel Castañón
 41 R Unstable Glyphbridge @Bastien Grivet
+42 U Vanguard of the Rose @Alex Brock
 44 R Akal Pakal, First Among Equals @Ryan Pancoast
 47 R Braided Net @Diego Gisbert
 48 U Chart a Course @Josu Solano
+49 C Cogwork Wrestler @Tomek Larek
 50 U Confounding Riddle @A. M. Sartor
 51 U Council of Echoes @Fariba Khamseh
 52 R Deeproot Pilgrimage @Rémi Jacquot
@@ -39,6 +45,7 @@ ScryfallCode=LCI
 61 R Kitesail Larcenist @Sidharth Chaturvedi
 62 U Lodestone Needle @José Parodi
 63 R Malcolm, Alluring Scoundrel @Fesbra
+65 U Merfolk Cave-Diver @Fesbra
 67 M Ojer Pakpatiq, Deepest Epoch @Chris Rahn
 74 U Self-Reflection @Henry Peters
 76 U Sinuous Benthisaur @John Tedrick
@@ -47,6 +54,7 @@ ScryfallCode=LCI
 79 U Staunch Crewmate @LA Draws
 80 R Subterranean Schooner @Svetlin Velinov
 81 R Tishana's Tidebinder @Nino Vecia
+83 U Waterlogged Hulk @Artur Treffner
 84 C Waterwind Scout @Alix Branwyn
 86 U Zoetic Glyph @Yeong-Hao Han
 87 U Abyssal Gorestalker @Maxime Minard
@@ -56,6 +64,7 @@ ScryfallCode=LCI
 94 R Bringer of the Last Gift @Wero Gallo
 95 C Broodrage Mycoid @Domenico Cava
 97 U Chupacabra Echo @Izzy
+98 R Corpses of the Lost @Izzy
 102 U Deep-Cavern Bat @Campbell White
 103 U Defossilize @Dibujante Nocturno
 107 U Gargantuan Leech @Piotr Foksowicz
@@ -66,18 +75,24 @@ ScryfallCode=LCI
 120 U Soulcoil Viper @Allen Douglas
 121 R Souls of the Lost @Nils Hamm
 122 R Stalactite Stalker @Olivier Bernard
+123 R Starving Revenant @Fesbra
 124 U Stinging Cave Crawler @Dan Scott
+125 U Synapse Necromage @Piotr Foksowicz
 126 R Tarrian's Journal @Randy Gallegos
 127 R Terror Tide @Brock Grossman
+129 U Visage of Dread @David Auden Nash
+131 C Abrade @Bartek Fedyczak
 133 U Belligerent Yearling @Maxime Minard
 134 M Bonehoard Dracosaur @Mark Zug
 135 R Brass's Tunnel-Grinder @Cristi Balanescu
 137 R Breeches, Eager Pillager @Josu Hernaiz
+139 U Calamitous Cave-In @Diego Gisbert
 141 U Curator of Sun's Creation @Javier Charro
 143 U Diamond Pick-Axe @Dibujante Nocturno
 144 C Dinotomaton @Zoltan Boros
 145 R Dire Flail @Anthony Devine
 146 U Dowsing Device @Olena Richards
+147 U Dreadmaw's Ire @Crystal Sully
 148 U Enterprising Scallywag @Denman Rooke
 150 U Geological Appraiser @Alix Branwyn
 152 U Goldfury Strider @José Parodi
@@ -88,7 +103,9 @@ ScryfallCode=LCI
 158 M Ojer Axonil, Deepest Might @Victor Adame Minguez
 161 R Poetic Ingenuity @Kieran Yanner
 162 U Rampaging Ceratops @Nicholas Gregory
+164 U Saheeli's Lattice @Zoltan Boros
 165 U Scytheclaw Raptor @John Tedrick
+170 U Triumphant Chomp @Simon Dominic
 173 U Zoyowa's Justice @Nestor Ossandon Leal
 176 R Bedrock Tortoise @Maxime Minard
 178 U Cenote Scout @Caroline Gariba
@@ -106,22 +123,29 @@ ScryfallCode=LCI
 194 U Ixalli's Lorekeeper @Ernanda Souza
 196 R Jadelight Spelunker @Izzy
 203 C Nurturing Bristleback @John Tedrick
+204 M Ojer Kaslem, Deepest Growth @Ryan Pancoast
 206 C Pathfinding Axejaw @Raoul Vitale
 207 C Poison Dart Frog @Julia Metzger
 208 R Pugnacious Hammerskull @Kev Walker
 211 R Sentinel of the Nameless City @Josu Hernaiz
 212 M The Skullspore Nexus @Daarken
 213 U Spelunking @Ernanda Souza
+215 U Tendril of the Mycotyrant @Maxime Minard
 216 U Thrashing Brontodon @Randy Vargas
 217 U Twists and Turns @Deruchenko Alexander
 219 R Abuelo, Ancestral Echo @Victor Adame Minguez
 220 U Akawalli, the Seething Tower @Simon Dominic
 221 R Amalia Benavides Aguirre @Alix Branwyn
+222 M The Ancient One @Victor Adame Minguez
 224 U Bartolome del Presidio @Randy Gallegos
 225 R The Belligerent @Bruce Brenneise
+226 U Caparocti Sunborn @Donato Giancola
 227 U Captain Storm, Cosmium Raider @Diego Gisbert
+228 R Deepfathom Echo @Matt Stewart
 229 M Gishath, Sun's Avatar @Zack Stella
+230 C Itzquinth, Firstborn of Gishath @Lars Grant-West
 231 R Kellan, Daring Traveler @Marta Nael
+232 U Kutzil, Malamet Exemplar @Marie Magny
 233 U Master's Guide-Mural @Racrufi
 234 R Molten Collapse @Kasia 'Kafis' Zielińska
 235 M The Mycotyrant @Chase Stone
@@ -133,13 +157,18 @@ ScryfallCode=LCI
 241 R Squirming Emergence @Simon Dominic
 242 U Uchbenbak, the Great Mistake @Steven Belledin
 243 M Vito, Fanatic of Aclazotz @Marta Nael
+244 R Wail of the Forgotten @Ryan Valle
+245 U Zoyowa Lava-Tongue @Campbell White
 247 U Careening Mine Cart @Hector Ortiz
 249 M Chimil, the Inner Sun @Adam Paquette
 250 C Compass Gnome @David Astruga
+251 U Contested Game Ball @Camille Alquier
 252 U Digsite Conservator @Racrufi
+254 U Hoverstone Pilgrim @Izzy
 256 R Matzalantli, the Great Door @Piotr Dura
 257 M The Millennium Calendar @Zoltan Boros
 258 R Roaming Throne @Anastasia Balakchina
+261 U Sorcerous Spyglass @Tyler Walpole
 262 U Sunbird Standard @Aldo Domínguez
 264 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
 265 R Threefold Thunderhulk @Xavier Ribeiro
@@ -175,7 +204,9 @@ ScryfallCode=LCI
 298 U Akawalli, the Seething Tower @rishxxv
 299 R Amalia Benavides Aguirre @Alex Negrea
 301 U Bartolome del Presidio @Pig Hands
+302 U Caparocti Sunborn @Cabrol
 303 U Captain Storm, Cosmium Raider @rishxxv
+304 U Kutzil, Malamet Exemplar @Pig Hands
 305 M The Mycotyrant @Andy Brase
 306 U Nicanzil, Current Conductor @Cabrol
 307 M Quintorius Kand @Cosmin Podar
@@ -183,15 +214,19 @@ ScryfallCode=LCI
 309 M Sovereign Okinec Ahau @Pig Hands
 310 U Uchbenbak, the Great Mistake @WolfSkullJack
 311 M Vito, Fanatic of Aclazotz @WolfSkullJack
+312 U Zoyowa Lava-Tongue @Richard Luong
 313 R Throne of the Grim Captain @Rafal Wechterowicz
 314 M Ojer Taq, Deepest Foundation @Josu Hernaiz
 315 M Ojer Pakpatiq, Deepest Epoch @Clint Lockwood & Viko Menezes
 316 M Aclazotz, Deepest Betrayal @Clint Lockwood & Viko Menezes
 317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
+318 M Ojer Kaslem, Deepest Growth @Eddie Mendoza
+319 M The Ancient One @Clint Lockwood
 320 U Belligerent Yearling @Sidharth Chaturvedi
 321 M Bonehoard Dracosaur @Sidharth Chaturvedi
 322 U Rampaging Ceratops @Sidharth Chaturvedi
 323 U Scytheclaw Raptor @Sidharth Chaturvedi
+324 R Trumpeting Carnosaur @Sidharth Chaturvedi
 325 U Earthshaker Dreadmaw @Sidharth Chaturvedi
 326 M Ghalta, Stampede Tyrant @Sidharth Chaturvedi
 328 R Pugnacious Hammerskull @Sidharth Chaturvedi
@@ -203,10 +238,12 @@ ScryfallCode=LCI
 335 R Tishana's Tidebinder @LeDania
 336 M Bloodletter of Aclazotz @Bene Rohlmann
 337 R Bringer of the Last Gift @Psydrian
+338 R Starving Revenant @Jorge Gutierrez Garcia
 339 M Huatli, Poet of Unity @LeDania
 340 M The Skullspore Nexus @Mónica Robles Corzo
 341 R Kellan, Daring Traveler @Jorge Gutierrez Garcia
 342 R Molten Collapse @Mónica Robles Corzo
+343 R Wail of the Forgotten @Bene Rohlmann
 344 R Roaming Throne @LeDania
 345 M Cavern of Souls @Pedro Correa
 346 R Echoing Deeps @Mónica Robles Corzo
@@ -216,7 +253,10 @@ ScryfallCode=LCI
 350 R Restless Ridgeline @David Frasheski
 351 R Restless Vents @Alexander Kintner
 352 M Quintorius Kand @Psydrian
+354 R Fabrication Foundry @Racrufi
+355 R Kutzil's Flanker @Michele Giorgi
 356 R Sanguine Evangelist @Zezhou Chen
+357 R Thousand Moons Smithy @Manuel Castañón
 358 R Unstable Glyphbridge @Bastien Grivet
 360 R Braided Net @Diego Gisbert
 361 R Deeproot Pilgrimage @Rémi Jacquot
@@ -224,6 +264,7 @@ ScryfallCode=LCI
 363 R The Everflowing Well @David Álvarez
 364 R Kitesail Larcenist @Sidharth Chaturvedi
 365 R Subterranean Schooner @Svetlin Velinov
+366 R Corpses of the Lost @Izzy
 367 R Preacher of the Schism @Donato Giancola
 368 R Queen's Bay Paladin @Slawomir Maniak
 369 R Souls of the Lost @Nils Hamm
@@ -240,7 +281,9 @@ ScryfallCode=LCI
 380 R Growing Rites of Itlimoc @Josu Hernaiz
 381 R Intrepid Paleontologist @Irina Nordsol
 382 R Jadelight Spelunker @Izzy
+383 R Sentinel of the Nameless City @Josu Hernaiz
 384 R The Belligerent @Bruce Brenneise
+385 R Deepfathom Echo @Matt Stewart
 386 R Squirming Emergence @Simon Dominic
 387 R Matzalantli, the Great Door @Piotr Dura
 388 M The Millennium Calendar @Zoltan Boros
