@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="115">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlDkOgDAMBNPyUf7/BHoEOYw34wRb2i6EmTXiPEo5wfQMyUd402zp6+PlNX9wpH2JUTpE8mwxrbyrL8+u5FljejsT1fE+u/1X1E4evh79UI4jvh7fA+3Yw+/VT7RYfFv30U4W756zNLP3niPwPPEpXGc5z+62NeSOa91Y2UZ9Z/aheMfoqO9Xd2hlqnGRLip3mlPtTfNkMplMZu9cu8tHvQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKwjAQheFZ2WjrUUXxKNaTqUexoDsnxkCYmoIbU83/wRBCmJI37aLDQmR41U3r2IjslvK00fWg+3vmPNrr/po8x1bs25q+EuydTk5kvQpnra4XFzL3zfg8snNJnznVV0Iua+Qzd1pnF+rdne1cejOfXF8JU1k/0SYz6ZIZzSVnNKdv7Rv8e6glKwAAv8r/f9aktrwAAAAAgP/wAP7HODg=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdWd1S01AQzqRjGwKib4FcCBfO8Ab8WATeRBxfQAFFaPHvzqdwxhtfA0RfACgg0lqV8d6zk/3Ml805aesV45nZSdKcnLPf7rc/SZ/WougojqK2O8qYd+dP3fkTJ2tx9HdsuOsdnbPrjsfuXtfJhZNTmrcSZ8/JHKzJa8hz506eu/MH7viyEUUzSRR9r0fRm0ZZeu73V+64Ppbptqz6ic5nTnq6d9MdF5ysOlmk30SXkzjDs6h7Qy/R9VktW6cblzEzpiWd06U9YYudmv+ZBV1fsMrz91V/0eO1B6vIWyeHSb6n6PtC97jUNRYVk9igpesv017P1M7f4qJuG6QLfHdf9VxW262qfeV+R+fJnAceuzRVl3nde9PJlpPtWqZzS38Te782Pu3WM58L3sk0f0bm3koz2dA1dnTNLb13QhxizIx1hbjS0flnhAkiNtwkXh6rXYQL4FKT7NKLc5/fdrr0HYZfKq1Gfr5nfPpwLLOBnPdp/o96dq9v1sBR7m/rfhtqg13FDK6Cx9C9oz5jPx7FuX2bFOPMBbbpZi3nXZ/02TP+69Xz2JVzieVXilHmthv5MzJPrluNon3ss4/GylzbVt0F81fFt6R6AzNipUVcAY84XwFrm3gFjCJTSYZP9BG5k+TY26Q7/ArfMh6L2+KcTbI4/+zkZlrGi4F4vTC87Wh8MweZM7tqBwjzVe7fpZwLHLCB9Q1jgo32CMtMkvOh3fBzX2QyzX0i8ikp42WfIsfjvF3LeWVzJnS/0nj6SVjk/k96bjopXvtqjvVZV+sQcsFaIIcL/nf3inGNOF/38Bo5p6v+hN9CWJlbOBefM2eFr8w9wR+qNzIH83E9mxTrF/K61OpuvSiy/u25XA+ODfH3QVL0c1vz1wvC2GqUc2ZIOE/Y2INdLAfZnzYuUW+h05bWkPE0i02RiTSTL0lmg/dz5X4F+K2f2f+DOGf7IPiC+TyMnRgj1sRvgteXX30DNhDcVf0K490zOvgwzmjuw7ofb2TCcTwMFzg2bZ7mmPXFXdV4rJwK1TZebxBHD5U/kuNl3ZeE98ON0fhQlYOx16B6Ysd+ktUF9CbAjVwneY7XC/XnjJPt+LtexFzFWcbEOQac4bpp97KYJO/cSvMjBDVQ9pnWeBb957Wf+Gb6XOxra6WPU8Dbr3iXYUxd4igwIedw7hGc+4TnwJyH+lDLE+bISVx878NAnkO8A++kp16PU04chAsCXD7f7SdlPzEOxjcoP0BvyXXNgG8t/5mHkq+5XwH28bTsHz5WxR7z0ofR9tbD5D+OH+l9BO9X9e2W8e2K9ou+OoT65cMe6tV82EL4+L2Icza/KwxT95lfkguA99TjW/m9am1+J2GeXRH+Aw8uxsa8DNVmcMpnA987FPeay9qHrcX5tby7+bh8GehJGaevL7L6+eJt2P5smPwu51NJsf/Cd6cOvX8v0fu55bIMyWGSe3w10qfrdEUfM0yPMWpM2nyEWoNvO524/P3Bh5PxIt/yO5f1p7UDxxue8x0h6K35HXFUW6GmLhisqDf4plE1hM/jVDcYO/OZ8XHdsbXUl7f52tayQT7nPmlB+XtBPrW1tWqs6PM8uP++a/zD/UJVL1Q12LZ2H1/vBaz8js7fU0cZl2qnkF7WT/+Cb9Cw+O35RJr3SYjPQZz1DeS2XgDvdRn4johvjP+CFbntSL8lXucxTA4KDf4mDKw2fv+XMU8+PdbaLFjPrzmfkZcXR9ST/19AT9IJ9JjXaezWwr1S1cA3cOA+prz+B47mIJE=
+  </data>
+ </layer>
+ <layer id="7" name="Bridge" width="60" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzjENACAMALCdOEAJwf+PE0zMxLI9rYJGAAAV3pke9Pp7etBr3ekBAAAAANRIqtgCQw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="448" y="478" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="128.157" y="208.569"/>
+  <object id="63" template="../../obj/gold.tx" x="144.217" y="209.673"/>
+  <object id="68" template="../../obj/gold.tx" x="326.375" y="390.247"/>
+  <object id="71" template="../../obj/manashards.tx" x="176.284" y="195.533"/>
+  <object id="72" template="../../obj/booster.tx" x="160.912" y="207.868">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [&quot;Green&quot;],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;type&quot;: &quot;Green&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [&quot;Colorless&quot;],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/waypoint.tx" x="136.985" y="99.8652"/>
+  <object id="85" template="../../obj/waypoint.tx" x="236.985" y="289.365"/>
+  <object id="105" template="../../obj/enemy.tx" x="144.167" y="239.51">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;,&quot;Second Head of the Hydra&quot;,&quot;Third Head of the Hydra&quot;,&quot;Fourth Head of the Hydra&quot;,&quot;Fifth Head of the Hydra&quot;,&quot;Sixth Head of the Hydra&quot;]
+}</property>
+    <property name="enemy" value="The Hydra of Shandalaar"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="107" template="../../obj/enemy.tx" x="370.402" y="272.155">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="78,99,78,98,93,98,78"/>
+   </properties>
+  </object>
+  <object id="108" template="../../obj/collision.tx" x="-0.122016" y="479.744" width="962.195" height="16"/>
+  <object id="109" template="../../obj/collision.tx" x="-2.27555" y="-17.028" width="962.195" height="16"/>
+  <object id="110" template="../../obj/collision.tx" x="960" y="-17.383" width="16" height="514.099"/>
+  <object id="111" template="../../obj/collision.tx" x="-17.3333" y="-15.0495" width="16" height="514.099"/>
+  <object id="112" template="../../obj/enemy.tx" x="773.5" y="185">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="78,99,78,98,93,98,78"/>
+   </properties>
+  </object>
+  <object id="114" template="../../obj/waypoint.tx" x="495.5" y="253"/>
+ </objectgroup>
+</map>

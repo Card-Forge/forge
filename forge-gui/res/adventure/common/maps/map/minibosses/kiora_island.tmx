@@ -57,7 +57,7 @@
    </properties>
   </object>
   <object id="55" template="../../obj/treasure.tx" x="63.2413" y="45.158"/>
-  <object id="64" template="../../obj/treasure.tx" x="225.969" y="32.1053" width="16"/>
+  <object id="64" template="../../obj/treasure.tx" x="225.969" y="32.1053"/>
   <object id="56" template="../../obj/enemy.tx" x="157.832" y="107.862" width="16" height="16">
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Kiora's Boss Effect&quot;]
@@ -135,13 +135,6 @@
   <object id="88" template="../../obj/waypoint.tx" x="290.52" y="423.634"/>
   <object id="95" template="../../obj/manashards.tx" x="886" y="172"/>
   <object id="96" template="../../obj/waypoint.tx" x="612" y="414"/>
-  <object id="97" template="../../obj/enemy.tx" x="138.667" y="696">
-   <properties>
-    <property name="enemy" value="Jellyfish"/>
-    <property name="threatRange" type="int" value="30"/>
-    <property name="waypoints" value="81,83,82,83"/>
-   </properties>
-  </object>
   <object id="98" template="../../obj/waypoint.tx" x="800" y="415.333"/>
   <object id="99" template="../../obj/waypoint.tx" x="809.333" y="579.333"/>
   <object id="100" template="../../obj/waypoint.tx" x="118.667" y="425.333"/>
