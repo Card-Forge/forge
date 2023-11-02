@@ -433,12 +433,21 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
                         for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
                             if (gameCard != null) {
-                                gameCard.addCounter(cti.getKey(), cti.getValue(), placer, table);
+                                if (!sa.hasParam("CounterNum")) {
+                                    // default is all
+                                    counterAmount = cti.getValue();
+                                }
+                                if (etbcounter) {
+                                    gameCard.addEtbCounter(cti.getKey(), counterAmount, placer);
+                                } else {
+                                    gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
+                                }
                             }
                         }
                     }
                     continue;
                 }
+
                 if (sa.hasParam("CounterTypePerDefined") || sa.hasParam("UniqueType")) {
                     counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), obj, pc);
                     if (counterType == null) continue;
