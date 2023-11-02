@@ -1,4 +1,4 @@
-Name:Welcome to...
+Name:Welcome to . . .
 ManaCost:1 G G
 Types:Enchantment Saga
 K:Saga:3:DBAnimateAll,DBToken,DBWrath
@@ -22,4 +22,4 @@ Types:Legendary Land
 S:Mode$ Continuous | Affected$ Dinosaur.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Escape:CardManaCost ExileFromGrave<3/Card.Other/other> | Description$ Each Dinosaur card in your graveyard has escape. The escape cost is equal to the card’s mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add {G} for each Dinosaur you control.
 SVar:X:Count$Valid Dinosaur.YouCtrl
-Oracle:(Transforms from Welcome to ….)\nEach Dinosaur card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)\n{T}: Add {G} for each Dinosaur you control.
+Oracle:(Transforms from Welcome to . . .)\nEach Dinosaur card in your graveyard has escape. The escape cost is equal to the card's mana cost plus exile three other cards from your graveyard. (You may cast cards from your graveyard for their escape cost.)\n{T}: Add {G} for each Dinosaur you control.
