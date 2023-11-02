@@ -3308,7 +3308,7 @@ public class ComputerUtil {
     }
 
     public static boolean shouldSacrificeThreatenedCard(Player ai, Card c, SpellAbility sa) {
-        if (sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
+        if (sa != null && sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
         ComputerUtilCost.setSuppressRecursiveSacCostCheck(true);
