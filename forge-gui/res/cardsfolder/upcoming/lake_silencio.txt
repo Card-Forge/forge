@@ -1,0 +1,7 @@
+Name:Lake Silencio
+ManaCost:no cost
+Types:Plane Earth
+S:Mode$ Continuous | AddKeyword$ Split second | Affected$ Card | AffectedZone$ Stack | EffectZone$ Command | Description$ Still Point in Time — All spells have split second. (As long as a spell with split second is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever chaos ensues, CARDNAME deals 6 damage to target creature an opponent controls. If a creature dealt damage this way would die this turn, exile it instead.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | NumDmg$ 6 | ReplaceDyingDefined$ Targeted
+Oracle:Still Point in Time — All spells have split second. (As long as a spell with split second is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nWhenever chaos ensues, Lake Silencio deals 6 damage to target creature an opponent controls. If a creature dealt damage this way would die this turn, exile it instead.

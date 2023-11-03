@@ -1,0 +1,11 @@
+Name:North Pole Research Base
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDrawCard | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, target opponent draws a card and creates a Treasure token.
+SVar:TrigDrawCard:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to draw a card and create a Treasure token | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ ParentTarget
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEndTurn | TriggerDescription$ Whenever chaos ensues, create a 2/2 white Alien creature token. When you do, tap target nontoken creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_alien | TokenOwner$ You | Execute$ TrigTap
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.nonToken+OppCtrl | TgtPrompt$ Select target nontoken creature an opponent controls | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Choices$ Targeted  | CounterType$ Stun | CounterNum$ 1
+Oracle:At the beginning of your upkeep, target opponent draws a card and creates a Treasure token.\nWhenever chaos ensues, create a 2/2 white Alien creature token. When you do, tap target nontoken creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
