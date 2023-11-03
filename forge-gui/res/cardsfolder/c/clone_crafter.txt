@@ -2,7 +2,7 @@ Name:Clone Crafter
 ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield, conjure a duplicate of a random creature card from your opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, conjure a duplicate of a random creature card from your opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
