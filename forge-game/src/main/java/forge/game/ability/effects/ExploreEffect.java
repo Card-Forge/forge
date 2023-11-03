@@ -14,6 +14,8 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -53,6 +55,11 @@ public class ExploreEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (final Card c : getTargetCards(sa)) {
+
+            if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(c)) != ReplacementResult.NotReplaced) {
+                continue;
+            }
+
             // revealed land card
             boolean revealedLand = false;
             final Player pl = c.getController();
