@@ -816,23 +816,10 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
-                    CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
+                    CardCollection cards = cardsGainedFrom(params.containsKey("GainsAbilitiesOfDefined") ?
+                            "GainsAbilitiesOfDefined" : "GainsAbilitiesOf", params, hostCard, stAb, game);
 
-                    if (params.containsKey("GainsAbilitiesOf")) {
-                        final String[] valids = params.get("GainsAbilitiesOf").split(",");
-                        List<ZoneType> validZones;
-                        if (params.containsKey("GainsAbilitiesOfZones")) {
-                            validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
-                        } else {
-                            validZones = ImmutableList.of(ZoneType.Battlefield);
-                        }
-                        cardsIGainedAbilitiesFrom.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
-                    }
-                    if (params.containsKey("GainsAbilitiesOfDefined")) {
-                        cardsIGainedAbilitiesFrom.addAll(AbilityUtils.getDefinedCards(hostCard, params.get("GainsAbilitiesOfDefined"), stAb));
-                    }
-
-                    for (Card c : cardsIGainedAbilitiesFrom) {
+                    for (Card c : cards) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
                                 if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
@@ -868,6 +855,17 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         addedTrigger.add(actualTrigger);
+                    }
+                }
+
+                if (params.containsKey("GainsTriggerAbsOf")) {
+                    CardCollection cards = cardsGainedFrom("GainsTriggerAbsOf", params, hostCard, stAb, game);
+
+                    for (Card c : cards) {
+                        for (final Trigger trig : c.getTriggers()) {
+                            final Trigger newTrigger = affectedCard.addTriggerForStaticAbility(trig, stAb);
+                            addedTrigger.add(newTrigger);
+                        }
                     }
                 }
 
@@ -999,6 +997,24 @@ public final class StaticAbilityContinuous {
         };
         sourceCard.getGame().getEndOfTurn().addUntil(removeIgnore);
         sourceCard.addLeavesPlayCommand(removeIgnore);
+    }
+
+    private static CardCollection cardsGainedFrom(final String param, final Map<String, String> params,
+                                                  final Card hostCard, final StaticAbility stAb, final Game game) {
+        CardCollection cards = new CardCollection();
+        if (param.contains("Defined")) {
+            cards.addAll(AbilityUtils.getDefinedCards(hostCard, params.get(param), stAb));
+        } else {
+            final String[] valids = params.get(param).split(",");
+            List<ZoneType> validZones;
+            if (params.containsKey("GainsAbilitiesOfZones")) {
+                validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+            } else {
+                validZones = ImmutableList.of(ZoneType.Battlefield);
+            }
+            cards.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
+        }
+        return cards;
     }
 
     private static List<Player> getAffectedPlayers(final StaticAbility stAb) {

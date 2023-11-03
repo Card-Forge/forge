@@ -1,0 +1,12 @@
+Name:Idris, Soul of the TARDIS
+ManaCost:1 U R
+Types:Legendary Creature Human Incarnation
+PT:3/3
+K:Vanishing:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another artifact you control until NICKNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | ChangeType$ Artifact.Other+YouCtrl | SelectPrompt$ Select another artifact you control | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.ExiledWithSource | GainsTriggerAbsOf$ Card.ExiledWithSource | GainsAbilitiesOfZones$ Exile | AddPower$ X | AddToughness$ X | Description$ NICKNAME has all activated and triggered abilities of the exiled card and gets +X/+X, where X is the exiled card's mana value.
+SVar:X:Count$ValidExile Card.ExiledWithSource$CardManaCost
+DeckHas:Ability$Counters|Sacrifice
+DeckNeeds:Type$Artifact
+Oracle:Vanishing 3\nImprint — When Idris, Soul of the TARDIS enters the battlefield, exile another artifact you control until Idris leaves the battlefield.\nIdris has all activated and triggered abilities of the exiled card and gets +X/+X, where X is the exiled card's mana value.
