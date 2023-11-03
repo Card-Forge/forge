@@ -117,8 +117,10 @@ public enum FSkinTexture implements FImage {
     public boolean load(String planeName) {
         if (hasError)
             return false;
-        if (!planeName.isEmpty())
+        if (!planeName.isEmpty()) {
+            texture = null; //reset
             this.filename = planeName + ".jpg";
+        }
         FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
