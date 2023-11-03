@@ -17,6 +17,5 @@ Name:Temple of Cultivation
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ SetState | Cost$ 2 G T | CheckSVar$ X | SVarCompare$ GE10 | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if you control ten or more permanents and only as a sorcery.
-SVar:X:Count$Valid Permanent.YouCtrl
+A:AB$ SetState | Cost$ 2 G T | IsPresent$ Permanent.YouCtrl | SVarCompare$ GE10 | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if you control ten or more permanents and only as a sorcery.
 Oracle:(Transforms from Ojer Kaslem, Deepest Growth.)\n{T}: Add {G}.\n{2}{G}, {T}: Transform Temple of Cultivation. Activate only if you control ten or more permanents and only as a sorcery.
