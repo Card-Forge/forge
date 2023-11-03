@@ -1,0 +1,9 @@
+Name:Fabrication Foundry
+ManaCost:1 W
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ W | Amount$ 1 | RestrictValid$ Spell.Artifact,Activated.Artifact+inZoneBattlefield | SpellDescription$ Add {W}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
+A:AB$ ChangeZone | Cost$ 2 W T Exile<X/Artifact.Other/other artifacts> | Origin$ Graveyard | Destination$ Battlefield |ValidTgts$ Artifact.cmcLEX+YouOwn | TgtPrompt$ Select target artifact card with total mana value X | SorcerySpeed$ True | SpellDescription$ Return target artifact card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:X:Count$xPaid
+SVar:Y:Sacrificed$CardManaCost
+DeckHints:Type$Artifact
+Oracle:{T}: Add {W}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.\n{2}{W}, {T}, Exile one or more other artifacts you control with total mana value X: Return target artifact card with mana value X or less from your graveyard to the battlefield. Activate only as a sorcery.

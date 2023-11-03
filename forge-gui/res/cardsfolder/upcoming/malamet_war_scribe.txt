@@ -1,0 +1,7 @@
+Name:Malamet War Scribe
+ManaCost:3 W W
+Types:Creature Cat Warrior
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +2/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 1 
+Oracle:When Malamet War Scribe enters the battlefield, creatures you control get +2/+1 until end of turn.
