@@ -2088,15 +2088,17 @@ public class ComputerUtil {
         // a creature will [hopefully] die from a spell on stack
         boolean willDieFromSpell = false;
         boolean noStackCheck = false;
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        if (aic.getBooleanProperty(AiProps.DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION)) {
-            // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
-            // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility sa = si.getSpellAbility();
-                if (sa.getApi() == ApiType.Counter) {
-                    noStackCheck = true;
-                    break;
+        if (ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            if (aic.getBooleanProperty(AiProps.DONT_EVAL_KILLSPELLS_ON_STACK_WITH_PERMISSION)) {
+                // See if permission is on stack and ignore this check if there is and the relevant AI flag is set
+                // TODO: improve this so that this flag is not needed and the AI can properly evaluate spells in presence of counterspells.
+                for (SpellAbilityStackInstance si : game.getStack()) {
+                    SpellAbility sa = si.getSpellAbility();
+                    if (sa.getApi() == ApiType.Counter) {
+                        noStackCheck = true;
+                        break;
+                    }
                 }
             }
         }
@@ -3308,7 +3310,9 @@ public class ComputerUtil {
     }
 
     public static boolean shouldSacrificeThreatenedCard(Player ai, Card c, SpellAbility sa) {
-        if (sa != null && sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
+        if (!ai.getController().isAI()) {
+            return false; // only makes sense for actual AI decisions
+        } else if (sa != null && sa.getApi() == ApiType.Regenerate && sa.getHostCard().equals(c)) {
             return false; // no use in sacrificing a card in an attempt to regenerate it
         }
         ComputerUtilCost.setSuppressRecursiveSacCostCheck(true);
