@@ -1,0 +1,8 @@
+Name:Vanguard of the Rose
+ManaCost:1 W
+Types:Creature Vampire Knight
+PT:3/1
+A:AB$ Pump | Cost$ Sac<1/Creature.Other;Artifact/another creature or artifact> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ Sacrifice another creature or artifact: CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+DeckHas:Ability$Sacrifice
+Oracle:{1}, Sacrifice another creature or artifact: Vanguard of the Rose gains indestructible until end of turn. Tap it.
