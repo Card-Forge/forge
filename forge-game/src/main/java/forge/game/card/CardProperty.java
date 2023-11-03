@@ -1054,24 +1054,6 @@ public class CardProperty {
             if (!card.wasDiscarded()) {
                 return false;
             }
-        } else if (property.startsWith("ControlledByPlayerInTheDirection")) {
-            final String restrictions = property.split("ControlledByPlayerInTheDirection_")[1];
-            final String[] res = restrictions.split("_");
-            final Direction direction = Direction.valueOf(res[0]);
-            Player p = null;
-            if (res.length > 1) {
-                for (Player pl : game.getPlayers()) {
-                    if (pl.isValid(res[1], sourceController, source, spellAbility)) {
-                        p = pl;
-                        break;
-                    }
-                }
-            } else {
-                p = sourceController;
-            }
-            if (p == null || !controller.equals(game.getNextPlayerAfter(p, direction))) {
-                return false;
-            }
         } else if (property.equals("hasABasicLandType")) {
             if (!card.hasABasicLandType()) {
                 return false;
