@@ -384,13 +384,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         if (data.containsKey("boosters")) {
             Deck[] decks = (Deck[]) data.readObject("boosters");
-            for (Deck d : decks) {
-                if (d != null && !d.isEmpty()) {
-                    boostersOwned.add(d);
-                } else {
-                    System.err.printf("Null or empty booster %s\n", d);
-                    System.out.println("You have an empty booster pack in your inventory.");
+            if (decks != null) {
+                for (Deck d : decks) {
+                    if (d != null && !d.isEmpty()) {
+                        boostersOwned.add(d);
+                    } else {
+                        System.err.printf("Null or empty booster %s\n", d);
+                        System.out.println("You have an empty booster pack in your inventory.");
+                    }
                 }
+            } else {
+                System.err.println("Deck[] is null! [boosters]");
             }
         }
 

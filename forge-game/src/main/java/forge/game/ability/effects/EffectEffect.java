@@ -292,7 +292,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen name
-            if (!hostCard.getNamedCard().isEmpty()) {
+            if (hostCard.hasNamedCard()) {
                 eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 

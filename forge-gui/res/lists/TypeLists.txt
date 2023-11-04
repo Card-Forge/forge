@@ -422,6 +422,7 @@ Undercity
 [BattleTypes]
 Siege
 [PlanarTypes]
+Androzani Minor
 Alara
 Alfava Metraxis
 Amonkhet

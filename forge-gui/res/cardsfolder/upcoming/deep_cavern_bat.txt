@@ -1,0 +1,12 @@
+Name:Deep-Cavern Bat
+ManaCost:1 B
+Types:Creature Bat
+PT:1/1
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, look at target opponent's hand. You may exile a nonland card from it until CARDNAME leaves the battlefield.
+SVar:TrigReveal:DB$ RevealHand | Defined$ Targeted | Look$ True | ValidTgts$ Opponent | SubAbility$ ExileCard
+SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nWhen Deep-Cavern Bat enters the battlefield, look at target opponent's hand. You may exile a nonland card from it until Deep-Cavern Bat leaves the battlefield.
