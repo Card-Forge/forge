@@ -90,7 +90,9 @@ public class ExploreEffect extends SpellAbilityEffect {
             }
 
             // a creature does explore even if it isn't on the battlefield anymore
-            game.getTriggerHandler().runTrigger(TriggerType.Explores, AbilityKey.mapFromCard(c), false);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
+            game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
         }
         table.replaceCounterEffect(game, sa, true);
         triggerList.triggerChangesZoneAll(game, sa);
