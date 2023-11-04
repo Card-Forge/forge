@@ -355,7 +355,6 @@ public class AdventureEventData implements Serializable {
                 for (PrintSheet ps : c.getPrintSheetsBySection()) {
                     //exclude block with sets containing P9 cards..
                     if (ps.containsCardNamed("Black Lotus", 1)
-                            || ps.containsCardNamed("Black Lotus", 1)
                             || ps.containsCardNamed("Mox Emerald", 1)
                             || ps.containsCardNamed("Mox Pearl", 1)
                             || ps.containsCardNamed("Mox Ruby", 1)
