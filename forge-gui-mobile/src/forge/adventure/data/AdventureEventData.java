@@ -13,6 +13,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.card.CardEdition;
+import forge.card.PrintSheet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
@@ -351,9 +352,25 @@ public class AdventureEventData implements Serializable {
                     }
                     isOkay = boosterSize == 15;
                 }
+                for (PrintSheet ps : c.getPrintSheetsBySection()) {
+                    //exclude block with sets containing P9 cards..
+                    if (ps.containsCardNamed("Black Lotus", 1)
+                            || ps.containsCardNamed("Mox Emerald", 1)
+                            || ps.containsCardNamed("Mox Pearl", 1)
+                            || ps.containsCardNamed("Mox Ruby", 1)
+                            || ps.containsCardNamed("Mox Sapphire", 1)
+                            || ps.containsCardNamed("Mox Jet", 1)
+                            || ps.containsCardNamed("Ancestral Recall", 1)
+                            || ps.containsCardNamed("Timetwister", 1)
+                            || ps.containsCardNamed("Time Walk", 1)) {
+                        isOkay = false;
+                        break;
+                    }
+                }
             }
-            if (isOkay)
+            if (isOkay) {
                 legalBlocks.add(b);
+            }
         }
 
         for (String restricted : Config.instance().getConfigData().restrictedEditions) {
