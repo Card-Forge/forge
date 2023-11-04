@@ -1,7 +1,7 @@
 Name:Twists and Turns
 ManaCost:G
 Types:Enchantment
-R:Event$ Explore | ValidExplorer$ Creature.YouCtrl | ReplaceWith$ DBScry | Description$ If a creature you control would explore, instead you scry 1, then that creature explores.
+R:Event$ Explore | ActiveZones$ Battlefield | ValidExplorer$ Creature.YouCtrl | ReplaceWith$ DBScry | Description$ If a creature you control would explore, instead you scry 1, then that creature explores.
 SVar:DBScry:DB$ Scry | SubAbility$ DBExplore
 SVar:DBExplore:DB$ Explore | Defined$ ReplacedCard
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control explores.

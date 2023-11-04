@@ -771,27 +771,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message, Map<String, Object> params) {
-        if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowCardInPrompt")) {
-            // The card wants another thing displayed in the prompt on mouse over rather than itself
-            Card show = null;
-            Object o = null;
-            switch (sa.getParam("ShowCardInPrompt")) {
-                case "RememberedFirst":
-                    o = sa.getHostCard().getFirstRemembered();
-                    if (o instanceof Card) {
-                        show = (Card) o;
-                    }
-                    break;
-                case "RememberedLast":
-                    o = Iterables.getLast(sa.getHostCard().getRemembered(), null);
-                    if (o instanceof Card) {
-                        show = (Card) o;
-                    }
-                    break;
-            }
-            tempShowCard(show);
-            boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
+    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
+                                 Map<String, Object> params, Card cardToShow) {
+        // Another card should be displayed in the prompt on mouse over rather than the SA source
+        if (cardToShow != null) {
+            tempShowCard(cardToShow);
+            boolean result = InputConfirm.confirm(this, cardToShow.getView(), sa, message);
             endTempShowCards();
             return result;
         }
