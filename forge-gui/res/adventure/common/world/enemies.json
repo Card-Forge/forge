@@ -9879,6 +9879,90 @@
 	]
 },
 {
+	"name": "Faerie Dragon",
+	"sprite": "sprites/enemy/fey/faerie_dragon.atlas",
+	"deck": [
+		"decks/standard/faeriedragon.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 17,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 1,
+			"count": 2,
+			"colors": [
+				"Black",
+				"Blue"
+			],
+			"rarity": [
+				"uncommon",
+				"rare",
+				"mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "BU",
+	"questTags": [
+		"Mythical",
+		"Flying",
+		"Faerie",
+		"IdentityBlack",
+		"Dragon",
+		"IdentityBlue",
+		"IdentityDimir"
+	]
+},
+{
 	"name": "Falcon",
 	"sprite": "sprites/enemy/beast/falcon.atlas",
 	"deck": [
@@ -15421,6 +15505,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 1.5,
 	"life": 19,
 	"rewards": [
 		{
@@ -15459,15 +15544,15 @@
 },
 {
 	"name": "The Hydra of Shandalaar",
-	"sprite": "sprites/enemy/monstrosity/hydra.atlas",
+	"sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
 	"deck": [
 		"decks/standard/hydraboss.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"boss":true,
 	"life": 30,
 	"rewards": [
 		{
@@ -17834,6 +17919,59 @@
 		"Octopus",
 		"IdentityBlue",
 		"Lorthos"
+	]
+},
+{
+	"name": "Mageripper",
+	"sprite": "sprites/enemy/monstrosity/mageripper.atlas",
+	"deck": [
+		"decks/standard/mageripper.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.8,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 2,
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Enchantment"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "GUR",
+	"questTags": [
+		"Mythical",
+		"Insect",
+		"Monster",
+		"Identity Temur",
+		"Insect"
 	]
 },
 {

@@ -2071,12 +2071,12 @@
 	]
 },
 {
-	"name": "GroveCentaur",
+	"name": "GroveFaerieDragon",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_12_centaur.tmx",
+	"map": "../common/maps/map/grove/grove_12_faeriedragon.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",

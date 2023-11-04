@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="115">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="116">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -34,7 +34,6 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="333.884" y="47.5858"/>
   <object id="63" template="../../obj/gold.tx" x="94.1965" y="341.797"/>
   <object id="65" template="../../obj/enemy.tx" x="364.959" y="293.643">
    <properties>
@@ -62,8 +61,8 @@
   <object id="71" template="../../obj/enemy.tx" x="304.49" y="112.991">
    <properties>
     <property name="enemy" value="Eldrazi Devastator"/>
-    <property name="speedModifier" type="float" value="5"/>
-    <property name="threatRange" type="int" value="80"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="72" template="../../obj/manashards.tx" x="441.407" y="39.8314"/>
@@ -73,21 +72,21 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;editions&quot;: [ &quot;TSR&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;colors&quot;: [&quot;Colorless&quot;],
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;editions&quot;: [ &quot;TSR&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [&quot;Colorless&quot;],
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;BFZ&quot; ],
+    &quot;editions&quot;: [ &quot;TSR&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [&quot;Colorless&quot;],
@@ -127,5 +126,25 @@
   <object id="112" template="../../obj/waypoint.tx" x="180.727" y="58.8906"/>
   <object id="113" template="../../obj/waypoint.tx" x="176.746" y="120.207"/>
   <object id="114" template="../../obj/waypoint.tx" x="452.271" y="114.235"/>
+  <object id="115" template="../../obj/treasure.tx" x="317.333" y="49.3333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2,
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
