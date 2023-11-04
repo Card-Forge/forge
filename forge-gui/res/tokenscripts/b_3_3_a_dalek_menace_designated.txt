@@ -1,8 +1,0 @@
-Name:Dalek Token
-ManaCost:no cost
-Types:Artifact Creature Dalek
-Colors:black
-PT:3/3
-K:Menace
-S:Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered | Description$ This creature attacks its designated player each combat if able.
-Oracle:Menace\nThis creature attacks the designated player each combat if able.
