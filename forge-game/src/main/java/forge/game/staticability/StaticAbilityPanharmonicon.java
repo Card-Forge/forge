@@ -26,6 +26,11 @@ public class StaticAbilityPanharmonicon {
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
+        if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
+            // exclude "helper" trigger
+            return n;
+        }
+
         // These effects say "abilities of objects trigger an additional time" which excludes Delayed Trigger
         // 603.2e
         if (t.getSpawningAbility() != null) {
