@@ -55,6 +55,7 @@ Camel:Camels
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
+Capybara:Capybaras
 Centaur:Centaurs
 Cephalid:Cephalids
 Chimera:Chimeras
