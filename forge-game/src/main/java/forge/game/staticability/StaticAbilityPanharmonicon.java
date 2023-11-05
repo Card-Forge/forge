@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 
@@ -13,6 +14,8 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -22,6 +25,11 @@ public class StaticAbilityPanharmonicon {
 
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
+
+        if (t.isStatic() && t.getMode() != TriggerType.TapsForMana && t.getMode() != TriggerType.ManaAdded) {
+            // exclude "helper" trigger
+            return n;
+        }
 
         // These effects say "abilities of objects trigger an additional time" which excludes Delayed Trigger
         // 603.2e
@@ -37,7 +45,8 @@ public class StaticAbilityPanharmonicon {
 
         CardCollectionView cardList = null;
         // if LTB look back
-        if ((t.getMode() == TriggerType.ChangesZone || t.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(t.getParam("Origin"))) {
+        if (t.getMode() == TriggerType.Exploited || t.getMode() == TriggerType.Sacrificed || t.getMode() == TriggerType.Destroyed ||
+                (t.getMode() == TriggerType.ChangesZone || t.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(t.getParam("Origin"))) {
             if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
             }
@@ -112,7 +121,20 @@ public class StaticAbilityPanharmonicon {
                 table = (CardZoneTable) runParams.get(AbilityKey.Cards);
             }
 
-            if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb).isEmpty()) {
+            List<ZoneType> trigOrigin = null;
+            ZoneType trigDestination = null;
+            if (trigger.hasParam("Destination") && !trigger.getParam("Destination").equals("Any")) {
+                trigDestination = ZoneType.valueOf(trigger.getParam("Destination"));
+            }
+            if (trigger.hasParam("Origin") && !trigger.getParam("Origin").equals("Any")) {
+                trigOrigin = ZoneType.listValueOf(trigger.getParam("Origin"));
+            }
+            CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
+
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb);
+
+            // check that whatever caused the trigger to fire is also a cause the static applies for
+            if (Collections.disjoint(causesForTrigger, causesForStatic)) {
                 return false;
             }
         } else if (trigMode.equals(TriggerType.Attacks)) {

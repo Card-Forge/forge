@@ -746,7 +746,8 @@ public class CardFactory {
             result.put(CardStateName.Adventure, ret2);
         } else if (in.isTransformable() && sa instanceof SpellAbility && (
                 ApiType.CopyPermanent.equals(((SpellAbility)sa).getApi()) ||
-                ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi())
+                ApiType.CopySpellAbility.equals(((SpellAbility)sa).getApi()) ||
+                ApiType.ReplaceToken.equals(((SpellAbility)sa).getApi())
                 )) {
             // CopyPermanent can copy token
             final CardState ret1 = new CardState(out, CardStateName.Original);
