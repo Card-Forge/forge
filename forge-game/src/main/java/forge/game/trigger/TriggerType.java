@@ -130,6 +130,7 @@ public enum TriggerType {
     TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
     Unattach(TriggerUnattach.class),
+    UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),
     Vote(TriggerVote.class);
 

@@ -121,6 +121,7 @@ public class Untap extends Phase {
     private void doUntap() {
         final Player player = game.getPhaseHandler().getPlayerTurn();
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
+        Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
         for (Card c : list) {
@@ -169,7 +170,9 @@ public class Untap extends Phase {
         });
 
         for (final Card c : list) {
-            optionalUntap(c);
+            if (optionalUntap(c)) {
+                untapMap.computeIfAbsent(player, i -> new CardCollection()).add(c);
+            }
         }
 
         // other players untapping during your untap phase
@@ -186,7 +189,10 @@ public class Untap extends Phase {
             if (cardWithKW.isExertedBy(player)) {
                 continue;
             }
-            cardWithKW.untap(true);
+            if (cardWithKW.untap(true)) {
+                untapMap.computeIfAbsent(cardWithKW.getController(),
+                        i -> new CardCollection()).add(cardWithKW);
+            }
         }
         // end other players untapping during your untap phase
 
@@ -215,7 +221,9 @@ public class Untap extends Phase {
             }
         }
         for (Card c : restrictUntapped) {
-            optionalUntap(c);
+            if (optionalUntap(c)) {
+                untapMap.computeIfAbsent(player, i -> new CardCollection()).add(c);
+            }
         }
 
         // Remove temporary keywords
@@ -230,12 +238,15 @@ public class Untap extends Phase {
         
         // remove exerted flags from all things in play
         // even if they are not creatures
-        for (final Card c : game.getCardsInGame()) {
+        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             c.removeExertedBy(player);
-        } 
+        }
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Map, untapMap);
+        game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
     } // end doUntap
 
-    private static void optionalUntap(final Card c) {
+    private static boolean optionalUntap(final Card c) {
         boolean untap = true;
 
         if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && c.isTapped()) {
@@ -254,8 +265,9 @@ public class Untap extends Phase {
             untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
         }
         if (untap) {
-            c.untap(true);
+            if (!c.untap(true)) untap = false;
         }
+        return untap;
     }
 
     private static void doPhasing(final Player turn) {
