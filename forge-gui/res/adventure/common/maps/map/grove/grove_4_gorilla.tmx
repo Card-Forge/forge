@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -13,12 +13,12 @@
  <tileset firstgid="11905" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <layer id="1" name="Background" width="36" height="35">
   <data encoding="base64" compression="zlib">
-   eJztzrEJADAIAEHbLGPmzNaZwE4Q5A6+/wiAfc6dPmCTl3UAAADdPrjmBTo=
+   eJztziEVACAQBbBDEodS1z8CggQ8BF9MzK9nVQM8GOv4/fC5P6W8Uh4AAAAJNi5vIBE=
   </data>
  </layer>
  <layer id="2" name="Ground" width="36" height="35">
   <data encoding="base64" compression="zlib">
-   eJzt0jEKgDAMRuHMDsXdO5SKs4dzdOyNpUMpGepofuF9kP2RxAzAH217dIGXDrO7RFd4q9CO1O5Fz7ul/XMeAx2X2D1aTx+VjuimWQs98456ft8CAAC0PRndGh4=
+   eJytl0FS4zAQRRUWU+X4GlkTIEyxoWZrMpVzwDlmmZNMAWFu5YDZs0dN/CffbbWkYP2qLgzB9tPvVrfi3DQ1tXO/68P149y55/nEBxbgefPR+XgnNtHCx5/zYZRQbN2tf/8//9nOx4uPV+KR98+W/ueFj6tyPI1at9am90iYhf2p5//yxPPMLn38LMfU0PssnrueGdfrWvEUZEJOhEnWvgh8vq8PuWqIbcRTmEnqA1yaSSS5ek/xXJatb+0V5xA+wSup49mNYrn2sRrzyFq6SI3GJN6wV1ZdaV++YhX2R/K8m9i74JW191I8Hz+OvqB3Te2psb03qhvKlQj1Jr7wfoh5nhI8WhseLdyx9u9nzj34+Hs2ZOEeyvXZ9TXaBWo1po2xpq3fW9XVIbar498tFmba9/v5pfeOGVNcqToSVRfD/9ezJSUw5nJtEjOFeaZI98FQTuF/CZ7tuRHqfnDtKbdg1LVQLcfPq66Hz+O5m6NqNWbSwuzE/Px/b+K+VD1HmQJeQeip6B05PCkWroWuPgZ+Fz8trrYOPzPGs0n4gnrYU32gNnQetr8i9ca1cjvsN5pnbZwPYgr1FKwbtcjecoin0gtDTJanKYX2MHha5Sdf88y3mL6jhvIMb3N6iJ5npZiaQJ5ze5qe0TzH9Cw7hUf321yeto6f1XKf80j1Ger/p8yg2IzNeY4+G/H8Rf/XPT8la8bq/HFolkGfNThyegeemXtm0feFeuaUMwKfV+6Ii/s/GHl9sVlS4syC74c6rHeaLMvT6wXCevn74W4+nE1Wjy7Nwkwt5St2VrP03X0UE/Jlff+IsZTkgHLO+qxPgeIwvQ==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="36" height="35">
@@ -26,10 +26,15 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztlm0OgjAMhrtD+InKDTyfnxH553UMoiB6NrvQxrqICYTBYvYkb9iPkXVv220AzUgUwFOV4wV+Q9RIKBSa07wVKm64Xt3YBkZMcnxGHXBeht+7sheH3K+O6YKaVHi0wzkb8W8E7XvF+43EWjp3MyMW9mqsyj2wVzf1GWNbFKKW9Dg38heKvF0pjhjs5y+Cdw4Kyt+DNKG4OKYUtQe79S19YnjNwPCpC38YrhEQa5o9uBNzbFO176FRT/MOvPlFJjwKqd/6JqH6zr/UmsdNdP+twc7ZXAd9Fh1RW2inv07LUk0JRG9NHajngM6dmQNnj2YovEkdiCdw5FxmMrrn+b3oAnyHuXBXaPhd1HdveTwej8fzz7wAd4U9rw==
+   eJztlUtOwzAQhicuCk4Cm0rcA9qKxwFQuuAc7KpKPUrgBG1V1KriLkhcASF1HRbs8BCncozt1GloN/NJs8nz8/iXB8CPUQSQhwBfhhqLe8Ok+vyMFYVEzPNnOzCp8VnHAJ+KU7cPkN3IGri/vYyb+WSnAN+aS0npErLC5aKnuN25v/2QuO+bSMQa3vlfJx30ya6r17JLe4+wN5sGPqqTad+QN272cTlhb/Ts+TCy7BsWl7k1+Wydbtv1se0bVljjE4hcPWtO6Z4+LqffLAuXbs/9PuYbc7OS2dnXR3XKNR9bb1QeA4AXVngMW/JB9Cwt0AfPnSs/l7Z8TPu2cPSodNloLusG5+EuTjgf7jt2n2VsduEtzxN0OpN1bljrifxfanGZ/8N8c1H6fAiH17hw4XLeHtoFmbLqjD9GT3QwX0+yju1CEARBEARBEL78ABjfby8=
   </data>
  </layer>
- <objectgroup id="4" name="Objects">
+ <layer id="7" name="Mountain" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJytWNtSE0EQ3SRmoq88gP+hi7CY+AW8WKI++ENWoaIUSYBsEtQPUP8Bf8YqbyhViSba7fapnAx7Rbqqa2bD7uzZ06d7eui6ILjVCoKGjCPxvviheE38div5W13mf5oLD+T6fj0IHos/awTBuYy7Mu7I+E38s/ieXF+X8Y24mo778ltf/KfdB5+Y6xq/Zf3YMOn7dT5rJvMDmXdkXG8tRvW74l159szWO7f1MH6vJ1jeGhbYa7m+If5cnv3i4cGo63ddgkN9bH7skvfmGWPCNyo3ykGWMaYzu/+MMCEuscVqbLiGLnn+NB9S8NV4QZxeyXue1POfYUx6v8YceDReikFjc0Qcacx+NS+u5ePrEvca/5eNfH58THgeeIBl0/TTJ0yqqcAVr71va/4wHav52snDBH0rz0ek5bFb4GGeymDSNR+KPzAcH4sf+WfXCI/Ge0CaObaYjQlPnBM7NnA0LcGLj2fftK15GVl+9Y2nDbruE18nJTjqltQObCVMRq1lO8av6jOinFcuVOMct7hC3C6DRfNLY9Wjb+lRzFD/kG+oA4cennlGHFc2Euf5kguWR1bfUdN3vToRGkcz2xOmVqOhKdbRxO7Rvw9zOFvZXMx9fXNOaV6+EDwHXqw1blu2J2C800q4Q33ifSUr/7TGZumf9z3gqKI5tXYrqU/QOtcF5e+et6+Edv/UeGRsvE/4fGj89VumFp86zafed7eNq5D469hv/pr67AbliB9TxbSXgkXzKPLi07H5ln1jUd3xLbI1lLO2rQn+5hk5qjneM87zDLw3rijPByk5ChuZRosMcapRT1YG37y5HPu69RFpeOYZuZrXW4QWw6MUPahN7J3A2iPNo84fpPRUE6q/s4raUIs8DW+vJWPb8EIroafL9dZF7aP34h6Q+WQvq+NPa9W/CQYOUT9OiM+YOOWcKLKnNy+PZ+SW6//Q3t8lTHn1/yrt1PDMqFYNU3qxrHzMs1rJGG97sQ0tP9BTHLqFltC3lo3ThOo5zkZFtSpNa23qt05I113qufy81+t3q0HwXvzDavJbj57j/nuWU5+ytBZR/nEPVqYHhCH2OMOihvRdtXV867vlM0bZPI8s9sgP5ENazYMVneXUeA9uZ+Q5+kC/rxkQR7G7fH5yrzYooeOeW8SE8y8kLSpPW63iM3aR9UrEe+CytRFSf/E/hnwduPyzOvok1ATFU0YHVXEgH/J6ct7v/H554vUS6EWq9G/oM7BPdayO+fsuDGcgPhcCE9d06AfnE+zJWec19Mj43xNj8LmZ0//BOE4xvTN2y+cyYMT6Wec1Nc2lEX2Dv3f/BcSegfI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0">
   <object id="38" template="../../obj/entry_up.tx" x="304.984" y="561.461" width="48" height="27">
    <properties>
     <property name="teleport" value=""/>
