@@ -144,8 +144,9 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.DamageAmount, excess);
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
                 game.getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
+
+                damagedList.add(damaged.getKey());
             }
-            damagedList.add(damaged.getKey());
         }
 
         if (cause != null && cause.hasParam("ExcessSVar")) {
