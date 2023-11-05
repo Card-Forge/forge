@@ -27,36 +27,7 @@ public class BranchAi extends SpellAbilityAi {
         if ("GrislySigil".equals(aiLogic)) {
             return SpecialCardAi.GrislySigil.consider(aiPlayer, sa);
         } else if ("BranchCounter".equals(aiLogic)) {
-            // TODO: this might need expanding/tweaking if more cards are added with different SA setups
-            SpellAbility top = ComputerUtilAbility.getTopSpellAbilityOnStack(aiPlayer.getGame(), sa);
-            if (top == null || !sa.canTarget(top)) {
-                return false;
-            }
-            Card host = sa.getHostCard();
-
-            // pre-target the object to calculate the branch condition SVar, then clean up before running the real check
-            sa.getTargets().add(top);
-            int value = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("BranchConditionSVar"), sa);
-            sa.resetTargets();
-
-            String branchCompare = sa.getParamOrDefault("BranchConditionSVarCompare", "GE1");
-            String operator = branchCompare.substring(0, 2);
-            String operand = branchCompare.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
-            boolean conditionMet = Expressions.compare(value, operator, operandValue);
-
-            SpellAbility falseSub = sa.getAdditionalAbility("FalseSubAbility"); // this ability has the UnlessCost part
-            boolean willPlay = false;
-            if (!conditionMet && falseSub.hasParam("UnlessCost")) {
-                // FIXME: We're emulating the UnlessCost on the SA to run the proper checks.
-                // This is hacky, but it works. Perhaps a cleaner way exists?
-                sa.getMapParams().put("UnlessCost", falseSub.getParam("UnlessCost"));
-                willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(aiPlayer, sa);
-                sa.getMapParams().remove("UnlessCost");
-            } else {
-                willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(aiPlayer, sa);
-            }
-            return willPlay;
+            return SpecialCardAi.BringTheEnding.consider(aiPlayer, sa); // Bring the Ending, Anticognition (hacky implementation)
         } else if ("TgtAttacker".equals(aiLogic)) {
             final Combat combat = aiPlayer.getGame().getCombat();
             if (combat == null || combat.getAttackingPlayer() != aiPlayer) {
