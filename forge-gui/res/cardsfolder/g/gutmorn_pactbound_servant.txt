@@ -4,7 +4,7 @@ Types:Legendary Creature Demon
 PT:1/3
 K:Flying
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ Whenever CARDNAME enters the battlefield, each player discards a nonland card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a nonland card.
 SVar:DBDiscard:DB$ Discard | Defined$ Player | DiscardValid$ Card.nonLand | Mode$ TgtChoose | AILogic$ DiscardUncastableAndExcess
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigChoosePlayer | PlayerTurn$ True | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a player discards a card during your turn, they choose another player. That player conjures a duplicate of that card into their hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ TriggeredCardOwner | Choices$ Player.Other | ChoiceTitle$ Choose another player | SubAbility$ DBConjure
