@@ -52,13 +52,14 @@ public class ExploreEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
-        final CardZoneTable triggerList = new CardZoneTable();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (final Card c : getTargetCards(sa)) {
             for (int i = 0; i < amount; i++) {
+                GameEntityCounterTable table = new GameEntityCounterTable();
+                final CardZoneTable triggerList = new CardZoneTable();
+
                 if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(c))
                         != ReplacementResult.NotReplaced) {
                     continue;
