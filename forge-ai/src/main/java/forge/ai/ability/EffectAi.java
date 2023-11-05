@@ -396,10 +396,17 @@ public class EffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
+        if (sa.hasParam("AILogic")) {
+            if (canPlayAI(aiPlayer, sa)) {
+                return true; // if false, fall through further to do the mandatory stuff
+            }
+        }
+
         // E.g. Nova Pentacle
         if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer()) {
             // try to target the opponent's best targetable permanent, if able
             CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+            oppPerms = CardLists.filter(oppPerms, card -> sa.canTarget(card));
             if (!oppPerms.isEmpty()) {
                 sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(oppPerms));
@@ -409,6 +416,7 @@ public class EffectAi extends SpellAbilityAi {
             if (mandatory) {
                 // try to target the AI's worst targetable permanent, if able
                 CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+                aiPerms = CardLists.filter(aiPerms, card -> sa.canTarget(card));
                 if (!aiPerms.isEmpty()) {
                     sa.resetTargets();
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(aiPerms));

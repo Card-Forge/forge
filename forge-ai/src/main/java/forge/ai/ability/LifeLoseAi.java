@@ -10,6 +10,7 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
+import forge.game.cost.CostSacrifice;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -96,6 +97,7 @@ public class LifeLoseAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String amountStr = sa.getParam("LifeAmount");
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
         int amount = 0;
 
         if (sa.usesTargeting()) {
@@ -133,9 +135,15 @@ public class LifeLoseAi extends SpellAbilityAi {
             return true;
         }
 
+        // Sacrificing a creature in response to something dangerous is generally good in any phase
+        boolean isSacCost = false;
+        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+            isSacCost = true;
+        }
+
         // Don't use loselife before main 2 if possible
         if (ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")
-                && !ComputerUtil.castSpellInMain1(ai, sa) && !"AnyPhase".equals(sa.getParam("AILogic"))) {
+                && !ComputerUtil.castSpellInMain1(ai, sa) && !aiLogic.contains("AnyPhase") && !isSacCost) {
             return false;
         }
 

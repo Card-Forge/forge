@@ -768,6 +768,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if (aiLogic.equals("SurvivalOfTheFittest") || aiLogic.equals("AtOppEOT")) {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
+        } else if (aiLogic.equals("Main1") && ph.is(PhaseType.MAIN1, ai)) {
+            return true;
         }
 
         if (sa.isHidden()) {

@@ -6,14 +6,7 @@ import java.util.List;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -50,7 +43,7 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
-        if (aiLogic.startsWith("ManaRitual")) {
+        if (aiLogic.startsWith("ManaRitual") || aiLogic.startsWith("BlackLotus")) {
             return doManaRitualLogic(ai, sa, false);
         } else if ("Always".equals(aiLogic)) {
             return true;
