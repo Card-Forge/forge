@@ -2,10 +2,10 @@ package forge.ai.ability;
 
 
 import com.google.common.base.Predicate;
-import forge.ai.*;
+import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -13,7 +13,6 @@ import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.util.Expressions;
 
 import java.util.Map;
 
