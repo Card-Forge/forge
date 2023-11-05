@@ -772,7 +772,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
-                                 Map<String, Object> params, Card cardToShow) {
+                                 Card cardToShow, Map<String, Object> params) {
         // Another card should be displayed in the prompt on mouse over rather than the SA source
         if (cardToShow != null) {
             tempShowCard(cardToShow);

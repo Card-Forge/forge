@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Maps;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
@@ -77,9 +78,11 @@ public class ExploreEffect extends SpellAbilityEffect {
                         movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
                         revealedLand = true;
                     } else {
+                        Map<String, Object> params = Maps.newHashMap();
+                        params.put("RevealedCard", r);
                         if (pl.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard",
-                                        CardTranslation.getTranslatedName(r.getName())), null, r))
+                                        CardTranslation.getTranslatedName(r.getName())), r, params))
                             movedCard = game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
                     }
 
