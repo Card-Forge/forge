@@ -1,0 +1,9 @@
+Name:Owen Grady, Raptor Trainer
+ManaCost:1 R G
+Types:Legendary Creature Human Soldier Scientist
+PT:3/2
+K:Partner:Blue, Loyal Raptor
+A:AB$ PutCounter | Cost$ T | ValidTgts$ Dinosaur | CounterType$ Menace,Trample,Reach,Haste | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put your choice of a menace, trample, reach, or haste counter on target Dinosaur. Activate only as a sorcery.
+DeckHas:Ability$Counters
+DeckHints:Type$Dinosaur
+Oracle:Partner with Blue, Loyal Raptor\n{T}: Put your choice of a menace, trample, reach, or haste counter on target Dinosaur. Activate only as a sorcery.
