@@ -1,30 +1,6 @@
 package forge.view;
 
-import java.awt.BasicStroke;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.MouseInfo;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
-
 import com.google.common.collect.Lists;
-
 import forge.Singletons;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.ILocalRepaint;
@@ -39,8 +15,14 @@ import forge.toolbox.FSkin.SkinnedLabel;
 import forge.util.Localizer;
 import forge.util.ReflectionUtil;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
-@SuppressWarnings("serial")
+
 public class FNavigationBar extends FTitleBarBase {
 
     private static final ForgeMenu forgeMenu = Singletons.getControl().getForgeMenu();
@@ -111,7 +93,7 @@ public class FNavigationBar extends FTitleBarBase {
 
     private NavigationTab addNavigationTab(final FScreen screen) {
         final NavigationTab tab = new NavigationTab(screen);
-        if (tabs.size() == 0) {
+        if (tabs.isEmpty()) {
             tab.setSelected(true);
             selectedTab = tab;
             layout.putConstraint(SpringLayout.WEST, tab, 1, SpringLayout.EAST, btnForge);
@@ -203,7 +185,7 @@ public class FNavigationBar extends FTitleBarBase {
         btnForge.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                if (btnForge.isEnabled() && System.currentTimeMillis() - timeMenuHidden > 250) { //time comparsion needed clicking button a second time to hide menu
+                if (btnForge.isEnabled() && System.currentTimeMillis() - timeMenuHidden > 250) { //time comparison needed clicking button a second time to hide menu
                     showForgeMenu(true);
                 }
             }
@@ -238,18 +220,8 @@ public class FNavigationBar extends FTitleBarBase {
                 }
             }
         });
-        incrementRevealTimer = new Timer(revealSpeed / visibleHeight, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                incrementReveal();
-            }
-        });
-        checkForRevealChangeTimer = new Timer(revealDelay, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                checkForRevealChange();
-            }
-        });
+        incrementRevealTimer = new Timer(revealSpeed / visibleHeight, e -> incrementReveal());
+        checkForRevealChangeTimer = new Timer(revealDelay, e -> checkForRevealChange());
     }
 
     private void startReveal() {
@@ -337,8 +309,8 @@ public class FNavigationBar extends FTitleBarBase {
         if (visible || this.getLocation().y < 0) {
             setLocation(0, visible ? 0 : -visibleHeight);
         }
-        else if (pnlReveal != null) { //if previously fully visible, delay hiding titlebar until mouse moves away
-            checkForRevealChangeTimer.setInitialDelay(initialHideDelay); //delay hiding a bit even if mouse already outside titlebar
+        else if (pnlReveal != null) { //if previously fully visible, delay hiding title bar until mouse moves away
+            checkForRevealChangeTimer.setInitialDelay(initialHideDelay); //delay hiding a bit even if mouse already outside title bar
             checkForRevealChangeTimer.start();
         }
     }
@@ -371,7 +343,7 @@ public class FNavigationBar extends FTitleBarBase {
 
     private final class NavigationTab extends SkinnedLabel implements ILocalRepaint {
         private static final int fontSize = 14;
-        private static final int unhoveredAlpha = 150;
+        private static final int unHoveredAlpha = 150;
 
         private final FScreen screen;
         private final CloseButton btnClose;
@@ -384,7 +356,7 @@ public class FNavigationBar extends FTitleBarBase {
             this.screen = screen0;
             setOpaque(false);
             this.setIcon(screen0.getTabIcon());
-            this.setForeground(foreColor.alphaColor(unhoveredAlpha));
+            this.setForeground(foreColor.alphaColor(unHoveredAlpha));
             this.setFont(FSkin.getRelativeFont(fontSize));
 
             int closeButtonOffset;
@@ -433,7 +405,7 @@ public class FNavigationBar extends FTitleBarBase {
             });
         }
 
-        /** @param isSelected0 &emsp; boolean */
+        /** @param selected0 &emsp; boolean */
         private void setSelected(final boolean selected0) {
             if (this.selected == selected0) { return; }
             this.selected = selected0;
@@ -466,7 +438,7 @@ public class FNavigationBar extends FTitleBarBase {
         @Override
         public void repaintSelf() {
             final Dimension d = this.getSize();
-            this.setForeground(this.selected ? bottomEdgeColor.getHighContrastColor() : (this.hovered ? foreColor : foreColor.alphaColor(unhoveredAlpha)));
+            this.setForeground(this.selected ? bottomEdgeColor.getHighContrastColor() : (this.hovered ? foreColor : foreColor.alphaColor(unHoveredAlpha)));
             repaint(0, 0, d.width, d.height);
             if (btnClose != null) {
                 btnClose.repaintSelf();
@@ -479,7 +451,7 @@ public class FNavigationBar extends FTitleBarBase {
             final int width = getWidth() - 1;
             final int height = visibleHeight - 1;
             final int radius = 6;
-            backColor = this.selected ? bottomEdgeColor : (this.hovered ? buttonHoverColor : buttonHoverColor.alphaColor(unhoveredAlpha));
+            backColor = this.selected ? bottomEdgeColor : (this.hovered ? buttonHoverColor : buttonHoverColor.alphaColor(unHoveredAlpha));
             FSkin.setGraphicsGradientPaint(g2d, 0, 0, backColor.stepColor(30), 0, height, backColor);
             g.fillRoundRect(0, 0, width, height, radius, radius);
             FSkin.setGraphicsColor(g, buttonBorderColor);
@@ -499,7 +471,7 @@ public class FNavigationBar extends FTitleBarBase {
                 addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(final MouseEvent e) {
-                        if (!CloseButton.this.isEnabled()) { return; }
+                        if (!FNavigationBar.NavigationTab.CloseButton.this.isEnabled()) { return; }
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             pressed = true;
                             repaintSelf();
@@ -517,7 +489,7 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                     @Override
                     public void mouseEntered(final MouseEvent e) {
-                        if (!CloseButton.this.isEnabled()) { return; }
+                        if (!FNavigationBar.NavigationTab.CloseButton.this.isEnabled()) { return; }
                         hovered = true;
                         repaintSelf();
                     }
@@ -563,8 +535,6 @@ public class FNavigationBar extends FTitleBarBase {
 
                 final int thickness = 2;
                 final int offset = 4;
-                final int x1 = offset;
-                final int y1 = offset;
                 final int x2 = getWidth() - offset - 1;
                 final int y2 = getHeight() - offset - 1;
 
@@ -576,8 +546,8 @@ public class FNavigationBar extends FTitleBarBase {
                 FSkin.setGraphicsColor(g2d, iconColor);
                 g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2d.setStroke(new BasicStroke(thickness));
-                g2d.drawLine(x1, y1, x2, y2);
-                g2d.drawLine(x2, y1, x1, y2);
+                g2d.drawLine(offset, offset, x2, y2);
+                g2d.drawLine(x2, offset, offset, y2);
             }
         }
     }
