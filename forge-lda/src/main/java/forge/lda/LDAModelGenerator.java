@@ -22,11 +22,11 @@ import static forge.lda.lda.inference.InferenceMethod.CGS;
 /**
  * Created by maustin on 09/05/2017.
  */
-public final class LDAModelGenetrator {
+public final class LDAModelGenerator {
 
     public static final String SUPPORTED_LDA_FORMATS = "Historic|Modern|Pioneer|Standard|Legacy|Vintage|Pauper";
-    public static Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap<>();
-    public static Map<String, List<Archetype>> ldaArchetypes = new HashMap<>();
+    public static final Map<String, Map<String,List<List<Pair<String, Double>>>>> ldaPools = new HashMap<>();
+    public static final Map<String, List<Archetype>> ldaArchetypes = new HashMap<>();
 
 
     public static void main(String[] args){
@@ -81,16 +81,16 @@ public final class LDAModelGenetrator {
                 }
                 if (format.equals(FModel.getFormats().getStandard().getName())) {
                     assert lda != null;
-                    formatMap = loadFormat(FModel.getFormats().getStandard(), lda);
+                    formatMap = loadFormat(lda);
                 } else if (format.equals(FModel.getFormats().getModern().getName())) {
                     assert lda != null;
-                    formatMap = loadFormat(FModel.getFormats().getModern(), lda);
+                    formatMap = loadFormat(lda);
                 } else if (format.equals(FModel.getFormats().getPauper().getName())) {
                     assert lda != null;
-                    formatMap = loadFormat(FModel.getFormats().getPauper(), lda);
+                    formatMap = loadFormat(lda);
                 } else if (!format.equals(DeckFormat.Commander.toString())) {
                     assert lda != null;
-                    formatMap = loadFormat(FModel.getFormats().get(format), lda);
+                    formatMap = loadFormat(lda);
                 }
                 CardThemedLDAIO.saveLDA(format, formatMap);
             }catch (Exception e){
@@ -103,7 +103,7 @@ public final class LDAModelGenetrator {
         return true;
     }
 
-    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(GameFormat format, List<Archetype> lda) {
+    public static Map<String,List<List<Pair<String, Double>>>> loadFormat(List<Archetype> lda) {
 
         List<List<Pair<String, Double>>> topics = new ArrayList<>();
         Set<String> cards = new HashSet<>();
@@ -207,24 +207,7 @@ public final class LDAModelGenetrator {
             if(decks==null){
                 continue;
             }
-            LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
-            for( Deck deck: decks){
-                String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((" + SUPPORTED_LDA_FORMATS + "), #[0-9]+\\)","");
-                name = name.replaceAll("\\(" + SUPPORTED_LDA_FORMATS + "|Fuck|Shit|Cunt|Ass|Arse|Dick|Pussy\\)","");
-                String[] tokens = name.split(" ");
-                for(String rawtoken: tokens){
-                    String token = rawtoken.toLowerCase();
-                    if (token.matches("[0-9]+") || token.matches("\\s?\\s?")) {
-                        //skip just numbers as not useful
-                        continue;
-                    }
-                    if(wordCounts.containsKey(token)){
-                        wordCounts.put(token, wordCounts.get(token)+1);
-                    }else{
-                        wordCounts.put(token, 1);
-                    }
-                }
-            }
+            LinkedHashMap<String, Integer> wordCounts = getStringIntegerLinkedHashMap(decks);
             Map<String, Integer> sortedWordCounts = sortByValue(wordCounts);
 
             List<String> topWords = new ArrayList<>();
@@ -250,6 +233,27 @@ public final class LDAModelGenetrator {
         return unfilteredTopics;
     }
 
+    private static LinkedHashMap<String, Integer> getStringIntegerLinkedHashMap(List<Deck> decks) {
+        LinkedHashMap<String, Integer> wordCounts = new LinkedHashMap<>();
+        for( Deck deck: decks){
+            String name = deck.getName().replaceAll(".* Version - ","").replaceAll(" \\((" + SUPPORTED_LDA_FORMATS + "), #[0-9]+\\)","");
+            name = name.replaceAll("\\(" + SUPPORTED_LDA_FORMATS + "|Fuck|Shit|Cunt|Ass|Arse|Dick|Pussy\\)","");
+            String[] tokens = name.split(" ");
+            for(String rawToken : tokens){
+                String token = rawToken.toLowerCase();
+                if (token.matches("[0-9]+") || token.matches("\\s?\\s?")) {
+                    //skip just numbers as not useful
+                    continue;
+                }
+                if(wordCounts.containsKey(token)){
+                    wordCounts.put(token, wordCounts.get(token)+1);
+                }else{
+                    wordCounts.put(token, 1);
+                }
+            }
+        }
+        return wordCounts;
+    }
 
 
     private static <K, V> Map<K, V> sortByValue(Map<K, V> map) {
