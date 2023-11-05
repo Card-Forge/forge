@@ -114,6 +114,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
     public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final Game game, final SpellAbility cause, final Map<Integer, Card> lkiCache) {
         int storedExcess = 0;
 
+        CardCollection damagedList = new CardCollection();
         for (Entry<Card, Integer> damaged : lethalDamage.entrySet()) {
             int sum = 0;
             for (Integer i : this.column(damaged.getKey()).values()) {
@@ -144,10 +145,19 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
                 game.getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
             }
+            damagedList.add(damaged.getKey());
         }
 
         if (cause != null && cause.hasParam("ExcessSVar")) {
             cause.setSVar(cause.getParam("ExcessSVar"), Integer.toString(storedExcess));
+        }
+
+        if (!damagedList.isEmpty()) {
+            // Run triggers
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.DamageTargets, damagedList);
+            runParams.put(AbilityKey.IsCombatDamage, isCombat);
+            game.getTriggerHandler().runTrigger(TriggerType.ExcessDamageAll, runParams, false);
         }
     }
 
