@@ -2,7 +2,7 @@ Name:Scrapwork Mutt
 ManaCost:2
 Types:Artifact Creature Dog
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 1
 K:Unearth:1 R
 DeckHas:Ability$Graveyard|Discard
