@@ -1,0 +1,21 @@
+Name:Ojer Kaslem, Deepest Growth
+ManaCost:3 G G
+Types:Legendary Creature God
+PT:6/5
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, reveal that many cards from the top of your library. You may put a creature card and/or a land card from among them onto the battlefield. Put the rest on the bottom in a random order.
+SVar:TrigDig:DB$ DigMultiple | SourceZone$ Library | DigNum$ X | Reveal$ True | ChangeValid$ Creature,Land | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True
+SVar:X:TriggerCount$DamageAmount
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control.
+SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | Tapped$ True
+AlternateMode:DoubleFaced
+Oracle:Trample\nWhenever Ojer Kaslem deals combat damage to a player, reveal that many cards from the top of your library. You may put a creature card and/or a land card from among them onto the battlefield. Put the rest on the bottom in a random order.\nWhen Ojer Kaslem dies, return it to the battlefield tapped and transformed under its owner's control.
+
+ALTERNATE
+
+Name:Temple of Cultivation
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ SetState | Cost$ 2 G T | IsPresent$ Permanent.YouCtrl | PresentCompare$ GE10 | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if you control ten or more permanents and only as a sorcery.
+Oracle:(Transforms from Ojer Kaslem, Deepest Growth.)\n{T}: Add {G}.\n{2}{G}, {T}: Transform Temple of Cultivation. Activate only if you control ten or more permanents and only as a sorcery.
