@@ -126,27 +126,29 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
 
             int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());
 
+            if (excess <= 0) {
+                continue;
+            }
+
             // also update the DamageHistory, but overwrite previous excess outcomes
             // because Rith, Liberated Primeval cares about who controlled it at this moment
-            lkiCache.get(damaged.getKey().getId()).setHasBeenDealtExcessDamageThisTurn(excess > 0);
-            if (excess > 0) {
-                if (cause != null && cause.hasParam("ExcessSVar")) {
-                    if ((!cause.hasParam("ExcessSVarCondition") || damaged.getKey().isValid(cause.getParam("ExcessSVarCondition"), cause.getActivatingPlayer(), cause.getHostCard(), cause))
-                            && (!cause.hasParam("ExcessSVarTargeted") || damaged.getKey().equals(cause.getTargetCard()))) {
-                        storedExcess += excess;
-                    }
+            lkiCache.get(damaged.getKey().getId()).setHasBeenDealtExcessDamageThisTurn(true);
+            if (cause != null && cause.hasParam("ExcessSVar")) {
+                if ((!cause.hasParam("ExcessSVarCondition") || damaged.getKey().isValid(cause.getParam("ExcessSVarCondition"), cause.getActivatingPlayer(), cause.getHostCard(), cause))
+                        && (!cause.hasParam("ExcessSVarTargeted") || damaged.getKey().equals(cause.getTargetCard()))) {
+                    storedExcess += excess;
                 }
-
-                damaged.getKey().setHasBeenDealtExcessDamageThisTurn(true);
-                // Run triggers
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.DamageTarget, damaged.getKey());
-                runParams.put(AbilityKey.DamageAmount, excess);
-                runParams.put(AbilityKey.IsCombatDamage, isCombat);
-                game.getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
-
-                damagedList.add(damaged.getKey());
             }
+
+            damaged.getKey().setHasBeenDealtExcessDamageThisTurn(true);
+            // Run triggers
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.DamageTarget, damaged.getKey());
+            runParams.put(AbilityKey.DamageAmount, excess);
+            runParams.put(AbilityKey.IsCombatDamage, isCombat);
+            game.getTriggerHandler().runTrigger(TriggerType.ExcessDamage, runParams, false);
+
+            damagedList.add(damaged.getKey());
         }
 
         if (cause != null && cause.hasParam("ExcessSVar")) {
