@@ -7708,7 +7708,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 1.2,
+	"scale": 2,
 	"life": 30,
 	"rewards": [
 		{
@@ -7749,12 +7749,14 @@
 },
 {
 	"name": "Dinosaur",
+	"nameOverride": "Giant Carnosaur",
 	"sprite": "sprites/enemy/beast/ancient_2.atlas",
 	"deck": [
 		"decks/standard/dinosaur_w_r.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
+	"scale":1.5,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -12685,6 +12687,82 @@
 		"Zombie",
 		"Humanoid",
 		"IdentityBlack"
+	]
+},
+{
+	"name": "Green Golem",
+	"sprite": "sprites/enemy/construct/golem_green.atlas",
+	"deck": [
+		"decks/standard/greengolem.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 3,
+			"colors": [
+				"Green"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Guardian",
+		"Artifact",
+		"Furnace",
+		"IdentityColorless",
+		"IdentityGreen",
+		"Construct",
+		"Robot"
 	]
 },
 {
@@ -19468,6 +19546,87 @@
 	]
 },
 {
+	"name": "Monkey",
+	"sprite": "sprites/enemy/beast/monkey_small.atlas",
+	"deck": [
+		"decks/standard/ragavan.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 18,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Red",
+				"Green"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Monkey"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Red",
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Humanoid",
+		"Simian",
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityTemur"
+	]
+},
+{
 	"name": "Mummy",
 	"sprite": "sprites/enemy/undead/mummy.atlas",
 	"deck": [
@@ -24731,7 +24890,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.8,
+	"scale": 1.2,
 	"life": 12,
 	"rewards": [
 		{
@@ -25903,7 +26062,6 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.8,
 	"life": 20,
 	"rewards": [
 		{
@@ -26761,6 +26919,79 @@
 	]
 },
 {
+	"name": "Werebear",
+	"sprite": "sprites/enemy/beast/bear_large.atlas",
+	"deck": [
+		"decks/standard/bearboss.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"scale":0.6,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 36,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Territorial",
+		"Animal",
+		"Wild",
+		"Domesticated",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Werewolf",
 	"sprite": "sprites/enemy/fiend/hellhound.atlas",
 	"deck": [
@@ -27063,7 +27294,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
@@ -27133,6 +27364,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 35,
+	"scale": 0.7,
 	"life": 12,
 	"rewards": [
 		{

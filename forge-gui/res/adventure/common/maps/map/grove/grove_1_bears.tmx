@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="93">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="101">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="35">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20JT6AAAAAAPgYQaAAB
@@ -22,16 +23,16 @@
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="35">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJy9V2tOwzAMzq+pTQQcqzD1KgjErToeV0ETZ1jZ9geOQCxqxXWdNmndflJU9TF/8eOzM2N00VhjDn5dXLi+WmUSAZXnuWfr7MI++B4aG3+Xg5O38WGH3HQP1H7t79/8/btf324+L3KDnRj/A7Ffk3ho5QP4W8H/fccLMb52/sJ3S/2V+Cn3ubNfCf5rg3PjM4285nCvjZ+dMb+7Pnc7k7dZqLU5fIeuBrVrfwz1hBbXAGpta17ed7W0/lmEernz61j039eET1Nzj+W/T9i3bxk31r+2xl/Kft9C3+k8XaN2nQ284POVXGlfXTonJUgze2qOaWBqZsdm91j/ahJyBLGWeoO0YIYei6DrfSQGqbNu6qyAWoK6hpqfmmUV+T4FYzGn5zSMIdc7AGORWw85dfZcDn+POYvlYI7PPOZPjJf28zn1T/ujdEYDm4Ud+luxb3JB68aROmrJ8y+f2xumK95vtp7TsTmi3XdTz8TacUjVq3bPPY34KPFulXsE1UWuvpeA9oa1z2gS9xb/Uyj+AJgdvpI=
   </data>
  </layer>
  <layer id="7" name="Trees" width="30" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   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
+   eJylV1tu2zAQFOij+De+QX6KQE6ixOlR3BukTlw5ak4VIC2KopeI5Tpy7d6hXHgGXK1JSUAXIChRJPc1+1CWHSl3WfZ5lGXvfn7y897Pb3gWmvjx+imL0szvu/XjW/xzVuB7Zu4gT+HzOArvf/087uBHnld+/Han63d+TBPfC8Xzi58/uqOuh8jeGMnenTvKKHSm1sV2X/2dD6NgN+rZ4LvwFLn++FH657Wf7/18meB9MT/OC79n6/dcu7A3d+GumH1ET9qT8lGuEnLSBpq+m7tK8CYf6vI8au+jPG8u2Jf8hT7M23c+mfMxEr2flcz2DP35DgzJaFzbv/9LE8zEt2CzMfYU2gMX1UDd+iiG/z3wovWqsXY7QNccsVggTlJnLubtd4sBuWeJta64YTwuRwEPu4gOml7Ne4mzIivx0Icf8c8G8soZxiVjaCguGhNfxMBP75tfyj/MAzWwJzLW51g7P2Kiz1ZC9HmpcK99USt5xlibwb4pezQDc9uZec+VnWrcoWWxtrGkY7eLdK5nXue9jClNe/hQ8JAj12t//uhneULMIZS3ieCEOCKONwrH03n83j6ytWKhaoKNzQrfDi7E0JCYj5HYW8ZYrVXQ7zHiM9Yf8rY+ad3dw/cla+e2lx5ZS8Xb8qX/py5dQ4XER+Rp+5QC52O2FL1XERzXyP8r+E9wexORIVWDCuD8AJxNcT4lB6mB3++wn/XWxj5z5o3BsLblATlyg+f7yH4h8Q/z18aFPieGE9psG8nxxBdz8RpYkvvWHfwr7O/KJTxTKt4pPOgYW8K/rAsp2+seVscMfSe8hvRzWr4p8nbMlsSk5JnYfQ+Kl+hemfcUb9o/VStq+HiHmf2mjulK6cDavsZe4rIrFnNlS90fbIFl4iJWWzR+r13w3woy8Ax7NvayUhN0LWnA4xo25hyLJSGpe/wnou7so+Qc+Wqc8P0KfLmXMbSGjdkvUE5LjdKVvPlMvrovoI+IK/aqjKG94Zki/c+hc5X+r6pduhbUrt131K5dU62tdF5eIOZXaugcYO+2cosPCxdiQ9fZamBfMjO5iP+nmm+s1tn+v+iJByHmFPLQvmx6/DVRz7ae67zCfTli7tKF/wCLfcF7ac7zbp7hf7bNNzN3mkf/AfZvR7I=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -60,19 +61,22 @@
 }]</property>
    </properties>
   </object>
-  <object id="50" template="../../obj/enemy.tx" x="280.756" y="302.37">
+  <object id="50" template="../../obj/enemy.tx" x="281.256" y="318.37">
    <properties>
-    <property name="deckOverride" value="Bearguard"/>
+    <property name="displayNameOverride" value="Grisly Honeyguard"/>
     <property name="enemy" value="Bear"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="67,73"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/gold.tx" x="396.783" y="296.25"/>
-  <object id="57" template="../../obj/enemy.tx" x="231.733" y="208.679">
+  <object id="52" template="../../obj/gold.tx" x="78.783" y="69.25"/>
+  <object id="57" template="../../obj/enemy.tx" x="280.233" y="266.179">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Up the Beanstalk&quot;]
+}</property>
     <property name="enemy" value="Werebear"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="inactive" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="80"/>
    </properties>
   </object>
   <object id="62" template="../../obj/booster.tx" x="225.068" y="191.63">
@@ -103,29 +107,58 @@
 </property>
    </properties>
   </object>
-  <object id="82" template="../../obj/manashards.tx" x="411.321" y="379.657"/>
-  <object id="83" template="../../obj/enemy.tx" x="134.4" y="298.8">
+  <object id="82" template="../../obj/manashards.tx" x="441.821" y="470.157"/>
+  <object id="83" template="../../obj/enemy.tx" x="143.9" y="290.8">
    <properties>
-    <property name="deckOverride" value="Bearguard"/>
+    <property name="displayNameOverride" value="Grisly Honeyguard"/>
     <property name="enemy" value="Bear"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="67,73"/>
+    <property name="waypoints" value="95,96,97,98,97,96,95"/>
    </properties>
   </object>
-  <object id="85" template="../../obj/enemy.tx" x="231.887" y="467.808">
+  <object id="85" template="../../obj/enemy.tx" x="164.887" y="409.808">
    <properties>
-    <property name="deckOverride" value="Bearguard"/>
+    <property name="deckOverride" value=""/>
+    <property name="displayNameOverride" value="Grisly Honeyguard"/>
     <property name="enemy" value="Bear"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="67,73"/>
+    <property name="waypoints" value="87,88,86,94,86,88"/>
    </properties>
   </object>
-  <object id="86" template="../../obj/waypoint.tx" x="230.565" y="510.763"/>
+  <object id="86" template="../../obj/waypoint.tx" x="47.565" y="315.763"/>
   <object id="87" template="../../obj/waypoint.tx" x="231.887" y="438.731"/>
   <object id="88" template="../../obj/waypoint.tx" x="119.543" y="392.472"/>
   <object id="89" template="../../obj/collision.tx" x="0.171222" y="-15.2693" width="478.77" height="16"/>
   <object id="90" template="../../obj/collision.tx" x="2.48425" y="559.666" width="478.77" height="16"/>
   <object id="91" template="../../obj/collision.tx" x="478.382" y="-17.1519" width="16" height="592.718"/>
   <object id="92" template="../../obj/collision.tx" x="-13.9476" y="-14.1782" width="16" height="592.718"/>
+  <object id="93" template="../../obj/manashards.tx" x="7" y="202.5"/>
+  <object id="94" template="../../obj/waypoint.tx" x="47.5" y="191"/>
+  <object id="95" template="../../obj/waypoint.tx" x="205.5" y="323"/>
+  <object id="96" template="../../obj/waypoint.tx" x="120" y="264.5"/>
+  <object id="97" template="../../obj/waypoint.tx" x="96.5" y="191"/>
+  <object id="98" template="../../obj/waypoint.tx" x="69" y="154"/>
+  <object id="99" template="../../obj/dialog.tx" type="dialog" gid="11530" x="194.25" y="223.5" width="81.5" height="54" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Suddently you hear strange sounds coming behind you. A coarse voice thunders behind you: HONEY MINE, YOU DIE !&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;You have a bad feeling about this.&quot;,
+				&quot;action&quot;: [
+					{ &quot;activateMapObject&quot;: 57 },			{ &quot;deleteMapObject&quot;: -1 }
+
+				]
+
+			}
+
+		]
+
+	}
+
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

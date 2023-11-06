@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Treetop Village&quot; ],
-}</property>
- </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="8" name="Collision" width="36" height="35">
+  <data encoding="base64" compression="zlib">
+   eJztllEOgCAMQ3dtPYt3VfkTooYtKzSkL+FPmhdXCGZCCCHEXI59tkFN8XkuJuTzT69PO+OMWSMy7d5/bnEfCMHcEV3x/PNR3f3qBKQvnT6eb9FO3ny0UyQb6RTNfesaE1k+K+dE7ohV55wFkw/TuWRxYXp/MzgULkLKUsk=
+  </data>
+ </layer>
  <layer id="1" name="Background" width="36" height="35">
   <data encoding="base64" compression="zlib">
    eJztziEVACAQBbBDEodS1z8CggQ8BF9MzK9nVQM8GOv4/fC5P6W8Uh4AAAAJNi5vIBE=
@@ -31,56 +32,59 @@
  </layer>
  <layer id="7" name="Mountain" width="36" height="35">
   <data encoding="base64" compression="zlib">
-   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
+   eJytWFtu01AQdRNyDb/9aNkHuLQpCRL//UEU+GAPLIBuAKlAoWqStnGSQhcA7KFsBolXoVICSZnBc5STGzt2AiONru3Y18dnzsydm4YLghthEJRl7Iq3xA/Fl8RvhslvJTm+rIw9kPN7pSB4JP68HAQXMu7KuC3jN/HP4ntyflXGt+JqOu7LtZb4T7sP3jfXOX7L/LFh0vfr8bCSHB/IcV3GtXA8qt8Wb8iz5zbfhc2H8XspwXJqWGBv5Pya+At59ouHB6PO33AJDvWe+bFL3jvLGBO+UblRDrKMMZ3b/eeECXGJLVY9w9VxyfNnNNfl0+n5vxoviNNrec/j0vR9WZj0fo058Gi8FIPG5og40pj9qkzPdeadN4h7jf+r8mx+fEx4HniAZcP00yJMqqnA5c+9b3P+MB2r+dqZhQn6Vp6PSMs9N8bDPBXBpHM+EL9vOD7mP/LXrhAejXebNHNsMesRnnhG7NjA0aAALz6efdO25mXV8qtlPK3TeYv4OinAUaOgdmDLUTJqLds2flWfVcp55UI1znGL54jbIlg0vzRWTfqWJsUM9Q/5hjpw6OEZZcRxeT1xPp5wwfLQ6jtq+q7VCdSUyDga2powsBoNTbGO+naP/t5hjDsero3xsa9vzinNy5eC58CLtcZt09YEjLfChDvUJ15XsvJPa2yW/nndA455NHf3SRDUwqQ+QetcF5S/O966Etn9A+ORsfE64fOh8ddvGVh8SnQ88L67ZlxFxF/drvlz6rPrlCMdjz/FtJeCRfOo6sWnbseb9o15dce3qs2hnNVsTvA3yshRzfGmcT7LwHv5P+V5OyVHYV3TaJ4hTkvUkxXBN6pMxr5kfUQanpGXq8h5f+1miyyGRyl6UOvbO4G1SZpHnT9I6an6VH+Hc2pDreppeGs1GWuGF1qJPF2uhdPaR+/FPSDzyV5Ux59W5/8mGDhE/TghPmPilHMiz55dXxxP103W/469v0GY0rSxkO3M/vnM8AypVnVSerGsfGTTms22VDDGW15sI8sP9BSHbqwl9K1F49Sneo69UV6tStNajfqtE9J1g3ouP+/1/N1KELwX/7CSXGvSc9x/D1PqE/jM0lqV8o97sCI9IAyxxx4WNaTlis2TtndSa7nJPUbRPK9a7JEfyIe0mgebVW9hvAbXMvIcfaDf17SJo9gtnp/cq7UL6LjpxjHh/ItIi8rTZpi/x86zZoF4t122NiLqL/7FkK9tl75Xh6FPQk1QPEV0MC8O5MNUT07G653fL/e9XgK9yDz9G/oMrFN1q2P+ugvDHoj3hcDENR36wf4Ea3LWfg09Mv57Ygw+NyP6H4zjFNM7Yze5LwNGzJ+1X1PTXOrSN/hr9x9L94rl
   </data>
  </layer>
- <objectgroup id="4" name="Objects" visible="0">
-  <object id="38" template="../../obj/entry_up.tx" x="304.984" y="561.461" width="48" height="27">
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="384.984" y="559.188" width="77.0909" height="27">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="62" template="../../obj/enemy.tx" x="194.5" y="111.5">
+  <object id="62" template="../../obj/enemy.tx" x="195.864" y="101.5">
    <properties>
+    <property name="displayNameOverride" value="Kogla"/>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Treetop Village&quot;,&quot;Concordant Crossroads&quot;]
+}</property>
     <property name="enemy" value="Gorilla"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="63" template="../../obj/enemy.tx" x="97.0361" y="97.7062">
+  <object id="63" template="../../obj/enemy.tx" x="129.309" y="380.433">
+   <properties>
+    <property name="enemy" value="Gorilla"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="297.499" y="239.542">
    <properties>
     <property name="enemy" value="Gorilla"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="70,69,71,72,73,72,71,69"/>
+    <property name="waypoints" value="74,76,71,72,71,76"/>
    </properties>
   </object>
-  <object id="64" template="../../obj/enemy.tx" x="245.226" y="176.815">
-   <properties>
-    <property name="enemy" value="Gorilla"/>
-    <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="75,74,76"/>
-   </properties>
-  </object>
-  <object id="65" template="../../obj/treasure.tx" x="195.5" y="96"/>
-  <object id="66" template="../../obj/booster.tx" x="21.4794" y="146.253">
+  <object id="65" template="../../obj/treasure.tx" x="152.773" y="65.0909"/>
+  <object id="66" template="../../obj/booster.tx" x="196.479" y="60.7985">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;editions&quot;: [ &quot;J22&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;colors&quot;: [ &quot;green&quot; ],
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;editions&quot;: [ &quot;J22&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [ &quot;green&quot; ],
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;RIX&quot; ],
+    &quot;editions&quot;: [ &quot;J22&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [ &quot;green&quot; ],
@@ -90,14 +94,29 @@
 </property>
    </properties>
   </object>
-  <object id="68" template="../../obj/manashards.tx" x="338.212" y="224.407"/>
-  <object id="69" template="../../obj/waypoint.tx" x="92.7784" y="148.309"/>
-  <object id="70" template="../../obj/waypoint.tx" x="94.1495" y="74.2681"/>
-  <object id="71" template="../../obj/waypoint.tx" x="150.366" y="147.624"/>
-  <object id="72" template="../../obj/waypoint.tx" x="130.485" y="214.809"/>
-  <object id="73" template="../../obj/waypoint.tx" x="69.4691" y="205.211"/>
-  <object id="74" template="../../obj/waypoint.tx" x="338.897" y="199.727"/>
-  <object id="75" template="../../obj/waypoint.tx" x="363.578" y="124.315"/>
-  <object id="76" template="../../obj/waypoint.tx" x="288.165" y="151.052"/>
+  <object id="68" template="../../obj/manashards.tx" x="2.30291" y="170.316"/>
+  <object id="71" template="../../obj/waypoint.tx" x="220.821" y="269.897"/>
+  <object id="72" template="../../obj/waypoint.tx" x="162.303" y="265.264"/>
+  <object id="74" template="../../obj/waypoint.tx" x="281.17" y="176.545"/>
+  <object id="75" template="../../obj/waypoint.tx" x="351.76" y="461.133"/>
+  <object id="76" template="../../obj/waypoint.tx" x="309.074" y="284.234"/>
+  <object id="77" template="../../obj/enemy.tx" x="469.273" y="312.909">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Ragavan, Nimble Pilferer&quot;]
+}</property>
+    <property name="enemy" value="Monkey"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="75,74,76"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/manashards.tx" x="124.727" y="52.4545"/>
+  <object id="79" template="../../obj/manashards.tx" x="528.818" y="432.909"/>
+  <object id="80" template="../../obj/manashards.tx" x="-0.727273" y="288.364"/>
+  <object id="81" template="../../obj/gold.tx" x="-0.272727" y="217.455"/>
+  <object id="82" template="../../obj/gold.tx" x="33.8182" y="528.364"/>
+  <object id="83" template="../../obj/gold.tx" x="523.364" y="240.182"/>
+  <object id="84" template="../../obj/treasure.tx" x="504.727" y="255.636"/>
+  <object id="85" template="../../obj/collision.tx" x="-1.72" y="560.182" width="580.258" height="16"/>
+  <object id="86" template="../../obj/collision.tx" x="-3.76536" y="-15.7273" width="580.258" height="16"/>
  </objectgroup>
 </map>

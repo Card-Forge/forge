@@ -54,6 +54,7 @@
     <property name="enemy" value="Minotaur Warcaller"/>
     <property name="inactive" type="bool" value="true"/>
     <property name="pursueRange" type="int" value="60"/>
+    <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="60,61,64,65,66,54,55"/>
    </properties>
