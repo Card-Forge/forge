@@ -4,14 +4,14 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Staff of the Sun Magus&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;White Shield Crusader&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJx7ws7A8GQUj+JRPIpH8SgexSMCAwBnNdQ6
+   eJx7ws7A8GQUj+JRPIrJwKxWA++GUTyKRzFpGADnNdOO
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">

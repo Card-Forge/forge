@@ -30,7 +30,7 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="279.5" y="292" width="48" height="16">
+  <object id="38" template="../../obj/entry_up.tx" x="491.5" y="480.5" width="16" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -55,10 +55,10 @@
 }]</property>
    </properties>
   </object>
-  <object id="63" template="../../obj/gold.tx" x="228.717" y="231.173"/>
+  <object id="63" template="../../obj/gold.tx" x="161.217" y="237.673"/>
   <object id="68" template="../../obj/gold.tx" x="769.875" y="455.247"/>
-  <object id="71" template="../../obj/manashards.tx" x="236.784" y="212.033"/>
-  <object id="72" template="../../obj/booster.tx" x="248.412" y="229.368">
+  <object id="71" template="../../obj/manashards.tx" x="246.784" y="224.533"/>
+  <object id="72" template="../../obj/booster.tx" x="178.912" y="251.368">
    <properties>
     <property name="reward">[
   {
@@ -88,7 +88,7 @@
   </object>
   <object id="84" template="../../obj/waypoint.tx" x="650.485" y="448.365"/>
   <object id="85" template="../../obj/waypoint.tx" x="236.985" y="289.365"/>
-  <object id="105" template="../../obj/enemy.tx" x="206.667" y="247.51">
+  <object id="105" template="../../obj/enemy.tx" x="219.167" y="243.01">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;,&quot;Second Head of the Hydra&quot;,&quot;Third Head of the Hydra&quot;,&quot;Fourth Head of the Hydra&quot;,&quot;Fifth Head of the Hydra&quot;,&quot;Sixth Head of the Hydra&quot;]
 }</property>

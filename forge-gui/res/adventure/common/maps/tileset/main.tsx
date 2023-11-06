@@ -12293,6 +12293,14 @@
    <object id="2" x="0" y="9" width="11" height="7"/>
   </objectgroup>
  </tile>
+ <tile id="6332">
+  <animation>
+   <frame tileid="6332" duration="100"/>
+   <frame tileid="6333" duration="100"/>
+   <frame tileid="6334" duration="100"/>
+   <frame tileid="6335" duration="100"/>
+  </animation>
+ </tile>
  <tile id="6336">
   <objectgroup draworder="index" id="2">
    <object id="1" x="3" y="2" width="10" height="14"/>

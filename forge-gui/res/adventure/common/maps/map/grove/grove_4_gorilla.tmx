@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="87">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,7 +9,7 @@
  <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
  <layer id="8" name="Collision" width="36" height="35">
   <data encoding="base64" compression="zlib">
-   eJztllEOgCAMQ3dtPYt3VfkTooYtKzSkL+FPmhdXCGZCCCHEXI59tkFN8XkuJuTzT69PO+OMWSMy7d5/bnEfCMHcEV3x/PNR3f3qBKQvnT6eb9FO3ny0UyQb6RTNfesaE1k+K+dE7ohV55wFkw/TuWRxYXp/MzgULkLKUsk=
+   eJztltEJwCAMRJ2g03S6ztJhix+ClRaamDNXuAf+aXiSC1qKEEIIkcu+ZRvcqT7jYoHJpfJXn6cez/Y6ul5f03sWgfdu6KxYvVZl9y0TiLx89bHsXdE3636kk6c20mlm/sesMRHlw1Ineoa9bxTbv4XFo8Hkw9YnBpc+v+fB4ZLNBQvIFwE=
   </data>
  </layer>
  <layer id="1" name="Background" width="36" height="35">
@@ -23,14 +23,14 @@
   </data>
  </layer>
  <layer id="3" name="Clutter" width="36" height="35">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJztlUtOwzAQhicuCk4Cm0rcA9qKxwFQuuAc7KpKPUrgBG1V1KriLkhcASF1HRbs8BCncozt1GloN/NJs8nz8/iXB8CPUQSQhwBfhhqLe8Ok+vyMFYVEzPNnOzCp8VnHAJ+KU7cPkN3IGri/vYyb+WSnAN+aS0npErLC5aKnuN25v/2QuO+bSMQa3vlfJx30ya6r17JLe4+wN5sGPqqTad+QN272cTlhb/Ts+TCy7BsWl7k1+Wydbtv1se0bVljjE4hcPWtO6Z4+LqffLAuXbs/9PuYbc7OS2dnXR3XKNR9bb1QeA4AXVngMW/JB9Cwt0AfPnSs/l7Z8TPu2cPSodNloLusG5+EuTjgf7jt2n2VsduEtzxN0OpN1bljrifxfanGZ/8N8c1H6fAiH17hw4XLeHtoFmbLqjD9GT3QwX0+yju1CEARBEARBEL78ABjfby8=
   </data>
  </layer>
  <layer id="7" name="Mountain" width="36" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJytWFtu01AQdRNyDb/9aNkHuLQpCRL//UEU+GAPLIBuAKlAoWqStnGSQhcA7KFsBolXoVICSZnBc5STGzt2AiONru3Y18dnzsydm4YLghthEJRl7Iq3xA/Fl8RvhslvJTm+rIw9kPN7pSB4JP68HAQXMu7KuC3jN/HP4ntyflXGt+JqOu7LtZb4T7sP3jfXOX7L/LFh0vfr8bCSHB/IcV3GtXA8qt8Wb8iz5zbfhc2H8XspwXJqWGBv5Pya+At59ouHB6PO33AJDvWe+bFL3jvLGBO+UblRDrKMMZ3b/eeECXGJLVY9w9VxyfNnNNfl0+n5vxoviNNrec/j0vR9WZj0fo058Gi8FIPG5og40pj9qkzPdeadN4h7jf+r8mx+fEx4HniAZcP00yJMqqnA5c+9b3P+MB2r+dqZhQn6Vp6PSMs9N8bDPBXBpHM+EL9vOD7mP/LXrhAejXebNHNsMesRnnhG7NjA0aAALz6efdO25mXV8qtlPK3TeYv4OinAUaOgdmDLUTJqLds2flWfVcp55UI1znGL54jbIlg0vzRWTfqWJsUM9Q/5hjpw6OEZZcRxeT1xPp5wwfLQ6jtq+q7VCdSUyDga2powsBoNTbGO+naP/t5hjDsero3xsa9vzinNy5eC58CLtcZt09YEjLfChDvUJ15XsvJPa2yW/nndA455NHf3SRDUwqQ+QetcF5S/O966Etn9A+ORsfE64fOh8ddvGVh8SnQ88L67ZlxFxF/drvlz6rPrlCMdjz/FtJeCRfOo6sWnbseb9o15dce3qs2hnNVsTvA3yshRzfGmcT7LwHv5P+V5OyVHYV3TaJ4hTkvUkxXBN6pMxr5kfUQanpGXq8h5f+1miyyGRyl6UOvbO4G1SZpHnT9I6an6VH+Hc2pDreppeGs1GWuGF1qJPF2uhdPaR+/FPSDzyV5Ux59W5/8mGDhE/TghPmPilHMiz55dXxxP103W/469v0GY0rSxkO3M/vnM8AypVnVSerGsfGTTms22VDDGW15sI8sP9BSHbqwl9K1F49Sneo69UV6tStNajfqtE9J1g3ouP+/1/N1KELwX/7CSXGvSc9x/D1PqE/jM0lqV8o97sCI9IAyxxx4WNaTlis2TtndSa7nJPUbRPK9a7JEfyIe0mgebVW9hvAbXMvIcfaDf17SJo9gtnp/cq7UL6LjpxjHh/ItIi8rTZpi/x86zZoF4t122NiLqL/7FkK9tl75Xh6FPQk1QPEV0MC8O5MNUT07G653fL/e9XgK9yDz9G/oMrFN1q2P+ugvDHoj3hcDENR36wf4Ea3LWfg09Mv57Ygw+NyP6H4zjFNM7Yze5LwNGzJ+1X1PTXOrSN/hr9x9L94rl
   </data>
@@ -106,7 +106,6 @@
 }</property>
     <property name="enemy" value="Monkey"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="75,74,76"/>
    </properties>
   </object>
   <object id="78" template="../../obj/manashards.tx" x="124.727" y="52.4545"/>
@@ -118,5 +117,7 @@
   <object id="84" template="../../obj/treasure.tx" x="504.727" y="255.636"/>
   <object id="85" template="../../obj/collision.tx" x="-1.72" y="560.182" width="580.258" height="16"/>
   <object id="86" template="../../obj/collision.tx" x="-3.76536" y="-15.7273" width="580.258" height="16"/>
+  <object id="87" template="../../obj/collision.tx" x="-15.2727" y="-13.7677" width="16" height="590.717"/>
+  <object id="88" template="../../obj/collision.tx" x="576.545" y="-10.3585" width="16" height="590.717"/>
  </objectgroup>
 </map>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="86">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="91">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -36,8 +36,8 @@
    eJzt1dENgjAUheGuUDG+qYEJdAKlG6jr0DgDYHQ4I67iJdi0BuEF472Q8yUnafSB/wWqFAAATIW233+f2WZRx///cuh4/tE2O6GvV9j3yJSqaM9MTl8ePH9J5xVtTSveK5n7QmGfROgbBn3DjKnvfv6cNNrQ/UuLaHPDXdOWU1NBK2kXgX0wXL7jLuin9/RuCG50fUVM70nMXdPm+jaJUtuEp2GR+t2MP4d9nK6pX93nzrW6TzLpfQAwPVLvO4fzvgMAGAN8x3/rBaHsPo0=
   </data>
  </layer>
- <objectgroup id="4" name="Objects" visible="0">
-  <object id="38" template="../../obj/entry_up.tx" x="192" y="271.5" width="48" height="16">
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="280.5" y="798.5" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -145,5 +145,9 @@
   <object id="83" template="../../obj/waypoint.tx" x="313.93" y="69.193"/>
   <object id="84" template="../../obj/waypoint.tx" x="91.5614" y="120.947"/>
   <object id="85" template="../../obj/waypoint.tx" x="106.035" y="203.842"/>
+  <object id="87" template="../../obj/collision.tx" x="-15" y="-2.9495" width="16" height="803.899"/>
+  <object id="88" template="../../obj/collision.tx" x="639.5" y="-0.4495" width="16" height="803.899"/>
+  <object id="89" template="../../obj/collision.tx" x="-13.72" y="-17.5" width="671.44" height="16"/>
+  <object id="90" template="../../obj/collision.tx" x="-14.22" y="800.5" width="671.44" height="16"/>
  </objectgroup>
 </map>

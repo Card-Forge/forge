@@ -421,6 +421,38 @@
    <frame tileid="1560" duration="100"/>
   </animation>
  </tile>
+ <tile id="1569">
+  <animation>
+   <frame tileid="1569" duration="100"/>
+   <frame tileid="1574" duration="100"/>
+   <frame tileid="1579" duration="100"/>
+   <frame tileid="1584" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1571">
+  <animation>
+   <frame tileid="1571" duration="100"/>
+   <frame tileid="1576" duration="100"/>
+   <frame tileid="1581" duration="100"/>
+   <frame tileid="1586" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1572">
+  <animation>
+   <frame tileid="1572" duration="100"/>
+   <frame tileid="1577" duration="100"/>
+   <frame tileid="1582" duration="100"/>
+   <frame tileid="1587" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1573">
+  <animation>
+   <frame tileid="1573" duration="100"/>
+   <frame tileid="1578" duration="100"/>
+   <frame tileid="1583" duration="100"/>
+   <frame tileid="1588" duration="100"/>
+  </animation>
+ </tile>
  <tile id="1664">
   <animation>
    <frame tileid="1664" duration="100"/>
@@ -445,6 +477,22 @@
    <frame tileid="1688" duration="100"/>
   </animation>
  </tile>
+ <tile id="1699">
+  <animation>
+   <frame tileid="1699" duration="100"/>
+   <frame tileid="1704" duration="100"/>
+   <frame tileid="1709" duration="100"/>
+   <frame tileid="1714" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1701">
+  <animation>
+   <frame tileid="1701" duration="100"/>
+   <frame tileid="1706" duration="100"/>
+   <frame tileid="1711" duration="100"/>
+   <frame tileid="1716" duration="100"/>
+  </animation>
+ </tile>
  <tile id="1792">
   <animation>
    <frame tileid="1792" duration="100"/>
@@ -467,6 +515,30 @@
    <frame tileid="1814" duration="100"/>
    <frame tileid="1815" duration="100"/>
    <frame tileid="1816" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1827">
+  <animation>
+   <frame tileid="1827" duration="100"/>
+   <frame tileid="1832" duration="100"/>
+   <frame tileid="1837" duration="100"/>
+   <frame tileid="1842" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1828">
+  <animation>
+   <frame tileid="1828" duration="100"/>
+   <frame tileid="1833" duration="100"/>
+   <frame tileid="1838" duration="100"/>
+   <frame tileid="1843" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="1829">
+  <animation>
+   <frame tileid="1829" duration="100"/>
+   <frame tileid="1834" duration="100"/>
+   <frame tileid="1839" duration="100"/>
+   <frame tileid="1844" duration="100"/>
   </animation>
  </tile>
  <tile id="1920">
@@ -624,6 +696,18 @@
    <frame tileid="2840" duration="100"/>
   </animation>
  </tile>
+ <tile id="2952">
+  <animation>
+   <frame tileid="2952" duration="100"/>
+   <frame tileid="2953" duration="100"/>
+   <frame tileid="2954" duration="100"/>
+   <frame tileid="2955" duration="100"/>
+   <frame tileid="2956" duration="100"/>
+   <frame tileid="2957" duration="100"/>
+   <frame tileid="2958" duration="100"/>
+   <frame tileid="2959" duration="100"/>
+  </animation>
+ </tile>
  <tile id="3464">
   <animation>
    <frame tileid="3464" duration="100"/>
@@ -646,6 +730,30 @@
    <frame tileid="4109" duration="100"/>
    <frame tileid="4110" duration="100"/>
    <frame tileid="4111" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="5896">
+  <animation>
+   <frame tileid="5896" duration="100"/>
+   <frame tileid="5897" duration="100"/>
+   <frame tileid="5898" duration="100"/>
+   <frame tileid="5899" duration="100"/>
+   <frame tileid="5900" duration="100"/>
+   <frame tileid="5901" duration="100"/>
+   <frame tileid="5902" duration="100"/>
+   <frame tileid="5903" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="6024">
+  <animation>
+   <frame tileid="6024" duration="100"/>
+   <frame tileid="6025" duration="100"/>
+   <frame tileid="6026" duration="100"/>
+   <frame tileid="6027" duration="100"/>
+   <frame tileid="6028" duration="100"/>
+   <frame tileid="6029" duration="100"/>
+   <frame tileid="6030" duration="100"/>
+   <frame tileid="6031" duration="100"/>
   </animation>
  </tile>
 </tileset>
