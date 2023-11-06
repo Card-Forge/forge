@@ -1,0 +1,7 @@
+Name:Vampire Demon Token
+ManaCost:no cost
+Colors:white,black
+Types:Creature Vampire Demon
+PT:4/3
+K:Flying
+Oracle:Flying
