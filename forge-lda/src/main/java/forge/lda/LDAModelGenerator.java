@@ -296,8 +296,8 @@ public final class LDAModelGenerator {
 
     public static HashMap<String,List<Map.Entry<PaperCard,Integer>>> initializeCommanderFormat(){
 
-        IStorage<Deck> decks = new StorageImmediatelySerialized<Deck>("Generator",
-                new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR,DeckFormat.Commander.toString()),
+        IStorage<Deck> decks = new StorageImmediatelySerialized<>("Generator",
+                new DeckStorage(new File(ForgeConstants.DECK_GEN_DIR, DeckFormat.Commander.toString()),
                         ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
@@ -309,7 +309,6 @@ public final class LDAModelGenerator {
         Map<String, Integer> cardIntegerMap = new HashMap<>();
         Map<Integer, PaperCard> integerCardMap = new HashMap<>();
         Map<String, Integer> legendIntegerMap = new HashMap<>();
-        Map<Integer, PaperCard> integerLegendMap = new HashMap<>();
         //generate lookups for cards to link card names to matrix columns
         for (int i=0; i<cardList.size(); ++i){
             cardIntegerMap.put(cardList.get(i).getName(), i);
@@ -318,17 +317,11 @@ public final class LDAModelGenerator {
 
         //filter to just legal commanders
         List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList,Predicates.compose(
-                new Predicate<CardRules>() {
-                    @Override
-                    public boolean apply(CardRules rules) {
-                        return DeckFormat.Commander.isLegalCommander(rules);
-                    }
-                }, PaperCard.FN_GET_RULES)));
+                DeckFormat.Commander::isLegalCommander, PaperCard.FN_GET_RULES)));
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){
             legendIntegerMap.put(legends.get(i).getName(), i);
-            integerLegendMap.put(i, legends.get(i));
         }
         int[][] matrix = new int[legends.size()][cardList.size()];
 
@@ -348,12 +341,12 @@ public final class LDAModelGenerator {
         for (PaperCard card:legends){
             int col=legendIntegerMap.get(card.getName());
             int[] distances = matrix[col];
-            int max = (Integer) Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
+            int max = Collections.max(Arrays.asList(ArrayUtils.toObject(distances)));
             if (max>0) {
                 List<Map.Entry<PaperCard,Integer>> deckPool=new ArrayList<>();
                 for(int k=0;k<cardList.size(); k++){
                     if(matrix[col][k]>0){
-                        deckPool.add(new AbstractMap.SimpleEntry<PaperCard, Integer>(integerCardMap.get(k),matrix[col][k]));
+                        deckPool.add(new AbstractMap.SimpleEntry<>(integerCardMap.get(k), matrix[col][k]));
                     }
                 }
                 cardPools.put(card.getName(), deckPool);
