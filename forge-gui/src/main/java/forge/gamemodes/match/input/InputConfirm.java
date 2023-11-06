@@ -21,12 +21,10 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
-import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
 import forge.gui.GuiBase;
-import forge.item.IPaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -50,6 +48,7 @@ public class InputConfirm extends InputSyncronizedBase {
     private boolean result;
     private SpellAbility sa;
     private CardView card;
+    private final boolean showDiffCard;
 
     // simple interface to hide ugliness deciding how to confirm
     protected static ImmutableList<String> defaultOptions = ImmutableList.of(Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
@@ -79,12 +78,6 @@ public class InputConfirm extends InputSyncronizedBase {
                  return controller.getGui().confirm(null, message, defaultIsYes, options);
              if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
                  return controller.getGui().confirm((sa.getTargetCard()==null)?null:CardView.get(sa.getTargetCard()), message, defaultIsYes, options);
-             if (ApiType.Play.equals(sa.getApi()) && sa.getPlayEffectCard() != null) {
-                 IPaperCard iPaperCard = sa.getPlayEffectCard().getPaperCard();
-                 if (iPaperCard != null) //getcardforUI regardless of zone if it's hidden or not...
-                     return controller.getGui().confirm(CardView.getCardForUi(iPaperCard), message, defaultIsYes, options);
-                 return controller.getGui().confirm(CardView.get(sa.getPlayEffectCard()), message, defaultIsYes, options);
-             }
              return controller.getGui().confirm(CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
              InputConfirm inp;
@@ -97,6 +90,23 @@ public class InputConfirm extends InputSyncronizedBase {
              return inp.getResult();
          }
     }
+     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message) {
+         return InputConfirm.confirm(controller, card, sa, message, true, defaultOptions);
+     }
+     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
+         if (GuiBase.getInterface().isLibgdxPort()) {
+             return controller.getGui().confirm(card, message, defaultIsYes, options);
+         } else {
+             InputConfirm inp;
+             if (options.size() == 2) {
+                 inp = new InputConfirm(controller, message, options.get(0), options.get(1), defaultIsYes, card, sa);
+             } else {
+                 inp = new InputConfirm(controller, message, defaultOptions.get(0), defaultOptions.get(1), defaultIsYes, card, sa);
+             }
+             inp.showAndWait();
+             return inp.getResult();
+         }
+     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0) {
         this(controller, message0, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"), true);
@@ -115,6 +125,7 @@ public class InputConfirm extends InputSyncronizedBase {
         result = defaultYes0;
         this.sa = null;
         this.card = null;
+        showDiffCard = false;
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, SpellAbility sa0) {
@@ -134,6 +145,7 @@ public class InputConfirm extends InputSyncronizedBase {
         result = defaultYes0;
         this.sa = sa0;
         this.card = sa != null ? sa.getView().getHostCard() : null;
+        showDiffCard = false;
     }
 
     public InputConfirm(final PlayerControllerHuman controller, String message0, CardView card0) {
@@ -153,15 +165,29 @@ public class InputConfirm extends InputSyncronizedBase {
         result = defaultYes0;
         this.sa = null;
         this.card = card0;
+        showDiffCard = false;
     }
 
-    /** {@inheritDoc} */
+    public InputConfirm(final PlayerControllerHuman controller, String message0, String yesButtonText0,
+                         String noButtonText0, boolean defaultYes0, CardView card0, SpellAbility sa0) {
+         super(controller);
+         message = message0;
+         yesButtonText = yesButtonText0;
+         noButtonText = noButtonText0;
+         defaultYes = defaultYes0;
+         result = defaultYes0;
+         this.sa = sa0;
+         this.card = card0;
+         showDiffCard = true;
+     }
+
+     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) && card != null) {
             final StringBuilder sb = new StringBuilder();
-            sb.append(card.toString());
+            sb.append(showDiffCard ? sa.getHostCard().toString() : card.toString());
             if (sa != null && sa.toString().length() > 1) { // some spell abilities have no useful string value
                 sb.append(" - ").append(sa.toString());
             }

@@ -1,0 +1,12 @@
+Name:Henry Wu, InGen Geneticist
+ManaCost:B G U
+Types:Legendary Creature Human Scientist
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.Self,Human.YouCtrl | AddKeyword$ Exploit | Description$ CARDNAME and other Human creatures you control have exploit. (When a creature with exploit enters the battlefield, you may sacrifice a creature.)
+T:Mode$ Exploited | ValidCard$ Creature.nonHuman | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control exploits a non-Human creature, draw a card. If the exploited creature had power 3 or greater, create a Treasure token.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3
+SVar:X:TriggeredExploited$CardPower
+DeckHas:Ability$Sacrifice|Token & Type$Treasure
+DeckHits:Type$Human
+Oracle:Henry Wu, InGen Geneticist and other Human creatures you control have exploit. (When a creature with exploit enters the battlefield, you may sacrifice a creature.)\nWhenever a creature you control exploits a non-Human creature, draw a card. If the exploited creature had power 3 or greater, create a Treasure token.

@@ -1,21 +1,12 @@
 package forge.ai;
 
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.ai.ability.TokenAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -23,6 +14,9 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.Expressions;
+
+import java.util.List;
 
 /*
  * This class contains logic which is shared by several cards with different ability types (e.g. AF ChangeZone / AF Destroy)
@@ -368,5 +362,40 @@ public class SpecialAiLogic {
 
             return !sacFodder.isEmpty();
         }
+    }
+
+    // AF Branch Counterspell with UnlessCost logic (Bring the Ending, Anticognition)
+    public static boolean doBranchCounterspellLogic(final Player ai, final SpellAbility sa) {
+        // TODO: this is an ugly hack that needs a rewrite if more cards are added with different SA setups or
+        // if this is to be made more generic in the future.
+        SpellAbility top = ComputerUtilAbility.getTopSpellAbilityOnStack(ai.getGame(), sa);
+        if (top == null || !sa.canTarget(top)) {
+            return false;
+        }
+        Card host = sa.getHostCard();
+
+        // pre-target the object to calculate the branch condition SVar, then clean up before running the real check
+        sa.getTargets().add(top);
+        int value = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("BranchConditionSVar"), sa);
+        sa.resetTargets();
+
+        String branchCompare = sa.getParamOrDefault("BranchConditionSVarCompare", "GE1");
+        String operator = branchCompare.substring(0, 2);
+        String operand = branchCompare.substring(2);
+        final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
+        boolean conditionMet = Expressions.compare(value, operator, operandValue);
+
+        SpellAbility falseSub = sa.getAdditionalAbility("FalseSubAbility"); // this ability has the UnlessCost part
+        boolean willPlay = false;
+        if (!conditionMet && falseSub.hasParam("UnlessCost")) {
+            // FIXME: We're emulating the UnlessCost on the SA to run the proper checks.
+            // This is hacky, but it works. Perhaps a cleaner way exists?
+            sa.getMapParams().put("UnlessCost", falseSub.getParam("UnlessCost"));
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
+            sa.getMapParams().remove("UnlessCost");
+        } else {
+            willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
+        }
+        return willPlay;
     }
 }

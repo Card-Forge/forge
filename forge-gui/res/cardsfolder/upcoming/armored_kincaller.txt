@@ -1,0 +1,13 @@
+Name:Armored Kincaller
+ManaCost:2 G
+Types:Creature Dinosaur
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, you may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life.
+SVar:TrigReveal:DB$ Reveal | RevealValid$ Dinosaur | RememberRevealed$ True | Optional$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | ConditionCheckSVar$ DinoPresence | ConditionSVarCompare$ GE1 | LifeAmount$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DinoPresence:Count$RememberedSize/Plus.DinoControlled
+SVar:DinoControlled:Count$Valid Dinosaur.Other+inZoneBattlefield+YouCtrl
+DeckHints:Type$Dinosaur
+DeckHas:Ability$LifeGain
+Oracle:When Armored Kincaller enters the battlefield, you may reveal a Dinosaur card from your hand. If you do or if you control another Dinosaur, you gain 3 life.

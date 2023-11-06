@@ -312,7 +312,11 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                runSingleTrigger(t, runParams);
+                int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+
+                for (int i = 0; i < x; ++i) {
+                    runSingleTrigger(t, runParams);
+                }
 
                 checkStatics = true;
             }

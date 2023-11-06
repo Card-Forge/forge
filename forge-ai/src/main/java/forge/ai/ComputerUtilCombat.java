@@ -2583,4 +2583,43 @@ public class ComputerUtilCombat {
         }
         return totalLifeLinkDamage;
     }
+
+    public static boolean willOpposingCreatureDieInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, atk, combat)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                for (Card blk : combat.getBlockers(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, blk, combat)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDangerousToSacInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (atk.hasKeyword(Keyword.TRAMPLE)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

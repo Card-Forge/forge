@@ -1,10 +1,9 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpecialAiLogic;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
@@ -16,6 +15,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 
+import java.util.Map;
+
 public class BranchAi extends SpellAbilityAi {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -25,6 +26,8 @@ public class BranchAi extends SpellAbilityAi {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("GrislySigil".equals(aiLogic)) {
             return SpecialCardAi.GrislySigil.consider(aiPlayer, sa);
+        } else if ("BranchCounter".equals(aiLogic)) {
+            return SpecialAiLogic.doBranchCounterspellLogic(aiPlayer, sa); // Bring the Ending, Anticognition (hacky implementation)
         } else if ("TgtAttacker".equals(aiLogic)) {
             final Combat combat = aiPlayer.getGame().getCombat();
             if (combat == null || combat.getAttackingPlayer() != aiPlayer) {
