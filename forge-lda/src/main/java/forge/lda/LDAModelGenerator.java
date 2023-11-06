@@ -1,20 +1,32 @@
 package main.java.forge.lda;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.GuiDesktop;
 import forge.StaticData;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
+import forge.deck.io.DeckStorage;
 import forge.gui.GuiBase;
 import forge.lda.dataset.Dataset;
 import forge.lda.lda.LDA;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.storage.IStorage;
+import forge.util.storage.StorageImmediatelySerialized;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.File;
 import java.util.*;
 
 import static forge.lda.lda.inference.InferenceMethod.CGS;
