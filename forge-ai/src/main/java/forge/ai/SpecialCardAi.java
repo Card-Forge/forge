@@ -48,7 +48,6 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.LinkedHashMapToAmount;
@@ -203,43 +202,6 @@ public class SpecialCardAi {
                 sa.setXManaCostPaid(Math.min(counterNum, libsize));
             }
             return true;
-        }
-    }
-
-    // Bring the Ending and Anticognition
-    public static class BringTheEnding {
-        public static boolean consider(final Player ai, final SpellAbility sa) {
-            // TODO: this is an ugly hack that needs a rewrite if more cards are added with different SA setups or
-            // if this is to be made more generic in the future.
-            SpellAbility top = ComputerUtilAbility.getTopSpellAbilityOnStack(ai.getGame(), sa);
-            if (top == null || !sa.canTarget(top)) {
-                return false;
-            }
-            Card host = sa.getHostCard();
-
-            // pre-target the object to calculate the branch condition SVar, then clean up before running the real check
-            sa.getTargets().add(top);
-            int value = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("BranchConditionSVar"), sa);
-            sa.resetTargets();
-
-            String branchCompare = sa.getParamOrDefault("BranchConditionSVarCompare", "GE1");
-            String operator = branchCompare.substring(0, 2);
-            String operand = branchCompare.substring(2);
-            final int operandValue = AbilityUtils.calculateAmount(host, operand, sa);
-            boolean conditionMet = Expressions.compare(value, operator, operandValue);
-
-            SpellAbility falseSub = sa.getAdditionalAbility("FalseSubAbility"); // this ability has the UnlessCost part
-            boolean willPlay = false;
-            if (!conditionMet && falseSub.hasParam("UnlessCost")) {
-                // FIXME: We're emulating the UnlessCost on the SA to run the proper checks.
-                // This is hacky, but it works. Perhaps a cleaner way exists?
-                sa.getMapParams().put("UnlessCost", falseSub.getParam("UnlessCost"));
-                willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
-                sa.getMapParams().remove("UnlessCost");
-            } else {
-                willPlay = SpellApiToAi.Converter.get(ApiType.Counter).canPlayAIWithSubs(ai, sa);
-            }
-            return willPlay;
         }
     }
 
