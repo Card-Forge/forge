@@ -112,6 +112,8 @@ public enum CounterEnumType {
     DIVINITY("DVNTY", 0, 233, 255),
 
     DOOM("DOOM", 255, 104, 118),
+    
+    DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
 
