@@ -1,7 +1,7 @@
 Name:Grasping Shadows
 ManaCost:3 B
 Types:Enchantment
-T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains lifelink until end of turn.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on CARDNAME. Then if there are three or more dread counters on it, transform it.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Lifelink & Deathtouch | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DREAD | CounterNum$ 1 | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | ConditionPresent$ Card.Self+counters_GE3_DREAD | Defined$ Self | Mode$ Transform
