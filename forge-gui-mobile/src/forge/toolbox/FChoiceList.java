@@ -357,16 +357,21 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
+            if (value instanceof CardView) {
+                CardRenderer.drawCardListItem(g, font, foreColor, (CardView) value, 0, null, x, y, w, h, compactModeHandler.isCompactMode());
+            }
             //update manacost text to draw symbols instead
-            if (value.toString().contains(" {")){
-                String[] values = value.toString().split(" ");
-                String cost = TextUtil.fastReplace(values[1],"}{", " ");
-                cost = TextUtil.fastReplace(TextUtil.fastReplace(cost,"{", ""),"}", "");
+            else if (value != null && value.toString().contains(" {")) {
+                int manaStringindex = value.toString().indexOf(" {");
+                String title = value.toString().substring(0, manaStringindex - 1); //support ability/name with spaces...
+                String cost = TextUtil.fastReplace(value.toString().substring(manaStringindex), "}{", " ");
+                cost = TextUtil.fastReplace(TextUtil.fastReplace(cost, "{", ""), "}", "");
                 ManaCost manaCost = new ManaCost(new ManaCostParser(cost));
-                CardFaceSymbols.drawManaCost(g, manaCost, x + font.getBounds(values[0]+" ").width, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
-                g.drawText(values[0], font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
+                CardFaceSymbols.drawManaCost(g, manaCost, x + font.getBounds(title).width, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
+                g.drawText(title, font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
             } else {
-                g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
+                if (value != null)
+                    g.drawText(getChoiceText(value), font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
             }
         }
     }

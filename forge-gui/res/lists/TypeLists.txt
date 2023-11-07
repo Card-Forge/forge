@@ -52,6 +52,7 @@ Brushwagg:Brushwaggs
 Camarid:Camarids
 C'tan:C'tan
 Camel:Camels
+Capybara:Capybaras
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats

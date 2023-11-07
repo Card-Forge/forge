@@ -3121,7 +3121,7 @@ public class CardFactoryUtil {
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each creature card in your graveyard.";
+                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
             }
 
             if (card.hasSVar("MonstrosityAILogic")) {

@@ -1,0 +1,9 @@
+Name:Abuelo's Awakening
+ManaCost:X 3 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouOwn,Enchantment.nonAura+YouOwn | TgtPrompt$ Select an Artifact or non-Aura enchantment | AnimateSubAbility$ DBAnimate | WithCountersType$ P1P1 | WithCountersAmount$ X | SpellDescription$ Return target artifact or non-Aura enchantment card from your graveyard to the battlefield with X additional +1/+1 counters on it. It's a 1/1 Spirit creature with flying in addition to its other types.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 1 | Toughness$ 1 | Keywords$ Flying | Types$ Creature,Spirit | Duration$ Permanent
+SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard|Counters & Type$Spirit
+DeckHints:Ability$Mill & Type$Artifact|Enchantment
+Oracle:Return target artifact or non-Aura enchantment card from your graveyard to the battlefield with X additional +1/+1 counters on it. It's a 1/1 Spirit creature with flying in addition to its other types.

@@ -1,0 +1,7 @@
+Name:Bitter Triumph
+ManaCost:1 B
+Types:Instant
+K:AlternateAdditionalCost:PayLife<3>:Discard<1/Card>
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+DeckHas:Ability$Discard
+Oracle:As an additional cost to cast this spell, discard a card or pay 3 life.\nDestroy target creature or planeswalker.

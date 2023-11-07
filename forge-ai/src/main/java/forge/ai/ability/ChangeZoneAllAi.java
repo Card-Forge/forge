@@ -44,6 +44,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        final String aiLogic = sa.getParamOrDefault("AILogic" ,"");
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -52,7 +53,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
 
             if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source, sa)) {
-                boolean aiLogicAllowsDiscard = sa.hasParam("AILogic") && sa.getParam("AILogic").startsWith("DiscardAll");
+                boolean aiLogicAllowsDiscard = aiLogic.startsWith("DiscardAll");
 
                 if (!aiLogicAllowsDiscard) {
                     return false;
@@ -86,16 +87,16 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         oppType = AbilityUtils.filterListByType(oppType, sa.getParam("ChangeType"), sa);
         computerType = AbilityUtils.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         
-        if ("LivingDeath".equals(sa.getParam("AILogic"))) {
+        if ("LivingDeath".equals(aiLogic)) {
             // Living Death AI
             return SpecialCardAi.LivingDeath.consider(ai, sa);
-        } else if ("Timetwister".equals(sa.getParam("AILogic"))) {
+        } else if ("Timetwister".equals(aiLogic)) {
             // Timetwister AI
             return SpecialCardAi.Timetwister.consider(ai, sa);
-        } else if ("RetDiscardedThisTurn".equals(sa.getParam("AILogic"))) {
+        } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             // e.g. Shadow of the Grave
             return ai.getNumDiscardedThisTurn() > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
-        } else if ("ExileGraveyards".equals(sa.getParam("AILogic"))) {
+        } else if ("ExileGraveyards".equals(aiLogic)) {
             for (Player opp : ai.getOpponents()) {
                 CardCollectionView cardsGY = opp.getCardsIn(ZoneType.Graveyard);
                 CardCollection creats = CardLists.filter(cardsGY, CardPredicates.Presets.CREATURES);
@@ -105,7 +106,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
             }
             return false;
-        } else if ("ManifestCreatsFromGraveyard".equals(sa.getParam("AILogic"))) {
+        } else if ("ManifestCreatsFromGraveyard".equals(aiLogic)) {
             PlayerCollection players = ai.getOpponents();
             players.add(ai);
             int maxSize = 1;
@@ -217,7 +218,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             }
 
             // Don't cast during main1?
-            if (game.getPhaseHandler().is(PhaseType.MAIN1, ai)) {
+            if (game.getPhaseHandler().is(PhaseType.MAIN1, ai) && !aiLogic.equals("Main1")) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
@@ -245,15 +246,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                         && !ComputerUtil.isPlayingReanimator(ai);
             }
         } else if (origin.equals(ZoneType.Exile)) {
-            String logic = sa.getParam("AILogic");
-
-            if (logic != null && logic.startsWith("DiscardAllAndRetExiled")) {
+            if (aiLogic.startsWith("DiscardAllAndRetExiled")) {
                 int numExiledWithSrc = CardLists.filter(ai.getCardsIn(ZoneType.Exile), CardPredicates.isExiledWith(source)).size();
                 int curHandSize = ai.getCardsIn(ZoneType.Hand).size();
             
                 // minimum card advantage unless the hand will be fully reloaded
-                int minAdv = logic.contains(".minAdv") ? Integer.parseInt(logic.substring(logic.indexOf(".minAdv") + 7)) : 0;
-                boolean noDiscard = logic.contains(".noDiscard");
+                int minAdv = aiLogic.contains(".minAdv") ? Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".minAdv") + 7)) : 0;
+                boolean noDiscard = aiLogic.contains(".noDiscard");
 
                 if (numExiledWithSrc > curHandSize || (noDiscard && numExiledWithSrc > 0)) {
                     if (ComputerUtil.predictThreatenedObjects(ai, sa, true).contains(source)) {
