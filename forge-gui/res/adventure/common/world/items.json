@@ -308,7 +308,7 @@
     "name": "Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "IronBoots",
-    "cost": 400,
+    "cost": 2000,
     "effect": { 
       "moveSpeed": 1.2
     }
@@ -317,7 +317,7 @@
     "name": "Iron Shield",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 400,
+    "cost": 2000,
     "effect": {
       "lifeModifier": 2
     }
@@ -325,7 +325,7 @@
   {
     "name": "Iron Armor",
     "equipmentSlot": "Body",
-    "cost": 400,
+    "cost": 2000,
     "iconName": "IronArmor",
     "effect": {
       "lifeModifier": 2
@@ -479,6 +479,17 @@
     "cost": 4500,
     "effect": {
       "lifeModifier": 5
+    }
+  },
+  {
+    "name": "Presence of the Hydra",
+    "equipmentSlot": "Left",
+    "iconName": "PresenceoftheHydra",
+    "effect": {
+      "lifeModifier": 2,
+        "startBattleWithCardInCommandZone": [
+          "Presence of the Hydra"
+        ]
     }
   },
   {
