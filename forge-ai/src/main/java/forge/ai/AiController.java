@@ -68,7 +68,10 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -1623,8 +1626,15 @@ public class AiController {
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (useLivingEnd) {
                 if (sa.isCycling() && sa.canCastTiming(player)) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                        aiPlayDecision = AiPlayDecision.WillPlay;
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                && !player.cantLoseForZeroOrLessLife()
+                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                            aiPlayDecision = AiPlayDecision.CantAfford;
+                        } else {
+                            aiPlayDecision = AiPlayDecision.WillPlay;
+                        }
+                    }
                 } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
                     if (isLifeInDanger) { //needs more tune up for certain conditions
                         aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
