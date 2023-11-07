@@ -272,7 +272,7 @@
   <object id="143" template="../../obj/waypoint.tx" x="225" y="846"/>
   <object id="145" template="../../obj/manashards.tx" x="17.3333" y="28.1667"/>
   <object id="146" template="../../obj/manashards.tx" x="716.5" y="418.5"/>
-  <object id="147" template="../../obj/gold.tx" x="397.5" y="592.5"/>
+  <object id="147" template="../../obj/gold.tx" x="406.833" y="567.833"/>
   <object id="148" template="../../obj/enemy.tx" x="33.5" y="874.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Shade"/>
