@@ -1622,10 +1622,11 @@ public class AiController {
                     continue;
                 }
             }
-            //living end AI decks
+            // living end AI decks
+            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player)) {
+                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
                     if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
                                 && !player.cantLoseForZeroOrLessLife()
