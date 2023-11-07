@@ -314,7 +314,8 @@ public class AnimateAi extends SpellAbilityAi {
                 int aValue = ComputerUtilCard.evaluateCreature(animatedCopy);
 
                 // animated creature has zero toughness, don't do that
-                if (animatedCopy.getNetToughness() <= 0) {
+                if (animatedCopy.getNetToughness() <= 0
+                        && !(logic.equals("WithCounters") && animatedCopy.canReceiveCounters(CounterEnumType.P1P1))) {
                     continue;
                 }
 
