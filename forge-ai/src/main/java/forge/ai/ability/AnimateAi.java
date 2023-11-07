@@ -316,10 +316,10 @@ public class AnimateAi extends SpellAbilityAi {
                 // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
                     boolean buffedToughness = false;
-                    SpellAbility sub = sa.getSubAbility();
+                    SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
                     if (sub != null) {
-                        if (animatedCopy.canReceiveCounters(CounterEnumType.P1P1) &&
-                                sub.getApi() == ApiType.PutCounter && "Targeted".equals(sub.getParam("Defined"))
+                        if (animatedCopy.canReceiveCounters(CounterEnumType.P1P1)
+                                && "Targeted".equals(sub.getParam("Defined"))
                                 && "P1P1".equals(sub.getParam("CounterType"))) {
                             buffedToughness = true;
                         }
