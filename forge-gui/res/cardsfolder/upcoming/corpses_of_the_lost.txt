@@ -1,0 +1,11 @@
+Name:Corpses of the Lost
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Skeleton+YouCtrl | AddPower$ 1 | AddKeyword$ Haste | Description$ Skeletons you control get +1/+0 and have haste.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 black Skeleton Pirate creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_skeleton_pirate
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, if you descended this turn, you may pay 1 life. If you do, return CARDNAME to its owner's hand. (You descended if a permanent card was put into your graveyard from anywhere.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ PayLife<1> | Defined$ Self | Origin$ Battlefield | Destination$ Hand | Hidden$ True
+DeckHints:Type$Skeleton
+DeckHas:Ability$Token & Type$Skeleton|Pirate
+Oracle:Skeletons you control get +1/+0 and have haste.\nWhen Corpses of the Lost enters the battlefield, create a 2/2 black Skeleton Pirate creature token.\nAt the beginning of your end step, if you descended this turn, you may pay 1 life. If you do, return Corpses of the Lost to its owner's hand. (You descended if a permanent card was put into your graveyard from anywhere.

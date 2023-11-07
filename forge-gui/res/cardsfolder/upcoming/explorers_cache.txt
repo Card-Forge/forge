@@ -1,0 +1,10 @@
+Name:Explorer's Cache
+ManaCost:1 G
+Types:Artifact
+K:etbCounter:P1P1:2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ MoveCounter | Cost$ T | ValidTgts$ Creature | Source$ Self | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Move a +1/+1 counter from CARDNAME onto target creature. Activate only as a sorcery.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Explorer's Cache enters the battlefield with two +1/+1 counters on it.\nWhenever a creature you control with a +1/+1 counter on it dies, put a +1/+1 counter on Explorer's Cache.\n{T}: Move a +1/+1 counter from Explorer's Cache onto target creature. Activate only as a sorcery.
