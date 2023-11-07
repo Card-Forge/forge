@@ -5,6 +5,7 @@
 *.tmp
 .metadata
 .recommenders
+qodana.yaml
 
 
 # Ignore Eclipse config files
