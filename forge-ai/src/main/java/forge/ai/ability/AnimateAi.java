@@ -313,7 +313,7 @@ public class AnimateAi extends SpellAbilityAi {
                 final Card animatedCopy = becomeAnimated(c, sa);
                 int aValue = ComputerUtilCard.evaluateCreature(animatedCopy);
 
-                // animated creature has zero toughness, don't do that unless
+                // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
                     boolean buffedToughness = false;
                     SpellAbility sub = sa.getSubAbility();
