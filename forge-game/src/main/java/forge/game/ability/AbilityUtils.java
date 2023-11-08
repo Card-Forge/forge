@@ -592,6 +592,11 @@ public class AbilityUtils {
             }
             val = handlePaid(list, calcX[1], card, ability);
         }
+        else if (calcX[0].matches("CraftedWith")) {
+            final CardCollection list = new CardCollection();
+            if (card.getExiledCards() != null) list.addAll(card.getExiledCards());
+            val = list.isEmpty() ? null :handlePaid(list, calcX[1], card, ability);
+        }
 
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility) {

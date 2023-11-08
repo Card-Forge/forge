@@ -24,10 +24,7 @@ import forge.StaticData;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.deck.DeckSection;
-import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
+import forge.game.ability.*;
 import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.Keyword;
@@ -506,6 +503,16 @@ public class GameAction {
 
                 // 607.2q linked ability can find cards exiled as cost while it was a spell
                 copied.addExiledCards(c.getExiledCards());
+            }
+
+            if (cause != null && cause.isCraft() && toBattlefield) { // retain cards crafted while ETB transformed
+                for (Card craft : cause.getPaidList("ExiledCards")) {
+                    if (!craft.equals(copied) && !craft.isToken()) {
+                        copied.addExiledCard(craft);
+                        craft.setExiledWith(copied);
+                        craft.setExiledBy(cause.getActivatingPlayer());
+                    }
+                }
             }
         }
 
