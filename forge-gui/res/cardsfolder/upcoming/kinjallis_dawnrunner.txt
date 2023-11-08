@@ -1,6 +1,6 @@
 Name:Kinjalli's Dawnrunner
 ManaCost:2 W
-Types:Creature Bird
+Types:Creature Human Scout
 PT:1/1
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ When CARDNAME enters the battlefield, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
