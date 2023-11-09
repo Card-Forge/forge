@@ -21,6 +21,7 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
@@ -2110,6 +2111,11 @@ public class AbilityUtils {
             final PhaseHandler cPhase = game.getPhaseHandler();
             final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
+        }
+
+        // Count$FinishedUpkeepsThisTurn
+        if (sq[0].startsWith("FinishedUpkeepsThisTurn")) {
+            return doXMath(game.getPhaseHandler().getNumUpkeep() - (game.getPhaseHandler().is(PhaseType.UPKEEP) ? 1 : 0), expr, c, ctb);
         }
 
         // Count$AttachedTo <restriction>
