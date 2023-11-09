@@ -983,6 +983,10 @@ public class PhaseHandler implements java.io.Serializable {
         return nCombatsThisTurn;
     }
 
+    public final int getNumUpkeep() {
+        return nUpkeepsThisTurn;
+    }
+
     public final boolean isFirstUpkeep() {
         return is(PhaseType.UPKEEP) && nUpkeepsThisTurn == 0;
     }
