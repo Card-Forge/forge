@@ -1,0 +1,8 @@
+Name:Hunter's Blowgun
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | Condition$ PlayerTurn | Description$ Equipped creature has deathtouch as long as it's your turn. Otherwise, it has reach.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Reach | Condition$ NotPlayerTurn | Secondary$ True | Description$ Equipped creature has deathtouch as long as it's your turn. Otherwise, it has reach.
+Oracle:Equipped creature gets +1/+1.\nEquipped creature has deathtouch as long as it's your turn. Otherwise, it has reach.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

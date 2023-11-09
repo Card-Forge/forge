@@ -1,0 +1,10 @@
+Name:Fungal Fortitude
+ManaCost:1 B
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When enchanted creature dies, return it to the battlefield tapped under its owner's control.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy
+Oracle:Flash\nEnchant creature\nWhen enchanted creature dies, return it to the battlefield tapped under its owner's control.

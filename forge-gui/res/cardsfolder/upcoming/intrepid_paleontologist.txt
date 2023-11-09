@@ -1,0 +1,16 @@
+Name:Intrepid Paleontologist
+ManaCost:1 G
+Types:Creature Human Druid
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ ChangeZone | Cost$ 2 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+S:Mode$ Continuous | MayPlay$ True | Affected$ Dinosaur.ExiledWithSource+YouOwn | AffectedZone$ Exile | Description$ You may cast Dinosaur creature spells from among cards you own exiled with CARDNAME. If you cast a spell this way, that creature enters the battlefield with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
+T:Mode$ SpellCast | ValidCard$ Card.CastSa Spell.MayPlaySource | Execute$ TrigEffect | Static$ True | TriggerZones$ Battlefield
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+DeckNeeds:Type$Dinosaur
+DeckHints:Ability$Mill
+DeckHas:Ability$Graveyard|Counters
+Oracle:{T}: Add one mana of any color.\n{2}: Exile target card from a graveyard.\nYou may cast Dinosaur creature spells from among cards you own exiled with Intrepid Paleontologist. If you cast a spell this way, that creature enters the battlefield with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)
