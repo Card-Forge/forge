@@ -767,10 +767,6 @@ public class CardFactory {
             final CardState ret = new CardState(out, CardStateName.Original);
             ret.copyFrom(in.getState(in.getCurrentStateName()), false, sa);
             result.put(CardStateName.Original, ret);
-
-            if (host.getGame().getView().useSourceImageForClone()) {
-                ret.setImageKey(host.getImageKey());
-            }
         }
 
         // update all states, both for flip cards
