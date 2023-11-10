@@ -1,0 +1,9 @@
+Name:Kutzil, Malamet Exemplar
+ManaCost:1 G W
+Types:Legendary Creature Cat Warrior
+PT:3/3
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+powerGTbasePower | ValidTarget$ Player | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control each with power greater than its base power deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Your opponents can't cast spells during your turn.\nWhenever one or more creatures you control each with power greater than its base power deals combat damage to a player, draw a card.
