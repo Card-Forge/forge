@@ -1,0 +1,8 @@
+Name:Poison Dart Frog
+ManaCost:1 G
+Types:Creature Frog
+PT:1/1
+K:Reach
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+Oracle:Reach\n{T}: Add one mana of any color.\n{2}: Poison Dart Frog gains deathtouch until end of turn.
