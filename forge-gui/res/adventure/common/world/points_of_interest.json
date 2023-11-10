@@ -828,7 +828,38 @@
 	"questTags": [
 		"Cave",
 		"Hostile",
-		"BiomeRed",
+		"BiomeColorless",
+		"Sidequest"
+	]
+},
+{
+	"name": "CaveAmphin",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "../common/maps/map/cave/cave_amphin.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Cave",
+		"Hostile",
+		"BiomeBlue",
+		"BiomeColorless",
+		"Sidequest"
+	]
+},
+{
+	"name": "CaveRat",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "../common/maps/map/cave/cave_rat.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Cave",
+		"Hostile",
+		"BiomeBlack",
 		"BiomeColorless",
 		"Sidequest"
 	]
@@ -1367,7 +1398,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "../common/maps/map/evilgrove/evilgrove_1.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_1_zombie.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"EvilGrove",
@@ -1382,7 +1413,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "../common/maps/map/evilgrove/evilgrove_2.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_2_blackgolem.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"EvilGrove",
@@ -1397,7 +1428,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "../common/maps/map/evilgrove/evilgrove_3.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_3_gravetitan.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"EvilGrove",
@@ -1412,7 +1443,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "../common/maps/map/evilgrove/evilgrove_4.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_4_cursedforest.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"EvilGrove",
@@ -1427,7 +1458,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
-	"map": "../common/maps/map/evilgrove/evilgrove_5.tmx",
+	"map": "../common/maps/map/evilgrove/evilgrove_5_swamp.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"EvilGrove",
@@ -1469,10 +1500,10 @@
 {
 	"name": "Factory",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Factory",
-	"map": "../common/maps/map/factory/factory_1.tmx",
+	"map": "../common/maps/map/factory/factory_1_golems.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -1484,10 +1515,10 @@
 {
 	"name": "Factory1",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Factory",
-	"map": "../common/maps/map/factory/factory_2.tmx",
+	"map": "../common/maps/map/factory/factory_2_ooze.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -1499,10 +1530,10 @@
 {
 	"name": "Factory2",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Factory",
-	"map": "../common/maps/map/factory/factory_3.tmx",
+	"map": "../common/maps/map/factory/factory_3_wizard.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -1514,10 +1545,10 @@
 {
 	"name": "Factory3",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Factory",
-	"map": "../common/maps/map/factory/factory_4.tmx",
+	"map": "../common/maps/map/factory/factory_4_large.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -1880,7 +1911,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_1.tmx",
+	"map": "../common/maps/map/grove/grove_1_bears.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1895,7 +1926,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_2.tmx",
+	"map": "../common/maps/map/grove/grove_2_wolf.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1910,7 +1941,7 @@
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_3.tmx",
+	"map": "../common/maps/map/grove/grove_3_dinosaur.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1925,7 +1956,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_4.tmx",
+	"map": "../common/maps/map/grove/grove_4_gorilla.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1940,7 +1971,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_5.tmx",
+	"map": "../common/maps/map/grove/grove_5_foresttitan.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1955,7 +1986,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_6.tmx",
+	"map": "../common/maps/map/grove/grove_6_wizards.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1967,10 +1998,10 @@
 {
 	"name": "Grove6",
 	"type": "cave",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_7.tmx",
+	"map": "../common/maps/map/grove/grove_7_snake.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1985,7 +2016,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_8.tmx",
+	"map": "../common/maps/map/grove/grove_8_hydra.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -1997,10 +2028,10 @@
 {
 	"name": "Grove8",
 	"type": "cave",
-	"count": 3,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
-	"map": "../common/maps/map/grove/grove_9.tmx",
+	"map": "../common/maps/map/grove/grove_9_eldrazi.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -2016,6 +2047,36 @@
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "Grove",
 	"map": "../common/maps/map/grove/grove_10_bamboo.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"BiomeGreen",
+		"Grove",
+		"Hostile",
+		"Sidequest"
+	]
+},
+{
+	"name": "GroveGreenDragon",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Grove",
+	"map": "../common/maps/map/grove/grove_11_greendragon.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"BiomeGreen",
+		"Grove",
+		"Hostile",
+		"Sidequest"
+	]
+},
+{
+	"name": "GroveFaerieDragon",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Grove",
+	"map": "../common/maps/map/grove/grove_12_faeriedragon.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeGreen",
@@ -2140,7 +2201,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "LavaForge",
-	"map": "../common/maps/map/lavaforge/lavaforge_3.tmx",
+	"map": "../common/maps/map/lavaforge/lavaforge_3_vulcanodragon.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Hostile",
@@ -2154,7 +2215,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "LavaForge",
-	"map": "../common/maps/map/lavaforge/lavaforge_1.tmx",
+	"map": "../common/maps/map/lavaforge/lavaforge_1_sulfuricvortex.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
@@ -2170,7 +2231,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "LavaForge",
-	"map": "../common/maps/map/lavaforge/lavaforge_2.tmx",
+	"map": "../common/maps/map/lavaforge/lavaforge_2_burningsands.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"DungeonEffect",
@@ -2197,10 +2258,10 @@
 {
 	"name": "MageTowerC",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerRed",
-	"map": "../common/maps/map/magetower/magetower_1.tmx",
+	"map": "../common/maps/map/magetower/magetower_1_djinn.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2213,10 +2274,10 @@
 {
 	"name": "MageTowerC2",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlack",
-	"map": "../common/maps/map/magetower/magetower_2.tmx",
+	"map": "../common/maps/map/magetower/magetower_2_blackwiz.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2229,10 +2290,10 @@
 {
 	"name": "MageTowerC3",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerRed",
-	"map": "../common/maps/map/magetower/magetower_3.tmx",
+	"map": "../common/maps/map/magetower/magetower_3_redwiz.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2245,10 +2306,10 @@
 {
 	"name": "MageTowerC4",
 	"type": "dungeon",
-	"count": 3,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerWhite",
-	"map": "../common/maps/map/magetower/magetower_4.tmx",
+	"map": "../common/maps/map/magetower/magetower_4_monastery.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2261,10 +2322,10 @@
 {
 	"name": "MageTowerC5",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerGreen",
-	"map": "../common/maps/map/magetower/magetower_5.tmx",
+	"map": "../common/maps/map/magetower/magetower_5_greenhouse.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2277,10 +2338,26 @@
 {
 	"name": "MageTowerC6",
 	"type": "dungeon",
-	"count": 3,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlack",
-	"map": "../common/maps/map/magetower/magetower_6.tmx",
+	"map": "../common/maps/map/magetower/magetower_6_infernalgenesis.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"MageTower",
+		"Dungeon",
+		"Hostile",
+		null,
+		null
+	]
+},
+{
+	"name": "MageTower7Church",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
+	"sprite": "MageTowerWhite",
+	"map": "../common/maps/map/magetower/magetower_7_church.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2293,10 +2370,10 @@
 {
 	"name": "MageTowerC8",
 	"type": "dungeon",
-	"count": 3,
+	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_8.tmx",
+	"map": "../common/maps/map/magetower/magetower_8_illusion.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2312,7 +2389,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_13.tmx",
+	"map": "../common/maps/map/magetower/magetower_13_doppelganger.tmx",
 	"radiusFactor": 0.2,
 	"questTags": [
 		"BiomeColorless",
@@ -2324,10 +2401,10 @@
 {
 	"name": "MageTowerCE",
 	"type": "dungeon",
-	"count": 3,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_14.tmx",
+	"map": "../common/maps/map/magetower/magetower_14_horrors.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"BiomeColorless",
@@ -2343,7 +2420,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_1.tmx",
+	"map": "../common/maps/map/magetower/magetower_1_djinn.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2359,7 +2436,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlack",
-	"map": "../common/maps/map/magetower/magetower_2.tmx",
+	"map": "../common/maps/map/magetower/magetower_2_blackwiz.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2375,7 +2452,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerRed",
-	"map": "../common/maps/map/magetower/magetower_3.tmx",
+	"map": "../common/maps/map/magetower/magetower_3_redwiz.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2388,10 +2465,10 @@
 {
 	"name": "MageTowerU3",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerWhite",
-	"map": "../common/maps/map/magetower/magetower_4.tmx",
+	"map": "../common/maps/map/magetower/magetower_4_monastery.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2407,7 +2484,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerGreen",
-	"map": "../common/maps/map/magetower/magetower_5.tmx",
+	"map": "../common/maps/map/magetower/magetower_5_greenhouse.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2420,10 +2497,10 @@
 {
 	"name": "MageTowerU5",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlack",
-	"map": "../common/maps/map/magetower/magetower_6.tmx",
+	"map": "../common/maps/map/magetower/magetower_6_infernalgenesis.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2439,7 +2516,7 @@
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_8.tmx",
+	"map": "../common/maps/map/magetower/magetower_8_illusion.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",
@@ -2452,10 +2529,26 @@
 {
 	"name": "MageTowerUD",
 	"type": "dungeon",
-	"count": 2,
+	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
-	"sprite": "MageTowerBlue",
-	"map": "../common/maps/map/magetower/magetower_14.tmx",
+	"sprite": "MageTowerBlack",
+	"map": "../common/maps/map/magetower/magetower_14_horrors.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"MageTower",
+		"Hostile",
+		"Dungeon",
+		"BiomeBlue",
+		"Sidequest"
+	]
+},
+{
+	"name": "MageTowerRats",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
+	"sprite": "MageTowerBlack",
+	"map": "../common/maps/map/magetower/magetower_9_ninjarats.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"MageTower",

@@ -400,6 +400,92 @@
 	]
 },
 {
+	"name": "Adult Green Dragon",
+	"nameOverride": "",
+	"sprite": "sprites/enemy/dragon/adultgreendragon.atlas",
+	"deck": [
+		"decks/standard/greendragon.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"scale": 1.6,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Dragon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.4,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Planeswalker"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 5,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{R}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 5
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Dragon",
+		"Flyer",
+		"Monster",
+		"IdentityGreen"
+	]
+},
+{
 	"name": "Ancient Silver Dragon",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/dragon/ancientsilverdragon.atlas",
@@ -412,7 +498,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.3,
 	"speed": 20,
-	"scale": 1.4,
+	"scale": 1.6,
 	"life": 18,
 	"rewards": [
 		{
@@ -704,6 +790,7 @@
 	"boss": true,
 	"flying": true,
 	"speed": 1,
+	"scale": 1.5,
 	"life": 60,
 	"rewards": [
 		{
@@ -762,6 +849,60 @@
 		"Flying",
 		"IdentityWhite",
 		"Akroma"
+	]
+},
+{
+	"name": "Amphin Warrior",
+	"sprite": "sprites/enemy/humanoid/amphin/amphin_warrior.atlas",
+	"deck": [
+		"decks/standard/amphin_warrior.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"scale": 0.7,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Monster",
+		"IdentityBlue",
+		"Water",
+		"Salamander",
+		"Wandering",
+		"Humanoid",
+		"Evil"
 	]
 },
 {
@@ -1104,7 +1245,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -1866,7 +2007,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
-	"scale": 0.5,
+	"scale": 0.65,
 	"life": 20,
 	"rewards": [
 		{
@@ -3445,7 +3586,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
-	"life": 8,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -3758,7 +3899,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -4207,9 +4348,9 @@
 		"decks/standard/cerodon.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
+	"spawnRate": 0.2,
 	"difficulty": 0.1,
-	"speed": 36,
+	"speed": 25,
 	"life": 30,
 	"rewards": [
 		{
@@ -5411,7 +5552,7 @@
 	"difficulty": 0.8,
 	"speed": 31,
 	"scale": 0.75,
-	"life": 8,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "card",
@@ -5514,7 +5655,7 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 2,
 			"cardTypes": [
 				"Artifact",
 				"Creature"
@@ -5529,7 +5670,7 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 3,
+			"count": 1,
 			"rarity": [
 				"Rare"
 			],
@@ -5554,7 +5695,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -5956,7 +6097,7 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 2,
 			"rarity": [
 				"common",
 				"uncommon"
@@ -5965,8 +6106,8 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
+			"count": 1,
+			"addMaxCount": 2
 		},
 		{
 			"type": "card",
@@ -6015,7 +6156,7 @@
 		"decks/standard/copperhostbrutalizer.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 19,
@@ -6094,7 +6235,7 @@
 		"decks/standard/copperhostinfector.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 16,
@@ -6634,7 +6775,7 @@
 		"decks/standard/curselord.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.4,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 20,
@@ -6985,7 +7126,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7567,7 +7708,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 1.2,
+	"scale": 2,
 	"life": 30,
 	"rewards": [
 		{
@@ -7608,12 +7749,14 @@
 },
 {
 	"name": "Dinosaur",
+	"nameOverride": "Giant Carnosaur",
 	"sprite": "sprites/enemy/beast/ancient_2.atlas",
 	"deck": [
 		"decks/standard/dinosaur_w_r.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
+	"scale":1.5,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -7835,7 +7978,7 @@
 	"difficulty": 0.1,
 	"speed": 20,
 	"scale": 0.75,
-	"life": 10,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -7898,7 +8041,7 @@
 	],
 	"copyPlayerDeck": true,
 	"ai": "",
-	"spawnRate": 0.95,
+	"spawnRate": 0.4,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 20,
@@ -8098,7 +8241,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 18,
-	"scale": 0.8,
+	"scale": 0.9,
 	"life": 20,
 	"rewards": [
 		{
@@ -8179,8 +8322,7 @@
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 35,
-	"scale": 0.75,
+	"speed": 23,
 	"life": 20,
 	"rewards": [
 		{
@@ -8258,7 +8400,7 @@
 		"decks/standard/drossgrimnarch.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 19,
@@ -9248,7 +9390,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -9338,7 +9480,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
-	"life": 11,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -9736,6 +9878,90 @@
 		"IdentityBlue",
 		"IdentitySultai",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Faerie Dragon",
+	"sprite": "sprites/enemy/fey/faerie_dragon.atlas",
+	"deck": [
+		"decks/standard/faeriedragon.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 17,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 1,
+			"count": 2,
+			"colors": [
+				"Black",
+				"Blue"
+			],
+			"rarity": [
+				"uncommon",
+				"rare",
+				"mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 100
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "BU",
+	"questTags": [
+		"Mythical",
+		"Flying",
+		"Faerie",
+		"IdentityBlack",
+		"Dragon",
+		"IdentityBlue",
+		"IdentityDimir"
 	]
 },
 {
@@ -10137,7 +10363,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -10374,6 +10600,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 1.2,
 	"life": 20,
 	"rewards": [
 		{
@@ -10659,7 +10886,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 1.3,
+	"scale": 1.4,
 	"life": 25,
 	"rewards": [
 		{
@@ -10793,10 +11020,10 @@
 		"decks/standard/frog.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -11033,9 +11260,9 @@
 		"decks/standard/furnacegoblin.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
-	"speed": 50,
+	"speed": 20,
 	"life": 16,
 	"rewards": [
 		{
@@ -11113,7 +11340,7 @@
 		"decks/standard/furnacetormentor.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 19,
@@ -11462,6 +11689,7 @@
 	"ai": "",
 	"boss": true,
 	"speed": 1,
+	"scale": 1.5,
 	"life": 60,
 	"rewards": [
 		{
@@ -11702,7 +11930,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 18,
-	"scale": 0.8,
+	"scale": 0.9,
 	"life": 20,
 	"rewards": [
 		{
@@ -11888,7 +12116,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -12129,7 +12357,7 @@
 		"decks/standard/gitaxianscientist.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.6,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 19,
@@ -12212,7 +12440,7 @@
 		"decks/standard/gitaxianunderling.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 16,
@@ -12296,6 +12524,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale": 1.3,
 	"life": 20,
 	"rewards": [
 		{
@@ -12461,6 +12690,82 @@
 	]
 },
 {
+	"name": "Green Golem",
+	"sprite": "sprites/enemy/construct/golem_green.atlas",
+	"deck": [
+		"decks/standard/greengolem.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.3,
+	"speed": 20,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 3,
+			"colors": [
+				"Green"
+			],
+			"cardTypes": [
+				"Artifact"
+			]
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Guardian",
+		"Artifact",
+		"Furnace",
+		"IdentityColorless",
+		"IdentityGreen",
+		"Construct",
+		"Robot"
+	]
+},
+{
 	"name": "Griselbrand",
 	"sprite": "sprites/enemy/fiend/griselbrand.atlas",
 	"deck": [
@@ -12470,6 +12775,7 @@
 	"boss": true,
 	"flying": true,
 	"speed": 1,
+	"scale": 1.5,
 	"life": 60,
 	"rewards": [
 		{
@@ -12859,7 +13165,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
-	"life": 12,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13263,7 +13569,7 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1,
-			"addMaxCount": 4
+			"addMaxCount": 2
 		},
 		{
 			"type": "gold",
@@ -13282,7 +13588,7 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 3,
+			"count": 1,
 			"rarity": [
 				"Rare"
 			]
@@ -13903,7 +14209,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -13987,7 +14293,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -14153,7 +14459,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -14665,7 +14971,7 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"basicland"
+				"uncommon"
 			]
 		},
 		{
@@ -15277,6 +15583,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 1.5,
 	"life": 19,
 	"rewards": [
 		{
@@ -15311,6 +15618,118 @@
 		"Aberration",
 		"IdentityGreen",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "The Hydra of Shandalaar",
+	"sprite": "sprites/enemy/monstrosity/hydra_large.atlas",
+	"deck": [
+		"decks/standard/hydraboss.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 150,
+			"addMaxCount": 250
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Wurm",
+		"Mythical",
+		"Giant",
+		"Aberration",
+		"IdentitySimic"
+	]
+},
+{
+	"name": "Holy Apparition",
+	"sprite": "sprites/enemy/celestial/seraphim.atlas",
+	"deck": [
+		"decks/standard/seraphim.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 35,
+	"scale": 0.8,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"IdentityWhite",
+		"Large",
+		"Holy",
+		"Celestial",
+		"Arcane",
+		"Magical"
 	]
 },
 {
@@ -15782,7 +16201,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
-	"life": 10,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16920,6 +17339,7 @@
 	"boss": true,
 	"flying": true,
 	"speed": 1,
+	"scale": 1.5,
 	"life": 60,
 	"rewards": [
 		{
@@ -17464,7 +17884,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.8,
-	"life": 10,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -17522,6 +17942,7 @@
 	"ai": "",
 	"boss": true,
 	"speed": 1,
+	"scale": 1.5,
 	"life": 60,
 	"rewards": [
 		{
@@ -17579,24 +18000,23 @@
 	]
 },
 {
-	"name": "Maelstrom Angel",
-	"sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
+	"name": "Mageripper",
+	"sprite": "sprites/enemy/monstrosity/mageripper.atlas",
 	"deck": [
-		"decks/standard/maelstromangel.dck"
+		"decks/standard/mageripper.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 20,
+	"speed": 25,
 	"scale": 0.8,
-	"life": 20,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 5,
+			"addMaxCount": 2,
 			"cardTypes": [
 				"Creature",
 				"Instant",
@@ -17614,7 +18034,61 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "GUR",
+	"questTags": [
+		"Mythical",
+		"Insect",
+		"Monster",
+		"Identity Temur",
+		"Insect"
+	]
+},
+{
+	"name": "Maelstrom Angel",
+	"sprite": "sprites/enemy/celestial/maelstrom_angel.atlas",
+	"deck": [
+		"decks/standard/maelstromangel.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
 			"addMaxCount": 2,
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Enchantment"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 1,
 			"rarity": [
 				"Rare"
 			],
@@ -19008,8 +19482,8 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"uncommon",
-				"basicland"
+				"common",
+				"uncommon"
 			]
 		},
 		{
@@ -19069,6 +19543,87 @@
 		"Passive",
 		"IdentityWhite",
 		"BiomeWhite"
+	]
+},
+{
+	"name": "Monkey",
+	"sprite": "sprites/enemy/beast/monkey_small.atlas",
+	"deck": [
+		"decks/standard/ragavan.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 18,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Red",
+				"Green"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Monkey"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Red",
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 10
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Humanoid",
+		"Simian",
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityTemur"
 	]
 },
 {
@@ -19139,8 +19694,8 @@
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.5,
-	"scale": 2.5,
 	"speed": 20,
+	"scale": 2.5,
 	"life": 25,
 	"rewards": [
 		{
@@ -19359,9 +19914,9 @@
 	],
 	"ai": "",
 	"spawnRate": 0.5,
-	"scale":0.6,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 0.6,
 	"life": 25,
 	"rewards": [
 		{
@@ -19441,7 +19996,7 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySultai"
-			]
+	]
 },
 {
 	"name": "Necrogoyf",
@@ -19557,8 +20112,72 @@
 	]
 },
 {
+	"name": "Nezumi Leader",
+	"sprite": "sprites/enemy/humanoid/nezumi/nezumi_berserker.atlas",
+	"deck": [
+		"decks/standard/rat_leader.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardText": "Rat"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"questTags": [
+		"Humanoid",
+		"Ninja",
+		"Bandit",
+		"Rat",
+		"Sneaky",
+		"Thief",
+		"Subterranean",
+		"Scavenger",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Nezumi Ninja",
-	"sprite": "sprites/enemy/humanoid/nezumi/humanoidrat.atlas",
+	"sprite": "sprites/enemy/humanoid/nezumi/nezumi_ninja.atlas",
 	"deck": [
 		"decks/standard/humanoidrat.dck"
 	],
@@ -19567,7 +20186,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -19699,7 +20318,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
-	"life": 10,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -19931,7 +20550,7 @@
 	"difficulty": 0.1,
 	"speed": 25,
 	"scale": 0.75,
-	"life": 10,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -20956,6 +21575,64 @@
 	]
 },
 {
+	"name": "Priest Fanatic",
+	"sprite": "sprites/enemy/humanoid/human/cleric/fanatic_priest.atlas",
+	"deck": [
+		"decks/standard/fanaticpriest.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 35,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"IdentityWhite",
+		"Cleric",
+		"Priest",
+		"Human",
+		"Holy",
+		null
+	]
+},
+{
 	"name": "Pyromancer",
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/human/shaman/pyromancer.atlas",
@@ -21188,7 +21865,7 @@
 		"decks/standard/phyrexianangel.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 19,
@@ -21269,7 +21946,7 @@
 		"decks/standard/phyrexianduelist.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 16,
@@ -21915,7 +22592,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 10,
+	"life": 16,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -22127,11 +22804,11 @@
 		"decks/standard/hellion.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 13,
-	"scale": 1.3,
-	"life": 12,
+	"scale": 1.6,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -22178,7 +22855,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 8,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -22813,7 +23490,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -23198,7 +23875,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 40,
 	"rewards": [
 		{
@@ -23803,7 +24480,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 10,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24004,7 +24681,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24213,7 +24890,7 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.8,
+	"scale": 1.2,
 	"life": 12,
 	"rewards": [
 		{
@@ -25064,8 +25741,8 @@
 	"randomizeDeck": true,
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
-	"speed": 15,
-	"life": 10,
+	"speed": 25,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -25189,7 +25866,7 @@
 	"difficulty": 0.1,
 	"speed": 5,
 	"scale": 0.8,
-	"life": 10,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -25385,7 +26062,6 @@
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.8,
 	"life": 20,
 	"rewards": [
 		{
@@ -25749,7 +26425,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26193,7 +26869,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26240,6 +26916,79 @@
 		"IdentityRed",
 		"IdentityBlack",
 		"IdentityJund"
+	]
+},
+{
+	"name": "Werebear",
+	"sprite": "sprites/enemy/beast/bear_large.atlas",
+	"deck": [
+		"decks/standard/bearboss.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"scale":0.6,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 36,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Territorial",
+		"Animal",
+		"Wild",
+		"Domesticated",
+		"IdentityGreen",
+		"BiomeGreen"
 	]
 },
 {
@@ -26330,7 +27079,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.8,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26397,7 +27146,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.8,
-	"life": 10,
+	"life": 13,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26545,7 +27294,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
-	"scale": 0.5,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
@@ -26589,6 +27338,70 @@
 			"probability": 1,
 			"count": 15,
 			"addMaxCount": 10
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Nocturnal",
+		"Animal",
+		"Human",
+		"Beast",
+		"Wild",
+		"Loner",
+		"Aggressive",
+		"Territorial",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
+	"name": "Wolf Pup",
+	"sprite": "sprites/enemy/beast/wolfcub.atlas",
+	"deck": [
+		"decks/standard/wolf.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 35,
+	"scale": 0.7,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 2,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 1
 		}
 	],
 	"colors": "G",
@@ -26713,7 +27526,6 @@
 	"spawnRate": 0.7,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 0.8,
 	"life": 12,
 	"rewards": [
 		{

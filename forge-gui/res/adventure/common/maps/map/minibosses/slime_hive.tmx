@@ -48,7 +48,6 @@
   </object>
   <object id="96" template="../../obj/enemy.tx" x="119.418" y="354.89">
    <properties>
-    <property name="deckOverride" value="decks/standard/rat_realmagic.dck"/>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="120,121"/>
@@ -56,7 +55,6 @@
   </object>
   <object id="98" template="../../obj/enemy.tx" x="489.241" y="356.064">
    <properties>
-    <property name="deckOverride" value="decks/standard/rat_realmagic.dck"/>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="120,121"/>

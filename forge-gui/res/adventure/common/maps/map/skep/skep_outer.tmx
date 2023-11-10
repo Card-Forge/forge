@@ -167,17 +167,6 @@
   </object>
   <object id="67" template="../../obj/enemy.tx" x="884.5" y="555" width="16" height="16" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Blue Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -236,17 +225,6 @@
   </object>
   <object id="72" template="../../obj/enemy.tx" x="477.5" y="389.667" width="16" height="16" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Blue Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -579,17 +557,6 @@
   </object>
   <object id="124" template="../../obj/enemy.tx" x="508" y="699" width="16" height="16" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Green Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -630,17 +597,6 @@
   </object>
   <object id="128" template="../../obj/enemy.tx" x="1019" y="910" width="16" height="16" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Black Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -661,17 +617,6 @@
   </object>
   <object id="130" template="../../obj/enemy.tx" x="530.334" y="440.666" width="16" height="16" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Black Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -732,17 +677,6 @@
   </object>
   <object id="136" template="../../obj/enemy.tx" x="373" y="673.833" width="20" height="17" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="White Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -918,17 +852,6 @@
   </object>
   <object id="154" template="../../obj/enemy.tx" x="1156.33" y="768.833" width="20" height="17" visible="1">
    <properties>
-    <property name="defeatDialog">[
-  {
-    &quot;name&quot;: &quot;The sliver looks at you without intrest&quot;,
-    &quot;condition&quot;: [
-      {
-        &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-         &quot;not&quot;: false
-      }
-    ]
-  }
-]</property>
     <property name="enemy" value="Red Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>

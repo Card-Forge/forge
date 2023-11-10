@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;White Shield Crusader&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJx7ws7A8GQUj+JRPIrJwKxWA++GUTyKRzFpGADnNdOO
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYNE6MnmpeBYRcPbhzFSz17YfIgO3cDaWxAQQAVU8u/pNgJwvj8Tay9IHP2QTEyaONnYGjlh7D3CWBiXHYTYy8+fxICO3HENzH2ypJpJwxIk+nfUXuHt717gbiemzw7a4H69pBprwyZdsPsxGYuKeUkKXbjs5PUcpJYuwnZSaq9yHbXcUMwzA213AgxQnaSYy+6HlhalybD/cgYAMOU0f8=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1UEKgCAQBdBZW6A3MI9qUsfqMtE9MmrABnXAZhHUhwE3+hb6EeCdWRXA2PGzKXlzMPnB2F7O5szUlbLRdPGsxdxn1gCTPtc0T200c7HRcxmT2q1u8VzG5fb/7rfdUhc4FzvYkloPa27a+9aU7JIrYdbsnCtpUhsnXHfnyX8kadJ44obG93NkBxWZNok=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF+MBdQwaGe4b0tzfWiIEhzgjBv2dAH3vvAu28B8R3aWhfLNDsOANMNiE5SkCcPnn6YsnUBwP39Mnz710K7R0oEEemf6kRzuQAaoTzQKTnwQLw+XcUDF4AAAa3IcE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="274.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="254.735" y="51.4753">
+   <properties>
+    <property name="enemy" value="Priest Fanatic"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/treasure.tx" x="159.5" y="50.8333">
+   <properties>
+    <property name="reward">[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;White&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Jungle Shield&quot;},
+{
+&quot;type&quot;: &quot;card&quot;,
+&quot;probability&quot;: 1,
+&quot;count&quot;: 1,
+&quot;cardName&quot;: &quot;Staff of the Sun Magus&quot;}]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/booster.tx" x="176.167" y="49.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NEO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="166.333" y="174">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="230.5" y="141.667">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="118.833" y="106.333">
+   <properties>
+    <property name="enemy" value="Apprentice White Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="81,80,82,77,76,78,83,79"/>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/enemy.tx" x="201.666" y="83">
+   <properties>
+    <property name="enemy" value="Holy Apparition"/>
+    <property name="speedModifier" type="float" value="5"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/enemy.tx" x="278.667" y="203.667">
+   <properties>
+    <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

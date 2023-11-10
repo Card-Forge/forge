@@ -51,6 +51,7 @@
   <object id="78" template="../../obj/enemy.tx" x="136.333" y="219.333">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
@@ -58,6 +59,7 @@
   <object id="79" template="../../obj/enemy.tx" x="277.667" y="200">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="76,74,62,75"/>
    </properties>
@@ -66,6 +68,7 @@
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
@@ -73,6 +76,7 @@
   <object id="81" template="../../obj/enemy.tx" x="296" y="629.667">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>
@@ -80,6 +84,7 @@
   <object id="82" template="../../obj/enemy.tx" x="154" y="648">
    <properties>
     <property name="enemy" value="Furnace Goblin"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="62,75,76,74"/>
    </properties>
@@ -127,6 +132,7 @@
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="75,76,74,62"/>
    </properties>
@@ -136,6 +142,7 @@
     <property name="enemy" value="Furnace Goblin"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" value="30"/>
     <property name="waypoints" value="74,62,75,76"/>
    </properties>

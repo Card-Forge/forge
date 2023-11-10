@@ -32,7 +32,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmMEOgjAMhntH3xQQUA+GgyY+jb6RPoUKHIwXuxAjIBtMVuiAL2kIMKAd/9ptAABXUNN0v8h+WT6/aDyri+MALBzCD/TECWM4F+I4LOVtx0ZVL/8i+kxHp7ZzbNlvbdt9CFyAEC1yv9derrx9X+jmkRv6fEd7FHyPvfxYF+O/UGsuQJ9DtMj7vVcXo42oYhyKBH1J0TKDPg2R19c+wAZt65ev7/z69h90xzxlnRck6G+KllX8fjbEERvWlKl6VWW3onlvH1DoeqxzOy6YrIHUqHIxpxrYNA5kuVhgugZSzktkubgOqnw5w4MuuV9Xo9Rz7SmtH00xpb2KGXvhUofEfozunkwXuMRdZM6zOU39QL2mpkZVG2YNTAvxv/vMe7bAfRxwrB82wlH7qvpC/d9luuc+Hqq8AZrvWeI=
+   eJztmEuOwjAMhr0vHIPblfIYWCAWgzSngRvBKZgBFogNrlA0aScvJzG4Qz/JqtqmrZ04v9MAABzAje++zueweb4nPEulKAAGRXj7wehh+rkEthjDTotjM7S3VUjxPRWVL+2xoVL3GSVPOVGxpMbk4isgRyjtFNMSYIY2L3+v3Up7+2dB1ZEj+vyN9qP5vh4/jqYYY+HOuSn6PEObj//eM8XYRVwxvooT+nJGuyT6pGtAiK7n5qMCWKAtq+b1VWVurzDNeZeW5arztm+c0N8z2qVq9unVE8faMH4pmtxe35ig6L5qt5rE+8RFaAwceU1d20mlvbaTQs4ayI1LiyXVQN88sGlxTe4amHtdomuBrsU+QvSyp7ukaD81R7nX2jHv5/zHS4X6DxoTxyvWtD09VKTUoXo/xrQnw6UjlLhzfd/3Hin7dKmoOGP7zdcPnHvnz8BVG/5LDvSEUY83dS/6HZA+D6TUza4jMfdd9YV73G15L30+tLkDfsFgZA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -44,7 +44,7 @@
   <object id="49" template="../../obj/gold.tx" x="681.038" y="604.87"/>
   <object id="53" template="../../obj/enemy.tx" x="217.438" y="187.194" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slimefoot's Boss Effect&quot;]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Fungus of Slimefoot's Boss Effect&quot;]
 }</property>
     <property name="enemy" value="Slimefoot"/>
    </properties>

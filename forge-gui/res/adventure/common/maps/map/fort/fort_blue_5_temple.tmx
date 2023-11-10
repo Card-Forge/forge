@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlU0OgjAQhbtlASIKN9BbyMIQdnAbr+EBDIksxFO54SZmUhtqmSlTfmKMvuQtaul8M9NBck+InDCm02q8OaLy2Ia886YOwbhzSr/GfQR9V77cu/j4vjJH1Gxswr6PSXcO1nWMmyOqnzZulsj1lHnm3iPGBZl1RqH0XFyuOMypXKjxmnaGtQu3iXHrMvciYq64XP1u9PNwh+o+MYYZH+pVz7pwTZtckz2VSwnj6rlS8Zfk2uJTvzeFEPdiWW6M7O1KIfYlkg8yzzbu2tJPl17fkHeHimNjunKhtiqVtsUZYs7JzRKaCXvmd4GTm2Lq3zgXUf9bXH2CW79mt9Vsk95bbk8prku+wB3T0yFlWs1t0vc6XIZ79t7jTZkbV+5f36UnVHuBIg==
+   eJztlU0OgkAMhWfLAkQUbqC30IUh7OA2XsMDGBJZiKdy401MgxPG0g4dfmKMvuQtxmH6tZ0imadUxpjScTHcEnF5rEPZeaxdMOyc1q9x70HXpd/snX16X1sibjZWYdeHpD0H6yqmLRHXTxs3TZr1mHmW3iPFBeE6o7DxVFypJMyxXKjxsm8NaxduHdM2hfciZq6kXPNuzPNwh/o+KQaOD/XqZ1242JiL2WO5nCiumSsXf06uLT73e50rdcvn5cbE3qZQalsQ+RDzbOMuLf106fWVeHe4ODamKxdqK/eNbXH6mFNy04Rnwh7+Lkhy00zzG+ci7n9Lqk9wq9fsPgzbZPZW2lOO65IvcIf0tE8pqvmBerEM5+GevPd4Y+bGlfvXd+kJ07yAKw==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
@@ -51,6 +51,7 @@
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Cold-Eyed Selkie&quot;]
 }</property>
     <property name="enemy" value="Merfolk Elite"/>
+    <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>

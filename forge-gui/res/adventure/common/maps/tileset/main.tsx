@@ -11874,6 +11874,18 @@
    <object id="2" x="0" y="12" width="10" height="4"/>
   </objectgroup>
  </tile>
+ <tile id="5861">
+  <animation>
+   <frame tileid="6490" duration="140"/>
+   <frame tileid="6491" duration="140"/>
+   <frame tileid="6492" duration="140"/>
+   <frame tileid="6493" duration="140"/>
+   <frame tileid="6648" duration="140"/>
+   <frame tileid="6649" duration="140"/>
+   <frame tileid="6650" duration="140"/>
+   <frame tileid="6651" duration="140"/>
+  </animation>
+ </tile>
  <tile id="5868">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="4" width="15" height="12"/>
@@ -12281,6 +12293,14 @@
    <object id="2" x="0" y="9" width="11" height="7"/>
   </objectgroup>
  </tile>
+ <tile id="6332">
+  <animation>
+   <frame tileid="6332" duration="100"/>
+   <frame tileid="6333" duration="100"/>
+   <frame tileid="6334" duration="100"/>
+   <frame tileid="6335" duration="100"/>
+  </animation>
+ </tile>
  <tile id="6336">
   <objectgroup draworder="index" id="2">
    <object id="1" x="3" y="2" width="10" height="14"/>
@@ -12330,6 +12350,18 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="5" height="3"/>
   </objectgroup>
+ </tile>
+ <tile id="6493">
+  <animation>
+   <frame tileid="6490" duration="140"/>
+   <frame tileid="6491" duration="140"/>
+   <frame tileid="6492" duration="140"/>
+   <frame tileid="6493" duration="140"/>
+   <frame tileid="6648" duration="140"/>
+   <frame tileid="6649" duration="140"/>
+   <frame tileid="6650" duration="140"/>
+   <frame tileid="6651" duration="140"/>
+  </animation>
  </tile>
  <tile id="6496">
   <objectgroup draworder="index" id="2">
@@ -12654,6 +12686,30 @@
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="1" width="16" height="15"/>
   </objectgroup>
+ </tile>
+ <tile id="7175">
+  <animation>
+   <frame tileid="7175" duration="140"/>
+   <frame tileid="7176" duration="140"/>
+   <frame tileid="7177" duration="140"/>
+   <frame tileid="7178" duration="140"/>
+  </animation>
+ </tile>
+ <tile id="7180">
+  <animation>
+   <frame tileid="7179" duration="140"/>
+   <frame tileid="7180" duration="140"/>
+   <frame tileid="7181" duration="140"/>
+   <frame tileid="7182" duration="140"/>
+  </animation>
+ </tile>
+ <tile id="7183">
+  <animation>
+   <frame tileid="7183" duration="140"/>
+   <frame tileid="7184" duration="140"/>
+   <frame tileid="7185" duration="140"/>
+   <frame tileid="7186" duration="140"/>
+  </animation>
  </tile>
  <tile id="7225">
   <objectgroup draworder="index" id="2">
