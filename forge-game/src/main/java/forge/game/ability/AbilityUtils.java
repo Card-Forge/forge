@@ -2405,6 +2405,20 @@ public class AbilityUtils {
             return doXMath(CardLists.getValidCardCount(player.getCreaturesAttackedThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
         }
 
+        // Count$LeftBattlefieldThisTurn <Valid>
+        if (sq[0].startsWith("LeftBattlefieldThisTurn")) {
+            final String[] workingCopy = l[0].split(" ", 2);
+            final String validFilter = workingCopy[1];
+            return doXMath(CardLists.getValidCardCount(game.getLeftBattlefieldThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
+        }
+
+        // Count$LeftBattlefieldThisTurn <Valid>
+        if (sq[0].startsWith("LeftGraveyardThisTurn")) {
+            final String[] workingCopy = l[0].split(" ", 2);
+            final String validFilter = workingCopy[1];
+            return doXMath(CardLists.getValidCardCount(game.getLeftGraveyardThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
+        }
+
         // Manapool
         if (sq[0].startsWith("ManaPool")) {
             final String color = l[0].split(":")[1];

@@ -257,11 +257,11 @@ public class Game {
         return leftGraveyardThisTurn;
     }
 
-    public void resetLeftBattlefieldThisTurn() {
+    public void clearLeftBattlefieldThisTurn() {
         leftBattlefieldThisTurn.clear();
     }
 
-    public void resetLeftGraveyardThisTurn() {
+    public void clearLeftGraveyardThisTurn() {
         leftGraveyardThisTurn.clear();
     }
 
@@ -1108,6 +1108,8 @@ public class Game {
     }
 
     public void onCleanupPhase() {
+        clearLeftBattlefieldThisTurn();
+        clearLeftGraveyardThisTurn();
         clearCounterAddedThisTurn();
         clearCounterRemovedThisTurn();
         clearGlobalDamageHistory();
