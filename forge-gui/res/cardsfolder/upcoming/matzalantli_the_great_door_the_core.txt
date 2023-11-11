@@ -1,7 +1,7 @@
 Name:Matzalantli, the Great Door
 ManaCost:3
 Types:Legendary Artifact
-A:AB$ Draw | Cost$ 1 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 A:AB$ SetState | Cost$ 4 T | Defined$ Self | Mode$ Transform | CheckSVar$ X | SVarCompare$ GE4 | SpellDescription$ Transform CARDNAME. Activate only if there are four or more permanent types among cards in your graveyard. (Artifact, battle, creature, enchantment, land, and planeswalker are permanent types.)
 SVar:X:Count$CardControllerPermanentTypes.Graveyard
