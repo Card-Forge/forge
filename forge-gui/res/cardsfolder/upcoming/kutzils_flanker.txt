@@ -1,0 +1,14 @@
+Name:Kutzil's Flanker
+ManaCost:2 W
+Types:Creature — Cat Warrior
+PT:3/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBExile
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a +1/+1 counter on CARDNAME for each creature that left the battlefield under your control this turn.
+SVar:X:Count$LeftBattlefieldThisTurn Creature.YouCtrl
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+SVar:DBExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True
+Oracle:Flash\nWhen Kutzil’s Flanker enters the battlefield, choose one —\n• Put a +1/+1 counter on Kutzil’s Flanker for each creature that left the battlefield under your control this turn.\n• You gain 2 life and scry 2.\n• Exile target player’s graveyard.
+
