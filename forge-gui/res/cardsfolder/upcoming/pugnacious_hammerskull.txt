@@ -7,5 +7,4 @@ SVar:TrigStunCounter:DB$ PutCounter | Defined$ Self | CounterType$ Stun | Counte
 SVar:HasAttackEffect:TRUE
 DeckNeeds:Type$Dinosaur
 DeckHas:Ability$Counters
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever Pugnacious Hammerskull attacks while you don't control another Dinosaur, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
