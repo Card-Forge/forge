@@ -52,12 +52,6 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        if (aiLogic.equals("VeilOfSummer")) {
-            return SpecialCardAi.VeilOfSummer.consider(ai, sa);
-        }
-
         if (!targetAI(ai, sa, false)) {
             return false;
         }
@@ -164,7 +158,7 @@ public class DrawAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
         if (logic.equals("VeilOfSummer")) {
-            return true; // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
+            return SpecialCardAi.VeilOfSummer.consider(ai, sa); // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
         } else if (logic.startsWith("LifeLessThan.")) {
             // LifeLessThan logic presupposes activation as soon as possible in an
             // attempt to save the AI from dying
