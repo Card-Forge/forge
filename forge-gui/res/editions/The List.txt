@@ -608,7 +608,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 600 R Guul Draz Assassin @James Ryman
 601 R Sign in Blood @Alan Pollack
 602 M Sorin Markov @Michael Komarck
-603 R Sorin's Vengeance @Jana Schirmer
+603 R Sorin's Vengeance @Jana Schirmer & Johannes Voss
 604 M Twilight Prophet @Seb McKinnon
 605 U Vampiric Feast @D. Alexander Gregory
 606 M Vampiric Tutor @Raymond Swanland
@@ -853,7 +853,7 @@ F567 R Puresteel Angel @Lukas Litzsinger
 845 C Phyresis @Izzy
 846 C Phyrexian Battleflies @Dan Frazier
 847 M Phyrexian Scriptures @Joseph Meehan
-848 M Sheoldred, Whispering One @Jana Schirmer
+848 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
 849 R Sleeper Agent @Randy Gallegos
 850 U Stitch Together @Arnie Swekel
 851 M Tourach, Dread Cantor @Greg Staples
@@ -1295,3 +1295,53 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1287 U Enchanted Carriage @Zoltan Boros
 1288 R Stonecoil Serpent @Mark Poole
 1289 R Castle Garenbrig @Adam Paquette
+1290 R Brought Back @Mitchell Malloy
+1291 R Deep Gnome Terramancer @David Sladek
+1292 U Dispatch @Erica Yang
+1293 R Esper Sentinel @Eric Deschamps
+1294 U Famished Paladin @Tommy Arnold
+1295 R Monologue Tax @Justine Cruz
+1296 U Veteran of the Depths @Daren Bader
+1297 R Curiosity Crafter @Rudy Siswanto
+1298 R Elder Deep-Fiend @Jason Felix
+1299 U Merrow Harbinger @Steve Prescott
+1300 M Murktide Regent @Lucas Graciano
+1301 R Nezahal, Primal Tide @Sam Burley
+1302 C Deadly Dispute @Irina Nordsol
+1303 M Kalitas, Traitor of Ghet @Todd Lockwood
+1304 U Pawn of Ulamog @Daarken
+1305 R Rotting Regisaur @Randy Vargas
+1306 R Tomb Robber @Xi Zhang
+1307 R Brass's Bounty @Grzegorz Rutkowski
+1308 C Cave Sense @Mark Romanoski
+1309 M Dockside Extortionist @Lie Setiawan
+1310 R The Reaver Cleaver @Yigit Koroglu
+1311 M Star of Extinction @Chris Rahn
+1312 U Storm-Kiln Artist @Manuel Castañón
+1313 R Xorn @Yigit Koroglu
+1314 R Beast Whisperer @Matt Stewart
+1315 U Deep Reconnaissance @Jeff Remmer
+1316 U Deep Wood @Paolo Parente
+1317 U Harmony of Nature @Kaja Foglio
+1318 C Jungleborn Pioneer @Scott Murphy
+1319 C Pouncing Jaguar @Daren Bader
+1320 M The Tarrasque @Filip Burburan
+1321 U Titanoth Rex @Svetlin Velinov
+1322 U Ardent Plea @Chippy
+1323 U Deathsprout @Seb McKinnon
+1324 U Ghostflame Sliver @Luca Zontini
+1325 U Inkfathom Infiltrator @Jesper Ejsing
+1326 U Pain Magnification @Aleksi Briclot
+1327 U Stromkirk Captain @Jana Schirmer & Johannes Voss
+1328 R Sygg, River Cutthroat @Jeremy Enecio
+1329 U Zebra Unicorn @Margaret Organ-Kean
+1330 U Bottle Gnomes @Kaja Foglio
+1331 U Ersatz Gnomes @Ron Spencer
+1332 U Fabrication Module @Aaron Miller
+1333 U Heartstone @John Matson
+1334 C Pili-Pala @Ron Spencer
+1335 R Cave of the Frost Dragon @Johannes Voss
+1336 U Rootwater Depths @Roger Raupp
+1337 R Treasure Vault @Johannes Voss
+1338 U Zoetic Cavern @Lars Grant-West
+1339 U Wall of Omens @James Paick
