@@ -46,8 +46,10 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+
         // For Brain in a Jar, avoid competing against the other ability in the opponent's EOT.
-        if ("BrainJar".equals(sa.getParam("AILogic"))) {
+        if ("BrainJar".equals(logic)) {
             return ph.getPhase().isAfter(PhaseType.MAIN2);
         }
 
@@ -55,15 +57,15 @@ public class ScryAi extends SpellAbilityAi {
         // and right before the beginning of AI's turn, if possible, to avoid mana locking the AI and also to
         // try to scry right before drawing a card. Also, avoid tapping creatures in the AI's turn, if possible,
         // even if there's no mana cost.
-        if (sa.getPayCosts().hasTapCost()
+        if (logic.equals("AtOppEOT") || (sa.getPayCosts().hasTapCost()
                 && (sa.getPayCosts().hasManaCost() || (sa.getHostCard() != null && sa.getHostCard().isCreature()))
-                && !isSorcerySpeed(sa, ai)) {
+                && !isSorcerySpeed(sa, ai))) {
             return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         }
 
         // AI logic to scry in Main 1 if there is no better option, otherwise scry at opponent's EOT
         // (e.g. Glimmer of Genius)
-        if ("BestOpportunity".equals(sa.getParam("AILogic"))) {
+        if ("BestOpportunity".equals(logic)) {
             return doBestOpportunityLogic(ai, sa, ph);
         }
 
