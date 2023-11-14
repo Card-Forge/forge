@@ -373,6 +373,8 @@ public enum CounterEnumType {
 
     STUN("STUN", 226, 192, 165),
 
+    TAKEOVER("TKVR", 63, 49, 191),
+
     TASK("TASK", 191, 63, 49),
 
     THEFT("THEFT", 255, 176, 125),
