@@ -1,0 +1,13 @@
+Name:The Master, Mesmerist
+ManaCost:2 U B
+Types:Legendary Creature Time Lord Rogue
+PT:3/3
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl+powerLEX | TgtPrompt$ Select target creature an opponent controls with power less than or equal to NICKNAME's power | KW$ Skulk | SubAbility$ DBGoad | StackDescription$ {c:Targeted} gains skulk until end of turn. Goad it. | SpellDescription$ Target creature an opponent controls with power less than or equal to NICKNAME's power gains skulk until end of turn. Goad it. (A creature with skulk can't be blocked by creatures with greater power.)
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+T:Mode$ DamageDone | ValidSource$ Creature.withSkulk | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with skulk deals combat damage to one of your opponents, put a +1/+1 counter on NICKNAME and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+DeckHints:Keyword$Skulk
+Oracle:{T}: Target creature an opponent controls with power less than or equal to The Master's power gains skulk until end of turn. Goad it. (A creature with skulk can't be blocked by creatures with greater power.)\nWhenever a creature with skulk deals combat damage to one of your opponents, put a +1/+1 counter on The Master and draw a card.

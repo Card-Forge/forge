@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 
+import forge.game.trigger.TriggerType;
 import forge.trackable.TrackableCollection;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -2628,8 +2629,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 inp.setMessage(localizer.getMessage("lblChoosePermanentstoTap"));
                 inp.showAndWait();
                 if (!inp.hasCancelled()) {
+                    CardCollection tapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        c.tap(true, null, null);
+                        if (c.tap(true, null, null)) tapped.add(c);
+                    }
+                    if (!tapped.isEmpty()) {
+                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                        runParams.put(AbilityKey.Cards, tapped);
+                        getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
                     }
                 }
             });

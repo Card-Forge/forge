@@ -1,0 +1,9 @@
+Name:Nurturing Bristleback
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:5/5
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 green Dinosaur creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur | TokenAmount$ 1
+K:TypeCycling:Forest:2
+DeckHas:Ability$Token|Discard
+Oracle:When Nurturing Bristleback enters the battlefield, create a 3/3 green Dinosaur creature token.\nForestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)

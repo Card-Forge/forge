@@ -1,0 +1,13 @@
+Name:Palani's Hatcher
+ManaCost:3 R G
+Types:Creature Dinosaur
+PT:5/3
+S:Mode$ Continuous | Affected$ Creature.Dinosaur+Other+YouCtrl | AddKeyword$ Haste | Description$ Other Dinosaurs you control have haste.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 0/1 green Dinosaur Egg creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_0_1_dinosaur_egg | TokenOwner$ You
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Egg.YouCtrl | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of combat on your turn, if you control one or more Eggs, sacrifice an Egg, then create a 3/3 green Dinosaur creature token.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Egg.YouCtrl | SacMessage$ Egg you control | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur | TokenAmount$ 1
+DeckHas:Ability$Graveyard|Token & Type$Egg
+DeckHints:Type$Dinosaur
+Oracle:Other Dinosaurs you control have haste.\nWhen Palani's Hatcher enters the battlefield, create two 0/1 green Dinosaur Egg creature tokens.\nAt the beginning of combat on your turn, if you control one or more Eggs, sacrifice an Egg, then create a 3/3 green Dinosaur creature token.

@@ -108,6 +108,8 @@ public enum CounterEnumType {
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),
+   
+    DISCOVERY("DISCO", 12, 230, 100),
 
     DIVINITY("DVNTY", 0, 233, 255),
 
@@ -372,6 +374,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    TAKEOVER("TKVR", 63, 49, 191),
 
     TASK("TASK", 191, 63, 49),
 

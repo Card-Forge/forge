@@ -1,0 +1,11 @@
+Name:Oltec Archaeologists
+ManaCost:4 W
+Types:Creature Human Artificer Scout
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBReturn,DBScry
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouOwn | SpellDescription$ Return target artifact card from your graveyard to your hand.
+SVar:DBScry:DB$ Scry | ScryNum$ 3 | SpellDescription$ Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard & Type$Artifact
+Oracle:When Oltec Archaeologists enters the battlefield, choose one —\n• Return target artifact card from your graveyard to your hand.\n• Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom and the rest on top in any order.)

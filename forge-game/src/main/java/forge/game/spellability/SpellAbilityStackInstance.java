@@ -59,7 +59,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private final SpellAbility ability;
 
     private final SpellAbilityStackInstance subInstance;
-    private Player activatingPlayer;
 
     private String stackDescription = null;
 
@@ -70,7 +69,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         id = nextId();
         ability = sa;
         stackDescription = sa.getStackDescription();
-        activatingPlayer = sa.getActivatingPlayer();
 
         subInstance = ability.getSubAbility() == null ? null : new SpellAbilityStackInstance(ability.getSubAbility());
 
@@ -142,7 +140,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
             view.updateText(this);
-            
+
             // Run BecomesTargetTrigger
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.SourceSA, ability);
@@ -193,11 +191,10 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
 
     public Player getActivatingPlayer() {
-        return activatingPlayer;
+        return ability.getActivatingPlayer();
     }
     public void setActivatingPlayer(Player activatingPlayer0) {
-        if (activatingPlayer == activatingPlayer0) { return; }
-        activatingPlayer = activatingPlayer0;
+        ability.setActivatingPlayer(activatingPlayer0);
         view.updateActivatingPlayer(this);
         if (subInstance != null) {
             subInstance.setActivatingPlayer(activatingPlayer0);
