@@ -17,9 +17,14 @@
  */
 package forge.game.cost;
 
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
+
+import java.util.Map;
 
 /**
  * The Class CostTap.
@@ -66,7 +71,12 @@ public class CostTap extends CostPart {
 
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        ability.getHostCard().tap(true, ability, payer);
+        Card hostCard = ability.getHostCard();
+        if (hostCard.tap(true, ability, payer)) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, new CardCollection(hostCard));
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+        }
         return true;
     }
 

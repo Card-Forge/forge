@@ -18,16 +18,17 @@
 package forge.game.cost;
 
 import forge.card.CardType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.ability.AbilityKey;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
+import java.util.Map;
 
 /**
  * The Class CostTapType.
@@ -198,6 +199,24 @@ public class CostTapType extends CostPartWithList {
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.tap(true, ability, payer);
         return targetCard;
+    }
+
+    @Override
+    protected boolean canPayListAtOnce() {
+        return true;
+    }
+
+    @Override
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        CardCollection tapped = new CardCollection();
+        for (Card c : targetCards) {
+            if (c.tap(true, ability, payer)) tapped.add(c);
+        }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Cards, tapped);
+        payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+        return targetCards;
     }
 
     /* (non-Javadoc)
