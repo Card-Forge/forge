@@ -109,7 +109,7 @@ public enum CounterEnumType {
 
     DEVOTION("DEVOT", 255, 111, 255),
    
-    DISCOVERY("DISCOVERY", 12, 230, 100),
+    DISCOVERY("DISCO", 12, 230, 100),
 
     DIVINITY("DVNTY", 0, 233, 255),
 

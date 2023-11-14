@@ -14,6 +14,6 @@ T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | CheckSVar$ RaidTest | Exec
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:RaidTest:Count$AttackersDeclared
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Token & Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 DeckHints:Ability$Graveyard|Mill & Type$Legendary|Artifact
 Oracle:First strike, reach\nWhenever Lara Croft attacks, exile up to one target legendary artifact card or legendary land card from a graveyard and put a discovery counter on it. You may play a card from exile with a discovery counter on it this turn.\nRaid — At end of combat on your turn, if you attacked this turn, create a Treasure token.
