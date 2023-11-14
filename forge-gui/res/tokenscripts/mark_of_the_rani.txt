@@ -1,0 +1,8 @@
+Name:Mark of the Rani
+ManaCost:no cost
+Colors:red
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Goad$ True | Description$ Enchanted creature gets +2/+2 and is goaded.
+Oracle:Enchant Creature\nEnchanted creature gets +2/+2 and is goaded.
