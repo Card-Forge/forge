@@ -1,0 +1,9 @@
+Name:Seismic Monstrosaur
+ManaCost:4 R R
+Types:Creature Dinosaur
+PT:6/5
+K:Trample
+A:AB$ Draw | Cost$ 2 R Sac<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card.
+K:TypeCycling:Mountain:2
+DeckHas:Ability$Sacrifice|Discard
+Oracle:Trample\n{2}{R}, Sacrifice a land: Draw a card.\nMountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)
