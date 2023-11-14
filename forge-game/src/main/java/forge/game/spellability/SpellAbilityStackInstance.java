@@ -142,7 +142,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             view.updateTargetCards(this);
             view.updateTargetPlayers(this);
             view.updateText(this);
-            
+
             // Run BecomesTargetTrigger
             Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.SourceSA, ability);
