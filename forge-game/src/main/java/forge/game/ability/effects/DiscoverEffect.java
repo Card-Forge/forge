@@ -14,7 +14,6 @@ import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostReveal;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -24,6 +23,9 @@ import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -52,8 +54,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
 
         final PlayerZone library = p.getZone(ZoneType.Library);
 
-        for (int i = 0; i < library.size(); i++) {
-            final Card c = library.get(i);
+        for (final Card c : library) {
             exiled.add(c);
             if (!c.isLand() && c.getCMC() <= num) {
                 found = c;
@@ -76,8 +77,10 @@ public class DiscoverEffect extends SpellAbilityEffect {
             String prompt = Localizer.getInstance().getMessage("lblDiscoverChoice",
                             CardTranslation.getTranslatedName(found.getName()));
             final Zone origin = found.getZone();
-            final boolean play = p.getController().chooseBinary(sa, prompt,
-                    PlayerController.BinaryChoiceType.CastOrHand);
+            List<String> options =
+                    Arrays.asList(StringUtils.capitalize(Localizer.getInstance().getMessage("lblCast")),
+                            StringUtils.capitalize(Localizer.getInstance().getMessage("lblHandZone")));
+            final boolean play = p.getController().confirmAction(sa, null, prompt, options, found, null);
             boolean cancel = false;
 
             if (play) {

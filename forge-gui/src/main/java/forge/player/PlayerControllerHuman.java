@@ -773,11 +773,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
-                                 Card cardToShow, Map<String, Object> params) {
+                                 List<String> options, Card cardToShow, Map<String, Object> params) {
         // Another card should be displayed in the prompt on mouse over rather than the SA source
         if (cardToShow != null) {
             tempShowCard(cardToShow);
-            boolean result = InputConfirm.confirm(this, cardToShow.getView(), sa, message);
+            boolean result = options.isEmpty() ? InputConfirm.confirm(this, cardToShow.getView(), sa, message)
+                    : InputConfirm.confirm(this, cardToShow.getView(), message, true, options);
             endTempShowCards();
             return result;
         }
@@ -1651,10 +1652,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 break;
             case AddOrRemove:
                 labels = ImmutableList.of(localizer.getMessage("lblAddCounter"), localizer.getMessage("lblRemoveCounter"));
-                break;
-            case CastOrHand:
-                labels = ImmutableList.of(StringUtils.capitalize(localizer.getMessage("lblCast")),
-                        StringUtils.capitalize(localizer.getMessage("lblHandZone")));
                 break;
             default:
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));

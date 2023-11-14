@@ -242,7 +242,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Card cardToShow, Map<String, Object> params) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params) {
         return getAi().confirmAction(sa, mode, message, params);
     }
 
@@ -762,9 +762,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Boolean defaultVal) {
         switch (kindOfChoice) {
-            case TapOrUntap:
-            case CastOrHand:
-                return true;
+            case TapOrUntap: return true;
             case UntapOrLeaveTapped:
                 Card source = sa.getHostCard();
                 if (source != null && source.hasSVar("AIUntapPreference")) {
