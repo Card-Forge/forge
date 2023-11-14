@@ -128,6 +128,9 @@ public abstract class Trigger extends TriggerReplacementBase {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
                 desc = TextUtil.fastReplace(desc,"CARDNAME", CardTranslation.getTranslatedName(currentName));
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+                if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getName());
+                }
             }
             if (getHostCard().getEffectSource() != null) {
                 if (active)
