@@ -14,6 +14,7 @@ import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostReveal;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -21,6 +22,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,118 +35,121 @@ public class DiscoverEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
+        final PlayerCollection players = getDefinedPlayersOrTargeted(sa);
+        final String verb = players.size() == 1 ? " discovers " : " discover ";
 
-        return sa.getActivatingPlayer() + " discovers " + sa.getParamOrDefault("Num", "1") + ".";
+        return Lang.joinHomogenous(players) + verb + sa.getParamOrDefault("Num", "1") + ".";
     }
 
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final Player p = sa.getActivatingPlayer();
+        final PlayerCollection players = getDefinedPlayersOrTargeted(sa);
 
         // Exile cards from the top of your library until you exile a nonland card with <N> mana value or less.
         final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-        if (p == null || !p.isInGame()) return;
+        for (final Player p : players) {
+            if (p == null || !p.isInGame()) return;
 
-        Card found = null;
-        CardCollection exiled = new CardCollection();
-        CardCollection rest = new CardCollection();
+            Card found = null;
+            CardCollection exiled = new CardCollection();
+            CardCollection rest = new CardCollection();
 
-        final PlayerZone library = p.getZone(ZoneType.Library);
+            final PlayerZone library = p.getZone(ZoneType.Library);
 
-        for (final Card c : library) {
-            exiled.add(c);
-            if (!c.isLand() && c.getCMC() <= num) {
-                found = c;
-                if (sa.hasParam("RememberDiscovered"))
-                    host.addRemembered(c);
-                break;
-            } else {
-                rest.add(c);
-            }
-        }
-
-        if (exiled.size() > 0) {
-            game.getAction().reveal(exiled, p, false);
-        }
-
-        changeZone(exiled, ZoneType.Exile, game, sa);
-
-        // Cast it without paying its mana cost or put it into your hand.
-        if (found != null) {
-            String prompt = Localizer.getInstance().getMessage("lblDiscoverChoice",
-                            CardTranslation.getTranslatedName(found.getName()));
-            final Zone origin = found.getZone();
-            List<String> options =
-                    Arrays.asList(StringUtils.capitalize(Localizer.getInstance().getMessage("lblCast")),
-                            StringUtils.capitalize(Localizer.getInstance().getMessage("lblHandZone")));
-            final boolean play = p.getController().confirmAction(sa, null, prompt, options, found, null);
-            boolean cancel = false;
-
-            if (play) {
-                // get basic spells (no flashback, etc.)
-                List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(found, p);
-
-                // filter out land abilities due to MDFC or similar
-                Iterables.removeIf(sas, Predicates.instanceOf(LandAbility.class));
-                // the spell must also have a mana value equal to or less than the discover number
-                sas.removeIf(sp -> sp.getPayCosts().getTotalMana().getCMC() > num);
-
-                if (sas.isEmpty()) { // shouldn't happen!
-                    System.err.println("DiscoverEffect Error: " + host + " found " + found + " but couldn't play sa");
+            for (final Card c : library) {
+                exiled.add(c);
+                if (!c.isLand() && c.getCMC() <= num) {
+                    found = c;
+                    if (sa.hasParam("RememberDiscovered"))
+                        host.addRemembered(c);
+                    break;
                 } else {
-                    SpellAbility tgtSA = p.getController().getAbilityToPlay(found, sas);
+                    rest.add(c);
+                }
+            }
 
-                    if (tgtSA == null) { // in case player canceled from choice dialog
-                        cancel = true;
+            if (exiled.size() > 0) {
+                game.getAction().reveal(exiled, p, false);
+            }
+
+            changeZone(exiled, ZoneType.Exile, game, sa);
+
+            // Cast it without paying its mana cost or put it into your hand.
+            if (found != null) {
+                String prompt = Localizer.getInstance().getMessage("lblDiscoverChoice",
+                        CardTranslation.getTranslatedName(found.getName()));
+                final Zone origin = found.getZone();
+                List<String> options =
+                        Arrays.asList(StringUtils.capitalize(Localizer.getInstance().getMessage("lblCast")),
+                                StringUtils.capitalize(Localizer.getInstance().getMessage("lblHandZone")));
+                final boolean play = p.getController().confirmAction(sa, null, prompt, options, found, null);
+                boolean cancel = false;
+
+                if (play) {
+                    // get basic spells (no flashback, etc.)
+                    List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(found, p);
+
+                    // filter out land abilities due to MDFC or similar
+                    Iterables.removeIf(sas, Predicates.instanceOf(LandAbility.class));
+                    // the spell must also have a mana value equal to or less than the discover number
+                    sas.removeIf(sp -> sp.getPayCosts().getTotalMana().getCMC() > num);
+
+                    if (sas.isEmpty()) { // shouldn't happen!
+                        System.err.println("DiscoverEffect Error: " + host + " found " + found + " but couldn't play sa");
                     } else {
-                        tgtSA = tgtSA.copyWithNoManaCost();
+                        SpellAbility tgtSA = p.getController().getAbilityToPlay(found, sas);
 
-                        // 118.8c
-                        boolean optional = false;
-                        for (CostPart cost : tgtSA.getPayCosts().getCostParts()) {
-                            if ((cost instanceof CostDiscard || cost instanceof CostReveal)
-                                    && !cost.getType().equals("Card") && !cost.getType().equals("Random")) {
-                                optional = true;
-                                break;
+                        if (tgtSA == null) { // in case player canceled from choice dialog
+                            cancel = true;
+                        } else {
+                            tgtSA = tgtSA.copyWithNoManaCost();
+
+                            // 118.8c
+                            boolean optional = false;
+                            for (CostPart cost : tgtSA.getPayCosts().getCostParts()) {
+                                if ((cost instanceof CostDiscard || cost instanceof CostReveal)
+                                        && !cost.getType().equals("Card") && !cost.getType().equals("Random")) {
+                                    optional = true;
+                                    break;
+                                }
                             }
-                        }
-                        if (!optional) {
-                            tgtSA.getPayCosts().setMandatory(true);
-                        }
+                            if (!optional) {
+                                tgtSA.getPayCosts().setMandatory(true);
+                            }
 
-                        if (tgtSA.usesTargeting() && !optional) {
-                            tgtSA.getTargetRestrictions().setMandatory(true);
-                        }
+                            if (tgtSA.usesTargeting() && !optional) {
+                                tgtSA.getTargetRestrictions().setMandatory(true);
+                            }
 
-                        tgtSA.setSVar("IsCastFromPlayEffect", "True");
+                            tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
-                        if (p.getController().playSaFromPlayEffect(tgtSA)) {
-                            final Card played = tgtSA.getHostCard();
-                            // add remember successfully played here if ever needed
-                            final Zone zone = game.getCardState(played).getZone();
-                            if (!origin.equals(zone)) {
-                                CardZoneTable trigList = new CardZoneTable();
-                                trigList.put(origin.getZoneType(), zone.getZoneType(), game.getCardState(found));
-                                trigList.triggerChangesZoneAll(game, sa);
+                            if (p.getController().playSaFromPlayEffect(tgtSA)) {
+                                final Card played = tgtSA.getHostCard();
+                                // add remember successfully played here if ever needed
+                                final Zone zone = game.getCardState(played).getZone();
+                                if (!origin.equals(zone)) {
+                                    CardZoneTable trigList = new CardZoneTable();
+                                    trigList.put(origin.getZoneType(), zone.getZoneType(), game.getCardState(found));
+                                    trigList.triggerChangesZoneAll(game, sa);
+                                }
                             }
                         }
                     }
                 }
+                if (!play || cancel) changeZone(new CardCollection(found), ZoneType.Hand, game, sa);
             }
-            if (!play || cancel) changeZone(new CardCollection(found), ZoneType.Hand, game, sa);
+
+            // Put the rest on the bottom in a random order.
+            changeZone(rest, ZoneType.Library, game, sa);
+
+            // Run discover triggers
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
+            runParams.put(AbilityKey.Amount, num);
+            game.getTriggerHandler().runTrigger(TriggerType.Discover, runParams, false);
         }
-
-        // Put the rest on the bottom in a random order.
-        changeZone(rest, ZoneType.Library, game, sa);
-
-        // Run discover triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
-        runParams.put(AbilityKey.Amount, num);
-        game.getTriggerHandler().runTrigger(TriggerType.Discover, runParams, false);
-
     }
 
     private void changeZone(CardCollection cards, ZoneType zone, Game game, SpellAbility sa) {
