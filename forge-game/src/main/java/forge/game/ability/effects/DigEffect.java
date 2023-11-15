@@ -391,6 +391,9 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 moveParams.put(AbilityKey.SimultaneousETB, movedCards);
+                                if (sa.hasParam("GainControl")) {
+                                    c.setController(player, game.getNextTimestamp());
+                                }
                                 if (sa.hasParam("WithCounter")) {
                                     final int numCtr = AbilityUtils.calculateAmount(host,
                                             sa.getParamOrDefault("WithCounterNum", "1"), sa);
