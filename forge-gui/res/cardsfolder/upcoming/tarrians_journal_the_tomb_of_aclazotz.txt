@@ -2,7 +2,7 @@ Name:Tarrian's Journal
 ManaCost:1 B
 Types:Legendary Artifact
 A:AB$ Draw | Cost$ T Sac<1/Creature.Other;Artifact.Other/another artifact or creature> | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Draw a card. Activate only as a sorcery.
-A:AB$ SetState | Defined$ Self | Mode$ Transform | Cost$ 2 T Discard<1/Hand> | SpellDescription$  Transform CARDNAME.
+A:AB$ SetState | Defined$ Self | Mode$ Transform | Cost$ 2 T Discard<1/Hand> | SpellDescription$ Transform CARDNAME.
 DeckHas:Ability$Graveyard|Discard|Sacrifice
 DeckHints:Type$Vampire|Artifact & Ability$Graveyard|Mill
 AlternateMode:DoubleFaced
