@@ -1,0 +1,7 @@
+Name:Buried Treasure
+ManaCost:2
+Types:Artifact Treasure
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Discover | Cost$ 5 ExileFromGrave<1/CARDNAME> | Num$ 5 | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Discover 5. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Sacrifice Buried Treasure: Add one mana of any color.\n{5}, Exile Buried Treasure from your graveyard: Discover 5. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 5 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

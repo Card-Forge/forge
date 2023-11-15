@@ -1,0 +1,7 @@
+Name:Squirming Emergence
+ManaCost:1 B G
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+cmcLEX+YouOwn | TgtPrompt$ Select target nonland permanent card with mana value X or less | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Fathomless descent — Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:Fathomless descent — Return to the battlefield target nonland permanent card in your graveyard with mana value less than or equal to the number of permanent cards in your graveyard.

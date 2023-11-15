@@ -1160,7 +1160,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return;
         }
 
-        final CardCollection topN = new CardCollection(this.getCardsIn(ZoneType.Library, num));
+        final CardCollection topN = getTopXCardsFromLibrary(num);
 
         if (topN.isEmpty()) {
             return;
@@ -1187,6 +1187,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (Card c : toTop) {
                 getGame().getAction().moveToLibrary(c, cause, params);
                 numToTop++;
+            }
+            if (cause.hasParam("RememberKept")) {
+                cause.getHostCard().addRemembered(toTop);
             }
         }
 
@@ -1653,19 +1656,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        CardCollectionView milledView = getCardsIn(ZoneType.Library);
+        Iterable<Card> milledView = getCardsIn(ZoneType.Library);
         // 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
-            Iterables.removeAll(milledView, (CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB));
+            milledView = Iterables.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
-        CardCollection milled = new CardCollection(Iterables.limit(milledView, n));
-        milledView = milled;
+        CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
         if (destination == ZoneType.Graveyard) {
-            milledView = GameActionUtil.orderCardsByTheirOwners(game, milledView, ZoneType.Graveyard, sa);
+            milled = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
-        for (Card m : milledView) {
+        for (Card m : milled) {
             final ZoneType origin = m.getZone().getZoneType();
             final Card d = game.getAction().moveTo(destination, m, sa, params);
             if (d.getZone().is(destination)) {
