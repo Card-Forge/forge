@@ -1,9 +1,9 @@
 Name:Sunken Citadel
 ManaCost:no cost
 Types:Land Cave
-K:CARDNAME enters the battlefield tapped.
-K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ ChooseColor | SpellDescription$ CARDNAME enters the battlefield tapped. As it enters, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck 
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | RestrictValid$ Activated.Land | Amount$ 2 | SpellDescription$ Add two mana of the chosen color. Spend this mana only to activate abilities of land sources.
 DeckHints:Type$Cave|Desert|Sphere
