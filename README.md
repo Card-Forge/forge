@@ -6,6 +6,8 @@ Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wik
 
 [Discord channel](https://discord.gg/HcPJNyD66a)
 
+[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
+
 ## Requirements / Tools
 
 - you favourite Java IDE (IntelliJ, Eclipse, VSCodium, Emacs, Vi...)
