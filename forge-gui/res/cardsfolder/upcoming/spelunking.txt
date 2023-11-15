@@ -6,7 +6,7 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | ConditionDefined$ Remembered | ConditionPresent$ Card.Cave | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-R:Event$ Moved | ValidCard$ Land | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Lands you control enter the battlefield untapped.
+R:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Lands you control enter the battlefield untapped.
 SVar:ETBUntapped:DB$ Untap | ETB$ True | Defined$ ReplacedCard
 DeckHas:Ability$LifeGain
 DeckHints:Type$Cave
