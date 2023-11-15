@@ -1,0 +1,8 @@
+Name:Hurl into History
+ManaCost:3 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target artifact or creature spell | ValidTgts$ Artifact,Creature | RememberCounteredCMC$ True | SubAbility$ DBDiscover | SpellDescription$ Counter target artifact or creature spell.
+SVar:DBDiscover:DB$ Discover | Num$ X | SubAbility$ DBCleanup | StackDescription$ REP Discover_{p:You} discovers | SpellDescription$ Discover X, where X is that spell's mana value. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedNumber
+Oracle:Counter target artifact or creature spell. Discover X, where X is that spell's mana value. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

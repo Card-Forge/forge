@@ -1,0 +1,8 @@
+Name:Hidden Volcano
+ManaCost:no cost
+Types:Land Cave
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Discover | Cost$ 4 R T Sac<1/CARDNAME> | Num$ 4 | SorcerySpeed$ True | SpellDescription$ Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Ability$Sacrifice
+Oracle:Hidden Volcano enters the battlefield tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice Hidden Volcano: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
