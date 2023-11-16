@@ -204,7 +204,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.0</version>
+                        <version>4.6.1</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -267,7 +267,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.0</version>
+                        <version>4.6.1</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -367,7 +367,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.0</version>
+                        <version>4.6.1</version>
                         <inherited>true</inherited>
                         <configuration>
                             <sign>
