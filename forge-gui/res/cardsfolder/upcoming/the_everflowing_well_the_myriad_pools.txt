@@ -1,0 +1,23 @@
+Name:The Everflowing Well
+ManaCost:2 U
+Types:Legendary Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards, then draw two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigTransform | TriggerDescription$ Descend 8 — At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHas:Ability$Graveyard|Mill
+DeckHints:Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
+Oracle:When The Everflowing Well enters the battlefield, mill two cards, then draw two cards.\nDescend 8 — At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform The Everflowing Well.
+
+ALTERNATE
+
+Name:The Myriad Pools
+ManaCost:no cost
+Types:Legendary Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+T:Mode$ SpellCast | ValidCard$ Permanent | ValidSA$ Spell.ManaFromCard.StrictlySelf | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a permanent spell using mana produced by CARDNAME, up to one other target permanent you control becomes a copy of that spell until end of turn.
+SVar:TrigCopy:DB$ Clone | Defined$ TriggeredCard | CloneTarget$ Targeted | ValidTgts$ Permanent.YouCtrl+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target permanent you control | Duration$ UntilEndOfTurn
+Oracle:(Transforms from The Everflowing Well.)\n{T}: Add {U}.\nWhenever you cast a permanent spell using mana produced by The Myriad Pools, up to one other target permanent you control becomes a copy of that spell until end of turn.
