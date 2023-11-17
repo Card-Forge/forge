@@ -2,6 +2,12 @@ name: Create Desktop Snapshot
 
 on:
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '30 18 * * *'
@@ -42,6 +48,11 @@ jobs:
           mvn -U -B clean -P windows-linux install -T 1C -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} 
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+          
       - name: Upload Snapshot somewhere useful
         uses: actions/upload-artifact@v3
         with:
