@@ -57,7 +57,11 @@ jobs:
         run: |
           mkdir tarball
           # If this works just gotta figure out how to append datetime
-          mv /home/runner/.m2/repository/forge/forge-gui-desktop/*/* tarball/
+          mv /home/runner/.m2/repository/forge/forge-gui-desktop/*/*.bz2 tarball/
+          cd tarball
+          out="$(basename -s .tar.bz2 *)"
+          d=$(date +%m-%d)
+          mv "${out}.tar.bz2" "${out}-${d}.tar.bz2"
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -70,6 +74,8 @@ jobs:
           exclude: |
             *.jar
             *.pom
+            *.repositories
+            *.xml
             
 
           
