@@ -65,7 +65,7 @@ jobs:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ~/tarball/
+          local-dir: tarball/
           server-dir: downloads/dailysnapshots/
           
 
