@@ -52,10 +52,15 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-          
-      - name: Upload Snapshot somewhere useful
-        uses: actions/upload-artifact@v3
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-            name: latest_desktop_snapshot.bz2
-            path: /home/runner/.m2/repository/forge/forge-gui-desktop/**/forge-gui-desktop-*.tar.bz2
+          server: ftp.cardforge.org
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: /home/runner/.m2/repository/forge/forge-gui-desktop/**/
+          server-dir: downloads/dailysnapshots/
+          
+
           
