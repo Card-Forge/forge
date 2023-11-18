@@ -53,13 +53,19 @@ jobs:
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
+      - name: Rename before upload
+        run: |
+          mkdir tarball
+          # If this works just gotta figure out how to append datetime
+          mv /home/runner/.m2/repository/forge/forge-gui-desktop/**/ tarball/
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: /home/runner/.m2/repository/forge/forge-gui-desktop/*/
+          local-dir: ~/tarball/
           server-dir: downloads/dailysnapshots/
           
 
