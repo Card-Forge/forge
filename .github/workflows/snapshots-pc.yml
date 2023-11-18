@@ -59,7 +59,7 @@ jobs:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: /home/runner/.m2/repository/forge/forge-gui-desktop/**/
+          local-dir: /home/runner/.m2/repository/forge/forge-gui-desktop/*/
           server-dir: downloads/dailysnapshots/
           
 
