@@ -57,7 +57,7 @@ jobs:
         run: |
           mkdir tarball
           # If this works just gotta figure out how to append datetime
-          mv /home/runner/.m2/repository/forge/forge-gui-desktop/**/ tarball/
+          mv /home/runner/.m2/repository/forge/forge-gui-desktop/*/* tarball/
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -67,6 +67,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: tarball/
           server-dir: downloads/dailysnapshots/
-          
+          exclude: |
+            *.jar
+            *.pom
+            
 
           
