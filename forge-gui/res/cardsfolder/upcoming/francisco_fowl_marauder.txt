@@ -3,10 +3,10 @@ ManaCost:1 B
 Types:Legendary Creature Bird Pirate
 PT:0/1
 K:Flying
+K:Partner
 S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Zombie.YouCtrl | Description$ You may cast CARDNAME from your graveyard as long as you control a Zombie.
 T:Mode$ DamageDoneOnce | ValidSource$ Pirate.YouCtrl | ValidTarget$ Player | Execute$ TrigExplore | TriggerDescription$ Whenever one or more Pirates you control deal damage to a player, NICKNAME explores.
 SVar:TrigExplore:DB$ Explore
-K:Partner
 DeckHints:Type$Pirate
 DeckHas:Ability$Counters|Graveyard
 Oracle:Flying\nFrancisco, Fowl Marauder can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if they both have partner.)
