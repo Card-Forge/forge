@@ -2659,8 +2659,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 inp.setMessage(localizer.getMessage("lblChoosePermanentstoUntap"));
                 inp.showAndWait();
                 if (!inp.hasCancelled()) {
+                    CardCollection untapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        c.untap(true);
+                        if (c.untap(true)) untapped.add(c);
+                    }
+                    if (!untapped.isEmpty()) {
+                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                        final Map<Player, CardCollection> map = Maps.newHashMap();
+                        map.put(getPlayer(), untapped);
+                        runParams.put(AbilityKey.Map, map);
+                        getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
                     }
                 }
             });

@@ -3,20 +3,25 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
 
+import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
@@ -145,6 +150,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
         }
 
         boolean combatChanged = false;
+        CardCollection untapped = new CardCollection();
         for (Card tgtC : tgtCards) {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
@@ -167,7 +173,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             tgtC.addTempController(newController, tStamp);
 
             if (bUntap) {
-                tgtC.untap(true);
+                if (tgtC.untap(true)) untapped.add(tgtC);
             }
 
             final List<String> kws = Lists.newArrayList();
@@ -251,6 +257,13 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 combatChanged = true;
             }
         } // end foreach target
+        if (!untapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<Player, CardCollection> map = Maps.newHashMap();
+            map.put(activator, untapped);
+            runParams.put(AbilityKey.Map, map);
+            game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
+        }
 
         if (combatChanged) {
             game.updateCombatForView();
