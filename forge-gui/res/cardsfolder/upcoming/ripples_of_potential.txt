@@ -1,0 +1,8 @@
+Name:Ripples of Potential
+ManaCost:1 U
+Types:Instant
+A:SP$ Proliferate | SubAbility$ DBPhaseOut | RememberPut$ True | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:DBPhaseOut:DB$ Phases | Defined$ Valid Permanent.IsRemembered+YouCtrl | AnyNumber$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Counters
+Oracle:Proliferate, then choose any number of permanents you control that had a counter put on them this way. Those permanents phase out. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there. Treat phased-out permanents and anything attached to them as though they don’t exist until their controller's next turn.)

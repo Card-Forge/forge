@@ -1,0 +1,13 @@
+Name:Skeleton Crew
+ManaCost:3 B
+Types:Creature Skeleton Pirate
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Skeleton+Other,Creature.YouCtrl+Pirate+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Each other creature you control that's a Skeleton or Pirate gets +1/+1.
+T:Mode$ ChangesZoneAll | Origin$ Graveyard | Destination$ Any | ValidCards$ Creature.YouOwn | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token. (This ability triggers only from the battlefield.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_skeleton_pirate | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ 5 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.
+SVar:DiscardMe:1
+SVar:SacMe:1
+DeckHints:Type$Pirate|Skeleton
+DeckHas:Ability$Token|Graveyard
+Oracle:Each other creature you control that's a Skeleton or Pirate gets +1/+1.\nWhenever one or more creature cards leave your graveyard, create a 2/2 black Skeleton Pirate creature token. (This ability triggers only from the battlefield.)\n{5}{B}: Return Skeleton Crew from your graveyard to the battlefield tapped.
