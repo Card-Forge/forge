@@ -10,10 +10,12 @@ import com.google.common.collect.Iterables;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.TextUtil;
@@ -436,6 +438,15 @@ public class PlayerProperty {
             if (!Iterables.contains(player.getAttackedPlayersMyTurn(), sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("attackedYouCtrlTheirCurrentTurn")) {
+            CardCollectionView cardsYouCtrl = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield),
+                    CardPredicates.isType(property.split("_")[1]));
+            for (Card card : cardsYouCtrl) {
+                if (!player.getCreaturesAttackedThisTurn(card).isEmpty()) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("attackedYouTheirLastTurn")) {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
