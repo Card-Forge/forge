@@ -1,4 +1,4 @@
-name: Forge Snapshot
+name: Create Android Snapshot
 
 on:
   workflow_dispatch:
@@ -58,10 +58,6 @@ jobs:
         run: |
           mvn clean install -Dmaven.test.skip=true
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-
       - name: Install Android maven plugin
         run: |
           mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.1
@@ -70,6 +66,12 @@ jobs:
           curl -L -o android-maven-plugin-4.6.1.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.pom
           mvn install:install-file -Dfile=android-maven-plugin-4.6.1.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.1 -Dpackaging=jar
           #cd -
+          
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
           
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
