@@ -8,5 +8,4 @@ SVar:DBAttach:DB$ Attach | Optional$ True | ChoiceTitle$ You may choose a creatu
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Aura|Equipment
 DeckHas:Ability$Token & Type$Soldier|Food
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human Soldier creature token and a Food token. (A Food token is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
-II, III — You may put an Aura or Equipment card from your hand or graveyard onto the battlefield. If an Equipment is put onto the battlefield this way, you may attach it to a creature you control.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human Soldier creature token and a Food token. (A Food token is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nII, III — You may put an Aura or Equipment card from your hand or graveyard onto the battlefield. If an Equipment is put onto the battlefield this way, you may attach it to a creature you control.
