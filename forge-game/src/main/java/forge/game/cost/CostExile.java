@@ -195,8 +195,29 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
         }
 
+        boolean sharedType = false;
+        if (type.contains("+withSharedCardType")) {
+            sharedType = true;
+            type = TextUtil.fastReplace(type, "+withSharedCardType", "");
+        }
+
         if (!type.contains("X") || ability.getXManaCostPaid() != null) {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
+        }
+
+        int amount = this.getAbilityAmount(ability);
+
+        if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type
+            if (list.size() < amount) return false;
+            for (int i = 0; i < list.size(); i++) {
+                final Card card1 = list.get(i);
+                for (final Card compare : list) {
+                    if (!compare.equals(card1) && compare.sharesCardTypeWith(card1)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         if (totalCMC) {
@@ -208,8 +229,6 @@ public class CostExile extends CostPartWithList {
             int i = AbilityUtils.calculateAmount(source, totalM, ability);
             return CardLists.cmcCanSumTo(i, list);
         }
-
-        int amount = this.getAbilityAmount(ability);
 
         // for cards like Allosaurus Rider, do not count it
         if (this.from.size() == 1 && this.from.get(0).equals(ZoneType.Hand) && source.isInZone(ZoneType.Hand)

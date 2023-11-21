@@ -2942,8 +2942,8 @@ public class CardFactoryUtil {
             // Create return transformed ability string
             String ab = "AB$ ChangeZone | CostDesc$ " + cd.toString() + " | Cost$ " + cost + " | Origin$ Exile | " +
                     "Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | Craft$ True | " +
-                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
-                    "StackDescription$ Return this card transformed under its owner's control. (Craft) | " +
+                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | SorcerySpeed$ True" +
+                    " | StackDescription$ Return this card transformed under its owner's control. (Craft) | " +
                     "SpellDescription$ (" + inst.getReminderText() + ")";
             final SpellAbility newSA = AbilityFactory.getAbility(ab, card);
             newSA.setIntrinsic(intrinsic);

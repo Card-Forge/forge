@@ -622,6 +622,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                 boolean result = c.changeToState(c.backside ? CardStateName.Transformed : CardStateName.Original);
                 retResult = retResult || result;
+                if (cause != null && cause.isCraft()) { // retain cards crafted while transforming in exile
+                    c.retainPaidList(cause, "ExiledCards");
+                }
             }
             if (hasMergedCard()) {
                 rebuildMutatedStates(cause);
@@ -1281,6 +1284,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             topCard.removeMutatedStates();
             topCard.rebuildMutatedStates(cause);
         }
+    }
+
+    public final void retainPaidList(final SpellAbility cause, final String list) {
+        for (Card craft : cause.getPaidList(list)) {
+            if (!craft.equals(this) && !craft.isToken()) {
+                addExiledCard(craft);
+                craft.setExiledWith(this);
+                craft.setExiledBy(cause.getActivatingPlayer());
+            }
+        }
+
     }
 
     public final List<Integer> getStoredRolls() {

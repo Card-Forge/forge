@@ -241,6 +241,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
         }
+        boolean sharedType = false;
+        if (type.contains("+withSharedCardType")) {
+            sharedType = true;
+            type = TextUtil.fastReplace(type, "+withSharedCardType", "");
+        }
 
         CardCollection list;
         if (cost.zoneRestriction != 1) {
@@ -292,7 +297,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             if (fromZone == ZoneType.Library) { return exileFromTop(cost, c); }
         }
         if (fromTopGrave) { return exileFromTopGraveType(c, list); }
-        if (cost.zoneRestriction != 0) { return exileFromMiscZone(cost, c, list); }
+        if (cost.zoneRestriction != 0) { return exileFromMiscZone(cost, c, list, sharedType); }
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<Player> payableZone = new ArrayList<>();
@@ -394,7 +399,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(list);
     }
 
-    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList) {
+    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList,
+                                              final boolean sharedType) {
         // when it's always a single triggered card getting exiled don't act like it might be different by offering the zone for choice
         if (cost.zoneRestriction == -1 && ability.isTrigger() && nNeeded == 1 && typeList.size() == 1) {
             if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(typeList.getFirst().getName())))) {
@@ -405,9 +411,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         final List<ZoneType> origin = Lists.newArrayList(cost.from);
         final CardCollection exiled = new CardCollection();
+        final String required = sharedType ? " (must share a card type)" : "";
+
 
         final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList,
-                mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded), null);
+                mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded) + required,
+                null);
+        if (sharedType) {
+            if (!chosen.get(1).sharesCardTypeWith(chosen.get(0))) return null;
+        }
 
         exiled.addAll(chosen);
         if (exiled.size() < nNeeded) {

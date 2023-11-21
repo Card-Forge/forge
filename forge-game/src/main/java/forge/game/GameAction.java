@@ -506,13 +506,7 @@ public class GameAction {
             }
 
             if (cause != null && cause.isCraft() && toBattlefield) { // retain cards crafted while ETB transformed
-                for (Card craft : cause.getPaidList("ExiledCards")) {
-                    if (!craft.equals(copied) && !craft.isToken()) {
-                        copied.addExiledCard(craft);
-                        craft.setExiledWith(copied);
-                        craft.setExiledBy(cause.getActivatingPlayer());
-                    }
-                }
+                copied.retainPaidList(cause, "ExiledCards");
             }
         }
 
