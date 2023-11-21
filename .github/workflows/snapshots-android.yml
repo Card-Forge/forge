@@ -36,6 +36,7 @@ jobs:
           curl -o apache-maven-3.6.3-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
           tar xf apache-maven-3.6.3-bin.tar.gz
           export PATH=$PWD/apache-maven-3.6.3/bin:$PATH
+          export MAVEN_HOME=$PWD/apache-maven-3.6.3
           mvn --version
           
       - name: Install android SDK
