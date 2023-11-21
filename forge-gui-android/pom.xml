@@ -6,7 +6,6 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <android.buildToolsVersion>31.0.0</android.buildToolsVersion>
         <alpha-version>1.6.59.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
@@ -276,7 +275,6 @@
                             </sign>
                             <sdk>
                                 <platform>26</platform>
-                                <buildToolsVersion>${android.buildToolsVersion}</buildToolsVersion>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
