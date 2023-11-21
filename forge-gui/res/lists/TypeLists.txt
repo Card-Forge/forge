@@ -325,7 +325,7 @@ Shrine
 Shard
 [ArtifactTypes]
 Blood
-Bottlehead:Bottleheads
+Bobblehead:Bobbleheads
 Clue:Clues
 Contraption
 Equipment
