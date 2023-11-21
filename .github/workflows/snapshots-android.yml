@@ -25,6 +25,7 @@ jobs:
         with:
           java-version: '8'
           distribution: 'temurin'
+          maven-version: '3.6.3'
           cache: 'maven'
           server-id: cardforge-repo
           server-username: ${{ secrets.FTP_USERNAME }}
