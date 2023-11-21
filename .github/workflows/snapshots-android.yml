@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 8
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '8'
           distribution: 'temurin'
@@ -31,6 +31,13 @@ jobs:
           server-username: ${{ secrets.FTP_USERNAME }}
           server-password: ${{ secrets.FTP_PASSWORD }}
           settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+      - name: Install old maven (3.6.3)
+        run: |
+          curl -o apache-maven-3.6.3-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+          tar xf apache-maven-3.6.3-bin.tar.gz
+          export PATH=$PWD/apache-maven-3.6.3/bin:$PATH
+          mvn --version
           
       - name: Install android SDK
         uses: maxim-lobanov/setup-android-tools@v1
