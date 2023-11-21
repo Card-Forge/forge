@@ -461,13 +461,13 @@ ScryfallCode=LCI
 3 Swamp|LCI|1
 3 Mountain|LCI|1
 3 Forest|LCI|1
-7 Captivating Cave|LCI
-7 Hidden Cataract|LCI
-7 Hidden Courtyard|LCI
-7 Hidden Necropolis|LCI
-7 Hidden Nursery|LCI
-7 Hidden Volcano|LCI
-7 Promising Vein|LCI
+5 Captivating Cave|LCI
+5 Hidden Cataract|LCI
+5 Hidden Courtyard|LCI
+5 Hidden Necropolis|LCI
+5 Hidden Nursery|LCI
+5 Hidden Volcano|LCI
+5 Promising Vein|LCI
 
 [tokens]
 b_1_1_bat_flying
