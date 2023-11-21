@@ -475,7 +475,6 @@ ScryfallCode=MOM
 4 Invasion of Xerex|MOM
 4 Invasion of Zendikar|MOM
 
-
 [double-face]
 1 Elesh Norn|MOM
 2 Heliod, the Radiant Dawn|MOM
@@ -502,7 +501,6 @@ ScryfallCode=MOM
 3 Herbology Instructor|MOM
 2 Polukranos Reborn|MOM
 1 Vorinclex|MOM
-
 
 [tokens]
 b_2_2_zombie
