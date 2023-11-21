@@ -19,6 +19,8 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.zone.CostPaymentStack;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.game.ability.AbilityKey;
@@ -75,6 +77,43 @@ public class TriggerExiled extends Trigger {
 
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
+        }
+
+        if (hasParam("WhileKeyword")) {
+            final String keyword = getParam("WhileKeyword");
+            boolean withKeyword = false;
+
+            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+
+            SpellAbility sa;
+            if (currentPayment != null) {
+                sa = currentPayment.getPayment().getAbility();
+
+                if (sa != null && sa.getHostCard() != null) {
+                    if ((sa.isSpell() || sa.isAbility()) && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                        withKeyword = true;
+                    }
+                }
+            }
+
+            if (!withKeyword) {
+                CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
+
+                for (IndividualCostPaymentInstance individual : stack) {
+                    sa = individual.getPayment().getAbility();
+
+                    if (sa == null || sa.getHostCard() == null)
+                        continue;
+
+                    if ((sa.isSpell() || sa.isAbility()) && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                        withKeyword = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!withKeyword)
+                return false;
         }
 
         return true;

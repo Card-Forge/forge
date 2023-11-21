@@ -945,6 +945,8 @@ public class GameAction {
         if (params != null) {
             runParams.putAll(params);
         }
+        runParams.put(AbilityKey.CostStack, game.costPaymentStack);
+        runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
 
         game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
 
