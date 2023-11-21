@@ -75,6 +75,6 @@ jobs:
           
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
-          mvn -U -B -P android-release-build,android-release-sign install -e -Dsign.keystore=forge.keystore -Dsign.alias=Forge -Dsign.storepass=${{ secrets.SIGN_STORE_PASS }} -Dsign.keypass=${{ secrets.SIGN_KEY_PASS }}  -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk  -Dmaven.test.skip=true
+          mvn -U -B -X -P android-release-build,android-release-sign install -e -Dsign.keystore=forge.keystore -Dsign.alias=Forge -Dsign.storepass=${{ secrets.SIGN_STORE_PASS }} -Dsign.keypass=${{ secrets.SIGN_KEY_PASS }}  -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk  -Dmaven.test.skip=true
         env:
           GITHUB_TOKEN: ${{ github.token }}
