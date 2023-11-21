@@ -68,11 +68,8 @@ jobs:
           curl -L -o android-maven-plugin-4.6.1.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.jar
           curl -L -o android-maven-plugin-4.6.1.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.pom
           mvn install:install-file -Dfile=android-maven-plugin-4.6.1.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.1 -Dpackaging=jar
-          mvn dependency:tree
-
-      - name: maven clean install
-        run: |
           mvn clean install -Dmaven.test.skip=true
+          mvn dependency:tree
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
