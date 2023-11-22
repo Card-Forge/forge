@@ -2,7 +2,7 @@ Name:Zygon Infiltrator
 ManaCost:2 U
 Types:Creature Alien Shapeshifter Soldier
 PT:3/2
-A:AB$ Tap | Cost$ 2 U | PrecostDesc$ Body-print - | SorcerySpeed$ True | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SubAbility$ DBCounter | SpellDescription$ Tap another target creature and put a stun counter on it. Zygon Infiltrator becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+A:AB$ Tap | Cost$ 2 U | PrecostDesc$ Body-print - | SorcerySpeed$ True | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SubAbility$ DBCounter | SpellDescription$ Tap another target creature and put a stun counter on it. CARDNAME becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBCopy
 SVar:DBCopy:DB$ Clone | Defined$ Targeted | Duration$ UntilTargetedUntaps
 Oracle:Body-print — {2}{U}: Tap another target creature and put a stun counter on it. Zygon Infiltrator becomes a copy of that creature for as long as that creature remains tapped. Activate only as a sorcery. (If a permanent with a stun counter would become untapped, remove one from it instead.)

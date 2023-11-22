@@ -15,7 +15,6 @@ public class TriggerTapAll extends Trigger {
         super(params, host, intrinsic);
     }
 
-
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         return matchesValidParam("ValidCards", runParams.get(AbilityKey.Cards));

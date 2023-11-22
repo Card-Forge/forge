@@ -5,6 +5,6 @@ PT:5/4
 K:Flash
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {2} less to cast for each creature that died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature/Times.2
-T:Mode$ ChangesZone | TriggerZone$ Battlefield | ValidCard$ Card.Self | Origin$ Any  | Destination$ Battlefield | Execute$ DBDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all other creatures that were dealt damage this turn.
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.wasDealtDamageThisTurn+Other
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | ValidCard$ Card.Self | Origin$ Any  | Destination$ Battlefield | Execute$ DBDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all other creatures that were dealt damage this turn.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.wasDealtDamageThisTurn+StrictlyOther
 Oracle:This spell costs {2} less to cast for each creature that died this turn.\nWhen Death-Rattle Oni enters the battlefield, destroy all other creatures that were dealt damage this turn.

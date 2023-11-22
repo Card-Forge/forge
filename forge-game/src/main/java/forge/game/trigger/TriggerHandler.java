@@ -483,24 +483,8 @@ public class TriggerHandler {
     // Return true if the trigger went off, false otherwise.
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         // All tests passed, execute ability.
-        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (null != abMana && null != abMana.getManaPart()) {
-                abMana.setUndoable(false);
-            }
-        }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-            if (null != abMana && null != abMana.getManaPart()) {
-                abMana.setUndoable(false);
-            }
-        }
-        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
-            final Card c = (Card) runParams.get(AbilityKey.Card);
-            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
-                sa.setUndoable(false);
-            }
-        }
+
+        adjustUndoStack(regtrig, runParams);
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
@@ -582,6 +566,43 @@ public class TriggerHandler {
         if (regtrig.hasParam("OneOff") && host.isImmutable()) {
             host.getController().getZone(ZoneType.Command).remove(host);
         }
+    }
+
+    private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {
+        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+            final Card c = (Card) runParams.get(AbilityKey.Card);
+            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                sa.setUndoable(false);
+            }
+        }  
+        else if (regtrig instanceof TriggerTapAll) {
+            final Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
+            for (Card c : cards) {
+                for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                    sa.setUndoable(false);
+                }
+            }
+        }
+        else if (regtrig instanceof TriggerUntapAll) {
+            final Map<Player, CardCollection> map = (Map<Player, CardCollection>) runParams.get(AbilityKey.Map);
+            for (Card c : Iterables.concat(map.values())) {
+                for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                    sa.setUndoable(false);
+                }
+            }
+        } 
     }
 
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {
