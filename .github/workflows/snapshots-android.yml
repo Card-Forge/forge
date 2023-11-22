@@ -59,6 +59,7 @@ jobs:
           #echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
           #gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
           echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore
+          ls
           cd -
 
       - name: Configure Git User
