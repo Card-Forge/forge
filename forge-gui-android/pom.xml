@@ -276,6 +276,7 @@
                             </sign>
                             <sdk>
                                 <platform>26</platform>
+                                <buildTools>30.0.3</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
