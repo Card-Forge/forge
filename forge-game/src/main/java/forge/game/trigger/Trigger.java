@@ -623,4 +623,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         super.setOverridingAbility(overridingAbility0);
         overridingAbility0.setTrigger(this);
     }
+
+    boolean whileKeywordCheck(final String keyword, final SpellAbility sa) {
+        if (sa == null || sa.getHostCard() == null) return false;
+        if (keyword.equals("Craft")) {
+            return sa.isAbility() && sa.isCraft();
+        } else return sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword);
+    }
 }

@@ -89,11 +89,7 @@ public class TriggerExiled extends Trigger {
             if (currentPayment != null) {
                 sa = currentPayment.getPayment().getAbility();
 
-                if (sa != null && sa.getHostCard() != null) {
-                    if ((sa.isSpell() || sa.isAbility()) && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-                        withKeyword = true;
-                    }
-                }
+                if (whileKeywordCheck(keyword, sa)) withKeyword = true;
             }
 
             if (!withKeyword) {
@@ -102,18 +98,14 @@ public class TriggerExiled extends Trigger {
                 for (IndividualCostPaymentInstance individual : stack) {
                     sa = individual.getPayment().getAbility();
 
-                    if (sa == null || sa.getHostCard() == null)
-                        continue;
-
-                    if ((sa.isSpell() || sa.isAbility()) && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                    if (whileKeywordCheck(keyword, sa))  {
                         withKeyword = true;
                         break;
                     }
                 }
             }
 
-            if (!withKeyword)
-                return false;
+            if (!withKeyword) return false;
         }
 
         return true;

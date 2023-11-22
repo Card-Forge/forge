@@ -77,11 +77,7 @@ public class TriggerSacrificed extends Trigger {
             if (currentPayment != null) {
                 sa = currentPayment.getPayment().getAbility();
 
-                if (sa != null && sa.getHostCard() != null) {
-                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-                        withKeyword = true;
-                    }
-                }
+                if (whileKeywordCheck(keyword, sa)) withKeyword = true;
             }
 
             if (!withKeyword) {
@@ -91,10 +87,7 @@ public class TriggerSacrificed extends Trigger {
                 for (IndividualCostPaymentInstance individual : stack) {
                     sa = individual.getPayment().getAbility();
 
-                    if (sa == null || sa.getHostCard() == null)
-                        continue;
-
-                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                    if (whileKeywordCheck(keyword, sa))  {
                         withKeyword = true;
                         break;
                     }
