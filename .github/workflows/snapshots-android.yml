@@ -56,11 +56,15 @@ jobs:
         run: |
           ls
           cd forge-gui-android
-          #echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
-          #gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
-          echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore
-          ls
+          echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
+          gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          #echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore
           cd -
+
+      - name: Debug Keystore
+        run: |
+          echo "${{ secrets.FORGE_KEYSTORE }}" | base64 -d > keystore.jks
+          keytool -list -v -keystore keystore.jks -storepass "${{ secrets.SIGN_STORE_PASS }}"
 
       - name: Configure Git User
         run: |
@@ -85,6 +89,6 @@ jobs:
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
           export _JAVA_OPTIONS="-Xmx2g"
-          mvn -U -B -X -P android-release-build,android-release-sign install -e -Dsign.keystore=forge.keystore -Dsign.alias=Forge -Dsign.storepass=${{ secrets.SIGN_STORE_PASS }} -Dsign.keypass=${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}  -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=30.0.3 -Dmaven.test.skip=true
+          mvn -U -B -X -P android-release-build,android-release-sign install -e -Dsign.keystore=forge.keystore -Dsign.alias=Forge -Dsign.storepass=${{ secrets.SIGN_STORE_PASS }} -Dsign.keypass=${{ secrets.SIGN_STORE_PASS }}  -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=30.0.3 -Dmaven.test.skip=true
         env:
           GITHUB_TOKEN: ${{ github.token }}
