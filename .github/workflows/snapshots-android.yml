@@ -58,13 +58,7 @@ jobs:
           cd forge-gui-android
           echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
           gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
-          #echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore
           cd -
-
-      - name: Debug Keystore
-        run: |
-          echo "${{ secrets.FORGE_KEYSTORE }}" | base64 -d > keystore.jks
-          keytool -list -v -keystore keystore.jks -storepass "${{ secrets.SIGN_STORE_PASS }}"
 
       - name: Configure Git User
         run: |
