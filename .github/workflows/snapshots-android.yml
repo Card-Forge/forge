@@ -54,8 +54,10 @@ jobs:
         
       - name: Extract Android keystore
         run: |
+          cd forge-gui-android
           echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
           gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          cd -
 
       - name: Configure Git User
         run: |
