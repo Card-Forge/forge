@@ -556,7 +556,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             int oldLife = life;
             // Run applicable replacement effects
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-            repParams.put(AbilityKey.Result, oldLife-toLose);
+            repParams.put(AbilityKey.Amount, toLose);
             repParams.put(AbilityKey.IsDamage, damage);
 
             switch (getGame().getReplacementHandler().run(ReplacementType.LifeReduced, repParams)) {
@@ -565,8 +565,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             case Updated:
                 // check if this is still the affected player
                 if (this.equals(repParams.get(AbilityKey.Affected))) {
-                    int result = (int) repParams.get(AbilityKey.Result);
-                    toLose = oldLife - result;
+                    toLose = (int) repParams.get(AbilityKey.Amount);
                     // there is nothing that changes lifegain into lifeloss this way
                     if (toLose <= 0) {
                         return 0;
