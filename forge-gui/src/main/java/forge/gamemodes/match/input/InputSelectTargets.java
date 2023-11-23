@@ -256,6 +256,22 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
 
+        // If all cards must have equal toughness
+        if (tgt.isEqualToughness()) {
+            final List<Integer> tgtTs = new ArrayList<>();
+            for (final GameObject o : targets) {
+                if (o instanceof Card) {
+                    final Integer cmc = ((Card) o).getCurrentToughness();
+                    tgtTs.add(cmc);
+                }
+            }
+            if (!tgtTs.isEmpty() && !tgtTs.contains(card.getCurrentToughness())) {
+                showMessage(sa.getHostCard() + " - Cannot target this card (must have equal toughness)");
+                return false;
+            }
+
+        }
+
         // If all cards must have different mana values
         if (tgt.isDifferentCMC()) {
             final List<Integer> targetedCMCs = new ArrayList<>();
