@@ -87,19 +87,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
+      - name: Move important file
+        run: |
+          mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
+          mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/
+          ls forge-gui-android/target/upload/
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: forge-gui-android/target/
+          local-dir: forge-gui-android/target/upload
           server-dir: downloads/dailysnapshots/
           state-name: .ftp-deploy-android-sync-state.json
           dry-run: true
-          exclude: |
-            *.jar
-            *.pom
-            *.repositories
-            *.xml
-            *.tar.bz2
