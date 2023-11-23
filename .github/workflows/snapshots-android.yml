@@ -8,6 +8,10 @@ on:
           description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
           required: false
           default: false
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '00 19 * * *'
+          
 
 jobs:
   build:
@@ -89,6 +93,7 @@ jobs:
 
       - name: Move important file
         run: |
+          mkdir -p  forge-gui-android/target/upload
           mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
           mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/
           ls forge-gui-android/target/upload/
