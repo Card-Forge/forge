@@ -749,7 +749,8 @@ public class AbilityUtils {
                 }
                 else if (calcX[0].startsWith("TriggerObjects")) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = Iterables.filter((Iterable<?>) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(14))), Card.class);
+                    list = Iterables.filter((Iterable<?>) root.getTriggeringObjects().getOrDefault(
+                            (AbilityKey.fromString(calcX[0].substring(14))), new CardCollection()), Card.class);
                 }
                 else if (calcX[0].startsWith("Triggered")) {
                     final SpellAbility root = sa.getRootAbility();
