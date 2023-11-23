@@ -737,6 +737,17 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
                 }
+                else if (calcX[0].startsWith("AllTargeted")) {
+                    CardCollection all = new CardCollection();
+                    SpellAbility loopSA = sa.getRootAbility();
+                    while (loopSA != null) {
+                        if (loopSA.usesTargeting()) {
+                            all.addAll(loopSA.findTargetedCards());
+                        }
+                        loopSA = loopSA.getSubAbility();
+                    }
+                    list = all;
+                }
                 else if (calcX[0].startsWith("ParentTargeted")) {
                     SpellAbility parent = sa.getParentTargetingCard();
                     if (parent != null) {
