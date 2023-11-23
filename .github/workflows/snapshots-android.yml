@@ -57,8 +57,12 @@ jobs:
           ls
           cd forge-gui-android
           echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
-          gpg -d -passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          gpg -d --passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
           cd -
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
 
       - name: Configure Git User
         run: |
@@ -75,10 +79,6 @@ jobs:
           cd -
           mvn install -Dmaven.test.skip=true
           mvn dependency:tree
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
           
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
