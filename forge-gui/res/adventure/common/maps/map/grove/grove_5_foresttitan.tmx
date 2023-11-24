@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxL42RgSBvFgwrXskDwQLtjFI8sPJrmRgYeKvEswMXAkDcI3EHruBgq8UGqv7DRpOilNPwImYMsTyge0NXSM13A2MiYnvGIbi+6G7C5b7im61E8ikfxKB7Fo3gUDzwGAPU4Cs4=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJydmA1u00AQhS0hkrUNKedAotdIg3INhIrUUvUY4adwjIaUayABUkvhCg0pKi0NF2CfvE9+noydlJVWdoO9++2bN7Nrsqy7HRdZ9qGo/x6XWbYo698exevnkGVfUr8f//4UryFeB7FvxX4WqnEu43u/Yp/F+5PY5/H+Z1mNM5A5vob6fmrmt2wYC2OQ8yLefyyajGDazauO56bSwWS5yLRJs3O1sWH8URpXGS/lXT63I93T6i6Ncz2Vd5WH9zOzbryHeck5bWHj+hgn65euFtJz9BRjwnkWZX0/ctau7ODcMffKTVbrX699D3W3Wtg5eG/11XXg3zAGY8j7ebkaW+tfaHQemnynoc4rzzvUjWseihb0usZR2Tdpbf4lG2rCTS/L/vSqsdVvQ8c7Noaex9a1eyaeZNT1ke02cr3uZ9mrftNjVjebGzrmzMlJ1jiric2JZ3kVU/oKY5yJbmB7l/qJ5D/vlY3cWsfa8mUsOls/0G/PI9uL2A/y1XhO+k22371uj8wdveblao09zKs9ZCy5wrVy7RgHa1K+0xbNyPa2X3tf80RjceHw2LaXV/Nq7TgPdZ5TQ8aF8ce6LBu4tkPFhjE0hty/1vld16Ce07G07tGnWIPuB9DucfC5UPseFs0Yclxvr6MOnHdhmGZFM6bWyxgT+zRiO0w+oHaMpXKx7aa4aC0mJxtrTlcfJT0Gqa5+C7U3Ne5ay44Mm3LBmxhnVzQflav7qlePvU49kIOoq+AEY1k067HWK8T2fXx+P6/Xxc684ZlIY+bt9d6ZROs1+N7Eua57VV1dpvpvGVVr8oFjmdY2Se8uU+y9M1EXF72OOTXu4PsRKsarXs0JRsZba8GN7BH04FXqyBNexx0sqo/uKaqxehb+gr/B+SQ0GRk/W+/IpfmB/qCousfn7WeIie5Jei7hGNxToC21BCNieNtrxk1r8H5e54eeXbYMnz1/q28QP80vbZZPGY+cGG6LtpMWffEbrmOjWdv8XWdKPftpQ22hHzWGjL/16Y3oyzWN17Bxfj2jst6uO6uXyUP0E2svf1cPqMaaH5vsZ6qh7h9ak5gzel33nWF9avcRnu/ZuvSwPvW+Bf7ne8369G9kfJmvPsc6aM/q+q2h+UNe3RO6zjnHHZru5c1c595j2Twfeud9/d72zoNe0/XYM7bVELlykDff9dgst+41m353sGkt9b6rDo2G5LP/N9Cl6bD0vzvuwqjnOeVTDcFHDzJ+ls/TdNNc34ST5yVt0JB81O8fp85MLw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30" opacity="0.9">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzFWG1O20AQXVUxIHEIt2CIEbSn4BI0bQkEJMRlOARcomrdNknTyPzmT3uNqv3dGZgRwzIzuw5BfdIqjr2zfp5982G3IQ9VL4Ttnn6tD+drGFs0Xol502ietQZjVITwDeYcFHdrSVv8v2PYD2D+aWGv+RnsvsD4BONYmYfP9xbOfzXWn4njIcw7oiHv8a7Q184B2p/AeG/YD+n6ouszPq48zb4rStJGTXsn9VAlbK/WF7tnZeikVeY2pAsc3yObibH+79WH/2tx/LMfwi8Y48hmTr9w6Var8T7Pgg6Oh3HP1ncX/AECf/vd7eLnkdCeRwPe9tLY00r88vFmBhdtT0uRZ3gty7+MvcR1xGsYu8TrRrm+/yJjEcAEuM2Jn6Ux1z76z5qriNcu6PNanO+KYeZ+MjxtIFhzyHsPuJ2v3XFdVIvLBN5e6qyl2OaYtjT4aB3Yz5cZ9c2DvJfl03ZVP++5EeNhw6l9Hryay5Cxxfw8TcTXMAf/oJrPvYMW14iS/MzzsK5vRj2HBdZeF1TCdydOj8Foolw9KNJ2yOtipTs3Xj+375gGv0+K0YbHPuPamqrdy0ZuPExID3WmJhjT9BQXpREnZ+C7N4Ij93Hc46Ziqysq0WtJDJ19jzkiWFdswzH+FD+h7Yj65lR9ifOpxvF/oaR3BcwJhyJnxRxNzT4zP85ByA15zoUWkCPmmtiXOe9mqTrfhd9Bce9DLXdpcWO9t9UL1l3cR+2ZBqTRVF5NaZJ1Mlae0fMlxgnux4cl9PseR9yHac9+5/XQCDvr24D2jKWSly2Os0TP4n2TaMT7XJz7rHeBPtV6zR9a3IwS+mCdaxwbqlO5kH2Idc+xwdPCgOqQ1j/x9wwJL2/x9wurxsQ+5z1P5UL+1mKt+w9jLpJx
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="358.5" y="481.5" width="98.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="48" template="../../obj/treasure.tx" x="218.334" y="132.583"/>
+  <object id="52" template="../../obj/gold.tx" x="339.916" y="143.417"/>
+  <object id="54" template="../../obj/enemy.tx" x="48.9849" y="84.0001">
+   <properties>
+    <property name="enemy" value="High Elf"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="87.834" y="77.166">
+   <properties>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="51.833" y="113">
+   <properties>
+    <property name="enemy" value="Elf"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/waypoint.tx" x="243.103" y="107.726"/>
+  <object id="63" template="../../obj/enemy.tx" x="202.495" y="148.941">
+   <properties>
+    <property name="enemy" value="Forest Giant"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="452" y="422">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/waypoint.tx" x="511" y="30.5"/>
+  <object id="66" template="../../obj/waypoint.tx" x="298" y="218"/>
+  <object id="67" template="../../obj/enemy.tx" x="106.5" y="112.5">
+   <properties>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,82,70"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/waypoint.tx" x="195" y="402"/>
+  <object id="69" template="../../obj/waypoint.tx" x="120.5" y="153.5"/>
+  <object id="70" template="../../obj/waypoint.tx" x="147" y="76.5"/>
+  <object id="71" template="../../obj/booster.tx" x="201" y="131">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/manashards.tx" x="182" y="128"/>
+  <object id="73" template="../../obj/collision.tx" x="-2.5975" y="480" width="644.195" height="16"/>
+  <object id="74" template="../../obj/collision.tx" x="-4.0975" y="-16.5" width="644.195" height="16"/>
+  <object id="75" template="../../obj/collision.tx" x="-17.5" y="-14.0495" width="16" height="514.099"/>
+  <object id="76" template="../../obj/collision.tx" x="638.5" y="-18.5495" width="16" height="514.099"/>
+  <object id="77" template="../../obj/treasure.tx" x="84" y="117"/>
+  <object id="78" template="../../obj/manashards.tx" x="518.5" y="416"/>
+  <object id="79" template="../../obj/manashards.tx" x="6.5" y="280.5"/>
+  <object id="80" template="../../obj/gold.tx" x="498.5" y="163.5"/>
+  <object id="81" template="../../obj/enemy.tx" x="97" y="209.5">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="82,66,65,66"/>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/waypoint.tx" x="22" y="174.5"/>
+  <object id="83" template="../../obj/enemy.tx" x="445.5" y="102">
+   <properties>
+    <property name="enemy" value="Rhino"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

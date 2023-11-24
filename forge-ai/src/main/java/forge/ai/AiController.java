@@ -23,7 +23,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.ChangeZoneAi;
-import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -69,7 +68,10 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -1538,7 +1540,14 @@ public class AiController {
             top = game.getStack().peekAbility();
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
-        final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
+
+        // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
+        boolean mustRespond = false;
+        if (top != null) {
+            mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
+            mustRespond |= top.isTrigger() && top.getTrigger().getKeyword() != null
+                    && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
+        }
 
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
@@ -1613,12 +1622,20 @@ public class AiController {
                     continue;
                 }
             }
-            //living end AI decks
+            // living end AI decks
+            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player)) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                        aiPlayDecision = AiPlayDecision.WillPlay;
+                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                && !player.cantLoseForZeroOrLessLife()
+                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                            aiPlayDecision = AiPlayDecision.CantAfford;
+                        } else {
+                            aiPlayDecision = AiPlayDecision.WillPlay;
+                        }
+                    }
                 } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
                     if (isLifeInDanger) { //needs more tune up for certain conditions
                         aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
@@ -2091,9 +2108,7 @@ public class AiController {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
 
-        if (sa.getApi() == ApiType.Explore) {
-            return ExploreAi.shouldPutInGraveyard(fetchList, decider);
-        } else if (sa.getApi() == ApiType.Learn) {
+        if (sa.getApi() == ApiType.Learn) {
             return LearnAi.chooseCardToLearn(fetchList, decider, sa);
         } else {
             return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);

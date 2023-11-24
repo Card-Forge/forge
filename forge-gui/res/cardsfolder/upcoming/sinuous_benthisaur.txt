@@ -1,0 +1,10 @@
+Name:Sinuous Benthisaur
+ManaCost:5 U
+Types:Creature Dinosaur
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top X cards of your library, where X is the number of Caves you control plus the number of Cave cards in your graveyard. Put two of those cards into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 2 | RestRandomOrder$ True
+SVar:X:Count$ValidBattlefield,Graveyard Cave.YouCtrl
+SVar:NeedsToPlayVar:X GE2
+DeckNeeds:Type$Cave
+Oracle:When Sinuous Benthisaur enters the battlefield, look at the top X cards of your library, where X is the number of Caves you control plus the number of Cave cards in your graveyard. Put two of those cards into your hand and the rest on the bottom of your library in a random order.

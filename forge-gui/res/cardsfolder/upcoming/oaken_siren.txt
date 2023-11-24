@@ -1,0 +1,9 @@
+Name:Oaken Siren
+ManaCost:1 U
+Types:Artifact Creature Siren Pirate
+PT:1/2
+K:Flying
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {U}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.
+DeckNeeds:Type$Artifact
+Oracle:Flying, vigilance\n{T}: Add {U}. Spend this mana only to cast an artifact spell or activate an ability of an artifact source.

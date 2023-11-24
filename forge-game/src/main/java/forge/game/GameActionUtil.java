@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -744,6 +745,7 @@ public final class GameActionUtil {
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setLayer(ReplacementLayer.Other);
         re.setOverridingAbility(sa);
+        re.setActiveZone(EnumSet.of(ZoneType.Command));
 
         eff.addReplacementEffect(re);
 

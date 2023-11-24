@@ -1,0 +1,13 @@
+Name:Bronzebeak Foragers
+ManaCost:3 W
+Types:Creature Dinosaur
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | Duration$ UntilHostLeavesPlay
+A:AB$ ChangeZone | Cost$ X W | Origin$ Exile | Destination$ Graveyard | TgtPrompt$ Select target permanent card exiled with CARDNAME with mana value X | Subability$ TrigLife | ValidTgts$ Permanent.ExiledWithSource+cmcEQX | SpellDescription$ Put target card with mana value X exiled with CARDNAME into its owner's graveyard. You gain X life.
+SVar:TrigLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$xPaid
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When Bronzebeak Foragers enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Bronzebeak Foragers leaves the battlefield.\n{X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner’s graveyard. You gain X life.

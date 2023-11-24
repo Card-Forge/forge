@@ -2,6 +2,6 @@ Name:Call to Serve
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant nonblack creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.nonBlack | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Flying | AddType$ Angel | Description$ Enchanted creature gets +1/+2, has flying, and is an Angel in addition to its other types.
 Oracle:Enchant nonblack creature\nEnchanted creature gets +1/+2, has flying, and is an Angel in addition to its other types.

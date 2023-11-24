@@ -30,6 +30,8 @@ import forge.game.GameActionUtil;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardPlayOption;
 import forge.game.cost.Cost;
@@ -53,6 +55,7 @@ import forge.util.Localizer;
 public class HumanPlaySpellAbility {
     private final PlayerControllerHuman controller;
     private SpellAbility ability;
+    private boolean needX = true;
 
     public HumanPlaySpellAbility(final PlayerControllerHuman controller0, final SpellAbility ability0) {
         controller = controller0;
@@ -63,9 +66,25 @@ public class HumanPlaySpellAbility {
         final Player human = ability.getActivatingPlayer();
         final Game game = human.getGame();
 
-        // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
         if (!skipStack) {
+            // CR 401.5: freeze top library cards until cast/activated so player can't cheat and see the next
             game.setTopLibsCast();
+
+            if (ability.getApi() == ApiType.Charm) {
+                if ("X".equals(ability.getParam("CharmNum"))) {
+                    // CR 601.4
+                    if (!announceValuesLikeX()) {
+                        return false;
+                    }
+                    needX = false;
+                }
+                if (!CharmEffect.makeChoices(ability)) {
+                    // 603.3c If no mode is chosen, the ability is removed from the stack.
+                    return false;
+                }
+            }
+
+            ability = AbilityUtils.addSpliceEffects(ability);
         }
 
         // used to rollback
@@ -191,9 +210,7 @@ public class HumanPlaySpellAbility {
     private boolean announceValuesLikeX() {
         if (ability.isCopied() || ability.isWrapper()) { return true; } //don't re-announce for spell copies
 
-        boolean needX = true;
         final Cost cost = ability.getPayCosts();
-        final PlayerController controller = ability.getActivatingPlayer().getController();
         final Card card = ability.getHostCard();
 
         // Announcing Requirements like Choosing X or Multikicker

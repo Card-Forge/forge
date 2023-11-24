@@ -7,6 +7,6 @@ T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ LoseLife | Cost$ 5 B B Sac<1/CARDNAME> | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select a player | SpellDescription$ Target player loses X life, where X is CARDNAME's power.
 SVar:X:Sacrificed$CardPower
-AI:RemoveDeck:All
 AI:RemoveDeck:Random
+AI:RemoveDeck:All
 Oracle:Defender (This creature can't attack.)\nWhenever you gain life, put a +1/+1 counter on Wall of Limbs.\n{5}{B}{B}, Sacrifice Wall of Limbs: Target player loses X life, where X is Wall of Limbs's power.

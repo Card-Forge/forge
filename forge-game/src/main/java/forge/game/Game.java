@@ -97,6 +97,9 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
     private Multimap<CounterType, Pair<Card, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
 
+    private List<Card> leftBattlefieldThisTurn = Lists.newArrayList();
+    private List<Card> leftGraveyardThisTurn = Lists.newArrayList();
+
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
@@ -237,6 +240,29 @@ public class Game {
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
+    }
+
+    public void addLeftBattlefieldThisTurn(Card lki) {
+        leftBattlefieldThisTurn.add(lki);
+    }
+    public void addLeftGraveyardThisTurn(Card lki) {
+        leftGraveyardThisTurn.add(lki);
+    }
+
+    public List<Card> getLeftBattlefieldThisTurn() {
+        return leftBattlefieldThisTurn;
+    }
+
+    public List<Card> getLeftGraveyardThisTurn() {
+        return leftGraveyardThisTurn;
+    }
+
+    public void clearLeftBattlefieldThisTurn() {
+        leftBattlefieldThisTurn.clear();
+    }
+
+    public void clearLeftGraveyardThisTurn() {
+        leftGraveyardThisTurn.clear();
     }
 
     public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) {
@@ -1082,6 +1108,8 @@ public class Game {
     }
 
     public void onCleanupPhase() {
+        clearLeftBattlefieldThisTurn();
+        clearLeftGraveyardThisTurn();
         clearCounterAddedThisTurn();
         clearCounterRemovedThisTurn();
         clearGlobalDamageHistory();

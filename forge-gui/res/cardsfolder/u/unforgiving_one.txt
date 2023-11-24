@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Spirit
 PT:2/3
 K:Menace
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of modified creatures you control. (Equipment, Auras you control, and counters are modifications.)
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the number of modified creatures you control. (Equipment, Auras you control, and counters are modifications.)
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select target creature card with mana value X or less
 SVar:X:Count$Valid Creature.YouCtrl+modified
 SVar:HasAttackEffect:TRUE

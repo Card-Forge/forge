@@ -1,0 +1,5 @@
+Name:Tectonic Hazard
+ManaCost:R
+Types:Sorcery
+A:SP$ DamageAll | NumDmg$ 1 | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control. | SpellDescription$ CARDNAME deals 1 damage to each opponent and each creature they control.
+Oracle:Tectonic Hazard deals 1 damage to each opponent and each creature they control.

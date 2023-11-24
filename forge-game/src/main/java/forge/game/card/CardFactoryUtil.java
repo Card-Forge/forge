@@ -167,7 +167,7 @@ public class CardFactoryUtil {
             sb.append(" | Mega$ True");
         }
 
-        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its morph cost.)");
+        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its morph cost.)");
 
         final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
 
@@ -192,7 +192,7 @@ public class CardFactoryUtil {
         StringBuilder sb = new StringBuilder();
         sb.append("ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest ").append(costDesc);
         sb.append(" | ManifestUp$ True | Secondary$ True | PresentDefined$ Self | IsPresent$ Card.faceDown+manifested");
-        sb.append(" | Mode$ TurnFace | SpellDescription$ (Turn this face up any time for its mana cost.)");
+        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its mana cost.)");
 
         final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
         manifestUp.setPayCosts(new Cost(manaCost, true));
@@ -236,7 +236,7 @@ public class CardFactoryUtil {
         String ab = "ST$ SetState | Cost$ 0"
                 + " | ConditionDefined$ Self | ConditionPresent$ Card.faceDown+inZoneCommand"
                 + " | HiddenAgenda$ True"
-                + " | Mode$ TurnFace | SpellDescription$ Reveal this Hidden Agenda at any time.";
+                + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
     }
 
@@ -3121,7 +3121,7 @@ public class CardFactoryUtil {
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each creature card in your graveyard.";
+                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
             }
 
             if (card.hasSVar("MonstrosityAILogic")) {

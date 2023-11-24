@@ -48,7 +48,7 @@ public class DialogChoosePoolDistribution {
 
 	private final FTextField numberOfBoostersField = new FTextField.Builder().text("0").maxLength(10).build();
 
-	private final FButton btnOk = new FButton(localizer.getMessage("lblOk"));
+	private final FButton btnOk = new FButton(localizer.getMessage("lblOK"));
 
 	private Runnable callback;
 

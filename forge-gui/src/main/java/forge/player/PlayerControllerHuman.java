@@ -19,8 +19,11 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 
+
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
+import forge.game.trigger.TriggerType;
+
 import forge.trackable.TrackableCollection;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -772,27 +775,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message, Map<String, Object> params) {
-        if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowCardInPrompt")) {
-            // The card wants another thing displayed in the prompt on mouse over rather than itself
-            Card show = null;
-            Object o = null;
-            switch (sa.getParam("ShowCardInPrompt")) {
-                case "RememberedFirst":
-                    o = sa.getHostCard().getFirstRemembered();
-                    if (o instanceof Card) {
-                        show = (Card) o;
-                    }
-                    break;
-                case "RememberedLast":
-                    o = Iterables.getLast(sa.getHostCard().getRemembered(), null);
-                    if (o instanceof Card) {
-                        show = (Card) o;
-                    }
-                    break;
-            }
-            tempShowCard(show);
-            boolean result = InputConfirm.confirm(this, ((Card) sa.getHostCard().getFirstRemembered()).getView(), message);
+    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message,
+                                 List<String> options, Card cardToShow, Map<String, Object> params) {
+        // Another card should be displayed in the prompt on mouse over rather than the SA source
+        if (cardToShow != null) {
+            tempShowCard(cardToShow);
+            boolean result = options.isEmpty() ? InputConfirm.confirm(this, cardToShow.getView(), sa, message)
+                    : InputConfirm.confirm(this, cardToShow.getView(), message, true, options);
             endTempShowCards();
             return result;
         }
@@ -1726,7 +1715,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     cardView = CardView.getCardForUi(iPaperCard);
                 else
                     cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOk")));
+                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOK")));
             } else {
                 getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
             }
@@ -2649,8 +2638,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 inp.setMessage(localizer.getMessage("lblChoosePermanentstoTap"));
                 inp.showAndWait();
                 if (!inp.hasCancelled()) {
+                    CardCollection tapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        c.tap(true, null, null);
+                        if (c.tap(true, null, null)) tapped.add(c);
+                    }
+                    if (!tapped.isEmpty()) {
+                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                        runParams.put(AbilityKey.Cards, tapped);
+                        getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
                     }
                 }
             });
@@ -2672,8 +2667,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 inp.setMessage(localizer.getMessage("lblChoosePermanentstoUntap"));
                 inp.showAndWait();
                 if (!inp.hasCancelled()) {
+                    CardCollection untapped = new CardCollection();
                     for (final Card c : inp.getSelected()) {
-                        c.untap(true);
+                        if (c.untap(true)) untapped.add(c);
+                    }
+                    if (!untapped.isEmpty()) {
+                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                        final Map<Player, CardCollection> map = Maps.newHashMap();
+                        map.put(getPlayer(), untapped);
+                        runParams.put(AbilityKey.Map, map);
+                        getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
                     }
                 }
             });

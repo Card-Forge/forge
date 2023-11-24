@@ -35,6 +35,10 @@ import java.util.Set;
 
 
 public class ComputerUtilCost {
+    private static boolean suppressRecursiveSacCostCheck = false;
+    public static void setSuppressRecursiveSacCostCheck(boolean shouldSuppress) {
+        suppressRecursiveSacCostCheck = shouldSuppress;
+    }
 
     /**
      * Check add m1 m1 counter cost.
@@ -344,6 +348,10 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
+                if (suppressRecursiveSacCostCheck) {
+                    return false;
+                }
+
                 final CostSacrifice sac = (CostSacrifice) part;
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 
@@ -358,11 +366,13 @@ public class ComputerUtilCost {
                     }
                     if (source.isCreature()) {
                         // e.g. Sakura Tribe-Elder
+                        final Combat combat = ai.getGame().getCombat();
                         final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai);
-                        final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility);
-                        final int lifeThreshold = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+                        final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false)
+                                && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
+                        final int lifeThreshold = ai.getController().isAI() ? (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD)) : 4;
                         final boolean aiInDanger = ai.getLife() <= lifeThreshold && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife();
-                        if (creatureInDanger) {
+                        if (creatureInDanger && !ComputerUtilCombat.isDangerousToSacInCombat(ai, source, combat)) {
                             return true;
                         } else if (aiInDanger || !beforeNextTurn) {
                             return false;

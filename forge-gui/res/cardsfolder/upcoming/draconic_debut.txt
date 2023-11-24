@@ -1,10 +1,10 @@
 Name:Draconic Debut
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | TargetMin$ 0 | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals X damage to any target.The next Dragon creature spell you cast costs {X} less to cast.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent
-SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | ValidCard$ Creature.Dragon | Amount$ X | Description$ The next Dragon creature spell you cast costs {X} less to cast.
-SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals X damage to any target. 
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | Duration$ Permanent | SetChosenNumber$ X | SpellDescription$ The next Dragon creature spell you cast costs {X} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | Activator$ You | ValidCard$ Creature.Dragon | Amount$ Count$ChosenNumber | Description$ The next Dragon creature spell you cast costs {X} less to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$xPaid
 DeckNeeds:Type$Dragon

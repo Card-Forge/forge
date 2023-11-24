@@ -1,0 +1,7 @@
+Name:Hermitic Nautilus
+ManaCost:1 U
+Types:Artifact Creature Nautilus
+PT:1/4
+K:Vigilance
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | NumAtt$ +3 | NumDef$ -3 | SpellDescription$ CARDNAME gets +3/-3 until end of turn.
+Oracle:Vigilance\n{1}{U}: Hermitic Nautilus gets +3/-3 until end of turn.

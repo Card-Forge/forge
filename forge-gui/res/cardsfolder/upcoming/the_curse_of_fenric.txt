@@ -1,0 +1,14 @@
+Name:The Curse of Fenric
+ManaCost:2 G W
+Types:Enchantment Saga
+K:Saga:3:DBDestroy,DBAnimate,DBFight
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ For each player, destroy up to one target creature that player controls. For each creature destroyed this way, its controller creates a 3/3 green Mutant creature token with deathtouch.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_mutant_deathtouch | TokenOwner$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Power$ 6 | Toughness$ 6 | RemoveAllAbilities$ True | Types$ Legendary,Creature,Horror | RemoveCreatureTypes$ True | Name$ Fenric | Duration$ Permanent | SpellDescription$ Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.
+SVar:DBFight:DB$ Pump | ValidTgts$ Creature.Mutant | AILogic$ Fight | TgtPrompt$ Select target Mutant | SubAbility$ DBFightBis | SpellDescription$ Target Mutant fights another target creature named Fenric.
+SVar:DBFightBis:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.namedFenric | TgtPrompt$ Select target creature named Fenric 
+SVar:OneEach:PlayerCountPlayers$Amount
+DeckHas:Ability$Token & Type$Mutant|Horror
+DeckHints:Type$Mutant
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each player, destroy up to one target creature that player controls. For each creature destroyed this way, its controller creates a 3/3 green Mutant creature token with deathtouch.\nII — Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.\nIII — Target Mutant fights another target creature named Fenric.

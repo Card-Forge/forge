@@ -674,12 +674,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 this.flipped = true;
             }
             return retResult;
-        } else if (mode.equals("TurnFace")) {
+        } else if (mode.equals("TurnFaceUp")) {
+            if (isFaceDown()) {
+                return turnFaceUp(cause);
+            }
+        } else if (mode.equals("TurnFaceDown")) {
             CardStateName oldState = getCurrentStateName();
             if (oldState == CardStateName.Original || oldState == CardStateName.Flipped) {
                 return turnFaceDown();
-            } else if (isFaceDown()) {
-                return turnFaceUp(cause);
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
@@ -1985,7 +1987,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasNamedCard() ? Iterables.getLast(chosenName) : "";
     }
     public final List<String> getNamedCards() {
-        return chosenName == null ? Lists.newArrayList() : chosenName;
+        return chosenName;
     }
     public final void setNamedCards(final List<String> s) {
         chosenName = s;
@@ -1998,7 +2000,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean hasNamedCard() {
-        return chosenName != null && !chosenName.isEmpty();
+        return !chosenName.isEmpty();
     }
 
     public boolean hasChosenEvenOdd() {
@@ -2535,6 +2537,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (type.hasSubtype("Class")) {
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
+        }
+
+        if (state.getStateName().equals(CardStateName.Transformed) &&
+                state.getView().getOracleText().startsWith("(Transforms")) {
+            sb.append("(").append(Localizer.getInstance().getMessage("lblTransformsFrom",
+                    CardTranslation.getTranslatedName(state.getCard().getState(CardStateName.Original).getName())));
+            sb.append(")").append(linebreak);
         }
 
         // Check if the saga card does not have the keyword Read ahead
@@ -4430,11 +4439,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
-    public final void tap(boolean tapAnimation, SpellAbility cause, Player tapper) {
-        tap(false, tapAnimation, cause, tapper);
+    public final boolean tap(boolean tapAnimation, SpellAbility cause, Player tapper) {
+        return tap(false, tapAnimation, cause, tapper);
     }
-    public final void tap(boolean attacker, boolean tapAnimation, SpellAbility cause, Player tapper) {
-        if (tapped) { return; }
+    public final boolean tap(boolean attacker, boolean tapAnimation, SpellAbility cause, Player tapper) {
+        if (tapped) { return false; }
 
         // Run replacement effects
         getGame().getReplacementHandler().run(ReplacementType.Tap, AbilityKey.mapFromAffected(this));
@@ -4449,14 +4458,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setTapped(true);
         view.updateNeedsTapAnimation(tapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, true));
+        return true;
     }
 
-    public final void untap(boolean untapAnimation) {
-        if (!tapped) { return; }
+    public final boolean untap(boolean untapAnimation) {
+        if (!tapped) { return false; }
 
         // Run Replacement effects
         if (getGame().getReplacementHandler().run(ReplacementType.Untap, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
-            return;
+            return false;
         }
 
         // Run triggers
@@ -4466,6 +4476,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setTapped(false);
         view.updateNeedsUntapAnimation(untapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, false));
+        return true;
     }
 
     public final Table<Long, Long, CardTraitChanges> getChangedCardTraitsByText() {
@@ -4501,6 +4512,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Trigger result = storedTrigger.get(stAb, str);
         if (result == null) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
+            storedTrigger.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final Trigger addTriggerForStaticAbility(final Trigger trig, final StaticAbility stAb) {
+        String str = trig.toString() + trig.getId();
+        Trigger result = storedTrigger.get(stAb, str);
+        if (result == null) {
+            result = trig.copy(this, false);
             storedTrigger.put(stAb, str, result);
         }
         return result;

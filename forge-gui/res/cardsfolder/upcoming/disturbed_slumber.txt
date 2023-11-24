@@ -1,0 +1,6 @@
+Name:Disturbed Slumber
+ManaCost:1 G
+Types:Instant
+A:SP$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Dinosaur | Keywords$ Reach & Haste | HiddenKeywords$ CARDNAME must be blocked if able. | SpellDescription$ Until end of turn, target land you control becomes a 4/4 Dinosaur creature with reach and haste. It's still a land. It must be blocked this turn if able.
+DeckHas:Type$Dinosaur
+Oracle:Until end of turn, target land you control becomes a 4/4 Dinosaur creature with reach and haste. It's still a land. It must be blocked this turn if able.

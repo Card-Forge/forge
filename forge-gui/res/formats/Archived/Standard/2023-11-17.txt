@@ -1,0 +1,7 @@
+[format]
+Name:Standard (LCI)
+Type:Archived
+Subtype:Standard
+Effective:2023-11-17
+Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI
+Banned:Fable of the Mirror-Breaker; Invoke Despair; Reckoner Bankbuster; The Meathook Massacre

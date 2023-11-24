@@ -1,0 +1,10 @@
+Name:Uchbenbak, the Great Mistake
+ManaCost:3 U B
+Types:Legendary Creature Skeleton Horror
+PT:6/4
+K:Vigilance
+K:Menace
+A:AB$ ChangeZone | PrecostDesc$ Descend 8 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | Cost$ 4 U B | Origin$ Graveyard | SorcerySpeed$ True | WithCountersType$ FINALITY | WithCountersAmount$ 1 | Destination$ Battlefield | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield with a finality counter on it. Activate only if there are eight or more permanent cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Mill|Discard|Sacrifice
+Oracle:Vigilance, menace\nDescend 8 — {4}{U}{B}: Return Uchbenbak, the Great Mistake from your graveyard to the battlefield with a finality counter on it. Activate only if there are eight or more permanent cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)

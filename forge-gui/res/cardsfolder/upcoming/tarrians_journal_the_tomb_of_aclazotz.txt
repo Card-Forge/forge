@@ -1,0 +1,26 @@
+Name:Tarrian's Journal
+ManaCost:1 B
+Types:Legendary Artifact
+A:AB$ Draw | Cost$ T Sac<1/Creature.Other;Artifact.Other/another artifact or creature> | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Draw a card. Activate only as a sorcery.
+A:AB$ SetState | Defined$ Self | Mode$ Transform | Cost$ 2 T Discard<1/Hand> | SpellDescription$ Transform CARDNAME.
+DeckHas:Ability$Graveyard|Discard|Sacrifice
+DeckHints:Type$Vampire|Artifact & Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
+Oracle:{T}, Sacrifice another artifact or creature: Draw a card. Activate only as a sorcery.\n{2}, {T}, Discard your hand: Transform Tarrian's Journal.
+
+ALTERNATE
+
+Name:The Tomb of Aclazotz
+ManaCost:no cost
+Types:Legendary Land Cave
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Effect | Cost$ T | StaticAbilities$ StaticPlay | Triggers$ SpellCast | SpellDescription$ You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:StaticPlay:Mode$ Continuous | Affected$ Creature.nonLand+YouOwn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Graveyard | Description$ You may cast a creature spell from your graveyard this turn. 
+SVar:SpellCast:Mode$ SpellCast | Static$ True | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | OneOff$ True | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard | SubAbility$ DBAnimate
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Vampire | Duration$ Permanent
+DeckHas:Ability$Counters
+Oracle:{T}: Add {B}.\n{T}: You may cast a creature spell from your graveyard this turn. If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)

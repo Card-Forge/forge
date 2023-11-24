@@ -1,0 +1,9 @@
+Name:Shipwreck Sentry
+ManaCost:1 U
+Types:Creature Human Pirate
+PT:3/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as an artifact entered the battlefield under your control this turn, CARDNAME can attack as though it didn't have defender.
+SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl
+DeckNeeds:Type$Artifact
+Oracle:Defender\nAs long as an artifact entered the battlefield under your control this turn, Shipwreck Sentry can attack as though it didn't have defender.

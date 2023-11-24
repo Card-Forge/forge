@@ -1,0 +1,12 @@
+Name:Itzquinth, Firstborn of Gishath
+ManaCost:R G
+Types:Legendary Creature Dinosaur
+PT:2/3
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigImmediate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {2}. When you do, target Dinosaur you control deals damage equal to its power to another target creature.
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ 2 | Execute$ TrigPowerDamage | TriggerDescription$ When you do, target Dinosaur you control deals damage equal to its power to another target creature.
+SVar:TrigPowerDamage:DB$ Pump | ValidTgts$ Dinosaur.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target dinosaur you control | SubAbility$ SoulsDamage
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature | AILogic$ PowerDmg | TargetUnique$ True | TgtPrompt$ Select another target creature | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+DeckHints:Type$Dinosaur
+Oracle:Haste\nWhen Itzquinth, Firstborn of Gishath enters the battlefield, you may pay {2}. When you do, target Dinosaur you control deals damage equal to its power to another target creature.

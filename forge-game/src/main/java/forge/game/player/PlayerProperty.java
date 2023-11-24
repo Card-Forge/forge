@@ -79,6 +79,10 @@ public class PlayerProperty {
             if (!player.equals(source.getOwner())) {
                 return false;
             }
+        } else if (property.equals("descended")) {
+            if (!(player.getDescended() > 0)) {
+                return false;
+            }
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
@@ -104,12 +108,13 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
             String v = property.split(" ")[1];
-            boolean found = true;
+            boolean found = false;
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
                     found = true;
+                    break;
                 }
             }
             if (!found) {
@@ -117,12 +122,13 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
             String v = property.split(" ")[1];
-            boolean found = true;
+            boolean found = false;
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             for (final Card card : cards) {
                 if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
                     found = true;
+                    break;
                 }
             }
             if (!found) {

@@ -68,6 +68,9 @@ public class GauntletIO {
         xStream.allowTypeHierarchy(TreeMap.class);
         xStream.allowTypeHierarchy(List.class);
         xStream.allowTypeHierarchy(DeckSection.class);
+        //bypass invalid reference to allow loading earlier saves of xstream
+        xStream.ignoreUnknownElements();
+        xStream.setMode(XStream.NO_REFERENCES);
         xStream.omitField(Deck.class, "unplayableAI");
         // allow any type from the same package
         xStream.allowTypesByWildcard(new String[] {

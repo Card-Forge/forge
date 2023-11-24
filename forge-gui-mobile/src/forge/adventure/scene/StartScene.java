@@ -103,7 +103,7 @@ public class StartScene extends UIScene {
     public boolean Exit() {
         if (exitDialog == null) {
             exitDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblExitForge"),
-                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOK"),
                     Forge.getLocalizer().getMessage("lblAbort"), () -> {
                         Forge.exit(true);
                         removeDialog();

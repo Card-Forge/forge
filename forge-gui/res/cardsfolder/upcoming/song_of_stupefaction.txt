@@ -1,0 +1,12 @@
+Name:Song of Stupefaction
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant creature or Vehicle
+A:SP$ Attach | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target Creature or Vehicle | AITgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, you may mill two cards. (You may put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 2  | Optional$ True
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ -X | Description$ Fathomless descent — Enchanted permanent gets -X/-0, where X is the number of permanent cards in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Graveyard|Mill|Discard
+DeckHas:Ability$Mill
+Oracle:Enchant creature or Vehicle\nWhen Song of Stupefaction enters the battlefield, you may mill two cards. (You may put the top two cards of your library into your graveyard.)\nFathomless descent — Enchanted permanent gets -X/-0, where X is the number of permanent cards in your graveyard.

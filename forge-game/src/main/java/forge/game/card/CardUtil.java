@@ -229,7 +229,9 @@ public final class CardUtil {
         if (in.isTransformed()) {
             newCopy.incrementTransformedTimestamp();
         }
-        newCopy.setState(in.getCurrentStateName(), false, true);
+        if (newCopy.hasAlternateState()) {
+            newCopy.setState(in.getCurrentStateName(), false, true);
+        }
         if (in.isFaceDown()) {
             newCopy.turnFaceDownNoUpdate();
             newCopy.setType(new CardType(in.getFaceDownState().getType()));
@@ -296,7 +298,7 @@ public final class CardUtil {
 
         newCopy.setChosenType(in.getChosenType());
         newCopy.setChosenType2(in.getChosenType2());
-        newCopy.setNamedCards(in.getNamedCards());
+        newCopy.setNamedCards(Lists.newArrayList(in.getNamedCards()));
         newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
         if (in.hasChosenNumber()) {
             newCopy.setChosenNumber(in.getChosenNumber());

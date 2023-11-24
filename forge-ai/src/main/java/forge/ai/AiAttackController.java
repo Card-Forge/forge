@@ -661,11 +661,9 @@ public class AiAttackController {
             if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblockedAttackers.add(attacker);
-            } else {
-                if (predictEvasion) {
-                    List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
-                    accountedBlockers.removeAll(potentialBestBlockers);
-                }
+            } else if (predictEvasion) {
+                List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
+                accountedBlockers.removeAll(potentialBestBlockers);
             }
         }
 

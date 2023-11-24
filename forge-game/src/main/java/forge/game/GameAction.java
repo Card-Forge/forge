@@ -115,6 +115,7 @@ public class GameAction {
 
         boolean toBattlefield = zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged);
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
+        boolean fromGraveyard = zoneFrom != null && zoneFrom.is(ZoneType.Graveyard);
         boolean wasFacedown = c.isFaceDown();
 
         // Rule 111.8: A token that has left the battlefield can't move to another zone
@@ -187,14 +188,22 @@ public class GameAction {
             }
         }
         CardCollectionView lastBattlefield = null;
+        CardCollectionView lastGraveyard = null;
         if (params != null) {
             lastBattlefield = (CardCollectionView) params.get(AbilityKey.LastStateBattlefield);
+            lastGraveyard = (CardCollectionView) params.get(AbilityKey.LastStateGraveyard);
         }
         if (lastBattlefield == null && cause != null) {
             lastBattlefield = cause.getLastStateBattlefield();
         }
+        if (lastGraveyard == null && cause != null) {
+            lastGraveyard = cause.getLastStateGraveyard();
+        }
         if (lastBattlefield == null) {
             lastBattlefield = game.getLastStateBattlefield();
+        }
+        if (lastGraveyard == null) {
+            lastGraveyard = game.getLastStateGraveyard();
         }
 
         if (c.isSplitCard()) {
@@ -240,6 +249,12 @@ public class GameAction {
                 int idx = lastBattlefield.indexOf(c);
                 if (idx != -1) {
                     lastKnownInfo = lastBattlefield.get(idx);
+                }
+            }
+            if (fromGraveyard) {
+                int idx = lastGraveyard.indexOf(c);
+                if (idx != -1) {
+                    lastKnownInfo = lastGraveyard.get(idx);
                 }
             }
 
@@ -549,7 +564,11 @@ public class GameAction {
         if (fromBattlefield) {
             // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
             unattachCardLeavingBattlefield(copied);
+            game.addLeftBattlefieldThisTurn(lastKnownInfo);
             c.runLeavesPlayCommands();
+        }
+        if (fromGraveyard) {
+            game.addLeftGraveyardThisTurn(lastKnownInfo);
         }
 
         // do ETB counters after zone add

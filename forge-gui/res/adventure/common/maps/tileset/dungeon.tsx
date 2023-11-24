@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.1" name="dungeon" tilewidth="16" tileheight="16" tilecount="4480" columns="64">
+<tileset version="1.10" tiledversion="1.10.1" name="Dungeon Tiles (Legacy)" tilewidth="16" tileheight="16" tilecount="4480" columns="64">
  <image source="dungeon.png" width="1024" height="1120"/>
  <tile id="215">
   <objectgroup draworder="index" id="2">

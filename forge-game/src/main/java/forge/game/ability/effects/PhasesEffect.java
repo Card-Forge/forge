@@ -1,7 +1,11 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.Map;
 
+import forge.game.ability.AbilityKey;
+import forge.game.card.CardCollection;
+import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
 import forge.game.Game;
@@ -61,6 +65,8 @@ public class PhasesEffect extends SpellAbilityEffect {
                     Localizer.getInstance().getMessage("lblChooseAnyNumberToPhase"),
                     0, tgtCards.size(), true, null);
         }
+
+        CardCollection phasedOut = new CardCollection();
         if (phaseInOrOut) { // Time and Tide and Oubliette
             for (final Card tgtC : tgtCards) {
                 tgtC.phase(false);
@@ -73,6 +79,7 @@ public class PhasesEffect extends SpellAbilityEffect {
                     }
                     tgtC.setWontPhaseInNormal(false);
                 } else {
+                    phasedOut.add(tgtC);
                     tgtC.setWontPhaseInNormal(wontPhaseInNormal);
                 }
             }
@@ -84,6 +91,7 @@ public class PhasesEffect extends SpellAbilityEffect {
                         if (sa.hasParam("RememberAffected")) {
                             source.addRemembered(tgtC);
                         }
+                        phasedOut.add(tgtC);
                         tgtC.setWontPhaseInNormal(wontPhaseInNormal);
                     }
                 }
@@ -91,6 +99,11 @@ public class PhasesEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("RememberValids")) {
             source.addRemembered(tgtCards);
+        }
+        if (!phasedOut.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, phasedOut);
+            game.getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
         }
     }
 }

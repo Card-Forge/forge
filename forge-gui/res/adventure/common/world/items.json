@@ -308,7 +308,7 @@
     "name": "Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "IronBoots",
-    "cost": 400,
+    "cost": 2000,
     "effect": { 
       "moveSpeed": 1.2
     }
@@ -317,7 +317,7 @@
     "name": "Iron Shield",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 400,
+    "cost": 2000,
     "effect": {
       "lifeModifier": 2
     }
@@ -325,7 +325,7 @@
   {
     "name": "Iron Armor",
     "equipmentSlot": "Body",
-    "cost": 400,
+    "cost": 2000,
     "iconName": "IronArmor",
     "effect": {
       "lifeModifier": 2
@@ -345,7 +345,7 @@
     "name": "Steel Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
-    "cost": 500,
+    "cost": 1500,
     "effect": {
       "lifeModifier": 1,
       "moveSpeed": 1.2
@@ -355,7 +355,7 @@
     "name": "Steel Shield",
     "equipmentSlot": "Right",
     "iconName": "SteelShield",
-    "cost": 500,
+    "cost": 1500,
     "effect": {
       "startBattleWithCard": [
         "w_0_3_wall_defender"
@@ -365,7 +365,7 @@
   {
     "name": "Steel Armor",
     "equipmentSlot": "Body",
-    "cost": 500,
+    "cost": 1500,
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
@@ -454,7 +454,7 @@
     "name": "Mithril Boots",
     "equipmentSlot": "Boots",
     "iconName": "MithrilBoots",
-    "cost": 1500,
+    "cost": 2500,
     "effect": {
       "lifeModifier": 2,
       "moveSpeed": 1.3
@@ -464,7 +464,7 @@
     "name": "Mithril Shield",
     "equipmentSlot": "Right",
     "iconName": "MithrilShield",
-    "cost": 1500,
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "c_0_4_a_wall_defender"
@@ -476,9 +476,20 @@
     "name": "Mithril Armor",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 1500,
+    "cost": 4500,
     "effect": {
       "lifeModifier": 5
+    }
+  },
+  {
+    "name": "Presence of the Hydra",
+    "equipmentSlot": "Left",
+    "iconName": "PresenceoftheHydra",
+    "effect": {
+      "lifeModifier": 2,
+        "startBattleWithCardInCommandZone": [
+          "Presence of the Hydra"
+        ]
     }
   },
   {

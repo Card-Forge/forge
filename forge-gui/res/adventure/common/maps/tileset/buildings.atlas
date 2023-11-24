@@ -570,15 +570,6 @@ SnowAbbey
 Grove 
   xy: 416, 496
   size: 32, 32 
-Grove 
-  xy: 256, 768
-  size: 32, 32 
-Grove 
-  xy: 224, 208
-  size: 32, 16
-Grove 
-  xy: 256, 208
-  size: 32, 16
 WurmPond 
   xy: 224, 400
   size: 32, 32  

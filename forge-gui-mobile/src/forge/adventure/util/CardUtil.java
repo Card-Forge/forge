@@ -755,6 +755,11 @@ public class CardUtil {
         List<PaperCard> validCards = Arrays.asList(Iterables.toArray(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
                 input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)), PaperCard.class));
 
+        if (validCards.isEmpty()) {
+            System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");
+            return getCardByName(cardName);
+        }
+
         return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
 

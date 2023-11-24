@@ -1,0 +1,7 @@
+Name:Mutant Token
+ManaCost:no cost
+Types:Creature Mutant
+Colors:green
+PT:3/3
+K:Deathtouch
+Oracle:Deathtouch

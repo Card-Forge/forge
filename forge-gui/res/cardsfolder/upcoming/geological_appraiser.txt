@@ -1,0 +1,7 @@
+Name:Geological Appraiser
+ManaCost:2 R R
+Types:Creature Human Artificer
+PT:3/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigDiscover | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:DB$ Discover | Num$ 3
+Oracle:When Geological Appraiser enters the battlefield, if you cast it, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

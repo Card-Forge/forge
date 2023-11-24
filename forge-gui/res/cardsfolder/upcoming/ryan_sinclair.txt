@@ -1,0 +1,14 @@
+Name:Ryan Sinclair
+ManaCost:2 R
+Types:Legendary Creature Human
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBDigUntil | TriggerDescription$ Whenever NICKNAME attacks, exile cards from the top of your library until you exile a nonland card. You may cast the exiled card without paying its mana cost if it's a spell with mana value less than or equal to NICKNAME's power. Put the exiled cards not cast this way on the bottom of your library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Defined$ You | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | ImprintFound$ True | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Imprinted | ValidSA$ Spell.cmcLEX | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$CardPower
+K:Doctor's companion
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Counters
+Oracle:Whenever Ryan attacks, exile cards from the top of your library until you exile a nonland card. You may cast the exiled card without paying its mana cost if it's a spell with mana value less than or equal to Ryan's power. Put the exiled cards not cast this way on the bottom of your library in a random order.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

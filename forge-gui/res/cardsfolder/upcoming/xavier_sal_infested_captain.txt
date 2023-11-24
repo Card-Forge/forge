@@ -1,0 +1,9 @@
+Name:Xavier Sal, Infested Captain
+ManaCost:B G U
+Types:Legendary Creature Human Fungus Pirate
+PT:3/3
+A:AB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | Cost$ T RemoveAnyCounter<1/Any/Permanent.YouCtrl+Other/another permanent you control> | SorcerySpeed$ True | SpellDescription$ Populate. Activate only as a sorcery. (Create a token that's a copy of a creature token you control.)
+A:AB$ Proliferate | Cost$ T Sac<1/Creature.Other/other creature> | SorcerySpeed$ True | SpellDescription$ Proliferate. Activate only as a sorcery. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Token|Counters|Sacrifice
+DeckHints:Ability$Counters|Token
+Oracle:{T}, Remove a counter from another permanent you control: Populate. Activate only as a sorcery. (Create a token that's a copy of a creature token you control.)\n{T}, Sacrifice another creature: Proliferate. Activate only as a sorcery. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

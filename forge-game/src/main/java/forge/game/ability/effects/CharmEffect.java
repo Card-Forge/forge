@@ -59,7 +59,9 @@ public class CharmEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
-        final int num;
+        String numParam = sa.getParamOrDefault("CharmNum", "1");
+        boolean isX = numParam.equals("X") && "Count$xPaid".equals(sa.getSVar("X"));
+        int num = 0;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
         // hotfix for complex cards when using getCardForUi
@@ -71,7 +73,9 @@ public class CharmEffect extends SpellAbilityEffect {
             if (sa.getActivatingPlayer() == null) {
                 sa.setActivatingPlayer(source.getController(), true);
             }
-            num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), list.size());
+            if (!isX) {
+                num = Math.min(AbilityUtils.calculateAmount(source, numParam, sa), list.size());
+            }
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
@@ -85,7 +89,9 @@ public class CharmEffect extends SpellAbilityEffect {
         sb.append(sa.getCostDescription());
         sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
-        if (num == min || num == Integer.MAX_VALUE) {
+        if (isX) {
+            sb.append("X");
+        } else if (num == min || num == Integer.MAX_VALUE) {
             sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
         } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
             sb.append("any number ");
@@ -188,14 +194,17 @@ public class CharmEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
 
+        boolean canRepeat = sa.hasParam("CanRepeatModes");
         int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
         // if the amount of choices is smaller than min then they can't be chosen
-        if (min > choices.size()) {
-            return false;
+        if (!canRepeat) {
+            if (min > choices.size()) {
+                return false;
+            }
+            num = Math.min(num, choices.size());
         }
-        num = Math.min(num, choices.size());
 
         boolean isOptional = sa.hasParam("Optional");
         if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())), null)) {
@@ -219,7 +228,7 @@ public class CharmEffect extends SpellAbilityEffect {
             source.setChosenPlayer(chooser);
         }
 
-        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, sa.hasParam("CanRepeatModes"));
+        List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, canRepeat);
         chainAbilities(sa, chosen);
 
         // trigger without chosen modes are removed from stack

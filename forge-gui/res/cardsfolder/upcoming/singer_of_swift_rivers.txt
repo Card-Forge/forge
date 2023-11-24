@@ -1,0 +1,11 @@
+Name:Singer of Swift Rivers
+ManaCost:1 G U
+Types:Creature Merfolk Shaman
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a shield counter on another target creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ SHIELD
+S:Mode$ CastWithFlash | ValidCard$ Merfolk | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast Merfolk spells as though they had flash.
+DeckHas:Ability$Counters
+DeckHints:Type$Merfolk
+Oracle:Flash\nWhen Singer of Swift Rivers enters the battlefield, put a shield counter on another target creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nYou may cast Merfolk spells as though they had flash.

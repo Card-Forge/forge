@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.AiController;
@@ -165,8 +167,10 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean canCastAtOppTurn = true;
         for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
-                if ("CantBeCast".equals(s.getParam("Mode")) && "True".equals(s.getParam("NonCasterTurn"))) {
+                if ("CantBeCast".equals(s.getParam("Mode")) && StringUtils.contains(s.getParam("Activator"), "NonActive")
+                        && (!s.getParam("Activator").startsWith("You") || c.getController().equals(ai))) {
                     canCastAtOppTurn = false;
+                    break;
                 }
             }
         }

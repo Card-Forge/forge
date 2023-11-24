@@ -338,11 +338,6 @@ public class StaticAbilityCantAttackBlock {
                 applyMinMaxBlockerAbility(stAb, attacker, defender, result);
             }
         }
-        if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
-            if (defender != null) {
-                result.setLeft(defender.getCreaturesInPlay().size());
-            }
-        }
         return result;
     }
 
@@ -353,7 +348,13 @@ public class StaticAbilityCantAttackBlock {
         }
 
         if (stAb.hasParam("Min")) {
-            result.setLeft(AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("Min"), stAb));
+            if ("All".equals(stAb.getParam("Min"))) {
+                if (defender != null) {
+                    result.setLeft(defender.getCreaturesInPlay().size());
+                }
+            } else {
+                result.setLeft(AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("Min"), stAb));
+            }
         }
 
         if (stAb.hasParam("Max")) {

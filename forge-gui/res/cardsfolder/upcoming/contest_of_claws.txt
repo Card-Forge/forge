@@ -1,0 +1,8 @@
+Name:Contest of Claws
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | AILogic$ PowerDmg | StackDescription$ {c:ThisTargetedCard} | SpellDescription$ Target creature you control
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget | ExcessSVar$ Excess | SubAbility$ DBDiscover | StackDescription$ REP another target creature_{c:ThisTargetedCard} | SpellDescription$ deals damage equal to its power to another target creature.
+SVar:DBDiscover:DB$ Discover | Num$ Excess | StackDescription$ SpellDescription | SpellDescription$ If excess damage was dealt this way, discover X, where X is that excess damage. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:X:ParentTargeted$CardPower
+Oracle:Target creature you control deals damage equal to its power to another target creature. If excess damage was dealt this way, discover X, where X is that excess damage. (Exile cards from the top of your library until you exile a nonland card with that mana value or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
