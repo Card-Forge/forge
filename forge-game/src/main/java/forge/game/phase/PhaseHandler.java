@@ -17,43 +17,22 @@
  */
 package forge.game.phase;
 
-import java.util.*;
-
-import com.google.common.collect.*;
-import org.apache.commons.lang3.time.StopWatch;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCombatChanged;
-import forge.game.event.GameEventCombatEnded;
-import forge.game.event.GameEventGameRestarted;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventPlayerStatsChanged;
-import forge.game.event.GameEventTokenStateUpdate;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnEnded;
-import forge.game.event.GameEventTurnPhase;
+import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -64,9 +43,14 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
+import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.util.*;
 
 
 /**
@@ -298,6 +282,9 @@ public class PhaseHandler implements java.io.Serializable {
                     {
                         if (playerTurn.isArchenemy()) {
                             playerTurn.setSchemeInMotion();
+                        }
+                        if (playerTurn.hasRadiationEffect()) {
+                            handleRadiation();
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
@@ -538,6 +525,36 @@ public class PhaseHandler implements java.io.Serializable {
                 game.fireEvent(new GameEventTurnEnded());
                 break;
             default: // no action
+        }
+    }
+
+    private void handleRadiation() {
+        int numRad = playerTurn.getCounters(CounterEnumType.RAD);
+        if (numRad == 0) playerTurn.removeRadiationEffect();
+        else {
+            final CardZoneTable table = new CardZoneTable();
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+            moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+            final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
+            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa,
+                    table, moveParams);
+            game.getAction().reveal(milled, playerTurn, false,
+                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn));
+            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
+                    Lang.joinHomogenous(milled) + ".");
+            table.triggerChangesZoneAll(game, sa);
+            int n = CardLists.filter(milled, Predicates.not(CardPredicates.Presets.LANDS)).size();
+            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            final int lost = playerTurn.loseLife(n, false, false);
+            if (lost > 0) {
+                lossMap.put(playerTurn, lost);
+            }
+            if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+            }
+            playerTurn.removeRadCounters(n, playerTurn.getRadiationEffect());
         }
     }
 
