@@ -1,4 +1,4 @@
-name: Publish Forge
+name: Publish Desktop Forge
 
 on:
   workflow_dispatch:
