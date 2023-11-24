@@ -11,6 +11,7 @@ A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | Activatio
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Sacrifice|Mill
+AI:RemoveDeck:All
 Oracle:When Altar of the Wretched enters the battlefield, you may sacrifice a nontoken creature. If you do, draw X cards, then mill X cards, where X is that creature's power.\nCraft with one or more creatures {2}{B}{B}\n{2}{B}: Return Altar of the Wretched from your graveyard to your hand.
 
 ALTERNATE
