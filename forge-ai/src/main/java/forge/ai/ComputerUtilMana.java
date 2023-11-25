@@ -1093,7 +1093,7 @@ public class ComputerUtilMana {
 
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost) {
         // mind the priorities
-        // * Pay mono-colored first,curPhase == PhaseType.CLEANUP
+        // * Pay mono-colored first
         // * Pay 2/C with matching colors
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
