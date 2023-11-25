@@ -325,6 +325,7 @@ Shrine
 Shard
 [ArtifactTypes]
 Blood
+Bobblehead:Bobbleheads
 Clue:Clues
 Contraption
 Equipment
@@ -332,6 +333,7 @@ Food
 Fortification
 Gold
 Incubator:Incubators
+Junk
 Key:Keys
 Map
 Powerstone
