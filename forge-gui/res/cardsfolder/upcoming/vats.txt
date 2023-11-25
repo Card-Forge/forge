@@ -1,0 +1,6 @@
+Name:V.A.T.S.
+ManaCost:2 B B
+Types:Instant
+K:Split second
+A:SP$ Destroy | TargetMin$ 0 | TargetMax$ Count$Valid Creature | ValidTgts$ Creature | TgtPrompt$ Choose any number of target creatures with equal toughness | TargetsWithEqualToughness$ True | SpellDescription$ Choose any number of target creatures with equal toughness. Destroy the chosen creatures.
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nChoose any number of target creatures with equal toughness. Destroy the chosen creatures.
