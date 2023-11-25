@@ -1,0 +1,9 @@
+Name:Dauntless Dismantler
+ManaCost:1 W
+Types:Creature Human Artificer
+PT:1/4
+R:Event$ Moved | ValidCard$ Artifact.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Artifacts your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
+A:AB$ DestroyAll | Cost$ X X W Sac<1/CARDNAME> | ValidCards$ Artifact.cmcEQX | SpellDescription$ Destroy each artifact with mana value X.
+SVar:X:Count$xPaid
+Oracle:Artifacts your opponents control enter the battlefield tapped.\n{X}{X}{W}, Sacrifice Dauntless Dismantler: Destroy each artifact with mana value X.
