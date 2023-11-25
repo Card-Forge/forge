@@ -1,0 +1,11 @@
+Name:Wayta, Trainer Prodigy
+ManaCost:R G W
+Types:Legendary Creature Human Warrior
+PT:1/5
+K:Haste
+A:AB$ Pump | Cost$ 2 G T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | ReduceCost$ X | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select another target creature
+SVar:X:Count$Compare Y EQ2.2.0
+SVar:Y:AllTargeted$Valid Creature.YouCtrl
+S:Mode$ Panharmonicon | ValidMode$ DamageDoneOnce,DamageDone | ValidTarget$ Creature.YouCtrl | ValidCard$ Permanent.YouCtrl | Description$ If a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Haste\n{2}{G}, {T}: Target creature you control fights another target creature. This ability costs {2} less to activate if it targets two creatures you control.\nIf a creature you control being dealt damage causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
