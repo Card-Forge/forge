@@ -54,7 +54,7 @@ public class GoadEffect extends SpellAbilityEffect {
                     }
                 };
 
-                addUntilCommand(sa, until);
+                addUntilCommand(sa, until, duration, player);
             }
 
             if (remember && tgtC.isGoaded()) {

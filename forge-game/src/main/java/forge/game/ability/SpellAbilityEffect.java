@@ -794,9 +794,11 @@ public abstract class SpellAbilityEffect {
         addUntilCommand(sa, until, sa.getActivatingPlayer());
     }
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until, Player controller) {
+        addUntilCommand(sa, until, sa.getParam("Duration"), controller);
+    }
+    protected static void addUntilCommand(final SpellAbility sa, GameCommand until, String duration, Player controller) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final String duration = sa.getParam("Duration");
         // in case host was LKI or still resolving
         if (host.isLKI() || host.getZone() == null || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);

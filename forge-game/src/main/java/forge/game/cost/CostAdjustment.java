@@ -281,6 +281,8 @@ public class CostAdjustment {
     // GetSpellCostChange
 
     private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
+        sa.clearTappedForConvoke();
+
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.Presets.UNTAPPED);

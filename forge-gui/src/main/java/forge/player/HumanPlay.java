@@ -552,9 +552,6 @@ public class HumanPlay {
                 runParams.put(AbilityKey.Cards, tapped);
                 game.getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
             }
-            if (manaInputCancelled) {
-                ability.clearTappedForConvoke();
-            }
         }
         if (!table.isEmpty() && !manaInputCancelled) {
             table.triggerChangesZoneAll(game, ability);
