@@ -63,17 +63,15 @@ public class DiscoverEffect extends SpellAbilityEffect {
                 exiled.add(c);
                 if (!c.isLand() && c.getCMC() <= num) {
                     found = c;
-                    if (sa.hasParam("RememberDiscovered"))
+                    if (sa.hasParam("RememberDiscovered")) {
                         host.addRemembered(c);
+                    }
                     break;
-                } else {
-                    rest.add(c);
                 }
+                rest.add(c);
             }
 
-            if (exiled.size() > 0) {
-                game.getAction().reveal(exiled, p, false);
-            }
+            game.getAction().reveal(exiled, p, false);
 
             changeZone(exiled, ZoneType.Exile, game, sa);
 

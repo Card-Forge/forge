@@ -245,8 +245,9 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameEntity> getEntities(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        String[] def = sa.getParamOrDefault(definedParam, "Self").split(" & ");
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetEntities())
-                : AbilityUtils.getDefinedEntities(sa.getHostCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedEntities(sa.getHostCard(), def, sa);
     }
 
     // Targets of unspecified type
