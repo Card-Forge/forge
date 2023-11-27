@@ -6,6 +6,6 @@ R:Event$ Moved | ValidCard$ Artifact.OppCtrl | Destination$ Battlefield | Replac
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 A:AB$ DestroyAll | Cost$ X X W Sac<1/CARDNAME> | ValidCards$ Artifact.cmcEQX | StackDescription$ SpellDescription | SpellDescription$ Destroy each artifact with mana value X.
 SVar:X:Count$xPaid
-Oracle:Artifacts your opponents control enter the battlefield tapped.\n{X}{X}{W}, Sacrifice Dauntless Dismantler: Destroy each artifact with mana value X.
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
+Oracle:Artifacts your opponents control enter the battlefield tapped.\n{X}{X}{W}, Sacrifice Dauntless Dismantler: Destroy each artifact with mana value X.
