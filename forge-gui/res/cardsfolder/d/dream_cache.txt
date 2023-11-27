@@ -1,6 +1,6 @@
 Name:Dream Cache
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ ChangeZoneDB | SpellDescription$ Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
-SVar:ChangeZoneDB:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the cards on the top of your library (and not on the bottom)?
+A:SP$ Draw | NumCards$ 3 | SubAbility$ ChangeZoneDB | StackDescription$ SpellDescription | SpellDescription$ Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
+SVar:ChangeZoneDB:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ None
 Oracle:Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.

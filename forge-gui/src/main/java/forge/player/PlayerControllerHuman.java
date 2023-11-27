@@ -784,7 +784,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         // The general case: display the source of the SA in the prompt on mouse over
-        return InputConfirm.confirm(this, sa, message);
+        return options.isEmpty() ? InputConfirm.confirm(this, sa, message) :
+                InputConfirm.confirm(this, sa.getHostCard().getView(), sa, message, true, options);
     }
 
     @Override
