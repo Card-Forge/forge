@@ -19,12 +19,10 @@ package forge.game.mana;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -493,7 +491,7 @@ public class ManaCostBeingPaid {
     }
 
     public ManaCostShard getShardToPayByPriority(Iterable<ManaCostShard> payableShards, byte possibleUses) {
-        Set<ManaCostShard> choice = EnumSet.noneOf(ManaCostShard.class);
+        List<ManaCostShard> choice = Lists.newArrayList();
         int priority = Integer.MIN_VALUE;
         for (ManaCostShard toPay : payableShards) {
             // if m is a better to pay than choice
