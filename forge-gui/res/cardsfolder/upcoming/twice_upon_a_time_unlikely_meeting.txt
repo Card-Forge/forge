@@ -1,9 +1,10 @@
 Name:Twice Upon a Time
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBChange | IsPresent$ Doctor.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Take an extra turn after this one.
+A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBChange | IsPresent$ Doctor.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Cast this spell only if you control two or more Doctors.,,,,,,Take an extra turn after this one.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
 AlternateMode:Adventure
+DeckNeeds:Type$Doctor
 Oracle:Cast this spell only if you control two or more Doctors.\nTake an extra turn after this one. Exile Twice Upon a Time.
 
 ALTERNATE
