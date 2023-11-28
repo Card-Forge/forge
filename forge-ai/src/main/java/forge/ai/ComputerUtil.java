@@ -516,7 +516,7 @@ public class ComputerUtil {
                 }
             }
 
-            if (ComputerUtilCost.isFreeCastAllowedByPermanent(ai, "Discard")) {
+            if (activate != null && ComputerUtilCost.isFreeCastAllowedByPermanent(ai, "Discard")) {
                 // Dream Halls allows to discard 1 worthless card to cast 1 expensive for free
                 // Do it even if nothing marked for discard in hand, if it's worth doing!
                 int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
