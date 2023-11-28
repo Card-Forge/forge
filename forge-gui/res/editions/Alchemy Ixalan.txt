@@ -1,0 +1,9 @@
+[metadata]
+Code=YLCI
+Date=2023-12-05
+Name=Alchemy: Ixalan
+Type=Online
+ScryfallCode=YLCI
+
+[cards]
+0 R Kamachal, Ship's Mascot @Steve Prescott
