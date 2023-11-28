@@ -63,7 +63,7 @@ K:Flying
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying
-DeckHas:Ability$Tokens & Type$Soldier
+DeckHas:Ability$Token & Type$Soldier
 Oracle:Flying\nWhenever you attack with one or more other creatures with flying, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
 
 SPECIALIZE:GREEN
