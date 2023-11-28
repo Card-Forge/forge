@@ -345,7 +345,7 @@
     "name": "Steel Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
-    "cost": 1500,
+    "cost": 4500,
     "effect": {
       "lifeModifier": 1,
       "moveSpeed": 1.2
@@ -355,7 +355,7 @@
     "name": "Steel Shield",
     "equipmentSlot": "Right",
     "iconName": "SteelShield",
-    "cost": 1500,
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "w_0_3_wall_defender"
@@ -365,7 +365,7 @@
   {
     "name": "Steel Armor",
     "equipmentSlot": "Body",
-    "cost": 1500,
+    "cost": 4500,
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3

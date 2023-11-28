@@ -81,7 +81,7 @@
   <object id="66" template="../../obj/waypoint.tx" x="230.861" y="385.433"/>
   <object id="67" template="../../obj/waypoint.tx" x="186.459" y="239.84"/>
   <object id="69" template="../../obj/waypoint.tx" x="9.232" y="239.443"/>
-  <object id="70" template="../../obj/gold.tx" x="256.871" y="209.134"/>
+  <object id="70" template="../../obj/gold.tx" x="573.269" y="163.455"/>
   <object id="72" template="../../obj/waypoint.tx" x="391.474" y="276.933"/>
   <object id="73" template="../../obj/waypoint.tx" x="357.418" y="162.665"/>
   <object id="74" template="../../obj/waypoint.tx" x="255.191" y="267.979"/>
