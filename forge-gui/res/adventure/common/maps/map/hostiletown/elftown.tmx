@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="76">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="25">
   <data encoding="base64" compression="zlib">
-   eJytVltSwzAMzId9jvBIaTkStLSBwClpktLS5lpYw+54MYUkEM1o8rIjabWSnGVZNndZtgh6EfQq6FvQXdBT0EOi10FnUO6ZYV+D7wuovXsNuvGf67j+Pjyb1NhzgE1bZ99sz8p/6jP00cd3dr/DvgZ+NuKjPd/5GMtWvhfiK33juif49Zsc8X/1cSs+NEksfL/HmvRb6/ptmpSwQ/wNyzWwIRYW8xrP9IUYd/CBeHQD7ZpUkgP6sHAxVzvYtmfiXCNe2m1xfe+xWwhPbmVtCR+Itf1nmcR6QG4P+F7DV/OrD+el8OocNsTAOJLDDuujkXviQB4OzW/l+/lH7tHem/Btm9z34TxGaqkr5lT5toLvNd7dTmR7LzXdAMstnjVHFXx4GVC/Q4S19gp7rYs5HZrPv8pRelcruR5Tr3+RykcOte5n/tqsuJnYl73Yog93Ps6WGXrdVPk1yZOckuOcfTrvLieMd+9iz+zO9GedZYYBbc/d+LrK4XuBWMmrzsUZaH2ikt7OWrtGDzbcH/zv9nMXZxLn0kb6oMX7jPydJN655Ja22b+I+1L6Yp5wj1iyVm1dKTNZuatxsXfrvNR5kvbOMuFeBUyWZziZvmMudUaQ38wJz0rvbrr6oi2eVXYunlkU6xViSWP8j13OY4vnKL2LffphhJ0CHLlw388EKjwXnATbDtxnDRUjaqgWvHi+sbzkyT8YE3sGeai8LeV+3tNPjlJ7FoPl6MV//YfJB5kF5CE=
+   eJy1Vu1SwkAM7I+75yhqEXwkBAGtPqW0Rb76Wl6G3bn1RFoRM5Pp190l2WySZlmWjVyWjYMOgt4G/Qi6DnoIuk30LugQyj1D7KvxfQy1d+9BF/64jusfw7NJhT1b2LR19s32zPxRX6HPPr6z+zX21fCzFh/teeJjLCv5Xoiv9I3rXuDXOdnjfPVxJT7USSx8v8Ga9Fvjum2aLGGH+BuWc2BDLCzmOZ7pCzFu4QPxaHvaNSklB/Rh7GKu1rBtz8S5Qry02+C667BbCE8eZO0SPhBrO2eaxLpFbrf4XsFX86sL56nw6hQ2xMA4ksMO66OWe+KgPLzvgXXpu/lH7tHeh/BtldwffojjEqmkrniu8m0G35mjtx511Ec2UtM1OLTC87ViOyWstXfYa1zMad96vVT20rsayfV/xmtS+sihRvKdxmuzog+ffyMbsUUfJj7OliF63bV4ZZInOSXHOft03t1cMd6Niz2zPdGfdZYZBrQ9Svph3xhtf4FYyavWxRlofbKU3s5au0MPNtyf/Hn7uYsziXNpIX3Q4mVfOEi8I8ktbbN/Efep9MU84R6xZK2yB3EmK3c1LvZunZc6T9IZtUy4VwKT6QlOpu+YS50R5Ddzwn+lnbtefdEW/1XWLv6zKNYzxJLG+Be7nMcWz156V+mjvb5SgCMD9/2fQIUz7yDYtuA+a6j4RQ1Vghf/bywveXIGY2LPIA+Vt0u5H3X0k73UnsVgOXrzX88w+QQOxeNs
   </data>
  </layer>
  <layer id="5" name="Rooftops" width="30" height="25">
