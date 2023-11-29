@@ -27,11 +27,13 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -624,10 +626,33 @@ public abstract class Trigger extends TriggerReplacementBase {
         overridingAbility0.setTrigger(this);
     }
 
-    boolean whileKeywordCheck(final String keyword, final SpellAbility sa) {
-        if (sa == null || sa.getHostCard() == null) return false;
-        if (keyword.equals("Craft")) {
-            return sa.isAbility() && sa.isCraft();
-        } else return sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword);
+    boolean whileKeywordCheck(final String keyword, final Map<AbilityKey, Object> runParams) {
+        SpellAbility sa;
+
+        IndividualCostPaymentInstance currentPayment =
+                (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+        if (currentPayment != null) {
+            sa = currentPayment.getPayment().getAbility();
+            if (sa != null) {
+                if (whileKeywordSACheck(keyword, sa)) return true;
+            }
+        }
+
+        CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
+        for (IndividualCostPaymentInstance individual : stack) {
+                sa = individual.getPayment().getAbility();
+                if (whileKeywordSACheck(keyword, sa)) return true;
+        }
+
+        return false;
     }
+
+    private boolean whileKeywordSACheck(final String keyword, final SpellAbility sa) {
+        if (sa == null || sa.getHostCard() == null) return false;
+        if (sa.isAbility()) {
+            if (keyword.equals("Craft") && sa.isCraft()) return true;
+        }
+        return sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword);
+    }
+
 }

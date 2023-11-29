@@ -19,8 +19,6 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import forge.game.cost.IndividualCostPaymentInstance;
-import forge.game.zone.CostPaymentStack;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.game.ability.AbilityKey;
@@ -79,33 +77,8 @@ public class TriggerExiled extends Trigger {
             return false;
         }
 
-        if (hasParam("WhileKeyword")) {
-            final String keyword = getParam("WhileKeyword");
-            boolean withKeyword = false;
-
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-
-            SpellAbility sa;
-            if (currentPayment != null) {
-                sa = currentPayment.getPayment().getAbility();
-
-                if (whileKeywordCheck(keyword, sa)) withKeyword = true;
-            }
-
-            if (!withKeyword) {
-                CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
-
-                for (IndividualCostPaymentInstance individual : stack) {
-                    sa = individual.getPayment().getAbility();
-
-                    if (whileKeywordCheck(keyword, sa))  {
-                        withKeyword = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!withKeyword) return false;
+        if (hasParam("WhileKeyword") && !whileKeywordCheck(getParam("WhileKeyword"), runParams)) {
+            return false;
         }
 
         return true;
@@ -119,9 +92,7 @@ public class TriggerExiled extends Trigger {
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblExiled")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblExiled") + ": " + sa.getTriggeringObject(AbilityKey.Card);
     }
 
 }
