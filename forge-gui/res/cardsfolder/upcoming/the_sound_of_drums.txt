@@ -1,0 +1,11 @@
+Name:The Sound of Drums
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | Goad$ True | Description$ Enchanted creature is goaded.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.EnchantedBy | ValidTarget$ Permanent,Player | CombatDamage$ True | ReplaceWith$ DmgTwice | Description$ If enchanted creature would deal combat damage to a permanent or player, it deals double that damage instead.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Twice
+A:AB$ ChangeZone | Cost$ 2 R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature\nEnchanted creature is goaded.\nIf enchanted creature would deal combat damage to a permanent or player, it deals double that damage instead.\n{2}{R}: Return The Sound of Drums from your graveyard to your hand.
