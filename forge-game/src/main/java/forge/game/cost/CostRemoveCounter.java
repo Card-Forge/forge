@@ -28,6 +28,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 /**
  * The Class CostRemoveCounter.
@@ -113,8 +114,7 @@ public class CostRemoveCounter extends CostPart {
             } else if (this.getAmount().equals("All")) {
                 sb.append("all ").append(this.counter.getName().toLowerCase()).append(" counters");
             } else {
-                final Integer i = this.convertAmount();
-                sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(),
+                sb.append(Lang.nounWithNumeralExceptOne(this.getAmount(),
                         this.counter.getName().toLowerCase() + " counter"));
             }
 
