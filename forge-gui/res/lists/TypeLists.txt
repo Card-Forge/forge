@@ -457,6 +457,7 @@ Ixalan
 Kaladesh
 Kaldheim
 Kamigawa
+Kandoka
 Karsus
 Kephalai
 Kinshala
@@ -470,6 +471,7 @@ Mercadia
 Mirrodin
 Moag
 Mongseng
+Moon
 Muraganda
 Necros
 New Earth
