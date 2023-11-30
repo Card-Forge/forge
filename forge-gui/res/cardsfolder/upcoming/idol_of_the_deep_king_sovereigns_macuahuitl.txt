@@ -4,7 +4,7 @@ Types:Artifact
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
-K:Craft:2 R ExileCtrlOrGrave<1/Artifact>
+K:Craft:2 R ExileCtrlOrGrave<1/Artifact.Other>
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard

@@ -3,7 +3,7 @@ ManaCost:3 W U
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 white and blue Golem artifact creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ wu_4_4_a_golem
-K:Craft:4 W W U ExileCtrlOrGrave<1/Artifact>
+K:Craft:4 W W U ExileCtrlOrGrave<1/Artifact.Other>
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Token & Type$Golem

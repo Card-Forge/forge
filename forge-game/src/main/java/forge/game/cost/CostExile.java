@@ -22,10 +22,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -176,12 +173,8 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
         }
 
-        CardCollectionView list;
-        if (zoneRestriction != 1) {
-            list = game.getCardsIn(this.from);
-        } else {
-            list = payer.getCardsIn(this.from);
-        }
+        CardCollection list = new CardCollection(zoneRestriction != 1 ? game.getCardsIn(this.from) :
+                payer.getCardsIn(this.from));
 
         if (this.payCostFromSource()) {
             return list.contains(source);
@@ -230,6 +223,21 @@ public class CostExile extends CostPartWithList {
             return CardLists.cmcCanSumTo(i, list);
         }
 
+        // for Craft: do not count the source card twice (it will be sacrificed)
+        if (ability.isCraft()) {
+            CostExile firstExileCost = ability.getPayCosts().getCostPartByType(CostExile.class);
+            if (firstExileCost != null && firstExileCost.payCostFromSource()) list.remove(ability.getHostCard());
+            // TODO: UGLY HACK! Ideally there should be no AI-specific code here, but not adding any (and adding it into ComputerUtil.chooseExileFrom)
+            // makes the game fail to play the SA with "AI failed to play....".
+            if (payer.isAI()) {
+                CardCollection toRemove = new CardCollection();
+                for (Card exileTgt : list) {
+                    if (exileTgt.isInPlay() && exileTgt.getCMC() >= 3) toRemove.add(exileTgt);
+                }
+                list.removeAll(toRemove);
+            }
+        }
+
         // for cards like Allosaurus Rider, do not count it
         if (this.from.size() == 1 && this.from.get(0).equals(ZoneType.Hand) && source.isInZone(ZoneType.Hand)
                 && list.contains(source)) {
@@ -269,6 +277,8 @@ public class CostExile extends CostPartWithList {
         String amount = this.getAmount();
         int amt = StringUtils.isNumeric(amount) ? Integer.parseInt(amount) : 0;
         String partType = this.getType();
+        //consume .Other from most partTypes
+        if (partType.contains(".Other")) partType = partType.replace(".Other", "");
         String singNoun = this.getTypeDescription() != null ? this.getTypeDescription() :
                 CardType.CoreType.isValidEnum(partType) || partType.equals("Permanent") ? partType.toLowerCase() :
                         partType;

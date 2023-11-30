@@ -4,7 +4,7 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.)
 SVar:TrigMill:DB$ Mill | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
-K:Craft:4 U U ExileCtrlOrGrave<1/Artifact>
+K:Craft:4 U U ExileCtrlOrGrave<1/Artifact.Other>
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill

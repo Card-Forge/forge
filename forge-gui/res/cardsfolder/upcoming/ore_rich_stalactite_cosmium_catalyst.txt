@@ -2,7 +2,7 @@ Name:Ore-Rich Stalactite
 ManaCost:1 R
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {R}. Spend this mana only to cast an instant or sorcery spell.
-K:Craft:3 R R XMin4 ExileFromGrave<X/Instant.Red;Sorcery.Red/red instant and/or sorcery cards>
+K:Craft:3 R R XMin4 ExileFromGrave<X/Instant.Red+Other;Sorcery.Red+Other/red instant and/or sorcery cards>
 SVar:X:Count$xPaid
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice

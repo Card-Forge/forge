@@ -2,7 +2,7 @@ Name:Waterlogged Hulk
 ManaCost:U
 Types:Artifact
 A:AB$ Mill | Cost$ T | SpellDescription$ Mill a card. (Put the top card of your library into your graveyard.)
-K:Craft:3 U ExileCtrlOrGrave<1/Island>
+K:Craft:3 U ExileCtrlOrGrave<1/Island.Other>
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill

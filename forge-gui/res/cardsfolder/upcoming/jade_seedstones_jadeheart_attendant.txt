@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Artifact
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures you control.
 SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one, two or three target creatures you control | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
-K:Craft:5 G G ExileCtrlOrGrave<1/Creature>
+K:Craft:5 G G ExileCtrlOrGrave<1/Creature.Other>
 AlternateMode:DoubleFaced
 DeckHas:Ability$Counters|LifeGain|Graveyard
 DeckHints:Ability$Discard|Mill|Sacrifice

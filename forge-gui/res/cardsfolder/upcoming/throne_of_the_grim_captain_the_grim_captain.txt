@@ -2,7 +2,7 @@ Name:Throne of the Grim Captain
 ManaCost:2
 Types:Legendary Artifact
 A:AB$ Mill | Cost$ T | NumCards$ 2 | SpellDescription$ Mill two cards.
-K:Craft:4 ExileCtrlOrGrave<1/Dinosaur> ExileCtrlOrGrave<1/Merfolk> ExileCtrlOrGrave<1/Pirate> ExileCtrlOrGrave<1/Vampire>:a Dinosaur, a Merfolk, a Pirate, and a Vampire:the four
+K:Craft:4 ExileCtrlOrGrave<1/Dinosaur.Other> ExileCtrlOrGrave<1/Merfolk.Other> ExileCtrlOrGrave<1/Pirate.Other> ExileCtrlOrGrave<1/Vampire.Other>:a Dinosaur, a Merfolk, a Pirate, and a Vampire:the four
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill

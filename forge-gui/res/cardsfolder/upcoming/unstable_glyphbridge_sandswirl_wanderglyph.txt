@@ -6,7 +6,7 @@ SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBCho
 SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.RememberedPlayerCtrl+powerLE2 | Mandatory$ True | ChoiceTitle$ Choose a creature card with power 2 or less | ImprintChosen$ True
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotImprinted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-K:Craft:3 W W ExileCtrlOrGrave<1/Artifact>
+K:Craft:3 W W ExileCtrlOrGrave<1/Artifact.Other>
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Mill|Graveyard|Token

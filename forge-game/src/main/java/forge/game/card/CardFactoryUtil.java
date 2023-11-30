@@ -2903,7 +2903,6 @@ public class CardFactoryUtil {
                 return;
             }
             String[] k = keyword.split(":");
-            String cost = "Exile<1/CARDNAME> Exile " + k[1];
 
             final StringBuilder cd = new StringBuilder();
             cd.append(k[0]).append(" with ");
@@ -2928,6 +2927,8 @@ public class CardFactoryUtil {
                         }
                     }
                     String partType = part.getType();
+                    //consume .Other from most partTypes
+                    if (partType.contains(".Other")) partType = partType.replace(".Other", "");
                     String singNoun = part.getTypeDescription() != null ? part.getTypeDescription() :
                             CardType.CoreType.isValidEnum(partType) ? partType.toLowerCase() : partType;
                     if (singNoun.equalsIgnoreCase("Permanent")) break;
@@ -2940,11 +2941,11 @@ public class CardFactoryUtil {
             cd.append(kCost.getCostMana() != null ? kCost.getCostMana().toString() : "no mana?");
 
             // Create return transformed ability string
-            String ab = "AB$ ChangeZone | CostDesc$ " + cd.toString() + " | Cost$ " + cost + " | Origin$ Exile | " +
-                    "Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | Craft$ True | " +
-                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | SorcerySpeed$ True" +
-                    " | StackDescription$ Return this card transformed under its owner's control. (Craft) | " +
-                    "SpellDescription$ (" + inst.getReminderText() + ")";
+            String ab = "AB$ ChangeZone | CostDesc$ " + cd.toString() + " | Cost$ Exile<1/CARDNAME> " + k[1] + " | " +
+                    "Origin$ Exile | Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | " +
+                    "Craft$ True | XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
+                    "SorcerySpeed$ True | StackDescription$ Return this card transformed under its owner's control. " +
+                    "(Craft) | SpellDescription$ (" + inst.getReminderText() + ")";
             final SpellAbility newSA = AbilityFactory.getAbility(ab, card);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
