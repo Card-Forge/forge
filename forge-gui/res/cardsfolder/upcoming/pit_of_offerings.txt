@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to three target cards from graveyards.
 SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Card | TgtPrompt$ Select up to three target cards from graveyards | Origin$ Graveyard | Destination$ Exile
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ManaReflected | Cost$ T | Valid$ Card.ExiledWithSource | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of the exiled cards' colors.
+A:AB$ ManaReflected | Cost$ T | Valid$ Defined.ExiledWith | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of the exiled cards' colors.
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Discard|Mill|Sacrifice
 Oracle:Pit of Offerings enters the battlefield tapped.\nWhen Pit of Offerings enters the battlefield, exile up to three target cards from graveyards.\n{T}: Add {C}.\n{T}: Add one mana of any of the exiled cards' colors.
