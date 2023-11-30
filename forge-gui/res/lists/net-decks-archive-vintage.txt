@@ -1790,6 +1790,7 @@
 2022-12-30 12504200 Vintage Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2022-12-30-12504200-vintage-super-qualifier.zip
 2022-12-30 12504280 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2022-12-30-12504280-vintage-preliminary.zip
 2022-12-31 12504290 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2022-12-31-12504290-vintage-challenge.zip
+
 2023-01-01 12504294 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-01-01-12504294-vintage-challenge.zip
 2023-01-01 Vintage League (19 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-01-01-vintage-league.zip
 2023-01-06 12508228 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-01-06-12508228-vintage-preliminary.zip
@@ -1819,7 +1820,7 @@
 2023-02-08 12520662 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-08-12520662-vintage-preliminary.zip
 2023-02-10 12520678 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-10-12520678-vintage-preliminary.zip
 2023-02-11 12520687 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-11-12520687-vintage-challenge.zip
-2023-02-12 12 520692 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-12-12-520692-vintage-challenge.zip
+2023-02-12 12520692 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-12-12520692-vintage-challenge.zip
 2023-02-12 Vintage League (14 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-12-vintage-league.zip
 2023-02-13 12520706 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-13-12520706-vintage-preliminary.zip
 2023-02-15 12523099 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-15-12523099-vintage-preliminary.zip
@@ -1840,7 +1841,7 @@
 2023-03-08 12529529 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-08-12529529-vintage-preliminary.zip
 2023-03-10 12529545 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-10-12529545-vintage-preliminary.zip
 2023-03-11 12529554 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-11-12529554-vintage-challenge.zip
-2023-03-12 12 529559 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-12-12-529559-vintage-challenge.zip
+2023-03-12 12529559 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-12-12529559-vintage-challenge.zip
 2023-03-12 Vintage League (20 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-12-vintage-league.zip
 2023-03-13 12529573 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-13-12529573-vintage-preliminary.zip
 2023-03-15 12532698 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-15-12532698-vintage-preliminary.zip
@@ -1869,16 +1870,12 @@
 2023-04-09 12540059 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-09-12540059-vintage-challenge.zip
 2023-04-09 Vintage League (18 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-09-vintage-league.zip
 2023-04-10 12540074 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-10-12540074-vintage-preliminary.zip
-2023-04-12 12 541655 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-12-12-541655-vintage-preliminary.zip
+2023-04-12 12541655 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-12-12541655-vintage-preliminary.zip
 2023-04-14 12541671 Vintage Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-14-12541671-vintage-preliminary.zip
 2023-04-15 12541681 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-15-12541681-vintage-challenge.zip
 2023-04-16 12541652 Vintage Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-16-12541652-vintage-super-qualifier.zip
 2023-04-16 12541686 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-16-12541686-vintage-challenge.zip
 2023-04-16 Vintage League (20 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-16-vintage-league.zip
-
-2023-02-12 12520692 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-02-12-12520692-vintage-challenge.zip
-2023-03-12 12529559 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-03-12-12529559-vintage-challenge.zip
-2023-04-12 12541655 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-12-12541655-vintage-preliminary.zip
 2023-04-17 12541701 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-17-12541701-vintage-preliminary.zip
 2023-04-19 12543415 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-19-12543415-vintage-preliminary.zip
 2023-04-21 12543431 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-04-21-12543431-vintage-preliminary.zip
@@ -2022,9 +2019,3 @@
 2023-11-12 Vintage League (19 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-12-vintage-league.zip
 2023-11-17 12592582 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-17-12592582-vintage-preliminary.zip
 2023-11-18 12592592 Vintage Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-18-12592592-vintage-challenge-32.zip
-2023-11-19 12592597 Vintage Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-19-12592597-vintage-challenge-32.zip
-2023-11-19 Vintage League (21 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-19-vintage-league.zip
-2023-11-24 12594360 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-24-12594360-vintage-preliminary.zip
-2023-11-25 12594370 Vintage Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-25-12594370-vintage-challenge-32.zip
-2023-11-26 12594375 Vintage Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-26-12594375-vintage-challenge-32.zip
-2023-11-26 Vintage League (21 decks) | https://downloads.cardforge.org/decks/archive/vintage/2023-11-26-vintage-league.zip
