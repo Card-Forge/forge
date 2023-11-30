@@ -1,305 +1,295 @@
 //Rank|Name|Rarity|Set
-#1|Sanguine Evangelist|R|LCI
-#2|Aclazotz, Deepest Betrayal|M|LCI
-#3|Bonehoard Dracosaur|M|LCI
-#4|Unstable Glyphbridge|R|LCI
-#5|Palani's Hatcher|R|LCI
-#6|Kitesail Larcenist|R|LCI
+#1|Aclazotz, Deepest Betrayal|M|LCI
+#2|Bonehoard Dracosaur|M|LCI
+#3|Unstable Glyphbridge|R|LCI
+#4|Palani's Hatcher|R|LCI
+#5|Kitesail Larcenist|R|LCI
+#6|Sanguine Evangelist|R|LCI
 #7|Breeches, Eager Pillager|R|LCI
 #8|Huatli, Poet of Unity|M|LCI
 #9|Magmatic Galleon|R|LCI
-#10|Thousand Moons Smithy|R|LCI
-#11|Zoetic Glyph|U|LCI
-#12|Sentinel of the Nameless City|R|LCI
-#13|Trumpeting Carnosaur|R|LCI
-#14|Warden of the Inner Sky|R|LCI
-#15|Spyglass Siren|U|LCI
-#16|Quintorius Kand|M|LCI
-#17|Subterranean Schooner|R|LCI
-#18|Inti, Seneschal of the Sun|R|LCI
-#19|Pugnacious Hammerskull|R|LCI
+#10|Pugnacious Hammerskull|R|LCI
+#11|Sentinel of the Nameless City|R|LCI
+#12|Trumpeting Carnosaur|R|LCI
+#13|Spyglass Siren|U|LCI
+#14|Quintorius Kand|M|LCI
+#15|Thousand Moons Smithy|R|LCI
+#16|Zoetic Glyph|U|LCI
+#17|Ojer Kaslem, Deepest Growth|M|LCI
+#18|Warden of the Inner Sky|R|LCI
+#19|Preacher of the Schism|R|LCI
 #20|Akal Pakal, First Among Equals|R|LCI
 #21|Deep-Cavern Bat|U|LCI
-#22|Preacher of the Schism|R|LCI
-#23|Resplendent Angel|M|LCI
-#24|Ojer Kaslem, Deepest Growth|M|LCI
-#25|Staunch Crewmate|U|LCI
-#26|Chimil, the Inner Sun|M|LCI
-#27|Anim Pakal, Thousandth Moon|R|LCI
-#28|Malcolm, Alluring Scoundrel|R|LCI
-#29|Ruin-Lurker Bat|U|LCI
-#30|Restless Anchorage|R|LCI
-#31|Itzquinth, Firstborn of Gishath|U|LCI
-#32|Oltec Cloud Guard|C|LCI
+#22|Resplendent Angel|M|LCI
+#23|Inti, Seneschal of the Sun|R|LCI
+#24|Subterranean Schooner|R|LCI
+#25|Chimil, the Inner Sun|M|LCI
+#26|Anim Pakal, Thousandth Moon|R|LCI
+#27|Malcolm, Alluring Scoundrel|R|LCI
+#28|The Skullspore Nexus|M|LCI
+#29|Staunch Crewmate|U|LCI
+#30|Ruin-Lurker Bat|U|LCI
+#31|Intrepid Paleontologist|R|LCI
+#32|Itzquinth, Firstborn of Gishath|U|LCI
 #33|Spring-Loaded Sawblades|U|LCI
-#34|The Everflowing Well|R|LCI
-#35|Waterwind Scout|C|LCI
-#36|Geological Appraiser|U|LCI
-#37|Poetic Ingenuity|R|LCI
-#38|Clay-Fired Bricks|U|LCI
-#39|Ojer Pakpatiq, Deepest Epoch|M|LCI
+#34|Geological Appraiser|U|LCI
+#35|Clay-Fired Bricks|U|LCI
+#36|Ojer Pakpatiq, Deepest Epoch|M|LCI
+#37|Bedrock Tortoise|R|LCI
+#38|Restless Anchorage|R|LCI
+#39|Deepfathom Echo|R|LCI
 #40|Miner's Guidewing|C|LCI
-#41|Intrepid Paleontologist|R|LCI
-#42|The Skullspore Nexus|M|LCI
+#41|Oltec Cloud Guard|C|LCI
+#42|Waterwind Scout|C|LCI
 #43|Kellan, Daring Traveler|R|LCI
 #44|Captain Storm, Cosmium Raider|U|LCI
-#45|Restless Ridgeline|R|LCI
-#46|Deepfathom Echo|R|LCI
-#47|Bedrock Tortoise|R|LCI
-#48|Lodestone Needle|U|LCI
-#49|Dusk Rose Reliquary|U|LCI
-#50|Dire Flail|R|LCI
-#51|Petrify|C|LCI
+#45|The Everflowing Well|R|LCI
+#46|Restless Ridgeline|R|LCI
+#47|Chupacabra Echo|U|LCI
+#48|Jadelight Spelunker|R|LCI
+#49|Poetic Ingenuity|R|LCI
+#50|Dusk Rose Reliquary|U|LCI
+#51|Dire Flail|R|LCI
 #52|Cogwork Wrestler|C|LCI
-#53|Chupacabra Echo|U|LCI
-#54|The Ancient One|M|LCI
-#55|Restless Reef|R|LCI
+#53|Lodestone Needle|U|LCI
+#54|Starving Revenant|R|LCI
+#55|The Ancient One|M|LCI
 #56|Hulking Raptor|R|LCI
 #57|Oaken Siren|C|LCI
-#58|Bringer of the Last Gift|R|LCI
-#59|Jadelight Spelunker|R|LCI
-#60|Abuelo, Ancestral Echo|R|LCI
-#61|Inverted Iceberg|C|LCI
-#62|Unlucky Drop|C|LCI
-#63|Ojer Axonil, Deepest Might|M|LCI
-#64|Thrashing Brontodon|U|LCI
-#65|Vito, Fanatic of Aclazotz|M|LCI
-#66|Market Gnome|U|LCI
-#67|Belligerent Yearling|U|LCI
-#68|Roaming Throne|R|LCI
-#69|Starving Revenant|R|LCI
-#70|Staggering Size|C|LCI
-#71|Etali's Favor|C|LCI
-#72|Kinjalli's Dawnrunner|U|LCI
-#73|Brackish Blunder|C|LCI
-#74|Tinker's Tote|C|LCI
-#75|Cenote Scout|U|LCI
-#76|Throne of the Grim Captain|R|LCI
-#77|The Belligerent|R|LCI
-#78|Threefold Thunderhulk|R|LCI
-#79|Braided Net|R|LCI
-#80|Defossilize|U|LCI
-#81|Pathfinding Axejaw|C|LCI
+#58|Ojer Axonil, Deepest Might|M|LCI
+#59|Abuelo, Ancestral Echo|R|LCI
+#60|Vito, Fanatic of Aclazotz|M|LCI
+#61|Throne of the Grim Captain|R|LCI
+#62|Petrify|C|LCI
+#63|Inverted Iceberg|C|LCI
+#64|Restless Reef|R|LCI
+#65|Etali's Favor|C|LCI
+#66|Bringer of the Last Gift|R|LCI
+#67|Thrashing Brontodon|U|LCI
+#68|Threefold Thunderhulk|R|LCI
+#69|Market Gnome|U|LCI
+#70|Belligerent Yearling|U|LCI
+#71|Pathfinding Axejaw|C|LCI
+#72|Roaming Throne|R|LCI
+#73|Dreadmaw's Ire|U|LCI
+#74|Kinjalli's Dawnrunner|U|LCI
+#75|Unlucky Drop|C|LCI
+#76|Brackish Blunder|C|LCI
+#77|Tinker's Tote|C|LCI
+#78|Cenote Scout|U|LCI
+#79|Defossilize|U|LCI
+#80|Diamond Pick-Axe|U|LCI
+#81|Earthshaker Dreadmaw|U|LCI
 #82|Master's Guide-Mural|U|LCI
-#83|Dreadmaw's Ire|U|LCI
-#84|Abrade|C|LCI
-#85|Goblin Tomb Raider|C|LCI
-#86|Waylaying Pirates|C|LCI
+#83|Staggering Size|C|LCI
+#84|Goblin Tomb Raider|C|LCI
+#85|Waylaying Pirates|C|LCI
+#86|Souls of the Lost|R|LCI
 #87|Poison Dart Frog|C|LCI
-#88|Stalactite Stalker|R|LCI
-#89|Diamond Pick-Axe|U|LCI
-#90|Guardian of the Great Door|U|LCI
-#91|Triumphant Chomp|U|LCI
-#92|Kutzil, Malamet Exemplar|U|LCI
-#93|Huatli's Final Strike|C|LCI
-#94|Cavern Stomper|C|LCI
-#95|Volatile Wanderglyph|C|LCI
-#96|Plundering Pirate|C|LCI
-#97|Deconstruction Hammer|C|LCI
-#98|Souls of the Lost|R|LCI
-#99|Restless Prairie|R|LCI
-#100|Tishana's Tidebinder|R|LCI
-#101|Colossadactyl|U|LCI
-#102|Earthshaker Dreadmaw|U|LCI
-#103|Vanguard of the Rose|U|LCI
-#104|Saheeli's Lattice|U|LCI
-#105|Caparocti Sunborn|U|LCI
-#106|Orazca Puzzle-Door|C|LCI
-#107|Scampering Surveyor|U|LCI
-#108|Malamet Battle Glyph|U|LCI
-#109|Sunshot Militia|C|LCI
-#110|Ancestors' Aid|C|LCI
-#111|Tithing Blade|C|LCI
-#112|Quicksand Whirlpool|C|LCI
-#113|Ironpaw Aspirant|C|LCI
-#114|Acrobatic Leap|C|LCI
-#115|Hidden Courtyard|C|LCI
-#116|Ojer Taq, Deepest Foundation|M|LCI
-#117|Dinotomaton|C|LCI
-#118|Cosmium Confluence|R|LCI
-#119|Hermitic Nautilus|U|LCI
-#120|Scytheclaw Raptor|U|LCI
-#121|Explorer's Cache|U|LCI
-#122|Corpses of the Lost|R|LCI
-#123|Jade Seedstones|U|LCI
-#124|Tendril of the Mycotyrant|U|LCI
-#125|Wail of the Forgotten|R|LCI
-#126|Bitter Triumph|U|LCI
-#127|Armored Kincaller|C|LCI
-#128|Panicked Altisaur|C|LCI
-#129|Shipwreck Sentry|C|LCI
-#130|River Herald Scout|C|LCI
-#131|Eaten by Piranhas|U|LCI
-#132|Attentive Sunscribe|C|LCI
-#133|Hidden Cataract|C|LCI
-#134|Chart a Course|U|LCI
-#135|Bloodletter of Aclazotz|M|LCI
-#136|Malamet War Scribe|U|LCI
-#137|Brass's Tunnel-Grinder|R|LCI
-#138|Restless Vents|R|LCI
-#139|Council of Echoes|U|LCI
-#140|Ixalli's Lorekeeper|U|LCI
-#141|Fanatical Offering|C|LCI
-#142|Sunfire Torch|C|LCI
-#143|Hidden Nursery|C|LCI
-#144|Hidden Volcano|C|LCI
-#145|Confounding Riddle|U|LCI
-#146|Synapse Necromage|U|LCI
-#147|Visage of Dread|U|LCI
-#148|River Herald Guide|C|LCI
-#149|Join the Dead|C|LCI
-#150|Deathcap Marionette|C|LCI
-#151|Dead Weight|C|LCI
-#152|Another Chance|C|LCI
-#153|Pirate Hat|C|LCI
-#154|Soaring Sandwing|C|LCI
-#155|Oltec Archaeologists|C|LCI
-#156|Might of the Ancestors|U|LCI
-#157|Adaptive Gemguard|C|LCI
-#158|Captivating Cave|C|LCI
-#159|Hidden Necropolis|C|LCI
-#160|Sinuous Benthisaur|U|LCI
-#161|Idol of the Deep King|C|LCI
-#162|Uchbenbak, the Great Mistake|U|LCI
-#163|Careening Mine Cart|U|LCI
-#164|Skullcap Snail|C|LCI
-#165|Amalia Benavides Aguirre|R|LCI
-#166|Bat Colony|U|LCI
-#167|Dauntless Dismantler|U|LCI
-#168|Abyssal Gorestalker|U|LCI
-#169|Terror Tide|R|LCI
-#170|Akawalli, the Seething Tower|U|LCI
-#171|Digsite Conservator|U|LCI
+#88|Restless Prairie|R|LCI
+#89|The Belligerent|R|LCI
+#90|Braided Net|R|LCI
+#91|Scytheclaw Raptor|U|LCI
+#92|Colossadactyl|U|LCI
+#93|Guardian of the Great Door|U|LCI
+#94|Vanguard of the Rose|U|LCI
+#95|Corpses of the Lost|R|LCI
+#96|Triumphant Chomp|U|LCI
+#97|Caparocti Sunborn|U|LCI
+#98|Abrade|C|LCI
+#99|Huatli's Final Strike|C|LCI
+#100|Malamet Battle Glyph|U|LCI
+#101|Cavern Stomper|C|LCI
+#102|Volatile Wanderglyph|C|LCI
+#103|Plundering Pirate|C|LCI
+#104|Chart a Course|U|LCI
+#105|Stalactite Stalker|R|LCI
+#106|Tishana's Tidebinder|R|LCI
+#107|Explorer's Cache|U|LCI
+#108|Saheeli's Lattice|U|LCI
+#109|Jade Seedstones|U|LCI
+#110|Kutzil, Malamet Exemplar|U|LCI
+#111|Orazca Puzzle-Door|C|LCI
+#112|Bitter Triumph|U|LCI
+#113|Scampering Surveyor|U|LCI
+#114|Armored Kincaller|C|LCI
+#115|Sunshot Militia|C|LCI
+#116|Ancestors' Aid|C|LCI
+#117|Tithing Blade|C|LCI
+#118|Quicksand Whirlpool|C|LCI
+#119|Ironpaw Aspirant|C|LCI
+#120|Deconstruction Hammer|C|LCI
+#121|Acrobatic Leap|C|LCI
+#122|Hidden Courtyard|C|LCI
+#123|Ojer Taq, Deepest Foundation|M|LCI
+#124|Bloodletter of Aclazotz|M|LCI
+#125|Dinotomaton|C|LCI
+#126|Hermitic Nautilus|U|LCI
+#127|Council of Echoes|U|LCI
+#128|Ixalli's Lorekeeper|U|LCI
+#129|Tendril of the Mycotyrant|U|LCI
+#130|Fanatical Offering|C|LCI
+#131|Panicked Altisaur|C|LCI
+#132|Another Chance|C|LCI
+#133|River Herald Scout|C|LCI
+#134|Attentive Sunscribe|C|LCI
+#135|Hidden Cataract|C|LCI
+#136|Sinuous Benthisaur|U|LCI
+#137|Cosmium Confluence|R|LCI
+#138|Malamet War Scribe|U|LCI
+#139|Terror Tide|R|LCI
+#140|Sunfire Torch|C|LCI
+#141|Join the Dead|C|LCI
+#142|Deathcap Marionette|C|LCI
+#143|Dead Weight|C|LCI
+#144|Shipwreck Sentry|C|LCI
+#145|Eaten by Piranhas|U|LCI
+#146|Oltec Archaeologists|C|LCI
+#147|Might of the Ancestors|U|LCI
+#148|Captivating Cave|C|LCI
+#149|Hidden Necropolis|C|LCI
+#150|Hidden Nursery|C|LCI
+#151|Hidden Volcano|C|LCI
+#152|Idol of the Deep King|C|LCI
+#153|Skullcap Snail|C|LCI
+#154|Dauntless Dismantler|U|LCI
+#155|Confounding Riddle|U|LCI
+#156|Brass's Tunnel-Grinder|R|LCI
+#157|Twists and Turns|U|LCI
+#158|Restless Vents|R|LCI
+#159|Visage of Dread|U|LCI
+#160|Molten Collapse|R|LCI
+#161|Wail of the Forgotten|R|LCI
+#162|River Herald Guide|C|LCI
+#163|Echo of Dusk|C|LCI
+#164|Pirate Hat|C|LCI
+#165|Soaring Sandwing|C|LCI
+#166|Adaptive Gemguard|C|LCI
+#167|Saheeli, the Sun's Brilliance|M|LCI
+#168|Careening Mine Cart|U|LCI
+#169|Rampaging Ceratops|U|LCI
+#170|Nurturing Bristleback|C|LCI
+#171|Akawalli, the Seething Tower|U|LCI
 #172|Kutzil's Flanker|R|LCI
-#173|Merfolk Cave-Diver|U|LCI
-#174|Stinging Cave Crawler|U|LCI
-#175|Hoverstone Pilgrim|U|LCI
+#173|Stinging Cave Crawler|U|LCI
+#174|Synapse Necromage|U|LCI
+#175|In the Presence of Ages|C|LCI
 #176|Rumbling Rockslide|C|LCI
 #177|Burning Sun Cavalry|C|LCI
-#178|Echo of Dusk|C|LCI
-#179|Saheeli, the Sun's Brilliance|M|LCI
-#180|Sunken Citadel|R|LCI
-#181|Helping Hand|U|LCI
-#182|Enterprising Scallywag|U|LCI
-#183|Rampaging Ceratops|U|LCI
-#184|Twists and Turns|U|LCI
-#185|Oteclan Landmark|C|LCI
-#186|Molten Collapse|R|LCI
-#187|In the Presence of Ages|C|LCI
-#188|Seismic Monstrosaur|C|LCI
-#189|Ray of Ruin|C|LCI
-#190|Primordial Gnawer|C|LCI
-#191|Out of Air|C|LCI
-#192|Cosmium Blast|C|LCI
-#193|Rampaging Spiketail|C|LCI
-#194|Goldfury Strider|U|LCI
-#195|Coati Scavenger|U|LCI
-#196|Bartolome del Presidio|U|LCI
-#197|Sovereign Okinec Ahau|M|LCI
-#198|Cavernous Maw|U|LCI
-#199|Nurturing Bristleback|C|LCI
-#200|Zoyowa Lava-Tongue|U|LCI
-#201|Forgotten Monument|U|LCI
-#202|Mineshaft Spider|C|LCI
-#203|Malamet Scythe|C|LCI
-#204|Mischievous Pup|U|LCI
-#205|Sage of Days|C|LCI
-#206|Ancestral Reminiscence|C|LCI
-#207|Ghalta, Stampede Tyrant|M|LCI
-#208|The Mycotyrant|M|LCI
-#209|Hurl into History|U|LCI
-#210|Nicanzil, Current Conductor|U|LCI
-#211|Promising Vein|C|LCI
-#212|Cartographer's Companion|C|LCI
-#213|Walk with the Ancestors|C|LCI
-#214|Malamet Veteran|C|LCI
-#215|Mephitic Draught|C|LCI
-#216|Thousand Moons Infantry|C|LCI
-#217|Glorifier of Suffering|C|LCI
-#218|Envoy of Okinec Ahau|C|LCI
-#219|Didact Echo|C|LCI
-#220|Tarrian's Journal|R|LCI
-#221|Gishath, Sun's Avatar|M|LCI
-#222|Treasure Map|R|LCI
-#223|Soulcoil Viper|U|LCI
-#224|Gargantuan Leech|U|LCI
-#225|Compass Gnome|C|LCI
-#226|Tarrian's Soulcleaver|R|LCI
+#178|Ray of Ruin|C|LCI
+#179|Cosmium Blast|C|LCI
+#180|Rampaging Spiketail|C|LCI
+#181|Goldfury Strider|U|LCI
+#182|Ghalta, Stampede Tyrant|M|LCI
+#183|Uchbenbak, the Great Mistake|U|LCI
+#184|Bat Colony|U|LCI
+#185|Helping Hand|U|LCI
+#186|Enterprising Scallywag|U|LCI
+#187|Digsite Conservator|U|LCI
+#188|Oteclan Landmark|C|LCI
+#189|Merfolk Cave-Diver|U|LCI
+#190|Zoyowa Lava-Tongue|U|LCI
+#191|Hoverstone Pilgrim|U|LCI
+#192|Malamet Scythe|C|LCI
+#193|Primordial Gnawer|C|LCI
+#194|Sage of Days|C|LCI
+#195|Sovereign Okinec Ahau|M|LCI
+#196|Sunken Citadel|R|LCI
+#197|Abyssal Gorestalker|U|LCI
+#198|Tarrian's Soulcleaver|R|LCI
+#199|Forgotten Monument|U|LCI
+#200|Promising Vein|C|LCI
+#201|Mineshaft Spider|C|LCI
+#202|Malamet Veteran|C|LCI
+#203|Seismic Monstrosaur|C|LCI
+#204|Daring Discovery|C|LCI
+#205|Mischievous Pup|U|LCI
+#206|Out of Air|C|LCI
+#207|Ancestral Reminiscence|C|LCI
+#208|Thousand Moons Crackshot|C|LCI
+#209|Envoy of Okinec Ahau|C|LCI
+#210|Tarrian's Journal|R|LCI
+#211|Coati Scavenger|U|LCI
+#212|Sunbird Standard|U|LCI
+#213|Cavernous Maw|U|LCI
+#214|Soulcoil Viper|U|LCI
+#215|Hurl into History|U|LCI
+#216|Nicanzil, Current Conductor|U|LCI
+#217|Cartographer's Companion|C|LCI
+#218|Walk with the Ancestors|C|LCI
+#219|Fungal Fortitude|C|LCI
+#220|Glorifier of Suffering|C|LCI
+#221|Family Reunion|C|LCI
+#222|Didact Echo|C|LCI
+#223|Bartolome del Presidio|U|LCI
+#224|Amalia Benavides Aguirre|R|LCI
+#225|Gargantuan Leech|U|LCI
+#226|Dowsing Device|U|LCI
 #227|Runaway Boulder|C|LCI
-#228|Hunter's Blowgun|C|LCI
-#229|Daring Discovery|C|LCI
-#230|Brazen Blademaster|C|LCI
-#231|Greedy Freebooter|C|LCI
-#232|Fungal Fortitude|C|LCI
-#233|Relic's Roar|C|LCI
-#234|Thousand Moons Crackshot|C|LCI
-#235|Sunbird Standard|U|LCI
-#236|Dowsing Device|U|LCI
-#237|Over the Edge|C|LCI
-#238|Malamet Brawler|C|LCI
-#239|Family Reunion|C|LCI
-#240|Queen's Bay Paladin|R|LCI
-#241|Glimpse the Core|U|LCI
-#242|Hotfoot Gnome|C|LCI
-#243|Screaming Phantom|C|LCI
-#244|Spelunking|U|LCI
-#245|Get Lost|R|LCI
-#246|Pit of Offerings|U|LCI
-#247|Self-Reflection|U|LCI
-#248|Squirming Emergence|R|LCI
-#249|Seeker of Sunlight|C|LCI
-#250|Marauding Brinefang|C|LCI
-#251|Song of Stupefaction|C|LCI
-#252|Curator of Sun's Creation|U|LCI
-#253|Calamitous Cave-In|U|LCI
-#254|Abuelo's Awakening|R|LCI
-#255|Waterlogged Hulk|U|LCI
-#256|Frilled Cave-Wurm|C|LCI
-#257|Deep Goblin Skulltaker|C|LCI
-#258|Broodrage Mycoid|C|LCI
-#259|Echoing Deeps|R|LCI
-#260|Basking Capybara|C|LCI
-#261|Acolyte of Aclazotz|C|LCI
-#262|Deeproot Pilgrimage|R|LCI
-#263|Growing Rites of Itlimoc|R|LCI
-#264|Matzalantli, the Great Door|R|LCI
-#265|Bloodthorn Flail|U|LCI
-#266|Zoyowa's Justice|U|LCI
-#267|Glowcap Lantern|U|LCI
-#268|Canonized in Blood|U|LCI
-#269|Malicious Eclipse|U|LCI
-#270|Kaslem's Stonetree|C|LCI
-#271|Swashbuckler's Whip|U|LCI
-#272|Volatile Fault|U|LCI
-#273|Disruptor Wanderglyph|C|LCI
-#274|Buried Treasure|C|LCI
-#275|Disturbed Slumber|C|LCI
-#276|Child of the Volcano|C|LCI
-#277|Vito's Inquisitor|C|LCI
-#278|Grasping Shadows|U|LCI
-#279|The Enigma Jewel|M|LCI
-#280|Hit the Mother Lode|R|LCI
-#281|Cavern of Souls|M|LCI
-#282|The Millennium Calendar|M|LCI
-#283|Fabrication Foundry|R|LCI
-#284|Sorcerous Spyglass|U|LCI
-#285|Contested Game Ball|U|LCI
-#286|Tectonic Hazard|C|LCI
+#228|Mephitic Draught|C|LCI
+#229|Relic's Roar|C|LCI
+#230|Gishath, Sun's Avatar|M|LCI
+#231|The Mycotyrant|M|LCI
+#232|Cavern of Souls|M|LCI
+#233|Glimpse the Core|U|LCI
+#234|Compass Gnome|C|LCI
+#235|Calamitous Cave-In|U|LCI
+#236|Over the Edge|C|LCI
+#237|Malamet Brawler|C|LCI
+#238|Hotfoot Gnome|C|LCI
+#239|Greedy Freebooter|C|LCI
+#240|Marauding Brinefang|C|LCI
+#241|Thousand Moons Infantry|C|LCI
+#242|Treasure Map|R|LCI
+#243|Queen's Bay Paladin|R|LCI
+#244|Self-Reflection|U|LCI
+#245|Hunter's Blowgun|C|LCI
+#246|Seeker of Sunlight|C|LCI
+#247|Brazen Blademaster|C|LCI
+#248|Screaming Phantom|C|LCI
+#249|Song of Stupefaction|C|LCI
+#250|Curator of Sun's Creation|U|LCI
+#251|Waterlogged Hulk|U|LCI
+#252|Broodrage Mycoid|C|LCI
+#253|Get Lost|R|LCI
+#254|Frilled Cave-Wurm|C|LCI
+#255|Basking Capybara|C|LCI
+#256|Deep Goblin Skulltaker|C|LCI
+#257|Acolyte of Aclazotz|C|LCI
+#258|Deeproot Pilgrimage|R|LCI
+#259|Growing Rites of Itlimoc|R|LCI
+#260|Spelunking|U|LCI
+#261|Matzalantli, the Great Door|R|LCI
+#262|Bloodthorn Flail|U|LCI
+#263|The Millennium Calendar|M|LCI
+#264|Pit of Offerings|U|LCI
+#265|Zoyowa's Justice|U|LCI
+#266|Glowcap Lantern|U|LCI
+#267|Squirming Emergence|R|LCI
+#268|Echoing Deeps|R|LCI
+#269|Abuelo's Awakening|R|LCI
+#270|Canonized in Blood|U|LCI
+#271|Malicious Eclipse|U|LCI
+#272|Kaslem's Stonetree|C|LCI
+#273|Swashbuckler's Whip|U|LCI
+#274|Volatile Fault|U|LCI
+#275|Disruptor Wanderglyph|C|LCI
+#276|Buried Treasure|C|LCI
+#277|Disturbed Slumber|C|LCI
+#278|Tectonic Hazard|C|LCI
+#279|Child of the Volcano|C|LCI
+#280|Vito's Inquisitor|C|LCI
+#281|Grasping Shadows|U|LCI
+#282|The Enigma Jewel|M|LCI
+#283|Hit the Mother Lode|R|LCI
+#284|Fabrication Foundry|R|LCI
+#285|Sorcerous Spyglass|U|LCI
+#286|Contested Game Ball|U|LCI
 #287|Plains|C|LCI
 #288|Island|C|LCI
 #289|Swamp|C|LCI
 #290|Mountain|C|LCI
 #291|Forest|C|LCI
-#292|Plains|C|LCI
-#293|Plains|C|LCI
-#294|Island|C|LCI
-#295|Island|C|LCI
-#296|Swamp|C|LCI
-#297|Swamp|C|LCI
-#298|Mountain|C|LCI
-#299|Mountain|C|LCI
-#300|Forest|C|LCI
-#301|Forest|C|LCI
 //Rank|Name|Rarity|Set
 #1|Virtue of Persistence|M|WOE
 #2|Gruff Triplets|R|WOE
