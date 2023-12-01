@@ -740,7 +740,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // predict Legendary cards already present
                 boolean nothingWillReturn = true;
                 for (final Card c : retrieval) {
-                    if (!(!c.ignoreLegendRule() && ai.isCardInPlay(c.getName()))) {
+                    final boolean isCraftSa = sa.isCraft() && sa.getHostCard().equals(c);
+                    if (isCraftSa || (!(!c.ignoreLegendRule() && ai.isCardInPlay(c.getName())))) {
                         nothingWillReturn = false;
                         break;
                     }
