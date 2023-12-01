@@ -551,6 +551,9 @@ public class GameAction {
                     zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
                     zoneTo.add(card, position, CardUtil.getLKICopy(card));
+                    card.setState(CardStateName.Original, false);
+                    card.setBackSide(false);
+                    card.updateStateForView();
                 }
                 card.setZone(zoneTo);
             }
