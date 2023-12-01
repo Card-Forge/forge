@@ -41,6 +41,10 @@ public class StaticAbilityCantGainLosePayLife {
                     continue;
                 }
 
+                if (!stAb.checkConditions()) {
+                    continue;
+                }
+
                 if (applyCommonAbility(stAb, player)) {
                     return true;
                 }

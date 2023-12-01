@@ -1,6 +1,6 @@
 Name:Careening Mine Cart
 ManaCost:3
-Types:Legendary Artifact Vehicle
+Types:Artifact Vehicle
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You

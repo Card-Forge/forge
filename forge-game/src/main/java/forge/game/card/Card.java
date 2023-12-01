@@ -730,7 +730,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean turnFaceDown() {
         return turnFaceDown(false);
     }
-
     public boolean turnFaceDown(boolean override) {
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
