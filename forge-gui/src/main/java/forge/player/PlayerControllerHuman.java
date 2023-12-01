@@ -523,12 +523,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return CardCollection.EMPTY;
         }
 
-        String inpMessage = null;
-        if (min == 0) {
-            inpMessage = localizer.getMessage("lblSelectUpToNumTargetToAction", message, action);
-        } else {
-            inpMessage = localizer.getMessage("lblSelectNumTargetToAction", message, action);
-        }
+        String inpMessage = localizer.getMessage((min == 0 ? "lblSelectUpToNumTargetToAction" :
+                "lblSelectNumTargetToAction"), Lang.nounWithNumeralExceptOne(max, message), action);
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(inpMessage);
