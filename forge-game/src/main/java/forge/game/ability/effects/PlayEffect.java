@@ -368,7 +368,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // illegal action, cancel early
             if ((sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost")) && tgtSA.costHasManaX() &&
-                    tgtSA.getPayCosts().getCostMana() != null && tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
+                    tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
                 continue;
             }
 

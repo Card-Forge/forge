@@ -650,7 +650,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     private boolean whileKeywordSACheck(final String keyword, final SpellAbility sa) {
         if (sa == null || sa.getHostCard() == null) return false;
         if (sa.isAbility()) {
-            if (keyword.equals("Craft") && sa.isCraft()) return true;
+            return (keyword.equals("Craft") && sa.isCraft());
         }
         return sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword);
     }

@@ -622,9 +622,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
                 boolean result = c.changeToState(c.backside ? CardStateName.Transformed : CardStateName.Original);
                 retResult = retResult || result;
-                if (cause != null && cause.isCraft()) { // retain cards crafted while transforming in exile
-                    c.retainPaidList(cause, "ExiledCards");
-                }
             }
             if (hasMergedCard()) {
                 rebuildMutatedStates(cause);
