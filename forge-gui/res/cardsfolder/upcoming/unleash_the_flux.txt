@@ -2,7 +2,11 @@ Name:Unleash the Flux
 ManaCost:no cost
 Types:Phenomenon
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When you encounter CARDNAME, each player sacrifices a nonland permanent, then you flip a coin. If you lose the flip, repeat this process. (Then planeswalk away from this phenomenon.)
-SVar:TrigEffect:DB$ Sacrifice | Defined$ Player | SacValid$ Permanent.nonLand | SubAbility$ DBCoin
-SVar:DBCoin:DB$ FlipACoin | WinSubAbility$ PWAway | LoseSubAbility$ TrigEffect
+SVar:TrigEffect:DB$ Repeat | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player | SacValid$ Permanent.nonLand | SubAbility$ DBCoin
+SVar:DBCoin:DB$ FlipACoin | WinSubAbility$ ResetCheck | LoseSubAbility$ AddCheck
+SVar:ResetCheck:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$0 | SubAbility$ PWAway
+SVar:AddCheck:DB$ StoreSVar | SVar$ RepeatCheck | Type$ CountSVar | Expression$ RepeatCheck/Plus.1
 SVar:PWAway:DB$ Planeswalk
+SVar:RepeatCheck:Number$0
 Oracle:When you encounter Unleash the Flux, each player sacrifices a nonland permanent, then you flip a coin. If you lose the flip, repeat this process. (Then planeswalk away from this phenomenon.)
