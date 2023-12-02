@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose an artifact or creature card from it. That player discards that card.
 SVar:TrigRemove:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Artifact,Creature
-K:Craft:5 B ExileCtrlOrGrave<2/Creature.OTher>
+K:Craft:5 B ExileCtrlOrGrave<2/Creature.Other>
 SVar:X:Count$xPaid
 AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
