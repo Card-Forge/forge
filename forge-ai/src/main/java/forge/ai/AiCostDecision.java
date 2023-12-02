@@ -302,7 +302,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (!player.canPayLife(c, isEffect(), ability)) {
             return null;
         }
-        // activator.payLife(c, null);
         return PaymentDecision.number(c);
     }
 

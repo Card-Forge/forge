@@ -227,15 +227,6 @@ public class CostExile extends CostPartWithList {
         if (ability.isCraft()) {
             CostExile firstExileCost = ability.getPayCosts().getCostPartByType(CostExile.class);
             if (firstExileCost != null && firstExileCost.payCostFromSource()) list.remove(ability.getHostCard());
-            // TODO: UGLY HACK! Ideally there should be no AI-specific code here, but not adding any (and adding it into ComputerUtil.chooseExileFrom)
-            // makes the game fail to play the SA with "AI failed to play....".
-            if (payer.isAI()) {
-                CardCollection toRemove = new CardCollection();
-                for (Card exileTgt : list) {
-                    if (exileTgt.isInPlay() && exileTgt.getCMC() >= 3) toRemove.add(exileTgt);
-                }
-                list.removeAll(toRemove);
-            }
         }
 
         // for cards like Allosaurus Rider, do not count it
