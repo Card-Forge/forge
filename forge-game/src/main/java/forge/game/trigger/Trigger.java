@@ -626,7 +626,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         overridingAbility0.setTrigger(this);
     }
 
-    boolean whileKeywordCheck(final String keyword, final Map<AbilityKey, Object> runParams) {
+    boolean whileKeywordCheck(final String param, final Map<AbilityKey, Object> runParams) {
         SpellAbility sa;
 
         IndividualCostPaymentInstance currentPayment =
@@ -634,25 +634,17 @@ public abstract class Trigger extends TriggerReplacementBase {
         if (currentPayment != null) {
             sa = currentPayment.getPayment().getAbility();
             if (sa != null) {
-                if (whileKeywordSACheck(keyword, sa)) return true;
+                if (matchesValidParam(param, sa)) return true;
             }
         }
 
         CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
         for (IndividualCostPaymentInstance individual : stack) {
                 sa = individual.getPayment().getAbility();
-                if (whileKeywordSACheck(keyword, sa)) return true;
+                if (matchesValidParam(param, sa)) return true;
         }
 
         return false;
-    }
-
-    private boolean whileKeywordSACheck(final String keyword, final SpellAbility sa) {
-        if (sa == null || sa.getHostCard() == null) return false;
-        if (sa.isAbility()) {
-            return (keyword.equals("Craft") && sa.isCraft());
-        }
-        return sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword);
     }
 
 }
