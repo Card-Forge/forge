@@ -19,7 +19,7 @@ ScryfallCode=CST
 43 U Balduvian Dead @Mike Kimble
 44b C Casting of Bones @Anson Maddocks
 51a C Insidious Bookworms @Greg Simanson
-54 C Swords to Plowshares @Kaja Foglio
+54 U Swords to Plowshares @Kaja Foglio
 57a C Phantasmal Fiend @Scott Kirschner
 60 U Binding Grasp @Ruth Thompson
 61 C Brainstorm @Christopher Rush
