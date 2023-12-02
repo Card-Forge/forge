@@ -627,21 +627,14 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     boolean whileKeywordCheck(final String param, final Map<AbilityKey, Object> runParams) {
-        SpellAbility sa;
-
-        IndividualCostPaymentInstance currentPayment =
-                (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+        IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
         if (currentPayment != null) {
-            sa = currentPayment.getPayment().getAbility();
-            if (sa != null) {
-                if (matchesValidParam(param, sa)) return true;
-            }
+            if (matchesValidParam(param, currentPayment.getPayment().getAbility())) return true;
         }
 
         CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
         for (IndividualCostPaymentInstance individual : stack) {
-                sa = individual.getPayment().getAbility();
-                if (matchesValidParam(param, sa)) return true;
+            if (matchesValidParam(param, individual.getPayment().getAbility())) return true;
         }
 
         return false;
