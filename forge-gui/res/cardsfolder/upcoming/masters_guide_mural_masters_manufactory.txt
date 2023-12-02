@@ -15,5 +15,5 @@ Name:Master's Manufactory
 ManaCost:no cost
 Colors:white,blue
 Types:Artifact
-A:AB$ Token | Cost$ T | TokenScript$ wu_4_4_a_golem | CheckSVar$ Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl | SpellDescription$ Create a 4/4 white and blue Golem artifact creature token. Activate only if CARDNAME or another artifact entered the battlefield under your control this turn.
+A:AB$ Token | Cost$ T | TokenScript$ wu_4_4_a_golem | CheckSVar$ Count$ThisTurnEntered_Battlefield_Card.Self+YouCtrl,Artifact.YouCtrl+Other | SpellDescription$ Create a 4/4 white and blue Golem artifact creature token. Activate only if CARDNAME or another artifact entered the battlefield under your control this turn.
 Oracle:{T}: Create a 4/4 white and blue Golem artifact creature token. Activate only if Master's Manufactory or another artifact entered the battlefield under your control this turn.
