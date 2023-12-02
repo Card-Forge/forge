@@ -207,8 +207,6 @@ public class ForgeScript {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
-        } else if (property.equals("Emerge")) {
-            return sa.isEmerge();
         } else if (property.equals("Flashback")) {
             return sa.isFlashBackAbility();
         } else if (property.equals("Jumpstart")) {
