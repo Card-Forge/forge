@@ -524,7 +524,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         String inpMessage = localizer.getMessage((min == 0 ? "lblSelectUpToNumTargetToAction" :
-                "lblSelectNumTargetToAction"), Lang.nounWithNumeralExceptOne(max, message), action);
+                "lblSelectNumTargetToAction"), message, action);
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(inpMessage);
