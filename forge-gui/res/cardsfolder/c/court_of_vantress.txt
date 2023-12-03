@@ -1,0 +1,10 @@
+Name:Court of Vantress
+ManaCost:2 U U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCloneCopy | TriggerDescription$ At the beginning of your upkeep, choose up to one other target enchantment or artifact. If you're the monarch, you may create a token that's a copy of it. If you're not the monarch, you may have CARDNAME become a copy of it, except it has this ability.
+SVar:TrigCloneCopy:DB$ Clone | Optional$ True | GainThisAbility$ True | AddSVars$ TrigCloneCopy | TgtPrompt$ Select up to one other target enchantment or artifact | ValidTgts$ Artifact.Other,Enchantment.Other | TargetMin$ 0 | TargetMax$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Monarch.1.0
+Oracle:When Court of Vantress enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, choose up to one other target enchantment or artifact. If you're the monarch, you may create a token that's a copy of it. If you're not the monarch, you may have Court of Vantress become a copy of it, except it has this ability.

@@ -1,0 +1,10 @@
+Name:Nettling Nuisance
+ManaCost:2 B
+Types:Creature Faerie Rogue
+PT:3/1
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Faerie+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more Faeries you control deal combat damage to a player,  that player creates a 4/2 red Pirate creature token with "This creature can't block." The token is goaded for the rest of the game. (It attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_2_pirate_noblock | TokenOwner$ TriggeredTarget | RememberTokens$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhenever one or more Faeries you control deal combat damage to a player, that player creates a 4/2 red Pirate creature token with "This creature can't block." The token is goaded for the rest of the game. (It attacks each combat if able and attacks a player other than you if able.)

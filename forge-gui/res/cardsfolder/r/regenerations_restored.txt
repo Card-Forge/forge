@@ -1,0 +1,13 @@
+Name:Regenerations Restored
+ManaCost:W U
+Types:Enchantment
+K:Vanishing:12
+T:Mode$ CounterRemovedOnce | ValidCard$ Card.Self | CounterType$ TIME | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever one or more time counters are removed from CARDNAME, scry 1 and you gain 1 life. Then if CARDNAME has no time counters on it, exile it. When you do, take an extra turn after this one.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ TrigGainLife
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ TrigExile
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_TIME | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | Execute$ TrigExtraTurn | SubAbility$ DBCleanup | TriggerDescription$ When you do, take an extra turn after this one.
+SVar:TrigExtraTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Vanishing 12 (This enchantment enters the battlefield with twelve time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever one or more time counters are removed from Regenerations Restored, scry 1 and you gain 1 life. Then if Regenerations Restored has no time counters on it, exile it. When you do, take an extra turn after this one.
