@@ -387,6 +387,9 @@ public class CardView extends GameEntityView {
     void updateChosenNumber(Card c) {
         set(TrackableProperty.ChosenNumber, c.getChosenNumber().toString());
     }
+    void clearChosenNumber() {
+        set(TrackableProperty.ChosenNumber, "");
+    }
 
     public List<String> getStoredRolls() {
         return get(TrackableProperty.StoredRolls);
