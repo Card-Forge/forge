@@ -7,5 +7,5 @@ SVar:DBSeek:DB$ Seek | Num$ 2 | Type$ Vampire | SpellDescription$ Seek two Vampi
 SVar:LifeCheck:SVar$Y/Plus.X
 SVar:X:Count$LifeOppsLostThisTurn/LimitMax.1
 SVar:Y:Count$LifeYouGainedThisTurn/LimitMax.1
-DeckNeeds:Type$Pirate & Type$LifeGain
+DeckNeeds:Type$Pirate & Ability$LifeGain
 Oracle:Draw a card. If an opponent lost life this turn and you gained life this turn, seek two Vampire cards instead.
