@@ -468,4 +468,48 @@ public class CardLists {
         }
         return total;
     }
+
+    /**
+     * Given a list of cards, return their combined mana value
+     *
+     * @param cardList the list of cards for which to sum the mana value
+     */
+    public static int getTotalCMC(Iterable<Card> cardList) {
+        int total = 0;
+        for (final Card crd : cardList) {
+            total += Math.max(0, crd.getCMC());
+        }
+        return total;
+    }
+
+    public static boolean cmcCanSumTo(int sum, Iterable<Card> cardList) {
+        List<Integer> numList = Lists.newArrayList();
+        for (final Card c : cardList) {
+            int num = c.getCMC();
+            if (num == sum) return true;
+            else if (num < sum) numList.add(num);
+        }
+        if (numList.isEmpty()) return false;
+        numList.sort(null);
+
+        return isSubsetSum(numList, sum);
+    }
+
+    public static boolean isSubsetSum(List<Integer> numList, int sum) {
+        if (sum == 0) return true;
+        int size = numList.size();
+        if (size == 0) return false;
+
+        Integer last = numList.get(size - 1);
+        numList.remove(last);
+        // If last element is greater than sum, then ignore it
+        if (last > sum) {
+            return isSubsetSum(numList, sum);
+        }
+
+        // Else, check if sum can be obtained by:
+        // (a) excluding the last element
+        // (b) including the last element
+        return isSubsetSum(numList, sum) || isSubsetSum(numList, sum - last);
+    }
 }

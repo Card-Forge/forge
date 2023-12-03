@@ -1,0 +1,25 @@
+Name:Sunbird Standard
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Craft:5 XMin1 ExileCtrlOrGrave<X/Permanent.Other/permanent>
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:All
+Oracle:{T}: Add one mana of any color.\nCraft with one or more {5} ({5}, Exile this artifact, Exile one or more other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Sunbird Effigy
+ManaCost:no cost
+Types:Artifact Creature Bird Construct
+PT:*/*
+K:Flying
+K:Vigilance
+K:Haste
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of colors among the exiled cards used to craft it.
+SVar:X:Count$ColorsDefined ExiledWith
+A:AB$ Mana | Cost$ T | Produced$ Special EachColorAmongDefined_ExiledWith | SpellDescription$ For each color among the exiled cards used to craft CARDNAME, add one mana of that color.
+Oracle:Flying, vigilance, haste\nSunbird Effigy's power and toughness are each equal to the number of colors among the exiled cards used to craft it.\n{T}: For each color among the exiled cards used to craft Sunbird Effigy, add one mana of that color.

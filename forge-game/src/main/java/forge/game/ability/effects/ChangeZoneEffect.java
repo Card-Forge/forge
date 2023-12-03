@@ -899,7 +899,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     private void changeZonePlayerInvariant(Player chooser, SpellAbility sa, List<Player> fetchers) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final boolean defined = sa.hasParam("Defined");
+        final boolean chooseFromDef = sa.hasParam("ChooseFromDefined");
+        final boolean defined = sa.hasParam("Defined") || chooseFromDef;
         final String changeType = sa.getParamOrDefault("ChangeType", "");
         boolean mandatory = sa.hasParam("Mandatory");
         Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
@@ -989,7 +990,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             boolean shuffleMandatory = true;
             boolean searchedLibrary = false;
             if (defined) {
-                fetchList = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+                String param = chooseFromDef ? "ChooseFromDefined" : "Defined";
+                fetchList = AbilityUtils.getDefinedCards(source, sa.getParam(param), sa);
                 if (!sa.hasParam("ChangeNum")) {
                     changeNum = fetchList.size();
                 }
@@ -1183,7 +1185,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             decider.getController().reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
                         }
                         c = Aggregates.random(fetchList);
-                    } else if (defined && !sa.hasParam("ChooseFromDefined")) {
+                    } else if (defined && !chooseFromDef) {
                         c = Iterables.getFirst(fetchList, null);
                     } else {
                         String title = selectPrompt;
