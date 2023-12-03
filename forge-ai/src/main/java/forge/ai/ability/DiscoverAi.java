@@ -46,13 +46,6 @@ public class DiscoverAi extends SpellAbilityAi {
     public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         Card c = (Card)params.get("Card");
         for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, CardStateName.Original)) { // TODO: other states for split cards and MDFC?
-            if (!sa.matchesValidParam("ValidSA", s)) {
-                continue;
-            }
-            if (s instanceof LandAbility) {
-                // might want to run some checks here but it's rare anyway
-                return true;
-            }
             Spell spell = (Spell) s;
             if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, false, true)) {
                 // Before accepting, see if the spell has a valid number of targets (it should at this point).
