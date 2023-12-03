@@ -47,7 +47,7 @@ public class DiscoverAi extends SpellAbilityAi {
         Card c = (Card)params.get("Card");
         for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, CardStateName.Original)) { // TODO: other states for split cards and MDFC?
             if (s instanceof LandAbility) {
-                // return false or your get ClassCastException later if it encounters MDFC with land backside
+                // return false or we get a ClassCastException later if the AI encounters MDFC with land backside
                 return false;
             }
             Spell spell = (Spell) s;
