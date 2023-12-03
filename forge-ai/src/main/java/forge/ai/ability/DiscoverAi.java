@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 
@@ -45,6 +46,10 @@ public class DiscoverAi extends SpellAbilityAi {
     public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         Card c = (Card)params.get("Card");
         for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, CardStateName.Original)) { // TODO: other states for split cards and MDFC?
+            if (s instanceof LandAbility) {
+                // return false or your get ClassCastException later if it encounters MDFC with land backside
+                return false;
+            }
             Spell spell = (Spell) s;
             if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, false, true)) {
                 // Before accepting, see if the spell has a valid number of targets (it should at this point).
