@@ -1,0 +1,15 @@
+Name:Rose Tyler
+ManaCost:1 W
+Types:Legendary Creature Human
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each time counter on it.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Bad Wolf — Whenever CARDNAME attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ Y
+SVar:X:Count$CardCounters.TIME
+SVar:Y:Count$ValidExile Card.suspended+YouOwn/Plus.Z
+SVar:Z:Count$Valid Permanent.Other+YouCtrl+counters_GE1_TIME
+K:Doctor's companion
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Keyword$Suspend|Vanishing
+Oracle:Rose Tyler gets +1/+1 for each time counter on it.\nBad Wolf — Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

@@ -1,0 +1,7 @@
+Name:Tendril of the Mycotyrant
+ManaCost:1 G
+Types:Creature Fungus Wizard
+PT:2/2
+A:AB$ PutCounter | Cost$ 5 G G | ValidTgts$ Land.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature land you control | CounterType$ P1P1 | CounterNum$ 7 | SubAbility$ DBAnimate | SpellDescription$ Put seven +1/+1 counters on target noncreature land you control. It becomes a 0/0 Fungus creature with haste. It's still a land.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Fungus | Keywords$ Haste | Duration$ Permanent
+Oracle:{5}{G}{G}: Put seven +1/+1 counters on target noncreature land you control. It becomes a 0/0 Fungus creature with haste. It's still a land.

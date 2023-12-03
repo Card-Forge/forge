@@ -1,0 +1,10 @@
+Name:Court of Garenbrig
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, distribute two +1/+1 counters among up to two target creatures. Then if you're the monarch, double the number of +1/+1 counters on each creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ TrigDoubleCounters
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | Defined$ Valid Creature.YouCtrl | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Monarch.1.0
+Oracle:When Court of Garenbrig enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, distribute two +1/+1 counters among up to two target creatures. Then if you're the monarch, double the number of +1/+1 counters on each creature you control.
