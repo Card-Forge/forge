@@ -5,6 +5,6 @@ PT:5/5
 K:Flying
 K:First Strike
 K:Lifelink
-K:Protection from Demons
-K:Protection from Dragons
+K:Protection:Demon
+K:Protection:Dragon
 Oracle:Flying, first strike, lifelink, protection from Demons and from Dragons

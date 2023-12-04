@@ -2,7 +2,8 @@ Name:Greensleeves, Maro-Sorcerer
 ManaCost:3 G G
 Types:Legendary Creature Elemental
 PT:*/*
-K:Protection:Planeswalker,Wizards:Protection from planeswalkers and Wizards
+K:Protection:Planeswalker
+K:Protection:Wizard
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_badger | TokenOwner$ You

@@ -2124,7 +2124,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         s.append(" on it.");
                     }
                     sbLong.append(s).append("\r\n");
-                } else if (keyword.startsWith("Protection:") || keyword.startsWith("DeckLimit")) {
+                } else if (keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[2]).append("\r\n");
                 } else if (keyword.startsWith("Creatures can't attack unless their controller pays")) {
@@ -2219,6 +2219,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         }
                         sbLong.append("\r\n");
                     }
+                } else if (keyword.startsWith("Protection:")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append("Protection from ");
+                    if (k.length > 2) {
+                        sbLong.append(k[2]);
+                    } else {
+                        if (MagicColor.Constant.ONLY_COLORS.contains(k[1])) {
+                            // lower-case color
+                            sbLong.append(k[1]);
+                        } else {
+                            // plural card types
+                            sbLong.append(CardType.getPluralType(k[1]));
+                        }
+                    }
+                    sbLong.append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
@@ -6298,38 +6313,38 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
         for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
             String kw = inst.getOriginal();
-            if (kw.contains("Protection from red")) {
+            if (kw.equals("Protection from red") || kw.contains(":red")) {
                 if (!pR) {
                     pR = true;
                     protectKey += "R";
                 }
-            } else if (kw.contains("Protection from green")) {
+            } else if (kw.equals("Protection from green") || kw.contains(":green")) {
                 if (!pG) {
                     pG = true;
                     protectKey += "G";
                 }
-            } else if (kw.contains("Protection from black")) {
+            } else if (kw.equals("Protection from black") || kw.contains(":black")) {
                 if (!pB) {
                     pB = true;
                     protectKey += "B";
                 }
-            } else if (kw.contains("Protection from blue")) {
+            } else if (kw.equals("Protection from blue") || kw.contains(":blue")) {
                 if (!pU) {
                     pU = true;
                     protectKey += "U";
                 }
-            } else if (kw.contains("Protection from white")) {
+            } else if (kw.equals("Protection from white") || kw.contains(":white")) {
                 if (!pW) {
                     pW = true;
                     protectKey += "W";
                 }
-            } else if (kw.equals("Protection from monocolored")) {
+            } else if (kw.contains("monocolored")) {
                 protectKey += "monocolored:";
-            } else if (kw.equals("Protection from multicolored")) {
+            } else if (kw.contains("multicolored")) {
                 protectKey += "multicolored:";
-            } else if (kw.equals("Protection from all colors")) {
+            } else if (kw.contains("all colors")) {
                 protectKey += "allcolors:";
-            } else if (kw.equals("Protection from colorless")) {
+            } else if (kw.contains("Protection from colorless")) {
                 protectKey += "colorless:";
             } else if (kw.equals("Protection from creatures")) {
                 protectKey += "creatures:";
@@ -6339,7 +6354,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 protectKey += "enchantments:";
             } else if (kw.equals("Protection from everything")) {
                 protectKey += "everything:";
-            } else if (kw.equals("Protection from colored spells")) {
+            } else if (kw.contains("colored spells")) {
                 protectKey += "coloredspells:";
             } else {
                 protectKey += "generic";

@@ -2,5 +2,5 @@ Name:Guardian of the Guildpact
 ManaCost:3 W
 Types:Creature Spirit
 PT:2/3
-K:Protection:Card.MonoColor:Protection from monocolored
+K:Protection:Card.MonoColor:monocolored
 Oracle:Protection from monocolored
