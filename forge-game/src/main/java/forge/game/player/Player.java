@@ -2535,6 +2535,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
         resetNumDiscardedThisTurn();
+        resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
