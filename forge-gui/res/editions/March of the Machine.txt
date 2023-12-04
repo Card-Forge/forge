@@ -271,7 +271,7 @@ ScryfallCode=MOM
 259 C Flywheel Racer @Joshua Cairos
 260 C Halo Hopper @Daniel Ljunggren
 261 C Kitesail @Ben Hill
-262 C Phyrexian Archivist @Daniel Romanovsky
+262 C Phyrexian Archivist @Andreas Zafiratos
 263 R Realmbreaker, the Invasion Tree @Kekai Kotaki
 264 C Skittering Surveyor @Igor Kieryluk
 265 M Sword of Once and Future @Joshua Cairos
