@@ -61,6 +61,7 @@ public class ExploreEffect extends SpellAbilityEffect {
         CardCollectionView tgts = GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa);
 
         for (final Card c : tgts) {
+            final Player pl = c.getController();
             for (int i = 0; i < amount; i++) {
                 GameEntityCounterTable table = new GameEntityCounterTable();
                 final CardZoneTable triggerList = new CardZoneTable();
@@ -72,7 +73,6 @@ public class ExploreEffect extends SpellAbilityEffect {
 
                 // revealed land card
                 boolean revealedLand = false;
-                final Player pl = c.getController();
                 CardCollection top = pl.getTopXCardsFromLibrary(1);
                 if (!top.isEmpty()) {
                     Card movedCard = null;
@@ -106,6 +106,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
 
                 // a creature does explore even if it isn't on the battlefield anymore
+                pl.addExploredThisTurn();
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                 if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
                 game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
