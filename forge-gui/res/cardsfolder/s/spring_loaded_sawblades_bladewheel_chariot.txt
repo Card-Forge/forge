@@ -19,4 +19,4 @@ Types:Artifact Vehicle
 PT:5/5
 A:AB$ Animate | Cost$ tapXType<2/Artifact.Other> | Types$ Artifact,Creature | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
 K:Crew:1
-Oracle:Tap two other untapped artifacts you control: Bladewheel Chariot becomes an artifact creature until end of turn./nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
+Oracle:Tap two other untapped artifacts you control: Bladewheel Chariot becomes an artifact creature until end of turn.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
