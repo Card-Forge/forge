@@ -6,7 +6,9 @@ Type=Online
 ScryfallCode=YLCI
 
 [cards]
+0 R Cogwork Progenitor @Kev Walker
 0 R Legion's Chant @John Tedrick
+0 U Radiant Smite @John Tedrick
 0 R Valiant Batrider @Ovidio Cartagena
 0 U Herald's Reveille @Allen Douglas
 0 M Hymn to the Ages @Alex Brock
@@ -14,6 +16,7 @@ ScryfallCode=YLCI
 0 R Plunderer's Prize @Elizabeth Peiró
 0 M Chitinous Crawler @Dave Kendall
 0 U Dusk's Landing @Lauren K. Cannon
+0 R Legion Reconsecrator @Valera Lutfullina
 0 M Caldera Breaker @Brian Valeza
 0 R Kamachal, Ship's Mascot @Steve Prescott
 0 U Pirate's Landing @Lauren K. Cannon
@@ -21,6 +24,12 @@ ScryfallCode=YLCI
 0 M Colossal Chorus @Todd Lockwood
 0 M Mythweaver Poq @Todd Lockwood
 0 R Propagator Primordium @Daniel Romanovsky
+0 U Wingbane Vantasaur @Franco Tempesta
+0 R Scalespeaker Shepherd @Quintin Gleim
+0 R Brazen Boarding @Anthony Devine
+0 R High Marshal Arguel @Craig J Spearing
 0 U Merfolk Tunnel-Guide @Danny Schwartz
 0 R Mycoid Resurrection @Danny Schwartz
-0 R Tan Jolom, The Worldwalker @Anthony Devine
+0 U Reflection Net @Allen Douglas
+0 R Scalesoul Gnome @Svetlin Velinov
+0 R Tan Jolom, the Worldwalker @Anthony Devine
