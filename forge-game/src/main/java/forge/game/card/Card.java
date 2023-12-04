@@ -1830,6 +1830,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChosenNumber(this);
     }
 
+    public final void clearChosenNumber() {
+        chosenNumber = null;
+        view.clearChosenNumber();
+    }
+
     public final Card getExiledWith() {
         return exiledWith;
     }
