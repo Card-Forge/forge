@@ -75,6 +75,7 @@ public enum SpellApiToAi {
             .put(ApiType.DigMultiple, DigMultipleAi.class)
             .put(ApiType.DigUntil, DigUntilAi.class)
             .put(ApiType.Discard, DiscardAi.class)
+            .put(ApiType.Discover, DiscoverAi.class)
             .put(ApiType.Draft, ChooseCardNameAi.class)
             .put(ApiType.DrainMana, DrainManaAi.class)
             .put(ApiType.Draw, DrawAi.class)
