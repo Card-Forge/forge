@@ -30,3 +30,4 @@ ScryfallCode=SPG
 17e M Mana Crypt @Dominik Mayer
 17f M Mana Crypt @Dominik Mayer
 18 U Star Compass @Alix Branwyn
+25 M Crashing Footfalls @Uriah Voth
