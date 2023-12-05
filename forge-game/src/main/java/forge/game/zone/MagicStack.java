@@ -244,7 +244,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            if (!sp.isCopied()) {
+            if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 source.addAbilityActivated(sp);
             }
@@ -320,7 +320,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.isAbility() && !sp.isCopied()) {
+        if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             source.addAbilityActivated(sp);
         }
 

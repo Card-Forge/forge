@@ -30,8 +30,7 @@ public interface IGameController {
 
     void selectPlayer(PlayerView playerView, ITriggerEvent triggerEvent);
 
-    boolean selectCard(CardView cardView,
-            List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
+    boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
 
     void selectAbility(SpellAbilityView sa);
 

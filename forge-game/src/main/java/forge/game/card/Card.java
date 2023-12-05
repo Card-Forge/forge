@@ -1290,7 +1290,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 craft.setExiledBy(cause.getActivatingPlayer());
             }
         }
-
     }
 
     public final List<Integer> getStoredRolls() {
