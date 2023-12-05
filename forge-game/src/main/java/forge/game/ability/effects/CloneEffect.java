@@ -7,6 +7,7 @@ import forge.StaticData;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.ability.effects.TokenEffectBase;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
@@ -152,7 +153,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             if (!pumpKeywords.isEmpty()) {
                 tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, 0);
-                addPumpUntil(sa, tgtCard, ts);
+                TokenEffectBase.addPumpUntil(sa, tgtCard, ts);
             }
 
             tgtCard.updateStateForView();
@@ -200,30 +201,6 @@ public class CloneEffect extends SpellAbilityEffect {
             }
 
             game.fireEvent(new GameEventCardStatsChanged(tgtCard));
-        }
-    }
-
-    protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
-        if (!sa.hasParam("PumpDuration")) {
-            return;
-        }
-        final String duration = sa.getParam("PumpDuration");
-        final Card host = sa.getHostCard();
-        final Game game = host.getGame();
-        final GameCommand untilEOT = new GameCommand() {
-            private static final long serialVersionUID = -42244224L;
-
-            @Override
-            public void run() {
-                c.removeChangedCardKeywords(timestamp, 0);
-                game.fireEvent(new GameEventCardStatsChanged(c));
-            }
-        };
-
-        if ("UntilYourNextTurn".equals(duration)) {
-            game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
-        } else {
-            game.getEndOfTurn().addUntil(untilEOT);
         }
     }
 }

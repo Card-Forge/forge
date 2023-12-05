@@ -264,7 +264,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         return false;
     }
 
-    protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
+    public static void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
         if (!sa.hasParam("PumpDuration")) {
             return;
         }
