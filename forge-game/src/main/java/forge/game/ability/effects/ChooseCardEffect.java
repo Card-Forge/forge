@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.game.Direction;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.util.CardTranslation;
@@ -57,7 +58,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        CardCollection chosen = new CardCollection();
+        CardCollection allChosen = new CardCollection();
 
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
@@ -97,8 +98,14 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
 
         for (Player p : tgtPlayers) {
+            CardCollectionView pChoices = choices;
+            CardCollection chosen = new CardCollection();
             if (!p.isInGame()) {
                 p = getNewChooser(sa, activator, p);
+            }
+            if (sa.hasParam("ControlledByPlayer")) {
+                pChoices = CardLists.filterControlledBy(pChoices, game.getNextPlayerAfter(p,
+                        Direction.valueOf(sa.getParam("ControlledByPlayer"))));
             }
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
@@ -165,9 +172,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 CardCollection chosenPool = new CardCollection();
                 String title = Localizer.getInstance().getMessage("lblChooseCreature");
                 Card choice = null;
-                while (!choices.isEmpty() && chosenPool.size() < validAmount) {
+                while (!pChoices.isEmpty() && chosenPool.size() < validAmount) {
                     boolean optional = chosenPool.size() >= minAmount;
-                    CardCollection creature = (CardCollection) choices;
+                    CardCollection creature = (CardCollection) pChoices;
                     if (!chosenPool.isEmpty()) {
                         title = Localizer.getInstance().getMessage("lblChooseCreatureWithDiffPower");
                     }
@@ -177,7 +184,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                     chosenPool.add(choice);
                     restrict = restrict + (restrict.contains(".") ? "+powerNE" : ".powerNE") + choice.getNetPower();
-                    choices = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                    pChoices = CardLists.getValidCards(pChoices, restrict, activator, host, sa);
                 }
                 if (choice != null) {
                     chosenPool.add(choice);
@@ -186,7 +193,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("EachDifferentPower")) {
                 List<Integer> powers = new ArrayList<>();
                 CardCollection chosenPool = new CardCollection();
-                for (Card c : choices) {
+                for (Card c : pChoices) {
                     int pow = c.getNetPower();
                     if (!powers.contains(pow)) {
                         powers.add(c.getNetPower());
@@ -197,7 +204,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 re = re + (re.contains(".") ? "+powerEQ" : ".powerEQ");
                 for (int i : powers) {
                     String restrict = re + i;
-                    CardCollection valids = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                    CardCollection valids = CardLists.getValidCards(pChoices, restrict, activator, host, sa);
                     Card choice = p.getController().chooseSingleEntityForEffect(valids, sa,
                             Localizer.getInstance().getMessage("lblChooseCreatureWithXPower", i), false, null);
                     chosenPool.add(choice);
@@ -206,17 +213,17 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("ControlAndNot")) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCreature");
                 // Targeted player (p) chooses N creatures that belongs to them
-                CardCollection tgtPlayerCtrl = CardLists.filterControlledBy(choices, p);
+                CardCollection tgtPlayerCtrl = CardLists.filterControlledBy(pChoices, p);
                 chosen.addAll(p.getController().chooseCardsForEffect(tgtPlayerCtrl, sa, title + " " + "you control", minAmount, validAmount,
                         !sa.hasParam("Mandatory"), null));
                 // Targeted player (p) chooses N creatures that don't belong to them
-                CardCollection notTgtPlayerCtrl = new CardCollection(choices);
+                CardCollection notTgtPlayerCtrl = new CardCollection(pChoices);
                 notTgtPlayerCtrl.removeAll(tgtPlayerCtrl);
                 chosen.addAll(p.getController().chooseCardsForEffect(notTgtPlayerCtrl, sa, title + " " + "you don't control", minAmount, validAmount,
                         !sa.hasParam("Mandatory"), null));
-            } else if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
+            } else if (sa.hasParam("AtRandom") && !pChoices.isEmpty()) {
                 // don't pass FCollection for direct modification, the Set part would get messed up
-                chosen = new CardCollection(Aggregates.random(choices, validAmount));
+                chosen = new CardCollection(Aggregates.random(pChoices, validAmount));
                 dontRevealToOwner = false;
             } else {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
@@ -249,7 +256,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
                             CardTranslation.getTranslatedName(host.getName()) + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
-                    Card choice = p.getController().chooseSingleEntityForEffect(choices, delayedReveal, sa, title,
+                    Card choice = p.getController().chooseSingleEntityForEffect(pChoices, delayedReveal, sa, title,
                             !sa.hasParam("Mandatory"), p, null);
                     if (choice == null) {
                         return;
@@ -260,7 +267,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         p.removeController(controlTimestamp);
                     }
                 } else {
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                    chosen.addAll(p.getController().chooseCardsForEffect(pChoices, sa, title, minAmount, validAmount,
                             !sa.hasParam("Mandatory"), null));
                 }
             }
@@ -268,25 +275,29 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 game.getAction().reveal(chosen, p, dontRevealToOwner, sa.hasParam("RevealTitle") ?
                         sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
+            if (sa.hasParam("ChosenMap")) {
+                host.addToChosenMap(p, chosen);
+            }
+            allChosen.addAll(chosen);
         }
         if (sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
             for (final Player p : tgtPlayers) {
-                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ?
+                game.getAction().reveal(allChosen, p, true, sa.hasParam("RevealTitle") ?
                         sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
-        host.setChosenCards(chosen);
+        host.setChosenCards(allChosen);
         if (sa.hasParam("ForgetOtherRemembered")) {
             host.clearRemembered();
         }
         if (sa.hasParam("RememberChosen")) {
-            host.addRemembered(chosen);
+            host.addRemembered(allChosen);
         }
         if (sa.hasParam("ForgetChosen")) {
-            host.removeRemembered(chosen);
+            host.removeRemembered(allChosen);
         }
         if (sa.hasParam("ImprintChosen")) {
-            host.addImprintedCards(chosen);
+            host.addImprintedCards(allChosen);
         }
     }
 }

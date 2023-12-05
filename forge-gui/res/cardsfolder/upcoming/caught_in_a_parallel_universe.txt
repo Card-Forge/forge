@@ -1,0 +1,9 @@
+Name:Caught in a Parallel Universe
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigChooseCard | TriggerDescription$ When you encounter CARDNAME, each player chooses a creature controlled by the player to their left. Each player creates a token that's a copy of the creature they chose, except it has menace. (Then planeswalk away from this phenomenon.)
+SVar:TrigChooseCard:DB$ ChooseCard | Defined$ Player | Choices$ Creature | ControlledByPlayer$ Left | ChoiceTitle$ Choose a creature controlled by the player to your left | Reveal$ True | Mandatory$ True | ChosenMap$ True | SubAbility$ DBClone
+SVar:DBClone:DB$ CopyPermanent | Defined$ ChosenMap | AddKeywords$ Menace | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk
+DeckHas:Ability$Token
+Oracle:When you encounter Caught in a Parallel Universe, each player chooses a creature controlled by the player to their left. Each player creates a token that's a copy of the creature they chose, except it has menace. (Then planeswalk away from this phenomenon.)
