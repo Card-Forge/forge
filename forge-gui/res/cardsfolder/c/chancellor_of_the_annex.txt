@@ -4,9 +4,8 @@ Types:Creature Phyrexian Angel
 PT:5/6
 K:Flying
 K:MayEffectFromOpeningHand:RevealCard
-SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ CounterFirstSpellEffect | SpellDescription$ You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.
-SVar:CounterFirstSpellEffect:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ TrigCounter | EffectOwner$ Remembered | Duration$ Permanent
+SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ DBEffect | SpellDescription$ You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigCounter | EffectOwner$ Opponent | Duration$ Permanent
 SVar:TrigCounter:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCounterSpell | OneOff$ True | TriggerZones$ Command | TriggerDescription$ When each opponent casts their first spell of the game, counter that spell unless that player pays {1}.
 SVar:TrigCounterSpell:DB$ Counter | Defined$ TriggeredSpellAbility | UnlessCost$ 1 | UnlessPayer$ You
 SVar:SpellsNeedExtraManaEffect:1
