@@ -4,5 +4,5 @@ Types:Creature Demon
 PT:5/5
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.
-SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Valid Swamp.YouCtrl
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Count$Valid Swamp.YouCtrl
 Oracle:Soulhunter Rakshasa can't block.\nWhen Soulhunter Rakshasa enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.
