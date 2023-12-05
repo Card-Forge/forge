@@ -1,0 +1,10 @@
+Name:K-9, Mark I
+ManaCost:U
+Types:Legendary Artifact Creature Robot Dog
+PT:1/1
+S:Mode$ Continuous | IsPresent$ Card.Self+untapped | Affected$ Creature.Other+Legendary+YouCtrl | AddKeyword$ Ward:1 | Description$ Negative — As long as CARDNAME is untapped, other legendary creatures you control have ward {1}.
+A:AB$ Effect | PrecostDesc$ Affirmative — | Cost$ 1 U T | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target legendary creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+K:Doctor's companion
+DeckNeeds:Type$Legendary & Type$Creature
+Oracle:Negative — As long as K-9, Mark I is untapped, other legendary creatures you control have ward {1}.\nAffirmative — {1}{U}, {T}: Target legendary creature can't be blocked this turn.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

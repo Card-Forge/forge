@@ -201,6 +201,8 @@ public class ForgeScript {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
+        } else if (property.equals("Craft")) {
+            return sa.isCraft();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {

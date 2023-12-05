@@ -19,6 +19,7 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
+import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
@@ -49,6 +50,31 @@ public class ChangeZoneAi extends SpellAbilityAi {
     // multipleCardsToChoose is used by Intuition and can be adapted to be used by other
     // cards where multiple cards are fetched at once and they need to be coordinated
     private static CardCollection multipleCardsToChoose = new CardCollection();
+
+    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+        if (sa.isCraft()) {
+            CardCollection payingCards = new CardCollection();
+            int needed = 0;
+            for (final CostPart part : cost.getCostParts()) {
+                if (part instanceof CostExile) {
+                    if (part.payCostFromSource()) {
+                        continue;
+                    }
+                    int amt = part.getAbilityAmount(sa);
+                    needed += amt;
+                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa);
+                    if (toAdd != null) {
+                        payingCards.addAll(toAdd);
+                    }
+                }
+            }
+            if (payingCards.size() < needed) {
+                return false;
+            }
+        }
+
+        return super.willPayCosts(ai, sa, cost, source);
+    }
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -740,7 +766,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // predict Legendary cards already present
                 boolean nothingWillReturn = true;
                 for (final Card c : retrieval) {
-                    if (!(!c.ignoreLegendRule() && ai.isCardInPlay(c.getName()))) {
+                    final boolean isCraftSa = sa.isCraft() && sa.getHostCard().equals(c);
+                    if (isCraftSa || (!(!c.ignoreLegendRule() && ai.isCardInPlay(c.getName())))) {
                         nothingWillReturn = false;
                         break;
                     }

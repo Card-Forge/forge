@@ -17,13 +17,7 @@
  */
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import forge.game.cost.*;
 import org.apache.commons.lang3.StringUtils;
@@ -689,6 +683,27 @@ public class ComputerUtil {
         }
 
         CardLists.sortByPowerAsc(typeList);
+        if (sa.isCraft()) {
+            // remove anything above 3 CMC so that high tier stuff doesn't get exiled with this
+            CardCollection toRemove = new CardCollection();
+            for (Card exileTgt : typeList) {
+                if (exileTgt.isInPlay() && exileTgt.getCMC() >= 3) toRemove.add(exileTgt);
+            }
+            typeList.removeAll(toRemove);
+            if (typeList.size() < amount) return null;
+
+            // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
+            CardLists.sortByCmcDesc(typeList);
+            Collections.reverse(typeList);
+            typeList.sort(new Comparator<Card>() {
+                @Override
+                public int compare(final Card a, final Card b) {
+                    if (!a.isInPlay() && b.isInPlay()) return -1;
+                    else if (!b.isInPlay() && a.isInPlay()) return 1;
+                    else return 0;
+                }
+            }); // something that's not on the battlefield should come first
+        }
         final CardCollection exileList = new CardCollection();
 
         for (int i = 0; i < amount; i++) {

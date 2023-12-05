@@ -1,9 +1,0 @@
-Name:Waylaying Pirates
-ManaCost:3 U
-Types:Creature Human Pirate
-PT:3/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBTap | IsPresent$ Artifact.YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, if you control an artifact, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-SVar:DBTap:DB$ Tap | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target artifact or creature an opponent controls
-SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 
-DeckHints:Type$Artifact
-Oracle:When Waylaying Pirates enters the battlefield, if you control an artifact, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

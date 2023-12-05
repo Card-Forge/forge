@@ -95,6 +95,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String msg = sa.getParamOrDefault("SacMessage", valid);
+        msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");

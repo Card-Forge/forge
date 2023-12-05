@@ -18,9 +18,7 @@
 package forge.game.cost;
 
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import forge.card.CardType;
 import org.apache.commons.lang3.ObjectUtils;
@@ -227,7 +225,7 @@ public class Cost implements Serializable {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
 
-        boolean xCantBe0 = false;
+        String xMin = "";
         boolean untapCost = false;
 
         StringBuilder manaParts = new StringBuilder();
@@ -243,8 +241,8 @@ public class Cost implements Serializable {
 
         CostPartMana parsedMana = null;
         for (String part : parts) {
-            if ("XCantBe0".equals(part)) {
-                xCantBe0 = true;
+            if (part.startsWith("XMin")) {
+                xMin = (part);
             } else if ("Mandatory".equals(part)) {
                 this.isMandatory = true;
             } else {
@@ -263,8 +261,8 @@ public class Cost implements Serializable {
             }
         }
 
-        if (parsedMana == null && (manaParts.length() > 0 || xCantBe0)) {
-            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xCantBe0 ? "XCantBe0" : null);
+        if (parsedMana == null && (manaParts.length() > 0 || !xMin.equals(""))) {
+            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.equals("") ? null : xMin);
         }
         if (parsedMana != null) {
             costParts.add(parsedMana);
@@ -465,6 +463,13 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, 0);
+        }
+
+        if (parse.startsWith("ExileCtrlOrGrave<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostExile(splitStr[0], splitStr[1], description,
+                    new ArrayList<>(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
         }
 
         if (parse.startsWith("Return<")) {
@@ -938,12 +943,13 @@ public class Cost implements Serializable {
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
                 costParts.remove(costPart2);
-                boolean XCantBe0 = !mPart.canXbe0() || !costPart2.canXbe0();
-                if (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || XCantBe0) {
+                int xMin = mPart.getXMin();
+                if (costPart2.getXMin() > xMin) xMin = costPart2.getXMin();
+                if (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || xMin > 0) {
                     // FIXME: something was amiss when trying to add the cost since the mana cost is either \EnchantedCost or \Exiled but the
                     // restriction no longer marks it as such. Therefore, we need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
                     // to make cards like Merseine or Back from the Brink work.
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), XCantBe0));
+                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), xMin));
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), null));
                 }
@@ -1056,7 +1062,7 @@ public class Cost implements Serializable {
             val = ObjectUtils.min(val, p.getMaxAmountX(ability, payer, effect));
         }
         // extra 0 check
-        if (val != null && val <= 0 && hasManaCost() && !getCostMana().canXbe0()) {
+        if (val != null && val <= 0 && hasManaCost() && getCostMana().getXMin() > 0) {
             val = null;
         }
         return val;

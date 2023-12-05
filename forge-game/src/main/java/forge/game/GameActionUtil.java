@@ -116,7 +116,8 @@ public final class GameActionUtil {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes
-                if ((!sa.isBasicSpell() || (sa.costHasManaX() && !sa.getPayCosts().getCostMana().canXbe0())) && o.getPayManaCost() == PayManaCost.NO) {
+                if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
+                        && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
                     continue;
                 }
                 final Card host = o.getHost();

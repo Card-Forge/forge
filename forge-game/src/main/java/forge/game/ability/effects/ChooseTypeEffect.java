@@ -9,6 +9,7 @@ import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
@@ -86,6 +87,24 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                                 }
                             }
                         }
+                    }
+                }
+                break;
+            case "Shared":
+                if (sa.hasParam("TypesFromDefined")) {
+                    CardCollection def = AbilityUtils.getDefinedCards(card, sa.getParam("TypesFromDefined"), sa);
+                    if (def.size() < 2) break; // need at least 2 cards to work with to find shared types
+                    final Card card1 = def.get(0);
+                    def.remove(0);
+                    for (final CardType.CoreType ct : card1.getType().getCoreTypes()) {
+                        boolean shared = true;
+                        for (final Card c : def) {
+                            if (!c.getType().hasType(ct)) {
+                                shared = false;
+                                break;
+                            }
+                        }
+                        if (shared) validTypes.add(ct.name());
                     }
                 }
             }

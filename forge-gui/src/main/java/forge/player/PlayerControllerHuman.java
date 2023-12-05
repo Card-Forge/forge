@@ -456,11 +456,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public Integer announceRequirements(final SpellAbility ability, final String announce) {
         final Card host = ability.getHostCard();
         int max = Integer.MAX_VALUE;
-        boolean canChooseZero = true;
+        int xMin = 0;
+        final boolean abXMin = ability.hasParam("XMin");
         Cost cost = ability.getPayCosts();
 
         if ("X".equals(announce)) {
-            canChooseZero = !ability.hasParam("XCantBe0");
+            if (abXMin) xMin = Integer.parseInt(ability.getParam("XMin"));
             if (ability.hasParam("XMaxLimit")) {
                 max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMaxLimit"), ability));
             }
@@ -469,12 +470,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (costX != null) {
                     max = Math.min(max, costX);
                 }
-                if (cost.hasManaCost() && !cost.getCostMana().canXbe0()) {
-                    canChooseZero = false;
+                if (cost.hasManaCost() && !abXMin) {
+                    xMin = cost.getCostMana().getXMin();
                 }
             }
         }
-        final int min = canChooseZero ? 0 : 1;
+        final int min = xMin;
 
         if (ability.hasParam("AnnounceMax")) {
             max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("AnnounceMax"), ability));
@@ -523,12 +524,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return CardCollection.EMPTY;
         }
 
-        String inpMessage = null;
-        if (min == 0) {
-            inpMessage = localizer.getMessage("lblSelectUpToNumTargetToAction", message, action);
-        } else {
-            inpMessage = localizer.getMessage("lblSelectNumTargetToAction", message, action);
-        }
+        String inpMessage = localizer.getMessage((min == 0 ? "lblSelectUpToNumTargetToAction" :
+                "lblSelectNumTargetToAction"), message, action);
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
         inp.setMessage(inpMessage);

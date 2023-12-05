@@ -1200,5 +1200,5 @@ w_1_1_human_ward
 w_1_1_soldier
 w_1_1_warrior
 w_2_2_alien
-w_2_2_alien_rhino
 w_2_2_horse_horsemanship
+w_4_4_alien_rhino

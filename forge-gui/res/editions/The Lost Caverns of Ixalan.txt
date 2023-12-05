@@ -3,6 +3,10 @@ Code=LCI
 Date=2023-11-17
 Name=The Lost Caverns of Ixalan
 Type=Expansion
+BoosterCovers=3
+Booster=9 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon:!dfc:!fromSheet("LCI lands"):fromSheet("LCI cards"), 1 fromSheet("LCI double-face"), 1 RareMythic:fromSheet("LCI cards"), 1 fromSheet("LCI lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=LCI
 
 [cards]
@@ -297,6 +301,8 @@ ScryfallCode=LCI
 289 L Swamp @Elektrodeko
 290 L Mountain @BEMOCS
 291 L Forest @Matteo Bassini
+
+[showcase]
 292 R Akal Pakal, First Among Equals @Alex Negrea
 293 R Malcolm, Alluring Scoundrel @Rafal Wechterowicz
 294 R Breeches, Eager Pillager @Rafal Wechterowicz
@@ -325,6 +331,14 @@ ScryfallCode=LCI
 317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
 318 M Ojer Kaslem, Deepest Growth @Eddie Mendoza
 319 M The Ancient One @Clint Lockwood
+410a M Cavern of Souls @Pedro Correa
+410b M Cavern of Souls @Pedro Correa
+410c M Cavern of Souls @Pedro Correa
+410d M Cavern of Souls @Pedro Correa
+410e M Cavern of Souls @Pedro Correa
+410f M Cavern of Souls @Pedro Correa
+
+[borderless]
 320 U Belligerent Yearling @Sidharth Chaturvedi
 321 M Bonehoard Dracosaur @Sidharth Chaturvedi
 322 U Rampaging Ceratops @Sidharth Chaturvedi
@@ -358,6 +372,8 @@ ScryfallCode=LCI
 350 R Restless Ridgeline @David Frasheski
 351 R Restless Vents @Alexander Kintner
 352 M Quintorius Kand @Psydrian
+
+[extended art]
 353 R Abuelo's Awakening @Eelis Kyttanen
 354 R Fabrication Foundry @Racrufi
 355 R Kutzil's Flanker @Michele Giorgi
@@ -398,6 +414,8 @@ ScryfallCode=LCI
 390 R Threefold Thunderhulk @Xavier Ribeiro
 391 R Treasure Map @Nestor Ossandon Leal
 392 R Sunken Citadel @Matteo Bassini
+
+[bundle]
 393 L Plains @Carlos Palma Cruchaga
 394 L Plains @Adam Paquette
 395 L Island @Nestor Ossandon Leal
@@ -408,6 +426,8 @@ ScryfallCode=LCI
 400 L Mountain @Adam Paquette
 401 L Forest @Carlos Palma Cruchaga
 402 L Forest @Adam Paquette
+
+[promo]
 403 R Jadelight Spelunker @Ovidio Cartagena
 404 R Hit the Mother Lode @Bram Sels
 405 U Spyglass Siren @David Astruga
@@ -415,12 +435,39 @@ ScryfallCode=LCI
 407 U Geological Appraiser @Alix Branwyn
 408 U Cenote Scout @Caroline Gariba
 409 U Bartolome del Presidio @Randy Gallegos
-410a M Cavern of Souls @Pedro Correa
-410b M Cavern of Souls @Pedro Correa
-410c M Cavern of Souls @Pedro Correa
-410d M Cavern of Souls @Pedro Correa
-410e M Cavern of Souls @Pedro Correa
-410f M Cavern of Souls @Pedro Correa
+
+[double-face]
+9 Idol of the Deep King|LCI
+9 Inverted Iceberg|LCI
+9 Kaslem's Stonetree|LCI
+9 Oteclan Landmark|LCI
+9 Tithing Blade|LCI
+3 Clay-Fired Bricks|LCI
+3 Dowsing Device|LCI
+3 Grasping Shadows|LCI
+3 Jade Seedstones|LCI
+3 Lodestone Needle|LCI
+3 Master's Guide-Mural|LCI
+3 Saheeli's Lattice|LCI
+3 Spring-Loaded Sawblades|LCI
+3 Sunbird Standard|LCI
+3 Twists and Turns|LCI
+3 Visage of Dread|LCI
+3 Waterlogged Hulk|LCI
+
+[lands]
+3 Plains|LCI|1
+3 Island|LCI|1
+3 Swamp|LCI|1
+3 Mountain|LCI|1
+3 Forest|LCI|1
+5 Captivating Cave|LCI
+5 Hidden Cataract|LCI
+5 Hidden Courtyard|LCI
+5 Hidden Necropolis|LCI
+5 Hidden Nursery|LCI
+5 Hidden Volcano|LCI
+5 Promising Vein|LCI
 
 [tokens]
 b_1_1_bat_flying

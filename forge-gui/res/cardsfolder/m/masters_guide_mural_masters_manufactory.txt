@@ -1,0 +1,19 @@
+Name:Master's Guide-Mural
+ManaCost:3 W U
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 white and blue Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_4_4_a_golem
+K:Craft:4 W W U ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Token & Type$Golem
+Oracle:When Master's Guide-Mural enters the battlefield, create a 4/4 white and blue Golem artifact creature token.\nCraft with artifact {4}{W}{W}{U} ({4}{W}{W}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Master's Manufactory
+ManaCost:no cost
+Colors:white,blue
+Types:Artifact
+A:AB$ Token | Cost$ T | TokenScript$ wu_4_4_a_golem | CheckSVar$ Count$ThisTurnEntered_Battlefield_Card.Self+YouCtrl,Artifact.YouCtrl+Other | SpellDescription$ Create a 4/4 white and blue Golem artifact creature token. Activate only if CARDNAME or another artifact entered the battlefield under your control this turn.
+Oracle:{T}: Create a 4/4 white and blue Golem artifact creature token. Activate only if Master's Manufactory or another artifact entered the battlefield under your control this turn.

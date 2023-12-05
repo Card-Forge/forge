@@ -47,6 +47,7 @@ public enum Keyword {
     COMPLEATED("Compleated", SimpleKeyword.class, true, "This planeswalker enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for."),
     CONSPIRE("Conspire", SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE("Convoke", SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
+    CRAFT("Craft", Craft.class, false, "%s: Return this card transformed under its owner's control. Craft only as a sorcery."),
     CREW("Crew", KeywordWithAmount.class, false, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP("Cumulative upkeep", KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it."),
     CYCLING("Cycling", KeywordWithCost.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class

@@ -68,7 +68,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             if (overridingSA instanceof AbilitySub) {
                 ((AbilitySub)overridingSA).setParent(null);
             }
-
             immediateTrig.setOverridingAbility(overridingSA);
         }
 

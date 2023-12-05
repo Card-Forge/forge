@@ -109,7 +109,8 @@ public class CostTapType extends CostPartWithList {
             if (CardType.CoreType.isValidEnum(descTrim)) {
                 descTrim = descTrim.toLowerCase();
             }
-            sb.append("another untapped ").append(descTrim);
+            sb.append(amt.equals("1") ? "another untapped " + descTrim : 
+                Lang.nounWithNumeral(amt, "other untapped " + descTrim));
             if (!descTrim.contains("you control")) {
                 sb.append(" you control");
             }

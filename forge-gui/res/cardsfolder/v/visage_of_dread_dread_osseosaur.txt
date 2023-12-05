@@ -1,0 +1,25 @@
+Name:Visage of Dread
+ManaCost:1 B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose an artifact or creature card from it. That player discards that card.
+SVar:TrigRemove:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Artifact,Creature
+K:Craft:5 B ExileCtrlOrGrave<2/Creature.Other>
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Mill
+Oracle:When Visage of Dread enters the battlefield, target opponent reveals their hand. You choose an artifact or creature card from it. That player discards that card.\nCraft with two creatures {5}{B} ({5}{B}, Exile this artifact, Exile the two from among creatures you control and/or creature cards in your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Dread Osseosaur
+ManaCost:no cost
+Colors:black
+Types:Creature Dinosaur Skeleton Horror
+PT:5/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may mill two cards. (You may put the top two cards of your library into your graveyard.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Optional$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Dread Osseosaur enters the battlefield or attacks, you may mill two cards. (You may put the top two cards of your library into your graveyard.)

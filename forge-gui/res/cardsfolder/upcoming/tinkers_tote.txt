@@ -1,7 +1,0 @@
-Name:Tinker's Tote
-ManaCost:2 W
-Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken| TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 colorless Gnome artifact creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_gnome | TokenOwner$ You
-A:AB$ GainLife | Cost$ W Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
-Oracle:When Tinker's Tote enters the battlefield, create two 1/1 colorless Gnome artifact creature tokens.\n{W}, Sacrifice Tinker's Tote: You gain 3 life.

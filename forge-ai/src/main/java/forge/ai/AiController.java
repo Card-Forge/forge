@@ -1877,6 +1877,8 @@ public class AiController {
                 } else {
                     return options.get(0);
                 }
+            case ChooseNumber:
+                return Aggregates.random(options);
             default:
                 return options.get(0);
         }

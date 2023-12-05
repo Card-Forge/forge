@@ -141,20 +141,21 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExile cost) {
+        String type = cost.getType();
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
 
-        if (cost.getType().equals("All")) {
+        if (type.equals("All")) {
             return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
         }
-        else if (cost.getType().contains("FromTopGrave")) {
+        else if (type.contains("FromTopGrave")) {
             return null;
         }
 
         int c = cost.getAbilityAmount(ability);
 
-        if (cost.getFrom().equals(ZoneType.Library)) {
+        if (cost.from.size() == 1 && cost.getFrom().get(0).equals(ZoneType.Library)) {
             return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
         }
         else if (cost.zoneRestriction == 0) {
@@ -301,7 +302,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (!player.canPayLife(c, isEffect(), ability)) {
             return null;
         }
-        // activator.payLife(c, null);
         return PaymentDecision.number(c);
     }
 

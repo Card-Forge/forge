@@ -4,5 +4,6 @@ Types:Creature Human Druid
 PT:3/1
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
 A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SpellDescription$ Mill two cards.
-DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Mill
 Oracle:{T}: Add {B} or {G}.\n{T}: Mill two cards.

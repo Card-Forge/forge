@@ -461,7 +461,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen cards: ");
+            area.append("(chosen card").append(card.getChosenCards().size() == 1 ? ": " : "s: ");
             if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
                 List<CardView> chosenToShow = new ArrayList<>();
                 for (CardView cc : card.getChosenCards()) {

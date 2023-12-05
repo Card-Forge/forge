@@ -5,7 +5,7 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill a card.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill a card.
 SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You
-A:AB$ SetState | Cost$ XCantBe0 X U U B B ExileFromGrave<X/Creature/creature cards> | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform NICKNAME. X can't be zero. Activate only as a sorcery.
+A:AB$ SetState | Cost$ XMin1 X U U B B ExileFromGrave<X/Creature/creature cards> | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform NICKNAME. X can't be zero. Activate only as a sorcery.
 SVar:X:Count$xPaid
 DeckHas:Ability$Mill|Counters
 DeckHints:Ability$Graveyard

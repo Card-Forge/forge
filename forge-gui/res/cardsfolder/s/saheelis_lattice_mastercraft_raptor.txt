@@ -1,0 +1,24 @@
+Name:Saheeli's Lattice
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw two cards.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 2
+K:Craft:4 R XMin1 ExileCtrlOrGrave<X/Dinosaur.Other>
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Discard|Graveyard
+DeckNeeds:Type$Dinosaur
+AI:RemoveDeck:All
+Oracle:When Saheeli's Lattice enters the battlefield, you may discard a card. If you do, draw two cards.\nCraft with one or more Dinosaurs {4}{R} ({4}{R}, Exile this artifact, Exile one or more Dinosaurs you control and/or Dinosaur cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Mastercraft Raptor
+ManaCost:no cost
+Colors:red
+Types:Artifact Creature Dinosaur
+PT:*/4
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the total power of the exiled cards used to craft it.
+SVar:X:ExiledWith$CardPower
+Oracle:Mastercraft Raptor's power is equal to the total power of the exiled cards used to craft it.

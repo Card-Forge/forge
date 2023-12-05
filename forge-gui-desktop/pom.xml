@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.59-SNAPSHOT</version>
+		<version>1.6.60-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -118,7 +118,7 @@
                         </goals>
                         <configuration>
                             <!-- TODO: insert placeholder for latest version tag -->
-                            <fromRef>forge-1.6.58</fromRef>
+                            <fromRef>forge-1.6.59</fromRef>
                             <file>../forge-gui/release-files/CHANGES.txt</file>
                             <templateContent>
 <![CDATA[
