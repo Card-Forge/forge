@@ -413,7 +413,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final CardCollection exiled = new CardCollection();
         final String required = sharedType ? " (must share a card type)" : "";
 
-
         final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList,
                 mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded) + required,
                 null);
