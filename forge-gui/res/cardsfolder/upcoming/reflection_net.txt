@@ -4,8 +4,6 @@ Types:Artifact
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | Duration$ UntilHostLeavesPlay
-A:AB$ ChooseCard | Cost$ 2 | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Reflection Net | SubAbility$ DBClone | SorcerySpeed$ True | GameActivationLimit$ 1 | SpellDescription$ Target creature you control becomes a copy of a creature card exiled with Reflection Net. Activate as a sorcery and only once.
-SVar:DBClone:DB$ Clone | CloneTarget$ Targeted | Defined$ ChosenCard | ValidTgts$ Creature.YouCtrl | Duration$ Permanent | SubAbility$ DBClearChosen
-SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ Clone | Cost$ 2 | CloneTarget$ Targeted | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource | ChoiceTitle$ Choose a card exiled with Reflection Net | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Duration$ Permanent | SorcerySpeed$ True | GameActivationLimit$ 1 | SpellDescription$ Target creature you control becomes a copy of a creature card exiled with Reflection Net. Activate as a sorcery and only once.
 SVar:PlayMain1:TRUE
 Oracle:Flash\nWhen Reflection Net enters the battlefield, exile target creature until Reflection Net leaves the battlefield.\n{2}: Target creature you control becomes a copy of a creature card exiled with Reflection Net. Activate as a sorcery and only once.
