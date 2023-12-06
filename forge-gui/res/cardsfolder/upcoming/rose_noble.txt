@@ -1,0 +1,10 @@
+Name:Rose Noble
+ManaCost:3 U
+Types:Legendary Creature Human
+PT:2/3
+K:Ward:2
+T:Mode$ SpellCast | ValidCard$ Doctor,Creature.withDoctor's companion | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a Doctor spell or creature spell with doctor's companion, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckNeeds:Type$Doctor
+K:Doctor's companion
+Oracle:Ward {2}\nWhenever you cast a Doctor spell or creature spell with doctor's companion, draw a card.\nDoctor's companion (You can have two commanders if the other is the Doctor.)
