@@ -35,7 +35,7 @@ ScryfallCode=KHC
 27 U Goldnight Commander @Chris Rahn
 28 C Kor Cartographer @Ryan Pancoast
 29 R Marshal's Anthem @Matt Stewart
-30 U Momentary Blink @Evan Shipard
+30 C Momentary Blink @Evan Shipard
 31 R Restoration Angel @Jake Murray
 32 U Return to Dust @Wayne Reynolds
 33 R Storm Herd @Jim Nelson
