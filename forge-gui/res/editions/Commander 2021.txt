@@ -150,7 +150,7 @@ ScryfallCode=C21
 142 R Defiant Bloodlord @Craig J Spearing
 143 C Epicure of Blood @Anna Steinbauer
 144 C Feed the Swarm @Andrey Kuzinskiy
-145 R Greed @Izzy
+145 U Greed @Izzy
 146 R Infernal Offering @Anthony Palumbo
 147 M Necropolis Regent @Winona Nelson
 148 M Noxious Gearhulk @Lius Lasahido
