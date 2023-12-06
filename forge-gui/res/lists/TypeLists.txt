@@ -310,6 +310,7 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Chorus
 Lesson
 Trap
 [EnchantmentTypes]
