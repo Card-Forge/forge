@@ -23,3 +23,8 @@ ScryfallCode=HHO
 19 M Decorated Knight @Zoltan Boros
 20 M Topdeck the Halls @Kieran Yanner
 21 M Last-Minute Chopping @Marta Nael
+22 M Chaos Wrap @Zoltan Boros
+23 M Seasonal Sequels @Adrián Rodríguez Pérez
+
+[tokens]
+c_a_treasure_sac

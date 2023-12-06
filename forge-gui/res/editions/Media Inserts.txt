@@ -38,7 +38,7 @@ ScryfallCode=PMEI
 35 R Voltaic Key @Henry G. Higginbotham
 36 U Daxos, Blessed by the Sun @Lius Lasahido
 37 R Staggering Insight @Dmitry Burmak
-38 C Dark Ritual @Tom Fleming
+38 R Dark Ritual @Tom Fleming
 39 R Sprite Dragon @Gabor Szikszai
 40 R Hypnotic Sprite @Irina Nordsol
 41 R Heliod's Pilgrim @Micah Epstein
@@ -53,6 +53,7 @@ ScryfallCode=PMEI
 50 R Frantic Search @Jeff Miracola
 51 R Mental Misstep @Erica Yang
 52 R Worn Powerstone @Henry G. Higginbotham
-53 R Gingerbrute @ Vincent Proce
+53 R Gingerbrute @Vincent Proce
 54 R Ruin Crab @Simon Dominic
 55 R Avalanche Riders @Lake Hurwitz
+56 R Pyromancer's Gauntlet @Magali Villeneuve

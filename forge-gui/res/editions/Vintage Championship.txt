@@ -38,3 +38,4 @@ ScryfallCode=OVNT
 2022A M Bazaar of Baghdad @Chris Seaman
 2022B M Time Walk @Tyler Walpole
 2022C M Ancestral Recall @Volkan Baǵa
+2023a M Mental Misstep @Kai Carpenter
