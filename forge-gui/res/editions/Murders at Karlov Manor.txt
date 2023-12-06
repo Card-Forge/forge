@@ -14,6 +14,7 @@ ScryfallCode=MKM
 52 C Deduce @Quintin Gleim
 60 C Hotshot Investigators @Jodie Muir
 66 C Out Cold @Tuan Duong Chu
+90 U Lead Pipe @Igor Krstic
 122 C Demand Answers @Justyna Dura
 144 C Shock @Eric Wilkerson
 159 C Fanatical Strength @Durion
@@ -45,4 +46,7 @@ ScryfallCode=MKM
 367 U Meddling Youths @Jack Hughes
 369 M Rakdos, Patron of Chaos @Ivan Shavrin
 384 M Alquist Proft, Master Sleuth @Peter Diamond
+387 M Rakdos, Patron of Chaos @Ivan Shavrin
+424 U Gleaming Geardrake @Filipe Pagliuso
+426 U Lightning Helix @Eli Minaya
 429 R Wojek Investigator @Greg Staples
