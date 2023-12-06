@@ -3032,7 +3032,9 @@ public class AbilityUtils {
         }
         for (final Entry<String, String> e : typeMap.entrySet()) {
             final String key = e.getKey();
-            replaced = getReplacedText(replaced, CardType.getPluralType(key), CardType.getPluralType(e.getValue()), isDescriptive);
+            if (isDescriptive) {
+                replaced = getReplacedText(replaced, CardType.getPluralType(key), CardType.getPluralType(e.getValue()), isDescriptive);
+            }
             replaced = getReplacedText(replaced, key, e.getValue(), isDescriptive);
         }
 
