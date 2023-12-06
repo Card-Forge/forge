@@ -161,6 +161,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
     private int numDiscardedThisTurn;
+    private int numExploredThisTurn;
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
     private int numCardsInHandStartedThisTurnWith;
@@ -1588,6 +1589,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         numDiscardedThisTurn = 0;
     }
 
+    public final int getNumExploredThisTurn() {
+        return numExploredThisTurn;
+    }
+    public final void addExploredThisTurn() {
+        numExploredThisTurn++;
+    }
+    public final void resetNumExploredThisTurn() {
+        numExploredThisTurn = 0;
+    }
+
     public int getNumCardsInHandStartedThisTurnWith() {
         return numCardsInHandStartedThisTurnWith;
     }
@@ -2524,6 +2535,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
         resetNumDiscardedThisTurn();
+        resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());

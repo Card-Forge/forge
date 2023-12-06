@@ -1,0 +1,8 @@
+Name:Herald's Reveille
+ManaCost:U
+Types:Sorcery
+A:SP$ Branch | BranchConditionSVar$ PlayerCountPropertyYou$ExploredThisTurn | TrueSubAbility$ DBSeek | FalseSubAbility$ DBDraw | SpellDescription$ Draw a card. If a permanent you controlled explored this turn, seek a Merfolk card instead.
+SVar:DBSeek:DB$ Seek | Type$ Merfolk
+SVar:DBDraw:DB$ Draw
+DeckHints:Type$Merfolk
+Oracle:Draw a card. If a permanent you controlled explored this turn, seek a Merfolk card instead.
