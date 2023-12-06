@@ -725,7 +725,7 @@ public class CardFactoryUtil {
             } else if (protectType.equals("everything")) {
                 return "";
             } else {
-                validSource = CardType.getSingularType(protectType);
+                throw new RuntimeException("unknown protection keyword: " + kw);
             }
         }
         if (validSource.isEmpty()) {
