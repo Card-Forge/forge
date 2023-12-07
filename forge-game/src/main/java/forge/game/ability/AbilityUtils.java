@@ -3027,6 +3027,7 @@ public class AbilityUtils {
                     replaced = getReplacedText(replaced, colorCaptCase, e.getValue(), isDescriptive);
                 }
             } else {
+                replaced = getReplacedText(replaced, key.toLowerCase(), e.getValue().toLowerCase(), isDescriptive);
                 replaced = getReplacedText(replaced, key, e.getValue(), isDescriptive);
             }
         }
