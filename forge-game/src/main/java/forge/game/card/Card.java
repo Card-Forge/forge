@@ -3937,6 +3937,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public Iterable<KeywordsChange> getChangedCardKeywordsList() {
         return Iterables.concat(
             changedCardKeywordsByText.values(), // Layer 3
+            ImmutableList.of(changedCardKeywordsByWord), // Layer 3
             ImmutableList.of(new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), this.hasRemoveIntrinsic())), // Layer 4
             changedCardKeywords.values() // Layer 6
         );
