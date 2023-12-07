@@ -3,7 +3,6 @@ package forge.game.card;
 import java.util.Map;
 
 import com.google.common.collect.ForwardingMap;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import com.google.common.collect.TreeBasedTable;
