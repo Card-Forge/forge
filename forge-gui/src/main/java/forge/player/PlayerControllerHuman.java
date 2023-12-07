@@ -19,7 +19,11 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 
+
+import forge.game.player.actions.SelectCardAction;
+import forge.game.player.actions.SelectPlayerAction;
 import forge.game.trigger.TriggerType;
+
 import forge.trackable.TrackableCollection;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.ObjectUtils;
@@ -136,7 +140,6 @@ import forge.item.PaperCard;
 import forge.localinstance.achievements.AchievementCollection;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.DeckAIUtils;
@@ -2341,12 +2344,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectPlayer(final PlayerView playerView, final ITriggerEvent triggerEvent) {
+        // TODO Also record input type and wait for that input to be present before sending select player
+        macros().addRememberedAction(new SelectPlayerAction(playerView));
+
         inputProxy.selectPlayer(playerView, triggerEvent);
     }
 
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect,
                               final ITriggerEvent triggerEvent) {
+        macros().addRememberedAction(new SelectCardAction(cardView));
+
         return inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
     }
 
@@ -3124,168 +3132,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public IMacroSystem macros() {
         if (macros == null) {
-            macros = new MacroSystem();
+            //macros = new BasicMacroSystem(this);
+            macros = new RecordActionsMacroSystem(this);
         }
         return macros;
-    }
-
-    // Simple macro system implementation. Its goal is to simulate "clicking"
-    // on cards/players in an automated way, to reduce mechanical overhead of
-    // situations like repeated combo activation.
-    public class MacroSystem implements IMacroSystem {
-        // Position in the macro "sequence".
-        private int sequenceIndex = 0;
-        // "Actions" are stored as a pair of the "action" recipient (the entity
-        // to "click") and a boolean representing whether the entity is a player.
-        private final List<Pair<GameEntityView, Boolean>> rememberedActions = Lists.newArrayList();
-        private String rememberedSequenceText = "";
-
-        @Override
-        public void setRememberedActions() {
-            final String dialogTitle = localizer.getMessage("lblRememberActionSequence");
-            // Not sure if this priority guard is really needed, but it seems
-            // like an alright idea.
-            final Input input = inputQueue.getInput();
-            if (!(input instanceof InputPassPriority)) {
-                getGui().message(localizer.getMessage("lblYouMustHavePrioritytoUseThisFeature"), dialogTitle);
-                return;
-            }
-
-            int currentIndex = sequenceIndex;
-            sequenceIndex = 0;
-            // Use a Pair so we can keep a flag for isPlayer
-            final List<Pair<Integer, Boolean>> entityInfo = Lists.newArrayList();
-            final int playerID = getPlayer().getId();
-            // Only support 1 opponent for now. There are some ideas about
-            // supporting multiplayer games in the future, but for now it would complicate
-            // the parsing process, and this implementation is still a "proof of concept".
-            int opponentID = 0;
-            for (final Player player : getGame().getPlayers()) {
-                if (player.getId() != playerID) {
-                    opponentID = player.getId();
-                    break;
-                }
-            }
-
-            // A more informative prompt would be useful, but the dialog seems
-            // to like to clip text in long messages...
-            final String prompt = localizer.getMessage("lblEnterASequence");
-            String textSequence = getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES,
-                    rememberedSequenceText);
-            if (textSequence == null || textSequence.trim().isEmpty()) {
-                rememberedActions.clear();
-                if (!rememberedSequenceText.isEmpty()) {
-                    rememberedSequenceText = "";
-                    getGui().message(localizer.getMessage("lblActionSequenceCleared"), dialogTitle);
-                }
-                return;
-            }
-            // If they haven't changed the sequence, inform them the index is
-            // reset but don't change rememberedActions.
-            if (textSequence.equals(rememberedSequenceText)) {
-                if (currentIndex > 0 && currentIndex < rememberedActions.size()) {
-                    getGui().message(localizer.getMessage("lblRestartingActionSequence"), dialogTitle);
-                }
-                return;
-            }
-            rememberedSequenceText = textSequence;
-            rememberedActions.clear();
-
-            // Clean up input
-            textSequence = textSequence.trim().toLowerCase().replaceAll("[@%]", "");
-            // Replace "opponent" and "me" with symbols to ease following replacements
-            textSequence = textSequence.replaceAll("\\bopponent\\b", "%").replaceAll("\\bme\\b", "@");
-            // Strip user input of anything that's not a
-            // digit/comma/whitespace/special symbol
-            textSequence = textSequence.replaceAll("[^\\d\\s,@%]", "");
-            // Now change various allowed delimiters to something neutral
-            textSequence = textSequence.replaceAll("(,\\s+|,|\\s+)", "_");
-            final String[] splitSequence = textSequence.split("_");
-            for (final String textID : splitSequence) {
-                if (StringUtils.isNumeric(textID)) {
-                    entityInfo.add(Pair.of(Integer.valueOf(textID), false));
-                } else if (textID.equals("%")) {
-                    entityInfo.add(Pair.of(opponentID, true));
-                } else if (textID.equals("@")) {
-                    entityInfo.add(Pair.of(playerID, true));
-                }
-            }
-            if (entityInfo.isEmpty()) {
-                getGui().message(localizer.getMessage("lblErrorPleaseCheckID"), dialogTitle);
-                return;
-            }
-
-            // Fetch cards and players specified by the user input
-            final ZoneType[] zones = {ZoneType.Battlefield, ZoneType.Hand, ZoneType.Graveyard, ZoneType.Exile,
-                    ZoneType.Command};
-            final CardCollectionView cards = getGame().getCardsIn(Arrays.asList(zones));
-            for (final Pair<Integer, Boolean> entity : entityInfo) {
-                boolean found = false;
-                // Nested loops are no fun; however, seems there's no better way
-                // to get stuff by ID
-                boolean isPlayer = entity.getValue();
-                if (isPlayer) {
-                    for (final Player player : getGame().getPlayers()) {
-                        if (player.getId() == entity.getKey()) {
-                            found = true;
-                            rememberedActions.add(Pair.of(player.getView(), true));
-                            break;
-                        }
-                    }
-                } else {
-                    for (final Card card : cards) {
-                        if (card.getId() == entity.getKey()) {
-                            found = true;
-                            rememberedActions.add(Pair.of(card.getView(), false));
-                            break;
-                        }
-                    }
-                }
-                if (!found) {
-                    getGui().message(localizer.getMessage("lblErrorEntityWithId") + " " + entity.getKey() + " " + localizer.getMessage("lblNotFound") + ".", dialogTitle);
-                    rememberedActions.clear();
-                    return;
-                }
-            }
-        }
-
-        @Override
-        public void nextRememberedAction() {
-            final String dialogTitle = localizer.getMessage("lblDoNextActioninSequence");
-            if (rememberedActions.isEmpty()) {
-                getGui().message(localizer.getMessage("lblPleaseDefineanActionSequenceFirst"), dialogTitle);
-                return;
-            }
-            if (sequenceIndex >= rememberedActions.size()) {
-                // Wrap around to repeat the sequence
-                sequenceIndex = 0;
-            }
-            final Pair<GameEntityView, Boolean> action = rememberedActions.get(sequenceIndex);
-            final boolean isPlayer = action.getValue();
-            if (isPlayer) {
-                selectPlayer((PlayerView) action.getKey(), new DummyTriggerEvent());
-            } else {
-                selectCard((CardView) action.getKey(), null, new DummyTriggerEvent());
-            }
-            sequenceIndex++;
-        }
-
-        private class DummyTriggerEvent implements ITriggerEvent {
-            @Override
-            public int getButton() {
-                return 1; // Emulate left mouse button
-            }
-
-            @Override
-            public int getX() {
-                return 0; // Hopefully this doesn't do anything wonky!
-            }
-
-            @Override
-            public int getY() {
-                return 0;
-            }
-        }
     }
 
     @Override

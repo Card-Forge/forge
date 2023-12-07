@@ -408,6 +408,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     private void done() {
         for (final GameEntity c : targets) {
+            //getController().macros().addRememberedAction(new TargetEntityAction(c.getView()));
             if (c instanceof Card) {
                 getController().getGui().setUsedToPay(CardView.get((Card) c), false);
             }

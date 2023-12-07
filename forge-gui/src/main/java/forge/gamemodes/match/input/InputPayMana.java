@@ -20,6 +20,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.player.actions.PayManaFromPoolAction;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
@@ -200,6 +201,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
+            // Record paying mana from pool here
+            getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
             onManaAbilityPaid();
             showMessage();
         }
