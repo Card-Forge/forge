@@ -345,8 +345,7 @@ public class CardDetailUtil {
 
             for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
                 // ignore lower case and plural form keys, to avoid duplicity
-                if (Character.isUpperCase(e.getKey().charAt(0))
-                        && !CardType.Constant.singularTypes.containsKey(e.getKey())) {
+                if (Character.isUpperCase(e.getKey().charAt(0))) {
                     area.append("Text changed: all instances of ");
                     if (e.getKey().equals("Any")) {
                         if (changedColorWords.containsKey(e.getKey())) {

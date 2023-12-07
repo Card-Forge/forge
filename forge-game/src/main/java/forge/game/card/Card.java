@@ -3970,6 +3970,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.changedTextColors.addEmpty(timestamp, staticId);
         this.changedTextTypes.addEmpty(timestamp, staticId);
 
+        this.updateChangedText();
+
         if (updateView) {
             updateTypesForView();
         }
@@ -5020,6 +5022,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         changedCardKeywordsByWord = new KeywordsChange(addKeywords, removeKeywords, false);
 
         text = AbilityUtils.applyDescriptionTextChangeEffects(originalText, this);
+
+        getView().updateChangedColorWords(this);
+        getView().updateChangedTypes(this);
 
         currentState.getView().updateAbilityText(this, currentState);
         view.updateNonAbilityText(this);

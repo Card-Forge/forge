@@ -100,12 +100,6 @@ public final class CardChangedWords extends ForwardingMap<String, String> {
                 resultCache.put(ccw.oldWord, ccw.newWord);
             }
 
-            // TODO should that be removed?
-            for (final String key : ImmutableList.copyOf(resultCache.keySet())) {
-                if (!key.equals("Any")) {
-                    resultCache.put(key.toLowerCase(), resultCache.get(key).toLowerCase());
-                }
-            }
             isDirty = false;
         }
     }
