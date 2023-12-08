@@ -552,10 +552,7 @@ public class ReplacementHandler {
         // Log the replacement effect
         if (res != ReplacementResult.NotReplaced) {
             String message = re.getDescription();
-            if ( !StringUtils.isEmpty(message)) {
-                if (re.getHostCard() != null) {
-                    message = TextUtil.fastReplace(message, "CARDNAME", re.getHostCard().getName());
-                }
+            if (!StringUtils.isEmpty(message)) {
                 game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
             }
         }
