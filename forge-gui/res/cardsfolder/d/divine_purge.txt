@@ -1,10 +1,11 @@
 Name:Divine Purge
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact.cmcLE3,Creature.cmcLE3 | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all artifacts and creatures with mana value 3 or less. They perpetually gain "This spell costs {2} more to cast" and "This permanent enters the battlefield tapped." For as long as each of them remain exiled, its owner may play it.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Divine Purge's Perpetual Effect | SubAbility$ DBMayPlayEffect
-SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ RaiseCost & ETBTappedDesc | EffectZone$ Command | AddKeyword$ CARDNAME enters the battlefield tapped. | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | SubAbility$ DBMayPlayEffect | Description$ The exiled cards perpetually gain "This spell costs {2} more to cast" and "This permanent enters the battlefield tapped."
+A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact.cmcLE3,Creature.cmcLE3 | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Exile all artifacts and creatures with mana value 3 or less.
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ Remembered | staticAbilities$ RaiseCost | Replacements$ ReplaceETB | SubAbility$ DBMayPlayEffect | StackDescription$ SpellDescription | SpellDescription$ They perpetually gain "This spell costs {2} more to cast" and "This permanent enters the battlefield tapped."
 SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} more to cast.
+SVar:ReplaceETB:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ This permanent enters the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 SVar:ETBTappedDesc:Mode$ Continuous | Affected$ Card.Self | Description$ This permanent enters the battlefield tapped.
 SVar:DBMayPlayEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ OwnerMayPlay | Duration$ Permanent | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | SpellDescription$ For as long as each of them remain exiled, its owner may play it.
 SVar:OwnerMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | EffectZone$ Command | MayPlayPlayer$ CardOwner | Description$ For as long as each of these remain exiled, its owner may play it.

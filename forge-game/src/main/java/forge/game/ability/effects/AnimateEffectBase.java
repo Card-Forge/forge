@@ -18,8 +18,12 @@
 package forge.game.ability.effects;
 
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
 
@@ -80,17 +84,35 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddTypes", addType);
+                params.put("RemoveTypes", removeType);
+                params.put("RemoveXTypes", remove);
+                params.put("Timestamp", timestamp);
+                c.addPerpetual(Pair.of("Types", params));
+            }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
         if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddKeywords", keywords);
+                params.put("Timestamp", timestamp);
+                c.addPerpetual(Pair.of("Keywords", params));
+            }
             c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
         }
 
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {
             if (perpetual) {
-                c.generatePerpetual("NewPT", power, toughness, timestamp);
+                Map <String, Object> params = new HashMap<>();
+                params.put("Power", power);
+                params.put("Toughness", toughness);
+                params.put("Timestamp", timestamp);
+                c.addPerpetual(Pair.of("NewPT", params));
             } else {
                 c.addNewPT(power, toughness, timestamp, 0);
             }
@@ -188,8 +210,21 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("Activated", addedAbilities);
+                params.put("ToRemove", removedAbilities);
+                params.put("Triggers", addedTriggers);
+                params.put("Replacements", addedReplacements);
+                params.put("Statics", addedStaticAbilities);
+                params.put("RemoveAll", removeAll);
+                params.put("RemoveNonMana", removeNonManaAbilities);
+                params.put("Timestamp", timestamp);
+                c.addPerpetual(Pair.of("Abilities", params));
+            } else {
+                c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            }
         }
 
         if (!"Permanent".equals(duration) && !perpetual) {

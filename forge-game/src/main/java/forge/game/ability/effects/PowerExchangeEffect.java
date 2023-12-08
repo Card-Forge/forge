@@ -1,7 +1,11 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import forge.GameCommand;
 import forge.game.Game;
@@ -60,8 +64,12 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         if (perpetual) {
-            c1.generatePerpetual("NewPT", power2, null, timestamp);
-            c2.generatePerpetual("NewPT", power1, null, timestamp);
+            Map <String, Object> params = new HashMap<>();
+            params.put("Power", power2);
+            params.put("Timestamp", timestamp);
+            c1.addPerpetual(Pair.of("NewPT", params));
+            params.put("Power", power1);
+            c2.addPerpetual(Pair.of("NewPT", params));
         } else {
             c1.addNewPT(power2, null, timestamp, 0);
             c2.addNewPT(power1, null, timestamp, 0);
@@ -89,12 +97,4 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         }
     }
 
-    private void generatePerpetual(Card c, int power, long timestamp) {
-        List<Object> params = new ArrayList<>();
-        params.add(0, power);
-        params.add(1, null);
-        params.add(2, timestamp);
-        params.add(3, (long) 0);
-        c.addPerpetual("PT", params);
-    }
 }

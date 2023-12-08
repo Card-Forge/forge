@@ -4386,40 +4386,50 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return intensity > 0;
     }
 
-    private Map<String, List<Object>> perpetual = Maps.newHashMap();
+    private List<Pair<String, Map<String, Object>>> perpetual = new ArrayList<>();
     public final boolean hasPerpetual() {
         return !perpetual.isEmpty();
     }
-    public final Map<String, List<Object>> getPerpetual() {
+    public final List<Pair<String, Map<String, Object>>> getPerpetual() {
         return perpetual;
     }
 
-    public final void addPerpetual(String s, List<Object> list) {
-        perpetual.put(s, list);
-        executePerpetual(s, list);
+    public final void addPerpetual(Pair<String, Map<String, Object>> p) {
+        perpetual.add(p);
+        executePerpetual(p);
     }
 
-    public final void executePerpetual(String s, List<Object> list) {
-        if (s.equals("NewPT")) {
-            addNewPT((Integer) list.get(0), (Integer) list.get(1), (long) list.get(2), (long) list.get(3));
-        } else if (s.equals("PTBoost")) {
-            addPTBoost((Integer) list.get(0), (Integer) list.get(1), (long) list.get(2), (long) list.get(3));
+    public final void executePerpetual(Pair<String, Map<String, Object>> p) {
+        final String pType = p.getKey();
+        Map<String, Object> params = p.getValue();
+        if (pType.equals("NewPT")) {
+            addNewPT((Integer) params.get("Power"), (Integer) params.get("Toughness"), (long) 
+                params.get("Timestamp"), (long) 0);
+        } else if (pType.equals("PTBoost")) {
+            addPTBoost((Integer) params.get("Power"), (Integer) params.get("Toughness"), (long) 
+                params.get("Timestamp"), (long) 0);
+        } else if (pType.equals("Keywords")) {
+            addChangedCardKeywords((List<String>) params.get("AddKeywords"), Lists.newArrayList(), 
+                false, (long) params.get("Timestamp"), (long) 0);        
+        } else if (pType.equals("Types")) {
+            addChangedCardTypes((CardType) params.get("AddTypes"), (CardType) params.get("RemoveTypes"), 
+            false, (Set<RemoveType>) params.get("RemoveXTypes"), 
+            (long) params.get("Timestamp"), (long) 0, true, false);
+        } else if (pType.equals("Abilities")) {
+            addChangedCardTraits((Collection<SpellAbility>) params.get("Activated"), 
+                (Collection<SpellAbility>) params.get("ToRemove"), 
+                (Collection<Trigger>) params.get("Triggers"), 
+                (Collection<ReplacementEffect>) params.get("Replacements"),
+                (Collection<StaticAbility>) params.get("Statics"), (boolean) params.get("RemoveAll"), 
+                (boolean) params.get("RemoveNonMana"), (long) params.get("Timestamp"), (long) 0);
         }
     }
 
-    public final void setPerpetual(Map<String, List<Object>> map) {
-        for (String key : map.keySet()) {
-            addPerpetual(key, map.get(key));
+    public final void setPerpetual(List<Pair<String, Map<String, Object>>> perp) {
+        perpetual = perp;
+        for (Pair <String, Map<String, Object>> p : perpetual) {
+            executePerpetual(p);
         }
-    }
-
-    public final void generatePerpetual(String type, Integer power, Integer toughness, long timestamp) {
-        List<Object> params = new ArrayList<>();
-        params.add(0, power);
-        params.add(1, toughness);
-        params.add(2, timestamp);
-        params.add(3, (long) 0);
-        addPerpetual(type, params);
     }
 
     private int multiKickerMagnitude = 0;

@@ -1,7 +1,11 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -47,7 +51,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
             if (a != 0 || d != 0) {
                 if (perpetual) {
-                    tgtC.generatePerpetual("PTBoost", a, d, timestamp);
+                    Map <String, Object> params = new HashMap<>();
+                    params.put("Power", a);
+                    params.put("Toughness", d);
+                    params.put("Timestamp", timestamp);
+                    tgtC.addPerpetual(Pair.of("PTBoost", params));
                 } else {
                     tgtC.addPTBoost(a, d, timestamp, 0);
                 }

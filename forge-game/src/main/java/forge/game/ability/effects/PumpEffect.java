@@ -1,9 +1,12 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -72,15 +75,24 @@ public class PumpEffect extends SpellAbilityEffect {
 
         if (a != 0 || d != 0) {
             if (perpetual) {
-                gameCard.generatePerpetual("PTBoost", a, d, timestamp);
-            } else {
-                gameCard.addPTBoost(a, d, timestamp, 0);
-            }
+                Map <String, Object> params = new HashMap<>();
+                params.put("Power", a);
+                params.put("Toughness", d);
+                params.put("Timestamp", timestamp);
+                gameCard.addPerpetual(Pair.of("PTBoost", params));
+            } else gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
         }
 
         if (!kws.isEmpty()) {
-            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddKeywords", keywords);
+                params.put("Timestamp", timestamp);
+                gameCard.addPerpetual(Pair.of("Keywords", params));
+            } else {
+                gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);                
+            }
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
