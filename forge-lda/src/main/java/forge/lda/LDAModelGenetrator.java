@@ -1,4 +1,4 @@
-package forge.lda;
+package main.java.forge.lda;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
