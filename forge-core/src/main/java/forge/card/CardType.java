@@ -250,7 +250,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean isEmpty() {
-        return coreTypes.isEmpty() && supertypes.isEmpty() && subtypes.isEmpty() && !excludedCreatureSubtypes.isEmpty();
+        return coreTypes.isEmpty() && supertypes.isEmpty() && subtypes.isEmpty() && excludedCreatureSubtypes.isEmpty();
     }
 
     @Override
