@@ -1,0 +1,12 @@
+Name:Rakdos, Patron of Chaos
+ManaCost:4 B R
+Types:Legendary Creature Demon
+PT:6/6
+K:Flying
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigSacrificeOpp | TriggerDescription$ At the beginning of your end step, target opponent may sacrifice two nonland, nontoken permanents. If they don't, you draw two cards.
+SVar:TrigSacrificeOpp:DB$ Sacrifice | ValidTgts$ Opponent | Amount$ 2 | Optional$ True | SacValid$ Permanent.nonLand+nonToken | SacMessage$ two nonland, nontoken permanents | RememberSacrificed$ True | SubAbility$ DBDraw 
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | NumCards$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
+Oracle:Flying, trample\nAt the beginning of your end step, target opponent may sacrifice two nonland, nontoken permanents. If they don't, you draw two cards.
