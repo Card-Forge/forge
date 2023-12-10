@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Green:Protection from green:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from green. This effect doesn't remove CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Green:green:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from green. This effect doesn't remove CARDNAME.
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature has protection from green. This effect doesn't remove Green Ward.

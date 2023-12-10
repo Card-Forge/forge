@@ -344,25 +344,21 @@ public class CardDetailUtil {
             }
 
             for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
-                // ignore lower case and plural form keys, to avoid duplicity
-                if (Character.isUpperCase(e.getKey().charAt(0))
-                        && !CardType.Constant.singularTypes.containsKey(e.getKey())) {
-                    area.append("Text changed: all instances of ");
-                    if (e.getKey().equals("Any")) {
-                        if (changedColorWords.containsKey(e.getKey())) {
-                            area.append("color words");
-                        } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
-                            area.append("basic land types");
-                        } else {
-                            area.append("creature types");
-                        }
+                area.append("Text changed: all instances of ");
+                if (e.getKey().equals("Any")) {
+                    if (changedColorWords.containsKey(e.getValue())) {
+                        area.append("color words");
+                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
+                        area.append("basic land types");
                     } else {
-                        area.append(e.getKey());
+                        area.append("creature types");
                     }
-                    area.append(" are replaced by ");
-                    area.append(e.getValue());
-                    area.append(".\n");
+                } else {
+                    area.append(e.getKey());
                 }
+                area.append(" are replaced by ");
+                area.append(e.getValue());
+                area.append(".\n");
             }
         }
 

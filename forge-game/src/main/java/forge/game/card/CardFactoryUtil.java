@@ -552,9 +552,10 @@ public class CardFactoryUtil {
                 } else if (k.startsWith("Protection")) {
                     protectionkw.add(k);
                     for (byte col : MagicColor.WUBRG) {
-                        final String colString = "Protection from " + MagicColor.toLongString(col).toLowerCase();
-                        if (k.contains(colString)) {
-                            protectionColorkw.add(colString);
+                        final String colString = MagicColor.toLongString(col);
+                        final String protString = "Protection from " + colString;
+                        if (k.equals(protString) || k.contains(StringUtils.capitalize(colString) + ":" + colString)) {
+                            protectionColorkw.add(protString);
                         }
                     }
                 } else if (k.startsWith("Hexproof")) {
@@ -699,7 +700,8 @@ public class CardFactoryUtil {
                 if (damage && (characteristic.endsWith("White") || characteristic.endsWith("Blue")
                     || characteristic.endsWith("Black") || characteristic.endsWith("Red")
                     || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor"))) {
+                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")
+                    || characteristic.endsWith("EnemyColor"))) {
                     characteristic += "Source";
                 }
                 return characteristic;
@@ -723,7 +725,7 @@ public class CardFactoryUtil {
             } else if (protectType.equals("everything")) {
                 return "";
             } else {
-                validSource = CardType.getSingularType(protectType);
+                throw new RuntimeException("unknown protection keyword: " + kw);
             }
         }
         if (validSource.isEmpty()) {
