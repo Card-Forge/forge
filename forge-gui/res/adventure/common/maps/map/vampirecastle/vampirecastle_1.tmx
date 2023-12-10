@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="62">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="68">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,31 +7,55 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <tileset firstgid="16385" source="../../tileset/dungeon/dungeon_bis.tsx"/>
- <layer id="7" name="Background" width="45" height="30">
+ <tileset firstgid="32769" source="../../tileset/dungeon/animatedtiles.tsx"/>
+ <layer id="10" name="Tilelaag 4" width="36" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlFEOgjAMhncEn513UMArOE7BxRQT7wA3wwMIgUltVgcva5d0yZfA1qQffzqagzGNQvI+r3C7bOV6WeF2idEV+TkPxb76aXE7V+WS95hvH8nYr5R+r/L3/eiMsS5c2wb2uZ2n5+fo1d4I3FwD4ZgD2P+vL+Gc0hv3vcd8BTnbZX5hxg+ErWdOtYzZwFli35CnVGcqVwnOvjd03uIqyZm6Z5K8fc/cnL//EDDDoXPsyTkfe74ttied3HxzdVYURVGU1HwAfZuCwg==
+   eJztlMENwjAMRXvtCvTCDEzRLsSRQQoHRkVRZfHzZQe3tYFDv/SlNonsFydx18Xo2r89TLXPYz3PKvPiDDFPS8iSxXOfbD+Aj1myeLz6J55ZYfnl/TlNuTzybkpMvjP4vkRzMo8waTFljN96No8V0+o9mTzPSx2v/LNFt35xNA/mknhaflmLLBE8mIP3LiweduFBreXBPXNNPBIGi2kLj8bG+TAPjzETxth6XhpLK7e1TosTxWPVpjWXwWOdzzDW3zjHcdbeQ42J44skv/Dg9yeWPTzWu0YGNHJ/k6cI68E11Hp2RG/Weq9lz5q9LFZ9WjlbLJG10ThabJ59reXxnoPXUUxWTQ4dOrToBZhF0VA=
   </data>
  </layer>
- <layer id="8" name="Castle" width="45" height="30">
+ <layer id="7" name="Background" width="36" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlssKgkAUQO8fpY6C9VsmpL9lQvVbNr1WnYuuhIkWoTM0Bw7iyiNz8SoScXFKRQYjckWLfbp20We094EmF8mxQJv63d3RVmQiFa17rLHk/pGtXeZmoNnSd8P7dNXe0qxd5sbQV+gsJ6N9MvYePG7uaau1kdYG22TsPTmaK09mXbtLOra4S929is7/mbO5eDzvc3T+n/S+AmrW+d9yDjuP531ORXNDbxtQs3Km97JQ87Dhe4Z2s8zzfoHhO5Zjkaxd8j0VrXusA2ruaD1Ouy4Uhmk/24CaDfsg1/84D3bvUpg/etdIJBKJRP6FN6Y4Pw4=
+   eJztlL0NwjAQRlPQ0NGbIhvwuwKBDMEE9JSIBVgAAmIH2AwGIEewclw+x0E5iyYnPYlA7Hs6fyZeRVEMMB+2/Wbwtaf0G7Qvhxdyket4X6069Io+snwuRvym6YPK5SO9/u2DZqR9Xk18kAt38pVJq88cqizV8/HdL7pPz1GJvGvkstn/5hOvqrmhzxfgI9evB1E0H5fQs3yHfHaOs6/zQdmqc7lNsI90Ih/6romPD+RheUzK/hLpQ4T2mU2L3rd8Lvex28c6afjUYRI8myzxr9X0ueZzOec9s4WDpHiHCOVj9/e6CB/pZM+yjQ/f++hzAT7ciWerzXwoKwSfzUlglgXDZdXH1q7mfvyCnIF0QQ7IRyvHLh/XPEL72H25TxMP5BLCB2XWlWGN/CKf939dCx9NeB+emZA9Ozo6OkLyAm9/vnU=
   </data>
  </layer>
- <layer id="9" name="Clutter" width="45" height="30">
+ <layer id="8" name="Castle" width="36" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0jEKwCAMRuFcpGAP4yK5o/WmDYi4tmixwfdBlkxv+EUAALs40uqCMUFFTl1d8c5lvcVZ8xNs6Vs52nbsSuy/v26pbSFrPU88NgMAAGCeG2OuDPU=
+   eJzt12FugjAUB/CeY6LZDQQLiXoBx3mQZHoU3byEI1GvxdjcPu3/Qpt1rC0Cxe2DL/nHLDa+n/UV2OCBsYEmsnTvuUy1bOv6Ntw38PS1RyPkSeNw4aHP3jYMWbwYr3F7j26d/J6DuFk8Ed1vVTc/prUj5XtSj63Sb1sTuTeuPKrF0/Q7BIzlnLFXpECy4OdnSEtbj5yRnYhqqc4AWc4IDxkLkQgpgt+mth51RoYiJgvVHn2jCWMJHEskRab4+zzp7qnOiOoxnY0cngK935B38UqWKe/m0c3Is4jJQsXRO6LZ8ctkfml57OjxLDNiqwx9U+oPxwpZ+6XlwPXrE81s2TxNLKppih4zZB6YLVQ0b0fs6UmZL5OnjaVp0bx9wPJZ49kt4Fn076F5m2H/5soems7XNUwJPCtY1hd46u7DruoIy+kCj5xpU+VjnGmkGLv1bdB32MLDcZZDJPLdeu5ivanujCVwLJG0B480VZ+bbLWH40Vcg13WJv42VZ+bbJWLe0Lh2KOamng4rmUh3c8D+7ouJvW56hrX51vdylWZ/of4i/rPli+R7On9
+  </data>
+ </layer>
+ <layer id="9" name="Clutter" width="36" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzdlk0KwjAQRucM7a6logu9QXuDUiu9l54hRWoPoedzhhKikBTyQ2f0wSwS+MIjk4QAbE95dlfIGrHscI0qkU8qlMPJh5Q+RW934oJ8bE5cqN7utCXXDOCW2Z0KBp9jDnDKv+cUo48LJcyH+CefGnNNQHYtR3dsDPR5Yu4VkF3L0ZkuezP2eY9qzDVY1cXPR+dS+9jYDwCHITxPd2x0uIbwQJc5wocD3/5uSWx/Y5ha7CfW3Jo5jv7q/kzDUlKQ5vOrqI7bwEAudyE+2kXCf+PTRYKP/vdI86F9GpnPj+qMC/f+2Fyo3q0+SgI=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="355" y="481" width="48" height="16">
+  <object id="38" template="../../obj/entry_up.tx" x="337.249" y="479.137" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="210.333" y="229.333"/>
-  <object id="50" template="../../obj/enemy.tx" x="563.902" y="266.317">
+  <object id="50" template="../../obj/enemy.tx" x="467.902" y="266.317">
    <properties>
     <property name="enemy" value="High Vampire"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/collision.tx" x="-117.914" y="-15.6387" width="743.222" height="15.6277"/>
+  <object id="63" template="../../obj/collision.tx" x="-97.2339" y="480.309" width="723.101" height="15.6277"/>
+  <object id="64" template="../../obj/treasure.tx" x="434.798" y="127.259">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Black&quot; ],
+		&quot;subTypes&quot;: [ &quot;Vampire&quot; ],
+		&quot;count&quot;: 5
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/entry_up.tx" x="348.374" y="125.395" width="24.5254" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_grave_1.tmx"/>
    </properties>
   </object>
  </objectgroup>
