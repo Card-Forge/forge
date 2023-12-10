@@ -73,6 +73,7 @@ Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dalek:Daleks
+Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
