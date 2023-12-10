@@ -56,9 +56,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     params.put("Toughness", d);
                     params.put("Timestamp", timestamp);
                     tgtC.addPerpetual(Pair.of("PTBoost", params));
-                } else {
-                    tgtC.addPTBoost(a, d, timestamp, 0);
                 }
+                tgtC.addPTBoost(a, d, timestamp, 0);
                 redrawPT = true;
             }
 

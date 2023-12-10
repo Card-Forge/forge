@@ -80,7 +80,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 params.put("Toughness", d);
                 params.put("Timestamp", timestamp);
                 gameCard.addPerpetual(Pair.of("PTBoost", params));
-            } else gameCard.addPTBoost(a, d, timestamp, 0);
+            }
+            gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
         }
 
@@ -90,9 +91,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 params.put("AddKeywords", keywords);
                 params.put("Timestamp", timestamp);
                 gameCard.addPerpetual(Pair.of("Keywords", params));
-            } else {
-                gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);                
             }
+            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);                
+            
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);

@@ -113,9 +113,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 params.put("Toughness", toughness);
                 params.put("Timestamp", timestamp);
                 c.addPerpetual(Pair.of("NewPT", params));
-            } else {
-                c.addNewPT(power, toughness, timestamp, 0);
             }
+            c.addNewPT(power, toughness, timestamp, 0);
         }
 
         if (sa.hasParam("CantHaveKeyword")) {
@@ -221,10 +220,9 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 params.put("RemoveNonMana", removeNonManaAbilities);
                 params.put("Timestamp", timestamp);
                 c.addPerpetual(Pair.of("Abilities", params));
-            } else {
-                c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
             }
+            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements, 
+                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
         }
 
         if (!"Permanent".equals(duration) && !perpetual) {

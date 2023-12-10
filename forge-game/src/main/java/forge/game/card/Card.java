@@ -4396,7 +4396,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addPerpetual(Pair<String, Map<String, Object>> p) {
         perpetual.add(p);
-        executePerpetual(p);
     }
 
     public final void executePerpetual(Pair<String, Map<String, Object>> p) {
