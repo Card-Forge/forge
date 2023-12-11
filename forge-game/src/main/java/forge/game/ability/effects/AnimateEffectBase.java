@@ -158,6 +158,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
+            if (perpetual) parsedTrigger.setSpawningAbility(sa);
             addedTriggers.add(parsedTrigger);
         }
 

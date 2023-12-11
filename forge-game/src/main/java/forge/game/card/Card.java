@@ -2180,8 +2180,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] upkeepCostParams = keyword.split(":");
                     sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                     sbLong.append("\r\n");
-                } else if (keyword.startsWith("Alternative Cost")) {
-                    sbLong.append("Has alternative cost.");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String[] costs = keyword.split(":", 2)[1].split(":");
                     sbLong.append("As an additional cost to cast this spell, ");
@@ -2379,7 +2377,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
-                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")) {
+                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
+                        || keyword.startsWith("Alternative Cost")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
