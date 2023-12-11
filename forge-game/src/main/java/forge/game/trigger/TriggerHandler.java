@@ -565,9 +565,9 @@ public class TriggerHandler {
 
         boolean removeBoon = host.isBoon();
         if (regtrig.hasParam("BoonAmount")) {
-                int x = AbilityUtils.calculateAmount(host, regtrig.getParam("BoonAmount"), wrapperAbility);
-                int y = host.getAbilityActivatedThisGame(regtrig.getOverridingAbility());
-                if (y < x) removeBoon = false;
+            int x = AbilityUtils.calculateAmount(host, regtrig.getParam("BoonAmount"), wrapperAbility);
+            int y = host.getAbilityActivatedThisGame(regtrig.getOverridingAbility());
+            if (y < x) removeBoon = false;
         }
         if (regtrig.hasParam("OneOff") && host.isImmutable() || removeBoon) {
             host.getController().getZone(ZoneType.Command).remove(host);
