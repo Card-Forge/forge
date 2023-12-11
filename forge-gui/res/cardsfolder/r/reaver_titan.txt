@@ -2,7 +2,7 @@ Name:Reaver Titan
 ManaCost:7
 Types:Artifact Vehicle
 PT:10/10
-K:Protection:Card.cmcLE3:Protection from mana value 3 or less
+K:Protection:Card.cmcLE3:mana value 3 or less
 T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Gatling Blaster — Whenever CARDNAME attacks, it deals 5 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5
 K:Crew:4

@@ -503,6 +503,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // temporarily reverted removing SAs after resolution
         final SpellAbility sa = peekAbility();
 
+        // abilities already on stack won't get changed text from host
+        if (sa.isSpell()) {
+            sa.changeText();
+        }
+
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority();
 

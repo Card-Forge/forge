@@ -1,0 +1,12 @@
+Name:Gleaming Geardrake
+ManaCost:U R
+Types:Artifact Creature Drake
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters & Type$Clue
+DeckHints:Ability$Sacrifice & Type$Artifact|Clue|Food|Treasure|Map
+Oracle:Flying\nWhen Gleaming Geardrake enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice an artifact, put a +1/+1 counter on Gleaming Geardrake.

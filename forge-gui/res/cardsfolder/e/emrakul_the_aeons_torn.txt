@@ -4,7 +4,7 @@ Types:Legendary Creature Eldrazi
 PT:15/15
 K:This spell can't be countered.
 K:Flying
-K:Protection:Spell.nonColorless:Protection from colored spells
+K:Protection:Spell.nonColorless:colored spells
 K:Annihilator:6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
 SVar:TrigShuffle:DB$ ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True

@@ -1,0 +1,9 @@
+Name:Demand Answers
+ManaCost:1 R
+Types:Instant
+K:AlternateAdditionalCost:Sac<1/Artifact>:Discard<1/Card>
+SVar:AIPreference:SacCost$Artifact.token,Artifact.cmcLE3
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+DeckHas:Ability$Discard|Sacrifice
+DeckHints:Ability$Graveyard & Type$Artifact
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or discard a card.\nDraw two cards.

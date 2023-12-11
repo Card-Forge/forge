@@ -3,5 +3,5 @@ ManaCost:4 W
 Types:Creature Bird Soldier
 PT:3/3
 K:Flying
-K:Protection from Dragons
+K:Protection:Dragon
 Oracle:Flying, protection from Dragons

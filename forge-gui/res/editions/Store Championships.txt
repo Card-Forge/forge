@@ -23,3 +23,6 @@ ScryfallCode=SCH
 15 R Tail Swipe @Edgar Sánchez Hidalgo
 16 R Transcendent Message @Miranda Meeks
 17 M Moonshaker Cavalry @Awanqi (Angela Wang)
+18 R Cauldron Familiar @Edgar Sánchez Hidalgo
+19 R Dark Petition @Julia Metzger
+20 R Lier, Disciple of the Drowned @Heonhwa Choe
