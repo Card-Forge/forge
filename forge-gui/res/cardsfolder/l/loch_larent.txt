@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Scry | Cost$ 1 U T | ScryNum$ 3 | GameActivationLimit$ 1 | PlayerTurn$ True | SubAbility$ DBEffect | SpellDescription$ Scry 3. Target opponent gets a one-time boon with "When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it." Activate only during your turn and only once.
 SVar:DBEffect:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | ValidTgts$ Opponent | EffectOwner$ Targeted
-SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it.
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast a creature spell, that creature enters the battlefield tapped and with a stun counter on it.
 SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ETBAddCounterTapped | RememberObjects$ TriggeredCard
 SVar:ETBAddCounterTapped:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ STUN | CounterNum$ 1 | SubAbility$ ETBTapped
