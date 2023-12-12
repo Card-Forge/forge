@@ -1655,6 +1655,15 @@
 	"radiusFactor": 0.8
 },
 {
+	"name": "Fort",  
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "Fort",
+	"map": "../common/maps/map/fort/fort_colorless_1_snow.tmx",
+	"radiusFactor": 0.8
+},
+{
 	"name": "Fort1",
 	"type": "dungeon",
 	"count": 1,

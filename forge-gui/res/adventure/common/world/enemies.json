@@ -916,7 +916,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
-	"scale": 0.75,
+	"scale": 0.85,
 	"life": 25,
 	"rewards": [
 		{
@@ -1928,6 +1928,67 @@
 	]
 },
 {
+	"name": "Armadillo",
+	"sprite": "sprites/enemy/beast/armadillo.atlas",
+	"deck": [
+		"decks/standard/armadillo.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Landfall"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"White",
+				"Green"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			]
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Armored Knight",
 	"sprite": "sprites/enemy/humanoid/knight.atlas",
 	"deck": [
@@ -2837,7 +2898,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.6,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
@@ -7756,9 +7817,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":1.5,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 1.5,
 	"life": 19,
 	"rewards": [
 		{
@@ -9551,8 +9612,8 @@
 	"ai": "",
 	"boss": true,
 	"flying": true,
-	"scale": 1.5,
 	"speed": 25,
+	"scale": 1.5,
 	"life": 100,
 	"rewards": [
 		{
@@ -21629,14 +21690,14 @@
 			"cardText": "Beast"
 		}
 	],
-	"colors": "G",
+	"colors": "GR",
 	"questTags": [
 		"Animal",
 		"Territorial",
 		"Wild",
 		"Small",
-		"IdentityGreen",
-		"BiomeGreen"
+		"IdentityGruul",
+		"BiomeRed"
 	]
 },
 {
@@ -22249,13 +22310,10 @@
 	"life": 20,
 	"rewards": [
 		{
-			"type": "card",
+			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
-			"colors": [
-				"Green"
-			],
 			"rarity": [
 				"common",
 				"uncommon",
@@ -22273,16 +22331,20 @@
 			"type": "card",
 			"probability": 1,
 			"count": 1,
+			"colors": [
+				"Green",
+				"White"
+			],
 			"rarity": [
 				"uncommon",
 				"common",
 				"Mythic Rare",
 				"Rare"
 			],
-			"cardText": "Beast"
+			"cardText": "Enchantment"
 		}
 	],
-	"colors": "G",
+	"colors": "GW",
 	"questTags": [
 		"Animal",
 		"Territorial",
@@ -27198,9 +27260,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.6,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale": 0.6,
 	"life": 36,
 	"rewards": [
 		{

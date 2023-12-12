@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="73">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="32" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="83">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,6 +7,11 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <tileset firstgid="28289" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="9" name="Colission" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJxjYMANnPnwSNIYDKTdpNpPbbdSYt5AhxulYKDdT8h+kDwM08t+ZDEYG5f9lKadgfI/seYRaz+p7hvs/hkFAw/Q895ovI2CUTAKhjIAAJ+mCxQ=
+  </data>
+ </layer>
  <layer id="2" name="Floor" width="32" height="24">
   <data encoding="base64" compression="zlib">
    eJztlFEKgCAMhn0Z4lsX7Bo9dpYO08FixGgsnaZtTwofQYrf/mmFoI91CQGivgbna2t6BrrJX6NU09fajvjA/VvS95eeUT+50avt29qbljpkdnST/w96slv6+bvcuY/0vPVuaL3/063Vw904KPuebiz9Mjc9cd7aD7F87t7+E97/O2s3sMy5O+fhz32TXr3nnhzWbsrv4ZlMJhPJBZIkRSg=
@@ -19,7 +24,7 @@
  </layer>
  <layer id="3" name="Clutter" width="32" height="24">
   <data encoding="base64" compression="zlib">
-   eJy9VktOwzAQnQWIfBZdsUIgbtJjpCCvEbcAsecO3XOCQsOKewCCK5SSrrCVPHkYJo6dqDwpipVY82befOzlEdEy8AAPx369Koieina9KYme7frbvh/Z91iEuK9mRNez37yOY2e5Lkr/3fnwxfyI9cHFFIpZorK210XLtS3//udaNAN+QMNYbtjXeOWeughrsWIapvCnYBPIh+l03Jb74eY+yFwh9svu2z75JcCN2Dn/f6AS3ODnuD8YZ/s1I3rPwnuMUrta7PPufZ4wS+5yorPC+4BZkTKP5mydwu1wYvd/Wu6b3M8oqXUIL4d+vU7k5j6c2mehcDs9moi5lAqZd63ved2nzugh8Lzz84HH7+p+0fV8aC6NgdP8I2t1x7ypGbfseW0GTIXLwZvSf+ByseNM2ikzcSq4Bho36rEeGTNqNyVfhtXbFK2H8oX6b8T9p+o052dNKm/MHOnreVPqcwC2+/TEP/BqtYKYeY4lj3bWwH5fTPxfqFZcz9/mvq81W/KuJOPSbPf5LAHNTeR+Hleo92Lud2P2a/cg4AdQUd2l
+   eJy9VjtOxDAQnQJEEhdbUSEQN9ljZEGuEbcA0XMHek6wsKHiBIgeEFwhLNkKW/HIwzB27ES7T4pi2ZbfzJuP/QIAdwfhD3F/6MfLCuCx6setAngy4x/zfyDzqYhxX8wALmd/eS3HxnCdKT9vbfgmdqTaYH2K+cxRm7NXVc+1Vv/XqRbdgB2oIed+jdjbBnj5nqaKa7EkGqb6nos2Eg/tdFyr7XBTG3is0PdzN7dNfg7kRt8p/y5QM27kp7jdG3f2WwHwUcT3aCF3Jd/n7n+a0UtuSoCTytuAvSKnH83JOIfb4sjs/zLcV6XvUVzrGJ73/XiVyU1tODbfQuC2enQJfSkXPO5S3dO8z+3RQ6Bxp/cD9d/m/cLVfKwvjYHV/LPodcd+0xBuXvNSD5gKG4N3of6Qy/qOd9JG6IlTQTWQuDEfm5E+Y+7mxEuTfJui9VC8MP879v6pneb0rsnlTekjoZrXSu4DeHZIT1xDXilX0GcaY84j3TV4fsgnuhbLFVvz16Wva+ks/lbifklnh2zmQM114n7qV6z2Ut53Y/ZL7yDEL/mu3qQ=
   </data>
  </layer>
  <layer id="8" name="Highest" width="32" height="24">
@@ -27,7 +32,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -36,9 +41,10 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../obj/enemy.tx" x="255.43" y="94.3968">
+  <object id="50" template="../../obj/enemy.tx" x="270.335" y="83.591">
    <properties>
     <property name="enemy" value="High Vampire"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="62" template="../../obj/gold.tx" x="484.268" y="342.677"/>
@@ -58,26 +64,58 @@
   <object id="65" template="../../obj/collision.tx" x="-2.53786" y="383.057" width="514.065" height="15.6277"/>
   <object id="66" template="../../obj/collision.tx" x="512.413" y="-14.5207" width="20.7262" height="412.833"/>
   <object id="67" template="../../obj/collision.tx" x="-21.5415" y="-13.403" width="20.7262" height="412.833"/>
-  <object id="68" template="../../obj/enemy.tx" x="305.74" y="158.558">
+  <object id="68" template="../../obj/enemy.tx" x="324.743" y="123.905">
    <properties>
-    <property name="enemy" value="High Vampire"/>
+    <property name="enemy" value="Gargoyle"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="69" template="../../obj/enemy.tx" x="228.982" y="215.94">
    <properties>
     <property name="enemy" value="High Vampire"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="81,82"/>
    </properties>
   </object>
   <object id="70" template="../../obj/enemy.tx" x="200.291" y="79.1914">
    <properties>
     <property name="enemy" value="High Vampire"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="71" template="../../obj/gold.tx" x="484.594" y="18.8281"/>
-  <object id="72" template="../../obj/entry_up.tx" x="276.512" y="127.631" width="24.5254" height="27.551">
+  <object id="72" template="../../obj/entry_up.tx" x="272.413" y="130.985" width="31.9777" height="32.395">
    <properties>
+    <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_grave_2.tmx"/>
    </properties>
   </object>
+  <object id="73" template="../../obj/manashards.tx" x="310.584" y="81.4271"/>
+  <object id="74" template="../../obj/enemy.tx" x="94.8412" y="138.064">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="78,77"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/enemy.tx" x="432" y="272">
+   <properties>
+    <property name="enemy" value="Golgari Treefolk"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/enemy.tx" x="435.782" y="104.902">
+   <properties>
+    <property name="enemy" value="Golgari Treefolk"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="80,79"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/waypoint.tx" x="132.475" y="24.7899"/>
+  <object id="78" template="../../obj/waypoint.tx" x="50.1276" y="203.272"/>
+  <object id="79" template="../../obj/waypoint.tx" x="382.126" y="202.154"/>
+  <object id="80" template="../../obj/waypoint.tx" x="480.123" y="49.3824"/>
+  <object id="81" template="../../obj/waypoint.tx" x="317.664" y="230.1"/>
+  <object id="82" template="../../obj/waypoint.tx" x="180.17" y="226.001"/>
  </objectgroup>
 </map>

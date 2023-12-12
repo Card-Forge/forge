@@ -466,7 +466,7 @@
     "name": "Mithril Boots",
     "equipmentSlot": "Boots",
     "iconName": "MithrilBoots",
-    "cost": 2500,
+    "cost": 10000,
     "effect": {
       "lifeModifier": 2,
       "moveSpeed": 1.3
@@ -488,7 +488,7 @@
     "name": "Mithril Armor",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 4500,
+    "cost": 15000,
     "effect": {
       "lifeModifier": 5
     }
@@ -609,6 +609,7 @@
     "name": "Dark Boots",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Clattering Augur"
@@ -621,6 +622,7 @@
     "name": "Dark Shield",
     "equipmentSlot": "Right",
     "iconName": "DarkShield",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Barrier of Bones"
@@ -631,12 +633,13 @@
   {
     "name": "Dark Armor",
     "equipmentSlot": "Body",
+    "cost": 3000,
     "iconName": "DarkArmor",
     "effect": {
       "startBattleWithCard": [
         "Skeletal Snake"
       ],
-      "lifeModifier": -4
+      "lifeModifier": -2
     }
   },
   {
@@ -712,6 +715,7 @@
   {
     "name": "Dark Amulet",
     "equipmentSlot": "Neck",
+    "cost": 3000,
     "iconName": "DarkAmulet",
     "effect": {
       "startBattleWithCard": [
@@ -1137,6 +1141,7 @@
     "iconName": "SteelBoots",
     "effect": {
       "lifeModifier": -1,
+      "moveSpeed": 1.20,
       "startBattleWithCard": [
         "Ooze Flux"
       ]
