@@ -6,13 +6,46 @@ Type=Reprint
 ScryfallCode=RVR
 
 [cards]
+9 R Blind Obedience @Seb McKinnon
+20 M Gideon Blackblade @Viktor Titov
 31 R Tomik, Distinguished Advokist @Johannes Voss
+32 R Unbreakable Formation @Matt Stewart
+40 M Cyclonic Rift @Isis
 44 R Fblthp, the Lost @Jesper Ejsing
+62 R Spark Double @Eric Deschamps
+70 R Crypt Ghast @Chris Rahn
 83 R Massacre Girl @Chris Rallis
+110 U Guttersnipe @Steve Prescott
 114 R Krenko, Mob Boss @Karl Kopinski
+116 R Legion Warboss @Alex Konstad
+118 R Mizzix's Mastery @Dan Scott
+126 R Stalking Vengeance @Anthony S. Waters
+129 M Utvara Hellkite @Mark Zug
 133 R Birds of Paradise @Marcelo Vignali
+138 U Farseek @Martina Pilcerova
+146 M Guardian Project @Chris Rallis
+148 R Life from the Loam @Sung Choi
+159 U Utopia Sprawl @Ron Spears
+163 R Assemble the Legion @Eric Deschamps
 164 M Aurelia, Exemplar of Justice @Chris Rahn
+167 M Borborygmos Enraged @Aleksi Briclot
+171 R Cindervines @Mark Behm
+174 U Crackling Drake @Victor Adame Minguez
+180 R Dreadbore @Wayne Reynolds
+186 C Goblin Electromancer @Svetlin Velinov
+190 U Izzet Charm @Zoltan Boros
+197 U Lightning Helix @Kev Walker
+198 M Master of Cruelties @Chase Stone
 207 R Niv-Mizzet, Parun @Svetlin Velinov
+215 M Rakdos, Lord of Riots @Vincent Proce
+217 U Rhythm of the Wild @Maxime Minard
+229 R Stitch in Time @Jon Foster
+231 R Tajic, Legion's Edge @Anthony Palumbo
+251 U Boros Signet @Greg Hildebrandt
+259 U Gruul Signet @Efrem Palacios
+260 R Illusionist's Bracers @Svetlin Velinov
+261 U Izzet Signet @Raoul Vitale
+265 U Rakdos Signet @Martina Pilcerova
 273 R Blood Crypt @Rob Alexander
 275 R Breeding Pool @Rob Alexander
 277 R Godless Shrine @Rob Alexander
@@ -33,12 +66,36 @@ ScryfallCode=RVR
 299 R Stomping Ground @Cliff Childs
 300 R Temple Garden @Alayna Danner
 301 R Watery Grave @Svetlin Velinov
+303 R Blind Obedience @Seb McKinnon
+306 M Divine Visitation @Cristi Balanescu
+313 M Cyclonic Rift @Isis
+319 R Spark Double @Eric Deschamps
+322 R Crypt Ghast @Chris Rahn
+327 M Lord of the Void @Chris Rahn
 328 R Massacre Girl @Chris Rallis
 331 R Arclight Phoenix @Slawomir Maniak
+332 U Guttersnipe @Steve Prescott
 335 R Krenko, Mob Boss @Karl Kopinski
+339 R Mizzix's Mastery @Dan Scott
+342 M Utvara Hellkite @Mark Zug
 344 R Birds of Paradise @Marcelo Vignali
+347 U Farseek @Martina Pilcerova
+349 M Guardian Project @Chris Rallis
+350 R Life from the Loam @Sung Choi
+355 U Utopia Sprawl @Ron Spears
 356 M Aurelia, Exemplar of Justice @Chris Rahn
+357 M Borborygmos Enraged @Aleksi Briclot
+362 U Crackling Drake @Victor Adame Minguez
+365 R Dreadbore @Wayne Reynolds
+367 C Goblin Electromancer @Svetlin Velinov
+368 U Izzet Charm @Zoltan Boros
+372 U Lightning Helix @Kev Walker
+373 M Master of Cruelties @Chase Stone
 376 R Niv-Mizzet, Parun @Svetlin Velinov
+379 M Rakdos, Lord of Riots @Vincent Proce
+380 U Rhythm of the Wild @Maxime Minard
+384 R Stitch in Time @Jon Foster
+392 R Illusionist's Bracers @Svetlin Velinov
 397 R Blood Crypt @Rob Alexander
 399 R Breeding Pool @Rob Alexander
 401 R Godless Shrine @Rob Alexander
@@ -49,10 +106,20 @@ ScryfallCode=RVR
 413 R Stomping Ground @Rob Alexander
 414 R Temple Garden @Rob Alexander
 415 R Watery Grave @Rob Alexander
+416 M Divine Visitation @Yuichi Murakami
 417 R Tomik, Distinguished Advokist @Yakotakos
+419 M Cyclonic Rift @Ryuichi Sakuma
 420 R Fblthp, the Lost @Tetsu Kurosawa
+421 R Spark Double @Canata Katana
+423 R Crypt Ghast @zizero
+424 M Lord of the Void @Ishikawa Kenta
 425 R Massacre Girl @MiDQN
 430 R Krenko, Mob Boss @Ai Nanahira
+431 M Utvara Hellkite @M.Matsumoto
 432 R Birds of Paradise @Kemonomichi
+433 M Guardian Project @Inuchiyo Meimaru
+434 R Life from the Loam @Ayuko
+436 M Aurelia, Exemplar of Justice @Hiromu
+438 R Niv-Mizzet, Parun @Yukihiro Maruo
 445 M Ral Zarek @Fukuzo Katsura
 467 R Niv-Mizzet, the Firemind @Todd Lockwood
