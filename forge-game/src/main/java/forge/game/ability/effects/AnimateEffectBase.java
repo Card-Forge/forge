@@ -38,6 +38,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardTraitChanges;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
 import forge.game.replacement.ReplacementEffect;
@@ -158,7 +159,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            if (perpetual) parsedTrigger.setSpawningAbility(sa);
+            if (perpetual) parsedTrigger.setCardState(c.getCurrentState());
             addedTriggers.add(parsedTrigger);
         }
 
@@ -210,20 +211,15 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
+            final CardTraitChanges ctc = new CardTraitChanges(addedAbilities, removedAbilities, addedTriggers, 
+                addedReplacements, addedStaticAbilities, removeAll, removeNonManaAbilities);
+            c.addChangedCardTraits(ctc, timestamp, 0);
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
-                params.put("Activated", addedAbilities);
-                params.put("ToRemove", removedAbilities);
-                params.put("Triggers", addedTriggers);
-                params.put("Replacements", addedReplacements);
-                params.put("Statics", addedStaticAbilities);
-                params.put("RemoveAll", removeAll);
-                params.put("RemoveNonMana", removeNonManaAbilities);
+                params.put("ChangedTraits", ctc);
                 params.put("Timestamp", timestamp);
                 c.addPerpetual(Pair.of("Abilities", params));
             }
-            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements, 
-                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
         }
 
         if (!"Permanent".equals(duration) && !perpetual) {

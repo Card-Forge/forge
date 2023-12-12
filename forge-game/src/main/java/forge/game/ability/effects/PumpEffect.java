@@ -88,7 +88,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (!kws.isEmpty()) {
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
-                params.put("AddKeywords", keywords);
+                params.put("AddKeywords", kws);
                 params.put("Timestamp", timestamp);
                 gameCard.addPerpetual(Pair.of("Keywords", params));
             }

@@ -4414,12 +4414,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             false, (Set<RemoveType>) params.get("RemoveXTypes"), 
             (long) params.get("Timestamp"), (long) 0, true, false);
         } else if (pType.equals("Abilities")) {
-            addChangedCardTraits((Collection<SpellAbility>) params.get("Activated"), 
-                (Collection<SpellAbility>) params.get("ToRemove"), 
-                (Collection<Trigger>) params.get("Triggers"), 
-                (Collection<ReplacementEffect>) params.get("Replacements"),
-                (Collection<StaticAbility>) params.get("Statics"), (boolean) params.get("RemoveAll"), 
-                (boolean) params.get("RemoveNonMana"), (long) params.get("Timestamp"), (long) 0);
+            addChangedCardTraits((CardTraitChanges) params.get("ChangedTraits"), 
+                (long) params.get("Timestamp"), (long) 0);
         }
     }
 
@@ -4686,6 +4682,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
             spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
         ));
+        // update view
+        updateAbilityTextForView();
+    }
+
+    public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
+        changedCardTraits.put(timestamp, staticId, ctc);
         // update view
         updateAbilityTextForView();
     }
