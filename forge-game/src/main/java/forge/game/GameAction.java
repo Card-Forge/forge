@@ -323,7 +323,7 @@ public class GameAction {
             copied.setState(c.getCurrentStateName(), false);
         }
         if (c.hasPerpetual()) {
-            copied.setPerpetual(c.getPerpetual());
+            copied.setPerpetual(c);
         }
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();

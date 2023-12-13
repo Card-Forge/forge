@@ -159,7 +159,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         final List<Trigger> addedTriggers = Lists.newArrayList();
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
-            if (perpetual) parsedTrigger.setCardState(c.getCurrentState());
             addedTriggers.add(parsedTrigger);
         }
 
@@ -216,7 +215,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addChangedCardTraits(ctc, timestamp, 0);
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
-                params.put("ChangedTraits", ctc);
                 params.put("Timestamp", timestamp);
                 c.addPerpetual(Pair.of("Abilities", params));
             }

@@ -291,7 +291,7 @@ public final class CardUtil {
         }
 
         newCopy.setIntensity(in.getIntensity(false));
-        newCopy.setPerpetual(in.getPerpetual());
+        newCopy.setPerpetual(in);
 
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());

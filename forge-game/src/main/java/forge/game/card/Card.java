@@ -4419,10 +4419,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    public final void setPerpetual(List<Pair<String, Map<String, Object>>> perp) {
+    public final void setPerpetual(final Card oldCard) {
+        final List<Pair<String, Map<String, Object>>> perp = oldCard.getPerpetual();
         perpetual = perp;
-        for (Pair <String, Map<String, Object>> p : perpetual) {
-            executePerpetual(p);
+        for (Pair <String, Map<String, Object>> p : perp) {
+            if (p.getKey().equals("Abilities")) {
+                CardTraitChanges ctc = oldCard.getChangedCardTraits().get((long) p.getValue().get("Timestamp"), 
+                    (long) 0).copy(oldCard, false);
+                addChangedCardTraits(ctc, (long) p.getValue().get("Timestamp"), (long) 0);
+            } else executePerpetual(p);
         }
     }
 
