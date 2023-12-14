@@ -902,7 +902,7 @@ public abstract class SpellAbilityEffect {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
         // avoid storing this on "inactive" cards
-        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack) || exilingSource.isInZone(ZoneType.Command)) {
             // make sure it gets updated
             exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);
