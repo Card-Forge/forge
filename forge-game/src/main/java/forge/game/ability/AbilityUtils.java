@@ -2154,6 +2154,10 @@ public class AbilityUtils {
             return doXMath(c.getRememberedCount(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("ChosenSize")) {
+            return doXMath(c.getChosenCards().size(), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("ImprintedSize")) {
             return doXMath(c.getImprintedCards().size(), expr, c, ctb);
         }
