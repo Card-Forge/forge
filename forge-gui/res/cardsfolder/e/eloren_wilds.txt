@@ -6,7 +6,7 @@ SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced 
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target player can't cast spells until a player planeswalks.
 SVar:RolledChaos:DB$ Effect | ValidTgts$ Player | IsCurse$ True | StaticAbilities$ STCantCast | Triggers$ TrigPlaneswalk | RememberObjects$ Targeted | Duration$ Permanent
 SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells until a player planeswalks.
-SVar:TrigPlaneswalk:Mode$ PlaneswalkedFrom | Execute$ ExileSelf | Static$ True
+SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a player taps a permanent for mana, that player adds one mana of any type that permanent produced.\nWhenever chaos ensues, target player can't cast spells until a player planeswalks.
