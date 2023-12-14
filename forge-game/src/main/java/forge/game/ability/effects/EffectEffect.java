@@ -101,7 +101,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // don't create Effect if there is no remembered Objects
-            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter"))) {
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter") || sa.hasParam("ForgetOnPhasedIn"))) {
                 return;
             }
         }
