@@ -210,9 +210,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (removeAll || removeNonManaAbilities
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
-            final CardTraitChanges ctc = new CardTraitChanges(addedAbilities, removedAbilities, addedTriggers, 
-                addedReplacements, addedStaticAbilities, removeAll, removeNonManaAbilities);
-            c.addChangedCardTraits(ctc, timestamp, 0);
+            c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
+                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
                 params.put("Timestamp", timestamp);
