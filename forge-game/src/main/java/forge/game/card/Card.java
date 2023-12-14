@@ -4413,9 +4413,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             addChangedCardTypes((CardType) params.get("AddTypes"), (CardType) params.get("RemoveTypes"), 
             false, (Set<RemoveType>) params.get("RemoveXTypes"), 
             (long) params.get("Timestamp"), (long) 0, true, false);
-        } else if (pType.equals("Abilities")) {
-            addChangedCardTraits((CardTraitChanges) params.get("ChangedTraits"), 
-                (long) params.get("Timestamp"), (long) 0);
         }
     }
 
