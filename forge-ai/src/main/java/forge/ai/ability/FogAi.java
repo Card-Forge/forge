@@ -23,8 +23,8 @@ import forge.game.zone.ZoneType;
 public class FogAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
-         * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-         */
+     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
+     */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Game game = ai.getGame();

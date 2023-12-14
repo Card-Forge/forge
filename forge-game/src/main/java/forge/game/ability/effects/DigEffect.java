@@ -374,9 +374,8 @@ public class DigEffect extends SpellAbilityEffect {
 
                     for (Card c : movedCards) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        final PlayerZone zone = c.getOwner().getZone(destZone1);
 
-                        if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                        if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
                             c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
                         } else {
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -410,7 +409,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 host.removeRemembered(c);
                                 animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                             }
-                            c = game.getAction().moveTo(zone, c, sa, moveParams);
+                            c = game.getAction().moveTo(c.getController().getZone(destZone1), c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
                                     combatChanged = true;
