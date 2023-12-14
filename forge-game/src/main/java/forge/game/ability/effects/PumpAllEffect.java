@@ -62,6 +62,12 @@ public class PumpAllEffect extends SpellAbilityEffect {
             }
 
             if (!kws.isEmpty()) {
+                if (perpetual) {
+                    Map <String, Object> params = new HashMap<>();
+                    params.put("AddKeywords", kws);
+                    params.put("Timestamp", timestamp);
+                    tgtC.addPerpetual(Pair.of("Keywords", params));
+                }
                 tgtC.addChangedCardKeywords(kws, null, false, timestamp, 0);
             }
             if (redrawPT) {

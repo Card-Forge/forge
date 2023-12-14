@@ -4425,7 +4425,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (Pair <String, Map<String, Object>> p : perp) {
             if (p.getKey().equals("Abilities")) {
                 CardTraitChanges ctc = oldCard.getChangedCardTraits().get((long) p.getValue().get("Timestamp"), 
-                    (long) 0).copy(oldCard, false);
+                    (long) 0).copy(this, false);
                 addChangedCardTraits(ctc, (long) p.getValue().get("Timestamp"), (long) 0);
             } else executePerpetual(p);
         }

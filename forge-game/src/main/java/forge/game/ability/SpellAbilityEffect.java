@@ -170,7 +170,8 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (!isPlainText) {
-                if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
+                if (t.length() <= 2) sb.append("{").append(t).append("}"); // string includes mana cost (e.g. {2}{R})
+                else if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
                     String parts[] = t.substring(2).split(" ", 2);
                     int n = AbilityUtils.calculateAmount(sa.getHostCard(), parts[0], sa);
                     sb.append(parts.length == 1 ? Lang.getNumeral(n) : Lang.nounWithNumeral(n, parts[1]));
