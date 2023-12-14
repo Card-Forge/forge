@@ -16,7 +16,7 @@ ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curiosity
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ TrigDamageDone | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, draw a card."
 SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw
