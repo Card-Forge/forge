@@ -21,7 +21,9 @@ import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
@@ -146,6 +148,13 @@ public final class CardRules implements ICardCharacteristics {
 
     public ICardFace getOtherPart() {
         return otherPart;
+    }
+
+    public List<ICardFace> getSpecializeParts() {
+        if (getSplitType() != CardSplitType.Specialize) {
+            return ImmutableList.of();
+        }
+        return ImmutableList.of(wSpecialize, uSpecialize, bSpecialize, rSpecialize, gSpecialize);
     }
 
     public ICardFace getWSpecialize() {
