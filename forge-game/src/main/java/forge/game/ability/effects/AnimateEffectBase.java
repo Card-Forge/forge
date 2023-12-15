@@ -90,7 +90,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 params.put("RemoveTypes", removeType);
                 params.put("RemoveXTypes", remove);
                 params.put("Timestamp", timestamp);
-                c.addPerpetual(Pair.of("Types", params));
+                params.put("Category", "Types");
+                c.addPerpetual(params);
             }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
@@ -99,8 +100,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
                 params.put("AddKeywords", keywords);
+                params.put("RemoveAll", removeAll);
                 params.put("Timestamp", timestamp);
-                c.addPerpetual(Pair.of("Keywords", params));
+                params.put("Category", "Keywords");
+                c.addPerpetual(params);
             }
             c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
         }
@@ -112,7 +115,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 params.put("Power", power);
                 params.put("Toughness", toughness);
                 params.put("Timestamp", timestamp);
-                c.addPerpetual(Pair.of("NewPT", params));
+                params.put("Category", "NewPT");
+                c.addPerpetual(params);
             }
             c.addNewPT(power, toughness, timestamp, 0);
         }
@@ -214,7 +218,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             if (perpetual) {
                 Map <String, Object> params = new HashMap<>();
                 params.put("Timestamp", timestamp);
-                c.addPerpetual(Pair.of("Abilities", params));
+                params.put("Category", "Abilities");
+                c.addPerpetual(params);
             }
         }
 

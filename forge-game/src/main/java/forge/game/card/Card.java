@@ -4385,45 +4385,55 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return intensity > 0;
     }
 
-    private List<Pair<String, Map<String, Object>>> perpetual = new ArrayList<>();
+    private List<Map<String, Object>> perpetual = new ArrayList<>();
     public final boolean hasPerpetual() {
         return !perpetual.isEmpty();
     }
-    public final List<Pair<String, Map<String, Object>>> getPerpetual() {
+    public final List<Map<String, Object>> getPerpetual() {
         return perpetual;
     }
 
-    public final void addPerpetual(Pair<String, Map<String, Object>> p) {
+    public final void addPerpetual(Map<String, Object> p) {
         perpetual.add(p);
     }
 
-    public final void executePerpetual(Pair<String, Map<String, Object>> p) {
-        final String pType = p.getKey();
-        Map<String, Object> params = p.getValue();
-        if (pType.equals("NewPT")) {
-            addNewPT((Integer) params.get("Power"), (Integer) params.get("Toughness"), (long) 
-                params.get("Timestamp"), (long) 0);
-        } else if (pType.equals("PTBoost")) {
-            addPTBoost((Integer) params.get("Power"), (Integer) params.get("Toughness"), (long) 
-                params.get("Timestamp"), (long) 0);
-        } else if (pType.equals("Keywords")) {
-            addChangedCardKeywords((List<String>) params.get("AddKeywords"), Lists.newArrayList(), 
-                false, (long) params.get("Timestamp"), (long) 0);        
-        } else if (pType.equals("Types")) {
-            addChangedCardTypes((CardType) params.get("AddTypes"), (CardType) params.get("RemoveTypes"), 
-            false, (Set<RemoveType>) params.get("RemoveXTypes"), 
-            (long) params.get("Timestamp"), (long) 0, true, false);
+    public final void executePerpetual(Map<String, Object> p) {
+        final String category = (String) p.get("Category");
+        if (category.equals("NewPT")) {
+            addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+                p.get("Timestamp"), (long) 0);
+        } else if (category.equals("PTBoost")) {
+            addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+                p.get("Timestamp"), (long) 0);
+        } else if (category.equals("Keywords")) {
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), 
+                (boolean) p.get("RemoveAll"), (long) p.get("Timestamp"), (long) 0);        
+        } else if (category.equals("Types")) {
+            addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
+            false, (Set<RemoveType>) p.get("RemoveXTypes"), 
+            (long) p.get("Timestamp"), (long) 0, true, false);
         }
     }
 
+    public final void removePerpetual(final long timestamp) {
+        Map<String, Object> toRemove = Maps.newHashMap();
+        for (Map<String, Object> p : perpetual) {
+            if (p.get("Timestamp").equals(timestamp)) {
+                toRemove = p;
+                break;
+            }
+        }
+        perpetual.remove(toRemove);
+    }
+
     public final void setPerpetual(final Card oldCard) {
-        final List<Pair<String, Map<String, Object>>> perp = oldCard.getPerpetual();
+        final List<Map<String, Object>> perp = oldCard.getPerpetual();
         perpetual = perp;
-        for (Pair <String, Map<String, Object>> p : perp) {
-            if (p.getKey().equals("Abilities")) {
-                CardTraitChanges ctc = oldCard.getChangedCardTraits().get((long) p.getValue().get("Timestamp"), 
-                    (long) 0).copy(this, false);
-                addChangedCardTraits(ctc, (long) p.getValue().get("Timestamp"), (long) 0);
+        for (Map<String, Object> p : perp) {
+            if (p.get("Category").equals("Abilities")) {
+                long timestamp = (long) p.get("Timestamp");
+                CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
+                addChangedCardTraits(ctc, timestamp, (long) 0);
             } else executePerpetual(p);
         }
     }

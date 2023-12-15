@@ -79,7 +79,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 params.put("Power", a);
                 params.put("Toughness", d);
                 params.put("Timestamp", timestamp);
-                gameCard.addPerpetual(Pair.of("PTBoost", params));
+                params.put("Category", "PTBoost");
+                gameCard.addPerpetual(params);
             }
             gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
@@ -90,7 +91,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 Map <String, Object> params = new HashMap<>();
                 params.put("AddKeywords", kws);
                 params.put("Timestamp", timestamp);
-                gameCard.addPerpetual(Pair.of("Keywords", params));
+                params.put("Category", "Keywords");
+                gameCard.addPerpetual(params);
             }
             gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);                
             

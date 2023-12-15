@@ -66,9 +66,10 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
             Map <String, Object> params = new HashMap<>();
             params.put("Power", power2);
             params.put("Timestamp", timestamp);
-            c1.addPerpetual(Pair.of("NewPT", params));
+            params.put("Category", "NewPT");
+            c1.addPerpetual(params);
             params.put("Power", power1);
-            c2.addPerpetual(Pair.of("NewPT", params));
+            c2.addPerpetual(params);
         }
         c1.addNewPT(power2, null, timestamp, 0);
         c2.addNewPT(power1, null, timestamp, 0);
