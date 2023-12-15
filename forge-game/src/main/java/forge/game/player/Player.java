@@ -1197,7 +1197,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         surveilThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.NumThisTurn, surveilThisTurn);
+        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 1);
         if (params != null) {
             runParams.putAll(params);
         }
@@ -3684,7 +3684,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Map<AbilityKey, Object> cycleParams = AbilityKey.mapFromCard(CardUtil.getLKICopy(game.getCardState(sp.getHostCard())));
         cycleParams.put(AbilityKey.Cause, sp);
         cycleParams.put(AbilityKey.Player, this);
-        cycleParams.put(AbilityKey.NumThisTurn, cycledThisTurn);
+        cycleParams.put(AbilityKey.FirstTime, cycledThisTurn == 1);
         game.getTriggerHandler().runTrigger(TriggerType.Cycled, cycleParams, false);
     }
 
