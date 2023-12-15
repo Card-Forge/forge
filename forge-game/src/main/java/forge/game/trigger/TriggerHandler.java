@@ -24,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table.Cell;
 
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
