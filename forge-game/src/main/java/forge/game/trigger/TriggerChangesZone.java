@@ -102,11 +102,8 @@ public class TriggerChangesZone extends Trigger {
 
         if (hasParam("ValidCard")) {
             Card moved = (Card) runParams.get(AbilityKey.Card);
-            boolean leavesLKIZone = "Battlefield".equals(getParam("Origin"));
-            leavesLKIZone |= "Exile".equals(getParam("Origin")) && (moved.getZone().is(ZoneType.Graveyard) ||
-                    moved.getZone().is(ZoneType.Command) || hasParam("UseLKI"));
 
-            if (leavesLKIZone) {
+            if ("Battlefield".equals(getParam("Origin"))) {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             }
             if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
