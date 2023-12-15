@@ -567,19 +567,6 @@ public class TriggerHandler {
         if (regtrig.hasParam("OneOff") && host.isImmutable()) {
             host.getController().getZone(ZoneType.Command).remove(host);
         }
-        if (regtrig.hasParam("LosePerpetual")) {
-            long toRemove = (long) 0;
-            for (Cell<Long, Long, CardTraitChanges> cell : host.getChangedCardTraits().cellSet()) {
-                if (cell.getValue().getTriggers().contains(regtrig)) {
-                    toRemove = cell.getRowKey();
-                    break;
-                }
-            }
-            if (toRemove != (long) 0) {
-                host.getChangedCardTraits().remove(toRemove, (long) 0);
-                host.removePerpetual(toRemove);
-            }
-        }
     }
 
     private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {
