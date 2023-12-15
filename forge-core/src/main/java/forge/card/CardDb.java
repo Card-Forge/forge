@@ -235,10 +235,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (final CardRules rule : rules.values()) {
             if (filteredCards.contains(rule.getName()) && !exlcudedCardName.equalsIgnoreCase(rule.getName()))
                 continue;
-            addFaceToDbNames(rule.getMainPart());
-            addFaceToDbNames(rule.getOtherPart());
-
-            for (ICardFace face : rule.getSpecializeParts()) {
+            for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face);
             }
         }

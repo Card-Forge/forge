@@ -1,4 +1,4 @@
-Name:Lim-Dul's Cohort
+Name:Lim-Dûl's Cohort
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3

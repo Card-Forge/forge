@@ -1,5 +1,6 @@
 package forge.card;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -361,23 +362,64 @@ public final class CardRulesPredicates {
         private final String operand;
         private final LeafString.CardField field;
 
+        protected boolean checkName(String name) {
+            if (op(name, this.operand) || op(CardTranslation.getTranslatedName(name), this.operand)) {
+                return true;
+            }
+            String normalName = Normalizer.normalize(name, Normalizer.Form.NFD);
+            if (op(normalName, this.operand) || op(normalName.replaceAll("[^\\p{ASCII}]", ""), this.operand)) {
+                return true;
+            }
+            return false;
+        }
+        protected boolean checkOracle(ICardFace face) {
+            if (face == null) {
+                return false;
+            }
+            if (op(face.getOracleText(), operand) || op(CardTranslation.getTranslatedOracle(face.getName()), operand)) {
+                return true;
+            }
+            return false;
+        }
+        protected boolean checkType(ICardFace face) {
+            if (face == null) {
+                return false;
+            }
+            return (op(CardTranslation.getTranslatedType(face.getName(), face.getType().toString()), operand) || op(face.getType().toString(), operand));
+        }
+
         @Override
         public boolean apply(final CardRules card) {
             boolean shouldContain;
             switch (this.field) {
             case NAME:
-                boolean otherName = false;
-                if (card.getOtherPart() != null) {
-                    otherName = (op(CardTranslation.getTranslatedName(card.getOtherPart().getName()), this.operand) || op(card.getOtherPart().getName(), this.operand));
+                for (ICardFace face : card.getAllFaces()) {
+                    if (face != null && checkName(face.getName())) {
+                        return true;
+                    }
                 }
-                return otherName || (op(CardTranslation.getTranslatedName(card.getName()), this.operand) || op(card.getName(), this.operand));
+                return false;
             case SUBTYPE:
                 shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().hasSubtype(this.operand);
             case ORACLE_TEXT:
-                return (op(CardTranslation.getTranslatedOracle(card.getName()), operand) || op(card.getOracleText(), this.operand));
+                for (ICardFace face : card.getAllFaces()) {
+                    if (checkOracle(face)) {
+                        return true;
+                    }
+                }
+                return false;
             case JOINED_TYPE:
-                return (op(CardTranslation.getTranslatedType(card.getName(), card.getType().toString()), operand) || op(card.getType().toString(), operand));
+                if ((op(CardTranslation.getTranslatedType(card.getName(), card.getType().toString()), operand) || op(card.getType().toString(), operand))) {
+                    return true;
+                }
+                for (ICardFace face : card.getAllFaces()) {
+                    if (checkType(face)) {
+                        return true;
+                    }
+                }
+
+                return false;
             case COST:
                 final String cost = card.getManaCost().toString();
                 return op(cost, operand);

@@ -112,7 +112,7 @@ ScryfallCode=ME1
 19 C Knights of Thorn @Christopher Rush
 177 R Lake of the Dead @Pete Venters
 102 C Lightning Bolt @Christopher Rush
-148 U Lim-Dul's Vault @Rob Alexander
+148 U Lim-Dûl's Vault @Rob Alexander
 149 R Lord of Tresserhorn @Anson Maddocks
 103 R Mana Flare @Christopher Rush
 104 R Marton Stromgald @Mark Poole

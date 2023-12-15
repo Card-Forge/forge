@@ -52707,7 +52707,7 @@ White creatures you control get +0/+1.
 {R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
 DGM M
 
-Legions of Lim-Dul
+Legions of Lim-Dûl
 {1}{B}{B}
 Creature - Zombie
 2/3
@@ -53639,7 +53639,7 @@ At the beginning of your upkeep, you may put a verse counter on Lilting Refrain.
 Sacrifice Lilting Refrain: Counter target spell unless its controller pays {X}, where X is the number of verse counters on Lilting Refrain.
 UZ U
 
-Lim-Dul the Necromancer
+Lim-Dûl the Necromancer
 {5}{B}{B}
 Legendary Creature - Human Wizard
 4/4
@@ -53647,38 +53647,38 @@ Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, re
 {1}{B}: Regenerate target Zombie.
 TSP R
 
-Lim-Dul's Cohort
+Lim-Dûl's Cohort
 {1}{B}{B}
 Creature - Zombie
 2/3
-Whenever Lim-Dul's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 IA C, ME4 C
 
-Lim-Dul's Hex
+Lim-Dûl's Hex
 {1}{B}
 Enchantment
-At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
+At the beginning of your upkeep, for each player, Lim-Dûl's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
 IA U
 
-Lim-Dul's High Guard
+Lim-Dûl's High Guard
 {1}{B}{B}
 Creature - Skeleton
 2/1
 First strike
-{1}{B}: Regenerate Lim-Dul's High Guard.
+{1}{B}: Regenerate Lim-Dûl's High Guard.
 AL C (x2), ME2 U
 
-Lim-Dul's Paladin
+Lim-Dûl's Paladin
 {2}{B}{R}
 Creature - Human Knight
 0/3
 Trample
-At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.
-Whenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.
-Whenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
+At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dûl's Paladin and draw a card.
+Whenever Lim-Dûl's Paladin becomes blocked, it gets +6/+3 until end of turn.
+Whenever Lim-Dûl's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
 AL U
 
-Lim-Dul's Vault
+Lim-Dûl's Vault
 {U}{B}
 Instant
 Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.
@@ -64703,10 +64703,10 @@ Enchantment
 At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
 EX R
 
-Oath of Lim-Dul
+Oath of Lim-Dûl
 {3}{B}
 Enchantment
-Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dul unless you discard a card. (Damage dealt to you causes you to lose life.)
+Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dûl unless you discard a card. (Damage dealt to you causes you to lose life.)
 {B}{B}: Draw a card.
 IA R
 
