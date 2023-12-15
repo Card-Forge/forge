@@ -143,13 +143,13 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         for (final GameOutcome game : gamesPlayed) {
             RegisteredPlayer player = game.getWinningPlayer();
 
-            int amount = winCount.containsKey(player) ? winCount.get(player) : 0;
+            int amount = winCount.getOrDefault(player, 0);
             winCount.put(player, amount + 1);
         }
 
         final StringBuilder sb = new StringBuilder();
         for (Entry<RegisteredPlayer, String> entry : players.entrySet()) {
-            int amount = winCount.containsKey(entry.getKey()) ? winCount.get(entry.getKey()) : 0;
+            int amount = winCount.getOrDefault(entry.getKey(), 0);
 
             sb.append(entry.getValue()).append(": ").append(amount).append(" ");
         }

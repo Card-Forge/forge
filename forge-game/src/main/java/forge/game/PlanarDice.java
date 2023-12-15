@@ -58,8 +58,6 @@ public enum PlanarDice {
         }
         PlanarDice res = results.get(0);
 
-        PlanarDice trigRes = res;
-
         final Map<AbilityKey, Object> resRepParams = AbilityKey.mapFromAffected(roller);
         resRepParams.put(AbilityKey.Result, res);
 
@@ -67,14 +65,14 @@ public enum PlanarDice {
             case NotReplaced:
                 break;
             case Updated: {
-                trigRes = (PlanarDice) resRepParams.get(AbilityKey.Result);
+                res = (PlanarDice) resRepParams.get(AbilityKey.Result);
                 break;
             }
         }
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(roller);
-        runParams.put(AbilityKey.Result, trigRes);
-        game.getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
+        runParams.put(AbilityKey.Result, res);
+        game.getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams, false);
 
         // Also run normal RolledDie and RolledDieOnce triggers
         for (int r = 0; r < rolls; r++) {
@@ -98,7 +96,6 @@ public enum PlanarDice {
      * @return enum equivalent
      */
     public static PlanarDice smartValueOf(String value) {
-
         final String valToCompate = value.trim();
         for (final PlanarDice v : PlanarDice.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {

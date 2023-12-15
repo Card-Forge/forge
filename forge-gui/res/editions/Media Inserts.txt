@@ -57,3 +57,4 @@ ScryfallCode=PMEI
 54 R Ruin Crab @Simon Dominic
 55 R Avalanche Riders @Lake Hurwitz
 56 R Pyromancer's Gauntlet @Magali Villeneuve
+57 R Culling the Weak @Scott M. Fischer
