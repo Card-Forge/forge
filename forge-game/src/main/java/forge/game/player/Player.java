@@ -2724,22 +2724,15 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void planeswalkTo(SpellAbility sa, final CardCollectionView destinations) {
         System.out.println(getName() + " planeswalks to " + destinations.toString());
-        currentPlanes.addAll(destinations);
         game.getView().updatePlanarPlayer(getView());
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         for (Card c : destinations) {
-            game.getAction().moveTo(ZoneType.Command, c, sa, moveParams);
+            currentPlanes.add(game.getAction().moveTo(getZone(ZoneType.Command), c, sa));
             planeswalkedToThisTurn.add(c);
-            //getZone(ZoneType.PlanarDeck).remove(c);
-            //getZone(ZoneType.Command).add(c);
         }
 
         game.setActivePlanes(currentPlanes);
-        //Run PlaneswalkedTo triggers here.
+
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Cards, destinations);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams, false);
@@ -2755,10 +2748,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
 
         for (final Card plane : currentPlanes) {
-            //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
-            //getZone(ZoneType.PlanarDeck).add(plane);
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane, -1, null);
         }
         currentPlanes.clear();
     }

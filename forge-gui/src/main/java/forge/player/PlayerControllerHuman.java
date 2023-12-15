@@ -3109,7 +3109,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Card forgeCard = Card.fromPaperCard(c, p);
 
-            forgeCard.setOwner(p);
             getGame().getAction().invoke(() -> {
                 getGame().getAction().changeZone(null, p.getZone(ZoneType.PlanarDeck), forgeCard, 0, null);
                 PlanarDice.roll(p, PlanarDice.Planeswalk);
