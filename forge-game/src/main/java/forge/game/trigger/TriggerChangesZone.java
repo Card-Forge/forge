@@ -17,7 +17,6 @@
  */
 package forge.game.trigger;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +107,7 @@ public class TriggerChangesZone extends Trigger {
             }
             if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
                 List<Card> etbLKI = moved.getController().getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
-                Collections.sort(etbLKI, CardPredicates.compareByTimestamp());
+                etbLKI.sort(CardPredicates.compareByTimestamp());
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
             }
 

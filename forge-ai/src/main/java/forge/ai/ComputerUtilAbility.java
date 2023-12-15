@@ -1,6 +1,5 @@
 package forge.ai;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -402,7 +401,7 @@ public class ComputerUtilAbility {
             return all;
         }
         // TODO this doesn't account for nearly identical creatures where one is a newer but more cost efficient variant
-        Collections.sort(creatures, ComputerUtilCard.EvaluateCreatureSpellComparator);
+        creatures.sort(ComputerUtilCard.EvaluateCreatureSpellComparator);
         int idx = 0;
         for (int i = 0; i < all.size(); i++) {
             if (all.get(i).getApi() == ApiType.PermanentCreature) {
