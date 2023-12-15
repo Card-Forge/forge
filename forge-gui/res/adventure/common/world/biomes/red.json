@@ -26,6 +26,7 @@
 	"Gravel"
 ],
 "enemies": [
+	"Armadillo",
 	"Adept Red Wizard",
 	"Amonkhet Minotaur Warrior",
 	"Apprentice Red Wizard",
@@ -51,6 +52,7 @@
 	"Furnace Goblin",
 	"Goblin",
 	"Goblin Chief",
+    "Goblin Fanatic",
 	"Goblin Warrior",
 	"Heart-Piercer Manticore",
 	"Hellhound",
@@ -64,6 +66,7 @@
 	"Mindclaw Shaman",
 	"Minotaur",
 	"Minotaur Flayer",
+    "Naked Mole Rat",
 	"Raptor",
 	"Red Beast",
 	"Red Sliver",
@@ -86,6 +89,8 @@
 	"BarbarianCamp1",
 	"BarbarianCamp2",
 	"BarbarianCamp3",
+	"BarbarianCamp4",
+	"BarbarianCamp5",
 	"FurnaceBase",
 	"LavaForge1",
 	"LavaForge2",

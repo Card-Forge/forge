@@ -7,6 +7,7 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <layer id="1" name="Background" width="72" height="66">
   <data encoding="base64" compression="zlib">
    eJzt201OwzAQBeBsEOqCFeIcLSJInKAXYcUdOAxXACSOwF24BRohi1Ea/8XxPI89ld6iaqt6Pk2cxHLOh2k6WyxK8307TVfX4aDHiIirnXxCGdEp1WbphB53qzY9+cTmki02Wnxi80BJ/anzENogVPvp6B9rTRsNRs5mbawSNi0b8d5ZG+vaZxJGPD83eCdph5zQ2NBGiF7RZqShj9wYUV7uv9EWKSEfhFHrx1orx502o7XU9EHXXZqaRuja9kqt6yctx1ZKnh72NerJZu8+6tHG+dCrxEbqPhSVHAd+r6zpmnBL3+T2SO99ErJxtftseu2TtVCtfM7hny3n6tFseA/57Ea3icVswjGbcMzGfMzHfMynzZiPP7QmZD6X4fcU77MZ+WzMKG4zuhHNMTGbUY3IJnc99X7Gj1syuevLIZ9e1lipbyhb1t99Pl/zX0qOweX6HCol+8+o/uV6Gr0nm17mqdL9eVT/Jwu3CTlqidT+Ra19JLm/03zMpyTSc9Ae/ye5l8x8wjkC9oaX2ozok/LckLRNS/sYaBwfj3K1l9iUPuul3SjFxn1vtD5KtUH5II1ybJA+CKNcG7QPhXykjHJtKC+vWB+K1Pmcn5OeF9cVvt+QTyxvd/9J+T5PSz5bwmvfO6lGrfrUtMkxGtnHGYXOA635SLmk9lFLPggbblTj+bdfGQy50Q==
@@ -27,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztm+tNxDAMgFsYAV2XQT1GRV2GGYBpkIWiM8VxHk1iJ/En9c/BqfbXPJ3eshhGn6y3ZXkKXM836ShlADdvW/j/9m0+T7FuMMckfnLcAKP4CY0pOW6AHvysgTEzt23EAOOQ5jEI507FWtONQ6sjKnccaws31H214IsJPr9v7dzg+2pbJ2l8bhgN8WmIgUNDfBpi4Dj3PYlYtTvCSMVqjvTeNwdqzqvd/1que2pR8xn3sCeKoYajEdoOpqSj0dw4Sjga1Q1wNbdR3bi6TUpuVJ1rVDepeY3aTiioOXgVqgFq5Dwmu/ylaoAacS7O+R+Et1nZiTqf8zO7Gx8H0aaMB+BnlD1UDcwPj/nhMT885ofH/PwH5vM7Ovc0Pw985+iLOWLXgbM7ilkjz+ooZf/Q03lWCew9SD813oPk6mo9cWVP7vPD1dV640ofiakr9u7o6hhyPsun2mLPjlqNsb06ajkH9TjfmR8e7X4+XvKvErmZn/Ixt7yXpJ/W5zVa/OC6Fne1dJP7LGr40bbW4Nzg30FdcZHav7Q4Crlxfzsa+wGkHcW6AST8AFKOUtwAUn6A1o5S3QCSfoCWjt4z3jdzuUj5wTHUZs9YT7jvfHmu7+1v7p8R65fXLe13Ez3uD0sQ23dm9QPEOJrZDxByNLsfgHNkfn7JmT9i+AGrpRQk
+   eJztm+tNxDAMgFsYAV2XQT1m6y2CugwL3J0ETEMtFAgldR5tbCfxJ/XPPRT7a95pu05RyqQ/dd2D53o8cUfJA7h5Gfy/G4f2PIW6sZkb8ZPiBqjFj69PSXEDlOCn9/SZqXUjBOiHJPdBdu6uWHO6MUh15MrdjpXCjatcKWzFBJ+fBzo3drnS5kkS75uNhPgkxIAhIT4JMWCs2x5HrNId2XDFqo7klpuCa8zL3f4o5z25yHmPS1gThZDDUQ11x+ZIR7W5MRzhqFY3wN7canVj9m1icnPtc9XqJjYvinrSXxfn17xlhOAag3umPUCbaXFzEeBn3Seb/Ln2AH/Kui3150ZTlg/jYp3/7PBGxbS4uQjxA4yOfT7jh2Nc6u9L/bnTlhnL7KhTVEyLm0sBfmpZQ+VA/eCoHxz1g6N+cNTPf2A8P1vnnurnl61z9E4dofPA1h2FzJFbdRSzfijpPOsI9DnIbXI8B4ntq5XEnjX5lh9sX6009rSRkH3F0h3t7UPWZ/muuliyI6o+tlRHlGNQieOd+sGR7uftKf06Ijf1c3zMlGVx+qE+r5Hix97Xwi5KN6n3IocfaXMNzI39HtQeF7HtS4ojnxvz3UzsB+B2FOoG4PADcDmKcQNw+QGoHcW6ATj9AJSOXhOeNzO5cPmxY8jNmDCfMP/52Lg+h7+5vwfMX56HuPcmSlwfHkFo22nVDxDiqGU/gM9R634AzJH6+SZl/AjhC9b7ISY=
   </data>
  </layer>
  <objectgroup id="4" name="Objects" visible="0">
