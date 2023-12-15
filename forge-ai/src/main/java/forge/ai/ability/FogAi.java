@@ -121,7 +121,7 @@ public class FogAi extends SpellAbilityAi {
         int fogs = 0;
         for (Card c : ai.getCardsActivatableInExternalZones(false)) {
             for (SpellAbility ability : c.getSpellAbilities()) {
-                if (ability.getApi() != null && ability.getApi().equals(ApiType.Fog)) {
+                if (ApiType.Fog.equals(ability.getApi())) {
                     fogs++;
                     break;
                 }
@@ -130,7 +130,7 @@ public class FogAi extends SpellAbilityAi {
 
         for (Card c : ai.getCardsIn(ZoneType.Hand)) {
             for (SpellAbility ability : c.getSpellAbilities()) {
-                if (ability.getApi() != null && ability.getApi().equals(ApiType.Fog)) {
+                if (ApiType.Fog.equals(ability.getApi())) {
                     fogs++;
                     break;
                 }
