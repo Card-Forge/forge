@@ -963,7 +963,6 @@ public class GameAction {
             if (z.is(ZoneType.Battlefield)) {
                 c.runLeavesPlayCommands();
             }
-
         }
 
         // CR 603.6c other players LTB triggers should work
@@ -1041,7 +1040,6 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
     }
 
     // Temporarily disable (if mode = true) actively checking static abilities.
