@@ -635,8 +635,7 @@ public class AttachAi extends SpellAbilityAi {
     }
 
     // Cards that trigger on dealing damage
-    private static Card attachAICuriosityPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
-                                                    final Card attachSource) {
+    private static Card attachAICuriosityPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         Card chosen = null;
         int priority = 0;
         for (Card card : list) {
@@ -689,7 +688,6 @@ public class AttachAi extends SpellAbilityAi {
                 chosen = card;
             }
         }
-
 
         return chosen;
     }

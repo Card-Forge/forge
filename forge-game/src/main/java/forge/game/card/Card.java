@@ -2682,11 +2682,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             }
 
-            // skip Basic Spells
-            if (sa.isSpell() && sa.isBasicSpell()) {
-                continue;
-            }
-
             // should not print Spelldescription for Morph
             if (sa.isCastFaceDown()) {
                 continue;
@@ -2704,6 +2699,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sbSA.append(": ");
                 sbSA.append(sAbility);
                 sAbility = sbSA.toString();
+            } else if (sa.isSpell() && sa.isBasicSpell()) {
+                continue;
             }
 
             if (sa.getManaPart() != null) {

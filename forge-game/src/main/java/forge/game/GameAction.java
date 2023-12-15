@@ -510,11 +510,6 @@ public class GameAction {
             }
         }
 
-        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (copied.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
-            copied.setState(CardStateName.Original, false);
-        }
-
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (mergedCards != null) {
@@ -992,11 +987,11 @@ public class GameAction {
                 if (!lki.getController().equals(lki.getOwner())) {
                     game.getTriggerHandler().registerActiveLTBTrigger(lki);
                 }
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                runParams.put(AbilityKey.CardLKI, lki);
+                runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
+                game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-            runParams.put(AbilityKey.CardLKI, lki);
-            runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         }
     }
 
