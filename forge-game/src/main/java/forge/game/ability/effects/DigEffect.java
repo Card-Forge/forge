@@ -444,9 +444,9 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     // now, move the rest to destZone2
-                    if (!sa.hasParam("DestZone2Optional") || p.getController().confirmAction(sa, null,
+                    if (!rest.isEmpty() && (!sa.hasParam("DestZone2Optional") || p.getController().confirmAction(sa, null,
                             Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone",
-                                    destZone2.getTranslatedName()), null)) {
+                                    destZone2.getTranslatedName()), null))) {
                         if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck
                                 || destZone2 == ZoneType.SchemeDeck || destZone2 == ZoneType.Graveyard) {
                             CardCollection afterOrder = rest;
