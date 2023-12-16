@@ -192,6 +192,7 @@ public enum ApiType {
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
     Venture (VentureEffect.class),
+    VillainousChoice (VillainousChoiceEffect.class),
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
