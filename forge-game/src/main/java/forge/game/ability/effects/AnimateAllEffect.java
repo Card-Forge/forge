@@ -133,7 +133,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         CardCollectionView list;
 
-        ZoneType z = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
+        List<ZoneType> z = sa.hasParam("Zone") ? ZoneType.listValueOf(sa.getParam("Zone")) : 
+            ZoneType.listValueOf("Battlefield");
 
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
             list = getTargetPlayers(sa).getCardsIn(z);
