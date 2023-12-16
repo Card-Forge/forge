@@ -102,10 +102,11 @@ public class TriggerChangesZone extends Trigger {
         if (hasParam("ValidCard")) {
             Card moved = (Card) runParams.get(AbilityKey.Card);
 
-            if ("Battlefield".equals(getParam("Origin"))) {
+            // CR 603.10a leaves battlefield or GY look back in time
+            if ("Battlefield".equals(getParam("Origin"))
+                    || ("Graveyard".equals(getParam("Origin")) && !"Battlefield".equals(getParam("Destination")))) {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
-            }
-            if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
+            } else if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
                 List<Card> etbLKI = moved.getController().getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
                 etbLKI.sort(CardPredicates.compareByTimestamp());
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
