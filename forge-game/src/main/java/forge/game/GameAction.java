@@ -916,7 +916,7 @@ public class GameAction {
     }
 
     public final CardCollection exile(final CardCollection cards, SpellAbility cause, Map<AbilityKey, Object> params) {
-        CardZoneTable table = new CardZoneTable();
+        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         CardCollection result = new CardCollection();
         for (Card card : cards) {
             if (cause != null) {
@@ -1261,7 +1261,7 @@ public class GameAction {
             checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
 
-            CardZoneTable table = new CardZoneTable();
+            CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {

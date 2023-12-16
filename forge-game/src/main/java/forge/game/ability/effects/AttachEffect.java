@@ -151,12 +151,9 @@ public class AttachEffect extends SpellAbilityEffect {
 
             ZoneType previousZone = source.getZone().getZoneType();
 
-            CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-            CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
-            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+            moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching

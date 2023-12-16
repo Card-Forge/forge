@@ -46,6 +46,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     public CardCollectionView getLastStateGraveyard() {
         return lastStateGraveyard;
     }
+    public void setLastStateBattlefield(CardCollectionView lastState) {
+        this.lastStateBattlefield = lastState;
+    }
+    public void setLastStateGraveyard(CardCollectionView lastState) {
+        this.lastStateGraveyard = lastState;
+    }
 
     /**
      * special put logic, add Card to Card Collection

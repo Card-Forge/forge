@@ -262,7 +262,6 @@ public class CostExile extends CostPartWithList {
     }
 
     public String exileMultiZoneCostString(boolean forKW, int xMin) {
-
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ");
         String amount = this.getAmount();

@@ -125,6 +125,9 @@ public abstract class CostPartWithList extends CostPart {
 
     // always returns true, made this to inline with return
     protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        table.setLastStateBattlefield(payer.getGame().getLastStateBattlefield());
+        table.setLastStateGraveyard(payer.getGame().getLastStateGraveyard());
+
         handleBeforePayment(payer, ability, targetCards);
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
             for (Card c: targetCards) {
@@ -174,9 +177,7 @@ public abstract class CostPartWithList extends CostPart {
             return;
         }
 
-        // copy table because the original get cleaned after the cost is done
-        final CardZoneTable copyTable = new CardZoneTable(table);
-        copyTable.triggerChangesZoneAll(payer.getGame(), ability);
+        table.triggerChangesZoneAll(payer.getGame(), ability);
     }
 
 }

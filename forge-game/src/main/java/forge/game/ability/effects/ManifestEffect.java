@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -30,12 +28,9 @@ public class ManifestEffect extends SpellAbilityEffect {
         // Most commonly "defined" is Top of Library
         final String defined = sa.getParamOrDefault("Defined", "TopOfLibrary");
 
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
-        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             CardCollection tgtCards;
@@ -73,8 +68,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                     if (sa.hasParam("RememberManifested") && rem.isManifested()) {
                         source.addRemembered(rem);
                     }
-                    // 701.34d. If an effect instructs a player to manifest multiple cards from their library,
-                    // those cards are manifested one at a time.
+                    // CR 701.34d multiple cards are manifested one at a time
                     triggerList.put(origin, ZoneType.Battlefield, rem);
                     triggerList.triggerChangesZoneAll(game, sa);
                 }
