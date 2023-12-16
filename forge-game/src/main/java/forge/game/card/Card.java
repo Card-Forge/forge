@@ -2175,8 +2175,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] upkeepCostParams = keyword.split(":");
                     sbLong.append(upkeepCostParams.length > 2 ? "— " + upkeepCostParams[2] : ManaCostParser.parse(upkeepCostParams[1]));
                     sbLong.append("\r\n");
-                } else if (keyword.startsWith("Alternative Cost")) {
-                    sbLong.append("Has alternative cost.");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String[] costs = keyword.split(":", 2)[1].split(":");
                     sbLong.append("As an additional cost to cast this spell, ");
@@ -2386,7 +2384,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
-                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")) {
+                        || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
+                        || keyword.startsWith("Alternative Cost")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -4393,6 +4392,59 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return intensity > 0;
     }
 
+    private List<Map<String, Object>> perpetual = new ArrayList<>();
+    public final boolean hasPerpetual() {
+        return !perpetual.isEmpty();
+    }
+    public final List<Map<String, Object>> getPerpetual() {
+        return perpetual;
+    }
+
+    public final void addPerpetual(Map<String, Object> p) {
+        perpetual.add(p);
+    }
+
+    public final void executePerpetual(Map<String, Object> p) {
+        final String category = (String) p.get("Category");
+        if (category.equals("NewPT")) {
+            addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+                p.get("Timestamp"), (long) 0);
+        } else if (category.equals("PTBoost")) {
+            addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+                p.get("Timestamp"), (long) 0);
+        } else if (category.equals("Keywords")) {
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), 
+                (boolean) p.get("RemoveAll"), (long) p.get("Timestamp"), (long) 0);        
+        } else if (category.equals("Types")) {
+            addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
+            false, (Set<RemoveType>) p.get("RemoveXTypes"), 
+            (long) p.get("Timestamp"), (long) 0, true, false);
+        }
+    }
+
+    public final void removePerpetual(final long timestamp) {
+        Map<String, Object> toRemove = Maps.newHashMap();
+        for (Map<String, Object> p : perpetual) {
+            if (p.get("Timestamp").equals(timestamp)) {
+                toRemove = p;
+                break;
+            }
+        }
+        perpetual.remove(toRemove);
+    }
+
+    public final void setPerpetual(final Card oldCard) {
+        final List<Map<String, Object>> perp = oldCard.getPerpetual();
+        perpetual = perp;
+        for (Map<String, Object> p : perp) {
+            if (p.get("Category").equals("Abilities")) {
+                long timestamp = (long) p.get("Timestamp");
+                CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
+                addChangedCardTraits(ctc, timestamp, (long) 0);
+            } else executePerpetual(p);
+        }
+    }
+
     private int multiKickerMagnitude = 0;
     public final void addMultiKickerMagnitude(final int n) { multiKickerMagnitude += n; }
     public final void setKickerMagnitude(final int n) { multiKickerMagnitude = n; }
@@ -4649,6 +4701,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
             spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
         ));
+        // update view
+        updateAbilityTextForView();
+    }
+
+    public final void addChangedCardTraits(CardTraitChanges ctc, long timestamp, long staticId) {
+        changedCardTraits.put(timestamp, staticId, ctc);
         // update view
         updateAbilityTextForView();
     }
@@ -6420,6 +6478,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean isInZone(final ZoneType zone) {
         Zone z = this.getLastKnownZone();
         return z != null && z.is(zone);
+    }
+
+    public boolean isInZones(final List<ZoneType> zones) {
+        boolean inZones = false;
+        Zone z = this.getLastKnownZone();
+        for (ZoneType okZone : zones) {
+            if (z.is(okZone)) {
+                inZones = true;
+                break;
+            }
+        }
+        return z != null && inZones;
     }
 
     public final boolean canBeDestroyed() {

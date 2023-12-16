@@ -1,7 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -27,6 +29,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenkws = Lists.newArrayList();
+        final boolean perpetual = ("Perpetual").equals(sa.getParam("Duration"));
 
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
@@ -38,25 +41,33 @@ public class PumpAllEffect extends SpellAbilityEffect {
 
         for (final Card tgtC : list) {
             // only pump things in the affected zones.
-            boolean found = false;
-            for (final ZoneType z : affectedZones) {
-                if (tgtC.isInZone(z)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
+            if (!tgtC.isInZones(affectedZones)) {
                 continue;
             }
 
             boolean redrawPT = false;
 
             if (a != 0 || d != 0) {
+                if (perpetual) {
+                    Map <String, Object> params = new HashMap<>();
+                    params.put("Power", a);
+                    params.put("Toughness", d);
+                    params.put("Timestamp", timestamp);
+                    params.put("Category", "PTBoost");
+                    tgtC.addPerpetual(params);
+                }
                 tgtC.addPTBoost(a, d, timestamp, 0);
                 redrawPT = true;
             }
 
             if (!kws.isEmpty()) {
+                if (perpetual) {
+                    Map <String, Object> params = new HashMap<>();
+                    params.put("AddKeywords", kws);
+                    params.put("Timestamp", timestamp);
+                    params.put("Category", "Keywords");
+                    tgtC.addPerpetual(params);
+                }
                 tgtC.addChangedCardKeywords(kws, null, false, timestamp, 0);
             }
             if (redrawPT) {
@@ -71,7 +82,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtC);
             }
 
-            if (!"Permanent".equals(sa.getParam("Duration"))) {
+            if (!"Permanent".equals(sa.getParam("Duration")) && !perpetual) {
                 // If not Permanent, remove Pumped at EOT
                 final GameCommand untilEOT = new GameCommand() {
                     private static final long serialVersionUID = 5415795460189457660L;

@@ -107,6 +107,7 @@ public enum ApiType {
     Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
+    LosePerpetual (LosePerpetualEffect.class),
     LosesGame (GameLossEffect.class),
     MakeCard (MakeCardEffect.class),
     Mana (ManaEffect.class),

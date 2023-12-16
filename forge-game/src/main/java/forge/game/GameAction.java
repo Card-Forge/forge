@@ -315,6 +315,16 @@ public class GameAction {
             }
         }
 
+        // perpetual stuff
+        if (c.hasIntensity()) {
+            copied.setIntensity(c.getIntensity(false));
+        }
+        if (c.isSpecialized()) {
+            copied.setState(c.getCurrentStateName(), false);
+        }
+        if (c.hasPerpetual()) {
+            copied.setPerpetual(c);
+        }
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
@@ -575,15 +585,6 @@ public class GameAction {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
             copied.putEtbCounters(table);
             copied.clearEtbCounters();
-        }
-
-        // intensity is perpetual
-        if (c.hasIntensity()) {
-            copied.setIntensity(c.getIntensity(false));
-        }
-        // specialize is perpetual
-        if (c.isSpecialized()) {
-            copied.setState(c.getCurrentStateName(), false);
         }
 
         // update state for view
