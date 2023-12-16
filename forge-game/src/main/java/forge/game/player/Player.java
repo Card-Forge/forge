@@ -3724,7 +3724,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 lki.setZone(c.getZone());
                 revealCards.add(lki);
             }
-            game.getAction().revealTo(revealCards, otherPlayers, Localizer.getInstance().getMessage("lblRevealFaceDownCards"));
+            game.getAction().revealTo(revealCards, otherPlayers, Localizer.getInstance().getMessage("lblRevealFaceDownCards"), true);
         }
     }
 

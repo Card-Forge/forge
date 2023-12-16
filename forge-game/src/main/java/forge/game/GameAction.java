@@ -1945,15 +1945,15 @@ public class GameAction {
         revealTo(cards, to, null);
     }
     public void revealTo(final CardCollectionView cards, final Player to, String messagePrefix) {
-        revealTo(cards, Collections.singleton(to), messagePrefix);
+        revealTo(cards, Collections.singleton(to), messagePrefix, true);
     }
     public void revealTo(final Card card, final Iterable<Player> to) {
         revealTo(new CardCollection(card), to);
     }
     public void revealTo(final CardCollectionView cards, final Iterable<Player> to) {
-        revealTo(cards, to, null);
+        revealTo(cards, to, null, true);
     }
-    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix) {
+    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix, boolean addSuffix) {
         if (cards.isEmpty()) {
             return;
         }
@@ -1961,7 +1961,7 @@ public class GameAction {
         final ZoneType zone = cards.getFirst().getZone().getZoneType();
         final Player owner = cards.getFirst().getOwner();
         for (final Player p : to) {
-            p.getController().reveal(cards, zone, owner, messagePrefix);
+            p.getController().reveal(cards, zone, owner, messagePrefix, addSuffix);
         }
     }
 
@@ -1972,18 +1972,25 @@ public class GameAction {
         reveal(cards, cardOwner, dontRevealToOwner, null);
     }
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
+        reveal(cards, cardOwner, dontRevealToOwner, messagePrefix, true);
+    }
+    public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
         Card firstCard = Iterables.getFirst(cards, null);
         if (firstCard == null) {
             return;
         }
-        reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix);
+        reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix, msgAddSuffix);
     }
+    
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
+        reveal(cards, zt, cardOwner, dontRevealToOwner, messagePrefix, true);
+    }
+    public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) {
                 continue;
             }
-            p.getController().reveal(cards, zt, cardOwner, messagePrefix);
+            p.getController().reveal(cards, zt, cardOwner, messagePrefix, msgAddSuffix);
         }
     }
 

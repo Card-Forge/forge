@@ -88,7 +88,6 @@ public class ClashEffect extends SpellAbilityEffect {
         }
 
         final StringBuilder reveal = new StringBuilder();
-        reveal.append("OVERRIDE "); //will return substring with the original message parsed here..
         Card pCard = null;
         Card oCard = null;
         final CardCollection toReveal = new CardCollection();
@@ -122,7 +121,7 @@ public class ClashEffect extends SpellAbilityEffect {
             reveal.append(winner + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
         }
 
-        player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
+        player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString(), false);
 
         clashMoveToTopOrBottom(player, pCard, sa);
         clashMoveToTopOrBottom(opponent, oCard, sa);

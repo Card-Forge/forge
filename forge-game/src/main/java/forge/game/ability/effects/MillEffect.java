@@ -14,6 +14,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 
 import java.util.Map;
 
@@ -46,8 +47,8 @@ public class MillEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " " +
-                    Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName());
+            String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
+                    Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
             if (sa.hasParam("Optional")) {
                 String d = destination.equals(ZoneType.Graveyard) ? "" : " (" + destination.getTranslatedName() + ")";
                 final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().
@@ -62,8 +63,9 @@ public class MillEffect extends SpellAbilityEffect {
             // graveyard to figure out which ones were milled.
             if (!facedown && reveal) { // do not reveal when exiling face down
                 if (showRevealDialog) {
-                    final String message = Localizer.getInstance().getMessage("lblMilledCards") + toZoneStr;
-                    game.getAction().reveal(milled, p, false, message);
+                    final String message = Localizer.getInstance().getMessage("lblMilledCards");
+                    final boolean addSuffix = !toZoneStr.equals("");
+                    game.getAction().reveal(milled, destination, p, false, message, addSuffix);
                 }
                 p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
                         Lang.joinHomogenous(milled) + toZoneStr + ".");

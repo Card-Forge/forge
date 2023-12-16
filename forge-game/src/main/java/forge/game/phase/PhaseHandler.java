@@ -540,7 +540,7 @@ public class PhaseHandler implements java.io.Serializable {
             final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa,
                     table, moveParams);
             game.getAction().reveal(milled, playerTurn, false,
-                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn));
+                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn), false);
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
                     Lang.joinHomogenous(milled) + ".");
             table.triggerChangesZoneAll(game, sa);
