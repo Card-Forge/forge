@@ -2141,9 +2141,11 @@ public class AbilityUtils {
         if (sq[0].contains("CardManaCost")) {
             int cmc = c.getCMC();
 
-            if (sq[0].contains("LKI") && ctb instanceof SpellAbility && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
-                if (((SpellAbility) ctb).getXManaCostPaid() != null) {
+            if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
+                if (ctb instanceof SpellAbility && ((SpellAbility) ctb).getXManaCostPaid() != null) {
                     cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
+                } else {
+                    cmc += c.getXManaCostPaid() * c.getManaCost().countX();
                 }
             }
 
