@@ -458,18 +458,7 @@ public class CardDetailUtil {
                 area.append("\n");
             }
             area.append("(chosen card").append(card.getChosenCards().size() == 1 ? ": " : "s: ");
-            if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
-                List<CardView> chosenToShow = new ArrayList<>();
-                for (CardView cc : card.getChosenCards()) {
-                    if (!cc.getZone().isHidden()) {
-                        chosenToShow.add(cc);
-                    }
-                }
-                area.append(Lang.joinHomogenous(chosenToShow));
-            } else {
-                area.append(Lang.joinHomogenous(card.getChosenCards()));
-            }
-            area.append(")");
+            area.append(Lang.joinHomogenous(card.getChosenCards())).append(")");
         }
 
         // chosen number

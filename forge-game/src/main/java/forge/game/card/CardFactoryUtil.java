@@ -1104,7 +1104,7 @@ public class CardFactoryUtil {
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
             final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
             final String puSt = "DB$ Pump | RememberObjects$ Self";
-            final String anSt = "DB$ Animate | Duration$ Perpetual | Defined$ Remembered | RemoveKeywords$ Double team";       
+            final String anSt = "DB$ Animate | Duration$ Perpetual | Defined$ Remembered | RemoveKeywords$ Double team";
             final String clSt = "DB$ Cleanup | ClearRemembered$ True";
             final Trigger trigger = TriggerHandler.parseTrigger(trigString, card, intrinsic);
             final SpellAbility trigMake = AbilityFactory.getAbility(maSt, card);

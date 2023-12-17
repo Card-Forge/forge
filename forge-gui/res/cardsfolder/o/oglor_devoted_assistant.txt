@@ -5,9 +5,9 @@ PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, look at the top two cards of your library, then put one of them into your graveyard.
 SVar:DBDig:DB$ Dig | ValidTgts$ You | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Graveyard | LibraryPosition2$ 0
 T:Mode$ ChangesZone | ValidCard$ Creature.YouOwn | Origin$ Library,Hand | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever a creature card is put into your graveyard from your library or hand, it perpetually gains "When this card leaves your graveyard, create a tapped 2/2 black Zombie creature token."
-SVar:TrigEffect:DB$ Animate | Defined$ TriggeredCard | Triggers$ LeavesGrave | Duration$ Perpetual
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Triggers$ LeavesGrave | Duration$ Perpetual
 SVar:LeavesGrave:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this card leaves your graveyard, create a tapped 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenTapped$ True
 DeckHas:Ability$Graveyard|Token & Type$Zombie & Color$Black
-DeckHints:Ability$Graveyard|Mill & Keyword$Disturb|Escape
+DeckHints:Ability$Graveyard|Mill & Keyword$Disturb|Escape|Unearth
 Oracle:At the beginning of your upkeep, look at the top two cards of your library, then put one of them into your graveyard.\nWhenever a creature card is put into your graveyard from your library or hand, it perpetually gains "When this card leaves your graveyard, create a tapped 2/2 black Zombie creature token."

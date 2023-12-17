@@ -3,11 +3,8 @@ ManaCost:1 W
 Types:Legendary Creature Tiefling Cleric
 PT:2/2
 K:Specialize:2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually get +1/+1.
-SVar:TrigEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Klement, Novice Acolyte's Perpetual Effect
-SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These creature cards perpetually get +1/+1.
-SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
-SVar:DBUpdate:DB$ UpdateRemember
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually get +1/+1.
+SVar:TrigPump:DB$ PumpAll | PumpZone$ Hand | ValidCards$ Creature.YouOwn | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 AlternateMode:Specialize
 Oracle:Specialize {2}\nWhen Klement, Novice Acolyte enters the battlefield, creature cards in your hand perpetually get +1/+1.
 
