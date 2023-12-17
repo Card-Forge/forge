@@ -211,7 +211,8 @@ public class Game {
                 : null;
 
         if (lookup != null) {
-            lookup.remove(c);
+            lastStateBattlefield.remove(c);
+            lastStateGraveyard.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }

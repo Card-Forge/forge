@@ -1,7 +1,7 @@
 Name:River Song's Diary
 ManaCost:3
 Types:Artifact
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromHand,Sorcery.wasCastFromHand | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.
 SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard | SubAbility$ DBImprint
 SVar:DBImprint:DB$ Pump | ImprintCards$ TriggeredCard
 SVar:ReMoved:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ DBExile | Description$ Exile it instead of putting it into a graveyard as it resolves.
