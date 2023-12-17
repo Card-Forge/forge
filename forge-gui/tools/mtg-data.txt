@@ -76476,10 +76476,10 @@ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it'
 Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 M13 U
 
- Ring of Ma'rûf
+Ring of Ma'rûf
 {5}
 Artifact
-{5}, {T}, Exile  Ring of Ma'rûf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+{5}, {T}, Exile Ring of Ma'rûf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
 AN R, MED R
 
 Ring of Renewal

@@ -84,7 +84,7 @@ ScryfallCode=ARN
 8† C Piety @Mark Poole
 67 R Pyramids @Amy Weber
 9 R Repentant Blacksmith @Drew Tucker
-68 R  Ring of Ma'rûf @Dan Frazier
+68 R Ring of Ma'rûf @Dan Frazier
 43 C Rukh Egg @Christopher Rush
 43† C Rukh Egg @Christopher Rush
 69 U Sandals of Abdallah @Dan Frazier
