@@ -18,7 +18,7 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
         String prompt = sa.getParamOrDefault("ChoicePrompt", "Villainous Choice by " + sa.getActivatingPlayer());
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
-            int choiceAmount = p.getAdditionalVotesAmount() + amount;
+            int choiceAmount = p.getAdditionalVillainousChoices() + amount;
 
             List<SpellAbility> saToRemove = Lists.newArrayList();
 
