@@ -340,7 +340,7 @@ public class HumanPlay {
                 }
                 CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source, sourceAbility);
 
-                if (sameZone) { // Jotun Grunt
+                if (sameZone) { // Jötun Grunt
                     FCollectionView<Player> players = p.getGame().getPlayers();
                     List<Player> payableZone = new ArrayList<>();
                     for (Player player : players) {

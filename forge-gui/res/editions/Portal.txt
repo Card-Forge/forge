@@ -66,7 +66,7 @@ ScryfallCode=POR
 50 R Cruel Fate @Adrian Smith
 51 U Deep-Sea Serpent @Scott M. Fischer
 52 R Djinn of the Lamp @DiTerlizzi
-53 C Deja Vu @Hannibal King
+53 C Déjà Vu @Hannibal King
 54 R Exhaustion @DiTerlizzi
 55 U Flux @Ted Naifeh
 56 C Giant Octopus @John Matson

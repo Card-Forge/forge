@@ -1,4 +1,4 @@
-Name:Ghazban Ogre
+Name:Ghazbán Ogre
 ManaCost:G
 Types:Creature Ogre
 PT:2/2

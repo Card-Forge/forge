@@ -226,7 +226,7 @@ ScryfallCode=ICE
 254 U Maddening Wind @Dameon Willich
 82 R Magus of the Unseen @Kaja Foglio
 328 U Malachite Talisman @Christopher Rush
-199 R Marton Stromgald @Mark Poole
+199 R Márton Stromgald @Mark Poole
 200 U Melee @Dameon Willich
 201 U Melting @Randy Gallegos
 44 R Mercenaries @Cornelius Brudi

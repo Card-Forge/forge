@@ -1,4 +1,4 @@
-Name:Bosium Strip
+Name:Bösium Strip
 ManaCost:3
 Types:Artifact
 A:AB$ Effect | Cost$ 3 T | ReplacementEffects$ REBosiumStrip | StaticAbilities$ STBosiumStrip | SpellDescription$ Until end of turn, you may cast instant and sorcery spells from the top of your graveyard. If a spell cast this way would be put into a graveyard this turn, exile it instead.

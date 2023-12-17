@@ -132,7 +132,7 @@ ScryfallCode=ME4
 15 R Island Sanctuary @Mark Poole
 208 R Jade Monolith @Anson Maddocks
 209 U Juggernaut @Dan Frazier
-88 U Junun Efreet @Christopher Rush
+88 U Junún Efreet @Christopher Rush
 16 C Just Fate @Bradley Williams
 17 R Kismet @Kaja Foglio
 210 R Kormus Bell @Christopher Rush

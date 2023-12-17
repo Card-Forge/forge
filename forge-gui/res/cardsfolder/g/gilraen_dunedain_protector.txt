@@ -1,4 +1,4 @@
-Name:Gilraen, Dunedain Protector
+Name:Gilraen, Dúnedain Protector
 ManaCost:2 W
 Types:Legendary Creature Human Noble
 PT:2/3
