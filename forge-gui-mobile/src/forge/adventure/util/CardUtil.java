@@ -668,9 +668,19 @@ public class CardUtil {
 
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
-        if(path.endsWith(".dck"))
-            return DeckSerializer.fromFile(new File(Config.instance().getCommonFilePath(path)));
-
+        if(path.endsWith(".dck")) {
+            File deckfile;
+            // Firstly, check for a user plane
+            String plane = Config.instance().getPlane().replace("user_", "<user>"); // Undo getPlane replacement
+            deckfile = new File(Config.instance().getPlanePath(plane) + File.separator + path);
+            if(!deckfile.exists()) {
+                // Fallback to common file path
+                deckfile = new File(Config.instance().getCommonFilePath(path));
+                if(!deckfile.exists())
+                    System.err.println("Cannot find deck: " + path);
+            }
+            return DeckSerializer.fromFile(deckfile);
+        }
         if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
             if (deck != null)
