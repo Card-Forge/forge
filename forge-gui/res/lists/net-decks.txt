@@ -22,8 +22,8 @@ Current Penny Dreadful Metagame | https://downloads.cardforge.org/decks/currentp
 Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneermetagame.zip
 Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
 Current Standard-BO1 Metagame | https://downloads.cardforge.org/decks/currentstandardbo1metagame.zip
-// Current Timeless Metagame | https://downloads.cardforge.org/decks/currenttimelessmetagame.zip
-// Current Timeless-BO1 Metagame | https://downloads.cardforge.org/decks/currenttimelessbo1metagame.zip
+Current Timeless Metagame | https://downloads.cardforge.org/decks/currenttimelessmetagame.zip
+Current Timeless-BO1 Metagame | https://downloads.cardforge.org/decks/currenttimelessbo1metagame.zip
 Current Vintage Metagame | https://downloads.cardforge.org/decks/currentvintagemetagame.zip
 Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
 Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate.zip
