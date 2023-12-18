@@ -18,7 +18,7 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
         String prompt = sa.getParamOrDefault("ChoicePrompt", "Villainous Choice by " + sa.getActivatingPlayer());
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
-            int choiceAmount = p.getAdditionalVillainousChoices() + amount;
+            int choiceAmount = p.getAdditionalVillainousChoices() + 1;
 
             List<SpellAbility> saToRemove = Lists.newArrayList();
 
@@ -30,7 +30,11 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
             abilities.removeAll(saToRemove);
 
             // For the AI chooseSAForEffect really should take the least good ability. Currently it just takes the first
-            List<SpellAbility> chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, choiceAmount, ImmutableMap.of());
+            List<SpellAbility> chosenSAs = Lists.newArrayList();
+            for(int i = 0; i < choiceAmount; i++) {
+                // This is a loop because you can choose the same abilities multiple times
+                 chosenSAs.addAll(p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of()));
+            }
 
             for (SpellAbility chosenSA : chosenSAs) {
                 AbilityUtils.resolve(chosenSA);
