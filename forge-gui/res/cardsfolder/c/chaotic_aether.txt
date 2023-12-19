@@ -2,7 +2,7 @@ Name:Chaotic Aether
 ManaCost:no cost
 Types:Phenomenon
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ Aether | TriggerDescription$ When you encounter CARDNAME, each blank roll of the planar dice is a {CHAOS} roll until a player planeswalks away from a plane. (Then planeswalk away from this phenomenon.)
-SVar:Aether:DB$ Effect | ReplacementEffects$ BlankIsChaos | Triggers$ TPWAway | SubAbility$ PWAway
+SVar:Aether:DB$ Effect | ReplacementEffects$ BlankIsChaos | Triggers$ TPWAway | SubAbility$ PWAway | Duration$ Permanent
 SVar:PWAway:DB$ Planeswalk
 SVar:BlankIsChaos:Event$ PlanarDiceResult | ValidRoll$ Blank | ReplaceWith$ REChaos | Description$ Each blank roll of the planar die is a {CHAOS} roll until a player planeswalks away from a plane.
 SVar:REChaos:DB$ ReplaceEffect | VarName$ Result | VarValue$ Chaos | VarType$ PlanarDice
