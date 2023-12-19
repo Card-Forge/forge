@@ -1,9 +1,10 @@
 package forge.card;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -363,14 +364,9 @@ public final class CardRulesPredicates {
         private final LeafString.CardField field;
 
         protected boolean checkName(String name) {
-            if (op(name, this.operand) || op(CardTranslation.getTranslatedName(name), this.operand)) {
-                return true;
-            }
-            String normalName = Normalizer.normalize(name, Normalizer.Form.NFD);
-            if (op(normalName, this.operand) || op(normalName.replaceAll("[^\\p{ASCII}]", ""), this.operand)) {
-                return true;
-            }
-            return false;
+            return op(name, this.operand)
+            || op(CardTranslation.getTranslatedName(name), this.operand)
+            || op(StringUtils.stripAccents(name), this.operand);
         }
         protected boolean checkOracle(ICardFace face) {
             if (face == null) {

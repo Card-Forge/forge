@@ -33,7 +33,6 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.text.Normalizer;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -248,7 +247,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         final String name = face.getName();
         facesByName.put(name, face);
-        final String normalName = Normalizer.normalize(name, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        final String normalName = StringUtils.stripAccents(name);
         if (!normalName.equals(name)) {
             normalizedNames.put(normalName, name);
         }
@@ -256,7 +255,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         final String altName = face.getAltName();
         if (altName != null) {
             alternateName.put(altName, face.getName());
-            final String normalAltName = Normalizer.normalize(altName, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+            final String normalAltName = StringUtils.stripAccents(altName);
             if (!normalAltName.equals(altName)) {
                 normalizedNames.put(normalAltName, altName);
             }
