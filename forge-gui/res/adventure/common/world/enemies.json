@@ -916,7 +916,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
-	"scale": 0.75,
+	"scale": 0.85,
 	"life": 25,
 	"rewards": [
 		{
@@ -1928,6 +1928,67 @@
 	]
 },
 {
+	"name": "Armadillo",
+	"sprite": "sprites/enemy/beast/armadillo.atlas",
+	"deck": [
+		"decks/standard/armadillo.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Landfall"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"White",
+				"Green"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			]
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Armored Knight",
 	"sprite": "sprites/enemy/humanoid/knight.atlas",
 	"deck": [
@@ -2837,7 +2898,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.6,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
@@ -7756,9 +7817,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":1.5,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 1.5,
 	"life": 19,
 	"rewards": [
 		{
@@ -9551,7 +9612,8 @@
 	"ai": "",
 	"boss": true,
 	"flying": true,
-	"speed": 1,
+	"speed": 25,
+	"scale": 1.5,
 	"life": 100,
 	"rewards": [
 		{
@@ -13327,6 +13389,57 @@
 	]
 },
 {
+	"name": "Goblin Fanatic",
+	"sprite": "sprites/enemy/humanoid/goblin/goblin_3.atlas",
+	"deck": [
+		"decks/standard/goblin_fanatic.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 29,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Goblin",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeRed"
+	]
+},
+{
 	"name": "Goblin King",
 	"sprite": "sprites/enemy/humanoid/goblin/goblinking.atlas",
 	"deck": [
@@ -13447,6 +13560,55 @@
 		"Horde",
 		"Aggressive",
 		"IdentityRed"
+	]
+},
+{
+	"name": "Goblin Stalker",
+	"sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
+	"deck": [
+		"decks/standard/evilgoblin.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 29,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "BR",
+	"questTags": [
+		"Goblin",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"IdentityBlack"
 	]
 },
 {
@@ -19907,6 +20069,63 @@
 	]
 },
 {
+	"name": "Naked Mole Rat",
+	"sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+	"deck": [
+		"decks/standard/shrinemole.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Beast"
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Nantuko Guard",
 	"sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
 	"deck": [
@@ -21425,6 +21644,63 @@
 	]
 },
 {
+	"name": "Porcupine",
+	"sprite": "sprites/enemy/beast/porcupine.atlas",
+	"deck": [
+		"decks/standard/porcupine.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Beast"
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGruul",
+		"BiomeRed"
+	]
+},
+{
 	"name": "Blue Prototype",
 	"sprite": "sprites/enemy/construct/prototype_blue.atlas",
 	"deck": [
@@ -22018,6 +22294,64 @@
 		"IdentityWhite",
 		"IdentityBlack",
 		"IdentityOrzhov"
+	]
+},
+{
+	"name": "Raccoon",
+	"sprite": "sprites/enemy/beast/raccoon.atlas",
+	"deck": [
+		"decks/standard/enchantment_aggro.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"Green",
+				"White"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Enchantment"
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
 	]
 },
 {
@@ -26926,9 +27260,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.6,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale": 0.6,
 	"life": 36,
 	"rewards": [
 		{

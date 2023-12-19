@@ -22,7 +22,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        return "Animate all valid cards.";
+        return sa.getParamOrDefault("SpellDescription", "Animate all valid cards.");
     }
 
     @Override
@@ -133,10 +133,12 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         CardCollectionView list;
 
+        ZoneType z = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
+
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
-            list = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
+            list = getTargetPlayers(sa).getCardsIn(z);
         } else {
-            list = game.getCardsIn(ZoneType.Battlefield);
+            list = game.getCardsIn(z);
         }
 
         list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);

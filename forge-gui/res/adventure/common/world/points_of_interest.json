@@ -75,6 +75,36 @@
 	]
 },
 {
+	"name": "BarbarianCamp4",
+	"type": "dungeon",
+	"count": 2,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "BarbarianCamp",
+	"map": "../common/maps/map/barbariancamp/barbariancamp_goblin_2.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Hostile",
+		"BarbarianCamp",
+		"BiomeRed",
+		"Sidequest"
+	]
+},
+{
+	"name": "BarbarianCamp5",
+	"type": "dungeon",
+	"count": 2,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "BarbarianCamp",
+	"map": "../common/maps/map/barbariancamp/barbariancamp_goblin_3.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Hostile",
+		"BarbarianCamp",
+		"BiomeRed",
+		"Sidequest"
+	]
+},
+{
 	"name": "Black Castle",
 	"type": "castle",
 	"count": 1,
@@ -1284,7 +1314,7 @@
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "colorless_castle",
-	"map": "../common/maps/map/emrakul/emrakul.tmx",
+	"map": "../common/maps/map/emrakul/emrakul_legacy.tmx",
 	"radiusFactor": 0.4,
 	"questTags": [
 		"Castle",
@@ -1448,8 +1478,7 @@
 	"questTags": [
 		"EvilGrove",
 		"BiomeBlack",
-		"Hostile",
-		"Sidequest"
+		"Hostile"
 	]
 },
 {
@@ -1463,8 +1492,7 @@
 	"questTags": [
 		"EvilGrove",
 		"BiomeBlack",
-		"Hostile",
-		"Sidequest"
+		"Hostile"
 	]
 },
 {
@@ -1622,6 +1650,15 @@
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
 	"map": "../common/maps/map/towns/forest_town.tmx",
+	"radiusFactor": 0.8
+},
+{
+	"name": "Fort",  
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "Fort",
+	"map": "../common/maps/map/fort/fort_colorless_1_snow.tmx",
 	"radiusFactor": 0.8
 },
 {

@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.GameCommand;
 import forge.game.Game;
@@ -34,6 +36,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final boolean perpetual = "Perpetual".equals(sa.getParam("Duration"));
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Card c1;
@@ -51,18 +54,28 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         if (!c1.isInPlay() || !c2.isInPlay()) {
             return;
         }
-        final int power1 = c1.getNetPower();
-        final int power2 = c2.getNetPower();
+        final boolean basePower = sa.hasParam("BasePower");
+        final int power1 = basePower ? c1.getCurrentPower() : c1.getNetPower();
+        final int power2 = basePower ? c2.getCurrentPower() : c2.getNetPower();
 
         final long timestamp = game.getNextTimestamp();
 
+        if (perpetual) {
+            Map <String, Object> params = new HashMap<>();
+            params.put("Power", power2);
+            params.put("Timestamp", timestamp);
+            params.put("Category", "NewPT");
+            c1.addPerpetual(params);
+            params.put("Power", power1);
+            c2.addPerpetual(params);
+        }
         c1.addNewPT(power2, null, timestamp, 0);
         c2.addNewPT(power1, null, timestamp, 0);
 
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
 
-        if (!"Permanent".equals(sa.getParam("Duration"))) {
+        if (!"Permanent".equals(sa.getParam("Duration")) && !perpetual) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
 

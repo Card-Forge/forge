@@ -315,6 +315,16 @@ public class GameAction {
             }
         }
 
+        // perpetual stuff
+        if (c.hasIntensity()) {
+            copied.setIntensity(c.getIntensity(false));
+        }
+        if (c.isSpecialized()) {
+            copied.setState(c.getCurrentStateName(), false);
+        }
+        if (c.hasPerpetual()) {
+            copied.setPerpetual(c);
+        }
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
@@ -510,11 +520,6 @@ public class GameAction {
             }
         }
 
-        // if an adventureCard is put from Stack somewhere else, need to reset to Original State
-        if (copied.isAdventureCard() && ((zoneFrom != null && zoneFrom.is(ZoneType.Stack)) || !zoneTo.is(ZoneType.Stack))) {
-            copied.setState(CardStateName.Original, false);
-        }
-
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (mergedCards != null) {
@@ -580,15 +585,6 @@ public class GameAction {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
             copied.putEtbCounters(table);
             copied.clearEtbCounters();
-        }
-
-        // intensity is perpetual
-        if (c.hasIntensity()) {
-            copied.setIntensity(c.getIntensity(false));
-        }
-        // specialize is perpetual
-        if (c.isSpecialized()) {
-            copied.setState(c.getCurrentStateName(), false);
         }
 
         // update state for view
@@ -992,11 +988,11 @@ public class GameAction {
                 if (!lki.getController().equals(lki.getOwner())) {
                     game.getTriggerHandler().registerActiveLTBTrigger(lki);
                 }
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                runParams.put(AbilityKey.CardLKI, lki);
+                runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
+                game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-            runParams.put(AbilityKey.CardLKI, lki);
-            runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         }
     }
 

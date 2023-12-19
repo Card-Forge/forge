@@ -24,6 +24,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        // up to X targets and chose 0 or similar situations
+        if (tgtCards.isEmpty()) return sa.getParamOrDefault("SpellDescription", "");
         final boolean justOne = tgtCards.size() == 1;
 
         sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));

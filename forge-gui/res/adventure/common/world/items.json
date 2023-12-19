@@ -73,6 +73,7 @@
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
+    "cost": 4000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Piper's Charm"
@@ -81,6 +82,7 @@
   },{
     "name": "Sleep Wand",
     "equipmentSlot": "Left",
+    "cost": 4000,
     "iconName": "SleepWand",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -90,6 +92,7 @@
   },{
     "name": "Hill Giant Club",
     "equipmentSlot": "Right",
+    "cost": 2000,
     "iconName": "HillGiantClub",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -100,6 +103,7 @@
     "name": "Cursed Treasure",
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
+    "cost": 4000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Cursed Treasure"
@@ -109,6 +113,7 @@
     "name": "Farmer's Tools",
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
+    "cost": 6000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Farmer's Tools"
@@ -200,7 +205,6 @@
     "equipmentSlot": "Left",
     "iconName": "Hivestone",
     "effect": {
-      "lifeModifier": 2,
       "startBattleWithCard": [
         "Hivestone"
       ]
@@ -210,6 +214,7 @@
     "name": "Life Amulet",
     "equipmentSlot": "Neck",
     "iconName": "LifeAmulet",
+    "cost": 4000,
     "effect": {
       "lifeModifier": 2
     }
@@ -288,6 +293,7 @@
     "name": "Axt",
     "equipmentSlot": "Left",
     "iconName": "SteelAxt",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Bonesplitter"
@@ -298,6 +304,7 @@
     "name": "Bronze Sword",
     "equipmentSlot": "Left",
     "iconName": "BronzeSword",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Bronze Sword"
@@ -317,7 +324,7 @@
     "name": "Iron Shield",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 2000,
+    "cost": 3500,
     "effect": {
       "lifeModifier": 2
     }
@@ -325,7 +332,7 @@
   {
     "name": "Iron Armor",
     "equipmentSlot": "Body",
-    "cost": 2000,
+    "cost": 3000,
     "iconName": "IronArmor",
     "effect": {
       "lifeModifier": 2
@@ -335,6 +342,7 @@
     "name": "Steel Sword",
     "equipmentSlot": "Left",
     "iconName": "SteelSword",
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "Greatsword"
@@ -355,7 +363,7 @@
     "name": "Steel Shield",
     "equipmentSlot": "Right",
     "iconName": "SteelShield",
-    "cost": 4500,
+    "cost": 6500,
     "effect": {
       "startBattleWithCard": [
         "w_0_3_wall_defender"
@@ -365,7 +373,7 @@
   {
     "name": "Steel Armor",
     "equipmentSlot": "Body",
-    "cost": 4500,
+    "cost": 5000,
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
@@ -392,6 +400,7 @@
     "name": "Jungle Shield",
     "equipmentSlot": "Right",
     "iconName": "JungleShield",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "g_0_1_plant"
@@ -402,6 +411,7 @@
     "name": "Dagger",
     "equipmentSlot": "Left",
     "iconName": "Dagger",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Spare Dagger"
@@ -423,6 +433,7 @@
   {
     "name": "Aladdin's Ring",
     "equipmentSlot": "Right",
+    "cost": 3000,
     "iconName": "AladdinsRing",
     "effect": {
       "startBattleWithCard": [
@@ -434,6 +445,7 @@
     "name": "Spell Book",
     "iconName": "SpellBook",
     "equipmentSlot": "Left",
+    "cost": 3000,
     "effect": {
       "changeStartCards": 1
     }
@@ -454,7 +466,7 @@
     "name": "Mithril Boots",
     "equipmentSlot": "Boots",
     "iconName": "MithrilBoots",
-    "cost": 2500,
+    "cost": 10000,
     "effect": {
       "lifeModifier": 2,
       "moveSpeed": 1.3
@@ -476,7 +488,7 @@
     "name": "Mithril Armor",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 4500,
+    "cost": 15000,
     "effect": {
       "lifeModifier": 5
     }
@@ -597,6 +609,7 @@
     "name": "Dark Boots",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Clattering Augur"
@@ -609,6 +622,7 @@
     "name": "Dark Shield",
     "equipmentSlot": "Right",
     "iconName": "DarkShield",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Barrier of Bones"
@@ -619,12 +633,13 @@
   {
     "name": "Dark Armor",
     "equipmentSlot": "Body",
+    "cost": 3000,
     "iconName": "DarkArmor",
     "effect": {
       "startBattleWithCard": [
         "Skeletal Snake"
       ],
-      "lifeModifier": -4
+      "lifeModifier": -2
     }
   },
   {
@@ -700,6 +715,7 @@
   {
     "name": "Dark Amulet",
     "equipmentSlot": "Neck",
+    "cost": 3000,
     "iconName": "DarkAmulet",
     "effect": {
       "startBattleWithCard": [
@@ -1125,6 +1141,7 @@
     "iconName": "SteelBoots",
     "effect": {
       "lifeModifier": -1,
+      "moveSpeed": 1.20,
       "startBattleWithCard": [
         "Ooze Flux"
       ]

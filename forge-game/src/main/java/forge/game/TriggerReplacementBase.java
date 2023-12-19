@@ -38,7 +38,6 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     public Set<ZoneType> getActiveZone() {
         return validHostZones;
     }
-    
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }

@@ -2,7 +2,6 @@ Name:Second Little Pig
 ManaCost:1 WB
 Types:Creature Boar
 PT:2/3
-A:AB$ Effect | Cost$ 2 WB WB | StaticAbilities$ PerpetualSpirit | IsPresent$ Card.Self+!Spirit | RememberObjects$ Self | Name$ Second Little Pig's Perpetual Effect | Duration$ Permanent | SpellDescription$ CARDNAME perpetually becomes a Boar Spirit with base power and toughness 4/4 and gains flying. Activate only if CARDNAME isn't a Spirit.
-SVar:PerpetualSpirit:Mode$ Continuous | AddKeyword$ Flying | Affected$ Card.IsRemembered | SetPower$ 4 | SetToughness$ 4 | AddType$ Spirit | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually becomes a Boar Spirit with base power and toughness 4/4 and gains flying.
+A:AB$ Animate | Cost$ 2 WB WB | Duration$ Perpetual | Types$ Boar,Spirit | RemoveCreatureTypes$ True | Power$ 4 | Toughness$ 4 | Keywords$ Flying | IsPresent$ Card.Self+!Spirit | StackDescription$ CARDNAME perpetually becomes a Boar Spirit with base power and toughness 4/4 and gains flying. | SpellDescription$ CARDNAME perpetually becomes a Boar Spirit with base power and toughness 4/4 and gains flying. Activate only if CARDNAME isn't a Spirit.
 DeckHas:Type$Spirit
 Oracle:{2}{W/B}{W/B}: Second Little Pig perpetually becomes a Boar Spirit with base power and toughness 4/4 and gains flying. Activate only if Second Little Pig isn't a Spirit.
