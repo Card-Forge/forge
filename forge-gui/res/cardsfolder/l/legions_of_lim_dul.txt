@@ -1,4 +1,4 @@
-Name:Legions of Lim-Dûl
+Name:Legions of Lim-Dul
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3

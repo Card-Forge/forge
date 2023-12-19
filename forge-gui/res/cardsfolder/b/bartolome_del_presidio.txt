@@ -1,4 +1,4 @@
-Name:Bartolomé del Presidio
+Name:Bartolome del Presidio
 ManaCost:W B
 Types:Legendary Creature Vampire Knight
 PT:2/1

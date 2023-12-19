@@ -1,4 +1,4 @@
-Name:Khabál Ghoul
+Name:Khabal Ghoul
 ManaCost:2 B
 Types:Creature Zombie
 PT:1/1

@@ -1,4 +1,4 @@
-Name:Mists of Lórien
+Name:Mists of Lorien
 ManaCost:2 U
 Types:Sorcery
 K:Replicate:U

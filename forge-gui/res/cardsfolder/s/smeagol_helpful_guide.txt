@@ -1,4 +1,4 @@
-Name:Sméagol, Helpful Guide
+Name:Smeagol, Helpful Guide
 ManaCost:1 B G
 Types:Legendary Creature Halfling Horror
 PT:4/2

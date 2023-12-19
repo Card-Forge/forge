@@ -1,4 +1,4 @@
-Name:Andúril, Narsil Reforged
+Name:Anduril, Narsil Reforged
 ManaCost:2
 Types:Legendary Artifact Equipment
 K:Ascend

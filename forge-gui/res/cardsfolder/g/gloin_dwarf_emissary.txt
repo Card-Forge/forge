@@ -1,4 +1,4 @@
-Name:Glóin, Dwarf Emissary
+Name:Gloin, Dwarf Emissary
 ManaCost:2 R
 Types:Legendary Creature Dwarf Advisor
 PT:3/3

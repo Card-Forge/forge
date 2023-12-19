@@ -1,4 +1,4 @@
-Name:Tura Kennerüd, Skyknight
+Name:Tura Kennerud, Skyknight
 ManaCost:2 W U U
 Types:Legendary Creature Human Knight
 PT:3/3
