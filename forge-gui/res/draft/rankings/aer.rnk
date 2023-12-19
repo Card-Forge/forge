@@ -1,0 +1,185 @@
+//Rank|Name|Rarity|Set
+#1|Herald of Anguish|M|AER
+#2|Ajani Unyielding|M|AER
+#3|Aethersphere Harvester|R|AER
+#4|Aethertide Whale|R|AER
+#5|Freejam Regent|R|AER
+#6|Quicksmith Rebel|R|AER
+#7|Ridgescale Tusker|U|AER
+#8|Tezzeret the Schemer|M|AER
+#9|Battle at the Bridge|R|AER
+#10|Yahenni's Expertise|R|AER
+#11|Rishkar, Peema Renegade|R|AER
+#12|Untethered Express|U|AER
+#13|Solemn Recruit|R|AER
+#14|Thopter Arrest|U|AER
+#15|Sram's Expertise|R|AER
+#16|Vengeful Rebel|U|AER
+#17|Walking Ballista|R|AER
+#18|Airdrop Aeronauts|U|AER
+#19|Baral's Expertise|R|AER
+#20|Fatal Push|U|AER
+#21|Glint-Sleeve Siphoner|R|AER
+#22|Midnight Entourage|R|AER
+#23|Hungry Flames|U|AER
+#24|Aetherwind Basker|M|AER
+#25|Monstrous Onslaught|U|AER
+#26|Maverick Thopterist|U|AER
+#27|Winding Constrictor|U|AER
+#28|Exquisite Archangel|M|AER
+#29|Quicksmith Spy|R|AER
+#30|Daring Demolition|C|AER
+#31|Gifted Aetherborn|U|AER
+#32|Yahenni, Undying Partisan|R|AER
+#33|Rishkar's Expertise|R|AER
+#34|Renegade Wheelsmith|U|AER
+#35|Rogue Refiner|U|AER
+#36|Heart of Kiran|M|AER
+#37|Caught in the Brights|C|AER
+#38|Scrapper Champion|U|AER
+#39|Maulfist Revolutionary|U|AER
+#40|Hidden Stockpile|U|AER
+#41|Spire Patrol|U|AER
+#42|Tezzeret's Touch|U|AER
+#43|Lifecrafter's Bestiary|R|AER
+#44|Treasure Keeper|U|AER
+#45|Reverse Engineer|U|AER
+#46|Shock|C|AER
+#47|Greenbelt Rampager|R|AER
+#48|Renegade Rallier|U|AER
+#49|Weldfast Engineer|U|AER
+#50|Aethergeode Miner|R|AER
+#51|Sram, Senior Edificer|R|AER
+#52|Skyship Plunderer|U|AER
+#53|Wind-Kin Raiders|U|AER
+#54|Chandra's Revolution|C|AER
+#55|Enraged Giant|U|AER
+#56|Kari Zev, Skyship Raider|R|AER
+#57|Outland Boar|U|AER
+#58|Metallic Mimic|R|AER
+#59|Pacification Array|U|AER
+#60|Felidar Guardian|U|AER
+#61|Trophy Mage|U|AER
+#62|Prey Upon|C|AER
+#63|Scrap Trawler|R|AER
+#64|Deadeye Harpooner|U|AER
+#65|Shielded Aether Thief|U|AER
+#66|Lightning Runner|M|AER
+#67|Sweatworks Brawler|C|AER
+#68|Greenwheel Liberator|R|AER
+#69|Leave in the Dust|C|AER
+#70|Release the Gremlins|R|AER
+#71|Druid of the Cowl|C|AER
+#72|Peema Aether-Seer|U|AER
+#73|Oath of Ajani|R|AER
+#74|Implement of Ferocity|C|AER
+#75|Renegade Map|C|AER
+#76|Aeronaut Admiral|U|AER
+#77|Aether Swooper|C|AER
+#78|Aether Chaser|C|AER
+#79|Reckless Racer|U|AER
+#80|Aetherstream Leopard|C|AER
+#81|Lifecraft Cavalry|C|AER
+#82|Scrounging Bandar|C|AER
+#83|Dark Intimations|R|AER
+#84|Audacious Infiltrator|C|AER
+#85|Countless Gears Renegade|C|AER
+#86|Illusionist's Stratagem|U|AER
+#87|Cruel Finality|C|AER
+#88|Narnam Renegade|U|AER
+#89|Peacewalker Colossus|R|AER
+#90|Dawnfeather Eagle|C|AER
+#91|Bastion Inventor|C|AER
+#92|Disallow|R|AER
+#93|Hinterland Drake|C|AER
+#94|Aether Poisoner|C|AER
+#95|Foundry Hornet|U|AER
+#96|Perilous Predicament|U|AER
+#97|Lifecraft Awakening|U|AER
+#98|Unbridled Growth|C|AER
+#99|Barricade Breaker|U|AER
+#100|Cogwork Assembler|U|AER
+#101|Daredevil Dragster|U|AER
+#102|Spire of Industry|R|AER
+#103|Decommission|C|AER
+#104|Restoration Specialist|U|AER
+#105|Dispersal Technician|C|AER
+#106|Ice Over|C|AER
+#107|Metallic Rebuke|C|AER
+#108|Shipwreck Moray|C|AER
+#109|Frontline Rebel|C|AER
+#110|Highspire Infusion|C|AER
+#111|Implement of Examination|C|AER
+#112|Defiant Salvager|C|AER
+#113|Natural Obsolescence|C|AER
+#114|Implement of Malice|C|AER
+#115|Merchant's Dockhand|R|AER
+#116|Welder Automaton|C|AER
+#117|Aerial Modification|U|AER
+#118|Aether Inspector|C|AER
+#119|Call for Unity|R|AER
+#120|Consulate Crackdown|R|AER
+#121|Deft Dismissal|U|AER
+#122|Ghirapur Osprey|C|AER
+#123|Mechanized Production|M|AER
+#124|Negate|C|AER
+#125|Alley Strangler|C|AER
+#126|Fen Hauler|C|AER
+#127|Night Market Aeronaut|C|AER
+#128|Resourceful Return|C|AER
+#129|Indomitable Creativity|M|AER
+#130|Precise Strike|C|AER
+#131|Siege Modification|U|AER
+#132|Aether Herder|C|AER
+#133|Hidden Herbalists|U|AER
+#134|Lifecrafter's Gift|U|AER
+#135|Implement of Improvement|C|AER
+#136|Irontread Crusher|C|AER
+#137|Watchful Automaton|C|AER
+#138|Alley Evasion|C|AER
+#139|Whir of Invention|R|AER
+#140|Sly Requisitioner|U|AER
+#141|Destructive Tampering|C|AER
+#142|Invigorated Rampage|U|AER
+#143|Kari Zev's Expertise|R|AER
+#144|Silkweaver Elite|C|AER
+#145|Implement of Combustion|C|AER
+#146|Mobile Garrison|C|AER
+#147|Baral, Chief of Compliance|R|AER
+#148|Salvage Scuttler|U|AER
+#149|Embraal Gear-Smasher|C|AER
+#150|Lathnu Sailback|C|AER
+#151|Ravenous Intruder|U|AER
+#152|Heroic Intervention|R|AER
+#153|Aegis Automaton|C|AER
+#154|Consulate Dreadnought|U|AER
+#155|Crackdown Construct|U|AER
+#156|Hope of Ghirapur|R|AER
+#157|Night Market Guard|C|AER
+#158|Reservoir Walker|C|AER
+#159|Servo Schematic|U|AER
+#160|Universal Solvent|C|AER
+#161|Bastion Enforcer|C|AER
+#162|Conviction|C|AER
+#163|Ironclad Revolutionary|U|AER
+#164|Renegade's Getaway|C|AER
+#165|Gremlin Infestation|U|AER
+#166|Wrangle|C|AER
+#167|Filigree Crawler|C|AER
+#168|Verdant Automaton|C|AER
+#169|Fourth Bridge Prowler|C|AER
+#170|Efficient Construction|U|AER
+#171|Take into Custody|C|AER
+#172|Pia's Revolution|R|AER
+#173|Aid from the Cowl|R|AER
+#174|Consulate Turret|C|AER
+#175|Foundry Assembler|C|AER
+#176|Gonti's Aether Heart|M|AER
+#177|Inspiring Statuary|R|AER
+#178|Paradox Engine|M|AER
+#179|Planar Bridge|M|AER
+#180|Augmenting Automaton|C|AER
+#181|Ornithopter|U|AER
+#182|Gonti's Machinations|U|AER
+#183|Prizefighter Construct|C|AER
+#184|Secret Salvage|R|AER

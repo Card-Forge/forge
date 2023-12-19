@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Garruk Relentless|M|ISD
+#2|Olivia Voldaren|M|ISD
+#3|Liliana of the Veil|M|ISD
+#4|Mikaeus, the Lunarch|M|ISD
+#5|Angelic Overseer|M|ISD
+#6|Reaper from the Abyss|M|ISD
+#7|Geist of Saint Traft|M|ISD
+#8|Grimgrin, Corpse Born|M|ISD
+#9|Balefire Dragon|M|ISD
+#10|Skaab Ruinator|M|ISD
+#11|Essence of the Wild|M|ISD
+#12|Army of the Damned|M|ISD
+#13|Grimoire of the Dead|M|ISD
+#14|Tree of Redemption|M|ISD
+#15|Mirror Mad Phantasm|M|ISD
+#16|Devil's Play|R|ISD
+#17|Bloodgift Demon|R|ISD
+#18|Geist Honored Monk|R|ISD
+#19|Sever the Bloodline|R|ISD
+#20|Angel of Flight Alabaster|R|ISD
+#21|Manor Gargoyle|R|ISD
+#22|Kessig Cagebreakers|R|ISD
+#23|Mindshrieker|R|ISD
+#24|Falkenrath Marauders|R|ISD
+#25|Bloodline Keeper|R|ISD
+#26|Mentor of the Meek|R|ISD
+#27|Snapcaster Mage|R|ISD
+#28|Charmbreaker Devils|R|ISD
+#29|Blasphemous Act|R|ISD
+#30|Curse of Death's Hold|R|ISD
+#31|Skirsdag High Priest|R|ISD
+#32|Slayer of the Wicked|U|ISD
+#33|Dearly Departed|R|ISD
+#34|Fiend Hunter|U|ISD
+#35|Evil Twin|R|ISD
+#36|Sturmgeist|R|ISD
+#37|Elder of Laurels|R|ISD
+#38|Mayor of Avabruck|R|ISD
+#39|Murder of Crows|U|ISD
+#40|Stromkirk Noble|R|ISD
+#41|Falkenrath Noble|U|ISD
+#42|Daybreak Ranger|R|ISD
+#43|Instigator Gang|R|ISD
+#44|Elite Inquisitor|R|ISD
+#45|Champion of the Parish|R|ISD
+#46|Gavony Township|R|ISD
+#47|Undead Alchemist|R|ISD
+#48|Cackling Counterpart|R|ISD
+#49|Midnight Haunting|U|ISD
+#50|Divine Reckoning|R|ISD
+#51|Heretic's Punishment|R|ISD
+#52|Kruin Outlaw|R|ISD
+#53|Morkrut Banshee|U|ISD
+#54|Moan of the Unhallowed|U|ISD
+#55|Grasp of Phantoms|U|ISD
+#56|Mausoleum Guard|U|ISD
+#57|Unburial Rites|U|ISD
+#58|Brimstone Volley|C|ISD
+#59|Ludevic's Test Subject|R|ISD
+#60|Invisible Stalker|U|ISD
+#61|Splinterfright|R|ISD
+#62|Kessig Wolf Run|R|ISD
+#63|Galvanic Juggernaut|U|ISD
+#64|Moorland Haunt|R|ISD
+#65|Tribute to Hunger|U|ISD
+#66|Civilized Scholar|U|ISD
+#67|Abattoir Ghoul|U|ISD
+#68|Moldgraf Monstrosity|R|ISD
+#69|Into the Maw of Hell|U|ISD
+#70|Isolated Chapel|R|ISD
+#71|Skirsdag Cultist|U|ISD
+#72|Rolling Temblor|U|ISD
+#73|Gatstaf Shepherd|U|ISD
+#74|Butcher's Cleaver|U|ISD
+#75|Back from the Brink|R|ISD
+#76|Battleground Geist|U|ISD
+#77|Sulfur Falls|R|ISD
+#78|Nephalia Drownyard|R|ISD
+#79|Clifftop Retreat|R|ISD
+#80|Skaab Goliath|U|ISD
+#81|Geistcatcher's Rig|U|ISD
+#82|Reckless Waif|U|ISD
+#83|Screeching Bat|U|ISD
+#84|Curse of Stalked Prey|R|ISD
+#85|Rakish Heir|U|ISD
+#86|Diregraf Ghoul|U|ISD
+#87|Ulvenwald Mystics|U|ISD
+#88|Woodland Cemetery|R|ISD
+#89|Lantern Spirit|U|ISD
+#90|Spectral Rider|U|ISD
+#91|Gallows Warden|U|ISD
+#92|Dead Weight|C|ISD
+#93|Avacynian Priest|C|ISD
+#94|Bonds of Faith|C|ISD
+#95|Hanweir Watchkeep|U|ISD
+#96|Spider Spawning|U|ISD
+#97|Victim of Night|C|ISD
+#98|Hinterland Harbor|R|ISD
+#99|Claustrophobia|C|ISD
+#100|Creepy Doll|R|ISD
+#101|Stitched Drake|C|ISD
+#102|Stensia Bloodhall|R|ISD
+#103|Geistflame|C|ISD
+#104|Hamlet Captain|U|ISD
+#105|Runechanter's Pike|R|ISD
+#106|Silver Inlaid Dagger|U|ISD
+#107|Cloistered Youth|U|ISD
+#108|Silent Departure|C|ISD
+#109|Blazing Torch|C|ISD
+#110|Gutter Grime|R|ISD
+#111|Rage Thrower|U|ISD
+#112|Chapel Geist|C|ISD
+#113|Rebuke|C|ISD
+#114|Voiceless Spirit|C|ISD
+#115|Avacyn's Pilgrim|C|ISD
+#116|Villagers of Estwald|C|ISD
+#117|Vampire Interloper|C|ISD
+#118|Unbreathing Horde|R|ISD
+#119|Forbidden Alchemy|C|ISD
+#120|Darkthicket Wolf|C|ISD
+#121|Moon Heron|C|ISD
+#122|Doomed Traveler|C|ISD
+#123|Armored Skaab|C|ISD
+#124|Makeshift Mauler|C|ISD
+#125|Deranged Assistant|C|ISD
+#126|Ambush Viper|C|ISD
+#127|Prey Upon|C|ISD
+#128|Think Twice|C|ISD
+#129|Elder Cathar|C|ISD
+#130|Shimmering Grotto|C|ISD
+#131|Pitchburn Devils|C|ISD
+#132|Thraben Sentry|C|ISD
+#133|Laboratory Maniac|R|ISD
+#134|Markov Patrician|C|ISD
+#135|Endless Ranks of the Dead|R|ISD
+#136|Travel Preparations|C|ISD
+#137|Smite the Monstrous|C|ISD
+#138|Scourge of Geier Reach|U|ISD
+#139|Ashmouth Hound|C|ISD
+#140|Past in Flames|M|ISD
+#141|Traveler's Amulet|C|ISD
+#142|Selhoff Occultist|C|ISD
+#143|Village Cannibals|U|ISD
+#144|Burning Vengeance|U|ISD
+#145|Festerhide Boar|C|ISD
+#146|Dissipate|U|ISD
+#147|Creeping Renaissance|R|ISD
+#148|Crossway Vampire|C|ISD
+#149|Ghoulraiser|C|ISD
+#150|Harvest Pyre|C|ISD
+#151|Delver of Secrets|C|ISD
+#152|Village Ironsmith|C|ISD
+#153|Orchard Spirit|C|ISD
+#154|Bloodcrazed Neonate|C|ISD
+#155|One Eyed Scarecrow|C|ISD
+#156|Village Bell Ringer|C|ISD
+#157|Walking Corpse|C|ISD
+#158|Unruly Mob|C|ISD
+#159|Stitcher's Apprentice|C|ISD
+#160|Lumberknot|U|ISD
+#161|Demonmail Hauberk|U|ISD
+#162|Typhoid Rats|C|ISD
+#163|Sharpened Pitchfork|U|ISD
+#164|Mask of Avacyn|U|ISD
+#165|Silverchase Fox|C|ISD
+#166|Moment of Heroism|C|ISD
+#167|Kessig Wolf|C|ISD
+#168|Abbey Griffin|C|ISD
+#169|Grizzled Outcasts|C|ISD
+#170|Hollowhenge Scavenger|U|ISD
+#171|Feeling of Dread|C|ISD
+#172|Somberwald Spider|C|ISD
+#173|Trepanation Blade|U|ISD
+#174|Fortress Crab|C|ISD
+#175|Selfless Cathar|C|ISD
+#176|Boneyard Wurm|U|ISD
+#177|Spidery Grasp|C|ISD
+#178|Tormented Pariah|C|ISD
+#179|Traitorous Blood|C|ISD
+#180|Sensory Deprivation|C|ISD
+#181|Corpse Lunge|C|ISD
+#182|Disciple of Griselbrand|U|ISD
+#183|Desperate Ravings|U|ISD
+#184|Dream Twist|C|ISD
+#185|Nightbird's Clutches|C|ISD
+#186|Woodland Sleuth|C|ISD
+#187|Night Revelers|C|ISD
+#188|Altar's Reap|C|ISD
+#189|Spectral Flight|C|ISD
+#190|Ghoulcaller's Chant|C|ISD
+#191|Riot Devils|C|ISD
+#192|Curse of the Bloody Tome|C|ISD
+#193|Caravan Vigil|C|ISD
+#194|Lost in the Mist|C|ISD
+#195|Stromkirk Patrol|C|ISD
+#196|Mulch|C|ISD
+#197|Feral Ridgewolf|C|ISD
+#198|Ranger's Guile|C|ISD
+#199|Rotting Fensnake|C|ISD
+#200|Manor Skeleton|C|ISD
+#201|Rally the Peasants|U|ISD
+#202|Bump in the Night|C|ISD
+#203|Brain Weevil|C|ISD
+#204|Urgent Exorcism|C|ISD
+#205|Cobbled Wings|C|ISD
+#206|Moonmist|C|ISD
+#207|Gnaw to the Bone|C|ISD
+#208|Naturalize|C|ISD
+#209|Kindercatch|C|ISD
+#210|Thraben Purebloods|C|ISD
+#211|Frightful Delusion|C|ISD
+#212|Grave Bramble|C|ISD
+#213|Furor of the Bitten|C|ISD
+#214|Ancient Grudge|C|ISD
+#215|Night Terrors|C|ISD
+#216|Curse of the Pierced Heart|C|ISD
+#217|Wooden Stake|C|ISD
+#218|Spare from Evil|C|ISD
+#219|Hysterical Blindness|C|ISD
+#220|Inquisitor's Flail|U|ISD
+#221|Vampiric Fury|C|ISD
+#222|Curiosity|U|ISD
+#223|Skeletal Grimace|C|ISD
+#224|Ghoulcaller's Bell|C|ISD
+#225|Ghostly Possession|C|ISD
+#226|Maw of the Mire|C|ISD
+#227|Curse of Oblivion|C|ISD
+#228|Gruesome Deformity|C|ISD
+#229|Infernal Plunge|C|ISD
+#230|Intangible Virtue|U|ISD
+#231|Runic Repetition|U|ISD
+#232|Memory's Journey|U|ISD
+#233|Bramblecrush|U|ISD
+#234|Bitterheart Witch|U|ISD
+#235|Cellar Door|U|ISD
+#236|Ghost Quarter|U|ISD
+#237|Full Moon's Rise|U|ISD
+#238|Wreath of Geists|U|ISD
+#239|Make a Wish|U|ISD
+#240|Witchbane Orb|R|ISD
+#241|Purify the Grave|U|ISD
+#242|Parallel Lives|R|ISD
+#243|Curse of the Nightly Hunt|U|ISD
+#244|Heartless Summoning|R|ISD
+#245|Paraselene|U|ISD
+#246|Nevermore|R|ISD
+#247|Rooftop Storm|R|ISD
+#248|Graveyard Shovel|U|ISD
+#249|Stony Silence|R|ISD

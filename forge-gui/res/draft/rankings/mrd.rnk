@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Platinum Angel|R|MRD
+#2|Loxodon Warhammer|U|MRD
+#3|Molder Slug|R|MRD
+#4|Troll Ascetic|R|MRD
+#5|Duplicant|R|MRD
+#6|Arc Slogger|R|MRD
+#7|Glissa Sunseeker|R|MRD
+#8|Solar Tide|R|MRD
+#9|Bosh, Iron Golem|R|MRD
+#10|Solemn Simulacrum|R|MRD
+#11|Broodstar|R|MRD
+#12|Clockwork Dragon|R|MRD
+#13|Triskelion|R|MRD
+#14|Icy Manipulator|U|MRD
+#15|Lodestone Myr|R|MRD
+#16|Grab the Reins|U|MRD
+#17|Crystal Shard|U|MRD
+#18|Empyrial Plate|R|MRD
+#19|Viridian Shaman|U|MRD
+#20|Oblivion Stone|R|MRD
+#21|Megatog|R|MRD
+#22|Scythe of the Wretched|R|MRD
+#23|Shrapnel Blast|U|MRD
+#24|Pentavus|R|MRD
+#25|Isochron Scepter|U|MRD
+#26|Luminous Angel|R|MRD
+#27|Electrostatic Bolt|C|MRD
+#28|Mindslaver|R|MRD
+#29|Thirst for Knowledge|U|MRD
+#30|Betrayal of Flesh|U|MRD
+#31|Leonin Sun Standard|R|MRD
+#32|Spikeshot Goblin|C|MRD
+#33|Auriok Steelshaper|R|MRD
+#34|Leonin Abunas|R|MRD
+#35|Detonate|U|MRD
+#36|Lightning Greaves|U|MRD
+#37|Vedalken Archmage|R|MRD
+#38|Living Hive|R|MRD
+#39|Sword of Kaldra|R|MRD
+#40|Sculpting Steel|R|MRD
+#41|Arrest|C|MRD
+#42|Domineer|U|MRD
+#43|Somber Hoverguard|C|MRD
+#44|Granite Shard|U|MRD
+#45|Bonesplitter|C|MRD
+#46|Mask of Memory|U|MRD
+#47|Promise of Power|R|MRD
+#48|Plated Slagwurm|R|MRD
+#49|Barter in Blood|U|MRD
+#50|Reiver Demon|R|MRD
+#51|Soul Foundry|R|MRD
+#52|Leonin Skyhunter|U|MRD
+#53|Terror|C|MRD
+#54|Goblin Charbelcher|R|MRD
+#55|Slith Ascendant|U|MRD
+#56|Loxodon Punisher|R|MRD
+#57|Skeleton Shard|U|MRD
+#58|Vulshok Battlegear|U|MRD
+#59|Myr Enforcer|C|MRD
+#60|Shatter|C|MRD
+#61|Blinding Beam|C|MRD
+#62|Pyrite Spellbomb|C|MRD
+#63|Frogmite|C|MRD
+#64|Deconstruct|C|MRD
+#65|Looming Hoverguard|U|MRD
+#66|Altar of Shadows|R|MRD
+#67|Gilded Lotus|R|MRD
+#68|Soul Nova|U|MRD
+#69|Talisman of Dominance|U|MRD
+#70|Cathodion|U|MRD
+#71|Viridian Longbow|C|MRD
+#72|Thoughtcast|C|MRD
+#73|Fireshrieker|U|MRD
+#74|Skyhunter Patrol|C|MRD
+#75|Quicksilver Elemental|R|MRD
+#76|Creeping Mold|U|MRD
+#77|Altar's Light|U|MRD
+#78|One Dozen Eyes|U|MRD
+#79|Grid Monitor|R|MRD
+#80|Leaden Myr|C|MRD
+#81|Silver Myr|C|MRD
+#82|Iron Myr|C|MRD
+#83|Nim Devourer|R|MRD
+#84|Skyhunter Cub|C|MRD
+#85|Mirror Golem|U|MRD
+#86|Tooth and Nail|R|MRD
+#87|Fangren Hunter|C|MRD
+#88|Neurok Spy|C|MRD
+#89|Nuisance Engine|U|MRD
+#90|Mind's Eye|R|MRD
+#91|Auriok Bladewarden|U|MRD
+#92|Gold Myr|C|MRD
+#93|Goblin Replica|C|MRD
+#94|Talisman of Progress|U|MRD
+#95|Seat of the Synod|C|MRD
+#96|Leonin Den Guard|C|MRD
+#97|Slith Firewalker|U|MRD
+#98|Copper Myr|C|MRD
+#99|Taj Nar Swordsmith|U|MRD
+#100|Talisman of Indulgence|U|MRD
+#101|Irradiate|C|MRD
+#102|Leonin Scimitar|C|MRD
+#103|Nightmare Lash|R|MRD
+#104|Lumengrid Augur|R|MRD
+#105|Talisman of Unity|U|MRD
+#106|Myr Retriever|U|MRD
+#107|Vulshok Battlemaster|R|MRD
+#108|Banshee's Blade|U|MRD
+#109|Chrome Mox|R|MRD
+#110|Atog|C|MRD
+#111|Bottle Gnomes|U|MRD
+#112|Slith Bloodletter|U|MRD
+#113|Vault of Whispers|C|MRD
+#114|Tel Jilad Archers|C|MRD
+#115|Talisman of Impulse|U|MRD
+#116|Disciple of the Vault|C|MRD
+#117|Needlebug|U|MRD
+#118|Auriok Transfixer|C|MRD
+#119|Consume Spirit|C|MRD
+#120|Vulshok Berserker|C|MRD
+#121|Tree of Tales|C|MRD
+#122|Fabricate|U|MRD
+#123|Flayed Nim|U|MRD
+#124|Ancient Den|C|MRD
+#125|Tel Jilad Chosen|C|MRD
+#126|Goblin Dirigible|U|MRD
+#127|Clockwork Vorrac|U|MRD
+#128|Aether Spellbomb|C|MRD
+#129|Moriok Scavenger|C|MRD
+#130|Raise the Alarm|C|MRD
+#131|Copperhoof Vorrac|R|MRD
+#132|Pearl Shard|U|MRD
+#133|Wizard Replica|C|MRD
+#134|Rustspore Ram|U|MRD
+#135|Chromatic Sphere|U|MRD
+#136|Nim Shrieker|C|MRD
+#137|Glimmervoid|R|MRD
+#138|Great Furnace|C|MRD
+#139|Yotian Soldier|C|MRD
+#140|Rust Elemental|U|MRD
+#141|Trolls of Tel Jilad|U|MRD
+#142|Woebearer|U|MRD
+#143|Dragon Blood|U|MRD
+#144|Sun Droplet|U|MRD
+#145|Tel Jilad Exile|C|MRD
+#146|Fatespinner|R|MRD
+#147|Stalking Stones|U|MRD
+#148|Soldier Replica|C|MRD
+#149|Vulshok Gauntlets|C|MRD
+#150|Rustmouth Ogre|U|MRD
+#151|Journey of Discovery|C|MRD
+#152|Pewter Golem|C|MRD
+#153|Leonin Bladetrap|U|MRD
+#154|Serum Tank|U|MRD
+#155|Predator's Strike|C|MRD
+#156|Nim Replica|C|MRD
+#157|Chalice of the Void|R|MRD
+#158|Hematite Golem|C|MRD
+#159|Alpha Myr|C|MRD
+#160|Clockwork Condor|C|MRD
+#161|Cobalt Golem|C|MRD
+#162|Duskworker|U|MRD
+#163|Nim Lasher|C|MRD
+#164|Slith Predator|U|MRD
+#165|Goblin War Wagon|C|MRD
+#166|Roar of the Kha|U|MRD
+#167|Sunbeam Spellbomb|C|MRD
+#168|Myr Incubator|R|MRD
+#169|Lightning Coils|R|MRD
+#170|Necrogen Spellbomb|C|MRD
+#171|Krark Clan Grunt|C|MRD
+#172|Wail of the Nim|C|MRD
+#173|Tooth of Chiss Goria|C|MRD
+#174|War Elemental|R|MRD
+#175|Golem Skin Gauntlets|U|MRD
+#176|Steel Wall|C|MRD
+#177|Slagwurm Armor|C|MRD
+#178|Neurok Familiar|C|MRD
+#179|Titanium Golem|C|MRD
+#180|Lumengrid Sentinel|U|MRD
+#181|Lifespark Spellbomb|C|MRD
+#182|Annul|C|MRD
+#183|Nim Shambler|U|MRD
+#184|Tower of Eons|R|MRD
+#185|Regress|C|MRD
+#186|Ornithopter|U|MRD
+#187|Relic Bane|U|MRD
+#188|Wall of Blood|U|MRD
+#189|Scale of Chiss Goria|C|MRD
+#190|Elf Replica|C|MRD
+#191|Vermiculos|R|MRD
+#192|Psychic Membrane|U|MRD
+#193|Scrabbling Claws|U|MRD
+#194|Welding Jar|C|MRD
+#195|Culling Scales|R|MRD
+#196|Leonin Elder|C|MRD
+#197|Loxodon Peacekeeper|R|MRD
+#198|Proteus Staff|R|MRD
+#199|Tower of Fortunes|R|MRD
+#200|Neurok Hoversail|C|MRD
+#201|Dross Prowler|C|MRD
+#202|Worldslayer|R|MRD
+#203|Viridian Joiner|C|MRD
+#204|Tower of Murmurs|R|MRD
+#205|Dead Iron Sledge|U|MRD
+#206|Extraplanar Lens|R|MRD
+#207|Slith Strider|U|MRD
+#208|Dross Harvester|R|MRD
+#209|Sylvan Scrying|U|MRD
+#210|Turn to Dust|C|MRD
+#211|Battlegrowth|C|MRD
+#212|Override|C|MRD
+#213|Dross Scorpion|C|MRD
+#214|Malachite Golem|C|MRD
+#215|Assert Authority|U|MRD
+#216|Wurmskin Forger|C|MRD
+#217|Razor Barrier|C|MRD
+#218|Ogre Leadfoot|C|MRD
+#219|Trash for Treasure|R|MRD
+#220|Thought Prison|U|MRD
+#221|Tower of Champions|R|MRD
+#222|Synod Sanctum|U|MRD
+#223|Cloudpost|C|MRD
+#224|Inertia Bubble|C|MRD
+#225|Blinkmoth Well|U|MRD
+#226|Farsight Mask|U|MRD
+#227|Loxodon Mender|C|MRD
+#228|Wrench Mind|C|MRD
+#229|Mindstorm Crown|U|MRD
+#230|Myr Prototype|U|MRD
+#231|Wanderguard Sentry|C|MRD
+#232|Awe Strike|C|MRD
+#233|Liar's Pendulum|R|MRD
+#234|Krark Clan Shaman|C|MRD
+#235|Power Conduit|U|MRD
+#236|Vorrac Battlehorns|C|MRD
+#237|Brown Ouphe|C|MRD
+#238|Myr Adapter|C|MRD
+#239|Clockwork Beetle|C|MRD
+#240|Fists of the Anvil|C|MRD
+#241|March of the Machines|R|MRD
+#242|Omega Myr|C|MRD
+#243|Second Sunrise|R|MRD
+#244|Lumengrid Warden|C|MRD
+#245|Molten Rain|C|MRD
+#246|Galvanic Key|C|MRD
+#247|Goblin Striker|C|MRD
+#248|Fractured Loyalty|U|MRD
+#249|Mesmeric Orb|R|MRD
+#250|Seething Song|C|MRD
+#251|Damping Matrix|R|MRD
+#252|Dream's Grip|C|MRD
+#253|Forge Armor|U|MRD
+#254|Tanglebloom|C|MRD
+#255|Mourner's Shield|U|MRD
+#256|Groffskithur|C|MRD
+#257|Heartwood Shard|U|MRD
+#258|Incite War|C|MRD
+#259|Hum of the Radix|R|MRD
+#260|Blinkmoth Urn|R|MRD
+#261|Chimney Imp|C|MRD
+#262|Contaminated Bond|C|MRD
+#263|Sphere of Purity|C|MRD
+#264|Bloodscent|U|MRD
+#265|Necrogen Mists|R|MRD
+#266|Jinxed Choker|R|MRD
+#267|Myr Mindservant|U|MRD
+#268|Tel Jilad Stylus|U|MRD
+#269|Disarm|C|MRD
+#270|Rule of Law|R|MRD
+#271|Leveler|R|MRD
+#272|Confusion in the Ranks|R|MRD
+#273|Quicksilver Fountain|R|MRD
+#274|Grim Reminder|R|MRD
+#275|Mass Hysteria|R|MRD
+#276|Krark's Thumb|R|MRD
+#277|Timesifter|R|MRD
+#278|Shared Fate|R|MRD
+#279|Fiery Gambit|R|MRD
+#280|Temporal Cascade|R|MRD
+#281|Gate to the Aether|R|MRD
+#282|Spoils of the Vault|R|MRD
+#283|Spellweaver Helix|R|MRD
+#284|Psychogenic Probe|R|MRD
+#285|Tangleroot|R|MRD
+#286|Tempest of Light|U|MRD

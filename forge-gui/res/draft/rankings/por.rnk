@@ -1,0 +1,196 @@
+//Rank|Name|Rarity|Set
+#1|Forked Lightning|R|POR
+#2|Thundering Wurm|R|POR
+#3|Pillaging Horde|R|POR
+#4|Devastation|R|POR
+#5|Earthquake|R|POR
+#6|Ancestral Memories|R|POR
+#7|King's Assassin|R|POR
+#8|Pyroclasm|R|POR
+#9|Alabaster Dragon|R|POR
+#10|Natural Order|R|POR
+#11|Fire Tempest|R|POR
+#12|Thundermare|R|POR
+#13|Ebon Dragon|R|POR
+#14|Volcanic Dragon|R|POR
+#15|Wicked Pact|R|POR
+#16|Dread Reaper|R|POR
+#17|Cloud Dragon|R|POR
+#18|Phantom Warrior|R|POR
+#19|Volcanic Hammer|C|POR
+#20|Serpent Assassin|R|POR
+#21|Final Strike|R|POR
+#22|Gift of Estates|R|POR
+#23|Blaze|U|POR
+#24|Fire Dragon|R|POR
+#25|Hurricane|R|POR
+#26|Cloud Spirit|U|POR
+#27|Bull Hippo|U|POR
+#28|Wrath of God|R|POR
+#29|Hand of Death|C|POR
+#30|Starlit Angel|U|POR
+#31|Arrogant Vampire|U|POR
+#32|Lava Flow|U|POR
+#33|Fire Imp|U|POR
+#34|Vampiric Feast|U|POR
+#35|Spiritual Guardian|R|POR
+#36|Primeval Force|R|POR
+#37|Bog Wraith|U|POR
+#38|Cruel Tutor|R|POR
+#39|Stern Marshal|R|POR
+#40|Armageddon|R|POR
+#41|Mercenary Knight|R|POR
+#42|Man o' War|U|POR
+#43|Wall of Swords|U|POR
+#44|Wind Drake|C|POR
+#45|Plant Elemental|U|POR
+#46|Charging Bandits|U|POR
+#47|Giant Spider|C|POR
+#48|Djinn of the Lamp|R|POR
+#49|Wood Elves|R|POR
+#50|Alluring Scent|R|POR
+#51|Assassin's Blade|U|POR
+#52|Charging Rhino|R|POR
+#53|Desert Drake|U|POR
+#54|Gravedigger|U|POR
+#55|Snapping Drake|C|POR
+#56|Blessed Reversal|R|POR
+#57|Archangel|R|POR
+#58|Whiptail Wurm|U|POR
+#59|Anaconda|U|POR
+#60|Cruel Bargain|R|POR
+#61|Temporary Truce|R|POR
+#62|Burning Cloak|C|POR
+#63|Ingenious Thief|U|POR
+#64|Hulking Cyclops|U|POR
+#65|Bee Sting|U|POR
+#66|Needle Storm|U|POR
+#67|Capricious Sorcerer|R|POR
+#68|Sylvan Tutor|R|POR
+#69|Symbol of Unsummoning|C|POR
+#70|Raging Minotaur|C|POR
+#71|Vengeance|U|POR
+#72|Path of Peace|C|POR
+#73|Stalking Tiger|C|POR
+#74|Elvish Ranger|C|POR
+#75|Redwood Treefolk|C|POR
+#76|Spitting Earth|C|POR
+#77|Highland Giant|C|POR
+#78|Soul Shred|C|POR
+#79|Mystic Denial|U|POR
+#80|Time Ebb|C|POR
+#81|Jungle Lion|C|POR
+#82|Virtue's Ruin|U|POR
+#83|Touch of Brilliance|C|POR
+#84|Rowan Treefolk|C|POR
+#85|Lava Axe|C|POR
+#86|Gorilla Warrior|C|POR
+#87|Prosperity|R|POR
+#88|Panther Warriors|C|POR
+#89|Hill Giant|C|POR
+#90|Elite Cat Warrior|C|POR
+#91|Grizzly Bears|C|POR
+#92|Last Chance|R|POR
+#93|Command of Unsummoning|U|POR
+#94|Exhaustion|R|POR
+#95|Spined Wurm|C|POR
+#96|Lizard Warrior|C|POR
+#97|Python|C|POR
+#98|Raging Cougar|C|POR
+#99|Treetop Defense|R|POR
+#100|Serpent Warrior|C|POR
+#101|Hulking Goblin|C|POR
+#102|Craven Giant|C|POR
+#103|Undying Beast|C|POR
+#104|Venerable Monk|U|POR
+#105|Seasoned Marshal|U|POR
+#106|Spotted Griffin|C|POR
+#107|Giant Octopus|C|POR
+#108|Feral Shadow|C|POR
+#109|Nature's Ruin|U|POR
+#110|Owl Familiar|C|POR
+#111|Nature's Lore|C|POR
+#112|Scorching Spear|C|POR
+#113|Minotaur Warrior|C|POR
+#114|Breath of Life|C|POR
+#115|Personal Tutor|U|POR
+#116|Flux|U|POR
+#117|Fire Snake|C|POR
+#118|Omen|C|POR
+#119|Sacred Knight|C|POR
+#120|Rain of Salt|U|POR
+#121|Bog Raiders|C|POR
+#122|Goblin Bully|C|POR
+#123|Monstrous Growth|C|POR
+#124|Elven Cache|C|POR
+#125|Deep Wood|U|POR
+#126|Horned Turtle|C|POR
+#127|Dry Spell|U|POR
+#128|Flashfires|U|POR
+#129|Dread Charge|R|POR
+#130|Natural Spring|U|POR
+#131|Ardent Militia|U|POR
+#132|Skeletal Crocodile|C|POR
+#133|Craven Knight|C|POR
+#134|Tidal Surge|C|POR
+#135|Untamed Wilds|U|POR
+#136|Mind Rot|C|POR
+#137|Moon Sprite|U|POR
+#138|Keen Eyed Archers|C|POR
+#139|Blinding Light|R|POR
+#140|Raging Goblin|C|POR
+#141|Regal Unicorn|C|POR
+#142|Storm Crow|C|POR
+#143|Endless Cockroaches|R|POR
+#144|Foot Soldiers|C|POR
+#145|Theft of Dreams|U|POR
+#146|Cloud Pirates|C|POR
+#147|Deep Sea Serpent|U|POR
+#148|Howling Fury|C|POR
+#149|Thing from the Deep|R|POR
+#150|Stone Rain|C|POR
+#151|Deja Vu|C|POR
+#152|Sorcerous Sight|C|POR
+#153|Harsh Justice|R|POR
+#154|Knight Errant|C|POR
+#155|Armored Pegasus|C|POR
+#156|Coral Eel|C|POR
+#157|Charging Paladin|U|POR
+#158|Skeletal Snake|C|POR
+#159|Winds of Change|R|POR
+#160|Merfolk of the Pearl Trident|C|POR
+#161|Warrior's Charge|C|POR
+#162|Raise Dead|C|POR
+#163|Bog Imp|C|POR
+#164|Noxious Toad|U|POR
+#165|Muck Rats|C|POR
+#166|Mind Knives|C|POR
+#167|Border Guard|C|POR
+#168|Winter's Grasp|U|POR
+#169|Vampiric Touch|C|POR
+#170|Withering Gaze|U|POR
+#171|False Peace|C|POR
+#172|Cloak of Feathers|C|POR
+#173|Baleful Stare|U|POR
+#174|Angelic Blessing|C|POR
+#175|Steadfastness|C|POR
+#176|Mountain Goat|U|POR
+#177|Willow Dryad|C|POR
+#178|Mobilize|C|POR
+#179|Fleet Footed Monk|C|POR
+#180|Cruel Fate|R|POR
+#181|Wall of Granite|U|POR
+#182|Devoted Hero|C|POR
+#183|Valorous Charge|U|POR
+#184|Scorching Winds|U|POR
+#185|Boiling Seas|U|POR
+#186|Defiant Stand|U|POR
+#187|Fruition|C|POR
+#188|Sacred Nectar|C|POR
+#189|Rain of Tears|U|POR
+#190|Renewing Dawn|U|POR
+#191|Summer Bloom|R|POR
+#192|Balance of Power|R|POR
+#193|Taunt|R|POR
+#194|Nature's Cloak|R|POR
+#195|Starlight|U|POR

@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Flameblast Dragon|R|ALA
+#2|Broodmate Dragon|R|ALA
+#3|Battlegrace Angel|R|ALA
+#4|Caldera Hellion|R|ALA
+#5|Mycoloth|R|ALA
+#6|Vein Drinker|R|ALA
+#7|Predator Dragon|R|ALA
+#8|Sigil of Distinction|R|ALA
+#9|Sharding Sphinx|R|ALA
+#10|Stoic Angel|R|ALA
+#11|Feral Hydra|R|ALA
+#12|Elspeth, Knight Errant|M|ALA
+#13|Sarkhan Vol|M|ALA
+#14|Cruel Ultimatum|R|ALA
+#15|Ajani Vengeant|M|ALA
+#16|Tower Gargoyle|U|ALA
+#17|Scourglass|R|ALA
+#18|Bull Cerodon|U|ALA
+#19|Rafiq of the Many|M|ALA
+#20|Sharuum the Hegemon|M|ALA
+#21|Woolly Thoctar|U|ALA
+#22|Hellkite Overlord|M|ALA
+#23|Violent Ultimatum|R|ALA
+#24|Master of Etherium|R|ALA
+#25|Rhox War Monk|U|ALA
+#26|Naya Charm|U|ALA
+#27|Oblivion Ring|C|ALA
+#28|Infest|U|ALA
+#29|Jund Charm|U|ALA
+#30|Empyrial Archangel|M|ALA
+#31|Rhox Charger|U|ALA
+#32|Branching Bolt|C|ALA
+#33|Skeletonize|U|ALA
+#34|Spearbreaker Behemoth|R|ALA
+#35|Goblin Assault|R|ALA
+#36|Sphinx Sovereign|M|ALA
+#37|Resounding Thunder|C|ALA
+#38|Ranger of Eos|R|ALA
+#39|Kresh the Bloodbraided|M|ALA
+#40|Knight Captain of Eos|R|ALA
+#41|Sprouting Thrinax|U|ALA
+#42|Titanic Ultimatum|R|ALA
+#43|Godsire|M|ALA
+#44|Realm Razer|R|ALA
+#45|Sedraxis Specter|R|ALA
+#46|Naya Battlemage|U|ALA
+#47|Executioner's Capsule|C|ALA
+#48|Sedris, the Traitor King|M|ALA
+#49|Agony Warp|C|ALA
+#50|Jund Battlemage|U|ALA
+#51|Fatestitcher|U|ALA
+#52|Blood Cultist|U|ALA
+#53|Manaplasm|R|ALA
+#54|Tezzeret the Seeker|M|ALA
+#55|Bant Charm|U|ALA
+#56|Hell's Thunder|R|ALA
+#57|Tar Fiend|R|ALA
+#58|Esper Battlemage|U|ALA
+#59|Topan Ascetic|U|ALA
+#60|Skullmulcher|R|ALA
+#61|Vithian Stinger|C|ALA
+#62|Grixis Charm|U|ALA
+#63|Jungle Shrine|U|ALA
+#64|Magma Spray|C|ALA
+#65|Necrogenesis|U|ALA
+#66|Savage Lands|U|ALA
+#67|Sigiled Paladin|U|ALA
+#68|Fleshbag Marauder|U|ALA
+#69|Qasali Ambusher|U|ALA
+#70|Arcane Sanctum|U|ALA
+#71|Algae Gharial|U|ALA
+#72|Crumbling Necropolis|U|ALA
+#73|Seaside Citadel|U|ALA
+#74|Drumhunter|U|ALA
+#75|Quietus Spike|R|ALA
+#76|Sanctum Gargoyle|C|ALA
+#77|Kederekt Leviathan|R|ALA
+#78|Wild Nacatl|C|ALA
+#79|Rockslide Elemental|U|ALA
+#80|Archdemon of Unx|R|ALA
+#81|Kiss of the Amesha|U|ALA
+#82|Tidehollow Sculler|U|ALA
+#83|Prince of Thralls|M|ALA
+#84|Resounding Silence|C|ALA
+#85|Fire Field Ogre|U|ALA
+#86|Bloodpyre Elemental|C|ALA
+#87|Soul's Fire|C|ALA
+#88|Knight of the Skyward Eye|C|ALA
+#89|Knight of the White Orchid|R|ALA
+#90|Tidehollow Strix|C|ALA
+#91|Hissing Iguanar|C|ALA
+#92|Scavenger Drake|U|ALA
+#93|Viscera Dragger|C|ALA
+#94|Bone Splinters|C|ALA
+#95|Corpse Connoisseur|U|ALA
+#96|Steward of Valeron|C|ALA
+#97|Covenant of Minds|R|ALA
+#98|Courier's Capsule|C|ALA
+#99|Akrasan Squire|C|ALA
+#100|Dragon Fodder|C|ALA
+#101|Kathari Screecher|C|ALA
+#102|Druid of the Anima|C|ALA
+#103|Scourge Devil|U|ALA
+#104|Mosstodon|C|ALA
+#105|Esper Charm|U|ALA
+#106|Rakeclaw Gargantuan|C|ALA
+#107|Blightning|C|ALA
+#108|Salvage Titan|R|ALA
+#109|Court Archers|C|ALA
+#110|Elvish Visionary|C|ALA
+#111|Puppet Conjurer|U|ALA
+#112|Metallurgeon|U|ALA
+#113|Sigil Blessing|C|ALA
+#114|Mayael the Anima|M|ALA
+#115|Deft Duelist|C|ALA
+#116|Ethersworn Canonist|R|ALA
+#117|Death Baron|R|ALA
+#118|Naya Panorama|C|ALA
+#119|Jund Panorama|C|ALA
+#120|Blister Beetle|C|ALA
+#121|Cloudheath Drake|C|ALA
+#122|Rip Clan Crasher|C|ALA
+#123|Thunder Thrash Elder|U|ALA
+#124|Goblin Deathraiders|C|ALA
+#125|Carrion Thrash|C|ALA
+#126|Jhessian Infiltrator|U|ALA
+#127|Grixis Panorama|C|ALA
+#128|Esper Panorama|C|ALA
+#129|Jungle Weaver|C|ALA
+#130|Bant Panorama|C|ALA
+#131|Cavern Thoctar|C|ALA
+#132|Dregscape Zombie|C|ALA
+#133|Resounding Roar|C|ALA
+#134|Grixis Battlemage|U|ALA
+#135|Kederekt Creeper|C|ALA
+#136|Waveskimmer Aven|C|ALA
+#137|Windwright Mage|C|ALA
+#138|Resounding Wave|C|ALA
+#139|Guardians of Akrasa|C|ALA
+#140|Punish Ignorance|R|ALA
+#141|Excommunicate|C|ALA
+#142|Gift of the Gargantuan|C|ALA
+#143|Sighted Caste Sorcerer|C|ALA
+#144|Welkin Guide|C|ALA
+#145|Ridge Rannet|C|ALA
+#146|Cylian Elf|C|ALA
+#147|Call to Heel|C|ALA
+#148|Yoked Plowbeast|C|ALA
+#149|Exuberant Firestoker|U|ALA
+#150|Skeletal Kathari|C|ALA
+#151|Obelisk of Jund|C|ALA
+#152|Dawnray Archer|U|ALA
+#153|Obelisk of Naya|C|ALA
+#154|Angelic Benediction|U|ALA
+#155|Rockcaster Platoon|U|ALA
+#156|Obelisk of Grixis|C|ALA
+#157|Thorn Thrash Viashino|C|ALA
+#158|Naturalize|C|ALA
+#159|Obelisk of Esper|C|ALA
+#160|Etherium Sculptor|C|ALA
+#161|Hindering Light|C|ALA
+#162|Bant Battlemage|U|ALA
+#163|Undead Leotau|C|ALA
+#164|Obelisk of Bant|C|ALA
+#165|Incurable Ogre|C|ALA
+#166|Relic of Progenitus|C|ALA
+#167|Volcanic Submersion|C|ALA
+#168|Cancel|C|ALA
+#169|Dispeller's Capsule|C|ALA
+#170|Where Ancients Tread|R|ALA
+#171|Angelsong|C|ALA
+#172|Steelclad Serpent|C|ALA
+#173|Glaze Fiend|C|ALA
+#174|Outrider of Jhess|C|ALA
+#175|Sacellum Godspeaker|R|ALA
+#176|Lightning Talons|C|ALA
+#177|Spell Snip|C|ALA
+#178|Dreg Reaver|C|ALA
+#179|Coma Veil|C|ALA
+#180|Jhessian Lookout|C|ALA
+#181|Shore Snapper|C|ALA
+#182|Sunseed Nurturer|U|ALA
+#183|Filigree Sages|U|ALA
+#184|Etherium Astrolabe|U|ALA
+#185|Sangrite Surge|U|ALA
+#186|Minion Reflector|R|ALA
+#187|Swerve|U|ALA
+#188|Vectis Silencers|C|ALA
+#189|Gather Specimens|R|ALA
+#190|Goblin Mountaineer|C|ALA
+#191|Gustrider Exuberant|C|ALA
+#192|Savage Hunger|C|ALA
+#193|Onyx Goblet|C|ALA
+#194|Deathgreeter|C|ALA
+#195|Bloodthorn Taunter|C|ALA
+#196|Cunning Lethemancer|R|ALA
+#197|Godtoucher|C|ALA
+#198|Soul's Might|C|ALA
+#199|Resounding Scream|C|ALA
+#200|Keeper of Progenitus|R|ALA
+#201|Brilliant Ultimatum|R|ALA
+#202|Cathartic Adept|C|ALA
+#203|Ooze Garden|R|ALA
+#204|Lush Growth|C|ALA
+#205|Tortoise Formation|C|ALA
+#206|Viashino Skeleton|C|ALA
+#207|Shadowfeed|C|ALA
+#208|Thoughtcutter Agent|U|ALA
+#209|Marble Chalice|C|ALA
+#210|Soul's Grace|C|ALA
+#211|Lich's Mirror|M|ALA
+#212|Protomatter Powder|U|ALA
+#213|Banewasp Affliction|C|ALA
+#214|Skill Borrower|R|ALA
+#215|Clarion Ultimatum|R|ALA
+#216|Ad Nauseam|R|ALA
+#217|Memory Erosion|R|ALA
+#218|Mighty Emergence|U|ALA
+#219|Dragon's Herald|U|ALA
+#220|Sphinx's Herald|U|ALA
+#221|Behemoth's Herald|U|ALA
+#222|Angel's Herald|U|ALA
+#223|Demon's Herald|U|ALA
+#224|Cradle of Vitality|R|ALA
+#225|Vicious Shadows|R|ALA
+#226|Crucible of Fire|R|ALA
+#227|Invincible Hymn|R|ALA
+#228|Immortal Coil|R|ALA
+#229|Mindlock Orb|R|ALA
