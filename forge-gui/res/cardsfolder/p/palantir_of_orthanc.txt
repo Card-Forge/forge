@@ -1,4 +1,4 @@
-Name:Palantir of Orthanc
+Name:Palantír of Orthanc
 ManaCost:3
 Types:Legendary Artifact
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put an influence counter on CARDNAME and scry 2. Then target opponent may have you draw a card. If that player doesn't, you mill X cards, where X is the number of influence counters on CARDNAME, and that player loses life equal to the total mana value of those cards.
