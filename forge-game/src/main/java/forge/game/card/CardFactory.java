@@ -327,23 +327,6 @@ public class CardFactory {
     }
 
     private static void buildPlaneAbilities(Card card) {
-        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
-                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
-
-        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
-
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
-        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
-        card.addTrigger(planesWalkTrigger);
-
-        String chaosTrig = "Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Static$ True";
-
-        String rolledChaos = "DB$ ChaosEnsues";
-
-        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, card, true);
-        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, card));
-        card.addTrigger(chaosTrigger);
-
         String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
                 " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
                 "times you have previously taken this action this turn. | CostDesc$ {X}: ";

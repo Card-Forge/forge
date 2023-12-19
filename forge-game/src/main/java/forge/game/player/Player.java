@@ -3210,6 +3210,35 @@ public class Player extends GameEntity implements Comparable<Player> {
         return eff;
     }
 
+    public Card createPlanechaseEffects(Game game) {
+        final String name = "Planechase Effect";
+        final Card eff = new Card(game.nextCardId(), game); //can't be DetachedCardEffect because there's no linked card
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(name);
+        eff.setOwner(this);
+        eff.setImmutable(true);
+
+        if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
+            String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Secondary$ True | " +
+                    "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
+
+            String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
+
+            Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
+            planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, eff));
+            eff.addTrigger(planesWalkTrigger);
+
+            String chaosTrig = "Mode$ PlanarDice | ValidPlayer$ You | Result$ Chaos | TriggerZones$ Command | Static$ True";
+
+            String rolledChaos = "DB$ ChaosEnsues";
+
+            Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, eff, true);
+            chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, eff));
+            eff.addTrigger(chaosTrigger);
+        }
+        return eff;
+    }
+
     public void createTheRing(Card host) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
