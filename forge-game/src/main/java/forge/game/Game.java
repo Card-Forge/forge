@@ -891,7 +891,7 @@ public class Game {
                 }
             }
             runParams.put(AbilityKey.Cards, planesLeavingGame);
-            game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
+            getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
             planarController.planeswalkTo(null, new CardCollection(planarController.getZone(ZoneType.PlanarDeck).get(0)));
         }
 
