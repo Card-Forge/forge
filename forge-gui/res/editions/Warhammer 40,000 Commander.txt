@@ -84,7 +84,7 @@ ScryfallCode=40K
 76 R Exocrine @Cory Trego-Erdner
 77 U Herald of Slaanesh @Alexander Mokhov
 78 R Keeper of Secrets @Miguel Sacristan
-79 R Khârn the Betrayer @Kekai Kotaki
+79 R Kharn the Betrayer @Kekai Kotaki
 80 R Knight Rampager @Games Workshop
 81 R Let the Galaxy Burn @Evan Shipard
 82 U Noise Marine @Johan Grenier

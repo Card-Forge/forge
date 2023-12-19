@@ -334,7 +334,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
         if (cost.isSameZone()) {
-            // Jötun Grunt
+            // Jotun Grunt
             // TODO: improve AI
             final FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {

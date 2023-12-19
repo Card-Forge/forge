@@ -1,4 +1,4 @@
-Name:Éowyn, Lady of Rohan
+Name:Eowyn, Lady of Rohan
 ManaCost:2 W
 Types:Legendary Creature Human Noble
 PT:2/4

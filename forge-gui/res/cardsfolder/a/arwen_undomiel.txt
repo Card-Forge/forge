@@ -1,4 +1,4 @@
-Name:Arwen Undómiel
+Name:Arwen Undomiel
 ManaCost:G U
 Types:Legendary Creature Elf Noble
 PT:2/2
