@@ -1,10 +1,10 @@
 [duel]
 [metadata]
-Name=Eomer 2
-Title=Eomer
+Name=Éomer 2
+Title=Éomer
 Difficulty=medium
 Description=Mono W flanking deck
-Icon=Eomer.jpg
+Icon=Éomer.jpg
 Deck Type=constructed
 [main]
 4 Cavalry Master|TSP

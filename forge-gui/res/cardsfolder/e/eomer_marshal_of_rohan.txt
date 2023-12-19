@@ -1,4 +1,4 @@
-Name:Eomer, Marshal of Rohan
+Name:Éomer, Marshal of Rohan
 ManaCost:2 R R
 Types:Legendary Creature Human Knight
 PT:4/4

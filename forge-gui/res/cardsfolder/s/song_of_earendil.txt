@@ -1,4 +1,4 @@
-Name:Song of Earendil
+Name:Song of Eärendil
 ManaCost:3 G U
 Types:Enchantment Saga
 K:Saga:3:DBScry,DBToken,DBCounter
