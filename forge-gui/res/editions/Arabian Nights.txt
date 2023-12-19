@@ -30,14 +30,14 @@ ScryfallCode=ARN
 23 C Cuombajj Witches @Kaja Foglio
 45 U Cyclone @Mark Tedin
 61 R Dancing Scimitar @Anson Maddocks
-12 C Dandan @Drew Tucker
+12 C Dandân @Drew Tucker
 72 C Desert @Jesper Myrfors
 38 C Desert Nomads @Christopher Rush
 46 U Desert Twister @Susan Van Camp
 73 U Diamond Valley @Brian Snõddy
 47 R Drop of Honey @Anson Maddocks
 62 R Ebony Horse @Dameon Willich
-24 R El-Hajjaj @Dameon Willich
+24 R El-Hajjâj @Dameon Willich
 74 R Elephant Graveyard @Rob Alexander
 25 C Erg Raiders @Dameon Willich
 25† C Erg Raiders @Dameon Willich
@@ -47,23 +47,23 @@ ScryfallCode=ARN
 13† C Fishliver Oil @Anson Maddocks
 63 U Flying Carpet @Mark Tedin
 14 C Flying Men @Christopher Rush
-49 C Ghazban Ogre @Jesper Myrfors
+49 C Ghazbán Ogre @Jesper Myrfors
 15 C Giant Tortoise @Kaja Foglio
 15† C Giant Tortoise @Kaja Foglio
 26 R Guardian Beast @Ken Meyer, Jr.
 27 C Hasran Ogress @Dan Frazier
 27† C Hasran Ogress @Dan Frazier
 39 C Hurr Jackal @Drew Tucker
-50 R Ifh-Biff Efreet @Jesper Myrfors
+50 R Ifh-Bíff Efreet @Jesper Myrfors
 16 R Island Fish Jasconius @Jesper Myrfors
 75 R Island of Wak-Wak @Douglas Shuler
 64 R Jandor's Ring @Dan Frazier
 65 R Jandor's Saddlebags @Dameon Willich
 66 U Jeweled Bird @Amy Weber
 5 R Jihad @Brian Snõddy
-28 R Junun Efreet @Christopher Rush
-29 R Juzam Djinn @Mark Tedin
-30 U Khabal Ghoul @Douglas Shuler
+28 R Junún Efreet @Christopher Rush
+29 R Juzám Djinn @Mark Tedin
+30 U Khabál Ghoul @Douglas Shuler
 6 R King Suleiman @Mark Poole
 40 C Kird Ape @Ken Meyer, Jr.
 76 U Library of Alexandria @Mark Poole
@@ -84,7 +84,7 @@ ScryfallCode=ARN
 8† C Piety @Mark Poole
 67 R Pyramids @Amy Weber
 9 R Repentant Blacksmith @Drew Tucker
-68 R Ring of Ma'ruf @Dan Frazier
+68 R Ring of Ma'rûf @Dan Frazier
 43 C Rukh Egg @Christopher Rush
 43† C Rukh Egg @Christopher Rush
 69 U Sandals of Abdallah @Dan Frazier

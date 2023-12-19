@@ -1,4 +1,4 @@
-Name:Lim-Dul's High Guard
+Name:Lim-Dûl's High Guard
 ManaCost:1 B B
 Types:Creature Skeleton
 PT:2/1

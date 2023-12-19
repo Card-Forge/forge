@@ -22,6 +22,7 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
@@ -43,11 +44,8 @@ public final class CardRules implements ICardCharacteristics {
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
-    private ICardFace wSpecialize;
-    private ICardFace uSpecialize;
-    private ICardFace bSpecialize;
-    private ICardFace rSpecialize;
-    private ICardFace gSpecialize;
+
+    private Map<CardStateName, ICardFace> specializedParts = Maps.newHashMap();
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private ColorSet deckbuildingColors;
@@ -59,11 +57,14 @@ public final class CardRules implements ICardCharacteristics {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
-        wSpecialize = faces[2];
-        uSpecialize = faces[3];
-        bSpecialize = faces[4];
-        rSpecialize = faces[5];
-        gSpecialize = faces[6];
+
+        if (CardSplitType.Specialize.equals(splitType)) {
+            specializedParts.put(CardStateName.SpecializeW, faces[2]);
+            specializedParts.put(CardStateName.SpecializeU, faces[3]);
+            specializedParts.put(CardStateName.SpecializeB, faces[4]);
+            specializedParts.put(CardStateName.SpecializeR, faces[5]);
+            specializedParts.put(CardStateName.SpecializeG, faces[6]);
+        }
 
         aiHints = cah;
         meldWith = "";
@@ -85,11 +86,7 @@ public final class CardRules implements ICardCharacteristics {
         splitType = newRules.splitType;
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
-        wSpecialize = newRules.wSpecialize;
-        uSpecialize = newRules.uSpecialize;
-        bSpecialize = newRules.bSpecialize;
-        rSpecialize = newRules.rSpecialize;
-        gSpecialize = newRules.gSpecialize;
+        specializedParts = Maps.newHashMap(newRules.specializedParts);
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
@@ -148,20 +145,28 @@ public final class CardRules implements ICardCharacteristics {
         return otherPart;
     }
 
+    public Map<CardStateName, ICardFace> getSpecializeParts() {
+        return specializedParts;
+    }
+
+    public Iterable<ICardFace> getAllFaces() {
+        return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
+    }
+
     public ICardFace getWSpecialize() {
-        return wSpecialize;
+        return specializedParts.get(CardStateName.SpecializeW);
     }
     public ICardFace getUSpecialize() {
-        return uSpecialize;
+        return specializedParts.get(CardStateName.SpecializeU);
     }
     public ICardFace getBSpecialize() {
-        return bSpecialize;
+        return specializedParts.get(CardStateName.SpecializeB);
     }
     public ICardFace getRSpecialize() {
-        return rSpecialize;
+        return specializedParts.get(CardStateName.SpecializeR);
     }
     public ICardFace getGSpecialize() {
-        return gSpecialize;
+        return specializedParts.get(CardStateName.SpecializeG);
     }
 
     public String getName() {

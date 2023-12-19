@@ -1,4 +1,4 @@
-Name:Lothlorien Blade
+Name:Lothlórien Blade
 ManaCost:3
 Types:Artifact Equipment
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | Execute$ TrigExchangeDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to target creature defending player controls.
