@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Ajani Caller of the Pride|M|M14
+#2|Jace Memory Adept|M|M14
+#3|Archangel of Thune|M|M14
+#4|Kalonian Hydra|M|M14
+#5|Chandra Pyromaster|M|M14
+#6|Garruk Caller of Beasts|M|M14
+#7|Liliana of the Dark Realms|M|M14
+#8|Shadowborn Demon|M|M14
+#9|Primeval Bounty|M|M14
+#10|Scourge of Valkas|M|M14
+#11|Windreader Sphinx|M|M14
+#12|Devout Invocation|M|M14
+#13|Rise of the Dark Realms|M|M14
+#14|Scavenging Ooze|R|M14
+#15|Megantic Sliver|R|M14
+#16|Seraph of the Sword|R|M14
+#17|Shivan Dragon|R|M14
+#18|Ogre Battledriver|R|M14
+#19|Liliana's Reaver|R|M14
+#20|Fiendslayer Paladin|R|M14
+#21|Haunted Plate Mail|R|M14
+#22|Witchstalker|R|M14
+#23|Bonescythe Sliver|R|M14
+#24|Mutavault|R|M14
+#25|Jace's Mindseeker|R|M14
+#26|Doom Blade|U|M14
+#27|Lifebane Zombie|R|M14
+#28|Ring of Three Wishes|M|M14
+#29|Vastwood Hydra|R|M14
+#30|Xathrid Necromancer|R|M14
+#31|Serra Angel|U|M14
+#32|Colossal Whale|R|M14
+#33|Garruk's Horde|R|M14
+#34|Thorncaster Sliver|R|M14
+#35|Sengir Vampire|U|M14
+#36|Flames of the Firebrand|U|M14
+#37|Clone|R|M14
+#38|Mindsparker|R|M14
+#39|Chandra's Phoenix|R|M14
+#40|Ajani's Chosen|R|M14
+#41|Imposing Sovereign|R|M14
+#42|Air Servant|U|M14
+#43|Nightmare|R|M14
+#44|Syphon Sliver|R|M14
+#45|Domestication|R|M14
+#46|Briarpack Alpha|U|M14
+#47|Banisher Priest|U|M14
+#48|Bogbrew Witch|R|M14
+#49|Planar Cleansing|R|M14
+#50|Path of Bravery|R|M14
+#51|Manaweft Sliver|U|M14
+#52|Kalonian Tusker|U|M14
+#53|Volcanic Geyser|U|M14
+#54|Young Pyromancer|U|M14
+#55|Opportunity|U|M14
+#56|Trading Post|R|M14
+#57|Galerider Sliver|R|M14
+#58|Enlarge|U|M14
+#59|Ratchet Bomb|R|M14
+#60|Warden of Evos Isle|U|M14
+#61|Water Servant|U|M14
+#62|Battle Sliver|U|M14
+#63|Awaken the Ancient|R|M14
+#64|Tidebinder Mage|R|M14
+#65|Goblin Diplomats|R|M14
+#66|Corrupt|U|M14
+#67|Blightcaster|U|M14
+#68|Fireshrieker|U|M14
+#69|Grim Return|R|M14
+#70|Woodborn Behemoth|U|M14
+#71|Pacifism|C|M14
+#72|Chandra's Outrage|C|M14
+#73|Phantom Warrior|U|M14
+#74|Guardian of the Ages|R|M14
+#75|Elite Arcanist|R|M14
+#76|Shiv's Embrace|U|M14
+#77|Door of Destinies|R|M14
+#78|Predatory Sliver|C|M14
+#79|Into the Wilds|R|M14
+#80|Steelform Sliver|U|M14
+#81|Shock|C|M14
+#82|Tenacious Dead|U|M14
+#83|Rumbling Baloth|C|M14
+#84|Liturgy of Blood|C|M14
+#85|Dark Prophecy|R|M14
+#86|Wall of Frost|U|M14
+#87|Sanguine Bond|R|M14
+#88|Claustrophobia|C|M14
+#89|Bubbling Cauldron|U|M14
+#90|Elvish Mystic|C|M14
+#91|Quag Sickness|C|M14
+#92|Deadly Recluse|C|M14
+#93|Traumatize|R|M14
+#94|Gnawing Zombie|U|M14
+#95|Savage Summoning|R|M14
+#96|Angelic Accord|U|M14
+#97|Voracious Wurm|U|M14
+#98|Molten Birth|U|M14
+#99|Indestructibility|R|M14
+#100|Howl of the Night Pack|U|M14
+#101|Nephalia Seakite|C|M14
+#102|Marauding Maulhorn|C|M14
+#103|Messenger Drake|C|M14
+#104|Advocate of the Beast|C|M14
+#105|Celestial Flare|C|M14
+#106|Wild Ricochet|R|M14
+#107|Master of Diversion|C|M14
+#108|Dragon Egg|U|M14
+#109|Deathgaze Cockatrice|C|M14
+#110|Trained Condor|C|M14
+#111|Oath of the Ancient Wood|R|M14
+#112|Rootwalla|C|M14
+#113|Accursed Spirit|C|M14
+#114|Child of Night|C|M14
+#115|Sentinel Sliver|C|M14
+#116|Mark of the Vampire|C|M14
+#117|Blur Sliver|C|M14
+#118|Hunt the Weak|C|M14
+#119|Wall of Swords|U|M14
+#120|Essence Scatter|C|M14
+#121|Giant Spider|C|M14
+#122|Divination|C|M14
+#123|Pitchburn Devils|C|M14
+#124|Charging Griffin|C|M14
+#125|Darksteel Ingot|U|M14
+#126|Act of Treason|C|M14
+#127|Time Ebb|C|M14
+#128|Hive Stirrings|C|M14
+#129|Archaeomancer|C|M14
+#130|Shimmering Grotto|U|M14
+#131|Giant Growth|C|M14
+#132|Trollhide|C|M14
+#133|Scroll Thief|C|M14
+#134|Corpse Hauler|C|M14
+#135|Festering Newt|C|M14
+#136|Blood Bairn|C|M14
+#137|Disperse|C|M14
+#138|Striking Sliver|C|M14
+#139|Seacoast Drake|C|M14
+#140|Sporemound|C|M14
+#141|Goblin Shortcutter|C|M14
+#142|Diabolic Tutor|U|M14
+#143|Dismiss into Dream|R|M14
+#144|Elixir of Immortality|U|M14
+#145|Frost Breath|C|M14
+#146|Dawnstrike Paladin|C|M14
+#147|Vampire Warlord|U|M14
+#148|Auramancer|C|M14
+#149|Griffin Sentinel|C|M14
+#150|Sliver Construct|C|M14
+#151|Brindle Boar|C|M14
+#152|Verdant Haven|C|M14
+#153|Regathan Firecat|C|M14
+#154|Strionic Resonator|R|M14
+#155|Cancel|C|M14
+#156|Academy Raider|C|M14
+#157|Wring Flesh|C|M14
+#158|Lightning Talons|C|M14
+#159|Barrage of Expendables|U|M14
+#160|Sensory Deprivation|C|M14
+#161|Silence|R|M14
+#162|Capashen Knight|C|M14
+#163|Undead Minotaur|C|M14
+#164|Illusionary Armor|U|M14
+#165|Windstorm|U|M14
+#166|Plummet|C|M14
+#167|Nightwing Shade|C|M14
+#168|Ranger's Guile|C|M14
+#169|Congregate|U|M14
+#170|Groundshaker Sliver|C|M14
+#171|Dark Favor|C|M14
+#172|Lay of the Land|C|M14
+#173|Gladecover Scout|C|M14
+#174|Canyon Minotaur|C|M14
+#175|Fortify|C|M14
+#176|Divine Favor|C|M14
+#177|Angelic Wall|C|M14
+#178|Thunder Strike|C|M14
+#179|Lava Axe|C|M14
+#180|Negate|C|M14
+#181|Altar's Reap|C|M14
+#182|Mind Rot|C|M14
+#183|Dragon Hatchling|C|M14
+#184|Rod of Ruin|U|M14
+#185|Show of Valor|C|M14
+#186|Suntail Hawk|C|M14
+#187|Quicken|R|M14
+#188|Minotaur Abomination|C|M14
+#189|Soulmender|C|M14
+#190|Solemn Offering|C|M14
+#191|Stonehorn Chanter|U|M14
+#192|Duress|C|M14
+#193|Naturalize|C|M14
+#194|Siege Mastodon|C|M14
+#195|Coral Merfolk|C|M14
+#196|Accorder's Shield|U|M14
+#197|Shrivel|C|M14
+#198|Bramblecrush|U|M14
+#199|Vile Rebirth|C|M14
+#200|Brave the Elements|U|M14
+#201|Pillarfield Ox|C|M14
+#202|Fog|C|M14
+#203|Armored Cancrix|C|M14
+#204|Pyromancer's Gauntlet|R|M14
+#205|Zephyr Charge|C|M14
+#206|Tome Scour|C|M14
+#207|Pay No Heed|C|M14
+#208|Cyclops Tyrant|C|M14
+#209|Millstone|U|M14
+#210|Seismic Stomp|C|M14
+#211|Wild Guess|C|M14
+#212|Merfolk Spy|C|M14
+#213|Shadowborn Apostle|C|M14
+#214|Blessing|U|M14
+#215|Demolish|C|M14
+#216|Smelt|C|M14
+#217|Spell Blast|U|M14
+#218|Glimpse the Future|U|M14
+#219|Fleshpulper Giant|U|M14
+#220|Vial of Poison|U|M14
+#221|Burning Earth|R|M14
+#222|Encroaching Wastes|U|M14
+#223|Artificer's Hex|U|M14
+#224|Darksteel Forge|M|M14
+#225|Staff of the Mind Magus|U|M14
+#226|Staff of the Death Magus|U|M14
+#227|Staff of the Sun Magus|U|M14
+#228|Staff of the Wild Magus|U|M14
+#229|Staff of the Flame Magus|U|M14

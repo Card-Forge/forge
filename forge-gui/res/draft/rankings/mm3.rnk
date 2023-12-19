@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Bonfire of the Damned|M|MM3
+#2|Mizzium Mortars|R|MM3
+#3|Niv-Mizzet, Dracogenius|R|MM3
+#4|Olivia Voldaren|M|MM3
+#5|Craterhoof Behemoth|M|MM3
+#6|Thragtusk|R|MM3
+#7|Broodmate Dragon|R|MM3
+#8|Wort, the Raidmother|R|MM3
+#9|Linvala, Keeper of Silence|M|MM3
+#10|Restoration Angel|R|MM3
+#11|Falkenrath Aristocrat|R|MM3
+#12|Obzedat, Ghost Council|R|MM3
+#13|Path to Exile|U|MM3
+#14|Damnation|R|MM3
+#15|Terminate|U|MM3
+#16|Sphinx's Revelation|M|MM3
+#17|Hellrider|R|MM3
+#18|Primal Command|R|MM3
+#19|Domri Rade|M|MM3
+#20|Lingering Souls|U|MM3
+#21|Liliana of the Veil|M|MM3
+#22|Boros Reckoner|R|MM3
+#23|Cyclonic Rift|R|MM3
+#24|Desecration Demon|R|MM3
+#25|Extractor Demon|R|MM3
+#26|Sever the Bloodline|R|MM3
+#27|Evil Twin|R|MM3
+#28|Simic Sky Swallower|R|MM3
+#29|Blade Splicer|R|MM3
+#30|Scavenging Ooze|R|MM3
+#31|Advent of the Wurm|R|MM3
+#32|Putrefy|U|MM3
+#33|Entreat the Angels|M|MM3
+#34|Deadeye Navigator|R|MM3
+#35|Snapcaster Mage|M|MM3
+#36|Basilisk Collar|R|MM3
+#37|Flickerwisp|U|MM3
+#38|Phantasmal Image|R|MM3
+#39|Griselbrand|M|MM3
+#40|Zealous Conscripts|R|MM3
+#41|Cruel Ultimatum|R|MM3
+#42|Voice of Resurgence|M|MM3
+#43|Terminus|R|MM3
+#44|Vampire Nighthawk|U|MM3
+#45|Mind Shatter|R|MM3
+#46|Gaea's Anthem|U|MM3
+#47|Sedraxis Specter|U|MM3
+#48|Azorius Signet|U|MM3
+#49|Boros Signet|U|MM3
+#50|Dimir Signet|U|MM3
+#51|Golgari Signet|U|MM3
+#52|Gruul Signet|U|MM3
+#53|Izzet Signet|U|MM3
+#54|Orzhov Signet|U|MM3
+#55|Rakdos Signet|U|MM3
+#56|Selesnya Signet|U|MM3
+#57|Simic Signet|U|MM3
+#58|Venser, Shaper Savant|R|MM3
+#59|Stoic Angel|R|MM3
+#60|Tower Gargoyle|U|MM3
+#61|Thunderous Wrath|C|MM3
+#62|Ulvenwald Tracker|R|MM3
+#63|Ground Assault|C|MM3
+#64|Cackling Counterpart|R|MM3
+#65|Opportunity|U|MM3
+#66|Serum Visions|U|MM3
+#67|Seal of Doom|U|MM3
+#68|Unburial Rites|U|MM3
+#69|Skirsdag Cultist|U|MM3
+#70|Call of the Herd|R|MM3
+#71|Harmonize|U|MM3
+#72|Abrupt Decay|R|MM3
+#73|Agony Warp|C|MM3
+#74|Auger Spree|C|MM3
+#75|Dinrova Horror|C|MM3
+#76|Fiery Justice|R|MM3
+#77|Ghor-Clan Rampager|U|MM3
+#78|Rhox War Monk|U|MM3
+#79|Sprouting Thrinax|U|MM3
+#80|Woolly Thoctar|U|MM3
+#81|Arcane Sanctum|U|MM3
+#82|Crumbling Necropolis|U|MM3
+#83|Jungle Shrine|U|MM3
+#84|Savage Lands|U|MM3
+#85|Seaside Citadel|U|MM3
+#86|Compulsive Research|U|MM3
+#87|Corpse Connoisseur|U|MM3
+#88|Grisly Spectacle|C|MM3
+#89|Arachnus Spinner|U|MM3
+#90|Call of the Conclave|C|MM3
+#91|Unflinching Courage|U|MM3
+#92|Torrent of Souls|U|MM3
+#93|Azure Mage|U|MM3
+#94|Wing Splicer|U|MM3
+#95|Entomber Exarch|U|MM3
+#96|Chandra's Outrage|C|MM3
+#97|Tarmogoyf|M|MM3
+#98|Sunhome Guildmage|U|MM3
+#99|Master Splicer|U|MM3
+#100|Ranger of Eos|R|MM3
+#101|Urbis Protector|U|MM3
+#102|Mist Raven|C|MM3
+#103|Pyrewild Shaman|U|MM3
+#104|Thornscape Battlemage|U|MM3
+#105|Vital Splicer|U|MM3
+#106|Coiling Oracle|C|MM3
+#107|Izzet Charm|U|MM3
+#108|Moroii|U|MM3
+#109|Mystic Genesis|U|MM3
+#110|Spike Jester|C|MM3
+#111|Thundersong Trumpeter|U|MM3
+#112|Urban Evolution|U|MM3
+#113|Wayfaring Temple|U|MM3
+#114|Tattermunge Witch|U|MM3
+#115|Gideon's Lawkeeper|C|MM3
+#116|Tandem Lookout|C|MM3
+#117|Falkenrath Noble|C|MM3
+#118|Magma Jet|C|MM3
+#119|Avacyn's Pilgrim|C|MM3
+#120|Bronzebeak Moa|U|MM3
+#121|Centaur Healer|C|MM3
+#122|Sin Collector|U|MM3
+#123|Soul Manipulation|U|MM3
+#124|Arid Mesa|R|MM3
+#125|Marsh Flats|R|MM3
+#126|Misty Rainforest|R|MM3
+#127|Scalding Tarn|R|MM3
+#128|Verdant Catacombs|R|MM3
+#129|Attended Knight|C|MM3
+#130|Kor Hookmaster|C|MM3
+#131|Penumbra Spider|C|MM3
+#132|Soul Ransom|U|MM3
+#133|Sea Gate Oracle|C|MM3
+#134|Cower in Fear|C|MM3
+#135|Grixis Slavedriver|C|MM3
+#136|Pyroclasm|U|MM3
+#137|Slime Molding|C|MM3
+#138|Carnage Gladiator|U|MM3
+#139|Golgari Rotwurm|C|MM3
+#140|Teleportal|U|MM3
+#141|Aethertow|C|MM3
+#142|Azorius Guildgate|C|MM3
+#143|Boros Guildgate|C|MM3
+#144|Dimir Guildgate|C|MM3
+#145|Golgari Guildgate|C|MM3
+#146|Gruul Guildgate|C|MM3
+#147|Izzet Guildgate|C|MM3
+#148|Orzhov Guildgate|C|MM3
+#149|Rakdos Guildgate|C|MM3
+#150|Selesnya Guildgate|C|MM3
+#151|Simic Guildgate|C|MM3
+#152|Kor Skyfisher|C|MM3
+#153|Wingcrafter|C|MM3
+#154|Goblin Guide|R|MM3
+#155|Scourge Devil|C|MM3
+#156|Arachnus Web|C|MM3
+#157|Baloth Cage Trap|U|MM3
+#158|Summoning Trap|R|MM3
+#159|Deputy of Acquittals|C|MM3
+#160|Goblin Electromancer|C|MM3
+#161|Kathari Bomber|C|MM3
+#162|Pilfered Plans|C|MM3
+#163|Skyknight Legionnaire|C|MM3
+#164|Wall of Denial|U|MM3
+#165|Lone Missionary|C|MM3
+#166|Pitfall Trap|C|MM3
+#167|Forbidden Alchemy|C|MM3
+#168|Death's Shadow|R|MM3
+#169|Battle-Rattle Shaman|C|MM3
+#170|Vithian Stinger|U|MM3
+#171|Explore|C|MM3
+#172|Sylvan Ranger|C|MM3
+#173|Golgari Germination|U|MM3
+#174|Talon Trooper|C|MM3
+#175|Vampire Aristocrat|C|MM3
+#176|Death-Hood Cobra|C|MM3
+#177|Mistmeadow Witch|U|MM3
+#178|Banishing Stroke|U|MM3
+#179|Sensor Splicer|C|MM3
+#180|Youthful Knight|C|MM3
+#181|Gifts Ungiven|R|MM3
+#182|Spire Monitor|C|MM3
+#183|Wall of Frost|U|MM3
+#184|Abyssal Specter|U|MM3
+#185|Inquisition of Kozilek|U|MM3
+#186|Ogre Jailbreaker|C|MM3
+#187|Goblin Assault|U|MM3
+#188|Hanweir Lancer|C|MM3
+#189|Molten Rain|U|MM3
+#190|Rubblebelt Maaka|C|MM3
+#191|Hungry Spriggan|C|MM3
+#192|Slaughterhorn|C|MM3
+#193|Agent of Masks|U|MM3
+#194|Vanish into Memory|U|MM3
+#195|Burning-Tree Emissary|C|MM3
+#196|Shimmering Grotto|C|MM3
+#197|Augur of Bolas|C|MM3
+#198|Grasp of Phantoms|C|MM3
+#199|Bone Splinters|C|MM3
+#200|Dregscape Zombie|C|MM3
+#201|Recover|C|MM3
+#202|Mogg Flunkies|C|MM3
+#203|Mudbutton Torchrunner|C|MM3
+#204|Traitorous Instinct|C|MM3
+#205|Revive|C|MM3
+#206|Aethermage's Touch|R|MM3
+#207|Gruul War Chant|U|MM3
+#208|Gift of Orzhova|C|MM3
+#209|Sundering Growth|C|MM3
+#210|Mystical Teachings|C|MM3
+#211|Rewind|C|MM3
+#212|Spell Pierce|C|MM3
+#213|Dragon Fodder|C|MM3
+#214|Madcap Skills|C|MM3
+#215|Fists of Ironwood|C|MM3
+#216|Might of Old Krosa|U|MM3
+#217|Seal of Primordium|C|MM3
+#218|Intangible Virtue|U|MM3
+#219|Momentary Blink|C|MM3
+#220|Soul Warden|C|MM3
+#221|Crippling Chill|C|MM3
+#222|Temporal Mastery|M|MM3
+#223|Gnawing Zombie|C|MM3
+#224|Druid's Deliverance|C|MM3
+#225|Strength in Numbers|C|MM3
+#226|Zur the Enchanter|R|MM3
+#227|Eyes in the Skies|C|MM3
+#228|Delirium Skeins|C|MM3
+#229|Dynacharge|C|MM3
+#230|Scorched Rusalka|C|MM3
+#231|Giantbaiting|C|MM3
+#232|Rootborn Defenses|C|MM3
+#233|Familiar's Ruse|U|MM3
+#234|Ghostly Flicker|C|MM3
+#235|Mortician Beetle|C|MM3
+#236|Pit Keeper|C|MM3
+#237|Ancient Grudge|U|MM3
+#238|Damping Matrix|R|MM3
+#239|Graceful Reprieve|C|MM3
+#240|Wake the Reflections|C|MM3
+#241|Night Terrors|C|MM3
+#242|Stony Silence|R|MM3
+#243|Kraken Hatchling|C|MM3
+#244|Blood Moon|R|MM3
+#245|Grafdigger's Cage|R|MM3
+#246|Cavern of Souls|M|MM3
+#247|Seance|R|MM3
+#248|Past in Flames|M|MM3
+#249|Pyromancer Ascension|R|MM3

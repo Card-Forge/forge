@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Pharika God of Affliction|M|JOU
+#2|Ajani Mentor of Heroes|M|JOU
+#3|Godsend|M|JOU
+#4|Iroas God of Victory|M|JOU
+#5|Keranos God of Storms|M|JOU
+#6|Prophetic Flamespeaker|M|JOU
+#7|Athreos God of Passage|M|JOU
+#8|Sage of Hours|M|JOU
+#9|Kruphix God of Horizons|M|JOU
+#10|Dictate of Heliod|R|JOU
+#11|Dawnbringer Charioteers|R|JOU
+#12|Silence the Believers|R|JOU
+#13|King Macar the Gold Cursed|R|JOU
+#14|Master of the Feast|R|JOU
+#15|Hypnotic Siren|R|JOU
+#16|Setessan Tactics|R|JOU
+#17|Hydra Broodmaster|R|JOU
+#18|Heroes Bane|R|JOU
+#19|Dictate of Erebos|R|JOU
+#20|Doomwake Giant|R|JOU
+#21|Eidolon of Blossoms|R|JOU
+#22|Spawn of Thraxes|R|JOU
+#23|Pheres Band Warchief|R|JOU
+#24|Battlefield Thaumaturge|R|JOU
+#25|Harness by Force|R|JOU
+#26|Extinguish All Hope|R|JOU
+#27|Scourge of Fleets|R|JOU
+#28|Launch the Fleet|R|JOU
+#29|Hall of Triumph|R|JOU
+#30|Daring Thief|R|JOU
+#31|Mana Confluence|R|JOU
+#32|Worst Fears|M|JOU
+#33|Deicide|R|JOU
+#34|Twinflame|R|JOU
+#35|Banishing Light|U|JOU
+#36|Eidolon of the Great Revel|R|JOU
+#37|Nessian Game Warden|U|JOU
+#38|Hour of Need|U|JOU
+#39|Temple of Malady|R|JOU
+#40|Riptide Chimera|U|JOU
+#41|Fleetfeather Cockatrice|U|JOU
+#42|Polymorphous Rush|R|JOU
+#43|Aegis of the Gods|R|JOU
+#44|Temple of Epiphany|R|JOU
+#45|Whitewater Naiads|U|JOU
+#46|Skyspear Cavalry|U|JOU
+#47|Tethmos High Priest|U|JOU
+#48|Sightless Brawler|U|JOU
+#49|Reprisal|U|JOU
+#50|Forgeborn Oreads|U|JOU
+#51|Felhide Petrifier|U|JOU
+#52|Crystalline Nautilus|U|JOU
+#53|Riddle of Lightning|U|JOU
+#54|Revel of the Fallen God|R|JOU
+#55|Nyx Fleece Ram|U|JOU
+#56|Gnarled Scarhide|U|JOU
+#57|Underworld Coinsmith|U|JOU
+#58|Brain Maggot|U|JOU
+#59|Leonin Iconoclast|U|JOU
+#60|Dictate of Kruphix|R|JOU
+#61|Nyx Weaver|U|JOU
+#62|Spiteful Blow|U|JOU
+#63|Phalanx Formation|U|JOU
+#64|Mogiss Warhound|U|JOU
+#65|Dictate of the Twin Gods|R|JOU
+#66|Bassara Tower Archer|U|JOU
+#67|Nightmarish End|U|JOU
+#68|War Wing Siren|C|JOU
+#69|Wildfire Cerberus|U|JOU
+#70|Spirespine|U|JOU
+#71|Skybind|R|JOU
+#72|Squelching Leeches|U|JOU
+#73|Bearer of the Heavens|R|JOU
+#74|Swarmborn Giant|U|JOU
+#75|Magma Spray|C|JOU
+#76|Triton Cavalry|U|JOU
+#77|Cyclops of Eternal Fury|U|JOU
+#78|Golden Hind|C|JOU
+#79|Bloodcrazed Hoplite|C|JOU
+#80|Akroan Line Breaker|U|JOU
+#81|Colossal Heroics|U|JOU
+#82|Cloaked Siren|C|JOU
+#83|Dakra Mystic|U|JOU
+#84|Grim Guardian|C|JOU
+#85|Supply Line Cranes|C|JOU
+#86|Stormchaser Chimera|U|JOU
+#87|Chariot of Victory|U|JOU
+#88|Feast of Dreams|C|JOU
+#89|Sigiled Starfish|C|JOU
+#90|Thoughtrender Lamia|U|JOU
+#91|Desperate Stand|U|JOU
+#92|Disciple of Deceit|U|JOU
+#93|Hubris|C|JOU
+#94|Ajanis Presence|C|JOU
+#95|Goldenhide Ox|U|JOU
+#96|Pharikas Chosen|C|JOU
+#97|Lagonna Band Trailblazer|C|JOU
+#98|Oreskos Swiftclaw|C|JOU
+#99|Quarry Colossus|U|JOU
+#100|Oakheart Dryads|C|JOU
+#101|Harvestguard Alseids|C|JOU
+#102|Bladetusk Boar|C|JOU
+#103|Sigiled Skink|C|JOU
+#104|Pheres Band Thunderhoof|C|JOU
+#105|Satyr Hoplite|C|JOU
+#106|Armory of Iroas|U|JOU
+#107|Ravenous Leucrocota|C|JOU
+#108|Starfall|C|JOU
+#109|Gold Forged Sentinel|U|JOU
+#110|Eagle of the Watch|C|JOU
+#111|Strength from the Fallen|U|JOU
+#112|Eidolon of Rhetoric|U|JOU
+#113|Nyx Infusion|C|JOU
+#114|Oppressive Rays|C|JOU
+#115|Kioras Dismissal|U|JOU
+#116|Akroan Mastiff|C|JOU
+#117|Interpret the Signs|U|JOU
+#118|Renowned Weaver|C|JOU
+#119|Satyr Grovedancer|C|JOU
+#120|Aerial Formation|C|JOU
+#121|Solidarity of Heroes|U|JOU
+#122|Font of Fortunes|C|JOU
+#123|Armament of Nyx|C|JOU
+#124|Ritual of the Returned|U|JOU
+#125|Thassas Ire|U|JOU
+#126|Spite of Mogis|U|JOU
+#127|Reviving Melody|U|JOU
+#128|Font of Fertility|C|JOU
+#129|Flurry of Horns|C|JOU
+#130|Agent of Erebos|U|JOU
+#131|Mortal Obstinacy|C|JOU
+#132|Stonewise Fortifier|C|JOU
+#133|Humbler of Mortals|C|JOU
+#134|Rise of Eagles|C|JOU
+#135|Aspect of Gorgon|C|JOU
+#136|Consign to Dust|U|JOU
+#137|Dreadbringer Lampads|C|JOU
+#138|Pin to the Earth|C|JOU
+#139|Rouse the Mob|C|JOU
+#140|Tormented Thoughts|U|JOU
+#141|Blinding Flare|U|JOU
+#142|Natures Panoply|C|JOU
+#143|Pensive Minotaur|C|JOU
+#144|Cruel Feeding|C|JOU
+#145|Thassas Devourer|C|JOU
+#146|Cast into Darkness|C|JOU
+#147|Market Festival|C|JOU
+#148|Triton Shorestalker|C|JOU
+#149|Countermand|C|JOU
+#150|Returned Reveler|C|JOU
+#151|Font of Return|C|JOU
+#152|Lightning Diadem|C|JOU
+#153|Gluttonous Cyclops|C|JOU
+#154|Knowledge and Power|U|JOU
+#155|Flamespeakers Will|C|JOU
+#156|Rotted Hulk|C|JOU
+#157|Font of Ire|C|JOU
+#158|Kruphixs Insight|C|JOU
+#159|Pull from the Deep|U|JOU
+#160|Dictate of Karametra|R|JOU
+#161|Rollick of Abandon|U|JOU
+#162|Font of Vigor|C|JOU
+#163|Godhunter Octopus|C|JOU
+#164|Desecration Plague|C|JOU
+#165|Deserters Quarters|U|JOU

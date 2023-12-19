@@ -1,0 +1,211 @@
+//Rank|Name|Rarity|Set
+#1|Dack Fayden|M|CNS
+#2|Pristine Angel|M|CNS
+#3|Scourge of the Throne|M|CNS
+#4|Deathrender|R|CNS
+#5|Hydra Omnivore|M|CNS
+#6|Spiritmonger|R|CNS
+#7|Mirari's Wake|M|CNS
+#8|Rout|R|CNS
+#9|Marchesa, the Black Rose|M|CNS
+#10|Pernicious Deed|M|CNS
+#11|Magister of Worth|R|CNS
+#12|Wolfbriar Elemental|R|CNS
+#13|Basandra, Battle Seraph|R|CNS
+#14|Coercive Portal|M|CNS
+#15|Brago, King Eternal|R|CNS
+#16|Council's Judgment|R|CNS
+#17|Reya Dawnbringer|R|CNS
+#18|Phage the Untouchable|M|CNS
+#19|Terastodon|R|CNS
+#20|Custodi Soulbinders|R|CNS
+#21|Reign of the Pit|R|CNS
+#22|Grenzo, Dungeon Warden|R|CNS
+#23|Aether Searcher|R|CNS
+#24|Edric, Spymaster of Trest|R|CNS
+#25|Backup Plan|R|CNS
+#26|Selvala, Explorer Returned|R|CNS
+#27|Worldknit|R|CNS
+#28|Dack's Duplicate|R|CNS
+#29|Plea for Power|R|CNS
+#30|Realm Seekers|R|CNS
+#31|Swords to Plowshares|U|CNS
+#32|Exploration|R|CNS
+#33|Heartless Hidetsugu|R|CNS
+#34|Misdirection|R|CNS
+#35|Vedalken Orrery|R|CNS
+#36|Drakestown Forgotten|R|CNS
+#37|Dimir Doppelganger|R|CNS
+#38|Ignition Team|R|CNS
+#39|Secret Summoning|U|CNS
+#40|Muzzio, Visionary Architect|M|CNS
+#41|Silent Arbiter|R|CNS
+#42|Stifle|R|CNS
+#43|Paliano, the High City|R|CNS
+#44|Cogwork Grinder|R|CNS
+#45|Double Stroke|U|CNS
+#46|Pelakka Wurm|U|CNS
+#47|Academy Elite|R|CNS
+#48|Reflecting Pool|R|CNS
+#49|Decimate|R|CNS
+#50|Deal Broker|R|CNS
+#51|Unexpected Potential|U|CNS
+#52|Muzzio's Preparations|C|CNS
+#53|Squirrel Nest|U|CNS
+#54|Brago's Favor|C|CNS
+#55|Fact or Fiction|U|CNS
+#56|Mortify|U|CNS
+#57|Lore Seeker|R|CNS
+#58|Elephant Guide|U|CNS
+#59|Jetting Glasskite|U|CNS
+#60|Iterative Analysis|U|CNS
+#61|Morkrut Banshee|U|CNS
+#62|Predator's Howl|U|CNS
+#63|Grenzo's Rebuttal|R|CNS
+#64|Magus of the Mirror|R|CNS
+#65|Fireshrieker|U|CNS
+#66|Sulfuric Vortex|R|CNS
+#67|Air Servant|U|CNS
+#68|Wakestone Gargoyle|U|CNS
+#69|Selvala's Charge|U|CNS
+#70|Unquestioned Authority|U|CNS
+#71|Tragic Slip|C|CNS
+#72|Brimstone Volley|C|CNS
+#73|Victimize|U|CNS
+#74|Reckless Spite|U|CNS
+#75|Canal Dredger|R|CNS
+#76|Deathreap Ritual|U|CNS
+#77|Sakura-Tribe Elder|C|CNS
+#78|Volcanic Fallout|U|CNS
+#79|Altar of Dementia|R|CNS
+#80|Glimmerpoint Stag|U|CNS
+#81|Soulcatcher|U|CNS
+#82|Liliana's Specter|C|CNS
+#83|Brainstorm|C|CNS
+#84|Woodvine Elemental|U|CNS
+#85|Secrets of Paradise|C|CNS
+#86|Council Guardian|U|CNS
+#87|Favorable Winds|U|CNS
+#88|Immediate Action|C|CNS
+#89|Assassinate|C|CNS
+#90|Sky Spirit|U|CNS
+#91|Flamewright|U|CNS
+#92|Marchesa's Infiltrator|U|CNS
+#93|Vow of Duty|U|CNS
+#94|Extract from Darkness|U|CNS
+#95|Rousing of Souls|C|CNS
+#96|Custodi Squire|C|CNS
+#97|Gamekeeper|U|CNS
+#98|Bite of the Black Rose|U|CNS
+#99|Wind Dancer|U|CNS
+#100|Intangible Virtue|U|CNS
+#101|Apex Hawks|C|CNS
+#102|Doomed Traveler|C|CNS
+#103|Galvanic Juggernaut|U|CNS
+#104|Deathforge Shaman|U|CNS
+#105|Typhoid Rats|C|CNS
+#106|Sentinel Dispatch|C|CNS
+#107|Advantageous Proclamation|U|CNS
+#108|Tyrant's Choice|C|CNS
+#109|Smallpox|U|CNS
+#110|Crookclaw Transmuter|C|CNS
+#111|Spectral Searchlight|U|CNS
+#112|Marchesa's Smuggler|U|CNS
+#113|Lurking Automaton|C|CNS
+#114|Split Decision|U|CNS
+#115|Twisted Abomination|C|CNS
+#116|Vampire Hexmage|U|CNS
+#117|Explorer's Scope|U|CNS
+#118|Vent Sentinel|C|CNS
+#119|Ill-Gotten Gains|R|CNS
+#120|Peace Strider|U|CNS
+#121|Wakedancer|C|CNS
+#122|Elvish Aberration|C|CNS
+#123|Boldwyr Intimidator|U|CNS
+#124|Marchesa's Emissary|C|CNS
+#125|Power Play|U|CNS
+#126|Screaming Seahawk|C|CNS
+#127|Courier Hawk|C|CNS
+#128|Grenzo's Cutthroat|C|CNS
+#129|Syphon Soul|C|CNS
+#130|Howling Wolf|C|CNS
+#131|Infectious Horror|C|CNS
+#132|Mirrodin's Core|U|CNS
+#133|Compulsive Research|C|CNS
+#134|Shoreline Ranger|C|CNS
+#135|Barbed Shocker|U|CNS
+#136|Skeletal Scrying|U|CNS
+#137|Gnarlid Pack|C|CNS
+#138|Lead the Stampede|U|CNS
+#139|Quicksand|U|CNS
+#140|Grudge Keeper|C|CNS
+#141|Dream Fracture|C|CNS
+#142|Ajani's Sunstriker|C|CNS
+#143|Noble Templar|C|CNS
+#144|Breakthrough|U|CNS
+#145|Plagued Rusalka|U|CNS
+#146|Brago's Representative|C|CNS
+#147|Spontaneous Combustion|U|CNS
+#148|Cogwork Librarian|C|CNS
+#149|Pride Guardian|C|CNS
+#150|Selvala's Enforcer|C|CNS
+#151|Sporecap Spider|C|CNS
+#152|Cogwork Spy|C|CNS
+#153|Charging Rhino|C|CNS
+#154|Silverchase Fox|C|CNS
+#155|Fires of Yavimaya|U|CNS
+#156|Hunger of the Howlpack|C|CNS
+#157|Runed Servitor|U|CNS
+#158|Echoing Courage|C|CNS
+#159|Treasonous Ogre|U|CNS
+#160|Pitchburn Devils|C|CNS
+#161|Cogwork Tracker|U|CNS
+#162|Moment of Heroism|C|CNS
+#163|Chartooth Cougar|C|CNS
+#164|Quag Vampires|C|CNS
+#165|Warmonger's Chariot|U|CNS
+#166|Skitter of Lizards|C|CNS
+#167|Flaring Flame-Kin|U|CNS
+#168|Kor Chant|C|CNS
+#169|Reckless Scholar|C|CNS
+#170|Enclave Elite|C|CNS
+#171|Heckling Fiends|U|CNS
+#172|Traveler's Cloak|C|CNS
+#173|Aether Tradewinds|C|CNS
+#174|Uncontrollable Anger|U|CNS
+#175|Scaled Wurm|C|CNS
+#176|Enraged Revolutionary|C|CNS
+#177|Stave Off|C|CNS
+#178|Cinder Wall|C|CNS
+#179|Torch Fiend|C|CNS
+#180|Copperhorn Scout|C|CNS
+#181|Guardian Zendikon|C|CNS
+#182|Agent of Acquisitions|U|CNS
+#183|Minamo Scrollkeeper|C|CNS
+#184|Stasis Cell|C|CNS
+#185|Altar's Reap|C|CNS
+#186|Plummet|C|CNS
+#187|Orcish Cannonade|C|CNS
+#188|Power of Fire|C|CNS
+#189|Trumpet Blast|C|CNS
+#190|Reito Lantern|U|CNS
+#191|Wrap in Flames|C|CNS
+#192|Lizard Warrior|C|CNS
+#193|Relic Crush|U|CNS
+#194|Unhallowed Pact|C|CNS
+#195|Provoke|C|CNS
+#196|Grixis Illusionist|C|CNS
+#197|Respite|C|CNS
+#198|Wrap in Vigor|C|CNS
+#199|Nature's Claim|C|CNS
+#200|Plated Seastrider|C|CNS
+#201|Whispergear Sneak|C|CNS
+#202|Flowstone Blade|C|CNS
+#203|Mana Geyser|C|CNS
+#204|Wood Sage|U|CNS
+#205|Turn the Tide|C|CNS
+#206|Zombie Goliath|C|CNS
+#207|Necromantic Thirst|C|CNS
+#208|Stronghold Discipline|C|CNS
+#209|Pillarfield Ox|C|CNS
+#210|Valor Made Real|C|CNS

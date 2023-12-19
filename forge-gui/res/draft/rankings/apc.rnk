@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Spiritmonger|R|APC
+#2|Desolation Angel|R|APC
+#3|Vindicate|R|APC
+#4|Prophetic Bolt|R|APC
+#5|Gerrard Capashen|R|APC
+#6|Rakavolver|R|APC
+#7|Necravolver|R|APC
+#8|Pernicious Deed|R|APC
+#9|Fervent Charge|R|APC
+#10|Penumbra Wurm|R|APC
+#11|Death Grasp|R|APC
+#12|Lightning Angel|R|APC
+#13|Phyrexian Arena|R|APC
+#14|Anavolver|R|APC
+#15|Phyrexian Gargantua|U|APC
+#16|Goblin Trenches|R|APC
+#17|Degavolver|R|APC
+#18|Llanowar Wastes|R|APC
+#19|Mystic Snake|R|APC
+#20|Spectral Lynx|R|APC
+#21|Desolation Giant|R|APC
+#22|Illuminate|U|APC
+#23|Fire Ice|U|APC
+#24|Cetavolver|R|APC
+#25|Aether Mutation|U|APC
+#26|Fungal Shambler|R|APC
+#27|Cromat|R|APC
+#28|Consume Strength|C|APC
+#29|Kavu Mauler|R|APC
+#30|Order Chaos|U|APC
+#31|Caves of Koilos|R|APC
+#32|Jungle Barrier|U|APC
+#33|Penumbra Kavu|U|APC
+#34|Phyrexian Rager|C|APC
+#35|Death Mutation|U|APC
+#36|Minotaur Illusionist|U|APC
+#37|Yavimaya Coast|R|APC
+#38|Yavimaya's Embrace|R|APC
+#39|Haunted Angel|U|APC
+#40|Captain's Maneuver|U|APC
+#41|Planar Despair|R|APC
+#42|Battlefield Forge|R|APC
+#43|Jilt|C|APC
+#44|Urborg Elf|C|APC
+#45|Bloodfire Kavu|U|APC
+#46|Coalition Honor Guard|C|APC
+#47|Penumbra Bobcat|C|APC
+#48|Ebony Treefolk|U|APC
+#49|Bloodfire Colossus|R|APC
+#50|Quicksilver Dagger|C|APC
+#51|Razorfin Hunter|C|APC
+#52|Coastal Drake|C|APC
+#53|Suffocating Blast|R|APC
+#54|Llanowar Dead|C|APC
+#55|Temporal Spring|C|APC
+#56|Flowstone Charger|U|APC
+#57|Living Airship|C|APC
+#58|Gaea's Skyfolk|C|APC
+#59|Lay of the Land|C|APC
+#60|Dead Ringers|C|APC
+#61|Overgrown Estate|R|APC
+#62|Goblin Legionnaire|C|APC
+#63|Emblazoned Golem|U|APC
+#64|Legacy Weapon|R|APC
+#65|Gerrard's Verdict|U|APC
+#66|Life Death|U|APC
+#67|Whirlpool Drake|U|APC
+#68|Manacles of Decay|C|APC
+#69|Night Day|U|APC
+#70|Shivan Reef|R|APC
+#71|Whirlpool Warrior|R|APC
+#72|Kavu Howler|U|APC
+#73|Reef Shaman|C|APC
+#74|Enlistment Officer|U|APC
+#75|Ana Sanctuary|U|APC
+#76|Zombie Boa|C|APC
+#77|Savage Gorilla|C|APC
+#78|Urborg Uprising|C|APC
+#79|Ana Disciple|C|APC
+#80|Grave Defiler|U|APC
+#81|Goblin Ringleader|U|APC
+#82|Helionaut|C|APC
+#83|Tundra Kavu|C|APC
+#84|Dodecapod|U|APC
+#85|Brass Herald|U|APC
+#86|Diversionary Tactics|U|APC
+#87|Raka Sanctuary|U|APC
+#88|Glade Gnarr|C|APC
+#89|Standard Bearer|C|APC
+#90|Last Stand|R|APC
+#91|Dwarven Patrol|U|APC
+#92|Putrid Warrior|C|APC
+#93|Sylvan Messenger|U|APC
+#94|Ceta Sanctuary|U|APC
+#95|Evasive Action|U|APC
+#96|Squee's Embrace|C|APC
+#97|Symbiotic Deployment|R|APC
+#98|Kavu Glider|C|APC
+#99|Powerstone Minefield|R|APC
+#100|Ceta Disciple|C|APC
+#101|Whirlpool Rider|C|APC
+#102|Dega Disciple|C|APC
+#103|Bog Gnarr|C|APC
+#104|Soul Link|C|APC
+#105|Angelfire Crusader|C|APC
+#106|Necra Sanctuary|U|APC
+#107|Necra Disciple|C|APC
+#108|Bloodfire Dwarf|C|APC
+#109|Guided Passage|R|APC
+#110|Quagmire Druid|C|APC
+#111|Foul Presence|U|APC
+#112|Strength of Night|C|APC
+#113|Dragon Arch|U|APC
+#114|Mournful Zombie|C|APC
+#115|Raka Disciple|C|APC
+#116|Orim's Thunder|C|APC
+#117|Tidal Courier|U|APC
+#118|Illusion Reality|U|APC
+#119|Jaded Response|C|APC
+#120|Squee's Revenge|U|APC
+#121|Minotaur Tactician|C|APC
+#122|Last Caress|C|APC
+#123|Shimmering Mirage|C|APC
+#124|Dega Sanctuary|U|APC
+#125|Martyrs' Tomb|U|APC
+#126|Coalition Flag|U|APC
+#127|Mind Extraction|C|APC
+#128|Gaea's Balance|U|APC
+#129|Divine Light|C|APC
+#130|Bloodfire Infusion|C|APC
+#131|Suppress|U|APC
+#132|Tranquil Path|C|APC
+#133|Index|C|APC
+#134|Dwarven Landslide|C|APC
+#135|Shield of Duty and Reason|C|APC
+#136|Smash|C|APC
+#137|Vodalian Mystic|U|APC
+#138|Wild Research|R|APC
+#139|Tahngarth's Glare|C|APC
+#140|Unnatural Selection|R|APC
+#141|Ice Cave|R|APC
+#142|Mask of Intolerance|R|APC
+#143|False Dawn|R|APC
