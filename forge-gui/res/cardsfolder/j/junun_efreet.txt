@@ -1,4 +1,4 @@
-Name:Junun Efreet
+Name:Junún Efreet
 ManaCost:1 B B
 Types:Creature Efreet
 PT:3/3

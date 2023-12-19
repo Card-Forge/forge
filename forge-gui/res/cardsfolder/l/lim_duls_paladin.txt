@@ -1,4 +1,4 @@
-Name:Lim-Dul's Paladin
+Name:Lim-Dûl's Paladin
 ManaCost:2 B R
 Types:Creature Human Knight
 PT:0/3

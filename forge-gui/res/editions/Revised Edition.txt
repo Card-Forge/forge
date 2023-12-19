@@ -90,7 +90,7 @@ ScryfallCode=3ED
 146 U Earth Elemental @Dan Frazier
 148 R Earthquake @Dan Frazier
 247 R Ebony Horse @Dameon Willich
-108 R El-Hajjaj @Dameon Willich
+108 R El-Hajjâj @Dameon Willich
 193 R Elvish Archers @Anson Maddocks
 57 U Energy Flux @Kaja Foglio
 109 C Erg Raiders @Dameon Willich

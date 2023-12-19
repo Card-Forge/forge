@@ -1,4 +1,4 @@
-Name:Dandan
+Name:Dandân
 ManaCost:U U
 Types:Creature Fish
 PT:4/1
