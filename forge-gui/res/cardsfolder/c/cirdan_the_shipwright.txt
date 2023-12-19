@@ -1,4 +1,4 @@
-Name:Cirdan the Shipwright
+Name:Círdan the Shipwright
 ManaCost:3 G U
 Types:Legendary Creature Elf Noble
 PT:3/4
