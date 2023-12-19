@@ -2755,6 +2755,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     /**
+     * Removes a particular plane from the active plane list.
+     */
+    public void removeCurrentPlane(Card c) {
+        currentPlanes.remove(c);
+    }
+
+    /**
      * Sets up the first plane of a round.
      */
     public void initPlane() {

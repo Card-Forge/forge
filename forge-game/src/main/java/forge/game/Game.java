@@ -882,6 +882,16 @@ public class Game {
             if (planarController.equals(p)) {
                 planarController = getNextPlayerAfter(p);
             }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            CardCollection planesLeavingGame =  new CardCollection();
+            for (Card c : getActivePlanes()) {
+                if ((c != null) && (c.getOwner().equals(p))) {
+                    planesLeavingGame.add(c);
+                    planarController.removeCurrentPlane(c);
+                }
+            }
+            runParams.put(AbilityKey.Cards, planesLeavingGame);
+            game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
             planarController.planeswalkTo(null, new CardCollection(planarController.getZone(ZoneType.PlanarDeck).get(0)));
         }
 
