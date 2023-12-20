@@ -10,4 +10,7 @@ ScryfallCode=PW24
 2 R Lord of Atlantis @Billy Christian
 3 R Zombie Master @Igor Krstic
 4 R Goblin King @Joshua Cairos
-5 S Gaea's Liege @Jodie Muir
+5 R Gaea's Liege @Jodie Muir
+6 R Arcane Signet @Gaboleps
+7 R Chaos Warp @Volkan Baǵa
+8 R Commander's Sphere @Andrea Radeck
