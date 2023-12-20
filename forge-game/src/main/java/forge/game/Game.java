@@ -211,7 +211,8 @@ public class Game {
                 : null;
 
         if (lookup != null) {
-            lookup.remove(c);
+            lastStateBattlefield.remove(c);
+            lastStateGraveyard.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }
@@ -851,7 +852,7 @@ public class Game {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
                         si.setActivatingPlayer(c.getController());
                     }
-                    if ((c.getController().equals(p)) && !(c.isPlane() || c.isPhenomenon())) {
+                    if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
                         getAction().exile(c, null, null);
                         triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
@@ -868,7 +869,7 @@ public class Game {
         // planar controller leaves
         if (planarControllerLost) {
             for (Card c : getActivePlanes()) {
-                if ((c != null) && !(c.getOwner().equals(p))) {
+                if (c != null && !c.getOwner().equals(p)) {
                     c.setController(getNextPlayerAfter(p), 0);
                     getAction().controllerChangeZoneCorrection(c);
                 }
@@ -885,14 +886,14 @@ public class Game {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             CardCollection planesLeavingGame =  new CardCollection();
             for (Card c : getActivePlanes()) {
-                if ((c != null) && (c.getOwner().equals(p))) {
+                if (c != null && c.getOwner().equals(p)) {
                     planesLeavingGame.add(c);
                     planarController.removeCurrentPlane(c);
                 }
             }
             runParams.put(AbilityKey.Cards, planesLeavingGame);
             getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
-            planarController.planeswalkTo(null, new CardCollection(planarController.getZone(ZoneType.PlanarDeck).get(0)));
+            planarController.planeswalk(null);
         }
 
         if (p.isMonarch()) {
