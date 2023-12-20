@@ -4416,8 +4416,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 (boolean) p.get("RemoveAll"), (long) p.get("Timestamp"), (long) 0);        
         } else if (category.equals("Types")) {
             addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
-            false, (Set<RemoveType>) p.get("RemoveXTypes"), 
-            (long) p.get("Timestamp"), (long) 0, true, false);
+                false, (Set<RemoveType>) p.get("RemoveXTypes"), 
+                (long) p.get("Timestamp"), (long) 0, true, false);
+        } else if (category.equals("Colors")) {
+            addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"), 
+                (long) 0, false);
         }
     }
 

@@ -127,7 +127,18 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKeywords);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, 0, false);
+        if (colors != null) {
+            final boolean overwrite = sa.hasParam("OverwriteColors");
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("Colors", colors);
+                params.put("Overwrite", overwrite);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "Colors");
+                c.addPerpetual(params);
+            }
+            c.addColor(colors, !overwrite, timestamp, 0, false);
+        }
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));

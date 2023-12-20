@@ -1102,18 +1102,19 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Double team")) {
             final String trigString = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield" +
                     " | Secondary$ True | TriggerDescription$ Double team (" + inst.getReminderText() + ")";
-            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
-            final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | ImprintCards$ TriggeredAttacker | StaticAbilities$ RemoveDoubleTeamMade";       
-            final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Both cards perpetually lose double team.";
-            final String CleanupString = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
+            final String maSt = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True | Conjure$ True";
+            final String puSt = "DB$ Pump | RememberObjects$ Self";
+            final String anSt = "DB$ Animate | Duration$ Perpetual | Defined$ Remembered | RemoveKeywords$ Double team";
+            final String clSt = "DB$ Cleanup | ClearRemembered$ True";
             final Trigger trigger = TriggerHandler.parseTrigger(trigString, card, intrinsic);
-            final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
-            final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
-            final AbilitySub Cleanup = (AbilitySub) AbilityFactory.getAbility(CleanupString, card);
-            forget.setSVar("RemoveDoubleTeamMade",madeforgetmadeString);
-            youMake.setSubAbility(forget);
-            forget.setSubAbility(Cleanup);
-            trigger.setOverridingAbility(youMake);
+            final SpellAbility trigMake = AbilityFactory.getAbility(maSt, card);
+            final AbilitySub pump = (AbilitySub) AbilityFactory.getAbility(puSt, card);
+            final AbilitySub remove = (AbilitySub) AbilityFactory.getAbility(anSt, card);
+            final AbilitySub cleanup = (AbilitySub) AbilityFactory.getAbility(clSt, card);
+            trigMake.setSubAbility(pump);
+            pump.setSubAbility(remove);
+            remove.setSubAbility(cleanup);
+            trigger.setOverridingAbility(trigMake);
             
             inst.addTrigger(trigger); 
         } else if (keyword.startsWith("Echo")) {

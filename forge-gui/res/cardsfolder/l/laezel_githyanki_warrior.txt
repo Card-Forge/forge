@@ -35,14 +35,10 @@ K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
-SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
-SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Illithid Thrall's Perpetual Effect | SubAbility$ DBCleanup
-SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
-SVar:DBUpdate:DB$ UpdateRemember
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 Oracle:Double strike\nWhen this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 
 SPECIALIZE:BLACK
@@ -77,10 +73,7 @@ ManaCost:3 G W
 Types:Legendary Creature Gith Warrior
 PT:3/6
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
-T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
-SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl+Other,ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Primal Warrior's Perpetual Effect
-SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These creature cards perpetually get +1/+1.
-SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
-SVar:DBUpdate:DB$ UpdateRemember
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Battlefield,Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 Oracle:Double strike\nWhen this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
