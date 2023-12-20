@@ -3212,7 +3212,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public Card createPlanechaseEffects(Game game) {
         final String name = "Planechase Effect";
-        final Card eff = new Card(game.nextCardId(), game); //can't be DetachedCardEffect because there's no linked card
+        final Card eff = new Card(game.nextCardId(), game){
+            @Override
+            public Card getCardForUi() {
+                List<Card> currentPlanes = getOwner().getGame().getActivePlanes();
+                return (currentPlanes == null || currentPlanes.size() == 0) ? null : currentPlanes.get(0); //use current plane for the sake of UI display logic
+            }
+        };
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setOwner(this);
