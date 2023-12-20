@@ -1398,7 +1398,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
             }
             if (MyRandom.percentTrue(chance)) {
-                Collections.sort(aiPlaneswalkers, CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
+                aiPlaneswalkers.sort(CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
                 for (Card pw : aiPlaneswalkers) {
                     int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
                     int freshLoyalty = Integer.valueOf(pw.getCurrentState().getBaseLoyalty());

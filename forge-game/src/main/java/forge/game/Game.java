@@ -794,7 +794,7 @@ public class Game {
         boolean planarControllerLost = false;
         boolean planarOwnerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
-        CardZoneTable triggerList = new CardZoneTable();
+        CardZoneTable triggerList = new CardZoneTable(getLastStateBattlefield(), getLastStateGraveyard());
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.

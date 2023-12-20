@@ -243,7 +243,7 @@ public class PlayerProperty {
             }
         } else if (property.equals("EnchantedController")) {
             Card enchanting = source.getEnchantingCard();
-            if (enchanting != null && !player.equals(enchanting.getController())) {
+            if (enchanting == null || !player.equals(enchanting.getController())) {
                 return false;
             }
         } else if (property.equals("Chosen")) {

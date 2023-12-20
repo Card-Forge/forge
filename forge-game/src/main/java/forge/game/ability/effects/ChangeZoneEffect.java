@@ -468,7 +468,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             libraryPosition = pair.getValue();
         }
 
-        final CardZoneTable triggerList = new CardZoneTable();
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        final CardZoneTable triggerList = new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
@@ -504,9 +507,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("Chooser")) {
             chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
         }
-
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         // CR 401.4
         if (destination.equals(ZoneType.Library) && !shuffle && tgtCards.size() > 1) {
@@ -1262,10 +1262,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("Imprint");
 
         boolean combatChanged = false;
-        final CardZoneTable triggerList = new CardZoneTable();
 
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+        final CardZoneTable triggerList = new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
 
         for (Player player : HiddenOriginChoicesMap.keySet()) {
             boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;

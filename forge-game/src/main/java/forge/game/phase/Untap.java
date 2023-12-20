@@ -128,7 +128,7 @@ public class Untap extends Phase {
             c.setStartedTheTurnUntapped(c.isUntapped());
         }
 
-        CardZoneTable triggerList = new CardZoneTable();
+        CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         CardCollection bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
             Card moved = game.getAction().moveToHand(c, null);

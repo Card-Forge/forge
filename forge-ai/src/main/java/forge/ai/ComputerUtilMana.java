@@ -126,7 +126,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        Collections.sort(orderedCards, new Comparator<Card>() {
+        orderedCards.sort(new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
                 return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
@@ -149,7 +149,7 @@ public class ComputerUtilMana {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
-            Collections.sort(newAbilities, new Comparator<SpellAbility>() {
+            newAbilities.sort(new Comparator<SpellAbility>() {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
@@ -195,7 +195,7 @@ public class ComputerUtilMana {
                     final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
                     final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
 
-                    Collections.sort(prefSortedAbilities, new Comparator<SpellAbility>() {
+                    prefSortedAbilities.sort(new Comparator<SpellAbility>() {
                         @Override
                         public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                             if (ability1.getManaPart().mana(ability1).contains(preferredShard))
@@ -206,7 +206,7 @@ public class ComputerUtilMana {
                             return 0;
                         }
                     });
-                    Collections.sort(otherSortedAbilities, new Comparator<SpellAbility>() {
+                    otherSortedAbilities.sort(new Comparator<SpellAbility>() {
                         @Override
                         public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                             if (ability1.getManaPart().mana(ability1).contains(preferredShard))
@@ -1094,7 +1094,7 @@ public class ComputerUtilMana {
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
         List<ManaCostShard> shardsToPay = Lists.newArrayList(cost.getDistinctShards());
         // optimize order so that the shards with less available sources are considered first
-        Collections.sort(shardsToPay, new Comparator<ManaCostShard>() {
+        shardsToPay.sort(new Comparator<ManaCostShard>() {
             @Override
             public int compare(final ManaCostShard shard1, final ManaCostShard shard2) {
                 return sourcesForShards.get(shard1).size() - sourcesForShards.get(shard2).size();
