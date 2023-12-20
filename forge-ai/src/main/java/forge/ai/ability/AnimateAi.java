@@ -487,7 +487,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // colors to be added or changed to
-        ColorSet finalColors = ColorSet.getNullColor();
+        ColorSet finalColors = null;
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
