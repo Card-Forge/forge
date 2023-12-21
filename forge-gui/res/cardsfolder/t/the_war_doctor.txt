@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Legendary Creature Time Lord Doctor
 PT:3/5
 T:Mode$ PhaseOutAll | ValidCards$ Permanent.phasedOutOther | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more other permanents phase out and whenever one or more other cards are put into exile from anywhere, put a time counter on CARDNAME.
-T:Mode$ ChangesZoneAll | ValidCards$ Card.Other | Origin$ Any | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever one or more other permanents phase out and whenever one or more other cards are put into exile from anywhere, put a time counter on CARDNAME.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.Other+nonToken+nonCopiedSpell | Origin$ Any | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever one or more other permanents phase out and whenever one or more other cards are put into exile from anywhere, put a time counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ TIME
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to the number of time counters on it to any target. If a creature dealt damage this way would die this turn, exile it instead.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ Count$CardCounters.TIME | ReplaceDyingDefined$ Targeted.Creature
