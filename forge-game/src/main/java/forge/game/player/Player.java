@@ -1162,38 +1162,36 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final CardCollection topN = getTopXCardsFromLibrary(num);
 
-        if (topN.isEmpty()) {
-            return;
-        }
+        if (!topN.isEmpty()) {
+            final ImmutablePair<CardCollection, CardCollection> lists = getController().arrangeForSurveil(topN);
+            final CardCollection toTop = lists.getLeft();
+            final CardCollection toGrave = lists.getRight();
 
-        final ImmutablePair<CardCollection, CardCollection> lists = getController().arrangeForSurveil(topN);
-        final CardCollection toTop = lists.getLeft();
-        final CardCollection toGrave = lists.getRight();
+            int numToGrave = 0;
+            int numToTop = 0;
 
-        int numToGrave = 0;
-        int numToTop = 0;
-
-        if (toGrave != null) {
-            for (Card c : toGrave) {
-                ZoneType oZone = c.getZone().getZoneType();
-                Card moved = getGame().getAction().moveToGraveyard(c, cause, params);
-                table.put(oZone, moved.getZone().getZoneType(), moved);
-                numToGrave++;
+            if (toGrave != null) {
+                for (Card c : toGrave) {
+                    ZoneType oZone = c.getZone().getZoneType();
+                    Card moved = getGame().getAction().moveToGraveyard(c, cause, params);
+                    table.put(oZone, moved.getZone().getZoneType(), moved);
+                    numToGrave++;
+                }
             }
-        }
 
-        if (toTop != null) {
-            Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
-            for (Card c : toTop) {
-                getGame().getAction().moveToLibrary(c, cause, params);
-                numToTop++;
+            if (toTop != null) {
+                Collections.reverse(toTop); // the last card in list will become topmost in library, have to revert thus.
+                for (Card c : toTop) {
+                    getGame().getAction().moveToLibrary(c, cause, params);
+                    numToTop++;
+                }
+                if (cause.hasParam("RememberKept")) {
+                    cause.getHostCard().addRemembered(toTop);
+                }
             }
-            if (cause.hasParam("RememberKept")) {
-                cause.getHostCard().addRemembered(toTop);
-            }
-        }
 
-        getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
+            getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
+        }
 
         surveilThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
