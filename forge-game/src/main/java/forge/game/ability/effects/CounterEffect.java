@@ -305,6 +305,9 @@ public class CounterEffect extends SpellAbilityEffect {
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);
         } else if (destination.equals("Battlefield")) {
+            // card is no longer cast
+            c.setCastSA(null);
+            c.setCastFrom(null);
             if (tgtSA instanceof SpellPermanent) {
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
