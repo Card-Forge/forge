@@ -3281,6 +3281,8 @@ public class CardFactoryUtil {
             sb.append(newSA.getCostDescription());
             sb.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(sb.toString());
+            // need to store them for additional copies
+            newSA.getOriginalMapParams().putAll(newSA.getMapParams());
 
             newSA.setIntrinsic(intrinsic);
             newSA.setAlternativeCost(AlternativeCost.Overload);
