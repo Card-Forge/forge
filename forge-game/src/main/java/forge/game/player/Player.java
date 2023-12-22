@@ -2314,7 +2314,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addInvestigatedThisTurn() {
         investigatedThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.Num, investigatedThisTurn);
+        runParams.put(AbilityKey.FirstTime, investigatedThisTurn == 1);
         game.getTriggerHandler().runTrigger(TriggerType.Investigated, runParams, false);
     }
     public final void resetInvestigatedThisTurn() {
