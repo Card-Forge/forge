@@ -3266,6 +3266,9 @@ public class CardFactoryUtil {
                 if (!tgt.getZone().contains(ZoneType.Battlefield)) {
                     zoneDef = StringUtils.join(tgt.getZone(), ",");
                 }
+                if (newSA.hasParam("TargetType")) {
+                    defined = defined.replaceAll("Card", newSA.getParam("TargetType"));
+                }
                 newSA.putParam("Defined", "Valid" + zoneDef + " " + defined);
             }
             newSA.setTargetRestrictions(null);
@@ -3275,6 +3278,11 @@ public class CardFactoryUtil {
             }
             newSA.putParam("PrecostDesc", "Overload");
             newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+
+            // makes new StackDescription
+            String stackD = newSA.getDescription().replaceAll("Target", "Each")
+                .replaceAll("target", "each");
+            newSA.putParam("StackDescription", stackD);
 
             // makes new SpellDescription
             final StringBuilder sb = new StringBuilder();
