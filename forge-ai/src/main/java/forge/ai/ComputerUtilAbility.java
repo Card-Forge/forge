@@ -257,7 +257,16 @@ public class ComputerUtilAbility {
 
             // deprioritize planar die roll marked with AIRollPlanarDieParams:LowPriority$ True
             if (ApiType.RollPlanarDice == a.getApi() || ApiType.RollPlanarDice == b.getApi()) {
-                for (Card c : a.getGame().getActivePlanes()) {
+                Card hostCardForGame = a.getHostCard();
+                if (hostCardForGame == null) {
+                    if (b.getHostCard() != null) {
+                        hostCardForGame = b.getHostCard();
+                    } else {
+                        return 0; // fallback if neither SA have a host card somehow
+                    }
+                }
+                Game game = hostCardForGame.getGame();
+                for (Card c : game.getActivePlanes()) {
                     if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
                         if (ApiType.RollPlanarDice == a.getApi()) {
                             return 1;
