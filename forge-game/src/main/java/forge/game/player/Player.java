@@ -3210,39 +3210,40 @@ public class Player extends GameEntity implements Comparable<Player> {
         return eff;
     }
 
-    public Card createPlanechaseEffects(Game game) {
-        final String name = "Planechase Effect";
-        final Card eff = new Card(game.nextCardId(), game){
-            @Override
-            public Card getCardForUi() {
-                List<Card> currentPlanes = getOwner().getGame().getActivePlanes();
-                return (currentPlanes == null || currentPlanes.size() == 0) ? null : currentPlanes.get(0); //use current plane for the sake of UI display logic
-            }
-        };
+    public void createPlanechaseEffects(Game game) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        final String name = "Planar Dice";
+        final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setOwner(this);
         eff.setImmutable(true);
+        String image = ImageKeys.getTokenKey("planechase");
+        eff.setImageKey(image);
 
-        if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
-            String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Secondary$ True | " +
-                    "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
+        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Secondary$ True | " +
+                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
+        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
+        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, eff));
+        eff.addTrigger(planesWalkTrigger);
 
-            String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
+        String chaosTrig = "Mode$ PlanarDice | ValidPlayer$ You | Result$ Chaos | TriggerZones$ Command | Static$ True";
+        String rolledChaos = "DB$ ChaosEnsues";
+        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, eff, true);
+        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, eff));
+        eff.addTrigger(chaosTrigger);
 
-            Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
-            planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, eff));
-            eff.addTrigger(planesWalkTrigger);
-
-            String chaosTrig = "Mode$ PlanarDice | ValidPlayer$ You | Result$ Chaos | TriggerZones$ Command | Static$ True";
-
-            String rolledChaos = "DB$ ChaosEnsues";
-
-            Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, eff, true);
-            chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, eff));
-            eff.addTrigger(chaosTrigger);
-        }
-        return eff;
+        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
+                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
+                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
+        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, eff);
+        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
+        eff.addSpellAbility(planarRoll);
+        
+        eff.updateStateForView();
+        com.add(eff);
+        this.updateZoneForView(com);
     }
 
     public void createTheRing(Card host) {

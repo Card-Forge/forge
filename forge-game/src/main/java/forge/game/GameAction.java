@@ -2098,7 +2098,7 @@ public class GameAction {
             if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
                 first.initPlane();
                 for (final Player p1 : game.getPlayers()) {
-                    p1.getZone(ZoneType.Command).add(p1.createPlanechaseEffects(game));
+                    p1.createPlanechaseEffects(game);
                 }
             }
 
