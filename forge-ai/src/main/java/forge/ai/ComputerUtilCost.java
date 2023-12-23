@@ -522,7 +522,7 @@ public class ComputerUtilCost {
             sa.setActivatingPlayer(player, true); // complaints on NPE had came before this line was added.
         }
 
-        final boolean cannotBeCountered = !sa.getHostCard().isCounterableBy(null);
+        final boolean cannotBeCountered = sa.isSpell() && !sa.getHostCard().isCounterableBy(null);
 
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;

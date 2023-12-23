@@ -7692,10 +7692,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isCounterableBy(final SpellAbility sa) {
-        if (hasKeyword("This spell can't be countered.")) {
-            return false;
-        }
-
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Cause, sa);
         List<ReplacementEffect> list = getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
