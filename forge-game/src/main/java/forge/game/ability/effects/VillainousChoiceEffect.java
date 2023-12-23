@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -16,9 +17,13 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
         final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         final int amount = extractAmount(sa);
         String prompt = sa.getParamOrDefault("ChoicePrompt", "Villainous Choice by " + sa.getActivatingPlayer());
+        Card source = sa.getHostCard();
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
             int choiceAmount = p.getAdditionalVillainousChoices() + 1;
+            // Is this linear or exponential growth? @Hanmac gonna look into making this a replacement ability?
+            //int choiceAmount = 2 ^ p.getAdditionalVillainousChoices();
+            source.addRemembered(p);
 
             List<SpellAbility> saToRemove = Lists.newArrayList();
 
@@ -39,6 +44,7 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
             for (SpellAbility chosenSA : chosenSAs) {
                 AbilityUtils.resolve(chosenSA);
             }
+            source.removeRemembered(p);
         }
     }
 }

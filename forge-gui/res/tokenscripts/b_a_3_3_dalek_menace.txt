@@ -1,0 +1,7 @@
+Name:Dalek
+ManaCost:no cost
+Types:Artifact Creature Dalek
+PT:3/3
+Colors:black
+K:Menace
+Oracle:Menahce
