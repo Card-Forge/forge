@@ -245,28 +245,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * isCounterableBy.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            the sa
-     * @return a boolean.
-     */
-    public static boolean isCounterableBy(final Card c, final SpellAbility sa) {
-        if (c.hasKeyword("This spell can't be countered.")) {
-            return false;
-        }
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
-        repParams.put(AbilityKey.Cause, sa);
-        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return list.isEmpty();
-    }
-
-    /**
-     * <p>
      * countOccurrences.
      * </p>
      *
