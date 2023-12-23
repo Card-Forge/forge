@@ -53,7 +53,7 @@ public final class AbilityFactory {
     public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
             "BidSubAbility", // BidLifeEffect
-            "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", // ChooseNumber
+            "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", "GuessCorrect", "GuessWrong", // ChooseNumber
             "HeadsSubAbility", "TailsSubAbility", "LoseSubAbility", // FlipCoin
             "TrueSubAbility", "FalseSubAbility", // Branch
             "ChosenPile", "UnchosenPile", // MultiplePiles & TwoPiles
@@ -397,6 +397,9 @@ public final class AbilityFactory {
         }
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
+        }
+        if (mapParams.containsKey("TargetsWithEqualToughness")) {
+            abTgt.setEqualToughness(true);
         }
         if (mapParams.containsKey("TargetsAtRandom")) {
             abTgt.setRandomTarget(true);

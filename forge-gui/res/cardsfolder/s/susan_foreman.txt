@@ -1,0 +1,10 @@
+Name:Susan Foreman
+ManaCost:1 G
+Types:Legendary Creature Time Lord
+PT:1/1
+R:Event$ Planeswalk | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DBPlanarScry | Description$ If you would planeswalk, instead look at the top two cards of your planar deck, put one on the bottom of your planar deck and the other on top, then planeswalk.
+SVar:DBPlanarScry:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | SourceZone$ PlanarDeck | DestinationZone$ PlanarDeck | DestinationZone2$ PlanarDeck | LibraryPosition$ -1 | LibraryPosition2$ 0 | ChangeValid$ Plane,Phenomenon | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+K:Doctor's companion
+Oracle:If you would planeswalk, instead look at the top two cards of your planar deck, put one on the bottom of your planar deck and the other on top, then planeswalk.\n{T}: Add {G}.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

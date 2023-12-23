@@ -1,0 +1,11 @@
+Name:The Fourteenth Doctor
+ManaCost:RG W U
+Types:Legendary Creature Time Lord Doctor
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When you cast this spell, reveal the top fourteen cards of your library. Put all Doctor cards revealed this way into your graveyard and the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 14 | Reveal$ True | ChangeNum$ All | ChangeValid$ Doctor | DestinationZone$ Graveyard | RestRandomOrder$ True
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Doctor.YouOwn+ThisTurnEnteredFrom_Library | ChoiceZone$ Graveyard | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a Doctor card in your graveyard that was put there from your library this turn. If you do, it gains haste until end of turn.
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Doctor
+Oracle:When you cast this spell, reveal the top fourteen cards of your library. Put all Doctor cards revealed this way into your graveyard and the rest on the bottom of your library in a random order.\nYou may have The Fourteenth Doctor enter the battlefield as a copy of a Doctor card in your graveyard that was put there from your library this turn. If you do, it gains haste until end of turn.

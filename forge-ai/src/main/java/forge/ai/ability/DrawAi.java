@@ -132,18 +132,6 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph) {
-        String logic = sa.getParamOrDefault("AILogic", "");
-
-        if (logic.startsWith("LifeLessThan.")) {
-            // LifeLessThan logic presupposes activation as soon as possible in an
-            // attempt to save the AI from dying
-            return true;
-        } else if (logic.equals("AtOppEOT")) {
-            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
-        } else if (logic.equals("RespondToOwnActivation")) {
-            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
-        }
-
         // Sacrificing a creature in response to something dangerous is generally good in any phase
         boolean isSacCost = false;
         if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
@@ -169,7 +157,17 @@ public class DrawAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(Player ai, SpellAbility sa, PhaseHandler ph, String logic) {
-        if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
+        if (logic.equals("VeilOfSummer")) {
+            return SpecialCardAi.VeilOfSummer.consider(ai, sa); // this is more of a counterspell than a true draw card, so it's timed by the card-specific logic
+        } else if (logic.startsWith("LifeLessThan.")) {
+            // LifeLessThan logic presupposes activation as soon as possible in an
+            // attempt to save the AI from dying
+            return true;
+        } else if (logic.equals("AtOppEOT")) {
+            return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
+        } else if (logic.equals("RespondToOwnActivation")) {
+            return !ai.getGame().getStack().isEmpty() && ai.getGame().getStack().peekAbility().getHostCard().equals(sa.getHostCard());
+        } else if ((!ph.getNextTurn().equals(ai) || ph.getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1 && !ComputerUtil.activateForCost(sa, ai)
                 && !"YawgmothsBargain".equals(logic)) {

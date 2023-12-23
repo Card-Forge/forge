@@ -1085,6 +1085,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Outlast);
     }
 
+    public boolean isCraft() {
+        return hasParam("Craft");
+    }
     public boolean isEquip() {
         return hasParam("Equip");
     }
@@ -1396,6 +1399,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
                 if (soFar > tr.getMaxTotalPower(getHostCard(), this)) {
                     return false;
+                }
+            }
+
+            if (tr.isEqualToughness() && entity instanceof Card) {
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
+                        return false;
+                    }
                 }
             }
 

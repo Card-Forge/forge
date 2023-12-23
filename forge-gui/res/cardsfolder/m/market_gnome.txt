@@ -1,0 +1,11 @@
+Name:Market Gnome
+ManaCost:W
+Types:Artifact Creature Gnome
+PT:0/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, you gain 1 life and draw a card.
+T:Mode$ Exiled | Origin$ Battlefield | WhileKeyword$ Ability.Craft | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME is exiled from the battlefield while you're activating a craft ability, you gain 1 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+SVar:SacMe:2
+Oracle:When Market Gnome dies, you gain 1 life and draw a card.\nWhen Market Gnome is exiled from the battlefield while you're activating a craft ability, you gain 1 life and draw a card.

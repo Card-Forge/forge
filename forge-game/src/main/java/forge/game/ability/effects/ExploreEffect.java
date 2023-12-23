@@ -2,12 +2,14 @@ package forge.game.ability.effects;
 
 import com.google.common.collect.Maps;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
@@ -55,7 +57,11 @@ public class ExploreEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        for (final Card c : getTargetCards(sa)) {
+
+        CardCollectionView tgts = GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa);
+
+        for (final Card c : tgts) {
+            final Player pl = c.getController();
             for (int i = 0; i < amount; i++) {
                 GameEntityCounterTable table = new GameEntityCounterTable();
                 final CardZoneTable triggerList = new CardZoneTable();
@@ -67,7 +73,6 @@ public class ExploreEffect extends SpellAbilityEffect {
 
                 // revealed land card
                 boolean revealedLand = false;
-                final Player pl = c.getController();
                 CardCollection top = pl.getTopXCardsFromLibrary(1);
                 if (!top.isEmpty()) {
                     Card movedCard = null;
@@ -101,6 +106,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
 
                 // a creature does explore even if it isn't on the battlefield anymore
+                pl.addExploredThisTurn();
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                 if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
                 game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);

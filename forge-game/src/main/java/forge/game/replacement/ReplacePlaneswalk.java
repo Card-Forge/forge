@@ -14,6 +14,9 @@ public class ReplacePlaneswalk extends ReplacementEffect {
 
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+            return false;
+        }
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }

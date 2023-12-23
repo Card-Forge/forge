@@ -10,6 +10,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -24,6 +25,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        // up to X targets and chose 0 or similar situations
+        if (tgtCards.isEmpty()) return sa.getParamOrDefault("SpellDescription", "");
         final boolean justOne = tgtCards.size() == 1;
 
         sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));
@@ -59,7 +62,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
-        CardZoneTable table = new CardZoneTable();
+        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
             if (!tgtC.isInPlay()) {

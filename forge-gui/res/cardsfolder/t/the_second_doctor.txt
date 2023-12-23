@@ -1,0 +1,11 @@
+Name:The Second Doctor
+ManaCost:2 W U
+Types:Legendary Creature Time Lord Doctor
+PT:2/4
+S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ Unlimited | Description$ Players have no maximum hand size.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ How Civil of You — At the beginning of your end step, each player may draw a card. Each opponent who does can't attack you or permanents you control during their next turn.
+SVar:TrigDraw:DB$ Draw | OptionalDecider$ True | Defined$ Player | RememberDrawn$ True | NumCards$ 1 | SubAbility$ DBEffect 
+SVar:DBEffect:DB$ Effect | EffectOwner$ RememberedOwner.Opponent | RememberObjects$ You | StaticAbilities$ STCantAttack | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered,Permanent.RememberedPlayerCtrl | Description$ Each opponent who does can't attack you or permanents you control during their next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Players have no maximum hand size.\nHow Civil of You — At the beginning of your end step, each player may draw a card. Each opponent who does can't attack you or permanents you control during their next turn.

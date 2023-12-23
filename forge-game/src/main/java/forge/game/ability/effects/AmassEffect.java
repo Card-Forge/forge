@@ -75,7 +75,6 @@ public class AmassEffect extends TokenEffectBase {
             makeTokenTable(makeTokenTableInternal(activator, result, 1), false, triggerList, combatChanged, sa);
 
             triggerList.triggerChangesZoneAll(game, sa);
-            triggerList.clear();
 
             game.fireEvent(new GameEventTokenCreated());
 

@@ -1,0 +1,17 @@
+Name:Starving Revenant
+ManaCost:2 B B
+Types:Creature Spirit Horror
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 2. Then for each card you put on top of your library, you draw a card and you lose 3 life.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2 | RememberKept$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:Y:SVar$X/Times.3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | CheckSVar$ Z | SVarCompare$ GE8 | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Descend 8 — Whenever you draw a card, if there are eight or more permanent cards in your graveyard, target opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:Z:Count$ValidGraveyard Permanent.YouOwn
+DeckHas:Ability$LifeGain|Graveyard
+Oracle:When Starving Revenant enters the battlefield, surveil 2. Then for each card you put on top of your library, you draw a card and you lose 3 life.\nDescend 8 — Whenever you draw a card, if there are eight or more permanent cards in your graveyard, target opponent loses 1 life and you gain 1 life.

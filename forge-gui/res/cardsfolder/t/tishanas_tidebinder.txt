@@ -1,0 +1,10 @@
+Name:Tishana's Tidebinder
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounterAbility | TriggerDescription$ When CARDNAME enters the battlefield, counter up to one target activated or triggered ability. If an ability of an artifact, creature, or planeswalker is countered this way, that permanent loses all abilities for as long as CARDNAME remains on the battlefield. (Mana abilities can't be targeted.)
+SVar:TrigCounterAbility:DB$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Choose target ability | RememberCountered$ True | ValidTgts$ Card,Emblem | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STLoseAB | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Artifact+inZoneBattlefield,Card.Creature+inZoneBattlefield,Card.Planeswalker+inZoneBattlefield | Duration$ UntilHostLeavesPlay
+SVar:STLoseAB:Mode$ Continuous | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | EffectZone$ Command | AffectedZone$ Battlefield | Description$ This permanent loses all abilities for as long as EFFECTSOURCE remains on the battlefield.
+Oracle:Flash\nWhen Tishana's Tidebinder enters the battlefield, counter up to one target activated or triggered ability. If an ability of an artifact, creature, or planeswalker is countered this way, that permanent loses all abilities for as long as Tishana's Tidebinder remains on the battlefield. (Mana abilities can't be targeted.)

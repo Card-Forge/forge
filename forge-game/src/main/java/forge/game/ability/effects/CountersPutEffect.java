@@ -250,11 +250,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         sa.hasParam("ChoiceOptional"), params));
             }
         } else {
-            if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
-            } else {
-                tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
-            }
+            tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
         }
 
         int counterRemain = counterAmount;

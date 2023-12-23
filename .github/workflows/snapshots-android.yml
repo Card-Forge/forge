@@ -1,0 +1,126 @@
+name: Create Android Snapshot
+
+on:
+  workflow_dispatch:
+      inputs:
+        debug_enabled:
+          type: boolean
+          description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+          required: false
+          default: false
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '00 19 * * *'
+          
+
+jobs:
+  build:
+    if: github.repository_owner == 'Card-Forge'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: cardforge-repo
+          server-username: ${{ secrets.FTP_USERNAME }}
+          server-password: ${{ secrets.FTP_PASSWORD }}
+          settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+      - name: Install old maven (3.6.3)
+        run: |
+          curl -o apache-maven-3.6.3-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+          tar xf apache-maven-3.6.3-bin.tar.gz
+          export PATH=$PWD/apache-maven-3.6.3/bin:$PATH
+          export MAVEN_HOME=$PWD/apache-maven-3.6.3
+          mvn --version
+          
+      - name: Install android SDK
+        uses: maxim-lobanov/setup-android-tools@v1
+        with:
+          packages: |
+            platforms;android-26
+            build-tools;30.0.3
+
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: |
+          command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+        
+      - name: Extract Android keystore
+        run: |
+          ls
+          cd forge-gui-android
+          echo "${{ secrets.FORGE_KEYSTORE }}" > forge.keystore.asc
+          gpg -d --passphrase "${{ secrets.FORGE_KEYSTORE_PASSPHRASE }}" --batch forge.keystore.asc > forge.keystore
+          cd -
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Install Android maven plugin
+        run: |
+          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.1
+          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.1
+          curl -L -o android-maven-plugin-4.6.1.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.jar
+          curl -L -o android-maven-plugin-4.6.1.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.pom
+          #mvn install:install-file -Dfile=android-maven-plugin-4.6.1.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.1 -Dpackaging=jar
+          cd -
+          mvn install -Dmaven.test.skip=true
+          mvn dependency:tree
+          
+      - name: Build/Install/Publish to GitHub Packages Apache Maven
+        run: |
+          export _JAVA_OPTIONS="-Xmx2g"
+          d=$(date +%m-%d)
+          # Replace date in forge-gui-mobile/src/forge/Forge.java
+          sed -i -e "s/-SNAPSHOT/-SNAPSHOT-${d}/g" forge-gui-mobile/src/forge/Forge.java
+          mvn -U -B -P android-release-build,android-release-sign install -e -Dsign.keystore=forge.keystore -Dsign.alias=Forge -Dsign.storepass=${{ secrets.SIGN_STORE_PASS }} -Dsign.keypass=${{ secrets.SIGN_STORE_PASS }}  -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=30.0.3 -Dmaven.test.skip=true
+          mkdir -p  forge-gui-android/target/upload
+          mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
+          mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/
+          cd forge-gui-android/target/upload/
+          # Get the first APK file in the folder
+          ls
+          apk_file=$(find . -maxdepth 1 -type f -name '*.apk' -print -quit)
+          
+          if [ -n "$apk_file" ]; then
+              version=$(echo "$apk_file" | grep -oP 'forge-android-\K\d+\.\d+\.\d+-SNAPSHOT' | sed 's/-signed-aligned.apk//')
+              echo "APK File: $apk_file"
+              echo "Version: $version"
+              mv *.apk "forge-android-$version-$d-signed-aligned.apk"
+
+              echo "$version-$d" > version.txt
+          else
+              echo "No .apk files found in the specified folder."
+          fi
+
+          cd -
+        
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.cardforge.org
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: forge-gui-android/target/upload/
+          server-dir: downloads/dailysnapshots/
+          state-name: .ftp-deploy-android-sync-state.json

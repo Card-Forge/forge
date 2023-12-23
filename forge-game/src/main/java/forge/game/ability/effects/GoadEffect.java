@@ -32,6 +32,7 @@ public class GoadEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         final long timestamp = game.getNextTimestamp();
         final boolean remember = sa.hasParam("RememberGoaded");
+        final String duration = sa.getParamOrDefault("Duration", "UntilYourNextTurn");
 
         for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             // only goad things on the battlefield
@@ -43,8 +44,8 @@ public class GoadEffect extends SpellAbilityEffect {
             tgtC.addGoad(timestamp, player);
 
             // currently, only Life of the Party uses Duration$ – Duration$ Permanent
-            if (!sa.hasParam("Duration")) {
-                final GameCommand untilEOT = new GameCommand() {
+            if (!duration.equals("Permanent")) {
+                final GameCommand until = new GameCommand() {
                     private static final long serialVersionUID = -1731759226844770852L;
 
                     @Override
@@ -53,7 +54,7 @@ public class GoadEffect extends SpellAbilityEffect {
                     }
                 };
 
-                game.getCleanup().addUntil(player, untilEOT);
+                addUntilCommand(sa, until, duration, player);
             }
 
             if (remember && tgtC.isGoaded()) {

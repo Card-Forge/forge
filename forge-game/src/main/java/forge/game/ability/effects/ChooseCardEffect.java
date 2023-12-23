@@ -45,7 +45,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
         sb.append(Lang.nounWithNumeralExceptOne(numCards, desc));
         if (sa.hasParam("FromDesc")) {
-            sb.append(" ").append(sa.getParam("FromDesc"));
+            sb.append(" from ").append(sa.getParam("FromDesc"));
+        } else if (sa.hasParam("ChoiceZone") && sa.getParam("ChoiceZone").equals("Hand")) {
+            sb.append(" in their hand");
         }
         sb.append(".");
 

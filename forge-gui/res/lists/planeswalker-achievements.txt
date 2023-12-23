@@ -153,6 +153,7 @@ Ob Nixilis, the Adversary|Ob Nixilis's Pact|The price is, let's see... everythin
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
 Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.
+Quintorius Kand|Quintorius's Archeological Dig|The past is still alive.
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.

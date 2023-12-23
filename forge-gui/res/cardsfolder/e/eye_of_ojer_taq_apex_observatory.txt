@@ -1,0 +1,24 @@
+Name:Eye of Ojer Taq
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+K:Craft:6 ExileCtrlOrGrave<2/Permanent.Other+withSharedCardType/permanent>:two that share a card type:the two
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Mill|Graveyard|Token
+AI:RemoveDeck:All
+Oracle:{T}: Add one mana of any color.\nCraft with two that share a card type {6} ({6}, Exile this artifact, Exile the two from among other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Apex Observatory
+ManaCost:no cost
+Types:Artifact
+K:ETBReplacement:Other:Tap
+SVar:Tap:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBChooseType | SpellDescription$ CARDNAME enters the battlefield tapped. As it enters, choose a card type shared among two exiled cards used to craft it.
+SVar:DBChooseType:DB$ ChooseType | Type$ Shared | TypesFromDefined$ ExiledWith | AILogic$ MostProminentComputerControlsOrOwns
+A:AB$ Effect | Cost$ T | StaticAbilities$ Play | Triggers$ CastTrig | SpellDescription$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayDontGrantZonePermissions$ True | EffectZone$ Command | Affected$ Card.ChosenType | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card.ChosenType | ValidActivatingPlayer$ You | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Apex Observatory enters the battlefield tapped. As it enters, choose a card type shared among two exiled cards used to craft it.\n{T}: The next spell you cast this turn of the chosen type can be cast without paying its mana cost.

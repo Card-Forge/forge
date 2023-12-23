@@ -1,0 +1,11 @@
+Name:Kate Stewart
+ManaCost:1 U R W
+Types:Legendary Creature Human Scientist
+PT:3/3
+T:Mode$ CounterAddedOnce | ValidCard$ Permanent.YouCtrl+inRealZoneBattlefield | TriggerZones$ Battlefield | CounterType$ TIME | Execute$ TrigToken | TriggerDescription$ Whenever you put one or more time counters on a permanent you control, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, you may pay {8}. If you do, attacking creatures get +X/+X until end of turn, where X is the number of time counters among permanents you control.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.attacking | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Permanent.YouCtrl$CardCounters.TIME
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever you put one or more time counters on a permanent you control, create a 1/1 white Soldier creature token.\nWhenever Kate Stewart attacks, you may pay {8}. If you do, attacking creatures get +X/+X until end of turn, where X is the number of time counters among permanents you control.

@@ -1,0 +1,9 @@
+Name:Misleading Signpost
+ManaCost:2 U
+Types:Artifact
+K:Flash
+T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeAttacker | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)
+SVar:TrigChangeAttacker:DB$ ChangeCombatants | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature
+AI:RemoveDeck:All
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:Flash\nWhen Misleading Signpost enters the battlefield during the declare attackers step, you may reselect which player or permanent target attacking creature is attacking. (It can't attack its controller or their permanents.)\n{T}: Add {U}.

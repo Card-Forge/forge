@@ -1,0 +1,12 @@
+Name:Zoyowa Lava-Tongue
+ManaCost:B R
+Types:Legendary Creature Goblin Warlock
+PT:2/2
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigMaySacorDiscard | TriggerDescription$ At the beginning of your end step, if you descended this turn, each opponent may discard a card or sacrifice a permanent. CARDNAME deals 3 damage to each opponent who didn't. (You descended if a permanent card was put into your graveyard from anywhere.)
+SVar:TrigMaySacorDiscard:DB$ RepeatEach | RepeatSubAbility$ DBGenericChoice | RepeatPlayers$ Opponent | DamageMap$ True
+SVar:DBGenericChoice:DB$ GenericChoice | Choices$ PaySac,PayDiscard | Defined$ Remembered | AILogic$ PayUnlessCost
+SVar:PaySac:DB$ DealDamage | NumDmg$ 3 | Defined$ Remembered | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ Remembered | UnlessAI$ LifeLE2 | SpellDescription$ CARDNAME deals 3 damage to you unless you sacrifice a permanent a card.
+SVar:PayDiscard:DB$ DealDamage | NumDmg$ 3 | Defined$ Remembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | UnlessAI$ LifeLE2 | SpellDescription$ CARDNAME deals 3 damage to you unless you discard a card.
+DeckHas:Ability$Discard|Sacrifice
+Oracle:Deathtouch\nAt the beginning of your end step, if you descended this turn, each opponent may discard a card or sacrifice a permanent. Zoyowa Lava-Tongue deals 3 damage to each opponent who didn't. (You descended if a permanent card was put into your graveyard from anywhere.)

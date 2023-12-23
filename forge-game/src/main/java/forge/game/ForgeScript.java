@@ -23,6 +23,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,6 +58,19 @@ public class ForgeScript {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return property.startsWith("non") != colors.isMulticolor();
+        } else if (property.contains("EnemyColor")) {
+            if (property.endsWith("Source") && isColorlessSource)
+                return false;
+            if (colors.countColors() != 2) {
+                return false;
+            }
+            // i want only enemy colors
+            for (final byte pair : Arrays.copyOfRange(MagicColor.COLORPAIR, 5, 10)) {
+                if (colors.hasExactlyColor(pair)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.contains("AllColors")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
@@ -201,6 +215,8 @@ public class ForgeScript {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
+        } else if (property.equals("Craft")) {
+            return sa.isCraft();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {

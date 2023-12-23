@@ -1,0 +1,23 @@
+Name:Oteclan Landmark
+ManaCost:W
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+K:Craft:2 W ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard
+Oracle:When Oteclan Landmark enters the battlefield, scry 2.\nCraft with artifact {2}{W} ({2}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Oteclan Levitator
+ManaCost:no cost
+Colors:white
+Types:Artifact Creature Golem
+PT:1/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target attacking creature without flying gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | KW$ Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Oteclan Levitator attacks, target attacking creature without flying gains flying until end of turn.

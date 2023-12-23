@@ -331,7 +331,7 @@ public class CostPayment extends ManaConversionMatrix {
 
     public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
         final Game game = sa.getHostCard().getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         if (sa.isOffering()) {
             if (sa.getSacrificedAsOffering() == null) {
                 return false;

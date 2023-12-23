@@ -3,6 +3,6 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Blue:Protection from blue:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from blue. This effect doesn't remove CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.Blue:blue:Card.CardUID_HostCardUID | Description$ Enchanted creature has protection from blue. This effect doesn't remove CARDNAME.
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature has protection from blue. This effect doesn't remove Blue Ward.

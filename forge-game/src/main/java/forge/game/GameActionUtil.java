@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -115,7 +116,8 @@ public final class GameActionUtil {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes
-                if ((!sa.isBasicSpell() || (sa.costHasManaX() && !sa.getPayCosts().getCostMana().canXbe0())) && o.getPayManaCost() == PayManaCost.NO) {
+                if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
+                        && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
                     continue;
                 }
                 final Card host = o.getHost();
@@ -744,6 +746,7 @@ public final class GameActionUtil {
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setLayer(ReplacementLayer.Other);
         re.setOverridingAbility(sa);
+        re.setActiveZone(EnumSet.of(ZoneType.Command));
 
         eff.addReplacementEffect(re);
 

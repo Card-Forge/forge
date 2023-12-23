@@ -1,0 +1,5 @@
+Name:Not on My Watch
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
+Oracle:Exile target attacking creature.

@@ -27,11 +27,13 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -128,6 +130,9 @@ public abstract class Trigger extends TriggerReplacementBase {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
                 desc = TextUtil.fastReplace(desc,"CARDNAME", CardTranslation.getTranslatedName(currentName));
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+                if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getName());
+                }
             }
             if (getHostCard().getEffectSource() != null) {
                 if (active)
@@ -623,4 +628,19 @@ public abstract class Trigger extends TriggerReplacementBase {
         super.setOverridingAbility(overridingAbility0);
         overridingAbility0.setTrigger(this);
     }
+
+    boolean whileKeywordCheck(final String param, final Map<AbilityKey, Object> runParams) {
+        IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+        if (currentPayment != null) {
+            if (matchesValidParam(param, currentPayment.getPayment().getAbility())) return true;
+        }
+
+        CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
+        for (IndividualCostPaymentInstance individual : stack) {
+            if (matchesValidParam(param, individual.getPayment().getAbility())) return true;
+        }
+
+        return false;
+    }
+
 }

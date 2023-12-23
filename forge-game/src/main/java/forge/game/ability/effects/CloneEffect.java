@@ -152,6 +152,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             if (!pumpKeywords.isEmpty()) {
                 tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, 0);
+                TokenEffectBase.addPumpUntil(sa, tgtCard, ts);
             }
 
             tgtCard.updateStateForView();
@@ -201,5 +202,4 @@ public class CloneEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCardStatsChanged(tgtCard));
         }
     }
-
 }

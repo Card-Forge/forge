@@ -68,7 +68,10 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -1088,7 +1091,6 @@ public class AiController {
                     return discards;
                 }
             }
-
         }
 
         // look for good discards
@@ -1096,9 +1098,7 @@ public class AiController {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
                 for (Card c : validCards) {
-                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
-                            + " put it onto the battlefield instead of putting it into your graveyard.")
-                            || !c.getSVar("DiscardMeByOpp").isEmpty()) {
+                    if (c.hasSVar("DiscardMeByOpp")) {
                         prefCard = c;
                         break;
                     }
@@ -1619,12 +1619,20 @@ public class AiController {
                     continue;
                 }
             }
-            //living end AI decks
+            // living end AI decks
+            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player)) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                        aiPlayDecision = AiPlayDecision.WillPlay;
+                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                && !player.cantLoseForZeroOrLessLife()
+                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                            aiPlayDecision = AiPlayDecision.CantAfford;
+                        } else {
+                            aiPlayDecision = AiPlayDecision.WillPlay;
+                        }
+                    }
                 } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
                     if (isLifeInDanger) { //needs more tune up for certain conditions
                         aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
@@ -1869,6 +1877,8 @@ public class AiController {
                 } else {
                     return options.get(0);
                 }
+            case ChooseNumber:
+                return Aggregates.random(options);
             default:
                 return options.get(0);
         }

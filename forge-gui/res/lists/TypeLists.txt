@@ -73,6 +73,7 @@ Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dalek:Daleks
+Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -310,6 +311,7 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Chorus
 Lesson
 Trap
 [EnchantmentTypes]
@@ -325,6 +327,7 @@ Shrine
 Shard
 [ArtifactTypes]
 Blood
+Bobblehead:Bobbleheads
 Clue:Clues
 Contraption
 Equipment
@@ -332,6 +335,7 @@ Food
 Fortification
 Gold
 Incubator:Incubators
+Junk
 Key:Keys
 Map
 Powerstone
@@ -390,6 +394,7 @@ Niko
 Nissa
 Nixilis
 Oko
+Quintorius
 Ral
 Rowan
 Saheeli
@@ -435,6 +440,7 @@ Belenon
 Bolas's Meditation Realm
 Capenna
 Cridhe
+Darillium
 Dominaria
 Earth
 Echoir
@@ -454,6 +460,7 @@ Ixalan
 Kaladesh
 Kaldheim
 Kamigawa
+Kandoka
 Karsus
 Kephalai
 Kinshala
@@ -467,6 +474,7 @@ Mercadia
 Mirrodin
 Moag
 Mongseng
+Moon
 Muraganda
 Necros
 New Earth

@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_a_myr | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap X untapped Myr you control. If you do, CARDNAME gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.
 SVar:TrigPump:AB$ Pump | Cost$ tapXType<X/Myr> | Defined$ Self | NumAtt$ +X | NumDef$ +0 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TriggeredDefender.Player & TriggeredDefender.Planeswalker | NumDmg$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
 Oracle:When Myr Battlesphere enters the battlefield, create four 1/1 colorless Myr artifact creature tokens.\nWhenever Myr Battlesphere attacks, you may tap X untapped Myr you control. If you do, Myr Battlesphere gets +X/+0 until end of turn and deals X damage to the player or planeswalker it's attacking.

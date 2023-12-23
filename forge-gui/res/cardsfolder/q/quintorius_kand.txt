@@ -1,0 +1,18 @@
+Name:Quintorius Kand
+ManaCost:3 R W
+Types:Legendary Planeswalker Quintorius
+Loyalty:4
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, CARDNAME deals 2 damage to each opponent and you gain 2 life.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ rw_3_2_spirit | SpellDescription$ Create a 3/2 red and white Spirit creature token.
+A:AB$ Discover | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Num$ 4 | SpellDescription$ Discover 4.
+A:AB$ ChangeZone | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ Yard | TgtPrompt$ Select any number of target cards in your graveyard | ValidTgts$ Card.YouOwn | RememberChanged$ True | SubAbility$ DBMana | StackDescription$ SpellDescription | SpellDescription$ Exile any number of target cards from your graveyard. Add {R} for each card exiled this way. You may play those cards this turn.
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STMayPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STMayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Yard:Count$InYourYard
+SVar:X:Remembered$Amount
+DeckHas:Ability$LifeGain|Token & Type$Spirit
+Oracle:Whenever you cast a spell from exile, Quintorius Kand deals 2 damage to each opponent and you gain 2 life.\n[+1]: Create a 3/2 red and white Spirit creature token.\n[−3]: Discover 4.\n[−6]: Exile any number of target cards from your graveyard. Add {R} for each card exiled this way. You may play those cards this turn.

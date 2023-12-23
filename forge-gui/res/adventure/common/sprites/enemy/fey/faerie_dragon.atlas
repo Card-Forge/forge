@@ -1,0 +1,92 @@
+faerie_dragon.png
+size: 512,384
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 93, 95
+  size: 16, 16      
+Idle 
+  xy: 8, 23
+  size: 50, 41     
+Idle 
+  xy: 72, 23
+  size: 50, 41  
+Idle 
+  xy: 136, 23
+  size: 50, 41  
+Idle 
+  xy: 200, 23
+  size: 50, 41     
+Walk 
+  xy: 8, 86
+  size: 50, 41      
+Walk 
+  xy: 72, 86
+  size: 50, 41    
+Walk 
+  xy: 136, 86
+  size: 50, 41    
+Walk 
+  xy: 200, 86
+  size: 50, 41     
+Walk 
+  xy: 264, 86
+  size: 50, 41      
+Walk 
+  xy: 328, 86
+  size: 50, 41    
+Walk 
+  xy: 392, 86
+  size: 50, 41    
+Walk 
+  xy: 456, 86
+  size: 50, 41    
+Attack 
+  xy: 8, 149
+  size: 50, 41      
+Attack 
+  xy: 72, 149
+  size: 50, 41    
+Attack 
+  xy: 136, 149
+  size: 50, 41  
+Attack 
+  xy: 200, 149
+  size: 50, 41     
+Attack 
+  xy: 264, 149
+  size: 50, 41     
+Attack 
+  xy: 328, 149
+  size: 50, 41   
+Attack 
+  xy: 392, 149
+  size: 50, 41  
+Attack 
+  xy: 456, 149
+  size: 50, 41  
+Death 
+  xy: 0, 340
+  size: 64, 44      
+Death 
+  xy: 64, 340
+  size: 64, 44   
+Death 
+  xy: 128, 340
+  size: 64, 44   
+Death 
+  xy: 192, 340
+  size: 64, 44  
+Death 
+  xy: 256, 340
+  size: 64, 44   
+Death 
+  xy: 320, 340
+  size: 64, 44  
+Death 
+  xy: 384, 340
+  size: 64, 44  
+Death 
+  xy: 448, 340
+  size: 64, 44  

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.ability.AbilityKey;
+import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
@@ -279,25 +281,37 @@ public class CostAdjustment {
     // GetSpellCostChange
 
     private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
-        CardCollectionView untappedCards = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.UNTAPPED);
+        sa.clearTappedForConvoke();
+
+        final Player activator = sa.getActivatingPlayer();
+        CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
+                CardPredicates.Presets.UNTAPPED);
         if (improvise) {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
         } else {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
         }
 
-        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
+        Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
+                cost.toManaCost(), untappedCards, improvise);
 
         // Convoked creats are tapped here, setting up their taps triggers,
         // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
         // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
+        CardCollection tapped = new CardCollection();
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
-            sa.addTappedForConvoke(conv.getKey());
+            Card c = conv.getKey();
+            sa.addTappedForConvoke(c);
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                conv.getKey().tap(true, sa, sa.getActivatingPlayer());
+                if (c.tap(true, sa, activator)) tapped.add(c);
             }
+        }
+        if (!tapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            activator.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 

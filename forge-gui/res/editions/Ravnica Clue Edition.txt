@@ -1,0 +1,14 @@
+[metadata]
+Code=CLU
+Date=2024-02-09
+Name=Ravnica: Clue Edition
+Type=Draft
+ScryfallCode=CLU
+
+[cards]
+2 R Senator Peacock @Aurore Folny
+6 R Commander Mustard @Jake Murray
+9 U Lead Pipe @Clint Lockwood
+15 U Dining Room @Arthur Yuan
+277 R Hallowed Fountain @Leon Tukker
+280 R Steam Vents @Lucas Graciano

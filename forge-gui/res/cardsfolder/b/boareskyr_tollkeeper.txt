@@ -4,8 +4,9 @@ Types:Creature Orc Knight
 PT:3/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals all creature and land cards in their hand. Choose one of them. That card perpetually gains "This permanent enters the battlefield tapped."
 SVar:TrigReveal:DB$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Creature.TargetedPlayerOwn,Land.TargetedPlayerOwn | SubAbility$ DBChooseCard | RememberRevealed$ True
-SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.IsRemembered | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualAbility | Name$ Boareskyr Tollkeeper's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.ChosenCard | EffectZone$ Command | AddKeyword$ CARDNAME enters the battlefield tapped. | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains "This permanent enters the battlefield tapped."
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.IsRemembered | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ ChosenCard | Replacements$ ReplaceETB | SubAbility$ DBCleanup
+SVar:ReplaceETB:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ This permanent enters the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 Oracle:When Boareskyr Tollkeeper enters the battlefield, target opponent reveals all creature and land cards in their hand. Choose one of them. That card perpetually gains "This permanent enters the battlefield tapped."

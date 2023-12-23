@@ -1,0 +1,12 @@
+[metadata]
+Code=PH22
+Date=2023-08-01
+Name=2022 Heroes of the Realm
+Type=Funny
+ScryfallCode=PH22
+
+[cards]
+2 M Elusen, the Giving @Livia Prima
+3 M Heroes of Kamigawa @Magali Villeneuve
+4 M Svega, the Unconventional @Chris Rallis
+5 M Wizard from Beyond @Nestor Ossandon Leal

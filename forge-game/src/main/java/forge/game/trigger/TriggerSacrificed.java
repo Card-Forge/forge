@@ -17,14 +17,12 @@
  */
 package forge.game.trigger;
 
-import java.util.Map;
-
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.CostPaymentStack;
 import forge.util.Localizer;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -65,44 +63,8 @@ public class TriggerSacrificed extends Trigger {
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
-
-        if (hasParam("WhileKeyword")) {
-            final String keyword = getParam("WhileKeyword");
-            boolean withKeyword = false;
-
-            // When cast with Emerge, the cost instance is there
-            IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-
-            SpellAbility sa;
-            if (currentPayment != null) {
-                sa = currentPayment.getPayment().getAbility();
-
-                if (sa != null && sa.getHostCard() != null) {
-                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-                        withKeyword = true;
-                    }
-                }
-            }
-
-            if (!withKeyword) {
-                // When done for another card to get the Mana, the Emerge card is there
-                CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
-
-                for (IndividualCostPaymentInstance individual : stack) {
-                    sa = individual.getPayment().getAbility();
-
-                    if (sa == null || sa.getHostCard() == null)
-                        continue;
-
-                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-                        withKeyword = true;
-                        break;
-                    }
-                }
-            }
-
-            if (!withKeyword)
-                return false;
+        if (hasParam("WhileKeyword") && !whileKeywordCheck(getParam("WhileKeyword"), runParams)) {
+            return false;
         }
 
         return true;
@@ -116,9 +78,8 @@ public class TriggerSacrificed extends Trigger {
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblSacrificed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblSacrificed") + ": " +
+                sa.getTriggeringObject(AbilityKey.Card);
     }
 
 }

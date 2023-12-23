@@ -405,6 +405,9 @@ BlueRobes
 Armory
   xy: 128,512
   size: 16, 16
+PresenceoftheHydra
+  xy: 288,928
+  size: 16, 16
 HorseHoove
   xy: 80,496
   size: 16, 16

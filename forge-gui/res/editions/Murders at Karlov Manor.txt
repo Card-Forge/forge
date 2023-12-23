@@ -1,0 +1,52 @@
+[metadata]
+Code=MKM
+Date=2024-02-09
+Name=Murders at Karlov Manor
+Type=Expansion
+ScryfallCode=MKM
+
+[cards]
+28 U Not on My Watch @Jason A. Engle
+29 C Novice Inspector @Fajareka Setiawan
+36 R Wojek Investigator @Ben Hill
+40 C Benthic Criminologists @Johan Grenier
+42 U Burden of Proof @Deruchenko Alexander
+52 C Deduce @Quintin Gleim
+60 C Hotshot Investigators @Jodie Muir
+66 C Out Cold @Tuan Duong Chu
+90 U Lead Pipe @Igor Krstic
+122 C Demand Answers @Justyna Dura
+144 C Shock @Eric Wilkerson
+159 C Fanatical Strength @Durion
+179 C Topiary Panther @Xabi Gaztelua
+185 M Alquist Proft, Master Sleuth @Andreas Zafiratos
+188 R Aurelia, the Law Above @Lie Setiawan
+194 U Curious Cadaver @Peter Polach
+205 U Gleaming Geardrake @Filipe Pagliuso
+218 U Lightning Helix @Eli Minaya
+219 U Meddling Youths @Matt Forsyth
+224 M Rakdos, Patron of Chaos @Joshua Raphael
+255 C Magnifying Glass @Paolo Puggioni
+272 L Plains @Mia Boas
+273 L Island @Mia Boas
+274 L Swamp @Mia Boas
+275 L Mountain @Mia Boas
+276 L Forest @Mia Boas
+291 U Not on My Watch @Greg Opalinski
+293 C Deduce @Ina Wong
+306 C Demand Answers @Robin Olausson
+310 C Fanatical Strength @Joshua Cairos
+317 R Aurelia, the Law Above @Barbara Rosiak
+320 M Rakdos, Patron of Chaos @Alex Dos Diaz
+340 R Wojek Investigator @Lisa Heidhoff
+355 M Alquist Proft, Master Sleuth @Peter Diamond
+357 R Aurelia, the Law Above @Peter Diamond
+358 U Curious Cadaver @Marko Manev
+361 U Gleaming Geardrake @Alex Dos Diaz
+367 U Meddling Youths @Jack Hughes
+369 M Rakdos, Patron of Chaos @Ivan Shavrin
+384 M Alquist Proft, Master Sleuth @Peter Diamond
+387 M Rakdos, Patron of Chaos @Ivan Shavrin
+424 U Gleaming Geardrake @Filipe Pagliuso
+426 U Lightning Helix @Eli Minaya
+429 R Wojek Investigator @Greg Staples

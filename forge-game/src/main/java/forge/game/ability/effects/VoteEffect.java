@@ -79,7 +79,6 @@ public class VoteEffect extends SpellAbilityEffect {
         }
 
         ListMultimap<Object, Player> votes = ArrayListMultimap.create();
-
         Player voter = game.getControlVote();
 
         for (final Player p : tgtPlayers) {
@@ -100,7 +99,7 @@ public class VoteEffect extends SpellAbilityEffect {
                             Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
                 }
                 if (record.length() > 0) {
-                        record.append("\r\n");
+                    record.append("\r\n");
                 }
                 record.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
             }
@@ -111,7 +110,6 @@ public class VoteEffect extends SpellAbilityEffect {
             game.getAction().notifyOfValue(sa, host, voteResult, null);
         }
         game.fireEvent(new GameEventRandomLog(voteResult));
-
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.AllVotes, votes);

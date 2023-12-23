@@ -1,0 +1,13 @@
+Name:Scalesoul Gnome
+ManaCost:3 R W
+Types:Artifact Creature Gnome
+PT:3/5
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscover | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, discover X, where X is that damage.
+SVar:TrigDiscover:DB$ Discover | Num$ X
+SVar:X:TriggerCount$DamageAmount
+T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile+nonToken | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever you play a card from exile, conjure a duplicate of it into your hand.
+T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigConjure | Secondary$ True | TriggerDescription$ Whenever you play a card from exile, conjure a duplicate of it into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand
+Oracle:Trample, Haste\nWhenever Scalesoul Gnome deals combat damage to a player, discover X, where X is that damage.\nWhenever you play a card from exile, conjure a duplicate of it into your hand.

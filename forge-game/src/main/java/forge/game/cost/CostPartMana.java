@@ -34,7 +34,7 @@ public class CostPartMana extends CostPart {
     private static final long serialVersionUID = 1L;
     // "Leftover"
     private final ManaCost cost;
-    private boolean xCantBe0 = false;
+    private int xMin = 0;
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
@@ -49,16 +49,16 @@ public class CostPartMana extends CostPart {
      */
     public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;
-        this.xCantBe0 = "XCantBe0".equals(restriction);
+        if (restriction != null && restriction.startsWith("XMin")) this.xMin = Integer.parseInt(restriction.substring(4));
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
         this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
         this.isCostPayAnyNumberOfTimes = "NumTimes".equalsIgnoreCase(restriction);
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
-    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
+    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, int xMin) {
         this.cost = cost;
-        this.xCantBe0 = XCantBe0;
+        this.xMin = xMin;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
     }
@@ -77,10 +77,10 @@ public class CostPartMana extends CostPart {
     }
 
     /**
-     * @return the xCantBe0
+     * @return the xMin
      */
-    public boolean canXbe0() {
-        return !xCantBe0;
+    public int getXMin() {
+        return xMin;
     }
 
     /**

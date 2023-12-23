@@ -244,7 +244,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            if (!sp.isCopied()) {
+            if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 source.addAbilityActivated(sp);
             }
@@ -320,7 +320,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.isAbility() && !sp.isCopied()) {
+        if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             source.addAbilityActivated(sp);
         }
 
@@ -502,6 +502,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // The SpellAbility isn't removed from the Stack until it finishes resolving
         // temporarily reverted removing SAs after resolution
         final SpellAbility sa = peekAbility();
+
+        // abilities already on stack won't get changed text from host
+        if (sa.isSpell()) {
+            sa.changeText();
+        }
 
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority();
@@ -734,10 +739,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 if (sa.getHostCard().getController().equals(p)) {
                     simultaneousStackEntryList.remove(sa);
                 }
-            } else {
-                if (activator.equals(p)) {
-                    simultaneousStackEntryList.remove(sa);
-                }
+            } else if (activator.equals(p)) {
+                simultaneousStackEntryList.remove(sa);
             }
         }
     }

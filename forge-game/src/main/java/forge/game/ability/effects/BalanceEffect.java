@@ -49,9 +49,10 @@ public class BalanceEffect extends SpellAbilityEffect {
         }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        CardZoneTable table = new CardZoneTable();
+        params.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, game.getLastStateBattlefield());
+        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateBattlefield());
+
         for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);
             int numToBalance = validCards.get(i).size() - min;

@@ -1,0 +1,11 @@
+Name:Commander Mustard
+ManaCost:3 R W
+Types:Legendary Creature Human Soldier
+PT:5/5
+K:Vigilance
+S:Mode$ Continuous | Affected$ Soldier.Other+YouCtrl | AddKeyword$ Vigilance & Trample & Haste | Description$ Other Soldiers you control have vigilance, trample, and haste.
+A:AB$ AnimateAll | Cost$ 2 R W | ValidCards$ Soldier.YouCtrl | Triggers$ AttackTrig | SpellDescription$ Until end of turn, Soldiers you control gain "Whenever this creature attacks, it deals 1 damage to defending player."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever this creature attacks, it deals 1 damage to defending player.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1
+DeckHints:Type$Soldier
+Oracle:Vigilance\nOther Soldiers you control have vigilance, trample, and haste.\n{2}{R}{W}: Until end of turn, Soldiers you control gain "Whenever this creature attacks, it deals 1 damage to defending player."

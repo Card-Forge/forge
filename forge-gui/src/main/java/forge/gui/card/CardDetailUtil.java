@@ -344,25 +344,21 @@ public class CardDetailUtil {
             }
 
             for (final Entry<String, String> e : Sets.union(changedColorWords.entrySet(), changedTypes.entrySet())) {
-                // ignore lower case and plural form keys, to avoid duplicity
-                if (Character.isUpperCase(e.getKey().charAt(0))
-                        && !CardType.Constant.singularTypes.containsKey(e.getKey())) {
-                    area.append("Text changed: all instances of ");
-                    if (e.getKey().equals("Any")) {
-                        if (changedColorWords.containsKey(e.getKey())) {
-                            area.append("color words");
-                        } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
-                            area.append("basic land types");
-                        } else {
-                            area.append("creature types");
-                        }
+                area.append("Text changed: all instances of ");
+                if (e.getKey().equals("Any")) {
+                    if (changedColorWords.containsKey(e.getValue())) {
+                        area.append("color words");
+                    } else if (forge.card.CardType.getBasicTypes().contains(e.getValue())) {
+                        area.append("basic land types");
                     } else {
-                        area.append(e.getKey());
+                        area.append("creature types");
                     }
-                    area.append(" are replaced by ");
-                    area.append(e.getValue());
-                    area.append(".\n");
+                } else {
+                    area.append(e.getKey());
                 }
+                area.append(" are replaced by ");
+                area.append(e.getValue());
+                area.append(".\n");
             }
         }
 
@@ -461,19 +457,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen cards: ");
-            if (card.isImmutable() && card.getName().contains("Perpetual Effect")) {
-                List<CardView> chosenToShow = new ArrayList<>();
-                for (CardView cc : card.getChosenCards()) {
-                    if (!cc.getZone().isHidden()) {
-                        chosenToShow.add(cc);
-                    }
-                }
-                area.append(Lang.joinHomogenous(chosenToShow));
-            } else {
-                area.append(Lang.joinHomogenous(card.getChosenCards()));
-            }
-            area.append(")");
+            area.append("(chosen card").append(card.getChosenCards().size() == 1 ? ": " : "s: ");
+            area.append(Lang.joinHomogenous(card.getChosenCards())).append(")");
         }
 
         // chosen number

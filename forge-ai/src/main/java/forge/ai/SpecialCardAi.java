@@ -1683,6 +1683,41 @@ public class SpecialCardAi {
         }
     }
 
+    // Veil of Summer
+    public static class VeilOfSummer {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            // check the top ability on stack if it's (a) an opponent's counterspell targeting the AI's spell;
+            // (b) a black or a blue spell targeting something that belongs to the AI
+            Game game = ai.getGame();
+            if (game.getStack().isEmpty()) {
+                return false;
+            }
+
+            SpellAbility topSA = game.getStack().peekAbility();
+            if (topSA.usesTargeting() && topSA.getActivatingPlayer().isOpponentOf(ai)) {
+                if (topSA.getApi() == ApiType.Counter) {
+                    SpellAbility tgtSpell = topSA.getTargets().getFirstTargetedSpell();
+                    if (tgtSpell != null && tgtSpell.getActivatingPlayer().equals(ai)) {
+                        return true;
+                    }
+                } else if (topSA.getHostCard().isBlack() || topSA.getHostCard().isBlue()) {
+                    for (Player tgtP : topSA.getTargets().getTargetPlayers()) {
+                        if (tgtP.equals(ai)) {
+                            return true;
+                        }
+                    }
+                    for (Card tgtC : topSA.getTargets().getTargetCards()) {
+                        if (tgtC.getController().equals(ai)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+
     // Volrath's Shapeshifter
     public static class VolrathsShapeshifter {
         public static boolean consider(final Player ai, final SpellAbility sa) {

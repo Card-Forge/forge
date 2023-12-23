@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -7,9 +8,12 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
+
+import java.util.Map;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -45,6 +49,7 @@ public class TapEffect extends SpellAbilityEffect {
             tapper = AbilityUtils.getDefinedPlayers(card, sa.getParam("Tapper"), sa).getFirst();
         }
 
+        CardCollection tapped = new CardCollection();
         for (final Card tgtC : toTap) {
             if (tgtC.isPhasedOut()) {
                 continue;
@@ -53,12 +58,17 @@ public class TapEffect extends SpellAbilityEffect {
                 if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);
                 }
-                tgtC.tap(true, sa, tapper);
+                if (tgtC.tap(true, sa, tapper)) tapped.add(tgtC);
             }
             if (sa.hasParam("ETB")) {
                 // do not fire Taps triggers
                 tgtC.setTapped(true);
             }
+        }
+        if (!tapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            activator.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 

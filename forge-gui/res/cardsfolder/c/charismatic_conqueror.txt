@@ -1,0 +1,9 @@
+Name:Charismatic Conqueror
+ManaCost:1 W
+Types:Creature Vampire Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl+untapped,Artifact.OppCtrl+untapped | Execute$ TrigToken | TriggerDescription$ Whenever an artifact or creature enters the battlefield untapped and under an opponent's control, they may tap that permanent. If they don't, you create a 1/1 white Vampire creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | UnlessCost$ tapXType<1/Card.TriggeredCard/that card> | UnlessPayer$ TriggeredCardController
+DeckHas:Ability$Token|LifeGain
+Oracle:Vigilance\nWhenever an artifact or creature enters the battlefield untapped and under an opponent's control, they may tap that permanent. If they don't, you create a 1/1 white Vampire creature token with lifelink.

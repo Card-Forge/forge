@@ -57,7 +57,11 @@ public enum CounterEnumType {
 
     BLOODLINE("BLDLN", 224, 44, 44),
 
+    BORE("BORE", 98, 47, 34),
+
     BOUNTY("BOUNT", 255, 158, 0),
+    
+    BRAIN("BRAIN", 197, 62, 212),
 
     BRIBERY("BRIBE", 172, 201, 235),
 
@@ -108,10 +112,14 @@ public enum CounterEnumType {
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),
+   
+    DISCOVERY("DISCO", 12, 230, 100),
 
     DIVINITY("DVNTY", 0, 233, 255),
 
     DOOM("DOOM", 255, 104, 118),
+    
+    DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
 
@@ -370,6 +378,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    TAKEOVER("TKVR", 63, 49, 191),
 
     TASK("TASK", 191, 63, 49),
 

@@ -7,6 +7,6 @@ SVar:Upkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battl
 SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | SubAbility$ DBPutCounter
 SVar:DBChoice:DB$ ChooseCard | Defined$ RememberedPlayer | Amount$ 1 | MinAmount$ 0 | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ OrzhovAdvokist
 SVar:DBPutCounter:DB$ PutCounterAll | Placer$ Controller | ValidCards$ Creature.IsRemembered | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.PlayerUID_ChosenPlayerUID:Protection from ChosenPlayerName | DefinedKW$ RememberedController.Opponent | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.PlayerUID_ChosenPlayerUID:ChosenPlayerName | DefinedKW$ RememberedController.Opponent | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 Oracle:Commander creatures you own have "When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn." (You can't be targeted, dealt damage, or enchanted by anything controlled by that player.)

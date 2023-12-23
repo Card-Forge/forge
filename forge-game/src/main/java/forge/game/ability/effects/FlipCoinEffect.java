@@ -196,25 +196,21 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         host.addRemembered(tempRemembered);
                     }
                 }
+            } else if (victory) {
+                if (sa.hasParam("RememberWinner")) {
+                    host.addRemembered(flipper);
+                }
+
+                if (sa.hasAdditionalAbility("WinSubAbility")) {
+                    AbilityUtils.resolve(sa.getAdditionalAbility("WinSubAbility"));
+                }
             } else {
-                if (victory) {
-                    if (sa.getParam("RememberWinner") != null) {
-                        host.addRemembered(flipper);
-                    }
+                if (sa.hasParam("RememberLoser")) {
+                    host.addRemembered(flipper);
+                }
 
-                    if (sa.hasAdditionalAbility("WinSubAbility")) {
-                        AbilityUtils.resolve(sa.getAdditionalAbility("WinSubAbility"));
-                    }
-                    // runParams.put("Won","True");
-                } else {
-                    if (sa.getParam("RememberLoser") != null) {
-                        host.addRemembered(flipper);
-                    }
-
-                    if (sa.hasAdditionalAbility("LoseSubAbility")) {
-                        AbilityUtils.resolve(sa.getAdditionalAbility("LoseSubAbility"));
-                    }
-                    // runParams.put("Won","False");
+                if (sa.hasAdditionalAbility("LoseSubAbility")) {
+                    AbilityUtils.resolve(sa.getAdditionalAbility("LoseSubAbility"));
                 }
             }
         }
@@ -307,6 +303,6 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
     public static int getFlipMultiplier(final Player flipper) {
         String str = "If you would flip a coin, instead flip two coins and ignore one.";
-        return 1 + flipper.getKeywords().getAmount(str);
+        return 1 << flipper.getKeywords().getAmount(str);
     }
 }

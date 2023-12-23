@@ -67,11 +67,12 @@ public class TriggerSurveil extends Trigger {
             return false;
         }
 
-        if (hasParam("OnlyFirst")) {
-            if ((int) runParams.get(AbilityKey.NumThisTurn) != 1) {
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
                 return false;
             }
         }
+
         return true;
     }
 

@@ -1,0 +1,8 @@
+Name:Disruptor Wanderglyph
+ManaCost:4
+Types:Artifact Creature Golem
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target card from an opponent's graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | TgtPrompt$ Select target card from an opponent's graveyard | Mandatory$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Disruptor Wanderglyph attacks, exile target card from an opponent's graveyard.

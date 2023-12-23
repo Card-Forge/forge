@@ -1,0 +1,23 @@
+Name:Inverted Iceberg
+ManaCost:1 U
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+K:Craft:4 U U ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Mill
+Oracle:When Inverted Iceberg enters the battlefield, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.)\nCraft with artifact {4}{U}{U} ({4}{U}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner’s control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Iceberg Titan
+ManaCost:no cost
+Colors:blue
+Types:Artifact Creature Golem
+PT:6/6
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap or untap target artifact or creature.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Iceberg Titan attacks, you may tap or untap target artifact or creature.

@@ -161,6 +161,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
     private int numDiscardedThisTurn;
+    private int numExploredThisTurn;
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
     private int numCardsInHandStartedThisTurnWith;
@@ -556,7 +557,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             int oldLife = life;
             // Run applicable replacement effects
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-            repParams.put(AbilityKey.Result, oldLife-toLose);
+            repParams.put(AbilityKey.Amount, toLose);
             repParams.put(AbilityKey.IsDamage, damage);
 
             switch (getGame().getReplacementHandler().run(ReplacementType.LifeReduced, repParams)) {
@@ -565,8 +566,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             case Updated:
                 // check if this is still the affected player
                 if (this.equals(repParams.get(AbilityKey.Affected))) {
-                    int result = (int) repParams.get(AbilityKey.Result);
-                    toLose = oldLife - result;
+                    toLose = (int) repParams.get(AbilityKey.Amount);
                     // there is nothing that changes lifegain into lifeloss this way
                     if (toLose <= 0) {
                         return 0;
@@ -1160,7 +1160,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return;
         }
 
-        final CardCollection topN = new CardCollection(this.getCardsIn(ZoneType.Library, num));
+        final CardCollection topN = getTopXCardsFromLibrary(num);
 
         if (topN.isEmpty()) {
             return;
@@ -1188,13 +1188,16 @@ public class Player extends GameEntity implements Comparable<Player> {
                 getGame().getAction().moveToLibrary(c, cause, params);
                 numToTop++;
             }
+            if (cause.hasParam("RememberKept")) {
+                cause.getHostCard().addRemembered(toTop);
+            }
         }
 
         getGame().fireEvent(new GameEventSurveil(this, numToTop, numToGrave));
 
         surveilThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.NumThisTurn, surveilThisTurn);
+        runParams.put(AbilityKey.FirstTime, surveilThisTurn == 1);
         if (params != null) {
             runParams.putAll(params);
         }
@@ -1586,6 +1589,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         numDiscardedThisTurn = 0;
     }
 
+    public final int getNumExploredThisTurn() {
+        return numExploredThisTurn;
+    }
+    public final void addExploredThisTurn() {
+        numExploredThisTurn++;
+    }
+    public final void resetNumExploredThisTurn() {
+        numExploredThisTurn = 0;
+    }
+
     public int getNumCardsInHandStartedThisTurnWith() {
         return numCardsInHandStartedThisTurnWith;
     }
@@ -1653,19 +1666,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        CardCollectionView milledView = getCardsIn(ZoneType.Library);
+        Iterable<Card> milledView = getCardsIn(ZoneType.Library);
         // 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
-            Iterables.removeAll(milledView, (CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB));
+            milledView = Iterables.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
-        CardCollection milled = new CardCollection(Iterables.limit(milledView, n));
-        milledView = milled;
+        CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
         if (destination == ZoneType.Graveyard) {
-            milledView = GameActionUtil.orderCardsByTheirOwners(game, milledView, ZoneType.Graveyard, sa);
+            milled = GameActionUtil.orderCardsByTheirOwners(game, milled, ZoneType.Graveyard, sa);
         }
 
-        for (Card m : milledView) {
+        for (Card m : milled) {
             final ZoneType origin = m.getZone().getZoneType();
             final Card d = game.getAction().moveTo(destination, m, sa, params);
             if (d.getZone().is(destination)) {
@@ -2523,6 +2535,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
         resetNumDiscardedThisTurn();
+        resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
@@ -2711,22 +2724,15 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public void planeswalkTo(SpellAbility sa, final CardCollectionView destinations) {
         System.out.println(getName() + " planeswalks to " + destinations.toString());
-        currentPlanes.addAll(destinations);
         game.getView().updatePlanarPlayer(getView());
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         for (Card c : destinations) {
-            game.getAction().moveTo(ZoneType.Command, c, sa, moveParams);
+            currentPlanes.add(game.getAction().moveTo(getZone(ZoneType.Command), c, sa));
             planeswalkedToThisTurn.add(c);
-            //getZone(ZoneType.PlanarDeck).remove(c);
-            //getZone(ZoneType.Command).add(c);
         }
 
         game.setActivePlanes(currentPlanes);
-        //Run PlaneswalkedTo triggers here.
+
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Cards, destinations);
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams, false);
@@ -2742,12 +2748,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
 
         for (final Card plane : currentPlanes) {
-            //game.getZoneOf(plane).remove(plane);
             plane.clearControllers();
-            //getZone(ZoneType.PlanarDeck).add(plane);
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane, -1, null);
         }
         currentPlanes.clear();
+    }
+
+    /**
+     * Removes a particular plane from the active plane list.
+     */
+    public void removeCurrentPlane(Card c) {
+        currentPlanes.remove(c);
     }
 
     /**
@@ -3680,7 +3691,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Map<AbilityKey, Object> cycleParams = AbilityKey.mapFromCard(CardUtil.getLKICopy(game.getCardState(sp.getHostCard())));
         cycleParams.put(AbilityKey.Cause, sp);
         cycleParams.put(AbilityKey.Player, this);
-        cycleParams.put(AbilityKey.NumThisTurn, cycledThisTurn);
+        cycleParams.put(AbilityKey.FirstTime, cycledThisTurn == 1);
         game.getTriggerHandler().runTrigger(TriggerType.Cycled, cycleParams, false);
     }
 

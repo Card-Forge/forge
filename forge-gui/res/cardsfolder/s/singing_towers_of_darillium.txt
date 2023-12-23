@@ -1,0 +1,10 @@
+Name:Singing Towers of Darillium
+ManaCost:no cost
+Types:Plane Darillium
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+withoutForetell | EffectZone$ Command | AffectedZone$ Hand | AddKeyword$ Foretell | Description$ Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}. (During your turn, you may pay {2} and exile it from your hand face down. Cast it on a later turn for its foretell cost.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ Whenever chaos ensues, you may cast a foretold card you own from exile without paying its mana cost this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ MayCastForetell | Triggers$ SpellCast
+SVar:MayCastForetell:Mode$ Continuous | Affected$ Card.foretold+YouOwn+nonLand | MayPlayWithoutManaCost$ True | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast a foretold card you own from exile without paying its mana cost this turn.
+SVar:SpellCast:Mode$ SpellCast | Static$ True | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | OneOff$ True | TriggerZones$ Command | Execute$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+Oracle:Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}. (During your turn, you may pay {2} and exile it from your hand face down. Cast it on a later turn for its foretell cost.)\nWhenever chaos ensues, you may cast a foretold card you own from exile without paying its mana cost this turn.

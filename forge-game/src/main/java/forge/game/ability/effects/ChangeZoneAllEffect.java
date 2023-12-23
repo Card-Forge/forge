@@ -155,7 +155,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             CardLists.shuffle(cards);
         }
 
-        final CardZoneTable triggerList = new CardZoneTable();
+        final CardZoneTable triggerList = new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 

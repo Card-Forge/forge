@@ -77,8 +77,11 @@ public abstract class SpellAbilityEffect {
             }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
+                String rawSDesc = params.get("SpellDescription");
                 if (params.containsKey("SpellDescription")) {
-                    String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
+                    if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
+                    if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc,
                             sa.getHostCard().getName());
 
                     int idx = spellDesc.indexOf("(");
@@ -167,7 +170,8 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (!isPlainText) {
-                if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
+                if (t.length() <= 2) sb.append("{").append(t).append("}"); // string includes mana cost (e.g. {2}{R})
+                else if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
                     String parts[] = t.substring(2).split(" ", 2);
                     int n = AbilityUtils.calculateAmount(sa.getHostCard(), parts[0], sa);
                     sb.append(parts.length == 1 ? Lang.getNumeral(n) : Lang.nounWithNumeral(n, parts[1]));
@@ -245,8 +249,9 @@ public abstract class SpellAbilityEffect {
 
     private static List<GameEntity> getEntities(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        String[] def = sa.getParamOrDefault(definedParam, "Self").split(" & ");
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetEntities())
-                : AbilityUtils.getDefinedEntities(sa.getHostCard(), sa.getParam(definedParam), sa);
+                : AbilityUtils.getDefinedEntities(sa.getHostCard(), def, sa);
     }
 
     // Targets of unspecified type
@@ -794,9 +799,11 @@ public abstract class SpellAbilityEffect {
         addUntilCommand(sa, until, sa.getActivatingPlayer());
     }
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until, Player controller) {
+        addUntilCommand(sa, until, sa.getParam("Duration"), controller);
+    }
+    protected static void addUntilCommand(final SpellAbility sa, GameCommand until, String duration, Player controller) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final String duration = sa.getParam("Duration");
         // in case host was LKI or still resolving
         if (host.isLKI() || host.getZone() == null || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);
@@ -896,7 +903,7 @@ public abstract class SpellAbilityEffect {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
         // avoid storing this on "inactive" cards
-        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack) || exilingSource.isInZone(ZoneType.Command)) {
             // make sure it gets updated
             exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);

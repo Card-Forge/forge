@@ -250,7 +250,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean isEmpty() {
-        return coreTypes.isEmpty() && supertypes.isEmpty() && subtypes.isEmpty() && !excludedCreatureSubtypes.isEmpty();
+        return coreTypes.isEmpty() && supertypes.isEmpty() && subtypes.isEmpty() && excludedCreatureSubtypes.isEmpty();
     }
 
     @Override
@@ -988,6 +988,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      * Otherwise, simply return the input.
      * @param type a String.
      * @return the corresponding type.
+     *
+     * @deprecated
      */
     public static final String getSingularType(final String type) {
         if (Constant.singularTypes.containsKey(type)) {
