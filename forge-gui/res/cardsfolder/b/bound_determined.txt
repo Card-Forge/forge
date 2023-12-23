@@ -16,6 +16,6 @@ Name:Determined
 ManaCost:G U
 Types:Instant
 A:SP$ Effect | Cost$ G U | StaticAbilities$ STCantbeCountered | SubAbility$ DBDraw | SpellDescription$ Other spells you control can't be countered this turn. Draw a card.
-SVar:STCantbeCountered:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.YouCtrl | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Other spells you control can't be countered this turn.
+SVar:STCantbeCountered:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.YouCtrl | AddHiddenKeyword$ This spell can't be countered. | Description$ Other spells you control can't be countered this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Other spells you control can't be countered this turn.\nDraw a card.

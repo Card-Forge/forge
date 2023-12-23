@@ -245,25 +245,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * isCounterable.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isCounterable(final Card c) {
-        if (c.hasKeyword("CARDNAME can't be countered.") || c.hasKeyword("This spell can't be countered.")) {
-            return false;
-        }
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
-        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return list.isEmpty();
-    }
-
-    /**
-     * <p>
      * isCounterableBy.
      * </p>
      *
@@ -274,19 +255,14 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean isCounterableBy(final Card c, final SpellAbility sa) {
-        if (!isCounterable(c)) {
+        if (c.hasKeyword("This spell can't be countered.")) {
             return false;
         }
 
-        for (String o : c.getHiddenExtrinsicKeywords()) {
-            if (o.startsWith("CantBeCounteredBy")) {
-                final String[] m = o.split(":");
-                if (sa.isValid(m[1].split(","), c.getController(), c, null)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
+        repParams.put(AbilityKey.Cause, sa);
+        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
+        return list.isEmpty();
     }
 
     /**
