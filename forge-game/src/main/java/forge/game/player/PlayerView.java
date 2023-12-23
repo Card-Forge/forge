@@ -336,7 +336,6 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AdditionalVillainousChoices, p.getAdditionalVotesAmount());
     }
 
-
     public ImmutableMultiset<String> getKeywords() {
         return get(TrackableProperty.Keywords);
     }

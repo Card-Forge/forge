@@ -146,13 +146,10 @@ public abstract class SpellAbilityEffect {
         return substitutedDesc;
     }
 
-
     // Common functions that all SAEffects will probably use
     protected final int extractAmount(SpellAbility sa) {
         return AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("Amount", "1"), sa);
     }
-
-
 
     /**
      * Append the description of a {@link SpellAbility} to a

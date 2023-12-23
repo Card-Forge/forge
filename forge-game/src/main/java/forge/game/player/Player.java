@@ -3708,7 +3708,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return value;
     }
 
-
     public void addCycled(SpellAbility sp) {
         cycledThisTurn++;
 

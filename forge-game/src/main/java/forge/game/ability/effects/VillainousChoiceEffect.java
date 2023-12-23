@@ -21,8 +21,6 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
             int choiceAmount = p.getAdditionalVillainousChoices() + 1;
-            // Is this linear or exponential growth? @Hanmac gonna look into making this a replacement ability?
-            //int choiceAmount = 2 ^ p.getAdditionalVillainousChoices();
             source.addRemembered(p);
 
             List<SpellAbility> saToRemove = Lists.newArrayList();
