@@ -2917,8 +2917,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbCost.append(cost.toSimpleString());
                     sbAfter.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
-                } else if (keyword.equals("This spell can't be " +
-                        "countered.") || keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
+                } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
                         "playing for ante.")) {
                     sbBefore.append(keyword);
                     sbBefore.append("\r\n");
