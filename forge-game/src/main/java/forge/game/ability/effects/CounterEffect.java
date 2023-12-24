@@ -100,7 +100,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtSACard);
             }
 
-            if (tgtSA.isSpell() && !tgtSACard.isCounterableBy(sa)) {
+            if (tgtSA.isSpell() && !tgtSA.isCounterableBy(sa)) {
                 continue;
             }
 
@@ -109,7 +109,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (sa.hasParam("CounterNoManaSpell") && tgtSA.getTotalManaSpent() != 0) {
+            if (sa.hasParam("CounterNoManaSpell") && tgtSA.isSpell() && tgtSA.getTotalManaSpent() != 0) {
                 continue;
             }
 
@@ -276,8 +276,8 @@ public class CounterEffect extends SpellAbilityEffect {
 
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
-        repParams.put(AbilityKey.TgtSA, tgtSA);
-        repParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        repParams.put(AbilityKey.SpellAbility, tgtSA);
+        repParams.put(AbilityKey.Cause, srcSA);
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
@@ -329,7 +329,7 @@ public class CounterEffect extends SpellAbilityEffect {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
-        runParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        runParams.put(AbilityKey.Cause, srcSA);
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
 

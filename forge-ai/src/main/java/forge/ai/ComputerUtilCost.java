@@ -522,11 +522,12 @@ public class ComputerUtilCost {
             sa.setActivatingPlayer(player, true); // complaints on NPE had came before this line was added.
         }
 
-        final boolean cannotBeCountered = sa.isSpell() && !sa.getHostCard().isCounterableBy(null);
+        boolean cannotBeCountered = false;
 
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
+            cannotBeCountered = !sa.isCounterableBy(null);
             for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
                 final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                 if (!StringUtils.isBlank(snem)) {
@@ -796,7 +797,7 @@ public class ComputerUtilCost {
         if (ApiType.Counter.equals(sa.getApi())) {
             List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
             for (SpellAbility toBeCountered : spells) {
-                if (toBeCountered.isSpell() && !toBeCountered.getHostCard().isCounterableBy(sa)) {
+                if (!toBeCountered.isCounterableBy(sa)) {
                     return false;
                 }
                 // no reason to pay if we don't plan to confirm

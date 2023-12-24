@@ -63,7 +63,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-            if ((topSA.isSpell() && !topSA.getHostCard().isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
+            if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
             } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
@@ -324,7 +324,7 @@ public class CounterAi extends SpellAbilityAi {
                 leastBadOption = tgtSA;
             }
 
-            if ((tgtSA.isSpell() && !tgtSA.getHostCard().isCounterableBy(sa)) ||
+            if ((tgtSA.isSpell() && !tgtSA.isCounterableBy(sa)) ||
                 tgtSA.getActivatingPlayer() == ai ||
                 !tgtSA.getActivatingPlayer().isOpponentOf(ai)) {
                 // Is this a "better" least bad option

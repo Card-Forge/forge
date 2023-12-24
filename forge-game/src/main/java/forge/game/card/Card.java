@@ -51,7 +51,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
@@ -5227,7 +5226,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isSpell() {
-        return isInZone(ZoneType.Stack) || isInstant() || isSorcery() || (isAura() && !isInZone(ZoneType.Battlefield));
+        return isInstant() || isSorcery() || (isAura() && !isInZone(ZoneType.Battlefield));
     }
 
     public final boolean isLand()       { return getType().isLand(); }
@@ -7689,12 +7688,5 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
-    }
-
-    public boolean isCounterableBy(final SpellAbility sa) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Cause, sa);
-        List<ReplacementEffect> list = getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return list.isEmpty();
     }
 }

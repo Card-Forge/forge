@@ -39,7 +39,7 @@ public class BidLifeAi extends SpellAbilityAi {
                     return false;
                 }
                 final SpellAbility topSA = game.getStack().peekAbility();
-                if (!topSA.getHostCard().isCounterableBy(sa) || aiPlayer.equals(topSA.getActivatingPlayer())) {
+                if (!topSA.isCounterableBy(sa) || aiPlayer.equals(topSA.getActivatingPlayer())) {
                     return false;
                 }
                 if (sa.canTargetSpellAbility(topSA)) {
