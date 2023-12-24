@@ -75,6 +75,11 @@ public class AbilityUtils {
             player = hostCard.getController();
         }
 
+        if (defined.contains("AndSelf")) {
+            cards.add(hostCard);
+            defined = defined.replace("AndSelf", "");
+        }
+        
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {

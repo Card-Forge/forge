@@ -1,8 +1,7 @@
 Name:Grow Old Together
 ManaCost:1 G U
 Types:Instant
-A:SP$ Seek | DefinedCards$ Top_10_OfLibrary | Num$ 2 | Type$ Creature | SubAbility$ Shuffle | SpellDescription$ Seek two creature cards from among the top ten cards of your library, then shuffle. Creature cards in your hand perpetually get +1/+1.
-SVar:Shuffle:DB$ Shuffle | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Name$ Grow Old Together Perpetual Effect | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
-SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creature cards in your hand perpetually get +1/+1.
+A:SP$ Seek | DefinedCards$ Top_10_OfLibrary | Num$ 2 | Type$ Creature | SubAbility$ Shuffle | SpellDescription$ Seek two creature cards from among the top ten cards of your library,
+SVar:Shuffle:DB$ Shuffle | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ then shuffle.
+SVar:DBEffect:DB$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SpellDescription$ Creature cards in your hand perpetually get +1/+1.
 Oracle:Seek two creature cards from among the top ten cards of your library, then shuffle. Creature cards in your hand perpetually get +1/+1.

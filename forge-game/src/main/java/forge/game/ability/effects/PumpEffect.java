@@ -306,8 +306,15 @@ public class PumpEffect extends SpellAbilityEffect {
                     Localizer.getInstance().getMessage("lblChooseKeyword"), tgtCards.get(0));
             keywords.add(chosen);
         }
-        final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, !sa.hasParam("Double"));
-        final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, !sa.hasParam("Double"));
+        
+        int a = 0;
+        int d = 0;
+        if (sa.hasParam("NumAtt") && !sa.getParam("NumAtt").equals("Double")) {
+            a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
+        }
+        if (sa.hasParam("NumDef") && !sa.getParam("NumDef").equals("Double")) {
+            d = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
+        }
 
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
@@ -496,6 +503,13 @@ public class PumpEffect extends SpellAbilityEffect {
                         return input;
                     }
                 });
+            }
+
+            if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Double")) {
+                a = tgtC.getNetPower();
+            }
+            if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Double")) {
+                d = tgtC.getNetToughness();
             }
 
             applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
