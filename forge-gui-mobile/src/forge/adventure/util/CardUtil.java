@@ -23,7 +23,6 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 
-import java.io.File;
 import java.util.*;
 import java.util.regex.Pattern;
 
