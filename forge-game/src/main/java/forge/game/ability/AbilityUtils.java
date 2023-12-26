@@ -1537,6 +1537,10 @@ public class AbilityUtils {
 
         boolean alreadyPaid = false;
         for (Player payer : allPayers) {
+            if (!payer.isInGame()) {
+                // CR 800.4f
+                continue;
+            }
             if (unlessCost.equals("LifeTotalHalfUp")) {
                 String halfup = Integer.toString(Math.max(0,(int) Math.ceil(payer.getLife() / 2.0)));
                 cost = new Cost("PayLife<" + halfup + ">", true);

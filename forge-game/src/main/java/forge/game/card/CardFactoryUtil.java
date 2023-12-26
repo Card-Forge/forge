@@ -31,6 +31,7 @@ import forge.game.cost.CostPart;
 import forge.game.event.GameEventCardForetold;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -78,6 +79,7 @@ import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -109,12 +111,9 @@ public class CardFactoryUtil {
                 }
                 final Game game = hostCard.getGame();
 
-                CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-                CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+                moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
                 hostCard.getGame().getAction().moveToPlay(hostCard, this, moveParams);
             }

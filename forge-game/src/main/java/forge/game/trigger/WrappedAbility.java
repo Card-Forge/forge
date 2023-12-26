@@ -14,6 +14,7 @@ import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
@@ -74,7 +75,7 @@ public class WrappedAbility extends Ability {
             );
 
     private final SpellAbility sa;
-    private final Player decider;
+    private Player decider;
 
     boolean mandatory = false;
 
@@ -465,7 +466,7 @@ public class WrappedAbility extends Ability {
     // //////////////////////////////////////
     @Override
     public void resolve() {
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = getActivatingPlayer().getGame();
         final Trigger regtrig = getTrigger();
 
         if (!(TriggerType.Always.equals(regtrig.getMode())) && !regtrig.hasParam("NoResolvingCheck")) {
@@ -490,8 +491,13 @@ public class WrappedAbility extends Ability {
             }
         }
 
-        if (decider != null && !decider.getController().confirmTrigger(this)) {
-            return;
+        if (decider != null) {
+            if (!decider.isInGame()) {
+                decider = SpellAbilityEffect.getNewChooser(sa, getActivatingPlayer(), decider);
+            }
+            if (!decider.getController().confirmTrigger(this)) {
+                return;
+            }
         }
 
         if (!regtrig.hasParam("NoTimestampCheck")) {

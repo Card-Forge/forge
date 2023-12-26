@@ -19,6 +19,7 @@ package forge.game.cost;
 
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
@@ -110,7 +111,7 @@ public class CostExileFromStack extends CostPart {
             if (si != null) {
                 game.getStack().remove(si);
             }
-            game.getAction().exile(sa.getHostCard(), null, null);
+            game.getAction().exile(new CardCollection(sa.getHostCard()), null, null);
         }
         return true;
     }

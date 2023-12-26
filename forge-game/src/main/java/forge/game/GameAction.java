@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
@@ -54,6 +55,7 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
@@ -902,14 +904,10 @@ public class GameAction {
         CardZoneTable table = new CardZoneTable(getLastState(AbilityKey.LastStateBattlefield, cause, params), getLastState(AbilityKey.LastStateGraveyard, cause, params));
         CardCollection result = new CardCollection();
         for (Card card : cards) {
-            if (cause != null) {
-                table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
-            }
+            table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
             result.add(exile(card, cause, params));
         }
-        if (cause != null) {
-            table.triggerChangesZoneAll(game, cause);
-        }
+        table.triggerChangesZoneAll(game, cause);
         return result;
     }
     public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
