@@ -939,22 +939,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, String message) {
-        reveal(cards, zone, PlayerView.get(owner), message);
+    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, String message, boolean addSuffix) {
+        reveal(cards, zone, PlayerView.get(owner), message, addSuffix);
     }
 
     @Override
-    public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
-        reveal(getCardList(cards), zone, owner, message);
+    public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        reveal(getCardList(cards), zone, owner, message, addSuffix);
     }
 
-    protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message) {
+    protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
-        } else if (message.startsWith("OVERRIDE")) {
-            message = message.substring(9);
         } else {
-            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+            if (addSuffix) message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {

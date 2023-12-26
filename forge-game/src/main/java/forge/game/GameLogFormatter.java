@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.player.Player;
@@ -221,6 +222,21 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventPlayerPoisoned ev) {
         String message = localizer.getMessage("lblLogPlayerReceivesNPosionCounterFrom",
                             ev.receiver.toString(), String.valueOf(ev.amount), ev.source.toString());
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventPlayerRadiation ev) {
+        String message;
+        final int change = ev.change;
+        String radCtr = CounterEnumType.RAD.getName().toLowerCase() + " " +
+                Localizer.getInstance().getMessage("lblCounter").toLowerCase();
+        if (change >= 0) message = localizer.getMessage("lblLogPlayerRadiation",
+                ev.receiver.toString(), Lang.nounWithNumeralExceptOne(String.valueOf(change), radCtr),
+                ev.source.toString());
+        else message = localizer.getMessage("lblLogPlayerRadRemove",
+                ev.receiver.toString(), Lang.nounWithNumeralExceptOne(String.valueOf(Math.abs(change)), radCtr),
+                ev.source.toString());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 

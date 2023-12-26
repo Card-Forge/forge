@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
-
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
@@ -17,6 +15,8 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+
+import java.util.Map;
 
 public class MillEffect extends SpellAbilityEffect {
     @Override
@@ -47,6 +47,8 @@ public class MillEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
+                    Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
             if (sa.hasParam("Optional")) {
                 String d = destination.equals(ZoneType.Graveyard) ? "" : " (" + destination.getTranslatedName() + ")";
                 final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().
@@ -61,11 +63,12 @@ public class MillEffect extends SpellAbilityEffect {
             // graveyard to figure out which ones were milled.
             if (!facedown && reveal) { // do not reveal when exiling face down
                 if (showRevealDialog) {
-                    game.getAction().reveal(milled, p, false);
+                    final String message = Localizer.getInstance().getMessage("lblMilledCards");
+                    final boolean addSuffix = !toZoneStr.equals("");
+                    game.getAction().reveal(milled, destination, p, false, message, addSuffix);
                 }
-                StringBuilder sb = new StringBuilder();
-                sb.append(p).append(" milled ").append(milled).append(" to ").append(destination);
-                p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
+                p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
+                        Lang.joinHomogenous(milled) + toZoneStr + ".");
             }
             if (destination.equals(ZoneType.Exile)) {
                 for (final Card c : milled) {
