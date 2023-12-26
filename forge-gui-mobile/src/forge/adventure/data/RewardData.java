@@ -82,7 +82,8 @@ public class RewardData implements Serializable {
     private static Iterable<PaperCard> allEnemyCards;
 
     static private void initializeAllCards(){
-        RewardData legals = Config.instance().getConfigData().legalCards;
+        ConfigData configData = Config.instance().getConfigData();
+        RewardData legals = configData.legalCards;
 
         if(legals==null)
             allCards = CardUtil.getFullCardPool(false); // we need unique cards only here, so that a unique card can be chosen before a set variant is determined
@@ -96,11 +97,14 @@ public class RewardData implements Serializable {
                return false;
             if(input.getRules().getAiHints().getRemNonCommanderDecks())
                 return false;
-            if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
+            if(configData.allowedEditions != null) {
+                if (!Arrays.asList(configData.allowedEditions).contains(input.getEdition()))
+                    return false;
+            } else if(Arrays.asList(configData.restrictedEditions).contains(input.getEdition()))
                 return false;
             if(input.getRules().isCustom())
                 return false;
-            return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
+            return !Arrays.asList(configData.restrictedCards).contains(input.getName());
         });
         //Filter AI cards for enemies.
         allEnemyCards=Iterables.filter(allCards, input -> {
