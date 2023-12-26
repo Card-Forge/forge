@@ -2,6 +2,6 @@ Name:Root Sliver
 ManaCost:3 G
 Types:Creature Sliver
 PT:2/2
-K:This spell can't be countered.
-S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+R:Event$ Counter | ValidSA$ Spell.Sliver | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Sliver spells can't be countered.
 Oracle:This spell can't be countered.\nSliver spells can't be countered.

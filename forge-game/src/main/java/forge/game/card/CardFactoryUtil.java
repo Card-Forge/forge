@@ -63,7 +63,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AlternativeCost;
@@ -241,52 +240,6 @@ public class CardFactoryUtil {
                 + " | HiddenAgenda$ True"
                 + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
-    }
-
-    /**
-     * <p>
-     * isCounterable.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isCounterable(final Card c) {
-        if (c.hasKeyword("CARDNAME can't be countered.") || c.hasKeyword("This spell can't be countered.")) {
-            return false;
-        }
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
-        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return list.isEmpty();
-    }
-
-    /**
-     * <p>
-     * isCounterableBy.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param sa
-     *            the sa
-     * @return a boolean.
-     */
-    public static boolean isCounterableBy(final Card c, final SpellAbility sa) {
-        if (!isCounterable(c)) {
-            return false;
-        }
-
-        for (String o : c.getHiddenExtrinsicKeywords()) {
-            if (o.startsWith("CantBeCounteredBy")) {
-                final String[] m = o.split(":");
-                if (sa.isValid(m[1].split(","), c.getController(), c, null)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     /**

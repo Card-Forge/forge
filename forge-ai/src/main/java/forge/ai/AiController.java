@@ -192,13 +192,12 @@ public class AiController {
                 if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                         && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                     return true;
-                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-                        && CardFactoryUtil.isCounterable(host)) {
+                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment() && sa.isCounterableBy(null)) {
                     return true;
-                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)
                         && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
                     return true;
-                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
+                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)) {
                     String hostName = host.getName();
                     for (Card card : ccvGameBattlefield) {
                         if (!card.isToken() && card.sharesNameWith(host)) {
@@ -815,7 +814,7 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (!sa.isSpell() || CardFactoryUtil.isCounterable(host)) {
+        if (!sa.isSpell() || sa.isCounterableBy(null)) {
             for (TargetChoices tc : sa.getAllTargetChoices()) {
                 for (Card tgt : tc.getTargetCards()) {
                     // TODO some older cards don't use the keyword, so check for trigger instead

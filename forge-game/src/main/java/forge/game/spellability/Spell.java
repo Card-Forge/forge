@@ -17,17 +17,24 @@
  */
 package forge.game.spellability;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
 
@@ -204,5 +211,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         return lkicheck ? source : null;
+    }
+
+    public boolean isCounterableBy(final SpellAbility sa) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(getHostCard());
+        repParams.put(AbilityKey.SpellAbility, this);
+        repParams.put(AbilityKey.Cause, sa);
+        List<ReplacementEffect> list = getHostCard().getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
+        return list.isEmpty();
     }
 }

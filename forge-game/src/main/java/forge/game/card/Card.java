@@ -2076,12 +2076,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final StringBuilder sbLong = new StringBuilder();
 
         for (String keyword : getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CantBeCounteredBy")) {
-                final String[] p = keyword.split(":");
-                sbLong.append(p[2]).append("\r\n");
-            } else {
-                sbLong.append(keyword).append("\r\n");
-            }
+            sbLong.append(keyword).append("\r\n");
         }
         if (sb.length() > 0) {
             sb.append("\r\n");
@@ -2107,10 +2102,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (KeywordInterface inst : keywords) {
             String keyword = inst.getOriginal();
             try {
-                if (keyword.startsWith("CantBeCounteredBy")) {
-                    final String[] p = keyword.split(":");
-                    sbLong.append(p[2]).append("\r\n");
-                } else if (keyword.startsWith("etbCounter")) {
+                if (keyword.startsWith("etbCounter")) {
                     final String[] p = keyword.split(":");
                     final StringBuilder s = new StringBuilder();
                     if (p.length > 4) {
@@ -2925,8 +2917,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbCost.append(cost.toSimpleString());
                     sbAfter.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
-                } else if (keyword.equals("CARDNAME can't be countered.") || keyword.equals("This spell can't be " +
-                        "countered.") || keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
+                } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
                         "playing for ante.")) {
                     sbBefore.append(keyword);
                     sbBefore.append("\r\n");
@@ -5234,7 +5225,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isSpell() {
-        return isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield)));
+        return isInstant() || isSorcery() || (isAura() && !isInZone(ZoneType.Battlefield));
     }
 
     public final boolean isLand()       { return getType().isLand(); }

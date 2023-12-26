@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Legendary Creature Troll Shaman
 PT:4/4
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Hexproof
 Oracle:This spell can't be countered.\nHexproof (This creature can't be the target of spells or abilities your opponents control.)\n{1}{G}: Regenerate Thrun, the Last Troll.

@@ -2,7 +2,7 @@ Name:Prowling Serpopard
 ManaCost:1 G G
 Types:Creature Cat Snake
 PT:4/3
-K:This spell can't be countered.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ This spell can't be countered. | Description$ Creature spells you control can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+R:Event$ Counter | ValidSA$ Spell.Creature+YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Creature spells you control can't be countered.
 SVar:PlayMain1:TRUE
 Oracle:This spell can't be countered.\nCreature spells you control can't be countered.
