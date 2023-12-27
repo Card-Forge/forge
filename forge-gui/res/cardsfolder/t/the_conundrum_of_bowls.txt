@@ -1,7 +1,7 @@
 Name:The Conundrum of Bowls
 ManaCost:2 U U
 Types:Enchantment Saga
-K:Saga:3:SeekSmall,SeekBig,Cast
+K:Chapter:3:SeekSmall,SeekBig,Cast
 SVar:SeekSmall:DB$ Seek | Type$ Card.cmcLTX | SpellDescription$ Seek a card with mana value less than the number of cards in your hand.
 SVar:SeekBig:DB$ Seek | Type$ Card.cmcGTX | SpellDescription$ Seek a card with mana value greater than the number of cards in your hand.
 SVar:Cast:DB$ Play | Valid$ Card.YouCtrl+cmcEQX | ValidSA$ Spell | Optional$ True | WithoutManaCost$ True | SpellDescription$ Count the number of cards in your hand. You may cast a spell with mana value equal to that number from your hand without paying its mana cost.

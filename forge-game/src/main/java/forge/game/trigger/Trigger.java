@@ -643,4 +643,15 @@ public abstract class Trigger extends TriggerReplacementBase {
         return false;
     }
 
+    public boolean isChapter() {
+        return hasParam("Chapter");
+    }
+    public Integer getChapter() {
+        if (!isChapter())
+            return null;
+        return Integer.valueOf(getParam("Chapter"));
+    }
+    public boolean isLastChapter() {
+        return isChapter() && getChapter() == getCardState().getFinalChapterNr();
+    }
 }

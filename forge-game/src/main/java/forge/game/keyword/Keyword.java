@@ -146,6 +146,7 @@ public enum Keyword {
     RAMPAGE("Rampage", KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%1$d/+%1$d until end of turn for each creature blocking it beyond the first."),
     RAVENOUS("Ravenous", SimpleKeyword.class, false, "This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters."),
     REACH("Reach", SimpleKeyword.class, true, "This creature can block creatures with flying."),
+    READ_AHEAD("Read ahead", SimpleKeyword.class, true, "Chapter abilities of this Saga can’t trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability."),
     REBOUND("Rebound", SimpleKeyword.class, true, "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."),
     RECOVER("Recover", KeywordWithCost.class, false, "When a creature is put into your graveyard from the battlefield, you may pay %s. If you do, return this card from your graveyard to your hand. Otherwise, exile this card."),
     RECONFIGURE("Reconfigure", KeywordWithCost.class, false, "%s: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature."),

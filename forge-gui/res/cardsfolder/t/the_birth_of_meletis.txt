@@ -1,7 +1,7 @@
 Name:The Birth of Meletis
 ManaCost:1 W
 Types:Enchantment Saga
-K:Saga:3:TrigChange,TrigToken,TrigGainLife
+K:Chapter:3:TrigChange,TrigToken,TrigGainLife
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_4_a_wall_defender | TokenOwner$ You | SpellDescription$ Create a 0/4 colorless Wall artifact creature token with defender.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.

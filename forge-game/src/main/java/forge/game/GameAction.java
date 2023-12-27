@@ -1470,7 +1470,7 @@ public class GameAction {
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
         boolean checkAgain = false;
-        if (!c.getType().hasSubtype("Saga")) {
+        if (!c.isSaga()) {
             return false;
         }
         if (!c.canBeSacrificedBy(null, true)) {

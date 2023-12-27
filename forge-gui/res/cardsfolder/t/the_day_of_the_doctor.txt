@@ -1,7 +1,7 @@
 Name:The Day of the Doctor
 ManaCost:3 R W
 Types:Enchantment Saga
-K:Saga:4:DBDig,DBDig,DBDig,DBChoose
+K:Chapter:4:DBDig,DBDig,DBDig,DBChoose
 SVar:DBDig:DB$ DigUntil | Defined$ You | Valid$ Card.Legendary | FoundDestination$ Exile | RevealedDestination$ Exile | RememberRevealed$ True | ImprintFound$ True | SubAbility$ DBEffect | SpellDescription$ Exile cards from the top of your library until you exile a legendary card. You may play that card for as long as CARDNAME remains on the battlefield. Put the rest of those exiled cards on the bottom of your library in a random order.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Imprinted | Duration$ UntilHostLeavesPlay | ForgetOnMoved$ Exile | SubAbility$ DBRestRandomOrder
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may play that card for as long as CARDNAME remains on the battlefield.
