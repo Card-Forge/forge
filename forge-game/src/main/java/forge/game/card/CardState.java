@@ -634,11 +634,16 @@ public class CardState extends GameObject implements IHasSVars {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
-        if (lki && source.loyaltyRep != null) {
-            this.loyaltyRep = source.loyaltyRep.copy(card, lki);
-        }
-        if (lki && source.defenseRep != null) {
-            this.defenseRep = source.defenseRep.copy(card, lki);
+        if (lki) {
+            if (source.loyaltyRep != null) {
+                loyaltyRep = source.loyaltyRep.copy(card, true);
+            }
+            if (source.defenseRep != null) {
+                defenseRep = source.defenseRep.copy(card, true);
+            }
+            if (source.sagaRep != null) {
+                sagaRep = source.sagaRep.copy(card, true);
+            }
         }
     }
 
