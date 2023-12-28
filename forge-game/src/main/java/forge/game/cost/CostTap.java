@@ -66,7 +66,7 @@ public class CostTap extends CostPart {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
-        return source.isUntapped() && !source.isAbilitySick();
+        return source.canTap() && !source.isAbilitySick();
     }
 
     @Override
