@@ -127,9 +127,9 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     }
 
     @SuppressWarnings("unchecked")
-    public void replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
+    public boolean replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
         if (isEmpty()) {
-            return;
+            return false;
         }
         GameEntityCounterTable result = new GameEntityCounterTable();
         for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
@@ -181,5 +181,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             }
         }
         result.triggerCountersPutAll(game);
+        return !result.isEmpty();
     }
 }
