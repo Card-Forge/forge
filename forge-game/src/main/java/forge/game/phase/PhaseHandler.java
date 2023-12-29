@@ -875,6 +875,10 @@ public class PhaseHandler implements java.io.Serializable {
 
         game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
 
+        for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.setStartedTheTurnUntapped(c.isUntapped());
+        }
+
         game.setMonarchBeginTurn(game.getMonarch());
 
         if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
