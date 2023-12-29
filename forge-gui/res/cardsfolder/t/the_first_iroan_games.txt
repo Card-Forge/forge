@@ -1,7 +1,7 @@
 Name:The First Iroan Games
 ManaCost:2 G
 Types:Enchantment Saga
-K:Saga:4:TrigToken,TrigPutCounter,TrigDraw,TrigGold
+K:Chapter:4:TrigToken,TrigPutCounter,TrigDraw,TrigGold
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human Soldier token.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature you control.
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ConditionPresent$ Creature.YouCtrl+powerGE4 | SpellDescription$ If you control a creature with power 4 or greater, draw two cards.

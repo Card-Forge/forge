@@ -1,7 +1,7 @@
 Name:The Flame of Keld
 ManaCost:1 R
 Types:Enchantment Saga
-K:Saga:3:TrigDiscard,TrigDraw,TrigEffect
+K:Chapter:3:TrigDiscard,TrigDraw,TrigEffect
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SpellDescription$ Discard your hand.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:TrigEffect:DB$ Effect | Name$ The Flame of Keld Effect | ReplacementEffects$ FlameOfKeldDamageEvent | SpellDescription$ If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 instead.

@@ -307,20 +307,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setChapter(int val) {
-        sa.setChapter(val);
-    }
-
-    @Override
-    public boolean isLastChapter() {
-        return sa.isLastChapter();
-    }
-    @Override
-    public boolean setLastChapter(boolean value) {
-        return sa.setLastChapter(value);
-    }
-
-    @Override
     public boolean isFlashBackAbility() {
         return sa.isFlashBackAbility();
     }

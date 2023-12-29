@@ -2371,7 +2371,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
                         || keyword.startsWith("Champion") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga")
+                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
@@ -2380,7 +2380,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
                         || keyword.startsWith("Alternative Cost")) {
                     // keyword parsing takes care of adding a proper description
-                } else if (keyword.startsWith("Read ahead")) {
+                } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
                     sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
                     sb.append(")").append("\r\n\r\n");
@@ -2560,10 +2560,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Check if the saga card does not have the keyword Read ahead
-        if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
+        if (type.hasSubtype("Saga") && !state.hasKeyword(Keyword.READ_AHEAD)) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
             if (!state.getCard().isTransformable()) {
-                sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+                sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(state.getFinalChapterNr())).append(".");
             }
             sb.append(")").append(linebreak);
         }
@@ -5272,9 +5272,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
     public final boolean isAura()           { return getType().hasSubtype("Aura"); }
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
+    public final boolean isSaga()           { return getType().hasSubtype("Saga"); }
 
     public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
-    public final boolean isHistoric()   { return getType().isLegendary() || isArtifact() || getType().hasSubtype("Saga"); }
+    public final boolean isHistoric()   { return getType().isLegendary() || isArtifact() || isSaga(); }
 
     public final boolean isScheme()     { return getType().isScheme(); }
     public final boolean isPhenomenon() { return getType().isPhenomenon(); }
@@ -7411,14 +7412,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final int getFinalChapterNr() {
-        int n = 0;
-        for (final Trigger t : getTriggers()) {
-            SpellAbility sa = t.getOverridingAbility();
-            if (sa != null && sa.isChapter()) {
-                n = Math.max(n, sa.getChapter());
-            }
-        }
-        return n;
+        return getCurrentState().getFinalChapterNr();
     }
 
     public boolean canBeDiscardedBy(SpellAbility sa, final boolean effect) {
