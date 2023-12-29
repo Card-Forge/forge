@@ -2905,7 +2905,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb")) {
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Overload")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
 

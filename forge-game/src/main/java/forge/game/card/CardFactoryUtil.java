@@ -74,6 +74,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
 import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
@@ -3244,6 +3245,50 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Overload")) {
+            final String[] k = keyword.split(":");
+            final Cost overloadCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(overloadCost);
+
+            TargetRestrictions tgt = newSA.getTargetRestrictions();
+            String defined = String.join(",", tgt.getValidTgts());
+
+            if (tgt.canTgtPlayer()) {
+                newSA.putParam("Defined", defined);
+            } else {
+                String zoneDef = "";
+                if (!tgt.getZone().contains(ZoneType.Battlefield)) {
+                    zoneDef = StringUtils.join(tgt.getZone(), ",");
+                }
+                if (newSA.hasParam("TargetType")) {
+                    defined = defined.replaceAll("Card", newSA.getParam("TargetType"));
+                }
+                newSA.putParam("Defined", "Valid" + zoneDef + " " + defined);
+            }
+            newSA.setTargetRestrictions(null);
+
+            if (host.isInstant() || host.isSorcery()) {
+                newSA.putParam("Secondary", "True");
+            }
+            newSA.putParam("PrecostDesc", "Overload");
+            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+
+            // makes new StackDescription
+            String stackD = newSA.getDescription().replaceAll("Target", "Each")
+                .replaceAll("target", "each");
+            newSA.putParam("StackDescription", stackD);
+
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription());
+            sb.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(sb.toString());
+            // need to store them for additional copies
+            newSA.getOriginalMapParams().putAll(newSA.getMapParams());
+
+            newSA.setIntrinsic(intrinsic);
+            newSA.setAlternativeCost(AlternativeCost.Overload);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prototype")) {
             final String[] k = keyword.split(":");
             if (k.length < 4) {

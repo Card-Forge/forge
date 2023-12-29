@@ -115,6 +115,10 @@ public class PumpEffect extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
+        if (sa.hasParam("RememberPumped")) {
+            host.addRemembered(gameCard);
+        }
+
         if (!"Permanent".equals(duration) && !perpetual) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
