@@ -67,7 +67,7 @@ public class CostTapType extends CostPartWithList {
         if (!canTapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
 
         if (ability.hasParam("Crew")) {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
