@@ -3228,12 +3228,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, eff));
         eff.addTrigger(planesWalkTrigger);
 
-        String chaosTrig = "Mode$ PlanarDice | ValidPlayer$ You | Result$ Chaos | TriggerZones$ Command | Static$ True";
-        String rolledChaos = "DB$ ChaosEnsues";
-        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, eff, true);
-        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, eff));
-        eff.addTrigger(chaosTrigger);
-
         String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
                 " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
                 "times you have previously taken this action this turn. | CostDesc$ {X}: ";
