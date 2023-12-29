@@ -51,6 +51,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
@@ -4505,6 +4506,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
+    public final boolean canTap() {
+        return canTap(false);
+    }
+    public final boolean canTap(boolean attacker) {
+        if (tapped) { return false; }
+
+        // Check replacement effects
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.IsCombat, attacker); // right name for parameter?
+        List<ReplacementEffect> list = getGame().getReplacementHandler().getReplacementList(ReplacementType.Tap, repParams, ReplacementLayer.CantHappen);
+
+        return list.isEmpty();
+    }
+
     public final boolean tap(boolean tapAnimation, SpellAbility cause, Player tapper) {
         return tap(false, tapAnimation, cause, tapper);
     }
@@ -4512,7 +4527,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (tapped) { return false; }
 
         // Run replacement effects
-        getGame().getReplacementHandler().run(ReplacementType.Tap, AbilityKey.mapFromAffected(this));
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.IsCombat, attacker); // right name for parameter?
+
+        switch (getGame().getReplacementHandler().run(ReplacementType.Tap, repParams)) {
+        case NotReplaced:
+            break;
+        case Updated:
+            break;
+        default:
+            return false;
+        }
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);

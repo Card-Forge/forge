@@ -565,8 +565,9 @@ public class PlayEffect extends SpellAbilityEffect {
         };
         String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFaceUp";
 
-        for (int i = 0; i < 3; ++i) {
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstrs[i], eff, true);
+        for (final String repStr : repeffstrs) {
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repStr, eff, true);
+            re.putParam("ReplacementResult", "Updated");
             re.setLayer(ReplacementLayer.Other);
             re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
             eff.addReplacementEffect(re);
