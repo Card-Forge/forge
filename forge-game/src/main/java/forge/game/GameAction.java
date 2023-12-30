@@ -583,10 +583,15 @@ public class GameAction {
             }
         }
 
-        // Need to apply any static effects to produce correct triggers
-        checkStaticAbilities();
+        if (!table.isEmpty()) {
+            // we don't want always trigger before counters are placed
+            game.getTriggerHandler().suppressMode(TriggerType.Always);
+            // Need to apply any static effects to produce correct triggers
+            checkStaticAbilities();
+        }
 
-        if (table.replaceCounterEffect(game, null, true, true, params)) {
+        if (table.isEmpty() || table.replaceCounterEffect(game, null, true, true, params)) {
+            game.getTriggerHandler().clearSuppression(TriggerType.Always);
             // update static abilities after etb counters have been placed
             checkStaticAbilities();
         }
