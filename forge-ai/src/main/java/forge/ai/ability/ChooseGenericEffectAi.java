@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -11,9 +10,7 @@ import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -84,9 +81,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
             Map<String, Object> params) {
         Card host = sa.getHostCard();
-        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = host.getGame();
-        final Combat combat = game.getCombat();
         final String logic = sa.getParam("AILogic");
         if (logic == null) {
             return spells.get(0);
