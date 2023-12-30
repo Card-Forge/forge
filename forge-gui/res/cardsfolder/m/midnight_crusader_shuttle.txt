@@ -1,0 +1,12 @@
+Name:Midnight Crusader Shuttle
+ManaCost:4
+Types:Artifact Vehicle
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Midnight Entity — Whenever CARDNAME attacks, defending player faces a villainous choice — That player sacrifices a creature, or you gain control of a creature of your choice that player controls until end of turn. If you gain control of a creature this way, tap it, and it's attacking that player.
+SVar:VillainousChoice:DB$ VillainousChoice | Defined$ TriggeredDefendingPlayer | Choices$ DBSacrifice,DBGainControl
+SVar:DBSacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | Defined$ Remembered
+SVar:DBGainControl:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl | Mandatory$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ChosenCard | Attacking$ RememberedPlayer | Tapped$ True | GainControl$ True 
+K:Crew:2
+SVar:HasAttackEffect:True
+DeckHas:Ability$Sacrifice
+Oracle:Midnight Entity — Whenever Midnight Crusader Shuttle attacks, defending player faces a villainous choice — That player sacrifices a creature, or you gain control of a creature of your choice that player controls until end of turn. If you gain control of a creature this way, tap it, and it's attacking that player.\nCrew 2
