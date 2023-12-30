@@ -8,5 +8,6 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBSacrifice,DBToken
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Remembered | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Opponent sacrifices a creature.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | TokenOwner$ You | SpellDescription$ You create a 3/3 black Dalek artifact creature token with menace.
-SVar:Y:Count$ValidHand Card.OwnedBy Player.IsRemembered
+DeckHints:Type$Dalek
+DeckHas:Ability$Token
 Oracle:Affinity for Daleks (This spell costs {1} less to cast for each Dalek you control.)\nOther Daleks you control have haste.\nAt the beginning of combat on your turn, each opponent faces a villainous choice — That player sacrifices a creature they control, or you create a 3/3 black Dalek artifact creature token with menace.
