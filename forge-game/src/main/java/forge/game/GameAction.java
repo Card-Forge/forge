@@ -590,11 +590,11 @@ public class GameAction {
             checkStaticAbilities();
         }
 
-        if (table.isEmpty() || table.replaceCounterEffect(game, null, true, true, params)) {
-            game.getTriggerHandler().clearSuppression(TriggerType.Always);
-            // update static abilities after etb counters have been placed
-            checkStaticAbilities();
-        }
+        table.replaceCounterEffect(game, null, true, true, params);
+
+        // update static abilities after etb counters have been placed
+        game.getTriggerHandler().clearSuppression(TriggerType.Always);
+        checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
