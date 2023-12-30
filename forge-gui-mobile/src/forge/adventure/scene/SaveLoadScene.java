@@ -15,8 +15,6 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.stage.GameHUD;
-import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;

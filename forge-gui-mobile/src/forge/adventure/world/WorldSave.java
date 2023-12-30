@@ -3,7 +3,6 @@ package forge.adventure.world;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
-import forge.adventure.scene.GameScene;
 import forge.adventure.scene.SaveLoadScene;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureModes;

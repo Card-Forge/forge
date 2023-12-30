@@ -3,7 +3,6 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
-import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.BiomeData;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -14,7 +13,6 @@ import forge.adventure.world.World;
 import forge.util.TextUtil;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Game scene main over world scene
