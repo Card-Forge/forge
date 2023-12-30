@@ -583,13 +583,18 @@ public class GameAction {
             }
         }
 
-        // Need to apply any static effects to produce correct triggers
-        checkStaticAbilities();
-
-        if (table.replaceCounterEffect(game, null, true, true, params)) {
-            // update static abilities after etb counters have been placed
+        if (!table.isEmpty()) {
+            // we don't want always trigger before counters are placed
+            game.getTriggerHandler().suppressMode(TriggerType.Always);
+            // Need to apply any static effects to produce correct triggers
             checkStaticAbilities();
         }
+
+        table.replaceCounterEffect(game, null, true, true, params);
+
+        // update static abilities after etb counters have been placed
+        game.getTriggerHandler().clearSuppression(TriggerType.Always);
+        checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
