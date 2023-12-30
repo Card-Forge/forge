@@ -254,7 +254,7 @@ https://downloads.cardforge.org/images/icons/Emrakul.jpg
 https://downloads.cardforge.org/images/icons/En%20Sabah%20Nur.jpg
 https://downloads.cardforge.org/images/icons/Enchantress.jpg
 https://downloads.cardforge.org/images/icons/Endora.jpg
-https://downloads.cardforge.org/images/icons/Eomer.jpg
+https://downloads.cardforge.org/images/icons/Éomer.jpg
 https://downloads.cardforge.org/images/icons/Equastis.jpg
 https://downloads.cardforge.org/images/icons/Equilibrium.jpg
 https://downloads.cardforge.org/images/icons/Erebos.jpg

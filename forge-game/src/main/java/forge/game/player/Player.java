@@ -193,6 +193,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
+    private Map<Long, Integer> additionalVillainousChoices = Maps.newHashMap();
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -3677,6 +3678,26 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
         return controlVotes.last();
+    }
+
+    public void addAdditionalVillainousChoices(long timestamp, int value) {
+        additionalVillainousChoices.put(timestamp, value);
+        getView().updateAdditionalVillainousChoices(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+    public void removeAdditionalVillainousChoices(long timestamp) {
+        if (additionalVillainousChoices.remove(timestamp) != null) {
+            getView().updateAdditionalVillainousChoices(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
+
+    public int getAdditionalVillainousChoices() {
+        int value = 0;
+        for (Integer i : additionalVillainousChoices.values()) {
+            value += i;
+        }
+        return value;
     }
 
     public void addCycled(SpellAbility sp) {

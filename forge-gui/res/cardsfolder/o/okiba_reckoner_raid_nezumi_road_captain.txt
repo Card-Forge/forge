@@ -1,7 +1,7 @@
 Name:Okiba Reckoner Raid
 ManaCost:B
 Types:Enchantment Saga
-K:Saga:3:DBDrain,DBDrain,DBTransform
+K:Chapter:3:DBDrain,DBDrain,DBTransform
 SVar:DBDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

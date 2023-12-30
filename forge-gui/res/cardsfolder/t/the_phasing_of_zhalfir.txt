@@ -1,7 +1,8 @@
 Name:The Phasing of Zhalfir
 ManaCost:2 U U
 Types:Enchantment Saga
-K:Read ahead:3:DBPhase,DBPhase,DBDestroyAll
+K:Read ahead
+K:Chapter:3:DBPhase,DBPhase,DBDestroyAll
 SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select another target nonland permanent | SubAbility$ DBEffect | SpellDescription$ Another target nonland permanent phases out. It can't phase in for as long as you control CARDNAME.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantPhaseIn | RememberObjects$ Targeted | Duration$ UntilLoseControlOfHost
 SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | Description$ It can't phase in for as long as you control EFFECTSOURCE.

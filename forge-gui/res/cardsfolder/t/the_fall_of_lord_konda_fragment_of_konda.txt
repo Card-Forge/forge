@@ -1,7 +1,7 @@
 Name:The Fall of Lord Konda
 ManaCost:2 W
 Types:Enchantment Saga
-K:Saga:3:DBExile,DBRetake,DBTransform
+K:Chapter:3:DBExile,DBRetake,DBTransform
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+cmcGE4 | TgtPrompt$ Choose target creature an opponent controls with mana value 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature an opponent controls with mana value 4 or greater.
 SVar:DBRetake:DB$ GainControlVariant | AllValid$ Permanent | ChangeController$ CardOwner | SpellDescription$ Each player gains control of all permanents they own.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

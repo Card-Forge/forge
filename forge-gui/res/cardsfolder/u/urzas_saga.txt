@@ -1,7 +1,7 @@
 Name:Urza's Saga
 ManaCost:no cost
 Types:Enchantment Land Urza's Saga
-K:Saga:3:Animate1,Animate2,Tutor
+K:Chapter:3:Animate1,Animate2,Tutor
 SVar:Animate1:DB$ Animate | Defined$ Self | Abilities$ ABMana | Duration$ Permanent | SpellDescription$ CARDNAME gains "{T}: Add {C}."
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:Animate2:DB$ Animate | Defined$ Self | Abilities$ ABToken | Duration$ Permanent | SpellDescription$ CARDNAME gains "{2}, {T}: Create a 0/0 colorless Construct artifact creature token with 'This creature gets +1/+1 for each artifact you control.'"

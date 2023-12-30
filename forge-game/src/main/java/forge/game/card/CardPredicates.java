@@ -551,6 +551,13 @@ public final class CardPredicates {
                 return c.isUntapped();
             }
         };
+
+        public static final Predicate<Card> CAN_TAP = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.canTap();
+            }
+        };
         /**
          * a Predicate<Card> to get all creatures.
          */

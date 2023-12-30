@@ -1,4 +1,4 @@
-Name:Jotun Owl Keeper
+Name:Jötun Owl Keeper
 ManaCost:2 W
 Types:Creature Giant
 PT:3/3

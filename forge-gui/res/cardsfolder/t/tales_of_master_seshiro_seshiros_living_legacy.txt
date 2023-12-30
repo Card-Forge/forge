@@ -1,7 +1,7 @@
 Name:Tales of Master Seshiro
 ManaCost:4 G
 Types:Enchantment Saga
-K:Saga:3:DBPutCounter,DBPutCounter,DBTransform
+K:Chapter:3:DBPutCounter,DBPutCounter,DBTransform
 SVar:DBPutCounter:DB
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature or Vehicle you control. It gains vigilance until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance

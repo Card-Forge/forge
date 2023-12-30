@@ -1,7 +1,7 @@
 Name:Blink
 ManaCost:2 U B
 Types:Enchantment Saga
-K:Saga:4:DBShuffle,DBToken,DBShuffle,DBToken
+K:Chapter:4:DBShuffle,DBToken,DBShuffle,DBToken
 SVar:DBShuffle:DB$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBInvestigate | SpellDescription$ Choose target creature. Its owner shuffles it into their library, then investigates. (They create a Clue token.)
 SVar:DBInvestigate:DB$ Investigate | Num$ 1 | Defined$ TargetedOwner
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_a_alien_angel_firststrike_vigilance | SpellDescription$ Create a 2/2 black Alien Angel artifact creature token with first strike, vigilance, and "Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn."

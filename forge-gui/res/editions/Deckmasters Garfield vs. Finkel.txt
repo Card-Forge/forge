@@ -12,8 +12,8 @@ ScryfallCode=DKM
 3 C Dark Banishing @Drew Tucker
 4 C Dark Ritual @Justin Hampton
 5 C Foul Familiar @Anson Maddocks
-6a C Lim-Dul's High Guard @Anson Maddocks
-6b C Lim-Dul's High Guard @Anson Maddocks
+6a C Lim-Dûl's High Guard @Anson Maddocks
+6b C Lim-Dûl's High Guard @Anson Maddocks
 7 R Necropotence @Mark Tedin
 8a C Phantasmal Fiend @Scott Kirschner
 8b C Phantasmal Fiend @Scott Kirschner

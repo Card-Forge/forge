@@ -24,28 +24,12 @@ import java.util.Map;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Game game = sa.getActivatingPlayer().getGame();
-
         final StringBuilder sb = new StringBuilder();
-        final List<SpellAbility> sas;
-
-        if (sa.hasParam("AllValid")) {
-            sas = Lists.newArrayList();
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility();
-                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                    continue;
-                }
-                sas.add(spell);
-            }
-        } else {
-            sas = getTargetSpells(sa);
-        }
 
         sb.append("Counter");
 
         boolean isAbility = false;
-        for (final SpellAbility tgtSA : sas) {
+        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             sb.append(" ");
             sb.append(tgtSA.getHostCard());
             isAbility = tgtSA.isAbility();
@@ -69,26 +53,10 @@ public class CounterEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
-        // TODO Before this resolves we should see if any of our targets are
-        // still on the stack
-        final List<SpellAbility> sas;
-
-        if (sa.hasParam("AllValid")) {
-            sas = Lists.newArrayList();
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility();
-                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                    continue;
-                }
-                sas.add(spell);
-            }
-        } else {
-            sas = getTargetSpells(sa);
-        }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
-        for (final SpellAbility tgtSA : sas) {
+        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered
             // currently all effects using this are targeted in case the spell gets countered before

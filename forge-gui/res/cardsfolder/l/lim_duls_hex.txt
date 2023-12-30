@@ -1,4 +1,4 @@
-Name:Lim-Dul's Hex
+Name:Lim-Dûl's Hex
 ManaCost:1 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, for each player, CARDNAME deals 1 damage to that player unless they pay {B} or {3}.

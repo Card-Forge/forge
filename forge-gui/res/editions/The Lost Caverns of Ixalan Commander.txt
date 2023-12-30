@@ -7,7 +7,7 @@ ScryfallCode=LCC
 
 [cards]
 1 M Admiral Brass, Unsinkable @Jason Rainville
-2 M Clavileno, First of the Blessed @Matt Stewart
+2 M Clavileño, First of the Blessed @Matt Stewart
 3 M Hakbal of the Surging Soul @Tyler Walpole
 4 M Pantlaza, Sun-Favored @Sam Burley
 5 M Carmen, Cruel Skymarcher @Randy Vargas
@@ -23,7 +23,7 @@ ScryfallCode=LCC
 15 M Eye of Ojer Taq @Erikas Perl
 16 M Paleontologist's Pick-Axe @Ernanda Souza
 17 M Admiral Brass, Unsinkable @Michael Walsh
-18 M Clavileno, First of the Blessed @Chun Lo
+18 M Clavileño, First of the Blessed @Chun Lo
 19 M Hakbal of the Surging Soul @Anditya Dita
 20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
 21 R Illustrious Wanderglyph @Erikas Perl
@@ -32,7 +32,7 @@ ScryfallCode=LCC
 24 R Contest of Claws @Cristi Balanescu
 25 M Admiral Brass, Unsinkable @Jason Rainville
 26 M Carmen, Cruel Skymarcher @Randy Vargas
-27 M Clavileno, First of the Blessed @Matt Stewart
+27 M Clavileño, First of the Blessed @Matt Stewart
 28 M Don Andres, the Renegade @Daarken
 29 M Hakbal of the Surging Soul @Tyler Walpole
 30 M Pantlaza, Sun-Favored @Sam Burley
@@ -127,7 +127,7 @@ ScryfallCode=LCC
 119 U Whispersilk Cloak @Julian Kok Joon Wen
 120 U Worn Powerstone @Chris Ostrowski
 121 M Admiral Brass, Unsinkable @Jason Rainville
-122 M Clavileno, First of the Blessed @Matt Stewart
+122 M Clavileño, First of the Blessed @Matt Stewart
 123 M Hakbal of the Surging Soul @Tyler Walpole
 124 M Pantlaza, Sun-Favored @Sam Burley
 125 R Akroma's Will @Antonio José Manzanedo
