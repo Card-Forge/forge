@@ -1488,7 +1488,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (sa.hasParam("Cost")) {
-                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, false)) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                         continue;
                     }
                 }
