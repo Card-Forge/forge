@@ -212,7 +212,9 @@ public class NewGameScene extends MenuScene {
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().setDirectlyEnterPOI();
-            AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
+            if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
+                AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
+            }
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));

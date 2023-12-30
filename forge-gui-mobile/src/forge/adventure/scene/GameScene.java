@@ -62,7 +62,7 @@ public class GameScene extends HudScene {
 
     public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
         if (MapStage.getInstance().isInMap()) {
-            location = forHeader ? TileMapScene.instance().rootPoint.getData().name : TileMapScene.instance().rootPoint.getData().type;
+            location = forHeader ? TileMapScene.instance().rootPoint.getDisplayName() : TileMapScene.instance().rootPoint.getData().type;
         } else {
             World world = Current.world();
             //this gets the name of the layer... this shoud be based on boundaries...
@@ -94,12 +94,6 @@ public class GameScene extends HudScene {
             return TileMapScene.instance().rootPoint;
         }
         return null;
-    }
-
-    public boolean isNotInWorldMap() {
-        String location = getAdventurePlayerLocation(false, true);
-        Set<String> locationTypes = Sets.newHashSet("capital", "castle", "cave", "dungeon", "town");
-        return locationTypes.contains(location);
     }
 }
 

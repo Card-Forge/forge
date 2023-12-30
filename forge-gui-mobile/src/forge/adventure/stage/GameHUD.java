@@ -304,7 +304,7 @@ public class GameHUD extends Stage {
             updatelife = false;
             lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
-        if (!GameScene.instance().isNotInWorldMap())
+        if (!MapStage.getInstance().isInMap())
             updateMusic();
         else
             SoundSystem.instance.pause();
@@ -382,7 +382,7 @@ public class GameHUD extends Stage {
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        if (GameScene.instance().isNotInWorldMap()) {
+        if (MapStage.getInstance().isInMap()) {
             SoundSystem.instance.pause();
             playAudio();
         } else {
@@ -453,7 +453,7 @@ public class GameHUD extends Stage {
     private Pair<FileHandle, Music> audio = null;
 
     public void switchAudio() {
-        if (GameScene.instance().isNotInWorldMap()) {
+        if (MapStage.getInstance().isInMap()) {
             pauseMusic();
             playAudio();
         }
@@ -590,7 +590,7 @@ public class GameHUD extends Stage {
     private void exitToWorldMap() {
         if (console.isVisible())
             return;
-        if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
+        if (!MapStage.getInstance().isInMap()) //prevent showing this dialog to WorldMap
             return;
         if (!MapStage.getInstance().canEscape())
             return;
@@ -614,7 +614,7 @@ public class GameHUD extends Stage {
     private void bookmark() {
         if (console.isVisible())
             return;
-        if (!GameScene.instance().isNotInWorldMap())
+        if (!MapStage.getInstance().isInMap())
             return;
         if (!MapStage.getInstance().canEscape())
             return;
@@ -694,8 +694,8 @@ public class GameHUD extends Stage {
         setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !GameScene.instance().isNotInWorldMap(), "[%120][+ExitToWorldMap]", "---");
-        setDisabled(bookmarkActor, !GameScene.instance().isNotInWorldMap(), "[%120][+Bookmark]", "---");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "---");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "---");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
