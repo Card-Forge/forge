@@ -18,7 +18,6 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.*;
-import forge.adventure.util.pathfinding.NavigationMap;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
