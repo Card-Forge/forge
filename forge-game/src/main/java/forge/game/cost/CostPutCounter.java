@@ -150,7 +150,7 @@ public class CostPutCounter extends CostPartWithList {
         final Card source = ability.getHostCard();
         final Game game = source.getGame();
         if (this.payCostFromSource()) {
-            if (isETBRelacement(ability, effect)) {
+            if (isETBReplacement(ability, effect)) {
                 final Card copy = CardUtil.getLKICopy(source);
                 copy.setLastKnownZone(payer.getZone(ZoneType.Battlefield));
 
@@ -202,7 +202,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final int i = getAbilityAmount(ability);
-        if (isETBRelacement(ability, effect)) {
+        if (isETBReplacement(ability, effect)) {
             targetCard.addEtbCounter(getCounter(), i, payer);
         } else {
             targetCard.addCounter(getCounter(), i, payer, counterTable);
@@ -241,7 +241,7 @@ public class CostPutCounter extends CostPartWithList {
         counterTable.clear();
     }
 
-    protected boolean isETBRelacement(final SpellAbility ability, final boolean effect) {
+    protected boolean isETBReplacement(final SpellAbility ability, final boolean effect) {
        if (!effect) {
            return false;
        }
