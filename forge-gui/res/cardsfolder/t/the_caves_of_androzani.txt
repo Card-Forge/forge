@@ -1,7 +1,7 @@
 Name:The Caves of Androzani
 ManaCost:3 W
 Types:Enchantment Saga
-K:Saga:4:DBStunCounter,DBChooseCard,DBChooseCard,DBSearch
+K:Chapter:4:DBStunCounter,DBChooseCard,DBChooseCard,DBSearch
 SVar:DBStunCounter:DB$ PutCounter | ValidTgts$ Creature.tapped | TgtPrompt$ Select up to two target tapped creatures | CounterType$ STUN | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 2 |  SpellDescription$ Put two stun counters on each of up to two target tapped creatures.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Permanent.nonSaga+HasCounters | ChoiceTitle$ Choose any number of non-Saga permanents with counters | MinAmount$ 0 | ChoiceZone$ Battlefield | Amount$ X | SubAbility$ DBAdditionalCounter | SpellDescription$ For each non-Saga permanent, choose a counter on it. You may put an additional counter of that kind on that permanent.
 SVar:X:Count$Valid Permanent.nonSaga+HasCounters

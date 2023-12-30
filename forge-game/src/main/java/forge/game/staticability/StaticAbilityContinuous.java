@@ -593,6 +593,11 @@ public final class StaticAbilityContinuous {
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
+                if (params.containsKey("AdditionalVillainousChoice")) {
+                    String mhs = params.get("AdditionalVillainousChoice");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalVillainousChoices(se.getTimestamp(), add);
+                }
             }
         }
 

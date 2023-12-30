@@ -1,7 +1,7 @@
 Name:Kiora Bests the Sea God
 ManaCost:5 U U
 Types:Enchantment Saga
-K:Saga:3:TrigToken,TrigTap,TrigGainControl
+K:Chapter:3:TrigToken,TrigTap,TrigGainControl
 SVar:TrigToken:DB$ Token | TokenScript$ u_8_8_kraken_hexproof | SpellDescription$ Create an 8/8 blue Kraken creature token with hexproof.
 SVar:TrigTap:DB$ TapAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Permanent.nonLand | SubAbility$ DBPumpAll | SpellDescription$ Tap all nonland permanents target opponent controls. They don't untap during their controllers' next untap step.
 SVar:DBPumpAll:DB$ PumpAll | Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent

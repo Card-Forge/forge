@@ -1,7 +1,8 @@
 Name:The Elder Dragon War
 ManaCost:2 R R
 Types:Enchantment Saga
-K:Read ahead:3:DBDealDamage,DBDiscard,DBToken
+K:Read ahead
+K:Chapter:3:DBDealDamage,DBDiscard,DBToken
 SVar:DBDealDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Opponent | NumDmg$ 2 | ValidDescription$ each creature and each opponent. | SpellDescription$ CARDNAME deals 2 damage to each creature and each opponent.
 SVar:DBDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard any number of cards, then draw that many cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup

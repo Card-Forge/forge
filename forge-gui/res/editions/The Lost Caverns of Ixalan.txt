@@ -233,7 +233,7 @@ ScryfallCode=LCI
 221 R Amalia Benavides Aguirre @Alix Branwyn
 222 M The Ancient One @Victor Adame Minguez
 223 R Anim Pakal, Thousandth Moon @Chris Rahn
-224 U Bartolome del Presidio @Randy Gallegos
+224 U Bartolomé del Presidio @Randy Gallegos
 225 R The Belligerent @Bruce Brenneise
 226 U Caparocti Sunborn @Donato Giancola
 227 U Captain Storm, Cosmium Raider @Diego Gisbert
@@ -312,7 +312,7 @@ ScryfallCode=LCI
 298 U Akawalli, the Seething Tower @rishxxv
 299 R Amalia Benavides Aguirre @Alex Negrea
 300 R Anim Pakal, Thousandth Moon @Anditya Dita
-301 U Bartolome del Presidio @Pig Hands
+301 U Bartolomé del Presidio @Pig Hands
 302 U Caparocti Sunborn @Cabrol
 303 U Captain Storm, Cosmium Raider @rishxxv
 304 U Kutzil, Malamet Exemplar @Pig Hands
@@ -434,7 +434,7 @@ ScryfallCode=LCI
 406 U Deep-Cavern Bat @Campbell White
 407 U Geological Appraiser @Alix Branwyn
 408 U Cenote Scout @Caroline Gariba
-409 U Bartolome del Presidio @Randy Gallegos
+409 U Bartolomé del Presidio @Randy Gallegos
 
 [double-face]
 9 Idol of the Deep King|LCI

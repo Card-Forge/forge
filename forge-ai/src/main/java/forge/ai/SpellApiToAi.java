@@ -192,6 +192,7 @@ public enum SpellApiToAi {
             .put(ApiType.Untap, UntapAi.class)
             .put(ApiType.UntapAll, UntapAllAi.class)
             .put(ApiType.Venture, VentureAi.class)
+            .put(ApiType.VillainousChoice, AlwaysPlayAi.class)
             .put(ApiType.Vote, VoteAi.class)
             .put(ApiType.WinsGame, GameWinAi.class)
 

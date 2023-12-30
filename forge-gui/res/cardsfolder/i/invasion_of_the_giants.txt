@@ -1,7 +1,7 @@
 Name:Invasion of the Giants
 ManaCost:U R
 Types:Enchantment Saga
-K:Saga:3:DBScry,DBDraw,DBEffect
+K:Chapter:3:DBScry,DBDraw,DBEffect
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBReveal | SpellDescription$ Draw a card. Then you may reveal a Giant card from your hand. When you do, CARDNAME deals 2 damage to target opponent or planeswalker.
 SVar:DBReveal:DB$ ImmediateTrigger | Execute$ TrigDealDamage | UnlessCost$ Reveal<1/Giant> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may reveal a Giant card from your hand. When you do, CARDNAME deals 2 damage to target opponent or planeswalker.

@@ -2,7 +2,7 @@ Name:Raven's Run
 ManaCost:no cost
 Types:Plane Shadowmoor
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Wither | Description$ All Creatures have Wither (They deal damage to creatures in the form of -1/-1 counters.)
-T:Mode$ ChaosEnsues | OptionalDecider$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever chaos ensues, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever chaos ensues, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetUnique$ True | CounterType$ M1M1 | SubAbility$ DBPutTwo
 SVar:DBPutTwo:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 2 | SubAbility$ DBPutThree
 SVar:DBPutThree:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select a third target creature | TargetUnique$ True | CounterType$ M1M1 | CounterNum$ 3

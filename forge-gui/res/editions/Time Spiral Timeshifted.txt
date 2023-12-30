@@ -26,7 +26,7 @@ FatPack=0
 4 S Consecrate Land @Jeff A. Menges
 39 S Conspiracy @Jeff Easley
 76 S Craw Giant @Christopher Rush
-19 S Dandan @Drew Tucker
+19 S Dandân @Drew Tucker
 40 S Darkness @Harold McNeill
 41 S Dauthi Slayer @Dermot Power
 5 S Defiant Vanguard @Pete Venters

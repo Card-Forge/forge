@@ -1,7 +1,7 @@
 Name:Victory of the Pyrohammer
 ManaCost:3 R R
 Types:Enchantment Saga
-K:Saga:3:DamageAll,PingAll,PingAll
+K:Chapter:3:DamageAll,PingAll,PingAll
 SVar:DamageAll:DB$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 4 | SubAbility$ DBAnimate | SpellDescription$ CARDNAME deals 4 damage to each creature and each planeswalker. CARDNAME gains "Damage isn't removed from creatures during cleanup steps."
 SVar:DBAnimate:DB$ Animate | staticAbilities$ DamageNotRemoved | Defined$ Self | Duration$ Permanent
 SVar:DamageNotRemoved:Mode$ NoCleanupDamage | ValidCard$ Creature | Description$ Damage isn't removed from creatures during cleanup steps.

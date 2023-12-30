@@ -1,4 +1,4 @@
-Name:Troll of Khazad-dum
+Name:Troll of Khazad-dûm
 ManaCost:5 B
 Types:Creature Troll
 PT:6/5

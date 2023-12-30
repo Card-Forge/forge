@@ -1,7 +1,7 @@
 Name:Fable of the Mirror-Breaker
 ManaCost:2 R
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBDiscard,DBTransform
+K:Chapter:3:DBToken,DBDiscard,DBTransform
 SVar:DBToken:DB$ Token | TokenScript$ r_2_2_goblin_shaman_treasure | SpellDescription$ Create a 2/2 red Goblin Shaman creature token with "Whenever this creature attacks, create a Treasure token."
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ You may discard up two cards. If you do, draw that many cards.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup

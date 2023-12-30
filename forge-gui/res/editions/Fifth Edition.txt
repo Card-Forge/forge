@@ -99,7 +99,7 @@ ScryfallCode=5ED
 152 U Cursed Land @Jesper Myrfors
 78 R Dance of Many @Sandra Everingham
 362 R Dancing Scimitar @Anson Maddocks
-79 C Dandan @Drew Tucker
+79 C Dandân @Drew Tucker
 80 C Dark Maze @David Seeley
 153 C Dark Ritual @Clint Langley
 23 C D'Avenant Archer @Douglas Shuler
@@ -174,7 +174,7 @@ ScryfallCode=5ED
 232 R Game of Chaos @Thomas Gianni
 90 C Gaseous Form @Doug Keith
 373 R Gauntlets of Chaos @Alan Rabinowitz
-298 C Ghazban Ogre @Mike Raabe
+298 C Ghazbán Ogre @Mike Raabe
 299 C Giant Growth @DiTerlizzi
 300 C Giant Spider @Brian Snõddy
 233 C Giant Strength @Kev Walker
