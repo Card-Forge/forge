@@ -95,13 +95,13 @@ public class CostPayment extends ManaConversionMatrix {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect) {
         if (cost == null) {
             return true;
         }
 
         cost = CostAdjustment.adjust(cost, ability);
-        return cost.canPay(ability, false);
+        return cost.canPay(ability, effect);
     }
 
     /**

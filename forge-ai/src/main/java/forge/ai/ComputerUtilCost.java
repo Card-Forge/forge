@@ -636,7 +636,7 @@ public class ComputerUtilCost {
         }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, effect);
     }
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
@@ -760,6 +760,8 @@ public class ComputerUtilCost {
             int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
 
             return evalToken < evalCounter;
+        } else if ("Riot".equals(aiLogic)) {
+            return !SpecialAiLogic.preferHasteForRiot(sa, payer);
         }
 
         // Check for shocklands and similar ETB replacement effects
