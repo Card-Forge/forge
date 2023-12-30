@@ -14,6 +14,9 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
+import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -244,6 +247,8 @@ public class SaveLoadScene extends UIScene {
                             Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Current.player().getQuests().clear();
                             Current.player().resetQuestFlags();
+                            Current.player().setCharacterFlag("newGamePlus", 1);
+                            AdventurePlayer.current().addQuest("28");
                             WorldStage.getInstance().setDirectlyEnterPOI();
                             SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
@@ -264,16 +269,11 @@ public class SaveLoadScene extends UIScene {
             updateFiles();
             //ensure the dialog is hidden before switching
 
-            Scene restoreScene = Forge.switchToLast();
-            if (restoreScene != null) {
-                restoreScene = Forge.switchToLast();
-            }
-
-            if (restoreScene == null) {
-                restoreScene = GameScene.instance();
-            }
-
-            Forge.switchScene(restoreScene);
+            if (MapStage.getInstance().isInMap())
+                Forge.switchScene(TileMapScene.instance());
+            else
+                Forge.switchScene(GameScene.instance());
+            GameHUD.getInstance().getTouchpad().setVisible(false);
         }
     }
 

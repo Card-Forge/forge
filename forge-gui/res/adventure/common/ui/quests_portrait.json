@@ -35,33 +35,7 @@
       "height": 413
 	  "fontColor":"black"
     },
-	{
-      "type": "TextButton",
-      "name": "abandonQuest",
-      "text": "Abandon Quest",
-      "width": 250,
-      "height": 30,
-      "x": 10,
-      "y": 14
-    },
-	{
-      "type": "TextButton",
-      "name": "trackQuest",
-      "text": "Track Quest",
-      "width": 250,
-      "height": 30,
-      "x": 10,
-      "y": 54
-    },
-	{
-      "type": "TextButton",
-      "name": "backToList",
-      "text": "Quest List",
-      "width": 250,
-      "height": 30,
-      "x": 10,
-      "y": 94
-    },
+	
     {
       "type": "TextButton",
       "name": "return",

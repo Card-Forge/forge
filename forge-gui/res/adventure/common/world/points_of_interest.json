@@ -1,6 +1,7 @@
 [
 {
 	"name": "Aerie",
+	"displayName": "Aerie",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -16,6 +17,7 @@
 },
 {
 	"name": "BarbarianCamp",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -31,6 +33,7 @@
 },
 {
 	"name": "BarbarianCamp1",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -46,6 +49,7 @@
 },
 {
 	"name": "BarbarianCamp2",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -61,6 +65,7 @@
 },
 {
 	"name": "BarbarianCamp3",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -76,6 +81,7 @@
 },
 {
 	"name": "BarbarianCamp4",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -91,6 +97,7 @@
 },
 {
 	"name": "BarbarianCamp5",
+	"displayName": "Barbarian Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -106,6 +113,7 @@
 },
 {
 	"name": "Black Castle",
+	"displayName": "Black Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -119,11 +127,17 @@
 		"Boss",
 		"RespawnEnemies",
 		"DungeonEffect",
-		"Castle"
+		"Castle",
+		"BiomeBlack",
+		"Chapter1Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "Blue Castle",
+	"displayName": "Blue Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -137,11 +151,17 @@
 		"Boss",
 		"RespawnEnemies",
 		"DungeonEffect",
-		"Castle"
+		"Castle",
+		"BiomeBlue",
+		"Chapter1Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "FortBlue1",
+	"displayName": "Pirate Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -157,6 +177,7 @@
 },
 {
 	"name": "FortBlue2",
+	"displayName": "River Crossing",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -172,6 +193,7 @@
 },
 {
 	"name": "FortBlue3",
+	"displayName": "Esper Manufactory",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -187,6 +209,7 @@
 },
 {
 	"name": "FortBlue4",
+	"displayName": "Cloud Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -202,6 +225,7 @@
 },
 {
 	"name": "FortBlue5",
+	"displayName": "Sea Temple",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -217,6 +241,7 @@
 },
 {
 	"name": "Castle",
+	"displayName": "Von Gant's Fortress",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -233,6 +258,7 @@
 },
 {
 	"name": "Castle1",
+	"displayName": "Fort",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -249,6 +275,7 @@
 },
 {
 	"name": "Castle2",
+	"displayName": "Pharaoh's Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -265,6 +292,7 @@
 },
 {
 	"name": "Castle3",
+	"displayName": "Levilain's Farm",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -281,6 +309,7 @@
 },
 {
 	"name": "CatLairG",
+	"displayName": "Leonin Camp",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -296,6 +325,7 @@
 },
 {
 	"name": "CatLairG1",
+	"displayName": "Tiger Forest",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -311,6 +341,7 @@
 },
 {
 	"name": "CatLairG2",
+	"displayName": "Chimera Lair",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -326,6 +357,7 @@
 },
 {
 	"name": "CatLairW",
+	"displayName": "Lion's Den",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -342,6 +374,7 @@
 },
 {
 	"name": "CatLairW1",
+	"displayName": "Leonin Camp",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -358,6 +391,7 @@
 },
 {
 	"name": "CatLairW2",
+	"displayName": "Leonin Sphinx",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -374,6 +408,7 @@
 },
 {
 	"name": "CaveB",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -389,6 +424,7 @@
 },
 {
 	"name": "CaveB1",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -402,6 +438,7 @@
 },
 {
 	"name": "CaveB2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -417,6 +454,7 @@
 },
 {
 	"name": "CaveB3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -432,6 +470,7 @@
 },
 {
 	"name": "CaveB4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -447,6 +486,7 @@
 },
 {
 	"name": "CaveB5",
+	"displayName": "Flooded Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -462,6 +502,7 @@
 },
 {
 	"name": "CaveB6",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -477,6 +518,7 @@
 },
 {
 	"name": "CaveB8",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -492,6 +534,7 @@
 },
 {
 	"name": "CaveBA",
+	"displayName": "Deep Caverns",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -507,6 +550,7 @@
 },
 {
 	"name": "CaveC",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -522,6 +566,7 @@
 },
 {
 	"name": "CaveC1",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -535,6 +580,7 @@
 },
 {
 	"name": "CaveC2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -550,6 +596,7 @@
 },
 {
 	"name": "CaveC3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -565,6 +612,7 @@
 },
 {
 	"name": "CaveC4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -580,6 +628,7 @@
 },
 {
 	"name": "CaveC5",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -595,6 +644,7 @@
 },
 {
 	"name": "CaveC6",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -610,6 +660,7 @@
 },
 {
 	"name": "CaveC7",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -625,6 +676,7 @@
 },
 {
 	"name": "CaveC8",
+	"displayName": "Flooded Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -640,6 +692,7 @@
 },
 {
 	"name": "CaveC9",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -655,6 +708,7 @@
 },
 {
 	"name": "CaveCA",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -670,6 +724,7 @@
 },
 {
 	"name": "CaveCB",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -685,6 +740,7 @@
 },
 {
 	"name": "CaveCD",
+	"displayName": "Deep Caverns",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -700,6 +756,7 @@
 },
 {
 	"name": "CaveG",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -715,6 +772,7 @@
 },
 {
 	"name": "CaveG1",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -728,6 +786,7 @@
 },
 {
 	"name": "CaveG2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -743,6 +802,7 @@
 },
 {
 	"name": "CaveG3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -758,6 +818,7 @@
 },
 {
 	"name": "CaveG4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -773,6 +834,7 @@
 },
 {
 	"name": "CaveG5",
+	"displayName": "Flooded Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -788,6 +850,7 @@
 },
 {
 	"name": "CaveG6",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -803,6 +866,7 @@
 },
 {
 	"name": "CaveG9",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -818,6 +882,7 @@
 },
 {
 	"name": "CaveGB",
+	"displayName": "Deep Caverns",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -833,6 +898,7 @@
 },
 {
 	"name": "CaveCerodon",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -849,6 +915,7 @@
 },
 {
 	"name": "CaveEldrazi",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -864,6 +931,7 @@
 },
 {
 	"name": "CaveAmphin",
+	"displayName": "Flooded Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -880,6 +948,7 @@
 },
 {
 	"name": "CaveRat",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -896,6 +965,7 @@
 },
 {
 	"name": "CaveU",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -909,6 +979,7 @@
 },
 {
 	"name": "CaveU1",
+	"displayName": "Flooded Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -924,6 +995,7 @@
 },
 {
 	"name": "CaveU2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -939,6 +1011,7 @@
 },
 {
 	"name": "CaveU3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -954,6 +1027,7 @@
 },
 {
 	"name": "CaveU4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -969,6 +1043,7 @@
 },
 {
 	"name": "CaveR",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -984,6 +1059,7 @@
 },
 {
 	"name": "CaveR2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -997,6 +1073,7 @@
 },
 {
 	"name": "CaveR3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1012,6 +1089,7 @@
 },
 {
 	"name": "CaveR4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1027,6 +1105,7 @@
 },
 {
 	"name": "CaveR5",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1042,6 +1121,7 @@
 },
 {
 	"name": "CaveR6",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1057,6 +1137,7 @@
 },
 {
 	"name": "CaveR7",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1072,6 +1153,7 @@
 },
 {
 	"name": "CaveR8",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1087,6 +1169,7 @@
 },
 {
 	"name": "CaveR9",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1102,6 +1185,7 @@
 },
 {
 	"name": "CaveRA",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1117,6 +1201,7 @@
 },
 {
 	"name": "CaveRB",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1132,6 +1217,7 @@
 },
 {
 	"name": "CaveRC",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1147,6 +1233,7 @@
 },
 {
 	"name": "CaveRE",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1162,6 +1249,7 @@
 },
 {
 	"name": "CaveRG",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1177,6 +1265,7 @@
 },
 {
 	"name": "CaveRH",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1192,6 +1281,7 @@
 },
 {
 	"name": "CaveRJ",
+	"displayName": "Deep Caverns",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1207,6 +1297,7 @@
 },
 {
 	"name": "CaveW",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1222,6 +1313,7 @@
 },
 {
 	"name": "CaveW1",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1235,6 +1327,7 @@
 },
 {
 	"name": "CaveW2",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1250,6 +1343,7 @@
 },
 {
 	"name": "CaveW3",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1265,6 +1359,7 @@
 },
 {
 	"name": "CaveW4",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1280,6 +1375,7 @@
 },
 {
 	"name": "CaveW5",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1295,6 +1391,7 @@
 },
 {
 	"name": "CaveW6",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1310,6 +1407,7 @@
 },
 {
 	"name": "Emrakul",
+	"displayName": "Emrakul's Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1319,10 +1417,14 @@
 	"questTags": [
 		"Castle",
 		"BiomeColorless"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "CopperhostForest",
+	"displayName": "Copper Host Forest",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
@@ -1332,6 +1434,7 @@
 },
 {
 	"name": "Crawlspace",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1354,6 +1457,7 @@
 },
 {
 	"name": "DjinnPalace",
+	"displayName": "Djinn's Palace",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1367,6 +1471,7 @@
 },
 {
 	"name": "DjinnPalace1",
+	"displayName": "Djinn's Palace",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1380,6 +1485,7 @@
 },
 {
 	"name": "Dream Halls",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1394,6 +1500,7 @@
 },
 {
 	"name": "DrossOutpost",
+	"displayName": "Dross Outpost",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
@@ -1409,6 +1516,7 @@
 },
 {
 	"name": "ElfTown",
+	"displayName": "Elven Town",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1424,6 +1532,7 @@
 },
 {
 	"name": "EvilGrove",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1439,6 +1548,7 @@
 },
 {
 	"name": "EvilGrove1",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1454,6 +1564,7 @@
 },
 {
 	"name": "EvilGrove2",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1469,6 +1580,7 @@
 },
 {
 	"name": "EvilGrove3",
+	"displayName": "Cursed Forest",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1478,11 +1590,13 @@
 	"questTags": [
 		"EvilGrove",
 		"BiomeBlack",
-		"Hostile"
+		"Hostile",
+		"Sidequest"
 	]
 },
 {
 	"name": "EvilGrove4",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1492,11 +1606,13 @@
 	"questTags": [
 		"EvilGrove",
 		"BiomeBlack",
-		"Hostile"
+		"Hostile",
+		"Sidequest"
 	]
 },
 {
 	"name": "EvilGrove5",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1512,6 +1628,7 @@
 },
 {
 	"name": "EvilGrove6",
+	"displayName": "Dark Grove",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1527,6 +1644,7 @@
 },
 {
 	"name": "Factory",
+	"displayName": "Autonomous Factory",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1542,6 +1660,7 @@
 },
 {
 	"name": "Factory1",
+	"displayName": "Autonomous Factory",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1557,6 +1676,7 @@
 },
 {
 	"name": "Factory2",
+	"displayName": "Autonomous Factory",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1572,6 +1692,7 @@
 },
 {
 	"name": "Factory3",
+	"displayName": "Autonomous Factory",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1587,6 +1708,7 @@
 },
 {
 	"name": "Forest Capital",
+	"displayName": "Unbroken Bough",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1595,7 +1717,8 @@
 	"questTags": [
 		"Capital",
 		"BiomeGreen",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -1610,7 +1733,8 @@
 		"Town",
 		"BiomeGreen",
 		"TownGeneric",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -1625,7 +1749,8 @@
 		"Town",
 		"BiomeGreen",
 		"TownIdentity",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -1640,7 +1765,8 @@
 		"Town",
 		"BiomeGreen",
 		"TownTribal",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -1663,6 +1789,7 @@
 },
 {
 	"name": "Fort1",
+	"displayName": "Tundra Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1678,6 +1805,7 @@
 },
 {
 	"name": "Fort2",
+	"displayName": "Mages' Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1693,6 +1821,7 @@
 },
 {
 	"name": "Fort3",
+	"displayName": "Mercenary Barracks",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1708,6 +1837,7 @@
 },
 {
 	"name": "Fort4",
+	"displayName": "Putrid Fort",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1723,6 +1853,7 @@
 },
 {
 	"name": "Fort5",
+	"displayName": "Fort",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1738,6 +1869,7 @@
 },
 {
 	"name": "Fort6",
+	"displayName": "Necromancer's Study",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1753,6 +1885,7 @@
 },
 {
 	"name": "Fort7",
+	"displayName": "Logging Camp",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1768,6 +1901,7 @@
 },
 {
 	"name": "Fort8",
+	"displayName": "Satyr Grove",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1783,6 +1917,7 @@
 },
 {
 	"name": "Fort9",
+	"displayName": "Beastmaster's Study",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1798,6 +1933,7 @@
 },
 {
 	"name": "FurnaceBase",
+	"displayName": "Furnace Host Base",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
@@ -1813,6 +1949,7 @@
 },
 {
 	"name": "Garruk Forest",
+	"displayName": "Garruk's Forest",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1827,6 +1964,7 @@
 },
 {
 	"name": "GitaxianLab",
+	"displayName": "Gitaxian Laboratory",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
@@ -1842,6 +1980,7 @@
 },
 {
 	"name": "Green Castle",
+	"displayName": "Green Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1855,11 +1994,17 @@
 		"Boss",
 		"RespawnEnemies",
 		"DungeonEffect",
-		"Castle"
+		"Castle",
+		"BiomeGreen",
+		"Chapter1Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "Graveyard",
+	"displayName": "Graveyard",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1874,6 +2019,7 @@
 },
 {
 	"name": "Graveyard1",
+	"displayName": "Graveyard",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1888,6 +2034,7 @@
 },
 {
 	"name": "Graveyard2",
+	"displayName": "Graveyard",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1902,6 +2049,7 @@
 },
 {
 	"name": "Graveyard3",
+	"displayName": "Graveyard",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1916,6 +2064,7 @@
 },
 {
 	"name": "Graveyard4",
+	"displayName": "Graveyard",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1930,6 +2079,7 @@
 },
 {
 	"name": "Grolnoks Bog",
+	"displayName": "Grolnok's Bog",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -1944,6 +2094,7 @@
 },
 {
 	"name": "Grove",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1959,6 +2110,7 @@
 },
 {
 	"name": "Grove1",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1974,6 +2126,7 @@
 },
 {
 	"name": "Grove2",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1989,6 +2142,7 @@
 },
 {
 	"name": "Grove3",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2004,6 +2158,7 @@
 },
 {
 	"name": "Grove4",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2019,6 +2174,7 @@
 },
 {
 	"name": "Grove5",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2034,6 +2190,7 @@
 },
 {
 	"name": "Grove6",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2049,6 +2206,7 @@
 },
 {
 	"name": "Grove7",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2064,6 +2222,7 @@
 },
 {
 	"name": "Grove8",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2079,6 +2238,7 @@
 },
 {
 	"name": "GroveBamboo",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2094,6 +2254,7 @@
 },
 {
 	"name": "GroveGreenDragon",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2109,6 +2270,7 @@
 },
 {
 	"name": "GroveFaerieDragon",
+	"displayName": "Forest Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2124,6 +2286,7 @@
 },
 {
 	"name": "Island Capital",
+	"displayName": "Great Lighthouse",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2132,7 +2295,8 @@
 	"questTags": [
 		"Capital",
 		"BiomeBlue",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2147,7 +2311,8 @@
 		"Town",
 		"TownGeneric",
 		"BiomeBlue",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2162,7 +2327,8 @@
 		"Town",
 		"TownIdentity",
 		"BiomeBlue",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2177,7 +2343,8 @@
 		"Town",
 		"TownTribal",
 		"BiomeBlue",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2191,6 +2358,7 @@
 },
 {
 	"name": "Jacehold",
+	"displayName": "Jace's Holdout",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2205,6 +2373,7 @@
 },
 {
 	"name": "Kavu Lair",
+	"displayName": "Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2219,6 +2388,7 @@
 },
 {
 	"name": "Kiora Island",
+	"displayName": "Kiora's Island",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2234,6 +2404,7 @@
 },
 {
 	"name": "Lavaforge Kobold",
+	"displayName": "Lava Forge",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2248,6 +2419,7 @@
 },
 {
 	"name": "LavaForge1",
+	"displayName": "Lava Forge",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2264,6 +2436,7 @@
 },
 {
 	"name": "LavaForge2",
+	"displayName": "Lava Forge",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2280,6 +2453,7 @@
 },
 {
 	"name": "Lich's Mirror",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2294,6 +2468,7 @@
 },
 {
 	"name": "MageTowerC",
+	"displayName": "Red Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2310,6 +2485,7 @@
 },
 {
 	"name": "MageTowerC2",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2326,6 +2502,7 @@
 },
 {
 	"name": "MageTowerC3",
+	"displayName": "Red Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2342,6 +2519,7 @@
 },
 {
 	"name": "MageTowerC4",
+	"displayName": "White Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2358,6 +2536,7 @@
 },
 {
 	"name": "MageTowerC5",
+	"displayName": "Green Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2374,6 +2553,7 @@
 },
 {
 	"name": "MageTowerC6",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2390,6 +2570,7 @@
 },
 {
 	"name": "MageTower7Church",
+	"displayName": "White Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2406,6 +2587,7 @@
 },
 {
 	"name": "MageTowerC8",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2422,6 +2604,7 @@
 },
 {
 	"name": "MageTowerX",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2437,6 +2620,7 @@
 },
 {
 	"name": "MageTowerCE",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2453,6 +2637,7 @@
 },
 {
 	"name": "MageTowerU",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2469,6 +2654,7 @@
 },
 {
 	"name": "MageTowerU1",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2485,6 +2671,7 @@
 },
 {
 	"name": "MageTowerU2",
+	"displayName": "Red Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2501,6 +2688,7 @@
 },
 {
 	"name": "MageTowerU3",
+	"displayName": "White Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2517,6 +2705,7 @@
 },
 {
 	"name": "MageTowerU4",
+	"displayName": "Green Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2533,6 +2722,7 @@
 },
 {
 	"name": "MageTowerU5",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2549,6 +2739,7 @@
 },
 {
 	"name": "MageTowerU7",
+	"displayName": "Blue Tower",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2565,6 +2756,7 @@
 },
 {
 	"name": "MageTowerUD",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2581,6 +2773,7 @@
 },
 {
 	"name": "MageTowerRats",
+	"displayName": "Black Tower",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2597,6 +2790,7 @@
 },
 {
 	"name": "Maze",
+	"displayName": "Maze",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2612,6 +2806,7 @@
 },
 {
 	"name": "Maze1",
+	"displayName": "Maze",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2627,6 +2822,7 @@
 },
 {
 	"name": "Maze2",
+	"displayName": "Maze",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2642,6 +2838,7 @@
 },
 {
 	"name": "Maze3",
+	"displayName": "Maze",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2657,6 +2854,7 @@
 },
 {
 	"name": "MerfolkPool",
+	"displayName": "Merfolk Pool",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2671,6 +2869,7 @@
 },
 {
 	"name": "MerfolkPool1",
+	"displayName": "Merfolk Pool",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2685,6 +2884,7 @@
 },
 {
 	"name": "MerfolkPool2",
+	"displayName": "Merfolk Pool",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2699,6 +2899,7 @@
 },
 {
 	"name": "MerfolkPool3",
+	"displayName": "Merfolk Pool",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2713,6 +2914,7 @@
 },
 {
 	"name": "MerfolkPool4",
+	"displayName": "Merfolk Pool",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2727,6 +2929,7 @@
 },
 {
 	"name": "Monastery",
+	"displayName": "Monastery",
 	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2742,6 +2945,7 @@
 },
 {
 	"name": "Monastery1",
+	"displayName": "Monastery",
 	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2757,6 +2961,7 @@
 },
 {
 	"name": "Monastery2",
+	"displayName": "Monastery",
 	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2772,6 +2977,7 @@
 },
 {
 	"name": "Monastery3",
+	"displayName": "Monastery",
 	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2787,6 +2993,7 @@
 },
 {
 	"name": "Monastery4",
+	"displayName": "Monastery",
 	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2812,7 +3019,8 @@
 		"Town",
 		"TownGeneric",
 		"BiomeRed",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2827,7 +3035,8 @@
 		"Town",
 		"TownIdentity",
 		"BiomeRed",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2842,7 +3051,8 @@
 		"Town",
 		"TownTribal",
 		"BiomeRed",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2856,6 +3066,7 @@
 },
 {
 	"name": "Mountain Capital",
+	"displayName": "Blazing Peak",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2864,11 +3075,13 @@
 	"questTags": [
 		"Capital",
 		"BiomeRed",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
 	"name": "Nahiri Encampment",
+	"displayName": "Nahiri's Encampment",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -2883,6 +3096,7 @@
 },
 {
 	"name": "Naktamun",
+	"displayName": "Naktamun",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2894,6 +3108,7 @@
 },
 {
 	"name": "NestW",
+	"displayName": "Nest",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2909,6 +3124,7 @@
 },
 {
 	"name": "NestU",
+	"displayName": "Nest",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2924,6 +3140,7 @@
 },
 {
 	"name": "Oasis",
+	"displayName": "Oasis",
 	"type": "cave",
 	"count": 10,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2933,6 +3150,7 @@
 },
 {
 	"name": "OrthodoxyBasilica",
+	"displayName": "Orthodoxy Basilica",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/phyrexia/Phyrexian_Buildings.atlas",
@@ -2948,6 +3166,7 @@
 },
 {
 	"name": "Plains Capital",
+	"displayName": "New Avalon",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2956,7 +3175,8 @@
 	"questTags": [
 		"Capital",
 		"BiomeWhite",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2971,7 +3191,8 @@
 		"Town",
 		"BiomeWhite",
 		"TownGeneric",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -2986,7 +3207,8 @@
 		"Town",
 		"TownIdentity",
 		"BiomeWhite",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3001,7 +3223,8 @@
 		"Town",
 		"TownTribal",
 		"BiomeWhite",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3015,6 +3238,7 @@
 },
 {
 	"name": "Quest_APortalToNowhere",
+	"displayName": "Ghost Town",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3023,70 +3247,110 @@
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_APortalToNowhere"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":5}
+	]
+},
+{
+	"name": "Quest_BanditCave",
+	"displayName": "Bandit Cave",
+	"type": "dungeon",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "banditcave",
+	"map": "../common/maps/map/main_story_explore/bandit_cave.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Quest_BanditCave"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":2}
 	]
 },
 {
 	"name": "Quest_DigSite",
+	"displayName": "Archaeological Dig",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-	"sprite": "WasteTown",
+	"sprite": "digsite",
 	"map": "../common/maps/map/main_story_explore/dig_site_0.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_DigSite"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":5}
 	]
 },
 {
 	"name": "Quest_FrostbittenCavern",
+	"displayName": "Frostbitten Cavern",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-	"sprite": "WasteTown",
+	"sprite": "frostbittencavern",
 	"map": "../common/maps/map/main_story_explore/frostbitten_cavern_0.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_FrostbittenCavern"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":9}
 	]
 },
 {
 	"name": "Quest_LibraryOfVarsil",
+	"displayName": "The Library Of Varsil",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-	"sprite": "WasteTown",
+	"sprite": "libraryofvarsil",
 	"map": "../common/maps/map/main_story_explore/library_of_varsil_0.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_LibraryOfVarsil"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":4}
 	]
 },
 {
 	"name": "Quest_PrimalJungle",
+	"displayName": "Primal Jungle",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-	"sprite": "WasteTown",
+	"sprite": "primaljungle",
 	"map": "../common/maps/map/main_story_explore/primal_jungle.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_PrimalJungle"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":8}
 	]
 },
 {
 	"name": "Quest_ShardMines",
+	"displayName": "Cidryl Shard Mines",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-	"sprite": "WasteTown",
+	"sprite": "abandonedshardmine",
 	"map": "../common/maps/map/main_story_explore/shard_mines.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Quest_ShardMines"
+	],
+	"questFlagsToActivate": [
+		{"key":"exploreShand1", "val":3}
 	]
 },
 {
 	"name": "Red Castle",
+	"displayName": "Red Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3100,11 +3364,17 @@
 		"Boss",
 		"RespawnEnemies",
 		"DungeonEffect",
-		"Castle"
+		"Castle",
+		"BiomeRed",
+		"Chapter1Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "SkullCaveR",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3121,6 +3391,7 @@
 },
 {
 	"name": "SkullCaveR1",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3137,6 +3408,7 @@
 },
 {
 	"name": "SkullCaveR2",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3153,6 +3425,7 @@
 },
 {
 	"name": "SnowAbbey",
+	"displayName": "Snow Abbey",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3169,6 +3442,7 @@
 },
 {
 	"name": "SnowAbbey1",
+	"displayName": "Snow Abbey",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3185,6 +3459,7 @@
 },
 {
 	"name": "SnowAbbey2",
+	"displayName": "Snow Abbey",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3201,6 +3476,7 @@
 },
 {
 	"name": "Spawn",
+	"displayName": "Secluded Encampment",
 	"type": "town",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3214,6 +3490,7 @@
 },
 {
 	"name": "Slimefoots Lair",
+	"displayName": "Slimefoot's Lair",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3229,6 +3506,7 @@
 },
 {
 	"name": "Slime Cave",
+	"displayName": "Slime Hive",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3243,6 +3521,7 @@
 },
 {
 	"name": "Scarecrow Farm",
+	"displayName": "Scarecrow Farm",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3257,6 +3536,7 @@
 },
 {
 	"name": "Slobads Factory",
+	"displayName": "Slobad's Factory",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3272,6 +3552,7 @@
 },
 {
 	"name": "Skep",
+	"displayName": "Skep",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3286,6 +3567,7 @@
 },
 {
 	"name": "SkullCaveB",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3302,6 +3584,7 @@
 },
 {
 	"name": "SkullCaveB1",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3318,6 +3601,7 @@
 },
 {
 	"name": "SkullCaveB2",
+	"displayName": "Skull Cave",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3334,6 +3618,7 @@
 },
 {
 	"name": "Swamp Capital",
+	"displayName": "Dead Man's Rest",
 	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3342,7 +3627,8 @@
 	"questTags": [
 		"Capital",
 		"BiomeBlack",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3357,7 +3643,8 @@
 		"Town",
 		"TownGeneric",
 		"BiomeBlack",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3372,7 +3659,8 @@
 		"Town",
 		"TownIdentity",
 		"BiomeBlack",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3387,7 +3675,8 @@
 		"Town",
 		"TownTribal",
 		"BiomeBlack",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3410,6 +3699,7 @@
 },
 {
 	"name": "Teferi Hideout",
+	"displayName": "Teferi's Hideout",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3425,11 +3715,12 @@
 },
 {
 	"name": "Temple of Chandra",
+	"displayName": "Temple of Chandra",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "hall_of_flame",
-	"map": "../common/maps/map/main_story/TempleOfChandra.tmx",
+	"map": "../common/maps/map/main_story/templeofchandra.tmx",
 	"radiusFactor": 0.8,
 	"questTags": [
 		"Story",
@@ -3438,10 +3729,14 @@
 		"DungeonEffect",
 		"Hostile",
 		"Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "Temple of Liliana",
+	"displayName": "Temple of Liliana",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3455,6 +3750,9 @@
 		"DungeonEffect",
 		"Hostile",
 		"Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
@@ -3467,6 +3765,7 @@
 },
 {
 	"name": "Tibalts Fortress",
+	"displayName": "Tibalt's Fortress",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3481,6 +3780,7 @@
 },
 {
 	"name": "UnhallowedAbbey",
+	"displayName": "Unhallowed Abbey",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
@@ -3493,6 +3793,7 @@
 },
 {
 	"name": "VampireCastle",
+	"displayName": "Vampire Castle",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3509,6 +3810,7 @@
 },
 {
 	"name": "VampireCastle1",
+	"displayName": "Vampire Castle",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3525,6 +3827,7 @@
 },
 {
 	"name": "VampireCastle2",
+	"displayName": "Vampire Castle",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3551,7 +3854,8 @@
 		"Town",
 		"TownGeneric",
 		"BiomeColorless",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3566,7 +3870,8 @@
 		"Town",
 		"TownIdentity",
 		"BiomeColorless",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
@@ -3581,11 +3886,13 @@
 		"Town",
 		"TownTribal",
 		"BiomeColorless",
-		"Sidequest"
+		"Sidequest",
+		"QuestSource"
 	]
 },
 {
 	"name": "White Castle",
+	"displayName": "White Castle",
 	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3598,11 +3905,17 @@
 		"Boss",
 		"RespawnEnemies",
 		"DungeonEffect",
-		"Castle"
+		"Castle",
+		"BiomeWhite",
+		"Chapter1Boss"
+	],
+	"questFlagsToActivate": [
+		{"key":"mainQuest", "val":2}
 	]
 },
 {
 	"name": "WurmPond",
+	"displayName": "Wurm Pond",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -3616,6 +3929,7 @@
 },
 {
 	"name": "Xiras Hive",
+	"displayName": "Xira's Hive",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3644,6 +3958,7 @@
 },
 {
 	"name": "Zedruu City",
+	"displayName": "Zedruu City",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
@@ -3661,6 +3976,7 @@
 },
 {
 	"name": "Zombie Town",
+	"displayName": "Shallowgrave",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",

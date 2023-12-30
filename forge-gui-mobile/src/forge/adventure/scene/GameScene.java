@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.Vector2;
 import com.google.common.collect.Sets;
 import forge.Forge;
 import forge.adventure.data.BiomeData;
@@ -79,6 +80,13 @@ public class GameScene extends HudScene {
             }
         }
         return location;
+    }
+
+    public String getBiomeByPosition(Vector2 position) {
+        World world = Current.world();
+        int currentBiome = World.highestBiome(world.getBiomeMapXY((int) position.x / world.getTileSize(), (int) position.y / world.getTileSize()));
+        List<BiomeData> biomeData = world.getData().GetBiomes();
+        return biomeData.size() <= currentBiome? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
     }
 
     public PointOfInterest getMapPOI() {

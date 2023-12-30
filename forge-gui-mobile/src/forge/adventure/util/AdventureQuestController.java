@@ -21,7 +21,47 @@ import java.util.stream.Collectors;
 
 public class AdventureQuestController implements Serializable {
 
-    public Map<String, Float> getBoostedSpawns(List<EnemyData> localSpawns) {
+    public static void trackQuest(AdventureQuestData quest) {
+        for (AdventureQuestData q: Current.player().getQuests()){
+            q.isTracked = q.equals(quest);
+        }
+    }
+
+    public List<EnemyData> getExtraQuestSpawns(float difficultyFactor){
+        List<EnemyData> extraSpawns = new ArrayList<>();
+        for (AdventureQuestData q : Current.player().getQuests()) {
+            for (AdventureQuestStage c : q.stages) {
+                if (c.getStatus().equals(QuestStatus.Active) && c.objective.equals(ObjectiveTypes.Defeat)) {
+                    if (c.getTargetEnemyData() != null) {
+                        extraSpawns.add(c.getTargetEnemyData());
+                        continue;
+                    }
+                    for (EnemyData enemy : WorldData.getAllEnemies()) {
+                        List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
+                        boolean match = true;
+                        for (String targetTag : c.enemyTags) {
+                            if (!candidateTags.contains(targetTag)) {
+                                match = false;
+                                break;
+                            }
+                        }
+                        for (String targetTag : c.enemyExcludeTags) {
+                            if (candidateTags.contains(targetTag)) {
+                                match = false;
+                                break;
+                            }
+                        }
+                        if (match) {
+                            extraSpawns.add(enemy);
+                        }
+                    }
+                }
+            }
+        }
+        return extraSpawns;
+    }
+
+    public Map<String, Float> getBoostedSpawns(List<EnemyData> localSpawns, float totalWeightToAssign) {
         Map<String,Float> boostedSpawns = new HashMap<>();
         for (AdventureQuestData q : Current.player().getQuests()){
             for (AdventureQuestStage c : q.stages){
@@ -31,10 +71,20 @@ public class AdventureQuestController implements Serializable {
                     if (c.mixedEnemies){
                         for (EnemyData enemy : localSpawns){
                             List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
+                            boolean match = true;
                             for (String targetTag : c.enemyTags) {
                                 if (!candidateTags.contains(targetTag)) {
-                                    continue;
+                                    match = false;
+                                    break;
                                 }
+                            }
+                            for (String targetTag : c.enemyExcludeTags) {
+                                if (candidateTags.contains(targetTag)) {
+                                    match = false;
+                                    break;
+                                }
+                            }
+                            if (match) {
                                 toBoost.add(enemy.getName());
                             }
                         }
@@ -43,7 +93,7 @@ public class AdventureQuestController implements Serializable {
                         toBoost.add(c.getTargetEnemyData().getName());
                     }
                     if (!toBoost.isEmpty()) {
-                        float value = 2.0f / toBoost.size();
+                        float value = totalWeightToAssign / toBoost.size();
                         for (String key : toBoost) {
                             float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
                                 boostedSpawns.put(key, value + existingValue);
@@ -59,6 +109,7 @@ public class AdventureQuestController implements Serializable {
         None,
         Arena,
         Clear,
+        CompleteQuest,
         Defeat,
         Delivery,
         Escort,
@@ -70,6 +121,7 @@ public class AdventureQuestController implements Serializable {
         Gather,
         Give,
         HaveReputation,
+        HaveReputationInCurrentLocation,
         Hunt,
         MapFlag,
         Leave,
@@ -99,9 +151,12 @@ public class AdventureQuestController implements Serializable {
     private List<EnemySprite> enemySpriteList= new ArrayList<>();
     private int nextQuestID = 0;
     public void showQuestDialogs(GameStage stage) {
+        if (dialogQueue.peek() == null)
+        {
+            inDialog = false; //occasionally this wasn't clearing, causing dialogs to stop displaying
+        }
         List<AdventureQuestData> finishedQuests = new ArrayList<>();
 
-        if (stage instanceof MapStage){
             for (AdventureQuestData quest : Current.player().getQuests()) {
                 DialogData prologue = quest.getPrologue();
                 if (prologue != null && (!prologue.text.isEmpty()) ){
@@ -109,6 +164,8 @@ public class AdventureQuestController implements Serializable {
                 }
                 for (AdventureQuestStage questStage : quest.stages)
                 {
+                    if (questStage.getStatus() == QuestStatus.Inactive)
+                        continue;
                     if (questStage.prologue != null && (!questStage.prologue.text.isEmpty()) && !questStage.prologueDisplayed){
                         questStage.prologueDisplayed = true;
                         dialogQueue.add(questStage.prologue);
@@ -122,9 +179,6 @@ public class AdventureQuestController implements Serializable {
                     if (questStage.getStatus() == QuestStatus.Complete && questStage.epilogue != null && (!questStage.epilogue.text.isEmpty()) && !questStage.epilogueDisplayed){
                         questStage.epilogueDisplayed = true;
                         dialogQueue.add(questStage.epilogue);
-                    }
-                    if (questStage.getStatus() != QuestStatus.Complete){
-                        break;
                     }
                 }
 
@@ -143,12 +197,12 @@ public class AdventureQuestController implements Serializable {
 
                 }
                 finishedQuests.add(quest);
+                updateQuestComplete(quest);
             }
             if (!inDialog){
                 inDialog = true;
                 displayNextDialog((MapStage) stage);
             }
-        }
         for (AdventureQuestData toRemove : finishedQuests) {
 
             if (!toRemove.failed && locationHasMoreQuests()){
@@ -172,7 +226,7 @@ public class AdventureQuestController implements Serializable {
             return;
         }
 
-        MapDialog dialog = new MapDialog(dialogQueue.remove(), stage, -1);
+        MapDialog dialog = new MapDialog(dialogQueue.remove(), stage, -1, null);
         stage.showDialog();
         dialog.activate();
         ChangeListener listen = new ChangeListener() {
@@ -258,11 +312,18 @@ public class AdventureQuestController implements Serializable {
         return nextQuestID++;
     }
 
+    public void activateNextStages() {
+        for(AdventureQuestData currentQuest : Current.player().getQuests()) {
+            currentQuest.activateNextStages();
+        }
+    }
+
     public void updateEnteredPOI(PointOfInterest arrivedAt)
     {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateEnteredPOI(arrivedAt);
         }
+        activateNextStages();
     }
 
     public void updateQuestsMapFlag(String updatedMapFlag, int updatedFlagValue)
@@ -270,6 +331,7 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateMapFlag(updatedMapFlag, updatedFlagValue);
         }
+        activateNextStages();
     }
 
     public void updateQuestsCharacterFlag(String updatedCharacterFlag, int updatedCharacterFlagValue)
@@ -277,6 +339,8 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateCharacterFlag(updatedCharacterFlag, updatedCharacterFlagValue);
         }
+        activateNextStages();
+
     }
 
     public void updateQuestsQuestFlag(String updatedQuestFlag, int updatedQuestFlagValue)
@@ -284,12 +348,14 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateQuestFlag(updatedQuestFlag, updatedQuestFlagValue);
         }
+        activateNextStages();
     }
 
     public void updateQuestsLeave(){
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateLeave();
         }
+        activateNextStages();
     }
 
     public void updateQuestsWin(EnemySprite defeated, ArrayList<EnemySprite> enemies){
@@ -312,6 +378,7 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateWin(defeated, allEnemiesCleared);
         }
+        activateNextStages();
     }
     public void updateQuestsWin(EnemySprite defeated){
         updateQuestsWin(defeated, null);
@@ -322,6 +389,7 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateLose(defeatedBy);
         }
+        activateNextStages();
     }
 
     public void updateDespawn(EnemySprite despawned){
@@ -329,18 +397,42 @@ public class AdventureQuestController implements Serializable {
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateDespawn(despawned);
         }
+        activateNextStages();
     }
 
     public void updateArenaComplete(boolean winner){
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateArenaComplete(winner);
         }
+        activateNextStages();
     }
 
     public void updateEventComplete(AdventureEventData completedEvent) {
         for(AdventureQuestData currentQuest: Current.player().getQuests()) {
             currentQuest.updateEventComplete(completedEvent);
         }
+        activateNextStages();
+    }
+
+    public void updateQuestComplete(AdventureQuestData completedQuest) {
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateQuestComplete(completedQuest);
+        }
+        activateNextStages();
+    }
+
+    public void updateItemUsed(ItemData data) {
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateItemUsed(data);
+        }
+        activateNextStages();
+    }
+
+    public void updateItemReceived(ItemData data) {
+        for(AdventureQuestData currentQuest: Current.player().getQuests()) {
+            currentQuest.updateItemReceived(data);
+        }
+        activateNextStages();
     }
 
     public AdventureQuestData generateQuest(int id){

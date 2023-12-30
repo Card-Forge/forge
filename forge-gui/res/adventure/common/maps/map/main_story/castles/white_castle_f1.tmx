@@ -35,6 +35,22 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../obj/enemy.tx" x="195.849" y="285.618" width="32" height="32">
    <properties>
+    <property name="defeatDialog">[{
+   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
+   &quot;text&quot;: &quot;As you land your final blow against Akroma, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1WhiteCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   }]
+},
+{
+   &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
+   &quot;text&quot;: &quot;As you land your final blow against Akroma, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1WhiteCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
+   }]
+}]</property>
     <property name="effect">{
  &quot;startBattleWithCard&quot;: [ &quot;Mox Pearl&quot; ]
 }</property>

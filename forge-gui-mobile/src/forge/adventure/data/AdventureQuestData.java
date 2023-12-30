@@ -1,10 +1,11 @@
 package forge.adventure.data;
 
-
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.GameScene;
+import forge.adventure.stage.GameHUD;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
@@ -13,6 +14,7 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.util.*;
 
+import static forge.adventure.util.AdventureQuestController.QuestStatus.*;
 
 public class AdventureQuestData implements Serializable {
 
@@ -50,10 +52,12 @@ public class AdventureQuestData implements Serializable {
     private transient EnemySprite targetEnemySprite = null;
     private PointOfInterest targetPoI = null;
     Dictionary<String, PointOfInterest> poiTokens = new Hashtable<>();
+    Dictionary<String, String> poiBiomeTokens = new Hashtable<>();
     Dictionary<String, EnemyData> enemyTokens = new Hashtable<>();
     Dictionary<String, String> otherTokens = new Hashtable<>();
     public boolean storyQuest = false;
     public boolean isTracked = false;
+    public boolean autoTrack = false;
     public String sourceID = "";
 
     public String getName() {
@@ -112,35 +116,31 @@ public class AdventureQuestData implements Serializable {
 
         //Temporarily allow only one active stage until parallel stages and prerequisites are implemented
         for (AdventureQuestStage stage : stages) {
-            if (stage.getStatus() == AdventureQuestController.QuestStatus.Complete)
-                continue;
-            if (stage.getStatus() == AdventureQuestController.QuestStatus.Inactive ) {
-                //todo: check prerequisites instead of break statement below
-                stage.setStatus(AdventureQuestController.QuestStatus.Active);
+            if (stage.getStatus() == Active ) {
+                toReturn.add(stage);
             }
-            toReturn.add(stage);
-            break;
         }
         return toReturn;
     }
 
-    public List<AdventureQuestStage> getStagesForQuestLog(){
+    public List<AdventureQuestStage> getCompletedStages(){
         List<AdventureQuestStage> toReturn = new ArrayList<>();
 
-        //Temporarily allow only one active stage until parallel stages and prerequisites are implemented
         for (AdventureQuestStage stage : stages) {
-            if (stage.getStatus() == AdventureQuestController.QuestStatus.Complete
-                    || stage.getStatus() == AdventureQuestController.QuestStatus.Failed)
-            {
+            if (stage.getStatus() == Complete)
                 toReturn.add(stage);
-                continue;
-            }
-            toReturn.add(stage);
-            break;
         }
         return toReturn;
     }
 
+    public List<Integer> getCompletedStageIDs(){
+        List<Integer> toReturn = new ArrayList<>();
+
+        for (AdventureQuestStage stage : getCompletedStages()) {
+            toReturn.add(stage.id);
+        }
+        return toReturn;
+    }
 
     public PointOfInterest getTargetPOI() {
 
@@ -166,6 +166,8 @@ public class AdventureQuestData implements Serializable {
     }
 
     public void initialize(){
+        poiTokens = new Hashtable<>();
+
         for (AdventureQuestStage stage : stages){
             initializeStage(stage);
         }
@@ -185,7 +187,10 @@ public class AdventureQuestData implements Serializable {
             case Clear:
                 stage.setTargetPOI(poiTokens, this.name);
                 break;
+            case CompleteQuest:
+                stage.setTargetPOI(poiTokens, this.name);
             case Defeat:
+                stage.setTargetPOI(poiTokens, this.name);
                 if (!stage.mixedEnemies)
                     stage.setTargetEnemyData(generateTargetEnemyData(stage));
                 break;
@@ -199,6 +204,8 @@ public class AdventureQuestData implements Serializable {
                 if (!stage.mixedEnemies)
                     stage.setTargetEnemyData(generateTargetEnemyData(stage));
                 break;
+            case Fetch:
+                stage.setTargetPOI(poiTokens, this.name);
             case Hunt:
                 stage.setTargetSprite(generateTargetEnemySprite(stage));
                 break;
@@ -213,6 +220,7 @@ public class AdventureQuestData implements Serializable {
                 // This might get oddly complex.
                 break;
             case QuestFlag:
+                stage.setTargetPOI(poiTokens, this.name);
                 break;
             case Rescue:
                 stage.setTargetPOI(poiTokens, this.name);
@@ -225,20 +233,22 @@ public class AdventureQuestData implements Serializable {
                 && ("cave".equalsIgnoreCase( stage.getTargetPOI().getData().type)
                 || "dungeon".equalsIgnoreCase( stage.getTargetPOI().getData().type))){
             //todo: decide how to handle this in "anyPOI" scenarios
-            WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID() + stage.getTargetPOI().getData().map).clearDeletedObjects();
+            WorldSave.getCurrentSave().getPointOfInterestChanges(stage.getTargetPOI().getID()).clearDeletedObjects();
         }
 
         PointOfInterest temp = stage.getTargetPOI();
-        if (temp != null)
-            poiTokens.put("$(poi_" + stage.id+")", temp);
+        if (temp != null) {
+            poiTokens.put("$(poi_" + stage.id + ")", temp);
+            poiBiomeTokens.put("$(biome_" + stage.id + ")", GameScene.instance().getBiomeByPosition(temp.getPosition()));
+        }
 
         EnemyData target = stage.getTargetEnemyData();
         if (target != null)
             enemyTokens.put("$(enemy_" + stage.id +")", target);
 
         otherTokens.put("$(playername)", Current.player().getName());
-        otherTokens.put("$(currentbiome)", GameScene.instance().getAdventurePlayerLocation(true,false));
-
+        otherTokens.put("$(currentbiome)", GameScene.instance().getAdventurePlayerLocation(false,true));
+        otherTokens.put("$(playerrace)", Current.player().raceName());
     }
 
     public void replaceTokens(){
@@ -269,7 +279,11 @@ public class AdventureQuestData implements Serializable {
     private String replaceTokens(String data){
         for (Enumeration<String> e = poiTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
-            data = data.replace(key, poiTokens.get(key).getData().name);
+            data = data.replace(key, poiTokens.get(key).getDisplayName());
+        }
+        for (Enumeration<String> e = poiBiomeTokens.keys(); e.hasMoreElements();){
+            String key = e.nextElement();
+            data = data.replace(key, poiBiomeTokens.get(key));
         }
         for (Enumeration<String> enemy = enemyTokens.keys(); enemy.hasMoreElements();){
             String enemyKey = enemy.nextElement();
@@ -288,9 +302,16 @@ public class AdventureQuestData implements Serializable {
         }
         for (Enumeration<String> e = poiTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
-            data.text = data.text.replace(key, poiTokens.get(key).getData().name);
-            data.name = data.name.replace(key, poiTokens.get(key).getData().name);
+            data.text = data.text.replace(key, poiTokens.get(key).getDisplayName());
+            data.name = data.name.replace(key, poiTokens.get(key).getDisplayName());
         }
+
+        for (Enumeration<String> e = poiBiomeTokens.keys(); e.hasMoreElements();){
+            String key = e.nextElement();
+            data.text = data.text.replace(key, poiBiomeTokens.get(key));
+            data.name = data.name.replace(key, poiBiomeTokens.get(key));
+        }
+
         for (Enumeration<String> e = enemyTokens.keys(); e.hasMoreElements();){
             String key = e.nextElement();
             data.text = data.text.replace(key, enemyTokens.get(key).getName());
@@ -330,10 +351,17 @@ public class AdventureQuestData implements Serializable {
         ArrayList<EnemyData> matchesTags = new ArrayList<>();
         for(EnemyData data: new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
             boolean valid = true;
+            List<String> candidateTags = Arrays.asList(data.questTags);
             for (String tag : stage.enemyTags) {
-                if (!Arrays.asList(data.questTags).contains(tag)) {
+                if (!candidateTags.contains(tag)) {
                    valid = false;
                    break;
+                }
+            }
+            for (String tag : stage.enemyExcludeTags) {
+                if (candidateTags.contains(tag)) {
+                    valid = false;
+                    break;
                 }
             }
             if (valid)
@@ -350,20 +378,48 @@ public class AdventureQuestData implements Serializable {
     public void updateEnteredPOI(PointOfInterest arrivedAt){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-
-            done = stage.updateEnterPOI(arrivedAt) == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateEnterPOI(arrivedAt) == Complete && done;
+                    break;
+                case Complete:
+                    continue;
+                default:
+                    done = false;
+                    break;
+            }
         }
         completed = done;
     }
 
-    public void updateMapFlag(String questFlag, int flagValue){
+    public void updateReputationChanged(PointOfInterest location, int newReputation) {
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-            done = stage.updateMapFlag(questFlag, flagValue) == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateReputationChanged(location, newReputation) == Complete && done;
+                    break;
+                case Complete:
+                    continue;
+                default:
+                    done = false;
+                    break;
+            }
+        }
+        completed = done;
+    }
+
+    public void updateMapFlag(String mapFlag, int flagValue){
+        boolean done = true;
+        for (AdventureQuestStage stage: stages) {
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateMapFlag(mapFlag, flagValue) == Complete && done;
+                    break;
+                case Inactive:
+                    done = false;
+                    break;
+            }
         }
         completed = done;
     }
@@ -371,9 +427,14 @@ public class AdventureQuestData implements Serializable {
     public void updateCharacterFlag(String characterFlag, int flagValue){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-            done = stage.updateCharacterFlag(characterFlag, flagValue) == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateCharacterFlag(characterFlag, flagValue) == Complete && done;
+                    break;
+                case Inactive:
+                    done = false;
+                    break;
+            }
         }
         completed = done;
     }
@@ -381,9 +442,15 @@ public class AdventureQuestData implements Serializable {
     public void updateQuestFlag(String questFlag, int flagValue){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-            done = stage.updateQuestFlag(questFlag, flagValue) == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateQuestFlag(questFlag, flagValue) == Complete && done;
+                    break;
+                case Inactive:
+                    done = false;
+                    break;
+            }
+
         }
         completed = done;
     }
@@ -391,9 +458,14 @@ public class AdventureQuestData implements Serializable {
     public void updateLeave(){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-            done = stage.updateLeave() == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateLeave() == Complete && done;
+                    break;
+                case Inactive:
+                    done = false;
+                    break;
+            }
         }
         completed = done;
     }
@@ -401,24 +473,33 @@ public class AdventureQuestData implements Serializable {
     public void updateWin(EnemySprite defeated, boolean cleared){
         boolean done = true;
         for (AdventureQuestStage stage: stages) {
-            done = stage.updateWin(defeated, cleared) == AdventureQuestController.QuestStatus.Complete && done;
-            if (!done)
-                break;
+            switch (stage.getStatus()) {
+                case Active:
+                    done = stage.updateWin(defeated, cleared) == Complete && done;
+                    break;
+                case Complete:
+                    continue;
+                default:
+                    done = false;
+                    break;
+            }
         }
         completed = done;
     }
 
     public void updateLose(EnemySprite defeatedBy){
         for (AdventureQuestStage stage: stages) {
-           if(failed)
-               break;
-            failed = stage.updateLose(defeatedBy) == AdventureQuestController.QuestStatus.Failed;
+            if (stage.getStatus() != Active)
+                continue;
+            failed = stage.updateLose(defeatedBy) == Failed;
         }
     }
 
     public void updateDespawn(EnemySprite despawned){
         for (AdventureQuestStage stage: stages) {
-            failed = stage.updateDespawn(despawned)== AdventureQuestController.QuestStatus.Failed || failed;
+            if (stage.getStatus() != Active)
+                continue;
+            failed = stage.updateDespawn(despawned)== Failed || failed;
         }
     }
 
@@ -426,8 +507,10 @@ public class AdventureQuestData implements Serializable {
         for (AdventureQuestStage stage: stages) {
             if(failed)
                 break;
+            if (stage.getStatus() != Active)
+                continue;
             stage.updateArenaComplete(winner);
-            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+            failed = failed || stage.getStatus() == Failed;
         }
         if (!failed)
             updateStatus();
@@ -437,8 +520,49 @@ public class AdventureQuestData implements Serializable {
         for (AdventureQuestStage stage: stages) {
             if(failed)
                 break;
+            if (stage.getStatus() != Active)
+                continue;
             stage.updateEventComplete(completedEvent);
-            failed = failed || stage.getStatus() == AdventureQuestController.QuestStatus.Failed;
+            failed = failed || stage.getStatus() == Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateQuestComplete(AdventureQuestData completedQuest) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            if (stage.getStatus() != Active)
+                continue;
+            stage.updateQuestComplete(completedQuest);
+            failed = failed || stage.getStatus() == Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateItemUsed(ItemData data) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            if (stage.getStatus() != Active)
+                continue;
+            stage.updateItemUsed(data);
+            failed = failed || stage.getStatus() == Failed;
+        }
+        if (!failed)
+            updateStatus();
+    }
+
+    public void updateItemReceived(ItemData data) {
+        for (AdventureQuestStage stage: stages) {
+            if(failed)
+                break;
+            if (stage.getStatus() != Active)
+                continue;
+            stage.updateItemReceived(data);
+            failed = failed || stage.getStatus() == Failed;
         }
         if (!failed)
             updateStatus();
@@ -481,6 +605,44 @@ public class AdventureQuestData implements Serializable {
         failed = true;
         isTracked = false;
         //todo: handle any necessary cleanup or reputation loss
+    }
+
+    public void activateNextStages() {
+        boolean showNotification = false;
+        for (AdventureQuestStage s : stages) {
+            if (s.getStatus() == Inactive){
+                s.checkPrerequisites(getCompletedStageIDs());
+                if (s.getStatus() == Active) {
+                    AdventureQuestController.instance().addQuestSprites(s);
+                    showNotification = true;
+                }
+            }
+        }
+        if (showNotification) {
+            StringBuilder description = new StringBuilder();
+            description.append("[!]").append(name).append("[]");
+            for (AdventureQuestStage stage : getActiveStages()) {
+                description.append("\n")
+                        .append(stage.name).append("\n[/]")
+                        //.append(stage.description.length()<=50?stage.description:stage.description.substring(0,49) + "...")
+                        .append(stage.description)
+                        .append("[]");
+            }
+            GameHUD.getInstance().addNotification(description.toString());
+        }
+
+    }
+
+    public PointOfInterest getClosestValidPOI(Vector2 pos) {
+        List<PointOfInterest> validPOIs = new ArrayList<>();
+        for (AdventureQuestStage stage : getActiveStages()) {
+            validPOIs.addAll(stage.getValidPOIs());
+        }
+        if (validPOIs.isEmpty())
+            return null;
+        validPOIs.sort(Comparator.comparingInt(a -> (int) a.getPosition().dst(pos)));
+        return validPOIs.get(0);
+
     }
 }
 
