@@ -2,7 +2,7 @@ Name:Sycorax Commander
 ManaCost:2 B R
 Types:Creature Alien Soldier
 PT:4/2
-K:First strike
+K:First Strike
 K:Haste
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChoice | TriggerDescription$ Sanctified Rules of Combat — When CARDNAME enters the battlefield, each opponent faces a villainous choice — That opponent discards all the cards in their hand, then draws that many cards minus one, or CARDNAME deals damage to that player equal to the number of cards in their hand.
 SVar:TrigChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBDiscard,DBDamage
