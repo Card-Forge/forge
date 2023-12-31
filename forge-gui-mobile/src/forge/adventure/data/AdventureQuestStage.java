@@ -2,12 +2,12 @@ package forge.adventure.data;
 
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.AdventureQuestController;
+import forge.adventure.util.AdventureQuestEvent;
+import forge.adventure.util.AdventureQuestEventType;
 import forge.adventure.util.Current;
-import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -22,7 +22,7 @@ public class AdventureQuestStage implements Serializable {
     private static final long serialVersionUID = 12042023L;
 
     public int id;
-    private AdventureQuestController.QuestStatus status = Inactive;
+    private AdventureQuestController.QuestStatus status = INACTIVE;
     public String name = "";
     public String description = "";
     public boolean anyPOI = false; //false: Pick one PoI. True: Any PoI matching tags is usable
@@ -67,14 +67,14 @@ public class AdventureQuestStage implements Serializable {
     }
 
     public void checkPrerequisites(List<Integer> completedStages) {
-        if (status != Inactive)
+        if (status != INACTIVE)
             return;
         for (Integer prereqID : prerequisiteIDs) {
             if (!completedStages.contains(prereqID)) {
                 return;
             }
         }
-        status = Active;
+        status = ACTIVE;
     }
 
     public AdventureQuestController.QuestStatus getStatus() {
@@ -153,135 +153,6 @@ public class AdventureQuestStage implements Serializable {
         targetSprite = target;
     }
 
-    public AdventureQuestController.QuestStatus updateEnterPOI(PointOfInterest entered) {
-        if (status != Active || !checkIfTargetLocation()) {
-            return status;
-        }
-        switch (objective) {
-            case Delivery:
-                status = Complete;
-                break;
-            case Travel:
-                status = ++progress1 >= count3 ? Complete : status;
-                break;
-           case HaveReputationInCurrentLocation:
-               PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(entered.getID());
-               status = changes.getMapReputation() >= count1 ? Complete : status;
-               break;
-        }
-
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateReputationChanged(PointOfInterest location, int newReputation) {
-        if (status != Active)
-            return status;
-
-        switch (objective) {
-            case HaveReputation:
-                status = checkIfTargetLocation(location) && newReputation >= count1 ? Complete : status;
-                break;
-            case HaveReputationInCurrentLocation:
-                status = checkIfTargetLocation() && newReputation >= count1 ? Complete : status;
-                break;
-        }
-
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateCharacterFlag(String flagName, int flagValue) {
-        //Not yet implemented as objective type
-        //Could theoretically be used as a part of quests for character lifetime achievements
-//        if (status != Active) {
-//            return status;
-//        }
-//            if (objective == CharacterFlag) {
-//                if (flagName.equals(this.mapFlag) && flagValue >= this.mapFlagValue)
-//                    status = Complete;
-//            }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateQuestFlag(String flagName, int flagValue) {
-        if (status != Active) {
-            return status;
-        }
-        switch (objective) {
-            case QuestFlag:
-                status = flagName.equals(this.mapFlag) && flagValue >= this.mapFlagValue ? Complete : status;
-                break;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateMapFlag(String mapFlag, int mapFlagValue) {
-        if (status != Active) {
-            return status;
-        }
-        switch (objective) {
-            case MapFlag:
-                status = checkIfTargetLocation() && mapFlag.equals(mapFlag) && mapFlagValue >= this.mapFlagValue ? Complete : status;
-                break;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateLeave() {
-        if (status != Active) {
-            return status;
-        }
-        switch (objective) {
-            case Leave:
-                status = checkIfTargetLocation() && ++progress1 >= count1 ? Complete : status;
-                break;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateWin(EnemySprite defeated, boolean mapCleared) {
-        //todo - Does this need to also be called for alternate mob removal types?
-        if (status != Active) {
-            return status;
-        }
-
-        switch (objective) {
-            case Clear:
-                status = mapCleared && checkIfTargetLocation()? Complete : status;
-                break;
-            case Defeat:
-                if (!checkIfTargetLocation())
-                    return status;
-                if (mixedEnemies) {
-                    List<String> defeatedTags = Arrays.asList(defeated.getData().questTags);
-                    for (String targetTag : enemyTags) {
-                        if (!defeatedTags.contains(targetTag)) {
-                            //Does not count toward objective
-                            return status;
-                        }
-                    }
-                    for (String targetTag : enemyExcludeTags) {
-                        if (defeatedTags.contains(targetTag)) {
-                            //Does not count
-                            return status;
-                        }
-                    }
-                } else {
-                    if (!defeated.getData().getName().equals(targetEnemyData.getName()))
-                        //Does not count
-                        return status;
-                }
-                //All tags matched, kill confirmed
-                if (++progress1 >= count1) {
-                    status = Complete;
-                }
-                break;
-            case Hunt:
-                status = defeated.equals(targetSprite)? Complete : status;
-                break;
-        }
-        return status;
-    }
-
     public boolean checkIfTargetLocation() {
         return checkIfTargetLocation(TileMapScene.instance().rootPoint);
     }
@@ -305,151 +176,24 @@ public class AdventureQuestStage implements Serializable {
         return anyPOI;
     }
 
-    public AdventureQuestController.QuestStatus updateLose(EnemySprite defeatedBy) {
-        if (status != Active) {
-            return status;
+    public boolean checkIfTargetEnemy(EnemySprite enemy) {
+        if (targetEnemyData != null) {
+            return enemy.getData() == targetEnemyData;
         }
-        switch (objective) {
-            case Defeat:
-            {
-                if (mixedEnemies) {
-                    List<String> defeatedByTags = Arrays.asList(defeatedBy.getData().questTags);
-                    for (String targetTag : enemyTags) {
-                        if (!defeatedByTags.contains(targetTag)) {
-                            //Does not count
-                            return status;
-                        }
-                    }
-                    for (String targetTag : enemyExcludeTags) {
-                        if (defeatedByTags.contains(targetTag)) {
-                            //Does not count
-                            return status;
-                        }
-                    }
-                } else {
-                    if (defeatedBy.getData() != targetEnemyData)
-                        //Does not count
-                        return status;
-                }
-                //All tags matched
-                //progress2: number of times defeated by a matching enemy
-                //count2: if > 0, fail once defeated this many times
-                if (status == Active && ++progress2 >= count2 && count2 > 0) {
-                    status = Failed;
-                }
-                break;
+        else if (targetSprite == null) {
+            ArrayList<String> candidateTags = new ArrayList<>(Arrays.asList(enemy.getData().questTags));
+            int tagCount = candidateTags.size();
+
+            candidateTags.removeAll(enemyExcludeTags);
+            if (candidateTags.size() != tagCount) {
+                return false;
             }
-            case Hunt:
-                if (defeatedBy.equals(targetSprite)) {
-                    status = Failed;
-                }
-                break;
-        }
-        return status;
-    }
 
-    public AdventureQuestController.QuestStatus updateDespawn(EnemySprite despawned) {
-        if (status != Active) {
-            return status;
+            candidateTags.removeAll(enemyTags);
+            return candidateTags.size() == tagCount - enemyTags.size();
+        } else  {
+            return targetSprite.equals(enemy);
         }
-        switch (objective) {
-            case Hunt:
-                status = (despawned.equals(targetSprite))? Failed : status;
-                break;
-        }
-
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateArenaComplete(boolean winner) {
-        if (status != Active || !checkIfTargetLocation()) {
-            return status;
-        }
-            if (objective == Arena) {
-                if (winner) {
-                    status = ++progress1 >= count1 ? Complete : status;
-                } else {
-                    status = ++progress2 >= count2 ? Failed : status;
-                }
-            }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateEventComplete(AdventureEventData completedEvent) {
-        if (status != Active || !checkIfTargetLocation()) {
-            return status;
-        }
-        switch (objective) {
-            case EventFinish:
-                if (++progress1 >= count1) {
-                    status = Complete;
-                }
-            break;
-            case EventWinMatches:
-                progress1 += completedEvent.matchesWon;
-                progress2 += completedEvent.matchesLost;
-
-                if (++progress2 >= count2 && count2 > 0) {
-                    status = Failed;
-                } else if (++progress1 >= count1) {
-                    status = Complete;
-                }
-
-                break;
-            case EventWin:
-                if (completedEvent.playerWon) {
-                    status = ++progress1 >=count1 ? Complete : status;
-                } else {
-                    status = ++progress2 >= count2 && count2 > 0 ? Failed : status;
-                }
-                break;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateQuestComplete(AdventureQuestData completedQuest) {
-        if (status != Active) {
-            return status;
-        }
-        switch (objective) {
-            case CompleteQuest:
-                if (this.anyPOI) {
-                    //todo - filter based on POI tags, below implementation is wrong but no quests use it yet
-//                    List<String> completedQuestPOITags = Arrays.stream(completedQuest.questPOITags).collect(Collectors.toList());
-//                    for (String targetTag : POITags) {
-//                        if (!completedQuestPOITags.contains(targetTag)) {
-//                            return status;
-//                        }
-//                    }
-                    //All tags matched, completed quest came from valid POI.
-                } else {
-                    if (!completedQuest.sourceID.equals(this.targetPOI.getID()))
-                        return status;
-                }
-                status = ++progress1 >= count1 ? Complete : status;
-                break;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateItemUsed(ItemData data) {
-        if (status != Active) {
-            return status;
-        }
-        if (objective == Use) {
-            status = (itemNames.isEmpty()) || itemNames.contains(data.name) && ++progress1 >= count1 ? Complete : status;
-        }
-        return status;
-    }
-
-    public AdventureQuestController.QuestStatus updateItemReceived(ItemData data) {
-        if (status != Active) {
-            return status;
-        }
-        if (objective == Fetch) {
-            status = (itemNames.isEmpty()) || itemNames.contains(data.name) && ++progress1 >= count1 ? Complete : status;
-        }
-        return status;
     }
 
     public AdventureQuestStage() {
@@ -515,5 +259,113 @@ public class AdventureQuestStage implements Serializable {
             }
         }
         return validPOIs;
+    }
+
+    public AdventureQuestController.QuestStatus handleEvent(AdventureQuestEvent event) {
+        if (!checkIfTargetLocation(event.poi))
+            return status;
+
+        if (event.enemy != null && !checkIfTargetEnemy(event.enemy))
+            return status;
+
+        switch (objective) {
+            case CharacterFlag:
+                if (event.type == AdventureQuestEventType.CHARACTERFLAG)
+                    status = event.flagName != null &&  event.flagName.equals(this.mapFlag) && event.flagValue >= this.mapFlagValue ? COMPLETE : status;
+                break;
+            case CompleteQuest:
+                status = event.type == AdventureQuestEventType.QUESTCOMPLETE
+                        && (anyPOI || event.otherQuest != null && event.otherQuest.sourceID.equals(targetPOI.getID()))
+                        && ++progress1 >= count1 ? COMPLETE : status;
+                break;
+            case Clear:
+                if (!event.clear) {
+                    break;
+                }
+                //intentional fallthrough to DEFEAT
+            case Defeat:
+                if (event.type != AdventureQuestEventType.MATCHCOMPLETE)
+                    break;
+                if (event.winner) {
+                    status = ++progress1 >= count1 ? COMPLETE : status;
+                } else {
+                    status = ++progress2 >= count2 ? FAILED : status;
+                }
+            case Arena:
+                status = event.type == AdventureQuestEventType.EVENTCOMPLETE
+                        && event.clear //if event not conceded
+                        && ++progress1 >= count1 ? COMPLETE : status;
+                break;
+            case EventWin:
+                if (event.type != AdventureQuestEventType.EVENTCOMPLETE)
+                    break;
+                if (event.winner)
+                    event.count1++; //number of wins
+                else
+                    event.count2++; //number of losses
+                if (++progress2 >= count2 && count2 > 0) {
+                    status = FAILED;
+                } else if (++progress1 >= count1) {
+                    status = COMPLETE;
+                }
+                break;
+            case EventWinMatches:
+                if (event.type != AdventureQuestEventType.EVENTMATCHCOMPLETE)
+                    break;
+                if (event.winner) {
+                    status = ++progress1 >=count1 ? COMPLETE : status;
+                } else {
+                    status = ++progress2 >= count2 && count2 > 0 ? FAILED : status;
+                }
+                break;
+            case Fetch:
+                status = event.type == AdventureQuestEventType.RECEIVEITEM
+                        && (itemNames.isEmpty()) || (event.item != null && itemNames.contains(event.item.name))
+                        && ++progress1 >= count1 ? COMPLETE : status;
+                break;
+            case Hunt:
+                if (event.type == AdventureQuestEventType.DESPAWN) {
+                    status = event.enemy.equals(targetSprite) ? FAILED : status;
+                } else if (event.type == AdventureQuestEventType.MATCHCOMPLETE) {
+                    if (event.winner) {
+                        status = event.enemy.equals(targetSprite) ? COMPLETE : status;
+                    } else {
+                        status = ++progress2 >= count2 && count2 > 0 ? FAILED : status;
+                    }
+                }
+                break;
+            case Leave:
+                if (event.type == AdventureQuestEventType.LEAVEPOI)
+                    status = ++progress1 >= count1 ? COMPLETE : status;
+                break;
+            case MapFlag:
+                if (event.type == AdventureQuestEventType.MAPFLAG)
+                    status = event.flagName != null &&  event.flagName.equals(this.mapFlag) && event.flagValue >= this.mapFlagValue ? COMPLETE : status;
+                break;
+            case QuestFlag:
+                if (event.type == AdventureQuestEventType.QUESTFLAG)
+                    status = event.flagName != null &&  event.flagName.equals(this.mapFlag) && event.flagValue >= this.mapFlagValue ? COMPLETE : status;
+                break;
+            case HaveReputation:
+                //presumed that WorldMapOK will be set on this type, as reputation will occasionally be updated remotely by quests
+                if (event.type == AdventureQuestEventType.REPUTATION)
+                    status = checkIfTargetLocation(event.poi) && event.count1 >= count1 ? COMPLETE : status;
+                break;
+            case HaveReputationInCurrentLocation:
+                if (event.type == AdventureQuestEventType.ENTERPOI || event.type == AdventureQuestEventType.REPUTATION)
+                    status = event.count1 >= count1 ? COMPLETE : status;
+                break;
+            case Delivery:
+                //will eventually differentiate from Travel
+            case Travel:
+                status = ++progress3 >= count3 ? COMPLETE : status;
+                break;
+            case Use:
+                status = event.type == AdventureQuestEventType.USEITEM
+                        && (itemNames.isEmpty()) || itemNames.contains(event.item.name)
+                        && ++progress1 >= count1 ? COMPLETE : status;
+                break;
+        }
+        return status;
     }
 }

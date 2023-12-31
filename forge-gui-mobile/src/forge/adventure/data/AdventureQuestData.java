@@ -5,8 +5,11 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.GameScene;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.AdventureQuestController;
+import forge.adventure.util.AdventureQuestEvent;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
@@ -116,7 +119,7 @@ public class AdventureQuestData implements Serializable {
 
         //Temporarily allow only one active stage until parallel stages and prerequisites are implemented
         for (AdventureQuestStage stage : stages) {
-            if (stage.getStatus() == Active ) {
+            if (stage.getStatus() == ACTIVE) {
                 toReturn.add(stage);
             }
         }
@@ -127,7 +130,7 @@ public class AdventureQuestData implements Serializable {
         List<AdventureQuestStage> toReturn = new ArrayList<>();
 
         for (AdventureQuestStage stage : stages) {
-            if (stage.getStatus() == Complete)
+            if (stage.getStatus() == COMPLETE)
                 toReturn.add(stage);
         }
         return toReturn;
@@ -350,22 +353,18 @@ public class AdventureQuestData implements Serializable {
     {
         ArrayList<EnemyData> matchesTags = new ArrayList<>();
         for(EnemyData data: new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
-            boolean valid = true;
-            List<String> candidateTags = Arrays.asList(data.questTags);
-            for (String tag : stage.enemyTags) {
-                if (!candidateTags.contains(tag)) {
-                   valid = false;
-                   break;
-                }
+            ArrayList<String> candidateTags = new ArrayList<>(Arrays.asList(data.questTags));
+            int tagCount = candidateTags.size();
+
+            candidateTags.removeAll(stage.enemyExcludeTags);
+            if (candidateTags.size() != tagCount) {
+                continue;
             }
-            for (String tag : stage.enemyExcludeTags) {
-                if (candidateTags.contains(tag)) {
-                    valid = false;
-                    break;
-                }
-            }
-            if (valid)
+
+            candidateTags.removeAll(stage.enemyTags);
+            if (candidateTags.size() == tagCount - stage.enemyTags.size()) {
                 matchesTags.add(data);
+            }
         }
         if (matchesTags.isEmpty()){
             return new EnemyData(Aggregates.random(WorldData.getAllEnemies()));
@@ -375,214 +374,30 @@ public class AdventureQuestData implements Serializable {
         }
     }
 
-    public void updateEnteredPOI(PointOfInterest arrivedAt){
+
+
+    class questUpdate {
+
+    }
+
+    public void updateStages(AdventureQuestEvent event){
         boolean done = true;
+        if (event.poi == null && MapStage.getInstance().isInMap())
+            event.poi = TileMapScene.instance().rootPoint;
         for (AdventureQuestStage stage: stages) {
             switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateEnterPOI(arrivedAt) == Complete && done;
+                case ACTIVE:
+                    done = stage.handleEvent(event) == COMPLETE && done;
                     break;
-                case Complete:
+                case COMPLETE:
                     continue;
                 default:
                     done = false;
                     break;
             }
+            failed |= stage.getStatus() == FAILED;
         }
         completed = done;
-    }
-
-    public void updateReputationChanged(PointOfInterest location, int newReputation) {
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateReputationChanged(location, newReputation) == Complete && done;
-                    break;
-                case Complete:
-                    continue;
-                default:
-                    done = false;
-                    break;
-            }
-        }
-        completed = done;
-    }
-
-    public void updateMapFlag(String mapFlag, int flagValue){
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateMapFlag(mapFlag, flagValue) == Complete && done;
-                    break;
-                case Inactive:
-                    done = false;
-                    break;
-            }
-        }
-        completed = done;
-    }
-
-    public void updateCharacterFlag(String characterFlag, int flagValue){
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateCharacterFlag(characterFlag, flagValue) == Complete && done;
-                    break;
-                case Inactive:
-                    done = false;
-                    break;
-            }
-        }
-        completed = done;
-    }
-
-    public void updateQuestFlag(String questFlag, int flagValue){
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateQuestFlag(questFlag, flagValue) == Complete && done;
-                    break;
-                case Inactive:
-                    done = false;
-                    break;
-            }
-
-        }
-        completed = done;
-    }
-
-    public void updateLeave(){
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateLeave() == Complete && done;
-                    break;
-                case Inactive:
-                    done = false;
-                    break;
-            }
-        }
-        completed = done;
-    }
-
-    public void updateWin(EnemySprite defeated, boolean cleared){
-        boolean done = true;
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Active:
-                    done = stage.updateWin(defeated, cleared) == Complete && done;
-                    break;
-                case Complete:
-                    continue;
-                default:
-                    done = false;
-                    break;
-            }
-        }
-        completed = done;
-    }
-
-    public void updateLose(EnemySprite defeatedBy){
-        for (AdventureQuestStage stage: stages) {
-            if (stage.getStatus() != Active)
-                continue;
-            failed = stage.updateLose(defeatedBy) == Failed;
-        }
-    }
-
-    public void updateDespawn(EnemySprite despawned){
-        for (AdventureQuestStage stage: stages) {
-            if (stage.getStatus() != Active)
-                continue;
-            failed = stage.updateDespawn(despawned)== Failed || failed;
-        }
-    }
-
-    public void updateArenaComplete(boolean winner){
-        for (AdventureQuestStage stage: stages) {
-            if(failed)
-                break;
-            if (stage.getStatus() != Active)
-                continue;
-            stage.updateArenaComplete(winner);
-            failed = failed || stage.getStatus() == Failed;
-        }
-        if (!failed)
-            updateStatus();
-    }
-
-    public void updateEventComplete(AdventureEventData completedEvent) {
-        for (AdventureQuestStage stage: stages) {
-            if(failed)
-                break;
-            if (stage.getStatus() != Active)
-                continue;
-            stage.updateEventComplete(completedEvent);
-            failed = failed || stage.getStatus() == Failed;
-        }
-        if (!failed)
-            updateStatus();
-    }
-
-    public void updateQuestComplete(AdventureQuestData completedQuest) {
-        for (AdventureQuestStage stage: stages) {
-            if(failed)
-                break;
-            if (stage.getStatus() != Active)
-                continue;
-            stage.updateQuestComplete(completedQuest);
-            failed = failed || stage.getStatus() == Failed;
-        }
-        if (!failed)
-            updateStatus();
-    }
-
-    public void updateItemUsed(ItemData data) {
-        for (AdventureQuestStage stage: stages) {
-            if(failed)
-                break;
-            if (stage.getStatus() != Active)
-                continue;
-            stage.updateItemUsed(data);
-            failed = failed || stage.getStatus() == Failed;
-        }
-        if (!failed)
-            updateStatus();
-    }
-
-    public void updateItemReceived(ItemData data) {
-        for (AdventureQuestStage stage: stages) {
-            if(failed)
-                break;
-            if (stage.getStatus() != Active)
-                continue;
-            stage.updateItemReceived(data);
-            failed = failed || stage.getStatus() == Failed;
-        }
-        if (!failed)
-            updateStatus();
-    }
-
-    public void updateStatus(){
-        for (AdventureQuestStage stage: stages) {
-            switch (stage.getStatus()) {
-                case Complete:
-                    continue;
-                case Failed:
-                    failed = true;
-                    break;
-                case None:
-                case Inactive:
-                case Active:
-                    return;
-            }
-        }
-        completed = true;
     }
 
     public DialogData getPrologue() {
@@ -610,9 +425,9 @@ public class AdventureQuestData implements Serializable {
     public void activateNextStages() {
         boolean showNotification = false;
         for (AdventureQuestStage s : stages) {
-            if (s.getStatus() == Inactive){
+            if (s.getStatus() == INACTIVE){
                 s.checkPrerequisites(getCompletedStageIDs());
-                if (s.getStatus() == Active) {
+                if (s.getStatus() == ACTIVE) {
                     AdventureQuestController.instance().addQuestSprites(s);
                     showNotification = true;
                 }

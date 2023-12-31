@@ -70,7 +70,7 @@ public class QuestLogScene extends UIScene {
         root.add(scroller).colspan(3);
         root.align(Align.right);
         root.row();
-        Label column0Label = new Label("Quest Name", Controls.getSkin());
+        Label column0Label = new Label(Forge.getLocalizer().getMessage("lblQuestName"), Controls.getSkin());
         column0Label.setColor(Color.BLACK);
         root.add(column0Label).align(Align.bottomLeft);
         root.row();
@@ -115,7 +115,7 @@ public class QuestLogScene extends UIScene {
             nameLabel.setWrap(true);
             nameLabel.setColor(Color.BLACK);
             scrollContainer.add(nameLabel).align(Align.left).expandX();
-            Button details = Controls.newTextButton("Details");
+            Button details = Controls.newTextButton(Forge.getLocalizer().getMessage("lblDetails"));
             details.addListener( new ClickListener(){
                 public void clicked(InputEvent event, float x, float y){
                     loadDetailsPane(quest);
@@ -145,7 +145,7 @@ public class QuestLogScene extends UIScene {
         detailRoot.setVisible(true);
         detailScrollContainer.clear();
         detailScrollContainer.row();
-        trackButton.setText(quest.isTracked?"Untrack Quest":"Track Quest");
+        trackButton.setText(quest.isTracked?Forge.getLocalizer().getMessage("lblUntrackQuest"):Forge.getLocalizer().getMessage("lblTrackQuest"));
         trackButton.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 toggleTracked(quest);
@@ -156,7 +156,7 @@ public class QuestLogScene extends UIScene {
         abandonQuestButton.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
 
-                Dialog confirm = createGenericDialog("", "Abandon Quest?","Yes","No", () -> abandonQuest(quest), null);
+                Dialog confirm = createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),Forge.getLocalizer().getMessage("lblYes"),Forge.getLocalizer().getMessage("lblNo"), () -> abandonQuest(quest), null);
                 showDialog(confirm);
             }
         });
@@ -211,10 +211,10 @@ public class QuestLogScene extends UIScene {
     private void toggleTracked(AdventureQuestData quest){
         if (quest.isTracked){
             quest.isTracked = false;
-            trackButton.setText("Track Quest");
+            trackButton.setText(Forge.getLocalizer().getMessage("lblTrackQuest"));
         } else {
             AdventureQuestController.trackQuest(quest);
-            trackButton.setText("Untrack Quest");
+            trackButton.setText(Forge.getLocalizer().getMessage("lblUntrackQuest"));
         }
     }
 
