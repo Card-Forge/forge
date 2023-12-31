@@ -87,6 +87,11 @@ public enum PlanarDice {
         runParams.put(AbilityKey.Result, Arrays.asList(0));
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
+        if (res == Chaos) {
+            runParams = AbilityKey.mapFromPlayer(roller);
+            roller.getGame().getTriggerHandler().runTrigger(TriggerType.ChaosEnsues, runParams, false);
+        }
+
         return res;
     }
 
