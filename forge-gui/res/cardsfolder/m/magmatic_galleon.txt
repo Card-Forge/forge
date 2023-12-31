@@ -4,7 +4,7 @@ Types:Artifact Vehicle
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage to target creature an opponent controls.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 5
-T:Mode$ ExcessDamageAll | ValidTarget$ Creature.OppCtrl | CombatDamage$ False | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token.
+T:Mode$ ExcessDamageAll | ValidTarget$ Creature.OppCtrl | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token.
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 K:Crew:2
 Oracle:When Magmatic Galleon enters the battlefield, it deals 5 damage to target creature an opponent controls.\nWhenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token.\nCrew 2
