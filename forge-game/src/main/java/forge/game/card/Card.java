@@ -5532,6 +5532,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // KeywordCollection#getAmount
 
             final String[] parse = kw.contains(":") ? kw.split(":") : kw.split(" ");
+            if (parse.length < 2) {
+                count++;
+                continue;
+            }
             final String s = parse[1];
             if (StringUtils.isNumeric(s)) {
                count += Integer.parseInt(s);

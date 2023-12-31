@@ -30,7 +30,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.ai.AiCardMemory.MemorySet;
-import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
 import forge.card.CardStateName;
@@ -290,7 +289,7 @@ public class ComputerUtil {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai, true);
 
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA, false) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
             return false;
         }
 
@@ -1176,7 +1175,7 @@ public class ComputerUtil {
             return true;
         }
 
-        if (cardState.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
+        if (cardState.hasKeyword(Keyword.RIOT) && SpecialAiLogic.preferHasteForRiot(sa, ai)) {
             // Planning to choose Haste for Riot, so do this in Main 1
             return true;
         }
