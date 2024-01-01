@@ -612,8 +612,11 @@ public class MapStage extends GameStage {
                         if (enemy != null && !enemy.toString().isEmpty()) {
                             EnemyData EN = WorldData.getEnemy(enemy.toString());
                             if (EN == null) {
-                                System.err.printf("Enemy \"%s\" not found.", enemy);
-                                break;
+                                System.err.printf("Enemy \"%s\" not found, choosing a random one for current biome\n", enemy);
+                                forge.adventure.world.World world = Current.world();
+                                Vector2 poiPos = AdventureQuestController.instance().mostRecentPOI.getPosition();
+                                int currentBiome = forge.adventure.world.World.highestBiome(world.getBiome((int) poiPos.x / world.getTileSize(), (int) poiPos.y / world.getTileSize()));
+                                EN = world.getData().GetBiomes().get(currentBiome).getEnemy(1.0f);
                             }
                             EnemySprite mob = new EnemySprite(id, EN);
                             Object dialogObject = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
