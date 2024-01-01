@@ -1036,7 +1036,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, validCards, ability);
-        inp.setMessage(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", cost.zone.getTranslatedName()));
+        inp.setMessage(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", Lang.joinHomogenous(cost.zone, ZoneType.Accessors.GET_TRANSLATED_NAME)));
         inp.setCancelAllowed(true);
         inp.showAndWait();
 
