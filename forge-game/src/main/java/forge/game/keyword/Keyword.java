@@ -175,7 +175,7 @@ public enum Keyword {
     STRIVE("Strive", KeywordWithCost.class, false, "CARDNAME costs %s more to cast for each target beyond the first."),
     SUNBURST("Sunburst", SimpleKeyword.class, false, "This enters the battlefield with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),
     SURGE("Surge", KeywordWithCost.class, false, "You may cast this spell for its surge cost if you or a teammate has cast another spell this turn."),
-    SUSPEND("Suspend", Suspend.class, false, "Rather than cast this card from your hand, you may pay %s and exile it with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost."),
+    SUSPEND("Suspend", Suspend.class, false, "If you could begin to cast this card by putting it onto the stack from your hand, you may pay %s and exile it with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter. When the last is removed, play it without paying its mana cost. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes."),
     TOTEM_ARMOR("Totem armor", SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     TOXIC("Toxic", KeywordWithAmount.class, false, "Players dealt combat damage by this creature also get {%d:poison counter}."),
     TRAINING("Training", SimpleKeyword.class, false, "Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature."),
