@@ -11,6 +11,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.StaticData;
+import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
@@ -151,7 +152,10 @@ public class SpellSmithScene extends UIScene {
                     .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
             if (it.size() == 0)
                 return false;
-            return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+            ConfigData configData = Config.instance().getConfigData();
+            if (configData.allowedEditions != null)
+                return Arrays.asList(configData.allowedEditions).contains(input.getCode());
+            return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
         }).sorted(new Comparator<CardEdition>() {
             @Override
             public int compare(CardEdition e1, CardEdition e2) {
