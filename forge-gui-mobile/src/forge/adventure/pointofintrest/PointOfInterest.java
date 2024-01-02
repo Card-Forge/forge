@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import forge.adventure.data.DialogData;
 import forge.adventure.data.PointOfInterestData;
-import forge.adventure.util.Config;
-import forge.adventure.util.SaveFileContent;
-import forge.adventure.util.SaveFileData;
+import forge.adventure.util.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -31,6 +31,13 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         {
             active = data.active;
         }
+        if (saveFileData.containsKey("displayName")){
+            displayName = saveFileData.readString("displayName");
+        }
+        else
+        {
+            displayName = data==null?"":data.getDisplayName();
+        }
 
         oldMapId="";
         Array<Sprite> textureAtlas = Config.instance().getPOISprites(this.data);
@@ -46,6 +53,9 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         data.store("rectangle",rectangle);
         data.store("spriteIndex",spriteIndex);
         data.store("active",active);
+        data.store("displayName",getDisplayName());
+        data.storeObject("questFlagsToActivate", questFlagsToActivate);
+
         return data;
     }
 
@@ -56,6 +66,8 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     final Rectangle rectangle=new Rectangle();
     String oldMapId="";
     boolean active = true;
+    private String displayName;
+    public ArrayList<DialogData.ActionData.QuestFlag> questFlagsToActivate=new ArrayList<>();
     public PointOfInterest() {
     }
     public PointOfInterest(PointOfInterestData d, Vector2 pos, Random rand) {
@@ -68,6 +80,9 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         data = d;
         active = d.active;
         position.set(pos);
+        for (DialogData.ActionData.QuestFlag flag : data.questFlagsToActivate) {
+            questFlagsToActivate.add(flag);
+        }
 
         rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
     }
@@ -105,17 +120,35 @@ public class PointOfInterest implements Serializable, SaveFileContent {
     }
 
     public String getID() {
-        return getSeedOffset()+data.name+"/"+oldMapId;
+        return getSeedOffset()+data.name+"/"+data.map;
     }
 
-    public boolean getActive() {return active;}
-
-    public void setActive(boolean active) {this.active = active;}
+    public boolean getActive() {
+        for (DialogData.ActionData.QuestFlag flag : questFlagsToActivate) {
+            if (Current.player().getQuestFlag(flag.key) < flag.val){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public Vector2 getNavigationVector(Vector2 origin){
         Vector2 navVector = new Vector2(rectangle.x + rectangle.getWidth() / 2, rectangle.y + rectangle.getHeight() / 2);
         if (origin != null) navVector.sub(origin);
 
         return navVector;
+    }
+
+    public String getDisplayName() {
+        if (displayName == null || displayName.isEmpty())
+            displayName = data.getDisplayName();
+        return displayName;
+    }
+    public void setDisplayName(String val) {
+        displayName = val;
+    }
+
+    public boolean hasDisplayName(){
+        return displayName!= null && !displayName.isEmpty();
     }
 }

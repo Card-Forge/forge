@@ -36,6 +36,7 @@ public class EnemyData implements Serializable {
 
     public String[] questTags = new String[0];
     public float lifetime;
+    public int gamesPerMatch = 1;
 
     public EnemyData() {
     }
@@ -61,6 +62,7 @@ public class EnemyData implements Serializable {
         nameOverride    = enemyData.nameOverride == null ? "" : enemyData.nameOverride;
         questTags       = enemyData.questTags.clone();
         lifetime        = enemyData.lifetime;
+        gamesPerMatch   = enemyData.gamesPerMatch;
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }

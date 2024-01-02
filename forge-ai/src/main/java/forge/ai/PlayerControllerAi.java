@@ -1063,6 +1063,9 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player, true);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
+        emptyAbility.setReplacingObjects(sa.getReplacingObjects());
+        emptyAbility.setTrigger(sa.getTrigger());
+        emptyAbility.setReplacementEffect(sa.getReplacementEffect());
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());

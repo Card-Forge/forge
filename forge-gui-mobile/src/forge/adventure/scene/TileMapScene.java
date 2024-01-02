@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.*;
@@ -107,7 +108,7 @@ public class TileMapScene extends HudScene   {
         rootPoint = point;
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(point.getData().map));
-        ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + oldMap));
+        ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges());
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
         tiledMapRenderer.loadMap(map, "", oldMap,0);
@@ -124,12 +125,19 @@ public class TileMapScene extends HudScene   {
 
     private void load(String targetMap, int nextSpawnPoint) {
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(targetMap));
-        ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap));
+        ((MapStage) stage).setPointOfInterest(getPointOfInterestChanges(targetMap));
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
         tiledMapRenderer.loadMap(map, oldMap, targetMap, nextSpawnPoint);
         oldMap = targetMap;
         stage.getPlayerSprite().stop();
+    }
+
+    public PointOfInterestChanges getPointOfInterestChanges(){
+        return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + rootPoint.getData().map);
+    }
+    public PointOfInterestChanges getPointOfInterestChanges(String targetMap){
+        return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap);
     }
 
 
@@ -142,6 +150,5 @@ public class TileMapScene extends HudScene   {
         nextMap = targetMap;
         nextSpawnPoint = entryTargetObject;
     }
-
 }
 

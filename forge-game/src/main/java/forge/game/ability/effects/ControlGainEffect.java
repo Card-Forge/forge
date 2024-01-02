@@ -192,7 +192,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
-            if (hiddenKws.isEmpty()) {
+            if (!hiddenKws.isEmpty()) {
                 tgtC.addHiddenExtrinsicKeywords(tStamp, 0, hiddenKws);
             }
 

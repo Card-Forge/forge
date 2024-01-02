@@ -18,10 +18,10 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.EnemySprite;
+import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.RewardData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
@@ -75,7 +75,7 @@ public class MapDialog {
         }
     }
 
-    public MapDialog(DialogData prebuiltDialog, MapStage stage, int parentID) {
+    public MapDialog(DialogData prebuiltDialog, MapStage stage, int parentID, AdventureQuestData prebuiltQuestData) {
         this.stage = stage;
         this.parentID = parentID;
         try
@@ -90,7 +90,12 @@ public class MapDialog {
             ChangeListener listen = new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
-                    Current.player().addQuest(questAccepted);
+                    if (prebuiltQuestData != null && Integer.parseInt(questAccepted) == prebuiltQuestData.getID()) {
+                        Current.player().addQuest(prebuiltQuestData);
+                    }
+                    else {
+                        Current.player().addQuest(questAccepted);
+                    }
                 }
             };
             addQuestAcceptedListener(listen);
@@ -221,7 +226,13 @@ public class MapDialog {
                     String name; //Get localized label if present.
                     if (option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
                     else name = option.name;
-                    TextraButton B = Controls.newTextButton(name, () -> loadDialog(option));
+                    TextraButton B;
+                    if (option.isDisabled) {
+                        B = Controls.newTextButton(name);
+                        B.setDisabled(true);
+                    } else {
+                        B = Controls.newTextButton(name, () -> loadDialog(option));
+                    }
                     B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     buttons.add(B);
                     B.setVisible(false);
@@ -229,6 +240,7 @@ public class MapDialog {
                     //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
                     i++;
+                    B.setDisabled(option.isDisabled);
                 }
             }
             D.addListener(new ClickListener() {
@@ -324,13 +336,11 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addShards);
             }
             if (E.addMapReputation != 0) {
-                PointOfInterestChanges p;
-                if (E.POIReference.length()>0 && !E.POIReference.contains("$"))
-                    p = WorldSave.getCurrentSave().getPointOfInterestChanges( E.POIReference);
+                if (!E.POIReference.isEmpty() && !E.POIReference.contains("$")) {
+                    WorldSave.getCurrentSave().getPointOfInterestChanges(E.POIReference).addMapReputation(E.addMapReputation);
+                }
                 else
-                    p = stage.getChanges();
-                if (p != null)
-                    p.addMapReputation(E.addMapReputation);
+                    stage.getChanges().addMapReputation(E.addMapReputation);
             }
             if (E.deleteMapObject != 0) { //Removes a dummy object from the map.
                 if (E.deleteMapObject < 0) stage.deleteObject(parentID);
@@ -379,6 +389,15 @@ public class MapDialog {
                 RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
                 Forge.switchScene(RewardScene.instance());
             }
+            //Test code for selectable rewards:
+//            if (E.grantRewards != null && E.grantRewards.length > 0) {
+//                Array<Reward> ret = new Array<Reward>();
+//                for(RewardData rdata:E.grantRewards) {
+//                    ret.addAll(rdata.generate(false, true));
+//                }
+//                RewardScene.instance().loadSelectableRewards(ret, RewardScene.Type.RewardChoice, ret.size > 1? 2: 1);
+//                Forge.switchScene(RewardScene.instance());
+//            }
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
                 questAccepted = E.issueQuest;
                 emitQuestAccepted();
@@ -503,18 +522,23 @@ public class MapDialog {
             case "EQUAL":
             case "=":
                 if (flag == value) return true;
+                break;
             case "LESSTHAN":
             case "<":
                 if (flag < value) return true;
+                break;
             case "MORETHAN":
             case ">":
                 if (flag > value) return true;
+                break;
             case "LE_THAN":
             case "<=":
                 if (flag <= value) return true;
+                break;
             case "ME_THAN":
             case ">=":
                 if (flag >= value) return true;
+                break;
         }
         return false;
     }

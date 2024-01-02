@@ -827,6 +827,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
     }
+    public void setReplacingObjects(final Map<AbilityKey, Object> repParams) {
+        replacingObjects = AbilityKey.newMap(repParams);
+    }
     public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
         int typesLength = types.length;
         for (int i = 0; i < typesLength; i += 1) {

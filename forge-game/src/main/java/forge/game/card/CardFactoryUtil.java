@@ -2445,21 +2445,11 @@ public class CardFactoryUtil {
             ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, repeatSA, false, true, intrinsic, "Card.Self", "");
 
             inst.addReplacement(cardre);
-        } else if (keyword.startsWith("Riot")) {
-            final String choose = "DB$ GenericChoice | AILogic$ Riot | SpellDescription$ Riot";
+        } else if (keyword.equals("Riot")) {
+            final String hasteStr = "DB$ Animate | Defined$ Self | Keywords$ Haste | Duration$ Permanent | UnlessCost$ AddCounter<1/P1P1> | UnlessPayer$ You | UnlessAI$ Riot | SpellDescription$ Riot";
 
-            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1" +
-                                " | SpellDescription$ Put a +1/+1 counter on it.";
-            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Duration$ Permanent | SpellDescription$ Haste";
-
-            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
-
-            List<AbilitySub> list = Lists.newArrayList();
-            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
-            list.add((AbilitySub)AbilityFactory.getAbility(haste, card));
-            saChoose.setAdditionalAbilityList("Choices", list);
-
-            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, saChoose, false, true, intrinsic, "Card.Self", "");
+            final SpellAbility hasteSa = AbilityFactory.getAbility(hasteStr, card);
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, hasteSa, false, true, intrinsic, "Card.Self", "");
 
             inst.addReplacement(cardre);
         }  else if (keyword.equals("Sunburst")) {
