@@ -146,6 +146,11 @@ public abstract class SpellAbilityEffect {
         return substitutedDesc;
     }
 
+    // Common functions that all SAEffects will probably use
+    protected final int extractAmount(SpellAbility sa) {
+        return AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("Amount", "1"), sa);
+    }
+
     /**
      * Append the description of a {@link SpellAbility} to a
      * {@link StringBuilder}.
@@ -876,7 +881,7 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    public Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
+    public static Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
         // CR 800.4g
         final PlayerCollection options;
         if (loser.isOpponentOf(activator)) {
@@ -903,7 +908,7 @@ public abstract class SpellAbilityEffect {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
         }
         // avoid storing this on "inactive" cards
-        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack)) {
+        if (exilingSource.isImmutable() || exilingSource.isInPlay() || exilingSource.isInZone(ZoneType.Stack) || exilingSource.isInZone(ZoneType.Command)) {
             // make sure it gets updated
             exilingSource.removeExiledCard(movedCard);
             exilingSource.addExiledCard(movedCard);

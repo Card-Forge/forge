@@ -13,7 +13,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -86,7 +85,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         // colors to be added or changed to
-        ColorSet finalColors = ColorSet.getNullColor();
+        ColorSet finalColors = null;
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
@@ -133,7 +132,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
         CardCollectionView list;
 
-        ZoneType z = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
+        List<ZoneType> z = sa.hasParam("Zone") ? ZoneType.listValueOf(sa.getParam("Zone")) : 
+            ZoneType.listValueOf("Battlefield");
 
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
             list = getTargetPlayers(sa).getCardsIn(z);
@@ -141,7 +141,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             list = game.getCardsIn(z);
         }
 
-        list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
+        list = AbilityUtils.filterListByType(list, valid, sa);
 
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors, keywords, removeKeywords,

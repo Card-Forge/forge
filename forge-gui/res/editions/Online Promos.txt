@@ -105,11 +105,11 @@ ScryfallCode=PRM
 43634 S Hymn to Tourach @Greg Staples
 59639 S Icatian Javelineers @Michael Phillippi
 35980 S Icatian Javelineers @Michael Phillippi
-213 S Ifh-Biff Efreet @Jesper Myrfors
+213 S Ifh-Bíff Efreet @Jesper Myrfors
 62387 S Izzet Signet @Raoul Vitale
 70942 S Jokulhaups @Mike Kerr
 35820 S Joraga Warcaller @Steven Belledin
-215 S Khabal Ghoul @Douglas Shuler
+215 S Khabál Ghoul @Douglas Shuler
 43628 S Kjeldoran Outpost @Noah Bradley
 23952 S Kjeldoran Outpost @Jeff A. Menges
 33442 S Kongming, "Sleeping Dragon" @Gao Yan

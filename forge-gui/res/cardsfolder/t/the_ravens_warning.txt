@@ -1,7 +1,7 @@
 Name:The Raven's Warning
 ManaCost:1 W U
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBEffect,DBWish
+K:Chapter:3:DBToken,DBEffect,DBWish
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create a 1/1 blue Bird creature token with flying. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:DBEffect:DB$ Effect | Triggers$ TrigDamage | SpellDescription$ Whenever one or more creatures you control with flying deal combat damage to a player this turn, look at that player's hand and draw a card.

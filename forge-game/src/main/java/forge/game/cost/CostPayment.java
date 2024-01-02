@@ -95,13 +95,13 @@ public class CostPayment extends ManaConversionMatrix {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect) {
         if (cost == null) {
             return true;
         }
 
         cost = CostAdjustment.adjust(cost, ability);
-        return cost.canPay(ability, false);
+        return cost.canPay(ability, effect);
     }
 
     /**
@@ -331,7 +331,7 @@ public class CostPayment extends ManaConversionMatrix {
 
     public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
         final Game game = sa.getHostCard().getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         if (sa.isOffering()) {
             if (sa.getSacrificedAsOffering() == null) {
                 return false;

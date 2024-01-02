@@ -1,7 +1,8 @@
 Name:Braids's Frightful Return
 ManaCost:2 B
 Types:Enchantment Saga
-K:Read ahead:3:ABDiscard,DBChangeZone,DBSacrificeOpp
+K:Read ahead
+K:Chapter:3:ABDiscard,DBChangeZone,DBSacrificeOpp
 SVar:ABDiscard:AB$ Discard | Cost$ Sac<1/Creature> | CostDesc$ You may sacrifice a creature. | Mode$ TgtChoose | Defined$ Opponent | SpellDescription$ If you do, each opponent discards a card.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:DBSacrificeOpp:DB$ Sacrifice | ValidTgts$ Opponent | Optional$ True | SacValid$ Permanent.nonLand+nonToken | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Target opponent may sacrifice a nonland, nontoken permanent. If they don't, they lose 2 life and you draw a card.

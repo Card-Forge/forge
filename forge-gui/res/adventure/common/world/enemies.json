@@ -637,7 +637,8 @@
 		"IdentityWhite",
 		"IdentityBlue",
 		"BiomeWhite",
-		"Loner"
+		"Loner",
+		"Minion"
 	]
 },
 {
@@ -1707,7 +1708,8 @@
 		"IdentityWhite",
 		"IdentityGreen",
 		"IdentitySelesnya",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -1752,6 +1754,7 @@
 		"Human",
 		"Archer",
 		"Soldier",
+		"Leader",
 		"IdentitySelesnya"
 	]
 },
@@ -2293,7 +2296,8 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"IdentityBoros",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -2899,6 +2903,7 @@
 	"difficulty": 0.1,
 	"speed": 21,
 	"scale": 0.7,
+	"scale": 0.6,
 	"life": 20,
 	"rewards": [
 		{
@@ -3321,7 +3326,8 @@
 		"Zombie",
 		"Humanoid",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -3682,7 +3688,8 @@
 		"IdentityRed",
 		"IdentityGreen",
 		"IdentityGruul",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -4164,7 +4171,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -4302,7 +4310,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -4776,12 +4785,13 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"cardName": "Chandra, Fire Of Kaladesh"
+			"cardName": "Chandra, Fire of Kaladesh"
 		},
 		{
 			"type": "Union",
@@ -7092,7 +7102,8 @@
 		"Unholy",
 		"Mounted",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -7174,7 +7185,8 @@
 		"Spirit",
 		"Flying",
 		"Ghost",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Minion"
 	]
 },
 {
@@ -7340,7 +7352,8 @@
 		"Unholy",
 		"Mounted",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -8774,7 +8787,8 @@
 		"Mercenary",
 		"IdentityGruul",
 		"IdentityRed",
-		"Dwarf"
+		"Dwarf",
+		"Minion"
 	]
 },
 {
@@ -9154,7 +9168,8 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"IdentityBoros",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -9483,7 +9498,8 @@
 		"Humanoid",
 		"Tribal",
 		"IdentityGreen",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -9528,7 +9544,8 @@
 		"Humanoid",
 		"Tribal",
 		"IdentityGreen",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -9615,6 +9632,7 @@
 	"speed": 25,
 	"scale": 1.5,
 	"life": 100,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -10323,7 +10341,8 @@
 		"Human",
 		"Knight",
 		"Unholy",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Minion"
 	]
 },
 {
@@ -11753,6 +11772,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -11823,6 +11843,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 25,
+	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "card",
@@ -11979,7 +12000,8 @@
 		"Ghost",
 		"Flying",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -12097,7 +12119,8 @@
 		"IdentityBlack",
 		"IdentityBlue",
 		"IdentityDimir",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -12238,7 +12261,8 @@
 		"Flying",
 		"Ghost",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -12839,6 +12863,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -12909,6 +12934,7 @@
 	"speed": 15,
 	"scale": 0.5,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13269,7 +13295,8 @@
 		"Thief",
 		"Scavenger",
 		"IdentityRed",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -13333,7 +13360,8 @@
 		"Small",
 		"Artificer",
 		"Scavenger",
-		"IdentityRed"
+		"IdentityRed",
+		"Minion"
 	]
 },
 {
@@ -13436,7 +13464,8 @@
 		"IdentityRed",
 		"IdentityGreen",
 		"IdentityGruul",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -13608,7 +13637,8 @@
 		"Tribal",
 		"Small",
 		"IdentityRed",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Minion"
 	]
 },
 {
@@ -13657,12 +13687,13 @@
 		"Tribal",
 		"Small",
 		"IdentityRed",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
 	"name": "Golem",
-	"nameOverride": "Rustic Golem",
+	"nameOverride": "Rusted Golem",
 	"sprite": "sprites/enemy/construct/golem.atlas",
 	"deck": [
 		"decks/standard/golem.json",
@@ -13829,7 +13860,8 @@
 		"Tribal",
 		"IdentityBlack",
 		"IdentityGreen",
-		"IdentityGolgari"
+		"IdentityGolgari",
+		"Leader"
 	]
 },
 {
@@ -14913,7 +14945,8 @@
 		"Mystic",
 		"IdentityGreen",
 		"IdentityBlack",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -15400,7 +15433,8 @@
 		"IdentityBlue",
 		"IdentityWhite",
 		"IdentityAzorius",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -15562,7 +15596,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 13,
+	"life": 18,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -15732,7 +15766,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"Mercenary"
+		"Mercenary",
+		"Minion"
 	]
 },
 {
@@ -15794,6 +15829,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 30,
+	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16279,6 +16315,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -16602,6 +16639,7 @@
 	"speed": 31,
 	"scale": 0.35,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16820,7 +16858,8 @@
 		"IdentityWhite",
 		"Mercenary",
 		"IdentityBlue",
-		"IdentityAzorius"
+		"IdentityAzorius",
+		"Minion"
 	]
 },
 {
@@ -17503,6 +17542,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -17612,7 +17652,8 @@
 		"BiomeWhite",
 		"Leonin",
 		"Armorer",
-		"Equipments"
+		"Equipments",
+		"Minion"
 	]
 },
 {
@@ -17661,7 +17702,8 @@
 		"IdentityWhite",
 		"IdentitySelesnya",
 		"BiomeWhite",
-		"Leonin"
+		"Leonin",
+		"Minion"
 	]
 },
 {
@@ -17780,6 +17822,7 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -18106,6 +18149,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -18755,7 +18799,8 @@
 		"Territorial",
 		"Water",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -18805,7 +18850,8 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySimic",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -18955,7 +19001,8 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySimic",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -19065,7 +19112,8 @@
 		"Soldier",
 		"Territorial",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -19843,7 +19891,8 @@
 		"IdentityBlack",
 		"IdentityOrzhov",
 		"BiomeColorless",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -19859,6 +19908,7 @@
 	"speed": 20,
 	"scale": 2.5,
 	"life": 25,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -20670,6 +20720,7 @@
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "item",
@@ -21297,7 +21348,8 @@
 		"IdentityIzzet",
 		"IdentityJund",
 		"Leader",
-		"Pirate"
+		"Pirate",
+		"Captain"
 	]
 },
 {
@@ -21376,7 +21428,9 @@
 		"Bandit",
 		"Thief",
 		"IdentityBlack",
-		"Dungeon"
+		"Dungeon",
+		"Pirate",
+		"Captain"
 	]
 },
 {
@@ -22912,7 +22966,8 @@
 		"Skeleton",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -23474,6 +23529,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24078,7 +24134,8 @@
 		"Skeleton",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -24112,7 +24169,8 @@
 		"Soldier",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -24211,6 +24269,7 @@
 	"speed": 31,
 	"scale": 0.7,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24666,6 +24725,7 @@
 	"speed": 15,
 	"scale": 0.75,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "Card",
@@ -24759,6 +24819,7 @@
 	"boss": true,
 	"speed": 1,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -25763,6 +25824,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -25852,6 +25914,7 @@
 	"speed": 15,
 	"scale": 0.6,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -25975,6 +26038,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -26139,6 +26203,7 @@
 	"speed": 20,
 	"scale": 0.7,
 	"life": 30,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26545,6 +26610,7 @@
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 80,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26633,7 +26699,8 @@
 		"Predator",
 		"Nocturnal",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -28013,7 +28080,8 @@
 		"IdentityBlack",
 		"Ghost",
 		"Undead",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -28064,6 +28132,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -28250,6 +28319,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -28368,7 +28438,8 @@
 		"Zombie",
 		"Humanoid",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {

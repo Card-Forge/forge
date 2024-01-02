@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.StaticData;
+import forge.adventure.data.ConfigData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
@@ -23,6 +24,7 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -54,6 +56,18 @@ public class CardUtil {
         private final ColorType colorType;
         private final boolean shouldBeEqual;
         private final List<String> deckNeeds=new ArrayList<>();
+        private final String minDate;
+        private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        private static Date parseDate(String date) {
+            if( date.length() <= 7 )
+                date = date + "-01";
+            try {
+                return formatter.parse(date);
+            } catch (Exception e) {
+                return new Date();
+            }
+        }
 
         @Override
         public boolean apply(final PaperCard card) {
@@ -66,6 +80,30 @@ public class CardUtil {
                     if (this.editions.contains(c.getEdition())) {
                         found = true;
                         break;
+                    }
+                }
+                if (!found)
+                    return !this.shouldBeEqual;
+            }
+            if(!this.minDate.isEmpty()) {
+                boolean found = false;
+                List<PaperCard> allPrintings = FModel.getMagicDb().getCommonCards().getAllCards(card.getCardName());
+                List<CardEdition> cardEditionList = new ArrayList<>();
+
+                Date d = parseDate(this.minDate);
+
+                for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                    if (e.getDate().before(d))
+                        continue;
+                    cardEditionList.add(e);
+                }
+
+                for (PaperCard c : allPrintings){
+                    for (CardEdition e : cardEditionList) {
+                        if (e.getCode().equals(c.getEdition())) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
                 if (!found)
@@ -282,6 +320,14 @@ public class CardUtil {
             }
             if(type.deckNeeds!=null&&type.deckNeeds.length!=0){
                 deckNeeds.addAll(Arrays.asList(type.deckNeeds));
+            }
+            if(type.minDate!=null&&!type.minDate.isEmpty())
+            {
+                this.minDate=type.minDate;
+            }
+            else
+            {
+                this.minDate="";
             }
         }
     }
@@ -709,8 +755,12 @@ public class CardUtil {
     }
 
     public static Deck generateBoosterPackAsDeck(String code){
-
-        if (Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(code)){
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null) {
+            if (!Arrays.asList(configData.allowedEditions).contains(code)){
+                System.err.println("Cannot generate booster pack, '" + code + "' is not an allowed edition");
+            }
+        } else if (Arrays.asList(configData.restrictedEditions).contains(code)){
             System.err.println("Cannot generate booster pack, '" + code + "' is a restricted edition");
         }
 

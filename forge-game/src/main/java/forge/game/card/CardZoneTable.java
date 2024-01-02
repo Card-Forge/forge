@@ -22,11 +22,35 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     private CardCollection createdTokens = new CardCollection();
     private PlayerCollection firstTimeTokenCreators = new PlayerCollection();
 
-    public CardZoneTable(Table<ZoneType, ZoneType, CardCollection> cardZoneTable) {
+    private CardCollectionView lastStateBattlefield;
+    private CardCollectionView lastStateGraveyard;
+    
+    public CardZoneTable(CardZoneTable cardZoneTable) {
         this.putAll(cardZoneTable);
+        lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
+        lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
     }
 
     public CardZoneTable() {
+        this(CardCollection.EMPTY, CardCollection.EMPTY);
+    }
+
+    public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
+        this.lastStateBattlefield = lastStateBattlefield;
+        this.lastStateGraveyard = lastStateGraveyard;
+    }
+
+    public CardCollectionView getLastStateBattlefield() {
+        return lastStateBattlefield;
+    }
+    public CardCollectionView getLastStateGraveyard() {
+        return lastStateGraveyard;
+    }
+    public void setLastStateBattlefield(CardCollectionView lastState) {
+        this.lastStateBattlefield = lastState;
+    }
+    public void setLastStateGraveyard(CardCollectionView lastState) {
+        this.lastStateGraveyard = lastState;
     }
 
     /**
@@ -88,12 +112,20 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
         if (origin != null) {
             for (ZoneType z : origin) {
+                CardCollectionView lkiLookup = CardCollection.EMPTY;
+                if (z == ZoneType.Battlefield) {
+                    lkiLookup = lastStateBattlefield;
+                }
                 if (containsRow(z)) {
                     if (destination != null) {
-                        allCards.addAll(row(z).get(destination));
+                        for (Card c : row(z).get(destination)) {
+                            allCards.add(lkiLookup.get(c));
+                        }
                     } else {
-                        for (CardCollection c : row(z).values()) {
-                            allCards.addAll(c);
+                        for (CardCollection cc : row(z).values()) {
+                            for (Card c : cc) {
+                                allCards.add(lkiLookup.get(c));
+                            }
                         }
                     }
                 }

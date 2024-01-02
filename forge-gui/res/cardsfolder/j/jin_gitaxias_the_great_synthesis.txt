@@ -21,7 +21,7 @@ Name:The Great Synthesis
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Saga
-K:Saga:3:DBDraw,DBBounceAll,DBCastAll
+K:Chapter:3:DBDraw,DBBounceAll,DBCastAll
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you control CARDNAME.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilLoseControlOfHost
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.

@@ -1,0 +1,17 @@
+[metadata]
+Code=PL24
+Date=2024-02-08
+Name=Year of the Dragon 2024
+Type=Promo
+ScryfallCode=PL24
+
+[cards]
+1 R Dragonlord's Servant @Song Qijin
+2 M Sarkhan Unbroken @Song Qijin
+4 R Steel Hellkite @Walleystation
+5 R Mountain @TSWCK
+6 M Korvold, Fae-Cursed King @Walleystation
+7 R Dragon Tempest @TSWCK
+
+[tokens]
+r_4_4_dragon_flying

@@ -3,25 +3,49 @@ package forge.adventure.stage;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingAdapter;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
+import forge.adventure.data.DialogData;
+import forge.adventure.data.EffectData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.Controls;
 import forge.adventure.util.KeyBinding;
+import forge.adventure.util.MapDialog;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
+import forge.assets.FBufferedImage;
+import forge.assets.FImageComplex;
+import forge.assets.FSkinImage;
+import forge.card.CardRenderer;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
 
@@ -45,6 +69,164 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance=1.5f;
     public static float minimumScrollDistance=0.3f;
+
+
+
+    protected final Dialog dialog;
+    protected Stage dialogStage;
+    protected boolean dialogOnlyInput;
+    protected final Array<TextraButton> dialogButtonMap = new Array<>();
+    TextraButton selectedKey;
+
+    public boolean getDialogOnlyInput() {
+        return dialogOnlyInput;
+    }
+
+    public Dialog getDialog() {
+        return dialog;
+    }
+
+    public boolean isDialogOnlyInput() {
+        return dialogOnlyInput;
+    }
+
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+    public void showDialog() {
+        if (dialogStage == null){
+            setDialogStage(GameHUD.getInstance());
+        }
+        GameHUD.getInstance().playerIdle();
+        dialogButtonMap.clear();
+        for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
+            dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
+        }
+        dialog.show(dialogStage, Actions.show());
+        dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
+        dialogOnlyInput = true;
+        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+    }
+
+    public void hideDialog() {
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
+        dialogOnlyInput = false;
+        selectedKey = null;
+        dialog.clearListeners();
+    }
+
+    public void effectDialog(EffectData effectData) {
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        dialog.clearListeners();
+        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
+        ok.setVisible(false);
+        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
+        L.setWrap(true);
+        L.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                ok.setVisible(true);
+            }
+        });
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
+            }
+        });
+        dialog.getButtonTable().add(ok).width(240f);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
+    }
+
+    public void showImageDialog(String message, FBufferedImage fb) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        dialog.clearListeners();
+
+        if (fb.getTexture() != null) {
+            TextureRegion tr = new TextureRegion(fb.getTexture());
+            tr.flip(true, true);
+            Image image = new Image(tr);
+            image.setScaling(Scaling.fit);
+            dialog.getContentTable().add(image).height(100);
+            dialog.getContentTable().add().row();
+        }
+        TypingLabel L = Controls.newTypingLabel(message);
+        L.setWrap(true);
+        L.skipToTheEnd();
+        dialog.getContentTable().add(L).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
+            hideDialog();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    fb.dispose();
+                }
+            }, 0.5f);
+        })).width(240f);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
+        showDialog();
+    }
+
+    public void showDeckAwardDialog(String message, Deck deck) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        dialog.clearListeners();
+        DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
+        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
+        if (cardArt != null) {
+            Image art = new Image(cardArt.getTextureRegion());
+            art.setWidth(58);
+            art.setHeight(46);
+            art.setPosition(25, 43);
+            Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
+            image.setWidth(60);
+            image.setHeight(80);
+            image.setPosition(24, 10);
+            ColorSet colorSet = DeckProxy.getColorIdentity(deck);
+            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, true).toUpperCase());
+            deckColors.skipToTheEnd();
+            deckColors.setAlignment(Align.center);
+            deckColors.setPosition(14, 44);
+            TextraLabel deckname = Controls.newTextraLabel(deck.getName());
+            deckname.setAlignment(Align.center);
+            deckname.setWrap(true);
+            deckname.setWidth(80);
+            deckname.setPosition(14, 28);
+            Group group = new Group();
+            group.addActor(art);
+            group.addActor(image);
+            group.addActor(deckColors);
+            group.addActor(deckname);
+            dialog.getContentTable().add(group).height(100).width(100).center();
+            dialog.getContentTable().add().row();
+        } else {
+            TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
+            label.skipToTheEnd();
+            label.setAlignment(Align.center);
+            dialog.getContentTable().add(label).align(Align.center);
+            dialog.getContentTable().add().row();
+        }
+
+        TypingLabel L = Controls.newTypingLabel(message);
+        L.setWrap(true);
+        L.skipToTheEnd();
+
+        dialog.getContentTable().add(L).width(250);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
+        showDialog();
+    }
+
+    
 
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
 
@@ -126,7 +308,7 @@ public abstract class GameStage extends Stage {
         addActor(backgroundSprites);
         addActor(foregroundSprites);
 
-
+        dialog = Controls.newDialog("");
     }
 
     public void setWinner(boolean b) {
@@ -247,12 +429,20 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F5)//todo config
         {
-            if (!TileMapScene.instance().currentMap().isInMap()) {
+            if (TileMapScene.instance().currentMap().isInMap()) {
+                DialogData noQuicksave = new DialogData();
+                DialogData noQuicksaveOK = new DialogData();
+                noQuicksave.text = "Game not saved. Quicksave is only available on the world map.";
+                noQuicksaveOK.name = "OK";
+                noQuicksave.options = new DialogData[]{noQuicksaveOK};
+                MapDialog noQuicksaveDialog = new MapDialog(noQuicksave, MapStage.getInstance(), -1, null);
+                showDialog();
+                noQuicksaveDialog.activate();
+            } else {
                 getPlayerSprite().storePos();
                 WorldSave.getCurrentSave().header.createPreview();
                 WorldSave.getCurrentSave().quickSave();
             }
-
         }
         if (keycode == Input.Keys.F8)//todo config
         {

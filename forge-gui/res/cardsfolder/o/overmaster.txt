@@ -1,9 +1,9 @@
 Name:Overmaster
 ManaCost:R
 Types:Sorcery
-A:SP$ Effect | Triggers$ SpellCastTrig | SubAbility$ DBDraw | SpellDescription$ The next instant or sorcery spell you cast this turn can't be countered.
+A:SP$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ DBEffect | ThisTurn$ True | Static$ True | SubAbility$ DBDraw | SpellDescription$ The next instant or sorcery spell you cast this turn can't be countered.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ AntiMagic | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack
+SVar:AntiMagic:Event$ Counter | ValidCard$ Card.IsRemembered | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ Mastery | OneOff$ True | Static$ True | TriggerDescription$ The next instant or sorcery spell you cast this turn can't be countered.
-SVar:Mastery:DB$ Pump | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack
 AI:RemoveDeck:All
 Oracle:The next instant or sorcery spell you cast this turn can't be countered.\nDraw a card.

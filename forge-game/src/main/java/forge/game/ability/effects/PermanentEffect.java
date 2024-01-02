@@ -9,7 +9,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -30,12 +29,9 @@ public class PermanentEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         ZoneType previousZone = host.getZone().getZoneType();
 
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+        moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
         final Card c = game.getAction().moveToPlay(host, host.getController(), sa, moveParams);
         sa.setHostCard(c);

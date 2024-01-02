@@ -297,7 +297,7 @@ public class Cost implements Serializable {
             final String[] splitStr = abCostParse(parse, 5);
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
-            final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
+            final List<ZoneType> zone = splitStr.length > 4 ? ZoneType.listValueOf(splitStr[4]) : Lists.newArrayList(ZoneType.Battlefield);
             boolean oneOrMore = false;
             if (splitStr[0].equals("X1+")) {
                 oneOrMore = true;
@@ -979,7 +979,7 @@ public class Cost implements Serializable {
                                 if (counters < 0) {
                                     costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
                                 } else {
-                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription(), ZoneType.Battlefield, false));
+                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription(), Lists.newArrayList(ZoneType.Battlefield) , false));
                                 }
                             } else {
                                 continue;

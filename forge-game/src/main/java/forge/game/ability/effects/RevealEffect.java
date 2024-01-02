@@ -76,7 +76,9 @@ public class RevealEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RevealToAll") || sa.hasParam("Random")) {
-                game.getAction().reveal(revealed, p, false, sa.getParamOrDefault("RevealTitle", ""));
+                boolean revealTitle = sa.hasParam("RevealTitle");
+                game.getAction().reveal(revealed, p, false, 
+                    revealTitle ? sa.getParam("RevealTitle") : "", !revealTitle);
             } else {
                 game.getAction().reveal(revealed, p);
             }

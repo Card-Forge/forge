@@ -1,7 +1,7 @@
 Name:Gadwick's First Duel
 ManaCost:1 U
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBScry,DBCopy
+K:Chapter:3:DBToken,DBScry,DBCopy
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_cursed | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature | SpellDescription$ Create a Cursed Role token attached to up to one target creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBCopy:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant.cmcLE3,Sorcery.cmcLE3 | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell with mana value 3 or less this turn, copy that spell. You may choose new targets for the copy.

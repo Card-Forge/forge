@@ -334,7 +334,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
         if (cost.isSameZone()) {
-            // Jotun Grunt
+            // Jötun Grunt
             // TODO: improve AI
             final FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
@@ -505,7 +505,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     protected int removeCounter(GameEntityCounterTable table, List<Card> prefs, CounterEnumType cType, int stillToRemove) {
         int removed = 0;
         if (!prefs.isEmpty() && stillToRemove > 0) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(cType));
+            prefs.sort(CardPredicates.compareByCounterType(cType));
 
             for (Card prefCard : prefs) {
                 // already enough removed
@@ -667,7 +667,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     return crd.getCounters(CounterEnumType.QUEST) > e;
                 }
             });
-            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
+            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
 
             for (final Card crd : prefs) {
                 int e = 0;

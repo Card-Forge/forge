@@ -1,0 +1,14 @@
+Name:The Matrix of Time
+ManaCost:no cost
+Types:Plane Gallifrey
+T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ TrigExile | TriggerDescription$ When you planeswalk to CARDNAME, each player exiles the top card of their library.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource | MayPlay$ True | Condition$ PlayerTurn | EffectZone$ Command | AffectedZone$ Exile | Description$ During your turn, you may play lands and cast spells from among cards exiled with CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever you play a land or cast a spell from among cards exiled with CARDNAME, that card's owner loses 3 life and exiles the top card of their library.
+T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Command | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whhenever you play a land or cast a spell from among cards exiled with CARDNAME, that card's owner loses 3 life and exiles the top card of their library.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredCardOwner | SubAbility$ DBExileTop
+SVar:DBExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredCardOwner | DestinationZone$ Exile
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigTreasure | TriggerDescription$ Whenever chaos ensues, create two Treasure tokens.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:When you planeswalk to The Matrix of Time, each player exiles the top card of their library.\nDuring your turn, you may play lands and cast spells from among cards exiled with The Matrix of Time.\nWhenever you play a land or cast a spell from among cards exiled with The Matrix of Time, that card's owner loses 3 life and exiles the top card of their library.\nWhenever chaos ensues, create two Treasure tokens.

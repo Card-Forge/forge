@@ -15,6 +15,79 @@
     "iconName": "BronzeChallengeCoin"
   },
   {
+	  "name": "Sir Donovan's Amulet",
+	  "usableOnWorldMap":true,
+	  "description": "A talisman for remotely contacting your employer",
+	  "iconName": "SirDonovansAmulet",
+	  "dialogOnUse": {
+		  "text": "The amulet lies inert until mana is channeled through it.",
+		  "options": [{
+			  "name": "Put the amulet away"				
+		  },
+		  {
+			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3}],
+			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
+			  "action": [{"setQuestFlag": {"key": "Quest_ShardMines_EpilogueComplete", "val": 1}, "addShards": -3}],
+			  "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
+			  "options": [
+				{
+					"name": "(Continue)",
+					"text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
+					"options": [
+						{
+							"name": "(Continue)"
+						}
+					]
+				}
+			  ]
+		  },
+		  {
+			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3, "not":true}],
+			  "isDisabled": true,
+			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
+		  },
+		  {
+			   "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5}],
+			   "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
+			   "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"action": [{"setQuestFlag": {"key": "exploreShand1", "val": 7}, "addShards": -5}]
+					}
+				]
+		  },
+		  {
+		  "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5, "not":true}],
+			  "isDisabled": true,
+			  "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
+		  }
+		  ]
+	  }
+	  "questItem": true
+  },
+  {
+	  "name": "Landscape Sketchbook",
+	  "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
+	  "iconName": "LandscapeSketchbook",
+	  "questItem": true
+  },
+  {
+	  "name": "Landscape Sketchbook - Mirage",
+	  "description": "A leather bound notebook containing sketches of tropical locations",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
+	  "name": "Landscape Sketchbook - Urza's Saga",
+	  "description": "A leather bound notebook containing many different angles of the same terrain features",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
+	  "name": "Landscape Sketchbook - Coldsnap",
+	  "description": "A leather bound notebook containing sketches of frost covered vistas",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
     "name": "Chandra's Tome",
 	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
     "equipmentSlot": "Left",

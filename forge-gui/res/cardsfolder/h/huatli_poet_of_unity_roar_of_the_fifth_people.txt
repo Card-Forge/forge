@@ -18,7 +18,7 @@ Name:Roar of the Fifth People
 ManaCost:no cost
 Colors:white,red,green
 Types:Enchantment Saga
-K:Saga:4:DBToken,DBMana,DBSearch,DBPumpAll
+K:Chapter:4:DBToken,DBMana,DBSearch,DBPumpAll
 SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur | TokenAmount$ 2 | SpellDescription$ Create two 3/3 green Dinosaur creature tokens.
 SVar:DBMana:DB$ Animate | Defined$ Self | staticAbilities$ Static | SpellDescription$ CARDNAME gains "Creatures you control have '{T}: Add {R}, {G}, or {W}.'"
 SVar:Static:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddAbility$ Mana | Description$ Creatures you control have '{T}: Add {R}, {G}, or {W}.

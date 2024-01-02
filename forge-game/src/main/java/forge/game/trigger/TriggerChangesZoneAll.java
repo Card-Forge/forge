@@ -3,6 +3,8 @@ package forge.game.trigger;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -23,13 +25,21 @@ public class TriggerChangesZoneAll extends Trigger {
     public boolean performTest(Map<AbilityKey, Object> runParams) {
         final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
+        // leaves the GY trigger look back in time
+        if (Iterables.contains(getActiveZone(), ZoneType.Battlefield) && "Graveyard".equals(getParam("Origin"))
+                && !table.getLastStateBattlefield().contains(getHostCard())) {
+            return false;
+        }
+
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
 
         if (hasParam("ValidAmount")) {
             int right = AbilityUtils.calculateAmount(hostCard, getParam("ValidAmount").substring(2), this);
-            if (!Expressions.compare(this.filterCards(table).size(), getParam("ValidAmount").substring(0, 2), right)) { return false; }
+            if (!Expressions.compare(this.filterCards(table).size(), getParam("ValidAmount").substring(0, 2), right)) {
+                return false;
+            }
         }
 
         return !filterCards(table).isEmpty();

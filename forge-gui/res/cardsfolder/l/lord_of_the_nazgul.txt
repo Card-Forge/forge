@@ -1,4 +1,4 @@
-Name:Lord of the Nazgul
+Name:Lord of the Nazgûl
 ManaCost:3 U B
 Types:Legendary Creature Wraith Noble
 PT:4/4

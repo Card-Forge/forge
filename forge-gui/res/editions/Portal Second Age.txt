@@ -51,7 +51,7 @@ ScryfallCode=P02
 72 U Dark Offering @Edward P. Beard, Jr.
 125 R Deathcoil Wurm @Rebecca Guay
 126 U Deep Wood @Jeff Miracola
-36 C Deja Vu @David Horne
+36 C Déjà Vu @David Horne
 35 R Denizen of the Deep @Anson Maddocks
 94 R Earthquake @Jeffrey R. Busch
 37 R Exhaustion @Kaja Foglio

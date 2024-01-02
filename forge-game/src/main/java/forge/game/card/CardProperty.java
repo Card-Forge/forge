@@ -403,6 +403,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("ExiledWithSourceLKI")) {
             List<Card> exiled = card.getZone().getCardsAddedThisTurn(null);
+            exiled.sort(CardPredicates.compareByTimestamp());
             int idx = exiled.lastIndexOf(card);
             if (idx == -1) {
                 return false;

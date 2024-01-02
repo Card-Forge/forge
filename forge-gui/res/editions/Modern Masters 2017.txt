@@ -32,7 +32,7 @@ ScryfallCode=MM3
 19 R Ranger of Eos @Ryan Pancoast
 20 R Restoration Angel @Johannes Voss
 21 C Rootborn Defenses @Mark Zug
-22 R Seance @David Rapoza
+22 R Séance @David Rapoza
 23 C Sensor Splicer @Izzy
 24 C Soul Warden @Randy Gallegos
 25 R Stony Silence @Mark Poole

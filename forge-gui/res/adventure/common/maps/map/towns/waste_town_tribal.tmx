@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0SEOgEAQQ9GvuAI4sLsz9w9XgdMgcCwhOJbkP1VR0aQgqQdjwpRtVr+uP80Vlvrc8+f/2AL2OHMUyHLf89/WOny9QJL01gHnWwjD
+   eJxjYBgFo2AUDAYgrsPAIKGDyR4Fgxegx5O8FgODghZ+dbSM5zujaYaq4KY2A8MtbQhbW5OBQUcTuzp6xe9QAjvYBtoFo2AUjIJRMAqIBQBptgnL
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -111,7 +111,7 @@
    </properties>
   </object>
   <object id="63" template="../../obj/shardtrader.tx" x="400" y="288"/>
-  <object id="64" template="../../obj/quest.tx" x="168" y="209">
+  <object id="64" template="../../obj/quest.tx" x="159" y="209" width="34" height="16">
    <properties>
     <property name="questtype" value="waste_town_tribal"/>
    </properties>

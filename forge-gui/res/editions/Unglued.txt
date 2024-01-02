@@ -69,7 +69,7 @@ ScryfallCode=UGL
 57 U Flock of Rabid Sheep @Anthony S. Waters
 58 C Free-Range Chicken @Mike Raabe
 59 U Gerrymandering @Doug Chaffee
-60 C Ghazban Ogress @Mike Raabe
+60 C Ghazbán Ogress @Mike Raabe
 61 C Growth Spurt @Jeff Laubenstein
 62 C Gus @DiTerlizzi
 63 U Hungry Hungry Heifer @Randy Gallegos

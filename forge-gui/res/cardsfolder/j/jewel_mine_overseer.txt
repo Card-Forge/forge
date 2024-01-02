@@ -3,16 +3,15 @@ ManaCost:1 R W
 Types:Creature Human Noble
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure seven cards named Seven Dwarves on top of your library. They perpetually gain "When this creature enters the battlefield, draw a card." Then shuffle.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Amount$ 7 | Name$ Seven Dwarves | LibraryPosition$ 0 | Zone$ Library | RememberMade$ True | SubAbility$ DBEffectBis
-SVar:DBEffectBis:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Jewel Mine Overseer's Perpetual Effect | SubAbility$ DBShuffle
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Amount$ 7 | Name$ Seven Dwarves | LibraryPosition$ 0 | Zone$ Library | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ DrawTrig | Duration$ Perpetual | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle
-SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ DrawTrig | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The cards perpetually gain "When this creature enters the battlefield, draw a card."
 SVar:DrawTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect 
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Type$Dwarf 
 Oracle:When Jewel Mine Overseer enters the battlefield, conjure seven cards named Seven Dwarves on top of your library. They perpetually gain "When this creature enters the battlefield, draw a card." Then shuffle.\nAt the beginning of your upkeep, exile the top card of your library. You may play that card this turn.

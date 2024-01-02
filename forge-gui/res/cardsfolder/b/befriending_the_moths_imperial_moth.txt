@@ -1,7 +1,7 @@
 Name:Befriending the Moths
 ManaCost:3 W
 Types:Enchantment Saga
-K:Saga:3:DBPump,DBPump,DBTransform
+K:Chapter:3:DBPump,DBPump,DBTransform
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1 | KW$ Flying | SpellDescription$ Target creature you control gets +1/+1 and gains flying until end of turn.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup

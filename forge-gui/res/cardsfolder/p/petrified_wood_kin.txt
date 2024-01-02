@@ -2,7 +2,7 @@ Name:Petrified Wood-Kin
 ManaCost:6 G
 Types:Creature Elemental Warrior
 PT:3/3
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Bloodthirst:X
 K:Protection:Instant:instants
 Oracle:This spell can't be countered.\nBloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, where X is the damage dealt to your opponents this turn.)\nProtection from instants

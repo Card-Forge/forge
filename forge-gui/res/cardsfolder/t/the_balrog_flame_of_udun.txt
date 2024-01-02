@@ -1,4 +1,4 @@
-Name:The Balrog, Flame of Udun
+Name:The Balrog, Flame of Udûn
 ManaCost:3 B R
 Types:Legendary Creature Avatar Demon
 PT:7/7

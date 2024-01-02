@@ -2,7 +2,7 @@ Name:Thrun, Breaker of Silence
 ManaCost:3 G G
 Types:Legendary Creature Troll Shaman
 PT:5/5
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Trample
 S:Mode$ CantTarget | ValidCard$ Card.Self | ValidSource$ Card.nonGreen+OppCtrl | Description$ CARDNAME can't be the target of nongreen spells your opponents control or abilities from nongreen sources your opponents control.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, NICKNAME has indestructible.
