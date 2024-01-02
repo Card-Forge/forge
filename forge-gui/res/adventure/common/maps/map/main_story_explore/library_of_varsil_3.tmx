@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="51">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="52">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="20">
@@ -17,7 +20,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzVlkEOwiAQRcfGbd2ZJl1W6gWser1qPIPRE3iNqj0BJxICpGQCDFUb8SU/pQnDT38YaLMAaP5Ihk/X2QtxoRUDqJl6usT1PAO36nyqdd3O4bvVa93FnJ6pp0uSQwGt8T0VQ11Ikk3Ad0pCvjKXikGLs6qsMcaXrV1L+cpMOpQRfsdQGaec83w9zPONfVC1KX4v3keuXsZ49lWLa0K+s5IWJiPmZyXtOyUhX98Zafc0JnQ+xubs6r3niP7tHHUPps7VFHOmOFp3guG2fN/3mgOcI4WJrbvk37nzDb/+BxmjF7xtk1U=
+   eJzVlk0OgjAQhUfiFneGhCUWLyDq9arxDEZP4DVQOUFPJE1paCadDqjE+iUvlGSmL7z0h2oBUP2RLJ/Os2+lWq0EQCnM0yfV1VmU00ep7Pp2Ht9tN9e9rWmEefqkOWQgre8p6/tC0mwCvlMS8tW5FAIkzrtwxhgqW7eX89WZ1Cgj/I7hMo455/m6r6PGFFxvjN+L15FvL2OIdSVxT8h3lvPCJEx9kvO+UxLypc7IwskNEzofh+bs23vPEfu39vQ9hDlXY8yZ4+jcCZbb8n3fawpwHijM0L5L+p073/Lrf5AxegHKRZNX
   </data>
  </layer>
  <layer id="4" name="Overlay" width="30" height="20">
@@ -260,6 +263,73 @@
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;battleWithActorID&quot;:49}]}]
 }
+]</property>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/dialog.tx" x="112" y="112">
+   <properties>
+    <property name="dialog">[
+    {
+        &quot;condition&quot;: [
+            {
+                &quot;getQuestFlag&quot;: {
+                    &quot;key&quot;: &quot;exploreShand1&quot;,
+                    &quot;op&quot;: &quot;=&quot;,
+                    &quot;val&quot;: 5
+                }
+            },
+            {
+                &quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;,
+                &quot;not&quot;: true
+            }
+        ],
+        &quot;text&quot;: &quot;\&quot;...s35 maintained insistence on not having been summoned previously. Upon initiation of stage seven, however, s35 exhibited lessened signs of sickness and appeared to at least subconsciously anticipate danger approaching in stage twelve once we summoned s36 to...\&quot;&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;(Continue)&quot;,
+                &quot;action&quot;: [
+                    {
+                        &quot;setQuestFlag&quot;: {
+                            &quot;key&quot;: &quot;foundLibraryOfVarsilResearch&quot;,
+                            &quot;val&quot;: 1
+                        }
+                    }
+                ],
+                &quot;text&quot;: &quot;This seems to be the research that you were looking for.&quot;,
+                &quot;options&quot;: [
+                    {
+                        &quot;condition&quot;: [
+                            {
+                                &quot;checkQuestFlag&quot;: &quot;defeatedLibraryOfVarsilBoss&quot;,
+                                &quot;not&quot;: true
+                            }
+                        ],
+                        &quot;name&quot;: &quot;Take the documents&quot;,
+                        &quot;text&quot;: &quot;There is likely more to be found here, but you have what Sir Donovan requested and could leave the way you came in.&quot;,
+                        &quot;options&quot;: [
+                            {
+                                &quot;name&quot;: &quot;(Continue)&quot;
+                            }
+                        ]
+                    },
+                    {
+                        &quot;condition&quot;: [
+                            {
+                                &quot;checkQuestFlag&quot;: &quot;defeatedLibraryOfVarsilBoss&quot;
+                            }
+                        ],
+                        &quot;name&quot;: &quot;Take the documents&quot;,
+                        &quot;text&quot;: &quot;With the massive mech upstairs already defeated, your work here is done.&quot;,
+                        &quot;options&quot;: [
+                            {
+                                &quot;name&quot;: &quot;(Continue)&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 ]</property>
    </properties>
   </object>

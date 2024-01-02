@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8oIZ3oF0w8GAxIyqmF/DUQsXX1RkYbqhT3x55oNkKWhB20yCNb3EdBgYJHUw2rczU46Tc/OEAKA1rXPovaJBvZgsFafQNBfZS0x30BvVUcCvMv81DyN9DCQAAXWQQQQ==
+   eJxjYBg8oIZ3oF0w8GAxIyqmF/DUQsXX1RkYbqhT3x55oNkKWhB20wDE9x0dwmrEgWokdDDZlAB8ZupxUm7+cACUhjUu/Rc0yDezhYI0+oYCe6npDnqDeiq4Febf5iHk76EEAI3DEUk=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -86,7 +86,7 @@
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="49" template="../../obj/quest.tx" x="114" y="114">
+  <object id="49" template="../../obj/quest.tx" x="95" y="114" width="36" height="16">
    <properties>
     <property name="questtype" value="swamp_town_identity"/>
    </properties>

@@ -46,6 +46,8 @@ public class RewardData implements Serializable {
     public String[] deckNeeds;
     public RewardData[] rotation;
     public Deck cardPack;
+    public String sourceDeck;
+    public String minDate;
 
     public RewardData() { }
 
@@ -76,6 +78,8 @@ public class RewardData implements Serializable {
         rotation          =rewardData.rotation==null?null:rewardData.rotation.clone();
         deckNeeds         =rewardData.deckNeeds==null?null:rewardData.deckNeeds.clone();
         cardPack          = rewardData.cardPack;
+        sourceDeck  =rewardData.sourceDeck;
+        minDate     =rewardData.minDate;
     }
 
     private static Iterable<PaperCard> allCards;
@@ -151,6 +155,8 @@ public class RewardData implements Serializable {
                                     : StaticData.instance().getCommonCards().getCard(r.cardName);
                             if (pc != null)
                                 pool.add(pc);
+                        } else if( r.sourceDeck != null && ! r.sourceDeck.isEmpty() ) {
+                            pool.addAll(CardUtil.getDeck(r.sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList());
                         } else {
                             pool.addAll(CardUtil.getPredicateResult(allCards, r));
                         }
@@ -181,6 +187,10 @@ public class RewardData implements Serializable {
                             for (int i = 0; i < count + addedCount; i++) {
                                 ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName), isNoSell));
                             }
+                        }
+                    } else if( sourceDeck != null && ! sourceDeck.isEmpty() ) {
+                        for(PaperCard card:CardUtil.generateCards(CardUtil.getDeck(sourceDeck, false, false, "", false, false).getAllCardsInASinglePool().toFlatList() ,this, count+addedCount, rewardRandom)) {
+                            ret.add(new Reward(card, isNoSell));
                         }
                     } else {
                         for(PaperCard card:CardUtil.generateCards(isForEnemy ? allEnemyCards:allCards,this, count+addedCount, rewardRandom)) {

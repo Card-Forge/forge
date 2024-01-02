@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpABxHQYGCR362NWpxcDQpUUfu4gByH6nZzgMJyAPjE+FAY5TXHEHE0enR8EoGAXDCwAAcGsFrA==
+   eJxjYBgFpABxHQYGCR362NWpxcDQpUUfu4gByH6nZzgMJyAPjE+FAYzTOzq44w4mjk6PglEwCoYXAACYuwa0
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -86,7 +86,7 @@
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/quest.tx" x="158.5" y="146.25" width="33.75" height="36">
+  <object id="52" template="../../obj/quest.tx" x="159" y="146" width="34" height="16">
    <properties>
     <property name="questtype" value="island_town_tribal"/>
    </properties>

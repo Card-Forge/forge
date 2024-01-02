@@ -8,10 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
+import forge.adventure.data.DialogData;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
@@ -30,7 +33,7 @@ import java.util.Random;
 /**
  * NewGame scene that contains the character creation
  */
-public class NewGameScene extends UIScene {
+public class NewGameScene extends MenuScene {
     TextField selectedName;
     ColorSet[] colorIds;
     CardEdition[] editionIds;
@@ -45,6 +48,10 @@ public class NewGameScene extends UIScene {
     private final TextraLabel starterEditionLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
+    private final TextraButton difficultyHelp;
+    private DialogData difficultySummary;
+    private final TextraButton modeHelp;
+    private DialogData modeSummary;
 
     private final Array<AdventureModes> modes = new Array<>();
 
@@ -52,11 +59,12 @@ public class NewGameScene extends UIScene {
 
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
 
-        selectedName = ui.findActor("nameField");
-        selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
-        avatarImage = ui.findActor("avatarPreview");
         gender = ui.findActor("gender");
+        selectedName = ui.findActor("nameField");
+        selectedName.setText(NameGenerator.getRandomName(gender.getCurrentIndex() > 0 ? "Female" : "Male", "Any", ""));
+        avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
+        modeHelp = ui.findActor("modeHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
         custom = new Array<>();
@@ -145,6 +153,7 @@ public class NewGameScene extends UIScene {
         race.addListener(event -> NewGameScene.this.updateAvatar());
         race.setTextList(HeroListData.getRaces());
         difficulty = ui.findActor("difficulty");
+        difficultyHelp = ui.findActor("difficultyHelp");
 
         Array<String> diffList = new Array<>(colorIds.length);
         int i = 0;
@@ -168,6 +177,8 @@ public class NewGameScene extends UIScene {
         ui.onButtonPress("start", () -> NewGameScene.this.start());
         ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
         ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
+        difficultyHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showDifficultyHelp(); }});
+        modeHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showModeHelp(); }});
     }
 
     private static NewGameScene object;
@@ -201,7 +212,9 @@ public class NewGameScene extends UIScene {
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().setDirectlyEnterPOI();
-            //AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
+            if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
+                AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
+            }
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
@@ -251,5 +264,148 @@ public class NewGameScene extends UIScene {
 
         unselectActors();
         super.enter();
+    }
+
+    private void showDifficultyHelp() {
+        DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+
+        difficultySummary = new DialogData();
+        difficultySummary.name = "Summary";
+        switch (selectedDifficulty.name) {
+            case "Easy":
+                difficultySummary.text = String.format("Difficulty: %s\nFor newer players or those who want a relaxed experience.\nStarter decks are monocolored.\nStarting equipment: Manasight Amulet, Leather Boots", selectedDifficulty.name);
+                break;
+            case "Normal":
+                difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: Leather Boots", selectedDifficulty.name);
+                break;
+            case "Hard":
+                difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                break;
+            case "Insane":
+                difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                break;
+            default:
+                difficultySummary.text = "((Custom difficulty settings))";
+                break;
+        }
+
+
+        DialogData dismiss = new DialogData();
+        //todo: add translation
+        dismiss.name = "OK";
+
+        DialogData matchImpacts = new DialogData();
+        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int)(selectedDifficulty.enemyLifeFactor * 100) , (int)(selectedDifficulty.goldLoss*100), (int)(selectedDifficulty.lifeLoss*100));
+        matchImpacts.name = "Duels";
+
+        DialogData economyImpacts = new DialogData();
+        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int)(selectedDifficulty.sellFactor*100), (int)(selectedDifficulty.shardSellRatio*100), (int)(selectedDifficulty.rewardMaxFactor*100));
+        economyImpacts.name = "Economy";
+
+        difficultySummary.options = new DialogData[3];
+        difficultySummary.options[0] = matchImpacts;
+        difficultySummary.options[1] = economyImpacts;
+        difficultySummary.options[2] = dismiss;
+        matchImpacts.options = new DialogData[3];
+        matchImpacts.options[0] = difficultySummary;
+        matchImpacts.options[1] = economyImpacts;
+        matchImpacts.options[2] = dismiss;
+        economyImpacts.options = new DialogData[3];
+        economyImpacts.options[0] = difficultySummary;
+        economyImpacts.options[1] = matchImpacts;
+        economyImpacts.options[2] = dismiss;
+
+        loadDialog(difficultySummary);
+    }
+
+    private void showModeHelp() {
+
+        AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
+        DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+
+        modeSummary = new DialogData();
+        modeSummary.name = "Summary";
+
+        StringBuilder summaryText = new StringBuilder();
+        switch (selectedMode) {
+            case Standard:
+                summaryText.append("Mode: Standard\n\nYour starting deck is built from 2-3 Jumpstart packs of twenty cards each.\n\n");
+                switch (selectedDifficulty.name) {
+                    case "Easy":
+                        summaryText.append("On your currently selected difficulty, Easy, you will receive three jumpstart packs of your chosen color.");
+                        break;
+                    case "Normal":
+                        summaryText.append("On your currently selected difficulty, Normal, you will receive two jumpstart packs of your chosen color and one of an allied color.");
+                        break;
+                    case "Hard":
+                        summaryText.append("On your currently selected difficulty, Hard, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        break;
+                    case "Insane":
+                        summaryText.append("On your currently selected difficulty, Insane, you will receive one jumpstart pack of your chosen color and one of an allied color.");
+                        break;
+                    default:
+                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        break;
+                }
+                break;
+            case Constructed:
+                summaryText.append("Mode: Constructed\n\nYou will receive a specific preconstructed deck based on your chosen color and difficulty.\n\n");
+                switch (selectedDifficulty.name) {
+                    case "Easy":
+                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color.");
+                        break;
+                    case "Normal":
+                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and one allied color.");
+                        break;
+                    case "Hard":
+                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and one opposing color.");
+                        break;
+                    case "Insane":
+                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and one opposing color.");
+                        break;
+                    default:
+                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        break;
+                }
+                break;
+            case Pile:
+                summaryText.append("Mode: Pile\n\nYou will receive a random pile of cards based on your chosen color and difficulty.\n\n");
+                switch (selectedDifficulty.name) {
+                    case "Easy":
+                        summaryText.append("On your currently selected difficulty, Easy, your deck will only contain your chosen color and one allied color.");
+                        break;
+                    case "Normal":
+                        summaryText.append("On your currently selected difficulty, Normal, your deck will contain your chosen color and two allied colors.");
+                        break;
+                    case "Hard":
+                        summaryText.append("On your currently selected difficulty, Hard, your deck will contain your chosen color and two allied colors.\n\n");
+                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        break;
+                    case "Insane":
+                        summaryText.append("On your currently selected difficulty, Insane, your deck will contain your chosen color and two allied colors.\n\n");
+                        summaryText.append("You will receive less uncommon and rare cards than on Normal difficulty.");
+                        break;
+                    default:
+                        difficultySummary.text = "((Cannot determine starter deck based on custom difficulty settings))";
+                        break;
+                }
+                break;
+            case Chaos:
+                summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                break;
+            case Custom:
+                summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can use receive a random genetic AI decks.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                break;
+            default:
+                summaryText.append("No summary available for your this game mode.");
+                break;
+        }
+
+        DialogData dismiss = new DialogData();
+        dismiss.name = "OK";
+        modeSummary.text = summaryText.toString();
+        modeSummary.options = new DialogData[1];
+        modeSummary.options[0] = dismiss;
+        loadDialog(modeSummary);
     }
 }

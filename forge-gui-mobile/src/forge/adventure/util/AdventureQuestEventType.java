@@ -1,0 +1,20 @@
+package forge.adventure.util;
+
+public enum AdventureQuestEventType {
+    ENTERPOI,
+    REPUTATION,
+    MAPFLAG,
+    QUESTFLAG,
+    CHARACTERFLAG,
+    LEAVEPOI,
+    MATCHCOMPLETE,
+    QUESTCOMPLETE,
+    DESPAWN,
+    ARENACOMPLETE,
+    ARENAMATCHCOMPLETE,
+    EVENTCOMPLETE,
+    EVENTMATCHCOMPLETE,
+    RECEIVEITEM,
+    USEITEM
+
+}

@@ -36,7 +36,6 @@
 	"Apprentice Green Wizard",
     "Apprentice Red Wizard",
 	"Apprentice White Wizard",
-	"Armadillo",
 	"Bandit",
 	"Boar",
 	"Caracal",
@@ -113,7 +112,11 @@
 	"Slime Cave",
 	"Slobads Factory",
 	"Xiras Hive",
-	"Emrakul"
+	"Emrakul",
+	"Quest_APortalToNowhere",
+	"Quest_DigSite",
+	"Quest_PrimalJungle",
+	"Quest_BanditCave"
 ],
 "structures": [
 	{

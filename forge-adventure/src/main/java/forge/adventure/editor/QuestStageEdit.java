@@ -297,6 +297,21 @@ public class QuestStageEdit extends FormPanel {
                 here.setVisible(true);
                 enemySelector.setVisible(true);
                 mixedEnemies.setVisible(true);
+
+                count1Description.setText("Time limit (seconds to defeat enemies)");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count1Spinner.setVisible(true);
+
+                count2Description.setText("Minimum # of enemies to defeat");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count2Spinner.setVisible(true);
+
+                count3Description.setText("Maximum # of enemies to defeat");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                count3Spinner.setVisible(true);
                 break;
             case "MapFlag":
                 mapFlagLabel.setVisible(true);

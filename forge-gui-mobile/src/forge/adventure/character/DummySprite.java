@@ -12,6 +12,7 @@ import forge.adventure.stage.MapStage;
 public class DummySprite extends MapActor {
     private final TextureRegion textureRegion;
     private final MapStage stage;
+    public boolean blocking = true;
     public DummySprite(int id, TextureRegion textureRegion, MapStage stage) {
         super(id);
         this.textureRegion = textureRegion;
@@ -19,7 +20,7 @@ public class DummySprite extends MapActor {
     }
 
     @Override
-    public void onPlayerCollide() { stage.resetPosition(); }
+    public void onPlayerCollide() { if (blocking) stage.resetPosition(); }
 
     @Override
     public void draw(Batch batch, float alpha) {

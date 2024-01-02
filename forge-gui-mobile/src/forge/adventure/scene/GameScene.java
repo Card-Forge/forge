@@ -2,7 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.google.common.collect.Sets;
+import com.badlogic.gdx.math.Vector2;
 import forge.Forge;
 import forge.adventure.data.BiomeData;
 import forge.adventure.pointofintrest.PointOfInterest;
@@ -13,7 +13,6 @@ import forge.adventure.world.World;
 import forge.util.TextUtil;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Game scene main over world scene
@@ -61,7 +60,7 @@ public class GameScene extends HudScene {
 
     public String getAdventurePlayerLocation(boolean forHeader, boolean skipRoads) {
         if (MapStage.getInstance().isInMap()) {
-            location = forHeader ? TileMapScene.instance().rootPoint.getData().name : TileMapScene.instance().rootPoint.getData().type;
+            location = forHeader ? TileMapScene.instance().rootPoint.getDisplayName() : TileMapScene.instance().rootPoint.getData().type;
         } else {
             World world = Current.world();
             //this gets the name of the layer... this shoud be based on boundaries...
@@ -81,17 +80,18 @@ public class GameScene extends HudScene {
         return location;
     }
 
+    public String getBiomeByPosition(Vector2 position) {
+        World world = Current.world();
+        int currentBiome = World.highestBiome(world.getBiomeMapXY((int) position.x / world.getTileSize(), (int) position.y / world.getTileSize()));
+        List<BiomeData> biomeData = world.getData().GetBiomes();
+        return biomeData.size() <= currentBiome? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
+    }
+
     public PointOfInterest getMapPOI() {
         if (MapStage.getInstance().isInMap()) {
             return TileMapScene.instance().rootPoint;
         }
         return null;
-    }
-
-    public boolean isNotInWorldMap() {
-        String location = getAdventurePlayerLocation(false, true);
-        Set<String> locationTypes = Sets.newHashSet("capital", "castle", "cave", "dungeon", "town");
-        return locationTypes.contains(location);
     }
 }
 

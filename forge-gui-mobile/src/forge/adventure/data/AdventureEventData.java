@@ -421,6 +421,7 @@ public class AdventureEventData implements Serializable {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
         List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
+        data.removeIf(q -> q.nextEnemy != null);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }

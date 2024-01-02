@@ -21,12 +21,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQwXsYGFgkMaDd7FQph8X/saKas4uNgYGeS0GBgUtCD+UFdMuZIAsr2uEaRYMZGoyMGQB8Xp1BoYN6hAxYx0GBhMdCPssOwODNdBOGyDWMyLOXmT9yGwY0ONkYGgF2tkGxPrsqO7L4WBgmAx033l2CJ3HQbx/QWbBADIbGZxlR6Xh6o2wixNjL8zNIHwBh73n0PyDy13E2vuFFTUNIutHjz9s4jA2TB7GJ2QvuhvP4ghzXOL6aOEP45NqL3KY5yKxYekGXRzGhtHEpitkgBzm6GUAyD+k5HX0/E0OgIU/KX6gBhi1lzwAAABuQiU=
+   eJztVFEOgjAMfR/g8Ax+6B+RICTon17DQ2jUW+gFPAh+Gu6AehjjtyOkphtMB/pjwkuadd3a15YOoMO/4OwAgzeSOd/5m+ThqnGyHjAMgJGUKAGWbj0fgZ9PkmoswmoMrKWkPnDyS9s0BGZhqecCmEvORVCNa+Ll/lwnRH1gLzkPUmKh5rfxgKPM7yrKdefZ8xaxCFznyIW6vu4n9XYbXsq5kJuB96LVY8rLlvfuqjPI/fXvV2cnnc5p/4lXzzE39Nxkj7X+074pL+/5luk0N7qddFpt54qD91z/BxT1NHnr+vtuA+p/kxp+gY63HZ4tbkIl
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowA7mKzOwDBFHcIW12FgkNAh3yxk/ZSaNQpIB7jCHF+8jMbTKBgFwxMAAMTVBSc=
+   eJxjYBgFowA7mKzOwDBFHcIW12FgkNAh3yxk/ZSaBQJ3KNQ/0gCuMMcXL9SIp1EwCkbB4AMALwMGLw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -92,7 +92,7 @@
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/quest.tx" x="364" y="98">
+  <object id="51" template="../../obj/quest.tx" x="353" y="98" width="32" height="16">
    <properties>
     <property name="questtype" value="mountain_town_generic"/>
    </properties>

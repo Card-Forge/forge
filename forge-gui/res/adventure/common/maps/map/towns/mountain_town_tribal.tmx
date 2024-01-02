@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowA7mKzOwDBFHcIW12FgkNBByMlrMTAoaBFvFrJ+dLNGAe0BrjDHFy+j8TQKRsHwBAAQ1QW6
+   eJxjYBgFowA7mKzOwDBFHcIW12FgkNBByMlrMTAoaBFvFrJ+dLPIAXco1D/SAK4wxxcv1IinUTAKRsHgAwB69AbC
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -92,7 +92,7 @@
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="51" template="../../obj/quest.tx" x="364" y="98">
+  <object id="51" template="../../obj/quest.tx" x="353" y="98" width="33" height="16">
    <properties>
     <property name="questtype" value="mountain_town_tribal"/>
    </properties>
