@@ -2,7 +2,6 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
-import forge.game.GameType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
