@@ -41,7 +41,7 @@ public class CostRemoveCounter extends CostPart {
      */
     private static final long serialVersionUID = 1L;
     public final CounterType counter;
-    public final ZoneType zone;
+    public final List<ZoneType> zone;
     public final Boolean oneOrMore;
 
     /**
@@ -57,7 +57,7 @@ public class CostRemoveCounter extends CostPart {
      *            the description
      * @param zone the zone.
      */
-    public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, final ZoneType zone, final boolean oneOrMore) {
+    public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, final List<ZoneType> zone, final boolean oneOrMore) {
         super(amount, type, description);
 
         this.counter = counter;
@@ -73,23 +73,24 @@ public class CostRemoveCounter extends CostPart {
         final CounterType cntrs = this.counter;
         final Card source = ability.getHostCard();
         final String type = this.getType();
+
         if (this.payCostFromSource()) {
             return source.getCounters(cntrs);
-        } else {
-            List<Card> typeList;
-            if (type.equals("OriginalHost")) {
-                typeList = Lists.newArrayList(ability.getOriginalHost());
-            } else {
-                typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
-            }
-
-            // Single Target
-            int maxcount = 0;
-            for (Card c : typeList) {
-                maxcount = Math.max(maxcount, c.getCounters(cntrs));
-            }
-            return maxcount;
         }
+
+        List<Card> typeList;
+        if (type.equals("OriginalHost")) {
+            typeList = Lists.newArrayList(ability.getOriginalHost());
+        } else {
+            typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
+        }
+
+        // Single Target
+        int maxcount = 0;
+        for (Card c : typeList) {
+            maxcount = Math.max(maxcount, c.getCounters(cntrs));
+        }
+        return maxcount;
     }
 
     /*
@@ -146,26 +147,24 @@ public class CostRemoveCounter extends CostPart {
         final int amount;
         if (getAmount().equals("All")) {
             amount = source.getCounters(cntrs);
-        }
-        else {
+        } else {
             amount = getAbilityAmount(ability);
         }
         if (this.payCostFromSource()) {
             return !source.isPhasedOut() && (source.getCounters(cntrs) - amount) >= 0;
         }
-        else {
-            List<Card> typeList;
-            if (type.equals("OriginalHost")) {
-                typeList = Lists.newArrayList(ability.getOriginalHost());
-            } else {
-                typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
-            }
 
-            // (default logic) remove X counters from a single permanent
-            for (Card c : typeList) {
-                if (c.getCounters(cntrs) - amount >= 0) {
-                    return true;
-                }
+        List<Card> typeList;
+        if (type.equals("OriginalHost")) {
+            typeList = Lists.newArrayList(ability.getOriginalHost());
+        } else {
+            typeList = CardLists.getValidCards(payer.getCardsIn(this.zone), type.split(";"), payer, source, ability);
+        }
+
+        // (default logic) remove X counters from a single permanent
+        for (Card c : typeList) {
+            if (c.getCounters(cntrs) - amount >= 0) {
+                return true;
             }
         }
 

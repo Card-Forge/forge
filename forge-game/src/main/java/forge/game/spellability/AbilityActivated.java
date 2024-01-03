@@ -90,7 +90,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
             return false;
         }
 
-        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
+        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false);
     }
 
     /** {@inheritDoc} */
