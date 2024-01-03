@@ -168,10 +168,11 @@ public final class FModel {
         loadDynamicGamedata();
 
         //load card database
+        // Lazy loading currently disabled
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+                false);
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
-                FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+                false);
         CardStorageReader customReader;
         try {
            customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge, false);
@@ -280,8 +281,7 @@ public final class FModel {
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
 
         //generate Deck Gen matrix
-        if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)
-                &&FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){
