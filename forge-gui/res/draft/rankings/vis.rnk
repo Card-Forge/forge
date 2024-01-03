@@ -1,0 +1,168 @@
+//Rank|Name|Rarity|Set
+#1|Snake Basket|R|VIS
+#2|Ogre Enforcer|R|VIS
+#3|Archangel|R|VIS
+#4|Kookus|R|VIS
+#5|Zhalfirin Crusader|R|VIS
+#6|Guiding Spirit|R|VIS
+#7|Necrosavant|R|VIS
+#8|Nekrataal|U|VIS
+#9|Vampiric Tutor|R|VIS
+#10|Daraja Griffin|U|VIS
+#11|Rainbow Efreet|R|VIS
+#12|Necromancy|U|VIS
+#13|Firestorm Hellkite|R|VIS
+#14|Miraculous Recovery|U|VIS
+#15|Undiscovered Paradise|R|VIS
+#16|Fireblast|C|VIS
+#17|Retribution of the Meek|R|VIS
+#18|Man-o'-War|C|VIS
+#19|Scalebane's Elite|U|VIS
+#20|Quirion Druid|R|VIS
+#21|Tempest Drake|U|VIS
+#22|Aku Djinn|R|VIS
+#23|Crypt Rats|C|VIS
+#24|Suq'Ata Lancer|C|VIS
+#25|Waterspout Djinn|U|VIS
+#26|River Boa|C|VIS
+#27|Bogardan Phoenix|R|VIS
+#28|Rock Slide|C|VIS
+#29|Viashivan Dragon|R|VIS
+#30|Desertion|R|VIS
+#31|Fallen Askari|C|VIS
+#32|Hulking Cyclops|U|VIS
+#33|Spitting Drake|U|VIS
+#34|Undo|C|VIS
+#35|Quicksand|U|VIS
+#36|Cloud Elemental|C|VIS
+#37|Shimmering Efreet|U|VIS
+#38|Breezekeeper|C|VIS
+#39|Talruum Piper|U|VIS
+#40|Longbow Archer|U|VIS
+#41|Viashino Sandstalker|U|VIS
+#42|Stampeding Wildebeests|U|VIS
+#43|Dormant Volcano|U|VIS
+#44|Wake of Vultures|C|VIS
+#45|Tithe|R|VIS
+#46|Impulse|C|VIS
+#47|Knight of the Mists|C|VIS
+#48|Natural Order|R|VIS
+#49|Flooded Shoreline|R|VIS
+#50|Talruum Champion|C|VIS
+#51|Knight of Valor|C|VIS
+#52|Magma Mine|U|VIS
+#53|Wand of Denial|R|VIS
+#54|Giant Caterpillar|C|VIS
+#55|Rowen|R|VIS
+#56|Diamond Kaleidoscope|R|VIS
+#57|Lightning Cloud|R|VIS
+#58|Warthog|C|VIS
+#59|Dragon Mask|U|VIS
+#60|Funeral Charm|C|VIS
+#61|Simoon|U|VIS
+#62|Army Ants|U|VIS
+#63|Mundungu|U|VIS
+#64|Inspiration|C|VIS
+#65|Raging Gorilla|C|VIS
+#66|Teferi's Honor Guard|U|VIS
+#67|Pillar Tombs of Aku|R|VIS
+#68|King Cheetah|C|VIS
+#69|Triangle of War|R|VIS
+#70|Panther Warriors|C|VIS
+#71|Infantry Veteran|C|VIS
+#72|Bull Elephant|C|VIS
+#73|Kyscu Drake|U|VIS
+#74|Quirion Ranger|C|VIS
+#75|Freewind Falcon|C|VIS
+#76|Ovinomancer|U|VIS
+#77|Tin-Wing Chimera|U|VIS
+#78|Uktabi Orangutan|U|VIS
+#79|Lichenthrope|R|VIS
+#80|Honorable Passage|U|VIS
+#81|Urborg Mindsucker|C|VIS
+#82|Jamuraan Lion|C|VIS
+#83|Dream Tides|U|VIS
+#84|Kaervek's Spite|R|VIS
+#85|Sisay's Ring|C|VIS
+#86|Python|C|VIS
+#87|Karoo|U|VIS
+#88|Relentless Assault|R|VIS
+#89|Dwarven Vigilantes|C|VIS
+#90|Coral Atoll|U|VIS
+#91|Tar Pit Warrior|C|VIS
+#92|Brass-Talon Chimera|U|VIS
+#93|Jungle Basin|U|VIS
+#94|Griffin Canyon|R|VIS
+#95|Shrieking Drake|C|VIS
+#96|Creeping Mold|U|VIS
+#97|Iron-Heart Chimera|U|VIS
+#98|Suq'Ata Assassin|U|VIS
+#99|Gossamer Chains|C|VIS
+#100|City of Solitude|R|VIS
+#101|Lead-Belly Chimera|U|VIS
+#102|Infernal Harvest|C|VIS
+#103|Hearth Charm|C|VIS
+#104|Elephant Grass|U|VIS
+#105|Anvil of Bogardan|R|VIS
+#106|Feral Instinct|C|VIS
+#107|Coercion|C|VIS
+#108|Sun Clasp|C|VIS
+#109|Keeper of Kookus|C|VIS
+#110|Wind Shear|U|VIS
+#111|Hope Charm|C|VIS
+#112|Elven Cache|C|VIS
+#113|Femeref Enchantress|R|VIS
+#114|Everglades|U|VIS
+#115|Parapet|C|VIS
+#116|Three Wishes|R|VIS
+#117|Solfatara|C|VIS
+#118|Forbidden Ritual|R|VIS
+#119|Resistance Fighter|C|VIS
+#120|Tremor|C|VIS
+#121|Goblin Recruiter|U|VIS
+#122|Goblin Swine-Rider|C|VIS
+#123|Pygmy Hippo|R|VIS
+#124|Betrayal|C|VIS
+#125|Phyrexian Marauder|R|VIS
+#126|Matopi Golem|U|VIS
+#127|Mystic Veil|C|VIS
+#128|Foreshadow|U|VIS
+#129|Brood of Cockroaches|U|VIS
+#130|Time and Tide|U|VIS
+#131|Mortal Wound|C|VIS
+#132|Vision Charm|C|VIS
+#133|Righteous Aura|C|VIS
+#134|Spider Climb|C|VIS
+#135|Phyrexian Walker|C|VIS
+#136|Vanishing|C|VIS
+#137|Chronatog|R|VIS
+#138|Dark Privilege|C|VIS
+#139|Teferi's Puzzle Box|R|VIS
+#140|Desolation|U|VIS
+#141|Emerald Charm|C|VIS
+#142|Remedy|C|VIS
+#143|Warrior's Honor|C|VIS
+#144|Blanket of Night|U|VIS
+#145|Death Watch|C|VIS
+#146|Equipoise|R|VIS
+#147|Helm of Awakening|U|VIS
+#148|Heat Wave|U|VIS
+#149|Song of Blood|C|VIS
+#150|Mob Mentality|U|VIS
+#151|Squandered Resources|R|VIS
+#152|Prosperity|U|VIS
+#153|Wicked Reward|C|VIS
+#154|Peace Talks|U|VIS
+#155|Summer Bloom|U|VIS
+#156|Relic Ward|U|VIS
+#157|Teferi's Realm|R|VIS
+#158|Vampirism|U|VIS
+#159|Corrosion|R|VIS
+#160|Breathstealer's Crypt|R|VIS
+#161|Righteous War|R|VIS
+#162|Katabatic Winds|R|VIS
+#163|Eye of Singularity|R|VIS
+#164|Juju Bubble|U|VIS
+#165|Sands of Time|R|VIS
+#166|Elkin Lair|R|VIS
+#167|Suleiman's Legacy|R|VIS

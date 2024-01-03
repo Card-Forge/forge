@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Jace, the Mind Sculptor|M|A25
+#2|Niv-Mizzet, the Firemind|R|A25
+#3|Gisela, Blade of Goldnight|M|A25
+#4|Akroma, Angel of Fury|M|A25
+#5|Laquatus's Champion|R|A25
+#6|Master of the Wild Hunt|M|A25
+#7|Prossh, Skyraider of Kher|M|A25
+#8|Vindicate|R|A25
+#9|Swords to Plowshares|U|A25
+#10|Courser of Kruphix|R|A25
+#11|Ruric Thar, the Unbowed|R|A25
+#12|Vendilion Clique|M|A25
+#13|Brion Stoutarm|R|A25
+#14|Grenzo, Dungeon Warden|R|A25
+#15|Lightning Bolt|U|A25
+#16|Rancor|U|A25
+#17|Pernicious Deed|R|A25
+#18|Armageddon|M|A25
+#19|Darien, King of Kjeldor|R|A25
+#20|Vesuvan Shapeshifter|R|A25
+#21|Ravenous Chupacabra|U|A25
+#22|Protean Hulk|R|A25
+#23|Akroma, Angel of Wrath|M|A25
+#24|Luminarch Ascension|R|A25
+#25|Magus of the Wheel|R|A25
+#26|Tree of Redemption|M|A25
+#27|Coalition Relic|R|A25
+#28|Akroma's Vengeance|R|A25
+#29|Murder|C|A25
+#30|Mystic Snake|R|A25
+#31|Pillory of the Sleepless|U|A25
+#32|Pacifism|C|A25
+#33|Fortune Thief|R|A25
+#34|Baloth Null|U|A25
+#35|Cloudblazer|U|A25
+#36|Decree of Justice|R|A25
+#37|Bident of Thassa|R|A25
+#38|Fiend Hunter|U|A25
+#39|Merfolk Looter|U|A25
+#40|Living Death|R|A25
+#41|Doomsday|M|A25
+#42|Quicksilver Dagger|U|A25
+#43|Sundering Titan|R|A25
+#44|Pact of Negation|R|A25
+#45|Eidolon of the Great Revel|R|A25
+#46|Kindle|C|A25
+#47|Eladamri's Call|R|A25
+#48|Shadowmage Infiltrator|U|A25
+#49|Thalia, Guardian of Thraben|R|A25
+#50|Blue Sun's Zenith|R|A25
+#51|Man-o'-War|C|A25
+#52|Zombify|U|A25
+#53|Chandra's Outrage|C|A25
+#54|Ire Shaman|U|A25
+#55|Zada, Hedron Grinder|U|A25
+#56|Epic Confrontation|C|A25
+#57|Boros Charm|U|A25
+#58|Murder of Crows|U|A25
+#59|Hordeling Outburst|C|A25
+#60|Krosan Tusker|U|A25
+#61|Summoner's Pact|R|A25
+#62|Urbis Protector|U|A25
+#63|Counterspell|C|A25
+#64|Fallen Angel|U|A25
+#65|Phyrexian Obliterator|M|A25
+#66|Ruthless Ripper|C|A25
+#67|Undead Gladiator|U|A25
+#68|Pyroclasm|U|A25
+#69|Skeletonize|C|A25
+#70|Regrowth|U|A25
+#71|Nicol Bolas|R|A25
+#72|Treasure Keeper|U|A25
+#73|Kongming, "Sleeping Dragon"|U|A25
+#74|Court Hussar|C|A25
+#75|Exclude|U|A25
+#76|Disfigure|C|A25
+#77|Ratcatcher|R|A25
+#78|Izzet Chemister|R|A25
+#79|Arbor Elf|C|A25
+#80|Azusa, Lost but Seeking|R|A25
+#81|Utopia Sprawl|U|A25
+#82|Blightning|U|A25
+#83|Hanna, Ship's Navigator|R|A25
+#84|Watchwolf|U|A25
+#85|Rishadan Port|R|A25
+#86|Mishra's Factory|U|A25
+#87|Nyx-Fleece Ram|U|A25
+#88|Path of Peace|C|A25
+#89|Brine Elemental|U|A25
+#90|Genju of the Falls|U|A25
+#91|Reef Worm|R|A25
+#92|Caustic Tar|U|A25
+#93|Deadly Designs|U|A25
+#94|Phyrexian Ghoul|C|A25
+#95|Triskaidekaphobia|R|A25
+#96|Twisted Abomination|C|A25
+#97|Genju of the Spires|U|A25
+#98|Ainok Survivalist|C|A25
+#99|Ember Weaver|C|A25
+#100|Iwamori of the Open Fist|U|A25
+#101|Lorescale Coatl|U|A25
+#102|Stangg|U|A25
+#103|Dauntless Cathar|C|A25
+#104|Geist of the Moors|C|A25
+#105|Karona's Zealot|U|A25
+#106|Kor Firewalker|U|A25
+#107|Noble Templar|C|A25
+#108|Arcane Denial|C|A25
+#109|Freed from the Real|U|A25
+#110|Horseshoe Crab|C|A25
+#111|Jalira, Master Polymorphist|U|A25
+#112|Shoreline Ranger|C|A25
+#113|Bloodhunter Bat|C|A25
+#114|Diabolic Edict|C|A25
+#115|Dusk Legion Zealot|C|A25
+#116|Hell's Caretaker|R|A25
+#117|Ihsan's Shade|U|A25
+#118|Mesmeric Fiend|U|A25
+#119|Zulaport Cutthroat|U|A25
+#120|Chartooth Cougar|C|A25
+#121|Enthralling Victor|U|A25
+#122|Goblin War Drums|U|A25
+#123|Ambassador Oak|C|A25
+#124|Elvish Aberration|C|A25
+#125|Elvish Piper|R|A25
+#126|Kavu Climber|C|A25
+#127|Presence of Gond|C|A25
+#128|Animar, Soul of Elements|M|A25
+#129|Ensnaring Bridge|M|A25
+#130|Fetid Heath|R|A25
+#131|Twilight Mire|R|A25
+#132|Cascade Bluffs|R|A25
+#133|Rugged Prairie|R|A25
+#134|Flooded Grove|R|A25
+#135|Pendelhaven|R|A25
+#136|Angelic Page|U|A25
+#137|Fencing Ace|C|A25
+#138|Valor in Akros|U|A25
+#139|Accumulated Knowledge|C|A25
+#140|Brainstorm|U|A25
+#141|Curiosity|U|A25
+#142|Ghost Ship|C|A25
+#143|Mystic of the Hidden Way|C|A25
+#144|Sift|C|A25
+#145|Willbender|U|A25
+#146|Plague Wind|R|A25
+#147|Frenzied Goblin|C|A25
+#148|Imperial Recruiter|M|A25
+#149|Pyre Hound|C|A25
+#150|Spikeshot Goblin|U|A25
+#151|Broodhatch Nantuko|U|A25
+#152|Fierce Empath|U|A25
+#153|Invigorate|U|A25
+#154|Wildheart Invoker|C|A25
+#155|Woolly Loxodon|C|A25
+#156|Gods Willing|C|A25
+#157|Griffin Protector|C|A25
+#158|Squadron Hawk|C|A25
+#159|Retraction Helix|C|A25
+#160|Returned Phalanx|C|A25
+#161|Balduvian Horde|C|A25
+#162|Mogg Flunkies|C|A25
+#163|Skirk Commando|C|A25
+#164|Uncaged fury|C|A25
+#165|Ancient Stirrings|U|A25
+#166|Giant Growth|C|A25
+#167|Sai of the Shinobi|U|A25
+#168|Cloudshift|C|A25
+#169|Knight of the Skyward Eye|C|A25
+#170|Lunarch Mantle|C|A25
+#171|Promise of Bunrei|U|A25
+#172|Whitemane Lion|C|A25
+#173|Fathom Seer|C|A25
+#174|Dark Ritual|C|A25
+#175|Death's-Head Buzzard|C|A25
+#176|Dirge of Dread|C|A25
+#177|Horror of the Broken Lands|C|A25
+#178|Nezumi Cutthroat|C|A25
+#179|Street Wraith|U|A25
+#180|Unearth|C|A25
+#181|Will-o'-the-Wisp|U|A25
+#182|Act of Treason|C|A25
+#183|Cinder Storm|C|A25
+#184|Pillage|C|A25
+#185|Trumpet Blast|C|A25
+#186|Colossal Dreadmaw|C|A25
+#187|Echoing Courage|C|A25
+#188|Timberpack Wolf|C|A25
+#189|Notion Thief|R|A25
+#190|Prophetic Prism|C|A25
+#191|Swiftfoot Boots|U|A25
+#192|Ash Barrens|U|A25
+#193|Auramancer|C|A25
+#194|Loyal Sentry|C|A25
+#195|Ordeal of Heliod|U|A25
+#196|Savannah Lions|C|A25
+#197|Blue Elemental Blast|U|A25
+#198|Dragon's Eye Savants|C|A25
+#199|Phantasmal Bear|C|A25
+#200|Totally Lost|C|A25
+#201|Twisted Image|U|A25
+#202|Ancient Craving|U|A25
+#203|Erg Raiders|C|A25
+#204|Supernatural Stamina|C|A25
+#205|Vampire Lacerator|C|A25
+#206|Ball Lightning|R|A25
+#207|Humble Defector|U|A25
+#208|Jackal Pup|C|A25
+#209|Red Elemental Blast|U|A25
+#210|Soulbright Flamekin|C|A25
+#211|Thresher Lizard|C|A25
+#212|Cultivate|C|A25
+#213|Kavu Predator|U|A25
+#214|Living Wish|R|A25
+#215|Stampede Driver|U|A25
+#216|Perilous Myr|U|A25
+#217|Act of Heroism|C|A25
+#218|Renewed Faith|C|A25
+#219|Choking Tethers|C|A25
+#220|Cursecatcher|U|A25
+#221|Flash|R|A25
+#222|Blood Moon|R|A25
+#223|Crimson Mage|C|A25
+#224|Krosan Colossus|U|A25
+#225|Nettle Sentinel|C|A25
+#226|Vessel of Nascency|C|A25
+#227|Chalice of the Void|M|A25
+#228|Heavy Arbalest|U|A25
+#229|Self-Assembler|C|A25
+#230|Strionic Resonator|R|A25
+#231|Quicksand|U|A25
+#232|Congregate|C|A25
+#233|Disenchant|C|A25
+#234|Coralhelm Guide|C|A25
+#235|Lull|C|A25
+#236|Plummet|C|A25
+#237|Assembly-Worker|C|A25
+#238|Nihil Spellbomb|C|A25
+#239|Haunted Fengraf|C|A25
+#240|Zoetic Cavern|U|A25
+#241|Borrowing 100,000 Arrows|C|A25
+#242|Browbeat|U|A25
+#243|Primal Clay|C|A25
+#244|Myriad Landscape|U|A25
+#245|Rest in Peace|R|A25
+#246|Relentless Rats|C|A25
+#247|Simian Spirit Guide|U|A25
+#248|Mikokoro, Center of the Sea|R|A25
+#249|Conflux|M|A25

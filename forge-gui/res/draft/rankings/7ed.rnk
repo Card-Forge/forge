@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Dregs of Sorrow|R|7ED
+#2|Mahamoti Djinn|R|7ED
+#3|Intrepid Hero|R|7ED
+#4|Bloodshot Cyclops|R|7ED
+#5|Seismic Assault|R|7ED
+#6|Wildfire|R|7ED
+#7|Thieving Magpie|U|7ED
+#8|Elder Druid|R|7ED
+#9|Blaze|U|7ED
+#10|Opposition|R|7ED
+#11|Air Elemental|U|7ED
+#12|Birds of Paradise|R|7ED
+#13|Serra Advocate|U|7ED
+#14|Shivan Dragon|R|7ED
+#15|Western Paladin|R|7ED
+#16|Rag Man|R|7ED
+#17|Uktabi Wildcats|R|7ED
+#18|Pyrotechnics|U|7ED
+#19|Greed|R|7ED
+#20|Abyssal Horror|R|7ED
+#21|Worship|R|7ED
+#22|Elite Archers|R|7ED
+#23|Serra Angel|R|7ED
+#24|Confiscate|U|7ED
+#25|Fire Elemental|U|7ED
+#26|Nightmare|R|7ED
+#27|Dakmor Lancer|U|7ED
+#28|Mawcor|R|7ED
+#29|Fallen Angel|R|7ED
+#30|Archivist|R|7ED
+#31|Crypt Rats|U|7ED
+#32|Merfolk Looter|U|7ED
+#33|Fleeting Image|R|7ED
+#34|Stronghold Assassin|R|7ED
+#35|Crimson Hellkite|R|7ED
+#36|Wall of Wonder|R|7ED
+#37|Eastern Paladin|R|7ED
+#38|Ancient Silverback|R|7ED
+#39|Revenant|R|7ED
+#40|Fighting Drake|U|7ED
+#41|Elvish Archers|R|7ED
+#42|Heavy Ballista|U|7ED
+#43|Pyroclasm|U|7ED
+#44|Sunweb|R|7ED
+#45|Glorious Anthem|R|7ED
+#46|Ghitu Fire-Eater|U|7ED
+#47|Volcanic Hammer|C|7ED
+#48|Lightning Blast|C|7ED
+#49|Goblin Matron|U|7ED
+#50|Befoul|U|7ED
+#51|Serra's Embrace|U|7ED
+#52|Dark Banishing|C|7ED
+#53|Reckless Embermage|R|7ED
+#54|Northern Paladin|R|7ED
+#55|Pacifism|C|7ED
+#56|Dingus Egg|R|7ED
+#57|Maro|R|7ED
+#58|Thorn Elemental|R|7ED
+#59|Gorilla Chieftain|C|7ED
+#60|Earthquake|R|7ED
+#61|Temporal Adept|R|7ED
+#62|Equilibrium|R|7ED
+#63|Grafted Skullcap|R|7ED
+#64|Might of Oaks|R|7ED
+#65|Inferno|R|7ED
+#66|Hurricane|R|7ED
+#67|Pride of Lions|U|7ED
+#68|Abyssal Specter|U|7ED
+#69|Phantom Warrior|U|7ED
+#70|Orcish Artillery|U|7ED
+#71|Shock|C|7ED
+#72|Gravedigger|C|7ED
+#73|Kjeldoran Royal Guard|R|7ED
+#74|Wind Drake|C|7ED
+#75|Fire Diamond|U|7ED
+#76|Prodigal Sorcerer|C|7ED
+#77|Wrath of God|R|7ED
+#78|Vizzerdrix|R|7ED
+#79|Ensnaring Bridge|R|7ED
+#80|Fyndhorn Elder|U|7ED
+#81|Brushland|R|7ED
+#82|Opportunity|U|7ED
+#83|Elvish Piper|R|7ED
+#84|Southern Paladin|R|7ED
+#85|Bellowing Fiend|R|7ED
+#86|Evacuation|R|7ED
+#87|Treefolk Seedlings|U|7ED
+#88|Jalum Tome|R|7ED
+#89|Charcoal Diamond|U|7ED
+#90|Counterspell|C|7ED
+#91|Necrologia|U|7ED
+#92|Spined Wurm|C|7ED
+#93|Corrupt|C|7ED
+#94|Master Healer|R|7ED
+#95|Gang of Elk|U|7ED
+#96|Sustainer of the Realm|U|7ED
+#97|Reverse Damage|R|7ED
+#98|Millstone|R|7ED
+#99|Reprisal|U|7ED
+#100|City of Brass|R|7ED
+#101|Spirit Link|U|7ED
+#102|Vengeance|U|7ED
+#103|Sulfurous Springs|R|7ED
+#104|Pit Trap|U|7ED
+#105|Underground River|R|7ED
+#106|Bedlam|R|7ED
+#107|Crossbow Infantry|C|7ED
+#108|Trained Armodon|C|7ED
+#109|Nocturnal Raid|U|7ED
+#110|Bull Hippo|U|7ED
+#111|Elvish Champion|R|7ED
+#112|Razorfoot Griffin|C|7ED
+#113|Foul Imp|U|7ED
+#114|Infernal Contract|R|7ED
+#115|Blanchwood Armor|U|7ED
+#116|Patagia Golem|U|7ED
+#117|Vigilant Drake|C|7ED
+#118|Rampant Growth|C|7ED
+#119|Anaconda|U|7ED
+#120|Lone Wolf|C|7ED
+#121|Wood Elves|C|7ED
+#122|Remove Soul|C|7ED
+#123|Llanowar Elves|C|7ED
+#124|Bog Wraith|U|7ED
+#125|Goblin King|R|7ED
+#126|Static Orb|R|7ED
+#127|Trained Orgg|R|7ED
+#128|Relentless Assault|R|7ED
+#129|Mana Short|R|7ED
+#130|Beast of Burden|R|7ED
+#131|Cloudchaser Eagle|C|7ED
+#132|Lord of Atlantis|R|7ED
+#133|Benthic Behemoth|R|7ED
+#134|Fugue|U|7ED
+#135|Canopy Spider|C|7ED
+#136|Teferi's Puzzle Box|R|7ED
+#137|Wind Dancer|U|7ED
+#138|Treasure Trove|U|7ED
+#139|Spitting Earth|C|7ED
+#140|Razortooth Rats|C|7ED
+#141|Okk|R|7ED
+#142|Ancestral Memories|R|7ED
+#143|Coat of Arms|R|7ED
+#144|Phyrexian Hulk|U|7ED
+#145|Seasoned Marshal|U|7ED
+#146|Giant Spider|C|7ED
+#147|Untamed Wilds|U|7ED
+#148|Wall of Air|U|7ED
+#149|Hill Giant|C|7ED
+#150|Ardent Militia|U|7ED
+#151|Balduvian Barbarians|C|7ED
+#152|Flying Carpet|R|7ED
+#153|Sage Owl|C|7ED
+#154|Engineered Plague|U|7ED
+#155|Yavimaya Enchantress|U|7ED
+#156|Nausea|C|7ED
+#157|Hollow Dogs|C|7ED
+#158|Rowen|R|7ED
+#159|Caltrops|U|7ED
+#160|Goblin Chariot|C|7ED
+#161|Disrupting Scepter|R|7ED
+#162|Femeref Archers|U|7ED
+#163|Howling Mine|R|7ED
+#164|Grizzly Bears|C|7ED
+#165|Storm Crow|C|7ED
+#166|Persecute|R|7ED
+#167|Vernal Bloom|R|7ED
+#168|Spineless Thug|C|7ED
+#169|Daring Apprentice|R|7ED
+#170|Sleight of Hand|C|7ED
+#171|Rolling Stones|R|7ED
+#172|Wall of Swords|U|7ED
+#173|Goblin Spelunkers|C|7ED
+#174|Castle|U|7ED
+#175|Rod of Ruin|U|7ED
+#176|Serpent Warrior|C|7ED
+#177|Lightning Elemental|C|7ED
+#178|Redwood Treefolk|C|7ED
+#179|Sabretooth Tiger|C|7ED
+#180|Ogre Taskmaster|U|7ED
+#181|Inspiration|C|7ED
+#182|Bog Imp|C|7ED
+#183|Seeker of Skybreak|C|7ED
+#184|Unsummon|C|7ED
+#185|Breath of Life|U|7ED
+#186|Longbow Archer|U|7ED
+#187|Fervor|R|7ED
+#188|Grapeshot Catapult|U|7ED
+#189|Telepathic Spies|C|7ED
+#190|Giant Growth|C|7ED
+#191|Lava Axe|C|7ED
+#192|Pillage|U|7ED
+#193|Glacial Wall|U|7ED
+#194|Horned Turtle|C|7ED
+#195|Boomerang|C|7ED
+#196|Tainted Aether|R|7ED
+#197|Soul Feast|U|7ED
+#198|Jayemdae Tome|R|7ED
+#199|Staunch Defenders|U|7ED
+#200|Angelic Page|C|7ED
+#201|Ostracize|C|7ED
+#202|Phyrexian Colossus|R|7ED
+#203|Storm Shaman|U|7ED
+#204|Levitation|U|7ED
+#205|Force Spike|C|7ED
+#206|Boil|U|7ED
+#207|Knighthood|U|7ED
+#208|Adarkar Wastes|R|7ED
+#209|Wall of Spears|U|7ED
+#210|Pariah|R|7ED
+#211|Meekstone|R|7ED
+#212|Unholy Strength|C|7ED
+#213|Knight Errant|C|7ED
+#214|Goblin Glider|U|7ED
+#215|Giant Octopus|C|7ED
+#216|Memory Lapse|C|7ED
+#217|Giant Cockroach|C|7ED
+#218|Sky Diamond|U|7ED
+#219|Drudge Skeletons|C|7ED
+#220|Sudden Impact|U|7ED
+#221|Jandor's Saddlebags|R|7ED
+#222|Tolarian Winds|C|7ED
+#223|Goblin Raider|C|7ED
+#224|Scathe Zombies|C|7ED
+#225|Monstrous Growth|C|7ED
+#226|Aladdin's Ring|R|7ED
+#227|Wild Growth|C|7ED
+#228|Sisay's Ring|U|7ED
+#229|Looming Shade|C|7ED
+#230|Feroz's Ban|R|7ED
+#231|Elvish Lyrist|U|7ED
+#232|Howl from Beyond|C|7ED
+#233|Final Fortune|R|7ED
+#234|Disorder|U|7ED
+#235|Impatience|R|7ED
+#236|Duress|C|7ED
+#237|Agonizing Memories|U|7ED
+#238|Samite Healer|C|7ED
+#239|Skyshroud Falcon|C|7ED
+#240|Venerable Monk|C|7ED
+#241|Moss Diamond|U|7ED
+#242|Mind Rot|C|7ED
+#243|Nature's Resurgence|R|7ED
+#244|Creeping Mold|U|7ED
+#245|Karplusan Forest|R|7ED
+#246|Coral Merfolk|C|7ED
+#247|Standing Troops|C|7ED
+#248|Verduran Enchantress|R|7ED
+#249|Wall of Bone|U|7ED
+#250|Pygmy Pyrosaur|C|7ED
+#251|Wall of Fire|U|7ED
+#252|Mana Clash|R|7ED
+#253|Reclaim|C|7ED
+#254|Squall|C|7ED
+#255|Steal Artifact|U|7ED
+#256|Blood Pet|C|7ED
+#257|Goblin Gardener|C|7ED
+#258|Familiar Ground|U|7ED
+#259|Raging Goblin|C|7ED
+#260|Raise Dead|C|7ED
+#261|Strands of Night|U|7ED
+#262|Honor Guard|C|7ED
+#263|Goblin War Drums|U|7ED
+#264|Yawgmoth's Edict|U|7ED
+#265|Plague Beetle|C|7ED
+#266|Bereavement|U|7ED
+#267|Aether Flash|U|7ED
+#268|Marble Diamond|U|7ED
+#269|Fog|C|7ED
+#270|Sea Monster|C|7ED
+#271|Regeneration|C|7ED
+#272|Reprocess|R|7ED
+#273|Scavenger Folk|U|7ED
+#274|Goblin Digging Team|C|7ED
+#275|Purify|R|7ED
+#276|Baleful Stare|U|7ED
+#277|Tranquility|C|7ED
+#278|Blessed Reversal|R|7ED
+#279|Telepathy|U|7ED
+#280|Hibernation|U|7ED
+#281|Nature's Revolt|R|7ED
+#282|Stone Rain|C|7ED
+#283|Goblin Elite Infantry|C|7ED
+#284|Tremor|C|7ED
+#285|Soul Net|U|7ED
+#286|Fear|C|7ED
+#287|Twiddle|C|7ED
+#288|Compost|U|7ED
+#289|Shanodin Dryads|C|7ED
+#290|Granite Grip|C|7ED
+#291|Megrim|U|7ED
+#292|Orcish Oriflamme|U|7ED
+#293|Lure|U|7ED
+#294|Darkest Hour|R|7ED
+#295|Delusions of Mediocrity|R|7ED
+#296|Holy Strength|C|7ED
+#297|Merfolk of the Pearl Trident|C|7ED
+#298|Crystal Rod|U|7ED
+#299|Healing Salve|C|7ED
+#300|Mana Breach|U|7ED
+#301|Disenchant|C|7ED
+#302|Flight|C|7ED
+#303|Iron Star|U|7ED
+#304|Eager Cadet|C|7ED
+#305|Thoughtleech|U|7ED
+#306|Circle of Protection: Black|C|7ED
+#307|Shield Wall|C|7ED
+#308|Circle of Protection: Green|C|7ED
+#309|Shatter|C|7ED
+#310|Stream of Life|C|7ED
+#311|Deflection|R|7ED
+#312|Wing Snare|U|7ED
+#313|Circle of Protection: White|C|7ED
+#314|Reflexes|C|7ED
+#315|Spellbook|U|7ED
+#316|Circle of Protection: Blue|C|7ED
+#317|Circle of Protection: Red|C|7ED
+#318|Arcane Laboratory|U|7ED
+#319|Sacred Nectar|C|7ED
+#320|Starlight|U|7ED
+#321|Oppression|R|7ED
+#322|Gerrard's Wisdom|U|7ED
+#323|Sacred Ground|R|7ED
+#324|Throne of Bone|U|7ED
+#325|Early Harvest|R|7ED
+#326|Wooden Sphere|U|7ED
+#327|Leshrac's Rite|U|7ED
+#328|Sanctimony|U|7ED
+#329|Storm Cauldron|R|7ED
+#330|Ivory Cup|U|7ED
