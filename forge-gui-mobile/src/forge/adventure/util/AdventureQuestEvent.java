@@ -10,8 +10,8 @@ public class AdventureQuestEvent {
     public PointOfInterest poi;
     public EnemySprite enemy;
     public ItemData item;
-    public Boolean clear;
-    public Boolean winner;
+    public boolean clear;
+    public boolean winner;
     public String flagName;
     public int flagValue;
     public int count1;
