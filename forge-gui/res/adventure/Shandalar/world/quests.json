@@ -671,7 +671,7 @@
                 },
                 "POIToken": "",
                 "prerequisiteIDs": [
-                    2
+                    1
                 ]
             },
             {
@@ -958,6 +958,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeGreen"
                 ],
@@ -1218,6 +1219,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeBlack"
                 ],
@@ -1626,6 +1628,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeWhite",
                     "Human"
@@ -1848,6 +1851,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeRed"
                 ],
@@ -2163,6 +2167,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeBlue"
                 ],
@@ -2450,6 +2455,7 @@
                 "mapFlagValue": 1,
                 "count1": 30,
                 "objective": "Hunt",
+                "worldMapOK": true,
                 "enemyTags": [
                     "BiomeColorless"
                 ],
