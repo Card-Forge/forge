@@ -201,10 +201,16 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         h = height / 12;
         if (Forge.isMobileAdventureMode) {
-            btnContinue.setBounds(x, y, w, h);
-            y += h + dy;
+            if (game.getNumGamesInMatch() > 1) {
+                btnContinue.setBounds(x, y, w, h);
+                y += h + dy;
+            }
+            else{
+                btnContinue.setVisible(false);
+            }
             btnQuit.setBounds(x, y, w, h);
             y += h + dy;
+
             btnRestart.setVisible(false);
         } else {
             if (btnContinue.isEnabled()) {
