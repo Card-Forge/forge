@@ -278,6 +278,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializePlayerNameButton();
         initializeDefaultLanguageComboBox();
 
+        disableLazyLoading();
     }
 
     /* (non-Javadoc)
@@ -658,6 +659,12 @@ public enum CSubmenuPreferences implements ICDoc {
         final FLabel btn = view.getBtnPlayerName();
         setPlayerNameButtonText();
         btn.setCommand(getPlayerNameButtonCommand());
+    }
+
+    private void disableLazyLoading() {
+        view.getCbLoadCardsLazily().setSelected(false);
+        view.getCbLoadCardsLazily().setEnabled(false);
+        prefs.save();
     }
 
     private void setPlayerNameButtonText() {
