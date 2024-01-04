@@ -239,7 +239,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                             c.setTapped(true);
                         }
                         m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
-                        if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                        if (addToCombat(c, sa, "Attacking", "Blocking")) {
                             combatChanged = true;
                         }
                     } else if (sa.hasParam("NoMoveFound")) {
