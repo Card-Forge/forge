@@ -1,4 +1,4 @@
-Name:Eomer, King of Rohan
+Name:Éomer, King of Rohan
 ManaCost:3 R W
 Types:Legendary Creature Human Noble
 PT:2/2
@@ -11,4 +11,4 @@ SVar:DBPower:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Y:Count$CardPower
 DeckNeeds:Type$Human
 DeckHas:Ability$Counters
-Oracle:Double strike\nEomer, King of Rohan enters the battlefield with a +1/+1 counter on it for each other Human you control.\nWhen Eomer enters the battlefield, target player becomes the monarch. Éomer deals damage equal to its power to any target.
+Oracle:Double strike\nÉomer, King of Rohan enters the battlefield with a +1/+1 counter on it for each other Human you control.\nWhen Éomer enters the battlefield, target player becomes the monarch. Éomer deals damage equal to its power to any target.

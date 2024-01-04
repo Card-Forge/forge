@@ -128,8 +128,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean aftermath = false;
 
     private boolean blessing = false;
-    private Integer chapter = null;
-    private boolean lastChapter = false;
 
     /** The pay costs. */
     private Cost payCosts;
@@ -829,6 +827,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
     }
+    public void setReplacingObjects(final Map<AbilityKey, Object> repParams) {
+        replacingObjects = AbilityKey.newMap(repParams);
+    }
     public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
         int typesLength = types.length;
         for (int i = 0; i < typesLength; i += 1) {
@@ -1100,22 +1101,18 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isChapter() {
-        return chapter != null;
+        return isTrigger() && getTrigger().isChapter();
     }
 
     public Integer getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(int val) {
-        chapter = val;
+        if (!isTrigger()) {
+            return null;
+        }
+        return getTrigger().getChapter();
     }
 
     public boolean isLastChapter() {
-        return lastChapter;
-    }
-    public boolean setLastChapter(boolean value) {
-        return lastChapter = value;
+        return isTrigger() && getTrigger().isLastChapter();
     }
 
     public CardPlayOption getMayPlayOption() {
@@ -1179,9 +1176,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.payingMana = Lists.newArrayList(payingMana);
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(getPaidHash());
-
-            // copy last chapter flag for Trigger
-            clone.lastChapter = this.lastChapter;
 
             if (usesTargeting()) {
                 // the targets need to be cloned, otherwise they might be cleared

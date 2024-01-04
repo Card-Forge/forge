@@ -1,0 +1,285 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|U|CMA
+#2|Command Tower|C|CMA
+#3|Evolving Wilds|C|CMA
+#4|Temple of the False God|U|CMA
+#5|Lightning Greaves|U|CMA
+#6|Swiftfoot Boots|U|CMA
+#7|Terramorphic Expanse|C|CMA
+#8|Eternal Witness|U|CMA
+#9|Skullclamp|U|CMA
+#10|Commander's Sphere|C|CMA
+#11|Thought Vessel|C|CMA
+#12|Darksteel Ingot|U|CMA
+#13|Bojuka Bog|C|CMA
+#14|Sakura-Tribe Elder|C|CMA
+#15|Path to Exile|U|CMA
+#16|Diabolic Tutor|U|CMA
+#17|Acidic Slime|U|CMA
+#18|Krosan Grip|U|CMA
+#19|Myriad Landscape|U|CMA
+#20|Ghost Quarter|U|CMA
+#21|Reclamation Sage|U|CMA
+#22|Return to Dust|U|CMA
+#23|Opal Palace|C|CMA
+#24|Orzhov Signet|C|CMA
+#25|Rakdos Signet|C|CMA
+#26|Wood Elves|C|CMA
+#27|Elvish Mystic|C|CMA
+#28|Putrefy|U|CMA
+#29|Llanowar Elves|C|CMA
+#30|Arcane Denial|C|CMA
+#31|High Market|R|CMA
+#32|Azorius Chancery|C|CMA
+#33|Blue Sun's Zenith|R|CMA
+#34|Boros Signet|C|CMA
+#35|Simic Signet|C|CMA
+#36|Golgari Rot Farm|C|CMA
+#37|Orzhov Basilica|C|CMA
+#38|Terastodon|R|CMA
+#39|Rakdos Carnarium|C|CMA
+#40|Golgari Signet|C|CMA
+#41|Karmic Guide|R|CMA
+#42|Beastmaster Ascension|R|CMA
+#43|Rupture Spire|C|CMA
+#44|Victimize|U|CMA
+#45|Mortify|U|CMA
+#46|Terminate|C|CMA
+#47|Selesnya Sanctuary|C|CMA
+#48|Boros Garrison|C|CMA
+#49|Basalt Monolith|U|CMA
+#50|Seaside Citadel|U|CMA
+#51|Butcher of Malakir|R|CMA
+#52|Jungle Hollow|C|CMA
+#53|Mother of Runes|U|CMA
+#54|Barren Moor|C|CMA
+#55|Transguild Promenade|C|CMA
+#56|Vivid Grove|U|CMA
+#57|Vivid Marsh|U|CMA
+#58|Oran-Rief, the Vastwood|R|CMA
+#59|Selesnya Signet|C|CMA
+#60|Harrow|C|CMA
+#61|Farhaven Elf|C|CMA
+#62|Tranquil Thicket|C|CMA
+#63|Secluded Steppe|C|CMA
+#64|Mycoloth|R|CMA
+#65|Soul of the Harvest|R|CMA
+#66|Bane of Progress|R|CMA
+#67|Conjurer's Closet|R|CMA
+#68|Thousand-Year Elixir|R|CMA
+#69|Rampaging Baloths|M|CMA
+#70|Shriekmaw|U|CMA
+#71|Vivid Meadow|U|CMA
+#72|Tainted Wood|U|CMA
+#73|Eldrazi Monument|M|CMA
+#74|Forgotten Cave|C|CMA
+#75|Praetor's Counsel|M|CMA
+#76|Anger|U|CMA
+#77|Golgari Guildgate|C|CMA
+#78|Mirror Entity|R|CMA
+#79|Song of the Dryads|R|CMA
+#80|Overwhelming Stampede|R|CMA
+#81|Azorius Guildgate|C|CMA
+#82|Simic Guildgate|C|CMA
+#83|Thunderfoot Baloth|R|CMA
+#84|Comet Storm|M|CMA
+#85|Selesnya Guildgate|C|CMA
+#86|Darksteel Mutation|U|CMA
+#87|Priest of Titania|C|CMA
+#88|Jarad, Golgari Lich Lord|M|CMA
+#89|Elvish Visionary|C|CMA
+#90|Akoum Refuge|U|CMA
+#91|Fiend Hunter|U|CMA
+#92|Pathbreaker Ibex|R|CMA
+#93|Grim Backwoods|R|CMA
+#94|Freyalise, Llanowar's Fury|M|CMA
+#95|Sejiri Refuge|U|CMA
+#96|Slippery Karst|C|CMA
+#97|Polluted Mire|C|CMA
+#98|Armillary Sphere|C|CMA
+#99|Elvish Archdruid|R|CMA
+#100|Skullwinder|U|CMA
+#101|Mazirek, Kraul Death Priest|M|CMA
+#102|Pilgrim's Eye|C|CMA
+#103|Overrun|U|CMA
+#104|Sylvan Safekeeper|R|CMA
+#105|Titania, Protector of Argoth|M|CMA
+#106|Satyr Wayfinder|C|CMA
+#107|Bant Panorama|C|CMA
+#108|Syphon Mind|C|CMA
+#109|Golgari Charm|U|CMA
+#110|Control Magic|U|CMA
+#111|Grisly Salvage|C|CMA
+#112|Stranglehold|R|CMA
+#113|Silklash Spider|R|CMA
+#114|Wall of Blossoms|U|CMA
+#115|Bloodspore Thrinax|R|CMA
+#116|Seer's Sundial|R|CMA
+#117|Wonder|U|CMA
+#118|Akroma's Vengeance|R|CMA
+#119|Primordial Sage|R|CMA
+#120|Crystal Vein|U|CMA
+#121|Azami, Lady of Scrolls|R|CMA
+#122|Meren of Clan Nel Toth|M|CMA
+#123|Essence Warden|C|CMA
+#124|Murkfiend Liege|R|CMA
+#125|Angelic Arbiter|R|CMA
+#126|Bonehoard|R|CMA
+#127|Wretched Confluence|R|CMA
+#128|Imperious Perfect|U|CMA
+#129|Earthquake|R|CMA
+#130|Dread Summons|R|CMA
+#131|Lifeblood Hydra|R|CMA
+#132|Primal Growth|C|CMA
+#133|Haunted Fengraf|C|CMA
+#134|Angel of Despair|R|CMA
+#135|Flickerwisp|U|CMA
+#136|Siege Behemoth|R|CMA
+#137|Sylvan Ranger|C|CMA
+#138|Emerald Medallion|R|CMA
+#139|Rise from the Grave|U|CMA
+#140|Akroma, Angel of Fury|R|CMA
+#141|Wash Out|U|CMA
+#142|Wolfbriar Elemental|R|CMA
+#143|Selesnya Charm|U|CMA
+#144|Assault Suit|U|CMA
+#145|Sword of the Paruns|R|CMA
+#146|Angel of Finality|R|CMA
+#147|Bladewing the Risen|R|CMA
+#148|Barter in Blood|U|CMA
+#149|Joraga Warcaller|R|CMA
+#150|Faerie Conclave|U|CMA
+#151|Mistmeadow Witch|U|CMA
+#152|Viridian Emissary|C|CMA
+#153|Altar's Reap|C|CMA
+#154|Scourge of Nel Toth|R|CMA
+#155|Thief of Blood|U|CMA
+#156|Kessig Cagebreakers|R|CMA
+#157|Ezuri, Renegade Leader|R|CMA
+#158|Ambition's Cost|U|CMA
+#159|Lys Alana Huntmaster|C|CMA
+#160|Vulturous Zombie|R|CMA
+#161|Corpse Augur|U|CMA
+#162|Immaculate Magistrate|R|CMA
+#163|Champion of Stray Souls|M|CMA
+#164|Sylvan Offering|R|CMA
+#165|Mulch|C|CMA
+#166|Flickerform|R|CMA
+#167|Pyrohemia|U|CMA
+#168|Wellwisher|C|CMA
+#169|Verdant Force|R|CMA
+#170|Collective Unconscious|R|CMA
+#171|Wave of Vitriol|R|CMA
+#172|Korozda Guildmage|U|CMA
+#173|Saltcrusted Steppe|U|CMA
+#174|Viridian Zealot|R|CMA
+#175|Unexpectedly Absent|R|CMA
+#176|Stonecloaker|U|CMA
+#177|Sever the Bloodline|R|CMA
+#178|Master Warcraft|R|CMA
+#179|Azorius Keyrune|U|CMA
+#180|Duergar Hedge-Mage|U|CMA
+#181|Lotleth Troll|R|CMA
+#182|Molten Slagheap|U|CMA
+#183|Zoetic Cavern|U|CMA
+#184|Timberwatch Elf|C|CMA
+#185|Phyrexian Plaguelord|R|CMA
+#186|Loreseeker's Stone|U|CMA
+#187|Orim's Thunder|C|CMA
+#188|Basandra, Battle Seraph|R|CMA
+#189|Deceiver Exarch|U|CMA
+#190|Centaur Vinecrasher|R|CMA
+#191|Vow of Duty|U|CMA
+#192|Jungle Basin|U|CMA
+#193|Fresh Meat|R|CMA
+#194|Great Oak Guardian|U|CMA
+#195|Masked Admirers|R|CMA
+#196|Reiver Demon|R|CMA
+#197|Drove of Elves|U|CMA
+#198|Desert Twister|U|CMA
+#199|Kazandu Tuskcaller|R|CMA
+#200|Syphon Flesh|U|CMA
+#201|Tornado Elemental|R|CMA
+#202|Predator, Flagship|R|CMA
+#203|Spider Spawning|U|CMA
+#204|Curse of Predation|U|CMA
+#205|Extractor Demon|R|CMA
+#206|Malfegor|M|CMA
+#207|Indrik Stomphowler|U|CMA
+#208|Tariel, Reckoner of Souls|M|CMA
+#209|Tribute to the Wild|U|CMA
+#210|Kirtar's Wrath|R|CMA
+#211|Havenwood Battleground|U|CMA
+#212|Congregate|C|CMA
+#213|Diabolic Servitude|U|CMA
+#214|Shattered Angel|U|CMA
+#215|Soul Snare|U|CMA
+#216|Restore|U|CMA
+#217|Thornweald Archer|C|CMA
+#218|Dread Cacodemon|R|CMA
+#219|Caller of the Pack|U|CMA
+#220|Avatar of Slaughter|R|CMA
+#221|Winged Coatl|C|CMA
+#222|Mana-Charged Dragon|R|CMA
+#223|Grave Sifter|R|CMA
+#224|Wren's Run Packmaster|R|CMA
+#225|Archangel of Strife|R|CMA
+#226|Selesnya Guildmage|U|CMA
+#227|Cloudthresher|R|CMA
+#228|Djinn of Infinite Deceits|R|CMA
+#229|Serra Angel|U|CMA
+#230|Gargoyle Castle|R|CMA
+#231|Eater of Hope|R|CMA
+#232|Wrecking Ball|C|CMA
+#233|Whirlwind|R|CMA
+#234|Vow of Malice|U|CMA
+#235|Phyrexian Rager|C|CMA
+#236|Banshee of the Dread Choir|U|CMA
+#237|Moss Diamond|U|CMA
+#238|Vow of Lightning|U|CMA
+#239|Dungeon Geists|R|CMA
+#240|Lu Xun, Scholar General|R|CMA
+#241|Righteous Cause|U|CMA
+#242|Wolfcaller's Howl|R|CMA
+#243|Hunting Triad|U|CMA
+#244|Titania's Chosen|U|CMA
+#245|Oros, the Avenger|R|CMA
+#246|Surveyor's Scope|R|CMA
+#247|Presence of Gond|C|CMA
+#248|Blood Bairn|C|CMA
+#249|Curse of the Forsaken|U|CMA
+#250|Phantom Nantuko|R|CMA
+#251|Roon of the Hidden Realm|M|CMA
+#252|Elvish Skysweeper|C|CMA
+#253|Fallen Angel|R|CMA
+#254|Death by Dragons|U|CMA
+#255|Curse of Inertia|U|CMA
+#256|Grim Flowering|U|CMA
+#257|Skyward Eye Prophets|U|CMA
+#258|Creeperhulk|R|CMA
+#259|Tempt with Glory|R|CMA
+#260|Rubinia Soulsinger|R|CMA
+#261|Derevi, Empyrial Tactician|M|CMA
+#262|Diviner Spirit|U|CMA
+#263|Voice of All|R|CMA
+#264|Boros Guildmage|U|CMA
+#265|Bathe in Light|U|CMA
+#266|Borrowing 100,000 Arrows|U|CMA
+#267|Aerie Mystics|U|CMA
+#268|Thunderstaff|U|CMA
+#269|Orzhov Guildmage|U|CMA
+#270|Sulfurous Blast|U|CMA
+#271|Kaalia of the Vast|M|CMA
+#272|Furnace Whelp|U|CMA
+#273|Thornwind Faeries|C|CMA
+#274|Lightkeeper of Emeria|U|CMA
+#275|Dragon Whelp|U|CMA
+#276|Hada Spy Patrol|U|CMA
+#277|Aethermage's Touch|R|CMA
+#278|Evincar's Justice|C|CMA
+#279|Leafdrake Roost|U|CMA
+#280|Oni of Wild Places|U|CMA
+#281|Cleansing Beam|U|CMA
+#282|Gwyllion Hedge-Mage|U|CMA
+#283|Razorjaw Oni|U|CMA
+#284|Leonin Bladetrap|U|CMA

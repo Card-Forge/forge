@@ -365,9 +365,9 @@ public class ComputerUtilCost {
                         return false;
                     }
                     if (source.isCreature()) {
-                        // e.g. Sakura Tribe-Elder
+                        // e.g. Sakura-Tribe Elder
                         final Combat combat = ai.getGame().getCombat();
-                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai);
+                        final boolean beforeNextTurn = ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn().equals(ai) && ComputerUtilCard.evaluateCreature(source) <= 150;
                         final boolean creatureInDanger = ComputerUtil.predictCreatureWillDieThisTurn(ai, source, sourceAbility, false)
                                 && !ComputerUtilCombat.willOpposingCreatureDieInCombat(ai, source, combat);
                         final int lifeThreshold = ai.getController().isAI() ? (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD)) : 4;
@@ -636,7 +636,7 @@ public class ComputerUtilCost {
         }
 
         return ComputerUtilMana.canPayManaCost(sa, player, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+                && CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, effect);
     }
 
     public static boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
@@ -760,6 +760,8 @@ public class ComputerUtilCost {
             int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
 
             return evalToken < evalCounter;
+        } else if ("Riot".equals(aiLogic)) {
+            return !SpecialAiLogic.preferHasteForRiot(sa, payer);
         }
 
         // Check for shocklands and similar ETB replacement effects

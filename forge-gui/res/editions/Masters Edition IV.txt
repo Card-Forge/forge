@@ -132,7 +132,7 @@ ScryfallCode=ME4
 15 R Island Sanctuary @Mark Poole
 208 R Jade Monolith @Anson Maddocks
 209 U Juggernaut @Dan Frazier
-88 U Junun Efreet @Christopher Rush
+88 U Junún Efreet @Christopher Rush
 16 C Just Fate @Bradley Williams
 17 R Kismet @Kaja Foglio
 210 R Kormus Bell @Christopher Rush
@@ -144,7 +144,7 @@ ScryfallCode=ME4
 211 C Library of Leng @Daniel Gelon
 89 R Lich @Daniel Gelon
 160 R Lifeforce @Dameon Willich
-90 C Lim-Dul's Cohort @Douglas Shuler
+90 C Lim-Dûl's Cohort @Douglas Shuler
 161 R Living Lands @Jesper Myrfors
 212 U Living Wall @Anson Maddocks
 52 R Mahamoti Djinn @Dan Frazier

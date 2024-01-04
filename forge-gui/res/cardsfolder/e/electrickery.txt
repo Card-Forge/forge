@@ -1,6 +1,6 @@
 Name:Electrickery
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control.
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | NumDmg$ 1 | PrecostDesc$ Overload | CostDesc$ {1}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+A:SP$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control.
+K:Overload:1 R
 Oracle:Electrickery deals 1 damage to target creature you don't control.\nOverload {1}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

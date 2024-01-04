@@ -14,6 +14,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -198,6 +199,14 @@ public class SaveLoadScene extends UIScene {
     public void loadSave() {
         switch (mode) {
             case Save:
+                if (TileMapScene.instance().currentMap().isInMap()) {
+                    //Access to screen should be disabled, but stop the process just in case.
+                    //Saving needs to be disabled inside maps until we can capture and load exact map state
+                    //Otherwise location based events for quests can be skipped by saving and then loading outside the map
+                    Dialog noSave = createGenericDialog("", "!!GAME NOT SAVED!!\nManual saving is only available on the world map","OK",null, null, null);
+                    showDialog(noSave);
+                    return;
+                }
                 if (currentSlot > 0) {
                     //prevent NPE, allowed saveslot is 1 to 10..
                     textInput.setText(buttons.get(currentSlot).actor.getText());
@@ -244,6 +253,8 @@ public class SaveLoadScene extends UIScene {
                             Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Current.player().getQuests().clear();
                             Current.player().resetQuestFlags();
+                            Current.player().setCharacterFlag("newGamePlus", 1);
+                            AdventurePlayer.current().addQuest("28");
                             WorldStage.getInstance().setDirectlyEnterPOI();
                             SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
@@ -260,20 +271,22 @@ public class SaveLoadScene extends UIScene {
 
 
     public void save() {
-        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true, true), currentSlot)) {
-            updateFiles();
-            //ensure the dialog is hidden before switching
+        if (!TileMapScene.instance().currentMap().isInMap()) {
+            if (WorldSave.getCurrentSave().save(textInput.getText() + getSaveFileSuffix(), currentSlot)) {
+                updateFiles();
+                //ensure the dialog is hidden before switching
 
-            Scene restoreScene = Forge.switchToLast();
-            if (restoreScene != null) {
-                restoreScene = Forge.switchToLast();
+                Scene restoreScene = Forge.switchToLast();
+                if (restoreScene != null) {
+                    restoreScene = Forge.switchToLast();
+                }
+
+                if (restoreScene == null) {
+                    restoreScene = GameScene.instance();
+                }
+
+                Forge.switchScene(restoreScene);
             }
-
-            if (restoreScene == null) {
-                restoreScene = GameScene.instance();
-            }
-
-            Forge.switchScene(restoreScene);
         }
     }
 
@@ -356,5 +369,9 @@ public class SaveLoadScene extends UIScene {
         }
         performTouch(scrollPane); //can use mouse wheel if available to scroll
         super.enter();
+    }
+
+    public String getSaveFileSuffix() {
+        return ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true, true);
     }
 }

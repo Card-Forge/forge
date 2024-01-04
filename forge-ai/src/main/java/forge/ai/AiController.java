@@ -363,28 +363,26 @@ public class AiController {
             }
         }
 
-        for (final Trigger tr : card.getTriggers()) {
-            if (!card.hasStartOfKeyword("Saga") && !card.hasStartOfKeyword("Read ahead")) {
+        if (card.isSaga()) {
+            for (final Trigger tr : card.getTriggers()) {
+                if (tr.getMode() != TriggerType.CounterAdded || !tr.isChapter()) {
+                    continue;
+                }
+
+                SpellAbility exSA = tr.ensureAbility().copy(activator);
+
+                if (api != null && exSA.getApi() == api) {
+                    rightapi = true;
+                }
+
+                if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
+                    // AI would not run this chapter if given the chance
+                    // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
+                    return false;
+                }
+
                 break;
             }
-
-            if (tr.getMode() != TriggerType.CounterAdded) {
-                continue;
-            }
-
-            SpellAbility exSA = tr.ensureAbility().copy(activator);
-
-            if (api != null && exSA.getApi() == api) {
-                rightapi = true;
-            }
-
-            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
-                // AI would not run this chapter if given the chance
-                // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
-                return false;
-            }
-
-            break;
         }
 
         if (api != null && !rightapi) {
@@ -763,7 +761,7 @@ public class AiController {
 
         return decision;
     }
-    
+
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
@@ -1303,7 +1301,7 @@ public class AiController {
 
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        AiAttackController aiAtk = new AiAttackController(attacker); 
+        AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
         // Check if we can reinforce with Banding creatures

@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Captain of the Watch|R|M10
+#2|Shivan Dragon|R|M10
+#3|Siege Gang Commander|R|M10
+#4|Earthquake|R|M10
+#5|Ant Queen|R|M10
+#6|Djinn of Wishes|R|M10
+#7|Guardian Seraph|R|M10
+#8|Royal Assassin|R|M10
+#9|Fireball|U|M10
+#10|Serra Angel|U|M10
+#11|Lightwielder Paladin|R|M10
+#12|Magma Phoenix|R|M10
+#13|Planar Cleansing|R|M10
+#14|Overrun|U|M10
+#15|Mind Control|U|M10
+#16|Cemetery Reaper|R|M10
+#17|Baneslayer Angel|M|M10
+#18|Air Elemental|U|M10
+#19|Hypnotic Specter|R|M10
+#20|Magebane Armor|R|M10
+#21|Chandra Nalaar|M|M10
+#22|Ajani Goldmane|M|M10
+#23|Garruk Wildspeaker|M|M10
+#24|Great Sable Stag|R|M10
+#25|Cudgel Troll|U|M10
+#26|Platinum Angel|M|M10
+#27|Master of the Wild Hunt|M|M10
+#28|Kalonian Behemoth|R|M10
+#29|Nightmare|R|M10
+#30|Bogardan Hellkite|M|M10
+#31|Sleep|U|M10
+#32|Harm's Way|U|M10
+#33|Gargoyle Castle|R|M10
+#34|Liliana Vess|M|M10
+#35|Jace Beleren|M|M10
+#36|Pyroclasm|U|M10
+#37|Protean Hydra|M|M10
+#38|Mind Spring|R|M10
+#39|Honor of the Pure|R|M10
+#40|Doom Blade|C|M10
+#41|Howling Banshee|U|M10
+#42|Dragon Whelp|U|M10
+#43|Goblin Artillery|U|M10
+#44|Might of Oaks|R|M10
+#45|Rhox Pikemaster|U|M10
+#46|Clone|R|M10
+#47|Sphinx Ambassador|M|M10
+#48|Prodigal Pyromancer|U|M10
+#49|Lightning Bolt|C|M10
+#50|Acidic Slime|U|M10
+#51|Vampire Nocturnus|M|M10
+#52|Gorgon Flail|U|M10
+#53|Pacifism|C|M10
+#54|Mind Shatter|R|M10
+#55|Consume Spirit|U|M10
+#56|Rise from the Grave|U|M10
+#57|Xathrid Demon|M|M10
+#58|Capricious Efreet|R|M10
+#59|Elvish Archdruid|R|M10
+#60|Whispersilk Cloak|U|M10
+#61|Blinding Mage|C|M10
+#62|White Knight|U|M10
+#63|Armored Ascension|U|M10
+#64|Black Knight|U|M10
+#65|Birds of Paradise|R|M10
+#66|Howl of the Night Pack|U|M10
+#67|Tendrils of Corruption|C|M10
+#68|Awakener Druid|U|M10
+#69|Time Warp|M|M10
+#70|Gravedigger|C|M10
+#71|Phantom Warrior|U|M10
+#72|Assassinate|C|M10
+#73|Goblin Chieftain|R|M10
+#74|Snapping Drake|C|M10
+#75|Elite Vanguard|U|M10
+#76|Divine Verdict|C|M10
+#77|Ball Lightning|R|M10
+#78|Wall of Frost|U|M10
+#79|Inferno Elemental|U|M10
+#80|Borderland Ranger|C|M10
+#81|Merfolk Looter|C|M10
+#82|Bog Wraith|U|M10
+#83|Act of Treason|U|M10
+#84|Rod of Ruin|U|M10
+#85|Stormfront Pegasus|C|M10
+#86|Stampeding Rhino|C|M10
+#87|Wind Drake|C|M10
+#88|Elvish Piper|R|M10
+#89|Veteran Swordsmith|C|M10
+#90|Razorfoot Griffin|C|M10
+#91|Deathmark|U|M10
+#92|Stone Giant|U|M10
+#93|Enormous Baloth|U|M10
+#94|Terramorphic Expanse|C|M10
+#95|Seismic Strike|C|M10
+#96|Dread Warlock|C|M10
+#97|Merfolk Sovereign|R|M10
+#98|Centaur Courser|C|M10
+#99|Illusionary Servant|C|M10
+#100|Giant Spider|C|M10
+#101|Deadly Recluse|C|M10
+#102|Veteran Armorsmith|C|M10
+#103|Child of Night|C|M10
+#104|Undead Slayer|U|M10
+#105|Essence Scatter|C|M10
+#106|Glacial Fortress|R|M10
+#107|Divination|C|M10
+#108|Prized Unicorn|U|M10
+#109|Diabolic Tutor|U|M10
+#110|Celestial Purge|U|M10
+#111|Darksteel Colossus|M|M10
+#112|Wall of Bone|U|M10
+#113|Elvish Visionary|C|M10
+#114|Dragonskull Summit|R|M10
+#115|Rampant Growth|C|M10
+#116|Kelinore Bat|C|M10
+#117|Llanowar Elves|C|M10
+#118|Sign in Blood|C|M10
+#119|Safe Passage|C|M10
+#120|Ice Cage|C|M10
+#121|Griffin Sentinel|C|M10
+#122|Rootbound Crag|R|M10
+#123|Lurking Predators|R|M10
+#124|Giant Growth|C|M10
+#125|Sparkmage Apprentice|C|M10
+#126|Warpath Ghoul|C|M10
+#127|Craw Wurm|C|M10
+#128|Sunpetal Grove|R|M10
+#129|Drowned Catacomb|R|M10
+#130|Windstorm|U|M10
+#131|Looming Shade|C|M10
+#132|Vampire Aristocrat|C|M10
+#133|Weakness|C|M10
+#134|Excommunicate|C|M10
+#135|Entangling Vines|C|M10
+#136|Siege Mastodon|C|M10
+#137|Palace Guard|C|M10
+#138|Soul Warden|C|M10
+#139|Silvercoat Lion|C|M10
+#140|Berserkers of Blood Ridge|C|M10
+#141|Ponder|C|M10
+#142|Drudge Skeletons|C|M10
+#143|Canyon Minotaur|C|M10
+#144|Mind Rot|C|M10
+#145|Runeclaw Bear|C|M10
+#146|Sage Owl|C|M10
+#147|Ignite Disorder|U|M10
+#148|Mold Adder|U|M10
+#149|Traumatize|R|M10
+#150|Righteousness|U|M10
+#151|Unsummon|C|M10
+#152|Zombie Goliath|C|M10
+#153|Cancel|C|M10
+#154|Viashino Spearhunter|C|M10
+#155|Horned Turtle|C|M10
+#156|Flashfreeze|U|M10
+#157|Twincast|R|M10
+#158|Fiery Hellhound|C|M10
+#159|Oakenform|C|M10
+#160|Mist Leopard|C|M10
+#161|Lightning Elemental|C|M10
+#162|Negate|C|M10
+#163|Emerald Oryx|C|M10
+#164|Nature's Spiral|U|M10
+#165|Duress|C|M10
+#166|Lava Axe|C|M10
+#167|Coral Merfolk|C|M10
+#168|Glorious Charge|C|M10
+#169|Indestructibility|R|M10
+#170|Goblin Piker|C|M10
+#171|Disentomb|C|M10
+#172|Alluring Siren|U|M10
+#173|Silence|R|M10
+#174|Coat of Arms|R|M10
+#175|Polymorph|R|M10
+#176|Wall of Fire|U|M10
+#177|Solemn Offering|C|M10
+#178|Relentless Rats|U|M10
+#179|Wall of Faith|C|M10
+#180|Levitation|U|M10
+#181|Naturalize|C|M10
+#182|Bramble Creeper|C|M10
+#183|Jackal Familiar|C|M10
+#184|Kindled Fury|C|M10
+#185|Zephyr Sprite|C|M10
+#186|Fog|C|M10
+#187|Trumpet Blast|C|M10
+#188|Unholy Strength|C|M10
+#189|Pithing Needle|R|M10
+#190|Serpent of the Endless Sea|C|M10
+#191|Panic Attack|C|M10
+#192|Raging Goblin|C|M10
+#193|Tome Scour|C|M10
+#194|Howling Mine|R|M10
+#195|Holy Strength|C|M10
+#196|Manabarbs|R|M10
+#197|Shatter|C|M10
+#198|Regenerate|C|M10
+#199|Lifelink|C|M10
+#200|Disorient|C|M10
+#201|Acolyte of Xathrid|C|M10
+#202|Angel's Mercy|C|M10
+#203|Underworld Dreams|R|M10
+#204|Convincing Mirage|C|M10
+#205|Firebreathing|C|M10
+#206|Burning Inquiry|C|M10
+#207|Mesa Enchantress|R|M10
+#208|Soul Bleed|C|M10
+#209|Jump|C|M10
+#210|Bountiful Harvest|C|M10
+#211|Yawning Fissure|C|M10
+#212|Burst of Speed|C|M10
+#213|Sanguine Bond|R|M10
+#214|Haunting Echoes|R|M10
+#215|Tempest of Light|U|M10
+#216|Open the Vaults|R|M10
+#217|Fabricate|U|M10
+#218|Warp World|R|M10
+#219|Ornithopter|U|M10
+#220|Megrim|U|M10
+#221|Hive Mind|R|M10
+#222|Telepathy|U|M10
+#223|Dragon's Claw|U|M10
+#224|Demon's Horn|U|M10
+#225|Angel's Feather|U|M10
+#226|Wurm's Tooth|U|M10
+#227|Kraken's Eye|U|M10
+#228|Mirror of Fate|R|M10
+#229|Spellbook|U|M10

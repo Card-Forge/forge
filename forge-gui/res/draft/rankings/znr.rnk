@@ -1,0 +1,533 @@
+//Rank|Name|Rarity|Set
+#1|Phylath, World Sculptor|R|ZNR
+#2|Zagras, Thief of Heartbeats|R|ZNR
+#3|Drana, the Last Bloodchief|M|ZNR
+#4|Zareth San, the Trickster|R|ZNR
+#5|Ashaya, Soul of the Wild|M|ZNR
+#6|Nahiri, Heir of the Ancients|M|ZNR
+#7|Nullpriest of Oblivion|R|ZNR
+#8|Ancient Greenwarden|M|ZNR
+#9|Leyline Tyrant|M|ZNR
+#10|Inscription of Abundance|R|ZNR
+#11|Maul of the Skyclaves|R|ZNR
+#12|Nighthawk Scavenger|R|ZNR
+#13|Omnath, Locus of Creation|M|ZNR
+#14|Akiri, Fearless Voyager|R|ZNR
+#15|Felidar Retreat|R|ZNR
+#16|Verazol, the Split Current|R|ZNR
+#17|Master of Winds|R|ZNR
+#18|Angel of Destiny|M|ZNR
+#19|Jace, Mirror Mage|M|ZNR
+#20|Moraug, Fury of Akoum|M|ZNR
+#21|Grakmaw, Skyclave Ravager|R|ZNR
+#22|Shatterskull Charger|R|ZNR
+#23|Yasharn, Implacable Earth|R|ZNR
+#24|Taborax, Hope's Demise|R|ZNR
+#25|Inscription of Ruin|R|ZNR
+#26|Tajuru Paragon|R|ZNR
+#27|Swarm Shambler|R|ZNR
+#28|Bloodchief's Thirst|U|ZNR
+#29|Nissa of Shadowed Boughs|M|ZNR
+#30|Orah, Skyclave Hierophant|R|ZNR
+#31|Tazri, Beacon of Unity|M|ZNR
+#32|Skyclave Shade|R|ZNR
+#33|Luminarch Aspirant|R|ZNR
+#34|Kargan Intimidator|R|ZNR
+#35|Lotus Cobra|R|ZNR
+#36|Lithoform Engine|M|ZNR
+#37|Scute Swarm|R|ZNR
+#38|Squad Commander|R|ZNR
+#39|Magmatic Channeler|R|ZNR
+#40|Inscription of Insight|R|ZNR
+#41|Thundering Rebuke|U|ZNR
+#42|Oran-Rief Ooze|R|ZNR
+#43|Charix, the Raging Isle|R|ZNR
+#44|Roost of Drakes|U|ZNR
+#45|Cragplate Baloth|R|ZNR
+#46|Soul Shatter|R|ZNR
+#47|Legion Angel|R|ZNR
+#48|Journey to Oblivion|U|ZNR
+#49|Murasa Sproutling|U|ZNR
+#50|Fearless Fledgling|U|ZNR
+#51|Sea Gate Stormcaller|M|ZNR
+#52|Crawling Barrens|R|ZNR
+#53|Coralhelm Chronicler|R|ZNR
+#54|Vine Gecko|U|ZNR
+#55|Spoils of Adventure|U|ZNR
+#56|Into the Roil|C|ZNR
+#57|Lullmage's Familiar|U|ZNR
+#58|Thieving Skydiver|R|ZNR
+#59|Merfolk Falconer|U|ZNR
+#60|Roil Eruption|C|ZNR
+#61|Umara Mystic|U|ZNR
+#62|Deadly Alliance|C|ZNR
+#63|Skyclave Apparition|R|ZNR
+#64|Archpriest of Iona|R|ZNR
+#65|Cleric of Life's Bond|U|ZNR
+#66|Linvala, Shield of Sea Gate|R|ZNR
+#67|Murasa Rootgrazer|U|ZNR
+#68|Myriad Construct|R|ZNR
+#69|Kargan Warleader|U|ZNR
+#70|Soaring Thought-Thief|U|ZNR
+#71|Ravager's Mace|U|ZNR
+#72|Thundering Sparkmage|U|ZNR
+#73|Vanquish the Weak|C|ZNR
+#74|Brushfire Elemental|U|ZNR
+#75|Rabid Bite|C|ZNR
+#76|Nahiri's Binding|C|ZNR
+#77|Moss-Pit Skeleton|U|ZNR
+#78|Shadows' Verdict|R|ZNR
+#79|Nimble Trapfinder|R|ZNR
+#80|Relic Robber|R|ZNR
+#81|Iridescent Hornbeetle|U|ZNR
+#82|Rockslide Sorcerer|U|ZNR
+#83|Bubble Snare|C|ZNR
+#84|Skyclave Geopede|U|ZNR
+#85|Valakut Exploration|R|ZNR
+#86|Thwart the Grave|U|ZNR
+#87|Kor Blademaster|U|ZNR
+#88|Synchronized Spellcraft|C|ZNR
+#89|Emeria Captain|U|ZNR
+#90|Skyclave Pick-Axe|U|ZNR
+#91|Canyon Jerboa|U|ZNR
+#92|Relic Amulet|U|ZNR
+#93|Scion of the Swarm|U|ZNR
+#94|Cunning Geysermage|C|ZNR
+#95|Attended Healer|U|ZNR
+#96|Paired Tactician|U|ZNR
+#97|Feed the Swarm|C|ZNR
+#98|Goma Fada Vanguard|U|ZNR
+#99|Taunting Arbormage|U|ZNR
+#100|Windrider Wizard|U|ZNR
+#101|Gnarlid Colony|C|ZNR
+#102|Veteran Adventurer|U|ZNR
+#103|Scourge of the Skyclaves|M|ZNR
+#104|Relic Axe|U|ZNR
+#105|Tazeem Roilmage|C|ZNR
+#106|Shatterskull Minotaur|U|ZNR
+#107|Shadow Stinger|U|ZNR
+#108|Skyclave Plunder|U|ZNR
+#109|Malakir Blood-Priest|C|ZNR
+#110|Roiling Regrowth|U|ZNR
+#111|Vastwood Surge|U|ZNR
+#112|Fissure Wizard|C|ZNR
+#113|Sure-Footed Infiltrator|U|ZNR
+#114|Mind Carver|U|ZNR
+#115|Demon's Disciple|U|ZNR
+#116|Acquisitions Expert|U|ZNR
+#117|Shepherd of Heroes|C|ZNR
+#118|Ruin Crab|U|ZNR
+#119|Maddening Cacophony|R|ZNR
+#120|Reclaim the Wastes|C|ZNR
+#121|Skyclave Shadowcat|U|ZNR
+#122|Relic Vial|U|ZNR
+#123|Risen Riptide|C|ZNR
+#124|Cinderclasm|U|ZNR
+#125|Archon of Emeria|R|ZNR
+#126|Joraga Visionary|C|ZNR
+#127|Lullmage's Domination|U|ZNR
+#128|Practiced Tactics|C|ZNR
+#129|Coveted Prize|R|ZNR
+#130|Grotag Bug-Catcher|C|ZNR
+#131|Expedition Diviner|C|ZNR
+#132|Grotag Night-Runner|U|ZNR
+#133|Merfolk Windrobber|U|ZNR
+#134|Tazeem Raptor|C|ZNR
+#135|Field Research|C|ZNR
+#136|Stonework Packbeast|C|ZNR
+#137|Kazandu Stomper|C|ZNR
+#138|Kor Celebrant|C|ZNR
+#139|Allied Assault|U|ZNR
+#140|Marauding Blight-Priest|C|ZNR
+#141|Springmantle Cleric|U|ZNR
+#142|Canopy Baloth|C|ZNR
+#143|Scale the Heights|C|ZNR
+#144|Kaza, Roil Chaser|R|ZNR
+#145|Subtle Strike|C|ZNR
+#146|Blood Beckoning|C|ZNR
+#147|Expedition Champion|C|ZNR
+#148|Sea Gate Colossus|C|ZNR
+#149|Expedition Skulker|C|ZNR
+#150|Dauntless Survivor|C|ZNR
+#151|Akoum Hellhound|C|ZNR
+#152|Kitesail Cleric|U|ZNR
+#153|Seafloor Stalker|C|ZNR
+#154|Ardent Electromancer|C|ZNR
+#155|Tajuru Blightblade|C|ZNR
+#156|Skyclave Relic|R|ZNR
+#157|Molten Blast|C|ZNR
+#158|Drana's Silencer|C|ZNR
+#159|Ghastly Gloomhunter|C|ZNR
+#160|Territorial Scythecat|C|ZNR
+#161|Nimana Skydancer|C|ZNR
+#162|Fireblade Charger|U|ZNR
+#163|Relic Golem|U|ZNR
+#164|Pyroclastic Hellion|C|ZNR
+#165|Expedition Healer|C|ZNR
+#166|Scorch Rider|C|ZNR
+#167|Dreadwurm|C|ZNR
+#168|Hagra Constrictor|C|ZNR
+#169|Resolute Strike|C|ZNR
+#170|Lithoform Blight|U|ZNR
+#171|Murasa Brute|C|ZNR
+#172|Angelheart Protector|C|ZNR
+#173|Prowling Felidar|C|ZNR
+#174|Spitfire Lagac|C|ZNR
+#175|Farsight Adept|C|ZNR
+#176|Might of Murasa|C|ZNR
+#177|Scavenged Blade|C|ZNR
+#178|Guul Draz Mucklord|C|ZNR
+#179|Skyclave Squid|C|ZNR
+#180|Deliberate|C|ZNR
+#181|Turntimber Ascetic|C|ZNR
+#182|Kazandu Nectarpot|C|ZNR
+#183|Makindi Ox|C|ZNR
+#184|Nissa's Zendikon|C|ZNR
+#185|Oblivion's Hunger|C|ZNR
+#186|Nimana Skitter-Sneak|C|ZNR
+#187|Sea Gate Banneret|C|ZNR
+#188|Cascade Seer|C|ZNR
+#189|Zulaport Duelist|C|ZNR
+#190|Anticognition|C|ZNR
+#191|Cliffhaven Sell-Sword|C|ZNR
+#192|Kabira Outrider|C|ZNR
+#193|Shell Shield|C|ZNR
+#194|Mind Drain|C|ZNR
+#195|Glacial Grasp|C|ZNR
+#196|Teeterpeak Ambusher|C|ZNR
+#197|Living Tempest|C|ZNR
+#198|Sizzling Barrage|C|ZNR
+#199|Strength of Solidarity|C|ZNR
+#200|Tormenting Voice|C|ZNR
+#201|Blood Price|C|ZNR
+#202|Chilling Trap|C|ZNR
+#203|Throne of Makindi|R|ZNR
+#204|Inordinate Rage|C|ZNR
+#205|Utility Knife|C|ZNR
+#206|Spare Supplies|C|ZNR
+#207|Adventure Awaits|C|ZNR
+#208|Highborn Vampire|C|ZNR
+#209|Cleansing Wildfire|C|ZNR
+#210|Sneaking Guide|C|ZNR
+#211|Tajuru Snarecaster|C|ZNR
+#212|Dauntless Unity|C|ZNR
+#213|Mesa Lynx|C|ZNR
+#214|Tuktuk Rubblefort|C|ZNR
+#215|Base Camp|U|ZNR
+#216|Skyclave Sentinel|C|ZNR
+#217|Cliffhaven Kitesail|C|ZNR
+#218|Pressure Point|C|ZNR
+#219|Disenchant|C|ZNR
+#220|Broken Wings|C|ZNR
+#221|Cleric of Chill Depths|C|ZNR
+#222|Confounding Conundrum|R|ZNR
+#223|Nahiri's Lithoforming|R|ZNR
+#224|Negate|C|ZNR
+#225|Smite the Monstrous|C|ZNR
+#226|Concerted Defense|U|ZNR
+#227|Forsaken Monument|M|ZNR
+#228|Wayward Guide-Beast|R|ZNR
+#229|Roiling Vortex|R|ZNR
+#1|Angel of Sanctions|M|AKR
+#2|Liliana, Death's Majesty|M|AKR
+#3|Glorybringer|R|AKR
+#4|The Scorpion God|M|AKR
+#5|Archfiend of Ifnir|R|AKR
+#6|The Locust God|M|AKR
+#7|The Scarab God|M|AKR
+#8|Gideon of the Trials|M|AKR
+#9|Samut, Voice of Dissent|M|AKR
+#10|Rhonas the Indomitable|M|AKR
+#11|Grind Dust|R|AKR
+#12|Nissa, Steward of Elements|M|AKR
+#13|Hornet Queen|M|AKR
+#14|Bontu's Last Reckoning|R|AKR
+#15|Never Return|R|AKR
+#16|Hour of Devastation|R|AKR
+#17|Curator of Mysteries|R|AKR
+#18|Unesh, Criosphinx Sovereign|M|AKR
+#19|Insult Injury|R|AKR
+#20|Cut Ribbons|R|AKR
+#21|Samut, the Tested|M|AKR
+#22|Wrath of God|R|AKR
+#23|Jace, Unraveler of Secrets|M|AKR
+#24|Drake Haven|R|AKR
+#25|Vizier of Many Faces|R|AKR
+#26|Pride Sovereign|R|AKR
+#27|Vizier of the Menagerie|M|AKR
+#28|Cast Out|U|AKR
+#29|Earthshaker Khenra|R|AKR
+#30|Majestic Myriarch|M|AKR
+#31|God-Pharaoh's Gift|R|AKR
+#32|Chandra, Pyromaster|M|AKR
+#33|Crested Sunmare|M|AKR
+#34|Desert's Hold|U|AKR
+#35|Oketra the True|M|AKR
+#36|Liliana's Mastery|R|AKR
+#37|Abrade|U|AKR
+#38|Struggle Survive|U|AKR
+#39|Temmet, Vizier of Naktamun|R|AKR
+#40|Sphinx's Revelation|M|AKR
+#41|Hazoret the Fervent|M|AKR
+#42|Resilient Khenra|R|AKR
+#43|Sifter Wurm|U|AKR
+#44|Neheb, the Worthy|R|AKR
+#45|Nicol Bolas, God-Pharaoh|M|AKR
+#46|Prepare Fight|R|AKR
+#47|Dusk Dawn|R|AKR
+#48|Hour of Revelation|R|AKR
+#49|Deem Worthy|U|AKR
+#50|Neheb, the Eternal|M|AKR
+#51|Glory-Bound Initiate|R|AKR
+#52|Oketra's Attendant|U|AKR
+#53|Sand Strangler|U|AKR
+#54|Trial of Zeal|U|AKR
+#55|Anger of the Gods|R|AKR
+#56|Sunscourge Champion|U|AKR
+#57|Champion of Wits|R|AKR
+#58|Kefnet the Mindful|M|AKR
+#59|Sweltering Suns|R|AKR
+#60|Aven Wind Guide|U|AKR
+#61|Hapatra, Vizier of Poisons|R|AKR
+#62|Trial of Solidarity|U|AKR
+#63|Final Reward|C|AKR
+#64|Ahn-Crop Crasher|U|AKR
+#65|Magma Spray|C|AKR
+#66|Open Fire|C|AKR
+#67|Prowling Serpopard|R|AKR
+#68|Farm Market|U|AKR
+#69|Merciless Javelineer|U|AKR
+#70|Nimble Obstructionist|R|AKR
+#71|Ominous Sphinx|U|AKR
+#72|Bone Picker|U|AKR
+#73|Ruthless Sniper|U|AKR
+#74|Cartouche of Strength|C|AKR
+#75|Crocodile of the Crossing|U|AKR
+#76|Ahn-Crop Champion|U|AKR
+#77|Consign Oblivion|U|AKR
+#78|River Hoopoe|U|AKR
+#79|Edifice of Authority|U|AKR
+#80|Compulsory Rest|C|AKR
+#81|Fan Bearer|C|AKR
+#82|Overwhelming Splendor|M|AKR
+#83|Lay Claim|U|AKR
+#84|Vizier of Tumbling Sands|U|AKR
+#85|Baleful Ammit|U|AKR
+#86|Gravedigger|U|AKR
+#87|Burning-Fist Minotaur|U|AKR
+#88|Mouth Feed|R|AKR
+#89|Destined Lead|U|AKR
+#90|Heaven Earth|R|AKR
+#91|Khenra Charioteer|U|AKR
+#92|Wayward Servant|U|AKR
+#93|Mirage Mirror|R|AKR
+#94|Pact of Negation|R|AKR
+#95|Thoughtseize|R|AKR
+#96|Aven Mindcensor|R|AKR
+#97|Cartouche of Knowledge|C|AKR
+#98|Bontu the Glorified|M|AKR
+#99|Lord of the Accursed|U|AKR
+#100|Fervent Paincaster|U|AKR
+#101|Puncturing Blow|C|AKR
+#102|Enigma Drake|U|AKR
+#103|Honored Crop-Captain|U|AKR
+#104|Obelisk Spider|U|AKR
+#105|Perilous Vault|R|AKR
+#106|Gust Walker|C|AKR
+#107|Steward of Solidarity|U|AKR
+#108|Pull from Tomorrow|R|AKR
+#109|Vizier of the Anointed|U|AKR
+#110|Torment of Hailfire|R|AKR
+#111|Combat Celebrant|M|AKR
+#112|Harsh Mentor|R|AKR
+#113|Exemplar of Strength|U|AKR
+#114|Shefet Monitor|U|AKR
+#115|Driven Despair|R|AKR
+#116|Desert of the Fervent|C|AKR
+#117|Tah-Crop Elite|C|AKR
+#118|Cartouche of Ambition|C|AKR
+#119|Vile Manifestation|U|AKR
+#120|Champion of Rhonas|R|AKR
+#121|Hour of Promise|R|AKR
+#122|Synchronized Strike|U|AKR
+#123|Shadowstorm Vizier|U|AKR
+#124|Start Finish|U|AKR
+#125|Desert of the Glorified|C|AKR
+#126|Desert of the Indomitable|C|AKR
+#127|Desert of the True|C|AKR
+#128|Demonic Pact|M|AKR
+#129|Cartouche of Solidarity|C|AKR
+#130|Oketra's Avenger|C|AKR
+#131|Vizier of Deferment|U|AKR
+#132|Aven Initiate|C|AKR
+#133|Eternal of Harsh Truths|U|AKR
+#134|Riddleform|U|AKR
+#135|Splendid Agony|C|AKR
+#136|Battlefield Scavenger|U|AKR
+#137|Nef-Crop Entangler|C|AKR
+#138|Hooded Brawler|C|AKR
+#139|Rags Riches|R|AKR
+#140|Rhonas's Monument|U|AKR
+#141|Canyon Slough|R|AKR
+#142|Desert of the Mindful|C|AKR
+#143|Fetid Pools|R|AKR
+#144|Irrigated Farmland|R|AKR
+#145|Scattered Groves|R|AKR
+#146|Sheltered Thicket|R|AKR
+#147|Binding Mummy|C|AKR
+#148|Dauntless Aven|C|AKR
+#149|Commit Memory|R|AKR
+#150|Shimmerscale Drake|C|AKR
+#151|Wander in Death|C|AKR
+#152|Wasteland Scorpion|C|AKR
+#153|Defiant Greatmaw|U|AKR
+#154|Naga Vitalist|C|AKR
+#155|Oasis Ritualist|C|AKR
+#156|Rhonas's Stalwart|C|AKR
+#157|Trial of Strength|U|AKR
+#158|Hollow One|R|AKR
+#159|Sunset Pyramid|U|AKR
+#160|Ifnir Deadlands|U|AKR
+#161|Djeru's Resolve|C|AKR
+#162|Aerial Guide|C|AKR
+#163|Essence Scatter|C|AKR
+#164|Hieroglyphic Illumination|C|AKR
+#165|Spellweaver Eternal|C|AKR
+#166|Supreme Will|U|AKR
+#167|Unquenchable Thirst|C|AKR
+#168|Blighted Bat|C|AKR
+#169|Doomfall|U|AKR
+#170|Trial of Ambition|U|AKR
+#171|Cartouche of Zeal|C|AKR
+#172|Khenra Scrapper|C|AKR
+#173|Magmaroth|U|AKR
+#174|Thresher Lizard|C|AKR
+#175|Hope Tender|U|AKR
+#176|Watchful Naga|U|AKR
+#177|Appeal Authority|U|AKR
+#178|Onward Victory|U|AKR
+#179|Abandoned Sarcophagus|R|AKR
+#180|Oketra's Monument|U|AKR
+#181|Ramunap Ruins|U|AKR
+#182|Shefet Dunes|U|AKR
+#183|Wasp of the Bitter End|U|AKR
+#184|Lord of Extinction|R|AKR
+#185|Gideon's Intervention|R|AKR
+#186|Impeccable Timing|C|AKR
+#187|Vizier of Remedies|U|AKR
+#188|Censor|U|AKR
+#189|Cryptic Serpent|U|AKR
+#190|Labyrinth Guardian|U|AKR
+#191|Trial of Knowledge|U|AKR
+#192|Cruel Reality|M|AKR
+#193|Dread Wanderer|R|AKR
+#194|Lethal Sting|C|AKR
+#195|Nest of Scarabs|U|AKR
+#196|Pitiless Vizier|C|AKR
+#197|Razaketh, the Foulblooded|M|AKR
+#198|Soulstinger|C|AKR
+#199|Supernatural Stamina|C|AKR
+#200|Unburden|C|AKR
+#201|Desert Cerodon|C|AKR
+#202|Bitterbow Sharpshooters|C|AKR
+#203|Greater Sandwurm|C|AKR
+#204|Quarry Hauler|C|AKR
+#205|Spring Mind|U|AKR
+#206|Wall of Forgotten Pharaohs|C|AKR
+#207|Hashep Oasis|U|AKR
+#208|Zealot of the God-Pharaoh|C|AKR
+#209|Collected Company|R|AKR
+#210|Aven of Enduring Hope|C|AKR
+#211|Those Who Serve|C|AKR
+#212|Unconventional Tactics|U|AKR
+#213|Winds of Rebuke|C|AKR
+#214|Horror of the Broken Lands|C|AKR
+#215|Brute Strength|C|AKR
+#216|Firebrand Archer|C|AKR
+#217|Gilded Cerodon|C|AKR
+#218|Thorned Moloch|C|AKR
+#219|Ornery Kudu|C|AKR
+#220|Shed Weakness|C|AKR
+#221|Stinging Shot|C|AKR
+#222|Forsake the Worldly|C|AKR
+#223|Supply Caravan|C|AKR
+#224|Floodwaters|C|AKR
+#225|Naga Oracle|C|AKR
+#226|Striped Riverwinder|C|AKR
+#227|Doomed Dissenter|C|AKR
+#228|Khenra Eternal|C|AKR
+#229|Blur of Blades|C|AKR
+#230|Pathmaker Initiate|C|AKR
+#231|Pursue Glory|C|AKR
+#232|Initiate's Companion|C|AKR
+#233|Ramunap Excavator|R|AKR
+#234|Sidewinder Naga|C|AKR
+#235|Watchers of the Dead|U|AKR
+#236|Evolving Wilds|C|AKR
+#237|Ipnu Rivulet|U|AKR
+#238|Anointer Priest|C|AKR
+#239|Approach of the Second Sun|R|AKR
+#240|Mighty Leap|C|AKR
+#241|Renewed Faith|U|AKR
+#242|Solitary Camel|C|AKR
+#243|Countervailing Winds|C|AKR
+#244|New Perspectives|R|AKR
+#245|Strategic Planning|C|AKR
+#246|Marauding Boneslasher|C|AKR
+#247|Beneath the Sands|C|AKR
+#248|Feral Prowler|C|AKR
+#249|Sandwurm Convergence|R|AKR
+#250|Claim Fame|U|AKR
+#251|Reason Believe|R|AKR
+#252|Reduce Rubble|U|AKR
+#253|Throne of the God-Pharaoh|R|AKR
+#254|Disposal Mummy|C|AKR
+#255|In Oketra's Name|C|AKR
+#256|Hekma Sentinels|C|AKR
+#257|Seeker of Insight|C|AKR
+#258|Seer of the Last Tomorrow|C|AKR
+#259|Festering Mummy|C|AKR
+#260|Bloodlust Inciter|C|AKR
+#261|Imminent Doom|R|AKR
+#262|Soul-Scar Mage|R|AKR
+#263|Dissenter's Deliverance|C|AKR
+#264|Pouncing Cheetah|C|AKR
+#265|Refuse Cooperate|R|AKR
+#266|Gate to the Afterlife|U|AKR
+#267|Hazoret's Monument|U|AKR
+#268|Cascading Cataracts|R|AKR
+#269|Rest in Peace|R|AKR
+#270|Sacred Cat|C|AKR
+#271|Ancient Crab|C|AKR
+#272|As Foretold|M|AKR
+#273|Compelling Argument|C|AKR
+#274|Slither Blade|C|AKR
+#275|Miasmic Mummy|C|AKR
+#276|Crash Through|C|AKR
+#277|Nimble-Blade Khenra|C|AKR
+#278|Tormenting Voice|C|AKR
+#279|Manglehorn|U|AKR
+#280|Oashra Cultivator|C|AKR
+#281|Leave Chance|R|AKR
+#282|Bontu's Monument|U|AKR
+#283|Sunscorched Desert|C|AKR
+#284|Anointed Procession|R|AKR
+#285|Protection of the Hekma|U|AKR
+#286|Dune Beetle|C|AKR
+#287|Scarab Feast|C|AKR
+#288|Kefnet's Monument|U|AKR
+#289|Solemnity|R|AKR
+#290|Haze of Pollen|C|AKR
+#291|Failure Comply|R|AKR
+#292|Crypt of the Eternals|U|AKR
+#293|Trespasser's Curse|C|AKR
+#294|By Force|U|AKR
+#295|Glorious End|M|AKR
+#296|Sixth Sense|U|AKR
+#297|Scavenger Grounds|R|AKR
+#298|Shatterstorm|R|AKR
+#299|Chandra's Defeat|U|AKR
+#300|Life Goes On|C|AKR
+#301|Liliana's Defeat|U|AKR
+#302|Shadow of the Grave|R|AKR
+#303|Dispossess|R|AKR

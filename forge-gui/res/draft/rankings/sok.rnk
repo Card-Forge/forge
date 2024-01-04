@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Skyfire Kirin|R|SOK
+#2|Infernal Kirin|R|SOK
+#3|Celestial Kirin|R|SOK
+#4|Kagemaro, First to Suffer|R|SOK
+#5|Ghost Lit Raider|U|SOK
+#6|Jiwari, the Earth Aflame|R|SOK
+#7|Cloudhoof Kirin|R|SOK
+#8|Arashi, the Sky Asunder|R|SOK
+#9|Homura, Human Ascendant|R|SOK
+#10|Charge Across the Araba|U|SOK
+#11|Soramaro, First to Dream|R|SOK
+#12|Kiku's Shadow|U|SOK
+#13|Reverence|R|SOK
+#14|Bounteous Kirin|R|SOK
+#15|Hail of Arrows|U|SOK
+#16|Hand of Cruelty|U|SOK
+#17|O Naginata|U|SOK
+#18|Kami of the Tended Garden|U|SOK
+#19|Akuta, Born of Ash|R|SOK
+#20|Kagemaro's Clutch|C|SOK
+#21|Secretkeeper|U|SOK
+#22|Masumaro, First to Live|R|SOK
+#23|Iizuka the Ruthless|R|SOK
+#24|Hand of Honor|U|SOK
+#25|Razorjaw Oni|U|SOK
+#26|Spiraling Embers|C|SOK
+#27|Exile into Darkness|U|SOK
+#28|Stampeding Serow|U|SOK
+#29|Manriki Gusari|U|SOK
+#30|Ghost Lit Nourisher|U|SOK
+#31|Ayumi, the Last Visitor|R|SOK
+#32|Kiyomaro, First to Stand|R|SOK
+#33|Barrel Down Sokenzan|C|SOK
+#34|Michiko Konda, Truth Seeker|R|SOK
+#35|Descendant of Kiyomaro|U|SOK
+#36|Oboro Envoy|U|SOK
+#37|Briarknit Kami|U|SOK
+#38|Promise of Bunrei|R|SOK
+#39|Sakashima the Impostor|R|SOK
+#40|Elder Pine of Jukai|C|SOK
+#41|Haru Onna|U|SOK
+#42|Kiri Onna|U|SOK
+#43|Oni of Wild Places|U|SOK
+#44|Rushing Tide Zubera|U|SOK
+#45|Undying Flames|R|SOK
+#46|Shinen of Flight's Wings|C|SOK
+#47|Tomb of Urami|R|SOK
+#48|Eiganjo Free Riders|U|SOK
+#49|Burning Eye Zubera|U|SOK
+#50|Sokenzan Spellblade|C|SOK
+#51|Choice of Damnations|R|SOK
+#52|Maga, Traitor to Mortals|R|SOK
+#53|Adamaro, First to Desire|R|SOK
+#54|Kemuri Onna|U|SOK
+#55|Moonwing Moth|C|SOK
+#56|Moonbow Illusionist|C|SOK
+#57|Okina Nightwatch|C|SOK
+#58|Shinen of Life's Roar|C|SOK
+#59|Skull Collector|U|SOK
+#60|Kataki, War's Wage|R|SOK
+#61|Sekki, Seasons' Guide|R|SOK
+#62|Inner Calm, Outer Strength|C|SOK
+#63|Soratami Cloud Chariot|U|SOK
+#64|Ghost Lit Stalker|U|SOK
+#65|Molting Skin|U|SOK
+#66|Raving Oni Slave|C|SOK
+#67|Deathmask Nezumi|C|SOK
+#68|Kashi Tribe Elite|U|SOK
+#69|Akki Underling|C|SOK
+#70|Captive Flame|U|SOK
+#71|Kitsune Loreweaver|C|SOK
+#72|Kuro's Taken|C|SOK
+#73|Ghost Lit Redeemer|U|SOK
+#74|Death Denied|C|SOK
+#75|Nikko Onna|U|SOK
+#76|Nightsoil Kami|C|SOK
+#77|Shinen of Stars' Light|C|SOK
+#78|Kami of Empty Graves|C|SOK
+#79|Ghost Lit Warder|U|SOK
+#80|Overwhelming Intellect|U|SOK
+#81|Descendant of Masumaro|U|SOK
+#82|Erayo, Soratami Ascendant|R|SOK
+#83|Araba Mothrider|C|SOK
+#84|Yuki Onna|U|SOK
+#85|Shinen of Fury's Fire|C|SOK
+#86|Freed from the Real|C|SOK
+#87|Pithing Needle|R|SOK
+#88|Miren, the Moaning Well|R|SOK
+#89|Kaho, Minamo Historian|R|SOK
+#90|Torii Watchward|C|SOK
+#91|Plow Through Reito|C|SOK
+#92|Twincast|R|SOK
+#93|Seek the Horizon|U|SOK
+#94|Mikokoro, Center of the Sea|R|SOK
+#95|Descendant of Soramaro|C|SOK
+#96|Meishin, the Mind Cage|R|SOK
+#97|Kuon, Ogre Ascendant|R|SOK
+#98|Feral Lightning|U|SOK
+#99|Akki Drillmaster|C|SOK
+#100|Endless Swarm|R|SOK
+#101|Sink into Takenuma|C|SOK
+#102|Spiritual Visit|C|SOK
+#103|Shape Stealer|U|SOK
+#104|Hidetsugu's Second Rite|R|SOK
+#105|Kami of the Crescent Moon|R|SOK
+#106|Godo's Irregulars|U|SOK
+#107|Path of Anger's Flame|C|SOK
+#108|Thoughts of Ruin|R|SOK
+#109|Neverending Torment|R|SOK
+#110|Oboro Breezecaller|C|SOK
+#111|Ronin Cavekeeper|C|SOK
+#112|Sasaya, Orochi Ascendant|R|SOK
+#113|Promised Kannushi|C|SOK
+#114|Cowed by Wisdom|C|SOK
+#115|Kitsune Dawnblade|C|SOK
+#116|Minamo Scrollkeeper|C|SOK
+#117|Glitterfang|C|SOK
+#118|Sakura Tribe Scout|C|SOK
+#119|Oboro, Palace in the Clouds|R|SOK
+#120|Reki, the History of Kamigawa|R|SOK
+#121|Murmurs from Beyond|C|SOK
+#122|Inner Chamber Guard|U|SOK
+#123|Aether Shockwave|U|SOK
+#124|Fiddlehead Kami|C|SOK
+#125|Locust Miser|U|SOK
+#126|Rending Vines|C|SOK
+#127|Sokenzan Renegade|U|SOK
+#128|Dreamcatcher|C|SOK
+#129|Matsu Tribe Birdstalker|C|SOK
+#130|Rune Tail, Kitsune Ascendant|R|SOK
+#131|Gaze of Adamaro|U|SOK
+#132|Gnat Miser|C|SOK
+#133|Curtain of Light|C|SOK
+#134|Scroll of Origins|R|SOK
+#135|Pain's Reward|R|SOK
+#136|Footsteps of the Goryo|U|SOK
+#137|Oppressive Will|C|SOK
+#138|Eternal Dominion|R|SOK
+#139|Shinen of Fear's Chill|C|SOK
+#140|Ideas Unbound|C|SOK
+#141|Iname as One|R|SOK
+#142|Trusted Advisor|U|SOK
+#143|Deathknell Kami|C|SOK
+#144|Dense Canopy|U|SOK
+#145|Evermind|U|SOK
+#146|Death of a Thousand Stings|C|SOK
+#147|Sunder from Within|U|SOK
+#148|Seed the Land|R|SOK
+#149|Kitsune Bonesetter|C|SOK
+#150|Presence of the Wise|U|SOK
+#151|Ivory Crane Netsuke|U|SOK
+#152|Rally the Horde|R|SOK
+#153|Dosan's Oldest Chant|C|SOK
+#154|Ebony Owl Netsuke|U|SOK
+#155|Measure of Wickedness|U|SOK
+#156|Cut the Earthly Bond|C|SOK
+#157|Enduring Ideal|R|SOK
+#158|Pure Intentions|R|SOK
+#159|Into the Fray|C|SOK
+#160|Blood Clock|R|SOK
+#161|Ashes of the Fallen|R|SOK
+#162|Wine of Blood and Iron|R|SOK
+#163|Inner Fire|C|SOK
+#164|Shifting Borders|U|SOK
+#165|One with Nothing|R|SOK

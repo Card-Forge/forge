@@ -1,7 +1,7 @@
 Name:The Bloodsky Massacre
 ManaCost:1 B R
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBEffect,DBMana
+K:Chapter:3:DBToken,DBEffect,DBMana
 SVar:DBToken:DB$ Token | TokenScript$ r_2_3_demon_berserker_menace | SpellDescription$ Create a 2/3 red Demon Berserker creature token with menace.
 SVar:DBEffect:DB$ Effect | Triggers$ TAttack | SpellDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.
 SVar:TAttack:Mode$ Attacks | ValidCard$ Berserker | Execute$ TrigDraw | TriggerDescription$ Whenever a Berserker attacks this turn, you draw a card and you lose 1 life.

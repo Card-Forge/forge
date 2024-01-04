@@ -193,6 +193,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, Integer> additionalVotes = Maps.newHashMap();
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
+    private Map<Long, Integer> additionalVillainousChoices = Maps.newHashMap();
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -3175,6 +3176,36 @@ public class Player extends GameEntity implements Comparable<Player> {
         return eff;
     }
 
+    public void createPlanechaseEffects(Game game) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        final String name = "Planar Dice";
+        final Card eff = new Card(game.nextCardId(), game);
+        eff.setTimestamp(game.getNextTimestamp());
+        eff.setName(name);
+        eff.setOwner(this);
+        eff.setImmutable(true);
+        String image = ImageKeys.getTokenKey("planechase");
+        eff.setImageKey(image);
+
+        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | ValidPlayer$ You | Secondary$ True | " +
+                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
+        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
+        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, eff, true);
+        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, eff));
+        eff.addTrigger(planesWalkTrigger);
+
+        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
+                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
+                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
+        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, eff);
+        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
+        eff.addSpellAbility(planarRoll);
+        
+        eff.updateStateForView();
+        com.add(eff);
+        this.updateZoneForView(com);
+    }
+
     public void createTheRing(Card host) {
         final PlayerZone com = getZone(ZoneType.Command);
         if (theRing == null) {
@@ -3677,6 +3708,26 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
         return controlVotes.last();
+    }
+
+    public void addAdditionalVillainousChoices(long timestamp, int value) {
+        additionalVillainousChoices.put(timestamp, value);
+        getView().updateAdditionalVillainousChoices(this);
+        getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+    }
+    public void removeAdditionalVillainousChoices(long timestamp) {
+        if (additionalVillainousChoices.remove(timestamp) != null) {
+            getView().updateAdditionalVillainousChoices(this);
+            getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
+        }
+    }
+
+    public int getAdditionalVillainousChoices() {
+        int value = 0;
+        for (Integer i : additionalVillainousChoices.values()) {
+            value += i;
+        }
+        return value;
     }
 
     public void addCycled(SpellAbility sp) {

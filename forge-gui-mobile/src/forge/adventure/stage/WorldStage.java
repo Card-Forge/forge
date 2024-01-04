@@ -208,6 +208,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         WorldSave.getCurrentSave().autoSave();
                         TileMapScene.instance().load(point.getPointOfInterest());
                         stop();
+                        TileMapScene.instance().setFromWorldMap(true);
                         Forge.switchScene(TileMapScene.instance());
                         point.getMapSprite().checkOut();
                     } catch (Exception e) {
@@ -268,7 +269,24 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (list == null)
             return;
         EnemyData enemyData = data.getEnemy(1.0f);
-        spawn(enemyData);
+        EnemyData extraSpawnForQuests = data.getExtraSpawnEnemy(1.0f);
+        if (extraSpawnForQuests != null) {
+            float spawnPicker = rand.nextFloat();
+
+            if (spawnPicker > 0.5f) //todo: make this difficulty dependent, more enemies on harder difficulty
+            {
+                spawn(enemyData);
+                spawn(extraSpawnForQuests);
+            }
+            else if (spawnPicker > 0.2f) {
+                spawn(extraSpawnForQuests);
+            }
+            else {
+                spawn(enemyData);
+            }
+
+        }
+        else spawn(enemyData);
     }
 
     private boolean spawn(EnemySprite sprite){
@@ -390,6 +408,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public void load(SaveFileData data) {
         try {
             clearCache();
+            MapStage.getInstance().clearIsInMap();
+            GameHUD.getInstance().clearNotifications();
             List<Float> timeouts = (List<Float>) data.readObject("timeouts");
             List<String> names = (List<String>) data.readObject("names");
             List<Float> x = (List<Float>) data.readObject("x");
@@ -471,17 +491,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
         for (AdventureQuestData adq: Current.player().getQuests())
         {
             if (adq.isTracked) {
-                if (adq.getTargetPOI() != null) {
-                    navDirection = adq.getTargetPOI().getNavigationVector(player.pos());
+                PointOfInterest nearestValidPOI = adq.getClosestValidPOI(player.pos());
+                if (nearestValidPOI != null) {
+                    navDirection = new Vector2(nearestValidPOI.getPosition()).sub(player.pos());
+                    break;
+                }
 
-                } else if (adq.getTargetEnemySprite() != null) {
+                if (adq.getTargetEnemySprite() != null) {
                     EnemySprite target = adq.getTargetEnemySprite();
                     for (Pair<Float, EnemySprite> active :enemies)
                     {
                         EnemySprite sprite = active.getValue();
                         if (sprite.equals(target)){
-                            navDirection = new Vector2(adq.getTargetEnemySprite().pos()).sub(player.getX(), player.getY());
-                            break;
+                            navDirection = new Vector2(adq.getTargetEnemySprite().pos()).sub(player.pos());
                         }
                     }
                 }

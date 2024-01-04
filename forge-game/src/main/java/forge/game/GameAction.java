@@ -583,9 +583,17 @@ public class GameAction {
             }
         }
 
+        if (!table.isEmpty()) {
+            // we don't want always trigger before counters are placed
+            game.getTriggerHandler().suppressMode(TriggerType.Always);
+            // Need to apply any static effects to produce correct triggers
+            checkStaticAbilities();
+        }
+
         table.replaceCounterEffect(game, null, true, true, params);
 
-        // Need to apply any static effects to produce correct triggers
+        // update static abilities after etb counters have been placed
+        game.getTriggerHandler().clearSuppression(TriggerType.Always);
         checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
@@ -1470,7 +1478,7 @@ public class GameAction {
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
         boolean checkAgain = false;
-        if (!c.getType().hasSubtype("Saga")) {
+        if (!c.isSaga()) {
             return false;
         }
         if (!c.canBeSacrificedBy(null, true)) {
@@ -2082,6 +2090,9 @@ public class GameAction {
             //<THIS CODE WILL WORK WITH PHASE = NULL>
             if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
                 first.initPlane();
+                for (final Player p1 : game.getPlayers()) {
+                    p1.createPlanechaseEffects(game);
+                }
             }
 
             first = runOpeningHandActions(first);

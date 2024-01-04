@@ -1,0 +1,261 @@
+//Rank|Name|Rarity|Set
+#1|Library of Alexandria|R|ME4
+#2|Talas Researcher|U|ME4
+#3|Soldevi Golem|U|ME4
+#4|Overwhelming Forces|R|ME4
+#5|Ali from Cairo|R|ME4
+#6|Ring of Renewal|R|ME4
+#7|Shivan Dragon|R|ME4
+#8|Fire Tempest|R|ME4
+#9|Maze of Ith|R|ME4
+#10|Fireball|U|ME4
+#11|Wicked Pact|U|ME4
+#12|Mishra's Workshop|R|ME4
+#13|Ebon Dragon|R|ME4
+#14|Demonic Tutor|R|ME4
+#15|Dread Reaper|R|ME4
+#16|Bronze Horse|U|ME4
+#17|Naked Singularity|R|ME4
+#18|Serra Angel|U|ME4
+#19|Mahamoti Djinn|R|ME4
+#20|Serendib Djinn|R|ME4
+#21|Swords to Plowshares|U|ME4
+#22|Cloud Dragon|R|ME4
+#23|Just Fate|C|ME4
+#24|Sengir Vampire|U|ME4
+#25|Armageddon|R|ME4
+#26|Balance|R|ME4
+#27|Air Elemental|U|ME4
+#28|Terror|C|ME4
+#29|Thunder Dragon|R|ME4
+#30|Citanul Druid|C|ME4
+#31|Dakmor Plague|U|ME4
+#32|Clockwork Swarm|C|ME4
+#33|Devastation|R|ME4
+#34|Rain of Daggers|R|ME4
+#35|Clockwork Avian|U|ME4
+#36|Icy Manipulator|U|ME4
+#37|Sol Ring|R|ME4
+#38|Black Knight|U|ME4
+#39|Demonic Hordes|R|ME4
+#40|Control Magic|R|ME4
+#41|Force of Nature|R|ME4
+#42|Primal Clay|C|ME4
+#43|Celestial Sword|U|ME4
+#44|Lava Flow|C|ME4
+#45|Fire Imp|U|ME4
+#46|Underground Sea|R|ME4
+#47|Wheel of Fortune|R|ME4
+#48|Drowned|C|ME4
+#49|Juggernaut|U|ME4
+#50|Cloud Spirit|C|ME4
+#51|Dragon Engine|C|ME4
+#52|Badlands|R|ME4
+#53|Roc of Kher Ridges|U|ME4
+#54|Plateau|R|ME4
+#55|Taiga|R|ME4
+#56|Whiptail Wurm|U|ME4
+#57|Counterspell|C|ME4
+#58|Scrubland|R|ME4
+#59|Bayou|R|ME4
+#60|Fork|R|ME4
+#61|Diabolic Machine|U|ME4
+#62|Dread Wight|U|ME4
+#63|Ebony Rhino|C|ME4
+#64|Sedge Troll|R|ME4
+#65|Weakstone|U|ME4
+#66|Braingeyser|R|ME4
+#67|Horn of Deafening|U|ME4
+#68|Clay Statue|U|ME4
+#69|Detonate|U|ME4
+#70|Junun Efreet|U|ME4
+#71|Savannah|R|ME4
+#72|White Knight|U|ME4
+#73|Gaea's Avenger|U|ME4
+#74|Volcanic Island|R|ME4
+#75|Mana Vault|R|ME4
+#76|Deathcoil Wurm|R|ME4
+#77|Tetravus|R|ME4
+#78|Rockslide Ambush|C|ME4
+#79|City of Brass|R|ME4
+#80|Prodigal Sorcerer|U|ME4
+#81|Colossus of Sardia|R|ME4
+#82|Shapeshifter|U|ME4
+#83|Champion Lancer|R|ME4
+#84|Goblin General|U|ME4
+#85|Tundra|R|ME4
+#86|Ironhoof Ox|C|ME4
+#87|Last Chance|R|ME4
+#88|Strip Mine|R|ME4
+#89|Ice Cauldron|R|ME4
+#90|Savannah Lions|U|ME4
+#91|Foul Spirit|C|ME4
+#92|Clockwork Gnomes|U|ME4
+#93|Gauntlet of Might|R|ME4
+#94|Time Vault|R|ME4
+#95|Steam Catapult|R|ME4
+#96|Rock Hydra|R|ME4
+#97|Grapeshot Catapult|U|ME4
+#98|Aesthir Glider|C|ME4
+#99|Guardian Beast|R|ME4
+#100|Personal Incarnation|R|ME4
+#101|Aladdin|R|ME4
+#102|Tropical Island|R|ME4
+#103|Minion of Tevesh Szat|R|ME4
+#104|Word of Command|R|ME4
+#105|Bottle of Suleiman|R|ME4
+#106|Sinkhole|R|ME4
+#107|Argothian Treefolk|U|ME4
+#108|Al-abara's Carpet|R|ME4
+#109|Sylvan Tutor|U|ME4
+#110|Scarecrow|U|ME4
+#111|Symbol of Unsummoning|C|ME4
+#112|Ogre Taskmaster|C|ME4
+#113|Onulet|C|ME4
+#114|Lim-Dul's Cohort|C|ME4
+#115|Obsianus Golem|C|ME4
+#116|Yotian Soldier|C|ME4
+#117|Goblin Cavaliers|C|ME4
+#118|Bee Sting|U|ME4
+#119|Water Elemental|U|ME4
+#120|Dark Ritual|C|ME4
+#121|Wild Griffin|C|ME4
+#122|Acid Rain|R|ME4
+#123|War Mammoth|C|ME4
+#124|Tawnos's Weaponry|U|ME4
+#125|Veteran Bodyguard|R|ME4
+#126|Cyclopean Mummy|C|ME4
+#127|Soul Shred|C|ME4
+#128|Phantasmal Forces|C|ME4
+#129|Wild Ox|U|ME4
+#130|Regrowth|R|ME4
+#131|Basalt Monolith|U|ME4
+#132|Mijae Djinn|R|ME4
+#133|Southern Elephant|C|ME4
+#134|Channel|R|ME4
+#135|Cyclopean Tomb|R|ME4
+#136|Giant Growth|C|ME4
+#137|Martyr's Cry|R|ME4
+#138|Argothian Pixies|C|ME4
+#139|Martyrs of Korlis|U|ME4
+#140|Zombie Master|U|ME4
+#141|Tawnos's Wand|C|ME4
+#142|Island Sanctuary|R|ME4
+#143|Candelabra of Tawnos|R|ME4
+#144|Fastbond|R|ME4
+#145|Drop of Honey|R|ME4
+#146|Kormus Bell|R|ME4
+#147|Scarwood Bandits|R|ME4
+#148|Power Artifact|R|ME4
+#149|Radjan Spirit|U|ME4
+#150|Stasis|R|ME4
+#151|Two-Headed Giant of Foriys|U|ME4
+#152|Atog|C|ME4
+#153|Goblin Firestarter|C|ME4
+#154|Oasis|C|ME4
+#155|Elite Cat Warrior|C|ME4
+#156|Scavenging Ghoul|U|ME4
+#157|Osai Vultures|C|ME4
+#158|Weakness|C|ME4
+#159|Xenic Poltergeist|U|ME4
+#160|Mightstone|C|ME4
+#161|Living Wall|U|ME4
+#162|Drain Power|R|ME4
+#163|Sleight of Hand|C|ME4
+#164|Prowling Nightstalker|C|ME4
+#165|Eye for an Eye|R|ME4
+#166|Hasran Ogress|C|ME4
+#167|Brass Man|C|ME4
+#168|Spotted Griffin|C|ME4
+#169|Book of Rass|U|ME4
+#170|Serra Bestiary|C|ME4
+#171|Obelisk of Undoing|R|ME4
+#172|Smoke|R|ME4
+#173|Coral Helm|U|ME4
+#174|Transmute Artifact|R|ME4
+#175|Living Lands|R|ME4
+#176|Goblin Caves|C|ME4
+#177|Alaborn Musketeer|C|ME4
+#178|Staff of Zegon|C|ME4
+#179|Owl Familiar|C|ME4
+#180|Pentagram of the Ages|U|ME4
+#181|Elephant Graveyard|U|ME4
+#182|Titania's Song|R|ME4
+#183|Serra Aviary|U|ME4
+#184|Copy Artifact|R|ME4
+#185|Triassic Egg|R|ME4
+#186|Goblin Bully|C|ME4
+#187|Bird Maiden|C|ME4
+#188|Howl from Beyond|C|ME4
+#189|Squall|U|ME4
+#190|In the Eye of Chaos|R|ME4
+#191|Mana Matrix|R|ME4
+#192|Righteous Charge|C|ME4
+#193|Scavenger Folk|C|ME4
+#194|Orcish Mechanics|U|ME4
+#195|Crumble|C|ME4
+#196|Tsunami|R|ME4
+#197|Armageddon Clock|R|ME4
+#198|Blaze of Glory|U|ME4
+#199|Red Elemental Blast|U|ME4
+#200|Urza's Tower|L|ME4
+#201|Gloom|R|ME4
+#202|Wood Elemental|R|ME4
+#203|Cyclone|R|ME4
+#204|Jade Monolith|R|ME4
+#205|False Summoning|C|ME4
+#206|Lich|R|ME4
+#207|Rakalite|R|ME4
+#208|Floodwater Dam|R|ME4
+#209|Wild Aesthir|C|ME4
+#210|Theft of Dreams|U|ME4
+#211|Flying Carpet|C|ME4
+#212|Alluring Scent|C|ME4
+#213|Ashnod's Altar|R|ME4
+#214|Kismet|R|ME4
+#215|Primitive Justice|U|ME4
+#216|Giant Tortoise|C|ME4
+#217|Sea Serpent|C|ME4
+#218|Urza's Miter|R|ME4
+#219|Sandstorm|C|ME4
+#220|Alaborn Trooper|C|ME4
+#221|Energy Flux|U|ME4
+#222|Lifeforce|R|ME4
+#223|Ebony Horse|C|ME4
+#224|Warp Artifact|C|ME4
+#225|Kudzu|U|ME4
+#226|Deathgrip|R|ME4
+#227|Thing from the Deep|R|ME4
+#228|Amulet of Kroog|C|ME4
+#229|Argivian Blacksmith|U|ME4
+#230|Temple Acolyte|C|ME4
+#231|Goblin Shrine|C|ME4
+#232|Blue Elemental Blast|U|ME4
+#233|Harsh Justice|R|ME4
+#234|Divine Offering|C|ME4
+#235|Goblin Warrens|U|ME4
+#236|Mystic Decree|U|ME4
+#237|Instill Energy|U|ME4
+#238|Artifact Blast|C|ME4
+#239|Urza's Mine|L|ME4
+#240|Alchor's Tomb|R|ME4
+#241|Planar Gate|U|ME4
+#242|Animate Artifact|U|ME4
+#243|Conversion|R|ME4
+#244|Glasses of Urza|C|ME4
+#245|Fog|C|ME4
+#246|Library of Leng|C|ME4
+#247|Gorilla War Cry|C|ME4
+#248|Urza's Power Plant|L|ME4
+#249|Vibrating Sphere|R|ME4
+#250|Healing Salve|C|ME4
+#251|Soldevi Machinist|U|ME4
+#252|Angelic Voices|U|ME4
+#253|Reconstruction|C|ME4
+#254|Gravebind|C|ME4
+#255|Urza's Chalice|C|ME4
+#256|Phantasmal Terrain|C|ME4
+#257|Dust to Dust|U|ME4
+#258|Gate to Phyrexia|U|ME4
+#259|Tablet of Epityr|C|ME4
+#260|Leeches|R|ME4

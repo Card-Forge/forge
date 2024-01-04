@@ -318,40 +318,9 @@ public class CardFactory {
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
-        if (card.isPlane()) {
-            buildPlaneAbilities(card);
-        }
         buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
-    }
-
-    private static void buildPlaneAbilities(Card card) {
-        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
-                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
-
-        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
-
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
-        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
-        card.addTrigger(planesWalkTrigger);
-
-        String chaosTrig = "Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Static$ True";
-
-        String rolledChaos = "DB$ ChaosEnsues";
-
-        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, card, true);
-        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, card));
-        card.addTrigger(chaosTrigger);
-
-        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
-                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
-                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
-
-        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
-        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
-
-        card.addSpellAbility(planarRoll);
     }
 
     private static void buildBattleAbilities(Card card) {
@@ -388,30 +357,12 @@ public class CardFactory {
         readCardFace(card, rules.getMainPart());
 
         if (st == CardSplitType.Specialize) {
-            card.addAlternateState(CardStateName.SpecializeW, false);
-            card.setState(CardStateName.SpecializeW, false);
-            if (rules.getWSpecialize() != null) {
-                readCardFace(card, rules.getWSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeU, false);
-            card.setState(CardStateName.SpecializeU, false);
-            if (rules.getUSpecialize() != null) {
-                readCardFace(card, rules.getUSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeB, false);
-            card.setState(CardStateName.SpecializeB, false);
-            if (rules.getBSpecialize() != null) {
-                readCardFace(card, rules.getBSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeR, false);
-            card.setState(CardStateName.SpecializeR, false);
-            if (rules.getRSpecialize() != null) {
-                readCardFace(card, rules.getRSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeG, false);
-            card.setState(CardStateName.SpecializeG, false);
-            if (rules.getGSpecialize() != null) {
-                readCardFace(card, rules.getGSpecialize());
+            for (Map.Entry<CardStateName, ICardFace> e : rules.getSpecializeParts().entrySet()) {
+                card.addAlternateState(e.getKey(), false);
+                card.setState(e.getKey(), false);
+                if (e.getValue() != null) {
+                    readCardFace(card, e.getValue());
+                }
             }
         } else if (st != CardSplitType.None) {
             card.addAlternateState(st.getChangedStateName(), false);

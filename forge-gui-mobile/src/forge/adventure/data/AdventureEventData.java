@@ -373,8 +373,14 @@ public class AdventureEventData implements Serializable {
             }
         }
 
-        for (String restricted : Config.instance().getConfigData().restrictedEditions) {
-            legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null) {
+            List<String> allowed = Arrays.asList(configData.allowedEditions);
+            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+        } else {
+            for (String restricted : configData.restrictedEditions) {
+                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+            }
         }
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);
     }
@@ -388,8 +394,14 @@ public class AdventureEventData implements Serializable {
                 legalBlocks.add(b);
             }
         }
-        for (String restricted : Config.instance().getConfigData().restrictedEditions) {
-            legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null) {
+            List<String> allowed = Arrays.asList(configData.allowedEditions);
+            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+        } else {
+            for (String restricted : configData.restrictedEditions) {
+                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+            }
         }
         return legalBlocks.isEmpty()?null:Aggregates.random(legalBlocks);
     }
@@ -421,6 +433,7 @@ public class AdventureEventData implements Serializable {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
         List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
+        data.removeIf(q -> q.nextEnemy != null);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }

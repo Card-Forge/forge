@@ -1,0 +1,185 @@
+//Rank|Name|Rarity|Set
+#1|The Scorpion God|M|HOU
+#2|The Locust God|M|HOU
+#3|The Scarab God|M|HOU
+#4|Angel of Condemnation|R|HOU
+#5|Kefnet's Last Word|R|HOU
+#6|Rhonas's Last Stand|R|HOU
+#7|Grind Dust|R|HOU
+#8|Bontu's Last Reckoning|R|HOU
+#9|Hour of Devastation|R|HOU
+#10|Samut, the Tested|M|HOU
+#11|Unesh, Criosphinx Sovereign|M|HOU
+#12|Hour of Glory|R|HOU
+#13|Pride Sovereign|R|HOU
+#14|Ramunap Hydra|R|HOU
+#15|Adorned Pouncer|R|HOU
+#16|Earthshaker Khenra|R|HOU
+#17|Majestic Myriarch|M|HOU
+#18|God-Pharaoh's Gift|R|HOU
+#19|Crested Sunmare|M|HOU
+#20|Desert's Hold|U|HOU
+#21|Banewhip Punisher|U|HOU
+#22|Abrade|U|HOU
+#23|Struggle Survive|U|HOU
+#24|Dreamstealer|R|HOU
+#25|Resilient Khenra|R|HOU
+#26|Sifter Wurm|U|HOU
+#27|Nicol Bolas, God-Pharaoh|M|HOU
+#28|Hour of Revelation|R|HOU
+#29|Ammit Eternal|R|HOU
+#30|Neheb, the Eternal|M|HOU
+#31|Sand Strangler|U|HOU
+#32|Sunscourge Champion|U|HOU
+#33|Champion of Wits|R|HOU
+#34|Open Fire|C|HOU
+#35|Ambuscade|C|HOU
+#36|Farm Market|U|HOU
+#37|Nimble Obstructionist|R|HOU
+#38|Ominous Sphinx|U|HOU
+#39|Overcome|U|HOU
+#40|Resolute Survivors|U|HOU
+#41|River Hoopoe|U|HOU
+#42|Consign Oblivion|U|HOU
+#43|Overwhelming Splendor|M|HOU
+#44|Torment of Venom|C|HOU
+#45|Burning-Fist Minotaur|U|HOU
+#46|Tenacious Hunter|U|HOU
+#47|Bloodwater Entity|U|HOU
+#48|Unraveling Mummy|U|HOU
+#49|Mirage Mirror|R|HOU
+#50|Chaos Maw|R|HOU
+#51|Fervent Paincaster|U|HOU
+#52|Puncturing Blow|C|HOU
+#53|Obelisk Spider|U|HOU
+#54|Steward of Solidarity|U|HOU
+#55|Vizier of the Anointed|U|HOU
+#56|Torment of Hailfire|R|HOU
+#57|Driven Despair|R|HOU
+#58|Desert of the Fervent|C|HOU
+#59|Hour of Eternity|R|HOU
+#60|Vile Manifestation|U|HOU
+#61|Hour of Promise|R|HOU
+#62|Desert of the Glorified|C|HOU
+#63|Desert of the Indomitable|C|HOU
+#64|Desert of the True|C|HOU
+#65|Oketra's Avenger|C|HOU
+#66|Vizier of the True|U|HOU
+#67|Eternal of Harsh Truths|U|HOU
+#68|Riddleform|U|HOU
+#69|Accursed Horde|U|HOU
+#70|Uncage the Menagerie|M|HOU
+#71|Desert of the Mindful|C|HOU
+#72|Dauntless Aven|C|HOU
+#73|Gideon's Defeat|U|HOU
+#74|Sinuous Striker|U|HOU
+#75|Unsummon|C|HOU
+#76|Liliana's Defeat|U|HOU
+#77|Chandra's Defeat|U|HOU
+#78|Oasis Ritualist|C|HOU
+#79|Rhonas's Stalwart|C|HOU
+#80|Hollow One|R|HOU
+#81|Sunset Pyramid|U|HOU
+#82|Ifnir Deadlands|U|HOU
+#83|Aerial Guide|C|HOU
+#84|Spellweaver Eternal|C|HOU
+#85|Supreme Will|U|HOU
+#86|Unquenchable Thirst|C|HOU
+#87|Doomfall|U|HOU
+#88|Ruin Rat|C|HOU
+#89|Torment of Scarabs|U|HOU
+#90|Khenra Scrapper|C|HOU
+#91|Magmaroth|U|HOU
+#92|Hope Tender|U|HOU
+#93|Appeal Authority|U|HOU
+#94|Abandoned Sarcophagus|R|HOU
+#95|Ramunap Ruins|U|HOU
+#96|Shefet Dunes|U|HOU
+#97|Angel of the God-Pharaoh|U|HOU
+#98|Sandblast|C|HOU
+#99|Apocalypse Demon|R|HOU
+#100|Lethal Sting|C|HOU
+#101|Merciless Eternal|U|HOU
+#102|Razaketh, the Foulblooded|M|HOU
+#103|Wretched Camel|C|HOU
+#104|Frontline Devastator|C|HOU
+#105|Inferno Jet|U|HOU
+#106|Manticore Eternal|U|HOU
+#107|Bitterbow Sharpshooters|C|HOU
+#108|Devotee of Strength|U|HOU
+#109|Harrier Naga|C|HOU
+#110|Rampaging Hippo|C|HOU
+#111|Hashep Oasis|U|HOU
+#112|Aven of Enduring Hope|C|HOU
+#113|Mummy Paramount|C|HOU
+#114|Unconventional Tactics|U|HOU
+#115|Firebrand Archer|C|HOU
+#116|Gilded Cerodon|C|HOU
+#117|Thorned Moloch|C|HOU
+#118|Quarry Beetle|U|HOU
+#119|Jace's Defeat|U|HOU
+#120|Striped Riverwinder|C|HOU
+#121|Khenra Eternal|C|HOU
+#122|Blur of Blades|C|HOU
+#123|Ramunap Excavator|R|HOU
+#124|Sidewinder Naga|C|HOU
+#125|Wall of Forgotten Pharaohs|C|HOU
+#126|Endless Sands|R|HOU
+#127|Ipnu Rivulet|U|HOU
+#128|Saving Grace|U|HOU
+#129|Solitary Camel|C|HOU
+#130|Countervailing Winds|C|HOU
+#131|Strategic Planning|C|HOU
+#132|Tragic Lesson|C|HOU
+#133|Carrion Screecher|C|HOU
+#134|Lurching Rotbeast|C|HOU
+#135|Marauding Boneslasher|C|HOU
+#136|Defiant Khenra|C|HOU
+#137|Granitic Titan|C|HOU
+#138|Beneath the Sands|C|HOU
+#139|Feral Prowler|C|HOU
+#140|Frilled Sandwalla|C|HOU
+#141|Gift of Strength|C|HOU
+#142|Claim Fame|U|HOU
+#143|Reason Believe|R|HOU
+#144|Survivors' Encampment|C|HOU
+#145|Act of Heroism|C|HOU
+#146|Disposal Mummy|C|HOU
+#147|Aven Reedstalker|C|HOU
+#148|Cunning Survivor|C|HOU
+#149|Seer of the Last Tomorrow|C|HOU
+#150|Grisly Survivor|C|HOU
+#151|Moaning Wall|C|HOU
+#152|Razaketh's Rite|U|HOU
+#153|Scrounger of Souls|C|HOU
+#154|Imminent Doom|R|HOU
+#155|Kindled Fury|C|HOU
+#156|Wildfire Eternal|R|HOU
+#157|Dune Diviner|U|HOU
+#158|Refuse Cooperate|R|HOU
+#159|Dagger of the Worthy|U|HOU
+#160|Manalith|C|HOU
+#161|Traveler's Amulet|C|HOU
+#162|Dunes of the Dead|U|HOU
+#163|Djeru, With Eyes Open|R|HOU
+#164|Dutiful Servants|C|HOU
+#165|Solemnity|R|HOU
+#166|Steadfast Sentinel|C|HOU
+#167|Imaginary Threats|U|HOU
+#168|Proven Combatant|C|HOU
+#169|Without Weakness|C|HOU
+#170|Crash Through|C|HOU
+#171|Leave Chance|R|HOU
+#172|Crook of Condemnation|U|HOU
+#173|Djeru's Renunciation|C|HOU
+#174|Nissa's Defeat|U|HOU
+#175|Graven Abomination|C|HOU
+#176|God-Pharaoh's Faithful|C|HOU
+#177|Oketra's Last Mercy|R|HOU
+#178|Crypt of the Eternals|U|HOU
+#179|Hazoret's Undying Fury|R|HOU
+#180|Scavenger Grounds|R|HOU
+#181|Life Goes On|C|HOU
+#182|Hostile Desert|R|HOU
+#183|Swarm Intelligence|R|HOU
+#184|Fraying Sanity|R|HOU

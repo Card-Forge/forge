@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Yosei, the Morning Star|R|CHK
+#2|Meloku the Clouded Mirror|R|CHK
+#3|Hikari, Twilight Guardian|R|CHK
+#4|Keiga, the Tide Star|R|CHK
+#5|Kokusho, the Evening Star|R|CHK
+#6|Kumano, Master Yamabushi|R|CHK
+#7|Ryusei, the Falling Star|R|CHK
+#8|Jugan, the Rising Star|R|CHK
+#9|Uyo, Silent Prophet|R|CHK
+#10|Nagao, Bound by Honor|U|CHK
+#11|Kodama of the North Tree|R|CHK
+#12|Kodama of the South Tree|R|CHK
+#13|Kiku, Night's Flower|R|CHK
+#14|Eight and a Half Tails|R|CHK
+#15|Kiki Jiki, Mirror Breaker|R|CHK
+#16|Hideous Laughter|U|CHK
+#17|Honden of Infinite Rage|U|CHK
+#18|Seshiro the Anointed|R|CHK
+#19|Glacial Ray|C|CHK
+#20|Nezumi Graverobber|U|CHK
+#21|Blind with Anger|U|CHK
+#22|Kabuto Moth|C|CHK
+#23|Tatsumasa, the Dragon's Fang|R|CHK
+#24|Yamabushi's Flame|C|CHK
+#25|Sosuke, Son of Seshiro|U|CHK
+#26|Hanabi Blast|U|CHK
+#27|Long Forgotten Gohei|R|CHK
+#28|Nezumi Shortfang|R|CHK
+#29|Strength of Cedars|U|CHK
+#30|Thief of Hope|U|CHK
+#31|Honden of Seeing Winds|U|CHK
+#32|Cage of Hands|C|CHK
+#33|Rend Flesh|C|CHK
+#34|Teller of Tales|C|CHK
+#35|Pain Kami|U|CHK
+#36|Swallowing Plague|U|CHK
+#37|Oathkeeper, Takeno's Daisho|R|CHK
+#38|Kitsune Blademaster|C|CHK
+#39|Seizan, Perverter of Truth|R|CHK
+#40|Earthshaker|U|CHK
+#41|Godo, Bandit Warlord|R|CHK
+#42|Horobi, Death's Wail|R|CHK
+#43|Nezumi Cutthroat|C|CHK
+#44|Gutwrencher Oni|U|CHK
+#45|Soratami Savant|U|CHK
+#46|Befoul|C|CHK
+#47|Sire of the Storm|U|CHK
+#48|Rend Spirit|C|CHK
+#49|Isamaru, Hound of Konda|R|CHK
+#50|Myojin of Cleansing Fire|R|CHK
+#51|Honden of Cleansing Fire|U|CHK
+#52|No Dachi|U|CHK
+#53|Jushi Apprentice|R|CHK
+#54|Kashi Tribe Reaver|U|CHK
+#55|He Who Hungers|R|CHK
+#56|Ghostly Prison|U|CHK
+#57|Samurai of the Pale Curtain|U|CHK
+#58|Soratami Mirror Guard|C|CHK
+#59|Reciprocate|U|CHK
+#60|Sensei's Divining Top|U|CHK
+#61|Frostwielder|C|CHK
+#62|Blood Rites|U|CHK
+#63|Ronin Houndmaster|C|CHK
+#64|Sensei Golden Tail|R|CHK
+#65|Painwracker Oni|U|CHK
+#66|Takeno, Samurai General|R|CHK
+#67|Mothrider Samurai|C|CHK
+#68|Innocence Kami|U|CHK
+#69|Sakura Tribe Elder|C|CHK
+#70|Kodama's Might|C|CHK
+#71|Kodama's Reach|C|CHK
+#72|Scuttling Death|C|CHK
+#73|Otherworldly Journey|U|CHK
+#74|Rootrunner|U|CHK
+#75|Moss Kami|C|CHK
+#76|Konda, Lord of Eiganjo|R|CHK
+#77|Honden of Life's Web|U|CHK
+#78|Orochi Hatchery|R|CHK
+#79|Marrow Gnawer|R|CHK
+#80|Mystic Restraints|C|CHK
+#81|Soratami Rainshaper|C|CHK
+#82|Soratami Mirror Mage|U|CHK
+#83|Honden of Night's Reach|U|CHK
+#84|Devouring Greed|C|CHK
+#85|Order of the Sacred Bell|C|CHK
+#86|Kusari Gama|R|CHK
+#87|Wicked Akuba|C|CHK
+#88|Kami of Fire's Roar|C|CHK
+#89|Soilshaper|U|CHK
+#90|Kami of Ancient Law|C|CHK
+#91|Azami, Lady of Scrolls|R|CHK
+#92|Gibbering Kami|C|CHK
+#93|Candles' Glow|U|CHK
+#94|Nezumi Ronin|C|CHK
+#95|Feral Deceiver|C|CHK
+#96|Brothers Yamazaki|U|CHK
+#97|Masako the Humorless|R|CHK
+#98|Hana Kami|U|CHK
+#99|Consuming Vortex|C|CHK
+#100|Kami of the Hunt|C|CHK
+#101|Hearth Kami|C|CHK
+#102|Dance of Shadows|U|CHK
+#103|Pull Under|C|CHK
+#104|Bloodthirsty Ogre|U|CHK
+#105|Blessed Breath|C|CHK
+#106|Konda's Hatamoto|U|CHK
+#107|Orochi Sustainer|C|CHK
+#108|Blood Speaker|U|CHK
+#109|Brutal Deceiver|C|CHK
+#110|Ember Fist Zubera|C|CHK
+#111|Kami of Old Stone|U|CHK
+#112|Budoka Gardener|R|CHK
+#113|Indomitable Will|C|CHK
+#114|Villainous Ogre|C|CHK
+#115|Cruel Deceiver|C|CHK
+#116|Akki Coalflinger|U|CHK
+#117|Burr Grafter|C|CHK
+#118|Kami of the Waning Moon|C|CHK
+#119|Soratami Seer|U|CHK
+#120|River Kaijin|C|CHK
+#121|Samurai Enforcers|U|CHK
+#122|Tenza, Godo's Maul|U|CHK
+#123|Zo Zu the Punisher|R|CHK
+#124|Kitsune Diviner|C|CHK
+#125|Orochi Eggwatcher|U|CHK
+#126|Soratami Cloudskater|C|CHK
+#127|Floating Dream Zubera|C|CHK
+#128|Sachi, Daughter of Seshiro|U|CHK
+#129|Iname, Life Aspect|R|CHK
+#130|Initiate of Blood|U|CHK
+#131|Hundred Talon Kami|C|CHK
+#132|Ashen Skin Zubera|C|CHK
+#133|Kami of the Palace Fields|U|CHK
+#134|Journeyer's Kite|R|CHK
+#135|Matsu Tribe Decoy|C|CHK
+#136|Dampen Thought|U|CHK
+#137|Serpent Skin|C|CHK
+#138|Lantern Kami|C|CHK
+#139|Orochi Ranger|C|CHK
+#140|General's Kabuto|R|CHK
+#141|Cursed Ronin|C|CHK
+#142|Petals of Insight|U|CHK
+#143|Kami of Lunacy|U|CHK
+#144|Kitsune Riftwalker|C|CHK
+#145|Time of Need|U|CHK
+#146|Soulless Revival|C|CHK
+#147|Night of Souls' Betrayal|R|CHK
+#148|Waking Nightmare|C|CHK
+#149|Dripping Tongue Zubera|C|CHK
+#150|Counsel of the Soratami|C|CHK
+#151|Callous Deceiver|C|CHK
+#152|Guardian of Solitude|U|CHK
+#153|Soul of Magma|C|CHK
+#154|Humble Budoka|C|CHK
+#155|Time Stop|R|CHK
+#156|Reach Through Mists|C|CHK
+#157|Kami of the Painted Road|C|CHK
+#158|Hinder|U|CHK
+#159|Nine Ringed Bo|U|CHK
+#160|Gifts Ungiven|R|CHK
+#161|Jade Idol|U|CHK
+#162|Uncontrollable Anger|C|CHK
+#163|Harsh Deceiver|C|CHK
+#164|Hold the Line|R|CHK
+#165|Hankyu|U|CHK
+#166|The Unspeakable|R|CHK
+#167|Devoted Retainer|C|CHK
+#168|Shizo, Death's Storehouse|R|CHK
+#169|Kami of Twisted Reflection|C|CHK
+#170|Devouring Rage|C|CHK
+#171|Moonring Mirror|R|CHK
+#172|Eiganjo Castle|R|CHK
+#173|Iname, Death Aspect|R|CHK
+#174|Eye of Nowhere|C|CHK
+#175|Venerable Kumo|C|CHK
+#176|Hisoka's Defiance|C|CHK
+#177|Kitsune Healer|C|CHK
+#178|Yamabushi's Storm|C|CHK
+#179|Bushi Tenderfoot|U|CHK
+#180|Soulblast|R|CHK
+#181|Sokenzan Bruiser|C|CHK
+#182|Call to Glory|C|CHK
+#183|Ben Ben, Akki Hermit|R|CHK
+#184|Okina, Temple to the Grandfathers|R|CHK
+#185|Distress|C|CHK
+#186|Myojin of Night's Reach|R|CHK
+#187|Eerie Procession|U|CHK
+#188|Battle Mad Ronin|C|CHK
+#189|Cranial Extraction|R|CHK
+#190|Orochi Leafcaller|C|CHK
+#191|Ethereal Haze|C|CHK
+#192|Silent Chant Zubera|C|CHK
+#193|Myojin of Life's Web|R|CHK
+#194|Lava Spike|C|CHK
+#195|Shinka, the Bloodsoaked Keep|R|CHK
+#196|Gale Force|U|CHK
+#197|Commune with Nature|C|CHK
+#198|Lantern Lit Graveyard|U|CHK
+#199|Dosan the Falling Leaf|R|CHK
+#200|Lure|U|CHK
+#201|Wear Away|C|CHK
+#202|Reweave|R|CHK
+#203|Orbweaver Kumo|U|CHK
+#204|Waterveil Cavern|U|CHK
+#205|Minamo, School at Water's Edge|R|CHK
+#206|Sift Through Sands|C|CHK
+#207|Psychic Puppetry|C|CHK
+#208|Kuro, Pitlord|R|CHK
+#209|Cloudcrest Lake|U|CHK
+#210|Pinecrest Ridge|U|CHK
+#211|Peer Through Depths|C|CHK
+#212|Azusa, Lost but Seeking|R|CHK
+#213|Akki Avalanchers|C|CHK
+#214|Konda's Banner|R|CHK
+#215|Kashi Tribe Warriors|C|CHK
+#216|Thoughtbind|C|CHK
+#217|Reverse the Sands|R|CHK
+#218|Myojin of Infinite Rage|R|CHK
+#219|Vine Kami|C|CHK
+#220|Student of Elements|U|CHK
+#221|Thousand legged Kami|U|CHK
+#222|Kitsune Mystic|R|CHK
+#223|Unearthly Blizzard|C|CHK
+#224|Nezumi Bone Reader|U|CHK
+#225|Myojin of Seeing Winds|R|CHK
+#226|Tranquil Garden|U|CHK
+#227|Oni Possession|U|CHK
+#228|Sideswipe|U|CHK
+#229|Crushing Pain|C|CHK
+#230|Akki Lavarunner|R|CHK
+#231|Forbidden Orchard|R|CHK
+#232|Kumano's Pupils|U|CHK
+#233|Heartbeat of Spring|R|CHK
+#234|Pious Kitsune|C|CHK
+#235|Jukai Messenger|C|CHK
+#236|Rag Dealer|C|CHK
+#237|Shimatsu the Bloodcloaked|R|CHK
+#238|Mindblaze|R|CHK
+#239|Quiet Purity|C|CHK
+#240|Terashi's Cry|C|CHK
+#241|Stone Rain|C|CHK
+#242|Hisoka, Minamo Sensei|R|CHK
+#243|Graceful Adept|U|CHK
+#244|Midnight Covenant|C|CHK
+#245|Hisoka's Guard|C|CHK
+#246|Shisato, Whispering Hunter|R|CHK
+#247|Honor Worn Shaku|U|CHK
+#248|Lifted by Clouds|C|CHK
+#249|Wandering Ones|C|CHK
+#250|Glimpse of Nature|R|CHK
+#251|Squelch|U|CHK
+#252|Deathcurse Ogre|C|CHK
+#253|Night Dealings|R|CHK
+#254|Through the Breach|R|CHK
+#255|Struggle for Sanity|U|CHK
+#256|Cleanfall|U|CHK
+#257|Shell of the Last Kappa|R|CHK
+#258|Joyous Respite|C|CHK
+#259|Uba Mask|R|CHK
+#260|Ragged Veins|C|CHK
+#261|Akki Underminer|U|CHK
+#262|Akki Rockspeaker|C|CHK
+#263|Field of Reality|C|CHK
+#264|Boseiju, Who Shelters All|R|CHK
+#265|Junkyo Bell|R|CHK
+#266|Desperate Ritual|C|CHK
+#267|Unnatural Speed|C|CHK
+#268|Vigilance|C|CHK
+#269|Cut the Tethers|U|CHK
+#270|Part the Veil|R|CHK
+#271|Numai Outcast|U|CHK
+#272|Hall of the Bandit Lord|R|CHK
+#273|Hair Strung Koto|R|CHK
+#274|Horizon Seed|U|CHK
+#275|Ore Gorger|U|CHK
+#276|Nature's Will|R|CHK
+#277|Reito Lantern|U|CHK
+#278|Feast of Worms|U|CHK
+#279|Strange Inversion|U|CHK
+#280|Aura of Dominion|U|CHK
+#281|Imi Statue|R|CHK
+#282|Vassal's Duty|R|CHK
+#283|Swirl the Mists|R|CHK
+#284|Untaidake, the Cloud Keeper|R|CHK
+#285|Tide of War|R|CHK
+#286|Mana Seism|U|CHK

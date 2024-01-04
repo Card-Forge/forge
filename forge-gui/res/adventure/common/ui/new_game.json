@@ -64,6 +64,16 @@
       "x": 75,
       "yOffset": 8
     },
+	{
+      "type": "TextButton",
+      "name": "difficultyHelp",
+      "text": "[GOLD]?",
+      "selectable": true,
+      "width": 16,
+      "height": 16,
+      "x": 145,
+      "yOffset": -16
+    },
     {
       "type": "Label",
       "name" : "colorIdL",
@@ -81,6 +91,16 @@
       "height": 16,
       "x": 75,
       "yOffset": 8
+    },
+	{
+      "type": "TextButton",
+      "name": "modeHelp",
+      "text": "[GOLD]?",
+      "selectable": true,
+      "width": 16,
+      "height": 16,
+      "x": 145,
+      "yOffset": -16
     },
 	{
       "type": "Label",

@@ -289,7 +289,7 @@ public class PhaseHandler implements java.io.Serializable {
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
-                            if (c.getType().hasSubtype("Saga")) {
+                            if (c.isSaga()) {
                                 c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                             }
                         }
@@ -874,6 +874,10 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
+
+        for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.setStartedTheTurnUntapped(c.isUntapped());
+        }
 
         game.setMonarchBeginTurn(game.getMonarch());
 

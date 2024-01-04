@@ -5,9 +5,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -129,8 +132,12 @@ public class ProtectEffect extends SpellAbilityEffect {
         }
 
         List<String> gainsKWList = Lists.newArrayList();
-        for (String color : gains) {
-            gainsKWList.add(TextUtil.concatWithSpace("Protection from", color));
+        for (String type : gains) {
+            if (isChoice && sa.getParam("Choices").equals("CardType")) {
+                gainsKWList.add("Protection:" + type);
+            }  else {
+                gainsKWList.add(TextUtil.concatWithSpace("Protection from", type));
+            }
         }
 
         tgtCards.addAll(CardUtil.getRadiance(sa));
@@ -176,6 +183,8 @@ public class ProtectEffect extends SpellAbilityEffect {
             if (choices.contains("AnyColor")) {
                 gains.addAll(MagicColor.Constant.ONLY_COLORS);
                 choices = choices.replaceAll("AnyColor,?", "");
+            } else if (choices.contains("CardType")) {
+                choices = StringUtils.join(CardType.getAllCardTypes(), ",");
             }
             // Add any remaining choices
             if (choices.length() > 0) {

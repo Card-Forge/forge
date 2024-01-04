@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Legacys Allure|R|TPR
+#2|Flame Wave|R|TPR
+#3|Living Death|M|TPR
+#4|Soltari Guerrillas|R|TPR
+#5|Rolling Thunder|U|TPR
+#6|Commander Greven il Vec|R|TPR
+#7|Silver Wyvern|R|TPR
+#8|Rathi Dragon|R|TPR
+#9|Volraths Stronghold|M|TPR
+#10|Vhati il Dal|R|TPR
+#11|Ephemeron|R|TPR
+#12|Stronghold Assassin|R|TPR
+#13|Magmasaur|R|TPR
+#14|Cursed Scroll|M|TPR
+#15|Overrun|U|TPR
+#16|Winds of Rath|R|TPR
+#17|Crovax the Cursed|R|TPR
+#18|Kezzerdrix|R|TPR
+#19|Tradewind Rider|R|TPR
+#20|Selenia Dark Angel|R|TPR
+#21|Pacifism|U|TPR
+#22|Dracoplasm|R|TPR
+#23|Spike Hatcher|R|TPR
+#24|Flowstone Wyvern|U|TPR
+#25|Shard Phoenix|M|TPR
+#26|Evincars Justice|U|TPR
+#27|Dark Banishing|C|TPR
+#28|Master Decoy|C|TPR
+#29|Exalted Dragon|R|TPR
+#30|Killer Whale|U|TPR
+#31|Mirri Cat Warrior|R|TPR
+#32|Orim Samite Healer|R|TPR
+#33|Soltari Champion|U|TPR
+#34|Carnassid|U|TPR
+#35|Ogre Shaman|R|TPR
+#36|Reanimate|U|TPR
+#37|Acidic Sliver|U|TPR
+#38|Paladin en Vec|R|TPR
+#39|Lightning Blast|C|TPR
+#40|Coffin Queen|R|TPR
+#41|Fanning the Flames|R|TPR
+#42|Wayward Soul|C|TPR
+#43|Dauthi Marauder|U|TPR
+#44|Rootbreaker Wurm|U|TPR
+#45|Avenging Angel|U|TPR
+#46|Soltari Priest|U|TPR
+#47|Soltari Monk|U|TPR
+#48|Repentance|U|TPR
+#49|Spitting Hydra|R|TPR
+#50|Cataclysm|M|TPR
+#51|Mawcor|R|TPR
+#52|Gerrards Battle Cry|R|TPR
+#53|Kindle|C|TPR
+#54|Recurring Nightmare|M|TPR
+#55|Rootwalla|C|TPR
+#56|Elvish Fury|C|TPR
+#57|Dauthi Slayer|U|TPR
+#58|Wall of Blossoms|U|TPR
+#59|Skyshroud Troll|C|TPR
+#60|Rootwater Hunter|U|TPR
+#61|Dauthi Horror|C|TPR
+#62|Krakilin|R|TPR
+#63|Soltari Trooper|C|TPR
+#64|Skyshroud Vampire|U|TPR
+#65|Dauthi Warlord|U|TPR
+#66|Warrior en Kor|U|TPR
+#67|Spike Colony|C|TPR
+#68|Counterspell|U|TPR
+#69|Dismiss|U|TPR
+#70|Shackles|C|TPR
+#71|Maze of Shadows|U|TPR
+#72|Erratic Portal|U|TPR
+#73|Deadshot|U|TPR
+#74|Death Stroke|C|TPR
+#75|Merfolk Looter|C|TPR
+#76|Aftershock|C|TPR
+#77|Fighting Drake|U|TPR
+#78|Kor Chant|U|TPR
+#79|Verdant Force|R|TPR
+#80|Flowstone Blade|C|TPR
+#81|Spined Sliver|U|TPR
+#82|Heartwood Giant|R|TPR
+#83|Thopter Squadron|R|TPR
+#84|Sabertooth Wyvern|U|TPR
+#85|Spined Wurm|C|TPR
+#86|Trained Armodon|C|TPR
+#87|Lowland Giant|C|TPR
+#88|Wind Drake|C|TPR
+#89|Thalakos Scout|C|TPR
+#90|Dauthi Jackal|C|TPR
+#91|Soltari Lancer|C|TPR
+#92|Flowstone Mauler|U|TPR
+#93|Screeching Harpy|U|TPR
+#94|Gravedigger|C|TPR
+#95|Stalking Stones|U|TPR
+#96|Spike Breeder|U|TPR
+#97|Lowland Basilisk|U|TPR
+#98|Sarcomancy|U|TPR
+#99|Carnophage|C|TPR
+#100|Crashing Boars|U|TPR
+#101|Serpent Warrior|C|TPR
+#102|Youthful Knight|C|TPR
+#103|Renegade Warlord|U|TPR
+#104|Spirit en Kor|C|TPR
+#105|Spirit Mirror|R|TPR
+#106|Sift|C|TPR
+#107|Legerdemain|U|TPR
+#108|Gallantry|U|TPR
+#109|Field of Souls|R|TPR
+#110|Mana Leak|C|TPR
+#111|Crystalline Sliver|U|TPR
+#112|Searing Touch|U|TPR
+#113|Diabolic Edict|C|TPR
+#114|Canyon Wildcat|C|TPR
+#115|Hibernation Sliver|U|TPR
+#116|Heartwood Dryad|C|TPR
+#117|Thalakos Drifters|U|TPR
+#118|Muscle Sliver|C|TPR
+#119|Dungeon Shade|C|TPR
+#120|Staunch Defenders|C|TPR
+#121|Forbid|R|TPR
+#122|Victual Sliver|U|TPR
+#123|Hammerhead Shark|C|TPR
+#124|Time Ebb|C|TPR
+#125|Caldera Lake|U|TPR
+#126|Pine Barrens|U|TPR
+#127|Salt Flats|U|TPR
+#128|Scabland|U|TPR
+#129|Skyshroud Forest|U|TPR
+#130|Mogg Conscripts|C|TPR
+#131|Wall of Essence|U|TPR
+#132|Fugue|U|TPR
+#133|Meditate|R|TPR
+#134|Shadow Rift|C|TPR
+#135|Charging Paladin|C|TPR
+#136|Bandage|C|TPR
+#137|Whispers of the Muse|C|TPR
+#138|Oath of Druids|M|TPR
+#139|Furnace Brood|C|TPR
+#140|Vampire Hounds|C|TPR
+#141|Angelic Protector|U|TPR
+#142|Sandstone Warrior|C|TPR
+#143|Phyrexian Hulk|U|TPR
+#144|Coiled Tinviper|C|TPR
+#145|Necrologia|R|TPR
+#146|Capsize|U|TPR
+#147|Mogg Fanatic|C|TPR
+#148|Telethopter|C|TPR
+#149|Rats of Rath|C|TPR
+#150|Skyshroud Elf|C|TPR
+#151|Rampant Growth|C|TPR
+#152|Smite|C|TPR
+#153|Shaman en Kor|R|TPR
+#154|Cursed Flesh|C|TPR
+#155|Spike Feeder|U|TPR
+#156|Reality Anchor|C|TPR
+#157|Curiosity|U|TPR
+#158|Provoke|C|TPR
+#159|Time Warp|U|TPR
+#160|Sea Monster|C|TPR
+#161|Elven Rite|C|TPR
+#162|Wall of Diffusion|C|TPR
+#163|Deaths Duet|C|TPR
+#164|Starke of Rath|M|TPR
+#165|Mnemonic Sliver|C|TPR
+#166|Barbed Sliver|C|TPR
+#167|Armor Sliver|C|TPR
+#168|Maniacal Rage|C|TPR
+#169|Spinal Graft|C|TPR
+#170|Mogg Flunkies|C|TPR
+#171|Revenant|U|TPR
+#172|Standing Troops|C|TPR
+#173|Horned Turtle|C|TPR
+#174|Recycle|R|TPR
+#175|Scrivener|C|TPR
+#176|Anarchist|C|TPR
+#177|Cinder Marsh|U|TPR
+#178|Mogg Hollows|U|TPR
+#179|Rootwater Depths|U|TPR
+#180|Thalakos Lowlands|U|TPR
+#181|Vec Townships|U|TPR
+#182|Pegasus Stampede|U|TPR
+#183|Verdant Touch|U|TPR
+#184|Shadowstorm|U|TPR
+#185|Wood Sage|R|TPR
+#186|Wasteland|R|TPR
+#187|Needle Storm|U|TPR
+#188|Canopy Spider|C|TPR
+#189|Mounted Archers|C|TPR
+#190|Mogg Infestation|R|TPR
+#191|Mindless Automaton|R|TPR
+#192|Intuition|R|TPR
+#193|Hermit Druid|U|TPR
+#194|Mage il Vec|U|TPR
+#195|Stun|C|TPR
+#196|Harrow|C|TPR
+#197|Wall of Souls|U|TPR
+#198|Clot Sliver|C|TPR
+#199|Horned Sliver|C|TPR
+#200|Twitch|C|TPR
+#201|Mulch|C|TPR
+#202|Thalakos Seer|C|TPR
+#203|Dark Ritual|C|TPR
+#204|Anoint|C|TPR
+#205|Coercion|C|TPR
+#206|Gaseous Form|C|TPR
+#207|Spellshock|U|TPR
+#208|Cannibalize|U|TPR
+#209|Volraths Curse|U|TPR
+#210|Nomads en Kor|C|TPR
+#211|Survival of the Fittest|M|TPR
+#212|Patchwork Gnomes|C|TPR
+#213|Emmessi Tome|U|TPR
+#214|Endangered Armodon|C|TPR
+#215|Bottle Gnomes|C|TPR
+#216|Wind Dancer|U|TPR
+#217|Seething Anger|C|TPR
+#218|Craven Giant|C|TPR
+#219|Dream Prowler|U|TPR
+#220|Thrull Surgeon|C|TPR
+#221|Volraths Laboratory|R|TPR
+#222|Lab Rats|C|TPR
+#223|Spell Blast|C|TPR
+#224|Conviction|C|TPR
+#225|Angelic Blessing|C|TPR
+#226|Skyshaper|C|TPR
+#227|Goblin Bombardment|U|TPR
+#228|Corpse Dance|R|TPR
+#229|Death Pits of Rath|R|TPR
+#230|Grindstone|M|TPR
+#231|Disenchant|C|TPR
+#232|Armored Pegasus|C|TPR
+#233|Winged Sliver|C|TPR
+#234|City of Traitors|R|TPR
+#235|Shatter|C|TPR
+#236|Mogg Maniac|C|TPR
+#237|Metallic Sliver|C|TPR
+#238|Lotus Petal|U|TPR
+#239|Mox Diamond|M|TPR
+#240|Tranquility|U|TPR
+#241|Verdigris|C|TPR
+#242|Sliver Queen|M|TPR
+#243|Humility|M|TPR
+#244|Coat of Arms|R|TPR
+#245|Jinxed Idol|R|TPR
+#246|Pandemonium|R|TPR
+#247|Aluren|R|TPR
+#248|Dream Halls|R|TPR
+#249|Manabond|R|TPR

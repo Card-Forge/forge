@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftXdw2dvKw8CgC2WfgvKRgbwWA4OCFvXtBYFr2qg0MWCohvNA2KupycCgpUlYjBJ7dfCYYa4BVA/Elhq41eii8Ym1Fz3JiAMdIgF1TDDQvhAgDoXaexOo+BaahlNk2quKozwVxRcQSAA9fw3FdEUPe/HVi7A6jRg1pNqLXBbhYpOibrCH86i9o/YOZXuvAcWvE4mRAbF6btDYX6NgcAEA/G9OzQ==
+   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftXdw2dvKw8CgC2WfgvKRgbwWA4OCFvXtBYFr2qg0NnBHh/r2kgOGor2amgwMWpqExSixVwe7MjAw1wCqB2JLDdxqdNH4xNqLnmTEgQ6RgDomGGhfCBCHQu29CVR8C03DKTLtVcVRnoriCwgkgJ6/hmK6ooe9+OpFWJ1GjBpS7UUui3CxSVE32MN51N5Re4eyvdeA4teJxMiAWD03aOyvUTC4AADAaE/V
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -104,9 +104,8 @@
     <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/spellsmith.tx" x="157" y="225"/>
   <object id="58" template="../../obj/shardtrader.tx" x="128" y="130"/>
-  <object id="59" template="../../obj/quest.tx" x="328" y="130">
+  <object id="59" template="../../obj/quest.tx" x="319" y="130" width="34" height="16">
    <properties>
     <property name="questtype" value="plains_town_trobal"/>
    </properties>
