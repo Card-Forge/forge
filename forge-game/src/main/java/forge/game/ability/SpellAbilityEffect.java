@@ -606,46 +606,41 @@ public abstract class SpellAbilityEffect {
         }
     }
 
-    protected static boolean addToCombat(Card c, Player controller, SpellAbility sa, String attackingParam, String blockingParam) {
+    protected static boolean addToCombat(Card c, SpellAbility sa, String attackingParam, String blockingParam) {
         final Card host = sa.getHostCard();
-        final Game game = controller.getGame();
+        final Game game = host.getGame();
         if (!c.isCreature() || !game.getPhaseHandler().inCombat()) {
             return false;
         }
         boolean combatChanged = false;
         final Combat combat = game.getCombat();
 
-        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(controller)) {
+        if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(c.getController())) {
             String attacking = sa.getParam(attackingParam);
 
             GameEntity defender = null;
             FCollection<GameEntity> defs = null;
             // important to update defenders here, maybe some PW got removed
             combat.initConstraints();
-            if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
-                defs = new FCollection<>(defendingPlayers);
-                defs.addAll(Iterables.filter(combat.getDefendingPlaneswalkers(), CardPredicates.isControlledByAnyOf(defendingPlayers)));
-            } else if ("True".equalsIgnoreCase(attacking)) {
+            if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else {
-                defs = AbilityUtils.getDefinedEntities(host, attacking, sa);
+                defs = AbilityUtils.getDefinedEntities(sa.hasParam("ForEach") ? c : host, attacking.split(","), sa);
             }
 
             if (defs != null) {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Attacker", c);
-                Player chooser;
-                if (sa.hasParam("Chooser")) {
-                    chooser = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa), null);
-                } else {
-                    chooser = controller;
-                }
-                defender = chooser.getController().chooseSingleEntityForEffect(defs, sa,
+                defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
                         Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
             }
 
-            if (defender != null) {
+            final GameEntity originalDefender = combat.getDefenderByAttacker(c);
+            if (defender != null &&
+                    (originalDefender == null || !originalDefender.equals(defender))) {
+                // we might be reselecting
+                combat.removeFromCombat(c);
+
                 combat.addAttacker(c, defender);
                 combat.getBandOfAttacker(c).setBlocked(false);
                 combatChanged = true;

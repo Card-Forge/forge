@@ -18,7 +18,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -149,7 +148,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
             return;
         }
 
-        boolean combatChanged = false;
         CardCollection untapped = new CardCollection();
         for (Card tgtC : tgtCards) {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
@@ -252,22 +250,14 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
-
-            if (addToCombat(tgtC, tgtC.getController(), sa, "Attacking", "Blocking")) {
-                combatChanged = true;
-            }
         } // end foreach target
+
         if (!untapped.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             final Map<Player, CardCollection> map = Maps.newHashMap();
             map.put(activator, untapped);
             runParams.put(AbilityKey.Map, map);
             game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
-        }
-
-        if (combatChanged) {
-            game.updateCombatForView();
-            game.fireEvent(new GameEventCombatChanged());
         }
     }
 
