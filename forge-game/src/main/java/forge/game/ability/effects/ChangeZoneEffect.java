@@ -673,7 +673,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("LeaveBattlefield")) {
                     addLeaveBattlefieldReplacement(movedCard, sa, sa.getParam("LeaveBattlefield"));
                 }
-                if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+                if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
                     combatChanged = true;
                 }
                 if (sa.isNinjutsu()) {
@@ -1369,7 +1369,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                    if (addToCombat(c, sa, "Attacking", "Blocking")) {
                         combatChanged = true;
                     }
 
