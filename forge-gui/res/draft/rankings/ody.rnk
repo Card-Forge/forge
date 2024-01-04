@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Persuasion|R|ODY
+#2|Shadowmage Infiltrator|R|ODY
+#3|Overrun|U|ODY
+#4|Wayward Angel|R|ODY
+#5|Aboshan, Cephalid Emperor|R|ODY
+#6|Cabal Patriarch|R|ODY
+#7|Mystic Crusader|R|ODY
+#8|Savage Firecat|R|ODY
+#9|Cephalid Retainer|R|ODY
+#10|Stone-Tongue Basilisk|R|ODY
+#11|Nantuko Mentor|R|ODY
+#12|Vampiric Dragon|R|ODY
+#13|Kamahl, Pit Fighter|R|ODY
+#14|Call of the Herd|R|ODY
+#15|Iridescent Angel|R|ODY
+#16|Cephalid Broker|U|ODY
+#17|Concentrate|U|ODY
+#18|Mirari|R|ODY
+#19|Repentant Vampire|R|ODY
+#20|Ivy Elemental|R|ODY
+#21|Wild Mongrel|C|ODY
+#22|Pianna, Nomad Captain|R|ODY
+#23|Bomb Squad|R|ODY
+#24|Shower of Coals|U|ODY
+#25|Kirtar's Wrath|R|ODY
+#26|Squirrel Nest|U|ODY
+#27|Mindslicer|R|ODY
+#28|Nut Collector|R|ODY
+#29|Roar of the Wurm|U|ODY
+#30|Mystic Enforcer|R|ODY
+#31|Psychatog|U|ODY
+#32|Stalking Bloodsucker|R|ODY
+#33|Braids, Cabal Minion|R|ODY
+#34|Divine Sacrament|R|ODY
+#35|Cephalid Looter|C|ODY
+#36|Aven Smokeweaver|U|ODY
+#37|Thought Devourer|R|ODY
+#38|Nomad Decoy|U|ODY
+#39|Resilient Wanderer|U|ODY
+#40|Amugaba|R|ODY
+#41|Liquid Fire|U|ODY
+#42|Aven Archer|U|ODY
+#43|Mortivore|R|ODY
+#44|Upheaval|R|ODY
+#45|Metamorphic Wurm|U|ODY
+#46|Devoted Caretaker|R|ODY
+#47|Elephant Ambush|C|ODY
+#48|Master Apothecary|R|ODY
+#49|Mystic Zealot|C|ODY
+#50|Krosan Beast|R|ODY
+#51|Beast Attack|U|ODY
+#52|Hallowed Healer|C|ODY
+#53|Puppeteer|U|ODY
+#54|Lieutenant Kirtar|R|ODY
+#55|Ashen Firebeast|R|ODY
+#56|Nimble Mongoose|U|ODY
+#57|Childhood Horror|U|ODY
+#58|Nantuko Disciple|C|ODY
+#59|Firebolt|C|ODY
+#60|Chainflinger|C|ODY
+#61|Crashing Centaur|U|ODY
+#62|Ghastly Demise|C|ODY
+#63|Aven Windreader|C|ODY
+#64|Second Thoughts|C|ODY
+#65|Aven Fisher|C|ODY
+#66|Think Tank|U|ODY
+#67|Treetop Sentinel|U|ODY
+#68|Werebear|C|ODY
+#69|Flame Burst|C|ODY
+#70|Painbringer|U|ODY
+#71|Gravedigger|C|ODY
+#72|Springing Tiger|C|ODY
+#73|Thermal Blast|C|ODY
+#74|Twigwalker|U|ODY
+#75|Beloved Chaplain|U|ODY
+#76|Morbid Hunger|C|ODY
+#77|Chlorophant|R|ODY
+#78|Kirtar's Desire|C|ODY
+#79|Patriarch's Desire|C|ODY
+#80|Bearscape|R|ODY
+#81|Standstill|U|ODY
+#82|Nantuko Elder|U|ODY
+#83|Pulsating Illusion|U|ODY
+#84|Dirty Wererat|C|ODY
+#85|Sylvan Might|U|ODY
+#86|Zombify|U|ODY
+#87|Balshan Griffin|U|ODY
+#88|Gorilla Titan|U|ODY
+#89|Aven Flock|C|ODY
+#90|Repel|C|ODY
+#91|Patrol Hound|C|ODY
+#92|Cursed Monstrosity|R|ODY
+#93|Scrivener|C|ODY
+#94|Skeletal Scrying|U|ODY
+#95|Seton, Krosan Protector|R|ODY
+#96|Krosan Archer|C|ODY
+#97|Diligent Farmhand|C|ODY
+#98|Thought Eater|U|ODY
+#99|Rabid Elephant|C|ODY
+#100|Ember Beast|C|ODY
+#101|Afflict|C|ODY
+#102|Syncopate|C|ODY
+#103|Volley of Boulders|R|ODY
+#104|Frightcrawler|C|ODY
+#105|Infected Vermin|U|ODY
+#106|Engulfing Flames|U|ODY
+#107|Aven Cloudchaser|C|ODY
+#108|Innocent Blood|C|ODY
+#109|Krosan Avenger|C|ODY
+#110|Acceptable Losses|C|ODY
+#111|Bloodcurdler|R|ODY
+#112|Careful Study|C|ODY
+#113|Dusk Imp|C|ODY
+#114|Psionic Gift|C|ODY
+#115|Barbarian Lunatic|C|ODY
+#116|Millikin|U|ODY
+#117|Skyshooter|U|ODY
+#118|Squirrel Mob|R|ODY
+#119|Caustic Tar|U|ODY
+#120|Anarchist|C|ODY
+#121|Minotaur Explorer|U|ODY
+#122|Halberdier|C|ODY
+#123|Dreamwinder|C|ODY
+#124|Face of Fear|U|ODY
+#125|Fervent Denial|U|ODY
+#126|Leaf Dancer|C|ODY
+#127|Sadistic Hypnotist|U|ODY
+#128|Fledgling Imp|C|ODY
+#129|Seton's Desire|C|ODY
+#130|Time Stretch|R|ODY
+#131|Crypt Creeper|C|ODY
+#132|Mystic Visionary|C|ODY
+#133|Still Life|U|ODY
+#134|Escape Artist|C|ODY
+#135|Mystic Penitent|U|ODY
+#136|Blessed Orator|U|ODY
+#137|Pardic Firecat|C|ODY
+#138|Cognivore|R|ODY
+#139|Shifty Doppelganger|R|ODY
+#140|Skycloud Expanse|R|ODY
+#141|Muscle Burst|C|ODY
+#142|Otarian Juggernaut|R|ODY
+#143|Cartographer|C|ODY
+#144|Cephalid Scout|C|ODY
+#145|Dwarven Strike Force|U|ODY
+#146|Zombie Infestation|U|ODY
+#147|Cultural Exchange|R|ODY
+#148|Cephalid Coliseum|U|ODY
+#149|Zoologist|R|ODY
+#150|Dematerialize|C|ODY
+#151|Graceful Antelope|R|ODY
+#152|Auramancer|C|ODY
+#153|Whispering Shade|C|ODY
+#154|Reckless Charge|C|ODY
+#155|Spellbane Centaur|R|ODY
+#156|Gallantry|U|ODY
+#157|Chatter of the Squirrel|C|ODY
+#158|Deep Reconnaissance|U|ODY
+#159|Barbarian Ring|U|ODY
+#160|Soulcatcher|U|ODY
+#161|Luminous Guardian|U|ODY
+#162|Rotting Giant|U|ODY
+#163|Terravore|R|ODY
+#164|Frenetic Ogre|U|ODY
+#165|Magnivore|R|ODY
+#166|Embolden|C|ODY
+#167|Sungrass Prairie|R|ODY
+#168|Diabolic Tutor|U|ODY
+#169|Entomb|R|ODY
+#170|Zombie Assassin|C|ODY
+#171|Peek|C|ODY
+#172|Extract|R|ODY
+#173|Vivify|U|ODY
+#174|Sungrass Egg|U|ODY
+#175|Morgue Theft|C|ODY
+#176|Famished Ghoul|U|ODY
+#177|Recoup|U|ODY
+#178|Execute|U|ODY
+#179|Decimate|R|ODY
+#180|Refresh|C|ODY
+#181|Cabal Pit|U|ODY
+#182|Darkwater Catacombs|R|ODY
+#183|Shelter|C|ODY
+#184|Mad Dog|C|ODY
+#185|Testament of Faith|U|ODY
+#186|Pilgrim of Justice|C|ODY
+#187|Predict|U|ODY
+#188|Spark Mage|U|ODY
+#189|Tireless Tribe|C|ODY
+#190|Seize the Day|R|ODY
+#191|Pilgrim of Virtue|C|ODY
+#192|Blazing Salvo|C|ODY
+#193|Steamclaw|U|ODY
+#194|Bamboozle|U|ODY
+#195|Screams of the Damned|U|ODY
+#196|Patchwork Gnomes|U|ODY
+#197|Sphere of Law|U|ODY
+#198|Druid's Call|U|ODY
+#199|Druid Lyrist|C|ODY
+#200|Centaur Garden|U|ODY
+#201|Aether Burst|C|ODY
+#202|Phantom Whelp|C|ODY
+#203|Mossfire Valley|R|ODY
+#204|Limestone Golem|U|ODY
+#205|Chamber of Manipulation|U|ODY
+#206|Moment's Peace|C|ODY
+#207|Deluge|U|ODY
+#208|Scorching Missile|C|ODY
+#209|Catalyst Stone|R|ODY
+#210|Crystal Quarry|R|ODY
+#211|Balshan Beguiler|U|ODY
+#212|Volcanic Spray|U|ODY
+#213|Junk Golem|R|ODY
+#214|Whipkeeper|U|ODY
+#215|Buried Alive|U|ODY
+#216|Shadowblood Egg|U|ODY
+#217|Divert|R|ODY
+#218|Laquatus's Creativity|U|ODY
+#219|Petrified Field|R|ODY
+#220|Coffin Purge|C|ODY
+#221|Angelic Wall|C|ODY
+#222|Words of Wisdom|C|ODY
+#223|Filthy Cur|C|ODY
+#224|Thaumatog|U|ODY
+#225|Mine Layer|R|ODY
+#226|Timberland Ruins|C|ODY
+#227|Cabal Inquisitor|C|ODY
+#228|Dwarven Recruiter|U|ODY
+#229|Skycloud Egg|U|ODY
+#230|Animal Boneyard|U|ODY
+#231|Pardic Miner|R|ODY
+#232|Rites of Spring|C|ODY
+#233|Phantatog|U|ODY
+#234|Atogatog|R|ODY
+#235|Lava Blister|U|ODY
+#236|Pardic Swordsmith|C|ODY
+#237|Nomad Stadium|U|ODY
+#238|Sandstone Deadfall|U|ODY
+#239|Sphere of Grace|U|ODY
+#240|Sarcatog|U|ODY
+#241|Skull Fracture|U|ODY
+#242|Last Rites|C|ODY
+#243|Touch of Invisibility|C|ODY
+#244|Mossfire Egg|U|ODY
+#245|Molten Influence|R|ODY
+#246|Malevolent Awakening|U|ODY
+#247|Immobilizing Ink|C|ODY
+#248|Traumatize|R|ODY
+#249|Ground Seal|R|ODY
+#250|Kamahl's Desire|C|ODY
+#251|Darkwater Egg|U|ODY
+#252|Howling Gale|U|ODY
+#253|Tainted Pact|R|ODY
+#254|Patron Wizard|R|ODY
+#255|Zombie Cannibal|C|ODY
+#256|Bog Wreckage|C|ODY
+#257|Thought Nibbler|C|ODY
+#258|Rites of Refusal|C|ODY
+#259|Lithatog|U|ODY
+#260|Sphere of Duty|U|ODY
+#261|Gravestorm|R|ODY
+#262|Seafloor Debris|C|ODY
+#263|Haunting Echoes|R|ODY
+#264|Aboshan's Desire|C|ODY
+#265|Traveling Plague|R|ODY
+#266|Tarnished Citadel|R|ODY
+#267|Confessor|C|ODY
+#268|Mind Burst|C|ODY
+#269|Overeager Apprentice|C|ODY
+#270|Ray of Distortion|C|ODY
+#271|Spiritualize|U|ODY
+#272|Magma Vein|U|ODY
+#273|Demoralize|C|ODY
+#274|Aven Shrine|R|ODY
+#275|Rites of Initiation|C|ODY
+#276|Ravaged Highlands|C|ODY
+#277|Holistic Wisdom|R|ODY
+#278|Dedicated Martyr|C|ODY
+#279|Earth Rift|C|ODY
+#280|Woodland Druid|C|ODY
+#281|Life Burst|C|ODY
+#282|Demolish|U|ODY
+#283|Abandoned Outpost|C|ODY
+#284|Decaying Soil|R|ODY
+#285|Dwarven Grunt|C|ODY
+#286|Aura Graft|U|ODY
+#287|Burning Sands|R|ODY
+#288|Tattoo Ward|U|ODY
+#289|Cease-Fire|C|ODY
+#290|Shadowblood Ridge|R|ODY
+#291|Decompose|U|ODY
+#292|Tremble|C|ODY
+#293|Nefarious Lich|R|ODY
+#294|New Frontiers|R|ODY
+#295|Earnest Fellowship|R|ODY
+#296|Unifying Theory|R|ODY
+#297|Need for Speed|R|ODY
+#298|Balancing Act|R|ODY
+#299|Sphere of Reason|U|ODY
+#300|Simplify|C|ODY
+#301|Cantivore|R|ODY
+#302|Karmic Justice|R|ODY
+#303|Sphere of Truth|U|ODY
+#304|Deserted Temple|R|ODY
+#305|Obstinate Familiar|R|ODY
+#306|Verdant Succession|R|ODY
+#307|Bash to Bits|U|ODY
+#308|Piper's Melody|U|ODY
+#309|Primal Frenzy|C|ODY
+#310|Price of Glory|U|ODY
+#311|Dwarven Shrine|R|ODY
+#312|Sacred Rites|C|ODY
+#313|Dogged Hunter|R|ODY
+#314|Ancestral Tribute|R|ODY
+#315|Tombfire|R|ODY
+#316|Battle Strain|U|ODY
+#317|Pedantic Learning|R|ODY
+#318|Battle of Wits|R|ODY
+#319|Impulsive Maneuvers|R|ODY
+#320|Delaying Shield|R|ODY
+#321|Charmed Pendant|R|ODY
+#322|Steam Vines|U|ODY
+#323|Epicenter|R|ODY
+#324|Cabal Shrine|R|ODY
+#325|Chance Encounter|R|ODY
+#326|Hint of Insanity|R|ODY
+#327|Aegis of Honor|R|ODY
+#328|Cephalid Shrine|R|ODY
+#329|Mudhole|R|ODY
+#330|Nantuko Shrine|R|ODY

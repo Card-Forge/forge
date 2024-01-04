@@ -1,0 +1,281 @@
+//Rank|Name|Rarity|Set
+#1|Nightpack Ambusher|R|M20
+#2|Chandra, Awakened Inferno|M|M20
+#3|Gargos, Vicious Watcher|R|M20
+#4|Vivien, Arkbow Ranger|M|M20
+#5|Ajani, Strength of the Pride|M|M20
+#6|Cavalier of Gales|M|M20
+#7|Cavalier of Night|M|M20
+#8|Cavalier of Flame|M|M20
+#9|Yarok, the Desecrated|M|M20
+#10|Mu Yanling, Sky Dancer|M|M20
+#11|Voracious Hydra|R|M20
+#12|Cavalier of Dawn|M|M20
+#13|Dungeon Geists|R|M20
+#14|Dread Presence|R|M20
+#15|Shifting Ceratops|R|M20
+#16|Omnath, Locus of the Roil|M|M20
+#17|Kykar, Wind's Fury|M|M20
+#18|Kaalia, Zenith Seeker|M|M20
+#19|Atemsis, All-Seeing|R|M20
+#20|Cavalier of Thorns|M|M20
+#21|Hanged Executioner|R|M20
+#22|Rotting Regisaur|R|M20
+#23|Knight of the Ebon Legion|R|M20
+#24|Drakuseth, Maw of Flames|R|M20
+#25|Steel Overseer|R|M20
+#26|Loxodon Lifechanter|R|M20
+#27|Master Splicer|U|M20
+#28|Tomebound Lich|U|M20
+#29|Planar Cleansing|R|M20
+#30|Chandra, Novice Pyromancer|U|M20
+#31|Gravedigger|U|M20
+#32|Shock|C|M20
+#33|Air Elemental|U|M20
+#34|Cloudkin Seer|C|M20
+#35|Pacifism|C|M20
+#36|Risen Reef|U|M20
+#37|Ironroot Warlord|U|M20
+#38|Chandra, Acolyte of Flame|R|M20
+#39|Rabid Bite|C|M20
+#40|Chandra's Outrage|C|M20
+#41|Murder|C|M20
+#42|Spectral Sailor|U|M20
+#43|Ogre Siegebreaker|U|M20
+#44|Empyrean Eagle|U|M20
+#45|Creeping Trailblazer|U|M20
+#46|Agonizing Syphon|C|M20
+#47|Glint-Horn Buccaneer|R|M20
+#48|Lightning Stormkin|U|M20
+#49|Captivating Gyre|U|M20
+#50|Thrashing Brontodon|U|M20
+#51|Disfigure|U|M20
+#52|Angel of Vitality|U|M20
+#53|Warden of Evos Isle|U|M20
+#54|Howling Giant|U|M20
+#55|Meteor Golem|U|M20
+#56|Scampering Scorcher|U|M20
+#57|Gorging Vulture|C|M20
+#58|Overcome|U|M20
+#59|Sephara, Sky's Blade|R|M20
+#60|Rapacious Dragon|U|M20
+#61|Bloodthirsty Aerialist|U|M20
+#62|Barkhide Troll|U|M20
+#63|Ember Hauler|U|M20
+#64|Corpse Knight|U|M20
+#65|Yarok's Fenlurker|U|M20
+#66|Sleep Paralysis|C|M20
+#67|Gruesome Scourger|U|M20
+#68|Frost Lynx|C|M20
+#69|Mask of Immolation|U|M20
+#70|Drawn from Dreams|R|M20
+#71|Starfield Mystic|R|M20
+#72|Fencing Ace|U|M20
+#73|Griffin Protector|C|M20
+#74|Reduce to Ashes|C|M20
+#75|Apostle of Purifying Light|U|M20
+#76|Brought Back|R|M20
+#77|Yarok's Wavecrasher|U|M20
+#78|Skyknight Vanguard|U|M20
+#79|Embodiment of Agonies|R|M20
+#80|Noxious Grasp|U|M20
+#81|Leafkin Druid|C|M20
+#82|Manifold Key|U|M20
+#83|Woodland Champion|U|M20
+#84|Vampire of the Dire Moon|U|M20
+#85|Sorin, Imperious Bloodlord|M|M20
+#86|Loyal Pegasus|U|M20
+#87|Unsummon|C|M20
+#88|Dawning Angel|C|M20
+#89|Steadfast Sentry|C|M20
+#90|Boreal Elemental|C|M20
+#91|Centaur Courser|C|M20
+#92|Might of the Masses|U|M20
+#93|Sedge Scorpion|C|M20
+#94|Ancestral Blade|U|M20
+#95|Blood for Bones|U|M20
+#96|Audacious Thief|C|M20
+#97|Aerial Assault|C|M20
+#98|Thicket Crasher|C|M20
+#99|Icon of Ancestry|R|M20
+#100|Cerulean Drake|U|M20
+#101|Agent of Treachery|R|M20
+#102|Fry|U|M20
+#103|Marauding Raptor|R|M20
+#104|Herald of the Sun|U|M20
+#105|Season of Growth|U|M20
+#106|Wolfrider's Saddle|U|M20
+#107|Legion's End|R|M20
+#108|Overgrowth Elemental|U|M20
+#109|Silverback Shaman|C|M20
+#110|Aether Gust|U|M20
+#111|Devout Decree|U|M20
+#112|Cryptic Caves|U|M20
+#113|Evolving Wilds|C|M20
+#114|Thornwood Falls|C|M20
+#115|Blossoming Sands|C|M20
+#116|Wind-Scarred Crag|C|M20
+#117|Rugged Highlands|C|M20
+#118|Jungle Hollow|C|M20
+#119|Bloodfell Caves|C|M20
+#120|Swiftwater Cliffs|C|M20
+#121|Dismal Backwater|C|M20
+#122|Scoured Barrens|C|M20
+#123|Tranquil Cove|C|M20
+#124|Gauntlets of Light|U|M20
+#125|Griffin Sentinel|C|M20
+#126|Inspiring Captain|C|M20
+#127|Metropolis Sprite|C|M20
+#128|Vengeful Warchief|U|M20
+#129|Keldon Raider|C|M20
+#130|Netcaster Spider|C|M20
+#131|Bag of Holding|R|M20
+#132|Gods Willing|U|M20
+#133|Bloodsoaked Altar|U|M20
+#134|Eternal Isolation|U|M20
+#135|Shared Summons|R|M20
+#136|Boneclad Necromancer|C|M20
+#137|Winged Words|C|M20
+#138|Lavakin Brawler|C|M20
+#139|Hard Cover|U|M20
+#140|Raise the Alarm|C|M20
+#141|Temple of Triumph|R|M20
+#142|Temple of Epiphany|R|M20
+#143|Temple of Malady|R|M20
+#144|Temple of Mystery|R|M20
+#145|Temple of Silence|R|M20
+#146|Masterful Replication|R|M20
+#147|Repeated Reverberation|R|M20
+#148|Bone Splinters|C|M20
+#149|Unchained Berserker|U|M20
+#150|Uncaged Fury|U|M20
+#151|Octoprophet|C|M20
+#152|Flame Sweep|U|M20
+#153|Chandra's Regulator|R|M20
+#154|Chandra's Spitfire|U|M20
+#155|Brightwood Tracker|C|M20
+#156|Angelic Gift|C|M20
+#157|Daybreak Chaplain|C|M20
+#158|Epicure of Blood|C|M20
+#159|Fathom Fleet Cutthroat|C|M20
+#160|Daggersail Aeronaut|C|M20
+#161|Ripscale Predator|C|M20
+#162|Mammoth Spider|C|M20
+#163|Pattern Matcher|U|M20
+#164|Brineborn Cutthroat|U|M20
+#165|Battalion Foot Soldier|C|M20
+#166|Kethis, the Hidden Hand|M|M20
+#167|Squad Captain|C|M20
+#168|Blood Burglar|C|M20
+#169|Goblin Smuggler|C|M20
+#170|Vilis, Broker of Blood|R|M20
+#171|Wolfkin Bond|C|M20
+#172|Ferocious Pup|C|M20
+#173|Diamond Knight|U|M20
+#174|Renowned Weaponsmith|U|M20
+#175|Portal of Sanctuary|U|M20
+#176|Scuttlemutt|U|M20
+#177|Scholar of the Ages|U|M20
+#178|Pulse of Murasa|U|M20
+#179|Golos, Tireless Pilgrim|R|M20
+#180|Bishop of Wings|R|M20
+#181|Destructive Digger|C|M20
+#182|Blightbeetle|U|M20
+#183|Veil of Summer|U|M20
+#184|Infuriate|C|M20
+#185|Chandra's Embercat|C|M20
+#186|Wakeroot Elemental|R|M20
+#187|Glaring Aegis|C|M20
+#188|Frilled Sea Serpent|C|M20
+#189|Soul Salvage|C|M20
+#190|Feral Invocation|C|M20
+#191|Gift of Paradise|C|M20
+#192|Marauder's Axe|C|M20
+#193|Faerie Miscreant|C|M20
+#194|Lotus Field|R|M20
+#195|Vial of Dragonfire|C|M20
+#196|Growth Cycle|C|M20
+#197|Loaming Shaman|U|M20
+#198|Retributive Wand|U|M20
+#199|Goblin Bird-Grabber|C|M20
+#200|Moment of Heroism|C|M20
+#201|Moorland Inquisitor|C|M20
+#202|Anticipate|C|M20
+#203|Befuddle|C|M20
+#204|Sage's Row Denizen|C|M20
+#205|Zephyr Charge|C|M20
+#206|Barony Vampire|C|M20
+#207|Bladebrand|C|M20
+#208|Feral Abomination|C|M20
+#209|Mind Rot|C|M20
+#210|Sanitarium Skeleton|C|M20
+#211|Sorcerer of the Fang|C|M20
+#212|Prismite|C|M20
+#213|Vorstclaw|C|M20
+#214|Undead Servant|C|M20
+#215|Pack Mastiff|C|M20
+#216|Moat Piranhas|C|M20
+#217|Elvish Reclaimer|R|M20
+#218|Moldervine Reclamation|U|M20
+#219|Convolute|C|M20
+#220|Goblin Ringleader|U|M20
+#221|Negate|C|M20
+#222|Inspired Charge|C|M20
+#223|Soulmender|C|M20
+#224|Bone to Ash|C|M20
+#225|Fortress Crab|C|M20
+#226|Duress|C|M20
+#227|Fire Elemental|C|M20
+#228|Maniacal Rage|C|M20
+#229|Tectonic Rift|C|M20
+#230|Greenwood Sentinel|C|M20
+#231|Plummet|C|M20
+#232|Anvilwrought Raptor|C|M20
+#233|Thunderkin Awakener|R|M20
+#234|Tale's End|R|M20
+#235|Colossus Hammer|U|M20
+#236|Heart-Piercer Bow|C|M20
+#237|Leyline of Abundance|R|M20
+#238|Leyline of Anticipation|R|M20
+#239|Reckless Air Strike|C|M20
+#240|Leyline of Combustion|R|M20
+#241|Dragon Mage|U|M20
+#242|Disenchant|C|M20
+#243|Scheming Symmetry|R|M20
+#244|Yoked Ox|C|M20
+#245|Act of Treason|C|M20
+#246|Scorch Spitter|C|M20
+#247|Healer of the Glade|C|M20
+#248|Natural End|C|M20
+#249|Salvager of Ruin|U|M20
+#250|Diviner's Lockbox|U|M20
+#251|Flood of Tears|R|M20
+#252|Leyline of Sanctity|R|M20
+#253|Unholy Indenture|C|M20
+#254|Stone Golem|C|M20
+#255|Mystic Forge|R|M20
+#256|Rule of Law|U|M20
+#257|Leyline of the Void|R|M20
+#258|Grafdigger's Cage|R|M20
+#259|Thought Distortion|U|M20
+#260|Field of the Dead|R|M20
+#261|Forest 4||M20
+#262|Forest 3||M20
+#263|Forest 2||M20
+#264|Forest 1||M20
+#265|Mountain 4||M20
+#266|Mountain 3||M20
+#267|Mountain 2||M20
+#268|Mountain 1||M20
+#269|Swamp 4||M20
+#270|Swamp 3||M20
+#271|Swamp 2||M20
+#272|Swamp 1||M20
+#273|Island 4||M20
+#274|Island 3||M20
+#275|Island 2||M20
+#276|Island 1||M20
+#277|Plains 4||M20
+#278|Plains 3||M20
+#279|Plains 2||M20
+#280|Plains 1||M20

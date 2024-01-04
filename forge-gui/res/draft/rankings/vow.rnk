@@ -1,0 +1,268 @@
+//Rank|Name|Rarity|Set
+#1|Avabruck Caretaker|M|VOW
+#2|Dreadfeast Demon|R|VOW
+#3|Toxrill, the Corrosive|M|VOW
+#4|Sorin the Mirthless|M|VOW
+#5|Halana and Alena, Partners|R|VOW
+#6|Cemetery Desecrator|M|VOW
+#7|Henrika Domnathi|M|VOW
+#8|Manaform Hellkite|M|VOW
+#9|Wedding Announcement|R|VOW
+#10|By Invitation Only|R|VOW
+#11|Hullbreaker Horror|R|VOW
+#12|Anje, Maid of Dishonor|R|VOW
+#13|Bloodvial Purveyor|R|VOW
+#14|Faithbound Judge|M|VOW
+#15|Mirrorhall Mimic|R|VOW
+#16|Edgar, Charmed Groom|R|VOW
+#17|Ulvenwald Oddity|R|VOW
+#18|Torens, Fist of the Angels|R|VOW
+#19|Glorious Sunrise|R|VOW
+#20|Volatile Arsonist|M|VOW
+#21|Cemetery Protector|M|VOW
+#22|Welcoming Vampire|R|VOW
+#23|Olivia, Crimson Bride|M|VOW
+#24|Dollhouse of Horrors|R|VOW
+#25|Dreamshackle Geist|R|VOW
+#26|Jacob Hauken, Inspector|M|VOW
+#27|Stensia Uprising|R|VOW
+#28|Voldaren Bloodcaster|R|VOW
+#29|Cemetery Illuminator|M|VOW
+#30|Falkenrath Forebear|R|VOW
+#31|Creepy Puppeteer|R|VOW
+#32|Hiveheart Shaman|R|VOW
+#33|Howlpack Piper|R|VOW
+#34|Katilda, Dawnhart Martyr|R|VOW
+#35|Ill-Tempered Loner|R|VOW
+#36|Savior of Ollenbock|M|VOW
+#37|Geralf, Visionary Stitcher|R|VOW
+#38|Overcharged Amalgam|R|VOW
+#39|Olivia's Attendants|R|VOW
+#40|Concealing Curtains|R|VOW
+#41|Necroduality|M|VOW
+#42|Headless Rider|R|VOW
+#43|Dying to Serve|R|VOW
+#44|Fell Stinger|U|VOW
+#45|Hero's Downfall|U|VOW
+#46|Chandra, Dressed to Kill|M|VOW
+#47|Cemetery Prowler|M|VOW
+#48|Packsong Pup|U|VOW
+#49|Grolnok, the Omnivore|R|VOW
+#50|Bloodtithe Harvester|U|VOW
+#51|Old Rutstein|R|VOW
+#52|Dorothea, Vengeful Victim|R|VOW
+#53|Bleed Dry|C|VOW
+#54|Path of Peril|R|VOW
+#55|Rending Flame|U|VOW
+#56|Markov Purifier|U|VOW
+#57|Child of the Pack|U|VOW
+#58|Ballista Watcher|U|VOW
+#59|Angelic Quartermaster|U|VOW
+#60|Lantern Flare|R|VOW
+#61|Valorous Stance|U|VOW
+#62|Voice of the Blessed|R|VOW
+#63|Abrade|C|VOW
+#64|Hamlet Vanguard|R|VOW
+#65|Howling Moon|R|VOW
+#66|Thirst for Discovery|U|VOW
+#67|Parasitic Grasp|U|VOW
+#68|Reclusive Taxidermist|U|VOW
+#69|Markov Waltzer|U|VOW
+#70|Wandering Mind|U|VOW
+#71|Twinblade Geist|U|VOW
+#72|Brine Comber|U|VOW
+#73|Alluring Suitor|U|VOW
+#74|Voltaic Visionary|U|VOW
+#75|Whispering Wizard|U|VOW
+#76|Kessig Wolfrider|R|VOW
+#77|Wolf Strike|C|VOW
+#78|Fleeting Spirit|U|VOW
+#79|Ancient Lumberknot|U|VOW
+#80|Skull Skaab|U|VOW
+#81|Dormant Grove|U|VOW
+#82|Wolfkin Outcast|U|VOW
+#83|Fierce Retribution|C|VOW
+#84|Resistance Squad|U|VOW
+#85|Traveling Minister|C|VOW
+#86|Diver Skaab|U|VOW
+#87|Undead Butler|U|VOW
+#88|Cemetery Gatekeeper|M|VOW
+#89|Dominating Vampire|R|VOW
+#90|Flame-Blessed Bolt|C|VOW
+#91|Ascendant Packleader|R|VOW
+#92|Cultivator Colossus|M|VOW
+#93|Sigardian Paladin|U|VOW
+#94|Circle of Confinement|U|VOW
+#95|Gryffwing Cavalry|U|VOW
+#96|Stormchaser Drake|U|VOW
+#97|Runebound Wolf|U|VOW
+#98|Eruth, Tormented Prophet|R|VOW
+#99|Kindly Ancestor|C|VOW
+#100|Thalia, Guardian of Thraben|R|VOW
+#101|Lunar Rejection|U|VOW
+#102|Archghoul of Thraben|U|VOW
+#103|Diregraf Scavenger|C|VOW
+#104|Falkenrath Celebrants|C|VOW
+#105|Vampires' Vengeance|U|VOW
+#106|Spore Crawler|C|VOW
+#107|Reckless Impulse|C|VOW
+#108|Bramble Wurm|U|VOW
+#109|Distracting Geist|U|VOW
+#110|Drogskol Infantry|C|VOW
+#111|Weaver of Blossoms|C|VOW
+#112|Panicked Bystander|U|VOW
+#113|Gryff Rider|C|VOW
+#114|Sigarda's Imprisonment|C|VOW
+#115|Chill of the Grave|C|VOW
+#116|Cruel Witness|C|VOW
+#117|Inspired Idea|R|VOW
+#118|Stitched Assistant|C|VOW
+#119|Doomed Dissenter|C|VOW
+#120|Gift of Fangs|C|VOW
+#121|Gluttonous Guest|C|VOW
+#122|Rot-Tide Gargantua|C|VOW
+#123|Blood Petal Celebrant|C|VOW
+#124|Apprentice Sharpshooter|C|VOW
+#125|Cloaked Cadet|U|VOW
+#126|Vilespawn Spider|U|VOW
+#127|Heron of Hope|C|VOW
+#128|Scattered Thoughts|C|VOW
+#129|Screaming Swarm|U|VOW
+#130|Bloodcrazed Socialite|C|VOW
+#131|Graf Reaver|R|VOW
+#132|Hungry Ridgewolf|C|VOW
+#133|Dawnhart Disciple|C|VOW
+#134|Flourishing Hunter|C|VOW
+#135|Evolving Wilds|C|VOW
+#136|Gutter Skulker|U|VOW
+#137|Lantern Bearer|C|VOW
+#138|Runo Stromkirk|R|VOW
+#139|Catapult Fodder|U|VOW
+#140|Infestation Expert|U|VOW
+#141|Oakshade Stalker|U|VOW
+#142|Foreboding Statue|U|VOW
+#143|Hookhand Mariner|C|VOW
+#144|Ragged Recluse|C|VOW
+#145|Desperate Farmer|C|VOW
+#146|Binding Geist|C|VOW
+#147|Repository Skaab|C|VOW
+#148|Syncopate|C|VOW
+#149|Syphon Essence|C|VOW
+#150|Wedding Security|U|VOW
+#151|Curse of Hospitality|R|VOW
+#152|Daybreak Combatants|C|VOW
+#153|Magma Pummeler|U|VOW
+#154|Dig Up|R|VOW
+#155|Sporeback Wolf|C|VOW
+#156|Odric, Blood-Cursed|R|VOW
+#157|Deathcap Glade|R|VOW
+#158|Dreamroot Cascade|R|VOW
+#159|Shattered Sanctum|R|VOW
+#160|Stormcarved Coast|R|VOW
+#161|Sundown Pass|R|VOW
+#162|Courier Bat|C|VOW
+#163|Sanguine Statuette|U|VOW
+#164|Sawblade Slinger|U|VOW
+#165|Spiked Ripsaw|U|VOW
+#166|Biolume Egg|U|VOW
+#167|Mischievous Catgeist|U|VOW
+#168|Restless Bloodseeker|U|VOW
+#169|Heron-Blessed Geist|C|VOW
+#170|Nebelgast Beguiler|C|VOW
+#171|Parish-Blade Trainee|C|VOW
+#172|Skywarp Skaab|C|VOW
+#173|Edgar's Awakening|U|VOW
+#174|Mindleech Ghoul|C|VOW
+#175|Pointed Discussion|C|VOW
+#176|Frenzied Devils|U|VOW
+#177|Lacerate Flesh|C|VOW
+#178|Voldaren Epicure|C|VOW
+#179|Rural Recruit|C|VOW
+#180|Snarling Wolf|C|VOW
+#181|Toxic Scorpion|C|VOW
+#182|Witch's Web|C|VOW
+#183|Investigator's Journal|R|VOW
+#184|Wash Away|U|VOW
+#185|Wretched Throng|C|VOW
+#186|Blood Hypnotist|U|VOW
+#187|Kessig Flamebreather|C|VOW
+#188|Boarded Window|U|VOW
+#189|Innocent Traveler|U|VOW
+#190|Lambholt Raconteur|U|VOW
+#191|Adamant Will|C|VOW
+#192|Estwald Shieldbasher|C|VOW
+#193|Hopeful Initiate|R|VOW
+#194|Ollenbock Escort|U|VOW
+#195|Vampire Slayer|C|VOW
+#196|Alchemist's Retrieval|C|VOW
+#197|Fear of Death|C|VOW
+#198|Geistlight Snare|U|VOW
+#199|Aim for the Head|C|VOW
+#200|Blood Fountain|C|VOW
+#201|Persistent Specimen|C|VOW
+#202|Undying Malice|C|VOW
+#203|Ancestral Anger|C|VOW
+#204|Lightning Wolf|C|VOW
+#205|Pyre Spawn|C|VOW
+#206|Sure Strike|C|VOW
+#207|Laid to Rest|U|VOW
+#208|Massive Might|C|VOW
+#209|Voldaren Estate|R|VOW
+#210|Cobbled Lancer|U|VOW
+#211|Belligerent Guest|C|VOW
+#212|Moldgraf Millipede|C|VOW
+#213|Mulch|C|VOW
+#214|Weary Prisoner|C|VOW
+#215|Soulcipher Board|U|VOW
+#216|Nurturing Presence|C|VOW
+#217|Dreadlight Monstrosity|C|VOW
+#218|Patchwork Crawler|R|VOW
+#219|Steelclad Spirit|C|VOW
+#220|Wanderlight Spirit|C|VOW
+#221|Grisly Ritual|C|VOW
+#222|Markov Retribution|U|VOW
+#223|Nature's Embrace|C|VOW
+#224|Retrieve|U|VOW
+#225|Sheltering Boughs|C|VOW
+#226|Ceremonial Knife|C|VOW
+#227|Wedding Invitation|C|VOW
+#228|Militia Rallier|C|VOW
+#229|Winged Portent|R|VOW
+#230|Witness the Future|U|VOW
+#231|Skulking Killer|U|VOW
+#232|Honeymoon Hearse|U|VOW
+#233|Into the Night|U|VOW
+#234|Bloodsworn Squire|U|VOW
+#235|Fearful Villager|C|VOW
+#236|Arm the Cathars|U|VOW
+#237|Bride's Gown|U|VOW
+#238|Dawnhart Geist|U|VOW
+#239|Piercing Light|C|VOW
+#240|Unholy Officiant|C|VOW
+#241|Cradle of Safety|C|VOW
+#242|Selhoff Entomber|C|VOW
+#243|Dread Fugue|U|VOW
+#244|Groom's Finery|U|VOW
+#245|Bramble Armor|C|VOW
+#246|Blood Servitor|C|VOW
+#247|Honored Heirloom|C|VOW
+#248|Hallowed Haunting|M|VOW
+#249|Sigarda's Summons|R|VOW
+#250|Supernatural Rescue|C|VOW
+#251|Serpentine Ambush|C|VOW
+#252|Vampire's Kiss|C|VOW
+#253|Bloody Betrayal|C|VOW
+#254|End the Festivities|C|VOW
+#255|Crushing Canopy|C|VOW
+#256|Kaya, Geist Hunter|M|VOW
+#257|Lantern of the Lost|U|VOW
+#258|Unhallowed Phalanx|C|VOW
+#259|Alchemist's Gambit|R|VOW
+#260|Cartographer's Survey|U|VOW
+#261|Crawling Infestation|U|VOW
+#262|Radiant Grace|U|VOW
+#263|Sanctify|C|VOW
+#264|Consuming Tide|R|VOW
+#265|Demonic Bargain|R|VOW
+#266|Change of Fortune|R|VOW
+#267|Splendid Reclamation|R|VOW

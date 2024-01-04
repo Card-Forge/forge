@@ -1,0 +1,181 @@
+//Rank|Name|Rarity|Set
+#1|Creakwood Liege|R|EVE
+#2|Figure of Destiny|R|EVE
+#3|Balefire Liege|R|EVE
+#4|Divinity of Pride|R|EVE
+#5|Deathbringer Liege|R|EVE
+#6|Hallowed Burial|R|EVE
+#7|Dominus of Fealty|R|EVE
+#8|Deity of Scars|R|EVE
+#9|Stillmoon Cavalier|R|EVE
+#10|Archon of Justice|R|EVE
+#11|Murkfiend Liege|R|EVE
+#12|Nobilis of War|R|EVE
+#13|Rise of the Hobgoblins|R|EVE
+#14|Call the Skybreaker|R|EVE
+#15|Spitting Image|R|EVE
+#16|Hateflayer|R|EVE
+#17|Crackleburr|R|EVE
+#18|Spitemare|U|EVE
+#19|Mindwrack Liege|R|EVE
+#20|Sapling of Colfenor|R|EVE
+#21|Unmake|C|EVE
+#22|Puncture Blast|C|EVE
+#23|Doomgape|R|EVE
+#24|Overbeing of Myth|R|EVE
+#25|Wake Thrasher|R|EVE
+#26|Ashling, the Extinguisher|R|EVE
+#27|Belligerent Hatchling|U|EVE
+#28|Necroskitter|R|EVE
+#29|Snakeform|C|EVE
+#30|Evershrike|R|EVE
+#31|Voracious Hatchling|U|EVE
+#32|Spirit of the Hearth|R|EVE
+#33|Rekindled Flame|R|EVE
+#34|Thunderblust|R|EVE
+#35|Hearthfire Hobgoblin|U|EVE
+#36|Hatchet Bully|U|EVE
+#37|Light from Within|R|EVE
+#38|Recumbent Bliss|C|EVE
+#39|Cankerous Thirst|U|EVE
+#40|Quillspike|U|EVE
+#41|Fire at Will|C|EVE
+#42|Waves of Aggression|R|EVE
+#43|Crag Puca|U|EVE
+#44|Noxious Hatchling|U|EVE
+#45|Shrewd Hatchling|U|EVE
+#46|Cold Eyed Selkie|R|EVE
+#47|Canker Abomination|U|EVE
+#48|Flickerwisp|U|EVE
+#49|Primalcrux|R|EVE
+#50|Outrage Shaman|U|EVE
+#51|Noggle Bandit|C|EVE
+#52|Ballynock Trapper|C|EVE
+#53|Restless Apparition|U|EVE
+#54|Sturdy Hatchling|U|EVE
+#55|Stalker Hag|U|EVE
+#56|Talara's Battalion|R|EVE
+#57|Soul Snuffers|U|EVE
+#58|Bloodied Ghost|U|EVE
+#59|Stigma Lasher|R|EVE
+#60|Unwilling Recruit|U|EVE
+#61|Glen Elendra Archmage|R|EVE
+#62|Regal Force|R|EVE
+#63|Soul Reap|C|EVE
+#64|Wistful Selkie|U|EVE
+#65|Gwyllion Hedge Mage|U|EVE
+#66|Rendclaw Trow|C|EVE
+#67|Needle Specter|R|EVE
+#68|Bloom Tender|R|EVE
+#69|Twinblade Slasher|U|EVE
+#70|Flame Jab|C|EVE
+#71|Battlegate Mimic|C|EVE
+#72|Savage Conception|U|EVE
+#73|Nightsky Mimic|C|EVE
+#74|Wickerbough Elder|C|EVE
+#75|Groundling Pouncer|U|EVE
+#76|Scarecrone|R|EVE
+#77|Desecrator Hag|C|EVE
+#78|Riverfall Mimic|C|EVE
+#79|Harvest Gwyllion|C|EVE
+#80|Hag Hedge Mage|U|EVE
+#81|Inundate|R|EVE
+#82|Noggle Hedge Mage|U|EVE
+#83|Duergar Hedge Mage|U|EVE
+#84|Loyal Gyrfalcon|U|EVE
+#85|Selkie Hedge Mage|U|EVE
+#86|Duergar Mine Captain|U|EVE
+#87|Shorecrasher Mimic|C|EVE
+#88|Nucklavee|U|EVE
+#89|Cinder Pyromancer|C|EVE
+#90|Duergar Assailant|C|EVE
+#91|Woodlurker Mimic|C|EVE
+#92|Syphon Life|U|EVE
+#93|Fiery Bombardment|R|EVE
+#94|Noggle Bridgebreaker|C|EVE
+#95|Leering Emblem|R|EVE
+#96|Worm Harvest|R|EVE
+#97|Fable of Wolf and Owl|R|EVE
+#98|Cenn's Enlistment|C|EVE
+#99|Marshdrinker Giant|U|EVE
+#100|Suture Spirit|U|EVE
+#101|Aerie Ouphes|C|EVE
+#102|Patrol Signaler|U|EVE
+#103|Double Cleave|C|EVE
+#104|Hobgoblin Dragoon|C|EVE
+#105|Nettle Sentinel|C|EVE
+#106|Soot Imp|U|EVE
+#107|Fetid Heath|R|EVE
+#108|Gilder Bairn|U|EVE
+#109|Rugged Prairie|R|EVE
+#110|Cache Raiders|U|EVE
+#111|Endless Horizons|R|EVE
+#112|Lingering Tormentor|U|EVE
+#113|Scourge of the Nobilis|C|EVE
+#114|Edge of the Divinity|C|EVE
+#115|Smoldering Butcher|C|EVE
+#116|Clout of the Dominus|C|EVE
+#117|Beckon Apparition|C|EVE
+#118|Dream Thief|C|EVE
+#119|Swirling Spriggan|U|EVE
+#120|Cascade Bluffs|R|EVE
+#121|Stream Hopper|C|EVE
+#122|Heartlash Cinder|C|EVE
+#123|Springjack Pasture|R|EVE
+#124|Kithkin Spellduster|C|EVE
+#125|Flooded Grove|R|EVE
+#126|Noggle Ransacker|U|EVE
+#127|Banishing Knack|C|EVE
+#128|Duergar Cave Guard|U|EVE
+#129|Twilight Mire|R|EVE
+#130|Inside Out|C|EVE
+#131|Nip Gwyllion|C|EVE
+#132|Gift of the Deity|C|EVE
+#133|Odious Trow|C|EVE
+#134|Grazing Kelpie|C|EVE
+#135|Duskdale Wurm|U|EVE
+#136|Impelled Giant|U|EVE
+#137|Monstrify|C|EVE
+#138|Hotheaded Giant|C|EVE
+#139|Cauldron Haze|U|EVE
+#140|Favor of the Overbeing|C|EVE
+#141|Chaotic Backlash|U|EVE
+#142|Razorfin Abolisher|U|EVE
+#143|Umbra Stalker|R|EVE
+#144|Springjack Shepherd|U|EVE
+#145|Trapjaw Kelpie|C|EVE
+#146|Batwing Brume|U|EVE
+#147|Slippery Bogle|C|EVE
+#148|Talonrend|U|EVE
+#149|Oona's Grace|C|EVE
+#150|Pyrrhic Revival|R|EVE
+#151|Crumbling Ashes|U|EVE
+#152|Unnerving Assault|U|EVE
+#153|Merrow Levitator|C|EVE
+#154|Invert the Skies|U|EVE
+#155|Fang Skulkin|C|EVE
+#156|Creakwood Ghoul|U|EVE
+#157|Mirror Sheen|R|EVE
+#158|Hoof Skulkin|C|EVE
+#159|Kithkin Zealot|C|EVE
+#160|Altar Golem|R|EVE
+#161|Tilling Treefolk|C|EVE
+#162|Raven's Crime|C|EVE
+#163|Endure|U|EVE
+#164|Sanity Grinding|R|EVE
+#165|Moonhold|U|EVE
+#166|Dream Fracture|U|EVE
+#167|Antler Skulkin|C|EVE
+#168|Shell Skulkin|C|EVE
+#169|Nightmare Incursion|R|EVE
+#170|Drain the Well|C|EVE
+#171|Wilderness Hypnotist|C|EVE
+#172|Indigo Faerie|U|EVE
+#173|Ward of Bones|R|EVE
+#174|Idle Thoughts|U|EVE
+#175|Jawbone Skulkin|C|EVE
+#176|Talara's Bane|C|EVE
+#177|Merrow Bonegnawer|C|EVE
+#178|Glamerdye|R|EVE
+#179|Helix Pinnacle|R|EVE
+#180|Phosphorescent Feast|U|EVE

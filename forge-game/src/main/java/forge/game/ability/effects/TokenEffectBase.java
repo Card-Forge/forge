@@ -185,7 +185,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     addSelfTrigger(sa, sa.getParam("AtEOTTrig"), moved);
                 }
 
-                if (addToCombat(moved, tok.getController(), sa, "TokenAttacking", "TokenBlocking")) {
+                if (addToCombat(moved, sa, "TokenAttacking", "TokenBlocking")) {
                     combatChanged.setTrue();
                 }
 

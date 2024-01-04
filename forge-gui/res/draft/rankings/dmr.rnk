@@ -1,0 +1,272 @@
+//Rank|Name|Rarity|Set
+#1|Yawgmoth, Thran Physician|M|DMR
+#2|Lyra Dawnbringer|M|DMR
+#3|Wrath of God|R|DMR
+#4|Battle Screech|U|DMR
+#5|Flametongue Kavu|U|DMR
+#6|Arcanis the Omnipotent|R|DMR
+#7|Tatyova, Benthic Druid|U|DMR
+#8|Confiscate|U|DMR
+#9|Fact or Fiction|U|DMR
+#10|Siege-Gang Commander|R|DMR
+#11|Serra Angel|U|DMR
+#12|Swords to Plowshares|U|DMR
+#13|Sylvan Library|M|DMR
+#14|Rith, the Awakener|R|DMR
+#15|Icy Manipulator|U|DMR
+#16|Griffin Guide|U|DMR
+#17|Urza, Lord High Artificer|M|DMR
+#18|Phantom Nishoba|R|DMR
+#19|Spiritmonger|U|DMR
+#20|Pashalik Mons|R|DMR
+#21|Call of the Herd|U|DMR
+#22|Recoil|U|DMR
+#23|Man-o'-War|C|DMR
+#24|Jolrael, Mwonvuli Recluse|R|DMR
+#25|Triskelion|R|DMR
+#26|Shivan Dragon|R|DMR
+#27|Birds of Paradise|R|DMR
+#28|Sevinne's Reclamation|R|DMR
+#29|Counterspell|C|DMR
+#30|Thieving Magpie|U|DMR
+#31|Vexing Sphinx|R|DMR
+#32|Royal Assassin|R|DMR
+#33|Grim Lavamancer|R|DMR
+#34|Lightning Rift|U|DMR
+#35|Sulfuric Vortex|R|DMR
+#36|Maze of Ith|R|DMR
+#37|Spectral Lynx|U|DMR
+#38|Windborn Muse|R|DMR
+#39|Opposition|R|DMR
+#40|Chainer's Edict|U|DMR
+#41|Phyrexian Rager|C|DMR
+#42|Terror|C|DMR
+#43|Chain Lightning|C|DMR
+#44|Forgotten Ancient|R|DMR
+#45|Gerrard's Verdict|U|DMR
+#46|Mystic Enforcer|U|DMR
+#47|Quicksilver Dagger|U|DMR
+#48|Sawtooth Loon|U|DMR
+#49|Circular Logic|U|DMR
+#50|Stroke of Genius|R|DMR
+#51|Chainer, Dementia Master|R|DMR
+#52|Dread Return|U|DMR
+#53|Faceless Butcher|U|DMR
+#54|Phyrexian Scuta|U|DMR
+#55|Undead Gladiator|U|DMR
+#56|Slice and Dice|U|DMR
+#57|Pyre Zombie|R|DMR
+#58|Radha, Heir to Keld|U|DMR
+#59|Tiana, Ship's Caretaker|U|DMR
+#60|Assault Battery|U|DMR
+#61|Fire Ice|U|DMR
+#62|Mind Stone|C|DMR
+#63|Lieutenant Kirtar|R|DMR
+#64|Momentary Blink|C|DMR
+#65|Radiant's Judgment|C|DMR
+#66|Voice of All|U|DMR
+#67|Deep Analysis|C|DMR
+#68|Frantic Search|C|DMR
+#69|Peregrine Drake|C|DMR
+#70|Snap|C|DMR
+#71|Dark Withering|U|DMR
+#72|Nantuko Shade|R|DMR
+#73|Fireblast|U|DMR
+#74|Gempalm Incinerator|U|DMR
+#75|Fa'adiyah Seer|C|DMR
+#76|Nature's Lore|U|DMR
+#77|Squirrel Nest|U|DMR
+#78|Symbiotic Beast|C|DMR
+#79|Wild Growth|C|DMR
+#80|Absorb|R|DMR
+#81|Sol'kanar the Swamp King|R|DMR
+#82|Spite Malice|U|DMR
+#83|Drifting Meadow|C|DMR
+#84|Mishra's Factory|U|DMR
+#85|Nantuko Monastery|U|DMR
+#86|Polluted Mire|C|DMR
+#87|Remote Isle|C|DMR
+#88|Valduk, Keeper of the Flame|U|DMR
+#89|Divine Sacrament|R|DMR
+#90|Glory|R|DMR
+#91|Nomad Decoy|C|DMR
+#92|Pacifism|C|DMR
+#93|Renewed Faith|C|DMR
+#94|Savannah Lions|C|DMR
+#95|Aquamoeba|C|DMR
+#96|Aven Fisher|C|DMR
+#97|Impulse|C|DMR
+#98|Obsessive Search|C|DMR
+#99|Cackling Fiend|C|DMR
+#100|Ichor Slick|C|DMR
+#101|Nightscape Familiar|C|DMR
+#102|Phyrexian Ghoul|C|DMR
+#103|Street Wraith|C|DMR
+#104|Urborg Syphon-Mage|C|DMR
+#105|Avarax|C|DMR
+#106|Coal Stoker|C|DMR
+#107|Goblin Matron|C|DMR
+#108|Mogg War Marshal|C|DMR
+#109|Solar Blast|C|DMR
+#110|Spark Spray|C|DMR
+#111|Deadwood Treefolk|U|DMR
+#112|Gamekeeper|U|DMR
+#113|Kavu Primarch|C|DMR
+#114|Penumbra Bobcat|C|DMR
+#115|Stonewood Invoker|C|DMR
+#116|Werebear|C|DMR
+#117|Wild Dogs|C|DMR
+#118|Xira Arien|R|DMR
+#119|Wax Wane|U|DMR
+#120|Life Death|U|DMR
+#121|Slippery Karst|C|DMR
+#122|Smoldering Crater|C|DMR
+#123|Cleric of the Forward Order|C|DMR
+#124|Mesa Enchantress|U|DMR
+#125|Serra Avatar|M|DMR
+#126|Vigilant Sentry|C|DMR
+#127|Aven Fateshaper|U|DMR
+#128|Denizen of the Deep|R|DMR
+#129|Force of Will|M|DMR
+#130|High Tide|U|DMR
+#131|Horseshoe Crab|C|DMR
+#132|Leaden Fists|C|DMR
+#133|Turnabout|U|DMR
+#134|Veiled Serpent|C|DMR
+#135|Body Snatcher|R|DMR
+#136|Evil Eye of Orms-by-Gore|C|DMR
+#137|Mindslicer|R|DMR
+#138|Necrosavant|U|DMR
+#139|No Mercy|M|DMR
+#140|Phyrexian Debaser|C|DMR
+#141|Urborg Uprising|C|DMR
+#142|Wretched Anurid|C|DMR
+#143|Dragon Whelp|U|DMR
+#144|Empty the Warrens|C|DMR
+#145|Lightning Reflexes|C|DMR
+#146|Overmaster|R|DMR
+#147|Suq'Ata Lancer|C|DMR
+#148|Invigorating Boon|U|DMR
+#149|Kamahl, Fist of Krosa|M|DMR
+#150|Krosan Restorer|C|DMR
+#151|Lull|C|DMR
+#152|Nut Collector|M|DMR
+#153|Primal Boost|C|DMR
+#154|Dralnu's Crusade|U|DMR
+#155|Spinal Embrace|R|DMR
+#156|Zur the Enchanter|R|DMR
+#157|Stand Deliver|U|DMR
+#158|Night Day|U|DMR
+#159|Dodecapod|U|DMR
+#160|Millikin|U|DMR
+#161|Clifftop Retreat|R|DMR
+#162|Hinterland Harbor|R|DMR
+#163|Isolated Chapel|R|DMR
+#164|Sulfur Falls|R|DMR
+#165|Woodland Cemetery|R|DMR
+#166|Kjeldoran Gargoyle|C|DMR
+#167|Mystic Zealot|C|DMR
+#168|Phantom Flock|C|DMR
+#169|Whitemane Lion|C|DMR
+#170|Cloud of Faeries|C|DMR
+#171|Hermetic Study|C|DMR
+#172|Ovinize|C|DMR
+#173|Wormfang Drake|C|DMR
+#174|Festering Goblin|C|DMR
+#175|Goblin Turncoat|C|DMR
+#176|Hyalopterous Lemure|C|DMR
+#177|Oversold Cemetery|R|DMR
+#178|Zombie Infestation|U|DMR
+#179|Ember Beast|C|DMR
+#180|Grapeshot|C|DMR
+#181|Macetail Hystrodon|C|DMR
+#182|Ridgetop Raptor|C|DMR
+#183|Skirk Prospector|C|DMR
+#184|Sneak Attack|M|DMR
+#185|Storm Entity|U|DMR
+#186|Subterranean Scout|C|DMR
+#187|Undying Rage|C|DMR
+#188|Worldgorger Dragon|M|DMR
+#189|Battlefield Scrounger|C|DMR
+#190|Break Asunder|C|DMR
+#191|Elvish Aberration|C|DMR
+#192|Giant Spider|C|DMR
+#193|Sandstorm|C|DMR
+#194|Saproling Symbiosis|R|DMR
+#195|Pain Suffering|U|DMR
+#196|Order Chaos|U|DMR
+#197|Juggernaut|C|DMR
+#198|Lotus Blossom|R|DMR
+#199|Thran Golem|U|DMR
+#200|Terminal Moraine|C|DMR
+#201|Icatian Javelineers|C|DMR
+#202|Improvised Armor|U|DMR
+#203|Floodgate|U|DMR
+#204|Glintwing Invoker|C|DMR
+#205|Time Stretch|M|DMR
+#206|Duress|C|DMR
+#207|Entomb|R|DMR
+#208|Flesh Reaver|U|DMR
+#209|Vampiric Tutor|M|DMR
+#210|Deadapult|U|DMR
+#211|Goblin Medics|C|DMR
+#212|Elvish Spirit Guide|U|DMR
+#213|Seton's Desire|C|DMR
+#214|Terravore|U|DMR
+#215|Arcades Sabboth|R|DMR
+#216|Decimate|R|DMR
+#217|Hunting Grounds|M|DMR
+#218|Dragon Blood|U|DMR
+#219|Dragon Engine|C|DMR
+#220|Gauntlet of Power|M|DMR
+#221|Jalum Tome|C|DMR
+#222|Crosis's Catacombs|U|DMR
+#223|Darigaaz's Caldera|U|DMR
+#224|Dromar's Cavern|U|DMR
+#225|Rith's Grove|U|DMR
+#226|Treva's Ruins|U|DMR
+#227|Auramancer|C|DMR
+#228|Remedy|C|DMR
+#229|Sun Clasp|C|DMR
+#230|Ovinomancer|U|DMR
+#231|Howl from Beyond|C|DMR
+#232|Twisted Experiment|C|DMR
+#233|Exploration|R|DMR
+#234|Worldly Tutor|R|DMR
+#235|Crawlspace|R|DMR
+#236|Ornithopter|C|DMR
+#237|Urza's Incubator|M|DMR
+#238|Wall of Junk|U|DMR
+#239|Gemstone Mine|R|DMR
+#240|Orim's Thunder|C|DMR
+#241|Spirit Link|C|DMR
+#242|Mystical Tutor|R|DMR
+#243|Gamble|R|DMR
+#244|Last Chance|M|DMR
+#245|Arboria|R|DMR
+#246|Crop Rotation|U|DMR
+#247|Emerald Charm|C|DMR
+#248|Cryptic Gateway|R|DMR
+#249|Helm of Awakening|R|DMR
+#250|Legacy Weapon|M|DMR
+#251|Urza's Blueprints|R|DMR
+#252|Congregate|U|DMR
+#253|Enlightened Tutor|R|DMR
+#254|Test of Endurance|M|DMR
+#255|Mystic Remora|R|DMR
+#256|Illusion Reality|U|DMR
+#257|Tormod's Crypt|U|DMR
+#258|Umbilicus|R|DMR
+#259|Dark Depths|M|DMR
+#260|Damping Sphere|U|DMR
+#261|Jester's Cap|R|DMR
+#262|Plains 1|C|DMR
+#263|Plains 2|C|DMR
+#264|Island 1|C|DMR
+#265|Island 2|C|DMR
+#266|Swamp 1|C|DMR
+#267|Swamp 2|C|DMR
+#268|Mountain 1|C|DMR
+#269|Mountain 2|C|DMR
+#270|Forest 1|C|DMR
+#271|Forest 2|C|DMR

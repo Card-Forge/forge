@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Rolling Earthquake|R|PTK
+#2|Kongming's Contraptions|R|PTK
+#3|Overwhelming Forces|R|PTK
+#4|Sun Quan, Lord of Wu|R|PTK
+#5|Guan Yu, Sainted Warrior|R|PTK
+#6|Lu Bu, Master at Arms|R|PTK
+#7|Lu Su, Wu Advisor|R|PTK
+#8|Meng Huo, Barbarian King|R|PTK
+#9|Eightfold Maze|R|PTK
+#10|Lu Xun, Scholar General|R|PTK
+#11|Ravages of War|R|PTK
+#12|Liu Bei, Lord of Shu|R|PTK
+#13|Famine|U|PTK
+#14|Dong Zhou, the Tyrant|R|PTK
+#15|Blaze|U|PTK
+#16|Imperial Seal|R|PTK
+#17|Riding the Dilu Horse|R|PTK
+#18|Sun Ce, Young Conquerer|R|PTK
+#19|Burning of Xinye|R|PTK
+#20|Wei Assassins|U|PTK
+#21|Exhaustion|R|PTK
+#22|Cao Cao, Lord of Wei|R|PTK
+#23|Xiahou Dun, the One Eyed|R|PTK
+#24|Ma Chao, Western Warrior|R|PTK
+#25|Capture of Jingzhou|R|PTK
+#26|Diaochan, Artful Beauty|R|PTK
+#27|Hua Tuo, Honored Physician|R|PTK
+#28|Zhang He, Wei General|R|PTK
+#29|Kongming, Sleeping Dragon|R|PTK
+#30|Xun Yu, Wei Advisor|R|PTK
+#31|Lady Sun|R|PTK
+#32|Wolf Pack|R|PTK
+#33|Zodiac Dragon|R|PTK
+#34|Borrowing the East Wind|R|PTK
+#35|Poison Arrow|U|PTK
+#36|Yuan Shao, the Indecisive|R|PTK
+#37|Slashing Tiger|R|PTK
+#38|Stone Catapult|R|PTK
+#39|Lady Zhurong, Warrior Queen|R|PTK
+#40|Ghostly Visit|C|PTK
+#41|Rockslide Ambush|U|PTK
+#42|Guan Yu's 1,000 Li March|R|PTK
+#43|Fire Ambush|C|PTK
+#44|Wei Night Raiders|U|PTK
+#45|Zhang Fei, Fierce Warrior|R|PTK
+#46|Zhuge Jin, Wu Strategist|R|PTK
+#47|Corrupt Eunuchs|U|PTK
+#48|Brilliant Plan|U|PTK
+#49|Relentless Assault|R|PTK
+#50|Wu Longbowman|U|PTK
+#51|Vengeance|U|PTK
+#52|Shu Elite Companions|U|PTK
+#53|Imperial Recruiter|U|PTK
+#54|Cao Ren, Wei Commander|R|PTK
+#55|Lu Meng, Wu General|R|PTK
+#56|Pang Tong, Young Phoenix|R|PTK
+#57|Zhou Yu, Chief Commander|R|PTK
+#58|Sima Yi, Wei Field Marshal|R|PTK
+#59|Zhang Liao, Hero of Hefei|R|PTK
+#60|Hunting Cheetah|U|PTK
+#61|Ambition's Cost|R|PTK
+#62|Champion's Victory|U|PTK
+#63|Ravaging Horde|U|PTK
+#64|Balance of Power|R|PTK
+#65|Marshaling the Troops|R|PTK
+#66|Imperial Edict|C|PTK
+#67|Loyal Retainers|U|PTK
+#68|Red Cliffs Armada|U|PTK
+#69|Warrior's Oath|R|PTK
+#70|Yellow Scarves General|R|PTK
+#71|Shu General|U|PTK
+#72|Wei Elite Companions|U|PTK
+#73|Wu Spy|U|PTK
+#74|Renegade Troops|U|PTK
+#75|Meng Huo's Horde|C|PTK
+#76|Zuo Ci, the Mocking Sage|R|PTK
+#77|Counterintelligence|U|PTK
+#78|Council of Advisors|U|PTK
+#79|Zodiac Pig|U|PTK
+#80|Wu Elite Cavalry|C|PTK
+#81|Mystic Denial|U|PTK
+#82|Alert Shu Infantry|U|PTK
+#83|Barbarian General|U|PTK
+#84|Zodiac Tiger|U|PTK
+#85|Zodiac Horse|U|PTK
+#86|Southern Elephant|C|PTK
+#87|Rally the Troops|U|PTK
+#88|Warrior's Stand|U|PTK
+#89|Flanking Troops|U|PTK
+#90|Zodiac Ox|U|PTK
+#91|Huang Zhong, Shu General|R|PTK
+#92|Shu Soldier Farmers|U|PTK
+#93|Misfortune's Gain|C|PTK
+#94|Desperate Charge|U|PTK
+#95|Zhao Zilong, Tiger General|R|PTK
+#96|Trip Wire|U|PTK
+#97|Borrowing 100,000 Arrows|U|PTK
+#98|Stalking Tiger|C|PTK
+#99|Shu Cavalry|C|PTK
+#100|Strategic Planning|U|PTK
+#101|Wu Admiral|U|PTK
+#102|Cunning Advisor|U|PTK
+#103|Stolen Grain|U|PTK
+#104|Yuan Shao's Infantry|U|PTK
+#105|Burning Fields|C|PTK
+#106|Wei Strike Force|C|PTK
+#107|Forced Retreat|C|PTK
+#108|Fire Bowman|U|PTK
+#109|Heavy Fog|U|PTK
+#110|Barbarian Horde|C|PTK
+#111|Spoils of Victory|U|PTK
+#112|Deception|C|PTK
+#113|Zodiac Monkey|C|PTK
+#114|Coercion|U|PTK
+#115|Eunuchs' Intrigues|U|PTK
+#116|Zodiac Rooster|C|PTK
+#117|Preemptive Strike|C|PTK
+#118|Shu Grain Caravan|C|PTK
+#119|Wu Warship|C|PTK
+#120|Shu Elite Infantry|C|PTK
+#121|False Defeat|C|PTK
+#122|False Mourning|U|PTK
+#123|Corrupt Court Official|U|PTK
+#124|Zodiac Dog|C|PTK
+#125|Taunting Challenge|R|PTK
+#126|Taoist Mystic|R|PTK
+#127|Shu Defender|C|PTK
+#128|Wei Scout|C|PTK
+#129|Wei Infantry|C|PTK
+#130|Three Visits|C|PTK
+#131|Wu Scout|C|PTK
+#132|Wei Ambush Force|C|PTK
+#133|Independent Troops|C|PTK
+#134|Wielding the Green Dragon|C|PTK
+#135|Young Wei Recruits|C|PTK
+#136|Yellow Scarves Troops|C|PTK
+#137|Forest Bear|C|PTK
+#138|Lone Wolf|U|PTK
+#139|Trained Cheetah|U|PTK
+#140|Taoist Hermit|U|PTK
+#141|Mountain Bandit|C|PTK
+#142|Wu Light Cavalry|C|PTK
+#143|Desert Sandstorm|C|PTK
+#144|Yellow Scarves Cavalry|C|PTK
+#145|Zodiac Snake|C|PTK
+#146|Control of the Court|U|PTK
+#147|Broken Dam|C|PTK
+#148|Shu Foot Soldiers|C|PTK
+#149|Zodiac Rabbit|C|PTK
+#150|Extinguish|C|PTK
+#151|Sage's Knowledge|C|PTK
+#152|Riding Red Hare|C|PTK
+#153|Straw Soldiers|C|PTK
+#154|Zodiac Goat|C|PTK
+#155|Shu Farmer|C|PTK
+#156|Empty City Ruse|U|PTK
+#157|Wu Infantry|C|PTK
+#158|Volunteer Militia|C|PTK
+#159|Return to Battle|C|PTK
+#160|Stone Rain|C|PTK
+#161|Virtuous Charge|C|PTK
+#162|Zodiac Rat|C|PTK
+#163|Trained Jackal|C|PTK
+#164|Spring of Eternal Peace|C|PTK
+#165|Peach Garden Oath|U|PTK

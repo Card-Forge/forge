@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Decree of Justice|R|SCG
+#2|Decree of Savagery|R|SCG
+#3|Forgotten Ancient|R|SCG
+#4|Decree of Pain|R|SCG
+#5|Eternal Dragon|R|SCG
+#6|Day of the Dragons|R|SCG
+#7|Form of the Dragon|R|SCG
+#8|Siege-Gang Commander|R|SCG
+#9|Carbonize|U|SCG
+#10|Soul Collector|R|SCG
+#11|Sulfuric Vortex|R|SCG
+#12|Krosan Warchief|U|SCG
+#13|Mischievous Quanar|R|SCG
+#14|Ambush Commander|R|SCG
+#15|Undead Warchief|U|SCG
+#16|Nefashu|R|SCG
+#17|Bladewing the Risen|R|SCG
+#18|Ageless Sentinels|R|SCG
+#19|Wing Shards|U|SCG
+#20|Dawn Elemental|R|SCG
+#21|Decree of Silence|R|SCG
+#22|Silver Knight|U|SCG
+#23|Karona's Zealot|U|SCG
+#24|Daru Warchief|U|SCG
+#25|Root Elemental|R|SCG
+#26|Raven Guild Master|R|SCG
+#27|Dragon Mage|R|SCG
+#28|Elvish Aberration|U|SCG
+#29|Putrid Raptor|U|SCG
+#30|Dragonstalker|U|SCG
+#31|Xantid Swarm|R|SCG
+#32|Ancient Ooze|R|SCG
+#33|Kurgadon|U|SCG
+#34|Zombie Cutthroat|C|SCG
+#35|Twisted Abomination|C|SCG
+#36|Hunting Pack|U|SCG
+#37|Shoreline Ranger|C|SCG
+#38|Goblin Warchief|U|SCG
+#39|Dragon Tyrant|R|SCG
+#40|Pemmin's Aura|U|SCG
+#41|Torrent of Fire|C|SCG
+#42|Aphetto Runecaster|U|SCG
+#43|Aven Liberator|C|SCG
+#44|Consumptive Goo|R|SCG
+#45|Primitive Etchings|R|SCG
+#46|Clutch of Undeath|C|SCG
+#47|Extra Arms|U|SCG
+#48|Fierce Empath|C|SCG
+#49|Decree of Annihilation|R|SCG
+#50|Alpha Status|U|SCG
+#51|Chartooth Cougar|C|SCG
+#52|Skirk Volcanist|U|SCG
+#53|Krosan Drover|C|SCG
+#54|Dragonstorm|R|SCG
+#55|Cabal Interrogator|U|SCG
+#56|Bladewing's Thrall|U|SCG
+#57|Frozen Solid|C|SCG
+#58|Riptide Survivor|U|SCG
+#59|Trap Digger|R|SCG
+#60|Noble Templar|C|SCG
+#61|Vengeful Dead|C|SCG
+#62|Chill Haunting|U|SCG
+#63|Wirewood Guardian|C|SCG
+#64|Zealous Inquisitor|C|SCG
+#65|Enrage|U|SCG
+#66|Aven Farseer|C|SCG
+#67|Death's-Head Buzzard|C|SCG
+#68|Exiled Doomsayer|R|SCG
+#69|Lethal Vapors|R|SCG
+#70|Call to the Grave|R|SCG
+#71|Spark Spray|C|SCG
+#72|Scattershot|C|SCG
+#73|Carrion Feeder|C|SCG
+#74|Mistform Warchief|U|SCG
+#75|Thundercloud Elemental|U|SCG
+#76|Edgewalker|U|SCG
+#77|Lingering Death|C|SCG
+#78|Proteus Machine|U|SCG
+#79|Titanic Bulvox|C|SCG
+#80|Tendrils of Agony|U|SCG
+#81|Sliver Overlord|R|SCG
+#82|Temple of the False God|U|SCG
+#83|Wirewood Symbiote|U|SCG
+#84|Claws of Wirewood|U|SCG
+#85|Mercurial Kite|C|SCG
+#86|Sprouting Vines|C|SCG
+#87|Woodcloaker|C|SCG
+#88|Rain of Blades|U|SCG
+#89|Accelerated Mutation|C|SCG
+#90|Frontline Strategist|C|SCG
+#91|Rock Jockey|C|SCG
+#92|Rush of Knowledge|C|SCG
+#93|Brain Freeze|U|SCG
+#94|Goblin Brigand|C|SCG
+#95|Final Punishment|R|SCG
+#96|Gilded Light|U|SCG
+#97|Coast Watcher|C|SCG
+#98|Astral Steel|C|SCG
+#99|Bonethorn Valesk|C|SCG
+#100|Unburden|C|SCG
+#101|Treetop Scout|C|SCG
+#102|Pyrostatic Pillar|U|SCG
+#103|Raven Guild Initiate|C|SCG
+#104|Reaping the Graves|C|SCG
+#105|Dragon Fangs|C|SCG
+#106|Daru Spiritualist|C|SCG
+#107|Skulltap|C|SCG
+#108|Dragon Shadow|C|SCG
+#109|Mind's Desire|R|SCG
+#110|Unspeakable Symbol|U|SCG
+#111|Dragon Breath|C|SCG
+#112|Guilty Conscience|C|SCG
+#113|Dragon Wings|C|SCG
+#114|Karona, False God|R|SCG
+#115|Dragonspeaker Shaman|U|SCG
+#116|One with Nature|U|SCG
+#117|Temporal Fissure|C|SCG
+#118|Fatal Mutation|U|SCG
+#119|Wipe Clean|C|SCG
+#120|Long-Term Plans|U|SCG
+#121|Hindering Touch|C|SCG
+#122|Break Asunder|C|SCG
+#123|Stifle|R|SCG
+#124|Misguided Rage|C|SCG
+#125|Dragon Scales|C|SCG
+#126|Dispersal Shield|C|SCG
+#127|Scornful Egotist|C|SCG
+#128|Upwelling|R|SCG
+#129|Goblin War Strike|C|SCG
+#130|Recuperate|C|SCG
+#131|Goblin Psychopath|U|SCG
+#132|Metamorphose|U|SCG
+#133|Cabal Conditioning|R|SCG
+#134|Dimensional Breach|R|SCG
+#135|Faces of the Past|R|SCG
+#136|Ark of Blight|U|SCG
+#137|Divergent Growth|C|SCG
+#138|Uncontrolled Infestation|C|SCG
+#139|Parallel Thoughts|R|SCG
+#140|Stabilizer|R|SCG
+#141|Force Bubble|R|SCG
+#142|Reward the Faithful|U|SCG
+#143|Grip of Chaos|R|SCG

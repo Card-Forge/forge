@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Champions of Tyr|M|HBG
+#2|Snowborn Simulacra|M|HBG
+#3|The Hourglass Coven|R|HBG
+#4|Ancient Gold Dragon|M|HBG
+#5|Ancient Brass Dragon|M|HBG
+#6|Ancient Bronze Dragon|M|HBG
+#7|Miirym, Sentinel Wyrm|R|HBG
+#8|Verdant Rejuvenation|M|HBG
+#9|Tasha, Unholy Archmage|M|HBG
+#10|Prosper, Tome-Bound|M|HBG
+#11|Minsc & Boo, Timeless Heroes|M|HBG
+#12|Lae'zel, Githyanki Warrior|R|HBG
+#13|Lukamina, Moon Druid|M|HBG
+#14|Thayan Evokers|R|HBG
+#15|Chaos Balor|M|HBG
+#16|Oyaminartok, Polar Werebear|R|HBG
+#17|Jon Irenicus, the Exile|R|HBG
+#18|Klement, Novice Acolyte|R|HBG
+#19|Wyll, Pact-Bound Duelist|M|HBG
+#20|Calim, Djinn Emperor|R|HBG
+#21|Horn of Valhalla|R|HBG
+#22|Illithid Harvester|R|HBG
+#23|Altar of Bhaal|R|HBG
+#24|Wrathful Red Dragon|R|HBG
+#25|Raphael, Fiendish Savior|R|HBG
+#26|Sune's Intervention|R|HBG
+#27|Ulder Ravengard, Marshal|R|HBG
+#28|Nalia de'Arnise|M|HBG
+#29|Skullport Merchant|U|HBG
+#30|Sword Coast Serpent|U|HBG
+#31|Ancient Copper Dragon|M|HBG
+#32|Astarion, the Decadent|R|HBG
+#33|Oji, the Exquisite Blade|U|HBG
+#34|Fraying Line|R|HBG
+#35|Seatower Imprisonment|U|HBG
+#36|Grim Hireling|R|HBG
+#37|Uthgardt Fury|R|HBG
+#38|Earthquake Dragon|R|HBG
+#39|Rasaad, Monk of Selune|U|HBG
+#40|Gale, Conduit of the Arcane|M|HBG
+#41|Imoen, Trickster Friend|R|HBG
+#42|Shadowheart, Sharran Cleric|R|HBG
+#43|Juvenile Mist Dragon|U|HBG
+#44|Cast Down|U|HBG
+#45|Tiefling Outcasts|R|HBG
+#46|Ancient Silver Dragon|M|HBG
+#47|Meteor Golem|U|HBG
+#48|Stick Together|R|HBG
+#49|Craving of Yeenoghu|U|HBG
+#50|Mephit's Enthusiasm|U|HBG
+#51|Priest of Ancient Lore|C|HBG
+#52|Grim Bounty|C|HBG
+#53|Krydle of Baldur's Gate|U|HBG
+#54|Gale's Redirection|R|HBG
+#55|Young Blue Dragon|C|HBG
+#56|Blood Money|M|HBG
+#57|Alaundo the Seer|R|HBG
+#58|Kagha, Shadow Archdruid|U|HBG
+#59|Korlessa, Scale Singer|U|HBG
+#60|Basilisk Collar|R|HBG
+#61|Grave Choice|U|HBG
+#62|Kardum, Patron of Flames|R|HBG
+#63|Liara of the Flaming Fist|U|HBG
+#64|Viconia, Nightsinger's Disciple|U|HBG
+#65|Karlach, Raging Tiefling|R|HBG
+#66|Wilson, Bear Comrade|R|HBG
+#67|Black Dragon|U|HBG
+#68|Dragon's Fire|C|HBG
+#69|Trelasarra, Moon Dancer|U|HBG
+#70|Displacer Kitten|R|HBG
+#71|Draconic Muralists|U|HBG
+#72|Thrakkus the Butcher|U|HBG
+#73|Signature Spells|R|HBG
+#74|Black Market Connections|R|HBG
+#75|Jaheira, Harper Emissary|U|HBG
+#76|Battle Cry Goblin|U|HBG
+#77|Red Dragon|U|HBG
+#78|Lurking Roper|U|HBG
+#79|Kalain, Reclusive Painter|U|HBG
+#80|Rescuer Chwinga|U|HBG
+#81|Goggles of Night|U|HBG
+#82|Bonecaller Cleric|U|HBG
+#83|Intellect Devourer|R|HBG
+#84|Pact Weapon|M|HBG
+#85|Breath Weapon|U|HBG
+#86|Swashbuckler Extraordinaire|U|HBG
+#87|Gorion, Wise Mentor|R|HBG
+#88|Jan Jansen, Chaos Crafter|R|HBG
+#89|Lozhan, Dragons' Legacy|U|HBG
+#90|Raggadragga, Goreguts Boss|R|HBG
+#91|Boareskyr Tollkeeper|U|HBG
+#92|Patriar's Humiliation|C|HBG
+#93|Vladimir and Godfrey|R|HBG
+#94|Minthara of the Absolute|U|HBG
+#95|Catti-brie of Mithral Hall|R|HBG
+#96|Ambergris, Citadel Agent|U|HBG
+#97|Skanos, Dragon Vassal|U|HBG
+#98|Owlbear|C|HBG
+#99|Prosperous Innkeeper|U|HBG
+#100|You're Confronted by Robbers|U|HBG
+#101|Irenicus's Vile Duplication|U|HBG
+#102|Circle of the Land Druid|C|HBG
+#103|Druid of the Emerald Grove|U|HBG
+#104|Undercellar Myconid|C|HBG
+#105|Sewer Plague|C|HBG
+#106|Dragonborn Immolator|U|HBG
+#107|Gnoll Hunting Party|U|HBG
+#108|Favored Enemy|R|HBG
+#109|Baba Lysaga, Night Witch|R|HBG
+#110|Alora, Rogue Companion|U|HBG
+#111|Vhal, Eager Scholar|U|HBG
+#112|Portable Hole|U|HBG
+#113|Soulknife Spy|C|HBG
+#114|You Come to a River|C|HBG
+#115|Deadly Dispute|C|HBG
+#116|Eyes of the Beholder|C|HBG
+#117|Guiding Bolt|U|HBG
+#118|Pegasus Guardian|U|HBG
+#119|Draconic Lore|U|HBG
+#120|Ghost Lantern|U|HBG
+#121|Young Red Dragon|C|HBG
+#122|Band Together|C|HBG
+#123|Dread Linnorm|C|HBG
+#124|Emerald Dragon|U|HBG
+#125|Jade Orb of Dragonkind|U|HBG
+#126|Owlbear Shepherd|U|HBG
+#127|Pilgrim's Eye|C|HBG
+#128|Moradin's Disciples|U|HBG
+#129|Water Weird|C|HBG
+#130|Genasi Rabble-Rouser|C|HBG
+#131|Fiendlash|R|HBG
+#132|Gate of the Black Dragon|U|HBG
+#133|Gate to Manorborn|U|HBG
+#134|Gate to Seatower|U|HBG
+#135|Gate to the Citadel|U|HBG
+#136|Gate to Tumbledown|U|HBG
+#137|Sarevok the Usurper|U|HBG
+#138|Steadfast Paladin|C|HBG
+#139|You Hear Something on Watch|C|HBG
+#140|Air-Cult Elemental|C|HBG
+#141|Clever Conjurer|C|HBG
+#142|Ray of Frost|U|HBG
+#143|Manticore|C|HBG
+#144|Shambling Ghast|C|HBG
+#145|Vampire Spawn|C|HBG
+#146|Hobgoblin Captain|C|HBG
+#147|Circle of the Moon Druid|C|HBG
+#148|Hill Giant Herdgorger|C|HBG
+#149|Blessed Hippogriff|C|HBG
+#150|Icewind Stalwart|C|HBG
+#151|Lapis Orb of Dragonkind|U|HBG
+#152|Pseudodragon Familiar|C|HBG
+#153|Guildsworn Prowler|C|HBG
+#154|Nefarious Imp|C|HBG
+#155|Carnelian Orb of Dragonkind|U|HBG
+#156|Two-Handed Axe|U|HBG
+#157|Scaled Nurturer|C|HBG
+#158|Prophetic Prism|C|HBG
+#159|Flaming Fist Duskguard|C|HBG
+#160|Ranger Squadron|C|HBG
+#161|Soldiers of the Watch|C|HBG
+#162|Lizardfolk Librarians|C|HBG
+#163|Undersimplify|C|HBG
+#164|Stroke of Luck|R|HBG
+#165|Sepulcher Ghoul|C|HBG
+#166|Giant Fire Beetles|C|HBG
+#167|Kobold Warcaller|C|HBG
+#168|Lulu, Forgetful Hollyphant|U|HBG
+#169|Minimus Containment|C|HBG
+#170|Monk of the Open Hand|U|HBG
+#171|Rally Maneuver|U|HBG
+#172|Charmed Sleep|C|HBG
+#173|Rimeshield Frost Giant|C|HBG
+#174|Demogorgon's Clutches|C|HBG
+#175|Grim Wanderer|U|HBG
+#176|Farideh's Fireball|C|HBG
+#177|Improvised Weaponry|C|HBG
+#178|Unexpected Windfall|C|HBG
+#179|Valor Singer|C|HBG
+#180|Choose Your Weapon|U|HBG
+#181|Gnoll Hunter|C|HBG
+#182|Wild Shape|U|HBG
+#183|Guardian Naga|C|HBG
+#184|Dragonborn Looter|C|HBG
+#185|Kenku Artificer|U|HBG
+#186|Kindred Discovery|R|HBG
+#187|Chain Devil|C|HBG
+#188|Gray Slaad|C|HBG
+#189|Sigil of Myrkul|U|HBG
+#190|Summon Undead|C|HBG
+#191|Reckless Barbarian|C|HBG
+#192|Druidic Ritual|C|HBG
+#193|Ettercap|C|HBG
+#194|Bronze Walrus|U|HBG
+#195|Lantern of Revealing|C|HBG
+#196|Navigation Orb|U|HBG
+#197|Wizened Githzerai|C|HBG
+#198|Seek New Knowledge|U|HBG
+#199|Wand of Orcus|R|HBG
+#200|Goblin Trapfinder|U|HBG
+#201|Incessant Provocation|C|HBG
+#202|Warriors of Tiamat|C|HBG
+#203|Nalfeshnee|R|HBG
+#204|Follow the Tracks|C|HBG
+#205|You Line Up the Shot|C|HBG
+#206|Yuan-Ti Scaleshield|R|HBG
+#207|Gut, Fanatical Priestess|U|HBG
+#208|Celestial Unicorn|C|HBG
+#209|Devoted Paladin|C|HBG
+#210|Contact Other Plane|C|HBG
+#211|Guild Thief|U|HBG
+#212|You Find the Villains' Lair|C|HBG
+#213|Baleful Beholder|C|HBG
+#214|Drider|U|HBG
+#215|Hoard Robber|C|HBG
+#216|Earth-Cult Elemental|C|HBG
+#217|Jaded Sell-Sword|C|HBG
+#218|You Find Some Prisoners|C|HBG
+#219|Inspiring Bard|C|HBG
+#220|Sylvan Shepherd|C|HBG
+#221|Underdark Basilisk|C|HBG
+#222|Bag of Holding|U|HBG
+#223|Iron Golem|U|HBG
+#224|Archivist of Oghma|R|HBG
+#225|Ascend from Avernus|R|HBG
+#226|Flaming Fist Officer|C|HBG
+#227|Scouting Hawk|U|HBG
+#228|Steadfast Unicorn|C|HBG
+#229|Blur|C|HBG
+#230|Dream Fracture|U|HBG
+#231|Tymora's Invoker|C|HBG
+#232|Ambition's Cost|U|HBG
+#233|Armor of Shadows|C|HBG
+#234|Ambitious Dragonborn|C|HBG
+#235|Poison the Blade|C|HBG
+#236|Split the Spoils|U|HBG
+#237|Mazzy, Truesword Paladin|R|HBG
+#238|Neera, Wild Mage|R|HBG
+#239|Chardalyn Dragon|U|HBG
+#240|Sworn to the Legion|M|HBG
+#241|Valiant Farewell|C|HBG
+#242|Hypnotic Pattern|C|HBG
+#243|Hook Horror|C|HBG
+#244|Unexpected Allies|C|HBG
+#245|Arcane Archery|C|HBG
+#246|Dawnbringer Cleric|C|HBG
+#247|You're Ambushed on the Road|C|HBG
+#248|Shocking Grasp|C|HBG
+#249|Thieves' Tools|C|HBG
+#250|Dueling Rapier|C|HBG
+#251|You Come to the Gnoll Camp|C|HBG
+#252|You Meet in a Tavern|U|HBG
+#253|Spiked Pit Trap|C|HBG
+#254|Lae'zel's Acrobatics|R|HBG
+#255|Cloak of the Bat|C|HBG
+#256|Mirror of Life Trapping|R|HBG
+#257|Mind Spike|U|HBG
+#258|Monster Manual|R|HBG
+#259|Mace of Disruption|C|HBG
+#260|Belt of Giant Strength|R|HBG
+#261|Robe of the Archmagi|R|HBG
+#262|Eldritch Pact|R|HBG
+#263|Storm King's Thunder|M|HBG
+#264|Traverse the Outlands|R|HBG
+#265|Baldur's Gate|R|HBG
+#266|Flames of Moradin|R|HBG
+#267|Plains 1|C|HBG
+#268|Plains 2|C|HBG
+#269|Plains 3|C|HBG
+#270|Plains 4|C|HBG
+#271|Island 1|C|HBG
+#272|Island 2|C|HBG
+#273|Island 3|C|HBG
+#274|Island 4|C|HBG
+#275|Swamp 1|C|HBG
+#276|Swamp 2|C|HBG
+#277|Swamp 3|C|HBG
+#278|Swamp 4|C|HBG
+#279|Mountain 1|C|HBG
+#280|Mountain 2|C|HBG
+#281|Mountain 3|C|HBG
+#282|Mountain 4|C|HBG
+#283|Forest 1|C|HBG
+#284|Forest 2|C|HBG
+#285|Forest 3|C|HBG
+#286|Forest 4|C|HBG

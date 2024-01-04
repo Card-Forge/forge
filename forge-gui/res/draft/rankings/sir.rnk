@@ -1,0 +1,368 @@
+//Rank|Name|Rarity|Set
+#1|Archangel Avacyn|M|SIR
+#2|Sorin, Grim Nemesis|M|SIR
+#3|Arlinn Kord|M|SIR
+#4|Descend upon the Sinful|M|SIR
+#5|Jace, Unraveler of Secrets|M|SIR
+#6|Decimator of the Provinces|M|SIR
+#7|Docent of Perfection|R|SIR
+#8|Liliana, the Last Hope|M|SIR
+#9|Sigarda, Heron's Grace|M|SIR
+#10|Gisela, the Broken Blade|M|SIR
+#11|Ishkanah, Grafwidow|M|SIR
+#12|Nahiri, the Harbinger|M|SIR
+#13|Olivia, Mobilized for War|M|SIR
+#14|Tamiyo, Field Researcher|M|SIR
+#15|Ulrich of the Krallenhorde|R|SIR
+#16|Dark Salvation|R|SIR
+#17|Tireless Tracker|R|SIR
+#18|Bloodline Keeper|M|SIS
+#19|Devil's Play|R|SIS
+#20|Falkenrath Aristocrat|M|SIS
+#21|Balefire Dragon|M|SIS
+#22|Sigarda, Host of Herons|M|SIS
+#23|Always Watching|R|SIR
+#24|Avacyn's Judgment|R|SIR
+#25|Collective Effort|R|SIR
+#26|Heron's Grace Champion|R|SIR
+#27|Thalia, Heretic Cathar|R|SIR
+#28|Collective Defiance|R|SIR
+#29|Emrakul, the Promised End|M|SIR
+#30|Nahiri's Wrath|M|SIR
+#31|Spell Queller|R|SIR
+#32|Bloodhall Priest|R|SIR
+#33|Bygone Bishop|R|SIR
+#34|Gisa and Geralf|M|SIR
+#35|Goldnight Castigator|M|SIR
+#36|Mindwrack Demon|M|SIR
+#37|Odric, Lunarch Marshal|R|SIR
+#38|Voldaren Pariah|R|SIR
+#39|Wharf Infiltrator|R|SIR
+#40|Bruna, the Fading Light|R|SIR
+#41|Burn from Within|R|SIR
+#42|Devils' Playground|R|SIR
+#43|Distended Mindbender|R|SIR
+#44|Elder Deep-Fiend|R|SIR
+#45|Grim Flayer|R|SIR
+#46|Startled Awake|M|SIR
+#47|Westvale Abbey|R|SIR
+#48|Mayor of Avabruck|R|SIS
+#49|Avacyn, Angel of Hope|M|SIS
+#50|Garruk Relentless|M|SIS
+#51|Geist of Saint Traft|M|SIS
+#52|Havengul Lich|M|SIS
+#53|Huntmaster of the Fells|M|SIS
+#54|Assembled Alphas|R|SIR
+#55|Geralf's Masterpiece|R|SIR
+#56|Hanweir Garrison|R|SIR
+#57|Mirrorwing Dragon|M|SIR
+#58|Stromkirk Condemned|R|SIR
+#59|Altered Ego|R|SIR
+#60|Declaration in Stone|R|SIR
+#61|Forgotten Creation|R|SIR
+#62|Noosegraf Mob|R|SIR
+#63|Selfless Spirit|R|SIR
+#64|Sin Prodder|R|SIR
+#65|Spirit of the Hunt|R|SIR
+#66|Angel of Flight Alabaster|R|SIS
+#67|Kruin Outlaw|R|SIS
+#68|Anguished Unmaking|U|SIR
+#69|Clear Shot|U|SIR
+#70|Collective Brutality|R|SIR
+#71|Duskwatch Recruiter|U|SIR
+#72|Relentless Dead|M|SIR
+#73|Triskaidekaphobia|R|SIR
+#74|Lingering Souls|U|SIS
+#75|Sever the Bloodline|U|SIS
+#76|Spider Spawning|U|SIS
+#77|Zealous Conscripts|R|SIS
+#78|Snapcaster Mage|M|SIS
+#79|Diregraf Colossus|R|SIR
+#80|Flameblade Angel|R|SIR
+#81|Bedlam Reveler|R|SIR
+#82|Bound by Moonsilver|C|SIR
+#83|Erdwal Illuminator|U|SIR
+#84|Fiery Temper|U|SIR
+#85|Geier Reach Bandit|U|SIR
+#86|Lightning Axe|U|SIR
+#87|Stromkirk Occultist|U|SIR
+#88|Tree of Perdition|R|SIR
+#89|Ulvenwald Hydra|R|SIR
+#90|Fiend Hunter|U|SIS
+#91|Accursed Witch|U|SIR
+#92|Galvanic Bombardment|C|SIR
+#93|Incendiary Flow|C|SIR
+#94|Ongoing Investigation|U|SIR
+#95|Tamiyo's Journal|R|SIR
+#96|Thalia's Lancers|R|SIR
+#97|Ulvenwald Captive|C|SIR
+#98|Falkenrath Noble|U|SIS
+#99|Requiem Angel|R|SIS
+#100|Skirsdag High Priest|R|SIS
+#101|Dead Weight|C|SIR
+#102|Mad Prophet|U|SIR
+#103|Mournwillow|U|SIR
+#104|Nebelgast Herald|U|SIR
+#105|Pack Guardian|U|SIR
+#106|Prized Amalgam|R|SIR
+#107|Rabid Bite|C|SIR
+#108|Sigardian Priest|C|SIR
+#109|Veteran Cathar|U|SIR
+#110|Alchemist's Greeting|C|SIR
+#111|Angelic Purge|C|SIR
+#112|Call the Bloodline|U|SIR
+#113|Deathcap Cultivator|U|SIR
+#114|Kindly Stranger|U|SIR
+#115|Rattlechains|R|SIR
+#116|Shrill Howler|U|SIR
+#117|Ulrich's Kindred|U|SIR
+#118|Advanced Stitchwing|U|SIR
+#119|Cryptolith Fragment|U|SIR
+#120|Drunau Corpse Trawler|U|SIR
+#121|Gisa's Bidding|C|SIR
+#122|Haunted Dead|U|SIR
+#123|Ingenious Skaab|C|SIR
+#124|Nearheath Chaplain|U|SIR
+#125|Obsessive Skinner|C|SIR
+#126|Slayer's Plate|R|SIR
+#127|Ulvenwald Mysteries|U|SIR
+#128|Diregraf Captain|U|SIS
+#129|Cackling Counterpart|R|SIS
+#130|Unburial Rites|U|SIS
+#131|Skirsdag Cultist|U|SIS
+#132|Avacyn's Pilgrim|C|SIS
+#133|Invisible Stalker|U|SIS
+#134|Conduit of Storms|C|SIR
+#135|Courageous Outrider|U|SIR
+#136|Gnarlwood Dryad|C|SIR
+#137|Graf Mole|U|SIR
+#138|Olivia's Bloodsworn|U|SIR
+#139|Scourge Wolf|U|SIR
+#140|Drogskol Captain|U|SIS
+#141|Griselbrand|M|SIS
+#142|Bloodbriar|C|SIR
+#143|Compelling Deterrence|U|SIR
+#144|Dauntless Cathar|C|SIR
+#145|Imprisoned in the Moon|C|SIR
+#146|Insatiable Gorgers|C|SIR
+#147|Noose Constrictor|U|SIR
+#148|Pore Over the Pages|U|SIR
+#149|Puncturing Light|C|SIR
+#150|Topplegeist|U|SIR
+#151|Havengul Runebinder|R|SIS
+#152|Stromkirk Captain|U|SIS
+#153|Doomed Traveler|C|SIS
+#154|Bonds of Faith|C|SIS
+#155|Brimstone Volley|U|SIS
+#156|Mist Raven|C|SIS
+#157|Tragic Slip|C|SIS
+#158|Blessed Alliance|U|SIR
+#159|Certain Death|C|SIR
+#160|Daring Sleuth|U|SIR
+#161|Deranged Whelp|C|SIR
+#162|Drag Under|C|SIR
+#163|Lone Rider|U|SIR
+#164|Seasons Past|M|SIR
+#165|Spectral Shepherd|U|SIR
+#166|Subjugator Angel|U|SIR
+#167|Thraben Inspector|C|SIR
+#168|Butcher's Cleaver|U|SIS
+#169|Immerwolf|U|SIS
+#170|Hollowhenge Scavenger|C|SIS
+#171|Bloodmad Vampire|C|SIR
+#172|Briarbridge Patrol|C|SIR
+#173|Choked Estuary|U|SIR
+#174|Crow of Dark Tidings|C|SIR
+#175|Drownyard Behemoth|U|SIR
+#176|Drownyard Explorers|C|SIR
+#177|Ever After|R|SIR
+#178|Foreboding Ruins|U|SIR
+#179|Fortified Village|U|SIR
+#180|Furyblade Vampire|U|SIR
+#181|Game Trail|U|SIR
+#182|Geier Reach Sanitarium|R|SIR
+#183|Geist of the Archives|C|SIR
+#184|Gryff's Boon|U|SIR
+#185|Hinterland Logger|C|SIR
+#186|Mercurial Geists|U|SIR
+#187|Olivia's Dragoon|C|SIR
+#188|Port Town|U|SIR
+#189|Reaper of Flight Moonsilver|U|SIR
+#190|Ride Down|U|SIR
+#191|Thermo-Alchemist|U|SIR
+#192|Thraben Foulbloods|C|SIR
+#193|Town Gossipmonger|U|SIR
+#194|Traverse the Ulvenwald|R|SIR
+#195|Wretched Gryff|C|SIR
+#196|Forbidden Alchemy|C|SIS
+#197|Apothecary Geist|C|SIR
+#198|Ember-Eye Wolf|C|SIR
+#199|Fevered Visions|R|SIR
+#200|Forsaken Sanctuary|U|SIR
+#201|Foul Orchard|U|SIR
+#202|Groundskeeper|U|SIR
+#203|Hamlet Captain|U|SIR
+#204|Highland Lake|U|SIR
+#205|Howlpack Wolf|C|SIR
+#206|Midnight Scavengers|U|SIR
+#207|Ruthless Disposal|U|SIR
+#208|Stone Quarry|U|SIR
+#209|Woodland Stream|U|SIR
+#210|Battleground Geist|C|SIS
+#211|Faithless Looting|C|SIS
+#212|Feeling of Dread|C|SIS
+#213|Rally the Peasants|U|SIS
+#214|Travel Preparations|C|SIS
+#215|Gutter Grime|R|SIS
+#216|Murder of Crows|U|SIS
+#217|Young Wolf|C|SIS
+#218|Evolving Wilds|C|SIS
+#219|Byway Courier|C|SIR
+#220|Curious Homunculus|U|SIR
+#221|Eternal Scourge|R|SIR
+#222|Ghoulcaller's Accomplice|C|SIR
+#223|Graf Rats|C|SIR
+#224|Guardian of Pilgrims|C|SIR
+#225|Hanweir Battlements|R|SIR
+#226|Pyre Hound|C|SIR
+#227|Ravenous Bloodseeker|C|SIR
+#228|Rise from the Grave|U|SIR
+#229|Steadfast Cathar|C|SIR
+#230|Stitcher's Graft|R|SIR
+#231|Stormrider Spirit|C|SIR
+#232|Avacyn's Collar|U|SIS
+#233|Silent Departure|C|SIS
+#234|Galvanic Juggernaut|U|SIS
+#235|Confirm Suspicions|R|SIR
+#236|Dawn Gryff|C|SIR
+#237|Devilthorn Fox|C|SIR
+#238|Eldritch Evolution|R|SIR
+#239|Exultant Cultist|C|SIR
+#240|Faith Unbroken|U|SIR
+#241|Falkenrath Gorger|R|SIR
+#242|Gatstaf Arsonists|C|SIR
+#243|Intrepid Provisioner|C|SIR
+#244|Neglected Heirloom|U|SIR
+#245|Rush of Adrenaline|C|SIR
+#246|Sage of Ancient Lore|R|SIR
+#247|Thing in the Ice|R|SIR
+#248|Vessel of Nascency|U|SIR
+#249|Village Messenger|U|SIR
+#250|Weirded Vampire|C|SIR
+#251|Elder Cathar|C|SIS
+#252|Cryptolith Rite|R|SIR
+#253|Drogskol Shieldmate|C|SIR
+#254|Gavony Unhallowed|C|SIR
+#255|Insolent Neonate|C|SIR
+#256|Liliana's Elite|C|SIR
+#257|Magnifying Glass|C|SIR
+#258|Mausoleum Wanderer|R|SIR
+#259|Morkrut Necropod|C|SIR
+#260|Permeating Mass|R|SIR
+#261|Sanitarium Skeleton|C|SIR
+#262|Swift Spinner|C|SIR
+#263|Tattered Haunter|C|SIR
+#264|Tormenting Voice|C|SIR
+#265|Ghoulraiser|C|SIS
+#266|Haunted Fengraf|C|SIS
+#267|Moonmist|C|SIS
+#268|Traveler's Amulet|C|SIS
+#269|Gnaw to the Bone|C|SIS
+#270|Bloodflow Connoisseur|C|SIS
+#271|Selhoff Occultist|C|SIS
+#272|Blazing Torch|C|SIS
+#273|Dusk Feaster|U|SIR
+#274|Explosive Apparatus|C|SIR
+#275|Field Creeper|C|SIR
+#276|Grapple with the Past|C|SIR
+#277|Humble the Brute|U|SIR
+#278|Jace's Scrutiny|C|SIR
+#279|Moonlight Hunt|C|SIR
+#280|Strength of Arms|C|SIR
+#281|Thornhide Wolves|C|SIR
+#282|Weirding Wood|C|SIR
+#283|Vampiric Fury|C|SIS
+#284|Bump in the Night|C|SIS
+#285|Mystic Retrieval|U|SIS
+#286|Stitcher's Apprentice|C|SIS
+#287|Abundant Maw|U|SIR
+#288|Epitaph Golem|C|SIR
+#289|Fogwalker|C|SIR
+#290|Graf Harvest|U|SIR
+#291|Ironclad Slayer|U|SIR
+#292|Laboratory Brute|C|SIR
+#293|Make Mischief|C|SIR
+#294|Mockery of Nature|U|SIR
+#295|Rise from the Tides|U|SIR
+#296|Seance|U|SIS
+#297|Traitorous Blood|C|SIS
+#298|Somberwald Sage|U|SIS
+#299|Vessel of Endless Rest|U|SIS
+#300|Borrowed Grace|C|SIR
+#301|Borrowed Malevolence|C|SIR
+#302|Confront the Unknown|C|SIR
+#303|Grotesque Mutation|C|SIR
+#304|Harvest Hand|U|SIR
+#305|Lupine Prototype|U|SIR
+#306|Spontaneous Mutation|C|SIR
+#307|Divine Reckoning|R|SIS
+#308|Forge Devil|C|SIS
+#309|Aim High|C|SIR
+#310|Biting Rain|U|SIR
+#311|Borrowed Hostility|C|SIR
+#312|Fiend Binder|C|SIR
+#313|Fleeting Memories|U|SIR
+#314|Macabre Waltz|C|SIR
+#315|Murderer's Axe|U|SIR
+#316|Summary Dismissal|R|SIR
+#317|Terrarion|C|SIR
+#318|True-Faith Censer|C|SIR
+#319|Uncaged Fury|U|SIR
+#320|Wild-Field Scarecrow|C|SIR
+#321|Past in Flames|M|SIS
+#322|Demonmail Hauberk|U|SIS
+#323|Barter in Blood|U|SIS
+#324|Blood Mist|U|SIR
+#325|Convolute|C|SIR
+#326|Crawling Sensation|U|SIR
+#327|Epiphany at the Drownyard|R|SIR
+#328|Hope Against Hope|U|SIR
+#329|Howlpack Resurgence|U|SIR
+#330|Lunarch Mantle|C|SIR
+#331|Magmatic Chasm|C|SIR
+#332|Faithbearer Paladin|C|SIR
+#333|Merciless Resolve|C|SIR
+#334|Shreds of Sanity|U|SIR
+#335|Soul Separator|U|SIR
+#336|Take Inventory|C|SIR
+#337|Indulgent Aristocrat|U|SIR
+#338|Stensia Masquerade|U|SIR
+#339|Manic Scribe|U|SIR
+#340|Pick the Brain|U|SIR
+#341|Pieces of the Puzzle|U|SIR
+#342|Splendid Reclamation|R|SIR
+#343|Wolfkin Bond|C|SIR
+#344|Deny Existence|C|SIR
+#345|Essence Flux|C|SIR
+#346|Second Harvest|R|SIR
+#347|Increasing Ambition|R|SIS
+#348|Mind's Dilation|M|SIR
+#349|Alms of the Vein|C|SIR
+#350|Invasive Surgery|U|SIR
+#351|Sigarda's Aid|R|SIR
+#352|Brain in a Jar|U|SIR
+#353|Plains 1|C|SIR
+#354|Island 1|C|SIR
+#355|Swamp 1|C|SIR
+#356|Mountain 1|C|SIR
+#357|Forest 1|C|SIR
+#358|Plains 2|C|SIR
+#359|Island 2|C|SIR
+#360|Swamp 2|C|SIR
+#361|Mountain 2|C|SIR
+#362|Forest 2|C|SIR
+#363|Plains 3|C|SIR
+#364|Island 3|C|SIR
+#365|Swamp 3|C|SIR
+#366|Mountain 3|C|SIR
+#367|Forest 3|C|SIR

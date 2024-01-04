@@ -1,0 +1,249 @@
+//Rank|Name|Rarity|Set
+#1|Garruk, Cursed Huntsman|M|ELD
+#2|Harmonious Archon|M|ELD
+#3|Murderous Rider|R|ELD
+#4|Oko, Thief of Crowns|M|ELD
+#5|Lochmere Serpent|R|ELD
+#6|The Circle of Loyalty|M|ELD
+#7|Brazen Borrower|M|ELD
+#8|The Great Henge|M|ELD
+#9|Bonecrusher Giant|R|ELD
+#10|Stonecoil Serpent|R|ELD
+#11|Opportunistic Dragon|R|ELD
+#12|Clackbridge Troll|R|ELD
+#13|Questing Beast|M|ELD
+#14|Realm-Cloaked Giant|M|ELD
+#15|Wicked Wolf|R|ELD
+#16|Irencrag Pyromancer|R|ELD
+#17|Feasting Troll King|R|ELD
+#18|Rankle, Master of Pranks|M|ELD
+#19|Gadwick, the Wizened|R|ELD
+#20|Sundering Stroke|R|ELD
+#21|Outlaws' Merriment|M|ELD
+#22|The Royal Scions|M|ELD
+#23|Yorvo, Lord of Garenbrig|R|ELD
+#24|Linden, the Steadfast Queen|R|ELD
+#25|Torbran, Thane of Red Fell|R|ELD
+#26|Epic Downfall|U|ELD
+#27|Stolen by the Fae|R|ELD
+#28|Worthy Knight|R|ELD
+#29|Wildborn Preserver|R|ELD
+#30|Piper of the Swarm|R|ELD
+#31|Lovestruck Beast|R|ELD
+#32|Syr Alin, the Lion's Claw|U|ELD
+#33|Faeburrow Elder|R|ELD
+#34|Oathsworn Knight|R|ELD
+#35|Robber of the Rich|M|ELD
+#36|Embercleave|M|ELD
+#37|Arcanist's Owl|U|ELD
+#38|Acclaimed Contender|R|ELD
+#39|Giant Killer|R|ELD
+#40|Bake into a Pie|C|ELD
+#41|Slaying Fire|U|ELD
+#42|Maraleaf Pixie|U|ELD
+#43|Syr Faren, the Hengehammer|U|ELD
+#44|Rampart Smasher|U|ELD
+#45|Archon of Absolution|U|ELD
+#46|Grumgully, the Generous|U|ELD
+#47|Bog Naughty|U|ELD
+#48|Scorching Dragonfire|C|ELD
+#49|Syr Carah, the Bold|U|ELD
+#50|Savvy Hunter|U|ELD
+#51|Inspiring Veteran|U|ELD
+#52|Fireborn Knight|U|ELD
+#53|Syr Konrad, the Grim|U|ELD
+#54|Wintermoor Commander|U|ELD
+#55|Return of the Wildspeaker|R|ELD
+#56|Blacklance Paragon|R|ELD
+#57|Loch Dragon|U|ELD
+#58|Reave Soul|C|ELD
+#59|Trapped in the Tower|C|ELD
+#60|Shinechaser|U|ELD
+#61|Steelclaw Lance|U|ELD
+#62|Order of Midnight|U|ELD
+#63|Charmed Sleep|C|ELD
+#64|Resolute Rider|U|ELD
+#65|Improbable Alliance|U|ELD
+#66|Stormfist Crusader|R|ELD
+#67|Fierce Witchstalker|C|ELD
+#68|Elite Headhunter|U|ELD
+#69|Syr Elenora, the Discerning|U|ELD
+#70|Searing Barrage|C|ELD
+#71|Covetous Urge|U|ELD
+#72|Outmuscle|C|ELD
+#73|Witch's Vengeance|R|ELD
+#74|Oakhame Ranger|U|ELD
+#75|Foulmire Knight|U|ELD
+#76|Deathless Knight|U|ELD
+#77|Vantress Gargoyle|R|ELD
+#78|Thunderous Snapper|U|ELD
+#79|Glass Casket|U|ELD
+#80|Wandermare|U|ELD
+#81|Ayara, First of Locthwain|R|ELD
+#82|Charming Prince|R|ELD
+#83|Keeper of Fables|U|ELD
+#84|Animating Faerie|U|ELD
+#85|Faerie Vandal|U|ELD
+#86|Tome Raider|C|ELD
+#87|Gilded Goose|R|ELD
+#88|Fae of Wishes|R|ELD
+#89|Shepherd of the Flock|U|ELD
+#90|Mysterious Pathlighter|U|ELD
+#91|Drown in the Loch|U|ELD
+#92|Mirrormade|R|ELD
+#93|Hypnotic Sprite|U|ELD
+#94|Joust|U|ELD
+#95|Beanstalk Giant|U|ELD
+#96|Queen of Ice|C|ELD
+#97|Hushbringer|R|ELD
+#98|Mad Ratter|U|ELD
+#99|Tempting Witch|C|ELD
+#100|Ardenvale Tactician|C|ELD
+#101|Oakhame Adversary|U|ELD
+#102|Into the Story|U|ELD
+#103|Trail of Crumbs|U|ELD
+#104|Scalding Cauldron|C|ELD
+#105|Sage of the Falls|U|ELD
+#106|Foreboding Fruit|C|ELD
+#107|Fabled Passage|R|ELD
+#108|Castle Ardenvale|R|ELD
+#109|Castle Locthwain|R|ELD
+#110|The Cauldron of Eternity|M|ELD
+#111|Rally for the Throne|U|ELD
+#112|Giant Opportunity|U|ELD
+#113|Redcap Melee|U|ELD
+#114|Fervent Champion|R|ELD
+#115|Doom Foretold|R|ELD
+#116|Burning-Yard Trainer|U|ELD
+#117|Once Upon a Time|R|ELD
+#118|Turn into a Pumpkin|U|ELD
+#119|Belle of the Brawl|U|ELD
+#120|Run Away Together|C|ELD
+#121|Youthful Knight|C|ELD
+#122|Outflank|C|ELD
+#123|Dwarven Mine|C|ELD
+#124|Malevolent Noble|C|ELD
+#125|Gingerbread Cabin|C|ELD
+#126|Lucky Clover|U|ELD
+#127|Castle Embereth|R|ELD
+#128|Castle Vantress|R|ELD
+#129|Overwhelmed Apprentice|U|ELD
+#130|Lonesome Unicorn|C|ELD
+#131|Clockwork Servant|U|ELD
+#132|Ferocity of the Wilds|U|ELD
+#133|The Magic Mirror|M|ELD
+#134|Dance of the Manse|R|ELD
+#135|Idyllic Grange|C|ELD
+#136|Merchant of the Vale|C|ELD
+#137|Edgewall Innkeeper|U|ELD
+#138|Spinning Wheel|U|ELD
+#139|Garenbrig Paladin|C|ELD
+#140|Once and Future|U|ELD
+#141|Enchanted Carriage|U|ELD
+#142|Venerable Knight|U|ELD
+#143|Smitten Swordmaster|C|ELD
+#144|Midnight Clock|R|ELD
+#145|Witch's Cottage|C|ELD
+#146|Sporecap Spider|C|ELD
+#147|Didn't Say Please|C|ELD
+#148|Prized Griffin|C|ELD
+#149|Flutterfox|C|ELD
+#150|Thrill of Possibility|C|ELD
+#151|Moonlit Scavengers|C|ELD
+#152|Mystic Sanctuary|C|ELD
+#153|So Tiny|C|ELD
+#154|Kenrith's Transformation|U|ELD
+#155|Steelgaze Griffin|C|ELD
+#156|Bloodhaze Wolverine|C|ELD
+#157|Unexplained Vision|C|ELD
+#158|Garenbrig Carver|C|ELD
+#159|Fortifying Provisions|C|ELD
+#160|Giant's Skewer|C|ELD
+#161|Castle Garenbrig|R|ELD
+#162|Escape to the Wilds|R|ELD
+#163|Forever Young|C|ELD
+#164|Silverflame Squire|C|ELD
+#165|Tuinvale Treefolk|C|ELD
+#166|Henge Walker|C|ELD
+#167|Redcap Raiders|C|ELD
+#168|Revenge of Ravens|U|ELD
+#169|Lost Legion|C|ELD
+#170|Ogre Errant|C|ELD
+#171|Skullknocker Ogre|U|ELD
+#172|Wishclaw Talisman|R|ELD
+#173|Brimstone Trebuchet|C|ELD
+#174|Wicked Guardian|C|ELD
+#175|Witch's Oven|U|ELD
+#176|Rosethorn Acolyte|C|ELD
+#177|Shambling Suit|U|ELD
+#178|Silverflame Ritual|C|ELD
+#179|Heraldic Banner|U|ELD
+#180|Embereth Shieldbreaker|U|ELD
+#181|Signpost Scarecrow|C|ELD
+#182|Barrow Witches|C|ELD
+#183|Merfolk Secretkeeper|C|ELD
+#184|Rimrock Knight|C|ELD
+#185|Festive Funeral|C|ELD
+#186|Rosethorn Halberd|C|ELD
+#187|Locthwain Paladin|C|ELD
+#188|Mantle of Tides|C|ELD
+#189|Vantress Paladin|C|ELD
+#190|Cauldron's Gift|U|ELD
+#191|Garenbrig Squire|C|ELD
+#192|Mistford River Turtle|C|ELD
+#193|Wolf's Quarry|C|ELD
+#194|Raging Redcap|C|ELD
+#195|Maraleaf Rider|C|ELD
+#196|Insatiable Appetite|C|ELD
+#197|Righteousness|U|ELD
+#198|Opt|C|ELD
+#199|Seven Dwarves|C|ELD
+#200|Curious Pair|C|ELD
+#201|Wildwood Tracker|C|ELD
+#202|Faerie Guidemother|C|ELD
+#203|Mystical Dispute|U|ELD
+#204|Frogify|U|ELD
+#205|Shining Armor|C|ELD
+#206|Tournament Grounds|U|ELD
+#207|Golden Egg|C|ELD
+#208|Witching Well|C|ELD
+#209|Crystal Slipper|C|ELD
+#210|Weapon Rack|C|ELD
+#211|Prophet of the Peak|C|ELD
+#212|Crashing Drawbridge|C|ELD
+#213|Fling|C|ELD
+#214|Memory Theft|C|ELD
+#215|Reaper of Night|C|ELD
+#216|Sorcerer's Broom|U|ELD
+#217|Ardenvale Paladin|C|ELD
+#218|Bartered Cow|C|ELD
+#219|Tall as a Beanstalk|C|ELD
+#220|Barge In|C|ELD
+#221|Knight of the Keep|C|ELD
+#222|Jousting Dummy|C|ELD
+#223|Corridor Monitor|C|ELD
+#224|All That Glitters|U|ELD
+#225|Embereth Paladin|C|ELD
+#226|Eye Collector|C|ELD
+#227|Wishful Merfolk|C|ELD
+#228|Lash of Thorns|C|ELD
+#229|Locthwain Gargoyle|C|ELD
+#230|Fell the Pheasant|C|ELD
+#231|Inquisitive Puppet|U|ELD
+#232|Gingerbrute|C|ELD
+#233|True Love's Kiss|C|ELD
+#234|Weaselback Redcap|C|ELD
+#235|Emry, Lurker of the Loch|R|ELD
+#236|Blow Your House Down|C|ELD
+#237|Return to Nature|C|ELD
+#238|Flaxen Intruder|U|ELD
+#239|Specter's Shriek|U|ELD
+#240|Beloved Princess|C|ELD
+#241|Claim the Firstborn|U|ELD
+#242|Roving Keep|C|ELD
+#243|Folio of Fancies|R|ELD
+#244|Cauldron Familiar|U|ELD
+#245|Irencrag Feat|R|ELD
+#246|Fires of Invention|R|ELD
+#247|Sorcerous Spyglass|R|ELD
+#248|Happily Ever After|R|ELD

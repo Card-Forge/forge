@@ -1,0 +1,340 @@
+//Rank|Name|Rarity|Set
+#1|Wrath of God|R|9ED
+#2|Sengir Vampire|R|9ED
+#3|Mahamoti Djinn|R|9ED
+#4|Hypnotic Specter|R|9ED
+#5|Royal Assassin|R|9ED
+#6|Shivan Dragon|R|9ED
+#7|Verdant Force|R|9ED
+#8|Serra Angel|R|9ED
+#9|Glorious Anthem|R|9ED
+#10|Worship|R|9ED
+#11|Loxodon Warhammer|R|9ED
+#12|Silklash Spider|R|9ED
+#13|Rathi Dragon|R|9ED
+#14|Blinding Angel|R|9ED
+#15|Thieving Magpie|U|9ED
+#16|Might of Oaks|R|9ED
+#17|Blaze|U|9ED
+#18|Shard Phoenix|R|9ED
+#19|Paladin en Vec|R|9ED
+#20|Force of Nature|R|9ED
+#21|Nekrataal|U|9ED
+#22|Thundermare|R|9ED
+#23|Wildfire|R|9ED
+#24|Nightmare|R|9ED
+#25|Dark Banishing|C|9ED
+#26|Beast of Burden|R|9ED
+#27|Ancient Silverback|R|9ED
+#28|Archivist|R|9ED
+#29|Tidings|U|9ED
+#30|Flame Wave|U|9ED
+#31|Icy Manipulator|U|9ED
+#32|Pyroclasm|U|9ED
+#33|Confiscate|U|9ED
+#34|Vulshok Morningstar|U|9ED
+#35|Elvish Champion|R|9ED
+#36|Karplusan Yeti|R|9ED
+#37|Volcanic Hammer|C|9ED
+#38|Plague Wind|R|9ED
+#39|Flowstone Slide|R|9ED
+#40|Clone|R|9ED
+#41|Air Elemental|U|9ED
+#42|Master Healer|R|9ED
+#43|Emperor Crocodile|R|9ED
+#44|Tidal Kraken|R|9ED
+#45|Elvish Piper|R|9ED
+#46|Orcish Artillery|U|9ED
+#47|Angel of Mercy|U|9ED
+#48|Mortivore|R|9ED
+#49|Phyrexian Gargantua|U|9ED
+#50|Shock|C|9ED
+#51|Pacifism|C|9ED
+#52|Blinking Spirit|R|9ED
+#53|Llanowar Behemoth|U|9ED
+#54|Thran Golem|R|9ED
+#55|Ballista Squad|U|9ED
+#56|Maro|R|9ED
+#57|Marble Titan|R|9ED
+#58|Goblin King|R|9ED
+#59|Coat of Arms|R|9ED
+#60|Story Circle|R|9ED
+#61|Bloodfire Colossus|R|9ED
+#62|Savannah Lions|R|9ED
+#63|Azure Drake|U|9ED
+#64|Puppeteer|U|9ED
+#65|Consume Spirit|U|9ED
+#66|Form of the Dragon|R|9ED
+#67|Rod of Ruin|U|9ED
+#68|Phyrexian Arena|R|9ED
+#69|Temporal Adept|R|9ED
+#70|Rukh Egg|R|9ED
+#71|Guerrilla Tactics|U|9ED
+#72|Millstone|R|9ED
+#73|Cruel Edict|U|9ED
+#74|Utopia Tree|R|9ED
+#75|Lord of the Undead|R|9ED
+#76|Aladdin's Ring|R|9ED
+#77|Fleeting Image|R|9ED
+#78|Seedborn Muse|R|9ED
+#79|Nantuko Husk|U|9ED
+#80|Jade Statue|R|9ED
+#81|Grave Pact|R|9ED
+#82|Blanchwood Armor|U|9ED
+#83|Threaten|U|9ED
+#84|Master Decoy|C|9ED
+#85|Gluttonous Zombie|U|9ED
+#86|Will o' the Wisp|R|9ED
+#87|Thought Courier|U|9ED
+#88|Phantom Warrior|U|9ED
+#89|Leonin Skyhunter|U|9ED
+#90|Chastise|U|9ED
+#91|Vengeance|U|9ED
+#92|Aven Windreader|C|9ED
+#93|Wind Drake|C|9ED
+#94|Anaba Shaman|C|9ED
+#95|Aven Fisher|C|9ED
+#96|Quicksand|U|9ED
+#97|Hell's Caretaker|R|9ED
+#98|Mindslicer|R|9ED
+#99|Oracle's Attendants|R|9ED
+#100|Hunted Wumpus|U|9ED
+#101|Gravedigger|C|9ED
+#102|Flowstone Crusher|U|9ED
+#103|Zombify|U|9ED
+#104|Order of the Sacred Bell|C|9ED
+#105|Giant Growth|C|9ED
+#106|Spined Wurm|C|9ED
+#107|Rootbreaker Wurm|U|9ED
+#108|Weathered Wayfarer|R|9ED
+#109|Pegasus Charger|C|9ED
+#110|Viashino Sandstalker|U|9ED
+#111|Kavu Climber|C|9ED
+#112|Dancing Scimitar|U|9ED
+#113|Anaconda|U|9ED
+#114|Trained Armodon|C|9ED
+#115|Greater Good|R|9ED
+#116|Llanowar Wastes|R|9ED
+#117|Wood Elves|C|9ED
+#118|Traumatize|R|9ED
+#119|Zealous Inquisitor|U|9ED
+#120|Magnivore|R|9ED
+#121|Diabolic Tutor|U|9ED
+#122|Persecute|R|9ED
+#123|Bottle Gnomes|U|9ED
+#124|Enormous Baloth|U|9ED
+#125|Enfeeblement|C|9ED
+#126|Llanowar Elves|C|9ED
+#127|Evacuation|R|9ED
+#128|Jester's Cap|R|9ED
+#129|Craw Wurm|C|9ED
+#130|River Bear|U|9ED
+#131|Treasure Trove|U|9ED
+#132|Kird Ape|U|9ED
+#133|Disrupting Scepter|R|9ED
+#134|Karplusan Forest|R|9ED
+#135|Deathgazer|U|9ED
+#136|Rewind|U|9ED
+#137|Yavimaya Coast|R|9ED
+#138|Anarchist|U|9ED
+#139|Execute|U|9ED
+#140|Ravenous Rats|C|9ED
+#141|Inspirit|U|9ED
+#142|Bog Wraith|U|9ED
+#143|Rootwalla|C|9ED
+#144|Phyrexian Hulk|U|9ED
+#145|Elvish Bard|U|9ED
+#146|Time Ebb|C|9ED
+#147|Caves of Koilos|R|9ED
+#148|Counsel of the Soratami|C|9ED
+#149|Fellwar Stone|U|9ED
+#150|Soul Feast|U|9ED
+#151|Razortooth Rats|C|9ED
+#152|Vizzerdrix|R|9ED
+#153|Viridian Shaman|U|9ED
+#154|Slate of Ancestry|R|9ED
+#155|Sift|C|9ED
+#156|King Cheetah|U|9ED
+#157|Dehydration|C|9ED
+#158|Underworld Dreams|R|9ED
+#159|Mana Leak|C|9ED
+#160|Giant Spider|C|9ED
+#161|Aven Flock|C|9ED
+#162|Ogre Taskmaster|U|9ED
+#163|Rampant Growth|C|9ED
+#164|Booby Trap|R|9ED
+#165|Final Punishment|R|9ED
+#166|Boomerang|C|9ED
+#167|Highway Robber|C|9ED
+#168|Trade Routes|R|9ED
+#169|Elvish Warrior|C|9ED
+#170|Scaled Wurm|C|9ED
+#171|Remove Soul|C|9ED
+#172|Blessed Orator|U|9ED
+#173|Festering Goblin|C|9ED
+#174|Lava Axe|C|9ED
+#175|Relentless Assault|R|9ED
+#176|Shivan Reef|R|9ED
+#177|Slay|U|9ED
+#178|Aven Cloudchaser|C|9ED
+#179|Unholy Strength|C|9ED
+#180|Drudge Skeletons|U|9ED
+#181|Needle Storm|U|9ED
+#182|Hill Giant|C|9ED
+#183|Goblin Chariot|C|9ED
+#184|Sandstone Warrior|C|9ED
+#185|Foul Imp|C|9ED
+#186|Underground River|R|9ED
+#187|Horned Turtle|C|9ED
+#188|Biorhythm|R|9ED
+#189|Kami of Old Stone|U|9ED
+#190|Giant Octopus|C|9ED
+#191|Sage Aven|C|9ED
+#192|Righteousness|R|9ED
+#193|Battlefield Forge|R|9ED
+#194|Skyhunter Prowler|C|9ED
+#195|Natural Affinity|R|9ED
+#196|Imaginary Pet|R|9ED
+#197|Crossbow Infantry|C|9ED
+#198|Zodiac Monkey|C|9ED
+#199|Brushland|R|9ED
+#200|Looming Shade|C|9ED
+#201|Veteran Cavalier|C|9ED
+#202|Grizzly Bears|C|9ED
+#203|Enrage|U|9ED
+#204|Dream Prowler|U|9ED
+#205|Sleight of Hand|C|9ED
+#206|Hollow Dogs|C|9ED
+#207|Spirit Link|U|9ED
+#208|Lightning Elemental|C|9ED
+#209|Seasoned Marshal|U|9ED
+#210|Exhaustion|U|9ED
+#211|Levitation|U|9ED
+#212|Polymorph|R|9ED
+#213|Zur's Weirding|R|9ED
+#214|Yavimaya Enchantress|U|9ED
+#215|Sulfurous Springs|R|9ED
+#216|Soul Warden|U|9ED
+#217|Glory Seeker|C|9ED
+#218|Adarkar Wastes|R|9ED
+#219|Daring Apprentice|R|9ED
+#220|Blackmail|U|9ED
+#221|Reverse Damage|R|9ED
+#222|Whip Sergeant|U|9ED
+#223|Howling Mine|R|9ED
+#224|Creeping Mold|U|9ED
+#225|Venerable Monk|C|9ED
+#226|Cowardice|R|9ED
+#227|Ur Golem's Eye|U|9ED
+#228|Suntail Hawk|C|9ED
+#229|Annex|U|9ED
+#230|Gift of Estates|U|9ED
+#231|Balduvian Barbarians|C|9ED
+#232|Verduran Enchantress|R|9ED
+#233|Mogg Sentry|R|9ED
+#234|Flashfires|U|9ED
+#235|Circle of Protection: Red|U|9ED
+#236|Plagiarize|R|9ED
+#237|Serpent Warrior|C|9ED
+#238|Mind Rot|C|9ED
+#239|Giant Cockroach|C|9ED
+#240|Yawgmoth Demon|R|9ED
+#241|Samite Healer|C|9ED
+#242|Ivory Mask|R|9ED
+#243|Sea Monster|C|9ED
+#244|Sudden Impact|U|9ED
+#245|Reclaim|C|9ED
+#246|Coercion|C|9ED
+#247|Goblin Raider|C|9ED
+#248|Foot Soldiers|C|9ED
+#249|Furnace of Rath|R|9ED
+#250|Infantry Veteran|C|9ED
+#251|Demolish|U|9ED
+#252|Treetop Bracers|C|9ED
+#253|Flowstone Shambler|C|9ED
+#254|Goblin Brigand|C|9ED
+#255|Lumengrid Warden|C|9ED
+#256|Coral Eel|C|9ED
+#257|Bog Imp|C|9ED
+#258|Circle of Protection: Black|U|9ED
+#259|Boiling Seas|U|9ED
+#260|Storm Crow|C|9ED
+#261|Goblin Piker|C|9ED
+#262|Ornithopter|U|9ED
+#263|Overgrowth|C|9ED
+#264|Spineless Thug|C|9ED
+#265|Angelic Blessing|C|9ED
+#266|Storage Matrix|R|9ED
+#267|Scathe Zombies|C|9ED
+#268|Stone Rain|C|9ED
+#269|Sanctum Guardian|U|9ED
+#270|Weird Harvest|R|9ED
+#271|Naturalize|C|9ED
+#272|Groundskeeper|U|9ED
+#273|Serra's Blessing|U|9ED
+#274|Urza's Tower|U|9ED
+#275|Holy Strength|C|9ED
+#276|Death Pits of Rath|R|9ED
+#277|Elvish Berserker|C|9ED
+#278|Swarm of Rats|U|9ED
+#279|Wanderguard Sentry|C|9ED
+#280|Ley Druid|U|9ED
+#281|Urza's Power Plant|U|9ED
+#282|Goblin Balloon Brigade|U|9ED
+#283|Defense Grid|R|9ED
+#284|Regeneration|U|9ED
+#285|Urza's Mine|U|9ED
+#286|Contaminated Bond|C|9ED
+#287|Raging Goblin|C|9ED
+#288|Norwood Ranger|C|9ED
+#289|Warrior's Honor|C|9ED
+#290|Raise Dead|C|9ED
+#291|Seething Song|C|9ED
+#292|Megrim|U|9ED
+#293|Crafty Pathmage|C|9ED
+#294|Teferi's Puzzle Box|R|9ED
+#295|Early Harvest|R|9ED
+#296|Rogue Kavu|C|9ED
+#297|Web|U|9ED
+#298|Withering Gaze|U|9ED
+#299|Goblin Sky Raider|C|9ED
+#300|Honor Guard|C|9ED
+#301|Kraken's Eye|U|9ED
+#302|Blood Moon|R|9ED
+#303|Panic Attack|C|9ED
+#304|Baleful Stare|U|9ED
+#305|Plague Beetle|C|9ED
+#306|Stream of Life|U|9ED
+#307|Goblin Mountaineer|C|9ED
+#308|Tanglebloom|U|9ED
+#309|Index|C|9ED
+#310|Tree Monkey|C|9ED
+#311|Mending Hands|C|9ED
+#312|Fear|C|9ED
+#313|Peace of Mind|U|9ED
+#314|Reminisce|U|9ED
+#315|Holy Day|C|9ED
+#316|Shatter|C|9ED
+#317|Horror of Horrors|U|9ED
+#318|Natural Spring|C|9ED
+#319|Dragon's Claw|U|9ED
+#320|Firebreathing|C|9ED
+#321|Tempest of Light|U|9ED
+#322|Summer Bloom|U|9ED
+#323|Demon's Horn|U|9ED
+#324|Fugitive Wizard|C|9ED
+#325|Wurm's Tooth|U|9ED
+#326|Demystify|C|9ED
+#327|Telepathy|U|9ED
+#328|Flight|C|9ED
+#329|Eager Cadet|C|9ED
+#330|Spellbook|U|9ED
+#331|Battle of Wits|R|9ED
+#332|Angel's Feather|U|9ED
+#333|Sea's Claim|C|9ED
+#334|Sacred Nectar|C|9ED
+#335|Reflexes|C|9ED
+#336|Fishliver Oil|C|9ED
+#337|Sacred Ground|R|9ED
+#338|Mind Bend|R|9ED
+#339|Mana Clash|R|9ED

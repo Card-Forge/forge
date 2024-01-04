@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Glare of Subdual|R|RAV
+#2|Loxodon Hierarch|R|RAV
+#3|Ursapine|R|RAV
+#4|Gleancrawler|R|RAV
+#5|Vulturous Zombie|R|RAV
+#6|Grave Shell Scarab|R|RAV
+#7|Char|R|RAV
+#8|Firemane Angel|R|RAV
+#9|Hex|R|RAV
+#10|Flame Fusillade|R|RAV
+#11|Moldervine Cloak|U|RAV
+#12|Cerulean Sphinx|R|RAV
+#13|Tolsimir Wolfblood|R|RAV
+#14|Ribbons of Night|U|RAV
+#15|Moroii|U|RAV
+#16|Putrefy|U|RAV
+#17|Selesnya Guildmage|U|RAV
+#18|Lightning Helix|U|RAV
+#19|Glimpse the Unthinkable|R|RAV
+#20|Keening Banshee|U|RAV
+#21|Dream Leash|R|RAV
+#22|Last Gasp|C|RAV
+#23|Faith's Fetters|C|RAV
+#24|Galvanic Arc|C|RAV
+#25|Primordial Sage|R|RAV
+#26|Followed Footsteps|R|RAV
+#27|Sunforger|R|RAV
+#28|Hour of Reckoning|R|RAV
+#29|Master Warcraft|R|RAV
+#30|Plague Boiler|R|RAV
+#31|Trophy Hunter|U|RAV
+#32|Devouring Light|U|RAV
+#33|Mark of Eviction|U|RAV
+#34|Hunted Dragon|R|RAV
+#35|Razia, Boros Archangel|R|RAV
+#36|Agrus Kos, Wojek Veteran|R|RAV
+#37|Brightflame|R|RAV
+#38|Dimir Guildmage|U|RAV
+#39|Disembowel|C|RAV
+#40|Vinelasher Kudzu|R|RAV
+#41|Birds of Paradise|R|RAV
+#42|Woebringer Demon|R|RAV
+#43|Dimir Cutpurse|R|RAV
+#44|Viashino Fangtail|C|RAV
+#45|Watchwolf|U|RAV
+#46|Golgari Guildmage|U|RAV
+#47|Loxodon Gatekeeper|R|RAV
+#48|Belltower Sphinx|U|RAV
+#49|Bottled Cloister|R|RAV
+#50|Szadek, Lord of Secrets|R|RAV
+#51|Hunted Lammasu|R|RAV
+#52|Civic Wayfinder|C|RAV
+#53|Hammerfist Giant|R|RAV
+#54|Snapping Drake|C|RAV
+#55|Compulsive Research|C|RAV
+#56|Sunhome Enforcer|U|RAV
+#57|Woodwraith Corrupter|R|RAV
+#58|Halcyon Glaze|U|RAV
+#59|Helldozer|R|RAV
+#60|Cleansing Beam|U|RAV
+#61|Boros Guildmage|U|RAV
+#62|Vedalken Dismisser|C|RAV
+#63|Brainspoil|C|RAV
+#64|Drooling Groodion|U|RAV
+#65|Dark Confidant|R|RAV
+#66|Stinkweed Imp|C|RAV
+#67|Skyknight Legionnaire|C|RAV
+#68|Golgari Rotwurm|C|RAV
+#69|Sisters of Stone Death|R|RAV
+#70|Oathsworn Giant|U|RAV
+#71|Carven Caryatid|U|RAV
+#72|Peel from Reality|C|RAV
+#73|Siege Wurm|C|RAV
+#74|Circu, Dimir Lobotomist|R|RAV
+#75|Dimir House Guard|C|RAV
+#76|Darkblast|U|RAV
+#77|Divebomber Griffin|U|RAV
+#78|Mausoleum Turnkey|U|RAV
+#79|Bramble Elemental|C|RAV
+#80|Conclave Equenaut|C|RAV
+#81|Flash Conscription|U|RAV
+#82|Thundersong Trumpeter|C|RAV
+#83|Twilight Drover|R|RAV
+#84|Scion of the Wild|R|RAV
+#85|Veteran Armorer|C|RAV
+#86|Dimir Doppelganger|R|RAV
+#87|Pollenbright Wings|U|RAV
+#88|Blazing Archon|R|RAV
+#89|Farseek|C|RAV
+#90|Necroplasm|R|RAV
+#91|Selesnya Evangel|C|RAV
+#92|Shambling Shell|C|RAV
+#93|Doubling Season|R|RAV
+#94|Savra, Queen of the Golgari|R|RAV
+#95|Spectral Searchlight|U|RAV
+#96|Vedalken Entrancer|C|RAV
+#97|Mindleech Mass|R|RAV
+#98|Nullmage Shepherd|U|RAV
+#99|Dowsing Shaman|U|RAV
+#100|Scatter the Seeds|C|RAV
+#101|Flight of Fancy|C|RAV
+#102|Chord of Calling|R|RAV
+#103|Drift of Phantasms|C|RAV
+#104|Wojek Embermage|U|RAV
+#105|Sacred Foundry|R|RAV
+#106|Fists of Ironwood|C|RAV
+#107|Greater Mossdog|C|RAV
+#108|Auratouched Mage|U|RAV
+#109|Centaur Safeguard|C|RAV
+#110|Gaze of the Gorgon|C|RAV
+#111|Indentured Oaf|U|RAV
+#112|Screeching Griffin|C|RAV
+#113|Vitu Ghazi, the City Tree|U|RAV
+#114|Remand|U|RAV
+#115|Tidewater Minion|C|RAV
+#116|Telling Time|U|RAV
+#117|Bathe in Light|U|RAV
+#118|Fiery Conclusion|C|RAV
+#119|Golgari Grave Troll|R|RAV
+#120|Overgrown Tomb|R|RAV
+#121|Flame Kin Zealot|U|RAV
+#122|Elves of Deep Shadow|C|RAV
+#123|Twisted Justice|U|RAV
+#124|Cloudstone Curio|R|RAV
+#125|Watery Grave|R|RAV
+#126|Dimir Aqueduct|C|RAV
+#127|Temple Garden|R|RAV
+#128|Boros Swiftblade|U|RAV
+#129|Lurking Informant|C|RAV
+#130|Nightguard Patrol|C|RAV
+#131|Sandsower|U|RAV
+#132|Clutch of the Undercity|U|RAV
+#133|Phytohydra|R|RAV
+#134|Golgari Rot Farm|C|RAV
+#135|Transluminant|C|RAV
+#136|Selesnya Sagittars|U|RAV
+#137|Boros Garrison|C|RAV
+#138|Root Kin Ally|U|RAV
+#139|Clinging Darkness|C|RAV
+#140|Recollect|U|RAV
+#141|Frenzied Goblin|U|RAV
+#142|Gather Courage|C|RAV
+#143|Sparkmage Apprentice|C|RAV
+#144|Dimir Signet|C|RAV
+#145|Surveilling Sprite|C|RAV
+#146|Strands of Undeath|C|RAV
+#147|Consult the Necrosages|C|RAV
+#148|Selesnya Sanctuary|C|RAV
+#149|Vigor Mortis|U|RAV
+#150|Greater Forgeling|U|RAV
+#151|Crown of Convergence|R|RAV
+#152|Psychic Drain|U|RAV
+#153|Guardian of Vitu Ghazi|C|RAV
+#154|Sunhome, Fortress of the Legion|U|RAV
+#155|Hunted Troll|R|RAV
+#156|Seeds of Strength|C|RAV
+#157|Hunted Phantasm|R|RAV
+#158|Terrarion|C|RAV
+#159|Chorus of the Conclave|R|RAV
+#160|Tattered Drake|C|RAV
+#161|Privileged Position|R|RAV
+#162|Congregation at Dawn|U|RAV
+#163|Golgari Signet|C|RAV
+#164|Elvish Skysweeper|C|RAV
+#165|Golgari Brownscale|C|RAV
+#166|Boros Signet|C|RAV
+#167|Courier Hawk|C|RAV
+#168|Roofstalker Wight|C|RAV
+#169|Bloodletter Quill|R|RAV
+#170|Benevolent Ancestor|C|RAV
+#171|Dimir Infiltrator|C|RAV
+#172|Conclave Phalanx|U|RAV
+#173|Concerted Effort|R|RAV
+#174|Selesnya Signet|C|RAV
+#175|Terraformer|C|RAV
+#176|Mortipede|C|RAV
+#177|Netherborn Phalanx|U|RAV
+#178|Junktroller|U|RAV
+#179|Overwhelm|U|RAV
+#180|Razia's Purification|R|RAV
+#181|Rally the Righteous|C|RAV
+#182|Ordruun Commando|C|RAV
+#183|Flickerform|R|RAV
+#184|Three Dreams|R|RAV
+#185|Sell Sword Brute|C|RAV
+#186|Goblin Spelunkers|C|RAV
+#187|Seed Spark|U|RAV
+#188|Grifter's Blade|U|RAV
+#189|Boros Fury Shield|C|RAV
+#190|Sewerdreg|C|RAV
+#191|Rolling Spoil|U|RAV
+#192|Glass Golem|U|RAV
+#193|Voyager Staff|U|RAV
+#194|Drake Familiar|C|RAV
+#195|Molten Sentry|R|RAV
+#196|Convolute|C|RAV
+#197|Induce Paranoia|C|RAV
+#198|War Torch Goblin|C|RAV
+#199|Moonlight Bargain|R|RAV
+#200|Boros Recruit|C|RAV
+#201|Thoughtpicker Witch|C|RAV
+#202|Stasis Cell|C|RAV
+#203|Autochthon Wurm|R|RAV
+#204|Lore Broker|U|RAV
+#205|Svogthos, the Restless Tomb|U|RAV
+#206|Carrion Howler|U|RAV
+#207|Blockbuster|U|RAV
+#208|Spawnbroker|R|RAV
+#209|Excruciator|R|RAV
+#210|Sadistic Augermage|C|RAV
+#211|Nightmare Void|U|RAV
+#212|Wizened Snitches|U|RAV
+#213|Duskmantle, House of Shadow|U|RAV
+#214|Copy Enchantment|R|RAV
+#215|Golgari Thug|U|RAV
+#216|Muddle the Mixture|C|RAV
+#217|Sundering Vitae|C|RAV
+#218|Sabertooth Alley Cat|C|RAV
+#219|Searing Meditation|R|RAV
+#220|Barbarian Riftcutter|C|RAV
+#221|Golgari Germination|U|RAV
+#222|Goliath Spider|U|RAV
+#223|Rain of Embers|C|RAV
+#224|Shadow of Doubt|R|RAV
+#225|Ivy Dancer|U|RAV
+#226|Perplex|C|RAV
+#227|Tunnel Vision|R|RAV
+#228|Woodwraith Strangler|C|RAV
+#229|Viashino Slasher|C|RAV
+#230|Dogpile|C|RAV
+#231|Ghosts of the Innocent|R|RAV
+#232|Hunted Horror|R|RAV
+#233|Pariah's Shield|R|RAV
+#234|Coalhauler Swine|C|RAV
+#235|Ethereal Usher|U|RAV
+#236|Wojek Siren|C|RAV
+#237|Mindmoil|R|RAV
+#238|Festival of the Guildpact|U|RAV
+#239|Undercity Shade|U|RAV
+#240|Nullstone Gargoyle|R|RAV
+#241|Votary of the Conclave|C|RAV
+#242|Life from the Loam|R|RAV
+#243|Leave No Trace|C|RAV
+#244|Incite Hysteria|C|RAV
+#245|Dimir Machinations|U|RAV
+#246|Smash|C|RAV
+#247|Reroute|U|RAV
+#248|Dromad Purebred|C|RAV
+#249|Torpid Moloch|C|RAV
+#250|Caregiver|C|RAV
+#251|Shred Memory|C|RAV
+#252|Vindictive Mob|U|RAV
+#253|Dark Heart of the Wood|U|RAV
+#254|Stone Seeder Hierophant|C|RAV
+#255|Cyclopean Snare|U|RAV
+#256|Necromantic Thirst|C|RAV
+#257|Instill Furor|U|RAV
+#258|Dizzy Spell|C|RAV
+#259|Infectious Host|C|RAV
+#260|Flow of Ideas|U|RAV
+#261|Peregrine Mask|U|RAV
+#262|Grayscaled Gharial|C|RAV
+#263|Seismic Spike|C|RAV
+#264|Sins of the Past|R|RAV
+#265|Goblin Fire Fiend|C|RAV
+#266|Chant of Vitu Ghazi|U|RAV
+#267|Wojek Apothecary|U|RAV
+#268|Quickchange|C|RAV
+#269|Breath of Fury|R|RAV
+#270|Conclave's Blessing|C|RAV
+#271|Leashling|U|RAV
+#272|Gate Hound|C|RAV
+#273|Grozoth|R|RAV
+#274|Suppression Field|U|RAV
+#275|Dryad's Caress|C|RAV
+#276|Zephyr Spirit|C|RAV
+#277|Stoneshaker Shaman|U|RAV
+#278|Bloodbond March|R|RAV
+#279|Surge of Zeal|C|RAV
+#280|Mnemonic Nexus|U|RAV
+#281|Empty the Catacombs|R|RAV
+#282|Perilous Forays|U|RAV
+#283|Eye of the Storm|R|RAV
+#284|Warp World|R|RAV
+#285|Light of Sanction|R|RAV
+#286|Blood Funnel|R|RAV
