@@ -178,7 +178,7 @@ public class AdventureQuestStage implements Serializable {
 
     public boolean checkIfTargetEnemy(EnemySprite enemy) {
         if (targetEnemyData != null) {
-            return enemy.getData() == targetEnemyData;
+            return (enemy.getData().match(targetEnemyData));
         }
         else if (targetSprite == null) {
             ArrayList<String> candidateTags = new ArrayList<>(Arrays.asList(enemy.getData().questTags));
