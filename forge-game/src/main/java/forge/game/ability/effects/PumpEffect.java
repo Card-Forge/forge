@@ -313,7 +313,7 @@ public class PumpEffect extends SpellAbilityEffect {
             a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
         }
         if (sa.hasParam("NumDef") && !sa.getParam("NumDef").equals("Double")) {
-            d = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
+            d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, true);
         }
 
         if (sa.hasParam("SharedKeywordsZone")) {
