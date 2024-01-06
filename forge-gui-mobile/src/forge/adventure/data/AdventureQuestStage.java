@@ -279,10 +279,10 @@ public class AdventureQuestStage implements Serializable {
                         && ++progress1 >= count1 ? COMPLETE : status;
                 break;
             case Clear:
-                if (!event.clear) {
-                    break;
+                if (event.clear && event.winner) {
+                    status = COMPLETE;
                 }
-                //intentional fallthrough to DEFEAT
+                break;
             case Defeat:
                 if (event.type != AdventureQuestEventType.MATCHCOMPLETE)
                     break;
