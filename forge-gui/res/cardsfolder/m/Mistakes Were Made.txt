@@ -1,0 +1,5 @@
+Name:Mistakes Were Made
+ManaCost:1 G
+Types:Instant
+A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. Create a 1/1 green Squirrel creature token for each fire extinguisher you can see from your seat.
+Oracle:Destroy target artifact or enchantment. Create a 1/1 green Squirrel creature token for each fire extinguisher you can see from your seat.
