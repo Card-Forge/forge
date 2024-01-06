@@ -4335,7 +4335,7 @@
         "id": 16,
         "isTemplate": true,
         "name": "Clearing the ledger",
-        "description": "Clear out all enemies in the $(poi_1)and report back",
+        "description": "Clear out all enemies in the $(poi_1) and report back",
         "offerDialog": {
             "text": "As you introduce yourself to the inside of the local inn for the night, another patron approaches you.",
             "options": [
@@ -5654,7 +5654,25 @@
             "text": "You walk back into the town with the requested cargo of $(enemy_1)s. You're unsure if they will be useful, but the dwarf seems extremely excited to begin his work. (+3 Local Reputation) ",
             "options": [
                 {
-                    "name": "You try to talk to him, but the dwarf is completely lost in his work already. You take the bundle he was carrying, assuming it to be your rewards. (Complete Quest)"
+                    "action": [
+                        {
+                            "grantRewards": [
+                                {
+                                    "type": "gold",
+                                    "count": 500
+                                },
+                                {
+                                    "type": "card",
+                                    "count": 4,
+                                    "addMaxCount": 4,
+                                    "rarity": [
+                                        "Common",
+										"Uncommon"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],"name": "You try to talk to him, but the dwarf is completely lost in his work already. You take the bundle he was carrying, assuming it to be your rewards. (Complete Quest)"
                 }
             ]
         },
@@ -9704,6 +9722,7 @@
                 "enemyTags": [
                     "Captain"
                 ],
+				"mixedEnemies": true,
                 "prologue": {
                     "text": "Sir Donovan's directions are very precise, and you find the mining operation without much trouble. There is, however, an obvious sign of trouble when you arrive.",
                     "options": [
@@ -9768,7 +9787,7 @@
                 "description": "Use Donovan's amulet to contact him.",
                 "mapFlag": "Quest_ShardMines_EpilogueComplete",
                 "mapFlagValue": 1,
-                "here": true,
+                "worldMapOK": true,
                 "objective": "QuestFlag",
                 "prologue": {
                     "text": "When you are ready, you should use the amulet he gave you to tell Sir Donovan about the pirates, and that they've been dealt with.",
