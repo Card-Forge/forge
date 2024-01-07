@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.ItemPool;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -562,6 +563,26 @@ public class DeckgenUtil {
         if (size == 0) { return; }
 
         deckManager.setSelectedIndex(MyRandom.getRandom().nextInt(size));
+    }
+
+    public static void randomFavoriteSelect(final IItemManager<DeckProxy> deckManager) {
+        ItemPool<DeckProxy> allDecks = deckManager.getPool();
+
+        List<Integer> favouriteDeckIndices = new ArrayList<>();
+
+        int i = 0;
+        for (Map.Entry<DeckProxy, Integer> deck : allDecks) {
+            if (deck.getKey().isFavoriteDeck()) {
+                favouriteDeckIndices.add(i);
+            }
+
+            i++;
+        }
+
+        final int size = favouriteDeckIndices.size();
+        if (size == 0) { return; }
+
+        deckManager.setSelectedIndex(favouriteDeckIndices.get(MyRandom.getRandom().nextInt(size)));
     }
 
     /** 
