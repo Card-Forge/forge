@@ -224,7 +224,8 @@ public class AdventureQuestController implements Serializable {
             return;
         }
 
-        MapDialog dialog = new MapDialog(dialogQueue.remove(), stage, -1, null);
+        DialogData data = dialogQueue.remove();
+        MapDialog dialog = new MapDialog(data, stage, -1, null);
         stage.showDialog();
         dialog.activate();
         ChangeListener listen = new ChangeListener() {
@@ -234,7 +235,10 @@ public class AdventureQuestController implements Serializable {
             }
         };
         dialog.addDialogCompleteListener(listen);
-
+        if (data.options == null || data.options.length == 0)
+        {
+            displayNextDialog(stage);
+        }
     }
     public static class DistanceSort implements Comparator<PointOfInterest>
     {
