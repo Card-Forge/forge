@@ -355,7 +355,7 @@ public class TriggerHandler {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
         final boolean wasCollected = wt.getTriggers() != null;
-        final List<Trigger> triggers = wasCollected ? wt.getTriggers() : activeTriggers;
+        final Iterable<Trigger> triggers = wasCollected ? wt.getTriggers() : activeTriggers;
 
         boolean checkStatics = false;
 
