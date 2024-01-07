@@ -916,6 +916,7 @@ public final class GameActionUtil {
         if (ability.getApi() == ApiType.Charm) {
             // reset chain
             ability.setSubAbility(null);
+            ability.setChosenList(null);
         }
 
         ability.clearTargets();
