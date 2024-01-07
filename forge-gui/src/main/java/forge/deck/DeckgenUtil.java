@@ -559,30 +559,27 @@ public class DeckgenUtil {
     }
 
     public static void randomSelect(final IItemManager<DeckProxy> deckManager) {
-        final int size = deckManager.getItemCount();
-        if (size == 0) { return; }
+        final int numDecks = deckManager.getItemCount();
+        if (numDecks == 0) { return; }
 
-        deckManager.setSelectedIndex(MyRandom.getRandom().nextInt(size));
+        deckManager.setSelectedIndex(MyRandom.getRandom().nextInt(numDecks));
     }
 
     public static void randomFavoriteSelect(final IItemManager<DeckProxy> deckManager) {
         ItemPool<DeckProxy> allDecks = deckManager.getPool();
 
-        List<Integer> favouriteDeckIndices = new ArrayList<>();
+        List<DeckProxy> favouriteDecks = new ArrayList<>();
 
-        int i = 0;
         for (Map.Entry<DeckProxy, Integer> deck : allDecks) {
             if (deck.getKey().isFavoriteDeck()) {
-                favouriteDeckIndices.add(i);
+                favouriteDecks.add(deck.getKey());
             }
-
-            i++;
         }
 
-        final int size = favouriteDeckIndices.size();
-        if (size == 0) { return; }
+        final int numFavorites = favouriteDecks.size();
+        if (numFavorites == 0) { return; }
 
-        deckManager.setSelectedIndex(favouriteDeckIndices.get(MyRandom.getRandom().nextInt(size)));
+        deckManager.setSelectedItem(favouriteDecks.get(MyRandom.getRandom().nextInt(numFavorites)));
     }
 
     /** 
