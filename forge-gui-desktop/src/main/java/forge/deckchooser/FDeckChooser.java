@@ -54,6 +54,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private final FLabel btnViewDeck = new FLabel.ButtonBuilder().text(localizer.getMessage("lblViewDeck")).fontSize(14).build();
     private final FLabel btnRandom = new FLabel.ButtonBuilder().fontSize(14).build();
+    private final FLabel btnRandomFavorite = new FLabel.ButtonBuilder().fontSize(14).build();
 
     private boolean isAi;
 
@@ -131,6 +132,14 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             @Override
             public void run() {
                 DeckgenUtil.randomSelect(lstDecks);
+            }
+        });
+
+        btnRandomFavorite.setText(localizer.getMessage("lblRandomFavoriteDeck"));
+        btnRandomFavorite.setCommand(new UiCommand() {
+            @Override
+            public void run() {
+                DeckgenUtil.randomFavoriteSelect(lstDecks);
             }
         });
 
@@ -352,8 +361,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         this.setLayout(new MigLayout("insets 0, gap 0"));
         decksComboBox.addTo(this, "w 100%, h 30px!, gapbottom 5px, spanx 2, wrap");
         this.add(lstDecksContainer, "w 100%, growy, pushy, spanx 2, wrap");
-        this.add(btnViewDeck, "w 50%-3px, h 30px!, gaptop 5px, gapright 6px");
-        this.add(btnRandom, "w 50%-3px, h 30px!, gaptop 5px");
+        this.add(btnViewDeck, "w 33%-4px, h 30px!, gaptop 5px, gapright 6px");
+        this.add(btnRandom, "w 33%-4px, h 30px!, gaptop 5px, gapright 6px");
+        this.add(btnRandomFavorite, "w 33%-4px, h 30px!, gaptop 5px");
         if (isShowing()) {
             revalidate();
             repaint();
