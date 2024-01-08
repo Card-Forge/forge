@@ -1,0 +1,9 @@
+Name:Mycoid Resurrection
+ManaCost:4 B G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Graveyard | NumAtt$ X | NumDef$ X | SubAbility$ DBReturn | SpellDescription$ Fathomless descent — Each creature card in your graveyard perpetually gets +X/+X, where X is the number of permanent cards in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | PrimaryPrompt$ Choose a creature card to return to the battlefield | ChangeTypeDesc$ creature | SpellDescription$ Then return a creature card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Sacrifice
+Oracle:Fathomless descent — Each creature card in your graveyard perpetually gets +X/+X, where X is the number of permanent cards in your graveyard. Then return a creature card from your graveyard to the battlefield.
