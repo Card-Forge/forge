@@ -506,6 +506,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventPlayerRadiation event) {
+        return processPlayer(event.receiver, livesUpdate);
+    }
+
+    @Override
     public Void visit(final GameEventPlayerDamaged event) {
         return processEvent();
     }

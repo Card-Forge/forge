@@ -1,7 +1,7 @@
 Name:Trial of a Time Lord
 ManaCost:1 W W
 Types:Enchantment Saga
-K:Saga:4:DBExile,DBExile,DBExile,DBVote
+K:Chapter:4:DBExile,DBExile,DBExile,DBVote
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.nonToken+OppCtrl | TgtPrompt$ Choose target nontoken creature an opponent controls | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay | SpellDescription$ Exile target nontoken creature an opponent controls until CARDNAME leaves the battlefield.
 SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Innocent,Guilty | VoteInnocent$ DBInnocent | VoteGuilty$ DBGuilty | SpellDescription$ Starting with you, each player votes for innocent or guilty. If guilty gets more votes, the owner of each card exiled with CARDNAME puts that card on the bottom of their library.
 SVar:DBInnocent:DB$ Effect

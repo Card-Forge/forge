@@ -18,6 +18,7 @@
 package forge.deck;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -117,7 +118,7 @@ public class AddBasicLandsDialog extends FDialog {
     private int nonLandCount, oldLandCount;
     private CardEdition landSet;
 
-    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0) {
+    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Callback<CardPool> callback0, List<CardEdition> editionOptions) {
         super(Forge.getLocalizer().getMessage("lblAddBasicLandsAutoSuggest").replace("%s", deck.getName()), 2);
 
         callback = callback0;
@@ -139,6 +140,12 @@ public class AddBasicLandsDialog extends FDialog {
                 pnlForest.refreshArtChoices();
             }
         });
+
+        if (editionOptions != null && !editionOptions.isEmpty())
+        {
+            cbLandSet.setItems(editionOptions, editionOptions.get(0));
+        }
+
         cbLandSet.setSelectedItem(defaultLandSet);
 
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {

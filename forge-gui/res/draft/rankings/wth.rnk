@@ -1,0 +1,168 @@
+//Rank|Name|Rarity|Set
+#1|Firestorm|R|WTH
+#2|Alabaster Dragon|R|WTH
+#3|Morinfen|R|WTH
+#4|Southern Paladin|R|WTH
+#5|Thundermare|R|WTH
+#6|Abeyance|R|WTH
+#7|Urborg Stalker|R|WTH
+#8|Call of the Wild|R|WTH
+#9|Cloud Djinn|U|WTH
+#10|Lava Hounds|U|WTH
+#11|Maraxus of Keld|R|WTH
+#12|Thran Tome|R|WTH
+#13|Empyrial Armor|C|WTH
+#14|Barishi|U|WTH
+#15|Heart of Bogardan|R|WTH
+#16|Abduction|U|WTH
+#17|Fire Whip|C|WTH
+#18|Aboroth|R|WTH
+#19|Vodalian Illusionist|U|WTH
+#20|Llanowar Behemoth|U|WTH
+#21|Gallowbraid|R|WTH
+#22|Fungus Elemental|R|WTH
+#23|Chimeric Sphere|U|WTH
+#24|Xanthic Statue|R|WTH
+#25|Mistmoon Griffin|U|WTH
+#26|Winding Canyons|R|WTH
+#27|Cone of Flame|U|WTH
+#28|Bogardan Firefiend|C|WTH
+#29|Heavy Ballista|C|WTH
+#30|Bone Dancer|R|WTH
+#31|Lotus Vale|R|WTH
+#32|Spinning Darkness|C|WTH
+#33|Serrated Biskelion|U|WTH
+#34|Phantom Warrior|U|WTH
+#35|Orcish Settlers|U|WTH
+#36|Fledgling Djinn|C|WTH
+#37|Urborg Justice|R|WTH
+#38|Peacekeeper|R|WTH
+#39|Fallow Wurm|U|WTH
+#40|Tolarian Drake|C|WTH
+#41|Thunderbolt|C|WTH
+#42|Benalish Knight|C|WTH
+#43|Bloodrock Cyclops|C|WTH
+#44|Mind Stone|C|WTH
+#45|Lava Storm|C|WTH
+#46|Hidden Horror|U|WTH
+#47|Llanowar Sentinel|C|WTH
+#48|Tariff|R|WTH
+#49|Striped Bears|C|WTH
+#50|Ophidian|C|WTH
+#51|Debt of Loyalty|R|WTH
+#52|Sawtooth Ogre|C|WTH
+#53|Arctic Wolves|U|WTH
+#54|Volunteer Reserves|U|WTH
+#55|Wave of Terror|R|WTH
+#56|Razortooth Rats|C|WTH
+#57|Infernal Tribute|R|WTH
+#58|Shadow Rider|C|WTH
+#59|Sylvan Hierophant|U|WTH
+#60|Sage Owl|C|WTH
+#61|Bubble Matrix|R|WTH
+#62|Heat Stroke|R|WTH
+#63|Tolarian Entrancer|R|WTH
+#64|Liege of the Hollows|R|WTH
+#65|Strands of Night|U|WTH
+#66|Goblin Bomb|R|WTH
+#67|Dense Foliage|R|WTH
+#68|Festering Evil|C|WTH
+#69|Hurloon Shaman|U|WTH
+#70|Nature's Resurgence|R|WTH
+#71|Revered Unicorn|U|WTH
+#72|Uktabi Efreet|C|WTH
+#73|Tolarian Serpent|R|WTH
+#74|Odylic Wraith|U|WTH
+#75|Duskrider Falcon|C|WTH
+#76|Fatal Blow|C|WTH
+#77|Relearn|U|WTH
+#78|Veteran Explorer|U|WTH
+#79|Roc Hatchling|U|WTH
+#80|Ardent Militia|C|WTH
+#81|Merfolk Traders|C|WTH
+#82|Gemstone Mine|U|WTH
+#83|Zombie Scavengers|C|WTH
+#84|Rogue Elephant|C|WTH
+#85|Benalish Infantry|C|WTH
+#86|Aether Flash|U|WTH
+#87|Gaea's Blessing|U|WTH
+#88|Master of Arms|U|WTH
+#89|Familiar Ground|U|WTH
+#90|Redwood Treefolk|C|WTH
+#91|Abyssal Gatekeeper|C|WTH
+#92|Necratog|U|WTH
+#93|Steel Golem|U|WTH
+#94|Serra's Blessing|U|WTH
+#95|Fog Elemental|C|WTH
+#96|Angelic Renewal|C|WTH
+#97|Well of Knowledge|R|WTH
+#98|Avizoa|R|WTH
+#99|Noble Benefactor|U|WTH
+#100|Manta Ray|C|WTH
+#101|Ertai's Familiar|R|WTH
+#102|Goblin Grenadiers|U|WTH
+#103|Scorched Ruins|R|WTH
+#104|Agonizing Memories|U|WTH
+#105|Foriysian Brigade|U|WTH
+#106|Briar Shield|C|WTH
+#107|Psychic Vortex|R|WTH
+#108|Downdraft|U|WTH
+#109|Mwonvuli Ooze|R|WTH
+#110|Soul Shepherd|C|WTH
+#111|Mana Chains|C|WTH
+#112|Coils of the Medusa|C|WTH
+#113|Boiling Blood|C|WTH
+#114|Guided Strike|C|WTH
+#115|Mischievous Poltergeist|U|WTH
+#116|Benalish Missionary|C|WTH
+#117|Cinder Wall|C|WTH
+#118|Dwarven Berserker|C|WTH
+#119|Phyrexian Furnace|U|WTH
+#120|Harvest Wurm|C|WTH
+#121|Jangling Automaton|C|WTH
+#122|Choking Vines|C|WTH
+#123|Null Rod|R|WTH
+#124|Dwarven Thaumaturgist|R|WTH
+#125|Apathy|C|WTH
+#126|Phantom Wings|C|WTH
+#127|Straw Golem|U|WTH
+#128|Fit of Rage|C|WTH
+#129|Barrow Ghoul|C|WTH
+#130|Aura of Silence|U|WTH
+#131|Argivian Find|U|WTH
+#132|Pendrell Mists|R|WTH
+#133|Cinder Giant|U|WTH
+#134|Timid Drake|U|WTH
+#135|Thran Forge|U|WTH
+#136|Touchstone|U|WTH
+#137|Disrupt|C|WTH
+#138|Bosium Strip|R|WTH
+#139|Fervor|R|WTH
+#140|Jabari's Banner|U|WTH
+#141|Flux|C|WTH
+#142|Haunting Misery|C|WTH
+#143|Mana Web|R|WTH
+#144|Llanowar Druid|C|WTH
+#145|Buried Alive|U|WTH
+#146|Vitalize|C|WTH
+#147|Shattered Crypt|C|WTH
+#148|Alms|C|WTH
+#149|Abjure|C|WTH
+#150|Goblin Vandal|C|WTH
+#151|Betrothed of Fire|C|WTH
+#152|Nature's Kiss|C|WTH
+#153|Tendrils of Despair|C|WTH
+#154|Doomsday|R|WTH
+#155|Kithkin Armor|C|WTH
+#156|Desperate Gambit|U|WTH
+#157|Ancestral Knowledge|R|WTH
+#158|Circling Vultures|U|WTH
+#159|Blossoming Wreath|C|WTH
+#160|Serenity|R|WTH
+#161|Gerrard's Wisdom|U|WTH
+#162|Argivian Restoration|U|WTH
+#163|Dingus Staff|U|WTH
+#164|Paradigm Shift|R|WTH
+#165|Teferi's Veil|U|WTH
+#166|Tranquil Grove|R|WTH
+#167|Inner Sanctum|R|WTH

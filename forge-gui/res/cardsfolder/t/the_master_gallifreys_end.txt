@@ -1,0 +1,15 @@
+Name:The Master, Gallifrey's End
+ManaCost:2 B R
+Types:Legendary Creature Time Lord Rogue
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Creature.Artifact+nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Make Them Pay — Whenever a nontoken artifact creature you control dies, you may exile it. If you do, choose an opponent with the most life among your opponents. That player faces a villainous choice — They lose 4 life, or you create a token that's a copy of that card.
+SVar:TrigExile:DB$ ChangeZone | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBChoosePlayer
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent+lifeEQX | SubAbility$ DBChoice
+SVar:X:Count$OppGreatestLifeTotal
+SVar:DBChoice:DB$ VillainousChoice | Defined$ ChosenPlayer | Choices$ DBLoseLife,DBCopy | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | Defined$ Player.IsRemembered | SpellDescription$ Opponent loses 4 life.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ You create a token that's a copy of the exiled card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Make Them Pay — Whenever a nontoken artifact creature you control dies, you may exile it. If you do, choose an opponent with the most life among your opponents. That player faces a villainous choice — They lose 4 life, or you create a token that's a copy of that card.

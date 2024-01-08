@@ -338,14 +338,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addSuffix) {
         for (Card c : cards) {
             AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.REVEALED_CARDS);
         }
     }
 
     @Override
-    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addSuffix) {
         for (CardView cv : cards) {
             AiCardMemory.rememberCard(player, player.getGame().findByView(cv), AiCardMemory.MemorySet.REVEALED_CARDS);
         }
@@ -1063,6 +1063,9 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player, true);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
+        emptyAbility.setReplacingObjects(sa.getReplacingObjects());
+        emptyAbility.setTrigger(sa.getTrigger());
+        emptyAbility.setReplacementEffect(sa.getReplacementEffect());
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());

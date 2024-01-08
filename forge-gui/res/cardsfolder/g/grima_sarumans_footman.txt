@@ -1,4 +1,4 @@
-Name:Grima, Saruman's Footman
+Name:Gríma, Saruman's Footman
 ManaCost:2 U B
 Types:Legendary Creature Human Advisor
 PT:1/4
@@ -8,4 +8,4 @@ SVar:TrigDigUntil:DB$ DigUntil | Defined$ TriggeredTarget | Valid$ Instant,Sorce
 SVar:DBPlay:DB$ Play | ValidZone$ Exile | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsImprinted,Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-Oracle:Grima, Saruman's Footman can't be blocked.\nWhenever Grima deals combat damage to a player, that player exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then that player puts the exiled cards that weren't cast this way on the bottom of their library in a random order.
+Oracle:Gríma, Saruman's Footman can't be blocked.\nWhenever Grima deals combat damage to a player, that player exiles cards from the top of their library until they exile an instant or sorcery card. You may cast that card without paying its mana cost. Then that player puts the exiled cards that weren't cast this way on the bottom of their library in a random order.

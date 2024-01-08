@@ -241,6 +241,10 @@ public class CardProperty {
             if (!lp.contains(card.getProtectingPlayer())) {
                 return false;
             }
+        } else if (property.equals("Defending")) {
+            if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {

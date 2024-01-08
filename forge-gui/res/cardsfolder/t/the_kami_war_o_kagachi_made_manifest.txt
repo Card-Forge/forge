@@ -1,7 +1,7 @@
 Name:The Kami War
 ManaCost:1 W U B R G
 Types:Enchantment Saga
-K:Saga:3:DBExile,DBBounce,DBTransform
+K:Chapter:3:DBExile,DBBounce,DBTransform
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | SpellDescription$ Exile target nonland permanent an opponent controls.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target nonland permanent | SubAbility$ DBDiscard | SpellDescription$ Return up to one other target nonland permanent to its owner's hand.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Then each opponent discards a card.

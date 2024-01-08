@@ -168,4 +168,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     public boolean isInHudOnlyMode() {
         return false;
     }
+
+    public void setFromWorldMap(boolean val) {
+        hud.fromWorldMap = val;
+    }
 }

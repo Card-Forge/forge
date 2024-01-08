@@ -365,7 +365,7 @@ public class DuelScene extends ForgeScene {
         }
         else{
             rules = new GameRules(GameType.Adventure);
-            rules.setGamesPerMatch(1);
+            rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
         rules.setPlayForAnte(false);
         rules.setMatchAnteRarity(true);

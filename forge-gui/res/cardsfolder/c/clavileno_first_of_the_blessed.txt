@@ -1,4 +1,4 @@
-Name:Clavileno, First of the Blessed
+Name:Clavileño, First of the Blessed
 ManaCost:1 W B
 Types:Legendary Creature Vampire Cleric
 PT:2/2

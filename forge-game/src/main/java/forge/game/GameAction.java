@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
@@ -54,6 +55,7 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
@@ -581,9 +583,17 @@ public class GameAction {
             }
         }
 
+        if (!table.isEmpty()) {
+            // we don't want always trigger before counters are placed
+            game.getTriggerHandler().suppressMode(TriggerType.Always);
+            // Need to apply any static effects to produce correct triggers
+            checkStaticAbilities();
+        }
+
         table.replaceCounterEffect(game, null, true, true, params);
 
-        // Need to apply any static effects to produce correct triggers
+        // update static abilities after etb counters have been placed
+        game.getTriggerHandler().clearSuppression(TriggerType.Always);
         checkStaticAbilities();
 
         // 400.7g try adding keyword back into card if it doesn't already have it
@@ -902,14 +912,10 @@ public class GameAction {
         CardZoneTable table = new CardZoneTable(getLastState(AbilityKey.LastStateBattlefield, cause, params), getLastState(AbilityKey.LastStateGraveyard, cause, params));
         CardCollection result = new CardCollection();
         for (Card card : cards) {
-            if (cause != null) {
-                table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
-            }
+            table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
             result.add(exile(card, cause, params));
         }
-        if (cause != null) {
-            table.triggerChangesZoneAll(game, cause);
-        }
+        table.triggerChangesZoneAll(game, cause);
         return result;
     }
     public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
@@ -1472,7 +1478,7 @@ public class GameAction {
 
     private boolean stateBasedAction_Saga(Card c, CardCollection sacrificeList) {
         boolean checkAgain = false;
-        if (!c.getType().hasSubtype("Saga")) {
+        if (!c.isSaga()) {
             return false;
         }
         if (!c.canBeSacrificedBy(null, true)) {
@@ -1926,15 +1932,15 @@ public class GameAction {
         revealTo(cards, to, null);
     }
     public void revealTo(final CardCollectionView cards, final Player to, String messagePrefix) {
-        revealTo(cards, Collections.singleton(to), messagePrefix);
+        revealTo(cards, Collections.singleton(to), messagePrefix, true);
     }
     public void revealTo(final Card card, final Iterable<Player> to) {
         revealTo(new CardCollection(card), to);
     }
     public void revealTo(final CardCollectionView cards, final Iterable<Player> to) {
-        revealTo(cards, to, null);
+        revealTo(cards, to, null, true);
     }
-    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix) {
+    public void revealTo(final CardCollectionView cards, final Iterable<Player> to, String messagePrefix, boolean addSuffix) {
         if (cards.isEmpty()) {
             return;
         }
@@ -1942,7 +1948,7 @@ public class GameAction {
         final ZoneType zone = cards.getFirst().getZone().getZoneType();
         final Player owner = cards.getFirst().getOwner();
         for (final Player p : to) {
-            p.getController().reveal(cards, zone, owner, messagePrefix);
+            p.getController().reveal(cards, zone, owner, messagePrefix, addSuffix);
         }
     }
 
@@ -1953,18 +1959,25 @@ public class GameAction {
         reveal(cards, cardOwner, dontRevealToOwner, null);
     }
     public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
+        reveal(cards, cardOwner, dontRevealToOwner, messagePrefix, true);
+    }
+    public void reveal(CardCollectionView cards, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
         Card firstCard = Iterables.getFirst(cards, null);
         if (firstCard == null) {
             return;
         }
-        reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix);
+        reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix, msgAddSuffix);
     }
+    
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
+        reveal(cards, zt, cardOwner, dontRevealToOwner, messagePrefix, true);
+    }
+    public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix, boolean msgAddSuffix) {
         for (Player p : game.getPlayers()) {
             if (dontRevealToOwner && cardOwner == p) {
                 continue;
             }
-            p.getController().reveal(cards, zt, cardOwner, messagePrefix);
+            p.getController().reveal(cards, zt, cardOwner, messagePrefix, msgAddSuffix);
         }
     }
 
@@ -2077,6 +2090,9 @@ public class GameAction {
             //<THIS CODE WILL WORK WITH PHASE = NULL>
             if (game.getRules().hasAppliedVariant(GameType.Planechase)) {
                 first.initPlane();
+                for (final Player p1 : game.getPlayers()) {
+                    p1.createPlanechaseEffects(game);
+                }
             }
 
             first = runOpeningHandActions(first);

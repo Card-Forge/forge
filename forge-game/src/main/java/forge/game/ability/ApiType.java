@@ -139,6 +139,7 @@ public enum ApiType {
     PumpAll (PumpAllEffect.class),
     PutCounter (CountersPutEffect.class),
     PutCounterAll (CountersPutAllEffect.class),
+    Radiation (RadiationEffect.class),
     RearrangeTopOfLibrary (RearrangeTopOfLibraryEffect.class),
     Regenerate (RegenerateEffect.class),
     RegenerateAll (RegenerateAllEffect.class),
@@ -193,6 +194,7 @@ public enum ApiType {
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
     Venture (VentureEffect.class),
+    VillainousChoice (VillainousChoiceEffect.class),
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 

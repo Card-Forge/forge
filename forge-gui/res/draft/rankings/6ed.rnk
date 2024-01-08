@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Balduvian Horde|R|6ED
+#2|Volcanic Dragon|R|6ED
+#3|Earthquake|R|6ED
+#4|Ancestral Memories|R|6ED
+#5|Sengir Autocrat|R|6ED
+#6|Wrath of God|R|6ED
+#7|Jokulhaups|R|6ED
+#8|Vampiric Tutor|R|6ED
+#9|Crimson Hellkite|R|6ED
+#10|Kjeldoran Royal Guard|R|6ED
+#11|Volcanic Geyser|U|6ED
+#12|Fallen Angel|R|6ED
+#13|Lord of Atlantis|R|6ED
+#14|Illicit Auction|R|6ED
+#15|Wyluli Wolf|R|6ED
+#16|Order of the Sacred Torch|R|6ED
+#17|Hammer of Bogardan|R|6ED
+#18|Reckless Embermage|R|6ED
+#19|Pyrotechnics|C|6ED
+#20|The Hive|R|6ED
+#21|Abyssal Specter|U|6ED
+#22|City of Brass|R|6ED
+#23|Terror|C|6ED
+#24|Air Elemental|U|6ED
+#25|Abyssal Hunter|R|6ED
+#26|Final Fortune|R|6ED
+#27|Blaze|U|6ED
+#28|Gravedigger|C|6ED
+#29|Shock|C|6ED
+#30|Fire Elemental|U|6ED
+#31|Armageddon|R|6ED
+#32|Uktabi Orangutan|U|6ED
+#33|Wind Drake|C|6ED
+#34|Pacifism|C|6ED
+#35|Power Sink|U|6ED
+#36|Longbow Archer|U|6ED
+#37|Primal Clay|R|6ED
+#38|Dragon Engine|R|6ED
+#39|Storm Cauldron|R|6ED
+#40|Prodigal Sorcerer|C|6ED
+#41|Exile|R|6ED
+#42|Rag Man|R|6ED
+#43|Pestilence|U|6ED
+#44|Inferno|R|6ED
+#45|River Boa|U|6ED
+#46|Wind Spirit|U|6ED
+#47|Heavy Ballista|C|6ED
+#48|Bottle of Suleiman|R|6ED
+#49|Goblin Recruiter|U|6ED
+#50|Lightning Blast|C|6ED
+#51|Elven Riders|U|6ED
+#52|Hidden Horror|U|6ED
+#53|Light of Day|U|6ED
+#54|Hecatomb|R|6ED
+#55|Skull Catapult|U|6ED
+#56|Birds of Paradise|R|6ED
+#57|Maro|R|6ED
+#58|Orcish Artillery|U|6ED
+#59|Phantom Warrior|U|6ED
+#60|Sabretooth Tiger|C|6ED
+#61|Hulking Cyclops|U|6ED
+#62|Anaba Shaman|C|6ED
+#63|Relentless Assault|R|6ED
+#64|Elvish Archers|R|6ED
+#65|Bog Wraith|U|6ED
+#66|Polymorph|R|6ED
+#67|Unsummon|C|6ED
+#68|Sky Diamond|U|6ED
+#69|Ashen Powder|R|6ED
+#70|Sibilant Spirit|R|6ED
+#71|Infernal Contract|R|6ED
+#72|Enfeeblement|C|6ED
+#73|Creeping Mold|U|6ED
+#74|Rod of Ruin|U|6ED
+#75|Howling Mine|R|6ED
+#76|Sage Owl|C|6ED
+#77|Talruum Minotaur|C|6ED
+#78|Worldly Tutor|U|6ED
+#79|Daraja Griffin|U|6ED
+#80|Juxtapose|R|6ED
+#81|Counterspell|C|6ED
+#82|Warthog|U|6ED
+#83|Snake Basket|R|6ED
+#84|Giant Spider|C|6ED
+#85|Daring Apprentice|R|6ED
+#86|Crystal Vein|U|6ED
+#87|Rowen|R|6ED
+#88|Spitting Earth|C|6ED
+#89|Aladdin's Ring|R|6ED
+#90|Viashino Warrior|C|6ED
+#91|Jalum Tome|R|6ED
+#92|Archangel|R|6ED
+#93|Spitting Drake|U|6ED
+#94|Deflection|R|6ED
+#95|Staunch Defenders|U|6ED
+#96|Balduvian Barbarians|C|6ED
+#97|Feral Shadow|C|6ED
+#98|Boomerang|C|6ED
+#99|Trained Armodon|C|6ED
+#100|Remove Soul|C|6ED
+#101|Gravebane Zombie|U|6ED
+#102|Howl from Beyond|C|6ED
+#103|Elder Druid|R|6ED
+#104|Necrosavant|R|6ED
+#105|Amber Prison|R|6ED
+#106|Underground River|R|6ED
+#107|Derelor|R|6ED
+#108|Llanowar Elves|C|6ED
+#109|Mystical Tutor|U|6ED
+#110|Dancing Scimitar|R|6ED
+#111|Strands of Night|U|6ED
+#112|Dwarven Ruins|U|6ED
+#113|Reprisal|U|6ED
+#114|Evil Eye of Orms by Gore|U|6ED
+#115|Thicket Basilisk|U|6ED
+#116|Wall of Air|U|6ED
+#117|Jayemdae Tome|R|6ED
+#118|Drudge Skeletons|C|6ED
+#119|Enlightened Tutor|U|6ED
+#120|Waiting in the Weeds|R|6ED
+#121|Anaba Bodyguard|C|6ED
+#122|Giant Growth|C|6ED
+#123|Inspiration|C|6ED
+#124|Patagia Golem|U|6ED
+#125|Obsianus Golem|U|6ED
+#126|Spirit Link|U|6ED
+#127|Cursed Totem|R|6ED
+#128|Razortooth Rats|C|6ED
+#129|Sulfurous Springs|R|6ED
+#130|Infantry Veteran|C|6ED
+#131|Disrupting Scepter|R|6ED
+#132|Uktabi Wildcats|R|6ED
+#133|Wand of Denial|R|6ED
+#134|Rampant Growth|C|6ED
+#135|Ekundu Griffin|C|6ED
+#136|D'Avenant Archer|C|6ED
+#137|Dread of Night|U|6ED
+#138|Tariff|R|6ED
+#139|Python|C|6ED
+#140|Millstone|R|6ED
+#141|Flying Carpet|R|6ED
+#142|Abduction|U|6ED
+#143|Meekstone|R|6ED
+#144|Untamed Wilds|U|6ED
+#145|Storm Crow|C|6ED
+#146|Moss Diamond|U|6ED
+#147|Icatian Town|R|6ED
+#148|Goblin Elite Infantry|C|6ED
+#149|Kismet|U|6ED
+#150|Dream Cache|C|6ED
+#151|Zombie Master|R|6ED
+#152|Pearl Dragon|R|6ED
+#153|Ebon Stronghold|U|6ED
+#154|Manabarbs|R|6ED
+#155|Goblin Digging Team|C|6ED
+#156|Fire Diamond|U|6ED
+#157|Memory Lapse|C|6ED
+#158|Venerable Monk|C|6ED
+#159|Horned Turtle|C|6ED
+#160|Call of the Wild|R|6ED
+#161|Stupor|U|6ED
+#162|Karplusan Forest|R|6ED
+#163|Boil|U|6ED
+#164|Glacial Wall|U|6ED
+#165|Perish|U|6ED
+#166|Nightmare|R|6ED
+#167|Flame Spirit|C|6ED
+#168|Greed|R|6ED
+#169|Living Lands|R|6ED
+#170|Ornithopter|U|6ED
+#171|Segovian Leviathan|U|6ED
+#172|Bog Imp|C|6ED
+#173|Desertion|R|6ED
+#174|Unyaro Griffin|U|6ED
+#175|Dragon Mask|U|6ED
+#176|Regal Unicorn|C|6ED
+#177|Goblin Hero|C|6ED
+#178|Familiar Ground|U|6ED
+#179|Vertigo|U|6ED
+#180|Stalking Tiger|C|6ED
+#181|Castle|U|6ED
+#182|Havenwood Battleground|U|6ED
+#183|Marble Diamond|U|6ED
+#184|Panther Warriors|C|6ED
+#185|Radjan Spirit|U|6ED
+#186|Flash|R|6ED
+#187|Fyndhorn Elder|U|6ED
+#188|Scathe Zombies|C|6ED
+#189|Spell Blast|C|6ED
+#190|Prosperity|U|6ED
+#191|Kjeldoran Dead|C|6ED
+#192|Pillage|U|6ED
+#193|Samite Healer|C|6ED
+#194|Ethereal Champion|R|6ED
+#195|Soldevi Sage|C|6ED
+#196|Scaled Wurm|C|6ED
+#197|Mischievous Poltergeist|U|6ED
+#198|Phyrexian Vault|U|6ED
+#199|Ankh of Mishra|R|6ED
+#200|Goblin King|R|6ED
+#201|Gorilla Chieftain|C|6ED
+#202|Harmattan Efreet|U|6ED
+#203|Serra's Blessing|U|6ED
+#204|Tundra Wolves|C|6ED
+#205|Stone Rain|C|6ED
+#206|Fervor|R|6ED
+#207|Ardent Militia|U|6ED
+#208|Cat Warriors|C|6ED
+#209|Wall of Swords|U|6ED
+#210|Wild Growth|C|6ED
+#211|Dry Spell|C|6ED
+#212|Flashfires|U|6ED
+#213|Hurricane|R|6ED
+#214|Chill|U|6ED
+#215|Femeref Archers|U|6ED
+#216|Standing Troops|C|6ED
+#217|Gaseous Form|C|6ED
+#218|Brushland|R|6ED
+#219|Lead Golem|U|6ED
+#220|Coercion|C|6ED
+#221|Iron Star|U|6ED
+#222|Lost Soul|C|6ED
+#223|Conquer|U|6ED
+#224|Insight|U|6ED
+#225|Redwood Treefolk|C|6ED
+#226|Ruins of Trokair|U|6ED
+#227|Warmth|U|6ED
+#228|Fatal Blow|C|6ED
+#229|Raise Dead|C|6ED
+#230|Fog Elemental|C|6ED
+#231|Mana Short|R|6ED
+#232|Raging Goblin|C|6ED
+#233|Psychic Venom|C|6ED
+#234|Orcish Oriflamme|U|6ED
+#235|Tremor|C|6ED
+#236|Fit of Rage|C|6ED
+#237|Dingus Egg|R|6ED
+#238|Sunweb|R|6ED
+#239|Giant Strength|C|6ED
+#240|Grizzly Bears|C|6ED
+#241|Aether Flash|U|6ED
+#242|Jade Monolith|R|6ED
+#243|Disenchant|C|6ED
+#244|Warrior's Honor|C|6ED
+#245|Bog Rats|C|6ED
+#246|Verduran Enchantress|R|6ED
+#247|Vodalian Soldiers|C|6ED
+#248|Ashnod's Altar|U|6ED
+#249|Pentagram of the Ages|R|6ED
+#250|Svyelunite Temple|U|6ED
+#251|Glasses of Urza|U|6ED
+#252|Armored Pegasus|C|6ED
+#253|Fog|C|6ED
+#254|Sea Monster|C|6ED
+#255|Circle of Protection: Red|C|6ED
+#256|Blood Pet|C|6ED
+#257|Painful Memories|C|6ED
+#258|Mesa Falcon|C|6ED
+#259|Fear|C|6ED
+#260|Resistance Fighter|C|6ED
+#261|Crusade|R|6ED
+#262|Mountain Goat|C|6ED
+#263|Zur's Weirding|R|6ED
+#264|Lure|U|6ED
+#265|Forget|R|6ED
+#266|Vitalize|C|6ED
+#267|Early Harvest|R|6ED
+#268|Merfolk of the Pearl Trident|C|6ED
+#269|Tranquil Grove|R|6ED
+#270|Fyndhorn Brownie|C|6ED
+#271|Charcoal Diamond|U|6ED
+#272|Summer Bloom|U|6ED
+#273|Shanodin Dryads|C|6ED
+#274|Circle of Protection: Green|C|6ED
+#275|Fallow Earth|U|6ED
+#276|Stromgald Cabal|R|6ED
+#277|Syphon Soul|C|6ED
+#278|Regeneration|C|6ED
+#279|Browse|U|6ED
+#280|Shatterstorm|R|6ED
+#281|Circle of Protection: Black|C|6ED
+#282|Shatter|C|6ED
+#283|Goblin Warrens|R|6ED
+#284|Healing Salve|C|6ED
+#285|Circle of Protection: Blue|C|6ED
+#286|Hero's Resolve|C|6ED
+#287|Elven Cache|C|6ED
+#288|Circle of Protection: White|C|6ED
+#289|Relearn|U|6ED
+#290|Library of Lat-Nam|R|6ED
+#291|Wall of Fire|U|6ED
+#292|Mana Prism|U|6ED
+#293|Pradesh Gypsies|C|6ED
+#294|Celestial Dawn|R|6ED
+#295|Mind Warp|U|6ED
+#296|Wooden Sphere|U|6ED
+#297|Tidal Surge|C|6ED
+#298|Blighted Shaman|U|6ED
+#299|Phantasmal Terrain|C|6ED
+#300|Recall|R|6ED
+#301|Tranquility|C|6ED
+#302|Stream of Life|C|6ED
+#303|Fountain of Youth|U|6ED
+#304|Feast of the Unicorn|C|6ED
+#305|Flight|C|6ED
+#306|Blight|U|6ED
+#307|Unseen Walker|U|6ED
+#308|Divine Transformation|U|6ED
+#309|Ivory Cup|U|6ED
+#310|Agonizing Memories|U|6ED
+#311|Leshrac's Rite|U|6ED
+#312|Remedy|C|6ED
+#313|Firebreathing|C|6ED
+#314|Diminishing Returns|R|6ED
+#315|Adarkar Wastes|R|6ED
+#316|Throne of Bone|U|6ED
+#317|Soul Net|U|6ED
+#318|Burrowing|U|6ED
+#319|Forbidden Crypt|R|6ED
+#320|Crystal Rod|U|6ED
+#321|Psychic Transfer|R|6ED
+#322|Teferi's Puzzle Box|R|6ED
+#323|Grinning Totem|R|6ED
+#324|Animate Wall|R|6ED
+#325|Nature's Resurgence|R|6ED
+#326|Dense Foliage|R|6ED
+#327|Mystic Compass|U|6ED
+#328|Serenity|R|6ED
+#329|Doomsday|R|6ED
+#330|Reverse Damage|R|6ED

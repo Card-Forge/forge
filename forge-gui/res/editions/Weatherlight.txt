@@ -40,7 +40,7 @@ ScryfallCode=WTH
 91 C Bogardan Firefiend @Terese Nielsen
 92 C Boiling Blood @Cliff Nielsen
 62 R Bone Dancer @Scott Kirschner
-147 R Bosium Strip @Steve Luke
+147 R Bösium Strip @Steve Luke
 121 C Briar Shield @Scott Kirschner
 146 R Bubble Matrix @Brom
 63 U Buried Alive @Brian Horton

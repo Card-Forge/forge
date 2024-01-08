@@ -1,0 +1,7 @@
+Name:The Valeyard
+ManaCost:2 U B R
+Types:Legendary Creature Time Lord Noble
+PT:4/5
+S:Mode$ Continuous | Affected$ Opponent | AdditionalVillainousChoice$ 1 | Description$ If an opponent would face a villainous choice, they face that choice an additional time. (They can make the same or different choices.)
+S:Mode$ Continuous | Affected$ You | AdditionalOptionalVote$ 1 | Description$ While voting, you may vote an additional time.
+Oracle:If an opponent would face a villainous choice, they face that choice an additional time. (They can make the same or different choices.)\nWhile voting, you may vote an additional time.

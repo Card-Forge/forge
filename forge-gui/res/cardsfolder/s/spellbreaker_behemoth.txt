@@ -2,6 +2,6 @@ Name:Spellbreaker Behemoth
 ManaCost:1 R G G
 Types:Creature Beast
 PT:5/5
-K:This spell can't be countered.
-S:Mode$ Continuous | Affected$ Creature.powerGE5+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ This spell can't be countered. | Description$ Creature spells you control with power 5 or greater can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+R:Event$ Counter | ValidSA$ Spell.Creature+powerGE5+YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Creature spells you control with power 5 or greater can't be countered.
 Oracle:This spell can't be countered.\nCreature spells you control with power 5 or greater can't be countered.

@@ -78,7 +78,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 tgtC.addHiddenExtrinsicKeywords(timestamp, 0, hiddenkws);
             }
 
-            if (sa.hasParam("RememberAllPumped")) {
+            if (sa.hasParam("RememberPumped")) {
                 sa.getHostCard().addRemembered(tgtC);
             }
 

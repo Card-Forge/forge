@@ -1,7 +1,7 @@
 Name:The Parting of the Ways
 ManaCost:4 R R
 Types:Enchantment Saga
-K:Saga:3:DBDig,DBTimeTravel,DBDestroy
+K:Chapter:3:DBDig,DBTimeTravel,DBDestroy
 SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Exile the top five cards of your library. For each nonland card exiled this way, put a number of time counters on that card equal to its mana value. If it doesn't have suspend, it gains suspend.
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered+nonLand | Zone$ Exile | ClearRemembered$ True | RepeatSubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ X | SubAbility$ GiveSuspend

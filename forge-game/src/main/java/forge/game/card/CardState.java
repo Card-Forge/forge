@@ -84,6 +84,7 @@ public class CardState extends GameObject implements IHasSVars {
     private ReplacementEffect loyaltyRep;
     private ReplacementEffect defenseRep;
     private ReplacementEffect battleTypeRep;
+    private ReplacementEffect sagaRep;
 
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
@@ -480,6 +481,12 @@ public class CardState extends GameObject implements IHasSVars {
             //result.add(battleTypeRep);
 
         }
+        if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
+            if (sagaRep == null) {
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+            }
+            result.add(sagaRep);
+        }
 
         card.updateReplacementEffects(result, this);
         return result;
@@ -627,11 +634,16 @@ public class CardState extends GameObject implements IHasSVars {
                 staticAbilities.add(sa.copy(card, lki));
             }
         }
-        if (lki && source.loyaltyRep != null) {
-            this.loyaltyRep = source.loyaltyRep.copy(card, lki);
-        }
-        if (lki && source.defenseRep != null) {
-            this.defenseRep = source.defenseRep.copy(card, lki);
+        if (lki) {
+            if (source.loyaltyRep != null) {
+                loyaltyRep = source.loyaltyRep.copy(card, true);
+            }
+            if (source.defenseRep != null) {
+                defenseRep = source.defenseRep.copy(card, true);
+            }
+            if (source.sagaRep != null) {
+                sagaRep = source.sagaRep.copy(card, true);
+            }
         }
     }
 
@@ -736,4 +748,15 @@ public class CardState extends GameObject implements IHasSVars {
             }
         }
     }
+
+    public final int getFinalChapterNr() {
+        int n = 0;
+        for (final Trigger t : getTriggers()) {
+            if (t.isChapter()) {
+                n = Math.max(n, t.getChapter());
+            }
+        }
+        return n;
+    }
+
 }

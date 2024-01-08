@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Gideon Jura|M|M12
+#2|Grave Titan|M|M12
+#3|Inferno Titan|M|M12
+#4|Chandra, the Firebrand|M|M12
+#5|Jace, Memory Adept|M|M12
+#6|Garruk, Primal Hunter|M|M12
+#7|Sun Titan|M|M12
+#8|Sorin Markov|M|M12
+#9|Frost Titan|M|M12
+#10|Bloodlord of Vaasgoth|M|M12
+#11|Primeval Titan|M|M12
+#12|Angelic Destiny|M|M12
+#13|Primordial Hydra|M|M12
+#14|Furyborn Hellkite|M|M12
+#15|Flameblast Dragon|R|M12
+#16|Day of Judgment|R|M12
+#17|Archon of Justice|R|M12
+#18|Fireball|U|M12
+#19|Mind Control|U|M12
+#20|Aegis Angel|R|M12
+#21|Royal Assassin|R|M12
+#22|Solemn Simulacrum|R|M12
+#23|Djinn of Wishes|R|M12
+#24|Rune Scarred Demon|R|M12
+#25|Sphinx of Uthuun|R|M12
+#26|Pentavus|R|M12
+#27|Grim Lavamancer|R|M12
+#28|Arachnus Spinner|R|M12
+#29|Vengeful Pharaoh|R|M12
+#30|Oblivion Ring|U|M12
+#31|Serra Angel|U|M12
+#32|Throne of Empires|R|M12
+#33|Sengir Vampire|U|M12
+#34|Cemetery Reaper|R|M12
+#35|Skinshifter|R|M12
+#36|Gideon's Avenger|R|M12
+#37|Chandra's Phoenix|R|M12
+#38|Overrun|U|M12
+#39|Sorin's Vengeance|R|M12
+#40|Dungrove Elder|R|M12
+#41|Phantasmal Image|R|M12
+#42|Druidic Satchel|R|M12
+#43|Vampire Outcasts|U|M12
+#44|Doom Blade|C|M12
+#45|Volcanic Dragon|U|M12
+#46|Garruk's Horde|R|M12
+#47|Cudgel Troll|U|M12
+#48|Stingerfling Spider|U|M12
+#49|Jade Mage|U|M12
+#50|Stormblood Berserker|U|M12
+#51|Azure Mage|U|M12
+#52|Incinerate|C|M12
+#53|Adaptive Automaton|R|M12
+#54|Belltower Sphinx|U|M12
+#55|Acidic Slime|U|M12
+#56|Timely Reinforcements|U|M12
+#57|Phantasmal Dragon|U|M12
+#58|Pacifism|C|M12
+#59|Chandra's Outrage|C|M12
+#60|Gideon's Lawkeeper|C|M12
+#61|Call to the Grave|R|M12
+#62|Birds of Paradise|R|M12
+#63|Onyx Mage|U|M12
+#64|Jace's Archivist|R|M12
+#65|Honor of the Pure|R|M12
+#66|Alabaster Mage|U|M12
+#67|Shock|C|M12
+#68|Lord of the Unreal|R|M12
+#69|Aether Adept|C|M12
+#70|Grand Abolisher|R|M12
+#71|Goblin Chieftain|R|M12
+#72|Gorehorn Minotaurs|C|M12
+#73|Warstorm Surge|R|M12
+#74|Spirit Mantle|U|M12
+#75|Crown of Empires|U|M12
+#76|Reassembling Skeleton|U|M12
+#77|Elvish Archdruid|R|M12
+#78|Gravedigger|C|M12
+#79|Blood Ogre|C|M12
+#80|Stormfront Pegasus|C|M12
+#81|Consume Spirit|U|M12
+#82|Assault Griffin|C|M12
+#83|Crimson Mage|U|M12
+#84|Elite Vanguard|U|M12
+#85|Merfolk Looter|C|M12
+#86|Sorin's Thirst|C|M12
+#87|Arbalest Elite|U|M12
+#88|Swiftfoot Boots|U|M12
+#89|Skywinder Drake|C|M12
+#90|Carnage Wurm|U|M12
+#91|Goblin Fireslinger|C|M12
+#92|Dragonskull Summit|R|M12
+#93|Glacial Fortress|R|M12
+#94|Turn to Frog|U|M12
+#95|Child of Night|C|M12
+#96|Chasm Drake|C|M12
+#97|Aven Fleetwing|C|M12
+#98|Giant Spider|C|M12
+#99|Griffin Sentinel|C|M12
+#100|Drowned Catacomb|R|M12
+#101|Peregrine Griffin|C|M12
+#102|Wring Flesh|C|M12
+#103|Duskhunter Bat|C|M12
+#104|Llanowar Elves|C|M12
+#105|Arachnus Web|C|M12
+#106|Roc Egg|U|M12
+#107|Divination|C|M12
+#108|Mana Leak|C|M12
+#109|Rootbound Crag|R|M12
+#110|Greatsword|U|M12
+#111|Rampant Growth|C|M12
+#112|Frost Breath|C|M12
+#113|Goblin Arsonist|C|M12
+#114|Phantasmal Bear|C|M12
+#115|Tormented Soul|C|M12
+#116|Bloodrage Vampire|C|M12
+#117|Devouring Swarm|C|M12
+#118|Benalish Veteran|C|M12
+#119|Garruk's Companion|C|M12
+#120|Ponder|C|M12
+#121|Griffin Rider|C|M12
+#122|Manalith|C|M12
+#123|Stampeding Rhino|C|M12
+#124|Sacred Wolf|C|M12
+#125|Lurking Crocodile|C|M12
+#126|Armored Warhorse|C|M12
+#127|Act of Treason|C|M12
+#128|Thran Golem|U|M12
+#129|Goblin Grenade|U|M12
+#130|Crumbling Colossus|U|M12
+#131|Unsummon|C|M12
+#132|Sunpetal Grove|R|M12
+#133|Ice Cage|C|M12
+#134|Sutured Ghoul|R|M12
+#135|Scepter of Empires|U|M12
+#136|Rusted Sentinel|U|M12
+#137|Warpath Ghoul|C|M12
+#138|Trollhide|C|M12
+#139|Greater Basilisk|C|M12
+#140|Deathmark|U|M12
+#141|Bonebreaker Giant|C|M12
+#142|Titanic Growth|C|M12
+#143|Auramancer|C|M12
+#144|Blood Seeker|C|M12
+#145|Stave Off|C|M12
+#146|Diabolic Tutor|U|M12
+#147|Goblin Piker|C|M12
+#148|Drifting Shade|C|M12
+#149|Fling|C|M12
+#150|Fiery Hellhound|C|M12
+#151|Mind Unbound|R|M12
+#152|Celestial Purge|U|M12
+#153|Mind Rot|C|M12
+#154|Hunter's Insight|U|M12
+#155|Stonehorn Dignitary|C|M12
+#156|Cancel|C|M12
+#157|Manic Vandal|C|M12
+#158|Combust|U|M12
+#159|Goblin Tunneler|C|M12
+#160|Lava Axe|C|M12
+#161|Runeclaw Bear|C|M12
+#162|Mighty Leap|C|M12
+#163|Plummet|C|M12
+#164|Coral Merfolk|C|M12
+#165|Amphin Cutthroat|C|M12
+#166|Vastwood Gorger|C|M12
+#167|Dark Favor|C|M12
+#168|Slaughter Cry|C|M12
+#169|Brindle Boar|C|M12
+#170|Zombie Goliath|C|M12
+#171|Negate|C|M12
+#172|Siege Mastodon|C|M12
+#173|Elixir of Immortality|U|M12
+#174|Merfolk Mesmerist|C|M12
+#175|Visions of Beyond|R|M12
+#176|Harbor Serpent|C|M12
+#177|Goblin War Paint|C|M12
+#178|Divine Favor|C|M12
+#179|Lightning Elemental|C|M12
+#180|Guardians' Pledge|C|M12
+#181|Pride Guardian|C|M12
+#182|Gladecover Scout|C|M12
+#183|Reverberate|R|M12
+#184|Quicksilver Amulet|R|M12
+#185|Distress|C|M12
+#186|Naturalize|C|M12
+#187|Disentomb|C|M12
+#188|Redirect|R|M12
+#189|Brink of Disaster|C|M12
+#190|Flashfreeze|U|M12
+#191|Master Thief|U|M12
+#192|Alluring Siren|U|M12
+#193|Jace's Erasure|C|M12
+#194|Goblin Bangchuckers|U|M12
+#195|Demystify|C|M12
+#196|Smallpox|U|M12
+#197|Fog|C|M12
+#198|Reclaim|C|M12
+#199|Wall of Torches|C|M12
+#200|Hideous Visage|C|M12
+#201|Mesa Enchantress|R|M12
+#202|Lifelink|C|M12
+#203|Taste of Blood|C|M12
+#204|Firebreathing|C|M12
+#205|Manabarbs|R|M12
+#206|Monomania|R|M12
+#207|Flight|C|M12
+#208|Angel's Mercy|C|M12
+#209|Tectonic Rift|U|M12
+#210|Circle of Flame|U|M12
+#211|Bountiful Harvest|C|M12
+#212|Lure|U|M12
+#213|Buried Ruin|U|M12
+#214|Levitation|U|M12
+#215|Time Reversal|M|M12
+#216|Zombie Infestation|U|M12
+#217|Rites of Flourishing|R|M12
+#218|Kite Shield|U|M12
+#219|Autumn's Veil|U|M12
+#220|Doubling Chant|R|M12
+#221|Personal Sanctuary|R|M12
+#222|Sundial of the Infinite|R|M12
+#223|Scrambleverse|R|M12
+#224|Dragon's Claw|U|M12
+#225|Worldslayer|R|M12
+#226|Wurm's Tooth|U|M12
+#227|Angel's Feather|U|M12
+#228|Demon's Horn|U|M12
+#229|Kraken's Eye|U|M12

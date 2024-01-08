@@ -34,7 +34,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -939,22 +938,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, String message) {
-        reveal(cards, zone, PlayerView.get(owner), message);
+    public void reveal(final CardCollectionView cards, final ZoneType zone, final Player owner, String message, boolean addSuffix) {
+        reveal(cards, zone, PlayerView.get(owner), message, addSuffix);
     }
 
     @Override
-    public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message) {
-        reveal(getCardList(cards), zone, owner, message);
+    public void reveal(final List<CardView> cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        reveal(getCardList(cards), zone, owner, message, addSuffix);
     }
 
-    protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message) {
+    protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
-        } else if (message.startsWith("OVERRIDE")) {
-            message = message.substring(9);
         } else {
-            message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
+            if (addSuffix) message += " " + localizer.getMessage("lblPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         }
         final String fm = MessageUtil.formatMessage(message, getLocalPlayerView(), owner);
         if (!cards.isEmpty()) {
@@ -2629,7 +2626,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void tapPermanents() {
             getGame().getAction().invoke(() -> {
                 final CardCollectionView untapped = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        Predicates.not(CardPredicates.Presets.TAPPED));
+                        CardPredicates.Presets.UNTAPPED);
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                         Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);

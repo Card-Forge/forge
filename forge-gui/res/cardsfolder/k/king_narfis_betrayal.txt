@@ -1,7 +1,7 @@
 Name:King Narfi's Betrayal
 ManaCost:1 U B
 Types:Enchantment Saga
-K:Saga:3:DBMill,DBEffect,DBEffect
+K:Chapter:3:DBMill,DBEffect,DBEffect
 SVar:DBMill:DB$ Mill | NumCards$ 4 | Defined$ Player | SubAbility$ DBRepeatEach | SpellDescription$ Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.
 SVar:DBRepeatEach:DB$ RepeatEach | Optional$ True | OptionPrompt$ Do you want to exile a creature or planeswalker card from each graveyard? | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBExile
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl | ChoiceZone$ Graveyard | ChoiceTitle$ Select a creature or planeswalker | Mandatory$ True | RememberChosen$ True

@@ -1,0 +1,535 @@
+//Rank|Name|Rarity|Set
+#1|Avabruck Caretaker|M|DBL
+#2|Dreadfeast Demon|R|DBL
+#3|Wrenn and Seven|M|DBL
+#4|The Meathook Massacre|M|DBL
+#5|Toxrill, the Corrosive|M|DBL
+#6|Consuming Blob|M|DBL
+#7|Sigarda, Champion of Light|M|DBL
+#8|Liesa, Forgotten Archangel|R|DBL
+#9|Tovolar's Huntmaster|R|DBL
+#10|Arlinn, the Pack's Hope|M|DBL
+#11|Burn Down the House|R|DBL
+#12|Sorin the Mirthless|M|DBL
+#13|Halana and Alena, Partners|R|DBL
+#14|Cemetery Desecrator|M|DBL
+#15|Henrika Domnathi|M|DBL
+#16|Manaform Hellkite|M|DBL
+#17|Intrepid Adversary|M|DBL
+#18|Tainted Adversary|M|DBL
+#19|Poppet Stitcher|M|DBL
+#20|Moonveil Regent|M|DBL
+#21|Florian, Voldaren Scion|R|DBL
+#22|Sunstreak Phoenix|M|DBL
+#23|Tovolar, Dire Overlord|R|DBL
+#24|Brutal Cathar|R|DBL
+#25|Augur of Autumn|R|DBL
+#26|Wedding Announcement|R|DBL
+#27|By Invitation Only|R|DBL
+#28|Hullbreaker Horror|R|DBL
+#29|Anje, Maid of Dishonor|R|DBL
+#30|Bloodvial Purveyor|R|DBL
+#31|Light Up the Night|R|DBL
+#32|Grafted Identity|R|DBL
+#33|Primal Adversary|M|DBL
+#34|Faithbound Judge|M|DBL
+#35|Mirrorhall Mimic|R|DBL
+#36|Edgar, Charmed Groom|R|DBL
+#37|Angelfire Ignition|R|DBL
+#38|Ulvenwald Oddity|R|DBL
+#39|Enduring Angel|M|DBL
+#40|Dennick, Pious Apprentice|R|DBL
+#41|Torens, Fist of the Angels|R|DBL
+#42|Glorious Sunrise|R|DBL
+#43|Gisa, Glorious Resurrector|R|DBL
+#44|Volatile Arsonist|M|DBL
+#45|Suspicious Stowaway|R|DBL
+#46|Cemetery Protector|M|DBL
+#47|Welcoming Vampire|R|DBL
+#48|Olivia, Crimson Bride|M|DBL
+#49|Dollhouse of Horrors|R|DBL
+#50|Dreamshackle Geist|R|DBL
+#51|Adeline, Resplendent Cathar|R|DBL
+#52|Vanquish the Horde|R|DBL
+#53|Spectral Adversary|M|DBL
+#54|Katilda, Dawnhart Prime|R|DBL
+#55|Jacob Hauken, Inspector|M|DBL
+#56|Reckless Stormseeker|R|DBL
+#57|Stensia Uprising|R|DBL
+#58|Sludge Monster|R|DBL
+#59|Briarbridge Tracker|R|DBL
+#60|Lier, Disciple of the Drowned|M|DBL
+#61|Teferi, Who Slows the Sunset|M|DBL
+#62|Bloodthirsty Adversary|M|DBL
+#63|Voldaren Bloodcaster|R|DBL
+#64|Smoldering Egg|R|DBL
+#65|Cemetery Illuminator|M|DBL
+#66|Falkenrath Forebear|R|DBL
+#67|Creepy Puppeteer|R|DBL
+#68|Hiveheart Shaman|R|DBL
+#69|Infernal Grasp|U|DBL
+#70|Foul Play|U|DBL
+#71|Saryth, the Viper's Fang|R|DBL
+#72|Borrowed Time|U|DBL
+#73|Sungold Sentinel|R|DBL
+#74|Bloodline Culling|R|DBL
+#75|Lord of the Forsaken|M|DBL
+#76|Howlpack Piper|R|DBL
+#77|Katilda, Dawnhart Martyr|R|DBL
+#78|Ill-Tempered Loner|R|DBL
+#79|Graveyard Trespasser|R|DBL
+#80|Savior of Ollenbock|M|DBL
+#81|Geralf, Visionary Stitcher|R|DBL
+#82|Overcharged Amalgam|R|DBL
+#83|Olivia's Attendants|R|DBL
+#84|Clear Shot|U|DBL
+#85|Jadar, Ghoulcaller of Nephalia|R|DBL
+#86|Slogurk, the Overslime|R|DBL
+#87|Morbid Opportunist|U|DBL
+#88|Sigardian Savior|M|DBL
+#89|Cathartic Pyre|U|DBL
+#90|Concealing Curtains|R|DBL
+#91|Jerren, Corrupted Bishop|M|DBL
+#92|Necroduality|M|DBL
+#93|Headless Rider|R|DBL
+#94|Champion of the Perished|R|DBL
+#95|Gavony Dawnguard|U|DBL
+#96|Bladestitched Skaab|U|DBL
+#97|Organ Hoarder|C|DBL
+#98|Overwhelmed Archivist|U|DBL
+#99|Hound Tamer|U|DBL
+#100|Dying to Serve|R|DBL
+#101|Fell Stinger|U|DBL
+#102|Hero's Downfall|U|DBL
+#103|Chandra, Dressed to Kill|M|DBL
+#104|Cemetery Prowler|M|DBL
+#105|Packsong Pup|U|DBL
+#106|Grolnok, the Omnivore|R|DBL
+#107|Bloodtithe Harvester|U|DBL
+#108|Old Rutstein|R|DBL
+#109|Skaab Wrangler|U|DBL
+#110|Moonrager's Slash|C|DBL
+#111|Rootcoil Creeper|U|DBL
+#112|Dorothea, Vengeful Victim|R|DBL
+#113|Malevolent Hermit|R|DBL
+#114|Ambitious Farmhand|U|DBL
+#115|Bleed Dry|C|DBL
+#116|Path of Peril|R|DBL
+#117|Rending Flame|U|DBL
+#118|Markov Purifier|U|DBL
+#119|Thermo-Alchemist|U|DBL
+#120|Diregraf Rebirth|U|DBL
+#121|Vadrik, Astral Archmage|R|DBL
+#122|Sacred Fire|U|DBL
+#123|Mask of Griselbrand|R|DBL
+#124|Seize the Storm|U|DBL
+#125|Slaughter Specialist|R|DBL
+#126|Fateful Absence|R|DBL
+#127|Memory Deluge|R|DBL
+#128|Sunrise Cavalier|U|DBL
+#129|Eccentric Farmer|C|DBL
+#130|Duelcraft Trainer|U|DBL
+#131|Rise of the Ants|U|DBL
+#132|Child of the Pack|U|DBL
+#133|Ballista Watcher|U|DBL
+#134|Fangblade Brigand|U|DBL
+#135|Ludevic, Necrogenius|R|DBL
+#136|Angelic Quartermaster|U|DBL
+#137|Lantern Flare|R|DBL
+#138|Valorous Stance|U|DBL
+#139|Voice of the Blessed|R|DBL
+#140|Abrade|C|DBL
+#141|Hamlet Vanguard|R|DBL
+#142|Howling Moon|R|DBL
+#143|Thirst for Discovery|U|DBL
+#144|Parasitic Grasp|U|DBL
+#145|Reclusive Taxidermist|U|DBL
+#146|Markov Waltzer|U|DBL
+#147|Wandering Mind|U|DBL
+#148|Contortionist Troupe|U|DBL
+#149|Play with Fire|U|DBL
+#150|Defenestrate|C|DBL
+#151|Dawnhart Wardens|U|DBL
+#152|Fleshtaker|U|DBL
+#153|Unnatural Growth|R|DBL
+#154|Vampire Socialite|U|DBL
+#155|The Celestus|R|DBL
+#156|Old Stickfingers|R|DBL
+#157|Dawnhart Mentor|U|DBL
+#158|Diregraf Horde|C|DBL
+#159|Rite of Oblivion|U|DBL
+#160|Stromkirk Bloodthief|U|DBL
+#161|Shadowbeast Sighting|C|DBL
+#162|Olivia's Midnight Ambush|C|DBL
+#163|Twinblade Geist|U|DBL
+#164|Brine Comber|U|DBL
+#165|Alluring Suitor|U|DBL
+#166|Voltaic Visionary|U|DBL
+#167|Devoted Grafkeeper|U|DBL
+#168|Kessig Naturalist|U|DBL
+#169|Ecstatic Awakener|C|DBL
+#170|Lunarch Veteran|C|DBL
+#171|Whispering Wizard|U|DBL
+#172|Kessig Wolfrider|R|DBL
+#173|Wolf Strike|C|DBL
+#174|Fleeting Spirit|U|DBL
+#175|Ancient Lumberknot|U|DBL
+#176|Skull Skaab|U|DBL
+#177|Festival Crasher|C|DBL
+#178|Triskaidekaphile|R|DBL
+#179|Join the Dance|U|DBL
+#180|Falkenrath Pit Fighter|R|DBL
+#181|Loyal Gryff|U|DBL
+#182|Eaten Alive|C|DBL
+#183|Obsessive Astronomer|U|DBL
+#184|Phantom Carriage|U|DBL
+#185|Dreadhound|U|DBL
+#186|Revenge of the Drowned|C|DBL
+#187|Falcon Abomination|C|DBL
+#188|Gavony Silversmith|C|DBL
+#189|Patrician Geist|R|DBL
+#190|Dormant Grove|U|DBL
+#191|Wolfkin Outcast|U|DBL
+#192|Burly Breaker|U|DBL
+#193|Fierce Retribution|C|DBL
+#194|Resistance Squad|U|DBL
+#195|Traveling Minister|C|DBL
+#196|Diver Skaab|U|DBL
+#197|Undead Butler|U|DBL
+#198|Cemetery Gatekeeper|M|DBL
+#199|Dominating Vampire|R|DBL
+#200|Flame-Blessed Bolt|C|DBL
+#201|Ascendant Packleader|R|DBL
+#202|Cultivator Colossus|M|DBL
+#203|Sigardian Paladin|U|DBL
+#204|Circle of Confinement|U|DBL
+#205|Gryffwing Cavalry|U|DBL
+#206|Stormchaser Drake|U|DBL
+#207|Runebound Wolf|U|DBL
+#208|Eruth, Tormented Prophet|R|DBL
+#209|Siege Zombie|C|DBL
+#210|Defend the Celestus|U|DBL
+#211|Lunar Frenzy|U|DBL
+#212|Startle|C|DBL
+#213|Odric's Outrider|U|DBL
+#214|Dryad's Revival|U|DBL
+#215|Rem Karolus, Stalwart Slayer|R|DBL
+#216|Bloodtithe Collector|U|DBL
+#217|Storm Skreelix|U|DBL
+#218|Burn the Accursed|C|DBL
+#219|Vampire Interloper|C|DBL
+#220|Flip the Switch|C|DBL
+#221|Search Party Captain|C|DBL
+#222|Sigarda's Splendor|R|DBL
+#223|Nebelgast Intruder|U|DBL
+#224|Kindly Ancestor|C|DBL
+#225|Baithook Angler|C|DBL
+#226|Bereaved Survivor|U|DBL
+#227|Outland Liberator|U|DBL
+#228|Thalia, Guardian of Thraben|R|DBL
+#229|Lunar Rejection|U|DBL
+#230|Archghoul of Thraben|U|DBL
+#231|Diregraf Scavenger|C|DBL
+#232|Falkenrath Celebrants|C|DBL
+#233|Vampires' Vengeance|U|DBL
+#234|Spore Crawler|C|DBL
+#235|Reckless Impulse|C|DBL
+#236|Bramble Wurm|U|DBL
+#237|Consider|C|DBL
+#238|Geistflame Reservoir|R|DBL
+#239|Candletrap|C|DBL
+#240|Croaking Counterpart|R|DBL
+#241|Larder Zombie|C|DBL
+#242|Hungry for More|U|DBL
+#243|Brood Weaver|U|DBL
+#244|Duel for Dominance|C|DBL
+#245|Winterthorn Blessing|U|DBL
+#246|Firmament Sage|U|DBL
+#247|Evolving Wilds|C|DBL
+#248|Gavony Trapper|C|DBL
+#249|Ritual of Hope|U|DBL
+#250|Grizzly Ghoul|U|DBL
+#251|Distracting Geist|U|DBL
+#252|Drogskol Infantry|C|DBL
+#253|Weaver of Blossoms|C|DBL
+#254|Panicked Bystander|U|DBL
+#255|Curse of Leeches|R|DBL
+#256|Covetous Castaway|U|DBL
+#257|Covert Cutpurse|U|DBL
+#258|Galedrifter|C|DBL
+#259|Gryff Rider|C|DBL
+#260|Sigarda's Imprisonment|C|DBL
+#261|Chill of the Grave|C|DBL
+#262|Cruel Witness|C|DBL
+#263|Inspired Idea|R|DBL
+#264|Stitched Assistant|C|DBL
+#265|Doomed Dissenter|C|DBL
+#266|Gift of Fangs|C|DBL
+#267|Gluttonous Guest|C|DBL
+#268|Rot-Tide Gargantua|C|DBL
+#269|Blood Petal Celebrant|C|DBL
+#270|Apprentice Sharpshooter|C|DBL
+#271|Cloaked Cadet|U|DBL
+#272|Vilespawn Spider|U|DBL
+#273|Heron of Hope|C|DBL
+#274|Scattered Thoughts|C|DBL
+#275|Screaming Swarm|U|DBL
+#276|Bloodcrazed Socialite|C|DBL
+#277|Graf Reaver|R|DBL
+#278|Hungry Ridgewolf|C|DBL
+#279|Dawnhart Disciple|C|DBL
+#280|Flourishing Hunter|C|DBL
+#281|Evolving Wilds|C|DBL
+#282|Locked in the Cemetery|C|DBL
+#283|Ominous Roost|U|DBL
+#284|Dawnhart Rejuvenator|C|DBL
+#285|Corpse Cobble|U|DBL
+#286|Purifying Dragon|U|DBL
+#287|Storm the Festival|R|DBL
+#288|Siphon Insight|R|DBL
+#289|Silver Bolt|C|DBL
+#290|Lambholt Harrier|C|DBL
+#291|Shipwreck Sifters|C|DBL
+#292|Gutter Skulker|U|DBL
+#293|Lantern Bearer|C|DBL
+#294|Runo Stromkirk|R|DBL
+#295|Catapult Fodder|U|DBL
+#296|Infestation Expert|U|DBL
+#297|Oakshade Stalker|U|DBL
+#298|Foreboding Statue|U|DBL
+#299|Hookhand Mariner|C|DBL
+#300|Ragged Recluse|C|DBL
+#301|Desperate Farmer|C|DBL
+#302|Binding Geist|C|DBL
+#303|Baneblade Scoundrel|U|DBL
+#304|Flame Channeler|U|DBL
+#305|Chaplain of Alms|U|DBL
+#306|Bird Admirer|C|DBL
+#307|Spellrune Painter|U|DBL
+#308|Vengeful Strangler|U|DBL
+#309|Deathbonnet Sprout|U|DBL
+#310|Mourning Patrol|C|DBL
+#311|Repository Skaab|C|DBL
+#312|Syncopate|C|DBL
+#313|Syphon Essence|C|DBL
+#314|Wedding Security|U|DBL
+#315|Curse of Hospitality|R|DBL
+#316|Daybreak Combatants|C|DBL
+#317|Magma Pummeler|U|DBL
+#318|Dig Up|R|DBL
+#319|Sporeback Wolf|C|DBL
+#320|Odric, Blood-Cursed|R|DBL
+#321|Deathcap Glade|R|DBL
+#322|Dreamroot Cascade|R|DBL
+#323|Shattered Sanctum|R|DBL
+#324|Stormcarved Coast|R|DBL
+#325|Sundown Pass|R|DBL
+#326|Courier Bat|C|DBL
+#327|Sanguine Statuette|U|DBL
+#328|Sawblade Slinger|U|DBL
+#329|Spiked Ripsaw|U|DBL
+#330|Galvanic Iteration|R|DBL
+#331|Deserted Beach|R|DBL
+#332|Overgrown Farmland|R|DBL
+#333|Rockfall Vale|R|DBL
+#334|Shipwreck Marsh|R|DBL
+#335|Haunted Ridge|R|DBL
+#336|Might of the Old Ways|C|DBL
+#337|Candlegrove Witch|C|DBL
+#338|Faithful Mending|U|DBL
+#339|Hobbling Zombie|C|DBL
+#340|Sunset Revelry|U|DBL
+#341|Unnatural Moonrise|U|DBL
+#342|Fading Hope|U|DBL
+#343|Harvesttide Sentry|C|DBL
+#344|Neonate's Rush|C|DBL
+#345|Biolume Egg|U|DBL
+#346|Mischievous Catgeist|U|DBL
+#347|Restless Bloodseeker|U|DBL
+#348|Beloved Beggar|U|DBL
+#349|Heron-Blessed Geist|C|DBL
+#350|Nebelgast Beguiler|C|DBL
+#351|Parish-Blade Trainee|C|DBL
+#352|Skywarp Skaab|C|DBL
+#353|Edgar's Awakening|U|DBL
+#354|Mindleech Ghoul|C|DBL
+#355|Pointed Discussion|C|DBL
+#356|Frenzied Devils|U|DBL
+#357|Lacerate Flesh|C|DBL
+#358|Voldaren Epicure|C|DBL
+#359|Rural Recruit|C|DBL
+#360|Snarling Wolf|C|DBL
+#361|Toxic Scorpion|C|DBL
+#362|Witch's Web|C|DBL
+#363|Investigator's Journal|R|DBL
+#364|Wash Away|U|DBL
+#365|Wretched Throng|C|DBL
+#366|Blood Hypnotist|U|DBL
+#367|Kessig Flamebreather|C|DBL
+#368|Boarded Window|U|DBL
+#369|Pestilent Wolf|C|DBL
+#370|Famished Foragers|C|DBL
+#371|Voldaren Ambusher|U|DBL
+#372|Ghoulcaller's Harvest|R|DBL
+#373|Ghoulish Procession|U|DBL
+#374|Willow Geist|R|DBL
+#375|Curse of Surveillance|R|DBL
+#376|Jack-o'-Lantern|C|DBL
+#377|Timberland Guide|C|DBL
+#378|Voldaren Stinger|C|DBL
+#379|Ardent Elementalist|C|DBL
+#380|Novice Occultist|C|DBL
+#381|Crawl from the Cellar|C|DBL
+#382|Geistwave|C|DBL
+#383|Cathar Commando|C|DBL
+#384|Innocent Traveler|U|DBL
+#385|Lambholt Raconteur|U|DBL
+#386|Tireless Hauler|C|DBL
+#387|Shady Traveler|C|DBL
+#388|Adamant Will|C|DBL
+#389|Estwald Shieldbasher|C|DBL
+#390|Hopeful Initiate|R|DBL
+#391|Ollenbock Escort|U|DBL
+#392|Vampire Slayer|C|DBL
+#393|Alchemist's Retrieval|C|DBL
+#394|Fear of Death|C|DBL
+#395|Geistlight Snare|U|DBL
+#396|Aim for the Head|C|DBL
+#397|Blood Fountain|C|DBL
+#398|Persistent Specimen|C|DBL
+#399|Undying Malice|C|DBL
+#400|Ancestral Anger|C|DBL
+#401|Lightning Wolf|C|DBL
+#402|Pyre Spawn|C|DBL
+#403|Sure Strike|C|DBL
+#404|Laid to Rest|U|DBL
+#405|Massive Might|C|DBL
+#406|Voldaren Estate|R|DBL
+#407|Cobbled Lancer|U|DBL
+#408|Belligerent Guest|C|DBL
+#409|Moldgraf Millipede|C|DBL
+#410|Mulch|C|DBL
+#411|Brimstone Vandal|C|DBL
+#412|Candlelit Cavalry|C|DBL
+#413|Immolation|C|DBL
+#414|Dissipate|U|DBL
+#415|Hallowed Respite|R|DBL
+#416|Morkrut Behemoth|C|DBL
+#417|Unblinking Observer|C|DBL
+#418|Soul-Guide Gryff|C|DBL
+#419|Clarion Cathars|C|DBL
+#420|Weary Prisoner|C|DBL
+#421|Soulcipher Board|U|DBL
+#422|Mysterious Tome|U|DBL
+#423|Harvesttide Infiltrator|C|DBL
+#424|Nurturing Presence|C|DBL
+#425|Dreadlight Monstrosity|C|DBL
+#426|Patchwork Crawler|R|DBL
+#427|Steelclad Spirit|C|DBL
+#428|Wanderlight Spirit|C|DBL
+#429|Grisly Ritual|C|DBL
+#430|Markov Retribution|U|DBL
+#431|Nature's Embrace|C|DBL
+#432|Retrieve|U|DBL
+#433|Sheltering Boughs|C|DBL
+#434|Ceremonial Knife|C|DBL
+#435|Wedding Invitation|C|DBL
+#436|Militia Rallier|C|DBL
+#437|Winged Portent|R|DBL
+#438|Witness the Future|U|DBL
+#439|Skulking Killer|U|DBL
+#440|Honeymoon Hearse|U|DBL
+#441|Into the Night|U|DBL
+#442|Sungold Barrage|C|DBL
+#443|Falkenrath Perforator|C|DBL
+#444|Path to the Festival|C|DBL
+#445|Electric Revelation|C|DBL
+#446|No Way Out|C|DBL
+#447|Drownyard Amalgam|C|DBL
+#448|Can't Stay Away|R|DBL
+#449|Bloodsworn Squire|U|DBL
+#450|Fearful Villager|C|DBL
+#451|Village Watch|U|DBL
+#452|Arm the Cathars|U|DBL
+#453|Bride's Gown|U|DBL
+#454|Dawnhart Geist|U|DBL
+#455|Piercing Light|C|DBL
+#456|Unholy Officiant|C|DBL
+#457|Cradle of Safety|C|DBL
+#458|Selhoff Entomber|C|DBL
+#459|Dread Fugue|U|DBL
+#460|Groom's Finery|U|DBL
+#461|Bramble Armor|C|DBL
+#462|Blood Servitor|C|DBL
+#463|Honored Heirloom|C|DBL
+#464|Howl of the Hunt|C|DBL
+#465|Unruly Mob|C|DBL
+#466|Stormrider Spirit|C|DBL
+#467|Arrogant Outlaw|C|DBL
+#468|Secrets of the Key|C|DBL
+#469|Ritual Guardian|C|DBL
+#470|Arcane Infusion|U|DBL
+#471|Bladebrand|C|DBL
+#472|Vivisection|U|DBL
+#473|Crossroads Candleguide|C|DBL
+#474|Bounding Wolf|C|DBL
+#475|Stolen Vitality|C|DBL
+#476|Mounted Dreadknight|C|DBL
+#477|Blood Pact|C|DBL
+#478|Tavern Ruffian|C|DBL
+#479|Delver of Secrets|U|DBL
+#480|Hallowed Haunting|M|DBL
+#481|Sigarda's Summons|R|DBL
+#482|Supernatural Rescue|C|DBL
+#483|Serpentine Ambush|C|DBL
+#484|Vampire's Kiss|C|DBL
+#485|Bloody Betrayal|C|DBL
+#486|End the Festivities|C|DBL
+#487|Crushing Canopy|C|DBL
+#488|Kaya, Geist Hunter|M|DBL
+#489|Lantern of the Lost|U|DBL
+#490|Unhallowed Phalanx|C|DBL
+#491|Alchemist's Gambit|R|DBL
+#492|Cartographer's Survey|U|DBL
+#493|Crawling Infestation|U|DBL
+#494|Snarling Wolf|C|DBL
+#495|Celestus Sanctifier|C|DBL
+#496|Turn the Earth|U|DBL
+#497|Tapping at the Window|C|DBL
+#498|Bramble Armor|C|DBL
+#499|Raze the Effigy|C|DBL
+#500|Abandon the Post|C|DBL
+#501|Rotten Reunion|C|DBL
+#502|Bat Whisperer|C|DBL
+#503|Devious Cover-Up|C|DBL
+#504|Component Collector|C|DBL
+#505|Homestead Courage|C|DBL
+#506|Blessed Defiance|C|DBL
+#507|Flare of Faith|C|DBL
+#508|Necrosynthesis|U|DBL
+#509|Radiant Grace|U|DBL
+#510|Mystic Skull|U|DBL
+#511|Hostile Hostel|M|DBL
+#512|Pack's Betrayal|C|DBL
+#513|Otherworldly Gaze|C|DBL
+#514|Dire-Strain Rampage|R|DBL
+#515|Heirloom Mirror|U|DBL
+#516|Sanctify|C|DBL
+#517|Hedgewitch's Mask|C|DBL
+#518|Stuffed Bear|C|DBL
+#519|Wake to Slaughter|R|DBL
+#520|Return to Nature|C|DBL
+#521|Plummet|C|DBL
+#522|Duress|C|DBL
+#523|Cathar's Call|U|DBL
+#524|Thraben Exorcism|C|DBL
+#525|Consuming Tide|R|DBL
+#526|Demonic Bargain|R|DBL
+#527|Change of Fortune|R|DBL
+#528|Splendid Reclamation|R|DBL
+#529|Moonsilver Key|U|DBL
+#530|Rite of Harmony|R|DBL
+#531|Curse of Shaken Faith|R|DBL
+#532|Pithing Needle|R|DBL
+#533|Curse of Silence|R|DBL
+#534|Field of Ruin|U|DBL

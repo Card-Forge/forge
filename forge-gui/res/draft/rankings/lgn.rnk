@@ -1,0 +1,146 @@
+//Rank|Name|Rarity|Set
+#1|Celestial Gatekeeper|R|LGN
+#2|Windborn Muse|R|LGN
+#3|Riptide Director|R|LGN
+#4|Bane of the Living|R|LGN
+#5|Havoc Demon|R|LGN
+#6|Akroma, Angel of Wrath|R|LGN
+#7|Lavaborn Muse|R|LGN
+#8|Imperial Hellkite|R|LGN
+#9|Kilnmouth Dragon|R|LGN
+#10|Toxin Sliver|R|LGN
+#11|Caller of the Claw|R|LGN
+#12|Scion of Darkness|R|LGN
+#13|Rockshard Elemental|R|LGN
+#14|Mistform Ultimus|R|LGN
+#15|Graveborn Muse|R|LGN
+#16|Hollow Specter|R|LGN
+#17|Synapse Sliver|R|LGN
+#18|Elvish Soultiller|R|LGN
+#19|Tribal Forcemage|R|LGN
+#20|Chromeshell Crab|R|LGN
+#21|Sunstrike Legionnaire|R|LGN
+#22|Feral Throwback|R|LGN
+#23|Noxious Ghoul|U|LGN
+#24|Essence Sliver|R|LGN
+#25|Seedborn Muse|R|LGN
+#26|Keeper of the Nine Gales|R|LGN
+#27|Goblin Goon|R|LGN
+#28|Riptide Mangler|R|LGN
+#29|Skinthinner|C|LGN
+#30|Branchsnap Lorian|U|LGN
+#31|Skirk Marauder|C|LGN
+#32|Aphetto Exterminator|U|LGN
+#33|White Knight|U|LGN
+#34|Timberwatch Elf|C|LGN
+#35|Canopy Crawler|U|LGN
+#36|Clickslither|R|LGN
+#37|Dermoplasm|R|LGN
+#38|Cloudreach Cavalry|U|LGN
+#39|Phage the Untouchable|R|LGN
+#40|Defender of the Order|R|LGN
+#41|Brood Sliver|R|LGN
+#42|Krosan Cloudscraper|R|LGN
+#43|Ghastly Remains|R|LGN
+#44|Blade Sliver|U|LGN
+#45|Deathmark Prelate|U|LGN
+#46|Echo Tracer|C|LGN
+#47|Totem Speaker|U|LGN
+#48|Brontotherium|U|LGN
+#49|Unstable Hulk|R|LGN
+#50|Magma Sliver|R|LGN
+#51|Beacon of Destiny|R|LGN
+#52|Aven Redeemer|C|LGN
+#53|Gempalm Strider|U|LGN
+#54|Krosan Vorine|C|LGN
+#55|Wingbeat Warrior|C|LGN
+#56|Wirewood Hivemaster|U|LGN
+#57|Goblin Dynamo|U|LGN
+#58|Daru Stinger|C|LGN
+#59|Patron of the Wild|C|LGN
+#60|Corpse Harvester|U|LGN
+#61|Wirewood Channeler|U|LGN
+#62|Glowrider|R|LGN
+#63|Gempalm Incinerator|U|LGN
+#64|Warbreak Trumpeter|U|LGN
+#65|Weaver of Lies|R|LGN
+#66|Keeneye Aven|C|LGN
+#67|Primal Whisperer|R|LGN
+#68|Ward Sliver|U|LGN
+#69|Planar Guide|R|LGN
+#70|Mistform Seaswift|C|LGN
+#71|Ridgetop Raptor|U|LGN
+#72|Smokespew Invoker|C|LGN
+#73|Primoc Escapee|U|LGN
+#74|Vexing Beetle|R|LGN
+#75|Willbender|U|LGN
+#76|Gempalm Polluter|C|LGN
+#77|Spectral Sliver|U|LGN
+#78|Sootfeather Flock|C|LGN
+#79|Liege of the Axe|U|LGN
+#80|Flamewave Invoker|C|LGN
+#81|Swooping Talon|U|LGN
+#82|Aven Warhawk|U|LGN
+#83|Stonewood Invoker|C|LGN
+#84|Crookclaw Elder|U|LGN
+#85|Nantuko Vigilante|C|LGN
+#86|Goblin Assassin|U|LGN
+#87|Enormous Baloth|U|LGN
+#88|Withered Wretch|U|LGN
+#89|Goblin Clearcutter|U|LGN
+#90|Deftblade Elite|C|LGN
+#91|Lowland Tracker|C|LGN
+#92|Crested Craghorn|C|LGN
+#93|Whipgrass Entangler|C|LGN
+#94|Frenetic Raptor|U|LGN
+#95|Akroma's Devoted|U|LGN
+#96|Gempalm Avenger|C|LGN
+#97|Berserk Murlodont|C|LGN
+#98|Stoic Champion|U|LGN
+#99|Root Sliver|U|LGN
+#100|Mistform Wakecaster|U|LGN
+#101|Needleshot Gourna|C|LGN
+#102|Gempalm Sorcerer|U|LGN
+#103|Shifting Sliver|U|LGN
+#104|Skirk Alarmist|R|LGN
+#105|Skirk Outrider|C|LGN
+#106|Embalmed Brawler|C|LGN
+#107|Infernal Caretaker|C|LGN
+#108|Skirk Drill Sergeant|U|LGN
+#109|Covert Operative|C|LGN
+#110|Wall of Deceit|U|LGN
+#111|Daru Mender|U|LGN
+#112|Glowering Rogon|C|LGN
+#113|Zombie Brute|U|LGN
+#114|Hundroog|C|LGN
+#115|Shaleskin Plower|C|LGN
+#116|Starlight Invoker|C|LGN
+#117|Master of the Veil|U|LGN
+#118|Voidmage Apprentice|C|LGN
+#119|Dreamborn Muse|R|LGN
+#120|Vile Deacon|C|LGN
+#121|Daru Sanctifier|C|LGN
+#122|Macetail Hystrodon|C|LGN
+#123|Bloodstoke Howler|C|LGN
+#124|Crypt Sliver|C|LGN
+#125|Goblin Grappler|C|LGN
+#126|Plated Sliver|C|LGN
+#127|Drinker of Sorrow|R|LGN
+#128|Quick Sliver|C|LGN
+#129|Goblin Turncoat|C|LGN
+#130|Warped Researcher|U|LGN
+#131|Glintwing Invoker|C|LGN
+#132|Hunter Sliver|C|LGN
+#133|Merchant of Secrets|C|LGN
+#134|Wall of Hope|C|LGN
+#135|Defiant Elf|C|LGN
+#136|Earthblighter|U|LGN
+#137|Mistform Sliver|C|LGN
+#138|Goblin Lookout|C|LGN
+#139|Dark Supplicant|U|LGN
+#140|Blood Celebrant|C|LGN
+#141|Dripping Dead|C|LGN
+#142|Cephalid Pathmage|C|LGN
+#143|Aven Envoy|C|LGN
+#144|Goblin Firebug|C|LGN
+#145|Fugitive Wizard|C|LGN

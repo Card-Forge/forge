@@ -16,7 +16,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final HashMap<Integer, HashSet<Integer>> cardsBought = new HashMap<>();
     private final java.util.Map<String, Byte> mapFlags = new HashMap<>();
     private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
-    private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
+    //private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
     private Boolean isBookmarked;
 
@@ -61,8 +61,10 @@ public class PointOfInterestChanges implements SaveFileContent  {
         shopSeeds.putAll((java.util.Map<Integer, Long>) data.readObject("shopSeeds"));
         mapFlags.clear();
         mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
-        shopModifiers.clear();
-        shopModifiers.putAll((java.util.Map<Integer, Float>) data.readObject("shopModifiers"));
+        reputation.clear();
+        if (data.containsKey("reputation")) {
+            reputation.putAll((java.util.Map<Integer, Integer>) data.readObject("reputation"));
+        }
         isBookmarked = (Boolean) data.readObject("isBookmarked");
     }
 
@@ -73,7 +75,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("cardsBought",cardsBought);
         data.storeObject("mapFlags", mapFlags);
         data.storeObject("shopSeeds", shopSeeds);
-        data.storeObject("shopModifiers", shopModifiers);
+        data.storeObject("reputation", reputation);
         data.storeObject("isBookmarked", isBookmarked);
         return data;
     }

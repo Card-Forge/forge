@@ -2,7 +2,7 @@ Name:Wilson, Refined Grizzly
 ManaCost:1 G
 Types:Legendary Creature Bear Warrior
 PT:2/2
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Vigilance
 K:Reach
 K:Trample

@@ -445,7 +445,7 @@ public class UntapAi extends SpellAbilityAi {
 
                             // pool one additional mana by tapping a land to try to ramp to something
                             CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Presets.LANDS_PRODUCING_MANA, Presets.UNTAPPED);
+                                    Presets.LANDS_PRODUCING_MANA, Presets.CAN_TAP);
                             manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (manaLands.isEmpty()) {

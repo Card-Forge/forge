@@ -1,7 +1,7 @@
 Name:The War in Heaven
 ManaCost:3 B B B
 Types:Enchantment Saga
-K:Saga:3:DBDraw,DBMill,DBChoose
+K:Chapter:3:DBDraw,DBMill,DBChoose
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBLoseLife | SpellDescription$ You draw three cards and you lose 3 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
 SVar:DBMill:DB$ Mill | NumCards$ 3 | SpellDescription$ Mill three cards.

@@ -47,16 +47,11 @@ public class ReplaceCounter extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.SpellAbility))) {
             return false;
         }
-
-        if (hasParam("ValidType")) {
-            final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.TgtSA);
-            String type = getParam("ValidType");
-            if (type.equals("Spell") && !spellAbility.isSpell()) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
         }
         return true;
     }

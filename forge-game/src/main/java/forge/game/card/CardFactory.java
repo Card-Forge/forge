@@ -83,7 +83,7 @@ public class CardFactory {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame())
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
-            out = CardFactory.copyStats(in, in.getController(), assignNewId);
+            out = copyStats(in, in.getController(), assignNewId);
             out.setToken(true);
 
             // need to copy this values for the tokens
@@ -128,7 +128,7 @@ public class CardFactory {
         int id = game.nextCardId();
 
         // need to create a physical card first, i need the original card faces
-        final Card copy = CardFactory.getCard(original.getPaperCard(), controller, id, game);
+        final Card copy = getCard(original.getPaperCard(), controller, id, game);
 
         if (original.isTransformable()) {
             // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
@@ -318,40 +318,9 @@ public class CardFactory {
 
         // ******************************************************************
         // ************** Link to different CardFactories *******************
-        if (card.isPlane()) {
-            buildPlaneAbilities(card);
-        }
         buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
-    }
-
-    private static void buildPlaneAbilities(Card card) {
-        String trigger = "Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Secondary$ True | " +
-                "TriggerDescription$ Whenever you roll the Planeswalker symbol on the planar die, planeswalk.";
-
-        String rolledWalk = "DB$ Planeswalk | Cause$ PlanarDie";
-
-        Trigger planesWalkTrigger = TriggerHandler.parseTrigger(trigger, card, true);
-        planesWalkTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledWalk, card));
-        card.addTrigger(planesWalkTrigger);
-
-        String chaosTrig = "Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Static$ True";
-
-        String rolledChaos = "DB$ ChaosEnsues";
-
-        Trigger chaosTrigger = TriggerHandler.parseTrigger(chaosTrig, card, true);
-        chaosTrigger.setOverridingAbility(AbilityFactory.getAbility(rolledChaos, card));
-        card.addTrigger(chaosTrigger);
-
-        String specialA = "ST$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | Activator$ Player | SpecialAction$ True" +
-                " | ActivationZone$ Command | SpellDescription$ Roll the planar dice. X is equal to the number of " +
-                "times you have previously taken this action this turn. | CostDesc$ {X}: ";
-
-        SpellAbility planarRoll = AbilityFactory.getAbility(specialA, card);
-        planarRoll.setSVar("X", "Count$PlanarDiceSpecialActionThisTurn");
-
-        card.addSpellAbility(planarRoll);
     }
 
     private static void buildBattleAbilities(Card card) {
@@ -388,30 +357,12 @@ public class CardFactory {
         readCardFace(card, rules.getMainPart());
 
         if (st == CardSplitType.Specialize) {
-            card.addAlternateState(CardStateName.SpecializeW, false);
-            card.setState(CardStateName.SpecializeW, false);
-            if (rules.getWSpecialize() != null) {
-                readCardFace(card, rules.getWSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeU, false);
-            card.setState(CardStateName.SpecializeU, false);
-            if (rules.getUSpecialize() != null) {
-                readCardFace(card, rules.getUSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeB, false);
-            card.setState(CardStateName.SpecializeB, false);
-            if (rules.getBSpecialize() != null) {
-                readCardFace(card, rules.getBSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeR, false);
-            card.setState(CardStateName.SpecializeR, false);
-            if (rules.getRSpecialize() != null) {
-                readCardFace(card, rules.getRSpecialize());
-            }
-            card.addAlternateState(CardStateName.SpecializeG, false);
-            card.setState(CardStateName.SpecializeG, false);
-            if (rules.getGSpecialize() != null) {
-                readCardFace(card, rules.getGSpecialize());
+            for (Map.Entry<CardStateName, ICardFace> e : rules.getSpecializeParts().entrySet()) {
+                card.addAlternateState(e.getKey(), false);
+                card.setState(e.getKey(), false);
+                if (e.getValue() != null) {
+                    readCardFace(card, e.getValue());
+                }
             }
         } else if (st != CardSplitType.None) {
             card.addAlternateState(st.getChangedStateName(), false);
@@ -579,7 +530,7 @@ public class CardFactory {
         c.setSetCode(in.getSetCode());
 
         for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, c, state);
+            copyState(in, state, c, state);
         }
 
         c.setState(in.getCurrentStateName(), false);

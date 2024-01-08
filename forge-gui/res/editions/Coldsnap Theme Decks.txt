@@ -39,7 +39,7 @@ ScryfallCode=CST
 123 U Drift of the Dead @Brian Snõddy
 127 C Gangrenous Zombies @Brian Snõddy
 137 C Kjeldoran Dead @Melissa A. Benson
-142 C Legions of Lim-Dul @Anson Maddocks
+142 C Legions of Lim-Dûl @Anson Maddocks
 161 C Soul Burn @Rob Alexander
 194 C Incinerate @Mark Poole
 208 U Orcish Healer @Quinton Hoover

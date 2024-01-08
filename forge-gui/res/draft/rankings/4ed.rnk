@@ -1,0 +1,364 @@
+//Rank|Name|Rarity|Set
+#1|Balance|R|4ED
+#2|Dancing Scimitar|R|4ED
+#3|Birds of Paradise|R|4ED
+#4|Primal Clay|R|4ED
+#5|Greed|R|4ED
+#6|Control Magic|U|4ED
+#7|Mind Twist|R|4ED
+#8|Tetravus|R|4ED
+#9|Mishra's Factory|U|4ED
+#10|Air Elemental|U|4ED
+#11|Water Elemental|U|4ED
+#12|Sorceress Queen|R|4ED
+#13|Elven Riders|U|4ED
+#14|Triskelion|R|4ED
+#15|Dragon Engine|R|4ED
+#16|Ivory Tower|R|4ED
+#17|Tempest Efreet|R|4ED
+#18|Wall of Swords|U|4ED
+#19|Mana Flare|R|4ED
+#20|Psionic Entity|R|4ED
+#21|Shivan Dragon|R|4ED
+#22|Flying Carpet|R|4ED
+#23|White Mana Battery|R|4ED
+#24|Verduran Enchantress|R|4ED
+#25|Sengir Vampire|U|4ED
+#26|Desert Twister|U|4ED
+#27|Elvish Archers|R|4ED
+#28|Radjan Spirit|U|4ED
+#29|Force of Nature|R|4ED
+#30|Phantasmal Forces|U|4ED
+#31|Serra Angel|U|4ED
+#32|Hypnotic Specter|U|4ED
+#33|Jayemdae Tome|R|4ED
+#34|Armageddon|R|4ED
+#35|White Knight|U|4ED
+#36|Goblin King|R|4ED
+#37|Earthquake|R|4ED
+#38|Royal Assassin|R|4ED
+#39|Lightning Bolt|C|4ED
+#40|Orcish Artillery|U|4ED
+#41|Inferno|R|4ED
+#42|Llanowar Elves|C|4ED
+#43|Fireball|C|4ED
+#44|Uthden Troll|U|4ED
+#45|Pirate Ship|R|4ED
+#46|Phantom Monster|U|4ED
+#47|Giant Spider|C|4ED
+#48|Ghost Ship|U|4ED
+#49|Gaea's Liege|R|4ED
+#50|Sylvan Library|R|4ED
+#51|Fire Elemental|U|4ED
+#52|Black Knight|U|4ED
+#53|Mahamoti Djinn|R|4ED
+#54|Hurricane|U|4ED
+#55|Pyrotechnics|U|4ED
+#56|Wall of Air|U|4ED
+#57|Terror|C|4ED
+#58|Wrath of God|R|4ED
+#59|Nightmare|R|4ED
+#60|Killer Bees|U|4ED
+#61|Swords to Plowshares|U|4ED
+#62|Ball Lightning|R|4ED
+#63|The Hive|R|4ED
+#64|Disintegrate|C|4ED
+#65|Lord of Atlantis|R|4ED
+#66|Thicket Basilisk|U|4ED
+#67|Counterspell|U|4ED
+#68|Whirling Dervish|U|4ED
+#69|Cockatrice|R|4ED
+#70|Prodigal Sorcerer|C|4ED
+#71|Uncle Istvan|U|4ED
+#72|Clockwork Avian|R|4ED
+#73|Aladdin's Ring|R|4ED
+#74|Cosmic Horror|R|4ED
+#75|Crusade|R|4ED
+#76|Land Tax|R|4ED
+#77|Brothers of Fire|C|4ED
+#78|Osai Vultures|U|4ED
+#79|Tsunami|U|4ED
+#80|Earth Elemental|U|4ED
+#81|Lord of the Pit|R|4ED
+#82|Giant Growth|C|4ED
+#83|Strip Mine|U|4ED
+#84|Urza's Avenger|R|4ED
+#85|Crimson Manticore|R|4ED
+#86|Bad Moon|R|4ED
+#87|Pestilence|C|4ED
+#88|Scavenging Ghoul|U|4ED
+#89|Bog Wraith|U|4ED
+#90|Craw Wurm|C|4ED
+#91|Obsianus Golem|U|4ED
+#92|Millstone|R|4ED
+#93|Northern Paladin|R|4ED
+#94|Shapeshifter|U|4ED
+#95|Jade Monolith|R|4ED
+#96|Onulet|R|4ED
+#97|Immolation|C|4ED
+#98|Zombie Master|R|4ED
+#99|Paralyze|C|4ED
+#100|Savannah Lions|R|4ED
+#101|Will o' the Wisp|R|4ED
+#102|Channel|U|4ED
+#103|Fellwar Stone|U|4ED
+#104|Clay Statue|C|4ED
+#105|War Mammoth|C|4ED
+#106|Steal Artifact|U|4ED
+#107|Animate Dead|U|4ED
+#108|Dragon Whelp|U|4ED
+#109|Helm of Chatzuk|R|4ED
+#110|Drudge Skeletons|C|4ED
+#111|Rod of Ruin|U|4ED
+#112|Keldon Warlord|U|4ED
+#113|Drain Life|C|4ED
+#114|Fissure|C|4ED
+#115|Grizzly Bears|C|4ED
+#116|Time Elemental|R|4ED
+#117|Divine Transformation|U|4ED
+#118|Unstable Mutation|C|4ED
+#119|Elder Land Wurm|R|4ED
+#120|Diabolic Machine|U|4ED
+#121|Brass Man|U|4ED
+#122|Hill Giant|C|4ED
+#123|Red Mana Battery|R|4ED
+#124|Durkwood Boars|C|4ED
+#125|Mana Short|R|4ED
+#126|Hurloon Minotaur|C|4ED
+#127|Zephyr Falcon|C|4ED
+#128|Black Vise|U|4ED
+#129|Wall of Ice|U|4ED
+#130|Stone Giant|U|4ED
+#131|Dark Ritual|C|4ED
+#132|Ironroot Treefolk|C|4ED
+#133|The Rack|U|4ED
+#134|Nevinyrral's Disk|R|4ED
+#135|Junun Efreet|U|4ED
+#136|Spirit Shackle|U|4ED
+#137|Living Artifact|R|4ED
+#138|Mana Vault|R|4ED
+#139|Yotian Soldier|C|4ED
+#140|Frozen Shade|C|4ED
+#141|Grapeshot Catapult|C|4ED
+#142|Segovian Leviathan|U|4ED
+#143|Bird Maiden|C|4ED
+#144|Land Leeches|C|4ED
+#145|Manabarbs|R|4ED
+#146|Flood|C|4ED
+#147|Mind Bomb|U|4ED
+#148|Drain Power|R|4ED
+#149|Blood Lust|C|4ED
+#150|Carrion Ants|U|4ED
+#151|Tawnos's Weaponry|U|4ED
+#152|Bottle of Suleiman|R|4ED
+#153|Untamed Wilds|U|4ED
+#154|Black Mana Battery|R|4ED
+#155|Erg Raiders|C|4ED
+#156|Sindbad|U|4ED
+#157|Ironclaw Orcs|C|4ED
+#158|Weakness|C|4ED
+#159|Clockwork Beast|R|4ED
+#160|Unsummon|C|4ED
+#161|Cave People|U|4ED
+#162|Leviathan|R|4ED
+#163|Detonate|U|4ED
+#164|Xenic Poltergeist|R|4ED
+#165|Ashnod's Battle Gear|U|4ED
+#166|Vampire Bats|C|4ED
+#167|Living Lands|R|4ED
+#168|Giant Strength|C|4ED
+#169|Colossus of Sardia|R|4ED
+#170|Unholy Strength|C|4ED
+#171|Scryb Sprites|C|4ED
+#172|Spell Blast|C|4ED
+#173|Ashes to Ashes|U|4ED
+#174|Wall of Stone|U|4ED
+#175|Cyclopean Mummy|C|4ED
+#176|Sisters of the Flame|C|4ED
+#177|Spirit Link|U|4ED
+#178|Power Sink|C|4ED
+#179|Wall of Dust|U|4ED
+#180|Giant Tortoise|C|4ED
+#181|Wall of Spears|C|4ED
+#182|Howling Mine|R|4ED
+#183|Iron Star|U|4ED
+#184|Mesa Pegasus|C|4ED
+#185|Wall of Brambles|U|4ED
+#186|Abomination|U|4ED
+#187|Bog Imp|C|4ED
+#188|Scathe Zombies|C|4ED
+#189|Holy Strength|C|4ED
+#190|Blue Elemental Blast|C|4ED
+#191|Word of Binding|C|4ED
+#192|Meekstone|R|4ED
+#193|Sunken City|C|4ED
+#194|Orcish Oriflamme|U|4ED
+#195|Web|R|4ED
+#196|Green Mana Battery|R|4ED
+#197|Gaseous Form|C|4ED
+#198|Goblin Balloon Brigade|U|4ED
+#199|Aladdin's Lamp|R|4ED
+#200|Coral Helm|R|4ED
+#201|Gray Ogre|C|4ED
+#202|Wild Growth|C|4ED
+#203|Ley Druid|U|4ED
+#204|Sandstorm|C|4ED
+#205|Eye for an Eye|R|4ED
+#206|Righteousness|R|4ED
+#207|Wall of Water|U|4ED
+#208|Apprentice Wizard|C|4ED
+#209|Disrupting Scepter|R|4ED
+#210|Stone Rain|C|4ED
+#211|Samite Healer|C|4ED
+#212|Carnivorous Plant|C|4ED
+#213|Stasis|R|4ED
+#214|Cursed Land|U|4ED
+#215|Murk Dwellers|C|4ED
+#216|Conversion|U|4ED
+#217|Shanodin Dryads|C|4ED
+#218|Pradesh Gypsies|C|4ED
+#219|Wall of Bone|U|4ED
+#220|Battering Ram|C|4ED
+#221|Island Fish Jasconius|R|4ED
+#222|Deathgrip|U|4ED
+#223|Flashfires|U|4ED
+#224|Armageddon Clock|R|4ED
+#225|Smoke|R|4ED
+#226|Oasis|U|4ED
+#227|Castle|U|4ED
+#228|Power Surge|R|4ED
+#229|Lost Soul|C|4ED
+#230|Nafs Asp|C|4ED
+#231|Winter Blast|U|4ED
+#232|Dwarven Warriors|C|4ED
+#233|Marsh Viper|C|4ED
+#234|Mana Clash|R|4ED
+#235|Twiddle|C|4ED
+#236|Island Sanctuary|R|4ED
+#237|Blight|U|4ED
+#238|Rag Man|R|4ED
+#239|Mons's Goblin Raiders|C|4ED
+#240|Titania's Song|R|4ED
+#241|Sunglasses of Urza|R|4ED
+#242|Raise Dead|C|4ED
+#243|Plague Rats|C|4ED
+#244|Pikemen|C|4ED
+#245|Personal Incarnation|R|4ED
+#246|Goblin Rock Sled|C|4ED
+#247|Hurkyl's Recall|R|4ED
+#248|Circle of Protection: Red|C|4ED
+#249|Angry Mob|U|4ED
+#250|Kismet|U|4ED
+#251|Crumble|U|4ED
+#252|Disenchant|C|4ED
+#253|Winds of Change|R|4ED
+#254|Venom|C|4ED
+#255|Wall of Fire|U|4ED
+#256|Lifeforce|U|4ED
+#257|Brainwash|C|4ED
+#258|Red Elemental Blast|C|4ED
+#259|Howl from Beyond|C|4ED
+#260|Visions|U|4ED
+#261|Fungusaur|R|4ED
+#262|Eternal Warrior|C|4ED
+#263|Circle of Protection: Black|C|4ED
+#264|Chaoslace|R|4ED
+#265|Mishra's War Machine|R|4ED
+#266|Timber Wolves|R|4ED
+#267|Thoughtlace|R|4ED
+#268|Throne of Bone|U|4ED
+#269|Fog|C|4ED
+#270|Tundra Wolves|C|4ED
+#271|Animate Artifact|U|4ED
+#272|Burrowing|U|4ED
+#273|Pearled Unicorn|C|4ED
+#274|Wanderlust|U|4ED
+#275|Magnetic Mountain|R|4ED
+#276|Pit Scorpion|C|4ED
+#277|Flight|C|4ED
+#278|Lure|U|4ED
+#279|Seeker|C|4ED
+#280|Karma|U|4ED
+#281|Fear|C|4ED
+#282|Circle of Protection: Artifacts|U|4ED
+#283|Siren's Call|U|4ED
+#284|Morale|C|4ED
+#285|Jandor's Saddlebags|R|4ED
+#286|Nether Shadow|R|4ED
+#287|Ankh of Mishra|R|4ED
+#288|Tunnel|U|4ED
+#289|Circle of Protection: Green|C|4ED
+#290|The Brute|C|4ED
+#291|Benalish Hero|C|4ED
+#292|Regeneration|C|4ED
+#293|Ornithopter|U|4ED
+#294|Blue Ward|U|4ED
+#295|Amulet of Kroog|C|4ED
+#296|Tawnos's Wand|U|4ED
+#297|Healing Salve|C|4ED
+#298|Merfolk of the Pearl Trident|C|4ED
+#299|Sea Serpent|C|4ED
+#300|Power Leak|C|4ED
+#301|Rebirth|R|4ED
+#302|Tranquility|C|4ED
+#303|Reverse Damage|R|4ED
+#304|Stream of Life|C|4ED
+#305|Ebony Horse|R|4ED
+#306|Firebreathing|C|4ED
+#307|Evil Presence|U|4ED
+#308|Amrou Kithkin|C|4ED
+#309|Ali Baba|U|4ED
+#310|Crystal Rod|U|4ED
+#311|Phantasmal Terrain|C|4ED
+#312|Jump|C|4ED
+#313|Sleight of Mind|R|4ED
+#314|Circle of Protection: Blue|C|4ED
+#315|Warp Artifact|R|4ED
+#316|El-Hajjaj|R|4ED
+#317|Gloom|U|4ED
+#318|Wall of Wood|C|4ED
+#319|Psychic Venom|C|4ED
+#320|Shatter|C|4ED
+#321|Energy Tap|C|4ED
+#322|Alabaster Potion|C|4ED
+#323|Marsh Gas|C|4ED
+#324|Library of Leng|U|4ED
+#325|Hurr Jackal|R|4ED
+#326|Soul Net|U|4ED
+#327|Holy Armor|C|4ED
+#328|Energy Flux|U|4ED
+#329|Simulacrum|U|4ED
+#330|Circle of Protection: White|C|4ED
+#331|Black Ward|U|4ED
+#332|Aspect of Wolf|R|4ED
+#333|Backfire|U|4ED
+#334|Cursed Rack|U|4ED
+#335|Kormus Bell|R|4ED
+#336|Fortified Area|C|4ED
+#337|Creature Bond|C|4ED
+#338|Death Ward|C|4ED
+#339|Dingus Egg|R|4ED
+#340|Lifelace|R|4ED
+#341|Celestial Prism|U|4ED
+#342|Conservator|U|4ED
+#343|Piety|C|4ED
+#344|Magical Hack|R|4ED
+#345|Purelace|R|4ED
+#346|Feedback|U|4ED
+#347|Wooden Sphere|U|4ED
+#348|Red Ward|U|4ED
+#349|Blessing|R|4ED
+#350|Green Ward|U|4ED
+#351|White Ward|U|4ED
+#352|Erosion|C|4ED
+#353|Volcanic Eruption|R|4ED
+#354|Instill Energy|U|4ED
+#355|Bronze Tablet|R|4ED
+#356|Blue Mana Battery|R|4ED
+#357|Glasses of Urza|U|4ED
+#358|Winter Orb|R|4ED
+#359|Lifetap|U|4ED
+#360|Ivory Cup|U|4ED
+#361|Relic Bind|R|4ED
+#362|Animate Wall|R|4ED
+#363|Deathlace|R|4ED

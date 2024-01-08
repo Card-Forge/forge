@@ -312,7 +312,7 @@ ScryfallCode=PLIST
 304 U Daxos, Blessed by the Sun @Jason A. Engle
 305 R Elspeth Conquers Death @Ryan Yee
 306 R Giver of Runes @Seb McKinnon
-307 U Jotun Grunt @Franz Vohwinkel
+307 U Jötun Grunt @Franz Vohwinkel
 308 U Release the Dogs @Jason Kang
 309 M Frost Titan @Mike Bierek
 310 R Ice Cave @Jerry Tiritilli

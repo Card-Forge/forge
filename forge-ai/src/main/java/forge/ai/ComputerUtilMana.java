@@ -976,7 +976,7 @@ public class ComputerUtilMana {
             // Check if AI can still play this mana ability
             ma.setActivatingPlayer(ai, true);
             // if the AI can't pay the additional costs skip the mana ability
-            if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
+            if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma, false)) {
                 return false;
             } else if (ma.getRestrictions() != null && ma.getRestrictions().isInstantSpeed()) {
                 return false;
@@ -1517,7 +1517,7 @@ public class ComputerUtilMana {
                 if (cost != null) {
                     // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai, true);
-                    if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
+                    if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m, false)) {
                         continue;
                     }
 

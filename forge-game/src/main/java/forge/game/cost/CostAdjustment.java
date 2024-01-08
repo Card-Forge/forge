@@ -285,7 +285,7 @@ public class CostAdjustment {
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
-                CardPredicates.Presets.UNTAPPED);
+                CardPredicates.Presets.CAN_TAP);
         if (improvise) {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
         } else {

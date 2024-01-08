@@ -90,6 +90,7 @@ public enum FSkinProp {
 
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
     IMG_TICKET           (new int[] {360, 80, 40, 40}, PropType.IMAGE),
+    IMG_RAD              (new int[] {360, 120, 40, 40}, PropType.IMAGE),
 
     //mana images
     IMG_MANA_B         (new int[] {166, 2, 80, 80}, PropType.MANAICONS),

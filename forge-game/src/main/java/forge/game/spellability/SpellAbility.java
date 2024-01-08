@@ -103,11 +103,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // choices for constructor isPermanent argument
     private String originalDescription = "", description = "";
     private String originalStackDescription = "", stackDescription = "";
-    private ManaCost multiKickerManaCost;
+
     private Player activatingPlayer;
     private Player targetingPlayer;
+    private Player choosingPlayer;
     private Pair<Long, Player> controlledByPlayer;
+
     private ManaCostBeingPaid manaCostBeingPaid;
+    private ManaCost multiKickerManaCost;
     private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
@@ -128,8 +131,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean aftermath = false;
 
     private boolean blessing = false;
-    private Integer chapter = null;
-    private boolean lastChapter = false;
 
     /** The pay costs. */
     private Cost payCosts;
@@ -149,7 +150,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TreeBasedTable<String, Boolean, CardCollection> paidLists = TreeBasedTable.create();
 
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
-
     private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
 
     private final List<String> pipsToReduce = new ArrayList<>();
@@ -481,6 +481,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setTargetingPlayer(Player targetingPlayer0) {
         targetingPlayer = targetingPlayer0;
+    }
+
+    public Player getChoosingPlayer() {
+        return choosingPlayer;
+    }
+    public void setChoosingPlayer(Player choosingPlayer0) {
+        choosingPlayer = choosingPlayer0;
     }
 
     /**
@@ -829,6 +836,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
     }
+    public void setReplacingObjects(final Map<AbilityKey, Object> repParams) {
+        replacingObjects = AbilityKey.newMap(repParams);
+    }
     public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
         int typesLength = types.length;
         for (int i = 0; i < typesLength; i += 1) {
@@ -1100,22 +1110,18 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isChapter() {
-        return chapter != null;
+        return isTrigger() && getTrigger().isChapter();
     }
 
     public Integer getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(int val) {
-        chapter = val;
+        if (!isTrigger()) {
+            return null;
+        }
+        return getTrigger().getChapter();
     }
 
     public boolean isLastChapter() {
-        return lastChapter;
-    }
-    public boolean setLastChapter(boolean value) {
-        return lastChapter = value;
+        return isTrigger() && getTrigger().isLastChapter();
     }
 
     public CardPlayOption getMayPlayOption() {
@@ -1179,9 +1185,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.payingMana = Lists.newArrayList(payingMana);
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(getPaidHash());
-
-            // copy last chapter flag for Trigger
-            clone.lastChapter = this.lastChapter;
 
             if (usesTargeting()) {
                 // the targets need to be cloned, otherwise they might be cleared
@@ -2531,6 +2534,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!matchesValidParam("ValidAfterStack", this)) {
             return false;
         }
+        return true;
+    }
+
+    public boolean isCounterableBy(SpellAbility sa) {
         return true;
     }
 }

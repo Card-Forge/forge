@@ -65,7 +65,7 @@ public class MeldEffect extends SpellAbilityEffect {
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         bf.addToMelded(secondary);
         Card movedCard = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
-        if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+        if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }

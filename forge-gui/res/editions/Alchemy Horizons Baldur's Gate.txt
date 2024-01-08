@@ -13,7 +13,7 @@ ScryfallCode=HBG
 1 R Klement, Novice Acolyte @Maria Poliakova
 2 R Lae'zel, Githyanki Warrior @John Stanko
 3 U Lulu, Forgetful Hollyphant @Jakob Eirich
-4 U Rasaad, Monk of Selune @Dan Scott
+4 U Rasaad, Monk of Selûne @Dan Scott
 5 U Alora, Rogue Companion @Aaron Miller
 6 M Gale, Conduit of the Arcane @Cristi Balanescu
 7 R Imoen, Trickster Friend @Alix Branwyn

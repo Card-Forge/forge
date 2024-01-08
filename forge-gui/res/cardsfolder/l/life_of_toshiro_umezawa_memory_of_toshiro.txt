@@ -1,7 +1,7 @@
 Name:Life of Toshiro Umezawa
 ManaCost:1 B
 Types:Enchantment Saga
-K:Saga:3:DBCharm,DBCharm,DBTransform
+K:Chapter:3:DBCharm,DBCharm,DBTransform
 SVar:DBCharm:DB$ Charm | Choices$ P2P2,M1M1,GainLife | CharmNum$ 1 | SpellDescription$ ABILITY
 SVar:P2P2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | AILogic$ Pump | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:M1M1:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | AILogic$ Curse | SpellDescription$ Target creature gets -1/-1 until end of turn.

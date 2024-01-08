@@ -1004,7 +1004,7 @@
   <object id="60" template="../../obj/enemy.tx" x="39.5" y="131.5">
    <properties>
     <property name="effect">{
- &quot;startBattleWithCard&quot;: [ &quot;Hazoret Monument&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Hazoret's Monument&quot; ]
 }</property>
     <property name="enemy" value="Chandra's Acolyte"/>
     <property name="reward">[

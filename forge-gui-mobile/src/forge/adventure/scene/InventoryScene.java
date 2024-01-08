@@ -14,10 +14,7 @@ import forge.adventure.data.ItemData;
 import forge.adventure.stage.ConsoleCommandInterpreter;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
-import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
-import forge.adventure.util.Current;
-import forge.adventure.util.Paths;
+import forge.adventure.util.*;
 import forge.deck.Deck;
 
 import java.util.HashMap;
@@ -160,7 +157,21 @@ public class InventoryScene extends UIScene {
         if (data == null) return;
         Current.player().addShards(-data.shardsNeeded);
         done();
-        ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+        if (data.commandOnUse != null && !data.commandOnUse.isEmpty())
+            ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+        if (data.dialogOnUse.text != null && !data.dialogOnUse.text.isEmpty()) {
+            MapDialog dialog = new MapDialog(data.dialogOnUse, MapStage.getInstance(),0,null);
+            MapStage.instance.showDialog();
+            dialog.activate();
+            ChangeListener listen = new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
+                }
+            };
+            dialog.addDialogCompleteListener(listen);
+        }
+        AdventureQuestController.instance().updateItemUsed(data);
     }
 
     private void openBooster() {

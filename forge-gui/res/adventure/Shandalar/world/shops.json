@@ -4870,8 +4870,8 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Rogue",
-		  "colors": ["Pirate"]
+		  "cardText": "Pirate",
+		  "colors": ["blue"]
 		}
 	  ]
 	}
@@ -5482,5 +5482,25 @@
 		}
 	  ] 
     }]
+},
+{
+  "name":"goblinKingShop2",
+  "description":"Goblin King Shop Test 2",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RotatingShop",
+  "rewards": [
+    {
+      "count":8,
+      "type":"Union",
+      "cardUnion":[
+		{
+			"sourceDeck":"decks/standard/goblinking.dck"
+		},
+		{
+			"count":1,
+			"subTypes": ["Goblin"],
+			"minDate": "2021-09-09"
+		}]
+	}]
 }
 ]   

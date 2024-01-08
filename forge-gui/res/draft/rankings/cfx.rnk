@@ -1,0 +1,146 @@
+//Rank|Name|Rarity|Set
+#1|Banefire|R|CFX
+#2|Obelisk of Alara|R|CFX
+#3|Martial Coup|R|CFX
+#4|Wall of Reverence|R|CFX
+#5|Voracious Dragon|R|CFX
+#6|Rakka Mar|R|CFX
+#7|Meglonoth|R|CFX
+#8|Path to Exile|U|CFX
+#9|Cliffrunner Behemoth|R|CFX
+#10|Extractor Demon|R|CFX
+#11|Charnelhoard Wurm|R|CFX
+#12|Scepter of Dominance|R|CFX
+#13|Noble Hierarch|R|CFX
+#14|Volcanic Fallout|U|CFX
+#15|Goblin Razerunners|R|CFX
+#16|Blood Tyrant|R|CFX
+#17|Knight of the Reliquary|R|CFX
+#18|Magister Sphinx|R|CFX
+#19|Sphinx Summoner|R|CFX
+#20|Ethersworn Adjudicator|M|CFX
+#21|Nicol Bolas, Planeswalker|M|CFX
+#22|Thornling|M|CFX
+#23|Apocalypse Hydra|M|CFX
+#24|Mirror Sigil Sergeant|M|CFX
+#25|Paleoloth|R|CFX
+#26|Master Transmuter|R|CFX
+#27|Malfegor|M|CFX
+#28|Shambling Remains|U|CFX
+#29|Giltspire Avenger|R|CFX
+#30|Grixis Slavedriver|U|CFX
+#31|Esperzoa|U|CFX
+#32|Drag Down|C|CFX
+#33|Fiery Fall|C|CFX
+#34|Bloodhall Ooze|R|CFX
+#35|Maelstrom Archangel|M|CFX
+#36|Celestial Purge|U|CFX
+#37|Dark Temper|C|CFX
+#38|Nyxathid|R|CFX
+#39|Esper Cormorants|C|CFX
+#40|Worldheart Phoenix|R|CFX
+#41|Inkwell Leviathan|R|CFX
+#42|Soul's Majesty|R|CFX
+#43|Armillary Sphere|C|CFX
+#44|Rupture Spire|C|CFX
+#45|Child of Alara|M|CFX
+#46|Cylian Sunsinger|R|CFX
+#47|Sacellum Archers|U|CFX
+#48|Paragon of the Amesha|U|CFX
+#49|Exotic Orchard|R|CFX
+#50|Ember Weaver|C|CFX
+#51|Dragonsoul Knight|U|CFX
+#52|Parasitic Strix|C|CFX
+#53|Wild Leotau|C|CFX
+#54|Scarland Thrinax|U|CFX
+#55|Viashino Slaughtermaster|U|CFX
+#56|Aven Squire|C|CFX
+#57|Vagrant Plowbeasts|U|CFX
+#58|Nacatl Hunt Pride|U|CFX
+#59|Matca Rioters|C|CFX
+#60|Ancient Ziggurat|U|CFX
+#61|Hellspark Elemental|U|CFX
+#62|Exploding Borders|C|CFX
+#63|Aven Trailblazer|C|CFX
+#64|Sedraxis Alchemist|C|CFX
+#65|Gleam of Resistance|C|CFX
+#66|Sludge Strider|U|CFX
+#67|Fusion Elemental|U|CFX
+#68|Vedalken Outlander|C|CFX
+#69|Goblin Outlander|C|CFX
+#70|Absorb Vis|C|CFX
+#71|Zombie Outlander|C|CFX
+#72|Valeron Outlander|C|CFX
+#73|Gluttonous Slime|U|CFX
+#74|Ignite Disorder|U|CFX
+#75|Nacatl Outlander|C|CFX
+#76|Spore Burst|U|CFX
+#77|Hellkite Hatchling|U|CFX
+#78|Scepter of Insight|R|CFX
+#79|Faerie Mechanist|C|CFX
+#80|Shard Convergence|U|CFX
+#81|Manaforce Mace|U|CFX
+#82|Skyward Eye Prophets|U|CFX
+#83|Sylvan Bounty|C|CFX
+#84|Rhox Bodyguard|C|CFX
+#85|Rhox Meditant|C|CFX
+#86|Might of Alara|C|CFX
+#87|Wretched Banquet|C|CFX
+#88|Unstable Frontier|U|CFX
+#89|Aerie Mystics|U|CFX
+#90|Knotvine Mystic|U|CFX
+#91|Traumatic Visions|C|CFX
+#92|Fleshformer|U|CFX
+#93|Cumber Stone|U|CFX
+#94|Scepter of Fugue|R|CFX
+#95|Beacon Behemoth|C|CFX
+#96|Progenitus|M|CFX
+#97|Voices from the Void|U|CFX
+#98|Darklit Gargoyle|C|CFX
+#99|Brackwater Elemental|C|CFX
+#100|Filigree Fracture|U|CFX
+#101|Gwafa Hazid, Profiteer|R|CFX
+#102|Elder Mastery|U|CFX
+#103|Suicidal Charge|C|CFX
+#104|Countersquall|U|CFX
+#105|Kaleidostone|C|CFX
+#106|Pestilent Kathari|C|CFX
+#107|Vectis Agents|C|CFX
+#108|Unsummon|C|CFX
+#109|Jhessian Balmgiver|U|CFX
+#110|Nacatl Savage|C|CFX
+#111|Kederekt Parasite|R|CFX
+#112|Canyon Minotaur|C|CFX
+#113|Yoke of the Damned|C|CFX
+#114|Molten Frame|C|CFX
+#115|Court Homunculus|C|CFX
+#116|Kranioceros|C|CFX
+#117|Frontline Sage|C|CFX
+#118|Telemin Performance|R|CFX
+#119|Dreadwing|U|CFX
+#120|Conflux|M|CFX
+#121|Scattershot Archer|C|CFX
+#122|Controlled Instincts|U|CFX
+#123|Tukatongue Thallid|C|CFX
+#124|Worldly Counsel|C|CFX
+#125|Lapse of Certainty|C|CFX
+#126|Quenchable Fire|C|CFX
+#127|Toxic Iguanar|C|CFX
+#128|Maniacal Rage|C|CFX
+#129|Wandering Goblins|C|CFX
+#130|Mana Cylix|C|CFX
+#131|Rotting Rats|C|CFX
+#132|Scornful Aether Lich|U|CFX
+#133|Bone Saw|C|CFX
+#134|Constricting Tendrils|C|CFX
+#135|Infectious Horror|C|CFX
+#136|Grixis Illusionist|C|CFX
+#137|Asha's Favor|C|CFX
+#138|Salvage Slasher|C|CFX
+#139|Valiant Guard|C|CFX
+#140|Mark of Asylum|R|CFX
+#141|View from Above|U|CFX
+#142|Sigil of the Empty Throne|R|CFX
+#143|Font of Mythos|R|CFX
+#144|Corrupted Roots|U|CFX
+#145|Reliquary Tower|U|CFX

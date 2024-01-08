@@ -531,6 +531,10 @@ public class TriggerHandler {
             host.addRemembered(triggeredCard);
         }
 
+        if (!sa.getActivatingPlayer().isInGame()) {
+            return;
+        }
+
         sa.setStackDescription(sa.toString());
 
         Player decider = null;

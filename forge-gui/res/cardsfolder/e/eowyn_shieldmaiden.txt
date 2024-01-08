@@ -1,4 +1,4 @@
-Name:Eowyn, Shieldmaiden
+Name:Éowyn, Shieldmaiden
 ManaCost:2 U R W
 Types:Legendary Creature Human Knight
 PT:5/4
