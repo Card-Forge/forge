@@ -37,11 +37,6 @@ public class CharmAi extends SpellAbilityAi {
             min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
         }
 
-        // only randomize if not all possible together
-        if (num < choices.size() || source.hasKeyword(Keyword.ESCALATE)) {
-            Collections.shuffle(choices);
-        }
-
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
@@ -51,11 +46,15 @@ public class CharmAi extends SpellAbilityAi {
         if (!ai.equals(sa.getActivatingPlayer())) {
             // This branch is for "An Opponent chooses" Charm spells from Alliances
             // Current just choose the first available spell, which seem generally less disastrous for the AI.
-            //return choices.subList(0, 1);
             chosenList = choices.subList(1, choices.size());
         } else if ("Triskaidekaphobia".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
             chosenList = chooseTriskaidekaphobia(choices, ai);
         } else {
+            // only randomize if not all possible together
+            if (num < choices.size() || source.hasKeyword(Keyword.ESCALATE)) {
+                Collections.shuffle(choices);
+            }
+
             /*
              * The generic chooseOptionsAi uses canPlayAi() to determine good choices
              * which means most "bonus" effects like life-gain and random pumps will
