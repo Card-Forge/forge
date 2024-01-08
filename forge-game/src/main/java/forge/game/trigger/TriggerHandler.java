@@ -412,7 +412,6 @@ public class TriggerHandler {
             }
         }
 
-        // Check if a trigger with the same ID is already in activeTriggers
         return true;
     }
 

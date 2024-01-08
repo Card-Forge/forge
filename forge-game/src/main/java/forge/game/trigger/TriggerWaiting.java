@@ -3,9 +3,7 @@ package forge.game.trigger;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimaps;
+import com.google.common.collect.Maps;
 
 import forge.game.ability.AbilityKey;
 import forge.game.player.Player;
@@ -17,7 +15,7 @@ import forge.util.TextUtil;
 public class TriggerWaiting {
     private TriggerType mode;
     private Map<AbilityKey, Object> params;
-    private ListMultimap<Trigger, Player> triggers;
+    private Map<Trigger, Player> triggers;
 
     public TriggerWaiting(TriggerType m, Map<AbilityKey, Object> p) {
         mode = m;
@@ -36,11 +34,11 @@ public class TriggerWaiting {
         if (triggers == null) {
             return null;
         }
-        return triggers.keys();
+        return triggers.keySet();
     }
 
     public void setTriggers(final List<Trigger> trigs) {
-        this.triggers = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
+        this.triggers = Maps.newHashMap();
         for (Trigger t : trigs) {
             triggers.put(t, t.getHostCard().getController());
         }
@@ -50,7 +48,7 @@ public class TriggerWaiting {
         if (triggers == null) {
             return null;
         }
-        return triggers.get(t).get(0);
+        return triggers.get(t);
     }
 
     @Override
