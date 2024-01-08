@@ -3,6 +3,7 @@ Code=YWOE
 Date=2023-10-10
 Name=Alchemy: Eldraine
 Type=Online
+Booster=1 UncommonRareMythic,8 Common:fromsheet("WOE cards"), 3 Uncommon:fromSheet("WOE cards"), 1 UncommonRareMythic:fromSheet("WOT cards"), 1 RareMythic:fromSheet("WOE cards"), 1 BasicLand:fromSheet("WOE cards")
 ScryfallCode=YWOE
 
 [cards]

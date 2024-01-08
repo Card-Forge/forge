@@ -74,11 +74,13 @@ public class HumanPlaySpellAbility {
                 if ("X".equals(ability.getParam("CharmNum"))) {
                     // CR 601.4
                     if (!announceValuesLikeX()) {
+                        game.clearTopLibsCast(ability);
                         return false;
                     }
                     needX = false;
                 }
                 if (!CharmEffect.makeChoices(ability)) {
+                    game.clearTopLibsCast(ability);
                     // 603.3c If no mode is chosen, the ability is removed from the stack.
                     return false;
                 }
