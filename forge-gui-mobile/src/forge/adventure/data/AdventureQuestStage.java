@@ -178,7 +178,7 @@ public class AdventureQuestStage implements Serializable {
 
     public boolean checkIfTargetEnemy(EnemySprite enemy) {
         if (targetEnemyData != null) {
-            return enemy.getData() == targetEnemyData;
+            return (enemy.getData().match(targetEnemyData));
         }
         else if (targetSprite == null) {
             ArrayList<String> candidateTags = new ArrayList<>(Arrays.asList(enemy.getData().questTags));
@@ -279,10 +279,10 @@ public class AdventureQuestStage implements Serializable {
                         && ++progress1 >= count1 ? COMPLETE : status;
                 break;
             case Clear:
-                if (!event.clear) {
-                    break;
+                if (event.clear && event.winner) {
+                    status = COMPLETE;
                 }
-                //intentional fallthrough to DEFEAT
+                break;
             case Defeat:
                 if (event.type != AdventureQuestEventType.MATCHCOMPLETE)
                     break;

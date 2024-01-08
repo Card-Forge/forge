@@ -154,32 +154,28 @@ public class AdventureQuestController implements Serializable {
     private List<EnemySprite> enemySpriteList= new ArrayList<>();
     private int nextQuestID = 0;
     public void showQuestDialogs(GameStage stage) {
-        if (dialogQueue.peek() == null)
-        {
-            inDialog = false; //occasionally this wasn't clearing, causing dialogs to stop displaying
-        }
         List<AdventureQuestData> finishedQuests = new ArrayList<>();
 
             for (AdventureQuestData quest : Current.player().getQuests()) {
                 DialogData prologue = quest.getPrologue();
-                if (prologue != null && (!prologue.text.isEmpty()) ){
+                if (prologue != null){
                     dialogQueue.add(prologue);
                 }
                 for (AdventureQuestStage questStage : quest.stages)
                 {
                     if (questStage.getStatus() == INACTIVE)
                         continue;
-                    if (questStage.prologue != null && (!questStage.prologue.text.isEmpty()) && !questStage.prologueDisplayed){
+                    if (questStage.prologue != null && !questStage.prologueDisplayed){
                         questStage.prologueDisplayed = true;
                         dialogQueue.add(questStage.prologue);
                     }
 
-                    if (questStage.getStatus() == FAILED && questStage.failureDialog != null && !questStage.failureDialog.text.isEmpty()){
+                    if (questStage.getStatus() == FAILED && questStage.failureDialog != null){
                         dialogQueue.add(questStage.failureDialog);
                         continue;
                     }
 
-                    if (questStage.getStatus() == COMPLETE && questStage.epilogue != null && (!questStage.epilogue.text.isEmpty()) && !questStage.epilogueDisplayed){
+                    if (questStage.getStatus() == COMPLETE && questStage.epilogue != null && !questStage.epilogueDisplayed){
                         questStage.epilogueDisplayed = true;
                         dialogQueue.add(questStage.epilogue);
                     }
@@ -187,7 +183,7 @@ public class AdventureQuestController implements Serializable {
 
                 if (quest.failed){
                     finishedQuests.add(quest);
-                    if (quest.failureDialog != null && !quest.failureDialog.text.isEmpty()){
+                    if (quest.failureDialog != null){
                         dialogQueue.add(quest.failureDialog);
                     }
                 }
@@ -195,9 +191,8 @@ public class AdventureQuestController implements Serializable {
                 if (!quest.completed)
                     continue;
                 DialogData epilogue = quest.getEpilogue();
-                if (epilogue != null && (!epilogue.text.isEmpty())){
+                if (epilogue != null){
                     dialogQueue.add(epilogue);
-
                 }
                 finishedQuests.add(quest);
                 updateQuestComplete(quest);
@@ -229,7 +224,15 @@ public class AdventureQuestController implements Serializable {
             return;
         }
 
-        MapDialog dialog = new MapDialog(dialogQueue.remove(), stage, -1, null);
+        DialogData data = dialogQueue.remove();
+        MapDialog dialog = new MapDialog(data, stage, -1, null);
+
+        if (data.options == null || data.options.length == 0) {
+            dialog.setEffects(data.action);
+            displayNextDialog(stage);
+            return;
+        }
+
         stage.showDialog();
         dialog.activate();
         ChangeListener listen = new ChangeListener() {
@@ -239,7 +242,10 @@ public class AdventureQuestController implements Serializable {
             }
         };
         dialog.addDialogCompleteListener(listen);
-
+        if (data.options == null || data.options.length == 0)
+        {
+            displayNextDialog(stage);
+        }
     }
     public static class DistanceSort implements Comparator<PointOfInterest>
     {

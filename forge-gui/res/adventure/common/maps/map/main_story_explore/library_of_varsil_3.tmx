@@ -93,19 +93,26 @@
   <object id="26" template="../../obj/dialog.tx" x="144" y="240">
    <properties>
     <property name="dialog">[
-{
-   &quot;text&quot;: &quot;'Shandalaar’s Most Burnable Cities'. Well, this one sounds like light reading...&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1},
-      &quot;action&quot;: [{
-         &quot;grantRewards&quot;: [{
-            &quot;type&quot;: &quot;card&quot;,
-            &quot;count&quot;: 1,
-            &quot;cardName&quot;: &quot;Fireball&quot;
-         }]
-      }]
-   }]
-}
+    {
+        &quot;text&quot;: &quot;'Shandalaar’s Most Burnable Cities'. Well, this one sounds like light reading...&quot;,
+        &quot;options&quot;: [
+            {
+                &quot;name&quot;: &quot;(Continue)&quot;,
+                &quot;action&quot;: [
+                    {
+                        &quot;deleteMapObject&quot;: -1,
+                        &quot;grantRewards&quot;: [
+                            {
+                                &quot;type&quot;: &quot;card&quot;,
+                                &quot;count&quot;: 1,
+                                &quot;cardName&quot;: &quot;Fireball&quot;
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 ]</property>
    </properties>
   </object>
@@ -275,7 +282,7 @@
                 &quot;getQuestFlag&quot;: {
                     &quot;key&quot;: &quot;exploreShand1&quot;,
                     &quot;op&quot;: &quot;=&quot;,
-                    &quot;val&quot;: 5
+                    &quot;val&quot;: 4
                 }
             },
             {

@@ -134,9 +134,11 @@ public class TileMapScene extends HudScene   {
     }
 
     public PointOfInterestChanges getPointOfInterestChanges(){
-        return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + rootPoint.getData().map);
+        return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID());
     }
     public PointOfInterestChanges getPointOfInterestChanges(String targetMap){
+        if (rootPoint.getID().endsWith(targetMap))
+            return getPointOfInterestChanges();
         return WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap);
     }
 
