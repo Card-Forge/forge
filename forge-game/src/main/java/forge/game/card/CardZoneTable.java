@@ -11,6 +11,7 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -57,6 +58,10 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
      * special put logic, add Card to Card Collection
      */
     public CardCollection put(ZoneType rowKey, ZoneType columnKey, Card value) {
+        // get newest state here in case a RE moved it
+        value = value.getGame().getCardState(value);
+        columnKey = value.getZone().getZoneType();
+
         if (rowKey == null) {
             rowKey = ZoneType.None;
         }
@@ -81,7 +86,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
-        if (!isEmpty()) {
+        if (!isEmpty() &&
+                (cause == null || !cause.isReplacementAbility() || cause.getReplacementEffect().getMode() != ReplacementType.Moved)) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
             runParams.put(AbilityKey.Cause, cause);
