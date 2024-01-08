@@ -10033,8 +10033,8 @@
                 "name": "Locate The Research",
                 "description": "Search $(poi_1) for research about the mechanics of summoning spells",
                 "mapFlag": "foundLibraryOfVarsilResearch",
+				"anyPOI": true,
                 "mapFlagValue": 1,
-                "here": true,
                 "objective": "QuestFlag",
                 "prologue": {
                     "text": "The structure before you is enormous, looking more like an ancient fortress than a library.",
