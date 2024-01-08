@@ -185,6 +185,8 @@ public class TriggerHandler {
             if (wt.getTriggers() != null)
                 continue;
 
+            // TODO we don't seem to handle Static ones from this,
+            // so they shouldn't be checked for performance in the first place
             wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
         }
     }
@@ -352,16 +354,17 @@ public class TriggerHandler {
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
-        final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
+        final boolean wasCollected = wt.getTriggers() != null;
+        final Iterable<Trigger> triggers = wasCollected ? wt.getTriggers() : activeTriggers;
 
         boolean checkStatics = false;
 
         for (final Trigger t : triggers) {
-            if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
+            if (!t.isStatic() && t.getHostCard().getController().equals(player) && (wasCollected || canRunTrigger(t, mode, runParams))) {
                 int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
 
                 for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, runParams);
+                    runSingleTrigger(t, runParams, wt.getController(t));
                 }
                 checkStatics = true;
             }
@@ -409,7 +412,6 @@ public class TriggerHandler {
             }
         }
 
-        // Check if a trigger with the same ID is already in activeTriggers
         return true;
     }
 
@@ -455,6 +457,12 @@ public class TriggerHandler {
     }
 
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        runSingleTrigger(regtrig, runParams, null);
+    }
+    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
+        if (controller == null) {
+            controller = regtrig.getHostCard().getController();
+        }
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
         if (runParams.get(AbilityKey.MergedCards) != null) {
             // Check if the trigger cares the origin is from battlefield
@@ -465,31 +473,29 @@ public class TriggerHandler {
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
-                runSingleTriggerInternal(regtrig, newParams);
+                runSingleTriggerInternal(regtrig, newParams, controller);
             } else {
                 // Else, trigger for each merged components
                 for (final Card c : mergedCards) {
                     newParams.put(AbilityKey.Card, c);
-                    runSingleTriggerInternal(regtrig, newParams);
+                    runSingleTriggerInternal(regtrig, newParams, controller);
                 }
             }
         } else {
-            runSingleTriggerInternal(regtrig, runParams);
+            runSingleTriggerInternal(regtrig, runParams, controller);
         }
     }
 
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
         // All tests passed, execute ability.
 
         adjustUndoStack(regtrig, runParams);
 
-        SpellAbility sa = null;
         Card host = regtrig.getHostCard();
-
-        sa = regtrig.getOverridingAbility();
+        SpellAbility sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!regtrig.hasParam("Execute")) {
                 sa = new SpellAbility.EmptySa(host);
@@ -504,14 +510,16 @@ public class TriggerHandler {
                 // need to set as Overriding Ability so it can be copied better
                 regtrig.setOverridingAbility(sa);
             }
-            sa.setActivatingPlayer(host.getController());
+            sa.setActivatingPlayer(controller);
 
             if (regtrig.isIntrinsic()) {
                 sa.setIntrinsic(true);
                 sa.changeText();
             }
         } else {
-            Player controller = regtrig.getSpawningAbility() != null ? regtrig.getSpawningAbility().getActivatingPlayer() : host.getController();
+            if (regtrig.getSpawningAbility() != null) {
+                controller = regtrig.getSpawningAbility().getActivatingPlayer();
+            }
             // need to copy the SA because of TriggeringObjects
             sa = sa.copy(host, controller, false);
         }

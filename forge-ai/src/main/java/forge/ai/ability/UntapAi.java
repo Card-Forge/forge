@@ -64,14 +64,12 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!sa.usesTargeting()) {
-            final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
-        } else {
-            // If we already selected a target just use that
-
+        if (sa.usesTargeting()) {
             return untapPrefTargeting(ai, sa, false);
         }
+
+        final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
     }
 
     @Override
@@ -134,11 +132,11 @@ public class UntapAi extends SpellAbilityAi {
         }
         sa.resetTargets();
 
-        final PlayerCollection targetController = new PlayerCollection();
-        if (sa.isCurse()) {
-            targetController.addAll(ai.getOpponents());
+        final PlayerCollection targetController;
+        if (sa.isCurse() || (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.GainControl)) {
+            targetController = ai.getOpponents();
         } else {
-            targetController.add(ai);
+            targetController = ai.getYourTeam();
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
