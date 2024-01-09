@@ -30,6 +30,7 @@ public enum AbilityKey {
     Card("Card"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
+    CardZoneTable("CardZoneTable"),
     CardLKI("CardLKI"),
     Cause("Cause"),
     Causer("Causer"),

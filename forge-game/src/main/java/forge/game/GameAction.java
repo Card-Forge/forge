@@ -538,8 +538,10 @@ public class GameAction {
                     if (repres != ReplacementResult.NotReplaced) continue;
                 }
                 if (card == c) {
+                    storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
                     zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
+                    storeChangesZoneAll(card, zoneFrom, zoneTo, params);
                     zoneTo.add(card, position, CardUtil.getLKICopy(card));
                     card.setState(CardStateName.Original, false);
                     card.setBackSide(false);
@@ -548,6 +550,7 @@ public class GameAction {
                 card.setZone(zoneTo);
             }
         } else {
+            storeChangesZoneAll(copied, zoneFrom, zoneTo, params);
             // "enter the battlefield as a copy" - apply code here
             // but how to query for input here and continue later while the callers assume synchronous result?
             zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
@@ -721,6 +724,12 @@ public class GameAction {
         }
 
         return copied;
+    }
+
+    private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
+        if (params != null && params.containsKey(AbilityKey.CardZoneTable)) {
+            ((CardZoneTable) params.get(AbilityKey.CardZoneTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);    
+        }
     }
 
     private static void unattachCardLeavingBattlefield(final Card copied) {

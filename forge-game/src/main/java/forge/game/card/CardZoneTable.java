@@ -5,6 +5,8 @@ package forge.game.card;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -33,12 +35,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public CardZoneTable() {
-        this(CardCollection.EMPTY, CardCollection.EMPTY);
+        this(null, null);
     }
 
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        this.lastStateBattlefield = lastStateBattlefield;
-        this.lastStateGraveyard = lastStateGraveyard;
+        this.lastStateBattlefield = ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY);
+        this.lastStateGraveyard = ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY);
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -58,10 +60,6 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
      * special put logic, add Card to Card Collection
      */
     public CardCollection put(ZoneType rowKey, ZoneType columnKey, Card value) {
-        // get newest state here in case a RE moved it
-        value = value.getGame().getCardState(value);
-        columnKey = value.getZone().getZoneType();
-
         if (rowKey == null) {
             rowKey = ZoneType.None;
         }
@@ -86,8 +84,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
-        if (!isEmpty() &&
-                (cause == null || !cause.isReplacementAbility() || cause.getReplacementEffect().getMode() != ReplacementType.Moved)) {
+        if (cause != null && cause.isReplacementAbility() && cause.getReplacementEffect().getMode() == ReplacementType.Moved) {
+            // will be handled by original "cause" instead
+            return;
+        }
+        if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
             runParams.put(AbilityKey.Cause, cause);

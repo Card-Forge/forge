@@ -915,4 +915,11 @@ public abstract class SpellAbilityEffect {
         movedCard.setExiledWith(exilingSource);
         movedCard.setExiledBy(cause.getActivatingPlayer());
     }
+
+    public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
+        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.CardZoneTable) != null) {
+            return (CardZoneTable) sa.getReplacingObject(AbilityKey.CardZoneTable);    
+        }
+        return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
+    }
 }
