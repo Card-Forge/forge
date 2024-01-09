@@ -21,7 +21,6 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
 
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
             int choiceAmount = p.getAdditionalVillainousChoices() + 1;
-            source.addRemembered(p);
 
             List<SpellAbility> saToRemove = Lists.newArrayList();
 
@@ -40,9 +39,10 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
             }
 
             for (SpellAbility chosenSA : chosenSAs) {
+                source.addRemembered(p);
                 AbilityUtils.resolve(chosenSA);
+                source.removeRemembered(p);
             }
-            source.removeRemembered(p);
         }
     }
 }
