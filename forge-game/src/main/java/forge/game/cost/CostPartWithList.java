@@ -20,7 +20,6 @@ package forge.game.cost;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.Zone;
 
 /**
  * The Class CostPartWithList.
@@ -105,7 +104,6 @@ public abstract class CostPartWithList extends CostPart {
 
     public final boolean executePayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         lkiList.add(CardUtil.getLKICopy(targetCard));
-        final Zone origin = targetCard.getZone();
         final Card newCard = doPayment(payer, ability, targetCard, effect);
 
         // need to update the LKI info to ensure correct interaction with cards which may trigger on this
@@ -113,12 +111,7 @@ public abstract class CostPartWithList extends CostPart {
         targetCard.getGame().updateLastStateForCard(targetCard);
 
         if (newCard != null) {
-            final Zone newZone = newCard.getZone();
             cardList.add(newCard);
-
-            if (!origin.equals(newZone)) {
-                table.put(origin.getZoneType(), newZone.getZoneType(), newCard);
-            }
         }
         return true;
     }

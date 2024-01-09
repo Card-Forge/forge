@@ -1260,6 +1260,7 @@ public class GameAction {
             boolean checkAgain = false;
 
             CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+            mapParams.put(AbilityKey.CardZoneTable, table);
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {
@@ -1405,7 +1406,7 @@ public class GameAction {
             }
             for (Card c : noRegCreats) {
                 c.updateWasDestroyed(true);
-                sacrificeDestroy(c, null, table, mapParams);
+                sacrificeDestroy(c, null, mapParams);
             }
 
             if (desCreats != null) {
@@ -1417,7 +1418,7 @@ public class GameAction {
                     orderedDesCreats = true;
                 }
                 for (Card c : desCreats) {
-                    destroy(c, null, true, table, mapParams);
+                    destroy(c, null, true, mapParams);
                 }
             }
 
@@ -1427,7 +1428,7 @@ public class GameAction {
             }
             for (Card c : sacrificeList) {
                 c.updateWasDestroyed(true);
-                sacrifice(c, null, true, table, mapParams);
+                sacrifice(c, null, true, mapParams);
             }
             setHoldCheckingStaticAbilities(false);
 
@@ -1865,7 +1866,7 @@ public class GameAction {
         return true;
     }
 
-    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, CardZoneTable table, Map<AbilityKey, Object> params) {
+    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
         if (!c.canBeSacrificedBy(source, effect)) {
             return null;
         }
@@ -1873,10 +1874,10 @@ public class GameAction {
         c.getController().addSacrificedThisTurn(c, source);
 
         c.updateWasDestroyed(true);
-        return sacrificeDestroy(c, source, table, params);
+        return sacrificeDestroy(c, source, params);
     }
 
-    public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, CardZoneTable table, Map<AbilityKey, Object> params) {
+    public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, Map<AbilityKey, Object> params) {
         if (!c.canBeDestroyed()) {
             return false;
         }
@@ -1913,7 +1914,7 @@ public class GameAction {
         // in case the destroyed card has such a trigger
         game.getTriggerHandler().registerActiveLTBTrigger(c);
 
-        final Card sacrificed = sacrificeDestroy(c, sa, table, params);
+        final Card sacrificed = sacrificeDestroy(c, sa, params);
         return sacrificed != null;
     }
 
@@ -1921,15 +1922,12 @@ public class GameAction {
      * @return the sacrificed Card in its new location, or {@code null} if the
      * sacrifice wasn't successful.
      */
-    protected final Card sacrificeDestroy(final Card c, SpellAbility cause, CardZoneTable table, Map<AbilityKey, Object> params) {
+    protected final Card sacrificeDestroy(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         if (!c.isInPlay()) {
             return null;
         }
 
         final Card newCard = moveToGraveyard(c, cause, params);
-        if (table != null && newCard != null && newCard.getZone() != null) {
-            table.put(ZoneType.Battlefield, newCard.getZone().getZoneType(), newCard);
-        }
 
         return newCard;
     }

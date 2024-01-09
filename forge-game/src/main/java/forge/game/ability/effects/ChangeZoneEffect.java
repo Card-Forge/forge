@@ -521,11 +521,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         }
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-        moveParams.put(AbilityKey.CardZoneTable, triggerList);
-
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -551,6 +546,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             Card movedCard = null;
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            moveParams.put(AbilityKey.CardZoneTable, triggerList);
 
             if (destination.equals(ZoneType.Library)) {
                 // If a card is moved to library from the stack, remove its spells from the stack
@@ -563,7 +562,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
-            } else if (destination.equals(ZoneType.Battlefield)) {;
+            } else if (destination.equals(ZoneType.Battlefield)) {
                 moveParams.put(AbilityKey.SimultaneousETB, tgtCards);
                 if (sa.isReplacementAbility()) {
                     ReplacementEffect re = sa.getReplacementEffect();

@@ -374,15 +374,16 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
+                        final CardZoneTable table = new CardZoneTable();
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
                         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+                        moveParams.put(AbilityKey.CardZoneTable, table);
 
-                        final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, false, table, moveParams) != null) {
+                            if (playerTurn.discard(c, null, false, moveParams) != null) {
                                 discarded.add(c);
                             }
                         }
@@ -536,9 +537,9 @@ public class PhaseHandler implements java.io.Serializable {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
             moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+            moveParams.put(AbilityKey.CardZoneTable, table);
             final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
-            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa,
-                    table, moveParams);
+            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa, moveParams);
             game.getAction().reveal(milled, playerTurn, false,
                     Localizer.getInstance().getMessage("lblMilledCards", playerTurn), false);
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
