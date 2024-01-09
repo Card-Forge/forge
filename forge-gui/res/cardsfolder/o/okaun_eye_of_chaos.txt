@@ -6,7 +6,5 @@ K:Partner:Zndrsplt, Eye of Wisdom:Zndrsplt
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ At the beginning of combat on your turn, flip a coin until you lose a flip.
 SVar:TrigFlip:DB$ FlipACoin | FlipUntilYouLose$ True
 T:Mode$ FlippedCoin | ValidResult$ Win | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player wins a coin flip, double NICKNAME's power and toughness until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +Y | Double$ True
-SVar:X:Count$CardPower
-SVar:Y:Count$CardToughness
+SVar:TrigPump:DB$ Pump | NumAtt$ Double | NumDef$ Double
 Oracle:Partner with Zndrsplt, Eye of Wisdom (When this creature enters the battlefield, target player may put Zndrsplt into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, flip a coin until you lose a flip.\nWhenever a player wins a coin flip, double Okaun's power and toughness until end of turn.

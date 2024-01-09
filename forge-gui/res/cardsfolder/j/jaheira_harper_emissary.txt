@@ -60,8 +60,7 @@ T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescr
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBBoon
 SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
 SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, it perpetually gets +1/+0 and gains haste.
-SVar:TrigEffect:DB$ Effect | Name$ Jaheira, Stirring Harper's Boon's Perpetual Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualAbility | Duration$ Permanent
-SVar:PerpetualAbility:Mode$ Continuous | AddPower$ 1 | AddKeyword$ Haste | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+0 and gains haste.
+SVar:TrigEffect:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | NumAtt$ 1 | KW$ Haste | Duration$ Perpetual
 Oracle:Hexproof from artifacts and enchantments\nWhen this creature specializes, destroy up to one target artifact or enchantment. You get a boon with "When you cast your next creature spell, it perpetually gets +1/+0 and gains haste."
 
 SPECIALIZE:GREEN

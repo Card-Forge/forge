@@ -4404,8 +4404,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
                 p.get("Timestamp"), (long) 0);
         } else if (category.equals("Keywords")) {
-            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), 
-                (boolean) p.getOrDefault("RemoveAll", false), (long) p.get("Timestamp"), (long) 0);        
+            boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll, 
+                (long) p.get("Timestamp"), (long) 0);
         } else if (category.equals("Types")) {
             addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
                 false, (Set<RemoveType>) p.get("RemoveXTypes"), 
