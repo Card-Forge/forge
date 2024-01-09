@@ -17,8 +17,6 @@ SVar:DBToken:DB$ Token | TokenOwner$ Remembered | TokenScript$ gw_1_1_citizen
 SVar:DBSecrets:DB$ RepeatEach | RepeatPlayers$ Player.NotedForSecrets | RepeatSubAbility$ DBSecretsPump | SubAbility$ DBCleanup | ClearRememberedBeforeLoop$ True
 SVar:DBSecretsPump:DB$ Pump | RememberObjects$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Remembered
-SVar:DBCleanup:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Money | SubAbility$ DBCleanup2
-SVar:DBCleanup2:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Friends | SubAbility$ DBCleanup3
-SVar:DBCleanup3:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Secrets
+SVar:DBCleanup:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Money,Friends,Secrets
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Citizen|Treasure
 Oracle:At the beginning of your upkeep, each opponent chooses money, friends, or secrets. For each player who chose money, you and that player each create a Treasure token. For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. For each player who chose secrets, you and that player each draw a card.
