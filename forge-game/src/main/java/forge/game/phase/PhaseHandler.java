@@ -810,6 +810,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         List<Card> blocked = Lists.newArrayList();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         for (final Card a : combat.getAttackers()) {
             if (combat.isBlocked(a)) {
@@ -835,8 +836,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(CardUtil.getLKICopy(a));
-                a.addBlockedByThisTurn(CardUtil.getLKICopy(b));
+                b.addBlockedThisTurn(CardUtil.getLKICopy(a, lkiCache));
+                a.addBlockedByThisTurn(CardUtil.getLKICopy(b, lkiCache));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
