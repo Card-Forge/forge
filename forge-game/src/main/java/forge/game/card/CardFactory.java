@@ -97,6 +97,7 @@ public class CardFactory {
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
+        out.setLeavesPlayCommands(in.getLeavesPlayCommands());
 
         out.setSpecialized(in.isSpecialized());
         out.addRemembered(in.getRemembered());
