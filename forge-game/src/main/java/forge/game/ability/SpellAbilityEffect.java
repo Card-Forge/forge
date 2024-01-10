@@ -761,13 +761,13 @@ public abstract class SpellAbilityEffect {
         };
     }
 
-    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
+    protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
         Set<Player> discarders = discardedMap.keySet();
         for (Player p : discarders) {
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, effect, table, params) != null) {
+                if (p.discard(card, sa, effect, params) != null) {
                     discardedByPlayer.add(card);
 
                     if (sa.hasParam("RememberDiscarded")) {
@@ -914,5 +914,12 @@ public abstract class SpellAbilityEffect {
         }
         movedCard.setExiledWith(exilingSource);
         movedCard.setExiledBy(cause.getActivatingPlayer());
+    }
+
+    public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
+        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
+        }
+        return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
     }
 }

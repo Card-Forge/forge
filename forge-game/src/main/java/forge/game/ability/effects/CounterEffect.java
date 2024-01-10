@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
@@ -53,9 +52,10 @@ public class CounterEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
-
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
+        params.put(AbilityKey.InternalTriggerTable, table);
+
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered
@@ -91,13 +91,13 @@ public class CounterEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (!removeFromStack(tgtSA, sa, si, table)) {
+            if (!removeFromStack(tgtSA, sa, si, params)) {
                 continue;
             }
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                game.getAction().destroy(tgtSACard, sa, true, table, params);
+                game.getAction().destroy(tgtSACard, sa, true, params);
             }
 
             if (sa.hasParam("RememberCountered")) {
@@ -193,7 +193,6 @@ public class CounterEffect extends SpellAbilityEffect {
         // Dry run Destroy on each validAffected to see if it can be destroyed at this moment
         boolean willDestroyCondition = false;
         final boolean noRegen = tgtSA.hasParam("NoRegen");
-        CardZoneTable testTable = new CardZoneTable();
         Map<AbilityKey, Object> testParams = AbilityKey.newMap();
         testParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
@@ -207,7 +206,7 @@ public class CounterEffect extends SpellAbilityEffect {
             Card toBeDestroyed = CardFactory.copyCard(aff, true);
 
             game.getTriggerHandler().setSuppressAllTriggers(true);
-            boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testTable, testParams);
+            boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testParams);
             game.getTriggerHandler().setSuppressAllTriggers(false);
 
             if (destroyed) {
@@ -236,11 +235,10 @@ public class CounterEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
+    private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, Map<AbilityKey, Object> params) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         Card movedCard = null;
         final Card c = tgtSA.getHostCard();
-        final Zone originZone = c.getZone();
 
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
@@ -254,7 +252,6 @@ public class CounterEffect extends SpellAbilityEffect {
         // if the target card on stack was a spell with Bestow, then unbestow it
         c.unanimateBestow();
 
-        Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);
         params.put(AbilityKey.StackSi, si);
 
@@ -305,9 +302,6 @@ public class CounterEffect extends SpellAbilityEffect {
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
         }
 
-        if (originZone != null && movedCard != null) {
-            triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-        }
         return true;
     }
 

@@ -17,7 +17,6 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -63,25 +62,24 @@ public class ExploreEffect extends SpellAbilityEffect {
         for (final Card c : tgts) {
             final Player pl = c.getController();
             for (int i = 0; i < amount; i++) {
-                GameEntityCounterTable table = new GameEntityCounterTable();
-                final CardZoneTable triggerList = new CardZoneTable();
-
                 if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(c))
                         != ReplacementResult.NotReplaced) {
                     continue;
                 }
 
+                GameEntityCounterTable table = new GameEntityCounterTable();
+                final CardZoneTable triggerList = new CardZoneTable();
+                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+
                 // revealed land card
                 boolean revealedLand = false;
                 CardCollection top = pl.getTopXCardsFromLibrary(1);
                 if (!top.isEmpty()) {
-                    Card movedCard = null;
                     game.getAction().reveal(top, pl, false,
                             Localizer.getInstance().getMessage("lblRevealedForExplore") + " - ");
                     final Card r = top.getFirst();
-                    final Zone originZone = game.getZoneOf(r);
                     if (r.isLand()) {
-                        movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
+                        game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
                         revealedLand = true;
                     } else {
                         Map<String, Object> params = Maps.newHashMap();
@@ -89,11 +87,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                         if (pl.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard",
                                         CardTranslation.getTranslatedName(r.getName())), r, params))
-                            movedCard = game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
-                    }
-
-                    if (originZone != null && movedCard != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+                            game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
                     }
                 }
                 if (!revealedLand) {

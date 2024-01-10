@@ -31,9 +31,9 @@ public class ConniveEffect extends SpellAbilityEffect {
         if (tgt.size() <= 0) {
             return "";
         } else {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(Lang.joinHomogenous(tgt)).append(tgt.size() > 1 ? " connive." : " connives.");
-        return sb.toString();
+            final StringBuilder sb = new StringBuilder();
+            sb.append(Lang.joinHomogenous(tgt)).append(tgt.size() > 1 ? " connive." : " connives.");
+            return sb.toString();
         }
     }
 
@@ -73,6 +73,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
                 moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
@@ -100,7 +101,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
                 }
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));
-                discard(sa, triggerList, true, discardedMap, moveParams);
+                discard(sa, true, discardedMap, moveParams);
                 table.replaceCounterEffect(game, sa, true);
                 triggerList.triggerChangesZoneAll(game, sa);
             }

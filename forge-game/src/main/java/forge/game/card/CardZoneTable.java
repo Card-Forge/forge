@@ -5,12 +5,15 @@ package forge.game.card;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -32,12 +35,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public CardZoneTable() {
-        this(CardCollection.EMPTY, CardCollection.EMPTY);
+        this(null, null);
     }
 
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        this.lastStateBattlefield = lastStateBattlefield;
-        this.lastStateGraveyard = lastStateGraveyard;
+        this.lastStateBattlefield = ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY);
+        this.lastStateGraveyard = ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY);
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -81,6 +84,10 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
+        if (cause != null && cause.isReplacementAbility() && cause.getReplacementEffect().getMode() == ReplacementType.Moved) {
+            // will be handled by original "cause" instead
+            return;
+        }
         if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
