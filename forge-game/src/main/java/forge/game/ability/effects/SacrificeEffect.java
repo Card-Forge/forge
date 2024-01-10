@@ -103,7 +103,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
         CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {

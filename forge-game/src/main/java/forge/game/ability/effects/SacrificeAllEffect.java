@@ -86,7 +86,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
         CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);

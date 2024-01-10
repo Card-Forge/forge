@@ -54,7 +54,7 @@ public class CounterEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();

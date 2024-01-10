@@ -52,7 +52,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         params.put(AbilityKey.LastStateGraveyard, game.getLastStateBattlefield());
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);

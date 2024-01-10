@@ -69,7 +69,7 @@ public class ExploreEffect extends SpellAbilityEffect {
 
                 GameEntityCounterTable table = new GameEntityCounterTable();
                 final CardZoneTable triggerList = new CardZoneTable();
-                moveParams.put(AbilityKey.CardZoneTable, triggerList);
+                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
 
                 // revealed land card
                 boolean revealedLand = false;

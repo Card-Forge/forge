@@ -212,7 +212,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    moveParams.put(AbilityKey.CardZoneTable, tableSeq);
+                    moveParams.put(AbilityKey.InternalTriggerTable, tableSeq);
 
                     if (foundDest.equals(ZoneType.Battlefield)) {
                         moveParams.put(AbilityKey.SimultaneousETB, new CardCollection(c));
@@ -285,7 +285,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.CardZoneTable, table);
+                moveParams.put(AbilityKey.InternalTriggerTable, table);
 
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {

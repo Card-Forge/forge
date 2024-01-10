@@ -279,7 +279,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         discard(sa, true, discardedMap, params);
 

@@ -727,8 +727,8 @@ public class GameAction {
     }
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
-        if (params != null && params.containsKey(AbilityKey.CardZoneTable)) {
-            ((CardZoneTable) params.get(AbilityKey.CardZoneTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);    
+        if (params != null && params.containsKey(AbilityKey.InternalTriggerTable)) {
+            ((CardZoneTable) params.get(AbilityKey.InternalTriggerTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);    
         }
     }
 
@@ -1260,7 +1260,7 @@ public class GameAction {
             boolean checkAgain = false;
 
             CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-            mapParams.put(AbilityKey.CardZoneTable, table);
+            mapParams.put(AbilityKey.InternalTriggerTable, table);
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {

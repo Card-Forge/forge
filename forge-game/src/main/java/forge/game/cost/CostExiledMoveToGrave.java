@@ -87,7 +87,7 @@ public class CostExiledMoveToGrave extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.CardZoneTable, table);
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
         return targetCard.getGame().getAction().moveToGraveyard(targetCard, null, moveParams);
     }
 

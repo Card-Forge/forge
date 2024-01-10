@@ -41,7 +41,7 @@ public class MillEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        moveParams.put(AbilityKey.CardZoneTable, table);
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {

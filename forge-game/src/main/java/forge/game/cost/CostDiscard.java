@@ -197,7 +197,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.CardZoneTable, table);
+        runParams.put(AbilityKey.InternalTriggerTable, table);
         if (ability.isCycling() && targetCard.equals(ability.getHostCard())) {
             // discard itself for cycling cost
             runParams.put(AbilityKey.Cycling, true);

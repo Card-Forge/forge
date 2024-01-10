@@ -148,7 +148,7 @@ public class CostSacrifice extends CostPartWithList {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-        moveParams.put(AbilityKey.CardZoneTable, table);
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
         return game.getAction().sacrifice(targetCard, ability, effect, moveParams);
     }
 

@@ -917,8 +917,8 @@ public abstract class SpellAbilityEffect {
     }
 
     public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.CardZoneTable) != null) {
-            return (CardZoneTable) sa.getReplacingObject(AbilityKey.CardZoneTable);    
+        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
         }
         return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
     }

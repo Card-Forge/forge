@@ -372,7 +372,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.CardZoneTable, table);
+                    moveParams.put(AbilityKey.InternalTriggerTable, table);
 
                     for (Card c : movedCards) {
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {

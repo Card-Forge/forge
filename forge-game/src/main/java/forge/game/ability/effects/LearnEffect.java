@@ -24,7 +24,7 @@ public class LearnEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        moveParams.put(AbilityKey.CardZoneTable, table);
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
         for (Player p : getTargetPlayers(sa)) {
             p.learnLesson(sa, moveParams);
         }

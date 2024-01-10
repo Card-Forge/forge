@@ -62,7 +62,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
         CardZoneTable table = getChangeZoneTable(sa, game.getLastStateBattlefield(), CardCollection.EMPTY);
-        params.put(AbilityKey.CardZoneTable, table);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
