@@ -1999,35 +1999,35 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardPower")) {
+        if (sq[0].equals("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
-        if (sq[0].contains("CardBasePower")) {
+        if (sq[0].equals("CardBasePower")) {
             return doXMath(c.getCurrentPower(), expr, c, ctb);
         }
-        if (sq[0].contains("CardToughness")) {
+        if (sq[0].equals("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
-        if (sq[0].contains("CardSumPT")) {
+        if (sq[0].equals("CardSumPT")) {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumTypes")) {
+        if (sq[0].equals("CardNumTypes")) {
             return doXMath(getNumberOfTypes(c), expr, c, ctb);
         }
-        if (sq[0].contains("CardNumNotedTypes")) {
+        if (sq[0].equals("CardNumNotedTypes")) {
             return doXMath(c.getNumNotedTypes(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumColors")) {
+        if (sq[0].equals("CardNumColors")) {
             return doXMath(c.getColor().countColors(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumAttacksThisTurn")) {
+        if (sq[0].equals("CardNumAttacksThisTurn")) {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
         }
 
-        if (sq[0].contains("Intensity")) {
+        if (sq[0].equals("Intensity")) {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
