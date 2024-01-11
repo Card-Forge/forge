@@ -47,11 +47,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1z0OgzAMhmFOVP4ExyhT+Tt0maBNT9NvYEHtAIJATd9H8pJIFk4cSwTBpyH+srhg35oyWbdvzTDW04TTdXeZ7lt3V592Bnq1z3Tmike2Ls9V91YYuLtbrjelqHI/+etIva1oIz/5f81TdTrF60/qrfWmG0Vr4G0fbe4MdKn/b9nDXjPwLOcFAAAAAMBR+LcGsDXmCgAAAAAAwPm8ARejHAc=
+   eJzt10sOgjAUhWFWJKiBZehIBbZLdKgj0boaz8BJgwMJtnjr/yV30iYNp6+ULBvql28aR/Rbs19N67emf+Vpcr/dLfx+687apxcDe/Vaas5Vt3LaOBut29bA2u0qnSnVoQozfl1ob6vaIsz4v+aunE71+JO8tc50o2oNnO25fXoHunX4b4kh1h2YynwBAAAAADAX/q0BfBv3CgAASF2n984p9+uY8BuIvORNCXnJmxLykje2Jw29VZs=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="371.279" y="644.63" width="85.7826" height="16">
+  <object id="38" template="../../obj/entry_up.tx" x="375.987" y="798.657" width="85.7826" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
@@ -146,10 +146,9 @@
    </properties>
   </object>
   <object id="102" template="../../obj/collision.tx" x="773.083" y="598.667" width="89.1667" height="88"/>
-  <object id="103" template="../../obj/collision.tx" x="56.4168" y="454.667" width="317.833" height="291.333"/>
-  <object id="104" template="../../obj/collision.tx" x="459.083" y="439" width="317.833" height="291.333"/>
+  <object id="103" template="../../obj/collision.tx" x="56.4168" y="454.667" width="317.833" height="345.814"/>
+  <object id="104" template="../../obj/collision.tx" x="459.083" y="439" width="317.833" height="361.284"/>
   <object id="105" template="../../obj/collision.tx" x="299.75" y="86" width="409.833" height="16"/>
-  <object id="106" template="../../obj/collision.tx" x="374.75" y="646" width="89.1667" height="88"/>
   <object id="107" template="../../obj/collision.tx" x="345.75" y="182.333" width="235.166" height="192.666"/>
   <object id="108" template="../../obj/collision.tx" x="27.7503" y="167" width="235.166" height="207.333"/>
   <object id="109" template="../../obj/collision.tx" x="663.084" y="185" width="265.833" height="192.666"/>
