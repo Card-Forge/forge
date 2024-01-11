@@ -5,7 +5,6 @@
  </editorsettings>
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="preventEscape" type="bool" value="true"/>
   <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
