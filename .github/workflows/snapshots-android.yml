@@ -43,12 +43,11 @@ jobs:
           export MAVEN_HOME=$PWD/apache-maven-3.6.3
           mvn --version
           
-      - name: Install android SDK
-        uses: maxim-lobanov/setup-android-tools@v1
-        with:
-          packages: |
-            platforms;android-26
-            build-tools;30.0.3
+      - name: Set Up Android tools
+        run: |
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-26"
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;30.0.3"
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |
