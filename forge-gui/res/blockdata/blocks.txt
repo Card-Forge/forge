@@ -129,3 +129,4 @@ Wilds of Eldraine, 3/6/WOE, WOE
 Alchemy: Eldraine,3/6/WOE, YWOE
 The Lost Caverns of Ixalan, 3/6/LCI, LCI
 Alchemy: Ixalan,3/6/LCI, YLCI
+Ravnica Remastered,3/6/RVR, RVR

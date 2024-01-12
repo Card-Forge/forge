@@ -3,6 +3,7 @@ Code=RVR
 Date=2024-01-12
 Name=Ravnica Remastered
 Type=Reprint
+Booster=10 Common:!fromSheet("RVR Mana Fixing"):fromsheet("RVR cards"), 3 Uncommon:!fromSheet("RVR Mana Fixing"):fromSheet("RVR cards"), 1 RareMythic:fromSheet("RVR cards"), 1 fromSheet("RVR Mana Fixing")
 ScryfallCode=RVR
 
 [cards]
@@ -477,6 +478,39 @@ ScryfallCode=RVR
 465 M Maze's End @Cliff Childs
 466 R Thespian's Stage @John Avon
 467 R Niv-Mizzet, the Firemind @Todd Lockwood
+
+[Mana Fixing]
+7 Azorius Guildgate|RVR
+7 Boros Guildgate|RVR
+7 Dimir Guildgate|RVR
+7 Golgari Guildgate|RVR
+7 Gruul Guildgate|RVR
+7 Izzet Guildgate|RVR
+7 Orzhov Guildgate|RVR
+7 Rakdos Guildgate|RVR
+7 Selesnya Guildgate|RVR
+7 Simic Guildgate|RVR
+4 Azorius Signet|RVR
+4 Boros Signet|RVR
+4 Dimir Signet|RVR
+4 Golgari Signet|RVR
+4 Gruul Signet|RVR
+4 Izzet Signet|RVR
+4 Orzhov Signet|RVR
+4 Rakdos Signet|RVR
+4 Selesnya Signet|RVR
+4 Simic Signet|RVR
+1 Blood Crypt|RVR
+1 Breeding Pool|RVR
+1 Godless Shrine|RVR
+1 Hallowed Fountain|RVR
+1 Overgrown Tomb|RVR
+1 Sacred Foundry|RVR
+1 Steam Vents|RVR
+1 Stomping Ground|RVR
+1 Temple Garden|RVR
+1 Watery Grave|RVR
+1 Chromatic Lantern|RVR
 
 [tokens]
 b_2_2_zombie
