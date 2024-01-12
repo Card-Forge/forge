@@ -1,7 +1,6 @@
 Name:Jaya Ballard, Task Mage
 ManaCost:1 R R
 Types:Legendary Creature Human Spellshaper
-Nickname:Jaya Ballard
 PT:2/2
 A:AB$ Destroy | Cost$ R T Discard<1/Card> | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
 A:AB$ DealDamage | Cost$ 1 R T Discard<1/Card> | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | SubAbility$ DBNoRegen | SpellDescription$ CARDNAME deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.
