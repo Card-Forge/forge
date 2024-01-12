@@ -11917,7 +11917,7 @@
 		"decks/standard/geonid.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
