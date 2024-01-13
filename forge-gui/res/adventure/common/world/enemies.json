@@ -15330,7 +15330,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.45,
+	"scale": 0.75,
 	"life": 20,
 	"rewards": [
 		{
