@@ -12,4 +12,5 @@ SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard|Counters
 Oracle:Reach, trample\nDomain — {7}{G}: Return Llanowar Greenwidow from your graveyard to the battlefield tapped. It gains "If this permanent would leave the battlefield, exile it instead." This ability costs {1} less to activate for each basic land type among lands you control.

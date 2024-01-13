@@ -7,6 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSurveil:DB$ Surveil | Amount$ 2
 A:AB$ GainLife | Cost$ 1 Sac<1/Land> | LifeAmount$ 2
 SVar:X:Count$TypeInYourYard.Land
-DeckHas:Ability$LifeGain|Graveyard
+DeckHas:Ability$LifeGain|Graveyard|Sacrifice
 DeckHints:Ability$Graveyard
 Oracle:Uurg, Spawn of Turg's power is equal to the number of land cards in your graveyard.\nAt the beginning of your upkeep, surveil 2.\n{1}, Sacrifice a land: You gain 2 life.
