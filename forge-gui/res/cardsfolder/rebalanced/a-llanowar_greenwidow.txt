@@ -1,0 +1,10 @@
+Name:A-Llanowar Greenwidow
+ManaCost:2 G
+Types:Creature Spider
+PT:4/3
+K:Reach
+K:Trample
+A:AB$ ChangeZone | Cost$ 5 G | ReduceCost$ X | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | WithCountersType$ FINALITY | WithCountersAmount$ 1 | PrecostDesc$ Domain — | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped with a finality counter on it. This ability costs {1} less to activate for each basic land type among lands you control.
+SVar:X:Count$Domain
+DeckHas:Ability$Graveyard|Counters
+Oracle:Reach, trample\nDomain — {5}{G}: Return Llanowar Greenwidow from your graveyard to the battlefield tapped with a finality counter on it. This ability costs {1} less to activate for each basic land type among lands you control.

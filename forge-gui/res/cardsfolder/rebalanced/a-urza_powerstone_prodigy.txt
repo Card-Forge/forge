@@ -1,0 +1,11 @@
+Name:A-Urza, Powerstone Prodigy
+ManaCost:1 U
+Types:Legendary Creature Human Artificer
+PT:1/3
+A:AB$ Draw | Cost$ 1 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card.Artifact | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigPowerstone | TriggerDescription$ Whenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn.
+SVar:TrigPowerstone:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHas:Ability$Discard|Token & Type$Artifact
+DeckHints:Type$Artifact
+Oracle:{1}, {T}: Draw a card, then discard a card.\nWhenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn.

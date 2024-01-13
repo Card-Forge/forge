@@ -1,0 +1,8 @@
+Name:A-Splitting the Powerstone
+ManaCost:2 U
+Types:Instant
+A:SP$ Token | Cost$ 2 U Sac<1/Artifact> | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ Create two tapped Powerstone tokens. Draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice|Token & Type$Artifact
+Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nCreate two tapped Powerstone tokens. Draw a card.

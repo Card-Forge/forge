@@ -202,6 +202,9 @@ ScryfallCode=MUL
 194 R Yorion, Sky Nomad @Justine Mara Andersen
 195 R Zirda, the Dawnwaker @Justine Mara Andersen
 
+[rebalanced]
+A55 U A-Radha, Coalition Warlord @Justin Hernandez & Alexis Hernandez
+
 [draft booster]
 2 Anafenza, Kin-Tree Spirit|MUL
 7 Daxos, Blessed by the Sun|MUL
@@ -268,7 +271,6 @@ ScryfallCode=MUL
 1 Yarok, the Desecrated|MUL
 2 Yorion, Sky Nomad|MUL
 2 Zirda, the Dawnwaker|MUL
-
 
 [tokens]
 r_3_1_elemental_trample_haste
