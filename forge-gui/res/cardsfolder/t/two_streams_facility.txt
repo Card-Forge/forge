@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Plane Apalapucia
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever you planeswalk to CARDNAME and at the beginning of the first upkeep of the game, each player chooses green anchor or red waterfall.
 T:Mode$ Phase | FirstUpkeepThisGame$ True | Execute$ TrigChoose | TriggerZones$ Command | Secondary$ True | TriggerDescription$ Whenever you planeswalk to CARDNAME and at the beginning of the first upkeep of the game, each player chooses green anchor or red waterfall.
-SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | ClearRememberedBeforeLoop$ True
-SVar:DBChoice:DB$ GenericChoice | Defined$ Remembered | Choices$ GreenAnchor,RedWaterfall | ShowChoice$ True
+SVar:TrigChoose:DB$ GenericChoice | Defined$ Player | TempRemember$ Chooser | Choices$ GreenAnchor,RedWaterfall | ShowChoice$ True
 SVar:GreenAnchor:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ GreenAnchor | SpellDescription$ Green Anchor (You may play an additional land during each of your turns)
 SVar:RedWaterfall:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ RedWaterfall | SpellDescription$ Red Waterfall (Creatures you control get +2/+0 and have haste)
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Player.NotedForGreenAnchor | AdjustLandPlays$ 1 | Description$ Each player who last chose green anchor may play an additional land during each of their turns.

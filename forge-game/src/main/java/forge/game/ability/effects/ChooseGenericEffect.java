@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.ability.AbilityUtils;
@@ -96,7 +97,16 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     }
                     p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue,
                             sa.hasParam("ShowChoice"), random));
-                    AbilityUtils.resolve(chosenSA);
+                    if (sa.hasParam("TempRemember")) {
+                        List<Object> oldRem = Lists.newArrayList(Iterables.filter(host.getRemembered(), Player.class));
+                        host.removeRemembered(oldRem);
+                        host.addRemembered(p); // currently we only ever need the Chooser, may need more support later
+                        AbilityUtils.resolve(chosenSA);
+                        host.removeRemembered(p);
+                        host.addRemembered(oldRem);
+                    } else {
+                        AbilityUtils.resolve(chosenSA);
+                    }
                 }
             } else {
                 // no choices are valid, e.g. maybe all Unless costs are unpayable
