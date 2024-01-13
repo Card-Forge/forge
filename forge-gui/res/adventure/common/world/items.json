@@ -1123,7 +1123,7 @@
 	"iconName": "WhiteStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Black Staff",
@@ -1138,7 +1138,7 @@
 	"iconName": "BlackStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Blue Staff",
@@ -1152,7 +1152,7 @@
     "iconName": "BlueStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Red Staff",
@@ -1166,7 +1166,7 @@
 	"iconName": "RedStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Green Staff",
@@ -1181,7 +1181,7 @@
 	"iconName": "GreenStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
     "name": "Slimefoot's Slimy Staff",
@@ -1316,8 +1316,7 @@
     "iconName": "UnderworldCookbook",
     "effect": {
       "startBattleWithCard": [
-        "The Underworld Cookbook",
-	    "c_a_food_sac"
+        "The Underworld Cookbook"
       ]
 }
 },

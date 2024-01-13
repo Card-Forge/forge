@@ -1516,7 +1516,7 @@
 },
 {
 	"name": "ElfTown",
-	"displayName": "Elven Town",
+	"displayName": "Secluded Elven Encampment",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1532,7 +1532,7 @@
 },
 {
 	"name": "EvilGrove",
-	"displayName": "Dark Grove",
+	"displayName": "Undead Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1548,7 +1548,7 @@
 },
 {
 	"name": "EvilGrove1",
-	"displayName": "Dark Grove",
+	"displayName": "Malicious Artificer's Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1564,7 +1564,7 @@
 },
 {
 	"name": "EvilGrove2",
-	"displayName": "Dark Grove",
+	"displayName": "Grove of the Dark Titan",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1596,7 +1596,7 @@
 },
 {
 	"name": "EvilGrove4",
-	"displayName": "Dark Grove",
+	"displayName": "Neverglades National Park",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1612,7 +1612,7 @@
 },
 {
 	"name": "EvilGrove5",
-	"displayName": "Dark Grove",
+	"displayName": "Black Dragon Mountain",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1628,7 +1628,7 @@
 },
 {
 	"name": "EvilGrove6",
-	"displayName": "Dark Grove",
+	"displayName": "Shade's Lair",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -1779,7 +1779,8 @@
 	"radiusFactor": 0.8
 },
 {
-	"name": "Fort",  
+	"name": "Fort",
+    "displayName": "The Frozen Ruins",
 	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
@@ -1853,7 +1854,7 @@
 },
 {
 	"name": "Fort5",
-	"displayName": "Fort",
+	"displayName": "Mind Slaver's Encampment",
 	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2094,7 +2095,7 @@
 },
 {
 	"name": "Grove",
-	"displayName": "Forest Grove",
+	"displayName": "The Honey Cove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2110,7 +2111,7 @@
 },
 {
 	"name": "Grove1",
-	"displayName": "Forest Grove",
+	"displayName": "Wolf's Nest",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2126,7 +2127,7 @@
 },
 {
 	"name": "Grove2",
-	"displayName": "Forest Grove",
+	"displayName": "Dinosaur Crater",
 	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2142,7 +2143,7 @@
 },
 {
 	"name": "Grove3",
-	"displayName": "Forest Grove",
+	"displayName": "Simian's City",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2158,7 +2159,7 @@
 },
 {
 	"name": "Grove4",
-	"displayName": "Forest Grove",
+	"displayName": "Grove of the Forest Titan",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2174,7 +2175,7 @@
 },
 {
 	"name": "Grove5",
-	"displayName": "Forest Grove",
+	"displayName": "Overgrown Ruins",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2190,7 +2191,7 @@
 },
 {
 	"name": "Grove6",
-	"displayName": "Forest Grove",
+	"displayName": "Long Forgotten Temple",
 	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2206,7 +2207,7 @@
 },
 {
 	"name": "Grove7",
-	"displayName": "Forest Grove",
+	"displayName": "The Lake of the Hydra",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2222,7 +2223,7 @@
 },
 {
 	"name": "Grove8",
-	"displayName": "Forest Grove",
+	"displayName": "Corrupted Forest",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2238,7 +2239,7 @@
 },
 {
 	"name": "GroveBamboo",
-	"displayName": "Forest Grove",
+	"displayName": "Bamboo Grove",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2254,7 +2255,7 @@
 },
 {
 	"name": "GroveGreenDragon",
-	"displayName": "Forest Grove",
+	"displayName": "Grove of the Green Dragon",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
@@ -2270,7 +2271,7 @@
 },
 {
 	"name": "GroveFaerieDragon",
-	"displayName": "Forest Grove",
+	"displayName": "Grove of the Faerie Dragon",
 	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
