@@ -624,21 +624,19 @@ public abstract class SpellAbilityEffect {
             String attacking = sa.getParam(attackingParam);
 
             GameEntity defender = null;
-            FCollection<GameEntity> defs = null;
+            FCollection<GameEntity> defs = new FCollection<>();
             // important to update defenders here, maybe some PW got removed
             combat.initConstraints();
             if ("True".equalsIgnoreCase(attacking)) {
-                defs = (FCollection<GameEntity>) combat.getDefenders();
+                defs.addAll(combat.getDefenders());
             } else {
-                defs = AbilityUtils.getDefinedEntities(sa.hasParam("ForEach") ? c : host, attacking.split(","), sa);
+                defs.addAll(AbilityUtils.getDefinedEntities(sa.hasParam("ForEach") ? c : host, attacking.split("&"), sa));
             }
 
-            if (defs != null) {
-                Map<String, Object> params = Maps.newHashMap();
-                params.put("Attacker", c);
-                defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
-                        Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
-            }
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("Attacker", c);
+            defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
+                    Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
 
             final GameEntity originalDefender = combat.getDefenderByAttacker(c);
             if (defender != null &&
