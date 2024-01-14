@@ -307,7 +307,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
-    private final List<GameCommand> leavePlayCommandList = Lists.newArrayList();
+    private List<GameCommand> leavePlayCommandList = Lists.newArrayList();
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
@@ -3395,6 +3395,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
+    }
+
+    public final List<GameCommand> getLeavesPlayCommands() {
+        return leavePlayCommandList;
+    }
+    public final void setLeavesPlayCommands(List<GameCommand> list) {
+        leavePlayCommandList = list;
     }
 
     public final void runLeavesPlayCommands() {
