@@ -292,8 +292,8 @@ public class AdventureQuestStage implements Serializable {
                     status = ++progress2 >= count2 ? FAILED : status;
                 }
             case Arena:
-                status = event.type == AdventureQuestEventType.EVENTCOMPLETE
-                        && event.clear //if event not conceded
+                status = event.type == AdventureQuestEventType.ARENACOMPLETE
+                        && event.winner //if event won & not conceded
                         && ++progress1 >= count1 ? COMPLETE : status;
                 break;
             case EventWin:
