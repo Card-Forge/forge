@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Rhino Druid
 PT:3/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, each opponent chooses money, friends, or secrets. For each player who chose money, you and that player each create a Treasure token. For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. For each player who chose secrets, you and that player each draw a card.
-SVar:TrigChoose:DB$ GenericChoice | Defined$ Opponent | TempRemember$ Chooser | Choices$ Money,Friends,Secrets | ShowChoice$ True | SubAbility$ DBMoney
+SVar:TrigChoose:DB$ GenericChoice | Defined$ Opponent | TempRemember$ Chooser | Choices$ Money,Friends,Secrets | ShowChoice$ ExceptSelf | SubAbility$ DBMoney
 SVar:Money:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Money | SpellDescription$ Money
 SVar:Friends:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Friends | SpellDescription$ Friends
 SVar:Secrets:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Secrets | SpellDescription$ Secrets
