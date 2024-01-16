@@ -81,4 +81,4 @@ if __name__ == "__main__":
 
 	result = parser.parse_args()
 
-	draftsimRankings(result.setcode, result.name)
+	draftsimRankings(result.setcode, result.altpage)
