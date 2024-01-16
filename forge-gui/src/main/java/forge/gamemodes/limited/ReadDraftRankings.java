@@ -114,6 +114,9 @@ public class ReadDraftRankings {
             // This should be updated
             String safeName = StringUtils.stripAccents(cardName);
 
+            // handle split cards
+            safeName = safeName.replace(" // ", " ");
+
             // If a card has no ranking, don't try to look it up --BBU
             if (draftRankings.get(edition).get(safeName) == null) {
                 // System.out.println("WARNING! " + safeName + " NOT found in " + edition);
