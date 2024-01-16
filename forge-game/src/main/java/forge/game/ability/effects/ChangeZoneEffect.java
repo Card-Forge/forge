@@ -79,12 +79,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             choosers.add(sa.getActivatingPlayer());
         }
 
-        final StringBuilder chooserSB = new StringBuilder();
-        for (int i = 0; i < choosers.size(); i++) {
-            chooserSB.append(choosers.get(i).getName());
-            chooserSB.append((i + 2) == choosers.size() ? " and " : (i + 1) == choosers.size() ? "" : ", ");
-        }
-        final String chooserNames = chooserSB.toString();
+        final boolean oneChooser = choosers.size() == 1;
+        final String chooserNames = Lang.joinHomogenous(choosers);
 
         String fetchPlayer = fetcherNames;
         if (chooserNames.equals(fetcherNames)) {
@@ -139,7 +135,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
         } else if (origin.equals("Library")) {
             final boolean originAlt = sa.hasParam("OriginAlternative");
-            sb.append(chooserNames).append(" search").append(choosers.size() > 1 ? " " : "es ");
+            sb.append(chooserNames).append(" search").append(!oneChooser ? " " : "es ");
             sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ").append("library");
             if (originAlt) {
                 sb.append(sa.getParam("OriginAlternative").contains("Hand") ? ", hand, and/or graveyard for " :
@@ -208,7 +204,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append("into their ").append(destination.toLowerCase()).append(".");
             } else {
                 if (sa.hasParam("Mandatory")) {
-                    sb.append(" puts ");
+                    sb.append(" put").append(!oneChooser ? " " : "s ");
                 } else {
                     sb.append(" may put ");
                 }
@@ -222,7 +218,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(destination.equals("Exile") ? "exiles " : "puts ");
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
-                sb.append(destination.equals("Exile") ? " exiles " : " puts ");
+                String verb = destination.equals("Exile") ? " exiles " : " puts ";
+                if (!oneChooser) verb = verb.replace("s", "");
+                sb.append(verb);
                 if (defined) {
                     sb.append(type);
                 } else if (StringUtils.containsIgnoreCase(type, "Card")) {
@@ -281,11 +279,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             final boolean toField = destination.equals("Battlefield");
             final boolean toHand = destination.equals("Hand");
-            sb.append(chooserNames).append(" returns ").append(mandatory || changeNumDesc ? "" : "up to ");
+            String verb = destination.equals("Exile") ? " exiles " : " returns ";
+            if (!oneChooser) verb = verb.replace("s", "");
+            sb.append(chooserNames).append(verb).append(mandatory || changeNumDesc ? "" : "up to ");
             sb.append(changed);
             // so far, it seems non-targeted only lets you return from your own graveyard
             sb.append(" from their graveyard").append(choosers.size() > 1 ? "s" : "");
-            sb.append(toField ? " to the " : toHand ? " to their " : " into their ").append(destination.toLowerCase());
+            if (!destination.equals("Exile")) {
+                sb.append(toField ? " to the " : toHand ? " to their " : " into their ");
+                sb.append(destination.toLowerCase());
+            }
             if (sa.hasParam("WithCountersType")) {
                 final CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                 if (cType != null) {
