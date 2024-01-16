@@ -47,6 +47,7 @@ def draftsimRankings(edition='KHM', extra=None):
 	cardlist = list(unique_cards.values())
 	cardlist.sort(key=lambda k:k['myrating'], reverse=True)
 	with open("../res/draft/rankings/" + edition.lower() + '.rnk', 'w') as out:
+		out.write('//Rank|Name|Rarity|Set\n')
 		for counter, card in enumerate(cardlist):
 			l = [str(counter+1), card['name'].replace('_', ' '), card['rarity'], edition]
 			out.write('#')
