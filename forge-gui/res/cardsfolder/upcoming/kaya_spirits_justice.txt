@@ -1,0 +1,16 @@
+NameKaya, Spirits' Justice
+ManaCost2 W B
+TypesLegendary Planeswalker Kaya
+Loyalty3
+TMode$ ChangesZoneAll  ValidCards$ Creature.YouCtrl  Origin$ Battlefield,Graveyard  Destination$ Exile  TriggerZones$ Battlefield  RememberChanged$ True  Execute$ TrigCopy  StackDescription$ SpellDescription  SpellDescription$ Whenever one or more creatures you control andor creature cards in your graveyard are put into exile, you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it, except it has flying.
+SVarTrigCopyDB$ Clone  Choices$ Card.TriggeredCards+Creature  ChoiceZone$ Exile  ChoiceTitle$ Choose a creature card among the exiled cards to copy  ValidTgts$ Permanent.token+YouCtrl  TgtPrompt$ Choose target token you control  AddKeywords$ Flying  Duration$ UntilEndOfTurn  Hidden$ True  SubAbility$ DBCleanup
+AAB$ Surveil  Cost$ AddCounter2LOYALTY  Amount$ 2  Planeswalker$ True  SubAbility$ DBExile  SpellDescription$ Surveil 2, then exile a card from a graveyard.
+SVarDBExileDB$ ChangeZone  Origin$ Graveyard  Destination$ Exile  ChangeType$ Card  ChangeNum$ 1  SelectPrompt$ Select a card from a graveyard  Mandatory$ True  Hidden$ True
+AAB$ Token  Cost$ AddCounter1LOYALTY  Planeswalker$ True  TokenScript$ wb_1_1_spirit_flying  SpellDescription$ Create a 11 white and black Spirit creature token with flying.
+AAB$ ChangeZone  Cost$ SubCounter2LOYALTY  Planeswalker$ True  ValidTgts$ Creature.YouCtrl  Origin$ Battlefield  Destination$ Exile  TgtPrompt$ Select target creature you control  SubAbility$ DBForEach  SpellDescription$ Exile target creature you control. For each other player, exile up to one target creature that player controls.
+SVarDBForEachDB$ ChangeZone  Origin$ Battlefield  Destination$ Exile  ValidTgts$ Creature.OppCtrl  TgtPrompt$ Select up to one target creature each other player controls  TargetMin$ 0  TargetMax$ OneEach  TargetsWithDifferentControllers$ True
+SVarDBCleanupDB$ Cleanup  ClearRemembered$ True
+SVarOneEachPlayerCountOpponents$Amount
+DeckHasAbility$CountersToken & Type$Spirit
+DeckHintsAbility$Token
+OracleWhenever one or more creatures you control andor creature cards in your graveyard are put into exile, you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it, except it has flying.n[+2] Surveil 2, then exile a card from a graveyard.n[+1] Create a 11 white and black Spirit creature token with flying.n[-2] Exile target creature you control. For each other player, exile up to one target creature that player controls.
