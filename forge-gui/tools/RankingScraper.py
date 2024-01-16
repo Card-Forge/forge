@@ -37,6 +37,14 @@ def draftsimRankings(edition='KHM', extra=None):
 	print(txt3)
 
 	cardlist = json.loads(txt3)
+
+	# remove duplicates
+	unique_cards = dict()
+	for card in cardlist:
+		if card['name'] not in unique_cards:
+			unique_cards[card['name']] = card
+
+	cardlist = list(unique_cards.values())
 	cardlist.sort(key=lambda k:k['myrating'], reverse=True)
 	with open("../res/draft/rankings/" + edition.lower() + '.rnk', 'w') as out:
 		for counter, card in enumerate(cardlist):
