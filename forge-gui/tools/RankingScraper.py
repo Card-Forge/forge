@@ -34,7 +34,7 @@ def draftsimRankings(edition='KHM', extra=None):
 
 	txt3 = txt + txt2
 	txt3 = txt3.replace(u'\xa9', '')
-	print(txt3)
+	# print(txt3)
 
 	cardlist = json.loads(txt3)
 
