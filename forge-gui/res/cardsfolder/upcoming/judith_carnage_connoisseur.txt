@@ -8,4 +8,4 @@ SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | KW$ Deathtouch & Lifelink | Pump
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_imp_burn_opp | TokenOwner$ You | SpellDescription$ Create a 2/2 red Imp creature token with "When this creature does, it deals 2 damage to each opponent."
 DeckNeeds:Type$Instant|Sorcery
 SVar:BuffedBy:Spell.Instant,Spell.Sorcery
-Oracle:Whenever you cast an instant or sorcery spell, choose one —\n• That spell gains deathtouch and lifelink.\n• Create a 2/2 red Imp creature token with "When this creature does, it deals 2 damage to each opponent."
+Oracle:Whenever you cast an instant or sorcery spell, choose one —\n• That spell gains deathtouch and lifelink.\n• Create a 2/2 red Imp creature token with "When this creature dies, it deals 2 damage to each opponent."
