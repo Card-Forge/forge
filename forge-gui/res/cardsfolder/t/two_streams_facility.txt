@@ -1,0 +1,16 @@
+Name:Two Streams Facility
+ManaCost:no cost
+Types:Plane Apalapucia
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever you planeswalk to CARDNAME and at the beginning of the first upkeep of the game, each player chooses green anchor or red waterfall.
+T:Mode$ Phase | FirstUpkeepThisGame$ True | Execute$ TrigChoose | TriggerZones$ Command | Secondary$ True | TriggerDescription$ Whenever you planeswalk to CARDNAME and at the beginning of the first upkeep of the game, each player chooses green anchor or red waterfall.
+SVar:TrigChoose:DB$ GenericChoice | Defined$ Player | TempRemember$ Chooser | Choices$ GreenAnchor,RedWaterfall | ShowChoice$ ExceptSelf
+SVar:GreenAnchor:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ GreenAnchor | SpellDescription$ Green Anchor (You may play an additional land during each of your turns)
+SVar:RedWaterfall:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ RedWaterfall | SpellDescription$ Red Waterfall (Creatures you control get +2/+0 and have haste)
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Player.NotedForGreenAnchor | AdjustLandPlays$ 1 | Description$ Each player who last chose green anchor may play an additional land during each of their turns.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.ControlledBy Player.NotedForRedWaterfall | AddPower$ 2 | AddKeyword$ Haste | Description$ Creatures controlled by players who last chose red waterfall get +2/+0 and have haste.
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigSwitch | TriggerDescription$ Whenever chaos ensues, each player who last chose green anchor chooses red waterfall, and vice versa.
+SVar:TrigSwitch:DB$ Pump | RememberObjects$ Player.NotedForRedWaterfall | Defined$ Player | ClearNotedCardsFor$ GreenAnchor,RedWaterfall | SubAbility$ GreenToRed
+SVar:GreenToRed:DB$ Pump | Defined$ Player.IsNotRemembered | NoteCards$ Self | NoteCardsFor$ RedWaterfall | SubAbility$ RedToGreen
+SVar:RedToGreen:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ GreenAnchor | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever you planeswalk to Two Streams Facility and at the beginning of the first upkeep of the game, each player chooses green anchor or red waterfall.\nEach player who last chose green anchor may play an additional land during each of their turns.\nCreatures controlled by players who last chose red waterfall get +2/+0 and have haste.\nWhenever chaos ensues, each player who last chose green anchor chooses red waterfall, and vice versa.

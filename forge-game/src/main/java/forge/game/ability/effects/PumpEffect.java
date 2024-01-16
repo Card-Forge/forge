@@ -441,7 +441,9 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("ClearNotedCardsFor")) {
             for (Player p : tgtPlayers) {
-                p.clearNotesForName(sa.getParam("ClearNotedCardsFor"));
+                for (String s : sa.getParam("ClearNotedCardsFor").split(",")) {
+                    p.clearNotesForName(s);
+                }
             }
         }
 
