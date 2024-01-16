@@ -133,7 +133,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
         List<String> gainsKWList = Lists.newArrayList();
         for (String type : gains) {
-            if (isChoice && sa.getParam("Choices").equals("CardType")) {
+            if (CardType.isACardType(type)) {
                 gainsKWList.add("Protection:" + type);
             }  else {
                 gainsKWList.add(TextUtil.concatWithSpace("Protection from", type));

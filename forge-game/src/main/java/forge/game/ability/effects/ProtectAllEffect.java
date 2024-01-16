@@ -125,7 +125,6 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 }
             }
         }
-
-    } // protectAllResolve()
+    }
 
 }
