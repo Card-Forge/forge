@@ -1,0 +1,9 @@
+Name:Meticulous Archive
+ManaCost:no cost
+Types:Land Plains Island
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+DeckHints:Ability$Graveyard
+Oracle:({T}: Add {W} or {U}.)\nMeticulous Archive enters the battlefield tapped.\nWhen Meticulous Archive enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
