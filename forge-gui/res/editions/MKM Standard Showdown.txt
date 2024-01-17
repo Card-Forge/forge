@@ -1,0 +1,13 @@
+[metadata]
+Code=PSS4
+Date=2024-02-10
+Name=MKM Standard Showdown
+Type=Promo
+ScryfallCode=PSS4
+
+[cards]
+1 R Plains @Alayna Danner
+2 R Island @Alayna Danner
+3 R Swamp @Alayna Danner
+4 R Mountain @Alayna Danner
+5 R Forest @Alayna Danner

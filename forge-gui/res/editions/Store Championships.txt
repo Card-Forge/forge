@@ -26,3 +26,6 @@ ScryfallCode=SCH
 18 R Cauldron Familiar @Edgar Sánchez Hidalgo
 19 R Dark Petition @Julia Metzger
 20 R Lier, Disciple of the Drowned @Heonhwa Choe
+21 R Mortify @Andreia Ugrai
+22 R Angel of Despair @Andreia Ugrai
+23 R Dauthi Voidwalker @Andreia Ugrai

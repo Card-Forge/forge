@@ -7,8 +7,13 @@ ScryfallCode=CLU
 
 [cards]
 2 R Senator Peacock @Aurore Folny
+3 R Mastermind Plum @Bryan Sola
 6 R Commander Mustard @Jake Murray
 9 U Lead Pipe @Clint Lockwood
+10 U Knife @Clint Lockwood
 15 U Dining Room @Arthur Yuan
+18 U Library @Arthur Yuan
+36 R Lavinia, Foil to Conspiracy @Chris Rahn
+49 U Undercover Butler @Kim Sokol
 277 R Hallowed Fountain @Leon Tukker
 280 R Steam Vents @Lucas Graciano
