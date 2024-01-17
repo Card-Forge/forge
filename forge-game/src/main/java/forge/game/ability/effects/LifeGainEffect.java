@@ -5,7 +5,13 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.collect.Sets;
 
 public class LifeGainEffect extends SpellAbilityEffect {
 
@@ -44,21 +50,20 @@ public class LifeGainEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         String amount = sa.getParam("LifeAmount");
         boolean variableAmount = amount.equals("AFNotDrawnNum");
-        int lifeAmount = 0;
         if (variableAmount) {
             amount = "X";
-        } else {
-            lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
         }
+        final List<Player> tgts = getTargetPlayersWithDuplicates(false, "Defined", sa);
 
-        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
+        for (final Player p : Sets.newHashSet(tgts)) {
             if (!p.isInGame()) {
                 continue;
             }
             if (variableAmount) {
                 sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
-                lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
             }
+            int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+            lifeAmount *= Collections.frequency(tgts, p);
             p.gainLife(lifeAmount, sa.getHostCard(), sa);
         }
     }

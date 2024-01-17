@@ -738,12 +738,11 @@ public class SpecialCardAi {
     // Grothama, All-Devouring
     public static class GrothamaAllDevouring {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            final Card source = sa.getHostCard();
-            final Card devourer = AbilityUtils.getDefinedCards(source, sa.getParam("ExtraDefined"), sa).getFirst(); // maybe just getOriginalHost()?
+            final Card fighter = sa.getHostCard();
+            final Card devourer = sa.getOriginalHost();
             if (ai.getTeamMates(true).contains(devourer.getController())) {
                 return false; // TODO: Currently, the AI doesn't ever fight its own (or allied) Grothama for card draw. This can be improved.
             }
-            final Card fighter = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).getFirst();
             boolean goodTradeOrNoTrade = devourer.canBeDestroyed() && (devourer.getNetPower() < fighter.getNetToughness() || !fighter.canBeDestroyed()
                     || ComputerUtilCard.evaluateCreature(devourer) > ComputerUtilCard.evaluateCreature(fighter));
             return goodTradeOrNoTrade && fighter.getNetPower() >= devourer.getNetToughness();
