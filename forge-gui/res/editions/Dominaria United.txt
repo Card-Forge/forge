@@ -471,6 +471,7 @@ A170 R A-Llanowar Loamspeaker @Zara Alfonso
 A176 C A-Scout the Wilderness @A. M. Sartor
 A181 C A-Sunbathing Rootwalla @Campbell White
 A207 U A-Nael, Avizoa Aeronaut @Miguel Mercado
+A211 U A-Radha, Coalition Warlord @Randy Vargas
 A217 U A-Rulik Mons, Warren Chief @Tuan Duong Chu
 A220 M A-Soul of Windgrace @Liiga Smilshkalne
 A222 U A-Tatyova, Steward of Tides @Howard Lyon
