@@ -99,7 +99,8 @@ public class CostSacrifice extends CostPartWithList {
                 desc = this.getTypeDescription();
             }
 
-            sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
+            if (desc.startsWith("another")) sb.append(desc);
+            else sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
                     : Lang.nounWithNumeralExceptOne(convertAmount(), desc));
         }
         return sb.toString();
