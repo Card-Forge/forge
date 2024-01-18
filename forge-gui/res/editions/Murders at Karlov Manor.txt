@@ -6,14 +6,17 @@ Type=Expansion
 ScryfallCode=MKM
 
 [cards]
+3 R Assemble the Players @Evyn Fong
 4 M Aurelia's Vindicator @Victor Adame Minguez
 5 C Auspicious Arrival @Lie Setiawan
 9 U Case of the Pilfered Proof @Joshua Cairos
 11 C Defenestrated Phantom @Svetlin Velinov
+12 M Delney, Streetwise Lookout @Darren Tan
 24 C Marketwatch Phantom @Bram Sels
 27 R No Witnesses @Michele Giorgi
 28 U Not on My Watch @Jason A. Engle
 29 C Novice Inspector @Fajareka Setiawan
+35 R Unyielding Gatekeeper @Borja Pindado
 36 R Wojek Investigator @Ben Hill
 40 C Benthic Criminologists @Johan Grenier
 42 U Burden of Proof @Deruchenko Alexander
@@ -22,6 +25,7 @@ ScryfallCode=MKM
 49 C Crimestopper Sprite @Julia Metzger
 52 C Deduce @Quintin Gleim
 60 C Hotshot Investigators @Jodie Muir
+61 M Intrude on the Mind @Magali Villeneuve
 66 C Out Cold @Tuan Duong Chu
 80 R Case of the Stashed Skeleton @Camille Alquier
 84 C Extract a Confession @Peter Polach
@@ -31,12 +35,14 @@ ScryfallCode=MKM
 92 U Long Goodbye @Jarel Threat
 94 M Massacre Girl, Known Killer @Billy Christian
 96 U Nightdrinker Moroii @Brent Hollowell
+108 U Undercity Eliminator @Quintin Gleim
 119 U Convenient Target @Gaboleps
 121 U Crime Novelist @Izzy
 122 C Demand Answers @Justyna Dura
 124 U Expose the Culprit @Ryan Valle
 125 C Felonious Rage @Justine Cruz
 128 C Galvanize @Matt Forsyth
+129 C Gearbane Orangutan @Svetlin Velinov
 134 U Knife @Tony Foti
 135 R Krenko, Baron of Tin Street @Brian Valeza
 140 R Pyrotechnic Performer @Peter Polach
@@ -45,6 +51,7 @@ ScryfallCode=MKM
 150 R Analyze the Pollen @Anna Christenson
 153 R Axebane Ferox @Maxime Minard
 154 C Bite Down on Crime @Mike Bierek
+158 U Culvert Ambusher @Slawomir Maniak
 159 C Fanatical Strength @Durion
 167 U A Killer Among Us @Leesha Hannigan
 168 C Loxodon Eavesdropper @Jesper Ejsing
@@ -59,6 +66,7 @@ ScryfallCode=MKM
 195 U Deadly Complication @Jodie Muir
 197 C Dog Walker @Milivoj Ćeran
 200 M Etrata, Deadly Fugitive @Livia Prima
+203 C Faerie Snoop @Dallas Williams
 204 C Gadget Technician @Caio Monteiro
 205 U Gleaming Geardrake @Filipe Pagliuso
 209 R Izoni, Center of the Web @Justine Cruz
@@ -70,12 +78,17 @@ ScryfallCode=MKM
 218 U Lightning Helix @Eli Minaya
 219 U Meddling Youths @Matt Forsyth
 221 U No More Lies @Liiga Smilshkalne
+223 U Private Eye @Vincent Christiaens
 224 M Rakdos, Patron of Chaos @Joshua Raphael
+231 C Shady Informant @Caio Monteiro
 233 U Sumala Sentry @Nicholas Elias
 234 R Teysa, Opulent Oligarch @Chris Rallis
 236 R Tolsimir, Midnight's Light @Uriah Voth
 238 M Trostani, Three Whispers @Jodie Muir
+239 C Undercover Crocodelf @Nicholas Gregory
+241 M Vannifar, Evolved Enigma @Uriah Voth
 242 R Warleader's Call @Aldo Domínguez
+254 U Magnetic Snuffler @Daniel Ljunggren
 255 C Magnifying Glass @Paolo Puggioni
 256 C Sanitation Automaton @Mike Burns
 258 U Branch of Vitu-Ghazi @Alayna Danner
@@ -106,9 +119,11 @@ ScryfallCode=MKM
 284 L Mountain @Svetlin Velinov
 285 L Forest @Jorge Jacinto
 286 L Forest @Carlos Palma Cruchaga
+287 R Assemble the Players @Monztre
 288 C Auspicious Arrival @Robin Olausson
 291 U Not on My Watch @Greg Opalinski
 293 C Deduce @Ina Wong
+296 M Intrude on the Mind @Francis Tneh
 299 U It Doesn't Add Up @Eliz Roxs
 305 U Convenient Target @Sergio Cosmai
 306 C Demand Answers @Robin Olausson
@@ -119,8 +134,10 @@ ScryfallCode=MKM
 315 R Warleader's Call @Francis Tneh
 317 R Aurelia, the Law Above @Barbara Rosiak
 320 M Rakdos, Patron of Chaos @Alex Dos Diaz
+320 M Rakdos, Patron of Chaos @Alex Dos Diaz
 321 R Teysa, Opulent Oligarch @Barbara Rosiak
 322 M Trostani, Three Whispers @Julie Dillon
+323 M Vannifar, Evolved Enigma @Olena Richards
 324 R Commercial District @Sergey Glushakov
 325 R Elegant Parlor @Sergey Glushakov
 326 R Hedge Maze @Sergey Glushakov
@@ -134,10 +151,12 @@ ScryfallCode=MKM
 334 R Kellan, Inquisitive Prodigy @David Robert Hovey
 335 M Kaya, Spirits' Justice @Fay Dalton
 336 M Aurelia's Vindicator @Roberta Ingranata
+337 M Delney, Streetwise Lookout @Jack Hughes
 340 R Wojek Investigator @Lisa Heidhoff
 343 R Homicide Investigator @David Robert Hovey
 344 M Massacre Girl, Known Killer @Jack Hughes
 350 R Krenko, Baron of Tin Street @Marko Manev
+351 U Culvert Ambusher @Alex Stone
 353 R Sharp-Eyed Rookie @Marko Manev
 354 M Agrus Kos, Spirit of Justice @Cosmin Podar
 355 M Alquist Proft, Master Sleuth @Peter Diamond
@@ -154,6 +173,8 @@ ScryfallCode=MKM
 370 R Teysa, Opulent Oligarch @Jack Hughes
 371 R Tolsimir, Midnight's Light @David Robert Hovey
 372 M Trostani, Three Whispers @Ionomycin
+373 M Vannifar, Evolved Enigma @Jack Hughes
+376 U Magnetic Snuffler @Cosmin Podar
 377 M Aurelia's Vindicator @Roberta Ingranata
 380 M Massacre Girl, Known Killer @Jack Hughes
 383 M Agrus Kos, Spirit of Justice @Cosmin Podar
@@ -162,6 +183,8 @@ ScryfallCode=MKM
 387 M Rakdos, Patron of Chaos @Ivan Shavrin
 388 M Trostani, Three Whispers @Ionomycin
 390 R No Witnesses @Michele Giorgi
+392 R Unyielding Gatekeeper @Borja Pindado
+407 R Pyrotechnic Performer @Peter Polach
 409 R Axebane Ferox @Maxime Minard
 412 R Assassin's Trophy @Dmitry Burmak
 423 U Long Goodbye @Jarel Threat
