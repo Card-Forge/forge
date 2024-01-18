@@ -154,13 +154,20 @@ public class Combat {
         lkiCache.clear();
         combatantsThatDealtFirstStrikeDamage.clear();
 
-        //update view for all attackers and blockers
+        //clear tracking for cards that care about "this combat"
         for (Card c : attackers) {
             c.getDamageHistory().endCombat();
-            c.updateAttackingForView();
         }
         for (Card c : blockers) {
             c.getDamageHistory().endCombat();
+        }
+        playerWhoAttacks.clearAttackedPlayersMyCombat();
+
+        //update view for all attackers and blockers
+        for (Card c : attackers) {
+            c.updateAttackingForView();
+        }
+        for (Card c : blockers) {
             c.updateBlockingForView();
         }
     }
