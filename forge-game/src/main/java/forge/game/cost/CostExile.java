@@ -257,12 +257,11 @@ public class CostExile extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        final Game game = targetCard.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+        moveParams.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
         moveParams.put(AbilityKey.InternalTriggerTable, table);
-        Card newCard = game.getAction().exile(targetCard, null, moveParams);
+        Card newCard = targetCard.getGame().getAction().exile(targetCard, null, moveParams);
         SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;
     }

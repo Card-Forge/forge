@@ -39,8 +39,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        this.lastStateBattlefield = ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY);
-        this.lastStateGraveyard = ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY);
+        setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
+        setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -50,10 +50,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return lastStateGraveyard;
     }
     public void setLastStateBattlefield(CardCollectionView lastState) {
-        this.lastStateBattlefield = lastState;
+        // store it in a new object, it might be from Game which can also refresh itself
+        this.lastStateBattlefield = new CardCollection(lastState);
     }
     public void setLastStateGraveyard(CardCollectionView lastState) {
-        this.lastStateGraveyard = lastState;
+        this.lastStateGraveyard = new CardCollection(lastState);
     }
 
     /**

@@ -82,10 +82,11 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = new CardZoneTable(lastStateBattlefield, CardCollection.EMPTY);
         params.put(AbilityKey.InternalTriggerTable, table);
 
         for (Card sac : list) {

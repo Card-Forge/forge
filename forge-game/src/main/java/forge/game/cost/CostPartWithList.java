@@ -118,8 +118,8 @@ public abstract class CostPartWithList extends CostPart {
 
     // always returns true, made this to inline with return
     protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
-        table.setLastStateBattlefield(payer.getGame().getLastStateBattlefield());
-        table.setLastStateGraveyard(payer.getGame().getLastStateGraveyard());
+        table.setLastStateBattlefield(payer.getGame().copyLastStateBattlefield());
+        table.setLastStateGraveyard(payer.getGame().copyLastStateGraveyard());
 
         handleBeforePayment(payer, ability, targetCards);
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
