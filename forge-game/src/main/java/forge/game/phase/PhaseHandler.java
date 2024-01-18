@@ -17,7 +17,6 @@
  */
 package forge.game.phase;
 
-<<<<<<< HEAD
 import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
@@ -28,23 +27,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.*;
-=======
-import java.util.*;
-
-import com.google.common.collect.*;
-import forge.game.card.*;
-import org.apache.commons.lang3.time.StopWatch;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
-import forge.game.ability.AbilityKey;
-import forge.game.ability.effects.AddTurnEffect;
-import forge.game.ability.effects.SkipPhaseEffect;
->>>>>>> 0a59add7a1 (fixed bug in cards using 'this combat')
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
