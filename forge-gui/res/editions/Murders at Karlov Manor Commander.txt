@@ -14,3 +14,7 @@ ScryfallCode=MKC
 50 M Mirko, Obsessive Theorist @Heonhwa Choe
 51 M Morska, Undersea Sleuth @Ekaterina Burmak
 52 M Nelly Borca, Impulsive Accuser @James Ryman
+314 M Kaust, Eyes of the Glade @Volkan Baǵa
+316 M Mirko, Obsessive Theorist @Heonhwa Choe
+317 M Morska, Undersea Sleuth @Ekaterina Burmak
+318 M Nelly Borca, Impulsive Accuser @James Ryman
