@@ -1,0 +1,23 @@
+Name:Kellan, Inquisitive Prodigy
+ManaCost:2 G U
+Types:Legendary Creature Human Faerie Detective
+PT:3/4
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy up to one target artifact. If you controlled that permanent, draw a card.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact | RememberLKI$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Investigate|Token & Type$Artifact
+AlternateMode:Adventure
+Oracle:Flying, vigilance\nWhenever Kellan, Inquisitive Prodigy attacks, destroy up to one target artifact. If you controlled that permanent, draw a card.
+
+ALTERNATE
+
+Name:Tail the Suspect
+ManaCost:G U
+Types:Sorcery Adventure
+A:SP$ Investigate | SubAbility$ DBEffect | SpellDescription$ Investigate. You may play an additional land this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
+SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
+Oracle:Investigate. You may play an additional land this turn.
