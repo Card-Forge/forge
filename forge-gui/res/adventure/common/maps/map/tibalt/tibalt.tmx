@@ -5,7 +5,6 @@
  </editorsettings>
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
@@ -39,7 +38,7 @@
  </layer>
  <layer id="22" name="Clutter 2" width="65" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="18" name="Clutter" width="65" height="40">
@@ -100,7 +99,7 @@
     <property name="enemy" value="Magma Fire Elemental"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="216,271,216,177,179,177"/>
+    <property name="waypoints" value="217,216,177,190,177,216,217"/>
    </properties>
   </object>
   <object id="172" template="../../obj/waypoint.tx" x="219.509" y="139.438"/>
@@ -160,7 +159,7 @@
   <object id="214" template="../../obj/waypoint.tx" x="546.842" y="212.105"/>
   <object id="215" template="../../obj/waypoint.tx" x="608.175" y="245.439"/>
   <object id="216" template="../../obj/waypoint.tx" x="605.175" y="123.772"/>
-  <object id="217" template="../../obj/waypoint.tx" x="659.842" y="8.43859"/>
+  <object id="217" template="../../obj/waypoint.tx" x="660.175" y="8.43859"/>
   <object id="219" template="../../obj/treasure.tx" x="734.842" y="352.105">
    <properties>
     <property name="reward">[{
@@ -193,7 +192,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="221" template="../../obj/portal.tx" x="442.842" y="499.439">
+  <object id="221" template="../../obj/portal.tx" x="460.842" y="499.439">
    <properties>
     <property name="activeQuestFlag" value="FortressPortal"/>
     <property name="portalState" value="closed"/>
@@ -202,7 +201,7 @@
     <property name="teleportObjectId" value="194"/>
    </properties>
   </object>
-  <object id="222" template="../../obj/portal.tx" x="465.175" y="500.105">
+  <object id="222" template="../../obj/portal.tx" x="515.508" y="499.438">
    <properties>
     <property name="activeQuestFlag" value="TibaltPortal"/>
     <property name="portalState" value="closed"/>

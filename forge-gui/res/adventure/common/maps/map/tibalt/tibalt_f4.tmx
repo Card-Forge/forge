@@ -127,6 +127,7 @@
   </object>
   <object id="175" template="../../obj/portal.tx" x="174.951" y="164.293">
    <properties>
+    <property name="activeQuestFlag" value="TibaltPortal"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
     <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
@@ -137,7 +138,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Before you stand Tibalt himself, smiling as you approach his chamber. Thinking about all the ways he is going to torture you in battle.&quot;,
+    &quot;text&quot;: &quot;A low, haunting melody plays in the background, emanating from unseen sources. The sound seems to echo from the very walls, creating an unsettling ambiance that adds to the sense of foreboding. Strange artifacts and arcane relics are scattered throughout the chamber, testifying to Tibalt's mastery of dark magic.&quot;,
     &quot;options&quot;: [
       {
         &quot;action&quot;: [
