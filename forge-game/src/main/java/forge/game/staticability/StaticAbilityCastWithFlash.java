@@ -64,7 +64,7 @@ public class StaticAbilityCastWithFlash {
 
     public static boolean applyWithFlashNeedsInfo(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
         boolean info = false;
-        String validSA = stAb.getParam("ValidSA");
+        String validSA = stAb.getParamOrDefault("ValidSA", "");
         if (validSA.contains("IsTargeting") || validSA.contains("XCost")) {
             info = true;
         }

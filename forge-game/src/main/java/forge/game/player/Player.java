@@ -1719,8 +1719,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return canPlayLand(land, ignoreZoneAndTiming, null);
     }
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility landSa) {
-        if (!ignoreZoneAndTiming && !canCastSorcery()) {
-            return false;
+        if (!ignoreZoneAndTiming) {
+            // CR 305.3
+            if (!game.getPhaseHandler().isPlayerTurn(this)) {
+                return false;
+            }
+            if (!canCastSorcery() && !landSa.withFlash(land, this)) {
+                return false;
+            }
         }
 
         // CantBeCast static abilities
