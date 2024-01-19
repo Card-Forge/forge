@@ -318,6 +318,7 @@ Trap
 Aura
 Background
 Cartouche
+Case
 Class
 Curse
 Role

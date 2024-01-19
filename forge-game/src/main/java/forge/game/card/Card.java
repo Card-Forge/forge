@@ -215,6 +215,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean monstrous;
 
     private boolean renowned;
+    private boolean solved = false;
 
     private boolean manifested;
 
@@ -2589,6 +2590,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (renowned) {
             sb.append("Renowned\r\n");
+        }
+        if (solved) {
+            sb.append("Solved\r\n");
         }
         if (manifested) {
             sb.append("Manifested\r\n");
@@ -6208,6 +6212,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setRenowned(final boolean renowned0) {
         renowned = renowned0;
+    }
+
+    public final boolean isSolved() {
+        return solved;
+    }
+    public final void setSolved(final boolean solved) {
+        this.solved = solved;
     }
 
     public final boolean isManifested() {

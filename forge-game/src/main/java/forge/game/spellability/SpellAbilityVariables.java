@@ -93,6 +93,7 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean revolt = false;
     private boolean desert = false;
     private boolean blessing = false;
+    private boolean solved = false;
 
     private boolean allTargetsLegal = false;
 
@@ -346,6 +347,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDesert(final boolean bDesert) { desert = bDesert; }
 
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
+    public void setSolved(final boolean bSolved) { solved = bSolved; }
 
     /** Optional Costs */
     protected boolean kicked = false;

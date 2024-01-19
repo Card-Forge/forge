@@ -1898,6 +1898,14 @@ public class CardProperty {
             if (card.isRenowned()) {
                 return false;
             }
+        } else if (property.equals("IsSolved")) {
+            if (!card.isSolved()) {
+                return false;
+            }
+        } else if (property.equals("IsUnsolved")) {
+            if (card.isSolved()) {
+                return false;
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(card)) {
                 return false;
