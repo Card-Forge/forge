@@ -71,7 +71,6 @@ public class HumanPlay {
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                p.getGame().updateLastStateForCard(source);
             }
             return false;
         }
