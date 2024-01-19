@@ -16,6 +16,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.ImageKeys;
+import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -936,7 +937,7 @@ public class CardView extends GameEntityView {
             updateIntensity(c);
         }
 
-        if (getBackup() == null && !c.isFaceDown() && (c.isDoubleFaced()||c.isFlipCard()||c.isAdventureCard())) {
+        if (getBackup() == null && !c.isFaceDown() && (c.isDoubleFaced() || c.isFlipCard() || c.isAdventureCard() || c.isCloned())) {
             set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
@@ -1234,6 +1235,9 @@ public class CardView extends GameEntityView {
                         : getType().getCreatureTypes().toString().toLowerCase().replace(" ", "_").replace("[", "").replace("]",""));
             }
             if (canBeShownToAny(viewers)) {
+                if (isCloned() && StaticData.instance().useSourceImageForClone()) {
+                    return getBackup().getCurrentState().getImageKey(viewers);
+                }
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
