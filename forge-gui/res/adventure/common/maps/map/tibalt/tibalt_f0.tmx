@@ -206,7 +206,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="194" template="../../obj/portal.tx" x="252.842" y="311.439">
+  <object id="194" template="../../obj/portal.tx" x="279.509" y="305.439">
    <properties>
     <property name="activeQuestFlag" value="FortressPortal"/>
     <property name="portalState" value="inactive"/>
