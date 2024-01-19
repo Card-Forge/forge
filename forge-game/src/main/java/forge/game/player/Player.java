@@ -2741,23 +2741,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateCurrentPlaneName(currentPlanes.toString().replaceAll(" \\(.*","").replace("[",""));
     }
 
-    public final void resetCombatantsThisCombat() {
-        // resets the status of attacked/blocked this phase
-        CardCollectionView list = getCardsIn(ZoneType.Battlefield, false);
-
-        for (Card c : list) {
-            if (c.getDamageHistory().getCreatureAttackedThisCombat() > 0) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(null, -1);
-            }
-            if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
-                c.getDamageHistory().setCreatureBlockedThisCombat(false);
-            }
-            if (c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-                c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
-            }
-        }
-    }
-
     public CardCollectionView getInboundTokens() {
         return inboundTokens;
     }

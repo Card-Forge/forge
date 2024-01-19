@@ -675,7 +675,6 @@ public class PhaseHandler implements java.io.Serializable {
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
-        playerTurn.clearAttackedPlayersMyCombat();
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }
@@ -1275,9 +1274,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
-        for (Player player : game.getPlayers()) {
-            player.resetCombatantsThisCombat();
-        }
         game.getEndOfCombat().executeUntil();
         game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
         if (inCombat()) {
