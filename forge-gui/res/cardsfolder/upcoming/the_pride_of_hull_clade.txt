@@ -11,6 +11,6 @@ SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.IsRemembered | Descript
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigDamage
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw cards equal to its toughness
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Y
-SVar:Y:Remembered$CardToughness
+SVar:Y:Count$CardToughness
 DeckHints:Type$Wall|Treefolk & Keyword$Defender
 Oracle:This spell costs {X} less to cast, where X is the total toughness of creatures you control.\nDefender\n{2}{U}{U}: Until end of turn, target creature you control gets +1/+0, gains "Whenever this creature deals combat damage to a player, draw cards equal to its toughness," and can attack as though it didn't have defender.
