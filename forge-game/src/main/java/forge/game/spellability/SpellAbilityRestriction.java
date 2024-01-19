@@ -433,6 +433,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (isSolved()) {
+            if (!c.isSolved()) {
+                return false;
+            }
+        }
         if (sa.isProwl()) {
             if (!activator.hasProwl(c.getType().getCreatureTypes())) {
                 return false;
