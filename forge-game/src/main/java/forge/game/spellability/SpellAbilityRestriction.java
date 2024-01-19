@@ -98,6 +98,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
+            if (value.equals("Solved")) {
+                this.setSolved(true);
+            }
         }
 
         if (params.containsKey("ActivationZone")) {
