@@ -591,13 +591,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         unfreezeStack();
         sa.resetOnceResolved();
 
-        //game.getAction().checkStaticAbilities();
         game.getPhaseHandler().onStackResolved();
 
         curResolvingCard = null;
-
-        // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
-        // sa.getHostCard().setXManaCostPaid(0);
     }
 
     private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
