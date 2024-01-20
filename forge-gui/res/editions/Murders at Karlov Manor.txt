@@ -12,10 +12,15 @@ ScryfallCode=MKM
 9 U Case of the Pilfered Proof @Joshua Cairos
 11 C Defenestrated Phantom @Svetlin Velinov
 12 M Delney, Streetwise Lookout @Darren Tan
+14 C Due Diligence @Borja Pindado
+15 U Essence of Antiquity @Caio Monteiro
+21 U Krovod Haunch @Craig J Spearing
 24 C Marketwatch Phantom @Bram Sels
+25 C Museum Nightwatch @Alix Branwyn
 27 R No Witnesses @Michele Giorgi
 28 U Not on My Watch @Jason A. Engle
 29 C Novice Inspector @Fajareka Setiawan
+33 C Seasoned Consultant @Andreas Zafiratos
 35 R Unyielding Gatekeeper @Borja Pindado
 36 R Wojek Investigator @Ben Hill
 40 C Benthic Criminologists @Johan Grenier
@@ -24,62 +29,104 @@ ScryfallCode=MKM
 45 R Case of the Ransacked Lab @Borja Pindado
 49 C Crimestopper Sprite @Julia Metzger
 52 C Deduce @Quintin Gleim
+58 U Forensic Researcher @Aldo Domínguez
 60 C Hotshot Investigators @Jodie Muir
 61 M Intrude on the Mind @Magali Villeneuve
+62 C Jaded Analyst @Borja Pindado
+65 U Mistway Spy @Andrew Mar
 66 C Out Cold @Tuan Duong Chu
+67 R Proft's Eidetic Memory @Julie Dillon
+68 C Projektor Inspector @Leonardo Santanna
+71 R Steamcore Scholar @David Astruga
+75 C Agency Coroner @Uriah Voth
+77 R Barbed Servitor @Simon Dominic
+79 U Case of the Gorgon's Kiss @Peter Polach
 80 R Case of the Stashed Skeleton @Camille Alquier
+82 U Clandestine Meddler @Jodie Muir
 84 C Extract a Confession @Peter Polach
 86 R Homicide Investigator @Jodie Muir
 89 U It Doesn't Add Up @Anastasia Ovchinnikova
 90 U Lead Pipe @Igor Krstic
 92 U Long Goodbye @Jarel Threat
+93 C Macabre Reconstruction @Sam Guay
 94 M Massacre Girl, Known Killer @Billy Christian
 96 U Nightdrinker Moroii @Brent Hollowell
+98 U Persuasive Interrogators @Dmitry Burmak
+99 U Polygraph Orb @Jokubas Uogintas
+101 C Repeat Offender @Joshua Cairos
 108 U Undercity Eliminator @Quintin Gleim
+110 M Vein Ripper @Bastien L. Deharme
+112 U Bolrac-Clan Basher @Warren Mahy
+117 U Concealed Weapon @Nicholas Elias
+118 R Connecting the Dots @Aaron J. Riley
 119 U Convenient Target @Gaboleps
 121 U Crime Novelist @Izzy
 122 C Demand Answers @Justyna Dura
 124 U Expose the Culprit @Ryan Valle
 125 C Felonious Rage @Justine Cruz
+127 R Fugitive Codebreaker @Joseph Weston
 128 C Galvanize @Matt Forsyth
 129 C Gearbane Orangutan @Svetlin Velinov
+130 C Goblin Maskmaker @Tomas Duchek
+131 U Harried Dronesmith @Lindsey Look
+133 C Innocent Bystander @Warren Mahy
 134 U Knife @Tony Foti
 135 R Krenko, Baron of Tin Street @Brian Valeza
 140 R Pyrotechnic Performer @Peter Polach
+142 C Red Herring @Iris Compiet
 144 C Shock @Eric Wilkerson
+148 U Aftermath Analyst @Danny Schwartz
 149 C Airtight Alibi @Jeremy Wilson
 150 R Analyze the Pollen @Anna Christenson
+151 R Archdruid's Charm @Liiga Smilshkalne
 153 R Axebane Ferox @Maxime Minard
 154 C Bite Down on Crime @Mike Bierek
 158 U Culvert Ambusher @Slawomir Maniak
 159 C Fanatical Strength @Durion
+161 U Get a Leg Up @Jesper Ejsing
+165 U Hedge Whisperer @Simon Dominic
 167 U A Killer Among Us @Leesha Hannigan
 168 C Loxodon Eavesdropper @Jesper Ejsing
+169 C Nervous Gardener @Borja Pindado
+170 C Pick Your Poison @Julia Metzger
+172 M The Pride of Hull Clade @Brent Hollowell
 176 R Sharp-Eyed Rookie @Jake Murray
+177 C Slime Against Humanity @Brent Hollowell
+178 C They Went This Way @Andreas Zafiratos
 179 C Topiary Panther @Xabi Gaztelua
+180 C Tunnel Tipster @Leesha Hannigan
 183 C Vitu-Ghazi Inspector @Borja Pindado
 184 M Agrus Kos, Spirit of Justice @Jason A. Engle
 185 M Alquist Proft, Master Sleuth @Andreas Zafiratos
+186 M Anzrag, the Quake-Mole @Helge C. Balzer
 187 R Assassin's Trophy @Dmitry Burmak
 188 R Aurelia, the Law Above @Lie Setiawan
+189 R Blood Spatter Analysis @Jokubas Uogintas
+191 U Buried in the Garden @Tom Babbey
 194 U Curious Cadaver @Peter Polach
 195 U Deadly Complication @Jodie Muir
 197 C Dog Walker @Milivoj Ćeran
+198 R Doppelgang @Chris Rallis
+199 R Drag the Canal @Josh Hass
 200 M Etrata, Deadly Fugitive @Livia Prima
 203 C Faerie Snoop @Dallas Williams
 204 C Gadget Technician @Caio Monteiro
 205 U Gleaming Geardrake @Filipe Pagliuso
+206 C Granite Witness @Tuan Duong Chu
 209 R Izoni, Center of the Web @Justine Cruz
 210 R Judith, Carnage Connoisseur @Jodie Muir
 211 M Kaya, Spirits' Justice @Magali Villeneuve
 212 R Kellan, Inquisitive Prodigy @Joshua Raphael
 213 U Kraul Whipcracker @Filip Burburan
 214 R Kylox, Visionary Inventor @Lie Setiawan
+216 R Lazav, Wearer of Faces @Wisnu Tan
 218 U Lightning Helix @Eli Minaya
 219 U Meddling Youths @Matt Forsyth
 221 U No More Lies @Liiga Smilshkalne
 223 U Private Eye @Vincent Christiaens
 224 M Rakdos, Patron of Chaos @Joshua Raphael
+225 C Rakish Scoundrel @Ina Wong
+227 U Repulsive Mutation @Filip Burburan
 231 C Shady Informant @Caio Monteiro
 233 U Sumala Sentry @Nicholas Elias
 234 R Teysa, Opulent Oligarch @Chris Rallis
@@ -94,6 +141,7 @@ ScryfallCode=MKM
 258 U Branch of Vitu-Ghazi @Alayna Danner
 259 R Commercial District @Julian Kok Joon Wen
 260 R Elegant Parlor @Kamila Szutenberg
+261 C Escape Tunnel @Carlos Palma Cruchaga
 262 R Hedge Maze @Andrew Mar
 263 R Lush Portico @Kamila Szutenberg
 264 R Meticulous Archive @Sam Burley
@@ -133,7 +181,7 @@ ScryfallCode=MKM
 312 U Deadly Complication @Monztre
 315 R Warleader's Call @Francis Tneh
 317 R Aurelia, the Law Above @Barbara Rosiak
-320 M Rakdos, Patron of Chaos @Alex Dos Diaz
+318 R Lazav, Wearer of Faces @Julie Dillon
 320 M Rakdos, Patron of Chaos @Alex Dos Diaz
 321 R Teysa, Opulent Oligarch @Barbara Rosiak
 322 M Trostani, Three Whispers @Julie Dillon
@@ -155,11 +203,16 @@ ScryfallCode=MKM
 340 R Wojek Investigator @Lisa Heidhoff
 343 R Homicide Investigator @David Robert Hovey
 344 M Massacre Girl, Known Killer @Jack Hughes
+345 U Persuasive Interrogators @Tyler Walpole
+346 M Vein Ripper @Marko Manev
+348 R Fugitive Codebreaker @Cosmin Podar
 350 R Krenko, Baron of Tin Street @Marko Manev
 351 U Culvert Ambusher @Alex Stone
+352 M The Pride of Hull Clade @Ivan Shavrin
 353 R Sharp-Eyed Rookie @Marko Manev
 354 M Agrus Kos, Spirit of Justice @Cosmin Podar
 355 M Alquist Proft, Master Sleuth @Peter Diamond
+356 M Anzrag, the Quake-Mole @Ivan Shavrin
 357 R Aurelia, the Law Above @Peter Diamond
 358 U Curious Cadaver @Marko Manev
 359 M Etrata, Deadly Fugitive @Ionomycin
@@ -168,6 +221,7 @@ ScryfallCode=MKM
 363 R Judith, Carnage Connoisseur @Alex Dos Diaz
 364 U Kraul Whipcracker @David Robert Hovey
 365 R Kylox, Visionary Inventor @Tyler Walpole
+366 R Lazav, Wearer of Faces @Tyler Walpole
 367 U Meddling Youths @Jack Hughes
 369 M Rakdos, Patron of Chaos @Ivan Shavrin
 370 R Teysa, Opulent Oligarch @Jack Hughes
@@ -176,7 +230,9 @@ ScryfallCode=MKM
 373 M Vannifar, Evolved Enigma @Jack Hughes
 376 U Magnetic Snuffler @Cosmin Podar
 377 M Aurelia's Vindicator @Roberta Ingranata
+378 M Delney, Streetwise Lookout @Jack Hughes
 380 M Massacre Girl, Known Killer @Jack Hughes
+382 M The Pride of Hull Clade @Ivan Shavrin
 383 M Agrus Kos, Spirit of Justice @Cosmin Podar
 384 M Alquist Proft, Master Sleuth @Peter Diamond
 386 M Etrata, Deadly Fugitive @Ionomycin
@@ -184,9 +240,17 @@ ScryfallCode=MKM
 388 M Trostani, Three Whispers @Ionomycin
 390 R No Witnesses @Michele Giorgi
 392 R Unyielding Gatekeeper @Borja Pindado
+396 R Proft's Eidetic Memory @Julie Dillon
+397 R Steamcore Scholar @David Astruga
+398 R Barbed Servitor @Simon Dominic
+403 R Connecting the Dots @Aaron J. Riley
 407 R Pyrotechnic Performer @Peter Polach
+408 R Archdruid's Charm @Liiga Smilshkalne
 409 R Axebane Ferox @Maxime Minard
 412 R Assassin's Trophy @Dmitry Burmak
+413 R Blood Spatter Analysis @Jokubas Uogintas
+414 R Doppelgang @Chris Rallis
+415 R Drag the Canal @Josh Hass
 423 U Long Goodbye @Jarel Threat
 424 U Gleaming Geardrake @Filipe Pagliuso
 425 U Kraul Whipcracker @Filip Burburan
@@ -197,3 +261,4 @@ ScryfallCode=MKM
 430 M Melek, Reforged Researcher @Andreas Zafiratos
 431 M Tomik, Wielder of Law @Valera Lutfullina
 432 M Voja, Jaws of the Conclave @Valera Lutfullina
+433 M Vein Ripper @Marko Manev
