@@ -57,6 +57,17 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostCollectEvidence cost) {
+        int c = cost.getAbilityAmount(ability);
+
+        // TODO figure out how to select Total CMC >= to c
+
+        CardCollectionView chosen = ComputerUtil.chooseCollectEvidence(player, cost, source, c, ability);
+
+        return null == chosen ? null : PaymentDecision.card(chosen);
+    }
+
+    @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
