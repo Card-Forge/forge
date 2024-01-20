@@ -323,7 +323,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("CastFaceDown")) {
                 // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
+                tgtSA = CardFactoryUtil.abilityCastFaceDown(tgtCard.getCurrentState(), false, "Morph");
             } else {
                 tgtSA = controller.getController().getAbilityToPlay(tgtCard, sas);
             }
