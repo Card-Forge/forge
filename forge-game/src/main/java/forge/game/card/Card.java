@@ -220,7 +220,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean manifested;
 
     private boolean foretold;
-    private boolean foretoldThisTurn;
     private boolean foretoldCostByEffect;
 
     private boolean specialized;
@@ -6251,13 +6250,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isForetoldThisTurn() {
-        return foretoldThisTurn;
-    }
-    public final void setForetoldThisTurn(final boolean foretoldThisTurn) {
-        this.foretoldThisTurn = foretoldThisTurn;
-    }
-    public void resetForetoldThisTurn() {
-        foretoldThisTurn = false;
+        return getTurnInZone() == game.getPhaseHandler().getTurn();
     }
 
     public boolean isSpecialized() {

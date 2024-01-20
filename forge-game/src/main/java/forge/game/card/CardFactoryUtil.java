@@ -31,7 +31,6 @@ import forge.GameCommand;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
 import forge.game.event.GameEventCardForetold;
-import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
 
 import org.apache.commons.lang3.StringUtils;
@@ -3018,7 +3017,6 @@ public class CardFactoryUtil {
                     final Game game = getHostCard().getGame();
                     final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
                     c.setForetold(true);
-                    c.setForetoldThisTurn(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
                     c.addMayLookTemp(getActivatingPlayer());

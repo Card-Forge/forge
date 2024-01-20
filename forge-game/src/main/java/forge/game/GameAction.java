@@ -76,11 +76,8 @@ public class GameAction {
     }
 
     public final void resetActivationsPerTurn() {
-        // Reset Activations per Turn
         for (final Card card : game.getCardsInGame()) {
             card.resetActivationsPerTurn();
-            // need to reset this in exile
-            card.resetForetoldThisTurn();
         }
     }
 
