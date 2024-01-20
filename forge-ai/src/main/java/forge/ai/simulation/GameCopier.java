@@ -389,6 +389,9 @@ public class GameCopier {
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                 }
+                if (c.isCloaked()) {
+                    newCard.setCloaked(true);
+                }
             }
             if (c.isMonstrous()) {
                 newCard.setMonstrous(true);
