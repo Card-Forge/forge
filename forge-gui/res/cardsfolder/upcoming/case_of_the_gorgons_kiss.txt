@@ -1,0 +1,11 @@
+Name:Case of the Gorgon's Kiss
+ManaCost:B
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this Case enters the battlefield, destroy up to one target creature that was dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select up to one target creature that was dealt damage this turn
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Count$ThisTurnEntered_Graveyard_Creature | SVarCompare$ GE3 | IsPresent$ Card.Self+IsUnsolved | Execute$ Solved | TriggerDescription$ To solve – Three or more creature cards were put into graveyards from anywhere this turn. (If unsolved, solve at the beginning of your end step.)
+SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+S:Mode$ Continuous | Affected$ Card.Self+IsSolved | AddType$ Creature & Gorgon | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Deathtouch & Lifelink | Description$ Solved – This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types.
+DeckHints:Ability$Sacrifice|Discard
+DeckHas:Ability$LifeGain
+Oracle:When this Case enters the battlefield, destroy up to one target creature that was dealt damage this turn.\nTo solve – Three or more creature cards were put into graveyards from anywhere this turn. (If unsolved, solve at the beginning of your end step.)\nSolved – This Case is a 4/4 Gorgon creature with deathtouch and lifelink in addition to its other types.

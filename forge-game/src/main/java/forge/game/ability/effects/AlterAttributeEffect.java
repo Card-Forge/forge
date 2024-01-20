@@ -29,6 +29,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         break;
                 }
             }
+            c.updateAbilityTextForView();
         }
     }
 }
