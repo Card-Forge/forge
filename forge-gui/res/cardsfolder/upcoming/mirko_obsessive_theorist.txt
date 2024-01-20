@@ -1,0 +1,13 @@
+Name:Mirko, Obsessive Theorist
+ManaCost:1 U B
+Types:Legendary Creature Vampire Detective
+PT:1/3
+K:Flying
+K:Vigilance
+T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, you may return target creature card with power less than NICKNAME's from your graveyard to the battlefield with a finality counter on it. (If it would die, exile it instead.)
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+powerLTCount$CardPower | WithCountersType$ FINALITY | TgtPrompt$ Select target creature card with power less than NICKNAME's
+DeckHints:Ability$Surveil
+DeckHas:Ability$Counters|Graveyard
+Oracle:Flying, vigilance\nWhenever you surveil, put a +1/+1 counter on Mirko, Obsessive Theorist.\nAt the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it. (If it would die, exile it instead.)

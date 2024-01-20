@@ -28,9 +28,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.util.Aggregates;
-import forge.util.ITriggerEvent;
-import forge.util.TextUtil;
+import forge.util.*;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -122,9 +120,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
+        String name = CardTranslation.getTranslatedName(sa.getHostCard().getName());
         String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
-                "CARDNAME", sa.getHostCard().toString()),
-                "(Targeting ERROR)", "");
+                "CARDNAME", name), "(Targeting ERROR)", "");
+        message = TextUtil.fastReplace(message, "NICKNAME", Lang.getInstance().getNickName(name));
         showMessage(message, sa.getView());
 
         if (divisionValues != null && !divisionValues.isEmpty() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
