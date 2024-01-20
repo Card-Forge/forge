@@ -89,14 +89,15 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-
-        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = new CardZoneTable(lastStateBattlefield, game.getLastStateGraveyard());
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (Card c : list) {
-            if (game.getAction().destroy(c, sa, !noRegen, table, params) && remDestroyed) {
+            if (game.getAction().destroy(c, sa, !noRegen, params) && remDestroyed) {
                 card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
             }
         }

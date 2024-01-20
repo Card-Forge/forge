@@ -103,11 +103,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     // choices for constructor isPermanent argument
     private String originalDescription = "", description = "";
     private String originalStackDescription = "", stackDescription = "";
-    private ManaCost multiKickerManaCost;
+
     private Player activatingPlayer;
     private Player targetingPlayer;
+    private Player choosingPlayer;
     private Pair<Long, Player> controlledByPlayer;
+
     private ManaCostBeingPaid manaCostBeingPaid;
+    private ManaCost multiKickerManaCost;
     private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
@@ -147,7 +150,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private TreeBasedTable<String, Boolean, CardCollection> paidLists = TreeBasedTable.create();
 
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
-
     private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
 
     private final List<String> pipsToReduce = new ArrayList<>();
@@ -479,6 +481,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setTargetingPlayer(Player targetingPlayer0) {
         targetingPlayer = targetingPlayer0;
+    }
+
+    public Player getChoosingPlayer() {
+        return choosingPlayer;
+    }
+    public void setChoosingPlayer(Player choosingPlayer0) {
+        choosingPlayer = choosingPlayer0;
     }
 
     /**
@@ -2487,7 +2496,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getRestrictions().isInstantSpeed()) {
             return true;
         }
-        if (isSpell() && (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
+        if ((isSpell() || this instanceof LandAbility) && (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
             return true;
         }
 

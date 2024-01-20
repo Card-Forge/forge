@@ -83,7 +83,7 @@ public class CardFactory {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame())
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
-            out = CardFactory.copyStats(in, in.getController(), assignNewId);
+            out = copyStats(in, in.getController(), assignNewId);
             out.setToken(true);
 
             // need to copy this values for the tokens
@@ -97,6 +97,7 @@ public class CardFactory {
         // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
+        out.setLeavesPlayCommands(in.getLeavesPlayCommands());
 
         out.setSpecialized(in.isSpecialized());
         out.addRemembered(in.getRemembered());
@@ -128,7 +129,7 @@ public class CardFactory {
         int id = game.nextCardId();
 
         // need to create a physical card first, i need the original card faces
-        final Card copy = CardFactory.getCard(original.getPaperCard(), controller, id, game);
+        final Card copy = getCard(original.getPaperCard(), controller, id, game);
 
         if (original.isTransformable()) {
             // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
@@ -530,7 +531,7 @@ public class CardFactory {
         c.setSetCode(in.getSetCode());
 
         for (final CardStateName state : in.getStates()) {
-            CardFactory.copyState(in, state, c, state);
+            copyState(in, state, c, state);
         }
 
         c.setState(in.getCurrentStateName(), false);

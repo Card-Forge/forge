@@ -292,6 +292,9 @@ public abstract class GameState {
             if (c.isRenowned()) {
                 newText.append("|Renowned");
             }
+            if (c.isSolved()) {
+                newText.append("|Solved");
+            }
             if (c.isMonstrous()) {
                 newText.append("|Monstrous");
             }

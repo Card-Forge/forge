@@ -17,6 +17,9 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -76,7 +79,6 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
-
         int i = getAbilityAmount(ability);
 
         return getMaxAmountX(ability, payer, effect) >= i;
@@ -84,7 +86,9 @@ public class CostExiledMoveToGrave extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        return targetCard.getGame().getAction().moveToGraveyard(targetCard, null);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        return targetCard.getGame().getAction().moveToGraveyard(targetCard, null, moveParams);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

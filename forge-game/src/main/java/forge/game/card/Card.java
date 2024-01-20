@@ -215,6 +215,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean monstrous;
 
     private boolean renowned;
+    private boolean solved = false;
 
     private boolean manifested;
 
@@ -307,7 +308,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private Map<Long, Player> goad = Maps.newTreeMap();
 
-    private final List<GameCommand> leavePlayCommandList = Lists.newArrayList();
+    private List<GameCommand> leavePlayCommandList = Lists.newArrayList();
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
@@ -2590,6 +2591,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (renowned) {
             sb.append("Renowned\r\n");
         }
+        if (solved) {
+            sb.append("Solved\r\n");
+        }
         if (manifested) {
             sb.append("Manifested\r\n");
         }
@@ -3395,6 +3399,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
+    }
+
+    public final List<GameCommand> getLeavesPlayCommands() {
+        return leavePlayCommandList;
+    }
+    public final void setLeavesPlayCommands(List<GameCommand> list) {
+        leavePlayCommandList = list;
     }
 
     public final void runLeavesPlayCommands() {
@@ -4404,8 +4415,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
                 p.get("Timestamp"), (long) 0);
         } else if (category.equals("Keywords")) {
-            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), 
-                (boolean) p.getOrDefault("RemoveAll", false), (long) p.get("Timestamp"), (long) 0);        
+            boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll, 
+                (long) p.get("Timestamp"), (long) 0);
         } else if (category.equals("Types")) {
             addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
                 false, (Set<RemoveType>) p.get("RemoveXTypes"), 
@@ -6200,6 +6212,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setRenowned(final boolean renowned0) {
         renowned = renowned0;
+    }
+
+    public final boolean isSolved() {
+        return solved;
+    }
+    public final void setSolved(final boolean solved) {
+        this.solved = solved;
     }
 
     public final boolean isManifested() {

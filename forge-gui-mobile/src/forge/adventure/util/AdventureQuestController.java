@@ -226,6 +226,13 @@ public class AdventureQuestController implements Serializable {
 
         DialogData data = dialogQueue.remove();
         MapDialog dialog = new MapDialog(data, stage, -1, null);
+
+        if (data.options == null || data.options.length == 0) {
+            dialog.setEffects(data.action);
+            displayNextDialog(stage);
+            return;
+        }
+
         stage.showDialog();
         dialog.activate();
         ChangeListener listen = new ChangeListener() {

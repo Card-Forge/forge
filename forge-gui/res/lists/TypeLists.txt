@@ -318,6 +318,7 @@ Trap
 Aura
 Background
 Cartouche
+Case
 Class
 Curse
 Role
@@ -433,6 +434,7 @@ Alara
 Alfava Metraxis
 Amonkhet
 Antausia
+Apalapucia
 Arcavios
 Arkhos
 Azgol

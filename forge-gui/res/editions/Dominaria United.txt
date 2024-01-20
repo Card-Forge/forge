@@ -461,6 +461,25 @@ ScryfallCode=DMU
 435 M Sheoldred, the Apocalypse @Richard Whitters
 436 M Sheoldred, the Apocalypse @Richard Whitters
 
+[rebalanced]
+A1 M A-Karn, Living Legacy @Chris Rahn
+A138 C A-Meria's Outrider @Lius Lasahido
+A141 R A-Radha's Firebrand @Ângelo Bortolini
+A145 U A-Sprouting Goblin @Uriah Voth
+A169 R A-Llanowar Greenwidow @Jokubas Uogintas
+A170 R A-Llanowar Loamspeaker @Zara Alfonso
+A176 C A-Scout the Wilderness @A. M. Sartor
+A181 C A-Sunbathing Rootwalla @Campbell White
+A207 U A-Nael, Avizoa Aeronaut @Miguel Mercado
+A211 U A-Radha, Coalition Warlord @Randy Vargas
+A217 U A-Rulik Mons, Warren Chief @Tuan Duong Chu
+A220 M A-Soul of Windgrace @Liiga Smilshkalne
+A222 U A-Tatyova, Steward of Tides @Howard Lyon
+A225 U A-Uurg, Spawn of Turg @Nicholas Gregory
+A227 U A-Zar Ojanen, Scion of Efrava @Justine Cruz
+A259 R A-Thran Portal @Sarah Finnigan
+A286 R A-Briar Hydra @Caio Monteiro
+
 [lands]
 2 Plains|DMU|1
 2 Plains|DMU|2

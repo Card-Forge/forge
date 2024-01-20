@@ -98,6 +98,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
             }
+            if (value.equals("Solved")) {
+                this.setSolved(true);
+            }
         }
 
         if (params.containsKey("ActivationZone")) {
@@ -427,6 +430,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
         if (isBlessing()) {
             if (!activator.hasBlessing()) {
+                return false;
+            }
+        }
+        if (isSolved()) {
+            if (!c.isSolved()) {
                 return false;
             }
         }

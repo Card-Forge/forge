@@ -6,3 +6,15 @@ Type=Commander
 ScryfallCode=MKC
 
 [cards]
+1 M Kaust, Eyes of the Glade @Volkan Baǵa
+2 M Mirko, Obsessive Theorist @Heonhwa Choe
+3 M Morska, Undersea Sleuth @Ekaterina Burmak
+4 M Nelly Borca, Impulsive Accuser @James Ryman
+49 M Kaust, Eyes of the Glade @Volkan Baǵa
+50 M Mirko, Obsessive Theorist @Heonhwa Choe
+51 M Morska, Undersea Sleuth @Ekaterina Burmak
+52 M Nelly Borca, Impulsive Accuser @James Ryman
+314 M Kaust, Eyes of the Glade @Volkan Baǵa
+316 M Mirko, Obsessive Theorist @Heonhwa Choe
+317 M Morska, Undersea Sleuth @Ekaterina Burmak
+318 M Nelly Borca, Impulsive Accuser @James Ryman

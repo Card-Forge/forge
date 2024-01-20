@@ -31,6 +31,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -154,13 +155,18 @@ public class Combat {
         lkiCache.clear();
         combatantsThatDealtFirstStrikeDamage.clear();
 
+        //clear tracking for cards that care about "this combat"
+        Game game = playerWhoAttacks.getGame();
+        for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.getDamageHistory().endCombat();
+        }
+        playerWhoAttacks.clearAttackedPlayersMyCombat();
+
         //update view for all attackers and blockers
         for (Card c : attackers) {
-            c.getDamageHistory().endCombat();
             c.updateAttackingForView();
         }
         for (Card c : blockers) {
-            c.getDamageHistory().endCombat();
             c.updateBlockingForView();
         }
     }

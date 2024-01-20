@@ -1,0 +1,11 @@
+Name:A-Nael, Avizoa Aeronaut
+ManaCost:G U
+Types:Legendary Creature Elf Scout
+PT:2/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDig | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top X cards of your library, where X is the number of basic land types among lands you control. Put up to one of them on top of your library and the rest on the bottom in a random order. Then if there are five basic land types among lands you control, draw a card.
+SVar:TrigDig:DB$ Dig | DigNum$ X | Defined$ You | DestinationZone$ Library | RestRandomOrder$ True | LibraryPosition$ 0 | Optional$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ5
+SVar:X:Count$Domain
+AI:RemoveDeck:Random
+Oracle:Flying\nDomain — Whenever Nael, Avizoa Aeronaut deals combat damage to a player, look at the top X cards of your library, where X is the number of basic land types among lands you control. Put up to one of them on top of your library and the rest on the bottom in a random order. Then if there are five basic land types among lands you control, draw a card.

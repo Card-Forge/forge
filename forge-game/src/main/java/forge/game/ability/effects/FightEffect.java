@@ -98,11 +98,8 @@ public class FightEffect extends DamageBaseEffect {
             }
         }
         if (sa.hasParam("Defined")) {
-            List<Card> defined = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
+            List<Card> defined = getTargetCardsWithDuplicates(true, "Defined", sa);
             // Allow both fighters to come from defined list if first fighter not already found
-            if (sa.hasParam("ExtraDefined")) {
-                defined.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("ExtraDefined"), sa));
-            }
 
             List<Card> newDefined = Lists.newArrayList();
             for (final Card d : defined) {

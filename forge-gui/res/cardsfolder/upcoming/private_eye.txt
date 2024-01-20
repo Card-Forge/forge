@@ -1,0 +1,10 @@
+Name:Private Eye
+ManaCost:1 W U
+Types:Creature Homunculus Detective
+PT:3/3
+S:Mode$ Continuous | Affected$ Detective.YouCtrl+Other | AddToughness$ 1 | AddPower$ 1 | Description$ Other Detectives you control get +1/+1.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever you draw your second card each turn, target Detective can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Card.Detective | TgtPrompt$ Select target Detective | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHints:Type$Detective
+Oracle:Other Detectives you control get +1/+1.\nWhenever you draw your second card each turn, target Detective can't be blocked this turn.

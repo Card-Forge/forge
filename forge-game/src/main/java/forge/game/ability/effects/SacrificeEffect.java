@@ -100,15 +100,17 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         final boolean optional = sa.hasParam("Optional");
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = new CardZoneTable(lastStateBattlefield, CardCollection.EMPTY);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()), null)) {
-                    if (game.getAction().sacrifice(card, sa, true, table, params) != null) {
+                    if (game.getAction().sacrifice(card, sa, true, params) != null) {
                         if (remSacrificed) {
                             card.addRemembered(card);
                         }
@@ -170,8 +172,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     if (devour || exploit || remSacrificed) {
                         lKICopy = CardUtil.getLKICopy(sac, cachedMap);
                     }
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, table, params) != null;
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, params);
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);

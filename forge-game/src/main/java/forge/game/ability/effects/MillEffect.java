@@ -41,6 +41,7 @@ public class MillEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
@@ -58,7 +59,7 @@ public class MillEffect extends SpellAbilityEffect {
                     continue;
                 }
             }
-            final CardCollectionView milled = p.mill(numCards, destination, sa, table, moveParams);
+            final CardCollectionView milled = p.mill(numCards, destination, sa, moveParams);
             // Reveal the milled cards, so players don't have to manually inspect the
             // graveyard to figure out which ones were milled.
             if (!facedown && reveal) { // do not reveal when exiling face down

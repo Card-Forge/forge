@@ -99,7 +99,8 @@ public class CostSacrifice extends CostPartWithList {
                 desc = this.getTypeDescription();
             }
 
-            sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
+            if (desc.startsWith("another")) sb.append(desc);
+            else sb.append(convertAmount() == null ? Lang.nounWithNumeralExceptOne(getAmount(), desc)
                     : Lang.nounWithNumeralExceptOne(convertAmount(), desc));
         }
         return sb.toString();
@@ -146,9 +147,10 @@ public class CostSacrifice extends CostPartWithList {
         final Game game = targetCard.getGame();
         // no table there, it is already handled by CostPartWithList
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-        return game.getAction().sacrifice(targetCard, ability, effect, null, moveParams);
+        moveParams.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        return game.getAction().sacrifice(targetCard, ability, effect, moveParams);
     }
 
     /* (non-Javadoc)

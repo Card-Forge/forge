@@ -155,7 +155,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             CardLists.shuffle(cards);
         }
 
-        final CardZoneTable triggerList = new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
+        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -173,6 +173,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
 
             if (destination == ZoneType.Battlefield) {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
@@ -239,21 +240,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 if (imprint != null) {
                     game.getCardState(source).addImprintedCard(movedCard);
-                }
-
-                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-
-                if (c.getMeldedWith() != null) {
-                    Card meld = game.getCardState(c.getMeldedWith(), null);
-                    if (meld != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
-                    }
-                }
-                if (c.hasMergedCard()) {
-                    for (final Card cm : c.getMergedCards()) {
-                        if (cm == c) continue;
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), cm);
-                    }
                 }
             }
         }

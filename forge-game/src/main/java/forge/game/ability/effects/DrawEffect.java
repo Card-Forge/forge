@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -53,7 +56,6 @@ public class DrawEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
 
         final boolean upto = sa.hasParam("Upto");
         final boolean optional = sa.hasParam("OptionalDecider") || upto;
@@ -61,10 +63,15 @@ public class DrawEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
-        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
+        final List<Player> tgts = getTargetPlayersWithDuplicates(true, "Defined", sa);
+
+        for (final Player p : Sets.newHashSet(tgts)) {
             if (!p.isInGame()) {
                 continue;
             }
+
+            int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            numCards *= Collections.frequency(tgts, p);
 
             // it is optional, not upto and player can't choose to draw that many cards
             if (optional && !upto && !p.canDrawAmount(numCards)) {

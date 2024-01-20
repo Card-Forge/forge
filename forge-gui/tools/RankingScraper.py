@@ -34,11 +34,20 @@ def draftsimRankings(edition='KHM', extra=None):
 
 	txt3 = txt + txt2
 	txt3 = txt3.replace(u'\xa9', '')
-	print(txt3)
+	# print(txt3)
 
 	cardlist = json.loads(txt3)
+
+	# remove duplicates
+	unique_cards = dict()
+	for card in cardlist:
+		if card['name'] not in unique_cards:
+			unique_cards[card['name']] = card
+
+	cardlist = list(unique_cards.values())
 	cardlist.sort(key=lambda k:k['myrating'], reverse=True)
 	with open("../res/draft/rankings/" + edition.lower() + '.rnk', 'w') as out:
+		out.write('//Rank|Name|Rarity|Set\n')
 		for counter, card in enumerate(cardlist):
 			l = [str(counter+1), card['name'].replace('_', ' '), card['rarity'], edition]
 			out.write('#')
@@ -72,4 +81,4 @@ if __name__ == "__main__":
 
 	result = parser.parse_args()
 
-	draftsimRankings(result.setcode, result.name)
+	draftsimRankings(result.setcode, result.altpage)

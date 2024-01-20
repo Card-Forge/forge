@@ -59,10 +59,12 @@ public class DestroyEffect extends SpellAbilityEffect {
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = getChangeZoneTable(sa, lastStateBattlefield, CardCollection.EMPTY);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
-        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), CardCollection.EMPTY);
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
             if (!tgtC.isInPlay()) {
@@ -75,21 +77,21 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
                 continue;
             }
-            internalDestroy(gameCard, sa, table, cachedMap, params);
+            internalDestroy(gameCard, sa, cachedMap, params);
         }
 
         untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         for (final Card unTgtC : untargetedCards) {
             if (unTgtC.isInPlay()) {
-                internalDestroy(unTgtC, sa, table, cachedMap, params);
+                internalDestroy(unTgtC, sa, cachedMap, params);
             }
         }
 
         table.triggerChangesZoneAll(game, sa);
     }
 
-    protected void internalDestroy(Card gameCard, SpellAbility sa, CardZoneTable table, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
+    protected void internalDestroy(Card gameCard, SpellAbility sa, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
@@ -100,9 +102,9 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
 
         if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, sa, true, table, params) != null;
+            destroyed = game.getAction().sacrifice(gameCard, sa, true, params) != null;
         } else {
-            destroyed = game.getAction().destroy(gameCard, sa, !noRegen, table, params);
+            destroyed = game.getAction().destroy(gameCard, sa, !noRegen, params);
         }
         if (destroyed && remDestroyed) {
             card.addRemembered(gameCard);

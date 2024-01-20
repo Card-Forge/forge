@@ -126,4 +126,7 @@ March of the Machine Jumpstart, -/2/MOM, Meta-Choose(S(MOM Brood 1)Brood 1;S(MOM
 The Lord of the Rings: Tales of Middle-earth, 3/6/LTR, LTR
 The Lord of the Rings: Tales of Middle-earth Jumpstart, -/2/LTR, Meta-Choose(S(LTR Courageous 1)Courageous 1;S(LTR Courageous 2)Courageous 2;S(LTR Tricksy 1)Tricksy 1;S(LTR Tricksy 2)Tricksy 2;S(LTR Mordor 1)Mordor 1;S(LTR Mordor 2)Mordor 1;S(LTR Marauders 1)Marauders 1;S(LTR Marauders 2)Marauders 1;S(LTR Journey 1)Journey 1;S(LTR Journey 2)Journey 2)Themes
 Wilds of Eldraine, 3/6/WOE, WOE
+Alchemy: Eldraine, 3/6/WOE, YWOE
 The Lost Caverns of Ixalan, 3/6/LCI, LCI
+Alchemy: Ixalan, 3/6/LCI, YLCI
+Ravnica Remastered, 3/6/RAV, RVR

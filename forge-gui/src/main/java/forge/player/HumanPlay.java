@@ -71,7 +71,6 @@ public class HumanPlay {
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                p.getGame().updateLastStateForCard(source);
             }
             return false;
         }
@@ -510,26 +509,26 @@ public class HumanPlay {
     }
 
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
-        Card hostCard = ability.getHostCard();
+        final Card hostCard = ability.getHostCard();
         final Game game = hostCard.getGame();
-
         final CardZoneTable table = new CardZoneTable();
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.InternalTriggerTable, table);
+
         if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
             for (final Card c : cardsToDelve) {
                 hostCard.addDelved(c);
-                final ZoneType o = c.getZone().getZoneType();
-                final Card d = game.getAction().exile(c, null, null);
+                final Card d = game.getAction().exile(c, null, params);
                 hostCard.addExiledCard(d);
                 d.setExiledWith(hostCard);
                 d.setExiledBy(hostCard.getController());
-                table.put(o, d.getZone().getZoneType(), d);
             }
         }
         if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(offering, ability, false, table, null);
+                game.getAction().sacrifice(offering, ability, false, params);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -537,7 +536,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(emerge, ability, false, table, null);
+                game.getAction().sacrifice(emerge, ability, false, params);
                 ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             } else {
                 ability.resetSacrificedAsEmerge();

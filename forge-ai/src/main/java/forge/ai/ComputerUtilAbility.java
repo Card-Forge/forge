@@ -265,12 +265,14 @@ public class ComputerUtilAbility {
                     }
                 }
                 Game game = hostCardForGame.getGame();
-                for (Card c : game.getActivePlanes()) {
-                    if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
-                        if (ApiType.RollPlanarDice == a.getApi()) {
-                            return 1;
-                        } else {
-                            return -1;
+                if (game.getActivePlanes() != null) {
+                    for (Card c : game.getActivePlanes()) {
+                        if (c.hasSVar("AIRollPlanarDieParams") && c.getSVar("AIRollPlanarDieParams").toLowerCase().matches(".*lowpriority\\$\\s*true.*")) {
+                            if (ApiType.RollPlanarDice == a.getApi()) {
+                                return 1;
+                            } else {
+                                return -1;
+                            }
                         }
                     }
                 }

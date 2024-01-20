@@ -3,7 +3,10 @@ package forge.game.trigger;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
+
 import forge.game.ability.AbilityKey;
+import forge.game.player.Player;
 import forge.util.TextUtil;
 
 /** 
@@ -12,7 +15,7 @@ import forge.util.TextUtil;
 public class TriggerWaiting {
     private TriggerType mode;
     private Map<AbilityKey, Object> params;
-    private List<Trigger> triggers = null;
+    private Map<Trigger, Player> triggers;
 
     public TriggerWaiting(TriggerType m, Map<AbilityKey, Object> p) {
         mode = m;
@@ -27,12 +30,25 @@ public class TriggerWaiting {
         return params;
     }
 
-    public List<Trigger> getTriggers() {
-        return triggers;
+    public Iterable<Trigger> getTriggers() {
+        if (triggers == null) {
+            return null;
+        }
+        return triggers.keySet();
     }
 
-    public void setTriggers(final List<Trigger> triggers) {
-        this.triggers = triggers;
+    public void setTriggers(final List<Trigger> trigs) {
+        this.triggers = Maps.newHashMap();
+        for (Trigger t : trigs) {
+            triggers.put(t, t.getHostCard().getController());
+        }
+    }
+
+    public Player getController(Trigger t) {
+        if (triggers == null) {
+            return null;
+        }
+        return triggers.get(t);
     }
 
     @Override

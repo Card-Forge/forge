@@ -267,6 +267,7 @@ public final class CardUtil {
         newCopy.setTributed(in.isTributed());
         newCopy.setMonstrous(in.isMonstrous());
         newCopy.setRenowned(in.isRenowned());
+        newCopy.setSolved(in.isSolved());
 
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());

@@ -75,5 +75,5 @@ PT:3/6
 K:Double Strike
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | PumpZone$ Battlefield,Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Other | PumpZone$ Battlefield,Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 Oracle:Double strike\nWhen this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.

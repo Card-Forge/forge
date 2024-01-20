@@ -1,5 +1,6 @@
 Name:Threaten
 ManaCost:2 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ Untap | ValidTgts$ Creature | SubAbility$ DBChange | SpellDescription$ Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn.
+SVar:DBChange:DB$ GainControl | Defined$ Targeted | AddKWs$ Haste | LoseControl$ EOT
 Oracle:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. (It can attack and {T} this turn.)

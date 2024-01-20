@@ -75,6 +75,11 @@ public class AbilityUtils {
             player = hostCard.getController();
         }
 
+        if (defined.contains("AndSelf")) {
+            cards.add(hostCard);
+            defined = defined.replace("AndSelf", "");
+        }
+        
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
@@ -820,8 +825,8 @@ public class AbilityUtils {
         return objects;
     }
 
-    public static FCollection<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
-        final FCollection<GameEntity> objects = new FCollection<>();
+    public static List<GameEntity> getDefinedEntities(final Card card, final String[] def, final CardTraitBase sa) {
+        final List<GameEntity> objects = new ArrayList<>();
         for (String d : def) {
             objects.addAll(AbilityUtils.getDefinedEntities(card, d, sa));
         }
@@ -1050,7 +1055,7 @@ public class AbilityUtils {
             addPlayer(card.getRemembered(), defined, players);
         }
         else if (defined.startsWith("Imprinted")) {
-            addPlayer(Lists.newArrayList(card.getImprintedCards()), defined, players);
+            addPlayer(card.getImprintedCards(), defined, players);
         }
         else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
@@ -1093,9 +1098,9 @@ public class AbilityUtils {
                     o = ((SpellAbility) c).getActivatingPlayer();
                 } else if (c instanceof Iterable<?>) { // For merged permanent
                     if (orCont) {
-                        addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Player.class)), "", players);
+                        addPlayer(Iterables.filter((Iterable<Object>)c, Player.class), "", players);
                     }
-                    addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Card.class)), "Controller", players);
+                    addPlayer(Iterables.filter((Iterable<Object>)c, Card.class), "Controller", players);
                 }
             }
             else if (defParsed.endsWith("Opponent")) {
@@ -1205,6 +1210,9 @@ public class AbilityUtils {
         else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
         }
+        else if (defined.equals("ChoosingPlayer")) {
+            players.add(((SpellAbility) sa).getRootAbility().getChoosingPlayer());
+        }
         else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
             if (p != null) {
@@ -1212,7 +1220,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.startsWith("ChosenCard")) {
-            addPlayer(Lists.newArrayList(card.getChosenCards()), defined, players);
+            addPlayer(card.getChosenCards(), defined, players);
         }
         else if (defined.equals("SourceController")) {
             players.add(sa.getHostCard().getController());
@@ -1991,35 +1999,35 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardPower")) {
+        if (sq[0].equals("CardPower")) {
             return doXMath(c.getNetPower(), expr, c, ctb);
         }
-        if (sq[0].contains("CardBasePower")) {
+        if (sq[0].equals("CardBasePower")) {
             return doXMath(c.getCurrentPower(), expr, c, ctb);
         }
-        if (sq[0].contains("CardToughness")) {
+        if (sq[0].equals("CardToughness")) {
             return doXMath(c.getNetToughness(), expr, c, ctb);
         }
-        if (sq[0].contains("CardSumPT")) {
+        if (sq[0].equals("CardSumPT")) {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumTypes")) {
+        if (sq[0].equals("CardNumTypes")) {
             return doXMath(getNumberOfTypes(c), expr, c, ctb);
         }
-        if (sq[0].contains("CardNumNotedTypes")) {
+        if (sq[0].equals("CardNumNotedTypes")) {
             return doXMath(c.getNumNotedTypes(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumColors")) {
+        if (sq[0].equals("CardNumColors")) {
             return doXMath(c.getColor().countColors(), expr, c, ctb);
         }
 
-        if (sq[0].contains("CardNumAttacksThisTurn")) {
+        if (sq[0].equals("CardNumAttacksThisTurn")) {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
         }
 
-        if (sq[0].contains("Intensity")) {
+        if (sq[0].equals("Intensity")) {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }
 
@@ -3053,11 +3061,11 @@ public class AbilityUtils {
         return applyAbilityTextChangeEffects(val, ability);
     }
 
-    private static void addPlayer(Iterable<Object> objects, final String def, FCollection<Player> players) {
+    private static void addPlayer(Iterable<?> objects, final String def, FCollection<Player> players) {
         addPlayer(objects, def, players, false);
     }
 
-    private static void addPlayer(Iterable<Object> objects, final String def, FCollection<Player> players, boolean skipRemembered) {
+    private static void addPlayer(Iterable<?> objects, final String def, FCollection<Player> players, boolean skipRemembered) {
         for (Object o : objects) {
             if (o instanceof Player) {
                 final Player p = (Player) o;
