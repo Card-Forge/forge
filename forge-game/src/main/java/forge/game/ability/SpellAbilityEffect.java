@@ -686,7 +686,7 @@ public abstract class SpellAbilityEffect {
             if ("True".equalsIgnoreCase(attacking)) {
                 defs.addAll(combat.getDefenders());
             } else {
-                defs.addAll(AbilityUtils.getDefinedEntities(sa.hasParam("ForEach") ? c : host, attacking.split("&"), sa));
+                defs.addAll(AbilityUtils.getDefinedEntities(sa.hasParam("ForEach") ? c : host, attacking.split(" & "), sa));
             }
 
             Map<String, Object> params = Maps.newHashMap();
