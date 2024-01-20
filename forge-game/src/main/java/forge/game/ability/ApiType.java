@@ -53,6 +53,7 @@ public enum ApiType {
     Clash (ClashEffect.class),
     ClassLevelUp (ClassLevelUpEffect.class),
     Cleanup (CleanUpEffect.class),
+    Cloak (CloakEffect.class),
     Clone (CloneEffect.class),
     CompanionChoose (ChooseCompanionEffect.class),
     Connive (ConniveEffect.class),
