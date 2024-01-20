@@ -4,7 +4,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -36,11 +35,11 @@ public class CostCollectEvidence extends CostPartWithList {
 
     @Override
     public boolean canPay(SpellAbility ability, Player payer, boolean effect) {
-        CardCollection list = new CardCollection(payer.getCardsIn(ZoneType.Graveyard));
-
         int amount = this.getAbilityAmount(ability);
 
-        return CardLists.getTotalCMC(list) >= amount;
+        // This may need to be updated if we get a card like "Cards in graveyards can't be exiled to pay for costs"
+
+        return CardLists.getTotalCMC(payer.getCardsIn(ZoneType.Graveyard)) >= amount;
     }
 
     @Override
