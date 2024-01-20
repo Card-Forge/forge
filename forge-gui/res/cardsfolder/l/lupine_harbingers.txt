@@ -4,7 +4,7 @@ Types:Creature Wolf
 PT:4/4
 K:Trample
 K:Haste
-T:Mode$ IsForetold | ValidCard$ Card.Self | TriggerZones$ Exile | Execute$ TrigNoteNum | Static$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Exile | Execute$ TrigNoteNum | Static$ True
 SVar:TrigNoteNum:DB$ Pump | NoteNumber$ X
 SVar:X:Count$YourTurns
 K:etbCounter:P1P1:Z:CheckSVar$ WasForetold:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the number of turns you've begun since it was foretold.

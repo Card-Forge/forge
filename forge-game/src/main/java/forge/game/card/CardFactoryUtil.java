@@ -3018,7 +3018,6 @@ public class CardFactoryUtil {
                     final Game game = getHostCard().getGame();
                     final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
                     c.setForetold(true);
-                    game.getTriggerHandler().runTrigger(TriggerType.IsForetold, AbilityKey.mapFromCard(c), false);
                     c.setForetoldThisTurn(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
