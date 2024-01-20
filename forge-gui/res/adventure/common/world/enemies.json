@@ -6917,7 +6917,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
-	"life": 19,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -6959,7 +6959,7 @@
 	"difficulty": 0.1,
 	"speed": 16,
 	"scale": 0.7,
-	"life": 19,
+	"life": 30,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -15476,7 +15476,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"scale": 0.7,
+	"scale": 0.8,
 	"life": 17,
 	"rewards": [
 		{
@@ -15484,11 +15484,18 @@
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
+			
 			"rarity": [
 				"rare",
 				"Mythic Rare",
 				"Rare",
 				"Uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Artifact",
+				"Enchantment"
 			]
 		},
 		{
@@ -26554,7 +26561,6 @@
 		"decks/miniboss/torturer.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,

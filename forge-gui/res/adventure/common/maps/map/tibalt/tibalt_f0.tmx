@@ -5,7 +5,7 @@
  </editorsettings>
  <properties>
   <property name="canFailDungeon" type="bool" value="true"/>
-  <property name="respawnEnemies" type="bool" value="true"/>
+  <property name="respawnEnemies" type="bool" value="false"/>
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
@@ -175,7 +175,7 @@
    <properties>
     <property name="displayNameOverride" value="Tibalt's Pet Dragon"/>
     <property name="enemy" value="Vulcano Dragon"/>
-    <property name="speedModifier" type="float" value="50"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -186,7 +186,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;: &quot;Before you stand the castle of Tibalt, surrounded by by streams of flaming hot Lava. The door stands before you opened, as though the castle is inviting you in.&quot;,
+    &quot;text&quot;: &quot;As you approach, the castle gates swing open with an eerie creak, revealing a darkened courtyard enveloped in an unsettling silence. The ground beneath your feet feels cold and unyielding, as if the very earth recoils from the presence of Tibalt's domain. Sinister gargoyles leer down from the castle walls, their grotesque forms seeming to come alive in the fading light.&quot;,
     &quot;options&quot;: [
       {
         &quot;action&quot;: [
@@ -206,8 +206,9 @@
 ]</property>
    </properties>
   </object>
-  <object id="194" template="../../obj/portal.tx" x="252.842" y="311.439">
+  <object id="194" template="../../obj/portal.tx" x="279.509" y="305.439">
    <properties>
+    <property name="activeQuestFlag" value="FortressPortal"/>
     <property name="portalState" value="inactive"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
     <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>

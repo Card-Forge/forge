@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="219">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="221">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -16,7 +16,7 @@
  <tileset firstgid="56577" source="../../tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJztllEKgDAIhqW3XnrrJp2h+x8pRggVtOm2f062D3yQpH2KtIjqca5Eyx6PUCMJfl/seU3v3HppP715c27hrUVyvldvrpve5YTzj+0OhnMOxJ6gZzC93/TqbXkXlHpbgtoTNKN5W/fldd7Mn3evPaS+XT06P/HqHUB4o/r2sCc5d3Mrb63baN6a/6iaThpvidvXM5aj+8klNW+kM9K7xZ549L4Aind7cw==
+   eJztljEOgCAMRRs3Fzdv4hm8/5EMQxMxChb6KQ285A8GMK9NIxLpca5Ey55O2MPhM29JrfG6pnfNWUk0qX2flTcCr96B6Y3j2OIg5gTdg+kd06u35V1Q620Jak7QjOZtXZfXfjNf3r3WkPt29eh8x6t3wJO3hzkpuZtbeUvdRvOW/EdpOkm8/7g9PVPP6HpKyfUb6Yz0bjEnHr0v9Ot4dw==
   </data>
  </layer>
  <layer id="18" name="BackgroundSub" width="46" height="28">
@@ -26,12 +26,12 @@
  </layer>
  <layer id="13" name="Background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzdl0EOgjAQRUFXboiJ0BhvQgy6MPEenksjsPMGngBv4VmUSWyYtkOhCML4kxcpYnkdSsFg6XlBT/iR55RXaO7D/dnSlzOQlt63TXvOkepIbdf5j+mdRnQ/lB8H76axcPHmMk+m7n0pj58hnkJtzy3r0zeeely9MZAsUsmZeN/XKly8dfeu3vD824kKPO9mBEl5zGNVgb1kG3/i7Vj0V2+oH/YYkliY+3RvfI2n4k3Bod7/5p3VuHP29mvWhzGdgWuDdz4Bx6Z6Z9oYOHhjOHoPNU+KD6eQhrqPtoK+t4C9sK+DXb0pN927QOOxrceu4e6N+5de+ns9Bn7TNAdcrnsX70So730SeZ5DYJJq3tDG39v+Y/WR48JEnpPyBSCUt16PIUN5A3XObb2HjmutbfPkl3kDsWEPJQ==
+   eJzdl9ENgjAQQAG//CEmSmPcxBj1w0TjGM6lEfhzAyfALZxFuWjDtRwtRVDOS16QWtvX4ygYjjwvbAk/8pziMSm34fFM0ZYzEOfel1l9jpHqSH2u8v+ldxzR41B+HLxta+HizaVO+u59yvsHiLtQzweG/ekTTz1cvTEQSaSSMvG+TlW4eOvuTb3h+bcSBbjuAoJl3uc2LsBeu/3rKNtxHzjORXv5hvxhjy6Zi3Kb7o2vcV+8KTjk+9+8kwp3zt5+xf7wS2fgbPFOe+Boy3eirYGDN4ajd906gWecyzzZm8OEhrqPFoK+t4C1MO+DTfNNueneGVqPaT92De7eeHzppb/XY+A3thpwue5NvJdCfe+TyHk2YZlY84Zz/L3pP1YbsR2WkXNSvgAE5a3no8ugvIEq57reXYdrrk118s14AoIeDpM=
   </data>
  </layer>
  <layer id="15" name="Walls" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWAByt4D7QLcIEyQgSEciCOAuFEclU+M/CgYBYMNnBQmTw2xYuSAeaLUMYeWoG8hAwPbXAYGZiDNDsQ8QDcvHALuxgbo7e48EQaG88IITAzQZkTggQJD1d3kgKHqbhigVllEL/COfaBdMApGwSiAAQAw4Rj6
+   eJxjYBgFo2AUjIJRMApGwSggDMIEGRjCgTgCiBvFUfnEyI+CUTDYwElh8tQQK0YOmCdKHXNoCfoWMjCwzWVgYAbS7EDMA3TzwiHgbmyA3u7OE2FgOC+MwMQAbUYEHigwVN1NDhiq7oYBapVF9ALv2AfaBaNgFIwCGAAAzmIYjA==
   </data>
  </layer>
  <layer id="16" name="Clutter" width="46" height="28">
@@ -39,12 +39,17 @@
    eJxjYBhAIDqQlqOCRVKYYpwlEIxLfjABkDsXQt3YWQLBMPHBDJDdSoz4UABDIa1gExvMaWU4ppPBCvCl38GetokF9PTHfxHs4tZi9HMDsUBNArcYNrlRQB1wEBi2/yQhWEUCt9hAgjmDqL1GKRgK4T1vNLxHwSgYBaMAJxjsZaQbJ3FiQwGMupu+YDC4GwCxxSvY
   </data>
  </layer>
- <layer id="19" name="AboveSprites" width="46" height="28">
+ <layer id="19" name="HighestLayer" width="46" height="28">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAvYBJF4FFAH7BIaqBdMLzBYwMGhicGA+0K4gByWvgPcrPhgDmF6sBWDMH+LzJw7qAEzB+i5eJQdvd2CdragauuswemVzscGARwyYHwvCEa3pZihNWMgsEJhmoeH6pgoPP4wtH4HhJg9hCNJwc61AW06Gf+HaJty6GaTubgcTfzEPXTKBgFQwEAAKTsFQw=
+   eJxjYKAvYBJF4FFAH7BIaqBdMLzBYwMGhicGA+0K4gByWvgPcrPhgDmF6sBWDMH+LzJw7qAEzB+i5eJQdvd2CdragauuswemVzscGARwyYHwvCEa3pZihNWMgsEJhmoeH6pgoPP4wtH4HhJg9mg84QS06Gf+HaJty6GaTubgcTfzEPXTKBgFQwEAAL/MFLY=
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1UERAAAEAEFdxFFaNCkMj90E97sIAOCLrOsCANjRHgfw1gBYqwF6
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
@@ -78,13 +83,6 @@
     <property name="waypoints" value="208,198,210,209"/>
    </properties>
   </object>
-  <object id="150" template="../../obj/enemy.tx" x="327.676" y="200.106">
-   <properties>
-    <property name="enemy" value="Necromancer"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-   </properties>
-  </object>
   <object id="173" template="../../obj/manashards.tx" x="188.009" y="188.105"/>
   <object id="174" template="../../obj/manashards.tx" x="525.342" y="122.438"/>
   <object id="179" template="../../obj/booster.tx" x="420.343" y="25.438">
@@ -112,23 +110,23 @@
 </property>
    </properties>
   </object>
-  <object id="189" template="../../obj/waypoint.tx" x="146.009" y="208.772"/>
-  <object id="195" template="../../obj/waypoint.tx" x="142.676" y="344.772"/>
-  <object id="196" template="../../obj/waypoint.tx" x="350.342" y="258.439"/>
+  <object id="189" template="../../obj/waypoint.tx" x="144.676" y="202.439"/>
+  <object id="195" template="../../obj/waypoint.tx" x="144.009" y="309.439"/>
+  <object id="196" template="../../obj/waypoint.tx" x="578.675" y="241.772"/>
   <object id="200" template="../../obj/enemy.tx" x="292.343" y="263.772">
    <properties>
     <property name="enemy" value="Adept Black Wizard"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="201" template="../../obj/enemy.tx" x="149.342" y="269.105">
+  <object id="201" template="../../obj/enemy.tx" x="250.342" y="313.772">
    <properties>
     <property name="enemy" value="Horror of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="198,195,213,214,213,195"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="213,195"/>
    </properties>
   </object>
-  <object id="202" template="../../obj/enemy.tx" x="87.6754" y="324.439">
+  <object id="202" template="../../obj/enemy.tx" x="87.6754" y="327.106">
    <properties>
     <property name="enemy" value="Horror of Tibalt"/>
     <property name="speedModifier" type="float" value="4"/>
@@ -162,8 +160,8 @@
    <properties>
     <property name="enemy" value="Curselord"/>
     <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="183,181,182,181"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="214,189"/>
    </properties>
   </object>
   <object id="208" template="../../obj/waypoint.tx" x="477.342" y="26.1053"/>
@@ -171,17 +169,18 @@
   <object id="210" template="../../obj/waypoint.tx" x="314.675" y="26.4386"/>
   <object id="211" template="../../obj/manashards.tx" x="451.675" y="312.105"/>
   <object id="212" template="../../obj/manashards.tx" x="125.009" y="186.105"/>
-  <object id="213" template="../../obj/waypoint.tx" x="252.675" y="309.772"/>
+  <object id="213" template="../../obj/waypoint.tx" x="383.342" y="310.105"/>
   <object id="214" template="../../obj/waypoint.tx" x="253.675" y="202.772"/>
-  <object id="215" template="../../obj/enemy.tx" x="435.342" y="259.772">
+  <object id="215" template="../../obj/enemy.tx" x="464.009" y="243.772">
    <properties>
     <property name="enemy" value="Horror of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="217,196"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="196,220,213"/>
    </properties>
   </object>
   <object id="217" template="../../obj/waypoint.tx" x="471.342" y="144.105"/>
-  <object id="218" name="Ward" type="dialog" gid="56584" x="557.695" y="178.772" width="63.961" height="16">
+  <object id="218" name="Ward" type="dialog" gid="56584" x="556.362" y="180.439" width="63.961" height="16">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
@@ -191,5 +190,22 @@
 }]</property>
    </properties>
   </object>
+  <object id="219" template="../../obj/treasure.tx" x="30.6754" y="297.772">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="220" template="../../obj/waypoint.tx" x="363.675" y="253.105"/>
  </objectgroup>
 </map>

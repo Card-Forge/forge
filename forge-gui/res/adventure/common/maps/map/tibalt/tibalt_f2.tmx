@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="207">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="207">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -15,7 +15,7 @@
  <tileset firstgid="23839" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJztlsEJgDAMRYMX8a4juIo3h3AnB3UEDxLoobZJmkYDeRBQiL/PIEEAPbaJ3lerWp8m3Ly0n/Iuf/TGe4/ebz0evbEvvOUe3Ext71zWMT+F4PU6/t9bk97eiAdvC8K7zKWcF/OuI915OWLetlh65/5PpRna3ufOd+DQy5vy7LC053/hLc1N3Tx6l6ol38LPYp9Qzmr1tdrfWp5W8+7pbP2dhDfADayQa+s=
+   eJztkkEKgDAMBIM37/olbz7CP/lQn+BBAkXaUtNNaiADAUF2M4QS4dhmWSY3tX+SPWjvNPtlkPT2efUudXr05t7wzvej0Xgnua5jeYZJvxE7NL2RaHszHrwtCO86F7gv7m1LeNsy0luyhzNo73OXZ1vQ8m5hWuXZkd4S3m4evWvzdz8L75Zdvb5W90Z5Wt1b09n6nYQ30Q14PGdB
   </data>
  </layer>
  <layer id="18" name="BackgroundSub" width="46" height="28">
@@ -25,7 +25,7 @@
  </layer>
  <layer id="13" name="Background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzt2M9OwkAQBvCRm5fGBNp49zmIBxMvBNBH8FH2OTwQn8KrF7gV5YlkNzpxdpjZ7bJbKIlf8oX/9Ndh2wDVDUBVqFc1wCih3xM4CH2/UEqZXVd1eFs8r7VvlK5r/nO6V7X8PpLvEtyxfbkUt5R/d7p72gBsxj9NTY5TimRw993NANZjvxvWc7k1A/cOya0Z8LZmPdaeMs/R7/qdG4CF7dL2yfbZyNuPGbW+3+a7JWNru7X9tP2y3RV2a7Ons4y5uRH3IzbzPtw588b9yHV3We+pbvqZSGtiGXF/zPqfN/fzULdkpddD8+OPvUzKnVukUKs0ezRL5xTudtYu58ISbskq3efcLnTdutC1vCZ+rGZ+S/zOEJp36DxI3eils8acwj03fkPrZWf810p+GuqmKeFujV/ql+x8HRyzXvG3532T56Y2apfceNzluEtEOybbgbt5po2+Py6x/x1OnYfq7xKrPQ8b+m1RIo/Xh8VtUkfMzNOnWXO7auau7r6TOuuh2PdQap+L
+   eJzt2F9OAjEQBvCRN182JrAbL0N8MCHhAZEjcJSewwfiKTwBvK3AibSNTpwOM+2WdmFJ/JIv/BP2t0NphOoBoCrUuxpglNCvCZyEvl4opcyumzp8LJ632jdK1zX/Nd2bWn4dyXcL7ti53Ipbyr873T1tAHbjn6YmxylFMrj7ZnOA7djvjvVabs3AvUNyawa8rVnPtafMc/S7fhcG4MV2aftquzLy8WNGrR+P+W7J2Np+2u5tD7bHwm5t9nSWMTc34nnEZt6HO2feeB657i7rPdVN3xNpTSwjbrfn9T1v7uehbslKr4fmxx9bT8rtLVKoVZo9mqU9hbudtcteWMItWaX7nNuFrlsXupa3xI/VzO+J/zOE5h3aB6kbvXTWmEu4F8ZvaL0cjf9cyU9D3TQl3K3xS/2Sna+Dc9Yrfvd8avLc1Ebtkhs/dznuEtE+k+3A3TzTRj8fl9jvDpfOc/V3idX+Dhv6blEis/vT4jGpI2bm6dOsuV01c1d330md9VDs333hnzA=
   </data>
  </layer>
  <layer id="15" name="Walls" width="46" height="28">
@@ -41,12 +41,17 @@
    eJxjYBhAIDqQlqOCo5wMDMeA+DgnhP9OkIHhPRB/EMQuP1hAiCAEBwmSJz9QgFB4DtbwHsoghEAaICQ/VADTIChX7MQYGJgHgTvIAQvR3N0ojqC/8tLfPcQCdHcPNCA2HVLq7u0SlOknFwy28IYBtgL88sS4m1A6B5mxgM7+B9kJy4uUAHLdPZ9YfQTCn1ww0sKbEPBtZGDwA2J/IA4A4kAgFpSjXr6kl7tdxCDiA+1uQun7LNCt54D4PBBfGETuJgTQ3X0RGv4wAKqnKGkz0dPd1AQ0LwcHGbAVQ+UP1fYpCIDa17jwYAJuWPqv2MSGAhh1N33BYHA3AHJlRro=
   </data>
  </layer>
- <layer id="19" name="AboveSprites" width="46" height="28">
+ <layer id="19" name="Highest Layer" width="46" height="28">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJztlktuwjAQhl0WSN10A4m4C2pZdE2BA7Rn4ARIaStOgdSyKydA3bJgRx8HQu2McJTx1MSP2BFF+aRfIU6Evpk4joVoaGho+P8sEiFuUiFaiTrOz2PTTw/Hn67+OvrQDFL1+rZT5KVm95zN5SEunIK3C3t4Puuemjq99w/68ZXBAR3RFQnlfcwlJNSbjoVmdh/2/9DxlXkuPb1vr9RzW9e5R03Xci3ENTGPyRv9aOgYpz11d7LlLVHj6s1rKKMl6xhmQtxBRpBx5v+MKaG9qeMjeE/guIN8QD4hX57esfqdyXnLHb/ZbyRfC+h3hCYEPvPkCfr8PC16jzXh/MDe47qpW8NM3rTXsbzLeo91LMgeJBZV3kv+Pk7kPFnK9fi9V4RzkfzdZ7nUWcVb129b76przjl6u9ZhomzvXZd3jLqqwL/19JzfZ9oX1MkxT919p9RvW2K9A7b8Ari/oaM=
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1DENAAAIwDC8IAfTSMMFhKRVsGsRAGzIui4A2NOeBwDwxgCLLgF6
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">

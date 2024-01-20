@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="208">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="208">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -15,35 +15,40 @@
  <tileset firstgid="23839" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="17" name="Collision" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzllkEKwkAMRQd3ghQXuvMYnsGdh/BOHtQjlCAfxhLDpCZpgh8+TZs0eYShtDU73fat7c6yqWbE6CflLblHmVCvfdeL+3H6NFfDxVr2CO7+XuL+1jOSm+Lp+DaeL1lH50dyg5lMqsIN1j5e29Oam+slne3s3Jby5oYqcEcoK/d1kvNR3C9lfRZubq6krNy/6p+5Lwd/rv4Zl4/ctzQHuf6cU0z2+I993sdr187x4NbOl3LYL3aOqxW39tvMMVo5gncrbitl5bbk2nrfFbiXfavsu+o5ieSeAWEaimc=
+   eJztlUEKgDAMBIs3L+JBv+TNR/gnH+oTJEhApYa2rKuFDCxEjXEIBUPAMbUhNKMd6UmJzrOeI71TnbQ/9923vJfhmlhPrM51Z3ifry3vp5lMb6m7/ojev7umfp/prc4SoRZvdT3XpTPf9hass10C0xuJe3Nxb5sNPM/3zcW9ubj3wTrj3Cx833iHkqSA+pewvVH81Rvp9fW+a/C+z61l37WeE6b3Dq6GfrU=
   </data>
  </layer>
  <layer id="18" name="BackgroundSub" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJACAMBdHgDLqS4Bjuv4RYaSEIWsQv9yCQ8iAQM8BPjd4FZ3r3PCqUu1e7gly8CwDgXkhjfvP6n369D3vcEACgoAEdUgeJ
+   eJztzrEJACAQBEGxBi3Q/psQIw2MDHyUGTi4cFOCOK1EF5wZ3ete8XL37gNwR65zAAD8pwNa4AVN
   </data>
  </layer>
  <layer id="13" name="Background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVmEtOAzEMhlMeCzYjpDZDZ66CCgsk7lEJOAm3AKnlFIgDwJoLcJYyVmrFdePJA6cqv/SrnijKfLE9rzaXxjRKnlhjHjrnZefjEzK+mbljMMRcdL0xaTGDV8DTO286H5vexzDn/sL5xe4yhmKJX5ub63O6a5iz3nplw+uE+A7JDZzLmTMew5z3ubPEHdtLDe7vqVv3+cqYx6FXnjoXn/fl3IfoE+QGnQ6sZ/1+nxwjNwpyzGPe61/EufoLZ67GuHPZNbklBs6LfrPl7Frc/PzcoRyHuFPZNfogxixZ4k5hj3HztUoZQ/lftMM9J4Od5lKbGyRdd6G+Gcv5WN5r5JtyS/w1uHlNqLT6JNUxpdzbeO4wZyCpN6T7NbyzaHBLCq2RkyvKDayc/3X7Lv4zXKM3rR/HWIOb547mG8XHkJXzo+HdIFQP7H0NpXKP7YNz83X587RUvCdprUPcnD/EI+W7FjcIz8f3IXF9zJ3h+2Zi/bcl+rrdH0PftjrclIcf0z1I3Fr9miuo6X/kXkTqJtVbo+4lumv8L1qahy79tkgV/pdBjeekHDFmrprMEjdYYk7lrq3cXB8L+y9eS4EL
+   eJzVmF9OwzAMxjP+PPBSIW0ta6+CBg9IkzjGJOAk3AKkwSkQBxjPXICzjFqZVdez06Q40/ikT3OiKP3Vcdp0xaVzhZEnpXMPtfeq7uIT0r+d+TYYYi46X0hWzOA18DTe27qLXdPFMGZ54f1S9hmlWOO35ubaTPuGMW87r0t5HonvkNzAuZp5YxvGfMy9Ne6he8nB/T318z5fOffY1spT7ePzZjz3IeoEuUGnLetZs18nx8iNghzzmNf6F3GqrJglLe/77RB3Krsls8bAedHv5Xh2K25+fW4pxxJ3LHvq2ksaYtasccewp+TxL4xS/hdV+8xJYKe5tOYGaftOqptQzkN5z5Fvyq3x5+Dma0JlVSexHpK2F3mOpJyBtNrQntdwZrHg1kTnwPdISq4oN7By/tfdWfyn3aM3lb8G9ENsyc1rd8Pm5n3IyvnRcDaQ1gNr30Kx3KH74Nx0Tul9OlY833StJW7OL/Fo+c7NjXsK4xDX59wbvm8mZfdtib6u9vvQt5UNN+XhbXoPGrdVvaYK1vQ/ci8G1k1bb4t1H6O7ovtFa+PQqWfKVOF/GdR4TcoxxMyVk1njBmvMsdy5lZrrY2H/BfI7g1c=
   </data>
  </layer>
  <layer id="15" name="Walls" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjILhBRaIYse0BoxAO+zFUMWUvUkzg97uxubmRBEEJgXQ093obqYUUOpuUDjaieHHNlR2MwxQ4u75aPoWkmlOizh5+qjlbkcCYWvOi2D/k2RgqOPFrZaWgNTwRnY3NjfTyx/USif0BsS6+wCJ5TStAbq7Qe47JjwwbiEF0CudqEqg8tUkIJhcAHI3ExKmhbtpkcaoFd4PoeVnPY5yHBa+5Jbz6GColifoYKi4mwktfaOHP7FAmoI8NgqGB6BHX2oUDDwAAPj/MA4=
+   eJxjYBgFo2AUjILhBRaIYse0BoxAO+zFKDOD3u7G5uZEEQQmBdDT3ZSGMzqg1N2gcLQTw49tqOxmGKDE3fPR9C0k05wWcfL0UcvdjgTC1pwXwf4nycBQx4tbLS0BqeGN7G5sbqaXP6iVTugNhou7QeCYMP3dQSqgV3irSqDy1SQgmFwAcjcTEh7K6YQc8BBaftbjKMdh4UtuOY8OqOXugQZDJZ0woaVvcsNfmoI8NgqGB6BHX2oUDDwAAO+NKxM=
   </data>
  </layer>
  <layer id="16" name="Clutter" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBhAIDqQlo+CgQQOPAPtglGADBYO0bw4GN1tLYZg3xbDrsYeh/hgAoJymGJfeenvDnzgeBIDw4mkgXYFdvBfBLecezIDg0cy/dxCCNSRGK9nUlH579ip5xZag1nAumcBD4Q+KowQR2aD0vl3Qdq64zWR6ljVIDTIvV4pEPqPJG71U4UodhpWMAetrJ1H5bLXWJiwGlqAmdC0gMxfAOXPH2TtFHS3ogNsZfZwBtqM1DOL1ukbG4hjoH6cOZDRtngohkoTA36Rbg1e4DgE2kQgMB8tXZDbBpWWoNwtpABbtPAlN33T293YgJ0YbjyYgBsncWJDAYy6m75gMLgbAJXuKUo=
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADBYO0bw4GN1tLYZg3xbDrsYeh/hgAoJymGJfeenvDnzgeBIDw4mkgXYFdvBfBLecezIDg0cy/dxCCNSRGK9nUlH579ip5xZag1nAumcBD4Q+KowQR2aD0vl3Qdq64zWR6ljVIDTIvV4pEPqPJG71U4UodhpWMAetrJ1H5bLXWJiwGlqAmdC0gMxfAOXPH2TtFHS3ogNsZfZwBtqM1DOL1ukbG4hjGBxx9lAMlSYG/KKNUwY9mI+WLshtg0pLUO4WUoAtWtySm77p7W5swE4MNx5MwI2TOLGhAEbdTV8wGNwNAJMKKJ0=
   </data>
  </layer>
- <layer id="19" name="AboveSprites" width="46" height="28">
+ <layer id="19" name="HighestLayer" width="46" height="28">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztljEOgjAUQH9kcBEXA1FmdXXURRPjTYyzxp14EiIaT+EFvIQcRprS0PxQoeVjMeElP22h0NdS+AB0dHR0/D+RB7DxARzPrsd+BvBOPRKfl4xEaveQX5y117bd5+aX2nC/E43XpPthAnBM4zThdfbsr4qxLq7+/Zty7wUAgzTcgNcZMRrHxFeGyn1Z4oG9+4u8FHVdTN13Q16uKqyd8A6lvrdBVgn0xxZ8e2+Ynxzysarg9aZy0/HGczhP9Tx09/bWV5+r412FovV+jXjo8vDy/KT6TjGovLGnaBcFBRTe6yyH43A8u95hyZ5VueH5UOaTMu86OeQ5zoMR/dBbYOKPvSmh2N8qbHlTz4MSU++2zQvnermN+5n+FzSByrOoX5vWuyq234EPWFhc3A==
+   eJztlsEOwTAYgP/YwcVcZAs74+rIhRBvIs7EXTzJYjyGF/ASxLPYn67R/FlZ659Osi/503Zq/VptfwA1NTU1/08cAMxCAC9w67EaANxSj3soSuSutBvEL8naU9fuQ/uvunA/M41Xpvu6B7BJY9sTdfztj5qxDr75+8tyb0QArTT8SNSRhIxj46vC5T7OPOZh/ufUuzl6lbJuiq37si3KSYG1k957pe+plVUi87El784N+qmhPisKXW8uNxNvOodd38zDdG8vNHsP+cZbpej+Rq4dETbI/KS7pxATbx3oTT1lOy844PCeZjmchhe49Zb3xEOzT3RudD6c+eSTt3rOTO+NS/cVSPxDb4lNDqTenHDsbx2uvLnnwYmtd9XmRXO92qb9bP8XlIHOM69flda7KK7PwBMe6154
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1TERACAMA8B6QQ6mkdbDAFtph38FGXJJBABV1u5OAMDLGb7TP/L5qlrTOwYAVwIixgP+
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
@@ -66,7 +71,7 @@
    <properties>
     <property name="defeatDialog">[
 	{
-		&quot;text&quot;: &quot;The Tortuer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his victims, you see the red barrier dissapear. The way to Tibalt is open&quot;,
+		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortuered victims, you see the red barrier disapear. The way to Tibalt's chambers is open&quot;,
 		&quot;options&quot;: [
 			{
 				&quot;name&quot;: &quot;(Continue)&quot;,
@@ -99,8 +104,8 @@
   <object id="136" template="../../obj/enemy.tx" x="399.524" y="258.907">
    <properties>
     <property name="enemy" value="Horror of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="196,185,197"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="196,185"/>
    </properties>
   </object>
   <object id="141" template="../../obj/treasure.tx" x="509.503" y="120.175">
@@ -124,7 +129,7 @@
     <property name="enemy" value="Necromancer"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="60"/>
-    <property name="waypoints" value="182,181,183"/>
+    <property name="waypoints" value="182,181"/>
    </properties>
   </object>
   <object id="168" template="../../obj/gold.tx" x="525.509" y="246.272"/>
@@ -134,10 +139,10 @@
   <object id="172" template="../../obj/manashards.tx" x="317.675" y="40.7719"/>
   <object id="173" template="../../obj/manashards.tx" x="476.009" y="179.438"/>
   <object id="174" template="../../obj/manashards.tx" x="511.009" y="169.105"/>
-  <object id="178" template="../../obj/enemy.tx" x="215.009" y="265.106">
+  <object id="178" template="../../obj/enemy.tx" x="208.676" y="256.439">
    <properties>
     <property name="enemy" value="Devil of Tibalt"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="187,193,195,193"/>
    </properties>
   </object>
@@ -167,14 +172,12 @@
    </properties>
   </object>
   <object id="181" template="../../obj/waypoint.tx" x="426.342" y="46.1053"/>
-  <object id="182" template="../../obj/waypoint.tx" x="347.342" y="45.1053"/>
-  <object id="183" template="../../obj/waypoint.tx" x="429.675" y="132.772"/>
+  <object id="182" template="../../obj/waypoint.tx" x="335.342" y="43.4386"/>
   <object id="185" template="../../obj/waypoint.tx" x="486.342" y="253.772"/>
   <object id="187" template="../../obj/waypoint.tx" x="218.676" y="204.438"/>
-  <object id="193" template="../../obj/waypoint.tx" x="230.676" y="351.105"/>
+  <object id="193" template="../../obj/waypoint.tx" x="213.009" y="353.438"/>
   <object id="195" template="../../obj/waypoint.tx" x="310.676" y="353.439"/>
   <object id="196" template="../../obj/waypoint.tx" x="316.675" y="256.105"/>
-  <object id="197" template="../../obj/waypoint.tx" x="476.009" y="139.772"/>
   <object id="198" template="../../obj/door_up.tx" x="461.105" y="86.8501" width="32.7127" height="80.0112" rotation="359.74">
    <properties>
     <property name="direction" value="down"/>
@@ -182,7 +185,7 @@
     <property name="teleportObjectId" value="170"/>
    </properties>
   </object>
-  <object id="201" name="Ward" type="dialog" gid="23816" x="457.362" y="123.772" width="39.2943" height="16">
+  <object id="201" name="Ward" type="dialog" gid="23816" x="461.029" y="123.772" width="35.6276" height="16">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
@@ -217,7 +220,7 @@
 </property>
    </properties>
   </object>
-  <object id="204" template="../../obj/gate.tx" x="577.509" y="278.772" width="11.6666" height="22">
+  <object id="204" template="../../obj/gate.tx" x="576.842" y="281.439" width="11.6666" height="22">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
