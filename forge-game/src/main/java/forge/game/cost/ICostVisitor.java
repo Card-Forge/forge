@@ -5,6 +5,7 @@ public interface ICostVisitor<T> {
     T visit(CostGainControl cost);
     T visit(CostChooseColor cost);
     T visit(CostChooseCreatureType cost);
+    T visit(CostCollectEvidence cost);
     T visit(CostDiscard cost);
     T visit(CostDamage cost);
     T visit(CostDraw cost);
@@ -36,6 +37,8 @@ public interface ICostVisitor<T> {
     T visit(CostTapType cost);
     T visit(CostPayShards cost);
 
+
+
     class Base<T> implements ICostVisitor<T> {
 
         @Override
@@ -50,6 +53,11 @@ public interface ICostVisitor<T> {
 
         @Override
         public T visit(CostChooseCreatureType cost) {
+            return null;
+        }
+
+        @Override
+        public T visit(CostCollectEvidence cost) {
             return null;
         }
 

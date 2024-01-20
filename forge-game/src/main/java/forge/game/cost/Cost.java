@@ -543,6 +543,11 @@ public class Cost implements Serializable {
             return new CostEnlist(splitStr[0], splitStr[1], description);
         }
 
+        if (parse.startsWith("CollectEvidence<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostCollectEvidence(splitStr[0]);
+        }
+
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);

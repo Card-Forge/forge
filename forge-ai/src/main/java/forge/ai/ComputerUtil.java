@@ -665,6 +665,33 @@ public class ComputerUtil {
         return sacList;
     }
 
+    public static CardCollection chooseCollectEvidence(final Player ai, CostCollectEvidence cost, final Card activate, int amount, SpellAbility sa) {
+        CardCollection typeList = new CardCollection(ai.getCardsIn(ZoneType.Graveyard));
+
+        if (CardLists.getTotalCMC(typeList) < amount) return null;
+
+        // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
+        CardLists.sortByCmcDesc(typeList);
+        Collections.reverse(typeList);
+
+
+        // TODO AI needs some improvements here
+        // Whats the best way to choose evidence to collect?
+        // Probably want to filter out cards that have graveyard abilities/castable from graveyard
+        // Ideally we remove as few cards as possible "Don't overspend"
+
+        final CardCollection exileList = new CardCollection();
+        while(amount > 0) {
+            Card c = typeList.remove(0);
+
+            amount -= c.getCMC();
+
+            exileList.add(c);
+        }
+
+        return exileList;
+    }
+
     public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa) {
         CardCollection typeList;
         if (cost.zoneRestriction != 1) {
