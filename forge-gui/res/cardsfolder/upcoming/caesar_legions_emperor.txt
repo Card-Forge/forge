@@ -8,7 +8,7 @@ SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBDraw,DBDamage | CharmNum$ 2
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rw_1_1_soldier_haste | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | SpellDescription$ Create two 1/1 red and white Soldier creature tokens with haste that are tapped and attacking.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creature tokens you control to target opponent. 
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creature tokens you control to target opponent.
 DeckHas:Ability$Token|Sacrifice
 DeckHints:Type$Token
 SVar:X:Count$Valid Creature.token+YouCtrl

@@ -16,7 +16,7 @@ Colors:black
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 black Zombie creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie
-A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. 
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SpellDescription$ If it was a creature card, create a 2/2 black Zombie creature token.
 DeckHas:Ability$Counters|Token|Graveyard & Type$Zombie
 Oracle:When Deluge of the Dead enters the battlefield, create two 2/2 black Zombie creature tokens.\n{2}{B}: Exile target card from a graveyard. If it was a creature card, create a 2/2 black Zombie creature token.

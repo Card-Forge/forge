@@ -1,5 +1,5 @@
 Name:Pull of the Mist Moon
-ManaCost:1 W W 
+ManaCost:1 W W
 Types:Enchantment
 K:Kicker:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.

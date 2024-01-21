@@ -6,7 +6,7 @@ K:Flying
 K:Ward:1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, for each player, choose up to one other target artifact or creature that player controls. For as long as CARDNAME remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.
 SVar:TrigAnimate:DB$ Animate | RemoveAllAbilities$ True | Types$ Artifact,Treasure  | Duration$ UntilHostLeavesPlay | Abilities$ TreasureSac | RemoveCardTypes$ True | ValidTgts$ Artifact.Other,Creature.Other | TgtPrompt$ Select up to one other target artifact or creature that player controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
-SVar:OneEach:PlayerCountPlayers$Amount 
+SVar:OneEach:PlayerCountPlayers$Amount
 SVar:TreasureSac:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Sacrifice & Type$Artifact|Treasure
 Oracle:Flying, ward {1}\nWhen Kitesail Larcenist enters the battlefield, for each player, choose up to one other target artifact or creature that player controls. For as long as Kitesail Larcenist remains on the battlefield, the chosen permanents become Treasure artifacts with "{T}, Sacrifice this artifact: Add one mana of any color" and lose all other abilities.

@@ -5,6 +5,6 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a three-time boon with "Whenever one or more Merfolk enter the battlefield under your control, target Merfolk creature you control explores."
 SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ MerfolkETB | SpellDescription$ You get a boon with "Whenever one or more Merfolk enter the battlefield under your control, target Merfolk creature you control explores."
 SVar:MerfolkETB:Mode$ ChangesZoneAll | ValidCards$ Merfolk.YouCtrl | Destination$ Battlefield | TriggerZones$ Command | BoonAmount$ 3 | Execute$ TrigExplore | TriggerDescription$ Whenever one or more Merfolk enter the battlefield under your control, target Merfolk creature you control explores.
-SVar:TrigExplore:DB$ Explore | ValidTgts$ Creature.Merfolk+YouCtrl | TgtPrompt$ Select target Merfolk creature you control 
+SVar:TrigExplore:DB$ Explore | ValidTgts$ Creature.Merfolk+YouCtrl | TgtPrompt$ Select target Merfolk creature you control
 AI:DeckNeeds:Type$Merfolk
 Oracle:When Merfolk Tunnel-Guide enters the battlefield, you get a three-time boon with "Whenever one or more Merfolk enter the battlefield under your control, target Merfolk creature you control explores."

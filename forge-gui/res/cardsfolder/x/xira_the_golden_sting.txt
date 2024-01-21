@@ -1,6 +1,6 @@
 Name:Xira, the Golden Sting
 ManaCost:1 B R G
-Types:Legendary Creature Insect Assassin 
+Types:Legendary Creature Insect Assassin
 PT:3/3
 K:Flying
 K:Haste

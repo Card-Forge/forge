@@ -4,6 +4,6 @@ Types:Creature Raccoon
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | CheckSVar$ X | SVarCompare$ GE4 | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Descend 4 — When CARDNAME enters the battlefield, if there are four or more permanent cards in your graveyard, return target permanent card from your graveyard to your hand.
 SVar:X:Count$ValidGraveyard Permanent.YouOwn
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target nonland permanent 
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target nonland permanent
 DeckHints:Ability$Graveyard|Mill
 Oracle:Descend 4 — When Coati Scavenger enters the battlefield, if there are four or more permanent cards in your graveyard, return target permanent card from your graveyard to your hand.

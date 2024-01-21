@@ -8,7 +8,7 @@ SVar:DBDelayedTrigger:DB$ DelayedTrigger | RememberObjects$ Targeted | Condition
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Exile | Destination$ Battlefield | AnimateSubAbility$ DBConditionEffect
 SVar:DBConditionEffect:DB$ Effect | RememberObjects$ RememberedLKI | ReplacementEffects$ ETBCounters
 SVar:ETBCounters:Event$ Moved | ReplacementResult$ Updated | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ AddExtraCounter | Description$ return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ Vigilance,Lifelink 
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ Vigilance,Lifelink
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters|LifeGain
 Oracle:{2}, {T}: Exile another target creature you control. You may return that card to the battlefield under its owner's control. If you don't, at the beginning of the next end step, return that card to the battlefield under its owner's control with a vigilance counter and a lifelink counter on it.

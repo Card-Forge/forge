@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, nontoken creatures you control perpetually gain double team.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+nonToken | Duration$ Perpetual | KW$ Double team
-T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCast | TriggerDescription$ Whenever you cast a creature spell, it perpetually gains double team. 
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCast | TriggerDescription$ Whenever you cast a creature spell, it perpetually gains double team.
 SVar:TrigCast:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | Duration$ Perpetual | KW$ Double team
 SVar:BuffedBy:Creature
 Oracle:When Sworn to the Legion enters the battlefield, nontoken creatures you control perpetually gain double team.\nWhenever you cast a creature spell, it perpetually gains double team.
