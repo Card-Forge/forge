@@ -7,4 +7,4 @@ SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
 A:AB$ ChangeZoneAll | Cost$ 3 G Sac<1/CARDNAME> | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all land cards from your graveyard to the battlefield tapped.
 DeckHas:Ability$Mill|Sacrifice|Graveyard
 DeckHints:Ability$Mill|Graveyard
-Oracle:\nWhen Aftermath Analyst enters the battlefield, mill three cards.\n{3}{G}, Sacrifice Aftermath Analyst: Return all land cards from your graveyard to the battlefield tapped.
+Oracle:When Aftermath Analyst enters the battlefield, mill three cards.\n{3}{G}, Sacrifice Aftermath Analyst: Return all land cards from your graveyard to the battlefield tapped.
