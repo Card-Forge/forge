@@ -108,7 +108,7 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                if (!hostCard.isFaceDown()) {
+                if (!hostCard.isCopiedSpell() && !hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
                 final Game game = hostCard.getGame();
