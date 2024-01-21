@@ -298,7 +298,16 @@ public class CardUtil {
             }
             if(type.editions!=null&&type.editions.length!=0)
             {
-                editions.addAll(Arrays.asList(type.editions));
+                ConfigData configData = Config.instance().getConfigData();
+                for(String edition: type.editions){
+                    // Ignore "forbidden" editions
+                    if (configData.allowedEditions != null) {
+                        if (Arrays.asList(configData.allowedEditions).contains(edition))
+                            editions.add(edition);
+                    } else if (!Arrays.asList(configData.restrictedEditions).contains(edition)){
+                        editions.add(edition);
+                    }
+                }
             }
             if(type.superTypes!=null&&type.superTypes.length!=0)
             {
