@@ -404,7 +404,6 @@ public abstract class GameState {
             if (c.isForetoldThisTurn()) {
                 newText.append("|ForetoldThisTurn");
             }
-
         }
 
         if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Exile) {
@@ -1377,7 +1376,7 @@ public abstract class GameState {
                     c.turnFaceDown(true);
                     c.addMayLookTemp(c.getOwner());
                 } else if (info.equals("ForetoldThisTurn")) {
-                    c.setForetoldThisTurn(true);
+                    c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
                     c.setToken(true);
                 }
