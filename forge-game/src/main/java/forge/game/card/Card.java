@@ -238,6 +238,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean flipped = false;
     private boolean facedown = false;
+    private boolean turnedFaceUpThisTurn = false;
     // set for transform and meld, needed for clone effects
     private boolean backside = false;
 
@@ -782,6 +783,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
 
                 c.facedown = false;
+                c.turnedFaceUpThisTurn = true;
                 c.updateStateForView(); //fixes cards with backside viewable
                 // need to run faceup commands, currently
                 // it does cleanup the modified facedown state
@@ -810,6 +812,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return retResult;
         }
         return false;
+    }
+
+    public boolean wasTurnedFaceUpThisTurn() {
+        return turnedFaceUpThisTurn;
     }
 
     public boolean canTransform(SpellAbility cause) {
@@ -6777,6 +6783,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetShieldCount();
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
+        turnedFaceUpThisTurn = false;
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();

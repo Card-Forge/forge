@@ -1114,6 +1114,8 @@ public class CardProperty {
             if (card.isFaceDown()) {
                 return false;
             }
+        } else if (property.startsWith("turnedFaceUpThisTurn")) {
+            if (!card.wasTurnedFaceUpThisTurn()) return false;
         } else if (property.startsWith("phasedOut")) {
             if (!card.isPhasedOut()) {
                 return false;
