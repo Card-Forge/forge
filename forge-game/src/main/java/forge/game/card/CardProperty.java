@@ -1908,6 +1908,14 @@ public class CardProperty {
             if (card.isSolved()) {
                 return false;
             }
+        } else if (property.equals("IsSuspected")) {
+            if (!card.isSuspected()) {
+                return false;
+            }
+        } else if (property.equals("IsUnsuspected")) {
+            if (card.isSuspected()) {
+                return false;
+            }
         } else if (property.equals("IsRemembered")) {
             if (!source.isRemembered(card)) {
                 return false;
