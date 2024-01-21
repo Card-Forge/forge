@@ -111,7 +111,6 @@ public class CardFactoryUtil {
                 if (!hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
-                CardFactoryUtil.setFaceDownState(hostCard, this);
                 final Game game = hostCard.getGame();
 
                 CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateBattlefield());
@@ -4058,6 +4057,7 @@ public class CardFactoryUtil {
             faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
         }
         if (sa.hasParam("FaceDownKeyword")) {
+            faceDown.setIntrinsicKeywords(Lists.newArrayList(), false);
             faceDown.addIntrinsicKeywords(Arrays.asList(sa.getParam("FaceDownKeyword").split(" & ")));
         }
 

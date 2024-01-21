@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBPump
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:DBPump:DB$ Pump | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ Add {C}{C}. This mana can't be spent to cast nonartifact spells.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ !Spell.!Artifact | SpellDescription$ Add {C}{C}. This mana can't be spent to cast nonartifact spells.
 DeckHints:Name$Urza, Lord Protector
 MeldPair:Urza, Lord Protector
 AlternateMode:Meld

@@ -557,7 +557,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.hasParam("Ninjutsu");
     }
 
-    public boolean isCumulativeupkeep() {
+    public boolean isCumulativeUpkeep() {
         return hasParam("CumulativeUpkeep");
     }
 
