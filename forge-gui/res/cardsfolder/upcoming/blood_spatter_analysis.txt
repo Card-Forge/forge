@@ -7,7 +7,7 @@ T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature | Orig
 SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ BLOODSTAIN | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE5_BLOODSTAIN | RememberSacrificed$ True | SubAbility$ DBTrigger
-SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigChange | RememberObjects$ RememberedCard | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigChange | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard|Counters|Mill

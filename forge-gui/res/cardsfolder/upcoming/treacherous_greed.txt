@@ -1,7 +1,7 @@
 Name:Treacherous Greed
 ManaCost:1 W B
 Types:Instant
-A:SP$ Draw | Cost$ B Sac<1/Creature.wasDealtDamageThisTurn/creature that was damaged this turn> | NumCards$ 3 | SubAbility$ DBLoseLife | SpellDescription$ Draw two cards.
+A:SP$ Draw | Cost$ B Sac<1/Creature.dealtDamageThisTurn/creature that was damaged this turn> | NumCards$ 3 | SubAbility$ DBLoseLife | SpellDescription$ Draw three cards.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Opponent | SubAbility$ DBGainLife | SpellDescription$ Draw three cards. Each opponent loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 DeckHas:Ability$Sacrifice|LifeGain
