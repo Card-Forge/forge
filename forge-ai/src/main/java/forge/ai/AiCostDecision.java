@@ -498,7 +498,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 

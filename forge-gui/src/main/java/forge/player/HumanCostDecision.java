@@ -851,7 +851,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(final CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(final CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 

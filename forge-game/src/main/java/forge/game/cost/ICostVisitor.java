@@ -26,7 +26,7 @@ public interface ICostVisitor<T> {
     T visit(CostSacrifice cost);
     T visit(CostReturn cost);
     T visit(CostReveal cost);
-    T visit(CostRevealChosenPlayer cost);
+    T visit(CostRevealChosen cost);
     T visit(CostRemoveAnyCounter cost);
     T visit(CostRemoveCounter cost);
     T visit(CostPutCounter cost);
@@ -159,7 +159,7 @@ public interface ICostVisitor<T> {
         }
 
         @Override
-        public T visit(CostRevealChosenPlayer cost) {
+        public T visit(CostRevealChosen cost) {
             return null;
         }
 
