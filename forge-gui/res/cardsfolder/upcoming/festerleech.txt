@@ -1,0 +1,9 @@
+Name:Festerleech
+ManaCost:B
+Types:Creature Zombie Leech
+PT:1/1
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
+A:AB$ Pump | Cost$ 1 B | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+DeckHas:Ability$Mill
+Oracle:Whenever Festerleech deals combat damage to a player, you mill two cards.\n{1}{B}: Festerleech gets +2/+2 until end of turn. Activate only once each turn.
