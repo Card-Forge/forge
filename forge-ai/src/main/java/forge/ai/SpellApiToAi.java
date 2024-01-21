@@ -56,6 +56,7 @@ public enum SpellApiToAi {
             .put(ApiType.Clash, ClashAi.class)
             .put(ApiType.ClassLevelUp, AlwaysPlayAi.class)
             .put(ApiType.Cleanup, AlwaysPlayAi.class)
+            .put(ApiType.Cloak, CloakAi.class)
             .put(ApiType.Clone, CloneAi.class)
             .put(ApiType.CompanionChoose, ChooseCompanionAi.class)
             .put(ApiType.Connive, ConniveAi.class)
