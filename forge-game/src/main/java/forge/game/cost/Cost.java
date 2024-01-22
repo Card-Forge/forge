@@ -543,8 +543,9 @@ public class Cost implements Serializable {
             return new CostEnlist(splitStr[0], splitStr[1], description);
         }
 
-        if (parse.equals("RevealChosenPlayer")) {
-            return new CostRevealChosenPlayer();
+        if (parse.startsWith("RevealChosen<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
         }
 
         // These won't show up with multiples

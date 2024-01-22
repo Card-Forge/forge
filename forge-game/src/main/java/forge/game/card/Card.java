@@ -1877,6 +1877,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return chosenType != null && !chosenType.isEmpty();
     }
 
+    public final void setSecretChosenType(final String s) {
+        chosenType = s;
+    }
+    public final void revealChosenType() {
+        view.updateChosenType(this);
+    }
+
     // used by card Illusionary Terrain
     public final String getChosenType2() {
         return chosenType2;
