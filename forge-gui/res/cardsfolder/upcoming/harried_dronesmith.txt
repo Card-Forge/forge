@@ -1,0 +1,8 @@
+Name:Harried Dronesmith
+ManaCost:3 R
+Types:Creature Human Artificer
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 colorless Thopter artifact creature token with flying. It gains haste until end of turn. Sacrifice it at the beginning of your next end step.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | PumpKeywords$ Haste | PumpDuration$ EOT | AtEOT$ Sacrifice
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Thopter
+Oracle:At the beginning of combat on your turn, create a 1/1 colorless Thopter artifact creature token with flying. It gains haste until end of turn. Sacrifice it at the beginning of your next end step.

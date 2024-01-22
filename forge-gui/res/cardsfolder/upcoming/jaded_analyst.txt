@@ -1,0 +1,10 @@
+Name:Jaded Analyst
+ManaCost:1 U
+Types:Creature Human Detective
+PT:3/2
+K:Defender
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Whenever you draw your second card each turn, CARDNAME loses defender and gains vigilance until end of turn.
+SVar:TrigDebuff:DB$ Debuff | Keywords$ Defender | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | KW$ Vigilance
+AI:RemoveDeck:Random
+Oracle:Defender\nWhenever you draw your second card each turn, Jaded Analyst loses defender and gains vigilance until end of turn.
