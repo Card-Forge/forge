@@ -140,6 +140,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
 
+    protected KeywordsChange suspectedKeywordChange = null;
+
     // stores the keywords created by static abilities
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywords = Maps.newHashMap();
 
@@ -216,6 +218,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean renowned;
     private boolean solved = false;
+    private boolean suspected = false;
 
     private boolean manifested;
 
@@ -2606,6 +2609,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (solved) {
             sb.append("Solved\r\n");
         }
+        if (suspected) {
+            sb.append("Suspected\r\n");
+        }
         if (manifested) {
             sb.append("Manifested\r\n");
         }
@@ -3942,7 +3948,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(changedCardKeywordsByWord), // Layer 3
             ImmutableList.of(new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), this.hasRemoveIntrinsic())), // Layer 4
-            changedCardKeywords.values() // Layer 6
+            changedCardKeywords.values(), // Layer 6
+            getSuspectedKeywordChange() // Menace by Suspected
         );
     }
 
@@ -4421,21 +4428,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void executePerpetual(Map<String, Object> p) {
         final String category = (String) p.get("Category");
         if (category.equals("NewPT")) {
-            addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+            addNewPT((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
                 p.get("Timestamp"), (long) 0);
         } else if (category.equals("PTBoost")) {
-            addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long) 
+            addPTBoost((Integer) p.get("Power"), (Integer) p.get("Toughness"), (long)
                 p.get("Timestamp"), (long) 0);
         } else if (category.equals("Keywords")) {
             boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
-            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll, 
+            addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll,
                 (long) p.get("Timestamp"), (long) 0);
         } else if (category.equals("Types")) {
-            addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"), 
-                false, (Set<RemoveType>) p.get("RemoveXTypes"), 
+            addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
+                false, (Set<RemoveType>) p.get("RemoveXTypes"),
                 (long) p.get("Timestamp"), (long) 0, true, false);
         } else if (category.equals("Colors")) {
-            addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"), 
+            addColor((ColorSet) p.get("Colors"), !(boolean) p.get("Overwrite"), (long) p.get("Timestamp"),
                 (long) 0, false);
         }
     }
@@ -6231,6 +6238,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setSolved(final boolean solved) {
         this.solved = solved;
+    }
+
+    public final boolean isSuspected() {
+        return suspected;
+    }
+
+    public final void setSuspected(final boolean suspected) {
+        if (suspected && StaticAbilityCantBeSuspected.cantBeSuspected(this)) {
+            return;
+        }
+        this.suspected = suspected;
+        if (suspected) {
+            KeywordInterface kw = Keyword.getInstance("Menace");
+            kw.createTraits(this, false);
+            suspectedKeywordChange = new KeywordsChange(ImmutableList.of(kw), ImmutableList.<String>of(), false);
+        }
+        updateKeywords();
+    }
+
+    protected Iterable<KeywordsChange> getSuspectedKeywordChange()
+    {
+        return isSuspected() ? ImmutableList.of(this.suspectedKeywordChange) : ImmutableList.of();
     }
 
     public final boolean isManifested() {
