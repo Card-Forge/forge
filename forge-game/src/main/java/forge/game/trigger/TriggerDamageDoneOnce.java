@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
+import forge.util.Expressions;
 import forge.util.Localizer;
 
 public class TriggerDamageDoneOnce extends Trigger {
@@ -24,16 +25,23 @@ public class TriggerDamageDoneOnce extends Trigger {
             }
         }
 
-        if (hasParam("ValidSource")) {
-            final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
-
-            if (getDamageAmount(damageMap) <= 0) {
-                return false;
-            }
-        }
-
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
             return false;
+        }
+
+        final int damageAmount = getDamageAmount((Map<Card, Integer>) runParams.get(AbilityKey.DamageMap));
+
+        if (hasParam("ValidSource")) {
+            if (damageAmount <= 0) return false;
+        }
+
+        if (hasParam("DamageAmount")) {
+            final String fullParam = getParam("DamageAmount");
+
+            final String operator = fullParam.substring(0, 2);
+            final int operand = Integer.parseInt(fullParam.substring(2));
+
+            if (!Expressions.compare(damageAmount, operator, operand)) return false;
         }
 
         return true;
