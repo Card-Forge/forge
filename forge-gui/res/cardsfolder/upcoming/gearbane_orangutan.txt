@@ -1,0 +1,15 @@
+Name:Gearbane Orangutan
+ManaCost:2 R
+Types:Creature Ape
+PT:2/2
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBSacrifice,DBPutCounter
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Destroy up to one target artifact.
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Artifact | RememberSacrificed$ True | SubAbility$ DBPutCounter | SpellDescription$ Sacrifice an artifact. If you do, put two +1/+1 counters on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice|Counters
+DeckHints:Type$Artifact
+AI:RemoveDeck:Random
+Oracle:Reach\nWhen Gearbane Orangutan enters the battlefield, choose one —\n• Destroy up to one target artifact.\n• Sacrifice an artifact. If you do, put two +1/+1 counters on Gearbane Orangutan.
