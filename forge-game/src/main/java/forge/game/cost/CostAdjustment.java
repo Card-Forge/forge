@@ -65,7 +65,7 @@ public class CostAdjustment {
                     result.add(new Cost(ManaCost.get(n), false));
                 }
             }
-        } // isSpell
+        }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
@@ -223,7 +223,7 @@ public class CostAdjustment {
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
 
-        if (sa.isSpell() && !sa.getPipsToReduce().isEmpty()) {
+        if (sa.isSpell()) {
             for (String pip : sa.getPipsToReduce()) {
                 cost.decreaseShard(ManaCostShard.parseNonGeneric(pip), 1);
             }
