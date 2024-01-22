@@ -37,8 +37,6 @@ public interface ICostVisitor<T> {
     T visit(CostTapType cost);
     T visit(CostPayShards cost);
 
-
-
     class Base<T> implements ICostVisitor<T> {
 
         @Override

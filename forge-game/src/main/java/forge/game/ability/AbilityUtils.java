@@ -3893,6 +3893,10 @@ public class AbilityUtils {
                 list = root.getPaidList("UntappedCards", true);
             } else if (defined.startsWith("Untapped")) {
                 list = root.getPaidList("Untapped", true);
+            } else if (defined.startsWith("CollectedCards")) {
+                list = root.getPaidList("CollectedCards", true);
+            } else if (defined.startsWith("Collected")) {
+                list = root.getPaidList("Collected", true);
             }
         }
         return list;
@@ -3965,6 +3969,14 @@ public class AbilityUtils {
             }
             def[0] = def[0].substring(22);
             return trig;
+        }
+        if (def[0].startsWith("CastSA>") && ctb instanceof SpellAbility) {
+            SpellAbility sa = ((SpellAbility) ctb).getHostCard().getCastSA();
+            if (sa == null) {
+                return ctb;
+            }
+            def[0] = def[0].substring(7);
+            return sa;
         }
         return ctb;
     }

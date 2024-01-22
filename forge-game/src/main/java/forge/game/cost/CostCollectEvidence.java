@@ -19,7 +19,7 @@ public class CostCollectEvidence extends CostPartWithList {
     }
 
     public static final String HashLKIListKey = "Collected";
-    public static final String HashCardListKey = "CollectedEvidence";
+    public static final String HashCardListKey = "CollectedCards";
 
     @Override
     public String getHashForLKIList() {
