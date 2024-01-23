@@ -6,14 +6,64 @@ Type=Draft
 ScryfallCode=CLU
 
 [cards]
+1 R Apothecary White @Anna Steinbauer
 2 R Senator Peacock @Aurore Folny
 3 R Mastermind Plum @Bryan Sola
+4 R Headliner Scarlett @Heonhwa Choe
+5 R Emissary Green @Heonhwa Choe
 6 R Commander Mustard @Jake Murray
+7 U Wrench @Clint Lockwood
+8 C Candlestick @Clint Lockwood
 9 U Lead Pipe @Clint Lockwood
 10 U Knife @Clint Lockwood
+11 U Rope @Clint Lockwood
+12 U Ballroom @Arthur Yuan
+13 U Billiard Room @Arthur Yuan
+14 U Conservatory @Arthur Yuan
 15 U Dining Room @Arthur Yuan
+16 U Hall @Arthur Yuan
+17 U Kitchen @Arthur Yuan
 18 U Library @Arthur Yuan
+19 U Lounge @Arthur Yuan
+20 U Secret Passage @Arthur Yuan
+21 U Study @Arthur Yuan
+22 R Aegis of the Legion @Alexandre Honoré
+23 U Afterlife Insurance @Elizabeth Peiró
+24 R Amzu, Swarm's Hunger @Slawomir Maniak
+25 R Boros Strike-Captain @Alexander Forssberg
+26 R Carnage Interpreter @Justine Cruz
+27 R Conclave Evangelist @John Tedrick
+28 R Corporeal Projection @Anna Pavleeva
+29 R Covetous Elegy @Deruchenko Alexander
+30 R Dimir Strandcatcher @Iris Compiet
+31 U Ecstatic Electromancer @Caio Monteiro
+32 R Frenzied Gorespawn @Kekai Kotaki
+33 U Furious Spinesplitter @Elizabeth Peiró
+34 R Herald of Ilharg @Dan Scott
+35 U Incriminating Impetus @Tony Foti
 36 R Lavinia, Foil to Conspiracy @Chris Rahn
+37 R Lonis, Genetics Expert @Kai Carpenter
+38 R Memory Vampire @Mila Pesic
+39 U Ordruun Mentor @Loïc Canavaggia
+40 U Portal Manipulator @Miranda Meeks
+41 R Resonance Technician @Piotr Dura
+42 U Scuttling Sentinel @Betty Jiang
+43 R Sludge Titan @Warren Mahy
+44 R Stampede Surfer @Brian Valeza
+45 U Sumala Rumblers @Leon Tukker
+46 R Suppressor Skyguard @Valera Lutfullina
+47 R Syndicate Heavy @Edgar Sánchez Hidalgo
+48 U Tribune of Rot @Diana Cearley
 49 U Undercover Butler @Kim Sokol
+50 R Unruly Krasis @Billy Christian
+51 R Vernal Sovereign @Aaron Miller
+274 R Blood Crypt @Piotr Dura
+275 R Breeding Pool @Yeong-Hao Han
+276 R Godless Shrine @Piotr Dura
 277 R Hallowed Fountain @Leon Tukker
+278 R Overgrown Tomb @Chris Ostrowski
+279 R Sacred Foundry @Alexander Forssberg
 280 R Steam Vents @Lucas Graciano
+281 R Stomping Ground @Leon Tukker
+282 R Temple Garden @Lorenzo Lanfranconi
+283 R Watery Grave @Alexander Forssberg
