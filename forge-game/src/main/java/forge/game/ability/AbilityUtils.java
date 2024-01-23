@@ -718,11 +718,7 @@ public class AbilityUtils {
                     list = sa.getRootAbility().getPaidList("Sacrificed", true);
                 }
                 else if (calcX[0].startsWith("Discarded")) {
-                    final SpellAbility root = sa.getRootAbility();
-                    list = root.getPaidList("Discarded", true);
-                    if (null == list && root.isTrigger()) {
-                        list = root.getHostCard().getSpellPermanent().getPaidList("Discarded", true);
-                    }
+                    list = sa.getRootAbility().getPaidList("Discarded", true);
                 }
                 else if (calcX[0].startsWith("Exiled")) {
                     list = sa.getRootAbility().getPaidList("Exiled", true);
