@@ -101,6 +101,7 @@ ScryfallCode=MKM
 133 C Innocent Bystander @Warren Mahy
 134 U Knife @Tony Foti
 135 R Krenko, Baron of Tin Street @Brian Valeza
+136 R Krenko's Buzzcrusher @Joshua Raphael
 137 R Lamplight Phoenix @Ryan Pancoast
 138 C Offender at Large @Mike Bierek
 140 R Pyrotechnic Performer @Peter Polach
