@@ -79,7 +79,7 @@ public class AbilityUtils {
             cards.add(hostCard);
             defined = defined.replace("AndSelf", "");
         }
-        
+
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
