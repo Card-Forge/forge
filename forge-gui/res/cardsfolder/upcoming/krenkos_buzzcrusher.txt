@@ -1,0 +1,14 @@
+Name:Krenko's Buzzcrusher
+ManaCost:2 R R
+Types:Artifact Creature Insect Thopter
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, for each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | RememberLKI$ True | SubAbility$ DBSearch | SpellDescription$ For each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | DefinedPlayer$ RememberedController | Chooser$ RememberedController | NoShuffle$ True | Optional$ True
+SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup
+SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying, trample\nWhen Krenko's Buzzcrusher enters the battlefield, for each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
