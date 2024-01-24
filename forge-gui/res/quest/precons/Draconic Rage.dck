@@ -15,7 +15,7 @@ Image=draconic_rage.png
 1 Arcane Signet|AFC
 1 Atarka, World Render|AFC
 1 Bag of Tricks|AFC
-1 Barbarian Class|AFC
+1 Barbarian Class|AFR
 1 Beast Within|AFC
 1 Berserker's Frenzy|AFC
 1 Bogardan Hellkite|AFC
@@ -38,10 +38,10 @@ Image=draconic_rage.png
 1 Dragonmaster Outcast|AFC
 1 Dragonspeaker Shaman|AFC
 1 Druid of Purification|AFC
-1 Earth-Cult Elemental|AFC
+1 Earth-Cult Elemental|AFR
 1 Exotic Orchard|AFC
 1 Explore|AFC
-15 Forest|AFC
+15 Forest|AFR
 1 Game Trail|AFC
 1 Garruk's Uprising|AFC
 1 Gratuitous Violence|AFC
@@ -58,7 +58,7 @@ Image=draconic_rage.png
 1 Magmaquake|AFC
 1 Mossfire Valley|AFC
 1 Mosswort Bridge|AFC
-12 Mountain|AFC
+12 Mountain|AFR
 1 Neverwinter Hydra|AFC
 1 Opportunistic Dragon|AFC
 1 Outpost Siege|AFC

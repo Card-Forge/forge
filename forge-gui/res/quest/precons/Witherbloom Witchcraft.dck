@@ -25,7 +25,7 @@ Image=witherbloom_witchcraft.png
 1 Damnable Pact|C21
 1 Deadly Tempest|C21
 1 Defiant Bloodlord|C21
-1 Dina, Soul Steeper|C21
+1 Dina, Soul Steeper|STX
 1 Druidic Satchel|C21
 1 Elixir of Immortality|C21
 1 Epicure of Blood|C21
@@ -33,7 +33,7 @@ Image=witherbloom_witchcraft.png
 1 Exotic Orchard|C21
 1 Ezzaroot Channeler|C21
 1 Feed the Swarm|C21
-11 Forest|C21
+11 Forest|STX
 1 Gaze of Granite|C21
 1 Gift of Paradise|C21
 1 Gingerbread Cabin|C21
@@ -43,14 +43,14 @@ Image=witherbloom_witchcraft.png
 1 Gyome, Master Chef|C21
 1 Healing Technique|C21
 1 High Market|C21
-1 Honor Troll|C21
+1 Honor Troll|STX
 1 Jungle Hollow|C21
 1 Leyline Prowler|C21
 1 Llanowar Wastes|C21
 1 Loxodon Warhammer|C21
 1 Marshland Bloodcaster|C21
 1 Moldervine Reclamation|C21
-1 Mortality Spear|C21
+1 Mortality Spear|STX
 1 Myriad Landscape|C21
 1 Nissa's Renewal|C21
 1 Noxious Gearhulk|C21
@@ -74,7 +74,7 @@ Image=witherbloom_witchcraft.png
 1 Study Hall|C21
 1 Suffer the Past|C21
 1 Sun Droplet|C21
-11 Swamp|C21
+11 Swamp|STX
 1 Tainted Wood|C21
 1 Talisman of Resilience|C21
 1 Taste of Death|C21
@@ -88,5 +88,5 @@ Image=witherbloom_witchcraft.png
 1 Verdant Sun's Avatar|C21
 1 Well of Lost Dreams|C21
 1 Witch's Clinic|C21
-1 Witherbloom Campus|C21
+1 Witherbloom Campus|STX
 1 Yedora, Grave Gardener|C21
