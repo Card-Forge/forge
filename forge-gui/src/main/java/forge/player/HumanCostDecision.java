@@ -80,6 +80,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostCollectEvidence cost) {
+        CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
+        final int total = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        final InputSelectCardsFromList inp =
+                new InputSelectCardsFromList(controller, 0, list.size(), list, ability, total);
+        inp.setMessage(Localizer.getInstance().getMessage("lblCollectEvidence", total));
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+
+        if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) < total) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
     public PaymentDecision visit(final CostDiscard cost) {
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         final String discardType = cost.getType();
@@ -851,7 +867,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(final CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(final CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 

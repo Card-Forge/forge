@@ -1,8 +1,8 @@
 Name:Everybody Lives!
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | ValidCards$ Creature | KW$ Hexproof & Indestructible | SubAbility$ DBPump | SpellDescription$ All creatures gain hexproof and indestructible until end of turn. 
-SVar:DBPump:DB$ Pump | Defined$ Player | KW$ Hexproof | SubAbility$ DBEffect | SpellDescription$ Players gain hexproof until end of turn. 
+A:SP$ PumpAll | ValidCards$ Creature | KW$ Hexproof & Indestructible | SubAbility$ DBPump | SpellDescription$ All creatures gain hexproof and indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Player | KW$ Hexproof | SubAbility$ DBEffect | SpellDescription$ Players gain hexproof until end of turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantLose,STKeepLife | SpellDescription$ Players can't lose life this turn and players can't lose the game or win the game this turn.
 SVar:STCantLose:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't lose the game. & Your opponents can't win the game. | Description$ Players can't lose life this turn and players can't lose the game or win the game this turn.
 SVar:STKeepLife:Mode$ CantLoseLife | ValidPlayer$ Player | Description$ Players can't lose life this turn.

@@ -57,6 +57,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostCollectEvidence cost) {
+        int c = cost.getAbilityAmount(ability);
+        CardCollectionView chosen = ComputerUtil.chooseCollectEvidence(player, cost, source, c, ability);
+
+        return null == chosen ? null : PaymentDecision.card(chosen);
+    }
+
+    @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -498,7 +506,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 

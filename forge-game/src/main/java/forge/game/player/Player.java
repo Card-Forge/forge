@@ -1724,7 +1724,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!game.getPhaseHandler().isPlayerTurn(this)) {
                 return false;
             }
-            if (!canCastSorcery() && !landSa.withFlash(land, this)) {
+            if (!canCastSorcery() && (landSa == null || !landSa.withFlash(land, this))) {
                 return false;
             }
         }

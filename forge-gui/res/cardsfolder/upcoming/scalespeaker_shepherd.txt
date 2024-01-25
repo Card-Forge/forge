@@ -2,7 +2,7 @@ Name:Scalespeaker Shepherd
 ManaCost:2 G
 Types:Creature Human Druid
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Ancient Imperiosaur,Burning Sun's Avatar,Carnage Tyrant,Charging Monstrosaur,Etali; Primal Conqueror,Ghalta; Primal Hunger,Gishath; Sun's Avatar,Quartzwood Crasher,Regisaur Alpha,Ripjaw Raptor,Shifting Ceratops,Territorial Allosaurus,Tranquil Frillback,Verdant Sun's Avatar,Zacama; Primal Calamity
 S:Mode$ ReduceCost | ValidCard$ Dinosaur | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Dinosaur spells you cast cost {1} less to cast.
 DeckHas:Type$Dinosaur

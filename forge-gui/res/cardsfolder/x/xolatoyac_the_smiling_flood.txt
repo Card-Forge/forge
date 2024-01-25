@@ -4,7 +4,7 @@ Types:Legendary Creature Salamander Serpent
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land | CounterType$ FLOOD | SubAbility$ DBEffect 
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land | CounterType$ FLOOD | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FountainStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ FLOOD | Duration$ Permanent
 SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Island | Description$ That land is an island in addition to its other types for as long as it has a flood counter on it.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap each permanent you control with a counter on it.

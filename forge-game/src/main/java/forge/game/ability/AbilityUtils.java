@@ -79,7 +79,7 @@ public class AbilityUtils {
             cards.add(hostCard);
             defined = defined.replace("AndSelf", "");
         }
-        
+
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
@@ -718,11 +718,7 @@ public class AbilityUtils {
                     list = sa.getRootAbility().getPaidList("Sacrificed", true);
                 }
                 else if (calcX[0].startsWith("Discarded")) {
-                    final SpellAbility root = sa.getRootAbility();
-                    list = root.getPaidList("Discarded", true);
-                    if (null == list && root.isTrigger()) {
-                        list = root.getHostCard().getSpellPermanent().getPaidList("Discarded", true);
-                    }
+                    list = sa.getRootAbility().getPaidList("Discarded", true);
                 }
                 else if (calcX[0].startsWith("Exiled")) {
                     list = sa.getRootAbility().getPaidList("Exiled", true);
@@ -3893,6 +3889,10 @@ public class AbilityUtils {
                 list = root.getPaidList("UntappedCards", true);
             } else if (defined.startsWith("Untapped")) {
                 list = root.getPaidList("Untapped", true);
+            } else if (defined.startsWith("CollectedCards")) {
+                list = root.getPaidList("CollectedCards", true);
+            } else if (defined.startsWith("Collected")) {
+                list = root.getPaidList("Collected", true);
             }
         }
         return list;
@@ -3965,6 +3965,14 @@ public class AbilityUtils {
             }
             def[0] = def[0].substring(22);
             return trig;
+        }
+        if (def[0].startsWith("CastSA>") && ctb instanceof SpellAbility) {
+            SpellAbility sa = ((SpellAbility) ctb).getHostCard().getCastSA();
+            if (sa == null) {
+                return ctb;
+            }
+            def[0] = def[0].substring(7);
+            return sa;
         }
         return ctb;
     }

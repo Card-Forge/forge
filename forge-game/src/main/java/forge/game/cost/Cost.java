@@ -543,8 +543,14 @@ public class Cost implements Serializable {
             return new CostEnlist(splitStr[0], splitStr[1], description);
         }
 
-        if (parse.equals("RevealChosenPlayer")) {
-            return new CostRevealChosenPlayer();
+        if (parse.startsWith("CollectEvidence<")) {
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostCollectEvidence(splitStr[0]);
+        }
+
+        if (parse.startsWith("RevealChosen<")) {
+            final String[] splitStr = abCostParse(parse, 2);
+            return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
         }
 
         // These won't show up with multiples
@@ -932,26 +938,23 @@ public class Cost implements Serializable {
     public Cost add(Cost cost1, boolean mergeAdditional) {
         return add(cost1, mergeAdditional, null);
     }
-    public Cost add(Cost cost1, boolean mergeAdditional, final SpellAbility sa) {
-        CostPartMana costPart2 = this.getCostMana();
+    public Cost add(Cost cost, boolean mergeAdditional, final SpellAbility sa) {
+        CostPartMana mPartOld = this.getCostMana();
         List<CostPart> toRemove = Lists.newArrayList();
-        for (final CostPart part : cost1.getCostParts()) {
+        for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPartMana && ((CostPartMana) part).getMana().isZero()) {
                 continue; // do not add Zero Mana
-            } else if (part instanceof CostPartMana && costPart2 != null) {
+            } else if (part instanceof CostPartMana && mPartOld != null) {
                 CostPartMana mPart = (CostPartMana) part;
-                ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
-                oldManaCost.addManaCost(costPart2.getMana());
-                costParts.remove(costPart2);
-                int xMin = mPart.getXMin();
-                if (costPart2.getXMin() > xMin) xMin = costPart2.getXMin();
-                if (mPart.isExiledCreatureCost() || mPart.isEnchantedCreatureCost() || xMin > 0) {
-                    // FIXME: something was amiss when trying to add the cost since the mana cost is either \EnchantedCost or \Exiled but the
-                    // restriction no longer marks it as such. Therefore, we need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
-                    // to make cards like Merseine or Back from the Brink work.
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), mPart.isExiledCreatureCost(), mPart.isEnchantedCreatureCost(), xMin));
+                ManaCostBeingPaid manaCost = new ManaCostBeingPaid(mPart.getMana());
+                costParts.remove(mPartOld);
+                int xMin = Math.max(mPart.getXMin(), mPartOld.getXMin());
+                manaCost.addManaCost(mPartOld.getMana());
+                if (mPartOld.isExiledCreatureCost() || mPartOld.isEnchantedCreatureCost() || xMin > 0) {
+                    // need to explicitly copy the ExiledCreatureCost/EnchantedCreatureCost
+                    costParts.add(0, new CostPartMana(manaCost.toManaCost(), mPartOld.isExiledCreatureCost(), mPartOld.isEnchantedCreatureCost(), xMin));
                 } else {
-                    costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), null));
+                    costParts.add(0, new CostPartMana(manaCost.toManaCost(), null));
                 }
             } else if (part instanceof CostPutCounter || (mergeAdditional && // below usually not desired because they're from different causes
                     (part instanceof CostDiscard || part instanceof CostDraw ||

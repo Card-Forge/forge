@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
-A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color. 
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Effect | Cost$ T | StaticAbilities$ QuickenStA | Triggers$ SpellCastTrig | SpellDescription$ The next spell of the chosen type you cast this turn can be cast as though it had flash.
 SVar:QuickenStA:Mode$ CastWithFlash | ValidCard$ Card.ChosenType | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ The next spell of the chosen type you cast this turn can be cast as though it had flash.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Card.ChosenType | ValidActivatingPlayer$ You | Execute$ Quickened | Static$ True

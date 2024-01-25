@@ -6,7 +6,7 @@ SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature.Phyrexian | ValidActivating
 SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard
 SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1,Deathtouch | CounterNum$ 1
-SVar:DBDraft:DB$ Draft | Spellbook$ Entomber Exarch,Phyrexian Fleshgorger,Phyrexian Gargantua,Phyrexian Obliterator,Phyrexian Rager,Phyrexian Revoker,Toxic Abomination,Vault Skirge,Scrapwork Rager,Bilious Skulldweller,Archfiend of the Dross,Myr Convert,Zenith Chronicler,Soulless Jailer,Diminished Returner | SpellDescription$ Draft a card from CARDNAME's spellbook. 
+SVar:DBDraft:DB$ Draft | Spellbook$ Entomber Exarch,Phyrexian Fleshgorger,Phyrexian Gargantua,Phyrexian Obliterator,Phyrexian Rager,Phyrexian Revoker,Toxic Abomination,Vault Skirge,Scrapwork Rager,Bilious Skulldweller,Archfiend of the Dross,Myr Convert,Zenith Chronicler,Soulless Jailer,Diminished Returner | SpellDescription$ Draft a card from CARDNAME's spellbook.
 DeckHas:Ability$Counters|Lifegain|Graveyard & Type$Phyrexian|Horror|Imp|Zombie|Insect|Demon|Insect
 DeckNeeds:Type$Phyrexian
 Oracle:You get a boon with "When you cast your next Phyrexian creature spell, that creature enters the battlefield with an additional +1/+1 counter and deathtouch counter on it."\nDraft a card from March Toward Perfection's spellbook.

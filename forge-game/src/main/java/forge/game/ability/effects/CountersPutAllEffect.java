@@ -69,7 +69,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             if (pstr.contains("Controller")) {
                 placerPerCard = true;
             } else {
-                placer =  AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
+                placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
             }
         }
 

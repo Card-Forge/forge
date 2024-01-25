@@ -5,7 +5,7 @@ PT:5/5
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card. For each opponent who can't, you gain 4 life.
 SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | RememberDiscarded$ True | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup  
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:SVar$Y/Times.4
 SVar:Y:PlayerCountOpponents$Amount/Minus.Remembered$Amount

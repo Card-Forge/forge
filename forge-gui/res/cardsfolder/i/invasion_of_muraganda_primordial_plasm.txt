@@ -18,5 +18,5 @@ Types:Creature Ooze
 PT:4/4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | RemoveAllAbilities$ True 
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | RemoveAllAbilities$ True
 Oracle:At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn.

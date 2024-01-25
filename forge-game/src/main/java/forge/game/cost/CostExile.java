@@ -217,7 +217,6 @@ public class CostExile extends CostPartWithList {
 
         if (totalCMC) {
             int needed = Integer.parseInt(this.getAmount().split("\\+")[0]);
-            if (list.size() < needed) return false;
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }

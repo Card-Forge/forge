@@ -56,6 +56,8 @@ public enum CounterEnumType {
     BLOOD("BLOOD", 255, 108, 111),
 
     BLOODLINE("BLDLN", 224, 44, 44),
+    
+    BLOODSTAIN("BLDST", 224, 44, 44),
 
     BORE("BORE", 98, 47, 34),
 

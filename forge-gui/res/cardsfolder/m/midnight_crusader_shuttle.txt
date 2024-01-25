@@ -6,9 +6,9 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigVillainousChoice | Trigger
 SVar:TrigVillainousChoice:DB$ VillainousChoice | Defined$ TriggeredDefendingPlayer | Choices$ DBSacrifice,DBGainControl
 SVar:DBSacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | Defined$ Remembered | SpellDescription$ That player sacrifices a creature.
 SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Select a creature that player controls | NewController$ You | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBTap | SpellDescription$ You gain control of a creature of your choice that player controls until end of turn. If you gain control of a creature this way, tap it, and it's attacking that player.
-SVar:DBTap:DB$ Tap | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | SubAbility$ DBSetAttacking 
+SVar:DBTap:DB$ Tap | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | SubAbility$ DBSetAttacking
 SVar:DBSetAttacking:DB$ ChangeCombatants | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | Attacking$ RememberedPlayer | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:2
 SVar:HasAttackEffect:True
 DeckHas:Ability$Sacrifice

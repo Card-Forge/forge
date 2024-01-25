@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Human Warrior
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAmass | TriggerDescription$ When CARDNAME dies, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
-SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 1 
+SVar:TrigAmass:DB$ Amass | Type$ Orc | Num$ 1
 DeckHas:Ability$Token|Counters & Type$Orc|Army
 Oracle:When Easterling Vanguard dies, amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)

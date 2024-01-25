@@ -20,12 +20,18 @@ package forge.game.cost;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Localizer;
 
-public class CostRevealChosenPlayer extends CostPart {
+public class CostRevealChosen extends CostPart {
 
     private static final long serialVersionUID = 1L;
 
-    public CostRevealChosenPlayer() { }
+    public CostRevealChosen(final String type, final String desc) {
+        super("1", type, desc);
+    }
+
+    @Override
+    public int paymentOrder() { return 20; }
 
     /*
      * (non-Javadoc)
@@ -34,19 +40,39 @@ public class CostRevealChosenPlayer extends CostPart {
      */
     @Override
     public final String toString() {
-        return "Reveal the player you chose";
+        if (getType().equals("Player")) {
+            return "Reveal the player you chose";
+        } else if (getType().equals("Type")) {
+            return "Reveal the chosen " + getDescriptiveType().toLowerCase();
+        }
+        return "Update CostRevealChosen.java";
     }
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player activator, final boolean effect) {
         final Card source = ability.getHostCard();
 
-        return source.hasChosenPlayer() && source.getTurnInController().equals(activator);
+        if (getType().equals("Player")) {
+            return source.hasChosenPlayer() && source.getTurnInController().equals(activator);
+        } else if (getType().equals("Type")) {
+            return source.hasChosenType() && source.getTurnInController().equals(activator);
+        }
+        return false;
     }
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        ability.getHostCard().revealChosenPlayer();
+        Card host = ability.getHostCard();
+        String o = "";
+        if (getType().equals("Player")) {
+            o = host.getChosenPlayer().toString();
+            host.revealChosenPlayer();
+        } else if (getType().equals("Type")) {
+            o = host.getChosenType();
+            host.revealChosenType();
+        }
+        final String message = Localizer.getInstance().getMessage("lblPlayerReveals", ai, o);
+        ai.getGame().getAction().notifyOfValue(ability, host, message, ai);
         return true;
     }
 

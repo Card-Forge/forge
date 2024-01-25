@@ -10,4 +10,4 @@ SVar:DBTimeTravel:DB$ TimeTravel | SpellDescription$ Time Travel. | SubAbility$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Remembered$CardManaCost
 SVar:Y:Imprinted$CardManaCost
-Oracle:Draw two cards, then you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. Then target opponent does the same. Cards exiled this way that don't have suspend gain suspend. Time travel. 
+Oracle:Draw two cards, then you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. Then target opponent does the same. Cards exiled this way that don't have suspend gain suspend. Time travel.

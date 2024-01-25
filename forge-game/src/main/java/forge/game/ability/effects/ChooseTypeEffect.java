@@ -41,6 +41,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<>();
         final List<String> validTypes = new ArrayList<>();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final boolean secret = sa.hasParam("Secretly");
 
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
@@ -131,7 +132,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                 }
 
-                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+                if (!secret) p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
 
                 if (sa.hasParam("Note")) {
                     card.addNotedType(choice);
@@ -142,7 +143,8 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ChooseType2")) {
                     card.setChosenType2(choice);
                 } else {
-                    card.setChosenType(choice);
+                    if (secret) card.setSecretChosenType(choice);
+                    else card.setChosenType(choice);
                 }
             }
         } else {

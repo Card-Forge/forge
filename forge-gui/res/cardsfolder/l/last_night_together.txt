@@ -1,9 +1,9 @@
 Name:Last Night Together
 ManaCost:3 R G
 Types:Sorcery
-A:SP$ ChooseCard | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures | TargetMin$ 2 | TargetMax$ 2 | Amount$ 2 | Defined$ You | DefinedCards$ Targeted | AtRandom$ True | SubAbility$ DBUntap | SpellDescription$ Choose two target creatures. 
-SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPutCounter | SpellDescription$ Untap them. 
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | Put two +1/+1 counters on each of them. 
+A:SP$ ChooseCard | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures | TargetMin$ 2 | TargetMax$ 2 | Amount$ 2 | Defined$ You | DefinedCards$ Targeted | AtRandom$ True | SubAbility$ DBUntap | SpellDescription$ Choose two target creatures.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPutCounter | SpellDescription$ Untap them.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | Put two +1/+1 counters on each of them.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Indestructible & Haste | SubAbility$ DBAddCombat | SpellDescription$ They gain vigilance, indestructible, and haste until end of turn.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ExtraPhaseDelayedTrigger$ DelTrigStatic | ExtraPhaseDelayedTriggerExcute$ TrigEffect | SpellDescription$ After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase.
 SVar:DelTrigStatic:Mode$ Phase | Static$ True | Phase$ BeginCombat | TriggerDescription$ After this main phase, there is an additional combat phase. Only the chosen creatures can attack during that combat phase.

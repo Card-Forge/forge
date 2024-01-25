@@ -1,5 +1,5 @@
 Name:Niambi, Beloved Protector
-ManaCost:W U 
+ManaCost:W U
 Types:Legendary Creature Human Cleric
 PT:2/2
 K:Flash

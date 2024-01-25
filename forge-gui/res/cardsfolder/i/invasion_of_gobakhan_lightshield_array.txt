@@ -19,7 +19,7 @@ ALTERNATE
 Name:Lightshield Array
 ManaCost:no cost
 Colors:white
-Types:Enchantment 
+Types:Enchantment
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | KW$ Indestructible & Hexproof | SpellDescription$ Creatures you control gain hexproof and indestructible until end of turn.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each creature that attacked this turn.
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.attackedThisTurn | CounterType$ P1P1 | CounterNum$ 1

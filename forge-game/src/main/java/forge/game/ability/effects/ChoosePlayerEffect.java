@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -27,12 +28,15 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
+        final Game game = card.getGame();
 
         final FCollectionView<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
-                card, sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayersInTurnOrder();
+                card, sa.getParam("Choices"), sa) : game.getPlayersInTurnOrder();
 
-        final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoosePlayer");
+        final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                Localizer.getInstance().getMessage("lblChoosePlayer");
         final boolean random = sa.hasParam("Random");
+        final boolean secret = sa.hasParam("Secretly");
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
@@ -45,7 +49,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 chosen = choices.isEmpty() ? null : p.getController().chooseSingleEntityForEffect(choices, sa, choiceDesc, sa.hasParam("Optional"), null);
             }
             if (null != chosen) {
-                if (sa.hasParam("Secretly")) {
+                if (secret) {
                     card.setSecretChosenPlayer(chosen);
                 } else if (sa.hasParam("Protect")) {
                     card.setProtectingPlayer(chosen);
@@ -58,11 +62,10 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
                 if (sa.hasParam("RememberChosen")) {
                     card.addRemembered(chosen);
                 }
-                if (sa.hasParam("DontNotify")) { //ie Shared Fate
-                    //log the chosen player
-                    p.getGame().getGameLog().add(GameLogEntryType.INFORMATION, Localizer.getInstance().getMessage("lblPlayerPickedChosen", sa.getActivatingPlayer(), chosen));
-                } else {
-                    p.getGame().getAction().notifyOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerPickedChosen", sa.getActivatingPlayer(), chosen), null);
+                if (!secret) {
+                    //ie Shared Fate – log the chosen player
+                    if (sa.hasParam("DontNotify")) game.getGameLog().add(GameLogEntryType.INFORMATION, Localizer.getInstance().getMessage("lblPlayerPickedChosen", sa.getActivatingPlayer(), chosen));
+                    else game.getAction().notifyOfValue(sa, p, Localizer.getInstance().getMessage("lblPlayerPickedChosen", sa.getActivatingPlayer(), chosen), null);
                 }
                 // SubAbility that only fires if a player is chosen
                 SpellAbility chosenSA = sa.getAdditionalAbility("ChooseSubAbility");

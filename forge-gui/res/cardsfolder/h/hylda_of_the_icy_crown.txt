@@ -8,6 +8,6 @@ SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPutCounterAll,DBScry
 SVar:DBToken:DB$ Token | TokenScript$ wu_4_4_elemental |SpellDescription$ Create a 4/4 white and blue Elemental creature token.
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw a card.
-SVar:DBDraw:DB$ Draw 
+SVar:DBDraw:DB$ Draw
 DeckHas:Ability$Token|Counters & Type$Elemental
 Oracle:Whenever you tap an untapped creature an opponent controls, you may pay {1}. When you do, choose one —\n• Create a 4/4 white and blue Elemental creature token.\n• Put a +1/+1 counter on each creature you control.\n• Scry 2, then draw a card.

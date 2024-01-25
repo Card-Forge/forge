@@ -275,7 +275,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void loadCard(String cardName, String setCode, CardRules cr) {
         // @leriomaggio: This method is called when lazy-loading is set
-        System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
+        // OR if a card is trying to load from an edition its not from
+        //System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
         boolean reIndexNecessary = false;
         CardEdition ed = editions.get(setCode);
