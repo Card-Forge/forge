@@ -10,6 +10,50 @@ ScryfallCode=MKC
 2 M Mirko, Obsessive Theorist @Heonhwa Choe
 3 M Morska, Undersea Sleuth @Ekaterina Burmak
 4 M Nelly Borca, Impulsive Accuser @James Ryman
+5 M Duskana, the Rage Mother @Samuel Perin
+6 M Feather, Radiant Arbiter @Dan Dos Santos
+7 M Marvo, Deep Operative @John Tedrick
+8 M Sophia, Dogged Detective @Campbell White
+9 R Armed with Proof @Serena Malyon
+10 R Immortal Obligation @Nino Vecia
+11 R Merchant of Truth @Carissa Susilo
+12 R Otherworldly Escort @Artur Treffner
+13 R Redemption Arc @Dominik Mayer
+14 R Serene Sleuth @Fay Dalton
+15 R Trouble in Pairs @Fay Dalton
+16 R True Identity @Chris Seaman
+17 R Unexplained Absence @Rockey Chen
+18 R Veiled Ascension @Domenico Cava
+19 R Case of the Shifting Visage @Chris Seaman
+20 R Copy Catchers @Edgar Sánchez Hidalgo
+21 R Detective of the Month @Stella Spente
+22 R Final-Word Phantom @Anthony Devine
+23 R Follow the Bodies @Alfven Ato
+24 R Tangletrove Kelp @Erikas Perl
+25 R Watcher of Hours @Daniel Romanovsky
+26 R Charnel Serenade @Alex Stone
+27 R Eye of Duskmantle @Anthony Devine
+28 R Foreboding Steamboat @Josu Solano
+29 R Unshakable Tail @Sean Murray
+30 R Boltbender @Lars Grant-West
+31 R Havoc Eater @David Szabo
+32 R Hot Pursuit @Michele Giorgi
+33 R Mob Verdict @Domenico Cava
+34 R Prisoner's Dilemma @Serena Malyon
+35 R Showstopping Surprise @David Palumbo
+36 R Tesak, Judith's Hellhound @Anna Podedworna
+37 R Experiment Twelve @Michele Giorgi
+38 R Innocuous Researcher @Simon Dominic
+39 R On the Trail @Erikas Perl
+40 R Printlifter Ooze @David Szabo
+41 R Counterpoint @Brian Valeza
+42 R Knowledge Is Power @Fay Dalton
+43 R Take the Bait @Johan Grenier
+44 R Panoptic Projektor @Alfven Ato
+45 R Ransom Note @Gaboleps
+46 R Ransom Note @Gaboleps
+47 R Ransom Note @Gaboleps
+48 R Ransom Note @Gaboleps
 49 M Kaust, Eyes of the Glade @Volkan Baǵa
 50 M Mirko, Obsessive Theorist @Heonhwa Choe
 51 M Morska, Undersea Sleuth @Ekaterina Burmak
