@@ -13,7 +13,7 @@ ScryfallCode=CLU
 5 R Emissary Green @Heonhwa Choe
 6 R Commander Mustard @Jake Murray
 7 U Wrench @Clint Lockwood
-8 C Candlestick @Clint Lockwood
+8 U Candlestick @Clint Lockwood
 9 U Lead Pipe @Clint Lockwood
 10 U Knife @Clint Lockwood
 11 U Rope @Clint Lockwood
@@ -57,6 +57,228 @@ ScryfallCode=CLU
 49 U Undercover Butler @Kim Sokol
 50 R Unruly Krasis @Billy Christian
 51 R Vernal Sovereign @Aaron Miller
+52 U Ajani's Pridemate @Sidharth Chaturvedi
+53 U Angel of Vitality @Johannes Voss
+54 C Azorius Arrester @Wayne Reynolds
+55 U Azorius Justiciar @Chris Rahn
+56 U Conclave Tribunal @Seb McKinnon
+57 R Council's Judgment @Kev Walker
+58 C Deadly Riposte @Olena Richards
+59 C Doomed Traveler @Lars Grant-West
+60 C Enforcer Griffin @Johan Grenier
+61 M Finale of Glory @Stanton Feng
+62 U Glorifier of Dusk @Viktor Titov
+63 C Gods Willing @Mark Winters
+64 C Law-Rune Enforcer @Eric Deschamps
+65 U Martial Impetus @Aaron Miller
+66 C Mighty Leap @rk post
+67 U Oust @Mike Bierek
+68 C Parhelion Patrol @Even Amundsen
+69 U Rally to Battle @Ben Wootten
+70 U Roc Charger @Titus Lunter
+71 C Rootborn Defenses @Mark Zug
+72 C Seller of Songbirds @Christopher Moeller
+73 U Sunhome Stalwart @Matt Stewart
+74 C Syndic of Tithes @Steve Prescott
+75 C Syndicate Messenger @Viktor Titov
+76 C Tandem Tactics @David Gaillet
+77 C Trusted Pegasus @Chris Rahn
+78 C Twilight Panther @Uriah Voth
+79 U Urbis Protector @Steve Argyle
+80 C War Screecher @Dan Scott
+81 U Chemister's Insight @Josh Hass
+82 C Cloudkin Seer @Anastasia Ovchinnikova
+83 U Code of Constraint @Ekaterina Burmak
+84 C Consider @Zezhou Chen
+85 C Erratic Visionary @Randy Vargas
+86 U Forbidden Alchemy @David Rapoza
+87 C Helium Squirter @Hideaki Takamura
+88 C Jeering Homunculus @Steve Prescott
+89 C Leapfrog @Aaron Miller
+90 C Owl Familiar @Janine Johnston
+91 C Passwall Adept @John Thacker
+92 U Psychic Impetus @Lindsey Look
+93 U Rapid Hybridization @Jack Wang
+94 C Repeal @Dan Scott
+95 U Rescuer Sphinx @Jesper Ejsing
+96 C Roaming Ghostlight @Zezhou Chen
+97 C Sage's Row Savant @Bastien L. Deharme
+98 C Skitter Eel @Mathias Kollros
+99 U Slip Out the Back @Zara Alfonso
+100 U Snow Day @Forrest Imel
+101 R Stunt Double @Joseph Meehan
+102 C Thunder Drake @Yeong-Hao Han
+103 U Turn to Frog @Warren Mahy
+104 C Watcher in the Mist @Ryan Yee
+105 C Basilica Screecher @Christine Choi
+106 C Blade Juggler @Dmitry Burmak
+107 C Corpse Churn @Lars Grant-West
+108 U Daggerclaw Imp @Pete Venters
+109 C Deadly Dispute @Irina Nordsol
+110 C Deal Gone Bad @Mathias Kollros
+111 C Fleshbag Marauder @Mark Zug
+112 C Gorging Vulture @Caio Monteiro
+113 U Gurmag Swiftwing @Jeff Simpson
+114 U Infest @Karl Kopinski
+115 C Masked Blackguard @Bryan Sola
+116 U Mausoleum Turnkey @Darrell Riche
+117 U Orzhov Racketeers @David Palumbo
+118 C Parasitic Impetus @Mila Pesic
+119 C Rakdos Trumpeter @Eric Deschamps
+120 U Ribbons of Night @Ron Spears
+121 C Roofstalker Wight @Puddnhead
+122 M Spawn of Mayhem @Victor Adame Minguez
+123 C Syndicate Enforcer @Steven Belledin
+124 C Tithebearer Giant @Wisnu Tan
+125 C Venomous Hierophant @Johannes Voss
+126 U Vindictive Vampire @Randy Gallegos
+127 C Chainwhip Cyclops @Johann Bodin
+128 U Coordinated Assault @John Severin Brassell
+129 C Cosmotronic Wave @Titus Lunter
+130 U Dagger Caster @Viktor Titov
+131 C Deputized Protester @Lius Lasahido
+132 C Direct Current @Dan Scott
+133 C Fire Urchin @Deruchenko Alexander
+134 U Firefist Striker @Tyler Jacobson
+135 U Frenzied Goblin @Randy Vargas
+136 C Goblin Wizardry @Izzy
+137 C Gravel-Hide Goblin @Jonathan Kuo
+138 U Havoc Jester @Jason A. Engle
+139 C Krenko's Command @Lucas Graciano
+140 U Light Up the Stage @Dmitry Burmak
+141 U Lightning Bolt @Christopher Moeller
+142 U Living Lightning @Caio Monteiro
+143 C Ornery Goblin @Johann Bodin
+144 U Pyrewild Shaman @Lucas Graciano
+145 C Reduce to Ashes @Jason A. Engle
+146 C Ripscale Predator @Volkan Baǵa
+147 U Shiny Impetus @Svetlin Velinov
+148 C Spellgorger Weird @James Paick
+149 U Stormblood Berserker @Min Yum
+150 U Street Spasm @Raymond Swanland
+151 C Towering Thunderfist @Zoltan Boros
+152 C Turret Ogre @Johann Bodin
+153 C Utvara Scalper @Christopher Rush
+154 C Wojek Bodyguard @Tyler Walpole
+155 U Affectionate Indrik @Steve Prescott
+156 C Band Together @Josh Hass
+157 U Battlefront Krushok @Steve Prescott
+158 R Beast Whisperer @Matt Stewart
+159 U Challenger Troll @Svetlin Velinov
+160 U Colossal Majesty @Randy Vargas
+161 C Duskshell Crawler @Yeong-Hao Han
+162 U Enraged Ceratok @Lars Grant-West
+163 U Fungal Rebirth @Nicholas Gregory
+164 M Giant Adephage @Christine Choi
+165 C Gift of Strength @Lius Lasahido
+166 C Ivy Lane Denizen @Winona Nelson
+167 U Kraul Harpooner @Kev Walker
+168 C Kraul Warrior @David Rapoza
+169 C Kronch Wrangler @Steve Prescott
+170 U Nissa's Judgment @Tyler Jacobson
+171 U Overcome @Craig J Spearing
+172 C Predatory Impetus @Randy Vargas
+173 C Sauroform Hybrid @Nils Hamm
+174 C Steeple Creeper @Svetlin Velinov
+175 C Territorial Boar @Dan Scott
+176 C Thrashing Mossdog @Ryan Barger
+177 C Transluminant @Greg Hildebrandt
+178 C Vines of the Recluse @Dan Scott
+179 C Wildsize @Jim Murray
+180 C Wildwood Patrol @Dan Scott
+181 C Yeva's Forcemage @Eric Deschamps
+182 R Clan Defiance @Daarken
+183 C Curse of Chains @Drew Tucker
+184 M Deadbridge Chant @Zoltan Boros
+185 U Depose // Deploy @Sara Winters
+186 U Dimir Guildmage @Adam Rex
+187 U Discovery // Dispersal @Mark Behm
+188 M Duskmantle Seer @Kev Walker
+189 R Firemane Avenger @Wayne Reynolds
+190 U Firespout @Jeff Miracola
+191 C Footlight Fiend @Deruchenko Alexander
+192 C Fresh-Faced Recruit @Anthony Palumbo
+193 C Frostburn Weird @Mike Bierek
+194 U Golgari Guildmage @Zoltan Boros & Gabor Szikszai
+195 M Hydroid Krasis @Jason Felix
+196 R Hypersonic Dragon @Dan Scott
+197 U Incubation // Incongruity @Mike Bierek
+198 U Integrity // Intervention @Ben Maier
+199 R Lavinia of the Tenth @Willian Murai
+200 M Master Biomancer @Willian Murai
+201 U Orzhov Guildmage @Greg Staples
+202 C Pit Fight @Matt Stewart
+203 C Pitiless Gorgon @Alex Konstad
+204 C Rakdos Shred-Freak @Wayne Reynolds
+205 M Rakdos, the Showstopper @Viktor Titov
+206 C Scuttlegator @Jehan Choo
+207 U Selesnya Guildmage @Mark Zug
+208 M Seraph of the Scales @Magali Villeneuve
+209 C Snakeform @Jim Nelson
+210 U Status // Statue @Ben Wootten
+211 R Supreme Verdict @Sam Burley
+212 R Thief of Sanity @Igor Kieryluk
+213 M Trostani Discordant @Chase Stone
+214 C Turn to Mist @Greg Staples
+215 M Underrealm Lich @Anna Steinbauer
+216 C Vernadi Shieldmate @Matt Stewart
+217 C Vizkopa Vampire @Winona Nelson
+218 C Whisper Agent @Deruchenko Alexander
+219 C Azorius Signet @Raoul Vitale
+220 C Boros Signet @Greg Hildebrandt
+221 C Dimir Signet @Raoul Vitale
+222 C Golgari Signet @Raoul Vitale
+223 C Gruul Signet @Efrem Palacios
+224 C Izzet Signet @Raoul Vitale
+225 C Orzhov Signet @Martina Pilcerova
+226 C Rakdos Signet @Martina Pilcerova
+227 C Selesnya Signet @Raoul Vitale
+228 C Simic Signet @Mike Sass
+229 C Azorius Chancery @John Avon
+230 C Azorius Guildgate @Drew Baker
+231 C Boros Garrison @John Avon
+232 C Boros Guildgate @Titus Lunter
+233 C Dimir Aqueduct @John Avon
+234 C Dimir Guildgate @Cliff Childs
+235 C Golgari Guildgate @Eytan Zana
+236 C Golgari Rot Farm @John Avon
+237 C Gruul Guildgate @Randy Gallegos
+238 C Gruul Turf @John Avon
+239 C Izzet Boilerworks @John Avon
+240 C Izzet Guildgate @Kirsten Zirngibl
+241 C Orzhov Basilica @John Avon
+242 C Orzhov Guildgate @Cliff Childs
+243 C Rakdos Carnarium @John Avon
+244 C Rakdos Guildgate @Eytan Zana
+245 C Selesnya Guildgate @Howard Lyon
+246 C Selesnya Sanctuary @John Avon
+247 C Simic Growth Chamber @John Avon
+248 C Simic Guildgate @Svetlin Velinov
+249 C Thriving Bluff @Johannes Voss
+250 C Thriving Grove @Ravenna Tran
+251 C Thriving Heath @Alayna Danner
+252 C Thriving Isle @Jonas De Ro
+253 C Thriving Moor @Titus Lunter
+254 L Plains @Alayna Danner
+255 L Plains @Yeong-Hao Han
+256 L Plains @James Paick
+257 L Plains @Ravenna Tran
+258 L Island @Alayna Danner
+259 L Island @Yeong-Hao Han
+260 L Island @Adam Paquette
+261 L Island @Jung Park
+262 L Swamp @Florian de Gesincourt
+263 L Swamp @Dimitar Marinski
+264 L Swamp @Christopher Moeller
+265 L Swamp @Ravenna Tran
+266 L Mountain @Dimitar Marinski
+267 L Mountain @James Paick
+268 L Mountain @Svetlin Velinov
+269 L Mountain @Anthony S. Waters
+270 L Forest @Alayna Danner
+271 L Forest @Yeong-Hao Han
+272 L Forest @James Paick
+273 L Forest @Svetlin Velinov
 274 R Blood Crypt @Piotr Dura
 275 R Breeding Pool @Yeong-Hao Han
 276 R Godless Shrine @Piotr Dura
