@@ -374,7 +374,6 @@ c_a_clue_draw
 c_a_food_sac
 c_a_gold_sac
 c_a_treasure_sac
-embalm_vizier_of_many_faces
 g_1_1_insect
 g_1_1_insect_flying_deathtouch
 g_1_1_saproling
@@ -392,3 +391,6 @@ u_4_3_salamander_warrior
 w_1_1_human_soldier
 w_1_1_soldier
 w_1_1_spirit_flying
+
+[other]
+embalm_vizier_of_many_faces
