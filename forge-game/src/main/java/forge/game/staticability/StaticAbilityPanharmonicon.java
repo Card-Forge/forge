@@ -160,6 +160,10 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
                 return false;
             }
+        } else if (trigMode.equals(TriggerType.TurnFaceUp)) {
+            if (!stAb.matchesValidParam("ValidTurned", runParams.get(AbilityKey.Card))) {
+                return false;
+            }
         }
 
         return true;
