@@ -517,6 +517,9 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
+            } else if (hType.equals("HasLost")) {
+                players.addAll(game.getLostPlayers());
+                val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("PropertyYou")) {
                 players.add(player);
                 val = playerXCount(players, calcX[1], card, ability);
