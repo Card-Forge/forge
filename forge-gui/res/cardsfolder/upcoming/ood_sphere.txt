@@ -1,10 +1,10 @@
 Name:Ood Sphere
 ManaCost:no cost
 Types:Plane Horsehead Nebula
-S:Mode$ Continuous | Affected$ Card.nonCreature | EffectZone$ Command | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Song of the Ood — Noncreature spells have convoke. (A player’s creatures can help cast those spells. Each creature they tap while casting a noncreature spell pays for {1} or one mana of that creature’s color.)
-T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Red-Eye — Whenever chaos ensues, for each opponent, goad up to one target creature that opponent controls. Until end of turn, those creatures can’t become tapped unless they’re being declared as attackers.
-SVar:RolledChaos:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose one target creature that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBEffect
+S:Mode$ Continuous | Affected$ Card.nonCreature | EffectZone$ Command | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Song of the Ood — Noncreature spells have convoke. (A player's creatures can help cast those spells. Each creature they tap while casting a noncreature spell pays for {1} or one mana of that creature's color.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Red-Eye — Whenever chaos ensues, for each opponent, goad up to one target creature that opponent controls. Until end of turn, those creatures can't become tapped unless they're being declared as attackers.
+SVar:RolledChaos:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ True | ReplacementEffects$ CantTap
-SVar:CantTap:Event$ Tap | ValidCard$ Card.IsRemembered | Attacker$ False | Layer$ CantHappen | Description$ Those creatures can’t become tapped unless they’re being declared as attackers.
+SVar:CantTap:Event$ Tap | ValidCard$ Card.IsRemembered | Attacker$ False | Layer$ CantHappen | Description$ Those creatures can't become tapped unless they're being declared as attackers.
 SVar:OneEach:PlayerCountOpponents$Amount
-Oracle:Song of the Ood — Noncreature spells have convoke. (A player’s creatures can help cast those spells. Each creature they tap while casting a noncreature spell pays for {1} or one mana of that creature’s color.)\nRed-Eye — Whenever chaos ensues, for each opponent, goad up to one target creature that opponent controls. Until end of turn, those creatures can’t become tapped unless they’re being declared as attackers.
+Oracle:Song of the Ood — Noncreature spells have convoke. (A player's creatures can help cast those spells. Each creature they tap while casting a noncreature spell pays for {1} or one mana of that creature's color.)\nRed-Eye — Whenever chaos ensues, for each opponent, goad up to one target creature that opponent controls. Until end of turn, those creatures can't become tapped unless they're being declared as attackers.
