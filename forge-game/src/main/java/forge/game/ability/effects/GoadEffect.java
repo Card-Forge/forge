@@ -41,28 +41,30 @@ public class GoadEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (ungoad) tgtC.unGoad();
-            else {
-                // 701.38d is handled by getGoaded
-                tgtC.addGoad(timestamp, player);
+            if (ungoad) {
+                tgtC.unGoad();
+                continue;
+            }
 
-                // currently, only Life of the Party uses Duration$ – Duration$ Permanent
-                if (!duration.equals("Permanent")) {
-                    final GameCommand until = new GameCommand() {
-                        private static final long serialVersionUID = -1731759226844770852L;
+            // 701.38d is handled by getGoaded
+            tgtC.addGoad(timestamp, player);
 
-                        @Override
-                        public void run() {
-                            tgtC.removeGoad(timestamp);
-                        }
-                    };
+            // currently, only Life of the Party uses Duration$ – Duration$ Permanent
+            if (!duration.equals("Permanent")) {
+                final GameCommand until = new GameCommand() {
+                    private static final long serialVersionUID = -1731759226844770852L;
 
-                    addUntilCommand(sa, until, duration, player);
-                }
+                    @Override
+                    public void run() {
+                        tgtC.removeGoad(timestamp);
+                    }
+                };
 
-                if (remember && tgtC.isGoaded()) {
-                    sa.getHostCard().addRemembered(tgtC);
-                }
+                addUntilCommand(sa, until, duration, player);
+            }
+
+            if (remember && tgtC.isGoaded()) {
+                sa.getHostCard().addRemembered(tgtC);
             }
         }
     }
