@@ -7406,6 +7406,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return !goad.isEmpty();
     }
 
+    public final void unGoad() {
+        goad = Maps.newTreeMap();
+        updateAbilityTextForView();
+    }
+
     public final boolean isGoadedBy(final Player p) {
         return goad.containsValue(p);
     }
