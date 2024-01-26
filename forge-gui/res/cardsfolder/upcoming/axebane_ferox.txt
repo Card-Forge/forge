@@ -1,0 +1,8 @@
+Name:Axebane Ferox
+ManaCost:2 G G
+Types:Creature Beast
+PT:4/4
+K:Deathtouch
+K:Haste
+K:Ward:CollectEvidence<4>
+Oracle:Deathtouch, haste\nWard—Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)
