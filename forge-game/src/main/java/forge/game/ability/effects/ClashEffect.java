@@ -33,7 +33,10 @@ public class ClashEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = source.getController();
-        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseOpponent"), null);
+        final Player opponent = sa.hasParam("Defined") ?
+                AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).getFirst() :
+                sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa,
+                        Localizer.getInstance().getMessage("lblChooseOpponent"), null);
         final Player winner = clashWithOpponent(sa, opponent);
 
         if (player.equals(winner)) {
