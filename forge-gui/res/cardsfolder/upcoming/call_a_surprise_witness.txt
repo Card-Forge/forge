@@ -1,7 +1,6 @@
 Name:Call a Surprise Witness
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ Spirit | ValidTgts$ Creature.YouCtrl+cmcLE3 | RememberChanged$ True | SubAbility$ DBPutCounter | TgtPrompt$ Select target creature card with mana value 3 or less
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE3 | RememberChanged$ True | SubAbility$ DBPutCounter | TgtPrompt$ Select target creature card with mana value 3 or less
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.IsRemembered | CounterType$ Flying | CounterNum$ 1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Spirit |  Duration$ Permanent | SubAbility$ DBCleanup
