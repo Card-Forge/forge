@@ -366,11 +366,30 @@ public class AbilityManaPart implements java.io.Serializable {
 
         // Loop over restrictions
         for (String restriction : restrictions.split(",")) {
+            if (restriction.equals("nonSpell")) {
+                return !sa.isSpell();
+            }
+
+            if (restriction.equals("CumulativeUpkeep")) {
+                if (sa.isCumulativeUpkeep()) {
+                    return true;
+                }
+                continue;
+            }
+
             if (restriction.startsWith("CostContains")) {
                 if (restriction.endsWith("X") && sa.costHasManaX()) {
                     return true;
                 }
                 if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
+                    return true;
+                }
+                continue;
+            }
+
+            if (restriction.equals("MorphOrManifest")) {
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
+                        || sa.isManifestUp() || sa.isMorphUp()) {
                     return true;
                 }
                 continue;
@@ -396,6 +415,11 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
             }
 
+            if (restriction.equals("CantCastNonArtifactSpells")) {
+                return !sa.isSpell() || sa.getHostCard().isArtifact();
+            }
+
+            // TODO refactor to differ between ForCost and ForEffect
             // the payment is for a resolving SA, currently no other restrictions would allow that
             if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
                 return false;
