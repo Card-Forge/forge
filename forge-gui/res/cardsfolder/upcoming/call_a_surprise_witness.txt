@@ -1,0 +1,7 @@
+Name:Call a Surprise Witness
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | WithCountersType$ Flying | Destination$ Battlefield | AnimateSubAbility$ Spirit | ValidTgts$ Creature.YouCtrl+cmcLE3 | TgtPrompt$ Select target creature card with mana value 3 or less
+SVar:Spirit:DB$ Animate | Defined$ Remembered | Types$ Spirit |  Duration$ Permanent
+DeckHas:Ability$Graveyard & Type$Spirit
+Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield. Put a flying counter on it. It's a Spirit in addition to its other types.
