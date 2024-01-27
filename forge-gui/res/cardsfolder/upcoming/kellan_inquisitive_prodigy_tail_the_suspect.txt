@@ -5,7 +5,7 @@ PT:3/4
 K:Flying
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy up to one target artifact. If you controlled that permanent, draw a card.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact | RememberLKI$ True | SubAbility$ DBDraw
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Investigate|Token & Type$Artifact
