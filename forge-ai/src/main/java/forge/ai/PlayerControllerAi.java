@@ -1068,6 +1068,7 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
+        emptyAbility.setTargets(sa.getTargets().clone());
 
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
