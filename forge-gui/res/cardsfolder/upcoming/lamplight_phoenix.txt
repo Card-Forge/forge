@@ -1,0 +1,11 @@
+Name:Lamplight Phoenix
+ManaCost:1 R R
+Types:Creature Phoenix
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME dies, you may exile it and collect evidence 4. If you do, return Lamplight Phoenix to the battlefield tapped. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | UnlessCost$ CollectEvidence<4> | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | ConditionDefined$ Remembered | ConditionPresent$ Card | Hidden$ True | Tapped$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:Flying\nWhen Lamplight Phoenix dies, you may exile it and collect evidence 4. If you do, return Lamplight Phoenix to the battlefield tapped. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)
