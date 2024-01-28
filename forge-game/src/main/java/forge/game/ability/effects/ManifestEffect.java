@@ -83,7 +83,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                 }
             } else {
                 // manifest from other zones should be done at the same time
-                CardZoneTable triggerList = new CardZoneTable();
+                CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
 
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());

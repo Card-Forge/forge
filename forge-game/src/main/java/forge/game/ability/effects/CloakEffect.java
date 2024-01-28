@@ -25,6 +25,12 @@ public class CloakEffect extends SpellAbilityEffect {
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source,
                 sa.getParam("Amount"), sa) : 1;
 
+        CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
+        moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             CardCollection tgtCards;
             if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
@@ -51,19 +57,14 @@ public class CloakEffect extends SpellAbilityEffect {
                 CardLists.shuffle(tgtCards);
             }
 
-            CardZoneTable triggerList = new CardZoneTable();
-
-            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
-            moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
-            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
             for (Card c : tgtCards) {
                 Card rem = c.cloak(p, sa, moveParams);
                 if (rem != null && sa.hasParam("RememberCloaked") && rem.isCloaked()) {
                     source.addRemembered(rem);
                 }
             }
-            triggerList.triggerChangesZoneAll(game, sa);
         }
+
+        triggerList.triggerChangesZoneAll(game, sa);
     }
 }
