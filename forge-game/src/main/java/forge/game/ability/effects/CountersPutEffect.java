@@ -147,7 +147,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Choices")) {
             int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
-            String what = (sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices")));
+            String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
             stringBuilder.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);

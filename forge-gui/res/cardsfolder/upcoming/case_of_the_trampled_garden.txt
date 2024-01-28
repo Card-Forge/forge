@@ -1,0 +1,13 @@
+Name:Case of the Trampled Garden
+ManaCost:2 G
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this Case enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one or two target creatures you control | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE8 | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+IsUnsolved | Execute$ TrigSolve | TriggerDescription$ To solve — Creatures you control have total power 8 or greater. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+T:Mode$ AttackersDeclared | IsPresent$ Card.Self+IsSolved | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounterAttacker | TriggerDescription$ Solved — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.
+SVar:TrigCounterAttacker:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
+SVar:X:Count$SumPower_Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:When this Case enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.\nTo solve — Creatures you control have total power 8 or greater. (If unsolved, solve at the beginning of your end step.)\nSolved — Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.

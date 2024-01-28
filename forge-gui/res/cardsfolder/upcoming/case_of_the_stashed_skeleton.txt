@@ -1,0 +1,12 @@
+Name:Case of the Stashed Skeleton
+ManaCost:1 B
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Case enters the battlefield, create a 2/1 black Skeleton creature token and suspect it. (It has menace and can't block.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_1_skeleton | RememberTokens$ True | SubAbility$ DBSuspect
+SVar:DBSuspect:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Suspected | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Skeleton.YouCtrl+IsSuspected | PresentCompare$ EQ0 | IsPresent2$ Card.Self+IsUnsolved | Execute$ TrigSolve | TriggerDescription$ To solve — You control no suspected Skeletons. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME/this Case> | Activation$ Solved | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SorcerySpeed$ True | NoReveal$ True | PrecostDesc$ Solved — | SpellDescription$ Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.
+DeckHas:Ability$Token & Type$Skeleton
+Oracle:When this Case enters the battlefield, create a 2/1 black Skeleton creature token and suspect it. (It has menace and can't block.)\nTo solve — You control no suspected Skeletons. (If unsolved, solve at the beginning of your end step.)\nSolved — {1}{B}, Sacrifice this Case: Search your library for a card, put it into your hand, then shuffle. Activate only as a sorcery.

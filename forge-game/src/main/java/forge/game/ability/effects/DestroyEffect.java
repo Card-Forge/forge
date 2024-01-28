@@ -101,10 +101,15 @@ public class DestroyEffect extends SpellAbilityEffect {
         boolean destroyed = false;
         final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
 
+        SpellAbility cause = sa;
+        if (sa.isReplacementAbility()) {
+            cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
+        }
+
         if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, sa, true, params) != null;
+            destroyed = game.getAction().sacrifice(gameCard, cause, true, params) != null;
         } else {
-            destroyed = game.getAction().destroy(gameCard, sa, !noRegen, params);
+            destroyed = game.getAction().destroy(gameCard, cause, !noRegen, params);
         }
         if (destroyed && remDestroyed) {
             card.addRemembered(gameCard);
