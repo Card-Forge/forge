@@ -387,6 +387,14 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
+            if (restriction.equals("FaceDownOrTurnFaceUp")) {
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
+                        || sa.isTurnFaceUp()) {
+                    return true;
+                }
+                continue;
+            }
+
             if (restriction.equals("MorphOrManifest")) {
                 if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
                         || sa.isManifestUp() || sa.isMorphUp()) {
