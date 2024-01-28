@@ -251,8 +251,8 @@ public class HumanPlay {
                     || part instanceof CostRemoveAnyCounter
                     || part instanceof CostMill
                     || part instanceof CostSacrifice
-                    || part instanceof CostCollectEvidence)
-            		{
+                    || part instanceof CostCollectEvidence){
+
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null) {
