@@ -262,7 +262,7 @@ public enum CounterEnumType {
     MANIFESTATION("MNFST", 104, 225, 8),
 
     MANNEQUIN("MANQN", 206, 199, 162),
-    
+
     MATRIX("MATRX", 183, 174, 255),
 
     MINE("MINE", 255, 100, 127),
