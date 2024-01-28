@@ -3,10 +3,7 @@ ManaCost:G
 Types:Creature Elf Druid Detective
 PT:0/3
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 3 G T CollectEvidence<4> | ValidTgts$ Land.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Select target land you control | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target land you control becomes a 5/5 green Plant Boar creature with haste for as long as Hedge Whisperer remains tapped. It's still a land. Activate only as a sorcery. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)
-S:Mode$ Continuous | Affected$ Land.IsRemembered | SetPower$ 5 | SetToughness$ 5 | AddType$ Creature & Plant & Bear | AddKeyword$ Haste 
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Animate | Cost$ 3 G T CollectEvidence<4> | Duration$ UntilUntaps | ValidTgts$ Land.YouCtrl | Power$ 5 | Toughness$ 5 | Types$ Creature,Plant,Bear | Keywords$ Haste | SorcerySpeed$ True | TgtPrompt$ Select target land you control | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target land you control becomes a 5/5 green Plant Boar creature with haste for as long as Hedge Whisperer remains tapped. It's still a land. Activate only as a sorcery. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)
 DeckHints:Ability$Graveyard|Mill|Discard|Dredge
 DeckHas:Type$Boar|Plant
 Oracle:You may choose not to untap Hedge Whisperer during your untap step.\n{3}{G}, {T}, Collect evidence 4: Target land you control becomes a 5/5 green Plant Boar creature with haste for as long as Hedge Whisperer remains tapped. It's still a land. Activate only as a sorcery. (To collect evidence 4, exile cards with total mana value 4 or greater from your graveyard.)
