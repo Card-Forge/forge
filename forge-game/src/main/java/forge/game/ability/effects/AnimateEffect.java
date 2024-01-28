@@ -40,6 +40,10 @@ public class AnimateEffect extends AnimateEffectBase {
             return;
         }
 
+        if ("UntilUntaps".equals(sa.getParam("Duration")) && !source.isTapped()) {
+            return;
+        }
+
         // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
