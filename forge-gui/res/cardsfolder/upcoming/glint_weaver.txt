@@ -4,7 +4,7 @@ Types:Creature Spider
 PT:3/3
 K:Reach
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures, then you gain life equal to the greatest toughness among creatures you control.
-SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select one, two or three target creatures you control | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBGainLife | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select one, two or three target creatures | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBGainLife | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 DeckHas:Ability$LifeGain|Counters
