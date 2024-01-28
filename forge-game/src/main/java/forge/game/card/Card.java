@@ -7096,7 +7096,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        if (isInPlay() && isFaceDown() && oState.getType().isCreature())
+        if (isInPlay() && isFaceDown() && oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
         {
             if (isManifested()) {
                 abilities.add(oState.getManifestUp());
