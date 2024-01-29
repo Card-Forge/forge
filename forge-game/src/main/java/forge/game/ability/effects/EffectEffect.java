@@ -55,14 +55,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String noteCounterDefined = null;
         final String duration = sa.getParam("Duration");
 
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
-                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
-        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
+        if (!checkValidDuration(duration, sa)) {
             return;
         }
 

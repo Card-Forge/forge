@@ -2733,7 +2733,7 @@ public class AbilityUtils {
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
         if (sq[0].startsWith("ThisTurnEntered") || sq[0].startsWith("LastTurnEntered")) {
-            final String[] workingCopy = paidparts[0].split("_");
+            final String[] workingCopy = paidparts[0].split("_", 5);
             ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
             final boolean hasFrom = workingCopy[2].equals("from");
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
