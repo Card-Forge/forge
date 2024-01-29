@@ -128,7 +128,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         final List<ZoneType> affectedZones = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if ("UntilUntaps".equals(sa.getParam("Duration")) && !sa.getHostCard().isTapped()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
