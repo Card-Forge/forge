@@ -1,0 +1,7 @@
+Name:Leyline of the Guildpact
+ManaCost:GW GU BG RG
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+S:Mode$ Continuous | EffectZone$ All | Affected$ Permanent.nonLand+YouCtrl | SetColor$ All | Description$ Each nonland permanent you control is all colors.
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ AllBasicLandType | Description$ Lands you control are every basic land type in addition to their other types.
+Oracle:If Leyline of the Guildpact is in your opening hand, you may begin the game with it on the battlefield.\nEach nonland permanent you control is all colors.\nLands you control are every basic land type in addition to their other types.
