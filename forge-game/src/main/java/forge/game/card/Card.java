@@ -798,6 +798,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
+        // Check replacement effects
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.TurnFaceUp,
+                repParams, ReplacementLayer.CantHappen);
+        if (!list.isEmpty()) return false;
+
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
         for (final Card c : cards) {
@@ -818,24 +824,29 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             retResult = retResult || result;
         }
-        if (retResult && hasMergedCard()) {
+
+        if (!retResult) return false;
+
+        final TriggerHandler triggerHandler = game.getTriggerHandler();
+        if (hasMergedCard()) {
             removeMutatedStates();
             rebuildMutatedStates(cause);
-            game.getTriggerHandler().clearActiveTriggers(this, null);
-            game.getTriggerHandler().registerActiveTrigger(this, false);
+            triggerHandler.clearActiveTriggers(this, null);
+            triggerHandler.registerActiveTrigger(this, false);
         }
-        if (retResult && runTriggers) {
+        if (runTriggers) {
             // Run replacement effects
-            getGame().getReplacementHandler().run(ReplacementType.TurnFaceUp, AbilityKey.mapFromAffected(this));
+            game.getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
             // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             runParams.put(AbilityKey.Cause, cause);
 
-            getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
+            triggerHandler.registerActiveTrigger(this, false);
+            triggerHandler.runTrigger(TriggerType.TurnFaceUp, runParams, false);
         }
-        return retResult;
+
+        return true;
     }
 
     public boolean wasTurnedFaceUpThisTurn() {
