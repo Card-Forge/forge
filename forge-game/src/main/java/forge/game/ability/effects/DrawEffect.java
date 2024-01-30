@@ -96,11 +96,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
             final CardCollectionView drawn = p.drawCards(actualNum, sa, moveParams);
             if (sa.hasParam("Reveal")) {
-                if (sa.getParam("Reveal").equals("All")) {
-                    p.getGame().getAction().reveal(drawn, p, false);
-                } else {
-                    p.getGame().getAction().reveal(drawn, p);
-                }
+                p.getGame().getAction().reveal(drawn, p, !sa.getParam("Reveal").equals("All"));
             }
             if (sa.hasParam("RememberDrawn")) {
                 source.addRemembered(drawn);
