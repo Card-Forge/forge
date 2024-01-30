@@ -280,6 +280,7 @@ public class BoosterGenerator {
                 PrintSheet replaceSheet = getPrintSheet(replaceKey);
                 result.addAll(replaceSheet.random(1, true));
                 sheetsUsed.add(replaceSheet);
+                System.out.println("Common was replaced with something from the replace sheet...");
                 replaceCommon = false;
             }
 
