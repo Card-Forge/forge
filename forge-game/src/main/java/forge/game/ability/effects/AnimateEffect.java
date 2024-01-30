@@ -31,12 +31,7 @@ public class AnimateEffect extends AnimateEffectBase {
         String animateRemembered = null;
         String animateImprinted = null;
 
-        //if host is not on the battlefield don't apply
-        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
-                && !source.isInPlay()) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && source.getController() != sa.getActivatingPlayer()) {
+        if (!checkValidDuration(duration, sa)) {
             return;
         }
 

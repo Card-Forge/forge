@@ -2,6 +2,8 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -10,6 +12,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -28,16 +31,15 @@ public class ManifestEffect extends SpellAbilityEffect {
         // Most commonly "defined" is Top of Library
         final String defined = sa.getParamOrDefault("Defined", "TopOfLibrary");
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             CardCollection tgtCards;
+            boolean fromLibrary = false;
             if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
                 ZoneType choiceZone = ZoneType.Hand;
                 if (sa.hasParam("ChoiceZone")) {
                     choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                    fromLibrary = choiceZone.equals(ZoneType.Library);
                 }
                 CardCollectionView choices = game.getCardsIn(choiceZone);
                 if (sa.hasParam("Choices")) {
@@ -52,26 +54,48 @@ public class ManifestEffect extends SpellAbilityEffect {
                 tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
             } else if ("TopOfLibrary".equals(defined)) {
                 tgtCards = p.getTopXCardsFromLibrary(amount);
+                fromLibrary = true;
             } else {
                 tgtCards = getTargetCards(sa);
+                if (Iterables.all(tgtCards, CardPredicates.inZone(ZoneType.Library))) {
+                    fromLibrary = true;
+                }
             }
 
             if (sa.hasParam("Shuffle")) {
                 CardLists.shuffle(tgtCards);
             }
 
-            for (Card c : tgtCards) {
-                CardZoneTable triggerList = new CardZoneTable();
-                ZoneType origin = c.getZone().getZoneType();
-                Card rem = c.manifest(p, sa, moveParams);
-                if (rem != null) {
-                    if (sa.hasParam("RememberManifested") && rem.isManifested()) {
+            if (fromLibrary) {
+                for (Card c : tgtCards) {
+                    // CR 701.34d If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
+                    CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
+                    moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
+                    moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                    Card rem = c.manifest(p, sa, moveParams);
+                    if (rem != null && sa.hasParam("RememberManifested") && rem.isManifested()) {
                         source.addRemembered(rem);
                     }
-                    // CR 701.34d multiple cards are manifested one at a time
-                    triggerList.put(origin, ZoneType.Battlefield, rem);
                     triggerList.triggerChangesZoneAll(game, sa);
                 }
+            } else {
+                // manifest from other zones should be done at the same time
+                CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
+                moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
+                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                for (Card c : tgtCards) {
+                    Card rem = c.manifest(p, sa, moveParams);
+                    if (rem != null && sa.hasParam("RememberManifested") && rem.isManifested()) {
+                        source.addRemembered(rem);
+                    }
+                }
+                triggerList.triggerChangesZoneAll(game, sa);
             }
         }
     }

@@ -930,6 +930,27 @@ public abstract class SpellAbilityEffect {
         }
     }
 
+    protected static boolean checkValidDuration(String duration, SpellAbility sa) {
+        if (duration == null) {
+            return true;
+        }
+        Card hostCard = sa.getHostCard();
+
+        //if host is not on the battlefield don't apply
+        // Suspend should does Affect the Stack
+        if ((duration.startsWith("UntilHostLeavesPlay") || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
+                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
+            return false;
+        }
+        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+            return false;
+        }
+        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
+            return false;
+        }
+        return true;
+    }
+
     public static Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
         // CR 800.4g
         final PlayerCollection options;

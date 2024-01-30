@@ -145,6 +145,9 @@ public class CardView extends GameEntityView {
     public boolean isManifested() {
         return get(TrackableProperty.Manifested);
     }
+    public boolean isCloaked() {
+        return get(TrackableProperty.Cloaked);
+    }
 
     public boolean isFlipCard() {
         return get(TrackableProperty.FlipCard);
@@ -948,6 +951,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Facedown, c.isFaceDown());
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Manifested, c.isManifested());
+        set(TrackableProperty.Cloaked, c.isCloaked());
         set(TrackableProperty.Adventure, c.isAdventureCard());
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
@@ -1230,8 +1234,13 @@ public class CardView extends GameEntityView {
                 if (getCard().getZone() == ZoneType.Exile) {
                     return ImageKeys.getTokenKey(getCard().isForeTold() ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD);
                 }
-                return ImageKeys.getTokenKey(getCard().isManifested() ? ImageKeys.MANIFEST_IMAGE
-                        : getType().getCreatureTypes().isEmpty() ? isCreature() ? ImageKeys.MORPH_IMAGE : ImageKeys.HIDDEN_CARD
+                if (getCard().isManifested()) {
+                    return ImageKeys.getTokenKey(ImageKeys.MANIFEST_IMAGE);
+                } else if (getCard().isCloaked()) {
+                    return ImageKeys.getTokenKey(ImageKeys.CLOAKED_IMAGE);
+                }
+
+                return ImageKeys.getTokenKey(getType().getCreatureTypes().isEmpty() ? isCreature() ? ImageKeys.MORPH_IMAGE : ImageKeys.HIDDEN_CARD
                         : getType().getCreatureTypes().toString().toLowerCase().replace(" ", "_").replace("[", "").replace("]",""));
             }
             if (canBeShownToAny(viewers)) {

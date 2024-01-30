@@ -1124,8 +1124,12 @@ public class CardProperty {
             if (card.isPhasedOut()) {
                 return false;
             }
-        } else if (property.startsWith("manifested")) {
+        } else if (property.equals("manifested")) {
             if (!card.isManifested()) {
+                return false;
+            }
+        } else if (property.equals("cloaked")) {
+            if (!card.isCloaked()) {
                 return false;
             }
         } else if (property.startsWith("DrawnThisTurn")) {

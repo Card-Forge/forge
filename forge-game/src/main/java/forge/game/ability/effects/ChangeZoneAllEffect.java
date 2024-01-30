@@ -45,8 +45,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
 
-        //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !source.isInPlay()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 

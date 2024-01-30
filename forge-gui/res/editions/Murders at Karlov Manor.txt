@@ -4,6 +4,10 @@ Date=2024-02-09
 Name=Murders at Karlov Manor
 Type=Expansion
 ScryfallCode=MKM
+Booster=7 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Any, 1 Any+
+ChanceReplaceCommonWith=.125F fromsheet("MKM karlov surprise")
+Prerelease=6 Boosters, 1 RareMythic+, 1 Any:fromsheet("MKM prerelease promo")+
+BoosterBox=36
 
 [cards]
 1 U Case of the Shattered Pact @Peter Polach
@@ -449,6 +453,63 @@ ScryfallCode=MKM
 
 [buy a box]
 429 R Wojek Investigator @Greg Staples
+
+[prerelease promo]
+1 Melek, Reforged Researcher|MKM
+1 Tomik, Wielder of Law|MKM
+1 Voja, Jaws of the Conclave|MKM
+
+[karlov surprise]
+1 Baleful Mastery|PLIST
+1 Bishop of the Bloodstained|PLIST
+1 Burden of Guilt|PLIST
+1 Cavalier of Thorns|PLIST
+1 Combine Chrysalis|PLIST
+1 Consign // Oblivion|PLIST
+1 Death Cloud|PLIST
+1 Duskmantle, House of Shadow|PLIST
+1 Enlisted Wurm|PLIST
+1 Ghost Quarter|PLIST
+1 Gnaw to the Bone|PLIST
+1 Goblin Warchief|PLIST
+1 Hard Evidence|PLIST
+1 High Alert|PLIST
+1 Ixidor, Reality Sculptor|PLIST
+1 Jace, Wielder of Mysteries|PLIST
+1 Krosan Tusker|PLIST
+1 Kuldotha Rebirth|PLIST
+1 Laid to Rest|PLIST
+1 Leonin Relic-Warder|PLIST
+1 Magmaw|PLIST
+1 Mass Hysteria|PLIST
+1 Maverick Thopterist|PLIST
+1 Mentor of the Meek|PLIST
+1 Metalspinner's Puzzleknot|PLIST
+1 Millstone|PLIST
+1 Mistveil Plains|PLIST
+1 Molten Psyche|PLIST
+1 Monologue Tax|PLIST
+1 Mystery Key|PLIST
+1 Nyx Weaver|PLIST
+1 Putrid Warrior|PLIST
+1 Quintorius, Field Historian|PLIST
+1 Ranger-Captain of Eos|PLIST
+1 Shard of Broken Glass|PLIST
+1 Spell Snare|PLIST
+1 Stromkirk Captain|PLIST
+1 Syr Konrad, the Grim|PLIST
+1 Treacherous Terrain|PLIST
+1 Worldspine Wurm|PLIST
+1 Ghostly Prison|SPG
+1 Fabricate|SPG
+1 Show and Tell|SPG
+1 Tragic Slip|SPG
+1 Victimize|SPG
+1 Gamble|SPG
+1 Crashing Footfalls|SPG
+1 Tireless Tracker|SPG
+1 Drown in the Loch|SPG
+1 Field of the Dead|SPG
 
 [tokens]
 b_1_1_bat_flying

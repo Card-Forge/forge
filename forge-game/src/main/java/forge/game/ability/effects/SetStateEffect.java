@@ -161,10 +161,8 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             boolean hasTransformed = false;
-            if (sa.isMorphUp()) {
+            if (sa.isTurnFaceUp()) {
                 hasTransformed = gameCard.turnFaceUp(sa);
-            } else if (sa.isManifestUp()) {
-                hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else if ("Specialize".equals(mode)) {
                 hasTransformed = gameCard.changeCardState(mode, host.getChosenColor(), sa);
                 host.setChosenColors(null);
@@ -181,6 +179,12 @@ public class SetStateEffect extends SpellAbilityEffect {
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (sa.isManifestUp()) {
                     String sb = p + " has unmanifested " + gameCard.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (sa.isDisguiseUp()) {
+                    String sb = p + " has undisguised " + gameCard.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (sa.isCloakUp()) {
+                    String sb = p + " has uncloaked " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
                     if (gameCard.hasKeyword("Double agenda")) {

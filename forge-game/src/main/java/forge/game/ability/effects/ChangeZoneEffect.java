@@ -428,8 +428,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
