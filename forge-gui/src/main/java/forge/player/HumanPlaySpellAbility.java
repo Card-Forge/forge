@@ -164,7 +164,7 @@ public class HumanPlaySpellAbility {
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
                 && ability.isLegalAfterStack()
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false)));
+                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
 
