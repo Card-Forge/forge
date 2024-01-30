@@ -1,0 +1,9 @@
+Name:Reenact the Crime
+ManaCost:1 U U U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target nonland card in a graveyard that was put there from anywhere this turn | ValidTgts$ Card.nonLand+ThisTurnEntered | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target nonland card in a graveyard that was put there from anywhere this turn. Copy it. You may cast the copy without paying its mana cost.
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard|Mill & Type$Instant|Sorcery
+Oracle:Exile target nonland card in a graveyard that was put there from anywhere this turn. Copy it. You may cast the copy without paying its mana cost.
