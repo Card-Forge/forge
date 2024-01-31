@@ -866,8 +866,8 @@ A103 R A-Orcish Bowmasters @Maxim Kostin
 A246 M A-The One Ring @Veli Nyström
 
 [tokens]
-b_0_0_army
-b_0_0_army
+b_0_0_orc_army
+b_0_0_orc_army
 ballistic_boulder
 c_a_food_sac
 c_a_food_sac
