@@ -15,4 +15,4 @@ p0hand=The Battle of Bywater|Set:LTR|Art:2;Ranger's Firebrand|Set:LTR|Art:1;Glam
 p0battlefield=Riders of Rohan|Set:LTC|Art:2;T:r_2_2_human_knight_trample_haste;T:r_2_2_human_knight_trample_haste;Forge Anew|Set:LTR|Art:3;Plains|Set:LTR|Art:2;Plains|Set:LTR|Art:2;Plains|Set:LTR|Art:2;Mountain|Set:LTR|Art:2;Mountain|Set:LTR|Art:2;Mountain|Set:LTR|Art:2
 p1life=16
 p1numringtemptedyou=0
-p1battlefield=Saruman of Many Colors|Set:LTR|Art:4;t:Orc Army Token,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Orc-Army,Keywords:,Image:b_0_0_army_ltr|Counters:P1P1=2
+p1battlefield=Saruman of Many Colors|Set:LTR|Art:4;t:Orc Army Token,P:0,T:0,Cost:no cost,Color:B,Types:Creature-Orc-Army,Keywords:,Image:b_0_0_orc_army_ltr|Counters:P1P1=2
