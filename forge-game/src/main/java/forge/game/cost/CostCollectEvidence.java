@@ -31,7 +31,10 @@ public class CostCollectEvidence extends CostPartWithList {
     }
 
     @Override
-    public int paymentOrder() { return 13; }
+    public int paymentOrder() {
+        // needs to be aligned with CostExile because of Lamplight Phoenix
+        return 15;
+    }
 
     @Override
     public boolean canPay(SpellAbility ability, Player payer, boolean effect) {
