@@ -208,6 +208,8 @@ public class QuestSpellShop {
 
         ItemPool<InventoryItem> itemsToAdd = new ItemPool<>(InventoryItem.class);
 
+        boolean skipRemainingPacks = false;
+
         for (Entry<InventoryItem, Integer> itemEntry : itemsToBuy) {
             final InventoryItem item = itemEntry.getKey();
 
@@ -249,14 +251,14 @@ public class QuestSpellShop {
                     if (booster instanceof BoxedProduct && FModel.getPreferences().getPrefBoolean(FPref.UI_OPEN_PACKS_INDIV)) {
 
                         int totalPacks = ((BoxedProduct) booster).boosterPacksRemaining();
-                        boolean skipTheRest = false;
+                        boolean skipRemainingBoxedPacks = false;
                         final List<PaperCard> remainingCards = new ArrayList<>();
 
-                        while (((BoxedProduct) booster).boosterPacksRemaining() > 0 && !skipTheRest) {
-                            skipTheRest = GuiBase.getInterface().showBoxedProduct(booster.getName(), "You have found the following cards inside (Booster Pack " + (totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1) + " of " + totalPacks + "):", ((BoxedProduct) booster).getNextBoosterPack());
+                        while (((BoxedProduct) booster).boosterPacksRemaining() > 0 && !skipRemainingBoxedPacks) {
+                            skipRemainingBoxedPacks = GuiBase.getInterface().showBoxedProduct(booster.getName(), "You have found the following cards inside (Booster Pack " + (totalPacks - ((BoxedProduct) booster).boosterPacksRemaining() + 1) + " of " + totalPacks + "):", ((BoxedProduct) booster).getNextBoosterPack());
                         }
 
-                        if (skipTheRest) {
+                        if (skipRemainingBoxedPacks) {
                             while (((BoxedProduct) booster).boosterPacksRemaining() > 0) {
                                 remainingCards.addAll(((BoxedProduct) booster).getNextBoosterPack());
                             }
@@ -269,7 +271,21 @@ public class QuestSpellShop {
                         }
 
                     } else {
-                        GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", newCards);
+                        if (!skipRemainingPacks) {
+                            // if we're showing the last pack (or if there is only one), don't
+                            // bother showing the "open all remaining" button.
+                            boolean displayingLastPack = (qty == 1) || (i == (qty-1));
+                            if (displayingLastPack) {
+                                GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", newCards);
+                            } else {
+                                int currentPack = i + 1;
+                                int totalPacks = qty;
+                                skipRemainingPacks = GuiBase.getInterface().showBoxedProduct(
+                                    booster.getName(),
+                                    "You have found the following cards inside (Pack " + currentPack + " of " + totalPacks + "):",
+                                    newCards);
+                            }
+                        }
                     }
                 }
             }

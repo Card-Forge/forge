@@ -28,6 +28,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -51,6 +52,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil;
+import forge.itemmanager.SItemManagerUtil.SpecialQuantity;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.IMenuProvider;
@@ -438,6 +440,34 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         return new EditorContextMenuBuilder(isAddContextMenu0);
     }
 
+    private class MenuItemContext {
+        public final String verb;
+        public final String dest;
+        public final boolean toAlternate;
+        public final int modSingle;
+        public final int modPlayset;
+        public final int modCustom;
+        public final int modAll;
+
+        public MenuItemContext(
+            final String verb,
+            final String dest,
+            final boolean toAlternate,
+            final int modSingle,
+            final int modPlayset,
+            final int modCustom,
+            final int modAll
+        ) {
+            this.verb = verb;
+            this.dest = dest;
+            this.toAlternate = toAlternate;
+            this.modSingle = modSingle;
+            this.modPlayset = modPlayset;
+            this.modCustom = modCustom;
+            this.modAll = modAll;
+        }
+    }
+
     protected class EditorContextMenuBuilder implements ContextMenuBuilder {
         private final boolean isAddContextMenu;
         private JPopupMenu menu;
@@ -457,7 +487,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         public JPopupMenu getMenu() {
             return menu;
         }
-        
+
         @Override
         public void buildContextMenu(final JPopupMenu menu) {
             this.menu = menu; //cache menu while controller populates menu
@@ -548,27 +578,59 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                         }
             }, true, true);
         }
-        //TODO: need to translate getItemDisplayString
-        private void addItem(final String verb, final String dest, final boolean toAlternate, final int qty, final int shortcutModifiers) {
-            String label = verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
-            if (dest != null && !dest.isEmpty()) {
-                label += " " + dest;
-            }
-            GuiUtils.addMenuItem(menu, label,
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), new Runnable() {
-                @Override public void run() {
-                    Integer quantity = qty;
-                    if (quantity < 0) {
-                        quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                        if (quantity == null) { return; }
-                    }
-                    if (isAddContextMenu) {
-                        CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                    } else {
-                        CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
-                    }
+
+        private int getShortcutModifiers(MenuItemContext ctx, int qty) {
+            Optional<SpecialQuantity> special_quantity = SpecialQuantity.lookupSpecialQuantity(qty);
+            if (!special_quantity.isPresent()) {
+                if (qty == 1){
+                    return ctx.modSingle;
                 }
-            }, true, shortcutModifiers == 0);
+                if (qty == FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT)) {
+                    return ctx.modPlayset;
+                }
+            }
+            switch (special_quantity.orNull()) {
+                case QUANTITY_X:
+                    return ctx.modCustom;
+                case QUANTITY_ALL:
+                    return ctx.modAll;
+            }
+            return 0;
+        }
+
+        //TODO: need to translate getItemDisplayString
+        private void addItem(final MenuItemContext ctx, final int qty) {
+            String label = ctx.verb + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
+            if (ctx.dest != null && !ctx.dest.isEmpty()) {
+                label += " " + ctx.dest;
+            }
+            int shortcutModifiers = getShortcutModifiers(ctx, qty);
+            KeyStroke shortcut = KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers);
+            GuiUtils.addMenuItem(menu, label, shortcut,
+                new Runnable() {
+                    @Override public void run() {
+                        Integer quantity = qty;
+                        if (quantity < 0) {
+                            // Negative quantities are signals for special handling
+                            Optional<SpecialQuantity> special_quantity = SpecialQuantity.lookupSpecialQuantity(qty);
+                            if (!special_quantity.isPresent()) { return; }
+                            switch (special_quantity.orNull()) {
+                                case QUANTITY_X:
+                                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, getMaxMoveQuantity(), 20);
+                                    break;
+                                case QUANTITY_ALL:
+                                    quantity = getMaxMoveQuantity();
+                                    break;
+                            }
+                            if (quantity == null) { return; }
+                        }
+                        if (isAddContextMenu) {
+                            CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(ctx.toAlternate, quantity);
+                        } else {
+                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(ctx.toAlternate, quantity);
+                        }
+                    }
+                }, true, shortcutModifiers == 0);
         }
 
         private int getMaxMoveQuantity() {
@@ -588,37 +650,50 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             return max;
         }
 
-        private void addItems(final String verb, final String dest, final boolean toAlternate, final int shortcutModifiers1, final int shortcutModifiers2, final int shortcutModifiers3) {
+        private void addItems(MenuItemContext ctx) {
             final int max = getMaxMoveQuantity();
             if (max == 0) { return; }
 
-            addItem(verb, dest, toAlternate, 1, shortcutModifiers1);
+            addItem(ctx, 1);
             if (max == 1) { return; }
 
-            int qty = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
-            if (qty > max) {
-                qty = max;
+            // add an entry for <deck limit> copies
+            int deck_limit = FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+            if (max >= deck_limit) {
+                addItem(ctx, deck_limit);
             }
 
-            addItem(verb, dest, toAlternate, qty, shortcutModifiers2);
-            if (max == 2) { return; }
+            // add an entry that will prompt for a specific quantity
+            addItem(ctx, SpecialQuantity.QUANTITY_X.quantity_code);
 
-            addItem(verb, dest, toAlternate, -max, shortcutModifiers3); //pass -max as quantity to indicate to prompt for specific quantity
+            // add an entry for all available copies (for buying only)
+            if (max > deck_limit) {
+                if (ctx.verb.equals("Buy")) {
+                    addItem(ctx, SpecialQuantity.QUANTITY_ALL.quantity_code);
+                }
+            }
         }
 
         public void addMoveItems(final String verb, final String dest) {
-            addItems(verb, dest, false, 0, InputEvent.SHIFT_DOWN_MASK, InputEvent.ALT_DOWN_MASK);
+            addItems(new MenuItemContext(verb, dest, false,
+                0,                 // modSingle
+                InputEvent.SHIFT_DOWN_MASK,  // modPlayset
+                InputEvent.ALT_DOWN_MASK,    // modCustom
+                InputEvent.ALT_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         }
 
         public void addMoveAlternateItems(final String verb, final String dest) {
             if (this.menu.getComponentCount() > 0) {
                 this.menu.addSeparator();
             }
-            //yes, CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
-            addItems(verb, dest, true, InputEvent.CTRL_DOWN_MASK,
-                    //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
-                    InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
-                    InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+
+            final int shortcut_mask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+            addItems(new MenuItemContext(verb, dest, true,
+                // CTRL_DOWN_MASK and not getMenuShortcutKeyMask().  On OSX, cmd-space is hard-coded to bring up Spotlight
+                InputEvent.CTRL_DOWN_MASK,                   // modSingle
+                shortcut_mask | InputEvent.SHIFT_DOWN_MASK,  // modPlayset
+                shortcut_mask | InputEvent.ALT_DOWN_MASK,    // modCustom
+                shortcut_mask | InputEvent.ALT_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));
         }
     }
 }

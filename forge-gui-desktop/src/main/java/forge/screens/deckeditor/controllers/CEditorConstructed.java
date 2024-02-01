@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -46,9 +46,9 @@ import java.util.Map.Entry;
  * Child controller for constructed deck editor UI.
  * This is the least restrictive mode;
  * all cards are available.
- * 
+ *
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
- * 
+ *
  * @author Forge
  * @version $Id: CEditorConstructed.java 24868 2014-02-17 05:08:05Z drdev $
  */
@@ -354,7 +354,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
-            cmb.addMoveAlternateItems("Move", "to deck");
+            cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltodeck"));
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
@@ -398,7 +398,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#resetTables()
      */
     @Override
@@ -420,7 +420,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.gui.deckeditor.ACEditorBase#getController()
      */
     @Override

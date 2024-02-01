@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
@@ -65,7 +66,7 @@ public final class SItemManagerUtil {
         DECK_COLORLESS  (FSkinProp.IMG_MANA_COLORLESS, null, "lblColorlessdecks"),
         DECK_MULTICOLOR (GuiBase.getInterface().isLibgdxPort() ? FSkinProp.IMG_HDMULTI :
                          FSkinProp.IMG_MULTI,          null, "lblMulticolordecks"),
-    	
+
         FOIL_OLD  (FSkinProp.FOIL_11,   null, "lblOldstyleFoilcards"),
         FOIL_NEW  (FSkinProp.FOIL_01,   null, "lblNewstyleFoilcards"),
         FOIL_NONE (FSkinProp.ICO_CLOSE, null, "lblNon-Foilcards"),
@@ -92,6 +93,36 @@ public final class SItemManagerUtil {
         @Override
         public FSkinProp getSkinProp() {
             return skinProp;
+        }
+    }
+
+    public enum SpecialQuantity {
+        QUANTITY_X   (-1, Localizer.getInstance().getMessage("lblXcopiesof")),
+        //QUANTITY_ALL (-2, Localizer.getInstance().getMessage("lblAllcopiesof"));
+        QUANTITY_ALL (-2, "all copies of");
+
+        public final int quantity_code;
+        public final String label;
+
+        SpecialQuantity(final int quantity_code, final String label){
+            this.quantity_code = quantity_code;
+            this.label = label;
+        }
+
+        public static Optional<SpecialQuantity> lookupSpecialQuantity(int quantity_code) {
+            for (SpecialQuantity special_quantity : SpecialQuantity.values()) {
+                if (special_quantity.quantity_code == quantity_code) {
+                    return Optional.fromNullable(special_quantity);
+                }
+            }
+            return Optional.absent();
+        }
+
+        static String getItemDisplayPrefix(int quantity_code) {
+            // This should only be called for negative quantity_codes, so the '? copies of'
+            // case should never be returned (and is just there to return something).
+            SpecialQuantity special_quantity = lookupSpecialQuantity(quantity_code).orNull();
+            return (special_quantity != null) ? special_quantity.label : "? copies of";
         }
     }
 
@@ -136,8 +167,8 @@ public final class SItemManagerUtil {
             if (itemCount != 1) {
                 result = itemCount + " " + result + "s";
             }
-            if (qty < 0) { //treat negative numbers as unknown quantity
-                result = localizer.getMessage("lblXcopiesof") + " " + result;
+            if (qty < 0) { //treat negative numbers as a special quantity
+                result = SpecialQuantity.getItemDisplayPrefix(qty) + " " + result;
             }
             else if (qty != 1) {
                 result = qty + " " + localizer.getMessage("lblcopiesof")+ " " + result;
