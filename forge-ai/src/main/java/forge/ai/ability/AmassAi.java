@@ -34,7 +34,7 @@ public class AmassAi extends SpellAbilityAi {
         }
         final String type = sa.getParam("Type");
         StringBuilder sb = new StringBuilder("b_0_0_");
-        sb.append(type.toLowerCase()).append("_army");
+        sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
         final String tokenScript = sb.toString();
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
