@@ -792,7 +792,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean turnFaceUp(SpellAbility cause) {
         return turnFaceUp(true, cause);
     }
-
     public boolean turnFaceUp(boolean runTriggers, SpellAbility cause) {
         if (!isFaceDown()) {
             return false;
