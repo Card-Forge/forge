@@ -514,16 +514,18 @@ public class TriggerHandler {
 
             if (regtrig.isIntrinsic()) {
                 sa.setIntrinsic(true);
+                sa.changeText();
             }
         } else {
             if (regtrig.getSpawningAbility() != null) {
                 controller = regtrig.getSpawningAbility().getActivatingPlayer();
             }
+            Map<String, String> changedParams = sa.getMapParams();
             // need to copy the SA because of TriggeringObjects
             sa = sa.copy(host, controller, false);
+            // reapply text changes
+            sa.getMapParams().putAll(changedParams);
         }
-
-        sa.changeText();
 
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
