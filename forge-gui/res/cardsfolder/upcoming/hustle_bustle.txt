@@ -1,10 +1,8 @@
 Name:Hustle
 ManaCost:UR
 Types:Instant
-A:SP$ GenericChoice | Defined$ You | Choices$ DBMustAttackEffect,DBMustBlockEffect | ValidTgts$ Creature | SpellDescription$ Target creature attacks or blocks this turn if able.
-SVar:DBMustAttackEffect:DB$ Effect | StaticAbilities$ MustAttack | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StackDescription$ {c:Targeted} attacks this turn if able. | SpellDescription$ Target creature attacks this turn if able.
+A:SP$ Effect | StaticAbilities$ MustAttack,MustBlock | RememberObjects$ ThisTargetedCard | ValidTgts$ Creature | ExileOnMoved$ Battlefield | StackDescription$ {c:Targeted} attacks this turn if able. | SpellDescription$ Target creature attacks this turn if able.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
-SVar:DBMustBlockEffect:DB$ Effect | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StackDescription$ {c:Targeted} blocks this turn if able. | SpellDescription$ Target creature blocks this turn if able.
 SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
 AlternateMode:Split
 Oracle:Target creature attacks or blocks this turn if able.
