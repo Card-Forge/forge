@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Ravnica Remastered #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/01/242.-RVR2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. You have 12 cards remaining in your library (but they are all unknown.) Remember that your solution must satisfy all possible blocking scenarios.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Priest of Forgotten Gods;Priest of Forgotten Gods;Golgari Thug;Birds of Paradise;Swamp;Swamp;Swamp;Mountain;Mountain;Forest;Forest;Rhythm of the Wild
+p1life=17
+p1battlefield=T:gw_2_2_elf_knight_vigilance;T:gw_2_2_elf_knight_vigilance;T:gw_2_2_elf_knight_vigilance;T:gw_2_2_elf_knight_vigilance
