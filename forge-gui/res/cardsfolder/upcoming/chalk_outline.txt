@@ -1,0 +1,8 @@
+Name:Chalk Outline
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creature cards leave your graveyard, create a 2/2 white and blue Detective creature token, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+DeckHas:Ability$Token|Investigate & Type$Clue|Artifact|Detective & Color$White|Blue
+Oracle:Whenever one or more creature cards leave your graveyard, create a 2/2 white and blue Detective creature token, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

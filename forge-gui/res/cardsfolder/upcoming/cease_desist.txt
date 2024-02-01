@@ -1,0 +1,17 @@
+Name:Cease
+ManaCost:1 BG
+Types:Instant
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 |  TgtPrompt Select up to two target cards from a single graveyard  | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | SubAbility$ DBGainLife | SpellDescription$ Exile up to two target cards from a single graveyard. 
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ Target player gains 2 life and draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedPlayer
+AlternateMode:Split
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Exile up to two target cards from a single graveyard. Target player gains 2 life and draws a card.
+
+ALTERNATE
+
+Name:Desist
+ManaCost:4 GW GW
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
+Oracle:Destroy all artifacts and enchantments.
