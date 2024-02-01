@@ -67,7 +67,7 @@ public class AmassEffect extends TokenEffectBase {
             MutableBoolean combatChanged = new MutableBoolean(false);
 
             StringBuilder sb = new StringBuilder("b_0_0_");
-            sb.append(type.toLowerCase()).append("_army");
+            sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
 
             final Card result = TokenInfo.getProtoType(sb.toString(), sa, activator, false);
             // need to alter the token to add the Type from the Parameter
