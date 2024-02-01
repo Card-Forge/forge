@@ -514,7 +514,6 @@ public class TriggerHandler {
 
             if (regtrig.isIntrinsic()) {
                 sa.setIntrinsic(true);
-                sa.changeText();
             }
         } else {
             if (regtrig.getSpawningAbility() != null) {
@@ -523,6 +522,8 @@ public class TriggerHandler {
             // need to copy the SA because of TriggeringObjects
             sa = sa.copy(host, controller, false);
         }
+
+        sa.changeText();
 
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
