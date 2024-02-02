@@ -830,7 +830,7 @@ public final class StaticAbilityContinuous {
                                 if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
                                     continue;
                                 }
-                                SpellAbility newSA = sa.copy(affectedCard, false);
+                                SpellAbility newSA = sa.copy(affectedCard, sa.getActivatingPlayer(), false, true);
                                 if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));

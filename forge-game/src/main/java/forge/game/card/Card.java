@@ -4661,6 +4661,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         SpellAbility result = storedSpellAbility.get(stAb, str);
         if (result == null) {
             result = AbilityFactory.getAbility(str, this, stAb);
+            // apply text changes from the statics host
+            result.setIntrinsic(true);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
             storedSpellAbility.put(stAb, str, result);
@@ -4672,6 +4675,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Trigger result = storedTrigger.get(stAb, str);
         if (result == null) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
+            // apply text changes from the statics host
+            result.setIntrinsic(true);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.setIntrinsic(false);
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -4702,6 +4709,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         ReplacementEffect result = storedReplacementEffect.get(stAb, str);
         if (result == null) {
             result = ReplacementHandler.parseReplacement(str, this, false, stAb);
+            // apply text changes from the statics host
+            result.setIntrinsic(true);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.setIntrinsic(false);
             storedReplacementEffect.put(stAb, str, result);
         }
         return result;
@@ -4711,6 +4722,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         StaticAbility result = storedStaticAbility.get(stAb, str);
         if (result == null) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
+            // apply text changes from the statics host
+            result.setIntrinsic(true);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.setIntrinsic(false);
             storedStaticAbility.put(stAb, str, result);
         }
         return result;

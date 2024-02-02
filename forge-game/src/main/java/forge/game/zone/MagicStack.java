@@ -302,9 +302,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (si == null && sp.isActivatedAbility() && !sp.isCopied()) {
             // if not already copied use a fresh instance
             SpellAbility original = sp;
-            sp = sp.copy();
-            // need to reapply text changes
-            sp.changeText();
+            sp = sp.copy(sp.getHostCard(), activator, false, true);
             sp.setOriginalAbility(original);
             original.clearTargets();
             original.setXManaCostPaid(null);
