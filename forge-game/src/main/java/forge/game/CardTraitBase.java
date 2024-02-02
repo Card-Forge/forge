@@ -695,8 +695,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     protected void copyHelper(CardTraitBase copy, Card host) {
+        copyHelper(copy, host, false);
+    }
+    protected void copyHelper(CardTraitBase copy, Card host, boolean keepTextChanges) {
         copy.originalMapParams = Maps.newHashMap(originalMapParams);
-        copy.mapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(keepTextChanges ? mapParams : originalMapParams);
         copy.setSVars(sVars);
         copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet
