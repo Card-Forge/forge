@@ -8,4 +8,3 @@ SVar:ArtifactSacrificed:PlayerCountPropertyYou$SacrificedThisTurn Artifact
 DeckHas:Ability$Token|Investigate & Type$Clue|Thopter
 DeckHints:Ability$Sacrifice & Type$Clue|Food|Treasure
 Oracle:When Detective's Satchel enters the battlefield, investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{T}: Create a 1/1 colorless Thopter artifact creature token with flying. Activate only if you've sacrificed an artifact this turn.
-
