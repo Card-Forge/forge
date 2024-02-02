@@ -4658,12 +4658,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        Map<String, String> changedTextColors = stAb.getChangedTextColors();
+        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         SpellAbility result = storedSpellAbility.get(stAb, str);
+        if (result != null) {
+            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
+            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
+            if (needNewCache) {
+                result = null;
+            }
+        }
         if (result == null) {
             result = AbilityFactory.getAbility(str, this, stAb);
             // apply text changes from the statics host
-            result.setIntrinsic(true);
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
+            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
             storedSpellAbility.put(stAb, str, result);
@@ -4672,13 +4680,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final Trigger getTriggerForStaticAbility(final String str, final StaticAbility stAb) {
+        Map<String, String> changedTextColors = stAb.getChangedTextColors();
+        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         Trigger result = storedTrigger.get(stAb, str);
+        if (result != null) {
+            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
+            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
+            if (needNewCache) {
+                result = null;
+            }
+        }
         if (result == null) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
             // apply text changes from the statics host
-            result.setIntrinsic(true);
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
-            result.setIntrinsic(false);
+            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -4706,26 +4721,40 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
+        Map<String, String> changedTextColors = stAb.getChangedTextColors();
+        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         ReplacementEffect result = storedReplacementEffect.get(stAb, str);
+        if (result != null) {
+            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
+            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
+            if (needNewCache) {
+                result = null;
+            }
+        }
         if (result == null) {
             result = ReplacementHandler.parseReplacement(str, this, false, stAb);
             // apply text changes from the statics host
-            result.setIntrinsic(true);
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
-            result.setIntrinsic(false);
+            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
             storedReplacementEffect.put(stAb, str, result);
         }
         return result;
     }
 
     public final StaticAbility getStaticAbilityForStaticAbility(final String str, final StaticAbility stAb) {
+        Map<String, String> changedTextColors = stAb.getChangedTextColors();
+        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         StaticAbility result = storedStaticAbility.get(stAb, str);
+        if (result != null) {
+            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
+            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
+            if (needNewCache) {
+                result = null;
+            }
+        }
         if (result == null) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
             // apply text changes from the statics host
-            result.setIntrinsic(true);
-            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
-            result.setIntrinsic(false);
+            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
             storedStaticAbility.put(stAb, str, result);
         }
         return result;
