@@ -128,6 +128,10 @@ public class PumpAllEffect extends SpellAbilityEffect {
         final List<ZoneType> affectedZones = Lists.newArrayList();
         final Game game = sa.getActivatingPlayer().getGame();
 
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         if (sa.hasParam("PumpZone")) {
             affectedZones.addAll(ZoneType.listValueOf(sa.getParam("PumpZone")));
         } else {

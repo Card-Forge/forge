@@ -189,7 +189,7 @@ public class GameAction {
         if (c.isSplitCard()) {
             boolean resetToOriginal = false;
 
-            if (c.isManifested()) {
+            if (c.isManifested() || c.isCloaked()) {
                 if (fromBattlefield) {
                     // Make sure the card returns from the battlefield as the original card with two halves
                     resetToOriginal = true;
@@ -351,7 +351,7 @@ public class GameAction {
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
             if (repres != ReplacementResult.NotReplaced && repres != ReplacementResult.Updated) {
                 // reset failed manifested Cards back to original
-                if (c.isManifested() && !c.isInPlay()) {
+                if ((c.isManifested() || c.isCloaked()) && !c.isInPlay()) {
                     c.forceTurnFaceUp();
                 }
 

@@ -52,7 +52,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !host.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 host.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -181,7 +181,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !originalCard.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 originalCard.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -200,7 +200,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.checkMode("ReduceCost")) {
+                if (stAb.checkMode("ReduceCost") && checkRequirement(sa, stAb)) {
                     reduceAbilities.add(stAb);
                 }
                 else if (stAb.checkMode("SetCost")) {
@@ -400,10 +400,6 @@ public class CostAdjustment {
         final Card hostCard = staticAbility.getHostCard();
         final Card card = sa.getHostCard();
         final String amount = staticAbility.getParam("Amount");
-
-        if (!checkRequirement(sa, staticAbility)) {
-            return 0;
-        }
 
         int value;
         if ("AffectedX".equals(amount)) {

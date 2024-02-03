@@ -44,16 +44,6 @@ public class PumpEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
         final boolean perpetual = ("Perpetual").equals(duration);
 
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && host.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
-
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
         if (gameCard == null || !applyTo.equalsWithTimestamp(gameCard)) {
@@ -151,13 +141,6 @@ public class PumpEffect extends SpellAbilityEffect {
             final List<String> keywords, final long timestamp) {
         final Card host = sa.getHostCard();
         final String duration = sa.getParam("Duration");
-
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
 
         if (!keywords.isEmpty()) {
             p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
@@ -294,6 +277,10 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card host = sa.getHostCard();

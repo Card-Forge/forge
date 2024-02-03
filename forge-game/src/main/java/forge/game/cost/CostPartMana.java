@@ -138,7 +138,7 @@ public class CostPartMana extends CostPart {
         if (isCostPayAnyNumberOfTimes) {
             int timesToPay = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getSVar("NumTimes"), sa);
             if (timesToPay == 0) {
-                return null;
+                return ManaCost.NO_COST;
             }
             ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getMana());
             for (int i = 1; i < timesToPay; i++) {

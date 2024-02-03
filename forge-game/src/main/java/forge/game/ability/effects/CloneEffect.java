@@ -128,10 +128,9 @@ public class CloneEffect extends SpellAbilityEffect {
 
         for (Card tgtCard : cloneTargets) {
             game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
-            if (sa.hasParam("CloneZone")) {
-                if (!tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
-                    continue;
-                }
+            if (sa.hasParam("CloneZone") &&
+                    !tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
+                continue;
             }
 
             if (tgtCard.isPhasedOut()) {

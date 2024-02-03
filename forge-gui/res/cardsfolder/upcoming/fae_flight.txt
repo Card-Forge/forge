@@ -1,0 +1,10 @@
+Name:Fae Flight
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, enchanted creature gains hexproof until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Hexproof
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+0 and has flying.
+Oracle:Flash\nEnchant creature\nWhen Fae Flight enters the battlefield, enchanted creature gains hexproof until end of turn.\nEnchanted creature gets +1/+0 and has flying.

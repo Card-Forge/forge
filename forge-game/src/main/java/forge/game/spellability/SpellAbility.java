@@ -519,8 +519,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
 
+    public boolean isTurnFaceUp() {
+        return isMorphUp() || isDisguiseUp() || isManifestUp() || isCloakUp();
+    }
+
     public boolean isMorphUp() {
         return this.hasParam("MorphUp");
+    }
+    public boolean isDisguiseUp() {
+        return this.hasParam("DisguiseUp");
     }
 
     public boolean isCastFaceDown() {
@@ -529,6 +536,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isManifestUp() {
         return hasParam("ManifestUp");
+    }
+    public boolean isCloakUp() {
+        return hasParam("CloakUp");
     }
 
     public boolean isCycling() {
@@ -547,7 +557,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.hasParam("Ninjutsu");
     }
 
-    public boolean isCumulativeupkeep() {
+    public boolean isCumulativeUpkeep() {
         return hasParam("CumulativeUpkeep");
     }
 
@@ -1060,7 +1070,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isBasicSpell() {
-        return basicSpell && this.altCost == null && getRootAbility().optionalCosts.isEmpty();
+        return basicSpell && !isCastFaceDown() && this.altCost == null && getRootAbility().optionalCosts.isEmpty();
     }
     public void setBasicSpell(final boolean basicSpell0) {
         basicSpell = basicSpell0;

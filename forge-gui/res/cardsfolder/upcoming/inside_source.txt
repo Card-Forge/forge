@@ -1,0 +1,10 @@
+Name:Inside Source
+ManaCost:2 W
+Types:Creature Human Citizen
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white and blue Detective creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Detective.YouCtrl | TgtPrompt$ Select target Detective you control | NumAtt$ +2 | KW$ Vigilance | SorcerySpeed$ True | SpellDescription$ Target Detective you control gets +2/+0 and gains vigilance until end of turn. Activate only as a sorcery.
+DeckHas:Ability$Token
+DeckHints:Type$Detective
+Oracle:When Inside Source enters the battlefield, create a 2/2 white and blue Detective creature token.\n{3}, {T}: Target Detective you control gets +2/+0 and gains vigilance until end of turn. Activate only as a sorcery.

@@ -1,0 +1,7 @@
+Name:Caught Red-Handed
+ManaCost:4 R
+Types:Instant
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered. (This includes by the ward ability.)
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBSuspect | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:DBSuspect:DB$ AlterAttribute | StackDescription$ SpellDescription | Attributes$ Suspected | Defined$ Targeted | SpellDescription$ Suspect it. (It has menace and can't block.)
+Oracle:This spell can't be countered. (This includes by the ward ability.)\nGain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Suspect it. (It has menace and can't block.)

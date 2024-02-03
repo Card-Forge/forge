@@ -371,7 +371,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.equals("CumulativeUpkeep")) {
-                if (sa.isCumulativeupkeep()) {
+                if (sa.isCumulativeUpkeep()) {
                     return true;
                 }
                 continue;
@@ -387,8 +387,9 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.equals("Disturb")) {
-                if (sa.isDisturb()) {
+            if (restriction.equals("FaceDownOrTurnFaceUp")) {
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
+                        || sa.isTurnFaceUp()) {
                     return true;
                 }
                 continue;
@@ -426,6 +427,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 return !sa.isSpell() || sa.getHostCard().isArtifact();
             }
 
+            // TODO refactor to differ between ForCost and ForEffect
             // the payment is for a resolving SA, currently no other restrictions would allow that
             if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
                 return false;
