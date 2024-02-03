@@ -1,0 +1,9 @@
+Name:Rope
+ManaCost:G
+Types:Artifact Clue Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +1/+2, has reach, and can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.EquippedBy | Max$ 1 | Secondary$ True | Description$ Equipped creature gets +1/+2, has reach, and can't be blocked by more than one creature.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+K:Equip:3
+DeckHas:Ability$Sacrifice
+Oracle:Equipped creature gets +1/+2, has reach, and can't be blocked by more than one creature.\n{2}, Sacrifice Rope: Draw a card.\nEquip {3}

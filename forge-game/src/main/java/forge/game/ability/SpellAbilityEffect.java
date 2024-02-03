@@ -823,10 +823,6 @@ public abstract class SpellAbilityEffect {
                 if (card == null) { continue; }
                 if (p.discard(card, sa, effect, params) != null) {
                     discardedByPlayer.add(card);
-
-                    if (sa.hasParam("RememberDiscarded")) {
-                        sa.getHostCard().addRemembered(card);
-                    }
                 }
             }
             discardedMap.put(p, discardedByPlayer);

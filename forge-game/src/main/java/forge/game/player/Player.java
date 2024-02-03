@@ -1447,7 +1447,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         final Card source = sa != null ? sa.getHostCard() : null;
-        final ZoneType origin = c.getZone().getZoneType();
 
         boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
         boolean discardMadness = sa != null && sa.hasParam("Madness");
@@ -1492,6 +1491,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         Card cause = null;
         if (sa != null) {
+            if (sa.hasParam("RememberDiscarded")) {
+                source.addRemembered(newCard);
+            }
+
             cause = sa.getHostCard();
             // for Replacement of the discard Cause
             if (sa.hasParam("Cause")) {
