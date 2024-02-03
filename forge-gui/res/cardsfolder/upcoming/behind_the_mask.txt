@@ -1,0 +1,9 @@
+Name:Behind the Mask
+ManaCost:U
+Types:Instant
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+A:SP$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 4 | Toughness$ 3 | ConditionDefined$ Collected | ConditionPresent$ Card | Types$ Artifact,Creature | SubAbility$ DBAnimateBis | SpellDescription$ Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/3.
+SVar:DBAnimateBis:DB$ Animate | Power$ 1 | Toughness$ 1 | Defined$ ParentTarget | ConditionDefined$ Collected | ConditionPresent$ Card | ConditionCompare$ EQ0 | Types$ Artifact,Creature | SpellDescription$ If evidence was collected, it has base power and toughness 1/1 until end of turn instead.
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$Counters|Sacrifice|Surveil
+Oracle:As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)\nUntil end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/3. If evidence was collected, it has base power and toughness 1/1 until end of turn instead.
