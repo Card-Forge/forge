@@ -5,11 +5,15 @@ import static forge.card.MagicColor.GREEN;
 import static forge.card.MagicColor.RED;
 import static forge.card.MagicColor.WHITE;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import junit.framework.TestCase;
 
-public class ManaCostBeingPaidTest extends TestCase {
+public class ManaCostBeingPaidTest {
+
+    @Test
     public void testPayManaViaConvoke() {
         runConvokeTest("1 W W", new byte[]{WHITE, COLORLESS, WHITE}, new String[]{"{1}{W}{W}", "{1}{W}", "{W}"});
         runConvokeTest("1 W W", new byte[]{COLORLESS, WHITE, WHITE}, new String[]{"{1}{W}{W}", "{W}{W}", "{W}"});
@@ -20,10 +24,10 @@ public class ManaCostBeingPaidTest extends TestCase {
     private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {
         ManaCostBeingPaid cost = createManaCostBeingPaid(initialCost);
         for (int i = 0; i < colorsToPay.length; i++) {
-            assertEquals(expectedRemainder[i], cost.toString());
+            Assert.assertEquals(expectedRemainder[i], cost.toString());
             cost.payManaViaConvoke(colorsToPay[i]);
         }
-        assertEquals("0", cost.toString());
+        Assert.assertEquals("0", cost.toString());
     }
 
     private ManaCostBeingPaid createManaCostBeingPaid(String cost) {
