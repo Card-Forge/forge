@@ -4658,20 +4658,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
-        Map<String, String> changedTextColors = stAb.getChangedTextColors();
-        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         SpellAbility result = storedSpellAbility.get(stAb, str);
-        if (result != null) {
-            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
-            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
-            if (needNewCache) {
-                result = null;
-            }
-        }
-        if (result == null) {
+        if (!canUseCachedTrait(result, stAb)) {
             result = AbilityFactory.getAbility(str, this, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
             result.setIntrinsic(false);
             result.setGrantorStatic(stAb);
             storedSpellAbility.put(stAb, str, result);
@@ -4680,20 +4671,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final Trigger getTriggerForStaticAbility(final String str, final StaticAbility stAb) {
-        Map<String, String> changedTextColors = stAb.getChangedTextColors();
-        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         Trigger result = storedTrigger.get(stAb, str);
-        if (result != null) {
-            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
-            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
-            if (needNewCache) {
-                result = null;
-            }
-        }
-        if (result == null) {
+        if (!canUseCachedTrait(result, stAb)) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -4721,40 +4703,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final ReplacementEffect getReplacementEffectForStaticAbility(final String str, final StaticAbility stAb) {
-        Map<String, String> changedTextColors = stAb.getChangedTextColors();
-        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         ReplacementEffect result = storedReplacementEffect.get(stAb, str);
-        if (result != null) {
-            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
-            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
-            if (needNewCache) {
-                result = null;
-            }
-        }
-        if (result == null) {
+        if (!canUseCachedTrait(result, stAb)) {
             result = ReplacementHandler.parseReplacement(str, this, false, stAb);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
             storedReplacementEffect.put(stAb, str, result);
         }
         return result;
     }
 
     public final StaticAbility getStaticAbilityForStaticAbility(final String str, final StaticAbility stAb) {
-        Map<String, String> changedTextColors = stAb.getChangedTextColors();
-        Map<String, String> changedTextTypes = stAb.getChangedTextTypes();
         StaticAbility result = storedStaticAbility.get(stAb, str);
-        if (result != null) {
-            boolean needNewCache = !result.getChangedTextColors().equals(changedTextColors);
-            needNewCache = needNewCache || !result.getChangedTextTypes().equals(changedTextTypes);
-            if (needNewCache) {
-                result = null;
-            }
-        }
-        if (result == null) {
+        if (!canUseCachedTrait(result, stAb)) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
             // apply text changes from the statics host
-            result.changeTextIntrinsic(changedTextColors, changedTextTypes);
+            result.changeTextIntrinsic(stAb.getChangedTextColors(), stAb.getChangedTextTypes());
             storedStaticAbility.put(stAb, str, result);
         }
         return result;
@@ -4824,6 +4788,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             storedKeywordByText.put(triple, result);
         }
         return result;
+    }
+
+    private boolean canUseCachedTrait(CardTraitBase cached, CardTraitBase stAb) {
+        if (cached == null) {
+            return false;
+        }
+        return cached.getChangedTextColors().equals(stAb.getChangedTextColors()) && cached.getChangedTextTypes().equals(stAb.getChangedTextTypes());
     }
 
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
