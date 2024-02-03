@@ -511,7 +511,7 @@ public class HumanPlay {
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         final Card hostCard = ability.getHostCard();
         final Game game = hostCard.getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.InternalTriggerTable, table);
 
