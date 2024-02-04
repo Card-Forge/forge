@@ -1,0 +1,10 @@
+Name:Granite Witness
+ManaCost:2 W U
+Types:Artifact Creature Gargoyle Detective
+PT:3/2
+K:Flying
+K:Vigilance
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapUnTap | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may tap or untap target creature.
+SVar:TrigTapUnTap:DB$ TapOrUntap | ValidTgts$ Creature
+K:Disguise:WU WU
+Oracle:Flying, vigilance\nDisguise {W/U}{W/U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Granite Witness is turned face up, you may tap or untap target creature.
