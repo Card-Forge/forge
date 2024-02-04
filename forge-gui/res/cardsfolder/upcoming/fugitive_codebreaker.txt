@@ -4,7 +4,7 @@ Types:Creature Goblin Rogue
 PT:2/1
 K:Prowess
 K:Haste
-K:Disguise:5 R::This cost is reduced by {1} for each instant and sorcery card in your graveyard:X
+K:Disguise:5 R:X:This cost is reduced by {1} for each instant and sorcery card in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, discard your hand, then draw three cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw

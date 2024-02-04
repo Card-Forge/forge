@@ -2194,6 +2194,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         if (!mCost.isOnlyManaCost()) {
                             sbLong.append(".");
                         }
+                        if (k.length > 2) {
+                            sbLong.append(". " + k[3]);
+                        }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
                     }

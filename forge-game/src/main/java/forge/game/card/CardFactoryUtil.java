@@ -2793,11 +2793,19 @@ public class CardFactoryUtil {
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Disguise")) {
             final String[] k = keyword.split(":");
+            final String reduceCost = k.length > 2 ? k[2] : null;
 
             SpellAbility faceDown = abilityCastFaceDown(card, intrinsic, "Disguise");
             faceDown.putParam("FaceDownKeyword", "Ward:2");
+
+            SpellAbility faceUp = abilityDisguiseUp(card, k[1], intrinsic);
+            if (reduceCost != null) {
+                faceUp.putParam("ReduceCost", reduceCost);
+                faceUp.setSVar(reduceCost, card.getSVar(reduceCost));
+            }
+
             inst.addSpellAbility(faceDown);
-            inst.addSpellAbility(abilityDisguiseUp(card, k[1], intrinsic));
+            inst.addSpellAbility(faceUp);
         } else if (keyword.startsWith("Disturb")) {
             final String[] k = keyword.split(":");
             final Cost disturbCost = new Cost(k[1], true);
