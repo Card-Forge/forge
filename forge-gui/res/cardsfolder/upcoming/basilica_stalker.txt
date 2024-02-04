@@ -4,7 +4,7 @@ Types:Creature Vampire Detective
 PT:3/4
 K:Flying
 K:Disguise:4 B
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | CombatDamage$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you gain 1 life and surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you gain 1 life and surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBSurveil
 SVar:DBSurveil:DB$ Surveil | Amount$ 1
 DeckHas:Ability$LifeGain|Graveyard|Surveil

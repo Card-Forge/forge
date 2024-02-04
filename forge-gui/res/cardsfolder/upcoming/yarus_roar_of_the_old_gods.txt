@@ -9,5 +9,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | Defined$ TriggeredCard | SubAbility$ DBTurnFaceUp | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Permanent
 SVar:DBTurnFaceUp:DB$ SetState | Defined$ Remembered | Mode$ TurnFaceUp | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHints:Keyword$Morph|Disguise & Ability$Manifest
+DeckHints:Keyword$Morph|Disguise
 Oracle:Other creatures you control have haste.\nWhenever one or more face-down creatures you control deal combat damage to a player, draw a card.\nWhenever a face-down creature you control dies, return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up.
