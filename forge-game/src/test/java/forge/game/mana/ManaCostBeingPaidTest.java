@@ -5,8 +5,9 @@ import static forge.card.MagicColor.GREEN;
 import static forge.card.MagicColor.RED;
 import static forge.card.MagicColor.WHITE;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
@@ -24,10 +25,10 @@ public class ManaCostBeingPaidTest {
     private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {
         ManaCostBeingPaid cost = createManaCostBeingPaid(initialCost);
         for (int i = 0; i < colorsToPay.length; i++) {
-            Assert.assertEquals(expectedRemainder[i], cost.toString());
+            assertEquals(expectedRemainder[i], cost.toString());
             cost.payManaViaConvoke(colorsToPay[i]);
         }
-        Assert.assertEquals("0", cost.toString());
+        assertEquals("0", cost.toString());
     }
 
     private ManaCostBeingPaid createManaCostBeingPaid(String cost) {

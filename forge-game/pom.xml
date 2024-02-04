@@ -12,6 +12,10 @@
     <artifactId>forge-game</artifactId>
     <name>Forge Game</name>
 
+    <properties>
+        <junit.version>5.10.1</junit.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>forge</groupId>
@@ -24,9 +28,9 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.10.1</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
