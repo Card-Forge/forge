@@ -23,12 +23,12 @@ public class ManaCostBeingPaidTest {
     }
 
     private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {
-        ManaCostBeingPaid cost = createManaCostBeingPaid(initialCost);
+        ManaCostBeingPaid costBeingPaid = createManaCostBeingPaid(initialCost);
         for (int i = 0; i < colorsToPay.length; i++) {
-            assertEquals(expectedRemainder[i], cost.toString());
-            cost.payManaViaConvoke(colorsToPay[i]);
+            assertEquals(expectedRemainder[i], costBeingPaid.toString());
+            costBeingPaid.payManaViaConvoke(colorsToPay[i]);
         }
-        assertEquals("0", cost.toString());
+        assertEquals("0", costBeingPaid.toString());
     }
 
     private ManaCostBeingPaid createManaCostBeingPaid(String cost) {
