@@ -358,6 +358,14 @@ public abstract class Trigger extends TriggerReplacementBase {
         return true;
     }
 
+    public boolean checkActivationLimit() {
+        if (hasParam("ActivationLimit") &&
+                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
         if ("True".equals(getParam("EvolveCondition"))) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
