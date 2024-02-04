@@ -6276,17 +6276,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isSolved() {
         return solved;
     }
-    public final void setSolved(final boolean solved) {
+    public final boolean setSolved(final boolean solved) {
         this.solved = solved;
+        return true;
     }
 
     public final boolean isSuspected() {
         return suspected;
     }
 
-    public final void setSuspected(final boolean suspected) {
+    public final boolean setSuspected(final boolean suspected) {
         if (suspected && StaticAbilityCantBeSuspected.cantBeSuspected(this)) {
-            return;
+            return false;
         }
         this.suspected = suspected;
         if (suspected) {
@@ -6295,10 +6296,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             suspectedKeywordChange = new KeywordsChange(ImmutableList.of(kw), ImmutableList.<String>of(), false);
         }
         updateKeywords();
+        return true;
     }
 
-    protected Iterable<KeywordsChange> getSuspectedKeywordChange()
-    {
+    protected Iterable<KeywordsChange> getSuspectedKeywordChange() {
         return isSuspected() ? ImmutableList.of(this.suspectedKeywordChange) : ImmutableList.of();
     }
 

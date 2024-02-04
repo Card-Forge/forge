@@ -28,20 +28,26 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
 
         for (Card c : defined) {
             for (String attr : attributes) {
+                boolean altered = false;
+
                 switch (attr.trim()) {
                     case "Solve":
                     case "Solved":
-                        c.setSolved(activate);
+                        altered = c.setSolved(activate);
                         break;
                     case "Suspect":
                     case "Suspected":
-                        c.setSuspected(activate);
+                        altered = c.setSuspected(activate);
                         break;
 
                         // Other attributes: renown, monstrous, suspected, etc
 
                     default:
                         break;
+                }
+
+                if (altered && sa.hasParam("RememberAltered")) {
+                    sa.getHostCard().addRemembered(c);
                 }
             }
             c.updateAbilityTextForView();
