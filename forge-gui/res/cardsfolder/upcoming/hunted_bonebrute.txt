@@ -4,9 +4,9 @@ Types:Creature Skeleton Beast
 PT:6/2
 K:Menace
 K:Disguise:1 B
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ CARDNAME enters the battlefield, target opponent creates two 1/1 white Dog creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates two 1/1 white Dog creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_dog | ValidTgts$ Opponent | TokenOwner$ Targeted
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME dies, each opponent loses 3 life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOpponent | LifeAmount$ 3
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3
 DeckHas:Ability$Token & Type$Dog
 Oracle:Menace\nWhen Hunted Bonebrute enters the battlefield, target opponent creates two 1/1 white Dog creature tokens.\nWhen Hunted Bonebrute dies, each opponent loses 3 life.\nDisguise {1}{B}
