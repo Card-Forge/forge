@@ -8185,7 +8185,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As you return to town, nobody seems impressed besides Tipsy Tim, who gives you a clap on the back. \"Those metal freaks...hiccup...You got rid of them you did!\" He then stumbles away happily. (+3 reputation in $(poi_1))",
+		"text": "As you return to $(poi_2), nobody seems impressed besides Tipsy Tim, who gives you a clap on the back. \"Those metal freaks...hiccup...You got rid of them you did!\" He then stumbles away happily. (+3 reputation in $(poi_2))",
 		"options": [
 			{
 				"action": [
@@ -8218,7 +8218,9 @@
 									"Mythic Rare"
 								]
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_2)"
 					}
 				],
 				"name": "You wave farewell to Tipsy Tim (Complete Quest)"
@@ -8243,7 +8245,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of dealing with the phyrexians. (-2 Local Reputation)",
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of dealing with the phyrexians. (-2 reputation in $(poi_2))",
 		"options": [
 			{
 				"name": "(Quest Failed)"
