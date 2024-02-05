@@ -31,9 +31,11 @@ public class AdventureQuestStage implements Serializable {
     public int count1; //use defined by objective type, this can be enemies to defeat, minimum PoI distance, etc
     public int count2; //use defined by objective type, this can be enemies to defeat, minimum PoI distance, etc
     public int count3; //use defined by objective type, this can be enemies to defeat, minimum PoI distance, etc
+    public int count4; //use defined by objective type, this can be enemies to defeat, minimum PoI distance, etc
     private int progress1; //Progress toward count1
     private int progress2; //Progress toward count2
     private int progress3; //Progress toward count3
+    private int progress4; //Progress toward count3
     public boolean mixedEnemies; //false: Pick one enemy type. True: Combine all potential types
     public boolean here; //Default PoI selection to current location
     private PointOfInterest targetPOI; //Destination. Expand to array to cover "anyPOI?"
@@ -55,7 +57,7 @@ public class AdventureQuestStage implements Serializable {
     public String deliveryItem = ""; //Imaginary item to get/fetch/deliver. Could be a general purpose field.
     public String POIToken; //If defined, ignore tags input and use the target POI from a different stage's objective instead.
     private transient List<Integer> _parsedPrerequisiteNames;
-    private transient List<PointOfInterest> validPOIs = Current.world().getAllPointOfInterest();
+    private transient List<PointOfInterest> validPOIs;
     public boolean allowInactivePOI = false;
 
     public UUID stageID;
@@ -64,6 +66,7 @@ public class AdventureQuestStage implements Serializable {
         if (stageID == null) {
             stageID = UUID.randomUUID();
         }
+        validPOIs = Current.world().getAllPointOfInterest();
     }
 
     public void checkPrerequisites(List<Integer> completedStages) {
@@ -215,6 +218,7 @@ public class AdventureQuestStage implements Serializable {
         this.count1 = other.count1;
         this.count2 = other.count2;
         this.count3 = other.count3;
+        this.count4 = other.count4;
         this.enemyTags = other.enemyTags;
         this.enemyExcludeTags = other.enemyExcludeTags;
         this.anyPOI = other.anyPOI;
@@ -271,12 +275,12 @@ public class AdventureQuestStage implements Serializable {
         switch (objective) {
             case CharacterFlag:
                 if (event.type == AdventureQuestEventType.CHARACTERFLAG)
-                    status = event.flagName != null &&  event.flagName.equals(this.mapFlag) && event.flagValue >= this.mapFlagValue ? COMPLETE : status;
+                    status = event.flagName != null && event.flagName.equals(this.mapFlag) && event.flagValue >= this.mapFlagValue ? COMPLETE : status;
                 break;
             case CompleteQuest:
                 status = event.type == AdventureQuestEventType.QUESTCOMPLETE
                         && (anyPOI || event.otherQuest != null && event.otherQuest.sourceID.equals(targetPOI.getID()))
-                        && ++progress1 >= count1 ? COMPLETE : status;
+                        && ++progress3 >= count3 ? COMPLETE : status;
                 break;
             case Clear:
                 if (event.clear && event.winner) {
@@ -287,35 +291,36 @@ public class AdventureQuestStage implements Serializable {
                 if (event.type != AdventureQuestEventType.MATCHCOMPLETE)
                     break;
                 if (event.winner) {
-                    status = ++progress1 >= count1 ? COMPLETE : status;
+                    status = ++progress3 >= count3 ? COMPLETE : status;
                 } else {
-                    status = ++progress2 >= count2 ? FAILED : status;
+                    status = ++progress4 >= count4 && count4 > 0 ? FAILED : status;
                 }
             case Arena:
                 status = event.type == AdventureQuestEventType.ARENACOMPLETE
                         && event.winner //if event won & not conceded
-                        && ++progress1 >= count1 ? COMPLETE : status;
+                        && ++progress3 >= count3 ? COMPLETE : status;
+                break;
+            case EventFinish:
+                if (event.type != AdventureQuestEventType.EVENTCOMPLETE)
+                    break;
+                status = ++progress3 >= count3 ? COMPLETE : status;
                 break;
             case EventWin:
                 if (event.type != AdventureQuestEventType.EVENTCOMPLETE)
                     break;
-                if (event.winner)
-                    event.count1++; //number of wins
-                else
-                    event.count2++; //number of losses
-                if (++progress2 >= count2 && count2 > 0) {
-                    status = FAILED;
-                } else if (++progress1 >= count1) {
-                    status = COMPLETE;
+                if (event.winner) {
+                    status = ++progress3 >= count3 ? COMPLETE : status;
+                } else {
+                    status = ++progress4 >= count4 && count4 > 0 ? FAILED : status;
                 }
                 break;
             case EventWinMatches:
                 if (event.type != AdventureQuestEventType.EVENTMATCHCOMPLETE)
                     break;
                 if (event.winner) {
-                    status = ++progress1 >=count1 ? COMPLETE : status;
+                    status = ++progress3 >= count3 ? COMPLETE : status;
                 } else {
-                    status = ++progress2 >= count2 && count2 > 0 ? FAILED : status;
+                    status = ++progress4 >= count4 && count4 > 0 ? FAILED : status;
                 }
                 break;
             case Fetch:
@@ -330,13 +335,13 @@ public class AdventureQuestStage implements Serializable {
                     if (event.winner) {
                         status = event.enemy.equals(targetSprite) ? COMPLETE : status;
                     } else {
-                        status = ++progress2 >= count2 && count2 > 0 ? FAILED : status;
+                        status = ++progress4 >= count4 && count4 > 0 ? FAILED : status;
                     }
                 }
                 break;
             case Leave:
                 if (event.type == AdventureQuestEventType.LEAVEPOI)
-                    status = ++progress1 >= count1 ? COMPLETE : status;
+                    status = ++progress3 >= count3 ? COMPLETE : status;
                 break;
             case MapFlag:
                 if (event.type == AdventureQuestEventType.MAPFLAG)
@@ -349,11 +354,11 @@ public class AdventureQuestStage implements Serializable {
             case HaveReputation:
                 //presumed that WorldMapOK will be set on this type, as reputation will occasionally be updated remotely by quests
                 if (event.type == AdventureQuestEventType.REPUTATION)
-                    status = checkIfTargetLocation(event.poi) && event.count1 >= count1 ? COMPLETE : status;
+                    status = checkIfTargetLocation(event.poi) && event.count3 >= count3 ? COMPLETE : status;
                 break;
             case HaveReputationInCurrentLocation:
                 if (event.type == AdventureQuestEventType.ENTERPOI || event.type == AdventureQuestEventType.REPUTATION)
-                    status = event.count1 >= count1 ? COMPLETE : status;
+                    status = event.count3 >= count3 ? COMPLETE : status;
                 break;
             case Delivery:
                 //will eventually differentiate from Travel
@@ -363,7 +368,7 @@ public class AdventureQuestStage implements Serializable {
             case Use:
                 status = event.type == AdventureQuestEventType.USEITEM
                         && (itemNames.isEmpty()) || itemNames.contains(event.item.name)
-                        && ++progress1 >= count1 ? COMPLETE : status;
+                        && ++progress3 >= count3 ? COMPLETE : status;
                 break;
         }
         return status;

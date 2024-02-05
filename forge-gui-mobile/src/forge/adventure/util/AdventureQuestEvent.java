@@ -16,6 +16,8 @@ public class AdventureQuestEvent {
     public int flagValue;
     public int count1;
     public int count2;
+    public int count3;
+    public int count4;
     public AdventureQuestData otherQuest;
 }
 

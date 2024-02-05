@@ -341,7 +341,7 @@ public class AdventureQuestData implements Serializable {
     private EnemySprite generateTargetEnemySprite(AdventureQuestStage stage){
         if (stage.objective == AdventureQuestController.ObjectiveTypes.Hunt){
             EnemyData toUse = generateTargetEnemyData(stage);
-            toUse.lifetime = stage.count1;
+            toUse.lifetime = stage.count3;
             EnemySprite toReturn =  new EnemySprite(toUse);
             toReturn.questStageID = stage.stageID.toString();
             return toReturn;
