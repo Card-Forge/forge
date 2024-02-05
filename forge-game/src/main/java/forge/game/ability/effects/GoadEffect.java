@@ -32,11 +32,17 @@ public class GoadEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         final long timestamp = game.getNextTimestamp();
         final boolean remember = sa.hasParam("RememberGoaded");
+        final boolean ungoad = sa.hasParam("NoLonger");
         final String duration = sa.getParamOrDefault("Duration", "UntilYourNextTurn");
 
         for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             // only goad things on the battlefield
             if (!tgtC.isInPlay()) {
+                continue;
+            }
+
+            if (ungoad) {
+                tgtC.unGoad();
                 continue;
             }
 
