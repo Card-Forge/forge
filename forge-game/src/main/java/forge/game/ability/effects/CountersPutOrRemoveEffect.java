@@ -115,7 +115,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         CounterType chosenType = pc.chooseCounterType(list, sa, prompt, params);
 
         params.put("CounterType", chosenType);
-        prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName()) + " ";
+        prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  chosenType.getName(), CardTranslation.getTranslatedName(tgtCard.getName())) + " ";
         boolean putCounter;
         if (sa.hasParam("RemoveConditionSVar")) {
             final Card host = sa.getHostCard();
