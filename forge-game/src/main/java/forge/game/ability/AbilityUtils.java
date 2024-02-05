@@ -717,28 +717,7 @@ public class AbilityUtils {
                 val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
-                if (calcX[0].startsWith("Sacrificed")) {
-                    list = sa.getRootAbility().getPaidList("Sacrificed", true);
-                }
-                else if (calcX[0].startsWith("Discarded")) {
-                    list = sa.getRootAbility().getPaidList("Discarded", true);
-                }
-                else if (calcX[0].startsWith("Exiled")) {
-                    list = sa.getRootAbility().getPaidList("Exiled", true);
-                }
-                else if (calcX[0].startsWith("Milled")) {
-                    list = sa.getRootAbility().getPaidList("Milled", true);
-                }
-                else if (calcX[0].startsWith("Tapped")) {
-                    list = sa.getRootAbility().getPaidList("Tapped", true);
-                }
-                else if (calcX[0].startsWith("Revealed")) {
-                    list = sa.getRootAbility().getPaidList("Revealed", true);
-                }
-                else if (calcX[0].startsWith("Returned")) {
-                    list = sa.getRootAbility().getPaidList("Returned", true);
-                }
-                else if (calcX[0].startsWith("Targeted")) {
+                if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
                 }
                 else if (calcX[0].startsWith("AllTargeted")) {
@@ -774,6 +753,9 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
+                }
+                else {
+                    list = getPaidCards(sa, calcX[0]);
                 }
                 if (list != null) {
                     // there could be null inside!
