@@ -7576,6 +7576,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public int getAbilityResolvedThisTurn(SpellAbility ability) {
         return numberAbilityResolved.get(ability);
     }
+    public List<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
+        return numberAbilityResolved.getActivators(ability);
+    }
 
     public void resetAbilityResolvedThisTurn() {
         numberAbilityResolved.clear();
