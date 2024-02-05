@@ -106,10 +106,10 @@ public class DigEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Player player = sa.getActivatingPlayer();
-        final Game game = player.getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
         final Player cont = host.getController();
-        Player chooser = player;
+        Player chooser = activator;
         int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
@@ -215,7 +215,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                     if (noMove) {
                         // Let the activating player see the cards even if they're not moved
-                        game.getAction().revealTo(top, player);
+                        game.getAction().revealTo(top, activator);
                     }
                 }
 
@@ -228,7 +228,7 @@ public class DigEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Choser")) {
                     final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Choser"), sa);
                     if (!choosers.isEmpty()) {
-                        chooser = player.getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, p, null);
+                        chooser = activator.getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, p, null);
                     }
                     if (sa.hasParam("SetChosenPlayer")) {
                         host.setChosenPlayer(chooser);
@@ -258,7 +258,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                     if (forceRevealToController) {
                         // Force revealing the card to the player activating the ability (e.g. Explorer's Scope)
-                        game.getAction().revealTo(top, player);
+                        game.getAction().revealTo(top, activator);
                         delayedReveal = null; // top is already seen by the player, do not reveal twice
                     }
 
@@ -368,7 +368,12 @@ public class DigEffect extends SpellAbilityEffect {
                     Collections.reverse(movedCards);
 
                     if (destZone1.equals(ZoneType.Battlefield) || destZone1.equals(ZoneType.Library)) {
-                        movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
+                        if (sa.hasParam("GainControl")) {
+                            // for Cybership
+                            movedCards = (CardCollection) activator.getController().orderMoveToZoneList(rest, destZone2, sa);
+                        } else {
+                            movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
+                        }
                     }
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -390,12 +395,12 @@ public class DigEffect extends SpellAbilityEffect {
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 moveParams.put(AbilityKey.SimultaneousETB, movedCards);
                                 if (sa.hasParam("GainControl")) {
-                                    c.setController(player, game.getNextTimestamp());
+                                    c.setController(activator, game.getNextTimestamp());
                                 }
                                 if (sa.hasParam("WithCounter")) {
                                     final int numCtr = AbilityUtils.calculateAmount(host,
                                             sa.getParamOrDefault("WithCounterNum", "1"), sa);
-                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, activator);
                                 }
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {
@@ -415,7 +420,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
                                 }
                                 handleExiledWith(c, sa);
                             }
@@ -425,7 +430,7 @@ public class DigEffect extends SpellAbilityEffect {
                             c.turnFaceDown(true);
                         }
                         if (sa.hasParam("WithMayLook")) {
-                            c.addMayLookFaceDownExile(player);
+                            c.addMayLookFaceDownExile(activator);
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);
@@ -472,7 +477,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 c = game.getAction().moveTo(destZone2, c, sa, moveParams);
                                 if (destZone2 == ZoneType.Exile) {
                                     if (sa.hasParam("ExileWithCounter")) {
-                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, player, counterTable);
+                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
                                     }
                                     handleExiledWith(c, sa);
                                     if (remZone2) {
@@ -490,7 +495,7 @@ public class DigEffect extends SpellAbilityEffect {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
-        //table trigger there
+
         table.triggerChangesZoneAll(game, sa);
         counterTable.replaceCounterEffect(game, sa, true);
     }
