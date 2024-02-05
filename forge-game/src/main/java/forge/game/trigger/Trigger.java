@@ -583,7 +583,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.CardTraitBase#changeText()
      */
@@ -606,9 +605,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        if (!isIntrinsic()) {
-            return;
-        }
         super.changeTextIntrinsic(colorMap, typeMap);
 
         SpellAbility sa = ensureAbility();

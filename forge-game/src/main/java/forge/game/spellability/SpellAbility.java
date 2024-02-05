@@ -1158,6 +1158,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return copy(host, this.getActivatingPlayer(), lki);
     }
     public SpellAbility copy(Card host, Player activ, final boolean lki) {
+        return copy(host, activ, lki, false);
+    }
+    public SpellAbility copy(Card host, Player activ, final boolean lki, final boolean keepTextChanges) {
         SpellAbility clone = null;
         try {
             clone = (SpellAbility) clone();
@@ -1166,7 +1169,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             // don't use setHostCard to not trigger the not copied parts yet
 
-            copyHelper(clone, host);
+            copyHelper(clone, host, lki || keepTextChanges);
 
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
@@ -1205,7 +1208,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             clone.additionalAbilities = Maps.newHashMap();
             clone.additionalAbilityLists = Maps.newHashMap();
             // run special copy Ability to make a deep copy
-            CardFactory.copySpellAbility(this, clone, host, activ, lki);
+            CardFactory.copySpellAbility(this, clone, host, activ, lki, keepTextChanges);
         } catch (final CloneNotSupportedException e) {
             System.err.println(e);
         }

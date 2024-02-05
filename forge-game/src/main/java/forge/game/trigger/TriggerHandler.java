@@ -521,7 +521,7 @@ public class TriggerHandler {
                 controller = regtrig.getSpawningAbility().getActivatingPlayer();
             }
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, controller, false);
+            sa = sa.copy(host, controller, false, true);
         }
 
         sa.setTrigger(regtrig);

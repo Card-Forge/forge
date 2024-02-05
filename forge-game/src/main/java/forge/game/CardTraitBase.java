@@ -531,31 +531,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return true;
     }
 
-    public void changeText() {
-        // copy changed text words into card trait there
-        this.changedTextColors = getHostCard().getChangedTextColorWords();
-        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
-
-        for (final String key : this.mapParams.keySet()) {
-            final String value = this.originalMapParams.get(key), newValue;
-            if (noChangeKeys.contains(key)) {
-                continue;
-            } else if (descriptiveKeys.contains(key)) {
-                // change descriptions differently
-                newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
-            } else if (this.getHostCard().hasSVar(value)) {
-                // don't change literal SVar names!
-                newValue = null;
-            } else {
-                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
-            }
-
-            if (newValue != null) {
-                this.mapParams.put(key, newValue);
-            }
-        }
-    }
-
     @Override
     public CardView getCardView() {
         return CardView.get(hostCard);
@@ -694,9 +669,37 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.originalMapParams = Maps.newHashMap(this.mapParams);
     }
 
+    public void changeText() {
+        // copy changed text words into card trait there
+        this.changedTextColors = getHostCard().getChangedTextColorWords();
+        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
+
+        for (final String key : this.mapParams.keySet()) {
+            final String value = this.originalMapParams.get(key), newValue;
+            if (noChangeKeys.contains(key)) {
+                continue;
+            } else if (descriptiveKeys.contains(key)) {
+                // change descriptions differently
+                newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
+            } else if (this.getHostCard().hasSVar(value)) {
+                // don't change literal SVar names!
+                newValue = null;
+            } else {
+                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
+            }
+
+            if (newValue != null) {
+                this.mapParams.put(key, newValue);
+            }
+        }
+    }
+
     protected void copyHelper(CardTraitBase copy, Card host) {
+        copyHelper(copy, host, false);
+    }
+    protected void copyHelper(CardTraitBase copy, Card host, boolean keepTextChanges) {
         copy.originalMapParams = Maps.newHashMap(originalMapParams);
-        copy.mapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(keepTextChanges ? mapParams : originalMapParams);
         copy.setSVars(sVars);
         copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet
