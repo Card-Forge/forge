@@ -1,0 +1,14 @@
+Name:Fugitive Codebreaker
+ManaCost:1 R
+Types:Creature Goblin Rogue
+PT:2/1
+K:Prowess
+K:Haste
+K:Disguise:5 R:X:This cost is reduced by {1} for each instant and sorcery card in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, discard your hand, then draw three cards.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 3
+DeckHas:Ability$Discard
+DeckHints:Ability$Mill & Type$Instant|Sorcery
+Oracle:Prowess, haste\nDisguise {5}{R}. This cost is reduced by {1} for each instant and sorcery card in your graveyard. (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Fugitive Codebreaker is turned face up, discard your hand, then draw three cards.
