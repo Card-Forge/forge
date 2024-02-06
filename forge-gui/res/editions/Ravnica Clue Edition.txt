@@ -289,3 +289,4 @@ ScryfallCode=CLU
 281 R Stomping Ground @Leon Tukker
 282 R Temple Garden @Lorenzo Lanfranconi
 283 R Watery Grave @Alexander Forssberg
+284 R Lavinia, Foil to Conspiracy @Chris Rahn
