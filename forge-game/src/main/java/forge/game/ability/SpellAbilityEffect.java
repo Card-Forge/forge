@@ -694,9 +694,7 @@ public abstract class SpellAbilityEffect {
             defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
                     Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
 
-            final GameEntity originalDefender = combat.getDefenderByAttacker(c);
-            if (defender != null &&
-                    (originalDefender == null || !originalDefender.equals(defender))) {
+            if (defender != null && !combat.getAttackersOf(defender).contains(c)) {
                 // we might be reselecting
                 combat.removeFromCombat(c);
 

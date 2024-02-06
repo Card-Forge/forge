@@ -299,7 +299,6 @@ public class Combat {
             } else {
                 return def.getController();
             }
-
         }
 
         return null;
