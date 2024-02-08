@@ -1,0 +1,10 @@
+Name:Watcher of Hours
+ManaCost:5 U
+Types:Creature Sphinx
+PT:6/6
+K:Flying
+K:Ward:3
+K:Suspend:6:1 U
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigSurveil | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+Oracle:Flying, ward {3}\nWhenever you remove a time counter from Watcher of Hours while it's exiled, surveil 1.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)
