@@ -250,7 +250,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (sa.isSpell()) {
                 final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-                if (o == null || sa.hasSVar("IsCastFromPlayEffect")) {
+                if (o == null || sa.isCastFromPlayEffect()) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
@@ -378,7 +378,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (sa.getKeyword() != null && sa.getKeyword().getKeyword() == Keyword.FUSE && !c.isInZone(ZoneType.Hand)) {
+        if (sa.isKeyword(Keyword.FUSE) && !c.isInZone(ZoneType.Hand)) {
             return false;
         }
 
@@ -601,7 +601,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!sa.hasSVar("IsCastFromPlayEffect")) {
+        if (!sa.isCastFromPlayEffect()) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
             }

@@ -20,6 +20,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -141,6 +142,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.hostCard = c;
     }
 
+    public boolean isKeyword(Keyword kw) {
+        return this.keyword != null && this.keyword.getKeyword() == kw;
+    }
     public KeywordInterface getKeyword() {
         return this.keyword;
     }

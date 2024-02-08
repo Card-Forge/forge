@@ -382,7 +382,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     }
                     abCost = new Cost(source.getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
-                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.getKeyword() != null && s.getKeyword().getKeyword() == Keyword.SUSPEND).getPayCosts();
+                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         if (unpayableCost) {
@@ -450,8 +450,6 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceIlluMask")) {
                 addIllusionaryMaskReplace(tgtCard, sa, moveParams);
             }
-
-            tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
             if (controlledByPlayer != null) {
