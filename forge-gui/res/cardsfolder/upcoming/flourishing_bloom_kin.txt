@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Plant Elemental
 PT:0/0
 K:Disguise:4 G
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Forest you control.
 SVar:X:Count$Valid Forest.YouCtrl
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, search your library for up to two Forest cards and reveal them. Put one of them onto the battlefield tapped and the other into your hand, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Forest | ChangeNum$ 2 | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBChangeZone
