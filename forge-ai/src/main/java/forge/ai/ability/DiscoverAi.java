@@ -4,7 +4,6 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
-import forge.card.CardStateName;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -45,7 +44,7 @@ public class DiscoverAi extends SpellAbilityAi {
     @Override
     public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         Card c = (Card)params.get("Card");
-        for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, CardStateName.Original)) { // TODO: other states for split cards and MDFC?
+        for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai)) {
             if (s instanceof LandAbility) {
                 // return false or we get a ClassCastException later if the AI encounters MDFC with land backside
                 return false;

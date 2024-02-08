@@ -35,6 +35,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardUtil;
 import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
@@ -249,7 +250,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (sa.isSpell()) {
                 final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-                if (o == null) {
+                if (o == null || sa.hasSVar("IsCastFromPlayEffect")) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
@@ -374,6 +375,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         // Explicit Aftermath check there
         if ((sa.isAftermath() || sa.isDisturb()) && !c.isInZone(ZoneType.Graveyard)) {
+            return false;
+        }
+
+        if (sa.getKeyword() != null && sa.getKeyword().getKeyword() == Keyword.FUSE && !c.isInZone(ZoneType.Hand)) {
             return false;
         }
 

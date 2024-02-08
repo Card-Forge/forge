@@ -91,6 +91,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintPlayed");
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
+        final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
         int totalCMCLimit = Integer.MAX_VALUE;
         final Player controller;
         if (sa.hasParam("Controller")) {
@@ -298,9 +299,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 state = CardStateName.Transformed;
             }
 
-            // TODO if cost isn't replaced should include alternative ones
-            // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller, state);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
@@ -367,8 +366,7 @@ public class PlayEffect extends SpellAbilityEffect {
             final int tgtCMC = tgtSA.getPayCosts().getTotalMana().getCMC();
 
             // illegal action, cancel early
-            if ((sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost")) && tgtSA.costHasManaX() &&
-                    tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
+            if (altCost && tgtSA.costHasManaX() && tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
                 continue;
             }
 
