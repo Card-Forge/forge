@@ -1,0 +1,7 @@
+Name:Slimy Dualleech
+ManaCost:3 B
+Types:Creature Leech
+PT:2/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control with power 2 or less gets +1/+0 and gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+powerLE2 | TgtPrompt$ Select target creature you control with power 2 or less | NumAtt$ 1 | KW$ Deathtouch
+Oracle:At the beginning of combat on your turn, target creature you control with power 2 or less gets +1/+0 and gains deathtouch until end of turn.

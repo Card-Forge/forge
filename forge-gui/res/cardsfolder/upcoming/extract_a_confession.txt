@@ -1,0 +1,12 @@
+Name:Extract a Confession
+ManaCost:1 B
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+A:SP$ Sacrifice | Defined$ Opponent | ConditionDefined$ Collected | ConditionPresent$ Card | ConditionCompare$ EQ0 | SacValid$ Creature | SubAbility$ EvidenceCollected | SpellDescription$ Each opponent sacrifices a creature.
+SVar:EvidenceCollected:DB$ RepeatEach | RepeatPlayers$ Opponent | ConditionDefined$ Collected | ConditionPresent$ Card | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ If evidence was collected, instead each opponent sacrifices a creature with the greatest power among creatures they control.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$Counters|Sacrifice|Surveil
+Oracle:As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)\nEach opponent sacrifices a creature. If evidence was collected, instead each opponent sacrifices a creature with the greatest power among creatures they control.
