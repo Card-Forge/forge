@@ -82,7 +82,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
+    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -134,6 +134,9 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     changedManaCost = true;
                 } else {
+                    if (altCostOnly) {
+                        continue;
+                    }
                     newSA = sa.copy(activator);
                 }
 

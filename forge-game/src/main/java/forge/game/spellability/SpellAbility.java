@@ -166,6 +166,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean isCopied = false;
     private boolean mayChooseNewTargets = false;
 
+    private boolean isCastFromPlayEffect = false;
+
     private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
     private TargetRestrictions targetRestrictions;
     private TargetChoices targetChosen = new TargetChoices();
@@ -1645,6 +1647,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         undoable = b;
     }
 
+    public boolean isCastFromPlayEffect() {
+        return isCastFromPlayEffect;
+    }
+    public void setCastFromPlayEffect(boolean b) {
+        isCastFromPlayEffect = b;
+    }
+
     public boolean isCopied() {
         return isCopied;
     }
@@ -2509,7 +2518,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getRestrictions().isInstantSpeed()) {
             return true;
         }
-        if ((isSpell() || this instanceof LandAbility) && (hasSVar("IsCastFromPlayEffect") || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
+        if ((isSpell() || this instanceof LandAbility) && (isCastFromPlayEffect() || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
             return true;
         }
 

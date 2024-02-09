@@ -1058,7 +1058,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                             continue;
                         }
-                        tgtSA.setSVar("IsCastFromPlayEffect", "True");
                         // if played, that card cannot be found
                         if (decider.getController().playSaFromPlayEffect(tgtSA)) {
                             fetchList.remove(tgtCard);

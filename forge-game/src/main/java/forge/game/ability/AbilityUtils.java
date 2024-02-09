@@ -2898,21 +2898,17 @@ public class AbilityUtils {
     }
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
-        return getBasicSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original);
+        return getSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original, false);
     }
-    public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state) {
+    public static final List<SpellAbility> getSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state, boolean withAltCost) {
         List<SpellAbility> sas = new ArrayList<>();
-        List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        List<SpellAbility> list = new ArrayList<>();
+        collectSpellsForPlayEffect(list, tgtCard.getState(tgtCard.getCurrentStateName()), controller, withAltCost);
         CardState original = tgtCard.getState(state);
 
         if (tgtCard.isFaceDown()) {
-            Iterables.addAll(list, tgtCard.getBasicSpells(original));
+            collectSpellsForPlayEffect(list, original, controller, withAltCost);
         } else {
-            if (tgtCard.isLand()) {
-                LandAbility la = new LandAbility(tgtCard, controller, null);
-                la.setCardState(original);
-                list.add(la);
-            }
             if (state == CardStateName.Transformed && tgtCard.isPermanent() && !tgtCard.isAura()) {
                 // casting defeated battle
                 Spell sp = new SpellPermanent(tgtCard, original);
@@ -2920,13 +2916,7 @@ public class AbilityUtils {
                 list.add(sp);
             }
             if (tgtCard.isModal()) {
-                CardState modal = tgtCard.getState(CardStateName.Modal);
-                Iterables.addAll(list, tgtCard.getBasicSpells(modal));
-                if (modal.getType().isLand()) {
-                    LandAbility la = new LandAbility(tgtCard, controller, null);
-                    la.setCardState(modal);
-                    list.add(la);
-                }
+                collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
             }
         }
 
@@ -2949,11 +2939,33 @@ public class AbilityUtils {
                 if (res.checkTimingRestrictions(tgtCard, newSA)
                         // still need to check the other restrictions like Aftermath
                         && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
+                    newSA.setCastFromPlayEffect(true);
                     sas.add(newSA);
                 }
             }
         }
         return sas;
+    }
+
+    private static void collectSpellsForPlayEffect(final List<SpellAbility> result, final CardState state, final Player controller, final boolean withAltCost) {
+        if (state.getType().isLand()) {
+            LandAbility la = new LandAbility(state.getCard(), controller, null);
+            la.setCardState(state);
+            result.add(la);
+        }
+        final Iterable<SpellAbility> spells = state.getSpellAbilities();
+        for (SpellAbility sa : spells) {
+            if (!sa.isSpell()) {
+                continue;
+            }
+            if (!withAltCost && !sa.isBasicSpell()) {
+                continue;
+            }
+            result.add(sa);
+            if (withAltCost) {
+                result.addAll(GameActionUtil.getAlternativeCosts(sa, controller, true));
+            }
+        }
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {

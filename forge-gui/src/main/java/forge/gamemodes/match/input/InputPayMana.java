@@ -116,7 +116,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : card.getManaAbilities()) {
             result.add(sa);
-            result.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+            result.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
         }
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
         for (final SpellAbility sa : result) {

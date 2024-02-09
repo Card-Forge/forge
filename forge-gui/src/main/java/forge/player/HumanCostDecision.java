@@ -851,7 +851,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return PaymentDecision.number(0);
             }
             // player might not want to pay if from a trigger
-            if (!ability.hasSVar("IsCastFromPlayEffect") && hand.size() == num) {
+            if (!ability.isCastFromPlayEffect() && hand.size() == num) {
                 return PaymentDecision.card(hand);
             }
 

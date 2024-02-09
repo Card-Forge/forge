@@ -125,8 +125,6 @@ public class DiscoverEffect extends SpellAbilityEffect {
                                 tgtSA.getTargetRestrictions().setMandatory(true);
                             }
 
-                            tgtSA.setSVar("IsCastFromPlayEffect", "True");
-
                             if (p.getController().playSaFromPlayEffect(tgtSA)) {
                                 final Card played = tgtSA.getHostCard();
                                 // add remember successfully played here if ever needed

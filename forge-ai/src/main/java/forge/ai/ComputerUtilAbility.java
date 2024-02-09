@@ -106,7 +106,7 @@ public class ComputerUtilAbility {
 
         for (SpellAbility sa : originListWithAddCosts) {
             // determine which alternative costs are cheaper than the original and prioritize them
-            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player);
+            List<SpellAbility> saAltCosts = GameActionUtil.getAlternativeCosts(sa, player, false);
             List<SpellAbility> priorityAltSa = Lists.newArrayList();
             List<SpellAbility> otherAltSa = Lists.newArrayList();
             for (SpellAbility altSa : saAltCosts) {
