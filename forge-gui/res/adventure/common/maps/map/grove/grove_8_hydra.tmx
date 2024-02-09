@@ -150,26 +150,5 @@
   <object id="117" template="../../obj/waypoint.tx" x="527.5" y="235"/>
   <object id="118" template="../../obj/waypoint.tx" x="923.5" y="334"/>
   <object id="119" template="../../obj/waypoint.tx" x="919" y="95"/>
-  <object id="120" template="../../obj/enemy.tx" x="483.736" y="443.156">
-   <properties>
-    <property name="effect">{
-	&quot;startBattleWithCard&quot;: [ &quot;First Head of the Hydra&quot;, &quot;Second Head of the Hydra&quot;, &quot;Third Head of the Hydra&quot;, &quot;Fourth Head of the Hydra&quot;, &quot;Fifth Head of the Hydra&quot;, &quot;Sixth Head of the Hydra&quot; ],
-	&quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Hydra of Shandalar&quot; ]
-}</property>
-    <property name="enemy" value="The Hydra of Shandalaar"/>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;item&quot;,
-    &quot;probability&quot;: 1,
-    &quot;count&quot;: 1,
-    &quot;itemName&quot;: &quot;Presence of the Hydra&quot;
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="speedModifier" type="float" value="10"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>
