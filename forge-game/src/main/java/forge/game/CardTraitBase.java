@@ -229,10 +229,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     public boolean matchesValidParam(String param, final Object o, final Card srcCard) {
+        boolean result = hasParam("Invert" + param);
         if (hasParam(param) && !matchesValid(o, getParam(param).split(","), srcCard)) {
-            return false;
+            return result;
         }
-        return true;
+        return !result;
     }
 
     public boolean matchesValidParam(String param, final Object o) {
