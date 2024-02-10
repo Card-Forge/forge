@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Artifact Creature Wall
 PT:0/4
 K:Defender
-A:AB$ Tap | Cost$ 2 W T | ValidTgts$ Creature |  SubAbility$ DBCounter | SpellDescription$ Tap target creature. You may put a stun counter on it. If you do, put a stun counter on Sanctuary Wall. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+A:AB$ Tap | Cost$ 2 W T | ValidTgts$ Creature |  SubAbility$ DBCounter | SpellDescription$ Tap target creature. You may put a stun counter on it. If you do, put a stun counter on CARDNAME. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | Optional$ True | RememberPut$ True | SubAbility$ DBCounterSelf
 SVar:DBCounterSelf:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ Stun | ConditionDefined$ Remembered | ConditionPresent$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
