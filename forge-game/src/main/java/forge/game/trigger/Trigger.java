@@ -28,6 +28,7 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -376,14 +377,10 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
-        if ("True".equals(getParam("EvolveCondition"))) {
+        if (isKeyword(Keyword.EVOLVE)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {
                 return false;
-                // final StringBuilder sb = new StringBuilder();
-                // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
-                // sb.append(this.getHostCard().getName());
-                // throw new RuntimeException(sb.toString());
             }
             // CR 702.100c
             if (!moved.isCreature() || !this.getHostCard().isCreature()) {
