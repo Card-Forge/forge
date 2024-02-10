@@ -182,7 +182,7 @@
   <object id="69" template="../../obj/waypoint.tx" x="364.75" y="328.5"/>
   <object id="70" template="../../obj/waypoint.tx" x="358.25" y="193"/>
   <object id="71" template="../../obj/waypoint.tx" x="214.75" y="185.75"/>
-  <object id="72" template="../../obj/enemy.tx" x="208.25" y="124.75">
+  <object id="72" template="../../obj/enemy.tx" x="195.203" y="125.343">
    <properties>
     <property name="enemy" value="Arcane Golem"/>
     <property name="threatRange" type="int" value="40"/>
