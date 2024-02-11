@@ -118,7 +118,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card lastDrawnCard;
     private Card ringBearer, theRing;
     private String namedCard = "";
-    private String namedCard2 = "";
 
     private int simultaneousDamage = 0;
 
@@ -1870,10 +1869,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setNamedCard(final String s) {
         namedCard = s;
-    }
-    public final String getNamedCard2() { return namedCard2; }
-    public final void setNamedCard2(final String s) {
-        namedCard2 = s;
     }
 
     public final int getTurn() {

@@ -1639,6 +1639,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean undo() {
         if (isUndoable() && getActivatingPlayer().getManaPool().accountFor(getManaPart())) {
             payCosts.refundPaidCost(hostCard);
+            return true;
         }
         return false;
     }
