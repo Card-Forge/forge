@@ -1,8 +1,8 @@
 Name:Take the Bait
 ManaCost:2 R W
 Types:Instant
-A:SP$ Effect | Cost$ 2 R W | ReplacementEffects$ RPrevent | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBUnTapAll | SpellDescription$ Prevent all combat damage that would be dealt to you and planeswalkers you control this turn. Untap all attacking creatures and goad them. After this phase, there is an additional combat phase.
-SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ You,Planeswalker.YouCtrl
+A:SP$ Effect | ReplacementEffects$ RPrevent | OpponentTurn$ True | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBUnTapAll | SpellDescription$ Prevent all combat damage that would be dealt to you and planeswalkers you control this turn. Untap all attacking creatures and goad them. After this phase, there is an additional combat phase.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ You,Planeswalker.YouCtrl
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.attacking | SubAbility$ DBGoad
 SVar:DBGoad:DB$ Goad | Defined$ Valid Creature.attacking | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
