@@ -388,9 +388,6 @@ public class TriggerHandler {
             return false; // It's not the right phase to go off.
         }
 
-        if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
-            return false; // Morphed cards only have pumped triggers go off.
-        }
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
