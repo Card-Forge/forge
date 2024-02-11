@@ -187,9 +187,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (undoStack.isEmpty()) { return false; }
 
         SpellAbility sa = undoStack.peek();
-        sa.undo();
-        clearUndoStack(sa);
-        sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        if (sa.undo()) {
+            clearUndoStack(sa);
+            sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        } else {
+            clearUndoStack(sa);
+            clearUndoStack(sa.getPayingManaAbilities());
+        }
         return true;
     }
     public final void clearUndoStack(SpellAbility sa) {
