@@ -428,8 +428,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
@@ -1059,7 +1058,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                             continue;
                         }
-                        tgtSA.setSVar("IsCastFromPlayEffect", "True");
                         // if played, that card cannot be found
                         if (decider.getController().playSaFromPlayEffect(tgtSA)) {
                             fetchList.remove(tgtCard);

@@ -2910,7 +2910,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             // Human player is choosing targets for an ability
                             // controlled by chosen player.
                             sa.setActivatingPlayer(p);
-                            sa.setSVar("IsCastFromPlayEffect", "True");
+                            sa.setCastFromPlayEffect(true);
                             HumanPlay.playSaWithoutPayingManaCost(PlayerControllerHuman.this, getGame(), sa, true);
                         }
                         // playSa could fire some triggers

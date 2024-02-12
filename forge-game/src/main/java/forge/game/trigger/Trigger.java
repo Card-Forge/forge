@@ -344,17 +344,34 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (hasParam("ResolvedLimit")) {
-            if (this.getOverridingAbility().getResolvedThisTurn() >= Integer.parseInt(getParam("ResolvedLimit"))) {
-                return false;
-            }
-        }
-
         // host controller will be null when adding card in a simulation game
         if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
             return false;
         }
 
+        if (!checkResolvedLimit(getHostCard().getController())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkResolvedLimit(Player activator) {
+        // CR 603.2i
+        if (hasParam("ResolvedLimit")) {
+            if (Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator)
+                    >= Integer.parseInt(getParam("ResolvedLimit"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkActivationLimit() {
+        if (hasParam("ActivationLimit") &&
+                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
+            return false;
+        }
         return true;
     }
 
@@ -575,7 +592,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.CardTraitBase#changeText()
      */
@@ -598,9 +614,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        if (!isIntrinsic()) {
-            return;
-        }
         super.changeTextIntrinsic(colorMap, typeMap);
 
         SpellAbility sa = ensureAbility();

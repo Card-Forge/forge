@@ -102,22 +102,24 @@ public class CardFactoryUtil {
      *
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static SpellAbility abilityMorphDown(final CardState cardState, final boolean intrinsic) {
+    public static SpellAbility abilityCastFaceDown(final CardState cardState, final boolean intrinsic, String key) {
         final Spell morphDown = new Spell(cardState.getCard(), new Cost(ManaCost.THREE, false)) {
             private static final long serialVersionUID = -1438810964807867610L;
 
             @Override
             public void resolve() {
-                if (!hostCard.isFaceDown()) {
+                if (!hostCard.isCopiedSpell() && !hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
                 final Game game = hostCard.getGame();
 
-                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
+                CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateBattlefield());
+                Map<AbilityKey, Object> params = AbilityKey.newMap();
+                params.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+                params.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
+                params.put(AbilityKey.InternalTriggerTable, table);
 
-                hostCard.getGame().getAction().moveToPlay(hostCard, this, moveParams);
+                hostCard.getGame().getAction().moveToPlay(hostCard, this, params);
             }
 
             @Override
@@ -138,9 +140,8 @@ public class CardFactoryUtil {
         morphDown.setCardState(cardState);
 
         morphDown.setDescription("(You may cast this card face down as a 2/2 creature for {3}.)");
-        morphDown.setStackDescription("Morph - Creature 2/2");
+        morphDown.setStackDescription(key + " - Creature 2/2");
         morphDown.setCastFaceDown(true);
-        morphDown.setBasicSpell(false);
 
         morphDown.setIntrinsic(intrinsic);
 
@@ -187,18 +188,48 @@ public class CardFactoryUtil {
 
         return morphUp;
     }
+    public static SpellAbility abilityDisguiseUp(final CardState cardState, final String costStr, final boolean intrinsic) {
+        Cost cost = new Cost(costStr, true);
+        StringBuilder sbCost =  new StringBuilder("Disguise");
+        sbCost.append(" ");
+        if (!cost.isOnlyManaCost()) {
+            sbCost.append("— ");
+        }
+        sbCost.append(cost.toString());
 
-    public static SpellAbility abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
+        sb.append(" | DisguiseUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown");
+        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its disguise cost.)");
+
+        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
+
+        // if Cost has X in cost, need to check source for an SVar for this
+        if (cost.hasXInAnyCostPart() && cardState.hasSVar("X")) {
+            morphUp.setSVar("X", cardState.getSVar("X"));
+        }
+
+        final StringBuilder sbStack = new StringBuilder();
+        sbStack.append(cardState.getName()).append(" - turn this card face up.");
+        morphUp.setStackDescription(sbStack.toString());
+
+        morphUp.setIntrinsic(intrinsic);
+
+        return morphUp;
+    }
+
+    public static SpellAbility abilityTurnFaceUp(final CardState sourceCard, String key, String desc) {
+        final ManaCost manaCost = sourceCard.getManaCost();
         String costDesc = manaCost.toString();
 
         // Cost need to be set later
         StringBuilder sb = new StringBuilder();
-        sb.append("ST$ SetState | Cost$ 0 | CostDesc$ Unmanifest ").append(costDesc);
-        sb.append(" | ManifestUp$ True | Secondary$ True | PresentDefined$ Self | IsPresent$ Card.faceDown+manifested");
-        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its mana cost.)");
+        sb.append("ST$ SetState | Cost$ 0 | ").append("PrecostDesc$ ").append(desc).append(" | CostDesc$ ").append(costDesc);
+        sb.append(" | ").append(key).append("$ True | Secondary$ True | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its mana cost.)");
 
         final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
         manifestUp.setPayCosts(new Cost(manaCost, true));
+        manifestUp.rebuiltDescription();
 
         final StringBuilder sbStack = new StringBuilder();
         sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
@@ -241,27 +272,6 @@ public class CardFactoryUtil {
                 + " | HiddenAgenda$ True"
                 + " | Mode$ TurnFaceUp | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
-    }
-
-    /**
-     * <p>
-     * countOccurrences.
-     * </p>
-     *
-     * @param arg1
-     *            a {@link java.lang.String} object.
-     * @param arg2
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int countOccurrences(final String arg1, final String arg2) {
-        int count = 0;
-        int index = 0;
-        while ((index = arg1.indexOf(arg2, index)) != -1) {
-            ++index;
-            ++count;
-        }
-        return count;
     }
 
     /**
@@ -1442,7 +1452,7 @@ public class CardFactoryUtil {
             sbTrig.append("Living Weapon (").append(inst.getReminderText()).append(")");
 
             final StringBuilder sbGerm = new StringBuilder();
-            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_phyrexian_germ |TokenOwner$ You | RememberTokens$ True");
+            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_phyrexian_germ | TokenOwner$ You | RememberTokens$ True");
 
             final SpellAbility saGerm = AbilityFactory.getAbility(sbGerm.toString(), card);
 
@@ -2760,6 +2770,21 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Disguise")) {
+            final String[] k = keyword.split(":");
+            final String reduceCost = k.length > 2 ? k[2] : null;
+
+            SpellAbility faceDown = abilityCastFaceDown(card, intrinsic, "Disguise");
+            faceDown.putParam("FaceDownKeyword", "Ward:2");
+
+            SpellAbility faceUp = abilityDisguiseUp(card, k[1], intrinsic);
+            if (reduceCost != null) {
+                faceUp.putParam("ReduceCost", reduceCost);
+                faceUp.setSVar(reduceCost, card.getSVar(reduceCost));
+            }
+
+            inst.addSpellAbility(faceDown);
+            inst.addSpellAbility(faceUp);
         } else if (keyword.startsWith("Disturb")) {
             final String[] k = keyword.split(":");
             final Cost disturbCost = new Cost(k[1], true);
@@ -3028,7 +3053,7 @@ public class CardFactoryUtil {
                         // because it doesn't work other wise
                         c.setForetoldCostByEffect(true);
                     }
-                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
+                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(), "has foretold.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     game.fireEvent(new GameEventCardForetold(getActivatingPlayer()));
                 }
@@ -3128,12 +3153,12 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Morph")) {
             final String[] k = keyword.split(":");
 
-            inst.addSpellAbility(abilityMorphDown(card, intrinsic));
+            inst.addSpellAbility(abilityCastFaceDown(card, intrinsic, "Morph"));
             inst.addSpellAbility(abilityMorphUp(card, k[1], false, intrinsic));
         } else if (keyword.startsWith("Megamorph")) {
             final String[] k = keyword.split(":");
 
-            inst.addSpellAbility(abilityMorphDown(card, intrinsic));
+            inst.addSpellAbility(abilityCastFaceDown(card, intrinsic, "Morph"));
             inst.addSpellAbility(abilityMorphUp(card, k[1], true, intrinsic));
         } else if (keyword.startsWith("More Than Meets the Eye")) {
             final String[] n = keyword.split(":");
@@ -4018,9 +4043,13 @@ public class CardFactoryUtil {
         if (sa.hasParam("FaceDownSetType")) {
             faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
         }
+        if (sa.hasParam("FaceDownKeyword")) {
+            faceDown.setIntrinsicKeywords(Lists.newArrayList(), false);
+            faceDown.addIntrinsicKeywords(Arrays.asList(sa.getParam("FaceDownKeyword").split(" & ")));
+        }
 
         if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
-                || sa.hasParam("FaceDownSetType")) {
+                || sa.hasParam("FaceDownSetType") || sa.hasParam("FaceDownKeyword")) {
             final GameCommand unanimate = new GameCommand() {
                 private static final long serialVersionUID = 8853789549297846163L;
 

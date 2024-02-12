@@ -1,0 +1,7 @@
+Name:Slice from the Shadows
+ManaCost:X B
+Types:Instant
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered. (This includes by the ward ability.)
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
+SVar:X:Count$xPaid
+Oracle:This spell can't be countered. (This includes by the ward ability.)\nTarget creature gets -X/-X until end of turn.

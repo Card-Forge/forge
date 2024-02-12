@@ -361,6 +361,9 @@ public class TriggerHandler {
 
         for (final Trigger t : triggers) {
             if (!t.isStatic() && t.getHostCard().getController().equals(player) && (wasCollected || canRunTrigger(t, mode, runParams))) {
+                if (wasCollected && !t.checkActivationLimit()) {
+                    continue;
+                }
                 int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
 
                 for (int i = 0; i < x; ++i) {
@@ -371,11 +374,10 @@ public class TriggerHandler {
         }
 
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (deltrig.getHostCard().getController().equals(player)) {
-                if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(deltrig);
-                    runSingleTrigger(deltrig, runParams);
-                }
+            if (deltrig.getHostCard().getController().equals(player) &&
+                    isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
+                delayedTriggers.remove(deltrig);
+                runSingleTrigger(deltrig, runParams);
             }
         }
         return checkStatics;
@@ -386,9 +388,6 @@ public class TriggerHandler {
             return false; // It's not the right phase to go off.
         }
 
-        if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
-            return false; // Morphed cards only have pumped triggers go off.
-        }
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
@@ -421,10 +420,8 @@ public class TriggerHandler {
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (regtrig.hasParam("ActivationLimit")) {
-            if (regtrig.getActivationsThisTurn() >= Integer.parseInt(regtrig.getParam("ActivationLimit"))) {
-                return false;
-            }
+        if (!regtrig.checkActivationLimit()) {
+            return false;
         }
 
         if (!regtrig.requirementsCheck(game)) {
@@ -521,7 +518,7 @@ public class TriggerHandler {
                 controller = regtrig.getSpawningAbility().getActivatingPlayer();
             }
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, controller, false);
+            sa = sa.copy(host, controller, false, true);
         }
 
         sa.setTrigger(regtrig);

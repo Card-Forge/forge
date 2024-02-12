@@ -91,6 +91,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintPlayed");
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
+        final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
         int totalCMCLimit = Integer.MAX_VALUE;
         final Player controller;
         if (sa.hasParam("Controller")) {
@@ -298,9 +299,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 state = CardStateName.Transformed;
             }
 
-            // TODO if cost isn't replaced should include alternative ones
-            // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller, state);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
@@ -323,7 +322,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("CastFaceDown")) {
                 // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
+                tgtSA = CardFactoryUtil.abilityCastFaceDown(tgtCard.getCurrentState(), false, "Morph");
             } else {
                 tgtSA = controller.getController().getAbilityToPlay(tgtCard, sas);
             }
@@ -337,7 +336,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final CardZoneTable triggerList = new CardZoneTable();
+            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             final Zone originZone = tgtCard.getZone();
 
             // lands will be played
@@ -367,8 +366,7 @@ public class PlayEffect extends SpellAbilityEffect {
             final int tgtCMC = tgtSA.getPayCosts().getTotalMana().getCMC();
 
             // illegal action, cancel early
-            if ((sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost")) && tgtSA.costHasManaX() &&
-                    tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
+            if (altCost && tgtSA.costHasManaX() && tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
                 continue;
             }
 
@@ -384,7 +382,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     }
                     abCost = new Cost(source.getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
-                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.getKeyword() != null && s.getKeyword().getKeyword() == Keyword.SUSPEND).getPayCosts();
+                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         if (unpayableCost) {
@@ -452,8 +450,6 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceIlluMask")) {
                 addIllusionaryMaskReplace(tgtCard, sa, moveParams);
             }
-
-            tgtSA.setSVar("IsCastFromPlayEffect", "True");
 
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
             if (controlledByPlayer != null) {

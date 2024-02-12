@@ -310,6 +310,9 @@ public abstract class GameState {
                 if (c.isManifested()) {
                     newText.append(":Manifested");
                 }
+                if (c.isCloaked()) {
+                    newText.append(":Cloaked");
+                }
             }
             if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
                 newText.append("|Transformed");
@@ -1279,6 +1282,9 @@ public abstract class GameState {
                     c.turnFaceDown(true);
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
+                    }
+                    if (info.endsWith("Cloaked")) {
+                        c.setCloaked(true);
                     }
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);

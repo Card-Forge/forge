@@ -250,7 +250,8 @@ public class HumanPlay {
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
                     || part instanceof CostMill
-                    || part instanceof CostSacrifice) {
+                    || part instanceof CostSacrifice
+                    || part instanceof CostCollectEvidence) {
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null) {
@@ -421,7 +422,7 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source, sourceAbility);
                 list = CardLists.filter(list, Presets.CAN_TAP);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
@@ -511,7 +512,7 @@ public class HumanPlay {
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         final Card hostCard = ability.getHostCard();
         final Game game = hostCard.getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.InternalTriggerTable, table);
 

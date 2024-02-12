@@ -1,0 +1,17 @@
+Name:Hustle
+ManaCost:UR
+Types:Instant
+A:SP$ Effect | StaticAbilities$ MustAttack,MustBlock | RememberObjects$ ThisTargetedCard | ValidTgts$ Creature | ExileOnMoved$ Battlefield | StackDescription$ {c:Targeted} attacks this turn if able. | SpellDescription$ Target creature attacks or blocks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+AlternateMode:Split
+Oracle:Target creature attacks or blocks this turn if able.
+
+ALTERNATE
+
+Name:Bustle
+ManaCost:4 RG RG
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SubAbility$ DBTurnFaceUp | SpellDescription$ Creatures you control get +2/+2 and gain trample until end of turn.
+SVar:DBTurnFaceUp:DB$ SetState | Optional$ True | Choices$ Creature.faceDown+YouCtrl | ChoiceTitle$ Select target facedown creature you control | Mode$ TurnFaceUp | SpellDescription$ You may turn a face-down creature you control face up.
+Oracle:Creatures you control get +2/+2 and gain trample until end of turn. You may turn a face-down creature you control face up.

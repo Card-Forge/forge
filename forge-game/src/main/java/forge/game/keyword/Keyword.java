@@ -61,6 +61,7 @@ public enum Keyword {
     DETHRONE("Dethrone", SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
     DEVOUR("Devour", KeywordWithAmount.class, false, "As this creature enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
     DEVOID("Devoid", SimpleKeyword.class, true, "This card has no color."),
+    DISGUISE("Disguise", KeywordWithCost.class, false, "You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost."),
     DISTURB("Disturb", KeywordWithCost.class, false, "You may cast this card from your graveyard transformed for its disturb cost."),
     DOCTORS_COMPANION("Doctor's companion", Partner.class, true, "You can have two commanders if the other is the Doctor."),
     DOUBLE_STRIKE("Double Strike", SimpleKeyword.class, true, "This creature deals both first-strike and regular combat damage."),

@@ -1,0 +1,8 @@
+Name:Eliminate the Impossible
+ManaCost:1 U
+Types:Instant
+A:SP$ Investigate | SubAbility$ DBDebuff | SpellDescription$ Investigate. Creatures your opponents control get -2/-0 until end of turn. If any of them are suspected, they're no longer suspected. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBDebuff:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | SubAbility$ DBAlterAtribute
+SVar:DBAlterAtribute:DB$ AlterAttribute | Defined$ Valid Creature.OppCtrl+IsSuspected | Attributes$ Suspected | Activate$ False
+DeckHas:Ability$Token & Type$Artifact|Clue
+Oracle:Investigate. Creatures your opponents control get -2/-0 until end of turn. If any of them are suspected, they're no longer suspected. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

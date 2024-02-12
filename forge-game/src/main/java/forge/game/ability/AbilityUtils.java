@@ -79,7 +79,7 @@ public class AbilityUtils {
             cards.add(hostCard);
             defined = defined.replace("AndSelf", "");
         }
-        
+
         if (defined.equals("Self")) {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
@@ -517,6 +517,9 @@ public class AbilityUtils {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
+            } else if (hType.equals("HasLost")) {
+                players.addAll(game.getLostPlayers());
+                val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.startsWith("PropertyYou")) {
                 players.add(player);
                 val = playerXCount(players, calcX[1], card, ability);
@@ -714,28 +717,7 @@ public class AbilityUtils {
                 val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
             } else { // these ones only for handling lists
                 Iterable<Card> list = null;
-                if (calcX[0].startsWith("Sacrificed")) {
-                    list = sa.getRootAbility().getPaidList("Sacrificed", true);
-                }
-                else if (calcX[0].startsWith("Discarded")) {
-                    list = sa.getRootAbility().getPaidList("Discarded", true);
-                }
-                else if (calcX[0].startsWith("Exiled")) {
-                    list = sa.getRootAbility().getPaidList("Exiled", true);
-                }
-                else if (calcX[0].startsWith("Milled")) {
-                    list = sa.getRootAbility().getPaidList("Milled", true);
-                }
-                else if (calcX[0].startsWith("Tapped")) {
-                    list = sa.getRootAbility().getPaidList("Tapped", true);
-                }
-                else if (calcX[0].startsWith("Revealed")) {
-                    list = sa.getRootAbility().getPaidList("Revealed", true);
-                }
-                else if (calcX[0].startsWith("Returned")) {
-                    list = sa.getRootAbility().getPaidList("Returned", true);
-                }
-                else if (calcX[0].startsWith("Targeted")) {
+                if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
                 }
                 else if (calcX[0].startsWith("AllTargeted")) {
@@ -771,6 +753,9 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
+                }
+                else {
+                    list = getPaidCards(sa, calcX[0]);
                 }
                 if (list != null) {
                     // there could be null inside!
@@ -2730,7 +2715,7 @@ public class AbilityUtils {
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
         if (sq[0].startsWith("ThisTurnEntered") || sq[0].startsWith("LastTurnEntered")) {
-            final String[] workingCopy = paidparts[0].split("_");
+            final String[] workingCopy = paidparts[0].split("_", 5);
             ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
             final boolean hasFrom = workingCopy[2].equals("from");
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
@@ -2763,6 +2748,8 @@ public class AbilityUtils {
             CardCollectionView cardsInZones = null;
             if (lparts[0].contains("All")) {
                 cardsInZones = game.getCardsInGame();
+            } else if (lparts[0].endsWith("Self")) {
+                cardsInZones = new CardCollection(c);
             } else {
                 final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
                 boolean usedLastState = false;
@@ -2911,21 +2898,17 @@ public class AbilityUtils {
     }
 
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
-        return getBasicSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original);
+        return getSpellsFromPlayEffect(tgtCard, controller, CardStateName.Original, false);
     }
-    public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state) {
+    public static final List<SpellAbility> getSpellsFromPlayEffect(final Card tgtCard, final Player controller, CardStateName state, boolean withAltCost) {
         List<SpellAbility> sas = new ArrayList<>();
-        List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
+        List<SpellAbility> list = new ArrayList<>();
+        collectSpellsForPlayEffect(list, tgtCard.getState(tgtCard.getCurrentStateName()), controller, withAltCost);
         CardState original = tgtCard.getState(state);
 
         if (tgtCard.isFaceDown()) {
-            Iterables.addAll(list, tgtCard.getBasicSpells(original));
+            collectSpellsForPlayEffect(list, original, controller, withAltCost);
         } else {
-            if (tgtCard.isLand()) {
-                LandAbility la = new LandAbility(tgtCard, controller, null);
-                la.setCardState(original);
-                list.add(la);
-            }
             if (state == CardStateName.Transformed && tgtCard.isPermanent() && !tgtCard.isAura()) {
                 // casting defeated battle
                 Spell sp = new SpellPermanent(tgtCard, original);
@@ -2933,13 +2916,7 @@ public class AbilityUtils {
                 list.add(sp);
             }
             if (tgtCard.isModal()) {
-                CardState modal = tgtCard.getState(CardStateName.Modal);
-                Iterables.addAll(list, tgtCard.getBasicSpells(modal));
-                if (modal.getType().isLand()) {
-                    LandAbility la = new LandAbility(tgtCard, controller, null);
-                    la.setCardState(modal);
-                    list.add(la);
-                }
+                collectSpellsForPlayEffect(list, tgtCard.getState(CardStateName.Modal), controller, withAltCost);
             }
         }
 
@@ -2962,11 +2939,33 @@ public class AbilityUtils {
                 if (res.checkTimingRestrictions(tgtCard, newSA)
                         // still need to check the other restrictions like Aftermath
                         && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
+                    newSA.setCastFromPlayEffect(true);
                     sas.add(newSA);
                 }
             }
         }
         return sas;
+    }
+
+    private static void collectSpellsForPlayEffect(final List<SpellAbility> result, final CardState state, final Player controller, final boolean withAltCost) {
+        if (state.getType().isLand()) {
+            LandAbility la = new LandAbility(state.getCard(), controller, null);
+            la.setCardState(state);
+            result.add(la);
+        }
+        final Iterable<SpellAbility> spells = state.getSpellAbilities();
+        for (SpellAbility sa : spells) {
+            if (!sa.isSpell()) {
+                continue;
+            }
+            if (!withAltCost && !sa.isBasicSpell()) {
+                continue;
+            }
+            result.add(sa);
+            if (withAltCost) {
+                result.addAll(GameActionUtil.getAlternativeCosts(sa, controller, true));
+            }
+        }
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {

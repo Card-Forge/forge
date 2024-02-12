@@ -694,9 +694,7 @@ public abstract class SpellAbilityEffect {
             defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa,
                     Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName())), false, params);
 
-            final GameEntity originalDefender = combat.getDefenderByAttacker(c);
-            if (defender != null &&
-                    (originalDefender == null || !originalDefender.equals(defender))) {
+            if (defender != null && !combat.getAttackersOf(defender).contains(c)) {
                 // we might be reselecting
                 combat.removeFromCombat(c);
 
@@ -823,10 +821,6 @@ public abstract class SpellAbilityEffect {
                 if (card == null) { continue; }
                 if (p.discard(card, sa, effect, params) != null) {
                     discardedByPlayer.add(card);
-
-                    if (sa.hasParam("RememberDiscarded")) {
-                        sa.getHostCard().addRemembered(card);
-                    }
                 }
             }
             discardedMap.put(p, discardedByPlayer);
@@ -928,6 +922,27 @@ public abstract class SpellAbilityEffect {
         } else {
             game.getEndOfTurn().addUntil(until);
         }
+    }
+
+    protected static boolean checkValidDuration(String duration, SpellAbility sa) {
+        if (duration == null) {
+            return true;
+        }
+        Card hostCard = sa.getHostCard();
+
+        //if host is not on the battlefield don't apply
+        // Suspend should does Affect the Stack
+        if ((duration.startsWith("UntilHostLeavesPlay") || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
+                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
+            return false;
+        }
+        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+            return false;
+        }
+        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
+            return false;
+        }
+        return true;
     }
 
     public static Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {

@@ -3,6 +3,12 @@ package forge.adventure.editor;
 
 
 import com.badlogic.gdx.tools.particleeditor.ParticleEditor;
+import com.google.common.base.Function;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.util.Lang;
+import forge.util.Localizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +23,15 @@ public class EditorMainWindow extends JFrame {
     public EditorMainWindow()
     {
         UIManager.LookAndFeelInfo[] var1 = UIManager.getInstalledLookAndFeels();
+        FModel.initialize(null, new Function<ForgePreferences, Void>()  {
+            @Override
+            public Void apply(ForgePreferences preferences) {
+                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
+                return null;
+            }
+        });
+        Lang.createInstance(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE));
+        Localizer.getInstance().initialize(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
         int var2 = var1.length;
 
         for(int var3 = 0; var3 < var2; ++var3) {

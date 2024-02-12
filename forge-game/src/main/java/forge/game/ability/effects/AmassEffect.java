@@ -25,7 +25,6 @@ import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
-import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -52,13 +51,10 @@ public class AmassEffect extends TokenEffectBase {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final Card source = sa.getHostCard();
+        final Game game = source.getGame();
         final Player activator = sa.getActivatingPlayer();
-        final PlayerController pc = activator.getController();
-
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
-        final boolean remember = sa.hasParam("RememberAmass");
+        final int amount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
 
         // create army token if needed
@@ -66,7 +62,10 @@ public class AmassEffect extends TokenEffectBase {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 
-            final Card result = TokenInfo.getProtoType("b_0_0_army", sa, activator, false);
+            StringBuilder sb = new StringBuilder("b_0_0_");
+            sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
+
+            final Card result = TokenInfo.getProtoType(sb.toString(), sa, activator, false);
             // need to alter the token to add the Type from the Parameter
             result.setCreatureTypes(Lists.newArrayList(type, "Army"));
             result.setName(type + " Army Token");
@@ -84,29 +83,25 @@ public class AmassEffect extends TokenEffectBase {
             }
         }
 
-        Map<String, Object> params = Maps.newHashMap();
-        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
-        params.put("Amount", 1);
-
         CardCollectionView tgtCards = CardLists.getType(activator.getCardsIn(ZoneType.Battlefield), "Army");
-        tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false, params);
-
         if (tgtCards.isEmpty()) {
             return;
         }
-        GameEntityCounterTable table = new GameEntityCounterTable();
-        for (final Card tgtCard : tgtCards) {
-            tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, table);
-            if (remember) {
-                card.addRemembered(tgtCard);
-            }
+
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
+        params.put("Amount", 1);
+        Card tgt = activator.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), false, params);
+
+        if (sa.hasParam("RememberAmass")) {
+            source.addRemembered(tgt);
         }
+
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
         table.replaceCounterEffect(game, sa, true);
         // change type after counters
-        long ts = game.getNextTimestamp();
-        for (final Card tgtCard : tgtCards) {
-            tgtCard.addChangedCardTypes(CardType.parse(type, true), null, false, EnumSet.noneOf(RemoveType.class), ts, 0, true, false);
-        }
+        tgt.addChangedCardTypes(CardType.parse(type, true), null, false, EnumSet.noneOf(RemoveType.class), game.getNextTimestamp(), 0, true, false);
     }
 
 }

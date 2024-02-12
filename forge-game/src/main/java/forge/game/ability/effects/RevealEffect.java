@@ -82,10 +82,8 @@ public class RevealEffect extends SpellAbilityEffect {
             } else {
                 game.getAction().reveal(revealed, p);
             }
-            for (final Card c : revealed) {
-                if (sa.hasParam("RememberRevealed")) {
-                    host.addRemembered(c);
-                }
+            if (sa.hasParam("RememberRevealed")) {
+                host.addRemembered(revealed);
             }
         }
     }

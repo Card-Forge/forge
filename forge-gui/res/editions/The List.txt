@@ -1345,3 +1345,43 @@ F567 R Puresteel Angel @Lukas Litzsinger
 1337 R Treasure Vault @Johannes Voss
 1338 U Zoetic Cavern @Lars Grant-West
 1339 U Wall of Omens @James Paick
+1340 R Baleful Mastery
+1341 U Bishop of the Bloodstained
+1342 C Burden of Guilt
+1343 M Cavalier of Thorns
+1344 U Combine Chrysalis
+1345 U Consign // Oblivion
+1346 R Death Cloud
+1347 U Duskmantle, House of Shadow
+1348 U Enlisted Wurm
+1349 U Ghost Quarter
+1350 C Gnaw to the Bone
+1351 U Goblin Warchief
+1352 C Hard Evidence
+1353 U High Alert
+1354 R Ixidor, Reality Sculptor
+1355 R Jace, Wielder of Mysteries
+1356 C Krosan Tusker
+1357 C Kuldotha Rebirth
+1358 U Laid to Rest
+1359 U Leonin Relic-Warder
+1360 U Magmaw
+1361 R Mass Hysteria
+1362 U Maverick Thopterist
+1363 U Mentor of the Meek
+1364 C Metalspinner's Puzzleknot
+1365 U Millstone
+1366 U Mistveil Plains
+1367 R Molten Psyche
+1368 R Monologue Tax
+1369 U Mystery Key
+1370 U Nyx Weaver
+1371 C Putrid Warrior
+1372 U Quintorius, Field Historian
+1373 M Ranger-Captain of Eos
+1374 C Shard of Broken Glass
+1375 U Spell Snare
+1376 U Stromkirk Captain
+1377 U Syr Konrad, the Grim
+1378 U Treacherous Terrain
+1379 M Worldspine Wurm

@@ -84,33 +84,43 @@ public class QuestStageEdit extends FormPanel {
     private Box mapFlagGroup;
     private final JSpinner flagSpinner = new JSpinner(new SpinnerNumberModel(1, 1, 1000, 1));
     private Box flagValueGroup;
-    private final JCheckBox anyPOI = new JCheckBox("Any Point of Interest matching");
+    private final JRadioButton anyPOI = new JRadioButton("Any Point of Interest matching tags is valid");
+    private final JRadioButton specificPOI = new JRadioButton("Only a specific Point of Interest is valid");
+    private final ButtonGroup anyPOIGroup = new ButtonGroup();
     private final JCheckBox here = new JCheckBox("Use current map instead of selecting tags");
     private final JCheckBox mixedEnemies = new JCheckBox("Mixture of enemy types matching");
     private final JLabel count1Description = new JLabel("(Count 1 description)");
     private final JLabel count2Description = new JLabel("(Count 2 description)");
     private final JLabel count3Description = new JLabel("(Count 3 description)");
+    private final JLabel count4Description = new JLabel("(Count 4 description)");
     private final JSpinner count1Spinner = new JSpinner(new SpinnerNumberModel(1, 0, 100, 1));
     private final JSpinner count2Spinner = new JSpinner(new SpinnerNumberModel(1, 0, 100, 1));
     private final JSpinner count3Spinner = new JSpinner(new SpinnerNumberModel(1, 0, 100, 1));
+    private final JSpinner count4Spinner = new JSpinner(new SpinnerNumberModel(1, 0, 100, 1));
 
     private final JLabel arenaLabel = new JLabel("Enter the arena and prove your worth. (Note: Please be sure the PoIs selected have an arena)");
+    private final JLabel characterFlagLabel = new JLabel("Have the selected character flag set to a given value. (Caution: You're probably looking for QuestFlag or MapFlag instead)");
     private final JLabel clearLabel = new JLabel("Clear all enemies from the target area.");
+    private final JLabel completeQuestLabel = new JLabel("Complete other quests issued by target POI. Primarily used for busy work as a part of storyline quests.");
     private final JLabel defeatLabel = new JLabel("Defeat a number of enemies of the indicated type.");
     private final JLabel deliveryLabel = new JLabel("Travel to the given destination to deliver an item (not tracked in inventory).");
     private final JLabel escortLabel = new JLabel("Protect your target as they travel to their destination.");
+    private final JLabel eventFinishLabel = new JLabel("Finish (win or lose) tavern events");
+    private final JLabel eventWinLabel = new JLabel("Finish and win tavern events");
+    private final JLabel eventWinMatchLabel = new JLabel("Win individual matches in tavern events");
     private final JLabel fetchLabel = new JLabel("Obtain the requested items (not tracked in inventory).");
     private final JLabel findLabel = new JLabel("Locate the and enter a PoI.");
     private final JLabel gatherLabel = new JLabel("Have the requested item in your inventory (tracked in inventory)");
     private final JLabel giveLabel = new JLabel("Have the requested items removed from your inventory.");
-    private final JLabel haveReputationLabel = new JLabel("Have a minimum reputation in the selected PoI (and enter it)");
+    private final JLabel haveReputationLabel = new JLabel("Have a minimum reputation in the selected PoI");
+    private final JLabel haveReputationInCurrentLocationLabel = new JLabel("Have a minimum reputation in the selected PoI (and be in it)");
     private final JLabel huntLabel = new JLabel("Track down and defeat your target (on the overworld map).");
     private final JLabel leaveLabel = new JLabel("Exit the current PoI and return to the overworld map.");
+    private final JLabel mapFlagLabel = new JLabel("Have a map flag set to a minimum value");
     private final JLabel noneLabel = new JLabel("No visible objective. Use in coordination with hidden parallel objectives to track when to progress");
     private final JLabel patrolLabel = new JLabel("Get close to generated coordinates before starting your next objective");
     private final JLabel rescueLabel = new JLabel("Reach and rescue the target");
     private final JLabel siegeLabel = new JLabel("Travel to the target location and defeat enemies attacking it");
-    private final JLabel mapFlagLabel = new JLabel("Have a map flag set to a minimum value");
     private final JLabel questFlagLabel = new JLabel("Have a global quest flag set to a minimum value");
     private final JLabel travelLabel = new JLabel("Travel to the given destination.");
     private final JLabel useLabel = new JLabel("Use the indicated item from your inventory.");
@@ -150,15 +160,18 @@ public class QuestStageEdit extends FormPanel {
         mapFlagGroup.setVisible(false);
         flagValueGroup.setVisible(false);
         anyPOI.setVisible(false);
+        specificPOI.setVisible(false);
         here.setVisible(false);
         mixedEnemies.setVisible(false);
         enemySelector.setVisible(false);
         count1Description.setVisible(false);
         count2Description.setVisible(false);
         count3Description.setVisible(false);
+        count4Description.setVisible(false);
         count1Spinner.setVisible(false);
         count2Spinner.setVisible(false);
         count3Spinner.setVisible(false);
+        count4Spinner.setVisible(false);
         poiPane.setVisible(false);
         poiTokenLabel.setVisible(false);
         nyi.setVisible(false);
@@ -172,20 +185,47 @@ public class QuestStageEdit extends FormPanel {
             case "Arena":
                 arenaLabel.setVisible(true);
                 poiPane.setVisible(true);
+                count3Description.setText("Arena tournaments to win (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                count4Description.setText("Fail after tournaments not won (only applied if > 0)");
+                count4Description.setVisible(true);
+                count4Spinner.setVisible(true);
                 anyPOI.setVisible(true);
                 here.setVisible(true);
                 poiTokenLabel.setVisible(true);
                 break;
+            case "CharacterFlag":
+                characterFlagLabel.setVisible(true);
+                nyi.setVisible(true);
+                mapFlagGroup.setVisible(true);
+                flagValueGroup.setVisible(true);
+                break;
             case "Clear":
                 clearLabel.setVisible(true);
-                nyi.setVisible(true);
                 poiPane.setVisible(true);
-                count1Description.setText("Target candidate percentile");
+                count1Description.setText("Target % of possible distances");
                 count1Description.setVisible(true);
                 count1Spinner.setVisible(true);
-                count2Description.setText("Percent variance");
+                count2Description.setText("Plus or minus %");
                 count2Description.setVisible(true);
                 count2Spinner.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                break;
+            case "CompleteQuest":
+                completeQuestLabel.setVisible(true);
+                poiPane.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Number of quests to complete (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
                 anyPOI.setVisible(true);
                 here.setVisible(true);
                 poiTokenLabel.setVisible(true);
@@ -193,12 +233,12 @@ public class QuestStageEdit extends FormPanel {
             case "Defeat":
                 defeatLabel.setVisible(true);
                 mixedEnemies.setVisible(true);
-                count1Description.setText("Number to defeat");
-                count1Description.setVisible(true);
-                count1Spinner.setVisible(true);
-                count2Description.setText("Maximum losses");
-                count2Description.setVisible(true);
-                count2Spinner.setVisible(true);
+                count3Description.setText("Matches to win");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                count4Description.setText("Fail after matches not won (only applied if > 0)");
+                count4Description.setVisible(true);
+                count4Spinner.setVisible(true);
                 enemySelector.setVisible(true);
                 break;
             case "Delivery":
@@ -216,6 +256,60 @@ public class QuestStageEdit extends FormPanel {
                 poiPane.setVisible(true);
                 here.setVisible(true);
                 spriteNames.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                break;
+            case "EventFinish":
+                eventFinishLabel.setVisible(true);
+                poiPane.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Events to complete (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                break;
+            case "EventWin":
+                eventWinLabel.setVisible(true);
+                poiPane.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Events to win (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                count4Description.setText("Fail after events not won (only applied if > 0)");
+                count4Description.setVisible(true);
+                count4Spinner.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                break;
+            case "EventWinMatch":
+                eventWinMatchLabel.setVisible(true);
+                poiPane.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Event matches to win (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                count4Description.setText("Fail after matches not won (only applied if > 0)");
+                count4Description.setVisible(true);
+                count4Spinner.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
                 poiTokenLabel.setVisible(true);
                 break;
             case "Fetch":
@@ -250,25 +344,66 @@ public class QuestStageEdit extends FormPanel {
                 here.setVisible(true);
                 break;
             case "HaveReputation":
-                haveReputationLabel.setVisible(true);
                 poiPane.setVisible(true);
                 poiTokenLabel.setVisible(true);
+                anyPOI.setVisible(true);
                 here.setVisible(true);
-                count1Description.setText("Minimum reputation needed");
+                count1Description.setText("Target % of possible distances");
                 count1Description.setVisible(true);
                 count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Minimum reputation needed");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                break;
+            case "haveReputationInCurrentLocation":
+                haveReputationInCurrentLocationLabel.setVisible(true);
+                poiPane.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
                 count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Minimum reputation needed");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
                 break;
             case "Hunt":
                 huntLabel.setVisible(true);
                 enemySelector.setVisible(true);
-                count1Description.setText("Lifespan (seconds to complete hunt before despawn)");
-                count1Description.setVisible(true);
-                count1Spinner.setVisible(true);
-                count1Spinner.setVisible(true);
+                count3Description.setText("Lifespan (seconds to complete hunt before despawn)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
                 break;
             case "Leave":
                 leaveLabel.setVisible(true);
+                poiPane.setVisible(true);
+                poiTokenLabel.setVisible(true);
+                anyPOI.setVisible(true);
+                here.setVisible(true);
+                count1Description.setText("Target % of possible distances");
+                count1Description.setVisible(true);
+                count1Spinner.setVisible(true);
+                count2Description.setText("Plus or minus %");
+                count2Description.setVisible(true);
+                count2Spinner.setVisible(true);
+                count3Description.setText("Number of times to leave before triggering (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
+                break;
+            case "MapFlag":
+                mapFlagLabel.setVisible(true);
+                poiPane.setVisible(true);
+                here.setVisible(true);
+                anyPOI.setVisible(true);
+                mapFlagGroup.setVisible(true);
+                flagValueGroup.setVisible(true);
                 break;
             case "None":
                 noneLabel.setVisible(true);
@@ -298,28 +433,20 @@ public class QuestStageEdit extends FormPanel {
                 enemySelector.setVisible(true);
                 mixedEnemies.setVisible(true);
 
-                count1Description.setText("Time limit (seconds to defeat enemies)");
+                poiPane.setVisible(true);
+                count1Description.setText("Target % of possible distances");
                 count1Description.setVisible(true);
                 count1Spinner.setVisible(true);
-                count1Spinner.setVisible(true);
-
-                count2Description.setText("Minimum # of enemies to defeat");
+                count2Description.setText("Plus or minus %");
                 count2Description.setVisible(true);
                 count2Spinner.setVisible(true);
-                count2Spinner.setVisible(true);
-
-                count3Description.setText("Maximum # of enemies to defeat");
+                count3Description.setText("Number of enemies to defeat");
                 count3Description.setVisible(true);
                 count3Spinner.setVisible(true);
                 count3Spinner.setVisible(true);
-                break;
-            case "MapFlag":
-                mapFlagLabel.setVisible(true);
-                poiPane.setVisible(true);
-                here.setVisible(true);
-                anyPOI.setVisible(true);
-                mapFlagGroup.setVisible(true);
-                flagValueGroup.setVisible(true);
+                count4Description.setText("Time limit (will only fail if > 0)");
+                count4Description.setVisible(true);
+                count4Spinner.setVisible(true);
                 break;
             case "QuestFlag":
                 questFlagLabel.setVisible(true);
@@ -339,6 +466,9 @@ public class QuestStageEdit extends FormPanel {
                 count2Description.setText("Plus or minus %");
                 count2Description.setVisible(true);
                 count2Spinner.setVisible(true);
+                count3Description.setText("Number of times to enter before triggering (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
                 break;
             case "Use":
                 useLabel.setVisible(true);
@@ -349,8 +479,13 @@ public class QuestStageEdit extends FormPanel {
                 here.setVisible(true);
                 poiTokenLabel.setVisible(true);
                 here.setVisible(true);
+                count3Description.setText("Number of times to use triggering (minimum 1)");
+                count3Description.setVisible(true);
+                count3Spinner.setVisible(true);
                 break;
         }
+
+        specificPOI.setVisible(anyPOI.isVisible());
     }
 
     private void changeObjective(){
@@ -377,6 +512,9 @@ public class QuestStageEdit extends FormPanel {
         flagValueGroup = new Box(BoxLayout.Y_AXIS);
         flagValueGroup.add(new JLabel("Flag value to check"));
         flagValueGroup.add(flagSpinner);
+
+        anyPOIGroup.add(anyPOI);
+        anyPOIGroup.add(specificPOI);
 
         JPanel poiSelectorPane = new JPanel();
         poiSelectorPane.setLayout(new BorderLayout());
@@ -441,6 +579,7 @@ public class QuestStageEdit extends FormPanel {
         center.add(mapFlagGroup);
         center.add(flagValueGroup);
         center.add(anyPOI);
+        center.add(specificPOI);
         center.add(mixedEnemies);
         center.add(enemySelector);
         center.add(count1Description);
@@ -449,6 +588,8 @@ public class QuestStageEdit extends FormPanel {
         center.add(count2Spinner);
         center.add(count3Description);
         center.add(count3Spinner);
+        center.add(count4Description);
+        center.add(count4Spinner);
         center.add(poiPane);
         center.add(poiTokenLabel);
 
@@ -547,6 +688,8 @@ public class QuestStageEdit extends FormPanel {
             poiSelector.load(selectedPOI);
         }
         here.getModel().setSelected(currentData.here);
+        anyPOI.getModel().setSelected(currentData.anyPOI);
+        specificPOI.getModel().setSelected(!currentData.anyPOI);
         poiTokenInput.setText(currentData.POIToken);
         poiTokenLabel.setText( "To reference this point of interest: $(poi_" + currentData.id + ")");
 
@@ -561,6 +704,7 @@ public class QuestStageEdit extends FormPanel {
         count1Spinner.getModel().setValue(currentData.count1);
         count2Spinner.getModel().setValue(currentData.count2);
         count3Spinner.getModel().setValue(currentData.count3);
+        count4Spinner.getModel().setValue(currentData.count4);
 
         updating=false;
         setEnabled(true);
@@ -583,6 +727,7 @@ public class QuestStageEdit extends FormPanel {
         currentData.count1 = Integer.parseInt(count1Spinner.getModel().getValue().toString());
         currentData.count2 = Integer.parseInt(count2Spinner.getModel().getValue().toString());
         currentData.count3 = Integer.parseInt(count3Spinner.getModel().getValue().toString());
+        currentData.count4 = Integer.parseInt(count4Spinner.getModel().getValue().toString());
         currentData.mixedEnemies = mixedEnemies.getModel().isSelected();
         currentData.here = here.getModel().isSelected();
         currentData.POIToken = poiTokenInput.getText();
@@ -622,6 +767,7 @@ public class QuestStageEdit extends FormPanel {
         count1Spinner.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
         count2Spinner.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
         count3Spinner.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
+        count4Spinner.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
         mixedEnemies.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
         here.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());
         anyPOI.getModel().addChangeListener(q -> QuestStageEdit.this.updateStage());

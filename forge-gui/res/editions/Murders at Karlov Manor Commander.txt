@@ -10,11 +10,387 @@ ScryfallCode=MKC
 2 M Mirko, Obsessive Theorist @Heonhwa Choe
 3 M Morska, Undersea Sleuth @Ekaterina Burmak
 4 M Nelly Borca, Impulsive Accuser @James Ryman
+5 M Duskana, the Rage Mother @Samuel Perin
+6 M Feather, Radiant Arbiter @Dan Dos Santos
+7 M Marvo, Deep Operative @John Tedrick
+8 M Sophia, Dogged Detective @Campbell White
+9 R Armed with Proof @Serena Malyon
+10 R Immortal Obligation @Nino Vecia
+11 R Merchant of Truth @Carissa Susilo
+12 R Otherworldly Escort @Artur Treffner
+13 R Redemption Arc @Dominik Mayer
+14 R Serene Sleuth @Fay Dalton
+15 R Trouble in Pairs @Fay Dalton
+16 R True Identity @Chris Seaman
+17 R Unexplained Absence @Rockey Chen
+18 R Veiled Ascension @Domenico Cava
+19 R Case of the Shifting Visage @Chris Seaman
+20 R Copy Catchers @Edgar Sánchez Hidalgo
+21 R Detective of the Month @Stella Spente
+22 R Final-Word Phantom @Anthony Devine
+23 R Follow the Bodies @Alfven Ato
+24 R Tangletrove Kelp @Erikas Perl
+25 R Watcher of Hours @Daniel Romanovsky
+26 R Charnel Serenade @Alex Stone
+27 R Eye of Duskmantle @Anthony Devine
+28 R Foreboding Steamboat @Josu Solano
+29 R Unshakable Tail @Sean Murray
+30 R Boltbender @Lars Grant-West
+31 R Havoc Eater @David Szabo
+32 R Hot Pursuit @Michele Giorgi
+33 R Mob Verdict @Domenico Cava
+34 R Prisoner's Dilemma @Serena Malyon
+35 R Showstopping Surprise @David Palumbo
+36 R Tesak, Judith's Hellhound @Anna Podedworna
+37 R Experiment Twelve @Michele Giorgi
+38 R Innocuous Researcher @Simon Dominic
+39 R On the Trail @Erikas Perl
+40 R Printlifter Ooze @David Szabo
+41 R Counterpoint @Brian Valeza
+42 R Knowledge Is Power @Fay Dalton
+43 R Take the Bait @Johan Grenier
+44 R Panoptic Projektor @Alfven Ato
+45 R Ransom Note @Gaboleps
+46 R Ransom Note @Gaboleps
+47 R Ransom Note @Gaboleps
+48 R Ransom Note @Gaboleps
 49 M Kaust, Eyes of the Glade @Volkan Baǵa
 50 M Mirko, Obsessive Theorist @Heonhwa Choe
 51 M Morska, Undersea Sleuth @Ekaterina Burmak
 52 M Nelly Borca, Impulsive Accuser @James Ryman
+53 R Ugin's Mastery @David Astruga
+54 R Aerial Extortionist @Deruchenko Alexander
+55 R Angel of the Ruins @Viko Menezes
+56 R Austere Command @Anna Steinbauer
+57 M Bennie Bracks, Zoologist @Eric Deschamps
+58 R Comeuppance @Igor Krstic
+59 R Darien, King of Kjeldor @Michael Phillippi
+60 R Duelist's Heritage @Lake Hurwitz
+61 R Dusk // Dawn @Kasia 'Kafis' Zielińska
+62 M Elspeth, Sun's Champion @Eric Deschamps
+63 R Exalted Angel @Michael Sutfin
+64 R Farewell @Seb McKinnon
+65 R Fell the Mighty @Raymond Swanland
+66 R Fumigate @Svetlin Velinov
+67 U Ghostly Prison @Daarken
+68 C Gideon's Sacrifice @Chris Rallis
+69 R Hidden Dragonslayer @Anastasia Ovchinnikova
+70 R Keeper of the Accord @Denman Rooke
+71 R Loran of the Third Path @Steven Belledin
+72 U Martial Impetus @Aaron Miller
+73 R Master of Pearls @David Gaillet
+74 R Mastery of the Unseen @Daniel Ljunggren
+75 R Mirror Entity @Zoltan Boros & Gabor Szikszai
+76 R Organic Extinction @Cristi Balanescu
+77 U Orzhov Advokist @Jason A. Engle
+78 U Path to Exile @Todd Lockwood
+79 R Promise of Loyalty @Sara Winters
+80 U Seal of Cleansing @Christopher Moeller
+81 R Search the Premises @Matt Stewart
+82 R Selfless Squire @Tony Foti
+83 R Sevinne's Reclamation @Zoltan Boros
+84 R Smuggler's Share @Aaron Miller
+85 U Soul Snare @Carl Critchlow
+86 R Stalking Leonin @Zoltan Boros
+87 M Sun Titan @Todd Lockwood
+88 U Swords to Plowshares @Jesper Ejsing
+89 U Vow of Duty @Wayne Reynolds
+90 U Wall of Omens @James Paick
+91 R Welcoming Vampire @Lorenzo Mastroianni
+92 R Windborn Muse @Adam Rex
+93 R Winds of Rath @Drew Tucker
+94 R Alandra, Sky Dreamer @Caroline Gariba
+95 R Amphin Mutineer @Nicholas Gregory
+96 C Brainstorm @Willian Murai
+97 R Confirm Suspicions @David Gaillet
+98 C Consider @Zezhou Chen
+99 C Curate @Ryan Valle
+100 C Deep Analysis @Daren Bader
+101 M Dream Eater @Daarken
+102 U Enhanced Surveillance @Grzegorz Rutkowski
+103 C Ephara's Dispersal @Awanqi (Angela Wang)
+104 U Erdwal Illuminator @Erikas Perl
+105 R Ethereal Investigator @Sean Murray
+106 M Finale of Revelation @Johann Bodin
+107 U Junk Winder @Campbell White
+108 R Kappa Cannoneer @Jesper Ejsing
+109 M Mechanized Production @Adam Paquette
+110 R Mission Briefing @Matt Stewart
+111 U Mulldrifter @Eric Fortune
+112 R Nadir Kraken @Dan Scott
+113 U Nightveil Sprite @Uriah Voth
+114 U Ongoing Investigation @Bud Cook
+115 C Otherworldly Gaze @Chris Cold
+116 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss
+117 R Shimmer Dragon @Lie Setiawan
+118 M Sphinx of the Second Sun @Antonio José Manzanedo
+119 R Teferi's Ageless Insight @Kieran Yanner
+120 M Tezzeret, Betrayer of Flesh @Bryan Sola
+121 R Thought Monitor @Martina Pilcerova
+122 U Thoughtbound Phantasm @Johann Bodin
+123 R Vizier of Many Faces @Ryan Yee
+124 U Whirler Rogue @Winona Nelson
+125 U Animate Dead @Anthony Jones
+126 R Black Sun's Zenith @Daniel Ljunggren
+127 R Dogged Detective @Caroline Gariba
+128 M Doom Whisperer @Vincent Proce
+129 M Grave Titan @Nils Hamm
+130 M Massacre Wurm @Jason Chan
+131 U Necromancy @Bastien L. Deharme
+132 R Overseer of the Damned @rk post
+133 R Phyrexian Arena @Martina Fačková
+134 R Pile On @Javier Charro
+135 U Price of Fame @Winona Nelson
+136 U Ravenous Chupacabra @Daarken
+137 R Reanimate @Johann Bodin
+138 M Rise of the Dark Realms @Michael Komarck
+139 U Shriekmaw @Steve Prescott
+140 C Sinister Starfish @Nils Hamm
+141 U Syr Konrad, the Grim @Anna Steinbauer
+142 R Toxic Deluge @Svetlin Velinov
+143 M Twilight Prophet @David Astruga
+144 U Whispering Snitch @Jason Rainville
+145 R Agitator Ant @Igor Kieryluk
+146 M Akroma, Angel of Fury @Daren Bader
+147 M Ashcloud Phoenix @Howard Lyon
+148 R Brash Taunter @Edgar Sánchez Hidalgo
+149 R Chaos Warp @Trevor Claxton
+150 U Curse of Opulence @Kieran Yanner
+151 R Disrupt Decorum @Sidharth Chaturvedi
+152 R Etali, Primal Storm @Raymond Swanland
+153 M Fiendish Duo @Lucas Graciano
+154 U Frontier Warmonger @Livia Prima
+155 R Imperial Hellkite @Matt Cavotta
+156 R Jeska's Will @Izzy
+157 U Kazuul, Tyrant of the Cliffs @Paul Bonner
+158 M Neheb, the Eternal @Chris Rahn
+159 U Rite of the Raging Storm @Svetlin Velinov
+160 R Scourge of the Throne @Michael Komarck
+161 U Shiny Impetus @Svetlin Velinov
+162 R Spectacular Showdown @Aniekan Udofia
+163 R Vengeful Ancestor @Mark Zug
+164 U Vow of Lightning @Randy Vargas
+165 U Ainok Survivalist @Craig J Spearing
+166 R Beast Whisperer @Matt Stewart
+167 U Broodhatch Nantuko @Keith Garletts
+168 M Deathmist Raptor @Filip Burburan
+169 R Den Protector @Viktor Titov
+170 U Graf Mole @Lars Grant-West
+171 M Hooded Hydra @Chase Stone
+172 R Hornet Queen @Martina Pilcerova
+173 R Jolrael, Mwonvuli Recluse @Izzy
+174 R Killer Service @Simon Dominic
+175 S Krosan Cloudscraper @Ron Spears
+176 U Krosan Colossus @Kev Walker
+177 C Nantuko Vigilante @Alex Horley-Orlandelli
+178 C Nature's Lore @Julie Dillon
+179 R Obscuring Aether @Min Yum
+180 R Ohran Frostfang @Torstein Nordstrand
+181 R Return of the Wildspeaker @Chris Rallis
+182 R Root Elemental @Anthony S. Waters
+183 C Sakura-Tribe Elder @Anastasia Ovchinnikova
+184 U Salt Road Ambushers @Joseph Meehan
+185 R Saryth, the Viper's Fang @Igor Kieryluk
+186 R Seedborn Muse @Adam Rex
+187 R Temur War Shaman @Raymond Swanland
+188 R Thelonite Hermit @Chippy
+189 U Three Visits @Yeong-Hao Han
+190 R Tireless Tracker @Eric Deschamps
+191 R Toski, Bearer of Secrets @Jason Rainville
+192 R Trail of Mystery @Raymond Swanland
+193 U Ulvenwald Mysteries @Marzena Nereida Piwowar
+194 M Whisperwood Elemental @Raymond Swanland
+195 C Wild Growth @Tony Szczudlo
+196 U Wilderness Reclamation @Tyler Walpole
+197 U Yedora, Grave Gardener @Svetlin Velinov
+198 M Adrix and Nev, Twincasters @Andrew Mar
+199 M Anya, Merciless Angel @Alisa Lee
+200 R Baleful Strix @Nils Hamm
+201 R Boros Reckoner @Howard Lyon
+202 M Chulane, Teller of Tales @Victor Adame Minguez
+203 R Connive // Concoct @Dan Scott
+204 R Decimate @Zoltan Boros
+205 R Deflecting Palm @Eric Deschamps
+206 U Dimir Spybug @James Paick
+207 U Discovery // Dispersal @Mark Behm
+208 U Disinformation Campaign @Anthony Palumbo
+209 R Disorder in the Court @Zoltan Boros
+210 M Esix, Fractal Bloom @Chase Stone
+211 R Gisela, Blade of Goldnight @Jason Chan
+212 M Hydroid Krasis @Jason Felix
+213 M Koma, Cosmos Serpent @Jesper Ejsing
+214 R Lazav, the Multifarious @Yongjae Choi
+215 R Lonis, Cryptozoologist @Andrew Mar
+216 R Master of Death @John Stanko
+217 C Notion Rain @Lius Lasahido
+218 R Selvala, Explorer Returned @Tyler Jacobson
+219 M Sidar Kondo of Jamuraa @Ryan Alexander Lee
+220 C Wavesifter @Nils Hamm
+221 R Academy Manufactor @Campbell White
+222 R Ancient Stone Idol @Josh Hass
+223 C Arcane Signet @Dan Scott
+224 U Azorius Signet @Raoul Vitale
+225 U Bloodthirsty Blade @Jason Kang
+226 U Dimir Signet @Raoul Vitale
+227 U Everflowing Chalice @Steve Argyle
+228 U Fellwar Stone @John Avon
+229 R Idol of Oblivion @Piotr Dura
+230 R Inspiring Statuary @Kirsten Zirngibl
+231 R Lifecrafter's Bestiary @Izzy
+232 U Mind Stone @Adam Rex
+233 R Nettlecyst @Vincent Proce
+234 R Psychosis Crawler @Stephan Martiniere
+235 R Scroll of Fate @Piotr Dura
+236 U Simic Signet @Mike Sass
+237 U Sol Ring @Mike Bierek
+238 R Solemn Simulacrum @Dan Scott
+239 R Steel Hellkite @James Paick
+240 U Talisman of Conviction @Lindsey Look
+241 U Talisman of Curiosity @Lindsey Look
+242 U Talisman of Dominance @Mike Dringenberg
+243 U Talisman of Progress @Mike Dringenberg
+244 U Talisman of Unity @Mike Dringenberg
+245 U Thought Vessel @rk post
+246 R Tome of Legends @Mila Pesic
+247 U Access Tunnel @Alayna Danner
+248 U Ash Barrens @Jonas De Ro
+249 C Azorius Chancery @John Avon
+250 C Bojuka Bog @Howard Lyon
+251 U Boros Garrison @John Avon
+252 R Canopy Vista @Adam Paquette
+253 R Castle Ardenvale @Volkan Baǵa
+254 R Choked Estuary @Vincent Proce
+255 R Cinder Glade @Adam Paquette
+256 C Command Tower @Ryan Yee
+257 R Darkwater Catacombs @Monte Michael Moore
+258 U Dimir Aqueduct @John Avon
+259 R Drownyard Temple @John Avon
+260 R Exotic Orchard @Steven Belledin
+261 R Fetid Pools @Jonas De Ro
+262 R Fortified Village @Cliff Childs
+263 R Furycalm Snarl @Sam Burley
+264 R Game Trail @Adam Paquette
+265 U Gruul Turf @John Avon
+266 R Hostile Desert @Josh Hass
+267 R Irrigated Farmland @Jonas De Ro
+268 U Jungle Shrine @Wayne Reynolds
+269 R Kessig Wolf Run @Eytan Zana
+270 R Kher Keep @Titus Lunter
+271 U Krosan Verge @Ruxing Gao
+272 R Labyrinth of Skophos @Jonas De Ro
+273 U Lonely Sandbar @Heather Hudson
+274 R Mossfire Valley @John Avon
+275 R Mosswort Bridge @Jeremy Jarvis
+276 U Myriad Landscape @Richard Wright
+277 C Mystic Sanctuary @Randy Vargas
+278 R Needle Spires @Jonas De Ro
+279 C Path of Ancestry @Alayna Danner
+280 U Port of Karfell @Mauricio Calle
+281 R Prairie Stream @Adam Paquette
+282 U Reliquary Tower @Jesper Ejsing
+283 R River of Tears @Chris J. Anderson
+284 U Rogue's Passage @Christine Choi
+285 C Sacred Peaks @Kamila Szutenberg
+286 R Scattered Groves @Christine Choi
+287 R Scavenger Grounds @Steven Belledin
+288 U Seaside Citadel @Volkan Baǵa
+289 C Secluded Steppe @Heather Hudson
+290 U Selesnya Sanctuary @John Avon
+291 R Sheltered Thicket @Sung Choi
+292 R Shrine of the Forsaken Gods @Daniel Ljunggren
+293 U Simic Growth Chamber @John Avon
+294 R Skycloud Expanse @Rob Alexander
+295 R Slayers' Stronghold @Karl Kopinski
+296 R Spire of Industry @John Avon
+297 R Sungrass Prairie @Ron Spencer
+298 U Sunhome, Fortress of the Legion @Martina Pilcerova
+299 R Sunken Hollow @Adam Paquette
+300 U Tainted Isle @Alan Pollack
+301 R Temple of Abandon @Adam Paquette
+302 R Temple of Enlightenment @Piotr Dura
+303 R Temple of Mystery @Piotr Dura
+304 R Temple of Plenty @Chris Ostrowski
+305 U Temple of the False God @James Zapata
+306 R Temple of Triumph @Piotr Dura
+307 R Throne of the High City @Titus Lunter
+308 C Tocasia's Dig Site @Nadia Hurianova
+309 C Tranquil Thicket @Heather Hudson
+310 R War Room @Milivoj Ćeran
+311 U Zoetic Cavern @Lars Grant-West
+312 M Duskana, the Rage Mother @Samuel Perin
+313 M Feather, Radiant Arbiter @Dan Dos Santos
 314 M Kaust, Eyes of the Glade @Volkan Baǵa
+315 M Marvo, Deep Operative @John Tedrick
 316 M Mirko, Obsessive Theorist @Heonhwa Choe
 317 M Morska, Undersea Sleuth @Ekaterina Burmak
 318 M Nelly Borca, Impulsive Accuser @James Ryman
+319 M Sophia, Dogged Detective @Campbell White
+320 R Armed with Proof @Serena Malyon
+321 R Immortal Obligation @Nino Vecia
+322 R Merchant of Truth @Carissa Susilo
+323 R Otherworldly Escort @Artur Treffner
+324 R Redemption Arc @Dominik Mayer
+325 R Serene Sleuth @Fay Dalton
+326 R Trouble in Pairs @Fay Dalton
+327 R True Identity @Chris Seaman
+328 R Unexplained Absence @Rockey Chen
+329 R Veiled Ascension @Domenico Cava
+330 R Copy Catchers @Edgar Sánchez Hidalgo
+331 R Detective of the Month @Stella Spente
+332 R Final-Word Phantom @Anthony Devine
+333 R Follow the Bodies @Alfven Ato
+334 R Tangletrove Kelp @Erikas Perl
+335 R Watcher of Hours @Daniel Romanovsky
+336 R Charnel Serenade @Alex Stone
+337 R Eye of Duskmantle @Anthony Devine
+338 R Foreboding Steamboat @Josu Solano
+339 R Unshakable Tail @Sean Murray
+340 R Boltbender @Lars Grant-West
+341 R Havoc Eater @David Szabo
+342 R Hot Pursuit @Michele Giorgi
+343 R Mob Verdict @Domenico Cava
+344 R Prisoner's Dilemma @Serena Malyon
+345 R Showstopping Surprise @David Palumbo
+346 R Tesak, Judith's Hellhound @Anna Podedworna
+347 R Experiment Twelve @Michele Giorgi
+348 R Innocuous Researcher @Simon Dominic
+349 R On the Trail @Erikas Perl
+350 R Printlifter Ooze @David Szabo
+351 R Counterpoint @Brian Valeza
+352 R Knowledge Is Power @Fay Dalton
+353 R Take the Bait @Johan Grenier
+354 R Panoptic Projektor @Alfven Ato
+355 R Ransom Note @Gaboleps
+356 R Ransom Note @Gaboleps
+357 R Ransom Note @Gaboleps
+358 R Ransom Note @Gaboleps
+
+[tokens]
+b_0_0_phyrexian_germ
+b_2_2_zombie
+c_10_10_eldrazi
+c_6_12_a_construct_trample
+c_a_clue_draw
+c_a_food_sac
+c_a_gold_sac
+c_a_treasure_sac
+g_1_1_insect
+g_1_1_insect_flying_deathtouch
+g_1_1_saproling
+g_1_1_snake
+g_2_2_cat
+g_4_4_rhino_warrior
+kobolds_of_kher_keep
+komas_coil
+lightning_rager
+r_3_3_ogre
+tiny
+u_1_1_tentacle
+u_2_2_drake_flying
+u_4_3_salamander_warrior
+w_1_1_human_soldier
+w_1_1_soldier
+w_1_1_spirit_flying
+
+[other]
+embalm_vizier_of_many_faces

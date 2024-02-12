@@ -360,7 +360,7 @@ ScryfallCode=SCD
 352 L Forest @Titus Lunter
 
 [tokens]
-b_0_0_army
+b_0_0_zombie_army
 b_2_2_zombie
 b_2_2_zombie_knight_menace
 b_x_x_demon_flying

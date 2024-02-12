@@ -299,7 +299,6 @@ public class Combat {
             } else {
                 return def.getController();
             }
-
         }
 
         return null;
@@ -522,7 +521,7 @@ public class Combat {
      * @param blocker the blocking creature.
      */
     public void addBlockerToDamageAssignmentOrder(Card attacker, Card blocker) {
-    	final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
+        final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
     	if (oldBlockers == null || oldBlockers.isEmpty()) {
    			blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blocker));
     	} else {
@@ -816,24 +815,21 @@ public class Combat {
                     defender = getDefenderPlayerByAttacker(attacker);
                 }
 
-                assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) &&
-                        getDefendersCreatures().size() > 0 &&
-                        attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
-                                "a creature defending player controls.") &&
+                assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) && getDefendersCreatures().size() > 0 &&
+                        attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.") &&
                         assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
-                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
-                                        CardTranslation.getTranslatedName(attacker.getName())), null);
-                        if (divideCombatDamageAsChoose) {
-                            if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                                orderedBlockers = getDefendersCreatures();
-                            } else {
-                                for (Card c : getDefendersCreatures()) {
-                                    if (!orderedBlockers.contains(c)) {
-                                        orderedBlockers.add(c);
-                                    }
-                                }
+                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature", CardTranslation.getTranslatedName(attacker.getName())), null);
+                if (divideCombatDamageAsChoose) {
+                    if (orderedBlockers == null || orderedBlockers.isEmpty()) {
+                        orderedBlockers = getDefendersCreatures();
+                    } else {
+                        for (Card c : getDefendersCreatures()) {
+                            if (!orderedBlockers.contains(c)) {
+                                orderedBlockers.add(c);
                             }
                         }
+                    }
+                }
             }
 
             assignedDamage = true;

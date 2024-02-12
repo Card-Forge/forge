@@ -467,6 +467,10 @@ public class WrappedAbility extends Ability {
             }
         }
 
+        if (!regtrig.checkResolvedLimit(getActivatingPlayer())) {
+            return;
+        }
+
         if (regtrig.hasParam("ResolvingCheck")) {
             // rare cases: Hidden Predators (state trigger, but have "Intervening If" to check IsPresent2) etc.
             Map<String, String> recheck = Maps.newHashMap();

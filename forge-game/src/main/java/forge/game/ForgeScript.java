@@ -221,6 +221,8 @@ public class ForgeScript {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
+        } else if (property.equals("Disturb")) {
+            return sa.isDisturb();
         } else if (property.equals("Flashback")) {
             return sa.isFlashBackAbility();
         } else if (property.equals("Jumpstart")) {
@@ -235,6 +237,10 @@ public class ForgeScript {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
+        } else if (property.equals("ManifestUp")) {
+            return sa.isManifestUp();
+        } else if (property.equals("isCastFaceDown")) {
+            return sa.isCastFaceDown();
         } else if (property.equals("Modular")) {
             return sa.hasParam("Modular");
         } else if (property.equals("Equip")) {
@@ -264,6 +270,8 @@ public class ForgeScript {
             if (sa.getChapter() == sa.getHostCard().getCounters(CounterEnumType.LORE)) {
                 return false;
             }
+        } else if (property.equals("CumulativeUpkeep")) {
+            return sa.isCumulativeUpkeep();
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {

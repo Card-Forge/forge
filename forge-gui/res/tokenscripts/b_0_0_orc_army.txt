@@ -1,6 +1,6 @@
-Name:Army Token
+Name:Orc Army Token
 ManaCost:no cost
-Types:Creature Army
+Types:Creature Orc Army
 Colors:black
 PT:0/0
 Oracle:

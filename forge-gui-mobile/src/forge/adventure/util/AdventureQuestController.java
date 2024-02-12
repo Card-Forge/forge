@@ -12,6 +12,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
+import forge.adventure.world.WorldSave;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -332,6 +333,7 @@ public class AdventureQuestController implements Serializable {
         AdventureQuestEvent event = new AdventureQuestEvent();
         event.type = AdventureQuestEventType.ENTERPOI;
         event.poi = arrivedAt;
+        event.count3 = WorldSave.getCurrentSave().getPointOfInterestChanges(arrivedAt.getID()).getMapReputation();
         for(AdventureQuestData currentQuest : Current.player().getQuests()) {
             currentQuest.updateStages(event);
         }

@@ -1,0 +1,12 @@
+Name:Mistway Spy
+ManaCost:U
+Types:Creature Merfolk Detective
+PT:1/1
+K:Flying
+K:Disguise:1 U
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, until end of turn, whenever a creature you control deals combat damage to a player, investigate.
+SVar:TrigEffect:DB$ Effect | Triggers$ AttackTrig
+SVar:AttackTrig:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, investigate.
+SVar:TrigInvestigate:DB$ Investigate | Defined$ You
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue|Treasure
+Oracle:Flying\nDisguise {1}{U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Mistway Spy is turned face up, until end of turn, whenever a creature you control deals combat damage to a player, investigate.

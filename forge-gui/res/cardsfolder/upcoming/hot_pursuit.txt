@@ -1,0 +1,11 @@
+Name:Hot Pursuit
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect target creature an opponent controls. As long as CARDNAME remains on the battlefield, that creature is also goaded.
+SVar:TrigSuspect:DB$ AlterAttribute | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Attributes$ Suspected | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ IsGoaded | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | Duration$ UntilHostLeavesPlay
+SVar:IsGoaded:Mode$ Continuous | Affected$ Creature.IsRemembered | Goad$ True | Description$ As long as EFFECTSOURCE remains on the battlefield, that creature is also goaded.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ PlayerCountHasLost$Amount | SVarCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ At the beginning of combat on your turn, if two or more players have lost the game, gain control of all goaded and/or suspected creatures until end of turn. Untap them. They gain haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | AllValid$ Creature.IsGoaded,Creature.IsSuspected | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+AI:RemoveDeck:Random
+Oracle:When Hot Pursuit enters the battlefield, suspect target creature an opponent controls. As long as Hot Pursuit remains on the battlefield, that creature is also goaded.\nAt the beginning of combat on your turn, if two or more players have lost the game, gain control of all goaded and/or suspected creatures until end of turn. Untap them. They gain haste until end of turn.

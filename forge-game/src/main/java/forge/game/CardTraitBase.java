@@ -20,6 +20,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -86,6 +87,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return mapParams.get(key);
     }
 
+    public String getOriginalParam(String key) {
+        return originalMapParams.get(key);
+    }
+
     public boolean hasParam(String key) {
         return mapParams.containsKey(key);
     }
@@ -141,6 +146,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.hostCard = c;
     }
 
+    public boolean isKeyword(Keyword kw) {
+        return this.keyword != null && this.keyword.getKeyword() == kw;
+    }
     public KeywordInterface getKeyword() {
         return this.keyword;
     }
@@ -229,10 +237,11 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     public boolean matchesValidParam(String param, final Object o, final Card srcCard) {
+        boolean result = hasParam("Invert" + param);
         if (hasParam(param) && !matchesValid(o, getParam(param).split(","), srcCard)) {
-            return false;
+            return result;
         }
-        return true;
+        return !result;
     }
 
     public boolean matchesValidParam(String param, final Object o) {
@@ -531,31 +540,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return true;
     }
 
-    public void changeText() {
-        // copy changed text words into card trait there
-        this.changedTextColors = getHostCard().getChangedTextColorWords();
-        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
-
-        for (final String key : this.mapParams.keySet()) {
-            final String value = this.originalMapParams.get(key), newValue;
-            if (noChangeKeys.contains(key)) {
-                continue;
-            } else if (descriptiveKeys.contains(key)) {
-                // change descriptions differently
-                newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
-            } else if (this.getHostCard().hasSVar(value)) {
-                // don't change literal SVar names!
-                newValue = null;
-            } else {
-                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
-            }
-
-            if (newValue != null) {
-                this.mapParams.put(key, newValue);
-            }
-        }
-    }
-
     @Override
     public CardView getCardView() {
         return CardView.get(hostCard);
@@ -694,9 +678,37 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.originalMapParams = Maps.newHashMap(this.mapParams);
     }
 
+    public void changeText() {
+        // copy changed text words into card trait there
+        this.changedTextColors = getHostCard().getChangedTextColorWords();
+        this.changedTextTypes = getHostCard().getChangedTextTypeWords();
+
+        for (final String key : this.mapParams.keySet()) {
+            final String value = this.originalMapParams.get(key), newValue;
+            if (noChangeKeys.contains(key)) {
+                continue;
+            } else if (descriptiveKeys.contains(key)) {
+                // change descriptions differently
+                newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
+            } else if (this.getHostCard().hasSVar(value)) {
+                // don't change literal SVar names!
+                newValue = null;
+            } else {
+                newValue = AbilityUtils.applyAbilityTextChangeEffects(value, this);
+            }
+
+            if (newValue != null) {
+                this.mapParams.put(key, newValue);
+            }
+        }
+    }
+
     protected void copyHelper(CardTraitBase copy, Card host) {
+        copyHelper(copy, host, false);
+    }
+    protected void copyHelper(CardTraitBase copy, Card host, boolean keepTextChanges) {
         copy.originalMapParams = Maps.newHashMap(originalMapParams);
-        copy.mapParams = Maps.newHashMap(originalMapParams);
+        copy.mapParams = Maps.newHashMap(keepTextChanges ? mapParams : originalMapParams);
         copy.setSVars(sVars);
         copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet

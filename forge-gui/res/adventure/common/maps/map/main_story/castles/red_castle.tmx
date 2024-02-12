@@ -68,7 +68,7 @@
     <property name="waypoints" value="76,75,76,84,81,82,83,82,79,80,78,77"/>
    </properties>
   </object>
-  <object id="55" template="../../../obj/gate.tx" x="325" y="676" width="17" height="16">
+  <object id="55" template="../../../obj/gate.tx" x="367.698" y="638.559" width="17" height="16">
    <properties>
     <property name="dialog">[
 	{

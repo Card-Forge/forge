@@ -574,6 +574,9 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
+        copySpellAbility(from, to, host, p, lki, false);
+    }
+    public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
         if (from.usesTargeting()) {
             to.setTargetRestrictions(from.getTargetRestrictions());
         }
@@ -581,16 +584,16 @@ public class CardFactory {
         to.setStackDescription(from.getOriginalStackDescription());
 
         if (from.getSubAbility() != null) {
-            to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, p, lki));
+            to.setSubAbility((AbilitySub) from.getSubAbility().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, SpellAbility> e : from.getAdditionalAbilities().entrySet()) {
-            to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki));
+            to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
             to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
                 @Override
                 public AbilitySub apply(AbilitySub input) {
-                    return (AbilitySub) input.copy(host, p, lki);
+                    return (AbilitySub) input.copy(host, p, lki, keepTextChanges);
                 }
             }));
         }

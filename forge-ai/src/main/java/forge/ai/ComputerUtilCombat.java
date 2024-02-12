@@ -1231,7 +1231,7 @@ public class ComputerUtilCombat {
             }
 
             // Extra check for the Exalted trigger in case we're declaring more than one attacker
-            if (combat != null && trigger.getKeyword() != null && trigger.getKeyword().getKeyword() == Keyword.EXALTED) {
+            if (combat != null && trigger.isKeyword(Keyword.EXALTED)) {
                 if (!combat.getAttackers().isEmpty() && !combat.getAttackers().contains(attacker)) {
                     continue;
                 }

@@ -1539,8 +1539,7 @@ public class AiController {
         boolean mustRespond = false;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
-            mustRespond |= top.isTrigger() && top.getTrigger().getKeyword() != null
-                    && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
+            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
 
         if (topOwnedByAI) {

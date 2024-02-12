@@ -206,6 +206,8 @@ public enum CounterEnumType {
     HUSK("HUSK", 227, 212, 173),
 
     ICE("ICE", 0, 239, 255),
+    
+    IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
 
@@ -400,6 +402,8 @@ public enum CounterEnumType {
     TREASURE("TRSUR", 255, 184, 0),
 
     UNITY("UNITY", 242, 156, 255),
+
+    UNLOCK("UNLCK", 222, 146, 205),
 
     VALOR("VALOR", 252, 250, 222),
 

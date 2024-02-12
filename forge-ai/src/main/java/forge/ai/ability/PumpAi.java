@@ -313,6 +313,7 @@ public class PumpAi extends PumpAiBase {
                 attack = root.getXManaCostPaid();
             }
         } else {
+            // TODO add Double
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
             if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 attack--; // the card will be spent casting the spell, so actual power is 1 less

@@ -1,0 +1,10 @@
+Name:Cryptex
+ManaCost:2
+Types:Artifact
+A:AB$ Mana | Cost$ T CollectEvidence<3> | Produced$ Any | SubAbility$ DBPutCounter | SpellDescription$ Add one mana of any color. Put an unlock counter on CARDNAME. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ UNLOCK 
+A:AB$ Surveil | Cost$ Sac<1/CARDNAME> | Amount$ 3 | SubAbility$ DBDraw | IsPresent$ Card.Self+counters_GE5_UNLOCK | SpellDescription$ Surveil 3, then draw three cards. Activate only if CARDNAME has five or more unlock counters on it.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBGainLife 
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$Counters|Sacrifice|Surveil
+Oracle:{T}, Collect evidence 3: Add one mana of any color. Put an unlock counter on Cryptex. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)\nSacrifice Cryptex: Surveil 3, then draw three cards. Activate only if Cryptex has five or more unlock counters on it.

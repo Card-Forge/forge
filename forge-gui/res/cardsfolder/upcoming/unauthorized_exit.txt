@@ -1,0 +1,7 @@
+Name:Unauthorized Exit
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | SubAbility$ DBSurveil | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Return target nonland permanent to its owner's hand.\nSurveil 1. (Look at the top card of your library. You may put it into your graveyard.)
