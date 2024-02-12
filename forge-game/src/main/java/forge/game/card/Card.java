@@ -1563,9 +1563,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
                 getGame().getTriggerHandler().runTrigger(
                         TriggerType.CounterAdded, AbilityKey.newMap(runParams), false);
-
-                if (cause != null) {
-                }
             }
             if (addAmount > 0) {
                 runParams.put(AbilityKey.CounterAmount, addAmount);
