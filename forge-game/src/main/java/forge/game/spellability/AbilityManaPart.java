@@ -326,6 +326,10 @@ public class AbilityManaPart implements java.io.Serializable {
         handler.registerOneTrigger(trig);
     }
 
+    public SpellAbility getSourceSA() {
+        return sVarHolder instanceof SpellAbility ? (SpellAbility) sVarHolder : null;
+    }
+
     /**
      * <p>
      * getManaRestrictions.
