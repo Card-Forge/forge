@@ -1,0 +1,9 @@
+Name:Lavinia, Foil to Conspiracy
+ManaCost:1 WU WU
+Types:Legendary Creature Human Detective
+PT:2/3
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | OpponentTurn$ True | SpellDescription$ Add {C}{C}. Activate only during an opponent's turn.
+Oracle:Vigilance\nWhenever you cast your second spell each turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{T}: Add {C}{C}. Activate only during an opponent's turn.
