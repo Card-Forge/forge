@@ -592,7 +592,7 @@ public class ComputerUtilMana {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            ai.getManaPool().refundMana(manaSpentToPay);
             CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
@@ -600,7 +600,7 @@ public class ComputerUtilMana {
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, true);
         if (manaAbilityMap.isEmpty()) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            ai.getManaPool().refundMana(manaSpentToPay);
             CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
@@ -648,7 +648,7 @@ public class ComputerUtilMana {
         }
 
         CostPayment.handleOfferings(sa, true, cost.isPaid());
-        ManaPool.refundMana(manaSpentToPay, ai, sa);
+        ai.getManaPool().refundMana(manaSpentToPay);
 
         return manaSources;
     }
@@ -855,7 +855,7 @@ public class ComputerUtilMana {
 
         // The cost is still unpaid, so refund the mana and report
         if (!cost.isPaid()) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            manapool.refundMana(manaSpentToPay);
             if (test) {
                 resetPayment(paymentList);
             } else {
@@ -865,7 +865,7 @@ public class ComputerUtilMana {
         }
 
         if (test) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            manapool.refundMana(manaSpentToPay);
             resetPayment(paymentList);
         }
 
