@@ -87,7 +87,7 @@ public enum TriggerType {
     LifeLostAll(TriggerLifeLostAll.class),
     LosesGame(TriggerLosesGame.class),
     ManaAdded(TriggerManaAdded.class),
-    Mentor(TriggerMentor.class),
+    Mentored(TriggerMentored.class),
     MilledAll(TriggerMilledAll.class),
     Mutates(TriggerMutates.class),
     NewGame(TriggerNewGame.class),

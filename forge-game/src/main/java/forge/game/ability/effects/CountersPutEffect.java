@@ -553,9 +553,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.isKeyword(Keyword.MENTOR)) {
-                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(sa.getHostCard());
-                        runParams.put(AbilityKey.Mentors, gameCard);
-                        game.getTriggerHandler().runTrigger(TriggerType.Mentor, runParams, false);
+                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
+                        runParams.put(AbilityKey.Source, sa.getHostCard());
+                        game.getTriggerHandler().runTrigger(TriggerType.Mentored, runParams, false);
                     }
 
                     game.updateLastStateForCard(gameCard);

@@ -86,7 +86,6 @@ public enum AbilityKey {
     LifeGained("LifeGained"),
     Map("Map"),
     Mana("Mana"),
-    Mentors("Mentors"),
     MergedCards("MergedCards"),
     Mode("Mode"),
     Modifier("Modifier"),
