@@ -3,7 +3,7 @@ ManaCost:1 GU GU
 Types:Legendary Creature Snake Elf Detective
 PT:1/2
 K:Evolve
-T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more +1/+1 counters are put on NICKNAME investigate that many times.
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more +1/+1 counters are put on NICKNAME, investigate that many times.
 SVar:TrigInvestigate:DB$ Investigate | Num$ X | Defined$ You
 SVar:X:TriggerCount$Amount
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, put a +1/+1 counter on another target creature you control.
