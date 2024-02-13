@@ -1,0 +1,13 @@
+Name:Polygraph Orb
+ManaCost:4 B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | DestinationZone2$ Graveyard | NoReveal$ True | ChangeNum$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+A:AB$ GenericChoice | Defined$ Opponent | TempRemember$ Chooser | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost | Cost$ 2 T CollectEvidence<3> | SpellDescription$ Each opponent loses 3 life unless they discard a card or sacrifice a creature. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
+SVar:Discard:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
+SVar:SacNonland:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Creature> | UnlessPayer$ Remembered
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$Graveyard
+Oracle:When Polygraph Orb enters the battlefield, look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.\n{2}, {T}, Collect evidence 3: Each opponent loses 3 life unless they discard a card or sacrifice a creature. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)
