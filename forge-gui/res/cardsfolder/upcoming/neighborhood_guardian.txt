@@ -1,0 +1,7 @@
+Name:Neighborhood Guardian
+ManaCost:1 W
+Types:Creature Unicorn
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, target creature you control gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever another creature with power 2 or less enters the battlefield under your control, target creature you control gets +1/+1 until end of turn.

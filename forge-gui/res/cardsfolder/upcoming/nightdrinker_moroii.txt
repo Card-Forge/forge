@@ -1,0 +1,9 @@
+Name:Nightdrinker Moroii
+ManaCost:3 B
+Types:Creature Vampire
+PT:4/2
+K:Flying
+K:Disguise:B B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
+Oracle:Flying\nWhen Nightdrinker Moroii enters the battlefield, you lose 3 life.\nDisguise {B}{B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
