@@ -5,6 +5,7 @@ import java.util.Set;
 
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -24,6 +25,14 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
 
         if (overridingAbility != null) {
             overridingAbility.setHostCard(c);
+        }
+    }
+
+    @Override
+    public void setKeyword(final KeywordInterface kw) {
+        super.setKeyword(kw);
+        if (overridingAbility != null) {
+            overridingAbility.setKeyword(kw);
         }
     }
 

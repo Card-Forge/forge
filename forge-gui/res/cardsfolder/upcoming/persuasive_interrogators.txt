@@ -1,0 +1,11 @@
+Name:Persuasive Interrogators
+ManaCost:4 B B
+Types:Creature Gorgon Detective
+PT:5/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever you sacrifice a Clue, target opponent gets two poison counters. (A player with ten or more poison counters loses the game.)
+SVar:TrigPoison:DB$ Poison | ValidTgts$ Opponent | Num$ 2
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+DeckHints:Ability$Sacrifice & Type$Clue
+Oracle:When Persuasive Interrogators enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, target opponent gets two poison counters. (A player with ten or more poison counters loses the game.)

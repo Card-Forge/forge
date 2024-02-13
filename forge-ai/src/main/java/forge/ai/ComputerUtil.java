@@ -931,8 +931,8 @@ public class ComputerUtil {
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && (source.hasParam("Devour") || source.hasParam("Exploit"))) {
-            if (source.hasParam("Exploit")) {
+        if (isOptional && (source.isKeyword(Keyword.DEVOUR) || source.isKeyword(Keyword.EXPLOIT))) {
+            if (source.isKeyword(Keyword.EXPLOIT)) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
                         final SpellAbility exSA = t.ensureAbility().copy(ai);

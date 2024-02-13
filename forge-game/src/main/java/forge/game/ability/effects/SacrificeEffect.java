@@ -28,6 +28,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
@@ -89,8 +90,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
-        final boolean devour = sa.hasParam("Devour");
-        final boolean exploit = sa.hasParam("Exploit");
+        final boolean devour = sa.isKeyword(Keyword.DEVOUR);
+        final boolean exploit = sa.isKeyword(Keyword.EXPLOIT);
         final boolean sacEachValid = sa.hasParam("SacEachValid");
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
