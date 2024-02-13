@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5
 K:Crew:4
 SVar:HasAttackEffect:TRUE
-Oracle:Void Shields — Protection from mana value 3 or less.\nGatling Blaster — Whenever Reaver Titan attacks, it deals 5 damage to each opponent.\Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
+Oracle:Void Shields — Protection from mana value 3 or less.\nGatling Blaster — Whenever Reaver Titan attacks, it deals 5 damage to each opponent.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
