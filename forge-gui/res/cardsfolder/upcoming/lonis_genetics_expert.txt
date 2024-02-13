@@ -1,0 +1,13 @@
+Name:Lonis, Genetics Expert
+ManaCost:1 GU GU
+Types:Legendary Creature Snake Elf Detective
+PT:1/2
+K:Evolve
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more +1/+1 counters are put on NICKNAME, investigate that many times.
+SVar:TrigInvestigate:DB$ Investigate | Num$ X | Defined$ You
+SVar:X:TriggerCount$Amount
+T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, put a +1/+1 counter on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterNum$ 1
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)\nWhenever one or more +1/+1 counters are put on Lonis, investigate that many times.\nWhenever you sacrifice a Clue, put a +1/+1 counter on another target creature you control.
