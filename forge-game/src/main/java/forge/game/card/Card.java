@@ -1531,6 +1531,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (fireEvents) {
             getGame().updateLastStateForCard(this);
 
+            final SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
+
             // Not sure why firing events wraps EVERYTHING ins
 
             final int powerBonusBefore = getPowerBonusFromCounters();
@@ -1567,6 +1569,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 runParams.put(AbilityKey.FirstTime, addedThisTurn == 0);
                 getGame().getTriggerHandler().runTrigger(
                         TriggerType.CounterAddedOnce, AbilityKey.newMap(runParams), false);
+                if (cause != null) {
+                    // 702.100b A creature “evolves” when one or more +1/+1 counters are put on it as a result of its evolve ability resolving.
+                    if (cause.isKeyword(Keyword.EVOLVE) && counterType.is(CounterEnumType.P1P1)) {
+                        getGame().getTriggerHandler().runTrigger(TriggerType.Evolved, AbilityKey.mapFromCard(this), false);
+                    }
+
+                    // 702.149c Some creatures with training have abilities that trigger when they train.
+                    // “When this creature trains” means “When a resolving training ability puts a +1/+1 counter on this creature.”
+                    if (cause.isKeyword(Keyword.TRAINING) && counterType.is(CounterEnumType.P1P1)) {
+                        getGame().getTriggerHandler().runTrigger(TriggerType.Trains, AbilityKey.mapFromCard(this), false);
+                    }
+                }
             }
         } else {
             setCounters(counterType, newValue);
