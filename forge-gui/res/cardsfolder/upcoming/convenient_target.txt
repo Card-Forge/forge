@@ -1,0 +1,10 @@
+Name:Convenient Target
+ManaCost:R
+Types:Enchantment Aura
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect enchanted creature. (It has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Enchanted | Attributes$ Suspected
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+A:AB$ ChangeZone | Cost$ 2 R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature\nWhen Convenient Target enters the battlefield, suspect enchanted creature. (It has menace and can't block.)\nEnchanted creature gets +1/+1.\n{2}{R}: Return Convenient Target from your graveyard to your hand.

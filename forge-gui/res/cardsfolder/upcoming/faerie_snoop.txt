@@ -1,0 +1,10 @@
+Name:Faerie Snoop
+ManaCost:1 U B
+Types:Creature Faerie Detective
+PT:1/4
+K:Flying
+K:Disguise:1 UB UB
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, look at the top two cards of your library. Put one into your hand and the other into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True
+DeckHas:Ability$Graveyard
+Oracle:Flying\nDisguise {1}{U/B}{U/B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Faerie Snoop is turned face up, look at the top two cards of your library. Put one into your hand and the other into your graveyard.

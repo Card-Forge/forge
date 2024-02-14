@@ -57,6 +57,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostTap;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.Untap;
@@ -264,6 +265,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         view.updateHostCard(this);
         view.updateDescription(this); //description can change if host card does
+    }
+
+    @Override
+    public void setKeyword(final KeywordInterface kw) {
+        super.setKeyword(kw);
+
+        if (subAbility != null) {
+            subAbility.setKeyword(kw);
+        }
+        for (SpellAbility sa : additionalAbilities.values()) {
+            sa.setKeyword(kw);
+        }
+        for (List<AbilitySub> list : additionalAbilityLists.values()) {
+            for (AbilitySub sa : list) {
+                sa.setKeyword(kw);
+            }
+        }
     }
 
     public boolean canThisProduce(final String s) {
@@ -1639,6 +1657,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean undo() {
         if (isUndoable() && getActivatingPlayer().getManaPool().accountFor(getManaPart())) {
             payCosts.refundPaidCost(hostCard);
+            return true;
         }
         return false;
     }

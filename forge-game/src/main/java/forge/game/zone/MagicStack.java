@@ -52,6 +52,7 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
@@ -187,12 +188,21 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (undoStack.isEmpty()) { return false; }
 
         SpellAbility sa = undoStack.peek();
-        sa.undo();
-        clearUndoStack(sa);
-        sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        if (sa.undo()) {
+            clearUndoStack(sa);
+            sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        } else {
+            clearUndoStack(sa);
+            for (Mana pay : sa.getPayingMana()) {
+                clearUndoStack(pay.getManaAbility().getSourceSA());
+            }
+        }
         return true;
     }
     public final void clearUndoStack(SpellAbility sa) {
+        if (sa == null) {
+            return;
+        }
         clearUndoStack(Lists.newArrayList(sa));
     }
     private final void clearUndoStack(List<SpellAbility> sas) {

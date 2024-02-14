@@ -1,0 +1,12 @@
+Name:Soul Enervation
+ManaCost:3 B
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -4/-4 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ LoseGain | TriggerDescription$ Whenever one or more creature cards leave your graveyard, each opponent loses 1 life and you gain 1 life.
+SVar:LoseGain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+DeckHints:Ability$Graveyard
+Oracle:Flash\nWhen Soul Enervation enters the battlefield, target creature gets -4/-4 until end of turn.\nWhenever one or more creature cards leave your graveyard, each opponent loses 1 life and you gain 1 life.

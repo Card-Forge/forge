@@ -13,5 +13,5 @@ Name:Bustle
 ManaCost:4 RG RG
 Types:Sorcery
 A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SubAbility$ DBTurnFaceUp | SpellDescription$ Creatures you control get +2/+2 and gain trample until end of turn.
-SVar:DBTurnFaceUp:DB$ SetState | Optional$ True | Choices$ Creature.faceDown+YouCtrl | ChoiceTitle$ Select target facedown creature you control | Mode$ TurnFaceUp | SpellDescription$  You may turn a face-down creature you control face up.
+SVar:DBTurnFaceUp:DB$ SetState | Optional$ True | Choices$ Creature.faceDown+YouCtrl | ChoiceTitle$ Select target facedown creature you control | Mode$ TurnFaceUp | SpellDescription$ You may turn a face-down creature you control face up.
 Oracle:Creatures you control get +2/+2 and gain trample until end of turn. You may turn a face-down creature you control face up.

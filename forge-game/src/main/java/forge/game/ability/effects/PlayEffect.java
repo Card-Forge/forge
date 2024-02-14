@@ -336,7 +336,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final CardZoneTable triggerList = new CardZoneTable();
+            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             final Zone originZone = tgtCard.getZone();
 
             // lands will be played
