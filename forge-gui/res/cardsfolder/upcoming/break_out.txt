@@ -1,0 +1,9 @@
+Name:Break Out
+ManaCost:R G
+Types:Sorcery
+A:SP$ Dig | Cost$ R G | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBChangeZoneBattlefield | StackDescription$ SpellDescription | SpellDescription$ Look at the top six cards of your library. You may reveal a creature card from among them. If that card has mana value 2 or less, you may put it onto the battlefield and it gains haste until end of turn. If you didn’t put the revealed card onto the battlefield this way, put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.cmcLE2 | Optional$ True | Destination$ Battlefield | SubAbility$ DBPump | StackDescription$ None
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | SubAbility$ DBChangeZoneHand | StackDescription$ None
+SVar:DBChangeZoneHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Look at the top six cards of your library. You may reveal a creature card from among them. If that card has mana value 2 or less, you may put it onto the battlefield and it gains haste until end of turn. If you didn’t put the revealed card onto the battlefield this way, put it into your hand. Put the rest on the bottom of your library in a random order.
