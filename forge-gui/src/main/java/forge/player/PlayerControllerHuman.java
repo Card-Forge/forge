@@ -1225,21 +1225,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollectionView chooseCardsToDiscardUnlessType(final int num, final CardCollectionView hand,
                                                              final String uType, final SpellAbility sa) {
         String[] splitUTypes = uType.split(",");
-        final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand,
-                sa) {
+        final InputSelectEntitiesFromList<Card> target = new InputSelectEntitiesFromList<Card>(this, num, num, hand, sa) {
             private static final long serialVersionUID = -5774108410928795591L;
 
             @Override
             protected boolean hasEnoughTargets() {
                 for (final Card c : selected) {
-                    for (String part : splitUTypes) {
-                        if (c.getType().hasStringType(part)) {
-                            return true;
-                        } else if (part.equals("Basic Land")) {
-                            if (c.isBasicLand()) {
-                                return true;
-                            }
-                        }
+                    if (c.isValid(splitUTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
+                        return true;
                     }
                 }
                 return super.hasEnoughTargets();

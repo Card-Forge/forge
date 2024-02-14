@@ -543,15 +543,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        String [] splitUTypes = uType.split(",");
-        CardCollection cardsOfType = new CardCollection();
-        for (String part : splitUTypes) {
-            CardCollection partCards = CardLists.getType(hand, part);
-            if (!partCards.isEmpty()) {
-                cardsOfType.addAll(partCards);
-            }
-        }
-        if (!cardsOfType.isEmpty()) {
+        Iterable<Card> cardsOfType = Iterables.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+        if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
             return new CardCollection(toDiscard);
         }
