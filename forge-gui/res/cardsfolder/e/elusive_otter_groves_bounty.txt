@@ -14,6 +14,6 @@ ALTERNATE
 Name:Grove's Bounty
 ManaCost:X G
 Types:Sorcery Adventure
-A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X| SpellDescription$ Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)
 SVar:X:Count$xPaid
 Oracle:Distribute X +1/+1 counters among any number of target creatures you control. (Then exile this card. You may cast the creature later from exile.)
