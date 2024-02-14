@@ -2,7 +2,7 @@ Name:Meriadoc Brandybuck
 ManaCost:1 G
 Types:Legendary Creature Halfling Citizen
 PT:2/2
-T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Halfling.YouCtrl | AttackedTarget$ Opponent | Execute$ TrigFood| TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Halflings you control attack a player, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Halfling.YouCtrl | AttackedTarget$ Opponent | Execute$ TrigFood | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Halflings you control attack a player, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
 DeckHas:Ability$Token|LifeGain & Type$Food|Artifact
 DeckHints:Type$Halfling
