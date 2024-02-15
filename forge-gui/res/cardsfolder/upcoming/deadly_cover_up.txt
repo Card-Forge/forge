@@ -12,4 +12,4 @@ SVar:NumInLib:TargetedController$CardsInLibrary
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInYard:TargetedController$CardsInGraveyard
 DeckHints:Ability$Graveyard|Mill|Discard|Dredge
-Oracle:As an additional cost to cast this spell, you may collect evidence 6.\nDestroy all creatures. If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them. T
+Oracle:As an additional cost to cast this spell, you may collect evidence 6.\nDestroy all creatures. If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them. 
