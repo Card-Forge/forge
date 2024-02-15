@@ -385,7 +385,6 @@ public final class GameActionUtil {
 		CardCollection preList = new CardCollection(creatureCandidate);
 		game.getAction().checkStaticAbilities(false, Sets.newHashSet(creatureCandidate), preList);
 
-		// currently only for Keyword Blitz, but should affect Dash probably too.
 		for (final KeywordInterface keywordInterface : creatureCandidate.getUnhiddenKeywords()) {
 			try {
 				// Try to find the keyword in the list of alternative cost keywords.
