@@ -7153,7 +7153,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {
         CardState oState = getState(CardStateName.Original);
         final List<SpellAbility> abilities = Lists.newArrayList();
-        for (SpellAbility sa : getSpellAbilities()) {
+        FCollectionView<SpellAbility> spellAbilitiesFromStaticAbilities = GameActionUtil.getAlternativeCostsGrantedByStaticAbilities(this);
+        for (SpellAbility sa : Iterables.concat(getSpellAbilities(), spellAbilitiesFromStaticAbilities)) {
             //adventure spell check
             if (isAdventureCard() && sa.isAdventure()) {
                 if (getExiledWith() != null && getExiledWith().equals(this) && CardStateName.Adventure.equals(getExiledWith().getCurrentStateName()))

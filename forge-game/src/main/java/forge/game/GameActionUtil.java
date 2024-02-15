@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -52,6 +53,8 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 
 /**
@@ -269,35 +272,6 @@ public final class GameActionUtil {
                     foretold.putParam("AfterDescription", "(Foretold)");
                     alternatives.add(foretold);
                 }
-
-                // some needs to check after ability was put on the stack
-                // Currently this is only checked for Toolbox and that only cares about creature spells
-                if (source.isCreature() && game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
-                    Zone oldZone = source.getLastKnownZone();
-                    Card blitzCopy = source;
-                    if (!source.isLKI()) {
-                        blitzCopy = CardUtil.getLKICopy(source);
-                    }
-                    blitzCopy.setLastKnownZone(game.getStackZone());
-                    lkicheck = true;
-
-                    blitzCopy.clearStaticChangedCardKeywords(false);
-                    CardCollection preList = new CardCollection(blitzCopy);
-                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(blitzCopy), preList);
-
-                    // currently only for Keyword BLitz, but should affect Dash probably too
-                    for (final KeywordInterface inst : blitzCopy.getKeywords(Keyword.BLITZ)) {
-                        // TODO with mana value 4 or greater has blitz.
-                        for (SpellAbility iSa : inst.getAbilities()) {
-                            // do only non intrinsic
-                            if (!iSa.isIntrinsic()) {
-                                alternatives.add(iSa);
-                            }
-                        }
-                    }
-                    // need to reset to Old Zone, or canPlay would fail
-                    blitzCopy.setLastKnownZone(oldZone);
-                }
             }
 
             // reset static abilities
@@ -376,6 +350,70 @@ public final class GameActionUtil {
             }
         }
         return alternatives;
+    }
+    
+    /**
+     * Checks a card to see if it qualifies to receive keywords from static abilities
+     * that grant alternative casting costs to spells on the stack, for example
+     *  - Toolbox's ability that gives Blitz to creature spells with mana value 4 or greater
+     *  - Hunting Velociraptor's ability that gives Prowl to Dinosaur spells
+     * 
+     * @param source The card to check eligibility for.
+     * @return Zero or more spell abilities, each representing an alternative casting cost.
+     */
+    public static final FCollectionView<SpellAbility> getAlternativeCostsGrantedByStaticAbilities(Card source) {
+    	final FCollection<SpellAbility> alternatives = new FCollection<SpellAbility>();
+    	final Game game = source.getGame();
+    	
+        if (!game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+        	return alternatives;
+        }
+        
+        // double freeze tracker, so it doesn't update view
+        game.getTracker().freeze();
+        
+		Zone oldZone = source.getLastKnownZone();
+		Card creatureCandidate = source; // Candidate to receive keyword.
+		if (!source.isLKI()) {
+			creatureCandidate = CardUtil.getLKICopy(source);
+		}
+		creatureCandidate.setLastKnownZone(game.getStackZone());
+
+		creatureCandidate.clearStaticChangedCardKeywords(false);
+		CardCollection preList = new CardCollection(creatureCandidate);
+		game.getAction().checkStaticAbilities(false, Sets.newHashSet(creatureCandidate), preList);
+
+		// currently only for Keyword Blitz, but should affect Dash probably too.
+		for (final KeywordInterface keywordInterface : creatureCandidate.getUnhiddenKeywords()) {
+			try {
+				// Try to find the keyword in the list of alternative cost keywords.
+				// If the operation doesn't throw an IllegalArgumentException, the keyword
+				// is an alternative cost.
+				AlternativeCost.valueOf(keywordInterface.getKeyword().toString());
+			
+				for (SpellAbility iSa : keywordInterface.getAbilities()) {
+					// do only non intrinsic
+					if (!iSa.isIntrinsic()) {
+						iSa.setHostCard(source);
+						alternatives.add(iSa);
+					}
+				}
+			} catch (IllegalArgumentException e) {
+				// The keyword interface isn't for an alternative cost keyword.
+				continue;
+			}
+		}
+
+		// need to reset to Old Zone, or canPlay fails.
+		creatureCandidate.setLastKnownZone(oldZone);
+
+		game.getAction().checkStaticAbilities(false);
+		// clear delayed changes, this check should not have updated the view.
+		game.getTracker().clearDelayed();
+		// need to unfreeze tracker.
+		game.getTracker().unfreeze();
+
+		return alternatives;
     }
 
     public static List<OptionalCostValue> getOptionalCostValues(final SpellAbility sa) {
