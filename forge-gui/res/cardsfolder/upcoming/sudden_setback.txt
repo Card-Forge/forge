@@ -1,0 +1,5 @@
+Name:Sudden Setback
+ManaCost:2 U U 
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ The owner of target nonland permanent puts it on the top or bottom of their library.
+Oracle:The owner of target spell or nonland permanent puts it on the top or bottom of their library.
