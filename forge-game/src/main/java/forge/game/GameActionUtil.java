@@ -352,70 +352,71 @@ public final class GameActionUtil {
         return alternatives;
     }
     
-	/**
-	 * Checks a card to see if it qualifies to receive keywords from static
-	 * abilities that grant alternative casting costs to spells on the stack, for
-	 * example, Toolbox's ability that gives blitz to creature spells with mana
-	 * value 4 or greater, and Hunting Velociraptor's ability that gives prowl to
-	 * Dinosaur spells.
-	 * 
-	 * @param source The card to check eligibility for.
-	 * @return Zero or more spell abilities, each representing an alternative
-	 *         casting cost.
-	 */
-	public static final FCollectionView<SpellAbility> getAlternativeCostsGrantedByStaticAbilities(Card source) {
-		final FCollection<SpellAbility> alternatives = new FCollection<SpellAbility>();
-		final Game game = source.getGame();
+    /**
+     * Checks a card to see if it qualifies to receive keywords from static
+     * abilities that grant alternative casting costs to spells on the stack, for
+     * example, Toolbox's ability that gives blitz to creature spells with mana
+     * value 4 or greater, and Hunting Velociraptor's ability that gives prowl to
+     * Dinosaur spells.
+     * 
+     * @param source The card to check eligibility for.
+     * @return Zero or more spell abilities, each representing an alternative
+     *         casting cost.
+     */
+    public static final FCollectionView<SpellAbility> getAlternativeCostsGrantedByStaticAbilities(Card source) {
+        final FCollection<SpellAbility> alternatives = new FCollection<SpellAbility>();
+        final Game game = source.getGame();
 
-		if (!game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
-			return alternatives;
-		}
+        if (!game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+            return alternatives;
+        }
 
-		// double freeze tracker, so it doesn't update view
-		game.getTracker().freeze();
+        // double freeze tracker, so it doesn't update view
+        game.getTracker().freeze();
 
-		Zone oldZone = source.getLastKnownZone();
-		Card creatureCandidate = source; // Candidate to receive keyword.
-		if (!source.isLKI()) {
-			creatureCandidate = CardUtil.getLKICopy(source);
-		}
-		creatureCandidate.setLastKnownZone(game.getStackZone());
+        Zone oldZone = source.getLastKnownZone();
+        Card creatureCandidate = source; // Candidate to receive keyword.
+		
+        if (!source.isLKI()) {
+            creatureCandidate = CardUtil.getLKICopy(source);
+        }
 
-		creatureCandidate.clearStaticChangedCardKeywords(false);
-		CardCollection preList = new CardCollection(creatureCandidate);
-		game.getAction().checkStaticAbilities(false, Sets.newHashSet(creatureCandidate), preList);
+        creatureCandidate.setLastKnownZone(game.getStackZone());
+        creatureCandidate.clearStaticChangedCardKeywords(false);
+        CardCollection preList = new CardCollection(creatureCandidate);
+        game.getAction().checkStaticAbilities(false, Sets.newHashSet(creatureCandidate), preList);
 
-		for (final KeywordInterface keywordInterface : creatureCandidate.getUnhiddenKeywords()) {
-			try {
-				// Try to find the keyword in the list of alternative cost keywords.
-				// If the operation doesn't throw an IllegalArgumentException, the keyword
-				// is an alternative cost.
-				AlternativeCost.valueOf(keywordInterface.getKeyword().toString());
+        for (final KeywordInterface keywordInterface : creatureCandidate.getUnhiddenKeywords()) {
+            try {
+                // Try to find the keyword in the list of alternative cost keywords.
+                // If the operation doesn't throw an IllegalArgumentException, the keyword
+                // is an alternative cost.
+                AlternativeCost.valueOf(keywordInterface.getKeyword().toString());
 
-				for (SpellAbility iSa : keywordInterface.getAbilities()) {
-					// do only non intrinsic
-					if (!iSa.isIntrinsic()) {
-						iSa.setHostCard(source);
-						alternatives.add(iSa);
-					}
-				}
-			} catch (IllegalArgumentException e) {
-				// The keyword interface isn't for an alternative cost keyword.
-				continue;
-			}
-		}
+                for (SpellAbility iSa : keywordInterface.getAbilities()) {
+                    // do only non intrinsic
+                    if (!iSa.isIntrinsic()) {
+                        iSa.setHostCard(source);
+                        alternatives.add(iSa);
+                    }
+                }
+            } catch (IllegalArgumentException e) {
+                // The keyword interface isn't for an alternative cost keyword.
+                continue;
+            }
+        }
 
-		// need to reset to Old Zone, or canPlay fails.
-		creatureCandidate.setLastKnownZone(oldZone);
+        // need to reset to Old Zone, or canPlay fails.
+        creatureCandidate.setLastKnownZone(oldZone);
 
-		game.getAction().checkStaticAbilities(false);
-		// clear delayed changes, this check should not have updated the view.
-		game.getTracker().clearDelayed();
-		// need to unfreeze tracker.
-		game.getTracker().unfreeze();
+        game.getAction().checkStaticAbilities(false);
+        // clear delayed changes, this check should not have updated the view.
+        game.getTracker().clearDelayed();
+        // need to unfreeze tracker.
+        game.getTracker().unfreeze();
 
-		return alternatives;
-	}
+        return alternatives;
+    }
 
     public static List<OptionalCostValue> getOptionalCostValues(final SpellAbility sa) {
         final List<OptionalCostValue> costs = Lists.newArrayList();
