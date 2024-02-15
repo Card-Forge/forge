@@ -352,26 +352,28 @@ public final class GameActionUtil {
         return alternatives;
     }
     
-    /**
-     * Checks a card to see if it qualifies to receive keywords from static abilities
-     * that grant alternative casting costs to spells on the stack, for example
-     *  - Toolbox's ability that gives Blitz to creature spells with mana value 4 or greater
-     *  - Hunting Velociraptor's ability that gives Prowl to Dinosaur spells
-     * 
-     * @param source The card to check eligibility for.
-     * @return Zero or more spell abilities, each representing an alternative casting cost.
-     */
-    public static final FCollectionView<SpellAbility> getAlternativeCostsGrantedByStaticAbilities(Card source) {
-    	final FCollection<SpellAbility> alternatives = new FCollection<SpellAbility>();
-    	final Game game = source.getGame();
-    	
-        if (!game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
-        	return alternatives;
-        }
-        
-        // double freeze tracker, so it doesn't update view
-        game.getTracker().freeze();
-        
+	/**
+	 * Checks a card to see if it qualifies to receive keywords from static
+	 * abilities that grant alternative casting costs to spells on the stack, for
+	 * example, Toolbox's ability that gives blitz to creature spells with mana
+	 * value 4 or greater, and Hunting Velociraptor's ability that gives prowl to
+	 * Dinosaur spells.
+	 * 
+	 * @param source The card to check eligibility for.
+	 * @return Zero or more spell abilities, each representing an alternative
+	 *         casting cost.
+	 */
+	public static final FCollectionView<SpellAbility> getAlternativeCostsGrantedByStaticAbilities(Card source) {
+		final FCollection<SpellAbility> alternatives = new FCollection<SpellAbility>();
+		final Game game = source.getGame();
+
+		if (!game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+			return alternatives;
+		}
+
+		// double freeze tracker, so it doesn't update view
+		game.getTracker().freeze();
+
 		Zone oldZone = source.getLastKnownZone();
 		Card creatureCandidate = source; // Candidate to receive keyword.
 		if (!source.isLKI()) {
@@ -390,7 +392,7 @@ public final class GameActionUtil {
 				// If the operation doesn't throw an IllegalArgumentException, the keyword
 				// is an alternative cost.
 				AlternativeCost.valueOf(keywordInterface.getKeyword().toString());
-			
+
 				for (SpellAbility iSa : keywordInterface.getAbilities()) {
 					// do only non intrinsic
 					if (!iSa.isIntrinsic()) {
@@ -414,7 +416,7 @@ public final class GameActionUtil {
 		game.getTracker().unfreeze();
 
 		return alternatives;
-    }
+	}
 
     public static List<OptionalCostValue> getOptionalCostValues(final SpellAbility sa) {
         final List<OptionalCostValue> costs = Lists.newArrayList();
