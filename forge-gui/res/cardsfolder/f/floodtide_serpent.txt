@@ -2,7 +2,7 @@ Name:Floodtide Serpent
 ManaCost:4 U
 Types:Creature Serpent
 PT:4/4
-S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Target$ Player,Planeswalker | Cost$ Return<1/Enchantment> | Description$ CARDNAME can't attack unless you return an enchantment you control to its owner's hand.
+S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$ Return<1/Enchantment> | Description$ CARDNAME can't attack unless you return an enchantment you control to its owner's hand.
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Enchantment.YouCtrl
 AI:RemoveDeck:All
