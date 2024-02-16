@@ -5763,6 +5763,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return isOfColor(col) || canProduceColorMana(color);
     }
 
+    public final boolean hasNoName() {
+        return !hasNonLegendaryCreatureNames() && getName().isEmpty();
+    }
+
     public final boolean sharesNameWith(final Card c1) {
         // in a corner case where c1 is null, there is no name to share with.
         if (c1 == null) {
