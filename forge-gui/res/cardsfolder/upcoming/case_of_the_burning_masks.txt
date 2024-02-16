@@ -1,0 +1,15 @@
+Name:Case of the Burning Masks
+ManaCost:1 R R
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When this Case enters the battlefield, it deals 3 damage to target creature an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE3 | IsPresent$ Card.Self+IsUnsolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — Three or more sources you controlled dealt damage this turn. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+SVar:X:Count$NumDamageThisTurn Card.YouCtrl,Emblem.YouCtrl Player,Permanent
+A:AB$ Dig | Cost$ Sac<1/CARDNAME/this card> | IsPresent$ Card.Self+IsSolved | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$Exile the top three cards of your library. Choose one of them. You may play that card this turn.
+SVar:DBChoose:DB$ ChooseCard | Amount$ 1 | Mandatory$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBCleanup | StackDescription$ {p:You} chooses one of them.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPlayEffect
+SVar:DBPlayEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | SubAbility$ DBClearChosen | StackDescription$ {p:You} may play that card this turn.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.ChosenCard | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+Oracle:When this Case enters the battlefield, it deals 3 damage to target creature an opponent controls.\nTo solve — Three or more sources you controlled dealt damage this turn. (If unsolved, solve at the beginning of your end step.)\nSolved — Sacrifice this Case: Exile the top three cards of your library. Choose one of them. You may play that card this turn.
