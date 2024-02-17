@@ -6,7 +6,7 @@ K:Unleash
 S:Mode$ Continuous | Affected$ Dog.Other+YouCtrl | AddKeyword$ Unleash | Description$ Other Dogs you control have unleash.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Haste | Description$ Creatures you control with counters on them have haste.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R} for each attacking creature.
-SVar:TrigMana:DB$ Mana | Produced$ R | Produced$ R | Amount$ X
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$Valid Creature.attacking
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
