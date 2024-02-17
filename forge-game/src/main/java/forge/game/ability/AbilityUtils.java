@@ -3965,8 +3965,8 @@ public class AbilityUtils {
             def[0] = def[0].substring(22);
             return trig;
         }
-        if (def[0].startsWith("CastSA>") && ctb instanceof SpellAbility) {
-            SpellAbility sa = ((SpellAbility) ctb).getHostCard().getCastSA();
+        if (def[0].startsWith("CastSA>")) {
+            SpellAbility sa = ctb.getHostCard().getCastSA();
             if (sa == null) {
                 return ctb;
             }
