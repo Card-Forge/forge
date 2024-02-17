@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 K:Kicker:W
 A:SP$ Effect | Cost$ W | Name$ Orim's Chant Effect | IsCurse$ True | StaticAbilities$ CantBeCast | ValidTgts$ Player | RememberObjects$ Targeted | SubAbility$ CantAttackWhenKicked | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't cast spells this turn.
-SVar:CantAttackWhenKicked:DB$ Effect | Name$ Orim's Chant can't Attack Effect | IsCurse$ True | StaticAbilities$ CantAttack | Condition$ Kicked | SpellDescription$ If CARDNAME was kicked, creatures can't attack this turn.
+SVar:CantAttackWhenKicked:DB$ Effect | Name$ Orim's Chant can't Attack Effect | IsCurse$ True | StaticAbilities$ CantAttack | Condition$ Kicked | SpellDescription$ If this spell was kicked, creatures can't attack this turn.
 SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells this turn.
 SVar:CantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Description$ Creatures can't attack this turn.
 SVar:NeedsToPlayKicked:Creature.OppCtrl
