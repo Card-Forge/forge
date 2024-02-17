@@ -1,0 +1,7 @@
+Name:Hide in Plain Sight
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 5 | SkipReorder$ True | ChangeNum$ 2 | DestinationZone$ Library | RememberChanged$ True | LibraryPosition$ 0 | RestRandomOrder$ True | SubAbility$ DBCloak | SpellDescription$ Look at the top five cards of your library, cloak two of them, and put the rest on the bottom of your library in a random order. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:DBCloak:DB$ Cloak | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Look at the top five cards of your library, cloak two of them, and put the rest on the bottom of your library in a random order. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)

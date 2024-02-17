@@ -139,7 +139,6 @@ public class PumpEffect extends SpellAbilityEffect {
 
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
-        final Card host = sa.getHostCard();
         final String duration = sa.getParam("Duration");
 
         if (!keywords.isEmpty()) {
