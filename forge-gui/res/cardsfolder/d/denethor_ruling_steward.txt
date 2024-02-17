@@ -7,5 +7,5 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | T
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 A:AB$ LoseLife | Cost$ 2 Sac<1/Creature.Other/another creature> | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-DeckHas:Ability$Token|LifeGain|Sacrifice & type$Soldier
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Soldier
 Oracle:At the beginning of your end step, if a creature died under your control this turn, create a 1/1 white Human Soldier creature token.\n{2}, Sacrifice another creature: Each opponent loses 1 life and you gain 1 life.
