@@ -3663,6 +3663,16 @@ public class AbilityUtils {
             return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
         }
 
+        if (string.equals("DifferentColorPair")) {
+            final Set<ColorSet> diffPair = new HashSet<>();
+            for (final Card card : paidList) {
+                if (card.getColor().countColors() == 2) {
+                    diffPair.add(card.getColor());
+                }
+            }
+            return diffPair.size();
+        }
+
         if (string.startsWith("DifferentCMC")) {
             final Set<Integer> diffCMC = new HashSet<>();
             for (final Card card : paidList) {
