@@ -303,7 +303,7 @@ ScryfallCode=C21
 295 C Jungle Hollow @Eytan Zana
 296 U Llanowar Reborn @Philip Straub
 297 R Llanowar Wastes @Rob Alexander
-298 C Lonely Sandbar @Heather Hudson
+298 U Lonely Sandbar @Heather Hudson
 299 R Lumbering Falls @Titus Lunter
 300 U Mage-Ring Network @Jung Park
 301 U Memorial to Genius @James Paick
