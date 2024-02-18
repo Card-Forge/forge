@@ -9,4 +9,4 @@ SVar:DBDraw:DB$ Scry | ScryNum$ 2 | SubAbility$ Draw | SpellDescription$ Scry 2,
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Token & Type$Artifact|Construct
 DeckHints:Type$Urza
-Oracle:Choose two -\n•Creatures you don't control get -3/-0 until end of turn\n•Create two tapped Powerstone tokens.\n•Create a tapped 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."\n• Scry 2, then draw a card.
+Oracle:Choose two -\n• Creatures you don't control get -3/-0 until end of turn.\n• Create two tapped Powerstone tokens.\n• Create a tapped 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."\n• Scry 2, then draw a card.

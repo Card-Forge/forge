@@ -12,4 +12,4 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creat
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice|LifeGain|Counters & Keyword$Lifelink
-Oracle:Choose two -\n•Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.\n•Destroy each creature with power 2 or less.\n•Return up to two creature cards from your graveyard to your hand.\n• Each opponent sacrifices a creature with highest power among creatures they control.
+Oracle:Choose two -\n• Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.\n• Destroy each creature with power 2 or less.\n• Return up to two creature cards from your graveyard to your hand.\n• Each opponent sacrifices a creature with highest power among creatures they control.
