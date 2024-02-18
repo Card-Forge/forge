@@ -124,6 +124,8 @@ public enum CounterEnumType {
     DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
+    
+    DUTY("DUTY", 232, 245, 245),
 
     ECHO("ECHO", 225, 180, 255),
 
