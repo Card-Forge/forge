@@ -3,6 +3,6 @@ ManaCost:6 U U
 Types:Creature Avatar
 PT:5/6
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ If an opponent has no cards in hand, CARDNAME costs {6} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ If an opponent has no cards in hand, this spell costs {6} less to cast.
 SVar:X:PlayerCountOpponents$LowestCardsInHand
 Oracle:If an opponent has no cards in hand, this spell costs {6} less to cast.\nFlying
