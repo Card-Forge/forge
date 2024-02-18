@@ -7,6 +7,7 @@ import forge.adventure.util.SaveFileData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Class to save point of interest changes, like sold cards and dead enemies
@@ -109,8 +110,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     public void generateNewShopSeed(int objectID){
-
-        shopSeeds.put(objectID, Current.world().getRandom().nextLong());
+        shopSeeds.put(objectID, shopSeeds.containsKey(objectID)? new Random(shopSeeds.get(objectID)).nextLong() : Current.world().getRandom().nextLong());
         cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
     }
 
