@@ -10193,6 +10193,7 @@
 			"description": "Use Donovan's talisman to contact him.",
 			"mapFlag": "exploreShand1",
 			"mapFlagValue": 7,
+			"worldMapOK": true,
 			"objective": "QuestFlag",
 			"prerequisiteIDs": [ 3 ],
 			"prologue": {
