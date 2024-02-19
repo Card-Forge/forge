@@ -5,11 +5,9 @@ PT:5/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCataclysm | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until CARDNAME leaves the battlefield.
 SVar:TrigCataclysm:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ ExileChosen
 SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 2 | ImprintChosen$ True | Choices$ Creature.nonToken+nonVehicle+RememberedPlayerCtrl | ChoiceTitle$ Choose two nontoken, non-Vehicle creatures you control 
-SVar:ExileChosen:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.
-SVar:TrigChange:DB$ ChangeZone | Mandatory$ True | Hidden$ True | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.ExiledWithSource | ChangeTypeDesc$ card exiled with CARDNAME | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBInvestigate
-SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True  | ClearImprinted$ True
+SVar:ExileChosen:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.
+SVar:TrigInvestigate:AB$ Investigate | Cost$ ExiledMoveToGrave<1/Card.ExiledWithSource/card exiled with CARDNAME>
 K:Crew:2
 DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
 SVar:HasAttackEffect:TRUE
