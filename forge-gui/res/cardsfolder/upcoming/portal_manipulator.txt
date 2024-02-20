@@ -5,7 +5,7 @@ PT:3/2
 K:Flash
 T:Mode$ ChangesZone | Phase$ Declare Attackers | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoosePlayer | TriggerDescription$ When CARDNAME enters the battlefield during the declare attackers step, choose target player and any number of target attacking creatures their opponents control. Those creatures are now attacking that player.
 SVar:TrigChoosePlayer:DB$ Pump | ValidTgts$ Player | RememberObjects$ Targeted | SubAbility$ DBChooseAttackers
-SVar:DBChooseAttackers:DB$ ChangeCombatants | ValidTgts$ Creature.attacking+!RememberedPlayerCtrl | TargetMin$ 0 | TargetMax$ MaxTargets | Attacking$ Player.IsRemembered | SubAbility$ DBCleanup
+SVar:DBChooseAttackers:DB$ ChangeCombatants | ValidTgts$ Creature.attacking+!RememberedPlayerCtrl | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Select any number of target attacking creatures controlled by target player's opponents | Attacking$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:MaxTargets:Count$Valid Creature.attacking+!RememberedPlayerCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flash\nWhen Portal Manipulator enters the battlefield during the declare attackers step, choose target player and any number of target attacking creatures their opponents control. Those creatures are now attacking that player.
