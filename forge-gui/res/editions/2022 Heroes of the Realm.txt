@@ -6,6 +6,7 @@ Type=Funny
 ScryfallCode=PH22
 
 [cards]
+1 M Treizeci, Sun of Serra @Gaboleps
 2 M Elusen, the Giving @Livia Prima
 3 M Heroes of Kamigawa @Magali Villeneuve
 4 M Svega, the Unconventional @Chris Rallis
