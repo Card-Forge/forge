@@ -322,7 +322,7 @@ BoosterBox=36
 308 R Analyze the Pollen @Monztre
 309 R Audience with Trostani @Hendry Iwanaga
 310 C Fanatical Strength @Joshua Cairos
-311 U Coerced to Kill @Li Wang
+311 U Coerced to Kill @Hendry Iwanaga
 312 U Deadly Complication @Monztre
 313 U Insidious Roots @Monztre
 314 R Officious Interrogation @Eliz Roxs

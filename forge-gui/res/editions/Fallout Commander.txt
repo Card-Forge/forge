@@ -11,6 +11,7 @@ ScryfallCode=PIP
 3 M Dr. Madison Li @Zuzanna Wużyk
 4 M The Wise Mothman @Sergei Leoluch Panin
 7 M Mr. House, President and CEO @Joseph Meehan
+8 M Preston Garvey, Minuteman @Leonardo Borazio
 16 U Gary Clone @Nicholas Gregory
 17 R Idolized @Kim Sokol
 18 R Overencumbered @Elizabeth Peiró
@@ -18,10 +19,13 @@ ScryfallCode=PIP
 37 R Radstorm @Salvatorre Zee Yazzie
 44 R Feral Ghoul @Sergio Cosmai
 50 R V.A.T.S. @Diego Gisbert
+89 R Agent Frank Horrigan @Wisnu Tan
+90 R Almost Perfect @Elizabeth Peiró
 91 R Alpha Deathclaw @Daarken
 117 R Rex, Cyber-Hound @Jeremy Paillotin
 134 U Intelligence Bobblehead @Torgeir Fjereide
 137 U Nuka-Cola Vending Machine @Anthony Devine
+145 R T-45 Power Armor @Diego Gisbert
 164 M Caesar, Legion's Emperor @Alexander Gering
 259 C Command Tower @Gabriel Tanko
 317 L Plains @Samuele Bandini
@@ -50,9 +54,50 @@ ScryfallCode=PIP
 361 R Wasteland @AKQA
 367 R Overencumbered @Elizabeth Peiró
 381 R Feral Ghoul @Sergio Cosmai
+406 R Almost Perfect @Elizabeth Peiró
 421 M Mr. House, President and CEO @Joseph Meehan
 427 R Rex, Cyber-Hound @Jeremy Paillotin
+529 M Caesar, Legion's Emperor @Alexander Gering
+530 M Dogmeat, Ever Loyal @Kieran Yanner
+531 M Dr. Madison Li @Zuzanna Wużyk
+532 M The Wise Mothman @Sergei Leoluch Panin
+535 M Mr. House, President and CEO @Joseph Meehan
+544 U Gary Clone @Nicholas Gregory
+546 R Overencumbered @Elizabeth Peiró
+565 R Radstorm @Salvatorre Zee Yazzie
+572 R Feral Ghoul @Sergio Cosmai
+578 R V.A.T.S. @Diego Gisbert
+618 R Almost Perfect @Elizabeth Peiró
+645 R Rex, Cyber-Hound @Jeremy Paillotin
+662 U Intelligence Bobblehead @Torgeir Fjereide
+665 U Nuka-Cola Vending Machine @Anthony Devine
+787 C Command Tower @Gabriel Tanko
+845 L Plains @Samuele Bandini
+846 L Plains @Constantin Marin
+847 L Island @Samuele Bandini
+848 L Island @Pablo Mendoza
+849 L Swamp @Samuele Bandini
+850 L Swamp @Nikola Matkovic
+851 L Mountain @Samuele Bandini
+852 L Mountain @Pablo Mendoza
+853 L Forest @Samuele Bandini
+854 L Forest @Nikola Matkovic
+857 R Radstorm @Tim Brumley
+861 R V.A.T.S.
+867 M Caesar, Legion's Emperor @David Gaillet
+868 M Dogmeat, Ever Loyal @Mark Poole
+869 M Dr. Madison Li @John Stanko
+871 M The Wise Mothman @David Gaillet
+886 U Nuka-Cola Vending Machine @AKQA
+888 U Command Tower @AKQA
+889 R Wasteland @AKQA
+895 R Overencumbered @Elizabeth Peiró
+909 R Feral Ghoul @Sergio Cosmai
+934 R Almost Perfect @Elizabeth Peiró
+949 M Mr. House, President and CEO @Joseph Meehan
+955 R Rex, Cyber-Hound @Jeremy Paillotin
 1061 U Intelligence Bobblehead @Torgeir Fjereide
+1064 M Caesar, Legion's Emperor @Alexander Gering
 1065 M Dogmeat, Ever Loyal @Kieran Yanner
 1066 M Dr. Madison Li @Zuzanna Wużyk
 1067 M The Wise Mothman @Sergei Leoluch Panin

@@ -85,7 +85,7 @@ ScryfallCode=MKC
 77 U Orzhov Advokist @Jason A. Engle
 78 U Path to Exile @Todd Lockwood
 79 R Promise of Loyalty @Sara Winters
-80 U Seal of Cleansing @Christopher Moeller
+80 C Seal of Cleansing @Christopher Moeller
 81 R Search the Premises @Matt Stewart
 82 R Selfless Squire @Tony Foti
 83 R Sevinne's Reclamation @Zoltan Boros
@@ -159,10 +159,10 @@ ScryfallCode=MKC
 151 R Disrupt Decorum @Sidharth Chaturvedi
 152 R Etali, Primal Storm @Raymond Swanland
 153 M Fiendish Duo @Lucas Graciano
-154 U Frontier Warmonger @Livia Prima
+154 R Frontier Warmonger @Livia Prima
 155 R Imperial Hellkite @Matt Cavotta
 156 R Jeska's Will @Izzy
-157 U Kazuul, Tyrant of the Cliffs @Paul Bonner
+157 R Kazuul, Tyrant of the Cliffs @Paul Bonner
 158 M Neheb, the Eternal @Chris Rahn
 159 U Rite of the Raging Storm @Svetlin Velinov
 160 R Scourge of the Throne @Michael Komarck
@@ -180,10 +180,10 @@ ScryfallCode=MKC
 172 R Hornet Queen @Martina Pilcerova
 173 R Jolrael, Mwonvuli Recluse @Izzy
 174 R Killer Service @Simon Dominic
-175 S Krosan Cloudscraper @Ron Spears
-176 U Krosan Colossus @Kev Walker
+175 R Krosan Cloudscraper @Ron Spears
+176 R Krosan Colossus @Kev Walker
 177 C Nantuko Vigilante @Alex Horley-Orlandelli
-178 C Nature's Lore @Julie Dillon
+178 U Nature's Lore @Julie Dillon
 179 R Obscuring Aether @Min Yum
 180 R Ohran Frostfang @Torstein Nordstrand
 181 R Return of the Wildspeaker @Chris Rallis
@@ -202,7 +202,7 @@ ScryfallCode=MKC
 194 M Whisperwood Elemental @Raymond Swanland
 195 C Wild Growth @Tony Szczudlo
 196 U Wilderness Reclamation @Tyler Walpole
-197 U Yedora, Grave Gardener @Svetlin Velinov
+197 R Yedora, Grave Gardener @Svetlin Velinov
 198 M Adrix and Nev, Twincasters @Andrew Mar
 199 M Anya, Merciless Angel @Alisa Lee
 200 R Baleful Strix @Nils Hamm
@@ -216,10 +216,10 @@ ScryfallCode=MKC
 208 U Disinformation Campaign @Anthony Palumbo
 209 R Disorder in the Court @Zoltan Boros
 210 M Esix, Fractal Bloom @Chase Stone
-211 R Gisela, Blade of Goldnight @Jason Chan
-212 M Hydroid Krasis @Jason Felix
+211 M Gisela, Blade of Goldnight @Jason Chan
+212 R Hydroid Krasis @Jason Felix
 213 M Koma, Cosmos Serpent @Jesper Ejsing
-214 R Lazav, the Multifarious @Yongjae Choi
+214 M Lazav, the Multifarious @Yongjae Choi
 215 R Lonis, Cryptozoologist @Andrew Mar
 216 R Master of Death @John Stanko
 217 C Notion Rain @Lius Lasahido
@@ -254,7 +254,7 @@ ScryfallCode=MKC
 246 R Tome of Legends @Mila Pesic
 247 U Access Tunnel @Alayna Danner
 248 U Ash Barrens @Jonas De Ro
-249 C Azorius Chancery @John Avon
+249 U Azorius Chancery @John Avon
 250 C Bojuka Bog @Howard Lyon
 251 U Boros Garrison @John Avon
 252 R Canopy Vista @Adam Paquette
@@ -278,7 +278,7 @@ ScryfallCode=MKC
 270 R Kher Keep @Titus Lunter
 271 U Krosan Verge @Ruxing Gao
 272 R Labyrinth of Skophos @Jonas De Ro
-273 U Lonely Sandbar @Heather Hudson
+273 C Lonely Sandbar @Heather Hudson
 274 R Mossfire Valley @John Avon
 275 R Mosswort Bridge @Jeremy Jarvis
 276 U Myriad Landscape @Richard Wright
