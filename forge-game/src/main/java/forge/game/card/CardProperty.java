@@ -2161,6 +2161,10 @@ public class CardProperty {
                 }
             }
             return new CheckCanPayManaCost().check();
+        } else if (property.equals("surveilledThisTurn")) {
+            if (!card.isSurveilledThisTurn()) {
+                return false;
+            }
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {
