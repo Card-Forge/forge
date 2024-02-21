@@ -1101,7 +1101,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public void surveil(int num, SpellAbility cause, CardZoneTable table, Map<AbilityKey, Object> params) {
+    public void surveil(int num, SpellAbility cause, Map<AbilityKey, Object> params) {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, cause);
         repParams.put(AbilityKey.SurveilNum, num);
@@ -1132,9 +1132,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             if (toGrave != null) {
                 for (Card c : toGrave) {
-                    ZoneType oZone = c.getZone().getZoneType();
                     Card moved = getGame().getAction().moveToGraveyard(c, cause, params);
-                    table.put(oZone, moved.getZone().getZoneType(), moved);
+                    moved.setSurveilledThisTurn(true);
                     numToGrave++;
                 }
             }

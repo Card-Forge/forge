@@ -239,6 +239,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean tributed = false;
     private boolean discarded = false;
 
+    private boolean surveilledThisTurn = false;
+
     private boolean flipped = false;
     private boolean facedown = false;
     private boolean turnedFaceUpThisTurn = false;
@@ -6893,6 +6895,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetShieldCount();
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
+        setSurveilledThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
@@ -7857,5 +7860,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
+    }
+
+    public boolean isSurveilledThisTurn() {
+        return this.surveilledThisTurn;
+    }
+    public void setSurveilledThisTurn(boolean value) {
+        this.surveilledThisTurn = value;
     }
 }
