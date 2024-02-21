@@ -1,0 +1,13 @@
+Name:Agent Frank Horrigan
+ManaCost:5 B G
+Types:Legendary Creature Mutant Warrior
+PT:8/6
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self+attackedThisTurn | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as it attacked this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, proliferate twice. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, proliferate twice. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate | Amount$ 2
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Proliferate|Counters
+DeckNeeds:Ability$Counters
+Oracle:Trample\nAgent Frank Horrigan has indestructible as long as it attacked this turn.\nWhenever Agent Frank Horrigan enters the battlefield or attacks, proliferate twice. (To proliferate, choose any number of permanents and/or players, then give each another counter of each kind already there.)
