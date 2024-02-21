@@ -1,0 +1,9 @@
+Name:Settlement
+ManaCost:no cost
+Types:Enchantment Aura
+Colors:green
+K:Enchant land
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ SettlementTap | Description$ Enchanted land has "{T}: Add one mana of any color."
+SVar:SettlementTap:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Enchant land\nEnchanted land has "{T}: Add one mana of any color."
