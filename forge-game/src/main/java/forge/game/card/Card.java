@@ -140,8 +140,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     protected KeywordsChange changedCardKeywordsByWord = new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), false); // Layer 3 by Word Change
     private final Table<Long, Long, KeywordsChange> changedCardKeywords = TreeBasedTable.create(); // Layer 6
 
-    protected KeywordsChange suspectedKeywordChange = null;
-
     // stores the keywords created by static abilities
     private final Map<Triple<String, Long, Long>, KeywordInterface> storedKeywords = Maps.newHashMap();
 
@@ -219,6 +217,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean renowned;
     private boolean solved = false;
     private boolean suspected = false;
+    private Long suspectedTimestamp = null;
+    private StaticAbility suspectedStatic = null;
 
     private boolean manifested;
     private boolean cloaked;
@@ -4003,8 +4003,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             changedCardKeywordsByText.values(), // Layer 3
             ImmutableList.of(changedCardKeywordsByWord), // Layer 3
             ImmutableList.of(new KeywordsChange(ImmutableList.<KeywordInterface>of(), ImmutableList.<KeywordInterface>of(), this.hasRemoveIntrinsic())), // Layer 4
-            changedCardKeywords.values(), // Layer 6
-            getSuspectedKeywordChange() // Menace by Suspected
+            changedCardKeywords.values() // Layer 6
         );
     }
 
@@ -6316,6 +6315,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return true;
     }
 
+    public Long getSuspectedTimestamp() {
+        return this.suspectedTimestamp;
+    }
+    public void setSuspectedTimestamp(final Long timestamp) {
+        this.suspectedTimestamp = timestamp;
+    }
+
     public final boolean isSuspected() {
         return suspected;
     }
@@ -6326,16 +6332,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         this.suspected = suspected;
         if (suspected) {
-            KeywordInterface kw = Keyword.getInstance("Menace");
-            kw.createTraits(this, false);
-            suspectedKeywordChange = new KeywordsChange(ImmutableList.of(kw), ImmutableList.<String>of(), false);
-        }
-        updateKeywords();
-        return true;
-    }
+            if (suspectedTimestamp != null) {
+                // 701.58d A suspected permanent can’t become suspected again.
+                return true;
+            }
+            suspectedTimestamp = getGame().getNextTimestamp();
 
-    protected Iterable<KeywordsChange> getSuspectedKeywordChange() {
-        return isSuspected() ? ImmutableList.of(this.suspectedKeywordChange) : ImmutableList.of();
+            // use this for CantHaveKeyword
+            addChangedCardKeywords(ImmutableList.of("Menace"), ImmutableList.<String>of(), false, suspectedTimestamp, 0, true);
+
+            if (suspectedStatic == null) {
+                String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
+                suspectedStatic = StaticAbility.create(effect, this, getCurrentState(), false);
+            }
+            this.addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
+        } else {
+            if (suspectedTimestamp != null) {
+                removeChangedCardKeywords(suspectedTimestamp, 0);
+                this.removeChangedCardTraits(suspectedTimestamp, 0);
+            }
+            suspectedTimestamp = null;
+        }
+        return true;
     }
 
     public final boolean isManifested() {
