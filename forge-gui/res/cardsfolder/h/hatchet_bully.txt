@@ -2,5 +2,5 @@ Name:Hatchet Bully
 ManaCost:3 R
 Types:Creature Goblin Warrior
 PT:3/3
-A:AB$ DealDamage | Cost$ 2 R T AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 2 R T AddCounter<1/M1M1/Creature.YouCtrl/a creature you control> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:{2}{R}, {T}, Put a -1/-1 counter on a creature you control: Hatchet Bully deals 2 damage to any target.

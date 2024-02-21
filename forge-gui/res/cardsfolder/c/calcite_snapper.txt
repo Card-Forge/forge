@@ -4,6 +4,5 @@ Types:Creature Turtle
 PT:1/4
 K:Shroud
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may switch CARDNAME power and toughness until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME's power and toughness are switched
-AI:RemoveDeck:All
+SVar:TrigPump:DB$ Pump | Defined$ Self | SwitchPT$ True
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\nLandfall — Whenever a land enters the battlefield under your control, you may switch Calcite Snapper's power and toughness until end of turn.

@@ -2,6 +2,5 @@ Name:Myr Quadropod
 ManaCost:4
 Types:Artifact Creature Myr
 PT:1/4
-A:AB$ Pump | Cost$ 3 | Defined$ Self | | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
-AI:RemoveDeck:All
+A:AB$ Pump | Cost$ 3 | Defined$ Self | SwitchPT$ True | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
 Oracle:{3}: Switch Myr Quadropod's power and toughness until end of turn.

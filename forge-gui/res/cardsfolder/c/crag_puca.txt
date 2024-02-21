@@ -2,6 +2,5 @@ Name:Crag Puca
 ManaCost:UR UR UR
 Types:Creature Shapeshifter
 PT:2/4
-A:AB$ Pump | Cost$ UR | Defined$ Self | | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
-AI:RemoveDeck:All
+A:AB$ Pump | Cost$ UR | Defined$ Self | SwitchPT$ True | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
 Oracle:{U/R}: Switch Crag Puca's power and toughness until end of turn.
