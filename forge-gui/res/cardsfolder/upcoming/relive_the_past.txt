@@ -1,0 +1,11 @@
+Name:Relive the Past
+ManaCost:5 G W
+Types:Sorcery
+A:SP$ Pump | TgtZone$ Graveyard | ValidTgts$ Artifact+YouOwn | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBLand | TgtPrompt$ Select up to one target artifact from your graveyard | SpellDescription$ Return up to one target artifact card, up to one target land card, and up to one target non-Aura enchantment card from your graveyard to the battlefield. 
+SVar:DBLand:DB$ Pump | TgtZone$ Graveyard | ValidTgts$ Land.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target land from your graveyard | SubAbility$ DBEnchantment
+SVar:DBEnchantment:DB$ Pump | TgtZone$ Graveyard | SubAbility$ DBChangeZoneAll | ValidTgts$ Enchantment.nonAura+YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target non-aura enchantment from your graveyard 
+SVar:DBChangeZoneAll:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Targeted | AnimateSubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Creature,Elemental | Power$ 5 | Toughness$ 5 | Duration$ Permanent | SpellDescription$ They are 5/5 Elemental creatures in addition to their other types.
+DeckHas:Ability$Graveyard & Type$Elemental
+DeckHints:Ability$Graveyard|Mill & Type$Enchantment|Artifact
+Oracle:Return up to one target artifact card, up to one target land card, and up to one target non-Aura enchantment card from your graveyard to the battlefield. They are 5/5 Elemental creatures in addition to their other types.

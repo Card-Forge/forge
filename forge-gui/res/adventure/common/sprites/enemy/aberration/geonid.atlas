@@ -1,0 +1,143 @@
+geonid.png
+size: 512,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 104, 16
+  size: 16, 16     
+Hidden
+  xy: 8, 16
+  size: 16, 16
+Hidden
+  xy: 40, 16
+  size: 16, 16
+Hidden
+  xy: 72, 16
+  size: 16, 16
+Hidden
+  xy: 104, 16
+  size: 16, 16
+Wake
+  xy: 8, 16
+  size: 16, 16
+Wake
+  xy: 40, 16
+  size: 16, 16
+Wake
+  xy: 72, 16
+  size: 16, 16
+Wake
+  xy: 104, 16
+  size: 16, 16
+Idle 
+  xy: 8,80
+  size: 16, 16   
+Idle 
+  xy: 40,80
+  size: 16, 16   
+Idle 
+  xy: 72,80
+  size: 16, 16     
+Idle 
+  xy: 104,80
+  size: 16, 16   
+Idle 
+  xy: 136,80
+  size: 16, 16    
+Idle 
+  xy: 168,80
+  size: 16, 16     
+Idle 
+  xy: 200,80
+  size: 16, 16    
+Idle 
+  xy: 232,80
+  size: 16, 16     
+Idle 
+  xy: 264,80
+  size: 16, 16   
+Idle 
+  xy: 296,80
+  size: 16, 16    
+Idle 
+  xy: 328,80
+  size: 16, 16     
+Idle 
+  xy: 360,80
+  size: 16, 16    
+Idle 
+  xy: 392,80
+  size: 16, 16  
+Idle 
+  xy: 424,80
+  size: 16, 16     
+Idle 
+  xy: 456,80
+  size: 16, 16    
+Idle 
+  xy: 488,80
+  size: 16, 16  
+Walk 
+  xy: 8,144
+  size: 16, 16  
+Walk 
+  xy: 40,144
+  size: 16, 16 
+Walk 
+  xy: 72,144
+  size: 16, 16  
+Walk 
+  xy: 104,144
+  size: 16, 16 
+Walk 
+  xy: 136,144
+  size: 16, 16  
+Walk 
+  xy: 168,144
+  size: 16, 16 
+Walk 
+  xy: 200,144
+  size: 16, 16  
+Walk 
+  xy: 232,144
+  size: 16, 16
+Attack 
+  xy: 8,172
+  size: 24, 20 
+Attack 
+  xy: 40,172
+  size: 24, 20 
+Attack 
+  xy: 72,172
+  size: 24, 20  
+Attack 
+  xy: 104,172
+  size: 24, 20 
+Attack 
+  xy: 136,172
+  size: 24, 20  
+Attack 
+  xy: 168,172
+  size: 24, 20 
+Attack 
+  xy: 200,172
+  size: 24, 20 
+Attack 
+  xy: 200,172
+  size: 24, 20 
+Death 
+  xy: 0,224
+  size: 32, 32
+Death 
+  xy: 32,224
+  size: 32, 32
+Death 
+  xy: 64,224
+  size: 32, 32
+Death 
+  xy: 96,224
+  size: 32, 32
+Death 
+  xy: 128,224
+  size: 32, 32

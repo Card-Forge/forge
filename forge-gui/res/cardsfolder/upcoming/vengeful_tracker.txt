@@ -1,0 +1,7 @@
+Name:Vengeful Tracker
+ManaCost:1 R
+Types:Creature Human Detective
+PT:2/2
+T:Mode$ Sacrificed | ValidCard$ Artifact.OppCtrl | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices an artifact, CARDNAME deals 2 damage to them.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
+Oracle:Whenever an opponent sacrifices an artifact, Vengeful Tracker deals 2 damage to them.

@@ -1,0 +1,21 @@
+Name:Lodestone Needle
+ManaCost:1 U
+Types:Artifact
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap up to one target artifact or creature and put two stun counters on it.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select up to one target artifact or creature | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 2
+K:Craft:2 U ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Counters
+Oracle:Flash\nWhen Lodestone Needle enters the battlefield, tap up to one target artifact or creature and put two stun counters on it.\nCraft with artifact {2}{U} ({2}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Guidestone Compass
+ManaCost:no cost
+Colors:blue
+Types:Artifact
+A:AB$ Explore | Cost$ 1 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | SpellDescription$ Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
+Oracle:{1}, {T}: Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)

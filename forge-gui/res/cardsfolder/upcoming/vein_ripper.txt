@@ -1,0 +1,11 @@
+Name:Vein Ripper
+ManaCost:3 B B B
+Types:Creature Vampire Assassin
+PT:6/5
+K:Flying
+K:Ward:Sac<1/Creature/creature>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature dies, target opponent loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:Flying\nWard—Sacrifice a creature.\nWhenever a creature dies, target opponent loses 2 life and you gain 2 life.

@@ -1,0 +1,333 @@
+//Rank|Name|Rarity|Set
+#1|Karn Liberated|M|2XM
+#2|Wurmcoil Engine|M|2XM
+#3|The Scarab God|M|2XM
+#4|Archangel of Thune|M|2XM
+#5|Jace, the Mind Sculptor|M|2XM
+#6|Atraxa, Praetors' Voice|M|2XM
+#7|Batterskull|M|2XM
+#8|Thragtusk|R|2XM
+#9|Skithiryx, the Blight Dragon|M|2XM
+#10|Sword of Fire and Ice|M|2XM
+#11|Geth, Lord of the Vault|M|2XM
+#12|Myr Battlesphere|R|2XM
+#13|Falkenrath Aristocrat|R|2XM
+#14|Vish Kal, Blood Arbiter|R|2XM
+#15|Mana Crypt|M|2XM
+#16|Riku of Two Reflections|M|2XM
+#17|Walking Ballista|R|2XM
+#18|Duplicant|R|2XM
+#19|Progenitor Mimic|R|2XM
+#20|Breya, Etherium Shaper|M|2XM
+#21|Sword of Feast and Famine|M|2XM
+#22|Sword of Body and Mind|M|2XM
+#23|Terastodon|R|2XM
+#24|Sword of War and Peace|M|2XM
+#25|Avenger of Zendikar|M|2XM
+#26|Cyclonic Rift|R|2XM
+#27|Council's Judgment|R|2XM
+#28|Basilisk Collar|R|2XM
+#29|Brudiclad, Telchor Engineer|R|2XM
+#30|Path to Exile|U|2XM
+#31|Sen Triplets|M|2XM
+#32|Sword of Light and Shadow|M|2XM
+#33|Champion of Lambholt|R|2XM
+#34|Sunforger|R|2XM
+#35|Austere Command|R|2XM
+#36|Stonehewer Giant|R|2XM
+#37|Wrath of God|R|2XM
+#38|Phyrexian Metamorph|R|2XM
+#39|Hammer of Nazahn|R|2XM
+#40|Sharuum the Hegemon|R|2XM
+#41|Voice of Resurgence|R|2XM
+#42|Rolling Earthquake|R|2XM
+#43|Savageborn Hydra|R|2XM
+#44|Dualcaster Mage|R|2XM
+#45|Dark Confidant|M|2XM
+#46|Karrthus, Tyrant of Jund|M|2XM
+#47|Baleful Strix|R|2XM
+#48|Blade Splicer|R|2XM
+#49|Maelstrom Pulse|R|2XM
+#50|Unlicensed Disintegration|U|2XM
+#51|Abrade|C|2XM
+#52|Grim Lavamancer|R|2XM
+#53|Maze of Ith|R|2XM
+#54|Isochron Scepter|R|2XM
+#55|Awakening Zone|R|2XM
+#56|Sphinx Summoner|U|2XM
+#57|Land Tax|M|2XM
+#58|Avacyn, Angel of Hope|M|2XM
+#59|Noble Hierarch|R|2XM
+#60|Doomed Necromancer|R|2XM
+#61|Flickerwisp|U|2XM
+#62|Cranial Plating|U|2XM
+#63|Yavimaya's Embrace|U|2XM
+#64|Cast Down|C|2XM
+#65|Bosh, Iron Golem|R|2XM
+#66|Fatal Push|U|2XM
+#67|Galvanic Blast|U|2XM
+#68|Ghor-Clan Rampager|U|2XM
+#69|Geist of Saint Traft|M|2XM
+#70|Sundering Titan|R|2XM
+#71|Grand Architect|R|2XM
+#72|Puresteel Paladin|R|2XM
+#73|Swiftblade Vindicator|R|2XM
+#74|Toxic Deluge|R|2XM
+#75|Basalt Monolith|U|2XM
+#76|Morkrut Banshee|U|2XM
+#77|Selesnya Guildmage|U|2XM
+#78|Conjurer's Closet|R|2XM
+#79|Rhys the Redeemed|R|2XM
+#80|Spellskite|R|2XM
+#81|Magus of the Will|R|2XM
+#82|Merciless Eviction|R|2XM
+#83|Deepglow Skate|R|2XM
+#84|Reclamation Sage|U|2XM
+#85|Valorous Stance|U|2XM
+#86|Dread Return|U|2XM
+#87|Disciple of the Vault|U|2XM
+#88|Lightning Greaves|U|2XM
+#89|Brimstone Volley|U|2XM
+#90|Serra Sphinx|U|2XM
+#91|Izzet Charm|U|2XM
+#92|Glassdust Hulk|U|2XM
+#93|Esperzoa|U|2XM
+#94|Adaptive Automaton|R|2XM
+#95|Arixmethes, Slumbering Isle|R|2XM
+#96|Skirsdag High Priest|R|2XM
+#97|Liege of the Tangle|R|2XM
+#98|Rage Reflection|R|2XM
+#99|Pyrewild Shaman|U|2XM
+#100|Kuldotha Flamefiend|U|2XM
+#101|Master Splicer|U|2XM
+#102|Thopter Engineer|U|2XM
+#103|Executioner's Capsule|C|2XM
+#104|Vengevine|M|2XM
+#105|Imperial Recruiter|M|2XM
+#106|Master of Etherium|R|2XM
+#107|Kemba, Kha Regent|R|2XM
+#108|Godo, Bandit Warlord|R|2XM
+#109|Thoughtseize|R|2XM
+#110|Disciple of Bolas|R|2XM
+#111|Hidden Stockpile|U|2XM
+#112|Myrsmith|U|2XM
+#113|Ulvenwald Mysteries|U|2XM
+#114|Ravenous Intruder|U|2XM
+#115|Weapons Trainer|U|2XM
+#116|Clear Shot|C|2XM
+#117|Conclave Naturalists|C|2XM
+#118|Doubling Season|M|2XM
+#119|Chrome Mox|M|2XM
+#120|Blasphemous Act|R|2XM
+#121|Jhoira, Weatherlight Captain|R|2XM
+#122|Hanna, Ship's Navigator|R|2XM
+#123|Oblivion Stone|R|2XM
+#124|Thirst for Knowledge|U|2XM
+#125|Treasure Keeper|U|2XM
+#126|Oubliette|U|2XM
+#127|Deathreap Ritual|U|2XM
+#128|Ovalchase Daredevil|U|2XM
+#129|Pyrite Spellbomb|C|2XM
+#130|Kozilek's Predator|C|2XM
+#131|Glint-Sleeve Artisan|C|2XM
+#132|Blinkmoth Nexus|R|2XM
+#133|Endless Atlas|R|2XM
+#134|Ratchet Bomb|R|2XM
+#135|Death's Shadow|R|2XM
+#136|Tuktuk the Explorer|R|2XM
+#137|Bloodspore Thrinax|R|2XM
+#138|Inkwell Leviathan|R|2XM
+#139|Trash for Treasure|U|2XM
+#140|Auriok Salvagers|U|2XM
+#141|Pentad Prism|U|2XM
+#142|Thopter Foundry|U|2XM
+#143|Gelatinous Genesis|U|2XM
+#144|Valor in Akros|U|2XM
+#145|O-Naginata|U|2XM
+#146|Golem Artisan|U|2XM
+#147|Thraben Inspector|C|2XM
+#148|Whisperer of the Wilds|C|2XM
+#149|Faerie Mechanist|C|2XM
+#150|Bone Picker|C|2XM
+#151|Ancestral Blade|C|2XM
+#152|Force of Will|M|2XM
+#153|Lux Cannon|R|2XM
+#154|Reshape|R|2XM
+#155|Chord of Calling|R|2XM
+#156|Stoneforge Mystic|R|2XM
+#157|Tempered Steel|R|2XM
+#158|Wound Reflection|R|2XM
+#159|Treasure Mage|U|2XM
+#160|Vampire Hexmage|U|2XM
+#161|Woodland Champion|U|2XM
+#162|Enlarge|U|2XM
+#163|Bloodshot Trainee|U|2XM
+#164|Rush of Knowledge|U|2XM
+#165|Sphinx of the Guildpact|U|2XM
+#166|Mishra's Factory|U|2XM
+#167|Myr Retriever|C|2XM
+#168|Lightning Axe|C|2XM
+#169|Sift|C|2XM
+#170|Twisted Abomination|C|2XM
+#171|Cloudreader Sphinx|C|2XM
+#172|Topple the Statue|C|2XM
+#173|Crib Swap|C|2XM
+#174|Angel of the Dawn|C|2XM
+#175|Everflowing Chalice|C|2XM
+#176|Arcum Dagsson|M|2XM
+#177|Magus of the Abyss|R|2XM
+#178|Engineered Explosives|R|2XM
+#179|Cragganwick Cremator|R|2XM
+#180|Master Transmuter|R|2XM
+#181|Beacon of Unrest|R|2XM
+#182|Mazirek, Kraul Death Priest|R|2XM
+#183|Leonin Abunas|R|2XM
+#184|Sword of the Meek|R|2XM
+#185|Fencing Ace|U|2XM
+#186|Chief of the Foundry|U|2XM
+#187|Skullmulcher|U|2XM
+#188|Sentinel of the Pearl Trident|U|2XM
+#189|Painsmith|U|2XM
+#190|Riddlesmith|U|2XM
+#191|Drown in Sorrow|U|2XM
+#192|Pongify|U|2XM
+#193|Sandstone Oracle|U|2XM
+#194|Cogwork Assembler|U|2XM
+#195|Temur Battle Rage|C|2XM
+#196|Elvish Aberration|C|2XM
+#197|Parasitic Strix|C|2XM
+#198|Sanctum Gargoyle|C|2XM
+#199|Metalspinner's Puzzleknot|C|2XM
+#200|Flayer Husk|C|2XM
+#201|Darksteel Axe|C|2XM
+#202|Crusader of Odric|C|2XM
+#203|Sanctum Spirit|C|2XM
+#204|Mox Opal|M|2XM
+#205|Heat Shimmer|R|2XM
+#206|Greater Good|R|2XM
+#207|Mystic Gate|R|2XM
+#208|Sunken Ruins|R|2XM
+#209|Wooded Bastion|R|2XM
+#210|Graven Cairns|R|2XM
+#211|Fire-Lit Thicket|R|2XM
+#212|Academy Ruins|R|2XM
+#213|Ion Storm|R|2XM
+#214|Shamanic Revelation|R|2XM
+#215|Salvage Titan|R|2XM
+#216|Goblin Guide|R|2XM
+#217|Ad Nauseam|R|2XM
+#218|Flooded Grove|R|2XM
+#219|Rugged Prairie|R|2XM
+#220|Twilight Mire|R|2XM
+#221|Cascade Bluffs|R|2XM
+#222|Fetid Heath|R|2XM
+#223|Mesmeric Orb|R|2XM
+#224|Manamorphose|U|2XM
+#225|Hinder|U|2XM
+#226|Coretapper|U|2XM
+#227|Culling Dais|U|2XM
+#228|Clone Shell|U|2XM
+#229|Buried Ruin|U|2XM
+#230|Chromatic Star|C|2XM
+#231|Fierce Empath|C|2XM
+#232|Battle-Rattle Shaman|C|2XM
+#233|Argivian Restoration|C|2XM
+#234|Defiant Salvager|C|2XM
+#235|Apprentice Wizard|C|2XM
+#236|Sickleslicer|C|2XM
+#237|Cathodion|C|2XM
+#238|Sculpting Steel|R|2XM
+#239|Meddling Mage|R|2XM
+#240|Ethersworn Canonist|R|2XM
+#241|Heartbeat of Spring|R|2XM
+#242|Well of Ideas|R|2XM
+#243|High Market|R|2XM
+#244|Mishra's Bauble|U|2XM
+#245|Throne of Geth|U|2XM
+#246|Ash Barrens|U|2XM
+#247|Dismantle|U|2XM
+#248|Invigorate|U|2XM
+#249|Jhoira's Familiar|U|2XM
+#250|Skinwing|C|2XM
+#251|Ichor Wellspring|C|2XM
+#252|Rapacious Dragon|C|2XM
+#253|Salivating Gremlins|C|2XM
+#254|Skinbrand Goblin|C|2XM
+#255|Sylvan Might|C|2XM
+#256|Chatter of the Squirrel|C|2XM
+#257|Silumgar Scavenger|C|2XM
+#258|Driver of the Dead|C|2XM
+#259|Frogify|C|2XM
+#260|Vulshok Gauntlets|C|2XM
+#261|Magnifying Glass|C|2XM
+#262|Golem-Skin Gauntlets|C|2XM
+#263|Sneak Attack|M|2XM
+#264|Glimmervoid|R|2XM
+#265|Kuldotha Forgemaster|R|2XM
+#266|Braids, Conjurer Adept|R|2XM
+#267|Vexing Shusher|R|2XM
+#268|Bloodbriar|C|2XM
+#269|Ancient Stirrings|C|2XM
+#270|Weapon Surge|C|2XM
+#271|Kazuul's Toll Collector|C|2XM
+#272|Might of the Masses|C|2XM
+#273|Death-Hood Cobra|C|2XM
+#274|Balduvian Rage|C|2XM
+#275|Relic Runner|C|2XM
+#276|Supernatural Stamina|C|2XM
+#277|Metallic Rebuke|C|2XM
+#278|Dire Fleet Hoarder|C|2XM
+#279|Divest|C|2XM
+#280|Strength of Arms|C|2XM
+#281|Remember the Fallen|C|2XM
+#282|Revoke Existence|C|2XM
+#283|Peace Strider|C|2XM
+#284|Masterwork of Ingenuity|R|2XM
+#285|Phyrexian Revoker|R|2XM
+#286|Veteran Explorer|U|2XM
+#287|Expedition Map|U|2XM
+#288|Brainstorm|C|2XM
+#289|Orcish Vandal|C|2XM
+#290|Cathartic Reunion|C|2XM
+#291|Goblin Gaveleer|C|2XM
+#292|Crushing Vines|C|2XM
+#293|Glaze Fiend|C|2XM
+#294|Heartless Pillage|C|2XM
+#295|Corridor Monitor|C|2XM
+#296|Costly Plunder|C|2XM
+#297|Alabaster Mage|C|2XM
+#298|Fortify|C|2XM
+#299|Tumble Magnet|C|2XM
+#300|Surge Node|C|2XM
+#301|Iron Bully|C|2XM
+#302|Iron League Steed|C|2XM
+#303|Kaalia of the Vast|M|2XM
+#304|Dark Depths|M|2XM
+#305|Mana Echoes|M|2XM
+#306|Open the Vaults|R|2XM
+#307|Mana Reflection|R|2XM
+#308|Fulminator Mage|R|2XM
+#309|Darksteel Citadel|U|2XM
+#310|Springleaf Drum|U|2XM
+#311|Welding Jar|U|2XM
+#312|Steel Sabotage|C|2XM
+#313|Gleaming Barrier|C|2XM
+#314|Eager Construct|C|2XM
+#315|Accomplished Automaton|C|2XM
+#316|Ensnaring Bridge|M|2XM
+#317|Boon Reflection|R|2XM
+#318|Thought Reflection|R|2XM
+#319|Exploration|R|2XM
+#320|Time Sieve|R|2XM
+#321|Crop Rotation|U|2XM
+#322|Vedalken Infuser|C|2XM
+#323|Thespian's Stage|R|2XM
+#324|Blood Moon|R|2XM
+#325|Trinisphere|M|2XM
+#326|Maelstrom Nexus|M|2XM
+#327|Urza's Mine|C|2XM
+#328|Urza's Power Plant|C|2XM
+#329|Urza's Tower|C|2XM
+#330|Ravenous Trap|R|2XM
+#331|Blightsteel Colossus|M|2XM
+#332|Darksteel Forge|M|2XM

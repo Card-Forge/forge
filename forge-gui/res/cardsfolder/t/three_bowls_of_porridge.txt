@@ -1,0 +1,10 @@
+Name:Three Bowls of Porridge
+ManaCost:2
+Types:Artifact Food
+A:AB$ Charm | Cost$ 2 T | Choices$ DBDamage,DBTap,DBSac | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBGainLife | SpellDescription$ Sacrifice CARDNAME. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHas:Ability$LifeGain|Sacrifice
+Oracle:{2}, {T}: Choose one that hasn't been chosen —\n• Three Bowls of Porridge deals 2 damage to target creature.\n• Tap target creature.\n• Sacrifice Three Bowls of Porridge. You gain 3 life.

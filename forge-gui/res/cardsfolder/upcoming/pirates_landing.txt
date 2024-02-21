@@ -1,0 +1,10 @@
+Name:Pirate's Landing
+ManaCost:R
+Types:Sorcery
+A:SP$ Branch | BranchConditionSVar$ TreasureCheck | BranchConditionSVarCompare$ GE1 | FalseSubAbility$ DBDraw | TrueSubAbility$ DBSeek | SpellDescription$ Draw a card. If mana from a Treasure was spent to cast this spell, seek a Pirate card instead.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBSeek:DB$ Seek | Type$ Pirate | SpellDescription$ Seek a Pirate card
+SVar:TreasureCheck:Count$CastTotalManaSpent Treasure
+SVar:AIPreference:ManaFrom$Treasure
+DeckNeeds:Type$Pirate|Treasure
+Oracle:Draw a card. If mana from a Treasure was spent to cast this spell, seek a Pirate card instead.

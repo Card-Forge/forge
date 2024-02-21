@@ -19,7 +19,7 @@ Colors:white,blue
 Types:Legendary Artifact Vehicle
 PT:1/3
 K:Living metal
-S:Mode$ Continuous | Affected$ Human.YouCtrl | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$ Human spells you control can't be countered.
+R:Event$ Counter | ValidSA$ Spell.Human+YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Human spells you control can't be countered.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Human.attacking+Other | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME and at least one Human attack, draw a card and convert NICKNAME.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform

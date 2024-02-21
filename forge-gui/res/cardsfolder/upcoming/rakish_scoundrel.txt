@@ -1,0 +1,10 @@
+Name:Rakish Scoundrel
+ManaCost:2 B G
+Types:Creature Elf Rogue
+PT:3/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, target creature gains indestructible until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, target creature gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Indestructible
+K:Disguise:4 BG BG
+Oracle:Deathtouch\nWhen Rakish Scoundrel enters the battlefield or is turned face up, target creature gains indestructible until end of turn.\nDisguise {4}{B/G}{B/G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

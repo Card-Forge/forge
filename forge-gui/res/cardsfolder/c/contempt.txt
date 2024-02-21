@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | Execute$ DelBounce | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature attacks, return it and CARDNAME to their owners' hands at end of combat.
 SVar:DelBounce:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ BounceCritter | TriggerDescription$ Return enchanted creature and CARDNAME to their owners' hands.
-SVar:BounceCritter:DB$ ChangeZone | Defined$ Enchanted | Origin$ Battlefield | Destination$ Hand | SubAbility$ BounceSelf
-SVar:BounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:BounceCritter:DB$ ChangeZone | Defined$ EnchantedAndSelf | Origin$ Battlefield | Destination$ Hand
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\nWhen enchanted creature attacks, return it and Contempt to their owners' hands at end of combat.

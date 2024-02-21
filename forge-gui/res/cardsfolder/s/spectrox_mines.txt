@@ -1,0 +1,11 @@
+Name:Spectrox Mines
+ManaCost:no cost
+Types:Plane Androzani Minor
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, you lose 3 life and create a Treasure token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, you lose 3 life and create a Treasure token.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create a Food token and a 2/2 black Human Rogue creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac,b_2_2_human_rogue | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure|Human|Rogue|Food & Color$Black
+Oracle:When you planeswalk to Spectrox Mines and at the beginning of your upkeep, you lose 3 life and create a Treasure token.\nWhenever chaos ensues, create a Food token and a 2/2 black Human Rogue creature token.

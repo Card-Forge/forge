@@ -352,6 +352,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> hasSuspend() {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.hasSuspend();
+            }
+        };
+    }
+
     public static final Predicate<Card> hasCounters() {
         return new Predicate<Card>() {
             @Override
@@ -540,6 +549,13 @@ public final class CardPredicates {
             @Override
             public boolean apply(Card c) {
                 return c.isUntapped();
+            }
+        };
+
+        public static final Predicate<Card> CAN_TAP = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.canTap();
             }
         };
         /**

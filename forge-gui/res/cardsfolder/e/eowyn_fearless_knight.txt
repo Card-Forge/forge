@@ -1,4 +1,4 @@
-Name:Eowyn, Fearless Knight
+Name:Éowyn, Fearless Knight
 ManaCost:2 R W
 Types:Legendary Creature Human Knight
 PT:3/4
@@ -8,4 +8,4 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Valid
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.YouCtrl+Legendary | Gains$ TargetedCardColor
 SVar:X:Count$CardPower
 DeckHints:Type$Legendary
-Oracle:Haste\nWhen Eowyn, Fearless Knight enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
+Oracle:Haste\nWhen Éowyn, Fearless Knight enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.

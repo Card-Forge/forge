@@ -1,0 +1,10 @@
+Name:A Killer Among Us
+ManaCost:4 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human creature token, a 1/1 blue Merfolk creature token, and a 1/1 red Goblin creature token. Then secretly choose Human, Merfolk, or Goblin.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human,u_1_1_merfolk,r_1_1_goblin | SubAbility$ DBChooseType
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | ValidTypes$ Human,Merfolk,Goblin | Secretly$ True
+A:AB$ PutCounter | Cost$ Sac<1/CARDNAME> RevealChosen<Type/creature type> | ValidTgts$ Creature.token+attacking | TgtPrompt$ Select target attacking creature token | AITgts$ Creature.token+attacking+ChosenType | Defined$ Targeted.ChosenType | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPump | StackDescription$ REP target attacking creature token_{c:Targeted} | SpellDescription$ If target attacking creature token is the chosen type, put three +1/+1 counters on it
+SVar:DBPump:DB$ Pump | Defined$ Targeted.ChosenType | KW$ Deathtouch | StackDescription$ SpellDescription | SpellDescription$ and it gains deathtouch until end of turn.
+DeckHas:Ability$Token|Sacrifice & Type$Human|Merfolk|Goblin & Color$White|Blue|Red
+Oracle:When A Killer Among Us enters the battlefield, create a 1/1 white Human creature token, a 1/1 blue Merfolk creature token, and a 1/1 red Goblin creature token. Then secretly choose Human, Merfolk, or Goblin.\nSacrifice A Killer Among Us, Reveal the chosen creature type: If target attacking creature token is the chosen type, put three +1/+1 counters on it and it gains deathtouch until end of turn.

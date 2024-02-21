@@ -1,0 +1,10 @@
+Name:Court of Ardenvale
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your upkeep, return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | ValidTgts$ Permanent.YouCtrl+cmcLE3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Monarch.1.0
+Oracle:When Court of Ardenvale enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead.

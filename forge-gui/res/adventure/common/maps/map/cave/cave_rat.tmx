@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Sub" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKACAMBMH0Nv7/tRJESGEgjeLJDlwZ2CpmAACc0fqcGsXu1azW7WL7btnNS6rdAICc4u+k+Y6fmwdjZwK/
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzllzEOwjAMRSM2CgMDTD1ape5cAIlbMLFzCy4DZ0GhMv1YduI0SYuEJauhbZwX9ycOzv2nbXZLE6SZ59WYV+ewlzAeL8SDz2+n8UouMWM/vE9xYuORtf3oUhw+LvFxv64H5/el/Er9pX6WebTdwB5i0lzjTmXV+HmetXc1Nus8clg5J+qLM1vyaf0Gufm1+hRmrgvOPFXTksakZ4/GuWcT5z7uw3PVtFxC27TuUCOHrY07pvkS609yba/I4a7JS8yYF9x/PbfXiuaatvi3LM7cj9dQzfglf2uj+66DSzOZmKF2L82Too25fWp+eB3M3ffnYP5oQ9ija/Pm1Ebc62rnR+O9uLS4eL7DM3sNjRCf5vdNGrO32rylmD967r7zTOx8zFSdcA2kMMf+eyE71kTMO/22MmPfGC8xh9YmtUPa8PzIizF4W8qLhTd0xsZ4ZL79An0rCH8=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="45" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztVktOxTAMLCsS2HAVxIITvILeAblCoeUc7xas+h6w4gw0qkYZXDdxQpetZKm/2OOxM87psWlOu+22W7X1rmnOfrbBzYb7d7dtnIFiScO3XMzg5zL9t3aNBh9WLhDnRcSTz7mYn9P3Vzfbm4vr7q/i/dHXYQ0Yf66jH9xLjNo7a8xnxVc3xf8uxMx+OHfGp+GuwRw4Z66Bty/s76cMnhzuEp5a/5ejg1/2++jz+GXuKcxsHLekDy9irdYvFt8Wrhm71S/rz6DoR1gbOPtSeMvVz4r542Zpo19qImtwTuewRv6X2iOyx+QV8tV42PrqXNTEEG+N41bZAxJrWNv6qLNr2BHTkpvUJ6kfOe3gPci+RqoxzzzZf5ybzB/f2Nb6ltda9jU4TPnmPLj/MAdDLbAvwLlWX1mvA9UR72rn+drM0up/FDxZZgwwcs6Mu0RDU1oC/7I/Rr/U3ZIYmC3Qw9CjNVyjhrd3en9oeotaWOciMHPOHdWx9OwksaPfc7qgxeHzxDmRM/JFLrWYcz3DWqNxLLXkQTmH8Z4t3RdW3uXZDFqTwitzY43CDOB9WHNGtfRLal4FY+1J5ab53xKv1XrSgP9y9gt1eRRc
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="45" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDAeQIgnBgxXIszMwKAGxAjtCjEkKggcDaEPjg9z7iJWB4QCQ3g119zROhPxKUbo6DwV8hobhezEGhg9iCPG9QHEXqJtB+CErIrwPSgysm0GgjpeBoVecgaFPHFUc2d3OQHofO3b9Aw0+o7kL5O4WtsHr3pEK0PPyKBgFMDBQaePnANlLazBc/TUKyAOj6QE7ALV9RsEoIAQAN7Ia0Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="435.333" y="397.333" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/gold.tx" x="493.991" y="88.765"/>
+  <object id="55" template="../../obj/treasure.tx" x="170.417" y="110.333"/>
+  <object id="58" template="../../obj/enemy.tx" x="269.108" y="224.107">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="72,73"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/enemy.tx" x="181.41" y="157.167">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/enemy.tx" x="308.463" y="332.026" visible="1">
+   <properties>
+    <property name="enemy" value="Nezumi Ninja"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/booster.tx" x="317.862" y="129.955">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;TSP&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="289.277" y="129.038">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot; ] }"/>
+    <property name="enemy" value="Nezumi Leader"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="415.765" y="236.565">
+   <properties>
+    <property name="enemy" value="Black Golem"/>
+    <property name="speedModifier" type="float" value="4"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/waypoint.tx" x="375.723" y="226.841"/>
+  <object id="73" template="../../obj/waypoint.tx" x="148.186" y="218.413"/>
+  <object id="75" template="../../obj/enemy.tx" x="631.913" y="193.693">
+   <properties>
+    <property name="enemy" value="Wild Rat"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/enemy.tx" x="534.718" y="146.5">
+   <properties>
+    <property name="enemy" value="Wild Rat"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="81,86,82,80,82,86,81"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/enemy.tx" x="645.396" y="285.27">
+   <properties>
+    <property name="enemy" value="Wild Rat"/>
+    <property name="speedModifier" type="float" value="2"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/waypoint.tx" x="579.102" y="316.732"/>
+  <object id="81" template="../../obj/waypoint.tx" x="536.965" y="107.735"/>
+  <object id="82" template="../../obj/waypoint.tx" x="554.943" y="247.628"/>
+  <object id="83" template="../../obj/manashards.tx" x="285.832" y="370.105"/>
+  <object id="84" template="../../obj/manashards.tx" x="643.711" y="257.741"/>
+  <object id="85" template="../../obj/treasure.tx" x="615.62" y="158.299"/>
+  <object id="86" template="../../obj/waypoint.tx" x="535.28" y="201.559"/>
+ </objectgroup>
+</map>

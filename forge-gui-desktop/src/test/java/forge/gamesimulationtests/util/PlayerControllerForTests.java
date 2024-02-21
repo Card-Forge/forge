@@ -35,6 +35,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
@@ -186,18 +187,17 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> newParam) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params) {
         return true;
     }
 
     @Override
-    public boolean confirmBidAction(SpellAbility sa,
-            PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
+    public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner) {
         return false;
     }
 
     @Override
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
+    public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
         return true;
     }
 
@@ -239,12 +239,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addSuffix) {
         //nothing needs to be done here
     }
 
     @Override
-    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addSuffix) {
         //nothing needs to be done here
     }
 
@@ -496,6 +496,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Integer chooseRollToIgnore(List<Integer> rolls) {
+        return Aggregates.random(rolls);
+    }
+
+    @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return chooseItem(options);
     }
@@ -527,6 +532,12 @@ public class PlayerControllerForTests extends PlayerController {
     public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleReplacers, null);
+    }
+
+    @Override
+    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+        // TODO Auto-generated method stub
+        return Iterables.getFirst(possibleStatics, null);
     }
 
     @Override
@@ -720,10 +731,14 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
+        return max;
     }
 
     @Override

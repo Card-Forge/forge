@@ -1,7 +1,7 @@
 Name:Birth of the Imperium
 ManaCost:2 W U B
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBSacrifice,DBDraw
+K:Chapter:3:DBToken,DBSacrifice,DBDraw
 SVar:DBToken:DB$ Token | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenAmount$ X | SpellDescription$ Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.
 SVar:X:PlayerCountOpponents$Amount
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.

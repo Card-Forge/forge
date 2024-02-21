@@ -282,6 +282,32 @@ ScryfallCode=KTK
 268 L Forest @Titus Lunter
 269 L Forest @Adam Paquette
 
+[alternate art]
+16y C Mardu Hateblade @Nathaniel Himawan
+45y R Kheru Spellsnatcher @Slawomir Maniak
+71y C Dutiful Return @Andrew Mar
+72y M Empty the Pits @Danny Schwartz
+73y R Grim Haruspex @Josiah "Jo" Cameron
+81y U Murderous Cut @Andrew Mar
+84y C Rakshasa's Secret @Andrew Mar
+86y C Rite of the Serpent @Kev Fang
+89y C Shambling Attendants @Andreia Ugrai
+92y U Swarm of Bloodflies @Monztre
+95y C Act of Treason @Josiah "Jo" Cameron
+97y U Arc Lightning @Nathaniel Himawan
+106y R Crater's Claws @Nathaniel Himawan
+115y U Mardu Blazebringer @Nathaniel Himawan
+192y R Rakshasa Deathdealer @Marzena Nereida Piwowar
+193y R Rakshasa Vizier @Nathaniel Himawan
+198y U Secret Plans @Inkognit
+199y M Sidisi, Brood Tyrant @Zezhou Chen
+201y C Snowhorn Rider @Nathaniel Himawan
+203y R Sultai Ascendancy @Eelis Kyttanen
+211y R Villainous Wealth @Josu Solano
+218y U Cranial Archive @Igor Krstic
+236y U Mystic Monastery @Josu Solano
+237y C Nomad Outpost @Kamila Szutenberg
+
 [tokens]
 w_3_4_bird_flying
 w_1_1_spirit_flying

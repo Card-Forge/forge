@@ -113,7 +113,7 @@ public class Aggregates {
                 default: return src.get(MyRandom.getRandom().nextInt(len));
             }
         }
-        
+
         T candidate = null;
         int lowest = Integer.MAX_VALUE;
         for (final T item : source) {

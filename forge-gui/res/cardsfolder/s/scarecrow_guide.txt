@@ -1,0 +1,7 @@
+Name:Scarecrow Guide
+ManaCost:2
+Types:Artifact Creature Scarecrow
+PT:2/1
+K:Reach
+A:AB$ Mana | Cost$ 1 | Produced$ Any | ActivationLimit$ 1 | SpellDescription$ Add one mana of any color. Activate only once each turn.
+Oracle:Reach\n{1}: Add one mana of any color. Activate only once each turn.

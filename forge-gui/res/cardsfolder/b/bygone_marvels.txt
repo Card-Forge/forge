@@ -1,0 +1,11 @@
+Name:Bygone Marvels
+ManaCost:G G
+Types:Sorcery
+T:Mode$ SpellCast | CheckSVar$ X | SVarCompare$ GE8 | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Descend 8 — When you cast this spell, if there are eight or more permanent cards in your graveyard, copy this spell twice. You may choose new targets for the copies.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent card in your graveyard | SubAbility$ ExileSelf | SpellDescription$ Return target permanent card from your graveyard to your hand.
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Descend 8 — When you cast this spell, if there are eight or more permanent cards in your graveyard, copy this spell twice. You may choose new targets for the copies.\nReturn target permanent card from your graveyard to your hand. Exile Bygone Marvels.

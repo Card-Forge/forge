@@ -1,0 +1,10 @@
+Name:Soaring Sandwing
+ManaCost:4 W W
+Types:Creature Dinosaur
+PT:3/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+K:TypeCycling:Plains:2
+DeckHas:Ability$Discard|LifeGain
+Oracle:Flying\nWhen Soaring Sandwing enters the battlefield, you gain 3 life.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

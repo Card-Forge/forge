@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Bribery|R|MMQ
+#2|Power Matrix|R|MMQ
+#3|Thrashing Wumpus|R|MMQ
+#4|Cateran Overlord|R|MMQ
+#5|Wave of Reckoning|R|MMQ
+#6|Ramosian Captain|U|MMQ
+#7|Ramosian Sky Marshal|R|MMQ
+#8|Rishadan Port|R|MMQ
+#9|Extravagant Spirit|R|MMQ
+#10|Jhovall Queen|R|MMQ
+#11|Trade Routes|R|MMQ
+#12|Cateran Enforcer|U|MMQ
+#13|Delraich|R|MMQ
+#14|Cateran Slaver|R|MMQ
+#15|Strongarm Thug|U|MMQ
+#16|Volcanic Wind|U|MMQ
+#17|Sand Squid|R|MMQ
+#18|Cinder Elemental|U|MMQ
+#19|Overtaker|R|MMQ
+#20|Brawl|R|MMQ
+#21|Forced March|R|MMQ
+#22|Two-Headed Dragon|R|MMQ
+#23|Saprazzan Heir|R|MMQ
+#24|Silent Assassin|R|MMQ
+#25|Collective Unconscious|R|MMQ
+#26|Cho-Manno, Revolutionary|R|MMQ
+#27|Arrest|U|MMQ
+#28|Battle Squadron|R|MMQ
+#29|Rishadan Brigand|R|MMQ
+#30|Aerial Caravan|R|MMQ
+#31|Ballista Squad|U|MMQ
+#32|Coastal Piracy|U|MMQ
+#33|Snuff Out|C|MMQ
+#34|Cho-Arrim Bruiser|R|MMQ
+#35|Rushwood Elemental|R|MMQ
+#36|Hunted Wumpus|U|MMQ
+#37|Charmed Griffin|U|MMQ
+#38|Notorious Assassin|R|MMQ
+#39|Blood Oath|R|MMQ
+#40|Thunderclap|C|MMQ
+#41|Ramosian Commander|U|MMQ
+#42|Stinging Barrier|C|MMQ
+#43|Reverent Mantra|R|MMQ
+#44|Hired Giant|U|MMQ
+#45|Seismic Mage|R|MMQ
+#46|War Tax|U|MMQ
+#47|Sever Soul|C|MMQ
+#48|Waterfront Bouncer|C|MMQ
+#49|Rappelling Scouts|R|MMQ
+#50|Vendetta|C|MMQ
+#51|Saber Ants|U|MMQ
+#52|Story Circle|U|MMQ
+#53|Vine Trellis|C|MMQ
+#54|Rishadan Airship|C|MMQ
+#55|Ramosian Lieutenant|C|MMQ
+#56|Afterlife|U|MMQ
+#57|Shock Troops|C|MMQ
+#58|Silverglade Pathfinder|U|MMQ
+#59|Rishadan Pawnshop|R|MMQ
+#60|Nether Spirit|R|MMQ
+#61|Lunge|C|MMQ
+#62|Charisma|R|MMQ
+#63|Thermal Glider|C|MMQ
+#64|Unnatural Hunger|R|MMQ
+#65|Vine Dryad|R|MMQ
+#66|General's Regalia|R|MMQ
+#67|Highway Robber|C|MMQ
+#68|Ramosian Sergeant|C|MMQ
+#69|Megatherium|R|MMQ
+#70|Squallmonger|U|MMQ
+#71|Crackdown|R|MMQ
+#72|Scandalmonger|U|MMQ
+#73|Cave-In|R|MMQ
+#74|Tidal Kraken|R|MMQ
+#75|Groundskeeper|U|MMQ
+#76|Flailing Manticore|R|MMQ
+#77|Gush|C|MMQ
+#78|Counterspell|C|MMQ
+#79|Midnight Ritual|R|MMQ
+#80|Lava Runner|R|MMQ
+#81|Eye of Ramos|R|MMQ
+#82|Dawnstrider|R|MMQ
+#83|Rishadan Footpad|U|MMQ
+#84|Drake Hatchling|C|MMQ
+#85|Monkey Cage|R|MMQ
+#86|Cateran Kidnappers|U|MMQ
+#87|Brainstorm|C|MMQ
+#88|Nightwind Glider|C|MMQ
+#89|Squee, Goblin Nabob|R|MMQ
+#90|Tooth of Ramos|R|MMQ
+#91|Primeval Shambler|U|MMQ
+#92|Soothsaying|U|MMQ
+#93|Cowardice|R|MMQ
+#94|Cho-Arrim Alchemist|R|MMQ
+#95|Arms Dealer|U|MMQ
+#96|Lumbering Satyr|U|MMQ
+#97|Instigator|R|MMQ
+#98|Snorting Gahr|C|MMQ
+#99|Horned Troll|C|MMQ
+#100|Alley Grifters|C|MMQ
+#101|Cateran Brute|C|MMQ
+#102|Desert Twister|U|MMQ
+#103|Last Breath|U|MMQ
+#104|Heart of Ramos|R|MMQ
+#105|Jhovall Rider|U|MMQ
+#106|Steadfast Guard|C|MMQ
+#107|Unmask|R|MMQ
+#108|Horn of Ramos|R|MMQ
+#109|Wishmonger|U|MMQ
+#110|Crossbow Infantry|C|MMQ
+#111|Corrupt Official|R|MMQ
+#112|Silverglade Elemental|C|MMQ
+#113|Warmonger|U|MMQ
+#114|Ogre Taskmaster|U|MMQ
+#115|Cateran Persuader|C|MMQ
+#116|Skull of Ramos|R|MMQ
+#117|Fresh Volunteers|C|MMQ
+#118|Maggot Therapy|C|MMQ
+#119|Undertaker|C|MMQ
+#120|Blockade Runner|C|MMQ
+#121|Saprazzan Breaker|U|MMQ
+#122|Trap Runner|U|MMQ
+#123|Territorial Dispute|R|MMQ
+#124|Sailmonger|U|MMQ
+#125|Deepwood Elder|R|MMQ
+#126|Bargaining Table|R|MMQ
+#127|Lightning Hounds|C|MMQ
+#128|Giant Caterpillar|C|MMQ
+#129|Mercadian Atlas|R|MMQ
+#130|Lithophage|R|MMQ
+#131|Invigorate|C|MMQ
+#132|Fountain Watch|R|MMQ
+#133|Intimidation|U|MMQ
+#134|Kyren Negotiations|U|MMQ
+#135|Indentured Djinn|U|MMQ
+#136|Bog Smugglers|C|MMQ
+#137|Magistrate's Scepter|R|MMQ
+#138|Molting Harpy|U|MMQ
+#139|Pious Warrior|C|MMQ
+#140|Misdirection|R|MMQ
+#141|Boa Constrictor|U|MMQ
+#142|Dehydration|C|MMQ
+#143|Kris Mage|C|MMQ
+#144|Misshapen Fiend|C|MMQ
+#145|Haunted Crossroads|U|MMQ
+#146|Erithizon|R|MMQ
+#147|Deepwood Drummer|C|MMQ
+#148|Spontaneous Generation|R|MMQ
+#149|Deepwood Legate|U|MMQ
+#150|Howling Wolf|C|MMQ
+#151|Deathgazer|U|MMQ
+#152|Tectonic Break|R|MMQ
+#153|Thwart|U|MMQ
+#154|Spidersilk Armor|C|MMQ
+#155|Gerrard's Irregulars|C|MMQ
+#156|Enslaved Horror|U|MMQ
+#157|Pangosaur|R|MMQ
+#158|Wild Jhovall|C|MMQ
+#159|Armistice|R|MMQ
+#160|Caller of the Hunt|R|MMQ
+#161|Muzzle|C|MMQ
+#162|Skulking Fugitive|C|MMQ
+#163|Mercadian Lift|R|MMQ
+#164|Flailing Ogre|U|MMQ
+#165|Dark Ritual|C|MMQ
+#166|High Market|R|MMQ
+#167|Chambered Nautilus|U|MMQ
+#168|Land Grant|C|MMQ
+#169|Natural Affinity|R|MMQ
+#170|Bifurcate|R|MMQ
+#171|Crenellated Wall|U|MMQ
+#172|Task Force|C|MMQ
+#173|Henge Guardian|U|MMQ
+#174|Deepwood Ghoul|C|MMQ
+#175|Cho-Manno's Blessing|C|MMQ
+#176|Darting Merfolk|C|MMQ
+#177|Saprazzan Legate|U|MMQ
+#178|Alabaster Wall|C|MMQ
+#179|Cackling Witch|U|MMQ
+#180|Ramosian Rally|C|MMQ
+#181|Deadly Insect|C|MMQ
+#182|Rushwood Legate|U|MMQ
+#183|Ancestral Mask|C|MMQ
+#184|Rushwood Dryad|C|MMQ
+#185|Tiger Claws|C|MMQ
+#186|Customs Depot|U|MMQ
+#187|Venomous Dragonfly|C|MMQ
+#188|Kyren Sniper|C|MMQ
+#189|Glowing Anemone|U|MMQ
+#190|Kyren Legate|U|MMQ
+#191|Devout Witness|C|MMQ
+#192|Statecraft|R|MMQ
+#193|Rishadan Cutpurse|C|MMQ
+#194|Wall of Distortion|C|MMQ
+#195|Extortion|R|MMQ
+#196|Rampart Crawler|C|MMQ
+#197|Cho-Arrim Legate|U|MMQ
+#198|Rushwood Herbalist|C|MMQ
+#199|Peat Bog|C|MMQ
+#200|Diplomatic Escort|U|MMQ
+#201|Dust Bowl|R|MMQ
+#202|Deepwood Tantiv|U|MMQ
+#203|Balloon Peddler|C|MMQ
+#204|Ivory Mask|R|MMQ
+#205|Rain of Tears|U|MMQ
+#206|Cateran Summons|U|MMQ
+#207|Larceny|U|MMQ
+#208|Clear the Land|R|MMQ
+#209|Rock Badger|U|MMQ
+#210|Crooked Scales|R|MMQ
+#211|Barbed Wire|U|MMQ
+#212|Cloud Sprite|C|MMQ
+#213|Saprazzan Skerry|C|MMQ
+#214|Noble Purpose|U|MMQ
+#215|Stone Rain|C|MMQ
+#216|Black Market|R|MMQ
+#217|Battle Rampart|C|MMQ
+#218|War Cadence|U|MMQ
+#219|False Demise|U|MMQ
+#220|Revive|U|MMQ
+#221|Worry Beads|R|MMQ
+#222|Ley Line|U|MMQ
+#223|Embargo|R|MMQ
+#224|Puffer Extract|U|MMQ
+#225|Saprazzan Outrigger|C|MMQ
+#226|Chameleon Spirit|U|MMQ
+#227|Disenchant|C|MMQ
+#228|Blaster Mage|C|MMQ
+#229|Energy Flux|U|MMQ
+#230|Orim's Cure|C|MMQ
+#231|Flaming Sword|C|MMQ
+#232|Cavern Crawler|C|MMQ
+#233|Panacea|U|MMQ
+#234|Briar Patch|U|MMQ
+#235|Hoodwink|C|MMQ
+#236|Timid Drake|U|MMQ
+#237|Misstep|C|MMQ
+#238|Kyren Glider|C|MMQ
+#239|Toymaker|U|MMQ
+#240|Caustic Wasps|U|MMQ
+#241|Security Detail|R|MMQ
+#242|Conspiracy|R|MMQ
+#243|Ceremonial Guard|C|MMQ
+#244|Fountain of Cho|U|MMQ
+#245|Squall|C|MMQ
+#246|Magistrate's Veto|U|MMQ
+#247|Subterranean Hangar|U|MMQ
+#248|Shoving Match|U|MMQ
+#249|Henge of Ramos|U|MMQ
+#250|Bog Witch|C|MMQ
+#251|Charm Peddler|C|MMQ
+#252|Puppet's Verdict|R|MMQ
+#253|Squeeze|R|MMQ
+#254|Hickory Woodlot|C|MMQ
+#255|Close Quarters|U|MMQ
+#256|Venomous Breath|U|MMQ
+#257|Deepwood Wolverine|C|MMQ
+#258|Honor the Fallen|R|MMQ
+#259|Lure|U|MMQ
+#260|Ghoul's Feast|U|MMQ
+#261|Blood Hound|R|MMQ
+#262|Sandstone Needle|C|MMQ
+#263|Warpath|U|MMQ
+#264|Tremor|C|MMQ
+#265|Uphill Battle|U|MMQ
+#266|Common Cause|R|MMQ
+#267|Quagmire Lamprey|U|MMQ
+#268|Iron Lance|U|MMQ
+#269|Hammer Mage|U|MMQ
+#270|Karn's Touch|R|MMQ
+#271|Mercadian Bazaar|U|MMQ
+#272|Ignoble Soldier|U|MMQ
+#273|Saprazzan Bailiff|R|MMQ
+#274|High Seas|U|MMQ
+#275|Furious Assault|C|MMQ
+#276|Rouse|C|MMQ
+#277|Revered Elder|C|MMQ
+#278|Port Inspector|C|MMQ
+#279|Saprazzan Raider|C|MMQ
+#280|Snake Pit|U|MMQ
+#281|Robber Fly|U|MMQ
+#282|Ferocity|C|MMQ
+#283|Righteous Indignation|U|MMQ
+#284|Sizzle|C|MMQ
+#285|Inviolability|C|MMQ
+#286|Cave Sense|C|MMQ
+#287|Diplomatic Immunity|C|MMQ
+#288|Mercadia's Downfall|U|MMQ
+#289|Crumbling Sanctuary|R|MMQ
+#290|Remote Farm|C|MMQ
+#291|Tranquility|C|MMQ
+#292|Rushwood Grove|U|MMQ
+#293|Vernal Equinox|R|MMQ
+#294|Kyren Archive|R|MMQ
+#295|Credit Voucher|U|MMQ
+#296|Saprazzan Cove|U|MMQ
+#297|Flailing Soldier|C|MMQ
+#298|Tonic Peddler|U|MMQ
+#299|Sustenance|U|MMQ
+#300|Crash|C|MMQ
+#301|Moment of Silence|C|MMQ
+#302|Soul Channeling|C|MMQ
+#303|Kyren Toy|R|MMQ
+#304|Liability|R|MMQ
+#305|Tidal Bore|C|MMQ
+#306|Insubordination|C|MMQ
+#307|Specter's Wail|C|MMQ
+#308|Cornered Market|R|MMQ
+#309|Buoyancy|C|MMQ
+#310|Jeweled Torque|U|MMQ
+#311|Sacred Prey|C|MMQ
+#312|Word of Blasting|U|MMQ
+#313|Putrefaction|U|MMQ
+#314|Soothing Balm|C|MMQ
+#315|Food Chain|R|MMQ
+#316|Spiritual Focus|R|MMQ
+#317|Assembly Hall|R|MMQ
+#318|Pretender's Claim|U|MMQ
+#319|Horn of Plenty|R|MMQ
+#320|Renounce|U|MMQ
+#321|Tower of the Magistrate|R|MMQ
+#322|Game Preserve|R|MMQ
+#323|Moonlit Wake|U|MMQ
+#324|Righteous Aura|U|MMQ
+#325|Stamina|U|MMQ
+#326|Thieves' Auction|R|MMQ
+#327|Pulverize|R|MMQ
+#328|Foster|R|MMQ
+#329|Crag Saurian|R|MMQ
+#330|Distorting Lens|R|MMQ

@@ -1,0 +1,10 @@
+Name:Tributary Instructor
+ManaCost:3 G
+Types:Creature Merfolk Shaman
+PT:4/4
+K:Mentor
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever a creature you control with a +1/+1 counter on it dies, draw a card.

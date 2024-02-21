@@ -17,9 +17,15 @@
  */
 package forge.game.cost;
 
+import com.google.common.collect.Maps;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
+
+import java.util.Map;
 
 /**
  * The Class CostUntap.
@@ -77,7 +83,14 @@ public class CostUntap extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        ability.getHostCard().untap(true);
+        final Card c = ability.getHostCard();
+        if (c.untap(true)) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<Player, CardCollection> map = Maps.newHashMap();
+            map.put(ai, new CardCollection(c));
+            runParams.put(AbilityKey.Map, map);
+            ai.getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
+        }
         return true;
     }
 

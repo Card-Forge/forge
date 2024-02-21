@@ -1,6 +1,6 @@
 Name:Blustersquall
 ManaCost:U
 Types:Instant
-A:SP$ Tap | Cost$ U | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SpellDescription$ Tap target creature you don't control.
-A:SP$ TapAll | Cost$ 3 U | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | PrecostDesc$ Overload | CostDesc$ {3}{U} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Tap each creature you don't control.
+A:SP$ Tap | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SpellDescription$ Tap target creature you don't control.
+K:Overload:3 U
 Oracle:Tap target creature you don't control.\nOverload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

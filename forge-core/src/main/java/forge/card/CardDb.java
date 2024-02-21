@@ -47,6 +47,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
+    private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = Maps.newHashMap();
 
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -233,20 +234,32 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (final CardRules rule : rules.values()) {
             if (filteredCards.contains(rule.getName()) && !exlcudedCardName.equalsIgnoreCase(rule.getName()))
                 continue;
-            final ICardFace main = rule.getMainPart();
-            facesByName.put(main.getName(), main);
-            if (main.getAltName() != null) {
-                alternateName.put(main.getAltName(), main.getName());
-            }
-            final ICardFace other = rule.getOtherPart();
-            if (other != null) {
-                facesByName.put(other.getName(), other);
-                if (other.getAltName() != null) {
-                    alternateName.put(other.getAltName(), other.getName());
-                }
+            for (ICardFace face : rule.getAllFaces()) {
+                addFaceToDbNames(face);
             }
         }
         setCardArtPreference(cardArtPreference);
+    }
+
+    private void addFaceToDbNames(ICardFace face) {
+        if (face == null) {
+            return;
+        }
+        final String name = face.getName();
+        facesByName.put(name, face);
+        final String normalName = StringUtils.stripAccents(name);
+        if (!normalName.equals(name)) {
+            normalizedNames.put(normalName, name);
+        }
+
+        final String altName = face.getAltName();
+        if (altName != null) {
+            alternateName.put(altName, face.getName());
+            final String normalAltName = StringUtils.stripAccents(altName);
+            if (!normalAltName.equals(altName)) {
+                normalizedNames.put(normalAltName, altName);
+            }
+        }
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
@@ -262,7 +275,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void loadCard(String cardName, String setCode, CardRules cr) {
         // @leriomaggio: This method is called when lazy-loading is set
-        System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
+        // OR if a card is trying to load from an edition its not from
+        //System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
         boolean reIndexNecessary = false;
         CardEdition ed = editions.get(setCode);
@@ -292,6 +306,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<String> missingCards = new ArrayList<>();
         CardEdition upcomingSet = null;
         Date today = new Date();
+
+        // do this first so they're not considered missing
+        buildRenamedCards();
 
         for (CardEdition e : editions.getOrderedEditions()) {
             boolean coreOrExpSet = e.getType() == CardEdition.Type.CORE || e.getType() == CardEdition.Type.EXPANSION;
@@ -351,6 +368,38 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         reIndex();
+    }
+
+    private void buildRenamedCards() {
+        // for now just check Universes Within
+        for (CardInSet cis : editions.get("SLX").getCards()) {
+            String orgName = alternateName.get(cis.name);
+            if (orgName != null) {
+                // found original (beyond) print
+                CardRules org = getRules(orgName);
+
+                CardFace renamedMain = (CardFace) ((CardFace) org.getMainPart()).clone();
+                renamedMain.setName(renamedMain.getAltName());
+                renamedMain.setAltName(null);
+                // TODO this could mess up some "named ..." cardname literals but there's no printing like that currently
+                renamedMain.setOracleText(renamedMain.getOracleText().replace(orgName, renamedMain.getName()));
+                facesByName.put(renamedMain.getName(), renamedMain);
+                CardFace renamedOther = null;
+                if (org.getOtherPart() != null) {
+                    renamedOther = (CardFace) ((CardFace) org.getOtherPart()).clone();
+                    orgName = renamedOther.getName();
+                    renamedOther.setName(renamedOther.getAltName());
+                    renamedOther.setAltName(null);
+                    renamedOther.setOracleText(renamedOther.getOracleText().replace(orgName, renamedOther.getName()));
+                    facesByName.put(renamedOther.getName(), renamedOther);
+                }
+
+                CardRules within = new CardRules(new ICardFace[] { renamedMain, renamedOther, null, null, null, null, null }, org.getSplitType(), org.getAiHints());
+                // so workshop can edit same script
+                within.setNormalizedName(org.getNormalizedName());
+                rulesByName.put(cis.name, within);
+            }
+        }
     }
 
     public void addCard(PaperCard paperCard) {
@@ -919,7 +968,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardEdition edition = null;
                 try {
                     edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMO||edition.getType() == Type.REPRINT)
+                    if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
                         return false;
                 } catch (Exception ex) {
                     return false;
@@ -930,7 +979,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public String getName(final String cardName) {
-        if (alternateName.containsKey(cardName)) {
+        return getName(cardName, false);
+    }
+    public String getName(String cardName, boolean engine) {
+        // normalize Names first
+        cardName = normalizedNames.getOrDefault(cardName, cardName);
+        if (alternateName.containsKey(cardName) && engine) {
+            // TODO might want to implement GUI option so it always fetches the Within version
             return alternateName.get(cardName);
         }
         return cardName;

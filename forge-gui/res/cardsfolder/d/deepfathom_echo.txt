@@ -1,0 +1,9 @@
+Name:Deepfathom Echo
+ManaCost:2 G U
+Types:Creature Merfolk Spirit
+PT:4/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExplore | TriggerDescription$ At the beginning of combat on your turn, CARDNAME explores. Then you may have it become a copy of another creature you control until end of turn. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
+SVar:TrigExplore:DB$ Explore | SubAbility$ DBClone
+SVar:DBClone:DB$ Clone | Choices$ Creature.Other+YouCtrl | ChoiceTitle$ Select another creature you control | Optional$ True | AILogic$ CloneBestCreature | Duration$ UntilEndOfTurn
+DeckHas:Ability$Counters|Graveyard
+Oracle:At the beginning of combat on your turn, Deepfathom Echo explores. Then you may have it become a copy of another creature you control until end of turn. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

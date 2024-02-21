@@ -1,7 +1,7 @@
 Name:Fall of the Thran
 ManaCost:5 W
 Types:Enchantment Saga
-K:Saga:3:DBDestroyAll,DBRepeatEach,DBRepeatEach
+K:Chapter:3:DBDestroyAll,DBRepeatEach,DBRepeatEach
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SpellDescription$ Each player returns two land cards from their graveyard to the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 2 | Hidden$ True | Mandatory$ True

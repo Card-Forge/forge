@@ -1,0 +1,8 @@
+Name:Calamitous Cave-In
+ManaCost:3 R
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature and each planeswalker, where X is the number of Caves you control plus the number of Cave cards in your graveyard.
+SVar:X:Count$ValidGraveyard,Battlefield Cave.YouCtrl
+DeckNeeds:Type$Cave
+DeckHints:Ability$Mill
+Oracle:Calamitous Cave-In deals X damage to each creature and each planeswalker, where X is the number of Caves you control plus the number of Cave cards in your graveyard.

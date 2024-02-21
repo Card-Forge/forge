@@ -1,0 +1,8 @@
+Name:Bartolomé del Presidio
+ManaCost:W B
+Types:Legendary Creature Vampire Knight
+PT:2/1
+A:AB$ PutCounter | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Sacrifice|Counters
+DeckHints:Type$Artifact
+Oracle:Sacrifice another creature or artifact: Put a +1/+1 counter on Bartolomé del Presidio.

@@ -1,0 +1,8 @@
+Name:Connecting the Dots
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control attacks, exile the top card of your library face down. (You can't look at it.)
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | NoReveal$ True
+A:AB$ ChangeZoneAll | Cost$ 1 R Discard<0/Hand> Sac<1/CARDNAME> | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Hand | AILogic$ DiscardAllAndRetExiled.minAdv2 | SpellDescription$ Put all cards exiled with CARDNAME into their owners' hands.
+DeckHas:Ability$Discard|Sacrifice
+Oracle:Whenever a creature you control attacks, exile the top card of your library face down. (You can't look at it.)\n{1}{R}, Discard your hand, Sacrifice Connecting the Dots: Put all cards exiled with Connecting the Dots into their owners' hands.

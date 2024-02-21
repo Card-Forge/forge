@@ -1,0 +1,10 @@
+Name:Syndicate Heavy
+ManaCost:2 WB WB
+Types:Creature Giant Rogue
+PT:4/4
+K:Extort
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE4 | Execute$ TrigInvestigate | TriggerDescription$ At the beginning of each end step, if you gained 4 or more life this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Token|Sacrifice
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nAt the beginning of each end step, if you gained 4 or more life this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

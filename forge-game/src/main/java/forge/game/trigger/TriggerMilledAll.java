@@ -57,6 +57,7 @@ public class TriggerMilledAll extends Trigger {
         }
 
         sa.setTriggeringObject(AbilityKey.Cards, cards);
+        sa.setTriggeringObject(AbilityKey.Amount, cards.size());
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
     }
 

@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 PT:2/2
 K:First Strike
 K:Vigilance
-K:Protection from Vampires
-K:Protection from Werewolves
-K:Protection from Zombies
+K:Protection:Vampire
+K:Protection:Werewolf
+K:Protection:Zombie
 Oracle:First strike, vigilance\nProtection from Vampires, from Werewolves, and from Zombies

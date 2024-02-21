@@ -55,6 +55,9 @@ Attack
   xy: 10, 149
   size: 55, 43
 Attack 
+  xy: 74, 149
+  size: 55, 43
+Attack 
   xy: 138, 149
   size: 55, 43
 Attack 
@@ -62,9 +65,6 @@ Attack
   size: 55, 43
 Attack 
   xy: 266, 149
-  size: 55, 43
-Attack 
-  xy: 330, 149
   size: 55, 43
 Death 
   xy: 15,277

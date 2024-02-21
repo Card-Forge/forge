@@ -5,7 +5,7 @@ PT:*/*
 K:Trample
 K:ETBReplacement:Other:ETBPrep
 SVar:ETBPrep:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.YouOwn+Other | ChoiceTitle$ Exile any number of creature cards from your graveyard | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard. CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.YouOwn+Other+NotDefinedReplacedSimultaneousETB | ChoiceTitle$ Exile any number of creature cards from your graveyard | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard. CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
 SVar:ExileCreatures:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | SetPower$ TotalPower | SetToughness$ TotalToughness | Description$ CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.

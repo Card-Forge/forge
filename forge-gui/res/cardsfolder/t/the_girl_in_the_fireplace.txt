@@ -1,0 +1,11 @@
+Name:The Girl in the Fireplace
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:3:DBToken,DBTokenBis,DBTimeTravelTrig
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_noble_vanishing_prevention | SpellDescription$ Create a 1/1 white Human Noble creature token with vanishing 3 and "Prevent all damage that would be dealt to this creature."
+SVar:DBTokenBis:DB$ Token | TokenScript$ w_2_2_horse_horsemanship | SpellDescription$ Create a 2/2 white Horse creature token with "Doctors you control have horsemanship." (They can't be blocked except by creatures with horsemanship.)
+SVar:DBTimeTravelTrig:DB$ Effect | Triggers$ DamageDraw | SpellDescription$ Whenever a creature you control deals combat damage to a player this turn, time travel.
+SVar:DamageDraw:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Command | Execute$ TrigTimeTravel | TriggerDescription$ Whenever a creature you control deals combat damage to a player this turn, time travel.
+SVar:TrigTimeTravel:DB$ TimeTravel
+DeckHas:Ability$Token & Type$Horse|Human|Noble
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 1/1 white Human Noble creature token with vanishing 3 and "Prevent all damage that would be dealt to this creature."\nII — Create a 2/2 white Horse creature token with "Doctors you control have horsemanship." (They can't be blocked except by creatures with horsemanship.)\nIII — Whenever a creature you control deals combat damage to a player this turn, time travel.

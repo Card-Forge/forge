@@ -1,0 +1,9 @@
+Name:Fixed Point in Time
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When you encounter CARDNAME, until your next turn, if a player would planeswalk as a result of rolling the planar die, chaos ensues instead. (Then planeswalk away from this phenomenon.)
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReplacePlaneswalk | Duration$ UntilYourNextTurn | SubAbility$ PWAway
+SVar:ReplacePlaneswalk:Event$ Planeswalk | ValidCause$ PlanarDie | ReplaceWith$ Chaos | Description$ If a player would planeswalk as a result of rolling the planar die, chaos ensues instead.
+SVar:Chaos:DB$ ChaosEnsues
+SVar:PWAway:DB$ Planeswalk
+Oracle:When you encounter Fixed Point in Time, until your next turn, if a player would planeswalk as a result of rolling the planar die, chaos ensues instead. (Then planeswalk away from this phenomenon.)

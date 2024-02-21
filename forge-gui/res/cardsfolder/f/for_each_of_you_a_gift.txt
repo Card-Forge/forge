@@ -3,5 +3,8 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each opponent, create a 3/3 black Horror creature token that attacks that player each combat if able.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBToken | ChangeZoneTable$ True
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror_designated | TokenOwner$ You | TokenRemembered$ Player.IsRemembered
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_horror | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBEff
+SVar:DBEff:DB$ Effect | RememberObjects$ Remembered | ExileOnMoved$ Battlefield | Duration$ Permanent | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | MustAttack$ RememberedPlayer | Description$ This creature attacks its designated player each combat if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When you set this scheme in motion, for each opponent, create a 3/3 black Horror creature token that attacks that player each combat if able.

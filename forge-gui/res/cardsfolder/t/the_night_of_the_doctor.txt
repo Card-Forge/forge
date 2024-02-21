@@ -1,0 +1,9 @@
+Name:The Night of the Doctor
+ManaCost:4 W W
+Types:Enchantment Saga
+K:Chapter:2:DBDestroyAll,DBChangeZone
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Choose target legendary creature card in your graveyard | SubAbility$ DBPutCounter | RememberChanged$ True | SpellDescription$ Return target legendary creature card from your graveyard to the battlefield. Put your choice of a first strike, vigilance, or lifelink counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.IsRemembered | CounterType$ First Strike,Vigilance,Lifelink | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after II.)\nI — Destroy all creatures.\nII — Return target legendary creature card from your graveyard to the battlefield. Put your choice of a first strike, vigilance, or lifelink counter on it.

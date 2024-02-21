@@ -1,4 +1,4 @@
-Name:Oath of Lim-Dul
+Name:Oath of Lim-Dûl
 ManaCost:3 B
 Types:Enchantment
 T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLimDulSac | TriggerDescription$ Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dûl unless you discard a card. (Damage dealt to you causes you to lose life.)

@@ -15,6 +15,7 @@ Epic Struggle|The Army|Let's just trample them into the ground already!
 Etrata, the Silencer|The Silent Hit|Hey, where did everybody go?
 Felidar Sovereign|The Cat's Life|Just wait for his other eight lives!
 Frodo, Sauron's Bane|Middle-Earth Saved|Sorry, Sauron! Your ring is in another volcano!
+Gallifrey Stands|The Big Thirteen|I think some of them are probably changelings...
 Halo Fountain|Let the Halo Flow|Good friends, and good drinks. What more could you want?
 Happily Ever After|The Happy Ending|*closes book* The End.
 Hedron Alignment|The Alignment|The hedrons are right!
@@ -39,6 +40,7 @@ Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
 The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 The Deck of Many Things's Effect|Down on the Deck|Lucky draw!
+The Millennium Calendar|The End of an Era|If time is cyclical, how could it run out?
 Triskaidekaphile|The Luckiest Number|13, 169, 2197, 28561...
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
 Vessel of the All-Consuming|Consumed by Hidetsugu|Fade into nothingness.

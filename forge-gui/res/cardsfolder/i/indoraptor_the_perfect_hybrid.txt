@@ -1,0 +1,13 @@
+Name:Indoraptor, the Perfect Hybrid
+ManaCost:1 BG R
+Types:Legendary Creature Dinosaur Mutant
+PT:3/1
+K:Bloodthirst:X
+K:Menace
+T:Mode$ DamageDoneOnce | Execute$ TrigChoose | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage - Whenever CARDNAME is dealt damage, choose an opponent at random. NICKNAME deals damage equal to its power to that player unless they sacrifice a nontoken creature.
+SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Random$ True | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | UnlessCost$ Sac<1/Creature.nonToken/a nontoken creature> | UnlessPayer$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+SVar:X:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, where X is the damage dealt to your opponents this turn.)\nMenace\nEnrage - Whenever Indoraptor, the Perfect Hybrid is dealt damage, choose an opponent at random. Indoraptor deals damage equal to its power to that player unless they sacrifice a nontoken creature.

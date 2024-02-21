@@ -1,0 +1,19 @@
+Name:Dowsing Device
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+Other | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform CARDNAME if you control four or more artifacts.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | NumAtt$ +1 | KW$ Haste | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE4 | Mode$ Transform
+DeckHints:Type$Artifact
+AlternateMode:DoubleFaced
+Oracle:Whenever Dowsing Device or another artifact enters the battlefield under your control, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform Dowsing Device if you control four or more artifacts.
+
+ALTERNATE
+
+Name:Geode Grotto
+ManaCost:no cost
+Types:Land Cave
+A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SpellDescription$ Add {R}.
+A:AB$ Pump | Cost$ 2 R T | ValidTgts$ Creature | NumAtt$ X | KW$ Haste | SorcerySpeed$ True | SpellDescription$  Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
+SVar:X:Count$Valid Artifact.YouCtrl
+Oracle:{T}: Add {R}.\n{2}{R}, {T}: Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.

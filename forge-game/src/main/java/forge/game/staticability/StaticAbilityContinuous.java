@@ -213,7 +213,7 @@ public final class StaticAbilityContinuous {
                         if (!hostCard.hasChosenPlayer() && input.contains("ChosenPlayer")) {
                             return true;
                         }
-                        if (!hostCard.hasChosenName() && input.contains("ChosenName")) {
+                        if (!hostCard.hasNamedCard() && input.contains("ChosenName")) {
                             return true;
                         }
                         if (!hostCard.hasChosenEvenOdd() && (input.contains("ChosenEvenOdd") || input.contains("chosenEvenOdd"))) {
@@ -297,8 +297,8 @@ public final class StaticAbilityContinuous {
                             input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
                             input = input.replaceAll("ChosenPlayerName", cp.getName());
                         }
-                        if (hostCard.hasChosenName()) {
-                            final String chosenName = hostCard.getChosenName().replace(",", ";");
+                        if (hostCard.hasNamedCard()) {
+                            final String chosenName = hostCard.getNamedCard().replace(",", ";");
                             input = input.replaceAll("ChosenName", "Card.named" + chosenName);
                         }
                         if (hostCard.hasChosenEvenOdd()) {
@@ -593,9 +593,10 @@ public final class StaticAbilityContinuous {
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalOptionalVote(se.getTimestamp(), add);
                 }
-
-                if (params.containsKey("ManaConversion")) {
-                    AbilityUtils.applyManaColorConversion(p.getManaPool(), params);
+                if (params.containsKey("AdditionalVillainousChoice")) {
+                    String mhs = params.get("AdditionalVillainousChoice");
+                    int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
+                    p.addAdditionalVillainousChoices(se.getTimestamp(), add);
                 }
             }
         }
@@ -674,8 +675,13 @@ public final class StaticAbilityContinuous {
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
                 if (stAb.hasParam("SetName")) {
-                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
-                            se.getTimestamp(), stAb.getId());
+                    String newName = stAb.getParam("SetName");
+                    if (newName.equals("ChosenName")) {
+                        newName = hostCard.getNamedCard();
+                    }
+                    if (!newName.isEmpty()) {
+                        affectedCard.addChangedName(newName, false, se.getTimestamp(), stAb.getId());
+                    }
                 }
 
                 // Change color words
@@ -770,7 +776,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId());
+                        removeAllAbilities, hostCard.getTimestamp(), stAb.getId(), true);
             }
 
             // add HIDDEN keywords
@@ -815,35 +821,19 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
-                    CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
+                    CardCollection cards = cardsGainedFrom(params.containsKey("GainsAbilitiesOfDefined") ?
+                            "GainsAbilitiesOfDefined" : "GainsAbilitiesOf", params, hostCard, stAb, game);
 
-                    if (params.containsKey("GainsAbilitiesOf")) {
-                        final String[] valids = params.get("GainsAbilitiesOf").split(",");
-                        List<ZoneType> validZones;
-                        if (params.containsKey("GainsAbilitiesOfZones")) {
-                            validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
-                        } else {
-                            validZones = ImmutableList.of(ZoneType.Battlefield);
-                        }
-                        cardsIGainedAbilitiesFrom.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
-                    }
-                    if (params.containsKey("GainsAbilitiesOfDefined")) {
-                        cardsIGainedAbilitiesFrom.addAll(AbilityUtils.getDefinedCards(hostCard, params.get("GainsAbilitiesOfDefined"), stAb));
-                    }
-
-                    for (Card c : cardsIGainedAbilitiesFrom) {
+                    for (Card c : cards) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
                                 if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
                                     continue;
                                 }
-                                SpellAbility newSA = sa.copy(affectedCard, false);
+                                SpellAbility newSA = sa.copy(affectedCard, sa.getActivatingPlayer(), false, true);
                                 if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
-                                }
-                                if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
-                                    newSA.putParam("ActivateIgnoreColor", params.get("GainsAbilitiesActivateIgnoreColor"));
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
@@ -873,6 +863,17 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
+                if (params.containsKey("GainsTriggerAbsOf")) {
+                    CardCollection cards = cardsGainedFrom("GainsTriggerAbsOf", params, hostCard, stAb, game);
+
+                    for (Card c : cards) {
+                        for (final Trigger trig : c.getTriggers()) {
+                            final Trigger newTrigger = affectedCard.addTriggerForStaticAbility(trig, stAb);
+                            addedTrigger.add(newTrigger);
+                        }
+                    }
+                }
+
                 // add static abilities
                 if (addStatics != null) {
                     for (String s : addStatics) {
@@ -899,8 +900,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if (addTypes != null || removeTypes != null || addAllCreatureTypes
-                    || !remove.isEmpty()) {
+            if (addTypes != null || removeTypes != null || addAllCreatureTypes || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
                         hostCard.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
             }
@@ -1001,6 +1001,24 @@ public final class StaticAbilityContinuous {
         };
         sourceCard.getGame().getEndOfTurn().addUntil(removeIgnore);
         sourceCard.addLeavesPlayCommand(removeIgnore);
+    }
+
+    private static CardCollection cardsGainedFrom(final String param, final Map<String, String> params,
+                                                  final Card hostCard, final StaticAbility stAb, final Game game) {
+        CardCollection cards = new CardCollection();
+        if (param.contains("Defined")) {
+            cards.addAll(AbilityUtils.getDefinedCards(hostCard, params.get(param), stAb));
+        } else {
+            final String[] valids = params.get(param).split(",");
+            List<ZoneType> validZones;
+            if (params.containsKey("GainsAbilitiesOfZones")) {
+                validZones = ZoneType.listValueOf(params.get("GainsAbilitiesOfZones"));
+            } else {
+                validZones = ImmutableList.of(ZoneType.Battlefield);
+            }
+            cards.addAll(CardLists.getValidCards(game.getCardsIn(validZones), valids, hostCard.getController(), hostCard, stAb));
+        }
+        return cards;
     }
 
     private static List<Player> getAffectedPlayers(final StaticAbility stAb) {

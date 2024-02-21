@@ -1,0 +1,262 @@
+//Rank|Name|Rarity|Set
+#1|Lolth, Spider Queen|M|AFR
+#2|Iymrith, Desert Doom|M|AFR
+#3|Icingdeath, Frost Tyrant|M|AFR
+#4|Westgate Regent|R|AFR
+#5|Mordenkainen|M|AFR
+#6|Ebondeath, Dracolich|M|AFR
+#7|Varis, Silverymoon Ranger|R|AFR
+#8|Inferno of the Star Mounts|M|AFR
+#9|Adult Gold Dragon|R|AFR
+#10|Gelatinous Cube|R|AFR
+#11|Xanathar, Guild Kingpin|M|AFR
+#12|Meteor Swarm|R|AFR
+#13|Orcus, Prince of Undeath|R|AFR
+#14|Drizzt Do'Urden|R|AFR
+#15|Zariel, Archduke of Avernus|M|AFR
+#16|Mind Flayer|R|AFR
+#17|Froghemoth|R|AFR
+#18|Ranger Class|R|AFR
+#19|Delina, Wild Mage|R|AFR
+#20|Grand Master of Flowers|M|AFR
+#21|The Book of Exalted Deeds|M|AFR
+#22|Nadaar, Selfless Paladin|R|AFR
+#23|Flameskull|M|AFR
+#24|Old Gnawbone|M|AFR
+#25|Skeletal Swarming|R|AFR
+#26|Ellywick Tumblestrum|M|AFR
+#27|Vorpal Sword|R|AFR
+#28|Werewolf Pack Leader|R|AFR
+#29|Teleportation Circle|R|AFR
+#30|Dancing Sword|R|AFR
+#31|Battle Cry Goblin|U|AFR
+#32|Triumphant Adventurer|R|AFR
+#33|Volo, Guide to Monsters|R|AFR
+#34|Paladin Class|R|AFR
+#35|Minsc, Beloved Ranger|M|AFR
+#36|Hand of Vecna|R|AFR
+#37|Magic Missile|U|AFR
+#38|Power Word Kill|U|AFR
+#39|Cave of the Frost Dragon|R|AFR
+#40|Den of the Bugbear|R|AFR
+#41|Hall of Storm Giants|R|AFR
+#42|Ochre Jelly|R|AFR
+#43|Grazilaxx, Illithid Scholar|R|AFR
+#44|Hobgoblin Bandit Lord|R|AFR
+#45|Lair of the Hydra|R|AFR
+#46|Hive of the Eye Tyrant|R|AFR
+#47|Wight|R|AFR
+#48|Yuan-Ti Malison|R|AFR
+#49|Monk Class|R|AFR
+#50|Forsworn Paladin|R|AFR
+#51|Bruenor Battlehammer|U|AFR
+#52|Demilich|M|AFR
+#53|Acererak the Archlich|M|AFR
+#54|Grim Bounty|C|AFR
+#55|Zalto, Fire Giant Duke|R|AFR
+#56|Skullport Merchant|U|AFR
+#57|Kalain, Reclusive Painter|U|AFR
+#58|Fighter Class|R|AFR
+#59|Dragon's Fire|C|AFR
+#60|Prosperous Innkeeper|U|AFR
+#61|Targ Nar, Demon-Fang Gnoll|U|AFR
+#62|Hunter's Mark|U|AFR
+#63|Reaper's Talisman|U|AFR
+#64|Sorcerer Class|R|AFR
+#65|Burning Hands|U|AFR
+#66|Loyal Warhound|R|AFR
+#67|Priest of Ancient Lore|C|AFR
+#68|Trelasarra, Moon Dancer|U|AFR
+#69|Dragon Turtle|R|AFR
+#70|Barrowin of Clan Undurr|U|AFR
+#71|Hama Pashar, Ruin Seeker|U|AFR
+#72|Gretchen Titchwillow|U|AFR
+#73|Cleric Class|U|AFR
+#74|Ray of Enfeeblement|U|AFR
+#75|Owlbear|C|AFR
+#76|The Tarrasque|M|AFR
+#77|Krydle of Baldur's Gate|U|AFR
+#78|Intrepid Outlander|U|AFR
+#79|The Blackstaff of Waterdeep|R|AFR
+#80|Farideh, Devil's Chosen|U|AFR
+#81|Ray of Frost|U|AFR
+#82|Minimus Containment|C|AFR
+#83|Hulking Bugbear|U|AFR
+#84|Goblin Morningstar|U|AFR
+#85|Rogue Class|R|AFR
+#86|Wizard Class|U|AFR
+#87|Rust Monster|U|AFR
+#88|Plate Armor|U|AFR
+#89|Portable Hole|U|AFR
+#90|Purple Worm|U|AFR
+#91|The Book of Vile Darkness|M|AFR
+#92|Shessra, Death's Whisper|U|AFR
+#93|Death-Priest of Myrkul|U|AFR
+#94|The Deck of Many Things|M|AFR
+#95|Ingenious Smith|U|AFR
+#96|Warlock Class|U|AFR
+#97|Spoils of the Hunt|C|AFR
+#98|White Dragon|U|AFR
+#99|Aberrant Mind Sorcerer|U|AFR
+#100|Tiamat|M|AFR
+#101|Sphere of Annihilation|R|AFR
+#102|Tiger-Tribe Hunter|U|AFR
+#103|Hobgoblin Captain|C|AFR
+#104|Black Dragon|U|AFR
+#105|Charmed Sleep|C|AFR
+#106|Circle of Dreams Druid|R|AFR
+#107|Dungeon Map|U|AFR
+#108|Chaos Channeler|U|AFR
+#109|Grim Wanderer|U|AFR
+#110|Air-Cult Elemental|C|AFR
+#111|Guardian of Faith|R|AFR
+#112|Red Dragon|U|AFR
+#113|Wizard's Spellbook|R|AFR
+#114|Hill Giant Herdgorger|C|AFR
+#115|Feywild Trickster|U|AFR
+#116|Instrument of the Bards|R|AFR
+#117|Precipitous Drop|C|AFR
+#118|Wandering Troubadour|U|AFR
+#119|Barbarian Class|U|AFR
+#120|Xorn|R|AFR
+#121|Long Rest|R|AFR
+#122|Divine Smite|U|AFR
+#123|Eye of Vecna|R|AFR
+#124|Farideh's Fireball|C|AFR
+#125|Cloister Gargoyle|U|AFR
+#126|Green Dragon|U|AFR
+#127|Fifty Feet of Rope|U|AFR
+#128|You See a Pair of Goblins|U|AFR
+#129|You Hear Something on Watch|C|AFR
+#130|Plundering Barbarian|C|AFR
+#131|Elturgard Ranger|C|AFR
+#132|Displacer Beast|U|AFR
+#133|Gnoll Hunter|C|AFR
+#134|Bag of Holding|U|AFR
+#135|Treasure Chest|R|AFR
+#136|Djinni Windseer|C|AFR
+#137|Lightfoot Rogue|U|AFR
+#138|Eccentric Apprentice|U|AFR
+#139|Split the Party|U|AFR
+#140|Eyes of the Beholder|C|AFR
+#141|Check for Traps|U|AFR
+#142|Temple of the Dragon Queen|U|AFR
+#143|Steadfast Paladin|C|AFR
+#144|Boots of Speed|C|AFR
+#145|Blue Dragon|U|AFR
+#146|Evolving Wilds|C|AFR
+#147|Shortcut Seeker|C|AFR
+#148|Valor Singer|C|AFR
+#149|Devoted Paladin|C|AFR
+#150|Celestial Unicorn|C|AFR
+#151|Moon-Blessed Cleric|U|AFR
+#152|Guild Thief|U|AFR
+#153|Drider|U|AFR
+#154|Shambling Ghast|C|AFR
+#155|Clever Conjurer|C|AFR
+#156|Dwarfhold Champion|C|AFR
+#157|Lurking Roper|U|AFR
+#158|Hoarding Ogre|C|AFR
+#159|Swarming Goblins|C|AFR
+#160|Planar Ally|C|AFR
+#161|Sepulcher Ghoul|C|AFR
+#162|Price of Loyalty|C|AFR
+#163|Rally Maneuver|U|AFR
+#164|True Polymorph|R|AFR
+#165|Monk of the Open Hand|U|AFR
+#166|Asmodeus the Archfiend|R|AFR
+#167|Arborea Pegasus|C|AFR
+#168|Underdark Basilisk|C|AFR
+#169|Deadly Dispute|C|AFR
+#170|Dungeon Crawler|U|AFR
+#171|Tasha's Hideous Laughter|R|AFR
+#172|You Come to a River|C|AFR
+#173|Oswald Fiddlebender|R|AFR
+#174|Inspiring Bard|C|AFR
+#175|Choose Your Weapon|U|AFR
+#176|Bull's Strength|C|AFR
+#177|Manticore|C|AFR
+#178|Spiked Pit Trap|C|AFR
+#179|Improvised Weaponry|C|AFR
+#180|You Happen On a Glade|U|AFR
+#181|Yuan-Ti Fang-Blade|C|AFR
+#182|Zombie Ogre|C|AFR
+#183|Fly|U|AFR
+#184|Rimeshield Frost Giant|C|AFR
+#185|Power of Persuasion|U|AFR
+#186|Hired Hexblade|C|AFR
+#187|Contact Other Plane|C|AFR
+#188|Scion of Stygia|C|AFR
+#189|Veteran Dungeoneer|C|AFR
+#190|Delver's Torch|C|AFR
+#191|Secret Door|C|AFR
+#192|Soulknife Spy|C|AFR
+#193|Dire Wolf Prowler|C|AFR
+#194|You Meet in a Tavern|U|AFR
+#195|Sudden Insight|U|AFR
+#196|Unexpected Windfall|C|AFR
+#197|Circle of the Moon Druid|C|AFR
+#198|Blink Dog|U|AFR
+#199|Armory Veteran|C|AFR
+#200|Hoard Robber|C|AFR
+#201|Vampire Spawn|C|AFR
+#202|Iron Golem|U|AFR
+#203|Baleful Beholder|C|AFR
+#204|You Find the Villains' Lair|C|AFR
+#205|Dueling Rapier|C|AFR
+#206|Dawnbringer Cleric|C|AFR
+#207|+2 Mace|C|AFR
+#208|You Find Some Prisoners|U|AFR
+#209|You Come to the Gnoll Camp|C|AFR
+#210|Half-Elf Monk|C|AFR
+#211|You Find a Cursed Idol|C|AFR
+#212|Loathsome Troll|U|AFR
+#213|Herald of Hadar|C|AFR
+#214|Sylvan Shepherd|C|AFR
+#215|Demogorgon's Clutches|U|AFR
+#216|Trickster's Talisman|U|AFR
+#217|Druid Class|U|AFR
+#218|Bard Class|R|AFR
+#219|Arcane Investigator|C|AFR
+#220|Thieves' Tools|C|AFR
+#221|Flumph|R|AFR
+#222|Ranger's Hawk|C|AFR
+#223|Earth-Cult Elemental|C|AFR
+#224|You're Ambushed on the Road|C|AFR
+#225|Bulette|C|AFR
+#226|Bar the Gate|C|AFR
+#227|Keen-Eared Sentry|U|AFR
+#228|Find the Path|C|AFR
+#229|Shocking Grasp|C|AFR
+#230|Goblin Javelineer|C|AFR
+#231|Jaded Sell-Sword|C|AFR
+#232|Pixie Guide|C|AFR
+#233|Clattering Skeletons|C|AFR
+#234|Wish|R|AFR
+#235|Devour Intellect|C|AFR
+#236|Fates' Reversal|C|AFR
+#237|Feign Death|C|AFR
+#238|Brazen Dwarf|C|AFR
+#239|Critical Hit|U|AFR
+#240|Dragon's Disciple|U|AFR
+#241|Potion of Healing|C|AFR
+#242|Wild Shape|U|AFR
+#243|Spare Dagger|C|AFR
+#244|Ranger's Longbow|C|AFR
+#245|Gloom Stalker|C|AFR
+#246|Orb of Dragonkind|R|AFR
+#247|Kick in the Door|C|AFR
+#248|Dungeon Descent|R|AFR
+#249|Paladin's Shield|C|AFR
+#250|Neverwinter Dryad|C|AFR
+#251|Leather Armor|C|AFR
+#252|Plummet|C|AFR
+#253|Compelled Duel|C|AFR
+#254|Silver Raven|C|AFR
+#255|Greataxe|C|AFR
+#256|Mimic|C|AFR
+#257|You See a Guard Approach|C|AFR
+#258|Mordenkainen's Polymorph|C|AFR
+#259|Treasure Vault|R|AFR
+#260|Scaled Herbalist|C|AFR
+#261|Minion of the Mighty|R|AFR

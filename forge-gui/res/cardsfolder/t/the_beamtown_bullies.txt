@@ -4,7 +4,7 @@ Types:Legendary Creature Ogre Devil Warrior
 PT:4/4
 K:Vigilance
 K:Haste
-A:AB$ Pump | Cost$ T | ValidTgts$ Player.Opponent+Active | TgtPrompt$ Select target opponent whose turn it is | SubAbility$ DBChangeZone | StackDescription$ None | StackDescription$ {p:Targeted} | SpellDescription$ Target opponent whose turn it is
+A:AB$ Pump | Cost$ T | ValidTgts$ Player.Opponent+Active | TgtPrompt$ Select target opponent whose turn it is | SubAbility$ DBChangeZone | StackDescription$ {p:Targeted} | SpellDescription$ Target opponent whose turn it is
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | DefinedPlayer$ ParentTarget | ValidTgts$ Creature.nonLegendary+YouOwn | TgtPrompt$ Select target nonlegendary creature card from your graveyard | GainControl$ ParentTarget | SubAbility$ DBAnimate | StackDescription$ puts {c:Targeted} onto the battlefield under their control. | SpellDescription$ puts target nonlegendary creature card from your graveyard onto the battlefield under their control.
 SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent | SubAbility$ DBGoad | StackDescription$ SpellDescription | SpellDescription$ It gains haste.
 SVar:DBGoad:DB$ Goad | Defined$ Targeted | SubAbility$ DelTrig | SpellDescription$ Goad it.

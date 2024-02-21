@@ -1,0 +1,16 @@
+Name:Ratcatcher Trainee
+ManaCost:1 R
+Types:Creature Human Peasant
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+DeckHas:Ability$Token & Type$Rat
+AlternateMode:Adventure
+Oracle:As long as it's your turn, Ratcatcher Trainee has first strike.
+
+ALTERNATE
+
+Name:Pest Problem
+ManaCost:2 R
+Types:Instant Adventure
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You | SpellDescription$ Create two 1/1 black Rat creature tokens with "This creature can't block." (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create two 1/1 black Rat creature tokens with "This creature can't block." (Then exile this card. You may cast the creature later from exile.)

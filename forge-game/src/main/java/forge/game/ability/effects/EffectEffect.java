@@ -55,14 +55,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String noteCounterDefined = null;
         final String duration = sa.getParam("Duration");
 
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
-                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
-        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
+        if (!checkValidDuration(duration, sa)) {
             return;
         }
 
@@ -101,7 +94,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // don't create Effect if there is no remembered Objects
-            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter"))) {
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter") || sa.hasParam("ForgetOnPhasedIn"))) {
                 return;
             }
         }
@@ -292,8 +285,8 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen name
-            if (!hostCard.getNamedCard().isEmpty()) {
-                eff.setNamedCard(hostCard.getNamedCard());
+            if (hostCard.hasNamedCard()) {
+                eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 
             // chosen number
@@ -302,10 +295,6 @@ public class EffectEffect extends SpellAbilityEffect {
                         sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
-            }
-
-            if (sa.hasParam("CopySVar")) {
-                eff.setSVar(sa.getParam("CopySVar"), hostCard.getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes
@@ -323,7 +312,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        game.getAction().exile(eff, null);
+                        game.getAction().exile(eff, null, null);
                     }
                 };
 

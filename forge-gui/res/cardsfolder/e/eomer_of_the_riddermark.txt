@@ -1,4 +1,4 @@
-Name:Eomer of the Riddermark
+Name:Éomer of the Riddermark
 ManaCost:4 R
 Types:Legendary Creature Human Knight
 PT:5/4
@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | IsPresent$ Creatur
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
 DeckHas:Ability$Token & Type$Soldier
 SVar:HasAttackEffect:TRUE
-Oracle:Haste\nWhenever Eomer of the Riddermark attacks, if you control a creature with the greatest power among creatures on the battlefield, create a 1/1 white Human Soldier creature token.
+Oracle:Haste\nWhenever Éomer of the Riddermark attacks, if you control a creature with the greatest power among creatures on the battlefield, create a 1/1 white Human Soldier creature token.

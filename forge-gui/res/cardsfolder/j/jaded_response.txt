@@ -1,5 +1,5 @@
 Name:Jaded Response
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | AITgts$ Card.SharesColorWith Creature.YouCtrl | ConditionDefined$ Targeted | ConditionPresent$ Spell.SharesColorWith Creature.YouCtrl | SpellDescription$ Counter target spell if it shares a color with a creature you control.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | AITgts$ Card.SharesColorWith Valid Creature.YouCtrl | ConditionDefined$ Targeted | ConditionPresent$ Spell.SharesColorWith Creature.YouCtrl | SpellDescription$ Counter target spell if it shares a color with a creature you control.
 Oracle:Counter target spell if it shares a color with a creature you control.

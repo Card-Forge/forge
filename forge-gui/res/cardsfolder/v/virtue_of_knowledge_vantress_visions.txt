@@ -1,0 +1,14 @@
+Name:Virtue of Knowledge
+ManaCost:4 U
+Types:Enchantment
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+AlternateMode:Adventure
+Oracle:If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+
+ALTERNATE
+
+Name:Vantress Visions
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ CopySpellAbility | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card,Emblem | AILogic$ AlwaysCopyActivatedAbilities | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control. You may choose new targets for the copy.
+Oracle:Copy target activated or triggered ability you control. You may choose new targets for the copy.

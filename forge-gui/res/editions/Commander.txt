@@ -154,7 +154,7 @@ ScryfallCode=cmd
 278 C Izzet Boilerworks @John Avon
 205 C Izzet Chronarch @Nick Percival
 252 C Izzet Signet @Greg Hildebrandt
-16 U Jotun Grunt @Franz Vohwinkel
+16 U Jötun Grunt @Franz Vohwinkel
 17 C Journey to Nowhere @Warren Mahy
 279 U Jwar Isle Refuge @Cyril Van Der Haegen
 206 M Kaalia of the Vast @Michael Komarck

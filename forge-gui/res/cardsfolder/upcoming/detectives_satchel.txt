@@ -1,0 +1,10 @@
+Name:Detective's Satchel
+ManaCost:2 U R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Num$ 2
+A:AB$ Token | Cost$ T | TokenScript$ c_1_1_a_thopter_flying | CheckSVar$ ArtifactSacrificed | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying. Activate only if you've sacrificed an artifact this turn.
+SVar:ArtifactSacrificed:PlayerCountPropertyYou$SacrificedThisTurn Artifact
+DeckHas:Ability$Token|Investigate & Type$Clue|Thopter
+DeckHints:Ability$Sacrifice & Type$Clue|Food|Treasure
+Oracle:When Detective's Satchel enters the battlefield, investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{T}: Create a 1/1 colorless Thopter artifact creature token with flying. Activate only if you've sacrificed an artifact this turn.

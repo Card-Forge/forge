@@ -1,5 +1,5 @@
 Name:The Mimeoplasm
-ManaCost:2 G U B
+ManaCost:2 B G U
 Types:Legendary Creature Ooze
 PT:0/0
 K:ETBReplacement:Copy:MimeoChooseTwo:Optional

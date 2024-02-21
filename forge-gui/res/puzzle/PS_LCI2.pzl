@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Lost Caverns of Ixalan #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/11/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. One Shipwreck Sentry is the only remaining Defender in your library.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=4
+p0hand=Runaway Boulder;Kitesail Larcenist;Arm the Cathars;Shield-Wall Sentinel
+p0library=Shipwreck Sentry
+p0battlefield=Heliod, the Radiant Dawn;Mindlink Mech;Mindlink Mech;Shipwreck Sentry
+p1life=4
+p1battlefield=Artificer's Dragon;T:u_1_1_faerie_flying_blockflying;Artificer's Dragon

@@ -1,0 +1,15 @@
+Name:The Eighth Doctor
+ManaCost:4 W U
+Types:Legendary Creature Time Lord Doctor
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+S:Mode$ Continuous | Affected$ Permanent.YouOwn+Historic,Land.YouOwn+Historic | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may play a historic land or cast a historic permanent spell from your graveyard. If you do, it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.MayPlaySource | Static$ True | Execute$ DBAnimate | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Once during each of your turns, you may play a historic land or cast a historic permanent spell from your graveyard. If you do, it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
+T:Mode$ LandPlayed | ValidCard$ Land | ValidSA$ SpellAbility.MayPlaySource | Static$ True | Execute$ DBAnimate | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$Once during each of your turns, you may play a historic land or cast a historic permanent spell from your graveyard. If you do, it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Replacements$ ReplaceDies | Duration$ Permanent
+SVar:ReplaceDies:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ExcludeDestination$ Exile | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this permanent would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$Mill
+DeckHints:Type$Saga|Artifact|Legendary
+Oracle:When The Eighth Doctor enters the battlefield, mill three cards.\nOnce during each of your turns, you may play a historic land or cast a historic permanent spell from your graveyard. If you do, it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."

@@ -1,0 +1,9 @@
+Name:The Pyramid of Mars
+ManaCost:no cost
+Types:Plane Mars
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When you planeswalk to CARDNAME and at beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSurveil | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigReanimate | TriggerDescription$ Whenever chaos ensues, return target creature card from your graveyard to the battlefield.
+SVar:TrigReanimate:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature card in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+Oracle:When you planeswalk to The Pyramid of Mars and at beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nWhenever chaos ensues, return target creature card from your graveyard to the battlefield.

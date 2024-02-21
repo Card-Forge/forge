@@ -137,7 +137,7 @@ ScryfallCode=ME2
 52 C Lat-Nam's Legacy @Tom Wänerstrand
 134 U Lava Burst @Tom Wänerstrand
 171 C Leaping Lizard @Amy Weber
-103 U Lim-Dul's High Guard @Anson Maddocks
+103 U Lim-Dûl's High Guard @Anson Maddocks
 213 R Lodestone Bauble @Douglas Shuler
 24 R Lost Order of Jarkeld @Andi Rusu
 53 R Magus of the Unseen @Kaja Foglio

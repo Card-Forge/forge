@@ -168,7 +168,6 @@ public class PumpAi extends PumpAiBase {
                     CardCollection best = CardLists.filter(attr, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
-
                             int amount = 0;
                             if (StringUtils.isNumeric(amountStr)) {
                                 amount = AbilityUtils.calculateAmount(source, amountStr, moveSA);
@@ -322,6 +321,7 @@ public class PumpAi extends PumpAiBase {
                 attack = root.getXManaCostPaid();
             }
         } else {
+            // TODO add Double
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
             if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 attack--; // the card will be spent casting the spell, so actual power is 1 less
@@ -585,11 +585,10 @@ public class PumpAi extends PumpAiBase {
                 list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
             } else {
                 ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
+                list = CardLists.getTargetableCards(game.getCardsIn(zone), sa);
             }
         }
 
-        list = CardLists.getTargetableCards(list, sa);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {

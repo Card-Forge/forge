@@ -1,0 +1,8 @@
+Name:Cursed
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | Description$ Enchanted creature is 1/1
+SVar:SacMe:2
+Oracle:Enchant Creature\nEnchanted creature is 1/1

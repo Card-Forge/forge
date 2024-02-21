@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:5/5
 K:Flash
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Dmg1 | TriggerDescription$ Whenever CARDNAME enters the battlefield, it deals 5 damage divided as you choose among any number of targets.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Dmg1 | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage divided as you choose among any number of targets.
 SVar:Dmg1:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5
 Oracle:Flash\nFlying\nWhen Bogardan Hellkite enters the battlefield, it deals 5 damage divided as you choose among any number of targets.

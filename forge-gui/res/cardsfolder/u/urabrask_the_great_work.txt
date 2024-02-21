@@ -24,7 +24,7 @@ Name:The Great Work
 ManaCost:no cost
 Colors:red
 Types:Enchantment Saga
-K:Saga:3:DBDamage,DBToken,DBCastAll
+K:Chapter:3:DBDamage,DBToken,DBCastAll
 SVar:DBDamage:DB$ DamageAll | ValidTgts$ Opponent | NumDmg$ 3 | ValidPlayers$ Targeted | ValidCards$ Creature.TargetedPlayerCtrl | ValidDescription$ target opponent and each creature they control. | SpellDescription$ CARDNAME deals 3 damage to target opponent and each creature they control.
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
 SVar:DBCastAll:DB$ Effect | ReplacementEffects$ REExileOnResolve | StaticAbilities$ STPlay | AILogic$ YawgmothsWill | AINoRecursiveCheck$ True | Ultimate$ True | SubAbility$ DBExileSelf | SpellDescription$ Until end of turn, you may cast instant and sorcery spells from any graveyard. If a spell cast this way would be put into a graveyard, exile it instead. Exile CARDNAME, then return it to the battlefield (front face up).

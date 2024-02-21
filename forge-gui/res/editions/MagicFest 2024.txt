@@ -1,0 +1,9 @@
+[metadata]
+Code=PF24
+Date=2024-01-01
+Name=MagicFest 2024
+Type=Promo
+ScryfallCode=PF24
+
+[cards]
+1 R Counterspell @Ryan Valle

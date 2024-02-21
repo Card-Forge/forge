@@ -57,6 +57,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostCollectEvidence cost) {
+        int c = cost.getAbilityAmount(ability);
+        CardCollectionView chosen = ComputerUtil.chooseCollectEvidence(player, cost, source, c, ability);
+
+        return null == chosen ? null : PaymentDecision.card(chosen);
+    }
+
+    @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -141,20 +149,21 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExile cost) {
+        String type = cost.getType();
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
 
-        if (cost.getType().equals("All")) {
+        if (type.equals("All")) {
             return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
         }
-        else if (cost.getType().contains("FromTopGrave")) {
+        else if (type.contains("FromTopGrave")) {
             return null;
         }
 
         int c = cost.getAbilityAmount(ability);
 
-        if (cost.getFrom().equals(ZoneType.Library)) {
+        if (cost.from.size() == 1 && cost.getFrom().get(0).equals(ZoneType.Library)) {
             return PaymentDecision.card(player.getCardsIn(ZoneType.Library, c));
         }
         else if (cost.zoneRestriction == 0) {
@@ -301,7 +310,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         if (!player.canPayLife(c, isEffect(), ability)) {
             return null;
         }
-        // activator.payLife(c, null);
         return PaymentDecision.number(c);
     }
 
@@ -334,7 +342,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
         if (cost.isSameZone()) {
-            // Jotun Grunt
+            // Jötun Grunt
             // TODO: improve AI
             final FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
@@ -498,14 +506,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 
     protected int removeCounter(GameEntityCounterTable table, List<Card> prefs, CounterEnumType cType, int stillToRemove) {
         int removed = 0;
         if (!prefs.isEmpty() && stillToRemove > 0) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(cType));
+            prefs.sort(CardPredicates.compareByCounterType(cType));
 
             for (Card prefCard : prefs) {
                 // already enough removed
@@ -667,7 +675,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     return crd.getCounters(CounterEnumType.QUEST) > e;
                 }
             });
-            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
+            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
 
             for (final Card crd : prefs) {
                 int e = 0;

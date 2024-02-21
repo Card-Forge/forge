@@ -3,7 +3,7 @@ ManaCost:4 B B R R
 Types:Legendary Creature Giant
 PT:5/5
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ DBGainLife | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, you gain 1 life and CARDNAME deals 1 damage to target player or planeswalker.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ DBGainLife | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, you gain 1 life and NICKNAME deals 1 damage to target player or planeswalker.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 DeckHas:Ability$LifeGain

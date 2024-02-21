@@ -34,7 +34,7 @@ public class World implements Disposable, SaveFileContent {
     private WorldData data;
     private Pixmap biomeImage;
     private long[][] biomeMap;
-    private int[][] terrainMap;
+    public int[][] terrainMap;
     private static final int collisionBit = 0b10000000000000000000000000000000;
     private static final int isStructureBit = 0b01000000000000000000000000000000;
     private static final int terrainMask = collisionBit | isStructureBit;
@@ -532,6 +532,13 @@ public class World implements Disposable, SaveFileContent {
 
 
                             if (poi.type != null && (poi.type.equals("town") || poi.type.equals("capital"))) {
+                                if (!newPoint.hasDisplayName()) {
+                                    if (poi.displayName == null || poi.displayName.isEmpty()) {
+                                        newPoint.setDisplayName(biome.getNewTownName());
+                                    } else {
+                                        newPoint.setDisplayName(poi.getDisplayName());
+                                    }
+                                }
                                 towns.add(newPoint);
                             } else {
                                 notTowns.add(newPoint);

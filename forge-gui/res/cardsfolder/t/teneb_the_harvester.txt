@@ -1,5 +1,5 @@
 Name:Teneb, the Harvester
-ManaCost:3 B G W
+ManaCost:3 W B G
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying

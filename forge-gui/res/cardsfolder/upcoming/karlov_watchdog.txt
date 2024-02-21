@@ -1,0 +1,9 @@
+Name:Karlov Watchdog
+ManaCost:3 W
+Types:Creature Dog
+PT:3/2
+K:Vigilance
+R:Event$ TurnFaceUp | ValidCard$ Permanent.OppCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | PlayerTurn$ True | Description$ Permanents your opponents control can't be turned face up during your turn.
+T:Mode$ AttackersDeclared | Execute$ TrigPump | ValidAttackers$ Creature | ValidAttackersAmount$ GE3 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, creatures you control get +1/+1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
+Oracle:Vigilance\nPermanents your opponents control can't be turned face up during your turn.\nWhenever you attack with three or more creatures, creatures you control get +1/+1 until end of turn.

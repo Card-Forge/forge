@@ -1,0 +1,27 @@
+Name:Unstable Glyphbridge
+ManaCost:3 W W
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.RememberedPlayerCtrl+powerLE2 | Mandatory$ True | ChoiceTitle$ Choose a creature card with power 2 or less | ImprintChosen$ True
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotImprinted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+K:Craft:3 W W ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Mill|Graveyard|Token
+Oracle:When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.\nCraft with artifact {3}{W}{W} ({3}{W}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Sandswirl Wanderglyph
+ManaCost:no cost
+Colors:white
+Types:Artifact Creature Golem
+PT:5/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.Opponent+Active | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever an opponent casts a spell during their turn, they can't attack you or planeswalkers you control this turn.
+SVar:TrigEffect:DB$ Effect | EffectOwner$ TriggeredActivator | StaticAbilities$ STCantAttack | RememberObjects$ You
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature.YouCtrl | Target$ Player.IsRemembered,Planeswalker.ControlledBy Remembered | Description$ You can't attack that player or planeswalkers they control this turn.
+S:Mode$ CantBeCast | Caster$ Player.Opponent+attackedYouTheirCurrentTurn,Player.Opponent+attackedYouCtrlTheirCurrentTurn_Planeswalker | Description$ Each opponent who attacked you or a planeswalker you control this turn can't cast spells.
+Oracle:Flying\nWhenever an opponent casts a spell during their turn, they can't attack you or planeswalkers you control this turn.\nEach opponent who attacked you or a planeswalker you control this turn can't cast spells.

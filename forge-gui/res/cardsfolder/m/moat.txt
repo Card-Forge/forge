@@ -1,7 +1,7 @@
 Name:Moat
 ManaCost:2 W W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures without flying can't attack.
+S:Mode$ CantAttack | ValidCard$ Creature.withoutFlying | Description$ Creatures without flying can't attack.
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Flying
 DeckHints:Type$Dragon|Angel|Bird|Gargoyles|Griffin|Specter|Spirit|Phoenix|Faerie|Manticore|Drake|Pegasus

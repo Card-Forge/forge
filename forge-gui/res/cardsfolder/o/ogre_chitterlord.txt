@@ -1,0 +1,13 @@
+Name:Ogre Chitterlord
+ManaCost:4 R R
+Types:Creature Ogre Warrior
+PT:6/5
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 1/1 black Rat creature tokens with "This creature can't block." Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 1/1 black Rat creature tokens with "This creature can't block." Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_rat_noblock | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Rat.YouCtrl | NumAtt$ 2 | ConditionPresent$ Rat.YouCtrl | ConditionCompare$ GE5
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Rat
+DeckHints:Type$Rat
+Oracle:Menace\nWhenever Ogre Chitterlord enters the battlefield or attacks, create two 1/1 black Rat creature tokens with "This creature can't block." Then if you control five or more Rats, each Rat you control gets +2/+0 until end of turn.

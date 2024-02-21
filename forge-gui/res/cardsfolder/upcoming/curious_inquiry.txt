@@ -1,0 +1,10 @@
+Name:Curious Inquiry
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curiosity
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigDamageDone | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, investigate." (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever this creature deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, investigate." (Create a Clue token. It’s an artifact with "{2}, Sacrifice this artifact: Draw a card.")

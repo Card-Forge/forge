@@ -7,7 +7,6 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -40,7 +39,7 @@ public class BidLifeAi extends SpellAbilityAi {
                     return false;
                 }
                 final SpellAbility topSA = game.getStack().peekAbility();
-                if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || aiPlayer.equals(topSA.getActivatingPlayer())) {
+                if (!topSA.isCounterableBy(sa) || aiPlayer.equals(topSA.getActivatingPlayer())) {
                     return false;
                 }
                 if (sa.canTargetSpellAbility(topSA)) {

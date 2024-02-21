@@ -1,0 +1,6 @@
+Name:Reasonable Doubt
+ManaCost:1 U 
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBSuspect | SpellDescription$ Counter target spell unless its controller pays {2}.
+SVar:DBSuspect:DB$ AlterAttribute | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Attributes$ Suspected | SpellDescription$ Suspect up to one target creature. (A suspected creature has menace and can't block.)
+Oracle:Counter target spell unless its controller pays {2}.\nSuspect up to one target creature. (A suspected creature has menace and can't block.)

@@ -1,7 +1,7 @@
 Name:The Akroan War
 ManaCost:3 R
 Types:Enchantment Saga
-K:Saga:3:DBGainControl,DBAllAttack,DBDamageTapped
+K:Chapter:3:DBGainControl,DBAllAttack,DBDamageTapped
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
 SVar:DBAllAttack:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ MustAttack | SpellDescription$ Until your next turn, creatures your opponents control attack each combat if able.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.OppCtrl | Description$ Until your next turn, creatures your opponents control attack each combat if able.

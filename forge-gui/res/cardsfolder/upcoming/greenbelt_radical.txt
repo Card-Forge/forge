@@ -1,0 +1,10 @@
+Name:Greenbelt Radical
+ManaCost:3 G
+Types:Creature Centaur Citizen
+PT:4/4
+K:Disguise:5 G G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put a +1/+1 counter on each creature you control. Creatures you control gain trample until end of turn.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample
+DeckHas:Ability$Counters
+Oracle:Disguise {5}{G}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Greenbelt Radical is turned face up, put a +1/+1 counter on each creature you control. Creatures you control gain trample until end of turn.

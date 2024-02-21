@@ -2,7 +2,9 @@ Name:Lathliss' Presence
 ManaCost:no cost
 Colors:Red
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Execute$ TrigDamage | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and planeswalker you don't control.
-SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | ValidDescription$ each creature and each planeswalker | NumDmg$ 1
-S:Mode$ Continuous | Affected$ Creature.OppCtrl | EffectZone$ Command | AddHiddenKeyword$ Damage isn't removed from CARDNAME during cleanup steps. | Description$ Damage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.
-Oracle:At the beginning of your upkeep, Lathliss's Presence deals 1 damage to each creature and planeswalker you don't control\nDamage isn't removed from creatures and planeswalkers your opponents control during cleanup steps.
+T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl,Planeswalker.OppCtrl | CombatDamage$ False | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Lathliss' Presence deals damage equal to the excess to that permanent's controller.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Command | AddAbility$ Pump | Description$ Creatures you control have "{R}: This creature gets +1/+0 until end of turn."
+SVar:Pump:AB$ Pump | Defined$ Self | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Lathliss' Presence deals damage equal to the excess to that permanent's controller.\nCreatures you control have "{R}: This creature gets +1/+0 until end of turn."

@@ -6,6 +6,6 @@ K:Convoke
 K:Delve
 K:Trample
 Text:You can't spend mana to cast this spell.
-A:SP$ PermanentCreature | Cost$ Mana<5 BG BG\Delve,Convoke>
-SVar:AltCost:Cost$ Mana<5 BG BG\Delve,Convoke> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
+A:SP$ PermanentCreature | Cost$ 5 BG BG | ManaRestriction$ None
+SVar:AltCost:Cost$ 5 BG BG | ManaRestriction$ None | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
 Oracle:You can't spend mana to cast this spell.\nConvoke, delve (Each creature you tap while casting this spell pays for {1} or one mana of that creature's color. Each card you exile from your graveyard pays for {1}.)\nYou may cast Hogaak, Arisen Necropolis from your graveyard.\nTrample

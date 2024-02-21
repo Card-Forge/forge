@@ -1,0 +1,10 @@
+Name:Expedited Inheritance
+ManaCost:R R
+Types:Enchantment
+T:Mode$ DamageDoneOnce | Execute$ TrigExile | ValidTarget$ Creature | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature is dealt damage, its controller may exile that many cards from the top of their library. They may play those cards until the end of their next turn.
+SVar:TrigExile:DB$ Dig | Defined$ TriggeredTargetController | Optional$ True | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | EffectOwner$ RememberedController | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ They may play those cards until the end of their next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever a creature is dealt damage, its controller may exile that many cards from the top of their library. They may play those cards until the end of their next turn.

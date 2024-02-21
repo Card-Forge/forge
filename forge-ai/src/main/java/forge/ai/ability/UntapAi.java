@@ -64,14 +64,12 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!sa.usesTargeting()) {
-            final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
-        } else {
-            // If we already selected a target just use that
-
+        if (sa.usesTargeting()) {
             return untapPrefTargeting(ai, sa, false);
         }
+
+        final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
     }
 
     @Override
@@ -134,11 +132,11 @@ public class UntapAi extends SpellAbilityAi {
         }
         sa.resetTargets();
 
-        final PlayerCollection targetController = new PlayerCollection();
-        if (sa.isCurse()) {
-            targetController.addAll(ai.getOpponents());
+        final PlayerCollection targetController;
+        if (sa.isCurse() || (sa.getSubAbility() != null && sa.getSubAbility().getApi() == ApiType.GainControl)) {
+            targetController = ai.getOpponents();
         } else {
-            targetController.add(ai);
+            targetController = ai.getYourTeam();
         }
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
@@ -431,7 +429,7 @@ public class UntapAi extends SpellAbilityAi {
                     if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                         // TODO: Currently limited to predicting something that can be paid with any color,
                         // can ideally be improved to work by color.
-                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestriction());
+                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab));
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
                         if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
@@ -445,7 +443,7 @@ public class UntapAi extends SpellAbilityAi {
 
                             // pool one additional mana by tapping a land to try to ramp to something
                             CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Presets.LANDS_PRODUCING_MANA, Presets.UNTAPPED);
+                                    Presets.LANDS_PRODUCING_MANA, Presets.CAN_TAP);
                             manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (manaLands.isEmpty()) {

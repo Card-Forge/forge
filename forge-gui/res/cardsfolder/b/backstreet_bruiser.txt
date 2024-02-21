@@ -6,4 +6,4 @@ K:Defender
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as there are two or more counters among creatures you control, CARDNAME can attack as though it didn't have defender.
 SVar:X:Count$Valid Creature.YouCtrl$CardCounters.ALL
 DeckHints:Ability$Counters
-Oracle:As long as there are two or more counters among creatures you control, Backstreet Bruiser can attack as though it didn't have defender.
+Oracle:Defender\nAs long as there are two or more counters among creatures you control, Backstreet Bruiser can attack as though it didn't have defender.

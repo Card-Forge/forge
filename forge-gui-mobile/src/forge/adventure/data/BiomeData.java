@@ -8,7 +8,7 @@ import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -56,6 +56,10 @@ public class BiomeData implements Serializable {
                         break;
                     }
                 }
+                //Adding enemy with 0 spawn rate allows quests to boost them and add to pool temporarily.
+                EnemyData zeroSpawnRate = new EnemyData(data);
+                zeroSpawnRate.spawnRate = 0.0f;
+                enemyList.add(zeroSpawnRate);
             }
         }
         return enemyList;
@@ -87,22 +91,40 @@ public class BiomeData implements Serializable {
         return pointOfInterestList;
     }
 
+    public EnemyData getExtraSpawnEnemy(float difficultyFactor) {
+        //todo: implement difficultyFactor
+        List<EnemyData> extraSpawnEnemies = AdventureQuestController.instance().getExtraQuestSpawns(difficultyFactor);
+        if (extraSpawnEnemies.isEmpty())
+            return null;
+        return Aggregates.random(extraSpawnEnemies); //fallback, shouldn't reach this point but guarantee that we return something
+    }
+
     public EnemyData getEnemy(float difficultyFactor) {
         //todo: implement difficultyFactor
-        Map<String, Float> boostedSpawns = AdventureQuestController.instance().getBoostedSpawns(enemyList);
         float totalDistribution = 0.0f;
         for (EnemyData data : enemyList) {
-            float boost = boostedSpawns.getOrDefault(data.getName(), 0.0f); //Each active quest stage will divide 2.0f across any valid enemies to defeat
-            totalDistribution += data.spawnRate + boost;
+            totalDistribution += data.spawnRate;
         }
         int i = 0;
         for (float f = totalDistribution * rand.nextFloat(); i < enemyList.size(); i++)
         {
-            f -= ( enemyList.get(i).spawnRate + boostedSpawns.getOrDefault(enemyList.get(i).getName(), 0.0f));
+            f -= ( enemyList.get(i).spawnRate);
             if (f <= 0.0f){
                 return enemyList.get(i);
             }
         }
         return Aggregates.random(enemyList); //fallback, shouldn't reach this point but guarantee that we return something
+    }
+
+    private ArrayList<String> unusedTownNames;
+    public String getNewTownName() {
+        return Aggregates.removeRandom(getUnusedTownNames());
+    }
+
+    public ArrayList<String> getUnusedTownNames() {
+        if (unusedTownNames == null) {
+            unusedTownNames = WorldData.getTownNames(this.name);
+        }
+        return unusedTownNames;
     }
 }

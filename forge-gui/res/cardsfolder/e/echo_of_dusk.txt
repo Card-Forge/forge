@@ -1,0 +1,8 @@
+Name:Echo of Dusk
+ManaCost:1 B
+Types:Creature Vampire Spirit
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddKeyword$ Lifelink | Description$ Descend 4 — As long as there are four or more permanent cards in your graveyard, CARDNAME gets +1/+1 and has lifelink.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+DeckHas:Ability$LifeGain
+Oracle:Descend 4 — As long as there are four or more permanent cards in your graveyard, Echo of Dusk gets +1/+1 and has lifelink.

@@ -1,0 +1,7 @@
+Name:Helping Hand
+ManaCost:W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 3 or less from your graveyard | ValidTgts$ Creature.cmcLE3+YouOwn | Tapped$ True | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield tapped.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield tapped.

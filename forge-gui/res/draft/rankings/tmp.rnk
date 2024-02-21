@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Helm of Possession|R|TMP
+#2|Rathi Dragon|R|TMP
+#3|Winds of Rath|R|TMP
+#4|Mawcor|R|TMP
+#5|Selenia, Dark Angel|R|TMP
+#6|Soltari Emissary|R|TMP
+#7|Living Death|R|TMP
+#8|Dregs of Sorrow|R|TMP
+#9|Overrun|U|TMP
+#10|Escaped Shapeshifter|R|TMP
+#11|Coffin Queen|R|TMP
+#12|Avenging Angel|R|TMP
+#13|Soltari Guerrillas|R|TMP
+#14|Verdant Force|R|TMP
+#15|Tradewind Rider|R|TMP
+#16|Commander Greven il-Vec|R|TMP
+#17|Rolling Thunder|C|TMP
+#18|Lightning Blast|C|TMP
+#19|Starke of Rath|R|TMP
+#20|Time Warp|R|TMP
+#21|Skyshroud Vampire|U|TMP
+#22|Fevered Convulsions|R|TMP
+#23|Mongrel Pack|R|TMP
+#24|Orim, Samite Healer|R|TMP
+#25|Dark Banishing|C|TMP
+#26|Bounty Hunter|R|TMP
+#27|Rootwater Hunter|C|TMP
+#28|Vhati il-Dal|R|TMP
+#29|Corpse Dance|R|TMP
+#30|Legacy's Allure|U|TMP
+#31|Cursed Scroll|R|TMP
+#32|Dirtcowl Wurm|R|TMP
+#33|Heartwood Giant|R|TMP
+#34|Fireslinger|C|TMP
+#35|Rootwater Matriarch|R|TMP
+#36|Reckless Spite|U|TMP
+#37|Altar of Dementia|R|TMP
+#38|Krakilin|U|TMP
+#39|Soltari Priest|U|TMP
+#40|Gerrard's Battle Cry|R|TMP
+#41|Dismiss|U|TMP
+#42|Propaganda|U|TMP
+#43|Flowstone Sculpture|R|TMP
+#44|Capsize|C|TMP
+#45|Soltari Crusader|U|TMP
+#46|Diabolic Edict|C|TMP
+#47|Marble Titan|R|TMP
+#48|Humility|R|TMP
+#49|Pegasus Refuge|R|TMP
+#50|Fighting Drake|U|TMP
+#51|Knight of Dawn|U|TMP
+#52|Spontaneous Combustion|U|TMP
+#53|Dauthi Mercenary|U|TMP
+#54|Gravedigger|C|TMP
+#55|Scroll Rack|R|TMP
+#56|Pacifism|C|TMP
+#57|Kindle|C|TMP
+#58|Master Decoy|C|TMP
+#59|Dauthi Horror|C|TMP
+#60|Counterspell|C|TMP
+#61|Goblin Bombardment|U|TMP
+#62|Thalakos Dreamsower|U|TMP
+#63|Muscle Sliver|C|TMP
+#64|Puppet Strings|U|TMP
+#65|Mirri's Guile|R|TMP
+#66|Dauthi Slayer|C|TMP
+#67|Bellowing Fiend|R|TMP
+#68|Screeching Harpy|U|TMP
+#69|Flowstone Wyvern|R|TMP
+#70|Wasteland|U|TMP
+#71|Meditate|R|TMP
+#72|Staunch Defenders|U|TMP
+#73|Enfeeblement|C|TMP
+#74|Charging Rhino|U|TMP
+#75|Eladamri, Lord of Leaves|R|TMP
+#76|Legerdemain|U|TMP
+#77|Evincar's Justice|C|TMP
+#78|Aftershock|C|TMP
+#79|Repentance|U|TMP
+#80|Maddening Imp|R|TMP
+#81|Magmasaur|R|TMP
+#82|Harrow|U|TMP
+#83|Deadshot|R|TMP
+#84|Heartwood Treefolk|U|TMP
+#85|Searing Touch|U|TMP
+#86|Knight of Dusk|U|TMP
+#87|Wind Drake|C|TMP
+#88|Extinction|R|TMP
+#89|Dauthi Mindripper|U|TMP
+#90|Pallimud|R|TMP
+#91|Fugitive Druid|R|TMP
+#92|Reanimate|U|TMP
+#93|Whispers of the Muse|U|TMP
+#94|Dauthi Marauder|C|TMP
+#95|Field of Souls|R|TMP
+#96|Soltari Trooper|C|TMP
+#97|Soltari Lancer|C|TMP
+#98|Dauthi Ghoul|U|TMP
+#99|Ancient Tomb|U|TMP
+#100|Trained Armodon|C|TMP
+#101|Trumpeting Armodon|U|TMP
+#102|Kezzerdrix|R|TMP
+#103|Soltari Monk|U|TMP
+#104|Grindstone|R|TMP
+#105|Sky Spirit|U|TMP
+#106|Skyshroud Troll|C|TMP
+#107|Intuition|R|TMP
+#108|Spirit Mirror|R|TMP
+#109|Skyshroud Elf|C|TMP
+#110|Fylamarid|U|TMP
+#111|Lowland Giant|C|TMP
+#112|Skyshroud Condor|U|TMP
+#113|Mogg Fanatic|C|TMP
+#114|Rootwalla|C|TMP
+#115|Opportunist|U|TMP
+#116|Crazed Armodon|R|TMP
+#117|Ruby Medallion|R|TMP
+#118|Elven Warhounds|R|TMP
+#119|Gallantry|U|TMP
+#120|Manakin|C|TMP
+#121|Thalakos Mistfolk|C|TMP
+#122|Carrionette|R|TMP
+#123|Rampant Growth|C|TMP
+#124|Nature's Revolt|R|TMP
+#125|Sarcomancy|R|TMP
+#126|Horned Turtle|C|TMP
+#127|Minion of the Wastes|R|TMP
+#128|Disturbed Burial|C|TMP
+#129|Bottle Gnomes|U|TMP
+#130|Reflecting Pool|R|TMP
+#131|Time Ebb|C|TMP
+#132|Stalking Stones|U|TMP
+#133|Power Sink|C|TMP
+#134|Flowstone Salamander|U|TMP
+#135|Renegade Warlord|U|TMP
+#136|Mana Severance|R|TMP
+#137|Rootbreaker Wurm|C|TMP
+#138|Flowstone Giant|C|TMP
+#139|Mnemonic Sliver|U|TMP
+#140|Cloudchaser Eagle|C|TMP
+#141|Ranger en-Vec|U|TMP
+#142|Horned Sliver|U|TMP
+#143|Emmessi Tome|R|TMP
+#144|Torture Chamber|R|TMP
+#145|Dream Cache|C|TMP
+#146|Darkling Stalker|C|TMP
+#147|Barbed Sliver|U|TMP
+#148|Telethopter|U|TMP
+#149|Wind Dancer|U|TMP
+#150|Scragnoth|U|TMP
+#151|Angelic Protector|U|TMP
+#152|Seeker of Skybreak|C|TMP
+#153|Phyrexian Hulk|U|TMP
+#154|Stinging Licid|U|TMP
+#155|Canyon Wildcat|C|TMP
+#156|Elvish Fury|C|TMP
+#157|Clergy en-Vec|C|TMP
+#158|Scabland|R|TMP
+#159|Coiled Tinviper|C|TMP
+#160|Flickering Ward|U|TMP
+#161|Giant Crab|C|TMP
+#162|Jackal Pup|U|TMP
+#163|Salt Flats|R|TMP
+#164|Rats of Rath|C|TMP
+#165|Sandstone Warrior|C|TMP
+#166|Benthic Behemoth|R|TMP
+#167|Mounted Archers|C|TMP
+#168|Mindwhip Sliver|U|TMP
+#169|Phyrexian Grimoire|R|TMP
+#170|Maze of Shadows|U|TMP
+#171|Energizer|R|TMP
+#172|Thalakos Seer|C|TMP
+#173|Rootwater Shaman|R|TMP
+#174|Canopy Spider|C|TMP
+#175|Fool's Tome|R|TMP
+#176|Lotus Petal|C|TMP
+#177|Tooth and Claw|R|TMP
+#178|Lightning Elemental|C|TMP
+#179|Canyon Drake|R|TMP
+#180|Dauthi Embrace|U|TMP
+#181|Soltari Foot Soldier|C|TMP
+#182|Perish|U|TMP
+#183|Elite Javelineer|C|TMP
+#184|Segmented Wurm|U|TMP
+#185|Static Orb|R|TMP
+#186|Light of Day|U|TMP
+#187|Recycle|R|TMP
+#188|Flailing Drake|U|TMP
+#189|Souldrinker|U|TMP
+#190|Skyshroud Forest|R|TMP
+#191|Safeguard|R|TMP
+#192|Wall of Diffusion|C|TMP
+#193|Armor Sliver|U|TMP
+#194|Nurturing Licid|U|TMP
+#195|Quickening Licid|U|TMP
+#196|Phyrexian Splicer|U|TMP
+#197|Oracle en-vec|R|TMP
+#198|Jet Medallion|R|TMP
+#199|Caldera Lake|R|TMP
+#200|Enraging Licid|U|TMP
+#201|Apes of Rath|U|TMP
+#202|Marsh Lurker|C|TMP
+#203|Advance Scout|C|TMP
+#204|Endless Scream|C|TMP
+#205|Dark Ritual|C|TMP
+#206|Earthcraft|R|TMP
+#207|Clot Sliver|C|TMP
+#208|Wild Wurm|U|TMP
+#209|Death Pits of Rath|R|TMP
+#210|Winged Sliver|C|TMP
+#211|Sea Monster|C|TMP
+#212|Patchwork Gnomes|U|TMP
+#213|Thalakos Sentry|C|TMP
+#214|Eladamri's Vineyard|R|TMP
+#215|Firefly|U|TMP
+#216|Pearl Medallion|R|TMP
+#217|Coercion|C|TMP
+#218|Spell Blast|C|TMP
+#219|Shadowstorm|U|TMP
+#220|Servant of Volrath|C|TMP
+#221|Blood Frenzy|C|TMP
+#222|Leeching Licid|U|TMP
+#223|Volrath's Curse|C|TMP
+#224|Gaseous Form|C|TMP
+#225|Invulnerability|U|TMP
+#226|Tahngarth's Rage|U|TMP
+#227|Unstable Shapeshifter|R|TMP
+#228|Twitch|C|TMP
+#229|Pincher Beetles|C|TMP
+#230|Thalakos Lowlands|U|TMP
+#231|Talon Sliver|C|TMP
+#232|Pine Barrens|R|TMP
+#233|Giant Strength|C|TMP
+#234|Mogg Raider|C|TMP
+#235|Choke|U|TMP
+#236|Dread of Night|U|TMP
+#237|Heartwood Dryad|C|TMP
+#238|Spinal Graft|C|TMP
+#239|Sapphire Medallion|R|TMP
+#240|Heart Sliver|C|TMP
+#241|Rain of Tears|U|TMP
+#242|Shadow Rift|C|TMP
+#243|Mogg Conscripts|C|TMP
+#244|Skyshroud Ranger|C|TMP
+#245|Blood Pet|C|TMP
+#246|Circle of Protection: Red|C|TMP
+#247|Stone Rain|C|TMP
+#248|Aluren|R|TMP
+#249|Jinxed Idol|R|TMP
+#250|Rootwater Depths|U|TMP
+#251|Cinder Marsh|U|TMP
+#252|Pit Imp|C|TMP
+#253|Auratog|R|TMP
+#254|Metallic Sliver|C|TMP
+#255|Chaotic Goo|R|TMP
+#256|Cold Storage|R|TMP
+#257|Ertai's Meddling|R|TMP
+#258|Scalding Tongs|R|TMP
+#259|Lobotomy|U|TMP
+#260|Armored Pegasus|C|TMP
+#261|Apocalypse|R|TMP
+#262|Orim's Prayer|U|TMP
+#263|Broken Fall|C|TMP
+#264|Mogg Hollows|U|TMP
+#265|Shocker|R|TMP
+#266|Stun|C|TMP
+#267|Boil|U|TMP
+#268|Emerald Medallion|R|TMP
+#269|Precognition|R|TMP
+#270|Hero's Resolve|C|TMP
+#271|Watchdog|U|TMP
+#272|Chill|U|TMP
+#273|Vec Townships|U|TMP
+#274|Imps' Taunt|U|TMP
+#275|Spike Drone|C|TMP
+#276|Magnetic Web|R|TMP
+#277|Wood Sage|R|TMP
+#278|Scorched Earth|R|TMP
+#279|Squee's Toy|C|TMP
+#280|Insight|U|TMP
+#281|Circle of Protection: Green|C|TMP
+#282|Dracoplasm|R|TMP
+#283|Manta Riders|C|TMP
+#284|Disenchant|C|TMP
+#285|Winter's Grasp|U|TMP
+#286|Steal Enchantment|U|TMP
+#287|Furnace of Rath|R|TMP
+#288|Warmth|U|TMP
+#289|Anoint|C|TMP
+#290|Needle Storm|U|TMP
+#291|Essence Bottle|U|TMP
+#292|Sadistic Glee|C|TMP
+#293|Storm Front|U|TMP
+#294|Interdict|U|TMP
+#295|Circle of Protection: White|C|TMP
+#296|Worthy Cause|U|TMP
+#297|Respite|C|TMP
+#298|Circle of Protection: Black|C|TMP
+#299|Echo Chamber|R|TMP
+#300|Reality Anchor|C|TMP
+#301|No Quarter|R|TMP
+#302|Havoc|U|TMP
+#303|Circle of Protection: Shadow|C|TMP
+#304|Sudden Impact|U|TMP
+#305|Bayou Dragonfly|C|TMP
+#306|Shatter|C|TMP
+#307|Abandon Hope|U|TMP
+#308|Reap|U|TMP
+#309|Hand to Hand|R|TMP
+#310|Duplicity|R|TMP
+#311|Serene Offering|U|TMP
+#312|Crown of Flames|C|TMP
+#313|Rootwater Diver|U|TMP
+#314|Tranquility|C|TMP
+#315|Ghost Town|U|TMP
+#316|Thumbscrews|R|TMP
+#317|Excavator|U|TMP
+#318|Circle of Protection: Blue|C|TMP
+#319|Frog Tongue|C|TMP
+#320|Booby Trap|R|TMP
+#321|Shimmering Wings|C|TMP
+#322|Whim of Volrath|R|TMP
+#323|Root Maze|R|TMP
+#324|Ancient Runes|U|TMP
+#325|Mogg Cannon|U|TMP
+#326|Sacred Guide|R|TMP
+#327|Mogg Squad|U|TMP
+#328|Natural Spring|C|TMP
+#329|Verdigris|U|TMP
+#330|Hanna's Custody|R|TMP

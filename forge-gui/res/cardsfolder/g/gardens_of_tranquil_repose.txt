@@ -1,0 +1,13 @@
+Name:Gardens of Tranquil Repose
+ManaCost:no cost
+Types:Plane Necros
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigChange | TriggerZones$ Command | TriggerDescription$ Suspended Animation — Whenever a creature dies, exile it. Its controller scries 1.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | Defined$ TriggeredCardController
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create X 3/3 black Dalek artifact creature tokens with menace, where X is one plus the number of cards exiled with CARDNAME.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_3_3_a_dalek_menace
+T:Mode$ ChangesZone | Origin$ Command | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount/Plus.1
+DeckHas:Ability$Token & Type$Dalek|Artifact
+Oracle:Suspended Animation — Whenever a creature dies, exile it. Its controller scries 1.\nWhenever chaos ensues, create X 3/3 black Dalek artifact creature tokens with menace, where X is one plus the number of cards exiled with Gardens of Tranquil Repose.

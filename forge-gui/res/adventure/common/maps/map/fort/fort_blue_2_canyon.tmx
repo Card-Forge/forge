@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="86">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -48,7 +48,7 @@
   <object id="48" template="../../obj/treasure.tx" x="424.039" y="112.979"/>
   <object id="51" template="../../obj/treasure.tx" x="44.532" y="24.9313"/>
   <object id="52" template="../../obj/gold.tx" x="422.633" y="132.868"/>
-  <object id="53" template="../../obj/enemy.tx" x="366.449" y="152.027">
+  <object id="53" template="../../obj/enemy.tx" x="366.853" y="151.22">
    <properties>
     <property name="enemy" value="Storm Titan"/>
     <property name="threatRange" type="int" value="30"/>
@@ -90,12 +90,12 @@
   <object id="74" template="../../obj/waypoint.tx" x="326.555" y="432.289"/>
   <object id="75" template="../../obj/enemy.tx" x="44.0599" y="259.967">
    <properties>
-    <property name="enemy" value="Homarid"/>
+    <property name="enemy" value="Geistmage"/>
    </properties>
   </object>
   <object id="76" template="../../obj/enemy.tx" x="107.016" y="77.1522">
    <properties>
-    <property name="enemy" value="Conjurer"/>
+    <property name="enemy" value="Cerodon"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
@@ -162,5 +162,8 @@
   </object>
   <object id="84" template="../../obj/waypoint.tx" x="131.23" y="210.732"/>
   <object id="85" template="../../obj/waypoint.tx" x="199.432" y="328.977"/>
+  <object id="86" template="../../obj/collision.tx" x="303.148" y="276.821" width="16" height="25.0694"/>
+  <object id="87" template="../../obj/collision.tx" x="271.267" y="147.681" width="30.9319" height="25.0694"/>
+  <object id="88" template="../../obj/collision.tx" x="418.77" y="295.385" width="30.9319" height="25.0694"/>
  </objectgroup>
 </map>

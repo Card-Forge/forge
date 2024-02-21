@@ -52,8 +52,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
             if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
                 if (n.equals("ChosenName")) {
-                    if (source.hasChosenName()) {
-                        names.add(source.getChosenName());
+                    if (source.hasNamedCard()) {
+                        names.addAll(source.getNamedCards());
                     } else {
                         System.err.println("Malformed MakeCard entry! - " + source.toString());
                     }
@@ -96,12 +96,21 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             if (!faces.isEmpty()) {
-                if (sa.hasParam("AtRandom")) {
-                    names.add(Aggregates.random(faces).getName());
-                } else {
-                    names.add(player.getController().chooseCardName(sa, faces,
-                            Localizer.getInstance().getMessage("lblChooseFromSpellbook",
-                                    CardTranslation.getTranslatedName(source.getName()))));
+                int i = sa.hasParam("SpellbookAmount") ?
+                        AbilityUtils.calculateAmount(source, sa.getParam("SpellbookAmount"), sa) : 1;
+                while (i > 0) {
+                    String chosen;
+                    if (sa.hasParam("AtRandom")) {
+                        chosen = Aggregates.random(faces).getName();
+                    } else {
+                        String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
+                                CardTranslation.getTranslatedName(source.getName());
+                        chosen = player.getController().chooseCardName(sa, faces,
+                                Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName));
+                    }
+                    names.add(chosen);
+                    faces.remove(StaticData.instance().getCommonCards().getFaceByName(chosen));
+                    i--;
                 }
             }
 

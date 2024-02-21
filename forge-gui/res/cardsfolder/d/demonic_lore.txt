@@ -8,3 +8,4 @@ SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$InYourHand/Times.2
 SVar:DonateMe:5
 Oracle:When Demonic Lore enters the battlefield, draw three cards.\nAt the beginning of your end step, you lose 2 life for each card in your hand.
+AI:Remove:Random

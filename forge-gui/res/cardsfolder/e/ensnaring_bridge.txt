@@ -1,7 +1,7 @@
 Name:Ensnaring Bridge
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.powerGTX | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures with power greater than the number of cards in your hand can't attack.
+S:Mode$ CantAttack | ValidCard$ Creature.powerGTX | Description$ Creatures with power greater than the number of cards in your hand can't attack.
 SVar:X:Count$InYourHand
 #NOTE: The AI will not play around this effect, so it's only good in properly designed decks that circumvent the necessity to worry about the detrimental effect.
 AI:RemoveDeck:Random

@@ -1,0 +1,8 @@
+Name:Rot Farm Mortipede
+ManaCost:3 B
+Types:Creature Insect
+PT:3/4
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever one or more creature cards leave your graveyard, CARDNAME gets +1/+0 and gains menace and lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | KW$ Menace & Lifelink
+DeckHas:Ability$LifeGain
+Oracle:Whenever one or more creature cards leave your graveyard, Rot Farm Mortipede gets +1/+0 and gains menace and lifelink until end of turn.

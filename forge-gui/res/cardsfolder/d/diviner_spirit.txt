@@ -3,7 +3,6 @@ ManaCost:4 U
 Types:Creature Spirit
 PT:2/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you and that player each draw that many cards.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ TriggeredTarget | NumCards$ X
+SVar:TrigDraw:DB$ Draw | Defined$ You & TriggeredTarget | NumCards$ X
 SVar:X:TriggerCount$DamageAmount
 Oracle:Whenever Diviner Spirit deals combat damage to a player, you and that player each draw that many cards.

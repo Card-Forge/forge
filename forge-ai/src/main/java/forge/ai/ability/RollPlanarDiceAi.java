@@ -19,9 +19,16 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        Card plane = sa.getHostCard();
+        for (Card c : ai.getGame().getActivePlanes()) {
+            if (willRollOnPlane(ai, c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    private boolean willRollOnPlane(Player ai, Card plane) {
+        AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         boolean decideToRoll = false;
         boolean rollInMain1 = false;
         String modeName = "never";

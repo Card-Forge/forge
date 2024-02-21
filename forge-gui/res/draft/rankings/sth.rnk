@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Flowstone Mauler|R|STH
+#2|Fanning the Flames|U|STH
+#3|Carnassid|R|STH
+#4|Grave Pact|R|STH
+#5|Ensnaring Bridge|R|STH
+#6|Stronghold Assassin|R|STH
+#7|Revenant|R|STH
+#8|Volrath's Laboratory|R|STH
+#9|Warrior Angel|R|STH
+#10|Spitting Hydra|R|STH
+#11|Shard Phoenix|R|STH
+#12|Flowstone Hellion|U|STH
+#13|Sliver Queen|R|STH
+#14|Crovax the Cursed|R|STH
+#15|Gliding Licid|U|STH
+#16|Silver Wyvern|R|STH
+#17|Flame Wave|U|STH
+#18|Soltari Champion|R|STH
+#19|Spike Soldier|U|STH
+#20|Thalakos Deceiver|R|STH
+#21|Lancers en-Kor|U|STH
+#22|Shock|C|STH
+#23|Mana Leak|C|STH
+#24|Skeleton Scavengers|R|STH
+#25|Volrath's Stronghold|R|STH
+#26|Mindwarper|R|STH
+#27|Volrath's Shapeshifter|R|STH
+#28|Shaman en-Kor|R|STH
+#29|Bullwhip|U|STH
+#30|Cloud Spirit|C|STH
+#31|Death Stroke|C|STH
+#32|Sift|C|STH
+#33|Shifting Wall|U|STH
+#34|Warrior en-Kor|U|STH
+#35|Portcullis|R|STH
+#36|Mogg Maniac|U|STH
+#37|Wall of Blossoms|U|STH
+#38|Tempting Licid|U|STH
+#39|Wall of Essence|U|STH
+#40|Spined Wurm|C|STH
+#41|Spirit en-Kor|C|STH
+#42|Foul Imp|C|STH
+#43|Mogg Infestation|R|STH
+#44|Wall of Tears|U|STH
+#45|Mox Diamond|R|STH
+#46|Spike Feeder|U|STH
+#47|Wall of Souls|U|STH
+#48|Dauthi Trapper|U|STH
+#49|Hornet Cannon|U|STH
+#50|Calming Licid|U|STH
+#51|Stronghold Taskmaster|U|STH
+#52|Skyshroud Troopers|C|STH
+#53|Mogg Flunkies|C|STH
+#54|Spike Breeder|R|STH
+#55|Evacuation|R|STH
+#56|Victual Sliver|U|STH
+#57|Volrath's Gardens|R|STH
+#58|Elven Rite|U|STH
+#59|Wall of Razors|U|STH
+#60|Walking Dream|U|STH
+#61|Corrupting Licid|U|STH
+#62|Temper|U|STH
+#63|Dungeon Shade|C|STH
+#64|Spike Colony|C|STH
+#65|Lowland Basilisk|C|STH
+#66|Spined Sliver|U|STH
+#67|Smite|C|STH
+#68|Amok|R|STH
+#69|Acidic Sliver|U|STH
+#70|Hibernation Sliver|U|STH
+#71|Youthful Knight|C|STH
+#72|Flowstone Blade|C|STH
+#73|Hammerhead Shark|C|STH
+#74|Spike Worker|C|STH
+#75|Cannibalize|C|STH
+#76|Dream Prowler|C|STH
+#77|Craven Giant|C|STH
+#78|Serpent Warrior|C|STH
+#79|Crystalline Sliver|U|STH
+#80|Nomads en-Kor|C|STH
+#81|Fling|C|STH
+#82|Hidden Retreat|R|STH
+#83|Convulsing Licid|U|STH
+#84|Venerable Monk|C|STH
+#85|Mind Games|C|STH
+#86|Reins of Power|R|STH
+#87|Lab Rats|C|STH
+#88|Horn of Greed|R|STH
+#89|Flowstone Shambler|C|STH
+#90|Spindrift Drake|C|STH
+#91|Constant Mists|U|STH
+#92|Invasion Plans|R|STH
+#93|Pursuit of Knowledge|R|STH
+#94|Tortured Existence|C|STH
+#95|Hermit Druid|R|STH
+#96|Rabid Rats|C|STH
+#97|Hesitation|U|STH
+#98|Endangered Armodon|C|STH
+#99|Mogg Bombers|C|STH
+#100|Conviction|C|STH
+#101|Seething Anger|C|STH
+#102|Brush with Death|C|STH
+#103|Morgue Thrull|C|STH
+#104|Intruder Alarm|R|STH
+#105|Torment|C|STH
+#106|Verdant Touch|R|STH
+#107|Mind Peel|U|STH
+#108|Provoke|C|STH
+#109|Sword of the Chosen|R|STH
+#110|Skyshroud Archer|C|STH
+#111|Bandage|C|STH
+#112|Bottomless Pit|U|STH
+#113|Skyshroud Falcon|C|STH
+#114|Tidal Warrior|C|STH
+#115|Overgrowth|C|STH
+#116|Primal Rage|U|STH
+#117|Furnace Spirit|C|STH
+#118|Mulch|C|STH
+#119|Contempt|C|STH
+#120|Ransack|U|STH
+#121|Tidal Surge|C|STH
+#122|Change of Heart|C|STH
+#123|Leap|C|STH
+#124|Mob Justice|C|STH
+#125|Rebound|U|STH
+#126|Honor Guard|C|STH
+#127|Contemplation|U|STH
+#128|Scapegoat|U|STH
+#129|Mortuary|R|STH
+#130|Duct Crawler|C|STH
+#131|Burgeoning|R|STH
+#132|Crossbow Ambush|C|STH
+#133|Dream Halls|R|STH
+#134|Mask of the Mimic|U|STH
+#135|Samite Blessing|C|STH
+#136|Heartstone|U|STH
+#137|Heat of Battle|U|STH
+#138|Awakening|R|STH
+#139|Jinxed Ring|R|STH
+#140|Sacred Ground|R|STH
+#141|Megrim|U|STH
+#142|Rolling Stones|R|STH
+#143|Ruination|R|STH

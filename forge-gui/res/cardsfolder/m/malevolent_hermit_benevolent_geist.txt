@@ -16,7 +16,7 @@ Colors:blue
 Types:Creature Spirit Wizard
 PT:2/2
 K:Flying
-S:Mode$ Continuous | Affected$ Card.nonCreature+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Description$ Noncreature spells you control can't be countered.
+R:Event$ Counter | ValidSA$ Spell.nonCreature+YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Noncreature spells you control can't be countered.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 Oracle:Flying\nNoncreature spells you control can't be countered.\nIf Benevolent Geist would be put into a graveyard from anywhere, exile it instead.

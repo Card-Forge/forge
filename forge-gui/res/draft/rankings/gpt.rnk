@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Skeletal Vampire|R|GPT
+#2|Niv-Mizzet, the Firemind|R|GPT
+#3|Savage Twister|U|GPT
+#4|Angel of Despair|R|GPT
+#5|Debtors' Knell|R|GPT
+#6|Invoke the Firemind|R|GPT
+#7|Seize the Soul|R|GPT
+#8|Ghost Council of Orzhova|R|GPT
+#9|Mortify|U|GPT
+#10|Rumbling Slum|R|GPT
+#11|Burning Tree Shaman|R|GPT
+#12|Electrolyze|U|GPT
+#13|Skarrgan Firebird|R|GPT
+#14|Giant Solifuge|R|GPT
+#15|Stratozeppelid|U|GPT
+#16|Gruul Guildmage|U|GPT
+#17|Djinn Illuminatus|R|GPT
+#18|Graven Dominator|R|GPT
+#19|Orzhov Pontiff|R|GPT
+#20|Pillory of the Sleepless|C|GPT
+#21|Gelectrode|U|GPT
+#22|Tibor and Lumia|R|GPT
+#23|Blind Hunter|C|GPT
+#24|Borborygmos|R|GPT
+#25|Teysa, Orzhov Scion|R|GPT
+#26|Steamcore Weird|C|GPT
+#27|Belfry Spirit|U|GPT
+#28|Ogre Savant|C|GPT
+#29|Douse in Gloom|C|GPT
+#30|Streetbreaker Wurm|C|GPT
+#31|Orzhov Guildmage|U|GPT
+#32|Living Inferno|R|GPT
+#33|Sword of the Paruns|R|GPT
+#34|Pyromatics|C|GPT
+#35|Izzet Chronarch|C|GPT
+#36|Wurmweaver Coil|R|GPT
+#37|Repeal|C|GPT
+#38|Daggerclaw Imp|U|GPT
+#39|Shrieking Grotesque|C|GPT
+#40|Harrier Griffin|U|GPT
+#41|Ulasht, the Hate Seed|R|GPT
+#42|Exhumer Thrull|U|GPT
+#43|Izzet Guildmage|U|GPT
+#44|Silhana Starfletcher|C|GPT
+#45|Ghor Clan Savage|C|GPT
+#46|Wildsize|C|GPT
+#47|Mourning Thrull|C|GPT
+#48|Stomping Ground|R|GPT
+#49|Torch Drake|C|GPT
+#50|Plagued Rusalka|U|GPT
+#51|Gristleback|U|GPT
+#52|Hypervolt Grasp|U|GPT
+#53|Spelltithe Enforcer|R|GPT
+#54|Ostiary Thrull|C|GPT
+#55|Culling Sun|R|GPT
+#56|Agent of Masks|U|GPT
+#57|Dryad Sophisticate|U|GPT
+#58|Orzhov Euthanist|C|GPT
+#59|Izzet Boilerworks|C|GPT
+#60|Steam Vents|R|GPT
+#61|Godless Shrine|R|GPT
+#62|Droning Bureaucrats|U|GPT
+#63|Skarrgan Skybreaker|U|GPT
+#64|Souls of the Faultless|U|GPT
+#65|Orzhov Basilica|C|GPT
+#66|Ghost Warden|C|GPT
+#67|Wee Dragonauts|C|GPT
+#68|Train of Thought|C|GPT
+#69|Gruul Turf|C|GPT
+#70|Bioplasm|R|GPT
+#71|Schismotivate|U|GPT
+#72|Izzet Signet|C|GPT
+#73|Gruul War Plow|R|GPT
+#74|Orzhov Signet|C|GPT
+#75|Petrahydrox|C|GPT
+#76|Scorched Rusalka|U|GPT
+#77|Vacuumelt|U|GPT
+#78|Revenant Patriarch|U|GPT
+#79|Shadow Lance|U|GPT
+#80|Thunderheads|U|GPT
+#81|Bloodscale Prowler|C|GPT
+#82|Scab Clan Mauler|C|GPT
+#83|Petrified Wood Kin|R|GPT
+#84|Sanguine Praetor|R|GPT
+#85|Ghostway|R|GPT
+#86|Absolver Thrull|C|GPT
+#87|Gruul Signet|C|GPT
+#88|Tin Street Hooligan|C|GPT
+#89|Silhana Ledgewalker|C|GPT
+#90|Cerebral Vortex|R|GPT
+#91|Smogsteed Rider|U|GPT
+#92|Gruul Scrapper|C|GPT
+#93|Vedalken Plotter|U|GPT
+#94|Goblin Flectomancer|U|GPT
+#95|Withstand|C|GPT
+#96|Wild Cantor|C|GPT
+#97|Burning Tree Bloodscale|C|GPT
+#98|To Arms!|U|GPT
+#99|Infiltrator's Magemark|C|GPT
+#100|Castigate|C|GPT
+#101|Sinstriker's Will|U|GPT
+#102|Skarrg, the Rage Pits|U|GPT
+#103|Drowned Rusalka|U|GPT
+#104|Order of the Stars|U|GPT
+#105|Orzhova, the Church of Deals|U|GPT
+#106|Storm Herd|R|GPT
+#107|Feral Animist|U|GPT
+#108|Necromancer's Magemark|C|GPT
+#109|Ghor Clan Bloodscale|U|GPT
+#110|Leap of Flame|C|GPT
+#111|Vertigo Spawn|U|GPT
+#112|Witch Maw Nephilim|R|GPT
+#113|Gruul Nodorog|C|GPT
+#114|Battering Wurm|U|GPT
+#115|Abyssal Nocturnus|R|GPT
+#116|Guardian's Magemark|C|GPT
+#117|Runeboggle|C|GPT
+#118|Glint Eye Nephilim|R|GPT
+#119|Hissing Miasma|U|GPT
+#120|Fencer's Magemark|C|GPT
+#121|Skyrider Trainee|C|GPT
+#122|Wreak Havoc|U|GPT
+#123|Frazzle|U|GPT
+#124|Dune Brood Nephilim|R|GPT
+#125|Gigadrowse|C|GPT
+#126|Parallectric Feedback|R|GPT
+#127|Leyline of Lightning|R|GPT
+#128|Rabble Rouser|U|GPT
+#129|Skarrgan Pit Skulk|C|GPT
+#130|Restless Bones|C|GPT
+#131|Beastmaster's Magemark|C|GPT
+#132|Stitch in Time|R|GPT
+#133|Ink Treader Nephilim|R|GPT
+#134|Siege of Towers|R|GPT
+#135|Lionheart Maverick|C|GPT
+#136|Poisonbelly Ogre|C|GPT
+#137|Yore Tiller Nephilim|R|GPT
+#138|Crystal Seer|C|GPT
+#139|Predatory Focus|U|GPT
+#140|Cry of Contrition|C|GPT
+#141|Crash Landing|U|GPT
+#142|Cremate|C|GPT
+#143|Quicken|R|GPT
+#144|Mimeofacture|R|GPT
+#145|Martyred Rusalka|U|GPT
+#146|Gatherer of Graces|U|GPT
+#147|Aetherplasm|U|GPT
+#148|Shattering Spree|U|GPT
+#149|Starved Rusalka|U|GPT
+#150|Caustic Rain|U|GPT
+#151|Moratorium Stone|R|GPT
+#152|Mizzium Transreliquat|R|GPT
+#153|Benediction of Moons|C|GPT
+#154|Killer Instinct|R|GPT
+#155|Primeval Light|U|GPT
+#156|Conjurer's Ban|U|GPT
+#157|Leyline of the Void|R|GPT
+#158|Hatching Plans|R|GPT
+#159|Leyline of the Meek|R|GPT
+#160|Nivix, Aerie of the Firemind|U|GPT
+#161|Sky Swallower|R|GPT
+#162|Cryptwailing|U|GPT
+#163|Leyline of Lifeforce|R|GPT
+#164|Leyline of Singularity|R|GPT
+#165|Earth Surge|R|GPT

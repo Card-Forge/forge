@@ -1,0 +1,7 @@
+Name:Traverse Eternity
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the highest mana value among historic permanents you control. (Artifacts, legendaries, and Sagas are historic.)
+SVar:X:Count$Valid Permanent.Historic+YouCtrl$GreatestCMC
+DeckHints:Type$Legendary|Saga|Artifact
+Oracle:Draw cards equal to the highest mana value among historic permanents you control. (Artifacts, legendaries, and Sagas are historic.)

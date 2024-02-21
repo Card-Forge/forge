@@ -1,0 +1,17 @@
+Name:Gingerbread Hunter
+ManaCost:4 G
+Types:Creature Giant
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token & Type$Artifact|Food
+AlternateMode:Adventure
+Oracle:When Gingerbread Hunter enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+
+ALTERNATE
+
+Name:Puny Snack
+ManaCost:2 B
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gets -2/-2 until end of turn. (Then exile this card. You may cast the creature later from exile.)

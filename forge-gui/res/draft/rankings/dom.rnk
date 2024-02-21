@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Aryel, Knight of Windgrace|R|DOM
+#2|Lyra Dawnbringer|M|DOM
+#3|Demonlord Belzenlok|M|DOM
+#4|Verix Bladewing|M|DOM
+#5|Zahid, Djinn of the Lamp|R|DOM
+#6|Josu Vess, Lich Knight|R|DOM
+#7|Siege-Gang Commander|R|DOM
+#8|Territorial Allosaurus|R|DOM
+#9|Multani, Yavimaya's Avatar|M|DOM
+#10|Jaya's Immolating Inferno|M|DOM
+#11|Darigaaz Reincarnated|M|DOM
+#12|Teferi, Hero of Dominaria|M|DOM
+#13|Grand Warlord Radha|R|DOM
+#14|Steel Leaf Champion|R|DOM
+#15|Naru Meha, Master Wizard|M|DOM
+#16|History of Benalia|M|DOM
+#17|Muldrotha, the Gravetide|R|DOM
+#18|Torgaar, Famine Incarnate|R|DOM
+#19|Yawgmoth's Vile Offering|R|DOM
+#20|Skizzik|U|DOM
+#21|Fight with Fire|U|DOM
+#22|Weatherlight|M|DOM
+#23|Wizard's Lightning|U|DOM
+#24|Raff Capashen, Ship's Mage|U|DOM
+#25|Shalai, Voice of Plenty|R|DOM
+#26|Jodah, Archmage Eternal|R|DOM
+#27|Phyrexian Scriptures|M|DOM
+#28|Tatyova, Benthic Druid|U|DOM
+#29|Untamed Kavu|U|DOM
+#30|Kazarov, Sengir Pureblood|R|DOM
+#31|Garna, the Bloodflame|U|DOM
+#32|Grunn, the Lonely King|U|DOM
+#33|The Eldest Reborn|U|DOM
+#34|Cast Down|U|DOM
+#35|Serra Angel|U|DOM
+#36|Two-Headed Giant|R|DOM
+#37|Adeliz, the Cinder Wind|U|DOM
+#38|Arvad the Cursed|U|DOM
+#39|Settle the Score|U|DOM
+#40|Eviscerate|C|DOM
+#41|Slimefoot, the Stowaway|U|DOM
+#42|Hallar, the Firefletcher|U|DOM
+#43|Karn's Temporal Sundering|R|DOM
+#44|Vicious Offering|C|DOM
+#45|Goblin Chainwhirler|R|DOM
+#46|Rite of Belzenlok|R|DOM
+#47|Traxos, Scourge of Kroog|R|DOM
+#48|Goblin Barrage|U|DOM
+#49|Knight of Malice|U|DOM
+#50|Seal Away|U|DOM
+#51|Benalish Marshal|R|DOM
+#52|Evra, Halcyon Witness|R|DOM
+#53|Karn, Scion of Urza|M|DOM
+#54|Knight of Grace|U|DOM
+#55|Danitha Capashen, Paragon|U|DOM
+#56|Daring Archaeologist|R|DOM
+#57|Shivan Fire|C|DOM
+#58|Icy Manipulator|U|DOM
+#59|Llanowar Elves|C|DOM
+#60|Forebear's Blade|R|DOM
+#61|Marwyn, the Nurturer|R|DOM
+#62|Valduk, Keeper of the Flame|U|DOM
+#63|In Bolas's Clutches|U|DOM
+#64|Urza's Ruinous Blast|R|DOM
+#65|Thorn Elemental|U|DOM
+#66|Blackblade Reforged|R|DOM
+#67|Rona, Disciple of Gix|U|DOM
+#68|Jhoira, Weatherlight Captain|M|DOM
+#69|Tiana, Ship's Caretaker|U|DOM
+#70|Urgoros, the Empty One|U|DOM
+#71|On Serra's Wings|U|DOM
+#72|Baird, Steward of Argive|U|DOM
+#73|The Flame of Keld|U|DOM
+#74|Gilded Lotus|R|DOM
+#75|Wild Onslaught|U|DOM
+#76|Fiery Intervention|C|DOM
+#77|Goblin Warchief|U|DOM
+#78|Verdant Force|R|DOM
+#79|Shanna, Sisay's Legacy|U|DOM
+#80|Song of Freyalise|U|DOM
+#81|Baloth Gorger|C|DOM
+#82|Naban, Dean of Iteration|R|DOM
+#83|Blink of an Eye|C|DOM
+#84|Triumph of Gerrard|U|DOM
+#85|Teshar, Ancestor's Apostle|R|DOM
+#86|Elfhame Druid|U|DOM
+#87|Helm of the Host|R|DOM
+#88|Fall of the Thran|R|DOM
+#89|Blessed Light|C|DOM
+#90|Yavimaya Sapherd|C|DOM
+#91|Gideon's Reproach|C|DOM
+#92|Ancient Animus|C|DOM
+#93|The First Eruption|R|DOM
+#94|Warcry Phoenix|U|DOM
+#95|Tempest Djinn|R|DOM
+#96|Kwende, Pride of Femeref|U|DOM
+#97|Lingering Phantom|U|DOM
+#98|Dread Shade|R|DOM
+#99|Deathbloom Thallid|C|DOM
+#100|Urza's Tome|U|DOM
+#101|Sylvan Awakening|R|DOM
+#102|Sporecrown Thallid|U|DOM
+#103|Rampaging Cyclops|C|DOM
+#104|Fungal Infection|C|DOM
+#105|Sentinel of the Pearl Trident|U|DOM
+#106|Precognition Field|R|DOM
+#107|Keldon Overseer|C|DOM
+#108|Saproling Migration|C|DOM
+#109|Academy Drake|C|DOM
+#110|Grow from the Ashes|C|DOM
+#111|D'Avenant Trapper|C|DOM
+#112|Woodland Cemetery|R|DOM
+#113|Sulfur Falls|R|DOM
+#114|Isolated Chapel|R|DOM
+#115|Hinterland Harbor|R|DOM
+#116|Clifftop Retreat|R|DOM
+#117|Mox Amber|M|DOM
+#118|Firefist Adept|U|DOM
+#119|Ghitu Journeymage|C|DOM
+#120|Squee, the Immortal|R|DOM
+#121|Thallid Soothsayer|U|DOM
+#122|Academy Journeymage|C|DOM
+#123|Deep Freeze|C|DOM
+#124|Tetsuko Umezawa, Fugitive|U|DOM
+#125|Merfolk Trickster|U|DOM
+#126|Dauntless Bodyguard|U|DOM
+#127|Memorial to Unity|U|DOM
+#128|Memorial to Glory|U|DOM
+#129|Memorial to Genius|U|DOM
+#130|Memorial to Folly|U|DOM
+#131|Arcane Flight|C|DOM
+#132|Aven Sentry|C|DOM
+#133|Orcish Vandal|U|DOM
+#134|Spore Swarm|U|DOM
+#135|Nature's Spiral|U|DOM
+#136|Champion of the Flame|U|DOM
+#137|Yargle, Glutton of Urborg|U|DOM
+#138|Windgrace Acolyte|C|DOM
+#139|Diligent Excavator|U|DOM
+#140|Sergeant-at-Arms|C|DOM
+#141|Sanctum Spirit|U|DOM
+#142|Call the Cavalry|C|DOM
+#143|Weight of Memory|U|DOM
+#144|Navigator's Compass|C|DOM
+#145|Sorcerer's Wand|U|DOM
+#146|Mishra's Self-Replicator|R|DOM
+#147|Primevals' Glorious Rebirth|R|DOM
+#148|Kamahl's Druidic Vow|R|DOM
+#149|Dark Bargain|C|DOM
+#150|Chainer's Torment|U|DOM
+#151|Wizard's Retort|U|DOM
+#152|The Mirari Conjecture|R|DOM
+#153|Serra Disciple|C|DOM
+#154|Slinn Voda, the Rising Deep|U|DOM
+#155|Mesa Unicorn|C|DOM
+#156|Syncopate|C|DOM
+#157|Cloudreader Sphinx|C|DOM
+#158|Pegasus Courser|C|DOM
+#159|Fungal Plots|U|DOM
+#160|Run Amok|C|DOM
+#161|Keldon Raider|C|DOM
+#162|Soul Salvage|C|DOM
+#163|Rescue|C|DOM
+#164|Jhoira's Familiar|U|DOM
+#165|Gift of Growth|C|DOM
+#166|Llanowar Scout|C|DOM
+#167|Radiating Lightning|C|DOM
+#168|Drudge Sentinel|C|DOM
+#169|Whisper, Blood Liturgist|U|DOM
+#170|Time of Ice|U|DOM
+#171|Curator's Ward|U|DOM
+#172|Ghitu Chronicler|C|DOM
+#173|Llanowar Envoy|C|DOM
+#174|Benalish Honor Guard|C|DOM
+#175|Skittering Surveyor|C|DOM
+#176|Mammoth Spider|C|DOM
+#177|Fervent Strike|C|DOM
+#178|Thallid Omnivore|C|DOM
+#179|Blessing of Belzenlok|C|DOM
+#180|Vodalian Arcanist|C|DOM
+#181|Relic Runner|C|DOM
+#182|Knight of New Benalia|C|DOM
+#183|Excavation Elephant|C|DOM
+#184|Adamant Will|C|DOM
+#185|Juggernaut|U|DOM
+#186|Voltaic Servant|C|DOM
+#187|Shield of the Realm|U|DOM
+#188|Corrosive Ooze|C|DOM
+#189|Keldon Warcaller|C|DOM
+#190|Befuddle|C|DOM
+#191|Dub|C|DOM
+#192|Jaya Ballard|M|DOM
+#193|Opt|C|DOM
+#194|Zhalfirin Void|U|DOM
+#195|Cabal Paladin|C|DOM
+#196|Caligo Skin-Witch|C|DOM
+#197|Board the Weatherlight|U|DOM
+#198|Divest|C|DOM
+#199|Memorial to War|U|DOM
+#200|Adventurous Impulse|C|DOM
+#201|Divination|C|DOM
+#202|Gaea's Protector|C|DOM
+#203|Krosan Druid|C|DOM
+#204|Seismic Shift|C|DOM
+#205|Bloodstone Goblin|C|DOM
+#206|Stronghold Confessor|C|DOM
+#207|Feral Abomination|C|DOM
+#208|Cold-Water Snapper|C|DOM
+#209|Sparring Construct|C|DOM
+#210|Powerstone Shard|C|DOM
+#211|Broken Bond|C|DOM
+#212|Haphazard Bombardment|R|DOM
+#213|Warlord's Fury|C|DOM
+#214|Demonic Vigor|C|DOM
+#215|Homarid Explorer|C|DOM
+#216|The Antiquities War|R|DOM
+#217|Healing Grace|C|DOM
+#218|Invoke the Divine|C|DOM
+#219|Tolarian Scholar|C|DOM
+#220|Fire Elemental|C|DOM
+#221|Bloodtallow Candle|C|DOM
+#222|Short Sword|C|DOM
+#223|Pardic Wanderer|C|DOM
+#224|Pierce the Sky|C|DOM
+#225|Arbor Armament|C|DOM
+#226|Artificer's Assistant|C|DOM
+#227|Gaea's Blessing|U|DOM
+#228|Oath of Teferi|R|DOM
+#229|Ghitu Lavarunner|C|DOM
+#230|Lich's Mastery|R|DOM
+#231|Charge|C|DOM
+#232|Guardians of Koilos|C|DOM
+#233|Cabal Evangel|C|DOM
+#234|Sage of Lat-Nam|U|DOM
+#235|Final Parting|U|DOM
+#236|Skirk Prospector|C|DOM
+#237|Thran Temporal Gateway|R|DOM
+#238|Jousting Lance|C|DOM
+#239|Aesthir Glider|C|DOM
+#240|Primordial Wurm|C|DOM
+#241|Rat Colony|C|DOM
+#242|Tragic Poet|C|DOM
+#243|Unwind|C|DOM
+#244|The Mending of Dominaria|R|DOM
+#245|Amaranthine Wall|U|DOM
+#246|Frenzied Rage|C|DOM
+#247|Howling Golem|U|DOM
+#248|Damping Sphere|U|DOM
+#249|Cabal Stronghold|R|DOM

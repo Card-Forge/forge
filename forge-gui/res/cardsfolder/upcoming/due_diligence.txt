@@ -1,0 +1,9 @@
+Name:Due Diligence
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control other than enchanted creature gets +2/+2 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+NotEnchantedBy | KW$ Vigilance | TgtPrompt$ Select target creature you control other than enchanted creature | NumAtt$ +2 | NumDef$ +2
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +2/+2 and has vigilance.
+Oracle:Enchant creature\nWhen Due Diligence enters the battlefield, target creature you control other than enchanted creature gets +2/+2 and gains vigilance until end of turn.\nEnchanted creature gets +2/+2 and has vigilance.

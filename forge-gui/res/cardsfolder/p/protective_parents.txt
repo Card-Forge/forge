@@ -1,0 +1,9 @@
+Name:Protective Parents
+ManaCost:2 W
+Types:Creature Human Peasant
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Young Hero Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_young_hero | TokenOwner$ You | TargetMin$ 0 | TargetMax$ 1 | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+SVar:SacMe:2
+Oracle:When Protective Parents dies, create a Young Hero Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature has "Whenever this creature attacks, if its toughness is 3 or less, put a +1/+1 counter on it.")

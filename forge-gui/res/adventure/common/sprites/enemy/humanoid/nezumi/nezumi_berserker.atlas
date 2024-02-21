@@ -1,0 +1,98 @@
+nezumi_berserker.png
+size: 512,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 25, 108
+  size: 16, 16   
+Idle 
+  xy: 20, 8
+  size: 24, 24    
+Idle 
+  xy: 84, 8
+  size: 24, 24    
+Idle 
+  xy: 148, 8
+  size: 24, 24    
+Idle 
+  xy: 212, 8
+  size: 24, 24    
+Idle 
+  xy: 20, 136
+  size: 24, 24    
+Idle 
+  xy: 84, 136
+  size: 24, 24    
+Idle 
+  xy: 148, 136
+  size: 24, 24    
+Idle 
+  xy: 212, 136
+  size: 24, 24 
+Walk 
+  xy: 14, 40
+  size: 34, 24 
+Walk 
+  xy: 78, 40
+  size: 34, 24
+Walk 
+  xy: 142, 40
+  size: 34, 24
+Walk 
+  xy: 206, 40
+  size: 34, 24
+Walk 
+  xy: 270, 40
+  size: 34, 24
+Walk 
+  xy: 334, 40
+  size: 34, 24
+Walk 
+  xy: 398, 40
+  size: 34, 24
+Walk 
+  xy: 462, 40
+  size: 34, 24
+Attack 
+  xy: 20, 96
+  size: 39, 32
+Attack 
+  xy: 84, 96
+  size: 39, 32
+Attack 
+  xy: 148, 96
+  size: 39, 32
+Attack 
+  xy: 212, 96
+  size: 39, 32
+Attack 
+  xy: 276, 96
+  size: 39, 32
+Attack 
+  xy: 340, 96
+  size: 39, 32
+Attack 
+  xy: 404, 96
+  size: 39, 32
+Attack 
+  xy: 468, 96
+  size: 39, 32
+Death
+  xy: 20, 169
+  size: 32, 23 
+Death
+  xy: 20, 169
+  size: 32, 23 
+Death
+  xy: 84, 169
+  size: 32, 23 
+Death
+  xy: 148, 169
+  size: 32, 23 
+Death
+  xy: 212, 169
+  size: 32, 23 
+Death
+  xy: 276, 169
+  size: 32, 23 

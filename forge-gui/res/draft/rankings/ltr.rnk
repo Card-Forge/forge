@@ -1,0 +1,282 @@
+//Rank|Name|Rarity|Set
+#1|Witch-King of Angmar|M|LTR
+#2|Horn of Gondor|R|LTR
+#3|Faramir, Prince of Ithilien|R|LTR
+#4|Anduril, Flame of the West|M|LTR
+#5|Spiteful Banditry|M|LTR
+#6|Orcish Bowmasters|R|LTR
+#7|Sauron, the Dark Lord|M|LTR
+#8|Arwen, Mortal Queen|M|LTR
+#9|Eomer, Marshal of Rohan|R|LTR
+#10|Rangers of Ithilien|R|LTR
+#11|Aragorn, the Uniter|M|LTR
+#12|Shelob, Child of Ungoliant|R|LTR
+#13|Boromir, Warden of the Tower|R|LTR
+#14|Gandalf the Grey|R|LTR
+#15|Frodo, Sauron's Bane|R|LTR
+#16|Eowyn, Fearless Knight|R|LTR
+#17|Nazgul|U|LTR
+#18|Samwise Gamgee|R|LTR
+#19|Call of the Ring|R|LTR
+#20|King of the Oathbreakers|R|LTR
+#21|Radagast the Brown|M|LTR
+#22|Flame of Anor|R|LTR
+#23|The Balrog, Durin's Bane|R|LTR
+#24|Sauron, the Necromancer|R|LTR
+#25|There and Back Again|R|LTR
+#26|Voracious Fell Beast|U|LTR
+#27|Gandalf the White|M|LTR
+#28|Bill the Pony|U|LTR
+#29|Gandalf, Friend of the Shire|U|LTR
+#30|Samwise the Stouthearted|U|LTR
+#31|Bitter Downfall|U|LTR
+#32|Fear, Fire, Foes!|U|LTR
+#33|Flowering of the White Tree|R|LTR
+#34|Theoden, King of Rohan|U|LTR
+#35|Gandalf's Sanction|U|LTR
+#36|Sauron's Ransom|R|LTR
+#37|Rosie Cotton of South Lane|U|LTR
+#38|Mauhur, Uruk-hai Captain|U|LTR
+#39|Bilbo, Retired Burglar|U|LTR
+#40|Fiery Inscription|U|LTR
+#41|The Mouth of Sauron|U|LTR
+#42|Smeagol, Helpful Guide|R|LTR
+#43|Denethor, Ruling Steward|U|LTR
+#44|Eomer of the Riddermark|U|LTR
+#45|Saruman of Many Colors|M|LTR
+#46|Gothmog, Morgul Lieutenant|U|LTR
+#47|Pippin, Guard of the Citadel|R|LTR
+#48|The Shire|R|LTR
+#49|Gollum, Patient Plotter|U|LTR
+#50|The One Ring|M|LTR
+#51|Shadowfax, Lord of Horses|U|LTR
+#52|Book of Mazarbul|U|LTR
+#53|March from the Black Gate|U|LTR
+#54|Palantir of Orthanc|M|LTR
+#55|Shadow Summoning|U|LTR
+#56|Old Man Willow|U|LTR
+#57|Rally at the Hornburg|C|LTR
+#58|Claim the Precious|C|LTR
+#59|Aragorn, Company Leader|R|LTR
+#60|Ranger's Firebrand|U|LTR
+#61|The Torment of Gollum|C|LTR
+#62|Grishnakh, Brash Instigator|U|LTR
+#63|Prince Imrahil the Fair|U|LTR
+#64|Smite the Deathless|C|LTR
+#65|Dunland Crebain|C|LTR
+#66|Frodo Baggins|U|LTR
+#67|The Bath Song|U|LTR
+#68|Gimli, Counter of Kills|U|LTR
+#69|Uruk-hai Berserker|C|LTR
+#70|Errand-Rider of Gondor|C|LTR
+#71|Gollum's Bite|U|LTR
+#72|Easterling Vanguard|C|LTR
+#73|Protector of Gondor|C|LTR
+#74|Generous Ent|C|LTR
+#75|Many Partings|C|LTR
+#76|Minas Tirith|R|LTR
+#77|Barad-dur|R|LTR
+#78|Goblin Fireleaper|U|LTR
+#79|Swarming of Moria|C|LTR
+#80|Saruman's Trickery|U|LTR
+#81|Foray of Orcs|U|LTR
+#82|Mirkwood Bats|C|LTR
+#83|Merry, Esquire of Rohan|R|LTR
+#84|Delighted Halfling|R|LTR
+#85|Stern Scolding|U|LTR
+#86|Eowyn, Lady of Rohan|U|LTR
+#87|Scroll of Isildur|R|LTR
+#88|Shire Shirriff|U|LTR
+#89|Erkenbrand, Lord of Westfold|U|LTR
+#90|Horses of the Bruinen|U|LTR
+#91|Birthday Escape|C|LTR
+#92|Soothing of Smeagol|C|LTR
+#93|Glorious Gale|C|LTR
+#94|Haunt of the Dead Marshes|C|LTR
+#95|Mordor Muster|C|LTR
+#96|Improvised Club|C|LTR
+#97|Stew the Coneys|U|LTR
+#98|Wose Pathfinder|C|LTR
+#99|Gloin, Dwarf Emissary|R|LTR
+#100|Troll of Khazad-dum|C|LTR
+#101|Phial of Galadriel|R|LTR
+#102|Battle-Scarred Goblin|C|LTR
+#103|Fall of Cair Andros|R|LTR
+#104|Hithlain Knots|C|LTR
+#105|Cirith Ungol Patrol|C|LTR
+#106|Sam's Desperate Rescue|C|LTR
+#107|Quarrel's End|C|LTR
+#108|Relentless Rohirrim|C|LTR
+#109|Saruman the White|U|LTR
+#110|Fall of Gil-galad|R|LTR
+#111|Council's Deliberation|U|LTR
+#112|Rivendell|R|LTR
+#113|Shelob's Ambush|C|LTR
+#114|East-Mark Cavalier|C|LTR
+#115|Meriadoc Brandybuck|U|LTR
+#116|Mushroom Watchdogs|C|LTR
+#117|Peregrin Took|U|LTR
+#118|One Ring to Rule Them All|R|LTR
+#119|Arwen's Gift|C|LTR
+#120|Oliphaunt|C|LTR
+#121|Gimli, Mournful Avenger|R|LTR
+#122|Ent's Fury|C|LTR
+#123|Mount Doom|M|LTR
+#124|Strider, Ranger of the North|U|LTR
+#125|War of the Last Alliance|R|LTR
+#126|Lotho, Corrupt Shirriff|R|LTR
+#127|Oath of the Grey Host|U|LTR
+#128|Took Reaper|C|LTR
+#129|The Battle of Bywater|R|LTR
+#130|Warbeast of Gorgoroth|C|LTR
+#131|Arwen Undomiel|U|LTR
+#132|Eagles of the North|C|LTR
+#133|Lembas|C|LTR
+#134|Pelargir Survivor|C|LTR
+#135|Lorien Revealed|C|LTR
+#136|Isolation at Orthanc|C|LTR
+#137|Deceive the Messenger|C|LTR
+#138|Haradrim Spearmaster|C|LTR
+#139|Rohirrim Lancer|C|LTR
+#140|Friendly Rivalry|U|LTR
+#141|Westfold Rider|C|LTR
+#142|Legolas, Master Archer|R|LTR
+#143|Quickbeam, Upstart Ent|U|LTR
+#144|Grima Wormtongue|U|LTR
+#145|Mirrormere Guardian|C|LTR
+#146|Doors of Durin|R|LTR
+#147|Mordor Trebuchet|C|LTR
+#148|Eastfarthing Farmer|C|LTR
+#149|Dunedain Blade|C|LTR
+#150|Ugluk of the White Hand|U|LTR
+#151|Shire Terrace|C|LTR
+#152|Treason of Isengard|C|LTR
+#153|Lobelia Sackville-Baggins|R|LTR
+#154|Reprieve|U|LTR
+#155|Bill Ferny, Bree Swindler|U|LTR
+#156|Moria Marauder|R|LTR
+#157|Grond, the Gatebreaker|U|LTR
+#158|Legolas, Counter of Kills|U|LTR
+#159|Rise of the Witch-King|U|LTR
+#160|Barrow-Blade|U|LTR
+#161|Meneldor, Swift Savior|U|LTR
+#162|Shagrat, Loot Bearer|R|LTR
+#163|Elrond, Lord of Rivendell|U|LTR
+#164|Lost to Legend|U|LTR
+#165|Dunedain Rangers|U|LTR
+#166|Celeborn the Wise|U|LTR
+#167|Elrond, Master of Healing|R|LTR
+#168|Glamdring|M|LTR
+#169|Gorbag of Minas Morgul|U|LTR
+#170|Hobbit's Sting|C|LTR
+#171|Dawn of a New Age|M|LTR
+#172|Orcish Medicine|C|LTR
+#173|Faramir, Field Commander|U|LTR
+#174|Ithilien Kingfisher|C|LTR
+#175|Esquire of the King|C|LTR
+#176|Banish from Edoras|C|LTR
+#177|Erebor Flamesmith|C|LTR
+#178|Enraged Huorn|C|LTR
+#179|Mines of Moria|R|LTR
+#180|Ioreth of the Healing House|U|LTR
+#181|Snarling Warg|C|LTR
+#182|Bag End Porter|C|LTR
+#183|Landroval, Horizon Witness|U|LTR
+#184|Second Breakfast|C|LTR
+#185|Butterbur, Bree Innkeeper|U|LTR
+#186|Knights of Dol Amroth|C|LTR
+#187|Nasty End|C|LTR
+#188|Bombadil's Song|C|LTR
+#189|Wizard's Rockets|C|LTR
+#190|Tale of Tinuviel|U|LTR
+#191|Morgul-Knife Wound|C|LTR
+#192|Gwaihir the Windlord|U|LTR
+#193|Gimli's Fury|C|LTR
+#194|Great Hall of the Citadel|C|LTR
+#195|Slip On the Ring|C|LTR
+#196|Surrounded by Orcs|C|LTR
+#197|Breaking of the Fellowship|C|LTR
+#198|Galadriel of Lothlorien|R|LTR
+#199|Lash of the Balrog|C|LTR
+#200|Stalwarts of Osgiliath|C|LTR
+#201|Soldier of the Grey Host|C|LTR
+#202|Nimble Hobbit|C|LTR
+#203|Fog on the Barrow-Downs|C|LTR
+#204|Escape from Orthanc|C|LTR
+#205|The Black Breath|C|LTR
+#206|Brandywine Farmer|C|LTR
+#207|Fangorn, Tree Shepherd|R|LTR
+#208|Pippin's Bravery|C|LTR
+#209|Gimli's Axe|C|LTR
+#210|Press the Enemy|R|LTR
+#211|Entish Restoration|U|LTR
+#212|Mirror of Galadriel|U|LTR
+#213|Isildur's Fateful Strike|R|LTR
+#214|Horn of the Mark|R|LTR
+#215|Goldberry, River-Daughter|R|LTR
+#216|Revive the Shire|C|LTR
+#217|Elven Chorus|R|LTR
+#218|Mirkwood Spider|C|LTR
+#219|Sting, the Glinting Dagger|R|LTR
+#220|Willow-Wind|C|LTR
+#221|Nimrodel Watcher|C|LTR
+#222|Bewitching Leechcraft|C|LTR
+#223|Galadhrim Guide|C|LTR
+#224|Rising of the Day|U|LTR
+#225|Grey Havens Navigator|C|LTR
+#226|Dreadful as the Storm|C|LTR
+#227|Now for Wrath, Now for Ruin!|C|LTR
+#228|Rush the Room|C|LTR
+#229|Chance-Met Elves|C|LTR
+#230|Inherited Envelope|C|LTR
+#231|Galadhrim Bow|C|LTR
+#232|Cast into the Fire|C|LTR
+#233|Fire of Orthanc|C|LTR
+#234|Olog-hai Crusher|C|LTR
+#235|Storm of Saruman|M|LTR
+#236|Hew the Entwood|M|LTR
+#237|Last March of the Ents|M|LTR
+#238|Tom Bombadil|M|LTR
+#239|Gift of Strands|U|LTR
+#240|Sharkey, Tyrant of the Shire|R|LTR
+#241|Glorfindel, Dauntless Rescuer|U|LTR
+#242|The Watcher in the Water|M|LTR
+#243|Shortcut to Mushrooms|U|LTR
+#244|The Grey Havens|U|LTR
+#245|Captain of Umbar|C|LTR
+#246|Elven Farsight|C|LTR
+#247|Lothlorien Lookout|C|LTR
+#248|Forge Anew|R|LTR
+#249|Long List of the Ents|U|LTR
+#250|You Cannot Pass!|U|LTR
+#251|Borne Upon a Wind|R|LTR
+#252|Ent-Draught Basin|U|LTR
+#253|Lost Isle Calling|R|LTR
+#254|Shower of Arrows|C|LTR
+#255|Shire Scarecrow|C|LTR
+#256|Mithril Coat|R|LTR
+#257|Ringsight|U|LTR
+#258|Shadow of the Enemy|M|LTR
+#259|Display of Power|R|LTR
+#260|The Ring Goes South|R|LTR
+#261|Stone of Erech|U|LTR
+#262|Plains 1|C|LTR
+#263|Plains 2|C|LTR
+#264|Plains 3|C|LTR
+#265|Plains 4|C|LTR
+#266|Island 1|C|LTR
+#267|Island 2|C|LTR
+#268|Island 3|C|LTR
+#269|Island 4|C|LTR
+#270|Swamp 1|C|LTR
+#271|Swamp 2|C|LTR
+#272|Swamp 3|C|LTR
+#273|Swamp 4|C|LTR
+#274|Mountain 1|C|LTR
+#275|Mountain 2|C|LTR
+#276|Mountain 3|C|LTR
+#277|Mountain 4|C|LTR
+#278|Forest 1|C|LTR
+#279|Forest 2|C|LTR
+#280|Forest 3|C|LTR
+#281|Forest 4|C|LTR

@@ -1,0 +1,9 @@
+Name:Digsite Conservator
+ManaCost:2
+Types:Artifact Creature Gnome
+PT:2/1
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 4 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to four target cards from a single graveyard | ValidTgts$ Card | SorcerySpeed$ True | SpellDescription$ Exile up to four target cards from a single graveyard. Activate only as a sorcery.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscover | TriggerDescription$ When CARDNAME dies, you may pay {4}. If you do, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:AB$ Discover | Cost$ 4 | Num$ 4
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice Digsite Conservator: Exile up to four target cards from a single graveyard. Activate only as a sorcery.\nWhen Digsite Conservator dies, you may pay {4}. If you do, discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

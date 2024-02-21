@@ -1,0 +1,14 @@
+Name:Korvold, Gleeful Glutton
+ManaCost:5 B R G
+Types:Legendary Creature Dragon Noble
+PT:4/4
+K:Flying
+K:Trample
+K:Haste
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ SacrificedPermanentsTypes | EffectZone$ All | Description$ This spell costs {1} less to cast for each card type among permanents you've sacrificed this turn.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, put X +1/+1 counters on NICKNAME and draw X cards, where X is the number of permanent types among cards in your graveyard.
+SVar:DBCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P1P1 | Defined$ Self | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:SacrificedPermanentsTypes:PlayerCountPropertyYou$SacrificedPermanentTypesThisTurn
+SVar:X:Count$CardControllerPermanentTypes.Graveyard
+Oracle:This spell costs {1} less to cast for each card type among permanents you've sacrificed this turn.\nFlying, trample, haste\nWhenever Korvold deals combat damage to a player, put X +1/+1 counters on Korvold and draw X cards, where X is the number of permanent types among cards in your graveyard.

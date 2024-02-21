@@ -1,0 +1,39 @@
+[metadata]
+Code=YLCI
+Date=2023-12-05
+Name=Alchemy: Ixalan
+Type=Online
+Booster=1 UncommonRareMythic,8 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon:!dfc:!fromSheet("LCI lands"):fromSheet("LCI cards"), 1 fromSheet("LCI double-face"), 1 RareMythic:fromSheet("LCI cards"), 1 fromSheet("LCI lands")
+ScryfallCode=YLCI
+
+[cards]
+1 R Cogwork Progenitor @Kev Walker
+2 R Legion's Chant @John Tedrick
+3 U Radiant Smite @John Tedrick
+4 R Valiant Batrider @Ovidio Cartagena
+5 U Herald's Reveille @Allen Douglas
+6 M Hymn to the Ages @Alex Brock
+7 U Landlore Navigator @Lorenzo Mastroianni
+8 R Plunderer's Prize @Elizabeth Peiró
+9 M Chitinous Crawler @Dave Kendall
+10 U Dusk's Landing @Lauren K. Cannon
+11 R Legion Reconsecrator @Valera Lutfullina
+12 R Mycelic Ballad @David Szabo
+13 U Phantasmal Extraction @David Szabo
+14 M Caldera Breaker @Brian Valeza
+15 R Kamachal, Ship's Mascot @Steve Prescott
+16 U Pirate's Landing @Lauren K. Cannon
+17 U Ribald Shanty @Craig J Spearing
+18 M Colossal Chorus @Todd Lockwood
+19 M Mythweaver Poq @Todd Lockwood
+20 R Propagator Primordium @Daniel Romanovsky
+21 R Scalespeaker Shepherd @Quintin Gleim
+22 U Wingbane Vantasaur @Franco Tempesta
+23 R Brazen Boarding @Anthony Devine
+24 R High Marshal Arguel @Craig J Spearing
+25 U Merfolk Tunnel-Guide @Danny Schwartz
+26 R Mycoid Resurrection @Danny Schwartz
+27 U Reflection Net @Allen Douglas
+28 R Scalesoul Gnome @Svetlin Velinov
+29 R Stalwart Speartail @Filip Burburan
+30 R Tan Jolom, the Worldwalker @Anthony Devine

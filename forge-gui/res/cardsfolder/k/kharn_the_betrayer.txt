@@ -1,4 +1,4 @@
-Name:Kharn the Betrayer
+Name:Khârn the Betrayer
 ManaCost:3 R
 Types:Legendary Creature Astartes Berserker
 PT:5/1
@@ -11,4 +11,4 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | Replac
 SVar:ChoosePlayer:DB$ ChoosePlayer | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | NewController$ ChosenPlayer | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenPlayer$ True
-Oracle:Berzerker — Kharn the Betrayer attacks or blocks each combat if able.\nSigil of Corruption — When you lose control of Kharn the Betrayer, draw two cards.\nThe Betrayer — If damage would be dealt to Kharn the Betrayer, prevent that damage and an opponent of your choice gains control of it.
+Oracle:Berzerker — Khârn the Betrayer attacks or blocks each combat if able.\nSigil of Corruption — When you lose control of Khârn the Betrayer, draw two cards.\nThe Betrayer — If damage would be dealt to Khârn the Betrayer, prevent that damage and an opponent of your choice gains control of it.

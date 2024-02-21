@@ -1,0 +1,9 @@
+Name:Confession Dial
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 3
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target legendary creature in your graveyard | KW$ Escape:CardManaCost ExileFromGrave<3/Card.Other/other> | TgtZone$ Graveyard | PumpZone$ Graveyard | SpellDescription$ Target legendary creature card in your graveyard gains escape until end of turn. The escape cost is equal to its mana cost plus exile three other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)
+DeckHas:Ability$Graveyard
+DeckHints:Type$Legendary & Ability$Graveyard|Mill
+Oracle:When Confession Dial enters the battlefield, surveil 3.\n{T}: Target legendary creature card in your graveyard gains escape until end of turn. The escape cost is equal to its mana cost plus exile three other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)

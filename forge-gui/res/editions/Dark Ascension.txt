@@ -131,7 +131,7 @@ ScryfallCode=DKA
 103 C Scorch the Fields @Jaime Jones
 125 C Scorned Villager @Cynthia Sheppard
 47 C Screeching Skaab @Clint Cearley
-20 R Seance @David Rapoza
+20 R Séance @David Rapoza
 48 U Secrets of the Dead @Eytan Zana
 104 U Shattered Perception @Terese Nielsen
 49 C Shriekgeist @Raymond Swanland

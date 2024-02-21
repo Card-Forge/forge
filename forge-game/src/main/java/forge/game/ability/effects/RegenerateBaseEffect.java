@@ -77,7 +77,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                game.getAction().exile(eff, null);
+                game.getAction().exile(eff, null, null);
             }
         };
         game.getEndOfTurn().addUntil(untilEOT);

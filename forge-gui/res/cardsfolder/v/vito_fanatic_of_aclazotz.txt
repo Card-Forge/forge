@@ -1,0 +1,12 @@
+Name:Vito, Fanatic of Aclazotz
+ManaCost:2 W B
+Types:Legendary Creature Vampire Demon
+PT:4/4
+K:Flying
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | ValidPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice another permanent, you gain 2 life if this is the first time this ability has resolved this turn. If it's the second time, each opponent loses 2 life. If it's the third time, create a 4/3 white and black Vampire Demon creature token with flying.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ1 | LifeAmount$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ wb_4_3_vampire_demon_flying | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ3
+SVar:Resolved:Count$ResolvedThisTurn
+DeckHas:Ability$LifeGain|Token
+Oracle:Flying\nWhenever you sacrifice another permanent, you gain 2 life if this is the first time this ability has resolved this turn. If it's the second time, each opponent loses 2 life. If it's the third time, create a 4/3 white and black Vampire Demon creature token with flying.

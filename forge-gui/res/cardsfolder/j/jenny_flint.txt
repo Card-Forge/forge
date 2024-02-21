@@ -1,0 +1,12 @@
+Name:Jenny Flint
+ManaCost:1 U R
+Types:Legendary Creature Human Detective
+PT:2/2
+K:Partner:Madame Vastra
+K:First Strike
+K:Training
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue,Food | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice & Name$Madame Vastra & Type$Clue|Food
+Oracle:Partner with Madame Vastra\nFirst strike\nTraining (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)\nWhenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control.

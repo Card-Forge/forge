@@ -1,0 +1,17 @@
+Name:Virtue of Loyalty
+ManaCost:3 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounters | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUntap
+SVar:DBUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl
+DeckHas:Ability$Token|Counters & Type$Knight
+AlternateMode:Adventure
+Oracle:At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures.
+
+ALTERNATE
+
+Name:Ardenvale Fealty
+ManaCost:1 W
+Types:Instant Adventure
+A:SP$ Token | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the enchantment later from exile.)
+Oracle:Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the enchantment later from exile.)

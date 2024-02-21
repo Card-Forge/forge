@@ -10,7 +10,7 @@ B1 U Aura of Silence @D. Alexander Gregory
 B2 C Benevolent Bodyguard @Roger Raupp
 B3 R Ethersworn Canonist @Izzy
 B4 U Flickerwisp @Jeremy Enecio
-B5 U Jotun Grunt @Franz Vohwinkel
+B5 U Jötun Grunt @Franz Vohwinkel
 B6 U Kor Firewalker @Matt Stewart
 B7 R Mangara of Corondor @Zoltan Boros & Gabor Szikszai
 B8 C Oblivion Ring @Wayne England

@@ -1,0 +1,12 @@
+Name:Stinging Cave Crawler
+ManaCost:2 B
+Types:Creature Insect Horror
+PT:1/3
+K:Deathtouch
+T:Mode$ Attacks | CheckSVar$ X | SVarCompare$ GE4 | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$Descend 4 — Whenever CARDNAME attacks, if there are four or more permanent cards in your graveyard, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nDescend 4 — Whenever Stinging Cave Crawler attacks, if there are four or more permanent cards in your graveyard, you draw a card and you lose 1 life.

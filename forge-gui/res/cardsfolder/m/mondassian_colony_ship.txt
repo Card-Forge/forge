@@ -1,0 +1,10 @@
+Name:Mondassian Colony Ship
+ManaCost:no cost
+Types:Plane Spacecraft
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Command | Execute$ AnimosityPump | TriggerDescription$ Whenever a creature attacks, it gets +1/+1 until end of turn for each other creature its controller controls that shares a creature type with it.
+SVar:AnimosityPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ X | NumDef$ X
+SVar:X:Count$Valid Creature.NotTriggeredAttacker+ControlledBy AttackingPlayer+sharesCreatureTypeWith TriggeredAttacker
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigSetState | TriggerDescription$ Whenever chaos ensues, turn target creature face down. It becomes a 2/2 Cyberman artifact creature.
+SVar:TrigSetState:DB$ SetState | ValidTgts$ Creature | Mode$ TurnFaceDown | FaceDownSetType$ Artifact & Creature & Cyberman | FaceDownPower$ 2 | FaceDownToughness$ 2
+DeckHas:Type$Cyberman
+Oracle:Whenever a creature attacks, it gets +1/+1 until end of turn for each other creature its controller controls that shares a creature type with it.\nWhenever chaos ensues, turn target creature face down. It becomes a 2/2 Cyberman artifact creature.

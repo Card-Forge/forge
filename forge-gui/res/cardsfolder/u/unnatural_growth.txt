@@ -2,9 +2,6 @@ Name:Unnatural Growth
 ManaCost:1 G G G G
 Types:Enchantment
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigDouble | TriggerDescription$ At the beginning of each combat, double the power and toughness of each creature you control until end of turn.
-SVar:TrigDouble:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBDouble
-SVar:DBDouble:DB$ Pump | Defined$ Remembered | NumAtt$ X | NumDef$ Y | Double$ True
-SVar:X:Remembered$CardPower
-SVar:Y:Remembered$CardToughness
+SVar:TrigDouble:DB$ Pump | Defined$ Valid Creature.YouCtrl | NumAtt$ Double | NumDef$ Double
 SVar:PlayMain1:TRUE
 Oracle:At the beginning of each combat, double the power and toughness of each creature you control until end of turn.

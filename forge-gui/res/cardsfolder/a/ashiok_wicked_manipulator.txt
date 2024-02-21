@@ -1,0 +1,14 @@
+Name:Ashiok, Wicked Manipulator
+ManaCost:3 B B
+Types:Legendary Planeswalker Ashiok
+Loyalty:5
+R:Event$ PayLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileTop | Amount$ LEY | Description$ If you would pay life while your library has at least that many cards in it, exile that many cards from the top of your library instead.
+SVar:ExileTop:DB$ ChangeZoneAll | TypeLimit$ X | ChangeType$ Card.NotDefinedReplacedSimultaneousETB | Defined$ You | Origin$ Library | Destination$ Exile
+SVar:X:ReplaceCount$Amount
+SVar:Y:Count$ValidLibrary Card.YouOwn
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Exile | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Exile one of them and put the other into your hand.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ b_1_1_nightmare_exile_counter | TokenOwner$ You | SpellDescription$ Create two 1/1 black Nightmare creature tokens with "At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature."
+A:AB$ Dig | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | DigNum$ Z | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Target player exiles the top X cards of their library, where X is the total mana value of cards you own in exile.
+SVar:Z:Count$ValidExile Card.YouOwn$SumCMC
+AI:RemoveDeck:Random
+Oracle:If you would pay life while your library has at least that many cards in it, exile that many cards from the top of your library instead.\n+1: Look at the top two cards of your library. Exile one of them and put the other into your hand.\n−2: Create two 1/1 black Nightmare creature tokens with "At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature."\n−7: Target player exiles the top X cards of their library, where X is the total mana value of cards you own in exile.

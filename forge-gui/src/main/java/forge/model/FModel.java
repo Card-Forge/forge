@@ -110,9 +110,10 @@ public final class FModel {
         //Device
         if (GuiBase.isAndroid()) //todo get device on other mobile platforms
             System.out.println(GuiBase.getDeviceName() + " (RAM: " + GuiBase.getDeviceRAM() + "MB, Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
-        else
+        else {
             System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")");
-
+            System.out.println("Java Version - " + RuntimeVersion.of(System.getProperty("java.version")).toString());
+        }
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
                 ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,
@@ -168,10 +169,11 @@ public final class FModel {
         loadDynamicGamedata();
 
         //load card database
+        // Lazy loading currently disabled
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, progressBarBridge,
-                FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+                false);
         final CardStorageReader tokenReader = new CardStorageReader(ForgeConstants.TOKEN_DATA_DIR, progressBarBridge,
-                FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
+                false);
         CardStorageReader customReader;
         try {
            customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge, false);
@@ -280,8 +282,7 @@ public final class FModel {
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
 
         //generate Deck Gen matrix
-        if(!FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY)
-                &&FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
+        if(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {
             boolean commanderDeckGenMatrixLoaded=CardRelationMatrixGenerator.initialize();
             deckGenMatrixLoaded=CardArchetypeLDAGenerator.initialize();
             if(!commanderDeckGenMatrixLoaded){

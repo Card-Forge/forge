@@ -1,0 +1,337 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|U|C16
+#2|Command Tower|C|C16
+#3|Reliquary Tower|U|C16
+#4|Evolving Wilds|C|C16
+#5|Temple of the False God|U|C16
+#6|Lightning Greaves|U|C16
+#7|Swiftfoot Boots|U|C16
+#8|Terramorphic Expanse|C|C16
+#9|Solemn Simulacrum|R|C16
+#10|Swords to Plowshares|U|C16
+#11|Chromatic Lantern|R|C16
+#12|Skullclamp|U|C16
+#13|Commander's Sphere|C|C16
+#14|Cultivate|C|C16
+#15|Kodama's Reach|C|C16
+#16|Darksteel Ingot|U|C16
+#17|Sakura-Tribe Elder|C|C16
+#18|Beast Within|U|C16
+#19|Myriad Landscape|U|C16
+#20|Exotic Orchard|R|C16
+#21|Blasphemous Act|R|C16
+#22|Fellwar Stone|U|C16
+#23|Chaos Warp|R|C16
+#24|Opal Palace|C|C16
+#25|Ash Barrens|C|C16
+#26|Propaganda|U|C16
+#27|Sunpetal Grove|R|C16
+#28|Whispersilk Cloak|U|C16
+#29|Dragonskull Summit|R|C16
+#30|Orzhov Signet|C|C16
+#31|Rakdos Signet|C|C16
+#32|Swan Song|R|C16
+#33|Ghostly Prison|U|C16
+#34|Rampant Growth|C|C16
+#35|Buried Ruin|U|C16
+#36|Farseek|C|C16
+#37|Putrefy|U|C16
+#38|Rootbound Crag|R|C16
+#39|Nevinyrral's Disk|R|C16
+#40|Merciless Eviction|R|C16
+#41|Arcane Denial|C|C16
+#42|Utter End|R|C16
+#43|Homeward Path|R|C16
+#44|Azorius Chancery|U|C16
+#45|Treasure Cruise|C|C16
+#46|Everflowing Chalice|U|C16
+#47|Caves of Koilos|R|C16
+#48|Simic Signet|C|C16
+#49|Izzet Boilerworks|U|C16
+#50|Golgari Rot Farm|U|C16
+#51|Crumbling Necropolis|U|C16
+#52|Orzhov Basilica|U|C16
+#53|Cathars' Crusade|R|C16
+#54|Mosswort Bridge|R|C16
+#55|Arcane Sanctum|U|C16
+#56|Darksteel Citadel|U|C16
+#57|Rakdos Carnarium|U|C16
+#58|Golgari Signet|C|C16
+#59|Opulent Palace|U|C16
+#60|Windfall|U|C16
+#61|Dimir Aqueduct|U|C16
+#62|Beastmaster Ascension|R|C16
+#63|Nomad Outpost|U|C16
+#64|Rupture Spire|C|C16
+#65|Simic Growth Chamber|U|C16
+#66|Mortify|U|C16
+#67|Terminate|C|C16
+#68|Sandsteppe Citadel|U|C16
+#69|Trinket Mage|C|C16
+#70|Burgeoning|R|C16
+#71|Selesnya Sanctuary|U|C16
+#72|Loxodon Warhammer|U|C16
+#73|Boros Garrison|U|C16
+#74|Seaside Citadel|U|C16
+#75|Reforge the Soul|R|C16
+#76|Boros Charm|U|C16
+#77|Swiftwater Cliffs|C|C16
+#78|Frontier Bivouac|U|C16
+#79|Dismal Backwater|C|C16
+#80|Sphere of Safety|U|C16
+#81|Underground River|R|C16
+#82|Jungle Hollow|C|C16
+#83|Blind Obedience|R|C16
+#84|Seat of the Synod|C|C16
+#85|Gruul Turf|U|C16
+#86|Mentor of the Meek|R|C16
+#87|Mystic Monastery|U|C16
+#88|Thornwood Falls|C|C16
+#89|Transguild Promenade|C|C16
+#90|Scavenging Ooze|R|C16
+#91|Jungle Shrine|U|C16
+#92|Coiling Oracle|C|C16
+#93|Sylvan Reclamation|U|C16
+#94|Myr Battlesphere|R|C16
+#95|Shamanic Revelation|R|C16
+#96|Savage Lands|U|C16
+#97|Psychosis Crawler|R|C16
+#98|Trading Post|R|C16
+#99|In Garruk's Wake|R|C16
+#100|Tempt with Discovery|R|C16
+#101|Mycoloth|R|C16
+#102|Reveillark|R|C16
+#103|Gruul Signet|C|C16
+#104|Champion of Lambholt|R|C16
+#105|Krosan Verge|U|C16
+#106|Chasm Skulker|R|C16
+#107|Venser's Journal|R|C16
+#108|Deepglow Skate|R|C16
+#109|Hardened Scales|R|C16
+#110|Hellkite Tyrant|M|C16
+#111|Howling Mine|R|C16
+#112|Baleful Strix|U|C16
+#113|Forgotten Ancient|R|C16
+#114|Evacuation|R|C16
+#115|Iroas, God of Victory|M|C16
+#116|Beacon of Unrest|R|C16
+#117|Mirror Entity|R|C16
+#118|Rugged Highlands|C|C16
+#119|Rakdos Charm|U|C16
+#120|Progenitor Mimic|M|C16
+#121|Forbidden Orchard|R|C16
+#122|Thunderfoot Baloth|R|C16
+#123|Army of the Damned|M|C16
+#124|Crystalline Crawler|R|C16
+#125|Managorger Hydra|R|C16
+#126|Oblation|R|C16
+#127|Decimate|R|C16
+#128|Daretti, Scrap Savant|M|C16
+#129|Spinerock Knoll|R|C16
+#130|Conqueror's Flail|R|C16
+#131|Corpsejack Menace|R|C16
+#132|Kalonian Hydra|M|C16
+#133|Temple Bell|R|C16
+#134|Ancient Excavation|U|C16
+#135|Rites of Flourishing|R|C16
+#136|Karplusan Forest|R|C16
+#137|Sunforger|R|C16
+#138|Fathom Mage|R|C16
+#139|Myr Retriever|U|C16
+#140|Open the Vaults|R|C16
+#141|Windborn Muse|R|C16
+#142|Windbrisk Heights|R|C16
+#143|Past in Flames|M|C16
+#144|Soul of New Phyrexia|M|C16
+#145|Consuming Aberration|R|C16
+#146|Tezzeret's Gambit|U|C16
+#147|Waste Not|R|C16
+#148|Edric, Spymaster of Trest|R|C16
+#149|Etherium Sculptor|C|C16
+#150|Whispering Madness|R|C16
+#151|Crackling Doom|R|C16
+#152|Stonehoof Chieftain|R|C16
+#153|Astral Cornucopia|R|C16
+#154|Master Biomancer|M|C16
+#155|Disdainful Stroke|C|C16
+#156|Spelltwine|R|C16
+#157|Sangromancer|R|C16
+#158|Shimmer Myr|R|C16
+#159|Dragon Mage|R|C16
+#160|Reyhan, Last of the Abzan|R|C16
+#161|Lurking Predators|R|C16
+#162|Kazuul, Tyrant of the Cliffs|R|C16
+#163|Phyrexian Rebirth|R|C16
+#164|Wheel of Fate|R|C16
+#165|Faerie Artisans|R|C16
+#166|Orzhov Advokist|U|C16
+#167|Devastation Tide|R|C16
+#168|Darkwater Catacombs|R|C16
+#169|Duelist's Heritage|R|C16
+#170|Murmuring Bosk|R|C16
+#171|Inspiring Call|U|C16
+#172|Grave Upheaval|U|C16
+#173|Satyr Wayfinder|C|C16
+#174|Cauldron of Souls|R|C16
+#175|Ichor Wellspring|C|C16
+#176|Vorel of the Hull Clade|R|C16
+#177|Citadel Siege|R|C16
+#178|Sungrass Prairie|R|C16
+#179|Selfless Squire|R|C16
+#180|Brave the Sands|U|C16
+#181|Thrummingbird|U|C16
+#182|Curtains' Call|R|C16
+#183|Volcanic Vision|R|C16
+#184|Abzan Charm|U|C16
+#185|Magus of the Will|R|C16
+#186|Grand Coliseum|R|C16
+#187|Sharuum the Hegemon|M|C16
+#188|Shadowblood Ridge|R|C16
+#189|Ravos, Soultender|M|C16
+#190|Taurean Mauler|R|C16
+#191|Juniper Order Ranger|U|C16
+#192|Wall of Blossoms|U|C16
+#193|Blinkmoth Urn|R|C16
+#194|Den Protector|R|C16
+#195|Abzan Falconer|U|C16
+#196|Mycosynth Wellspring|C|C16
+#197|Chain of Vapor|U|C16
+#198|Treacherous Terrain|U|C16
+#199|Dauntless Escort|R|C16
+#200|Hanna, Ship's Navigator|R|C16
+#201|Runehorn Hellkite|R|C16
+#202|Prismatic Geoscope|R|C16
+#203|Bonehoard|R|C16
+#204|Stalking Vengeance|R|C16
+#205|Etherium-Horn Sorcerer|R|C16
+#206|Selvala, Explorer Returned|R|C16
+#207|Dreadship Reef|U|C16
+#208|Blazing Archon|R|C16
+#209|Languish|R|C16
+#210|Godo, Bandit Warlord|R|C16
+#211|Bloodbraid Elf|U|C16
+#212|Far Wanderings|C|C16
+#213|Collective Voyage|R|C16
+#214|Thopter Foundry|U|C16
+#215|Sphinx Summoner|R|C16
+#216|Duneblast|R|C16
+#217|Tuskguard Captain|U|C16
+#218|Artifact Mutation|R|C16
+#219|Thrasios, Triton Hero|R|C16
+#220|Cranial Plating|U|C16
+#221|Naya Charm|U|C16
+#222|Hushwing Gryff|R|C16
+#223|Benefactor's Draught|R|C16
+#224|Chief Engineer|R|C16
+#225|Trash for Treasure|R|C16
+#226|Assault Suit|U|C16
+#227|Kydele, Chosen of Kruphix|M|C16
+#228|Vial Smasher the Fierce|M|C16
+#229|Reins of Power|R|C16
+#230|Ishai, Ojutai Dragonspeaker|M|C16
+#231|Ankle Shanker|R|C16
+#232|Ethersworn Adjudicator|M|C16
+#233|Sublime Exhalation|R|C16
+#234|Goblin Spymaster|R|C16
+#235|Minds Aglow|R|C16
+#236|Humble Defector|U|C16
+#237|Silas Renn, Seeker Adept|M|C16
+#238|Master of Etherium|R|C16
+#239|Solidarity of Heroes|U|C16
+#240|Armory Automaton|R|C16
+#241|Rubblehulk|R|C16
+#242|Executioner's Capsule|C|C16
+#243|Aura Mutation|R|C16
+#244|Tymna the Weaver|R|C16
+#245|Bruse Tarl, Boorish Herder|M|C16
+#246|Ghave, Guru of Spores|M|C16
+#247|Keening Stone|R|C16
+#248|Ikra Shidiqi, the Usurper|M|C16
+#249|Vulturous Zombie|R|C16
+#250|Zhur-Taa Druid|C|C16
+#251|Migratory Route|U|C16
+#252|Primeval Protector|R|C16
+#253|Realm Seekers|R|C16
+#254|Entrapment Maneuver|R|C16
+#255|Veteran Explorer|U|C16
+#256|Brutal Hordechief|M|C16
+#257|Coastal Breach|R|C16
+#258|Boompile|R|C16
+#259|Horizon Chimera|U|C16
+#260|Filigree Angel|R|C16
+#261|Dispeller's Capsule|C|C16
+#262|Wight of Precinct Six|U|C16
+#263|Bred for the Hunt|U|C16
+#264|Korozda Guildmage|U|C16
+#265|Clan Defiance|R|C16
+#266|Vedalken Engineer|C|C16
+#267|Gwafa Hazid, Profiteer|R|C16
+#268|Slobad, Goblin Tinkerer|R|C16
+#269|Elite Scaleguard|U|C16
+#270|Grip of Phyresis|U|C16
+#271|Cruel Entertainment|R|C16
+#272|Guiltfeeder|R|C16
+#273|Enduring Scalelord|U|C16
+#274|Hellkite Igniter|R|C16
+#275|Worm Harvest|R|C16
+#276|Aeon Chronicler|R|C16
+#277|Sydri, Galvanic Genius|M|C16
+#278|Grab the Reins|U|C16
+#279|Necrogenesis|U|C16
+#280|Breath of Fury|R|C16
+#281|Akroan Horse|R|C16
+#282|Manifold Insights|R|C16
+#283|Thelonite Hermit|R|C16
+#284|Divergent Transformations|R|C16
+#285|Frenzied Fugue|U|C16
+#286|Seeds of Renewal|R|C16
+#287|Jor Kadeen, the Prevailer|R|C16
+#288|Evolutionary Escalation|U|C16
+#289|Sidar Kondo of Jamuraa|M|C16
+#290|Sanctum Gargoyle|C|C16
+#291|Nath of the Gilt-Leaf|R|C16
+#292|Spitting Image|R|C16
+#293|Tana, the Bloodsower|M|C16
+#294|Bituminous Blast|U|C16
+#295|Akiri, Line-Slinger|R|C16
+#296|Wave of Reckoning|R|C16
+#297|Ludevic, Necro-Alchemist|M|C16
+#298|Charging Cinderhorn|R|C16
+#299|Empyrial Plate|R|C16
+#300|Wild Beastmaster|R|C16
+#301|Alesha, Who Smiles at Death|R|C16
+#302|Parting Thoughts|U|C16
+#303|Kraum, Ludevic's Opus|R|C16
+#304|Custodi Soulbinders|R|C16
+#305|Atraxa, Praetors' Voice|M|C16
+#306|Curse of Vengeance|R|C16
+#307|Everlasting Torment|R|C16
+#308|Spellheart Chimera|U|C16
+#309|Etched Oracle|U|C16
+#310|Lavalanche|R|C16
+#311|Whims of the Fates|R|C16
+#312|Yidris, Maelstrom Wielder|M|C16
+#313|Ghastly Conscription|M|C16
+#314|Reverse the Sands|R|C16
+#315|Blood Tyrant|R|C16
+#316|Selesnya Guildmage|U|C16
+#317|Oath of Druids|R|C16
+#318|Mirrorweave|R|C16
+#319|Gamekeeper|U|C16
+#320|Necroplasm|R|C16
+#321|Hoofprints of the Stag|R|C16
+#322|Read the Runes|R|C16
+#323|Whipflare|U|C16
+#324|Saskia the Unyielding|M|C16
+#325|Order Chaos|U|C16
+#326|Academy Elite|R|C16
+#327|Bane of the Living|R|C16
+#328|Breya, Etherium Shaper|M|C16
+#329|Glint-Eye Nephilim|R|C16
+#330|Kynaios and Tiro of Meletis|M|C16
+#331|Wilderness Elemental|U|C16
+#332|Quirion Explorer|C|C16
+#333|Sylvok Explorer|C|C16
+#334|Zedruu the Greathearted|M|C16
+#335|Festercreep|C|C16
+#336|Trial Error|U|C16

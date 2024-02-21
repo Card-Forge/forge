@@ -1,0 +1,6 @@
+Name:Assemble the Players
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Card.Creature+nonLand+powerLE2+TopLibrary+YouCtrl | AffectedZone$ Library | Description$ Once each turn, you may cast a creature spell with power 2 or less from the top of your library.
+Oracle:You may look at the top card of your library any time.\nOnce each turn, you may cast a creature spell with power 2 or less from the top of your library.

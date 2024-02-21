@@ -1,0 +1,10 @@
+Name:Hunted by The Family
+ManaCost:5 U U
+Types:Sorcery
+A:SP$ ChooseCard | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to four target creatures you don't control | TargetMin$ 0 | TargetMax$ 4 | SubAbility$ DBRepeat | SpellDescription$ Choose up to four target creatures you don't control. For each of them, that creature's controller faces a villainous choice — That creature becomes a 1/1 white Human creature and loses all abilities, or you create a token that's a copy of it.
+SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBChoice | DefinedCards$ Targeted
+SVar:DBChoice:DB$ VillainousChoice | Defined$ RememberedController | Choices$ DBAnimate,DBCopy
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 1 | Toughness$ 1 | Types$ Creature,Human | RemoveCreatureTypes$ True | RemoveCardTypes$ True | RemoveAllAbilities$ True | IsCurse$ True | Colors$ White | OverwriteColors$ True | Duration$ Permanent | SpellDescription$ That creature becomes a 1/1 white Human creature and loses all abilities.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SpellDescription$ You create a token that's a copy of it.
+DeckHas:Ability$Token & Type$Human
+Oracle:Choose up to four target creatures you don't control. For each of them, that creature's controller faces a villainous choice — That creature becomes a 1/1 white Human creature and loses all abilities, or you create a token that's a copy of it.

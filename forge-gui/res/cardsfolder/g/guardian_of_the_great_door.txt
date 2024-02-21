@@ -1,0 +1,8 @@
+Name:Guardian of the Great Door
+ManaCost:W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+A:SP$ PermanentCreature | Cost$ W W tapXType<4/Artifact;Creature;Land/artifacts, creatures, and/or lands> | CostDesc$ As an additional cost to cast this spell, tap four untapped artifacts, creatures, and/or lands you control
+DeckHints:Type$Artifact
+Oracle:As an additional cost to cast this spell, tap four untapped artifacts, creatures, and/or lands you control.\nFlying

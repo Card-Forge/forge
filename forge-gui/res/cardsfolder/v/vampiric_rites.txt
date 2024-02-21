@@ -4,5 +4,4 @@ Types:Enchantment
 A:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | Defined$ You | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ You gain 1 life and draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:NonStackingEffect:True
-AI:RemoveDeck:All
 Oracle:{1}{B}, Sacrifice a creature: You gain 1 life and draw a card.

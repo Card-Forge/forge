@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Day of Judgment|R|ZEN
+#2|Hellkite Charger|R|ZEN
+#3|Emeria Angel|R|ZEN
+#4|Malakir Bloodwitch|R|ZEN
+#5|Sphinx of Jwar Isle|R|ZEN
+#6|Vampire Nighthawk|U|ZEN
+#7|Turntimber Ranger|R|ZEN
+#8|Kazuul Warlord|R|ZEN
+#9|Sphinx of Lost Truths|R|ZEN
+#10|Trusty Machete|U|ZEN
+#11|Sorin Markov|M|ZEN
+#12|Ob Nixilis, the Fallen|M|ZEN
+#13|Marsh Casualties|U|ZEN
+#14|Terra Stomper|R|ZEN
+#15|Conqueror's Pledge|R|ZEN
+#16|World Queller|R|ZEN
+#17|Living Tsunami|U|ZEN
+#18|Shepherd of the Lost|U|ZEN
+#19|Rampaging Baloths|M|ZEN
+#20|Roil Elemental|R|ZEN
+#21|Halo Hunter|R|ZEN
+#22|Sea Gate Loremaster|R|ZEN
+#23|Rite of Replication|R|ZEN
+#24|Scute Mob|R|ZEN
+#25|Felidar Sovereign|M|ZEN
+#26|Oracle of Mul Daya|R|ZEN
+#27|Punishing Fire|U|ZEN
+#28|Guul Draz Specter|R|ZEN
+#29|Kazandu Blademaster|U|ZEN
+#30|Gigantiform|R|ZEN
+#31|Inferno Trap|U|ZEN
+#32|Gatekeeper of Malakir|U|ZEN
+#33|Luminarch Ascension|R|ZEN
+#34|Eldrazi Monument|M|ZEN
+#35|Hideous End|C|ZEN
+#36|Journey to Nowhere|C|ZEN
+#37|Burst Lightning|C|ZEN
+#38|Obsidian Fireheart|M|ZEN
+#39|Bala Ged Thief|R|ZEN
+#40|Baloth Woodcrasher|U|ZEN
+#41|Kalitas, Bloodchief of Ghet|M|ZEN
+#42|Lotus Cobra|M|ZEN
+#43|Nissa Revane|M|ZEN
+#44|River Boa|U|ZEN
+#45|Chandra Ablaze|M|ZEN
+#46|Bloodghast|R|ZEN
+#47|Kabira Evangel|R|ZEN
+#48|Disfigure|C|ZEN
+#49|Plated Geopede|C|ZEN
+#50|Merfolk Seastalkers|U|ZEN
+#51|Umara Raptor|C|ZEN
+#52|Kor Skyfisher|C|ZEN
+#53|Vampire Hexmage|U|ZEN
+#54|Geyser Glider|U|ZEN
+#55|Goblin Guide|R|ZEN
+#56|Pitfall Trap|U|ZEN
+#57|Kor Aeronaut|U|ZEN
+#58|Oran Rief Survivalist|C|ZEN
+#59|Kor Hookmaster|C|ZEN
+#60|Arrow Volley Trap|U|ZEN
+#61|Arid Mesa|R|ZEN
+#62|Blazing Torch|U|ZEN
+#63|Iona, Shield of Emeria|M|ZEN
+#64|Murasa Pyromancer|U|ZEN
+#65|Bladetusk Boar|C|ZEN
+#66|Marsh Flats|R|ZEN
+#67|Quest for the Gravelord|U|ZEN
+#68|Armament Master|R|ZEN
+#69|Verdant Catacombs|R|ZEN
+#70|Beastmaster Ascension|R|ZEN
+#71|Windrider Eel|C|ZEN
+#72|Scalding Tarn|R|ZEN
+#73|Welkin Tern|C|ZEN
+#74|Torch Slinger|C|ZEN
+#75|Nimana Sell Sword|C|ZEN
+#76|Surrakar Marauder|C|ZEN
+#77|Harrow|C|ZEN
+#78|Turntimber Basilisk|U|ZEN
+#79|Misty Rainforest|R|ZEN
+#80|Baloth Cage Trap|U|ZEN
+#81|Hedron Crab|U|ZEN
+#82|Heartstabber Mosquito|C|ZEN
+#83|Grazing Gladehart|C|ZEN
+#84|Steppe Lynx|C|ZEN
+#85|Aether Figment|U|ZEN
+#86|Hagra Diabolist|U|ZEN
+#87|Blade of the Bloodchief|R|ZEN
+#88|Vampire Lacerator|C|ZEN
+#89|Adventuring Gear|C|ZEN
+#90|Giant Scorpion|C|ZEN
+#91|Bloodchief Ascension|R|ZEN
+#92|Lorthos, the Tidemaker|M|ZEN
+#93|Devout Lightcaster|R|ZEN
+#94|Windborne Charge|U|ZEN
+#95|Goblin Shortcutter|C|ZEN
+#96|Valakut, the Molten Pinnacle|R|ZEN
+#97|Grappling Hook|R|ZEN
+#98|Kor Sanctifiers|C|ZEN
+#99|Hellfire Mongrel|U|ZEN
+#100|Highland Berserker|C|ZEN
+#101|Into the Roil|C|ZEN
+#102|Warren Instigator|M|ZEN
+#103|Tuktuk Grunts|C|ZEN
+#104|Oran Rief, the Vastwood|R|ZEN
+#105|Shatterskull Giant|C|ZEN
+#106|Gomazoa|U|ZEN
+#107|Mind Sludge|U|ZEN
+#108|Nissa's Chosen|C|ZEN
+#109|Stonework Puma|C|ZEN
+#110|Crypt Ripper|C|ZEN
+#111|Tajuru Archer|U|ZEN
+#112|Guul Draz Vampire|C|ZEN
+#113|Territorial Baloth|C|ZEN
+#114|Whiplash Trap|C|ZEN
+#115|Goblin Ruinblaster|U|ZEN
+#116|Mold Shambler|C|ZEN
+#117|Celestial Mantle|R|ZEN
+#118|Mark of Mutiny|U|ZEN
+#119|Electropotence|R|ZEN
+#120|Spire Barrage|C|ZEN
+#121|Ondu Cleric|C|ZEN
+#122|Vines of Vastwood|C|ZEN
+#123|Magma Rift|C|ZEN
+#124|Greenweaver Druid|U|ZEN
+#125|Oran Rief Recluse|C|ZEN
+#126|Cliff Threader|C|ZEN
+#127|Kor Cartographer|C|ZEN
+#128|Sky Ruin Drake|C|ZEN
+#129|Paralyzing Grasp|C|ZEN
+#130|Blood Seeker|C|ZEN
+#131|Khalni Gem|U|ZEN
+#132|Timbermaw Larva|C|ZEN
+#133|Elemental Appeal|R|ZEN
+#134|Eternity Vessel|M|ZEN
+#135|Zektar Shrine Expedition|C|ZEN
+#136|Goblin Bushwhacker|C|ZEN
+#137|Reckless Scholar|C|ZEN
+#138|Predatory Urge|R|ZEN
+#139|Summoner's Bane|U|ZEN
+#140|Archive Trap|R|ZEN
+#141|Primal Bellow|U|ZEN
+#142|Teetering Peaks|C|ZEN
+#143|Makindi Shieldmate|C|ZEN
+#144|Lavaball Trap|R|ZEN
+#145|Frontier Guide|U|ZEN
+#146|Explorer's Scope|C|ZEN
+#147|Akoum Refuge|U|ZEN
+#148|Khalni Heart Expedition|C|ZEN
+#149|Hagra Crocodile|C|ZEN
+#150|Emeria, the Sky Ruin|R|ZEN
+#151|Feast of Blood|U|ZEN
+#152|Sejiri Refuge|U|ZEN
+#153|Kraken Hatchling|C|ZEN
+#154|Vastwood Gorger|C|ZEN
+#155|Ruinous Minotaur|C|ZEN
+#156|Molten Ravager|C|ZEN
+#157|Slaughter Cry|C|ZEN
+#158|Quest for the Gemblades|U|ZEN
+#159|Soul Stair Expedition|C|ZEN
+#160|Kazandu Refuge|U|ZEN
+#161|Cobra Trap|U|ZEN
+#162|Jwar Isle Refuge|U|ZEN
+#163|Expedition Map|C|ZEN
+#164|Kor Outfitter|C|ZEN
+#165|Ior Ruin Expedition|C|ZEN
+#166|Joraga Bard|C|ZEN
+#167|Seascape Aerialist|U|ZEN
+#168|Grim Discovery|C|ZEN
+#169|Graypelt Refuge|U|ZEN
+#170|Goblin War Paint|C|ZEN
+#171|Savage Silhouette|C|ZEN
+#172|Kabira Crossroads|C|ZEN
+#173|Pillarfield Ox|C|ZEN
+#174|Brave the Elements|U|ZEN
+#175|Vampire's Bite|C|ZEN
+#176|Bog Tatters|C|ZEN
+#177|Summoning Trap|R|ZEN
+#178|Mindbreak Trap|M|ZEN
+#179|Cancel|C|ZEN
+#180|Soaring Seacliff|C|ZEN
+#181|Unstable Footing|U|ZEN
+#182|Narrow Escape|C|ZEN
+#183|Kor Duelist|U|ZEN
+#184|Hedron Scrabbler|C|ZEN
+#185|Seismic Shudder|C|ZEN
+#186|Bold Defense|C|ZEN
+#187|Nimbus Wings|C|ZEN
+#188|Spreading Seas|C|ZEN
+#189|Zendikar Farguide|C|ZEN
+#190|Spidersilk Net|C|ZEN
+#191|Piranha Marsh|C|ZEN
+#192|Shoal Serpent|C|ZEN
+#193|Tempest Owl|C|ZEN
+#194|Mindless Null|C|ZEN
+#195|Turntimber Grove|C|ZEN
+#196|Caravan Hurda|C|ZEN
+#197|Shieldmate's Blessing|C|ZEN
+#198|Needlebite Trap|U|ZEN
+#199|Lethargy Trap|C|ZEN
+#200|Demolish|C|ZEN
+#201|Tanglesap|C|ZEN
+#202|Relic Crush|C|ZEN
+#203|Noble Vestige|C|ZEN
+#204|Spell Pierce|C|ZEN
+#205|Caller of Gales|C|ZEN
+#206|Scythe Tiger|C|ZEN
+#207|Merfolk Wayfinder|U|ZEN
+#208|Crypt of Agadeem|R|ZEN
+#209|Desecrated Earth|C|ZEN
+#210|Sunspring Expedition|C|ZEN
+#211|Blood Tribute|R|ZEN
+#212|Beast Hunt|C|ZEN
+#213|Mire Blight|C|ZEN
+#214|Trapfinder's Trick|C|ZEN
+#215|Cosi's Trickster|R|ZEN
+#216|Lullmage Mentor|R|ZEN
+#217|Sadistic Sacrament|R|ZEN
+#218|Magosi, the Waterveil|R|ZEN
+#219|Quest for Pure Flame|U|ZEN
+#220|Carnage Altar|U|ZEN
+#221|Trapmaker's Snare|U|ZEN
+#222|Trailblazer's Boots|U|ZEN
+#223|Landbind Ritual|U|ZEN
+#224|Runeflare Trap|U|ZEN
+#225|Quest for the Holy Relic|U|ZEN
+#226|Ravenous Trap|U|ZEN
+#227|Pyromancer Ascension|R|ZEN
+#228|Quest for Ancient Secrets|U|ZEN
+#229|Archmage Ascension|R|ZEN

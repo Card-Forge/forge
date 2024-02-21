@@ -1,0 +1,11 @@
+Name:Captivating Crossroads
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ Y | ConditionSVarCompare$ LT3 | SpellDescription$ During your first three turns of the game, CARDNAME enters the battlefield tapped if you were the starting player.
+SVar:Y:Count$YourTurns/Plus.X
+SVar:X:Count$StartingPlayer.0.3
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+Oracle:During your first three turns of the game, Captivating Crossroads enters the battlefield tapped if you were the starting player.\nAs Captivating Crossroads enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color.

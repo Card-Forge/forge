@@ -2,6 +2,6 @@ Name:Kiora's Bident
 ManaCost:no cost
 Types:Artifact Equipment
 S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Crab.YouCtrl,Kraken.YouCtrl,Serpent.YouCtrl,Leviathan.YouCtrl,Octopus.YouCtrl | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Kraken, Leviathan, Octopus, Crab and Serpent spells you cast cost {1} less.
-A:AB$ MakeCard | Cost$ U G PayShards<2> | Conjure$ True | ActivationLimit$ 1 | Zone$ Hand | ActivationZone$ Command | AtRandom$ True | SubAbility$ Eject | Spellbook$ Kiora; Behemoth Beckoner,Kiora;Master of the Depths,Kiora; the Crashing Wave,Kiora; the Tide's Fury | SpellDescription$ Conjure a random Kiora planeswalker card into your hand. Exile Kiora's Bident. 
+A:AB$ MakeCard | Cost$ U G PayShards<2> | Conjure$ True | ActivationLimit$ 1 | Zone$ Hand | ActivationZone$ Command | AtRandom$ True | SubAbility$ Eject | Spellbook$ Kiora; Behemoth Beckoner,Kiora; Master of the Depths,Kiora; the Crashing Wave,Kiora; the Tide's Fury | SpellDescription$ Conjure a random Kiora planeswalker card into your hand. Exile Kiora's Bident. 
 SVar:Eject:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:Kraken, Leviathan, Octopus, Crab and Serpent spells you cast cost {1} less.\n {M}{M}, {U}{G}:Conjure a random Kiora planeswalker card into your hand. Exile Kiora's Bident

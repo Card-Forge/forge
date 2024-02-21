@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.ability.AbilityKey;
+import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
@@ -34,6 +36,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class CostAdjustment {
 
@@ -49,7 +52,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !host.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 host.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -62,7 +65,7 @@ public class CostAdjustment {
                     result.add(new Cost(ManaCost.get(n), false));
                 }
             }
-        } // isSpell
+        }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
@@ -169,7 +172,7 @@ public class CostAdjustment {
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
-        if (sa.isTrigger()) {
+        if (sa.isTrigger() || sa.isReplacementAbility()) {
             return;
         }
 
@@ -178,7 +181,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !originalCard.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 originalCard.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -197,7 +200,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.checkMode("ReduceCost")) {
+                if (stAb.checkMode("ReduceCost") && checkRequirement(sa, stAb)) {
                     reduceAbilities.add(stAb);
                 }
                 else if (stAb.checkMode("SetCost")) {
@@ -212,13 +215,15 @@ public class CostAdjustment {
             sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
         }
 
-        for (final StaticAbility stAb : reduceAbilities) {
-            sumGeneric += applyReduceCostAbility(stAb, sa, cost, sumGeneric);
+        while (!reduceAbilities.isEmpty()) {
+            StaticAbility choice = sa.getActivatingPlayer().getController().chooseSingleStaticAbility(Localizer.getInstance().getMessage("lblChooseCostReduction"), reduceAbilities);
+            reduceAbilities.remove(choice);
+            sumGeneric += applyReduceCostAbility(choice, sa, cost, sumGeneric);
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
 
-        if (sa.isSpell() && !sa.getPipsToReduce().isEmpty()) {
+        if (sa.isSpell()) {
             for (String pip : sa.getPipsToReduce()) {
                 cost.decreaseShard(ManaCostShard.parseNonGeneric(pip), 1);
             }
@@ -249,7 +254,7 @@ public class CostAdjustment {
                         cardsToDelveOut.add(c);
                     } else if (!test) {
                         sa.getHostCard().addDelved(c);
-                        final Card d = game.getAction().exile(c, null);
+                        final Card d = game.getAction().exile(c, null, null);
                         final Card host = sa.getHostCard();
                         host.addExiledCard(d);
                         d.setExiledWith(host);
@@ -276,28 +281,37 @@ public class CostAdjustment {
     // GetSpellCostChange
 
     private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
-        CardCollectionView untappedCards = CardLists.filter(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.UNTAPPED);
+        sa.clearTappedForConvoke();
+
+        final Player activator = sa.getActivatingPlayer();
+        CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
+                CardPredicates.Presets.CAN_TAP);
         if (improvise) {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
         } else {
             untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
         }
 
-        Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
+        Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,
+                cost.toManaCost(), untappedCards, improvise);
 
         // Convoked creats are tapped here, setting up their taps triggers,
         // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
         // AND that you can't use mana tapabilities of convoked creatures to pay the convoked cost.
+        CardCollection tapped = new CardCollection();
         for (final Entry<Card, ManaCostShard> conv : convokedCards.entrySet()) {
-            sa.addTappedForConvoke(conv.getKey());
+            Card c = conv.getKey();
+            sa.addTappedForConvoke(c);
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                conv.getKey().tap(true);
-                if (!improvise) {
-                    sa.getHostCard().addConvoked(conv.getKey());
-                }
+                if (c.tap(true, sa, activator)) tapped.add(c);
             }
+        }
+        if (!tapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            activator.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 
@@ -387,10 +401,6 @@ public class CostAdjustment {
         final Card card = sa.getHostCard();
         final String amount = staticAbility.getParam("Amount");
 
-        if (!checkRequirement(sa, staticAbility)) {
-            return 0;
-        }
-
         int value;
         if ("AffectedX".equals(amount)) {
             value = AbilityUtils.calculateAmount(card, amount, staticAbility);
@@ -405,13 +415,17 @@ public class CostAdjustment {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
 
+        if (staticAbility.hasParam("UpTo")) {
+            value = sa.getActivatingPlayer().getController().chooseNumberForCostReduction(sa, 0, value);
+        }
+
         if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
                 minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
             }
 
-            final int maxReduction = Math.max(0, manaCost.getConvertedManaCost() - minMana - sumReduced);
+            final int maxReduction = manaCost.getConvertedManaCost() - minMana - sumReduced;
             if (maxReduction > 0) {
                 return Math.min(value, maxReduction);
             }

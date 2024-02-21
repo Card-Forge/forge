@@ -3,7 +3,7 @@ ManaCost:2 R G
 Types:Creature Cyclops
 PT:4/4
 K:Trample
-K:Protection from enchantments
+K:Protection:Enchantment
 K:Monstrosity:3:4 R G
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Card.Self+IsMonstrous | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if CARDNAME is monstrous, destroy target enchantment that player controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment damaged player controls | TargetsWithDefinedController$ TriggeredTarget

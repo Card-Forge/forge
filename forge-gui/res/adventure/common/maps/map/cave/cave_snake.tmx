@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="78">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="78">
  <editorsettings>
   <export target="cave_1..tmx" format="tmx"/>
  </editorsettings>
@@ -17,12 +17,12 @@
  </layer>
  <layer id="6" name="BackgroundBlend" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzdlkFSAjEQRbNAnSRgeQuVg1jlxhuwZYdY3kJlxZ1UYKPoVTyA6Rq6pqfpTkIYLPVX/WIxM3n5nU6IMd3pyua7S/0Ed2y3vQu7RPcCE3zt8/Pvw/2ojPkkHjj5/VzuqGfM0MvPQN7FOTlsiZnilkji0jX6b1zOPjR3fRz6b+O7E3l9u+YCc35U86hL9tFD6OGlr/0U6WeNSbmYMYe5InVYRGoyqHQm51JLAuYF8yKSG9hfPZ0rsS+VLJwLjvUCz53iarqxu3FBU8bUuDSbxKXsWajxawZXOje0nMiFNXx0bS4amBKX9j2Ic2P1xUxaZm76DL/HMVNcXmfkzjZ5zxM1Ra40JtZX4+J7yF1XTe88h98Xha0x6X2EK1bvqW3WWNurKabG5WyqU1dnBmn7euX3Z2qZQVjvtzCP96qZD/2GM2PnQercwMx4Lk5sez44xpmT75mlurXtzHDH6rvtO1bO/0upDnEX+c1cem7+NX0DmnuPvw==
+   eJzd1ktOwzAQBmAvWojtFnELHgdBYsMN2MIKirgF0BV3Ako3ULgKByCjMPJkOjN2QoqAXxoFUciXsR3Xzg2XI19eJZmHn3fBfIrNz+cx/f7Mr1cXu0vGk+Z6LZhQx7H990O5GHTfKufeSU2V+Sh1T0fOHUb5M0gMtlNiS2bO7RPJpXP031xub9pdbdXr76uutuX5HdoF837ceLT6vEc39Rp+jk3dGetZM6mLPZaYSzIOC2NMppVucpeWFDD3WS2MvsH+GOmuZB8ovXAXyloLvO+cq+XEd3MhM2ZqLu1NcqlNv68sV9o3tD7RhTm8DW0XC0zJpesewl1rfLEnrWde9DP8f7xnzuXjjC6eOfYyY4ouvd9uSDZeJRdtdFdVWjsP9fVRsSUTip5HeKzxnvk0x9q7mjM1l9s0O6HpGaK918v4fVPrGYLj/VI/x2uVnscyrf0gt29gz7gvXvj28+A9YA1J58y+ufTtnuGMNQnrZ6yS75e+2cRZ5De7dN/8a/kEKVqSWg==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzFlksOgjAQhlkYQyExXkpjWHADt669htF4DRG9hvGxc+EJjI9j2EmZUMdaWqDlT/4ATek3Mx0eQWCnMdO7Td2l9Xxykb0LhffcuXTEMRfcf7E8WHlO4/AlGodvPo2lK3ZisO9zB71RxZ056scua13FdlFnU7ZLvRvkNe0Jg5aR+X0mfe1CXXA3oVmNT3EQnOPvOh749dqirpRJv1m4V1TXovdSaS6c27Ap0+abRbnIXnEfYzF+66vvbbKnKfu9pmOyFjyeS6zm2uSMHJV1TBC+K2z+SwaKfdTlSpnQN8NIzW5LyMR3CjLBTXqrStvQnKnj2sQ04nOfrGRXMU0M62WhWFMleW2Y+5Jcl6njAy9rkE8dPsgXD50X+aqeSZeeFPkmnvNti/sBZUaQ6g==
+   eJzFlksOgjAQhlkYQyFRL6UxLLyBW9dew2i8hvi4hvGxMS48gfFxDDspE+pYSwu0/MkfoKH9ZqbDIwjsNGB616m7tJ5PLrK3ofCOeyMdccwF918sD5af0zh8icbhm09jaYqdGOz71EFvFHEnjvqxyVoXsV3U2ZTtUu8KeY1bwqB5ZD7PpK9dqAnuKjSr8TEOglP8Xcc9v15a1JUy6TcL94rqmvXeSLoXzm3YlGnzzaJcZC+4D7EYv7XVc6vs6Yj9XtMxWTMezzlWc21yRo7KOiboIv0TmNa6o9hHXa4qZi/K31Mu/oeQie8UMDDBVXqrSOsw52Ge/5g6rk1MfX7vkwm2CdPEsF4aijVVktfuctaL5S7L1PGBl1bIpwwf5IuH3mT5qp5Jlx5m+Sae862L+wHXaJFh
   </data>
  </layer>
  <layer id="7" name="Foreground" width="30" height="30">
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1s1OwkAQAOAejClto0eR+ADGByGEAxd/HoEzr2GIvgaheuFk4s0DwasHn8CIJL4EM9mZdJzsFtjdYmKcZFJaSL+dZbrbbitJupYs0yR5oHxMq+uxwuV9KiO2rd0e3XcCzhd8nqbm/CNirdotqU40V+J8QMmBY9DzEeIuW6ZGmzlQziyMdfaUNrUbGi7zIm/OZFc+M/J/a9pdUt8O4ThqwHC50t63K/tZPrf7cPUYmrS5r+Q6qNcuGSfQ523K0zzMxdpwDZL7QKl6+zYzx2ewvg9M3hT+tm1ecZ3UczyH+99nP13Mp0BX1req+X8vocYzsjtwvC78XW3KvfAV7j3Oqt9j3WhfFf4muz21B3Hgs3yemzXz/bDKOc3tHYxnQd9tMlwu9hX2E8/vrMZleyGu+7oY0pb18lxrW+auwb3MwTaO5QisY8g31V+xXG33aQ5ce/uu7kuNK+e7r8ZRF2hOPNZT13sOxra2LWw1utyY78fbxG+Y//G3Yw1pGZwn
+   eJztljtOw0AQhl0g5NgWlDzEARAHiaIUaXgcgZprICSuEcXQpEKio4hCS8EJECESl2BG3pF/RjsG79qp8kuj9Uv7zYxnZ3c4SJKhx8o0SR6cPab1865k8T4Vo2u25o7cvFPifNH1LK3uPzqMVXNLFycz13A/cSZiH3Q+YrirQRWjjzlRnHkc1qwpzdTcWFnMs7w/pnBxzeB/65u7cnV7TeNNDwyLi+xNc7Gecd1ugqt96JMtdYV9UPcu1AHV+aGzozyOy7FxD8J9oFS1fZtV4zOxvncquyrC2b68cp/UOV7Q/PfZby7bUyQX41s3/N9zivHEsY9pvCzCuZqJe+ErzX2X1d9z3My+KMKZwh2pPUjEa/k0r3rm+25tC8jt0r37i2Fxua64niS/8wausJfwPJTLQjbGK7nWbDRL1nlBahm/Yzb7skesfbI3VV9tuJZwHYnGLgfW3t6W+9LAxXyPlR9NYuY0oJ9a5xzWf9k++WK0uLFn1LZ+dn0m32qrH7YWnWs=
   </data>
  </layer>
  <layer id="9" name="Clutter" width="30" height="30">

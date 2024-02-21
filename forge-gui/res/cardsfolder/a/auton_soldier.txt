@@ -1,0 +1,8 @@
+Name:Auton Soldier
+ManaCost:4 U U
+Types:Artifact Creature Alien Soldier
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature | AddTypes$ Artifact | AddKeywords$ Myriad | NonLegendary$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it isn't legendary, is an artifact in addition to its other types, and has myriad. (Whenever it attacks, for each opponent other than defending player, you may put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+DeckHas:Ability$Counters
+Oracle:You may have Auton Soldier enter the battlefield as a copy of any creature on the battlefield, except it isn’t legendary, is an artifact in addition to its other types, and has myriad. (Whenever it attacks, for each opponent other than defending player, you may put a token that's a copy of this creature onto the battlefield tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)

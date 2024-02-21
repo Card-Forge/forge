@@ -1,11 +1,13 @@
 package forge.gamemodes.limited;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ReadDraftRankings class.
@@ -26,7 +28,7 @@ public class ReadDraftRankings {
      */
     public ReadDraftRankings() {
         this.setSizes = new HashMap<>();
-        this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_RANKINGS_FILE));
+        this.draftRankings = readRankingFolder();
     } // setup()
 
     public ReadDraftRankings(String customFile) {
@@ -34,18 +36,34 @@ public class ReadDraftRankings {
         this.draftRankings = this.readFile(FileUtil.readFile(ForgeConstants.DRAFT_DIR + customFile));
     }
 
-    /**
-     * <p>
-     * readFile.
-     * </p>
-     * 
-     * @param file
-     *            a {@link java.io.File} object.
-     * @return a {@link java.util.Map} object.
-     */
-    private Map<String, Map<String, Integer>> readFile(List<String> lines) {
+    private Map<String, Map<String, Integer>> readRankingFolder() {
+        Map<String, Map<String, Integer>> map = new HashMap<>();
 
+        File rankingDirectory = new File(ForgeConstants.DRAFT_RANKINGS_FOLDER);
+
+        if (!rankingDirectory.isDirectory()) {
+            System.out.println(rankingDirectory + " is not a directory...");
+            return null;
+        }
+
+        for(File rank : rankingDirectory.listFiles()) {
+            if (rank.isDirectory()) {
+                continue;
+            }
+
+            this.readFile(FileUtil.readFile(rank), map);
+        }
+
+        return map;
+    }
+
+
+    private Map<String, Map<String, Integer>> readFile(List<String> lines) {
         final Map<String, Map<String, Integer>> map = new HashMap<>();
+
+        return readFile(lines, map);
+    }
+    private Map<String, Map<String, Integer>> readFile(List<String> lines, Map<String, Map<String, Integer>> map) {
         for (String line : lines) {
             // stop reading if end of file or blank line is read
             if (line == null || line.length() == 0) {
@@ -57,7 +75,7 @@ public class ReadDraftRankings {
             }
             final String[] s = line.split("\\|");
             final String rankStr = s[0].trim().substring(1);
-            final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
+            final String name = StringUtils.stripAccents(s[1].trim());
             // final String rarity = s[2].trim();
             final String edition = s[3].trim();
 
@@ -93,7 +111,11 @@ public class ReadDraftRankings {
         Double rank = null;
 
         if (draftRankings.containsKey(edition)) {
-            String safeName = cardName.replaceAll("-", " ").replaceAll("[^A-Za-z ]", "").replaceAll("  ", " ");
+            // This should be updated
+            String safeName = StringUtils.stripAccents(cardName);
+
+            // handle split cards
+            safeName = safeName.replace(" // ", " ");
 
             // If a card has no ranking, don't try to look it up --BBU
             if (draftRankings.get(edition).get(safeName) == null) {
@@ -103,9 +125,5 @@ public class ReadDraftRankings {
             rank = (double) draftRankings.get(edition).get(safeName) / (double) setSizes.get(edition);
         }
         return rank;
-    }
-
-    public Double getCustomRanking(String cardName) {
-        return getRanking(cardName, "CUSTOM");
     }
 }

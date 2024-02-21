@@ -1,0 +1,338 @@
+//Rank|Name|Rarity|Set
+#1|Phyrexian Plaguelord|R|8ED
+#2|Bloodshot Cyclops|R|8ED
+#3|Shivan Dragon|R|8ED
+#4|Thorn Elemental|R|8ED
+#5|Mahamoti Djinn|R|8ED
+#6|Western Paladin|R|8ED
+#7|Blinding Angel|R|8ED
+#8|Glorious Anthem|R|8ED
+#9|Elite Archers|R|8ED
+#10|Might of Oaks|R|8ED
+#11|Birds of Paradise|R|8ED
+#12|Blaze|U|8ED
+#13|Wrath of God|R|8ED
+#14|Fallen Angel|R|8ED
+#15|Pyrotechnics|U|8ED
+#16|Confiscate|U|8ED
+#17|Lhurgoyf|R|8ED
+#18|Avatar of Hope|R|8ED
+#19|Nightmare|R|8ED
+#20|Royal Assassin|R|8ED
+#21|Lava Hounds|R|8ED
+#22|Plague Wind|R|8ED
+#23|Two-Headed Dragon|R|8ED
+#24|Bribery|R|8ED
+#25|Call of the Wild|R|8ED
+#26|Eastern Paladin|R|8ED
+#27|Fodder Cannon|U|8ED
+#28|Nekrataal|U|8ED
+#29|Emperor Crocodile|R|8ED
+#30|Lightning Blast|C|8ED
+#31|Air Elemental|U|8ED
+#32|Chastise|U|8ED
+#33|Rhox|R|8ED
+#34|Intrepid Hero|R|8ED
+#35|Dark Banishing|C|8ED
+#36|Temporal Adept|R|8ED
+#37|Volcanic Hammer|C|8ED
+#38|Inferno|R|8ED
+#39|Serra Angel|R|8ED
+#40|Pyroclasm|U|8ED
+#41|Worship|R|8ED
+#42|Thieving Magpie|U|8ED
+#43|Vampiric Spirit|R|8ED
+#44|Phyrexian Arena|R|8ED
+#45|Shock|C|8ED
+#46|Master Healer|R|8ED
+#47|Abyssal Specter|U|8ED
+#48|Searing Wind|R|8ED
+#49|Llanowar Behemoth|U|8ED
+#50|Ensnaring Bridge|R|8ED
+#51|Silverback Ape|U|8ED
+#52|Living Terrain|U|8ED
+#53|Story Circle|R|8ED
+#54|Rukh Egg|R|8ED
+#55|Primeval Shambler|U|8ED
+#56|Jayemdae Tome|R|8ED
+#57|Elvish Piper|R|8ED
+#58|Hammer of Bogardan|R|8ED
+#59|Tidal Kraken|R|8ED
+#60|Gluttonous Zombie|U|8ED
+#61|Elvish Champion|R|8ED
+#62|Spitting Spider|U|8ED
+#63|Pacifism|C|8ED
+#64|Blanchwood Armor|U|8ED
+#65|Phyrexian Colossus|R|8ED
+#66|Sever Soul|U|8ED
+#67|Viashino Sandstalker|U|8ED
+#68|Archivist|R|8ED
+#69|Angel of Mercy|U|8ED
+#70|Fungusaur|R|8ED
+#71|Concentrate|U|8ED
+#72|Hunted Wumpus|U|8ED
+#73|Diabolic Tutor|U|8ED
+#74|Maro|R|8ED
+#75|Shock Troops|C|8ED
+#76|Grave Pact|R|8ED
+#77|Ambition's Cost|U|8ED
+#78|Coat of Arms|R|8ED
+#79|Master Decoy|C|8ED
+#80|Orcish Artillery|U|8ED
+#81|Puppeteer|U|8ED
+#82|Spirit Link|U|8ED
+#83|Gravedigger|C|8ED
+#84|Nantuko Disciple|C|8ED
+#85|Rod of Ruin|U|8ED
+#86|Spined Wurm|C|8ED
+#87|Vizzerdrix|R|8ED
+#88|Planar Portal|R|8ED
+#89|Zombify|U|8ED
+#90|Vicious Hunger|C|8ED
+#91|Relentless Assault|R|8ED
+#92|Seasoned Marshal|U|8ED
+#93|Primeval Force|R|8ED
+#94|Fighting Drake|U|8ED
+#95|Severed Legion|C|8ED
+#96|Craw Wurm|C|8ED
+#97|Guerrilla Tactics|U|8ED
+#98|Bog Wraith|U|8ED
+#99|Beast of Burden|R|8ED
+#100|Phantom Warrior|U|8ED
+#101|Plow Under|R|8ED
+#102|Mana Leak|C|8ED
+#103|Diving Griffin|C|8ED
+#104|Savannah Lions|R|8ED
+#105|Fleeting Image|R|8ED
+#106|Anaba Shaman|C|8ED
+#107|Obliterate|R|8ED
+#108|Curiosity|U|8ED
+#109|Urza's Armor|R|8ED
+#110|Lord of the Undead|R|8ED
+#111|Phyrexian Hulk|U|8ED
+#112|Slay|U|8ED
+#113|Ogre Taskmaster|U|8ED
+#114|Trained Armodon|C|8ED
+#115|Lesser Gargadon|U|8ED
+#116|Coastal Piracy|R|8ED
+#117|Staunch Defenders|U|8ED
+#118|Wind Drake|C|8ED
+#119|Enrage|U|8ED
+#120|Razorfoot Griffin|C|8ED
+#121|Enormous Baloth|U|8ED
+#122|Execute|U|8ED
+#123|Vengeance|U|8ED
+#124|Aven Flock|C|8ED
+#125|Aven Cloudchaser|C|8ED
+#126|Sunweb|R|8ED
+#127|Furnace of Rath|R|8ED
+#128|Disrupting Scepter|R|8ED
+#129|Vexing Arcanix|R|8ED
+#130|Giant Spider|C|8ED
+#131|Soul Feast|U|8ED
+#132|Millstone|R|8ED
+#133|Deathgazer|U|8ED
+#134|Dusk Imp|C|8ED
+#135|Angelic Page|C|8ED
+#136|Oracle's Attendants|R|8ED
+#137|Evacuation|R|8ED
+#138|Aladdin's Ring|R|8ED
+#139|Hulking Cyclops|U|8ED
+#140|Aven Fisher|C|8ED
+#141|Giant Growth|C|8ED
+#142|Patagia Golem|U|8ED
+#143|Goblin King|R|8ED
+#144|Horned Troll|C|8ED
+#145|Goblin Chariot|C|8ED
+#146|Lava Axe|C|8ED
+#147|Death Pit Offering|R|8ED
+#148|Elite Javelineer|U|8ED
+#149|Treasure Trove|U|8ED
+#150|City of Brass|R|8ED
+#151|Persecute|R|8ED
+#152|Fyndhorn Elder|U|8ED
+#153|Spiketail Hatchling|U|8ED
+#154|Rewind|U|8ED
+#155|Noble Purpose|R|8ED
+#156|Trade Routes|R|8ED
+#157|Lightning Elemental|C|8ED
+#158|Ardent Militia|U|8ED
+#159|Moss Monster|C|8ED
+#160|Underworld Dreams|R|8ED
+#161|Natural Affinity|R|8ED
+#162|Ravenous Rats|C|8ED
+#163|Dehydration|C|8ED
+#164|Serpent Warrior|C|8ED
+#165|Balance of Power|R|8ED
+#166|Vine Trellis|C|8ED
+#167|Coastal Hornclaw|C|8ED
+#168|Hill Giant|C|8ED
+#169|Rushwood Dryad|C|8ED
+#170|Rampant Growth|C|8ED
+#171|Boomerang|C|8ED
+#172|Sage Owl|C|8ED
+#173|Foratog|U|8ED
+#174|Crossbow Infantry|C|8ED
+#175|Remove Soul|C|8ED
+#176|Blessed Reversal|R|8ED
+#177|Wing Snare|U|8ED
+#178|Unsummon|C|8ED
+#179|Wood Elves|C|8ED
+#180|Carrion Wall|U|8ED
+#181|Looming Shade|C|8ED
+#182|Wall of Air|U|8ED
+#183|Lone Wolf|C|8ED
+#184|Canyon Wildcat|C|8ED
+#185|Yavimaya Enchantress|U|8ED
+#186|Howling Mine|R|8ED
+#187|Brass Herald|R|8ED
+#188|Star Compass|U|8ED
+#189|Drudge Skeletons|C|8ED
+#190|Sudden Impact|U|8ED
+#191|Mind Sludge|U|8ED
+#192|Glory Seeker|C|8ED
+#193|Wall of Swords|U|8ED
+#194|Murderous Betrayal|R|8ED
+#195|Deepwood Ghoul|C|8ED
+#196|Grizzly Bears|C|8ED
+#197|Flashfires|U|8ED
+#198|Balduvian Barbarians|C|8ED
+#199|Samite Healer|C|8ED
+#200|Boil|U|8ED
+#201|Collective Unconscious|R|8ED
+#202|Giant Cockroach|C|8ED
+#203|Giant Badger|C|8ED
+#204|Death Pits of Rath|R|8ED
+#205|Sabretooth Tiger|C|8ED
+#206|Inspiration|C|8ED
+#207|Flying Carpet|R|8ED
+#208|Canopy Spider|C|8ED
+#209|Fertile Ground|C|8ED
+#210|Goblin Raider|C|8ED
+#211|Sacred Ground|R|8ED
+#212|Defense Grid|R|8ED
+#213|Gaea's Herald|R|8ED
+#214|Venerable Monk|C|8ED
+#215|Merchant Scroll|U|8ED
+#216|Standing Troops|C|8ED
+#217|Unholy Strength|C|8ED
+#218|Choke|U|8ED
+#219|Giant Octopus|C|8ED
+#220|Verduran Enchantress|R|8ED
+#221|Raise Dead|C|8ED
+#222|Scathe Zombies|C|8ED
+#223|Coercion|C|8ED
+#224|Wall of Spears|C|8ED
+#225|Creeping Mold|U|8ED
+#226|Seismic Assault|R|8ED
+#227|Ridgeline Rager|C|8ED
+#228|Urza's Power Plant|U|8ED
+#229|Spineless Thug|C|8ED
+#230|Swarm of Rats|U|8ED
+#231|Teferi's Puzzle Box|R|8ED
+#232|Larceny|R|8ED
+#233|Deflection|R|8ED
+#234|Bog Imp|C|8ED
+#235|Mind Rot|C|8ED
+#236|Urza's Tower|U|8ED
+#237|Monstrous Growth|C|8ED
+#238|Suntail Hawk|C|8ED
+#239|Karma|U|8ED
+#240|Daring Apprentice|R|8ED
+#241|Storm Crow|C|8ED
+#242|Horned Turtle|C|8ED
+#243|Lure|U|8ED
+#244|Nausea|C|8ED
+#245|Coastal Tower|U|8ED
+#246|Sizzle|C|8ED
+#247|Stone Rain|C|8ED
+#248|Wall of Stone|U|8ED
+#249|Shivan Oasis|U|8ED
+#250|Urza's Mine|U|8ED
+#251|Hibernation|U|8ED
+#252|Blood Moon|R|8ED
+#253|Skull of Orm|R|8ED
+#254|Coral Eel|C|8ED
+#255|Naturalize|C|8ED
+#256|Circle of Protection: Black|U|8ED
+#257|Sword Dancer|U|8ED
+#258|Demolish|U|8ED
+#259|Circle of Protection: Red|U|8ED
+#260|Elvish Lyrist|U|8ED
+#261|Elvish Scrapper|U|8ED
+#262|Salt Marsh|U|8ED
+#263|Ivory Mask|R|8ED
+#264|Circle of Protection: Blue|U|8ED
+#265|Vernal Bloom|R|8ED
+#266|Elfhame Palace|U|8ED
+#267|Merchant of Secrets|C|8ED
+#268|Catalog|C|8ED
+#269|Elvish Pioneer|C|8ED
+#270|Revive|U|8ED
+#271|Megrim|U|8ED
+#272|Holy Strength|C|8ED
+#273|Sea Eagle|C|8ED
+#274|Wrath of Marit Lage|U|8ED
+#275|Okk|R|8ED
+#276|Peach Garden Oath|U|8ED
+#277|Zur's Weirding|R|8ED
+#278|Circle of Protection: Green|U|8ED
+#279|Dwarven Demolition Team|U|8ED
+#280|Thieves' Auction|R|8ED
+#281|Panic Attack|C|8ED
+#282|Urborg Volcano|U|8ED
+#283|Distorting Lens|R|8ED
+#284|Shifting Sky|R|8ED
+#285|Holy Day|C|8ED
+#286|Tundra Wolves|C|8ED
+#287|Redeem|C|8ED
+#288|Plague Beetle|C|8ED
+#289|Rolling Stones|R|8ED
+#290|Norwood Ranger|C|8ED
+#291|Tremor|C|8ED
+#292|Intruder Alarm|R|8ED
+#293|Stream of Life|C|8ED
+#294|Raging Goblin|C|8ED
+#295|Circle of Protection: White|U|8ED
+#296|Sea Monster|C|8ED
+#297|Honor Guard|C|8ED
+#298|Regeneration|C|8ED
+#299|Cowardice|R|8ED
+#300|Healing Salve|C|8ED
+#301|Dingus Egg|R|8ED
+#302|Maggot Carrier|C|8ED
+#303|Warped Devotion|R|8ED
+#304|Goblin Glider|U|8ED
+#305|Spreading Algae|U|8ED
+#306|Sneaky Homunculus|C|8ED
+#307|Sanctimony|U|8ED
+#308|Cinder Wall|C|8ED
+#309|Sage of Lat-Nam|R|8ED
+#310|Rain of Blades|U|8ED
+#311|Fear|C|8ED
+#312|Mana Clash|R|8ED
+#313|Shatter|C|8ED
+#314|Mind Slash|U|8ED
+#315|Orcish Spy|C|8ED
+#316|Demystify|C|8ED
+#317|Steal Artifact|U|8ED
+#318|Mogg Sentry|R|8ED
+#319|Fecundity|U|8ED
+#320|Telepathy|U|8ED
+#321|Eager Cadet|C|8ED
+#322|Invisibility|C|8ED
+#323|Crystal Rod|U|8ED
+#324|Solidarity|C|8ED
+#325|Twiddle|C|8ED
+#326|Sacred Nectar|C|8ED
+#327|Index|C|8ED
+#328|Flash Counter|C|8ED
+#329|Reflexes|C|8ED
+#330|Ivory Cup|U|8ED
+#331|Throne of Bone|U|8ED
+#332|Flight|C|8ED
+#333|Fugitive Wizard|C|8ED
+#334|Wooden Sphere|U|8ED
+#335|Mind Bend|R|8ED
+#336|Iron Star|U|8ED
+#337|Spellbook|U|8ED

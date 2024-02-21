@@ -1,0 +1,12 @@
+Name:Agatha's Soul Cauldron
+ManaCost:2
+Types:Legendary Artifact
+S:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidSA$ Activated | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to activate abilities of creatures you control.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ Creatures you control with +1/+1 counters on them have all activated abilities of all creature cards exiled with CARDNAME.
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | RememberChanged$ True | ValidTgts$ Card | SubAbility$ TrigImmediateTrig | SpellDescription$ Exile target card from a graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control.
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | Execute$ TrigPutCounter | SubAbility$ DBCleanup | TriggerDescription$ When a creature card is exiled this way, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Counters
+Oracle:You may spend mana as though it were mana of any color to activate abilities of creatures you control.\nCreatures you control with +1/+1 counters on them have all activated abilities of all creature cards exiled with Agatha's Soul Cauldron.\n{T}: Exile target card from a graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control.

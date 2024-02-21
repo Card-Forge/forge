@@ -1,0 +1,5 @@
+Name:Water Wings
+ManaCost:1 U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 4 | Toughness$ 4 | Keywords$ Flying & Hexproof | SpellDescription$ Until end of turn, target creature you control has base power and toughness 4/4 and gains flying and hexproof. (It can't be the target of spells or abilities your opponents control.)
+Oracle:Until end of turn, target creature you control has base power and toughness 4/4 and gains flying and hexproof. (It can't be the target of spells or abilities your opponents control.)

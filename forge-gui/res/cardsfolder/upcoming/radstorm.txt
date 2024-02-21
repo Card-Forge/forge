@@ -1,0 +1,8 @@
+Name:Radstorm
+ManaCost:3 U
+Types:Instant
+K:Storm
+A:SP$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckNeeds:Ability$Counters
+DeckHints:Type$Planeswalker
+Oracle:Storm (When you cast this spell, copy it for each spell cast before it this turn.)\nProliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

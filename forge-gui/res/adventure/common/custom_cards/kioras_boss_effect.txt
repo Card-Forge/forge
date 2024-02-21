@@ -1,0 +1,10 @@
+Name:Kiora's Boss Effect
+ManaCost:no cost
+Colors:green,Blue
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Player | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ Each player may play an additional land on each of their turns.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create  a 1/1 blue Tentacle creature token. 
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_tentacle
+Oracle:At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns.\nAt the beginning of your upkeep, create  a 1/1 blue Tentacle creature token. 

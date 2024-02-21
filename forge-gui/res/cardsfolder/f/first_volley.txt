@@ -1,6 +1,7 @@
 Name:First Volley
 ManaCost:1 R
 Types:Instant Arcane
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature and 1 damage to that creature's controller.
-SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ TargetedController
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to target creature and 1 damage to that creature's controller.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ TargetedController | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:First Volley deals 1 damage to target creature and 1 damage to that creature's controller.

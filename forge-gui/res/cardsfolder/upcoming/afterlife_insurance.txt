@@ -1,0 +1,7 @@
+Name:Afterlife Insurance
+ManaCost:1 WB
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Afterlife:1 | SubAbility$ DBDraw | SpellDescription$ Creatures you control gain afterlife 1 until end of turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+Oracle:Creatures you control gain afterlife 1 until end of turn. Draw a card. (When a creature with afterlife 1 dies, create a 1/1 white and black Spirit creature token with flying.)

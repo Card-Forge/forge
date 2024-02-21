@@ -1958,11 +1958,12 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest;
-        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander
+        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander;
+        // Murders at Karlov Manor Commander
         String cnSelflessSquire = "Selfless Squire";
         PaperCard selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "LTC"); // The Lord of the Rings: Tales of Middle-earth Commander
+        assertEquals(selflessSquire.getEdition(), "MKC"); // Murders at Karlov Manor Commander
 
         PaperCard legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.Latest);
@@ -2003,10 +2004,11 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest;
-        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander
+        // COMMANDER 2016; The Lord of the Rings: Tales of Middle-earth Commander;
+        // Murders at Karlov Manor Commander
         selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "LTC");
+        assertEquals(selflessSquire.getEdition(), "MKC");
 
         legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.LatestCoreExp);

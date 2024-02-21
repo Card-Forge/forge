@@ -1,0 +1,12 @@
+Name:High Fae Prankster
+ManaCost:2 U B
+Types:Creature Faerie Rogue
+PT:1/4
+K:Flying
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ 1 | Choices$ Exchange,Switch
+SVar:Exchange:DB$ ExchangePower | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | BasePower$ True | Duration$ Perpetual | SpellDescription$ Perpetually exchange target creature's base power with another target creature's base power.
+SVar:Switch:DB$ Animate | Duration$ Perpetual | Power$ 4 | Toughness$ 1 | SpellDescription$ CARDNAME perpetually has base power and toughness 4/1.
+SVar:NeedsToPlay:Creature.OppCtrl+powerGE4
+Oracle:Flying, deathtouch\nWhen High Fae Prankster enters the battlefield, choose up to one —\n• Perpetually exchange target creature's base power with another target creature's base power.\n• High Fae Prankster perpetually has base power and toughness 4/1.

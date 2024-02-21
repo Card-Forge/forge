@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.net.GameProtocolSender;
@@ -124,11 +125,16 @@ public class NetGameController implements IGameController {
     @Override
     public IMacroSystem macros() {
         if (macros == null) {
-            macros = new MacroSystem();
+            macros = new NetMacroSystem();
         }
         return macros;
     }
-    public class MacroSystem implements IMacroSystem {
+    public class NetMacroSystem implements IMacroSystem {
+        @Override
+        public void addRememberedAction(PlayerAction action) {
+            // DO i need to send this?
+        }
+
         @Override
         public void setRememberedActions() {
             send(ProtocolMethod.setRememberedActions);
@@ -137,6 +143,16 @@ public class NetGameController implements IGameController {
         @Override
         public void nextRememberedAction() {
             send(ProtocolMethod.nextRememberedAction);
+        }
+
+        @Override
+        public boolean isRecording() {
+            return false;
+        }
+
+        @Override
+        public String playbackText() {
+            return null;
         }
     }
 }

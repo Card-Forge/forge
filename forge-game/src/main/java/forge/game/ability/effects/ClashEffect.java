@@ -33,7 +33,10 @@ public class ClashEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Player player = source.getController();
-        final Player opponent = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa, Localizer.getInstance().getMessage("lblChooseOpponent"), null);
+        final Player opponent = sa.hasParam("Defined") ?
+                AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa).getFirst() :
+                sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(player.getOpponents(), sa,
+                        Localizer.getInstance().getMessage("lblChooseOpponent"), null);
         final Player winner = clashWithOpponent(sa, opponent);
 
         if (player.equals(winner)) {
@@ -88,7 +91,6 @@ public class ClashEffect extends SpellAbilityEffect {
         }
 
         final StringBuilder reveal = new StringBuilder();
-        reveal.append("OVERRIDE "); //will return substring with the original message parsed here..
         Card pCard = null;
         Card oCard = null;
         final CardCollection toReveal = new CardCollection();
@@ -122,7 +124,7 @@ public class ClashEffect extends SpellAbilityEffect {
             reveal.append(winner + " " + Localizer.getInstance().getMessage("lblWinsClash") + ".");
         }
 
-        player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString());
+        player.getGame().getAction().revealTo(toReveal, player.getGame().getPlayers(), reveal.toString(), false);
 
         clashMoveToTopOrBottom(player, pCard, sa);
         clashMoveToTopOrBottom(opponent, oCard, sa);

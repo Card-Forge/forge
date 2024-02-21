@@ -1,0 +1,9 @@
+Name:The Master, Formed Anew
+ManaCost:U B
+Types:Legendary Creature Time Lord Rogue
+PT:0/1
+K:ETBReplacement:Copy:DBCopy:Optional
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Body Thief — When you cast this spell, you may exile a creature you control and put a takeover counter on it.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Creature.YouCtrl | WithCountersType$ TAKEOVER
+SVar:DBCopy:DB$ Clone | Choices$ Creature.counters_GE1_TAKEOVER | ChoiceZone$ Exile | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature card in exile with a takeover counter on it.
+Oracle:Body Thief — When you cast this spell, you may exile a creature you control and put a takeover counter on it.\nYou may have The Master, Formed Anew enter the battlefield as a copy of a creature card in exile with a takeover counter on it.

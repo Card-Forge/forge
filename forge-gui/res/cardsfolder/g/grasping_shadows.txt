@@ -1,0 +1,20 @@
+Name:Grasping Shadows
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on CARDNAME. Then if there are three or more dread counters on it, transform it.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Lifelink & Deathtouch | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DREAD | CounterNum$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | ConditionPresent$ Card.Self+counters_GE3_DREAD | Defined$ Self | Mode$ Transform
+DeckHas:Ability$LifeGain|Counters
+AlternateMode:DoubleFaced
+Oracle:Whenever a creature you control attacks alone, it gains deathtouch and lifelink until end of turn. Put a dread counter on Grasping Shadows. Then if there are three or more dread counters on it, transform it.
+
+ALTERNATE
+
+Name:Shadows' Lair
+ManaCost:no cost
+Types:Land Cave
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Draw | Cost$ B T SubCounter<1/Dread> | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:{T}: Add {B}.\n{B}, {T}, Remove a dread counter from Shadows' Lair: You draw a card and you lose 1 life.

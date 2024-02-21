@@ -2,6 +2,6 @@ Name:Bone Splinters
 ManaCost:B
 Types:Sorcery
 A:SP$ Destroy | Cost$ B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
-SVar:AICostPreference:SacCost$Creature.Token,Creature.cmcLE2
+SVar:AIPreference:SacCost$Creature.Token,Creature.cmcLE2
 AI:RemoveDeck:Random
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDestroy target creature.

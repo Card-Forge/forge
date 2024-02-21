@@ -1,0 +1,11 @@
+Name:Vashta Nerada
+ManaCost:2 B
+Types:Creature Alien Horror
+PT:1/1
+K:Indestructible
+K:Shadow
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Morbid — At the beginning of each end step, if a creature died this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Counters
+Oracle:Indestructible\nShadow (This creature can block or be blocked by only creatures with shadow.)\nMorbid — At the beginning of each end step, if a creature died this turn, put a +1/+1 counter on Vashta Nerada.

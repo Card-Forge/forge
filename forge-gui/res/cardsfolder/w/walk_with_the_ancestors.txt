@@ -1,0 +1,7 @@
+Name:Walk with the Ancestors
+ManaCost:4 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target up to one target permanent from your graveyard | SubAbility$ DBDiscover | SpellDescription$ Return up to one target permanent card from your graveyard to your hand.
+SVar:DBDiscover:DB$ Discover | Num$ 4 | SpellDescription$ Discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Ability$Graveyard
+Oracle:Return up to one target permanent card from your graveyard to your hand. Discover 4. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

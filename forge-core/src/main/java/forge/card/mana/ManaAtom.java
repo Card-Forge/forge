@@ -64,6 +64,9 @@ public abstract class ManaAtom {
             case "AnyColor": return ALL_MANA_COLORS;
             case "AnyType": return ALL_MANA_TYPES;
         }
+        if (s.startsWith("non")) {
+            return (byte) (fromName(s.substring(3)) ^ ALL_MANA_TYPES);
+        }
         byte b = 0;
         if (s.length() > 2) {
             // check for color word

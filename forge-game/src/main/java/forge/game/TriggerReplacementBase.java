@@ -5,6 +5,7 @@ import java.util.Set;
 
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -28,6 +29,14 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     }
 
     @Override
+    public void setKeyword(final KeywordInterface kw) {
+        super.setKeyword(kw);
+        if (overridingAbility != null) {
+            overridingAbility.setKeyword(kw);
+        }
+    }
+
+    @Override
     public void setCardState(CardState state) {
         super.setCardState(state);
         if (overridingAbility != null) {
@@ -38,7 +47,6 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     public Set<ZoneType> getActiveZone() {
         return validHostZones;
     }
-    
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }
@@ -74,6 +82,7 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
      */
     public void setOverridingAbility(final SpellAbility overridingAbility0) {
         this.overridingAbility = overridingAbility0;
+        overridingAbility0.setIntrinsic(intrinsic);
     }
 
     abstract public SpellAbility ensureAbility();

@@ -20,6 +20,7 @@ public class DialogData implements Serializable {
     public String text = "";               //The text body.
     public String loctext= "";            //References a localized string for the text body.
     public DialogData[] options = new DialogData[0];      //List of sub-dialogs. Show up as options in the current one.
+    public boolean isDisabled = false;
 
     public transient Callback callback;
 
@@ -40,6 +41,7 @@ public class DialogData implements Serializable {
         }
         this.options = clonedOptions.toArray(new DialogData[0]);
         this.voiceFile = other.voiceFile;
+        this.isDisabled = other.isDisabled;
     }
 
     @Override

@@ -1,7 +1,7 @@
 Name:Path of the Ghosthunter
 ManaCost:X 1 W
 Types:Sorcery
-A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | SubAbility DBSpace | SpellDescription$ Create X 1/1 white Spirit creature tokens with flying.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | SubAbility$ DBSpace | SpellDescription$ Create X 1/1 white Spirit creature tokens with flying.
 SVar:DBSpace:DB$ BlankLine | SubAbility$ DBVote | SpellDescription$ ,,,,,,
 SVar:DBVote:DB$ Vote | Defined$ Player | VoteType$ Planeswalk,Chaos | VotePlaneswalk$ DBPlaneswalk | VoteChaos$ DBChaos | Tied$ DBChaos | StackDescription$ SpellDescription | SpellDescription$ Will of the Planeswalkers — Starting with you, each player votes for planeswalk or chaos. If planeswalk gets more votes, planeswalk. If chaos gets more votes or the vote is tied, chaos ensues.
 SVar:DBPlaneswalk:DB$ Planeswalk

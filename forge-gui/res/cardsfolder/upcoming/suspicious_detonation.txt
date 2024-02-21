@@ -1,0 +1,9 @@
+Name:Suspicious Detonation
+ManaCost:4 R
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | CheckSVar$ X | Type$ Spell | Amount$ 3 | EffectZone$ All | Description$ This spell costs {3} less to cast if you've sacrificed an artifact this turn.
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Artifact
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered. (This includes by the ward ability.)
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+DeckHints:Ability$Sacrifice & Type$Map|Treasure|Food|Clue
+Oracle:This spell costs {3} less to cast if you've sacrificed an artifact this turn.\nThis spell can't be countered. (This includes by the ward ability.)\nSuspicious Detonation deals 4 damage to target creature.

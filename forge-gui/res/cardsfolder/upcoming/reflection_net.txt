@@ -1,0 +1,9 @@
+Name:Reflection Net
+ManaCost:1 W U
+Types:Artifact
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | Duration$ UntilHostLeavesPlay
+A:AB$ Clone | Cost$ 2 | CloneTarget$ Targeted | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource | ChoiceTitle$ Choose a card exiled with Reflection Net | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | GameActivationLimit$ 1 | SpellDescription$ Target creature you control becomes a copy of a creature card exiled with CARDNAME. Activate only as a sorcery and only once.
+SVar:PlayMain1:TRUE
+Oracle:Flash\nWhen Reflection Net enters the battlefield, exile target creature until Reflection Net leaves the battlefield.\n{2}: Target creature you control becomes a copy of a creature card exiled with Reflection Net. Activate only as a sorcery and only once.

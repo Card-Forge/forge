@@ -12,6 +12,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
 import forge.game.card.*;
+import forge.game.combat.Combat;
 import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -312,9 +313,21 @@ public class AnimateAi extends SpellAbilityAi {
                 final Card animatedCopy = becomeAnimated(c, sa);
                 int aValue = ComputerUtilCard.evaluateCreature(animatedCopy);
 
-                // animated creature has zero toughness, don't do that
+                // animated creature has zero toughness, don't do that unless the card will receive a counter to buff its toughness
                 if (animatedCopy.getNetToughness() <= 0) {
-                    continue;
+                    boolean buffedToughness = false;
+                    SpellAbility sub = sa.findSubAbilityByType(ApiType.PutCounter);
+                    if (sub != null) {
+                        if (animatedCopy.canReceiveCounters(CounterEnumType.P1P1)
+                                && "Targeted".equals(sub.getParam("Defined"))
+                                && "P1P1".equals(sub.getParam("CounterType"))) {
+                            buffedToughness = true;
+                        }
+                    }
+
+                    if (!buffedToughness) {
+                        continue;
+                    }
                 }
 
                 // if original is already a Creature,
@@ -386,6 +399,19 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
 
+        if (logic.equals("ValuableAttackerOrBlocker")) {
+            if (ph.inCombat()) {
+                final Combat combat = ph.getCombat();
+                CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+                for (Card c : list) {
+                    Card animated = becomeAnimated(c, sa);
+                    boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);
+                    boolean isValuableBlocker = combat != null && combat.getDefendingPlayers().contains(ai) && ComputerUtilCard.doesSpecifiedCreatureBlock(ai, animated);
+                    if (isValuableAttacker || isValuableBlocker)
+                        return true;
+                }
+            }
+        }
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
@@ -461,7 +487,7 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // colors to be added or changed to
-        ColorSet finalColors = ColorSet.getNullColor();
+        ColorSet finalColors = null;
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {

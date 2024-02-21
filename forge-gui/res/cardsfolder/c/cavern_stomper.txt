@@ -1,0 +1,9 @@
+Name:Cavern Stomper
+ManaCost:4 G G
+Types:Creature Dinosaur
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+A:AB$ Effect | Cost$ 3 G | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked by creatures with power 2 or less this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.powerLE2 | Description$ EFFECTSOURCE can't be blocked by creatures with power 2 or less this turn.
+Oracle:When Cavern Stomper enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\n{3}{G}: Cavern Stomper can't be blocked by creatures with power 2 or less this turn.

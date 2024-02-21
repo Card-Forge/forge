@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="40" height="25">
   <data encoding="base64" compression="zlib">
-   eJybxsnAMG0AMLGA1u6QEMDEyO7DJj/Y3DePE4IHq/sGMvxAOFkEYi+IRk9/8zgR7kTm09t9MIzLfbj49HAfNjxU3IcOBsJ9x4QRmFL3zRvg8EMHQ9F9lLiR2DQznMNvMLuPXnjUffRx3ygYBaNgFIxUAABxFz2P
+   eJybxsnAMG0AMLFgINwx1Nw3jxOCB6v7BjL8QDhZBGIXiEZ3N3q4ofPp5T4YHozuwxfvg9196GAg3HdMGIEpdd+8AQ4/dDAU3UeJG4lNM8M5/Aaz++iFR91HH/eNglEwCkbBSAUAn0g43w==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="25" opacity="0.9">

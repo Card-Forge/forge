@@ -1,0 +1,8 @@
+Name:Cerebral Confiscation
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,YouChoose
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+SVar:YouChoose:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+DeckHas:Ability$Discard
+Oracle:Choose one —\n• Target opponent discards two cards.\n• Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.

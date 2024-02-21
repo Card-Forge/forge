@@ -1,0 +1,7 @@
+Name:Panicked Altisaur
+ManaCost:4 R
+Types:Creature Dinosaur
+PT:4/5
+K:Reach
+A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | Defined$ Opponent | SpellDescription$ CARDNAME deals 2 damage to each opponent.
+Oracle:Reach\n{T}: Panicked Altisaur deals 2 damage to each opponent.

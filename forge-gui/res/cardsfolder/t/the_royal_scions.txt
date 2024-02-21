@@ -6,7 +6,7 @@ A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | Sp
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:All
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ First Strike & Trample | SpellDescription$ Target creature gets +2/+0 and gains first strike and trample until end of turn.
-A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 4 | RememberDrawn$ True | SubAbility$ DBTrigger | SpellDescription$ Draw four cards.
+A:AB$ Draw | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ 4 | RememberDrawn$ AllReplaced | SubAbility$ DBTrigger | SpellDescription$ Draw four cards.
 SVar:DBTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE4 | Execute$ DBDamage | SpellDescription$ When you do, CARDNAME deals damage to any target equal to the number of cards in your hand. | SubAbility$ DBCleanup
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

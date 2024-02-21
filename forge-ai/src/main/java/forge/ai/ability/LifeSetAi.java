@@ -109,6 +109,11 @@ public class LifeSetAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
+        // TODO add AI logic for that
+        if (sa.hasParam("Redistribute")) {
+            return mandatory;
+        }
+
         final String amountStr = sa.getParam("LifeAmount");
 
         int amount;

@@ -1,0 +1,7 @@
+Name:An Unearthly Child
+ManaCost:1 U U
+Types:Enchantment Saga
+K:Chapter:3:DBDigUntil,DBDigUntil,DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Vehicle,Doctor,Card.withDoctor's companion | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Reveal cards from the top of your library until you reveal a Doctor card, a card with doctor's companion, or a Vehicle card. Put that card into your hand and the rest on the bottom of your library in a random order.
+DeckNeeds:Type$Doctor|Vehicle & Keyword$Doctor's companion
+Oracle:I, II, III — Reveal cards from the top of your library until you reveal a Doctor card, a card with doctor's companion, or a Vehicle card. Put that card into your hand and the rest on the bottom of your library in a random order.

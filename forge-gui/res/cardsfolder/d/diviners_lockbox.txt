@@ -5,6 +5,6 @@ A:AB$ NameCard | Cost$ 1 T | Defined$ You | SubAbility$ DBReveal | SorcerySpeed$
 SVar:DBReveal:DB$ PeekAndReveal | RememberRevealed$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ GE1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
 AI:RemoveDeck:All
 Oracle:{1}, {T}: Choose a card name, then reveal the top card of your library. If that card has the chosen name, sacrifice Diviner's Lockbox and draw three cards. Activate only as a sorcery.

@@ -7,7 +7,7 @@ SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | Destination
 SVar:DBEffect:DB$ Effect | Duration$ EndOfTurn | RememberObjects$ Remembered | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card.
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ NICKNAME deals 1 damage to any target.
 SVar:NonCombatPriority:1
 DeckHints:Type$Instant|Sorcery
 Oracle:Whenever Syr Carah, the Bold or an instant or sorcery spell you control deals damage to a player, exile the top card of your library. You may play that card this turn.\n{T}: Syr Carah deals 1 damage to any target.

@@ -25,6 +25,7 @@ import forge.util.CardTranslation;
 import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -311,7 +312,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     @Override
     public String getImageKey(boolean altState) {
-        String imageKey = ImageKeys.CARD_PREFIX + name + CardDb.NameSetSeparator
+        String noramlizedName = StringUtils.stripAccents(name);
+        String imageKey = ImageKeys.CARD_PREFIX + noramlizedName + CardDb.NameSetSeparator
                 + edition + CardDb.NameSetSeparator + artIndex;
         if (altState) {
             imageKey += ImageKeys.BACKFACE_POSTFIX;

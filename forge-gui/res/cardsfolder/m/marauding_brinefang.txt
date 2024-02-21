@@ -1,0 +1,8 @@
+Name:Marauding Brinefang
+ManaCost:5 U U
+Types:Creature Dinosaur
+PT:6/7
+K:Ward:3
+K:TypeCycling:Island:2
+DeckHas:Ability$Discard
+Oracle:Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

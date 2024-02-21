@@ -25,6 +25,8 @@ public class PointOfInterestData implements Serializable {
     public float offsetY=0f;
     public boolean active = true;
     public String[] questTags = new String[0];
+    public DialogData.ActionData.QuestFlag[] questFlagsToActivate = new DialogData.ActionData.QuestFlag[0];
+    public String displayName;
 
 
 
@@ -64,5 +66,14 @@ public class PointOfInterestData implements Serializable {
         offsetY=other.offsetY;
         active=other.active;
         questTags = other.questTags.clone();
+        displayName= other.displayName;
+        questFlagsToActivate = other.questFlagsToActivate;
+    }
+
+    public String getDisplayName() {
+        if (displayName == null || displayName.isEmpty()) {
+            return name!=null?name:"";
+        }
+        return displayName;
     }
 }

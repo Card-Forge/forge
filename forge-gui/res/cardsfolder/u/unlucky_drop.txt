@@ -1,0 +1,5 @@
+Name:Unlucky Drop
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Target artifact or creature's owner puts it on the top or bottom of their library.
+Oracle:Target artifact or creature's owner puts it on the top or bottom of their library.

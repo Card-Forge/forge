@@ -4,5 +4,5 @@ Types:Creature Elk
 PT:3/3
 K:Protection from blue
 K:Protection from black
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 Oracle:This spell can't be countered.\nProtection from blue and from black (This creature can't be blocked, targeted, dealt damage, or enchanted by anything blue or black.)

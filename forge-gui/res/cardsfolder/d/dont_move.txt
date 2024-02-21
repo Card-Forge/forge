@@ -1,0 +1,8 @@
+Name:Don't Move
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.tapped | SubAbility$ DBEffect | SpellDescription$ Destroy all tapped creatures.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigTaps | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature becomes tapped, destroy it.
+SVar:TrigTaps:Mode$ Taps | ValidCard$ Creature | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature becomes tapped, destroy it.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy
+Oracle:Destroy all tapped creatures. Until your next turn, whenever a creature becomes tapped, destroy it.

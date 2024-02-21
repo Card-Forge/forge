@@ -36,12 +36,11 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
 
-        mapParams.remove("Cost");
-
-        if (mapParams.containsKey("SpellDescription")) {
+        if (mapParams.containsKey("SpellDescription") && !mapParams.containsKey("TriggerDescription")) {
             mapParams.put("TriggerDescription", mapParams.get("SpellDescription"));
-            mapParams.remove("SpellDescription");
         }
+        mapParams.remove("SpellDescription");
+        mapParams.remove("Cost");
 
         mapParams.put("Mode", TriggerType.Immediate.name());
 
@@ -69,7 +68,6 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             if (overridingSA instanceof AbilitySub) {
                 ((AbilitySub)overridingSA).setParent(null);
             }
-
             immediateTrig.setOverridingAbility(overridingSA);
         }
 

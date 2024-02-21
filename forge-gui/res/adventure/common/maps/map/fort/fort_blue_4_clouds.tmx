@@ -6,19 +6,20 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
- <layer id="6" name="Collision" width="30" height="30" visible="0">
+ <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30" visible="0" opacity="0.6">
   <data encoding="base64" compression="zlib">
-   eJy9lU1OwzAQhWefNmJf0g0Se8qPWZGD9C4Rp6hgDQIhlrCq1EtwIjIKT5q82rEdkj5p1CSN/c2Mn2ORvlwp8rQUuSvlZFKe1U95HHPkc0tzXtX9uHAi3w/TsrnW/aILXw5TsnWel7aeV9fl4Ouxxlxsrpv1WIhcz8BOEdg3dTxPyE3kSXgwZa618YnmPAWXr4eY/2Frv5zhaJ8deQ95rFpm1cblJp5LjBl7prWAi/nfWu77prvPYXKNMaGPlWHslvlMlX6rYrLvWEaq5620Z3Y+1PJVd79N0QXUkGfGMC13FdgL6KU+Wy+O/9frXP9yj328KrBmzEplWx/51rby1GbFHkrxlK0TsaJx3Ms5mCqfPywP5+bew4D32HPMZA15MtczB8prDHMsG94IMXlNY+xQH622pg7do+VZP+x8ofG2Z+qd80ieW+rd0Dnmq1nHf/z57ZD4rWcmuFwvamYuxg99r61/NXxMcENiX6kn7P6CcJ9z5jwH8vF5GV4Ex+aQe56DvTMR2j+6nuzbz/txzDECvylOx7RK2bM+/QJUAmD1
+   eJy9lkFOwzAQRb1PE7FjEeiGC4BK8TJngC33YNVGXIK2rGHDGiEkJA5ReiHylXxlMth1HNJ+adQ0tf08zp9JjenKZsZsUmNuMnM0gSf1k/2NQ+xnrta8KrpxYY25XY7L1rlqSf6YbKzzUuXzaus9uM74OT0cO5Q32DPB/liMw+4jsq+L/lw7kifpwT7c6aS9fkzG4+o68DH/w7aNx3aCa5X/uI+8Yp47uK69hJg7kds2q+9pketaP4apcwyJ53j50N5bpfFM8NCrQuKYrdgn2KHadGneMJ/Sej5yWVef70X9e5nUQZXKM0OYkpurWlg369E3uDcV13LsaWRvkWc8U8+WPJdfNTump0nv7uP6ahEs8mJ6GvNk5CovedaaDc7novt9CJOe0pLsr0kbd8vuOPRl7T8XU8rHdLH76Fud2xDmUDa94WJC+pmG2L5zpJDHvdgfajQ76QaEvuPzK+bjzJgnavdszz41k1yfXDlj/lvTE8EO9V0Xk1ydL3PWXM739Wsw6F2Gi0mubw3tK3iC9SXFeot55+D/kvajz8v0IrmyxmPf52SvRPjqB8+zVHUzlDlE5JfJ8ZhSoZr16ReQQoXh
   </data>
  </layer>
  <layer id="8" name="Ground" width="30" height="30" opacity="0.62">
   <data encoding="base64" compression="zlib">
-   eJzt0sEJgDAMheFctBN0FDdzEHcTnUeKBF7FaoUkXt7hP3+El5xEskHTILJ/yMIsbXSrlhTrFg+LcNG62lbu2nGrh3tnR7lot0zN2u21PVy1/3DfbE/3yfZ20cbNI1z8NbWjXLXn8SzSZYwxxlodX72+7A==
+   eJzt08EJgDAMheFctBN0Dy9uJh50ie4mOo8UCbyWVhCSeMnhP38kJDEQRYHmgej6kISZO90tSsHWzR5m4aJV21Lu8eJOa5mk27JbpoaLdm9WTtpFu2dquWz/4eb2rW0mRZNDC9N2eef1H1u4eGtsW7lsL+OTpet5nud5vW5Hg8Dk
   </data>
  </layer>
  <layer id="9" name="Clutter Ground" width="30" height="30" opacity="0.66">
   <data encoding="base64" compression="zlib">
-   eJzNV9tOwkAQ3T7RPqiYlLYIXv5Q8IKgQdFPAjWixp8AtVr9F2fSmbA2u3V3C8STnJRA27MzO3NmEUKIEfBKqJHWhPggfknXOfCzpnnIAKh5ATzw1L9vBUIkwIbEOjEK3HVvQe8ReK/R/a/IINevFfLtip4P++SvX7cLmhuBfY2lBnWZUg2r7otB8wS0+5YxD+D+d+qLOfXJvLBnGNMR3afaS4752yLmuNAfDVq//J4QPnfgu0Nf3TvhEvqK19Ip7Bv2cbPie03AuT12qNXMwsuGwBv6jHW0GeR53XaIEXNj8txI/PZKrLVTR01TDEkzBs1d4Axifaut3gtaoBUCm8DEc4u1D7wWi30yAcY69hZ57jr4XkRrf8B1C/VM5XnK/b/v5dwBvnh5Tdj24ZQ0J6Svmm2x5AvofW3SfDKYg2nJ7HmG5+8078koVuyRMz+nqSaiS15p44eIAXldIvmizbzv0Vp1Pq1DXNFD2afPaZ9WPe9HwEuR90ko5arqHPgLWDMN6u91o7UkXZuZgYgq6mZ0nkAPtjmbYLy6M3YZ+IyEvYv+W7ec4xHNDRPMpPMSxsd6ch3iPOJa1QF9f2IQbyr5EvoEn59UdT+lWh2Tp+Nc4SsSPX6vxHdl9GiWJQY9xrHg/G0XruyhLVqX7r8bI7TYux8fFnHA
+   eJzNV21OwkAQ3f6i/aFiUtoi+HEEbyb4UUGDokcCNaLGS4Bard7FmXQmrM1u2V3E+JKXEmj7dnZn3gxCCDEEXgo1spoQ78RP6ToDftQ0DxkANc+Be576941AiATYkFgnRoG77g3oPQDvNLr/FTns9csS++2K1Idz8v9etwuaa4F9jmUGeZlRDqvui0HzGLR7ljH34f43qosZ1cmsdGYY0yHdpzpLjvnLIua4VB8NWr/8nhA+d+C7A19dO6FBXe2nZmvplM4N67jpWK+oyVwE3tsjh1zNS7lQpTkAXtNnzKP1oNjXTYcYcW9MnhuKn16JuXbiqGmKAWnGoLkNnEKsr7XVe0ELtEJgE5h4brH2gFdifk4mwFhH3nyfuw6+F9Ha73HdQt1TuZ9y/e96BbeAz16RE7b9bUKaY9JX9bZY8gX0vjZpPhr0wayi9zzB87ea9+QUK9bIqV/QVBPRJa+08UNEn7wukXzRpt+ntFadT68K7NNndE6r1h4CL0RRJ6G0V8vMVybAnGlQff81Wr+kW+4ZixAtqZvTPIEebDObYLy6GbsKPCNh7aL/1i37eER9wwRTaV7C+FhPzkPsR5yrOqDvjw3izSRfQp/g+UmV9xPK1RF5OvYVviLR43cqfFdGSr0sMagxjgX7b7t0ZQ9t0bp0/90YocXZfQNfOXVl
   </data>
  </layer>
  <layer id="1" name="SubClouds" width="30" height="30">

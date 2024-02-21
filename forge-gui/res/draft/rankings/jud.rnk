@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Jeska, Warrior Adept|R|JUD
+#2|Mirari's Wake|R|JUD
+#3|Cephalid Constable|R|JUD
+#4|Lightning Surge|R|JUD
+#5|Erhnam Djinn|R|JUD
+#6|Genesis|R|JUD
+#7|Masked Gorgon|R|JUD
+#8|Fledgling Dragon|R|JUD
+#9|Wonder|U|JUD
+#10|Living Wish|R|JUD
+#11|Battle Screech|U|JUD
+#12|Valor|U|JUD
+#13|Swelter|U|JUD
+#14|Chastise|U|JUD
+#15|Wormfang Drake|C|JUD
+#16|Glory|R|JUD
+#17|Phantom Nantuko|R|JUD
+#18|Wormfang Crab|U|JUD
+#19|Anger|U|JUD
+#20|Thriss, Nantuko Primus|R|JUD
+#21|Phantom Centaur|U|JUD
+#22|Anurid Brushhopper|R|JUD
+#23|Phantom Nishoba|R|JUD
+#24|Grizzly Fate|U|JUD
+#25|Shaman's Trance|R|JUD
+#26|Scalpelexis|R|JUD
+#27|Elephant Guide|U|JUD
+#28|Brawn|U|JUD
+#29|Phantom Flock|U|JUD
+#30|Wormfang Manta|R|JUD
+#31|Arcane Teachings|C|JUD
+#32|Commander Eesha|R|JUD
+#33|Toxic Stench|C|JUD
+#34|Silver Seraph|R|JUD
+#35|Guiltfeeder|R|JUD
+#36|Stitch Together|U|JUD
+#37|Battlewise Aven|C|JUD
+#38|Anurid Swarmsnapper|U|JUD
+#39|Filth|U|JUD
+#40|Aven Fogbringer|C|JUD
+#41|Unquestioned Authority|U|JUD
+#42|Treacherous Werewolf|C|JUD
+#43|Treacherous Vampire|U|JUD
+#44|Mental Note|C|JUD
+#45|Wormfang Turtle|U|JUD
+#46|Crush of Wurms|R|JUD
+#47|Giant Warthog|C|JUD
+#48|Exoskeletal Armor|U|JUD
+#49|Cephalid Inkshrouder|U|JUD
+#50|Mirror Wall|C|JUD
+#51|Cunning Wish|R|JUD
+#52|Vigilant Sentry|C|JUD
+#53|Spelljack|R|JUD
+#54|Laquatus's Disdain|U|JUD
+#55|Wormfang Behemoth|R|JUD
+#56|Browbeat|U|JUD
+#57|Phantom Tiger|C|JUD
+#58|Sylvan Safekeeper|R|JUD
+#59|Lava Dart|C|JUD
+#60|Forcemage Advocate|U|JUD
+#61|Pulsemage Advocate|R|JUD
+#62|Ancestor's Chosen|U|JUD
+#63|Cabal Therapy|U|JUD
+#64|Selfless Exorcist|R|JUD
+#65|Dwarven Driller|U|JUD
+#66|Barbarian Bully|C|JUD
+#67|Sudden Strength|C|JUD
+#68|Anurid Barkripper|C|JUD
+#69|Battlefield Scrounger|C|JUD
+#70|Harvester Druid|C|JUD
+#71|Nantuko Tracer|C|JUD
+#72|Nomad Mythmaker|R|JUD
+#73|Tunneler Wurm|U|JUD
+#74|Spurnmage Advocate|U|JUD
+#75|Ironshell Beetle|C|JUD
+#76|Krosan Verge|U|JUD
+#77|Quiet Speculation|U|JUD
+#78|Cabal Trainee|C|JUD
+#79|Sutured Ghoul|R|JUD
+#80|Earsplitting Rats|C|JUD
+#81|Nullmage Advocate|C|JUD
+#82|Breaking Point|R|JUD
+#83|Spellgorger Barbarian|C|JUD
+#84|Balthor the Defiled|R|JUD
+#85|Firecat Blitz|U|JUD
+#86|Centaur Rootcaster|C|JUD
+#87|Flash of Insight|U|JUD
+#88|Phantom Nomad|C|JUD
+#89|Burning Wish|R|JUD
+#90|Shieldmage Advocate|C|JUD
+#91|Lost in Thought|C|JUD
+#92|Dwarven Bloodboiler|R|JUD
+#93|Worldgorger Dragon|R|JUD
+#94|Infectious Rage|U|JUD
+#95|Hapless Researcher|C|JUD
+#96|Keep Watch|C|JUD
+#97|Ember Shot|C|JUD
+#98|Goretusk Firebeast|C|JUD
+#99|Benevolent Bodyguard|C|JUD
+#100|Nantuko Monastery|U|JUD
+#101|Golden Wish|R|JUD
+#102|Web of Inertia|U|JUD
+#103|Guided Strike|C|JUD
+#104|Riftstone Portal|U|JUD
+#105|Solitary Confinement|R|JUD
+#106|Border Patrol|C|JUD
+#107|Trained Pronghorn|C|JUD
+#108|Hunting Grounds|R|JUD
+#109|Funeral Pyre|C|JUD
+#110|Suntail Hawk|C|JUD
+#111|Death Wish|R|JUD
+#112|Wormfang Newt|C|JUD
+#113|Prismatic Strands|C|JUD
+#114|Cagemail|C|JUD
+#115|Envelop|C|JUD
+#116|Spirit Cairn|U|JUD
+#117|Swirling Sandstorm|C|JUD
+#118|Soulcatchers' Aerie|U|JUD
+#119|Rats' Feast|C|JUD
+#120|Liberated Dwarf|C|JUD
+#121|Seedtime|R|JUD
+#122|Epic Struggle|R|JUD
+#123|Mist of Stagnation|R|JUD
+#124|Defy Gravity|C|JUD
+#125|Grip of Amnesia|C|JUD
+#126|Book Burning|C|JUD
+#127|Krosan Wayfarer|C|JUD
+#128|Aven Warcraft|U|JUD
+#129|Telekinetic Bonds|R|JUD
+#130|Ray of Revelation|C|JUD
+#131|Venomous Vines|C|JUD
+#132|Dwarven Scorcher|C|JUD
+#133|Canopy Claws|C|JUD
+#134|Krosan Reclamation|U|JUD
+#135|Lead Astray|C|JUD
+#136|Folk Medicine|C|JUD
+#137|Test of Endurance|R|JUD
+#138|Flaring Pain|C|JUD
+#139|Grave Consequences|U|JUD
+#140|Soulgorger Orgg|U|JUD
+#141|Serene Sunset|U|JUD
+#142|Planar Chaos|U|JUD
+#143|Morality Shift|R|JUD

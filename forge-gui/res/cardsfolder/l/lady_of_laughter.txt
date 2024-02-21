@@ -1,0 +1,9 @@
+Name:Lady of Laughter
+ManaCost:3 W W
+Types:Creature Faerie Noble
+PT:4/5
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Celebration | SVarCompare$ GE2 | Execute$ TrigDraw | TriggerDescription$ Celebration — At the beginning of your end step, if two or more nonland permanents entered the battlefield under your control this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+Oracle:Flying\nCelebration — At the beginning of your end step, if two or more nonland permanents entered the battlefield under your control this turn, draw a card.

@@ -18,6 +18,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventRandomLog;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
@@ -147,7 +148,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Choices")) {
             int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
-            String what = (sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices")));
+            String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
             stringBuilder.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
             final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
@@ -250,11 +251,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         sa.hasParam("ChoiceOptional"), params));
             }
         } else {
-            if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
-                tgtObjects.addAll(AbilityUtils.getDefinedEntities(card, sa.getParam("Defined").split(" & "), sa));
-            } else {
-                tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
-            }
+            tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
         }
 
         int counterRemain = counterAmount;
@@ -433,12 +430,21 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
                         for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
                             if (gameCard != null) {
-                                gameCard.addCounter(cti.getKey(), cti.getValue(), placer, table);
+                                if (!sa.hasParam("CounterNum")) {
+                                    // default is all
+                                    counterAmount = cti.getValue();
+                                }
+                                if (etbcounter) {
+                                    gameCard.addEtbCounter(cti.getKey(), counterAmount, placer);
+                                } else {
+                                    gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
+                                }
                             }
                         }
                     }
                     continue;
                 }
+
                 if (sa.hasParam("CounterTypePerDefined") || sa.hasParam("UniqueType")) {
                     counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), obj, pc);
                     if (counterType == null) continue;
@@ -481,7 +487,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    if (sa.hasParam("Tribute")) {
+                    if (sa.isKeyword(Keyword.TRIBUTE)) {
                         // make a copy to check if it would be on the battlefield
                         Card noTributeLKI = CardUtil.getLKICopy(gameCard);
                         // this check needs to check if this card would be on the battlefield
@@ -530,17 +536,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         gameCard.addCounter(counterType, counterAmount, placer, table);
                     }
 
-                    if (sa.hasParam("Evolve")) {
-                        game.getTriggerHandler().runTrigger(TriggerType.Evolved, AbilityKey.mapFromCard(gameCard),
-                                false);
-                    }
                     if (sa.hasParam("Monstrosity")) {
                         gameCard.setMonstrous(true);
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                         runParams.put(AbilityKey.MonstrosityAmount, counterAmount);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonstrous, runParams, false);
                     }
-                    if (sa.hasParam("Renown")) {
+                    if (sa.isKeyword(Keyword.RENOWN)) {
                         gameCard.setRenowned(true);
                         game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned,
                                 AbilityKey.mapFromCard(gameCard), false);
@@ -549,9 +551,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard),
                                 false);
                     }
-                    if (sa.hasParam("Training")) {
-                        game.getTriggerHandler().runTrigger(TriggerType.Trains, AbilityKey.mapFromCard(gameCard),
-                                false);
+
+                    if (sa.isKeyword(Keyword.MENTOR)) {
+                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
+                        runParams.put(AbilityKey.Source, sa.getHostCard());
+                        game.getTriggerHandler().runTrigger(TriggerType.Mentored, runParams, false);
                     }
 
                     game.updateLastStateForCard(gameCard);
@@ -599,10 +603,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("SharedKeywords")) {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
-            List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
-            String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
-                    : new String[] { "Card" };
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            if (sa.hasParam("SharedKeywordsDefined")) {
+                CardCollection def = getDefinedCardsOrTargeted(sa, "SharedKeywordsDefined");
+                keywords = CardFactoryUtil.getSharedKeywords(keywords, def);
+            } else {
+                List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+                String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
+                        : new String[] { "Card" };
+                keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
+            }
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table, false);
             }

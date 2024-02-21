@@ -1,0 +1,11 @@
+Name:Shadow Puppeteers
+ManaCost:6 U
+Types:Creature Faerie Wizard
+PT:4/4
+K:Flying
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 black Faerie Rogue creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withFlying | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever a creature you control with flying attacks, you may have it become a red Dragon with base power and toughness 4/4 in addition to its other colors and types until end of turn.
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredAttackerLKICopy | Power$ 4 | Toughness$ 4 | Types$ Dragon | Colors$ Red | Optional$ True
+Oracle:Flying, ward {2}\nWhen Shadow Puppeteers enters the battlefield, create two 1/1 black Faerie Rogue creature tokens with flying.\nWhenever a creature you control with flying attacks, you may have it become a red Dragon with base power and toughness 4/4 in addition to its other colors and types until end of turn.

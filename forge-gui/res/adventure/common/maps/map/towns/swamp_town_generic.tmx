@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8oIZ3oF0wCmDgujoDww116psrr8XAoKAFYTeREd86RtR1DzYgrsPAIKGDyaaVmXqclJs/HAClYU2tuEIGLYOkTBos7iAG1FPBrTD/Ng8hfw8lAACFpQo3
+   eJxjYBg8oIZ3oF0wCmDgujoDww116psrr8XAoKAFYTeREd86RpTZf0eHsBpxoBoJHUw2JQCfmXqclJs/HAClYU2tuEIGLYOkTBos7iAG1FPBrTD/Ng8hfw8lAAC2BAs/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -87,7 +87,7 @@
    </properties>
   </object>
   <object id="50" template="../../obj/shardtrader.tx" x="288" y="82"/>
-  <object id="51" template="../../obj/quest.tx" x="114" y="114">
+  <object id="51" template="../../obj/quest.tx" x="95" y="114" width="35" height="16">
    <properties>
     <property name="questtype" value="swamp_town_generic"/>
    </properties>

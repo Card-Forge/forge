@@ -38,6 +38,7 @@ public class MessageUtil {
             case ChooseDirection:
             case Clash:
             case DigMultiple:
+            case Seek:
                 return value;
             case ChooseColor:
                 return sa.hasParam("Random")

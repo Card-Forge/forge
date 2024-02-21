@@ -1,0 +1,13 @@
+Name:Sludge Titan
+ManaCost:4 BG BG
+Types:Creature Zombie Giant
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill five cards. You may put a creature card and/or a land card from among them into your hand.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill five cards. You may put a creature card and/or a land card from among them into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ EACH Creature.YouOwn+IsRemembered & Land.YouOwn+IsRemembered | Optional$ True | SelectPrompt$ You may select a creature card and/or a land card. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill
+Oracle:Trample\nWhenever Sludge Titan enters the battlefield or attacks, mill five cards. You may put a creature card and/or a land card from among them into your hand.

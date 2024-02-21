@@ -13,5 +13,6 @@ ScryfallCode=PJOU
 84 U Squelching Leeches @Tomasz Jedruszek
 93★ R Dictate of the Twin Gods @Chase Stone
 112★ R Spawn of Thraxes @Jason Rainville
-*122 R Eidolon of Blossoms @Seb McKinnon
+122★ R Eidolon of Blossoms @Seb McKinnon
 126★ R Heroes' Bane @Volkan Baǵa
+162 R Hall of Triumph @Chuck Lukacs

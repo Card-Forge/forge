@@ -1,6 +1,7 @@
 package forge.game;
 
-import forge.game.card.CardCollectionView;
+import com.google.common.collect.Iterables;
+
 import forge.game.card.CardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -45,35 +46,34 @@ public abstract class GameEntityView extends TrackableObject {
     public int getPreventNextDamage() {
         return get(TrackableProperty.PreventNextDamage);
     }
-    protected void updatePreventNextDamage(GameEntity e) {
+    public void updatePreventNextDamage(GameEntity e) {
         set(TrackableProperty.PreventNextDamage, e.getPreventNextDamageTotalShields());
     }
 
     public Iterable<CardView> getAttachedCards() {
-        return get(TrackableProperty.AttachedCards);
+        if (hasAnyCardAttachments()) {
+            Iterable<CardView> active = Iterables.filter(get(TrackableProperty.AttachedCards), c -> !c.isPhasedOut());
+            if (!Iterables.isEmpty(active)) {
+                return active;
+            }
+        }
+        return null;
     }
     public boolean hasCardAttachments() {
         return getAttachedCards() != null;
     }
     public Iterable<CardView> getAllAttachedCards() {
-        return get(TrackableProperty.AllAttachedCards);
+        return get(TrackableProperty.AttachedCards);
     }
     public boolean hasAnyCardAttachments() {
         return getAllAttachedCards() != null;
     }
 
     protected void updateAttachedCards(GameEntity e) {
-        if (e.hasCardAttachments()) {
-            set(TrackableProperty.AttachedCards, CardView.getCollection(e.getAttachedCards()));
-        }
-        else {
-            set(TrackableProperty.AttachedCards, null);
-        }
-        CardCollectionView all = e.getAllAttachedCards();
-        if (all.isEmpty()) {
-            set(TrackableProperty.AllAttachedCards, null);
+        if (!e.getAllAttachedCards().isEmpty()) {
+            set(TrackableProperty.AttachedCards, CardView.getCollection(e.getAllAttachedCards()));
         } else {
-            set(TrackableProperty.AllAttachedCards, CardView.getCollection(all));
+            set(TrackableProperty.AttachedCards, null);
         }
     }
 }

@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import forge.ai.*;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -57,6 +58,25 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
         if (trigsa == null) {
             return false;
+        }
+
+        if (logic.equals("WeakerCreature")) {
+            Card ownCreature = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
+            if (ownCreature == null) {
+                return false;
+            }
+
+            int eval = ComputerUtilCard.evaluateCreature(ownCreature);
+            boolean foundWorse = false;
+            for (Card c : ai.getOpponents().getCreaturesInPlay()) {
+                if (eval + 100 < ComputerUtilCard.evaluateCreature(c) ) {
+                    foundWorse = true;
+                    break;
+                }
+            }
+            if (!foundWorse) {
+                return false;
+            }
         }
 
         trigsa.setActivatingPlayer(ai, true);

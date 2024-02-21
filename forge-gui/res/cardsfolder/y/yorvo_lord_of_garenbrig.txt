@@ -3,7 +3,7 @@ ManaCost:G G G
 Types:Legendary Creature Giant Noble
 PT:0/0
 K:etbCounter:P1P1:4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on CARDNAME. Then if that creature's power is greater than CARDNAME's power, put another +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on NICKNAME. Then if that creature's power is greater than NICKNAME's power, put another +1/+1 counter on NICKNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GEY
 SVar:X:TriggeredCard$CardPower

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="45">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B3Fo3gUj+JRPIpH8SgexVTDAA08eeE=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhaYIsEBNMbbJeAYHoDeQEGBkUB6ph1EGjOISJxOz9DgqoAQwKx6g9TyY3U9O9A2dvIz8DQRCRWAdqpLEC8+mZ+/H5QoBHGFzZ7gXL7iMRtQPe38hOvfv9ouoKD0fxLH3tHwxk74FVH2Ati0wvA6t6BqoMpAQDikGk6
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBlCGAYoNccciC8BsbIKA4OqCoQG4Ut82DEMXELShwurQs0xw2KvKdSsgyr4MQgsF0XY2yJOvD5jPPbSEuCzFxQuSmjhhM5HB+jy6HGlRIR/QWFyAC2M0PnoAF0eHR8exOHMooZQh4uNCxDSOxj9i56WVCHsBnzpCkeexdCDz15GKfyYSQrTXmL1DMZwHih7ceU/fPkXV14/rDL4y0lCoFEcU6wZixix9s7kZWCYRiRGB8Tqm8FLnTofBga6DUIKBgBY2I60
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFyEBFhYFBGQmPglEwCkbBSAfKKoQxPj1KQJwsCWGrjpavo2CEAAAhegZS
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="25" template="../../obj/dialog.tx" x="192" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Anatomical studies of various mundane animals are found on this shelf. Open on top is a text on snakes. Why did it have to be snakes?&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="26" template="../../obj/dialog.tx" x="128" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;This shelf contains books of recipes, but many of the ingredients are unfamiliar to you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="27" template="../../obj/dialog.tx" x="352" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find not so much books as collections of paperwork. It appears to consist of a series of caravan manifests and shipping ledgers affixed to maps. Comments and questions scribbled onto a set of calendars indicate that whomever collected these records suspected that the associated merchants were frequently conducting additional undocumented business along their routes.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="28" template="../../obj/dialog.tx" x="400" y="200">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'The Impact of Personal Teleportation on Intercity Commerce' - Doesn't exactly sound like a page turner.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="30" template="../../obj/dialog.tx" x="144" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Whatever knowledge was once contained in these texts is lost, their pages long ago having been soaked in the same dark liquid that appears to have stained the shelves below them.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="31" template="../../obj/dialog.tx" x="368" y="240">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Dust covered tomes of nondescript subjects fill this shelf. You have a feeling these have been untouched for quite some time.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="32" template="../../obj/dialog.tx" x="352" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;This shelf holds a journal with a sturdy cover which stands apart from the faded scrolls around it. The entries are a mystery to you, however, as they are written in some form of code.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="33" template="../../obj/dialog.tx" x="400" y="112">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;'Azgothian poems from a Midsummer Morning'. This book gives you a creepy feeling and you wisely leave the cover closed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="34" template="../../obj/dialog.tx" x="400" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find a collection of biographies of wizards you've never heard of, and a quick skim of the contents makes you wonder who would bother to write these.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="35" template="../../obj/dialog.tx" x="128" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A collection of children's drawings fill this bookcase, although unlike most similar collections these all seem to depict arcane subjects.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="36" template="../../obj/dialog.tx" x="80" y="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Here you find a blueprint of the library itself. Unfortunately, there doesn't seem to be any list of secret passages to take advantage of.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="39" template="../../obj/enemy.tx" x="232" y="112">
+   <properties>
+    <property name="enemy" value="Spirit"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="75"/>
+    <property name="waypoints" value="r5-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23-37-38"/>
+   </properties>
+  </object>
+  <object id="40" template="../../obj/enemy.tx" x="88" y="144">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="pursueRange" type="int" value="125"/>
+    <property name="threatRange" type="int" value="100"/>
+    <property name="waypoints" value="r5-8-15,r18-21,r11-12-13-16-18-21"/>
+   </properties>
+  </object>
+  <object id="41" template="../../obj/enemy.tx" x="384" y="144">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="pursueRange" type="int" value="125"/>
+    <property name="threatRange" type="int" value="100"/>
+    <property name="waypoints" value="r5-8-15,r19-20,r19-20-37-38-14-17"/>
+   </properties>
+  </object>
+  <object id="42" template="../../obj/enemy.tx" x="384" y="256">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="80"/>
+    <property name="waypoints" value="r10-14-23,r19-20,r19-20-37-38,r8-10-14-18-21"/>
+   </properties>
+  </object>
+  <object id="43" template="../../obj/enemy.tx" x="80" y="256">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+    <property name="pursueRange" type="int" value="100"/>
+    <property name="threatRange" type="int" value="80"/>
+    <property name="waypoints" value="22, r11-12, r18-21, 5, r8-15, r18-21, r11-12, r9-13"/>
+   </properties>
+  </object>
+  <object id="44" template="../../obj/enemy.tx" x="232" y="56">
+   <properties>
+    <property name="enemy" value="Archivist"/>
+   </properties>
+  </object>
+  <object id="24" template="../../obj/entry_down.tx" x="224" y="32" width="32" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_2.tmx"/>
+    <property name="teleportObjectId" value="7"/>
+   </properties>
+  </object>
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="320" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="7" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_0.tmx"/>
+    <property name="teleportObjectId" value="13"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="5" x="232" y="144"/>
+  <object id="8" template="../../obj/waypoint.tx" name="8" x="232" y="208"/>
+  <object id="9" template="../../obj/waypoint.tx" name="9" x="48" y="208"/>
+  <object id="10" template="../../obj/waypoint.tx" name="10" x="416" y="208"/>
+  <object id="11" template="../../obj/waypoint.tx" name="11" x="48" y="128"/>
+  <object id="12" template="../../obj/waypoint.tx" name="12" x="48" y="160"/>
+  <object id="13" template="../../obj/waypoint.tx" name="13" x="48" y="80"/>
+  <object id="14" template="../../obj/waypoint.tx" name="14" x="416" y="80"/>
+  <object id="15" template="../../obj/waypoint.tx" name="15" x="232" y="80"/>
+  <object id="16" template="../../obj/waypoint.tx" name="16" x="48" y="256"/>
+  <object id="17" template="../../obj/waypoint.tx" name="17" x="416" y="256"/>
+  <object id="18" template="../../obj/waypoint.tx" name="18" x="130" y="158"/>
+  <object id="19" template="../../obj/waypoint.tx" name="19" x="334" y="158"/>
+  <object id="20" template="../../obj/waypoint.tx" name="20" x="334" y="128"/>
+  <object id="21" template="../../obj/waypoint.tx" name="21" x="130" y="128"/>
+  <object id="22" template="../../obj/waypoint.tx" name="22" x="128" y="256">
+   <properties>
+    <property name="type" value="waypoint"/>
+   </properties>
+  </object>
+  <object id="23" template="../../obj/waypoint.tx" name="23" x="336" y="256"/>
+  <object id="37" template="../../obj/waypoint.tx" name="37" x="416" y="128"/>
+  <object id="38" template="../../obj/waypoint.tx" name="38" x="416" y="160"/>
+ </objectgroup>
+</map>

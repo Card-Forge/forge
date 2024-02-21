@@ -1,0 +1,7 @@
+Name:Rat Out
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBRat | SpellDescription$ Up to one target creature gets -1/-1 until end of turn.
+SVar:DBRat:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You | SpellDescription$ You create a 1/1 black Rat creature token with "This creature can't block."
+DeckHas:Ability$Token & Type$Rat
+Oracle:Up to one target creature gets -1/-1 until end of turn. You create a 1/1 black Rat creature token with "This creature can't block."

@@ -1,7 +1,7 @@
 Name:Kardur's Vicious Return
 ManaCost:2 B R
 Types:Enchantment Saga
-K:Saga:3:DBSacrifice,DBDiscard,DBReturn
+K:Chapter:3:DBSacrifice,DBDiscard,DBReturn
 SVar:DBSacrifice:DB$ ImmediateTrigger | Execute$ TrigDealDamage | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may sacrifice a creature. When you do, CARDNAME deals 3 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
 SVar:DBDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Each player discards a card.

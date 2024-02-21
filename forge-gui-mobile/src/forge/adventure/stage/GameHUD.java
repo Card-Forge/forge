@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
@@ -46,7 +47,11 @@ public class GameHUD extends Stage {
     static public GameHUD instance;
     private final GameStage gameStage;
     private final Image avatar, miniMapPlayer;
-    private final TextraLabel lifePoints, money, shards, keys;
+    private final TextraLabel lifePoints;
+    private final TextraLabel money;
+    private final TextraLabel shards;
+    private final TextraLabel keys;
+    private TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
     private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor;
@@ -64,6 +69,7 @@ public class GameHUD extends Stage {
     private final Array<String> questKeys = new Array<>();
     private String lifepointsTextColor = "";
     private final ScrollPane scrollPane;
+    private final ScrollPane notificationPane;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -131,7 +137,7 @@ public class GameHUD extends Stage {
         keys = Controls.newTextraLabel("");
         scrollPane = new ScrollPane(keys);
         scrollPane.setPosition(2, 2);
-        scrollPane.setStyle(Controls.getSkin().get("transluscent", ScrollPane.ScrollPaneStyle.class));
+        scrollPane.setStyle(Controls.getSkin().get("translucent", ScrollPane.ScrollPaneStyle.class));
         addActor(scrollPane);
         AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
@@ -150,12 +156,21 @@ public class GameHUD extends Stage {
             gamehud.addListener(new ConsoleToggleListener());
         }
         WorldSave.getCurrentSave().onLoad(this::enter);
+
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
         eventTouchDown.setType(InputEvent.Type.touchDown);
         eventTouchUp = new InputEvent();
         eventTouchUp.setPointer(-1);
         eventTouchUp.setType(InputEvent.Type.touchUp);
+
+        notificationPane = new ScrollPane(notificationText);
+        notificationPane.setTouchable(Touchable.childrenOnly);
+        notificationPane.setBounds(5, GuiBase.isAndroid() ? getHeight() : -notificationText.getPrefHeight(), getWidth()*0.4f, 25);
+        notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
+        notificationPane.getColor().a = 0f;
+
+        ui.addActor(notificationPane);
     }
 
     private void openMap() {
@@ -261,8 +276,11 @@ public class GameHUD extends Stage {
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
         miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
-        if (GuiBase.isAndroid()) // prevent drawing on top of console
-            miniMapPlayer.setVisible(!console.isVisible() && miniMap.isVisible());
+
+        miniMapPlayer.setVisible(miniMap.isVisible() &&
+                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
+                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
+                || !console.isVisible())); // prevent drawing on top of console or notifications
         //colored lifepoints
         if (Current.player().getLife() >= Current.player().getMaxLife()) {
             //color green if max life
@@ -286,7 +304,7 @@ public class GameHUD extends Stage {
             updatelife = false;
             lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
-        if (!GameScene.instance().isNotInWorldMap())
+        if (!MapStage.getInstance().isInMap())
             updateMusic();
         else
             SoundSystem.instance.pause();
@@ -295,6 +313,7 @@ public class GameHUD extends Stage {
     Texture miniMapTexture;
     Texture miniMapToolTipTexture;
     Pixmap miniMapToolTipPixmap;
+    public boolean fromWorldMap = false;
 
     public void enter() {
         questKeys.clear();
@@ -333,12 +352,37 @@ public class GameHUD extends Stage {
             keys.setText("");
             scrollPane.getColor().a = 0;
         }
+
+        switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
+            case "capital":
+            case "town":
+                if(MapStage.getInstance().isInMap()) {
+                    int rep = TileMapScene.instance().getPointOfInterestChanges().getMapReputation();
+                    String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
+                    if (fromWorldMap) {
+                        addNotification(reputationText);
+                        fromWorldMap = false;
+                    }
+                }
+                break;
+            case "dungeon":
+            case "cave":
+            case "castle":
+                if (fromWorldMap) {
+                    addNotification(TileMapScene.instance().rootPoint.getDisplayName());
+                    fromWorldMap = false;
+                }
+                break;
+            default:
+                break;
+        }
+
         if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
             deckActor.setColor(Color.RED);
         } else {
             deckActor.setColor(menuActor.getColor());
         }
-        if (GameScene.instance().isNotInWorldMap()) {
+        if (MapStage.getInstance().isInMap()) {
             SoundSystem.instance.pause();
             playAudio();
         } else {
@@ -399,6 +443,7 @@ public class GameHUD extends Stage {
                     return;
                 Current.player().addShards(-data.shardsNeeded);
                 ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+                AdventureQuestController.instance().updateItemUsed(data);
             });
             button.setStyle(Controls.getSkin().get("menu", TextButton.TextButtonStyle.class));
             abilityButtonMap.add(button);
@@ -408,7 +453,7 @@ public class GameHUD extends Stage {
     private Pair<FileHandle, Music> audio = null;
 
     public void switchAudio() {
-        if (GameScene.instance().isNotInWorldMap()) {
+        if (MapStage.getInstance().isInMap()) {
             pauseMusic();
             playAudio();
         }
@@ -545,7 +590,7 @@ public class GameHUD extends Stage {
     private void exitToWorldMap() {
         if (console.isVisible())
             return;
-        if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
+        if (!MapStage.getInstance().isInMap()) //prevent showing this dialog to WorldMap
             return;
         if (!MapStage.getInstance().canEscape())
             return;
@@ -569,7 +614,7 @@ public class GameHUD extends Stage {
     private void bookmark() {
         if (console.isVisible())
             return;
-        if (!GameScene.instance().isNotInWorldMap())
+        if (!MapStage.getInstance().isInMap())
             return;
         if (!MapStage.getInstance().canEscape())
             return;
@@ -649,8 +694,8 @@ public class GameHUD extends Stage {
         setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !GameScene.instance().isNotInWorldMap(), "[%120][+ExitToWorldMap]", "---");
-        setDisabled(bookmarkActor, !GameScene.instance().isNotInWorldMap(), "[%120][+Bookmark]", "---");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "---");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "---");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -873,5 +918,53 @@ public class GameHUD extends Stage {
     void restorePlayerCollision() {
         flicker(MapStage.getInstance().getPlayerSprite());
         flicker(WorldStage.getInstance().getPlayerSprite());
+    }
+
+    public void addNotification(String text) {
+        Action preconfigureNotification = new Action() {
+            @Override
+            public boolean act(float delta) {
+                notificationText.setWrap(false);
+                notificationText.setText(text);
+                notificationText.setColor(Color.BLACK);
+                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode()?getWidth() * 0.25f : getWidth() - 25));
+                notificationText.setWrap(true);
+                notificationText.layout();
+
+                notificationPane.setSize(notificationText.getWidth() + 10, notificationText.getPrefHeight() + 20);
+
+                notificationPane.setPosition(5, Forge.isLandscapeMode()? -notificationPane.getHeight(): getHeight());
+
+                notificationPane.getColor().a = 1f;
+                notificationPane.layout();
+                notificationText.layout();
+                return true;
+            }
+        };
+
+        Action newNotification;
+
+        if (Forge.isLandscapeMode()) {
+            newNotification = Actions.after(Actions.sequence(preconfigureNotification,
+                    Actions.moveTo(5, 0, 2f),
+                    Actions.delay(10f),
+                    Actions.alpha(0f,3f),
+                    Actions.sizeTo(0,0)));
+        } else {
+            newNotification = Actions.after(Actions.sequence(preconfigureNotification,
+                    Actions.moveToAligned(5, getHeight(), Align.topLeft, 2f),
+                    Actions.delay(10f),
+                    Actions.alpha(0f,3f),
+                    Actions.sizeTo(0,0)));
+        }
+
+        notificationPane.addAction(newNotification);
+    }
+
+    public void clearNotifications(){
+        notificationText.setText("");
+        notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth()*0.4f, 25);
+        notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
+        notificationPane.getColor().a = 0f;
     }
 }

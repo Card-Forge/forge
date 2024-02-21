@@ -34,14 +34,15 @@ public class ManaEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final AbilityManaPart abMana = sa.getManaPart();
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
+        final Player activator = sa.getActivatingPlayer();
 
         // Spells are not undoable
         sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);
 
         final boolean optional = sa.hasParam("Optional");
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = activator.getGame();
 
-        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
+        if (optional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
             return;
         }
 
@@ -192,9 +193,11 @@ public class ManaEffect extends SpellAbilityEffect {
                     abMana.setExpressChoice(sb.toString());
                 } else if (type.startsWith("EachColorAmong")) {
                     final String res = type.split("_")[1];
-                    final ZoneType zone = type.startsWith("EachColorAmong_") ? ZoneType.Battlefield : ZoneType.smartValueOf(type.split("_")[0].substring(14));
-                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(zone),
-                            res, sa.getActivatingPlayer(), card, sa);
+                    final boolean defined = type.startsWith("EachColorAmongDefined");
+                    final ZoneType zone = defined || type.startsWith("EachColorAmong_") ? ZoneType.Battlefield :
+                            ZoneType.smartValueOf(type.split("_")[0].substring(14));
+                    final CardCollection list = defined ? AbilityUtils.getDefinedCards(card, res, sa) :
+                            CardLists.getValidCards(card.getGame().getCardsIn(zone), res, activator, card, sa);
                     byte colors = 0;
                     for (Card c : list) {
                         colors |= c.getColor().getColor();

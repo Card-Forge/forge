@@ -1,7 +1,7 @@
 Name:Sacred Ground
 ManaCost:1 W
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Land.YouOwn | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.
+T:Mode$ ChangesZone | ValidCard$ Land.YouOwn | ValidCause$ SpellAbility.OppCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
 AI:RemoveDeck:Random
 Oracle:Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.

@@ -1,0 +1,181 @@
+//Rank|Name|Rarity|Set
+#1|Simic Sky Swallower|R|DIS
+#2|Demonfire|R|DIS
+#3|Rakdos Pit Dragon|R|DIS
+#4|Windreaver|R|DIS
+#5|Grand Arbiter Augustin IV|R|DIS
+#6|Rakdos Guildmage|U|DIS
+#7|Azorius Guildmage|U|DIS
+#8|Pride of the Clouds|R|DIS
+#9|Cytoplast Root Kin|R|DIS
+#10|Twinstrike|U|DIS
+#11|Seal of Doom|C|DIS
+#12|Cytoplast Manipulator|R|DIS
+#13|Sky Hussar|U|DIS
+#14|Stormscale Anarch|R|DIS
+#15|Lyzolda, the Blood Witch|R|DIS
+#16|Wrecking Ball|C|DIS
+#17|Cackling Flames|C|DIS
+#18|Condemn|U|DIS
+#19|Protean Hulk|R|DIS
+#20|Stalking Vengeance|R|DIS
+#21|Minister of Impediments|C|DIS
+#22|Crime Punishment|R|DIS
+#23|Seal of Fire|C|DIS
+#24|Tidespout Tyrant|R|DIS
+#25|Isperia the Inscrutable|R|DIS
+#26|Rakdos the Defiler|R|DIS
+#27|Celestial Ancient|R|DIS
+#28|Experiment Kraj|R|DIS
+#29|Wakestone Gargoyle|R|DIS
+#30|Trygon Predator|U|DIS
+#31|Avatar of Discord|R|DIS
+#32|Rakdos Ickspitter|C|DIS
+#33|Azorius Herald|U|DIS
+#34|Rakdos Augermage|R|DIS
+#35|Assault Zeppelid|C|DIS
+#36|Leafdrake Roost|U|DIS
+#37|Simic Guildmage|U|DIS
+#38|Indrik Stomphowler|U|DIS
+#39|Plaxcaster Frogling|U|DIS
+#40|Hit Run|U|DIS
+#41|Mistral Charger|U|DIS
+#42|Omnibian|R|DIS
+#43|Govern the Guildless|R|DIS
+#44|Research Development|R|DIS
+#45|Ratcatcher|R|DIS
+#46|Patagia Viper|U|DIS
+#47|Hellhole Rats|U|DIS
+#48|Supply Demand|U|DIS
+#49|Odds Ends|R|DIS
+#50|Court Hussar|U|DIS
+#51|Unliving Psychopath|R|DIS
+#52|Guardian of the Guildpact|C|DIS
+#53|Hallowed Fountain|R|DIS
+#54|Paladin of Prahv|U|DIS
+#55|Blood Crypt|R|DIS
+#56|Momir Vig, Simic Visionary|R|DIS
+#57|Azorius First Wing|C|DIS
+#58|Demon's Jester|C|DIS
+#59|Rise Fall|U|DIS
+#60|Kindle the Carnage|U|DIS
+#61|Helium Squirter|C|DIS
+#62|Silkwing Scout|C|DIS
+#63|Crypt Champion|U|DIS
+#64|Novijen Sages|R|DIS
+#65|Freewind Equenaut|C|DIS
+#66|Hide Seek|R|DIS
+#67|Plumes of Peace|C|DIS
+#68|Breeding Pool|R|DIS
+#69|Plaxmanta|U|DIS
+#70|Squealing Devil|U|DIS
+#71|Loaming Shaman|R|DIS
+#72|Flaring Flame Kin|U|DIS
+#73|Aquastrand Spider|C|DIS
+#74|Cytoshape|R|DIS
+#75|Pure Simple|U|DIS
+#76|Coiling Oracle|C|DIS
+#77|Rakdos Carnarium|C|DIS
+#78|Vigean Graftmage|U|DIS
+#79|Dread Slag|R|DIS
+#80|Ocular Halo|C|DIS
+#81|Azorius Chancery|C|DIS
+#82|Gobhobbler Rats|C|DIS
+#83|Sporeback Troll|C|DIS
+#84|Simic Ragworm|C|DIS
+#85|Voidslime|R|DIS
+#86|Ogre Gatecrasher|C|DIS
+#87|Simic Growth Chamber|C|DIS
+#88|Riot Spikes|C|DIS
+#89|Transguild Courier|U|DIS
+#90|Shielding Plax|C|DIS
+#91|Rakdos Signet|C|DIS
+#92|Azorius Signet|C|DIS
+#93|Evolution Vat|R|DIS
+#94|Cytospawn Shambler|C|DIS
+#95|Simic Signet|C|DIS
+#96|Pillar of the Paruns|R|DIS
+#97|Drekavac|U|DIS
+#98|Simic Basilisk|U|DIS
+#99|Carom|C|DIS
+#100|Jagged Poppet|U|DIS
+#101|Might of the Nephilim|U|DIS
+#102|Beacon Hawk|C|DIS
+#103|Soulsworn Jury|C|DIS
+#104|Trial Error|U|DIS
+#105|Flame Kin War Scout|U|DIS
+#106|Enemy of the Guildpact|C|DIS
+#107|Utopia Sprawl|C|DIS
+#108|Muse Vessel|R|DIS
+#109|Gnat Alley Creeper|U|DIS
+#110|Biomantic Mastery|R|DIS
+#111|Ragamuffyn|U|DIS
+#112|Macabre Waltz|C|DIS
+#113|Sprouting Phytohydra|R|DIS
+#114|Verdant Eidolon|C|DIS
+#115|Vigean Hydropon|C|DIS
+#116|Anthem of Rakdos|R|DIS
+#117|Enigma Eidolon|C|DIS
+#118|Haazda Shield Mate|R|DIS
+#119|Entropic Eidolon|C|DIS
+#120|Bound Determined|R|DIS
+#121|Aurora Eidolon|C|DIS
+#122|Aethermage's Touch|R|DIS
+#123|Fertile Imagination|U|DIS
+#124|Overrule|C|DIS
+#125|Spell Snare|U|DIS
+#126|Prahv, Spires of Order|U|DIS
+#127|Slaughterhouse Bouncer|C|DIS
+#128|Swift Silence|R|DIS
+#129|Rakdos Riteknife|R|DIS
+#130|Dovescape|R|DIS
+#131|Novijen, Heart of Progress|U|DIS
+#132|Flash Foliage|U|DIS
+#133|Walking Archive|R|DIS
+#134|Kill Suit Cultist|C|DIS
+#135|Ghost Quarter|U|DIS
+#136|Taste for Mayhem|C|DIS
+#137|Vesper Ghoul|C|DIS
+#138|Thrive|C|DIS
+#139|Simic Initiate|C|DIS
+#140|Psychotic Fury|C|DIS
+#141|Nettling Curse|C|DIS
+#142|Infernal Tutor|R|DIS
+#143|Brace for Impact|U|DIS
+#144|Palliation Accord|U|DIS
+#145|Stoic Ephemera|U|DIS
+#146|Utvara Scalper|C|DIS
+#147|War's Toll|R|DIS
+#148|Sandstorm Eidolon|C|DIS
+#149|Proper Burial|R|DIS
+#150|Rix Maadi, Dungeon Palace|U|DIS
+#151|Haazda Exonerator|C|DIS
+#152|Bronze Bombshell|R|DIS
+#153|Proclamation of Rebirth|R|DIS
+#154|Magewright's Stone|U|DIS
+#155|Bond of Agony|U|DIS
+#156|Vigean Intuition|U|DIS
+#157|Skullmead Cauldron|U|DIS
+#158|Azorius Ploy|U|DIS
+#159|Azorius Aethermage|U|DIS
+#160|Steeling Stance|C|DIS
+#161|Vision Skeins|C|DIS
+#162|Delirium Skeins|C|DIS
+#163|Blessing of the Nephilim|U|DIS
+#164|Skyscribing|U|DIS
+#165|Nihilistic Glee|R|DIS
+#166|Rain of Gore|R|DIS
+#167|Weight of Spires|U|DIS
+#168|Ignorant Bliss|U|DIS
+#169|Slithering Shade|U|DIS
+#170|Whiptail Moloch|C|DIS
+#171|Stomp and Howl|U|DIS
+#172|Writ of Passage|C|DIS
+#173|Brain Pry|U|DIS
+#174|Street Savvy|C|DIS
+#175|Pain Magnification|U|DIS
+#176|Valor Made Real|C|DIS
+#177|Psychic Possession|R|DIS
+#178|Wit's End|R|DIS
+#179|Elemental Resonance|R|DIS
+#180|Nightcreep|U|DIS

@@ -19,7 +19,7 @@ ScryfallCode=CST
 43 U Balduvian Dead @Mike Kimble
 44b C Casting of Bones @Anson Maddocks
 51a C Insidious Bookworms @Greg Simanson
-54 C Swords to Plowshares @Kaja Foglio
+54 U Swords to Plowshares @Kaja Foglio
 57a C Phantasmal Fiend @Scott Kirschner
 60 U Binding Grasp @Ruth Thompson
 61 C Brainstorm @Christopher Rush
@@ -39,7 +39,7 @@ ScryfallCode=CST
 123 U Drift of the Dead @Brian Snõddy
 127 C Gangrenous Zombies @Brian Snõddy
 137 C Kjeldoran Dead @Melissa A. Benson
-142 C Legions of Lim-Dul @Anson Maddocks
+142 C Legions of Lim-Dûl @Anson Maddocks
 161 C Soul Burn @Rob Alexander
 194 C Incinerate @Mark Poole
 208 U Orcish Healer @Quinton Hoover

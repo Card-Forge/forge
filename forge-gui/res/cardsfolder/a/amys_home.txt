@@ -1,0 +1,12 @@
+Name:Amy's Home
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. If it doesn't have suspend, it gains suspend.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | OptionalDecider$ You | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. If it doesn't have suspend, it gains suspend.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | WithCountersType$ TIME | WithCountersAmount$ X | RememberChanged$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.withoutSuspend | PumpZone$ Exile | KW$ Suspend | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigTimeTravel | TriggerDescription$ Whenever chaos ensues, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
+SVar:TrigTimeTravel:DB$ TimeTravel
+Oracle:When you planeswalk to Amy's Home and at the beginning of your upkeep, you may exile a nonland card from your hand with a number of time counters on it equal to its mana value. If it doesn't have suspend, it gains suspend.\nWhenever chaos ensues, time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)

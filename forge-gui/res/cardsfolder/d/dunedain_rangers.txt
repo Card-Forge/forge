@@ -1,4 +1,4 @@
-Name:Dunedain Rangers
+Name:Dúnedain Rangers
 ManaCost:3 G
 Types:Creature Human Ranger
 PT:4/4

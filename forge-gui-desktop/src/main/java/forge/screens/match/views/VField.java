@@ -80,6 +80,7 @@ public class VField implements IVDoc<CField> {
     private final FLabel lblEnergy     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ENERGY)).iconInBackground().build();
     private final FLabel lblExperience = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_EXPERIENCE)).iconInBackground().build();
     private final FLabel lblTicket     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_TICKET)).iconInBackground().build();
+    private final FLabel lblRad        = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_RAD)).iconInBackground().build();
 
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
@@ -115,6 +116,7 @@ public class VField implements IVDoc<CField> {
         lblEnergy.setFocusable(false);
         lblExperience.setFocusable(false);
         lblTicket.setFocusable(false);
+        lblRad.setFocusable(false);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
@@ -236,6 +238,24 @@ public class VField implements IVDoc<CField> {
         avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
     }
 
+    private void addLblRad() {
+        if (lblRad.isShowing() || lblExperience.isShowing() || lblEnergy.isShowing() || lblPoison.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblLife);
+        lblLife.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_LIFE));
+        avatarArea.add(lblLife, "w 50%!, h 20px!, split 2");
+        avatarArea.add(lblRad, "w 50%!, h 20px!, wrap");
+    }
+
+    private void removeLblRad() {
+        if (!lblRad.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblRad);
+        avatarArea.remove(lblLife);
+        avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
+    }
 
     private void addLblExperience() {
         if (lblExperience.isShowing() || lblEnergy.isShowing() || lblPoison.isShowing()) {
@@ -307,11 +327,13 @@ public class VField implements IVDoc<CField> {
         final int poison = player.getCounters(CounterEnumType.POISON);
         final int energy = player.getCounters(CounterEnumType.ENERGY);
         final int experience = player.getCounters(CounterEnumType.EXPERIENCE);
+        final int rad = player.getCounters(CounterEnumType.RAD);
         final int ticket = player.getCounters(CounterEnumType.TICKET);
 
         if (poison > 0) {
             removeLblEnergy();
             removeLblExperience();
+            removeLblRad();
             removeLblTicket();
             addLblPoison();
             lblPoison.setText(String.valueOf(poison));
@@ -326,6 +348,7 @@ public class VField implements IVDoc<CField> {
 
         if (energy > 0) {
             removeLblExperience();
+            removeLblRad();
             removeLblTicket();
             if (poison == 0) {
                 addLblEnergy();
@@ -336,6 +359,7 @@ public class VField implements IVDoc<CField> {
         }
 
         if (experience > 0) {
+            removeLblRad();
             removeLblTicket();
             if (poison == 0 && energy == 0) {
                 addLblExperience();
@@ -345,8 +369,18 @@ public class VField implements IVDoc<CField> {
             removeLblExperience();
         }
 
-        if (ticket > 0) {
+        if (rad > 0) {
+            removeLblTicket();
             if (poison == 0 && energy == 0 && experience == 0) {
+                addLblRad();
+                lblRad.setText(String.valueOf(rad));
+            }
+        } else {
+            removeLblRad();
+        }
+
+        if (ticket > 0) {
+            if (poison == 0 && energy == 0 && experience == 0 && rad == 0) {
                 addLblTicket();
                 lblTicket.setText(String.valueOf(ticket));
             }

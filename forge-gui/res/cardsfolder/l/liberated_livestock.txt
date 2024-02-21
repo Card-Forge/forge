@@ -1,0 +1,13 @@
+Name:Liberated Livestock
+ManaCost:5 W
+Types:Creature Cat Bird Ox
+PT:4/6
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token. For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | RememberTokens$ True | TokenScript$ w_1_1_cat_lifelink,w_1_1_bird_flying,w_2_4_ox | TokenOwner$ You | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBChangeZone | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Aura.YouCtrl+!IsRemembered | DefinedPlayer$ You | AttachedTo$ Imprinted | Optional$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+DeckNeeds:Type$Aura
+SVar:SacMe:4
+Oracle:When Liberated Livestock dies, create a 1/1 white Cat creature token with lifelink, a 1/1 white Bird creature token with flying, and a 2/4 white Ox creature token. For each of those tokens, you may put an Aura card from your hand and/or graveyard onto the battlefield attached to it.

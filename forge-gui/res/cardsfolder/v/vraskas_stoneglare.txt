@@ -1,9 +1,9 @@
 Name:Vraska's Stoneglare
 ManaCost:4 B G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard from a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup | SubAbility$ DBSearch
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.YouOwn+namedVraska; Regal Gorgon | ChangeNum$ 1 | Optional$ True
-SVar:X:TargetedLKI$CardToughness
-DeckNeeds:Name$Vraska, Regal Gorgon
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ TargetedLKI$CardToughness | SubAbility$ DBSearch | StackDescription$ REP You gain_{p:You} gains | SpellDescription$ You gain life equal to its toughness.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedVraska; Regal Gorgon | Optional$ True | SpellDescription$ You may search your library and/or graveyard from a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+DeckHints:Name$Vraska, Regal Gorgon
+DeckHas:Ability$LifeGain
 Oracle:Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard for a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle.

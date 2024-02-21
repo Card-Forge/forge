@@ -1,0 +1,8 @@
+Name:Gallant Pie-Wielder
+ManaCost:2 W
+Types:Creature Dwarf Knight
+PT:2/3
+K:First Strike
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | CheckSVar$ Celebration | SVarCompare$ GE2 | Description$ Celebration — CARDNAME has double strike as long as two or more nonland permanents entered the battlefield under your control this turn.
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+Oracle:First strike\nCelebration — Gallant Pie-Wielder has double strike as long as two or more nonland permanents entered the battlefield under your control this turn.

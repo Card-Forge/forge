@@ -3,7 +3,7 @@ ManaCost:1 W B
 Types:Legendary Enchantment Creature God
 PT:5/4
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and black is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to white and black is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.White.Black
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouOwn+Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever another creature you own dies, return it to your hand unless target opponent pays 3 life.
 SVar:TrigReturn:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBReturn

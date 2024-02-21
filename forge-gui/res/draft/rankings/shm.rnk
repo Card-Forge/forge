@@ -1,0 +1,282 @@
+//Rank|Name|Rarity|Set
+#1|Oona, Queen of the Fae|R|SHM
+#2|Oversoul of Dusk|R|SHM
+#3|Grim Poppet|R|SHM
+#4|Demigod of Revenge|R|SHM
+#5|Godhead of Awe|R|SHM
+#6|Twilight Shepherd|R|SHM
+#7|Wilt Leaf Liege|R|SHM
+#8|Boartusk Liege|R|SHM
+#9|Incremental Blight|U|SHM
+#10|Furystoke Giant|R|SHM
+#11|Firespout|U|SHM
+#12|Deus of Calamity|R|SHM
+#13|Thistledown Liege|R|SHM
+#14|Swans of Bryn Argoll|R|SHM
+#15|Ghastlord of Fugue|R|SHM
+#16|Glen Elendra Liege|R|SHM
+#17|Flame Javelin|U|SHM
+#18|Ashenmoor Liege|R|SHM
+#19|Murderous Redcap|U|SHM
+#20|Midnight Banshee|R|SHM
+#21|Kitchen Finks|U|SHM
+#22|Kulrath Knight|U|SHM
+#23|Knollspine Invocation|R|SHM
+#24|Valleymaker|R|SHM
+#25|Heartmender|R|SHM
+#26|Biting Tether|U|SHM
+#27|Prison Term|U|SHM
+#28|Puppeteer Clique|R|SHM
+#29|Boggart Ram Gang|U|SHM
+#30|Jaws of Stone|U|SHM
+#31|Windbrisk Raptor|R|SHM
+#32|Mirrorweave|R|SHM
+#33|Silkbind Faerie|C|SHM
+#34|Knollspine Dragon|R|SHM
+#35|Spectral Procession|U|SHM
+#36|Wilt Leaf Cavaliers|U|SHM
+#37|Trip Noose|U|SHM
+#38|Oracle of Nectars|R|SHM
+#39|Mass Calcify|R|SHM
+#40|Rhys the Redeemed|R|SHM
+#41|Wort, the Raidmother|R|SHM
+#42|Augury Adept|R|SHM
+#43|Ashenmoor Gouger|U|SHM
+#44|Dusk Urchins|R|SHM
+#45|Burn Trail|C|SHM
+#46|Leech Bonder|U|SHM
+#47|Wasp Lancer|U|SHM
+#48|Rosheen Meanderer|R|SHM
+#49|Plumeveil|U|SHM
+#50|Order of Whiteclay|R|SHM
+#51|Knacksaw Clique|R|SHM
+#52|Sygg, River Cutthroat|R|SHM
+#53|Corrupt|U|SHM
+#54|Spawnwrithe|R|SHM
+#55|Mistmeadow Witch|U|SHM
+#56|River Kelpie|R|SHM
+#57|Armored Ascension|U|SHM
+#58|Grief Tyrant|U|SHM
+#59|Power of Fire|C|SHM
+#60|Glamer Spinners|U|SHM
+#61|Inkfathom Infiltrator|U|SHM
+#62|Seedcradle Witch|U|SHM
+#63|Curse of Chains|C|SHM
+#64|Puncture Bolt|C|SHM
+#65|Tower Above|U|SHM
+#66|Cragganwick Cremator|R|SHM
+#67|Din of the Fireherd|R|SHM
+#68|Scuttlemutt|C|SHM
+#69|Puresight Merrow|U|SHM
+#70|Elemental Mastery|R|SHM
+#71|Gloomlance|C|SHM
+#72|Ballynock Cohort|C|SHM
+#73|Witherscale Wurm|R|SHM
+#74|Torrent of Souls|U|SHM
+#75|Aethertow|C|SHM
+#76|Woodfall Primus|R|SHM
+#77|Lurebound Scarecrow|U|SHM
+#78|Wicker Warcrawler|U|SHM
+#79|Scuzzback Marauders|C|SHM
+#80|Tatterkite|U|SHM
+#81|Safehold Elite|C|SHM
+#82|River's Grasp|U|SHM
+#83|Cultbrand Cinder|C|SHM
+#84|Isleback Spawn|R|SHM
+#85|Gloomwidow|U|SHM
+#86|Steel of the Godhead|C|SHM
+#87|Tattermunge Maniac|U|SHM
+#88|Tattermunge Duo|C|SHM
+#89|Thistledown Duo|C|SHM
+#90|Faerie Swarm|U|SHM
+#91|Mistmeadow Skulk|U|SHM
+#92|Mercy Killing|U|SHM
+#93|Inkfathom Witch|U|SHM
+#94|Cemetery Puca|R|SHM
+#95|Briarberry Cohort|C|SHM
+#96|Mossbridge Troll|R|SHM
+#97|Repel Intruders|U|SHM
+#98|Tattermunge Witch|U|SHM
+#99|Scar|C|SHM
+#100|Howl of the Night Pack|U|SHM
+#101|Reaper King|R|SHM
+#102|Vexing Shusher|R|SHM
+#103|Barkshell Blessing|C|SHM
+#104|Shield of the Oversoul|C|SHM
+#105|Painter's Servant|R|SHM
+#106|Turn to Mist|C|SHM
+#107|Rage Reflection|R|SHM
+#108|Bloodmark Mentor|U|SHM
+#109|Farhaven Elf|C|SHM
+#110|Somnomancer|C|SHM
+#111|Devoted Druid|C|SHM
+#112|Hungry Spriggan|C|SHM
+#113|Consign to Dream|C|SHM
+#114|Wildslayer Elves|C|SHM
+#115|Barrenton Cragtreads|C|SHM
+#116|Medicine Runner|C|SHM
+#117|Mudbrawler Raiders|C|SHM
+#118|Sootwalkers|C|SHM
+#119|Safehold Duo|C|SHM
+#120|Giantbaiting|C|SHM
+#121|Raven's Run Dragoon|C|SHM
+#122|Elsewhere Flask|C|SHM
+#123|Fulminator Mage|R|SHM
+#124|Morselhoarder|C|SHM
+#125|Safehold Sentry|C|SHM
+#126|Crabapple Cohort|C|SHM
+#127|Spiteflame Witch|U|SHM
+#128|Rune Cervin Rider|C|SHM
+#129|Wanderbrine Rootcutters|C|SHM
+#130|Faerie Macabre|C|SHM
+#131|Reflecting Pool|R|SHM
+#132|Last Breath|C|SHM
+#133|Corrosive Mentor|U|SHM
+#134|Gnarled Effigy|U|SHM
+#135|Beseech the Queen|U|SHM
+#136|Sickle Ripper|C|SHM
+#137|Inquisitor's Snare|C|SHM
+#138|Roughshod Mentor|U|SHM
+#139|Horde of Boggarts|U|SHM
+#140|Pili Pala|C|SHM
+#141|Fire Lit Thicket|R|SHM
+#142|Manamorphose|C|SHM
+#143|Drove of Elves|U|SHM
+#144|Watchwing Scarecrow|C|SHM
+#145|Rustrazor Butcher|C|SHM
+#146|Gravelgill Duo|C|SHM
+#147|Gravelgill Axeshark|C|SHM
+#148|Mudbrawler Cohort|C|SHM
+#149|Merrow Wavebreakers|C|SHM
+#150|Crowd of Cinders|U|SHM
+#151|Old Ghastbark|C|SHM
+#152|Thoughtweft Gambit|U|SHM
+#153|Kithkin Rabble|U|SHM
+#154|Wooded Bastion|R|SHM
+#155|Runes of the Deus|C|SHM
+#156|Mystic Gate|R|SHM
+#157|Dire Undercurrents|R|SHM
+#158|Oona's Gatewarden|C|SHM
+#159|Kinscaer Harpoonist|C|SHM
+#160|Blowfly Infestation|U|SHM
+#161|Elvish Hexhunter|C|SHM
+#162|Presence of Gond|C|SHM
+#163|Juvenile Gloomwidow|C|SHM
+#164|Graven Cairns|R|SHM
+#165|Merrow Grimeblotter|U|SHM
+#166|Sunken Ruins|R|SHM
+#167|Scarscale Ritual|C|SHM
+#168|Torpor Dust|C|SHM
+#169|Wingrattle Scarecrow|C|SHM
+#170|Boggart Arsonists|C|SHM
+#171|Fate Transfer|C|SHM
+#172|Flow of Ideas|U|SHM
+#173|Intimidator Initiate|C|SHM
+#174|Slinking Giant|U|SHM
+#175|Sootstoke Kindler|C|SHM
+#176|Hollowborn Barghest|R|SHM
+#177|Scuzzback Scrapper|C|SHM
+#178|Ghastly Discovery|C|SHM
+#179|Illuminated Folio|U|SHM
+#180|Ember Gale|C|SHM
+#181|Safewright Quest|C|SHM
+#182|Emberstrike Duo|C|SHM
+#183|Niveous Wisps|C|SHM
+#184|Flourishing Defenses|U|SHM
+#185|Manaforge Cinder|C|SHM
+#186|Prismwake Merrow|C|SHM
+#187|Fists of the Demigod|C|SHM
+#188|Scrapbasket|C|SHM
+#189|Umbral Mantle|U|SHM
+#190|Parapet Watchers|C|SHM
+#191|Chainbreaker|C|SHM
+#192|Helm of the Ghastlord|C|SHM
+#193|Gloomwidow's Feast|C|SHM
+#194|Pyre Charger|U|SHM
+#195|Cauldron of Souls|R|SHM
+#196|Traitor's Roar|C|SHM
+#197|Lockjaw Snapper|U|SHM
+#198|Puca's Mischief|R|SHM
+#199|Advice from the Fae|U|SHM
+#200|Torture|C|SHM
+#201|Loamdragger Giant|C|SHM
+#202|Zealous Guardian|C|SHM
+#203|Resplendent Mentor|U|SHM
+#204|Cinderbones|C|SHM
+#205|Cerulean Wisps|C|SHM
+#206|Foxfire Oak|C|SHM
+#207|Kithkin Shielddare|C|SHM
+#208|Leechridden Swamp|U|SHM
+#209|Viridescent Wisps|C|SHM
+#210|Spiteful Visions|R|SHM
+#211|Reknit|U|SHM
+#212|Memory Plunder|R|SHM
+#213|Nurturer Initiate|C|SHM
+#214|Blight Sickle|C|SHM
+#215|Gleeful Sabotage|C|SHM
+#216|Smash to Smithereens|C|SHM
+#217|Deepchannel Mentor|U|SHM
+#218|Everlasting Torment|R|SHM
+#219|Barrenton Medic|C|SHM
+#220|Blazethorn Scarecrow|C|SHM
+#221|Whimwader|C|SHM
+#222|Thornwatch Scarecrow|C|SHM
+#223|Drowner Initiate|C|SHM
+#224|Runed Halo|R|SHM
+#225|Dawnglow Infusion|U|SHM
+#226|Cinderhaze Wretch|C|SHM
+#227|Crimson Wisps|C|SHM
+#228|Memory Sluice|C|SHM
+#229|Woeleecher|C|SHM
+#230|Aphotic Wisps|C|SHM
+#231|Rattleblaze Scarecrow|C|SHM
+#232|Smolder Initiate|C|SHM
+#233|Raking Canopy|U|SHM
+#234|Fracturing Gust|R|SHM
+#235|Cursecatcher|U|SHM
+#236|Poison the Well|C|SHM
+#237|Tyrannize|R|SHM
+#238|Loch Korrigan|C|SHM
+#239|Blistering Dieflyn|C|SHM
+#240|Spell Syphon|C|SHM
+#241|Put Away|C|SHM
+#242|Sinking Feeling|C|SHM
+#243|Pale Wayfarer|U|SHM
+#244|Prismatic Omen|R|SHM
+#245|Sapseep Forest|U|SHM
+#246|Hollowsage|U|SHM
+#247|Disturbing Plot|C|SHM
+#248|Impromptu Raid|R|SHM
+#249|Rite of Consumption|C|SHM
+#250|Ashenmoor Cohort|C|SHM
+#251|Splitting Headache|C|SHM
+#252|Inescapable Brute|C|SHM
+#253|Apothecary Initiate|C|SHM
+#254|Guttural Response|U|SHM
+#255|Savor the Moment|R|SHM
+#256|Strip Bare|C|SHM
+#257|Mine Excavation|C|SHM
+#258|Goldenglow Moth|C|SHM
+#259|Revelsong Horn|U|SHM
+#260|Fossil Find|U|SHM
+#261|Deep Slumber Titan|R|SHM
+#262|Bloodshed Fever|C|SHM
+#263|Toil to Renown|C|SHM
+#264|Dramatic Entrance|R|SHM
+#265|Wild Swing|U|SHM
+#266|Worldpurge|R|SHM
+#267|Heap Doll|U|SHM
+#268|Enchanted Evening|R|SHM
+#269|Polluted Bonds|R|SHM
+#270|Thought Reflection|R|SHM
+#271|Wheel of Sun and Moon|R|SHM
+#272|Greater Auramancy|R|SHM
+#273|Counterbore|R|SHM
+#274|Moonring Island|U|SHM
+#275|Mistveil Plains|U|SHM
+#276|Wound Reflection|R|SHM
+#277|Dream Salvage|U|SHM
+#278|Mana Reflection|R|SHM
+#279|Madblind Mountain|U|SHM
+#280|Plague of Vermin|R|SHM
+#281|Boon Reflection|R|SHM

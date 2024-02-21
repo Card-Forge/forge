@@ -7,7 +7,7 @@ ScryfallCode=PAVR
 
 [cards]
 32★ R Restoration Angel @Wesley Burt
-*36 R Silverblade Paladin @Todd Lockwood
+36★ R Silverblade Paladin @Todd Lockwood
 63 U Latch Seeker @Eytan Zana
 111 R Killing Wave @Michael Komarck
 217★ R Moonsilver Spear @Nic Klein

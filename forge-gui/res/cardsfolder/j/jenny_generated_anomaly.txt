@@ -1,0 +1,9 @@
+Name:Jenny, Generated Anomaly
+ManaCost:2 R W
+Types:Legendary Creature Time Lord Soldier
+PT:2/3
+K:Double Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExplore | TriggerZones$ Battlefield | TriggerController$ TriggeredSourceController | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
+SVar:TrigExplore:DB$ Explore
+DeckHas:Ability$Counters
+Oracle:Double strike\nWhenever Jenny deals combat damage to a player, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

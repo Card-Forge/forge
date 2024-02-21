@@ -1,0 +1,9 @@
+Name:Curse of the Werefox
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberTokens$ True | SubAbility$ DBImmediateTrigger | SpellDescription$ Create a Monster Role token attached to target creature you control. When you do, that creature fights up to one target creature you don't control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample. Creatures that fight each deal damage equal to their power to the other.)
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ Targeted | Execute$ TrigFight | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, that creature fights up to one target creature you don't control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample. Creatures that fight each deal damage equal to their power to the other.)
+SVar:TrigFight:DB$ Fight | Defined$ DelayTriggerRemembered | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Create a Monster Role token attached to target creature you control. When you do, that creature fights up to one target creature you don't control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample. Creatures that fight each deal damage equal to their power to the other.)

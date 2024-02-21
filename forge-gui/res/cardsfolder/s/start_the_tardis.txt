@@ -1,0 +1,9 @@
+Name:Start the TARDIS
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw a card. You may planeswalk. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBDraw:DB$ Draw | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk | Optional$ True
+K:Jump-start
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Surveil 2, then draw a card. You may planeswalk. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

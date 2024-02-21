@@ -1,0 +1,369 @@
+//Rank|Name|Rarity|Set
+#1|Sibilant Spirit|R|ICE
+#2|Karplusan Yeti|R|ICE
+#3|Skeleton Ship|R|ICE
+#4|Kjeldoran Phalanx|R|ICE
+#5|Jokulhaups|R|ICE
+#6|Fiery Justice|R|ICE
+#7|Lhurgoyf|R|ICE
+#8|Wrath of Marit Lage|R|ICE
+#9|Stormbind|R|ICE
+#10|Chaos Moon|R|ICE
+#11|Formation|R|ICE
+#12|Swords to Plowshares|U|ICE
+#13|Marton Stromgald|R|ICE
+#14|Johtull Wurm|U|ICE
+#15|Time Bomb|R|ICE
+#16|Minion of Leshrac|R|ICE
+#17|Mudslide|R|ICE
+#18|Fire Covenant|U|ICE
+#19|Stampede|R|ICE
+#20|Hurricane|U|ICE
+#21|Shambling Strider|C|ICE
+#22|Infernal Denizen|R|ICE
+#23|Balduvian Hydra|R|ICE
+#24|Kjeldoran Knight|R|ICE
+#25|Pale Bears|R|ICE
+#26|Ashen Ghoul|U|ICE
+#27|Underground River|R|ICE
+#28|Jester's Cap|R|ICE
+#29|Yavimaya Gnats|U|ICE
+#30|Abyssal Specter|U|ICE
+#31|Wiitigo|R|ICE
+#32|Pyroclasm|U|ICE
+#33|General Jarkeld|R|ICE
+#34|Icy Manipulator|U|ICE
+#35|Ritual of Subdual|R|ICE
+#36|Lava Tubes|R|ICE
+#37|Stunted Growth|R|ICE
+#38|Dark Banishing|C|ICE
+#39|Incinerate|C|ICE
+#40|Kjeldoran Royal Guard|R|ICE
+#41|Flooded Woodlands|R|ICE
+#42|Forbidden Lore|R|ICE
+#43|Seraph|R|ICE
+#44|Lightning Blow|R|ICE
+#45|Stromgald Cabal|R|ICE
+#46|Illusions of Grandeur|R|ICE
+#47|Phantasmal Mount|U|ICE
+#48|Shyft|R|ICE
+#49|Krovikan Vampire|U|ICE
+#50|Merieke Ri Berit|R|ICE
+#51|Storm Spirit|R|ICE
+#52|Lava Burst|C|ICE
+#53|Veldt|R|ICE
+#54|Binding Grasp|U|ICE
+#55|Nature's Lore|U|ICE
+#56|Soldevi Golem|R|ICE
+#57|Dread Wight|R|ICE
+#58|Hyalopterous Lemure|U|ICE
+#59|Zuran Spellcaster|C|ICE
+#60|Wind Spirit|U|ICE
+#61|Kjeldoran Elite Guard|U|ICE
+#62|Fyndhorn Elves|C|ICE
+#63|Ice Floe|U|ICE
+#64|Soldevi Simulacrum|U|ICE
+#65|Hymn of Rebirth|U|ICE
+#66|Mind Whip|R|ICE
+#67|Illusionary Forces|C|ICE
+#68|Polar Kraken|R|ICE
+#69|Folk of the Pines|C|ICE
+#70|Elkin Bottle|R|ICE
+#71|Deflection|R|ICE
+#72|Skull Catapult|U|ICE
+#73|Adarkar Sentinel|U|ICE
+#74|Blinking Spirit|R|ICE
+#75|Order of the White Shield|U|ICE
+#76|Staff of the Ages|R|ICE
+#77|Elder Druid|R|ICE
+#78|Scaled Wurm|C|ICE
+#79|Goblin Mutant|U|ICE
+#80|Hoar Shade|C|ICE
+#81|Call to Arms|R|ICE
+#82|Fumarole|U|ICE
+#83|Enduring Renewal|R|ICE
+#84|Karplusan Forest|R|ICE
+#85|Pygmy Allosaurus|R|ICE
+#86|Caribou Range|R|ICE
+#87|Kjeldoran Frostbeast|U|ICE
+#88|Ray of Command|C|ICE
+#89|Dance of the Dead|U|ICE
+#90|Knight of Stromgald|U|ICE
+#91|Counterspell|C|ICE
+#92|Vexing Arcanix|R|ICE
+#93|Orcish Cannoneers|U|ICE
+#94|Curse of Marit Lage|R|ICE
+#95|Gangrenous Zombies|C|ICE
+#96|Meteor Shower|C|ICE
+#97|Soul Burn|C|ICE
+#98|Minion of Tevesh Szat|R|ICE
+#99|Balduvian Bears|C|ICE
+#100|Celestial Sword|R|ICE
+#101|Stone Spirit|U|ICE
+#102|Zur's Weirding|R|ICE
+#103|Pit Trap|U|ICE
+#104|Woolly Mammoths|C|ICE
+#105|Centaur Archer|U|ICE
+#106|Tor Giant|C|ICE
+#107|Sabretooth Tiger|C|ICE
+#108|Goblin Lyre|R|ICE
+#109|Fyndhorn Elder|U|ICE
+#110|Brainstorm|C|ICE
+#111|Spoils of War|R|ICE
+#112|Walking Wall|U|ICE
+#113|Dark Ritual|C|ICE
+#114|Balduvian Barbarians|C|ICE
+#115|Norritt|C|ICE
+#116|Silver Erne|U|ICE
+#117|Barbed Sextant|C|ICE
+#118|Giant Trap Door Spider|U|ICE
+#119|Wings of Aesthir|U|ICE
+#120|Lim-Dul's Cohort|C|ICE
+#121|Melee|U|ICE
+#122|Baton of Morale|U|ICE
+#123|Thunder Wall|U|ICE
+#124|Pox|R|ICE
+#125|Necropotence|R|ICE
+#126|Moor Fiend|C|ICE
+#127|Mountain Titan|R|ICE
+#128|Timberline Ridge|R|ICE
+#129|Woolly Spider|C|ICE
+#130|Kjeldoran Dead|C|ICE
+#131|Wall of Pine Needles|U|ICE
+#132|Foul Familiar|C|ICE
+#133|Pentagram of the Ages|R|ICE
+#134|Vibrating Sphere|R|ICE
+#135|Adarkar Wastes|R|ICE
+#136|Halls of Mist|R|ICE
+#137|Power Sink|C|ICE
+#138|Krovikan Sorcerer|C|ICE
+#139|Infernal Darkness|R|ICE
+#140|Dreams of the Dead|U|ICE
+#141|Demonic Consultation|U|ICE
+#142|Flame Spirit|U|ICE
+#143|Fanatical Fever|U|ICE
+#144|Dwarven Armory|R|ICE
+#145|Giant Growth|C|ICE
+#146|Mind Warp|U|ICE
+#147|Sea Spirit|U|ICE
+#148|Vertigo|U|ICE
+#149|Wall of Lava|U|ICE
+#150|Jester's Mask|R|ICE
+#151|Legions of Lim-Dul|C|ICE
+#152|Flare|C|ICE
+#153|Oath of Lim-Dul|R|ICE
+#154|Diabolic Vision|U|ICE
+#155|Sulfurous Springs|R|ICE
+#156|Fyndhorn Pollen|R|ICE
+#157|Magus of the Unseen|R|ICE
+#158|Lost Order of Jarkeld|R|ICE
+#159|Bone Shaman|C|ICE
+#160|Gravebind|R|ICE
+#161|Lim-Dul's Hex|U|ICE
+#162|Hipparion|U|ICE
+#163|Juniper Order Druid|C|ICE
+#164|Aurochs|C|ICE
+#165|Ice Cauldron|R|ICE
+#166|Mind Ravel|C|ICE
+#167|Dire Wolves|C|ICE
+#168|Orcish Farmer|C|ICE
+#169|Drought|U|ICE
+#170|Freyalise's Charm|U|ICE
+#171|Wild Growth|C|ICE
+#172|Essence Vortex|U|ICE
+#173|Stone Rain|C|ICE
+#174|Total War|R|ICE
+#175|Mountain Goat|C|ICE
+#176|Lure|U|ICE
+#177|Icy Prison|R|ICE
+#178|Whalebone Glider|U|ICE
+#179|Grizzled Wolverine|C|ICE
+#180|Wall of Shields|U|ICE
+#181|Order of the Sacred Torch|R|ICE
+#182|Spoils of Evil|R|ICE
+#183|Gorilla Pack|C|ICE
+#184|Zuran Orb|U|ICE
+#185|Mercenaries|R|ICE
+#186|Illusionary Presence|R|ICE
+#187|Pyknite|C|ICE
+#188|Portent|C|ICE
+#189|Balduvian Conjurer|U|ICE
+#190|Orcish Squatters|R|ICE
+#191|Urza's Bauble|U|ICE
+#192|Brine Shaman|C|ICE
+#193|Altar of Bone|R|ICE
+#194|Infuse|C|ICE
+#195|Brand of Ill Omen|R|ICE
+#196|Krovikan Fetish|C|ICE
+#197|Snow-Covered Swamp|U|ICE
+#198|Freyalise Supplicant|U|ICE
+#199|Chub Toad|C|ICE
+#200|Essence Flare|C|ICE
+#201|Iceberg|U|ICE
+#202|Kjeldoran Warrior|C|ICE
+#203|Tinder Wall|C|ICE
+#204|Brushland|R|ICE
+#205|War Chariot|U|ICE
+#206|Karplusan Giant|U|ICE
+#207|Glaciers|R|ICE
+#208|Icequake|U|ICE
+#209|Monsoon|R|ICE
+#210|Orcish Healer|U|ICE
+#211|Hecatomb|R|ICE
+#212|Cold Snap|U|ICE
+#213|Zuran Enchanter|C|ICE
+#214|Soul Kiss|C|ICE
+#215|Battle Cry|U|ICE
+#216|Reclamation|R|ICE
+#217|Enervate|C|ICE
+#218|Thermokarst|U|ICE
+#219|Earthlink|R|ICE
+#220|Kjeldoran Skyknight|C|ICE
+#221|Mesmeric Trance|R|ICE
+#222|Glacial Wall|U|ICE
+#223|Howl from Beyond|C|ICE
+#224|Pestilence Rats|C|ICE
+#225|Snow Fortress|R|ICE
+#226|Anarchy|U|ICE
+#227|Panic|C|ICE
+#228|Crown of the Ages|R|ICE
+#229|Chaos Lord|R|ICE
+#230|Winter's Chill|R|ICE
+#231|Word of Undoing|C|ICE
+#232|Kjeldoran Skycaptain|U|ICE
+#233|Mole Worms|U|ICE
+#234|Naked Singularity|R|ICE
+#235|Brown Ouphe|C|ICE
+#236|Touch of Death|C|ICE
+#237|Seizures|C|ICE
+#238|Maddening Wind|U|ICE
+#239|Shield of the Ages|U|ICE
+#240|Hydroblast|C|ICE
+#241|Regeneration|C|ICE
+#242|Jeweled Amulet|U|ICE
+#243|Goblin Snowman|U|ICE
+#244|Battle Frenzy|C|ICE
+#245|Snowblind|R|ICE
+#246|Circle of Protection: Black|C|ICE
+#247|Runed Arch|R|ICE
+#248|Mistfolk|C|ICE
+#249|Snow-Covered Island|U|ICE
+#250|Infinite Hourglass|R|ICE
+#251|Musician|R|ICE
+#252|Disenchant|C|ICE
+#253|Glacial Chasm|U|ICE
+#254|Flow of Maggots|R|ICE
+#255|Circle of Protection: Red|C|ICE
+#256|Clairvoyance|C|ICE
+#257|Soul Barrier|U|ICE
+#258|Stench of Evil|U|ICE
+#259|Elvish Healer|C|ICE
+#260|Pyroblast|C|ICE
+#261|Elemental Augury|R|ICE
+#262|Krovikan Elementalist|U|ICE
+#263|River Delta|R|ICE
+#264|Snow-Covered Mountain|U|ICE
+#265|Foxfire|C|ICE
+#266|Rime Dryad|C|ICE
+#267|Touch of Vitae|U|ICE
+#268|Orcish Librarian|R|ICE
+#269|Blizzard|R|ICE
+#270|Orcish Lumberjack|C|ICE
+#271|Orcish Conscripts|C|ICE
+#272|Circle of Protection: Blue|C|ICE
+#273|Ghostly Flame|R|ICE
+#274|Aggression|U|ICE
+#275|Goblin Sappers|C|ICE
+#276|Balduvian Shaman|C|ICE
+#277|Fear|C|ICE
+#278|Songs of the Damned|C|ICE
+#279|Shield Bearer|C|ICE
+#280|Hematite Talisman|U|ICE
+#281|Ray of Erasure|C|ICE
+#282|Reality Twist|R|ICE
+#283|Illusionary Wall|C|ICE
+#284|Hot Springs|R|ICE
+#285|Justice|U|ICE
+#286|Shatter|C|ICE
+#287|Errant Minion|C|ICE
+#288|Fyndhorn Brownie|C|ICE
+#289|Goblin Ski Patrol|C|ICE
+#290|Updraft|U|ICE
+#291|Mystic Remora|C|ICE
+#292|Burnt Offering|C|ICE
+#293|Adarkar Unicorn|C|ICE
+#294|Whiteout|U|ICE
+#295|Earthlore|C|ICE
+#296|Withering Wisps|U|ICE
+#297|Stonehands|C|ICE
+#298|Black Scarab|U|ICE
+#299|Arctic Foxes|C|ICE
+#300|Sleight of Mind|U|ICE
+#301|Conquer|U|ICE
+#302|Cloak of Confusion|C|ICE
+#303|Imposing Visage|C|ICE
+#304|Venomous Breath|U|ICE
+#305|Breath of Dreams|U|ICE
+#306|Barbarian Guides|C|ICE
+#307|Glacial Crevasses|R|ICE
+#308|Amulet of Quoz|R|ICE
+#309|Heal|C|ICE
+#310|Warning|C|ICE
+#311|Green Scarab|U|ICE
+#312|Sacred Boon|U|ICE
+#313|Aegis of the Meek|R|ICE
+#314|Drift of the Dead|U|ICE
+#315|Fyndhorn Bow|U|ICE
+#316|Force Void|U|ICE
+#317|Thoughtleech|U|ICE
+#318|Circle of Protection: Green|C|ICE
+#319|Snow Hound|U|ICE
+#320|Snow-Covered Forest|U|ICE
+#321|Prismatic Ward|C|ICE
+#322|Leshrac's Rite|U|ICE
+#323|Arcum's Weathervane|U|ICE
+#324|Arcum's Whistle|U|ICE
+#325|Arenson's Aura|C|ICE
+#326|Errantry|C|ICE
+#327|Kelsinko Ranger|C|ICE
+#328|Avalanche|U|ICE
+#329|Spectral Shield|U|ICE
+#330|Blessed Wine|C|ICE
+#331|Kjeldoran Guard|C|ICE
+#332|Leshrac's Sigil|U|ICE
+#333|Freyalise's Winds|R|ICE
+#334|Word of Blasting|U|ICE
+#335|Essence Filter|C|ICE
+#336|Armor of Faith|C|ICE
+#337|Snowfall|C|ICE
+#338|Arcum's Sleigh|U|ICE
+#339|Forgotten Lore|U|ICE
+#340|Sunstone|U|ICE
+#341|Chromatic Armor|R|ICE
+#342|Rally|C|ICE
+#343|Arnjlot's Ascent|C|ICE
+#344|Death Ward|C|ICE
+#345|Illusionary Terrain|U|ICE
+#346|Tarpan|C|ICE
+#347|Hallowed Ground|U|ICE
+#348|Trailblazer|R|ICE
+#349|Onyx Talisman|U|ICE
+#350|Despotic Scepter|R|ICE
+#351|Gaze of Pain|C|ICE
+#352|Cooperation|C|ICE
+#353|Red Scarab|U|ICE
+#354|Snow Devil|C|ICE
+#355|Blue Scarab|U|ICE
+#356|Melting|U|ICE
+#357|Circle of Protection: White|C|ICE
+#358|Energy Storm|R|ICE
+#359|Soldevi Machinist|U|ICE
+#360|Snow-Covered Plains|U|ICE
+#361|Fylgja|C|ICE
+#362|White Scarab|U|ICE
+#363|Mystic Might|R|ICE
+#364|Game of Chaos|R|ICE
+#365|Land Cap|R|ICE
+#366|Nacre Talisman|U|ICE
+#367|Malachite Talisman|U|ICE
+#368|Lapis Lazuli Talisman|U|ICE

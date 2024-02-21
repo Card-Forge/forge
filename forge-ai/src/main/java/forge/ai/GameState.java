@@ -79,8 +79,7 @@ public abstract class GameState {
     private final Map<Card, List<String>> cardToRememberedId = new HashMap<>();
     private final Map<Card, List<String>> cardToImprintedId = new HashMap<>();
     private final Map<Card, List<String>> cardToMergedCards = new HashMap<>();
-    private final Map<Card, String> cardToNamedCard = new HashMap<>();
-    private final Map<Card, String> cardToNamedCard2 = new HashMap<>();
+    private final Map<Card, List<String>> cardToNamedCard = new HashMap<>();
     private final Map<Card, String> cardToExiledWithId = new HashMap<>();
     private final Map<Card, Card> cardAttackMap = new HashMap<>();
 
@@ -293,6 +292,12 @@ public abstract class GameState {
             if (c.isRenowned()) {
                 newText.append("|Renowned");
             }
+            if (c.isSolved()) {
+                newText.append("|Solved");
+            }
+            if (c.isSuspected()) {
+                newText.append("|Suspected");
+            }
             if (c.isMonstrous()) {
                 newText.append("|Monstrous");
             }
@@ -304,6 +309,9 @@ public abstract class GameState {
                 newText.append("|FaceDown");
                 if (c.isManifested()) {
                     newText.append(":Manifested");
+                }
+                if (c.isCloaked()) {
+                    newText.append(":Cloaked");
                 }
             }
             if (c.getCurrentStateName().equals(CardStateName.Transformed)) {
@@ -342,9 +350,6 @@ public abstract class GameState {
             }
             if (!c.getNamedCard().isEmpty()) {
                 newText.append("|NamedCard:").append(c.getNamedCard());
-            }
-            if (!c.getNamedCard2().isEmpty()) {
-                newText.append("|NamedCard2:").append(c.getNamedCard2());
             }
 
             List<String> chosenCardIds = Lists.newArrayList();
@@ -405,7 +410,6 @@ public abstract class GameState {
             if (c.isForetoldThisTurn()) {
                 newText.append("|ForetoldThisTurn");
             }
-
         }
 
         if (zoneType == ZoneType.Battlefield || zoneType == ZoneType.Exile) {
@@ -1012,15 +1016,11 @@ public abstract class GameState {
         }
 
         // Named card
-        for (Entry<Card, String> entry : cardToNamedCard.entrySet()) {
+        for (Entry<Card, List<String>> entry : cardToNamedCard.entrySet()) {
             Card c = entry.getKey();
-            c.setNamedCard(entry.getValue());
-        }
-
-        // Named card 2
-        for (Entry<Card,String> entry : cardToNamedCard2.entrySet()) {
-            Card c = entry.getKey();
-            c.setNamedCard2(entry.getValue());
+            for (String s : entry.getValue()) {
+                c.addNamedCard(s);
+            }
         }
 
         // Chosen cards
@@ -1245,7 +1245,7 @@ public abstract class GameState {
                     System.err.println("ERROR: Tried to create a non-existent token named " + cardinfo[0] + " when loading game state!");
                     continue;
                 }
-                c = Card.fromPaperCard(token, player, player.getGame());
+                c = CardFactory.getCard(token, player, player.getGame());
             } else {
                 PaperCard pc = StaticData.instance().getCommonCards().getCard(cardinfo[0], setCode, artID);
                 if (pc == null) {
@@ -1262,9 +1262,13 @@ public abstract class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap(false);
+                    c.tap(false, null, null);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
+                } else if (info.startsWith("Solved")) {
+                    c.setSolved(true);
+                } else if (info.startsWith("Suspected")) {
+                    c.setSuspected(true);
                 } else if (info.startsWith("Monstrous")) {
                     c.setMonstrous(true);
                 } else if (info.startsWith("PhasedOut")) {
@@ -1278,6 +1282,9 @@ public abstract class GameState {
                     c.turnFaceDown(true);
                     if (info.endsWith("Manifested")) {
                         c.setManifested(true);
+                    }
+                    if (info.endsWith("Cloaked")) {
+                        c.setCloaked(true);
                     }
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);
@@ -1358,9 +1365,8 @@ public abstract class GameState {
                     List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
                     cardToMergedCards.put(c, cardNames);
                 } else if (info.startsWith("NamedCard:")) {
-                    cardToNamedCard.put(c, info.substring(info.indexOf(':') + 1));
-                } else if (info.startsWith("NamedCard2:")) {
-                    cardToNamedCard2.put(c, info.substring(info.indexOf(':') + 1));
+                    List<String> cardNames = Arrays.asList(info.substring(info.indexOf(':') + 1).split(","));
+                    cardToNamedCard.put(c, cardNames);
                 } else if (info.startsWith("ExecuteScript:")) {
                     cardToScript.put(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("RememberedCards:")) {
@@ -1383,7 +1389,7 @@ public abstract class GameState {
                     c.turnFaceDown(true);
                     c.addMayLookTemp(c.getOwner());
                 } else if (info.equals("ForetoldThisTurn")) {
-                    c.setForetoldThisTurn(true);
+                    c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
                     c.setToken(true);
                 }

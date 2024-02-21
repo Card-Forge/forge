@@ -1,0 +1,12 @@
+Name:Sentinel of Lost Lore
+ManaCost:1 G G
+Types:Creature Elf Knight
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBChangeZone,DBChangeZoneBis,DBExileGrave
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Card.AdventureCard+YouOwn | TgtPrompt$ Select target card you own in exile that has an Adventure | Origin$ Exile | Destination$ Hand | SpellDescription$ Return target card you own in exile that has an Adventure to your hand.
+SVar:DBChangeZoneBis:DB$ ChangeZone | ValidTgts$ Card.AdventureCard+YouDontOwn | TgtPrompt$ Select target card you don't own in exile that has an Adventure | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card you don't own in exile that has an Adventure on the bottom of its owner's library.
+SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Adventure
+Oracle:When Sentinel of Lost Lore enters the battlefield, choose one or more —\n• Return target card you own in exile that has an Adventure to your hand.\n• Put target card you don't own in exile that has an Adventure on the bottom of its owner's library.\n• Exile target player's graveyard.

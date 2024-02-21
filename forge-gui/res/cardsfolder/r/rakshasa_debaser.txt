@@ -1,6 +1,6 @@
 Name:Rakshasa Debaser
 ManaCost:4 B B
-Types:Creature Cat Demon
+Types:Creature Demon
 PT:6/6
 K:Encore:6 B B
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME attacks, put target creature card from defending player's graveyard onto the battlefield under your control.

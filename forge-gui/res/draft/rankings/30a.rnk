@@ -1,0 +1,308 @@
+//Rank|Name|Rarity|Set
+#1|Ancestral Recall|R|30A
+#2|Time Walk|R|30A
+#3|Demonic Tutor|U|30A
+#4|Black Lotus|R|30A
+#5|Balance|R|30A
+#6|Control Magic|U|30A
+#7|Timetwister|R|30A
+#8|Sol Ring 1|C|30A
+#9|Sol Ring 2|U|30A
+#10|Swords to Plowshares|U|30A
+#11|Wrath of God|R|30A
+#12|Animate Dead|U|30A
+#13|Mind Twist|R|30A
+#14|Manabarbs|R|30A
+#15|Channel|U|30A
+#16|Mox Emerald|R|30A
+#17|Mox Jet|R|30A
+#18|Mox Pearl|R|30A
+#19|Mox Ruby|R|30A
+#20|Mox Sapphire|R|30A
+#21|Serra Angel|U|30A
+#22|Counterspell|U|30A
+#23|Terror|C|30A
+#24|Lightning Bolt|C|30A
+#25|Regrowth|U|30A
+#26|Personal Incarnation|R|30A
+#27|Air Elemental|U|30A
+#28|Mahamoti Djinn|R|30A
+#29|Drain Life|C|30A
+#30|Pestilence|C|30A
+#31|Disintegrate|C|30A
+#32|Fireball|C|30A
+#33|Shivan Dragon|R|30A
+#34|Wheel of Fortune|R|30A
+#35|Howling Mine|R|30A
+#36|Meekstone|R|30A
+#37|Nevinyrral's Disk|R|30A
+#38|Northern Paladin|R|30A
+#39|White Knight|U|30A
+#40|Braingeyser|R|30A
+#41|Black Knight|U|30A
+#42|Hypnotic Specter|U|30A
+#43|Earthquake|R|30A
+#44|Birds of Paradise|R|30A
+#45|Prodigal Sorcerer|C|30A
+#46|Psionic Blast|U|30A
+#47|Sengir Vampire|U|30A
+#48|Phantom Monster|U|30A
+#49|Red Elemental Blast|C|30A
+#50|Roc of Kher Ridges|R|30A
+#51|Circle of Protection Red|C|30A
+#52|Savannah Lions|R|30A
+#53|Clone|U|30A
+#54|Royal Assassin|R|30A
+#55|Wild Growth|C|30A
+#56|Forcefield|R|30A
+#57|Mana Vault|R|30A
+#58|Island Sanctuary|R|30A
+#59|Karma|U|30A
+#60|Vesuvan Doppelganger|R|30A
+#61|Bad Moon|R|30A
+#62|Demonic Hordes|R|30A
+#63|Nightmare|R|30A
+#64|Berserk|U|30A
+#65|Llanowar Elves|C|30A
+#66|Tsunami|U|30A
+#67|Ankh of Mishra|R|30A
+#68|Disrupting Scepter|R|30A
+#69|Gauntlet of Might|R|30A
+#70|Badlands|R|30A
+#71|Bayou|R|30A
+#72|Plateau|R|30A
+#73|Savannah|R|30A
+#74|Scrubland|R|30A
+#75|Taiga|R|30A
+#76|Tropical Island|R|30A
+#77|Tundra|R|30A
+#78|Underground Sea|R|30A
+#79|Volcanic Island|R|30A
+#80|Badlands|R|30A
+#81|Bayou|R|30A
+#82|Plateau|R|30A
+#83|Savannah|R|30A
+#84|Scrubland|R|30A
+#85|Taiga|R|30A
+#86|Tropical Island|R|30A
+#87|Tundra|R|30A
+#88|Underground Sea|R|30A
+#89|Volcanic Island|R|30A
+#90|Circle of Protection Black|C|30A
+#91|Circle of Protection Green|C|30A
+#92|Circle of Protection White|C|30A
+#93|Pirate Ship|R|30A
+#94|Power Sink|C|30A
+#95|Sinkhole|C|30A
+#96|Dragon Whelp|U|30A
+#97|Force of Nature|R|30A
+#98|Ice Storm|U|30A
+#99|Clockwork Beast|R|30A
+#100|Two-Headed Giant of Foriys|R|30A
+#101|Unsummon|C|30A
+#102|Water Elemental|U|30A
+#103|Zombie Master|R|30A
+#104|Sedge Troll|R|30A
+#105|Stone Giant|U|30A
+#106|Stone Rain|C|30A
+#107|Cockatrice|R|30A
+#108|Elvish Archers|R|30A
+#109|Hurricane|U|30A
+#110|Armageddon|R|30A
+#111|Circle of Protection Blue|C|30A
+#112|Disenchant|C|30A
+#113|Red Ward|U|30A
+#114|Resurrection|U|30A
+#115|Veteran Bodyguard|R|30A
+#116|Lord of Atlantis|R|30A
+#117|Siren's Call|U|30A
+#118|Spell Blast|C|30A
+#119|Wall of Air|U|30A
+#120|Bog Wraith|U|30A
+#121|Dark Ritual|C|30A
+#122|Drudge Skeletons|C|30A
+#123|Paralyze|C|30A
+#124|Raise Dead|C|30A
+#125|Word of Command|R|30A
+#126|Earth Elemental|U|30A
+#127|Fire Elemental|U|30A
+#128|Goblin King|R|30A
+#129|Ironclaw Orcs|C|30A
+#130|Keldon Warlord|U|30A
+#131|Mana Flare|R|30A
+#132|Orcish Artillery|U|30A
+#133|Rock Hydra|R|30A
+#134|Uthden Troll|U|30A
+#135|Fastbond|R|30A
+#136|Giant Growth|C|30A
+#137|Giant Spider|C|30A
+#138|Grizzly Bears|C|30A
+#139|Thicket Basilisk|U|30A
+#140|Verduran Enchantress|R|30A
+#141|Wall of Brambles|U|30A
+#142|War Mammoth|C|30A
+#143|Basalt Monolith|U|30A
+#144|Chaos Orb|R|30A
+#145|Jayemdae Tome|R|30A
+#146|Juggernaut|U|30A
+#147|Obsianus Golem|U|30A
+#148|Winter Orb|R|30A
+#149|Death Ward|C|30A
+#150|Wall of Swords|U|30A
+#151|Lifetap|U|30A
+#152|Phantasmal Forces|U|30A
+#153|Sea Serpent|C|30A
+#154|Twiddle|C|30A
+#155|Volcanic Eruption|R|30A
+#156|Wall of Water|U|30A
+#157|Howl from Beyond|C|30A
+#158|Lord of the Pit|R|30A
+#159|Nettling Imp|U|30A
+#160|Simulacrum|U|30A
+#161|Wall of Bone|U|30A
+#162|Will-o'-the-Wisp|R|30A
+#163|Dwarven Warriors|C|30A
+#164|Firebreathing|C|30A
+#165|Goblin Balloon Brigade|U|30A
+#166|Granite Gargoyle|R|30A
+#167|Hill Giant|C|30A
+#168|Hurloon Minotaur|C|30A
+#169|Raging River|R|30A
+#170|Shatter|C|30A
+#171|Craw Wurm|C|30A
+#172|Ironroot Treefolk|C|30A
+#173|Ley Druid|U|30A
+#174|Lure|U|30A
+#175|Wall of Ice|U|30A
+#176|Jade Statue|U|30A
+#177|Kormus Bell|R|30A
+#178|Lance|U|30A
+#179|Mesa Pegasus|C|30A
+#180|Pearled Unicorn|C|30A
+#181|Righteousness|R|30A
+#182|Blue Elemental Blast|C|30A
+#183|Invisibility|C|30A
+#184|Steal Artifact|U|30A
+#185|Fear|C|30A
+#186|Frozen Shade|C|30A
+#187|Sacrifice|U|30A
+#188|Scathe Zombies|C|30A
+#189|Scavenging Ghoul|U|30A
+#190|Unholy Strength|C|30A
+#191|Warp Artifact|R|30A
+#192|Dwarven Demolition Team|U|30A
+#193|False Orders|C|30A
+#194|Fork|R|30A
+#195|Gray Ogre|C|30A
+#196|Mons's Goblin Raiders|C|30A
+#197|Orcish Oriflamme|U|30A
+#198|Fungusaur|R|30A
+#199|Instill Energy|U|30A
+#200|Lifeforce|U|30A
+#201|Scryb Sprites|C|30A
+#202|Shanodin Dryads|C|30A
+#203|Tranquility|C|30A
+#204|Living Wall|U|30A
+#205|Rod of Ruin|U|30A
+#206|Benalish Hero|C|30A
+#207|Black Ward|U|30A
+#208|Blessing|R|30A
+#209|Blue Ward|U|30A
+#210|Green Ward|U|30A
+#211|Guardian Angel|C|30A
+#212|Healing Salve|C|30A
+#213|Holy Strength|C|30A
+#214|Samite Healer|C|30A
+#215|White Ward|U|30A
+#216|Copy Artifact|R|30A
+#217|Creature Bond|C|30A
+#218|Flight|C|30A
+#219|Merfolk of the Pearl Trident|C|30A
+#220|Power Leak|C|30A
+#221|Stasis|R|30A
+#222|Cursed Land|U|30A
+#223|Deathgrip|U|30A
+#224|Evil Presence|U|30A
+#225|Gloom|U|30A
+#226|Lich|R|30A
+#227|Nether Shadow|R|30A
+#228|Flashfires|U|30A
+#229|Smoke|R|30A
+#230|Aspect of Wolf|R|30A
+#231|Fog|C|30A
+#232|Gaea's Liege|R|30A
+#233|Kudzu|R|30A
+#234|Regeneration|C|30A
+#235|Stream of Life|C|30A
+#236|Timber Wolves|R|30A
+#237|Wall of Wood|C|30A
+#238|Web|R|30A
+#239|Black Vise|U|30A
+#240|Copper Tablet|U|30A
+#241|The Hive|R|30A
+#242|Icy Manipulator|U|30A
+#243|Illusionary Mask|R|30A
+#244|Jade Monolith|R|30A
+#245|Library of Leng|U|30A
+#246|Blaze of Glory|R|30A
+#247|Animate Artifact|U|30A
+#248|Psychic Venom|C|30A
+#249|Deathlace|R|30A
+#250|Burrowing|U|30A
+#251|Wall of Fire|U|30A
+#252|Wall of Stone|U|30A
+#253|Animate Wall|R|30A
+#254|Castle|U|30A
+#255|Holy Armor|C|30A
+#256|Reverse Damage|R|30A
+#257|Drain Power|R|30A
+#258|Feedback|U|30A
+#259|Jump|C|30A
+#260|Sleight of Mind|R|30A
+#261|Thoughtlace|R|30A
+#262|Plague Rats|C|30A
+#263|Chaoslace|R|30A
+#264|Tunnel|U|30A
+#265|Lifelace|R|30A
+#266|Natural Selection|R|30A
+#267|Wanderlust|U|30A
+#268|Conservator|U|30A
+#269|Crystal Rod|U|30A
+#270|Iron Star|U|30A
+#271|Ivory Cup|U|30A
+#272|Soul Net|U|30A
+#273|Magical Hack|R|30A
+#274|Mana Short|R|30A
+#275|Phantasmal Terrain|C|30A
+#276|Camouflage|U|30A
+#277|Living Artifact|R|30A
+#278|Living Lands|R|30A
+#279|Celestial Prism|U|30A
+#280|Cyclopean Tomb|R|30A
+#281|Dingus Egg|R|30A
+#282|Glasses of Urza|U|30A
+#283|Helm of Chatzuk|R|30A
+#284|Throne of Bone|U|30A
+#285|Time Vault|R|30A
+#286|Wooden Sphere|U|30A
+#287|Purelace|R|30A
+#288|Power Surge|R|30A
+#289|Sunglasses of Urza|R|30A
+#290|Consecrate Land|U|30A
+#291|Conversion|U|30A
+#292|Farmstead|R|30A
+#293|Plains 1|C|30A
+#294|Plains 2|C|30A
+#295|Plains 3|C|30A
+#296|Island 1|C|30A
+#297|Island 2|C|30A
+#298|Island 3|C|30A
+#299|Swamp 1|C|30A
+#300|Swamp 2|C|30A
+#301|Swamp 3|C|30A
+#302|Mountain 1|C|30A
+#303|Mountain 2|C|30A
+#304|Mountain 3|C|30A
+#305|Forest 1|C|30A
+#306|Forest 2|C|30A
+#307|Forest 3|C|30A

@@ -1,0 +1,10 @@
+Name:Kaust, Eyes of the Glade
+ManaCost:RW G
+Types:Legendary Creature Dryad Detective
+PT:2/2
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+turnedFaceUpThisTurn | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control that was turned face up this turn deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ SetState | Cost$ T | ValidTgts$ Creature.faceDown+attacking+YouCtrl | TgtPrompt$ Select target face-down attacking creature you control | Mode$ TurnFaceUp | StackDescription$ Turn {c:Targeted} face up. | SpellDescription$ Turn target face-down attacking creature you control face up.
+AI:RemoveDeck:Random
+DeckHints:Keyword$Morph|Megamorph
+Oracle:Whenever a creature you control that was turned face up this turn deals combat damage to a player, draw a card.\n{T}: Turn target face-down attacking creature you control face up.

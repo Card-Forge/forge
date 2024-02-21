@@ -1,0 +1,395 @@
+[metadata]
+Code=LCC
+Date=2023-11-17
+Name=The Lost Caverns of Ixalan Commander
+Type=Commander
+ScryfallCode=LCC
+
+[cards]
+1 M Admiral Brass, Unsinkable @Jason Rainville
+2 M Clavileño, First of the Blessed @Matt Stewart
+3 M Hakbal of the Surging Soul @Tyler Walpole
+4 M Pantlaza, Sun-Favored @Sam Burley
+5 M Carmen, Cruel Skymarcher @Randy Vargas
+6 M Don Andres, the Renegade @Daarken
+7 M Wayta, Trainer Prodigy @Magali Villeneuve
+8 M Xolatoyac, the Smiling Flood @Campbell White
+9 R Illustrious Wanderglyph @Erikas Perl
+10 R Altar of the Wretched @Helge C. Balzer
+11 R Ore-Rich Stalactite @Tomek Larek
+12 R Contest of Claws @Cristi Balanescu
+13 R Tetzin, Gnome Champion @Kekai Kotaki
+14 R Xavier Sal, Infested Captain @Bryan Sola
+15 M Eye of Ojer Taq @Erikas Perl
+16 M Paleontologist's Pick-Axe @Ernanda Souza
+17 M Admiral Brass, Unsinkable @Michael Walsh
+18 M Clavileño, First of the Blessed @Chun Lo
+19 M Hakbal of the Surging Soul @Anditya Dita
+20 M Pantlaza, Sun-Favored @Sidharth Chaturvedi
+21 R Illustrious Wanderglyph @Erikas Perl
+22 R Altar of the Wretched @Helge C. Balzer
+23 R Ore-Rich Stalactite @Tomek Larek
+24 R Contest of Claws @Cristi Balanescu
+25 M Admiral Brass, Unsinkable @Jason Rainville
+26 M Carmen, Cruel Skymarcher @Randy Vargas
+27 M Clavileño, First of the Blessed @Matt Stewart
+28 M Don Andres, the Renegade @Daarken
+29 M Hakbal of the Surging Soul @Tyler Walpole
+30 M Pantlaza, Sun-Favored @Sam Burley
+31 R Tetzin, Gnome Champion @Kekai Kotaki
+32 M Wayta, Trainer Prodigy @Magali Villeneuve
+33 R Xavier Sal, Infested Captain @Bryan Sola
+34 M Xolatoyac, the Smiling Flood @Campbell White
+35 M Eye of Ojer Taq @Erikas Perl
+36 M Paleontologist's Pick-Axe @Ernanda Souza
+37 R Bronzebeak Foragers @Brian Valeza
+38 R Charismatic Conqueror @Bram Sels
+39 R Elenda's Hierophant @Miranda Meeks
+40 R From the Rubble @Ryan Valle
+41 R March of the Canonized @Dominik Mayer
+42 R Redemption Choir @Michele Giorgi
+43 R The Indomitable @Samuel Perin
+44 R Mist Dancer @Christina Kraus
+45 R Ripples of Potential @Sam Hogg
+46 R Storm Fleet Negotiator @Nino Vecia
+47 R Wave Goodbye @Sam Hogg
+48 R Dusk Legion Sergeant @Igor Kieryluk
+49 R Francisco, Fowl Marauder @Rudy Siswanto
+50 R The Grim Captain's Locker @Bruce Brenneise
+51 R Master of Dark Rites @Igor Kieryluk
+52 R Promise of Aclazotz @Lixin Yin
+53 R Skeleton Crew @Camille Alquier
+54 R Broadside Bombardiers @Tomek Larek
+55 R Gemcutter Buccaneer @Helge C. Balzer
+56 R Wrathful Raptors @April Prime
+57 R Bygone Marvels @Constantin Marin
+58 R Curious Altisaur @Simon Dominic
+59 R Deeproot Historian @Stella Spente
+60 R Dinosaur Egg @Alessandra Pisano
+61 R Scion of Calamity @Crystal Sully
+62 R Sunfrill Imitator @Brian Valeza
+63 R Topography Tracker @Lindsey Look
+64 R Tributary Instructor @Christina Kraus
+65 R Order of Sacred Dusk @Bartek Fedyczak
+66 R Singer of Swift Rivers @Gabor Szikszai
+67 R Arm-Mounted Anchor @Nino Vecia
+68 R Progenitor's Icon @Stella Spente
+69 R Bronzebeak Foragers @Brian Valeza
+70 R Charismatic Conqueror @Bram Sels
+71 R Elenda's Hierophant @Miranda Meeks
+72 R From the Rubble @Ryan Valle
+73 R March of the Canonized @Dominik Mayer
+74 R Redemption Choir @Michele Giorgi
+75 R The Indomitable @Samuel Perin
+76 R Mist Dancer @Christina Kraus
+77 R Ripples of Potential @Sam Hogg
+78 R Storm Fleet Negotiator @Nino Vecia
+79 R Wave Goodbye @Sam Hogg
+80 R Dusk Legion Sergeant @Igor Kieryluk
+81 R Francisco, Fowl Marauder @Rudy Siswanto
+82 R The Grim Captain's Locker @Bruce Brenneise
+83 R Master of Dark Rites @Igor Kieryluk
+84 R Promise of Aclazotz @Lixin Yin
+85 R Skeleton Crew @Camille Alquier
+86 R Broadside Bombardiers @Tomek Larek
+87 R Gemcutter Buccaneer @Helge C. Balzer
+88 R Wrathful Raptors @April Prime
+89 R Bygone Marvels @Constantin Marin
+90 R Curious Altisaur @Simon Dominic
+91 R Deeproot Historian @Stella Spente
+92 R Dinosaur Egg @Alessandra Pisano
+93 R Scion of Calamity @Crystal Sully
+94 R Sunfrill Imitator @Brian Valeza
+95 R Topography Tracker @Lindsey Look
+96 R Tributary Instructor @Christina Kraus
+97 R Order of Sacred Dusk @Bartek Fedyczak
+98 R Singer of Swift Rivers @Gabor Szikszai
+99 R Arm-Mounted Anchor @Nino Vecia
+100 R Progenitor's Icon @Stella Spente
+101 R Archaeomancer's Map @Jonas De Ro
+102 M Wedding Ring @J.P. Targete
+103 R Amulet of Vigor @Chris Seaman
+104 U Arcane Signet @J.P. Targete
+105 M Chalice of the Void @Julie Dillon
+106 M Chimil, the Inner Sun @Gaboleps
+107 M Chromatic Orrery @Gaboleps
+108 R Coat of Arms @Volkan Baǵa
+109 M Coercive Portal @Chris Ostrowski
+110 U Colossus Hammer @Julian Kok Joon Wen
+111 U Everflowing Chalice @Chris Seaman
+112 U Expedition Map @Julian Kok Joon Wen
+113 R Fist of Suns @J.P. Targete
+114 U Lightning Greaves @Chris Seaman
+115 R Mimic Vat @Chris Seaman
+116 R Strionic Resonator @Jonas De Ro
+117 R Temple Bell @Jonas De Ro
+118 U Thought Vessel @Julie Dillon
+119 U Whispersilk Cloak @Julian Kok Joon Wen
+120 U Worn Powerstone @Chris Ostrowski
+121 M Admiral Brass, Unsinkable @Jason Rainville
+122 M Clavileño, First of the Blessed @Matt Stewart
+123 M Hakbal of the Surging Soul @Tyler Walpole
+124 M Pantlaza, Sun-Favored @Sam Burley
+125 R Akroma's Will @Antonio José Manzanedo
+126 R Austere Command @Anna Steinbauer
+127 U Bellowing Aegisaur @Craig J Spearing
+128 C Generous Gift @Kev Walker
+129 R Kindred Boon @Carlos Palma Cruchaga
+130 R Kinjalli's Sunwing @Simon Dominic
+131 U Majestic Heliopterus @Filip Burburan
+132 C Martyr of Dusk @Greg Staples
+133 R Mavren Fein, Dusk Apostle @Daarken
+134 U Path to Exile @Todd Lockwood
+135 R Radiant Destiny @Emrah Elmasli
+136 U Return to Dust @Anato Finnstark
+137 U Swords to Plowshares @Jesper Ejsing
+138 R Temple Altisaur @Daarken
+139 R Wakening Sun's Avatar @Tyler Jacobson
+140 R Welcoming Vampire @Lorenzo Mastroianni
+141 R Zetalpa, Primal Dawn @Chris Rallis
+142 U Aetherize @Alexandre Honoré
+143 R Amphin Mutineer @Nicholas Gregory
+144 C Azure Fleet Admiral @Sidharth Chaturvedi
+145 R Benthic Biomancer @Daarken
+146 R Bident of Thassa @Yeong-Hao Han
+147 R Commit // Memory @Ryan Alexander Lee
+148 R Coralhelm Commander @Jaime Jones
+149 R Corsair Captain @Victor Adame Minguez
+150 R Curse of the Swine @James Ryman
+151 U Daring Saboteur @Victor Adame Minguez
+152 U Deeproot Waters @Zezhou Chen
+153 U Departed Deckhand @Zoltan Boros
+154 C Distant Melody @Sam Guay
+155 R Emperor Mihail II @PINDURSKI
+156 R Evacuation @Jason Rainville
+157 U Ghost of Ramirez DePietro @Grzegorz Rutkowski
+158 R Herald of Secret Streams @Sara Winters
+159 R Kindred Discovery @Lake Hurwitz
+160 R Kopala, Warden of Waves @Magali Villeneuve
+161 U Malcolm, Keen-Eyed Navigator @Eric Deschamps
+162 R Master of the Pearl Trident @Ryan Pancoast
+163 U Merchant Raiders @Deruchenko Alexander
+164 R Merfolk Sovereign @Marta Nael
+165 U Merrow Reejerey @Greg Staples
+166 U Rapid Hybridization @Jack Wang
+167 C Ravenform @Anna Steinbauer
+168 R Reflections of Littjara @Aaron Miller
+169 U Sage of Fables @Julia Metzger
+170 R Seafloor Oracle @Simon Dominic
+171 U Siren Stormtamer @Josu Hernaiz
+172 U Spectral Sailor @Cristi Balanescu
+173 C Stonybrook Banneret @Ernanda Souza
+174 R Surgespanner @Warren Mahy
+175 M Svyelun of Sea and Sky @Seb McKinnon
+176 M Thassa, God of the Sea @Jason Chan
+177 R Thieving Skydiver @Kieran Yanner
+178 M Timestream Navigator @Zezhou Chen
+179 R Warkite Marauder @Victor Adame Minguez
+180 U Windfall @Scott Murphy
+181 R Black Market Connections @Lixin Yin
+182 U Blood Artist @LA Draws
+183 M Blood Money @Inka Schulz
+184 R Bloodghast @Lixin Yin
+185 U Bloodline Necromancer @J.P. Targete
+186 R Bloodtracker @Magali Villeneuve
+187 R Butcher of Malakir @Jason Chan
+188 R Champion of Dusk @Josh Hass
+189 R Cordial Vampire @Winona Nelson
+190 R Crossway Troublemakers @Aaron J. Riley
+191 R Damn @Lucas Graciano
+192 M Dire Fleet Ravager @Bram Sels
+193 M Drana, Liberator of Malakir @Mike Bierek
+194 C Dusk Legion Zealot @Winona Nelson
+195 R Exquisite Blood @Cynthia Sheppard
+196 U Falkenrath Noble @Slawomir Maniak
+197 R Fathom Fleet Captain @Matt Stewart
+198 C Feed the Swarm @Andrey Kuzinskiy
+199 R Glass-Cast Heart @Alayna Danner
+200 U Indulgent Aristocrat @Anna Steinbauer
+201 R Lethal Scheme @Tuan Duong Chu
+202 R New Blood @Howard Lyon
+203 R Nighthawk Scavenger @Heonhwa Choe
+204 U Oathsworn Vampire @Greg Opalinski
+205 R Olivia's Wrath @Nestor Ossandon Leal
+206 R Pact of the Serpent @Donato Giancola
+207 R Patron of the Vein @Tommy Arnold
+208 U Pitiless Plunderer @David Palumbo
+209 R Sanctum Seeker @Volkan Baǵa
+210 M Timothar, Baron of Bats @Jason A. Engle
+211 M Twilight Prophet @Seb McKinnon
+212 C Village Rites @Igor Kieryluk
+213 C Viscera Seer @John Stanko
+214 U Yahenni, Undying Partisan @Lius Lasahido
+215 R Angrath's Marauders @Victor Adame Minguez
+216 R Blasphemous Act @Daarken
+217 U Breeches, Brazen Plunderer @Svetlin Velinov
+218 R Captain Lannery Storm @Chris Rallis
+219 R Captivating Crew @Winona Nelson
+220 R Chandra's Ignition @Eric Deschamps
+221 R Chaos Warp @Trevor Claxton
+222 R Coercive Recruiter @Randy Vargas
+223 R Dire Fleet Daredevil @Zoltan Boros
+224 R Etali, Primal Storm @Raymond Swanland
+225 C Faithless Looting @Karl Kopinski
+226 R Fiery Confluence @Kieran Yanner
+227 R Kari Zev, Skyship Raider @Brad Rigney
+228 R Marauding Raptor @Bayard Wu
+229 U Otepec Huntmaster @Daarken
+230 M Port Razer @Craig J Spearing
+231 R Shared Animosity @Chuck Lukacs
+232 R Apex Altisaur @Simon Dominic
+233 U Beast Within @Jesper Ejsing
+234 R Branching Evolution @Lucas Graciano
+235 C Cultivate @Justyna Dura
+236 R Deathgorge Scavenger @Tyler Jacobson
+237 R Deeproot Elite @Winona Nelson
+238 R Descendants' Path @Carlos Palma Cruchaga
+239 U Drover of the Mighty @Eric Deschamps
+240 U Evolution Sage @Simon Dominic
+241 C Explore @David Sondered
+242 C Farseek @Hristo D. Chukov
+243 R Hardened Scales @Mark Winters
+244 U Inspiring Call @Dan Scott
+245 C Kodama's Reach @Heather Hudson
+246 U Migration Path @Grzegorz Rutkowski
+247 R Rampaging Brontodon @Lars Grant-West
+248 C Rampant Growth @Steven Belledin
+249 U Ranging Raptors @Simon Dominic
+250 R Realmwalker @Zack Stella
+251 R Regal Behemoth @Jakub Kasper
+252 R Return of the Wildspeaker @Chris Rallis
+253 R Ripjaw Raptor @Ryan Pancoast
+254 R Rishkar's Expertise @Magali Villeneuve
+255 R Ruinous Intrusion @Johann Bodin
+256 R Runic Armasaur @Randy Vargas
+257 U Savage Stomp @Wayne Reynolds
+258 R Shifting Ceratops @Izzy
+259 U Thunderherd Migration @Lars Grant-West
+260 U Thundering Spineback @Brian Valeza
+261 R Topiary Stomper @Robin Olausson
+262 R Verdant Sun's Avatar @Izzy
+263 R Wayward Swordtooth @Chris Rahn
+264 M Admiral Beckett Brass @Jason Rainville
+265 U Atzocan Seer @Joseph Meehan
+266 R Cold-Eyed Selkie @Jaime Jones
+267 U Cruel Celebrant @Bastien L. Deharme
+268 M Elenda, the Dusk Rose @Chris Rahn
+269 U Etchings of the Chosen @Chuck Lukacs
+270 C Growth Spiral @Seb McKinnon
+271 R Hostage Taker @Wayne Reynolds
+272 R King Narfi's Betrayal @Chase Stone
+273 U Kiora's Follower @Eric Deschamps
+274 M Kumena, Tyrant of Orazca @Tyler Jacobson
+275 U Legion Lieutenant @Zezhou Chen
+276 U Merfolk Mistbinder @Clint Cearley
+277 U Merfolk Skydiver @Sara Winters
+278 M Prime Speaker Zegana @Willian Murai
+279 R Prismari Command @Johannes Voss
+280 R Quandrix Command @Viktor Titov
+281 R Quartzwood Crasher @Antonio José Manzanedo
+282 U Raging Regisaur @Bayard Wu
+283 U Raging Swordtooth @Izzy
+284 U Rakdos Charm @Zoltan Boros
+285 U Ramirez DePietro, Pillager @Anna Steinbauer
+286 R Regisaur Alpha @Jonathan Kuo
+287 U Rhythm of the Wild @Maxime Minard
+288 R Simic Ascendancy @Izzy
+289 M Sorin, Lord of Innistrad @Michael Komarck
+290 U Tatyova, Benthic Druid @Mathias Kollros
+291 M Tishana, Voice of Thunder @Anna Steinbauer
+292 R Utter End @Mark Winters
+293 M Vona, Butcher of Magan @Volkan Baǵa
+294 R Vorel of the Hull Clade @Mike Bierek
+295 M Xenagos, God of Revels @Jason Chan
+296 R Zacama, Primal Calamity @Jaime Jones
+297 R Zara, Renegade Recruiter @Chris Rallis
+298 R Zegana, Utopian Speaker @Slawomir Maniak
+299 C Arcane Signet @Dan Scott
+300 R Blade of the Bloodchief @Jung Park
+301 C Commander's Sphere @Ryan Alexander Lee
+302 U Dimir Signet @Raoul Vitale
+303 U Heirloom Blade @Carmen Sinek
+304 U Herald's Horn @Jason Felix
+305 R Icon of Ancestry @Chris Seaman
+306 U Izzet Signet @Raoul Vitale
+307 R Lifecrafter's Bestiary @Izzy
+308 R Metallic Mimic @Zack Stella
+309 C Mind Stone @Camille Alquier
+310 U Orzhov Signet @Martina Pilcerova
+311 U Rakdos Signet @Martina Pilcerova
+312 U Simic Signet @Mike Sass
+313 U Sol Ring @Mike Bierek
+314 U Swiftfoot Boots @Svetlin Velinov
+315 U Talisman of Hierarchy @Lindsey Look
+316 R Vanquisher's Banner @Milivoj Ćeran
+317 C Wayfarer's Bauble @David Sondered
+318 R Alchemist's Refuge @Dan Scott
+319 R Arch of Orazca @Titus Lunter
+320 C Bojuka Bog @Howard Lyon
+321 R Canopy Vista @Steven Belledin
+322 R Choked Estuary @Vincent Proce
+323 R Cinder Glade @Adam Paquette
+324 R Clifftop Retreat @Constantin Marin
+325 C Command Tower @Evan Shipard
+326 U Crumbling Necropolis @Volkan Baǵa
+327 R Desolate Lighthouse @Scott Chou
+328 C Evolving Wilds @Daniel Ljunggren
+329 R Exotic Orchard @Steven Belledin
+330 R Foreboding Ruins @Adam Paquette
+331 R Fortified Village @Cliff Childs
+332 R Frostboil Snarl @Sam Burley
+333 R Furycalm Snarl @Sam Burley
+334 R Game Trail @Adam Paquette
+335 R Geier Reach Sanitarium @Cliff Childs
+336 R Hinterland Harbor @Daniel Ljunggren
+337 R Isolated Chapel @Richard Wright
+338 U Jungle Shrine @Rob Alexander
+339 R Karn's Bastion @Adam Paquette
+340 R Kessig Wolf Run @Eytan Zana
+341 U Llanowar Reborn @Philip Straub
+342 R Mosswort Bridge @Jeremy Jarvis
+343 U Myriad Landscape @Richard Wright
+344 R Nephalia Drownyard @Cliff Childs
+345 C Orzhov Basilica @John Avon
+346 C Path of Ancestry @Alayna Danner
+347 U Port of Karfell @Mauricio Calle
+348 U Reliquary Tower @Jesper Ejsing
+349 U Rogue's Passage @Christine Choi
+350 U Secluded Courtyard @Sam Burley
+351 R Shineshadow Snarl @Sam Burley
+352 C Simic Growth Chamber @John Avon
+353 R Smoldering Marsh @Adam Paquette
+354 R Sulfur Falls @Cliff Childs
+355 R Sunken Hollow @Adam Paquette
+356 U Tainted Field @Alayna Danner
+357 R Temple of Mystery @Piotr Dura
+358 R Temple of Silence @Adam Paquette
+359 U Temple of the False God @James Zapata
+360 C Terramorphic Expanse @Dan Scott
+361 C Thriving Bluff @Johannes Voss
+362 C Thriving Grove @Ravenna Tran
+363 C Thriving Heath @Alayna Danner
+364 C Thriving Isle @Jonas De Ro
+365 C Thriving Moor @Titus Lunter
+366 U Unclaimed Territory @Dimitar Marinski
+367 R Vault of the Archangel @John Avon
+368 R Vineglimmer Snarl @Sam Burley
+369 R Voldaren Estate @Richard Wright
+370 R Windbrisk Heights @Omar Rayyan
+
+[tokens]
+b_1_1_vampire_lifelink
+b_2_2_pirate_menace
+c_3_2_shapeshifter_changeling
+c_a_blood_draw
+g_2_2_boar
+g_3_3_beast
+g_3_3_dinosaur_trample
+g_3_3_elephant
+g_3_3_frog_lizard
+g_x_x_dinosaur_beast_trample
+ragavan
+u_1_1_bird_flying
+u_1_1_merfolk
+u_4_3_salamander_warrior
+wb_1_1_vampire_lifelink

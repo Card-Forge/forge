@@ -1,0 +1,11 @@
+Name:Crowd-Control Warden
+ManaCost:3 G W
+Types:Creature Centaur Soldier
+PT:4/4
+K:Disguise:3 GW GW
+K:etbCounter:P1P1:X
+R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Description$ As CARDNAME enters the battlefield or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control.
+SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterNum$ X | CounterType$ P1P1
+SVar:X:Count$Valid Creature.YouCtrl+Other
+DeckHas:Ability$Counters
+Oracle:As Crowd-Control Warden enters the battlefield or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control.\nDisguise {3}{G/W}{G/W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

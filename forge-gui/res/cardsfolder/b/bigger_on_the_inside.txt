@@ -1,0 +1,12 @@
+Name:Bigger on the Inside
+ManaCost:3 R G
+Types:Enchantment Aura
+K:Enchant Artifact or Land
+A:SP$ Attach | ValidTgts$ Artifact,Land | TgtPrompt$ Select target Artifact or Land to enchant | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted permanent has "{T}: Target player adds two mana of any one color. The next spell they cast this turn has cascade." (When they cast their next spell, they exile cards from the top of their library until they exile a nonland card that costs less. They may cast it without paying its mana cost. They put the exiled cards on the bottom in a random order.)
+SVar:ABMana:AB$ Mana | Cost$ T | Defined$ Targeted | ValidTgts$ Player | Produced$ Any | Amount$ 2 | SubAbility$ DBEffect | SpellDescription$ Target player adds two mana of any one color. The next spell they cast this turn has cascade. (When they cast their next spell, they exile cards from the top of their library until they exile a nonland card that costs less. They may cast it without paying its mana cost. They put the exiled cards on the bottom in a random order.)
+SVar:DBEffect:DB$ Effect | StaticAbilities$ GrantCascade | EffectOwner$ Targeted | Triggers$ ExileEffect
+SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next spell you cast this turn has cascade.
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.YouCtrl | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:Enchant artifact or land\nEnchanted permanent has "{T}: Target player adds two mana of any one color. The next spell they cast this turn has cascade." (When they cast their next spell, they exile cards from the top of their library until they exile a nonland card that costs less. They may cast it without paying its mana cost. They put the exiled cards on the bottom in a random order.)

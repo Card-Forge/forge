@@ -1,0 +1,8 @@
+Name:Become Brutes
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Pump | TargetMin$ 1 | KW$ Haste | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select one or two target creatures | SubAbility$ DBRepeat | SpellDescription$ One or two target creatures each gain haste until end of turn.
+SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Targeted | Zone$ Battlefield | RepeatSubAbility$ DBToken | ChangeZoneTable$ True | SpellDescription$ For each of those creatures, create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+SVar:DBToken:DB$ Token | TokenScript$ role_monster | AttachedTo$ Remembered
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:One or two target creatures each gain haste until end of turn. For each of those creatures, create a Monster Role token attached to it. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)

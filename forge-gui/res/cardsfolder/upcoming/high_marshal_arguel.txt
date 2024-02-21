@@ -1,0 +1,16 @@
+Name:High Marshal Arguel
+ManaCost:1 W B
+Types:Legendary Creature Vampire Knight
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME dies, conjure a card named Arguel's Blood Fast onto the battlefield and you may transform it. If you control an enchantment named Arguel's Blood Fast and a land named Temple of Aclazotz, instead create two 4/3 white and black Vampire Demon creature tokens with flying.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ Sum | BranchConditionSVarCompare$ EQ2 | TrueSubAbility$ DBToken | FalseSubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Arguel's Blood Fast | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Remembered | Mode$ Transform | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You
+SVar:Sum:SVar$Enchantment/Plus.Land
+SVar:Enchantment:Count$Valid Enchantment.YouCtrl+namedArguel's Blood Fast/LimitMax.1
+SVar:Land:Count$Valid Land.YouCtrl+namedTemple of Aclazotz/LimitMax.1
+DeckHas:Ability$Token & Type$Enchantment|Demon
+DeckHints:Name$Arguel's Blood Fast
+Oracle:When High Marshal Arguel dies, conjure a card named Arguel's Blood Fast onto the battlefield and you may transform it. If you control an enchantment named Arguel's Blood Fast and a land named Temple of Aclazotz, instead create two 4/3 white and black Vampire Demon creature tokens with flying.

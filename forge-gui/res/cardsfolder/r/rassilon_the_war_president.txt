@@ -1,0 +1,12 @@
+Name:Rassilon, the War President
+ManaCost:3 U B
+Types:Legendary Creature Time Lord Noble
+PT:3/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life and exile the top card of your library. You may play that card for as long as it remains exiled.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled.
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Card.nonCreature+wasCastFromExile+YouCtrl | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each noncreature spell you cast from exile has conspire. (As you cast that spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+Oracle:At the beginning of your upkeep, you lose 2 life and exile the top card of your library. You may play that card for as long as it remains exiled.\nEach noncreature spell you cast from exile has conspire. (As you cast that spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)

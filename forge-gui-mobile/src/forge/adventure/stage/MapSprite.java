@@ -29,7 +29,7 @@ public class MapSprite extends Actor {
     boolean isCaveDungeon, isOldorVisited, isBookmarked;
     public MapSprite(Vector2 pos, TextureRegion sprite, PointOfInterest point) {
         if (point != null) {
-            PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + point.getData().map);
+            PointOfInterestChanges changes = WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID());
             setBookmarked(changes.isBookmarked(), point);
             isCaveDungeon = "cave".equalsIgnoreCase(point.getData().type) || "dungeon".equalsIgnoreCase(point.getData().type);
             if (point.getData().map != null && point.getID() != null) {

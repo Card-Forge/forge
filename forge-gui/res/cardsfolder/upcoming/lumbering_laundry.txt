@@ -1,0 +1,8 @@
+Name:Lumbering Laundry
+ManaCost:5
+Types:Artifact Creature Golem
+PT:4/5
+A:AB$ Effect | Cost$ 2 | StaticAbilities$ MayLookFaceDown | SpellDescription$ Until end of turn, you may look at face-down creatures you don't control any time.
+SVar:MayLookFaceDown:Mode$ Continuous | Affected$ Creature.faceDown+YouDontCtrl | AffectedZone$ Battlefield | MayLookAt$ You | Description$ You may look at face-down creatures you don't control any time.
+K:Disguise:5
+Oracle:{2}: Until end of turn, you may look at face-down creatures you don't control any time.

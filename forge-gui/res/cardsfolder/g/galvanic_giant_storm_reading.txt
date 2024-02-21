@@ -1,0 +1,19 @@
+Name:Galvanic Giant
+ManaCost:3 U
+Types:Creature Giant Wizard
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target creature an opponent controls
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+DeckHas:Ability$Counters|Discard
+AlternateMode:Adventure
+Oracle:Whenever you cast a spell with mana value 5 or greater, tap target creature an opponent controls and put a stun counter on it.
+
+ALTERNATE
+
+Name:Storm Reading
+ManaCost:5 U U
+Types:Instant Adventure
+A:SP$ Draw | NumCards$ 4 | SubAbility$ DBDiscard | SpellDescription$ Draw four cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+Oracle:Draw four cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)

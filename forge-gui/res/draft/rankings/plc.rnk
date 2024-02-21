@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Damnation|SR|PLC
+#2|Serra Sphinx|SR|PLC
+#3|Gaea's Anthem|SR|PLC
+#4|Pyrohemia|SU|PLC
+#5|Serendib Sorcerer|SR|PLC
+#6|Calciderm|SU|PLC
+#7|Harmonize|SU|PLC
+#8|Akroma, Angel of Fury|R|PLC
+#9|Reckless Wurm|SU|PLC
+#10|Torchling|R|PLC
+#11|Chronozoa|R|PLC
+#12|Crovax, Ascendant Hero|R|PLC
+#13|Shivan Wumpus|SR|PLC
+#14|Mirri the Cursed|R|PLC
+#15|Jedit Ojanen of Efrava|R|PLC
+#16|Rough Tumble|U|PLC
+#17|Enslave|U|PLC
+#18|Oros, the Avenger|R|PLC
+#19|Aeon Chronicler|R|PLC
+#20|Sunlance|SC|PLC
+#21|Ovinize|SU|PLC
+#22|Timbermare|R|PLC
+#23|Numot, the Devastator|R|PLC
+#24|Intet, the Dreamer|R|PLC
+#25|Vorosh, the Hunter|R|PLC
+#26|Teneb, the Harvester|R|PLC
+#27|Shaper Parasite|C|PLC
+#28|Malach of the Dawn|SU|PLC
+#29|Prodigal Pyromancer|SC|PLC
+#30|Rathi Trapper|SC|PLC
+#31|Magus of the Arena|R|PLC
+#32|Null Profusion|SR|PLC
+#33|Dead Gone|C|PLC
+#34|Jodah's Avenger|U|PLC
+#35|Stonecloaker|U|PLC
+#36|Blood Knight|SU|PLC
+#37|Dust Elemental|R|PLC
+#38|Stormfront Riders|U|PLC
+#39|Deadwood Treefolk|U|PLC
+#40|Shivan Meteor|U|PLC
+#41|Giant Dustwasp|C|PLC
+#42|Hedge Troll|SU|PLC
+#43|Sulfur Elemental|U|PLC
+#44|Kor Dirge|SU|PLC
+#45|Sinew Sliver|SC|PLC
+#46|Molten Firebird|SR|PLC
+#47|Groundbreaker|SR|PLC
+#48|Big Game Hunter|U|PLC
+#49|Voidstone Gargoyle|R|PLC
+#50|Volcano Hellion|R|PLC
+#51|Riftmarked Knight|U|PLC
+#52|Saltblast|U|PLC
+#53|Necrotic Sliver|U|PLC
+#54|Body Double|R|PLC
+#55|Mire Boa|C|PLC
+#56|Stingscourger|C|PLC
+#57|Pongify|U|PLC
+#58|Whitemane Lion|C|PLC
+#59|Radha, Heir to Keld|R|PLC
+#60|Magus of the Coffers|R|PLC
+#61|Brute Force|SC|PLC
+#62|Magus of the Tabernacle|R|PLC
+#63|Pouncing Wurm|U|PLC
+#64|Hammerheim Deadeye|U|PLC
+#65|Aven Riftwatcher|C|PLC
+#66|Cautery Sliver|U|PLC
+#67|Porphyry Nodes|SR|PLC
+#68|Erratic Mutation|C|PLC
+#69|Citanul Woodreaders|C|PLC
+#70|Urborg, Tomb of Yawgmoth|R|PLC
+#71|Ana Battlemage|U|PLC
+#72|Utopia Vow|C|PLC
+#73|Evolution Charm|C|PLC
+#74|Skirk Shaman|SC|PLC
+#75|Blightspeaker|C|PLC
+#76|Shade of Trokair|C|PLC
+#77|Fatal Frenzy|R|PLC
+#78|Aether Membrane|U|PLC
+#79|Kavu Predator|U|PLC
+#80|Saltfield Recluse|C|PLC
+#81|Dreamscape Artist|C|PLC
+#82|Treacherous Urge|U|PLC
+#83|Magus of the Library|R|PLC
+#84|Wild Pair|R|PLC
+#85|Darkheart Sliver|U|PLC
+#86|Primal Plasma|SC|PLC
+#87|Boom Bust|R|PLC
+#88|Dunerider Outlaw|SU|PLC
+#89|Riptide Pilferer|SU|PLC
+#90|Cradle to Grave|C|PLC
+#91|Aquamorph Entity|C|PLC
+#92|Essence Warden|SC|PLC
+#93|Piracy Charm|SC|PLC
+#94|Gossamer Phantasm|SC|PLC
+#95|Uktabi Drake|C|PLC
+#96|Pallid Mycoderm|C|PLC
+#97|Hunting Wilds|U|PLC
+#98|Muck Drubb|U|PLC
+#99|Benalish Commander|R|PLC
+#100|Psychotrope Thallid|U|PLC
+#101|Frenetic Sliver|U|PLC
+#102|Needlepeak Spider|C|PLC
+#103|Poultice Sliver|C|PLC
+#104|Dismal Failure|U|PLC
+#105|Keldon Marauders|C|PLC
+#106|Veiling Oddity|C|PLC
+#107|Dawn Charm|C|PLC
+#108|Battering Sliver|C|PLC
+#109|Midnight Charm|C|PLC
+#110|Fungal Behemoth|R|PLC
+#111|Imp's Mischief|R|PLC
+#112|Dormant Sliver|U|PLC
+#113|Melancholy|SC|PLC
+#114|Fury Charm|C|PLC
+#115|Brain Gorgers|C|PLC
+#116|Spitting Sliver|C|PLC
+#117|Reflex Sliver|C|PLC
+#118|Simian Spirit Guide|SC|PLC
+#119|Synchronous Sliver|C|PLC
+#120|Reality Acid|C|PLC
+#121|Merfolk Thaumaturgist|SC|PLC
+#122|Deadly Grub|C|PLC
+#123|Timebender|U|PLC
+#124|Vitaspore Thallid|C|PLC
+#125|Roiling Horror|R|PLC
+#126|Lavacore Elemental|U|PLC
+#127|Serra's Boon|U|PLC
+#128|Phantasmagorian|U|PLC
+#129|Rebuff the Wicked|U|PLC
+#130|Ridged Kusite|C|PLC
+#131|Extirpate|R|PLC
+#132|Mana Tithe|SC|PLC
+#133|Ghost Tactician|C|PLC
+#134|Firefright Mage|C|PLC
+#135|Dust Corona|C|PLC
+#136|Revered Dead|SC|PLC
+#137|Wistful Thinking|C|PLC
+#138|Bog Serpent|SC|PLC
+#139|Circle of Affliction|U|PLC
+#140|Auramancer's Guise|U|PLC
+#141|Keen Sense|SU|PLC
+#142|Waning Wurm|U|PLC
+#143|Dash Hopes|C|PLC
+#144|Mantle of Leadership|U|PLC
+#145|Tidewalker|U|PLC
+#146|Magus of the Bazaar|R|PLC
+#147|Vampiric Link|SC|PLC
+#148|Detritivore|R|PLC
+#149|Seal of Primordium|SC|PLC
+#150|Timecrafting|U|PLC
+#151|Heroes Remembered|R|PLC
+#152|Life and Limb|R|PLC
+#153|Venarian Glimmer|U|PLC
+#154|Braids, Conjurer Adept|R|PLC
+#155|Temporal Extortion|R|PLC
+#156|Fa'adiyah Seer|SC|PLC
+#157|Sophic Centaur|U|PLC
+#158|Mycologist|SU|PLC
+#159|Healing Leaves|SC|PLC
+#160|Retether|R|PLC
+#161|Dichotomancy|R|PLC
+#162|Spellshift|R|PLC
+#163|Frozen Aether|SU|PLC
+#164|Shrouded Lore|SU|PLC
+#165|Mesa Enchantress|SR|PLC

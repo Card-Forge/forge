@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Lightning Dragon|R|USG
+#2|Morphling|R|USG
+#3|Worship|R|USG
+#4|Opal Archangel|R|USG
+#5|Fault Line|R|USG
+#6|Herald of Serra|R|USG
+#7|Argothian Wurm|R|USG
+#8|Crater Hellion|R|USG
+#9|Western Paladin|R|USG
+#10|Soul Sculptor|R|USG
+#11|Catastrophe|R|USG
+#12|Drifting Djinn|R|USG
+#13|Chimeric Staff|R|USG
+#14|Phyrexian Processor|R|USG
+#15|Child of Gaea|R|USG
+#16|Wildfire|R|USG
+#17|Glorious Anthem|R|USG
+#18|Great Whale|R|USG
+#19|Elite Archers|R|USG
+#20|Karn, Silver Golem|R|USG
+#21|Shivan Hellkite|R|USG
+#22|Gaea's Cradle|R|USG
+#23|Expunge|C|USG
+#24|Jagged Lightning|U|USG
+#25|Pestilence|C|USG
+#26|Shivan Gorge|R|USG
+#27|Endless Wurm|R|USG
+#28|Opal Titan|R|USG
+#29|Albino Troll|U|USG
+#30|Barrin, Master Wizard|R|USG
+#31|Befoul|C|USG
+#32|Gilded Drake|R|USG
+#33|Arc Lightning|C|USG
+#34|Eastern Paladin|R|USG
+#35|Dark Hatchling|R|USG
+#36|Confiscate|U|USG
+#37|Citanul Hierophants|R|USG
+#38|Cradle Guard|U|USG
+#39|Zephid's Embrace|U|USG
+#40|Intrepid Hero|R|USG
+#41|Heat Ray|C|USG
+#42|Zephid|R|USG
+#43|Shivan Raptor|U|USG
+#44|Somnophore|R|USG
+#45|Voice of Grace|U|USG
+#46|Sanguine Guard|U|USG
+#47|Gaea's Embrace|U|USG
+#48|Pacifism|C|USG
+#49|Witch Engine|R|USG
+#50|Shiv's Embrace|U|USG
+#51|Tolarian Academy|R|USG
+#52|Corrupt|C|USG
+#53|Show and Tell|R|USG
+#54|Serra's Embrace|U|USG
+#55|Stroke of Genius|R|USG
+#56|Viashino Sandswimmer|R|USG
+#57|Exploration|R|USG
+#58|Sneak Attack|R|USG
+#59|Citanul Flute|R|USG
+#60|Skirge Familiar|U|USG
+#61|Order of Yawgmoth|U|USG
+#62|Angelic Chorus|R|USG
+#63|Smokestack|R|USG
+#64|Yawgmoth's Will|R|USG
+#65|Argothian Enchantress|R|USG
+#66|Waylay|U|USG
+#67|Pariah|R|USG
+#68|Vampiric Embrace|U|USG
+#69|Hermetic Study|C|USG
+#70|Vug Lizard|U|USG
+#71|Humble|U|USG
+#72|Diabolic Servitude|U|USG
+#73|Fire Ants|U|USG
+#74|Mishra's Helix|R|USG
+#75|Path of Peace|C|USG
+#76|Bull Hippo|U|USG
+#77|Steam Blast|U|USG
+#78|Pendrell Drake|C|USG
+#79|Grafted Skullcap|R|USG
+#80|Voice of Law|U|USG
+#81|Peregrine Drake|U|USG
+#82|Anaconda|U|USG
+#83|Phyrexian Colossus|R|USG
+#84|Victimize|U|USG
+#85|Citanul Centaurs|R|USG
+#86|Argothian Elder|U|USG
+#87|Thundering Giant|U|USG
+#88|Midsummer Revel|R|USG
+#89|Abundance|R|USG
+#90|Titania's Chosen|U|USG
+#91|Phyrexian Ghoul|C|USG
+#92|Time Spiral|R|USG
+#93|Vile Requiem|U|USG
+#94|Barrin's Codex|R|USG
+#95|Cathodion|U|USG
+#96|Blanchwood Armor|U|USG
+#97|Pouncing Jaguar|C|USG
+#98|Opal Acrolith|U|USG
+#99|Pit Trap|U|USG
+#100|Sandbar Serpent|U|USG
+#101|Serra Avatar|R|USG
+#102|Sporogenesis|R|USG
+#103|Skittering Skirge|C|USG
+#104|Thran Quarry|R|USG
+#105|Spined Fluke|U|USG
+#106|Hidden Predators|R|USG
+#107|Sanctum Custodian|C|USG
+#108|Greater Good|R|USG
+#109|Treefolk Seedlings|U|USG
+#110|Priest of Titania|C|USG
+#111|Pegasus Charger|C|USG
+#112|Abyssal Horror|R|USG
+#113|Winding Wurm|C|USG
+#114|Acridian|C|USG
+#115|Fog Bank|U|USG
+#116|Viashino Outrider|C|USG
+#117|Crazed Skirge|U|USG
+#118|Temporal Aperture|R|USG
+#119|Hidden Stag|R|USG
+#120|Gorilla Warrior|C|USG
+#121|Priest of Gix|U|USG
+#122|Blanchwood Treefolk|C|USG
+#123|Symbiosis|C|USG
+#124|Whirlwind|R|USG
+#125|Metrognome|R|USG
+#126|Ravenous Skirge|C|USG
+#127|Argothian Swine|C|USG
+#128|Opal Gargoyle|C|USG
+#129|Treetop Rangers|C|USG
+#130|Seasoned Marshal|U|USG
+#131|Worn Powerstone|U|USG
+#132|Goblin Patrol|C|USG
+#133|Lotus Blossom|R|USG
+#134|Rewind|C|USG
+#135|Recantation|R|USG
+#136|Angelic Page|C|USG
+#137|Lifeline|R|USG
+#138|Cackling Fiend|C|USG
+#139|Persecute|R|USG
+#140|Dark Ritual|C|USG
+#141|Retromancer|C|USG
+#142|Torch Song|U|USG
+#143|Looming Shade|C|USG
+#144|Serra's Sanctum|R|USG
+#145|Horseshoe Crab|C|USG
+#146|Sicken|C|USG
+#147|Wizard Mentor|C|USG
+#148|Goblin Raider|C|USG
+#149|Hollow Dogs|C|USG
+#150|Contamination|R|USG
+#151|Mobile Fort|U|USG
+#152|Power Sink|C|USG
+#153|Cave Tiger|C|USG
+#154|Blood Vassal|C|USG
+#155|Titania's Boon|U|USG
+#156|Sulfuric Vapors|R|USG
+#157|Dragon Blood|U|USG
+#158|Guma|U|USG
+#159|Veiled Crocodile|R|USG
+#160|Bog Raiders|C|USG
+#161|Monk Idealist|U|USG
+#162|Sunder|R|USG
+#163|Electryte|R|USG
+#164|Viashino Runner|C|USG
+#165|Goblin Spelunkers|C|USG
+#166|Flesh Reaver|U|USG
+#167|Fluctuator|R|USG
+#168|Rescind|C|USG
+#169|Goblin War Buggy|C|USG
+#170|Shimmering Barrier|U|USG
+#171|Imaginary Pet|R|USG
+#172|Polluted Mire|C|USG
+#173|Goblin Offensive|U|USG
+#174|Sanctum Guardian|U|USG
+#175|Oppression|R|USG
+#176|Veiled Sentry|U|USG
+#177|Lurking Evil|R|USG
+#178|Fertile Ground|C|USG
+#179|Unworthy Dead|C|USG
+#180|Phyrexian Tower|R|USG
+#181|Viashino Weaponsmith|C|USG
+#182|Spire Owl|C|USG
+#183|Veiled Serpent|C|USG
+#184|Windfall|U|USG
+#185|Exhume|C|USG
+#186|Duress|C|USG
+#187|Blasted Landscape|U|USG
+#188|Wild Dogs|C|USG
+#189|Tainted Aether|R|USG
+#190|Dromosaur|C|USG
+#191|Despondency|C|USG
+#192|Energy Field|R|USG
+#193|Umbilicus|R|USG
+#194|Shower of Sparks|C|USG
+#195|Hibernation|U|USG
+#196|Turnabout|U|USG
+#197|Goblin Lackey|U|USG
+#198|Monk Realist|C|USG
+#199|Reprocess|R|USG
+#200|Disciple of Grace|C|USG
+#201|Hawkeater Moth|U|USG
+#202|Whetstone|R|USG
+#203|Goblin Matron|C|USG
+#204|Vebulid|R|USG
+#205|Opal Caryatid|C|USG
+#206|Hidden Spider|C|USG
+#207|Acidic Soil|U|USG
+#208|Rune of Protection: Black|C|USG
+#209|Catalog|C|USG
+#210|Stern Proctor|U|USG
+#211|Brilliant Halo|C|USG
+#212|Coral Merfolk|C|USG
+#213|Disciple of Law|C|USG
+#214|Veiled Apparition|U|USG
+#215|Exhaustion|U|USG
+#216|Lilting Refrain|U|USG
+#217|Elvish Lyrist|C|USG
+#218|Gaea's Bounty|C|USG
+#219|Elvish Herder|C|USG
+#220|Songstitcher|C|USG
+#221|Hopping Automaton|U|USG
+#222|Purging Scythe|R|USG
+#223|Wirecat|U|USG
+#224|Remote Isle|C|USG
+#225|Disorder|U|USG
+#226|Absolute Law|U|USG
+#227|Pendrell Flux|C|USG
+#228|Ill-Gotten Gains|R|USG
+#229|Drifting Meadow|C|USG
+#230|Hidden Ancients|U|USG
+#231|Hidden Guerrillas|U|USG
+#232|Copper Gnomes|R|USG
+#233|Unnerve|C|USG
+#234|Fecundity|U|USG
+#235|Darkest Hour|R|USG
+#236|Disruptive Student|C|USG
+#237|Scoria Wurm|R|USG
+#238|Redeem|U|USG
+#239|Slippery Karst|C|USG
+#240|Smoldering Crater|C|USG
+#241|Attunement|R|USG
+#242|Wall of Junk|U|USG
+#243|Vernal Bloom|R|USG
+#244|Bedlam|R|USG
+#245|Serra's Liturgy|R|USG
+#246|No Rest for the Wicked|U|USG
+#247|Greener Pastures|R|USG
+#248|Disenchant|C|USG
+#249|Yawgmoth's Edict|U|USG
+#250|Destructive Urge|U|USG
+#251|Antagonism|R|USG
+#252|Okk|R|USG
+#253|Rune of Protection: Green|C|USG
+#254|Urza's Armor|U|USG
+#255|Rumbling Crescendo|R|USG
+#256|Lull|C|USG
+#257|Academy Researchers|U|USG
+#258|Douse|U|USG
+#259|Reclusive Wight|U|USG
+#260|Rune of Protection: Red|C|USG
+#261|Curfew|C|USG
+#262|Gamble|R|USG
+#263|Enchantment Alteration|U|USG
+#264|Carrion Beetles|C|USG
+#265|Remembrance|R|USG
+#266|War Dance|U|USG
+#267|Clear|U|USG
+#268|Mana Leech|U|USG
+#269|Retaliation|U|USG
+#270|Hush|C|USG
+#271|Congregate|C|USG
+#272|Claws of Gix|U|USG
+#273|Scald|U|USG
+#274|Rune of Protection: Blue|C|USG
+#275|Hidden Herd|R|USG
+#276|Endoskeleton|U|USG
+#277|Rune of Protection: White|C|USG
+#278|Rune of Protection: Artifacts|U|USG
+#279|Lingering Mirage|U|USG
+#280|Absolute Grace|U|USG
+#281|Annul|C|USG
+#282|Planar Birth|R|USG
+#283|Outmaneuver|U|USG
+#284|Discordant Dirge|R|USG
+#285|Tolarian Winds|C|USG
+#286|Sandbar Merfolk|C|USG
+#287|Bravado|C|USG
+#288|Spreading Algae|U|USG
+#289|Fiery Mantle|C|USG
+#290|Silent Attendant|C|USG
+#291|Healing Salve|C|USG
+#292|Scrap|C|USG
+#293|Faith Healer|R|USG
+#294|Lay Waste|C|USG
+#295|Serra Zealot|C|USG
+#296|Veil of Birds|C|USG
+#297|Falter|C|USG
+#298|Voltaic Key|U|USG
+#299|Rain of Filth|U|USG
+#300|Crosswinds|U|USG
+#301|Planar Void|U|USG
+#302|Meltdown|U|USG
+#303|Noetic Scales|R|USG
+#304|Back to Basics|R|USG
+#305|Sleeper Agent|R|USG
+#306|Carpet of Flowers|U|USG
+#307|Breach|C|USG
+#308|Brand|R|USG
+#309|Venomous Fangs|C|USG
+#310|Cloak of Mists|C|USG
+#311|Fortitude|C|USG
+#312|Power Taint|C|USG
+#313|Bereavement|U|USG
+#314|Defensive Formation|U|USG
+#315|Launch|C|USG
+#316|Thran Turbine|U|USG
+#317|Arcane Laboratory|U|USG
+#318|Rune of Protection: Lands|R|USG
+#319|Goblin Cadets|U|USG
+#320|Rejuvenate|C|USG
+#321|Serra's Hymn|U|USG
+#322|Presence of the Master|U|USG
+#323|Raze|C|USG
+#324|Parasitic Bond|U|USG
+#325|Bulwark|R|USG
+#326|Headlong Rush|C|USG
+#327|Rain of Salt|U|USG
+#328|Telepathy|C|USG
+#329|Crystal Chimes|U|USG
+#330|Reflexes|C|USG

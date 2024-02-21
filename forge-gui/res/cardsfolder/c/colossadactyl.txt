@@ -1,0 +1,7 @@
+Name:Colossadactyl
+ManaCost:2 G G
+Types:Creature Dinosaur
+PT:4/5
+K:Reach
+K:Trample
+Oracle:Reach, trample

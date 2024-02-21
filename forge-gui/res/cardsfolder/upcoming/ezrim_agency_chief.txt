@@ -1,0 +1,10 @@
+Name:Ezrim, Agency Chief
+ManaCost:1 W W U U
+Types:Legendary Creature Archon Detective
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Num$ 2
+A:AB$ Pump | Cost$ 1 Sac<1/Artifact> | Defined$ Self | StackDescription$ SpellDescription | KWChoice$ Vigilance,Lifelink,Hexproof | SpellDescription$ NICKNAME gains your choice of vigilance, lifelink, or hexproof until end of turn.
+DeckHas:Ability$Token|Sacrifice|LifeGain|Investigate & Type$Clue|Artifact
+Oracle:Flying\nWhen Ezrim, Agency Chief enters the battlefield, investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn.

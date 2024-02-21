@@ -1,0 +1,10 @@
+Name:Raging Battle Mouse
+ManaCost:1 R
+Types:Creature Mouse
+PT:2/1
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ1 | Description$ The second spell you cast each turn costs {1} less to cast.
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | CheckSVar$ Celebration | SVarCompare$ GE2 | TriggerDescription$ Celebration — At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+Oracle:The second spell you cast each turn costs {1} less to cast.\nCelebration — At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+1 until end of turn.

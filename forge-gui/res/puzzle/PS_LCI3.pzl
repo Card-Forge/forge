@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Lost Caverns of Ixalan #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/12/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume both graveyards start empty. Remember that your solution must satisfy all blocking scenarios. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=4
+p0hand=Market Gnome;Tinker's Tote;Bitter Triumph;Fungal Fortitude
+p0battlefield=Bartolome del Presidio;Souls of the Lost;Regal Bunnicorn;Fabrication Foundry;Plains;Plains;Swamp;Swamp;Swamp
+p1life=7
+p1battlefield=Hulking Raptor;Hulking Raptor

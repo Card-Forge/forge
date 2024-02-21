@@ -49,6 +49,8 @@ public class StaticData {
     private boolean enableSmartCardArtSelection;
     private boolean loadNonLegalCards;
 
+    private boolean sourceImageForClone;
+
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -898,6 +900,13 @@ public class StaticData {
     }
     public void setEnableSmartCardArtSelection(boolean isEnabled) {
         this.enableSmartCardArtSelection = isEnabled;
+    }
+
+    public boolean useSourceImageForClone() {
+        return sourceImageForClone;
+    }
+    public void setSourceImageForClone(final boolean b) {
+        this.sourceImageForClone = b;
     }
 
     public boolean isRebalanced(String name)

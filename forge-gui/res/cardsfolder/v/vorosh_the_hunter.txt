@@ -1,5 +1,5 @@
 Name:Vorosh, the Hunter
-ManaCost:3 G U B
+ManaCost:3 B G U
 Types:Legendary Creature Dragon
 PT:6/6
 K:Flying

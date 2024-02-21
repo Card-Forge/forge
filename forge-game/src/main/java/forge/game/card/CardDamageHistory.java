@@ -309,5 +309,8 @@ public class CardDamageHistory {
 
     public void endCombat() {
         damagedThisCombat.clear();
+        setCreatureAttackedThisCombat(null, -1);
+        setCreatureBlockedThisCombat(false);
+        setCreatureGotBlockedThisCombat(false);
     }
 }

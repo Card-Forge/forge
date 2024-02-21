@@ -65,17 +65,18 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         String revealValid = sa.getParamOrDefault("RevealValid", "Card");
         String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
         int numPeek = AbilityUtils.calculateAmount(source, peekAmount, sa);
+        final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
 
-        List<Player> libraryPlayers = getDefinedPlayersOrTargeted(sa);
+        List<Player> srcZonePlayers = getDefinedPlayersOrTargeted(sa);
         final Player peekingPlayer = sa.getActivatingPlayer();
 
-        for (Player libraryToPeek : libraryPlayers) {
-            final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
-            numPeek = Math.min(numPeek, library.size());
+        for (Player zoneToPeek : srcZonePlayers) {
+            final PlayerZone playerZone = zoneToPeek.getZone(srcZone);
+            numPeek = Math.min(numPeek, playerZone.size());
 
             CardCollection peekCards = new CardCollection();
             for (int i = 0; i < numPeek; i++) {
-                peekCards.add(library.get(i));
+                peekCards.add(playerZone.get(i));
             }
 
             Map<String, Object> params = new HashMap<>();
@@ -84,7 +85,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, peekingPlayer, source, sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!noPeek) {
-                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, libraryToPeek,
+                peekingPlayer.getController().reveal(peekCards, srcZone, zoneToPeek,
                         CardTranslation.getTranslatedName(source.getName()) + " - " +
                                 Localizer.getInstance().getMessage("lblLookingCardFrom"));
             }
@@ -93,7 +94,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), params);
 
             if (doReveal) {
-                peekingPlayer.getGame().getAction().reveal(revealableCards, ZoneType.Library, libraryToPeek, !noPeek,
+                peekingPlayer.getGame().getAction().reveal(revealableCards, srcZone, zoneToPeek, !noPeek,
                         CardTranslation.getTranslatedName(source.getName()) + " - " +
                                 Localizer.getInstance().getMessage("lblRevealingCardFrom"));
 

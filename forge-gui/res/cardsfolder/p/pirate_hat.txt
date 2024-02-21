@@ -1,0 +1,12 @@
+Name:Pirate Hat
+ManaCost:1 U
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigAttack | Description$ Equipped creature gets +1/+1 and has "Whenever this creature attacks, draw a card, then discard a card."
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature attacks, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+K:Equip:1:Creature.Pirate+YouCtrl:Pirate
+K:Equip:2
+DeckHas:Ability$Discard
+DeckHints:Type$Pirate
+Oracle:Equipped creature gets +1/+1 and has "Whenever this creature attacks, draw a card, then discard a card."\nEquip Pirate {1}\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,7 +1,7 @@
 Name:Ral's Dispersal
 ManaCost:3 U U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBSearch | SpellDescription$ Return target creature to its owner's hand. You may search your library and/or graveyard for a card named, Ral, Caller of Storms and put it in your hand. If you search your library this way, shuffle it.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.YouOwn+namedRal; Caller of Storms | ChangeNum$ 1 | Optional$ True
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBSearch | SpellDescription$ Return target creature to its owner's hand.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedRal; Caller of Storms | Optional$ True | SpellDescription$ You may search your library and/or graveyard for a card named, Ral, Caller of Storms and put it in your hand. If you search your library this way, shuffle it.
 DeckNeeds:Name$Ral, Caller of Storms
 Oracle:Return target creature to its owner's hand. You may search your library and/or graveyard for a card named Ral, Caller of Storms, reveal it, and put it into your hand. If you search your library this way, shuffle.

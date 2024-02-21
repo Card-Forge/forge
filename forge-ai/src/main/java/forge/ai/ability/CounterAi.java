@@ -19,7 +19,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostExile;
@@ -64,7 +63,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
+            if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
             } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
@@ -325,7 +324,7 @@ public class CounterAi extends SpellAbilityAi {
                 leastBadOption = tgtSA;
             }
 
-            if ((tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSA.getHostCard(), sa)) ||
+            if ((tgtSA.isSpell() && !tgtSA.isCounterableBy(sa)) ||
                 tgtSA.getActivatingPlayer() == ai ||
                 !tgtSA.getActivatingPlayer().isOpponentOf(ai)) {
                 // Is this a "better" least bad option

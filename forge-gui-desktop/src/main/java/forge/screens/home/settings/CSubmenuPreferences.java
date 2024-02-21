@@ -279,6 +279,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializePlayerNameButton();
         initializeDefaultLanguageComboBox();
 
+        disableLazyLoading();
     }
 
     /* (non-Javadoc)
@@ -574,7 +575,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeSwitchStatesCombobox() {
-        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER};
+        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER, ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS};
         final FPref userSetting = FPref.UI_SWITCH_STATES_DECKVIEW;
         final FComboBoxPanel<String> panel = this.view.getSwitchStates();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
@@ -659,6 +660,12 @@ public enum CSubmenuPreferences implements ICDoc {
         final FLabel btn = view.getBtnPlayerName();
         setPlayerNameButtonText();
         btn.setCommand(getPlayerNameButtonCommand());
+    }
+
+    private void disableLazyLoading() {
+        view.getCbLoadCardsLazily().setSelected(false);
+        view.getCbLoadCardsLazily().setEnabled(false);
+        prefs.save();
     }
 
     private void setPlayerNameButtonText() {

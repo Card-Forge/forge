@@ -1,4 +1,4 @@
-Name:Ugluk of the White Hand
+Name:Uglúk of the White Hand
 ManaCost:2 B R
 Types:Legendary Creature Orc Soldier
 PT:3/3
@@ -7,4 +7,4 @@ SVar:TrigGainCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counte
 SVar:X:TriggeredCard$Valid Creature.Orc,Creature.Goblin/Plus.1
 DeckHas:Ability$Counters
 DeckHints:Type$Orc|Goblin
-Oracle:Whenever another creature you control dies, put a +1/+1 counter on Ugluk of the White Hand. If that creature was a Goblin or Orc, put two +1/+1 counters on Uglúk instead.
+Oracle:Whenever another creature you control dies, put a +1/+1 counter on Uglúk of the White Hand. If that creature was a Goblin or Orc, put two +1/+1 counters on Uglúk instead.

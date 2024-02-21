@@ -10,6 +10,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -24,6 +25,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        // up to X targets and chose 0 or similar situations
+        if (tgtCards.isEmpty()) return sa.getParamOrDefault("SpellDescription", "");
         final boolean justOne = tgtCards.size() == 1;
 
         sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));
@@ -47,7 +50,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
 
-        if (sa.hasParam("RememberDestroyed") || sa.hasParam("RememberAttached")) {
+        if (sa.hasParam("RememberDestroyed")) {
             card.clearRemembered();
         }
 
@@ -56,10 +59,12 @@ public class DestroyEffect extends SpellAbilityEffect {
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = getChangeZoneTable(sa, lastStateBattlefield, CardCollection.EMPTY);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
-        CardZoneTable table = new CardZoneTable();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
             if (!tgtC.isInPlay()) {
@@ -72,39 +77,39 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
                 continue;
             }
-            internalDestroy(gameCard, sa, table, cachedMap, params);
+            internalDestroy(gameCard, sa, cachedMap, params);
         }
 
         untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         for (final Card unTgtC : untargetedCards) {
             if (unTgtC.isInPlay()) {
-                internalDestroy(unTgtC, sa, table, cachedMap, params);
+                internalDestroy(unTgtC, sa, cachedMap, params);
             }
         }
 
         table.triggerChangesZoneAll(game, sa);
     }
 
-    protected void internalDestroy(Card gameCard, SpellAbility sa, CardZoneTable table, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
+    protected void internalDestroy(Card gameCard, SpellAbility sa, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
-
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
-        final boolean remAttached = sa.hasParam("RememberAttached");
         final boolean noRegen = sa.hasParam("NoRegen");
         final boolean sac = sa.hasParam("Sacrifice");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
-
         boolean destroyed = false;
         final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
-        if (remAttached) {
-            card.addRemembered(gameCard.getAttachedCards());
+
+        SpellAbility cause = sa;
+        if (sa.isReplacementAbility()) {
+            cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
         }
+
         if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, sa, true, table, params) != null;
+            destroyed = game.getAction().sacrifice(gameCard, cause, true, params) != null;
         } else {
-            destroyed = game.getAction().destroy(gameCard, sa, !noRegen, table, params);
+            destroyed = game.getAction().destroy(gameCard, cause, !noRegen, params);
         }
         if (destroyed && remDestroyed) {
             card.addRemembered(gameCard);

@@ -1,0 +1,22 @@
+Name:Braided Net
+ManaCost:2 U
+Types:Artifact
+K:etbCounter:NET:3
+A:AB$ Tap | Cost$ T SubCounter<1/NET> | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select another target nonland permanent | SubAbility$ DBEffect | SpellDescription$ Tap another target nonland permanent.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ CantActivate | ForgetOnMoved$ Battlefield | Duration$ UntilTargetedUntaps | SpellDescription$ Its activated abilities can't be activated for as long as it remains tapped.
+SVar:CantActivate:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | ValidSA$ Activated | Description$ Its activated abilities can't be activated for as long as it remains tapped.
+K:Craft:1 U ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice & Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:Braided Net enters the battlefield with three net counters on it.\n{T}, Remove a net counter from Braided Net: Tap another target nonland permanent. Its activated abilities can't be activated for as long as it remains tapped.\nCraft with artifact {1}{U}
+
+ALTERNATE
+
+Name:Braided Quipu
+ManaCost:no cost
+Colors:blue
+Types:Artifact
+A:AB$ Draw | Cost$ 3 U T | NumCards$ Count$Valid Artifact.YouCtrl | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Draw a card for each artifact you control,
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | StackDescription$ SpellDescription | SpellDescription$ then put CARDNAME into its owner's library third from the top.
+Oracle:{3}{U}, {T}: Draw a card for each artifact you control, then put Braided Quipu into its owner's library third from the top.

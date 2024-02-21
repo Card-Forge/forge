@@ -1,0 +1,10 @@
+Name:New New York
+ManaCost:no cost
+Types:Plane New Earth
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, until end of turn, noncreature artifacts you control become 3/3 Vehicles in addition to their other types and gain flying, haste, and crew 1.
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Artifact.nonCreature+YouCtrl | Types$ Vehicle | Power$ 3 | Toughness$ 3 | Keywords$ Flying & Haste & Crew:1
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create a Treasure token and a 2/2 white Alien creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac,w_2_2_alien | TokenOwner$ You
+DeckHas:Type$Alien|Treasure & Ability$Token
+DeckHints:Type$Artifact
+Oracle:At the beginning of combat on your turn, until end of turn, noncreature artifacts you control become 3/3 Vehicles in addition to their other types and gain flying, haste, and crew 1.\nWhenever chaos ensues, create a Treasure token and a 2/2 white Alien creature token.

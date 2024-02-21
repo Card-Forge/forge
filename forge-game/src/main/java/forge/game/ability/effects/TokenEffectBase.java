@@ -38,6 +38,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
     protected TokenCreateTable createTokenTable(Iterable<Player> players, String[] tokenScripts, final int finalAmount, final SpellAbility sa) {
         TokenCreateTable tokenTable = new TokenCreateTable();
         for (final Player owner : players) {
+            if (!owner.isInGame()) {
+                continue;
+            }
             for (String script : tokenScripts) {
                 final Card result = TokenInfo.getProtoType(script, sa, owner);
 
@@ -130,7 +133,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setTapped(true);
                 }
 
-                if (!sa.hasParam("AttachAfter") && sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa)) {
+                // CR 303.4i
+                if (!sa.hasParam("AttachAfter") && sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa) && tok.isAura()) {
                     continue;
                 }
 
@@ -181,7 +185,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     addSelfTrigger(sa, sa.getParam("AtEOTTrig"), moved);
                 }
 
-                if (addToCombat(moved, tok.getController(), sa, "TokenAttacking", "TokenBlocking")) {
+                if (addToCombat(moved, sa, "TokenAttacking", "TokenBlocking")) {
                     combatChanged.setTrue();
                 }
 
@@ -260,7 +264,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         return false;
     }
 
-    protected void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
+    public static void addPumpUntil(SpellAbility sa, final Card c, long timestamp) {
         if (!sa.hasParam("PumpDuration")) {
             return;
         }

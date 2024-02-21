@@ -1,0 +1,10 @@
+Name:Mirkwood Channeler
+ManaCost:3 G
+Types:Creature Elf Druid
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target Elf you control gains trample and gets +X/+X until end of turn, where X is the number of Forests you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Elf.YouCtrl | TgtPrompt$ Select target Elf you control | NumAtt$ X | NumDef$ X | KW$ Trample
+SVar:X:Count$Valid Forest.YouCtrl
+SVar:BuffedBy:Forest
+DeckHints:Type$Elf
+Oracle:At the beginning of combat on your turn, target Elf you control gains trample and gets +X/+X until end of turn, where X is the number of Forests you control.

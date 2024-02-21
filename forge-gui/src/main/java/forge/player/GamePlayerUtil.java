@@ -14,7 +14,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.GuiDisplayUtil;
 import forge.util.MyRandom;
-import forge.util.TextUtil;
 
 public final class GamePlayerUtil {
     private GamePlayerUtil() { }
@@ -83,12 +82,8 @@ public final class GamePlayerUtil {
             if (lastProfileChosen.equals(AiProfileUtil.AI_PROFILE_RANDOM_MATCH)) {
                 lastProfileChosen = AiProfileUtil.getRandomProfile();
             }
-            System.out.println(TextUtil.concatNoSpace("[AI Preferences] AI profile ", lastProfileChosen,
-                    " was chosen for the lobby player ", player.getName(), "."));
             profile = lastProfileChosen;
         } else {
-            System.out.println(TextUtil.concatNoSpace("[Override] AI profile ", profileOverride,
-                    " was chosen for the lobby player ", player.getName(), "."));
             profile = profileOverride;
         }
 

@@ -407,7 +407,18 @@ ScryfallCode=BRO
 384 U Blanchwood Armor @Manuel Castañón
 
 [rebalanced]
+A58 C A-Mightstone's Animation @Igor Kieryluk
+A63 U A-Splitting the Powerstone @Campbell White
+A69 U A-Urza, Powerstone Prodigy @Donato Giancola
+A70 R A-Urza's Command @Dominik Mayer
+A132 C A-Excavation Explosion @Campbell White
+A140 U A-Mishra, Excavation Prodigy @Donato Giancola
+A156 R A-Visions of Phyrexia @Dominik Mayer
 A199 U A-Haywire Mite @Izzy
+A219 M A-Saheeli, Filigree Master @Aurore Folny
+A254 R A-Thran Spider @Joshua Cairos
+A263 R A-Hall of Tagsin @Christian Dimitrov
+A289 R A-Geology Enthusiast @Fajareka Setiawan
 
 [lands]
 2 Plains|BRO|1

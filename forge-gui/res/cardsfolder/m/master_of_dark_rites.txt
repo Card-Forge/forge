@@ -1,0 +1,8 @@
+Name:Master of Dark Rites
+ManaCost:B
+Types:Creature Vampire Cleric
+PT:1/1
+A:AB$ Mana | Cost$ T Sac<1/Creature.Other> | Produced$ B | Amount$ 3 | RestrictValid$ Spell.Demon,Spell.Cleric,Spell.Vampire | SpellDescription$ Add {B}{B}{B}. Spend this mana only to cast Vampire, Cleric, and/or Demon spells.
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Vampire|Cleric|Demon
+Oracle:{T}, Sacrifice another creature: Add {B}{B}{B}. Spend this mana only to cast Vampire, Cleric, and/or Demon spells.

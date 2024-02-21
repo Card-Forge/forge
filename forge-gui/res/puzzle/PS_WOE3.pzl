@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Wilds of Eldraine #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/10/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Graveyards start empty, and you have no information regarding the cards in your library. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Cheeky House-Mouse;Tranquil Cove;Otawara, Soaring City;Duel for Dominance;Angelic Intervention;Moonsnare Specialist
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Sword of Once and Future;Gallant Pie-Wielder|Counters:P1P1=1;Will, Scion of Peace;Vantress Transmuter;Plains;Plains;Plains;Restless Vinestalk;Restless Vinestalk
+p1life=13
+p1battlefield=Rowan, Scion of War;Mishra's Juggernaut

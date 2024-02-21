@@ -1,0 +1,13 @@
+Name:Swooping Pteranodon
+ManaCost:3 R W
+Types:Creature Dinosaur
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Dinosaur.withFlying+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME or another Dinosaur with flying enters the battlefield under your control, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains flying and haste until end of turn. At the beginning of the next end step, target land deals 3 damage to that creature.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent control | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Flying | SubAbility$ DBDelayTrig
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigChooseLand | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, target land deals 3 damage to that creature.
+SVar:TrigChooseLand:DB$ Pump | ValidTgts$ Land | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ DelayTriggerRemembered | DamageSource$ Targeted | NumDmg$ 3
+DeckHints:Type$Dinosaur
+Oracle:Flying, haste\nWhenever Swooping Pteranodon or another Dinosaur with flying enters the battlefield under your control, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains flying and haste until end of turn. At the beginning of the next end step, target land deals 3 damage to that creature.

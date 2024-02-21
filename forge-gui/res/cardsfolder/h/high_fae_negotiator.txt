@@ -1,0 +1,12 @@
+Name:High Fae Negotiator
+ManaCost:3 B B
+Types:Creature Faerie Warlock
+PT:3/5
+K:Bargain
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+bargained | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, if it was bargained, each opponent loses 3 life and you gain 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Opponent | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Sacrifice|LifeGain
+DeckHints:Type$Enchantment|Artifact & Ability$Token
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nFlying\nWhen High Fae Negotiator enters the battlefield, if it was bargained, each opponent loses 3 life and you gain 3 life.

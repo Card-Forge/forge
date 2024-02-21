@@ -1,0 +1,11 @@
+Name:Spitting Dilophosaurus
+ManaCost:2 B
+Types:Creature Dinosaur
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a -1/-1 counter on up to one target creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a -1/-1 counter on up to one target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.counters_GE1_M1M1+OppCtrl | Description$ Creatures your opponents control with -1/-1 counters on them can't block.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Whenever Spitting Dilophosaurus enters the battlefield or attacks, put a -1/-1 counter on up to one target creature.\nCreatures your opponents control with -1/-1 counters on them can't block.

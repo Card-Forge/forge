@@ -28,6 +28,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
@@ -43,6 +44,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card card = sa.getHostCard();
+
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
@@ -88,25 +90,28 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
-        final boolean devour = sa.hasParam("Devour");
-        final boolean exploit = sa.hasParam("Exploit");
+        final boolean devour = sa.isKeyword(Keyword.DEVOUR);
+        final boolean exploit = sa.isKeyword(Keyword.EXPLOIT);
         final boolean sacEachValid = sa.hasParam("SacEachValid");
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String msg = sa.getParamOrDefault("SacMessage", valid);
+        msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         final boolean optional = sa.hasParam("Optional");
-        CardZoneTable table = new CardZoneTable();
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        CardZoneTable table = new CardZoneTable(lastStateBattlefield, CardCollection.EMPTY);
+        params.put(AbilityKey.InternalTriggerTable, table);
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()), null)) {
-                    if (game.getAction().sacrifice(card, sa, true, table, params) != null) {
+                    if (game.getAction().sacrifice(card, sa, true, params) != null) {
                         if (remSacrificed) {
                             card.addRemembered(card);
                         }
@@ -168,8 +173,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     if (devour || exploit || remSacrificed) {
                         lKICopy = CardUtil.getLKICopy(sac, cachedMap);
                     }
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, table, params) != null;
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, params);
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);

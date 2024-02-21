@@ -1,0 +1,7 @@
+Name:Scytheclaw Raptor
+ManaCost:2 R
+Types:Creature Dinosaur
+PT:4/3
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player.NonActive | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a player casts a spell, if it's not their turn, CARDNAME deals 4 damage to them.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ 4
+Oracle:Whenever a player casts a spell, if it's not their turn, Scytheclaw Raptor deals 4 damage to them.

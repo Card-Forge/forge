@@ -67,6 +67,6 @@ Types:Legendary Creature Human Wizard
 PT:4/5
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put two +1/+1 counters on target creature.
 SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2
-DeckHas:Ability$Counter
+DeckHas:Ability$Counters
 DeckHints:Type$Instant|Sorcery
 Oracle:Whenever you cast an instant or sorcery spell, put two +1/+1 counters on target creature.

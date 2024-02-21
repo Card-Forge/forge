@@ -97,6 +97,9 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
     private Multimap<CounterType, Pair<Card, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
 
+    private List<Card> leftBattlefieldThisTurn = Lists.newArrayList();
+    private List<Card> leftGraveyardThisTurn = Lists.newArrayList();
+
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
@@ -208,7 +211,8 @@ public class Game {
                 : null;
 
         if (lookup != null) {
-            lookup.remove(c);
+            lastStateBattlefield.remove(c);
+            lastStateGraveyard.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }
@@ -237,6 +241,27 @@ public class Game {
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
+    }
+
+    public void addLeftBattlefieldThisTurn(Card lki) {
+        leftBattlefieldThisTurn.add(lki);
+    }
+    public void addLeftGraveyardThisTurn(Card lki) {
+        leftGraveyardThisTurn.add(lki);
+    }
+
+    public List<Card> getLeftBattlefieldThisTurn() {
+        return leftBattlefieldThisTurn;
+    }
+    public List<Card> getLeftGraveyardThisTurn() {
+        return leftGraveyardThisTurn;
+    }
+
+    public void clearLeftBattlefieldThisTurn() {
+        leftBattlefieldThisTurn.clear();
+    }
+    public void clearLeftGraveyardThisTurn() {
+        leftGraveyardThisTurn.clear();
     }
 
     public Game(Iterable<RegisteredPlayer> players0, GameRules rules0, Match match0) {
@@ -646,8 +671,11 @@ public class Game {
         return visit.getFound();
     }
 
-    // Allows visiting cards in game without allocating a temporary list.
     public void forEachCardInGame(Visitor<Card> visitor) {
+        forEachCardInGame(visitor, false);
+    }
+    // Allows visiting cards in game without allocating a temporary list.
+    public void forEachCardInGame(Visitor<Card> visitor, boolean withSideboard) {
         for (final Player player : getPlayers()) {
             if (!visitor.visitAll(player.getZone(ZoneType.Graveyard).getCards())) {
                 return;
@@ -665,6 +693,9 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Command).getCards())) {
+                return;
+            }
+            if (withSideboard && !visitor.visitAll(player.getZone(ZoneType.Sideboard).getCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getInboundTokens())) {
@@ -760,8 +791,9 @@ public class Game {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
+        boolean planarOwnerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
-        CardZoneTable triggerList = new CardZoneTable();
+        CardZoneTable triggerList = new CardZoneTable(getLastStateBattlefield(), getLastStateGraveyard());
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
@@ -782,8 +814,13 @@ public class Game {
         }
 
         for (Card c : cards) {
-            if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
-                planarControllerLost = true;
+            if (c.isPlane() || c.isPhenomenon()) {
+                if (c.getController().equals(p)) {
+                    planarControllerLost = true;
+                }
+                if (c.getOwner().equals(p)) {
+                    planarOwnerLost = true;
+                }
             }
 
             if (isMultiplayer) {
@@ -813,8 +850,8 @@ public class Game {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
                         si.setActivatingPlayer(c.getController());
                     }
-                    if (c.getController().equals(p)) {
-                        getAction().exile(c, null);
+                    if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
+                        getAction().exile(c, null, null);
                         triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
                 }
@@ -826,13 +863,35 @@ public class Game {
         triggerList.triggerChangesZoneAll(this, null);
 
         // 901.6: If the current planar controller would leave the game, instead the next player
-        // in turn order that wouldn’t leave the game becomes the planar controller, then the old
+        // in turn order that wouldn't leave the game becomes the planar controller, then the old
         // planar controller leaves
+        if (planarControllerLost) {
+            for (Card c : getActivePlanes()) {
+                if (c != null && !c.getOwner().equals(p)) {
+                    c.setController(getNextPlayerAfter(p), 0);
+                    getAction().controllerChangeZoneCorrection(c);
+                }
+            }
+        }
         // 901.10: When a player leaves the game, all objects owned by that player except abilities
         // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card
         // or phenomenon card, the planar controller turns the top card of his or her planar deck face up.the game.
-        if (planarControllerLost) {
-            getNextPlayerAfter(p).initPlane();
+        if (planarOwnerLost) {
+            Player planarController = getPhaseHandler().getPlayerTurn();
+            if (planarController.equals(p)) {
+                planarController = getNextPlayerAfter(p);
+            }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            CardCollection planesLeavingGame =  new CardCollection();
+            for (Card c : getActivePlanes()) {
+                if (c != null && c.getOwner().equals(p)) {
+                    planesLeavingGame.add(c);
+                    planarController.removeCurrentPlane(c);
+                }
+            }
+            runParams.put(AbilityKey.Cards, planesLeavingGame);
+            getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
+            planarController.planeswalk(null);
         }
 
         if (p.isMonarch()) {
@@ -1076,6 +1135,8 @@ public class Game {
     }
 
     public void onCleanupPhase() {
+        clearLeftBattlefieldThisTurn();
+        clearLeftGraveyardThisTurn();
         clearCounterAddedThisTurn();
         clearCounterRemovedThisTurn();
         clearGlobalDamageHistory();

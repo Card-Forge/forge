@@ -1,7 +1,7 @@
 Name:Blow Your House Down
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | RememberTargets$ True | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select target creature | SubAbility$ DBDestroy | SpellDescription$ Up to three target creatures can't block this turn. Destroy any of them that are Walls.
-SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Wall.IsRemembered | SubAbility$ DBCleanup
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | RememberTargets$ True | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select up to three target creatures | SubAbility$ DBDestroy | StackDescription$ REP Up to three target creatures_{c:Targeted} | SpellDescription$ Up to three target creatures can't block this turn.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Wall.IsRemembered | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Destroy any of them that are Walls.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Up to three target creatures can't block this turn. Destroy any of them that are Walls.

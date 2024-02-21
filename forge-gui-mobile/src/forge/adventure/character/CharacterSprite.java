@@ -252,15 +252,17 @@ public class CharacterSprite extends MapActor {
             currentFrame = currentAnimation.getKeyFrame(timer, true);
         }
 
-        setHeight(currentFrame.getRegionHeight());
-        setWidth(currentFrame.getRegionWidth());
-        Color oldColor = batch.getColor().cpy();
-        batch.setColor(getColor());
         float scale = 1f;
         if (this instanceof EnemySprite) {
             scale = ((EnemySprite) this).getData().scale;
         }
-        batch.draw(currentFrame, getX(), getY(), getWidth() * scale, getHeight() * scale);
+
+        setHeight(currentFrame.getRegionHeight() * scale);
+        setWidth(currentFrame.getRegionWidth() * scale);
+        Color oldColor = batch.getColor().cpy();
+        batch.setColor(getColor());
+
+        batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
         batch.setColor(oldColor);
         super.draw(batch, parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());

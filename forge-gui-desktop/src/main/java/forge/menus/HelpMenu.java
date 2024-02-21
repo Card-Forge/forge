@@ -57,8 +57,7 @@ public final class HelpMenu {
     private static JMenu getMenu_Troubleshooting() {
         final Localizer localizer = Localizer.getInstance();
         JMenu mnu = new JMenu(localizer.getMessage("lblTroubleshooting"));
-        mnu.add(getMenuItem_UrlLink("How to Provide a Useful Bug Report", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9621"));
-        mnu.addSeparator();
+        mnu.add(getMenuItem_OpenLogFile());
         mnu.add(getMenuItem_ReadMeFile());
         return mnu;
     }
@@ -76,8 +75,8 @@ public final class HelpMenu {
         JMenu mnu = new JMenu(localizer.getMessage("lblGettingStarted"));
         mnu.add(getMenuItem_HowToPlayFile());
         mnu.addSeparator();
-        mnu.add(getMenuItem_UrlLink("Forge Wiki", "http://www.slightlymagic.net/wiki/Forge", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
-        mnu.add(getMenuItem_UrlLink("What is Forge?", "http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=468"));
+        mnu.add(getMenuItem_UrlLink("Forge Wiki", "https://github.com/Card-Forge/forge/wiki", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
+        mnu.add(getMenuItem_UrlLink("What is Forge?", "https://github.com/Card-Forge/forge/wiki#what-is-forge"));
         return mnu;
     }
 
@@ -91,6 +90,13 @@ public final class HelpMenu {
     private static JMenuItem getMenuItem_ReadMeFile() {
         JMenuItem menuItem = new JMenuItem("README.txt");
         menuItem.addActionListener(getOpenFileAction(getFile(ForgeConstants.README_FILE)));
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_OpenLogFile() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFile"));
+        menuItem.addActionListener(getOpenFileAction(getAbsoluteFile(ForgeConstants.LOG_FILE)));
         return menuItem;
     }
 
@@ -128,6 +134,14 @@ public final class HelpMenu {
         String filePath = FileUtil.pathCombine(System.getProperty("user.dir"), filename);
         if (FileUtil.doesFileExist(filePath)) {
             file = new File(filePath);
+        }
+        return file;
+    }
+
+    protected static File getAbsoluteFile(String filename) {
+        File file = null;
+        if (FileUtil.doesFileExist(filename)) {
+            file = new File(filename);
         }
         return file;
     }

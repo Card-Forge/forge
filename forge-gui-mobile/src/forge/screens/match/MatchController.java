@@ -313,6 +313,7 @@ public class MatchController extends AbstractGuiGame {
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
             if (Config.instance().getSettingData().disableWinLose) {
+                MatchController.writeMatchPreferences();
                 if (getGameView().isMatchOver()){
                     Forge.setCursor(null, "0");
                     if (!DuelScene.instance().hasCallbackExit()){

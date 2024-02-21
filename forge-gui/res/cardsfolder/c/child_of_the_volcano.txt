@@ -1,0 +1,10 @@
+Name:Child of the Volcano
+ManaCost:3 R
+Types:Creature Elemental
+PT:3/3
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you descended this turn, put a +1/+1 counter on CARDNAME. (You descended if a permanent card was put into your graveyard from anywhere.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
+DeckHas:Ability$Counters
+DeckHints:Ability$Mill|Sacrifice
+Oracle:Trample\nAt the beginning of your end step, if you descended this turn, put a +1/+1 counter on Child of the Volcano. (You descended if a permanent card was put into your graveyard from anywhere.)

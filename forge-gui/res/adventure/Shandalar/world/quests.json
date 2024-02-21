@@ -41,7 +41,7 @@
 					},
 					{
 						"name": "\"And what if I find the right people myself?\"",
-						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and most importantly faster than you to work with.\"",
+						"text": "He shrugs as though that wouldn't bother him. \"Then I'll have to find someone bigger, badder, and most importantly, faster than you to work with.\"",
 						"options": [
 							{
 								"name": "\"Good luck with that.\" (Decline Quest)"
@@ -123,7 +123,8 @@
 			"description": "Defeat $(enemy_1) twice as your part of the deal.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 2,
+			"count3": 2,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"BiomeColorless"
@@ -147,6 +148,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {
 				"text": "Having finally handled the pair of $(enemy_1), it's time to go collect your reward. As a reminder, you can track this quest in your quest log for navigation assistance.",
 				"options": [
@@ -228,7 +230,7 @@
 	"name": "Wanderlust",
 	"description": "Make a delivery to a distant location",
 	"offerDialog": {
-		"text": "\"Excuse me, but you look like a well traveled individual.\" A frazzled looking mage gets your attention. \"I have a letter of some great importance that MUST be hand delivered. Would you be willing to handle this for me?\"",
+		"text": "\"Excuse me, but you look like a well traveled individual.\" A frazzled looking mage gets your attention. \"I have a letter of some great importance that MUST be hand delivered to $(poi_1), in the $(biome_1) lands. Would you be willing to handle this for me?\"",
 		"options": [
 			{
 				"name": "\"Why does it have to be hand delivered?\"",
@@ -321,8 +323,6 @@
 								"name": "\"I guess I should have asked for the reward first.\" (+1 local reputation. Complete Quest)"
 							},
 							{
-								"name": "(Break down the door)",
-								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
 								"action": [
 									{
 										"removeItem": "",
@@ -340,6 +340,8 @@
 										"POIReference": ""
 									}
 								],
+								"name": "(Break down the door)",
+								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
 								"options": [
 									{
 										"name": "You mutter to yourself. \"Not worth a scene I suppose.\" (Complete Quest)"
@@ -386,7 +388,7 @@
 										"POIReference": ""
 									}
 								],
-								"name": "You take the coins and place the letter in the bucket. \"I have to say, I do I find your demeanor unnerving.\" ",
+								"name": "You take the coins and place the letter in the bucket. \"I have to say, I do find your demeanor unnerving.\" ",
 								"text": "(+2 local reputation)",
 								"options": [
 									{
@@ -421,7 +423,7 @@
 		{
 			"id": 1,
 			"name": "Travel",
-			"description": "Make the long journey",
+			"description": "Make the long journey to $(poi_1)",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 80,
@@ -431,7 +433,7 @@
 			],
 			"objective": "Travel",
 			"prologue": {
-				"text": "Nothing like a really long journey to strech the legs, right? You could likely save yourself some time with the right spells, but... is that going to be safe?",
+				"text": "Nothing like a really long walk to strech the legs, right? You could likely save yourself some time with the right spells, but... is that going to be safe?",
 				"options": [
 					{
 						"name": "(Begin your quest)"
@@ -456,7 +458,7 @@
 			},
 			{
 				"name": "So long as it pays. What do you need?",
-				"text": "I'm new to town, and looking to open a new spell shop. But I need supplies that I had to leave behind. Can you go get them for me?",
+				"text": "I'm new to town, and looking to open a new spell shop. But I need supplies that I had to leave behind. Can you go get them for me from $(poi_1)?",
 				"options": [
 					{
 						"name": "\"And the pay?\"",
@@ -534,6 +536,7 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -561,6 +564,7 @@
 				"Town"
 			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {
 				"text": "Upon arriving at the pickup point, you find a rather modest looking spellbook among the supplies. Presumably, this is the merchandise your employer is planning to sell",
@@ -677,6 +681,7 @@
 				"BiomeColorless"
 			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {
 				"text": "While you were gone, the new merchant has set up a tent filled with mismatched and bare shelves. It will be a little less bare now, but you doubt that their business will succeed.",
@@ -821,24 +826,24 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
 		"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": ""
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "",
-								"addMapReputation": 3,
-								"POIReference": ""
-							}
-						],
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": 3,
+				"POIReference": ""
+			}
+		],
+		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back into town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
 		"options": [
 			{
 				"action": [
@@ -930,9 +935,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin the hunt",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
@@ -944,8 +949,10 @@
 			"description": "Find and defeat the $(enemy_2) before it escapes. You only get one shot, so make it count.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeGreen"
 			],
@@ -961,6 +968,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -1183,9 +1191,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to locate your victim",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
@@ -1197,8 +1205,10 @@
 			"description": "Find and defeat the $(enemy_2) before it escapes. You only get one shot, so make it count.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeBlack"
 			],
@@ -1214,6 +1224,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -1584,9 +1595,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Begin the chase",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
@@ -1598,8 +1609,10 @@
 			"description": "Bring the $(enemy_2) to justice before they can escape.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeWhite",
 				"Human"
@@ -1616,6 +1629,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -1799,9 +1813,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin the hunt",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
@@ -1813,8 +1827,10 @@
 			"description": "Find and defeat the $(enemy_2) before it escapes. You only get one shot, so make it count.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeRed"
 			],
@@ -1830,6 +1846,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -1846,7 +1863,7 @@
 	"id": 8,
 	"isTemplate": true,
 	"name": "Remote Instruction",
-	"description": "Find the $(enemy_2) before it escapes and put on a show",
+	"description": "Find the $(enemy_2) before it escapes, and put on a show",
 	"offerDialog": {
 		"text": "A robed wizard leads a more mundane dressed individual over to you. \"You there, you are a battle mage, yes?\"",
 		"options": [
@@ -2100,9 +2117,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin the hunt",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {
@@ -2121,8 +2138,10 @@
 			"description": "Find and defeat the $(enemy_2) before it escapes. You only get one shot, so make it count.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeBlue"
 			],
@@ -2138,6 +2157,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -2174,7 +2194,7 @@
 							},
 							{
 								"name": "Curious as to why this would be on the board, your gaze lingers for a moment.",
-								"text": "As you look at the wordless paper, words find their way in to your mind by unknown other means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
+								"text": "As you look at the wordless paper, words find their way into your mind by unknown, other, means. 'FIND.' '{COLOR=red}KILL!{ENDCOLOR}' 'REWARD.'",
 								"options": [
 									{
 										"action": [
@@ -2224,7 +2244,7 @@
 										]
 									},
 									{
-										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcomed, and you take a step back.",
+										"name": "You decide that the invasive thoughts, if you can call them that, are unwelcome, and you take a step back.",
 										"text": "The thoughts urgently follow you for a moment. '{COLOR=red}KKKKiiiiill...{ENDCOLOR}' But as you take another step back, the words vanish from your mind.",
 										"options": [
 											{
@@ -2259,7 +2279,7 @@
 						"options": [
 							{
 								"name": "You continue to read.",
-								"text": "Secondly, another handwriting has scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday\"",
+								"text": "Secondly, another's handwriting has scrawled over what might have actually been a romantic bit, with the following. \"Don't bother. I killed him yesterday\"",
 								"options": [
 									{
 										"name": "You shake your head and walk away. (Decline Quest)"
@@ -2387,9 +2407,9 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin the hunt",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 15,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {},
@@ -2401,8 +2421,10 @@
 			"description": "Find and defeat the $(enemy_2) before it escapes. You only get one chance, so give it your best shot.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 30,
+			"count3": 30,
+			"worldMapOK": true,
 			"objective": "Hunt",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeColorless"
 			],
@@ -2418,6 +2440,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -2469,7 +2492,7 @@
 				"options": [
 					{
 						"name": "\"And what is, then?\"",
-						"text": "\"The inhabitants of the nearby $(poi_1). They must be removed for the sake of balance and to ensure space is available for new life to grow.\" She nods as though this were an indisputable fact.",
+						"text": "\"The inhabitants of the nearby $(poi_1). They must be removed, for the sake of balance and to ensure space is available for new life to grow.\" She nods as though this were an indisputable fact.",
 						"options": [
 							{
 								"action": [
@@ -2522,7 +2545,7 @@
 			},
 			{
 				"name": "\"I'm beginning to think that is my role in life. What can I do for you?\"",
-				"text": "\"The inhabitants of the nearby $(poi_1) must be removed for the sake of balance and to ensure space is available for new life to grow.\" She nods as though this were an indisputable fact.",
+				"text": "\"The inhabitants of the nearby $(poi_1) must be removed, for the sake of balance and to ensure space is available for new life to grow.\" She nods as though this were an indisputable fact.",
 				"options": [
 					{
 						"action": [
@@ -2562,7 +2585,7 @@
 							}
 						],
 						"name": "\"I'm not entirely sure I have time for that right now.\"",
-						"text": "The druids face remains unchanged, but her voice grows a touch more quiet. \"The forest will remember this.\" (-1 Local Reputation)",
+						"text": "The druid's face remains unchanged, but her voice grows a touch more quiet. \"The forest will remember this.\" (-1 Local Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -2668,7 +2691,7 @@
 						]
 					}
 				],
-				"name": "\"Almost. I believe there's a reward due to level the scales.\"",
+				"name": "\"Almost. I believe there's a reward due, to level the scales.\"",
 				"text": "(-1 Local Reputation) The druid frowns slightly, but hands you a bundle wrapped in small vines.",
 				"options": [
 					{
@@ -2818,6 +2841,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -2848,7 +2872,7 @@
 						"options": [
 							{
 								"name": "\"I see. And I suppose you're looking for the current occupants to be removed?",
-								"text": "\"Yes! Exactly that! After all, I have this deed right here stating that we own the land!\" He briefly flashes some papers, but you notice some of the ink has smeared ink on them.",
+								"text": "\"Yes! Exactly that! After all, I have this deed right here stating that we own this $(poi_1)!\" He briefly flashes some papers, but you notice some of the ink has smeared on them.",
 								"options": [
 									{
 										"action": [
@@ -2913,7 +2937,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "As soon as you turn to head back to town, you hear the squeaking of wagon wheels in the distance. Your employer comes in to view, and drives his wagon right up to you.",
+		"text": "Your employer couldn't be happier to see you returning to town, as it means that he gets to leave. (+1 reputation in $(poi_3))",
 		"options": [
 			{
 				"action": [
@@ -2960,10 +2984,12 @@
 								"probability": 0.5,
 								"count": 2
 							}
-						]
+						],
+						"addMapReputation": 1,
+						"POIReference": "$(poi_3)"
 					}
 				],
-				"name": "\"You might want to spend some time cleaning it before you move in, but it's all yours.\" (Complete Quest)"
+				"name": "\"You might want to spend some time cleaning it before you move in, but the place is all yours.\" (Complete Quest)"
 			}
 		]
 	},
@@ -2985,7 +3011,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "You decide that the rewards promised to you are not worth clearing out the current occupants of the $(poi_1). They were here first anyway. (-2 Local Reputation)",
+		"text": "You decide that the rewards promised to you are not worth clearing out the current occupants of the $(poi_1). They were there first, anyway. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -3005,7 +3031,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the  $(poi_1) and defeat all enemies inside.",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count2": 25,
@@ -3022,12 +3048,22 @@
 			"id": 2,
 			"name": "Leave",
 			"description": "Exit the newly cleared (but not yet cleaned) dungeon",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": "$(poi_1)"
+		},
+		{
+			"id": 3,
+			"name": "Return to town",
+			"description": "Go back to the settler in $(poi_3)",
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ]
 		}
 	]
 },
@@ -3228,6 +3264,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 35,
+			"count2": 10,
 			"POITags": [
 				"BiomeWhite",
 				"Hostile",
@@ -3243,9 +3280,11 @@
 			"id": 2,
 			"name": "Leave",
 			"description": "Leave town to begin your quest.",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -3264,7 +3303,7 @@
 	"name": "The Onyx Compass",
 	"description": "Clear out all enemies in the $(poi_2) and report back",
 	"offerDialog": {
-		"text": "\"You. Come here.\" The gnome speaking to you seems very out of place here. He wears a white pristine robe that was either a shirt or custom tailored for him. He acts like he belongs and that he owns the place, however.",
+		"text": "\"You. Come here.\" The gnome speaking to you seems very out of place here. He wears a white pristine robe that was either a long shirt, or custom tailored for him. He acts like he belongs and that he owns the place, however.",
 		"options": [
 			{
 				"name": "Walk over without a word.",
@@ -3373,7 +3412,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "You hold out your hand. \"Sorry, must be this tall to give orders\" (Decline Quest)",
+				"name": "You hold out your hand. \"Sorry, must be at least this tall to give orders\" (Decline Quest)",
 				"text": "(-1 Local Reputation) He scowls and stomps away, one tiny step at a time.",
 				"options": [
 					{
@@ -3601,7 +3640,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "Despite the insistance of the needle you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
+		"text": "Despite the insistance of the compass needle, you decide that you will not finish clearing the $(poi_2). As if it could sense this somehow, the onyx compass disappears. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -3620,9 +3659,10 @@
 	"rewardDescription": "Mana Shards, Uncommon & Rare cards",
 	"stages": [
 		{
-			"id": 3,
+			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin your quest",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -3635,7 +3675,7 @@
 					},
 					{
 						"name": "You take a closer look at the device.",
-						"text": "The 'compass' is unlike most you have ever seen before. There is not a single marking on it anywhere, nor any color other than onyx save the crimson needle.",
+						"text": "The 'compass' is unlike most you have seen before. There is not a single marking on it anywhere, nor any color other than onyx, save the crimson needle.",
 						"options": [
 							{
 								"name": "You put the compass away and carry on. (Continue)"
@@ -3668,6 +3708,7 @@
 				"Sidequest"
 			],
 			"objective": "Clear",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {
 				"text": "You check your compass, looking for your next target, only to find that the needle has disappeared entirely. Your task appears to be complete."
@@ -3683,6 +3724,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -3914,7 +3956,7 @@
 				"text": "\"My vision was less than specific about whether or not it would be changed by your actions. So... yes.\"",
 				"options": [
 					{
-						"name": "You glance around at a clear sky warily before going on in to town. (Complete Quest)"
+						"name": "You glance around at a clear sky warily before going on into town. (Complete Quest)"
 					}
 				]
 			}
@@ -3963,6 +4005,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 35,
+			"count2": 10,
 			"POITags": [
 				"BiomeRed",
 				"Hostile",
@@ -3989,6 +4032,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -4047,7 +4091,7 @@
 							},
 							{
 								"name": "\"I must decline. I respect the local inhabitants far more than faceless nobility.\" (Decline Quest)",
-								"text": "He gives you the smallest bow imaginable, just enough to say that one was given without indicating respect.",
+								"text": "He gives you the smallest bow imaginable, just enough to say that one was given, without indicating respect.",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -4082,7 +4126,7 @@
 			},
 			{
 				"name": "You can't put your finger on it, but something seems off about the man. \"This isn't a good time.\" (Decline Quest)",
-				"text": "He gives you the smallest bow imaginable, just enough to say that one was given without indicating respect. (-1 Local Reputation)",
+				"text": "He gives you the smallest bow imaginable, just enough to say that one was given, without indicating respect. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -4224,6 +4268,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -4240,7 +4285,7 @@
 	"id": 16,
 	"isTemplate": true,
 	"name": "Clearing the ledger",
-	"description": "Clear out all enemies in the $(poi_1)and report back",
+	"description": "Clear out all enemies in the $(poi_1) and report back",
 	"offerDialog": {
 		"text": "As you introduce yourself to the inside of the local inn for the night, another patron approaches you.",
 		"options": [
@@ -4250,11 +4295,11 @@
 				"options": [
 					{
 						"name": "You wait for him to continue.",
-						"text": "\"I've come in to an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\" ",
+						"text": "\"I've come into an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\" ",
 						"options": [
 							{
 								"name": "\"I see.\" You think you know where this is headed.",
-								"text": "The man looks sheepish. \"Unfortunately, I found that the land isn't exactly usable at the moment. Because it's occupied. Would you be willing to clear it for me in exchange for other parts of the inheritance?\"",
+								"text": "The man looks sheepish. \"Unfortunately, I found that the land isn't exactly usable at the moment. Because it contains a $(poi_1) which is... \"occupied\". Would you be willing to clear it for me in exchange for other parts of the inheritance?\"",
 								"options": [
 									{
 										"action": [
@@ -4273,7 +4318,7 @@
 												"POIReference": ""
 											}
 										],
-										"name": "\"So long as I get to keep whatever I find along the way too.\" (Accept Quest)."
+										"name": "\"So long as I get to keep whatever I find along the way, too.\" (Accept Quest)."
 									},
 									{
 										"name": "\"I don't think I'm interested. Sorry.\" (Decline Quest)"
@@ -4282,7 +4327,7 @@
 							},
 							{
 								"name": "\"And why exactly do you need me?\"",
-								"text": "\"Well, it seems the land isn't empty, and I need someone to fix that. You look like the sort that could handle it.\" ",
+								"text": "\"Well, it seems the land isn't empty, and I need someone to clear out the $(poi_1) which can be found there. You look like the sort that could handle it.\" ",
 								"options": [
 									{
 										"action": [
@@ -4444,6 +4489,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 35,
+			"count2": 10,
 			"POITags": [
 				"BiomeColorless",
 				"Hostile",
@@ -4463,6 +4509,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -4490,7 +4537,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort, off to one side.",
 						"text": "It reads: \"Gimgee's self-replicating paper. When you need unlimited paper or to clear a forest from afar, it's got to be Gimgee's\".",
 						"options": [
 							{
@@ -4606,7 +4653,7 @@
 								]
 							}
 						],
-						"name": "You dump the $(enemy_1s) on to one of the wagons and collect your rewards. (+3 Local Reputation)"
+						"name": "You dump the $(enemy_1)s onto one of the wagons and collect your rewards. (+3 Local Reputation)"
 					},
 					{
 						"name": "You take a closer look at the carts.",
@@ -4657,7 +4704,7 @@
 												]
 											}
 										],
-										"name": "You dump the $(enemy_1s) and collect your rewards.  (+3 Local Reputation)"
+										"name": "You dump the $(enemy_1)s and collect your rewards.  (+3 Local Reputation)"
 									}
 								]
 							}
@@ -4708,7 +4755,8 @@
 			"description": "Sometimes it pays to specialize. Cash in on a local bounty by bringing in the remains of 3 $(enemy_1)s. They can usually be found in the Swamp biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"BiomeBlack"
@@ -4732,6 +4780,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -4760,7 +4809,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
 						"text": "\"A focused mind receives great rewards. Focus on defeating 3 $(enemy_2)s, and be rewarded.\"",
 						"options": [
 							{
@@ -4850,7 +4899,7 @@
 					}
 				],
 				"name": "Warily take the items.",
-				"text": "No sooner than you do, the Djinn dissapears in a puff of smoke. When you turn back, the $(enemy_2) you just defeated has vanished as well.",
+				"text": "No sooner than you do, the Djinn disappears in a puff of smoke. When you turn back, the $(enemy_2) you just defeated has vanished as well.",
 				"options": [
 					{
 						"action": [
@@ -4915,6 +4964,7 @@
 			"id": 1,
 			"name": "Leave",
 			"description": "Leave town to begin your quest",
+			"anyPOI": true,
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -4928,8 +4978,10 @@
 			"description": "Sometimes it pays to specialize. Cash in on a local bounty by bringing in the remains of 3 $(enemy_2)s. They can usually be found in the Island biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
 			"enemyTags": [
 				"BiomeBlue"
 			],
@@ -5174,7 +5226,8 @@
 			"description": "Sometimes it pays to specialize. Cash in on a local bounty by bringing in the remains of 3 $(enemy_1)s. They can usually be found in the Forest biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"Animal",
@@ -5193,6 +5246,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
@@ -5227,7 +5281,7 @@
 								"text": "He laughs as if the question was ridiculous. \"I am, of course. And I need someone to prove that they are worthy of my teachings!\"",
 								"options": [
 									{
-										"name": "You decide to humor him. \"Let's say that I am, what then?\"",
+										"name": "You decide to humor him. \"Let's say that I am. What then?\"",
 										"text": "He looks at you again, as though he hadn't actually paid attention to you before. \"Then you prove it. Defeat 3 $(enemy_1)s with honor.\"",
 										"options": [
 											{
@@ -5438,7 +5492,8 @@
 			"description": "Sometimes it pays to specialize. Cash in on a local bounty by bringing in the remains of 3 $(enemy_1)s. They can usually be found in the Plains biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"BiomeWhite"
@@ -5456,6 +5511,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
@@ -5483,7 +5539,7 @@
 				"options": [
 					{
 						"name": "\"It really depends on what they are.\" You look at him suspsiciously.",
-						"text": "\"You're not a farmhand, so it will have to be.\" He thinks for a moment, pulling out a well worn notebook and flipping through the pages.",
+						"text": "\"You're not a farmhand, so it will have to be..\" He thinks for a moment, pulling out a well worn notebook and flipping through the pages.",
 						"options": [
 							{
 								"name": "\"Another time perhaps, I need to keep moving.\" (Decline Quest)",
@@ -5539,6 +5595,25 @@
 		"text": "You walk back into the town with the requested cargo of $(enemy_1)s. You're unsure if they will be useful, but the dwarf seems extremely excited to begin his work. (+3 Local Reputation) ",
 		"options": [
 			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "gold",
+								"count": 500
+							},
+							{
+								"type": "card",
+								"count": 4,
+								"addMaxCount": 4,
+								"rarity": [
+									"Common",
+									"Uncommon"
+								]
+							}
+						]
+					}
+				],
 				"name": "You try to talk to him, but the dwarf is completely lost in his work already. You take the bundle he was carrying, assuming it to be your rewards. (Complete Quest)"
 			}
 		]
@@ -5584,7 +5659,8 @@
 			"description": "Sometimes it pays to specialize. Cash in on a local bounty by bringing in the remains of 3 $(enemy_1)s. They can usually be found in the Wasteland biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"BiomeColorless"
@@ -5602,6 +5678,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
@@ -5630,7 +5707,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
 						"text": "It reads: \"Gimgee's rocks. When you need a good rock, think Gimgee's\".",
 						"options": [
 							{
@@ -5745,7 +5822,8 @@
 			"description": "At the request of a village shaman, defeat 3 $(enemy_1)s. They can usually be found in the Mountain biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 3,
+			"count3": 3,
+			"worldMapOK": true,
 			"objective": "Defeat",
 			"enemyTags": [
 				"BiomeRed"
@@ -5763,6 +5841,7 @@
 			"mapFlagValue": 1,
 			"here": true,
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"failureDialog": {},
@@ -5785,48 +5864,25 @@
 		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
 		"options": [
 			{
-				"name": "You walk over to her. \"Okay, kid, settle down, I heard you. What's this about?\"",
+				"name": "You walk over to her. \"Okay kid, settle down, I heard you. What's this about?\"",
 				"text": "She looks surprised, and falls silent for a moment as she tries to remember what to do next. \"I uhhh... ummm...\" She pulls a piece of paper out of her pocket and prepares to read.",
 				"options": [
 					{
 						"action": [
 							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": ""
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "23",
-								"addMapReputation": -1,
-								"POIReference": ""
+								"addMapReputation": -1
 							}
 						],
 						"name": "Take the paper from her.",
-						"text": "\"HEY THAT'S MINE!!!\" She finds her full ear-piercing volume again before pulling it away and reading. \"PROVE YOU'RE THE BEST IN THE ARENA! THE TOURNAMENT BEGINS SOON\"",
+						"text": "\"HEY THAT'S MINE!!!\" (-1 Reputation) She finds her full ear-piercing volume again before pulling it away and reading. \"PROVE YOU'RE THE BEST IN THE ARENA! THE TOURNAMENT BEGINS SOON\"",
 						"options": [
 							{
 								"action": [
 									{
-										"removeItem": "",
-										"setColorIdentity": "",
-										"advanceQuestFlag": "",
-										"advanceMapFlag": "",
-										"setQuestFlag": {
-											"key": ""
-										},
-										"setMapFlag": {
-											"key": ""
-										},
-										"issueQuest": "23",
-										"POIReference": ""
+										"issueQuest": "23"
 									}
 								],
-								"name": "\"Okay, sure, going somewhere far away seems good right now.\" (Accept Quest)"
+								"name": "\"Okay, sure, going somewhere far away seems good right now, wherever it may be.\" (Accept Quest)"
 							},
 							{
 								"name": "\"No thanks, I think I'll go find somewhere quiet for a while.\" (Decline Quest)"
@@ -5840,18 +5896,7 @@
 							{
 								"action": [
 									{
-										"removeItem": "",
-										"setColorIdentity": "",
-										"advanceQuestFlag": "",
-										"advanceMapFlag": "",
-										"setQuestFlag": {
-											"key": ""
-										},
-										"setMapFlag": {
-											"key": ""
-										},
-										"issueQuest": "23",
-										"POIReference": ""
+										"issueQuest": "23"
 									}
 								],
 								"name": "\"Okay, sure, going somewhere far away seems good right now.\" (Accept Quest)"
@@ -5876,7 +5921,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "The crowd goes wild as you finish your last opponent. You won't be paying for drinks in the $(poi_1) for quite some time. (+3 reputation in $(poi_1))",
+		"text": "The crowd goes wild as you finish your last opponent. You won't be paying for drinks in $(poi_1) for quite some time. (+3 reputation in $(poi_1))",
 		"options": [
 			{
 				"action": [
@@ -5899,7 +5944,9 @@
 								"type": "gold",
 								"count": 250
 							}
-						]
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_1)"
 					}
 				],
 				"name": "(Complete Quest)"
@@ -5994,6 +6041,7 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Arena",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": "$(poi_1)"
@@ -6009,7 +6057,7 @@
 	"id": 24,
 	"isTemplate": true,
 	"name": "Pest Control",
-	"description": "Defeat Xira and her hornets in her hive and report back",
+	"description": "Defeat Xira and her hornets in her hive, and report back",
 	"offerDialog": {
 		"text": "Greetings, adventurer! I have a task that requires your assistance. You see, we have a bit of a situation with a giant insect named Xira. She's been causing quite a stir in our town with her penchant for organizing extravagant balls.",
 		"options": [
@@ -6041,7 +6089,7 @@
 			},
 			{
 				"name": "Let me guess, you want to me to deal with this situation ?",
-				"text": "Well Yes, Let me explain the situation; Xira's balls have become a bit of a problem. She has been hosting them every night, and they're becoming increasingly extravagant and disruptive. The townspeople are getting tired of the constant noise and commotion, and it's affecting their daily lives.",
+				"text": "Well yes. Let me explain the situation; Xira's balls have become a bit of a problem. She has been hosting them every night, and they're becoming increasingly extravagant and disruptive. The townspeople are getting tired of the constant noise and commotion, and it's affecting their daily lives.",
 				"options": [
 					{
 						"name": "I see. So you want me to talk to Xira and ask her to stop?",
@@ -6080,7 +6128,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
 										"POIReference": ""
 									}
 								],
@@ -6175,7 +6222,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the Xira's Hive and defeat all enemies inside. The target location is in the Waste biome.",
+			"description": "Travel to $(poi_1) and defeat all enemies inside. The target location is in the Waste biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
@@ -6189,7 +6236,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"description": "Return to $(poi_2) and report your success in clearing $(poi_1).",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -6197,6 +6244,7 @@
 				"Xira"
 			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -6230,7 +6278,6 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": -1,
 						"POIReference": ""
 					}
 				],
@@ -6248,7 +6295,7 @@
 				"options": [
 					{
 						"name": "I see. So you want me to go to his factory and defeat him ?",
-						"text": "Your task, should you accept it, is to venture into Slobad's factory and cleanse it of its mechanical menaces. You will face a myriad of strange mechs, each with its unique capabilities and behaviors. Additionally, the factory's artificers, skilled engineers corrupted by their own creations, will fiercely defend their inventions, making your mission all the more challenging.",
+						"text": "Your task, should you accept it, is to venture into Slobad's factory and cleanse it of its mechanical menaces. You will face a myriad of strange mechs, each with its unique capabilities and behaviors. Additionally, the factory's artificers, skilled engineers corrupted by their own creations, will fiercely defend their inventions. Making your mission all the more challenging.",
 						"options": [
 							{
 								"action": [
@@ -6284,7 +6331,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
 										"POIReference": ""
 									}
 								],
@@ -6380,7 +6426,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Waste biome.",
+			"description": "Travel to Slobad's Factory and defeat all enemies inside. The target location is in the Waste biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
@@ -6394,14 +6440,12 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"description": "Return to town and report your success in clearing $(poi_1).",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
-			"POITags": [
-				"Slobad"
-			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -6417,7 +6461,7 @@
 	"id": 26,
 	"isTemplate": true,
 	"name": "Spores of Death",
-	"description": "Defeat Slimfoot and his fungi in his bog and report back",
+	"description": "Defeat Slimefoot and his fungi in his bog and report back",
 	"offerDialog": {
 		"text": " Ah, greetings, brave adventurer! I have a grave matter to discuss with you. We need a brave adventurer to deal with the rogue fungus Slimefoot. ",
 		"options": [
@@ -6435,7 +6479,6 @@
 							"key": ""
 						},
 						"issueQuest": "",
-						"addMapReputation": -1,
 						"POIReference": ""
 					}
 				],
@@ -6449,7 +6492,7 @@
 			},
 			{
 				"name": "Tell me more about Slimefoot and what I can do to stop it.",
-				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence, a monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
+				"text": "Thank you, noble adventurer. Slimefoot is a creature of pure malevolence. A monstrous being that has taken root in the heart of the treacherous swamp. Its corrosive touch and toxic aura have brought devastation to our lands. To defeat it, you must journey through the perilous swamp, filled with treacherous terrain and deadly creatures lurking within.",
 				"options": [
 					{
 						"name": "I see. So you want me to travel to Slimefoots swamp and defeat him ?",
@@ -6488,7 +6531,6 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
 										"POIReference": ""
 									}
 								],
@@ -6580,7 +6622,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the Swamp biome.",
+			"description": "Travel to Slimefoot's Lair and defeat him and his fungal minions'. The target location is in the Swamp biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
@@ -6594,14 +6636,12 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"description": "Return to town and report your success in clearing Slimefoots Lair.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
-			"POITags": [
-				"Slimefoot"
-			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -6640,7 +6680,7 @@
 					}
 				],
 				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
-				"text": "Figured you weren't up to the challenge, come back to me when you are. ",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -6688,12 +6728,11 @@
 											"key": ""
 										},
 										"issueQuest": "",
-										"addMapReputation": -1,
 										"POIReference": ""
 									}
 								],
-								"name": "I don't intending to get slime on my armor, sorry you have to find someone else (Decline Quest)",
-								"text": "The merchant keeps a passive look on his face. \"Soon those things will be balanced as well.\"",
+								"name": "I don't intend to get slime on my armor. Sorry, you have to find someone else (Decline Quest)",
+								"text": "The merchant keeps a passive look on his face. \"All things perish in the end..\"",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -6786,7 +6825,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the $(poi_1) and defeat all enemies inside. The target location is in the waste biome.",
+			"description": "Travel to the Old Sewers and defeat all enemies inside. The target location is in the waste biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
@@ -6804,10 +6843,8 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
-			"POITags": [
-				"SlimeCave"
-			],
 			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": ""
@@ -6839,8 +6876,13 @@
 				]
 			},
 			{
+				"condition": [
+					{
+						"checkCharacterFlag": "newGamePlus"
+					}
+				],
 				"name": "Been here, done that. Show me to the enemies. (New Game+)",
-				"text": "Okay, skipping all that \"hard work\" somebody put into dialog, the portal opens and you can leave.",
+				"text": "Okay, skipping all that hard work somebody put into dialog, the portal opens and you can leave.",
 				"options": [
 					{
 						"action": [
@@ -6893,9 +6935,11 @@
 			"id": 2,
 			"name": "Exit the cave",
 			"description": "The portal is open and you can leave now.",
-			"mapFlag": "mainQuest",
+			"anyPOI": true,
+			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {
 				"text": "So, you have a quest of sorts now: Find and free the planeswalkers. But is that really what you want to do? Despite the fog covering your memory, you are certain that you are powerful enough to take care of yourself.",
@@ -6908,7 +6952,7 @@
 								"advanceQuestFlag": "",
 								"advanceMapFlag": "",
 								"setQuestFlag": {
-									"key": "seekWalkers",
+									"key": "shandWalkers1",
 									"val": 1
 								},
 								"setMapFlag": {
@@ -6918,7 +6962,7 @@
 								"POIReference": ""
 							}
 						],
-						"name": "I want to find the planeswalkers",
+						"name": "I want to find the planeswalkers (Future release)",
 						"text": "Well, shouting \"Planeswalkers, where are you?\" into the wastes won't do much. Travel to the nearest settlement and ask around for information.",
 						"options": [
 							{
@@ -6938,51 +6982,16 @@
 										"POIReference": ""
 									}
 								],
-								"name": "(Dismiss)"
-							}
-						]
-					},
-					{
-						"action": [
-							{
-								"removeItem": "",
-								"setColorIdentity": "",
-								"advanceQuestFlag": "",
-								"advanceMapFlag": "",
-								"setQuestFlag": {
-									"key": "exploreShand",
-									"val": 1
-								},
-								"setMapFlag": {
-									"key": ""
-								},
-								"issueQuest": "",
-								"POIReference": ""
-							}
-						],
-						"name": "I want to explore and learn about Shandalar",
-						"text": "Exploring it is. Find and enter a nearby dungeon.",
-						"options": [
-							{
-								"action": [
+								"name": "(Continue)",
+								"text": "New Quest: A Chat with the Locals - Objective: Travel to any town in the wasteland",
+								"options": [
 									{
-										"removeItem": "",
-										"setColorIdentity": "",
-										"advanceQuestFlag": "",
-										"advanceMapFlag": "",
-										"setQuestFlag": {
-											"key": ""
-										},
-										"setMapFlag": {
-											"key": ""
-										},
-										"issueQuest": "30",
-										"POIReference": ""
+										"name": "(Dismiss)"
 									}
-								],
-								"name": "(Dismiss)"
+								]
 							}
-						]
+						],
+						"isDisabled": true
 					},
 					{
 						"action": [
@@ -6992,7 +7001,27 @@
 								"advanceQuestFlag": "",
 								"advanceMapFlag": "",
 								"setQuestFlag": {
-									"key": "shandRep",
+									"key": "exploreShand1",
+									"val": 1
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "30",
+								"POIReference": ""
+							}
+						],
+						"name": "I want to explore Shandalar ((Has a brief tutorial))"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": "shandRep1",
 									"val": 1
 								},
 								"setMapFlag": {
@@ -7002,7 +7031,7 @@
 								"POIReference": ""
 							}
 						],
-						"name": "I want to make a name for myself",
+						"name": "I want to make a name for myself (Future release)",
 						"text": "Then let's go impress some people. But first, you need some impressive spells. Build your collection to begin your quest.",
 						"options": [
 							{
@@ -7018,13 +7047,14 @@
 										"setMapFlag": {
 											"key": ""
 										},
-										"issueQuest": "30",
+										"issueQuest": "31",
 										"POIReference": ""
 									}
 								],
 								"name": "(Dismiss)"
 							}
-						]
+						],
+						"isDisabled": true
 					}
 				]
 			},
@@ -7041,7 +7071,7 @@
 	"offerDialog": {},
 	"prologue": {},
 	"epilogue": {
-		"text": "The locals look at you a little less suspiciously than when you first arrived asking questions, but they can't deliver information they don't have.",
+		"text": "The locals meet your inquiries with a little less disdain than when you first arrived asking questions without much coin to go along with them, but they can't deliver information they don't have.",
 		"options": [
 			{
 				"name": "(Continue)",
@@ -7057,7 +7087,7 @@
 								"options": [
 									{
 										"name": "\"Go on...\"",
-										"text": "\"Every door was locked tight. A bad feeling came up my back as I realized just how quiet it was right before I heard splashing. I peeked round the corner, and found a merfolk waving his arms around and casting some spell.\"",
+										"text": "\"Every door was locked tight. A bad feeling came up my back as I realized just how quiet it was, right before I heard splashing. I peeked round the corner, and found a merfolk waving his arms around and casting some spell.\"",
 										"options": [
 											{
 												"name": "\"What was the spell?\"",
@@ -7088,7 +7118,19 @@
 																				"POIReference": "$(poi_2)"
 																			}
 																		],
-																		"name": "Portals aren't exactly what you're looking for, but mages that travel the aether are. The merchant marks your map and goes back to his drink."
+																		"name": "(Continue)",
+																		"text": "Portals aren't exactly what you're looking for, but mages that travel the aether are. The merchant marks your map and goes back to his drink.",
+																		"options": [
+																			{
+																				"name": "(Continue)",
+																				"text": "[New Quest: A Portal to Nowhere  - Objective: Travel to the ghost town]",
+																				"options": [
+																					{
+																						"name": "(Dismiss)"
+																					}
+																				]
+																			}
+																		]
 																	}
 																]
 															}
@@ -7119,7 +7161,18 @@
 															}
 														],
 														"name": "\"And where did this happen?\"",
-														"text": "He marks your map without another word and goes back to his drink. (-1 local reputation) (Continue)"
+														"text": "He marks your map without another word and goes back to his drink. (-1 local reputation) ",
+														"options": [
+															{
+																"name": "(Continue)",
+																"text": "[New Quest: A Portal to Nowhere  - Objective: Travel to the ghost town]",
+																"options": [
+																	{
+																		"name": "(Dismiss)"
+																	}
+																]
+															}
+														]
 													}
 												]
 											}
@@ -7165,13 +7218,51 @@
 			"description": "Build your reputation to at least +5 in any wasteland town",
 			"mapFlag": "",
 			"mapFlagValue": 1,
-			"count1": 5,
+			"count3": 5,
 			"POITags": [
 				"BiomeColorless",
 				"Town"
 			],
 			"objective": "HaveReputation",
-			"prologue": {},
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "As you enter this small town, the local population pays little notice to you as they go about their normal business. It appears that strangers are a familiar sight here, and not a particularly impactful one unless you are looking to spend your gold.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "A centaur trots out of town, adding one more letter to the bag of mail slung over his shoulder. The courier deftly veers around an ogre lifting blocks of stone onto the second floor of a building under construction.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Signs affixed to the smaller buildings along the dusty street advertise specialty spell shops, crop wizards for hire, a recently shuttered parlor of a divination specialist, and a newly built explorer's guild hall. Street peddlers unable to afford permanent shops buy and sell food and mundane goods from their carts.",
+								"options": [
+									{
+										"name": "(Continue)",
+										"text": "Everyone around has something to do or something to barter for, but no one seems to be selling information, let alone giving it away.",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "Perhaps building trust with the community might earn you some information. (Note: Reputation is earned by successfully completing quests offered in the town hall)",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "[New Objective: Reach a total of +5 reputation in any wasteland town]",
+														"options": [
+															{
+																"name": "(Leave)"
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
 			"epilogue": {},
 			"POIToken": ""
 		}
@@ -7182,9 +7273,51 @@
 	"id": 30,
 	"isTemplate": true,
 	"name": "Where Am I?",
+	"description": "Get your bearings in the world around you",
 	"offerDialog": {},
 	"prologue": {},
-	"epilogue": {},
+	"epilogue": {
+		"text": "Like most small towns, there are more shops and market stalls than there are houses, with much of the town's occupants traveling in from the outlying areas each morning.",
+		"options": [
+			{
+				"name": "(Continue)",
+				"text": "Many merchants are peddling their wares, the most relevant to a wizard having colorful (if at times crude) signs in front of their shops advertising their specialties.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "The inn sounds just raucous enough to know that it is doing healthy business. You recall what you were told about the Challenge coins and contemplate putting them to use there.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Perhaps the most intriguing of all, however, is the town hall with a notice board out front, advertising work for adventurers. What better way to make some coin while you explore?",
+								"options": [
+									{
+										"action": [
+											{
+												"removeItem": "",
+												"setColorIdentity": "",
+												"advanceQuestFlag": "",
+												"advanceMapFlag": "",
+												"setQuestFlag": {
+													"key": ""
+												},
+												"setMapFlag": {
+													"key": ""
+												},
+												"issueQuest": "43",
+												"POIReference": ""
+											}
+										],
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
 	"failureDialog": {},
 	"declinedDialog": {
 		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
@@ -7194,7 +7327,203 @@
 			}
 		]
 	},
-	"storyQuest": true
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel to town",
+			"description": "Find a friendly settlement to be introduced to the services it offers",
+			"anyPOI": true,
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Town"
+			],
+			"objective": "Travel",
+			"prologue": {
+				"text": "All major locations in Shandalar can be divided up in to one of two categories: towns and dungeons.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "A navigation arrow should now appear around your character. Follow it to a nearby town. Try to avoid any enemies that pop up along the way.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Hint: Follow a road. All roads lead to a town. You also move faster on roads and fewer enemies will appear.",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Leave town",
+			"description": "Head back out into the wilderness when you are ready to proceed",
+			"anyPOI": true,
+			"POITags": [
+				"Town"
+			],
+			"objective": "Leave",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "Most towns in a given region of Shandalar will look very similar to one another, and offer the same basic services.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "The inn contains some special events. You can also sell extra cards there, or buy temporary extra health.\n\nThe '?' sign denotes a town square / job board where you can obtain side quests.\n\nAll of the other buildings with signs out front are shops, most of them sell cards.\n\nTo leave town, walk back toward the edge of the screen just below your current location.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Entering a friendly town will also restore any missing hit points for free.\n\nExplore the town if you want, and leave when you are ready to continue.",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Find a Dungeon",
+			"description": "Find and enter any dungeon",
+			"anyPOI": true,
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Dungeon"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {
+				"text": "Your navigation arrow should now direct you to the nearest dungeon. Many quests will send you to dungeons, but you are also free to enter them without a quest. Follow the arrow and travel to a dungeon.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 4,
+			"name": "Win a duel",
+			"description": "Duel and defeat any enemy",
+			"anyPOI": true,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {
+				"text": "Many quests you undertake in your adventure will send you to one or more dungeons just like this one. Dungeons are filled with enemies, but also treasure like gold, mana shards, and cards.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "Your next objective is to defeat any single enemy in a duel. You can find them in a dungeon like this one, or wandering around outside on the world map. To begin a duel, simply walk in to the enemy.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "If you are defeated by the enemy, that's okay. If (when) that happens, you will lose some of your starting health and a percentage of your gold, but you've learned what to expect from that enemy in the future.",
+								"options": [
+									{
+										"name": "(Continue)",
+										"text": "Unlike on the world map, an enemy that defeats you in a dungeon will remain on the map; you can try to duel them again, or run away and seek out another opponent. If you want or need to heal yourself, go back to town.",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "Some quests, like this one, have multiple objectives that can be achieved simultaneously. Your other current objective is to find and enter a cave on the world map. An enemy defeated in a cave or on the way there will count as the enemy to defeat for your first objective, so feel free to do these things in any order.",
+												"options": [
+													{
+														"name": "(Continue)"
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {
+				"text": "Winning a duel grants you rewards; usually a combination of gold and cards. Some enemies drop a wider assortment of cards for variety, but others specifically give cards from their own deck. If you still need to visit a cave, do that now. Otherwise, it's time to return to town.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 5,
+			"name": "Find a Cave",
+			"description": "Find and enter any cave",
+			"anyPOI": true,
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Cave"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "A cave is functionally identical to a dungeon, but can be classified separately for quest purposes; a cave would not have completed your objective to find a dungeon, nor would that dungeon count for this one.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "If you haven't defeated an enemy in a duel yet, you can pick a fight with an enemy here for that. Otherwise, you can return to town.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 5,
+			"name": "Go to a town",
+			"description": "Go to one of the nearby settlements",
+			"anyPOI": true,
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Town"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 4, 5 ],
+			"prologue": {
+				"text": "It's not a bad idea to occasionally visit town to sell extra cards, browse the shops, or pick up new quests.\n\nEvery town has its own assortment of shops and thus its own unique collections of cards for sale.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": true,
+	"autoTrack": true
 },
 {
 	"id": 31,
@@ -7218,7 +7547,6 @@
 	"id": 32,
 	"isTemplate": true,
 	"name": "A Portal to Nowhere",
-	"storyQuest": true,
 	"description": "Investigate the report of portals being opened in a seemingly abandoned town.",
 	"offerDialog": {},
 	"prologue": {},
@@ -7240,9 +7568,53 @@
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"POITags": [
-				"BiomeColorless",
-				"OccupiedTown"
+				"Quest_APortalToNowhere"
 			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": "",
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Investigate",
+			"description": "Search for clues regarding the portals from the merchant's story",
+			"mapFlag": "foundClues",
+			"mapFlagValue": 2,
+			"objective": "MapFlag",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": "$(poi_1)"
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 33,
+	"isTemplate": true,
+	"name": "Welcome to the Jungle",
+	"description": "Search for a powerful artifact",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Travel to the abandoned town",
+			"mapFlag": "",
+			"mapFlagValue": 1,
 			"objective": "Travel",
 			"prologue": {},
 			"epilogue": {},
@@ -7255,10 +7627,3596 @@
 			"mapFlag": "foundClues",
 			"mapFlagValue": 2,
 			"objective": "MapFlag",
+			"prerequisiteIDs": [ 1 ],
 			"prologue": {},
 			"epilogue": {},
 			"POIToken": "$(poi_1)"
 		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 34,
+	"isTemplate": true,
+	"name": "A Healthy Dose of Skep-ticism",
+	"description": "Find Shandalar's largest Sliver hive",
+	"offerDialog": {},
+	"prologue": {
+		"text": "Quest 'A Healthy Dose of Skep-ticism' is a placeholder. It will eventually be replaced with an actual quest to explore the Skep. For now, this simply serves as directions to get there if you so desire. This placeholder quest does not provide any rewards.",
+		"options": [
+			{
+				"name": "(Dismiss)"
+			}
+		]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Travel",
+			"description": "Travel to the Skep",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Snow"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital"
 	]
+},
+{
+	"id": 35,
+	"isTemplate": true,
+	"name": "Kiora's Fall",
+	"description": "Defeat the Kiora and her minions",
+	"offerDialog": {
+		"text": "Village Elder: (Wrinkled brow, concerned tone) Ah, adventurer, have you heard of the looming threat? Kiora, the sea mage, stirs the depths with her restless sea creatures. We face a dire peril.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Kiora? What's she up to now, Elder?",
+				"text": "(Grimaces) She seeks to summon ancient sea titans that slumber beneath the waves, creatures that could engulf our lands in a cataclysmic flood. It's a threat that endangers Shandalar's very existence.",
+				"options": [
+					{
+						"name": "That sounds like a catastrophe waiting to happen. What can we do?",
+						"text": "(Nods) We must act swiftly. Seek out Kiora, reason with her if you can, but be prepared for a fight. Our survival depends on thwarting her dangerous ambitions. Remember, the sea is a powerful ally and a formidable foe.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "35",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll do my best to stop her, Elder. Shandalar's safety is my priority.",
+								"text": "(Grateful smile) Thank you, brave one. We place our hopes in your hands. Kiora must be convinced to abandon her reckless path, or we'll face a watery doom."
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "I don't think this is a quest for me  (Decline Quest)",
+								"text": "Shocked, the Elder shakes his head in dismay, \"Youngsters these days...\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for defeating Kiora. (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of defeating Kiora. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Find Kiora's Hideout and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Kiora"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing Kiora's Hideout'",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal"
+	]
+},
+{
+	"id": 36,
+	"isTemplate": true,
+	"name": "Teferi's Fall",
+	"description": "Find and defeat Teferi",
+	"offerDialog": {
+		"text": "Village Scholar: (Worried expression, hurried tone) Adventurer, we have a grave concern on our hands, and it concerns Teferi, the temporal mage. His actions threaten Shandalar's very fabric of time.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Teferi? What's he doing that's causing such alarm?",
+				"text": "(Frowning) Teferi's meddling with time magic has created temporal anomalies across Shandalar. The past, present, and future are becoming entangled, leading to chaos and unpredictability. It's a perilous situation.",
+				"options": [
+					{
+						"name": "That sounds like a serious problem. How can we resolve it?",
+						"text": "(Nods) We must confront Teferi, but diplomacy should be our first approach. He's a powerful mage, and if he refuses to cooperate, we may have to resort to more forceful measures to restore temporal stability.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "36",
+										"POIReference": ""
+									}
+								],
+								"name": "I'll do what I can to reason with him, Scholar. Shandalar's timeline must be protected. (Accept Quest)",
+								"text": "(Appreciative nod) Your bravery is commendable. Remember, time magic is delicate and dangerous. Approach Teferi with caution, but be resolute in your mission to save Shandalar from temporal disaster."
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "I don't think this is a quest for me  (Decline Quest)",
+								"text": "The Scholar keeps a passive look on his face. \"Soon, everything will come to naught.\"",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you enter the village, the local towspeople rush towards you to thank you for your deeds.  (+3 reputation in $(poi_1))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						]
+					}
+				],
+				"name": "It's nothing I coudn't handle (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of defeating Teferi. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Find Teferi's Hideout and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Teferi"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal"
+	]
+},
+{
+	"id": 37,
+	"isTemplate": true,
+	"name": "The Drunken Plea",
+	"description": "Confront the Phyrexians",
+	"offerDialog": {
+		"text": "Hey there, bud! You see...hiccup... them metal monstrosities, the Phyrexians? Yeah, they're up to no good, I tell ya. I saw 'em, I did!",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"name": "Sorry, I don't have to the time for this. (Decline Quest)",
+				"text": "Figured you weren't up to the challenge, come back to me when you are.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			{
+				"name": "Phyrexians? What are you talking about, Tipsy Tim?",
+				"text": "These...hiccup... metal freaks! They ain't from around here, I swear. Saw 'em with me own eyes. They got them twisted, mechanical...things! Up to somethin' bad, they are!",
+				"options": [
+					{
+						"name": "You've had quite a few drinks, Tim. Are you sure you're not imagining things? Phyrexians haven't been seen in these parts for thousands of years",
+						"text": "Nonsense! Me eyes don't lie, friend. Them Phyrexians are real trouble, I'm tellin' ya. You gotta go. See for yourself. Kick 'em outta Shandalar!",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "37",
+										"POIReference": ""
+									}
+								],
+								"name": "Alright, Tim, I'll look into it. But first, maybe you should lay off the ale for a while.",
+								"text": "Yeah, yeah, maybe you're right. But don't forget about them Phyrexians! Shandalar needs ya, and so does ol' Tipsy Tim!"
+							},
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "Sorry, I don't have time for this (Decline Quest)",
+								"text": "Tipsy Tim gives you a morose look, then starts drinking more as he staggers away from you with profound disappointment.",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "As you return to $(poi_2), nobody seems impressed besides Tipsy Tim, who gives you a clap on the back. \"Those metal freaks...hiccup...You got rid of them you did!\" He then stumbles away happily. (+3 reputation in $(poi_2))",
+		"options": [
+			{
+				"action": [
+					{
+						"grantRewards": [
+							{
+								"type": "shards",
+								"probability": 1,
+								"count": 10,
+								"addMaxCount": 20
+							},
+							{
+								"type": "gold",
+								"probability": 1,
+								"count": 500,
+								"addMaxCount": 500
+							},
+							{
+								"type": "card",
+								"probability": 1,
+								"count": 7,
+								"addMaxCount": 7,
+								"colors": [
+									"Green",
+									"Blue",
+									"Black"
+								],
+								"rarity": [
+									"Rare",
+									"Mythic Rare"
+								]
+							}
+						],
+						"addMapReputation": 3,
+						"POIReference": "$(poi_2)"
+					}
+				],
+				"name": "You wave farewell to Tipsy Tim (Complete Quest)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_2)"
+			}
+		],
+		"text": "After some reflection, you decide that the rewards promised to you are not worth the effort of dealing with the phyrexians. (-2 reputation in $(poi_2))",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"reward": {},
+	"rewardDescription": "Mana Shards, Rare and mythic cards",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Clear",
+			"description": "Find the Phyrexian camp and defeat all enemies present.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Phyrexian"
+			],
+			"objective": "Clear",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Travel",
+			"description": "Return to town and report your success in clearing the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"failureDialog": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_capital",
+		"mountain_capital",
+		"forest_capital",
+		"plains_capital",
+		"swamp_capital"
+	]
+},
+{
+	"id": 38,
+	"isTemplate": true,
+	"name": "Goblin Invasion",
+	"description": "Stop the Goblin invasion",
+	"offerDialog": {
+		"text": "From somewhere near the gate where you entered $(poi_3), a bell rings frantically.",
+		"options": [
+			{
+				"name": "Go back and see what the noise is about.",
+				"text": "\"GOBLINS!!!\" A haggard looking ranger exclaims as he sounds the alarm. \"Goblins are coming, hordes of them! To arms!!!\"",
+				"options": [
+					{
+						"action": [
+							{
+								"addMapReputation": -1,
+								"POIReference": "$(poi_3)"
+							}
+						],
+						"name": "This isn't your problem, leave it to the town guards. (Decline Quest, -1 local reputation)"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "38",
+								"POIReference": ""
+							}
+						],
+						"name": "Commit to helping defend the town (Accept Quest)"
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "With the Goblin attacks halted, the people of $(poi_3) shower you with thanks and quite a few coins as well. (+2 local reputation, +500 gold)",
+		"options": [
+			{
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_3)"
+					}
+				],
+				"name": "(Quest complete)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_3)"
+			}
+		],
+		"text": "The day, and much of $(poi_3), belongs to the Goblin horde. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Gold and Reputation",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Battle the Goblin horde",
+			"description": "Goblins are appearing all over. Win at least three duels against them.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 3,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"enemyTags": [
+				"Goblin",
+				"Minion"
+			],
+			"enemyExcludeTags": [
+				"Leader",
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "The gobins are greatly diminished in number, but the bravest of them still press the attack on $(poi_3). Defeat one of the leaders to put a stop to all of this.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Defeat a $(enemy_2)",
+			"description": "With the greenskin ranks thinned out, defeating one of their leaders should break the remaining horde's will to fight.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Goblin",
+				"Leader"
+			],
+			"enemyExcludeTags": [
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "A few more raiders remain, but they fight more defensively now. $(poi_3) should be safe, and you should return to report your success.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Travel",
+			"description": "Return to $(poi_3) and collect your rewards.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 39,
+	"isTemplate": true,
+	"name": "Merfolk Invasion",
+	"description": "Stop the Merfolk invasion",
+	"offerDialog": {
+		"text": "\"Traveler, we need every able body to be ready. Merfolk have been spotted nearby, and in very large numbers.\"",
+		"options": [
+			{
+				"name": "Merfolk? Here?",
+				"text": "\"Well\", the man's face twists slightly, \"...we may have sent some adventurers in search of an artifact recently. A portion of the group returned without it, but it appears they were followed.\"",
+				"options": [
+					{
+						"action": [
+							{
+								"addMapReputation": -1,
+								"POIReference": "$(poi_3)"
+							}
+						],
+						"name": "\"You called this onto yourself, fix it yourself.\" (Decline Quest, -1 local reputation)"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "39",
+								"POIReference": ""
+							}
+						],
+						"name": "Join the fight. (Accept Quest)"
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "Whether the merfolk got sufficient revenge, or your efforts drove them away, $(poi_3) is no longer under attack. (+2 local reputation, +500 gold)",
+		"options": [
+			{
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_3)"
+					}
+				],
+				"name": "(Quest complete)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_3)"
+			}
+		],
+		"text": "You have failed to defend $(poi_3), and they are now at the mercy of the Merfolk. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Gold and Reputation",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Battle the Merfolk raiders",
+			"description": "Defeat at least three Merfolk in defense of $(poi_3).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 3,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"enemyTags": [
+				"Merfolk",
+				"Minion"
+			],
+			"enemyExcludeTags": [
+				"Leader",
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "With several Merfolk defeated, their champions begin to hunt for you..",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Defeat one of the Merfolk champions",
+			"description": "Defeating a Merfolk champion will hopefully be enough to turn the tide, so to say.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Merfolk",
+				"Leader"
+			],
+			"enemyExcludeTags": [
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "$(poi_3) has successfully been defended, and you should return to report your success.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Travel",
+			"description": "Return to $(poi_3) and collect your rewards.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 40,
+	"isTemplate": true,
+	"name": "Undead Invasion",
+	"description": "Stop the Undead invasion",
+	"offerDialog": {
+		"text": "Outside the walls of $(poi_3), corpses litter the ground. \"The problem is, they won't stay down.\" The town's mayor implores you to assist somehow.",
+		"options": [
+			{
+				"name": "\"There is likely a necromancer at work here.\"",
+				"text": "\"Can you stop them?\" The mayor gives you a hopeful look, knowing that the town's defenders are exhausted from fighting the same undead re-raised over and over.",
+				"options": [
+					{
+						"action": [
+							{
+								"addMapReputation": -1,
+								"POIReference": "$(poi_3)"
+							}
+						],
+						"name": "\"I have other things to do.\" (Decline Quest, -1 local reputation)"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "40",
+								"POIReference": ""
+							}
+						],
+						"name": "Attack quickly while some of the corpses are still down. (Accept Quest)"
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "Tonight, $(poi_3) can rest more easily, as the dead do not rise before they can be burned. (+2 local reputation, +500 gold)",
+		"options": [
+			{
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_3)"
+					}
+				],
+				"name": "(Quest complete)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_3)"
+			}
+		],
+		"text": "The population of $(poi_3) has diminished significantly. The living population, that is... (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Gold and Reputation",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Battle the Undead",
+			"description": "Defeat at least three Undead in defense of $(poi_3).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 3,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"enemyTags": [
+				"Undead",
+				"Minion"
+			],
+			"enemyExcludeTags": [
+				"Leader",
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "With each skirmish won, you found more hints of magic that led you closer to the dark wizards behind this attack. Now you can face them directly.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Defeat a Necromancer threatening $(poi_3)",
+			"description": "Without Necromancers animating the dead, the defenders of $(poi_3) can regroup and recover.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Necromancer"
+			],
+			"enemyExcludeTags": [
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "$(poi_3) has successfully been defended, and you should return to report your success.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Travel",
+			"description": "Return to $(poi_3) and collect your rewards.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 41,
+	"isTemplate": true,
+	"name": "Elven Invasion",
+	"description": "Stop the Elven invasion",
+	"offerDialog": {
+		"text": "\"Hail, stranger. I'm in need of a neutral party to settle a disagreement.\" A worried looking man approaches you, holding a small plant in clay pot.",
+		"options": [
+			{
+				"name": "\"What can I do to help?\"",
+				"text": "\"You see, I took this cutting from a giant tree. I mean GIANT. Biggest tree I've ever seen.\" Outside the town, you hear shouting. \"And, well, turns out, the elves seem to disagree with me having taken it...\"",
+				"options": [
+					{
+						"action": [
+							{
+								"addMapReputation": -1,
+								"POIReference": "$(poi_3)"
+							}
+						],
+						"name": "\"Then I suggest you give it back. Quickly.\" (Decline Quest, -1 local reputation)"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "41",
+								"POIReference": ""
+							}
+						],
+						"name": "\"It's just a tree, I can handle some elves, and I support your bansai hobby.\" (Accept Quest)"
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "The elves are still angry about the defilement of their sacred tree, but your efforts in defending $(poi_3) have convinced them to forgo revenge for now. (+2 local reputation, +500 gold)",
+		"options": [
+			{
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_3)"
+					}
+				],
+				"name": "(Quest complete)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_3)"
+			}
+		],
+		"text": "No houseplant is worth this effort, but you've let the people of $(poi_3) down. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Gold and Reputation",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Battle the Elves",
+			"description": "Defeat at least three Elves in defense of $(poi_3).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 3,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"enemyTags": [
+				"Elf",
+				"Minion"
+			],
+			"enemyExcludeTags": [
+				"Leader",
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "Your defiant defense has gathered the attention of the elves' elite hunters and more powerful druids. Expect a greater challenge now.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Defeat an elite Elf threatening $(poi_3)",
+			"description": "Deal with the best that the elves can throw at you and $(poi_3) in order to halt their attacks.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Elf",
+				"Leader"
+			],
+			"enemyExcludeTags": [
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "$(poi_3) has successfully been defended, and you should return to report your success.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Travel",
+			"description": "Return to $(poi_3) and collect your rewards.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"plains_town_generic",
+		"plains_town_identity",
+		"plains_town_tribal",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamo_town_tribal",
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 42,
+	"isTemplate": true,
+	"name": "Soldier Invasion",
+	"description": "Stop the Soldier invasion",
+	"offerDialog": {
+		"text": "$(poi_3) is a bustle of frantic activity. The reason? A small army flying a foreign battle flag has been spotted on the horizon.",
+		"options": [
+			{
+				"name": "Consider your options.",
+				"text": "Defending the town will not be simple, but can you really just let them be conquered?",
+				"options": [
+					{
+						"action": [
+							{
+								"addMapReputation": -1,
+								"POIReference": "$(poi_3)"
+							}
+						],
+						"name": "\"This is not my fight.\" (Decline Quest, -1 local reputation)"
+					},
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "42",
+								"POIReference": ""
+							}
+						],
+						"name": "\"The invaders have no claim to these lands!\" (Accept Quest)"
+					}
+				]
+			}
+		]
+	},
+	"prologue": {},
+	"epilogue": {
+		"text": "The leaders of $(poi_3) have you to thank for their freedom, and likely their heads. (+2 local reputation, +500 gold)",
+		"options": [
+			{
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_3)"
+					}
+				],
+				"name": "(Quest complete)"
+			}
+		]
+	},
+	"failureDialog": {
+		"action": [
+			{
+				"removeItem": "",
+				"setColorIdentity": "",
+				"advanceQuestFlag": "",
+				"advanceMapFlag": "",
+				"setQuestFlag": {
+					"key": ""
+				},
+				"setMapFlag": {
+					"key": ""
+				},
+				"issueQuest": "",
+				"addMapReputation": -2,
+				"POIReference": "$(poi_3)"
+			}
+		],
+		"text": "A new banner flies above the walls of $(poi_3), and a new set of tax collectors will follow. The locals will not soon forget who failed to protect them. (-2 Local Reputation)",
+		"options": [
+			{
+				"name": "(Quest Failed)"
+			}
+		]
+	},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"rewardDescription": "Gold and Reputation",
+	"stages": [
+		{
+			"id": 1,
+			"name": "Battle the Soldiers",
+			"description": "Defeat at least three Soldiers in defense of $(poi_3).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 3,
+			"mixedEnemies": true,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"enemyTags": [
+				"Soldier",
+				"IdentityWhite",
+				"Minion"
+			],
+			"enemyExcludeTags": [
+				"Boss",
+				"Leader"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "The rank and file troops are no match for you, but breaking their resolve will require defeating one of the army's leaders.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Defeat one of the commanders of the forces attacking $(poi_3)",
+			"description": "The rank and file troops are no match for you, but breaking their resolve will require defeating one of the army's leaders.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"worldMapOK": true,
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Soldier",
+				"IdentityWhite",
+				"Leader"
+			],
+			"enemyExcludeTags": [
+				"Boss"
+			],
+			"prologue": {},
+			"epilogue": {
+				"text": "$(poi_3) has successfully been defended, and you should return to report your success.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Travel",
+			"description": "Return to $(poi_3) and collect your rewards.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		}
+	],
+	"questSourceTags": [
+		"forest_town_generic",
+		"forest_town_identity",
+		"forest_town_tribal",
+		"island_town_generic",
+		"island_town_identity",
+		"island_town_tribal",
+		"mountain_town_generic",
+		"mountain_town_identity",
+		"mountain_town_tribal",
+		"swamp_town_generic",
+		"swamp_town_identity",
+		"swamp_town_tribal",
+		"waste_town_generic",
+		"waste_town_identity",
+		"waste_town_tribal"
+	]
+},
+{
+	"id": 43,
+	"isTemplate": true,
+	"name": "Your First Job",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Complete a side quest",
+			"description": "Side quests are available in all towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
+			"anyPOI": true,
+			"count3": 1,
+			"POITags": [
+				"QuestSource"
+			],
+			"objective": "CompleteQuest",
+			"prologue": {
+				"text": "Note: Since this quest objective is to complete other quests, your navigation arrow will lead you to quest sources while you are tracking it. Once you accept a side quest, go in to your quest log and track that quest in order to update navigation hints.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Complete more side quests",
+			"description": "Side quests are available in all towns (look for the question mark) and can be a great way to collect extra loot while exploring Shandalar.",
+			"anyPOI": true,
+			"count3": 3,
+			"POITags": [
+				"QuestSource"
+			],
+			"objective": "CompleteQuest",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "Your first job complete, you feel the slightest bit more experienced. And hopefully a little bit more wealthy.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "The townsfolk offer you a small discount in their shops for having helped them and suggest that there may be more work available. Continue to explore via quests and build up a little bit more of a reputation in the process. Remember to track this quest to find more sources, or track the quests you take on to find their objectives.",
+						"options": [
+							{
+								"name": "(Continue"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {
+				"text": "A human male approaches you, dressed in a well tailored black coat adorned with silver flourishes and details. \"You there! Yes, you, the $(playerrace). You are the one who just finished a job for the locals, yes?\"",
+				"options": [
+					{
+						"name": "\"Yes, that's right.\"",
+						"text": "\"I have another job for you, and I won't take no for an answer...\"",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "44",
+										"POIReference": ""
+									}
+								],
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 44,
+	"isTemplate": true,
+	"name": "Find the Caravan",
+	"description": "A shipment of mana shards is overdue to arrive at $(poi_1). Find the caravan carrying it and make sure the shipment arrives.",
+	"offerDialog": {},
+	"prologue": {
+		"text": "\"My name is Donovan. Sir Donovan to most. And I have an urgent need for mana shards, far more than I can source in any one town.\" Realizing the financial implications of this, you suddenly feel as though his fine coat is Donovan's 'roughing it' attire despite the fact that it likely cost a year's wages for most people here in $(poi_1)",
+		"options": [
+			{
+				"name": "\"I can't say I carry that many on me, but I suppose I could sell you some of what I have.\"",
+				"text": "\"No, the problem is that I've already purchased them, and the caravan they were supposed to arrive on is far overdue. I need you to go find it, and quickly.\"",
+				"options": [
+					{
+						"name": "\"I see...\"",
+						"text": "\"Now then, you are already aware that I will not be taking no for an answer.\" Donovan hands you a sheet of paper from a stack that appears to have more copies of the same information. \"Here are the details on the caravan's planned route and my personal passphrase to use with the driver for identification. Go find my shipment. I must have it to continue my research.\"",
+						"options": [
+							{
+								"name": "It seems as if he really isn't giving you an opportunity to say no."
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Begin the search",
+			"description": "Leave $(poi_1) to search for the caravan.",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"here": true,
+			"objective": "Leave",
+			"prologue": {},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 2,
+			"name": "Find the caravan",
+			"description": "Travel to $(poi_2) in search of the missing shipment of mana shards",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count1": 50,
+			"count2": 10,
+			"POITags": [
+				"QuestSource",
+				"Sidequest",
+				"Town",
+				"BiomeColorless"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "You had hoped this would be an easy task and that the caravan would be approaching on the horizon as you exited the gates. Alas, that was not the case. Instead, you consult your map and head off toward the shipment's point of origin, $(poi_2).",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {}
+		},
+		{
+			"id": 3,
+			"name": "Find the bandit cave",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Quest_BanditCave"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {
+				"text": "The people in $(poi_2) all claim not to have seen any travelers matching the description you were given of the merchants overdue in $(poi_1).",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "However, many do mention reports of bandit attacks on the roads, and a farmer you spoke with believes he knows where their hideout is, a cave near his farm. He marks it on your map and you resolve to investigate.",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": "exploreShand1",
+											"val": 2
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "",
+										"POIReference": ""
+									}
+								],
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": "",
+			"allowInactivePOI": true
+		},
+		{
+			"id": 4,
+			"name": "Search the bandit cave",
+			"description": "Search the bandit cave for the missing shipment and defeat all enemies inside.",
+			"POITags": [
+				"Quest_BanditCave"
+			],
+			"objective": "Clear",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {
+				"text": "The cave you are looking for is very well hidden, and you might have missed it entirely had you not known where to look. Of course, the pair of ruffians lifting the last two small crates off of a wagon and carrying them inside does help identify the entrance.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "As you approach, you get a better look at the wagon. There's nothing about it which indicates what it once carried, but the fresh bloodstains on the driver's seat hint that these goods weren't paid for.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": "$(poi_3)"
+		},
+		{
+			"id": 5,
+			"name": "Return to $(poi_1)",
+			"description": "Travel back to $(poi_1) to discuss the next steps.",
+			"objective": "Travel",
+			"prerequisiteIDs": [ 4 ],
+			"prologue": {
+				"text": "Silver. Regular, mundane, unsmithed chunks of silver ore. That's all you find in the majority of the crates stashed away in the cave. Not having the tools or knowledge to mint the weighty metal into currency, and knowing that someone still living may have a rightful claim to it, you leave it behind.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "And as you have no further leads on the much more valuable shipment you are looking for, you should return to $(poi_1) and report in.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {
+				"action": [
+					{
+						"addGold": 500,
+						"addMapReputation": 2,
+						"POIReference": "$(poi_1)"
+					}
+				],
+				"text": "After you explain what you found, and what you didn't find, Sir Donovan hands you a pouch of coins that are most certainly spendable. \"You didn't find anything, but that doesn't mean you put in no effort on my behalf.\" (+500 gold)",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "Then he pulls out a map of a completely different area in a mountainous region to the southwest. \"We should go back a step, and make sure the shipment left the mines to begin with.\"",
+						"options": [
+							{
+								"action": [
+									{
+										"removeItem": "",
+										"addItem": "Sir Donovan's Amulet",
+										"setColorIdentity": "",
+										"advanceQuestFlag": "",
+										"advanceMapFlag": "",
+										"setQuestFlag": {
+											"key": ""
+										},
+										"setMapFlag": {
+											"key": ""
+										},
+										"issueQuest": "45",
+										"POIReference": ""
+									}
+								],
+								"name": "(Continue)",
+								"text": "Sir Donovan continues, \"You need not return here with your findings unless escorting the caravan. While my venture ultimately depends on having these shards, I have preparations to make elsewhere. Use this amulet once you have more information and I will be in touch.\" He hands you a small piece of iron jewelry, after which you nod and depart.",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"POIToken": "$(poi_1)"
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 45,
+	"isTemplate": true,
+	"name": "What's Yours Is Mine",
+	"description": "Still hunting for the missing mana shard shipment, Sir Donovan sends you to the mines from which they originate.",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Go to the $(poi_1)",
+			"description": "Travel to the mountain biome to find the $(poi_2) in search of the missing shipment.",
+			"POITags": [
+				"Quest_ShardMines"
+			],
+			"objective": "Travel",
+			"prologue": {
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": "exploreShand1",
+							"val": 3
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "",
+						"POIReference": ""
+					}
+				],
+				"text": "Consulting your map, Sir Donovan's directions lead you into the mountains found to the southwest.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Defeat the $(enemy_2)",
+			"description": "Find and defeat the leader of the pirates in the $(poi_1).",
+			"mapFlag": "",
+			"mapFlagValue": 1,
+			"count3": 1,
+			"mixedEnemies": true,
+			"POITags": [
+				"Quest_ShardMines"
+			],
+			"objective": "Defeat",
+			"prerequisiteIDs": [ 1 ],
+			"enemyTags": [
+				"Captain"
+			],
+			"prologue": {
+				"text": "Sir Donovan's directions are very precise, and you find the mining operation without much trouble. There is, however, an obvious sign of trouble when you arrive.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "Specifically, the sign which once designated this as the $(poi_1) - it has been painted over with a crude copy of the skull and crossbones seen on the pirate flag that has been strapped to the top of the sign. Pirates.",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "Your average pirate is probably just following orders long enough to find some grog or loot. But there's always a captain somewhere steering the ship, so to say...",
+								"options": [
+									{
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": "",
+			"allowInactivePOI": true
+		},
+		{
+			"id": 3,
+			"name": "Exit the mines",
+			"description": "Exit the mines when you are ready to continue.",
+			"anyPOI": true,
+			"objective": "Leave",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {
+				"text": "The latest entries in the captain's logbook confirms what you had seen while working your way into the mine - rather than being priceless treasures, the crystals in this mine are now basically worthless.",
+				"options": [
+					{
+						"action": [
+							{
+								"setQuestFlag": {
+									"key": "Quest_ShardMines_Epilogue",
+									"val": 1
+								}
+							}
+						],
+						"name": "\"So much for making it rich on pirate treasure\"",
+						"text": "There may be some less industrial scale treasure to be found among any of the remaining pirates, but when you're ready you should contact Sir Donovan using his talisman.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"id": 4,
+			"name": "Contact Sir Donovan",
+			"description": "Use Donovan's amulet to contact him.",
+			"mapFlag": "Quest_ShardMines_EpilogueComplete",
+			"mapFlagValue": 1,
+			"worldMapOK": true,
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {
+				"text": "When you are ready, you should use the amulet he gave you to tell Sir Donovan about the pirates, and that they've been dealt with.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"options": [
+							{
+								"action": [
+									{
+										"addItem": "Sir Donovan's Amulet"
+									}
+								],
+								"condition": [
+									{
+										"item": "Sir Donovan's Amulet",
+										"not": true
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {}
+		},
+		{
+			"id": 5,
+			"name": "Go to a town",
+			"description": "The urge from Sir Donovan's amulet persists. It doesn't control you, speak to you, or anything else like that. You simply know somehow that it is what he wants you to do - go to a town.",
+			"anyPOI": true,
+			"POITags": [
+				"Town"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 4 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "Within moments of walking in to town, a wiry young elf approaches you. Or at least he looks young, it's so hard to tell with elves. He briefly holds out an amulet identical to the one Donovan gave you, and beckons you to follow him to the inn.",
+				"options": [
+					{
+						"action": [
+							{
+								"removeItem": "",
+								"setColorIdentity": "",
+								"advanceQuestFlag": "",
+								"advanceMapFlag": "",
+								"setQuestFlag": {
+									"key": ""
+								},
+								"setMapFlag": {
+									"key": ""
+								},
+								"issueQuest": "46",
+								"POIReference": ""
+							}
+						],
+						"name": "(Continue)",
+						"text": "Taking a corner table at the inn, the elf leans forward on his elbows and studies you for a moment. \"Yeah, you're the one. The name's Acirxes. I work with Donovan.\"",
+						"options": [
+							{
+								"name": "(Continue)",
+								"text": "\"Seeing as you walked here, I take it you didn't find our shipment.\"",
+								"options": [
+									{
+										"name": "Explain to Acirxes about the state of the mine, the pirate crew you found holed up within it, and the expended mana shards.",
+										"text": "\"I hate when a good vein runs dry. Cidryl was loaded with crystals, and compared to other operations they were easy to get to. But when there's no mana left, there's no mana left.\" Acirxes pauses.",
+										"options": [
+											{
+												"action": [
+													{
+														"addGold": 500
+													}
+												],
+												"name": "\"So what now?\"",
+												"text": "\"Standard 'Keep working for us' fee.\" He slides you a coin pouch of a familiar size. \"Give me a couple days to track down the boss and bring him up to speed. I'll meet you here again soon.\" (+500 gold)",
+												"options": [
+													{
+														"name": "(Continue)"
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"POIToken": ""
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 46,
+	"isTemplate": true,
+	"name": "Busy Work",
+	"description": "Having reported the state of matters in the shard mines to his contact, you await further word from Sir Donovan. Until then, you are free to take on other jobs.",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {
+		"text": "A slight whistle alerts you to Acirxes' presence. You're not entirely sure if he has impeccible timing or if he watched you complete your most recent job, but it appears that Sir Donovan has more work for you.",
+		"options": [
+			{
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "47",
+						"POIReference": ""
+					}
+				],
+				"name": "(Continue)"
+			}
+		]
+	},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Do Side Quests",
+			"description": "Complete 3 side quests while waiting for Acirxes to find you again",
+			"anyPOI": true,
+			"count3": 3,
+			"POITags": [
+				"QuestSource"
+			],
+			"objective": "CompleteQuest",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 47,
+	"isTemplate": true,
+	"name": "Check Out The Library",
+	"description": "Sir Donovan wants you to search $(poi_1) for information on the mechanics of summoning.",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find $(poi_1)",
+			"description": "Follow Acirxes' directions to $(poi_1) in the island biome to the northeast.",
+			"POITags": [
+				"Quest_LibraryOfVarsil"
+			],
+			"objective": "Travel",
+			"prologue": {
+				"text": "Acirxes furrows his brow, which for a brief time makes his youthful appearance fade into maturity. \"Boss says you're no mere hedge wizard, so I presume you understand somewhat of what spells actually do.\"",
+				"options": [
+					{
+						"name": "You wonder where this is going, but simply nod for the moment.",
+						"text": "He continues, \"Well the boss wants to know more than he does about specific aspects of spells, and likely more than you or I know too. He wants you to go to $(poi_1) and secure any books or research on the actual mechanics behind summoning spells.\"",
+						"options": [
+							{
+								"action": [
+									{
+										"setQuestFlag": {
+											"key": "exploreShand1",
+											"val": 4
+										}
+									}
+								],
+								"name": "\"Consider it done.\"",
+								"text": "\"If you can handle that, it should be a short trip from there to $(poi_4) after. I've got some... 'buisiness' to take care of there. I'll meet you at the inn on the north end of the central peninsula.\""
+							},
+							{
+								"name": "\"Fine, but why send me?\"",
+								"text": "\"You are a clever one.\" Acirxes pauses before responding further in a carefully measured tone. \"Because one of my peers found the library. And another one found the library and her body. And a third one found all of them and escaped alive. It's not your average library.\"",
+								"options": [
+									{
+										"name": "\"No, apparently not.\"",
+										"text": "\"So that's why we're sending you. Meet me in $(poi_4) after. I've got some... 'buisiness' to take care of there and I'll add a personal reward if you bring me back the head of whoever's running the show at the library.\" He looks away before walking off. \"I owe that much to Gwen...\"",
+										"options": [
+											{
+												"action": [
+													{
+														"setQuestFlag": {
+															"key": "exploreShand1",
+															"val": 4
+														}
+													},
+													{
+														"setQuestFlag": {
+															"key": "libraryOfVarsilBonusAvailable",
+															"val": 1
+														}
+													}
+												],
+												"name": "(Continue)"
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Locate The Research",
+			"description": "Search $(poi_1) for research about the mechanics of summoning spells",
+			"anyPOI": true,
+			"mapFlag": "foundLibraryOfVarsilResearch",
+			"mapFlagValue": 1,
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "The structure before you is enormous, looking more like an ancient fortress than a library.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "A small group of scholars carrying books around the entrance seems to confirm the building's purpose, but something odd about their manerisms has you on edge as you approach.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": ""
+		},
+		{
+			"id": 3,
+			"name": "Leave",
+			"description": "Find your way back to the entrance once you are ready",
+			"anyPOI": true,
+			"objective": "Leave",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {}
+		},
+		{
+			"id": 4,
+			"name": "Travel to $(poi_4)",
+			"description": "Deliver the research to $(poi_4), the largest settlement in the islands",
+			"POITags": [
+				"Capital",
+				"BiomeBlue"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "\"Welcome to $(poi_4), a shining beacon of civilization.\" You had just entered the tavern and it takes you a moment to realize that the voice from over your shoulder is speaking to you.",
+				"options": [
+					{
+						"name": "[/]But that's not Acirxes...[]",
+						"text": "\"I take it you were expecting my associate.\" Sir Donovan leads you to a table before continuing. \"Acirxes is on leave, indefinitely. Welcomed to return to my service, but only once he has fully overcome the grief of Guinneverre's passing; another of my employees whom he had somewhat of a relationship with.\"",
+						"options": [
+							{
+								"condition": [
+									{
+										"checkQuestFlag": "defeatedLibraryOfVarsilBoss"
+									},
+									{
+										"checkQuestFlag": "libraryOfVarsilBonusAvailable"
+									}
+								],
+								"name": "\"About that...\" You hand him the research before telling Donovan about the giant automaton at the top of the library.",
+								"text": "\"Yes, Acirxes was quite adamant that I hold on to this for you.\" He hands you a small and ornate spellbook.",
+								"options": [
+									{
+										"action": [
+											{
+												"grantRewards": [
+													{
+														"type": "card",
+														"count": 1,
+														"colors": [
+															"Black"
+														],
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														]
+													},
+													{
+														"type": "card",
+														"count": 1,
+														"colors": [
+															"Blue"
+														],
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														]
+													},
+													{
+														"type": "card",
+														"count": 1,
+														"colors": [
+															"Green"
+														],
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														]
+													},
+													{
+														"type": "card",
+														"count": 1,
+														"colors": [
+															"Red"
+														],
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														]
+													},
+													{
+														"type": "card",
+														"count": 1,
+														"colors": [
+															"White"
+														],
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														]
+													},
+													{
+														"type": "card",
+														"count": 1,
+														"rarity": [
+															"Rare",
+															"Mythic Rare"
+														],
+														"colorType": "Colorless"
+													}
+												]
+											}
+										],
+										"name": "(Continue)",
+										"text": "\"Now, about the golems. I'm curious if they are related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+										"options": [
+											{
+												"action": [
+													{
+														"addGold": 1000,
+														"issueQuest": "48"
+													}
+												],
+												"name": "(Continue)"
+											}
+										]
+									}
+								]
+							},
+							{
+								"condition": [
+									{
+										"checkQuestFlag": "defeatedLibraryOfVarsilBoss"
+									},
+									{
+										"checkQuestFlag": "libraryOfVarsilBonusAvailable",
+										"not": true
+									}
+								],
+								"name": "\"About that...\" You hand him the research before telling Donovan about the giant automaton at the top of the library.",
+								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+								"options": [
+									{
+										"action": [
+											{
+												"addGold": 1000,
+												"issueQuest": "48"
+											}
+										],
+										"name": "(Continue)"
+									}
+								]
+							},
+							{
+								"condition": [
+									{
+										"checkQuestFlag": "defeatedLibraryOfVarsilBoss",
+										"not": true
+									}
+								],
+								"name": "Hand him the research and tell him about the occupants of the library.",
+								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+500 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+								"options": [
+									{
+										"action": [
+											{
+												"addGold": 500,
+												"issueQuest": "48"
+											}
+										],
+										"name": "(Continue)"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 48,
+	"isTemplate": true,
+	"name": "The Dig Site",
+	"description": "Determine if the golems you found previously are connected to those at $(poi_1)",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find $(poi_1)",
+			"description": "Follow Donovan's map to $(poi_1) in the wastelands.",
+			"POITags": [
+				"Quest_DigSite"
+			],
+			"objective": "Travel",
+			"prologue": {
+				"text": "Sir Donovan gives you a sense of deja vu as he hands you a map and another of his amulets. \"Explore the site. Look for signs that the two groups are connected or distinct. Use the amulet when you're done and we'll find somewhere to meet.\"",
+				"options": [
+					{
+						"action": [
+							{
+								"setQuestFlag": {
+									"key": "exploreShand1",
+									"val": 5
+								}
+							}
+						],
+						"name": "\"Understood.\""
+					}
+				]
+			},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Explore the site",
+			"description": "Search $(poi_1) and compare the mechanized occupants with your previous encounter",
+			"objective": "Fetch",
+			"prerequisiteIDs": [ 1 ],
+			"itemNames": [
+				"Landscape Sketchbook"
+			],
+			"prologue": {
+				"text": "Approaching the site from the south, your current path leads down into the freshly exposed entrance, now blocked by a metallic humanoid sentry.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"text": "On your right stands a much newer structure which you presume serves as a habitation for the digging crew and the scholars who employ them.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"epilogue": {},
+			"POIToken": "$(poi_1)"
+		},
+		{
+			"id": 3,
+			"name": "Leave",
+			"description": "Find your way back to the entrance once you are ready",
+			"anyPOI": true,
+			"objective": "Leave",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {}
+		},
+		{
+			"id": 4,
+			"name": "Contact Sir Donovan",
+			"description": "Use Donovan's talisman to contact him.",
+			"mapFlag": "exploreShand1",
+			"mapFlagValue": 7,
+			"worldMapOK": true,
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {
+				"text": "When you are ready, you should use the amulet he gave you to contact Sir Donovan again.",
+				"options": [
+					{
+						"action": [
+							{
+								"setQuestFlag": {
+									"key": "exploreShand1",
+									"val": 6
+								}
+							}
+						],
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {
+				"text": "Once again you get a feeling that you should go to a town. But it's a little more clear this time, and a particular name is on the tip of your tongue: $(poi_5). You should go there.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			}
+		},
+		{
+			"id": 5,
+			"name": "Travel to $(poi_5)",
+			"description": "Deliver the research to $(poi_5), a wasteland town relatively far from $(poi_1)",
+			"count1": 70,
+			"count2": 10,
+			"POITags": [
+				"Town",
+				"BiomeColorless"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 4 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "\"$(playername)?\" A middle aged woman approaches you in what passes for a town square here, slipping a small but very identifiable portrait of you into her cloak. \"We share's the bossman.\" As Acirxes did upon meeting you, she pulls her hand back out of her cloak to flash an amulet matching yours.",
+				"options": [
+					{
+						"name": "You wonder to yourself where she got the portrait. [/]Who drew me, and when?[]",
+						"text": "\"They calls me Viv. Those'n who knows me, it is.\"",
+						"options": [
+							{
+								"action": [
+									{
+										"addGold": 500
+									}
+								],
+								"name": "\"That's quite an unusual accent you have.\"",
+								"text": "Viv shrugs. \"I says that evah-time one's of you blabs the samewise. And me jingle works samewise.\" To demonstrate her point, she shakes the usual coin pouch before tossing it to you. (+500 gold)\n\"So blabs it. Same metal men?\"",
+								"options": [
+									{
+										"name": "\"I don't think so.\"",
+										"text": "\"Thinks he do. Knows?\" For all the brevity of Viv's reply, it takes you a moment to realize she's asking if you're sure.",
+										"options": [
+											{
+												"name": "\"Some of them were similar. More similar than most golems I've seen in the wild. But no big one this time. And there were several that were like nothing I saw in the library.\"",
+												"text": "\"No big one this time.\" Viv gives a very passing echo of your words, even coming close to matching your natural voice. \"Bossman due certain a'love that one. Mayhap sends me back for that jingle bag next.\"",
+												"options": [
+													{
+														"name": "\"Look... I'm not an expert on antique golem provenance.\"",
+														"text": "\"Tell bossman that one instead, bigger laugh to hear.\" Before you can respond to that, she moves to walk off. \"Gets you the local jingle. Viv to bring bossman's words.\"",
+														"options": [
+															{
+																"action": [
+																	{
+																		"issueQuest": "49"
+																	}
+																],
+																"name": "(Continue)"
+															}
+														]
+													}
+												]
+											},
+											{
+												"name": "\"Yes, some of them were. Like a different builder with the same parts and hearing the same description, but distinct from the other's design.\"",
+												"text": "Viv gives a knowing nod, as if she appreciates that description. \"Gets you the local jingle. Viv'll bring bossman's words.\" She then turns to leave.",
+												"options": [
+													{
+														"action": [
+															{
+																"issueQuest": "49"
+															}
+														],
+														"name": "(Continue)"
+													}
+												]
+											}
+										]
+									},
+									{
+										"name": "\"I think so.\"",
+										"text": "\"Thinks he do. Knows?\" For all the brevity of Viv's reply, thanks to her unusual way of speaking it takes you a moment to realize she's asking if you're sure.",
+										"options": [
+											{
+												"name": "\"Some of them were similar. More similar than most golems I've seen in the wild. But no big one this time. And there were several that were like nothing I saw in the library.\"",
+												"text": "\"No big one this time.\" Viv gives a very passing echo of your words, even coming close to matching your natural voice. \"Bossman due certain a'love that one. Mayhap sends me back after that jingle bag.\"",
+												"options": [
+													{
+														"name": "\"Look... I'm not an expert on antique golem provenance.\"",
+														"text": "\"Tell bossman that one instead, bigger laugh to hear.\" Before you can respond to that, she moves to walk off. \"Gets you the local jingle. Viv to bring bossman's words.\"",
+														"options": [
+															{
+																"action": [
+																	{
+																		"issueQuest": "49"
+																	}
+																],
+																"name": "(Continue)"
+															}
+														]
+													}
+												]
+											},
+											{
+												"name": "\"Like a different builder copying the same example, but both doing it very well.\"",
+												"text": "Viv gives a knowing nod, as if she appreciates that description. \"Gets you the local jingle. Viv'll bring bossman's words.\" She then turns to leave.",
+												"options": [
+													{
+														"action": [
+															{
+																"issueQuest": "49"
+															}
+														],
+														"name": "(Continue)"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "\"Donovan wanted to know if these two groups of automatons matched. I think don't think so. Similar, but different.\"",
+								"text": "\"Similar, but different.\" Viv gives a very passing echo of your words, even coming close to matching your natural voice. \"Makes samewise sense out Viv's mouth and yours, none. Mayhap bossman gets the words, or mayhap he sends me back after that jingle bag.\"",
+								"options": [
+									{
+										"name": "\"Look... I'm not an expert on antique golem provenance.\"",
+										"text": "\"Tell bossman that one instead, bigger laugh to hear.\" Before you can respond to that, she moves to walk off. \"Gets you the local jingle. Viv to bring bossman's words.\"",
+										"options": [
+											{
+												"action": [
+													{
+														"issueQuest": "49"
+													}
+												],
+												"name": "(Continue)"
+											}
+										]
+									},
+									{
+										"name": "\"Like a different builder with the same parts and hearing the same description, but distinct from the other's design.\"",
+										"text": "Viv suddenly gives a knowing nod, as if she appreciates that description more than the first. \"Gets you the local jingle. Viv to bring bossman's words.\" She then turns to leave.",
+										"options": [
+											{
+												"action": [
+													{
+														"issueQuest": "49"
+													}
+												],
+												"name": "(Continue)"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "\"Donovan wanted to know if these two groups of automatons matched. I think so. Mostly at least.\"",
+								"text": "\"Thinks he do. Knows?\" For all the brevity of Viv's reply, it takes you a moment to realize she's asking if you're sure.",
+								"options": [
+									{
+										"name": "\"Some were very similar. More similar than most golems I've seen in the wild. No big one this time though, and several that I'd never seen anything like before.\"",
+										"text": "\"No big one this time.\" Viv gives a very passing echo of your words, even coming close to matching your natural voice. \"Bossman due certain a'love that one. Mayhap sends me back after that jingle bag.\"",
+										"options": [
+											{
+												"name": "\"Look... I'm not an expert on antique golem provenance.\"",
+												"text": "\"Tell bossman that one instead, bigger laugh to hear.\" Before you can respond to that, she moves to walk off. \"Gets you the local jingle. Viv to bring bossman's words.\"",
+												"options": [
+													{
+														"action": [
+															{
+																"issueQuest": "49"
+															}
+														],
+														"name": "(Continue)"
+													}
+												]
+											}
+										]
+									},
+									{
+										"name": "\"Like a different builder copying the same example, and both doing it very well.\"",
+										"text": "Viv gives a knowing nod, as if she appreciates that description. \"Gets you the local jingle. Viv to bring bossman's words.\" She then turns to leave.",
+										"options": [
+											{
+												"action": [
+													{
+														"issueQuest": "49"
+													}
+												],
+												"name": "(Continue)"
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 49,
+	"isTemplate": true,
+	"name": "Busy Work 2",
+	"description": "You await further word from Sir Donovan via your new contact, Viv. Until then, you are free to take on other jobs.",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Do Side Quests",
+			"description": "Complete 3 side quests while waiting for Viv to find you again",
+			"anyPOI": true,
+			"count3": 3,
+			"POITags": [
+				"QuestSource"
+			],
+			"objective": "CompleteQuest",
+			"prologue": {},
+			"epilogue": {}
+		},
+		{
+			"id": 2,
+			"name": "Wait for Viv",
+			"description": "Give Viv more time to contact you.",
+			"anyPOI": true,
+			"count3": 3,
+			"POITags": [
+				"QuestSource"
+			],
+			"objective": "Travel",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {
+				"text": "No word from or sign of Viv yet, but you should expect to hear from her soon.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			},
+			"epilogue": {
+				"action": [
+					{
+						"removeItem": "",
+						"setColorIdentity": "",
+						"advanceQuestFlag": "",
+						"advanceMapFlag": "",
+						"setQuestFlag": {
+							"key": ""
+						},
+						"setMapFlag": {
+							"key": ""
+						},
+						"issueQuest": "50",
+						"POIReference": ""
+					}
+				],
+				"text": "As you walk in to town, a familiar cloaked figure is waiting and watching for you.",
+				"options": [
+					{
+						"name": "(Continue)"
+					}
+				]
+			}
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 50,
+	"isTemplate": true,
+	"name": "Welcome To The Jungle",
+	"description": "Search the Primal Jungle for an artifact referenced in the research from The Library of Varsil",
+	"offerDialog": {},
+	"prologue": {
+		"action": [
+			{
+				"setQuestFlag": {
+					"key": "exploreShand1",
+					"val": 6
+				}
+			}
+		],
+		"text": "You have and take the opportunity to speak to Viv before she appears to notice you.",
+		"options": [
+			{
+				"name": "\"There you are, Viv.\"",
+				"text": "Sir Donovan's voice replies to you from under her cloak. \"$(playername) will have to wait a little longer, I need you to fetch those materials for the next batch right now.\" Viv drops her hood and her imitation of your employer. \"Tinker he does, things he needs.\" Viv then shrugs. \"Viv focus for jingle he give samewise you take.\"",
+				"options": [
+					{
+						"name": "\"So what now?\"",
+						"text": "\"Things bossman needs [i]again[].\" She emphasizes the word in a way that indicates it's your turn to fetch something. \"Things told in samewise books you gave.\" You receive another map, another amulet, and a short note. Viv summarily dismisses you by walking away before you can ask questions or read the note.",
+						"options": [
+							{
+								"name": "Continue"
+							}
+						]
+					},
+					{
+						"name": "Remain silent",
+						"text": "\"Bossman needs things [i]again[].\" It's difficult to tell with her, but there might have been a touch of amusement in her emphasis. \"Things told in samewise books you gave.\" You receive another map, another amulet, and a short note. Viv summarily dismisses you by walking away before you can ask questions or read the note.",
+						"options": [
+							{
+								"name": "Continue"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "\"I was beginning to worry I was out of a job.\"",
+				"text": "Sir Donovan's voice replies to you from under her cloak. \"$(playername) will have to wait a little longer, I need you to fetch those materials for the next batch right now.\" Viv drops her hood and her imitation of your employer. \"Tinker he does, things he needs.\" Viv then shrugs. \"Viv focus for jingle he give samewise you take.\"",
+				"options": [
+					{
+						"name": "\"So what now?\"",
+						"text": "\"Things bossman needs [i]again[].\" She emphasizes the word in a way that indicates it's your turn to fetch something. \"Things told in samewise books you gave.\" You receive another map, another amulet, and a short note. Viv summarily dismisses you by walking away before you can ask questions or read the note.",
+						"options": [
+							{
+								"name": "Continue"
+							}
+						]
+					},
+					{
+						"name": "Remain silent",
+						"text": "\"Bossman needs things [i]again[].\" It's difficult to tell with her, but there might have been a touch of amusement in her emphasis. \"Things told in samewise books you gave.\" You receive another map, another amulet, and a short note. Viv summarily dismisses you by walking away before you can ask questions or read the note.",
+						"options": [
+							{
+								"name": "Continue"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find The Primal Jungle",
+			"description": "Follow the given map to the area Sir Donovan suggested you search",
+			"POITags": [
+				"Quest_PrimalJungle"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Search for the artifact",
+			"description": "Sir Donovan suspects that some form of magic staff can be found in this area, and he wants you to retrieve it.",
+			"mapFlag": "SearchedForArtifact",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Quest_PrimalJungle"
+			],
+			"objective": "MapFlag",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "Along with the other items in the treasure chest you find a staff that matches the rough description from Donovan's note. Or at least it would if it hadn't been broken into pieces",
+				"options": [
+					{
+						"name": "Gather up the pieces",
+						"text": "You technically weren't asked to bring it back in one piece. Hopefully Sir Donovan will still want it.",
+						"options": [
+							{
+								"name": "(Continue)"
+							}
+						]
+					}
+				]
+			},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 3,
+			"name": "Return to $(poi_3)",
+			"description": "Find Viv again in $(poi_3) to report what you found, and what you didn't.",
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "Viv frowns at you after listening to your explanation. \"Jingle bag to wait, staff already jingle. Very bad.\"",
+				"options": [
+					{
+						"name": "\"You don't think Sir Donovan wants it anyway?\"",
+						"text": "She shakes her head emphatically. \"We must make it new. I have a fix.\" She retrieves a pen and paper to scrawl a much rougher map than usual on short notice. \"Flower grows in cave here, scarlet. You must bring it here.\"",
+						"options": [
+							{
+								"name": "\"Scarlet flower, grows in the cave. Got it.\"",
+								"text": "\"...and smart wizard would take coat.\"",
+								"options": [
+									{
+										"action": [
+											{
+												"setQuestFlag": {
+													"key": "exploreShand1",
+													"val": 7
+												},
+												"issueQuest": "51"
+											}
+										],
+										"name": "continue"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 51,
+	"isTemplate": true,
+	"name": "Flower Fetching",
+	"description": "Bring Viv a flower from Frostbitten Cavern",
+	"offerDialog": {},
+	"prologue": {},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find $(poi_1)",
+			"description": "Viv's crude map shows the way to $(poi_1) in the $(biome_1) biome",
+			"POITags": [
+				"Quest_FrostbittenCavern"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Retrieve the flower",
+			"description": "Viv said the flower would be located inside a cave",
+			"mapFlag": "hasAFlower",
+			"mapFlagValue": 1,
+			"POITags": [
+				"Quest_FrostbittenCavern"
+			],
+			"objective": "MapFlag",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 3,
+			"name": "Return to $(poi_3)",
+			"description": "Bring the flower back to Viv in $(poi_3).",
+			"here": true,
+			"objective": "Travel",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {
+				"text": "You find Viv right where you had agreed to meet, and Sir Donovan is there as well. He is staring intently at the newly repaired staff as Viv directs her gaze to you.",
+				"options": [
+					{
+						"name": "You interrupt Donovan's inspection. \"So what does the staff do?\"",
+						"text": "\"Nothing, not yet at least. Perhaps it will eventually.\" He runs his left hand across an engraving on the staff as if trying to draw out its secrets. \"But I believe we have something else to discuss, something potentially even more important than my research.\"",
+						"options": [
+							{
+								"name": "\"I'm listening.\"",
+								"text": "\"You've proven yourself to be reliable enough to my organization that I feel I can share its nature, if you have not already surmised it. Put bluntly, my associates and I make our living through the acquisition of information, the discreet sale of it, and occasionally, the role you have been most involved with, its direct application.\"",
+								"options": [
+									{
+										"name": "(Continue)",
+										"text": "\"It is the nature of our trade that more information is available to me than can be acted upon, especially in a timely manner. My research is an attempt to find ways to communicate more rapidly, and give more opportunities to act. Often now we must make decisions based on incomplete knowledge, and incomplete knowledge is all that I can offer you now.\"",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "\"We had been monitoring the activities of several previously unknown wizards, they appeared to have begun working together toward some unknown greater goal, with an impressive degree of effectiveness to their individual actions.\"",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "\"Several weeks ago, however, the group was quickly and methodically silenced, presumed killed, by a second group. But now it has been confirmed that all five of them were taken alive, and my network has determined where we believe they are being held.\"",
+														"options": [
+															{
+																"name": "\"So, this is the part where I do the 'direct application' thing, right?\"",
+																"text": "Donovan gives a hearty, if solemn, chuckle. \"Based on what I have seen of your work, I believe you to be capable of it. But this is not something I am asking of you. More that it is something I am offering to you.\"",
+																"options": [
+																	{
+																		"name": "\"I'm not sure that I follow your meaning.\"",
+																		"text": "\"The efficiency you have shown in your work for me rivals what we had seen from the captured mages. I believe that if you were to free them, you could make some new and powerful allies. And taking on their captors now may mean that you find yourself in a conflict that would be forthcoming anyway, but on your terms and timing rather than theirs.\"",
+																		"options": [
+																			{
+																				"name": "\"I don't believe that I'm ready for this kind of confrontation.\" (Decline Quest)",
+																				"text": "\"Then hold on to one of my amulets. Use it to contact us if you change your mind.\"",
+																				"options": [
+																					{
+																						"name": "Understood. And thank you."
+																					}
+																				]
+																			},
+																			{
+																				"action": [
+																					{
+																						"setQuestFlag": {
+																							"key": "exploreShand1",
+																							"val": 8
+																						},
+																						"issueQuest": "52"
+																					}
+																				],
+																				"name": "\"Adventure calls. Who am I to say no?\" (Accept Quest)"
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"condition": [
+							{
+								"checkQuestFlag": "violetFlowerForViv"
+							},
+							{
+								"checkQuestFlag": "scarletFlowerForViv"
+							}
+						],
+						"name": "Give her both flowers",
+						"text": "Viv has a thankful look, but you note what might be a twinge of disappointment underneath it. \"Fix was gentle. Unexpectedly. Not to need those now.\" Donovan then clears his throat, redirecting your attention.",
+						"options": [
+							{
+								"name": "\"So what does the staff do?\"",
+								"text": "\"Nothing, not yet at least. Perhaps it will eventually.\" He runs his left hand across an engraving on the staff as if trying to draw out its secrets. \"But I believe we have something else to discuss, something potentially even more important than my research.\"",
+								"options": [
+									{
+										"name": "\"I'm listening.\"",
+										"text": "\"You've proven yourself to be reliable enough to my organization that I feel I can share its nature, if you have not already surmised it. Put bluntly, my associates and I make our living through the acquisition of information, the discreet sale of it, and occasionally, the role you have been most involved with, its direct application.\"",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "\"It is the nature of our trade that more information is available to me than can be acted upon, especially in a timely manner. My research is an attempt to find ways to communicate more rapidly, and give more opportunities to act. Often now we must make decisions based on incomplete knowledge, and incomplete knowledge is all that I can offer you now.\"",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "\"We had been monitoring the activities of several previously unknown wizards, they appeared to have begun working together toward some unknown greater goal, with an impressive degree of effectiveness to their individual actions.\"",
+														"options": [
+															{
+																"name": "(Continue)",
+																"text": "\"Several weeks ago, however, the group was quickly and methodically silenced, presumed killed, by a second group. But now it has been confirmed that all five of them were taken alive, and my network has determined where we believe they are being held.\"",
+																"options": [
+																	{
+																		"name": "\"So, this is the part where I do the 'direct application' thing, right?\"",
+																		"text": "Donovan gives a hearty, if solemn, chuckle. \"Based on what I have seen of your work, I believe you to be capable of it. But this is not something I am asking of you. More that it is something I am offering to you.\"",
+																		"options": [
+																			{
+																				"name": "\"I'm not sure that I follow your meaning.\"",
+																				"text": "\"The efficiency you have shown in your work for me rivals what we had seen from the captured mages. I believe that if you were to free them, you could make some new and powerful allies. And taking on their captors now may mean that you find yourself in a conflict that would be forthcoming anyway, but on your terms and timing rather than theirs.\"",
+																				"options": [
+																					{
+																						"name": "\"I don't believe that I'm ready for this kind of confrontation.\" (Decline Quest)",
+																						"text": "\"Then hold on to one of my amulets. Use it to contact us if you change your mind.\"",
+																						"options": [
+																							{
+																								"name": "Understood. And thank you."
+																							}
+																						]
+																					},
+																					{
+																						"action": [
+																							{
+																								"setQuestFlag": {
+																									"key": "exploreShand1",
+																									"val": 8
+																								},
+																								"issueQuest": "52"
+																							}
+																						],
+																						"name": "\"Adventure calls. Who am I to say no?\" (Accept Quest)"
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"action": [
+							{
+								"setQuestFlag": {
+									"key": "violetFlowerForViv",
+									"val": 2
+								}
+							}
+						],
+						"condition": [
+							{
+								"checkQuestFlag": "violetFlowerForViv"
+							}
+						],
+						"name": "Give her the violet flower",
+						"text": "Viv shakes her head. \"Headstrong adventurers... Not right. But we find that the flower had no need.\" Donovan then clears his throat, redirecting your attention.",
+						"options": [
+							{
+								"name": "\"So what does the staff do?\"",
+								"text": "\"Nothing, not yet at least. Perhaps it will eventually.\" He runs his left hand across an engraving on the staff as if trying to draw out its secrets. \"But I believe we have something else to discuss, something potentially even more important than my research.\"",
+								"options": [
+									{
+										"name": "\"I'm listening.\"",
+										"text": "\"You've proven yourself to be reliable enough to my organization that I feel I can share its nature, if you have not already surmised it. Put bluntly, my associates and I make our living through the acquisition of information, the discreet sale of it, and occasionally, the role you have been most involved with, its direct application.\"",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "\"It is the nature of our trade that more information is available to me than can be acted upon, especially in a timely manner. My research is an attempt to find ways to communicate more rapidly, and give more opportunities to act. Often now we must make decisions based on incomplete knowledge, and incomplete knowledge is all that I can offer you now.\"",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "\"We had been monitoring the activities of several previously unknown wizards, they appeared to have begun working together toward some unknown greater goal, with an impressive degree of effectiveness to their individual actions.\"",
+														"options": [
+															{
+																"name": "(Continue)",
+																"text": "\"Several weeks ago, however, the group was quickly and methodically silenced, presumed killed, by a second group. But now it has been confirmed that all five of them were taken alive, and my network has determined where we believe they are being held.\"",
+																"options": [
+																	{
+																		"name": "\"So, this is the part where I do the 'direct application' thing, right?\"",
+																		"text": "Donovan gives a hearty, if solemn, chuckle. \"Based on what I have seen of your work, I believe you to be capable of it. But this is not something I am asking of you. More that it is something I am offering to you.\"",
+																		"options": [
+																			{
+																				"name": "\"I'm not sure that I follow your meaning.\"",
+																				"text": "\"The efficiency you have shown in your work for me rivals what we had seen from the captured mages. I believe that if you were to free them, you could make some new and powerful allies. And taking on their captors now may mean that you find yourself in a conflict that would be forthcoming anyway, but on your terms and timing rather than theirs.\"",
+																				"options": [
+																					{
+																						"name": "\"I don't believe that I'm ready for this kind of confrontation.\" (Decline Quest)",
+																						"text": "\"Then hold on to one of my amulets. Use it to contact us if you change your mind.\"",
+																						"options": [
+																							{
+																								"name": "Understood. And thank you."
+																							}
+																						]
+																					},
+																					{
+																						"action": [
+																							{
+																								"setQuestFlag": {
+																									"key": "exploreShand1",
+																									"val": 8
+																								},
+																								"issueQuest": "52"
+																							}
+																						],
+																						"name": "\"Adventure calls. Who am I to say no?\" (Accept Quest)"
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"action": [
+							{
+								"setQuestFlag": {
+									"key": "scarletFlowerForViv",
+									"val": 2
+								}
+							}
+						],
+						"condition": [
+							{
+								"checkQuestFlag": "scarletFlowerForViv"
+							}
+						],
+						"name": "Give her the crimson flower",
+						"text": "Viv smiles and takes the flower, tucking it behind her ear. \"[i]Jingle[] accepted. The bloom was not for the fix.\" Donovan then clears his throat, redirecting your attention.",
+						"options": [
+							{
+								"name": "\"So what does the staff do?\"",
+								"text": "\"Nothing, not yet at least. Perhaps it will eventually.\" He runs his left hand across an engraving on the staff as if trying to draw out its secrets. \"But I believe we have something else to discuss, something potentially even more important than my research.\"",
+								"options": [
+									{
+										"name": "\"I'm listening.\"",
+										"text": "\"You've proven yourself to be reliable enough to my organization that I feel I can share its nature, if you have not already surmised it. Put bluntly, my associates and I make our living through the acquisition of information, the discreet sale of it, and occasionally, the role you have been most involved with, its direct application.\"",
+										"options": [
+											{
+												"name": "(Continue)",
+												"text": "\"It is the nature of our trade that more information is available to me than can be acted upon, especially in a timely manner. My research is an attempt to find ways to communicate more rapidly, and give more opportunities to act. Often now we must make decisions based on incomplete knowledge, and incomplete knowledge is all that I can offer you now.\"",
+												"options": [
+													{
+														"name": "(Continue)",
+														"text": "\"We had been monitoring the activities of several previously unknown wizards, they appeared to have begun working together toward some unknown greater goal, with an impressive degree of effectiveness to their individual actions.\"",
+														"options": [
+															{
+																"name": "(Continue)",
+																"text": "\"Several weeks ago, however, the group was quickly and methodically silenced, presumed killed, by a second group. But now it has been confirmed that all five of them were taken alive, and my network has determined where we believe they are being held.\"",
+																"options": [
+																	{
+																		"name": "\"So, this is the part where I do the 'direct application' thing, right?\"",
+																		"text": "Donovan gives a hearty, if solemn, chuckle. \"Based on what I have seen of your work, I believe you to be capable of it. But this is not something I am asking of you. More that it is something I am offering to you.\"",
+																		"options": [
+																			{
+																				"name": "\"I'm not sure that I follow your meaning.\"",
+																				"text": "\"The efficiency you have shown in your work for me rivals what we had seen from the captured mages. I believe that if you were to free them, you could make some new and powerful allies. And taking on their captors now may mean that you find yourself in a conflict that would be forthcoming anyway, but on your terms and timing rather than theirs.\"",
+																				"options": [
+																					{
+																						"name": "\"I don't believe that I'm ready for this kind of confrontation.\" (Decline Quest)",
+																						"text": "\"Then hold on to one of my amulets. Use it to contact us if you change your mind.\"",
+																						"options": [
+																							{
+																								"name": "Understood. And thank you."
+																							}
+																						]
+																					},
+																					{
+																						"action": [
+																							{
+																								"setQuestFlag": {
+																									"key": "exploreShand1",
+																									"val": 8
+																								},
+																								"issueQuest": "52"
+																							},
+																							{
+																								"setQuestFlag": {
+																									"key": "mainQuest",
+																									"val": 2
+																								}
+																							}
+																						],
+																						"name": "\"Adventure calls. Who am I to say no?\" (Accept Quest)"
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"storyQuest": true
+},
+{
+	"id": 52,
+	"isTemplate": true,
+	"name": "The Enemy of My Enemy...",
+	"description": "Sir Donovan has given you a set of five locations where he believes that powerful wizards are being held.",
+	"offerDialog": {},
+	"prologue": {
+		"action": [
+			{
+				"setQuestFlag": {
+					"key": "mainQuest",
+					"val": 2
+				}
+			}
+		],
+		"text": "Good luck",
+		"options": [
+			{
+				"name": "(Continue)"
+			}
+		]
+	},
+	"epilogue": {},
+	"failureDialog": {},
+	"declinedDialog": {
+		"text": "Come back tomorrow and perhaps I'll have something that you'll actually be willing to do.",
+		"options": [
+			{
+				"name": "(Catching the not so subtle hint, you leave.)"
+			}
+		]
+	},
+	"stages": [
+		{
+			"id": 1,
+			"name": "Find the Black Castle",
+			"description": "Find the Black Castle in the Swamp Biome",
+			"count3": 1,
+			"POITags": [
+				"BiomeBlack",
+				"Chapter1Boss"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 2,
+			"name": "Find the Blue Castle",
+			"description": "Find the Blue Castle in the Island Biome",
+			"count3": 1,
+			"POITags": [
+				"BiomeBlue",
+				"Chapter1Boss"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 3,
+			"name": "Find the Green Castle",
+			"description": "Find the Green Castle in the Forest Biome",
+			"count3": 1,
+			"POITags": [
+				"BiomeGreen",
+				"Chapter1Boss"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 4,
+			"name": "Find the Red Castle",
+			"description": "Find the Red Castle in the Mountain Biome",
+			"count3": 1,
+			"POITags": [
+				"BiomeRed",
+				"Chapter1Boss"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 5,
+			"name": "Find the White Castle",
+			"description": "Find the White Castle in the Plains Biome",
+			"count3": 1,
+			"POITags": [
+				"BiomeWhite",
+				"Chapter1Boss"
+			],
+			"objective": "Travel",
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 6,
+			"name": "Rescue the Black Captive",
+			"description": "Free the wizard being held captive inside the Black Castle",
+			"mapFlag": "Ch1BlackCastleComplete",
+			"POITags": [
+				"BiomeBlack",
+				"Chapter1Boss"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 1 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 7,
+			"name": "Rescue the Blue Captive",
+			"description": "Free the wizard being held captive inside the Blue Castle",
+			"mapFlag": "Ch1BlueCastleComplete",
+			"POITags": [
+				"BiomeBlue",
+				"Chapter1Boss"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 2 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 8,
+			"name": "Rescue the Green Captive",
+			"description": "Free the wizard being held captive inside the Green Castle",
+			"mapFlag": "Ch1GreenCastleComplete",
+			"POITags": [
+				"BiomeGreen",
+				"Chapter1Boss"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 3 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 9,
+			"name": "Rescue the Red Captive",
+			"description": "Free the wizard being held captive inside the Red Castle",
+			"mapFlag": "Ch1RedCastleComplete",
+			"mapFlagValue": 1,
+			"POITags": [
+				"BiomeRed",
+				"Chapter1Boss"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 4 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 10,
+			"name": "Rescue the White Captive",
+			"description": "Free the wizard being held captive inside the White Castle",
+			"mapFlag": "Ch1WhiteCastleComplete",
+			"POITags": [
+				"BiomeWhite",
+				"Chapter1Boss"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 5 ],
+			"prologue": {},
+			"epilogue": {},
+			"allowInactivePOI": true
+		},
+		{
+			"id": 11,
+			"name": "Get Some Answers",
+			"description": "Return to the spawn point at the center of the wastes and speak to the mage there.",
+			"mapFlag": "mainQuest",
+			"mapFlagValue": 3,
+			"POITags": [
+				"Spawn"
+			],
+			"objective": "QuestFlag",
+			"prerequisiteIDs": [ 6, 7, 8, 9, 10 ],
+			"prologue": {},
+			"epilogue": {}
+		}
+	],
+	"storyQuest": true
 }
 ]

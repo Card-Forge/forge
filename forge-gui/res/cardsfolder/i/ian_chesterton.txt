@@ -1,0 +1,9 @@
+Name:Ian Chesterton
+ManaCost:2 W
+Types:Legendary Creature Human Scientist
+PT:2/3
+S:Mode$ Continuous | AddKeyword$ Replicate:CardManaCost | Affected$ Saga.YouCtrl | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Science Teacher — Each Saga spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast that Saga, copy it for each time you paid its replicate cost. Copies of permanents enter the battlefield as tokens.)
+K:Doctor's companion
+DeckHas:Ability$Token
+DeckNeeds:Type$Saga
+Oracle:Science Teacher — Each Saga spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast that Saga, copy it for each time you paid its replicate cost. Copies of permanents enter the battlefield as tokens.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)

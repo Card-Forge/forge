@@ -1,0 +1,14 @@
+Name:Plunderer's Prize
+ManaCost:X U
+Types:Sorcery
+A:SP$ Seek | Type$ Artifact.nonLand+cmcLEX | RememberFound$ True | SubAbility$ DBPut | SpellDescription$ Seek a nonland artifact card with mana value X or less
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | StackDescription$ None | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ and put it onto the battlefield.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Remembered$CardManaCost | BranchConditionSVarCompare$ LTX | TrueSubAbility$ DBAnimate | FalseSubAbility$ DBCleanup | SpellDescription$ If a card with mana value less than X is put onto the battlefield this way, this spell perpetually gains "This spell costs {1} more to cast," then return this spell to its owner's hand.
+SVar:DBAnimate:DB$ Animate | staticAbilities$ RaiseCost | Duration$ Perpetual | SubAbility$ DBReturn
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} more to cast.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckNeeds:Type$Artifact
+AI:RemoveDeck:Random
+Oracle:Seek a nonland artifact card with mana value X or less and put it onto the battlefield. If a card with mana value less than X is put onto the battlefield this way, this spell perpetually gains "This spell costs {1} more to cast," then return this spell to its owner's hand.

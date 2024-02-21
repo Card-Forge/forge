@@ -1,0 +1,10 @@
+Name:Topography Tracker
+ManaCost:2 G
+Types:Creature Merfolk Scout
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_map_sac_explore
+R:Event$ Explore | ActiveZones$ Battlefield | ValidExplorer$ Creature.YouCtrl | ReplaceWith$ Explore1 | Description$ If a creature you control would explore, instead it explores, then it explores again.
+SVar:Explore1:DB$ Explore | Defined$ ReplacedCard | Num$ 2
+DeckHas:Ability$Token|Sacrifice & Type$Map|Artifact
+Oracle:When Topography Tracker enters the battlefield, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")\nIf a creature you control would explore, instead it explores, then it explores again.

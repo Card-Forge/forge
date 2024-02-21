@@ -1,0 +1,8 @@
+Name:Topiary Panther
+ManaCost:4 G G
+Types:Creature Plant Cat
+PT:6/5
+K:Trample
+K:TypeCycling:Basic:1 G
+DeckHas:Ability$Discard
+Oracle:Trample\nBasic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

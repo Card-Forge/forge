@@ -10895,7 +10895,7 @@ Hand +0, life -2
 {X}, Sacrifice an artifact with converted mana cost X: Bosh, Iron Golem Avatar deals X damage to target creature or player.
 VAN S
 
-Bosium Strip
+Bösium Strip
 {3}
 Artifact
 {3}, {T}: Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card. If a card cast this way would be put into a graveyard this turn, exile it instead.
@@ -20347,12 +20347,12 @@ Artifact Creature - Spirit
 Flying (This creature can't be blocked except by creatures with flying or reach.)
 AN R, 3E R, 4E R, 5E R, 6E R, 9ED U
 
-Dandan
+Dandân
 {U}{U}
 Creature - Fish
 4/1
-Dandan can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice Dandan.
+Dandân can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice Dandân.
 AN C, CH C, 5E C, TSB S
 
 Dangerous Wager
@@ -22332,7 +22332,7 @@ Deity of Scars enters the battlefield with two -1/-1 counters on it.
 {B/G}, Remove a -1/-1 counter from Deity of Scars: Regenerate Deity of Scars.
 EVE R
 
-Deja Vu
+Déjà Vu
 {2}{U}
 Sorcery
 Return target sorcery card from your graveyard to your hand.
@@ -27028,7 +27028,7 @@ El-Hajjaj
 {1}{B}{B}
 Creature - Human Wizard
 1/1
-Whenever El-Hajjaj deals damage, you gain that much life.
+Whenever El-Hajjâj deals damage, you gain that much life.
 AN R, 3E R, 4E R
 
 Eladamri
@@ -35962,11 +35962,11 @@ Ghave, Guru of Spores enters the battlefield with five +1/+1 counters on it.
 {1}, Sacrifice a creature: Put a +1/+1 counter on target creature.
 CMD M
 
-Ghazban Ogre
+Ghazbán Ogre
 {G}
 Creature - Ogre
 2/2
-At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazban Ogre.
+At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazbán Ogre.
 AN C, CH C, 5E C, MED C
 
 Ghirapur AEther Grid
@@ -45146,7 +45146,7 @@ Ifh-Biff Efreet
 Creature - Efreet
 3/3
 Flying
-{G}: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability.
+{G}: Ifh-Bíff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability.
 AN R, MED R
 
 Igneous Golem
@@ -48227,19 +48227,19 @@ Jorubai Murk Lurker gets +1/+1 as long as you control a Swamp.
 {1}{B}: Target creature gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)
 M15 U
 
-Jotun Grunt
+Jötun Grunt
 {1}{W}
 Creature - Giant Soldier
 4/4
 Cumulative upkeep-Put two cards from a single graveyard on the bottom of their owner's library. (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
 CSP U, CMD U
 
-Jotun Owl Keeper
+Jötun Owl Keeper
 {2}{W}
 Creature - Giant
 3/3
 Cumulative upkeep {W} or {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)
-When Jotun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
+When Jötun Owl Keeper dies, put a 1/1 white Bird creature token with flying onto the battlefield for each age counter on it.
 CSP U
 
 Journey of Discovery
@@ -48523,12 +48523,12 @@ Artifact
 Creatures with power 1 or less don't untap during their controllers' untap steps.
 IN R
 
-Junun Efreet
+Junún Efreet
 {1}{B}{B}
 Creature - Efreet
 3/3
 Flying
-At the beginning of your upkeep, sacrifice Junun Efreet unless you pay {B}{B}.
+At the beginning of your upkeep, sacrifice Junún Efreet unless you pay {B}{B}.
 AN R, 4E U, ME4 U
 
 Jushi Apprentice
@@ -48571,11 +48571,11 @@ Sorcery
 You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
 LE R, CH R, 5E R, 6E R, MED U
 
-Juzam Djinn
+Juzám Djinn
 {2}{B}{B}
 Creature - Djinn
 5/5
-At the beginning of your upkeep, Juzam Djinn deals 1 damage to you.
+At the beginning of your upkeep, Juzám Djinn deals 1 damage to you.
 AN R, MED R
 
 Jwar Isle Refuge
@@ -49756,11 +49756,11 @@ First strike
 At the beginning of your upkeep, if your opponents control no creatures, Kezzerdrix deals 4 damage to you.
 TE R, VMA U, TPR R
 
-Khabal Ghoul
+Khabál Ghoul
 {2}{B}
 Creature - Zombie
 1/1
-At the beginning of each end step, put a +1/+1 counter on Khabal Ghoul for each creature that died this turn.
+At the beginning of each end step, put a +1/+1 counter on Khabál Ghoul for each creature that died this turn.
 AN U, MED R
 
 Khalni Garden
@@ -52707,7 +52707,7 @@ White creatures you control get +0/+1.
 {R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
 DGM M
 
-Legions of Lim-Dul
+Legions of Lim-Dûl
 {1}{B}{B}
 Creature - Zombie
 2/3
@@ -53639,7 +53639,7 @@ At the beginning of your upkeep, you may put a verse counter on Lilting Refrain.
 Sacrifice Lilting Refrain: Counter target spell unless its controller pays {X}, where X is the number of verse counters on Lilting Refrain.
 UZ U
 
-Lim-Dul the Necromancer
+Lim-Dûl the Necromancer
 {5}{B}{B}
 Legendary Creature - Human Wizard
 4/4
@@ -53647,38 +53647,38 @@ Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, re
 {1}{B}: Regenerate target Zombie.
 TSP R
 
-Lim-Dul's Cohort
+Lim-Dûl's Cohort
 {1}{B}{B}
 Creature - Zombie
 2/3
-Whenever Lim-Dul's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+Whenever Lim-Dûl's Cohort blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 IA C, ME4 C
 
-Lim-Dul's Hex
+Lim-Dûl's Hex
 {1}{B}
 Enchantment
-At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
+At the beginning of your upkeep, for each player, Lim-Dûl's Hex deals 1 damage to that player unless he or she pays {B} or {3}.
 IA U
 
-Lim-Dul's High Guard
+Lim-Dûl's High Guard
 {1}{B}{B}
 Creature - Skeleton
 2/1
 First strike
-{1}{B}: Regenerate Lim-Dul's High Guard.
+{1}{B}: Regenerate Lim-Dûl's High Guard.
 AL C (x2), ME2 U
 
-Lim-Dul's Paladin
+Lim-Dûl's Paladin
 {2}{B}{R}
 Creature - Human Knight
 0/3
 Trample
-At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.
-Whenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.
-Whenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
+At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dûl's Paladin and draw a card.
+Whenever Lim-Dûl's Paladin becomes blocked, it gets +6/+3 until end of turn.
+Whenever Lim-Dûl's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
 AL U
 
-Lim-Dul's Vault
+Lim-Dûl's Vault
 {U}{B}
 Instant
 Look at the top five cards of your library. As many times as you choose, you may pay 1 life, put those cards on the bottom of your library in any order, then look at the top five cards of your library. Then shuffle your library and put the last cards you looked at this way on top of it in any order.
@@ -56843,12 +56843,12 @@ Enchantment
 At the beginning of your upkeep, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
 RTR R
 
-Marton Stromgald
+Márton Stromgald
 {2}{R}{R}
 Legendary Creature - Human Knight
 1/1
-Whenever Marton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Marton Stromgald.
-Whenever Marton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Marton Stromgald.
+Whenever Márton Stromgald attacks, other attacking creatures get +1/+1 until end of turn for each attacking creature other than Márton Stromgald.
+Whenever Márton Stromgald blocks, other blocking creatures get +1/+1 until end of turn for each blocking creature other than Márton Stromgald.
 IA R, MED R
 
 Martyr of Ashes
@@ -64703,10 +64703,10 @@ Enchantment
 At the beginning of each player's upkeep, that player chooses target player who controls more lands than he or she does and is his or her opponent. The first player may search his or her library for a basic land card, put that card onto the battlefield, then shuffle his or her library.
 EX R
 
-Oath of Lim-Dul
+Oath of Lim-Dûl
 {3}{B}
 Enchantment
-Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dul unless you discard a card. (Damage dealt to you causes you to lose life.)
+Whenever you lose life, for each 1 life you lost, sacrifice a permanent other than Oath of Lim-Dûl unless you discard a card. (Damage dealt to you causes you to lose life.)
 {B}{B}: Draw a card.
 IA R
 
@@ -76476,10 +76476,10 @@ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it'
 Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
 M13 U
 
-Ring of Ma'ruf
+Ring of Ma'rûf
 {5}
 Artifact
-{5}, {T}, Exile Ring of Ma'ruf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+{5}, {T}, Exile Ring of Ma'rûf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
 AN R, MED R
 
 Ring of Renewal
@@ -81145,7 +81145,7 @@ Sealock Monster can't attack unless defending player controls an Island.
 When Sealock Monster becomes monstrous, target land becomes an Island in addition to its other types.
 THS U, DDO U
 
-Seance
+Séance
 {2}{W}{W}
 Enchantment
 At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.

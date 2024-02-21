@@ -1,0 +1,9 @@
+Name:Scion of Calamity
+ManaCost:3 G G
+Types:Creature Dinosaur
+PT:5/5
+K:Myriad
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target artifact or enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget,Enchantment.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment damaged player controls
+DeckHas:Ability$Token
+Oracle:Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nWhenever Scion of Calamity deals combat damage to a player, destroy target artifact or enchantment that player controls.

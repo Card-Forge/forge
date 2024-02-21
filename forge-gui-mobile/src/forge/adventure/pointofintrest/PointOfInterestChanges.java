@@ -7,6 +7,7 @@ import forge.adventure.util.SaveFileData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Class to save point of interest changes, like sold cards and dead enemies
@@ -16,7 +17,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     private final HashMap<Integer, HashSet<Integer>> cardsBought = new HashMap<>();
     private final java.util.Map<String, Byte> mapFlags = new HashMap<>();
     private final java.util.Map<Integer, Long> shopSeeds = new HashMap<>();
-    private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
+    //private final java.util.Map<Integer, Float> shopModifiers = new HashMap<>();
     private final java.util.Map<Integer, Integer> reputation = new HashMap<>();
     private Boolean isBookmarked;
 
@@ -61,8 +62,10 @@ public class PointOfInterestChanges implements SaveFileContent  {
         shopSeeds.putAll((java.util.Map<Integer, Long>) data.readObject("shopSeeds"));
         mapFlags.clear();
         mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
-        shopModifiers.clear();
-        shopModifiers.putAll((java.util.Map<Integer, Float>) data.readObject("shopModifiers"));
+        reputation.clear();
+        if (data.containsKey("reputation")) {
+            reputation.putAll((java.util.Map<Integer, Integer>) data.readObject("reputation"));
+        }
         isBookmarked = (Boolean) data.readObject("isBookmarked");
     }
 
@@ -73,7 +76,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
         data.storeObject("cardsBought",cardsBought);
         data.storeObject("mapFlags", mapFlags);
         data.storeObject("shopSeeds", shopSeeds);
-        data.storeObject("shopModifiers", shopModifiers);
+        data.storeObject("reputation", reputation);
         data.storeObject("isBookmarked", isBookmarked);
         return data;
     }
@@ -107,8 +110,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     public void generateNewShopSeed(int objectID){
-
-        shopSeeds.put(objectID, Current.world().getRandom().nextLong());
+        shopSeeds.put(objectID, shopSeeds.containsKey(objectID)? new Random(shopSeeds.get(objectID)).nextLong() : Current.world().getRandom().nextLong());
         cardsBought.put(objectID, new HashSet<>()); //Allows cards to appear in slots of previous purchases
     }
 

@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
@@ -53,7 +54,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.58.001";
+    public static final String CURRENT_VERSION = "1.6.60-SNAPSHOT";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -1016,6 +1017,7 @@ public class Forge implements ApplicationListener {
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
+        MapStage.getInstance().disposeWorld();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();

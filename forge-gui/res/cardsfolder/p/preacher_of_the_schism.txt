@@ -1,0 +1,12 @@
+Name:Preacher of the Schism
+ManaCost:2 B
+Types:Creature Vampire Cleric
+PT:2/4
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks the player with the most life or tied for most life, create a 1/1 white Vampire creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_vampire_lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | NoResolvingCheck$ True | CheckDefinedPlayer$ You.withMostLife | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks while you have the most life or are tied for most life, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Preacher of the Schism attacks the player with the most life or tied for most life, create a 1/1 white Vampire creature token with lifelink.\nWhenever Preacher of the Schism attacks while you have the most life or are tied for most life, you draw a card and you lose 1 life.

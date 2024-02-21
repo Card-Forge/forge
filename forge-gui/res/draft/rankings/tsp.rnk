@@ -1,0 +1,403 @@
+//Rank|Name|Rarity|Set
+#1|Jaya Ballard, Task Mage|R|TSP
+#2|Bogardan Hellkite|R|TSP
+#3|Sengir Nosferatu|R|TSP
+#4|Pardic Dragon|R|TSP
+#5|Firemaw Kavu|U|TSP
+#6|Spectral Force|R|TSP
+#7|Thelonite Hermit|R|TSP
+#8|Teferi, Mage of Zhalfir|R|TSP
+#9|Draining Whelk|R|TSP
+#10|Magus of the Disk|R|TSP
+#11|Sudden Spoiling|R|TSP
+#12|Vesuvan Shapeshifter|R|TSP
+#13|Disintegrate|SR|TSP
+#14|Stonewood Invocation|R|TSP
+#15|Sulfurous Blast|U|TSP
+#16|Stronghold Overseer|R|TSP
+#17|Serra Avenger|R|TSP
+#18|Magus of the Scroll|R|TSP
+#19|Verdant Embrace|R|TSP
+#20|Plague Sliver|R|TSP
+#21|Call of the Herd|SR|TSP
+#22|Griffin Guide|U|TSP
+#23|Psionic Blast|SR|TSP
+#24|Triskelavus|R|TSP
+#25|Sedge Sliver|R|TSP
+#26|Sudden Death|U|TSP
+#27|Riftwing Cloudskate|U|TSP
+#28|Sporesower Thallid|U|TSP
+#29|Kaervek the Merciless|R|TSP
+#30|Greater Gargadon|R|TSP
+#31|Stonebrow, Krosan Hero|R|TSP
+#32|Stormbind|SR|TSP
+#33|Sacred Mesa|SR|TSP
+#34|Word of Seizing|R|TSP
+#35|Stuffy Doll|R|TSP
+#36|Errant Ephemeron|C|TSP
+#37|Akroma, Angel of Wrath|SR|TSP
+#38|Pulmonic Sliver|R|TSP
+#39|Fledgling Mawcor|U|TSP
+#40|Ixidron|R|TSP
+#41|Pentarch Paladin|R|TSP
+#42|Avatar of Woe|SR|TSP
+#43|Ith, High Arcanist|R|TSP
+#44|Endrek Sahr, Master Breeder|R|TSP
+#45|Shadowmage Infiltrator|SR|TSP
+#46|Tromp the Domains|U|TSP
+#47|Serrated Arrows|SR|TSP
+#48|Wurmcalling|R|TSP
+#49|Soul Collector|SR|TSP
+#50|Duskrider Peregrine|U|TSP
+#51|Void|SR|TSP
+#52|Rift Bolt|C|TSP
+#53|Lightning Axe|C|TSP
+#54|Mystic Enforcer|SR|TSP
+#55|Phthisis|U|TSP
+#56|Desolation Giant|SR|TSP
+#57|Strangling Soot|C|TSP
+#58|Sudden Shock|U|TSP
+#59|Fiery Temper|SR|TSP
+#60|Dragon Whelp|SR|TSP
+#61|Teferi's Moat|SR|TSP
+#62|Deep Sea Kraken|R|TSP
+#63|Mangara of Corondor|R|TSP
+#64|Ancestral Vision|R|TSP
+#65|Faceless Butcher|SR|TSP
+#66|Might Sliver|U|TSP
+#67|Knight of the Holy Nimbus|U|TSP
+#68|Clockwork Hydra|U|TSP
+#69|Assault Battery|SR|TSP
+#70|Essence Sliver|SR|TSP
+#71|Durkwood Baloth|C|TSP
+#72|Squall Line|R|TSP
+#73|Lightning Angel|SR|TSP
+#74|Brine Elemental|U|TSP
+#75|Careful Consideration|U|TSP
+#76|Temporal Isolation|C|TSP
+#77|Looter il Kor|C|TSP
+#78|Twisted Abomination|SR|TSP
+#79|Prodigal Sorcerer|SR|TSP
+#80|Nightshade Assassin|U|TSP
+#81|Outrider en Kor|U|TSP
+#82|Celestial Crusader|U|TSP
+#83|Fathom Seer|C|TSP
+#84|Castle Raptors|C|TSP
+#85|Tendrils of Corruption|C|TSP
+#86|Verdeloth the Ancient|SR|TSP
+#87|Wildfire Emissary|SR|TSP
+#88|Mindless Automaton|SR|TSP
+#89|Evangelize|R|TSP
+#90|Thornscape Battlemage|SR|TSP
+#91|Sprite Noble|R|TSP
+#92|Spike Tiller|R|TSP
+#93|Willbender|SR|TSP
+#94|Soltari Priest|SR|TSP
+#95|Tribal Flames|SR|TSP
+#96|Crookclaw Transmuter|C|TSP
+#97|Psionic Sliver|R|TSP
+#98|Vhati il Dal|SR|TSP
+#99|Spiketail Drakeling|C|TSP
+#100|Dark Withering|C|TSP
+#101|Weatherseed Totem|U|TSP
+#102|Basalt Gargoyle|U|TSP
+#103|Scryb Ranger|U|TSP
+#104|Phantom Wurm|U|TSP
+#105|Fire Whip|SR|TSP
+#106|Amrou Scout|C|TSP
+#107|Premature Burial|U|TSP
+#108|Hunting Moa|SR|TSP
+#109|Assassinate|C|TSP
+#110|Thelon of Havenwood|R|TSP
+#111|Liege of the Pit|R|TSP
+#112|Mystic Snake|SR|TSP
+#113|Defiant Vanguard|SR|TSP
+#114|Pirate Ship|SR|TSP
+#115|Penumbra Spider|C|TSP
+#116|Telekinetic Sliver|U|TSP
+#117|Cockatrice|SR|TSP
+#118|Avalanche Riders|SR|TSP
+#119|Gemhide Sliver|C|TSP
+#120|Jolrael, Empress of Beasts|SR|TSP
+#121|Conflagrate|U|TSP
+#122|Search for Tomorrow|C|TSP
+#123|Suq'Ata Lancer|SR|TSP
+#124|Chronosavant|R|TSP
+#125|Yavimaya Dryad|U|TSP
+#126|Dauthi Slayer|SR|TSP
+#127|Cavalry Master|U|TSP
+#128|Foriysian Totem|U|TSP
+#129|Stormcloud Djinn|U|TSP
+#130|Fortune Thief|R|TSP
+#131|Grapeshot|C|TSP
+#132|Ghost Ship|SR|TSP
+#133|Weathered Bodyguards|R|TSP
+#134|Empty the Warrens|C|TSP
+#135|Keldon Halberdier|C|TSP
+#136|Benalish Cavalry|C|TSP
+#137|Amrou Seekers|C|TSP
+#138|Tivadar of Thorn|R|TSP
+#139|Opal Guardian|R|TSP
+#140|Undying Rage|U|TSP
+#141|Wall of Roots|SR|TSP
+#142|Corpulent Corpse|C|TSP
+#143|Fury Sliver|U|TSP
+#144|Shadow Guildmage|SR|TSP
+#145|Terramorphic Expanse|C|TSP
+#146|Prismatic Lens|C|TSP
+#147|Phyrexian Totem|U|TSP
+#148|Spike Feeder|SR|TSP
+#149|Coal Stoker|C|TSP
+#150|Orcish Cannonade|C|TSP
+#151|Nantuko Shaman|C|TSP
+#152|Viscerid Deepwalker|C|TSP
+#153|Hail Storm|SR|TSP
+#154|Momentary Blink|C|TSP
+#155|Eron the Relentless|SR|TSP
+#156|Fiery Justice|SR|TSP
+#157|Ib Halfheart, Goblin Tactician|R|TSP
+#158|Undertaker|SR|TSP
+#159|Lim Dul the Necromancer|R|TSP
+#160|Giant Oyster|SR|TSP
+#161|Urborg Syphon Mage|C|TSP
+#162|Uthden Troll|SR|TSP
+#163|Candles of Leng|R|TSP
+#164|Cloudchaser Kestrel|C|TSP
+#165|Thick Skinned Goblin|U|TSP
+#166|Trespasser il Vec|C|TSP
+#167|Zhalfirin Commander|SR|TSP
+#168|Desert|SR|TSP
+#169|Sol'kanar the Swamp King|SR|TSP
+#170|Might of Old Krosa|U|TSP
+#171|Snapback|C|TSP
+#172|Voidmage Prodigy|SR|TSP
+#173|Coral Trickster|C|TSP
+#174|Vampiric Sliver|U|TSP
+#175|Orgg|SR|TSP
+#176|Wipe Away|U|TSP
+#177|Fortify|C|TSP
+#178|Magus of the Jar|R|TSP
+#179|Bonesplitter Sliver|C|TSP
+#180|Gorgon Recluse|C|TSP
+#181|Spinneret Sliver|C|TSP
+#182|Urza's Factory|U|TSP
+#183|Goblin Skycutter|C|TSP
+#184|Thunder Totem|U|TSP
+#185|Saffi Eriksdotter|R|TSP
+#186|Valor|SR|TSP
+#187|Gauntlet of Power|R|TSP
+#188|Icatian Javelineers|SR|TSP
+#189|Stupor|SR|TSP
+#190|Strength in Numbers|C|TSP
+#191|Herd Gnarr|C|TSP
+#192|Lotus Bloom|R|TSP
+#193|Thallid Germinator|C|TSP
+#194|Chromatic Star|C|TSP
+#195|Sarpadian Empires, Vol. VII|R|TSP
+#196|Ivory Giant|C|TSP
+#197|Stormscape Familiar|SR|TSP
+#198|Witch Hunter|SR|TSP
+#199|Whispers of the Muse|SR|TSP
+#200|Moorish Cavalry|SR|TSP
+#201|Mogg War Marshal|C|TSP
+#202|Watcher Sliver|C|TSP
+#203|Browbeat|SR|TSP
+#204|Primal Forcemage|U|TSP
+#205|Mistform Ultimus|SR|TSP
+#206|Walk the Aeons|R|TSP
+#207|Think Twice|C|TSP
+#208|Mana Skimmer|C|TSP
+#209|Flowstone Channeler|C|TSP
+#210|Errant Doomsayers|C|TSP
+#211|Quilled Sliver|U|TSP
+#212|Ashcoat Bear|C|TSP
+#213|Funeral Charm|SR|TSP
+#214|Faceless Devourer|U|TSP
+#215|Subterranean Shambler|C|TSP
+#216|Withered Wretch|SR|TSP
+#217|Blazing Blade Askari|C|TSP
+#218|Slipstream Serpent|C|TSP
+#219|Spined Sliver|SR|TSP
+#220|Temporal Eddy|C|TSP
+#221|Pit Keeper|C|TSP
+#222|Deathspore Thallid|C|TSP
+#223|Gemstone Mine|SR|TSP
+#224|Undead Warchief|SR|TSP
+#225|Nether Traitor|R|TSP
+#226|Feebleness|C|TSP
+#227|Unstable Mutation|SR|TSP
+#228|Zealot il Vec|C|TSP
+#229|Greenseeker|C|TSP
+#230|Pendelhaven|SR|TSP
+#231|Thallid Shell Dweller|C|TSP
+#232|Flamecore Elemental|C|TSP
+#233|Dodecapod|SR|TSP
+#234|Flickering Spirit|C|TSP
+#235|Dream Stalker|C|TSP
+#236|Jasmine Boreal|SR|TSP
+#237|Thrill of the Hunt|C|TSP
+#238|Sengir Autocrat|SR|TSP
+#239|Resurrection|SR|TSP
+#240|Hivestone|R|TSP
+#241|Molten Slagheap|U|TSP
+#242|Mindstab|C|TSP
+#243|Magus of the Mirror|R|TSP
+#244|Bogardan Rager|C|TSP
+#245|Icatian Crier|C|TSP
+#246|Tolarian Sentinel|C|TSP
+#247|Krosan Cloudscraper|SR|TSP
+#248|Havenwood Wurm|C|TSP
+#249|Skulking Knight|C|TSP
+#250|Ironclaw Buzzardiers|C|TSP
+#251|Scragnoth|SR|TSP
+#252|Dread Return|U|TSP
+#253|Scarwood Treefolk|C|TSP
+#254|Bad Moon|SR|TSP
+#255|Fungal Reaches|U|TSP
+#256|Durkwood Tracker|U|TSP
+#257|Ghostflame Sliver|U|TSP
+#258|Calciform Pools|U|TSP
+#259|Dreadship Reef|U|TSP
+#260|Arena|SR|TSP
+#261|Fungus Sliver|R|TSP
+#262|Kher Keep|R|TSP
+#263|Wormwood Dryad|C|TSP
+#264|Skittering Monstrosity|U|TSP
+#265|Cancel|C|TSP
+#266|Chronatog Totem|U|TSP
+#267|Thallid|SR|TSP
+#268|Whirling Dervish|SR|TSP
+#269|Basal Sliver|C|TSP
+#270|Opaline Sliver|U|TSP
+#271|Merieke Ri Berit|SR|TSP
+#272|Spitting Slug|SR|TSP
+#273|Savage Thallid|C|TSP
+#274|Viashino Bladescout|C|TSP
+#275|Mwonvuli Acid Moss|C|TSP
+#276|Saltcrusted Steppe|U|TSP
+#277|D'Avenant Healer|C|TSP
+#278|Jedit's Dragoons|C|TSP
+#279|Evil Eye of Urborg|U|TSP
+#280|Venser's Sliver|C|TSP
+#281|Mirari|SR|TSP
+#282|Two Headed Sliver|C|TSP
+#283|Viscid Lemures|C|TSP
+#284|Sidewinder Sliver|C|TSP
+#285|Smallpox|U|TSP
+#286|Flying Men|SR|TSP
+#287|Lord of Atlantis|SR|TSP
+#288|Mystical Teachings|C|TSP
+#289|Pendelhaven Elder|U|TSP
+#290|Flagstones of Trokair|R|TSP
+#291|Dralnu, Lich Lord|R|TSP
+#292|The Rack|SR|TSP
+#293|Honorable Passage|SR|TSP
+#294|Mishra, Artificer Prodigy|R|TSP
+#295|Vesuva|R|TSP
+#296|Cyclopean Giant|C|TSP
+#297|Tectonic Fiend|U|TSP
+#298|Assembly Worker|U|TSP
+#299|Drudge Reavers|C|TSP
+#300|Aetherflame Wall|C|TSP
+#301|Drifter il Dal|C|TSP
+#302|Sage of Epityr|C|TSP
+#303|Spell Burst|U|TSP
+#304|Pentarch Ward|C|TSP
+#305|Craw Giant|SR|TSP
+#306|Firewake Sliver|U|TSP
+#307|Ophidian Eye|C|TSP
+#308|Eternity Snare|C|TSP
+#309|Unyaro Bees|R|TSP
+#310|Aether Web|C|TSP
+#311|Ovinomancer|SR|TSP
+#312|Voidmage Husher|U|TSP
+#313|Safe Haven|SR|TSP
+#314|Nicol Bolas|SR|TSP
+#315|Grinning Totem|SR|TSP
+#316|Gaze of Justice|C|TSP
+#317|Gustcloak Cavalier|U|TSP
+#318|Gaea's Blessing|SR|TSP
+#319|Evil Eye of Orms by Gore|SR|TSP
+#320|Gemstone Caverns|R|TSP
+#321|Paradise Plume|U|TSP
+#322|Screeching Sliver|C|TSP
+#323|Sprout|C|TSP
+#324|Swarmyard|R|TSP
+#325|Bewilder|C|TSP
+#326|Haunting Hymn|U|TSP
+#327|Mindlash Sliver|C|TSP
+#328|Avoid Fate|SR|TSP
+#329|Jhoira's Timebug|C|TSP
+#330|Uncle Istvan|SR|TSP
+#331|Plated Pegasus|U|TSP
+#332|Shadow Sliver|C|TSP
+#333|Disenchant|SR|TSP
+#334|Reiterate|R|TSP
+#335|Psychotic Episode|C|TSP
+#336|Pandemonium|SR|TSP
+#337|Darkness|SR|TSP
+#338|Call to the Netherworld|C|TSP
+#339|Trickbind|R|TSP
+#340|Sindbad|SR|TSP
+#341|Spirit Loop|U|TSP
+#342|Tormod's Crypt|SR|TSP
+#343|Children of Korlis|C|TSP
+#344|Goblin Snowman|SR|TSP
+#345|Sangrophage|C|TSP
+#346|Ignite Memories|U|TSP
+#347|Molder|C|TSP
+#348|Orcish Librarian|SR|TSP
+#349|Gaea's Liege|SR|TSP
+#350|Academy Ruins|R|TSP
+#351|Dandan|SR|TSP
+#352|Harmonic Sliver|U|TSP
+#353|Krosan Grip|U|TSP
+#354|Traitor's Clutch|C|TSP
+#355|Demonic Collusion|R|TSP
+#356|Glass Asp|C|TSP
+#357|Ancient Grudge|C|TSP
+#358|Foriysian Interceptor|C|TSP
+#359|Plunder|C|TSP
+#360|Clockspinning|C|TSP
+#361|Angel's Grace|R|TSP
+#362|Merfolk Assassin|SR|TSP
+#363|Claws of Gix|SR|TSP
+#364|Curse of the Cabal|R|TSP
+#365|Brass Gnat|C|TSP
+#366|Ghitu Firebreathing|C|TSP
+#367|Fallen Ideal|U|TSP
+#368|Auratog|SR|TSP
+#369|Chameleon Blur|C|TSP
+#370|Kobold Taskmaster|SR|TSP
+#371|War Barge|SR|TSP
+#372|Detainment Spell|C|TSP
+#373|Ground Rift|C|TSP
+#374|Barbed Shocker|U|TSP
+#375|Dragonstorm|SR|TSP
+#376|Divine Congregation|C|TSP
+#377|Enduring Renewal|SR|TSP
+#378|Magus of the Candelabra|R|TSP
+#379|Dementia Sliver|U|TSP
+#380|Wheel of Fate|R|TSP
+#381|Conspiracy|SR|TSP
+#382|Swamp Mosquito|SR|TSP
+#383|Feldon's Cane|SR|TSP
+#384|Pull from Eternity|U|TSP
+#385|Return to Dust|U|TSP
+#386|Fool's Demise|U|TSP
+#387|Celestial Dawn|SR|TSP
+#388|Truth or Tale|U|TSP
+#389|Squire|SR|TSP
+#390|Coalition Victory|SR|TSP
+#391|Leviathan|SR|TSP
+#392|Volcanic Awakening|U|TSP
+#393|Living End|R|TSP
+#394|Consecrate Land|SR|TSP
+#395|Scion of the Ur Dragon|R|TSP
+#396|Aspect of Mongoose|U|TSP
+#397|Restore Balance|R|TSP
+#398|Paradox Haze|U|TSP
+#399|Locket of Yesterdays|U|TSP
+#400|Norin the Wary|R|TSP
+#401|Hypergenesis|R|TSP
+#402|Moonlace|R|TSP

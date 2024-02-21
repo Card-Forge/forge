@@ -1,0 +1,11 @@
+Name:Gallifrey Stands
+ManaCost:4 W U
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return all Doctor cards from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZoneAll | Defined$ You | ChangeType$ Card.Doctor | Origin$ Graveyard | Destination$ Hand
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your upkeep, you may put a Doctor creature card from your hand onto the battlefield. Then if you control thirteen or more Doctors, you win the game.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.Doctor | SubAbility$ DBWin
+SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionPresent$ Doctor.YouCtrl | ConditionCompare$ GE13
+DeckNeeds:Type$Doctor
+DeckHas:Ability$Graveyard
+Oracle:When Gallifrey Stands enters the battlefield, return all Doctor cards from your graveyard to your hand.\nAt the beginning of your upkeep, you may put a Doctor creature card from your hand onto the battlefield. Then if you control thirteen or more Doctors, you win the game.

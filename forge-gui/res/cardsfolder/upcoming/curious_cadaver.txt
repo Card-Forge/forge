@@ -1,0 +1,12 @@
+Name:Curious Cadaver
+ManaCost:2 U B
+Types:Creature Zombie Detective
+PT:3/1
+K:Flying
+T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ When you sacrifice a Clue, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+SVar:SacMe:3
+SVar:DiscardMe:3
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Clue
+Oracle:Flying\nWhen you sacrifice a Clue, return Curious Cadaver from your graveyard to your hand.

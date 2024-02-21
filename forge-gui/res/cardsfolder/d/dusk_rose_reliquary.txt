@@ -1,0 +1,11 @@
+Name:Dusk Rose Reliquary
+ManaCost:W
+Types:Artifact
+K:Ward:2
+K:AlternateAdditionalCost:Sac<1/Creature;Artifact/creature or artifact>
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target artifact or creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl | TgtPrompt$ Select target artifact or creature an opponent controls | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nWard {2}\nWhen Dusk Rose Reliquary enters the battlefield, exile target artifact or creature an opponent controls until Dusk Rose Reliquary leaves the battlefield.

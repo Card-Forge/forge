@@ -60,6 +60,21 @@ public class FSkin {
             });
         })), null, false, true));
     }
+    private static boolean isValidDirectory(FileHandle fileHandle) {
+        if (fileHandle == null)
+            return false;
+        if (!fileHandle.exists())
+            return false;
+        if (!fileHandle.isDirectory())
+            return false;
+        String[] lists = fileHandle.file().list();
+        if (lists == null)
+            return false;
+        return lists.length > 0;
+    }
+    private static void useFallbackDir() {
+        preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
+    }
     public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
         preferredDir = prefDir;
         loadLight(skinName,splashScreen);
@@ -81,13 +96,15 @@ public class FSkin {
 
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
-        if(preferredDir==null)
+        if(preferredDir == null)
         {
-            if (!dir.exists() || !dir.isDirectory()) {
-                //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-                preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
-            }
-            else {
+            if (!isValidDirectory(dir)) {
+                final FileHandle def = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
+                if (def.exists() && def.isDirectory()) //if default skin exists
+                    preferredDir = def;
+                else //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
+                    useFallbackDir();
+            } else {
                 if (splashScreen != null) {
                     if (allSkins == null) { //initialize
                         allSkins = new Array<>();
@@ -106,6 +123,10 @@ public class FSkin {
                     preferredDir.mkdirs();
                 }
             }
+        }
+        //check preferredDir
+        if (!isValidDirectory(preferredDir)) {
+            useFallbackDir();
         }
 
 

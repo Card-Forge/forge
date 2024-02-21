@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
+    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -115,7 +116,8 @@ public final class GameActionUtil {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes
-                if ((!sa.isBasicSpell() || (sa.costHasManaX() && !sa.getPayCosts().getCostMana().canXbe0())) && o.getPayManaCost() == PayManaCost.NO) {
+                if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
+                        && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
                     continue;
                 }
                 final Card host = o.getHost();
@@ -132,6 +134,9 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     changedManaCost = true;
                 } else {
+                    if (altCostOnly) {
+                        continue;
+                    }
                     newSA = sa.copy(activator);
                 }
 
@@ -144,7 +149,7 @@ public final class GameActionUtil {
                     sar.setInstantSpeed(true);
                 }
                 sar.setZone(null);
-                newSA.setMayPlay(o.getAbility());
+                newSA.setMayPlay(o);
 
                 if (changedManaCost) {
                     if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
@@ -440,7 +445,10 @@ public final class GameActionUtil {
 
         for (KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
-            if (keyword.startsWith("Buyback")) {
+            if (keyword.equals("Bargain")) {
+                final Cost cost = new Cost("Sac<1/Artifact;Enchantment;Card.token/artifact, enchantment or token>", false);
+                costs.add(new OptionalCostValue(OptionalCost.Bargain, cost));
+            } else if (keyword.startsWith("Buyback")) {
                 final Cost cost = new Cost(keyword.substring(8), false);
                 costs.add(new OptionalCostValue(OptionalCost.Buyback, cost));
             } else if (keyword.startsWith("Entwine")) {
@@ -741,6 +749,7 @@ public final class GameActionUtil {
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setLayer(ReplacementLayer.Other);
         re.setOverridingAbility(sa);
+        re.setActiveZone(EnumSet.of(ZoneType.Command));
 
         eff.addReplacementEffect(re);
 
@@ -905,6 +914,12 @@ public final class GameActionUtil {
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
             }
+        }
+
+        if (ability.getApi() == ApiType.Charm) {
+            // reset chain
+            ability.setSubAbility(null);
+            ability.setChosenList(null);
         }
 
         ability.clearTargets();

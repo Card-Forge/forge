@@ -1,0 +1,11 @@
+Name:Ravenous Tyrannosaurus
+ManaCost:4 R G
+Types:Creature Dinosaur
+PT:6/6
+K:Devour:3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExchangeDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead.
+SVar:TrigExchangeDamage:DB$ DealDamage | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target other creature | NumDmg$ MyX | ExcessDamage$ TargetedController
+SVar:MyX:Count$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Devour 3 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with three times that many +1/+1 counters on it.)\nWhenever Ravenous Tyrannosaurus attacks, it deals damage equal to its power to up to one other target creature. Excess damage is dealt to that creature's controller instead.

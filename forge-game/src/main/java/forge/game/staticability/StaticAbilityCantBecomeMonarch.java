@@ -23,7 +23,8 @@ public class StaticAbilityCantBecomeMonarch {
         }
         return false;
     }
-    public static boolean applyCantBecomeMonarchAbility(final StaticAbility stAb, final Player player) {
+
+    private static boolean applyCantBecomeMonarchAbility(final StaticAbility stAb, final Player player) {
         if (!stAb.matchesValidParam("ValidPlayer", player)) {
             return false;
         }

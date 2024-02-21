@@ -2,6 +2,6 @@ Name:Compleated Huntmaster
 ManaCost:2 B
 Types:Creature Phyrexian Elf Warrior
 PT:2/3
-A:AB$ Incubate | Cost$ 1 T Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Amount$ 3
+A:AB$ Incubate | Cost$ 1 T Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Amount$ 3 | SpellDescription$ Incubate 3.
 DeckHas:Ability$Sacrifice|Counters|Token & Type$Incubator|Artifact
 Oracle:{1}, {T}, Sacrifice another creature or artifact: Incubate 3. (Create an Incubator token with three +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)

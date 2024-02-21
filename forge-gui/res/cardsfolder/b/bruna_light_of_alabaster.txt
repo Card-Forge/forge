@@ -6,12 +6,12 @@ K:Flying
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ Aurify | TriggerDescription$ Whenever CARDNAME attacks or blocks, you may attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ Aurify | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, you may attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand.
-SVar:Aurify:DB$ RepeatEach | RepeatSubAbility$ BrunaAttach | RepeatCards$ Aura.CanEnchantSource+NotAttachedTo | SubAbility$ HandAuras
+SVar:Aurify:DB$ RepeatEach | RepeatSubAbility$ BrunaAttach | RepeatCards$ Aura.CanEnchantSource+NotAttachedTo | SubAbility$ ZoneAuras
 SVar:BrunaAttach:DB$ Attach | Object$ Remembered | Defined$ Self | Optional$ True
-SVar:HandAuras:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource+YouCtrl | AttachedTo$ Self | ChangeNum$ HandX | Optional$ True | Hidden$ True | SubAbility$ GraveAuras
-SVar:GraveAuras:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource+YouCtrl | AttachedTo$ Self | ChangeNum$ GraveX | Optional$ True | Hidden$ True
-SVar:HandX:Count$ValidHand Aura.CanEnchantSource+YouCtrl
-SVar:GraveX:Count$ValidGraveyard Aura.CanEnchantSource+YouCtrl
+SVar:ZoneAuras:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource+YouOwn | AttachedTo$ Self | ChangeNum$ Count | Optional$ True | Hidden$ True
+SVar:Count:Count$ValidHand,Graveyard Aura.CanEnchantSource+YouOwn
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
+DeckNeeds:Type$Aura
+DeckHas:Ability$Graveyard
 Oracle:Flying, vigilance\nWhenever Bruna, Light of Alabaster attacks or blocks, you may attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand.

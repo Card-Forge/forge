@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Sword of Body and Mind|M|SOM
+#2|Wurmcoil Engine|M|SOM
+#3|Molten Tail Masticore|M|SOM
+#4|Skithiryx, the Blight Dragon|M|SOM
+#5|Elspeth Tirel|M|SOM
+#6|Koth of the Hammer|M|SOM
+#7|Venser, the Sojourner|M|SOM
+#8|Geth, Lord of the Vault|M|SOM
+#9|Indomitable Archangel|M|SOM
+#10|Lux Cannon|M|SOM
+#11|Platinum Emperion|M|SOM
+#12|Mindslaver|M|SOM
+#13|Liege of the Tangle|M|SOM
+#14|Quicksilver Gargantuan|M|SOM
+#15|Steel Hellkite|R|SOM
+#16|Mox Opal|M|SOM
+#17|Contagion Engine|R|SOM
+#18|Sunblast Angel|R|SOM
+#19|Hoard Smelter Dragon|R|SOM
+#20|Carnifex Demon|R|SOM
+#21|Myr Battlesphere|R|SOM
+#22|Precursor Golem|R|SOM
+#23|Mimic Vat|R|SOM
+#24|Skinrender|U|SOM
+#25|Kuldotha Phoenix|R|SOM
+#26|Arc Trail|U|SOM
+#27|Oxidda Scrapmelter|U|SOM
+#28|Strata Scythe|R|SOM
+#29|Contagion Clasp|U|SOM
+#30|Hand of the Praetors|R|SOM
+#31|Argent Sphinx|R|SOM
+#32|Nim Deathmantle|R|SOM
+#33|Darksteel Axe|U|SOM
+#34|Spikeshot Elder|R|SOM
+#35|Chimeric Mass|R|SOM
+#36|Putrefax|R|SOM
+#37|Ezuri's Brigade|R|SOM
+#38|Livewire Lash|R|SOM
+#39|Tempered Steel|R|SOM
+#40|Kemba, Kha Regent|R|SOM
+#41|Grand Architect|R|SOM
+#42|True Conviction|R|SOM
+#43|Ratchet Bomb|R|SOM
+#44|Volition Reins|U|SOM
+#45|Argentum Armor|R|SOM
+#46|Razor Hippogriff|U|SOM
+#47|Embersmith|U|SOM
+#48|Myrsmith|U|SOM
+#49|Slice in Twain|U|SOM
+#50|Cerebral Eruption|R|SOM
+#51|Trigon of Corruption|U|SOM
+#52|Golem Artisan|U|SOM
+#53|Engulfing Slagwurm|R|SOM
+#54|Glimmerpoint Stag|U|SOM
+#55|Tangle Angler|U|SOM
+#56|Necrotic Ooze|R|SOM
+#57|Galvanic Blast|C|SOM
+#58|Grasp of Darkness|C|SOM
+#59|Arrest|C|SOM
+#60|Palladium Myr|U|SOM
+#61|Darksteel Juggernaut|R|SOM
+#62|Etched Champion|R|SOM
+#63|Darkslick Drake|U|SOM
+#64|Necropede|U|SOM
+#65|Dispense Justice|U|SOM
+#66|Asceticism|R|SOM
+#67|Rusted Relic|U|SOM
+#68|Rust Tick|U|SOM
+#69|Necrogen Scudder|U|SOM
+#70|Trigon of Rage|U|SOM
+#71|Tumble Magnet|C|SOM
+#72|Ichor Rats|U|SOM
+#73|Acid Web Spider|U|SOM
+#74|Heavy Arbalest|U|SOM
+#75|Perilous Myr|C|SOM
+#76|Myr Propagator|R|SOM
+#77|Painsmith|U|SOM
+#78|Prototype Portal|R|SOM
+#79|Trinket Mage|U|SOM
+#80|Revoke Existence|C|SOM
+#81|Shatter|C|SOM
+#82|Barbed Battlegear|U|SOM
+#83|Riddlesmith|U|SOM
+#84|Bellowing Tanglewurm|U|SOM
+#85|Sylvok Replica|C|SOM
+#86|Turn to Slag|C|SOM
+#87|Blackcleave Cliffs|R|SOM
+#88|Copperline Gorge|R|SOM
+#89|Infiltration Lens|U|SOM
+#90|Glint Hawk Idol|C|SOM
+#91|Darksteel Sentinel|U|SOM
+#92|Grafted Exoskeleton|U|SOM
+#93|Plague Stinger|C|SOM
+#94|Seachrome Coast|R|SOM
+#95|Cystbearer|C|SOM
+#96|Barrage Ogre|U|SOM
+#97|Iron Myr|C|SOM
+#98|Myr Galvanizer|U|SOM
+#99|Darkslick Shores|R|SOM
+#100|Ezuri, Renegade Leader|R|SOM
+#101|Corpse Cur|C|SOM
+#102|Gold Myr|C|SOM
+#103|Leaden Myr|C|SOM
+#104|Sylvok Lifestaff|C|SOM
+#105|Silver Myr|C|SOM
+#106|Copper Myr|C|SOM
+#107|Chrome Steed|C|SOM
+#108|Tower of Calamities|R|SOM
+#109|Glint Hawk|C|SOM
+#110|Razorverge Thicket|R|SOM
+#111|Ichorclaw Myr|C|SOM
+#112|Origin Spellbomb|C|SOM
+#113|Snapsail Glider|C|SOM
+#114|Kuldotha Forgemaster|R|SOM
+#115|Thrummingbird|U|SOM
+#116|Horizon Spellbomb|C|SOM
+#117|Trigon of Infestation|U|SOM
+#118|Wall of Tanglecord|C|SOM
+#119|Genesis Wave|R|SOM
+#120|Vulshok Replica|C|SOM
+#121|Moriok Replica|C|SOM
+#122|Flesh Allergy|U|SOM
+#123|Neurok Replica|C|SOM
+#124|Kemba's Skyguard|C|SOM
+#125|Blight Mamba|C|SOM
+#126|Bladed Pinions|C|SOM
+#127|Sky Eel School|C|SOM
+#128|Bloodshot Trainee|U|SOM
+#129|Strider Harness|C|SOM
+#130|Fume Spitter|C|SOM
+#131|Tel Jilad Fallen|C|SOM
+#132|Untamed Might|C|SOM
+#133|Carrion Call|U|SOM
+#134|Instill Infection|C|SOM
+#135|Clone Shell|U|SOM
+#136|Panic Spellbomb|C|SOM
+#137|Accorder's Shield|C|SOM
+#138|Contagious Nim|C|SOM
+#139|Throne of Geth|U|SOM
+#140|Memnite|U|SOM
+#141|Auriok Edgewright|U|SOM
+#142|Culling Dais|U|SOM
+#143|Trigon of Thought|U|SOM
+#144|Furnace Celebration|U|SOM
+#145|Myr Reservoir|R|SOM
+#146|Sunspear Shikari|C|SOM
+#147|Liquimetal Coating|U|SOM
+#148|Saberclaw Golem|C|SOM
+#149|Lumengrid Drake|C|SOM
+#150|Flight Spellbomb|C|SOM
+#151|Auriok Sunchaser|C|SOM
+#152|Auriok Replica|C|SOM
+#153|Ghalma's Warden|C|SOM
+#154|Soliton|C|SOM
+#155|Molder Beast|C|SOM
+#156|Carapace Forger|C|SOM
+#157|Vedalken Certarch|C|SOM
+#158|Neurok Invisimancer|C|SOM
+#159|Nihil Spellbomb|C|SOM
+#160|Blade Tribe Berserkers|C|SOM
+#161|Necrogen Censer|C|SOM
+#162|Blackcleave Goblin|C|SOM
+#163|Vector Asp|C|SOM
+#164|Stoic Rebuttal|C|SOM
+#165|Darksteel Myr|U|SOM
+#166|Disperse|C|SOM
+#167|Alpha Tyrranax|C|SOM
+#168|Tainted Strike|C|SOM
+#169|Bleak Coven Vampires|C|SOM
+#170|Vulshok Heartstoker|C|SOM
+#171|Bonds of Quicksilver|C|SOM
+#172|Grindclock|R|SOM
+#173|Abuna Acolyte|U|SOM
+#174|Tel Jilad Defiance|C|SOM
+#175|Flameborn Hellion|C|SOM
+#176|Ferrovore|C|SOM
+#177|Moriok Reaver|C|SOM
+#178|Inexorable Tide|R|SOM
+#179|Blistergrub|C|SOM
+#180|Scrapdiver Serpent|C|SOM
+#181|Steady Progress|C|SOM
+#182|Salvage Scout|C|SOM
+#183|Golem Foundry|C|SOM
+#184|Ezuri's Archers|C|SOM
+#185|Halt Order|U|SOM
+#186|Goblin Gaveleer|C|SOM
+#187|Plated Seastrider|C|SOM
+#188|Wing Puncture|C|SOM
+#189|Lifesmith|U|SOM
+#190|Oxidda Daredevil|C|SOM
+#191|Kuldotha Rebirth|C|SOM
+#192|Loxodon Wayfarer|C|SOM
+#193|Screeching Silcaw|C|SOM
+#194|Golden Urn|C|SOM
+#195|Withstand Death|C|SOM
+#196|Seize the Initiative|C|SOM
+#197|Dross Hopper|C|SOM
+#198|Soul Parry|C|SOM
+#199|Twisted Image|U|SOM
+#200|Turn Aside|C|SOM
+#201|Fulgent Distraction|C|SOM
+#202|Assault Strobe|C|SOM
+#203|Razorfield Thresher|C|SOM
+#204|Exsanguinate|U|SOM
+#205|Copperhorn Scout|C|SOM
+#206|Trigon of Mending|U|SOM
+#207|Echo Circlet|C|SOM
+#208|Blunt the Assault|C|SOM
+#209|Ogre Geargrabber|U|SOM
+#210|Melt Terrain|C|SOM
+#211|Scoria Elemental|C|SOM
+#212|Psychic Miasma|C|SOM
+#213|Relic Putrescence|C|SOM
+#214|Vault Skyward|C|SOM
+#215|Viridian Revel|U|SOM
+#216|Whitesun's Passage|C|SOM
+#217|Glimmerpost|C|SOM
+#218|Leonin Arbiter|R|SOM
+#219|Corrupted Harvester|U|SOM
+#220|Memoricide|R|SOM
+#221|Dissipation Field|R|SOM
+#222|Painful Quandary|R|SOM
+#223|Tunnel Ignus|R|SOM
+#224|Semblance Anvil|R|SOM
+#225|Venser's Journal|R|SOM
+#226|Golem's Heart|U|SOM
+#227|Vigil for the Lost|U|SOM
+#228|Shape Anew|R|SOM
+#229|Molten Psyche|R|SOM

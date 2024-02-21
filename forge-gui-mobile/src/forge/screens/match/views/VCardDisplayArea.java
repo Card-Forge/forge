@@ -300,7 +300,12 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             }
        
             if (card.getAttachedTo() != null) {
-                setAttachedToPanel(CardAreaPanel.get(card.getAttachedTo()));
+                if (card != card.getAttachedTo().getAttachedTo())
+                    setAttachedToPanel(CardAreaPanel.get(card.getAttachedTo()));
+                else {
+                    attachedPanels.remove(CardAreaPanel.get(card.getAttachedTo()));
+                    setAttachedToPanel(null);
+                }
             }
             else {
                 setAttachedToPanel(null);

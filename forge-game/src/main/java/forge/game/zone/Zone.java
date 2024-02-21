@@ -121,6 +121,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setTapped(false);
         }
 
+        if (zoneType == (ZoneType.Graveyard) && c.isPermanent() && !c.isToken()) {
+            c.getOwner().descend();
+        }
+
         c.setZone(this);
 
         if ((zoneType == ZoneType.Battlefield || !c.isToken()) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {

@@ -1,0 +1,18 @@
+Name:Promise of Aclazotz
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPopulate | TriggerDescription$ At the beginning of your end step, you may sacrifice a non-Demon creature. If you do, populate. (Create a token that's a copy of a creature token you control.)
+SVar:TrigPopulate:AB$ CopyPermanent | Cost$ Sac<1/Creature.nonDemon/non-Demon creature> | Choices$ Creature.token+YouCtrl | Populate$ True
+DeckHas:Ability$Token|Sacrifice & Type$Demon|Vampire
+AlternateMode:Adventure
+Oracle:At the beginning of your end step, you may sacrifice a non-Demon creature. If you do, populate. (Create a token that's a copy of a creature token you control.)
+
+ALTERNATE
+
+Name:Foul Rebirth
+ManaCost:2 B
+Types:Sorcery Adventure
+A:SP$ Sacrifice | SacValid$ Creature.nonDemon | Defined$ You | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Sacrifice a non-Demon creature. If you do, create a 4/3 white and black Vampire Demon creature token with flying.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Sacrifice a non-Demon creature. If you do, create a 4/3 white and black Vampire Demon creature token with flying.

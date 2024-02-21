@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Lost Caverns of Ixalan #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/11/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Start in your first main phase (the 4th lore counter has just been put on Roar of the Fifth People and the ability is being put on the stack). Assume both graveyards start empty and that your opponent has no spells they could cast this turn. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=UPKEEP
+activephaseadvance=MAIN1
+p0life=20
+p0hand=Light 'Em Up;Sibling Rivalry;Kessig Flamebreather;Rampaging Geoderm
+p0battlefield=Earthshaker Dreadmaw;Huatli, Poet of Unity|Transformed|Counters:LORE=3;T:g_3_3_dinosaur;T:g_3_3_dinosaur;The Skullspore Nexus;Mountain;Mountain;Mountain;Forest;Forest;Forest
+p1life=40
+p1battlefield=Ojer Axonil, Deepest Might;Breeches, Eager Pillager;Heartflame Duelist

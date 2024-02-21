@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.AiController;
@@ -36,19 +38,9 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        final Game game = ai.getGame();
 
         if ("Never".equals(aiLogic)) {
             return false;
-        } else if ("ZeroToughness".equals(aiLogic)) {
-            // If Creature has Zero Toughness, make sure some static ability is in play
-            // That will grant a toughness bonus
-
-            final Card copy = CardUtil.getLKICopy(sa.getHostCard());
-
-            ComputerUtilCard.applyStaticContPT(game, copy, null);
-
-            return copy.getNetToughness() > 0;
         }
         return true;
     }
@@ -175,8 +167,10 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean canCastAtOppTurn = true;
         for (Card c : ai.getGame().getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
-                if ("CantBeCast".equals(s.getParam("Mode")) && "True".equals(s.getParam("NonCasterTurn"))) {
+                if ("CantBeCast".equals(s.getParam("Mode")) && StringUtils.contains(s.getParam("Activator"), "NonActive")
+                        && (!s.getParam("Activator").startsWith("You") || c.getController().equals(ai))) {
                     canCastAtOppTurn = false;
+                    break;
                 }
             }
         }

@@ -2,6 +2,7 @@ package forge.game.ability;
 
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import forge.game.ability.effects.*;
@@ -17,6 +18,7 @@ public enum ApiType {
     AddOrRemoveCounter (CountersPutOrRemoveEffect.class),
     AddPhase (AddPhaseEffect.class),
     AddTurn (AddTurnEffect.class),
+    AlterAttribute (AlterAttributeEffect.class),
     Amass (AmassEffect.class),
     Animate (AnimateEffect.class),
     AnimateAll (AnimateAllEffect.class),
@@ -51,6 +53,7 @@ public enum ApiType {
     Clash (ClashEffect.class),
     ClassLevelUp (ClassLevelUpEffect.class),
     Cleanup (CleanUpEffect.class),
+    Cloak (CloakEffect.class),
     Clone (CloneEffect.class),
     CompanionChoose (ChooseCompanionEffect.class),
     Connive (ConniveEffect.class),
@@ -71,6 +74,7 @@ public enum ApiType {
     DigMultiple (DigMultipleEffect.class),
     DigUntil (DigUntilEffect.class),
     Discard (DiscardEffect.class),
+    Discover (DiscoverEffect.class),
     DrainMana (DrainManaEffect.class),
     Draft (DraftEffect.class),
     Draw (DrawEffect.class),
@@ -105,6 +109,7 @@ public enum ApiType {
     Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
+    LosePerpetual (LosePerpetualEffect.class),
     LosesGame (GameLossEffect.class),
     MakeCard (MakeCardEffect.class),
     Mana (ManaEffect.class),
@@ -136,6 +141,7 @@ public enum ApiType {
     PumpAll (PumpAllEffect.class),
     PutCounter (CountersPutEffect.class),
     PutCounterAll (CountersPutAllEffect.class),
+    Radiation (RadiationEffect.class),
     RearrangeTopOfLibrary (RearrangeTopOfLibraryEffect.class),
     Regenerate (RegenerateEffect.class),
     RegenerateAll (RegenerateAllEffect.class),
@@ -182,6 +188,7 @@ public enum ApiType {
     TapAll (TapAllEffect.class),
     TapOrUntap (TapOrUntapEffect.class),
     TapOrUntapAll (TapOrUntapAllEffect.class),
+    TimeTravel (TimeTravelEffect.class),
     Token (TokenEffect.class, false),
     TwoPiles (TwoPilesEffect.class),
     Unattach (UnattachEffect.class),
@@ -189,6 +196,7 @@ public enum ApiType {
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
     Venture (VentureEffect.class),
+    VillainousChoice (VillainousChoiceEffect.class),
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
@@ -196,9 +204,7 @@ public enum ApiType {
     DamageResolve (DamageResolveEffect.class),
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalIgnoreEffect (CharmEffect.class),
-    UpdateRemember (UpdateRememberEffect.class);
-
+    InternalIgnoreEffect (CharmEffect.class);
 
     private final SpellAbilityEffect instanceEffect;
     private final Class<? extends SpellAbilityEffect> clsEffect;
@@ -206,9 +212,9 @@ public enum ApiType {
     private static final Map<String, ApiType> allValues = new HashMap<>();
 
     static {
-    	for (ApiType t : ApiType.values()) {
-    		allValues.put(t.name().toLowerCase(), t);
-    	}
+        for (ApiType t : ApiType.values()) {
+            allValues.put(t.name().toLowerCase(Locale.ENGLISH), t);
+        }
     }
 
     ApiType(Class<? extends SpellAbilityEffect> clsEf) { this(clsEf, true); }
@@ -218,7 +224,7 @@ public enum ApiType {
     }
 
     public static ApiType smartValueOf(String value) {
-        ApiType v = allValues.get(value.toLowerCase());
+        ApiType v = allValues.get(value.toLowerCase(Locale.ENGLISH));
         if ( v == null )
             throw new RuntimeException("Element " + value + " not found in ApiType enum");
         return v;

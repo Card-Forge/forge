@@ -145,11 +145,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.COLOR);
         }
 
-        if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesOfDefined")) {
-            layers.add(StaticAbilityLayer.ABILITIES);
-        }
-
-        if (hasParam("AddKeyword") || hasParam("AddAbility")
+        if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf")
+                || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
+                || hasParam("AddKeyword") || hasParam("AddAbility")
                 || hasParam("AddTrigger") || hasParam("RemoveTriggers")
                 || hasParam("RemoveKeyword") || hasParam("AddReplacementEffects")
                 || hasParam("AddStaticAbility") || hasParam("AddSVar")
@@ -196,10 +194,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
             String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), currentName);
             desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-            desc = TextUtil.fastReplace(desc, "NICKNAME",
-                    Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
-            desc = TextUtil.fastReplace(desc, "INSERT",
-                    Integer.toString(AbilityUtils.calculateAmount(getHostCard(), getParam("Insert"), this)));
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
 
             return desc;
         } else {
@@ -297,22 +292,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return null;
         }
         return StaticAbilityCantAttackBlock.getBlockCost(this, blocker, attacker);
-    }
-
-    /**
-     * Check conditions for static abilities acting on a specific player. Also
-     * automatically check the general conditions.
-     *
-     * @param player a {@link Player}.
-     * @return true, if the static ability is applicable.
-     * @see {@link StaticAbility#checkConditions()}
-     */
-    public final boolean checkPlayerSpecificConditions(final Player player) {
-        if (!checkConditions()) {
-            return false;
-        }
-
-        return true;
     }
 
     public final boolean checkMode(String mode) {

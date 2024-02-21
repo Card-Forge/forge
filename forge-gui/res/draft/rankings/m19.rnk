@@ -1,0 +1,261 @@
+//Rank|Name|Rarity|Set
+#1|Chromium, the Mutable|M|M19
+#2|Palladia-Mors, the Ruiner|M|M19
+#3|Tezzeret, Artifice Master|M|M19
+#4|Vivien Reid|M|M19
+#5|Vaevictis Asmadi, the Dire|M|M19
+#6|Lathliss, Dragon Queen|R|M19
+#7|Ajani, Adversary of Tyrants|M|M19
+#8|Valiant Knight|R|M19
+#9|Resplendent Angel|M|M19
+#10|Leonin Warleader|R|M19
+#11|Nicol Bolas, the Ravager|M|M19
+#12|Bone Dragon|M|M19
+#13|Demon of Catastrophes|R|M19
+#14|Lena, Selfless Champion|R|M19
+#15|Sigiled Sword of Valeron|R|M19
+#16|Arcades, the Strategist|M|M19
+#17|Demanding Dragon|R|M19
+#18|Djinn of Wishes|R|M19
+#19|Isareth the Awakener|R|M19
+#20|Hungering Hydra|R|M19
+#21|Banefire|R|M19
+#22|Murder|U|M19
+#23|Pelakka Wurm|R|M19
+#24|Goreclaw, Terror of Qal Sisma|R|M19
+#25|Spit Flame|R|M19
+#26|Prodigious Growth|R|M19
+#27|Death Baron|R|M19
+#28|Goblin Trashmaster|R|M19
+#29|Cleansing Nova|R|M19
+#30|Vivien's Invocation|R|M19
+#31|Windreader Sphinx|R|M19
+#32|Sarkhan, Fireblood|M|M19
+#33|Lightning Strike|U|M19
+#34|Sai, Master Thopterist|R|M19
+#35|Sarkhan's Unsealing|R|M19
+#36|Open the Graves|R|M19
+#37|Ajani's Last Stand|R|M19
+#38|Dismissive Pyromancer|R|M19
+#39|Hieromancer's Cage|U|M19
+#40|Graveyard Marshal|R|M19
+#41|Volley Veteran|U|M19
+#42|Mentor of the Meek|R|M19
+#43|Militia Bugler|U|M19
+#44|Exclusion Mage|U|M19
+#45|Aerial Engineer|U|M19
+#46|Draconic Disciple|U|M19
+#47|Regal Bloodlord|U|M19
+#48|Skyrider Patrol|U|M19
+#49|Lich's Caress|C|M19
+#50|Liliana, Untouched by Death|M|M19
+#51|Runic Armasaur|R|M19
+#52|Shield Mare|U|M19
+#53|Plague Mare|U|M19
+#54|Fell Specter|U|M19
+#55|Psychic Symbiont|U|M19
+#56|Shock|C|M19
+#57|Heroic Reinforcements|U|M19
+#58|Enigma Drake|U|M19
+#59|Remorseful Cleric|R|M19
+#60|Surge Mare|U|M19
+#61|Vine Mare|U|M19
+#62|Poison-Tip Archer|U|M19
+#63|Electrify|C|M19
+#64|Luminous Bonds|C|M19
+#65|Rabid Bite|C|M19
+#66|Lightning Mare|U|M19
+#67|Skilled Animator|U|M19
+#68|Brawl-Bash Ogre|U|M19
+#69|Gravedigger|U|M19
+#70|Vampire Sovereign|U|M19
+#71|Vigilant Baloth|U|M19
+#72|Knightly Valor|U|M19
+#73|Dark-Dweller Oracle|R|M19
+#74|Departed Deckhand|U|M19
+#75|Herald of Faith|U|M19
+#76|Liliana's Contract|R|M19
+#77|Thorn Lieutenant|R|M19
+#78|Mystic Archaeologist|R|M19
+#79|Sift|U|M19
+#80|Patient Rebuilding|R|M19
+#81|Phylactery Lich|R|M19
+#82|Mirror Image|U|M19
+#83|Satyr Enchanter|U|M19
+#84|Goblin Instigator|C|M19
+#85|Ajani's Pridemate|U|M19
+#86|Fiery Finish|U|M19
+#87|Volcanic Dragon|U|M19
+#88|Druid of the Cowl|C|M19
+#89|Sleep|U|M19
+#90|Star-Crowned Stag|C|M19
+#91|Strangling Spores|C|M19
+#92|Aviation Pioneer|C|M19
+#93|Rise from the Grave|U|M19
+#94|Switcheroo|U|M19
+#95|One with the Machine|R|M19
+#96|Meteor Golem|U|M19
+#97|Declare Dominance|U|M19
+#98|Ghastbark Twins|U|M19
+#99|Pegasus Courser|C|M19
+#100|Take Vengeance|C|M19
+#101|Siegebreaker Giant|U|M19
+#102|Gallant Cavalry|C|M19
+#103|Elvish Clancaller|R|M19
+#104|Dryad Greenseeker|U|M19
+#105|Diamond Mare|U|M19
+#106|Fountain of Renewal|U|M19
+#107|Nightmare's Thirst|U|M19
+#108|Guttersnipe|U|M19
+#109|Reassembling Skeleton|U|M19
+#110|Aven Wind Mage|C|M19
+#111|Centaur Courser|C|M19
+#112|Disperse|C|M19
+#113|Dwarven Priest|C|M19
+#114|Horizon Scholar|U|M19
+#115|Skyscanner|C|M19
+#116|Skymarch Bloodletter|C|M19
+#117|Angel of the Dawn|C|M19
+#118|Aethershield Artificer|U|M19
+#119|Blanchwood Armor|U|M19
+#120|Arcane Encyclopedia|U|M19
+#121|Essence Scatter|C|M19
+#122|Metamorphic Alteration|R|M19
+#123|Stitcher's Supplier|U|M19
+#124|Elvish Rejuvenator|C|M19
+#125|Blood Divination|U|M19
+#126|Bristling Boar|C|M19
+#127|Colossal Dreadmaw|C|M19
+#128|Epicure of Blood|C|M19
+#129|Cavalry Drillmaster|C|M19
+#130|Divination|C|M19
+#131|Sparktongue Dragon|C|M19
+#132|Gearsmith Guardian|C|M19
+#133|Omenspeaker|C|M19
+#134|Giant Spider|C|M19
+#135|Skeleton Archer|C|M19
+#136|Snapping Drake|C|M19
+#137|Totally Lost|C|M19
+#138|Transmogrifying Wand|R|M19
+#139|Doomed Dissenter|C|M19
+#140|Boggart Brute|C|M19
+#141|Dragon Egg|U|M19
+#142|Ghirapur Guide|U|M19
+#143|Gift of Paradise|U|M19
+#144|Cinder Barrens|C|M19
+#145|Forsaken Sanctuary|C|M19
+#146|Foul Orchard|C|M19
+#147|Highland Lake|C|M19
+#148|Meandering River|C|M19
+#149|Stone Quarry|C|M19
+#150|Submerged Boneyard|C|M19
+#151|Tranquil Expanse|C|M19
+#152|Woodland Stream|C|M19
+#153|Timber Gorge|C|M19
+#154|Ajani's Welcome|U|M19
+#155|Two-Headed Zombie|C|M19
+#156|Act of Treason|C|M19
+#157|Anticipate|C|M19
+#158|Child of Night|C|M19
+#159|Scholar of Stars|C|M19
+#160|Marauder's Axe|C|M19
+#161|Thornhide Wolves|C|M19
+#162|Titanic Growth|C|M19
+#163|Salvager of Secrets|C|M19
+#164|Havoc Devils|C|M19
+#165|Supreme Phantom|R|M19
+#166|Ravenous Harpy|U|M19
+#167|Druid of Horns|U|M19
+#168|Aether Tunnel|U|M19
+#169|Macabre Waltz|C|M19
+#170|Explosive Apparatus|C|M19
+#171|Magistrate's Scepter|R|M19
+#172|Thud|U|M19
+#173|Diregraf Ghoul|U|M19
+#174|Daybreak Chaplain|C|M19
+#175|Dwindle|C|M19
+#176|Rogue's Gloves|U|M19
+#177|Hostile Minotaur|C|M19
+#178|Sure Strike|C|M19
+#179|Doublecast|U|M19
+#180|Rhox Oracle|C|M19
+#181|Make a Stand|U|M19
+#182|Gargoyle Sentinel|U|M19
+#183|Gigantosaurus|R|M19
+#184|Desecrated Tomb|R|M19
+#185|Colossal Majesty|U|M19
+#186|Cancel|C|M19
+#187|Abnormal Endurance|C|M19
+#188|Fire Elemental|C|M19
+#189|Gearsmith Prodigy|C|M19
+#190|Viashino Pyromancer|C|M19
+#191|Inspired Charge|C|M19
+#192|Mighty Leap|C|M19
+#193|Onakke Ogre|C|M19
+#194|Tormenting Voice|C|M19
+#195|Frilled Sea Serpent|C|M19
+#196|Oakenform|C|M19
+#197|Oreskos Swiftclaw|C|M19
+#198|Recollect|U|M19
+#199|Revitalize|C|M19
+#200|Uncomfortable Chill|C|M19
+#201|Suspicious Bookcase|U|M19
+#202|Novice Knight|U|M19
+#203|Dragon's Hoard|R|M19
+#204|Suncleanser|R|M19
+#205|Mind Rot|C|M19
+#206|Chaos Wand|R|M19
+#207|Reclamation Sage|U|M19
+#208|Bogstomper|C|M19
+#209|Trusty Packbeast|C|M19
+#210|Goblin Motivator|C|M19
+#211|Manalith|C|M19
+#212|Loxodon Line Breaker|C|M19
+#213|Field Creeper|C|M19
+#214|Highland Game|C|M19
+#215|Infernal Scarring|C|M19
+#216|Plummet|C|M19
+#217|Rustwing Falcon|C|M19
+#218|Tolarian Scholar|C|M19
+#219|Trumpet Blast|C|M19
+#220|Lava Axe|C|M19
+#221|Catalyst Elemental|C|M19
+#222|Ghostform|C|M19
+#223|Invoke the Divine|C|M19
+#224|Leonin Vanguard|U|M19
+#225|Psychic Corrosion|U|M19
+#226|Aegis of the Heavens|U|M19
+#227|Bone to Ash|U|M19
+#228|Vampire Neonate|C|M19
+#229|Tectonic Rift|U|M19
+#230|Daggerback Basilisk|C|M19
+#231|Talons of Wildwood|C|M19
+#232|Infernal Reckoning|R|M19
+#233|Smelt|C|M19
+#234|Knight's Pledge|C|M19
+#235|Sovereign's Bite|C|M19
+#236|Walking Corpse|C|M19
+#237|Knight of the Tusk|C|M19
+#238|Isolate|R|M19
+#239|Fraying Omnipotence|R|M19
+#240|Rupture Spire|U|M19
+#241|Duress|C|M19
+#242|Hired Blade|C|M19
+#243|Crash Through|C|M19
+#244|Inferno Hellion|U|M19
+#245|Greenwood Sentinel|C|M19
+#246|Naturalize|C|M19
+#247|Wall of Mist|C|M19
+#248|Wall of Vines|C|M19
+#249|Infectious Horror|C|M19
+#250|Millstone|U|M19
+#251|Crucible of Worlds|M|M19
+#252|Scapeshift|M|M19
+#253|Amulet of Safekeeping|R|M19
+#254|Root Snare|C|M19
+#255|Mistcaller|R|M19
+#256|Apex of Power|M|M19
+#257|Detection Tower|R|M19
+#258|Alpine Moon|R|M19
+#259|Reliquary Tower|U|M19
+#260|Omniscience|M|M19

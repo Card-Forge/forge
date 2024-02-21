@@ -1,0 +1,11 @@
+Name:Timber Paladin
+ManaCost:1 G
+Types:Artifact Creature Knight
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | CheckSVar$ X | SVarCompare$ EQ1 | SetToughness$ 3 | Description$ As long as CARDNAME is enchanted by exactly one Aura, it has base power and toughness 3/3.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | CheckSVar$ X | SVarCompare$ EQ2 | SetToughness$ 5 |  AddKeyword$ Vigilance | Description$ As long as CARDNAME is enchanted by exactly two Auras, it has base power and toughness 5/5 and vigilance.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 10 | CheckSVar$ X | SVarCompare$ GE3 | SetToughness$ 10 | AddKeyword$ Vigilance & Trample | Description$ As long as CARDNAME is enchanted by three or more Auras, it has base power and toughness 10/10, vigilance, and trample.
+SVar:X:Count$Valid Aura.Attached
+SVar:EnchantMe:Multiple
+DeckNeeds:Type$Aura
+Oracle:As long as Timber Paladin is enchanted by exactly one Aura, it has base power and toughness 3/3.\nAs long as Timber Paladin is enchanted by exactly two Auras, it has base power and toughness 5/5 and vigilance.\nAs long as Timber Paladin is enchanted by three or more Auras, it has base power and toughness 10/10, vigilance, and trample.

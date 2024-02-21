@@ -1,0 +1,299 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|U|COM
+#2|Command Tower|C|COM
+#3|Evolving Wilds|C|COM
+#4|Temple of the False God|U|COM
+#5|Lightning Greaves|U|COM
+#6|Terramorphic Expanse|C|COM
+#7|Solemn Simulacrum|R|COM
+#8|Eternal Witness|U|COM
+#9|Skullclamp|U|COM
+#10|Cultivate|C|COM
+#11|Kodama's Reach|C|COM
+#12|Darksteel Ingot|C|COM
+#13|Bojuka Bog|C|COM
+#14|Sakura-Tribe Elder|C|COM
+#15|Path to Exile|U|COM
+#16|Brainstorm|C|COM
+#17|Diabolic Tutor|U|COM
+#18|Acidic Slime|U|COM
+#19|Fellwar Stone|U|COM
+#20|Explosive Vegetation|U|COM
+#21|Return to Dust|U|COM
+#22|Chaos Warp|R|COM
+#23|Fact or Fiction|U|COM
+#24|Propaganda|U|COM
+#25|Dimir Signet|C|COM
+#26|Orzhov Signet|C|COM
+#27|Rakdos Signet|C|COM
+#28|Ghostly Prison|U|COM
+#29|Izzet Signet|C|COM
+#30|Oblivion Ring|C|COM
+#31|Homeward Path|R|COM
+#32|Azorius Chancery|C|COM
+#33|Boros Signet|C|COM
+#34|Simic Signet|C|COM
+#35|Izzet Boilerworks|C|COM
+#36|Golgari Rot Farm|C|COM
+#37|Harmonize|U|COM
+#38|Orzhov Basilica|C|COM
+#39|Mulldrifter|C|COM
+#40|Rakdos Carnarium|C|COM
+#41|Golgari Signet|C|COM
+#42|Windfall|U|COM
+#43|Dimir Aqueduct|C|COM
+#44|Rupture Spire|C|COM
+#45|Fleshbag Marauder|U|COM
+#46|Simic Growth Chamber|C|COM
+#47|Mortify|U|COM
+#48|Terminate|C|COM
+#49|Austere Command|R|COM
+#50|Selesnya Sanctuary|C|COM
+#51|Grave Pact|R|COM
+#52|Boros Garrison|C|COM
+#53|Vivid Creek|U|COM
+#54|Butcher of Malakir|R|COM
+#55|Mother of Runes|U|COM
+#56|Buried Alive|U|COM
+#57|Barren Moor|C|COM
+#58|Gruul Turf|C|COM
+#59|Aura Shards|U|COM
+#60|Vivid Grove|U|COM
+#61|Scavenging Ooze|R|COM
+#62|Yavimaya Elder|C|COM
+#63|Vivid Marsh|U|COM
+#64|Living Death|R|COM
+#65|Selesnya Signet|C|COM
+#66|Garruk Wildspeaker|M|COM
+#67|Tranquil Thicket|C|COM
+#68|Secluded Steppe|C|COM
+#69|Gruul Signet|C|COM
+#70|Shriekmaw|U|COM
+#71|Vivid Meadow|U|COM
+#72|Vivid Crag|U|COM
+#73|Lonely Sandbar|C|COM
+#74|Forgotten Cave|C|COM
+#75|Howling Mine|R|COM
+#76|Artisan of Kozilek|U|COM
+#77|Anger|U|COM
+#78|Doom Blade|C|COM
+#79|Comet Storm|M|COM
+#80|Dreamstone Hedron|U|COM
+#81|Fierce Empath|C|COM
+#82|Hornet Queen|R|COM
+#83|Oblation|R|COM
+#84|Sign in Blood|C|COM
+#85|Insurrection|R|COM
+#86|Vampire Nighthawk|U|COM
+#87|Jwar Isle Refuge|U|COM
+#88|Akoum Refuge|U|COM
+#89|Wild Ricochet|R|COM
+#90|Hull Breach|C|COM
+#91|Windborn Muse|R|COM
+#92|Edric, Spymaster of Trest|R|COM
+#93|Awakening Zone|R|COM
+#94|Attrition|R|COM
+#95|Armillary Sphere|C|COM
+#96|Spell Crumple|U|COM
+#97|Fertilid|C|COM
+#98|Oblivion Stone|R|COM
+#99|Avatar of Woe|R|COM
+#100|Champion's Helm|R|COM
+#101|Syphon Mind|C|COM
+#102|Kazandu Refuge|U|COM
+#103|Fog Bank|U|COM
+#104|Chain Reaction|R|COM
+#105|Stranglehold|R|COM
+#106|Wonder|U|COM
+#107|Akroma's Vengeance|R|COM
+#108|Wall of Omens|U|COM
+#109|Angelic Arbiter|R|COM
+#110|Dreadship Reef|U|COM
+#111|Earthquake|R|COM
+#112|Collective Voyage|R|COM
+#113|Journey to Nowhere|C|COM
+#114|Angel of Despair|R|COM
+#115|Brawn|U|COM
+#116|Rise from the Grave|U|COM
+#117|Akroma, Angel of Fury|R|COM
+#118|Hour of Reckoning|R|COM
+#119|Reins of Power|R|COM
+#120|Bladewing the Risen|R|COM
+#121|Minds Aglow|R|COM
+#122|Ruination|R|COM
+#123|Hydra Omnivore|R|COM
+#124|Storm Herd|R|COM
+#125|Prison Term|U|COM
+#126|Wrexial, the Risen Deep|M|COM
+#127|Ghave, Guru of Spores|M|COM
+#128|Martyr's Bond|R|COM
+#129|Vulturous Zombie|R|COM
+#130|Veteran Explorer|U|COM
+#131|Teneb, the Harvester|R|COM
+#132|Pyrohemia|U|COM
+#133|Flusterstorm|R|COM
+#134|Guard Gomazoa|U|COM
+#135|Prophetic Prism|C|COM
+#136|Flametongue Kavu|U|COM
+#137|Master Warcraft|R|COM
+#138|Wall of Denial|U|COM
+#139|Krosan Tusker|C|COM
+#140|Stitch Together|U|COM
+#141|Duergar Hedge-Mage|U|COM
+#142|Prophetic Bolt|R|COM
+#143|Molten Slagheap|U|COM
+#144|Intet, the Dreamer|R|COM
+#145|Gravedigger|C|COM
+#146|Zoetic Cavern|U|COM
+#147|Memory Erosion|R|COM
+#148|Deadwood Treefolk|U|COM
+#149|Necrogenesis|U|COM
+#150|Orim's Thunder|C|COM
+#151|Basandra, Battle Seraph|R|COM
+#152|Skyscribing|U|COM
+#153|Svogthos, the Restless Tomb|U|COM
+#154|Mortivore|R|COM
+#155|Vow of Duty|U|COM
+#156|Nezumi Graverobber|U|COM
+#157|Dominus of Fealty|R|COM
+#158|Reiver Demon|R|COM
+#159|Spawnwrithe|R|COM
+#160|Nin, the Pain Artist|R|COM
+#161|Dreamborn Muse|R|COM
+#162|Nantuko Husk|U|COM
+#163|Syphon Flesh|U|COM
+#164|Spitebellows|U|COM
+#165|Rapacious One|U|COM
+#166|Izzet Chronarch|C|COM
+#167|Extractor Demon|R|COM
+#168|Malfegor|M|COM
+#169|Tariel, Reckoner of Souls|M|COM
+#170|Tribute to the Wild|U|COM
+#171|Vision Skeins|C|COM
+#172|Electrolyze|U|COM
+#173|Congregate|C|COM
+#174|Magmatic Force|R|COM
+#175|Shattered Angel|U|COM
+#176|Savage Twister|U|COM
+#177|Soul Snare|U|COM
+#178|Dread Cacodemon|R|COM
+#179|Sewer Nemesis|R|COM
+#180|Azorius Guildmage|U|COM
+#181|Spike Feeder|U|COM
+#182|Simic Sky Swallower|R|COM
+#183|Avatar of Slaughter|R|COM
+#184|Vish Kal, Blood Arbiter|R|COM
+#185|Mana-Charged Dragon|R|COM
+#186|Vow of Wildness|U|COM
+#187|Vow of Flight|U|COM
+#188|Deadly Recluse|C|COM
+#189|Archangel of Strife|R|COM
+#190|Selesnya Guildmage|U|COM
+#191|False Prophet|R|COM
+#192|Sigil Captain|U|COM
+#193|Serra Angel|U|COM
+#194|Alliance of Arms|R|COM
+#195|Magus of the Vineyard|R|COM
+#196|Wrecking Ball|C|COM
+#197|Vow of Malice|U|COM
+#198|Szadek, Lord of Secrets|R|COM
+#199|Fungal Reaches|U|COM
+#200|Vedalken Plotter|U|COM
+#201|Vow of Lightning|U|COM
+#202|Elvish Aberration|U|COM
+#203|Righteous Cause|U|COM
+#204|Numot, the Devastator|R|COM
+#205|Invigorate|C|COM
+#206|Cobra Trap|U|COM
+#207|Chromeshell Crab|R|COM
+#208|Disaster Radius|R|COM
+#209|Repulse|C|COM
+#210|Oros, the Avenger|R|COM
+#211|Arbiter of Knollridge|R|COM
+#212|Riddlekeeper|R|COM
+#213|Relic Crush|C|COM
+#214|Crescendo of War|R|COM
+#215|Vorosh, the Hunter|R|COM
+#216|Scythe Specter|R|COM
+#217|Unnerve|C|COM
+#218|The Mimeoplasm|M|COM
+#219|Hex|R|COM
+#220|Fire Ice|U|COM
+#221|Brion Stoutarm|R|COM
+#222|Afterlife|U|COM
+#223|Ray of Command|C|COM
+#224|Animar, Soul of Elements|M|COM
+#225|Call the Skybreaker|R|COM
+#226|Baloth Woodcrasher|U|COM
+#227|Riku of Two Reflections|M|COM
+#228|Fallen Angel|R|COM
+#229|Golgari Guildmage|U|COM
+#230|Fists of Ironwood|C|COM
+#231|Penumbra Spider|C|COM
+#232|Breath of Darigaaz|U|COM
+#233|Damia, Sage of Stone|M|COM
+#234|Death by Dragons|U|COM
+#235|Skullbriar, the Walking Grave|R|COM
+#236|Conundrum Sphinx|R|COM
+#237|Symbiotic Wurm|R|COM
+#238|Vengeful Rebirth|U|COM
+#239|Avatar of Fury|R|COM
+#240|Celestial Force|R|COM
+#241|Aquastrand Spider|C|COM
+#242|Karador, Ghost Chieftain|M|COM
+#243|Zedruu the Greathearted|M|COM
+#244|Triskelavus|R|COM
+#245|Voice of All|R|COM
+#246|Gomazoa|U|COM
+#247|Troll Ascetic|R|COM
+#248|Boros Guildmage|U|COM
+#249|Nucklavee|U|COM
+#250|Spurnmage Advocate|U|COM
+#251|Trench Gorger|R|COM
+#252|Valley Rannet|C|COM
+#253|Bathe in Light|U|COM
+#254|Acorn Catapult|R|COM
+#255|Patron of the Nezumi|R|COM
+#256|Punishing Fire|U|COM
+#257|Firespout|U|COM
+#258|Aethersnipe|C|COM
+#259|Lhurgoyf|R|COM
+#260|Selesnya Evangel|C|COM
+#261|Bestial Menace|U|COM
+#262|Chorus of the Conclave|R|COM
+#263|Orzhov Guildmage|U|COM
+#264|Perilous Research|U|COM
+#265|Sulfurous Blast|U|COM
+#266|Colossal Might|C|COM
+#267|Kaalia of the Vast|M|COM
+#268|Furnace Whelp|U|COM
+#269|Scattering Stroke|U|COM
+#270|Faultgrinder|C|COM
+#271|Dark Hatchling|R|COM
+#272|Goblin Cadets|U|COM
+#273|Shared Trauma|R|COM
+#274|Pollen Lullaby|U|COM
+#275|Footbottom Feast|C|COM
+#276|Death Mutation|U|COM
+#277|Lightkeeper of Emeria|U|COM
+#278|Chartooth Cougar|C|COM
+#279|Dragon Whelp|U|COM
+#280|Hunting Pack|U|COM
+#281|Evincar's Justice|C|COM
+#282|Plumeveil|U|COM
+#283|Monk Realist|C|COM
+#284|Oni of Wild Places|U|COM
+#285|Ruhan of the Fomori|M|COM
+#286|Jotun Grunt|U|COM
+#287|Murmurs from Beyond|C|COM
+#288|Court Hussar|U|COM
+#289|Cleansing Beam|U|COM
+#290|Squallmonger|U|COM
+#291|Gwyllion Hedge-Mage|U|COM
+#292|Trade Secrets|R|COM
+#293|Nemesis Trap|U|COM
+#294|Razorjaw Oni|U|COM
+#295|Desecrator Hag|C|COM
+#296|Lash Out|C|COM
+#297|Whirlpool Whelm|C|COM
+#298|Slipstream Eel|C|COM

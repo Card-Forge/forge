@@ -1,0 +1,63 @@
+[metadata]
+Code=REX
+Date=2023-11-17
+Name=Jurassic World Collection
+Type=Promo
+ScryfallCode=REX
+
+[cards]
+1 R Don't Move @Inkognit
+2 R Cresting Mosasaurus @Chris Rallis
+3 R Spitting Dilophosaurus @Francisco Padilla
+4 R Hunting Velociraptor @Caio Monteiro
+5 R Life Finds a Way @Inkognit
+6 R Savage Order @Jesper Ejsing
+7 R Welcome to . . . @Villarrte
+8 R Blue, Loyal Raptor @Maaz Ali Khan
+9 R Compy Swarm @Izzy
+10 R Ellie and Alan, Paleontologists @Zoltan Boros
+11 R Grim Giganotosaurus @Daren Bader
+12 R Henry Wu, InGen Geneticist @Justin Cornell
+13 R Ian Malcolm, Chaotician @Caio Monteiro
+14 R Indominus Rex, Alpha @Miro Petrov
+15 R Indoraptor, the Perfect Hybrid @Daren Bader
+16 R Owen Grady, Raptor Trainer @Jaroslav Kosmina
+17 R Permission Denied @Leonardo Santanna
+18 R Ravenous Tyrannosaurus @Raymond Swanland
+19 R Swooping Pteranodon @Slawomir Maniak
+20 R Dino DNA @Leonardo Santanna
+21 L Plains @Véronique Meignaud
+21b L Plains @Véronique Meignaud
+22 L Island @Svetlin Velinov
+22b L Island @Svetlin Velinov
+23 L Swamp @Pablo Mendoza
+23b L Swamp @Pablo Mendoza
+24 L Mountain @Simon Dominic
+24b L Mountain @Simon Dominic
+25 L Forest @Yeong-Hao Han
+25b L Forest @Yeong-Hao Han
+26 C Command Tower @Xabi Gaztelua
+26b C Command Tower @Xabi Gaztelua
+27 R Don't Move @Inkognit
+28 R Cresting Mosasaurus @Chris Rallis
+29 R Spitting Dilophosaurus @Francisco Padilla
+30 R Hunting Velociraptor @Caio Monteiro
+31 R Life Finds a Way @Inkognit
+32 R Savage Order @Jesper Ejsing
+33 R Blue, Loyal Raptor @Maaz Ali Khan
+34 R Compy Swarm @Izzy
+35 R Ellie and Alan, Paleontologists @Zoltan Boros
+36 R Grim Giganotosaurus @Daren Bader
+37 R Henry Wu, InGen Geneticist @Justin Cornell
+38 R Ian Malcolm, Chaotician @Caio Monteiro
+39 R Indominus Rex, Alpha @Miro Petrov
+40 R Indoraptor, the Perfect Hybrid @Daren Bader
+41 R Owen Grady, Raptor Trainer @Jaroslav Kosmina
+42 R Permission Denied @Leonardo Santanna
+43 R Ravenous Tyrannosaurus @Raymond Swanland
+44 R Swooping Pteranodon @Slawomir Maniak
+45 R Dino DNA @Leonardo Santanna
+
+[tokens]
+c_a_treasure_sac
+g_3_3_dinosaur_trample

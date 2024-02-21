@@ -2,12 +2,12 @@ Name:Craving of Yeenoghu
 ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant creature you control
-A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +3/+2, has haste, and attacks each combat if able.
 S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy
-A:AB$ Pump | Cost$ R | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Choose a creature you control | SubAbility$ DBChange | SpellDescription$ Return CARDNAME from your graveyard to the battlefield attached to target creature you control. CARDNAME perpetually gains "Enchanted creature gets -1/-1." Activate only as a sorcery.
-SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget | SpellDescription$ | StackDescription$ SpellDescription | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ Craving | RememberObjects$ Self | Name$ Craving of Yeenoghu's Perpetual Effect | Duration$ Permanent | StackDescription$ CARDNAME perpetually gains "Enchanted creature gets -1/-1."
-SVar:Craving:Mode$ Continuous | AddStaticAbility$ Hunger | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains "Enchanted creature gets -1/-1."
+A:AB$ Pump | Cost$ R | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Select target creature you control | SubAbility$ DBChange | StackDescription$ None | SpellDescription$
+SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget | SubAbility$ DBAnimate | StackDescription$ REP target creature you control_{c:ParentTarget} | SpellDescription$ Return CARDNAME from your graveyard to the battlefield attached to target creature you control.
+SVar:DBAnimate:DB$ Animate | staticAbilities$ Hunger | Defined$ Self | Duration$ Perpetual | StackDescription$ CARDNAME perpetually gains "Enchanted creature gets -1/-1." | SpellDescription$ CARDNAME perpetually gains "Enchanted creature gets -1/-1." Activate only as a sorcery.
 SVar:Hunger:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | AddToughness$ -1 | Description$ Enchanted creature gets -1/-1.
+DeckHas:Ability$Graveyard
 Oracle:Enchant creature you control\nEnchanted creature gets +3/+2, has haste, and attacks each combat if able.\n{R}: Return Craving of Yeenoghu from your graveyard to the battlefield attached to target creature you control. Craving of Yeenoghu perpetually gains "Enchanted creature gets -1/-1." Activate only as a sorcery.

@@ -13,8 +13,11 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class ExploreAi extends SpellAbilityAi {
     /* (non-Javadoc)
@@ -36,7 +39,7 @@ public class ExploreAi extends SpellAbilityAi {
         return true;
     }
 
-    public static Card shouldPutInGraveyard(CardCollection top, Player ai) {
+    public static boolean shouldPutInGraveyard(Card topCard, Player ai) {
         int predictedMana = ComputerUtilMana.getAvailableManaSources(ai, false).size();
         CardCollectionView cardsOTB = ai.getCardsIn(ZoneType.Battlefield);
         CardCollectionView cardsInHand = ai.getCardsIn(ZoneType.Hand);
@@ -52,20 +55,20 @@ public class ExploreAi extends SpellAbilityAi {
             numLandsToStillNeedMore = aic.getIntProperty(AiProps.EXPLORE_NUM_LANDS_TO_STILL_NEED_MORE);
         }
 
-        if (!top.isEmpty()) {
-            Card topCard = top.getFirst();
-            if (landsInHand.isEmpty() && landsOTB.size() <= numLandsToStillNeedMore) {
-                // We need more lands to improve our mana base, explore away the non-lands
-                return topCard;
-            }
-            if (topCard.getCMC() - maxCMCDiff >= predictedMana && !topCard.hasSVar("DoNotDiscardIfAble")) {
-                // We're not casting this in foreseeable future, put it in the graveyard
-                return topCard;
-            }
+        if (landsInHand.isEmpty() && landsOTB.size() <= numLandsToStillNeedMore) {
+            // We need more lands to improve our mana base, explore away the non-lands
+            return true;
+        } else if (topCard.getCMC() - maxCMCDiff >= predictedMana && !topCard.hasSVar("DoNotDiscardIfAble")) {
+            // We're not casting this in foreseeable future, put it in the graveyard
+            return true;
         }
 
         // Put on top of the library (do not mark the card for placement in the graveyard)
-        return null;
+        return false;
     }
 
+    @Override
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return shouldPutInGraveyard((Card)params.get("RevealedCard"), player);
+    }
 }

@@ -1,0 +1,11 @@
+Name:A-Mightstone's Animation
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
+A:SP$ Attach | ValidTgts$ Artifact | AITgts$ Card.nonCreature | AILogic$ Animate
+S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature | Description$ Enchanted artifact is a creature with base power and toughness 4/4 in addition to its other types.
+DeckNeeds:Type$Artifact
+Oracle:Enchant artifact\nWhen Mightstone's Animation enters the battlefield, draw two cards, then discard a card.\nEnchanted artifact is a creature with base power and toughness 4/4 in addition to its other types.

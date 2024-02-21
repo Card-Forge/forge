@@ -296,9 +296,7 @@ public class SpecialCardAi {
     public static class PithingNeedle {
         public static String chooseCard(final Player ai, final SpellAbility sa) {
             // TODO Remove names of cards already named by other Pithing Needles
-            Card best = null;
-
-            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonmanaAbilities", ai, sa.getHostCard(), sa);
+            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
             if (!oppPerms.isEmpty()) {
                 return chooseCardFromList(oppPerms).getName();
             }
@@ -680,6 +678,7 @@ public class SpecialCardAi {
     // Gideon Blackblade
     public static class GideonBlackblade {
         public static boolean consider(final Player ai, final SpellAbility sa) {
+            sa.resetTargets();
             CardCollectionView otb = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isTargetableBy(sa));
             if (!otb.isEmpty()) {
                 sa.getTargets().add(ComputerUtilCard.getBestAI(otb));
@@ -739,12 +738,11 @@ public class SpecialCardAi {
     // Grothama, All-Devouring
     public static class GrothamaAllDevouring {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            final Card source = sa.getHostCard();
-            final Card devourer = AbilityUtils.getDefinedCards(source, sa.getParam("ExtraDefined"), sa).getFirst(); // maybe just getOriginalHost()?
+            final Card fighter = sa.getHostCard();
+            final Card devourer = sa.getOriginalHost();
             if (ai.getTeamMates(true).contains(devourer.getController())) {
                 return false; // TODO: Currently, the AI doesn't ever fight its own (or allied) Grothama for card draw. This can be improved.
             }
-            final Card fighter = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).getFirst();
             boolean goodTradeOrNoTrade = devourer.canBeDestroyed() && (devourer.getNetPower() < fighter.getNetToughness() || !fighter.canBeDestroyed()
                     || ComputerUtilCard.evaluateCreature(devourer) > ComputerUtilCard.evaluateCreature(fighter));
             return goodTradeOrNoTrade && fighter.getNetPower() >= devourer.getNetToughness();
@@ -1228,7 +1226,7 @@ public class SpecialCardAi {
                 return false;
             }
 
-            final CardCollectionView cards = ai.getCardsIn(new ZoneType[] {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command});
+            final CardCollectionView cards = ai.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield, ZoneType.Command));
             List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, ai);
 
             int numManaSrcs = CardLists.filter(ComputerUtilMana.getAvailableManaSources(ai, true), CardPredicates.Presets.UNTAPPED).size();
@@ -1611,6 +1609,22 @@ public class SpecialCardAi {
         }
     }
 
+    // The One Ring
+    public static class TheOneRing {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            if (!ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) {
+                return true;
+            }
+
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            int lifeInDanger = aic.getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD);
+            int numCtrs = sa.getHostCard().getCounters(CounterEnumType.BURDEN);
+
+            return ai.getLife() > numCtrs + 1 && ai.getLife() > lifeInDanger
+                    && ai.getMaxHandSize() >= ai.getCardsIn(ZoneType.Hand).size() + numCtrs + 1;
+        }
+    }
+
     // The Scarab God
     public static class TheScarabGod {
         public static boolean consider(final Player ai, final SpellAbility sa) {
@@ -1667,6 +1681,41 @@ public class SpecialCardAi {
             }
         }
     }
+
+    // Veil of Summer
+    public static class VeilOfSummer {
+        public static boolean consider(final Player ai, final SpellAbility sa) {
+            // check the top ability on stack if it's (a) an opponent's counterspell targeting the AI's spell;
+            // (b) a black or a blue spell targeting something that belongs to the AI
+            Game game = ai.getGame();
+            if (game.getStack().isEmpty()) {
+                return false;
+            }
+
+            SpellAbility topSA = game.getStack().peekAbility();
+            if (topSA.usesTargeting() && topSA.getActivatingPlayer().isOpponentOf(ai)) {
+                if (topSA.getApi() == ApiType.Counter) {
+                    SpellAbility tgtSpell = topSA.getTargets().getFirstTargetedSpell();
+                    if (tgtSpell != null && tgtSpell.getActivatingPlayer().equals(ai)) {
+                        return true;
+                    }
+                } else if (topSA.getHostCard().isBlack() || topSA.getHostCard().isBlue()) {
+                    for (Player tgtP : topSA.getTargets().getTargetPlayers()) {
+                        if (tgtP.equals(ai)) {
+                            return true;
+                        }
+                    }
+                    for (Card tgtC : topSA.getTargets().getTargetCards()) {
+                        if (tgtC.getController().equals(ai)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
 
     // Volrath's Shapeshifter
     public static class VolrathsShapeshifter {

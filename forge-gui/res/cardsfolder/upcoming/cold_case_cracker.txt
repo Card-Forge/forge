@@ -1,0 +1,9 @@
+Name:Cold Case Cracker
+ManaCost:3 U
+Types:Creature Spirit Detective
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME dies, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Token|Investigate & Type$Artifact|Clue
+Oracle:Flying\nWhen Cold Case Cracker dies, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

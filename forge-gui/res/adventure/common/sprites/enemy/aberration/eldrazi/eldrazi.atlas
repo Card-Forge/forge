@@ -1,0 +1,68 @@
+eldrazi.png
+size: 64,96
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 16
+  size: 16, 16      
+Idle 
+  xy: 16, 16
+  size: 16, 16 
+Idle 
+  xy: 32, 16
+  size: 16, 16 
+Idle 
+  xy: 48, 16
+  size: 16, 16    
+Walk
+  xy: 0, 32
+  size: 16, 16      
+Walk 
+  xy: 16, 32
+  size: 16, 16 
+Walk 
+  xy: 32, 32
+  size: 16, 16 
+Walk 
+  xy: 48, 32
+  size: 16, 16      
+Attack 
+  xy: 0, 48
+  size: 16, 16      
+Attack 
+  xy: 16, 48
+  size: 16, 16 
+Attack 
+  xy: 32, 48
+  size: 16, 16 
+Attack 
+  xy: 48, 48
+  size: 16, 16          
+Hit 
+  xy: 0, 64
+  size: 16, 16      
+Hit 
+  xy: 16, 64
+  size: 16, 16 
+Hit 
+  xy: 32, 64
+  size: 16, 16 
+Hit 
+  xy: 48, 64
+  size: 16, 16 
+Death 
+  xy: 0, 80
+  size: 16, 16      
+Death 
+  xy: 16, 80
+  size: 16, 16 
+Death 
+  xy: 32, 80
+  size: 16, 16 
+Death 
+  xy: 48, 80
+  size: 16, 16 

@@ -1,0 +1,7 @@
+Name:Galvanize
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to target creature. If you've drawn two or more cards this turn, CARDNAME deals 5 damage to that creature instead.
+SVar:X:Count$Compare Y GE2.5.3
+SVar:Y:Count$YouDrewThisTurn
+Oracle:Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead.

@@ -1,0 +1,340 @@
+//Rank|Name|Rarity|Set
+#1|Virtue of Persistence|M|WOE
+#2|Gruff Triplets|R|WOE
+#3|Redcap Gutter-Dweller|R|WOE
+#4|Realm-Scorcher Hellkite|M|WOE
+#5|Faunsbane Troll|R|WOE
+#6|Lord Skitter, Sewer King|R|WOE
+#7|Horned Loch-Whale|R|WOE
+#8|Virtue of Loyalty|M|WOE
+#9|Imodane's Recruiter|U|WOE
+#10|Spellbook Vendor|R|WOE
+#11|The Goose Mother|R|WOE
+#12|Talion's Messenger|R|WOE
+#13|Gumdrop Poisoner|R|WOE
+#14|Goblin Bombardment|R|WOT
+#15|Bitterblossom|M|WOT
+#16|Ashiok, Wicked Manipulator|M|WOE
+#17|Gingerbread Hunter|U|WOE
+#18|Sleep-Cursed Faerie|R|WOE
+#19|Tough Cookie|U|WOE
+#20|The Huntsman's Redemption|R|WOE
+#21|Tangled Colony|R|WOE
+#22|Twining Twins|R|WOE
+#23|Mosswood Dreadknight|R|WOE
+#24|Twisted Fealty|U|WOE
+#25|Talion, the Kindly Lord|M|WOE
+#26|Welcome to Sweettooth|U|WOE
+#27|Heartflame Duelist|R|WOE
+#28|Regal Bunnicorn|R|WOE
+#29|Torch the Tower|C|WOE
+#30|Werefox Bodyguard|R|WOE
+#31|Restless Cottage|R|WOE
+#32|Decadent Dragon|R|WOE
+#33|Hopeless Nightmare|C|WOE
+#34|Flick a Coin|C|WOE
+#35|Goddric, Cloaked Reveler|R|WOE
+#36|Song of Totentanz|R|WOE
+#37|The Witch's Vanity|U|WOE
+#38|Witchstalker Frenzy|U|WOE
+#39|Restless Vinestalk|R|WOE
+#40|Candy Grapple|C|WOE
+#41|Hatching Plans|U|WOT
+#42|Monstrous Rage|U|WOE
+#43|Ash, Party Crasher|U|WOE
+#44|Archon of the Wild Rose|R|WOE
+#45|Spiteful Hexmage|R|WOE
+#46|Cut In|C|WOE
+#47|Extraordinary Journey|R|WOE
+#48|The Princess Takes Flight|U|WOE
+#49|Royal Treatment|U|WOE
+#50|Picklock Prankster|U|WOE
+#51|Eriette's Tempting Apple|U|WOE
+#52|High Fae Negotiator|U|WOE
+#53|Faerie Dreamthief|U|WOE
+#54|Scalding Viper|R|WOE
+#55|Lord Skitter's Butcher|U|WOE
+#56|Rat Out|C|WOE
+#57|Totentanz, Swarm Piper|U|WOE
+#58|Kellan, the Fae-Blooded|M|WOE
+#59|Greta, Sweettooth Scourge|U|WOE
+#60|Frolicking Familiar|U|WOE
+#61|Picnic Ruiner|U|WOE
+#62|Spellscorn Coven|U|WOE
+#63|Twisted Sewer-Witch|U|WOE
+#64|Feral Encounter|R|WOE
+#65|Hopeful Vigil|C|WOE
+#66|Utopia Sprawl|U|WOT
+#67|Expel the Interlopers|R|WOE
+#68|Three Blind Mice|R|WOE
+#69|Sweettooth Witch|C|WOE
+#70|Embereth Veteran|U|WOE
+#71|Ruby, Daring Tracker|U|WOE
+#72|Faerie Fencing|U|WOE
+#73|Threadbind Clique|U|WOE
+#74|Agatha's Champion|U|WOE
+#75|Shrouded Shepherd|U|WOE
+#76|Stormkeld Vanguard|U|WOE
+#77|Into the Fae Court|C|WOE
+#78|Up the Beanstalk|U|WOE
+#79|Spell Stutter|C|WOE
+#80|Devouring Sugarmaw|R|WOE
+#81|Restless Bivouac|R|WOE
+#82|Woodland Acolyte|U|WOE
+#83|Hearth Elemental|U|WOE
+#84|Hamlet Glutton|C|WOE
+#85|Elvish Archivist|R|WOE
+#86|Restless Fortress|R|WOE
+#87|Callous Sell-Sword|U|WOE
+#88|Ratcatcher Trainee|C|WOE
+#89|Sharae of Numbing Depths|U|WOE
+#90|Obyra, Dreaming Duelist|U|WOE
+#91|Two-Headed Hunter|U|WOE
+#92|Charming Scoundrel|R|WOE
+#93|Harried Spearguard|C|WOE
+#94|Hollow Scavenger|C|WOE
+#95|Witch's Mark|C|WOE
+#96|Redcap Thief|C|WOE
+#97|Edgewall Pack|C|WOE
+#98|Gnawing Crescendo|C|WOE
+#99|Mintstrosity|C|WOE
+#100|Archon's Glory|C|WOE
+#101|Sleight of Hand|C|WOE
+#102|Johann's Stopgap|C|WOE
+#103|Ice Out|C|WOE
+#104|Specter of Mortality|R|WOE
+#105|Agatha's Soul Cauldron|M|WOE
+#106|Edgewall Inn|U|WOE
+#107|Syr Armont, the Redeemer|U|WOE
+#108|Raging Battle Mouse|R|WOE
+#109|Taken by Nightmares|U|WOE
+#110|Ingenious Prodigy|R|WOE
+#111|Bitter Chill|U|WOE
+#112|Voracious Vermin|C|WOE
+#113|Rankle's Prank|R|WOE
+#114|Barrow Naughty|C|WOE
+#115|Minecart Daredevil|C|WOE
+#116|Grabby Giant|C|WOE
+#117|Shatter the Oath|C|WOE
+#118|Archive Dragon|U|WOE
+#119|Cooped Up|C|WOE
+#120|Defense of the Heart|M|WOT
+#121|Conceited Witch|C|WOE
+#122|The End|R|WOE
+#123|Tanglespan Lookout|U|WOE
+#124|Howling Galefang|U|WOE
+#125|Blossoming Tortoise|M|WOE
+#126|Johann, Apprentice Sorcerer|U|WOE
+#127|Rotisserie Elemental|R|WOE
+#128|Cheeky House-Mouse|U|WOE
+#129|Sentinel of Lost Lore|R|WOE
+#130|Belligerent of the Ball|U|WOE
+#131|Grand Ball Guest|C|WOE
+#132|Questing Druid|R|WOE
+#133|Titanic Growth|C|WOE
+#134|Ferocious Werefox|C|WOE
+#135|Feed the Cauldron|C|WOE
+#136|Stockpiling Celebrant|C|WOE
+#137|Land Tax|M|WOT
+#138|Tattered Ratter|U|WOE
+#139|Stonesplitter Bolt|U|WOE
+#140|Rootrider Faun|C|WOE
+#141|Evolving Wilds|C|WOE
+#142|Eriette of the Charmed Apple|M|WOE
+#143|Brave the Wilds|C|WOE
+#144|Bramble Familiar|R|WOE
+#145|Yenna, Redtooth Regent|R|WOE
+#146|Boundary Lands Ranger|U|WOE
+#147|Prophetic Prism|C|WOE
+#148|Graceful Takedown|U|WOE
+#149|Restless Spire|R|WOE
+#150|Gingerbrute|C|WOE
+#151|Crystal Grotto|C|WOE
+#152|Redtooth Genealogist|C|WOE
+#153|Curse of the Werefox|C|WOE
+#154|Tenacious Tomeseeker|U|WOE
+#155|Diminisher Witch|C|WOE
+#156|Syr Ginger, the Meal Ender|R|WOE
+#157|Rowan, Scion of War|M|WOE
+#158|Not Dead After All|C|WOE
+#159|Imodane, the Pyrohammer|R|WOE
+#160|Hylda's Crown of Winter|R|WOE
+#161|Quick Study|C|WOE
+#162|Candy Trail|C|WOE
+#163|Scream Puff|C|WOE
+#164|Elusive Otter|R|WOE
+#165|Leaping Ambush|C|WOE
+#166|Vantress Transmuter|C|WOE
+#167|Beluna's Gatekeeper|C|WOE
+#168|Dragon Mantle|U|WOT
+#169|Glass Casket|U|WOE
+#170|Farsight Ritual|R|WOE
+#171|Beluna Grandsquall|M|WOE
+#172|Pollen-Shield Hare|R|WOE
+#173|Frantic Firebolt|C|WOE
+#174|Virtue of Courage|M|WOE
+#175|Aquatic Alchemist|C|WOE
+#176|Redtooth Vanguard|U|WOE
+#177|Merry Bards|C|WOE
+#178|Bellowing Bruiser|C|WOE
+#179|Eriette's Whisper|C|WOE
+#180|Grasp of Fate|U|WOT
+#181|Spreading Seas|U|WOT
+#182|Besotted Knight|C|WOE
+#183|Return from the Wilds|C|WOE
+#184|Troublemaker Ouphe|C|WOE
+#185|Icewrought Sentry|U|WOE
+#186|Return Triumphant|C|WOE
+#187|Kellan's Lightblades|C|WOE
+#188|Disdainful Stroke|U|WOE
+#189|Unruly Catapult|C|WOE
+#190|Stingblade Assassin|C|WOE
+#191|Sugar Rush|C|WOE
+#192|Stab Wound|U|WOT
+#193|Cursed Courtier|U|WOE
+#194|Gallant Pie-Wielder|U|WOE
+#195|Living Lectern|C|WOE
+#196|Cruel Somnophage|R|WOE
+#197|Beanstalk Wurm|C|WOE
+#198|Lord Skitter's Blessing|R|WOE
+#199|Warehouse Tabby|C|WOE
+#200|Neva, Stalked by Nightmares|U|WOE
+#201|Hylda of the Icy Crown|M|WOE
+#202|Armory Mice|C|WOE
+#203|Three Bowls of Porridge|U|WOE
+#204|Back for Seconds|U|WOE
+#205|Tempest Hart|U|WOE
+#206|Skewer Slinger|C|WOE
+#207|Fell Horseman|C|WOE
+#208|Stormkeld Prowler|C|WOE
+#209|Misleading Motes|C|WOE
+#210|Obyra's Attendants|C|WOE
+#211|Moment of Valor|C|WOE
+#212|Griffin Aerie|U|WOT
+#213|Fiery Emancipation|R|WOT
+#214|Curiosity|U|WOT
+#215|Rowan's Grim Search|C|WOE
+#216|Thunderous Debut|R|WOE
+#217|Splashy Spellcaster|U|WOE
+#218|Mocking Sprite|C|WOE
+#219|Charmed Clothier|C|WOE
+#220|Snaremaster Sprite|C|WOE
+#221|Verdant Outrider|C|WOE
+#222|Territorial Witchstalker|C|WOE
+#223|Commune with Nature|C|WOE
+#224|Wicked Visitor|C|WOE
+#225|Unnatural Growth|R|WOT
+#226|Troyan, Gutsy Explorer|U|WOE
+#227|The Apprentice's Folly|R|WOE
+#228|Likeness Looter|R|WOE
+#229|Water Wings|C|WOE
+#230|Collector's Vault|U|WOE
+#231|Scarecrow Guide|C|WOE
+#232|Bespoke Battlegarb|C|WOE
+#233|Merfolk Coralsmith|C|WOE
+#234|Bestial Bloodline|C|WOE
+#235|Unassuming Sage|C|WOE
+#236|Frostbridge Guard|C|WOE
+#237|Necropotence|M|WOT
+#238|Skybeast Tracker|C|WOE
+#239|Night of the Sweets' Revenge|U|WOE
+#240|Dutiful Griffin|U|WOE
+#241|Gadwick's First Duel|U|WOE
+#242|Spider Food|C|WOE
+#243|Tuinvale Guide|C|WOE
+#244|Slumbering Keepguard|C|WOE
+#245|Vampiric Rites|U|WOT
+#246|Knightly Valor|U|WOT
+#247|Moonshaker Cavalry|M|WOE
+#248|Chancellor of Tales|U|WOE
+#249|Discerning Financier|U|WOE
+#250|Ashiok's Reaper|U|WOE
+#251|Galvanic Giant|U|WOE
+#252|Toadstool Admirer|C|WOE
+#253|Kindled Heroism|C|WOE
+#254|Rimefur Reindeer|C|WOE
+#255|Savior of the Sleeping|C|WOE
+#256|Season of Growth|U|WOT
+#257|Break the Spell|C|WOE
+#258|Ego Drain|U|WOE
+#259|Virtue of Strength|M|WOE
+#260|Dream Spoilers|U|WOE
+#261|Protective Parents|C|WOE
+#262|Blind Obedience|R|WOT
+#263|Knight of Doves|U|WOE
+#264|Stroke of Midnight|U|WOE
+#265|Virtue of Knowledge|M|WOE
+#266|Beseech the Mirror|M|WOE
+#267|Lich-Knights' Conquest|R|WOE
+#268|Will, Scion of Peace|M|WOE
+#269|Agatha of the Vile Cauldron|M|WOE
+#270|Eerie Interference|U|WOE
+#271|Korvold and the Noble Thief|U|WOE
+#272|Asinine Antics|M|WOE
+#273|Freeze in Place|C|WOE
+#274|Solitary Sanctuary|U|WOE
+#275|A Tale for the Ages|R|WOE
+#276|Food Fight|R|WOE
+#277|The Irencrag|R|WOE
+#278|Succumb to the Cold|U|WOE
+#279|Plunge into Winter|C|WOE
+#280|Shared Animosity|R|WOT
+#281|Compulsion|U|WOT
+#282|Dark Tutelage|U|WOT
+#283|Forced Fruition|R|WOT
+#284|Impact Tremors|U|WOT
+#285|Parallel Lives|M|WOT
+#286|Dawn of Hope|R|WOT
+#287|Ground Seal|U|WOT
+#288|Raid Bombardment|U|WOT
+#289|Oversold Cemetery|R|WOT
+#290|Intangible Virtue|U|WOT
+#291|Grave Pact|M|WOT
+#292|Garruk's Uprising|U|WOT
+#293|Prismatic Omen|R|WOT
+#294|Rhystic Study|M|WOT
+#295|Soul-Guide Lantern|U|WOE
+#296|Primal Vigor|R|WOT
+#297|Waste Not|R|WOT
+#298|As Foretold|R|WOT
+#299|Leyline of Anticipation|R|WOT
+#300|Leyline of Abundance|R|WOT
+#301|Karmic Justice|R|WOT
+#302|Leyline of Sanctity|R|WOT
+#303|Omniscience|M|WOT
+#304|Rest in Peace|R|WOT
+#305|Hardened Scales|R|WOT
+#306|Phyrexian Unlife|R|WOT
+#307|Repercussion|M|WOT
+#308|Mana Flare|R|WOT
+#309|Leyline of Lightning|R|WOT
+#310|Intruder Alarm|R|WOT
+#311|Fraying Sanity|R|WOT
+#312|Nature's Will|R|WOT
+#313|Leyline of the Void|R|WOT
+#314|Oppression|R|WOT
+#315|Sneak Attack|M|WOT
+#316|Smothering Tithe|M|WOT
+#317|Sanguine Bond|R|WOT
+#318|Kindred Discovery|M|WOT
+#319|Copy Enchantment|R|WOT
+#320|Blood Moon|M|WOT
+#321|Polluted Bonds|R|WOT
+#322|Doubling Season|M|WOT
+#323|Greater Auramancy|M|WOT
+#324|Aggravated Assault|R|WOT
+#325|Plains|C|WOE
+#326|Island|C|WOE
+#327|Swamp|C|WOE
+#328|Mountain|C|WOE
+#329|Forest|C|WOE
+#330|Plains|C|WOE
+#331|Plains|C|WOE
+#332|Island|C|WOE
+#333|Island|C|WOE
+#334|Swamp|C|WOE
+#335|Swamp|C|WOE
+#336|Mountain|C|WOE
+#337|Mountain|C|WOE
+#338|Forest|C|WOE
+#339|Forest|C|WOE

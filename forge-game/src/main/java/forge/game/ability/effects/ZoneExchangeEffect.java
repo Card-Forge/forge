@@ -9,6 +9,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -90,11 +91,17 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
             object1.unattachFromEntity(c);
             object2.attachToEntity(c, sa);
         }
+
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         // Exchange Zone
-        game.getAction().moveTo(zone2, object1, sa, moveParams);
-        game.getAction().moveTo(zone1, object2, sa, moveParams);
+        Card newObj1 = game.getAction().moveTo(zone2, object1, sa, moveParams);
+        Card newObj2 = game.getAction().moveTo(zone1, object2, sa, moveParams);
+
+        final CardZoneTable table = new CardZoneTable();
+        table.put(zone1, newObj1.getZone().getZoneType(), newObj1);
+        table.put(zone2, newObj2.getZone().getZoneType(), newObj2);
+        table.triggerChangesZoneAll(game, sa);
     }
 }

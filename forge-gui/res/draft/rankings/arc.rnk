@@ -1,0 +1,137 @@
+//Rank|Name|Rarity|Set
+#1|Lightning Greaves|U|ARC
+#2|Terramorphic Expanse|C|ARC
+#3|Sakura-Tribe Elder|C|ARC
+#4|Path to Exile|U|ARC
+#5|Thran Dynamo|U|ARC
+#6|Dimir Signet|C|ARC
+#7|Rakdos Signet|C|ARC
+#8|Oblivion Ring|C|ARC
+#9|Azorius Signet|C|ARC
+#10|Everflowing Chalice|U|ARC
+#11|Harmonize|U|ARC
+#12|Mosswort Bridge|R|ARC
+#13|Rakdos Carnarium|C|ARC
+#14|Terminate|C|ARC
+#15|Duplicant|R|ARC
+#16|Barren Moor|C|ARC
+#17|Reanimate|U|ARC
+#18|Tranquil Thicket|C|ARC
+#19|Secluded Steppe|C|ARC
+#20|Gruul Signet|C|ARC
+#21|Krosan Verge|U|ARC
+#22|Shriekmaw|U|ARC
+#23|Forgotten Ancient|R|ARC
+#24|Artisan of Kozilek|U|ARC
+#25|Beacon of Unrest|R|ARC
+#26|Dreamstone Hedron|U|ARC
+#27|Fierce Empath|C|ARC
+#28|Sign in Blood|C|ARC
+#29|Fires of Yavimaya|U|ARC
+#30|Rancor|C|ARC
+#31|Hellkite Charger|R|ARC
+#32|Reassembling Skeleton|U|ARC
+#33|Primal Command|R|ARC
+#34|Fertilid|C|ARC
+#35|Llanowar Reborn|U|ARC
+#36|Avatar of Woe|R|ARC
+#37|Khalni Garden|C|ARC
+#38|Graypelt Refuge|U|ARC
+#39|Cemetery Reaper|R|ARC
+#40|Kazandu Refuge|U|ARC
+#41|Master Transmuter|R|ARC
+#42|Taurean Mauler|R|ARC
+#43|Dragon Fodder|C|ARC
+#44|Memnarch|R|ARC
+#45|Kamahl, Fist of Krosa|R|ARC
+#46|Seething Song|C|ARC
+#47|Corpse Connoisseur|U|ARC
+#48|Unmake|C|ARC
+#49|Magister Sphinx|R|ARC
+#50|Chameleon Colossus|R|ARC
+#51|Fog|C|ARC
+#52|Dragonspeaker Shaman|U|ARC
+#53|Leonin Abunas|R|ARC
+#54|Fireball|U|ARC
+#55|Kaervek the Merciless|R|ARC
+#56|Armadillo Cloak|C|ARC
+#57|Ryusei, the Falling Star|R|ARC
+#58|Lodestone Golem|R|ARC
+#59|Wickerbough Elder|C|ARC
+#60|Vitu-Ghazi, the City-Tree|U|ARC
+#61|Krosan Tusker|C|ARC
+#62|Flameblast Dragon|R|ARC
+#63|Thelonite Hermit|R|ARC
+#64|Verdeloth the Ancient|R|ARC
+#65|Obelisk of Esper|C|ARC
+#66|Sanctum Gargoyle|C|ARC
+#67|Bituminous Blast|U|ARC
+#68|Wall of Roots|C|ARC
+#69|Extractor Demon|R|ARC
+#70|Torrent of Souls|U|ARC
+#71|Savage Twister|U|ARC
+#72|Sun Droplet|U|ARC
+#73|Yavimaya Dryad|U|ARC
+#74|Selesnya Guildmage|U|ARC
+#75|Spin into Myth|U|ARC
+#76|Kilnmouth Dragon|R|ARC
+#77|Incremental Blight|U|ARC
+#78|Zombie Infestation|U|ARC
+#79|Feral Hydra|R|ARC
+#80|Zombify|U|ARC
+#81|Scion of Darkness|R|ARC
+#82|Molimo, Maro-Sorcerer|R|ARC
+#83|Leaf Gilder|C|ARC
+#84|Spider Umbra|C|ARC
+#85|March of the Machines|R|ARC
+#86|Twisted Abomination|C|ARC
+#87|Volcanic Fallout|U|ARC
+#88|Aether Spellbomb|C|ARC
+#89|Unbender Tine|U|ARC
+#90|Mistvein Borderpost|C|ARC
+#91|Breath of Darigaaz|U|ARC
+#92|Fieldmist Borderpost|C|ARC
+#93|Makeshift Mannequin|U|ARC
+#94|Plummet|C|ARC
+#95|Batwing Brume|U|ARC
+#96|Bog Witch|C|ARC
+#97|Gleeful Sabotage|C|ARC
+#98|Dragon Breath|C|ARC
+#99|Vampiric Dragon|R|ARC
+#100|Imperial Hellkite|R|ARC
+#101|Thunderstaff|U|ARC
+#102|Skullcage|U|ARC
+#103|Infest|U|ARC
+#104|Two-Headed Dragon|R|ARC
+#105|Architects of Will|C|ARC
+#106|Nantuko Monastery|U|ARC
+#107|Colossal Might|C|ARC
+#108|Chandra's Outrage|C|ARC
+#109|Furnace Whelp|U|ARC
+#110|Synod Sanctum|U|ARC
+#111|Infectious Horror|C|ARC
+#112|Shinen of Life's Roar|C|ARC
+#113|Dragon Whelp|U|ARC
+#114|Pale Recluse|C|ARC
+#115|Festering Goblin|C|ARC
+#116|Sorcerer's Strongbox|U|ARC
+#117|Ethersworn Shieldmage|C|ARC
+#118|Metallurgeon|U|ARC
+#119|Avatar of Discord|R|ARC
+#120|Watchwolf|U|ARC
+#121|Dregscape Zombie|C|ARC
+#122|Heroes' Reunion|U|ARC
+#123|Sundering Titan|R|ARC
+#124|Urborg Syphon-Mage|C|ARC
+#125|Branching Bolt|C|ARC
+#126|Rakdos Guildmage|U|ARC
+#127|Agony Warp|C|ARC
+#128|Juggernaut|U|ARC
+#129|Hunting Moa|U|ARC
+#130|Skirk Commando|C|ARC
+#131|Inferno Trap|U|ARC
+#132|Wax Wane|U|ARC
+#133|Skirk Marauder|C|ARC
+#134|Gathan Raiders|C|ARC
+#135|Battering Craghorn|C|ARC
+#136|Synod Centurion|U|ARC

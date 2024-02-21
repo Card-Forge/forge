@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Legendary Enchantment Creature God
 PT:7/6
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to red is less than five, CARDNAME is not a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT5 | Description$ As long as your devotion to red is less than five, NICKNAME is not a creature.
 SVar:X:Count$Devotion.Red
 SVar:BuffedBy:Permanent.Red
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Haste | Description$ Other creatures you control have haste.

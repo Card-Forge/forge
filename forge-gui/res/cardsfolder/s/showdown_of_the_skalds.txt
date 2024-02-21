@@ -1,7 +1,7 @@
 Name:Showdown of the Skalds
 ManaCost:2 R W
 Types:Enchantment Saga
-K:Saga:3:TrigExile,TrigEffect,TrigEffect
+K:Chapter:3:TrigExile,TrigEffect,TrigEffect
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top four cards of your library. Until the end of your next turn, you may play those cards.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.

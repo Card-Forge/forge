@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Ajani Caller of the Pride|M|M13
+#2|Garruk Primal Hunter|M|M13
+#3|Jace Memory Adept|M|M13
+#4|Thundermaw Hellkite|M|M13
+#5|Sublime Archangel|M|M13
+#6|Liliana of the Dark Realms|M|M13
+#7|Primordial Hydra|M|M13
+#8|Chandra the Firebrand|M|M13
+#9|Akromas Memorial|M|M13
+#10|Elderscale Wurm|M|M13
+#11|Nicol Bolas Planeswalker|M|M13
+#12|Vampire Nocturnus|M|M13
+#13|Serra Avatar|M|M13
+#14|Nefarox Overlord of Grixis|R|M13
+#15|Thragtusk|R|M13
+#16|Odric Master Tactician|R|M13
+#17|Captain of the Watch|R|M13
+#18|Talrand Sky Summoner|R|M13
+#19|Krenko Mob Boss|R|M13
+#20|Yeva Natures Herald|R|M13
+#21|Staff of Nin|R|M13
+#22|Xathrid Gorgon|R|M13
+#23|Silklash Spider|R|M13
+#24|Vampire Nighthawk|U|M13
+#25|Serra Angel|U|M13
+#26|Oblivion Ring|U|M13
+#27|Rancor|U|M13
+#28|Sphinx of Uthuun|R|M13
+#29|Serra Avenger|R|M13
+#30|Firewing Phoenix|R|M13
+#31|Mutilate|R|M13
+#32|Rhox Faithmender|R|M13
+#33|Predatory Rampage|R|M13
+#34|Disciple of Bolas|R|M13
+#35|Magmaquake|R|M13
+#36|Flames of the Firebrand|U|M13
+#37|Talrands Invocation|U|M13
+#38|Intrepid Hero|R|M13
+#39|Shimian Specter|R|M13
+#40|Sands of Delirium|R|M13
+#41|Stuffy Doll|R|M13
+#42|Clone|R|M13
+#43|Knight of Infamy|U|M13
+#44|Knight of Glory|U|M13
+#45|Cathedral of War|R|M13
+#46|Volcanic Geyser|U|M13
+#47|Garruks Packleader|U|M13
+#48|Public Execution|U|M13
+#49|Acidic Slime|U|M13
+#50|Murder|C|M13
+#51|Stormtide Leviathan|R|M13
+#52|Arms Dealer|U|M13
+#53|Planar Cleansing|R|M13
+#54|Quirion Dryad|R|M13
+#55|Slumbering Dragon|R|M13
+#56|Sleep|U|M13
+#57|Void Stalker|R|M13
+#58|Elvish Archdruid|R|M13
+#59|Trading Post|R|M13
+#60|Searing Spear|C|M13
+#61|Switcheroo|U|M13
+#62|Arctic Aven|U|M13
+#63|Roaring Primadox|U|M13
+#64|Crusader of Odric|U|M13
+#65|Pacifism|C|M13
+#66|Hamletback Goliath|R|M13
+#67|Gilded Lotus|R|M13
+#68|Fog Bank|U|M13
+#69|Healer of the Pride|U|M13
+#70|Duskmantle Prowler|U|M13
+#71|Flinthoof Boar|U|M13
+#72|Rise from the Grave|U|M13
+#73|Furnace Whelp|U|M13
+#74|Augur of Bolas|U|M13
+#75|Harbor Bandit|U|M13
+#76|Aven Squire|C|M13
+#77|Crimson Muckwader|U|M13
+#78|Master of the Pearl Trident|R|M13
+#79|Sentinel Spider|C|M13
+#80|Attended Knight|C|M13
+#81|Mwonvuli Beast Tracker|U|M13
+#82|Jaces Phantasm|U|M13
+#83|Prized Elephant|U|M13
+#84|Chronomaton|U|M13
+#85|Bloodhunter Bat|C|M13
+#86|Glacial Fortress|R|M13
+#87|Cower in Fear|U|M13
+#88|Dragonskull Summit|R|M13
+#89|Rootbound Crag|R|M13
+#90|Sunpetal Grove|R|M13
+#91|War Priest of Thune|U|M13
+#92|Drowned Catacomb|R|M13
+#93|Essence Drain|C|M13
+#94|Duskdale Wurm|U|M13
+#95|Divine Verdict|C|M13
+#96|Angelic Benediction|U|M13
+#97|Deadly Recluse|C|M13
+#98|Hellion Crucible|R|M13
+#99|Evolving Wilds|C|M13
+#100|Mindclaw Shaman|U|M13
+#101|Duty Bound Dead|C|M13
+#102|Servant of Nefarox|C|M13
+#103|Arbor Elf|C|M13
+#104|Giant Scorpion|C|M13
+#105|Prey Upon|C|M13
+#106|Ring of Kalonia|U|M13
+#107|Ring of Xathrid|U|M13
+#108|Elvish Visionary|C|M13
+#109|Griffin Protector|C|M13
+#110|Centaur Courser|C|M13
+#111|Bladetusk Boar|C|M13
+#112|Timberpack Wolf|C|M13
+#113|Primal Huntbeast|C|M13
+#114|Turn to Slag|C|M13
+#115|Faiths Reward|R|M13
+#116|Primal Clay|U|M13
+#117|Welkin Tern|C|M13
+#118|Mark of Mutiny|U|M13
+#119|Mogg Flunkies|C|M13
+#120|Faerie Invaders|C|M13
+#121|Omniscience|M|M13
+#122|Captains Call|C|M13
+#123|Wind Drake|C|M13
+#124|Guardians of Akrasa|C|M13
+#125|Ajanis Sunstriker|C|M13
+#126|Archaeomancer|C|M13
+#127|Phylactery Lich|R|M13
+#128|Ring of Thune|U|M13
+#129|Krenkos Command|C|M13
+#130|Essence Scatter|C|M13
+#131|Unsummon|C|M13
+#132|Farseek|C|M13
+#133|Yevas Forcemage|C|M13
+#134|Spelltwine|R|M13
+#135|Kitesail|U|M13
+#136|Goblin Arsonist|C|M13
+#137|Mark of the Vampire|C|M13
+#138|Tormented Soul|C|M13
+#139|Ravenous Rats|C|M13
+#140|Diabolic Revelation|R|M13
+#141|Divination|C|M13
+#142|Lilianas Shade|C|M13
+#143|Encrust|C|M13
+#144|Titanic Growth|C|M13
+#145|Scroll Thief|C|M13
+#146|Spiked Baloth|C|M13
+#147|Fungal Sprouting|U|M13
+#148|Sign in Blood|C|M13
+#149|War Falcon|C|M13
+#150|Rewind|U|M13
+#151|Crippling Blight|C|M13
+#152|Chandras Fury|C|M13
+#153|Torch Fiend|U|M13
+#154|Ring of Evos Isle|U|M13
+#155|Battleflight Eagle|C|M13
+#156|Fervor|R|M13
+#157|Ring of Valkas|U|M13
+#158|Rummaging Goblin|C|M13
+#159|Elixir of Immortality|U|M13
+#160|Watercourser|C|M13
+#161|Vedalken Entrancer|C|M13
+#162|Reckless Brute|C|M13
+#163|Redirect|R|M13
+#164|Walking Corpse|C|M13
+#165|Silvercoat Lion|C|M13
+#166|Reverberate|R|M13
+#167|Mind Sculpt|C|M13
+#168|Worldfire|M|M13
+#169|Tricks of the Trade|C|M13
+#170|Dragon Hatchling|C|M13
+#171|Plummet|C|M13
+#172|Safe Passage|C|M13
+#173|Bond Beetle|C|M13
+#174|Goblin Battle Jester|C|M13
+#175|Vastwood Gorger|C|M13
+#176|Veilborn Ghoul|U|M13
+#177|Dark Favor|C|M13
+#178|Canyon Minotaur|C|M13
+#179|Fire Elemental|C|M13
+#180|Mind Rot|C|M13
+#181|Bloodthrone Vampire|C|M13
+#182|Duress|C|M13
+#183|Volcanic Strength|C|M13
+#184|Show of Valor|C|M13
+#185|Jayemdae Tome|U|M13
+#186|Kraken Hatchling|C|M13
+#187|Warclamp Mastiff|C|M13
+#188|Negate|C|M13
+#189|Downpour|C|M13
+#190|Vile Rebirth|C|M13
+#191|Divine Favor|C|M13
+#192|Rangers Path|C|M13
+#193|Courtly Provocateur|U|M13
+#194|Trumpet Blast|C|M13
+#195|Glorious Charge|C|M13
+#196|Naturalize|C|M13
+#197|Kindled Fury|C|M13
+#198|Harbor Serpent|C|M13
+#199|Fog|C|M13
+#200|Pillarfield Ox|C|M13
+#201|Zombie Goliath|C|M13
+#202|Phyrexian Hulk|U|M13
+#203|Guardian Lions|C|M13
+#204|Disentomb|C|M13
+#205|Wall of Fire|C|M13
+#206|Wild Guess|C|M13
+#207|Serpents Gift|C|M13
+#208|Rain of Blades|U|M13
+#209|Revive|U|M13
+#210|Cleaver Riot|U|M13
+#211|Blood Reckoning|U|M13
+#212|Index|C|M13
+#213|Merfolk of the Pearl Trident|C|M13
+#214|Erase|C|M13
+#215|Hydrosurge|C|M13
+#216|Smelt|C|M13
+#217|Craterize|C|M13
+#218|Angels Mercy|C|M13
+#219|Gem of Becoming|U|M13
+#220|Bountiful Harvest|C|M13
+#221|Ground Seal|R|M13
+#222|Boundless Realms|R|M13
+#223|Touch of the Eternal|R|M13
+#224|Reliquary Tower|U|M13
+#225|Wits End|R|M13
+#226|Tormods Crypt|U|M13
+#227|Door to Nothingness|R|M13
+#228|Battle of Wits|R|M13
+#229|Clock of Omens|U|M13

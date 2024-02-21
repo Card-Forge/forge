@@ -1,0 +1,12 @@
+Name:Hamlet Glutton
+ManaCost:5 G G
+Types:Creature Giant
+PT:6/6
+K:Bargain
+K:Trample
+S:Mode$ ReduceCost | ValidSpell$ Spell.Bargain | Type$ Spell | ValidCard$ Card.Self | Amount$ 2 | EffectZone$ All | Description$This spell costs {2} less to cast if it's bargained.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Sacrifice|LifeGain
+DeckHints:Ability$Token & Type$Enchantment|Artifact
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nThis spell costs {2} less to cast if it's bargained.\nTrample\nWhen Hamlet Glutton enters the battlefield, you gain 3 life.

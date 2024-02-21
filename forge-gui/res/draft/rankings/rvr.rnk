@@ -1,0 +1,292 @@
+//Rank|Name|Rarity|Set
+#1|Liliana, Dreadhorde General|M|RVR
+#2|Aurelia, Exemplar of Justice|M|RVR
+#3|Quasiduplicate|R|RVR
+#4|Ilharg, the Raze-Boar|M|RVR
+#5|Nicol Bolas, Dragon-God|M|RVR
+#6|Niv-Mizzet, Parun|R|RVR
+#7|Cyclonic Rift|M|RVR
+#8|Lord of the Void|M|RVR
+#9|Massacre Girl|R|RVR
+#10|Demonfire|U|RVR
+#11|Hellkite Tyrant|R|RVR
+#12|Utvara Hellkite|M|RVR
+#13|Sphinx's Revelation|R|RVR
+#14|Tajic, Legion's Edge|R|RVR
+#15|Midnight Reaper|R|RVR
+#16|Gideon Blackblade|M|RVR
+#17|Birds of Paradise|R|RVR
+#18|Yeva, Nature's Herald|R|RVR
+#19|Assemble the Legion|R|RVR
+#20|Domri Rade|M|RVR
+#21|Ral Zarek|M|RVR
+#22|Murmuring Mystic|U|RVR
+#23|Chord of Calling|R|RVR
+#24|Golgari Grave-Troll|R|RVR
+#25|Protean Hulk|M|RVR
+#26|Master of Cruelties|M|RVR
+#27|Legion Warboss|R|RVR
+#28|Guardian Project|M|RVR
+#29|Nightveil Predator|U|RVR
+#30|Sharktocrab|U|RVR
+#31|Nightveil Sprite|U|RVR
+#32|Tidespout Tyrant|R|RVR
+#33|Stalking Vengeance|U|RVR
+#34|Borborygmos Enraged|R|RVR
+#35|Crackling Drake|U|RVR
+#36|Lightning Helix|U|RVR
+#37|Prime Speaker Zegana|R|RVR
+#38|Tolsimir Wolfblood|R|RVR
+#39|Find Finality|R|RVR
+#40|Thrash Threat|R|RVR
+#41|Response Resurgence|R|RVR
+#42|Assure Assemble|R|RVR
+#43|Priest of Forgotten Gods|R|RVR
+#44|Arclight Phoenix|R|RVR
+#45|Conclave Cavalier|U|RVR
+#46|Golgari Findbroker|U|RVR
+#47|Golgari Guildmage|U|RVR
+#48|Putrefy|U|RVR
+#49|Rakdos Firewheeler|U|RVR
+#50|Scab-Clan Mauler|C|RVR
+#51|Selesnya Evangel|U|RVR
+#52|Teysa, Orzhov Scion|R|RVR
+#53|Truefire Captain|U|RVR
+#54|Urbis Protector|U|RVR
+#55|Spark Double|R|RVR
+#56|Dreadbore|R|RVR
+#57|Phytohydra|R|RVR
+#58|Rhythm of the Wild|U|RVR
+#59|Sky Hussar|U|RVR
+#60|Unbreakable Formation|R|RVR
+#61|Blade Juggler|C|RVR
+#62|Orzhov Enforcer|U|RVR
+#63|Lazav, the Multifarious|R|RVR
+#64|Sunder Shaman|U|RVR
+#65|Warrant Warden|R|RVR
+#66|Gate Colossus|U|RVR
+#67|Mistral Charger|U|RVR
+#68|Aetherplasm|U|RVR
+#69|Last Gasp|C|RVR
+#70|Mausoleum Turnkey|U|RVR
+#71|Ultimate Price|U|RVR
+#72|Woebringer Demon|U|RVR
+#73|Homing Lightning|U|RVR
+#74|Skewer the Critics|C|RVR
+#75|Overwhelm|U|RVR
+#76|Coiling Oracle|C|RVR
+#77|Frilled Mystic|U|RVR
+#78|Rakdos Guildmage|U|RVR
+#79|Rakdos, Lord of Riots|R|RVR
+#80|Savra, Queen of the Golgari|R|RVR
+#81|Selesnya Guildmage|U|RVR
+#82|Sphinx of New Prahv|U|RVR
+#83|Connive Concoct|R|RVR
+#84|Bedeck Bedazzle|R|RVR
+#85|Voyager Staff|U|RVR
+#86|Azorius Justiciar|U|RVR
+#87|Faith's Fetters|C|RVR
+#88|Sunhome Stalwart|U|RVR
+#89|Golgari Thug|U|RVR
+#90|Azorius Guildmage|U|RVR
+#91|Boros Guildmage|U|RVR
+#92|Call of the Conclave|C|RVR
+#93|Cartel Aristocrat|U|RVR
+#94|Gruul Guildmage|U|RVR
+#95|Mayhem Devil|U|RVR
+#96|Conclave Equenaut|C|RVR
+#97|Summary Judgment|C|RVR
+#98|Cerulean Sphinx|U|RVR
+#99|Repeal|C|RVR
+#100|Orzhov Euthanist|C|RVR
+#101|Bloodfray Giant|U|RVR
+#102|Rakdos Pit Dragon|U|RVR
+#103|Band Together|C|RVR
+#104|Experiment One|U|RVR
+#105|Fungal Rebirth|U|RVR
+#106|Horncaller's Chant|C|RVR
+#107|Utopia Sprawl|U|RVR
+#108|Izzet Charm|U|RVR
+#109|Teferi, Time Raveler|M|RVR
+#110|Revival Revenge|R|RVR
+#111|Expansion Explosion|R|RVR
+#112|Condemn|U|RVR
+#113|Devouring Light|U|RVR
+#114|Ministrant of Obligation|U|RVR
+#115|Sinister Sabotage|C|RVR
+#116|Stab Wound|U|RVR
+#117|Mugging|C|RVR
+#118|Loaming Shaman|U|RVR
+#119|Moldervine Cloak|U|RVR
+#120|Wasteland Viper|U|RVR
+#121|Dimir Guildmage|U|RVR
+#122|Glowspore Shaman|C|RVR
+#123|Skyknight Legionnaire|C|RVR
+#124|Whisper Agent|C|RVR
+#125|Angelic Exaltation|U|RVR
+#126|Boros Elite|C|RVR
+#127|Eyes in the Skies|C|RVR
+#128|Compulsive Research|C|RVR
+#129|Drift of Phantasms|C|RVR
+#130|Balustrade Spy|C|RVR
+#131|Plaguecrafter|U|RVR
+#132|Burning Prophet|C|RVR
+#133|Krenko, Mob Boss|R|RVR
+#134|Light Up the Stage|U|RVR
+#135|Crocanura|C|RVR
+#136|Fists of Ironwood|C|RVR
+#137|Gather Courage|C|RVR
+#138|Life from the Loam|R|RVR
+#139|Titanic Brawl|C|RVR
+#140|Blind Hunter|C|RVR
+#141|Gobhobbler Rats|C|RVR
+#142|Karlov of the Ghost Council|M|RVR
+#143|Moroii|U|RVR
+#144|Mourning Thrull|C|RVR
+#145|Simic Guildmage|U|RVR
+#146|Eyes Everywhere|U|RVR
+#147|Fblthp, the Lost|R|RVR
+#148|Pteramander|U|RVR
+#149|Dreadmalkin|U|RVR
+#150|Vindictive Vampire|U|RVR
+#151|Rubblebelt Maaka|C|RVR
+#152|Wojek Bodyguard|C|RVR
+#153|Drudge Beetle|C|RVR
+#154|Goblin Electromancer|C|RVR
+#155|Azorius Arrester|C|RVR
+#156|Rootborn Defenses|C|RVR
+#157|Tomik, Distinguished Advokist|R|RVR
+#158|Cloudfin Raptor|C|RVR
+#159|Downsize|C|RVR
+#160|Helium Squirter|C|RVR
+#161|Keymaster Rogue|C|RVR
+#162|Remand|U|RVR
+#163|Burglar Rat|C|RVR
+#164|Crypt Ghast|R|RVR
+#165|Dimir House Guard|C|RVR
+#166|Ill-Gotten Inheritance|C|RVR
+#167|Macabre Waltz|C|RVR
+#168|Sewer Shambler|C|RVR
+#169|Krenko's Command|C|RVR
+#170|Greater Mossdog|C|RVR
+#171|Open the Gates|C|RVR
+#172|Rampaging Rendhorn|C|RVR
+#173|Debt to the Deathless|U|RVR
+#174|Deputy of Acquittals|C|RVR
+#175|Izzet Guildmage|U|RVR
+#176|Orzhov Guildmage|U|RVR
+#177|Petrahydrox|C|RVR
+#178|Repudiate Replicate|R|RVR
+#179|Blood Crypt|R|RVR
+#180|Breeding Pool|R|RVR
+#181|Godless Shrine|R|RVR
+#182|Hallowed Fountain|R|RVR
+#183|Overgrown Tomb|R|RVR
+#184|Sacred Foundry|R|RVR
+#185|Steam Vents|R|RVR
+#186|Stomping Ground|R|RVR
+#187|Temple Garden|R|RVR
+#188|Watery Grave|R|RVR
+#189|Armory Guard|C|RVR
+#190|Arrester's Zeal|C|RVR
+#191|Keening Apparition|C|RVR
+#192|Syndicate Messenger|C|RVR
+#193|To Arms!|U|RVR
+#194|Totally Lost|C|RVR
+#195|Disembowel|C|RVR
+#196|Thrill-Kill Assassin|C|RVR
+#197|Undercity's Embrace|C|RVR
+#198|Bomber Corps|C|RVR
+#199|Burning-Tree Vandal|C|RVR
+#200|Dogpile|C|RVR
+#201|Skullcrack|U|RVR
+#202|Siege Wurm|C|RVR
+#203|Footlight Fiend|C|RVR
+#204|Fresh-Faced Recruit|C|RVR
+#205|Judge's Familiar|C|RVR
+#206|Merfolk of the Depths|C|RVR
+#207|Slitherhead|C|RVR
+#208|Azorius Signet|U|RVR
+#209|Boros Signet|U|RVR
+#210|Dimir Signet|U|RVR
+#211|Golgari Signet|U|RVR
+#212|Gruul Signet|U|RVR
+#213|Izzet Signet|U|RVR
+#214|Orzhov Signet|U|RVR
+#215|Rakdos Signet|U|RVR
+#216|Selesnya Signet|U|RVR
+#217|Simic Signet|U|RVR
+#218|Azorius Guildgate|C|RVR
+#219|Boros Guildgate|C|RVR
+#220|Dimir Guildgate|C|RVR
+#221|Golgari Guildgate|C|RVR
+#222|Gruul Guildgate|C|RVR
+#223|Izzet Guildgate|C|RVR
+#224|Orzhov Guildgate|C|RVR
+#225|Rakdos Guildgate|C|RVR
+#226|Selesnya Guildgate|C|RVR
+#227|Simic Guildgate|C|RVR
+#228|Basilica Guards|C|RVR
+#229|Blazing Archon|R|RVR
+#230|Kasmina's Transmutation|C|RVR
+#231|Kiora's Dambreaker|C|RVR
+#232|Leapfrog|C|RVR
+#233|Quench|C|RVR
+#234|Bladebrand|C|RVR
+#235|Shadow Alley Denizen|C|RVR
+#236|Greater Forgeling|C|RVR
+#237|Mortus Strider|C|RVR
+#238|Vernadi Shieldmate|C|RVR
+#239|Bottled Cloister|R|RVR
+#240|Chromatic Lantern|R|RVR
+#241|Makeshift Battalion|C|RVR
+#242|Rising Populace|C|RVR
+#243|Radical Idea|C|RVR
+#244|Debtors' Transport|C|RVR
+#245|Tin Street Dodger|C|RVR
+#246|Civic Saber|U|RVR
+#247|Karn, the Great Creator|M|RVR
+#248|Bulwark Giant|C|RVR
+#249|Vedalken Mesmerist|C|RVR
+#250|Act of Treason|C|RVR
+#251|Burn Bright|C|RVR
+#252|Guttersnipe|U|RVR
+#253|Mizzix's Mastery|R|RVR
+#254|Taste for Mayhem|C|RVR
+#255|Farseek|U|RVR
+#256|Forced Adaptation|C|RVR
+#257|Silhana Ledgewalker|C|RVR
+#258|Sprouting Renewal|C|RVR
+#259|Wurmweaver Coil|U|RVR
+#260|Deathrite Shaman|R|RVR
+#261|Lavinia, Azorius Renegade|R|RVR
+#262|Mindleech Mass|R|RVR
+#263|Voidslime|R|RVR
+#264|Wild Cantor|C|RVR
+#265|Divine Visitation|M|RVR
+#266|Mephitic Vapors|C|RVR
+#267|Scorched Rusalka|C|RVR
+#268|Forced Landing|C|RVR
+#269|Persistent Petitioners|C|RVR
+#270|Cindervines|R|RVR
+#271|Kaya, Orzhov Usurper|R|RVR
+#272|Junktroller|U|RVR
+#273|Sword of the Paruns|R|RVR
+#274|Seal of the Guildpact|R|RVR
+#275|Arboreal Grazer|C|RVR
+#276|Blind Obedience|R|RVR
+#277|Carom|C|RVR
+#278|Ghostway|R|RVR
+#279|Bruvac the Grandiloquent|M|RVR
+#280|Dark Confidant|M|RVR
+#281|Demolish|C|RVR
+#282|Siege of Towers|U|RVR
+#283|Copy Enchantment|R|RVR
+#284|Muddle the Mixture|U|RVR
+#285|Quicken|U|RVR
+#286|Infernal Tutor|R|RVR
+#287|Stitch in Time|R|RVR
+#288|Cloudstone Curio|M|RVR
+#289|Pariah's Shield|R|RVR
+#290|Silent Dart|U|RVR
+#291|Illusionist's Bracers|R|RVR

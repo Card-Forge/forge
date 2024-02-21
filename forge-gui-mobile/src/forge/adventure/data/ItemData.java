@@ -25,6 +25,7 @@ public class ItemData {
     public boolean usableInPoi;
     public String commandOnUse;
     public int shardsNeeded;
+    public DialogData dialogOnUse;
 
 
     public ItemData()
@@ -44,6 +45,7 @@ public class ItemData {
         usableOnWorldMap  = cpy.usableOnWorldMap;
         commandOnUse      = cpy.commandOnUse;
         shardsNeeded      = cpy.shardsNeeded;
+        dialogOnUse       = cpy.dialogOnUse;
     }
 
     public Sprite sprite() {

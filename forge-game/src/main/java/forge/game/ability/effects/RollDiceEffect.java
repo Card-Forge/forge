@@ -1,22 +1,22 @@
 package forge.game.ability.effects;
 
-import java.util.*;
-
-import forge.game.event.GameEventRollDie;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.util.Localizer;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class RollDiceEffect extends SpellAbilityEffect {
 
@@ -35,11 +35,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
-    }
-
-    private static int getRollAdvange(final Player player) {
-        String str = "If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.";
-        return player.getKeywords().getAmount(str);
     }
 
     /* (non-Javadoc)
@@ -68,11 +63,27 @@ public class RollDiceEffect extends SpellAbilityEffect {
         return rollDiceForPlayer(sa, player, amount, sides, 0, 0, null);
     }
     private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult) {
+        Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
+
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
+        repParams.put(AbilityKey.Number, amount);
+        repParams.put(AbilityKey.Ignore, ignore);
+        repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
+
+        switch (player.getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated: {
+                amount = (int) repParams.get(AbilityKey.Number);
+                ignore = (int) repParams.get(AbilityKey.Ignore);
+                ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
+                break;
+            }
+        }
+
         if (amount == 0) {
             return 0;
         }
-        int advantage = getRollAdvange(player);
-        amount += advantage;
         int total = 0;
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
 
@@ -85,20 +96,37 @@ public class RollDiceEffect extends SpellAbilityEffect {
             total += roll;
         }
 
-        if (amount > 0) {
-            String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(naturalRolls, ", "));
-            player.getGame().getAction().notifyOfValue(sa, player, message, null);
-        }
-
         naturalRolls.sort(null);
 
+        List<Integer> ignored = new ArrayList<>();
         // Ignore lowest rolls
-        advantage += ignore;
-        if (advantage > 0) {
-            for (int i = advantage - 1; i >= 0; --i) {
+        if (ignore > 0) {
+            for (int i = ignore - 1; i >= 0; --i) {
                 total -= naturalRolls.get(i);
+                ignored.add(naturalRolls.get(i));
                 naturalRolls.remove(i);
             }
+        }
+        // Player chooses to ignore rolls
+        for (Player chooser : ignoreChosenMap.keySet()) {
+            for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
+                Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
+                total -= ign;
+                ignored.add(ign);
+                naturalRolls.remove(ign);
+            }
+        }
+
+        //Notify of results
+        if (amount > 0) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Localizer.getInstance().getMessage("lblPlayerRolledResult", player,
+                    StringUtils.join(naturalRolls, ", ")));
+            if (!ignored.isEmpty()) {
+                sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
+                        StringUtils.join(ignored, ", ")));
+            }
+            player.getGame().getAction().notifyOfValue(sa, player, sb.toString(), null);
         }
 
         List<Integer> rolls = Lists.newArrayList();
@@ -177,6 +205,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> rolls = new ArrayList<>();
         int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
 
+        if (sa.hasParam("StoreResults")) {
+            host.addStoredRolls(rolls);
+        }
         if (sa.hasParam("ResultSVar")) {
             sa.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
         }
@@ -235,8 +266,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> results = new ArrayList<>(playersToRoll.size());
 
         for (Player player : playersToRoll) {
-            int result = rollDice(sa, player, amount, sides);
-            results.add(result);
+            if (sa.hasParam("RerollResults")) {
+                rerollDice(sa, host, player, sides);
+            } else {
+                int result = rollDice(sa, player, amount, sides);
+                results.add(result);
+            }
         }
         if (rememberHighest) {
             int highest = 0;
@@ -251,5 +286,23 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 }
             }
         }
+    }
+
+    private void rerollDice(SpellAbility sa, Card host, Player roller, int sides) {
+        List<Integer> toReroll = Lists.newArrayList();
+
+        for (Integer storedResult : host.getStoredRolls()) {
+            if (roller.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblRerollResult", storedResult), null)) {
+                toReroll.add(storedResult);
+            }
+        }
+
+        Map<Integer, Integer> replaceMap = Maps.newHashMap();
+        for (Integer old : toReroll) {
+            int newRoll = rollDice(sa, roller, 1, sides);
+            replaceMap.put(old, newRoll);
+        }
+        host.replaceStoredRoll(replaceMap);
     }
 }

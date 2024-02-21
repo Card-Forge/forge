@@ -1,0 +1,14 @@
+Name:The Dining Car
+ManaCost:no cost
+Types:Plane Spacecraft
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you planeswalk to CARDNAME, each player creates a Food token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ Player
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Command | TriggerDescription$ Sixty-Six Seconds — At the beginning of your upkeep, sacrifice a creature with the least toughness among creatures you control. Then investigate.
+SVar:TrigChoose:DB$ Sacrifice | SacValid$ Creature.leastToughnessControlledByTriggeredPlayer | SacMessage$ a creature with the least toughness among creatures you control | Defined$ TriggeredPlayer | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ Whenever chaos ensues, activated abilities of artifact tokens you control cost {2} less to activate this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STaticReduce
+SVar:STaticReduce:Mode$ ReduceCost | ValidCard$ Artifact.token+YouCtrl | Type$ Ability | Amount$ 2 | AffectedZone$ Battlefield | Description$ Activated abilities of artifact tokens you control cost {2} less to activate this turn.
+DeckHas:Ability$Token|Sacrifice & Type$Food|Clue
+DeckHints:Type$Artifact
+Oracle:When you planeswalk to The Dining Car, each player creates a Food token.\nSixty-Six Seconds — At the beginning of your upkeep, sacrifice a creature with the least toughness among creatures you control. Then investigate.\nWhenever chaos ensues, activated abilities of artifact tokens you control cost {2} less to activate this turn.

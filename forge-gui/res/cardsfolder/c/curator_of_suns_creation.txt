@@ -1,0 +1,8 @@
+Name:Curator of Sun's Creation
+ManaCost:3 R
+Types:Creature Human Artificer
+PT:3/3
+T:Mode$ Discover | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscover | ActivationLimit$ 1 | TriggerDescription$ Whenever you discover, discover again for the same value. This ability triggers only once each turn.
+SVar:TrigDiscover:DB$ Discover | Num$ X
+SVar:X:TriggerCount$Amount
+Oracle:Whenever you discover, discover again for the same value. This ability triggers only once each turn.

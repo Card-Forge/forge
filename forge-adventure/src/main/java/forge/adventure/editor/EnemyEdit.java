@@ -24,6 +24,7 @@ public class EnemyEdit extends FormPanel {
     JCheckBox ignoreDungeonEffect=new JCheckBox();
     FloatSpinner lifeFiled= new FloatSpinner(0, 1000, 1);
     FloatSpinner spawnRate= new FloatSpinner(  0.f, 1, 0.1f);
+    FloatSpinner scale= new FloatSpinner(  0.f, 8, 0.1f);
     FloatSpinner difficulty= new FloatSpinner(  0.f, 1, 0.1f);
     FloatSpinner speed= new FloatSpinner( 0.f, 100.f, 1.0f);
     FilePicker deck=new FilePicker(new String[]{"dck","json"});
@@ -55,6 +56,7 @@ public class EnemyEdit extends FormPanel {
 
         basicInfo.add("Life:",lifeFiled);
         basicInfo.add("Spawn rate:",spawnRate);
+        basicInfo.add("Scale:",scale);
         basicInfo.add("Difficulty:",difficulty);
         basicInfo.add("Speed:",speed);
         basicInfo.add("Deck:",deck);
@@ -201,6 +203,7 @@ public class EnemyEdit extends FormPanel {
         deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(EnemyEdit.this::updateEnemy));
         lifeFiled.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         speed.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        scale.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         difficulty.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         spawnRate.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         rewards.addChangeListener(e -> EnemyEdit.this.updateEnemy());
@@ -273,9 +276,10 @@ public class EnemyEdit extends FormPanel {
             currentData.equipment=null;
         else
             currentData.equipment=equipment.getText().split(",");
-        currentData.speed=  ((Double)  speed.getValue()).floatValue();
-        currentData.spawnRate=((Double)  spawnRate.getValue()).floatValue();
-        currentData.difficulty=((Double)  difficulty.getValue()).floatValue();
+        currentData.speed=  speed.floatValue();
+        currentData.scale=  scale.floatValue();
+        currentData.spawnRate=spawnRate.floatValue();
+        currentData.difficulty=difficulty.floatValue();
         currentData.deck= deck.getEdit().getText().split(",");
         currentData.rewards= rewards.getRewards();
         preview.setSpritePath(currentData.sprite);
@@ -316,9 +320,10 @@ public class EnemyEdit extends FormPanel {
         else
             equipment.setText("");
         deck.getEdit().setText(String.join(",",currentData.deck));
-        speed.setValue(new Float(currentData.speed).doubleValue());
-        spawnRate.setValue(new Float(currentData.spawnRate).doubleValue());
-        difficulty.setValue(new Float(currentData.difficulty).doubleValue());
+        speed.setValue(currentData.speed);
+        scale.setValue(currentData.scale);
+        spawnRate.setValue(currentData.spawnRate);
+        difficulty.setValue(currentData.difficulty);
         rewards.setRewards(currentData.rewards);
         preview.setSpritePath(currentData.sprite);
         enemyModel.clear();

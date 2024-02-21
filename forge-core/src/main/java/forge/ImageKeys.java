@@ -23,7 +23,9 @@ public final class ImageKeys {
 
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
+    public static final String DISGUISED_IMAGE       = "disguised";
     public static final String MANIFEST_IMAGE        = "manifest";
+    public static final String CLOAKED_IMAGE         = "cloaked";
     public static final String FORETELL_IMAGE        = "foretell";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
@@ -406,7 +408,7 @@ public final class ImageKeys {
             CardEdition ed = StaticData.instance().getEditions().get(setFolder);
             if (ed != null && !editionAlias.containsKey(setFolder)) {
                 String alias = ed.getAlias();
-                Set aliasSet = new HashSet<>();
+                Set<String> aliasSet = new HashSet<>();
                 if (alias != null) {
                     if (!alias.equalsIgnoreCase(setFolder))
                         aliasSet.add(alias);

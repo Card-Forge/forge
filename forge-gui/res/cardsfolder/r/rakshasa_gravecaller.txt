@@ -1,6 +1,6 @@
 Name:Rakshasa Gravecaller
 ManaCost:4 B
-Types:Creature Cat Demon
+Types:Creature Demon
 PT:3/6
 K:Exploit
 T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME exploits a creature, create two 2/2 black Zombie creature tokens.

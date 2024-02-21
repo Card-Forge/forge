@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="43">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../tileset/dungeon-nocollide.tsx"/>
+ <tileset firstgid="20865" source="../../tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzjVWdg4B1CGAbQxQbaXaN4FI/iUTyKR/EoHsUwDADG93lF
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowATNPIzMDTz099eeQEGBkUB+toJ8qsK0E5lAfr6GeRXBSim1M/RNgNjLymA1vaK+FLX3hBrPHI+hPWTau91oH038NhJLKBlOE/B4296patQtHimhb1XaBC/lIIwX4aGgbAXBgbK3u0SqHgoAQAY1RaZ
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMBmB2ByIL9EYm2Gx1xSICYFdngwMuz2xy+3FIY4MjMm0FwT2EGE+LezFB/CFBy3tJQTobe9Fa/z2RtsQh2NtEGZGAtkLbDDtuuaDKUapf+OQ7InHYicuQAt7rwLDUhQanhetGBhCoOwr1gwNlNgrbo3b3mvWqOoEofzLUDrcl4Ehwpc0e8P9iPMvOrhijSlGy/gFpqcEXPpoZS+6HydZo4qRY68EUvrA518JLOFLib3IgJr5aCYvA8M0IjG6vcTqm8FLWV2NDga67UAKBgBvP4Rt
+  </data>
+ </layer>
+ <layer id="4" name="Overlay" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALaAHEf6qojFoQTaR6x6kYBdkDteCMWEBtvEaPxOwoGEAAAArYDtw==
+  </data>
+ </layer>
+ <objectgroup id="5" name="Objects">
+  <object id="26" template="../../obj/scroll.tx" x="272" y="80">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Convert&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Coretapper&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Custodian&quot;, &quot;count&quot;: 1 }, { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Myr Adapter&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="27" template="../../obj/enemy.tx" x="232" y="172">
+   <properties>
+    <property name="defeatDialog">[{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+}]</property>
+    <property name="enemy" value="Myr Superion"/>
+    <property name="pursueRange" type="int" value="200"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="28" template="../../obj/enemy.tx" x="232" y="162">
+   <properties>
+    <property name="defeatDialog">[{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+}]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Alpha Myr&quot;, &quot;Omega Myr&quot;]}"/>
+    <property name="enemy" value="Myr Superion"/>
+    <property name="pursueRange" type="int" value="200"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="29" template="../../obj/enemy.tx" x="232" y="152">
+   <properties>
+    <property name="defeatDialog">[{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;, &quot;not&quot;: true}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers, but you still haven't found the documents Sir Donovan wanted. They must be somewhere downstairs.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+},{
+   &quot;condition&quot;: [{&quot;getQuestFlag&quot;: {&quot;key&quot;: &quot;exploreShand1&quot;, &quot;op&quot;:&quot;=&quot;, &quot;val&quot;: 4}}, {&quot;checkQuestFlag&quot;: &quot;foundLibraryOfVarsilResearch&quot;}],
+   &quot;text&quot;: &quot;With this monstrous machine out of action, defeating its (relatively) smaller companions could be left to lesser adventurers. You've already found the documents Sir Donovan wanted and can report back to him now or go back down and explore further first.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, 
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;defeatedLibraryOfVarsilBoss&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}]
+   }]
+}]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Myr Turbine&quot;, &quot;Alpha Myr&quot;, &quot;Omega Myr&quot;]}"/>
+    <property name="enemy" value="Myr Superion"/>
+    <property name="pursueRange" type="int" value="200"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="33" template="../../obj/dialog.tx" x="144" y="112" width="192" height="80">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;If there is any information to be gathered from the shredded pages piled across this floor, it will be up to the scholars who might have some memory of what they had been. But as you approach, the portal here opens providing a quick route back to the entrance.&quot;,
+      &quot;options&quot;: [{
+      &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;completedLibraryOfVarsil&quot;, &quot;val&quot;: 1}, &quot;activateMapObject&quot;: 34, &quot;deleteMapObject&quot;:-1}],
+      &quot;name&quot;: &quot;(Continue)&quot;
+      }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="34" template="../../obj/portal.tx" x="232" y="88">
+   <properties>
+    <property name="activeQuestFlag" value="defeatedLibraryOfVarsilBoss"/>
+    <property name="portalState" value="inactive"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_0.tmx"/>
+    <property name="teleportObjectId" value="14"/>
+   </properties>
+  </object>
+  <object id="35" template="../../obj/dialog.tx" x="176" y="272" width="128" height="64">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;In front of you stands one of the largest constructs you've ever seen. In contrast to the golems below, its shape seems to be less modeled after other humanoids and more a unique form of its own.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;,
+      &quot;text&quot;: &quot;Behind the machine you see the remnants of many books pulled from the shelves below, now torn asunder.&quot;,
+      &quot;options&quot;: [{
+         &quot;name&quot;: &quot;(Continue)&quot;,
+         &quot;text&quot;: &quot;(Note: This encounter is difficult and optional)&quot;,
+         &quot;options&quot;: [{
+            &quot;name&quot;: &quot;(Continue)&quot;,
+            &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+      }]
+   }]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="36" template="../../obj/collision.tx" x="-32" y="0" width="32" height="320"/>
+  <object id="37" template="../../obj/collision.tx" x="272" y="176" width="176" height="112"/>
+  <object id="38" template="../../obj/collision.tx" x="480" y="0" width="32" height="320"/>
+  <object id="39" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="40" template="../../obj/entry_up.tx" x="208" y="304" width="64" height="16">
+   <properties>
+    <property name="teleport" value="../common/maps/map/main_story_explore/library_of_varsil_3.tmx"/>
+    <property name="teleportObjectId" value="24"/>
+   </properties>
+  </object>
+  <object id="41" template="../../obj/collision.tx" x="92" y="309" width="544" height="32"/>
+  <object id="42" template="../../obj/collision.tx" x="32" y="144" width="176" height="144"/>
+ </objectgroup>
+ <objectgroup id="6" name="Waypoints">
+  <object id="5" template="../../obj/waypoint.tx" name="WP1" x="232" y="144"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,10 @@
+Name:Bite Down on Crime
+ManaCost:3 G
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Z | EffectZone$ All | Relative$ True | Description$ This spell costs {2} less to cast if evidence was collected. (To collect evidence 6, exile cards with total mana value 6 or greater from your graveyard.)
+SVar:Z:Count$OptionalGenericCostPaid.2.0
+A:SP$ Pump | AILogic$ Fight | NumAtt$ +2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +2/+0 until end of turn. It deals damage equal to its power to target creature you don't control.
+SVar:DBFight:DB$ DealDamage | AILogic$ PowerDmg | NumDmg$ ParentTargeted$CardPower | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | DamageSource$ ParentTarget
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+Oracle:As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected. (To collect evidence 6, exile cards with total mana value 6 or greater from your graveyard.)\nTarget creature you control gets +2/+0 until end of turn. It deals damage equal to its power to target creature you don't control.

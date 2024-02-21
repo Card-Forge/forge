@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Angel Illusion
 PT:4/4
 K:Flying
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Flying
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast this spell only if you've cast another spell this turn.
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 Oracle:Cast this spell only if you've cast another spell this turn.\nFlying

@@ -1,0 +1,12 @@
+Name:The Fifteenth Doctor
+ManaCost:2 U R
+Types:Legendary Creature Time Lord Doctor
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards. You may put an artifact card with mana value 2 or 3 from among them into your hand.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards. You may put an artifact card with mana value 2 or 3 from among them into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Optional$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Artifact.IsRemembered+cmcEQ2,Artifact.IsRemembered+cmcEQ3 | SubAbility$ DBCleanup | SelectPrompt$ You may put an artifact card with mana value 2 or 3 from among the milled cards into your hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.nonArtifact+YouCtrl | EffectZone$ Battlefield | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Improvise | Description$ The first nonartifact spell you cast each turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)
+SVar:X:Count$ThisTurnCast_Card.nonArtifact+YouCtrl
+Oracle:Whenever The Fifteenth Doctor enters the battlefield or attacks, mill three cards. You may put an artifact card with mana value 2 or 3 from among them into your hand.\nThe first nonartifact spell you cast each turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)

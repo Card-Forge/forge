@@ -33,7 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
 
         // turning face is most likely okay
         // TODO only do this at beneficial moment (e.g. surprise during combat or morph trigger), might want to reserve mana to protect them from easy removal
-        if ("TurnFace".equals(mode)) {
+        if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
             return true;
         }
 
@@ -103,7 +103,7 @@ public class SetStateAi extends SpellAbilityAi {
 
                 return sa.isMinTargetChosen();
             }
-        } else if ("TurnFace".equals(mode)) {
+        } else if ("TurnFaceUp".equals(mode) || "TurnFaceDown".equals(mode)) {
             if (sa.usesTargeting()) {
                 sa.resetTargets();
 
@@ -114,7 +114,7 @@ public class SetStateAi extends SpellAbilityAi {
                 }
 
                 for (final Card c : list) {
-                    if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
+                    if (shouldTurnFace(c, ai, ph, mode) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
                         if (!sa.canAddMoreTarget()) {
                             break;
@@ -128,7 +128,7 @@ public class SetStateAi extends SpellAbilityAi {
                 if (list.isEmpty()) {
                     return false;
                 }
-                return shouldTurnFace(list.get(0), ai, ph) || "Always".equals(logic);
+                return shouldTurnFace(list.get(0), ai, ph, mode) || "Always".equals(logic);
             }
         }
         return true;
@@ -150,8 +150,11 @@ public class SetStateAi extends SpellAbilityAi {
         return compareCards(card, transformed, ai, ph);
     }
 
-    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph) {
+    private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph, String mode) {
         if (card.isFaceDown()) {
+            if ("TurnFaceDown".equals(mode)) {
+                return false;
+            }
             // hidden agenda
             if (card.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")
                     && card.isInZone(ZoneType.Command)) {
@@ -169,6 +172,9 @@ public class SetStateAi extends SpellAbilityAi {
                 return false;
             }            
         } else {
+            if ("TurnFaceUp".equals(mode)) {
+                return false;
+            }
             // doublefaced or meld cards can't be turned face down
             if (card.isTransformable() || card.isMeldable()) {
                 return false;

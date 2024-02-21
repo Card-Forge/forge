@@ -1,0 +1,12 @@
+Name:Bat Colony
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black Bat creature token with flying for each mana from a Cave spent to cast it.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+SVar:X:Count$CastTotalManaSpent Cave
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Cave.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Cave enters the battlefield under your control, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Cave
+DeckHas:Ability$Token|Counters & Type$Bat
+DeckHints:Type$Cave
+Oracle:When Bat Colony enters the battlefield, create a 1/1 black Bat creature token with flying for each mana from a Cave spent to cast it.\nWhenever a Cave enters the battlefield under your control, put a +1/+1 counter on target creature you control.

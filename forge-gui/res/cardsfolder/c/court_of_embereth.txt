@@ -1,0 +1,12 @@
+Name:Court of Embereth
+ManaCost:2 R R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 3/1 red Knight creature token. Then if you're the monarch, CARDNAME deals X damage to each opponent, where X is the number of creatures you control.
+SVar:TrigToken:DB$ Token | TokenScript$ r_3_1_knight | SubAbility$ TrigDealDamage
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:Y:Count$Monarch.1.0
+DeckHas:Ability$Token & Type$Knight
+Oracle:When Court of Embereth enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, create a 3/1 red Knight creature token. Then if you're the monarch, Court of Embereth deals X damage to each opponent, where X is the number of creatures you control.

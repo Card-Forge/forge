@@ -2,9 +2,8 @@ Name:Detritivore
 ManaCost:2 R R
 Types:Creature Lhurgoyf
 PT:*/*
-Text:X can't be 0.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic land cards in your opponents' graveyards.
-K:Suspend:X:XCantBe0 X 3 R
+K:Suspend:X:XMin1 X 3 R
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigDestroy | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, destroy target nonbasic land.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select a nonbasic land.
 SVar:X:Count$xPaid

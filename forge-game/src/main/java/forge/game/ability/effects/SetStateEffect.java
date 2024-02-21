@@ -91,13 +91,13 @@ public class SetStateEffect extends SpellAbilityEffect {
             // Cards which are not on the battlefield should not be able to transform.
             // TurnFace should be allowed in other zones like Exile too
             // Specialize and Unspecialize are allowed in other zones
-            if (!"TurnFace".equals(mode) && !"Unspecialize".equals(mode) && !"Specialize".equals(mode)
+            if (!"TurnFaceUp".equals(mode) && !"TurnFaceDown".equals(mode) && !"Unspecialize".equals(mode) && !"Specialize".equals(mode)
                     && !gameCard.isInPlay() && !sa.hasParam("ETB")) {
                 continue;
             }
 
             // facedown cards that are not Permanent, can't turn faceup there
-            if ("TurnFace".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
+            if ("TurnFaceUp".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
                 if (gameCard.hasMergedCard()) {
                     boolean hasNonPermanent = false;
                     Card nonPermanentCard = null;
@@ -124,7 +124,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Merged faceup permanent that have double faced cards can't turn face down
-            if ("TurnFace".equals(mode) && !gameCard.isFaceDown() && gameCard.isInPlay()
+            if ("TurnFaceDown".equals(mode) && !gameCard.isFaceDown() && gameCard.isInPlay()
                     && gameCard.hasMergedCard()) {
                 boolean hasBackSide = false;
                 for (final Card c : gameCard.getMergedCards()) {
@@ -161,16 +161,14 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             boolean hasTransformed = false;
-            if (sa.isMorphUp()) {
+            if (sa.isTurnFaceUp()) {
                 hasTransformed = gameCard.turnFaceUp(sa);
-            } else if (sa.isManifestUp()) {
-                hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else if ("Specialize".equals(mode)) {
                 hasTransformed = gameCard.changeCardState(mode, host.getChosenColor(), sa);
                 host.setChosenColors(null);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
-                if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                if (hasTransformed && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
                         || sa.hasParam("FaceDownSetType"))) {
                     CardFactoryUtil.setFaceDownState(gameCard, sa);
                 }
@@ -182,10 +180,15 @@ public class SetStateEffect extends SpellAbilityEffect {
                 } else if (sa.isManifestUp()) {
                     String sb = p + " has unmanifested " + gameCard.getName();
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (sa.isDisguiseUp()) {
+                    String sb = p + " has undisguised " + gameCard.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                } else if (sa.isCloakUp()) {
+                    String sb = p + " has uncloaked " + gameCard.getName();
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                 } else if (hiddenAgenda) {
                     if (gameCard.hasKeyword("Double agenda")) {
-                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names " +
-                                gameCard.getNamedCard() + " and " + gameCard.getNamedCard2();
+                        String sb = p + " has revealed " + gameCard.getName() + " with the chosen names: " + gameCard.getNamedCards();
                         game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     } else {
                         String sb = p + " has revealed " + gameCard.getName() + " with the chosen name " + gameCard.getNamedCard();

@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -7,9 +8,12 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
+
+import java.util.Map;
 
 public class TapEffect extends SpellAbilityEffect {
 
@@ -18,6 +22,7 @@ public class TapEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getHostCard();
         final boolean remTapped = sa.hasParam("RememberTapped");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
@@ -28,7 +33,6 @@ public class TapEffect extends SpellAbilityEffect {
         Iterable<Card> toTap;
 
         if (sa.hasParam("CardChoices")) { // choosing outside Defined/Targeted
-            final Player activator = sa.getActivatingPlayer();
             CardCollection choices = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"), activator, card, sa);
             int n = sa.hasParam("ChoiceAmount") ?
                     AbilityUtils.calculateAmount(card, sa.getParam("ChoiceAmount"), sa) : 1;
@@ -40,6 +44,12 @@ public class TapEffect extends SpellAbilityEffect {
             toTap = getTargetCards(sa);
         }
 
+        Player tapper = activator;
+        if (sa.hasParam("Tapper")) {
+            tapper = AbilityUtils.getDefinedPlayers(card, sa.getParam("Tapper"), sa).getFirst();
+        }
+
+        CardCollection tapped = new CardCollection();
         for (final Card tgtC : toTap) {
             if (tgtC.isPhasedOut()) {
                 continue;
@@ -48,12 +58,17 @@ public class TapEffect extends SpellAbilityEffect {
                 if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);
                 }
-                tgtC.tap(true);
+                if (tgtC.tap(true, sa, tapper)) tapped.add(tgtC);
             }
             if (sa.hasParam("ETB")) {
                 // do not fire Taps triggers
                 tgtC.setTapped(true);
             }
+        }
+        if (!tapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            activator.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 

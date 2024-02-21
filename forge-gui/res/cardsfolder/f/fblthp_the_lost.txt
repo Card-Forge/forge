@@ -2,7 +2,7 @@ Name:Fblthp, the Lost
 ManaCost:1 U
 Types:Legendary Creature Homunculus
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card. If it enters from your library or was cast from your library, draw two cards instead.
 SVar:DBDraw:DB$ Draw | NumCards$ DrawNum
 SVar:DrawNum:SVar$LibNum1/LimitMax.2
 SVar:LibNum1:Count$wasCastFromYourLibrary.2.1/Plus.LibNum2

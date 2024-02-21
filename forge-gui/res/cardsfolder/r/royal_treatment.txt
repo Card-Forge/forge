@@ -1,0 +1,7 @@
+Name:Royal Treatment
+ManaCost:G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBToken | SpellDescription$ Target creature you control gains hexproof until end of turn. Create a Royal Role token attached to that creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_royal | TokenOwner$ You | AttachedTo$ Targeted
+DeckHas:Ability$Token & Type$Role|Aura
+Oracle:Target creature you control gains hexproof until end of turn. Create a Royal Role token attached to that creature. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has ward {1}.)

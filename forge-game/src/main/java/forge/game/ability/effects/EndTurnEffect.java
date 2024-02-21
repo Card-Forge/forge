@@ -2,11 +2,9 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
@@ -19,7 +17,11 @@ public class EndTurnEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final List<Player> enders = getDefinedPlayersOrTargeted(sa, "Defined");
-        final Player ender = enders.isEmpty() ? sa.getActivatingPlayer() : enders.get(0);
+        Player ender = enders.isEmpty() ? sa.getActivatingPlayer() : enders.get(0);
+        if (!ender.isInGame()) {
+            ender = getNewChooser(sa, sa.getActivatingPlayer(), ender);
+        }
+
         if (sa.hasParam("Optional") && !ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"), null)) {
             return;
         }
@@ -28,9 +30,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
-        for (final Card c : Lists.newArrayList(game.getStackZone().getCards())) {
-            game.getAction().exile(c, sa);
-        }
+        game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, null);
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
         game.getTriggerHandler().clearWaitingTriggers();

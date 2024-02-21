@@ -4,8 +4,7 @@ Types:Creature Eldrazi
 PT:7/11
 K:Annihilator:1
 A:AB$ Token | Cost$ 4 | TokenAmount$ 2 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
-A:AB$ Play | Cost$ 20 | Valid$ Card.Eldrazi+YouOwn | ValidZone$ Sideboard | WithoutManaCost$ True | Amount$ SpawnsireX | Controller$ You | Optional$ True | SpellDescription$ Cast any number of Eldrazi spells from among cards you own outside the game without paying their mana costs.
-SVar:SpawnsireX:Count$TypeInYourSideboard.Eldrazi
+A:AB$ Play | Cost$ 20 | Valid$ Card.Eldrazi+YouOwn | ValidZone$ Sideboard | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True | SpellDescription$ Cast any number of Eldrazi spells from among cards you own outside the game without paying their mana costs.
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)\n{4}: Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."\n{20}: Cast any number of Eldrazi spells from among cards you own outside the game without paying their mana costs.

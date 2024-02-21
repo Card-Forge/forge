@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIncubate | TriggerDescription$ When CARDNAME enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)
 SVar:TrigIncubate:DB$ Incubate | Amount$ 2
 A:AB$ SetState | Cost$ 5 | TgtPrompt$ Select target Incubator token you control | ValidTgts$ Incubator.token+YouCtrl | Mode$ Transform | SubAbility$ DBDouble | SpellDescription$ Transform target Incubator token you control.
-SVar:DBDouble:DB$ MultiplyCounter | Defined$ Targeted | CounterType$ P1P1 | SpellDescription$ SpellDescription | SpellDescription$ Double the number of +1/+1 counters on it.
+SVar:DBDouble:DB$ MultiplyCounter | Defined$ Targeted | CounterType$ P1P1 | SpellDescription$ Double the number of +1/+1 counters on it.
 DeckHas:Ability$Counters|Token & Type$Incubator|Artifact
 DeckHints:Type$Incubator
 Oracle:When Elvish Vatkeeper enters the battlefield, incubate 2. (Create an Incubator token with two +1/+1 counters on it and "{2}: Transform this artifact." It transforms into a 0/0 Phyrexian artifact creature.)\n{5}: Transform target Incubator token you control. Double the number of +1/+1 counters on it.

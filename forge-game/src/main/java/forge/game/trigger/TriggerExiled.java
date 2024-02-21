@@ -77,6 +77,10 @@ public class TriggerExiled extends Trigger {
             return false;
         }
 
+        if (hasParam("WhileKeyword") && !whileKeywordCheck(getParam("WhileKeyword"), runParams)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -88,9 +92,7 @@ public class TriggerExiled extends Trigger {
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblExiled")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblExiled") + ": " + sa.getTriggeringObject(AbilityKey.Card);
     }
 
 }

@@ -2,7 +2,7 @@ Name:Harbinger of Spring
 ManaCost:4 G
 Types:Creature Spirit
 PT:2/1
-K:Protection:Creature.nonSpirit:Protection from non-Spirit creatures
+K:Protection:Creature.nonSpirit:non-Spirit creatures
 K:Soulshift:4
 DeckHints:Type$Spirit
 Oracle:Protection from non-Spirit creatures\nSoulshift 4 (When this creature dies, you may return target Spirit card with mana value 4 or less from your graveyard to your hand.)

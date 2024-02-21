@@ -4,6 +4,6 @@ Types:Legendary Creature Avatar Rogue
 PT:2/4
 S:Mode$ CantBeActivated | AffectedZone$ Battlefield | ValidCard$ Land.OppCtrl | ValidSA$ Activated.nonManaAbility | Description$ Activated abilities of lands your opponents control can't be activated unless they're mana abilities.
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Land.OppCtrl | GainsValidAbilities$ Activated.nonManaAbility | Description$ CARDNAME has all activated abilities of lands your opponents control except mana abilities.
-K:ManaConvert:AnyType->AnyType:Mana of any type can be spent to activate NICKNAME's abilities.
+S:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Activated | ManaConversion$ AnyType->AnyType | Description$ Mana of any type can be spent to activate NICKNAME's abilities.
 SVar:PlayMain1:TRUE
 Oracle:Activated abilities of lands your opponents control can't be activated unless they're mana abilities.\nSharkey, Tyrant of the Shire has all activated abilities of lands your opponents control except mana abilities.\nMana of any type can be spent to activate Sharkey's abilities.

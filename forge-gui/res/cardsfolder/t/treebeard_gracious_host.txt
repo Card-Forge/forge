@@ -2,7 +2,7 @@ Name:Treebeard, Gracious Host
 ManaCost:2 G W
 Types:Legendary Creature Treefolk
 PT:0/5
-K:Trample 
+K:Trample
 K:Ward:2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two Food tokens.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 2

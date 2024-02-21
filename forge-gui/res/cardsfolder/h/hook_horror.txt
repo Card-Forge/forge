@@ -3,8 +3,7 @@ ManaCost:4 B
 Types:Creature Horror
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Molting Exoskeleton — Whenever CARDNAME dies, it perpetually gets -1/-1. Then if that card's toughness is 1 or greater, return it to the battlefield under its owner's control.
-SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualDebuff | RememberObjects$ Self | Name$ Hook Horror's Perpetual Effect | Duration$ Permanent | SubAbility$ DBReturn
-SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -1 | AddToughness$ -1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -1/-1.
+SVar:TrigEffect:DB$ Pump | Defined$ TriggeredNewCardLKICopy | PumpZone$ Graveyard | NumAtt$ -1 | NumDef$ -1 | Duration$ Perpetual | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | ConditionDefined$ TriggeredNewCardLKICopy | ConditionPresent$ Creature.toughnessGE1 | Origin$ Graveyard | Destination$ Battlefield
 DeckHas:Ability$Sacrifice
 Oracle:Molting Exoskeleton — Whenever Hook Horror dies, it perpetually gets -1/-1. Then if that card's toughness is 1 or greater, return it to the battlefield under its owner's control.

@@ -20,17 +20,11 @@ public class PermanentNoncreatureAi extends PermanentAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-        if ("Never".equals(aiLogic) || "DontCast".equals(aiLogic)) {
-            return false;
-        }
-
-        Game game = ai.getGame();
-
         if ("PithingNeedle".equals(aiLogic)) {
             // Make sure theres something in play worth Needlings.
             // Planeswalker or equipment or something
 
-            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonmanaAbilities", ai, sa.getHostCard(), sa);
+            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
             if (oppPerms.isEmpty()) {
                 return false;
             }
@@ -44,7 +38,7 @@ public class PermanentNoncreatureAi extends PermanentAi {
             return MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size();
         }
 
-        return true;
+        return super.checkAiLogic(ai, sa, aiLogic);
     }
 
     /**

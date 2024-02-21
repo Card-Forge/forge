@@ -1,0 +1,7 @@
+Name:Ixalli's Lorekeeper
+ManaCost:G
+Types:Creature Human Druid
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Dinosaur,Activated.Dinosaur | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Dinosaur spell or activate an ability of a Dinosaur source.
+DeckNeeds:Type$Dinosaur
+Oracle:{T}: Add one mana of any color. Spend this mana only to cast a Dinosaur spell or activate an ability of a Dinosaur source.

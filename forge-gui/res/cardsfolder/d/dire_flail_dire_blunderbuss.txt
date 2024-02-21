@@ -1,0 +1,22 @@
+Name:Dire Flail
+ManaCost:R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+K:Equip:1
+K:Craft:3 R R ExileCtrlOrGrave<1/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice & Type$Artifact
+DeckHas:Ability$Graveyard|Token|Sacrifice
+Oracle:Equipped creature gets +2/+0.\nEquip {1}\nCraft with artifact {3}{R}{R} ({3}{R}{R}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Dire Blunderbuss
+Colors:red
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddTrigger$ AttacksTrig | Description$ Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than CARDNAME. When you do, this creature deals damage equal to its power to target creature."
+SVar:AttacksTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever this creature attacks, you may sacrifice an artifact other than ORIGINALHOST. When you do, this creature deals damage equal to its power to target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact.NotDefinedOriginalHost/another artifact> | Execute$ TrigDamage | CopyTriggeringObjects$ True | TriggerDescription$ When you do, this creature deals damage equal to its power to target creature.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Count$CardPower
+K:Equip:1
+Oracle:Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than Dire Blunderbuss. When you do, this creature deals damage equal to its power to target creature."\nEquip {1}

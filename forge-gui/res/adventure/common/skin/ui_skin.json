@@ -474,7 +474,7 @@
 	"gold": {
 		"background": "9patch4"
 	},
-	"transluscent": {
+	"translucent": {
 		"background": "transwindow10Patch"
 	},
 	"nobg": {
@@ -583,7 +583,7 @@
 		"background": "paper10Patch",
 		"titleFont": "default"
 	},
-	"transluscent": {
+	"translucent": {
 		"parent": "default",
 		"background": "transwindow10Patch",
 		"titleFont": "default"

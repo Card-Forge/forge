@@ -1,0 +1,10 @@
+Name:Melek, Reforged Researcher
+ManaCost:3 U R
+Types:Legendary Creature Weird Detective
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to twice the number of instant and sorcery cards in your graveyard.
+S:Mode$ ReduceCost | OnlyFirstSpell$ True | Type$ Spell | ValidSpell$ Spell.Instant,Spell.Sorcery | Activator$ You | Amount$ 3 | Description$ The first instant or sorcery spell you cast each turn costs {3} less to cast.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/Times.2
+DeckHints:Ability$Mill
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Melek, Reforged Researcher's power and toughness are each equal to twice the number of instant and sorcery cards in your graveyard.\nThe first instant or sorcery spell you cast each turn costs {3} less to cast.

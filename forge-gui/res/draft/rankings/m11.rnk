@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Baneslayer Angel|M|M11
+#2|Grave Titan|M|M11
+#3|Frost Titan|M|M11
+#4|Sun Titan|M|M11
+#5|Inferno Titan|M|M11
+#6|Platinum Angel|M|M11
+#7|Primeval Titan|M|M11
+#8|Chandra Nalaar|M|M11
+#9|Liliana Vess|M|M11
+#10|Garruk Wildspeaker|M|M11
+#11|Ajani Goldmane|M|M11
+#12|Jace Beleren|M|M11
+#13|Sword of Vengeance|R|M11
+#14|Gaea's Revenge|M|M11
+#15|Day of Judgment|R|M11
+#16|Triskelion|R|M11
+#17|Royal Assassin|R|M11
+#18|Conundrum Sphinx|R|M11
+#19|Fireball|U|M11
+#20|Mind Control|U|M11
+#21|Brittle Effigy|R|M11
+#22|Overwhelming Stampede|R|M11
+#23|Mitotic Slime|R|M11
+#24|Serra Angel|U|M11
+#25|Ancient Hellkite|R|M11
+#26|Vengeful Archon|R|M11
+#27|Magma Phoenix|R|M11
+#28|Angelic Arbiter|R|M11
+#29|Obstinate Baloth|R|M11
+#30|Air Servant|U|M11
+#31|Hoarding Dragon|R|M11
+#32|Fauna Shaman|R|M11
+#33|Protean Hydra|R|M11
+#34|Cudgel Troll|U|M11
+#35|Cyclops Gladiator|R|M11
+#36|Nantuko Shade|R|M11
+#37|Doom Blade|C|M11
+#38|Clone|R|M11
+#39|Stormtide Leviathan|R|M11
+#40|Garruk's Packleader|U|M11
+#41|Jace's Ingenuity|U|M11
+#42|Crystal Ball|U|M11
+#43|Water Servant|U|M11
+#44|Prodigal Pyromancer|U|M11
+#45|Howling Banshee|U|M11
+#46|Lightning Bolt|C|M11
+#47|Sleep|U|M11
+#48|Condemn|U|M11
+#49|Mystifying Maze|R|M11
+#50|Pyroclasm|U|M11
+#51|Juggernaut|U|M11
+#52|Steel Overseer|R|M11
+#53|Pacifism|C|M11
+#54|Blinding Mage|C|M11
+#55|Corrupt|U|M11
+#56|Demon of Death's Gate|M|M11
+#57|Acidic Slime|U|M11
+#58|Armored Ascension|U|M11
+#59|Rise from the Grave|U|M11
+#60|Reassembling Skeleton|U|M11
+#61|Honor of the Pure|R|M11
+#62|Chandra's Outrage|C|M11
+#63|Whispersilk Cloak|U|M11
+#64|Ember Hauler|U|M11
+#65|Birds of Paradise|R|M11
+#66|Fire Servant|U|M11
+#67|Aether Adept|C|M11
+#68|Knight Exemplar|R|M11
+#69|Foresee|C|M11
+#70|White Knight|U|M11
+#71|Azure Drake|C|M11
+#72|Black Knight|U|M11
+#73|Awakener Druid|U|M11
+#74|Gargoyle Sentinel|U|M11
+#75|Shiv's Embrace|U|M11
+#76|Assassinate|C|M11
+#77|Liliana's Specter|C|M11
+#78|Stormfront Pegasus|C|M11
+#79|Destructive Force|R|M11
+#80|Gravedigger|C|M11
+#81|Quag Sickness|C|M11
+#82|Wall of Frost|U|M11
+#83|Cloud Elemental|C|M11
+#84|Assault Griffin|C|M11
+#85|Duskdale Wurm|U|M11
+#86|Cultivate|C|M11
+#87|Elvish Archdruid|R|M11
+#88|Cloud Crusader|C|M11
+#89|Wild Griffin|C|M11
+#90|Captivating Vampire|R|M11
+#91|Roc Egg|U|M11
+#92|Squadron Hawk|C|M11
+#93|War Priest of Thune|U|M11
+#94|Elite Vanguard|U|M11
+#95|Scroll Thief|C|M11
+#96|Chandra's Spitfire|U|M11
+#97|Mana Leak|C|M11
+#98|Stone Golem|U|M11
+#99|Ajani's Pridemate|U|M11
+#100|Sylvan Ranger|C|M11
+#101|Warlord's Axe|U|M11
+#102|Augury Owl|C|M11
+#103|Terramorphic Expanse|C|M11
+#104|Giant Spider|C|M11
+#105|Merfolk Sovereign|R|M11
+#106|Serra Ascendant|R|M11
+#107|Child of Night|C|M11
+#108|Garruk's Companion|C|M11
+#109|Spined Wurm|C|M11
+#110|Llanowar Elves|C|M11
+#111|Preordain|C|M11
+#112|Act of Treason|C|M11
+#113|Ice Cage|C|M11
+#114|Deathmark|U|M11
+#115|Yavimaya Wurm|C|M11
+#116|Sign in Blood|C|M11
+#117|Diabolic Tutor|U|M11
+#118|Glacial Fortress|R|M11
+#119|Excommunicate|C|M11
+#120|Greater Basilisk|C|M11
+#121|Drowned Catacomb|R|M11
+#122|Sacred Wolf|C|M11
+#123|Barony Vampire|C|M11
+#124|Dragonskull Summit|R|M11
+#125|Vulshok Berserker|C|M11
+#126|Redirect|R|M11
+#127|Celestial Purge|U|M11
+#128|Goblin Chieftain|R|M11
+#129|Infantry Veteran|C|M11
+#130|Earth Servant|U|M11
+#131|Nightwing Shade|C|M11
+#132|Combust|U|M11
+#133|Fling|C|M11
+#134|Giant Growth|C|M11
+#135|Unsummon|C|M11
+#136|Diminish|C|M11
+#137|Prized Unicorn|U|M11
+#138|Necrotic Plague|R|M11
+#139|Cancel|C|M11
+#140|Reverberate|R|M11
+#141|Mind Rot|C|M11
+#142|Plummet|C|M11
+#143|Rootbound Crag|R|M11
+#144|Sunpetal Grove|R|M11
+#145|Call to Mind|U|M11
+#146|Sorcerer's Strongbox|U|M11
+#147|Bloodthrone Vampire|C|M11
+#148|Mighty Leap|C|M11
+#149|Silvercoat Lion|C|M11
+#150|Nether Horror|C|M11
+#151|Fiery Hellhound|C|M11
+#152|Harbor Serpent|C|M11
+#153|Manic Vandal|C|M11
+#154|Canyon Minotaur|C|M11
+#155|Stabbing Pain|C|M11
+#156|Phylactery Lich|R|M11
+#157|Elixir of Immortality|U|M11
+#158|Berserkers of Blood Ridge|C|M11
+#159|Lava Axe|C|M11
+#160|Rotting Legion|C|M11
+#161|Safe Passage|C|M11
+#162|Negate|C|M11
+#163|Inspired Charge|C|M11
+#164|Siege Mastodon|C|M11
+#165|Phantom Beast|C|M11
+#166|Flashfreeze|U|M11
+#167|Traumatize|R|M11
+#168|Viscera Seer|C|M11
+#169|Palace Guard|C|M11
+#170|Brindle Boar|C|M11
+#171|Bog Raiders|C|M11
+#172|Runeclaw Bear|C|M11
+#173|Leyline of Vitality|R|M11
+#174|Maritime Guard|C|M11
+#175|Goblin Piker|C|M11
+#176|Thunder Strike|C|M11
+#177|Volcanic Strength|C|M11
+#178|Solemn Offering|C|M11
+#179|Duress|C|M11
+#180|Arc Runner|C|M11
+#181|Alluring Siren|U|M11
+#182|Armored Cancrix|C|M11
+#183|Naturalize|C|M11
+#184|Goblin Tunneler|C|M11
+#185|Disentomb|C|M11
+#186|Hornet Sting|C|M11
+#187|Nature's Spiral|U|M11
+#188|Temple Bell|R|M11
+#189|Time Reversal|M|M11
+#190|Tireless Missionaries|C|M11
+#191|Unholy Strength|C|M11
+#192|Wall of Vines|C|M11
+#193|Fog|C|M11
+#194|Goblin Balloon Brigade|C|M11
+#195|Dark Tutelage|R|M11
+#196|Jace's Erasure|C|M11
+#197|Tome Scour|C|M11
+#198|Leyline of Anticipation|R|M11
+#199|Holy Strength|C|M11
+#200|Jinxed Idol|R|M11
+#201|Merfolk Spy|C|M11
+#202|Ajani's Mantra|C|M11
+#203|Demolish|C|M11
+#204|Goldenglow Moth|C|M11
+#205|Blood Tithe|C|M11
+#206|Relentless Rats|U|M11
+#207|Leyline of Sanctity|R|M11
+#208|Bloodcrazed Goblin|C|M11
+#209|Silence|R|M11
+#210|Primal Cocoon|C|M11
+#211|Hunters' Feast|C|M11
+#212|Dryad's Favor|C|M11
+#213|Pyretic Ritual|C|M11
+#214|Mass Polymorph|R|M11
+#215|Incite|C|M11
+#216|Back to Nature|U|M11
+#217|Autumn's Veil|U|M11
+#218|Leyline of Punishment|R|M11
+#219|Ornithopter|U|M11
+#220|Leyline of the Void|R|M11
+#221|Liliana's Caress|U|M11
+#222|Voltaic Key|U|M11
+#223|Wurm's Tooth|U|M11
+#224|Dragon's Claw|U|M11
+#225|Haunting Echoes|R|M11
+#226|Demon's Horn|U|M11
+#227|Angel's Feather|U|M11
+#228|Kraken's Eye|U|M11
+#229|Wild Evocation|R|M11

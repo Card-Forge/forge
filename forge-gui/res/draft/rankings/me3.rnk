@@ -1,0 +1,216 @@
+//Rank|Name|Rarity|Set
+#1|Rolling Earthquake|R|ME3
+#2|Forked Lightning|U|ME3
+#3|Hazezon Tamar|R|ME3
+#4|Tetsuo Umezawa|R|ME3
+#5|Firestorm Phoenix|R|ME3
+#6|Sun Quan, Lord of Wu|R|ME3
+#7|Guan Yu, Sainted Warrior|U|ME3
+#8|Lu Bu, Master-at-Arms|R|ME3
+#9|Ramses Overdark|U|ME3
+#10|Knowledge Vault|U|ME3
+#11|Meng Huo, Barbarian King|R|ME3
+#12|Rasputin Dreamweaver|R|ME3
+#13|Eightfold Maze|U|ME3
+#14|Lu Xun, Scholar General|U|ME3
+#15|Lady Orca|C|ME3
+#16|Lady Evangela|U|ME3
+#17|Mana Drain|R|ME3
+#18|Liu Bei, Lord of Shu|R|ME3
+#19|The Wretched|U|ME3
+#20|Anaba Spirit Crafter|C|ME3
+#21|Rohgahh of Kher Keep|R|ME3
+#22|Karakas|R|ME3
+#23|Willow Priestess|U|ME3
+#24|Dong Zhou, the Tyrant|R|ME3
+#25|Mind Twist|R|ME3
+#26|Land Tax|R|ME3
+#27|Exorcist|U|ME3
+#28|Gwendlyn Di Corci|R|ME3
+#29|Riding the Dilu Horse|U|ME3
+#30|Sun Ce, Young Conquerer|U|ME3
+#31|Hellfire|R|ME3
+#32|Coal Golem|C|ME3
+#33|Chain Lightning|C|ME3
+#34|The Abyss|R|ME3
+#35|Ragnar|U|ME3
+#36|Xiahou Dun, the One-Eyed|U|ME3
+#37|Angus Mackenzie|R|ME3
+#38|Frost Giant|U|ME3
+#39|Gauntlets of Chaos|R|ME3
+#40|Capture of Jingzhou|R|ME3
+#41|Famine|U|ME3
+#42|Xira Arien|R|ME3
+#43|Hua Tuo, Honored Physician|R|ME3
+#44|Jerrard of the Closed Fist|C|ME3
+#45|Tor Wauki|U|ME3
+#46|Halfdane|R|ME3
+#47|Kongming, "Sleeping Dragon"|R|ME3
+#48|Burning of Xinye|R|ME3
+#49|Killer Bees|U|ME3
+#50|Banshee|U|ME3
+#51|Fellwar Stone|C|ME3
+#52|Crimson Manticore|U|ME3
+#53|Kobold Drill Sergeant|U|ME3
+#54|Old Man of the Sea|R|ME3
+#55|Jedit Ojanen|C|ME3
+#56|Stangg|U|ME3
+#57|Sir Shandlar of Eberyn|C|ME3
+#58|Zodiac Dragon|R|ME3
+#59|Lady Caleria|U|ME3
+#60|Plateau|R|ME3
+#61|Scrubland|R|ME3
+#62|Vaevictis Asmadi|R|ME3
+#63|Bayou|R|ME3
+#64|Princess Lucrezia|U|ME3
+#65|Desert Twister|U|ME3
+#66|Slashing Tiger|C|ME3
+#67|Pavel Maliki|U|ME3
+#68|Rubinia Soulsinger|R|ME3
+#69|Lesser Werewolf|C|ME3
+#70|Axelrod Gunnarson|U|ME3
+#71|Reveka, Wizard Savant|U|ME3
+#72|Bartel Runeaxe|U|ME3
+#73|Ghostly Visit|C|ME3
+#74|Volcanic Island|R|ME3
+#75|Fire Drake|C|ME3
+#76|Nebuchadnezzar|U|ME3
+#77|Guan Yu's 1,000-Li March|R|ME3
+#78|Wormwood Treefolk|U|ME3
+#79|Fire Ambush|C|ME3
+#80|Wei Night Raiders|U|ME3
+#81|Blood Lust|C|ME3
+#82|Zhang Fei, Fierce Warrior|U|ME3
+#83|Chromium|R|ME3
+#84|Immolation|C|ME3
+#85|Nicol Bolas|R|ME3
+#86|Kjeldoran Frostbeast|U|ME3
+#87|Spiny Starfish|U|ME3
+#88|Corrupt Eunuchs|U|ME3
+#89|Barl's Cage|R|ME3
+#90|The Lady of the Mountain|C|ME3
+#91|Brilliant Plan|C|ME3
+#92|Palladia-Mors|R|ME3
+#93|Sunastian Falconer|U|ME3
+#94|Ashes to Ashes|U|ME3
+#95|Boris Devilboon|U|ME3
+#96|Sword of the Ages|R|ME3
+#97|Wu Longbowman|C|ME3
+#98|Shu Elite Companions|C|ME3
+#99|Tracker|U|ME3
+#100|Tropical Island|R|ME3
+#101|Labyrinth Minotaur|C|ME3
+#102|Faerie Noble|U|ME3
+#103|Lu Meng, Wu General|U|ME3
+#104|Gabriel Angelfire|R|ME3
+#105|Torsten Von Ursus|C|ME3
+#106|City of Shadows|R|ME3
+#107|Akron Legionnaire|R|ME3
+#108|Marhault Elsdragon|U|ME3
+#109|Black Vise|R|ME3
+#110|Livonya Silone|U|ME3
+#111|Raging Minotaur|C|ME3
+#112|Sol Grail|C|ME3
+#113|Voodoo Doll|R|ME3
+#114|Hunting Cheetah|C|ME3
+#115|Demonic Torment|C|ME3
+#116|Hunding Gjornersen|U|ME3
+#117|Grim Tutor|R|ME3
+#118|D'Avenant Archer|C|ME3
+#119|Tobias Andrion|C|ME3
+#120|Concordant Crossroads|R|ME3
+#121|Willow Satyr|R|ME3
+#122|Arcades Sabboth|R|ME3
+#123|Cinder Storm|U|ME3
+#124|Elves of Deep Shadow|C|ME3
+#125|Loyal Retainers|U|ME3
+#126|Kei Takahashi|U|ME3
+#127|Dance of Many|U|ME3
+#128|Kobold Overlord|U|ME3
+#129|Jungle Lion|C|ME3
+#130|Giant Growth|C|ME3
+#131|Cosmic Horror|R|ME3
+#132|Shu General|C|ME3
+#133|Illusionary Mask|R|ME3
+#134|Barktooth Warbeard|C|ME3
+#135|Wei Elite Companions|C|ME3
+#136|Reincarnation|U|ME3
+#137|Arboria|R|ME3
+#138|Sivitri Scarzam|C|ME3
+#139|Carrion Ants|U|ME3
+#140|Meng Huo's Horde|C|ME3
+#141|Recall|U|ME3
+#142|Remove Soul|C|ME3
+#143|Nether Void|R|ME3
+#144|Freyalise's Winds|R|ME3
+#145|Hurloon Minotaur|C|ME3
+#146|Tuknir Deathlock|U|ME3
+#147|Wandering Mage|R|ME3
+#148|Wu Elite Cavalry|C|ME3
+#149|Ramirez DePietro|C|ME3
+#150|Land Equilibrium|R|ME3
+#151|Kobold Taskmaster|C|ME3
+#152|Boomerang|C|ME3
+#153|The Tabernacle at Pendrell Vale|R|ME3
+#154|Ivory Guardians|U|ME3
+#155|Crimson Kobolds|C|ME3
+#156|Scryb Sprites|C|ME3
+#157|Arena of the Ancients|R|ME3
+#158|Fire Sprites|C|ME3
+#159|Shu Soldier-Farmers|C|ME3
+#160|Misfortune's Gain|C|ME3
+#161|Cleanse|R|ME3
+#162|Desperate Charge|C|ME3
+#163|Hammerheim|U|ME3
+#164|Reset|R|ME3
+#165|Bone Flute|C|ME3
+#166|Living Plane|R|ME3
+#167|Trip Wire|C|ME3
+#168|Mana Vortex|R|ME3
+#169|Borrowing 100,000 Arrows|U|ME3
+#170|Benthic Explorers|C|ME3
+#171|Infuse|C|ME3
+#172|Shu Cavalry|C|ME3
+#173|Strategic Planning|C|ME3
+#174|Bazaar of Baghdad|R|ME3
+#175|Spirit Shackle|C|ME3
+#176|Stolen Grain|U|ME3
+#177|All Hallow's Eve|R|ME3
+#178|Wei Strike Force|C|ME3
+#179|Kobolds of Kher Keep|C|ME3
+#180|Forced Retreat|C|ME3
+#181|Heavy Fog|C|ME3
+#182|Riven Turnbull|U|ME3
+#183|Force Spike|C|ME3
+#184|Spoils of Victory|C|ME3
+#185|Astrolabe|C|ME3
+#186|Alabaster Potion|U|ME3
+#187|Takklemaggot|U|ME3
+#188|Active Volcano|U|ME3
+#189|Wu Warship|C|ME3
+#190|Ghosts of the Damned|C|ME3
+#191|Disharmony|U|ME3
+#192|False Defeat|U|ME3
+#193|Wall of Light|C|ME3
+#194|Fevered Strength|C|ME3
+#195|Amrou Kithkin|C|ME3
+#196|Urborg|U|ME3
+#197|Lightning Blow|C|ME3
+#198|Disenchant|C|ME3
+#199|Life Chisel|R|ME3
+#200|Wei Infantry|C|ME3
+#201|Three Visits|C|ME3
+#202|Spectral Shield|U|ME3
+#203|Anaba Ancestor|C|ME3
+#204|Young Wei Recruits|C|ME3
+#205|Flash Flood|U|ME3
+#206|Evil Presence|C|ME3
+#207|Gaea's Touch|U|ME3
+#208|Storm World|R|ME3
+#209|Sorrow's Path|R|ME3
+#210|Peach Garden Oath|C|ME3
+#211|Didgeridoo|U|ME3
+#212|Heal|C|ME3
+#213|Nova Pentacle|R|ME3
+#214|Call to Arms|U|ME3
+#215|Divine Intervention|R|ME3

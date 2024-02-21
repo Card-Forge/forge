@@ -17,6 +17,9 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -115,8 +118,10 @@ public class CostReturn extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        return targetCard.getGame().getAction().moveToHand(targetCard, null);
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        return targetCard.getGame().getAction().moveToHand(targetCard, null, moveParams);
     }
 
     /* (non-Javadoc)

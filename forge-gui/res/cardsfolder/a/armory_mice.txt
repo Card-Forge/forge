@@ -1,0 +1,7 @@
+Name:Armory Mice
+ManaCost:1 W
+Types:Creature Mouse
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 2 | CheckSVar$ Celebration | SVarCompare$ GE2 | Description$ Celebration — CARDNAME gets +0/+2 as long as two or more nonland permanents entered the battlefield under your control this turn.
+SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+Oracle:Celebration — Armory Mice gets +0/+2 as long as two or more nonland permanents entered the battlefield under your control this turn.

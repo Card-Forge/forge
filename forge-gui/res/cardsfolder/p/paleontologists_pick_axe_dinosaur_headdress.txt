@@ -1,0 +1,28 @@
+Name:Paleontologist's Pick-Axe
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+K:Equip:1
+K:Craft:5 XMin1 ExileCtrlOrGrave<X/Creature.Other>
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Discard
+AI:RemoveDeck:All
+Oracle:Whenever equipped creature attacks, draw a card, then discard a card.\nEquip {1}\nCraft with one or more creatures {5} ({5}, Exile this artifact, Exile one or more creatures you control and/or creature cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Dinosaur Headdress
+ManaCost:no cost
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+R:Event$ Attached | ValidCard$ Card.Self | ValidTarget$ Creature | ReplaceWith$ ChooseCard | ActiveZones$ Battlefield | Description$ As CARDNAME becomes attached to a creature, choose an exiled creature card used to craft CARDNAME.
+SVar:ChooseCard:DB$ ChooseCard | Mandatory$ True | DefinedCards$ ExiledWith | ChoiceZone$ Exile
+T:Mode$ Attached | ValidSource$ Card.Self | Static$ True | Execute$ DBClone | TriggerDescription$ Equipped creature is a copy of the last chosen card.
+SVar:DBClone:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Equipped | Duration$ UntilUnattached
+K:Equip:2
+Oracle:When Dinosaur Headdress enters the battlefield, attach it to target creature you control.\nAs Dinosaur Headdress becomes attached to a creature, choose an exiled creature card used to craft Dinosaur Headdress.\nEquipped creature is a copy of the last chosen card.\nEquip {2}

@@ -1,0 +1,44 @@
+maelstrom_angel.png
+size: 96,144
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 0, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 16
+  size: 32,32   
+Idle 
+  xy: 32, 16
+  size: 32,32   
+Idle 
+  xy: 64, 16
+  size: 32,32   
+Walk
+  xy: 0, 48
+  size: 32,32     
+Walk 
+  xy: 32, 48
+  size: 32,32    
+Walk 
+  xy: 64, 48
+  size: 32,32    
+Attack 
+  xy: 2, 80
+  size: 30, 32      
+Attack 
+  xy: 35, 80
+  size: 30, 32 
+Attack 
+  xy: 66, 80
+  size: 30, 32 
+Death 
+  xy: 0, 112
+  size: 32, 32  
+Death 
+  xy: 32, 112
+  size: 32, 32 
+Death 
+  xy: 64, 112
+  size: 32, 32 

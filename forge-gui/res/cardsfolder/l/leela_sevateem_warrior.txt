@@ -1,0 +1,9 @@
+Name:Leela, Sevateem Warrior
+ManaCost:3 G
+Types:Legendary Creature Human Warrior
+PT:3/3
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | FirstCardInDrawStep$ False | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent draws a card except the first one they draw in each of their draw steps, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+K:Doctor's companion
+DeckHas:Ability$Counters
+Oracle:Whenever an opponent draws a card except the first one they draw in each of their draw steps, put a +1/+1 counter on Leela, Sevateem Warrior.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

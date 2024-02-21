@@ -1,0 +1,11 @@
+Name:Don Andres, the Renegade
+ManaCost:1 U B R
+Types:Legendary Creature Vampire Pirate
+PT:4/3
+S:Mode$ Continuous | Affected$ Creature.YouDontOwn+YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddType$ Pirate | AddKeyword$ Menace & Deathtouch | Description$ Each creature you control but don't own gets +2/+2, has menace and deathtouch, and is a Pirate in addition to its other types.
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn+nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell you don't own, create two tapped Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenTapped$ True
+SVar:PlayMain1:TRUE
+DeckHints:Type$Vampire
+DeckHas:Ability$Token & Type$Treasure|Artifact
+Oracle:Each creature you control but don't own gets +2/+2, has menace and deathtouch, and is a Pirate in addition to its other types.\nWhenever you cast a noncreature spell you don't own, create two tapped Treasure tokens.

@@ -1,7 +1,7 @@
 Name:The Long Reach of Night
 ManaCost:3 B
 Types:Enchantment Saga
-K:Saga:3:DBEachOpp,DBEachOpp,DBTransform
+K:Chapter:3:DBEachOpp,DBEachOpp,DBTransform
 SVar:DBEachOpp:DB$ RepeatEach | RepeatSubAbility$ DBSac | RepeatPlayers$ Opponent | SpellDescription$ Each opponent sacrifices a creature unless they discard a card.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Creature | Defined$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

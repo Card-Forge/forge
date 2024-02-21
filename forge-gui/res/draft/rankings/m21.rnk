@@ -1,0 +1,265 @@
+//Rank|Name|Rarity|Set
+#1|Baneslayer Angel|M|M21
+#2|Chandra, Heart of Fire|M|M21
+#3|Massacre Wurm|M|M21
+#4|Garruk, Unleashed|M|M21
+#5|Ugin, the Spirit Dragon|M|M21
+#6|Elder Gargaroth|M|M21
+#7|Basri Ket|M|M21
+#8|Terror of the Peaks|M|M21
+#9|Mangara, the Diplomat|M|M21
+#10|Liliana, Waker of the Dead|M|M21
+#11|Teferi, Master of Time|M|M21
+#12|Fiery Emancipation|M|M21
+#13|Chromatic Orrery|M|M21
+#14|Discontinuity|M|M21
+#15|Grim Tutor|M|M21
+#16|Radha, Heart of Keld|R|M21
+#17|Scavenging Ooze|R|M21
+#18|Solemn Simulacrum|R|M21
+#19|Gadrak, the Crown-Scourge|R|M21
+#20|Basri's Lieutenant|R|M21
+#21|Garruk's Harbinger|R|M21
+#22|Jolrael, Mwonvuli Recluse|R|M21
+#23|Liliana's Standard Bearer|R|M21
+#24|Sublime Epiphany|R|M21
+#25|Stormwing Entity|R|M21
+#26|Glorious Anthem|R|M21
+#27|Pursued Whale|R|M21
+#28|Azusa, Lost but Seeking|R|M21
+#29|Shacklegeist|R|M21
+#30|Volcanic Salvo|R|M21
+#31|Chandra's Incinerator|R|M21
+#32|Vito, Thorn of the Dusk Rose|R|M21
+#33|Hooded Blightfang|R|M21
+#34|Subira, Tulzidi Caravanner|R|M21
+#35|Demonic Embrace|R|M21
+#36|Sparkhunter Masticore|R|M21
+#37|Ghostly Pilferer|R|M21
+#38|Primal Might|R|M21
+#39|Brash Taunter|R|M21
+#40|Faith's Fetters|U|M21
+#41|Barrin, Tolarian Archmage|R|M21
+#42|Soul Sear|U|M21
+#43|Sporeweb Weaver|R|M21
+#44|Feline Sovereign|R|M21
+#45|Heartfire Immolator|U|M21
+#46|Kaervek, the Spiteful|R|M21
+#47|Pack Leader|R|M21
+#48|Shipwreck Dowser|U|M21
+#49|Enthralling Hold|U|M21
+#50|Volcanic Geyser|U|M21
+#51|Lorescale Coatl|U|M21
+#52|Wildwood Scourge|U|M21
+#53|Aven Gagglemaster|U|M21
+#54|Double Vision|R|M21
+#55|Falconer Adept|U|M21
+#56|Scorching Dragonfire|C|M21
+#57|Heroic Intervention|R|M21
+#58|Eliminate|U|M21
+#59|Thieves' Guild Enforcer|R|M21
+#60|Rain of Revelation|U|M21
+#61|Speaker of the Heavens|R|M21
+#62|Angelic Ascension|U|M21
+#63|Watcher of the Spheres|U|M21
+#64|Thrashing Brontodon|U|M21
+#65|Leafkin Avenger|U|M21
+#66|Goremand|U|M21
+#67|Basri's Solidarity|U|M21
+#68|Warden of the Woods|U|M21
+#69|Liliana's Devotee|U|M21
+#70|Garruk's Uprising|U|M21
+#71|Cultivate|U|M21
+#72|Tide Skimmer|U|M21
+#73|Niambi, Esteemed Speaker|R|M21
+#74|Idol of Endurance|R|M21
+#75|Waker of Waves|U|M21
+#76|Bolt Hound|U|M21
+#77|Fungal Rebirth|U|M21
+#78|Sanctum of Stone Fangs|U|M21
+#79|Twinblade Assassins|U|M21
+#80|Teferi's Tutelage|U|M21
+#81|Quirion Dryad|U|M21
+#82|Jeskai Elder|U|M21
+#83|Conclave Mentor|U|M21
+#84|Teferi's Ageless Insight|R|M21
+#85|Grasp of Darkness|C|M21
+#86|Fierce Empath|U|M21
+#87|Containment Priest|R|M21
+#88|Seasoned Hallowblade|U|M21
+#89|Silversmote Ghoul|U|M21
+#90|Fabled Passage|R|M21
+#91|Obsessive Stitcher|U|M21
+#92|Havoc Jester|U|M21
+#93|Shock|C|M21
+#94|Hellkite Punisher|U|M21
+#95|Llanowar Visionary|C|M21
+#96|Tolarian Kraken|U|M21
+#97|Mazemind Tome|R|M21
+#98|Pestilent Haze|U|M21
+#99|See the Truth|R|M21
+#100|Temple of Epiphany|R|M21
+#101|Burlfist Oak|U|M21
+#102|Basri's Acolyte|C|M21
+#103|Indulging Patrician|U|M21
+#104|Conspicuous Snoop|R|M21
+#105|Experimental Overload|U|M21
+#106|Roaming Ghostlight|C|M21
+#107|Selfless Savior|U|M21
+#108|Tempered Veteran|U|M21
+#109|Siege Striker|U|M21
+#110|Kitesail Freebooter|U|M21
+#111|Finishing Blow|C|M21
+#112|Kinetic Augur|U|M21
+#113|Sanctum of Calm Waters|U|M21
+#114|Unsubstantiate|U|M21
+#115|Sanctum of Fruitful Harvest|U|M21
+#116|Hunter's Edge|C|M21
+#117|Riddleform|U|M21
+#118|Swift Response|C|M21
+#119|Mistral Singer|C|M21
+#120|Palladium Myr|U|M21
+#121|Invigorating Surge|U|M21
+#122|Battle-Rattle Shaman|U|M21
+#123|Malefic Scythe|U|M21
+#124|Vryn Wingmare|U|M21
+#125|Canopy Stalker|U|M21
+#126|Traitorous Greed|U|M21
+#127|Temple of Mystery|R|M21
+#128|Alpine Houndmaster|U|M21
+#129|Animal Sanctuary|R|M21
+#130|Carrion Grub|U|M21
+#131|Chrome Replicator|U|M21
+#132|Transmogrify|R|M21
+#133|Dire Fleet Warmonger|U|M21
+#134|Trufflesnout|C|M21
+#135|Spellgorger Weird|C|M21
+#136|Unleash Fury|U|M21
+#137|Chandra's Pyreling|U|M21
+#138|Gale Swooper|C|M21
+#139|Rousing Read|C|M21
+#140|Capture Sphere|C|M21
+#141|Pridemalkin|C|M21
+#142|Temple of Triumph|R|M21
+#143|Feat of Resistance|C|M21
+#144|Chandra's Magmutt|C|M21
+#145|Goblin Wizardry|C|M21
+#146|Griffin Aerie|U|M21
+#147|Secure the Scene|C|M21
+#148|Opt|C|M21
+#149|Archfiend's Vessel|U|M21
+#150|Turn to Slag|C|M21
+#151|Frantic Inventory|C|M21
+#152|Rise Again|C|M21
+#153|Deathbloom Thallid|C|M21
+#154|Drowsing Tyrannodon|C|M21
+#155|Witch's Cauldron|U|M21
+#156|Colossal Dreadmaw|C|M21
+#157|Sabertooth Mauler|C|M21
+#158|Pitchburn Devils|C|M21
+#159|Fetid Imp|C|M21
+#160|Daybreak Charger|C|M21
+#161|Alpine Watchdog|C|M21
+#162|Makeshift Battalion|C|M21
+#163|Runed Halo|R|M21
+#164|Furious Rise|U|M21
+#165|Spined Megalodon|C|M21
+#166|Temple of Malady|R|M21
+#167|Hobblefiend|C|M21
+#168|Turret Ogre|C|M21
+#169|Igneous Cur|C|M21
+#170|Library Larcenist|C|M21
+#171|Meteorite|U|M21
+#172|Legion's Judgment|C|M21
+#173|Concordia Pegasus|C|M21
+#174|Thrill of Possibility|C|M21
+#175|Blood Glutton|C|M21
+#176|Gnarled Sage|C|M21
+#177|Goblin Arsonist|C|M21
+#178|Vodalian Arcanist|C|M21
+#179|Sanctum of All|R|M21
+#180|Anointed Chorister|C|M21
+#181|Skeleton Archer|C|M21
+#182|Rewind|U|M21
+#183|Sanctum of Shattered Heights|U|M21
+#184|Teferi's Protege|C|M21
+#185|Crypt Lurker|C|M21
+#186|Onakke Ogre|C|M21
+#187|Keen Glidemaster|C|M21
+#188|Titanic Growth|C|M21
+#189|Sure Strike|C|M21
+#190|Celestial Enforcer|C|M21
+#191|Valorous Steed|C|M21
+#192|Crash Through|C|M21
+#193|Snarespinner|C|M21
+#194|Ornery Dilophosaur|C|M21
+#195|Frost Breath|C|M21
+#196|Bone Pit Brute|C|M21
+#197|Read the Tides|C|M21
+#198|Ranger's Guile|C|M21
+#199|Skyway Sniper|U|M21
+#200|Tome Anima|C|M21
+#201|Setessan Training|C|M21
+#202|Masked Blackguard|C|M21
+#203|Track Down|C|M21
+#204|Cancel|C|M21
+#205|Defiant Strike|C|M21
+#206|Rambunctious Mutt|C|M21
+#207|Gloom Sower|C|M21
+#208|Skyscanner|C|M21
+#209|Caged Zombie|C|M21
+#210|Alchemist's Gift|C|M21
+#211|Garruk's Gorehorn|C|M21
+#212|Revitalize|C|M21
+#213|Lofty Denial|C|M21
+#214|Tavern Swindler|U|M21
+#215|Furor of the Bitten|C|M21
+#216|Village Rites|C|M21
+#217|Warded Battlements|C|M21
+#218|Dub|C|M21
+#219|Peer into the Abyss|R|M21
+#220|Sanguine Indulgence|C|M21
+#221|Mind Rot|C|M21
+#222|Portcullis Vine|C|M21
+#223|Wishcoin Crab|C|M21
+#224|Miscast|U|M21
+#225|Wall of Runes|C|M21
+#226|Infernal Scarring|C|M21
+#227|Light of Promise|U|M21
+#228|Walking Corpse|C|M21
+#229|Bloodfell Caves|C|M21
+#230|Burn Bright|C|M21
+#231|Duress|C|M21
+#232|Liliana's Steward|C|M21
+#233|Staunch Shieldmate|C|M21
+#234|Bad Deal|U|M21
+#235|Swiftwater Cliffs|C|M21
+#236|Wind-Scarred Crag|C|M21
+#237|Sanctum of Tranquil Light|U|M21
+#238|Blossoming Sands|C|M21
+#239|Thornwood Falls|C|M21
+#240|Rookie Mistake|C|M21
+#241|Rugged Highlands|C|M21
+#242|Destructive Tampering|C|M21
+#243|Return to Nature|C|M21
+#244|Dismal Backwater|C|M21
+#245|Jungle Hollow|C|M21
+#246|Temple of Silence|R|M21
+#247|Tranquil Cove|C|M21
+#248|Short Sword|C|M21
+#249|Run Afoul|C|M21
+#250|Scoured Barrens|C|M21
+#251|Silent Dart|C|M21
+#252|Forgotten Sentinel|C|M21
+#253|Life Goes On|C|M21
+#254|Prismite|C|M21
+#255|Epitaph Golem|U|M21
+#256|Radiant Fountain|C|M21
+#257|Nine Lives|R|M21
+#258|Necromentia|R|M21
+#259|Tormod's Crypt|U|M21
+#260|Island|L|M21
+#261|Mountain|L|M21
+#262|Plains|L|M21
+#263|Swamp|L|M21
+#264|Forest|L|M21

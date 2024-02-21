@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Arcanis the Omnipotent|R|ONS
+#2|Visara the Dreadful|R|ONS
+#3|Silvos, Rogue Elemental|R|ONS
+#4|Kamahl, Fist of Krosa|R|ONS
+#5|Goblin Sharpshooter|R|ONS
+#6|Akroma's Vengeance|R|ONS
+#7|Starstorm|R|ONS
+#8|Future Sight|R|ONS
+#9|Jareth, Leonine Titan|R|ONS
+#10|Aven Brigadier|R|ONS
+#11|Symbiotic Wurm|R|ONS
+#12|Tephraderm|R|ONS
+#13|Insurrection|R|ONS
+#14|Rorix Bladewing|R|ONS
+#15|Quicksilver Dragon|R|ONS
+#16|Mistform Skyreaver|R|ONS
+#17|Rotlung Reanimator|R|ONS
+#18|Silent Specter|R|ONS
+#19|Exalted Angel|R|ONS
+#20|Clone|R|ONS
+#21|Gustcloak Savior|R|ONS
+#22|Grinning Demon|R|ONS
+#23|Dragon Roost|R|ONS
+#24|Elvish Vanguard|R|ONS
+#25|Silklash Spider|R|ONS
+#26|Bloodstained Mire|R|ONS
+#27|Slice and Dice|U|ONS
+#28|Oversold Cemetery|R|ONS
+#29|Butcher Orgg|R|ONS
+#30|Smother|U|ONS
+#31|Sparksmith|C|ONS
+#32|Krosan Colossus|R|ONS
+#33|Mobilization|R|ONS
+#34|Catapult Master|R|ONS
+#35|Death Pulse|U|ONS
+#36|Contested Cliffs|R|ONS
+#37|Aggravated Assault|R|ONS
+#38|Blistering Firecat|R|ONS
+#39|Patriarch's Bidding|R|ONS
+#40|Ravenous Baloth|R|ONS
+#41|Polluted Delta|R|ONS
+#42|Flooded Strand|R|ONS
+#43|Ixidor, Reality Sculptor|R|ONS
+#44|Callous Oppressor|R|ONS
+#45|Centaur Glade|U|ONS
+#46|Tribal Golem|R|ONS
+#47|Solar Blast|C|ONS
+#48|Weathered Wayfarer|R|ONS
+#49|Wooded Foothills|R|ONS
+#50|Lavamancer's Skill|C|ONS
+#51|Riptide Replicator|R|ONS
+#52|Gravespawn Sovereign|R|ONS
+#53|Infest|U|ONS
+#54|Words of War|R|ONS
+#55|Goblin Piledriver|R|ONS
+#56|Blatant Thievery|R|ONS
+#57|Steely Resolve|R|ONS
+#58|Shock|C|ONS
+#59|Cruel Revival|C|ONS
+#60|Hystrodon|R|ONS
+#61|Menacing Ogre|R|ONS
+#62|Gangrenous Goliath|R|ONS
+#63|Sigil of the New Dawn|R|ONS
+#64|Undead Gladiator|R|ONS
+#65|Embermage Goblin|U|ONS
+#66|Skirk Fire Marshal|R|ONS
+#67|Goblin Pyromancer|R|ONS
+#68|Unholy Grotto|R|ONS
+#69|Windswept Heath|R|ONS
+#70|Mistform Shrieker|U|ONS
+#71|Glarecaster|R|ONS
+#72|Chain of Plasma|U|ONS
+#73|Whipcorder|U|ONS
+#74|Stag Beetle|R|ONS
+#75|Gigapede|R|ONS
+#76|Pacifism|C|ONS
+#77|Mythic Proportions|R|ONS
+#78|Voice of the Woods|R|ONS
+#79|Lightning Rift|U|ONS
+#80|Pinpoint Avalanche|C|ONS
+#81|Krosan Tusker|C|ONS
+#82|Snarling Undorak|C|ONS
+#83|Symbiotic Beast|U|ONS
+#84|Catapult Squad|U|ONS
+#85|Doom Cannon|R|ONS
+#86|Heedless One|U|ONS
+#87|Swat|C|ONS
+#88|Nantuko Husk|C|ONS
+#89|Voidmage Prodigy|R|ONS
+#90|Explosive Vegetation|U|ONS
+#91|Venomspout Brackus|U|ONS
+#92|Doomed Necromancer|R|ONS
+#93|Mistform Stalker|U|ONS
+#94|Wellwisher|C|ONS
+#95|Skirk Commando|C|ONS
+#96|Supreme Inquisitor|R|ONS
+#97|Gluttonous Zombie|U|ONS
+#98|Ancestor's Prophet|R|ONS
+#99|Ascending Aven|C|ONS
+#100|Riptide Entrancer|R|ONS
+#101|Prowling Pangolin|U|ONS
+#102|Avarax|U|ONS
+#103|Astral Slide|U|ONS
+#104|Essence Fracture|U|ONS
+#105|Riptide Laboratory|R|ONS
+#106|Reckless One|U|ONS
+#107|Soulless One|U|ONS
+#108|Cabal Archon|U|ONS
+#109|Wirewood Savage|C|ONS
+#110|Snapping Thragg|U|ONS
+#111|Gratuitous Violence|R|ONS
+#112|Nameless One|U|ONS
+#113|Serpentine Basilisk|U|ONS
+#114|Aphetto Alchemist|U|ONS
+#115|Doubtless One|U|ONS
+#116|Gustcloak Skirmisher|U|ONS
+#117|Cabal Executioner|U|ONS
+#118|Barkhide Mauler|C|ONS
+#119|Everglove Courier|U|ONS
+#120|Spitting Gourna|C|ONS
+#121|Shared Triumph|R|ONS
+#122|Towering Baloth|U|ONS
+#123|Enchantress's Presence|R|ONS
+#124|Wirewood Elf|C|ONS
+#125|Primal Boost|U|ONS
+#126|Grand Coliseum|R|ONS
+#127|Cover of Darkness|R|ONS
+#128|Threaten|U|ONS
+#129|Words of Wilding|R|ONS
+#130|Broodhatch Nantuko|U|ONS
+#131|Symbiotic Elf|C|ONS
+#132|Daru Lancer|C|ONS
+#133|Severed Legion|C|ONS
+#134|Mistform Dreamer|C|ONS
+#135|Death Match|R|ONS
+#136|Elvish Warrior|C|ONS
+#137|Mistform Wall|C|ONS
+#138|Battering Craghorn|C|ONS
+#139|Thoughtbound Primoc|U|ONS
+#140|Frightshroud Courier|U|ONS
+#141|Peer Pressure|R|ONS
+#142|Aphetto Grifter|U|ONS
+#143|Complicate|U|ONS
+#144|Krosan Groundshaker|U|ONS
+#145|Oblation|R|ONS
+#146|Elven Riders|U|ONS
+#147|Mana Echoes|R|ONS
+#148|Gustcloak Harrier|C|ONS
+#149|Biorhythm|R|ONS
+#150|Flamestick Courier|U|ONS
+#151|Erratic Explosion|C|ONS
+#152|Boneknitter|U|ONS
+#153|Riptide Shapeshifter|U|ONS
+#154|Wirewood Herald|C|ONS
+#155|Gustcloak Sentinel|U|ONS
+#156|Charging Slateback|C|ONS
+#157|Fleeting Aven|U|ONS
+#158|Festering Goblin|C|ONS
+#159|Read the Runes|R|ONS
+#160|Haunted Cadaver|C|ONS
+#161|Aven Soulgazer|U|ONS
+#162|Slate of Ancestry|R|ONS
+#163|Treespring Lorian|C|ONS
+#164|Bloodline Shaman|U|ONS
+#165|Aven Fateshaper|U|ONS
+#166|Dive Bomber|C|ONS
+#167|Choking Tethers|C|ONS
+#168|Mistform Mutant|U|ONS
+#169|Feeding Frenzy|U|ONS
+#170|Airdrop Condor|U|ONS
+#171|Shepherd of Rot|C|ONS
+#172|Aether Charge|U|ONS
+#173|Wretched Anurid|C|ONS
+#174|Screeching Buzzard|C|ONS
+#175|Forgotten Cave|C|ONS
+#176|Cryptic Gateway|R|ONS
+#177|Kamahl's Summons|U|ONS
+#178|Daru Cavalier|C|ONS
+#179|Psychic Trance|R|ONS
+#180|Wall of Mulch|U|ONS
+#181|Aurification|R|ONS
+#182|Improvised Armor|U|ONS
+#183|Dream Chisel|R|ONS
+#184|Entrails Feaster|R|ONS
+#185|Tribal Unity|U|ONS
+#186|Headhunter|U|ONS
+#187|Elvish Pioneer|C|ONS
+#188|Weird Harvest|R|ONS
+#189|Commando Raid|U|ONS
+#190|Cabal Slaver|U|ONS
+#191|Harsh Mercy|R|ONS
+#192|Wirewood Lodge|U|ONS
+#193|Animal Magnetism|R|ONS
+#194|Trade Secrets|R|ONS
+#195|Thrashing Mudspawn|U|ONS
+#196|Birchlore Rangers|C|ONS
+#197|True Believer|R|ONS
+#198|Disruptive Pitmage|C|ONS
+#199|Gravel Slinger|C|ONS
+#200|Spined Basher|C|ONS
+#201|Nosy Goblin|C|ONS
+#202|Pearlspear Courier|U|ONS
+#203|Ironfist Crusher|U|ONS
+#204|Goblin Taskmaster|C|ONS
+#205|Dirge of Dread|C|ONS
+#206|Shaleskin Bruiser|U|ONS
+#207|Ebonblade Reaper|R|ONS
+#208|Akroma's Blessing|U|ONS
+#209|Blackmail|U|ONS
+#210|Spitfire Handler|U|ONS
+#211|Convalescent Care|R|ONS
+#212|Ghosthelm Courier|U|ONS
+#213|Goblin Machinist|U|ONS
+#214|Meddle|U|ONS
+#215|Battlefield Medic|C|ONS
+#216|Goblin Sledder|C|ONS
+#217|Screaming Seahawk|C|ONS
+#218|Discombobulate|U|ONS
+#219|Fallen Cleric|C|ONS
+#220|Crowd Favorites|U|ONS
+#221|Inspirit|U|ONS
+#222|Annex|U|ONS
+#223|Tranquil Thicket|C|ONS
+#224|Aphetto Vulture|U|ONS
+#225|Glory Seeker|C|ONS
+#226|Lonely Sandbar|C|ONS
+#227|Standardize|R|ONS
+#228|Daru Healer|C|ONS
+#229|Riptide Biologist|C|ONS
+#230|Circle of Solace|R|ONS
+#231|Shieldmage Elder|U|ONS
+#232|Skittish Valesk|U|ONS
+#233|Profane Prayers|C|ONS
+#234|Vitality Charm|C|ONS
+#235|Imagecrafter|C|ONS
+#236|Leery Fogbeast|C|ONS
+#237|Words of Wind|R|ONS
+#238|Grassland Crusader|C|ONS
+#239|Goblin Burrows|U|ONS
+#240|Artificial Evolution|R|ONS
+#241|Dawning Purist|U|ONS
+#242|Disciple of Malice|C|ONS
+#243|Taunting Elf|C|ONS
+#244|Wave of Indifference|C|ONS
+#245|Thunder of Hooves|U|ONS
+#246|Wirewood Pride|C|ONS
+#247|Fever Charm|C|ONS
+#248|Crude Rampart|U|ONS
+#249|Barren Moor|C|ONS
+#250|Walking Desecration|U|ONS
+#251|Daunting Defender|C|ONS
+#252|Chain of Vapor|U|ONS
+#253|Righteous Cause|U|ONS
+#254|Spurred Wolverine|C|ONS
+#255|Skirk Prospector|C|ONS
+#256|Secluded Steppe|C|ONS
+#257|Graxiplon|U|ONS
+#258|Sage Aven|C|ONS
+#259|Goblin Sky Raider|C|ONS
+#260|Aphetto Dredging|C|ONS
+#261|Misery Charm|C|ONS
+#262|Daru Encampment|U|ONS
+#263|Slipstream Eel|C|ONS
+#264|Nova Cleric|U|ONS
+#265|Disciple of Grace|C|ONS
+#266|Unified Strike|C|ONS
+#267|Crown of Suspicion|C|ONS
+#268|Information Dealer|C|ONS
+#269|Starlit Sanctum|U|ONS
+#270|Words of Worship|R|ONS
+#271|Anurid Murkdiver|C|ONS
+#272|Overwhelming Instinct|U|ONS
+#273|Elvish Pathcutter|C|ONS
+#274|Renewed Faith|C|ONS
+#275|Sunfire Balm|U|ONS
+#276|Elvish Scrapper|U|ONS
+#277|Invigorating Boon|U|ONS
+#278|Piety Charm|C|ONS
+#279|Wheel and Deal|R|ONS
+#280|Tempting Wurm|R|ONS
+#281|Foothill Guide|C|ONS
+#282|Words of Waste|R|ONS
+#283|Chain of Smog|U|ONS
+#284|Dwarven Blastminer|U|ONS
+#285|Rummaging Wizard|U|ONS
+#286|Head Games|R|ONS
+#287|Crown of Vigor|C|ONS
+#288|Crown of Fury|C|ONS
+#289|Elvish Guidance|C|ONS
+#290|Lay Waste|C|ONS
+#291|Naturalize|C|ONS
+#292|Kaboom!|R|ONS
+#293|Searing Flesh|U|ONS
+#294|Chain of Acid|U|ONS
+#295|Custody Battle|U|ONS
+#296|Gustcloak Runner|C|ONS
+#297|Fade from Memory|U|ONS
+#298|Mage's Guile|C|ONS
+#299|Run Wild|U|ONS
+#300|Sandskin|C|ONS
+#301|Syphon Mind|C|ONS
+#302|Syphon Soul|C|ONS
+#303|Riptide Chronologist|U|ONS
+#304|Crafty Pathmage|C|ONS
+#305|Backslide|C|ONS
+#306|Crown of Awe|C|ONS
+#307|Aura Extraction|U|ONS
+#308|Dispersing Orb|U|ONS
+#309|False Cure|R|ONS
+#310|Endemic Plague|R|ONS
+#311|Strongarm Tactics|R|ONS
+#312|Ixidor's Will|C|ONS
+#313|Risky Move|R|ONS
+#314|Withering Hex|U|ONS
+#315|Shade's Breath|U|ONS
+#316|Airborne Aid|C|ONS
+#317|Accursed Centaur|C|ONS
+#318|Crown of Ascension|C|ONS
+#319|Trickery Charm|C|ONS
+#320|Mistform Mask|C|ONS
+#321|Chain of Silence|U|ONS
+#322|Spy Network|C|ONS
+#323|Grand Melee|R|ONS
+#324|Brightstone Ritual|C|ONS
+#325|Defensive Maneuvers|C|ONS
+#326|Demystify|C|ONS
+#327|Break Open|C|ONS
+#328|Seaside Haven|U|ONS
+#329|Reminisce|U|ONS
+#330|Sea's Claim|C|ONS

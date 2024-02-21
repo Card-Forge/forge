@@ -1,0 +1,11 @@
+Name:Experimental Confectioner
+ManaCost:2 B
+Types:Creature Human Peasant
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenScript$ c_a_food_sac
+T:Mode$ Sacrificed | ValidCard$ Food | Execute$ TrigToken | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a Food, create a 1/1 black Rat creature token with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_rat_noblock
+DeckHints:Type$Food
+DeckHas:Ability$Token & Type$Artifact|Food|Rat
+Oracle:When Experimental Confectioner enters the battlefield, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever you sacrifice a Food, create a 1/1 black Rat creature token with "This creature can't block."

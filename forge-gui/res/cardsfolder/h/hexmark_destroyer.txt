@@ -1,5 +1,5 @@
 Name:Hexmark Destroyer
-ManaCost:4 B B 
+ManaCost:4 B B
 Types:Artifact Creature Necron
 PT:6/6
 S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 6 | Description$ Multi-threat Eliminator — CARDNAME can't be blocked except by six or more creatures.

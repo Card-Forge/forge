@@ -1,0 +1,15 @@
+Name:Besotted Knight
+ManaCost:3 W
+Types:Creature Human Knight
+PT:3/3
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+AlternateMode:Adventure
+Oracle:
+
+ALTERNATE
+
+Name:Betroth the Beast
+ManaCost:W
+Types:Sorcery Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ role_royal | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Royal Role token attached to target creature you control.
+Oracle:Create a Royal Role token attached to target creature you control. (Enchanted creature gets +1/+1 and has ward {1}.)

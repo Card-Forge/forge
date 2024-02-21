@@ -1,0 +1,12 @@
+Name:Teysa, Opulent Oligarch
+ManaCost:1 W B
+Types:Legendary Creature Human Advisor
+PT:2/3
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ At the beginning of your end step, investigate for each opponent who lost life this turn.
+SVar:TrigInvestigate:DB$ Investigate | Num$ PlayerCountRegisteredOpponents$HasPropertyLostLifeThisTurn
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Clue.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever a Clue you control is put into a graveyard from the battlefield, create a 1/1 white and black Spirit creature token with flying. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_1_1_spirit_flying
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue|Spirit
+DeckHints:Ability$Investigate & Type$Clue
+Oracle:Deathtouch\nAt the beginning of your end step, investigate for each opponent who lost life this turn.\nWhenever a Clue you control is put into a graveyard from the battlefield, create a 1/1 white and black Spirit creature token with flying. This ability triggers only once each turn.

@@ -1,0 +1,14 @@
+Name:Aurelia, the Law Above
+ManaCost:3 R W
+Types:Legendary Creature Angel
+PT:4/4
+K:Flying
+K:Vigilance
+K:Haste
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | ValidAttackers$ Creature | ValidAttackersAmount$ GE3 | TriggerZones$ Battlefield | AttackingPlayer$ Player | TriggerDescription$ Whenever a player attacks with three or more creatures, you draw a card.
+SVar:TrigDraw:DB$ Draw
+T:Mode$ AttackersDeclared | Execute$ TrigDamage | ValidAttackers$ Creature | ValidAttackersAmount$ GE5 | TriggerZones$ Battlefield | AttackingPlayer$ Player | TriggerDescription$ Whenever a player attacks with five or more creatures, CARDNAME deals 3 damage to each of your opponents and you gain 3 life.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:Flying, vigilance, haste\nWhenever a player attacks with three or more creatures, you draw a card.\nWhenever a player attacks with five or more creatures, Aurelia, the Law Above deals 3 damage to each of your opponents and you gain 3 life.

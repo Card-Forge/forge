@@ -71,7 +71,7 @@ ScryfallCode=ME1
 195 L Forest @Christopher Rush
 118 C Fyndhorn Elves @Justin Hampton
 119 R Gargantuan Gorilla @Greg Simanson
-120 C Ghazban Ogre @Jesper Myrfors
+120 C Ghazbán Ogre @Jesper Myrfors
 34 C Giant Tortoise @Kaja Foglio
 94 C Goblin Chirurgeon @Dan Frazier
 95 U Goblin Grenade @Ron Spencer
@@ -94,7 +94,7 @@ ScryfallCode=ME1
 17 C Icatian Lieutenant @Pete Venters
 18 U Icatian Town @Tom Wänerstrand
 122 U Ice Storm @Dan Frazier
-123 R Ifh-Biff Efreet @Jesper Myrfors
+123 R Ifh-Bíff Efreet @Jesper Myrfors
 38 U Illusionary Forces @Justin Hampton
 39 C Illusionary Wall @Mark Poole
 40 R Illusions of Grandeur @Quinton Hoover
@@ -106,16 +106,16 @@ ScryfallCode=ME1
 147 R Jacques le Vert @Andi Rusu
 100 R Jokulhaups @Richard Thomas
 41 U Juxtapose @Justin Hampton
-74 R Juzam Djinn @Mark Tedin
+74 R Juzám Djinn @Mark Tedin
 101 U Keldon Warlord @Kev Brockschmidt
-75 R Khabal Ghoul @Douglas Shuler
+75 R Khabál Ghoul @Douglas Shuler
 19 C Knights of Thorn @Christopher Rush
 177 R Lake of the Dead @Pete Venters
 102 C Lightning Bolt @Christopher Rush
-148 U Lim-Dul's Vault @Rob Alexander
+148 U Lim-Dûl's Vault @Rob Alexander
 149 R Lord of Tresserhorn @Anson Maddocks
 103 R Mana Flare @Christopher Rush
-104 R Marton Stromgald @Mark Poole
+104 R Márton Stromgald @Mark Poole
 20 C Mesa Pegasus @Melissa A. Benson
 76 C Mindstab Thrull @Mark Tedin
 159 R Mirror Universe @Phil Foglio
@@ -153,7 +153,7 @@ ScryfallCode=ME1
 126 U Rabid Wombat @Kaja Foglio
 179 R Rainbow Vale @Kaja Foglio
 25 C Righteous Avengers @Heather Hudson
-163 R Ring of Ma'ruf @Dan Frazier
+163 R Ring of Ma'rûf @Dan Frazier
 47 C River Merfolk @Douglas Shuler
 127 C Roots @Nicola Leonard
 128 C Scryb Sprites @Amy Weber

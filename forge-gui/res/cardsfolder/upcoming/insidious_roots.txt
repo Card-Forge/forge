@@ -1,0 +1,11 @@
+Name:Insidious Roots
+ManaCost:B G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddAbility$ AnyMana | Description$ Creature tokens you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creature cards leave your graveyard, create a 0/1 green Plant creature token, then put a +1/+1 counter on each Plant you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_plant | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounterAll | ValidCards$ Plant.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Graveyard|Token|Counters & Type$Plant
+DeckHints:Type$Plant
+Oracle:Creature tokens you control have "{T}: Add one mana of any color."\nWhenever one or more creature cards leave your graveyard, create a 0/1 green Plant creature token, then put a +1/+1 counter on each Plant you control.

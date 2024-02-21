@@ -2,7 +2,6 @@ package forge.screens.match.winlose;
 
 import java.util.List;
 
-import forge.game.GameType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -201,7 +200,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
 
         h = height / 12;
         if (Forge.isMobileAdventureMode) {
-            if (game.getGameType() == GameType.AdventureEvent) {
+            if (game.getNumGamesInMatch() > 1) {
                 btnContinue.setBounds(x, y, w, h);
                 y += h + dy;
             }

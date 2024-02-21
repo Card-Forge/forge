@@ -1,6 +1,6 @@
 Name:Dynacharge
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | NumAtt$ 2 | SpellDescription$ Target creature you control gets +2/+0 until end of turn.
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | PrecostDesc$ Overload | CostDesc$ {2}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you control gets +2/+0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | NumAtt$ 2 | SpellDescription$ Target creature you control gets +2/+0 until end of turn.
+K:Overload:2 R
 Oracle:Target creature you control gets +2/+0 until end of turn.\nOverload {2}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

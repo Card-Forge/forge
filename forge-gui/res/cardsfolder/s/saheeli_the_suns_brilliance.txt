@@ -1,0 +1,8 @@
+Name:Saheeli, the Sun's Brilliance
+ManaCost:U R
+Types:Legendary Creature Human Artificer
+PT:2/2
+A:AB$ CopyPermanent | Cost$ U R T | ValidTgts$ Creature.YouCtrl+Other,Artifact.YouCtrl+Other | TgtPrompt$ Select another target artifact or creature you control | AddTypes$ Artifact | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of another target creature or artifact you control, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact
+DeckHints:Type$Artifact|Saheeli
+Oracle:{U}{R}, {T}: Create a token that's a copy of another target creature or artifact you control, except it's an artifact in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.

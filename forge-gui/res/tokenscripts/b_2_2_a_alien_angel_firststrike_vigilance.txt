@@ -1,0 +1,9 @@
+Name:Alien Angel Token
+ManaCost:no cost
+Types:Artifact Creature Alien Angel
+PT:2/2
+K:First Strike
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever an opponent casts a creature spell, this permanent isn't a creature until end of turn.
+SVar:TrigAnimate:DB$ Animate | RemoveTypes$ Creature
+Oracle:First strike, vigilance\nWhenever an opponent casts a creature spell, this permanent isn't a creature until end of turn.

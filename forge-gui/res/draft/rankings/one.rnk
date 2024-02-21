@@ -1,0 +1,277 @@
+//Rank|Name|Rarity|Set
+#1|Nissa, Ascended Animist|M|ONE
+#2|Elesh Norn, Mother of Machines|M|ONE
+#3|The Eternal Wanderer|R|ONE
+#4|White Sun's Twilight|R|ONE
+#5|Jace, the Perfected Mind|M|ONE
+#6|Vraska, Betrayal's Sting|M|ONE
+#7|Dragonwing Glider|R|ONE
+#8|Thrun, Breaker of Silence|R|ONE
+#9|Migloz, Maze Crusher|R|ONE
+#10|Sword of Forge and Frontier|M|ONE
+#11|Kemba, Kha Enduring|R|ONE
+#12|Mondrak, Glory Dominus|M|ONE
+#13|Skrelv, Defector Mite|R|ONE
+#14|Black Sun's Twilight|R|ONE
+#15|Koth, Fire of Resistance|R|ONE
+#16|Urabrask's Forge|R|ONE
+#17|Bloated Contaminator|R|ONE
+#18|Glissa Sunslayer|R|ONE
+#19|Kaito, Dancing Shadow|R|ONE
+#20|Kaya, Intangible Slayer|R|ONE
+#21|Lukka, Bound to Ruin|M|ONE
+#22|Malcator, Purity Overseer|R|ONE
+#23|Argentum Masticore|R|ONE
+#24|Annex Sentry|U|ONE
+#25|Ossification|U|ONE
+#26|Mercurial Spelldancer|R|ONE
+#27|Tekuthal, Inquiry Dominus|M|ONE
+#28|Solphim, Mayhem Dominus|M|ONE
+#29|Evolving Adaptive|U|ONE
+#30|Zopandrel, Hunger Dominus|M|ONE
+#31|Bladehold War-Whip|U|ONE
+#32|Cinderslash Ravager|U|ONE
+#33|Bladed Ambassador|U|ONE
+#34|Crawling Chorus|C|ONE
+#35|Jawbone Duelist|U|ONE
+#36|Skrelv's Hive|R|ONE
+#37|Blue Sun's Twilight|R|ONE
+#38|Trawler Drake|U|ONE
+#39|Unctus's Retrofitter|U|ONE
+#40|Ambulatory Edifice|U|ONE
+#41|Anoint with Affliction|C|ONE
+#42|Archfiend of the Dross|R|ONE
+#43|Drivnod, Carnage Dominus|M|ONE
+#44|Drown in Ichor|U|ONE
+#45|Karumonix, the Rat King|R|ONE
+#46|Phyrexian Obliterator|M|ONE
+#47|Vraan, Executioner Thane|R|ONE
+#48|Chimney Rabble|C|ONE
+#49|Furnace Strider|C|ONE
+#50|Hazardous Blast|C|ONE
+#51|Hexgold Slash|C|ONE
+#52|Rebel Salvo|U|ONE
+#53|Sylvok Battle-Chair|U|ONE
+#54|Tyrranax Rex|M|ONE
+#55|Ria Ivor, Bane of Bladehold|R|ONE
+#56|Slaughter Singer|U|ONE
+#57|Vivisection Evangelist|U|ONE
+#58|Atraxa's Skitterfang|U|ONE
+#59|Ichorplate Golem|U|ONE
+#60|Compleat Devotion|C|ONE
+#61|Duelist of Deep Faith|C|ONE
+#62|Hexgold Hoverwings|U|ONE
+#63|Planar Disruption|C|ONE
+#64|Plated Onslaught|U|ONE
+#65|Porcelain Zealot|U|ONE
+#66|Resistance Reunited|U|ONE
+#67|Unctus, Grand Metatect|R|ONE
+#68|Bilious Skulldweller|U|ONE
+#69|Blightbelly Rat|C|ONE
+#70|Chittering Skitterling|U|ONE
+#71|Gulping Scraptrap|C|ONE
+#72|Pestilent Syphoner|C|ONE
+#73|Stinging Hivemaster|C|ONE
+#74|Testament Bearer|C|ONE
+#75|Axiom Engraver|C|ONE
+#76|Barbed Batterfist|C|ONE
+#77|Blazing Crescendo|C|ONE
+#78|Cacophony Scamp|U|ONE
+#79|Capricious Hellraiser|M|ONE
+#80|Resistance Skywarden|U|ONE
+#81|Urabrask's Anointer|U|ONE
+#82|Armored Scrapgorger|U|ONE
+#83|Cankerbloom|U|ONE
+#84|Contagious Vorrac|C|ONE
+#85|Evolved Spinoderm|R|ONE
+#86|Incubation Sac|U|ONE
+#87|Infectious Bite|U|ONE
+#88|Viral Spawning|U|ONE
+#89|Cephalopod Sentry|U|ONE
+#90|Charforger|U|ONE
+#91|Jor Kadeen, First Goldwarden|R|ONE
+#92|Necrogen Rotpriest|U|ONE
+#93|Serum-Core Chimera|U|ONE
+#94|Venser, Corpse Puppet|R|ONE
+#95|Ribskiff|U|ONE
+#96|Serum Snare|U|ONE
+#97|Tamiyo's Immobilizer|U|ONE
+#98|Nimraiser Paladin|U|ONE
+#99|Churning Reservoir|U|ONE
+#100|Exuberant Fuseling|U|ONE
+#101|Free from Flesh|C|ONE
+#102|Furnace Punisher|U|ONE
+#103|Hexgold Halberd|U|ONE
+#104|Volt Charge|C|ONE
+#105|Lattice-Blade Mantis|C|ONE
+#106|Ruthless Predation|C|ONE
+#107|Titanic Growth|C|ONE
+#108|Tyvar's Stand|U|ONE
+#109|Ezuri, Stalker of Spheres|R|ONE
+#110|Melira, the Living Cure|R|ONE
+#111|Tainted Observer|U|ONE
+#112|Voidwing Hybrid|U|ONE
+#113|Mandible Justiciar|C|ONE
+#114|Malcator's Watcher|C|ONE
+#115|Mesmerizing Dose|C|ONE
+#116|Ravenous Necrotitan|U|ONE
+#117|Kuldotha Cackler|C|ONE
+#118|Magmatic Sprinter|U|ONE
+#119|Vindictive Flamestoker|R|ONE
+#120|Rustvine Cultivator|C|ONE
+#121|Tyrranax Atrocity|C|ONE
+#122|Kethek, Crucible Goliath|R|ONE
+#123|Nahiri, the Unforgiving|M|ONE
+#124|Ovika, Enigma Goliath|R|ONE
+#125|Myr Convert|U|ONE
+#126|Mirrex|R|ONE
+#127|Basilica Shepherd|C|ONE
+#128|Charge of the Mites|C|ONE
+#129|Flensing Raptor|C|ONE
+#130|Incisor Glider|C|ONE
+#131|Indoctrination Attendant|C|ONE
+#132|Infested Fleshcutter|U|ONE
+#133|Mirran Bardiche|C|ONE
+#134|Phyrexian Vindicator|M|ONE
+#135|Sinew Dancer|C|ONE
+#136|Atmosphere Surgeon|U|ONE
+#137|Blade of Shared Souls|R|ONE
+#138|Chrome Prowler|C|ONE
+#139|Eye of Malcator|C|ONE
+#140|Font of Progress|U|ONE
+#141|Gitaxian Anatomist|C|ONE
+#142|Ichor Synthesizer|C|ONE
+#143|Quicksilver Fisher|C|ONE
+#144|Tamiyo's Logbook|U|ONE
+#145|Vivisurgeon's Insight|C|ONE
+#146|Annihilating Glare|C|ONE
+#147|Cruel Grimnarch|C|ONE
+#148|Infectious Inquiry|C|ONE
+#149|Necrogen Communion|U|ONE
+#150|Phyrexian Arena|R|ONE
+#151|Sheoldred's Headcleaver|C|ONE
+#152|Vat Emergence|U|ONE
+#153|Whisper of the Dross|C|ONE
+#154|All Will Be One|M|ONE
+#155|Bladegraft Aspirant|C|ONE
+#156|Molten Rebuke|C|ONE
+#157|Shrapnel Slinger|C|ONE
+#158|Slobad, Iron Goblin|R|ONE
+#159|Vulshok Splitter|C|ONE
+#160|Branchblight Stalker|C|ONE
+#161|Ichorspit Basilisk|C|ONE
+#162|Maze's Mantle|C|ONE
+#163|Oil-Gorger Troll|C|ONE
+#164|Predation Steward|C|ONE
+#165|Myr Custodian|C|ONE
+#166|Myr Kinsmith|C|ONE
+#167|The Autonomous Furnace|C|ONE
+#168|Blackcleave Cliffs|R|ONE
+#169|Copperline Gorge|R|ONE
+#170|Darkslick Shores|R|ONE
+#171|The Dross Pits|C|ONE
+#172|The Fair Basilica|C|ONE
+#173|The Hunter Maze|C|ONE
+#174|The Monumental Facade|R|ONE
+#175|The Mycosynth Gardens|R|ONE
+#176|Razorverge Thicket|R|ONE
+#177|Seachrome Coast|R|ONE
+#178|The Seedcore|R|ONE
+#179|The Surgical Bay|C|ONE
+#180|Terramorphic Expanse|C|ONE
+#181|Experimental Augury|C|ONE
+#182|Reject Imperfection|U|ONE
+#183|Watchful Blisterzoa|U|ONE
+#184|Necrosquito|U|ONE
+#185|Adaptive Sporesinger|C|ONE
+#186|Conduit of Worlds|R|ONE
+#187|Venerated Rotpriest|R|ONE
+#188|Against All Odds|U|ONE
+#189|Apostle of Invasion|U|ONE
+#190|Goldwarden's Helm|C|ONE
+#191|Leonin Lightbringer|C|ONE
+#192|Norn's Wellspring|R|ONE
+#193|Orthodoxy Enforcer|C|ONE
+#194|Swooping Lookout|U|ONE
+#195|Vanish into Eternity|C|ONE
+#196|Zealot's Conviction|C|ONE
+#197|Distorted Curiosity|U|ONE
+#198|Escaped Experiment|C|ONE
+#199|Gitaxian Raptor|C|ONE
+#200|Glistener Seer|C|ONE
+#201|Meldweb Curator|C|ONE
+#202|Meldweb Strider|C|ONE
+#203|Prologue to Phyresis|C|ONE
+#204|Thrummingbird|U|ONE
+#205|Transplant Theorist|U|ONE
+#206|Bonepicker Skirge|C|ONE
+#207|Cutthroat Centurion|C|ONE
+#208|Feed the Infection|U|ONE
+#209|Fleshless Gladiator|C|ONE
+#210|Geth, Thane of Contracts|R|ONE
+#211|Scheming Aspirant|U|ONE
+#212|Vraska's Fall|C|ONE
+#213|Awaken the Sleeper|U|ONE
+#214|Forgehammer Centurion|C|ONE
+#215|Oxidda Finisher|U|ONE
+#216|Sawblade Scamp|C|ONE
+#217|Carnivorous Canopy|C|ONE
+#218|Noxious Assault|U|ONE
+#219|Paladin of Predation|U|ONE
+#220|Skyscythe Engulfer|C|ONE
+#221|Thirsting Roots|C|ONE
+#222|Venomous Brutalizer|U|ONE
+#223|Basilica Skullbomb|C|ONE
+#224|Dross Skullbomb|C|ONE
+#225|Dune Mover|C|ONE
+#226|The Filigree Sylex|R|ONE
+#227|Furnace Skullbomb|C|ONE
+#228|Maze Skullbomb|C|ONE
+#229|Phyrexian Atlas|C|ONE
+#230|Prophetic Prism|C|ONE
+#231|Staff of Compleation|M|ONE
+#232|Surgical Skullbomb|C|ONE
+#233|Zenith Chronicler|R|ONE
+#234|Aspirant's Ascent|C|ONE
+#235|Bring the Ending|C|ONE
+#236|Duress|C|ONE
+#237|Offer Immortality|C|ONE
+#238|Sheoldred's Edict|U|ONE
+#239|Vat of Rebirth|U|ONE
+#240|Red Sun's Twilight|R|ONE
+#241|Thrill of Possibility|C|ONE
+#242|Copper Longlegs|C|ONE
+#243|Green Sun's Twilight|R|ONE
+#244|Atraxa, Grand Unifier|M|ONE
+#245|Graaz, Unstoppable Juggernaut|R|ONE
+#246|Prosthetic Injector|U|ONE
+#247|Tablet of Compleation|R|ONE
+#248|Veil of Assimilation|U|ONE
+#249|Encroaching Mycosynth|R|ONE
+#250|Ichormoon Gauntlet|M|ONE
+#251|Mindsplice Apparatus|R|ONE
+#252|Minor Misstep|U|ONE
+#253|Gleeful Demolition|U|ONE
+#254|Nahiri's Sacrifice|U|ONE
+#255|Expand the Sphere|U|ONE
+#256|Plague Nurse|C|ONE
+#257|Unnatural Restoration|U|ONE
+#258|Tyvar, Jubilant Brawler|R|ONE
+#259|Mirran Safehouse|R|ONE
+#260|Monument to Perfection|R|ONE
+#261|Soulless Jailer|R|ONE
+#262|Plains 1|C|ONE
+#263|Island 1|C|ONE
+#264|Swamp 1|C|ONE
+#265|Mountain 1|C|ONE
+#266|Forest 1|C|ONE
+#267|Plains 2|C|ONE
+#268|Island 2|C|ONE
+#269|Swamp 2|C|ONE
+#270|Mountain 2|C|ONE
+#271|Forest 2|C|ONE
+#272|Plains 3|C|ONE
+#273|Island 3|C|ONE
+#274|Swamp 3|C|ONE
+#275|Mountain 3|C|ONE
+#276|Forest 3|C|ONE

@@ -58,6 +58,7 @@ public class TargetRestrictions {
     private boolean singleZone = false;
     private boolean differentControllers = false;
     private boolean differentCMC = false;
+    private boolean equalToughness = false;
     private boolean sameController = false;
     private boolean withoutSameCreatureType = false;
     private boolean withSameCreatureType = false;
@@ -100,6 +101,7 @@ public class TargetRestrictions {
         this.singleZone = target.isSingleZone();
         this.differentControllers = target.isDifferentControllers();
         this.differentCMC = target.isDifferentCMC();
+        this.equalToughness = target.isEqualToughness();
         this.sameController = target.isSameController();
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.withSameCreatureType = target.isWithSameCreatureType();
@@ -616,6 +618,21 @@ public class TargetRestrictions {
     public void setDifferentCMC(boolean different) {
         this.differentCMC = different;
     }
+
+    /**
+     * @return the equalToughness
+     */
+    public boolean isEqualToughness() {
+        return equalToughness;
+    }
+
+    /**
+     * @param b the equalToughness to set
+     */
+    public void setEqualToughness(boolean b) {
+        this.equalToughness = b;
+    }
+
     /**
      * @return the differentControllers
      */

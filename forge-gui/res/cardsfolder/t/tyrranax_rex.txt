@@ -2,7 +2,7 @@ Name:Tyrranax Rex
 ManaCost:4 G G G
 Types:Creature Phyrexian Dinosaur
 PT:8/8
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Trample
 K:Ward:4
 K:Haste

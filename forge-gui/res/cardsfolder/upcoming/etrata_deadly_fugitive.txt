@@ -1,0 +1,14 @@
+Name:Etrata, Deadly Fugitive
+ManaCost:1 U B
+Types:Legendary Creature Vampire Assassin
+PT:1/4
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Creature.faceDown+YouCtrl | EffectZone$ Battlefield | AddAbility$ TurnFaceUp | Description$ Face-down creatures you control have "{2}{U}{B}: Turn this creature face up. If you can't, exile it, then you may cast the exiled card without paying its mana cost."
+SVar:TurnFaceUp:AB$ SetState | Cost$ 2 U B | Defined$ Self | Mode$ TurnFaceUp | SubAbility$ ExileSelf | RememberChanged$ True | SpellDescription$ Turn this creature face up. If you can't, exile it, then you may cast the exiled card without paying its mana cost.
+SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | Imprint$ True | SubAbility$ DBPlayExiled
+SVar:DBPlayExiled:DB$ Play | Valid$ Card.IsImprinted | WithoutManaCost$ True | ValidSA$ Spell | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ All | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ DamageDone | ValidSource$ Assassin.YouCtrl | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigCloak | TriggerDescription$ Whenever an Assassin you control deals combat damage to an opponent, cloak the top card of that player's library.
+SVar:TrigCloak:DB$ Cloak | Defined$ ValidLibrary Card.TopLibrary+OwnedBy TriggeredTarget
+DeckHints:Type$Assassin
+Oracle:Deathtouch\nFace-down creatures you control have "{2}{U}{B}: Turn this creature face up. If you can't, exile it, then you may cast the exiled card without paying its mana cost."\nWhenever an Assassin you control deals combat damage to an opponent, cloak the top card of that player's library.

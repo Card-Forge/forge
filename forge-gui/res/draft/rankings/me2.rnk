@@ -1,0 +1,246 @@
+//Rank|Name|Rarity|Set
+#1|Aeolipile|C|ME2
+#2|Wiitigo|R|ME2
+#3|Sustaining Spirit|R|ME2
+#4|Mana Crypt|R|ME2
+#5|Skeleton Ship|R|ME2
+#6|Fungal Bloom|R|ME2
+#7|Angel of Fury|R|ME2
+#8|Minion of Leshrac|R|ME2
+#9|Ihsan's Shade|R|ME2
+#10|Orcish Cannoneers|U|ME2
+#11|Krovikan Vampire|U|ME2
+#12|Ravages of War|R|ME2
+#13|Incinerate|C|ME2
+#14|Dark Banishing|C|ME2
+#15|Stunted Growth|R|ME2
+#16|Ebon Praetor|R|ME2
+#17|Knight of Stromgald|U|ME2
+#18|Swords to Plowshares|U|ME2
+#19|Whirling Catapult|U|ME2
+#20|Storm Spirit|R|ME2
+#21|Snow Fortress|U|ME2
+#22|Imperial Seal|R|ME2
+#23|Kaysa|R|ME2
+#24|Thelonite Druid|R|ME2
+#25|Lava Burst|U|ME2
+#26|Order of the White Shield|U|ME2
+#27|Sibilant Spirit|R|ME2
+#28|Ritual of the Machine|R|ME2
+#29|Grandmother Sengir|R|ME2
+#30|Deep Spawn|R|ME2
+#31|Icy Prison|C|ME2
+#32|Soldevi Digger|U|ME2
+#33|Zuran Spellcaster|C|ME2
+#34|Farrel's Mantle|U|ME2
+#35|Fire Dragon|R|ME2
+#36|Bounty of the Hunt|R|ME2
+#37|Helm of Obedience|R|ME2
+#38|Abbey Gargoyles|U|ME2
+#39|Feral Thallid|C|ME2
+#40|Meteor Shower|C|ME2
+#41|Necropotence|R|ME2
+#42|Binding Grasp|R|ME2
+#43|Woolly Spider|U|ME2
+#44|Wind Spirit|U|ME2
+#45|Angel of Light|U|ME2
+#46|Righteous Fury|R|ME2
+#47|Balduvian Trading Post|R|ME2
+#48|Jester's Mask|R|ME2
+#49|Balduvian Hydra|R|ME2
+#50|Soldevi Excavations|R|ME2
+#51|Storm Elemental|U|ME2
+#52|Fumarole|U|ME2
+#53|Underground Sea|R|ME2
+#54|Ray of Command|U|ME2
+#55|Lost Order of Jarkeld|R|ME2
+#56|Pyrokinesis|R|ME2
+#57|Temporal Manipulation|R|ME2
+#58|Soldevi Simulacrum|U|ME2
+#59|Badlands|R|ME2
+#60|Orc General|U|ME2
+#61|Brimstone Dragon|R|ME2
+#62|Viscerid Drone|U|ME2
+#63|Wolf Pack|R|ME2
+#64|Brassclaw Orcs|C|ME2
+#65|Taiga|R|ME2
+#66|Counterspell|U|ME2
+#67|Rogue Skycaptain|R|ME2
+#68|Sea Spirit|U|ME2
+#69|Kjeldoran Skycaptain|C|ME2
+#70|Broken Visage|U|ME2
+#71|Skull Catapult|U|ME2
+#72|Clockwork Steed|U|ME2
+#73|Ivory Gargoyle|R|ME2
+#74|Savannah|R|ME2
+#75|Adarkar Sentinel|C|ME2
+#76|Time Bomb|R|ME2
+#77|Retribution|U|ME2
+#78|Woolly Mammoths|C|ME2
+#79|Balduvian Dead|U|ME2
+#80|Glacial Chasm|R|ME2
+#81|Tundra|R|ME2
+#82|Wings of Aesthir|U|ME2
+#83|Brainstorm|C|ME2
+#84|Musician|R|ME2
+#85|Kjeldoran Elite Guard|C|ME2
+#86|Roterothopter|C|ME2
+#87|Necrite|C|ME2
+#88|Ashen Ghoul|U|ME2
+#89|Heart of Yavimaya|R|ME2
+#90|Flame Spirit|U|ME2
+#91|Sea Drake|R|ME2
+#92|Leaping Lizard|C|ME2
+#93|Earthlink|R|ME2
+#94|Farrel's Zealot|U|ME2
+#95|Narwhal|U|ME2
+#96|Elvish Hunter|C|ME2
+#97|Imperial Recruiter|R|ME2
+#98|Lim-Dul's High Guard|U|ME2
+#99|Orcish Veteran|C|ME2
+#100|Krovikan Horror|R|ME2
+#101|Elemental Augury|R|ME2
+#102|Giant Trap Door Spider|U|ME2
+#103|Joven's Ferrets|U|ME2
+#104|Stone Spirit|U|ME2
+#105|Infernal Darkness|R|ME2
+#106|Marjhan|R|ME2
+#107|Elven Lyre|C|ME2
+#108|Jeweled Amulet|U|ME2
+#109|Screeching Drake|C|ME2
+#110|Yavimaya Ancients|U|ME2
+#111|Dance of the Dead|U|ME2
+#112|Death Spark|C|ME2
+#113|Phantasmal Mount|C|ME2
+#114|Armored Griffin|C|ME2
+#115|Barbed Sextant|C|ME2
+#116|Caribou Range|R|ME2
+#117|Icatian Javelineers|C|ME2
+#118|Folk of the Pines|C|ME2
+#119|Ironclaw Orcs|C|ME2
+#120|Ambush Party|C|ME2
+#121|Elvish Ranger|C|ME2
+#122|Stromgald Cabal|R|ME2
+#123|Order of the Sacred Torch|R|ME2
+#124|Anarchy|R|ME2
+#125|Elvish Spirit Guide|U|ME2
+#126|Shyft|C|ME2
+#127|Red Cliffs Armada|C|ME2
+#128|Reprisal|C|ME2
+#129|Pillage|U|ME2
+#130|Gorilla Shaman|U|ME2
+#131|Whiteout|C|ME2
+#132|Ice Floe|U|ME2
+#133|Aurochs|C|ME2
+#134|Kjeldoran Outpost|R|ME2
+#135|Giant Growth|C|ME2
+#136|Phantasmal Fiend|C|ME2
+#137|Dystopia|R|ME2
+#138|Balduvian Conjurer|C|ME2
+#139|Scars of the Veteran|R|ME2
+#140|Thermokarst|C|ME2
+#141|Soul Exchange|U|ME2
+#142|Varchild's Crusader|C|ME2
+#143|Brine Shaman|C|ME2
+#144|Mishra's Groundbreaker|U|ME2
+#145|Kjeldoran Dead|C|ME2
+#146|Tinder Wall|C|ME2
+#147|Thallid Devourer|C|ME2
+#148|Forgotten Lore|U|ME2
+#149|Royal Decree|R|ME2
+#150|Wall of Kelp|C|ME2
+#151|Thunder Wall|U|ME2
+#152|Portent|C|ME2
+#153|Krovikan Sorcerer|C|ME2
+#154|Gangrenous Zombies|C|ME2
+#155|Johtull Wurm|U|ME2
+#156|Thallid|C|ME2
+#157|Aysen Bureaucrats|C|ME2
+#158|Orcish Lumberjack|C|ME2
+#159|Karplusan Giant|U|ME2
+#160|Gustha's Scepter|R|ME2
+#161|Orcish Squatters|R|ME2
+#162|Dwarven Ruins|U|ME2
+#163|Stampede|U|ME2
+#164|Royal Trooper|C|ME2
+#165|Snow-Covered Island|L|ME2
+#166|Phyrexian Devourer|U|ME2
+#167|Combat Medic|C|ME2
+#168|Browse|U|ME2
+#169|Snow-Covered Mountain|L|ME2
+#170|Elkin Bottle|R|ME2
+#171|Ruins of Trokair|U|ME2
+#172|Icatian Phalanx|C|ME2
+#173|Orcish Farmer|C|ME2
+#174|Spore Cloud|U|ME2
+#175|Soul Kiss|U|ME2
+#176|Juniper Order Advocate|U|ME2
+#177|Armor Thrull|C|ME2
+#178|Phyrexian Portal|R|ME2
+#179|Lodestone Bauble|R|ME2
+#180|Forbidden Lore|U|ME2
+#181|Svyelunite Temple|U|ME2
+#182|Ashnod's Cylix|R|ME2
+#183|Foul Familiar|C|ME2
+#184|Energy Storm|R|ME2
+#185|Personal Tutor|U|ME2
+#186|Glacial Crevasses|R|ME2
+#187|Snow-Covered Forest|L|ME2
+#188|Ebon Stronghold|U|ME2
+#189|Diabolic Vision|U|ME2
+#190|Aether Storm|U|ME2
+#191|Demonic Consultation|U|ME2
+#192|Enervate|C|ME2
+#193|Mesmeric Trance|R|ME2
+#194|Stonehands|C|ME2
+#195|Goblin Ski Patrol|C|ME2
+#196|Withering Wisps|U|ME2
+#197|An-Zerrin Ruins|R|ME2
+#198|Nature's Blessing|U|ME2
+#199|Essence Flare|C|ME2
+#200|Dry Spell|C|ME2
+#201|Night Soil|U|ME2
+#202|Nature's Wrath|R|ME2
+#203|Drift of the Dead|C|ME2
+#204|Snow-Covered Swamp|L|ME2
+#205|Magus of the Unseen|R|ME2
+#206|Iceberg|U|ME2
+#207|Havenwood Battleground|U|ME2
+#208|Snow-Covered Plains|L|ME2
+#209|Inheritance|U|ME2
+#210|Kjeldoran Home Guard|U|ME2
+#211|Krovikan Fetish|C|ME2
+#212|Dreams of the Dead|R|ME2
+#213|Icatian Scout|C|ME2
+#214|Funeral March|C|ME2
+#215|Sacred Boon|U|ME2
+#216|Orcish Conscripts|C|ME2
+#217|Lat-Nam's Legacy|C|ME2
+#218|Conquer|U|ME2
+#219|Disenchant|C|ME2
+#220|Aysen Crusader|U|ME2
+#221|Shrink|C|ME2
+#222|Orcish Captain|U|ME2
+#223|Spore Flower|U|ME2
+#224|Panic|C|ME2
+#225|Fyndhorn Pollen|R|ME2
+#226|Carapace|C|ME2
+#227|Shield Bearer|C|ME2
+#228|Misinformation|U|ME2
+#229|Warning|C|ME2
+#230|Viscerid Armor|C|ME2
+#231|Errantry|C|ME2
+#232|Winter's Night|R|ME2
+#233|Songs of the Damned|C|ME2
+#234|Armor of Faith|C|ME2
+#235|Cloak of Confusion|C|ME2
+#236|Errand of Duty|U|ME2
+#237|Elvish Farmer|R|ME2
+#238|Icequake|C|ME2
+#239|Reinforcements|C|ME2
+#240|Essence Filter|U|ME2
+#241|Burnout|U|ME2
+#242|Ritual of Subdual|R|ME2
+#243|Mudslide|R|ME2
+#244|Despotic Scepter|R|ME2
+#245|Thought Lash|R|ME2

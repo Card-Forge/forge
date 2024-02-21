@@ -1,0 +1,10 @@
+Name:Earthshaker Dreadmaw
+ManaCost:4 G G
+Types:Creature Dinosaur
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each other Dinosaur you control.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$Valid Dinosaur.StrictlyOther+YouCtrl
+DeckNeeds:Type$Dinosaur
+Oracle:Trample\nWhen Earthshaker Dreadmaw enters the battlefield, draw a card for each other Dinosaur you control.

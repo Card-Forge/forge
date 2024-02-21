@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Grim Lavamancer|R|TOR
+#2|Laquatus's Champion|R|TOR
+#3|Shambling Swarm|R|TOR
+#4|Hydromorph Gull|U|TOR
+#5|Mutilate|R|TOR
+#6|Arrogant Wurm|U|TOR
+#7|Compulsion|U|TOR
+#8|Gurzigost|R|TOR
+#9|Reborn Hero|R|TOR
+#10|Possessed Aven|R|TOR
+#11|Angel of Retribution|R|TOR
+#12|Ichorid|R|TOR
+#13|Ambassador Laquatus|R|TOR
+#14|Chainer, Dementia Master|R|TOR
+#15|Violent Eruption|U|TOR
+#16|Pardic Arsonist|U|TOR
+#17|Chainer's Edict|U|TOR
+#18|Grotesque Hybrid|U|TOR
+#19|Faceless Butcher|C|TOR
+#20|Sengir Vampire|R|TOR
+#21|Narcissism|U|TOR
+#22|Nantuko Shade|R|TOR
+#23|Major Teroh|R|TOR
+#24|Fiery Temper|C|TOR
+#25|Possessed Barbarian|R|TOR
+#26|Crippling Fatigue|C|TOR
+#27|Nantuko Blightcutter|R|TOR
+#28|Nantuko Cultivator|R|TOR
+#29|Centaur Chieftain|U|TOR
+#30|Balshan Collaborator|U|TOR
+#31|Basking Rootwalla|C|TOR
+#32|Possessed Centaur|R|TOR
+#33|Aquamoeba|C|TOR
+#34|Deep Analysis|C|TOR
+#35|Cephalid Sage|U|TOR
+#36|Seton's Scout|U|TOR
+#37|Gloomdrifter|U|TOR
+#38|Anurid Scavenger|U|TOR
+#39|Breakthrough|U|TOR
+#40|Llawan, Cephalid Empress|R|TOR
+#41|Hell-Bent Raider|R|TOR
+#42|Cabal Torturer|C|TOR
+#43|Insidious Dreams|R|TOR
+#44|Soul Scourge|C|TOR
+#45|Vengeful Dreams|R|TOR
+#46|Skywing Aven|C|TOR
+#47|Carrion Wurm|U|TOR
+#48|Devastating Dreams|R|TOR
+#49|Stern Judge|U|TOR
+#50|Balthor the Stout|R|TOR
+#51|Possessed Nomad|R|TOR
+#52|Teroh's Vanguard|U|TOR
+#53|Mesmeric Fiend|C|TOR
+#54|Obsessive Search|C|TOR
+#55|Circular Logic|U|TOR
+#56|Acorn Harvest|C|TOR
+#57|Mystic Familiar|C|TOR
+#58|Spirit Flare|C|TOR
+#59|Mind Sludge|U|TOR
+#60|Strength of Isolation|U|TOR
+#61|Organ Grinder|C|TOR
+#62|Militant Monk|C|TOR
+#63|Hypnox|R|TOR
+#64|Pardic Lancer|C|TOR
+#65|Waste Away|C|TOR
+#66|Sickening Dreams|U|TOR
+#67|Slithery Stalker|U|TOR
+#68|Crazed Firecat|U|TOR
+#69|Boneshard Slasher|U|TOR
+#70|Stupefying Touch|U|TOR
+#71|Pitchstone Wall|U|TOR
+#72|Strength of Lunacy|U|TOR
+#73|Teroh's Faithful|C|TOR
+#74|Churning Eddy|C|TOR
+#75|Hydromorph Guardian|C|TOR
+#76|Pardic Collaborator|U|TOR
+#77|Sonic Seizure|C|TOR
+#78|Longhorn Firebeast|C|TOR
+#79|Petravark|C|TOR
+#80|Centaur Veteran|C|TOR
+#81|Krosan Constrictor|C|TOR
+#82|Nantuko Calmer|C|TOR
+#83|Shade's Form|C|TOR
+#84|Cephalid Aristocrat|C|TOR
+#85|Cabal Coffers|U|TOR
+#86|Krosan Restorer|C|TOR
+#87|Hypochondria|U|TOR
+#88|Far Wanderings|C|TOR
+#89|Gravegouger|C|TOR
+#90|Cephalid Illusionist|U|TOR
+#91|Tainted Peak|U|TOR
+#92|Putrid Imp|C|TOR
+#93|Zombie Trailblazer|U|TOR
+#94|Floating Shield|C|TOR
+#95|Nostalgic Dreams|R|TOR
+#96|Tainted Isle|U|TOR
+#97|Liquify|C|TOR
+#98|Tainted Wood|U|TOR
+#99|Overmaster|R|TOR
+#100|Unhinge|C|TOR
+#101|Crackling Club|C|TOR
+#102|Ghostly Wings|C|TOR
+#103|Coral Net|C|TOR
+#104|Petradon|R|TOR
+#105|Parallel Evolution|R|TOR
+#106|Cabal Surgeon|C|TOR
+#107|Morningtide|R|TOR
+#108|Barbarian Outcast|C|TOR
+#109|Rancid Earth|C|TOR
+#110|Temporary Insanity|U|TOR
+#111|Cephalid Vandal|R|TOR
+#112|Plagiarize|R|TOR
+#113|Turbulent Dreams|R|TOR
+#114|Pyromania|U|TOR
+#115|Dawn of the Dead|R|TOR
+#116|Restless Dreams|C|TOR
+#117|Last Laugh|R|TOR
+#118|Flaming Gambit|U|TOR
+#119|Kamahl's Sledge|C|TOR
+#120|Cabal Ritual|C|TOR
+#121|Equal Treatment|U|TOR
+#122|Carrion Rats|C|TOR
+#123|Psychotic Haze|C|TOR
+#124|Tainted Field|U|TOR
+#125|Mortiphobia|U|TOR
+#126|Aven Trooper|C|TOR
+#127|Flash of Defiance|C|TOR
+#128|Enslaved Dwarf|C|TOR
+#129|Skullscorch|R|TOR
+#130|Cephalid Snitch|C|TOR
+#131|Insist|R|TOR
+#132|Frantic Purification|C|TOR
+#133|Accelerate|C|TOR
+#134|Pay No Heed|C|TOR
+#135|Retraced Image|R|TOR
+#136|Invigorating Falls|C|TOR
+#137|False Memories|R|TOR
+#138|Radiate|R|TOR
+#139|Alter Reality|R|TOR
+#140|Cleansing Meditation|U|TOR
+#141|Dwell on the Past|U|TOR
+#142|Mortal Combat|R|TOR
+#143|Transcendence|R|TOR

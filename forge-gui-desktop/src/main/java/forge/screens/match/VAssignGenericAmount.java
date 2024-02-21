@@ -73,7 +73,7 @@ public class VAssignGenericAmount {
     private final JLabel lblTotalAmount;
     private final boolean atLeastOne;
     //  Label Buttons
-    private final FButton btnOK    = new FButton(localizer.getMessage("lblOk"));
+    private final FButton btnOK    = new FButton(localizer.getMessage("lblOK"));
     private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
 
     private static class AssignTarget {

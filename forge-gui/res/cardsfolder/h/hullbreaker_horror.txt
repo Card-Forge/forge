@@ -3,7 +3,7 @@ ManaCost:5 U U
 Types:Creature Kraken Horror
 PT:7/8
 K:Flash
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ ControlReturn,ControlBounce | MinCharmNum$ 0 | CharmNum$ 1
 SVar:ControlReturn:DB$ ChangeZone | ValidTgts$ Card.YouDontCtrl | TargetType$ Spell | TgtPrompt$ Select target spell you don't control | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell you don't control to its owner's hand.

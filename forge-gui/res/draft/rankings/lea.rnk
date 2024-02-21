@@ -1,0 +1,286 @@
+//Rank|Name|Rarity|Set
+#1|Black Lotus|R|LEA
+#2|Mox Emerald|R|LEA
+#3|Mox Sapphire|R|LEA
+#4|Time Walk|R|LEA
+#5|Gauntlet of Might|R|LEA
+#6|Mox Pearl|R|LEA
+#7|Sol Ring|U|LEA
+#8|Taiga|R|LEA
+#9|Mox Jet|R|LEA
+#10|Shivan Dragon|R|LEA
+#11|Mox Ruby|R|LEA
+#12|Cockatrice|R|LEA
+#13|Demonic Tutor|U|LEA
+#14|Roc of Kher Ridges|R|LEA
+#15|Ancestral Recall|R|LEA
+#16|Badlands|R|LEA
+#17|Wrath of God|R|LEA
+#18|Underground Sea|R|LEA
+#19|Fireball|C|LEA
+#20|Lightning Bolt|C|LEA
+#21|Bad Moon|R|LEA
+#22|Swords to Plowshares|U|LEA
+#23|Braingeyser|R|LEA
+#24|Royal Assassin|R|LEA
+#25|Vesuvan Doppelganger|R|LEA
+#26|Timetwister|R|LEA
+#27|Scrubland|R|LEA
+#28|Time Vault|R|LEA
+#29|Disintegrate|C|LEA
+#30|Balance|R|LEA
+#31|Clone|U|LEA
+#32|Nevinyrral's Disk|R|LEA
+#33|Armageddon|R|LEA
+#34|Savannah|R|LEA
+#35|Tundra|R|LEA
+#36|Berserk|U|LEA
+#37|Wheel of Fortune|R|LEA
+#38|Force of Nature|R|LEA
+#39|Tropical Island|R|LEA
+#40|Earthquake|R|LEA
+#41|Fork|R|LEA
+#42|Hypnotic Specter|U|LEA
+#43|Bayou|R|LEA
+#44|Sengir Vampire|U|LEA
+#45|Chaos Orb|R|LEA
+#46|Winter Orb|R|LEA
+#47|Volcanic Island|R|LEA
+#48|Two-Headed Giant of Foriys|R|LEA
+#49|Will o' the Wisp|R|LEA
+#50|Granite Gargoyle|R|LEA
+#51|Lord of the Pit|R|LEA
+#52|Birds of Paradise|R|LEA
+#53|Counterspell|U|LEA
+#54|Sedge Troll|R|LEA
+#55|Sinkhole|C|LEA
+#56|Channel|U|LEA
+#57|Mind Twist|R|LEA
+#58|Northern Paladin|R|LEA
+#59|Plateau|R|LEA
+#60|Psionic Blast|U|LEA
+#61|Mana Vault|R|LEA
+#62|Dragon Whelp|U|LEA
+#63|Mahamoti Djinn|R|LEA
+#64|Dark Ritual|C|LEA
+#65|Crusade|R|LEA
+#66|Terror|C|LEA
+#67|Rock Hydra|R|LEA
+#68|Mana Short|R|LEA
+#69|Animate Dead|U|LEA
+#70|Fire Elemental|U|LEA
+#71|Serra Angel|U|LEA
+#72|Righteousness|R|LEA
+#73|Nightmare|R|LEA
+#74|Llanowar Elves|C|LEA
+#75|Smoke|R|LEA
+#76|Pirate Ship|R|LEA
+#77|Forcefield|R|LEA
+#78|Wall of Swords|U|LEA
+#79|Savannah Lions|R|LEA
+#80|Juggernaut|U|LEA
+#81|Black Knight|U|LEA
+#82|Nether Shadow|R|LEA
+#83|Icy Manipulator|U|LEA
+#84|Manabarbs|R|LEA
+#85|Lord of Atlantis|R|LEA
+#86|Demonic Hordes|R|LEA
+#87|Ankh of Mishra|R|LEA
+#88|Fungusaur|R|LEA
+#89|Verduran Enchantress|R|LEA
+#90|Word of Command|R|LEA
+#91|Fastbond|R|LEA
+#92|Kudzu|R|LEA
+#93|Stone Giant|U|LEA
+#94|Personal Incarnation|R|LEA
+#95|White Knight|U|LEA
+#96|Basalt Monolith|U|LEA
+#97|Keldon Warlord|U|LEA
+#98|Jayemdae Tome|R|LEA
+#99|Gaea's Liege|R|LEA
+#100|Control Magic|U|LEA
+#101|Howling Mine|R|LEA
+#102|Drain Power|R|LEA
+#103|Goblin King|R|LEA
+#104|Ice Storm|U|LEA
+#105|War Mammoth|C|LEA
+#106|Stasis|R|LEA
+#107|Thicket Basilisk|U|LEA
+#108|Timber Wolves|R|LEA
+#109|Contract from Below|R|LEA
+#110|Veteran Bodyguard|R|LEA
+#111|Darkpact|R|LEA
+#112|Meekstone|R|LEA
+#113|Air Elemental|U|LEA
+#114|Disrupting Scepter|R|LEA
+#115|Orcish Artillery|U|LEA
+#116|Craw Wurm|C|LEA
+#117|Regrowth|U|LEA
+#118|Elvish Archers|R|LEA
+#119|Uthden Troll|U|LEA
+#120|Water Elemental|U|LEA
+#121|Mana Flare|R|LEA
+#122|Zombie Master|R|LEA
+#123|Copy Artifact|R|LEA
+#124|Giant Spider|C|LEA
+#125|Giant Growth|C|LEA
+#126|Drudge Skeletons|C|LEA
+#127|Resurrection|U|LEA
+#128|Frozen Shade|C|LEA
+#129|Ley Druid|U|LEA
+#130|Raging River|R|LEA
+#131|Scavenging Ghoul|U|LEA
+#132|Earth Elemental|U|LEA
+#133|Hurricane|U|LEA
+#134|Cyclopean Tomb|R|LEA
+#135|Sunglasses of Urza|R|LEA
+#136|Grizzly Bears|C|LEA
+#137|Obsianus Golem|U|LEA
+#138|Hill Giant|C|LEA
+#139|Prodigal Sorcerer|C|LEA
+#140|Lich|R|LEA
+#141|Kormus Bell|R|LEA
+#142|Phantasmal Forces|U|LEA
+#143|Rod of Ruin|U|LEA
+#144|Drain Life|C|LEA
+#145|Power Surge|R|LEA
+#146|Phantom Monster|U|LEA
+#147|Pestilence|C|LEA
+#148|Flashfires|U|LEA
+#149|Aspect of Wolf|R|LEA
+#150|Illusionary Mask|R|LEA
+#151|Hurloon Minotaur|C|LEA
+#152|Dingus Egg|R|LEA
+#153|Ironroot Treefolk|C|LEA
+#154|The Hive|R|LEA
+#155|Clockwork Beast|R|LEA
+#156|Black Vise|U|LEA
+#157|Wall of Fire|U|LEA
+#158|Stone Rain|C|LEA
+#159|Goblin Balloon Brigade|U|LEA
+#160|Demonic Attorney|R|LEA
+#161|Blessing|R|LEA
+#162|Volcanic Eruption|R|LEA
+#163|Animate Wall|R|LEA
+#164|Red Elemental Blast|C|LEA
+#165|Magical Hack|R|LEA
+#166|Bog Wraith|U|LEA
+#167|Wall of Air|U|LEA
+#168|Gray Ogre|C|LEA
+#169|Natural Selection|R|LEA
+#170|Wall of Ice|U|LEA
+#171|Farmstead|R|LEA
+#172|Jade Statue|U|LEA
+#173|Wall of Stone|U|LEA
+#174|Wall of Bone|U|LEA
+#175|Web|R|LEA
+#176|Thoughtlace|R|LEA
+#177|Island Sanctuary|R|LEA
+#178|Plague Rats|C|LEA
+#179|Warp Artifact|R|LEA
+#180|Unholy Strength|C|LEA
+#181|Wild Growth|C|LEA
+#182|Jade Monolith|R|LEA
+#183|Animate Artifact|U|LEA
+#184|Orcish Oriflamme|U|LEA
+#185|Power Sink|C|LEA
+#186|Nettling Imp|U|LEA
+#187|Instill Energy|U|LEA
+#188|Purelace|R|LEA
+#189|Chaoslace|R|LEA
+#190|Deathgrip|U|LEA
+#191|Unsummon|C|LEA
+#192|Steal Artifact|U|LEA
+#193|Living Lands|R|LEA
+#194|Stream of Life|C|LEA
+#195|Scryb Sprites|C|LEA
+#196|Paralyze|C|LEA
+#197|Howl from Beyond|C|LEA
+#198|Wanderlust|U|LEA
+#199|Living Artifact|R|LEA
+#200|Wall of Water|U|LEA
+#201|Conservator|U|LEA
+#202|Wall of Brambles|U|LEA
+#203|Living Wall|U|LEA
+#204|Reverse Damage|R|LEA
+#205|Weakness|C|LEA
+#206|Glasses of Urza|U|LEA
+#207|Tsunami|U|LEA
+#208|Helm of Chatzuk|R|LEA
+#209|Shatter|C|LEA
+#210|Dwarven Demolition Team|U|LEA
+#211|Scathe Zombies|C|LEA
+#212|Cursed Land|U|LEA
+#213|Lifelace|R|LEA
+#214|Lifeforce|U|LEA
+#215|Camouflage|U|LEA
+#216|Burrowing|U|LEA
+#217|Celestial Prism|U|LEA
+#218|Simulacrum|U|LEA
+#219|Spell Blast|C|LEA
+#220|Lure|U|LEA
+#221|Fog|C|LEA
+#222|Psychic Venom|C|LEA
+#223|Blaze of Glory|R|LEA
+#224|Wall of Wood|C|LEA
+#225|Gloom|U|LEA
+#226|Dwarven Warriors|C|LEA
+#227|Library of Leng|U|LEA
+#228|Copper Tablet|U|LEA
+#229|Raise Dead|C|LEA
+#230|Sleight of Mind|R|LEA
+#231|Blue Elemental Blast|C|LEA
+#232|Siren's Call|U|LEA
+#233|Firebreathing|C|LEA
+#234|Sacrifice|U|LEA
+#235|Shanodin Dryads|C|LEA
+#236|Karma|U|LEA
+#237|Evil Presence|U|LEA
+#238|Castle|U|LEA
+#239|Crystal Rod|U|LEA
+#240|Sea Serpent|C|LEA
+#241|Mesa Pegasus|C|LEA
+#242|Feedback|U|LEA
+#243|Mons's Goblin Raiders|C|LEA
+#244|Earthbind|C|LEA
+#245|Red Ward|U|LEA
+#246|Deathlace|R|LEA
+#247|Tunnel|U|LEA
+#248|Soul Net|U|LEA
+#249|Tranquility|C|LEA
+#250|Lifetap|U|LEA
+#251|Pearled Unicorn|C|LEA
+#252|Twiddle|C|LEA
+#253|Regeneration|C|LEA
+#254|Circle of Protection: Red|C|LEA
+#255|Healing Salve|C|LEA
+#256|Throne of Bone|U|LEA
+#257|Fear|C|LEA
+#258|Lance|U|LEA
+#259|Invisibility|C|LEA
+#260|Disenchant|C|LEA
+#261|Merfolk of the Pearl Trident|C|LEA
+#262|Flight|C|LEA
+#263|Samite Healer|C|LEA
+#264|Wooden Sphere|U|LEA
+#265|Power Leak|C|LEA
+#266|Benalish Hero|C|LEA
+#267|Black Ward|U|LEA
+#268|Holy Strength|C|LEA
+#269|Green Ward|U|LEA
+#270|Consecrate Land|U|LEA
+#271|Circle of Protection: Green|C|LEA
+#272|False Orders|C|LEA
+#273|Iron Star|U|LEA
+#274|White Ward|U|LEA
+#275|Guardian Angel|C|LEA
+#276|Blue Ward|U|LEA
+#277|Ivory Cup|U|LEA
+#278|Phantasmal Terrain|C|LEA
+#279|Conversion|U|LEA
+#280|Circle of Protection: White|C|LEA
+#281|Circle of Protection: Blue|C|LEA
+#282|Death Ward|C|LEA
+#283|Jump|C|LEA
+#284|Creature Bond|C|LEA
+#285|Holy Armor|C|LEA

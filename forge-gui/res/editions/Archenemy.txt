@@ -42,7 +42,6 @@ ScryfallCode=ARC
 36 U Dragonspeaker Shaman
 105 U Dreamstone Hedron
 14 C Dregscape Zombie
-S Drench the Soil in Their Blood
 106 R Duplicant
 9 C Embrace My Diabolical Vision
 84 C Ethersworn Shieldmage
@@ -80,7 +79,6 @@ S Drench the Soil in Their Blood
 18 C I Know All, I See All
 19 C Ignite the Cloneforge!
 42 R Imperial Hellkite
-S Imprison This Insolent Wretch
 17 U Incremental Blight
 18 C Infectious Horror
 43 U Inferno Trap
@@ -132,10 +130,8 @@ S Imprison This Insolent Wretch
 34 C Only Blood Ends Your Nightmares
 91 C Pale Recluse
 4 U Path to Exile
-S Perhaps You've Met My Cohort
 137 L Plains
 137 L Plains
-S Plots That Span Centuries
 65 C Plummet
 66 R Primal Command
 132 C Rakdos Carnarium
@@ -202,7 +198,6 @@ S Plots That Span Centuries
 74 C Wickerbough Elder
 75 U Yavimaya Dryad
 43 C Your Fate Is Thrice Sealed
-S Your Inescapable Doom
 44 C Your Puny Minds Cannot Fathom
 45 C Your Will Is Not Your Own
 28 U Zombie Infestation

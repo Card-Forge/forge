@@ -139,8 +139,10 @@ public class DuelScene extends ForgeScene {
                 public void run(Integer result) {
                     if (result == 0) {
                         afterGameEnd(enemyName, finalWinner);
-                        if (Config.instance().getSettingData().disableWinLose)
+                        if (Config.instance().getSettingData().disableWinLose) {
+                            MatchController.writeMatchPreferences();
                             exitDuelScene();
+                        }
                     }
                     fb.dispose();
                 }
@@ -363,7 +365,7 @@ public class DuelScene extends ForgeScene {
         }
         else{
             rules = new GameRules(GameType.Adventure);
-            rules.setGamesPerMatch(1);
+            rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
         rules.setPlayForAnte(false);
         rules.setMatchAnteRarity(true);

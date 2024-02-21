@@ -56,25 +56,20 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
             // Get the list of cards that are referenced by effects on the stack
             SpellAbility siSpellAbility = stackinst.getSpellAbility();
-            if (siSpellAbility.getTriggeringObjects() != null) {
-                for (Object c : siSpellAbility.getTriggeringObjects().values()) {
-                    if (c instanceof Card) {
-                        if (!stackSources.contains(c)) {
-                            referencedSources.add((Card) c);
-                        }
+            for (Object c : siSpellAbility.getTriggeringObjects().values()) {
+                if (c instanceof Card) {
+                    if (!stackSources.contains(c)) {
+                        referencedSources.add((Card) c);
                     }
                 }
             }
             if (siSpellAbility.getTargetCard() != null) {
                 referencedSources.add(siSpellAbility.getTargetCard());
             }
-            // TODO: is this necessary?
-            if (siSpellAbility.getReplacingObjects() != null) {
-                for (Object c : siSpellAbility.getReplacingObjects().values()) {
-                    if (c instanceof Card) {
-                        if (!stackSources.contains(c)) {
-                            referencedSources.add((Card) c);
-                        }
+            for (Object c : siSpellAbility.getReplacingObjects().values()) {
+                if (c instanceof Card) {
+                    if (!stackSources.contains(c)) {
+                        referencedSources.add((Card) c);
                     }
                 }
             }

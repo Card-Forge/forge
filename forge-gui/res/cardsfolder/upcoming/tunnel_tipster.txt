@@ -1,0 +1,10 @@
+Name:Tunnel Tipster
+ManaCost:1 G
+Types:Creature Mole Scout
+PT:1/1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ FaceDown | SVarCompare$ GE1 | Execute$ TrigPutCounters | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if a face-down creature entered the battlefield under your control this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+SVar:FaceDown:Count$ThisTurnEntered_Battlefield_Creature.faceDown+YouCtrl
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, if a face-down creature entered the battlefield under your control this turn, put a +1/+1 counter on Tunnel Tipster.\n{T}: Add {G}.

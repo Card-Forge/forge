@@ -1,0 +1,7 @@
+Name:Another Chance
+ManaCost:2 B
+Types:Instant
+A:SP$ Mill | NumCards$ 2 | Defined$ You | Optional$ True | SubAbility$ DBChangeZone | SpellDescription$ You may mill two cards. Then return up to two creature cards from your graveyard to your hand. (To mill two cards, put the top two cards of your library into your graveyard.)
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouCtrl | SelectPrompt$ Select up to two creature cards from your graveyard to return to your hand | ChangeNum$ 2 | Hidden$ True
+DeckHas:Ability$Graveyard|Mill
+Oracle:You may mill two cards. Then return up to two creature cards from your graveyard to your hand. (To mill two cards, put the top two cards of your library into your graveyard.)

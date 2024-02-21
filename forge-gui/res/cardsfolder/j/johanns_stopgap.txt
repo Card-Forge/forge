@@ -1,0 +1,10 @@
+Name:Johann's Stopgap
+ManaCost:3 U
+Types:Sorcery
+K:Bargain
+S:Mode$ ReduceCost | ValidSpell$ Spell.Bargain | Type$ Spell | ValidCard$ Card.Self | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} less to cast if it's bargained.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token & Type$Enchantment|Artifact
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nThis spell costs {2} less to cast if it's bargained.\nReturn target nonland permanent to its owner's hand. Draw a card.

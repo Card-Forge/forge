@@ -2,5 +2,5 @@ Name:Dosan the Falling Leaf
 ManaCost:1 G G
 Types:Legendary Creature Human Monk
 PT:2/2
-S:Mode$ CantBeCast | ValidCard$ Card | NonCasterTurn$ True | Description$ Players can cast spells only during their own turns.
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.NonActive | Description$ Players can cast spells only during their own turns.
 Oracle:Players can cast spells only during their own turns.

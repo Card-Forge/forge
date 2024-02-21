@@ -1,0 +1,7 @@
+Name:Toxin Analysis
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Deathtouch & Lifelink | SubAbility$ DBInvestigate | SpellDescription$ Target creature gains deathtouch and lifelink until end of turn.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Token|Investigate|LifeGain & Type$Clue|Artifact
+Oracle:Target creature gains deathtouch and lifelink until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

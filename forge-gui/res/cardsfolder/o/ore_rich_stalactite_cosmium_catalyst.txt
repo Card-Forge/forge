@@ -1,0 +1,23 @@
+Name:Ore-Rich Stalactite
+ManaCost:1 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {R}. Spend this mana only to cast an instant or sorcery spell.
+K:Craft:3 R R XMin4 ExileFromGrave<X/Instant.Red+Other;Sorcery.Red+Other/red instant and/or sorcery cards>
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Instant|Sorcery
+AI:RemoveDeck:All
+Oracle:{T}: Add {R}. Spend this mana only to cast an instant or sorcery spell.\nCraft with four or more red instant and/or sorcery cards {3}{R}{R} ({3}{R}{R}, Exile this artifact, Exile the four or more from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:Cosmium Catalyst
+ManaCost:no cost
+Colors:red
+Types:Artifact
+A:AB$ ChooseCard | Cost$ 1 R T | DefinedCards$ ExiledWith | ChoiceZone$ Exile | AtRandom$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Choose an exiled card used to craft CARDNAME at random.
+SVar:DBPlay:DB$ Play | Defined$ ChosenCard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ You may cast that card without paying its mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:{1}{R}, {T}: Choose an exiled card used to craft Cosmium Catalyst at random. You may cast that card without paying its mana cost.

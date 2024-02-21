@@ -1,0 +1,12 @@
+Name:Serene Sleuth
+ManaCost:1 W
+Types:Creature Human Detective
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigInvestigateEach | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded.
+SVar:TrigInvestigateEach:DB$ Investigate | Num$ Count$Valid Creature.IsGoaded+YouCtrl | SubAbility$ DBNoGoad
+SVar:DBNoGoad:DB$ Goad | NoLonger$ True | Defined$ Valid Creature.YouCtrl
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
+Oracle:When Serene Sleuth enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nAt the beginning of combat on your turn, investigate for each goaded creature you control. Then each creature you control is no longer goaded.

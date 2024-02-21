@@ -1,0 +1,7 @@
+Name:Self-Reflection
+ManaCost:4 U U
+Types:Sorcery
+K:Flashback:3 U
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
+DeckHas:Ability$Token|Graveyard
+Oracle:Create a token that's a copy of target creature you control.\nFlashback {3}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

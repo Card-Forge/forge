@@ -1,0 +1,303 @@
+//Rank|Name|Rarity|Set
+#1|The Wandering Emperor|M|NEO
+#2|Tamiyo, Compleated Sage|M|NEO
+#3|Farewell|R|NEO
+#4|Jugan Defends the Temple|M|NEO
+#5|Ao, the Dawn Sky|M|NEO
+#6|Kairi, the Swirling Sky|M|NEO
+#7|Junji, the Midnight Sky|M|NEO
+#8|Atsushi, the Blazing Sky|M|NEO
+#9|Kura, the Boundless Sky|M|NEO
+#10|Kaito Shizuki|M|NEO
+#11|Tezzeret, Betrayer of Flesh|M|NEO
+#12|Reckoner Bankbuster|R|NEO
+#13|Kyodai, Soul of Kamigawa|R|NEO
+#14|Lion Sash|R|NEO
+#15|Jin-Gitaxias, Progress Tyrant|M|NEO
+#16|The Reality Chip|R|NEO
+#17|Tameshi, Reality Architect|R|NEO
+#18|Blade of the Oni|M|NEO
+#19|Hidetsugu, Devouring Chaos|R|NEO
+#20|Tatsunari, Toad Rider|R|NEO
+#21|Thundering Raiju|R|NEO
+#22|Invoke the Ancients|R|NEO
+#23|The Restoration of Eiganjo|R|NEO
+#24|Fable of the Mirror-Breaker|R|NEO
+#25|The Kami War|M|NEO
+#26|Kodama of the West Tree|M|NEO
+#27|Kotose, the Silent Spider|R|NEO
+#28|Raiyuu, Storm's Edge|R|NEO
+#29|Inventive Iteration|R|NEO
+#30|Invoke the Winds|R|NEO
+#31|Biting-Palm Ninja|R|NEO
+#32|Nashi, Moon Sage's Scion|M|NEO
+#33|Goro-Goro, Disciple of Ryusei|R|NEO
+#34|Blossom Prancer|U|NEO
+#35|Kappa Tech-Wrecker|U|NEO
+#36|Shigeki, Jukai Visionary|R|NEO
+#37|Spring-Leaf Avenger|R|NEO
+#38|Behold the Unspeakable|U|NEO
+#39|Soul Transfer|R|NEO
+#40|Lizard Blades|R|NEO
+#41|Twinshot Sniper|U|NEO
+#42|Weaver of Harmony|R|NEO
+#43|Surgehacker Mech|R|NEO
+#44|Boseiju Reaches Skyward|U|NEO
+#45|Banishing Slash|U|NEO
+#46|Touch the Spirit Realm|U|NEO
+#47|Assassin's Ink|U|NEO
+#48|Gloomshrieker|U|NEO
+#49|Spirit-Sister's Call|M|NEO
+#50|Ogre-Head Helm|R|NEO
+#51|Eater of Virtue|R|NEO
+#52|Michiko's Reign of Truth|U|NEO
+#53|Life of Toshiro Umezawa|U|NEO
+#54|Selfless Samurai|U|NEO
+#55|Hinata, Dawn-Crowned|R|NEO
+#56|Circuit Mender|U|NEO
+#57|Kami of Transience|R|NEO
+#58|Colossal Skyturtle|U|NEO
+#59|Tribute to Horobi|R|NEO
+#60|Teachings of the Kirin|R|NEO
+#61|Invoke Justice|R|NEO
+#62|Jukai Naturalist|U|NEO
+#63|Oni-Cult Anvil|U|NEO
+#64|Cloudsteel Kirin|R|NEO
+#65|Mindlink Mech|R|NEO
+#66|Naomi, Pillar of Order|U|NEO
+#67|Rabbit Battery|U|NEO
+#68|Dockside Chef|U|NEO
+#69|Patchwork Automaton|U|NEO
+#70|Imperial Oath|C|NEO
+#71|Spirited Companion|C|NEO
+#72|Acquisition Octopus|U|NEO
+#73|Moonsnare Specialist|C|NEO
+#74|Thirst for Knowledge|U|NEO
+#75|March of Wretched Sorrow|R|NEO
+#76|Tempered in Solitude|U|NEO
+#77|Generous Visitor|U|NEO
+#78|Spinning Wheel Kick|U|NEO
+#79|Enthusiastic Mechanaut|U|NEO
+#80|Greasefang, Okiba Boss|R|NEO
+#81|Isshin, Two Heavens as One|R|NEO
+#82|Prodigy's Prototype|U|NEO
+#83|Satoru Umezawa|R|NEO
+#84|Silver-Fur Master|U|NEO
+#85|Invigorating Hot Spring|U|NEO
+#86|Risona, Asari Commander|R|NEO
+#87|Blade-Blizzard Kitsune|U|NEO
+#88|Eiganjo, Seat of the Empire|R|NEO
+#89|Kami's Flare|C|NEO
+#90|Experimental Synthesizer|C|NEO
+#91|Virus Beetle|C|NEO
+#92|Twisted Embrace|C|NEO
+#93|Kumano Faces Kakkazan|U|NEO
+#94|Norika Yamazaki, the Poet|U|NEO
+#95|Moon-Circuit Hacker|C|NEO
+#96|Network Disruptor|C|NEO
+#97|Prosperous Thief|U|NEO
+#98|Replication Specialist|U|NEO
+#99|Thousand-Faced Shadow|R|NEO
+#100|Nezumi Prowler|U|NEO
+#101|Seismic Wave|U|NEO
+#102|Flame Discharge|U|NEO
+#103|Voltage Surge|C|NEO
+#104|Intercessor's Arrest|C|NEO
+#105|The Modern Age|C|NEO
+#106|Okiba Reckoner Raid|C|NEO
+#107|Tamiyo's Compleation|C|NEO
+#108|Gravelighter|U|NEO
+#109|Leech Gauntlet|U|NEO
+#110|Heiko Yamazaki, the General|U|NEO
+#111|Asari Captain|U|NEO
+#112|Boseiju, Who Endures|R|NEO
+#113|Otawara, Soaring City|R|NEO
+#114|Roadside Reliquary|U|NEO
+#115|Dokuchi Silencer|U|NEO
+#116|Containment Construct|U|NEO
+#117|March of Otherworldly Light|R|NEO
+#118|Master's Rebuke|C|NEO
+#119|Fade into Antiquity|C|NEO
+#120|Imperial Recovery Unit|U|NEO
+#121|Sunblade Samurai|C|NEO
+#122|Bronzeplate Boar|U|NEO
+#123|Fang of Shigeki|C|NEO
+#124|Go-Shintai of Boundless Vigor|U|NEO
+#125|Takenuma, Abandoned Mire|R|NEO
+#126|Explosive Singularity|M|NEO
+#127|Jukai Preserver|C|NEO
+#128|Mothrider Patrol|C|NEO
+#129|Mukotai Soulripper|R|NEO
+#130|The Fall of Lord Konda|U|NEO
+#131|Tales of Master Seshiro|C|NEO
+#132|Born to Drive|U|NEO
+#133|Go-Shintai of Shared Purpose|U|NEO
+#134|Hotshot Mechanic|U|NEO
+#135|Covert Technician|U|NEO
+#136|Futurist Operative|U|NEO
+#137|Mobilizer Mech|U|NEO
+#138|Go-Shintai of Hidden Cruelty|U|NEO
+#139|Inkrise Infiltrator|C|NEO
+#140|Lethal Exploit|C|NEO
+#141|Mukotai Ambusher|C|NEO
+#142|Go-Shintai of Ancient Wars|U|NEO
+#143|Scrap Welder|R|NEO
+#144|Simian Sling|C|NEO
+#145|Bamboo Grove Archer|C|NEO
+#146|Boon of Boseiju|U|NEO
+#147|Geothermal Kami|C|NEO
+#148|Greater Tanuki|C|NEO
+#149|Storyweave|U|NEO
+#150|Webspinner Cuff|U|NEO
+#151|High-Speed Hoverbike|U|NEO
+#152|Towashi Guide-Bot|U|NEO
+#153|Unforgiving One|U|NEO
+#154|Go-Shintai of Lost Wisdom|U|NEO
+#155|Uncharted Haven|C|NEO
+#156|Searchlight Companion|C|NEO
+#157|Ninja's Kunai|C|NEO
+#158|Ecologist's Terrarium|C|NEO
+#159|Harmonious Emergence|C|NEO
+#160|Commune with Spirits|C|NEO
+#161|Towashi Songshaper|C|NEO
+#162|Suit Up|C|NEO
+#163|Skyswimmer Koi|C|NEO
+#164|Mnemonic Sphere|C|NEO
+#165|Mirrorshell Crab|C|NEO
+#166|Wanderer's Intervention|C|NEO
+#167|Repel the Vile|C|NEO
+#168|Befriending the Moths|C|NEO
+#169|Azusa's Many Journeys|U|NEO
+#170|The Long Reach of Night|U|NEO
+#171|Eiganjo Exemplar|C|NEO
+#172|Seven-Tail Mentor|C|NEO
+#173|Sky-Blessed Samurai|U|NEO
+#174|Essence Capture|U|NEO
+#175|Dokuchi Shadow-Walker|C|NEO
+#176|Nezumi Bladeblesser|C|NEO
+#177|Okiba Salvage|U|NEO
+#178|Akki Ronin|C|NEO
+#179|Peerless Samurai|C|NEO
+#180|Reinforced Ronin|U|NEO
+#181|Orochi Merge-Keeper|U|NEO
+#182|Roaring Earth|U|NEO
+#183|Sokenzan, Crucible of Defiance|R|NEO
+#184|Papercraft Decoy|C|NEO
+#185|Network Terminal|C|NEO
+#186|Season of Renewal|C|NEO
+#187|Grafted Growth|C|NEO
+#188|Careful Cultivation|C|NEO
+#189|Ironhoof Boar|C|NEO
+#190|Kami of Terrible Secrets|C|NEO
+#191|Debt to the Kami|C|NEO
+#192|Clawing Torment|C|NEO
+#193|Moonfolk Puzzlemaker|C|NEO
+#194|Golden-Tail Disciple|C|NEO
+#195|Jukai Trainee|C|NEO
+#196|Era of Enlightenment|C|NEO
+#197|Hidetsugu Consumes All|M|NEO
+#198|Wind-Scarred Crag|C|NEO
+#199|Bloodfell Caves|C|NEO
+#200|Blossoming Sands|C|NEO
+#201|Dismal Backwater|C|NEO
+#202|Tranquil Cove|C|NEO
+#203|Thornwood Falls|C|NEO
+#204|Swiftwater Cliffs|C|NEO
+#205|Scoured Barrens|C|NEO
+#206|Rugged Highlands|C|NEO
+#207|Jungle Hollow|C|NEO
+#208|Moonsnare Prototype|C|NEO
+#209|Unstoppable Ogre|C|NEO
+#210|Upriser Renegade|U|NEO
+#211|Coiling Stalker|C|NEO
+#212|Runaway Trash-Bot|U|NEO
+#213|Walking Skyscraper|U|NEO
+#214|Dragonspark Reactor|U|NEO
+#215|Shrine Steward|C|NEO
+#216|Tamiyo's Safekeeping|C|NEO
+#217|Chainflail Centipede|C|NEO
+#218|Brilliant Restoration|R|NEO
+#219|Imperial Subduer|C|NEO
+#220|When We Were Young|U|NEO
+#221|Armguard Familiar|C|NEO
+#222|Guardians of Oboro|C|NEO
+#223|Invoke Despair|R|NEO
+#224|Malicious Malfunction|U|NEO
+#225|You Are Already Dead|C|NEO
+#226|Akki Ember-Keeper|C|NEO
+#227|Kami of Industry|C|NEO
+#228|Sokenzan Smelter|U|NEO
+#229|Heir of the Ancient Fang|C|NEO
+#230|Eiganjo Uprising|R|NEO
+#231|Satsuki, the Living Lore|R|NEO
+#232|March of Swirling Mist|R|NEO
+#233|Favor of Jukai|C|NEO
+#234|Bearer of Memory|C|NEO
+#235|Scrapyard Steelbreaker|C|NEO
+#236|Explosive Entry|C|NEO
+#237|Crackling Emergence|C|NEO
+#238|Return to Action|C|NEO
+#239|Reckoner's Bargain|C|NEO
+#240|Kami of Restless Shadows|C|NEO
+#241|Disruption Protocol|C|NEO
+#242|Lucky Offering|C|NEO
+#243|Kitsune Ace|C|NEO
+#244|Dragonfly Suit|C|NEO
+#245|Ancestral Katana|C|NEO
+#246|Light the Way|C|NEO
+#247|Saiba Trespassers|C|NEO
+#248|March of Reckless Joy|R|NEO
+#249|Historian's Wisdom|U|NEO
+#250|Mechtitan Core|R|NEO
+#251|Reito Sentinel|U|NEO
+#252|Iron Apprentice|C|NEO
+#253|Brute Suit|C|NEO
+#254|Kindled Fury|C|NEO
+#255|Gift of Wrath|C|NEO
+#256|Undercity Scrounger|C|NEO
+#257|Kaito's Pursuit|C|NEO
+#258|Futurist Sentinel|C|NEO
+#259|Regent's Authority|C|NEO
+#260|Light-Paws, Emperor's Voice|R|NEO
+#261|Spell Pierce|C|NEO
+#262|Akki War Paint|C|NEO
+#263|Mech Hangar|U|NEO
+#264|Secluded Courtyard|U|NEO
+#265|Thundersteel Colossus|C|NEO
+#266|Dramatist's Puppet|C|NEO
+#267|Automated Artificer|C|NEO
+#268|Ambitious Assault|C|NEO
+#269|Reckoner Shakedown|C|NEO
+#270|Short Circuit|C|NEO
+#271|Planar Incision|C|NEO
+#272|The Shattered States Era|C|NEO
+#273|The Dragon-Kami Reborn|R|NEO
+#274|Anchor to Reality|U|NEO
+#275|Awakened Awareness|U|NEO
+#276|Discover the Impossible|U|NEO
+#277|Reality Heist|U|NEO
+#278|Enormous Energy Blade|U|NEO
+#279|Invoke Calamity|R|NEO
+#280|Bronze Cudgels|U|NEO
+#281|March of Burgeoning Life|R|NEO
+#282|Mirror Box|R|NEO
+#283|Plains 1|C|NEO
+#284|Plains 2|C|NEO
+#285|Island 1|C|NEO
+#286|Island 2|C|NEO
+#287|Swamp 1|C|NEO
+#288|Swamp 2|C|NEO
+#289|Mountain 1|C|NEO
+#290|Mountain 2|C|NEO
+#291|Forest 1|C|NEO
+#292|Forest 2|C|NEO
+#293|Plains 3|C|NEO
+#294|Plains 4|C|NEO
+#295|Island 3|C|NEO
+#296|Island 4|C|NEO
+#297|Swamp 3|C|NEO
+#298|Swamp 4|C|NEO
+#299|Mountain 3|C|NEO
+#300|Mountain 4|C|NEO
+#301|Forest 3|C|NEO
+#302|Forest 4|C|NEO

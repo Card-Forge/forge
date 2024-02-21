@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="108">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="111">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -14,8 +14,6 @@
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/buildings-nocollide.tsx"/>
- <tileset firstgid="13697" source="../tileset/buildings.tsx"/>
- <tileset firstgid="15489" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
@@ -76,6 +74,9 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="sprite" value="sprites/3life.atlas"/>
    </properties>
   </object>
@@ -319,6 +320,9 @@
     <property name="reward">[
  { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
 ]</property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="86" template="../obj/treasure.tx" x="336" y="368" visible="0">
@@ -357,9 +361,7 @@
   <object id="93" template="../obj/enemy.tx" x="304" y="400">
    <properties>
     <property name="enemy" value="Geist"/>
-    <property name="reward">[
- { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
-]</property>
+    <property name="reward" value=""/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
@@ -432,36 +434,6 @@
   <object id="101" template="../obj/enemy.tx" x="128" y="400">
    <properties>
     <property name="enemy" value="Plague Rat Swarm"/>
-   </properties>
-  </object>
-  <object id="102" template="../obj/enemy.tx" x="224" y="304">
-   <properties>
-    <property name="enemy" value="Khenra Warrior"/>
-   </properties>
-  </object>
-  <object id="103" template="../obj/enemy.tx" x="192" y="304">
-   <properties>
-    <property name="enemy" value="Falcon-headed Aven Warrior"/>
-   </properties>
-  </object>
-  <object id="104" template="../obj/enemy.tx" x="208" y="304">
-   <properties>
-    <property name="enemy" value="Ibis-headed Aven Warrior"/>
-   </properties>
-  </object>
-  <object id="105" template="../obj/enemy.tx" x="240" y="304">
-   <properties>
-    <property name="enemy" value="Amonkhet Minotaur Warrior"/>
-   </properties>
-  </object>
-  <object id="106" template="../obj/enemy.tx" x="256" y="304">
-   <properties>
-    <property name="enemy" value="Naga Warrior"/>
-   </properties>
-  </object>
-  <object id="107" template="../obj/enemy.tx" x="224" y="320">
-   <properties>
-    <property name="enemy" value="Warrior"/>
    </properties>
   </object>
  </objectgroup>

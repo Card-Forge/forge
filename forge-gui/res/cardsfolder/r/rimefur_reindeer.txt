@@ -1,0 +1,8 @@
+Name:Rimefur Reindeer
+ManaCost:3 W
+Types:Creature Elk
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
+DeckHints:Type$Enchantment
+Oracle:Whenever an enchantment enters the battlefield under your control, tap target creature an opponent controls.

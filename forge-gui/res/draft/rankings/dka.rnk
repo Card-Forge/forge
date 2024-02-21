@@ -1,0 +1,159 @@
+//Rank|Name|Rarity|Set
+#1|Sorin, Lord of Innistrad|M|DKA
+#2|Havengul Lich|M|DKA
+#3|Mikaeus, the Unhallowed|M|DKA
+#4|Drogskol Reaver|M|DKA
+#5|Vorapede|M|DKA
+#6|Falkenrath Aristocrat|M|DKA
+#7|Moonveil Dragon|M|DKA
+#8|Beguiler of Wills|M|DKA
+#9|Huntmaster of the Fells|M|DKA
+#10|Thraben Doomsayer|R|DKA
+#11|Increasing Devotion|R|DKA
+#12|Dungeon Geists|R|DKA
+#13|Hellrider|R|DKA
+#14|Requiem Angel|R|DKA
+#15|Fiend of the Shadows|R|DKA
+#16|Geralf's Mindcrusher|R|DKA
+#17|Increasing Savagery|R|DKA
+#18|Flayer of the Hatebound|R|DKA
+#19|Havengul Runebinder|R|DKA
+#20|Increasing Confusion|R|DKA
+#21|Lingering Souls|U|DKA
+#22|Drogskol Captain|U|DKA
+#23|Geralf's Messenger|R|DKA
+#24|Deranged Outcast|R|DKA
+#25|Elbrus, the Binding Blade|M|DKA
+#26|Gravecrawler|R|DKA
+#27|Vault of the Archangel|R|DKA
+#28|Markov Blademaster|R|DKA
+#29|Helvault|M|DKA
+#30|Wolfbitten Captive|R|DKA
+#31|Mondronen Shaman|R|DKA
+#32|Ghoultree|R|DKA
+#33|Briarpack Alpha|U|DKA
+#34|Predator Ooze|R|DKA
+#35|Thalia, Guardian of Thraben|R|DKA
+#36|Diregraf Captain|U|DKA
+#37|Tower Geist|U|DKA
+#38|Immerwolf|U|DKA
+#39|Ravenous Demon|R|DKA
+#40|Niblis of the Breath|U|DKA
+#41|Strangleroot Geist|U|DKA
+#42|Stromkirk Captain|U|DKA
+#43|Farbog Boneflinger|U|DKA
+#44|Burning Oil|U|DKA
+#45|Zombie Apocalypse|R|DKA
+#46|Skirsdag Flayer|U|DKA
+#47|Niblis of the Urn|U|DKA
+#48|Tragic Slip|C|DKA
+#49|Hollowhenge Spirit|U|DKA
+#50|Pyreheart Wolf|U|DKA
+#51|Relentless Skaabs|U|DKA
+#52|Fires of Undeath|C|DKA
+#53|Markov Warlord|U|DKA
+#54|Soul Seizer|U|DKA
+#55|Feed the Pack|R|DKA
+#56|Wakedancer|U|DKA
+#57|Archangel's Light|M|DKA
+#58|Death's Caress|C|DKA
+#59|Vengeful Vampire|U|DKA
+#60|Stormbound Geist|C|DKA
+#61|Gather the Townsfolk|C|DKA
+#62|Lambholt Elder|U|DKA
+#63|Blood Feud|U|DKA
+#64|Increasing Ambition|R|DKA
+#65|Scorned Villager|C|DKA
+#66|Thraben Heretic|U|DKA
+#67|Elgaud Inquisitor|C|DKA
+#68|Loyal Cathar|C|DKA
+#69|Evolving Wilds|C|DKA
+#70|Nephalia Seakite|C|DKA
+#71|Gravetiller Wurm|U|DKA
+#72|Burden of Guilt|C|DKA
+#73|Niblis of the Mist|C|DKA
+#74|Highborn Ghoul|C|DKA
+#75|Alpha Brawl|R|DKA
+#76|Wolfhunter's Quiver|U|DKA
+#77|Dawntreader Elk|C|DKA
+#78|Kessig Recluse|C|DKA
+#79|Avacyn's Collar|U|DKA
+#80|Sudden Disappearance|R|DKA
+#81|Afflicted Deserter|U|DKA
+#82|Jar of Eyeballs|R|DKA
+#83|Wrack with Madness|C|DKA
+#84|Reap the Seagraf|C|DKA
+#85|Griptide|C|DKA
+#86|Gavony Ironwright|U|DKA
+#87|Young Wolf|C|DKA
+#88|Hinterland Hermit|C|DKA
+#89|Forge Devil|C|DKA
+#90|Warden of the Wall|U|DKA
+#91|Ulvenwald Bear|C|DKA
+#92|Screeching Skaab|C|DKA
+#93|Grim Backwoods|R|DKA
+#94|Silverclaw Griffin|C|DKA
+#95|Midnight Guard|C|DKA
+#96|Undying Evil|C|DKA
+#97|Black Cat|C|DKA
+#98|Divination|C|DKA
+#99|Headless Skaab|C|DKA
+#100|Harrowing Journey|U|DKA
+#101|Faith's Shield|U|DKA
+#102|Wild Hunger|C|DKA
+#103|Faithless Looting|C|DKA
+#104|Erdwal Ripper|C|DKA
+#105|Chosen of Markov|C|DKA
+#106|Village Survivors|U|DKA
+#107|Falkenrath Torturer|C|DKA
+#108|Thought Scour|C|DKA
+#109|Nearheath Stalker|C|DKA
+#110|Shriekgeist|C|DKA
+#111|Chant of the Skifsang|C|DKA
+#112|Curse of Bloodletting|R|DKA
+#113|Torch Fiend|C|DKA
+#114|Sightless Ghoul|C|DKA
+#115|Fling|C|DKA
+#116|Hunger of the Howlpack|C|DKA
+#117|Russet Wolves|C|DKA
+#118|Somberwald Dryad|C|DKA
+#119|Hollowhenge Beast|C|DKA
+#120|Bone to Ash|C|DKA
+#121|Skillful Lunge|C|DKA
+#122|Crushing Vines|C|DKA
+#123|Increasing Vengeance|R|DKA
+#124|Heckling Fiends|U|DKA
+#125|Gravepurge|C|DKA
+#126|Chill of Foreboding|U|DKA
+#127|Haunted Fengraf|C|DKA
+#128|Break of Day|C|DKA
+#129|Saving Grasp|C|DKA
+#130|Grafdigger's Cage|R|DKA
+#131|Heavy Mattock|C|DKA
+#132|Artful Dodge|C|DKA
+#133|Tracker's Instincts|U|DKA
+#134|Sanctuary Cat|C|DKA
+#135|Gruesome Discovery|C|DKA
+#136|Ray of Revelation|C|DKA
+#137|Counterlash|R|DKA
+#138|Chalice of Life|U|DKA
+#139|Deadly Allure|U|DKA
+#140|Clinging Mists|C|DKA
+#141|Executioner's Hood|C|DKA
+#142|Secrets of the Dead|U|DKA
+#143|Scorch the Fields|C|DKA
+#144|Bar the Door|C|DKA
+#145|Talons of Falkenrath|C|DKA
+#146|Mystic Retrieval|U|DKA
+#147|Favor of the Woods|C|DKA
+#148|Spiteful Shadows|C|DKA
+#149|Call to the Kindred|R|DKA
+#150|Curse of Misfortunes|R|DKA
+#151|Grim Flowering|U|DKA
+#152|Lost in the Woods|R|DKA
+#153|Curse of Echoes|R|DKA
+#154|Shattered Perception|U|DKA
+#155|Seance|R|DKA
+#156|Curse of Thirst|U|DKA
+#157|Curse of Exhaustion|U|DKA
+#158|Altar of the Lost|U|DKA

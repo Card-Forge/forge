@@ -140,8 +140,8 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.getGame().getAction().reveal(new CardCollection(targetCard), ability.getActivatingPlayer());
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        targetCard.getGame().getAction().reveal(new CardCollection(targetCard), payer);
         StringBuilder sb = new StringBuilder();
         sb.append(ability.getActivatingPlayer());
         if (targetCard.isInZone(ZoneType.Hand)) {
@@ -161,8 +161,8 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    protected CardCollectionView doListPayment(SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
-        ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, ability.getActivatingPlayer());
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        ability.getActivatingPlayer().getGame().getAction().reveal(targetCards, payer);
         return targetCards;
     }
 

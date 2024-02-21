@@ -4,7 +4,7 @@ Types:Artifact Creature Thopter
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDig | DestinationZone2$ Graveyard | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top two cards of your library. Put one of them into your hand and the other into your graveyard. If you put an artifact card into your hand this way, you gain 3 life.
-SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | Reveal$ True | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | Reveal$ True | ChangeType$ Card | DestinationZone2$ Graveyard | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Artifact | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Artifact

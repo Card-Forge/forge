@@ -1,0 +1,311 @@
+//Rank|Name|Rarity|Set
+#1|Bronze Horse|R|LEG
+#2|Gwendlyn Di Corci|R|LEG
+#3|Spinal Villain|R|LEG
+#4|Livonya Silone|R|LEG
+#5|Boris Devilboon|R|LEG
+#6|Adun Oakenshield|R|LEG
+#7|Acid Rain|R|LEG
+#8|Quarum Trench Gnomes|R|LEG
+#9|Invoke Prejudice|R|LEG
+#10|Hell's Caretaker|R|LEG
+#11|Hellfire|R|LEG
+#12|Sylvan Library|U|LEG
+#13|Tor Wauki|U|LEG
+#14|Lesser Werewolf|U|LEG
+#15|Evil Eye of Orms by Gore|U|LEG
+#16|Sunastian Falconer|U|LEG
+#17|Hazezon Tamar|R|LEG
+#18|Beasts of Bogardan|U|LEG
+#19|Craw Giant|U|LEG
+#20|Chain Lightning|C|LEG
+#21|The Abyss|R|LEG
+#22|Riven Turnbull|U|LEG
+#23|Greater Realm of Preservation|U|LEG
+#24|Tetsuo Umezawa|R|LEG
+#25|Karakas|U|LEG
+#26|The Lady of the Mountain|U|LEG
+#27|Firestorm Phoenix|R|LEG
+#28|Crimson Manticore|R|LEG
+#29|Moat|R|LEG
+#30|Mirror Universe|R|LEG
+#31|Nether Void|R|LEG
+#32|Angus Mackenzie|R|LEG
+#33|Mana Drain|U|LEG
+#34|Ramses Overdark|R|LEG
+#35|Sivitri Scarzam|U|LEG
+#36|Master of the Hunt|R|LEG
+#37|Lady Evangela|R|LEG
+#38|Pyrotechnics|C|LEG
+#39|Lady Orca|U|LEG
+#40|Segovian Leviathan|U|LEG
+#41|Imprison|R|LEG
+#42|Divine Transformation|R|LEG
+#43|Nebuchadnezzar|R|LEG
+#44|Jacques le Vert|R|LEG
+#45|Wall of Putrid Flesh|U|LEG
+#46|Axelrod Gunnarson|R|LEG
+#47|Elder Land Wurm|R|LEG
+#48|Reverberation|R|LEG
+#49|Tuknir Deathlock|R|LEG
+#50|Fallen Angel|U|LEG
+#51|Puppet Master|U|LEG
+#52|Wall of Dust|U|LEG
+#53|Knowledge Vault|R|LEG
+#54|Rabid Wombat|U|LEG
+#55|Wall of Opposition|R|LEG
+#56|Kobold Drill Sergeant|U|LEG
+#57|Concordant Crossroads|R|LEG
+#58|Vampire Bats|C|LEG
+#59|Sol'kanar the Swamp King|R|LEG
+#60|Pendelhaven|U|LEG
+#61|Ur-Drago|R|LEG
+#62|Infernal Medusa|U|LEG
+#63|Halfdane|R|LEG
+#64|Land Tax|U|LEG
+#65|Land Equilibrium|R|LEG
+#66|Rasputin Dreamweaver|R|LEG
+#67|Gosta Dirk|R|LEG
+#68|Abomination|U|LEG
+#69|Jasmine Boreal|U|LEG
+#70|Kei Takahashi|R|LEG
+#71|Brine Hag|U|LEG
+#72|Dakkon Blackblade|R|LEG
+#73|Raging Bull|C|LEG
+#74|Rohgahh of Kher Keep|R|LEG
+#75|Palladia-Mors|R|LEG
+#76|Vaevictis Asmadi|R|LEG
+#77|Serpent Generator|R|LEG
+#78|Bartel Runeaxe|R|LEG
+#79|Kobold Taskmaster|U|LEG
+#80|Living Plane|R|LEG
+#81|Horn of Deafening|R|LEG
+#82|Chromium|R|LEG
+#83|The Brute|C|LEG
+#84|Mountain Yeti|U|LEG
+#85|Xira Arien|R|LEG
+#86|Time Elemental|R|LEG
+#87|Shimian Night Stalker|U|LEG
+#88|Immolation|C|LEG
+#89|Ring of Immortals|R|LEG
+#90|Lord Magnus|U|LEG
+#91|Juxtapose|R|LEG
+#92|Azure Drake|U|LEG
+#93|Falling Star|R|LEG
+#94|The Tabernacle at Pendrell Vale|R|LEG
+#95|Ragnar|R|LEG
+#96|Elven Riders|R|LEG
+#97|Jedit Ojanen|U|LEG
+#98|Gabriel Angelfire|R|LEG
+#99|Princess Lucrezia|U|LEG
+#100|Stangg|R|LEG
+#101|Gauntlets of Chaos|R|LEG
+#102|Cyclopean Mummy|C|LEG
+#103|Blazing Effigy|C|LEG
+#104|Blood Lust|U|LEG
+#105|Triassic Egg|R|LEG
+#106|Chains of Mephistopheles|R|LEG
+#107|Whirling Dervish|U|LEG
+#108|Caverns of Despair|R|LEG
+#109|Greed|R|LEG
+#110|Fire Sprites|C|LEG
+#111|Sir Shandlar of Eberyn|U|LEG
+#112|Marhault Elsdragon|U|LEG
+#113|Cleanse|R|LEG
+#114|The Wretched|R|LEG
+#115|Frost Giant|U|LEG
+#116|Walking Dead|C|LEG
+#117|Psionic Entity|R|LEG
+#118|Cocoon|U|LEG
+#119|Killer Bees|R|LEG
+#120|Spirit Link|U|LEG
+#121|Mold Demon|R|LEG
+#122|Thunder Spirit|R|LEG
+#123|North Star|R|LEG
+#124|Carrion Ants|R|LEG
+#125|Moss Monster|C|LEG
+#126|Boomerang|C|LEG
+#127|Jerrard of the Closed Fist|U|LEG
+#128|Wall of Shadows|C|LEG
+#129|Kasimir the Lone Wolf|U|LEG
+#130|Life Matrix|R|LEG
+#131|Zephyr Falcon|C|LEG
+#132|Heaven's Gate|U|LEG
+#133|Pavel Maliki|U|LEG
+#134|Arcades Sabboth|R|LEG
+#135|Untamed Wilds|U|LEG
+#136|Spectral Cloak|U|LEG
+#137|Eureka|R|LEG
+#138|Johan|R|LEG
+#139|Planar Gate|R|LEG
+#140|Storm World|R|LEG
+#141|Giant Turtle|C|LEG
+#142|Tundra Wolves|C|LEG
+#143|Remove Soul|C|LEG
+#144|Ayesha Tanaka|R|LEG
+#145|Telekinesis|R|LEG
+#146|Kobold Overlord|R|LEG
+#147|Elder Spawn|R|LEG
+#148|Barktooth Warbeard|U|LEG
+#149|Sentinel|R|LEG
+#150|Wall of Heat|C|LEG
+#151|Sword of the Ages|R|LEG
+#152|Jovial Evil|R|LEG
+#153|Hammerheim|U|LEG
+#154|Al-abara's Carpet|R|LEG
+#155|Giant Strength|C|LEG
+#156|Demonic Torment|U|LEG
+#157|All Hallow's Eve|R|LEG
+#158|Wolverine Pack|C|LEG
+#159|Tobias Andrion|U|LEG
+#160|Underworld Dreams|U|LEG
+#161|Recall|R|LEG
+#162|Hornet Cobra|C|LEG
+#163|Gravity Sphere|R|LEG
+#164|Arboria|U|LEG
+#165|Winds of Change|U|LEG
+#166|Nicol Bolas|R|LEG
+#167|Reincarnation|U|LEG
+#168|Wall of Wonder|U|LEG
+#169|Petra Sphinx|R|LEG
+#170|Psychic Purge|C|LEG
+#171|Horror of Horrors|U|LEG
+#172|Durkwood Boars|C|LEG
+#173|Rubinia Soulsinger|R|LEG
+#174|Willow Satyr|R|LEG
+#175|Lady Caleria|R|LEG
+#176|Wall of Earth|C|LEG
+#177|Tempest Efreet|R|LEG
+#178|Mana Matrix|R|LEG
+#179|Ramirez DePietro|U|LEG
+#180|Glyph of Destruction|C|LEG
+#181|Akron Legionnaire|R|LEG
+#182|Hunding Gjornersen|U|LEG
+#183|Righteous Avengers|U|LEG
+#184|Arena of the Ancients|R|LEG
+#185|Floral Spuzzem|U|LEG
+#186|Osai Vultures|C|LEG
+#187|Marble Priest|U|LEG
+#188|Forethought Amulet|R|LEG
+#189|Wall of Vapor|C|LEG
+#190|Teleport|R|LEG
+#191|Winter Blast|R|LEG
+#192|Lost Soul|C|LEG
+#193|Angelic Voices|R|LEG
+#194|Silhouette|U|LEG
+#195|Ichneumon Druid|U|LEG
+#196|Active Volcano|C|LEG
+#197|Kry Shield|U|LEG
+#198|Part Water|U|LEG
+#199|Torsten Von Ursus|U|LEG
+#200|Land's Edge|R|LEG
+#201|Cat Warriors|C|LEG
+#202|D'Avenant Archer|C|LEG
+#203|Force Spike|C|LEG
+#204|Red Mana Battery|U|LEG
+#205|Takklemaggot|U|LEG
+#206|Emerald Dragonfly|C|LEG
+#207|Wood Elemental|R|LEG
+#208|Aerathi Berserker|U|LEG
+#209|Energy Tap|C|LEG
+#210|Syphon Soul|C|LEG
+#211|Barbary Apes|C|LEG
+#212|Cosmic Horror|R|LEG
+#213|Spiritual Sanctuary|R|LEG
+#214|Disharmony|R|LEG
+#215|Pixie Queen|R|LEG
+#216|Presence of the Master|U|LEG
+#217|Voodoo Doll|R|LEG
+#218|Storm Seeker|U|LEG
+#219|Infinite Authority|R|LEG
+#220|Spirit Shackle|C|LEG
+#221|Keepers of the Faith|C|LEG
+#222|Crookshank Kobolds|C|LEG
+#223|Backdraft|U|LEG
+#224|Relic Barrier|U|LEG
+#225|Urborg|U|LEG
+#226|Mountain Stronghold|U|LEG
+#227|Radjan Spirit|U|LEG
+#228|Kobolds of Kher Keep|C|LEG
+#229|Subdue|C|LEG
+#230|Clergy of the Holy Nimbus|C|LEG
+#231|Backfire|U|LEG
+#232|Tolaria|U|LEG
+#233|Kismet|U|LEG
+#234|Typhoon|R|LEG
+#235|Headless Horseman|C|LEG
+#236|Primordial Ooze|U|LEG
+#237|Unholy Citadel|U|LEG
+#238|Ivory Guardians|U|LEG
+#239|Enchanted Being|C|LEG
+#240|Crimson Kobolds|C|LEG
+#241|Hyperion Blacksmith|U|LEG
+#242|In the Eye of Chaos|R|LEG
+#243|Ghosts of the Damned|C|LEG
+#244|Giant Slug|C|LEG
+#245|Rapid Fire|R|LEG
+#246|Dream Coat|U|LEG
+#247|Divine Intervention|R|LEG
+#248|Wall of Light|U|LEG
+#249|Green Mana Battery|U|LEG
+#250|Reset|U|LEG
+#251|Black Mana Battery|U|LEG
+#252|Gaseous Form|C|LEG
+#253|Darkness|C|LEG
+#254|Transmutation|C|LEG
+#255|Wall of Tombstones|U|LEG
+#256|Pradesh Gypsies|U|LEG
+#257|White Mana Battery|U|LEG
+#258|Revelation|R|LEG
+#259|Blue Mana Battery|U|LEG
+#260|Pit Scorpion|C|LEG
+#261|Wall of Caltrops|C|LEG
+#262|Alchor's Tomb|R|LEG
+#263|Great Defender|U|LEG
+#264|Visions|U|LEG
+#265|Aisling Leprechaun|C|LEG
+#266|Great Wall|U|LEG
+#267|Avoid Fate|C|LEG
+#268|Life Chisel|U|LEG
+#269|Fortified Area|U|LEG
+#270|Rebirth|R|LEG
+#271|Devouring Deep|C|LEG
+#272|Venarian Gold|C|LEG
+#273|Hell Swarm|C|LEG
+#274|Lifeblood|R|LEG
+#275|Amrou Kithkin|C|LEG
+#276|Alabaster Potion|C|LEG
+#277|Seeker|U|LEG
+#278|Glyph of Doom|C|LEG
+#279|Anti-Magic Aura|C|LEG
+#280|Glyph of Reincarnation|C|LEG
+#281|Undertow|U|LEG
+#282|Shelkin Brownie|C|LEG
+#283|Sea Kings' Blessing|U|LEG
+#284|Eternal Warrior|U|LEG
+#285|Seafarer's Quay|U|LEG
+#286|Field of Dreams|R|LEG
+#287|Nova Pentacle|R|LEG
+#288|Flash Counter|C|LEG
+#289|Dwarven Song|U|LEG
+#290|Adventurers' Guildhouse|U|LEG
+#291|Holy Day|C|LEG
+#292|Shield Wall|U|LEG
+#293|Remove Enchantments|C|LEG
+#294|Touch of Darkness|U|LEG
+#295|Divine Offering|C|LEG
+#296|Deadfall|U|LEG
+#297|Enchantment Alteration|C|LEG
+#298|Equinox|C|LEG
+#299|Glyph of Life|C|LEG
+#300|Glyph of Delusion|C|LEG
+#301|Cathedral of Serra|U|LEG
+#302|Flash Flood|C|LEG
+#303|Feint|C|LEG
+#304|Blight|U|LEG
+#305|Relic Bind|U|LEG
+#306|Sylvan Paradise|U|LEG
+#307|Crevasse|U|LEG
+#308|Indestructible Aura|C|LEG
+#309|Rust|C|LEG
+#310|Quagmire|U|LEG

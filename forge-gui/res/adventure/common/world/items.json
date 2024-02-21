@@ -15,6 +15,79 @@
     "iconName": "BronzeChallengeCoin"
   },
   {
+	  "name": "Sir Donovan's Amulet",
+	  "usableOnWorldMap":true,
+	  "description": "A talisman for remotely contacting your employer",
+	  "iconName": "SirDonovansAmulet",
+	  "dialogOnUse": {
+		  "text": "The amulet lies inert until mana is channeled through it.",
+		  "options": [{
+			  "name": "Put the amulet away"				
+		  },
+		  {
+			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3}],
+			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
+			  "action": [{"setQuestFlag": {"key": "Quest_ShardMines_EpilogueComplete", "val": 1}, "addShards": -3}],
+			  "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
+			  "options": [
+				{
+					"name": "(Continue)",
+					"text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
+					"options": [
+						{
+							"name": "(Continue)"
+						}
+					]
+				}
+			  ]
+		  },
+		  {
+			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3, "not":true}],
+			  "isDisabled": true,
+			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
+		  },
+		  {
+			   "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5}],
+			   "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
+			   "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
+				"options": [
+					{
+						"name": "(Continue)",
+						"action": [{"setQuestFlag": {"key": "exploreShand1", "val": 7}, "addShards": -5}]
+					}
+				]
+		  },
+		  {
+		  "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5, "not":true}],
+			  "isDisabled": true,
+			  "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
+		  }
+		  ]
+	  }
+	  "questItem": true
+  },
+  {
+	  "name": "Landscape Sketchbook",
+	  "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
+	  "iconName": "LandscapeSketchbook",
+	  "questItem": true
+  },
+  {
+	  "name": "Landscape Sketchbook - Mirage",
+	  "description": "A leather bound notebook containing sketches of tropical locations",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
+	  "name": "Landscape Sketchbook - Urza's Saga",
+	  "description": "A leather bound notebook containing many different angles of the same terrain features",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
+	  "name": "Landscape Sketchbook - Coldsnap",
+	  "description": "A leather bound notebook containing sketches of frost covered vistas",
+	  "iconName": "LandscapeSketchbook"
+  },
+  {
     "name": "Chandra's Tome",
 	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
     "equipmentSlot": "Left",
@@ -73,6 +146,7 @@
     "name": "Piper's Charm",
     "equipmentSlot": "Neck",
     "iconName": "PipersCharm",
+    "cost": 4000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Piper's Charm"
@@ -81,6 +155,7 @@
   },{
     "name": "Sleep Wand",
     "equipmentSlot": "Left",
+    "cost": 4000,
     "iconName": "SleepWand",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -90,6 +165,7 @@
   },{
     "name": "Hill Giant Club",
     "equipmentSlot": "Right",
+    "cost": 2000,
     "iconName": "HillGiantClub",
     "effect": {
       "startBattleWithCardInCommandZone": [
@@ -100,6 +176,7 @@
     "name": "Cursed Treasure",
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
+    "cost": 4000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Cursed Treasure"
@@ -109,6 +186,7 @@
     "name": "Farmer's Tools",
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
+    "cost": 6000,
     "effect": {
       "startBattleWithCardInCommandZone": [
         "Farmer's Tools"
@@ -200,7 +278,6 @@
     "equipmentSlot": "Left",
     "iconName": "Hivestone",
     "effect": {
-      "lifeModifier": 2,
       "startBattleWithCard": [
         "Hivestone"
       ]
@@ -210,6 +287,7 @@
     "name": "Life Amulet",
     "equipmentSlot": "Neck",
     "iconName": "LifeAmulet",
+    "cost": 4000,
     "effect": {
       "lifeModifier": 2
     }
@@ -288,6 +366,7 @@
     "name": "Axt",
     "equipmentSlot": "Left",
     "iconName": "SteelAxt",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Bonesplitter"
@@ -298,6 +377,7 @@
     "name": "Bronze Sword",
     "equipmentSlot": "Left",
     "iconName": "BronzeSword",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Bronze Sword"
@@ -308,7 +388,7 @@
     "name": "Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "IronBoots",
-    "cost": 400,
+    "cost": 2000,
     "effect": { 
       "moveSpeed": 1.2
     }
@@ -317,7 +397,7 @@
     "name": "Iron Shield",
     "equipmentSlot": "Right",
     "iconName": "IronShield",
-    "cost": 400,
+    "cost": 3500,
     "effect": {
       "lifeModifier": 2
     }
@@ -325,7 +405,7 @@
   {
     "name": "Iron Armor",
     "equipmentSlot": "Body",
-    "cost": 400,
+    "cost": 3000,
     "iconName": "IronArmor",
     "effect": {
       "lifeModifier": 2
@@ -335,6 +415,7 @@
     "name": "Steel Sword",
     "equipmentSlot": "Left",
     "iconName": "SteelSword",
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "Greatsword"
@@ -345,7 +426,7 @@
     "name": "Steel Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
-    "cost": 500,
+    "cost": 4500,
     "effect": {
       "lifeModifier": 1,
       "moveSpeed": 1.2
@@ -355,7 +436,7 @@
     "name": "Steel Shield",
     "equipmentSlot": "Right",
     "iconName": "SteelShield",
-    "cost": 500,
+    "cost": 6500,
     "effect": {
       "startBattleWithCard": [
         "w_0_3_wall_defender"
@@ -365,7 +446,7 @@
   {
     "name": "Steel Armor",
     "equipmentSlot": "Body",
-    "cost": 500,
+    "cost": 5000,
     "iconName": "SteelArmor",
     "effect": {
       "lifeModifier": 3
@@ -392,6 +473,7 @@
     "name": "Jungle Shield",
     "equipmentSlot": "Right",
     "iconName": "JungleShield",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "g_0_1_plant"
@@ -402,6 +484,7 @@
     "name": "Dagger",
     "equipmentSlot": "Left",
     "iconName": "Dagger",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Spare Dagger"
@@ -423,6 +506,7 @@
   {
     "name": "Aladdin's Ring",
     "equipmentSlot": "Right",
+    "cost": 3000,
     "iconName": "AladdinsRing",
     "effect": {
       "startBattleWithCard": [
@@ -434,6 +518,7 @@
     "name": "Spell Book",
     "iconName": "SpellBook",
     "equipmentSlot": "Left",
+    "cost": 3000,
     "effect": {
       "changeStartCards": 1
     }
@@ -454,7 +539,7 @@
     "name": "Mithril Boots",
     "equipmentSlot": "Boots",
     "iconName": "MithrilBoots",
-    "cost": 1500,
+    "cost": 10000,
     "effect": {
       "lifeModifier": 2,
       "moveSpeed": 1.3
@@ -464,7 +549,7 @@
     "name": "Mithril Shield",
     "equipmentSlot": "Right",
     "iconName": "MithrilShield",
-    "cost": 1500,
+    "cost": 4500,
     "effect": {
       "startBattleWithCard": [
         "c_0_4_a_wall_defender"
@@ -476,9 +561,20 @@
     "name": "Mithril Armor",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 1500,
+    "cost": 15000,
     "effect": {
       "lifeModifier": 5
+    }
+  },
+  {
+    "name": "Presence of the Hydra",
+    "equipmentSlot": "Left",
+    "iconName": "PresenceoftheHydra",
+    "effect": {
+      "lifeModifier": 2,
+        "startBattleWithCardInCommandZone": [
+          "Presence of the Hydra"
+        ]
     }
   },
   {
@@ -586,6 +682,7 @@
     "name": "Dark Boots",
     "equipmentSlot": "Boots",
     "iconName": "DarkBoots",
+    "cost": 2000,
     "effect": {
       "startBattleWithCard": [
         "Clattering Augur"
@@ -598,6 +695,7 @@
     "name": "Dark Shield",
     "equipmentSlot": "Right",
     "iconName": "DarkShield",
+    "cost": 2500,
     "effect": {
       "startBattleWithCard": [
         "Barrier of Bones"
@@ -608,12 +706,13 @@
   {
     "name": "Dark Armor",
     "equipmentSlot": "Body",
+    "cost": 3000,
     "iconName": "DarkArmor",
     "effect": {
       "startBattleWithCard": [
         "Skeletal Snake"
       ],
-      "lifeModifier": -4
+      "lifeModifier": -2
     }
   },
   {
@@ -689,6 +788,7 @@
   {
     "name": "Dark Amulet",
     "equipmentSlot": "Neck",
+    "cost": 3000,
     "iconName": "DarkAmulet",
     "effect": {
       "startBattleWithCard": [
@@ -1023,7 +1123,7 @@
 	"iconName": "WhiteStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Black Staff",
@@ -1038,7 +1138,7 @@
 	"iconName": "BlackStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Blue Staff",
@@ -1052,7 +1152,7 @@
     "iconName": "BlueStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Red Staff",
@@ -1066,7 +1166,7 @@
 	"iconName": "RedStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
 	"name": "Green Staff",
@@ -1081,7 +1181,7 @@
 	"iconName": "GreenStaff",
 	"questItem": true,
 	"shardsNeeded": 5,
-	"cost": 1000
+	"cost": 5000
 },
 {
     "name": "Slimefoot's Slimy Staff",
@@ -1114,6 +1214,7 @@
     "iconName": "SteelBoots",
     "effect": {
       "lifeModifier": -1,
+      "moveSpeed": 1.20,
       "startBattleWithCard": [
         "Ooze Flux"
       ]
@@ -1215,8 +1316,7 @@
     "iconName": "UnderworldCookbook",
     "effect": {
       "startBattleWithCard": [
-        "The Underworld Cookbook",
-	    "c_a_food_sac"
+        "The Underworld Cookbook"
       ]
 }
 },

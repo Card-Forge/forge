@@ -1,0 +1,11 @@
+Name:A-Geology Enthusiast
+ManaCost:2 U U
+Types:Creature Human Artificer
+PT:3/4
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a tapped Powerstone token.
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+A:AB$ Draw | Cost$ 5 | SubAbility$ DBCounter | SpellDescription$ Draw a card and put a +1/+1 counter on CARDNAME.
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:Vigilance\nAt the beginning of your end step, create a tapped Powerstone token.\n{5}: Draw a card and put a +1/+1 counter on Geology Enthusiast.

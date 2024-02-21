@@ -1,0 +1,10 @@
+Name:Trumpeting Carnosaur
+ManaCost:4 R R
+Types:Creature Dinosaur
+PT:7/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscover | TriggerDescription$ When CARDNAME enters the battlefield, discover 5.
+SVar:TrigDiscover:DB$ Discover | Num$ 5
+A:AB$ DealDamage | Cost$ 2 R Discard<1/CARDNAME> | ActivationZone$ Hand | NumDmg$ 3 | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ It deals 3 damage to target creature or planeswalker.
+DeckHas:Ability$Discard
+Oracle:Trample\nWhen Trumpeting Carnosaur enters the battlefield, discover 5.\n{2}{R}, Discard Trumpeting Carnosaur: It deals 3 damage to target creature or planeswalker.

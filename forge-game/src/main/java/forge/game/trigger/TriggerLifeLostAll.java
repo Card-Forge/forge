@@ -70,9 +70,9 @@ public class TriggerLifeLostAll extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final Map<Player, Integer> map = (Map<Player, Integer>) runParams.get(AbilityKey.Map);
+        final Map<Player, Integer> map = filteredMap((Map<Player, Integer>) runParams.get(AbilityKey.Map));
 
-        sa.setTriggeringObject(AbilityKey.Map, filteredMap(map));
+        sa.setTriggeringObject(AbilityKey.Map, map);
         sa.setTriggeringObject(AbilityKey.Player, map.keySet());
     }
 
@@ -93,23 +93,16 @@ public class TriggerLifeLostAll extends Trigger {
 
     private Map<Player, Integer> filteredMap(Map<Player, Integer> map) {
         Map<Player, Integer> passMap = Maps.newHashMap();
-        if (hasParam("ValidPlayer")) {
-            for (final Map.Entry<Player, Integer> e : map.entrySet()) {
-                if (matchesValidParam("ValidPlayer", e.getKey())) {
-                    passMap.put(e.getKey(), e.getValue());
+        for (final Map.Entry<Player, Integer> e : map.entrySet()) {
+            if (matchesValidParam("ValidPlayer", e.getKey())) {
+                if (hasParam("ValidAmountEach")) {
+                    final String comp = getParam("ValidAmountEach");
+                    final int value = AbilityUtils.calculateAmount(getHostCard(), comp.substring(2), this);
+                    if (!Expressions.compare(e.getValue(), comp.substring(0, 2), value)) {
+                        continue;
+                    }
                 }
-            }
-            if (passMap.isEmpty()) {
-                return passMap;
-            }
-        }
-        if (hasParam("ValidAmountEach")) {
-            final String comp = getParam("ValidAmountEach");
-            final int value = AbilityUtils.calculateAmount(getHostCard(), comp.substring(2), this);
-            for (final Map.Entry<Player, Integer> e : passMap.entrySet()) {
-                if (!Expressions.compare(e.getValue(), comp.substring(0, 2), value)) {
-                    return Maps.newHashMap();
-                }
+                passMap.put(e.getKey(), e.getValue());
             }
         }
         return passMap;

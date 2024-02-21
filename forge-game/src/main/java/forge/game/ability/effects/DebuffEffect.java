@@ -97,59 +97,56 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
             }
 
-            // special for Protection:Card.<color>:Protection from <color>:*
-            for (final KeywordInterface inst : tgtC.getUnhiddenKeywords()) {
-                String keyword = inst.getOriginal();
-                if (keyword.startsWith("Protection:")) {
-                    for (final String kw : kws) {
-                        if (keyword.matches("(?i).*:" + kw))
-                            removedKW.add(keyword);
-                    }
-                }
-            }
-
             boolean ProtectionFromColor = false;
             for (final String kw : kws) {
                 // Check if some of the Keywords are Protection from <color>
-                if (!ProtectionFromColor && kw.startsWith("Protection from ")) {
-                    for (byte col : MagicColor.WUBRG) {
-                        final String colString = MagicColor.toLongString(col);
-                        if (kw.endsWith(colString.toLowerCase())) {
-                            ProtectionFromColor = true;
+                if (!kw.startsWith("Protection from ")) {
+                    continue;
+                }
+                for (byte col : MagicColor.WUBRG) {
+                    final String colString = MagicColor.toLongString(col);
+                    if (!kw.endsWith(colString)) {
+                        continue;
+                    }
+                    final String wardString = StringUtils.capitalize(colString) + ":" + colString;
+                    for (final KeywordInterface inst : tgtC.getKeywords(Keyword.PROTECTION)) {
+                        // special for the Ward Auras Protection:Card.<Color>:<color>:*
+                        String keyword = inst.getOriginal();
+                        if (keyword.startsWith("Protection:") && keyword.contains(wardString)) {
+                            removedKW.add(keyword);
                         }
                     }
                 }
+                ProtectionFromColor = true;
             }
+            if (ProtectionFromColor) {
+                // Split "Protection from all colors" into extra Protection from <color>
+                String allColors = "Protection from all colors";
+                if (tgtC.hasKeyword(allColors)) {
+                    final List<String> allColorsProtect = Lists.newArrayList();
 
-            // Split "Protection from all colors" into extra Protection from <color>
-            String allColors = "Protection from all colors";
-            if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
-                final List<String> allColorsProtect = Lists.newArrayList();
-
-                for (byte col : MagicColor.WUBRG) {
-                    allColorsProtect.add("Protection from " + MagicColor.toLongString(col).toLowerCase());
-                }
-                allColorsProtect.removeAll(kws);
-                addedKW.addAll(allColorsProtect);
-                removedKW.add(allColors);
-            }
-
-            // Extra for Spectra Ward
-            allColors = "Protection:Card.nonColorless:Protection from all colors:Aura";
-            if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
-                final List<String> allColorsProtect = Lists.newArrayList();
-
-                for (byte col : MagicColor.WUBRG) {
-                    final String colString = MagicColor.toLongString(col);
-                    if (!kws.contains("Protection from " + colString)) {
-                        allColorsProtect.add(
-                                "Protection:Card." + StringUtils.capitalize(colString) +
-                                ":Protection from " + colString + ":Aura"
-                                );
+                    for (byte col : MagicColor.WUBRG) {
+                        allColorsProtect.add("Protection from " + MagicColor.toLongString(col));
                     }
+                    allColorsProtect.removeAll(kws);
+                    addedKW.addAll(allColorsProtect);
+                    removedKW.add(allColors);
                 }
-                addedKW.addAll(allColorsProtect);
-                removedKW.add(allColors);
+
+                // Extra for Spectra Ward
+                allColors = "Protection:Card.nonColorless:all colors:Aura";
+                if (tgtC.hasKeyword(allColors)) {
+                    final List<String> allColorsProtect = Lists.newArrayList();
+
+                    for (byte col : MagicColor.WUBRG) {
+                        final String colString = MagicColor.toLongString(col);
+                        if (!kws.contains("Protection from " + colString)) {
+                            allColorsProtect.add("Protection:Card." + StringUtils.capitalize(colString) + ":" + colString + ":Aura");
+                        }
+                    }
+                    addedKW.addAll(allColorsProtect);
+                    removedKW.add(allColors);
+                }
             }
 
             removedKW.addAll(kws);

@@ -1,0 +1,9 @@
+Name:Tin Street Gossip
+ManaCost:2 R G
+Types:Creature Viashino Advisor
+PT:4/4
+K:Vigilance
+A:AB$ Mana | Cost$ T | Produced$ R G | RestrictValid$ FaceDownOrTurnFaceUp | SpellDescription$ Add {R}{G}. Spend this mana only to cast face-down spells or to turn creatures face up.
+AI:RemoveDeck:Random
+DeckHints:Keyword$Morph|Megamorph
+Oracle:Vigilance\n{T}: Add {R}{G}. Spend this mana only to cast face-down spells or to turn creatures face up.

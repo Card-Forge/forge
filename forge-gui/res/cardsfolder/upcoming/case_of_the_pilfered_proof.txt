@@ -1,0 +1,14 @@
+Name:Case of the Pilfered Proof
+ManaCost:1 W
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Detective.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Detective enters the battlefield under your control and whenever a Detective you control is turned face up, put a +1/+1 counter on it.
+T:Mode$ TurnFaceUp | ValidCard$ Detective.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a Detective enters the battlefield under your control and whenever a Detective you control is turned face up, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Detective.YouCtrl | PresentCompare$ GE3 | IsPresent2$ Card.Self+IsUnsolved | Execute$ Solved | TriggerDescription$ To solve – You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)
+SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+R:Event$ CreateToken | IsPresent$ Card.Self+IsSolved | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ Solved – If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Card.YouCtrl | TokenScript$ c_a_clue_draw
+DeckNeeds:Type$Detective
+DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Clue
+DeckHints:Ability$Token
+Oracle:Whenever a Detective enters the battlefield under your control and whenever a Detective you control is turned face up, put a +1/+1 counter on it.\nTo solve – You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)\nSolved – If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

@@ -1,0 +1,10 @@
+Name:Diminisher Witch
+ManaCost:2 U
+Types:Creature Human Warlock
+PT:3/2
+K:Bargain
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+bargained | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_cursed | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+DeckHas:Ability$Token|Sacrifice & Type$Role|Aura
+DeckHints:Type$Enchantment|Artifact & Ability$Token
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nWhen Diminisher Witch enters the battlefield, if it was bargained, create a Cursed Role token attached to target creature an opponent controls. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)

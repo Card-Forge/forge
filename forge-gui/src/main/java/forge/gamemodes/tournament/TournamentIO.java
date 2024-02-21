@@ -49,6 +49,9 @@ public class TournamentIO {
         xStream.addPermission(NullPermission.NULL);
         xStream.addPermission(PrimitiveTypePermission.PRIMITIVES);
         xStream.allowTypeHierarchy(String.class);
+        //bypass invalid reference to allow loading earlier saves of xstream
+        xStream.ignoreUnknownElements();
+        xStream.setMode(XStream.NO_REFERENCES);
         // allow any type from the same package
         xStream.allowTypesByWildcard(new String[] {
                 TournamentIO.class.getPackage().getName()+".*"

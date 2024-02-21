@@ -1,0 +1,7 @@
+Name:On the Job
+ManaCost:2 W W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBInvestigate | SpellDescription$ Creatures you control get +2/+1 until end of turn.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+Oracle:Creatures you control get +2/+1 until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

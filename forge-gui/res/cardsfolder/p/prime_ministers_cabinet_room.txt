@@ -1,0 +1,10 @@
+Name:Prime Minister's Cabinet Room
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, up to one target creature you control becomes a copy of target creature an opponent controls.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | SubAbility$ DBClone
+SVar:DBClone:DB$ Clone | CloneTarget$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls to copy | TargetUnique$ True
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigVote | TriggerDescription$ Will of the council — Whenever chaos ensues, starting with you, each player votes for a creature you don't control. Exile each creature with the most votes or tied for most votes.
+SVar:TrigVote:DB$ Vote | Defined$ Player | VoteSubAbility$ DBExile | VoteCard$ Creature.YouDontCtrl | VoteMessage$ for a creature you don't control | AILogic$ Judgment
+SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile
+Oracle:At the beginning of combat on your turn, up to one target creature you control becomes a copy of target creature an opponent controls.\nWill of the council — Whenever chaos ensues, starting with you, each player votes for a creature you don't control. Exile each creature with the most votes or tied for most votes.

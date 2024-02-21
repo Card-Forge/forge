@@ -59,7 +59,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
             final boolean oneCard = numCards == 1 && oneTgtP;
 
-            String valid = oneCard ? "card" : "cards";
+            String valid = "card";
             if (sa.hasParam("DiscardValid")) {
                 String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
                         : sa.getParam("DiscardValid");
@@ -68,8 +68,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
                 }
-                valid = validD.contains(" card") ?
-                        (oneCard ? validD : validD.replace(" card", " cards")) : validD + " " + valid;
+                valid = validD.contains(" card") ? validD : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {
@@ -280,10 +279,10 @@ public class DiscardEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+        params.put(AbilityKey.InternalTriggerTable, table);
 
-        discard(sa, table, true, discardedMap, params);
+        discard(sa, true, discardedMap, params);
 
-        // run trigger if something got milled
         table.triggerChangesZoneAll(game, sa);
     }
 }

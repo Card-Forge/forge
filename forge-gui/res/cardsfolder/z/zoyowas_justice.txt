@@ -1,0 +1,8 @@
+Name:Zoyowa's Justice
+ManaCost:1 R
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Artifact.cmcGE1,Creature.cmcGE1 | TgtPrompt$ Select target artifact or creature with mana value 1 or greater | Origin$ Battlefield | Destination$ Library | Shuffle$ True | RememberLKI$ True | SubAbility$ DBDiscover | StackDescription$ {p:TargetedOwner} shuffles {c:Targeted} into their library. | SpellDescription$ The owner of target artifact or creature with mana value 1 or greater shuffles it into their library.
+SVar:DBDiscover:DB$ Discover | Defined$ TargetedOwner | Num$ X | SubAbility$ DBCleanup | StackDescription$ REP that player_{p:TargetedOwner} | SpellDescription$ Then that player discovers X, where X is its mana value. (They exile cards from the top of their library until they exile a nonland card with that mana value or less. They cast it without paying its mana cost or put it into their hand. They put the rest on the bottom in a random order.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardManaCost
+Oracle:The owner of target artifact or creature with mana value 1 or greater shuffles it into their library. Then that player discovers X, where X is its mana value. (They exile cards from the top of their library until they exile a nonland card with that mana value or less. They cast it without paying its mana cost or put it into their hand. They put the rest on the bottom in a random order.)

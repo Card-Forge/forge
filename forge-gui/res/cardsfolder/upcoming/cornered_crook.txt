@@ -1,0 +1,11 @@
+Name:Cornered Crook
+ManaCost:4 R
+Types:Creature Viashino Warrior
+PT:5/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice an artifact. When you do, CARDNAME deals 3 damage to any target.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact> | Execute$ TrigDamage | SpellDescription$ When you do, CARDNAME deals 3 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Any
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Sacrifice
+AI:RemoveDeck:Random
+Oracle:When Cornered Crook enters the battlefield, you may sacrifice an artifact. When you do, Cornered Crook deals 3 damage to any target.

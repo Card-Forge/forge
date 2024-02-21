@@ -1,0 +1,326 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|M|VMA
+#2|Library of Alexandria|M|VMA
+#3|Ancestral Recall|S|VMA
+#4|Jace the Mind Sculptor|M|VMA
+#5|Mana Crypt|M|VMA
+#6|Control Magic|R|VMA
+#7|Visara the Dreadful|R|VMA
+#8|Magister of Worth|R|VMA
+#9|Scourge of the Throne|M|VMA
+#10|Crater Hellion|R|VMA
+#11|Morphling|M|VMA
+#12|Rorix Bladewing|R|VMA
+#13|Parallax Wave|R|VMA
+#14|Balance|M|VMA
+#15|Grenzo Dungeon Warden|R|VMA
+#16|Spiritmonger|R|VMA
+#17|Living Death|R|VMA
+#18|Flametongue Kavu|U|VMA
+#19|Starstorm|R|VMA
+#20|Winds of Rath|R|VMA
+#21|Silvos Rogue Elemental|R|VMA
+#22|Swords to Plowshares|U|VMA
+#23|Battle Screech|C|VMA
+#24|Deranged Hermit|R|VMA
+#25|Ancient Tomb|R|VMA
+#26|Prophetic Bolt|U|VMA
+#27|Councils Judgment|R|VMA
+#28|Dark Hatchling|U|VMA
+#29|Skullclamp|M|VMA
+#30|Mana Drain|M|VMA
+#31|Mana Vault|R|VMA
+#32|Rofellos Llanowar Emissary|R|VMA
+#33|Recurring Nightmare|R|VMA
+#34|Nevinyrrals Disk|R|VMA
+#35|Palinchron|R|VMA
+#36|Crovax the Cursed|R|VMA
+#37|Baleful Strix|R|VMA
+#38|Basandra Battle Seraph|R|VMA
+#39|Kaerveks Torch|U|VMA
+#40|Yavimaya Hollow|R|VMA
+#41|Serendib Efreet|U|VMA
+#42|Masticore|R|VMA
+#43|Tradewind Rider|R|VMA
+#44|Radiant Archangel|U|VMA
+#45|Lightning Dragon|R|VMA
+#46|Edric Spymaster of Trest|R|VMA
+#47|Time Walk|S|VMA
+#48|Laquatuss Champion|R|VMA
+#49|Demonic Tutor|R|VMA
+#50|Shivan Wurm|R|VMA
+#51|Sulfuric Vortex|R|VMA
+#52|Roar of the Wurm|U|VMA
+#53|Symbiotic Wurm|U|VMA
+#54|Armageddon|M|VMA
+#55|Survival of the Fittest|R|VMA
+#56|Yawgmoths Will|M|VMA
+#57|Lightning Rift|U|VMA
+#58|Sylvan Library|R|VMA
+#59|Mox Pearl|S|VMA
+#60|Mox Sapphire|S|VMA
+#61|Mox Jet|S|VMA
+#62|Mox Ruby|S|VMA
+#63|Mox Emerald|S|VMA
+#64|Kezzerdrix|U|VMA
+#65|Jareth Leonine Titan|R|VMA
+#66|Decree of Justice|R|VMA
+#67|Kongming Sleeping Dragon|R|VMA
+#68|Brago King Eternal|R|VMA
+#69|Penumbra Wurm|U|VMA
+#70|Chain Lightning|C|VMA
+#71|Dacks Duplicate|R|VMA
+#72|Clickslither|R|VMA
+#73|Zhalfirin Crusader|R|VMA
+#74|Upheaval|M|VMA
+#75|Baleful Force|R|VMA
+#76|Burning of Xinye|R|VMA
+#77|Goblin Goon|U|VMA
+#78|Famine|U|VMA
+#79|Expunge|C|VMA
+#80|Goblin Lackey|R|VMA
+#81|Crescendo of War|R|VMA
+#82|Dreampod Druid|U|VMA
+#83|Black Lotus|S|VMA
+#84|Man o War|C|VMA
+#85|Beetleback Chief|C|VMA
+#86|Cursed Scroll|R|VMA
+#87|Vampiric Tutor|R|VMA
+#88|Benalish Trapper|C|VMA
+#89|Strip Mine|R|VMA
+#90|Animate Dead|U|VMA
+#91|Reanimate|U|VMA
+#92|Arrogant Wurm|C|VMA
+#93|Ring of Gix|R|VMA
+#94|Ephemeron|R|VMA
+#95|Afterlife|C|VMA
+#96|Oath of Druids|M|VMA
+#97|Eternal Dragon|R|VMA
+#98|Hymn to Tourach|U|VMA
+#99|Blazing Specter|U|VMA
+#100|Simian Grunts|C|VMA
+#101|Aether Mutation|U|VMA
+#102|Genesis|R|VMA
+#103|Elephant Guide|C|VMA
+#104|Reign of the Pit|R|VMA
+#105|Waterfront Bouncer|U|VMA
+#106|Blastoderm|U|VMA
+#107|Goblin Trenches|U|VMA
+#108|Marchesa the Black Rose|M|VMA
+#109|Coercive Portal|M|VMA
+#110|Fact or Fiction|U|VMA
+#111|Erhnam Djinn|U|VMA
+#112|Gaeas Embrace|U|VMA
+#113|Phyrexian Defiler|U|VMA
+#114|Gigapede|R|VMA
+#115|Killer Whale|C|VMA
+#116|Chaos Warp|R|VMA
+#117|Memory Jar|M|VMA
+#118|Stroke of Genius|R|VMA
+#119|Gerrards Battle Cry|R|VMA
+#120|Keldon Necropolis|R|VMA
+#121|Pillaging Horde|U|VMA
+#122|Tendrils of Agony|U|VMA
+#123|Lurking Evil|U|VMA
+#124|Ankh of Mishra|R|VMA
+#125|Wheel of Fortune|M|VMA
+#126|Timetwister|S|VMA
+#127|Brain Freeze|U|VMA
+#128|Wild Mongrel|C|VMA
+#129|Fledgling Djinn|C|VMA
+#130|Goblin Warchief|U|VMA
+#131|Goblin Ringleader|U|VMA
+#132|Hermit Druid|R|VMA
+#133|Su Chi|U|VMA
+#134|Flowstone Sculpture|R|VMA
+#135|Predatory Nightstalker|C|VMA
+#136|Selvala Explorer Returned|R|VMA
+#137|Counterspell|C|VMA
+#138|Gush|U|VMA
+#139|Necropotence|R|VMA
+#140|Solar Blast|C|VMA
+#141|Sea Drake|R|VMA
+#142|Future Sight|R|VMA
+#143|Aftershock|C|VMA
+#144|Deep Analysis|C|VMA
+#145|Armadillo Cloak|U|VMA
+#146|Plea for Power|R|VMA
+#147|Pianna Nomad Captain|U|VMA
+#148|Smokestack|R|VMA
+#149|Death Grasp|U|VMA
+#150|Deathreap Ritual|U|VMA
+#151|Tropical Island|R|VMA
+#152|Bayou|R|VMA
+#153|Savannah|R|VMA
+#154|Taiga|R|VMA
+#155|Underground Sea|R|VMA
+#156|Volcanic Island|R|VMA
+#157|Tundra|R|VMA
+#158|Badlands|R|VMA
+#159|Plateau|R|VMA
+#160|Scrubland|R|VMA
+#161|Grizzly Fate|U|VMA
+#162|Yawgmoths Bargain|M|VMA
+#163|Dack Fayden|M|VMA
+#164|Kindle|C|VMA
+#165|Chainers Edict|C|VMA
+#166|Power Sink|U|VMA
+#167|Exile|C|VMA
+#168|Fireblast|U|VMA
+#169|Fyndhorn Elves|C|VMA
+#170|Karmic Guide|R|VMA
+#171|Psychatog|U|VMA
+#172|Sarcomancy|U|VMA
+#173|Carnophage|C|VMA
+#174|Berserk|R|VMA
+#175|Soltari Trooper|C|VMA
+#176|Soltari Emissary|C|VMA
+#177|Yavimaya Elder|U|VMA
+#178|Krovikan Sorcerer|C|VMA
+#179|Krosan Tusker|C|VMA
+#180|Cloud Djinn|U|VMA
+#181|Gustcloak Harrier|C|VMA
+#182|Fires of Yavimaya|U|VMA
+#183|Brindle Shoat|C|VMA
+#184|Sidar Jabari|U|VMA
+#185|Stoic Champion|U|VMA
+#186|Natures Lore|C|VMA
+#187|Rites of Initiation|U|VMA
+#188|Orcish Lumberjack|C|VMA
+#189|Mystic Zealot|U|VMA
+#190|Empyrial Armor|U|VMA
+#191|Mistmoon Griffin|C|VMA
+#192|Sudden Strength|C|VMA
+#193|Dauthi Mercenary|C|VMA
+#194|Nightscape Familiar|C|VMA
+#195|Goblin Piledriver|R|VMA
+#196|Cloud of Faeries|U|VMA
+#197|Deaths Head Buzzard|C|VMA
+#198|Cruel Bargain|R|VMA
+#199|Shelter|C|VMA
+#200|Goblin Commando|C|VMA
+#201|Grand Coliseum|R|VMA
+#202|Secluded Steppe|C|VMA
+#203|Lonely Sandbar|C|VMA
+#204|Forgotten Cave|C|VMA
+#205|Tranquil Thicket|C|VMA
+#206|Barren Moor|C|VMA
+#207|Turnabout|U|VMA
+#208|High Tide|U|VMA
+#209|Akromas Blessing|U|VMA
+#210|Predator Flagship|R|VMA
+#211|Goblin Matron|C|VMA
+#212|Gamble|R|VMA
+#213|Norwood Priestess|R|VMA
+#214|Goblin Patrol|C|VMA
+#215|Skywing Aven|C|VMA
+#216|Fallen Askari|C|VMA
+#217|Phantom Nomad|C|VMA
+#218|Brainstorm|C|VMA
+#219|Obsessive Search|C|VMA
+#220|Drakestown Forgotten|R|VMA
+#221|Jungle Wurm|C|VMA
+#222|Thopter Squadron|U|VMA
+#223|Chimeric Idol|U|VMA
+#224|Skirk Drill Sergeant|C|VMA
+#225|Academy Elite|R|VMA
+#226|Basking Rootwalla|C|VMA
+#227|Triangle of War|U|VMA
+#228|Desert Twister|U|VMA
+#229|Urborg Uprising|C|VMA
+#230|Skyshroud Forest|U|VMA
+#231|Caldera Lake|U|VMA
+#232|Scabland|U|VMA
+#233|Pine Barrens|U|VMA
+#234|Salt Flats|U|VMA
+#235|Repel|C|VMA
+#236|Spirit Mirror|R|VMA
+#237|Keeneye Aven|C|VMA
+#238|Krosan Vorine|C|VMA
+#239|Mountain Valley|U|VMA
+#240|Grasslands|U|VMA
+#241|Bad River|U|VMA
+#242|Flood Plain|U|VMA
+#243|Rocky Tar Pit|U|VMA
+#244|Falter|C|VMA
+#245|Dark Ritual|C|VMA
+#246|Ophidian|C|VMA
+#247|Spinal Graft|C|VMA
+#248|Giant Mantis|C|VMA
+#249|Frantic Search|C|VMA
+#250|Paralyze|C|VMA
+#251|Radiants Judgment|C|VMA
+#252|Realm Seekers|R|VMA
+#253|Thalakos Drifters|U|VMA
+#254|Breath of Life|U|VMA
+#255|Goblin General|C|VMA
+#256|Aquamoeba|C|VMA
+#257|Minds Desire|R|VMA
+#258|Regrowth|R|VMA
+#259|Flowstone Hellion|U|VMA
+#260|Armor of Thorns|C|VMA
+#261|Mesmeric Fiend|C|VMA
+#262|Scrivener|C|VMA
+#263|Cabal Ritual|U|VMA
+#264|Elvish Aberration|C|VMA
+#265|Benevolent Bodyguard|C|VMA
+#266|Terohs Faithful|C|VMA
+#267|Choking Tethers|C|VMA
+#268|Skirge Familiar|C|VMA
+#269|Tangle|C|VMA
+#270|Spark Spray|C|VMA
+#271|Force of Will|R|VMA
+#272|Giant Strength|C|VMA
+#273|Kjeldoran Outpost|R|VMA
+#274|Reviving Vapors|U|VMA
+#275|Eureka|M|VMA
+#276|Spirit Cairn|R|VMA
+#277|Provoke|C|VMA
+#278|Hulking Goblin|C|VMA
+#279|Worldgorger Dragon|R|VMA
+#280|Natures Ruin|R|VMA
+#281|Volraths Shapeshifter|R|VMA
+#282|Rescind|C|VMA
+#283|Chartooth Cougar|C|VMA
+#284|Putrid Imp|C|VMA
+#285|Circular Logic|C|VMA
+#286|Claws of Wirewood|U|VMA
+#287|Addle|C|VMA
+#288|Tyrants Choice|C|VMA
+#289|Devout Witness|U|VMA
+#290|Mana Prism|C|VMA
+#291|Burning Wish|R|VMA
+#292|Owl Familiar|C|VMA
+#293|Noble Templar|C|VMA
+#294|Deftblade Elite|C|VMA
+#295|Nostalgic Dreams|U|VMA
+#296|Temporal Fissure|C|VMA
+#297|Choking Sands|C|VMA
+#298|Seal of Cleansing|C|VMA
+#299|Wall of Diffusion|C|VMA
+#300|Thawing Glaciers|R|VMA
+#301|Saproling Burst|R|VMA
+#302|Brilliant Halo|C|VMA
+#303|Fastbond|M|VMA
+#304|Karn Silver Golem|R|VMA
+#305|Flusterstorm|R|VMA
+#306|Astral Slide|U|VMA
+#307|Tribute to the Wild|C|VMA
+#308|Channel|M|VMA
+#309|Renewed Faith|C|VMA
+#310|Gilded Light|C|VMA
+#311|Skirk Prospector|C|VMA
+#312|Goblin Settler|U|VMA
+#313|Reckless Charge|C|VMA
+#314|Lake of the Dead|R|VMA
+#315|Ichorid|R|VMA
+#316|Bazaar of Baghdad|M|VMA
+#317|Null Rod|R|VMA
+#318|Muzzio Visionary Architect|M|VMA
+#319|Sphere of Resistance|R|VMA
+#320|City in a Bottle|M|VMA
+#321|Ivory Tower|U|VMA
+#322|Lions Eye Diamond|M|VMA
+#323|Time Vault|M|VMA
+#324|Mishras Workshop|M|VMA
+#325|Tolarian Academy|M|VMA

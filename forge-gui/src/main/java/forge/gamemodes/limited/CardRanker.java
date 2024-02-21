@@ -192,7 +192,7 @@ public class CardRanker {
     private static List<PaperCard> sortAndCreateList(List<Pair<Double, PaperCard>> cardScores) {
         // even if some cards might be assigned the same rank we don't need randomization here
         // as the limited variant is responsible for that during generation
-        Collections.sort(cardScores, Collections.reverseOrder(new CardRankingComparator()));
+        cardScores.sort(Collections.reverseOrder(new CardRankingComparator()));
 
         List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
         for (Pair<Double, PaperCard> pair : cardScores) {

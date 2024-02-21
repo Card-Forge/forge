@@ -2,6 +2,6 @@ Name:Unexpected Potential
 ManaCost:no cost
 Types:Conspiracy
 K:Hidden agenda
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.NamedCard | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast spells with the chosen name.
+S:Mode$ ManaConvert | EffectZone$ Command | ValidPlayer$ You | ValidCard$ Card.NamedCard | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast spells with the chosen name.
 SVar:AgendaLogic:BestCreatureInComputerDeck
 Oracle:Hidden agenda (Start the game with this conspiracy face down in the command zone and secretly choose a card name. You may turn this conspiracy face up any time and reveal that name.)\nYou may spend mana as though it were mana of any color to cast spells with the chosen name.

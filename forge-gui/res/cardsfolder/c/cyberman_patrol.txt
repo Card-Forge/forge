@@ -1,0 +1,7 @@
+Name:Cyberman Patrol
+ManaCost:2
+Types:Artifact Creature Cyberman
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Afflict:3 | Description$ Artifact creatures you control have afflict 3. (Whenever a creature with afflict 3 becomes blocked, defending player loses 3 life.)
+DeckHints:Type$Artifact & Type$Creature
+Oracle:Artifact creatures you control have afflict 3. (Whenever a creature with afflict 3 becomes blocked, defending player loses 3 life.)

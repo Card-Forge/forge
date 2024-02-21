@@ -1,0 +1,7 @@
+Name:Flesh Duplicate
+ManaCost:U U
+Types:Creature Shapeshifter Rebel
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddKeywords$ IfNew Vanishing:3 | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it has vanishing 3 if that creature doesn't have vanishing. (A permanent with vanishing 3 enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
+Oracle:You may have Flesh Duplicate enter the battlefield as a copy of any creature on the battlefield, except it has vanishing 3 if that creature doesn't have vanishing. (A permanent with vanishing 3 enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)

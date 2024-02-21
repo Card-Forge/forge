@@ -1,4 +1,4 @@
-Name:Dunedain Blade
+Name:Dúnedain Blade
 ManaCost:1 W
 Types:Artifact Equipment
 K:Equip:1:Human.YouCtrl:Human

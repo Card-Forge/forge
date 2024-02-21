@@ -1,0 +1,10 @@
+Name:Renegade Silent
+ManaCost:3 U
+Types:Creature Alien Horror
+PT:3/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGoad | TriggerDescription$ At the beginning of your end step, goad up to one target creature you don't control and put a +1/+1 counter on CARDNAME. CARDNAME phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPhase
+SVar:DBPhase:DB$ Phases | Defined$ Self
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, goad up to one target creature you don't control and put a +1/+1 counter on Renegade Silent. Renegade Silent phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)

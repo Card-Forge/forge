@@ -1642,7 +1642,7 @@
     <property name="waypoints" value="245,248"/>
    </properties>
   </object>
-  <object id="237" template="../../../obj/dialog.tx" x="0" y="464" width="144" height="16">
+  <object id="237" template="../../../obj/dialog.tx" x="0" y="448" width="144" height="16">
    <properties>
     <property name="dialog">[
 {
@@ -2285,9 +2285,10 @@
 }]</property>
    </properties>
   </object>
-  <object id="288" template="../../../obj/portal.tx" x="128" y="480">
+  <object id="288" template="../../../obj/portal.tx" x="122" y="474">
    <properties>
     <property name="activeQuestFlag" value="lilianaTownPortal"/>
+    <property name="direction" value="left"/>
     <property name="portalState" value="closed"/>
     <property name="teleport" value="../common/maps/map/main_story/temple_of_liliana/keep.tmx"/>
     <property name="teleportObjectId" value="238"/>

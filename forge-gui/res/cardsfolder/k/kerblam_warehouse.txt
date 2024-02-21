@@ -1,0 +1,12 @@
+Name:Kerblam! Warehouse
+ManaCost:no cost
+Types:Plane Kandoka
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigAnimateAll | TriggerDescription$ Whenever chaos ensues, until your next turn, noncreature artifacts you control gain "{T}, Sacrifice this artifact: Flip a coin. If you win the flip, this artifact deals 3 damage to any target."
+SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Artifact.nonCreature+YouCtrl | Abilities$ ABExplode | Duration$ UntilYourNextTurn
+SVar:ABExplode:AB$ FlipACoin | Cost$ {T} Sac<1/CARDNAME/this artifact> | WinSubAbility$ DBDamage | SpellDescription$ Flip a coin. If you win the flip, this artifact deals 3 damage to any target.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckNeeds:Type$Artifact
+Oracle:Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.\nWhenever chaos ensues, until your next turn, noncreature artifacts you control gain "{T}, Sacrifice this artifact: Flip a coin. If you win the flip, this artifact deals 3 damage to any target."

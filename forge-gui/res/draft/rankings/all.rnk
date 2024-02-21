@@ -1,0 +1,145 @@
+//Rank|Name|Rarity|Set
+#1|Helm of Obedience|R|ALL
+#2|Thawing Glaciers|R|ALL
+#3|Feast or Famine|U|ALL
+#4|Tornado|R|ALL
+#5|Pyrokinesis|U|ALL
+#6|Balduvian Dead|U|ALL
+#7|Sustaining Spirit|R|ALL
+#8|Krovikan Plague|U|ALL
+#9|Phelddagrif|R|ALL
+#10|Exile|R|ALL
+#11|Soldevi Excavations|R|ALL
+#12|Urza's Engine|R|ALL
+#13|Sol Grail|R|ALL
+#14|Force of Will|U|ALL
+#15|Krovikan Horror|R|ALL
+#16|Kjeldoran Outpost|R|ALL
+#17|Lake of the Dead|R|ALL
+#18|Misfortune|R|ALL
+#19|Contagion|U|ALL
+#20|Ritual of the Machine|R|ALL
+#21|Lim-Dul's Paladin|U|ALL
+#22|Ivory Gargoyle|R|ALL
+#23|Phyrexian War Beast|C|ALL
+#24|Yavimaya Ancients|C|ALL
+#25|Gorilla Chieftain|C|ALL
+#26|Gargantuan Gorilla|R|ALL
+#27|Stromgald Spy|U|ALL
+#28|Gorilla Berserkers|C|ALL
+#29|Storm Elemental|U|ALL
+#30|Keeper of Tresserhorn|R|ALL
+#31|Reprisal|U|ALL
+#32|Elvish Spirit Guide|U|ALL
+#33|Death Spark|U|ALL
+#34|Balduvian Horde|R|ALL
+#35|Heart of Yavimaya|R|ALL
+#36|Guerrilla Tactics|C|ALL
+#37|Balduvian Trading Post|R|ALL
+#38|Kaysa|R|ALL
+#39|Phyrexian Boon|C|ALL
+#40|Balduvian War-Makers|C|ALL
+#41|Dystopia|R|ALL
+#42|Aesthir Glider|C|ALL
+#43|Phantasmal Sphere|R|ALL
+#44|Varchild's Crusader|C|ALL
+#45|Fatal Lore|R|ALL
+#46|Whirling Catapult|R|ALL
+#47|Yavimaya Ants|U|ALL
+#48|Ashnod's Cylix|R|ALL
+#49|Lord of Tresserhorn|R|ALL
+#50|Phyrexian Devourer|R|ALL
+#51|Storm Shaman|C|ALL
+#52|Phantasmal Fiend|C|ALL
+#53|Elvish Bard|U|ALL
+#54|Kjeldoran Home Guard|U|ALL
+#55|Arcane Denial|C|ALL
+#56|Bounty of the Hunt|U|ALL
+#57|School of the Unseen|U|ALL
+#58|Storm Crow|C|ALL
+#59|Deadly Insect|U|ALL
+#60|Surge of Strength|U|ALL
+#61|Soldevi Digger|R|ALL
+#62|Lim-Dul's High Guard|C|ALL
+#63|Splintering Wind|R|ALL
+#64|Diminishing Returns|R|ALL
+#65|Varchild's War-Riders|R|ALL
+#66|Rogue Skycaptain|R|ALL
+#67|Soldevi Steam Beast|C|ALL
+#68|Fyndhorn Druid|C|ALL
+#69|Shield Sphere|U|ALL
+#70|Astrolabe|C|ALL
+#71|Lodestone Bauble|R|ALL
+#72|Enslaved Scout|C|ALL
+#73|Viscerid Drone|U|ALL
+#74|Elvish Ranger|C|ALL
+#75|Hail Storm|U|ALL
+#76|Spiny Starfish|U|ALL
+#77|Wild Aesthir|C|ALL
+#78|Nature's Wrath|R|ALL
+#79|Gorilla Shaman|U|ALL
+#80|Juniper Order Advocate|U|ALL
+#81|Library of Lat-Nam|R|ALL
+#82|Scars of the Veteran|U|ALL
+#83|Omen of Fire|R|ALL
+#84|False Demise|U|ALL
+#85|Pillage|U|ALL
+#86|Whip Vine|C|ALL
+#87|Bestial Fury|C|ALL
+#88|Lim-Dul's Vault|U|ALL
+#89|Fevered Strength|C|ALL
+#90|Soldier of Fortune|U|ALL
+#91|Mishra's Groundbreaker|U|ALL
+#92|Chaos Harlequin|R|ALL
+#93|Benthic Explorers|C|ALL
+#94|Soldevi Heretic|C|ALL
+#95|Diseased Vermin|U|ALL
+#96|Kjeldoran Escort|C|ALL
+#97|Gorilla War Cry|C|ALL
+#98|Mystic Compass|U|ALL
+#99|Casting of Bones|C|ALL
+#100|Agent of Stromgald|C|ALL
+#101|Nature's Blessing|U|ALL
+#102|Phyrexian Portal|R|ALL
+#103|Gustha's Scepter|R|ALL
+#104|Undergrowth|C|ALL
+#105|Winter's Night|R|ALL
+#106|Carrier Pigeons|C|ALL
+#107|Wandering Mage|R|ALL
+#108|Nature's Chosen|U|ALL
+#109|Stench of Decay|C|ALL
+#110|Soldevi Sage|C|ALL
+#111|Lat-Nam's Legacy|C|ALL
+#112|Burnout|U|ALL
+#113|Inheritance|U|ALL
+#114|Insidious Bookworms|C|ALL
+#115|Sheltered Valley|R|ALL
+#116|Veteran's Voice|C|ALL
+#117|Gift of the Woods|C|ALL
+#118|Viscerid Armor|C|ALL
+#119|Errand of Duty|C|ALL
+#120|Storm Cauldron|R|ALL
+#121|Soldevi Adnate|C|ALL
+#122|Seasoned Tactician|U|ALL
+#123|Energy Arc|U|ALL
+#124|Foresight|C|ALL
+#125|Kjeldoran Pride|C|ALL
+#126|Primitive Justice|U|ALL
+#127|Browse|U|ALL
+#128|Reinforcements|C|ALL
+#129|Scarab of the Unseen|U|ALL
+#130|Awesome Presence|C|ALL
+#131|Martyrdom|C|ALL
+#132|Swamp Mosquito|C|ALL
+#133|Soldevi Sentry|C|ALL
+#134|Tidal Control|R|ALL
+#135|Suffocation|U|ALL
+#136|Misinformation|U|ALL
+#137|Taste of Paradise|C|ALL
+#138|Sworn Defender|R|ALL
+#139|Noble Steeds|C|ALL
+#140|Unlikely Alliance|U|ALL
+#141|Floodwater Dam|R|ALL
+#142|Royal Herbalist|C|ALL
+#143|Thought Lash|R|ALL
+#144|Royal Decree|R|ALL

@@ -1,0 +1,13 @@
+Name:Vitu-Ghazi Inspector
+ManaCost:1 G
+Types:Creature Elf Detective
+PT:1/3
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ Z | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, if evidence was collected, put a +1/+1 counter on target creature and you gain 2 life.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:Z:CastSA>Collected$Amount
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$LifeGain|Counters
+Oracle:As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)\nReach\nWhen Vitu-Ghazi Inspector enters the battlefield, if evidence was collected, put a +1/+1 counter on target creature and you gain 2 life.

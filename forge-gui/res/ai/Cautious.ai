@@ -299,3 +299,16 @@ MOJHOSTO_CHANCE_TO_PREFER_JHOIRA_OVER_MOMIR=50
 # attempt this either in its upkeep or its draw phase or main 1).
 MOJHOSTO_CHANCE_TO_USE_JHOIRA_COPY_INSTANT=15
 
+# Master toggle for the following options setting the default AIPreference:SacCost handling.
+SACRIFICE_DEFAULT_PREF_ENABLE=false
+# If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
+# consider the sacrifice of a matching card if its mana value (CMC) matches the specified minimum
+SACRIFICE_DEFAULT_PREF_MIN_CMC=0
+# If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
+# consider the sacrifice of a matching card if its mana value (CMC) matches the specified maximum
+SACRIFICE_DEFAULT_PREF_MAX_CMC=1
+# If a card has no card-specific AIPreference for the Sacrifice cost (AIPreference:SacCost), the AI will still
+# consider the sacrifice of a matching card is a token
+SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS=true
+# A creature should evaluate to no more than this much to be considered for default SacCost preference
+SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL=135

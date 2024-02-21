@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -30,7 +29,9 @@ import com.google.common.collect.Maps;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
@@ -95,13 +96,13 @@ public class CostPayment extends ManaConversionMatrix {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect) {
         if (cost == null) {
             return true;
         }
 
         cost = CostAdjustment.adjust(cost, ability);
-        return cost.canPay(ability, false);
+        return cost.canPay(ability, effect);
     }
 
     /**
@@ -151,22 +152,15 @@ public class CostPayment extends ManaConversionMatrix {
             PaymentDecision pd = part.accept(decisionMaker);
 
             // Right before we start paying as decided, we need to transfer the CostPayments matrix over?
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(this);
+            if (pd != null) {
+                pd.matrix = this;
             }
 
             if (pd == null || !part.payAsDecided(decisionMaker.getPlayer(), pd, ability, decisionMaker.isEffect())) {
-                if (part instanceof CostPartMana) {
-                    ((CostPartMana)part).setCardMatrix(null);
-                }
                 game.costPaymentStack.pop(); // cost is resolved
                 return false;
             }
             this.paidCostParts.add(part);
-
-            if (part instanceof CostPartMana) {
-                ((CostPartMana)part).setCardMatrix(null);
-            }
             game.costPaymentStack.pop(); // cost is resolved
         }
 
@@ -238,9 +232,9 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a {@link forge.game.mana.Mana} object.
      */
     public static Mana getMana(final Player player, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
-            String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
+            final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(player.getManaPool(), shard,
-            saBeingPaidFor, restriction, colorsPaid, xManaCostPaidByColor);
+            saBeingPaidFor, colorsPaid, xManaCostPaidByColor);
 
         // Exclude border case
         if (weightedOptions.isEmpty()) {
@@ -289,7 +283,7 @@ public class CostPayment extends ManaConversionMatrix {
     }
 
     private static List<Pair<Mana, Integer>> selectManaToPayFor(final ManaPool manapool, final ManaCostShard shard,
-            final SpellAbility saBeingPaidFor, String restriction, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
+            final SpellAbility saBeingPaidFor, final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<>();
         for (final Mana thisMana : manapool) {
             if (shard == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(thisMana.getColor()), xManaCostPaidByColor)) {
@@ -308,7 +302,7 @@ public class CostPayment extends ManaConversionMatrix {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isValid(restriction, null, null, null)) {
+            if (!saBeingPaidFor.allowsPayingWithShard(thisMana.getSourceCard(), thisMana.getColor())) {
                 continue;
             }
 
@@ -336,22 +330,40 @@ public class CostPayment extends ManaConversionMatrix {
         return weightedOptions;
     }
 
-    public static void handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
-        if (sa.isOffering() && sa.getSacrificedAsOffering() != null) {
+    public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
+        final Game game = sa.getHostCard().getGame();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.InternalTriggerTable, table);
+
+        if (sa.isOffering()) {
+            if (sa.getSacrificedAsOffering() == null) {
+                return false;
+            }
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, false, null, null);
+            if (test) {
+                sa.resetSacrificedAsOffering();
+            } else if (costIsPaid) {
+                game.getAction().sacrifice(offering, sa, false, params);
             }
-            sa.resetSacrificedAsOffering();
         }
-        if (sa.isEmerge() && sa.getSacrificedAsEmerge() != null) {
+        if (sa.isEmerge()) {
+            if (sa.getSacrificedAsEmerge() == null) {
+                return false;
+            }
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
-            if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, false, null, null);
+            if (test) {
+                sa.resetSacrificedAsEmerge();
+            } else if (costIsPaid) {
+                game.getAction().sacrifice(emerge, sa, false, params);
+                sa.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             }
-            sa.resetSacrificedAsEmerge();
         }
+        if (!table.isEmpty()) {
+            table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
+        }
+        return true;
     }
 }

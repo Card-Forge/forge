@@ -1,0 +1,6 @@
+Name:All of History, All at Once
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ TimeTravel | SpellDescription$ Time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
+K:Storm
+Oracle:Time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

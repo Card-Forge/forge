@@ -1,0 +1,9 @@
+Name:Meddling Youths
+ManaCost:3 R W
+Types:Creature Human Detective
+PT:4/5
+K:Haste
+T:Mode$ AttackersDeclared | Execute$ TrigInvestigate | ValidAttackers$ Creature | ValidAttackersAmount$ GE3 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate|Token & Type$Clue|Artifact
+Oracle:Haste\nWhenever you attack with three or more creatures, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

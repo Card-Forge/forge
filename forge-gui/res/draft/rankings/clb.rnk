@@ -1,0 +1,382 @@
+//Rank|Name|Rarity|Set
+#1|Battle Angels of Tyr|M|CLB
+#2|Karlach, Fury of Avernus|M|CLB
+#3|Horn of Valhalla|R|CLB
+#4|Elminster's Simulacrum|M|CLB
+#5|Ancient Brass Dragon|M|CLB
+#6|Elder Brain|R|CLB
+#7|Ancient Bronze Dragon|M|CLB
+#8|Miirym, Sentinel Wyrm|R|CLB
+#9|Tasha, the Witch Queen|M|CLB
+#10|Minsc and Boo, Timeless Heroes|M|CLB
+#11|Elminster|M|CLB
+#12|Tomb of Horrors Adventurer|R|CLB
+#13|Blood Money|M|CLB
+#14|Intellect Devourer|R|CLB
+#15|Ancient Copper Dragon|M|CLB
+#16|Bramble Sovereign|M|CLB
+#17|Mighty Servant of Leuk-o|R|CLB
+#18|Nautiloid Ship|M|CLB
+#19|Noble Heritage|R|CLB
+#20|Ancient Gold Dragon|M|CLB
+#21|Illithid Harvester|R|CLB
+#22|Astarion's Thirst|R|CLB
+#23|Firbolg Flutist|R|CLB
+#24|Blade of Selves|R|CLB
+#25|Shadowheart, Dark Justiciar|R|CLB
+#26|Gorion, Wise Mentor|R|CLB
+#27|Jan Jansen, Chaos Crafter|R|CLB
+#28|Volo, Itinerant Scholar|M|CLB
+#29|Pact Weapon|M|CLB
+#30|Skullport Merchant|U|CLB
+#31|Balor|M|CLB
+#32|Elturel Survivors|R|CLB
+#33|Wrathful Red Dragon|R|CLB
+#34|Owlbear Cub|R|CLB
+#35|Basilisk Collar|R|CLB
+#36|Lae'zel, Vlaakith's Champion|R|CLB
+#37|Jaheira, Friend of the Forest|R|CLB
+#38|Bane, Lord of Darkness|R|CLB
+#39|Windshaper Planetar|R|CLB
+#40|Caves of Chaos Adventurer|R|CLB
+#41|Undermountain Adventurer|R|CLB
+#42|Duke Ulder Ravengard|R|CLB
+#43|Raphael, Fiendish Savior|R|CLB
+#44|Lightning Bolt|C|CLB
+#45|Skullwinder|U|CLB
+#46|Arcane Signet|U|CLB
+#47|Myrkul, Lord of Bones|R|CLB
+#48|Crystal Dragon|U|CLB
+#49|Sculpted Sunburst|R|CLB
+#50|Ancient Silver Dragon|M|CLB
+#51|Modify Memory|U|CLB
+#52|Ravenloft Adventurer|R|CLB
+#53|Amethyst Dragon|U|CLB
+#54|Wand of Wonder|R|CLB
+#55|Jaheira's Respite|R|CLB
+#56|Mind Stone|U|CLB
+#57|Feywild Caretaker|U|CLB
+#58|Commander Liara Portyr|U|CLB
+#59|Kagha, Shadow Archdruid|U|CLB
+#60|Minthara, Merciless Soul|U|CLB
+#61|Thrakkus the Butcher|U|CLB
+#62|Baba Lysaga, Night Witch|R|CLB
+#63|The Council of Four|R|CLB
+#64|Lae'zel's Acrobatics|R|CLB
+#65|Altar of Bhaal|R|CLB
+#66|Bonecaller Cleric|U|CLB
+#67|Thunderwave|U|CLB
+#68|Wyll's Reversal|R|CLB
+#69|Earthquake Dragon|R|CLB
+#70|Sharpshooter Elf|U|CLB
+#71|Fraying Line|R|CLB
+#72|Swiftfoot Boots|U|CLB
+#73|Juvenile Mist Dragon|U|CLB
+#74|Ellyn Harbreeze, Busybody|U|CLB
+#75|Lulu, Loyal Hollyphant|U|CLB
+#76|Alora, Merry Thief|U|CLB
+#77|Amber Gristle O'Maul|U|CLB
+#78|Ganax, Astral Hunter|U|CLB
+#79|Gut, True Soul Zealot|U|CLB
+#80|Lozhan, Dragons' Legacy|U|CLB
+#81|Mahadi, Emporium Master|U|CLB
+#82|Oji, the Exquisite Blade|U|CLB
+#83|Rilsa Rael, Kingpin|U|CLB
+#84|Bhaal, Lord of Murder|R|CLB
+#85|Dynaheir, Invoker Adept|R|CLB
+#86|Jon Irenicus, Shattered One|R|CLB
+#87|Banishment|U|CLB
+#88|Githzerai Monk|U|CLB
+#89|Hammers of Moradin|U|CLB
+#90|Roving Harper|C|CLB
+#91|Gale's Redirection|R|CLB
+#92|Mystery Key|U|CLB
+#93|Wizards of Thay|R|CLB
+#94|Call to the Void|R|CLB
+#95|Cloudkill|U|CLB
+#96|Passageway Seer|U|CLB
+#97|Fireball|U|CLB
+#98|Two-Handed Axe|U|CLB
+#99|Monster Manual|R|CLB
+#100|Burnished Hart|U|CLB
+#101|Meteor Golem|U|CLB
+#102|Vexing Puzzlebox|M|CLB
+#103|Murder|C|CLB
+#104|Imoen, Mystic Trickster|U|CLB
+#105|Skanos Dragonheart|U|CLB
+#106|Korlessa, Scale Singer|U|CLB
+#107|Astarion, the Decadent|R|CLB
+#108|Nine-Fingers Keene|R|CLB
+#109|Acolyte of Bahamut|U|CLB
+#110|Contraband Livestock|U|CLB
+#111|Legion Loyalty|M|CLB
+#112|Slaughter the Strong|U|CLB
+#113|Cone of Cold|U|CLB
+#114|Moonshae Pixie|U|CLB
+#115|Sapphire Dragon|U|CLB
+#116|Young Blue Dragon|C|CLB
+#117|Ghost Lantern|U|CLB
+#118|Gnoll War Band|U|CLB
+#119|Traverse the Outlands|R|CLB
+#120|Treasure Keeper|U|CLB
+#121|Wayfarer's Bauble|C|CLB
+#122|Undercellar Myconid|C|CLB
+#123|Winter Eladrin|C|CLB
+#124|Abdel Adrian, Gorion's Ward|U|CLB
+#125|Cadira, Caller of the Small|U|CLB
+#126|Beckoning Will-o'-Wisp|U|CLB
+#127|Rescuer Chwinga|U|CLB
+#128|White Plume Adventurer|R|CLB
+#129|Bane's Contingency|U|CLB
+#130|Displacer Kitten|R|CLB
+#131|Kindred Discovery|R|CLB
+#132|Cast Down|U|CLB
+#133|Topaz Dragon|U|CLB
+#134|Vrock|U|CLB
+#135|Inspired Tinkering|U|CLB
+#136|Nemesis Phoenix|U|CLB
+#137|Swashbuckler Extraordinaire|U|CLB
+#138|Draconic Muralists|U|CLB
+#139|Emerald Dragon|U|CLB
+#140|Giant Ankheg|U|CLB
+#141|Nature's Lore|C|CLB
+#142|Charcoal Diamond|C|CLB
+#143|Fire Diamond|C|CLB
+#144|Marble Diamond|C|CLB
+#145|Moss Diamond|C|CLB
+#146|Sky Diamond|C|CLB
+#147|Stonespeaker Crystal|U|CLB
+#148|Earth Tremor|C|CLB
+#149|Blessed Hippogriff|C|CLB
+#150|Safana, Calimport Cutthroat|U|CLB
+#151|Erinis, Gloom Stalker|U|CLB
+#152|Alaundo the Seer|R|CLB
+#153|Raggadragga, Goreguts Boss|R|CLB
+#154|Archivist of Oghma|R|CLB
+#155|Icewind Stalwart|C|CLB
+#156|Pegasus Guardian|C|CLB
+#157|Undercellar Sweep|U|CLB
+#158|You're Confronted by Robbers|C|CLB
+#159|Dragonborn Looter|C|CLB
+#160|Sailors' Bane|U|CLB
+#161|Ambition's Cost|U|CLB
+#162|Nothic|U|CLB
+#163|Bloodboil Sorcerer|U|CLB
+#164|Avenging Hunter|C|CLB
+#165|Explore the Underdark|U|CLB
+#166|Jade Orb of Dragonkind|C|CLB
+#167|Arcane Encyclopedia|U|CLB
+#168|Geode Golem|U|CLB
+#169|Patriar's Seal|U|CLB
+#170|Command Tower|C|CLB
+#171|Pilgrim's Eye|C|CLB
+#172|Scaled Nurturer|C|CLB
+#173|Band Together|C|CLB
+#174|Patron of the Arts|C|CLB
+#175|Sword Coast Serpent|C|CLB
+#176|Recruitment Drive|C|CLB
+#177|Vhal, Candlekeep Researcher|U|CLB
+#178|Sarevok, Deathbringer|U|CLB
+#179|Sivriss, Nightmare Speaker|U|CLB
+#180|Viconia, Drow Apostate|U|CLB
+#181|Halsin, Emerald Archdruid|U|CLB
+#182|Wilson, Refined Grizzly|U|CLB
+#183|Wyll, Blade of Frontiers|R|CLB
+#184|Mazzy, Truesword Paladin|R|CLB
+#185|Neera, Wild Mage|R|CLB
+#186|Zevlor, Elturel Exile|R|CLB
+#187|Master Chef|C|CLB
+#188|Far Traveler|U|CLB
+#189|Feywild Visitor|U|CLB
+#190|Criminal Past|U|CLB
+#191|Cloakwood Hermit|U|CLB
+#192|Popular Entertainer|R|CLB
+#193|Raised by Giants|R|CLB
+#194|Astral Confrontation|C|CLB
+#195|Bane's Invoker|C|CLB
+#196|Greatsword of Tyr|C|CLB
+#197|Guardian Naga|C|CLB
+#198|Tabaxi Toucaneers|C|CLB
+#199|Aarakocra Sneak|C|CLB
+#200|Blur|C|CLB
+#201|Irenicus's Vile Duplication|U|CLB
+#202|Oceanus Dragon|C|CLB
+#203|Eldritch Pact|R|CLB
+#204|Sigil of Myrkul|U|CLB
+#205|Summon Undead|C|CLB
+#206|Bhaal's Invoker|C|CLB
+#207|Breath Weapon|C|CLB
+#208|Fang Dragon|C|CLB
+#209|Genasi Enforcers|C|CLB
+#210|Young Red Dragon|C|CLB
+#211|Dread Linnorm|C|CLB
+#212|Saddle of the Cavalier|U|CLB
+#213|Split the Spoils|U|CLB
+#214|You Look Upon the Tarrasque|U|CLB
+#215|Bag of Holding|U|CLB
+#216|Campfire|U|CLB
+#217|Dungeoneer's Pack|U|CLB
+#218|Iron Mastiff|U|CLB
+#219|Black Dragon Gate|C|CLB
+#220|Bountiful Promenade|R|CLB
+#221|Citadel Gate|C|CLB
+#222|Cliffgate|C|CLB
+#223|Luxury Suite|R|CLB
+#224|Manor Gate|C|CLB
+#225|Morphic Pool|R|CLB
+#226|Sea Gate|C|CLB
+#227|Sea of Clouds|R|CLB
+#228|Spire Garden|R|CLB
+#229|Owlbear Shepherd|U|CLB
+#230|Ettercap|C|CLB
+#231|Druid of the Emerald Grove|C|CLB
+#232|Colossal Badger|C|CLB
+#233|Zhentarim Bandit|C|CLB
+#234|Mold Folk|C|CLB
+#235|Gray Slaad|C|CLB
+#236|Run Away Together|C|CLB
+#237|Scouting Hawk|C|CLB
+#238|Minimus Containment|C|CLB
+#239|Livaan, Cultist of Tiamat|U|CLB
+#240|Gale, Waterdeep Prodigy|R|CLB
+#241|Gluntch, the Bestower|R|CLB
+#242|Candlekeep Sage|C|CLB
+#243|Inspiring Leader|U|CLB
+#244|Dragon Cultist|U|CLB
+#245|Street Urchin|U|CLB
+#246|Hardy Outlander|U|CLB
+#247|Your Temple Is Under Attack|C|CLB
+#248|Font of Magic|M|CLB
+#249|Sea Hag|C|CLB
+#250|Tymora's Invoker|C|CLB
+#251|Stirge|C|CLB
+#252|Carnelian Orb of Dragonkind|C|CLB
+#253|Circle of the Land Druid|C|CLB
+#254|Silvanus's Invoker|C|CLB
+#255|Drillworks Mole|U|CLB
+#256|Gate Colossus|U|CLB
+#257|Marut|C|CLB
+#258|Trailblazer's Torch|C|CLB
+#259|Evolving Wilds|C|CLB
+#260|Prophetic Prism|C|CLB
+#261|Nimblewright Schematic|C|CLB
+#262|Bronze Walrus|C|CLB
+#263|Overwhelming Encounter|U|CLB
+#264|Carefree Swinemaster|C|CLB
+#265|Stirring Bard|C|CLB
+#266|Reckless Barbarian|C|CLB
+#267|Ingenious Artillerist|C|CLB
+#268|Vicious Battlerager|C|CLB
+#269|Myrkul's Invoker|C|CLB
+#270|Chain Devil|C|CLB
+#271|Arms of Hadar|C|CLB
+#272|Nimbleclaw Adept|C|CLB
+#273|Guiding Bolt|C|CLB
+#274|Goliath Paladin|C|CLB
+#275|Barroom Brawl|R|CLB
+#276|Myconid Spore Tender|C|CLB
+#277|Renari, Merchant of Marvels|U|CLB
+#278|Tavern Brawler|C|CLB
+#279|Veteran Soldier|U|CLB
+#280|Agent of the Iron Throne|U|CLB
+#281|Agent of the Shadow Thieves|U|CLB
+#282|Guild Artisan|U|CLB
+#283|Shameless Charlatan|R|CLB
+#284|Ascend from Avernus|R|CLB
+#285|Stoneskin|U|CLB
+#286|Candlekeep Inspiration|U|CLB
+#287|Goggles of Night|C|CLB
+#288|Lapis Orb of Dragonkind|C|CLB
+#289|Robe of the Archmagi|R|CLB
+#290|Storm King's Thunder|M|CLB
+#291|Taunting Kobold|U|CLB
+#292|Wild Magic Surge|U|CLB
+#293|Lurking Green Dragon|C|CLB
+#294|Manifold Key|U|CLB
+#295|Mirror of Life Trapping|R|CLB
+#296|Noble's Purse|U|CLB
+#297|Rug of Smothering|U|CLB
+#298|Baldur's Gate|R|CLB
+#299|Basilisk Gate|C|CLB
+#300|Gond Gate|U|CLB
+#301|Heap Gate|C|CLB
+#302|Reflecting Pool|R|CLB
+#303|Prized Statue|C|CLB
+#304|Druidic Ritual|C|CLB
+#305|Ambitious Dragonborn|C|CLB
+#306|Warehouse Thief|C|CLB
+#307|Tiamat's Fanatics|C|CLB
+#308|Insufferable Balladeer|C|CLB
+#309|Hoarding Ogre|C|CLB
+#310|Underdark Explorer|C|CLB
+#311|Nefarious Imp|C|CLB
+#312|Guildsworn Prowler|C|CLB
+#313|Deadly Dispute|C|CLB
+#314|Atrocious Experiment|C|CLB
+#315|Stunning Strike|C|CLB
+#316|Pseudodragon Familiar|C|CLB
+#317|Kenku Artificer|C|CLB
+#318|Gray Harbor Merfolk|C|CLB
+#319|Draconic Lore|C|CLB
+#320|Steadfast Unicorn|C|CLB
+#321|Flaming Fist Officer|C|CLB
+#322|Dawnbringer Cleric|C|CLB
+#323|Majestic Genesis|M|CLB
+#324|Rasaad yn Bashir|U|CLB
+#325|Flaming Fist|C|CLB
+#326|Scion of Halaster|C|CLB
+#327|Dungeon Delver|U|CLB
+#328|Cultist of the Absolute|R|CLB
+#329|Hezrou|C|CLB
+#330|Universal Solvent|C|CLB
+#331|Navigation Orb|C|CLB
+#332|Marching Duodrone|C|CLB
+#333|Lantern of Revealing|C|CLB
+#334|Clockwork Fox|C|CLB
+#335|Cloak of the Bat|C|CLB
+#336|You Meet in a Tavern|C|CLB
+#337|Poison the Blade|C|CLB
+#338|Cloakwood Swarmkeeper|C|CLB
+#339|Pack Attack|C|CLB
+#340|Javelin of Lightning|C|CLB
+#341|Coronation of Chaos|C|CLB
+#342|Myrkul's Edict|C|CLB
+#343|Ghastly Death Tyrant|C|CLB
+#344|Dream Fracture|C|CLB
+#345|Contact Other Plane|C|CLB
+#346|Wyrm's Crossing Patrol|C|CLB
+#347|Cut a Deal|U|CLB
+#348|Thieves' Tools|C|CLB
+#349|Sword Coast Sailor|U|CLB
+#350|Descent into Avernus|R|CLB
+#351|Dire Mimic|C|CLB
+#352|Predatory Impetus|C|CLB
+#353|You've Been Caught Stealing|C|CLB
+#354|Shiny Impetus|C|CLB
+#355|Parasitic Impetus|C|CLB
+#356|Armor of Shadows|C|CLB
+#357|Psychic Impetus|C|CLB
+#358|Martial Impetus|C|CLB
+#359|Decanter of Endless Water|C|CLB
+#360|Chardalyn Dragon|C|CLB
+#361|Faceless One|C|CLB
+#362|Plains 1|C|CLB
+#363|Island 1|C|CLB
+#364|Swamp 1|C|CLB
+#365|Mountain 1|C|CLB
+#366|Forest 1|C|CLB
+#367|Plains 2|C|CLB
+#368|Island 2|C|CLB
+#369|Swamp 2|C|CLB
+#370|Mountain 2|C|CLB
+#371|Forest 2|C|CLB
+#372|Plains 3|C|CLB
+#373|Island 3|C|CLB
+#374|Swamp 3|C|CLB
+#375|Mountain 3|C|CLB
+#376|Forest 3|C|CLB
+#377|Plains 4|C|CLB
+#378|Island 4|C|CLB
+#379|Swamp 4|C|CLB
+#380|Mountain 4|C|CLB
+#381|Forest 4|C|CLB

@@ -1,0 +1,12 @@
+Name:Wojek Investigator
+ManaCost:2 W
+Types:Creature Angel Detective
+PT:2/4
+K:Flying
+K:Vigilance
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigInvestigate | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, investigate once for each opponent who has more cards in hand than you. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Num$ X
+SVar:X:PlayerCountOpponents$HasPropertyHasCardsInHand_Card_GTY
+SVar:Y:Count$CardsInYourHand
+DeckHas:Ability$Token & Type$Clue|Artifact
+Oracle:Flying, vigilance\nAt the beginning of your upkeep, investigate once for each opponent who has more cards in hand than you. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

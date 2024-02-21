@@ -43,6 +43,7 @@
   <object id="50" template="../../obj/enemy.tx" x="96.485" y="173.992">
    <properties>
     <property name="enemy" value="Dross Gladiator"/>
+    <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" value="45"/>
     <property name="waypoints" value="82,81,80,83,84,88,70,79,87,83"/>
    </properties>
@@ -86,6 +87,7 @@
   <object id="85" template="../../obj/enemy.tx" x="216.75" y="165.25">
    <properties>
     <property name="enemy" value="Dross Gladiator"/>
+    <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" value="50"/>
     <property name="waypoints" value="66,78,65,77"/>
    </properties>
@@ -93,6 +95,7 @@
   <object id="86" template="../../obj/enemy.tx" x="276" y="105.25">
    <properties>
     <property name="enemy" value="Dross Gladiator"/>
+    <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" value="50"/>
     <property name="waypoints" value="65,78,66,77"/>
    </properties>
@@ -100,6 +103,7 @@
   <object id="89" template="../../obj/enemy.tx" x="47.75" y="87.5">
    <properties>
     <property name="enemy" value="Dross Gladiator"/>
+    <property name="speedModifier" type="float" value="4"/>
     <property name="threatRange" value="45"/>
     <property name="waypoints" value="88,87,79,70,88,84,83,82,81,80,83,84"/>
    </properties>

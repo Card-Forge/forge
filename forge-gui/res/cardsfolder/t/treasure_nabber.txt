@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Goblin Rogue
 PT:3/2
 T:Mode$ TapsForMana | ValidCard$ Artifact | Activator$ Opponent | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn.
-SVar:TrigControl:DB$ GainControl | Defined$ TriggeredCard | LoseControl$ UntilTheEndOfYourNextTurn
+SVar:TrigControl:DB$ GainControl | Defined$ TriggeredCardLKICopy | LoseControl$ UntilTheEndOfYourNextTurn
 Oracle:Whenever an opponent taps an artifact for mana, gain control of that artifact until the end of your next turn.

@@ -1,0 +1,10 @@
+Name:Krovod Haunch
+ManaCost:W
+Types:Artifact Food Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigToken | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay {1}{W}. If you do, create two 1/1 white Dog creature tokens.
+SVar:TrigToken:AB$ Token | Cost$ 1 W | TokenAmount$ 2 | TokenScript$ w_1_1_dog | TokenOwner$ You
+K:Equip:2
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Dog
+Oracle:Equipped creature gets +2/+0.\n{2}, {T}, Sacrifice Krovod Haunch: You gain 3 life.\nWhen Krovod Haunch is put into a graveyard from the battlefield, you may pay {1}{W}. If you do, create two 1/1 white Dog creature tokens.\nEquip {2}

@@ -1,0 +1,7 @@
+Name:Adaptive Gemguard
+ManaCost:3 W
+Types:Artifact Creature Gnome
+PT:3/3
+A:AB$ PutCounter | Cost$ tapXType<2/Artifact;Creature/artifacts and/or creatures> | Defined$ Self | SorcerySpeed$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only as a sorcery.
+DeckHints:Type$Artifact & Ability$Counters
+Oracle:Tap two untapped artifacts and/or creatures you control: Put a +1/+1 counter on Adaptive Gemguard. Activate only as a sorcery.

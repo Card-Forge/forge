@@ -19,12 +19,10 @@ package forge.game.mana;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -124,7 +122,6 @@ public class ManaCostBeingPaid {
     // ManaPartColor is stored before ManaPartGeneric
     private final Map<ManaCostShard, ShardCount> unpaidShards = Maps.newHashMap();
     private Map<String, Integer> xManaCostPaidByColor;
-    private final String sourceRestriction;
     private byte sunburstMap = 0;
     private int cntX = 0;
 
@@ -139,17 +136,11 @@ public class ManaCostBeingPaid {
         if (manaCostBeingPaid.xManaCostPaidByColor != null) {
             xManaCostPaidByColor = Maps.newHashMap(manaCostBeingPaid.xManaCostPaidByColor);
         }
-        sourceRestriction = manaCostBeingPaid.sourceRestriction;
         sunburstMap = manaCostBeingPaid.sunburstMap;
         cntX = manaCostBeingPaid.cntX;
     }
 
     public ManaCostBeingPaid(ManaCost manaCost) {
-        this(manaCost, null);
-    }
-
-    public ManaCostBeingPaid(ManaCost manaCost, String srcRestriction) {
-        sourceRestriction = srcRestriction;
         if (manaCost == null) { return; }
         for (ManaCostShard shard : manaCost) {
             if (shard == ManaCostShard.X) {
@@ -309,7 +300,7 @@ public class ManaCostBeingPaid {
                 for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
                     final ManaCostShard eShard = e.getKey();
                     sc = e.getValue();
-                    if (eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
+                    if (eShard != ManaCostShard.COLORED_X && eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
                         if (otherSubtract >= sc.totalCount) {
                             otherSubtract -= sc.totalCount;
                             sc.xCount = sc.totalCount = 0;
@@ -381,6 +372,20 @@ public class ManaCostBeingPaid {
                             if (sc.xCount > sc.totalCount) {
                                 sc.xCount = sc.totalCount;
                             }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    } else if (sc.xCount > 0) { // X part that can only be paid by specific color
+                        if (otherSubtract >= sc.xCount) {
+                            otherSubtract -= sc.xCount;
+                            sc.totalCount -= sc.xCount;
+                            sc.xCount = 0;
+                            if (sc.totalCount == 0) {
+                                toRemove.add(eShard);
+                            }
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            sc.xCount -= otherSubtract;
                             // nothing more left in otherSubtract
                             return;
                         }
@@ -486,7 +491,7 @@ public class ManaCostBeingPaid {
     }
 
     public ManaCostShard getShardToPayByPriority(Iterable<ManaCostShard> payableShards, byte possibleUses) {
-        Set<ManaCostShard> choice = EnumSet.noneOf(ManaCostShard.class);
+        List<ManaCostShard> choice = Lists.newArrayList();
         int priority = Integer.MIN_VALUE;
         for (ManaCostShard toPay : payableShards) {
             // if m is a better to pay than choice
@@ -705,10 +710,6 @@ public class ManaCostBeingPaid {
         unpaidShards.remove(ManaCostShard.GENERIC);
     }
 
-    public String getSourceRestriction() {
-        return sourceRestriction;
-    }
-
     public Iterable<ManaCostShard> getDistinctShards() {
         return unpaidShards.keySet();
     }
@@ -728,10 +729,10 @@ public class ManaCostBeingPaid {
         }
         return result;
     }
-    
+
     public boolean hasAnyKind(int kind) {
-        for (ManaCostShard s : unpaidShards.keySet()) {
-            if (s.isOfKind(kind)) {
+        for (Map.Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+            if (e.getKey().isOfKind(kind) && e.getValue().totalCount > e.getValue().xCount) {
                 return true;
             }
         }

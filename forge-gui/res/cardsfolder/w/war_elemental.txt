@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
 SVar:TrigSac:DB$ Sacrifice | ConditionCheckSVar$ WarElementalX | ConditionSVarCompare$ EQ0
-SVar:WarElementalX:PlayerCountOpponents$HasPropertywasDealtDamageThisTurn
+SVar:WarElementalX:PlayerCountRegisteredOpponents$HasPropertywasDealtDamageThisTurn
 T:Mode$ DamageDoneOnce | ValidSource$ Card | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent is dealt damage, put that many +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ WarElementalY
 SVar:WarElementalY:TriggerCount$DamageAmount

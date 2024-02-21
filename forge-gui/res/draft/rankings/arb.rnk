@@ -1,0 +1,146 @@
+//Rank|Name|Rarity|Set
+#1|Lavalanche|R|ARB
+#2|Behemoth Sledge|U|ARB
+#3|Bituminous Blast|U|ARB
+#4|Slave of Bolas|U|ARB
+#5|Maelstrom Pulse|R|ARB
+#6|Spellbreaker Behemoth|R|ARB
+#7|Enigma Sphinx|R|ARB
+#8|Bloodbraid Elf|U|ARB
+#9|Nemesis of Reason|R|ARB
+#10|Spellbound Dragon|R|ARB
+#11|Enlisted Wurm|U|ARB
+#12|Mycoid Shepherd|R|ARB
+#13|Knight of New Alara|R|ARB
+#14|Lightning Reaver|R|ARB
+#15|Deathbringer Thoctar|R|ARB
+#16|Sphinx of the Steel Wind|M|ARB
+#17|Dauntless Escort|R|ARB
+#18|Dragon Broodmother|M|ARB
+#19|Retaliator Griffin|R|ARB
+#20|Vengeful Rebirth|U|ARB
+#21|Thraximundar|M|ARB
+#22|Blitz Hellion|R|ARB
+#23|Defiler of Souls|M|ARB
+#24|Marisi's Twinclaws|U|ARB
+#25|Jenara, Asura of War|M|ARB
+#26|Terminate|C|ARB
+#27|Finest Hour|R|ARB
+#28|Lich Lord of Unx|R|ARB
+#29|Giant Ambush Beetle|U|ARB
+#30|Madrush Cyclops|R|ARB
+#31|Knotvine Paladin|R|ARB
+#32|Karrthus, Tyrant of Jund|M|ARB
+#33|Aven Mimeomancer|R|ARB
+#34|Filigree Angel|R|ARB
+#35|Wall of Denial|U|ARB
+#36|Glory of Warfare|R|ARB
+#37|Crystallization|C|ARB
+#38|Uril, the Miststalker|M|ARB
+#39|Intimidation Bolt|U|ARB
+#40|Lord of Extinction|M|ARB
+#41|Sen Triplets|M|ARB
+#42|Sangrite Backlash|C|ARB
+#43|Esper Stormblade|C|ARB
+#44|Vithian Renegades|U|ARB
+#45|Unscythe, Killer of Kings|R|ARB
+#46|Messenger Falcons|U|ARB
+#47|Stun Sniper|U|ARB
+#48|Qasali Pridemage|C|ARB
+#49|Gloryscale Viashino|U|ARB
+#50|Bant Sureblade|C|ARB
+#51|Necromancer's Covenant|R|ARB
+#52|Rhox Brute|C|ARB
+#53|Sewn Eye Drake|C|ARB
+#54|Grixis Grimblade|C|ARB
+#55|Jund Hackblade|C|ARB
+#56|Naya Hushblade|C|ARB
+#57|Putrid Leech|C|ARB
+#58|Lorescale Coatl|U|ARB
+#59|Deadshot Minotaur|C|ARB
+#60|Colossal Might|C|ARB
+#61|Zealous Persecution|U|ARB
+#62|Gorger Wurm|C|ARB
+#63|Kathari Remnant|U|ARB
+#64|Pale Recluse|C|ARB
+#65|Veinfire Borderpost|C|ARB
+#66|Mistvein Borderpost|C|ARB
+#67|Sovereigns of Lost Alara|R|ARB
+#68|Firewild Borderpost|C|ARB
+#69|Fieldmist Borderpost|C|ARB
+#70|Ethercaste Knight|C|ARB
+#71|Thopter Foundry|U|ARB
+#72|Mask of Riddles|U|ARB
+#73|Wildfield Borderpost|C|ARB
+#74|Kathari Bomber|C|ARB
+#75|Deny Reality|C|ARB
+#76|Ethersworn Shieldmage|C|ARB
+#77|Trace of Abundance|C|ARB
+#78|Valley Rannet|C|ARB
+#79|Igneous Pouncer|C|ARB
+#80|Soul Manipulation|C|ARB
+#81|Glassdust Hulk|C|ARB
+#82|Talon Trooper|C|ARB
+#83|Jund Sojourners|C|ARB
+#84|Mage Slayer|U|ARB
+#85|Ardent Plea|U|ARB
+#86|Architects of Will|C|ARB
+#87|Monstrous Carabid|C|ARB
+#88|Sanctum Plowbeast|C|ARB
+#89|Leonin Armorguard|C|ARB
+#90|Arsenal Thresher|C|ARB
+#91|Predatory Advantage|R|ARB
+#92|Jhessian Zombies|C|ARB
+#93|Singe Mind Ogre|C|ARB
+#94|Naya Sojourners|C|ARB
+#95|Captured Sunlight|C|ARB
+#96|Sigiled Behemoth|C|ARB
+#97|Meddling Mage|R|ARB
+#98|Skyclaw Thrash|U|ARB
+#99|Sigil Captain|U|ARB
+#100|Etherium Abomination|C|ARB
+#101|Sages of the Anima|R|ARB
+#102|Winged Coatl|C|ARB
+#103|Violent Outburst|C|ARB
+#104|Cerodon Yearling|C|ARB
+#105|Esper Sojourners|C|ARB
+#106|Reborn Hope|U|ARB
+#107|Grizzled Leotau|C|ARB
+#108|Bant Sojourners|C|ARB
+#109|Nulltread Gargantuan|U|ARB
+#110|Maelstrom Nexus|M|ARB
+#111|Demonspine Whip|U|ARB
+#112|Illusory Demon|U|ARB
+#113|Sigil of the Nayan Gods|C|ARB
+#114|Wargate|R|ARB
+#115|Grixis Sojourners|C|ARB
+#116|Breath of Malfegor|C|ARB
+#117|Stormcaller's Boon|C|ARB
+#118|Flurry of Wings|U|ARB
+#119|Offering to Asha|C|ARB
+#120|Marrow Chomper|U|ARB
+#121|Demonic Dread|C|ARB
+#122|Godtracker of Jund|C|ARB
+#123|Mayael's Aria|R|ARB
+#124|Etherwrought Page|U|ARB
+#125|Vedalken Heretic|R|ARB
+#126|Brainbite|C|ARB
+#127|Anathemancer|U|ARB
+#128|Sanity Gnawers|U|ARB
+#129|Morbid Bloom|U|ARB
+#130|Identity Crisis|R|ARB
+#131|Mind Funeral|U|ARB
+#132|Fight to the Death|R|ARB
+#133|Shield of the Righteous|U|ARB
+#134|Thought Hemorrhage|R|ARB
+#135|Vectis Dominator|C|ARB
+#136|Vedalken Ghoul|C|ARB
+#137|Magefire Wings|C|ARB
+#138|Soulquake|R|ARB
+#139|Drastic Revelation|U|ARB
+#140|Double Negative|U|ARB
+#141|Unbender Tine|U|ARB
+#142|Time Sieve|R|ARB
+#143|Cloven Casting|R|ARB
+#144|Tainted Sigil|U|ARB
+#145|Dragon Appeasement|U|ARB

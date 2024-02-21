@@ -1,0 +1,9 @@
+Name:Tegan Jovanka
+ManaCost:2 W
+Types:Legendary Creature Human
+PT:2/2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Brave Heart — Whenever you attack, target attacking historic creature gets +1/+1 and gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Historic+attacking | TgtPrompt$ Select target attacking historic creature | NumAtt$ +1 | NumDef$ +1 | KW$ Indestructible
+K:Doctor's companion
+DeckHints:Type$Legendary|Artifact
+Oracle:Brave Heart — Whenever you attack, target attacking historic creature gets +1/+1 and gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)

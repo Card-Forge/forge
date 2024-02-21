@@ -148,7 +148,7 @@ ScryfallCode=TSP
 202 U Krosan Grip @Zoltan Boros & Gabor Szikszai
 113 R Liege of the Pit @Jeremy Jarvis
 168 C Lightning Axe @Dan Scott
-114 R Lim-Dul the Necromancer @Matt Cavotta
+114 R Lim-Dûl the Necromancer @Matt Cavotta
 115 R Living End @Greg Staples
 258 U Locket of Yesterdays @Dany Orizio
 66 C Looter il-Kor @Mike Dringenberg

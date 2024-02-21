@@ -3,7 +3,7 @@ ManaCost:3 U U U
 Types:Creature Elemental Incarnation
 PT:6/6
 S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ CARDNAME can't be blocked except by three or more creatures.
-R:Event$ Counter | ActiveZones$ Battlefield | ValidType$ Spell | ValidCause$ Card.YouCtrl,Emblem.YouCtrl | ReplaceWith$ DBRemove | Description$ If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.
+R:Event$ Counter | ActiveZones$ Battlefield | ValidSA$ Spell | ValidCause$ SpellAbility.YouCtrl | ReplaceWith$ DBRemove | Description$ If a spell or ability you control would counter a spell, instead exile that spell and you may play that card without paying its mana cost.
 SVar:DBRemove:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

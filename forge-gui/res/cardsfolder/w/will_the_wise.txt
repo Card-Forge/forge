@@ -1,4 +1,5 @@
 Name:Will the Wise
+AltName:Wernog, Rider's Chaplain
 ManaCost:W B
 Types:Legendary Creature Human
 PT:1/2

@@ -1,0 +1,9 @@
+Name:Griffnaut Tracker
+ManaCost:3 W
+Types:Creature Human Detective
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile up to two target cards from a single graveyard.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | ValidTgts$ Card | TgtPrompt$ Select up to two target cards from a single graveyard
+DeckHas:Ability$Graveyard
+Oracle:Flying\nWhen Griffnaut Tracker enters the battlefield, exile up to two target cards from a single graveyard.

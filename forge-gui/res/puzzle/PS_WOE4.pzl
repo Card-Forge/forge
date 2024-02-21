@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Wilds of Eldraine #04
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/10/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your rats each have a Wicked token attached to them. Assume your opponent currently does not have access to mana. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Cheeky House-Mouse;Kellan's Lightblades;Wicked Visitor;Solitary Sanctuary
+p0battlefield=Twisted Sewer-Witch;T:b_1_1_rat_noblock;T:b_1_1_rat_noblock;Plains;Plains;Plains;Swamp;Swamp
+p0precast=Twisted Sewer-Witch:TrigToken
+p1life=7
+p1battlefield=Dawn of Hope;T:w_1_1_soldier_lifelink;T:w_1_1_human;Horned Loch-Whale
+removesummoningsickness=true

@@ -5,5 +5,5 @@ PT:4/4
 K:Flying
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ At the beginning of your upkeep, you may pay {4}. If you do, untap CARDNAME.
-SVar:TrigUntap:AB$Untap | Cost$ 4 | Defined$ Self
+SVar:TrigUntap:AB$ Untap | Cost$ 4 | Defined$ Self
 Oracle:Flying\nGoblin Dirigible doesn't untap during your untap step.\nAt the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.

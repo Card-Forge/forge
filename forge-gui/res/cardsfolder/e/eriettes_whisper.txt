@@ -1,0 +1,7 @@
+Name:Eriette's Whisper
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBToken | SpellDescription$ Target opponent discards two cards.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TargetMin$ 0 | TargetMax$ 1 | TokenOwner$ You | AttachedTo$ ThisTargetedCard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | SpellDescription$ Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+DeckHas:Ability$Token|Discard & Type$Role|Aura
+Oracle:Target opponent discards two cards. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

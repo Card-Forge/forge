@@ -1,0 +1,9 @@
+Name:Trostani, Three Whispers
+ManaCost:G GW W
+Types:Legendary Creature Dryad
+PT:4/4
+A:AB$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain deathtouch | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
+A:AB$ Pump | Cost$ GW | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain vigilance | KW$ Vigilance | SpellDescription$ Target creature gains vigilance until end of turn.
+A:AB$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain double strike | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:{1}{G}: Target creature gains deathtouch until end of turn.\n{G/W}: Target creature gains vigilance until end of turn.\n{2}{W}: Target creature gains double strike until end of turn.

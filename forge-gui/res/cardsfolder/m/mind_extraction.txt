@@ -1,7 +1,6 @@
 Name:Mind Extraction
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | RememberCostCards$ True | ValidTgts$ Player | DiscardValid$ Card.SharesColorWith Remembered | Mode$ RevealDiscardAll | SubAbility$ DBCleanup | SpellDescription$ Target player reveals their hand and discards all cards of each of the sacrificed creature's colors.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | DiscardValid$ Card.SharesColorWith Sacrificed | Mode$ RevealDiscardAll | SpellDescription$ Target player reveals their hand and discards all cards of each of the sacrificed creature's colors.
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nTarget player reveals their hand and discards all cards of each of the sacrificed creature's colors.

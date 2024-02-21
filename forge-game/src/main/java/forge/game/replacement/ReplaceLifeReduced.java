@@ -4,6 +4,8 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 
 /**
@@ -27,7 +29,13 @@ public class ReplaceLifeReduced extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
+        int amount = (int)runParams.get(AbilityKey.Amount);
+        Player affected = (Player) runParams.get(AbilityKey.Affected);
+        if (amount <= 0) {
+            return false;
+        }
+
+        if (!matchesValidParam("ValidPlayer", affected)) {
             return false;
         }
 
@@ -36,8 +44,9 @@ public class ReplaceLifeReduced extends ReplacementEffect {
                 return false;
             }
         }
+
         if (hasParam("Result")) {
-            final int n = (Integer)runParams.get(AbilityKey.Result);
+            final int n = affected.getLife() - amount;
             String comparator = getParam("Result");
             final String operator = comparator.substring(0, 2);
             final int operandValue = Integer.parseInt(comparator.substring(2));
@@ -46,5 +55,11 @@ public class ReplaceLifeReduced extends ReplacementEffect {
             }
         }
         return true;
+    }
+
+    @Override
+    public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.Amount);
+        sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 }

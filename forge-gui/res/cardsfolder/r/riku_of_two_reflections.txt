@@ -1,5 +1,5 @@
 Name:Riku of Two Reflections
-ManaCost:2 U R G
+ManaCost:2 G U R
 Types:Legendary Creature Human Wizard
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigCopySpell | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may pay {U}{R}. If you do, copy that spell. You may choose new targets for the copy.

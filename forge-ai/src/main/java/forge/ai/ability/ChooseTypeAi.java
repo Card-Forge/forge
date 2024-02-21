@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,14 +30,18 @@ import forge.util.Aggregates;
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        if (!sa.hasParam("AILogic")) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.isEmpty()) {
             return false;
-        } else if ("MostProminentComputerControls".equals(sa.getParam("AILogic"))) {
+        } else if ("MostProminentComputerControls".equals(aiLogic)) {
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Mirror Entity Avatar")) {
                 return doMirrorEntityLogic(aiPlayer, sa);
             }
             return !chooseType(sa, aiPlayer.getCardsIn(ZoneType.Battlefield)).isEmpty();
-        } else if ("MostProminentOppControls".equals(sa.getParam("AILogic"))) {
+        } else if ("MostProminentComputerControlsOrOwns".equals(aiLogic)) {
+            return !chooseType(sa, aiPlayer.getCardsIn(Arrays.asList(ZoneType.Hand, ZoneType.Battlefield))).isEmpty();
+        } else if ("MostProminentOppControls".equals(aiLogic)) {
             return !chooseType(sa, aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield)).isEmpty();
         }
 
@@ -169,7 +174,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             // Account for the situation when only changelings are on the battlefield
             boolean allChangeling = false;
             for (Card c : cards) {
-                if (c.isCreature() && c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
+                if (c.isCreature() && c.hasKeyword(Keyword.CHANGELING)) {
                     chosenType = Aggregates.random(valid); // just choose a random type for changelings
                     allChangeling = true;
                     break;

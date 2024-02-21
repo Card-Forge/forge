@@ -1,0 +1,9 @@
+Name:Skybeast Tracker
+ManaCost:3 G
+Types:Creature Giant Archer
+PT:2/4
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token & Type$Artifact|Food
+Oracle:Reach\nWhenever you cast a spell with mana value 5 or greater, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

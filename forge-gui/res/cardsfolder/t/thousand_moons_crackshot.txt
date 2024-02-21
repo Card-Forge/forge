@@ -1,0 +1,9 @@
+Name:Thousand Moons Crackshot
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may pay {2}{W}. When you do, tap target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 2 W | Execute$ TrigTap | TriggerDescription$ When you do, tap target creature.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Thousand Moons Crackshot attacks, you may pay {2}{W}. When you do, tap target creature.

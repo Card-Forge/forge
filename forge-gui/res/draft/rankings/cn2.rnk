@@ -1,0 +1,222 @@
+//Rank|Name|Rarity|Set
+#1|Kaya, Ghost Assassin|M|CN2
+#2|Platinum Angel|M|CN2
+#3|Daretti, Ingenious Iconoclast|M|CN2
+#4|Avatar of Woe|M|CN2
+#5|Subterranean Tremors|M|CN2
+#6|Queen Marchesa|M|CN2
+#7|Selvala, Heart of the Wilds|M|CN2
+#8|Skyline Despot|R|CN2
+#9|Leovold, Emissary of Trest|M|CN2
+#10|Sphinx of Magosi|R|CN2
+#11|Arcane Savant|R|CN2
+#12|Keeper of Keys|R|CN2
+#13|Custodi Lich|R|CN2
+#14|Harvester of Souls|R|CN2
+#15|Caller of the Untamed|R|CN2
+#16|Sangromancer|R|CN2
+#17|Hallowed Burial|R|CN2
+#18|Sanctum Prelate|M|CN2
+#19|Grenzo, Havoc Raiser|R|CN2
+#20|Berserk|M|CN2
+#21|Stunt Double|R|CN2
+#22|Forgotten Ancient|R|CN2
+#23|Expropriate|M|CN2
+#24|Followed Footsteps|R|CN2
+#25|Dragonlair Spider|R|CN2
+#26|Splitting Slime|R|CN2
+#27|Regal Behemoth|R|CN2
+#28|Psychosis Crawler|R|CN2
+#29|Spirit of the Hearth|R|CN2
+#30|Hundred-Handed One|R|CN2
+#31|Adriana, Captain of the Guard|R|CN2
+#32|Recruiter of the Guard|R|CN2
+#33|Selvala's Stampede|R|CN2
+#34|Paliano Vanguard|R|CN2
+#35|Phyrexian Arena|R|CN2
+#36|Capital Punishment|R|CN2
+#37|Desertion|R|CN2
+#38|Guul Draz Specter|R|CN2
+#39|Charmbreaker Devils|R|CN2
+#40|Show and Tell|M|CN2
+#41|Protector of the Crown|R|CN2
+#42|Birds of Paradise|R|CN2
+#43|Hamletback Goliath|R|CN2
+#44|Volatile Chimera|R|CN2
+#45|Sovereign's Realm|M|CN2
+#46|Duskmantle Seer|R|CN2
+#47|Hedron Matrix|R|CN2
+#48|Gratuitous Violence|R|CN2
+#49|Wild Pair|R|CN2
+#50|Inquisition of Kozilek|R|CN2
+#51|Pariah|R|CN2
+#52|Ghostly Prison|U|CN2
+#53|Burgeoning|R|CN2
+#54|Weight Advantage|R|CN2
+#55|Hymn of the Wilds|M|CN2
+#56|Archdemon of Paliano|R|CN2
+#57|Faith's Reward|R|CN2
+#58|Emissary's Ploy|R|CN2
+#59|Covenant of Minds|R|CN2
+#60|Exotic Orchard|R|CN2
+#61|Kami of the Crescent Moon|R|CN2
+#62|Keepsake Gorgon|U|CN2
+#63|Nessian Asp|U|CN2
+#64|Guardian of the Gateless|U|CN2
+#65|Burning Wish|R|CN2
+#66|Animus of Predation|U|CN2
+#67|Noble Banneret|U|CN2
+#68|Overrun|U|CN2
+#69|Coveted Peacock|U|CN2
+#70|Domesticated Hydra|U|CN2
+#71|Fleshbag Marauder|U|CN2
+#72|Juniper Order Ranger|U|CN2
+#73|Ascended Lawmage|U|CN2
+#74|Sulfurous Blast|U|CN2
+#75|Spectral Grasp|U|CN2
+#76|Smuggler Captain|U|CN2
+#77|Custodi Soulcaller|U|CN2
+#78|Murder|C|CN2
+#79|Serum Visions|U|CN2
+#80|Beast Within|U|CN2
+#81|Regicide|C|CN2
+#82|Palace Jailer|U|CN2
+#83|Knights of the Black Rose|U|CN2
+#84|Merfolk Skyscout|U|CN2
+#85|Summoner's Bond|U|CN2
+#86|Guttersnipe|U|CN2
+#87|Rogue's Passage|U|CN2
+#88|Deceiver Exarch|U|CN2
+#89|Infest|U|CN2
+#90|Stoneshock Giant|U|CN2
+#91|Marchesa's Decree|U|CN2
+#92|Public Execution|U|CN2
+#93|Merfolk Looter|U|CN2
+#94|Hollowhenge Spirit|U|CN2
+#95|Hail of Arrows|U|CN2
+#96|Hold the Perimeter|R|CN2
+#97|Fang of the Pack|U|CN2
+#98|Flame Slash|C|CN2
+#99|Havengul Vampire|U|CN2
+#100|Explosive Vegetation|U|CN2
+#101|Spire Phantasm|U|CN2
+#102|Grenzo's Ruffians|U|CN2
+#103|Custodi Peacekeeper|C|CN2
+#104|Garbage Fire|C|CN2
+#105|Pyretic Hunter|U|CN2
+#106|Thorn of the Black Rose|C|CN2
+#107|Deadly Designs|U|CN2
+#108|Wings of the Guard|C|CN2
+#109|Affa Guard Hound|U|CN2
+#110|Shipwreck Singer|U|CN2
+#111|Pharika's Mender|U|CN2
+#112|Kill Shot|C|CN2
+#113|Sinuous Vermin|C|CN2
+#114|Coiling Oracle|U|CN2
+#115|Voyaging Satyr|C|CN2
+#116|Death Wind|C|CN2
+#117|Burn Away|U|CN2
+#118|Throne Warden|C|CN2
+#119|Besmirch|U|CN2
+#120|Mausoleum Turnkey|U|CN2
+#121|Into the Void|U|CN2
+#122|Natural Unity|C|CN2
+#123|Skittering Crustacean|C|CN2
+#124|Ravenous Leucrocota|C|CN2
+#125|Omenspeaker|C|CN2
+#126|Netcaster Spider|C|CN2
+#127|Diabolic Tutor|U|CN2
+#128|Garrulous Sycophant|C|CN2
+#129|Illusionary Informant|C|CN2
+#130|Wild Griffin|C|CN2
+#131|Repulse|C|CN2
+#132|Dismiss|U|CN2
+#133|Farbog Boneflinger|U|CN2
+#134|Throne of the High City|R|CN2
+#135|Manaplasm|U|CN2
+#136|Cloaked Siren|C|CN2
+#137|Blood-Toll Harpy|C|CN2
+#138|Lieutenants of the Guard|C|CN2
+#139|Canal Courier|C|CN2
+#140|Borderland Explorer|C|CN2
+#141|Deputized Protester|C|CN2
+#142|Brushstrider|U|CN2
+#143|Messenger Jays|C|CN2
+#144|Ill-Tempered Cyclops|C|CN2
+#145|Menagerie Liberator|C|CN2
+#146|Vaporkin|C|CN2
+#147|Driver of the Dead|C|CN2
+#148|Windborne Charge|U|CN2
+#149|Coordinated Assault|U|CN2
+#150|Mnemonic Wall|C|CN2
+#151|Prey Upon|C|CN2
+#152|Carnage Gladiator|U|CN2
+#153|Kitesail|C|CN2
+#154|Spy Kit|U|CN2
+#155|Vertigo Spawn|U|CN2
+#156|Opaline Unicorn|C|CN2
+#157|Palace Sentinels|C|CN2
+#158|Evolving Wilds|C|CN2
+#159|Jeering Homunculus|C|CN2
+#160|Child of Night|C|CN2
+#161|Entourage of Trest|C|CN2
+#162|Hired Heist|C|CN2
+#163|Orchard Elemental|C|CN2
+#164|Raise the Alarm|C|CN2
+#165|Doomed Traveler|C|CN2
+#166|Stormchaser Chimera|U|CN2
+#167|Kiln Fiend|C|CN2
+#168|Leovold's Operative|C|CN2
+#169|Twin Bolt|C|CN2
+#170|Gruul War Chant|U|CN2
+#171|Ballot Broker|C|CN2
+#172|Gang of Devils|U|CN2
+#173|Runed Servitor|U|CN2
+#174|Shimmering Grotto|U|CN2
+#175|Dread Statuary|U|CN2
+#176|Divination|C|CN2
+#177|Assemble the Rank and Vile|C|CN2
+#178|Illusion of Choice|U|CN2
+#179|Echoing Boon|U|CN2
+#180|Fiery Fall|C|CN2
+#181|Bonds of Quicksilver|C|CN2
+#182|Goblin Tunneler|C|CN2
+#183|Strength in Numbers|C|CN2
+#184|Lace with Moonglove|C|CN2
+#185|Hurly-Burly|C|CN2
+#186|Sylvan Bounty|C|CN2
+#187|Disenchant|C|CN2
+#188|Fleeting Distraction|C|CN2
+#189|Altar's Reap|C|CN2
+#190|Bronze Sable|C|CN2
+#191|Fade into Antiquity|C|CN2
+#192|Festergloom|C|CN2
+#193|Reviving Dose|C|CN2
+#194|Hexplate Golem|C|CN2
+#195|Zealous Strike|C|CN2
+#196|Ogre Sentry|C|CN2
+#197|Trumpet Blast|C|CN2
+#198|Incendiary Dissent|C|CN2
+#199|Irresistible Prey|U|CN2
+#200|Lay of the Land|C|CN2
+#201|Plummet|C|CN2
+#202|Absorb Vis|C|CN2
+#203|Gleam of Resistance|C|CN2
+#204|Goblin Balloon Brigade|C|CN2
+#205|Tormenting Voice|C|CN2
+#206|Raise Dead|C|CN2
+#207|Copperhorn Scout|C|CN2
+#208|Gods Willing|C|CN2
+#209|Horn of Greed|R|CN2
+#210|Adriana's Valor|C|CN2
+#211|Negate|C|CN2
+#212|Traumatic Visions|C|CN2
+#213|Shambling Goblin|C|CN2
+#214|Akroan Hoplite|U|CN2
+#215|Stromkirk Patrol|C|CN2
+#216|Caller of Gales|C|CN2
+#217|Goblin Racketeer|C|CN2
+#218|Unnerve|C|CN2
+#219|Ember Beast|C|CN2
+#220|Ghostly Possession|C|CN2
+#221|Crown-Hunter Hireling|C|CN2

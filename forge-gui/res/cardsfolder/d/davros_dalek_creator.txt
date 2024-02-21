@@ -1,0 +1,12 @@
+Name:Davros, Dalek Creator
+ManaCost:1 U B R
+Types:Legendary Artifact Creature Alien Scientist
+PT:3/4
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DalekCreation | TriggerDescription$ At the beginning of your end step, create a 3/3 black Dalek artifact creature token with menace if an opponent lost 3 or more life this turn. Then each opponent who lost 3 or more life this turn faces a villainous choice — You draw a card, or that player discards a card.
+SVar:DalekCreation:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | SubAbility$ VillainousChoice
+SVar:VillainousChoice:DB$ VillainousChoice | Defined$ Opponent.LostLifeThisTurn GE3 | Choices$ Draw,Discard
+SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ You draw a card.
+SVar:Discard:DB$ Discard | Defined$ Remembered | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Opponent that lost 3 or more life discards 1 card.
+SVar:X:PlayerCountRegisteredOpponents$HighestLifeLostThisTurn
+Oracle:Menace\nAt the beginning of your end step, create a 3/3 black Dalek artifact creature token with menace if an opponent lost 3 or more life this turn. Then each opponent who lost 3 or more life this turn faces a villainous choice — You draw a card, or that player discards a card.

@@ -1,0 +1,255 @@
+//Rank|Name|Rarity|Set
+#1|Karn Liberated|M|UMA
+#2|Sigarda, Host of Herons|M|UMA
+#3|Bitterblossom|M|UMA
+#4|Balefire Dragon|M|UMA
+#5|Sublime Archangel|R|UMA
+#6|Liliana of the Veil|M|UMA
+#7|Tasigur, the Golden Fang|R|UMA
+#8|Mana Vault|M|UMA
+#9|Maelstrom Pulse|R|UMA
+#10|Ancient Tomb|R|UMA
+#11|Talrand, Sky Summoner|R|UMA
+#12|Mikaeus, the Unhallowed|M|UMA
+#13|Snapcaster Mage|M|UMA
+#14|Leovold, Emissary of Trest|M|UMA
+#15|Golgari Grave-Troll|R|UMA
+#16|Reveillark|R|UMA
+#17|Demonic Tutor|R|UMA
+#18|Woodfall Primus|R|UMA
+#19|Noble Hierarch|R|UMA
+#20|Glen Elendra Archmage|R|UMA
+#21|Shriekmaw|U|UMA
+#22|Eternal Witness|U|UMA
+#23|Kitchen Finks|U|UMA
+#24|Sovereigns of Lost Alara|R|UMA
+#25|Fauna Shaman|R|UMA
+#26|Faith's Fetters|C|UMA
+#27|Wall of Reverence|R|UMA
+#28|Eldrazi Conscription|R|UMA
+#29|Engineered Explosives|R|UMA
+#30|Celestial Colonnade|R|UMA
+#31|Lavaclaw Reaches|R|UMA
+#32|Raging Ravine|R|UMA
+#33|Creeping Tar Pit|R|UMA
+#34|Stirring Wildwood|R|UMA
+#35|Fire Ice|C|UMA
+#36|All Is Dust|R|UMA
+#37|Warleader's Helix|U|UMA
+#38|Fiend Hunter|U|UMA
+#39|Vengevine|M|UMA
+#40|Dig Through Time|R|UMA
+#41|Murderous Redcap|U|UMA
+#42|Sigil of the New Dawn|U|UMA
+#43|Fiery Temper|C|UMA
+#44|Travel Preparations|U|UMA
+#45|Spider Spawning|U|UMA
+#46|Young Pyromancer|U|UMA
+#47|Unburial Rites|U|UMA
+#48|Chainer's Edict|U|UMA
+#49|Firewing Phoenix|U|UMA
+#50|Devoted Druid|U|UMA
+#51|Vengeful Rebirth|U|UMA
+#52|Urban Evolution|U|UMA
+#53|Garna, the Bloodflame|U|UMA
+#54|Blast of Genius|U|UMA
+#55|Penumbra Wurm|U|UMA
+#56|Unholy Hunger|C|UMA
+#57|Last Gasp|C|UMA
+#58|Mahamoti Djinn|U|UMA
+#59|Swift Reckoning|U|UMA
+#60|Gurmag Angler|C|UMA
+#61|Magmaw|U|UMA
+#62|Golgari Charm|U|UMA
+#63|Soul's Fire|C|UMA
+#64|Aethersnipe|C|UMA
+#65|Phalanx Leader|U|UMA
+#66|Tarmogoyf|M|UMA
+#67|Squee, Goblin Nabob|R|UMA
+#68|Shirei, Shizo's Caretaker|U|UMA
+#69|Treasure Cruise|C|UMA
+#70|Runed Halo|R|UMA
+#71|Rune Snag|C|UMA
+#72|Resurrection|C|UMA
+#73|Dimir Guildmage|C|UMA
+#74|Slippery Bogle|U|UMA
+#75|Seize the Day|R|UMA
+#76|Prismatic Lens|U|UMA
+#77|Reviving Vapors|U|UMA
+#78|Boar Umbra|U|UMA
+#79|Reckless Charge|C|UMA
+#80|Brazen Scourge|U|UMA
+#81|Moan of the Unhallowed|C|UMA
+#82|Wingsteed Rider|C|UMA
+#83|Hero of Iroas|U|UMA
+#84|Desolate Lighthouse|R|UMA
+#85|Reanimate|R|UMA
+#86|Lord of Extinction|M|UMA
+#87|Gaddock Teeg|R|UMA
+#88|Wild Mongrel|C|UMA
+#89|Reckless Wurm|C|UMA
+#90|Seismic Assault|R|UMA
+#91|Become Immense|U|UMA
+#92|Daybreak Coronet|R|UMA
+#93|Angel of Despair|U|UMA
+#94|Wild Hunger|U|UMA
+#95|Satyr Wayfinder|C|UMA
+#96|Brawn|U|UMA
+#97|Thermo-Alchemist|C|UMA
+#98|Rolling Temblor|U|UMA
+#99|Golgari Thug|U|UMA
+#100|Sleight of Hand|U|UMA
+#101|Iridescent Drake|U|UMA
+#102|Forbidden Alchemy|U|UMA
+#103|Cavern of Souls|M|UMA
+#104|Life from the Loam|R|UMA
+#105|Gamble|R|UMA
+#106|Living Lore|U|UMA
+#107|Reya Dawnbringer|R|UMA
+#108|Pattern of Rebirth|R|UMA
+#109|Conflagrate|U|UMA
+#110|Terramorphic Expanse|C|UMA
+#111|Cathodion|C|UMA
+#112|Artisan of Kozilek|U|UMA
+#113|Countersquall|U|UMA
+#114|Prey Upon|C|UMA
+#115|Kodama's Reach|C|UMA
+#116|Boneyard Wurm|U|UMA
+#117|Furnace Celebration|U|UMA
+#118|Ghoulsteed|U|UMA
+#119|Buried Alive|U|UMA
+#120|Bloodflow Connoisseur|C|UMA
+#121|Rise from the Tides|U|UMA
+#122|Deranged Assistant|C|UMA
+#123|Archaeomancer|C|UMA
+#124|Rally the Peasants|U|UMA
+#125|Miraculous Recovery|U|UMA
+#126|Mammoth Umbra|C|UMA
+#127|Emancipation Angel|U|UMA
+#128|Karakas|M|UMA
+#129|Fulminator Mage|R|UMA
+#130|Vexing Devil|R|UMA
+#131|Faithless Looting|C|UMA
+#132|Containment Priest|R|UMA
+#133|Hero of Leina Tower|U|UMA
+#134|Rogue's Passage|U|UMA
+#135|Scuzzback Marauders|C|UMA
+#136|Plumeveil|U|UMA
+#137|Stingerfling Spider|U|UMA
+#138|Snake Umbra|U|UMA
+#139|Hooting Mandrills|C|UMA
+#140|Malevolent Whispers|U|UMA
+#141|Anger|U|UMA
+#142|Ghoulcaller's Accomplice|C|UMA
+#143|Death Denied|C|UMA
+#144|Unstable Mutation|U|UMA
+#145|Mystic Retrieval|U|UMA
+#146|Marang River Prowler|U|UMA
+#147|Dreamscape Artist|U|UMA
+#148|Spirit Cairn|U|UMA
+#149|Icatian Crier|C|UMA
+#150|Dawn Charm|U|UMA
+#151|Ancestor's Chosen|U|UMA
+#152|Urborg, Tomb of Yawgmoth|R|UMA
+#153|Fecundity|U|UMA
+#154|Visions of Beyond|R|UMA
+#155|Circular Logic|U|UMA
+#156|Apprentice Necromancer|U|UMA
+#157|Hyena Umbra|C|UMA
+#158|Spider Umbra|C|UMA
+#159|Dakmor Salvage|U|UMA
+#160|Ulamog's Crusher|C|UMA
+#161|Wickerbough Elder|C|UMA
+#162|Walker of the Grove|C|UMA
+#163|Sparkspitter|C|UMA
+#164|Molten Birth|C|UMA
+#165|Mad Prophet|C|UMA
+#166|Twins of Maurer Estate|C|UMA
+#167|Mark of the Vampire|C|UMA
+#168|Crow of Dark Tidings|C|UMA
+#169|Think Twice|C|UMA
+#170|Skywing Aven|C|UMA
+#171|Just the Wind|C|UMA
+#172|Flight of Fancy|C|UMA
+#173|Skyspear Cavalry|C|UMA
+#174|Gods Willing|C|UMA
+#175|Platinum Emperion|M|UMA
+#176|Temporal Manipulation|M|UMA
+#177|Frantic Search|C|UMA
+#178|Magus of the Bazaar|R|UMA
+#179|Slum Reaper|C|UMA
+#180|Miming Slime|C|UMA
+#181|Tethmos High Priest|C|UMA
+#182|Disrupting Shoal|R|UMA
+#183|Mage-Ring Network|U|UMA
+#184|Safehold Elite|C|UMA
+#185|Canker Abomination|C|UMA
+#186|Verdant Eidolon|C|UMA
+#187|Shed Weakness|C|UMA
+#188|Basking Rootwalla|C|UMA
+#189|Raid Bombardment|C|UMA
+#190|Nightbird's Clutches|C|UMA
+#191|Generator Servant|C|UMA
+#192|Arena Athlete|C|UMA
+#193|Olivia's Dragoon|C|UMA
+#194|Appetite for Brains|U|UMA
+#195|Whirlwind Adept|C|UMA
+#196|Stitcher's Apprentice|C|UMA
+#197|Stitched Drake|C|UMA
+#198|Eel Umbra|C|UMA
+#199|Defy Gravity|C|UMA
+#200|Wandering Champion|C|UMA
+#201|Conviction|C|UMA
+#202|Vessel of Endless Rest|C|UMA
+#203|Martyr of Sands|C|UMA
+#204|Phyrexian Altar|R|UMA
+#205|Phyrexian Tower|R|UMA
+#206|Nourishing Shoal|R|UMA
+#207|Foil|C|UMA
+#208|Laboratory Maniac|U|UMA
+#209|Lava Spike|U|UMA
+#210|Heliod's Pilgrim|C|UMA
+#211|Patchwork Gnomes|C|UMA
+#212|Turn to Mist|C|UMA
+#213|Shielding Plax|C|UMA
+#214|Rakdos Shred-Freak|C|UMA
+#215|Double Cleave|C|UMA
+#216|Staunch-Hearted Warrior|C|UMA
+#217|Golgari Brownscale|C|UMA
+#218|Hissing Iguanar|C|UMA
+#219|Sanitarium Skeleton|C|UMA
+#220|Grave Scrabbler|C|UMA
+#221|Sultai Skullkeeper|C|UMA
+#222|Repel the Darkness|C|UMA
+#223|Lotus-Eye Mystics|C|UMA
+#224|Angelic Renewal|C|UMA
+#225|Entomb|R|UMA
+#226|Goryo's Vengeance|R|UMA
+#227|Through the Breach|R|UMA
+#228|Flagstones of Trokair|R|UMA
+#229|Thespian's Stage|R|UMA
+#230|Desperate Ritual|U|UMA
+#231|Spoils of the Vault|R|UMA
+#232|Mistveil Plains|U|UMA
+#233|Pulse of Murasa|C|UMA
+#234|Groundskeeper|C|UMA
+#235|Crushing Canopy|C|UMA
+#236|Undying Rage|C|UMA
+#237|Ingot Chewer|C|UMA
+#238|Akroan Crusader|C|UMA
+#239|Grave Strength|U|UMA
+#240|Fume Spitter|C|UMA
+#241|Ronom Unicorn|C|UMA
+#242|Myr Servitor|C|UMA
+#243|Back to Basics|R|UMA
+#244|Bridge from Below|R|UMA
+#245|Beckon Apparition|C|UMA
+#246|Offalsnout|C|UMA
+#247|Dark Dabbling|C|UMA
+#248|Stream of Consciousness|U|UMA
+#249|Heap Doll|U|UMA
+#250|Songs of the Damned|U|UMA
+#251|Dark Depths|M|UMA
+#252|Kozilek, Butcher of Truth|M|UMA
+#253|Ulamog, the Infinite Gyre|M|UMA
+#254|Emrakul, the Aeons Torn|M|UMA

@@ -7,24 +7,25 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <tileset firstgid="28289" source="../../tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="28319" source="../../tileset/main-nocollide.tsx"/>
  <layer id="8" name="toggle" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgwE480EwpWootRfGxyZGS4DN3sEIpnHS1vzB7v9RQD54rMnA8EST/vb+B9mpRX97R8EoGAWjYBSMglEwNAAARxQIyg==
+   eJxjYBgFgwE480EwpWootRfGxyZGS4DN3sEIpnHS1vzB7v9RQD54rMnA8EST/vb+B9mpRX97R8EoGAWjgJpgGutAu2AUjILhCwBSTQll
   </data>
  </layer>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzdl80NwjAMhateSsQFCSF1ATZghl5hiq7DDXHKOMzDCCgHC9d9jvOHhPokq1HU+rPjuE27btvq9+XPTs42zpFWw0uJA+VXwj0PXwt6XpdzZJ7F9d6145LG2zoeyT0NSx8tuHIecUl3h+tL9UD1Q/5zud4tmTRG+wLVDplke/CsZ/lOYlzKRQw0T7xW3IezLdyHehn15szGFgutvSb0DknhxngpbOvdRdxYrq24Ml/kn+ZQTClsWV/ODddZyed1tHONsX/VR5qRX20//xM3pZalXFp73se8PqhuOdzYfpb7GvnX4ijpKUuoh1Nz5so960gm9W+MG3Tp18zcbz/najFZa1tz3pBcxNZUc54cD9ifZa24qDdRj7Y4Qwchbqpq/he2oA9iD2gJ
+   eJzdlzsOwjAMhiuWErEgIaRegIWRQ3SFU/QA0HuwIMSU43AedhaUwcJx/jyaBAnVkkWUUH92bBfTNPOWxSr/2V7FlXOklvBS/EDx5XB37VeNPI72Hqlmfr2WZVzJNNKd3DPJ3ba2nZJ4Qz5JLslV4fxSPlD+kP2pXK1sJq1RXaDcIZVsrdwzzeLtxTqXi+JF+8Srxb2ruJrvoV5GvTmwdYyF7t4n6B2Swg3xUtixdxdxQ7HW4sp4kX3aQz6lsGV+Odd8Dp54npt4rCH2r/rIp2TXV8//xE3JZS6X7p73Mc8PytsUbqieZV0j+z4/cnoqJqiHYzG/zy5z6qzj61/EPYwub18wY3Guzyd5r2PF+UpyJft2qculOu/W7hn6jUPzaw0u6k3UozVmaCOImyol/xfmIB982Gtw
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztljEKwjAUhkMWGx0UHF26OLuIgwfwGI49iAcQEeworh7C1QPo7hUcXDvYRxv6+sxLk1SEgj/8NCQlX/+kfY0cCCH/7rRXqrLPvaC7rAxKy34Yx2PgZyTErC/EKZ/nrNpxqVKmH7TPx7alfblg29yuXO25dN8XrAPh2LhHA3fnmBW8kPa8HNuUV3NBbbi2zG25ieJN814mn8bS++vKNSkxrLGJm6q6Xff3m1yXnL7cae+3XD0fxwWFcJfMu3WL6s/BcaEfr0tI3WgSx9UKqVebYeVQ+XKvYyFe+XPHo3BmKBdfsWw12iRX7iMueNptFcI1ifs3ZLLwWlbtzGOdcVbKpjXBxKV2YeIzQhOXsjNZb3/znGPLTHOGcrl7MJee7Xzn8jGcC6Am+XybXeZ22W84GqXc
+   eJztlrFKA0EQhodtkosBFUubNNYSCSkEWx8l7YGXxtYHkBjJlZLWh0ipDxBrfQULSxt3SJabrDt7M3tBOPCHj4XdZb+bvWRvzQGA+afVXGcVmrmYN1OBKbf9OE7HkM8uwHkPYGnXec6aef2UTD9mbsfut2i9SGxtqdcxMvL3QrPwPDHvU8A7E9aKjE28Xs5N68VQL6aJN1ZzaJ813knG49e7Ov3NS68a7/R13lAmgT0OectsF+n73adXUqfWe9b5W69bj/NiUryXzG9r3d19Ds6L/XRfUs6NunBel5Tz6u6wIjVa7+sJwJd97sFRujPVS1ua2BkditT7Mdj4HJq853aPbu0aeTNvKNy34aEAuJgCfN8ADG27tswLuZfW6rv9M8EPOq/yTYsc92VOekeo8/pu53Ls855TV7NzPhbpXm4O9fp3OzdnKlxLA94L8EzS/Dfb7G0zP5kjrQI=
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJytl71uE0EQxzdHEe5DciTk+BwKQPbR0lhR6jwBdpueJwCdjdwAEmUUUUAqeh6CpADlAWI3/oCXoE2RHe0NNzc3c7cWjPTX+e529nc7uzO7zmNj0sSYdWTMkb2+tfdNtiraTeNSbT7Ut584da0OrX5FTr2k2Te3jG1U+sC1zYf6Tgt/ap/3jPlCdLlX9+16cqS+5kp8RoEx7+NSx4HfOCST+kJumjS3/bHvhAa/F0H9ORq8exE5LQQuxOp3VI8z5z63fWek/8uXdT0el+9PD405D52+hXLsYI5nsVtjm4J/G7jvPC7G9JNw0zOrcV1HZzIXFBWCPpeEC/MLOTFj84zjBA1SPy60+xRWuaCLsNr3vOBuPXJnl/GiaVyMM6ytDZtnyXoT21ZQfyJz/zx0V87FPMR13Sf8hZI/8PzNg/L+tf2dDerCNvCe9xXETrCueb17FcqSTOJqeY9MENZJWu80bibkbBMX2g8LH8ibdVSNK7f/NV7KxVrVto/8C/fvO4HblD8a70SYt13Hy/OH1q1FUIreL3fkUsPaPI3LOrViez74vetU/T6w+yaTvg8sJ3FGJo07cJ8cGPOU6NmBP1eznMR5Lsw11GeJK+URt2y/qiHx6SblmSaP5X1B435V1rX2DUP2rVg3pLMccL9bzseOP3ekrEWtTtIY45kI1yNlt8V5VPjcBVXBc3pWQy6dV37euHnk2FdW1y3rSuJK5w3kcl/O5WPUxuzLpXVC40rzo+2R9D1KO1/x9XQbVP20/Pcx3hfuRz7/ScBWLXuXj/H/Nj5crKu+56E2pu95jrPXwrpo88VzBfSBY70HRpLliA==
+   eJytl79PFEEUxx9rAfsjAWIO7rAQw52tzYVYW1gLLb0lJgazB7lCMFEqYyyURjpMTPgX0MIffwBHcwfyT1Ba6LzMPPft2ze7Q/Ql3+zNzrz57LyZeTOXpwDtDGCSACyZ544p19nYtRukhZp8uG8ns2oZLRj9TKwWs3rf3DAuksIHn00+3Hfg/Lm9mwJ4z3QwVfVtBXK0voae+PQjgL200GoUNg7NtL6I287q236dtiLD36Oo+p4M6+4lViOFi7G6TKpxlty72Pd+UX/wqKpba7bu9yuABwsAr2OrT7EeO5zj7dSusXPHP43sd666MX0zOnTc9obRWlVLG7b+w36Zi0qcsM8zxsX5xT2xLeYZx9lzWmmHcbHd27jMRb2Jy30PHfciYO+EcNFwvGQ+LsUZ19a5mGfNFtdNW0WddZ17NWOfkkv7kNZ1h/FHnv2D75/dKMpb5ndvpSps8z2xkn1FqRWua5nvHse6NNO4vn1PTBTlSZ7vfNyesmfruNi+63xw30ySclyl/a/xci7lqqZz5F+4f+sUbt3+8fHuK/N23fHK/cPz1igqxMtn1+Ryo9w8SIs8NRZnPvrtzpb9XohynWnfh5azOBOTxx25t+cAlpnuzIVzfZazOA+Vucb8rHG1fSStN11Wl/m0suJOk6f6ueDjHnrWte8buuJbKW9odznknhjOy9lwbt+zFn15kseY7kS0Hjm7Kc595/PwCcCvpwAfN+H5fGbf87sacfm8yvvGj5uW/dnoS8O6Qt9jE4ujTVveSvX7BnGlr+TKMfrG3Bfx9HF5nvBxtfnxnZG8nuS7X8n1dBqV/Xz7P8RkX3QehfwnQRs3nF0hJv/bhHApr4beh5qYofc5yZ4o66LJl+4V2AeN9Q/9uudd
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="30">
@@ -32,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlr1OAkEQx5ezMJq7KyAm4AMgR0JneAkLpTaYaKytLI2tomin8jw8AmdvoSWxMdGoBc5ld8IyN7t7C4r/ZDLH7uz8du72AyGEGIdCbMVC9CPBqgF9icV6MO4ykt6Ug9OVGteMi4+h88rGoi8iV61/JVetxzVpNhWJ4bimWtuBEMGmNNR6V4jBrvQojMniU2XbgZ3r+iZHqo6Njpon8Kp70us6rEkuysXllOpjVK3VfelD4EVgMeFOFPcdnj/ARlrtPqru8O194N2A3XbzfXq9appz1c0pPIB6weIDnkunsyj3ruOOwXo/wb7Avj25+rpMyXeia4eLw5jTlTw3Oy9eQ/u8W1pbi/Qh9yIR4hnsJZHPVJSL+5ZjZ7mH4K/LEFOetp+s8XtlkvGafA1UyK3HeTbmTiqQriKfh6RP555Hs94k/UzuMewsd4uMMb3nM43l4upnciPO319tyxp8ZOp9Sqbm4uoc+tvEpe2+e5NyXGf02yrPHRn2kY3LrScTD2V7/0WE37Re8L+Bqd552YmDS+tdphZl+6y9h5K0QWm23ec935emeXxFOT7cRe6//+aa7kJbblvf2LF/f1N4vuLdsGzh3YCy/Q+gSoNZ78vlzmgf/jxCzg8Q9HnK
+   eJzFlr1OwzAQx69hQKAkQyukwgOUplI31JdggM6ITsxMjIgVCoUN6PP0ERp2BhgrFiQQMMBFzinu9WzHLZS/dLrUPt/Pl/ijAACTEGA7BhhEIKqJfYnF+jjuIlLelEPSZT6uFZcfw+eVjSVfRq5a/0quWo82ldlUJkbimmrtBADBljLS+iHAcE95EsVk8WluO4GdW/abbHTzeSKvvq+8NE+SiyspFcbUD5QPkRehxQbuG/p3tLFWu4/qu3L7AHnXaDeOevNpzlW3pLCH9aLFPZnLp7Mo97brjqF6P9A+0b48ufq6TNl34mtHiqOYk5VZbnZevIT2ebe1tjbrI+55AvCE9pyoZy7OpX0rsbPcI/RXVYypFu3Ha/Je+c54LbkGLuI24lk25U5qmK6mnkesT+eeRdPeJP1M7gvsLHebjTG951ON5eLqZ3Iznr2/OpY1+CDU+5gU5uLqHP7bxOXtvnuTc1xn9OuqzB0b9pGNK60nE49ke/9lRN+0UfK/ganeedmJg8vrXaYWZfusvfuKsmFlut3nPd9Vijy+4hwf7iL3339zTXehLbetb+LYv78pOl/pbli26G4g2f4HcKXBtPflSme0D38eEecH6fp3ow==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -181,7 +182,7 @@
   <object id="69" template="../../obj/waypoint.tx" x="364.75" y="328.5"/>
   <object id="70" template="../../obj/waypoint.tx" x="358.25" y="193"/>
   <object id="71" template="../../obj/waypoint.tx" x="214.75" y="185.75"/>
-  <object id="72" template="../../obj/enemy.tx" x="208.25" y="124.75">
+  <object id="72" template="../../obj/enemy.tx" x="195.203" y="125.343">
    <properties>
     <property name="enemy" value="Arcane Golem"/>
     <property name="threatRange" type="int" value="40"/>

@@ -1,9 +1,8 @@
 Name:Distant Memories
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | Imprint$ True | AILogic$ BestCard | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBDraw
-SVar:DBChoose:DB$ GenericChoice | Defined$ Remembered | Choices$ DBToHand,DoNothing | ChoicePrompt$ Have them put the card in their hand? | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ EQ1
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | Imprint$ True | AILogic$ BestCard | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+SVar:DBChoose:DB$ GenericChoice | Defined$ Opponent | Choices$ DBToHand,DoNothing | ChoicePrompt$ Have them put the card in their hand? | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBDraw
 SVar:DBToHand:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Imprinted | Unimprint$ True | SpellDescription$ Yes
 SVar:DoNothing:DB$ Cleanup | SpellDescription$ No
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None

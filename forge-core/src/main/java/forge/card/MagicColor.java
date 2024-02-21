@@ -2,7 +2,6 @@ package forge.card;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 
 /**
  * Holds byte values for each color magic has.
@@ -140,13 +139,9 @@ public final class MagicColor {
         /** The Basic lands. */
         public static final ImmutableList<String> BASIC_LANDS = ImmutableList.of("Plains", "Island", "Swamp", "Mountain", "Forest");
         public static final ImmutableList<String> SNOW_LANDS = ImmutableList.of("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest");
-        public static final ImmutableMap<String, String> ANY_COLOR_CONVERSION = new ImmutableMap.Builder<String, String>()
-                .put("ManaConversion", "AnyType->AnyColor")
-                .build();
+        public static final String ANY_COLOR_CONVERSION = "AnyType->AnyColor";
 
-        public static final ImmutableMap<String, String> ANY_TYPE_CONVERSION = new ImmutableMap.Builder<String, String>()
-                .put("ManaConversion", "AnyType->AnyType")
-                .build();
+        public static final String ANY_TYPE_CONVERSION = "AnyType->AnyType";
         /**
          * Private constructor to prevent instantiation.
          */

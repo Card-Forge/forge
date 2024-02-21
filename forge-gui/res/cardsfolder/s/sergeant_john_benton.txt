@@ -1,0 +1,10 @@
+Name:Sergeant John Benton
+ManaCost:1 G W
+Types:Legendary Creature Human Soldier
+PT:2/4
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Share Intelligence — Whenever CARDNAME deals combat damage to a player, you and that player each draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You & TriggeredTarget | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Trample, haste\nShare Intelligence — Whenever Sergeant John Benton deals combat damage to a player, you and that player each draw that many cards.

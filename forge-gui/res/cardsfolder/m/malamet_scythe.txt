@@ -1,0 +1,9 @@
+Name:Malamet Scythe
+ManaCost:2 G
+Types:Artifact Equipment
+K:Flash
+K:Equip:4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2.
+Oracle:Flash\nWhen Malamet Scythe enters the battlefield, attach it to target creature you control.\nEquipped creature gets +2/+2.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

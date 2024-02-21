@@ -56,8 +56,14 @@ public enum CounterEnumType {
     BLOOD("BLOOD", 255, 108, 111),
 
     BLOODLINE("BLDLN", 224, 44, 44),
+    
+    BLOODSTAIN("BLDST", 224, 44, 44),
+
+    BORE("BORE", 98, 47, 34),
 
     BOUNTY("BOUNT", 255, 158, 0),
+    
+    BRAIN("BRAIN", 197, 62, 212),
 
     BRIBERY("BRIBE", 172, 201, 235),
 
@@ -70,6 +76,8 @@ public enum CounterEnumType {
     CARRION("CRRON", 255, 163, 222),
 
     CHARGE("CHARG", 246, 192, 0),
+
+    CHORUS("CHRUS", 0, 192, 246),
 
     COIN("COIN",255,215,0),
 
@@ -106,10 +114,14 @@ public enum CounterEnumType {
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),
+   
+    DISCOVERY("DISCO", 12, 230, 100),
 
     DIVINITY("DVNTY", 0, 233, 255),
 
     DOOM("DOOM", 255, 104, 118),
+    
+    DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
 
@@ -119,9 +131,13 @@ public enum CounterEnumType {
 
     ELIXIR("ELIXR", 81, 221, 175),
 
+    EMBER("EMBER", 247, 52, 43),
+    
     EON("EON", 23, 194, 255),
 
-    EMBER("EMBER", 247, 52, 43),
+    ERUPTION("ERUPTION", 255, 124, 124),
+    
+    EXPOSURE("EXPOSURE", 50, 180, 30),
 
     EYEBALL("EYE", 184, 202, 201),
 
@@ -136,6 +152,8 @@ public enum CounterEnumType {
     FETCH("FETCH", 180, 235, 52),
 
     FILIBUSTER("FLBTR", 255, 179, 119),
+
+    FINALITY("FINAL", 255, 255, 255),
 
     FLAME("FLAME", 255, 143, 43),
     
@@ -188,6 +206,8 @@ public enum CounterEnumType {
     HUSK("HUSK", 227, 212, 173),
 
     ICE("ICE", 0, 239, 255),
+    
+    IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
 
@@ -332,6 +352,8 @@ public enum CounterEnumType {
     SHRED("SHRED", 255, 165, 152),
 
     SILVER("SILVER", 192, 192, 192),
+    
+    SKEWER("SKEWER", 202, 192, 156),
 
     SLEEP("SLEEP", 178, 192, 255),
 
@@ -361,6 +383,8 @@ public enum CounterEnumType {
 
     STUN("STUN", 226, 192, 165),
 
+    TAKEOVER("TKVR", 63, 49, 191),
+
     TASK("TASK", 191, 63, 49),
 
     THEFT("THEFT", 255, 176, 125),
@@ -378,6 +402,8 @@ public enum CounterEnumType {
     TREASURE("TRSUR", 255, 184, 0),
 
     UNITY("UNITY", 242, 156, 255),
+
+    UNLOCK("UNLCK", 222, 146, 205),
 
     VALOR("VALOR", 252, 250, 222),
 
@@ -406,6 +432,8 @@ public enum CounterEnumType {
     EXPERIENCE("EXP"),
 
     POISON("POISN"),
+
+    RAD("RAD"),
 
     TICKET("TICKET"),
 

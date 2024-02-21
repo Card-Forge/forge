@@ -1,0 +1,7 @@
+Name:Tan Jolom, the Worldwalker
+ManaCost:1 G W U
+Types:Legendary Creature Spirit
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose up to one target artifact or land you control that isn't a creature or token. Until end of turn, it becomes a 3/3 Spirit creature with vigilance and double team in addition to its other types.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.nonCreature+nonToken+YouCtrl,Land.nonCreature+nonToken+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact or land you control that isn't a creature or token | Power$ 3 | Toughness$ 3 | Types$ Creature,Spirit | Keywords$ Vigilance & Double team
+Oracle:At the beginning of combat on your turn, choose up to one target artifact or land you control that isn't a creature or token. Until end of turn, it becomes a 3/3 Spirit creature with vigilance and double team in addition to its other types.

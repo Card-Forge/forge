@@ -69,7 +69,6 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     public final void showMessage() {
-        // TODO still seems to have some issues with multiple planeswalkers
         setCurrentDefender(defenders.getFirst());
 
         if (currentDefender == null) {
@@ -89,7 +88,7 @@ public class InputAttack extends InputSyncronizedBase {
     private void updatePrompt() {
         Localizer localizer = Localizer.getInstance();
         String alphaLabel = canCallBackAttackers() ? localizer.getMessage("lblCallBack") : localizer.getMessage("lblAlphaStrike");
-        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOk"), alphaLabel, true, true, true);
+        getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), alphaLabel, true, true, true);
     }
 
     private void disablePrompt() {
@@ -295,7 +294,9 @@ public class InputAttack extends InputSyncronizedBase {
                 getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
             }
         }
-        potentialBanding = isBandingPossible();
+        if (def != null) {
+            potentialBanding = isBandingPossible();
+        }
 
         updateMessage();
     }

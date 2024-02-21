@@ -6281,7 +6281,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Ringwraiths|LTR
 1 Gollum, Patient Plotter|LTR
 1 Uruk-hai Berserker|LTR
-1 Nazgul|LTR
+1 Nazgûl|LTR
 1 Gothmog, Morgul Lieutenant|LTR
 1 Cirith Ungol Patrol|LTR
 1 Nasty End|LTR
@@ -6295,7 +6295,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Ringwraiths|LTR
 1 Gollum, Patient Plotter|LTR
 1 Dunland Crebain|LTR
-1 Grima Wormtongue|LTR
+1 Gríma Wormtongue|LTR
 1 Gothmog, Morgul Lieutenant|LTR
 1 Cirith Ungol Patrol|LTR
 1 Bitter Downfall|LTR
@@ -6309,7 +6309,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Battle-Scarred Goblin|LTR
 1 Erebor Flamesmith|LTR
 1 Gimli, Counter of Kills|LTR
-1 Grishnakh, Brash Instigator|LTR
+1 Grishnákh, Brash Instigator|LTR
 1 Olog-hai Crusher|LTR
 1 Gimli's Fury|LTR
 1 Assault on Osgiliath|LTR
@@ -6323,7 +6323,7 @@ Kaya, Ghost Assassin|CN2|2
 1 Erebor Flamesmith|LTR
 1 Goblin Fireleaper|LTR
 1 Gimli, Counter of Kills|LTR
-1 Grishnakh, Brash Instigator|LTR
+1 Grishnákh, Brash Instigator|LTR
 1 Olog-hai Crusher|LTR
 1 Smite the Deathless|LTR
 1 Rush the Room|LTR
@@ -6335,7 +6335,7 @@ Kaya, Ghost Assassin|CN2|2
 
 [LTR Journey 1]
 1 Brandywine Farmer|LTR
-1 Dunedain Rangers|LTR
+1 Dúnedain Rangers|LTR
 1 Elanor Gardner|LTR
 1 Meriadoc Brandybuck|LTR
 1 Mirkwood Spider|LTR
@@ -6393,9 +6393,9 @@ Radagast the Brown|LTR
 
 [LTR Red Inserts]
 Display of Power|LTR
-Eomer, Marshal of Rohan|LTR
+Éomer, Marshal of Rohan|LTR
 Fall of Cair Andros|LTR
-Gloin, Dwarf Emissary|LTR
+Glóin, Dwarf Emissary|LTR
 Moria Marauder|LTR
 There and Back Again|LTR
 Hew the Entwood|LTR

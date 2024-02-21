@@ -63,6 +63,7 @@ public enum AbilityKey {
     EffectOnly("EffectOnly"),
     Enlisted("Enlisted"),
     Exploited("Exploited"),
+    Explored("Explored"),
     Explorer("Explorer"),
     ExtraTurn("ExtraTurn"),
     Event("Event"),
@@ -73,6 +74,7 @@ public enum AbilityKey {
     Fizzle("Fizzle"),
     FoundSearchingLibrary("FoundSearchingLibrary"),
     Ignore("Ignore"),
+    IgnoreChosen("IgnoreChosen"),
     IsCombat("IsCombat"), // TODO confirm that this and IsCombatDamage can be merged
     IsCombatDamage("IsCombatDamage"),
     IsDamage("IsDamage"),
@@ -91,8 +93,7 @@ public enum AbilityKey {
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),
-    Num("Num"), // TODO confirm that this and NumThisTurn can be merged
-    NumThisTurn("NumThisTurn"),
+    Num("Num"),
     Number("Number"),
     Object("Object"),
     Objects("Objects"),
@@ -130,12 +131,14 @@ public enum AbilityKey {
     SurveilNum("SurveilNum"),
     Target("Target"),
     Targets("Targets"),
-    TgtSA("TgtSA"),
     Token("Token"),
     TokenNum("TokenNum"),
     Vehicle("Vehicle"),
-    Won("Won");
+    Won("Won"),
 
+    // below used across different Replacements, don't reuse
+    InternalTriggerTable("InternalTriggerTable"),
+    SimultaneousETB("SimultaneousETB"); // for CR 614.13c
 
     private String key;
 

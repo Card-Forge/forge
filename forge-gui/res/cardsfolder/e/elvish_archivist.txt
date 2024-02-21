@@ -1,0 +1,11 @@
+Name:Elvish Archivist
+ManaCost:1 G
+Types:Creature Elf Artificer
+PT:0/1
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more artifacts enter the battlefield under your control, put two +1/+1 counters on CARDNAME. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ ChangesZoneAll | ValidCards$ Enchantment.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more enchantments enter the battlefield under your control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+DeckHints:Type$Enchantment|Artifact
+Oracle:Whenever one or more artifacts enter the battlefield under your control, put two +1/+1 counters on Elvish Archivist. This ability triggers only once each turn.\nWhenever one or more enchantments enter the battlefield under your control, draw a card. This ability triggers only once each turn.

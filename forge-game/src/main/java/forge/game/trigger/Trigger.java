@@ -27,11 +27,14 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
+import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -128,6 +131,9 @@ public abstract class Trigger extends TriggerReplacementBase {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), currentName);
                 desc = TextUtil.fastReplace(desc,"CARDNAME", CardTranslation.getTranslatedName(currentName));
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+                if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getName());
+                }
             }
             if (getHostCard().getEffectSource() != null) {
                 if (active)
@@ -339,29 +345,42 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (hasParam("ResolvedLimit")) {
-            if (this.getOverridingAbility().getResolvedThisTurn() >= Integer.parseInt(getParam("ResolvedLimit"))) {
-                return false;
-            }
-        }
-
         // host controller will be null when adding card in a simulation game
         if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
+            return false;
+        }
+
+        if (!checkResolvedLimit(getHostCard().getController())) {
             return false;
         }
 
         return true;
     }
 
+    public boolean checkResolvedLimit(Player activator) {
+        // CR 603.2i
+        if (hasParam("ResolvedLimit")) {
+            if (Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator)
+                    >= Integer.parseInt(getParam("ResolvedLimit"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkActivationLimit() {
+        if (hasParam("ActivationLimit") &&
+                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
-        if ("True".equals(getParam("EvolveCondition"))) {
+        if (isKeyword(Keyword.EVOLVE)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {
                 return false;
-                // final StringBuilder sb = new StringBuilder();
-                // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
-                // sb.append(this.getHostCard().getName());
-                // throw new RuntimeException(sb.toString());
             }
             // CR 702.100c
             if (!moved.isCreature() || !this.getHostCard().isCreature()) {
@@ -570,7 +589,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.CardTraitBase#changeText()
      */
@@ -593,9 +611,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        if (!isIntrinsic()) {
-            return;
-        }
         super.changeTextIntrinsic(colorMap, typeMap);
 
         SpellAbility sa = ensureAbility();
@@ -622,5 +637,31 @@ public abstract class Trigger extends TriggerReplacementBase {
     public void setOverridingAbility(SpellAbility overridingAbility0) {
         super.setOverridingAbility(overridingAbility0);
         overridingAbility0.setTrigger(this);
+    }
+
+    boolean whileKeywordCheck(final String param, final Map<AbilityKey, Object> runParams) {
+        IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
+        if (currentPayment != null) {
+            if (matchesValidParam(param, currentPayment.getPayment().getAbility())) return true;
+        }
+
+        CostPaymentStack stack = (CostPaymentStack) runParams.get(AbilityKey.CostStack);
+        for (IndividualCostPaymentInstance individual : stack) {
+            if (matchesValidParam(param, individual.getPayment().getAbility())) return true;
+        }
+
+        return false;
+    }
+
+    public boolean isChapter() {
+        return hasParam("Chapter");
+    }
+    public Integer getChapter() {
+        if (!isChapter())
+            return null;
+        return Integer.valueOf(getParam("Chapter"));
+    }
+    public boolean isLastChapter() {
+        return isChapter() && getChapter() == getCardState().getFinalChapterNr();
     }
 }

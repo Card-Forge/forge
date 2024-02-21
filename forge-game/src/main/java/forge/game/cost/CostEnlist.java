@@ -73,8 +73,13 @@ public class CostEnlist extends CostPartWithTrigger {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        targetCard.tap(true);
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
+        if (targetCard.tap(true, ability, payer)) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, new CardCollection(targetCard));
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+        }
+
         // need to transfer info
         payTrig.addRemembered(targetCard);
 
@@ -102,7 +107,7 @@ public class CostEnlist extends CostPartWithTrigger {
     }
 
     public static CardCollection getCardsForEnlisting(Player active) {
-        return CardLists.filter(active.getCreaturesInPlay(), c -> c.isUntapped() && !c.isSick() && !c.isAttacking());
+        return CardLists.filter(active.getCreaturesInPlay(), c -> c.canTap() && !c.isSick() && !c.isAttacking());
     }
 
 }

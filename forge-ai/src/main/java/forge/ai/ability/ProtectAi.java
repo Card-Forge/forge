@@ -72,8 +72,8 @@ public class ProtectAi extends SpellAbilityAi {
             return null;
         }
         final List<String> choices = ProtectEffect.getProtectionList(sa);
-        if (threat.isArtifact() && choices.contains("artifacts")) {
-            return "artifacts";
+        if (threat.isArtifact() && choices.contains("Artifact")) {
+            return "Artifact";
         }
         if (threat.isBlack() && choices.contains("black")) {
             return "black";
@@ -157,7 +157,7 @@ public class ProtectAi extends SpellAbilityAi {
             }
         });
         return list;
-    } // getProtectCreatures()
+    }
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {

@@ -166,6 +166,24 @@ public abstract class InputBase implements java.io.Serializable, Input {
                 sb.append("\n").append(localizer.getMessage("lblStormCount")).append(": ").append(stormCount);
             }
         }
+
+        if (controller.macros() != null) {
+            boolean isRecording = controller.macros().isRecording();
+            String pbText = controller.macros().playbackText();
+            if (pbText != null) {
+                sb.append("\n");
+                if (isRecording) {
+                    sb.append("Macro Recording -- ");
+                } else {
+                    sb.append("Macro Playback -- ");
+                }
+
+                sb.append(pbText);
+            } else if (isRecording) {
+                sb.append("\n").append("Macro Recording -- ");
+            }
+        }
+
         return sb.toString();
     }
 }

@@ -54,7 +54,7 @@ public class OptionalCostValue implements Serializable {
         boolean isTag = type.getName().startsWith("(");
         if (type != OptionalCost.Generic && !isTag) {
             sb.append(type.getName());
-            sb.append(" ");
+            sb.append(" – ");
         }
         sb.append(cost.toSimpleString());
         sb.append(isTag ? " " + type.getName() : "");

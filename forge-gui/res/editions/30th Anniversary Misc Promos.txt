@@ -1,0 +1,13 @@
+[metadata]
+Code=P30M
+Date=2022-09-02
+Name=30th Anniversary Misc Promos
+Type=Promo
+ScryfallCode=P30M
+
+[cards]
+F1★ R Richard Garfield, Ph.D. @Dave Dorman
+2 M Lotus Petal @April Lee
+1F R Arcane Signet @Gaboleps
+1F★ R Arcane Signet @Gaboleps
+1P R Arcane Signet @Gaboleps

@@ -1,0 +1,151 @@
+//Rank|Name|Rarity|Set
+#1|Bitterblossom|R|MOR
+#2|Chameleon Colossus|R|MOR
+#3|Reveillark|R|MOR
+#4|Titan's Revenge|R|MOR
+#5|Lightning Crafter|R|MOR
+#6|Countryside Crusher|R|MOR
+#7|Taurean Mauler|R|MOR
+#8|Feudkiller's Verdict|R|MOR
+#9|Unstoppable Ash|R|MOR
+#10|Notorious Throng|R|MOR
+#11|Earwig Squad|R|MOR
+#12|Spitebellows|U|MOR
+#13|Vendilion Clique|R|MOR
+#14|Mutavault|R|MOR
+#15|Violet Pall|C|MOR
+#16|Leaf Crowned Elder|R|MOR
+#17|Swell of Courage|U|MOR
+#18|Obsidian Battle Axe|U|MOR
+#19|Bramblewood Paragon|U|MOR
+#20|Fendeep Summoner|R|MOR
+#21|Mind Shatter|R|MOR
+#22|Door of Destinies|R|MOR
+#23|Reach of Branches|R|MOR
+#24|Wolf Skull Shaman|U|MOR
+#25|Oona's Blackguard|U|MOR
+#26|Hunting Triad|U|MOR
+#27|Nevermaker|U|MOR
+#28|Mind Spring|R|MOR
+#29|Sage of Fables|U|MOR
+#30|Kinsbaile Borderguard|R|MOR
+#31|Inspired Sprite|U|MOR
+#32|Rhys the Exiled|R|MOR
+#33|Meadowboon|U|MOR
+#34|Preeminent Captain|R|MOR
+#35|Stenchskipper|R|MOR
+#36|Stonehewer Giant|R|MOR
+#37|Burrenton Bombardier|C|MOR
+#38|Weight of Conscience|C|MOR
+#39|Kinsbaile Cavalier|R|MOR
+#40|Game Trail Changeling|C|MOR
+#41|Grimoire Thief|R|MOR
+#42|Vengeful Firebrand|R|MOR
+#43|Cenn's Tactician|U|MOR
+#44|Battletide Alchemist|R|MOR
+#45|Weirding Shaman|R|MOR
+#46|Latchkey Faerie|C|MOR
+#47|Stinkdrinker Bandit|U|MOR
+#48|War Spike Changeling|C|MOR
+#49|Moonglove Changeling|C|MOR
+#50|Borderland Behemoth|R|MOR
+#51|Sigil Tracer|R|MOR
+#52|Rage Forger|U|MOR
+#53|Pack's Disdain|C|MOR
+#54|Shard Volley|C|MOR
+#55|Slithermuse|R|MOR
+#56|Scarblade Elite|R|MOR
+#57|Supreme Exemplar|R|MOR
+#58|Indomitable Ancients|R|MOR
+#59|Greatbow Doyen|R|MOR
+#60|Murmuring Bosk|R|MOR
+#61|Pyroclast Consul|U|MOR
+#62|Ambassador Oak|C|MOR
+#63|Winnower Patrol|C|MOR
+#64|Cloak and Dagger|U|MOR
+#65|Thornbite Staff|U|MOR
+#66|Sage's Dousing|U|MOR
+#67|Changeling Sentinel|C|MOR
+#68|Auntie's Snitch|R|MOR
+#69|Warren Weirding|U|MOR
+#70|Stonybrook Schoolmaster|C|MOR
+#71|Kithkin Zephyrnaut|C|MOR
+#72|Coordinated Barrage|C|MOR
+#73|Veteran's Armaments|U|MOR
+#74|Dewdrop Spy|C|MOR
+#75|Lys Alana Bowmaster|C|MOR
+#76|Wandering Graybeard|U|MOR
+#77|Fencer Clique|C|MOR
+#78|Diviner's Wand|U|MOR
+#79|Order of the Golden Cricket|C|MOR
+#80|Weed Pruner Poplar|C|MOR
+#81|Shared Animosity|R|MOR
+#82|Waterspout Weavers|U|MOR
+#83|Walker of the Grove|U|MOR
+#84|Cream of the Crop|R|MOR
+#85|Mothdust Changeling|C|MOR
+#86|Stonybrook Banneret|C|MOR
+#87|Boldwyr Heavyweights|R|MOR
+#88|Earthbrawn|C|MOR
+#89|Rustic Clachan|R|MOR
+#90|Elvish Warrior|C|MOR
+#91|Ballyrush Banneret|C|MOR
+#92|Gilt Leaf Archdruid|R|MOR
+#93|Brighthearth Banneret|C|MOR
+#94|Nightshade Schemers|U|MOR
+#95|Distant Melody|C|MOR
+#96|Sunflare Shaman|C|MOR
+#97|Rivals' Duel|U|MOR
+#98|Fertilid|C|MOR
+#99|Disperse|C|MOR
+#100|Orchard Warden|U|MOR
+#101|Bosk Banneret|C|MOR
+#102|Primal Beyond|R|MOR
+#103|Release the Ants|U|MOR
+#104|Ink Dissolver|C|MOR
+#105|Frogtosser Banneret|C|MOR
+#106|Final Sting Faerie|C|MOR
+#107|Knowledge Exploitation|R|MOR
+#108|Noggin Whack|U|MOR
+#109|Maralen of the Mornsong|R|MOR
+#110|Morsel Theft|C|MOR
+#111|Mosquito Guard|C|MOR
+#112|Festercreep|C|MOR
+#113|Prickly Boggart|C|MOR
+#114|Heritage Druid|U|MOR
+#115|Blightsoil Druid|C|MOR
+#116|Boldwyr Intimidator|U|MOR
+#117|Seething Pathblazer|C|MOR
+#118|Sensation Gorger|R|MOR
+#119|Revive the Fallen|U|MOR
+#120|Fire Juggler|C|MOR
+#121|Stream of Unconsciousness|C|MOR
+#122|Everbark Shaman|C|MOR
+#123|Offalsnout|U|MOR
+#124|Redeem the Lost|U|MOR
+#125|Roar of the Crowd|C|MOR
+#126|Thieves' Fortune|U|MOR
+#127|Squeaking Pie Grubfellows|C|MOR
+#128|Floodchaser|C|MOR
+#129|Graceful Reprieve|U|MOR
+#130|Negate|C|MOR
+#131|Research the Deep|U|MOR
+#132|Scapeshift|R|MOR
+#133|Lunk Errant|C|MOR
+#134|Burrenton Shield Bearers|C|MOR
+#135|Merrow Witsniper|C|MOR
+#136|Shinewend|C|MOR
+#137|Reins of the Vinesteed|C|MOR
+#138|Daily Regimen|U|MOR
+#139|Stingmoggie|C|MOR
+#140|Kindled Fury|C|MOR
+#141|Mudbutton Clanger|C|MOR
+#142|Deglamer|C|MOR
+#143|Idyllic Tutor|R|MOR
+#144|Pulling Teeth|C|MOR
+#145|Recross the Paths|U|MOR
+#146|Forfend|C|MOR
+#147|Luminescent Rain|C|MOR
+#148|Declaration of Naught|R|MOR
+#149|Hostile Realm|C|MOR
+#150|Stomping Slabs|U|MOR

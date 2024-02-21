@@ -1,0 +1,9 @@
+Name:Audience with Trostani
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Token | TokenScript$ g_0_1_plant | SubAbility$ DBDraw | SpellDescription$ Create a 0/1 green Plant creature token, then draw cards equal to the number of differently named creature tokens you control.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None
+SVar:X:Count$DifferentCardNames_Creature.YouCtrl+token+inZoneBattlefield
+DeckHas:Ability$Token & Type$Plant
+DeckHints:Ability$Token
+Oracle:Create a 0/1 green Plant creature token, then draw cards equal to the number of differently named creature tokens you control.

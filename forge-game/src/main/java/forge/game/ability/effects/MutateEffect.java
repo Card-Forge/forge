@@ -1,12 +1,10 @@
 package forge.game.ability.effects;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
-import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -34,8 +32,7 @@ public class MutateEffect extends SpellAbilityEffect {
             host.setToken(true);
         }
 
-        final List<GameObject> targets = getDefinedOrTargeted(sa, "Defined");
-        final Card target = (Card)targets.get(0);
+        final Card target = getDefinedCardsOrTargeted(sa, "Defined").get(0);
 
         CardCollectionView view = CardCollection.getView(Lists.newArrayList(host, target));
         final Card topCard = host.getController().getController().chooseSingleEntityForEffect(

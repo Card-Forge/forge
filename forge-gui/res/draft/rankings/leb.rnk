@@ -1,0 +1,287 @@
+//Rank|Name|Rarity|Set
+#1|Mana Short|R|LEB
+#2|Mana Vault|R|LEB
+#3|Mox Jet|R|LEB
+#4|Ancestral Recall|R|LEB
+#5|Timetwister|R|LEB
+#6|Demonic Tutor|U|LEB
+#7|Royal Assassin|R|LEB
+#8|Mox Sapphire|R|LEB
+#9|Time Walk|R|LEB
+#10|Taiga|R|LEB
+#11|Black Lotus|R|LEB
+#12|Earthquake|R|LEB
+#13|Lightning Bolt|C|LEB
+#14|Tropical Island|R|LEB
+#15|Mox Pearl|R|LEB
+#16|Mahamoti Djinn|R|LEB
+#17|Mox Emerald|R|LEB
+#18|Icy Manipulator|U|LEB
+#19|Cockatrice|R|LEB
+#20|Winter Orb|R|LEB
+#21|Volcanic Island|R|LEB
+#22|Nevinyrral's Disk|R|LEB
+#23|Tundra|R|LEB
+#24|Balance|R|LEB
+#25|Air Elemental|U|LEB
+#26|Hypnotic Specter|U|LEB
+#27|Sol Ring|U|LEB
+#28|Fastbond|R|LEB
+#29|Sedge Troll|R|LEB
+#30|Chaoslace|R|LEB
+#31|Shivan Dragon|R|LEB
+#32|Chaos Orb|R|LEB
+#33|Drain Power|R|LEB
+#34|Smoke|R|LEB
+#35|Wrath of God|R|LEB
+#36|Birds of Paradise|R|LEB
+#37|Armageddon|R|LEB
+#38|Scrubland|R|LEB
+#39|Fireball|C|LEB
+#40|Serra Angel|U|LEB
+#41|Nightmare|R|LEB
+#42|Plateau|R|LEB
+#43|Sengir Vampire|U|LEB
+#44|Fork|R|LEB
+#45|Verduran Enchantress|R|LEB
+#46|Mox Ruby|R|LEB
+#47|Mind Twist|R|LEB
+#48|Roc of Kher Ridges|R|LEB
+#49|Rock Hydra|R|LEB
+#50|Time Vault|R|LEB
+#51|Northern Paladin|R|LEB
+#52|Elvish Archers|R|LEB
+#53|Nether Shadow|R|LEB
+#54|Swords to Plowshares|U|LEB
+#55|Dragon Whelp|U|LEB
+#56|Wheel of Fortune|R|LEB
+#57|Veteran Bodyguard|R|LEB
+#58|Lord of Atlantis|R|LEB
+#59|Crusade|R|LEB
+#60|Terror|C|LEB
+#61|Aspect of Wolf|R|LEB
+#62|Forcefield|R|LEB
+#63|Control Magic|U|LEB
+#64|Basalt Monolith|U|LEB
+#65|Badlands|R|LEB
+#66|Bad Moon|R|LEB
+#67|Animate Dead|U|LEB
+#68|Black Knight|U|LEB
+#69|Farmstead|R|LEB
+#70|Sinkhole|C|LEB
+#71|Disintegrate|C|LEB
+#72|Clone|U|LEB
+#73|Lord of the Pit|R|LEB
+#74|Ankh of Mishra|R|LEB
+#75|Demonic Hordes|R|LEB
+#76|Two-Headed Giant of Foriys|R|LEB
+#77|Berserk|U|LEB
+#78|Reverse Damage|R|LEB
+#79|Fire Elemental|U|LEB
+#80|Psionic Blast|U|LEB
+#81|Word of Command|R|LEB
+#82|Bayou|R|LEB
+#83|Clockwork Beast|R|LEB
+#84|Mana Flare|R|LEB
+#85|Living Lands|R|LEB
+#86|Dark Ritual|C|LEB
+#87|Channel|U|LEB
+#88|Force of Nature|R|LEB
+#89|Copper Tablet|U|LEB
+#90|Demonic Attorney|R|LEB
+#91|Natural Selection|R|LEB
+#92|Phantasmal Forces|U|LEB
+#93|Counterspell|U|LEB
+#94|Earth Elemental|U|LEB
+#95|Vesuvan Doppelganger|R|LEB
+#96|Juggernaut|U|LEB
+#97|Jade Statue|U|LEB
+#98|Sleight of Mind|R|LEB
+#99|Goblin King|R|LEB
+#100|Savannah|R|LEB
+#101|Phantom Monster|U|LEB
+#102|Granite Gargoyle|R|LEB
+#103|Howling Mine|R|LEB
+#104|White Knight|U|LEB
+#105|Wall of Ice|U|LEB
+#106|Gauntlet of Might|R|LEB
+#107|Drain Life|C|LEB
+#108|Regrowth|U|LEB
+#109|Craw Wurm|C|LEB
+#110|Pestilence|C|LEB
+#111|Will o' the Wisp|R|LEB
+#112|Water Elemental|U|LEB
+#113|Braingeyser|R|LEB
+#114|Gaea's Liege|R|LEB
+#115|Stasis|R|LEB
+#116|Black Vise|U|LEB
+#117|Orcish Artillery|U|LEB
+#118|Underground Sea|R|LEB
+#119|Bog Wraith|U|LEB
+#120|Jayemdae Tome|R|LEB
+#121|Pirate Ship|R|LEB
+#122|Lich|R|LEB
+#123|Copy Artifact|R|LEB
+#124|Llanowar Elves|C|LEB
+#125|Obsianus Golem|U|LEB
+#126|Savannah Lions|R|LEB
+#127|Thicket Basilisk|U|LEB
+#128|Prodigal Sorcerer|C|LEB
+#129|Kormus Bell|R|LEB
+#130|Giant Spider|C|LEB
+#131|Web|R|LEB
+#132|Living Artifact|R|LEB
+#133|Fungusaur|R|LEB
+#134|War Mammoth|C|LEB
+#135|Zombie Master|R|LEB
+#136|Frozen Shade|C|LEB
+#137|Meekstone|R|LEB
+#138|The Hive|R|LEB
+#139|Disrupting Scepter|R|LEB
+#140|Cyclopean Tomb|R|LEB
+#141|Nettling Imp|U|LEB
+#142|Stone Giant|U|LEB
+#143|Ironroot Treefolk|C|LEB
+#144|Magical Hack|R|LEB
+#145|Thoughtlace|R|LEB
+#146|Grizzly Bears|C|LEB
+#147|Hill Giant|C|LEB
+#148|Darkpact|R|LEB
+#149|Giant Growth|C|LEB
+#150|Jade Monolith|R|LEB
+#151|Helm of Chatzuk|R|LEB
+#152|Personal Incarnation|R|LEB
+#153|Rod of Ruin|U|LEB
+#154|Drudge Skeletons|C|LEB
+#155|Keldon Warlord|U|LEB
+#156|Hurricane|U|LEB
+#157|Blessing|R|LEB
+#158|Resurrection|U|LEB
+#159|Hurloon Minotaur|C|LEB
+#160|Tsunami|U|LEB
+#161|Power Surge|R|LEB
+#162|Wall of Air|U|LEB
+#163|Scryb Sprites|C|LEB
+#164|Righteousness|R|LEB
+#165|Scathe Zombies|C|LEB
+#166|Illusionary Mask|R|LEB
+#167|Cursed Land|U|LEB
+#168|Uthden Troll|U|LEB
+#169|Red Elemental Blast|C|LEB
+#170|Dingus Egg|R|LEB
+#171|Unsummon|C|LEB
+#172|Unholy Strength|C|LEB
+#173|Living Wall|U|LEB
+#174|Paralyze|C|LEB
+#175|Island Sanctuary|R|LEB
+#176|Ley Druid|U|LEB
+#177|Scavenging Ghoul|U|LEB
+#178|Plague Rats|C|LEB
+#179|Ice Storm|U|LEB
+#180|Weakness|C|LEB
+#181|Stone Rain|C|LEB
+#182|Wall of Stone|U|LEB
+#183|Celestial Prism|U|LEB
+#184|Wall of Fire|U|LEB
+#185|Dwarven Demolition Team|U|LEB
+#186|Kudzu|R|LEB
+#187|Wall of Water|U|LEB
+#188|Deathgrip|U|LEB
+#189|Wall of Bone|U|LEB
+#190|Instill Energy|U|LEB
+#191|Gray Ogre|C|LEB
+#192|Karma|U|LEB
+#193|Sunglasses of Urza|R|LEB
+#194|Blaze of Glory|R|LEB
+#195|Wild Growth|C|LEB
+#196|Steal Artifact|U|LEB
+#197|Wall of Brambles|U|LEB
+#198|Orcish Oriflamme|U|LEB
+#199|Goblin Balloon Brigade|U|LEB
+#200|Contract from Below|R|LEB
+#201|Power Sink|C|LEB
+#202|Deathlace|R|LEB
+#203|Earthbind|C|LEB
+#204|Raise Dead|C|LEB
+#205|Blue Elemental Blast|C|LEB
+#206|Lifeforce|U|LEB
+#207|Mesa Pegasus|C|LEB
+#208|Wall of Swords|U|LEB
+#209|Manabarbs|R|LEB
+#210|Howl from Beyond|C|LEB
+#211|Raging River|R|LEB
+#212|Timber Wolves|R|LEB
+#213|Purelace|R|LEB
+#214|Glasses of Urza|U|LEB
+#215|Spell Blast|C|LEB
+#216|Lure|U|LEB
+#217|Gloom|U|LEB
+#218|Consecrate Land|U|LEB
+#219|Simulacrum|U|LEB
+#220|Shatter|C|LEB
+#221|Feedback|U|LEB
+#222|Shanodin Dryads|C|LEB
+#223|Twiddle|C|LEB
+#224|Wall of Wood|C|LEB
+#225|Flashfires|U|LEB
+#226|Conservator|U|LEB
+#227|Dwarven Warriors|C|LEB
+#228|Sacrifice|U|LEB
+#229|Sea Serpent|C|LEB
+#230|Warp Artifact|R|LEB
+#231|Camouflage|U|LEB
+#232|Mons's Goblin Raiders|C|LEB
+#233|Samite Healer|C|LEB
+#234|Castle|U|LEB
+#235|Fog|C|LEB
+#236|Animate Wall|R|LEB
+#237|Benalish Hero|C|LEB
+#238|Wanderlust|U|LEB
+#239|Pearled Unicorn|C|LEB
+#240|Burrowing|U|LEB
+#241|Disenchant|C|LEB
+#242|Volcanic Eruption|R|LEB
+#243|Circle of Protection: Red|C|LEB
+#244|Regeneration|C|LEB
+#245|Firebreathing|C|LEB
+#246|Animate Artifact|U|LEB
+#247|Lifetap|U|LEB
+#248|Merfolk of the Pearl Trident|C|LEB
+#249|Psychic Venom|C|LEB
+#250|Circle of Protection: Black|C|LEB
+#251|Iron Star|U|LEB
+#252|Soul Net|U|LEB
+#253|Tranquility|C|LEB
+#254|Library of Leng|U|LEB
+#255|Evil Presence|U|LEB
+#256|Throne of Bone|U|LEB
+#257|Siren's Call|U|LEB
+#258|Holy Strength|C|LEB
+#259|Stream of Life|C|LEB
+#260|Lifelace|R|LEB
+#261|Tunnel|U|LEB
+#262|Invisibility|C|LEB
+#263|Phantasmal Terrain|C|LEB
+#264|Wooden Sphere|U|LEB
+#265|Black Ward|U|LEB
+#266|Fear|C|LEB
+#267|Conversion|U|LEB
+#268|Flight|C|LEB
+#269|Crystal Rod|U|LEB
+#270|False Orders|C|LEB
+#271|Circle of Protection: Green|C|LEB
+#272|Healing Salve|C|LEB
+#273|Red Ward|U|LEB
+#274|Death Ward|C|LEB
+#275|Guardian Angel|C|LEB
+#276|Circle of Protection: Blue|C|LEB
+#277|White Ward|U|LEB
+#278|Holy Armor|C|LEB
+#279|Power Leak|C|LEB
+#280|Circle of Protection: White|C|LEB
+#281|Creature Bond|C|LEB
+#282|Ivory Cup|U|LEB
+#283|Jump|C|LEB
+#284|Lance|U|LEB
+#285|Blue Ward|U|LEB
+#286|Green Ward|U|LEB

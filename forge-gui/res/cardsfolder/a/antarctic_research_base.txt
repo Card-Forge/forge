@@ -1,0 +1,12 @@
+Name:Antarctic Research Base
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, investigate.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigInvestigate | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever chaos ensues, put X +1/+1 counters on target creature you control, where X is the number of artifacts you control. It becomes a Plant in addition to its other types.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Plant | Duration$ Permanent
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHas:Ability$Token|Counters & Type$Clue|Artifact|Plant
+Oracle:When you planeswalk to Antarctic Research Base and at the beginning of your upkeep, investigate.\nWhenever chaos ensues, put X +1/+1 counters on target creature you control, where X is the number of artifacts you control. It becomes a Plant in addition to its other types.

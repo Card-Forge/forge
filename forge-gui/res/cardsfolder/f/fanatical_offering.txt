@@ -1,0 +1,7 @@
+Name:Fanatical Offering
+ManaCost:1 B
+Types:Instant
+A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | NumCards$ 2 | SubAbility$ DBToken | SpellDescription$ Draw two cards and create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_map_sac_explore | TokenOwner$ You
+DeckHas:Ability$Sacrifice|Token & Type$Artifact|Map
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards and create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")

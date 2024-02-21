@@ -1,0 +1,9 @@
+Name:Pick Your Poison
+ManaCost:G
+Types:Sorcery
+A:SP$ Charm | Choices$ SacArtifact,SacEnchantment,SacFlier | CharmNum$ 1
+SVar:SacArtifact:DB$ Sacrifice | Defined$ Opponent | SacValid$ Artifact | Amount$ 1 | SpellDescription$ Each opponent sacrifices an artifact.
+SVar:SacEnchantment:DB$ Sacrifice | Defined$ Opponent | SacValid$ Enchantment | Amount$ 1 | SpellDescription$ Each opponent sacrifices an enchantment.
+SVar:SacFlier:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | Amount$ 1 | SpellDescription$ Each opponent sacrifices a creature with flying.
+DeckHas:Ability$Sacrifice
+Oracle:Choose one —\n• Each opponent sacrifices an artifact.\n• Each opponent sacrifices an enchantment.\n• Each opponent sacrifices a creature with flying.

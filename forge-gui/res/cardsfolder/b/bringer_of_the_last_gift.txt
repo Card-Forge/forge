@@ -1,0 +1,12 @@
+Name:Bringer of the Last Gift
+ManaCost:6 B B
+Types:Creature Vampire Demon
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigSacAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, each player sacrifices all other creatures they control. Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield.
+SVar:TrigSacAll:DB$ SacrificeAll | ValidCards$ Creature.StrictlyOther | RememberSacrificed$ True | SubAbility$ DBReturnAll
+SVar:DBReturnAll:DB$ ChangeZoneAll | ChangeType$ Creature.IsNotRemembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard|Sacrifice
+DeckHints:Ability$Graveyard|Discard|Mill
+Oracle:Flying\nWhen Bringer of the Last Gift enters the battlefield, if you cast it, each player sacrifices all other creatures they control. Then each player returns all creature cards from their graveyard that weren't put there this way to the battlefield.

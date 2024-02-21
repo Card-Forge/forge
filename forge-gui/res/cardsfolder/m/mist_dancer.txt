@@ -1,0 +1,10 @@
+Name:Mist Dancer
+ManaCost:4 U
+Types:Creature Merfolk Wizard
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddPower$ 1 | AddKeyword$ Flying | Description$ Other Merfolk you control get +1/+0 and have flying.
+K:Encore:5 U U
+DeckHas:Ability$Token
+DeckHints:Type$Merfolk
+Oracle:Flying\nOther Merfolk you control get +1/+0 and have flying.\nEncore {5}{U}{U} ({5}{U}{U}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

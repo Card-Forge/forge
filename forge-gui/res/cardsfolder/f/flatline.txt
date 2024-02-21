@@ -1,0 +1,5 @@
+Name:Flatline
+ManaCost:2 U
+Types:Instant
+A:SP$ AnimateAll | ValidCards$ Creature.OppCtrl | Power$ 0 | Toughness$ 1 | IsCurse$ True | SpellDescription$ Creatures your opponents control have base power and toughness 0/1 until end of turn.
+Oracle:Creatures your opponents control have base power and toughness 0/1 until end of turn.

@@ -1,0 +1,8 @@
+Name:It Doesn't Add Up
+ManaCost:3 B B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBSuspect | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:DBSuspect:DB$ AlterAttribute | Attributes$ Suspected | Defined$ Targeted | StackDescription$ SpellDescription | SpellDescription$ Suspect it. (It has menace and can't block.)
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill|Discard
+Oracle:Return target creature card from your graveyard to the battlefield. Suspect it. (It has menace and can't block.)

@@ -20,4 +20,12 @@ ScryfallCode=SCH
 12 M Thalia and The Gitrog Monster @PINDURSKI
 13 R Gifted Aetherborn @Lie Setiawan
 14 R Eidolon of the Great Revel @Yigit Koroglu
+15 R Tail Swipe @Edgar Sánchez Hidalgo
+16 R Transcendent Message @Miranda Meeks
 17 M Moonshaker Cavalry @Awanqi (Angela Wang)
+18 R Cauldron Familiar @Edgar Sánchez Hidalgo
+19 R Dark Petition @Julia Metzger
+20 R Lier, Disciple of the Drowned @Heonhwa Choe
+21 R Mortify @Andreia Ugrai
+22 R Angel of Despair @Andreia Ugrai
+23 R Dauthi Voidwalker @Andreia Ugrai

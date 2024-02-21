@@ -1,0 +1,9 @@
+Name:Graham O'Brien
+ManaCost:1 G
+Types:Legendary Creature Human Pilot
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+K:Doctor's companion
+DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact
+Oracle:Paradox — Whenever you cast a spell from anywhere other than your hand, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nDoctor's companion (You can have two commanders if the other is the Doctor.)

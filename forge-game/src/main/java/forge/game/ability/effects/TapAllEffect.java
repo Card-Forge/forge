@@ -1,14 +1,19 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 public class TapAllEffect extends SpellAbilityEffect {
     @Override
@@ -39,11 +44,22 @@ public class TapAllEffect extends SpellAbilityEffect {
 
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);
 
+        Player tapper = activator;
+
+        CardCollection tapped = new CardCollection();
         for (final Card c : cards) {
             if (remTapped) {
                 card.addRemembered(c);
             }
-            c.tap(true);
+            if (sa.hasParam("TapperController")) {
+                tapper = c.getController();
+            }
+            if (c.tap(true, sa, tapper)) tapped.add(c);
+        }
+        if (!tapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, tapped);
+            game.getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 

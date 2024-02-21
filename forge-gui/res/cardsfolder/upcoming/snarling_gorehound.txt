@@ -1,0 +1,9 @@
+Name:Snarling Gorehound
+ManaCost:B
+Types:Creature Dog
+PT:1/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Menace\nWhenever another creature with power 2 or less enters the battlefield under your control, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

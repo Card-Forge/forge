@@ -2,7 +2,7 @@ Name:Coils of the Medusa
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse | RememberTargets$ True | ForgetOtherTargets$ True
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ -1 | Description$ Enchanted creature gets +1/-1.
-A:AB$ DestroyAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.nonWall+blockingRemembered | SpellDescription$ Destroy all non-Wall creatures blocking enchanted creature.
+A:AB$ DestroyAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.nonWall+blockingEnchanted | SpellDescription$ Destroy all non-Wall creatures blocking enchanted creature.
 Oracle:Enchant creature\nEnchanted creature gets +1/-1.\nSacrifice Coils of the Medusa: Destroy all non-Wall creatures blocking enchanted creature.

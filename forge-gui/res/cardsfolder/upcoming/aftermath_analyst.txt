@@ -1,0 +1,10 @@
+Name:Aftermath Analyst
+ManaCost:1 G
+Types:Creature Elf Detective
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3
+A:AB$ ChangeZoneAll | Cost$ 3 G Sac<1/CARDNAME> | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all land cards from your graveyard to the battlefield tapped.
+DeckHas:Ability$Mill|Sacrifice|Graveyard
+DeckHints:Ability$Mill|Graveyard
+Oracle:When Aftermath Analyst enters the battlefield, mill three cards.\n{3}{G}, Sacrifice Aftermath Analyst: Return all land cards from your graveyard to the battlefield tapped.

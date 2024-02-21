@@ -1,0 +1,13 @@
+Name:Resonance Technician
+ManaCost:3 UR UR
+Types:Creature Weird Detective
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, investigate twice.
+SVar:TrigInvestigate:AB$ Investigate | Cost$ Discard<1/Card> | Num$ 2
+A:AB$ CopySpellAbility | Cost$ T tapXType<X/Artifact/artifacts you control> | ValidTgts$ Instant.YouCtrl+cmcEQX,Sorcery.YouCtrl+cmcEQX | TargetType$ Spell | AILogic$ OnceIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control with mana value X. You may choose new targets for the copy.
+SVar:X:Count$xPaid
+DeckHas:Ability$Discard|Sacrifice|Investigate|Token & Type$Clue|Artifact
+DeckNeeds:Type$Artifact
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nWhen Resonance Technician enters the battlefield, you may discard a card. If you do, investigate twice.\n{T}, Tap X untapped artifacts you control: Copy target instant or sorcery spell you control with mana value X. You may choose new targets for the copy.

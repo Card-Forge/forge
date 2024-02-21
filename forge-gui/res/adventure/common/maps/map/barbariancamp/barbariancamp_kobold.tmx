@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="109">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="109">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -23,7 +23,7 @@
  </layer>
  <layer id="7" name="Mountain Walls" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmP1NwzAQxY8B+IskbQRRynSsECo+2jIDYg9akBAwTWEPfKpPvVp2fHEcYlV90lMTybV/OdvxaydnABOhM+U3w3mPdn1tjvOubGpjjJ/pdtsM4Ef7N9u368Nr47m52LtNOH6pfKeu58rLHGCl/ZT7n0vCRvXhTFI+1Icer1KuC4CZ9nXR/lwSximbu1A+1KXq51V5qa4fYPc593yniMAnFY5V6z5rbZrzofi6iOYYua6YZ5a9RfLNMV97MYSM33q/EGfl6b+thtOIbCYnvQs+E+TrotT5XGsw9trrI1sNU6gd6Rj4ns8P71+M+7H5xlKjvLbw4VnpOx8l2rIsFSKqHc9QecQaYl5ZqBxVFWGMlLf4u2QTeY67MC5gl28ePX3GnGMUMdoyKRflHMw2ty2cQ+yT2pNJUV96Pku2D1ZGmwbGP0PodwGvJXk9QO1CxDNjyvmgtLCd8oFMrvMjFT5XPj3xyeTKzzHPjr5KvYYnvn5y8aWwBl3vv1Rq6PuPaCy+ezjMKi7/9xw3Qi6TEb8j5Ww6trVluxATp4uVP7ur7jF5pKyusSRtQv0H4fuRKg==
+   eJztmF1uwjAQhLcH6FOTQNRGgdP1CinqD9AzVL0H0EoV9DS096hXeMVi2bFjO40fMtIIIjnZL2s7GZhcAUwcnQl/KM4DxoVarfMprGqn1M/kuGMG8CP9m53HhfDqeO5vzm4T1i+FN8ILcbzKAdbSr7n9vlzYqD+cyZUP9SXrVcJ1ATCTnhft9+XCOGVz58uHupU9XInvz3D6XFjOKSLwuQpr1fKatfSjhTGUr4tojpHrjnmm2Vsk2xzztRdDyPgt9wtxVpbrt/VwGpFN5aRnwT5Bvi5Knc+0BmOvvRDpephC70hD82089ojK93Z9efyuHPepofvXpkZ4q+GjvBGqI8tSPqLe8QyVR+wh5pWlyFFV4cdIeYs/S3aR57gL4xJO+ebFcs2Yc4wiRl0m5aKcg9nmoYWzj31SWzIp6iDns2T7YK2MaWD4dwj9LqglI/aSvO2hdz7imTHlfFBq2MZ84CbT+yMVPlM+HfncZMrPMd8doUq9hyNfmEx8KaxB0/MvlR7a/iMaiu8JLrOKyf89x40jl8qI57hyNh3H6rKdj3lO1NXn927qe0weV1ZTLZcxvv4D3E2SSw==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="40">

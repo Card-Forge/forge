@@ -1,0 +1,7 @@
+Name:Synapse Necromage
+ManaCost:2 B
+Types:Creature Fungus Wizard
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 1/1 black Fungus creature tokens with "This creature can't block."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_fungus_noblock
+Oracle:When Synapse Necromage dies, create two 1/1 black Fungus creature tokens with "This creature can't block."

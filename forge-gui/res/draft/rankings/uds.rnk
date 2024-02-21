@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Temporal Adept|R|UDS
+#2|Opposition|R|UDS
+#3|Powder Keg|R|UDS
+#4|Masticore|R|UDS
+#5|Bloodshot Cyclops|R|UDS
+#6|Attrition|R|UDS
+#7|False Prophet|R|UDS
+#8|Apprentice Necromancer|R|UDS
+#9|Treachery|R|UDS
+#10|Thorn Elemental|R|UDS
+#11|Blizzard Elemental|R|UDS
+#12|Master Healer|R|UDS
+#13|Emperor Crocodile|R|UDS
+#14|Rofellos, Llanowar Emissary|R|UDS
+#15|Thieving Magpie|U|UDS
+#16|Eradicate|U|UDS
+#17|Thran Golem|R|UDS
+#18|Goblin Marshal|R|UDS
+#19|Voice of Duty|U|UDS
+#20|Rayne, Academy Chancellor|R|UDS
+#21|Nightshade Seer|U|UDS
+#22|Ancient Silverback|R|UDS
+#23|Plow Under|R|UDS
+#24|Body Snatcher|R|UDS
+#25|Yavimaya Hollow|R|UDS
+#26|Academy Rector|R|UDS
+#27|Plague Dogs|U|UDS
+#28|Yawgmoth's Bargain|R|UDS
+#29|Yavimaya Elder|C|UDS
+#30|Phyrexian Negator|R|UDS
+#31|Fodder Cannon|U|UDS
+#32|Opalescence|R|UDS
+#33|Keldon Champion|U|UDS
+#34|Pattern of Rebirth|R|UDS
+#35|Serra Advocate|U|UDS
+#36|Elvish Piper|R|UDS
+#37|Gamekeeper|U|UDS
+#38|Hunting Moa|U|UDS
+#39|Mantis Engine|U|UDS
+#40|Covetous Dragon|R|UDS
+#41|Cinder Seer|U|UDS
+#42|Plated Spider|C|UDS
+#43|Aura Thief|R|UDS
+#44|Metalworker|R|UDS
+#45|Voice of Reason|U|UDS
+#46|Thran Dynamo|U|UDS
+#47|Goblin Berserker|U|UDS
+#48|Metathran Elite|U|UDS
+#49|Kingfisher|C|UDS
+#50|Heart Warden|C|UDS
+#51|Iridescent Drake|U|UDS
+#52|Disease Carriers|C|UDS
+#53|Ravenous Rats|C|UDS
+#54|Extruder|U|UDS
+#55|Reckless Abandon|C|UDS
+#56|Brass Secretary|U|UDS
+#57|Scent of Nightshade|C|UDS
+#58|Soul Feast|U|UDS
+#59|Slinking Skirge|C|UDS
+#60|Marker Beetles|C|UDS
+#61|Archery Training|U|UDS
+#62|Phyrexian Monitor|C|UDS
+#63|Flicker|R|UDS
+#64|Tethered Griffin|R|UDS
+#65|Wake of Destruction|R|UDS
+#66|Skittering Horror|C|UDS
+#67|Storage Matrix|R|UDS
+#68|Sigil of Sleep|C|UDS
+#69|Yavimaya Enchantress|U|UDS
+#70|Capashen Knight|C|UDS
+#71|Reliquary Monk|C|UDS
+#72|Momentum|U|UDS
+#73|Goliath Beetle|C|UDS
+#74|Field Surgeon|C|UDS
+#75|Tormented Angel|C|UDS
+#76|Braidwood Sextant|U|UDS
+#77|Hulking Ogre|C|UDS
+#78|Jasmine Seer|U|UDS
+#79|Wild Colos|C|UDS
+#80|Bubbling Beebles|C|UDS
+#81|Scent of Cinder|C|UDS
+#82|Keldon Vandals|C|UDS
+#83|Flame Jet|C|UDS
+#84|Caltrops|U|UDS
+#85|Scrying Glass|R|UDS
+#86|Metathran Soldier|C|UDS
+#87|Ivy Seer|U|UDS
+#88|Replenish|R|UDS
+#89|Festering Wound|U|UDS
+#90|Taunting Elf|C|UDS
+#91|Chime of Night|C|UDS
+#92|Twisted Experiment|C|UDS
+#93|Capashen Templar|C|UDS
+#94|Brine Seer|U|UDS
+#95|Repercussion|R|UDS
+#96|Junk Diver|R|UDS
+#97|Wall of Glare|C|UDS
+#98|Disappear|U|UDS
+#99|Impatience|R|UDS
+#100|Telepathic Spies|C|UDS
+#101|Mental Discipline|C|UDS
+#102|Quash|U|UDS
+#103|Goblin Masons|C|UDS
+#104|Goblin Gardener|C|UDS
+#105|Private Research|U|UDS
+#106|Compost|U|UDS
+#107|Squirming Mass|C|UDS
+#108|Splinter|U|UDS
+#109|Scent of Ivy|C|UDS
+#110|Scour|U|UDS
+#111|Mask of Law and Grace|C|UDS
+#112|Colos Yearling|C|UDS
+#113|Braidwood Cup|U|UDS
+#114|Magnify|C|UDS
+#115|Trumpet Blast|C|UDS
+#116|Scent of Brine|C|UDS
+#117|Elvish Lookout|C|UDS
+#118|Encroach|U|UDS
+#119|Lurking Jackals|U|UDS
+#120|Fend Off|C|UDS
+#121|Dying Wail|C|UDS
+#122|Landslide|U|UDS
+#123|Rescue|C|UDS
+#124|Illuminated Wings|C|UDS
+#125|Capashen Standard|C|UDS
+#126|Aether Sting|U|UDS
+#127|Multani's Decree|C|UDS
+#128|Urza's Incubator|R|UDS
+#129|Rapid Decay|R|UDS
+#130|Solidarity|C|UDS
+#131|Thran Foundry|U|UDS
+#132|Sanctimony|U|UDS
+#133|Rofellos's Gift|C|UDS
+#134|Incendiary|U|UDS
+#135|Bubbling Muck|C|UDS
+#136|Fatigue|C|UDS
+#137|Donate|R|UDS
+#138|Fledgling Osprey|C|UDS
+#139|Goblin Festival|R|UDS
+#140|Scent of Jasmine|C|UDS
+#141|Carnival of Souls|R|UDS
+#142|Mark of Fury|C|UDS
+#143|Sowing Salt|U|UDS

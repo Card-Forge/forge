@@ -1,12 +1,12 @@
 Name:Primitive Justice
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X 1 R | XColor$ RG | AnnounceTitle$ how many times to pay the additional cost | Announce$ AdditionalCostPayTimes | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ TargetNum | TargetMax$ TargetNum | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact. For each additional {1}{R} you paid, destroy another target artifact. For each additional {1}{G} you paid, destroy another target artifact, and you gain 1 life.
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | EffectZone$ All | Description$ As an additional cost to cast this spell, you may pay {1}{R} and/or {1}{G} any number of times.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ GManaPaid
-SVar:AdditionalCostPayTimes:Number$0
-SVar:TargetNum:SVar$AdditionalCostPayTimes/Plus.1
-SVar:IncreaseCost:SVar$AdditionalCostPayTimes
-SVar:X:SVar$AdditionalCostPayTimes
-SVar:GManaPaid:Count$xColorPaid G
+A:SP$ Destroy | Cost$ 1 R | AnnounceTitle$ how many times to pay the additional cost | Announce$ AdditionalCostPayTimesR,AdditionalCostPayTimesG | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ TargetNum | TargetMax$ TargetNum | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact. For each additional {1}{R} you paid, destroy another target artifact. For each additional {1}{G} you paid, destroy another target artifact, and you gain 1 life.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ 1 R | Amount$ AdditionalCostPayTimesR | EffectZone$ All | Description$ As an additional cost to cast this spell, you may pay {1}{R} and/or {1}{G} any number of times.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ 1 G | Amount$ AdditionalCostPayTimesG | EffectZone$ All
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AdditionalCostPayTimesG
+SVar:AdditionalCostPayTimesR:Number$0
+SVar:AdditionalCostPayTimesG:Number$0
+SVar:TargetNum:SVar$AdditionalCostPayTimesR/Plus.TargetNum2
+SVar:TargetNum2:SVar$AdditionalCostPayTimesG/Plus.1
 Oracle:As an additional cost to cast this spell, you may pay {1}{R} and/or {1}{G} any number of times.\nDestroy target artifact. For each additional {1}{R} you paid, destroy another target artifact. For each additional {1}{G} you paid, destroy another target artifact, and you gain 1 life.

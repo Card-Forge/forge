@@ -1,0 +1,9 @@
+Name:Chupacabra Echo
+ManaCost:2 B B
+Types:Creature Beast Horror Spirit
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ Fathomless descent — When CARDNAME enters the battlefield, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:Fathomless descent — When Chupacabra Echo enters the battlefield, target creature an opponent controls gets -X/-X until end of turn, where X is the number of permanent cards in your graveyard.

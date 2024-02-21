@@ -12,7 +12,6 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.ability.ChangeZoneAi;
-import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
@@ -324,6 +323,13 @@ public class SpellAbilityPicker {
     }
 
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
+        if (!sa.isLegalAfterStack()) {
+            return AiPlayDecision.CantPlaySa;
+        }
+        if (!sa.checkRestrictions(sa.getHostCard(), player)) {
+            return AiPlayDecision.CantPlaySa;
+        }
+
         if (sa instanceof LandAbility) {
             return AiPlayDecision.WillPlay;
         }
@@ -428,9 +434,7 @@ public class SpellAbilityPicker {
                 return card;
             }
         }
-        if (sa.getApi() == ApiType.Explore) {
-            return ExploreAi.shouldPutInGraveyard(fetchList, decider);
-        } else if (sa.getApi() == ApiType.Learn) {
+        if (sa.getApi() == ApiType.Learn) {
             return LearnAi.chooseCardToLearn(fetchList, decider, sa);
         } else {
             return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
@@ -440,7 +444,7 @@ public class SpellAbilityPicker {
     public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, final boolean effect, int amount, final CardCollectionView exclude) {
         if (amount == 1) {
             Card source = ability.getHostCard();
-            CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
+            CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
             cardList = CardLists.filter(cardList, CardPredicates.canBeSacrificedBy(ability, effect));
             if (cardList.size() >= 2) {
                 if (interceptor != null) {

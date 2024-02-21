@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Batterskull|M|NPH
+#2|Karn Liberated|M|NPH
+#3|Elesh Norn, Grand Cenobite|M|NPH
+#4|Sheoldred, Whispering One|M|NPH
+#5|Urabrask the Hidden|M|NPH
+#6|Sword of War and Peace|M|NPH
+#7|Phyrexian Obliterator|M|NPH
+#8|Moltensteel Dragon|R|NPH
+#9|Etched Monstrosity|M|NPH
+#10|Vorinclex, Voice of Hunger|M|NPH
+#11|Life's Finale|R|NPH
+#12|Phyrexian Swarmlord|R|NPH
+#13|Blade Splicer|R|NPH
+#14|Jor Kadeen, the Prevailer|R|NPH
+#15|Chancellor of the Dross|R|NPH
+#16|Phyrexian Metamorph|R|NPH
+#17|Dismember|U|NPH
+#18|Lashwrithe|R|NPH
+#19|Phyrexian Ingester|R|NPH
+#20|Enslave|U|NPH
+#21|Chancellor of the Annex|R|NPH
+#22|Jin Gitaxias, Core Augur|M|NPH
+#23|Chancellor of the Spires|R|NPH
+#24|Puresteel Paladin|R|NPH
+#25|Spellskite|R|NPH
+#26|Viral Drake|U|NPH
+#27|Volt Charge|C|NPH
+#28|Chancellor of the Forge|R|NPH
+#29|Act of Aggression|U|NPH
+#30|Tormentor Exarch|U|NPH
+#31|Fallen Ferromancer|U|NPH
+#32|Tezzeret's Gambit|U|NPH
+#33|Wing Splicer|U|NPH
+#34|Master Splicer|U|NPH
+#35|Pith Driller|C|NPH
+#36|Grim Affliction|C|NPH
+#37|Porcelain Legionnaire|C|NPH
+#38|Reaper of Sheoldred|U|NPH
+#39|Entomber Exarch|U|NPH
+#40|Shattered Angel|U|NPH
+#41|Shrine of Burning Rage|U|NPH
+#42|Vital Splicer|U|NPH
+#43|Birthing Pod|R|NPH
+#44|Triumph of the Hordes|U|NPH
+#45|Chancellor of the Tangle|R|NPH
+#46|Norn's Annex|R|NPH
+#47|Beast Within|U|NPH
+#48|Invader Parasite|R|NPH
+#49|Whipflare|U|NPH
+#50|Whispering Specter|U|NPH
+#51|Shrine of Loyal Legions|U|NPH
+#52|Glistening Oil|R|NPH
+#53|Deceiver Exarch|U|NPH
+#54|Spinebiter|U|NPH
+#55|Melira, Sylvok Outcast|R|NPH
+#56|Spined Thopter|C|NPH
+#57|Blinding Souleater|C|NPH
+#58|Dispatch|U|NPH
+#59|Artillerize|C|NPH
+#60|Brutalizer Exarch|U|NPH
+#61|Caress of Phyrexia|U|NPH
+#62|Mindculling|U|NPH
+#63|Fresh Meat|R|NPH
+#64|Praetor's Grasp|R|NPH
+#65|Sickleslicer|U|NPH
+#66|Thundering Tanadon|C|NPH
+#67|Alloy Myr|U|NPH
+#68|Spire Monitor|C|NPH
+#69|Glissa's Scorn|C|NPH
+#70|Hex Parasite|R|NPH
+#71|Geth's Verdict|C|NPH
+#72|Blind Zealot|C|NPH
+#73|Vault Skirge|C|NPH
+#74|Blighted Agent|C|NPH
+#75|Gut Shot|U|NPH
+#76|Mutagenic Growth|C|NPH
+#77|Suture Priest|C|NPH
+#78|Inquisitor Exarch|U|NPH
+#79|Gremlin Mine|C|NPH
+#80|Cathedral Membrane|U|NPH
+#81|Parasitic Implant|C|NPH
+#82|Impaler Shrike|C|NPH
+#83|Mycosynth Wellspring|C|NPH
+#84|Exclusion Ritual|U|NPH
+#85|Caged Sun|R|NPH
+#86|Pristine Talisman|C|NPH
+#87|Leeching Bite|C|NPH
+#88|Forced Worship|C|NPH
+#89|Slash Panther|C|NPH
+#90|Razor Swine|C|NPH
+#91|Necropouncer|U|NPH
+#92|Kiln Walker|U|NPH
+#93|Remember the Fallen|C|NPH
+#94|Glistener Elf|C|NPH
+#95|Sensor Splicer|C|NPH
+#96|Apostle's Blessing|C|NPH
+#97|Despise|U|NPH
+#98|Trespassing Souleater|C|NPH
+#99|Mortis Dogs|C|NPH
+#100|Death Hood Cobra|C|NPH
+#101|Shriek Raptor|C|NPH
+#102|Vapor Snag|C|NPH
+#103|Marrow Shards|U|NPH
+#104|Vulshok Refugee|U|NPH
+#105|Lost Leonin|C|NPH
+#106|Conversion Chamber|U|NPH
+#107|Immolating Souleater|C|NPH
+#108|Hovermyr|C|NPH
+#109|Chained Throatseeker|C|NPH
+#110|Pestilent Souleater|C|NPH
+#111|Maul Splicer|C|NPH
+#112|Priest of Urabrask|U|NPH
+#113|Gitaxian Probe|C|NPH
+#114|Viridian Betrayers|C|NPH
+#115|Mycosynth Fiend|U|NPH
+#116|Slag Fiend|R|NPH
+#117|Psychic Barrier|C|NPH
+#118|Ogre Menial|C|NPH
+#119|Noxious Revival|U|NPH
+#120|Corrosive Gale|U|NPH
+#121|Victorious Destruction|C|NPH
+#122|Shrine of Piercing Vision|U|NPH
+#123|Numbing Dose|C|NPH
+#124|Toxic Nim|C|NPH
+#125|Phyrexian Hulk|C|NPH
+#126|Loxodon Convert|C|NPH
+#127|Rage Extractor|U|NPH
+#128|Insatiable Souleater|C|NPH
+#129|Rotted Hystrix|C|NPH
+#130|Mental Misstep|U|NPH
+#131|Flameborn Viron|C|NPH
+#132|Ichor Explosion|U|NPH
+#133|Furnace Scamp|C|NPH
+#134|Phyrexia's Core|U|NPH
+#135|Dementia Bat|C|NPH
+#136|Corrupted Resolve|U|NPH
+#137|Ruthless Invasion|C|NPH
+#138|Greenhilt Trainee|U|NPH
+#139|Postmortem Lunge|U|NPH
+#140|Auriok Survivors|U|NPH
+#141|War Report|C|NPH
+#142|Scrapyard Salvo|C|NPH
+#143|Shrine of Limitless Power|U|NPH
+#144|Due Respect|U|NPH
+#145|Defensive Stance|C|NPH
+#146|Viridian Harvest|C|NPH
+#147|Evil Presence|C|NPH
+#148|Myr Superion|R|NPH
+#149|Arm with Aether|U|NPH
+#150|Shrine of Boundless Growth|U|NPH
+#151|Argent Mutation|U|NPH
+#152|Surge Node|U|NPH
+#153|Surgical Extraction|R|NPH
+#154|Mindcrank|U|NPH
+#155|Geosurge|U|NPH
+#156|Isolation Cell|U|NPH
+#157|Phyrexian Unlife|R|NPH
+#158|Darksteel Relic|U|NPH
+#159|Bludgeon Brawl|R|NPH
+#160|Unwinding Clock|R|NPH
+#161|Xenograft|R|NPH
+#162|Torpor Orb|R|NPH
+#163|Soul Conduit|R|NPH
+#164|Psychic Surgery|R|NPH
+#165|Omen Machine|R|NPH

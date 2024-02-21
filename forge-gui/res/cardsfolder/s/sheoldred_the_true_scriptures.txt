@@ -19,7 +19,7 @@ Name:The True Scriptures
 ManaCost:no cost
 Colors:black
 Types:Enchantment Saga
-K:Saga:3:DBDestroy,DBDiscard,DBRiseAll
+K:Chapter:3:DBDestroy,DBDiscard,DBRiseAll
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ For each opponent, select up to one target creature or planeswalker | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, destroy up to one target creature or planeswalker that player controls.
 SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 3 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Each opponent discards three cards, then mills three cards.
 SVar:DBMill:DB$ Mill | Defined$ Opponent | NumCards$ 3 | StackDescription$ None

@@ -1,0 +1,357 @@
+//Rank|Name|Rarity|Set
+#1|Sunfall|R|MOM
+#2|Elesh Norn, Grand Cenobite|M|MUL
+#3|Sheoldred, Whispering One|M|MUL
+#4|Invasion of New Phyrexia|M|MOM
+#5|Boon-Bringer Valkyrie|R|MOM
+#6|Glissa, Herald of Predation|R|MOM
+#7|Yorion, Sky Nomad|R|MUL
+#8|Elesh Norn|M|MOM
+#9|Vorinclex|M|MOM
+#10|Etali, Primal Conqueror|R|MOM
+#11|Yarok, the Desecrated|M|MUL
+#12|Archangel Elspeth|M|MOM
+#13|Quintorius, Loremaster|R|MOM
+#14|Zurgo and Ojutai|M|MOM
+#15|Hoarding Broodlord|R|MOM
+#16|Ancient Imperiosaur|R|MOM
+#17|Kenrith, the Returned King|M|MUL
+#18|Aurelia, the Warleader|M|MUL
+#19|Lutri, the Spellchaser|R|MUL
+#20|Urabrask|M|MOM
+#21|Sheoldred|M|MOM
+#22|Archpriest of Shadows|R|MOM
+#23|Breach the Multiverse|R|MOM
+#24|Wrenn and Realmbreaker|M|MOM
+#25|Thalia and The Gitrog Monster|M|MOM
+#26|Chrome Host Seedshark|R|MOM
+#27|Kroxa and Kunoros|M|MOM
+#28|Skithiryx, the Blight Dragon|M|MUL
+#29|Brudiclad, Telchor Engineer|R|MUL
+#30|Grimgrin, Corpse-Born|M|MUL
+#31|Borborygmos and Fblthp|M|MOM
+#32|Drana and Linvala|R|MOM
+#33|Ghalta and Mavren|R|MOM
+#34|Streetwise Negotiator|U|MOM
+#35|See Double|R|MOM
+#36|Ozolith, the Shattered Spire|R|MOM
+#37|Zephyr Singer|R|MOM
+#38|Rampaging Raptor|R|MOM
+#39|Glistening Dawn|R|MOM
+#40|Gyruda, Doom of Depths|R|MUL
+#41|Obosh, the Preypiercer|R|MUL
+#42|Invasion of Fiora|R|MOM
+#43|Invasion of Karsus|R|MOM
+#44|Invasion of Tolvada|R|MOM
+#45|Invasion of Innistrad|M|MOM
+#46|Transcendent Message|R|MOM
+#47|Chandra, Hope's Beacon|M|MOM
+#48|Botanical Brawler|U|MOM
+#49|Guardian of Ghirapur|R|MOM
+#50|Baral and Kari Zev|R|MOM
+#51|Voldaren Thrillseeker|R|MOM
+#52|Grafted Butcher|R|MOM
+#53|Kogla and Yidaro|R|MOM
+#54|Marshal of Zhalfir|U|MOM
+#55|Progenitor Exarch|R|MOM
+#56|Ragavan, Nimble Pilferer|M|MUL
+#57|Stoke the Flames|U|MOM
+#58|Halo Forager|U|MOM
+#59|Sword of Once and Future|M|MOM
+#60|Hidetsugu and Kairi|R|MOM
+#61|Errant and Giada|R|MOM
+#62|Inga and Esika|R|MOM
+#63|Rankle and Torbran|R|MOM
+#64|Ayara, First of Locthwain|R|MUL
+#65|Atraxa, Praetors' Voice|M|MUL
+#66|Judith, the Scourge Diva|R|MUL
+#67|Keruga, the Macrosage|R|MUL
+#68|Kroxa, Titan of Death's Hunger|M|MUL
+#69|Invasion of Moag|U|MOM
+#70|Polukranos Reborn|R|MOM
+#71|Norn's Inquisitor|U|MOM
+#72|Faerie Mastermind|R|MOM
+#73|Furnace Gremlin|U|MOM
+#74|Tandem Takedown|U|MOM
+#75|Dusk Legion Duelist|R|MOM
+#76|Collective Nightmare|U|MOM
+#77|Djeru and Hazoret|R|MOM
+#78|Bloated Processor|R|MOM
+#79|Doomskar Warrior|R|MOM
+#80|Elvish Vatkeeper|U|MOM
+#81|Urabrask the Hidden|M|MUL
+#82|Firja, Judge of Valor|U|MUL
+#83|Taigam, Ojutai Master|R|MUL
+#84|Invasion of Ravnica|M|MOM
+#85|Harried Artisan|U|MOM
+#86|Ayara, Widow of the Realm|R|MOM
+#87|Khenra Spellspear|U|MOM
+#88|Merciless Repurposing|U|MOM
+#89|Zimone and Dina|R|MOM
+#90|Rampaging Geoderm|U|MOM
+#91|Stormclaw Rager|U|MOM
+#92|Anafenza, Kin-Tree Spirit|R|MUL
+#93|Captain Lannery Storm|R|MUL
+#94|Goreclaw, Terror of Qal Sisma|R|MUL
+#95|Atris, Oracle of Half-Truths|R|MUL
+#96|Umori, the Collector|R|MUL
+#97|Zirda, the Dawnwaker|R|MUL
+#98|Invasion of Segovia|R|MOM
+#99|Kami of Whispered Hopes|U|MOM
+#100|Artistic Refusal|U|MOM
+#101|Pile On|R|MOM
+#102|Oracle of Tragedy|U|MOM
+#103|Jegantha, the Wellspring|R|MUL
+#104|Lurrus of the Dream-Den|R|MUL
+#105|Invasion of Kaladesh|U|MOM
+#106|Sun-Blessed Guardian|U|MOM
+#107|Skyclave Aerialist|U|MOM
+#108|Jin-Gitaxias|M|MOM
+#109|Phyrexian Gargantua|U|MOM
+#110|Sandstalker Moloch|U|MOM
+#111|Tiller of Flesh|U|MOM
+#112|Nahiri's Warcrafting|R|MOM
+#113|Phyrexian Awakening|U|MOM
+#114|Volcanic Spite|C|MOM
+#115|Raff, Weatherlight Stalwart|U|MUL
+#116|Invasion of Amonkhet|U|MOM
+#117|Invasion of Kaldheim|R|MOM
+#118|Invasion of Belenon|U|MOM
+#119|Invasion of Gobakhan|R|MOM
+#120|Invasion of New Capenna|U|MOM
+#121|Invasion of Ikoria|R|MOM
+#122|Rona, Herald of Invasion|R|MOM
+#123|Blightreaper Thallid|U|MOM
+#124|Gnottvold Hermit|U|MOM
+#125|Monastery Mentor|M|MOM
+#126|Seal from Existence|U|MOM
+#127|Yargle and Multani|R|MOM
+#128|Xerex Strobe-Knight|U|MOM
+#129|Deeproot Wayfinder|R|MOM
+#130|Phyrexian Censor|U|MOM
+#131|Meeting of Minds|C|MOM
+#132|Realmbreaker's Grasp|C|MOM
+#133|Preening Champion|C|MOM
+#134|Corruption of Towashi|U|MOM
+#135|Horobi, Death's Wail|R|MUL
+#136|Yedora, Grave Gardener|R|MUL
+#137|Ezuri, Claw of Progress|M|MUL
+#138|Invasion of Regatha|U|MOM
+#139|Invasion of Xerex|U|MOM
+#140|Invasion of Zendikar|U|MOM
+#141|Invasion of Kamigawa|U|MOM
+#142|Invasion of Azgol|U|MOM
+#143|Invasion of Pyrulea|U|MOM
+#144|Sculpted Perfection|U|MOM
+#145|Deadly Derision|C|MOM
+#146|Astral Wingspan|U|MOM
+#147|Mutagen Connoisseur|U|MOM
+#148|Compleated Huntmaster|U|MOM
+#149|Halo-Charged Skaab|C|MOM
+#150|Tangled Skyline|U|MOM
+#151|Cosmic Hunger|C|MOM
+#152|Ephara's Dispersal|C|MOM
+#153|Eyes of Gitaxias|C|MOM
+#154|Final Flourish|C|MOM
+#155|Vanquish the Weak|C|MOM
+#156|Scorn-Blade Berserker|U|MOM
+#157|Squee, the Immortal|R|MUL
+#158|Fynn, the Fangbearer|U|MUL
+#159|Shanna, Sisay's Legacy|U|MUL
+#160|Invasion of Tarkir|M|MOM
+#161|Herbology Instructor|U|MOM
+#162|Traumatic Revelation|C|MOM
+#163|Zhalfirin Lancer|U|MOM
+#164|Beamtown Beatstick|C|MOM
+#165|Tribute to the World Tree|R|MOM
+#166|Mirror-Shield Hoplite|U|MOM
+#167|Ral's Reinforcements|C|MOM
+#168|Knight of the New Coalition|C|MOM
+#169|Converter Beast|C|MOM
+#170|Ichor Drinker|C|MOM
+#171|Swordsworn Cavalier|C|MOM
+#172|Temporal Cleansing|C|MOM
+#173|Daxos, Blessed by the Sun|U|MUL
+#174|Arixmethes, Slumbering Isle|R|MUL
+#175|Imoti, Celebrant of Bounty|U|MUL
+#176|Teysa Karlov|R|MUL
+#177|Invasion of Vryn|U|MOM
+#178|Invasion of Lorwyn|U|MOM
+#179|Invasion of Mercadia|U|MOM
+#180|Invasion of Ergamon|U|MOM
+#181|Overgrown Pest|C|MOM
+#182|Skittering Surveyor|C|MOM
+#183|Portent Tracker|C|MOM
+#184|Alabaster Host Intercessor|C|MOM
+#185|Sigiled Sentinel|C|MOM
+#186|Tetsuko Umezawa, Fugitive|U|MUL
+#187|Vorinclex, Voice of Hunger|M|MUL
+#188|Lathiel, the Bounteous Dawn|R|MUL
+#189|Order of the Mirror|C|MOM
+#190|Aetherblade Agent|C|MOM
+#191|Elspeth's Smite|U|MOM
+#192|Joyful Stormsculptor|U|MOM
+#193|Into the Fire|R|MOM
+#194|Ravenous Sailback|U|MOM
+#195|Ramosian Greatsword|U|MOM
+#196|Bloodfeather Phoenix|R|MOM
+#197|Knight-Errant of Eos|R|MOM
+#198|Omen Hawker|U|MOM
+#199|Surge of Salvation|U|MOM
+#200|Lithomantic Barrage|U|MOM
+#201|Seed of Hope|C|MOM
+#202|Marauding Dreadship|C|MOM
+#203|Corrupted Conviction|C|MOM
+#204|Protocol Knight|C|MOM
+#205|Shatter the Source|C|MOM
+#206|Flywheel Racer|C|MOM
+#207|Wildwood Escort|C|MOM
+#208|Wary Thespian|C|MOM
+#209|Searing Barb|C|MOM
+#210|Saiba Cryptomancer|C|MOM
+#211|Tidal Terror|C|MOM
+#212|Flitting Guerrilla|C|MOM
+#213|Nezumi Informant|C|MOM
+#214|Tymaret, Chosen from Death|U|MUL
+#215|Valduk, Keeper of the Flame|U|MUL
+#216|Renata, Called to the Hunt|U|MUL
+#217|Aegar, the Freezing Flame|U|MUL
+#218|Firesong and Sunspeaker|R|MUL
+#219|Rona, Sheoldred's Faithful|U|MUL
+#220|Invasion of Ulgrotha|U|MOM
+#221|Invasion of Kylem|U|MOM
+#222|Invasion of Eldraine|U|MOM
+#223|Invasion of Dominaria|U|MOM
+#224|Invasion of Ixalan|R|MOM
+#225|Invasion of Muraganda|U|MOM
+#226|Invasion of Shandalar|M|MOM
+#227|Captive Weird|U|MOM
+#228|Bloodfell Caves|C|MOM
+#229|Blossoming Sands|C|MOM
+#230|Dismal Backwater|C|MOM
+#231|Jungle Hollow|C|MOM
+#232|Rugged Highlands|C|MOM
+#233|Scoured Barrens|C|MOM
+#234|Swiftwater Cliffs|C|MOM
+#235|Thornwood Falls|C|MOM
+#236|Tranquil Cove|C|MOM
+#237|Wind-Scarred Crag|C|MOM
+#238|Timberland Ancient|C|MOM
+#239|Failed Conversion|C|MOM
+#240|Shivan Branch-Burner|U|MOM
+#241|Kwende, Pride of Femeref|U|MUL
+#242|Thalia, Guardian of Thraben|R|MUL
+#243|Emry, Lurker of the Loch|R|MUL
+#244|Inga Rune-Eyes|U|MUL
+#245|Juri, Master of the Revue|U|MUL
+#246|Pyretic Prankster|C|MOM
+#247|Alabaster Host Sanctifier|C|MOM
+#248|Storm the Seedcore|U|MOM
+#249|Fearless Skald|U|MOM
+#250|City on Fire|R|MOM
+#251|Render Inert|U|MOM
+#252|Gift of Compleation|U|MOM
+#253|Furnace Reins|U|MOM
+#254|Gloomfang Mauler|C|MOM
+#255|Attentive Skywarden|C|MOM
+#256|Serpent-Blade Assailant|C|MOM
+#257|Iridescent Blademaster|C|MOM
+#258|Blighted Burgeoning|C|MOM
+#259|Redcap Heelslasher|C|MOM
+#260|Sunder the Gateway|C|MOM
+#261|Zhalfirin Shapecraft|C|MOM
+#262|Etched Familiar|C|MOM
+#263|Ichor Shade|C|MOM
+#264|Unseal the Necropolis|C|MOM
+#265|Wicked Slumber|U|MOM
+#266|Sram, Senior Edificer|R|MUL
+#267|Zada, Hedron Grinder|U|MUL
+#268|Dina, Soul Steeper|U|MUL
+#269|Kaheera, the Orphanguard|R|MUL
+#270|Reyav, Master Smith|U|MUL
+#271|Heliod, the Radiant Dawn|R|MOM
+#272|Seraph of New Capenna|U|MOM
+#273|Nezumi Freewheeler|U|MOM
+#274|Tarkir Duneshaper|C|MOM
+#275|Negate|C|MOM
+#276|Omnath, Locus of All|R|MOM
+#277|Fertilid's Favor|C|MOM
+#278|Angelic Intervention|C|MOM
+#279|Cut Short|C|MOM
+#280|Golden-Scale Aeronaut|C|MOM
+#281|Infected Defector|C|MOM
+#282|Stasis Field|C|MOM
+#283|Consuming Aetherborn|C|MOM
+#284|Dreg Recycler|C|MOM
+#285|Etched Host Doombringer|C|MOM
+#286|Invasion of Theros|R|MOM
+#287|Bonded Herdbeast|C|MOM
+#288|Aerial Boost|C|MOM
+#289|Bola Slinger|C|MOM
+#290|Scrollshift|C|MOM
+#291|Assimilate Essence|C|MOM
+#292|Bladed Battle-Fan|C|MOM
+#293|Burning Sun's Fury|C|MOM
+#294|Moment of Truth|C|MOM
+#295|Hangar Scrounger|C|MOM
+#296|Kithkin Billyrider|C|MOM
+#297|Thunderhead Squadron|C|MOM
+#298|War Historian|C|MOM
+#299|War-Trained Slasher|C|MOM
+#300|Oculus Whelp|C|MOM
+#301|Chomping Kavu|C|MOM
+#302|Thrashing Frontliner|C|MOM
+#303|Onakke Javelineer|C|MOM
+#304|Furnace Host Charger|C|MOM
+#305|Realmbreaker, the Invasion Tree|R|MOM
+#306|Tenured Oilcaster|C|MOM
+#307|Enduring Bondwarden|C|MOM
+#308|Placid Rottentail|C|MOM
+#309|Urn of Godfire|C|MOM
+#310|Kitesail|C|MOM
+#311|Halo Hopper|C|MOM
+#312|Arachnoid Adaptation|C|MOM
+#313|Trailblazing Historian|C|MOM
+#314|Mirran Banesplitter|C|MOM
+#315|Karsus Depthguard|C|MOM
+#316|Coming In Hot|C|MOM
+#317|Inspired Charge|C|MOM
+#318|Kor Halberd|C|MOM
+#319|Disturbing Conversion|C|MOM
+#320|Expedition Lookout|C|MOM
+#321|Furtive Analyst|C|MOM
+#322|Akki Scrapchomper|C|MOM
+#323|Baral, Chief of Compliance|R|MUL
+#324|Seizan, Perverter of Truth|R|MUL
+#325|Yargle, Glutton of Urborg|U|MUL
+#326|Niv-Mizzet Reborn|M|MUL
+#327|Radha, Coalition Warlord|U|MUL
+#328|Mirrodin Avenged|C|MOM
+#329|Copper Host Crusher|U|MOM
+#330|Glistening Deluge|U|MOM
+#331|Change the Equation|U|MOM
+#332|Crystal Carapace|C|MOM
+#333|Atraxa's Fall|C|MOM
+#334|Invasion of Alara|R|MOM
+#335|Scrappy Bruiser|U|MOM
+#336|Wrenn's Resolve|C|MOM
+#337|Jin-Gitaxias, Core Augur|M|MUL
+#338|Phyrexian Archivist|C|MOM
+#339|Vengeant Earth|C|MOM
+#340|Invasion of Arcavios|R|MOM
+#341|Complete the Circuit|R|MOM
+#342|Plains 1|C|MOM
+#343|Plains 2|C|MOM
+#344|Plains 3|C|MOM
+#345|Island 1|C|MOM
+#346|Island 2|C|MOM
+#347|Island 3|C|MOM
+#348|Swamp 1|C|MOM
+#349|Swamp 2|C|MOM
+#350|Swamp 3|C|MOM
+#351|Mountain 1|C|MOM
+#352|Mountain 2|C|MOM
+#353|Mountain 3|C|MOM
+#354|Forest 1|C|MOM
+#355|Forest 2|C|MOM
+#356|Forest 3|C|MOM

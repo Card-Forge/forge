@@ -54,8 +54,13 @@ public class StartScene extends UIScene {
     }
 
     public boolean Save() {
-        SaveLoadScene.instance().setMode(SaveLoadScene.Modes.Save);
-        Forge.switchScene(SaveLoadScene.instance());
+        if (TileMapScene.instance().currentMap().isInMap()) {
+            Dialog noSave = createGenericDialog("", "!!GAME NOT SAVED!!\nManual saving is only available on the world map","OK",null, null, null);
+            showDialog(noSave);
+        } else {
+            SaveLoadScene.instance().setMode(SaveLoadScene.Modes.Save);
+            Forge.switchScene(SaveLoadScene.instance());
+        }
         return true;
     }
 
@@ -103,7 +108,7 @@ public class StartScene extends UIScene {
     public boolean Exit() {
         if (exitDialog == null) {
             exitDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblExitForge"),
-                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"), Forge.getLocalizer().getMessage("lblOK"),
                     Forge.getLocalizer().getMessage("lblAbort"), () -> {
                         Forge.exit(true);
                         removeDialog();
@@ -126,6 +131,7 @@ public class StartScene extends UIScene {
             hasSaveButton = !scene.currentMap().isInMap() || scene.isAutoHealLocation();
         }
         saveButton.setVisible(hasSaveButton);
+        saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
 
         boolean hasResumeButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         resumeButton.setVisible(hasResumeButton);

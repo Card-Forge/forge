@@ -1,0 +1,6 @@
+Name:On the Trail
+ManaCost:1 G
+Types:Enchantment
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDropLand | TriggerDescription$ Whenever you draw your second card each turn, you may put a land card from your hand onto the battlefield tapped.
+SVar:TrigDropLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ True | Tapped$ True
+Oracle:Whenever you draw your second card each turn, you may put a land card from your hand onto the battlefield tapped.

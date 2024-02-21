@@ -305,6 +305,12 @@ public class CountersPutAi extends CountersAi {
                 AiCardMemory.rememberCard(ai, source, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
             }
             return willActivate;
+        } else if (logic.equals("ChargeToBestCMC")) {
+            return doChargeToCMCLogic(ai, sa);
+        } else if (logic.equals("ChargeToBestOppControlledCMC")) {
+            return doChargeToOppCtrlCMCLogic(ai, sa);
+        } else if (logic.equals("TheOneRing")) {
+            return SpecialCardAi.TheOneRing.consider(ai, sa);
         }
 
         if (!sa.metConditions() && sa.getSubAbility() == null) {
@@ -436,6 +442,9 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
+        final boolean hasSacCost = abCost.hasSpecificCostType(CostSacrifice.class);
+        final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
+
         if (sa.usesTargeting()) {
             if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
                 // only evaluates case where all tokens are placed on a single target
@@ -449,14 +458,14 @@ public class CountersPutAi extends CountersAi {
                         sa.addDividedAllocation(c, amount);
                         return true;
                     } else {
-                        return false;
+                        if (!hasSacCost) { // for Sacrifice costs, evaluate further to see if it's worth using the ability before the card dies
+                            return false;
+                        }
                     }
                 }
             }
 
             sa.resetTargets();
-
-            final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
@@ -469,6 +478,8 @@ public class CountersPutAi extends CountersAi {
                 public boolean apply(final Card c) {
                     // don't put the counter on the dead creature
                     if (sacSelf && c.equals(source)) {
+                        return false;
+                    } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
                         return false;
                     }
                     if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -624,7 +635,7 @@ public class CountersPutAi extends CountersAi {
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
             }
@@ -740,6 +751,7 @@ public class CountersPutAi extends CountersAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
         // boolean chance = true;
         boolean preferred = true;
         CardCollection list;
@@ -747,6 +759,7 @@ public class CountersPutAi extends CountersAi {
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         int left = amount;
+
         final String[] types;
         String type = "";
         if (sa.hasParam("CounterType")) {
@@ -757,6 +770,12 @@ public class CountersPutAi extends CountersAi {
             // all types will be added
             types = sa.getParam("CounterTypes").split(",");
             type = types[0];
+        }
+
+        if ("ChargeToBestCMC".equals(aiLogic)) {
+            return doChargeToCMCLogic(ai, sa) || mandatory;
+        } else if ("ChargeToBestOppControlledCMC".equals(aiLogic)) {
+            return doChargeToOppCtrlCMCLogic(ai, sa) || mandatory;
         }
 
         if (!sa.usesTargeting()) {
@@ -1206,4 +1225,38 @@ public class CountersPutAi extends CountersAi {
         return max;
     }
 
+    private boolean doChargeToCMCLogic(Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Creature"));
+        int numCtrs = source.getCounters(CounterEnumType.CHARGE);
+        int maxCMC = Aggregates.max(ownLib, CardPredicates.Accessors.fnGetCmc);
+        int optimalCMC = 0;
+        int curAmount = 0;
+        // Assume the AI knows its deck list and realizes what it has left in its library. Could be improved to make this less cheat-y.
+        for (int cmc = numCtrs; cmc <= maxCMC; cmc++) {
+            int numPerCMC = CardLists.filter(ownLib, CardPredicates.hasCMC(cmc)).size();
+            if (numPerCMC >= curAmount) {
+                curAmount = numPerCMC;
+                optimalCMC = cmc;
+            }
+        }
+        return numCtrs < optimalCMC;
+    }
+
+    private boolean doChargeToOppCtrlCMCLogic(Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONLAND_PERMANENTS);
+        int numCtrs = source.getCounters(CounterEnumType.CHARGE);
+        int maxCMC = Aggregates.max(oppInPlay, CardPredicates.Accessors.fnGetCmc);
+        int optimalCMC = 0;
+        int curAmount = 0;
+        for (int cmc = numCtrs; cmc <= maxCMC; cmc++) {
+            int numPerCMC = CardLists.filter(oppInPlay, CardPredicates.hasCMC(cmc)).size();
+            if (numPerCMC >= curAmount) {
+                curAmount = numPerCMC;
+                optimalCMC = cmc;
+            }
+        }
+        return numCtrs < optimalCMC;
+    }
 }

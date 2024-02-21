@@ -1,0 +1,10 @@
+Name:Faerie Fencing
+ManaCost:X B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -XPlus | NumDef$ -XPlus | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn. That creature gets an additional -3/-3 until end of turn if you controlled a Faerie as you cast this spell.
+SVar:X:Count$xPaid
+SVar:XPlus:Count$xPaid/Plus.Y
+SVar:Y:Count$Compare FaerieCheck GE1.3.0
+SVar:FaerieCheck:Count$LastStateBattlefieldWithFallback Faerie.YouCtrl
+DeckHints:Type$Faerie
+Oracle:Target creature gets -X/-X until end of turn. That creature gets an additional -3/-3 until end of turn if you controlled a Faerie as you cast this spell.

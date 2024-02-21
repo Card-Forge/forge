@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Horror
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTurnFaceDown | TriggerDescription$ Ceremorphosis — When CARDNAME enters the battlefield, turn any number of target tapped nontoken creatures face down. They're 2/2 Horror creatures.
-SVar:TrigTurnFaceDown:DB$ SetState | ValidTgts$ Creature.tapped+nonToken | TgtPrompt$ Select any number of target tapped nontoken creatures | TargetMin$ 0 | TargetMax$ X | Mode$ TurnFace | FaceDownPower$ 2 | FaceDownToughness$ 2 | FaceDownSetType$ Horror & Creature
+SVar:TrigTurnFaceDown:DB$ SetState | ValidTgts$ Creature.tapped+nonToken | TgtPrompt$ Select any number of target tapped nontoken creatures | TargetMin$ 0 | TargetMax$ X | Mode$ TurnFaceDown | FaceDownPower$ 2 | FaceDownToughness$ 2 | FaceDownSetType$ Horror & Creature
 SVar:X:Count$Valid Creature.tapped+nonToken
 AlternateMode:Adventure
 Oracle:Ceremorphosis — When Illithid Harvester enters the battlefield, turn any number of target tapped nontoken creatures face down. They're 2/2 Horror creatures.

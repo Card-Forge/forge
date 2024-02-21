@@ -1,0 +1,12 @@
+Name:Stalactite Stalker
+ManaCost:B
+Types:Creature Goblin Rogue
+PT:1/1
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you descended this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+A:AB$ Pump | Cost$ 2 B Sac<1/CARDNAME> | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target creature gets -X/-X until end of turn, where X is CARDNAME's power.
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Counters|Sacrifice
+DeckHints:Ability$Sacrifice
+Oracle:Menace\nAt the beginning of your end step, if you descended this turn, put a +1/+1 counter on Stalactite Stalker.\n{2}{B}, Sacrifice Stalactite Stalker: Target creature gets -X/-X until end of turn, where X is Stalactite Stalker's power.

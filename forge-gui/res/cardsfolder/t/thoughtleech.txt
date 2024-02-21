@@ -1,7 +1,7 @@
 Name:Thoughtleech
 ManaCost:G G
 Types:Enchantment
-T:Mode$ Taps | ValidCard$ Island.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | Optional$ True | TriggerDescription$ Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
+T:Mode$ Taps | ValidCard$ Island.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever an Island an opponent controls becomes tapped, you may gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 AI:RemoveDeck:Random
 Oracle:Whenever an Island an opponent controls becomes tapped, you may gain 1 life.

@@ -1,0 +1,10 @@
+Name:Vannifar, Evolved Enigma
+ManaCost:2 G U
+Types:Legendary Creature Elf Ooze Wizard
+PT:3/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBCloak,DBPutCounters | CharmNum$ 1
+SVar:DBCloak:DB$ Cloak | Choices$ Card.YouCtrl | SpellDescription$ Cloak a card from your hand.
+SVar:DBPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Colorless+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each colorless creature you control.
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, choose one —\n• Cloak a card from your hand. (Put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)\n• Put a +1/+1 counter on each colorless creature you control.

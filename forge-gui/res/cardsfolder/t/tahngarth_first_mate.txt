@@ -4,6 +4,8 @@ Types:Legendary Creature Minotaur Warrior
 PT:5/5
 S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Card.Self+tapped | TriggerDescription$ Whenever an opponent attacks with one or more creatures, if NICKNAME is tapped, you may have that opponent gain control of NICKNAME until end of combat. If you do, choose a player or planeswalker that opponent is attacking. NICKNAME is attacking that player or planeswalker.
-SVar:TrigGainControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredAttackingPlayer | LoseControl$ EndOfCombat | Attacking$ Player.Defending | Chooser$ You | ChoosePlayerOrPlaneswalker$ True
+SVar:TrigGainControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredAttackingPlayer | LoseControl$ EndOfCombat | RememberControlled$ True | SubAbility$ DBAttack
+SVar:DBAttack:DB$ ChangeCombatants | Defined$ Remembered | Attacking$ .Defending & Valid Planeswalker.Defending | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Tahngarth, First Mate can't be blocked by more than one creature.\nWhenever an opponent attacks with one or more creatures, if Tahngarth is tapped, you may have that opponent gain control of Tahngarth until end of combat. If you do, choose a player or planeswalker that opponent is attacking. Tahngarth is attacking that player or planeswalker.

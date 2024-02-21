@@ -1,0 +1,10 @@
+Name:Eagle of Deliverance
+ManaCost:4 W W
+Types:Creature Bird Soldier
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put an indestructible counter on another target creature you control. Draw a card if that creature's power is 2 or less.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target Creature you control | CounterType$ Indestructible | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerLE2
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Eagle of Deliverance enters the battlefield, put an indestructible counter on another target creature you control. Draw a card if that creature's power is 2 or less.

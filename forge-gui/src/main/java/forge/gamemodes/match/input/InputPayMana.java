@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilMana;
@@ -22,6 +20,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.player.actions.PayManaFromPoolAction;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
@@ -117,7 +116,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : card.getManaAbilities()) {
             result.add(sa);
-            result.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+            result.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
         }
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
         for (final SpellAbility sa : result) {
@@ -186,10 +185,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             return abilities;
         }
 
-        final String typeRes = manaCost.getSourceRestriction();
-        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
-            return abilities;
-        }
+        //        final String typeRes = manaCost.getSourceRestriction();
+        //        if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
+        //            return abilities;
+        //        }
 
         for (SpellAbility ma : getAllManaAbilities(card)) {
             ma.setActivatingPlayer(player);
@@ -202,6 +201,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
+            // Record paying mana from pool here
+            getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
             onManaAbilityPaid();
             showMessage();
         }
@@ -234,15 +235,10 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         final SpellAbility chosen;
-        final String typeRes = manaCost.getSourceRestriction();
 
         if (chosenAbility == null) {
             HashMap<SpellAbilityView, SpellAbility> abilitiesMap = new HashMap<>();
             // you can't remove unneeded abilities inside a for (am:abilities) loop :(
-
-            if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
-                return false;
-            }
 
             boolean guessAbilityWithRequiredColors = true;
             int amountOfMana = -1;
@@ -354,14 +350,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                             restrictionsMet = false;
                             break;
                         }
-
-                        if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
-                            restrictionsMet = false;
-                            break;
-                        }
                     }
 
-                    if (restrictionsMet) {
+                    if (restrictionsMet && !player.getController().isFullControl()) {
                         player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
                     }
                     if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {

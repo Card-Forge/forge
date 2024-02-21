@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="107">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8QJaHgUGaB8KWRmLTCpjwQTA2e2FytARRvAwM0bwIe2FsWoOdQLt282CyhxNAjz8Yn5Zxis2OUXtH7R0IsGMY5unhDnbxIDAx4sQAAKmkFSk=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8YDInYTwQdlLbblLspJbd5NhJqd2U2EmJ3aP2jto7nOyl1G5KwUDYSY7d1AYDYSc+N1ACALeAhNk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzV02EKgCAMBtD9V09gXazOYl3LrO6WECORGmwOJOFDGLjnQKMFiEQGRqg+nGC/2QEk+53J6dmlueedWpuSzTG1bImpYUvNN5vrjkITlxfO2+qmTm6vef/mnjmrkZkhnzsa/rDEbjGltobJtTXN2l7MHbxDME9N2yxtDL51X9W5PS+ZOt+E
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBj8YIUmBKOzaQWCBCEYm70g8QBB2tr/E2jPL01U9jt22to5EsAhCQTGJ0Zt8E8SgfGJgYA0DwPDLh4EmxKgLIHA+MSoYRcyICWcjfkgdIoI5faSEs4we6kByAnnFnHq2U8MoGb8DgV7RwF+AACy1Srn
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="192" y="280.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/enemy.tx" x="291.132" y="96.7759">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="92,95,97,93,97,95,92,102,101"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/treasure.tx" x="208" y="47.5">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;,&quot;colors&quot;: [&quot;Blue&quot;], &quot;count&quot;: 5 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Steel Sword&quot;}]"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/booster.tx" x="227.311" y="125.723">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M11&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="84" template="../../obj/enemy.tx" x="179.092" y="220.668">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="93,94"/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/enemy.tx" x="266.286" y="196.992">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="97,95,92,95"/>
+   </properties>
+  </object>
+  <object id="86" template="../../obj/enemy.tx" x="168.12" y="149.642">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,98,102,92,102,98"/>
+   </properties>
+  </object>
+  <object id="87" template="../../obj/enemy.tx" x="168.12" y="93.6301">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="101,102,92,95,92,102"/>
+   </properties>
+  </object>
+  <object id="88" template="../../obj/enemy.tx" x="209.119" y="63.0256">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="89" template="../../obj/booster.tx" x="108.019" y="174.228">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="87.8556" y="145.6">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Illusionist's Key&quot;
+  }
+]
+</property>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="99,100,101,100"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/waypoint.tx" x="266.286" y="89.0105"/>
+  <object id="93" template="../../obj/waypoint.tx" x="250.117" y="227.597"/>
+  <object id="94" template="../../obj/waypoint.tx" x="129.432" y="217.78"/>
+  <object id="95" template="../../obj/waypoint.tx" x="262.244" y="128.277"/>
+  <object id="96" template="../../obj/waypoint.tx" x="169.853" y="194.683"/>
+  <object id="97" template="../../obj/waypoint.tx" x="266.863" y="169.853"/>
+  <object id="98" template="../../obj/waypoint.tx" x="161.923" y="98.817"/>
+  <object id="99" template="../../obj/waypoint.tx" x="87.8556" y="173.895"/>
+  <object id="100" template="../../obj/waypoint.tx" x="96.0997" y="112.019" width="10.6667" height="11.6667"/>
+  <object id="101" template="../../obj/waypoint.tx" x="130.108" y="77.4516"/>
+  <object id="102" template="../../obj/waypoint.tx" x="197.57" y="89.588"/>
+  <object id="104" template="../../obj/entry_up.tx" x="320.565" y="158.304">
+   <properties>
+    <property name="teleport" value="../common/maps/map/magetower/magetower_8_illusion_basement.tmx"/>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/manashards.tx" x="158.667" y="68.6667"/>
+  <object id="106" template="../../obj/gate.tx" x="320.167" y="133" width="14.9999" height="22">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked. Judging by the scrapes and scratches on the floor, however, it seems to be opened frequently so the key can probably be found nearby.&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;(Leave)&quot; },
+    {      
+        &quot;name&quot;:&quot;Unlock the gate with the Illusionist's key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Illusionist's Key&quot;}],    
+        &quot;text&quot;:&quot;The door swings open and you can continue to explore the tower.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Illusionist's Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,0 +1,9 @@
+Name:Volatile Fault
+ManaCost:no cost
+Types:Land Cave
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Destroy | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic+OppCtrl | TgtPrompt$ Select target nonbasic land an opponent controls | SubAbility$ DBSearch | AILogic$ GhostQuarter | SpellDescription$ Destroy target nonbasic land an opponent controls. That player may search their library for a basic land card, put it onto the battlefield, then shuffle. You create a Treasure token.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ TargetedController | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBTreasure | StackDescription$ That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You create a Treasure token.
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Volatile Fault: Destroy target nonbasic land an opponent controls. That player may search their library for a basic land card, put it onto the battlefield, then shuffle. You create a Treasure token.

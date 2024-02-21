@@ -2,8 +2,8 @@ Name:Noble's Purse
 ManaCost:2
 Types:Artifact
 K:ETBReplacement:Other:EntersTapped
-SVar:EntersTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped and with three coin counters on it. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:EntersTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped and with three coin counters on it.
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | CounterType$ COIN | CounterNum$ 3
-A:AB$ Token | Cost$ T SubCounter<1/COIN> | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+A:AB$ Token | Cost$ T SubCounter<1/COIN> | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Noble's Purse enters the battlefield tapped and with three coin counters on it.\n{T}, Remove a coin counter from Noble's Purse: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

@@ -1,13 +1,7 @@
 package forge.ai;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.common.base.Function;
 import forge.ai.simulation.GameStateEvaluator;
@@ -90,7 +84,7 @@ public class ComputerUtilCard {
      * @param list
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
-        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
+        list.sort(ComputerUtilCard.EvaluateCreatureComparator);
     }
 
     // The AI doesn't really pick the best artifact, just the most expensive.
@@ -237,7 +231,26 @@ public class ComputerUtilCard {
         final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
 
         if (!nbLand.isEmpty()) {
-            // TODO - Rank non basics?
+            // TODO - Improve ranking various non-basic lands depending on context
+
+            // Urza's Mine/Tower/Power Plant
+            final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
+                }
+            }
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Tower"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Tower")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Tower")).getFirst();
+                }
+            }
+            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Power Plant"))) {
+                if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Power Plant")).isEmpty()) {
+                    return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Power Plant")).getFirst();
+                }
+            }
+
             return Aggregates.random(nbLand);
         }
 
@@ -539,11 +552,12 @@ public class ComputerUtilCard {
         if (!Iterables.isEmpty(list)) {
             CardCollection cc = CardLists.filter(list,
                     Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
-            Collections.sort(cc, CardLists.CmcComparatorInv);
 
             if (cc.isEmpty()) {
                 return null;
             }
+
+            cc.sort(CardLists.CmcComparatorInv);
 
             Card cheapest = cc.getLast();
             if (cheapest.hasSVar("DoNotDiscardIfAble")) {
@@ -883,7 +897,7 @@ public class ComputerUtilCard {
                     }
                 }
                 // special rule for Fabricate and Servo
-                if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
+                if (c.hasKeyword(Keyword.FABRICATE)) {
                     Integer count = typesInDeck.getOrDefault("Servo", 0);
                     typesInDeck.put("Servo", count + weight);
                 }

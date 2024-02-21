@@ -86,7 +86,7 @@ public class VAssignCombatDamage {
     private final JLabel lblTotalDamage = new FLabel.Builder().text(localizer.getMessage("lblTotalDamageText")).build();
     private final JLabel lblAssignRemaining = new FLabel.Builder().text(localizer.getMessage("lblAssignRemainingText")).build();
     //  Label Buttons
-    private final FButton btnOK    = new FButton(localizer.getMessage("lblOk"));
+    private final FButton btnOK    = new FButton(localizer.getMessage("lblOK"));
     private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
     private final FButton btnAuto  = new FButton(localizer.getMessage("lblAuto"));
     private final FButton btnSkip  = new FButton(localizer.getMessage("lblSkip"));

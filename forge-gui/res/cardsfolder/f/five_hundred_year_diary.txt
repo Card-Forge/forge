@@ -1,0 +1,10 @@
+Name:Five Hundred Year Diary
+ManaCost:3 U
+Types:Legendary Artifact Clue
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ X | SpellDescription$ Add {U} for each Clue you control.
+SVar:X:Count$Valid Clue.YouCtrl
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHints:Type$Clue
+DeckHas:Ability$Sacrifice
+Oracle:Five Hundred Year Diary enters the battlefield tapped.\n{T}: Add {U} for each Clue you control.\n{2}, Sacrifice Five Hundred Year Diary: Draw a card.

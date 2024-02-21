@@ -1,0 +1,12 @@
+Name:Souls of the Lost
+ManaCost:1 B
+Types:Creature Spirit
+PT:*/*+1
+K:AlternateAdditionalCost:Discard<1/Card>:Sac<1/Permanent>
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ Fathomless descent — CARDNAME's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+SVar:Y:Count$ValidGraveyard Permanent.YouOwn/Plus.1
+DeckHas:Ability$Sacrifice|Discard
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:As an additional cost to cast this spell, discard a card or sacrifice a permanent.\nFathomless descent — Souls of the Lost's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.

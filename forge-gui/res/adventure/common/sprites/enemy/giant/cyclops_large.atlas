@@ -1,0 +1,176 @@
+cyclops_large.png
+size: 960, 640
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Avatar
+  xy: 409, 89
+  size: 16, 16
+Idle
+  xy: 00, 00
+  size: 64,64
+Idle
+  xy: 64, 00
+  size: 64,64
+Idle
+  xy: 128, 00
+  size: 64,64
+Idle
+  xy: 192, 00
+  size: 64,64
+Idle
+  xy: 256, 00
+  size: 64,64
+Idle
+  xy: 320, 00
+  size: 64,64
+Idle
+  xy: 384, 00
+  size: 64,64
+Idle
+  xy: 448, 00
+  size: 64,64
+Idle
+  xy: 512, 00
+  size: 64,64
+Idle
+  xy: 576, 00
+  size: 64,64
+Idle
+  xy: 640, 00
+  size: 64,64
+Idle
+  xy: 704, 00
+  size: 64,64
+Idle
+  xy: 768, 00
+  size: 64,64
+Idle
+  xy: 832, 00
+  size: 64,64
+Idle
+  xy: 896, 00
+  size: 64,64
+Idle
+  xy: 00, 128
+  size: 64,64
+Idle
+  xy: 64, 128
+  size: 64,64
+Idle
+  xy: 128, 128
+  size: 64,64
+Idle
+  xy: 192, 128
+  size: 64,64
+Idle
+  xy: 256, 128
+  size: 64,64
+Idle
+  xy: 320, 128
+  size: 64,64
+Idle
+  xy: 384, 128
+  size: 64,64
+Walk
+  xy: 00, 64
+  size: 64,64
+Walk
+  xy: 64, 64
+  size: 64,64
+Walk
+  xy: 128, 64
+  size: 64,64
+Walk
+  xy: 192, 64
+  size: 64,64
+Walk
+  xy: 256, 64
+  size: 64,64
+Walk
+  xy: 320, 64
+  size: 64,64
+Walk
+  xy: 384, 64
+  size: 64,64
+Walk
+  xy: 448, 64
+  size: 64,64
+Walk
+  xy: 512, 64
+  size: 64,64
+Walk
+  xy: 576, 64
+  size: 64,64
+Walk
+  xy: 640, 64
+  size: 64,64
+Walk
+  xy: 704, 64
+  size: 64,64
+Attack
+  xy: 00, 192
+  size: 64,64
+Attack
+  xy: 64, 192
+  size: 64,64
+Attack
+  xy: 128, 192
+  size: 64,64
+Attack
+  xy: 192, 192
+  size: 64,64
+Attack
+  xy: 256, 192
+  size: 64,64
+Attack
+  xy: 320, 192
+  size: 64,64
+Attack
+  xy: 384, 192
+  size: 64,64
+Attack
+  xy: 448, 192
+  size: 64,64
+Attack
+  xy: 512, 192
+  size: 64,64
+Attack
+  xy: 576, 192
+  size: 64,64
+Attack
+  xy: 640, 192
+  size: 64,64
+Attack
+  xy: 704, 192
+  size: 64,64
+Attack
+  xy: 768, 192
+  size: 64,64
+Death
+  xy: 0, 384
+  size: 64, 64
+Death
+  xy: 64, 384
+  size: 64, 64
+Death
+  xy: 128, 384
+  size: 64, 64
+Death
+  xy: 192, 384
+  size: 64, 64
+ Death
+  xy: 256, 384
+  size: 64, 64
+Death
+  xy: 320, 384
+  size: 64, 64
+Death
+  xy: 384, 384
+  size: 64, 64
+Death
+  xy: 448, 384
+  size: 64, 64
+Death
+  xy: 512, 384
+  size: 64, 64

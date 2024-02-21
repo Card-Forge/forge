@@ -3,5 +3,5 @@ ManaCost:3 G G G
 Types:Creature Beast
 PT:8/8
 K:Trample
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 Oracle:This spell can't be countered.\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)

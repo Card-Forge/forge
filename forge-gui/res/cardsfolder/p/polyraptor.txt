@@ -2,7 +2,7 @@ Name:Polyraptor
 ManaCost:6 G G
 Types:Creature Dinosaur
 PT:5/5
-T:Mode$ DamageDoneOnce | Execute$ TrigCopyPermanent | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, create a token that's a copy of Polyraptor.
+T:Mode$ DamageDoneOnce | Execute$ TrigCopyPermanent | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, create a token that's a copy of CARDNAME.
 SVar:TrigCopyPermanent:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 DeckHas:Ability$Token
 Oracle:Enrage — Whenever Polyraptor is dealt damage, create a token that's a copy of Polyraptor.

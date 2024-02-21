@@ -17,6 +17,6 @@ Colors:green,black
 Types:Creature Phyrexian Treefolk
 PT:3/3
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature transforms into CARDNAME, target creature an opponent controls gets -0/-X until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDef$ -X | IsCurse$ True 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDef$ -X | IsCurse$ True
 SVar:X:Count$CardPower
 Oracle:When this creature transforms into Malady Invoker, target creature an opponent controls gets -0/-X until end of turn, where X is Malady Invoker's power.

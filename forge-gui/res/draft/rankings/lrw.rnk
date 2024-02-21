@@ -1,0 +1,282 @@
+//Rank|Name|Rarity|Set
+#1|Garruk Wildspeaker|R|LRW
+#2|Profane Command|R|LRW
+#3|Mirror Entity|R|LRW
+#4|Shriekmaw|U|LRW
+#5|Chandra Nalaar|R|LRW
+#6|Dread|R|LRW
+#7|Ajani Goldmane|R|LRW
+#8|Austere Command|R|LRW
+#9|Sower of Temptation|R|LRW
+#10|Brion Stoutarm|R|LRW
+#11|Galepowder Mage|R|LRW
+#12|Vigor|R|LRW
+#13|Wren's Run Packmaster|R|LRW
+#14|Brigid, Hero of Kinsbaile|R|LRW
+#15|Wort, Boggart Auntie|R|LRW
+#16|Liliana Vess|R|LRW
+#17|Imperious Perfect|U|LRW
+#18|Mistbind Clique|R|LRW
+#19|Cryptic Command|R|LRW
+#20|Cloudthresher|R|LRW
+#21|Nath of the Gilt Leaf|R|LRW
+#22|Wydwen, the Biting Gale|R|LRW
+#23|Purity|R|LRW
+#24|Cairn Wanderer|R|LRW
+#25|Cloudgoat Ranger|U|LRW
+#26|Scion of Oona|R|LRW
+#27|Thoughtweft Trio|R|LRW
+#28|Immaculate Magistrate|R|LRW
+#29|Thundercloud Shaman|U|LRW
+#30|Jace Beleren|R|LRW
+#31|Timber Protector|R|LRW
+#32|Doran, the Siege Tower|R|LRW
+#33|Merrow Reejerey|U|LRW
+#34|Masked Admirers|R|LRW
+#35|Sygg, River Guide|R|LRW
+#36|Briarhorn|U|LRW
+#37|Hostility|R|LRW
+#38|Guile|R|LRW
+#39|Mulldrifter|C|LRW
+#40|Oblivion Ring|C|LRW
+#41|Nameless Inversion|C|LRW
+#42|Ashling the Pilgrim|R|LRW
+#43|Incendiary Command|R|LRW
+#44|Dauntless Dourbark|R|LRW
+#45|Changeling Hero|U|LRW
+#46|Mad Auntie|R|LRW
+#47|Final Revels|U|LRW
+#48|Surgespanner|R|LRW
+#49|Epic Proportions|R|LRW
+#50|Crib Swap|U|LRW
+#51|Sunrise Sovereign|R|LRW
+#52|Oona's Prowler|R|LRW
+#53|Incandescent Soulstoke|R|LRW
+#54|Summon the School|U|LRW
+#55|Marsh Flitter|U|LRW
+#56|Wren's Run Vanquisher|U|LRW
+#57|Changeling Titan|U|LRW
+#58|Lash Out|C|LRW
+#59|Boggart Mob|R|LRW
+#60|Eyeblight's Ending|C|LRW
+#61|Changeling Berserker|U|LRW
+#62|Wizened Cenn|U|LRW
+#63|Fodder Launch|U|LRW
+#64|Drowner of Secrets|U|LRW
+#65|Shapesharer|R|LRW
+#66|Primal Command|R|LRW
+#67|Fathom Trawl|R|LRW
+#68|Pestermite|C|LRW
+#69|Faerie Harbinger|U|LRW
+#70|Tarfire|C|LRW
+#71|Silvergill Douser|C|LRW
+#72|Harpoon Sniper|U|LRW
+#73|Militia's Pride|R|LRW
+#74|Knight of Meadowgrain|U|LRW
+#75|Elvish Harbinger|U|LRW
+#76|Tar Pitcher|U|LRW
+#77|Deathrender|R|LRW
+#78|Moonglove Extract|C|LRW
+#79|Avian Changeling|C|LRW
+#80|Hoofprints of the Stag|R|LRW
+#81|Ghostly Changeling|U|LRW
+#82|Jagged Scar Archers|U|LRW
+#83|Fallowsage|U|LRW
+#84|Hamletback Goliath|R|LRW
+#85|Aethersnipe|C|LRW
+#86|Merrow Harbinger|U|LRW
+#87|Warren Pilferers|C|LRW
+#88|Nova Chaser|R|LRW
+#89|Silvergill Adept|U|LRW
+#90|Incremental Growth|U|LRW
+#91|Thorntooth Witch|U|LRW
+#92|Goldmeadow Harrier|C|LRW
+#93|Dreamspoiler Witches|C|LRW
+#94|Makeshift Mannequin|U|LRW
+#95|Stonybrook Angler|C|LRW
+#96|Sentinels of Glen Elendra|C|LRW
+#97|Giant Harbinger|U|LRW
+#98|Lys Alana Huntmaster|C|LRW
+#99|Weed Strangle|C|LRW
+#100|Neck Snap|C|LRW
+#101|Turtleshell Changeling|U|LRW
+#102|Veteran of the Depths|U|LRW
+#103|Boggart Harbinger|U|LRW
+#104|Plover Knights|C|LRW
+#105|Woodland Changeling|C|LRW
+#106|Goldmeadow Stalwart|U|LRW
+#107|Cloudcrown Oak|C|LRW
+#108|Dolmen Gate|R|LRW
+#109|Glarewielder|U|LRW
+#110|Mudbutton Torchrunner|C|LRW
+#111|Streambed Aquitects|C|LRW
+#112|Squeaking Pie Sneak|U|LRW
+#113|Leaf Gilder|C|LRW
+#114|Benthicore|U|LRW
+#115|Thoughtseize|R|LRW
+#116|Seedguide Ash|U|LRW
+#117|Kithkin Harbinger|U|LRW
+#118|Flamekin Spitfire|U|LRW
+#119|Flamekin Harbinger|U|LRW
+#120|Smokebraider|C|LRW
+#121|Kinsbaile Balloonist|C|LRW
+#122|Gilt Leaf Ambush|C|LRW
+#123|Treefolk Harbinger|U|LRW
+#124|Wanderwine Prophets|R|LRW
+#125|Arbiter of Knollridge|R|LRW
+#126|Peppersmoke|C|LRW
+#127|Vivid Marsh|U|LRW
+#128|Vivid Creek|U|LRW
+#129|Battlewand Oak|C|LRW
+#130|Hornet Harasser|C|LRW
+#131|Inner Flame Igniter|U|LRW
+#132|Ethereal Whiskergill|U|LRW
+#133|Vivid Grove|U|LRW
+#134|Whirlpool Whelm|C|LRW
+#135|Secluded Glen|R|LRW
+#136|Vivid Meadow|U|LRW
+#137|Kithkin Greatheart|C|LRW
+#138|Spellstutter Sprite|C|LRW
+#139|Blind Spot Giant|C|LRW
+#140|Consuming Bonfire|C|LRW
+#141|Amoeboid Changeling|C|LRW
+#142|Stinkdrinker Daredevil|C|LRW
+#143|Vivid Crag|U|LRW
+#144|Skeletal Changeling|C|LRW
+#145|Gilt Leaf Palace|R|LRW
+#146|Wanderwine Hub|R|LRW
+#147|Fertile Ground|C|LRW
+#148|Wings of Velis Vel|C|LRW
+#149|Nath's Elite|C|LRW
+#150|Fire Belly Changeling|C|LRW
+#151|Windbrisk Heights|R|LRW
+#152|Knucklebone Witch|R|LRW
+#153|Judge of Currents|C|LRW
+#154|Forced Fruition|R|LRW
+#155|Glen Elendra Pranksters|U|LRW
+#156|Inner Flame Acolyte|C|LRW
+#157|Shimmering Grotto|C|LRW
+#158|Ponder|C|LRW
+#159|Wanderer's Twig|C|LRW
+#160|Auntie's Hovel|R|LRW
+#161|Lowland Oaf|C|LRW
+#162|Moonglove Winnower|C|LRW
+#163|Broken Ambitions|C|LRW
+#164|Gaddock Teeg|R|LRW
+#165|Kinsbaile Skirmisher|C|LRW
+#166|Paperfin Rascal|C|LRW
+#167|Springleaf Drum|C|LRW
+#168|Hunter of Eyeblights|U|LRW
+#169|Runed Stalactite|C|LRW
+#170|Kithkin Mourncaller|U|LRW
+#171|Fistful of Force|C|LRW
+#172|Deeptread Merrow|C|LRW
+#173|Elvish Branchbender|C|LRW
+#174|Lignify|C|LRW
+#175|Thieving Sprite|C|LRW
+#176|Boggart Loggers|C|LRW
+#177|Ancient Amphitheater|R|LRW
+#178|Ceaseless Searblades|U|LRW
+#179|Inkfathom Divers|C|LRW
+#180|Adder Staff Boggart|C|LRW
+#181|Flamekin Bladewhirl|U|LRW
+#182|Horde of Notions|R|LRW
+#183|Soulbright Flamekin|C|LRW
+#184|Surge of Thoughtweft|C|LRW
+#185|Bog Strider Ash|C|LRW
+#186|Goatnapper|U|LRW
+#187|Footbottom Feast|C|LRW
+#188|Elvish Promenade|U|LRW
+#189|Hillcomber Giant|C|LRW
+#190|Boggart Sprite Chaser|C|LRW
+#191|Faerie Trickery|C|LRW
+#192|Blades of Velis Vel|C|LRW
+#193|Hearthcage Giant|U|LRW
+#194|Nettlevine Blight|R|LRW
+#195|Kithkin Daggerdare|C|LRW
+#196|Heat Shimmer|R|LRW
+#197|Axegrinder Giant|C|LRW
+#198|Caterwauling Boggart|C|LRW
+#199|Glimmerdust Nap|C|LRW
+#200|Elvish Handservant|C|LRW
+#201|Familiar's Ruse|U|LRW
+#202|Mournwhelk|C|LRW
+#203|Crush Underfoot|U|LRW
+#204|Burrenton Forge Tender|U|LRW
+#205|Guardian of Cloverdell|U|LRW
+#206|Shelldock Isle|R|LRW
+#207|Mosswort Bridge|R|LRW
+#208|Kithkin Healer|C|LRW
+#209|Spiderwig Boggart|C|LRW
+#210|Lys Alana Scarblade|U|LRW
+#211|Hurly Burly|C|LRW
+#212|Nightshade Stinger|C|LRW
+#213|Oakgnarl Warrior|C|LRW
+#214|Gilt Leaf Seer|C|LRW
+#215|Ego Erasure|U|LRW
+#216|Tideshaper Mystic|C|LRW
+#217|Oaken Brawler|C|LRW
+#218|Wild Ricochet|R|LRW
+#219|Giant's Ire|C|LRW
+#220|Wispmare|C|LRW
+#221|Pollen Lullaby|U|LRW
+#222|Springjack Knight|C|LRW
+#223|Triclopean Sight|C|LRW
+#224|Nectar Faerie|U|LRW
+#225|Black Poplar Shaman|C|LRW
+#226|Merrow Commerce|U|LRW
+#227|Sentry Oak|U|LRW
+#228|Quill Slinger Boggart|C|LRW
+#229|Lairwatch Giant|C|LRW
+#230|Boggart Birth Rite|C|LRW
+#231|Ringskipper|C|LRW
+#232|Cenn's Heir|C|LRW
+#233|Scattering Stroke|U|LRW
+#234|Spinerock Knoll|R|LRW
+#235|Colfenor's Plans|R|LRW
+#236|Aquitect's Will|C|LRW
+#237|Wellgabber Apothecary|C|LRW
+#238|Flamekin Brawler|C|LRW
+#239|Faultgrinder|C|LRW
+#240|Lace with Moonglove|C|LRW
+#241|Thousand Year Elixir|R|LRW
+#242|Facevaulter|C|LRW
+#243|Rootgrapple|C|LRW
+#244|Nath's Buffoon|C|LRW
+#245|Warren Scourge Elf|C|LRW
+#246|Needle Drop|C|LRW
+#247|Ingot Chewer|C|LRW
+#248|Scarred Vinebreeder|C|LRW
+#249|Hoarder's Greed|U|LRW
+#250|Shields of Velis Vel|C|LRW
+#251|Elvish Eulogist|C|LRW
+#252|Eyes of the Wisent|R|LRW
+#253|Zephyr Net|C|LRW
+#254|Rings of Brighthearth|R|LRW
+#255|Spring Cleaning|C|LRW
+#256|Protective Bubble|C|LRW
+#257|Howltooth Hollow|R|LRW
+#258|Goldmeadow Dodger|C|LRW
+#259|Exiled Boggart|C|LRW
+#260|Rebellion of the Flamekin|U|LRW
+#261|Dawnfluke|C|LRW
+#262|Boggart Forager|C|LRW
+#263|Prowess of the Fair|U|LRW
+#264|Hunt Down|C|LRW
+#265|Soaring Hope|C|LRW
+#266|Bog Hoodlums|C|LRW
+#267|Heal the Scars|C|LRW
+#268|Woodland Guidance|U|LRW
+#269|Battle Mastery|U|LRW
+#270|Captivating Glance|U|LRW
+#271|Herbal Poultice|C|LRW
+#272|Thorn of Amethyst|R|LRW
+#273|Boggart Shenanigans|U|LRW
+#274|Favor of the Mighty|R|LRW
+#275|Entangling Trap|U|LRW
+#276|Lammastide Weave|U|LRW
+#277|Colfenor's Urn|R|LRW
+#278|Faerie Tauntings|U|LRW
+#279|Sylvan Echoes|U|LRW
+#280|Twinning Glass|R|LRW
+#281|Ashling's Prerogative|R|LRW

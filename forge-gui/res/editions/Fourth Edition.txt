@@ -113,7 +113,7 @@ ScryfallCode=4ED
 188 U Earth Elemental @Dan Frazier
 189 R Earthquake @Dan Frazier
 318 R Ebony Horse @Dameon Willich
-134 R El-Hajjaj @Dameon Willich
+134 R El-Hajjâj @Dameon Willich
 24 R Elder Land Wurm @Quinton Hoover
 242 U Elven Riders @Melissa A. Benson
 243 R Elvish Archers @Anson Maddocks
@@ -190,7 +190,7 @@ ScryfallCode=4ED
 330 R Jandor's Saddlebags @Dameon Willich
 331 R Jayemdae Tome @Mark Tedin
 79 C Jump @Mark Poole
-143 U Junun Efreet @Christopher Rush
+143 U Junún Efreet @Christopher Rush
 32 U Karma @Richard Thomas
 207 U Keldon Warlord @Kev Brockschmidt
 254 U Killer Bees @Phil Foglio

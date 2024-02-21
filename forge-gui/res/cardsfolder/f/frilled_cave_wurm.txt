@@ -1,0 +1,7 @@
+Name:Frilled Cave-Wurm
+ManaCost:3 U
+Types:Creature Salamander Wurm
+PT:2/5
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddPower$ 2 | Description$ Descend 4 — CARDNAME gets +2/+0 as long as there are four or more permanent cards in your graveyard.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+Oracle:Descend 4 — Frilled Cave-Wurm gets +2/+0 as long as there are four or more permanent cards in your graveyard.

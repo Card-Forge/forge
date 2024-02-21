@@ -1,0 +1,9 @@
+Name:Scream Puff
+ManaCost:4 B
+Types:Creature Horror
+PT:4/5
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigFood | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+DeckHas:Ability$Token & Type$Artifact|Food
+Oracle:Deathtouch\nWhenever Scream Puff deals combat damage to a player, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

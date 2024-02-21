@@ -1,0 +1,142 @@
+//Rank|Name|Rarity|Set
+#1|Terramorphic Expanse|C|HOP
+#2|Phyrexian Arena|R|HOP
+#3|Explosive Vegetation|U|HOP
+#4|Rampant Growth|C|HOP
+#5|Oblivion Ring|C|HOP
+#6|Cabal Coffers|U|HOP
+#7|Boros Signet|C|HOP
+#8|Fabricate|U|HOP
+#9|Grave Pact|R|HOP
+#10|Loxodon Warhammer|R|HOP
+#11|Boros Garrison|C|HOP
+#12|Seat of the Synod|C|HOP
+#13|Gruul Turf|C|HOP
+#14|Dark Ritual|C|HOP
+#15|Darksteel Forge|R|HOP
+#16|Forgotten Ancient|R|HOP
+#17|Great Furnace|C|HOP
+#18|Beacon of Unrest|R|HOP
+#19|Beseech the Queen|U|HOP
+#20|Ancient Den|C|HOP
+#21|Vault of Whispers|C|HOP
+#22|Insurrection|R|HOP
+#23|Hull Breach|C|HOP
+#24|Soul Warden|C|HOP
+#25|Fires of Yavimaya|U|HOP
+#26|Profane Command|R|HOP
+#27|Fertilid|C|HOP
+#28|Sunhome, Fortress of the Legion|U|HOP
+#29|Relic of Progenitus|C|HOP
+#30|Syphon Mind|C|HOP
+#31|Thirst for Knowledge|U|HOP
+#32|Taurean Mauler|R|HOP
+#33|Undead Warchief|U|HOP
+#34|Akroma's Vengeance|R|HOP
+#35|Furnace of Rath|R|HOP
+#36|Search for Tomorrow|C|HOP
+#37|Cranial Plating|C|HOP
+#38|Death Baron|R|HOP
+#39|Mask of Memory|U|HOP
+#40|Relentless Assault|R|HOP
+#41|Master of Etherium|R|HOP
+#42|Pentavus|R|HOP
+#43|Prison Term|U|HOP
+#44|Iron Myr|C|HOP
+#45|Innocent Blood|C|HOP
+#46|Leechridden Swamp|U|HOP
+#47|Corpse Harvester|U|HOP
+#48|Tree of Tales|C|HOP
+#49|Verdant Force|R|HOP
+#50|Noxious Ghoul|U|HOP
+#51|Flametongue Kavu|U|HOP
+#52|Vedalken Engineer|C|HOP
+#53|Mage Slayer|U|HOP
+#54|Silver Myr|C|HOP
+#55|Duergar Hedge-Mage|U|HOP
+#56|Fertile Ground|C|HOP
+#57|Gravedigger|C|HOP
+#58|Shepherd of Rot|C|HOP
+#59|Orim's Thunder|C|HOP
+#60|Withered Wretch|U|HOP
+#61|Balefire Liege|R|HOP
+#62|Soulless One|U|HOP
+#63|Goblin Offensive|U|HOP
+#64|Lightning Helix|U|HOP
+#65|Leaden Myr|C|HOP
+#66|Tornado Elemental|R|HOP
+#67|Gold Myr|C|HOP
+#68|Bosh, Iron Golem|R|HOP
+#69|Door to Nothingness|R|HOP
+#70|Browbeat|U|HOP
+#71|Congregate|C|HOP
+#72|Consume Spirit|U|HOP
+#73|Savage Twister|U|HOP
+#74|Flamekin Harbinger|U|HOP
+#75|Etched Oracle|U|HOP
+#76|Reckless Charge|C|HOP
+#77|Ascendant Evincar|R|HOP
+#78|Glory of Warfare|R|HOP
+#79|Helldozer|R|HOP
+#80|Incremental Blight|U|HOP
+#81|Kor Sanctifiers|C|HOP
+#82|Smokebraider|C|HOP
+#83|Rolling Thunder|C|HOP
+#84|Pentad Prism|C|HOP
+#85|Shivan Oasis|U|HOP
+#86|Arcbound Crusher|U|HOP
+#87|Order Chaos|U|HOP
+#88|Living Hive|R|HOP
+#89|Copper Myr|C|HOP
+#90|Cruel Revival|C|HOP
+#91|Nuisance Engine|U|HOP
+#92|Rotting Rats|C|HOP
+#93|Razia, Boros Archangel|R|HOP
+#94|Keep Watch|C|HOP
+#95|Blaze|U|HOP
+#96|Lodestone Myr|R|HOP
+#97|Broodstar|R|HOP
+#98|Myr Enforcer|C|HOP
+#99|Skeleton Shard|U|HOP
+#100|Boros Guildmage|U|HOP
+#101|Arcbound Slith|U|HOP
+#102|Phyrexian Ghoul|C|HOP
+#103|Tribal Unity|U|HOP
+#104|Hideous End|C|HOP
+#105|Serum Tank|U|HOP
+#106|Boros Swiftblade|U|HOP
+#107|Silverglade Elemental|C|HOP
+#108|Rorix Bladewing|R|HOP
+#109|Arc Lightning|C|HOP
+#110|Rockslide Elemental|U|HOP
+#111|Cinder Elemental|U|HOP
+#112|Double Cleave|C|HOP
+#113|Briarhorn|U|HOP
+#114|Syphon Soul|C|HOP
+#115|Ivy Elemental|R|HOP
+#116|Festering Goblin|C|HOP
+#117|Nefashu|R|HOP
+#118|Hearthfire Hobgoblin|U|HOP
+#119|Cone of Flame|U|HOP
+#120|Bull Cerodon|U|HOP
+#121|Dregscape Zombie|C|HOP
+#122|Whiplash Trap|C|HOP
+#123|Captain's Maneuver|U|HOP
+#124|Rumbling Slum|R|HOP
+#125|Wizard Replica|C|HOP
+#126|Cerodon Yearling|C|HOP
+#127|Branching Bolt|C|HOP
+#128|Keldon Champion|U|HOP
+#129|Sludge Strider|U|HOP
+#130|Pyrotechnics|U|HOP
+#131|Arsenal Thresher|C|HOP
+#132|Menacing Ogre|R|HOP
+#133|Qumulox|U|HOP
+#134|Cadaverous Knight|C|HOP
+#135|Sarcomite Myr|C|HOP
+#136|Bogardan Firefiend|C|HOP
+#137|Suntouched Myr|C|HOP
+#138|Beast Hunt|C|HOP
+#139|Assault Battery|U|HOP
+#140|Bogardan Rager|C|HOP
+#141|Battlegate Mimic|C|HOP

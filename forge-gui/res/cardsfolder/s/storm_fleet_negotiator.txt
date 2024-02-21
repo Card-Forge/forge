@@ -1,0 +1,14 @@
+Name:Storm Fleet Negotiator
+ManaCost:2 U
+Types:Creature Siren Pirate
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Parley — Whenever CARDNAME attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card. (A Map token is an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+SVar:TrigPeek:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_map_sac_explore | TokenAmount$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+DeckHas:Ability$Token & Type$Map|Artifact
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nParley — Whenever Storm Fleet Negotiator attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card. (A Map token is an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")

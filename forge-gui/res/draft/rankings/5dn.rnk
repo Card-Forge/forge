@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Razormane Masticore|R|5DN
+#2|Mephidross Vampire|R|5DN
+#3|Vedalken Shackles|R|5DN
+#4|Beacon of Destruction|R|5DN
+#5|Grafted Wargear|U|5DN
+#6|Qumulox|U|5DN
+#7|Silent Arbiter|R|5DN
+#8|Eternal Witness|U|5DN
+#9|Cranial Plating|C|5DN
+#10|Furnace Whelp|U|5DN
+#11|Tornado Elemental|R|5DN
+#12|Magma Jet|U|5DN
+#13|Helm of Kaldra|R|5DN
+#14|Tel Jilad Justice|U|5DN
+#15|Beacon of Creation|R|5DN
+#16|Summoning Station|R|5DN
+#17|Engineered Explosives|R|5DN
+#18|Bringer of the White Dawn|R|5DN
+#19|Bringer of the Black Dawn|R|5DN
+#20|Moriok Rigger|R|5DN
+#21|Guardian Idol|U|5DN
+#22|Relic Barrier|U|5DN
+#23|Etched Oracle|U|5DN
+#24|Night's Whisper|U|5DN
+#25|Bringer of the Green Dawn|R|5DN
+#26|Vulshok Sorcerer|C|5DN
+#27|Retaliate|R|5DN
+#28|Wayfarer's Bauble|C|5DN
+#29|Ion Storm|R|5DN
+#30|Magma Giant|R|5DN
+#31|Stasis Cocoon|C|5DN
+#32|Infused Arrows|U|5DN
+#33|Solarion|R|5DN
+#34|Ferropede|U|5DN
+#35|Rude Awakening|R|5DN
+#36|Staff of Domination|R|5DN
+#37|Vedalken Mastermind|U|5DN
+#38|Bringer of the Blue Dawn|R|5DN
+#39|Hoverguard Sweepers|R|5DN
+#40|Synod Centurion|U|5DN
+#41|Joiner Adept|R|5DN
+#42|Bringer of the Red Dawn|R|5DN
+#43|Viridian Lorebearers|U|5DN
+#44|Pentad Prism|C|5DN
+#45|Auriok Champion|R|5DN
+#46|Devour in Shadow|U|5DN
+#47|Energy Chamber|U|5DN
+#48|Trinket Mage|C|5DN
+#49|Mycosynth Golem|R|5DN
+#50|Skyhunter Skirmisher|U|5DN
+#51|Raksha Golden Cub|R|5DN
+#52|Loxodon Anchorite|C|5DN
+#53|Thought Courier|C|5DN
+#54|Sylvok Explorer|C|5DN
+#55|Skyreach Manta|C|5DN
+#56|Ensouled Scimitar|U|5DN
+#57|Auriok Windwalker|R|5DN
+#58|Auriok Salvagers|U|5DN
+#59|Ebon Drake|U|5DN
+#60|Blind Creeper|C|5DN
+#61|Conjurer's Bauble|C|5DN
+#62|Beacon of Unrest|R|5DN
+#63|Acquire|R|5DN
+#64|Granulate|R|5DN
+#65|Clearwater Goblet|R|5DN
+#66|Loxodon Stalwart|U|5DN
+#67|Beacon of Immortality|R|5DN
+#68|Leonin Squire|C|5DN
+#69|Fangren Pathcutter|U|5DN
+#70|Healer's Headdress|C|5DN
+#71|Opaline Bracers|C|5DN
+#72|Tangle Asp|C|5DN
+#73|Battered Golem|C|5DN
+#74|Ferocious Charge|C|5DN
+#75|Fill with Fright|C|5DN
+#76|Condescend|C|5DN
+#77|Suntouched Myr|C|5DN
+#78|Suncrusher|R|5DN
+#79|Ouphe Vandals|U|5DN
+#80|Skyhunter Prowler|C|5DN
+#81|Serum Visions|C|5DN
+#82|Vanquish|U|5DN
+#83|Lose Hope|C|5DN
+#84|Blasting Station|U|5DN
+#85|Cackling Imp|C|5DN
+#86|Myr Quadropod|C|5DN
+#87|Paradise Mantle|U|5DN
+#88|Goblin Brawler|C|5DN
+#89|Salvaging Station|R|5DN
+#90|Advanced Hoverguard|C|5DN
+#91|Tyrranax|C|5DN
+#92|Grinding Station|U|5DN
+#93|Composite Golem|U|5DN
+#94|Iron Barb Hellion|U|5DN
+#95|Horned Helm|C|5DN
+#96|Baton of Courage|C|5DN
+#97|Rain of Rust|C|5DN
+#98|Fleshgrafter|C|5DN
+#99|Summoner's Egg|R|5DN
+#100|Goblin Cannon|U|5DN
+#101|Arachnoid|U|5DN
+#102|Lunar Avenger|U|5DN
+#103|Plasma Elemental|U|5DN
+#104|Anodet Lurker|C|5DN
+#105|Stand Firm|C|5DN
+#106|Gemstone Array|U|5DN
+#107|Cosmic Larva|R|5DN
+#108|Myr Servitor|C|5DN
+#109|Heliophial|C|5DN
+#110|Dawn's Reflection|C|5DN
+#111|Rite of Passage|R|5DN
+#112|Thermal Navigator|C|5DN
+#113|Desecration Elemental|R|5DN
+#114|Arcbound Wanderer|U|5DN
+#115|Sawtooth Thresher|C|5DN
+#116|Beacon of Tomorrows|R|5DN
+#117|Steelshaper's Gift|U|5DN
+#118|Krark Clan Engineers|U|5DN
+#119|Shattered Dreams|U|5DN
+#120|Krark Clan Ogre|C|5DN
+#121|Dross Crocodile|C|5DN
+#122|Avarice Totem|U|5DN
+#123|Chimeric Coils|U|5DN
+#124|Circle of Protection: Artifacts|U|5DN
+#125|Feedback Bolt|U|5DN
+#126|Nim Grotesque|U|5DN
+#127|Fold into Aether|U|5DN
+#128|Plunge into Darkness|R|5DN
+#129|Tel Jilad Lifebreather|C|5DN
+#130|All Suns' Dawn|R|5DN
+#131|Sparring Collar|C|5DN
+#132|Neurok Stealthsuit|C|5DN
+#133|Roar of Reclamation|R|5DN
+#134|Channel the Suns|U|5DN
+#135|Door to Nothingness|R|5DN
+#136|Krark Clan Ironworks|U|5DN
+#137|Skullcage|U|5DN
+#138|Crucible of Worlds|R|5DN
+#139|Artificer's Intuition|R|5DN
+#140|Spark Elemental|C|5DN
+#141|Razorgrass Screen|C|5DN
+#142|Disruption Aura|U|5DN
+#143|Doubling Cube|R|5DN
+#144|Lantern of Insight|U|5DN
+#145|Screaming Fury|C|5DN
+#146|Into Thin Air|C|5DN
+#147|Armed Response|C|5DN
+#148|Relentless Rats|U|5DN
+#149|Abuna's Chant|C|5DN
+#150|Vicious Betrayal|C|5DN
+#151|Viridian Scout|C|5DN
+#152|Vedalken Orrery|R|5DN
+#153|Magnetic Theft|U|5DN
+#154|Spinal Parasite|U|5DN
+#155|Clock of Omens|U|5DN
+#156|Early Frost|C|5DN
+#157|Endless Whispers|R|5DN
+#158|Reversal of Fortune|R|5DN
+#159|Eyes of the Watcher|U|5DN
+#160|Mana Geyser|C|5DN
+#161|Possessed Portal|R|5DN
+#162|Fist of Suns|R|5DN
+#163|Eon Hub|R|5DN
+#164|Spectral Shift|R|5DN
+#165|Blinkmoth Infusion|R|5DN

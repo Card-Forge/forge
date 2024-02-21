@@ -74,8 +74,8 @@ ScryfallCode=CSP
 111 C Into the North @Richard Sardinha
 137 R Jester's Scepter @Matt Cavotta
 37 R Jokulmorder @Mark Zug
-8 U Jotun Grunt @Franz Vohwinkel
-9 U Jotun Owl Keeper @Dave Dorman
+8 U Jötun Grunt @Franz Vohwinkel
+9 U Jötun Owl Keeper @Dave Dorman
 130 U Juniper Order Ranger @Greg Hildebrandt
 86 R Karplusan Minotaur @Wayne England
 112 U Karplusan Strider @Dan Scott

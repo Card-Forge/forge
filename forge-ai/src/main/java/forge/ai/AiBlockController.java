@@ -140,7 +140,7 @@ public class AiBlockController {
             ComputerUtilCard.sortByEvaluateCreature(attackers);
             CardLists.sortByPowerDesc(attackers);
             //move cards like Phage the Untouchable to the front
-            Collections.sort(attackers, new Comparator<Card>() {
+            attackers.sort(new Comparator<Card>() {
                 @Override
                 public int compare(final Card o1, final Card o2) {
                     if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {
@@ -252,8 +252,10 @@ public class AiBlockController {
                     }
                 }
                 // 4.Blockers that have a big upside when dying
+                // 4a.Blockers that are profitable to sacrifice even in the event of an unfavorable block
                 for (Card b : blockers) {
-                    if (b.hasSVar("SacMe") && Integer.parseInt(b.getSVar("SacMe")) > 3) {
+                    if ((b.hasSVar("SacMe") && Integer.parseInt(b.getSVar("SacMe")) > 3) ||
+                            (b.hasSVar("SacMeAfterBlock") && !attacker.hasKeyword(Keyword.TRAMPLE) && !attacker.hasKeyword(Keyword.BANDING))) {
                         blocker = b;
                         if (!ComputerUtilCombat.canDestroyAttacker(ai, attacker, blocker, combat, false)) {
                             blockedButUnkilled.add(attacker);
@@ -1355,8 +1357,8 @@ public class AiBlockController {
         }
 
         int evalAtk = ComputerUtilCard.evaluateCreature(attacker, true, false);
-        boolean atkEmbalm = (attacker.hasStartOfKeyword("Embalm") || attacker.hasStartOfKeyword("Eternalize")) && !attacker.isToken();
-        boolean blkEmbalm = (blocker.hasStartOfKeyword("Embalm") || blocker.hasStartOfKeyword("Eternalize")) && !blocker.isToken();
+        boolean atkEmbalm = (attacker.hasKeyword(Keyword.EMBALM) || attacker.hasKeyword(Keyword.ETERNALIZE)) && !attacker.isToken();
+        boolean blkEmbalm = (blocker.hasKeyword(Keyword.EMBALM) || blocker.hasKeyword(Keyword.ETERNALIZE)) && !blocker.isToken();
 
         if (atkEmbalm && !blkEmbalm) {
             // The opponent will eventually get his creature back, while the AI won't

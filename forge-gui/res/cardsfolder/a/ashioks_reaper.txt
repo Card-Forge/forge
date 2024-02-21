@@ -1,0 +1,8 @@
+Name:Ashiok's Reaper
+ManaCost:3 B
+Types:Creature Nightmare
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Enchantment.YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever an enchantment you control is put into a graveyard from the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Enchantment & Ability$Sacrifice
+Oracle:Whenever an enchantment you control is put into a graveyard from the battlefield, draw a card.

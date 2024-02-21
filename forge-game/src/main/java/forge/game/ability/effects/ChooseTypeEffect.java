@@ -9,6 +9,7 @@ import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
@@ -40,6 +41,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         final List<String> invalidTypes = sa.hasParam("InvalidTypes") ? Arrays.asList(sa.getParam("InvalidTypes").split(",")) : new ArrayList<>();
         final List<String> validTypes = new ArrayList<>();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final boolean secret = sa.hasParam("Secretly");
 
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
@@ -88,6 +90,24 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                break;
+            case "Shared":
+                if (sa.hasParam("TypesFromDefined")) {
+                    CardCollection def = AbilityUtils.getDefinedCards(card, sa.getParam("TypesFromDefined"), sa);
+                    if (def.size() < 2) break; // need at least 2 cards to work with to find shared types
+                    final Card card1 = def.get(0);
+                    def.remove(0);
+                    for (final CardType.CoreType ct : card1.getType().getCoreTypes()) {
+                        boolean shared = true;
+                        for (final Card c : def) {
+                            if (!c.getType().hasType(ct)) {
+                                shared = false;
+                                break;
+                            }
+                        }
+                        if (shared) validTypes.add(ct.name());
+                    }
+                }
             }
         }
 
@@ -111,14 +131,21 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 } else {
                     choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                 }
+
+                if (!secret) p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+
                 if (sa.hasParam("Note")) {
                     card.addNotedType(choice);
-                } else if (!sa.hasParam("ChooseType2")) {
-                    card.setChosenType(choice);
-                } else {
-                    card.setChosenType2(choice);
+                    if (!sa.hasParam("ChooseNoted")) {
+                        continue;
+                    }
                 }
-                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+                if (sa.hasParam("ChooseType2")) {
+                    card.setChosenType2(choice);
+                } else {
+                    if (secret) card.setSecretChosenType(choice);
+                    else card.setChosenType(choice);
+                }
             }
         } else {
             throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");

@@ -31,6 +31,12 @@ public class ReplaceTap extends ReplacementEffect {
             return false;
         }
 
+        if (hasParam("Attacker")) {
+            if (getParam("Attacker").equalsIgnoreCase("True") != (boolean) runParams.get(AbilityKey.IsCombat)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

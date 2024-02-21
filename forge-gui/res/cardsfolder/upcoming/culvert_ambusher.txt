@@ -1,0 +1,10 @@
+Name:Culvert Ambusher
+ManaCost:3 G G
+Types:Creature Wurm Horror
+PT:4/5
+K:Disguise:4 G
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProvoke | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, target creature blocks this turn if able.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigProvoke | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, target creature blocks this turn if able.
+SVar:TrigProvoke:DB$ Effect | ValidTgts$ Creature | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+Oracle:When Culvert Ambusher enters the battlefield or is turned face up, target creature blocks this turn if able.\nDisguise {4}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

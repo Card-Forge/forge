@@ -1,0 +1,15 @@
+Name:Threadbind Clique
+ManaCost:3 U
+Types:Creature Faerie
+PT:3/3
+K:Flying
+AlternateMode:Adventure
+Oracle:Flying
+
+ALTERNATE
+
+Name:Rip the Seams
+ManaCost:2 W
+Types:Instant Adventure
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Destroy target tapped creature. (Then exile this card. You may cast the creature later from exile.)

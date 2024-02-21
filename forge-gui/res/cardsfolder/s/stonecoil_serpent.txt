@@ -4,7 +4,7 @@ Types:Artifact Creature Snake
 PT:0/0
 K:Reach
 K:Trample
-K:Protection:Card.MultiColor:Protection from multicolored
+K:Protection:Card.MultiColor:multicolored
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters

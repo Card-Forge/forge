@@ -23,6 +23,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,6 +58,19 @@ public class ForgeScript {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
             return property.startsWith("non") != colors.isMulticolor();
+        } else if (property.contains("EnemyColor")) {
+            if (property.endsWith("Source") && isColorlessSource)
+                return false;
+            if (colors.countColors() != 2) {
+                return false;
+            }
+            // i want only enemy colors
+            for (final byte pair : Arrays.copyOfRange(MagicColor.COLORPAIR, 5, 10)) {
+                if (colors.hasExactlyColor(pair)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.contains("AllColors")) {
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
@@ -193,16 +207,22 @@ public class ForgeScript {
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
+        } else if (property.equals("Bargain")) {
+            return sa.isBargain();
         } else if (property.equals("Backup")) {
             return sa.isBackup();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
             return sa.isBuyBackAbility();
+        } else if (property.equals("Craft")) {
+            return sa.isCraft();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
+        } else if (property.equals("Disturb")) {
+            return sa.isDisturb();
         } else if (property.equals("Flashback")) {
             return sa.isFlashBackAbility();
         } else if (property.equals("Jumpstart")) {
@@ -217,6 +237,10 @@ public class ForgeScript {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
+        } else if (property.equals("ManifestUp")) {
+            return sa.isManifestUp();
+        } else if (property.equals("isCastFaceDown")) {
+            return sa.isCastFaceDown();
         } else if (property.equals("Modular")) {
             return sa.hasParam("Modular");
         } else if (property.equals("Equip")) {
@@ -246,6 +270,8 @@ public class ForgeScript {
             if (sa.getChapter() == sa.getHostCard().getCounters(CounterEnumType.LORE)) {
                 return false;
             }
+        } else if (property.equals("CumulativeUpkeep")) {
+            return sa.isCumulativeUpkeep();
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
@@ -323,7 +349,7 @@ public class ForgeScript {
             } else {
                 y = sa.getPayCosts().getTotalMana().getCMC();
             }
-            int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);
+            int x = AbilityUtils.calculateAmount(source, property.substring(5), spellAbility);
             if (!Expressions.compare(y, property, x)) {
                 return false;
             }

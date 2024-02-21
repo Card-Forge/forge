@@ -1,0 +1,9 @@
+Name:Rubblebelt Maverick
+ManaCost:G
+Types:Creature Human Detective
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+A:AB$ PutCounter | Cost$ G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
+DeckHas:Ability$Graveyard|Counters
+Oracle:When Rubblebelt Maverick enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n{G}, Exile Rubblebelt Maverick from your graveyard: Put a +1/+1 counter on target creature. Activate only as a sorcery.

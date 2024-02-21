@@ -1,0 +1,11 @@
+Name:Stampede Surfer
+ManaCost:3 RG RG
+Types:Creature Human Warrior
+PT:4/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBRepeat | TriggerDescription$ Whenever CARDNAME attacks, for each opponent, you create a 2/2 green Boar creature token that's tapped and attacking that opponent.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenTapped$ True | TokenAttacking$ Remembered | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Haste\nWhenever Stampede Surfer attacks, for each opponent, you create a 2/2 green Boar creature token that's tapped and attacking that opponent.

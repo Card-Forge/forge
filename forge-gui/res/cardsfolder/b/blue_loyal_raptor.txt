@@ -1,0 +1,10 @@
+Name:Blue, Loyal Raptor
+ManaCost:2 G U
+Types:Legendary Creature Dinosaur
+PT:5/4
+K:Partner:Owen Grady, Raptor Trainer
+R:Event$ Moved | ActiveZones$ Battlefield | ValidCard$ Dinosaur.YouCtrl+Other | Destination$ Battlefield | ReplaceWith$ EnterWithCounters | ReplacementResult$ Updated | Description$ For each kind of counter on CARDNAME, each other Dinosaur you control enters the battlefield with a counter of that kind on it.
+SVar:EnterWithCounters:DB$ PutCounter | ETB$ True | CounterType$ EachFromSource | EachFromSource$ Self | Defined$ ReplacedCard | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters & Type$Dinosaur
+Oracle:Partner with Owen Grady, Raptor Trainer (When this creature enters the battlefield, target player may put Owen into their hand from their library, then shuffle.)\nFor each kind of counter on Blue, Loyal Raptor, each other Dinosaur you control enters the battlefield with a counter of that kind on it.

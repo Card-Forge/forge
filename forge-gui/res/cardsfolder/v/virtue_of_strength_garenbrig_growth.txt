@@ -1,0 +1,17 @@
+Name:Virtue of Strength
+ManaCost:5 G G
+Types:Enchantment
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidActivator$ You | ValidCard$ Land.Basic | ReplaceWith$ ProduceThrice | Description$ If you tap a basic land for mana, it produces three times as much of that mana instead.
+SVar:ProduceThrice:DB$ ReplaceMana | ReplaceAmount$ 3
+DeckHas:Ability$Graveyard
+AlternateMode:Adventure
+Oracle:If you tap a basic land for mana, it produces three times as much of that mana instead.
+
+
+ALTERNATE
+
+Name:Garenbrig Growth
+ManaCost:G
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature or land card in your graveyard | ValidTgts$ Creature.YouCtrl,Land.YouCtrl | SpellDescription$ Return target creature or land card from your graveyard to your hand. (Then exile this card. You may cast the enchantment later from exile.)
+Oracle:Return target creature or land card from your graveyard to your hand. (Then exile this card. You may cast the enchantment later from exile.)

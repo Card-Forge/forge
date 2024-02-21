@@ -1,0 +1,12 @@
+Name:Illicit Masquerade
+ManaCost:3 B
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCountersAll | TriggerDescription$ When CARDNAME enters the battlefield, put an impostor counter on each creature you control.
+SVar:TrigPutCountersAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ IMPOSTOR | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+counters_GE1_IMPOSTOR | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with an impostor counter on it dies, exile it. Return up to one other target creature card from your graveyard to the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose up to one other target creature card in your graveyard | ValidTgts$ Creature.YouOwn+NotTriggeredCard | TargetMin$ 0 | TargetMax$ 1
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$Graveyard|Discard|Mill
+Oracle:Flash\nWhen Illicit Masquerade enters the battlefield, put an impostor counter on each creature you control.\nWhenever a creature you control with an impostor counter on it dies, exile it. Return up to one other target creature card from your graveyard to the battlefield.

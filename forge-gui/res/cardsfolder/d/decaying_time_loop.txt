@@ -1,0 +1,10 @@
+Name:Decaying Time Loop
+ManaCost:3 R
+Types:Instant
+K:Retrace
+A:SP$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Discard|Graveyard
+Oracle:Discard all the cards in your hand, then draw that many cards.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

@@ -1,0 +1,14 @@
+Name:Izoni, Center of the Web
+ManaCost:4 B G
+Types:Legendary Creature Elf Detective
+PT:5/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may collect evidence 4. If you do, create two 2/1 black and green Spider creature tokens with menace and reach.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may collect evidence 4. If you do, create two 2/1 black and green Spider creature tokens with menace and reach.
+SVar:TrigToken:AB$ Token | Cost$ CollectEvidence<4> | TokenScript$ bg_2_1_spider_menace_reach | TokenAmount$ 2
+A:AB$ Surveil | Cost$ Sac<4/Card.token/tokens> | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBGainLife 
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+DeckHas:Ability$Sacrifice|LifeGain|Surveil|Token & Type$Spider
+Oracle:Menace\nWhenever Izoni, Center of the Web enters the battlefield or attacks, you may collect evidence 4. If you do, create two 2/1 black and green Spider creature tokens with menace and reach.\nSacrifice four tokens: Surveil 2, then draw two cards. You gain 2 life.

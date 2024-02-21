@@ -1,0 +1,13 @@
+Name:The Millennium Calendar
+ManaCost:1
+Types:Legendary Artifact
+T:Mode$ UntapAll | TriggerZones$ Battlefield | ValidCards$ Permanent | ValidPlayer$ You | Phase$ Untap | PlayerTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you untap one or more permanents during your untap step, put that many time counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ X
+SVar:X:TriggerCount$Amount
+A:AB$ MultiplyCounter | Cost$ 2 T | CounterType$ TIME | SpellDescription$ Double the number of time counters on CARDNAME.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1000_TIME | Execute$ TrigSac | TriggerDescription$ When there are 1,000 or more time counters on CARDNAME, sacrifice it and each opponent loses 1,000 life.
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1000
+DeckHas:Ability$Counters|Sacrifice
+DeckHints:Ability$Counters
+Oracle:Whenever you untap one or more permanents during your untap step, put that many time counters on The Millennium Calendar.\n{2}, {T}: Double the number of time counters on The Millennium Calendar.\nWhen there are 1,000 or more time counters on The Millennium Calendar, sacrifice it and each opponent loses 1,000 life.

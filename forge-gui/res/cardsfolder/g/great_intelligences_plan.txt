@@ -1,0 +1,8 @@
+Name:Great Intelligence's Plan
+ManaCost:4 U B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 3 | Defined$ You | SubAbility$ DBDiscardOrFreeCast | SpellDescription$ Draw three cards. Then target opponent faces a villainous choice — They discard three cards, or you may cast a spell from your hand without paying its mana cost.
+SVar:DBDiscardOrFreeCast:DB$ VillainousChoice | Choices$ Discard,FreeCast | ValidTgts$ Opponent | StackDescription$ Then target opponent faces a villainous choice — They discard three cards, or you may cast a spell from your hand without paying its mana cost.
+SVar:Discard:DB$ Discard | Defined$ Targeted | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Targeted opponent discards three cards.
+SVar:FreeCast:DB$ Play | Valid$ Card.YouCtrl | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | SpellDescription$ You may cast a spell from your hand without paying its mana cost.
+Oracle:Draw three cards. Then target opponent faces a villainous choice — They discard three cards, or you may cast a spell from your hand without paying its mana cost.

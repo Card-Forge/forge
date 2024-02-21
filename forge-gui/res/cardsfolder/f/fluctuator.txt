@@ -1,6 +1,6 @@
 Name:Fluctuator
 ManaCost:2
 Types:Artifact
-S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Cycling | Activator$ You | Amount$ 2 | Description$ Cycling abilities you activate cost you up to {2} less to activate.
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Cycling | Activator$ You | Amount$ 2 | UpTo$ True | Description$ Cycling abilities you activate cost you up to {2} less to activate.
 AI:RemoveDeck:Random
 Oracle:Cycling abilities you activate cost up to {2} less to activate.

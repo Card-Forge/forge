@@ -36,6 +36,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -241,7 +242,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params) {
         return getAi().confirmAction(sa, mode, message, params);
     }
 
@@ -252,8 +253,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        return getAi().confirmStaticApplication(hostCard, affected, logic, message);
+    public boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic) {
+        return getAi().confirmStaticApplication(hostCard, logic);
     }
 
     @Override
@@ -337,14 +338,14 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+    public void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addSuffix) {
         for (Card c : cards) {
             AiCardMemory.rememberCard(player, c, AiCardMemory.MemorySet.REVEALED_CARDS);
         }
     }
 
     @Override
-    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+    public void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addSuffix) {
         for (CardView cv : cards) {
             AiCardMemory.rememberCard(player, player.getGame().findByView(cv), AiCardMemory.MemorySet.REVEALED_CARDS);
         }
@@ -542,15 +543,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        String [] splitUTypes = uType.split(",");
-        CardCollection cardsOfType = new CardCollection();
-        for (String part : splitUTypes) {
-            CardCollection partCards = CardLists.getType(hand, part);
-            if (!partCards.isEmpty()) {
-                cardsOfType.addAll(partCards);
-            }
-        }
-        if (!cardsOfType.isEmpty()) {
+        Iterable<Card> cardsOfType = Iterables.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+        if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
             return new CardCollection(toDiscard);
         }
@@ -584,6 +578,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls) {
+        //TODO create AI logic for this
+        return Aggregates.random(rolls);
+    }
+
+    @Override
+    public Integer chooseRollToIgnore(List<Integer> rolls) {
         //TODO create AI logic for this
         return Aggregates.random(rolls);
     }
@@ -659,7 +659,6 @@ public class PlayerControllerAi extends PlayerController {
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                getGame().updateLastStateForCard(sa.getHostCard());
             }
         } else {
             ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
@@ -981,6 +980,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+        // only matters in corner cases
+        return Iterables.getFirst(possibleStatics, null);
+    }
+
+    @Override
     public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
@@ -1050,9 +1055,14 @@ public class PlayerControllerAi extends PlayerController {
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
         emptyAbility.setActivatingPlayer(player, true);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
+        emptyAbility.setReplacingObjects(sa.getReplacingObjects());
+        emptyAbility.setTrigger(sa.getTrigger());
+        emptyAbility.setReplacementEffect(sa.getReplacementEffect());
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
+        emptyAbility.setTargets(sa.getTargets().clone());
+
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
             if (!emptyAbility.getPaidHash().isEmpty()) {
@@ -1435,7 +1445,6 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
-
         if (keyword.getKeyword() == Keyword.CASUALTY
                 && "true".equalsIgnoreCase(sa.getHostCard().getSVar("AINoCasualtyPayment"))) {
             // TODO: Grisly Sigil - currently will be misplayed if Casualty is paid (the cost is always paid, targeting is wrong).
@@ -1457,6 +1466,11 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         return chosenAmount;
+    }
+
+    @Override
+    public int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max) {
+        return max;
     }
 
     @Override

@@ -1,0 +1,9 @@
+Name:Rampaging Spiketail
+ManaCost:4 B B
+Types:Creature Dinosaur
+PT:5/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gets +2/+0 and gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | KW$ Indestructible
+K:TypeCycling:Swamp:2
+SVar:PlayMain1:TRUE
+Oracle:When Rampaging Spiketail enters the battlefield, target creature you control gets +2/+0 and gains indestructible until end of turn.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

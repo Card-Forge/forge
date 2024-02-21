@@ -362,7 +362,6 @@ public class AttackConstraints {
         MapToAmount<GameEntity> sortedPlayerReqs = new LinkedHashMapToAmount<>();
         sortedPlayerReqs.addAll(Iterables.concat(playerReqs));
         while (!sortedPlayerReqs.isEmpty()) {
-            sortedPlayerReqs.keySet().removeAll(excludedDefenders);
             Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
             Attack bestMatch = Iterables.getLast(Iterables.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
@@ -376,6 +375,7 @@ public class AttackConstraints {
             } else {
                 excludedDefenders.add(playerReq.getLeft());
             }
+            sortedPlayerReqs.keySet().removeAll(excludedDefenders);
         }
         if (!usedAttackers.isEmpty()) {
             // order could have changed

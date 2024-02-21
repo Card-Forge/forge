@@ -1230,6 +1230,13 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            // Extra check for the Exalted trigger in case we're declaring more than one attacker
+            if (combat != null && trigger.isKeyword(Keyword.EXALTED)) {
+                if (!combat.getAttackers().isEmpty() && !combat.getAttackers().contains(attacker)) {
+                    continue;
+                }
+            }
+
             SpellAbility sa = trigger.ensureAbility();
             if (sa == null) {
                 continue;
@@ -1250,7 +1257,7 @@ public class ComputerUtilCombat {
             sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.hasParam("Cost")) {
-                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                     continue;
                 }
             }
@@ -1447,7 +1454,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (sa.hasParam("Cost")) {
-                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                         continue;
                     }
                 }
@@ -1481,7 +1488,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (sa.hasParam("Cost")) {
-                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                         continue;
                     }
                 }
@@ -2556,5 +2563,63 @@ public class ComputerUtilCombat {
             }
         }
         return Iterables.getFirst(defenders, null);
+    }
+
+    public static int checkAttackerLifelinkDamage(Combat combat) {
+        if (combat == null) {
+            return 0;
+        }
+
+        int totalLifeLinkDamage = 0;
+        for (Card attacker : combat.getAttackers()) {
+            int netDamage = attacker.getNetCombatDamage();
+            if ((attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasSVar("LikeLifeLink")) && netDamage > 0) {
+                int damage = ComputerUtilCombat.predictDamageTo(combat.getDefenderByAttacker(attacker), netDamage, attacker, true);
+                boolean prevented = ComputerUtilCombat.isCombatDamagePrevented(attacker, combat.getDefenderByAttacker(attacker), damage);
+                if (!prevented) {
+                    totalLifeLinkDamage += damage;
+                }
+            }
+        }
+        return totalLifeLinkDamage;
+    }
+
+    public static boolean willOpposingCreatureDieInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, atk, combat)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                for (Card blk : combat.getBlockers(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, blk, combat)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDangerousToSacInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (atk.hasKeyword(Keyword.TRAMPLE)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

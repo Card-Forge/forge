@@ -1,0 +1,9 @@
+Name:Repeat Offender
+ManaCost:1 B
+Types:Creature Human Assassin
+PT:2/1
+A:AB$ Branch | Cost$ 2 B | BranchConditionSVar$ Count$Valid Card.Self+IsSuspected | TrueSubAbility$ DBPutCounter | FalseSubAbility$ DBSuspect | StackDescription$ SpellDescription | SpellDescription$ If CARDNAME is suspected, put a +1/+1 counter on it. Otherwise, suspect it. (A suspected creature has menace and can't block.)
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1
+SVar:DBSuspect:DB$ AlterAttribute | Attributes$ Suspected
+DeckHas:Ability$Counters
+Oracle:{2}{B}: If Repeat Offender is suspected, put a +1/+1 counter on it. Otherwise, suspect it. (A suspected creature has menace and can't block.)

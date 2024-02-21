@@ -1,4 +1,5 @@
 Name:Hawkins National Laboratory
+AltName:Havengul Laboratory
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
@@ -14,6 +15,7 @@ Oracle:{T}: Add {C}.\n{4}, {T}: Investigate.\nAt the beginning of your end step,
 ALTERNATE
 
 Name:The Upside Down
+AltName:Havengul Mystery
 ManaCost:no cost
 Types:Legendary Land
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this land transforms into CARDNAME, return target creature card from your graveyard to the battlefield.

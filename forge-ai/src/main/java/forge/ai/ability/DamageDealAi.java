@@ -15,6 +15,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
+import forge.game.cost.CostPutCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -735,7 +736,8 @@ public class DamageDealAi extends DamageAiBase {
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
-                    if ((pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
+                    boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
+                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
                         tcs.add(enemy);
                         if (divided) {
                             sa.addDividedAllocation(enemy, dmg);
@@ -747,8 +749,22 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // fell through all the choices, no targets left?
-        if (tcs.size() < tgt.getMinTargets(source, sa) || tcs.size() == 0) {
+        int minTgts = tgt.getMinTargets(source, sa);
+        if (tcs.size() < minTgts || tcs.size() == 0) {
             if (mandatory) {
+                // Sanity check: if there are any legal non-owned targets after the check (which may happen for complex cards like Rift Bolt),
+                // choose a random opponent's target before forcing targeting of own stuff
+                List<GameEntity> allTgtEntities = sa.getTargetRestrictions().getAllCandidates(sa, true);
+                for (GameEntity ent : allTgtEntities) {
+                    if ((ent instanceof Player && ((Player)ent).isOpponentOf(ai))
+                            || (ent instanceof Card && ((Card)ent).getController().isOpponentOf(ai))) {
+                        tcs.add(ent);
+                    }
+                    if (tcs.size() == minTgts) {
+                        return true;
+                    }
+                }
+
                 // If the trigger is mandatory, gotta choose my own stuff now
                 return damageChooseRequiredTargets(ai, sa, tgt, dmg);
             }

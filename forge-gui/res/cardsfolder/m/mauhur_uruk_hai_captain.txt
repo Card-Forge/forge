@@ -1,4 +1,4 @@
-Name:Mauhur, Uruk-hai Captain
+Name:Mauhúr, Uruk-hai Captain
 ManaCost:B R
 Types:Legendary Creature Orc Soldier
 PT:2/2

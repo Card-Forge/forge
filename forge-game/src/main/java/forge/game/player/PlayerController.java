@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import forge.game.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -39,6 +40,7 @@ import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -130,10 +132,16 @@ public abstract class PlayerController {
 
     public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer, Map<String, Object> params);
 
-    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params);
+    public final boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return confirmAction(sa, mode, message, Lists.newArrayList(), null, params);
+    }
+    public final boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Card cardToShow, Map<String, Object> params) {
+        return confirmAction(sa, mode, message, Lists.newArrayList(), cardToShow, params);
+    }
+    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question);
-    public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);
+    public abstract boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic);
     public abstract boolean confirmTrigger(WrappedAbility sa);
     public abstract Player chooseStartingPlayer(boolean isFirstGame);
 
@@ -155,8 +163,14 @@ public abstract class PlayerController {
     public final void reveal(CardCollectionView cards, ZoneType zone, Player owner) {
         reveal(cards, zone, owner, null);
     }
-    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix);
-    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
+    public final void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addMsgSuffix);
+    public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);
@@ -188,6 +202,7 @@ public abstract class PlayerController {
     }
 
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
+    public abstract Integer chooseRollToIgnore(List<Integer> rolls);
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
 
@@ -201,6 +216,7 @@ public abstract class PlayerController {
 
     public abstract boolean payManaOptional(Card card, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose);
 
+    public abstract int chooseNumberForCostReduction(final SpellAbility sa, final int min, final int max);
     public abstract int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max);
     public boolean addKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt) {
         return chooseNumberForKeywordCost(sa, cost, keyword, prompt, 1) == 1;
@@ -232,6 +248,7 @@ public abstract class PlayerController {
 
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers);
+    public abstract StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleReplacers);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 
     // these 4 need some refining.
@@ -251,9 +268,6 @@ public abstract class PlayerController {
 
     public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
 
-    public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, boolean effect) {
-        return payManaCost(costPartMana, sa, prompt, null, effect);
-    }
     public final boolean payManaCost(CostPartMana costPartMana, SpellAbility sa, String prompt, ManaConversionMatrix matrix, boolean effect) {
         return payManaCost(costPartMana.getManaCostFor(sa), costPartMana, sa, prompt, matrix, effect);
     }
@@ -271,6 +285,11 @@ public abstract class PlayerController {
     public abstract Card chooseSingleCardForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal, String selectPrompt, boolean isOptional, Player decider);
 
     public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
+
+    public boolean isFullControl() {
+        return false;
+    }
+    public void setFullControl(boolean full) {}
 
     public abstract void autoPassCancel();
 

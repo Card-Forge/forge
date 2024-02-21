@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -18,12 +18,12 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy91UsOgjAQBuBJlxROIHIK4+Mqegrdq+dQz2GCiqcA9ToOi4aGtJ2Z1jjJHxaUfn0ArXOAmkjJiLQPTvtNAXDP/VkXdF9ct7TMB16v4K8bw5a4xgyVGQ9lc1zKbDVAp2Xzptyx2Yzm1dcW7+2sMVUwtPXZHHeuwmtL1UzFuVPMKQM4Yy5Z+J1yVZvgLnD/lpiVYx+pmjj65rov9N6Yjx72+B9uX5Wjz34NfelUmvskvlmqmgjXto9a9k7ttduU/q+MnWpKzwWuTZlS17YP2h/KjHFdz/zi/P0CaY/QDg==
+   eJy91d0NgjAQB/ALjxxMILKGuopOoe/qHOocJqg4BaDreDw0NKTl7lr1kn94oPTXr9AqA6iYFIJo+5C03+QA98yfdc73JXULy3zQ8wr+uglsjWvMqTLj4WyJy5kNArSomzfnjs16NK++tvRuZ42phKGtz5a4c2ZtuZo5+pa6pxTgTLmk02fKVU0S7i5o/5aUlWMffznfjrwX5Y3DHv/D7at09NmvoS9tEuc+I89VHeDa9hF1Z2qPblP7vzJ2rKm9F6Q2Z2pd2z6gP5wZ4rq++cb9+wHU1M/w
   </data>
  </layer>
  <layer id="7" name="Ornamental Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBi8wIKJgeEyHmzJRBs7r2AxN1IQwb5EZbtx2YkNUMtuUuyklt3k2Ektu5Hjj17AjAT3IquFpW8TGqRvfPbC2OTaS65/aWkvutwLPQaGl3qoYuTaew2obwYjcfZq6DMwaOoj+NOA+q5TEL/47AaBI0A/HgXiY0h+pdROdLux5SkWoB9ZgZhNn7p2otsNA9jintp2Its9nRGCzZDYMEwLO2kFAGrZLDs=
+   eJxjYBi8wIKJgeEyHmzJRBs7r2AxN1IQwb5EZbtx2YkNUMtuUuyklt3k2EkNu82YUOOPXsCMBPciq4WlbxMapG989sLY5NpLrn9paS+63As9BoaXeqhi5Np7DahvBiNx9mroMzBo6iP404D6rlMQv/jsBoEjQD8eBeJjSH6l1E50u7HlKRagH1mBmE2funai2w0D2OKe2nYi2z2dEYLNkNgwTAs7aQUAh0Yscw==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">

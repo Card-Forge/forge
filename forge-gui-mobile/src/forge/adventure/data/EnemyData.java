@@ -5,6 +5,8 @@ import forge.deck.Deck;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Data class that will be used to read Json configuration files
@@ -12,6 +14,7 @@ import java.io.Serializable;
  * contains the information of enemies
  */
 public class EnemyData implements Serializable {
+    private static final long serialVersionUID = -3317270785183936320L;
     public String name;
     public String nameOverride;
     public String sprite;
@@ -35,6 +38,7 @@ public class EnemyData implements Serializable {
 
     public String[] questTags = new String[0];
     public float lifetime;
+    public int gamesPerMatch = 1;
 
     public EnemyData() {
     }
@@ -60,6 +64,7 @@ public class EnemyData implements Serializable {
         nameOverride    = enemyData.nameOverride == null ? "" : enemyData.nameOverride;
         questTags       = enemyData.questTags.clone();
         lifetime        = enemyData.lifetime;
+        gamesPerMatch   = enemyData.gamesPerMatch;
         if (enemyData.scale == 0.0f) {
             scale = 1.0f;
         }
@@ -86,5 +91,19 @@ public class EnemyData implements Serializable {
         if (name != null && !name.isEmpty())
             return name;
         return "(Unnamed Enemy)";
+    }
+
+    public boolean match(EnemyData other) {
+        //equals() does not cover cases where data is updated to override speed, displayname, etc
+        if (this.equals(other))
+            return true;
+        if (!this.name.equals(other.name))
+            return false;
+        if (questTags.length != other.questTags.length)
+            return false;
+        ArrayList<String> myQuestTags = new ArrayList<>(Arrays.asList(questTags));
+        ArrayList<String> otherQuestTags = new ArrayList<>(Arrays.asList(other.questTags));
+        myQuestTags.removeAll(otherQuestTags);
+        return myQuestTags.isEmpty();
     }
 }

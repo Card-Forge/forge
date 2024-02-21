@@ -1,0 +1,8 @@
+Name:Intelligence Bobblehead
+ManaCost:3
+Types:Artifact Bobblehead
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 5 T | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of Bobbleheads you control.
+SVar:X:Count$Valid Bobblehead.YouCtrl
+DeckNeeds:Type$Bobblehead
+Oracle:{T}: Add one mana of any color.\n{5}, {T}: Draw X cards, where X is the number of Bobbleheads you control.

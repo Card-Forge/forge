@@ -1,0 +1,10 @@
+Name:Romana II
+ManaCost:3 W
+Types:Legendary Creature Time Lord Scientist
+PT:3/3
+K:Vigilance
+A:AB$ CopyPermanent | Cost$ 1 T | ValidTgts$ Permanent.token+ThisTurnEntered | TgtPrompt$ Select target token that entered the battlefield this turn | TokenTapped$ True
+K:Doctor's companion
+DeckHas:Ability$Token
+DeckNeeds:Ability$Token
+Oracle:Vigilance\n{1}, {T}: Create a tapped token that's a copy of target token that entered the battlefield this turn.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

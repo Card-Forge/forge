@@ -1,0 +1,10 @@
+Name:Rowan, Scion of War
+ManaCost:1 B R
+Types:Legendary Creature Human Wizard
+PT:4/2
+K:Menace
+A:AB$ Effect | Cost$ T | StaticAbilities$ StaticReduce | SetChosenNumber$ X | SorcerySpeed$ True | SpellDescription$ Spells you cast this turn that are black and/or red cost {X} less to cast, where X is the amount of life you lost this turn. Activate only as a sorcery.
+SVar:StaticReduce:Mode$ ReduceCost | ValidCard$ Card.Black,Card.Red | Type$ Spell | Activator$ You | Amount$ Num | Description$ Spells you cast this turn that are black and/or red cost {X} less to cast, where X is the amount of life you lost this turn.
+SVar:X:Count$LifeYouLostThisTurn
+SVar:Num:Count$ChosenNumber
+Oracle:Menace\n{T}: Spells you cast this turn that are black and/or red cost {X} less to cast, where X is the amount of life you lost this turn. Activate only as a sorcery.

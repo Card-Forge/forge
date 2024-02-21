@@ -383,6 +383,17 @@ public class Assets implements Disposable {
         return textrafonts.get(name);
     }
 
+    public Font getGenericHeaderFont(BitmapFont bitmapFont) {
+        if (textrafonts == null)
+            textrafonts = new ObjectMap<>();
+        if (!textrafonts.containsKey("GenericHeaderFont")) {
+            Font font = new Font(bitmapFont, 0f, -0.5f, 0f, -2.5f);
+            font.integerPosition = false;
+            textrafonts.put("GenericHeaderFont", font);
+        }
+        return textrafonts.get("GenericHeaderFont");
+    }
+
     public Music getMusic(FileHandle file) {
         if (file == null || !file.exists() || !FileType.Absolute.equals(file.type())) {
             System.err.println("Failed to load: " + file + "!.");

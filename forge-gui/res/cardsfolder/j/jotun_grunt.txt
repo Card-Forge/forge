@@ -1,4 +1,4 @@
-Name:Jotun Grunt
+Name:Jötun Grunt
 ManaCost:1 W
 Types:Creature Giant Soldier
 PT:4/4

@@ -1,0 +1,11 @@
+Name:Zoetic Glyph
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant artifact
+A:SP$ Attach | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AILogic$ Animate
+S:Mode$ Continuous | Affected$ Artifact.EnchantedBy | AddType$ Creature & Golem | SetPower$ 5 | SetToughness$ 4 | Description$ Enchanted artifact is a Golem creature with base power and toughness 5/4 in addition to its other types.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscover | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, discover 3.
+SVar:TrigDiscover:DB$ Discover | Num$ 3
+DeckHas:Type$Golem
+DeckNeeds:Type$Artifact
+Oracle:Enchant artifact\nEnchanted artifact is a Golem creature with base power and toughness 5/4 in addition to its other types.\nWhen Zoetic Glyph is put into a graveyard from the battlefield, discover 3.

@@ -59,7 +59,7 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblPrompt"));
 
     // Various components
-    private final FButton btnOK = new FButton(localizer.getMessage("lblOk"));
+    private final FButton btnOK = new FButton(localizer.getMessage("lblOK"));
     private final FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
     private final FHtmlViewer tarMessage = new FHtmlViewer();
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,

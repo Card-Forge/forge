@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,6 +16,9 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
+import forge.util.collect.FCollectionView;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ChooseNumberEffect extends SpellAbilityEffect {
 
@@ -47,11 +51,17 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         final Map<Player, Integer> chooseMap = Maps.newHashMap();
 
+        // defined guesser must try to guess the chosen - currently only on "The Toymaker's Trap"
+        boolean guessedCorrect = false;
+        Pair<Player, Integer> guessPair = null;
+        // may need future work to ensure chooser and guesser get same choices even in absence of RemoveChoices param
+        List<Integer> choices = new ArrayList<>();
+
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
                 continue;
             }
-            int chosen;
+            Integer chosen;
             if (random) {
                 chosen = MyRandom.getRandom().nextInt((max - min) + 1) + min;
                 //TODO more useful notify for RepeatEach -> ChooseNumber with random
@@ -61,6 +71,16 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 if (anyNumber) {
                     Integer value = p.getController().announceRequirements(sa, title);
                     chosen = value == null ? 0 : value;
+                } else if (sa.hasParam("RemoveChoices")) {
+                    // currently we always remove remembered numbers, so the value is not really used yet
+                    for (int i = min; i <= max; i++) {
+                        choices.add(i);
+                    }
+                    for (Object o : card.getRemembered()) {
+                        if (o instanceof Integer) choices.remove((Integer) o);
+                    }
+                    if (choices.isEmpty()) continue;
+                    chosen = p.getController().chooseNumber(sa, title, choices, null);
                 } else {
                     chosen = p.getController().chooseNumber(sa, title, min, max);
                 }
@@ -72,15 +92,35 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 card.setChosenNumber(chosen);
             }
             if (sa.hasParam("Notify")) {
-                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
+                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().
+                getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
+            }
+            if (sa.hasParam("Guesser") && chosen != null) { // if nothing was chosen, there is nothing to guess
+                final FCollectionView<Player> gChoices = 
+                    AbilityUtils.getDefinedPlayers(card, sa.getParam("Guesser"), sa);
+                final Player guesser = choices.isEmpty() ? null : p.getController().
+                    chooseSingleEntityForEffect(gChoices, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), 
+                        false, null);
+                if (guesser != null) {
+                    guessPair = Pair.of(guesser, guesser.getController().chooseNumber(sa, 
+                    Localizer.getInstance().getMessage("lblChooseNumber"), choices, null));
+                    // if more complicated effects require this in the future it may be worth a unique message
+                    if (chooseMap.containsValue(guessPair.getValue())) guessedCorrect = true;
+                }
             }
         }
-        if (secretlyChoose) {
+
+        if (secretlyChoose && !chooseMap.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             List<Player> highestNum = Lists.newArrayList();
             List<Player> lowestNum = Lists.newArrayList();
             int highest = 0;
             int lowest = Integer.MAX_VALUE;
+            if (guessPair != null) {
+                sb.append(Localizer.getInstance().getMessage("lblPlayerGuessedNum", guessPair.getKey().getName(),
+                        String.valueOf(guessPair.getValue())));
+                sb.append("\r\n");
+            }
             for (Entry<Player, Integer> ev : chooseMap.entrySet()) {
                 int num = ev.getValue();
                 Player player = ev.getKey();
@@ -153,7 +193,24 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.addRemembered(highestNum);
                 }
             }
+
+            if (sa.hasParam("GuessCorrect") && guessedCorrect) { // correct guess doesn't use any chosen num yet
+                SpellAbility sub = sa.getAdditionalAbility("GuessCorrect");
+                AbilityUtils.resolve(sub);
+            }
+
+            if (sa.hasParam("GuessWrong") && guessPair != null && !guessedCorrect) {
+                SpellAbility sub = sa.getAdditionalAbility("GuessWrong");
+                // wrong currently uses the guess, not the chosen
+                card.setChosenNumber(guessPair.getValue());
+                card.addRemembered(guessPair.getKey());
+                AbilityUtils.resolve(sub);
+                card.clearChosenNumber();
+                card.removeRemembered(guessPair.getKey());
+            }
         }
+
+        if (sa.hasParam("RememberChosen")) card.addRemembered(chooseMap.values());
     }
 
 }

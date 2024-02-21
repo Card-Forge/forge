@@ -1,0 +1,6 @@
+Name:Dinosaur Token
+ManaCost:no cost
+Types:Creature Dinosaur
+Colors:green
+PT:3/3
+Oracle:

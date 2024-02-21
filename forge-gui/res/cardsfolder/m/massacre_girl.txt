@@ -3,9 +3,9 @@ ManaCost:3 B B
 Types:Legendary Creature Human Assassin
 PT:4/4
 K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMassacre | TriggerDescription$ When CARDNAME enters the battlefield, each other creature gets -1/-1 until end of turn. Whenever a creature dies this turn, each creature other than Massacre Girl gets -1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMassacre | TriggerDescription$ When CARDNAME enters the battlefield, each other creature gets -1/-1 until end of turn. Whenever a creature dies this turn, each creature other than CARDNAME gets -1/-1 until end of turn.
 SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.StrictlyOther | IsCurse$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ TrigDies | RememberObjects$ Self
-SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigMoreMassacre | TriggerDescription$ Whenever a creature dies this turn, each creature other than Massacre Girl gets -1/-1 until end of turn.
+SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigMoreMassacre | TriggerDescription$ Whenever a creature dies this turn, each creature other than EFFECTSOURCE gets -1/-1 until end of turn.
 SVar:TrigMoreMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.IsNotRemembered | IsCurse$ True
 Oracle:Menace\nWhen Massacre Girl enters the battlefield, each other creature gets -1/-1 until end of turn. Whenever a creature dies this turn, each creature other than Massacre Girl gets -1/-1 until end of turn.

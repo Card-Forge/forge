@@ -1,0 +1,11 @@
+Name:Lich-Knights' Conquest
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Sacrifice | Amount$ SacX | Optional$ True | SacValid$ Enchantment,Artifact,Card.token | RememberSacrificed$ True | SubAbility$ ReturnGrave | SpellDescription$ Sacrifice any number of artifacts, enchantments, and/or tokens. Return that many creature cards from your graveyard to the battlefield.
+SVar:ReturnGrave:DB$ ChangeZone | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Mandatory$ True | Destination$ Battlefield | ChangeNum$ ReturnX | Hidden$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Enchantment.YouCtrl,Artifact.YouCtrl,Card.token+YouCtrl
+SVar:ReturnX:Remembered$Amount
+DeckHas:Ability$Graveyard|Sacrifice
+DeckHints:Ability$Graveyard|Token & Type$Artifact|Enchantment
+Oracle:Sacrifice any number of artifacts, enchantments, and/or tokens. Return that many creature cards from your graveyard to the battlefield.

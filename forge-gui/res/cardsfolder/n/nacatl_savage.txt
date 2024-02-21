@@ -2,5 +2,5 @@ Name:Nacatl Savage
 ManaCost:1 G
 Types:Creature Cat Warrior
 PT:2/1
-K:Protection from artifacts
+K:Protection:Artifact
 Oracle:Protection from artifacts

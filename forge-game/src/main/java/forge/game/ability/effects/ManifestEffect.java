@@ -2,83 +2,23 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
-public class ManifestEffect extends SpellAbilityEffect {
-    @Override
-    public void resolve(SpellAbility sa) {
+public class ManifestEffect extends ManifestBaseEffect {
+
+    protected String getDefaultMessage() {
+        return Localizer.getInstance().getMessage("lblChooseCardToManifest");
+    }
+    protected Card internalEffect(Card c, Player p, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         final Card source = sa.getHostCard();
-        final Player activator = sa.getActivatingPlayer();
-        final Game game = source.getGame();
-        // Usually a number leaving possibility for X, Sacrifice X land: Manifest X creatures.
-        final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source,
-                sa.getParam("Amount"), sa) : 1;
-        // Most commonly "defined" is Top of Library
-        final String defined = sa.getParamOrDefault("Defined", "TopOfLibrary");
-
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-
-        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
-        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-
-        for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
-            CardCollection tgtCards;
-            if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
-                ZoneType choiceZone = ZoneType.Hand;
-                if (sa.hasParam("ChoiceZone")) {
-                    choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
-                }
-                CardCollectionView choices = game.getCardsIn(choiceZone);
-                if (sa.hasParam("Choices")) {
-                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
-                }
-                if (choices.isEmpty()) {
-                    continue;
-                }
-
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
-
-                tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
-            } else if ("TopOfLibrary".equals(defined)) {
-                tgtCards = p.getTopXCardsFromLibrary(amount);
-            } else {
-                tgtCards = getTargetCards(sa);
-            }
-
-            if (sa.hasParam("Shuffle")) {
-                CardLists.shuffle(tgtCards);
-            }
-
-            for (Card c : tgtCards) {
-                CardZoneTable triggerList = new CardZoneTable();
-                ZoneType origin = c.getZone().getZoneType();
-                Card rem = c.manifest(p, sa, moveParams);
-                if (rem != null) {
-                    if (sa.hasParam("RememberManifested") && rem.isManifested()) {
-                        source.addRemembered(rem);
-                    }
-                    // 701.34d. If an effect instructs a player to manifest multiple cards from their library,
-                    // those cards are manifested one at a time.
-                    triggerList.put(origin, ZoneType.Battlefield, rem);
-                    triggerList.triggerChangesZoneAll(game, sa);
-                }
-            }
+        Card rem = c.manifest(p, sa, moveParams);
+        if (rem != null && sa.hasParam("RememberManifested") && rem.isManifested()) {
+            source.addRemembered(rem);
         }
+        return rem;
     }
 }

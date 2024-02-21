@@ -1,0 +1,12 @@
+Name:Time Reaper
+ManaCost:3 B B
+Types:Creature Alien Horror
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Consume Anomaly — Whenever CARDNAME deals combat damage to a player, put target face-up card they own in exile on the bottom of their library. If you do, you gain 3 life.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Exile | LibraryPosition$ -1 | Destination$ Library | ValidTgts$ Card.faceUp | TgtPrompt$ Select target face up card in exile | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
+Oracle:Flying, haste\nConsume Anomaly — Whenever Time Reaper deals combat damage to a player, put target face-up card they own in exile on the bottom of their library. If you do, you gain 3 life.

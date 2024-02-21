@@ -31,9 +31,9 @@ public class QuestLogScene extends UIScene {
         scrollWindow = ui.findActor("scrollWindow");
         root = ui.findActor("questList");
         detailRoot = ui.findActor("questDetails");
-        abandonQuestButton = ui.findActor("abandonQuest");
-        trackButton = ui.findActor("trackQuest");
-        backToListButton = ui.findActor("backToList");//Controls.newTextButton("Quest List");
+        abandonQuestButton = Controls.newTextButton("Abandon Quest");
+        trackButton = Controls.newTextButton("Track Quest");
+        backToListButton = Controls.newTextButton("Quest List");
         ui.onButtonPress("return", QuestLogScene.this::back);
         ui.onButtonPress("status", QuestLogScene.this::status);
         ui.onButtonPress("backToList", QuestLogScene.this::backToList);
@@ -48,8 +48,21 @@ public class QuestLogScene extends UIScene {
         detailScrollContainer.row();
 
         detailScroller = new ScrollPane(detailScrollContainer);
+        detailScroller.setScrollingDisabled(true,false);
+        if (Forge.isLandscapeMode()) {
+            detailRoot.add(abandonQuestButton).fillX().top().padTop(5f);
+            detailRoot.add(trackButton).fillX().top().padTop(5f);
+            detailRoot.add(backToListButton).fillX().top().padTop(5f);
+        } else {
+            detailRoot.add(abandonQuestButton).fillX().top().padTop(5f).colspan(3);
+            detailRoot.row();
+            detailRoot.add(trackButton).fillX().top().padTop(5f).colspan(3);
+            detailRoot.row();
+            detailRoot.add(backToListButton).fillX().top().padTop(5f).colspan(3);
+        }
+
         detailRoot.row();
-        detailRoot.add(detailScroller).expandX().fillX();
+        detailRoot.add(detailScroller).colspan(3).expandX().fillX().expandY();
         detailRoot.row();
         scrollWindow.setTouchable(Touchable.disabled);
         detailRoot.setVisible(false);
@@ -57,7 +70,7 @@ public class QuestLogScene extends UIScene {
         root.add(scroller).colspan(3);
         root.align(Align.right);
         root.row();
-        Label column0Label = new Label("Quest Name", Controls.getSkin());
+        Label column0Label = new Label(Forge.getLocalizer().getMessage("lblQuestName"), Controls.getSkin());
         column0Label.setColor(Color.BLACK);
         root.add(column0Label).align(Align.bottomLeft);
         root.row();
@@ -102,7 +115,7 @@ public class QuestLogScene extends UIScene {
             nameLabel.setWrap(true);
             nameLabel.setColor(Color.BLACK);
             scrollContainer.add(nameLabel).align(Align.left).expandX();
-            Button details = Controls.newTextButton("Details");
+            Button details = Controls.newTextButton(Forge.getLocalizer().getMessage("lblDetails"));
             details.addListener( new ClickListener(){
                 public void clicked(InputEvent event, float x, float y){
                     loadDetailsPane(quest);
@@ -130,8 +143,9 @@ public class QuestLogScene extends UIScene {
         }
         root.setVisible(false);
         detailRoot.setVisible(true);
+        detailScrollContainer.clear();
         detailScrollContainer.row();
-        trackButton.setText(quest.isTracked?"Untrack Quest":"Track Quest");
+        trackButton.setText(quest.isTracked?Forge.getLocalizer().getMessage("lblUntrackQuest"):Forge.getLocalizer().getMessage("lblTrackQuest"));
         trackButton.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
                 toggleTracked(quest);
@@ -142,7 +156,7 @@ public class QuestLogScene extends UIScene {
         abandonQuestButton.addListener( new ClickListener(){
             public void clicked(InputEvent event, float x, float y){
 
-                Dialog confirm = createGenericDialog("", "Abandon Quest?","Yes","No", () -> abandonQuest(quest), null);
+                Dialog confirm = createGenericDialog("", Forge.getLocalizer().getMessage("lblAbandonQuestConfirm"),Forge.getLocalizer().getMessage("lblYes"),Forge.getLocalizer().getMessage("lblNo"), () -> abandonQuest(quest), null);
                 showDialog(confirm);
             }
         });
@@ -164,60 +178,44 @@ public class QuestLogScene extends UIScene {
         dDescriptionLabel.setColor(Color.DARK_GRAY);
 
         detailScrollContainer.row();
-        detailScrollContainer.add(dDescriptionLabel).align(Align.left).padLeft(25);
+        detailScrollContainer.add(dDescriptionLabel).align(Align.left).padLeft(25).width(detailRoot.getWidth() -25);
 
-        for (AdventureQuestStage stage : quest.getStagesForQuestLog()){
-            // Todo: Eventually needs to be multiple loops or sort stages by status
-            //       because parallel objectives will make this messy
-            switch (stage.getStatus()){
-                case Complete:
-                TypingLabel completeLabel = Controls.newTypingLabel("*  " + stage.name);
-                completeLabel.skipToTheEnd();
-                completeLabel.setColor(Color.GREEN);
-                completeLabel.setWrap(true);
-                detailScrollContainer.row();
-                detailScrollContainer.add(completeLabel).align(Align.left).padLeft(25);
-                break;
-            case Failed:
-                TypingLabel failedLabel = Controls.newTypingLabel("*  " + stage.name);
-                failedLabel.skipToTheEnd();
-                failedLabel.setColor(Color.RED);
-                failedLabel.setText(stage.name);
-                failedLabel.setWrap(true);
-                detailScrollContainer.row();
-                detailScrollContainer.add(failedLabel).align(Align.left).padLeft(25);
-                break;
-            case Active:
-                TypingLabel activeLabel = Controls.newTypingLabel("*  " + stage.name);
-                activeLabel.skipToTheEnd();
-                activeLabel.setColor(Color.BLACK);
-                activeLabel.setWrap(true);
-                detailScrollContainer.row();
-                detailScrollContainer.add(activeLabel).align(Align.left).padLeft(25);
+        for (AdventureQuestStage stage : quest.getCompletedStages()) {
+            TypingLabel completeLabel = Controls.newTypingLabel("*  " + stage.name);
+            completeLabel.skipToTheEnd();
+            completeLabel.setColor(Color.GREEN);
+            completeLabel.setWrap(true);
+            detailScrollContainer.row();
+            detailScrollContainer.add(completeLabel).align(Align.left).padLeft(25);
+        }
 
-                TypingLabel activeDescriptionLabel = Controls.newTypingLabel(stage.description);
-                activeDescriptionLabel.skipToTheEnd();
-                activeDescriptionLabel.setColor(Color.DARK_GRAY);
-                activeDescriptionLabel.setWrap(true);
+        for (AdventureQuestStage stage : quest.getActiveStages()) {
+            TypingLabel activeLabel = Controls.newTypingLabel("*  " + stage.name);
+            activeLabel.skipToTheEnd();
+            activeLabel.setColor(Color.BLACK);
+            activeLabel.setWrap(true);
+            detailScrollContainer.row();
+            detailScrollContainer.add(activeLabel).align(Align.left).padLeft(25);
 
-                detailScrollContainer.row();
-                detailScrollContainer.add(activeDescriptionLabel).padLeft(35).width(scrollWindow.getWidth() - 50).colspan(4);
-                detailScrollContainer.row();
-                break;
-            }
+            TypingLabel activeDescriptionLabel = Controls.newTypingLabel(stage.description);
+            activeDescriptionLabel.skipToTheEnd();
+            activeDescriptionLabel.setColor(Color.DARK_GRAY);
+            activeDescriptionLabel.setWrap(true);
+
+            detailScrollContainer.row();
+            detailScrollContainer.add(activeDescriptionLabel).padLeft(35).width(detailRoot.getWidth() - 50);
+            detailScrollContainer.row();
         }
     }
 
     private void toggleTracked(AdventureQuestData quest){
-        quest.isTracked = !quest.isTracked;
         if (quest.isTracked){
-            for (AdventureQuestData q: Current.player().getQuests()){
-                if (q.equals(quest))
-                    continue;
-                q.isTracked = false;
-            }
+            quest.isTracked = false;
+            trackButton.setText(Forge.getLocalizer().getMessage("lblTrackQuest"));
+        } else {
+            AdventureQuestController.trackQuest(quest);
+            trackButton.setText(Forge.getLocalizer().getMessage("lblUntrackQuest"));
         }
-        trackButton.setText(quest.isTracked?"Untrack Quest":"Track Quest");
     }
 
     private void status() {

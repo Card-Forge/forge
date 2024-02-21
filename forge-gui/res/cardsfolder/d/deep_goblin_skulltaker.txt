@@ -1,0 +1,10 @@
+Name:Deep Goblin Skulltaker
+ManaCost:2 B
+Types:Creature Goblin Warrior
+PT:2/2
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you descended this turn, put a +1/+1 counter on CARDNAME. (You descended if a permanent card was put into your graveyard from anywhere.)
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+DeckHas:Ability$Counters
+DeckHints:Ability$Sacrifice|Mill
+Oracle:Menace\nAt the beginning of your end step, if you descended this turn, put a +1/+1 counter on Deep Goblin Skulltaker. (You descended if a permanent card was put into your graveyard from anywhere.)

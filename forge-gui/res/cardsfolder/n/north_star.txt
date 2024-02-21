@@ -1,6 +1,6 @@
 Name:North Star
 ManaCost:4
 Types:Artifact
-A:AB$ Pump | Cost$ 4 T | Defined$ You | KW$ You may spend mana as though it were mana of any color to cast a spell this turn. | SpellDescription$ For one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost. (Additional costs are still paid normally.)
+A:AB$ Pump | Cost$ 4 T | Defined$ You | KW$ You may spend mana as though it were mana of any type to cast a spell this turn. | SpellDescription$ For one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost. (Additional costs are still paid normally.)
 AI:RemoveDeck:All
 Oracle:{4}, {T}: For one spell this turn, you may spend mana as though it were mana of any type to pay that spell's mana cost. (Additional costs are still paid normally.)

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Lord of the Rings #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/08/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Treebeard, Gracious Host;Frodo Baggins;Gilded Goose;Sam, Loyal Attendant;Banquet Guests;Frodo, Adventurous Hobbit
+p0battlefield=Prize Pig;T:w_1_1_halfling|Id:1;Field-Tested Frying Pan|AttachedTo:1;Pippin, Warden of Isengard;T:c_a_food_sac;T:c_a_food_sac;Sandsteppe Citadel;Sandsteppe Citadel;Sandsteppe Citadel;Woodland Cemetery;Woodland Cemetery;Woodland Cemetery
+p1life=15
+p1battlefield=Riders of Rohan;T:r_2_2_human_knight_trample_haste

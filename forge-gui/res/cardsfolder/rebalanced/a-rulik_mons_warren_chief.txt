@@ -1,0 +1,13 @@
+Name:A-Rulik Mons, Warren Chief
+ManaCost:1 R G G
+Types:Legendary Creature Goblin
+PT:4/4
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDig | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you didn't put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDig | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you didn't put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
+SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Card.Land | ForceRevealToController$ True | Optional$ True | RememberChanged$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.inZoneBattlefield | ConditionCompare$ EQ0 | TokenScript$ r_1_1_goblin | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Rulik Mons, Warren Chief enters the battlefield or attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you didn't put a card onto the battlefield this way, create a 1/1 red Goblin creature token.

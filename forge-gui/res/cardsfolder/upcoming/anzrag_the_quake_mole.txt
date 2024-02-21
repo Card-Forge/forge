@@ -1,0 +1,9 @@
+Name:Anzrag, the Quake-Mole
+ManaCost:2 R G
+Types:Legendary Creature Mole God
+PT:8/4
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUntapAll | TriggerDescription$ Whenever CARDNAME becomes blocked, untap each creature you control. After this combat phase, there is an additional combat phase.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+A:AB$ Pump | Cost$ 3 R R G G | Defined$ Self | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ NICKNAME must be blocked each combat this turn if able.
+Oracle:Whenever Anzrag, the Quake-Mole becomes blocked, untap each creature you control. After this combat phase, there is an additional combat phase.\n{3}{R}{R}{G}{G}: Anzrag must be blocked each combat this turn if able.

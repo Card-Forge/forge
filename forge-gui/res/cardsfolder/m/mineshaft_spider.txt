@@ -1,0 +1,9 @@
+Name:Mineshaft Spider
+ManaCost:3 G
+Types:Creature Spider
+PT:3/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, you may mill two cards. (You may put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Optional$ True | Defined$ You
+DeckHas:Ability$Graveyard|Mill
+Oracle:Reach\nWhen Mineshaft Spider enters the battlefield, you may mill two cards. (You may put the top two cards of your library into your graveyard.)

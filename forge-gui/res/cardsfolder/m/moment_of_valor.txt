@@ -1,0 +1,8 @@
+Name:Moment of Valor
+ManaCost:2 W
+Types:Instant
+A:SP$ Charm | Choices$ DBIndestructible,DBDestroy
+SVar:DBIndestructible:DB$ Untap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +1/+0 and gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 1 | KW$ Indestructible
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+Oracle:Choose one —\n• Untap target creature. It gets +1/+0 and gains indestructible until end of turn.\n• Destroy target creature with power 4 or greater.

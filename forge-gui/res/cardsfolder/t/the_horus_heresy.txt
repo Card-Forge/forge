@@ -1,7 +1,7 @@
 Name:The Horus Heresy
 ManaCost:3 U B R
 Types:Enchantment Saga
-K:Saga:3:GainControl,DBDraw,DBRepeat
+K:Chapter:3:GainControl,DBDraw,DBRepeat
 SVar:GainControl:DB$ GainControl | ValidTgts$ Creature.nonLegendary+OppCtrl | LoseControl$ LeavesPlay | TgtPrompt$ Select target nonlegendary creature an opponent controls to gain control of. | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as CARDNAME remains on the battlefield.
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each creature you control but don't own.

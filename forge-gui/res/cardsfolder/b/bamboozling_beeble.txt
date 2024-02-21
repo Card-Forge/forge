@@ -1,0 +1,12 @@
+Name:Bamboozling Beeble
+ManaCost:U
+Types:Creature Beeble
+PT:1/1
+K:Protection:Robot
+A:AB$ Effect | Cost$ 1 T | ValidTgts$ Player | ReplacementEffects$ RigRoll | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next time target player would roll one or more dice this turn, instead they roll that many dice plus one and you choose one of those rolls to ignore.
+SVar:RigRoll:Event$ RollDice | ValidPlayer$ Player.IsRemembered | ReplaceWith$ PlusRoll | Description$ The next time target player would roll one or more dice this turn, instead they roll that many dice plus one and you choose one of those rolls to ignore.
+SVar:PlusRoll:DB$ ReplaceEffect | VarName$ Number | VarValue$ ReplaceCount$Number/Plus.1 | SubAbility$ IgnoreRoll
+SVar:IgnoreRoll:DB$ ReplaceEffect | VarName$ IgnoreChosen | VarType$ Map | VarKey$ You | VarValue$ 1 | SubAbility$ DBExileEffect
+SVar:DBExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+AI:RemoveDeck:All
+Oracle:Protection from Robots\n{1}, {T}: The next time target player would roll one or more dice this turn, instead they roll that many dice plus one and you choose one of those rolls to ignore.

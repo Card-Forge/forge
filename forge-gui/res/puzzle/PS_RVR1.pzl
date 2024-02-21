@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Ravnica Remastered #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/01/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume both graveyards start empty. Remember that your solution must satisfy all possible blocking scenarios. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=4
+p0hand=Devouring Light;Fists of Ironwood;Overwhelm;Angelic Exaltation
+p0battlefield=T:g_1_1_saproling;T:g_1_1_saproling;T:g_1_1_saproling;T:g_1_1_saproling;T:g_1_1_saproling;Forest;Forest;Forest;Plains;Plains;Plains
+p1life=8
+p1landsplayed=0
+p1landsplayedlastturn=0
+p1numringtemptedyou=0
+p1battlefield=Niv-Mizzet, Parun

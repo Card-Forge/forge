@@ -1,0 +1,17 @@
+Name:City of the Daleks
+ManaCost:no cost
+Types:Plane Skaro
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Command | TriggerDescription$ Whenever you attack, target opponent loses X life, where X is the number of artifacts you control.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigRepeat | TriggerDescription$ Whenever chaos ensues, for each opponent, you create a 3/3 black Dalek artifact creature token with menace that attacks that opponent this turn if able. Those tokens gain haste. Sacrifice them at the beginning of the next end step.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBToken | ChangeZoneTable$ True | SubAbility$ DBSac
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | RememberTokens$ True | ImprintTokens$ True | PumpKeywords$ Haste | SubAbility$ DBEff
+SVar:DBEff:DB$ Effect | RememberObjects$ Remembered | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | MustAttack$ RememberedPlayer | Description$ This creature attacks its designated player each combat if able.
+SVar:DBSac:DB$ Pump | Defined$ Imprinted | AtEOT$ Sacrifice | SubAbility$ DBCleanup2
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Dalek
+DeckNeeds:Type$Artifact
+Oracle:Whenever you attack, target opponent loses X life, where X is the number of artifacts you control.\nWhenever chaos ensues, for each opponent, you create a 3/3 black Dalek artifact creature token with menace that attacks that opponent this turn if able. Those tokens gain haste. Sacrifice them at the beginning of the next end step.

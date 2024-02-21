@@ -1,0 +1,16 @@
+Name:Vantress Transmuter
+ManaCost:3 U
+Types:Creature Human Wizard
+PT:3/4
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+AlternateMode:Adventure
+Oracle:
+
+ALTERNATE
+
+Name:Croaking Curse
+ManaCost:1 U
+Types:Sorcery Adventure
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Tap target creature. Create a Cursed Role token attached to it. (Enchanted creature is 1/1.)
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_cursed | TokenOwner$ You | AttachedTo$ Targeted
+Oracle:Tap target creature. Create a Cursed Role token attached to it. (Enchanted creature is 1/1.)

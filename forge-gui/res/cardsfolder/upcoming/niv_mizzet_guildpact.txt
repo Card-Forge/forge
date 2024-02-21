@@ -1,0 +1,12 @@
+Name:Niv-Mizzet, Guildpact
+ManaCost:W U B R G
+Types:Legendary Creature Dragon Avatar
+PT:6/6
+K:Flying
+K:Hexproof:Card.MultiColor:multicolored
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ DBDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals X damage to any target, target player draws X cards, and you gain X life, where X is the number of different color pairs among permanents you control that are exactly two colors.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$Valid Card.YouCtrl$DifferentColorPair
+Oracle:Flying, hexproof from multicolored\nWhenever Niv-Mizzet, Guildpact deals combat damage to a player, it deals X damage to any target, target player draws X cards, and you gain X life, where X is the number of different color pairs among permanents you control that are exactly two colors.

@@ -1,0 +1,10 @@
+Name:Public Thoroughfare
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you tap an untapped artifact or land you control.
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ tapXType<1/Artifact;Land/artifact or land> | UnlessPayer$ You
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHints:Type$Artifact
+SVar:NeedsToPlay:Land.untapped+YouCtrl;Artifact.untapped+YouCtrl
+Oracle:Public Thoroughfare enters the battlefield tapped.\nWhen Public Thoroughfare enters the battlefield, sacrifice it unless you tap an untapped artifact or land you control.\n{T}: Add one mana of any color.

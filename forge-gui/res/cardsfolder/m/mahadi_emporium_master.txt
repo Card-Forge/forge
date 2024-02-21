@@ -1,6 +1,6 @@
 Name:Mahadi, Emporium Master
 ManaCost:1 B R
-Types:Legendary Creature Cat Devil
+Types:Legendary Creature Devil
 PT:3/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a Treasure token for each creature that died this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You

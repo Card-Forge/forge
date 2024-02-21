@@ -409,7 +409,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      */
     protected CardCollection getPumpCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack,
             final List<String> keywords, final boolean immediately) {
-        CardCollection list = ai.getCreaturesInPlay();
+        CardCollection list = CardLists.getTargetableCards(ai.getCreaturesInPlay(), sa);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

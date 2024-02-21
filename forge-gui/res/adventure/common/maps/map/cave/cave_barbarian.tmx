@@ -38,9 +38,10 @@
   <object id="38" template="../../obj/entry_up.tx" x="176" y="273.333" width="48" height="16"/>
   <object id="54" template="../../obj/gold.tx" x="231.369" y="44.4817"/>
   <object id="55" template="../../obj/gold.tx" x="337.35" y="46.1496"/>
-  <object id="57" template="../../obj/enemy.tx" x="233.388" y="60.8212">
+  <object id="57" template="../../obj/enemy.tx" x="228.055" y="78.8212">
    <properties>
     <property name="enemy" value="Barbarian"/>
+    <property name="speedModifier" type="float" value="3"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>

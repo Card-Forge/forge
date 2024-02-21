@@ -1,0 +1,11 @@
+Name:Officious Interrogation
+ManaCost:W U
+Types:Instant
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | Relative$ True | Cost$ W U | EffectZone$ All | Description$ This spell costs {W}{U} more to cast for each target beyond the first.
+SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
+A:SP$ Pump | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ MaxPlayer | SubAbility$ DBInvestigate | SpellDescription$ Choose any number of target players.
+SVar:DBInvestigate:DB$ Investigate | Num$ X | SpellDescription$ Investigate X times, where X is the total number of creatures those players control.
+SVar:MaxPlayer:PlayerCountPlayers$Amount
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl
+DeckHas:Ability$Token & Type$Artifact|Clue
+Oracle:This spell costs {W}{U} more to cast for each target beyond the first.\nChoose any number of target players. Investigate X times, where X is the total number of creatures those players control.

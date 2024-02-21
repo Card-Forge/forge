@@ -1,45 +1,72 @@
 [metadata]
-Name=Kiora
+Name=kiora
 [Avatar]
 
 [Main]
-1 Aesi, Tyrant of Gyre Strait|CMR|1
+2 Aesi, Tyrant of Gyre Strait|CMR|1
 1 Arixmethes, Slumbering Isle|C18|1
 1 Biblioplex Kraken|J22|1
+4 Bident of Thassa|BRC|1
 4 Birds of Paradise|DMR|1
+4 Boseiju, Who Endures|NEO|1
+4 Botanical Sanctum|KLR|1
 4 Breeding Pool|DIS|1
 1 Counterspell|30A|1
+3 Counterspell|GN3|1
 1 Crush of Tentacles|OGW|1
+3 Cryptic Command|PPRO|1
 1 Deep-Sea Kraken|DDS|1
 3 Forest|THS|1
 2 Forest|THS|3
+4 Fyndhorn Elves|VMA|1
+4 Growth Spiral|LTC|1
 4 Hinterland Harbor|DMR|1
 1 Island|THS|3
 2 Island|THS|4
-2 Kenessos, Priest of Thassa|J22|1
-1 Kiora Bests the Sea God|THB|1
-1 Kiora's Dambreaker|WAR|1
-1 Kiora's Follower|DDO|1
-1 Kiora, Behemoth Beckoner|WAR|1
+4 Kenessos, Priest of Thassa|J22|1
+4 Kiora Bests the Sea God|THB|1
+4 Kiora's Dambreaker|WAR|1
+1 Kiora's Follower|MB1|1
+3 Kiora's Follower|PBNG|1
+4 Kiora, Behemoth Beckoner|WAR|1
 1 Kiora, Master of the Depths|BFZ|1
-1 Kiora, the Crashing Wave|BNG|1
-1 Kiora, the Tide's Fury|J21|1
+4 Kiora, Sovereign of the Deep|MAT|1
+3 Kiora, the Crashing Wave|DDO|1
+4 Kiora, the Tide's Fury|J21|1
+2 Koma, Cosmos Serpent|KHM|1
 1 Lorthos, the Tidemaker|C14|1
-1 Mana Leak|IMA|1
 1 Mesmerizing Benthid|RNA|1
 4 Misty Rainforest|MH2|1
 2 Nadir Kraken|THB|1
-3 Nature's Lore|DMR|1
+2 Nature's Lore|DMR|1
+4 Negate|CN2|1
+4 Ominous Seas|IKO|1
+4 Otawara, Soaring City|NEO|1
+2 Rapid Hybridization|C15|1
+4 Restless Vinestalk|WOE|1
+2 Rivendell|LTR|1
 1 Scourge of Fleets|ZNC|1
 1 Sea-Dasher Octopus|IKO|1
 1 Serpent of Yawning Depths|THB|1
+4 Simic Growth Chamber|MM2|1
+4 Simic Guildgate|CMR|1
 1 Simic Sky Swallower|GK2|1
 1 Slinn Voda, the Rising Deep|DOM|1
 1 Spawning Kraken|C21|1
 1 Stormtide Leviathan|M15|1
+3 Thassa's Intervention|THB|1
+1 Thassa, God of the Sea|THS|1
+4 The Great Henge|CMM|1
+2 The Watcher in the Water|LTR|1
+2 Tribute to the World Tree|MOM|1
 1 Tromokratis|CMR|1
 4 Tropical Island|30A|1
+2 Troyan, Gutsy Explorer|WOE|1
+4 Unsummon|M12|1
+4 Up the Beanstalk|WOE|1
+4 Waterlogged Grove|MH1|1
 1 Whelming Wave|DDO|1
+4 Woodland Stream|KLD|1
 [Sideboard]
 
 [Planes]

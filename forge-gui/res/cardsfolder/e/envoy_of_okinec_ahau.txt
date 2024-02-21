@@ -1,0 +1,7 @@
+Name:Envoy of Okinec Ahau
+ManaCost:2 W
+Types:Creature Cat Advisor
+PT:3/3
+A:AB$ Token | Cost$ 4 W | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Gnome artifact creature token.
+DeckHas:Ability$Token & Type$Gnome|Artifact
+Oracle:{4}{W}: Create a 1/1 colorless Gnome artifact creature token.

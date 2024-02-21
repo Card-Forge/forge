@@ -1,0 +1,8 @@
+Name:Hidden Nursery
+ManaCost:no cost
+Types:Land Cave
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Discover | Cost$ 4 G T Sac<1/CARDNAME> | Num$ 4 | SorcerySpeed$ True | SpellDescription$ Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+DeckHas:Ability$Sacrifice
+Oracle:Hidden Nursery enters the battlefield tapped.\n{T}: Add {G}.\n{4}{G}, {T}, Sacrifice Hidden Nursery: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)

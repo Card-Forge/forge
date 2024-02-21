@@ -214,19 +214,19 @@ ScryfallCode=ICE
 327 U Lapis Lazuli Talisman @Amy Weber
 198 C Lava Burst @Tom Wänerstrand
 358 R Lava Tubes @Bryon Wackwitz
-142 C Legions of Lim-Dul @Anson Maddocks
+142 C Legions of Lim-Dûl @Anson Maddocks
 143 U Leshrac's Rite @Richard Thomas
 144 U Leshrac's Sigil @Drew Tucker
 252 R Lhurgoyf @Pete Venters
 42 R Lightning Blow @Harold McNeill
-145 C Lim-Dul's Cohort @Douglas Shuler
-146 U Lim-Dul's Hex @Liz Danforth
+145 C Lim-Dûl's Cohort @Douglas Shuler
+146 U Lim-Dûl's Hex @Liz Danforth
 43 R Lost Order of Jarkeld @Andi Rusu
 253 U Lure @Phil Foglio
 254 U Maddening Wind @Dameon Willich
 82 R Magus of the Unseen @Kaja Foglio
 328 U Malachite Talisman @Christopher Rush
-199 R Marton Stromgald @Mark Poole
+199 R Márton Stromgald @Mark Poole
 200 U Melee @Dameon Willich
 201 U Melting @Randy Gallegos
 44 R Mercenaries @Cornelius Brudi
@@ -256,7 +256,7 @@ ScryfallCode=ICE
 255 U Nature's Lore @Rick Emond
 154 R Necropotence @Mark Tedin
 155 C Norritt @Mike Raabe
-156 R Oath of Lim-Dul @Douglas Shuler
+156 R Oath of Lim-Dûl @Douglas Shuler
 331 U Onyx Talisman @Sandra Everingham
 205 U Orcish Cannoneers @Dan Frazier
 206 C Orcish Conscripts @Douglas Shuler

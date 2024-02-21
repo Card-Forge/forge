@@ -12,6 +12,6 @@ SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Land
 SVar:Y:Remembered$Valid Card.nonLand
-DeckHas:Ability$Token & Type$ Citizen
+DeckHas:Ability$Token & Type$Citizen
 DeckHints:Ability$Token
 Oracle:Creature tokens you control have haste.\nParley — At the beginning of combat on your turn, each player reveals the top card of their library. For each land card revealed this way, you create a 1/1 green and white Citizen creature token. Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way. Then each player draws a card.

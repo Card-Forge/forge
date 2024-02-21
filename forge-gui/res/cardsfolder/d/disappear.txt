@@ -3,7 +3,6 @@ ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Curse
-A:AB$ ChangeZone | Cost$ U | Defined$ Enchanted | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return enchanted creature and CARDNAME to their owners' hands.
-SVar:DBBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+A:AB$ ChangeZone | Cost$ U | Defined$ EnchantedAndSelf | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return enchanted creature and CARDNAME to their owners' hands.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature\n{U}: Return enchanted creature and Disappear to their owners' hands.

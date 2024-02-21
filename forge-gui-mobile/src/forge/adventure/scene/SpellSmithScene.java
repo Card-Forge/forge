@@ -11,6 +11,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.StaticData;
+import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
@@ -151,7 +152,10 @@ public class SpellSmithScene extends UIScene {
                     .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
             if (it.size() == 0)
                 return false;
-            return (!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+            ConfigData configData = Config.instance().getConfigData();
+            if (configData.allowedEditions != null)
+                return Arrays.asList(configData.allowedEditions).contains(input.getCode());
+            return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
         }).sorted(new Comparator<CardEdition>() {
             @Override
             public int compare(CardEdition e1, CardEdition e2) {
@@ -382,7 +386,16 @@ public class SpellSmithScene extends UIScene {
 
     public void pullCard(boolean usingShards) {
         PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
-        Reward R = new Reward(P);
+        Reward R = null;
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            if (!edition.isEmpty()) {
+                R = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+            } else {
+                R = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
+            }
+        } else {
+            R = new Reward(P);
+        }
         Current.player().addReward(R);
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
@@ -392,7 +405,7 @@ public class SpellSmithScene extends UIScene {
         if (Current.player().getGold() < currentPrice) pullUsingGold.setDisabled(true);
         if (Current.player().getShards() < currentShardPrice) pullUsingShards.setDisabled(true);
         if (rewardActor != null) rewardActor.remove();
-        rewardActor = new RewardActor(R, true, null);
+        rewardActor = new RewardActor(R, true, null, true);
         rewardActor.flip(); //Make it flip so it draws visual attention, why not.
         rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);

@@ -1,0 +1,8 @@
+Name:Adric, Mathematical Genius
+ManaCost:1 U
+Types:Legendary Creature Human Artificer
+PT:1/1
+A:AB$ CopySpellAbility | Cost$ 2 U T | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card,Emblem | TgtPrompt$ Choose target activated or triggered ability you control | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control. You may choose new targets for the copy.
+A:AB$ Counter | PrecostDesc$ Ultimate Sacrifice — | Cost$ 1 U Sac<1/NICKNAME> | TargetType$ Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SpellDescription$ Counter target activated or triggered ability.
+K:Doctor's companion
+Oracle:{2}{U}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.\nUltimate Sacrifice — {1}{U}, Sacrifice Adric: Counter target activated or triggered ability.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

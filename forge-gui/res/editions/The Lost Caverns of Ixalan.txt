@@ -1,0 +1,489 @@
+[metadata]
+Code=LCI
+Date=2023-11-17
+Name=The Lost Caverns of Ixalan
+Type=Expansion
+BoosterCovers=3
+Booster=9 Common:!dfc:!fromSheet("LCI lands"):fromsheet("LCI cards"), 3 Uncommon:!dfc:!fromSheet("LCI lands"):fromSheet("LCI cards"), 1 fromSheet("LCI double-face"), 1 RareMythic:fromSheet("LCI cards"), 1 fromSheet("LCI lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+ScryfallCode=LCI
+
+[cards]
+1 R Abuelo's Awakening @Eelis Kyttanen
+2 C Acrobatic Leap @Fesbra
+3 C Adaptive Gemguard @Anthony Devine
+4 C Attentive Sunscribe @Devin Platts
+5 U Bat Colony @Cristi Balanescu
+6 U Clay-Fired Bricks @Steve Ellis
+7 C Cosmium Blast @Caroline Gariba
+8 U Dauntless Dismantler @Dibujante Nocturno
+9 C Deconstruction Hammer @Dibujante Nocturno
+10 U Dusk Rose Reliquary @Samuel Araya
+11 C Envoy of Okinec Ahau @Zoltan Boros
+12 R Fabrication Foundry @Racrufi
+13 C Family Reunion @Aurore Folny
+14 R Get Lost @Eli Minaya
+15 C Glorifier of Suffering @Lauren K. Cannon
+16 U Guardian of the Great Door @Justyna Dura
+17 U Helping Hand @Aldo Domínguez
+18 C Ironpaw Aspirant @Dan Scott
+19 U Kinjalli's Dawnrunner @Arash Radkia
+20 R Kutzil's Flanker @Michele Giorgi
+21 U Malamet War Scribe @Nicholas Gregory
+22 U Market Gnome @Gaboleps
+23 U Might of the Ancestors @Aldo Domínguez
+24 C Miner's Guidewing @Allen Douglas
+25 U Mischievous Pup @Devin Platts
+26 M Ojer Taq, Deepest Foundation @Cristi Balanescu
+27 C Oltec Archaeologists @Winona Nelson
+28 C Oltec Cloud Guard @Evyn Fong
+29 C Oteclan Landmark @Warren Mahy
+30 C Petrify @Samuel Araya
+31 C Quicksand Whirlpool @LA Draws
+32 M Resplendent Angel @Victor Adame Minguez
+33 U Ruin-Lurker Bat @Camille Alquier
+34 R Sanguine Evangelist @Zezhou Chen
+35 C Soaring Sandwing @John Tedrick
+36 U Spring-Loaded Sawblades @Wayne Reynolds
+37 C Thousand Moons Crackshot @Marie Magny
+38 C Thousand Moons Infantry @Manuel Castañón
+39 R Thousand Moons Smithy @Manuel Castañón
+40 C Tinker's Tote @Julia Metzger
+41 R Unstable Glyphbridge @Bastien Grivet
+42 U Vanguard of the Rose @Alex Brock
+43 R Warden of the Inner Sky @Raoul Vitale
+44 R Akal Pakal, First Among Equals @Ryan Pancoast
+45 C Ancestral Reminiscence @Artur Treffner
+46 C Brackish Blunder @Daarken
+47 R Braided Net @Diego Gisbert
+48 U Chart a Course @Josu Solano
+49 C Cogwork Wrestler @Tomek Larek
+50 U Confounding Riddle @A. M. Sartor
+51 U Council of Echoes @Fariba Khamseh
+52 R Deeproot Pilgrimage @Rémi Jacquot
+53 C Didact Echo @Irina Nordsol
+54 U Eaten by Piranhas @Abz J Harding
+55 M The Enigma Jewel @Martin de Diego Sádaba
+56 R The Everflowing Well @David Álvarez
+57 C Frilled Cave-Wurm @Aaron Miller
+58 U Hermitic Nautilus @Logan Feliciano
+59 U Hurl into History @Eli Minaya
+60 C Inverted Iceberg @Campbell White
+61 R Kitesail Larcenist @Sidharth Chaturvedi
+62 U Lodestone Needle @José Parodi
+63 R Malcolm, Alluring Scoundrel @Fesbra
+64 C Marauding Brinefang @John Tedrick
+65 U Merfolk Cave-Diver @Fesbra
+66 C Oaken Siren @Lars Grant-West
+67 M Ojer Pakpatiq, Deepest Epoch @Chris Rahn
+68 C Orazca Puzzle-Door @Cristi Balanescu
+69 C Out of Air @Francisco Miyara
+70 C Pirate Hat @Domenico Cava
+71 C Relic's Roar @Nino Vecia
+72 C River Herald Scout @Josu Hernaiz
+73 C Sage of Days @Aldo Domínguez
+74 U Self-Reflection @Henry Peters
+75 C Shipwreck Sentry @Ryan Valle
+76 U Sinuous Benthisaur @John Tedrick
+77 C Song of Stupefaction @Ernanda Souza
+78 U Spyglass Siren @David Astruga
+79 U Staunch Crewmate @LA Draws
+80 R Subterranean Schooner @Svetlin Velinov
+81 R Tishana's Tidebinder @Nino Vecia
+82 C Unlucky Drop @Patrik Hell
+83 U Waterlogged Hulk @Artur Treffner
+84 C Waterwind Scout @Alix Branwyn
+85 C Waylaying Pirates @Zoltan Boros
+86 U Zoetic Glyph @Yeong-Hao Han
+87 U Abyssal Gorestalker @Maxime Minard
+88 M Aclazotz, Deepest Betrayal @Steve Prescott
+89 C Acolyte of Aclazotz @Irina Nordsol
+90 C Another Chance @Irina Nordsol
+91 U Bitter Triumph @Donato Giancola
+92 M Bloodletter of Aclazotz @Antonio José Manzanedo
+93 U Bloodthorn Flail @Igor Kieryluk
+94 R Bringer of the Last Gift @Wero Gallo
+95 C Broodrage Mycoid @Domenico Cava
+96 U Canonized in Blood @Antonio José Manzanedo
+97 U Chupacabra Echo @Izzy
+98 R Corpses of the Lost @Izzy
+99 C Dead Weight @Javier Charro
+100 C Deathcap Marionette @Svetlin Velinov
+101 C Deep Goblin Skulltaker @Cristi Balanescu
+102 U Deep-Cavern Bat @Campbell White
+103 U Defossilize @Dibujante Nocturno
+104 C Echo of Dusk @Domenico Cava
+105 C Fanatical Offering @Raluca Marinescu
+106 C Fungal Fortitude @Izzy
+107 U Gargantuan Leech @Piotr Foksowicz
+108 U Grasping Shadows @Sam Wolfe Connelly
+109 C Greedy Freebooter @David Palumbo
+110 C Join the Dead @Olivier Bernard
+111 U Malicious Eclipse @Campbell White
+112 C Mephitic Draught @Lauren K. Cannon
+113 R Preacher of the Schism @Donato Giancola
+114 C Primordial Gnawer @Maxime Minard
+115 R Queen's Bay Paladin @Slawomir Maniak
+116 C Rampaging Spiketail @John Tedrick
+117 C Ray of Ruin @Sam Rowan
+118 C Screaming Phantom @Halil Ural
+119 C Skullcap Snail @Maxime Minard
+120 U Soulcoil Viper @Allen Douglas
+121 R Souls of the Lost @Nils Hamm
+122 R Stalactite Stalker @Olivier Bernard
+123 R Starving Revenant @Fesbra
+124 U Stinging Cave Crawler @Dan Scott
+125 U Synapse Necromage @Piotr Foksowicz
+126 R Tarrian's Journal @Randy Gallegos
+127 R Terror Tide @Brock Grossman
+128 C Tithing Blade @Michael Walsh
+129 U Visage of Dread @David Auden Nash
+130 C Vito's Inquisitor @Anna Pavleeva
+131 C Abrade @Bartek Fedyczak
+132 C Ancestors' Aid @Alessandra Pisano
+133 U Belligerent Yearling @Maxime Minard
+134 M Bonehoard Dracosaur @Mark Zug
+135 R Brass's Tunnel-Grinder @Cristi Balanescu
+136 C Brazen Blademaster @Jarel Threat
+137 R Breeches, Eager Pillager @Josu Hernaiz
+138 C Burning Sun Cavalry @Josu Hernaiz
+139 U Calamitous Cave-In @Diego Gisbert
+140 C Child of the Volcano @Uriah Voth
+141 U Curator of Sun's Creation @Javier Charro
+142 C Daring Discovery @Michele Giorgi
+143 U Diamond Pick-Axe @Dibujante Nocturno
+144 C Dinotomaton @Zoltan Boros
+145 R Dire Flail @Anthony Devine
+146 U Dowsing Device @Olena Richards
+147 U Dreadmaw's Ire @Crystal Sully
+148 U Enterprising Scallywag @Denman Rooke
+149 C Etali's Favor @Matt Stewart
+150 U Geological Appraiser @Alix Branwyn
+151 C Goblin Tomb Raider @Kevin Sidharta
+152 U Goldfury Strider @José Parodi
+153 R Hit the Mother Lode @Diego Gisbert
+154 C Hotfoot Gnome @Svetlin Velinov
+155 C Idol of the Deep King @Matteo Bassini
+156 R Inti, Seneschal of the Sun @Victor Adame Minguez
+157 R Magmatic Galleon @Cristi Balanescu
+158 M Ojer Axonil, Deepest Might @Victor Adame Minguez
+159 C Panicked Altisaur @Lars Grant-West
+160 C Plundering Pirate @Francisco Miyara
+161 R Poetic Ingenuity @Kieran Yanner
+162 U Rampaging Ceratops @Nicholas Gregory
+163 C Rumbling Rockslide @Johann Bodin
+164 U Saheeli's Lattice @Zoltan Boros
+165 U Scytheclaw Raptor @John Tedrick
+166 C Seismic Monstrosaur @John Tedrick
+167 C Sunfire Torch @David Szabo
+168 C Sunshot Militia @Torgeir Fjereide
+169 C Tectonic Hazard @Jarel Threat
+170 U Triumphant Chomp @Simon Dominic
+171 R Trumpeting Carnosaur @Lars Grant-West
+172 C Volatile Wanderglyph @Slawomir Maniak
+173 U Zoyowa's Justice @Nestor Ossandon Leal
+174 C Armored Kincaller @John Tedrick
+175 C Basking Capybara @Ilse Gort
+176 R Bedrock Tortoise @Maxime Minard
+177 C Cavern Stomper @David Szabo
+178 U Cenote Scout @Caroline Gariba
+179 U Coati Scavenger @Alessandra Pisano
+180 U Colossadactyl @Campbell White
+181 R Cosmium Confluence @Kasia 'Kafis' Zielińska
+182 C Disturbed Slumber @David Palumbo
+183 U Earthshaker Dreadmaw @Jesper Ejsing
+184 U Explorer's Cache @Marzena Nereida Piwowar
+185 M Ghalta, Stampede Tyrant @Lars Grant-West
+186 U Glimpse the Core @Francisco Miyara
+187 U Glowcap Lantern @Irina Nordsol
+188 R Growing Rites of Itlimoc @Josu Hernaiz
+189 M Huatli, Poet of Unity @Tyler Jacobson
+190 C Huatli's Final Strike @Marta Nael
+191 R Hulking Raptor @Nestor Ossandon Leal
+192 C In the Presence of Ages @Steve Prescott
+193 R Intrepid Paleontologist @Irina Nordsol
+194 U Ixalli's Lorekeeper @Ernanda Souza
+195 U Jade Seedstones @Alexandre Honoré
+196 R Jadelight Spelunker @Izzy
+197 C Kaslem's Stonetree @Victor Adame Minguez
+198 U Malamet Battle Glyph @Andrew Mar
+199 C Malamet Brawler @Oriana Menendez
+200 C Malamet Scythe @Hristo D. Chukov
+201 C Malamet Veteran @Steve Prescott
+202 C Mineshaft Spider @Sam Rowan
+203 C Nurturing Bristleback @John Tedrick
+204 M Ojer Kaslem, Deepest Growth @Ryan Pancoast
+205 C Over the Edge @Ryan Valle
+206 C Pathfinding Axejaw @Raoul Vitale
+207 C Poison Dart Frog @Julia Metzger
+208 R Pugnacious Hammerskull @Kev Walker
+209 C River Herald Guide @David Astruga
+210 C Seeker of Sunlight @Randy Vargas
+211 R Sentinel of the Nameless City @Josu Hernaiz
+212 M The Skullspore Nexus @Daarken
+213 U Spelunking @Ernanda Souza
+214 C Staggering Size @Fajareka Setiawan
+215 U Tendril of the Mycotyrant @Maxime Minard
+216 U Thrashing Brontodon @Randy Vargas
+217 U Twists and Turns @Deruchenko Alexander
+218 C Walk with the Ancestors @Loïc Canavaggia
+219 R Abuelo, Ancestral Echo @Victor Adame Minguez
+220 U Akawalli, the Seething Tower @Simon Dominic
+221 R Amalia Benavides Aguirre @Alix Branwyn
+222 M The Ancient One @Victor Adame Minguez
+223 R Anim Pakal, Thousandth Moon @Chris Rahn
+224 U Bartolomé del Presidio @Randy Gallegos
+225 R The Belligerent @Bruce Brenneise
+226 U Caparocti Sunborn @Donato Giancola
+227 U Captain Storm, Cosmium Raider @Diego Gisbert
+228 R Deepfathom Echo @Matt Stewart
+229 M Gishath, Sun's Avatar @Zack Stella
+230 U Itzquinth, Firstborn of Gishath @Lars Grant-West
+231 R Kellan, Daring Traveler @Marta Nael
+232 U Kutzil, Malamet Exemplar @Marie Magny
+233 U Master's Guide-Mural @Racrufi
+234 R Molten Collapse @Kasia 'Kafis' Zielińska
+235 M The Mycotyrant @Chase Stone
+236 U Nicanzil, Current Conductor @Fariba Khamseh
+237 R Palani's Hatcher @Aaron Miller
+238 M Quintorius Kand @Zoltan Boros
+239 M Saheeli, the Sun's Brilliance @Cynthia Sheppard
+240 M Sovereign Okinec Ahau @Victor Adame Minguez
+241 R Squirming Emergence @Simon Dominic
+242 U Uchbenbak, the Great Mistake @Steven Belledin
+243 M Vito, Fanatic of Aclazotz @Marta Nael
+244 R Wail of the Forgotten @Ryan Valle
+245 U Zoyowa Lava-Tongue @Campbell White
+246 C Buried Treasure @Jarel Threat
+247 U Careening Mine Cart @Hector Ortiz
+248 C Cartographer's Companion @Chuck Lukacs
+249 M Chimil, the Inner Sun @Adam Paquette
+250 C Compass Gnome @David Astruga
+251 U Contested Game Ball @Camille Alquier
+252 U Digsite Conservator @Racrufi
+253 C Disruptor Wanderglyph @Izzy
+254 U Hoverstone Pilgrim @Izzy
+255 C Hunter's Blowgun @Hector Ortiz
+256 R Matzalantli, the Great Door @Piotr Dura
+257 M The Millennium Calendar @Zoltan Boros
+258 R Roaming Throne @Anastasia Balakchina
+259 C Runaway Boulder @Loïc Canavaggia
+260 U Scampering Surveyor @Xavier Ribeiro
+261 U Sorcerous Spyglass @Tyler Walpole
+262 U Sunbird Standard @Aldo Domínguez
+263 U Swashbuckler's Whip @Irina Nordsol
+264 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
+265 R Threefold Thunderhulk @Xavier Ribeiro
+266 R Throne of the Grim Captain @Tiffany Turrill
+267 R Treasure Map @Nestor Ossandon Leal
+268 C Captivating Cave @Lorenzo Lanfranconi
+269 M Cavern of Souls @Alayna Danner
+270 U Cavernous Maw @Alfven Ato
+271 R Echoing Deeps @Mauricio Calle
+272 U Forgotten Monument @Logan Feliciano
+273 C Hidden Cataract @Josu Solano
+274 C Hidden Courtyard @Josu Solano
+275 C Hidden Necropolis @Svetlin Velinov
+276 C Hidden Nursery @Álvaro Calvo Escudero
+277 C Hidden Volcano @Logan Feliciano
+278 U Pit of Offerings @Martin de Diego Sádaba
+279 C Promising Vein @Julian Kok Joon Wen
+280 R Restless Anchorage @Leon Tukker
+281 R Restless Prairie @Randy Gallegos
+282 R Restless Reef @Hristo D. Chukov
+283 R Restless Ridgeline @Álvaro Calvo Escudero
+284 R Restless Vents @Svetlin Velinov
+285 R Sunken Citadel @Matteo Bassini
+286 U Volatile Fault @Andrew Mar
+287 L Plains @Olga Tereshenko
+288 L Island @WFlemming Illustration
+289 L Swamp @Elektrodeko
+290 L Mountain @BEMOCS
+291 L Forest @Matteo Bassini
+
+[showcase]
+292 R Akal Pakal, First Among Equals @Alex Negrea
+293 R Malcolm, Alluring Scoundrel @Rafal Wechterowicz
+294 R Breeches, Eager Pillager @Rafal Wechterowicz
+295 R Inti, Seneschal of the Sun @Richard Luong
+296 M Huatli, Poet of Unity @Anditya Dita
+297 R Abuelo, Ancestral Echo @Cabrol
+298 U Akawalli, the Seething Tower @rishxxv
+299 R Amalia Benavides Aguirre @Alex Negrea
+300 R Anim Pakal, Thousandth Moon @Anditya Dita
+301 U Bartolomé del Presidio @Pig Hands
+302 U Caparocti Sunborn @Cabrol
+303 U Captain Storm, Cosmium Raider @rishxxv
+304 U Kutzil, Malamet Exemplar @Pig Hands
+305 M The Mycotyrant @Andy Brase
+306 U Nicanzil, Current Conductor @Cabrol
+307 M Quintorius Kand @Cosmin Podar
+308 M Saheeli, the Sun's Brilliance @Richard Luong
+309 M Sovereign Okinec Ahau @Pig Hands
+310 U Uchbenbak, the Great Mistake @WolfSkullJack
+311 M Vito, Fanatic of Aclazotz @WolfSkullJack
+312 U Zoyowa Lava-Tongue @Richard Luong
+313 R Throne of the Grim Captain @Rafal Wechterowicz
+314 M Ojer Taq, Deepest Foundation @Josu Hernaiz
+315 M Ojer Pakpatiq, Deepest Epoch @Clint Lockwood & Viko Menezes
+316 M Aclazotz, Deepest Betrayal @Clint Lockwood & Viko Menezes
+317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
+318 M Ojer Kaslem, Deepest Growth @Eddie Mendoza
+319 M The Ancient One @Clint Lockwood
+410a M Cavern of Souls @Pedro Correa
+410b M Cavern of Souls @Pedro Correa
+410c M Cavern of Souls @Pedro Correa
+410d M Cavern of Souls @Pedro Correa
+410e M Cavern of Souls @Pedro Correa
+410f M Cavern of Souls @Pedro Correa
+
+[borderless]
+320 U Belligerent Yearling @Sidharth Chaturvedi
+321 M Bonehoard Dracosaur @Sidharth Chaturvedi
+322 U Rampaging Ceratops @Sidharth Chaturvedi
+323 U Scytheclaw Raptor @Sidharth Chaturvedi
+324 R Trumpeting Carnosaur @Sidharth Chaturvedi
+325 U Earthshaker Dreadmaw @Sidharth Chaturvedi
+326 M Ghalta, Stampede Tyrant @Sidharth Chaturvedi
+327 R Hulking Raptor @Sidharth Chaturvedi
+328 R Pugnacious Hammerskull @Sidharth Chaturvedi
+329 U Thrashing Brontodon @Sidharth Chaturvedi
+330 M Gishath, Sun's Avatar @Sidharth Chaturvedi
+331 U Itzquinth, Firstborn of Gishath @Sidharth Chaturvedi
+332 R Palani's Hatcher @Sidharth Chaturvedi
+333 R Get Lost @Psydrian
+334 M Resplendent Angel @Jorge Gutierrez Garcia
+335 R Tishana's Tidebinder @LeDania
+336 M Bloodletter of Aclazotz @Bene Rohlmann
+337 R Bringer of the Last Gift @Psydrian
+338 R Starving Revenant @Jorge Gutierrez Garcia
+339 M Huatli, Poet of Unity @LeDania
+340 M The Skullspore Nexus @Mónica Robles Corzo
+341 R Kellan, Daring Traveler @Jorge Gutierrez Garcia
+342 R Molten Collapse @Mónica Robles Corzo
+343 R Wail of the Forgotten @Bene Rohlmann
+344 R Roaming Throne @LeDania
+345 M Cavern of Souls @Pedro Correa
+346 R Echoing Deeps @Mónica Robles Corzo
+347 R Restless Anchorage @Tyler Smith
+348 R Restless Prairie @Piotr Dura
+349 R Restless Reef @Thomas Stoop
+350 R Restless Ridgeline @David Frasheski
+351 R Restless Vents @Alexander Kintner
+352 M Quintorius Kand @Psydrian
+
+[extended art]
+353 R Abuelo's Awakening @Eelis Kyttanen
+354 R Fabrication Foundry @Racrufi
+355 R Kutzil's Flanker @Michele Giorgi
+356 R Sanguine Evangelist @Zezhou Chen
+357 R Thousand Moons Smithy @Manuel Castañón
+358 R Unstable Glyphbridge @Bastien Grivet
+359 R Warden of the Inner Sky @Raoul Vitale
+360 R Braided Net @Diego Gisbert
+361 R Deeproot Pilgrimage @Rémi Jacquot
+362 M The Enigma Jewel @Martin de Diego Sádaba
+363 R The Everflowing Well @David Álvarez
+364 R Kitesail Larcenist @Sidharth Chaturvedi
+365 R Subterranean Schooner @Svetlin Velinov
+366 R Corpses of the Lost @Izzy
+367 R Preacher of the Schism @Donato Giancola
+368 R Queen's Bay Paladin @Slawomir Maniak
+369 R Souls of the Lost @Nils Hamm
+370 R Stalactite Stalker @Olivier Bernard
+371 R Tarrian's Journal @Randy Gallegos
+372 R Terror Tide @Brock Grossman
+373 R Brass's Tunnel-Grinder @Cristi Balanescu
+374 R Dire Flail @Anthony Devine
+375 R Hit the Mother Lode @Diego Gisbert
+376 R Magmatic Galleon @Cristi Balanescu
+377 R Poetic Ingenuity @Kieran Yanner
+378 R Bedrock Tortoise @Maxime Minard
+379 R Cosmium Confluence @Kasia 'Kafis' Zielińska
+380 R Growing Rites of Itlimoc @Josu Hernaiz
+381 R Intrepid Paleontologist @Irina Nordsol
+382 R Jadelight Spelunker @Izzy
+383 R Sentinel of the Nameless City @Josu Hernaiz
+384 R The Belligerent @Bruce Brenneise
+385 R Deepfathom Echo @Matt Stewart
+386 R Squirming Emergence @Simon Dominic
+387 R Matzalantli, the Great Door @Piotr Dura
+388 M The Millennium Calendar @Zoltan Boros
+389 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
+390 R Threefold Thunderhulk @Xavier Ribeiro
+391 R Treasure Map @Nestor Ossandon Leal
+392 R Sunken Citadel @Matteo Bassini
+
+[bundle]
+393 L Plains @Carlos Palma Cruchaga
+394 L Plains @Adam Paquette
+395 L Island @Nestor Ossandon Leal
+396 L Island @Adam Paquette
+397 L Swamp @Logan Feliciano
+398 L Swamp @Adam Paquette
+399 L Mountain @Muhammad Firdaus
+400 L Mountain @Adam Paquette
+401 L Forest @Carlos Palma Cruchaga
+402 L Forest @Adam Paquette
+
+[promo]
+403 R Jadelight Spelunker @Ovidio Cartagena
+404 R Hit the Mother Lode @Bram Sels
+405 U Spyglass Siren @David Astruga
+406 U Deep-Cavern Bat @Campbell White
+407 U Geological Appraiser @Alix Branwyn
+408 U Cenote Scout @Caroline Gariba
+409 U Bartolomé del Presidio @Randy Gallegos
+
+[double-face]
+9 Idol of the Deep King|LCI
+9 Inverted Iceberg|LCI
+9 Kaslem's Stonetree|LCI
+9 Oteclan Landmark|LCI
+9 Tithing Blade|LCI
+3 Clay-Fired Bricks|LCI
+3 Dowsing Device|LCI
+3 Grasping Shadows|LCI
+3 Jade Seedstones|LCI
+3 Lodestone Needle|LCI
+3 Master's Guide-Mural|LCI
+3 Saheeli's Lattice|LCI
+3 Spring-Loaded Sawblades|LCI
+3 Sunbird Standard|LCI
+3 Twists and Turns|LCI
+3 Visage of Dread|LCI
+3 Waterlogged Hulk|LCI
+
+[lands]
+3 Plains|LCI|1
+3 Island|LCI|1
+3 Swamp|LCI|1
+3 Mountain|LCI|1
+3 Forest|LCI|1
+5 Captivating Cave|LCI
+5 Hidden Cataract|LCI
+5 Hidden Courtyard|LCI
+5 Hidden Necropolis|LCI
+5 Hidden Nursery|LCI
+5 Hidden Volcano|LCI
+5 Promising Vein|LCI
+
+[tokens]
+b_1_1_bat_flying
+b_1_1_fungus_noblock
+b_2_2_skeleton_pirate
+c_1_1_a_gnome
+c_a_map_sac_explore
+c_a_treasure_sac
+g_0_1_dinosaur_egg
+g_3_3_dinosaur
+g_x_x_fungus_dinosaur
+r_3_1_dinosaur
+rw_3_2_spirit
+u_1_1_merfolk_hexproof
+w_1_1_vampire_lifelink
+w_4_4_angel_flying_vigilance
+w_x_x_a_gnome_soldier_total_artifacts_creatures
+wb_4_3_vampire_demon_flying
+wu_4_4_a_golem

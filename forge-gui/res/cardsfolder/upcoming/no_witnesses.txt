@@ -1,0 +1,7 @@
+Name:No Witnesses
+ManaCost:2 W W
+Types:Sorcery
+A:SP$ Investigate | Num$ 1 | Defined$ Player.withMostTypeCreature | SubAbility$ DBDestroyAll | SpellDescription$ Each player who controls the most creatures investigates. Then destroy all creatures. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature
+AI:RemoveDeck:Random
+Oracle:Each player who controls the most creatures investigates. Then destroy all creatures. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

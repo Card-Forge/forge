@@ -1,0 +1,8 @@
+Name:This Is How It Ends
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBChoice | SpellDescription$ The owner of target creature shuffles it into their library,
+SVar:DBChoice:DB$ VillainousChoice | Defined$ TargetedOwner | Choices$ DBLoseLife,DBShuffleAnother | SpellDescription$ then faces a villainous choice — They lose 5 life, or they shuffle another creature they own into their library.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5 | Defined$ Remembered | SpellDescription$ Targeted creature's owner loses 5 life.
+SVar:DBShuffleAnother:DB$ ChangeZone | ChangeType$ Creature.OwnedBy Remembered | DefinedPlayer$ Remembered | Chooser$ Remembered | ChangeNum$ 1 | Mandatory$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Hidden$ True | SpellDescription$ Targeted creature's owner shuffles another creature they own into their library.
+Oracle:Target creature's owner shuffles it into their library, then faces a villainous choice — They lose 5 life, or they shuffle another creature they own into their library.

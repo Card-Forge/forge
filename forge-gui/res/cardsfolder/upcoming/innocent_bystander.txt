@@ -1,0 +1,8 @@
+Name:Innocent Bystander
+ManaCost:1 R
+Types:Creature Goblin Citizen
+PT:2/1
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | DamageAmount$ GE3 | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt 3 or more damage, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Token|Investigate|Sacrifice & Type$Artifact|Clue
+Oracle:Whenever Innocent Bystander is dealt 3 or more damage, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

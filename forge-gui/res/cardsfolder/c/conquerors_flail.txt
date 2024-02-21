@@ -2,7 +2,7 @@ Name:Conqueror's Flail
 ManaCost:2
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each color among permanents you control.
-S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | IsPresent$ Card.Self+AttachedTo Creature | Description$ As long as Conqueror's Flail is attached to a creature, your opponents can't cast spells during your turn.
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | IsPresent$ Card.Self+AttachedTo Creature | Description$ As long as CARDNAME is attached to a creature, your opponents can't cast spells during your turn.
 SVar:X:Count$ColorsCtrl Permanent
 K:Equip:2
 Oracle:Equipped creature gets +1/+1 for each color among permanents you control.\nAs long as Conqueror's Flail is attached to a creature, your opponents can't cast spells during your turn.\nEquip {2}

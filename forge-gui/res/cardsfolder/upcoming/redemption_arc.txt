@@ -1,0 +1,8 @@
+Name:Redemption Arc
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant Creature
+A:SP$ Attach | ValidTgts$ Creature
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Indestructible | Goad$ True | Description$ Enchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+A:AB$ ChangeZone | Cost$ 1 W | Defined$ Enchanted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile enchanted creature.
+Oracle:Enchant creature\nEnchanted creature has indestructible and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\n{1}{W}: Exile enchanted creature.

@@ -1,0 +1,24 @@
+Name:Brass's Tunnel-Grinder
+ManaCost:2 R
+Types:Legendary Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of cards, then draw that many cards plus one.
+SVar:TrigDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Remembered$Amount/Plus.1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You.descended | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you descended this turn, put a bore counter on CARDNAME. Then if there are three or more bore counters on it, remove those counters and transform it. (You descended if a permanent card was put into your graveyard from anywhere.)
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ BORE | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Count$CardCounters.BORE | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ BORE | CounterNum$ All | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:When Brass's Tunnel-Grinder enters the battlefield, discard any number of cards, then draw that many cards plus one.\nAt the beginning of your end step, if you descended this turn, put a bore counter on Brass's Tunnel-Grinder. Then if there are three or more bore counters on it, remove those counters and transform it. (You descended if a permanent card was put into your graveyard from anywhere.)
+
+ALTERNATE
+
+Name:Tecutlan, the Searing Rift
+ManaCost:no cost
+Types:Legendary Land Cave
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+T:Mode$ SpellCast | ValidCard$ Permanent | ValidSA$ Spell.ManaFromCard.StrictlySelf | ValidActivatingPlayer$ You | Execute$ TrigDiscover | TriggerDescription$ Whenever you cast a permanent spell using mana produced by CARDNAME, discover X, where X is that spell's mana value.
+SVar:TrigDiscover:DB$ Discover | Num$ TriggeredStackInstance$CardManaCostLKI
+Oracle:(Transforms from Brass's Tunnel-Grinder.)\n{T}: Add {R}.\nWhenever you cast a permanent spell using mana produced by Tecutlan, the Searing Rift, discover X, where X is that spell's mana value.

@@ -195,15 +195,16 @@ public class CostDiscard extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.InternalTriggerTable, table);
         if (ability.isCycling() && targetCard.equals(ability.getHostCard())) {
             // discard itself for cycling cost
             runParams.put(AbilityKey.Cycling, true);
         }
         // if this is caused by 118.12 it's also an effect
         SpellAbility cause = targetCard.getGame().getStack().isResolving(ability.getHostCard()) ? ability : null;
-        return targetCard.getController().discard(targetCard, cause, effect, null, runParams);
+        return payer.discard(targetCard, cause, effect, runParams);
     }
 
     /* (non-Javadoc)
@@ -230,9 +231,9 @@ public class CostDiscard extends CostPartWithList {
     protected void handleChangeZoneTrigger(Player payer, SpellAbility ability, CardCollectionView targetCards) {
         super.handleChangeZoneTrigger(payer, ability, targetCards);
 
-        if (!targetCards.isEmpty()) {
+        if (!cardList.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(payer);
-            runParams.put(AbilityKey.Cards, new CardCollection(targetCards));
+            runParams.put(AbilityKey.Cards, new CardCollection(cardList));
             runParams.put(AbilityKey.Cause, ability);
             runParams.put(AbilityKey.FirstTime, firstTime);
             payer.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);

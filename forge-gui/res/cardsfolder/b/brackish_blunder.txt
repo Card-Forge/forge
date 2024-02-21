@@ -1,0 +1,7 @@
+Name:Brackish Blunder
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBToken | SpellDescription$ Return target creature to its owner's hand.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_map_sac_explore | ConditionDefined$ Targeted | ConditionPresent$ Card.tapped | SpellDescription$ If it was tapped, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+DeckHas:Ability$Token|Counters|Sacrifice & Type$Artifact|Map
+Oracle:Return target creature to its owner's hand. If it was tapped, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")

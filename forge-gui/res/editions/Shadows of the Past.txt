@@ -17,7 +17,7 @@ ScryfallCode=SIS
 9 U Lingering Souls @Bud Cook
 10 U Rally the Peasants @Jaime Jones
 11 R Requiem Angel @Eric Deschamps
-12 U Seance @David Rapoza
+12 U Séance @David Rapoza
 13 C Battleground Geist @Clint Cearley
 14 R Cackling Counterpart @David Rapoza
 15 C Forbidden Alchemy @David Rapoza

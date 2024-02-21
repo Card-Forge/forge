@@ -1,0 +1,10 @@
+Name:Drag the Canal
+ManaCost:U B
+Types:Instant
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ wu_2_2_detective | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create a 2/2 white and blue Detective creature token.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | SubAbility$ DBSurveil | SpellDescription$ If a creature died this turn, you gain 2 life, surveil 2, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | CheckSVar$ X | SVarCompare$ GE1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue|Detective
+Oracle:Create a 2/2 white and blue Detective creature token. If a creature died this turn, you gain 2 life, surveil 2, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

@@ -1,0 +1,8 @@
+Name:A Golden Opportunity
+ManaCost:2 G
+Types:Enchantment Saga
+K:Chapter:3:DBConjureGoos,DBConjureEgg,DBConjureEgg
+SVar:DBConjureGoos:DB$ MakeCard | Conjure$ True | Name$ Gilded Goose | Zone$ Battlefield | SpellDescription$ Conjure a card named Gilded Goose onto the battlefield.
+SVar:DBConjureEgg:AB$ MakeCard | Cost$ tapXType<1/Bird> Sac<1/Artifact> | Conjure$ True | Name$ Golden Egg | Zone$ Battlefield | SpellDescription$ You may tap an untapped Bird you control and sacrifice an artifact. If you do, conjure a card named Golden Egg onto the battlefield.
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food|Bird|Artifact
+Oracle:(As this Saga enters and after your draw step add a lore counter. Sacrifice after III.)\nI — Conjure a card named Gilded Goose onto the battlefield.\nII, III — You may tap an untapped Bird you control and sacrifice an artifact. If you do, conjure a card named Golden Egg onto the battlefield.

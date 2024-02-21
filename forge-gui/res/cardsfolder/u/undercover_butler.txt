@@ -1,0 +1,8 @@
+Name:Undercover Butler
+ManaCost:2 UB
+Types:Creature Human Rogue
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.withMostLife | Execute$ DBUnblockable | TriggerDescription$ Whenever CARDNAME attacks the player with the most life or tied for most life, it can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+Oracle:Whenever Undercover Butler attacks the player with the most life or tied for most life, it can't be blocked this turn.

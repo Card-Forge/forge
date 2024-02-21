@@ -1,104 +1,92 @@
 homarid.png
-size: 512,488
+size: 512,224
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Avatar          
-  xy: 283, 288
-  size: 24, 24      
+  xy: 24, 1
+  size: 20, 20      
 Idle 
-  xy: 10,21
-  size: 46,43 
+  xy: 00,00
+  size: 64,32 
 Idle 
-  xy: 74,21
-  size: 46,43
+  xy: 64,00
+  size: 64,32 
 Idle 
-  xy: 138,21
-  size: 46,43
+  xy: 128,00
+  size: 64,32 
 Idle 
-  xy: 202,21
-  size: 46,43
-Idle 
-  xy: 10,21
-  size: 46,43 
-Idle 
-  xy: 74,21
-  size: 46,43
-Idle 
-  xy: 138,21
-  size: 46,43
-Idle 
-  xy: 202,21
-  size: 46,43
-Idle 
-  xy: 10,85
-  size: 46,43 
-Idle 
-  xy: 74,85
-  size: 46,43
-Idle 
-  xy: 138,85
-  size: 46,43
-Idle 
-  xy: 202,85
-  size: 46,43
+  xy: 192,00
+  size: 64,32 
 Walk
-  xy: 10, 149
-  size: 46,43
+  xy: 00, 32
+  size: 64,32
 Walk
-  xy: 74, 149
-  size: 46,43
+  xy: 64, 32
+  size: 64,32
 Walk
-  xy: 138, 149
-  size: 46,43
+  xy: 128, 32
+  size: 64,32
 Walk
-  xy: 202, 149
-  size: 46,43
+  xy: 192, 32
+  size: 64,32
 Walk
-  xy: 266, 149
-  size: 46,43
+  xy: 256, 32
+  size: 64,32
 Walk
-  xy: 330, 149
-  size: 46,43
+  xy: 320, 32
+  size: 64,32
+Walk
+  xy: 384, 32
+  size: 64,32
+Walk
+  xy: 448, 32
+  size: 64,32
 Attack 
-  xy: 0, 213
-  size: 64, 43
+  xy: 0, 64
+  size: 64,32
 Attack 
-  xy: 64, 213
-  size: 64, 43
+  xy: 64, 64
+  size: 64,32
 Attack 
-  xy: 128, 213
-  size: 64, 43
+  xy: 128, 64
+  size: 64,32
 Attack 
-  xy: 192, 213
-  size: 64, 43
+  xy: 192, 64
+  size: 64,32
 Attack 
-  xy: 256, 213
-  size: 64, 43
+  xy: 256, 64
+  size: 64,32
 Attack 
-  xy: 320, 213
-  size: 64, 43
+  xy: 320, 64
+  size: 64,32
+Attack 
+  xy: 384, 64
+  size: 64,32
+Attack 
+  xy: 448, 64
+  size: 64,32
 Death 
-  xy: 0,405
-  size: 64, 43
+  xy: 0,192
+  size: 64, 32
 Death 
-  xy: 64,405
-  size: 64, 43
+  xy: 64,192
+  size: 64, 32
 Death 
-  xy: 128,405
-  size: 64, 43
+  xy: 128,192
+  size: 64, 32
 Death 
-  xy: 192,405
-  size: 64, 43
+  xy: 192,192
+  size: 64, 32
 Death 
-  xy: 256,405
-  size: 64, 43
+  xy: 256,192
+  size: 64, 32
 Death 
-  xy: 320,405
-  size: 64, 43
+  xy: 320,192
+  size: 64, 32
 Death 
-  xy: 384,405
-  size: 64, 43
+  xy: 384,192
+  size: 64, 32
 Death 
-  xy: 448,405
-  size: 64, 43
+  xy: 448,192
+  size: 64, 32

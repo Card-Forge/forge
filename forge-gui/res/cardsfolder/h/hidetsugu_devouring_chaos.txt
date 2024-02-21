@@ -10,5 +10,5 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:TriggerRemembered$CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Deckhas:Ability$Sacrifice
+DeckHas:Ability$Sacrifice
 Oracle:{B}, Sacrifice a creature: Scry 2.\n{2}{R}, {T}: Exile the top card of your library. You may play that card this turn. When you exile a nonland card this way, Hidetsugu, Devouring Chaos deals damage equal to the exiled card's mana value to any target.

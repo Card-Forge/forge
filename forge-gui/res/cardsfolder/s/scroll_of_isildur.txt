@@ -1,7 +1,7 @@
 Name:Scroll of Isildur
 ManaCost:2 U
 Types:Enchantment Saga
-K:Saga:3:DBGainControl,DBTap,DBDraw
+K:Chapter:3:DBGainControl,DBTap,DBDraw
 SVar:DBGainControl:DB$ GainControl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target artifact | ValidTgts$ Artifact | SubAbility$ TrigTempt | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of up to one target artifact for as long as you control CARDNAME. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures. Put a stun counter on each of them.

@@ -661,11 +661,9 @@ public class AiAttackController {
             if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblockedAttackers.add(attacker);
-            } else {
-                if (predictEvasion) {
-                    List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
-                    accountedBlockers.removeAll(potentialBestBlockers);
-                }
+            } else if (predictEvasion) {
+                List<Card> potentialBestBlockers = CombatUtil.getPotentialBestBlockers(attacker, accountedBlockers, null);
+                accountedBlockers.removeAll(potentialBestBlockers);
             }
         }
 
@@ -934,7 +932,7 @@ public class AiAttackController {
                     // check defenders in order of maximum requirements
                     List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
                     final GameEntity def = defender;
-                    Collections.sort(reqs, new Comparator<Pair<GameEntity, Integer>>() {
+                    reqs.sort(new Comparator<Pair<GameEntity, Integer>>() {
                         @Override
                         public int compare(Pair<GameEntity, Integer> r1, Pair<GameEntity, Integer> r2) {
                             if (r1.getValue() == r2.getValue()) {
@@ -1397,7 +1395,7 @@ public class AiAttackController {
         if (!isEffectiveAttacker(ai, attacker, combat, defender)) {
             return false;
         }
-        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
+        boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasKeyword(Keyword.ANNIHILATOR);
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") || "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 

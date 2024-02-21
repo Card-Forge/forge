@@ -1,0 +1,7 @@
+Name:Feed the Cauldron
+ManaCost:2 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | SubAbility$ DBFood | SpellDescription$ Destroy target creature with mana value 3 or less.
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | ConditionPlayerTurn$ True | SpellDescription$ If it's your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+DeckHas:Ability$Token & Type$Artifact|Food
+Oracle:Destroy target creature with mana value 3 or less. If it's your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

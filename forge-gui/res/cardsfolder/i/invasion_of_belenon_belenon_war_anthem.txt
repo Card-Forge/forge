@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Battle Siege
 Defense:5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white and blue Knight creature token with vigilance.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wu_2_2_knight_vigilance 
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wu_2_2_knight_vigilance
 DeckHas:Ability$Token|Discard & Type$Knight & Color$Blue
 AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Belenon enters the battlefield, create a 2/2 white and blue Knight creature token with vigilance.

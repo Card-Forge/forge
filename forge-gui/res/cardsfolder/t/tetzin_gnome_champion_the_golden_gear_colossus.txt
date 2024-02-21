@@ -1,0 +1,28 @@
+Name:Tetzin, Gnome Champion
+ManaCost:U R W
+Types:Legendary Artifact Creature Gnome
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.Other+DoubleFaced+YouCtrl | Execute$ TrigMill | TriggerDescription$ Whenever NICKNAME or another double-faced artifact enters the battlefield under your control, mill three cards. You may put an artifact card from among them into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Artifact.IsRemembered | SelectPrompt$ You may put an artifact card from among them into your hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Craft:4 ExileCtrlOrGrave<6/Artifact.Other>
+AlternateMode:DoubleFaced
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Mill|Graveyard|Token
+Oracle:Whenever Tetzin or another double-faced artifact enters the battlefield under your control, mill three cards. You may put an artifact card from among them into your hand.\nCraft with six artifacts {4} ({4}, Exile this artifact, Exile the six from among other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control.)
+
+ALTERNATE
+
+Name:The Golden-Gear Colossus
+ManaCost:no cost
+Colors:white,blue,red
+Types:Legendary Artifact Creature Gnome
+PT:6/6
+K:Vigilance
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, transform up to one other target double-faced artifact you control. Create two 1/1 colorless Gnome artifact creature tokens.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTransform | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, transform up to one other target double-faced artifact you control. Create two 1/1 colorless Gnome artifact creature tokens.
+SVar:TrigTransform:DB$ SetState | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact.Other+DoubleFaced+YouCtrl | TgtPrompt$ Select up to one other target double-faced artifact you control | Mode$ Transform | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_gnome
+Oracle:Vigilance, trample\nWhenever The Golden-Gear Colossus enters the battlefield or attacks, transform up to one other target double-faced artifact you control. Create two 1/1 colorless Gnome artifact creature tokens.

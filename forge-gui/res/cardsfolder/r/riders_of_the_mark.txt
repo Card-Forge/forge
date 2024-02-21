@@ -1,0 +1,16 @@
+Name:Riders of the Mark
+ManaCost:6 R
+Types:Creature Human Knight
+PT:7/4
+K:Trample
+K:Haste
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Human you control.
+SVar:X:Count$TypeYouCtrl.Human
+T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+attackedThisTurn | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, if CARDNAME attacked this turn, return it to its owner's hand. If you do, create a number of 1/1 white Human Soldier creature tokens equal to its toughness.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | TokenAmount$ Y | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:RememberedLKI$CardToughness
+DeckHints:Type$Human
+DeckHas:Ability$Token & Type$Soldier
+Oracle:This spell costs {1} less to cast for each Human you control.\nTrample, haste\nAt the beginning of your end step, if Riders of the Mark attacked this turn, return it to its owner's hand. If you do, create a number of 1/1 white Human Soldier creature tokens equal to its toughness.

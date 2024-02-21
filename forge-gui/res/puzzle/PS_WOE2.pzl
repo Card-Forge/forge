@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Wilds of Eldraine #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2023/09/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Two of your Gruff Triplets are tokens. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Whirling Strike;Burn Down the House;Torch the Tower
+p0battlefield=Gruff Triplets;Copperline Gorge;Copperline Gorge;Copperline Gorge;Mountain;Mountain;Mountain
+p1life=9
+p1battlefield=Gavony Dawnguard|NoETBTrigs;Archive Dragon;Interdisciplinary Mascot|Counters:P1P1=4
+removesummoningsickness=true
+p0precast=Gruff Triplets:CustomScript:DB$ CopyPermanent | Defined$ Self | NumCopies$ 2

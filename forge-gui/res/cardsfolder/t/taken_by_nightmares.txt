@@ -1,0 +1,7 @@
+Name:Taken by Nightmares
+ManaCost:2 B B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBScry | SpellDescription$ Exile target creature.
+SVar:DBScry:DB$ Scry | ConditionPresent$ Enchantment.YouCtrl | ScryNum$ 2 | SpellDescription$ If you control an enchantment, scry 2.
+DeckHints:Type$Enchantment
+Oracle:Exile target creature. If you control an enchantment, scry 2.

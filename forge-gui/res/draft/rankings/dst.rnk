@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Sword of Light and Shadow|R|DST
+#2|Pulse of the Forge|R|DST
+#3|Fireball|U|DST
+#4|Skullclamp|U|DST
+#5|Pristine Angel|R|DST
+#6|Sword of Fire and Ice|R|DST
+#7|Arcbound Ravager|R|DST
+#8|Furnace Dragon|R|DST
+#9|Wand of the Elements|R|DST
+#10|Memnarch|R|DST
+#11|Juggernaut|U|DST
+#12|Arcbound Overseer|R|DST
+#13|Heartseeker|R|DST
+#14|Leonin Bola|C|DST
+#15|Oxidize|U|DST
+#16|Greater Harvester|R|DST
+#17|Death Cloud|R|DST
+#18|Pulse of the Tangle|R|DST
+#19|Barbed Lightning|C|DST
+#20|Rebuking Ceremony|R|DST
+#21|Viridian Zealot|R|DST
+#22|Fangren Firstborn|R|DST
+#23|Leonin Shikari|R|DST
+#24|Vulshok Morningstar|C|DST
+#25|Roaring Slagwurm|R|DST
+#26|Pulse of the Fields|R|DST
+#27|Specter's Shroud|U|DST
+#28|Arcbound Crusher|U|DST
+#29|Emissary of Hope|U|DST
+#30|Flamebreak|R|DST
+#31|Sundering Titan|R|DST
+#32|Shield of Kaldra|R|DST
+#33|Dismantle|U|DST
+#34|Hoverguard Observer|U|DST
+#35|Ageless Entity|R|DST
+#36|Darksteel Colossus|R|DST
+#37|Echoing Ruin|C|DST
+#38|Leonin Battlemage|U|DST
+#39|Blinkmoth Nexus|R|DST
+#40|Gemini Engine|R|DST
+#41|Chromescale Drake|R|DST
+#42|Purge|U|DST
+#43|Echoing Decay|C|DST
+#44|Essence Drain|C|DST
+#45|Emissary of Despair|U|DST
+#46|Test of Faith|U|DST
+#47|Murderous Spoils|U|DST
+#48|Tanglewalker|U|DST
+#49|Karstoderm|U|DST
+#50|Stir the Pride|U|DST
+#51|Arcbound Slith|U|DST
+#52|Myr Matrix|R|DST
+#53|Aether Vial|U|DST
+#54|Steelshaper Apprentice|R|DST
+#55|Razor Golem|C|DST
+#56|Stand Together|U|DST
+#57|Savage Beating|R|DST
+#58|Chittering Rats|C|DST
+#59|Darksteel Gargoyle|U|DST
+#60|Arcbound Reclaimer|R|DST
+#61|Vulshok War Boar|U|DST
+#62|Mephitic Ooze|R|DST
+#63|Darksteel Brute|U|DST
+#64|Panoptic Mirror|R|DST
+#65|Spire Golem|C|DST
+#66|Tangle Golem|C|DST
+#67|Darksteel Ingot|C|DST
+#68|Thunderstaff|U|DST
+#69|Arcbound Worker|C|DST
+#70|Arcbound Stinger|C|DST
+#71|Loxodon Mystic|C|DST
+#72|Vedalken Engineer|C|DST
+#73|Nim Abomination|U|DST
+#74|Darksteel Citadel|C|DST
+#75|Grimclaw Bats|C|DST
+#76|Screams from Within|U|DST
+#77|Quicksilver Behemoth|C|DST
+#78|Tel Jilad Outrider|C|DST
+#79|Oxidda Golem|C|DST
+#80|Tel Jilad Wolf|C|DST
+#81|Whispersilk Cloak|C|DST
+#82|Tangle Spider|C|DST
+#83|Arcbound Hybrid|C|DST
+#84|Death Mask Duplicant|U|DST
+#85|Dross Golem|C|DST
+#86|Echoing Truth|C|DST
+#87|Arcbound Fiend|U|DST
+#88|Arcbound Bruiser|C|DST
+#89|Slobad, Goblin Tinkerer|R|DST
+#90|Psychic Overload|U|DST
+#91|Talon of Pain|U|DST
+#92|Neurok Prodigy|C|DST
+#93|Pulse of the Dross|R|DST
+#94|Spawning Pit|U|DST
+#95|Coretapper|U|DST
+#96|Unforge|C|DST
+#97|Mirrodin's Core|U|DST
+#98|Pulse of the Grid|R|DST
+#99|Last Word|R|DST
+#100|Echoing Courage|C|DST
+#101|Auriok Siege Sled|U|DST
+#102|Auriok Glaivemaster|C|DST
+#103|Eater of Days|R|DST
+#104|Synod Artificer|R|DST
+#105|Voltaic Construct|U|DST
+#106|Drill Skimmer|C|DST
+#107|Darksteel Pendant|C|DST
+#108|Arcbound Lancer|U|DST
+#109|Neurok Transmuter|U|DST
+#110|Mycosynth Lattice|R|DST
+#111|Carry Away|U|DST
+#112|Krark Clan Stoker|C|DST
+#113|Pteron Ghost|C|DST
+#114|Shriveling Rot|R|DST
+#115|Reshape|R|DST
+#116|Turn the Tables|R|DST
+#117|Genesis Chamber|U|DST
+#118|Spincrusher|U|DST
+#119|Reap and Sow|C|DST
+#120|Ur Golems Eye|C|DST
+#121|Serum Powder|R|DST
+#122|Second Sight|U|DST
+#123|Scavenging Scarab|C|DST
+#124|Chimeric Egg|U|DST
+#125|Surestrike Trident|U|DST
+#126|Infested Roothold|U|DST
+#127|Soulscour|R|DST
+#128|Arcane Spyglass|C|DST
+#129|Tears of Rage|U|DST
+#130|Darksteel Reactor|R|DST
+#131|Thought Dissector|R|DST
+#132|Vex|C|DST
+#133|Shunt|R|DST
+#134|Nemesis Mask|U|DST
+#135|Myr Moonvessel|C|DST
+#136|Viridian Acolyte|C|DST
+#137|Scrounge|U|DST
+#138|Lich's Tomb|R|DST
+#139|Wirefly Hive|U|DST
+#140|Goblin Archaeologist|U|DST
+#141|Myr Landshaper|C|DST
+#142|Well of Lost Dreams|R|DST
+#143|Machinate|C|DST
+#144|Drooling Ogre|C|DST
+#145|Darksteel Forge|R|DST
+#146|Spellbinder|R|DST
+#147|Echoing Calm|C|DST
+#148|Inflame|C|DST
+#149|Geth's Grimoire|U|DST
+#150|Ritual of Restoration|C|DST
+#151|Metal Fatigue|C|DST
+#152|Magnetic Flux|C|DST
+#153|Nourish|C|DST
+#154|Hunger of the Nim|C|DST
+#155|Burden of Greed|C|DST
+#156|Hallow|C|DST
+#157|Aether Snap|R|DST
+#158|Crazed Goblin|C|DST
+#159|Dragon's Claw|U|DST
+#160|Demon's Horn|U|DST
+#161|Retract|R|DST
+#162|Kraken's Eye|U|DST
+#163|Angel's Feather|U|DST
+#164|Trinisphere|R|DST
+#165|Wurm's Tooth|U|DST

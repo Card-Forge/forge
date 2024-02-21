@@ -11,6 +11,6 @@ ALTERNATE
 Name:Carnage
 ManaCost:2 B R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 B R | ValidTgts$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 3 damage to target player. That player discards two cards.
+A:SP$ DealDamage | Cost$ 2 B R | ValidTgts$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 3 damage to target opponent. That player discards two cards.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Carnage deals 3 damage to target opponent. That player discards two cards.

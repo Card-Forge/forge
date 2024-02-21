@@ -1,0 +1,9 @@
+Name:Sisterhood of Karn
+ManaCost:1 G
+Types:Creature Cleric
+PT:0/0
+K:etbCounter:P1P1:1
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDouble | TriggerDescription$ Paradox — Whenever you cast a spell from anywhere other than your hand, double the number of +1/+1 counters on CARDNAME.
+SVar:TrigDouble:DB$ MultiplyCounter | Defined$ Self | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Sisterhood of Karn enters the battlefield with a +1/+1 counter on it.\nParadox — Whenever you cast a spell from anywhere other than your hand, double the number of +1/+1 counters on Sisterhood of Karn.

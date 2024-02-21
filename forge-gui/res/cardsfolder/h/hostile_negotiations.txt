@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Exile the top three cards of your library in a face-down pile,
 SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | ExileFaceDown$ True | SubAbility$ YouChoose | StackDescription$ SpellDescription | SpellDescription$ then exile the next top three cards of your library in another face-down pile.
 SVar:YouChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | ChosenPile$ TurnFaceUp | SubAbility$ TheyChoose | KeepRemembered$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the cards in each pile, then turn a pile of your choice face up.
-SVar:TurnFaceUp:DB$ SetState | Defined$ Remembered | Mode$ TurnFace
+SVar:TurnFaceUp:DB$ SetState | Defined$ Remembered | Mode$ TurnFaceUp
 SVar:TheyChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | Chooser$ Opponent | ChosenPile$ ToHand | UnchosenPile$ ToGrave | SubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ An opponent chooses one of those piles. Put all cards in the chosen pile into your hand and the rest into your graveyard.
 SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 SVar:ToGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard

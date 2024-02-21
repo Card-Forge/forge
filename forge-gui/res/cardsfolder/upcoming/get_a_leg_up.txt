@@ -1,0 +1,6 @@
+Name:Get a Leg Up
+ManaCost:G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ X | NumDef$ X | KW$ Reach | SpellDescription$ Until end of turn, target creature gets +1/+1 for each creature you control and gains reach.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Until end of turn, target creature gets +1/+1 for each creature you control and gains reach.

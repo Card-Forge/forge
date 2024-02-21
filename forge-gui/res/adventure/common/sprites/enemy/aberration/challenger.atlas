@@ -1,0 +1,47 @@
+challenger.png
+size: 64,82
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 1, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 17
+  size: 16, 16      
+Walk
+  xy: 0, 33
+  size: 16, 16      
+Walk 
+  xy: 16, 33
+  size: 16, 16 
+Walk 
+  xy: 32, 33
+  size: 16, 16 
+Walk 
+  xy: 48, 33
+  size: 16, 16      
+Attack 
+  xy: 0, 49
+  size: 16, 16      
+Attack 
+  xy: 16, 49
+  size: 16, 16 
+Attack 
+  xy: 32, 49
+  size: 16, 16 
+Attack 
+  xy: 48, 49
+  size: 16, 16          
+Death 
+  xy: 0, 65
+  size: 16, 16      
+Death 
+  xy: 16, 65
+  size: 16, 16 
+Death 
+  xy: 32, 65
+  size: 16, 16 
+Death 
+  xy: 48, 65
+  size: 16, 16 

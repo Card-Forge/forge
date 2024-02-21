@@ -1,0 +1,11 @@
+Name:Twisted Sewer-Witch
+ManaCost:3 B B
+Types:Creature Human Warlock
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block."Then for each Rat you control, create a Wicked Role token attached to that Rat. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_noblock | TokenOwner$ You | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Creature.Rat+YouCtrl | Zone$ Battlefield | RepeatSubAbility$ DBToken | ChangeZoneTable$ True
+SVar:DBToken:DB$ Token | TokenScript$ role_wicked | AttachedTo$ Remembered
+DeckNeeds:Type$Rat
+DeckHas:Ability$Token & Type$Role|Aura|Rat
+Oracle:When Twisted Sewer-Witch enters the battlefield, create a 1/1 black Rat creature token with "This creature can't block." Then for each Rat you control, create a Wicked Role token attached to that Rat. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this Aura is put into a graveyard, each opponent loses 1 life.)

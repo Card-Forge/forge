@@ -1,7 +1,7 @@
 Name:Waking the Trolls
 ManaCost:4 R G
 Types:Enchantment Saga
-K:Saga:3:DBDestroy,DBChangeZone,DBPump
+K:Chapter:3:DBDestroy,DBChangeZone,DBPump
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Choose target land. | SpellDescription$ Destroy target land.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Choose target land card. | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put target land card from a graveyard onto the battlefield under your control.
 SVar:DBPump:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBToken | SpellDescription$ Choose target player. If they control fewer lands than you, create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference.

@@ -37,7 +37,7 @@ public class MeldEffect extends SpellAbilityEffect {
         Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
         CardCollection exiled = new CardCollection(Arrays.asList(hostCard, secondary));
-        exiled = game.getAction().exile(exiled, sa);
+        exiled = game.getAction().exile(exiled, sa, null);
         Card primary = exiled.get(0);
         secondary = exiled.get(1);
 
@@ -65,7 +65,7 @@ public class MeldEffect extends SpellAbilityEffect {
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         bf.addToMelded(secondary);
         Card movedCard = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
-        if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+        if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }

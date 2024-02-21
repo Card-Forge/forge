@@ -1,4 +1,5 @@
 Name:Glenn, the Voice of Calm
+AltName:Gregor, Shrewd Magistrate
 ManaCost:1 W U
 Types:Legendary Creature Human Advisor
 PT:1/3

@@ -1,6 +1,6 @@
 Name:Meddle
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeTargets | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Spell | ConditionTargetValidTargeting$ Creature | ConditionTargetsSingleTarget$ True | TargetRestriction$ Creature.Other | SpellDescription$ If target spell has only one target and that target is a creature, change that spell's target to another creature.
+A:SP$ ChangeTargets | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Spell | ConditionTargetValidTargeting$ Creature.inZoneBattlefield | ConditionTargetsSingleTarget$ True | TargetRestriction$ Creature.Other | SpellDescription$ If target spell has only one target and that target is a creature, change that spell's target to another creature.
 AI:RemoveDeck:All
 Oracle:If target spell has only one target and that target is a creature, change that spell's target to another creature.

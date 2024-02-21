@@ -1,0 +1,12 @@
+Name:Buried in the Garden
+ManaCost:2 G W
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G W | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent you don't control until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Duration$ UntilHostLeavesPlay
+T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 1 | Defined$ TriggeredCardController
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Permanent.nonLand+YouDontCtrl
+Oracle:Enchant land\nWhen Buried in the Garden enters the battlefield, exile target nonland permanent you don't control until Buried in the Garden leaves the battlefield.\nWhenever enchanted land is tapped for mana, its controller adds an additional one mana of any color.

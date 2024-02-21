@@ -2,6 +2,6 @@ Name:Ghalta's Presence
 ManaCost:no cost
 Colors:Green
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Card | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | EffectZone$ Command | Description$ Spells can't be countered.
+R:Event$ Counter | ValidCard$ Card | ValidSA$ Spell | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Spells can't be countered.
 S:Mode$ RaiseCost | ValidCard$ Card.nonCreature+nonBattle | Type$ Spell | Activator$ Opponent | EffectZone$ Command | Amount$ 2 | Description$ Noncreature, nonbattle spells your opponent cast cost {2} more to cast.
 Oracle:Spells can't be countered.\nNoncreature, nonbattle spells your opponent cast cost {2} more to cast.

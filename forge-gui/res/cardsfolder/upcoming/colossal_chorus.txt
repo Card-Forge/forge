@@ -1,0 +1,10 @@
+Name:Colossal Chorus
+ManaCost:6 G G
+Types:Sorcery Chorus
+K:Starting intensity:2
+A:SP$ MakeCard | Conjure$ True | Name$ Colossal Dreadmaw | Amount$ X | Zone$ Battlefield | SubAbility$ DBIntensify | SpellDescription$ Conjure X cards named Colossal Dreadmaw onto the battlefield, where X is this spell's intensity.
+SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+Chorus | DefinedDesc$ all Chorus cards you own | SpellDescription$ All Chorus cards you own intensify by 1.
+SVar:X:Count$Intensity
+DeckHints:Type$Chorus
+DeckHas:Type$Dinosaur
+Oracle:Starting intensity 2\nConjure X cards named Colossal Dreadmaw onto the battlefield, where X is this spell's intensity.\nAll Chorus cards you own intensify by 1.

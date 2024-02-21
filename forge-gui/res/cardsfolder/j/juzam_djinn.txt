@@ -1,4 +1,4 @@
-Name:Juzam Djinn
+Name:Juzám Djinn
 ManaCost:2 B B
 Types:Creature Djinn
 PT:5/5

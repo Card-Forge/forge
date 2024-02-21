@@ -1,0 +1,9 @@
+Name:Nightmare Token
+ManaCost:no cost
+Types:Creature Nightmare
+Colors:black
+PT:1/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$ThisTurnEntered_Exile_Card.nonToken
+Oracle:At the beginning of combat on your turn, if a card was put into exile this turn, put a +1/+1 counter on this creature.

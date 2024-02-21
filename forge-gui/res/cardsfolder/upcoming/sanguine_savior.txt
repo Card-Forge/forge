@@ -1,0 +1,11 @@
+Name:Sanguine Savior
+ManaCost:1 W B
+Types:Creature Vampire Cleric
+PT:2/1
+K:Flying
+K:Lifelink
+K:Disguise:WB WB
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, another target creature you control gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Lifelink
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nDisguise {W/B}{W/B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Sanguine Savior is turned face up, another target creature you control gains lifelink until end of turn.

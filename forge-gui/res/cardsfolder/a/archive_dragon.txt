@@ -1,0 +1,9 @@
+Name:Archive Dragon
+ManaCost:4 U U
+Types:Creature Dragon Wizard
+PT:4/6
+K:Flying
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:Flying\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Archive Dragon enters the battlefield, scry 2.

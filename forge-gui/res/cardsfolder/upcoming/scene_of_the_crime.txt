@@ -1,0 +1,10 @@
+Name:Scene of the Crime
+ManaCost:no cost
+Types:Artifact Land Clue
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T tapXType<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Clue
+Oracle:Scene of the Crime enters the battlefield tapped.\n{T}: Add {C}.\n{T}, Tap an untapped creature you control: Add one mana of any color.\n{2}, Sacrifice Scene of the Crime: Draw a card.

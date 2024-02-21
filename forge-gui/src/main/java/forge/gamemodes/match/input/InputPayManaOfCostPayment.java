@@ -30,7 +30,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         if (spellAbility.getPayCosts().isMandatory()) {
             List<Mana> refund = new ArrayList<>();
             mandatory = ManaPool.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, refund);
-            ManaPool.refundMana(refund, payer, spellAbility);
+            payer.getManaPool().refundMana(refund);
         }
 
         // Set Mana cost being paid for SA to be able to reference it later

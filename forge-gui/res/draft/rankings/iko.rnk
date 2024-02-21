@@ -1,0 +1,265 @@
+//Rank|Name|Rarity|Set
+#1|Narset of the Ancient Way|M|IKO
+#2|Vivien, Monsters' Advocate|M|IKO
+#3|Snapdax, Apex of the Hunt|M|IKO
+#4|Nethroi, Apex of Death|M|IKO
+#5|Luminous Broodmoth|M|IKO
+#6|Fiend Artisan|M|IKO
+#7|Brokkos, Apex of Forever|M|IKO
+#8|Winota, Joiner of Forces|M|IKO
+#9|Vadrok, Apex of Thunder|M|IKO
+#10|Lukka, Coppercoat Outcast|M|IKO
+#11|General Kudro of Drannith|M|IKO
+#12|Illuna, Apex of Wishes|M|IKO
+#13|Kinnan, Bonder Prodigy|M|IKO
+#14|Rielle, the Everwise|M|IKO
+#15|Chevill, Bane of Monsters|M|IKO
+#16|Gyruda, Doom of Depths|R|IKO
+#17|Kaheera, the Orphanguard|R|IKO
+#18|Kogla, the Titan Ape|R|IKO
+#19|Obosh, the Preypiercer|R|IKO
+#20|Keruga, the Macrosage|R|IKO
+#21|Crystalline Giant|R|IKO
+#22|Yorion, Sky Nomad|R|IKO
+#23|Lurrus of the Dream Den|R|IKO
+#24|Cubwarden|R|IKO
+#25|Everquill Phoenix|R|IKO
+#26|Voracious Greatshark|R|IKO
+#27|Dirge Bat|R|IKO
+#28|Quartzwood Crasher|R|IKO
+#29|Gemrazer|R|IKO
+#30|Shark Typhoon|R|IKO
+#31|Extinction Event|R|IKO
+#32|Yidaro, Wandering Monster|R|IKO
+#33|Hunted Nightmare|R|IKO
+#34|Mythos of Vadrok|R|IKO
+#35|Skycat Sovereign|R|IKO
+#36|Mythos of Nethroi|R|IKO
+#37|Umori, the Collector|R|IKO
+#38|Jegantha, the Wellspring|R|IKO
+#39|Lavabrink Venturer|R|IKO
+#40|Sea-Dasher Octopus|R|IKO
+#41|Zirda, the Dawnwaker|R|IKO
+#42|Frondland Felidar|R|IKO
+#43|Labyrinth Raptor|R|IKO
+#44|Inspired Ultimatum|R|IKO
+#45|Auspicious Starrix|U|IKO
+#46|Ruinous Ultimatum|R|IKO
+#47|Pouncing Shoreshark|U|IKO
+#48|Flame Spill|U|IKO
+#49|Mythos of Illuna|R|IKO
+#50|Heartless Act|U|IKO
+#51|Zenith Flare|U|IKO
+#52|Lutri, the Spellchaser|R|IKO
+#53|Back for More|U|IKO
+#54|Trumpeting Gnarr|U|IKO
+#55|Boneyard Lurker|U|IKO
+#56|Slitherwisp|R|IKO
+#57|Chittering Harvester|U|IKO
+#58|Blood Curdle|C|IKO
+#59|Flourishing Fox|U|IKO
+#60|Parcelbeast|U|IKO
+#61|Necropanther|U|IKO
+#62|Grimdancer|U|IKO
+#63|Fire Prophecy|C|IKO
+#64|Valiant Rescuer|U|IKO
+#65|Titanoth Rex|U|IKO
+#66|Archipelagore|U|IKO
+#67|Porcuparrot|U|IKO
+#68|Savai Thundermane|U|IKO
+#69|Eerie Ultimatum|R|IKO
+#70|Lore Drakkis|U|IKO
+#71|Dire Tactics|U|IKO
+#72|Glowstone Recluse|U|IKO
+#73|Splendor Mare|U|IKO
+#74|Boon of the Wish-Giver|U|IKO
+#75|Sanctuary Smasher|U|IKO
+#76|Void Beckoner|U|IKO
+#77|Avian Oddity|U|IKO
+#78|Sprite Dragon|U|IKO
+#79|Insatiable Hemophage|U|IKO
+#80|Unbreakable Bond|U|IKO
+#81|Clash of Titans|U|IKO
+#82|Pacifism|C|IKO
+#83|Easy Prey|U|IKO
+#84|Colossification|R|IKO
+#85|Swallow Whole|U|IKO
+#86|Hornbash Mentor|U|IKO
+#87|Bonders' Enclave|R|IKO
+#88|Savai Triome|R|IKO
+#89|Raugrin Triome|R|IKO
+#90|Jubilant Skybonder|U|IKO
+#91|Wingspan Mentor|U|IKO
+#92|Rooting Moloch|U|IKO
+#93|Dreamtail Heron|C|IKO
+#94|Reconnaissance Mission|U|IKO
+#95|Frillscare Mentor|U|IKO
+#96|Sonorous Howlbonder|U|IKO
+#97|Migratory Greathorn|C|IKO
+#98|Momentum Rumbler|U|IKO
+#99|Ominous Seas|U|IKO
+#100|Pollywog Symbiote|U|IKO
+#101|Alert Heedbonder|U|IKO
+#102|Mythos of Snapdax|R|IKO
+#103|Duskfang Mentor|U|IKO
+#104|Majestic Auricorn|U|IKO
+#105|Mythos of Brokkos|R|IKO
+#106|Bastion of Remembrance|U|IKO
+#107|Indatha Triome|R|IKO
+#108|Huntmaster Liger|U|IKO
+#109|Keensight Mentor|U|IKO
+#110|Zagoth Mamba|U|IKO
+#111|General's Enforcer|U|IKO
+#112|The Ozolith|R|IKO
+#113|Weaponize the Monsters|U|IKO
+#114|Migration Path|U|IKO
+#115|Primal Empathy|U|IKO
+#116|Whirlwind of Thought|R|IKO
+#117|Ivy Elemental|U|IKO
+#118|Charge of the Forever-Beast|U|IKO
+#119|Regal Leosaur|U|IKO
+#120|Ram Through|C|IKO
+#121|Proud Wildbonder|U|IKO
+#122|Rumbling Rockslide|C|IKO
+#123|Zagoth Triome|R|IKO
+#124|Genesis Ultimatum|R|IKO
+#125|Humble Naturalist|C|IKO
+#126|Ketria Triome|R|IKO
+#127|Sanctuary Lockdown|U|IKO
+#128|Skull Prophet|U|IKO
+#129|Reptilian Reflection|U|IKO
+#130|Call of the Death-Dweller|U|IKO
+#131|Drannith Stinger|C|IKO
+#132|Essence Symbiote|C|IKO
+#133|Dead Weight|C|IKO
+#134|Capture Sphere|C|IKO
+#135|Exuberant Wolfbear|U|IKO
+#136|Offspring's Revenge|R|IKO
+#137|Boot Nipper|C|IKO
+#138|Drannith Healer|C|IKO
+#139|Stormwild Capridor|U|IKO
+#140|Lava Serpent|C|IKO
+#141|Vulpikeet|C|IKO
+#142|Blitz of the Thunder-Raptor|U|IKO
+#143|Cavern Whisperer|C|IKO
+#144|Go for Blood|C|IKO
+#145|Fertilid|C|IKO
+#146|Greater Sandwurm|C|IKO
+#147|Neutralize|U|IKO
+#148|Essence Scatter|C|IKO
+#149|Evolving Wilds|C|IKO
+#150|Mystic Subdual|U|IKO
+#151|Checkpoint Officer|C|IKO
+#152|Divine Arrow|C|IKO
+#153|Will of the All-Hunter|U|IKO
+#154|Frost Lynx|C|IKO
+#155|Glimmerbell|C|IKO
+#156|Unpredictable Cyclone|R|IKO
+#157|Ferocious Tigorilla|C|IKO
+#158|Prickly Marmoset|C|IKO
+#159|Emergent Ultimatum|R|IKO
+#160|Cloudpiercer|C|IKO
+#161|Fight as One|U|IKO
+#162|Thieving Otter|C|IKO
+#163|Mutual Destruction|C|IKO
+#164|Cunning Nightbonder|U|IKO
+#165|Imposing Vantasaur|C|IKO
+#166|Spelleater Wolverine|C|IKO
+#167|Snare Tactician|C|IKO
+#168|Bushmeat Poacher|C|IKO
+#169|Nightsquad Commando|C|IKO
+#170|Lurking Deadeye|C|IKO
+#171|Helica Glider|C|IKO
+#172|Durable Coilbug|C|IKO
+#173|Forbidden Friendship|C|IKO
+#174|Frostveil Ambush|C|IKO
+#175|Farfinder|C|IKO
+#176|Gust of Wind|C|IKO
+#177|Daysquad Marshal|C|IKO
+#178|Mosscoat Goriak|C|IKO
+#179|Blitz Leech|C|IKO
+#180|Of One Mind|C|IKO
+#181|Memory Leak|C|IKO
+#182|Serrated Scorpion|C|IKO
+#183|Bristling Boar|C|IKO
+#184|Blade Banish|C|IKO
+#185|Raking Claws|C|IKO
+#186|Honey Mammoth|C|IKO
+#187|Footfall Crater|U|IKO
+#188|Pyroceratops|C|IKO
+#189|Startling Development|C|IKO
+#190|Excavation Mole|C|IKO
+#191|Tentative Connection|C|IKO
+#192|Almighty Brushwagg|C|IKO
+#193|Wingfold Pteron|C|IKO
+#194|Facet Reader|C|IKO
+#195|Perimeter Sergeant|C|IKO
+#196|Coordinated Charge|C|IKO
+#197|Phase Dolphin|C|IKO
+#198|Patagia Tiger|C|IKO
+#199|Maned Serval|C|IKO
+#200|Whisper Squad|C|IKO
+#201|Garrison Cat|C|IKO
+#202|Savai Sabertooth|C|IKO
+#203|Frenzied Raptor|C|IKO
+#204|Shredded Sails|C|IKO
+#205|Suffocating Fumes|C|IKO
+#206|Song of Creation|R|IKO
+#207|Jungle Hollow|C|IKO
+#208|Anticipate|C|IKO
+#209|Wind-Scarred Crag|C|IKO
+#210|Wilt|C|IKO
+#211|Flycatcher Giraffid|C|IKO
+#212|Unlikely Aid|C|IKO
+#213|Fully Grown|C|IKO
+#214|Hampering Snare|C|IKO
+#215|Cathartic Reunion|C|IKO
+#216|Keep Safe|C|IKO
+#217|Survivors' Bond|C|IKO
+#218|Dark Bargain|C|IKO
+#219|Spontaneous Flight|C|IKO
+#220|Swiftwater Cliffs|C|IKO
+#221|Drannith Magistrate|R|IKO
+#222|Solid Footing|C|IKO
+#223|Adventurous Impulse|C|IKO
+#224|Blisterspit Gremlin|C|IKO
+#225|Scoured Barrens|C|IKO
+#226|Convolute|C|IKO
+#227|Thornwood Falls|C|IKO
+#228|Bloodfell Caves|C|IKO
+#229|Sudden Spinnerets|C|IKO
+#230|Corpse Churn|C|IKO
+#231|Gloom Pangolin|C|IKO
+#232|Monstrous Step|U|IKO
+#233|Unexpected Fangs|C|IKO
+#234|Lead the Stampede|U|IKO
+#235|Channeled Force|U|IKO
+#236|Heightened Reflexes|C|IKO
+#237|Dismal Backwater|C|IKO
+#238|Raugrin Crystal|U|IKO
+#239|Tranquil Cove|C|IKO
+#240|Aegis Turtle|C|IKO
+#241|Zagoth Crystal|U|IKO
+#242|Rugged Highlands|C|IKO
+#243|Light of Hope|C|IKO
+#244|Plummet|C|IKO
+#245|Indatha Crystal|U|IKO
+#246|Savai Crystal|U|IKO
+#247|Mysterious Egg|C|IKO
+#248|Crystacean|C|IKO
+#249|Blazing Volley|C|IKO
+#250|Blossoming Sands|C|IKO
+#251|Thwart the Enemy|C|IKO
+#252|Springjaw Trap|C|IKO
+#253|Ketria Crystal|U|IKO
+#254|Titans' Nest|R|IKO
+#255|Barrier Breach|U|IKO
+#256|Sleeper Dart|C|IKO
+#257|Adaptive Shimmerer|C|IKO
+#258|Escape Protocol|U|IKO
+#259|Death's Oasis|R|IKO
+#260|Swamp|L|IKO
+#261|Plains|L|IKO
+#262|Forest|L|IKO
+#263|Island|L|IKO
+#264|Mountain|L|IKO

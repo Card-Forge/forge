@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Crypt Angel|R|INV
+#2|Thicket Elemental|R|INV
+#3|Thornscape Master|R|INV
+#4|Treva, the Renewer|R|INV
+#5|Dromar, the Banisher|R|INV
+#6|Pyre Zombie|R|INV
+#7|Tsabo Tavoc|R|INV
+#8|Stormscape Master|R|INV
+#9|Rith, the Awakener|R|INV
+#10|Breath of Darigaaz|U|INV
+#11|Blazing Specter|R|INV
+#12|Darigaaz, the Igniter|R|INV
+#13|Fact or Fiction|U|INV
+#14|Teferi's Moat|R|INV
+#15|Phyrexian Delver|R|INV
+#16|Annihilate|U|INV
+#17|Utopia Tree|R|INV
+#18|Undermine|R|INV
+#19|Reya Dawnbringer|R|INV
+#20|Sabertooth Nishoba|R|INV
+#21|Crosis, the Purger|R|INV
+#22|Stalking Assassin|R|INV
+#23|Verdeloth the Ancient|R|INV
+#24|Skizzik|R|INV
+#25|Meteor Storm|R|INV
+#26|Kavu Titan|R|INV
+#27|Rout|R|INV
+#28|Noble Panther|R|INV
+#29|Thunderscape Master|R|INV
+#30|Sunscape Master|R|INV
+#31|Void|R|INV
+#32|Spite Malice|U|INV
+#33|Spinal Embrace|R|INV
+#34|Ghitu Fire|R|INV
+#35|Kavu Monarch|R|INV
+#36|Tsabo's Assassin|R|INV
+#37|Molimo, Maro-Sorcerer|R|INV
+#38|Nightscape Master|R|INV
+#39|Absorb|R|INV
+#40|Charging Troll|U|INV
+#41|Collective Restraint|R|INV
+#42|Plague Spitter|U|INV
+#43|Tek|R|INV
+#44|Armadillo Cloak|C|INV
+#45|Phyrexian Lens|R|INV
+#46|Wash Out|U|INV
+#47|Barrin's Spite|R|INV
+#48|Fires of Yavimaya|U|INV
+#49|Armored Guardian|R|INV
+#50|Dueling Grounds|R|INV
+#51|Goham Djinn|U|INV
+#52|Agonizing Demise|C|INV
+#53|Kangee, Aerie Keeper|R|INV
+#54|Urza's Rage|R|INV
+#55|Marauding Knight|R|INV
+#56|Angel of Mercy|U|INV
+#57|Assault Battery|U|INV
+#58|Harrow|C|INV
+#59|Reckless Spite|U|INV
+#60|Do or Die|R|INV
+#61|Shivan Emissary|U|INV
+#62|Scorching Lava|C|INV
+#63|Plague Spores|C|INV
+#64|Rooting Kavu|U|INV
+#65|Recoil|C|INV
+#66|Distorting Wake|R|INV
+#67|Global Ruin|R|INV
+#68|Cinder Shade|U|INV
+#69|Samite Archer|U|INV
+#70|Tsabo's Decree|R|INV
+#71|Tribal Flames|C|INV
+#72|Kavu Chameleon|U|INV
+#73|Repulse|C|INV
+#74|Exclude|C|INV
+#75|Yawgmoth's Agenda|R|INV
+#76|Andradite Leech|R|INV
+#77|Blind Seer|R|INV
+#78|Elfhame Palace|U|INV
+#79|Zanam Djinn|U|INV
+#80|Benalish Trapper|C|INV
+#81|Elvish Champion|R|INV
+#82|Thornscape Apprentice|C|INV
+#83|Phyrexian Infiltrator|R|INV
+#84|Ordered Migration|U|INV
+#85|Halam Djinn|U|INV
+#86|Urborg Volcano|U|INV
+#87|Smoldering Tar|U|INV
+#88|Sleeper's Robe|U|INV
+#89|Quirion Elves|C|INV
+#90|Probe|C|INV
+#91|Voracious Cobra|U|INV
+#92|Jade Leech|R|INV
+#93|Urborg Drake|U|INV
+#94|Devouring Strossus|R|INV
+#95|Kavu Climber|C|INV
+#96|Reckless Assault|R|INV
+#97|Exotic Curse|C|INV
+#98|Ruham Djinn|U|INV
+#99|Stormscape Apprentice|C|INV
+#100|Benalish Heralds|U|INV
+#101|Quirion Trailblazer|C|INV
+#102|Slinking Serpent|U|INV
+#103|Raging Kavu|R|INV
+#104|Sulam Djinn|U|INV
+#105|Callous Giant|R|INV
+#106|Razorfoot Griffin|C|INV
+#107|Urborg Emissary|U|INV
+#108|Riptide Crab|U|INV
+#109|Soul Burn|C|INV
+#110|Salt Marsh|U|INV
+#111|Hanna, Ship's Navigator|R|INV
+#112|Vicious Kavu|U|INV
+#113|Faerie Squadron|C|INV
+#114|Fertile Ground|C|INV
+#115|Empress Galina|R|INV
+#116|Wax Wane|U|INV
+#117|Shivan Zombie|C|INV
+#118|Rainbow Crow|U|INV
+#119|Pincer Spider|C|INV
+#120|Lightning Dart|U|INV
+#121|Shackles|C|INV
+#122|Hate Weaver|U|INV
+#123|Duskwalker|C|INV
+#124|Cauldron Dance|U|INV
+#125|Atalya, Samite Master|R|INV
+#126|Vile Consumption|R|INV
+#127|Serpentine Kavu|C|INV
+#128|Crusading Knight|R|INV
+#129|Death or Glory|R|INV
+#130|Captain Sisay|R|INV
+#131|Reviving Vapors|U|INV
+#132|Phyrexian Slayer|C|INV
+#133|Ravenous Rats|C|INV
+#134|Keldon Necropolis|R|INV
+#135|Tower Drake|C|INV
+#136|Vodalian Zombie|C|INV
+#137|Metathran Transport|U|INV
+#138|Seashell Cameo|U|INV
+#139|Trench Wurm|U|INV
+#140|Blurred Mongoose|R|INV
+#141|Restock|R|INV
+#142|Artifact Mutation|R|INV
+#143|Kavu Lair|R|INV
+#144|Llanowar Knight|C|INV
+#145|Lotus Guardian|R|INV
+#146|Benalish Lancer|C|INV
+#147|Nomadic Elf|C|INV
+#148|Hunting Kavu|U|INV
+#149|Drake-Skull Cameo|U|INV
+#150|Kavu Runner|U|INV
+#151|Zap|C|INV
+#152|Hooded Kavu|C|INV
+#153|Ancient Kavu|C|INV
+#154|Dream Thrush|C|INV
+#155|Glimmering Angel|C|INV
+#156|Urza's Filter|R|INV
+#157|Angelic Shield|U|INV
+#158|Sky Weaver|U|INV
+#159|Pouncing Kavu|C|INV
+#160|Sapphire Leech|R|INV
+#161|Galina's Knight|C|INV
+#162|Power Armor|U|INV
+#163|Chromatic Sphere|U|INV
+#164|Twilight's Call|R|INV
+#165|Yavimaya Barbarian|C|INV
+#166|Tangle|U|INV
+#167|Planar Portal|R|INV
+#168|Metathran Aerostat|R|INV
+#169|Might Weaver|U|INV
+#170|Stand Deliver|U|INV
+#171|Urborg Shambler|U|INV
+#172|Seer's Vision|U|INV
+#173|Benalish Emissary|U|INV
+#174|Phyrexian Reaper|C|INV
+#175|Horned Cheetah|U|INV
+#176|Shivan Oasis|U|INV
+#177|Frenzied Tilling|C|INV
+#178|Firebrand Ranger|U|INV
+#179|Simoon|U|INV
+#180|Rage Weaver|U|INV
+#181|Thunderscape Apprentice|C|INV
+#182|Shoreline Raider|C|INV
+#183|Obsidian Acolyte|C|INV
+#184|Sparring Golem|U|INV
+#185|Bloodstone Cameo|U|INV
+#186|Opt|C|INV
+#187|Saproling Symbiosis|R|INV
+#188|Prohibit|C|INV
+#189|Backlash|U|INV
+#190|Breaking Wave|R|INV
+#191|Kavu Aggressor|C|INV
+#192|Recover|C|INV
+#193|Coastal Tower|U|INV
+#194|Nightscape Apprentice|C|INV
+#195|Crimson Acolyte|C|INV
+#196|Metathran Zombie|C|INV
+#197|Quirion Sentinel|C|INV
+#198|Yavimaya Kavu|U|INV
+#199|Troll-Horn Cameo|U|INV
+#200|Alloy Golem|U|INV
+#201|Aura Mutation|R|INV
+#202|Aggressive Urge|C|INV
+#203|Firescreamer|C|INV
+#204|Verduran Emissary|U|INV
+#205|Spirit Weaver|U|INV
+#206|Vodalian Hypnotist|U|INV
+#207|Treefolk Healer|U|INV
+#208|Ardent Soldier|C|INV
+#209|Sunscape Apprentice|C|INV
+#210|Elfhame Sanctuary|U|INV
+#211|Tidal Visionary|C|INV
+#212|Urborg Phantom|C|INV
+#213|Slimy Kavu|C|INV
+#214|Vodalian Merchant|C|INV
+#215|Vodalian Serpent|C|INV
+#216|Rogue Kavu|C|INV
+#217|Pain Suffering|U|INV
+#218|Overabundance|R|INV
+#219|Canopy Surge|U|INV
+#220|Ruby Leech|R|INV
+#221|Treva's Attendant|U|INV
+#222|Juntu Stakes|R|INV
+#223|Explosive Growth|C|INV
+#224|Tigereye Cameo|U|INV
+#225|Viashino Grappler|C|INV
+#226|Spreading Plague|R|INV
+#227|Sulfur Vent|C|INV
+#228|Kavu Scout|C|INV
+#229|Sterling Grove|U|INV
+#230|Rith's Attendant|U|INV
+#231|Tolarian Emissary|U|INV
+#232|Prison Barricade|C|INV
+#233|Cursed Flesh|C|INV
+#234|Loafing Giant|R|INV
+#235|Scouting Trek|U|INV
+#236|Darigaaz's Attendant|U|INV
+#237|Tinder Farm|C|INV
+#238|Wings of Hope|C|INV
+#239|Spirit of Resistance|R|INV
+#240|Hypnotic Cloud|C|INV
+#241|Wayfaring Giant|U|INV
+#242|Crosis's Attendant|U|INV
+#243|Ancient Spring|C|INV
+#244|Worldly Counsel|C|INV
+#245|Wallop|U|INV
+#246|Llanowar Elite|C|INV
+#247|Irrigation Ditch|C|INV
+#248|Dismantling Blow|C|INV
+#249|Geothermal Crevice|C|INV
+#250|Mourning|C|INV
+#251|Rampant Elephant|C|INV
+#252|Essence Leak|U|INV
+#253|Scavenged Weaponry|C|INV
+#254|Saproling Infestation|R|INV
+#255|Urborg Skeleton|C|INV
+#256|Lobotomy|U|INV
+#257|Fight or Flight|R|INV
+#258|Temporal Distortion|R|INV
+#259|Phyrexian Battleflies|C|INV
+#260|Capashen Unicorn|C|INV
+#261|Obliterate|R|INV
+#262|Pulse of Llanowar|U|INV
+#263|Traveler's Cloak|C|INV
+#264|Llanowar Cavalry|C|INV
+#265|Collapsing Borders|R|INV
+#266|Bend or Break|R|INV
+#267|Disrupt|U|INV
+#268|Divine Presence|R|INV
+#269|Archaeological Dig|U|INV
+#270|Maniacal Rage|C|INV
+#271|Liberate|U|INV
+#272|Aether Rift|R|INV
+#273|Aura Shards|U|INV
+#274|Dromar's Attendant|U|INV
+#275|Bind|R|INV
+#276|Barrin's Unmaking|C|INV
+#277|Blinding Light|U|INV
+#278|Coalition Victory|R|INV
+#279|Savage Offensive|C|INV
+#280|Cremate|U|INV
+#281|Phyrexian Altar|R|INV
+#282|Llanowar Vanguard|C|INV
+#283|Scarred Puma|C|INV
+#284|Bog Initiate|C|INV
+#285|Addle|U|INV
+#286|Stun|C|INV
+#287|Heroes' Reunion|U|INV
+#288|Samite Ministration|U|INV
+#289|Restrain|C|INV
+#290|Strength of Unity|C|INV
+#291|Teferi's Response|R|INV
+#292|Tsabo's Web|R|INV
+#293|Overload|C|INV
+#294|Shivan Harvest|U|INV
+#295|Skittish Kavu|U|INV
+#296|Defiling Tears|U|INV
+#297|Turf Wound|C|INV
+#298|Pledge of Loyalty|U|INV
+#299|Dredge|U|INV
+#300|Pure Reflection|R|INV
+#301|Vigorous Charge|C|INV
+#302|Shimmering Wings|C|INV
+#303|Orim's Touch|C|INV
+#304|Tainted Well|C|INV
+#305|Crystal Spray|R|INV
+#306|Rewards of Diversity|U|INV
+#307|Reviving Dose|C|INV
+#308|Searing Rays|U|INV
+#309|Crown of Flames|C|INV
+#310|Mana Maze|R|INV
+#311|Teferi's Care|U|INV
+#312|Psychic Battle|R|INV
+#313|Holy Day|C|INV
+#314|Protective Sphere|C|INV
+#315|Sway of Illusion|U|INV
+#316|Tranquility|C|INV
+#317|Phantasmal Terrain|C|INV
+#318|Desperate Research|R|INV
+#319|Wandering Stream|C|INV
+#320|Chaotic Strike|U|INV
+#321|Stand or Fall|R|INV
+#322|Whip Silk|C|INV
+#323|Well-Laid Plans|R|INV
+#324|Winnow|R|INV
+#325|Manipulate Fate|U|INV
+#326|Goblin Spy|U|INV
+#327|Tectonic Instability|R|INV
+#328|Harsh Judgment|R|INV
+#329|Mages' Contest|R|INV
+#330|Alabaster Leech|R|INV

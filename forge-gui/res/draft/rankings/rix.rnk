@@ -1,0 +1,192 @@
+//Rank|Name|Rarity|Set
+#1|Tetzimoc, Primal Death|R|RIX
+#2|Azor, the Lawbringer|M|RIX
+#3|Profane Procession|R|RIX
+#4|Rekindling Phoenix|M|RIX
+#5|Champion of Dusk|R|RIX
+#6|Kumena, Tyrant of Orazca|M|RIX
+#7|Twilight Prophet|M|RIX
+#8|Angrath, the Flame-Chained|M|RIX
+#9|The Immortal Sun|M|RIX
+#10|Dire Fleet Daredevil|R|RIX
+#11|Hadana's Climb|R|RIX
+#12|Bishop of Binding|R|RIX
+#13|Ravenous Chupacabra|U|RIX
+#14|Nezahal, Primal Tide|R|RIX
+#15|Warkite Marauder|R|RIX
+#16|Trapjaw Tyrant|M|RIX
+#17|Dire Fleet Poisoner|R|RIX
+#18|Tendershoot Dryad|R|RIX
+#19|Elenda, the Dusk Rose|M|RIX
+#20|Radiant Destiny|R|RIX
+#21|Vona's Hunger|R|RIX
+#22|Form of the Dinosaur|R|RIX
+#23|Reckless Rage|U|RIX
+#24|Tilonalli's Summoner|R|RIX
+#25|Ghalta, Primal Hunger|R|RIX
+#26|Jadelight Ranger|R|RIX
+#27|Impale|C|RIX
+#28|Swift Warden|U|RIX
+#29|Path of Mettle|R|RIX
+#30|Etali, Primal Storm|R|RIX
+#31|Polyraptor|M|RIX
+#32|Legion Lieutenant|U|RIX
+#33|Protean Raider|R|RIX
+#34|Arch of Orazca|R|RIX
+#35|Expel from Orazca|U|RIX
+#36|Bombard|C|RIX
+#37|Thrashing Brontodon|U|RIX
+#38|Dire Fleet Neckbreaker|U|RIX
+#39|Merfolk Mistbinder|U|RIX
+#40|Raging Regisaur|U|RIX
+#41|Resplendent Griffin|U|RIX
+#42|Luminous Bonds|C|RIX
+#43|Atzocan Seer|U|RIX
+#44|Jungle Creeper|U|RIX
+#45|Relentless Raptor|U|RIX
+#46|Siegehorn Ceratops|R|RIX
+#47|Baffling End|U|RIX
+#48|Slaughter the Strong|R|RIX
+#49|Siren Reaver|U|RIX
+#50|Waterknot|C|RIX
+#51|Needletooth Raptor|U|RIX
+#52|Storm Fleet Swashbuckler|U|RIX
+#53|Crested Herdcaller|U|RIX
+#54|Deadeye Brawler|U|RIX
+#55|Storm Fleet Sprinter|U|RIX
+#56|Captain's Hook|R|RIX
+#57|Famished Paladin|U|RIX
+#58|Paladin of Atonement|R|RIX
+#59|Deadeye Rig-Hauler|C|RIX
+#60|Reaver Ambush|U|RIX
+#61|Charging Tuskodon|U|RIX
+#62|Hunt the Weak|C|RIX
+#63|Wayward Swordtooth|R|RIX
+#64|Forerunner of the Legion|U|RIX
+#65|Skymarcher Aspirant|U|RIX
+#66|Crashing Tide|C|RIX
+#67|Silvergill Adept|U|RIX
+#68|Moment of Craving|C|RIX
+#69|Sadistic Skymarcher|U|RIX
+#70|Jungleborn Pioneer|C|RIX
+#71|World Shaper|R|RIX
+#72|Journey to Eternity|R|RIX
+#73|Azor's Gateway|M|RIX
+#74|Golden Guardian|R|RIX
+#75|Temple Altisaur|R|RIX
+#76|Dusk Legion Zealot|C|RIX
+#77|Forerunner of the Coalition|U|RIX
+#78|Silverclad Ferocidons|R|RIX
+#79|Forerunner of the Heralds|U|RIX
+#80|Huatli, Radiant Champion|M|RIX
+#81|Everdawn Champion|U|RIX
+#82|Exultant Skymarcher|C|RIX
+#83|Aquatic Incursion|U|RIX
+#84|Kumena's Awakening|R|RIX
+#85|Golden Demise|U|RIX
+#86|Mutiny|C|RIX
+#87|Deeproot Elite|R|RIX
+#88|Strength of the Pack|U|RIX
+#89|Thunderherd Migration|U|RIX
+#90|Blazing Hope|U|RIX
+#91|Divine Verdict|C|RIX
+#92|Zetalpa, Primal Dawn|R|RIX
+#93|Hornswoggle|U|RIX
+#94|Kitesail Corsair|C|RIX
+#95|Riverwise Augur|U|RIX
+#96|Seafloor Oracle|R|RIX
+#97|Slippery Scoundrel|U|RIX
+#98|Dead Man's Chest|R|RIX
+#99|Mausoleum Harpy|U|RIX
+#100|Oathsworn Vampire|U|RIX
+#101|Tomb Robber|R|RIX
+#102|Frilled Deathspitter|C|RIX
+#103|Cherished Hatchling|U|RIX
+#104|Giltgrove Stalker|C|RIX
+#105|Martyr of Dusk|C|RIX
+#106|Pride of Conquerors|U|RIX
+#107|Raptor Companion|C|RIX
+#108|Sanguine Glorifier|C|RIX
+#109|Curious Obsession|U|RIX
+#110|Sailor of Means|C|RIX
+#111|Secrets of the Golden City|C|RIX
+#112|Fathom Fleet Boarder|C|RIX
+#113|Buccaneer's Bravado|C|RIX
+#114|Forerunner of the Empire|U|RIX
+#115|Goblin Trailblazer|C|RIX
+#116|Pirate's Pillage|U|RIX
+#117|Shake the Foundations|U|RIX
+#118|Swaggering Corsair|C|RIX
+#119|Aggressive Urge|C|RIX
+#120|Colossal Dreadmaw|C|RIX
+#121|Hardy Veteran|C|RIX
+#122|Path of Discovery|R|RIX
+#123|Legion Conquistador|C|RIX
+#124|Moment of Triumph|C|RIX
+#125|Squire's Devotion|C|RIX
+#126|Sun Sentinel|C|RIX
+#127|Admiral's Order|R|RIX
+#128|Flood of Recollection|U|RIX
+#129|Soul of the Rapids|C|RIX
+#130|Spire Winder|C|RIX
+#131|Vampire Revenant|C|RIX
+#132|See Red|U|RIX
+#133|Sun-Collared Raptor|C|RIX
+#134|Enter the Unknown|U|RIX
+#135|Jadecraft Artisan|C|RIX
+#136|Orazca Frillback|C|RIX
+#137|Evolving Wilds|C|RIX
+#138|Forsaken Sanctuary|U|RIX
+#139|Foul Orchard|U|RIX
+#140|Highland Lake|U|RIX
+#141|Stone Quarry|U|RIX
+#142|Woodland Stream|U|RIX
+#143|Imperial Ceratops|U|RIX
+#144|Majestic Heliopterus|U|RIX
+#145|Sun-Crested Pterodon|C|RIX
+#146|Mist-Cloaked Herald|C|RIX
+#147|Negate|C|RIX
+#148|Sea Legs|C|RIX
+#149|Timestream Navigator|M|RIX
+#150|Arterial Flow|U|RIX
+#151|Dinosaur Hunter|C|RIX
+#152|Dusk Charger|C|RIX
+#153|Mastermind's Acquisition|R|RIX
+#154|Pitiless Plunderer|U|RIX
+#155|Recover|C|RIX
+#156|Voracious Vampire|C|RIX
+#157|Brazen Freebooter|C|RIX
+#158|Daring Buccaneer|U|RIX
+#159|Orazca Raptor|C|RIX
+#160|Stampeding Horncrest|C|RIX
+#161|Tilonalli's Crown|C|RIX
+#162|Cacophodon|U|RIX
+#163|Knight of the Stampede|C|RIX
+#164|Overgrown Armasaur|C|RIX
+#165|Orazca Relic|C|RIX
+#166|Traveler's Amulet|C|RIX
+#167|Cleansing Ray|C|RIX
+#168|Snubhorn Sentry|C|RIX
+#169|Crafty Cutpurse|R|RIX
+#170|River Darter|C|RIX
+#171|Sworn Guardian|C|RIX
+#172|Grasping Scoundrel|C|RIX
+#173|Blood Sun|R|RIX
+#174|Fanatical Firebrand|C|RIX
+#175|Jade Bearer|C|RIX
+#176|Plummet|C|RIX
+#177|Zacama, Primal Calamity|M|RIX
+#178|Strider Harness|C|RIX
+#179|Release to the Wind|R|RIX
+#180|Canal Monitor|C|RIX
+#181|Dark Inquiry|C|RIX
+#182|Naturalize|C|RIX
+#183|Induced Amnesia|R|RIX
+#184|Gruesome Fate|C|RIX
+#185|Storm the Vault|R|RIX
+#186|Gleaming Barrier|C|RIX
+#187|Shatter|C|RIX
+#188|Silent Gravestone|R|RIX
+#189|Awakened Amalgam|R|RIX
+#190|Brass's Bounty|R|RIX
+#191|Sphinx's Decree|R|RIX

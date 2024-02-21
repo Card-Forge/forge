@@ -11,13 +11,13 @@ activeplayer=p0
 activephase=UPKEEP
 activephaseadvance=MAIN1
 p0life=5
-p0hand=Bushwhack|Set:BRO|Art:1;Grima Wormtongue|Set:LTR|Art:1;Claim the Precious|Set:LTR|Art:1;Storm the Seedcore|Set:MOM|Art:1;Thirsting Roots|Set:ONE|Art:1
-p0battlefield=Cankerbloom|Set:ONE|Art:3;Shelob, Child of Ungoliant|Set:LTR|Art:3;Fall of Gil-galad|Set:LTR|Art:1|Counters:LORE=1;Dunedain Rangers|Set:LTR|Art:1;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2
+p0hand=Bushwhack|Set:BRO|Art:1;Gríma Wormtongue|Set:LTR|Art:1;Claim the Precious|Set:LTR|Art:1;Storm the Seedcore|Set:MOM|Art:1;Thirsting Roots|Set:ONE|Art:1
+p0battlefield=Cankerbloom|Set:ONE|Art:3;Shelob, Child of Ungoliant|Set:LTR|Art:3;Fall of Gil-galad|Set:LTR|Art:1|Counters:LORE=1;Dúnedain Rangers|Set:LTR|Art:1;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Swamp|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2;Forest|Set:LTR|Art:2
 p0library=Swamp;Swamp;Swamp;Swamp;Swamp;Forest;Forest;Forest;Forest;Forest
 p0numringtemptedyou=1
 p1life=21
 p1landsplayed=0
 p1landsplayedlastturn=0
 p1numringtemptedyou=0
-p1battlefield=Smeagol, Helpful Guide|Set:LTR|Art:2;Eastfarthing Farmer|Set:LTR|Art:1;Braids's Frightful Return|Set:DMU|Art:1|Counters:LORE=1;Phyrexian Fleshgorger|Set:BRO|Art:2
+p1battlefield=Sméagol, Helpful Guide|Set:LTR|Art:2;Eastfarthing Farmer|Set:LTR|Art:1;Braids's Frightful Return|Set:DMU|Art:1|Counters:LORE=1;Phyrexian Fleshgorger|Set:BRO|Art:2
 p1library=Swamp;Swamp;Swamp;Swamp;Swamp;Plains;Plains;Plains;Plains;Plains;Forest;Forest;Forest;Forest;Forest

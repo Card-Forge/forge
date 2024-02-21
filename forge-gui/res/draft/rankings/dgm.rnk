@@ -1,0 +1,167 @@
+//Rank|Name|Rarity|Set
+#1|Master of Cruelties|M|DGM
+#2|Voice of Resurgence|M|DGM
+#3|Ral Zarek|M|DGM
+#4|Savageborn Hydra|M|DGM
+#5|Blood Baron of Vizkopa|M|DGM
+#6|Progenitor Mimic|M|DGM
+#7|Legion's Initiative|M|DGM
+#8|Deadbridge Chant|M|DGM
+#9|Aetherling|R|DGM
+#10|Advent of the Wurm|R|DGM
+#11|Tajic Blade of the Legion|R|DGM
+#12|Scion of Vitu-Ghazi|R|DGM
+#13|Exava Rakdos Blood Witch|R|DGM
+#14|Lavinia of the Tenth|R|DGM
+#15|Pontiff of Blight|R|DGM
+#16|Ruric Thar the Unbowed|R|DGM
+#17|Varolz the Scar-Striped|R|DGM
+#18|Mirko Vosk Mind Drinker|R|DGM
+#19|Teysa Envoy of Ghosts|R|DGM
+#20|Sire of Insanity|R|DGM
+#21|Warleader's Helix|U|DGM
+#22|Council of the Absolute|M|DGM
+#23|Unflinching Courage|U|DGM
+#24|Ready Willing|R|DGM
+#25|Renegade Krasis|R|DGM
+#26|Turn Burn|U|DGM
+#27|Boros Battleshaper|R|DGM
+#28|Far Away|U|DGM
+#29|Putrefy|U|DGM
+#30|Pyrewild Shaman|R|DGM
+#31|Vorel of the Hull Clade|R|DGM
+#32|Gaze of Granite|R|DGM
+#33|Blood Scrivener|R|DGM
+#34|Ascended Lawmage|U|DGM
+#35|Flesh Blood|R|DGM
+#36|Trostani's Summoner|U|DGM
+#37|Beck Call|R|DGM
+#38|Skylasher|R|DGM
+#39|Dragonshift|R|DGM
+#40|Krasis Incubation|U|DGM
+#41|Haunter of Nightveil|U|DGM
+#42|Melek Izzet Paragon|R|DGM
+#43|Jelenn Sphinx|U|DGM
+#44|Zhur-Taa Ancient|R|DGM
+#45|Gruul War Chant|U|DGM
+#46|Carnage Gladiator|U|DGM
+#47|Spike Jester|U|DGM
+#48|Bronzebeak Moa|U|DGM
+#49|Warped Physique|U|DGM
+#50|Scab-Clan Giant|U|DGM
+#51|Breaking Entering|R|DGM
+#52|Obzedat's Aid|R|DGM
+#53|Punish the Enemy|C|DGM
+#54|Armed Dangerous|U|DGM
+#55|Fluxcharger|U|DGM
+#56|Give Take|U|DGM
+#57|Species Gorger|U|DGM
+#58|Tithe Drinker|C|DGM
+#59|Blast of Genius|U|DGM
+#60|Sin Collector|U|DGM
+#61|Renounce the Guilds|R|DGM
+#62|Emmara Tandris|R|DGM
+#63|Rubblebelt Maaka|C|DGM
+#64|Korozda Gorgon|U|DGM
+#65|Zhur-Taa Druid|C|DGM
+#66|Alive Well|U|DGM
+#67|Viashino Firstblade|C|DGM
+#68|Beetleform Mage|C|DGM
+#69|Thrashing Mossdog|C|DGM
+#70|Battering Krasis|C|DGM
+#71|Kraul Warrior|C|DGM
+#72|Blaze Commando|U|DGM
+#73|Profit Loss|U|DGM
+#74|Wind Drake|C|DGM
+#75|Haazda Snare Squad|C|DGM
+#76|Rakdos Drake|C|DGM
+#77|Ubul Sar Gatekeepers|C|DGM
+#78|Boros Mastiff|C|DGM
+#79|Fatal Fumes|C|DGM
+#80|Woodlot Crawler|U|DGM
+#81|Maw of the Obzedat|U|DGM
+#82|Steam Vents|L|DGM
+#83|Stomping Ground|L|DGM
+#84|Temple Garden|L|DGM
+#85|Plasm Capture|R|DGM
+#86|Notion Thief|R|DGM
+#87|Blood Crypt|L|DGM
+#88|Runner's Bane|C|DGM
+#89|Watery Grave|L|DGM
+#90|Sacred Foundry|L|DGM
+#91|Deputy of Acquittals|C|DGM
+#92|Godless Shrine|L|DGM
+#93|Sunspire Gatekeepers|C|DGM
+#94|Selesnya Guildgate|L|DGM
+#95|Azorius Guildgate|L|DGM
+#96|Hallowed Fountain|L|DGM
+#97|Dimir Guildgate|L|DGM
+#98|Gruul Guildgate|L|DGM
+#99|Feral Animist|U|DGM
+#100|Toil Trouble|U|DGM
+#101|Opal Lake Gatekeepers|C|DGM
+#102|Boros Guildgate|L|DGM
+#103|Breeding Pool|L|DGM
+#104|Orzhov Guildgate|L|DGM
+#105|Izzet Guildgate|L|DGM
+#106|Rakdos Guildgate|L|DGM
+#107|Golgari Guildgate|L|DGM
+#108|Simic Guildgate|L|DGM
+#109|Overgrown Tomb|L|DGM
+#110|Riot Piker|C|DGM
+#111|Protect Serve|U|DGM
+#112|Catch Release|R|DGM
+#113|Nivix Cyclops|C|DGM
+#114|Maze's End|L|DGM
+#115|Steeple Roc|C|DGM
+#116|Render Silent|R|DGM
+#117|Armored Wolf-Rider|C|DGM
+#118|Smelt-Ward Gatekeepers|C|DGM
+#119|Debt to the Deathless|U|DGM
+#120|Saruli Gatekeepers|C|DGM
+#121|Weapon Surge|C|DGM
+#122|Rot Farm Skeleton|U|DGM
+#123|Pilfered Plans|C|DGM
+#124|Maze Glider|C|DGM
+#125|Down Dirty|U|DGM
+#126|Reap Intellect|M|DGM
+#127|Murmuring Phantasm|C|DGM
+#128|Hired Torturer|C|DGM
+#129|Maze Abomination|C|DGM
+#130|Morgue Burst|C|DGM
+#131|Gleam of Battle|U|DGM
+#132|Lyev Decree|C|DGM
+#133|Maze Behemoth|C|DGM
+#134|Maze Rusher|C|DGM
+#135|Boros Cluestone|C|DGM
+#136|Selesnya Cluestone|C|DGM
+#137|Gruul Cluestone|C|DGM
+#138|Phytoburst|C|DGM
+#139|Orzhov Cluestone|C|DGM
+#140|Golgari Cluestone|C|DGM
+#141|Simic Cluestone|C|DGM
+#142|Dimir Cluestone|C|DGM
+#143|Rakdos Cluestone|C|DGM
+#144|Azorius Cluestone|C|DGM
+#145|Izzet Cluestone|C|DGM
+#146|Bane Alley Blackguard|C|DGM
+#147|Hidden Strings|C|DGM
+#148|Mindstatic|C|DGM
+#149|Maze Sentinel|C|DGM
+#150|Drown in Filth|C|DGM
+#151|Riot Control|C|DGM
+#152|Mutant's Prey|C|DGM
+#153|Wear Tear|U|DGM
+#154|Bred for the Hunt|U|DGM
+#155|Mending Touch|C|DGM
+#156|Clear a Path|C|DGM
+#157|Wake the Reflections|C|DGM
+#158|Uncovered Clues|C|DGM
+#159|Crypt Incursion|C|DGM
+#160|Sinister Possession|C|DGM
+#161|Awe for the Guilds|C|DGM
+#162|Restore the Peace|U|DGM
+#163|Showstopper|U|DGM
+#164|Goblin Test Pilot|U|DGM
+#165|Possibility Storm|R|DGM
+#166|Trait Doctoring|R|DGM

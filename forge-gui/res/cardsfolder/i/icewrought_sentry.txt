@@ -1,0 +1,12 @@
+Name:Icewrought Sentry
+ManaCost:2 U
+Types:Creature Elemental Soldier
+PT:2/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTrigger | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}{U}. When you do, tap target creature an opponent controls.
+SVar:TrigTrigger:AB$ ImmediateTrigger | Cost$ 1 U | Execute$ TrigTap | SpellDescription$ When you do, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+T:Mode$ Taps | ValidCard$ Creature.OppCtrl | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you tap an untapped creature an opponent controls, CARDNAME gets +2/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Vigilance\nWhenever Icewrought Sentry attacks, you may pay {1}{U}. When you do, tap target creature an opponent controls.\nWhenever you tap an untapped creature an opponent controls, Icewrought Sentry gets +2/+1 until end of turn.

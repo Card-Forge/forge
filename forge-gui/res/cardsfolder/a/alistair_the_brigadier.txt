@@ -1,0 +1,13 @@
+Name:Alistair, the Brigadier
+ManaCost:1 G W U
+Types:Legendary Creature Human Soldier
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a historic spell, create a 1/1 white Soldier creature token. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, you may pay {8}. If you do, creatures you control get +X/+X until end of turn, where X is the number of historic permanents you control.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 8 | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ X
+SVar:X:Count$Valid Permanent.YouCtrl+Historic
+DeckHas:Ability$Token
+DeckHints:Type$Artifact|Legendary|Saga
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever you cast a historic spell, create a 1/1 white Soldier creature token. (Artifacts, legendaries, and Sagas are historic.)\nWhenever Alistair attacks, you may pay {8}. If you do, creatures you control get +X/+X until end of turn, where X is the number of historic permanents you control.

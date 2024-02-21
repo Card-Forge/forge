@@ -56,6 +56,10 @@ public class TriggerExplores extends Trigger {
             return false;
         }
 
+        if (!matchesValidParam("ValidExplored", runParams.get(AbilityKey.Explored))) {
+            return false;
+        }
+
         return true;
     }
 
@@ -63,13 +67,18 @@ public class TriggerExplores extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObject(AbilityKey.Explorer, runParams.get(AbilityKey.Card));
+        if (runParams.containsKey(AbilityKey.Explored)) sa.setTriggeringObjectsFrom(runParams, AbilityKey.Explored);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-
-        sb.append(Localizer.getInstance().getMessage("lblExplorer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Explorer));
+        sb.append(Localizer.getInstance().getMessage("lblExplorer")).append(": ");
+        sb.append(sa.getTriggeringObject(AbilityKey.Explorer));
+        if (sa.hasTriggeringObject(AbilityKey.Explored)) {
+            sb.append(", ").append(Localizer.getInstance().getMessage("lblExplored")).append(": ");
+            sb.append(sa.getTriggeringObject(AbilityKey.Explored));
+        }
         return sb.toString();
     }
 }

@@ -1,0 +1,8 @@
+Name:Shady Informant
+ManaCost:3 B R
+Types:Creature Ogre Rogue
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME dies, it deals 2 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+K:Disguise:2 BR BR
+Oracle:When Shady Informant dies, it deals 2 damage to any target.\nDisguise {2}{B/R}{B/R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

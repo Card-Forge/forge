@@ -3,6 +3,7 @@ package forge.adventure.world;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
+import forge.adventure.scene.SaveLoadScene;
 import forge.adventure.stage.WorldStage;
 import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
@@ -137,10 +138,10 @@ public class WorldSave   {
     }
 
     public boolean autoSave() {
-        return save("auto save",AUTO_SAVE_SLOT);
+        return save("auto save"+ SaveLoadScene.instance().getSaveFileSuffix(),AUTO_SAVE_SLOT);
     }
     public boolean quickSave() {
-        return save("quick save",QUICK_SAVE_SLOT);
+        return save("quick save"+ SaveLoadScene.instance().getSaveFileSuffix(),QUICK_SAVE_SLOT);
     }
     public boolean quickLoad() {
         return load(QUICK_SAVE_SLOT);

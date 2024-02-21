@@ -1,4 +1,5 @@
 Name:Rick, Steadfast Leader
+AltName:Greymond, Avacyn's Stalwart
 ManaCost:2 W W
 Types:Legendary Creature Human Soldier
 PT:3/4

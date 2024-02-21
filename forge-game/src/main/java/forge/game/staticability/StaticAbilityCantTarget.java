@@ -167,8 +167,8 @@ public class StaticAbilityCantTarget {
             SpellAbility next = it.next();
             while (next != null) {
                 if (next.usesTargeting() && (!next.getParam("ValidTgts").contains(stAb.getParam("SourceCanOnlyTarget"))
-                        || next.getParam("ValidTgts").contains(","))
-                        || next.getParam("ValidTgts").contains("non" + stAb.getParam("SourceCanOnlyTarget"))) {
+                        || next.getParam("ValidTgts").contains(",")
+                        || next.getParam("ValidTgts").contains("non" + stAb.getParam("SourceCanOnlyTarget")))) {
                     return false;
                 }
                 next = next.getSubAbility();

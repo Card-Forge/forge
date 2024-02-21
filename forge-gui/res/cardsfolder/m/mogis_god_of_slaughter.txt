@@ -3,9 +3,9 @@ ManaCost:2 B R
 Types:Legendary Enchantment Creature God
 PT:7/5
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to black and red is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to black and red is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Black.Red
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals 2 damage to that player unless they sacrifice a creature.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | Execute$ TrigDmg | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, NICKNAME deals 2 damage to that player unless they sacrifice a creature.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer | UnlessCost$ Sac<1/Creature> | UnlessAI$ LifeLE2 | UnlessPayer$ TriggeredPlayer
 SVar:BuffedBy:Permanent.Black,Permanent.Red
 Oracle:Indestructible\nAs long as your devotion to black and red is less than seven, Mogis isn't a creature.\nAt the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.

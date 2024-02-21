@@ -1,0 +1,154 @@
+//Rank|Name|Rarity|Set
+#1|Thorn Elemental|R|S99
+#2|Archangel|R|S99
+#3|Ancient Craving|R|S99
+#4|Fire Tempest|R|S99
+#5|Wicked Pact|R|S99
+#6|Time Warp|R|S99
+#7|Volcanic Dragon|R|S99
+#8|Jagged Lightning|U|S99
+#9|Armageddon|R|S99
+#10|Stream of Acid|U|S99
+#11|Dread Reaper|R|S99
+#12|Last Chance|R|S99
+#13|Air Elemental|U|S99
+#14|Abyssal Horror|R|S99
+#15|Angel of Mercy|U|S99
+#16|Thunder Dragon|R|S99
+#17|Counterspell|U|S99
+#18|Whiptail Wurm|U|S99
+#19|Phantom Warrior|R|S99
+#20|Tidings|U|S99
+#21|Man o' War|U|S99
+#22|Angel of Light|U|S99
+#23|Pride of Lions|U|S99
+#24|Gravedigger|U|S99
+#25|Dakmor Lancer|R|S99
+#26|Dakmor Plague|U|S99
+#27|Dark Offering|U|S99
+#28|Righteous Fury|R|S99
+#29|Fire Elemental|U|S99
+#30|Goblin General|U|S99
+#31|Untamed Wilds|U|S99
+#32|Goblin Commando|U|S99
+#33|Sylvan Yeti|R|S99
+#34|Silverback Ape|U|S99
+#35|Volcanic Hammer|C|S99
+#36|Hand of Death|C|S99
+#37|Devastation|R|S99
+#38|Bog Wraith|U|S99
+#39|Champion Lancer|R|S99
+#40|Dakmor Sorceress|R|S99
+#41|Spitting Earth|U|S99
+#42|Loyal Sentry|R|S99
+#43|Gerrard's Wisdom|R|S99
+#44|Snapping Drake|C|S99
+#45|Piracy|R|S99
+#46|Owl Familiar|U|S99
+#47|Bull Hippo|U|S99
+#48|Wind Drake|C|S99
+#49|Southern Elephant|C|S99
+#50|Barbtooth Wurm|C|S99
+#51|Relentless Assault|R|S99
+#52|Durkwood Boars|C|S99
+#53|Vengeance|U|S99
+#54|Norwood Archers|C|S99
+#55|Path of Peace|C|S99
+#56|Goblin Hero|R|S99
+#57|Dakmor Ghoul|U|S99
+#58|Sylvan Basilisk|R|S99
+#59|Grim Tutor|R|S99
+#60|Undo|U|S99
+#61|Cinder Storm|U|S99
+#62|Shrieking Specter|U|S99
+#63|Time Ebb|C|S99
+#64|Earth Elemental|U|S99
+#65|Wood Elves|U|S99
+#66|Trained Orgg|R|S99
+#67|Goblin Cavaliers|C|S99
+#68|Sleight of Hand|C|S99
+#69|Gorilla Warrior|C|S99
+#70|Wild Ox|U|S99
+#71|Water Elemental|U|S99
+#72|Lynx|U|S99
+#73|Hulking Ogre|U|S99
+#74|Breath of Life|U|S99
+#75|Grizzly Bears|C|S99
+#76|Ravenous Rats|U|S99
+#77|Wild Griffin|C|S99
+#78|Ogre Warrior|C|S99
+#79|Nature's Lore|C|S99
+#80|Hulking Goblin|C|S99
+#81|Royal Trooper|U|S99
+#82|Blinding Light|R|S99
+#83|Goblin Chariot|C|S99
+#84|Mind Rot|C|S99
+#85|Denizen of the Deep|R|S99
+#86|Exhaustion|U|S99
+#87|Touch of Brilliance|C|S99
+#88|Charging Paladin|U|S99
+#89|Hollow Dogs|C|S99
+#90|Lone Wolf|C|S99
+#91|Vizzerdrix|R|S99
+#92|Remove Soul|C|S99
+#93|Feral Shadow|C|S99
+#94|Scorching Spear|C|S99
+#95|Mons's Goblin Raiders|R|S99
+#96|Squall|C|S99
+#97|Knight Errant|C|S99
+#98|Lava Axe|C|S99
+#99|Goblin Settler|U|S99
+#100|Venerable Monk|C|S99
+#101|Monstrous Growth|C|S99
+#102|Dakmor Scorpion|C|S99
+#103|Coercion|U|S99
+#104|Tremor|C|S99
+#105|Relearn|U|S99
+#106|Giant Octopus|C|S99
+#107|Whirlwind|R|S99
+#108|Angelic Blessing|C|S99
+#109|Raging Goblin|C|S99
+#110|Serpent Warrior|C|S99
+#111|Bog Raiders|C|S99
+#112|Summer Bloom|R|S99
+#113|Foot Soldiers|C|S99
+#114|Muck Rats|C|S99
+#115|Extinguish|C|S99
+#116|Soul Feast|U|S99
+#117|Sea Eagle|C|S99
+#118|Stone Rain|C|S99
+#119|Righteous Charge|U|S99
+#120|Howling Fury|U|S99
+#121|Coral Eel|C|S99
+#122|Wind Sail|U|S99
+#123|Bog Imp|C|S99
+#124|Border Guard|C|S99
+#125|Ingenious Thief|C|S99
+#126|Royal Falcon|C|S99
+#127|Ardent Militia|U|S99
+#128|Veteran Cavalier|U|S99
+#129|Steadfastness|C|S99
+#130|Bargain|U|S99
+#131|Goblin Mountaineer|C|S99
+#132|Storm Crow|C|S99
+#133|Norwood Ranger|C|S99
+#134|Goblin Lore|U|S99
+#135|Raise Dead|C|S99
+#136|Natural Spring|U|S99
+#137|Scathe Zombies|C|S99
+#138|Goblin Glider|U|S99
+#139|Merfolk of the Pearl Trident|C|S99
+#140|Devout Monk|C|S99
+#141|Chorus of Woe|C|S99
+#142|Willow Elf|C|S99
+#143|Eye Spy|U|S99
+#144|Eager Cadet|C|S99
+#145|Alluring Scent|R|S99
+#146|Sacred Nectar|C|S99
+#147|Devoted Hero|C|S99
+#148|False Peace|U|S99
+#149|Moon Sprite|U|S99
+#150|Renewing Touch|U|S99
+#151|Nature's Cloak|R|S99
+#152|Psychic Transfer|R|S99
+#153|Ransack|R|S99

@@ -1,0 +1,8 @@
+Name:Merfolk Coralsmith
+ManaCost:2 U
+Types:Creature Merfolk
+PT:2/3
+A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ When CARDNAME dies, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:{1}: Merfolk Coralsmith gets +1/-1 until end of turn.\nWhen Merfolk Coralsmith dies, scry 2.

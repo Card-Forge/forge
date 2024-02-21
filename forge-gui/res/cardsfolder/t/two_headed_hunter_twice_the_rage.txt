@@ -1,0 +1,15 @@
+Name:Two-Headed Hunter
+ManaCost:4 R
+Types:Creature Giant
+PT:5/4
+K:Menace
+AlternateMode:Adventure
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
+
+ALTERNATE
+
+Name:Twice the Rage
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gains double strike until end of turn. (Then exile this card. You may cast the creature later from exile.)

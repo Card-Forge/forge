@@ -1,0 +1,7 @@
+Name:Dino DNA
+ManaCost:1
+Types:Artifact
+A:AB$ ChangeZone | PrecostDesc$ Imprint — | SorcerySpeed$ True | Cost$ 1 T | Imprint$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature card from a graveyard. Activate only as a sorcery.
+A:AB$ CopyPermanent | Cost$ 6 | Defined$ Targeted | SetPower$ 6 | AddKeywords$ Trample | SetToughness$ 6 | SetColor$ Green | SetCreatureTypes$ Dinosaur | SorcerySpeed$ True | ValidTgts$ Creature.IsImprinted+ExiledWithSource | TgtZone$ Exile | TgtPrompt$ Select target creature card exiled with CARDNAME | SpellDescription$ Create a token that's a copy of target creature card exiled with CARDNAME, except it's a 6/6 green Dinosaur creature with trample. Activate only as a sorcery.
+DeckHas:Ability$Token|Graveyard & Type$Dinosaur & Color$Green
+Oracle:Imprint - {1}, {T}: Exile target creature card from a graveyard. Activate only as a sorcery.\n{6}: Create a token that's a copy of target creature card exiled with Dino DNA, except it's a 6/6 green Dinosaur creature with trample. Activate only as a sorcery.

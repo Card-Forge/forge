@@ -3,7 +3,7 @@ ManaCost:3 G U
 Types:Legendary Enchantment Creature God
 PT:4/7
 K:Indestructible
-S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to green and blue is less than seven, CARDNAME isn't a creature.
+S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to green and blue is less than seven, NICKNAME isn't a creature.
 SVar:X:Count$DevotionDual.Green.Blue
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 R:Event$ LoseMana | ValidPlayer$ You | ReplacementResult$ Replaced | ReplaceWith$ ConvertMana | ActiveZones$ Battlefield | Description$ If you would lose unspent mana, that mana becomes colorless instead.

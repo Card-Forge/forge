@@ -53,7 +53,7 @@ ScryfallCode=CM2
 45 R Memory Erosion @Howard Lyon
 46 R Minds Aglow @Yeong-Hao Han
 47 C Mulldrifter @Eric Fortune
-48 C Riddlekeeper @Steve Prescott
+48 R Riddlekeeper @Steve Prescott
 49 U Slipstream Eel @Mark Tedin
 50 U Spell Crumple @Dan Scott
 51 U Tezzeret's Gambit @Karl Kopinski

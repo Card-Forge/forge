@@ -1,9 +1,10 @@
 Name:Dhalsim, Pliable Pacifist
+AltName:Tadeas, Juniper Ascendant
 ManaCost:2 G W
 Types:Legendary Creature Human Monk
 PT:1/3
 K:Reach
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+notattacking | Description$ Teleport — CARDNAME has hexproof unless he's attacking.
+S:Mode$ Continuous | Affected$ Card.Self+notattacking | AddKeyword$ Hexproof | Description$ Teleport — CARDNAME has hexproof unless he's attacking.
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withReach | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.
 SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ TriggeredAttacker | StaticAbilities$ CantBeBlockedPow | ForgetOnMoved$ Battlefield | Duration$ UntilEndOfCombat

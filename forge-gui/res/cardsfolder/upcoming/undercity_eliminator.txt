@@ -1,0 +1,9 @@
+Name:Undercity Eliminator
+ManaCost:3 B B
+Types:Creature Gorgon Assassin
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice an artifact or creature. When you do, exile target creature an opponent controls.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact;Creature/artifact or creature> | Execute$ TrigExile | TriggerDescription$ When you do, exile target creature an opponent controls.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile
+DeckHas:Ability$Sacrifice
+Oracle:When Undercity Eliminator enters the battlefield, you may sacrifice an artifact or creature. When you do, exile target creature an opponent controls.

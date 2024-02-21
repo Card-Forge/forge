@@ -2,7 +2,7 @@ Name:Howlpack Piper
 ManaCost:3 G
 Types:Creature Human Werewolf
 PT:2/2
-K:CARDNAME can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBUntap | StackDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. | SpellDescription$ You may put a creature card from your hand onto the battlefield. If it's a Wolf or Werewolf, untap CARDNAME. Activate only as a sorcery.
 SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Wolf,Werewolf | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

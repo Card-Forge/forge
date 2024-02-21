@@ -1,0 +1,13 @@
+Name:Blossoming Tortoise
+ManaCost:2 G G
+Types:Creature Turtle
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards, then return a land card from your graveyard to the battlefield tapped.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards, then return a land card from your graveyard to the battlefield tapped.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 3 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ChangeType$ Land.YouOwn | Mandatory$ True | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | ChangeNum$ 1 | Tapped$ True
+S:Mode$ ReduceCost | ValidCard$ Land.YouCtrl | Type$ Ability | Amount$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of lands you control cost {1} less to activate.
+S:Mode$ Continuous | Affected$ Creature.Land+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Land creatures you control get +1/+1.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill
+Oracle:Whenever Blossoming Tortoise enters the battlefield or attacks, mill three cards, then return a land card from your graveyard to the battlefield tapped.\nActivated abilities of lands you control cost {1} less to activate.\nLand creatures you control get +1/+1.

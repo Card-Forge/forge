@@ -1,0 +1,6 @@
+Name:Quicksand Whirlpool
+ManaCost:5 W
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | ValidTarget$ Creature.tapped | Description$ This spell costs {3} less to cast if it targets a tapped creature.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SpellDescription$ Exile target creature.
+Oracle:This spell costs {3} less to cast if it targets a tapped creature.\nExile target creature.

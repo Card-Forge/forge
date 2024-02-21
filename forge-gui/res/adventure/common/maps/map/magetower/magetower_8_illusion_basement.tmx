@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="99">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKRA1ZwIDA9gRsnAtMSmPDR1vxRe3HbS6u43cUDsQ8Zg8RAmBwAAB7VB68=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gUj+JRPCwwCIzaOzztleFBYErMAQAesRWT
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzN1UEOgyAQBVD2anddaS9mz6K9So+hrV7CE4nRSadkhD8T0pRkYgLI46PRoXRu+EE1QSH33CvnXuV5tVU+l8Y38+2vsTYCtiZvaEpZURt1kZya3IhrMVM24t6MJrXamDf27tKe6sS83Hm5mzvvP7pIs7qzr0chr9n5/r74Hn9eP7WNT0a3idh0vvxMlsteZErrar6Tki25dA5npvY7KdmSmzK1Lrf747lOhxf2IRm0/0E+nzft/nmtlufjJA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxk48aDy37EzMHxih9DIoI3K9oqzUUfNYAayPITV4APSFOjnEkVlgzB6HLYhyWHTNxzBVF4GhmlIeDov5Wai5yFswJgPmKfEGBgWQMPXlI9ye0GAUL68CLSnR5yB4RIfBF+mkr2EQBM3Kk0PMMUEGL9APM2EfnYOVQAA5YcT4A==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="68" template="../../obj/enemy.tx" x="287.074" y="141.29">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="128.033" y="143.933">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/entry_down.tx" x="272.342" y="211.743">
+   <properties>
+    <property name="teleport" value="../common/maps/map/magetower/magetower_8_illusion.tmx"/>
+    <property name="teleportObjectId" value="104"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/treasure.tx" x="210.851" y="46.2797">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="166.965" y="95.3624">
+   <properties>
+    <property name="enemy" value="Eye"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="75,79,75,77,75,80,78,76,80"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="256.469" y="90.7429">
+   <properties>
+    <property name="enemy" value="Eye"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="79,75,77,75,80,78,76,80,75"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/enemy.tx" x="146.177" y="188.331">
+   <properties>
+    <property name="enemy" value="Eye"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="76,80,75,79,75,77,75,80,78"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/waypoint.tx" x="208.94" y="114.578"/>
+  <object id="76" template="../../obj/waypoint.tx" x="125.967" y="174.472"/>
+  <object id="77" template="../../obj/waypoint.tx" x="149.642" y="73.4195"/>
+  <object id="78" template="../../obj/waypoint.tx" x="297.468" y="165.491"/>
+  <object id="79" template="../../obj/waypoint.tx" x="272.638" y="60.7158"/>
+  <object id="80" template="../../obj/waypoint.tx" x="209.119" y="173.317"/>
+  <object id="81" template="../../obj/waypoint.tx" x="148.487" y="233.371"/>
+  <object id="82" template="../../obj/gold.tx" x="109.798" y="107.489"/>
+  <object id="83" template="../../obj/gold.tx" x="172.162" y="230.484"/>
+  <object id="84" template="../../obj/gold.tx" x="172.74" y="214.893"/>
+  <object id="85" template="../../obj/gold.tx" x="171.008" y="247.23"/>
+  <object id="86" template="../../obj/gold.tx" x="110.953" y="93.0526"/>
+  <object id="87" template="../../obj/gold.tx" x="91.3203" y="108.066"/>
+  <object id="88" template="../../obj/gold.tx" x="317.678" y="109.221"/>
+  <object id="89" template="../../obj/gold.tx" x="311.904" y="94.785"/>
+  <object id="90" template="../../obj/gold.tx" x="298.045" y="108.066"/>
+  <object id="91" template="../../obj/treasure.tx" x="303.242" y="143.534">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../obj/treasure.tx" x="111.775" y="144.778">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/manashards.tx" x="152.667" y="45"/>
+  <object id="96" template="../../obj/manashards.tx" x="180.667" y="44.3333"/>
+  <object id="97" template="../../obj/booster.tx" x="99" y="170.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/booster.tx" x="254.667" y="44.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M13&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

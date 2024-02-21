@@ -197,6 +197,7 @@ public class StaticEffect {
             p.removeControlVote(getTimestamp());
             p.removeAdditionalVote(getTimestamp());
             p.removeAdditionalOptionalVote(getTimestamp());
+            p.removeAdditionalVillainousChoices(getTimestamp());
         }
 
         // modify the affected card
@@ -217,13 +218,11 @@ public class StaticEffect {
             // remove P/T bonus
             affectedCard.removePTBoost(getTimestamp(), ability.getId());
 
-            // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-
             // remove keywords
             // (Although nothing uses it at this time)
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword") || hasParam("RemoveLandTypes")
                     || hasParam("ShareRememberedKeywords") || hasParam("RemoveAllAbilities")) {
-                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId());
+                affectedCard.removeChangedCardKeywords(getTimestamp(), ability.getId(), false);
             }
 
             if (hasParam("CantHaveKeyword")) {
@@ -235,9 +234,11 @@ public class StaticEffect {
             }
 
             // remove abilities
-            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf") || hasParam("GainsAbilitiesOfDefined")
-                    || hasParam("AddTrigger") || hasParam("AddStaticAbility") || hasParam("AddReplacementEffects")
-                    || hasParam("RemoveAllAbilities") || hasParam("RemoveLandTypes")) {
+            if (hasParam("AddAbility") || hasParam("GainsAbilitiesOf")
+                    || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
+                    || hasParam("AddTrigger") || hasParam("AddStaticAbility")
+                    || hasParam("AddReplacementEffects") || hasParam("RemoveAllAbilities")
+                    || hasParam("RemoveLandTypes")) {
                 affectedCard.removeChangedCardTraits(getTimestamp(), ability.getId());
             }
 
@@ -290,7 +291,7 @@ public class StaticEffect {
 
             affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
 
-            affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
+            affectedCard.updateAbilityTextForView(); // need to update keyword cache for clean reapply
         }
         return affectedCards;
     }

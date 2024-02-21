@@ -22,6 +22,7 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
@@ -43,11 +44,8 @@ public final class CardRules implements ICardCharacteristics {
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
-    private ICardFace wSpecialize;
-    private ICardFace uSpecialize;
-    private ICardFace bSpecialize;
-    private ICardFace rSpecialize;
-    private ICardFace gSpecialize;
+
+    private Map<CardStateName, ICardFace> specializedParts = Maps.newHashMap();
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private ColorSet deckbuildingColors;
@@ -55,15 +53,18 @@ public final class CardRules implements ICardCharacteristics {
     private String partnerWith;
     private boolean custom;
 
-    private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
+    public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
-        wSpecialize = faces[2];
-        uSpecialize = faces[3];
-        bSpecialize = faces[4];
-        rSpecialize = faces[5];
-        gSpecialize = faces[6];
+
+        if (CardSplitType.Specialize.equals(splitType)) {
+            specializedParts.put(CardStateName.SpecializeW, faces[2]);
+            specializedParts.put(CardStateName.SpecializeU, faces[3]);
+            specializedParts.put(CardStateName.SpecializeB, faces[4]);
+            specializedParts.put(CardStateName.SpecializeR, faces[5]);
+            specializedParts.put(CardStateName.SpecializeG, faces[6]);
+        }
 
         aiHints = cah;
         meldWith = "";
@@ -85,11 +86,7 @@ public final class CardRules implements ICardCharacteristics {
         splitType = newRules.splitType;
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
-        wSpecialize = newRules.wSpecialize;
-        uSpecialize = newRules.uSpecialize;
-        bSpecialize = newRules.bSpecialize;
-        rSpecialize = newRules.rSpecialize;
-        gSpecialize = newRules.gSpecialize;
+        specializedParts = Maps.newHashMap(newRules.specializedParts);
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
@@ -148,20 +145,28 @@ public final class CardRules implements ICardCharacteristics {
         return otherPart;
     }
 
+    public Map<CardStateName, ICardFace> getSpecializeParts() {
+        return specializedParts;
+    }
+
+    public Iterable<ICardFace> getAllFaces() {
+        return Iterables.concat(Arrays.asList(mainPart, otherPart), specializedParts.values());
+    }
+
     public ICardFace getWSpecialize() {
-        return wSpecialize;
+        return specializedParts.get(CardStateName.SpecializeW);
     }
     public ICardFace getUSpecialize() {
-        return uSpecialize;
+        return specializedParts.get(CardStateName.SpecializeU);
     }
     public ICardFace getBSpecialize() {
-        return bSpecialize;
+        return specializedParts.get(CardStateName.SpecializeB);
     }
     public ICardFace getRSpecialize() {
-        return rSpecialize;
+        return specializedParts.get(CardStateName.SpecializeR);
     }
     public ICardFace getGSpecialize() {
-        return gSpecialize;
+        return specializedParts.get(CardStateName.SpecializeG);
     }
 
     public String getName() {
@@ -275,16 +280,51 @@ public final class CardRules implements ICardCharacteristics {
         return false;
     }
 
+    public boolean canBePartnerCommanders(CardRules b) {
+        if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
+            return false;
+        }
+        boolean legal = false;
+        if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
+            legal = true; // normal partner commander
+        }
+        if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
+            legal = true; // paired partner commander
+        }
+        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
+            legal = true; // Stranger Things Secret Lair gimmick partner commander
+        }
+        if (hasKeyword("Choose a Background") && b.canBeBackground()
+                || b.hasKeyword("Choose a Background") && canBeBackground()) {
+            legal = true; // commander with background
+        }
+        if (isDoctor() && b.hasKeyword("Doctor's companion")
+                || hasKeyword("Doctor's companion") && b.isDoctor()) {
+            legal = true; // Doctor Who partner commander
+        }
+        return legal;
+    }
+
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background"));
+                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
+                hasKeyword("Doctor's companion") || isDoctor());
     }
 
     public boolean canBeBackground() {
         return mainPart.getType().hasSubtype("Background");
+    }
+
+    public boolean isDoctor() {
+        for (String type : mainPart.getType().getSubtypes()) {
+            if (!type.equals("Time Lord") && !type.equals("Doctor")) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean canBeOathbreaker() {
@@ -395,6 +435,11 @@ public final class CardRules implements ICardCharacteristics {
             this.curFace = 0;
             this.faces[0] = null;
             this.faces[1] = null;
+            this.faces[2] = null;
+            this.faces[3] = null;
+            this.faces[4] = null;
+            this.faces[5] = null;
+            this.faces[6] = null;
 
             this.handLife = null;
             this.altMode = CardSplitType.None;

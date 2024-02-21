@@ -1,6 +1,7 @@
 package forge.gamemodes.tournament;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -28,6 +29,12 @@ abstract public class TournamentWinLoseController {
 
     public void showOutcome() {
         final TournamentData gd = FModel.getTournamentData();
+        if (gd.getEventNames() == null || gd.getEventRecords() == null) {
+            //fix corrupted entry to reset and allow the save to continue instead of crashing due to NPE
+            gd.setEventNames(new ArrayList<>());
+            gd.setEventRecords(new ArrayList<>());
+            gd.reset();
+        }
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
@@ -67,7 +74,7 @@ abstract public class TournamentWinLoseController {
                     message2 = localizer.getMessage("lblThroughTournament");
 
                     view.getBtnContinue().setVisible(false);
-                    view.getBtnQuit().setText(localizer.getMessage("lblOk"));
+                    view.getBtnQuit().setText(localizer.getMessage("lblOK"));
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(TournamentIO.PREFIX_QUICK)) {

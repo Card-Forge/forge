@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Dwarf Cleric
 PT:2/3
 K:Double team
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls. 
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBTap | TriggerDescription$ Whenever CARDNAME attacks, tap target creature defending player controls.
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredDefendingPlayer | TargetMax$ 1 | TgtPrompt$ Select target creature defending player controls
 Oracle:Double team\nWhenever Moradin's Disciples attacks, tap target creature defending player controls.

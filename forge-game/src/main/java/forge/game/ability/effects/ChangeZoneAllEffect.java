@@ -45,8 +45,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
 
-        //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !source.isInPlay()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
@@ -107,8 +106,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
         }
 
-        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
-
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(cards);
             final String message;
@@ -121,6 +118,12 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
                 return;
             }
+        }
+
+        cards = (CardCollection)AbilityUtils.filterListByType(cards, sa.getParam("ChangeType"), sa);
+
+        if (sa.hasParam("TypeLimit")) {
+            cards = new CardCollection(Iterables.limit(cards, AbilityUtils.calculateAmount(source, sa.getParam("TypeLimit"), sa)));
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
@@ -151,7 +154,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             CardLists.shuffle(cards);
         }
 
-        final CardZoneTable triggerList = new CardZoneTable();
+        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -169,8 +172,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
 
             if (destination == ZoneType.Battlefield) {
+                moveParams.put(AbilityKey.SimultaneousETB, cards);
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
@@ -234,21 +239,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 if (imprint != null) {
                     game.getCardState(source).addImprintedCard(movedCard);
-                }
-
-                triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-
-                if (c.getMeldedWith() != null) {
-                    Card meld = game.getCardState(c.getMeldedWith(), null);
-                    if (meld != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), meld);
-                    }
-                }
-                if (c.hasMergedCard()) {
-                    for (final Card cm : c.getMergedCards()) {
-                        if (cm == c) continue;
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), cm);
-                    }
                 }
             }
         }

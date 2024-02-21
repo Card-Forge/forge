@@ -1,0 +1,19 @@
+Name:Lara Croft, Tomb Raider
+ManaCost:G U R
+Types:Legendary Creature Human Ranger
+PT:3/4
+K:First Strike
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target legendary artifact card or legendary land card from a graveyard and put a discovery counter on it. You may play a card from exile with a discovery counter on it this turn.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.Legendary,Land.Legendary | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target legendary artifact card or legendary land card from a graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ DISCOVERY | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticPlay | SubAbility$ DBCleanup
+SVar:StaticPlay:Mode$ Continuous | MayPlayLimit$ 1 | Affected$ Card.counters_GE1_DISCOVERY | AffectedZone$ Exile | MayPlay$ True | Description$ You may play a card from exile with a discovery counter on it this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Raid — At end of combat on your turn, if you attacked this turn, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHints:Ability$Graveyard|Mill & Type$Legendary|Artifact
+Oracle:First strike, reach\nWhenever Lara Croft attacks, exile up to one target legendary artifact card or legendary land card from a graveyard and put a discovery counter on it. You may play a card from exile with a discovery counter on it this turn.\nRaid — At end of combat on your turn, if you attacked this turn, create a Treasure token.

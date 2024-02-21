@@ -1,0 +1,18 @@
+Name:Intrepid Trufflesnout
+ManaCost:1 G
+Types:Creature Boar
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigFood | TriggerDescription$ Whenever CARDNAME attacks alone, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Food|Artifact
+AlternateMode:Adventure
+Oracle:Whenever Intrepid Trufflesnout attacks alone, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+
+ALTERNATE
+
+Name:Go Hog Wild
+ManaCost:1 G
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)

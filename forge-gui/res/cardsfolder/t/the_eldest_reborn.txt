@@ -1,7 +1,7 @@
 Name:The Eldest Reborn
 ManaCost:4 B
 Types:Enchantment Saga
-K:Saga:3:DBSacrifice,DBDiscard,DBChangeZone
+K:Chapter:3:DBSacrifice,DBDiscard,DBChangeZone
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | SpellDescription$ Each opponent sacrifices a creature or planeswalker.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Each opponent discards a card.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Choose target creature or planeswalker card in a graveyard | SpellDescription$ Put target creature or planeswalker card from a graveyard onto the battlefield under your control.

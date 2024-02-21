@@ -1,0 +1,10 @@
+Name:Chitinous Crawler
+ManaCost:2 B B
+Types:Creature Insect Horror
+PT:4/4
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose target creature card in your graveyard. Conjure a duplicate of it into your graveyard.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | DefinedName$ Targeted | Zone$ Graveyard
+A:AB$ Play | PrecostDesc$ Descend 8 | Cost$ ExileFromGrave<1/Permanent> | Defined$ ExiledCards | ValidSA$ Spell | SorcerySpeed$ True | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | SpellDescription$ You may play it. Activate only as a sorcery and only if there are eight or more permanent cards in your graveyard.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+DeckHas:Ability$Discard|Mill
+Oracle:At the beginning of combat on your turn, choose target creature card in your graveyard. Conjure a duplicate of it into your graveyard.\nDescend 8 — Exile a permanent card from your graveyard: You may play it. Activate only as a sorcery and only if there are eight or more permanent cards in your graveyard.

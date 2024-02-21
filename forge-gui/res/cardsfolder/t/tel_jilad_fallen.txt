@@ -2,6 +2,6 @@ Name:Tel-Jilad Fallen
 ManaCost:2 G G
 Types:Creature Phyrexian Elf Warrior
 PT:3/1
-K:Protection from artifacts
+K:Protection:Artifact
 K:Infect
 Oracle:Protection from artifacts\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

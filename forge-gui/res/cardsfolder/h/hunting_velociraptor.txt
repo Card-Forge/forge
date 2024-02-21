@@ -1,0 +1,8 @@
+Name:Hunting Velociraptor
+ManaCost:2 R
+Types:Creature Dinosaur
+PT:3/2
+K:First Strike
+S:Mode$ Continuous | Affected$ Dinosaur.YouCtrl | AddKeyword$ Prowl:2 R | AffectedZone$ Hand | Description$ Dinosaur spells you cast have prowl {2}{R}. (You may cast a spell for its prowl cost if you dealt combat damage to a player this turn with a creature with any of its creature types.)
+DeckHints:Type$Dinosaur
+Oracle:First strike\nDinosaur spells you cast have prowl {2}{R}. (You may cast a spell for its prowl cost if you dealt combat damage to a player this turn with a creature with any of its creature types.)

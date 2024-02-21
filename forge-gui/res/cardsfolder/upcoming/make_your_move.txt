@@ -1,0 +1,5 @@
+Name:Make Your Move
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4,Artifact,Enchantment | TgtPrompt$ Select target artifact, enchantment, or creature with power 4 or greater | SpellDescription$ Destroy target artifact, enchantment, or creature with power 4 or greater.
+Oracle:Destroy target artifact, enchantment, or creature with power 4 or greater.

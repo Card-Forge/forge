@@ -2,7 +2,7 @@ Name:Flayer of Loyalties
 ManaCost:8 C C
 Types:Creature Eldrazi
 PT:10/10
-K:Annahilator:2
+K:Annihilator:2
 K:Trample
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When you cast this spell, gain control of target creature until end of turn. Untap that creature. Until end of turn, it has base power and toughness 10/10, and gains trample, annihilator 2, and haste.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Trample & Annihilator:2 | SubAbility$ DBAnimate

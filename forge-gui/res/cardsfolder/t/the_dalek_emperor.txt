@@ -1,0 +1,13 @@
+Name:The Dalek Emperor
+ManaCost:5 B R
+Types:Legendary Artifact Creature Dalek
+PT:6/6
+K:Affinity:Dalek
+S:Mode$ Continuous | Affected$ Dalek.Other+YouCtrl | AddKeyword$ Haste | Description$ Other Daleks you control have haste.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ At the beginning of combat on your turn, each opponent faces a villainous choice — That player sacrifices a creature they control, or you create a 3/3 black Dalek artifact creature token with menace.
+SVar:TrigChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBSacrifice,DBToken
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Remembered | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Opponent sacrifices a creature.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | TokenOwner$ You | SpellDescription$ You create a 3/3 black Dalek artifact creature token with menace.
+DeckHints:Type$Dalek
+DeckHas:Ability$Token
+Oracle:Affinity for Daleks (This spell costs {1} less to cast for each Dalek you control.)\nOther Daleks you control have haste.\nAt the beginning of combat on your turn, each opponent faces a villainous choice — That player sacrifices a creature they control, or you create a 3/3 black Dalek artifact creature token with menace.

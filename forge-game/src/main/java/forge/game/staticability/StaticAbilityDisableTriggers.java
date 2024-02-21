@@ -100,7 +100,7 @@ public class StaticAbilityDisableTriggers {
             if (table == null) {
                 table = (CardZoneTable) runParams.get(AbilityKey.Cards);
             }
-            CardZoneTable filtered = new CardZoneTable();
+            CardZoneTable filtered = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
             boolean possiblyDisabled = false;
 
             // purge all forbidden causes from table

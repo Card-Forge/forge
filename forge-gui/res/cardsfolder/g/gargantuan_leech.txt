@@ -1,0 +1,10 @@
+Name:Gargantuan Leech
+ManaCost:7 B
+Types:Creature Leech
+PT:5/5
+K:Lifelink
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard.
+SVar:X:Count$ValidGraveyard,Battlefield Cave.YouCtrl
+DeckHas:Ability$LifeGain
+DeckNeeds:Type$Cave
+Oracle:This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard.\nLifelink

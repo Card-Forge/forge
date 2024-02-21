@@ -1,4 +1,4 @@
-Name:El-Hajjaj
+Name:El-Hajjâj
 ManaCost:1 B B
 Types:Creature Human Wizard
 PT:1/1

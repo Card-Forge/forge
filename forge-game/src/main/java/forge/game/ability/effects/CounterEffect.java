@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
@@ -24,28 +23,12 @@ import java.util.Map;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final Game game = sa.getActivatingPlayer().getGame();
-
         final StringBuilder sb = new StringBuilder();
-        final List<SpellAbility> sas;
-
-        if (sa.hasParam("AllValid")) {
-            sas = Lists.newArrayList();
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility();
-                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                    continue;
-                }
-                sas.add(spell);
-            }
-        } else {
-            sas = getTargetSpells(sa);
-        }
 
         sb.append("Counter");
 
         boolean isAbility = false;
-        for (final SpellAbility tgtSA : sas) {
+        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             sb.append(" ");
             sb.append(tgtSA.getHostCard());
             isAbility = tgtSA.isAbility();
@@ -69,26 +52,11 @@ public class CounterEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
-        // TODO Before this resolves we should see if any of our targets are
-        // still on the stack
-        final List<SpellAbility> sas;
-
-        if (sa.hasParam("AllValid")) {
-            sas = Lists.newArrayList();
-            for (SpellAbilityStackInstance si : game.getStack()) {
-                SpellAbility spell = si.getSpellAbility();
-                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                    continue;
-                }
-                sas.add(spell);
-            }
-        } else {
-            sas = getTargetSpells(sa);
-        }
-
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
-        for (final SpellAbility tgtSA : sas) {
+        params.put(AbilityKey.InternalTriggerTable, table);
+
+        for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered
             // currently all effects using this are targeted in case the spell gets countered before
@@ -100,7 +68,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtSACard);
             }
 
-            if (tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSACard, sa)) {
+            if (tgtSA.isSpell() && !tgtSA.isCounterableBy(sa)) {
                 continue;
             }
 
@@ -109,7 +77,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (sa.hasParam("CounterNoManaSpell") && tgtSA.getTotalManaSpent() != 0) {
+            if (sa.hasParam("CounterNoManaSpell") && tgtSA.isSpell() && tgtSA.getTotalManaSpent() != 0) {
                 continue;
             }
 
@@ -123,13 +91,13 @@ public class CounterEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (!removeFromStack(tgtSA, sa, si, table)) {
+            if (!removeFromStack(tgtSA, sa, si, params)) {
                 continue;
             }
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                game.getAction().destroy(tgtSACard, sa, true, table, params);
+                game.getAction().destroy(tgtSACard, sa, true, params);
             }
 
             if (sa.hasParam("RememberCountered")) {
@@ -225,7 +193,6 @@ public class CounterEffect extends SpellAbilityEffect {
         // Dry run Destroy on each validAffected to see if it can be destroyed at this moment
         boolean willDestroyCondition = false;
         final boolean noRegen = tgtSA.hasParam("NoRegen");
-        CardZoneTable testTable = new CardZoneTable();
         Map<AbilityKey, Object> testParams = AbilityKey.newMap();
         testParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
@@ -239,7 +206,7 @@ public class CounterEffect extends SpellAbilityEffect {
             Card toBeDestroyed = CardFactory.copyCard(aff, true);
 
             game.getTriggerHandler().setSuppressAllTriggers(true);
-            boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testTable, testParams);
+            boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testParams);
             game.getTriggerHandler().setSuppressAllTriggers(false);
 
             if (destroyed) {
@@ -268,16 +235,15 @@ public class CounterEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
+    private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, Map<AbilityKey, Object> params) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         Card movedCard = null;
         final Card c = tgtSA.getHostCard();
-        final Zone originZone = c.getZone();
 
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
-        repParams.put(AbilityKey.TgtSA, tgtSA);
-        repParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        repParams.put(AbilityKey.SpellAbility, tgtSA);
+        repParams.put(AbilityKey.Cause, srcSA);
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
@@ -286,7 +252,6 @@ public class CounterEffect extends SpellAbilityEffect {
         // if the target card on stack was a spell with Bestow, then unbestow it
         c.unanimateBestow();
 
-        Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);
         params.put(AbilityKey.StackSi, si);
 
@@ -302,11 +267,12 @@ public class CounterEffect extends SpellAbilityEffect {
             movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
             movedCard = game.getAction().exile(c, srcSA, params);
-        } else if (destination.equals("TopOfLibrary")) {
-            movedCard = game.getAction().moveToLibrary(c, srcSA, params);
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);
         } else if (destination.equals("Battlefield")) {
+            // card is no longer cast
+            c.setCastSA(null);
+            c.setCastFrom(null);
             if (tgtSA instanceof SpellPermanent) {
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
@@ -314,6 +280,8 @@ public class CounterEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
                 movedCard.setController(srcSA.getActivatingPlayer(), 0);
             }
+        } else if (destination.equals("TopOfLibrary")) {
+            movedCard = game.getAction().moveToLibrary(c, srcSA, params);
         } else if (destination.equals("BottomOfLibrary")) {
             movedCard = game.getAction().moveToBottomOfLibrary(c, srcSA, params);
         } else if (destination.equals("ShuffleIntoLibrary")) {
@@ -326,7 +294,7 @@ public class CounterEffect extends SpellAbilityEffect {
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
-        runParams.put(AbilityKey.Cause, srcSA.getHostCard());
+        runParams.put(AbilityKey.Cause, srcSA);
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
 
@@ -334,9 +302,6 @@ public class CounterEffect extends SpellAbilityEffect {
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
         }
 
-        if (originZone != null && movedCard != null) {
-            triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
-        }
         return true;
     }
 

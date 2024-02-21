@@ -1,0 +1,8 @@
+Name:Branch of Vitu-Ghazi
+ManaCost:no cost
+Types:Land
+K:Disguise:3
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, add two mana of any one color. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 2 | PersistentMana$ True
+Oracle:{T}: Add {C}.\nDisguise {3} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.\nWhen Branch of Vitu-Ghazi is turned face up, add two mana of any one color. Until end of turn, you don't lose this mana as steps and phases end.

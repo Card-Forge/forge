@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJwL42RgCBvFo5jOOA4NYxPDpoaadpKCB8peSuweCHuHol+pEbduNLaHVP/SIs+O4uGDAayGwJM=
+   eJwL42RgCBvFo5jOOA4NYxPDpoaadpKCB8peSuweCHuHol+pEbcgQOv0S4p/aZFnR/HwwQDYMMBE
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
@@ -120,7 +120,7 @@
   <object id="74" template="../../obj/waypoint.tx" x="82.7832" y="200.563"/>
   <object id="75" template="../../obj/waypoint.tx" x="170.126" y="171.184"/>
   <object id="76" template="../../obj/waypoint.tx" x="164.303" y="83.3126"/>
-  <object id="77" template="../../obj/waypoint.tx" x="130.16" y="220.678"/>
+  <object id="77" template="../../obj/waypoint.tx" x="134.395" y="226.236"/>
   <object id="78" template="../../obj/enemy.tx" x="193.682" y="40.9647">
    <properties>
     <property name="enemy" value="Goblin"/>

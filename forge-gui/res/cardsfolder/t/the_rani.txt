@@ -1,0 +1,12 @@
+Name:The Rani
+ManaCost:1 U B R
+Types:Legendary Creature Time Lord Scientist
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a red Aura enchantment token named Mark of the Rani attached to another target creature. That token has enchant creature and "Enchanted creature gets +2/+2 and is goaded."
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a red Aura enchantment token named Mark of the Rani attached to another target creature. That token has enchant creature and "Enchanted creature gets +2/+2 and is goaded."
+SVar:TrigToken:DB$ Token | TokenScript$ mark_of_the_rani | AttachedTo$ Targeted | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature
+T:Mode$ DamageDone | ValidSource$ Creature.IsGoaded | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$Whenever a goaded creature deals combat damage to one of your opponents, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Enchantment|Aura|Artifact|Clue
+Oracle:Whenever The Rani enters the battlefield or attacks, create a red Aura enchantment token named Mark of the Rani attached to another target creature. That token has enchant creature and "Enchanted creature gets +2/+2 and is goaded."\nWhenever a goaded creature deals combat damage to one of your opponents, investigate.

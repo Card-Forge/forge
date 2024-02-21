@@ -17,13 +17,19 @@
  */
 package forge.game.cost;
 
+import com.google.common.collect.Maps;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
 
 /**
  * The Class CostUntapType.
@@ -91,11 +97,31 @@ public class CostUntapType extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         targetCard.untap(true);
         return targetCard;
     }
 
+    @Override
+    protected boolean canPayListAtOnce() {
+        return true;
+    }
+
+    @Override
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        CardCollection untapped = new CardCollection();
+        for (Card c : targetCards) {
+            if (c.untap(true)) untapped.add(c);
+        }
+        if (!untapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<Player, CardCollection> map = Maps.newHashMap();
+            map.put(payer, untapped);
+            runParams.put(AbilityKey.Map, map);
+            payer.getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
+        }
+        return targetCards;
+    }
     @Override
     public String getHashForLKIList() {
         return "Untapped";

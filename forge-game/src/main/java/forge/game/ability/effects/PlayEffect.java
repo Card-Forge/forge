@@ -32,6 +32,7 @@ import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostReveal;
+import forge.game.keyword.Keyword;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -90,11 +91,8 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintPlayed");
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
+        final boolean altCost = sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost");
         int totalCMCLimit = Integer.MAX_VALUE;
-        int amount = 1;
-        if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
-            amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
-        }
         final Player controller;
         if (sa.hasParam("Controller")) {
             controller = AbilityUtils.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
@@ -164,7 +162,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 return;
             }
         } else if (sa.hasParam("CopyFromChosenName")) {
-            String name = source.getChosenName();
+            String name = controller.getNamedCard();
             if (name.trim().isEmpty()) return;
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack
@@ -193,7 +191,7 @@ public class PlayEffect extends SpellAbilityEffect {
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card c = it.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
                     // it.remove will only remove item from the list part of CardCollection
                     tgtCards.asSet().remove(c);
                     it.remove();
@@ -204,8 +202,13 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("Amount") && sa.getParam("Amount").equals("All")) {
-            amount = tgtCards.size();
+        int amount = 1;
+        if (sa.hasParam("Amount")) {
+            if (sa.getParam("Amount").equals("All")) {
+                amount = tgtCards.size();
+            } else {
+                amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
+            }
         }
 
         if (hasTotalCMCLimit) {
@@ -258,9 +261,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, controller);
             }
             String prompt = sa.hasParam("CastTransformed") ? "lblDoYouWantPlayCardTransformed" : "lblDoYouWantPlayCard";
-            if (singleOption && sa.getTargetCard() == null)
-                sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), tgtCard, null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -298,9 +299,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 state = CardStateName.Transformed;
             }
 
-            // TODO if cost isn't replaced should include alternative ones
-            // get basic spells (no flashback, etc.)
-            List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller, state);
+            List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, controller, state, !altCost);
             if (sa.hasParam("ValidSA")) {
                 final String valid[] = sa.getParam("ValidSA").split(",");
                 sas.removeIf(sp -> !sp.isValid(valid, controller , source, sa));
@@ -323,7 +322,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("CastFaceDown")) {
                 // For Illusionary Mask effect
-                tgtSA = CardFactoryUtil.abilityMorphDown(tgtCard.getCurrentState(), false);
+                tgtSA = CardFactoryUtil.abilityCastFaceDown(tgtCard.getCurrentState(), false, "Morph");
             } else {
                 tgtSA = controller.getController().getAbilityToPlay(tgtCard, sas);
             }
@@ -337,7 +336,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            final CardZoneTable triggerList = new CardZoneTable();
+            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             final Zone originZone = tgtCard.getZone();
 
             // lands will be played
@@ -367,7 +366,7 @@ public class PlayEffect extends SpellAbilityEffect {
             final int tgtCMC = tgtSA.getPayCosts().getTotalMana().getCMC();
 
             // illegal action, cancel early
-            if ((sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost")) && tgtSA.costHasManaX() && !tgtSA.getPayCosts().getCostMana().canXbe0()) {
+            if (altCost && tgtSA.costHasManaX() && tgtSA.getPayCosts().getCostMana().getXMin() > 0) {
                 continue;
             }
 
@@ -382,6 +381,8 @@ public class PlayEffect extends SpellAbilityEffect {
                         continue;
                     }
                     abCost = new Cost(source.getManaCost(), false);
+                } else if (cost.equals("SuspendCost")) {
+                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         if (unpayableCost) {
@@ -450,13 +451,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 addIllusionaryMaskReplace(tgtCard, sa, moveParams);
             }
 
-            tgtSA.setSVar("IsCastFromPlayEffect", "True");
-
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
             if (controlledByPlayer != null) {
                 tgtSA.setControlledByPlayer(controlledByTimeStamp, controlledByPlayer);
                 controller.pushPaidForSA(tgtSA);
-                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA), tgtSA.getPayCosts().getCostMana().getRestriction()));
+                tgtSA.setManaCostBeingPaid(new ManaCostBeingPaid(tgtSA.getPayCosts().getCostMana().getManaCostFor(tgtSA)));
             }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
@@ -527,7 +526,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                game.getAction().exile(eff, null);
+                game.getAction().exile(eff, null, null);
             }
         };
 
@@ -560,10 +559,11 @@ public class PlayEffect extends SpellAbilityEffect {
             "Event$ DealtDamage | ValidCard$ Card.IsRemembered+faceDown",
             "Event$ Tap | ValidCard$ Card.IsRemembered+faceDown"
         };
-        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFace";
+        String effect = "DB$ SetState | Defined$ ReplacedCard | Mode$ TurnFaceUp";
 
-        for (int i = 0; i < 3; ++i) {
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstrs[i], eff, true);
+        for (final String repStr : repeffstrs) {
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repStr, eff, true);
+            re.putParam("ReplacementResult", "Updated");
             re.setLayer(ReplacementLayer.Other);
             re.setOverridingAbility(AbilityFactory.getAbility(effect, eff));
             eff.addReplacementEffect(re);

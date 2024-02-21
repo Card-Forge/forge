@@ -1,0 +1,9 @@
+Name:Undercover Crocodelf
+ManaCost:4 G U
+Types:Creature Elf Crocodile Detective
+PT:5/5
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Num$ 1
+K:Disguise:3 GU GU
+DeckHas:Type$Clue|Artifact & Ability$Token
+Oracle:Whenever Undercover Crocodelf deals combat damage to a player, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nDisguise {3}{G/U}{G/U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

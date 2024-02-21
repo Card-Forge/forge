@@ -1,0 +1,14 @@
+Name:Court of Locthwain
+ManaCost:2 B B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with CARDNAME without paying its mana cost.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ Targeted | ValidTgts$ Opponent | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMonarchEffect
+SVar:DBMonarchEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilEndOfTurn | RememberObjects$ ValidExile Card.ExiledWithSource+nonLand | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | Description$ You may cast a spell from among cards exiled with CARDNAME without paying its mana cost.
+SVar:X:Count$Monarch.1.0
+Oracle:When Court of Locthwain enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with Court of Locthwain without paying its mana cost.

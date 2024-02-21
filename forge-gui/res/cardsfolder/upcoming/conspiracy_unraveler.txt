@@ -1,0 +1,8 @@
+Name:Conspiracy Unraveler
+ManaCost:5 U U
+Types:Creature Sphinx Detective
+PT:6/6
+K:Flying
+S:Mode$ Continuous | Affected$ Card.YouCtrl+nonLand | MayPlay$ True | MayPlayAltManaCost$ CollectEvidence<10> | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may collect evidence 10 rather than pay the mana cost for spells that you cast. (To collect evidence 10, exile cards with total mana value 10 or greater from your graveyard.)
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+Oracle:Flying\nYou may collect evidence 10 rather than pay the mana cost for spells that you cast. (To collect evidence 10, exile cards with total mana value 10 or greater from your graveyard.)

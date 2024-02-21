@@ -1,0 +1,9 @@
+Name:Coerced to Kill
+ManaCost:3 U B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ GainControl
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | AddType$ Assassin | AddKeyword$ Deathtouch | Description$ Enchanted creature has base power and toughness 1/1, has deathtouch, and is an Assassin in addition to its other types.
+DeckHas:Type$Assassin
+Oracle:Enchant creature\nYou control enchanted creature.\nEnchanted creature has base power and toughness 1/1, has deathtouch, and is an Assassin in addition to its other types.

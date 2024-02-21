@@ -2,7 +2,7 @@ Name:Primordial Mist
 ManaCost:4 U
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigManifest | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may manifest the top card of your library.
-SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
+SVar:TrigManifest:DB$ Manifest
 A:AB$ Effect | Cost$ Exile<1/Permanent.faceDown> | CostDesc$ Exile a face-down permanent you control face up: | RememberObjects$ ExiledCards | StaticAbilities$ Play | ExileOnMoved$ Exile | SpellDescription$ You may play that card this turn. (You still pay its costs. Timing rules still apply.)
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 AI:RemoveDeck:All

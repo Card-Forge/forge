@@ -1,0 +1,14 @@
+Name:The Beast, Deathless Prince
+ManaCost:2 B R
+Types:Legendary Creature Demon
+PT:6/6
+K:ETBReplacement:Other:ETBTapped
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When you cast this spell, gain control of target creature until end of turn. Untap it. It gains menace and haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Menace
+SVar:ETBTapped:DB$ Tap | Defined$ Self | SubAbility$ DBAddCounter | ETB$ True | SpellDescription$ NICKNAME enters the battlefield tapped with six stun counters on it. (If it would become untapped, remove a stun counter from it instead.)
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 6
+T:Mode$ DamageDone | ValidSource$ Creature | TargetRelativeToSource$ Player.CardOwner | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature deals combat damage to its owner, untap NICKNAME and draw a card.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+AI:RemoveDeck:Random
+Oracle:When you cast this spell, gain control of target creature until end of turn. Untap it. It gains menace and haste until end of turn.\nThe Beast enters the battlefield tapped with six stun counters on it. (If it would become untapped, remove a stun counter from it instead.)\nWhenever a creature deals combat damage to its owner, untap The Beast and draw a card.

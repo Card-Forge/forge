@@ -1,0 +1,19 @@
+Name:Bramble Familiar
+ManaCost:1 G
+Types:Creature Elemental Raccoon
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ ChangeZone | Cost$ 1 G T Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+DeckHas:Ability$Mill|Discard
+AlternateMode:Adventure
+Oracle:{T}: Add {G}.\n{1}{G}, {T}, Discard a card: Return Bramble Familiar to its owner's hand.
+
+ALTERNATE
+
+Name:Fetch Quest
+ManaCost:5 G G
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 7 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards, then put a creature, enchantment, or land card from among cards milled this way onto the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered,Enchantment.IsRemembered,Land.IsRemembered | SelectPrompt$ Choose a creature, enchantment, or land card from among cards milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill seven cards, then put a creature, enchantment, or land card from among cards milled this way onto the battlefield.

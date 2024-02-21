@@ -1,0 +1,7 @@
+Name:Stockpiling Celebrant
+ManaCost:2 W
+Types:Creature Dwarf Knight
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.
+SVar:TrigScry:AB$ Scry | ScryNum$ 2 | Cost$ Return<1/Permanent.nonLand+Other/another nonland permanent>
+Oracle:When Stockpiling Celebrant enters the battlefield, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2.

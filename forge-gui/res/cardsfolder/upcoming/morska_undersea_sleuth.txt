@@ -1,0 +1,11 @@
+Name:Morska, Undersea Sleuth
+ManaCost:G W U
+Types:Legendary Creature Vedalken Fish Detective
+PT:2/3
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ At the beginning of your upkeep, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters|Investigate|Token|Sacrifice & Type$Artifact|Clue
+Oracle:You have no maximum hand size.\nAt the beginning of your upkeep, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you draw your second card each turn, put two +1/+1 counters on Morska, Undersea Sleuth.

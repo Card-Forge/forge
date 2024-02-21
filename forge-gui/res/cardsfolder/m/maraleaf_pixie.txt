@@ -3,5 +3,5 @@ ManaCost:G U
 Types:Creature Faerie
 PT:2/2
 K:Flying
-A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {G}.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
 Oracle:Flying\n{T}: Add {G} or {U}.

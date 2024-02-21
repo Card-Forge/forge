@@ -1,0 +1,6 @@
+Name:Might of the Ancestors
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +2/+0 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | KW$ Vigilance
+Oracle:At the beginning of combat on your turn, target creature you control gets +2/+0 and gains vigilance until end of turn.

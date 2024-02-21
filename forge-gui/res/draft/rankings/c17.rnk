@@ -1,0 +1,295 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|U|C17
+#2|Command Tower|C|C17
+#3|Evolving Wilds|C|C17
+#4|Temple of the False God|U|C17
+#5|Path of Ancestry|C|C17
+#6|Lightning Greaves|U|C17
+#7|Swiftfoot Boots|U|C17
+#8|Terramorphic Expanse|C|C17
+#9|Swords to Plowshares|U|C17
+#10|Skullclamp|U|C17
+#11|Commander's Sphere|C|C17
+#12|Cultivate|C|C17
+#13|Kodama's Reach|C|C17
+#14|Rogue's Passage|U|C17
+#15|Darksteel Ingot|U|C17
+#16|Bojuka Bog|C|C17
+#17|Herald's Horn|U|C17
+#18|Teferi's Protection|R|C17
+#19|Myriad Landscape|U|C17
+#20|Exotic Orchard|R|C17
+#21|Fellwar Stone|U|C17
+#22|Return to Dust|U|C17
+#23|Chaos Warp|R|C17
+#24|Opal Palace|C|C17
+#25|Hedron Archive|U|C17
+#26|Orzhov Signet|U|C17
+#27|Hammer of Nazahn|R|C17
+#28|Worn Powerstone|U|C17
+#29|Rakdos Signet|U|C17
+#30|Kindred Discovery|R|C17
+#31|Farseek|C|C17
+#32|Nevinyrral's Disk|R|C17
+#33|Sword of the Animist|R|C17
+#34|Merciless Eviction|R|C17
+#35|Bloodline Necromancer|U|C17
+#36|Steel Hellkite|R|C17
+#37|Boros Signet|U|C17
+#38|Izzet Boilerworks|U|C17
+#39|Decree of Pain|R|C17
+#40|Heirloom Blade|U|C17
+#41|Crumbling Necropolis|U|C17
+#42|Blood Artist|U|C17
+#43|Traverse the Outlands|R|C17
+#44|Harmonize|U|C17
+#45|Orzhov Basilica|C|C17
+#46|Mosswort Bridge|R|C17
+#47|Mirari's Wake|M|C17
+#48|Arcane Sanctum|U|C17
+#49|Rakdos Carnarium|C|C17
+#50|Opulent Palace|U|C17
+#51|Zendikar Resurgent|R|C17
+#52|Dimir Aqueduct|U|C17
+#53|Nomad Outpost|U|C17
+#54|Mortify|U|C17
+#55|Terminate|U|C17
+#56|Bloodforged Battle-Axe|R|C17
+#57|Sandsteppe Citadel|U|C17
+#58|Blighted Woodland|U|C17
+#59|Curse of Opulence|U|C17
+#60|Disrupt Decorum|R|C17
+#61|Mirri, Weatherlight Duelist|M|C17
+#62|Selesnya Sanctuary|C|C17
+#63|Loxodon Warhammer|U|C17
+#64|Scoured Barrens|C|C17
+#65|Boros Garrison|C|C17
+#66|Alms Collector|R|C17
+#67|Seaside Citadel|U|C17
+#68|Kindred Dominance|R|C17
+#69|Vivid Creek|U|C17
+#70|Swiftwater Cliffs|C|C17
+#71|Patron of the Vein|R|C17
+#72|Butcher of Malakir|R|C17
+#73|Frontier Bivouac|U|C17
+#74|Dismal Backwater|C|C17
+#75|Blind Obedience|R|C17
+#76|Wayfarer's Bauble|C|C17
+#77|Mystic Monastery|U|C17
+#78|Balan, Wandering Knight|R|C17
+#79|Vivid Grove|U|C17
+#80|Door of Destinies|R|C17
+#81|Archaeomancer|C|C17
+#82|Jungle Shrine|U|C17
+#83|New Blood|R|C17
+#84|Kindred Summons|R|C17
+#85|Vivid Marsh|U|C17
+#86|Read the Bones|C|C17
+#87|Kindred Boon|R|C17
+#88|Staff of Nin|R|C17
+#89|Kindred Charge|R|C17
+#90|Savage Lands|U|C17
+#91|Tranquil Thicket|C|C17
+#92|Secluded Steppe|C|C17
+#93|Scalelord Reckoner|R|C17
+#94|Wind-Scarred Crag|C|C17
+#95|Reality Shift|U|C17
+#96|Go for the Throat|U|C17
+#97|Krosan Verge|U|C17
+#98|Vivid Meadow|U|C17
+#99|Bloodfell Caves|C|C17
+#100|Mathas, Fiend Seeker|M|C17
+#101|Vivid Crag|U|C17
+#102|Orzhov Guildgate|C|C17
+#103|Blossoming Sands|C|C17
+#104|Sanguine Bond|R|C17
+#105|Kess, Dissident Mage|M|C17
+#106|Qasali Slingers|R|C17
+#107|Vindictive Lich|R|C17
+#108|Crux of Fate|R|C17
+#109|Wasitora, Nekoru Queen|R|C17
+#110|Stalking Leonin|R|C17
+#111|Black Market|R|C17
+#112|Ramos, Dragon Engine|M|C17
+#113|Arcanis the Omnipotent|R|C17
+#114|Curse of Verbosity|U|C17
+#115|Nazahn, Revered Bladesmith|M|C17
+#116|Rakdos Charm|U|C17
+#117|Mirror of the Forebears|U|C17
+#118|Curse of Disturbance|U|C17
+#119|Comet Storm|M|C17
+#120|Palace Siege|R|C17
+#121|Rakdos Guildgate|C|C17
+#122|Dreamstone Hedron|U|C17
+#123|Boros Guildgate|C|C17
+#124|Sword of Vengeance|R|C17
+#125|Galecaster Colossus|R|C17
+#126|Fractured Identity|R|C17
+#127|Bloodsworn Steward|R|C17
+#128|Selesnya Guildgate|C|C17
+#129|Vampire Nighthawk|U|C17
+#130|O-Kagachi, Vengeful Kami|M|C17
+#131|Jwar Isle Refuge|U|C17
+#132|Akoum Refuge|U|C17
+#133|Curse of Vitality|U|C17
+#134|Underworld Connections|R|C17
+#135|Boneyard Scourge|R|C17
+#136|Kheru Mind-Eater|R|C17
+#137|Condemn|U|C17
+#138|Taigam, Ojutai Master|R|C17
+#139|Hungry Lynx|R|C17
+#140|Nissa's Pilgrimage|C|C17
+#141|Utvara Hellkite|M|C17
+#142|Rout|R|C17
+#143|Niv-Mizzet, the Firemind|R|C17
+#144|Argentum Armor|R|C17
+#145|Portal Mage|R|C17
+#146|Crackling Doom|R|C17
+#147|Licia, Sanguine Tribune|M|C17
+#148|Puppeteer Clique|R|C17
+#149|Elemental Bond|U|C17
+#150|Spelltwine|R|C17
+#151|Qasali Pridemage|C|C17
+#152|Sangromancer|R|C17
+#153|Well of Lost Dreams|R|C17
+#154|Grixis Panorama|C|C17
+#155|Armillary Sphere|C|C17
+#156|Atarka, World Render|R|C17
+#157|Hellkite Charger|R|C17
+#158|Curse of Bounty|U|C17
+#159|Taigam, Sidisi's Hand|R|C17
+#160|Unstable Obelisk|U|C17
+#161|Savage Ventmaw|U|C17
+#162|Havengul Lich|M|C17
+#163|Mystifying Maze|R|C17
+#164|Body Double|R|C17
+#165|Falkenrath Noble|C|C17
+#166|Outpost Siege|R|C17
+#167|Stirring Wildwood|R|C17
+#168|Territorial Hellkite|R|C17
+#169|Crimson Honor Guard|R|C17
+#170|Magus of the Mind|R|C17
+#171|Hero's Blade|U|C17
+#172|Nihil Spellbomb|C|C17
+#173|Dragon Tempest|R|C17
+#174|White Sun's Zenith|R|C17
+#175|Syphon Mind|C|C17
+#176|Frontier Siege|R|C17
+#177|Graypelt Refuge|U|C17
+#178|Monastery Siege|R|C17
+#179|Temur Sabertooth|U|C17
+#180|Sunscorch Regent|R|C17
+#181|Haven of the Spirit Dragon|R|C17
+#182|Tyrant's Familiar|R|C17
+#183|Drana, Kalastria Bloodchief|R|C17
+#184|Forsaken Sanctuary|U|C17
+#185|Azami, Lady of Scrolls|R|C17
+#186|Abundance|R|C17
+#187|Quietus Spike|R|C17
+#188|Divine Reckoning|R|C17
+#189|Izzet Chemister|R|C17
+#190|Etherium-Horn Sorcerer|R|C17
+#191|Pawn of Ulamog|U|C17
+#192|Into the Roil|C|C17
+#193|Earthquake|R|C17
+#194|Blade of the Bloodchief|R|C17
+#195|Clone Legion|M|C17
+#196|Crosis's Charm|U|C17
+#197|Grasslands|U|C17
+#198|Painful Truths|R|C17
+#199|Necromantic Selection|R|C17
+#200|Dark Impostor|R|C17
+#201|Stone Quarry|U|C17
+#202|Shifting Shadow|R|C17
+#203|Scourge of Valkas|M|C17
+#204|Jazal Goldmane|M|C17
+#205|Bladewing the Risen|R|C17
+#206|Damnable Pact|R|C17
+#207|Fell the Mighty|R|C17
+#208|Fortunate Few|R|C17
+#209|The Ur-Dragon|M|C17
+#210|Kolaghan, the Storm's Fury|R|C17
+#211|Cinder Barrens|U|C17
+#212|Deathbringer Regent|R|C17
+#213|Crucible of Fire|R|C17
+#214|Polymorphist's Jest|R|C17
+#215|Dragonspeaker Shaman|U|C17
+#216|Niv-Mizzet, Dracogenius|R|C17
+#217|Leonin Shikari|R|C17
+#218|Dragonlord's Servant|U|C17
+#219|Oreskos Explorer|U|C17
+#220|Mercurial Chemister|R|C17
+#221|Silumgar, the Drifting Death|R|C17
+#222|Ambition's Cost|U|C17
+#223|Captivating Vampire|R|C17
+#224|Mairsil, the Pretender|M|C17
+#225|Silumgar's Command|R|C17
+#226|Tranquil Expanse|U|C17
+#227|Sea Gate Oracle|C|C17
+#228|Corpse Augur|U|C17
+#229|Crucible of the Spirit Dragon|R|C17
+#230|Anowon, the Ruin Sage|R|C17
+#231|Memory Plunder|R|C17
+#232|Dromoka, the Eternal|R|C17
+#233|Opportunity|U|C17
+#234|Kemba, Kha Regent|R|C17
+#235|Bloodlord of Vaasgoth|M|C17
+#236|Soul's Majesty|R|C17
+#237|Teneb, the Harvester|R|C17
+#238|Blood Tribute|R|C17
+#239|Behemoth Sledge|U|C17
+#240|Kabira Crossroads|C|C17
+#241|Arahbo, Roar of the World|M|C17
+#242|Stromkirk Captain|U|C17
+#243|Malakir Bloodwitch|R|C17
+#244|Saltcrusted Steppe|U|C17
+#245|Ryusei, the Falling Star|M|C17
+#246|Taj-Nar Swordsmith|U|C17
+#247|Intet, the Dreamer|R|C17
+#248|Leonin Relic-Warder|U|C17
+#249|Fleecemane Lion|R|C17
+#250|Tithe Drinker|C|C17
+#251|Blood Baron of Vizkopa|M|C17
+#252|Ojutai, Soul of Winter|R|C17
+#253|Nivix Guildmage|U|C17
+#254|Leonin Arbiter|R|C17
+#255|Rakish Heir|U|C17
+#256|Jareth, Leonine Titan|R|C17
+#257|Shadowmage Infiltrator|R|C17
+#258|Grappling Hook|R|C17
+#259|Skeletal Scrying|U|C17
+#260|Elfhame Palace|U|C17
+#261|Nin, the Pain Artist|R|C17
+#262|Consuming Vapors|R|C17
+#263|Hunter's Prowess|R|C17
+#264|Apprentice Necromancer|R|C17
+#265|Urborg Volcano|U|C17
+#266|Izzet Chronarch|C|C17
+#267|Fist of Suns|R|C17
+#268|Broodmate Dragon|R|C17
+#269|Crosis, the Purger|R|C17
+#270|Rain of Thorns|U|C17
+#271|Wing Shards|U|C17
+#272|Harbinger of the Tides|R|C17
+#273|Magus of the Abyss|R|C17
+#274|Raksha Golden Cub|R|C17
+#275|Cauldron Dance|U|C17
+#276|Bloodhusk Ritualist|U|C17
+#277|Spirit of the Hearth|R|C17
+#278|Jedit Ojanen of Efrava|R|C17
+#279|Vela the Night-Clad|M|C17
+#280|Skeletal Vampire|R|C17
+#281|Seht's Tiger|R|C17
+#282|Vein Drinker|R|C17
+#283|Marchesa, the Black Rose|M|C17
+#284|Relic Crush|U|C17
+#285|Spellbound Dragon|R|C17
+#286|Sunspear Shikari|C|C17
+#287|Serendib Sorcerer|R|C17
+#288|Scion of the Ur-Dragon|R|C17
+#289|Inalla, Archmage Ritualist|M|C17
+#290|Phantom Nishoba|R|C17
+#291|Crushing Vines|C|C17
+#292|Merchant of Secrets|C|C17
+#293|Edgar Markov|M|C17
+#294|Orator of Ojutai|U|C17

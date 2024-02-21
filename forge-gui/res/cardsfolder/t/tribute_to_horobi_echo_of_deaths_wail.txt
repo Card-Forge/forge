@@ -1,7 +1,7 @@
 Name:Tribute to Horobi
 ManaCost:1 B
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBToken,DBExile
+K:Chapter:3:DBToken,DBToken,DBExile
 SVar:DBToken:DB$ Token | TokenScript$ b_1_1_rat_rogue | TokenOwner$ Opponent | SpellDescription$ Each opponent creates a 1/1 black Rat Rogue creature token.
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup

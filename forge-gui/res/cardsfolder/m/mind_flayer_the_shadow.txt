@@ -1,4 +1,5 @@
 Name:Mind Flayer, the Shadow
+AltName:Arvinox, the Mind Flail
 ManaCost:4 B B B
 Types:Legendary Enchantment Creature Horror
 PT:9/9

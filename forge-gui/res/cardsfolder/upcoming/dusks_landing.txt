@@ -1,0 +1,11 @@
+Name:Dusk's Landing
+ManaCost:B
+Types:Sorcery
+A:SP$ Branch | BranchConditionSVar$ LifeCheck | BranchConditionSVarCompare$ GE2 | FalseSubAbility$ DBDraw | TrueSubAbility$ DBSeek | SpellDescription$ Draw a card. If an opponent lost life this turn and you gained life this turn, seek two Vampire cards instead.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBSeek:DB$ Seek | Num$ 2 | Type$ Vampire | SpellDescription$ Seek two Vampire card
+SVar:LifeCheck:SVar$Y/Plus.X
+SVar:X:Count$LifeOppsLostThisTurn/LimitMax.1
+SVar:Y:Count$LifeYouGainedThisTurn/LimitMax.1
+DeckNeeds:Type$Vampire & Ability$LifeGain
+Oracle:Draw a card. If an opponent lost life this turn and you gained life this turn, seek two Vampire cards instead.

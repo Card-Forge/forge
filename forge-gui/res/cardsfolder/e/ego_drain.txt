@@ -1,0 +1,8 @@
+Name:Ego Drain
+ManaCost:B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SubAbility$ DBExileHand | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:DBExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | Mandatory$ True | ChangeNum$ 1 | ConditionPresent$ Faerie.YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ If you don't control a Faerie, exile a card from your hand.
+DeckHas:Ability$Discard
+DeckHints:Type$Faerie
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. If you don't control a Faerie, exile a card from your hand.

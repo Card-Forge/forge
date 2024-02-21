@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=PDKA
 
 [cards]
-*64 R Gravecrawler @Dave Kendall
+64★ R Gravecrawler @Dave Kendall
 71★ R Ravenous Demon @Kev Walker
 80 R Zombie Apocalypse @Volkan Baǵa
 98★ R Mondronen Shaman @Anthony Palumbo

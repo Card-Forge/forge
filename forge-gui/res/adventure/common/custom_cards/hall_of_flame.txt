@@ -3,7 +3,7 @@ ManaCost:0
 Colors:Red
 Types:Enchantment Saga
 K:Hexproof
-K:Saga:5:DBConjure,DBDiscount,DBConjureSpell,DBDiscount2,DBConjureSpell2
+K:Chapter:5:DBConjure,DBDiscount,DBConjureSpell,DBDiscount2,DBConjureSpell2
 SVar:DBConjure:DB$MakeCard | Conjure$ True | Name$ Mountain | Zone$ Battlefield 
 SVar:DBDiscount:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ ReduceCost | SpellDescription$ Spells you cast cost {R} less to cast until your next turn. 
 SVar:DBDiscount2:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ ReduceCost2 | SpellDescription$ Spells you cast cost {R} less to cast until your next turn. 

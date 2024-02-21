@@ -1,0 +1,15 @@
+Name:Blood Spatter Analysis
+ManaCost:B R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 3
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigMill | TriggerDescription$ Whenever one or more creatures die, mill a card and put a bloodstain counter on CARDNAME. Then sacrifice it if it has five or more bloodstain counters on it. When you do, return target creature card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ BLOODSTAIN | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE5_BLOODSTAIN | RememberSacrificed$ True | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ TrigChange | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup | TriggerDescription$ When you do, return target creature card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard|Counters|Mill
+DeckHints:Ability$Graveyard
+Oracle:When Blood Spatter Analysis enters the battlefield, it deals 3 damage to target creature an opponent controls.\nWhenever one or more creatures die, mill a card and put a bloodstain counter on Blood Spatter Analysis. Then sacrifice it if it has five or more bloodstain counters on it. When you do, return target creature card from your graveyard to your hand.

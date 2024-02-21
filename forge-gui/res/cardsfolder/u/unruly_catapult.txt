@@ -1,0 +1,10 @@
+Name:Unruly Catapult
+ManaCost:2 R
+Types:Artifact Creature Construct
+PT:0/4
+K:Defender
+A:AB$ DealDamage | Cost$ T | Defined$ Player.Opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast an instant or sorcery spell, untap CARDNAME.
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+DeckHints:Type$Instant|Sorcery
+Oracle:Defender\n{T}: Unruly Catapult deals 1 damage to each opponent.\nWhenever you cast an instant or sorcery spell, untap Unruly Catapult.

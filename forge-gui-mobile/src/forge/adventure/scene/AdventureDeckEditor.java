@@ -39,10 +39,7 @@ import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
@@ -565,29 +562,41 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     protected void launchBasicLandDialog() {
         CardEdition defaultLandSet;
-        //suggest a random set from the ones used in the limited card pool that have all basic lands
         Set<CardEdition> availableEditionCodes = new HashSet<>();
-        for (PaperCard p : currentEvent.registeredDeck.getAllCardsInASinglePool().toFlatList()) {
-            availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+
+        if (currentEvent != null) {
+            //suggest a random set from the ones used in the limited card pool that have all basic lands
+
+            for (PaperCard p : currentEvent.registeredDeck.getAllCardsInASinglePool().toFlatList()) {
+                availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
+            }
+            defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
         }
-        defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+        else {
+            defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
+        }
 
         if (defaultLandSet == null) {
             defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
         }
 
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(currentEvent.registeredDeck, defaultLandSet, new Callback<CardPool>() {
+        List<CardEdition> unlockedEditions = new ArrayList<>();
+        unlockedEditions.add(defaultLandSet);
+
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(getDeck(), defaultLandSet, new Callback<CardPool>() {
             @Override
             public void run(CardPool landsToAdd) {
                 getMainDeckPage().addCards(landsToAdd);
             }
-        });
+        }, unlockedEditions);
         dialog.show();
         setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
     }
 
     protected boolean allowsAddBasic() {
-        if (currentEvent == null || !currentEvent.eventRules.allowsAddBasicLands)
+        if (currentEvent == null)
+            return true;
+        if (!currentEvent.eventRules.allowsAddBasicLands)
             return false;
         if (currentEvent.eventStatus == AdventureEventController.EventStatus.Entered && currentEvent.isDraftComplete)
             return true;

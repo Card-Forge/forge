@@ -1,0 +1,12 @@
+Name:Old Flitterfang
+ManaCost:4 B
+Types:Legendary Creature Rat Faerie
+PT:3/4
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigFood | TriggerDescription$ At the beginning of each end step, if a creature died this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+A:AB$ Pump | Cost$ 2 B Sac<1/Creature.Other;Artifact/another creature or artifact> | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckHas:Ability$Token|Sacrifice & Type$Food|Artifact
+DeckHints:Ability$Sacrifice
+Oracle:Flying\nAt the beginning of each end step, if a creature died this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n{2}{B}, Sacrifice another creature or artifact: Old Flitterfang gets +2/+2 until end of turn.

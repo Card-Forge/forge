@@ -1,7 +1,7 @@
 Name:Era of Enlightenment
 ManaCost:1 W
 Types:Enchantment Saga
-K:Saga:3:DBScry,DBGainLife,DBTransform
+K:Chapter:3:DBScry,DBGainLife,DBTransform
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

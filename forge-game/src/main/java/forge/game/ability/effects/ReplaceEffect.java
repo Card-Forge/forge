@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
 import forge.game.GameObject;
 import forge.game.PlanarDice;
 import forge.game.ability.AbilityKey;
@@ -12,7 +13,6 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
-
 
 public class ReplaceEffect extends SpellAbilityEffect {
 
@@ -44,6 +44,12 @@ public class ReplaceEffect extends SpellAbilityEffect {
             }
         } else if ("PlanarDice".equals(type)) {
             params.put(varName, PlanarDice.smartValueOf(varValue));
+        } else if ("Map".equals(type)) {
+            Map<Player, Integer> m = Maps.newHashMap();
+            for (Player key : AbilityUtils.getDefinedPlayers(card, sa.getParam("VarKey"), sa)) {
+                m.put(key, AbilityUtils.calculateAmount(card, varValue, sa));
+            }
+            params.put(varName, m);
         } else {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
         }

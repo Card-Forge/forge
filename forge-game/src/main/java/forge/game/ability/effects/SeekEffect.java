@@ -11,6 +11,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Localizer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,6 +55,7 @@ public class SeekEffect extends SpellAbilityEffect {
 
             CardCollection soughtCards = new CardCollection();
 
+            final StringBuilder notify = new StringBuilder();
             for (String seekType : seekTypes) {
                 CardCollection pool;
                 if (sa.hasParam("DefinedCards")) {
@@ -65,6 +67,8 @@ public class SeekEffect extends SpellAbilityEffect {
                     pool = CardLists.getValidCards(pool, seekType, source.getController(), source, sa);
                 }
                 if (pool.isEmpty()) {
+                    if (notify.length() != 0) notify.append("\r\n");
+                    notify.append(Localizer.getInstance().getMessage("lblSeekFailed", seekType));
                     continue; // can't find if nothing to seek
                 }
 
@@ -83,6 +87,9 @@ public class SeekEffect extends SpellAbilityEffect {
                     }
 
                 }
+            }
+            if (notify.length() != 0) {
+                game.getAction().notifyOfValue(sa, source, notify.toString(), null);
             }
             if (!soughtCards.isEmpty()) {
                 if (sa.hasParam("RememberFound")) {

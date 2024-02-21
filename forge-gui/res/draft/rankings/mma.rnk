@@ -1,0 +1,230 @@
+//Rank|Name|Rarity|Set
+#1|Sword of Fire and Ice|M|MMA
+#2|Sword of Light and Shadow|M|MMA
+#3|Elspeth Knight-Errant|M|MMA
+#4|Kiki-Jiki, Mirror Breaker|M|MMA
+#5|Kokusho the Evening Star|M|MMA
+#6|Keiga the Tide Star|M|MMA
+#7|Yosei the Morning Star|M|MMA
+#8|Vendilion Clique|M|MMA
+#9|Sarkhan Vol|M|MMA
+#10|Vedalken Shackles|M|MMA
+#11|Tarmogoyf|M|MMA
+#12|Ryusei the Falling Star|M|MMA
+#13|Dark Confidant|M|MMA
+#14|Jugan the Rising Star|M|MMA
+#15|Oona Queen of the Fae|R|MMA
+#16|Cryptic Command|R|MMA
+#17|Progenitus|M|MMA
+#18|Meloku the Clouded Mirror|R|MMA
+#19|Adarkar Valkyrie|R|MMA
+#20|Figure of Destiny|R|MMA
+#21|Arcbound Ravager|R|MMA
+#22|Reveillark|R|MMA
+#23|Divinity of Pride|R|MMA
+#24|Scion of Oona|R|MMA
+#25|Glen Elendra Archmage|R|MMA
+#26|Skeletal Vampire|R|MMA
+#27|Demigod of Revenge|R|MMA
+#28|Kira Great Glass-Spinner|R|MMA
+#29|Maelstrom Pulse|R|MMA
+#30|Knight of the Reliquary|R|MMA
+#31|Tombstalker|R|MMA
+#32|Path to Exile|U|MMA
+#33|Kitchen Finks|U|MMA
+#34|Doubling Season|R|MMA
+#35|Cloudgoat Ranger|U|MMA
+#36|Stonehewer Giant|R|MMA
+#37|Murderous Redcap|U|MMA
+#38|Molten Disaster|R|MMA
+#39|Grand Arbiter Augustin IV|R|MMA
+#40|Countryside Crusher|R|MMA
+#41|Slaughter Pact|R|MMA
+#42|Mulldrifter|U|MMA
+#43|Verdeloth the Ancient|R|MMA
+#44|Lightning Helix|U|MMA
+#45|Auriok Salvagers|R|MMA
+#46|Woodfall Primus|R|MMA
+#47|Greater Gargadon|R|MMA
+#48|Engineered Explosives|R|MMA
+#49|Eternal Witness|U|MMA
+#50|Aether Vial|R|MMA
+#51|Tooth and Nail|R|MMA
+#52|Blinkmoth Nexus|R|MMA
+#53|Riftwing Cloudskate|U|MMA
+#54|Executioner's Capsule|U|MMA
+#55|Earwig Squad|R|MMA
+#56|Thundercloud Shaman|U|MMA
+#57|Horobi's Whisper|U|MMA
+#58|Rude Awakening|R|MMA
+#59|Lotus Bloom|R|MMA
+#60|Academy Ruins|R|MMA
+#61|Ethersworn Canonist|R|MMA
+#62|Marsh Flitter|U|MMA
+#63|Pact of Negation|R|MMA
+#64|Flickerwisp|U|MMA
+#65|Electrolyze|U|MMA
+#66|Gifts Ungiven|R|MMA
+#67|Sporesower Thallid|U|MMA
+#68|Life from the Loam|R|MMA
+#69|City of Brass|R|MMA
+#70|Cold-Eyed Selkie|R|MMA
+#71|Sudden Shock|U|MMA
+#72|Epochrasite|U|MMA
+#73|Feudkiller's Verdict|U|MMA
+#74|Kataki War's Wage|R|MMA
+#75|Manamorphose|U|MMA
+#76|Summoner's Pact|R|MMA
+#77|Rift Bolt|C|MMA
+#78|Masked Admirers|U|MMA
+#79|Pardic Dragon|U|MMA
+#80|Death Rattle|U|MMA
+#81|Meadowboon|U|MMA
+#82|Jhoira of the Ghitu|R|MMA
+#83|Esperzoa|U|MMA
+#84|Death Cloud|R|MMA
+#85|Bonesplitter|C|MMA
+#86|Glimmervoid|R|MMA
+#87|Squee Goblin Nabob|R|MMA
+#88|Chalice of the Void|R|MMA
+#89|Glacial Ray|C|MMA
+#90|Bound in Silence|C|MMA
+#91|Thirst for Knowledge|U|MMA
+#92|Tidehollow Sculler|U|MMA
+#93|Plumeveil|U|MMA
+#94|Mad Auntie|U|MMA
+#95|Tar Pitcher|U|MMA
+#96|Phthisis|U|MMA
+#97|Pestermite|C|MMA
+#98|Errant Ephemeron|C|MMA
+#99|Vivid Creek|U|MMA
+#100|Careful Consideration|U|MMA
+#101|Vivid Crag|U|MMA
+#102|Vivid Meadow|U|MMA
+#103|Take Possession|U|MMA
+#104|Trygon Predator|U|MMA
+#105|Tribal Flames|U|MMA
+#106|Kodama's Reach|C|MMA
+#107|Terramorphic Expanse|C|MMA
+#108|Avian Changeling|C|MMA
+#109|Pyrite Spellbomb|C|MMA
+#110|Spellstutter Sprite|C|MMA
+#111|Rathi Trapper|C|MMA
+#112|Torrent of Stone|C|MMA
+#113|Imperiosaur|C|MMA
+#114|Reach of Branches|U|MMA
+#115|Tromp the Domains|U|MMA
+#116|Vivid Marsh|U|MMA
+#117|Search for Tomorrow|C|MMA
+#118|Aether Spellbomb|C|MMA
+#119|Bridge from Below|R|MMA
+#120|Sanctum Gargoyle|C|MMA
+#121|Mogg War Marshal|C|MMA
+#122|Myr Retriever|U|MMA
+#123|Spell Snare|U|MMA
+#124|Vivid Grove|U|MMA
+#125|Penumbra Spider|C|MMA
+#126|Latchkey Faerie|C|MMA
+#127|Amrou Scout|C|MMA
+#128|Pyromancer's Swath|R|MMA
+#129|Paradise Mantle|U|MMA
+#130|Etched Oracle|U|MMA
+#131|War-Spike Changeling|C|MMA
+#132|Auntie's Snitch|U|MMA
+#133|Aethersnipe|C|MMA
+#134|Sporoloth Ancient|C|MMA
+#135|Veteran Armorer|C|MMA
+#136|Durkwood Baloth|C|MMA
+#137|Shrapnel Blast|U|MMA
+#138|Stingscourger|C|MMA
+#139|Stinkweed Imp|C|MMA
+#140|Faerie Mechanist|C|MMA
+#141|Amrou Seekers|C|MMA
+#142|Echoing Truth|C|MMA
+#143|Blightspeaker|C|MMA
+#144|Blind-Spot Giant|C|MMA
+#145|Etherium Sculptor|C|MMA
+#146|Grinning Ignus|U|MMA
+#147|Lava Spike|C|MMA
+#148|Desperate Ritual|U|MMA
+#149|Giant Dustwasp|C|MMA
+#150|Drag Down|C|MMA
+#151|Fiery Fall|C|MMA
+#152|Empty the Warrens|C|MMA
+#153|Incremental Growth|U|MMA
+#154|Myr Enforcer|C|MMA
+#155|Worm Harvest|U|MMA
+#156|Arcbound Stinger|C|MMA
+#157|Thallid Germinator|C|MMA
+#158|Blood Moon|R|MMA
+#159|Dreamspoiler Witches|C|MMA
+#160|Frogmite|C|MMA
+#161|Otherworldly Journey|C|MMA
+#162|Blinding Beam|C|MMA
+#163|Kithkin Greatheart|C|MMA
+#164|Warren Weirding|C|MMA
+#165|Thallid Shell-Dweller|C|MMA
+#166|Court Homunculus|C|MMA
+#167|Arcbound Worker|C|MMA
+#168|Moldervine Cloak|C|MMA
+#169|Grapeshot|C|MMA
+#170|Thieving Sprite|C|MMA
+#171|Saltfield Recluse|C|MMA
+#172|Faerie Macabre|C|MMA
+#173|Warren Pilferers|C|MMA
+#174|Ivory Giant|C|MMA
+#175|Nantuko Shaman|C|MMA
+#176|Test of Faith|C|MMA
+#177|Stinkdrinker Daredevil|C|MMA
+#178|Thundering Giant|C|MMA
+#179|Hammerheim Deadeye|C|MMA
+#180|Runed Stalactite|C|MMA
+#181|Mind Funeral|U|MMA
+#182|Brute Force|C|MMA
+#183|Peppersmoke|C|MMA
+#184|Traumatic Visions|C|MMA
+#185|Thallid|C|MMA
+#186|Hillcomber Giant|C|MMA
+#187|Reach Through Mists|C|MMA
+#188|Vedalken Dismisser|C|MMA
+#189|Relic of Progenitus|U|MMA
+#190|Sandsower|U|MMA
+#191|Citanul Woodreaders|C|MMA
+#192|Stir the Pride|U|MMA
+#193|Peer Through Depths|C|MMA
+#194|Mothdust Changeling|C|MMA
+#195|Pallid Mycoderm|C|MMA
+#196|Skyreach Manta|C|MMA
+#197|Festering Goblin|C|MMA
+#198|Logic Knot|C|MMA
+#199|Dampen Thought|C|MMA
+#200|Deepcavern Imp|C|MMA
+#201|Cenn's Enlistment|C|MMA
+#202|Perilous Research|C|MMA
+#203|Gleam of Resistance|C|MMA
+#204|Petals of Insight|C|MMA
+#205|Street Wraith|C|MMA
+#206|Erratic Mutation|C|MMA
+#207|Echoing Courage|C|MMA
+#208|Crush Underfoot|C|MMA
+#209|Riftsweeper|U|MMA
+#210|Death Denied|C|MMA
+#211|Dispeller's Capsule|C|MMA
+#212|Greater Mossdog|C|MMA
+#213|Rift Elemental|C|MMA
+#214|Absorb Vis|C|MMA
+#215|Fury Charm|C|MMA
+#216|Raven's Crime|C|MMA
+#217|Walker of the Grove|C|MMA
+#218|Sylvan Bounty|C|MMA
+#219|Facevaulter|C|MMA
+#220|Syphon Life|C|MMA
+#221|Hana Kami|C|MMA
+#222|Arcbound Wanderer|C|MMA
+#223|Extirpate|R|MMA
+#224|Krosan Grip|U|MMA
+#225|Terashi's Grasp|U|MMA
+#226|Angel's Grace|R|MMA
+#227|Narcomoeba|U|MMA
+#228|Dakmor Salvage|U|MMA
+#229|Dragonstorm|R|MMA

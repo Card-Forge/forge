@@ -1,0 +1,8 @@
+Name:Kitchen
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+A:AB$ Investigate | Cost$ 4 T | SpellDescription$ Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHints:Ability$Investigate|Token
+Oracle:Kitchen enters the battlefield tapped.\n{T}: Add {G} or {U}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

@@ -13,6 +13,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -78,7 +79,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
-                // CR 115.3. The same target can’t be chosen multiple times for
+                // CR 115.3. The same target can't be chosen multiple times for
                 // any one instance of the word “target” on a spell or ability.
                 if (!oldTargetBlock.contains(newTarget) && replaceIn.getSpellAbility().canTarget(newTarget)) {
                     newTargetBlock.remove(oldTarget);
@@ -130,7 +131,12 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             }
                         } else {
                             // Update targets, with a potential new target
-                            Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa) : null;
+                            Card source = sa.getHostCard();
+                            if (changingTgtSA.getTargetCard() != null) {
+                                // try to use old target so "Other" restriction of Meddle works
+                                source = changingTgtSA.getTargetCard();
+                            }
+                            Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, source, sa) : null;
                             // TODO Creature.Other might not work yet as it should
                             TargetChoices newTarget = chooser.getController().chooseNewTargetsFor(changingTgtSA, filter, false);
                             changingTgtSI.updateTarget(newTarget, sa.getHostCard());

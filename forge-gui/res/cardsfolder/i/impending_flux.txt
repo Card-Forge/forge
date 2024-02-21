@@ -1,0 +1,7 @@
+Name:Impending Flux
+ManaCost:2 R
+Types:Sorcery
+A:SP$ DamageAll | NumDmg$ X | ValidPlayers$ Opponent | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control | SpellDescription$ Paradox — CARDNAME deals X damage to each opponent and each creature they control, where X is 1 plus the number of spells you've cast from anywhere other than your hand this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+wasNotCastFromYourHand/Plus.1
+K:Foretell:1 R R
+Oracle:Paradox — Impending Flux deals X damage to each opponent and each creature they control, where X is 1 plus the number of spells you've cast from anywhere other than your hand this turn.\nForetell {1}{R}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

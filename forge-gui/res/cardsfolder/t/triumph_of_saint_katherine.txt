@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Human Warrior
 PT:5/5
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Praesidium Protectiva — When CARDNAME dies, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+YouOwn | Execute$ TrigExile | TriggerDescription$ Praesidium Protectiva — When CARDNAME is put into your graveyard from the battlefield, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBExileTopCard
 SVar:DBExileTopCard:DB$ Dig | Defined$ You | DigNum$ 6 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBChangeLibrary
 SVar:DBChangeLibrary:DB$ ChangeZoneAll | ConditionCheckSVar$ RememberedSize | ConditionSVarCompare$ GE7 | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ 0 | RandomOrder$ True | SubAbility$ DBCleanup
@@ -11,4 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RememberedSize:Count$RememberedSize
 K:Miracle:1 W
 DeckHas:Ability$LifeGain
-Oracle:Lifelink\nPraesidium Protectiva — When Triumph of Saint Katherine dies, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.\nMiracle {1}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+Oracle:Lifelink\nPraesidium Protectiva — When Triumph of Saint Katherine is put into your graveyard from the battlefield, exile it and the top six cards of your library in a face-down pile. If you do, shuffle that pile and put it back on top of your library.\nMiracle {1}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

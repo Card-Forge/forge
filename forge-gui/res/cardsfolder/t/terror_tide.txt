@@ -1,0 +1,7 @@
+Name:Terror Tide
+ManaCost:2 B B
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ Fathomless descent — All creatures get -X/-X until end of turn, where X is the number of permanent cards in your graveyard.
+SVar:X:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Graveyard|Mill|Discard
+Oracle:Fathomless descent — All creatures get -X/-X until end of turn, where X is the number of permanent cards in your graveyard.

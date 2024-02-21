@@ -1,0 +1,8 @@
+Name:Swashbuckler's Whip
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Reach | AddAbility$ ABTap & ABDiscover | Description$ Equipped creature has reach, "{2}, {T}: Tap target artifact or creature," and "{8}, {T}: Discover 10." (Exile cards from the top of your library until you exile a nonland card with mana value 10 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:ABTap:AB$ Tap | Cost$ 2 T | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SpellDescription$ Tap target artifact or creature.
+SVar:ABDiscover:AB$ Discover | Cost$ 8 T | Num$ 10 | SpellDescription$ Discover 10.
+K:Equip:1
+Oracle:Equipped creature has reach, "{2}, {T}: Tap target artifact or creature," and "{8}, {T}: Discover 10." (Exile cards from the top of your library until you exile a nonland card with mana value 10 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)\nEquip {1}

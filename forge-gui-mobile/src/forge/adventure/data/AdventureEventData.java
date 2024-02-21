@@ -13,6 +13,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.card.CardEdition;
+import forge.card.PrintSheet;
 import forge.deck.Deck;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
@@ -351,13 +352,35 @@ public class AdventureEventData implements Serializable {
                     }
                     isOkay = boosterSize == 15;
                 }
+                for (PrintSheet ps : c.getPrintSheetsBySection()) {
+                    //exclude block with sets containing P9 cards..
+                    if (ps.containsCardNamed("Black Lotus", 1)
+                            || ps.containsCardNamed("Mox Emerald", 1)
+                            || ps.containsCardNamed("Mox Pearl", 1)
+                            || ps.containsCardNamed("Mox Ruby", 1)
+                            || ps.containsCardNamed("Mox Sapphire", 1)
+                            || ps.containsCardNamed("Mox Jet", 1)
+                            || ps.containsCardNamed("Ancestral Recall", 1)
+                            || ps.containsCardNamed("Timetwister", 1)
+                            || ps.containsCardNamed("Time Walk", 1)) {
+                        isOkay = false;
+                        break;
+                    }
+                }
             }
-            if (isOkay)
+            if (isOkay) {
                 legalBlocks.add(b);
+            }
         }
 
-        for (String restricted : Config.instance().getConfigData().restrictedEditions) {
-            legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null) {
+            List<String> allowed = Arrays.asList(configData.allowedEditions);
+            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+        } else {
+            for (String restricted : configData.restrictedEditions) {
+                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+            }
         }
         return legalBlocks.isEmpty() ? null : Aggregates.random(legalBlocks);
     }
@@ -371,8 +394,14 @@ public class AdventureEventData implements Serializable {
                 legalBlocks.add(b);
             }
         }
-        for (String restricted : Config.instance().getConfigData().restrictedEditions) {
-            legalBlocks.removeIf(q -> q.getName().equals(restricted));
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null) {
+            List<String> allowed = Arrays.asList(configData.allowedEditions);
+            legalBlocks.removeIf(q -> !allowed.contains(q.getName()));
+        } else {
+            for (String restricted : configData.restrictedEditions) {
+                legalBlocks.removeIf(q -> q.getName().equals(restricted));
+            }
         }
         return legalBlocks.isEmpty()?null:Aggregates.random(legalBlocks);
     }
@@ -404,6 +433,7 @@ public class AdventureEventData implements Serializable {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
         List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
+        data.removeIf(q -> q.nextEnemy != null);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }
@@ -506,7 +536,9 @@ public class AdventureEventData implements Serializable {
                 data.itemName = item;
                 ret.addAll(data.generate(false, true));
             }
-
+            for (RewardData data :  r.rewards) {
+                ret.addAll(data.generate(false, true));
+            }
         }
         if (ret.size > 0) {
             RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);

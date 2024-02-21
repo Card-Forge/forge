@@ -1,0 +1,11 @@
+Name:Case of the Filched Falcon
+ManaCost:U
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When this Case enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE3 | IsPresent2$ Card.Self+IsUnsolved | Execute$ SolveFalcon | TriggerDescription$ To solve — You control three or more artifacts. (If unsolved, solve at the beginning of your end step.)
+SVar:SolveFalcon:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+A:AB$ PutCounter | Cost$ 2 U Sac<1/CARDNAME/this Case> | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Activation$ Solved | CounterType$ P1P1 | CounterNum$ 4 | SubAbility$ DBAnimate | PrecostDesc$ Solved — | SpellDescription$ Put four +1/+1 counters on target noncreature artifact. It becomes a 0/0 Bird creature with flying in addition to its other types.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Bird | Keywords$ Flying | Duration$ Permanent
+DeckNeeds:Type$Artifact
+Oracle:When this Case enters the battlefield, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nTo solve — You control three or more artifacts. (If unsolved, solve at the beginning of your end step.)\nSolved — {2}{U}, Sacrifice this Case: Put four +1/+1 counters on target noncreature artifact. It becomes a 0/0 Bird creature with flying in addition to its other types.

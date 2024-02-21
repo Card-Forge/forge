@@ -38,33 +38,6 @@
     },
 	{
       "type": "TextButton",
-      "name": "abandonQuest",
-      "text": "Abandon Quest",
-      "width": 130,
-      "height": 30,
-      "x": 20,
-      "y": 25
-    },
-	{
-      "type": "TextButton",
-      "name": "trackQuest",
-      "text": "Track Quest",
-      "width": 130,
-      "height": 30,
-      "x": 150,
-      "y": 25
-    },
-	{
-      "type": "TextButton",
-      "name": "backToList",
-      "text": "Quest List",
-      "width": 130,
-      "height": 30,
-      "x": 280,
-      "y": 25
-    },
-	{
-      "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
       "binding": "Back",

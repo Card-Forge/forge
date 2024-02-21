@@ -11,3 +11,8 @@ ScryfallCode=P23
 3 R Mycosynth Lattice @Anthony S. Waters
 4 R Retrofitter Foundry @Dmitry Burmak
 5 M Sword of War and Peace @Chris Rahn
+6 R Plains @Jorge Jacinto
+7 R Island @Jorge Jacinto
+8 R Swamp @Jorge Jacinto
+9 R Mountain @Jorge Jacinto
+10 R Forest @Jorge Jacinto

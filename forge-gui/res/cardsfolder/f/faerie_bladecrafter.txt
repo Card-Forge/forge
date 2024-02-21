@@ -1,0 +1,12 @@
+Name:Faerie Bladecrafter
+ManaCost:2 B
+Types:Creature Faerie Rogue
+PT:2/2
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Faerie.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more Faeries you control deal combat damage to a player, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigLose | TriggerDescription$ When CARDNAME dies, each opponent loses X life and you gain X life, where X is its power.
+SVar:TrigLose:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:TriggeredCard$CardPower
+Oracle:Flying\nWhenever one or more Faeries you control deal combat damage to a player, put a +1/+1 counter on Faerie Bladecrafter.\nWhen Faerie Bladecrafter dies, each opponent loses X life and you gain X life, where X is its power.

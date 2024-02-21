@@ -1,0 +1,11 @@
+Name:Case of the Shattered Pact
+ManaCost:2
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this Case enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Card.Self+IsUnsolved | CheckSVar$ X | SVarCompare$ GE5 | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — There are five colors among permanents you control. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+T:Mode$ Phase | Phase$ BeginCombat | IsPresent$ Card.Self+IsSolved | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Solved — At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Flying & Double Strike & Vigilance
+SVar:X:Count$ColorsCtrl Permanent
+Oracle:When this Case enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nTo solve — There are five colors among permanents you control. (If unsolved, solve at the beginning of your end step.)\nSolved — At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.

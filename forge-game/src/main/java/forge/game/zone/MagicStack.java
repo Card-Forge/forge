@@ -52,6 +52,7 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
+import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
@@ -187,12 +188,21 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (undoStack.isEmpty()) { return false; }
 
         SpellAbility sa = undoStack.peek();
-        sa.undo();
-        clearUndoStack(sa);
-        sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        if (sa.undo()) {
+            clearUndoStack(sa);
+            sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+        } else {
+            clearUndoStack(sa);
+            for (Mana pay : sa.getPayingMana()) {
+                clearUndoStack(pay.getManaAbility().getSourceSA());
+            }
+        }
         return true;
     }
     public final void clearUndoStack(SpellAbility sa) {
+        if (sa == null) {
+            return;
+        }
         clearUndoStack(Lists.newArrayList(sa));
     }
     private final void clearUndoStack(List<SpellAbility> sas) {
@@ -244,7 +254,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            if (!sp.isCopied()) {
+            if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 source.addAbilityActivated(sp);
             }
@@ -291,11 +301,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.getApi() == ApiType.Charm && sp.hasParam("ChoiceRestriction")) {
-            // Remember the Choice here for later handling
-            source.addChosenModes(sp, sp.getSubAbility().getDescription(), game.getPhaseHandler().inCombat());
-        }
-
         //cancel auto-pass for all opponents of activating player
         //when a new non-triggered ability is put on the stack
         if (!sp.isTrigger()) {
@@ -307,9 +312,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (si == null && sp.isActivatedAbility() && !sp.isCopied()) {
             // if not already copied use a fresh instance
             SpellAbility original = sp;
-            sp = sp.copy();
+            sp = sp.copy(sp.getHostCard(), activator, false, true);
             sp.setOriginalAbility(original);
+            original.clearTargets();
             original.setXManaCostPaid(null);
+            if (original.getApi() == ApiType.Charm) {
+                // reset chain
+                original.setSubAbility(null);
+            }
         }
 
         if (frozen && !sp.hasParam("IgnoreFreeze")) {
@@ -318,7 +328,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp.isAbility() && !sp.isCopied()) {
+        if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
             source.addAbilityActivated(sp);
         }
 
@@ -501,6 +511,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // temporarily reverted removing SAs after resolution
         final SpellAbility sa = peekAbility();
 
+        // abilities already on stack won't get changed text from host
+        if (sa.isSpell()) {
+            sa.changeText();
+        }
+
         // ActivePlayer gains priority first after Resolve
         game.getPhaseHandler().resetPriority();
 
@@ -584,13 +599,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         unfreezeStack();
         sa.resetOnceResolved();
 
-        //game.getAction().checkStaticAbilities();
         game.getPhaseHandler().onStackResolved();
 
         curResolvingCard = null;
-
-        // xManaCostPaid will reset when cast the spell, comment out to fix Venarian Gold
-        // sa.getHostCard().setXManaCostPaid(0);
     }
 
     private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
@@ -732,10 +743,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 if (sa.getHostCard().getController().equals(p)) {
                     simultaneousStackEntryList.remove(sa);
                 }
-            } else {
-                if (activator.equals(p)) {
-                    simultaneousStackEntryList.remove(sa);
-                }
+            } else if (activator.equals(p)) {
+                simultaneousStackEntryList.remove(sa);
             }
         }
     }

@@ -1,0 +1,8 @@
+Name:The Drum, Mining Facility
+ManaCost:no cost
+Types:Plane Earth
+T:Mode$ PlanarDice | TriggerZones$ Command | Execute$ RolledDie | ValidPlayer$ You | TriggerDescription$ Whenever you roll the planar die, creatures you control get +1/+1 and gain haste until end of turn.
+SVar:RolledDie:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigEndTurn | TriggerDescription$ Whenever chaos ensues, end the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+SVar:TrigEndTurn:DB$ EndTurn
+Oracle:Whenever you roll the planar die, creatures you control get +1/+1 and gain haste until end of turn.\nWhenever chaos ensues, end the turn. (Exile all spells and abilities from the stack. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
