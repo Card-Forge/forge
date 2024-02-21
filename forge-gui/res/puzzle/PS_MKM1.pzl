@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Murder at Karlov Manor #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/02/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. In your library there is another copy of each card on your battlefield and in your hand.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Seismic Monstrosaur;Murder;Ironhoof Boar;Krovod Haunch
+p0library=Swamp;Swamp;Mountain;Mountain;Mountain;Plains;Plains;Seismic Monstrosaur;Murder;Ironhoof Boar;Krovod Haunch;Kaya, Spirits' Justice;Realm-Scorcher Hellkite;Krenko, Baron of Tin Street
+p0battlefield=Kaya, Spirits' Justice|Counters:LOYALTY=3;Realm-Scorcher Hellkite;Krenko, Baron of Tin Street;Plains;Plains;Mountain;Mountain;Mountain;Swamp;Swamp
+p1life=8
+p1battlefield=Vein Ripper;T:wb_1_1_spirit_flying;T:wb_1_1_spirit_flying
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle
