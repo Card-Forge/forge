@@ -44,7 +44,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbilityCantPhaseOut;
+import forge.game.staticability.StaticAbilityCantPhase;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -290,7 +290,7 @@ public class Untap extends Phase {
                 // and indirectly, it just phases out indirectly.
                 if (c.isAttachment()) {
                     final Card ent = c.getAttachedTo();
-                    if (ent != null && list.contains(ent) && !StaticAbilityCantPhaseOut.cantPhaseOut(ent)) {
+                    if (ent != null && list.contains(ent) && !StaticAbilityCantPhase.cantPhaseOut(ent)) {
                         continue;
                     }
                 }
