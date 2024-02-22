@@ -507,10 +507,6 @@ public class CombatUtil {
             return false;
         }
 
-        if (blocker.isSuspected()) {
-            return false;
-        }
-
         if (blocker.hasKeyword("CARDNAME can't block.") || blocker.hasKeyword("CARDNAME can't attack or block.")
                 || blocker.isPhasedOut()) {
             return false;
