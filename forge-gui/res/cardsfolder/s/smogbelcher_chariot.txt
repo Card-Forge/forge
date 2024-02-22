@@ -15,4 +15,4 @@ SVar:TrigPump:DB$ Pump | ValidTgts$ Card.IsRemembered | TgtPrompt$ Select target
 K:Crew:3
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
-Oracle:Menace,Deathtouch,Lifelink\nWhenever Smogbelcher Chariot attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.\nCrew 3
+Oracle:Menace, deathtouch, lifelink\nWhenever Smogbelcher Chariot attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.\nCrew 3

@@ -1,0 +1,11 @@
+Name:Scuttling Sentinel
+ManaCost:1 GU GU
+Types:Creature Crab Elf
+PT:3/2
+K:Flash
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target creature you control. Until end of turn, that creature becomes a blue Crab in addition to its other types and gains hexproof. (It can't be the target of spells or abilities your opponents control.)
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Crab | Colors$ Blue | OverwriteColors$ True | Keywords$ Hexproof
+DeckHas:Ability$Counters & Type$Crab
+Oracle:Flash\nVigilance\nWhen Scuttling Sentinel enters the battlefield, put a +1/+1 counter on another target creature you control. Until end of turn, that creature becomes a blue Crab in addition to its other types and gains hexproof. (It can't be the target of spells or abilities your opponents control.)
