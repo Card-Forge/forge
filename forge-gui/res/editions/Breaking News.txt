@@ -1,0 +1,12 @@
+[metadata]
+Code=OTP
+Date=2024-04-19
+Name=Breaking News
+Type=Collector_Edition
+ScryfallCode=OTP
+
+[cards]
+20 M Thoughtseize @William Tempest
+39 M Crime // Punishment @William Tempest
+70 M Thoughtseize @William Tempest
+75 M Crime // Punishment @William Tempest
