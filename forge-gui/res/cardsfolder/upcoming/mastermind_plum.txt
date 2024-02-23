@@ -1,0 +1,14 @@
+Name:Mastermind Plum
+ManaCost:2 B
+Types:Legendary Creature Human Wizard
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target card from a graveyard. If an artifact card was exiled this way, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | TargetMin$ 0 | TargetMax$ 1 | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select up to one target card in a graveyard | RememberChanged$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | ConditionDefined$ Remembered | ConditionPresent$ Artifact | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ValidSA$ Spell.ManaFromTreasure | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$Token & Type$Artifact|Treasure
+DeckHints:Type$Artifact|Treasure & Ability$Graveyard
+Oracle:Whenever Mastermind Plum attacks, exile up to one target card from a graveyard. If an artifact card was exiled this way, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you cast a spell, if mana from a Treasure was spent to cast it, you draw a card and you lose 1 life.
