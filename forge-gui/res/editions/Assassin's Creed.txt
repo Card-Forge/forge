@@ -17,9 +17,7 @@ ScryfallCode=ACR
 99 M Sword of Feast and Famine @Thanh Tuấn
 113 M Ezio Auditore da Firenze @Alexander Gering
 118 M Leonardo da Vinci @Miklós Ligeti
-118z M Leonardo da Vinci @Miklós Ligeti
 119 M Cleopatra, Exiled Pharaoh @Nestor Ossandon Leal
-119z M Cleopatra, Exiled Pharaoh @Nestor Ossandon Leal
 124 M Sword of Feast and Famine @Bruce Brenneise
 131 M Ezio Auditore da Firenze @Luisa J. Preissler
 137 M Altaïr Ibn-La'Ahad @Alex Negrea
