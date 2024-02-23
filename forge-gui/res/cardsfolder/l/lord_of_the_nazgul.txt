@@ -1,7 +1,7 @@
 Name:Lord of the Nazgûl
 ManaCost:3 U B
 Types:Legendary Creature Wraith Noble
-PT:4/4
+PT:4/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Wraith+YouCtrl | AddKeyword$ Protection:Card.IsRingbearer:Ring-bearers | Description$ Wraiths you control have protection from Ring-bearers.
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 3/3 black Wraith creature token with menace. Then if you control nine or more Wraiths, Wraiths you control have base power and toughness 9/9 until end of turn.
