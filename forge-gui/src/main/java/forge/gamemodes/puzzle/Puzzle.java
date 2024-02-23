@@ -162,7 +162,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                 if (targets == null) {
                     targets = "Creature.OppCtrl"; // by default, kill all opponent's creatures
                 }
-                String trigKill = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCards$ " + targets + " | " +
+                String trigKill = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ " + targets + " | " +
                         "Static$ True | TriggerDescription$ When the last permanent specified in the goal leaves the battlefield, you win the game.";
                 String effKill = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ EQ0";
                 final Trigger triggerKill = TriggerHandler.parseTrigger(trigKill, goalCard, true);
@@ -179,7 +179,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                     System.err.println("Error: target was not specified for the puzzle with an OTB permanent objective!");
                     break;
                 }
-                String trigPlay = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCards$ " + targets + " | " +
+                String trigPlay = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ " + targets + " | " +
                         "Static$ True | TriggerDescription$ When the specified permanent enters the battlefield, you win the game.";
                 String effPlay = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ GE" + targetCount;
                 final Trigger triggerPlay = TriggerHandler.parseTrigger(trigPlay, goalCard, true);

@@ -1630,12 +1630,6 @@ public class CardProperty {
                     return false;
                 }
             }
-            if (property.equals("attackingOpponent")) {
-                Player defender = combat.getDefenderPlayerByAttacker(card);
-                if (!sourceController.isOpponentOf(defender)) {
-                    return false;
-                }
-            }
             if (property.startsWith("attacking ")) { // generic "attacking [DefinedGameEntity]"
                 FCollection<GameEntity> defined = AbilityUtils.getDefinedEntities(source, property.split(" ")[1],
                         spellAbility);

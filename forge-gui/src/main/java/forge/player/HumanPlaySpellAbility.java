@@ -71,7 +71,7 @@ public class HumanPlaySpellAbility {
             game.setTopLibsCast();
 
             if (ability.getApi() == ApiType.Charm) {
-                if ("X".equals(ability.getParam("CharmNum"))) {
+                if (ability.isAnnouncing("X")) {
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
