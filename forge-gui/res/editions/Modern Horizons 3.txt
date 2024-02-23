@@ -33,7 +33,6 @@ ScryfallCode=MH3
 361 R Wooded Foothills @Tomáš Honz
 368 R Laelia, the Blade Reforged @Tyler Walpole
 381 M Emrakul, the World Anew @Mark Tedin
-381z M Emrakul, the World Anew @Mark Tedin
 384 M Emrakul, the World Anew @Brent Hollowell
 385 U It That Heralds the End @Alex Konstad
 428 U Priest of Titania @Rebecca Guay
