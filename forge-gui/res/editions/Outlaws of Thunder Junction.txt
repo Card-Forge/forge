@@ -1,0 +1,22 @@
+[metadata]
+Code=OTJ
+Date=2024-04-19
+Name=Outlaws of Thunder Junction
+Type=Expansion
+ScryfallCode=OTJ
+
+[cards]
+48 R Fblthp, Lost on the Range @Brian Valeza
+109 M Tinybones, the Pickpocket @Ekaterina Burmak
+126 R Hell to Pay @Liiga Smilshkalne
+223 M Oko, the Ringleader @Magali Villeneuve
+272 L Plains @Salvatorre Zee Yazzie
+273 L Island @Salvatorre Zee Yazzie
+274 L Swamp @Salvatorre Zee Yazzie
+275 L Mountain @Salvatorre Zee Yazzie
+276 L Forest @Salvatorre Zee Yazzie
+290 M Tinybones, the Pickpocket @Michael Walsh
+296 M Oko, the Ringleader @Dibujante Nocturno
+305 M Oko, the Ringleader @Lie Setiawan
+319 R Fblthp, Lost on the Range @Brian Valeza
+332 R Hell to Pay @Liiga Smilshkalne

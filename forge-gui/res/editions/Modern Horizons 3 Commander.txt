@@ -1,0 +1,8 @@
+[metadata]
+Code=M3C
+Date=2024-06-07
+Name=Modern Horizons 3 Commander
+Type=Commander
+ScryfallCode=M3C
+
+[cards]

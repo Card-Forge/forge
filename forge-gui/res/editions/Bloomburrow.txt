@@ -1,0 +1,20 @@
+[metadata]
+Code=BLB
+Date=2024-07-26
+Name=Bloomburrow
+Type=Expansion
+ScryfallCode=BLB
+
+[cards]
+183 M Lumra, Bellow of the Woods @Matt Stewart
+224 R Mabel, Heir to Cragflame @Aurore Folny
+274 L Mountain @Andrew Theophilopoulos
+275 L Mountain @Andrew Theophilopoulos
+276 L Mountain @Andrew Theophilopoulos
+277 L Mountain @Andrew Theophilopoulos
+293 M Lumra, Bellow of the Woods @Allen Douglas
+336 R Mabel, Heir to Cragflame @David Petersen
+342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+351 R Mabel, Heir to Cragflame @Airi Yoshihisa
+379 M Bria, Riptide Rogue @Borja Pindado
+380 M Byrke, Long Ear of the Law @Manuel Castañón

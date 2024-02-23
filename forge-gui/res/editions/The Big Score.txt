@@ -1,0 +1,14 @@
+[metadata]
+Code=BIG
+Date=2024-04-19
+Name=The Big Score
+Type=Expansion
+ScryfallCode=BIG
+
+[cards]
+25 M Nexus of Becoming @Adam Volker
+26 M Sword of Wealth and Power @Dominik Mayer
+56 M Sword of Wealth and Power @Artur Nakhodkin
+64 M Sword of Wealth and Power @Artur Nakhodkin
+90 M Nexus of Becoming @Adam Volker
+91 M Sword of Wealth and Power @Dominik Mayer

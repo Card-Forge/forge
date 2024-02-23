@@ -29,6 +29,9 @@ ScryfallCode=PIP
 27 R Vault 75: Middle School @Victor Harmatiuk
 28 R Vault 101: Birthday Party @Andrea Piparo
 29 R Yes Man, Personal Securitron @Dan Murayama Scott
+32 R Jason Bright, Glowing Prophet @Tomas Duchek
+33 R Mirelurk Queen @Nicholas Gregory
+34 U Nerd Rage @Irina Nordsol
 35 R Nick Valentine, Private Eye @Viko Menezes
 36 R Piper Wright, Publick Reporter @Rafater
 37 R Radstorm @Salvatorre Zee Yazzie
@@ -38,8 +41,10 @@ ScryfallCode=PIP
 43 U Butch DeLoria, Tunnel Snake @Zuzanna Wużyk
 44 R Feral Ghoul @Sergio Cosmai
 45 R Hancock, Ghoulish Mayor @Wonchun Choi
+46 U Infesting Radroach @Loïc Canavaggia
 47 R Nuclear Fallout @Jason Rainville
 48 U Ruthless Radrat @Bruno Biazotto
+49 R Screeching Scorchbeast @Nino Is
 50 R V.A.T.S. @Diego Gisbert
 51 R Vault 12: The Necropolis @Nicholas Gregory
 52 R Wasteland Raider @Yigit Koroglu
@@ -60,18 +65,25 @@ ScryfallCode=PIP
 72 R Animal Friend @Maxim Kostin
 73 U Bighorner Rancher @Brian Valeza
 74 U Break Down @Fesbra
+75 U Cathedral Acolyte @Jeremy Paillotin
+76 U Glowing One @Liiga Smilshkalne
 77 U Gunner Conscript @Miguel Mercado
 78 R Harold and Bob, First Numens @Andrea Piparo
 79 R Lily Bowen, Raging Grandma @Villarrte
 80 U Lumbering Megasloth @Daniel Romanovsky
+81 R Power Fist @Campbell White
+82 R Rampaging Yao Guai @Christina Kraus
 83 R Strong Back @Elizabeth Peiró
+84 R Strong, the Brutish Thespian @Jason Rainville
 85 U Super Mutant Scavenger @David Astruga
+86 R Tato Farmer @Xavier Ribeiro
+87 R Watchful Radstag @Alexander Ostrowski
 88 U Well Rested @Brian Valeza
 89 R Agent Frank Horrigan @Wisnu Tan
 90 R Almost Perfect @Elizabeth Peiró
 91 R Alpha Deathclaw @Daarken
 93 R Armory Paladin @Javier Charro
-94 R Atomize
+94 R Atomize @Josu Solano
 95 R Boomer Scrapper @Xavier Ribeiro
 96 R Cait, Cage Brawler @Joseph Meehan
 97 R Cass, Hand of Vengeance @Dan Watson
@@ -83,8 +95,10 @@ ScryfallCode=PIP
 106 R Kellogg, Dangerous Mind @Josh Hass
 107 U Legate Lanius, Caesar's Ace @Bruno Biazotto
 108 R MacCready, Lamplight Mayor @Stephen Stark
+109 R Marcus, Mutant Mayor @Josu Hernaiz
 110 R Moira Brown, Guide Author @Campbell White
 111 R Mutational Advantage @Maxim Kostin
+112 U Nightkin Ambusher @Antonio José Manzanedo
 113 R The Nipton Lottery @Olivier Bernard
 114 R Paladin Elizabeth Taggerdy @Wisnu Tan
 115 U Raul, Trouble Shooter @Irina Nordsol
@@ -135,6 +149,7 @@ ScryfallCode=PIP
 172 R Single Combat @Josh Hass
 174 U Valorous Stance @Diego Gisbert
 175 R Fraying Sanity @Jason Kang
+177 R Inexorable Tide @James Bousema
 178 M Mechanized Production @Brian Valeza
 182 U Bastion of Remembrance @Pablo Mendoza
 183 R Black Market @Irina Nordsol
@@ -147,26 +162,39 @@ ScryfallCode=PIP
 191 C Sticky Fingers @Elizabeth Peiró
 192 R Stolen Strategy @Wonchun Choi
 194 C Abundant Growth @Victor Harmatiuk
-195 C Fertile Ground @Jason Kang
+195 R Branching Evolution @Tomas Duchek
+196 U Cultivate @Valera Lutfullina
+197 C Farseek @Erikas Perl
+198 C Fertile Ground @Jason Kang
 199 R Guardian Project @Mirko Failoni
 200 R Hardened Scales @Maxim Kostin
+201 U Harmonize @Javier Charro
 202 R Heroic Intervention @Josh Hass
+203 U Inspiring Call @Liiga Smilshkalne
+204 C Rampant Growth @Tomas Duchek
 205 U Rancor @Andrea Piparo
 206 U Squirrel Nest @Loïc Canavaggia
+207 R Tireless Tracker @Evyn Fong
 208 C Wild Growth @Igor Krstic
 209 R Anguished Unmaking @Javier Charro
 210 R Assemble the Legion @Bruno Biazotto
 211 U Behemoth Sledge @Campbell White
+212 R Biomass Mutation @Nicholas Gregory
+213 R Casualties of War @Samuel Perin
 215 R Fervent Charge @Aaron J. Riley
+216 R Find // Finality @Nikola Matkovic
 217 U General's Enforcer @Nino Is
 218 U Heroic Reinforcements @Daniel Romanovsky
+219 U Putrefy @Irina Nordsol
 220 R Ruinous Ultimatum @Diego Gisbert
 222 U Wear // Tear @Constantin Marin & Diego Gisbert
+223 U Winding Constrictor @Crystal Sully
 224 U Arcane Signet @Eddie Mendoza
 225 R Basilisk Collar @Artur Treffner
 226 R Bloodforged Battle-Axe @James Bousema
 227 U Brass Knuckles @Russell Lu
 228 R Champion's Helm @Bruno Biazotto
+229 U Contagion Clasp @Zuzanna Wużyk
 231 C Explorer's Scope @Michał Miłkowski
 232 U Fireshrieker @Xavier Ribeiro
 234 R Masterwork of Ingenuity @Daarken
@@ -175,8 +203,11 @@ ScryfallCode=PIP
 240 R Solemn Simulacrum @Kamila Szutenberg
 242 U Swiftfoot Boots @Zezhou Chen
 243 U Talisman of Conviction @Jason Kang
+245 U Talisman of Curiosity @Kekai Kotaki
+246 U Talisman of Dominance @Valera Lutfullina
 247 U Talisman of Hierarchy @Brian Valeza
 248 U Talisman of Indulgence @Bruno Biazotto
+250 U Talisman of Resilience @Gaboleps
 253 C Ash Barrens @Sergei Leoluch Panin
 254 U Buried Ruin @Arthur Yuan
 255 R Canopy Vista @Skinnyelbows
@@ -184,14 +215,21 @@ ScryfallCode=PIP
 257 R Cinder Glade @Nino Is
 258 R Clifftop Retreat @Samuele Bandini
 259 C Command Tower @Gabriel Tanko
+260 R Darkwater Catacombs @Victor Harmatiuk
 261 R Dragonskull Summit @Liiga Smilshkalne
+262 R Drowned Catacomb @Eddie Mendoza
 263 C Evolving Wilds @Anthony Devine
 264 R Exotic Orchard @Calder Moore
+265 R Fetid Pools @Kamila Szutenberg
+267 R Hinterland Harbor @Marco Gorlei
 269 R Isolated Chapel @Daniel Ljunggren
 270 U Jungle Shrine @Tomas Duchek
+272 C Mortuary Mire @Zuzanna Wużyk
 273 R Mossfire Valley @Nino Is
 274 U Myriad Landscape @Alexander Forssberg
+276 R Nesting Grounds @Ashley Mackenzie
 277 U Nomad Outpost @Sergei Leoluch Panin
+278 U Opulent Palace @Jonas De Ro
 279 C Path of Ancestry @Marco Gorlei
 282 U Roadside Reliquary @Arthur Yuan
 283 U Rogue's Passage @Rafater
@@ -202,17 +240,24 @@ ScryfallCode=PIP
 289 R Sheltered Thicket @Constantin Marin
 292 R Smoldering Marsh @Erikas Perl
 295 R Sungrass Prairie @Hristo D. Chukov
+296 R Sunken Hollow @Daarken
 297 R Sunpetal Grove @Eddie Mendoza
 298 U Tainted Field @Mirko Failoni
+299 U Tainted Isle @Rafater
 300 U Tainted Peak @Gabriel Tanko
+301 U Tainted Wood @Jarel Threat
 302 R Temple of Abandon @Arthur Yuan
+303 R Temple of Deceit @Pascal Quidault
+306 R Temple of Malady @Alexander Forssberg
 307 R Temple of Malice @Arthur Yuan
+308 R Temple of Mystery @Alexander Forssberg
 309 R Temple of Plenty @Jeremy Paillotin
 310 R Temple of Silence @Nino Is
 311 U Temple of the False God @Kekai Kotaki
 312 R Temple of Triumph @Josu Hernaiz
 313 C Terramorphic Expanse @Jonas De Ro
 315 R Windbrisk Heights @Anthony Devine
+316 R Woodland Cemetery @Arthur Yuan
 317 L Plains @Samuele Bandini
 318 L Plains @Constantin Marin
 319 L Island @Samuele Bandini
@@ -227,10 +272,13 @@ ScryfallCode=PIP
 328 R Securitron Squadron @Tim Brumley
 329 R Radstorm @Tim Brumley
 331 R Nuclear Fallout @James Bousema
+332 R Screeching Scorchbeast @Tomas Duchek
 333 R V.A.T.S. @Robin Olausson
 334 R Mysterious Stranger @Chad Weatherford
+335 R Watchful Radstag @Evan Shipard
 336 R Alpha Deathclaw @Robin Olausson
 337 R Armory Paladin @Chad Weatherford
+338 R Atomize @Robin Olausson
 339 M Caesar, Legion's Emperor @David Gaillet
 340 M Dogmeat, Ever Loyal @Mark Poole
 341 M Dr. Madison Li @John Stanko
@@ -238,9 +286,11 @@ ScryfallCode=PIP
 343 M The Wise Mothman @David Gaillet
 344 R Hullbreaker Horror @Tomas Duchek
 345 R Lord of the Undead @John Stanko
+346 M Grave Titan @Mark Poole
 347 R Vigor @Tomas Duchek
 348 R Ayula, Queen Among Bears @Mark Poole
 349 M Tarmogoyf @Robin Olausson
+350 R Hornet Queen @Robin Olausson
 352 R Walking Ballista @Evan Shipard
 354 M Ravages of War @AKQA
 355 U Vandalblast @AKQA
@@ -258,7 +308,11 @@ ScryfallCode=PIP
 369 R Pre-War Formalwear @Josu Hernaiz
 372 R Sierra, Nuka's Biggest Fan @Anna Podedworna
 373 R Yes Man, Personal Securitron @Dan Murayama Scott
+376 R Jason Bright, Glowing Prophet @Tomas Duchek
+377 R Mirelurk Queen @Nicholas Gregory
 378 R Nick Valentine, Private Eye @Viko Menezes
+379 R Piper Wright, Publick Reporter @Rafater
+380 R Struggle for Project Purity @Billy Christian
 381 R Feral Ghoul @Sergio Cosmai
 382 R Hancock, Ghoulish Mayor @Wonchun Choi
 383 R Wasteland Raider @Yigit Koroglu
@@ -272,8 +326,13 @@ ScryfallCode=PIP
 395 R Veronica, Dissident Scribe @Pascal Quidault
 396 R Wild Wasteland @Mathias Kollros
 397 R Animal Friend @Maxim Kostin
+398 R Harold and Bob, First Numens @Andrea Piparo
 399 R Lily Bowen, Raging Grandma @Villarrte
+400 R Power Fist @Campbell White
+401 R Rampaging Yao Guai @Christina Kraus
 402 R Strong Back @Elizabeth Peiró
+403 R Strong, the Brutish Thespian @Jason Rainville
+404 R Tato Farmer @Xavier Ribeiro
 405 R Agent Frank Horrigan @Wisnu Tan
 406 R Almost Perfect @Elizabeth Peiró
 408 R Boomer Scrapper @Xavier Ribeiro
@@ -285,8 +344,11 @@ ScryfallCode=PIP
 415 R Kellogg, Dangerous Mind @Josh Hass
 416 M Liberty Prime, Recharged @Pascal Quidault
 417 R MacCready, Lamplight Mayor @Stephen Stark
+418 R Marcus, Mutant Mayor @Josu Hernaiz
+419 M The Master, Transcendent @Javier Charro
 420 R Moira Brown, Guide Author @Campbell White
 421 M Mr. House, President and CEO @Joseph Meehan
+422 R Mutational Advantage @Maxim Kostin
 423 R The Nipton Lottery @Olivier Bernard
 424 R Paladin Elizabeth Taggerdy @Wisnu Tan
 425 M Preston Garvey, Minuteman @Leonardo Borazio
@@ -296,13 +358,16 @@ ScryfallCode=PIP
 433 R Mister Gutsy @Zezhou Chen
 434 R Nuka-Nuke Launcher @Uriah Voth
 435 R Pip-Boy 3000 @Mirko Failoni
+436 R Recon Craft Theta @Jarel Threat
 437 R T-45 Power Armor @Diego Gisbert
 438 R Desolate Mire @Tomáš Honz
 439 R Diamond City @Pascal Quidault
 440 R Ferrous Lake @Hristo D. Chukov
 442 R Junktown @Calder Moore
+443 R Mariposa Military Base @Alexander Forssberg
 444 R Overflowing Basin @Marina Ortega Lorente
 445 R Sunscorched Divide @Zezhou Chen
+446 R Viridescent Bog @Rafater
 448 R Captain of the Watch @Jonas De Ro
 449 R Entrapment Maneuver @Nicholas Gregory
 450 R Hour of Reckoning @Jason Kang
@@ -313,6 +378,7 @@ ScryfallCode=PIP
 456 R Puresteel Paladin @Daarken
 457 R Secure the Wastes @Viko Menezes
 458 R Single Combat @Josh Hass
+459 R Fraying Sanity @Jason Kang
 460 R Inexorable Tide @James Bousema
 461 M Mechanized Production @Brian Valeza
 463 R Black Market @Irina Nordsol
@@ -320,10 +386,14 @@ ScryfallCode=PIP
 465 R Blasphemous Act @Chris Cold
 466 R Chaos Warp @Justine Cruz
 467 R Stolen Strategy @Wonchun Choi
+468 R Branching Evolution @Tomas Duchek
 469 R Guardian Project @Mirko Failoni
+470 R Hardened Scales @Maxim Kostin
 471 R Heroic Intervention @Josh Hass
+472 R Tireless Tracker @Evyn Fong
 473 R Anguished Unmaking @Javier Charro
 474 R Assemble the Legion @Bruno Biazotto
+475 R Biomass Mutation @Nicholas Gregory
 476 R Casualties of War @Samuel Perin
 477 R Fervent Charge @Aaron J. Riley
 478 R Ruinous Ultimatum @Diego Gisbert
@@ -336,10 +406,15 @@ ScryfallCode=PIP
 489 R Canyon Slough @Anthony Devine
 490 R Cinder Glade @Nino Is
 491 R Clifftop Retreat @Samuele Bandini
+492 R Darkwater Catacombs @Victor Harmatiuk
 493 R Dragonskull Summit @Liiga Smilshkalne
+494 R Drowned Catacomb @Eddie Mendoza
 495 R Exotic Orchard @Calder Moore
+496 R Fetid Pools @Kamila Szutenberg
+498 R Hinterland Harbor @Marco Gorlei
 500 R Isolated Chapel @Daniel Ljunggren
 501 R Mossfire Valley @Nino Is
+502 R Nesting Grounds @Ashley Mackenzie
 504 R Rootbound Crag @Samuele Bandini
 505 R Scattered Groves @Pablo Mendoza
 506 R Scavenger Grounds @Jonas De Ro
@@ -347,18 +422,23 @@ ScryfallCode=PIP
 508 R Sheltered Thicket @Constantin Marin
 510 R Smoldering Marsh @Erikas Perl
 513 R Sungrass Prairie @Hristo D. Chukov
+514 R Sunken Hollow @Daarken
 515 R Sunpetal Grove @Eddie Mendoza
 516 R Temple of Abandon @Arthur Yuan
+517 R Temple of Deceit @Pascal Quidault
 521 R Temple of Malice @Arthur Yuan
+522 R Temple of Mystery @Alexander Forssberg
 523 R Temple of Plenty @Jeremy Paillotin
 524 R Temple of Silence @Nino Is
 525 R Temple of Triumph @Josu Hernaiz
 527 R Windbrisk Heights @Anthony Devine
+528 R Woodland Cemetery @Arthur Yuan
 529 M Caesar, Legion's Emperor @Alexander Gering
 530 M Dogmeat, Ever Loyal @Kieran Yanner
 531 M Dr. Madison Li @Zuzanna Wużyk
 532 M The Wise Mothman @Sergei Leoluch Panin
 533 M Liberty Prime, Recharged @Pascal Quidault
+534 M The Master, Transcendent @Javier Charro
 535 M Mr. House, President and CEO @Joseph Meehan
 536 M Preston Garvey, Minuteman @Leonardo Borazio
 537 R Aradesh, the Founder @Campbell White
@@ -374,14 +454,23 @@ ScryfallCode=PIP
 553 R Sierra, Nuka's Biggest Fan @Anna Podedworna
 555 R Vault 75: Middle School @Victor Harmatiuk
 557 R Yes Man, Personal Securitron @Dan Murayama Scott
+560 R Jason Bright, Glowing Prophet @Tomas Duchek
+561 R Mirelurk Queen @Nicholas Gregory
 563 R Nick Valentine, Private Eye @Viko Menezes
+564 R Piper Wright, Publick Reporter @Rafater
 565 R Radstorm @Salvatorre Zee Yazzie
+567 R Struggle for Project Purity @Billy Christian
+569 U Vexing Radgull @Josu Solano
+570 U Bloatfly Swarm @Igor Krstic
 571 U Butch DeLoria, Tunnel Snake @Zuzanna Wużyk
 572 R Feral Ghoul @Sergio Cosmai
 573 R Hancock, Ghoulish Mayor @Wonchun Choi
+574 U Infesting Radroach @Loïc Canavaggia
 575 R Nuclear Fallout @Jason Rainville
 576 U Ruthless Radrat @Bruno Biazotto
+577 R Screeching Scorchbeast @Nino Is
 578 R V.A.T.S. @Diego Gisbert
+579 R Vault 12: The Necropolis @Nicholas Gregory
 580 R Wasteland Raider @Yigit Koroglu
 581 U Acquired Mutation @Xavier Ribeiro
 584 U Crimson Caravaneer @Nicholas Gregory
@@ -400,14 +489,24 @@ ScryfallCode=PIP
 600 R Animal Friend @Maxim Kostin
 601 U Bighorner Rancher @Brian Valeza
 602 U Break Down @Fesbra
+603 U Cathedral Acolyte @Jeremy Paillotin
+604 U Glowing One @Liiga Smilshkalne
 605 U Gunner Conscript @Miguel Mercado
+606 R Harold and Bob, First Numens @Andrea Piparo
+607 R Lily Bowen, Raging Grandma @Villarrte
+608 U Lumbering Megasloth @Daniel Romanovsky
+609 R Power Fist @Campbell White
+610 R Rampaging Yao Guai @Christina Kraus
 611 R Strong Back @Elizabeth Peiró
+612 R Strong, the Brutish Thespian @Jason Rainville
 613 U Super Mutant Scavenger @David Astruga
+614 R Tato Farmer @Xavier Ribeiro
 615 R Watchful Radstag @Alexander Ostrowski
 616 U Well Rested @Brian Valeza
 617 R Agent Frank Horrigan @Wisnu Tan
 618 R Almost Perfect @Elizabeth Peiró
 621 R Armory Paladin @Javier Charro
+622 R Atomize @Josu Solano
 623 R Boomer Scrapper @Xavier Ribeiro
 624 R Cait, Cage Brawler @Joseph Meehan
 625 R Cass, Hand of Vengeance @Dan Watson
@@ -419,14 +518,20 @@ ScryfallCode=PIP
 634 R Kellogg, Dangerous Mind @Josh Hass
 635 U Legate Lanius, Caesar's Ace @Bruno Biazotto
 636 R MacCready, Lamplight Mayor @Stephen Stark
+637 R Marcus, Mutant Mayor @Josu Hernaiz
 638 R Moira Brown, Guide Author @Campbell White
+639 R Mutational Advantage @Maxim Kostin
+640 U Nightkin Ambusher @Antonio José Manzanedo
 641 R The Nipton Lottery @Olivier Bernard
 642 R Paladin Elizabeth Taggerdy @Wisnu Tan
+643 U Raul, Trouble Shooter @Irina Nordsol
 645 R Rex, Cyber-Hound @Jeremy Paillotin
 648 R Three Dog, Galaxy News DJ @Elizabeth Peiró
 649 R Vault 11: Voter's Dilemma @Kieran Yanner
+650 R Vault 87: Forced Evolution @Nicholas Gregory
 651 R Vault 112: Sadistic Simulation @Anton Solovianchyk
 652 U White Glove Gourmand @Wonchun Choi
+653 U Young Deathclaws @Nino Is
 654 U Agility Bobblehead @Daarken
 657 U C.A.M.P. @Tomas Duchek
 658 U Charisma Bobblehead @Michał Miłkowski
@@ -435,17 +540,22 @@ ScryfallCode=PIP
 663 U Luck Bobblehead @Ørjan Ruttenborg Svendsen
 664 R Mister Gutsy @Zezhou Chen
 665 U Nuka-Cola Vending Machine @Anthony Devine
+666 R Nuka-Nuke Launcher @Uriah Voth
 667 U Perception Bobblehead @Marina Ortega Lorente
 668 R Pip-Boy 3000 @Mirko Failoni
+669 R Recon Craft Theta @Jarel Threat
 670 U Silver Shroud Costume @Zuzanna Wużyk
+671 U Strength Bobblehead @Nikola Matkovic
 672 U Survivor's Med Kit @Valera Lutfullina
 673 R T-45 Power Armor @Diego Gisbert
 674 R Desolate Mire @Tomáš Honz
 675 R Diamond City @Pascal Quidault
 676 R Ferrous Lake @Hristo D. Chukov
 678 R Junktown @Calder Moore
+679 R Mariposa Military Base @Alexander Forssberg
 680 R Overflowing Basin @Marina Ortega Lorente
 681 R Sunscorched Divide @Zezhou Chen
+682 R Viridescent Bog @Rafater
 683 C All That Glitters @Iain McCaig
 685 R Captain of the Watch @Jonas De Ro
 688 R Entrapment Maneuver @Nicholas Gregory
@@ -462,6 +572,7 @@ ScryfallCode=PIP
 699 R Secure the Wastes @Viko Menezes
 700 R Single Combat @Josh Hass
 702 U Valorous Stance @Diego Gisbert
+703 R Fraying Sanity @Jason Kang
 705 R Inexorable Tide @James Bousema
 706 M Mechanized Production @Brian Valeza
 710 U Bastion of Remembrance @Pablo Mendoza
@@ -475,11 +586,19 @@ ScryfallCode=PIP
 719 C Sticky Fingers @Elizabeth Peiró
 720 R Stolen Strategy @Wonchun Choi
 722 C Abundant Growth @Victor Harmatiuk
+723 R Branching Evolution @Tomas Duchek
+724 U Cultivate @Valera Lutfullina
+725 C Farseek @Erikas Perl
 726 C Fertile Ground @Jason Kang
 727 R Guardian Project @Mirko Failoni
+728 R Hardened Scales @Maxim Kostin
+729 U Harmonize @Javier Charro
 730 R Heroic Intervention @Josh Hass
+731 U Inspiring Call @Liiga Smilshkalne
+732 C Rampant Growth @Tomas Duchek
 733 U Rancor @Andrea Piparo
 734 U Squirrel Nest @Loïc Canavaggia
+735 R Tireless Tracker @Evyn Fong
 736 C Wild Growth @Igor Krstic
 737 R Anguished Unmaking @Javier Charro
 738 R Assemble the Legion @Bruno Biazotto
@@ -488,16 +607,19 @@ ScryfallCode=PIP
 741 R Casualties of War @Samuel Perin
 742 U Corpsejack Menace @Russell Lu
 743 R Fervent Charge @Aaron J. Riley
+744 R Find // Finality @Nikola Matkovic
 745 U General's Enforcer @Nino Is
 746 U Heroic Reinforcements @Daniel Romanovsky
 747 U Putrefy @Irina Nordsol
 748 R Ruinous Ultimatum @Diego Gisbert
 750 U Wear // Tear @Constantin Marin & Diego Gisbert
+751 U Winding Constrictor @Crystal Sully
 752 U Arcane Signet @Eddie Mendoza
 753 R Basilisk Collar @Artur Treffner
 754 R Bloodforged Battle-Axe @James Bousema
 755 U Brass Knuckles @Russell Lu
 756 R Champion's Helm @Bruno Biazotto
+757 U Contagion Clasp @Zuzanna Wużyk
 759 C Explorer's Scope @Michał Miłkowski
 760 U Fireshrieker @Xavier Ribeiro
 762 R Masterwork of Ingenuity @Daarken
@@ -505,8 +627,11 @@ ScryfallCode=PIP
 767 U Sol Ring @Aaron J. Riley
 768 R Solemn Simulacrum @Kamila Szutenberg
 771 U Talisman of Conviction @Jason Kang
+773 U Talisman of Curiosity @Kekai Kotaki
+774 U Talisman of Dominance @Valera Lutfullina
 775 U Talisman of Hierarchy @Brian Valeza
 776 U Talisman of Indulgence @Bruno Biazotto
+778 U Talisman of Resilience @Gaboleps
 781 C Ash Barrens @Sergei Leoluch Panin
 782 U Buried Ruin @Arthur Yuan
 783 R Canopy Vista @Skinnyelbows
@@ -514,15 +639,22 @@ ScryfallCode=PIP
 785 R Cinder Glade @Nino Is
 786 R Clifftop Retreat @Samuele Bandini
 787 C Command Tower @Gabriel Tanko
+788 R Darkwater Catacombs @Victor Harmatiuk
 789 R Dragonskull Summit @Liiga Smilshkalne
+790 R Drowned Catacomb @Eddie Mendoza
 791 C Evolving Wilds @Anthony Devine
 792 R Exotic Orchard @Calder Moore
+793 R Fetid Pools @Kamila Szutenberg
+795 R Hinterland Harbor @Marco Gorlei
 797 R Isolated Chapel @Daniel Ljunggren
 798 U Jungle Shrine @Tomas Duchek
 799 C Memorial to Glory @Kim Sokol
+800 C Mortuary Mire @Zuzanna Wużyk
 801 R Mossfire Valley @Nino Is
 802 U Myriad Landscape @Alexander Forssberg
+804 R Nesting Grounds @Ashley Mackenzie
 805 U Nomad Outpost @Sergei Leoluch Panin
+806 U Opulent Palace @Jonas De Ro
 807 C Path of Ancestry @Marco Gorlei
 810 U Roadside Reliquary @Arthur Yuan
 811 U Rogue's Passage @Rafater
@@ -533,17 +665,24 @@ ScryfallCode=PIP
 817 R Sheltered Thicket @Constantin Marin
 820 R Smoldering Marsh @Erikas Perl
 823 R Sungrass Prairie @Hristo D. Chukov
+824 R Sunken Hollow @Daarken
 825 R Sunpetal Grove @Eddie Mendoza
 826 U Tainted Field @Mirko Failoni
+827 U Tainted Isle @Rafater
 828 U Tainted Peak @Gabriel Tanko
+829 U Tainted Wood @Jarel Threat
 830 R Temple of Abandon @Arthur Yuan
+831 R Temple of Deceit @Pascal Quidault
+834 R Temple of Malady @Alexander Forssberg
 835 R Temple of Malice @Arthur Yuan
+836 R Temple of Mystery @Alexander Forssberg
 837 R Temple of Plenty @Jeremy Paillotin
 838 R Temple of Silence @Nino Is
 839 U Temple of the False God @Kekai Kotaki
 840 R Temple of Triumph @Josu Hernaiz
 841 C Terramorphic Expanse @Jonas De Ro
 843 R Windbrisk Heights @Anthony Devine
+844 R Woodland Cemetery @Arthur Yuan
 845 L Plains @Samuele Bandini
 846 L Plains @Constantin Marin
 847 L Island @Samuele Bandini
@@ -557,6 +696,7 @@ ScryfallCode=PIP
 856 R Securitron Squadron @Tim Brumley
 857 R Radstorm @Tim Brumley
 859 R Nuclear Fallout @James Bousema
+860 R Screeching Scorchbeast @Tomas Duchek
 861 R V.A.T.S.
 862 R Mysterious Stranger @Chad Weatherford
 863 R Watchful Radstag @Evan Shipard
@@ -569,6 +709,7 @@ ScryfallCode=PIP
 871 M The Wise Mothman @David Gaillet
 872 R Hullbreaker Horror @Tomas Duchek
 873 R Lord of the Undead @John Stanko
+874 M Grave Titan @Mark Poole
 875 R Vigor @Tomas Duchek
 876 R Ayula, Queen Among Bears @Mark Poole
 877 M Tarmogoyf @Robin Olausson
@@ -589,7 +730,11 @@ ScryfallCode=PIP
 897 R Pre-War Formalwear @Josu Hernaiz
 900 R Sierra, Nuka's Biggest Fan @Anna Podedworna
 901 R Yes Man, Personal Securitron @Dan Murayama Scott
+904 R Jason Bright, Glowing Prophet @Tomas Duchek
+905 R Mirelurk Queen @Nicholas Gregory
 906 R Nick Valentine, Private Eye @Viko Menezes
+907 R Piper Wright, Publick Reporter @Rafater
+908 R Struggle for Project Purity @Billy Christian
 909 R Feral Ghoul @Sergio Cosmai
 910 R Hancock, Ghoulish Mayor @Wonchun Choi
 911 R Wasteland Raider @Yigit Koroglu
@@ -604,7 +749,12 @@ ScryfallCode=PIP
 924 R Wild Wasteland @Mathias Kollros
 925 R Animal Friend @Maxim Kostin
 926 R Harold and Bob, First Numens @Andrea Piparo
+927 R Lily Bowen, Raging Grandma @Villarrte
+928 R Power Fist @Campbell White
+929 R Rampaging Yao Guai @Christina Kraus
 930 R Strong Back @Elizabeth Peiró
+931 R Strong, the Brutish Thespian @Jason Rainville
+932 R Tato Farmer @Xavier Ribeiro
 933 R Agent Frank Horrigan @Wisnu Tan
 934 R Almost Perfect @Elizabeth Peiró
 936 R Boomer Scrapper @Xavier Ribeiro
@@ -616,9 +766,11 @@ ScryfallCode=PIP
 943 R Kellogg, Dangerous Mind @Josh Hass
 944 M Liberty Prime, Recharged @Pascal Quidault
 945 R MacCready, Lamplight Mayor @Stephen Stark
+946 R Marcus, Mutant Mayor @Josu Hernaiz
 947 M The Master, Transcendent @Javier Charro
 948 R Moira Brown, Guide Author @Campbell White
 949 M Mr. House, President and CEO @Joseph Meehan
+950 R Mutational Advantage @Maxim Kostin
 951 R The Nipton Lottery @Olivier Bernard
 952 R Paladin Elizabeth Taggerdy @Wisnu Tan
 953 M Preston Garvey, Minuteman @Leonardo Borazio
@@ -626,14 +778,18 @@ ScryfallCode=PIP
 958 R Three Dog, Galaxy News DJ @Elizabeth Peiró
 960 R ED-E, Lonesome Eyebot @Leanna Crossan
 961 R Mister Gutsy @Zezhou Chen
+962 R Nuka-Nuke Launcher @Uriah Voth
 963 R Pip-Boy 3000 @Mirko Failoni
+964 R Recon Craft Theta @Jarel Threat
 965 R T-45 Power Armor @Diego Gisbert
 966 R Desolate Mire @Tomáš Honz
 967 R Diamond City @Pascal Quidault
 968 R Ferrous Lake @Hristo D. Chukov
 970 R Junktown @Calder Moore
+971 R Mariposa Military Base @Alexander Forssberg
 972 R Overflowing Basin @Marina Ortega Lorente
 973 R Sunscorched Divide @Zezhou Chen
+974 R Viridescent Bog @Rafater
 976 R Captain of the Watch @Jonas De Ro
 977 R Entrapment Maneuver @Nicholas Gregory
 978 R Hour of Reckoning @Jason Kang
@@ -645,17 +801,23 @@ ScryfallCode=PIP
 984 R Puresteel Paladin @Daarken
 985 R Secure the Wastes @Viko Menezes
 986 R Single Combat @Josh Hass
+987 R Fraying Sanity @Jason Kang
+988 R Inexorable Tide @James Bousema
 989 M Mechanized Production @Brian Valeza
 991 R Black Market @Irina Nordsol
 992 R Lethal Scheme @Mirko Failoni
 993 R Blasphemous Act @Chris Cold
 994 R Chaos Warp @Justine Cruz
 995 R Stolen Strategy @Wonchun Choi
+996 R Branching Evolution @Tomas Duchek
 997 R Guardian Project @Mirko Failoni
+998 R Hardened Scales @Maxim Kostin
 999 R Heroic Intervention @Josh Hass
+1000 R Tireless Tracker @Evyn Fong
 1001 R Anguished Unmaking @Javier Charro
 1002 R Assemble the Legion @Bruno Biazotto
 1003 R Biomass Mutation @Nicholas Gregory
+1004 R Casualties of War @Samuel Perin
 1005 R Fervent Charge @Aaron J. Riley
 1006 R Ruinous Ultimatum @Diego Gisbert
 1008 R Basilisk Collar @Artur Treffner
@@ -667,10 +829,15 @@ ScryfallCode=PIP
 1017 R Canyon Slough @Anthony Devine
 1018 R Cinder Glade @Nino Is
 1019 R Clifftop Retreat @Samuele Bandini
+1020 R Darkwater Catacombs @Victor Harmatiuk
 1021 R Dragonskull Summit @Liiga Smilshkalne
+1022 R Drowned Catacomb @Eddie Mendoza
 1023 R Exotic Orchard @Calder Moore
+1024 R Fetid Pools @Kamila Szutenberg
+1026 R Hinterland Harbor @Marco Gorlei
 1028 R Isolated Chapel @Daniel Ljunggren
 1029 R Mossfire Valley @Nino Is
+1030 R Nesting Grounds @Ashley Mackenzie
 1032 R Rootbound Crag @Samuele Bandini
 1033 R Scattered Groves @Pablo Mendoza
 1034 R Scavenger Grounds @Jonas De Ro
@@ -678,13 +845,18 @@ ScryfallCode=PIP
 1036 R Sheltered Thicket @Constantin Marin
 1038 R Smoldering Marsh @Erikas Perl
 1041 R Sungrass Prairie @Hristo D. Chukov
+1042 R Sunken Hollow @Daarken
 1043 R Sunpetal Grove @Eddie Mendoza
 1044 R Temple of Abandon @Arthur Yuan
+1045 R Temple of Deceit @Pascal Quidault
+1048 R Temple of Malady @Alexander Forssberg
 1049 R Temple of Malice @Arthur Yuan
+1050 R Temple of Mystery @Alexander Forssberg
 1051 R Temple of Plenty @Jeremy Paillotin
 1052 R Temple of Silence @Nino Is
 1053 R Temple of Triumph @Josu Hernaiz
 1055 R Windbrisk Heights @Anthony Devine
+1056 R Woodland Cemetery @Arthur Yuan
 1059 U Endurance Bobblehead @Alex Brock
 1060 U Charisma Bobblehead @Michał Miłkowski
 1061 U Intelligence Bobblehead @Torgeir Fjereide
