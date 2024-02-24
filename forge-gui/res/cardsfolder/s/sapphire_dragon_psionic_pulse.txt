@@ -6,9 +6,9 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks or blocks, scry 2.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigScry | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, scry 2.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
-AlternateMode:Adventure
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
+AlternateMode:Adventure
 Oracle:Flying\nWhenever Sapphire Dragon attacks or blocks, scry 2.
 
 ALTERNATE
