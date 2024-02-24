@@ -1,7 +1,7 @@
 Name:Flowering of the White Tree
 ManaCost:W W
 Types:Legendary Enchantment
-S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Ward:1  | Description$ Legendary creatures you control get +2/+1 and have ward {1}.
+S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Ward:1 | Description$ Legendary creatures you control get +2/+1 and have ward {1}.
 S:Mode$ Continuous | Affected$ Creature.nonLegendary+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Nonlegendary creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Legendary
