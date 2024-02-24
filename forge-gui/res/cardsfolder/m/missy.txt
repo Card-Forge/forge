@@ -3,7 +3,7 @@ ManaCost:3 U B R
 Types:Legendary Creature Time Lord Rogue
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonArtifact+Other | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever another nonartifact creature dies, return it to the battlefield under your control face down and tapped. It's a 2/2 Cyberman artifact creature.
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard  | GainControl$ True | FaceDown$ True | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | FaceDownSetType$ Artifact & Creature & Cyberman | FaceDownPower$ 2 | FaceDownToughness$ 2
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ TriggeredCard | GainControl$ True | FaceDown$ True | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | FaceDownSetType$ Artifact & Creature & Cyberman | FaceDownPower$ 2 | FaceDownToughness$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ VillainousChoice | TriggerDescription$ At the beginning of your end step, each opponent faces a villainous choice — Each artifact creature you control deals 1 damage to that opponent, or you draw a card and chaos ensues.
 SVar:VillainousChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBDamage,DBDraw
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 1 | DamageSource$ Valid Artifact.Creature+YouCtrl | Defined$ Remembered | SpellDescription$ Each artifact creature you control deals 1 damage to that opponent

@@ -3,7 +3,7 @@ ManaCost:1 B G
 Types:Creature Phyrexian Ooze
 PT:3/3
 K:Trample
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard  | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME dies, conjure a card named Mephidross Slime into your graveyard. Perpetually double the power and toughness of CARDNAME and that card, then shuffle them into their owner's library.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigConjure | TriggerDescription$ Whenever CARDNAME dies, conjure a card named Mephidross Slime into your graveyard. Perpetually double the power and toughness of CARDNAME and that card, then shuffle them into their owner's library.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mephidross Slime | Amount$ 1 | Zone$ Graveyard | RememberMade$ True | SubAbility$ DBRemember
 SVar:DBRemember:DB$ Pump | RememberObjects$ TriggeredCardLKICopy | SubAbility$ DBDouble
 SVar:DBDouble:DB$ Pump | PumpZone$ Graveyard | Defined$ Remembered | NumAtt$ Double | NumDef$ Double | Duration$ Perpetual | SubAbility$ DBShuffle
