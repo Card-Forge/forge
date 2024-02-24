@@ -1133,7 +1133,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (toGrave != null) {
                 for (Card c : toGrave) {
                     Card moved = getGame().getAction().moveToGraveyard(c, cause, params);
-                    moved.setSurveilledThisTurn(true);
+                    moved.setSurveilled(true);
                     numToGrave++;
                 }
             }
@@ -1642,7 +1642,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         for (Card m : milled) {
-            game.getAction().moveTo(destination, m, sa, params);
+            Card moved = game.getAction().moveTo(destination, m, sa, params);
+            moved.setMilled(true);
         }
 
         // MilledAll trigger

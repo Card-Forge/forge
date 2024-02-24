@@ -403,9 +403,6 @@ public class PhaseHandler implements java.io.Serializable {
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                         c.onCleanupPhase(playerTurn);
                     }
-                    for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Graveyard)) {
-                        c.onCleanupPhase(playerTurn);
-                    }
 
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
