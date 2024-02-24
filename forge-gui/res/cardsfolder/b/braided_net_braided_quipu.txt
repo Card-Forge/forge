@@ -6,9 +6,9 @@ A:AB$ Tap | Cost$ T SubCounter<1/NET> | ValidTgts$ Permanent.Other+nonLand | Tgt
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ CantActivate | ForgetOnMoved$ Battlefield | Duration$ UntilTargetedUntaps | SpellDescription$ Its activated abilities can't be activated for as long as it remains tapped.
 SVar:CantActivate:Mode$ CantBeActivated | ValidCard$ Card.IsRemembered | ValidSA$ Activated | Description$ Its activated abilities can't be activated for as long as it remains tapped.
 K:Craft:1 U ExileCtrlOrGrave<1/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice & Type$Artifact
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Braided Net enters the battlefield with three net counters on it.\n{T}, Remove a net counter from Braided Net: Tap another target nonland permanent. Its activated abilities can't be activated for as long as it remains tapped.\nCraft with artifact {1}{U}
 
 ALTERNATE
