@@ -4,9 +4,9 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card of your choice from the Three Pigs spellbook onto the battlefield.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Spellbook$ First Little Pig,Second Little Pig,Third Little Pig | Zone$ Battlefield
 S:Mode$ Continuous | Affected$ Boar.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Boars you control get +1/+1.
-AlternateMode:Adventure
 DeckHints:Type$Boar
 DeckHas:Ability$LifeGain
+AlternateMode:Adventure
 Oracle:When Porcine Portent enters the battlefield, conjure a card of your choice from the Three Pigs spellbook onto the battlefield.\nBoars you control get +1/+1.
 
 ALTERNATE
