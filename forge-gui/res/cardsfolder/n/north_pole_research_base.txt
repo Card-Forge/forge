@@ -8,6 +8,6 @@ T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescri
 SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_alien | TokenOwner$ You | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigTap | TriggerDescription$ When you do, tap target nontoken creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.nonToken+OppCtrl | TgtPrompt$ Select target nontoken creature an opponent controls | SubAbility$ DBCounter
-SVar:DBCounter:DB$ PutCounter | Defined$ Targeted  | CounterType$ Stun | CounterNum$ 1
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure|Alien
 Oracle:At the beginning of your upkeep, target opponent draws a card and creates a Treasure token.\nWhenever chaos ensues, create a 2/2 white Alien creature token. When you do, tap target nontoken creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
