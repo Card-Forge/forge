@@ -7,9 +7,9 @@ SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChan
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Artifact.IsRemembered | SelectPrompt$ You may put an artifact card from among them into your hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Craft:4 ExileCtrlOrGrave<6/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Mill|Graveyard|Token
+AlternateMode:DoubleFaced
 Oracle:Whenever Tetzin or another double-faced artifact enters the battlefield under your control, mill three cards. You may put an artifact card from among them into your hand.\nCraft with six artifacts {4} ({4}, Exile this artifact, Exile the six from among other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control.)
 
 ALTERNATE

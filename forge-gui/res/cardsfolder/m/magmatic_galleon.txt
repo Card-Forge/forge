@@ -8,4 +8,3 @@ T:Mode$ ExcessDamageAll | ValidTarget$ Creature.OppCtrl | CombatDamage$ False | 
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 K:Crew:2
 Oracle:When Magmatic Galleon enters the battlefield, it deals 5 damage to target creature an opponent controls.\nWhenever one or more creatures your opponents control are dealt excess noncombat damage, create a Treasure token.\nCrew 2
-

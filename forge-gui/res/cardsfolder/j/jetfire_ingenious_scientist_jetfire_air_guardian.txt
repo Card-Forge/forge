@@ -7,9 +7,9 @@ K:Flying
 A:AB$ Mana | Cost$ RemoveAnyCounter<X1+/P1P1/Artifact.YouCtrl/among artifacts you control> | XMin$ 1 | ValidTgts$ Player | Produced$ C | Amount$ X | AmountDesc$ for each counter removed | RestrictValid$ CantCastNonArtifactSpells | SubAbility$ DBConvert | SpellDescription$ Target player adds that much {C}. This mana can't be spent to cast nonartifact spells.
 SVar:DBConvert:DB$ SetState | Mode$ Transform | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
 SVar:X:Count$xPaid
-AlternateMode:DoubleFaced
 AI:RemoveDeck:All
 DeckHints:Ability$Counters & Keyword$Adapt|Modular
+AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {3}{U} (You may cast this card converted for {3}{U}.)\nFlying\nRemove one or more +1/+1 counters from among artifacts you control: Target player adds that much {C}. This mana can't be spent to cast nonartifact spells. Convert Jetfire.
 
 ALTERNATE

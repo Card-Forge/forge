@@ -2,8 +2,8 @@ Name:Fuss
 ManaCost:2 RW
 Types:Instant
 A:SP$ PutCounterAll | ValidCards$ Creature.attacking+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each attacking creature you control.
-AlternateMode:Split
 DeckHas:Ability$Counters|Token|Graveyard & Type$Artifact|Thopter
+AlternateMode:Split
 Oracle:Put a +1/+1 counter on each attacking creature you control.
 
 ALTERNATE

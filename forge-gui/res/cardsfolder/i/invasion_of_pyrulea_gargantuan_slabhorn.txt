@@ -16,8 +16,8 @@ Name:Gargantuan Slabhorn
 ManaCost:no cost
 Colors:blue,green
 Types:Creature Beast
+PT:4/4
 K:Trample
 K:Ward:2
-PT:4/4
 S:Mode$ Continuous | Affected$ Permanent.Transformed+Other+YouCtrl | AddKeyword$ Trample & Ward:2 | Description$ Other transformed permanents you control have trample and ward {2}.
 Oracle:Trample, ward {2}\nOther transformed permanents you control have trample and ward {2}.

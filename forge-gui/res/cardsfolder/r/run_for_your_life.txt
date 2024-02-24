@@ -7,4 +7,4 @@ SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBloc
 K:Escape:2 U R ExileFromGrave<4/Card.Other/other>
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Graveyard|Mill
-Oracle:One or two target creatures each gain haste until end of turn. They can’t be blocked this turn except by creatures with haste.\nEscape—{2}{U}{R}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)
+Oracle:One or two target creatures each gain haste until end of turn. They can't be blocked this turn except by creatures with haste.\nEscape—{2}{U}{R}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

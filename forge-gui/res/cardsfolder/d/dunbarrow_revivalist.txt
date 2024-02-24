@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Warlock
 PT:3/1
 K:Bargain
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon |  TriggerDescription$ When CARDNAME enters the battlefield, you get a one-time boon with "When one or more creatures enter the battlefield under your control, create a Wicked Role token attached to one of them." Then if CARDNAME was bargained, return a creature card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a one-time boon with "When one or more creatures enter the battlefield under your control, create a Wicked Role token attached to one of them." Then if CARDNAME was bargained, return a creature card from your graveyard to your hand.
 SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ ChangeZoneTrig | SubAbility$ DBBargained
 SVar:ChangeZoneTrig:Mode$ ChangesZoneAll | ValidCards$ Creature.YouCtrl | Destination$ Battlefield | TriggerZones$ Command | Execute$ TrigChoose | TriggerDescription$ When one or more creatures enter the battlefield under your control, create a Wicked Role token attached to one of them.
 SVar:TrigChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.TriggeredCards | ChoiceTitle$ Choose one of the cards that entered the battlefield | Mandatory$ True | SubAbility$ DBToken

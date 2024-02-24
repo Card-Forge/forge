@@ -17,4 +17,4 @@ SVar:Z:Remembered$CardManaCost
 Text:CARDNAME can be your commander.
 DeckHas:Ability$Token & Type$Faerie|Dragon
 DeckHints:Type$Instant|Sorcery
-Oracle:Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.\n+2: Draw a card, then scry 2.\n−3: Exile the top card of your library. Create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to that card's mana value.\nElminster can be your commander.
+Oracle:Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.\n+2: Draw a card, then scry 2.\n-3: Exile the top card of your library. Create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to that card's mana value.\nElminster can be your commander.

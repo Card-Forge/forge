@@ -1,4 +1,5 @@
 Name:The Fertile Lands of Saulvinia
+ManaCost:no cost
 Types:Plane Antausia
 T:Mode$ TapsForMana | ValidCard$ Land | Execute$ AddMana | TriggerZones$ Command | Static$ True | TriggerDescription$ Whenever a player taps a land for mana, that player adds one mana of any type that land produced.
 SVar:AddMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredActivator

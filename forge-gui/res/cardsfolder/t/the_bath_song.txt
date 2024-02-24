@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Chapter:3:DBDraw,DBDraw,DBShuffle
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-SVar:DBShuffle:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X |  Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBAdd | TgtPrompt$ Choose any target cards in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Shuffle any number of target cards from your graveyard into your library. Add {U}{U}.
+SVar:DBShuffle:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBAdd | TgtPrompt$ Choose any target cards in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Shuffle any number of target cards from your graveyard into your library. Add {U}{U}.
 SVar:DBAdd:DB$ Mana | Produced$ U | Amount$ 2
 SVar:X:Count$InYourYard
 DeckHas:Ability$Discard|Graveyard

@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Instant
 K:Convoke
 A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | RememberTargets$ True | TgtPrompt$ Select up to two target creatures | SpellDescription$ Tap up to two target creatures. Put a stun counter on either of them. Then put a stun counter on either of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
-SVar:DBCounter:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a creature tapped this to put a stun counter on  | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBCounterBis
+SVar:DBCounter:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a creature tapped this to put a stun counter on | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBCounterBis
 SVar:DBCounterBis:DB$ PutCounter | Choices$ Card.IsRemembered | ChoiceTitle$ Choose a creature tapped this to put a stun counter on | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters

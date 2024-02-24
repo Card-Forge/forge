@@ -6,5 +6,5 @@ SVar:KnightTokens:DB$ Token | TokenOwner$ You | TokenScript$ w_2_2_knight | Toke
 SVar:SeekCard:DB$ Seek | Type$ Card.Permanent+nonLand+cmcLE3 | SpellDescription$ Seek a nonland permanent card with mana value 3 or less.
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-SVar:GainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain 3 life |  LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
+SVar:GainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain 3 life | LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
 Oracle:Choose one or more —\n• Create two 2/2 white Knight creature tokens.\n• Seek a nonland permanent card with mana value 3 or less.\n• Destroy target artifact.\n• Destroy target enchantment.\n• Target player gains 3 life.

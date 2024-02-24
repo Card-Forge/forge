@@ -3,8 +3,8 @@ ManaCost:4 U
 Types:Creature Dragon
 PT:3/4
 K:Flying
-Oracle:Flying
 AlternateMode:Adventure
+Oracle:Flying
 
 ALTERNATE
 

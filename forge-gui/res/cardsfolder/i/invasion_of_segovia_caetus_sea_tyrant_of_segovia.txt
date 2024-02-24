@@ -5,8 +5,8 @@ Defense:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 blue Kraken creature tokens with trample.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_kraken_trample
 DeckHas:Ability$Token & Type$Kraken
-Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Segovia enters the battlefield, create two 1/1 blue Kraken creature tokens with trample.
 AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Segovia enters the battlefield, create two 1/1 blue Kraken creature tokens with trample.
 
 ALTERNATE
 

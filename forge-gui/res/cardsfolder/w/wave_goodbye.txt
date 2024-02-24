@@ -1,6 +1,6 @@
 Name:Wave Goodbye
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | ChangeType$ Creature.NoCounters | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature without a +1/+1 counter on it to its owner’s hand.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.NoCounters | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature without a +1/+1 counter on it to its owner's hand.
 DeckNeeds:Ability$Counters
-Oracle:Return each creature without a +1/+1 counter on it to its owner’s hand.
+Oracle:Return each creature without a +1/+1 counter on it to its owner's hand.

@@ -9,7 +9,7 @@ SVar:DBMaySac:DB$ Sacrifice | SacValid$ Card.Self | RememberSacrificed$ True | O
 SVar:DBExile:DB$ Dig | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ You | DestinationZone$ Exile | DigNum$ X | ChangeNum$ All | Imprint$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True  | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$CardCounters.SKEWER
 DeckHas:Ability$Sacrifice|Counters
 Oracle:Menace\nWhenever Rotisserie Elemental deals combat damage to a player, put a skewer counter on Rotisserie Elemental. Then you may sacrifice it. If you do, exile the top X cards of your library, where X is the number of skewer counters on Rotisserie Elemental. You may play those cards this turn.

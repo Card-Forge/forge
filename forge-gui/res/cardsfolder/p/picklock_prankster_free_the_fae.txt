@@ -9,7 +9,6 @@ DeckHints:Type$Instant|Sorcery|Faerie
 AlternateMode:Adventure
 Oracle:Flying, vigilance
 
-
 ALTERNATE
 
 Name:Free the Fae
