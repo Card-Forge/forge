@@ -10,4 +10,4 @@ SVar:X:Count$xPaid
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-Oracle:When Bronzebeak Foragers enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Bronzebeak Foragers leaves the battlefield.\n{X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner’s graveyard. You gain X life.
+Oracle:When Bronzebeak Foragers enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until Bronzebeak Foragers leaves the battlefield.\n{X}{W}: Put target card with mana value X exiled with Bronzebeak Foragers into its owner's graveyard. You gain X life.

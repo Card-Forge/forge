@@ -2,7 +2,7 @@ Name:Bill Ferny, Bree Swindler
 ManaCost:1 U
 Types:Legendary Creature Human Rogue
 PT:2/1
-T:Mode$ AttackerBlocked  | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME becomes blocked, ABILITY
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME becomes blocked, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBTreasure,DBChoose
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | ValidTgts$ Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBHorseDonate | SpellDescription$ Target opponent gains control of target Horse you control. If they do, remove NICKNAME from combat and create three Treasure tokens.

@@ -21,7 +21,7 @@ PT:6/6
 K:Vigilance
 K:Trample
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this creature transforms into CARDNAME, other legendary creatures you control get +2/+2 and gain trample until end of turn.
-SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+Legendary+YouCtrl | NumAtt$ +2 | NumDef$ +2  | KW$ Trample
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+Legendary+YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigTransformBis | TriggerDescription$ At the beginning of your upkeep, transform NICKNAME.
 SVar:TrigTransformBis:DB$ SetState | Defined$ Self | Mode$ Transform
 DeckNeeds:Type$Legendary

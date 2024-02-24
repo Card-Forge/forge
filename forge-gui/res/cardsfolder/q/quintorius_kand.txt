@@ -15,4 +15,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Yard:Count$InYourYard
 SVar:X:Remembered$Amount
 DeckHas:Ability$LifeGain|Token & Type$Spirit
-Oracle:Whenever you cast a spell from exile, Quintorius Kand deals 2 damage to each opponent and you gain 2 life.\n[+1]: Create a 3/2 red and white Spirit creature token.\n[−3]: Discover 4.\n[−6]: Exile any number of target cards from your graveyard. Add {R} for each card exiled this way. You may play those cards this turn.
+Oracle:Whenever you cast a spell from exile, Quintorius Kand deals 2 damage to each opponent and you gain 2 life.\n[+1]: Create a 3/2 red and white Spirit creature token.\n[-3]: Discover 4.\n[-6]: Exile any number of target cards from your graveyard. Add {R} for each card exiled this way. You may play those cards this turn.

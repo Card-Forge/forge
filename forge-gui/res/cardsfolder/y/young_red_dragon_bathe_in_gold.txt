@@ -4,8 +4,8 @@ Types:Creature Dragon
 PT:3/2
 K:Flying
 K:CARDNAME can't block.
-Oracle:Flying\nYoung Red Dragon can't block.
 AlternateMode:Adventure
+Oracle:Flying\nYoung Red Dragon can't block.
 
 ALTERNATE
 

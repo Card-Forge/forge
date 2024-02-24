@@ -7,8 +7,8 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Hu
 SVar:NonStackingEffect:True
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHints:Type$Human
+AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {W}{U} (You may cast this card converted for {W}{U}.)\nPrevent all combat damage that would be dealt to attacking Humans you control.\nWhenever you cast your second spell each turn, convert Goldbug.
 
 ALTERNATE

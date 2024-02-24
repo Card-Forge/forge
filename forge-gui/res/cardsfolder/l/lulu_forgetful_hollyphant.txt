@@ -8,8 +8,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
 SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature.withoutFlying | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigPump | TriggerDescription$ When you cast your next creature spell without flying, it perpetually gains flying.
 SVar:TrigPump:DB$ Pump | PumpZone$ Stack | Defined$ TriggeredCard | KW$ Flying | Duration$ Perpetual
-Oracle:Flying\nSpecialize {2}\nWhen Lulu, Forgetful Hollyphant enters the battlefield, you get a boon with "When you cast your next creature spell without flying, it perpetually gains flying."
 AlternateMode:Specialize
+Oracle:Flying\nSpecialize {2}\nWhen Lulu, Forgetful Hollyphant enters the battlefield, you get a boon with "When you cast your next creature spell without flying, it perpetually gains flying."
 
 SPECIALIZE:WHITE
 

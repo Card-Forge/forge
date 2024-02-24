@@ -7,8 +7,8 @@ T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourHand | TriggerZones$ Battl
 SVar:AddRebound:DB$ Pump | Defined$ TriggeredCard | KW$ Rebound | PumpZone$ Stack
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control with three time counters on it.
 SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Tapped$ True | Destination$ Battlefield | Transformed$ True | WithCountersType$ TIME | WithCountersAmount$ 3
-AlternateMode:DoubleFaced
 DeckHints:Type$Instant
+AlternateMode:DoubleFaced
 Oracle:Flying\nWhenever you cast an instant spell from your hand, it gains rebound. (Exile it as it resolves. At the beginning of your next upkeep, you may cast it from exile without paying its mana cost.)\nWhen Ojer Pakpatiq dies, return it to the battlefield tapped and transformed under its owner's control with three time counters on it.
 
 ALTERNATE

@@ -6,8 +6,8 @@ K:Specialize:5
 A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBPutCounter | SpellDescription$ then discard a card.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ STUDY | SpellDescription$ Put a study counter on CARDNAME.
-AlternateMode:Specialize
 DeckHas:Ability$Discard|Counters
+AlternateMode:Specialize
 Oracle:Specialize {5}\n{T}: Draw a card, then discard a card. Put a study counter on Vhal, Eager Scholar.
 
 SPECIALIZE:WHITE

@@ -14,6 +14,6 @@ Name:Geode Grotto
 ManaCost:no cost
 Types:Land Cave
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SpellDescription$ Add {R}.
-A:AB$ Pump | Cost$ 2 R T | ValidTgts$ Creature | NumAtt$ X | KW$ Haste | SorcerySpeed$ True | SpellDescription$  Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
+A:AB$ Pump | Cost$ 2 R T | ValidTgts$ Creature | NumAtt$ X | KW$ Haste | SorcerySpeed$ True | SpellDescription$ Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:{T}: Add {R}.\n{2}{R}, {T}: Until end of turn, target creature gains haste and gets +X/+0, where X is the number of artifacts you control. Activate only as a sorcery.

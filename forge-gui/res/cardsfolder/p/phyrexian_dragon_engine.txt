@@ -7,10 +7,10 @@ T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | OptionalDec
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
 K:Unearth:3 R R
-MeldPair:Mishra, Claimed by Gix
-AlternateMode:Meld
 SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHints:Name$Mishra, Claimed by Gix
 DeckHas:Ability$Graveyard|Discard
+MeldPair:Mishra, Claimed by Gix
+AlternateMode:Meld
 Oracle:Double strike\nWhen Phyrexian Dragon Engine enters the battlefield from your graveyard, you may discard your hand. If you do, draw three cards. \nUnearth:{3}{R}{R}

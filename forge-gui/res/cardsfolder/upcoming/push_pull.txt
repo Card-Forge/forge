@@ -2,8 +2,8 @@ Name:Push
 ManaCost:1 WB
 Types:Sorcery
 A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+DeckHas:Ability$Graveyard|Sacrifice
 AlternateMode:Split
-DeckHas:Ability$Graveyard|Sacrifice 
 Oracle:Destroy target tapped creature.
 
 ALTERNATE

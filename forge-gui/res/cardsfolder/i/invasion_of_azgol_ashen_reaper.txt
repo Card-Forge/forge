@@ -5,8 +5,8 @@ Defense:4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, target player sacrifices a creature or planeswalker and loses 1 life.
 SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedPlayer | LifeAmount$ 1
-AlternateMode:DoubleFaced
 DeckHas:Ability$Sacrifice|Counters
+AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Azgol enters the battlefield, target player sacrifices a creature or planeswalker and loses 1 life.
 
 ALTERNATE

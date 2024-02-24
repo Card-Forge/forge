@@ -10,4 +10,4 @@ SVar:DBEffect:DB$ Effect | Duration$ UntilYourNextTurn | StaticAbilities$ Static
 SVar:Static:Mode$ CantAttack | DefenderNotNearestToYouInChosenDirection$ True | Description$ Each player may attack only the nearest opponent in the chosen direction and planeswalkers controller by that opponent.
 AI:RemoveDeck:Random
 DeckHas:Type$Wall & Ability$Token
-Oracle:When Teyo, Geometric Tactician enters the battlefield, create a 0/4 white Wall creature token with defender and flying.\n[+1]: You and target opponent each draw a card.\n[−2]: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.
+Oracle:When Teyo, Geometric Tactician enters the battlefield, create a 0/4 white Wall creature token with defender and flying.\n[+1]: You and target opponent each draw a card.\n[-2]: Choose left or right. Until your next turn, each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that opponent.

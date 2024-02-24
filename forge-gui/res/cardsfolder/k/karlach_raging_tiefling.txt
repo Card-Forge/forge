@@ -4,8 +4,8 @@ Types:Legendary Creature Tiefling Barbarian
 PT:2/2
 K:First Strike
 K:Specialize:6:Rage Beyond Death:You may also activate this ability if CARDNAME is in your graveyard.:AdditionalActivationZone$ Graveyard
-AlternateMode:Specialize
 DeckHas:Ability$Graveyard
+AlternateMode:Specialize
 Oracle:First strike\nRage Beyond Death — Specialize {6}. You may also activate this ability if Karlach, Raging Tiefling is in your graveyard.
 
 SPECIALIZE:WHITE

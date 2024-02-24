@@ -6,9 +6,9 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select up to one target artifact or creature | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 2
 K:Craft:2 U ExileCtrlOrGrave<1/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Counters
+AlternateMode:DoubleFaced
 Oracle:Flash\nWhen Lodestone Needle enters the battlefield, tap up to one target artifact or creature and put two stun counters on it.\nCraft with artifact {2}{U} ({2}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE
