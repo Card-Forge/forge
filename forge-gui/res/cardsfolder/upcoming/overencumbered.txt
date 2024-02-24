@@ -10,4 +10,4 @@ SVar:TrigEffect:DB$ Effect | UnlessCost$ X | UnlessPayer$ EnchantedPlayer | Dura
 SVar:StaticCantAttack:Mode$ CantAttack | ValidCard$ Creature | Description$ Creatures can't attack this turn.
 SVar:X:Count$Valid Artifact.EnchantedPlayerCtrl
 DeckHas:Ability$Token & Type$Clue|Food|Junk
-Oracle:Enchant opponent\nWhen Overencumbered enters the battlefield, enchanted opponent creates a Clue token, a Food token, and a Junk token.\nAt the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can’t attack this combat.
+Oracle:Enchant opponent\nWhen Overencumbered enters the battlefield, enchanted opponent creates a Clue token, a Food token, and a Junk token.\nAt the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat.

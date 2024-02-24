@@ -1,5 +1,5 @@
 Name:Coveted Falcon
-ManaCost:1 U U 
+ManaCost:1 U U
 Types:Artifact Creature Bird
 PT:1/4
 K:Flying

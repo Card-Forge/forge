@@ -1,5 +1,5 @@
 Name:Agency Outfitter
-ManaCost:4 U U 
+ManaCost:4 U U
 Types:Creature Sphinx Detective
 PT:4/3
 K:Flying

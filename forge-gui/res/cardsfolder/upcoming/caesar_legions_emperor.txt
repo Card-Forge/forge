@@ -2,7 +2,7 @@ Name:Caesar, Legion's Emperor
 ManaCost:1 R W B
 Types:Legendary Creature Human Soldier
 PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig |  TriggerDescription$ Whenever you attack, you may sacrifice another creature. When you do, ABILITY
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever you attack, you may sacrifice another creature. When you do, ABILITY
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigCharm | TriggerDescription$ When you do, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBDraw,DBDamage | CharmNum$ 2
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rw_1_1_soldier_haste | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | SpellDescription$ Create two 1/1 red and white Soldier creature tokens with haste that are tapped and attacking.
