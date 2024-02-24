@@ -11,4 +11,4 @@ SVar:PlayMain1:TRUE
 DeckHas:Ability$Token & Type$Artifact
 DeckNeeds:Type$Artifact
 SVar:X:Count$ChosenNumber
-Oracle:[+1]: Create a tapped Powerstone token.\n[0]: Pay any amount of mana. Look at that many cards from the top of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.\n[−6]: You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
+Oracle:[+1]: Create a tapped Powerstone token.\n[0]: Pay any amount of mana. Look at that many cards from the top of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.\n[-6]: You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
