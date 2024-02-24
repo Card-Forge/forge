@@ -13,6 +13,6 @@ ALTERNATE
 
 Name:Take It Back
 ManaCost:2 U
-Types:Instant  Adventure
+Types:Instant Adventure
 A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
