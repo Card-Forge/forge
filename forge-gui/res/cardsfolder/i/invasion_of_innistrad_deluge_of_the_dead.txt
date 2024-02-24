@@ -5,8 +5,8 @@ Defense:5
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -13 | NumDef$ -13
-Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nFlash\nWhen Invasion of Innistrad enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
 AlternateMode:DoubleFaced
+Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nFlash\nWhen Invasion of Innistrad enters the battlefield, target creature an opponent controls gets -13/-13 until end of turn.
 
 ALTERNATE
 
