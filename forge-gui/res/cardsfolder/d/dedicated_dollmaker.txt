@@ -4,7 +4,7 @@ Types:Creature Dwarf Artificer
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one other target nonland, nontoken permanent. Its controller creates a token that's a copy of it, except it's not legendary and it's an artifact in addition to its other types.
 SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | ValidTgts$ Permanent.Other+nonLand+nonToken | TgtPrompt$ Select up to one target nonland nontoken permanenent | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NonLegendary$ True | AddTypes$ Artifact  | Controller$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NonLegendary$ True | AddTypes$ Artifact | Controller$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Card.token+YouCtrl | KW$ Indestructible | GameActivationLimit$ 1 | SpellDescription$ Tokens you control gain indestructible until end of turn. Activate only once.
 DeckHas:Ability$Token & Type$Artifact
