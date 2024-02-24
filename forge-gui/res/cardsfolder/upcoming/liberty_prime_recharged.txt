@@ -1,0 +1,15 @@
+Name:Liberty Prime, Recharged
+ManaCost:2 U R W
+Types:Legendary Artifact Creature Robot
+PT:8/8
+K:Vigilance
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you pay {E}{E} (two energy counters).
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice it unless you pay {E}{E} (two energy counters).
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ PayEnergy<2> | UnlessPayer$ You
+A:AB$ PutCounter | Defined$ You | Cost$ 2 T Sac<1/Artifact> | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBDraw | SpellDescription$ You get {E}{E} and draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Vigilance, trample, haste\nWhenever Liberty Prime, Recharged attacks or blocks, sacrifice it unless you pay {E}{E} (two energy counters).\n{2}, {T}, Sacrifice an artifact: You get {E}{E} and draw a card.
