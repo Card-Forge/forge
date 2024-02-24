@@ -1076,22 +1076,22 @@ ScryfallCode=PIP
 1068 R War Room @Desmuncubic
 
 [tokens]
-w_2_2_human_knight_artifact_pump
-w_1_1_human_soldier
-w_1_1_soldier
-w_1_1_warrior
-u_0_0_alien
 b_2_2_zombie_mutant
-settlement
-g_1_1_squirrel
-rw_1_1_soldier_haste
+c_1_1_a_thopter_flying
+c_3_3_a_robot
 c_a_clue_draw
 c_a_food_sac
 c_a_food_sac
 c_a_food_sac
 c_a_junk_sac_exileplay
-c_3_3_a_robot
-c_1_1_a_thopter_flying
 c_a_treasure_sac
 c_a_treasure_sac
+g_1_1_squirrel
+rw_1_1_soldier_haste
+settlement
+u_0_0_alien
+w_1_1_human_soldier
+w_1_1_soldier
+w_1_1_warrior
+w_2_2_human_knight_artifact_pump
 wasteland_survival_guide
