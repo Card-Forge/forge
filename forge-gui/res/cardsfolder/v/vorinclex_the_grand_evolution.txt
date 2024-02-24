@@ -1,8 +1,6 @@
 Name:Vorinclex
 ManaCost:3 G G
 Types:Legendary Creature Phyrexian Praetor
-K:Trample
-K:Reach
 PT:6/6
 K:Trample
 K:Reach

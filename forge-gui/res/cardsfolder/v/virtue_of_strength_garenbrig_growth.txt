@@ -7,7 +7,6 @@ DeckHas:Ability$Graveyard
 AlternateMode:Adventure
 Oracle:If you tap a basic land for mana, it produces three times as much of that mana instead.
 
-
 ALTERNATE
 
 Name:Garenbrig Growth

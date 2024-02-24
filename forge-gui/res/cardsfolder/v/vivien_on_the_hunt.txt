@@ -11,4 +11,4 @@ SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand 
 SVar:Z:Remembered$Valid Creature
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_4_4_rhino_warrior | SpellDescription$ Create a 4/4 green Rhino Warrior creature token.
 DeckHas:Ability$Sacrifice|Token|Mill|Graveyard & Type$Rhino
-Oracle:[+2]: You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle.\n[+1]: Mill five cards, then put any number of creature cards milled this way into your hand.\n[−1]: Create a 4/4 green Rhino Warrior creature token.
+Oracle:[+2]: You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle.\n[+1]: Mill five cards, then put any number of creature cards milled this way into your hand.\n[-1]: Create a 4/4 green Rhino Warrior creature token.
