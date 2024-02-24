@@ -3492,6 +3492,10 @@ public class AbilityUtils {
             return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
         }
 
+        if (value.contains("AllCounters")) {
+            return doXMath(Aggregates.sum(player.getCounters().values(), Functions.identity()), m, source, ctb);
+        }
+
         if (value.contains("PoisonCounters")) {
             return doXMath(player.getPoisonCounters(), m, source, ctb);
         }
