@@ -9,4 +9,3 @@ T:Mode$ CollectEvidence | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ 
 SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
 DeckHas:Ability$Token & Type$Artifact|Thopter
 Oracle:When Surveillance Monitor enters the battlefield, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)\nWhenever you collect evidence, create a 1/1 colorless Thopter artifact creature token with flying.
-
