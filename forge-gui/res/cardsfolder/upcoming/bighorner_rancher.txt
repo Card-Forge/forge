@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Human Ranger
 PT:2/5
 K:Vigilance
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ {T}: Add an amount of {G} equal to the greatest power among creatures you control.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | SpellDescription$ Add an amount of {G} equal to the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ Y | SpellDescription$ You gain life equal to the greatest toughness among other creatures you control.
 SVar:Y:Count$Valid Creature.YouCtrl$GreatestToughness
