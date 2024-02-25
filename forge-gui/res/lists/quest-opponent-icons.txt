@@ -39,7 +39,6 @@ https://downloads.cardforge.org/images/icons/Amadioha.jpg
 https://downloads.cardforge.org/images/icons/Amalia%20Sheran%20Sharm.jpg
 https://downloads.cardforge.org/images/icons/Amphibian.jpg
 https://downloads.cardforge.org/images/icons/An-Havva.jpg
-https://downloads.cardforge.org/images/icons/An-Havva.jpg
 https://downloads.cardforge.org/images/icons/Anakin%20Skywalker.jpg
 https://downloads.cardforge.org/images/icons/Anansi.jpg
 https://downloads.cardforge.org/images/icons/Ancient%20Battlefield.jpg
@@ -316,6 +315,7 @@ https://downloads.cardforge.org/images/icons/Emrakul.jpg
 https://downloads.cardforge.org/images/icons/En%20Sabah%20Nur.jpg
 https://downloads.cardforge.org/images/icons/Enchantress.jpg
 https://downloads.cardforge.org/images/icons/Endora.jpg
+https://downloads.cardforge.org/images/icons/Eomer.jpg
 https://downloads.cardforge.org/images/icons/Equastis.jpg
 https://downloads.cardforge.org/images/icons/Equilibrium.jpg
 https://downloads.cardforge.org/images/icons/Er-Miral.jpg
@@ -704,7 +704,6 @@ https://downloads.cardforge.org/images/icons/Plague%20Rats.jpg
 https://downloads.cardforge.org/images/icons/Platoon.jpg
 https://downloads.cardforge.org/images/icons/Pogo.jpg
 https://downloads.cardforge.org/images/icons/Pointy%20Haired%20Boss.jpg
-https://downloads.cardforge.org/images/icons/Pointy%20Haired%20Boss.jpg
 https://downloads.cardforge.org/images/icons/Poinyetta.jpg
 https://downloads.cardforge.org/images/icons/Polukranos,%20World%20Eater.jpg
 https://downloads.cardforge.org/images/icons/Poseidon.jpg
@@ -744,7 +743,6 @@ https://downloads.cardforge.org/images/icons/Rambo.jpg
 https://downloads.cardforge.org/images/icons/Ramos%201.jpg
 https://downloads.cardforge.org/images/icons/Ramsay%20the%20Flayer.jpg
 https://downloads.cardforge.org/images/icons/Ramses%20Overdark.jpg
-https://downloads.cardforge.org/images/icons/Ras%20Al%20Ghul.jpg
 https://downloads.cardforge.org/images/icons/Ras%20Al%20Ghul.jpg
 https://downloads.cardforge.org/images/icons/RasAlGhul.jpg
 https://downloads.cardforge.org/images/icons/Ratbert.jpg
@@ -1098,7 +1096,6 @@ https://downloads.cardforge.org/images/icons/Zeus.jpg
 https://downloads.cardforge.org/images/icons/Zombie%20Attack.jpg
 https://downloads.cardforge.org/images/icons/Zorislav.jpg
 https://downloads.cardforge.org/images/icons/zatanna.jpg
-https://downloads.cardforge.org/images/icons/Eomer.jpg
 https://downloads.cardforge.org/images/icons/b_1_1_crocodile_pet_small.jpg
 https://downloads.cardforge.org/images/icons/b_2_1_crocodile_pet_small.jpg
 https://downloads.cardforge.org/images/icons/b_3_1_crocodile_pet_swampwalk_small.jpg
