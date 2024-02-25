@@ -132,7 +132,7 @@ ScryfallCode=PIP
 124 U White Glove Gourmand @Wonchun Choi
 125 U Young Deathclaws @Nino Is
 126 U Agility Bobblehead @Daarken
-127 U Behemoth of Vault @Eddie Mendoza
+127 U Behemoth of Vault 0 @Eddie Mendoza
 128 R Brotherhood Vertibird @Daarken
 129 U C.A.M.P. @Tomas Duchek
 130 U Charisma Bobblehead @Michał Miłkowski
@@ -660,7 +660,7 @@ ScryfallCode=PIP
 652 U White Glove Gourmand @Wonchun Choi
 653 U Young Deathclaws @Nino Is
 654 U Agility Bobblehead @Daarken
-655 U Behemoth of Vault @Eddie Mendoza
+655 U Behemoth of Vault 0 @Eddie Mendoza
 656 R Brotherhood Vertibird @Daarken
 657 U C.A.M.P. @Tomas Duchek
 658 U Charisma Bobblehead @Michał Miłkowski

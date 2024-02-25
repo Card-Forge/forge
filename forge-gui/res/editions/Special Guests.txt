@@ -40,3 +40,4 @@ ScryfallCode=SPG
 26 M Tireless Tracker @Donato Giancola
 27 M Drown in the Loch @Chris Seaman
 28 M Field of the Dead @Ralph Horsley
+44 M Solitude @Campbell White

@@ -24,6 +24,7 @@ ScryfallCode=MH3
 306 L Swamp @Yohann Schepacz
 307 L Mountain @Chuck Lukacs
 308 L Forest @Vance Kovacs
+309 U Snow-Covered Wastes @Tomáš Honz
 338 R Flare of Cultivation @Olena Richards
 344 R Psychic Frog @Chuck Lukacs
 352 R Bloodstained Mire @Sean Vo
