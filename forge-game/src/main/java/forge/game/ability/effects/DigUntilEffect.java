@@ -10,7 +10,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
@@ -135,10 +134,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final boolean optionalFound = sa.hasParam("OptionalFoundMove");
         boolean sequential = digSite == ZoneType.Library && revealedDest != null && revealedDest.equals(foundDest);
 
-        CardZoneTable table = new CardZoneTable();
+        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
         boolean combatChanged = false;
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (p == null || !p.isInGame()) {
@@ -208,11 +205,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    CardZoneTable tableSeq = new CardZoneTable();
+                    CardZoneTable tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    moveParams.put(AbilityKey.InternalTriggerTable, tableSeq);
+                    AbilityKey.addCardZoneTableParams(moveParams, tableSeq);
 
                     if (foundDest.equals(ZoneType.Battlefield)) {
                         moveParams.put(AbilityKey.SimultaneousETB, new CardCollection(c));
@@ -222,7 +217,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         if (sa.hasParam("AttachedTo")) {
                             CardCollection list = AbilityUtils.getDefinedCards(c, sa.getParam("AttachedTo"), sa);
                             if (list.isEmpty()) {
-                                list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), c.getController(), c, sa);
+                                list = CardLists.getValidCards(table.getLastStateBattlefield(), sa.getParam("AttachedTo"), c.getController(), c, sa);
                             }
                             if (!list.isEmpty()) {
                                 list = CardLists.filter(list, CardPredicates.canBeAttached(c, sa));
@@ -285,7 +280,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 }
 
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.InternalTriggerTable, table);
+                AbilityKey.addCardZoneTableParams(moveParams, table);
 
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {

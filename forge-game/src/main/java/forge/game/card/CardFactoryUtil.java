@@ -115,11 +115,10 @@ public class CardFactoryUtil {
 
                 CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateBattlefield());
                 Map<AbilityKey, Object> params = AbilityKey.newMap();
-                params.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
-                params.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
-                params.put(AbilityKey.InternalTriggerTable, table);
+                AbilityKey.addCardZoneTableParams(params, table);
 
                 hostCard.getGame().getAction().moveToPlay(hostCard, this, params);
+                table.triggerChangesZoneAll(game, this);
             }
 
             @Override
@@ -3036,7 +3035,13 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     final Game game = getHostCard().getGame();
-                    final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    CardZoneTable table = new CardZoneTable(this.getLastStateBattlefield(), this.getLastStateGraveyard());
+                    AbilityKey.addCardZoneTableParams(moveParams, table);
+
+                    final Card c = game.getAction().exile(getHostCard(), this, moveParams);
+                    table.triggerChangesZoneAll(game, this);
+
                     c.setForetold(true);
                     c.turnFaceDown(true);
                     // look at the exiled card
@@ -3494,7 +3499,12 @@ public class CardFactoryUtil {
                 @Override
                 public void resolve() {
                     final Game game = this.getHostCard().getGame();
-                    final Card c = game.getAction().exile(new CardCollection(getHostCard()), this, null).get(0);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    CardZoneTable moveTable = new CardZoneTable(this.getLastStateBattlefield(), this.getLastStateGraveyard());
+                    AbilityKey.addCardZoneTableParams(moveParams, moveTable);
+
+                    final Card c = game.getAction().exile(getHostCard(), this, moveParams);
+                    moveTable.triggerChangesZoneAll(game, this);
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();

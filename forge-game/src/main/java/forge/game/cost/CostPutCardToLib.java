@@ -161,7 +161,7 @@ public class CostPutCardToLib extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        AbilityKey.addCardZoneTableParams(moveParams, table);
         return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()), null, moveParams);
     }
 

@@ -1,9 +1,13 @@
 package forge.game.ability.effects;
 
 
+import java.util.Map;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollection;
+import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 
 public class EndCombatPhaseEffect extends SpellAbilityEffect {
@@ -22,7 +26,13 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
         }
 
         // 1) All spells and abilities on the stack are exiled.
-        game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, null);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+
+        game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, moveParams);
+        // trigger of Table not needed?
+
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
         game.getTriggerHandler().clearWaitingTriggers();

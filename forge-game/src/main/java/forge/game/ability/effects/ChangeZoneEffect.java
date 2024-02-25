@@ -549,9 +549,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             Card movedCard = null;
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+            AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             if (destination.equals(ZoneType.Library)) {
                 // If a card is moved to library from the stack, remove its spells from the stack
@@ -1274,9 +1272,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
-                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                AbilityKey.addCardZoneTableParams(moveParams, triggerList);
                 if (destination.equals(ZoneType.Library)) {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
@@ -1546,7 +1542,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Map<AbilityKey,Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);
         params.put(AbilityKey.StackSi, si);
-        params.put(AbilityKey.InternalTriggerTable, triggerList);
+        AbilityKey.addCardZoneTableParams(params, triggerList);
 
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {

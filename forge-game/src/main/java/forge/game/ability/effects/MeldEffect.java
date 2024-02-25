@@ -2,11 +2,13 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -14,6 +16,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import java.util.Arrays;
+import java.util.Map;
 
 public class MeldEffect extends SpellAbilityEffect {
     @Override
@@ -37,7 +40,14 @@ public class MeldEffect extends SpellAbilityEffect {
         Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
         CardCollection exiled = new CardCollection(Arrays.asList(hostCard, secondary));
-        exiled = game.getAction().exile(exiled, sa, null);
+
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+
+        exiled = game.getAction().exile(exiled, sa, moveParams);
+        table.triggerChangesZoneAll(game, sa);
+
         Card primary = exiled.get(0);
         secondary = exiled.get(1);
 

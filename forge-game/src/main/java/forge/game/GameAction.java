@@ -915,13 +915,10 @@ public class GameAction {
     }
 
     public final CardCollection exile(final CardCollection cards, SpellAbility cause, Map<AbilityKey, Object> params) {
-        CardZoneTable table = new CardZoneTable(getLastState(AbilityKey.LastStateBattlefield, cause, params), getLastState(AbilityKey.LastStateGraveyard, cause, params));
         CardCollection result = new CardCollection();
         for (Card card : cards) {
-            table.put(card.getZone().getZoneType(), ZoneType.Exile, card);
             result.add(exile(card, cause, params));
         }
-        table.triggerChangesZoneAll(game, cause);
         return result;
     }
     public final Card exile(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
@@ -1249,15 +1246,13 @@ public class GameAction {
         boolean orderedSacrificeList = false;
         CardCollection cardsToUpdateLKI = new CardCollection();
 
-        Map<AbilityKey, Object> mapParams = AbilityKey.newMap();
-        mapParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-        mapParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
         for (int q = 0; q < 9; q++) {
             checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
 
             CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-            mapParams.put(AbilityKey.InternalTriggerTable, table);
+            Map<AbilityKey, Object> mapParams = AbilityKey.newMap();
+            AbilityKey.addCardZoneTableParams(mapParams, table);
 
             for (final Player p : game.getPlayers()) {
                 for (final ZoneType zt : ZoneType.values()) {

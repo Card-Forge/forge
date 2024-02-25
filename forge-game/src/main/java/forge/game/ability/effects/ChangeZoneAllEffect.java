@@ -170,9 +170,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+            AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             if (destination == ZoneType.Battlefield) {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);

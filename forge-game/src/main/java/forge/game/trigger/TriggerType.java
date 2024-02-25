@@ -43,6 +43,7 @@ public enum TriggerType {
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
     ConjureAll(TriggerConjureAll.class),
+    CollectEvidence(TriggerCollectEvidence.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterAddedOnce(TriggerCounterAddedOnce.class),
     CounterPlayerAddedAll(TriggerCounterPlayerAddedAll.class),
