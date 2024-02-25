@@ -38,7 +38,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         AbilityKey.addCardZoneTableParams(moveParams, table);
 
         game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, moveParams);
-        // trigger of Table not needed?
+        table.triggerChangesZoneAll(game, sa);
 
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
