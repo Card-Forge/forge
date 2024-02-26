@@ -46,6 +46,9 @@ public final class Main {
 
         //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
         System.setProperty("sun.java2d.d3d", "false");
+        
+        //Turn on OpenGl acceleration to improve performance
+        System.setProperty("sun.java2d.opengl", "true");
 
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
