@@ -9,6 +9,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -29,6 +30,15 @@ public class TriggerChangesZoneAll extends Trigger {
         if (Iterables.contains(getActiveZone(), ZoneType.Battlefield) && "Graveyard".equals(getParam("Origin"))
                 && !table.getLastStateBattlefield().contains(getHostCard())) {
             return false;
+        }
+
+        if (hasParam("FirstTime")) {
+            // currently only for Crawling Sensation
+            List<Card> entered = CardUtil.getThisTurnEntered(ZoneType.smartValueOf(getParam("Destination")), null, getParam("ValidCards"), getHostCard(), this, getHostCard().getController());
+            entered.removeAll(filterCards(table));
+            if (!entered.isEmpty()) {
+                return false;
+            }
         }
 
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
