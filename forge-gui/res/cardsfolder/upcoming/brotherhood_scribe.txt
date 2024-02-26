@@ -1,0 +1,9 @@
+Name:Brotherhood Scribe
+ManaCost:1 W
+Types:Creature Human Artificer
+PT:1/3
+A:AB$ PutCounter | Cost$ T | Activation$ Metalcraft | PrecostDesc$ Metalcraft — | CounterType$ ENERGY | CounterNum$ 1 | Defined$ You | SpellDescription$ You get {E} (an energy counter).
+T:Mode$ CounterAddedOnce | ValidPlayer$ You | PlayerTurn$ True | TriggerZones$ Battlefield | CounterType$ ENERGY | Execute$ TrigPumpAll | TriggerDescription$ Whenever you get one or more {E} during your turn, creatures you control get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1
+DeckNeeds:Type$Artifact
+Oracle:Metalcraft — {T}: You get {E} (an energy counter). Activate only if you control three or more artifacts.\nWhenever you get one or more {E} during your turn, creatures you control get +1/+1 until end of turn.
