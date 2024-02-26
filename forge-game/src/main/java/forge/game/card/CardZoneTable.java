@@ -112,25 +112,25 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null) {
-            if (!containsColumn(destination)) {
-                return allCards;
-            }
+        if (destination != null && !containsColumn(destination)) {
+            return allCards;
         }
         if (origin != null) {
             for (ZoneType z : origin) {
-                CardCollectionView lkiLookup = CardCollection.EMPTY;
-                // CR 603.10a
-                if (z == ZoneType.Battlefield) {
-                    lkiLookup = lastStateBattlefield;
-                }
-                if (z == ZoneType.Graveyard && destination == null) {
-                    lkiLookup = lastStateGraveyard;
-                }
                 if (containsRow(z)) {
+                    CardCollectionView lkiLookup = CardCollection.EMPTY;
+                    // CR 603.10a
+                    if (z == ZoneType.Battlefield) {
+                        lkiLookup = lastStateBattlefield;
+                    }
+                    if (z == ZoneType.Graveyard && destination == null) {
+                        lkiLookup = lastStateGraveyard;
+                    }
                     if (destination != null) {
-                        for (Card c : row(z).get(destination)) {
-                            allCards.add(lkiLookup.get(c));
+                        if (row(z).containsKey(destination)) {
+                            for (Card c : row(z).get(destination)) {
+                                allCards.add(lkiLookup.get(c));
+                            }
                         }
                     } else {
                         for (CardCollection cc : row(z).values()) {
