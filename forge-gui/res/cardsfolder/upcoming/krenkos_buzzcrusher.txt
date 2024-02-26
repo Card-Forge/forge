@@ -1,0 +1,17 @@
+Name:Krenko's Buzzcrusher
+ManaCost:2 R R
+Types:Artifact Creature Insect Thopter
+PT:4/4
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBForEach | TriggerDescription$ When CARDNAME enters the battlefield, for each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:DBForEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | ChoiceZone$ Battlefield | Amount$ 1 | Choices$ Land.nonBasic+RememberedPlayerCtrl | Optional$ True | RememberChosen$ True | ChoiceTitle$ Choose up to one nonbasic land this player controls.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Land.nonBasic+IsRemembered | RememberLKI$ True | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBSearch | SubAbility$ DBShuffle
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | DefinedPlayer$ ImprintedController | NoShuffle$ True | Optional$ True
+SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup
+SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying, trample\nWhen Krenko's Buzzcrusher enters the battlefield, for each player, destroy up to one nonbasic land that player controls. For each land destroyed this way, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
