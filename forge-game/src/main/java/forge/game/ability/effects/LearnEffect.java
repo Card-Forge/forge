@@ -20,11 +20,8 @@ public class LearnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        CardZoneTable table = new CardZoneTable();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
         for (Player p : getTargetPlayers(sa)) {
             p.learnLesson(sa, moveParams);
         }

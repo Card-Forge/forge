@@ -2,6 +2,7 @@ package forge.game.ability;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 
 import java.util.EnumMap;
@@ -202,5 +203,16 @@ public enum AbilityKey {
 
         runParams.put(Map, map);
         return runParams;
+    }
+
+    public static void addCardZoneTableParams(Map<AbilityKey, Object> map, CardZoneTable table) {
+        map.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+        map.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
+        map.put(AbilityKey.InternalTriggerTable, table);
+    }
+    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> map, forge.game.spellability.SpellAbility sa) {
+        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
+        addCardZoneTableParams(map, table);
+        return table;
     }
 }

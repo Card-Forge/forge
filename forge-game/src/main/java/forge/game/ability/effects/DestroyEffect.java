@@ -59,11 +59,9 @@ public class DestroyEffect extends SpellAbilityEffect {
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
 
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        CardZoneTable table = getChangeZoneTable(sa, lastStateBattlefield, CardCollection.EMPTY);
-        params.put(AbilityKey.InternalTriggerTable, table);
+        CardZoneTable table = getChangeZoneTable(sa, game.copyLastStateBattlefield(), CardCollection.EMPTY);
+        AbilityKey.addCardZoneTableParams(params, table);
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {

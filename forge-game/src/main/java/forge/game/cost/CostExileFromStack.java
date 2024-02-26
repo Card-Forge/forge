@@ -17,12 +17,17 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
+import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -105,14 +110,25 @@ public class CostExileFromStack extends CostPart {
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
         Game game = ai.getGame();
+        CardCollection list = new CardCollection();
         for (final SpellAbility sa : decision.sp) {
             ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled", true);
             SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
             if (si != null) {
                 game.getStack().remove(si);
             }
-            game.getAction().exile(new CardCollection(sa.getHostCard()), null, null);
+            list.add(sa.getHostCard());
         }
+        if (list.isEmpty()) {
+            return true;
+        }
+
+        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardCollection moved = game.getAction().exile(list, ability, moveParams);
+        SpellAbilityEffect.handleExiledWith(moved, ability);
+
         return true;
     }
 

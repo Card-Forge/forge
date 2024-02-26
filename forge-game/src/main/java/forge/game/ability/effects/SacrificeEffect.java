@@ -101,11 +101,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         final boolean optional = sa.hasParam("Optional");
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-        CardZoneTable table = new CardZoneTable(lastStateBattlefield, CardCollection.EMPTY);
-        params.put(AbilityKey.InternalTriggerTable, table);
+        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), CardCollection.EMPTY);
+        AbilityKey.addCardZoneTableParams(params, table);
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {

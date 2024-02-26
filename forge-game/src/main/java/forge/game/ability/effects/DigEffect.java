@@ -161,11 +161,9 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        CardZoneTable table = new CardZoneTable();
+        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             if (!p.isInGame()) {
@@ -377,14 +375,12 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.InternalTriggerTable, table);
+                    AbilityKey.addCardZoneTableParams(moveParams, table);
 
                     for (Card c : movedCards) {
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
                             c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
                         } else {
-                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }

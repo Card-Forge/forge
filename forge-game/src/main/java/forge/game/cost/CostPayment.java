@@ -334,7 +334,7 @@ public class CostPayment extends ManaConversionMatrix {
         final Game game = sa.getHostCard().getGame();
         final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.InternalTriggerTable, table);
+        AbilityKey.addCardZoneTableParams(params, table);
 
         if (sa.isOffering()) {
             if (sa.getSacrificedAsOffering() == null) {

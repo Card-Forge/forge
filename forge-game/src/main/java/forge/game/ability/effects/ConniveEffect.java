@@ -68,12 +68,10 @@ public class ConniveEffect extends SpellAbilityEffect {
             CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (!connivers.isEmpty()) {
                 GameEntityCounterTable table = new GameEntityCounterTable();
-                final CardZoneTable triggerList = new CardZoneTable();
+                final CardZoneTable triggerList = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
                 Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);

@@ -136,7 +136,6 @@ public class DiscardEffect extends SpellAbilityEffect {
             discarders = targets;
         }
 
-        final CardZoneTable table = new CardZoneTable();
         Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         for (final Player p : discarders) {
             if (!p.isInGame()) {
@@ -277,9 +276,7 @@ public class DiscardEffect extends SpellAbilityEffect {
         }
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        params.put(AbilityKey.InternalTriggerTable, table);
+        CardZoneTable table = AbilityKey.addCardZoneTableParams(params, sa);
 
         discard(sa, true, discardedMap, params);
 

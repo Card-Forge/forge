@@ -68,9 +68,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
                     CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
-                    moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
-                    moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                    AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
                     internalEffect(c, p, sa, moveParams);
                     triggerList.triggerChangesZoneAll(game, sa);
@@ -80,9 +78,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
                 CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
 
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.LastStateBattlefield, triggerList.getLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateGraveyard, triggerList.getLastStateGraveyard());
-                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                AbilityKey.addCardZoneTableParams(moveParams, triggerList);
                 for (Card c : tgtCards) {
                     internalEffect(c, p, sa, moveParams);
                 }

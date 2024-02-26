@@ -1,0 +1,11 @@
+Name:Surveillance Monitor
+ManaCost:3 U
+Types:Creature Vedalken Detective
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEvidence | TriggerDescription$ When CARDNAME enters the battlefield, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)
+# Empty Effect for Cost
+SVar:TrigEvidence:AB$ Pump | Cost$ CollectEvidence<4> | AILogic$ Always
+T:Mode$ CollectEvidence | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you collect evidence, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+DeckHas:Ability$Token & Type$Artifact|Thopter
+Oracle:When Surveillance Monitor enters the battlefield, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)\nWhenever you collect evidence, create a 1/1 colorless Thopter artifact creature token with flying.
