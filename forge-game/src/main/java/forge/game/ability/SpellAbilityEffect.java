@@ -17,6 +17,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -969,7 +970,8 @@ public abstract class SpellAbilityEffect {
     }
 
     public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved
+                && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
             return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
         }
         return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);

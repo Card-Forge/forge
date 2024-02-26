@@ -13,7 +13,6 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -85,7 +84,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
-        if (cause != null && cause.isReplacementAbility() && cause.getReplacementEffect().getMode() == ReplacementType.Moved) {
+        if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
             // will be handled by original "cause" instead
             return;
         }
