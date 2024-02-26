@@ -237,9 +237,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
-    private boolean discarded = false;
 
-    private boolean surveilledThisTurn = false;
+    private boolean discarded, surveilled, milled;
 
     private boolean flipped = false;
     private boolean facedown = false;
@@ -6282,6 +6281,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
+    public boolean wasSurveilled() {
+        return this.surveilled;
+    }
+    public void setSurveilled(boolean value) {
+        this.surveilled = value;
+    }
+    public boolean wasMilled() {
+        return milled;
+    }
+    public void setMilled(boolean value) {
+        milled = value;
+    }
 
     public final boolean isRingBearer() {
         return ringbearer;
@@ -6293,6 +6304,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void clearRingBearer() {
         setRingBearer(false);
     }
+
     public final boolean isMonstrous() {
         return monstrous;
     }
@@ -6913,7 +6925,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetShieldCount();
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
-        setSurveilledThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
@@ -7878,12 +7889,5 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
-    }
-
-    public boolean isSurveilledThisTurn() {
-        return this.surveilledThisTurn;
-    }
-    public void setSurveilledThisTurn(boolean value) {
-        this.surveilledThisTurn = value;
     }
 }

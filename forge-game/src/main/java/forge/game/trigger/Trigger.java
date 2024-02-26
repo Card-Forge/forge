@@ -377,7 +377,9 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
-        if (isKeyword(Keyword.EVOLVE)) {
+        String condition = getParam("Condition");
+
+        if (isKeyword(Keyword.EVOLVE) || "Evolve".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {
                 return false;
@@ -392,7 +394,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        String condition = getParam("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
