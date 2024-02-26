@@ -121,8 +121,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         if (origin != null) {
             for (ZoneType z : origin) {
                 CardCollectionView lkiLookup = CardCollection.EMPTY;
+                // CR 603.10a
                 if (z == ZoneType.Battlefield) {
                     lkiLookup = lastStateBattlefield;
+                }
+                if (z == ZoneType.Graveyard && destination == null) {
+                    lkiLookup = lastStateGraveyard;
                 }
                 if (containsRow(z)) {
                     if (destination != null) {
