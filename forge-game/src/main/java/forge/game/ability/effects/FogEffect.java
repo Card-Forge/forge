@@ -1,15 +1,11 @@
 package forge.game.ability.effects;
 
-import forge.GameCommand;
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 
 public class FogEffect extends SpellAbilityEffect {
 
@@ -32,18 +28,8 @@ public class FogEffect extends SpellAbilityEffect {
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         eff.addReplacementEffect(re);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
-        game.getEndOfTurn().addUntil(new GameCommand() {
-            private static final long serialVersionUID = -3297629217432253089L;
-
-            @Override
-            public void run() {
-                game.getAction().exile(eff, null, null);
-            }
-        });
+        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
     }
 }

@@ -266,7 +266,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return activeScheme;
     }
 
-    public void setSchemeInMotion() {
+    public void setSchemeInMotion(SpellAbility cause) {
         if (StaticAbilityCantSetSchemesInMotion.any(getGame())) {
             return;
         }
@@ -280,10 +280,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
-        game.getAction().moveTo(ZoneType.Command, activeScheme, null, moveParams);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(activeScheme, cause);
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -2690,7 +2689,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getView().updatePlanarPlayer(getView());
 
         for (Card c : destinations) {
-            currentPlanes.add(game.getAction().moveTo(getZone(ZoneType.Command), c, sa));
+            currentPlanes.add(game.getAction().moveTo(getZone(ZoneType.Command), c, sa, AbilityKey.newMap()));
             planeswalkedToThisTurn.add(c);
         }
 
@@ -2712,7 +2711,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (final Card plane : currentPlanes) {
             plane.clearControllers();
-            game.getAction().moveTo(ZoneType.PlanarDeck, plane, -1, null);
+            game.getAction().moveTo(ZoneType.PlanarDeck, plane, -1, null, AbilityKey.newMap());
         }
         currentPlanes.clear();
     }
@@ -3801,7 +3800,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (c.isInZone(ZoneType.Sideboard)) { // Sideboard Lesson to Hand
             game.getAction().reveal(new CardCollection(c), c.getOwner(), true);
-            Card moved = game.getAction().moveTo(ZoneType.Hand, c, sa, params);
+            game.getAction().moveTo(ZoneType.Hand, c, sa, params);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
             boolean firstDiscard = getNumDiscardedThisTurn() == 0;
             if (discard(c, sa, true, params) != null) {

@@ -39,7 +39,7 @@ public class MeldEffect extends SpellAbilityEffect {
 
         Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
-        CardCollection exiled = new CardCollection(Arrays.asList(hostCard, secondary));
+        CardCollection exiled = CardLists.filter(Arrays.asList(hostCard, secondary), CardPredicates.canExiledBy(sa, true));
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
@@ -48,8 +48,12 @@ public class MeldEffect extends SpellAbilityEffect {
         exiled = game.getAction().exile(exiled, sa, moveParams);
         table.triggerChangesZoneAll(game, sa);
 
-        Card primary = exiled.get(0);
-        secondary = exiled.get(1);
+        if (exiled.size() < 2) {
+            return;
+        }
+
+        Card primary = exiled.get(hostCard);
+        secondary = exiled.get(secondary);
 
         // cards has wrong name in exile
         if (!primary.sharesNameWith(primName) || !secondary.sharesNameWith(secName)) {

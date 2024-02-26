@@ -175,8 +175,8 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
         }
 
-        CardCollection list = new CardCollection(zoneRestriction != 1 ? game.getCardsIn(this.from) :
-                payer.getCardsIn(this.from));
+        CardCollection list = CardLists.filter(zoneRestriction != 1 ? game.getCardsIn(this.from) :
+                payer.getCardsIn(this.from), CardPredicates.canExiledBy(ability, effect));
 
         if (this.payCostFromSource()) {
             return list.contains(source);
@@ -216,7 +216,6 @@ public class CostExile extends CostPartWithList {
         }
 
         if (totalCMC) {
-            int needed = Integer.parseInt(this.getAmount().split("\\+")[0]);
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }

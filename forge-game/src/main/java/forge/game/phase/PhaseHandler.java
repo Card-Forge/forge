@@ -281,7 +281,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case MAIN1:
                     {
                         if (playerTurn.isArchenemy()) {
-                            playerTurn.setSchemeInMotion();
+                            playerTurn.setSchemeInMotion(null);
                         }
                         if (playerTurn.hasRadiationEffect()) {
                             handleRadiation();

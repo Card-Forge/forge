@@ -24,6 +24,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
+import forge.card.CardType.Supertype;
 import forge.deck.DeckSection;
 import forge.game.ability.*;
 import forge.game.card.*;
@@ -725,7 +726,7 @@ public class GameAction {
 
     private void storeChangesZoneAll(Card c, Zone zoneFrom, Zone zoneTo, Map<AbilityKey, Object> params) {
         if (params != null && params.containsKey(AbilityKey.InternalTriggerTable)) {
-            ((CardZoneTable) params.get(AbilityKey.InternalTriggerTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);    
+            ((CardZoneTable) params.get(AbilityKey.InternalTriggerTable)).put(zoneFrom != null ? zoneFrom.getZoneType() : null, zoneTo.getZoneType(), c);
         }
     }
 
@@ -747,16 +748,11 @@ public class GameAction {
         // use FThreads.invokeInNewThread to run code in a pooled thread
         return moveTo(zoneTo, c, null, cause, params);
     }
-    public final Card moveTo(final Zone zoneTo, Card c, Integer position, SpellAbility cause) {
-        return moveTo(zoneTo, c, position, cause, AbilityKey.newMap());
-    }
 
     public final Card moveTo(final ZoneType name, final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveTo(name, c, 0, cause, params);
     }
-    public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause) {
-        return moveTo(name, c, libPosition, cause, AbilityKey.newMap());
-    }
+
     public final Card moveTo(final ZoneType name, final Card c, final int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         // Call specific functions to set PlayerZone, then move onto moveTo
         switch(name) {
@@ -764,7 +760,11 @@ public class GameAction {
             case Library:       return moveToLibrary(c, libPosition, cause, params);
             case Battlefield:   return moveToPlay(c, c.getController(), cause, params);
             case Graveyard:     return moveToGraveyard(c, cause, params);
-            case Exile:         return exile(c, cause, params);
+            case Exile:
+                if (!c.canExiledBy(cause, true)) {
+                    return null;
+                }
+                return exile(c, cause, params);
             case Stack:         return moveToStack(c, cause, params);
             case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
             case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
@@ -941,6 +941,20 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.Exiled, runParams, false);
 
         return copied;
+    }
+
+    public final Card exileEffect(final Card effect) {
+        return exile(effect, null, null);
+    }
+
+    public final void moveToCommand(final Card effect, final SpellAbility sa) {
+        moveToCommand(effect, sa, AbilityKey.newMap());
+    }
+    public final void moveToCommand(final Card effect, final SpellAbility sa, Map<AbilityKey, Object> params) {
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        moveTo(ZoneType.Command, effect, sa, params);
+        effect.updateStateForView();
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
     public void ceaseToExist(Card c, boolean skipTrig) {
@@ -1226,12 +1240,6 @@ public class GameAction {
             return false;
         }
 
-        // Max: I don't know where to put this! - but since it's a state based action, it must be in check state effects
-        if (game.getRules().hasAppliedVariant(GameType.Archenemy)
-                || game.getRules().hasAppliedVariant(GameType.ArchenemyRumble)) {
-            game.archenemy904_10();
-        }
-
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
@@ -1266,6 +1274,7 @@ public class GameAction {
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
+                        stateBasedAction_Scheme(c);
                     }
                 }
             }
@@ -1542,6 +1551,15 @@ public class GameAction {
         }
         if (!game.getStack().hasSourceOnStack(c, null)) {
             completeDungeon(c.getController(), c);
+        }
+    }
+
+    private void stateBasedAction_Scheme(Card c) {
+        if (!c.isScheme() || c.getType().hasSupertype(Supertype.Ongoing)) {
+            return;
+        }
+        if (!game.getStack().hasSourceOnStack(c, null)) {
+            moveTo(ZoneType.SchemeDeck, c, null, AbilityKey.newMap());
         }
     }
 
@@ -1967,7 +1985,7 @@ public class GameAction {
         }
         reveal(cards, game.getZoneOf(firstCard).getZoneType(), cardOwner, dontRevealToOwner, messagePrefix, msgAddSuffix);
     }
-    
+
     public void reveal(CardCollectionView cards, ZoneType zt, Player cardOwner, boolean dontRevealToOwner, String messagePrefix) {
         reveal(cards, zt, cardOwner, dontRevealToOwner, messagePrefix, true);
     }
