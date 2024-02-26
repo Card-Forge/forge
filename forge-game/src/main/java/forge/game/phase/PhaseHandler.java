@@ -1235,6 +1235,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
+        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
@@ -1243,6 +1244,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final void endTurnByEffect() {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
+        game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
         onPhaseBegin();
     }
 

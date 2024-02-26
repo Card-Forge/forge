@@ -30,7 +30,6 @@ public class HauntEffect extends SpellAbilityEffect {
             final Card copy = game.getAction().exile(card, sa, moveParams);
             sa.getTargetCard().addHauntedBy(copy);
             table.triggerChangesZoneAll(game, sa);
-
         } else if (!sa.usesTargeting() && card.getHaunting() != null) {
             // unhaunt
             card.getHaunting().removeHauntedBy(card);
