@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Ogre Warlock
 PT:5/4
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon |  TriggerDescription$ When CARDNAME enters the battlefield, you get a one-time boon with "At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a one-time boon with "At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life."
 SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ EndStepTrig
 SVar:EndStepTrig:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE3 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDrain | TriggerDescription$ At the beginning of your end step, if three or more creatures died this turn, each opponent loses 5 life and you gain 5 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 5 | SubAbility$ DBGainLife

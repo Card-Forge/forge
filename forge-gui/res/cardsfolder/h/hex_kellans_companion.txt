@@ -5,7 +5,7 @@ PT:1/1
 K:Haste
 T:Mode$ SpellCast | ValidCard$ Card.Adventure | ValidActivatingPlayer$ You | TriggerZones$ Battlefield,Exile | Execute$ TrigEffect | TriggerDescription$ Whenever you cast an Adventure spell, if CARDNAME is on the battlefield or in exile, it perpetually gets +1/+1. Then if it's on the battlefield, exile it with a fetch counter on it.
 SVar:TrigEffect:DB$ Pump | PumpZone$ Battlefield,Exile | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBChange
-SVar:DBChange:DB$ ChangeZone | ConditionPresent$ Card.Self | ConditionZone$ Battlefield | Origin$ Battlefield  | Destination$ Exile | WithCountersType$ FETCH
+SVar:DBChange:DB$ ChangeZone | ConditionPresent$ Card.Self | ConditionZone$ Battlefield | Origin$ Battlefield | Destination$ Exile | WithCountersType$ FETCH
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigReturn | TriggerZones$ Exile | IsPresent$ Card.Self+counters_EQ1_FETCH | PresentZone$ Exile | TriggerDescription$ Whenever you cast a spell from exile, if NICKNAME is in exile with a fetch counter on it, put it onto the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield
 DeckHints:Type$Adventure

@@ -5,7 +5,7 @@ PT:4/4
 K:Bargain
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+bargained | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was bargained, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
-SVar:TrigKicker:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl  | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1
+SVar:TrigKicker:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature an opponent controls | TargetMin$ 0 | TargetMax$ 1
 SVar:PlayMain1:TRUE
 DeckHints:Type$Artifact|Enchantment & Ability$Token
 DeckHas:Ability$Sacrifice

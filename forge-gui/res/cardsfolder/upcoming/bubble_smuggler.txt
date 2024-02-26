@@ -1,5 +1,5 @@
 Name:Bubble Smuggler
-ManaCost:1 U 
+ManaCost:1 U
 Types:Creature Octopus Fish
 PT:2/1
 K:Disguise:5 U

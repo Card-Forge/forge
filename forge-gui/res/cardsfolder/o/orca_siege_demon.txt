@@ -1,8 +1,8 @@
 Name:Orca, Siege Demon
 ManaCost:5 B R
 Types:Legendary Creature Demon
-K:Trample
 PT:5/5
+K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When NICKNAME dies, it deals damage equal to its power divided as you choose among any number of targets.

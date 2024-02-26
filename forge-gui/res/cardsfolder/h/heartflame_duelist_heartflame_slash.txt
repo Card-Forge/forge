@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Creature Human Knight
 PT:3/1
 S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have lifelink.
-AlternateMode:Adventure
 DeckHas:Ability$LifeGain
 DeckHints:Type$Instant|Sorcery
+AlternateMode:Adventure
 Oracle:Instant and sorcery spells you control have lifelink.
 
 ALTERNATE

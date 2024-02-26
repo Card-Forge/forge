@@ -1,5 +1,5 @@
 Name:Vengeful Creeper
-ManaCost:4 G 
+ManaCost:4 G
 Types:Creature Plant Elemental
 PT:5/5
 K:Disguise:5 G

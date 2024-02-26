@@ -10,4 +10,3 @@ SVar:DBPump:DB$ Pump | Defined$ ReplacedCard | Duration$ UntilYourNextTurn | KW$
 DeckHas:Ability$Counters
 DeckHints:Type$Dragon
 Oracle:{T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn. (It can't be the target of spells or abilities your opponents control.)
-

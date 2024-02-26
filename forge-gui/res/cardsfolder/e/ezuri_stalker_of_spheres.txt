@@ -2,7 +2,7 @@ Name:Ezuri, Stalker of Spheres
 ManaCost:2 G U
 Types:Legendary Creature Phyrexian Elf Warrior
 PT:3/3
-T:Mode$ ChangesZone  | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {3}. If you do, proliferate twice.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {3}. If you do, proliferate twice.
 SVar:TrigProliferate:AB$ Proliferate | Cost$ 3 | Amount$ 2
 T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you proliferate, draw a card.
 SVar:TrigDraw:DB$ Draw

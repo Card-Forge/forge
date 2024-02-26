@@ -1,5 +1,5 @@
 Name:Exit Specialist
-ManaCost:1 U 
+ManaCost:1 U
 Types:Creature Human Detective
 PT:2/1
 K:Disguise:1 U

@@ -7,9 +7,9 @@ SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.RememberedPlayerCtrl+powerLE2 |
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotImprinted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 K:Craft:3 W W ExileCtrlOrGrave<1/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Mill|Graveyard|Token
+AlternateMode:DoubleFaced
 Oracle:When Unstable Glyphbridge enters the battlefield, if you cast it, for each player, choose a creature with power 2 or less that player controls. Then destroy all creatures except creatures chosen this way.\nCraft with artifact {3}{W}{W} ({3}{W}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE

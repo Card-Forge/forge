@@ -10,4 +10,4 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
 SVar:X:Count$Valid Mountain.YouCtrl
 DeckNeeds:Type$Mountain
 SVar:BuffedBy:Mountain
-Oracle:[+2]: Search your library for a basic Mountain card, reveal it, put it into your hand, then shuffle.\n[−3]: Koth, Fire of Resistance deals damage to target creature equal to the number of Mountains you control.\n[−7]: You get an emblem with "Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target."
+Oracle:[+2]: Search your library for a basic Mountain card, reveal it, put it into your hand, then shuffle.\n[-3]: Koth, Fire of Resistance deals damage to target creature equal to the number of Mountains you control.\n[-7]: You get an emblem with "Whenever a Mountain enters the battlefield under your control, this emblem deals 4 damage to any target."

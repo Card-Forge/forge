@@ -8,8 +8,8 @@ SVar:TrigDealDamage:DB$ LoseLife | Defined$ TriggeredSourceController | LifeAmou
 A:AB$ ChangeZone | Cost$ 2 W Sac<3/Creature.Other/other creatures> | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME,
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ then return it to the battlefield transformed under its owner's control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | StackDescription$ None | SpellDescription$ Activate only as a sorcery.
-AlternateMode:DoubleFaced
 DeckHas:Ability$Sacrifice
+AlternateMode:DoubleFaced
 Oracle:Vigilance\nWhenever a source an opponent controls deals damage to you or a permanent you control, that source's controller loses 2 life unless they pay {1}.\n{2}{W}, Sacrifice three other creatures: Exile Elesh Norn, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery.
 
 ALTERNATE

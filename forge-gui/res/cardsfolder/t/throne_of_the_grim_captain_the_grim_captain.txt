@@ -3,9 +3,9 @@ ManaCost:2
 Types:Legendary Artifact
 A:AB$ Mill | Cost$ T | NumCards$ 2 | SpellDescription$ Mill two cards.
 K:Craft:4 ExileCtrlOrGrave<1/Dinosaur.Other> ExileCtrlOrGrave<1/Merfolk.Other> ExileCtrlOrGrave<1/Pirate.Other> ExileCtrlOrGrave<1/Vampire.Other>:a Dinosaur, a Merfolk, a Pirate, and a Vampire:the four
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
 Oracle:{T}: Mill two cards.\nCraft with a Dinosaur, a Merfolk, a Pirate, and a Vampire {4} ({4}, Exile this artifact, Exile the four from among permanents you control and/or cards in your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE

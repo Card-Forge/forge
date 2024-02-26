@@ -1,7 +1,7 @@
 Name:Forensic Gadgeteer
 ManaCost:2 U
-PT:2/3
 Types:Creature Vedalken Artificer Detective
+PT:2/3
 T:Mode$ SpellCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an artifact spell, investigate.
 SVar:TrigInvestigate:DB$ Investigate
 S:Mode$ ReduceCost | ValidCard$ Artifact.YouCtrl | Type$ Ability | Amount$ 1 | MinMana$ 1 | AffectedZone$ Battlefield | Description$ Activated abilities of artifacts you control {1} less to activate. This effect can't reduce the mana in that cost to less than one mana.

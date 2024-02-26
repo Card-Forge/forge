@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 4 | Toughness$ 3 | Types$ Creature,Insect | Keywords$ Haste & Reach | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Type$Insect
-Oracle:Search your library for a basic land card and put that card onto the battlefield, then shuffle. Until end of turn, that land becomes a 4/3 Insect creature with reach and haste. It's still a land. 
+Oracle:Search your library for a basic land card and put that card onto the battlefield, then shuffle. Until end of turn, that land becomes a 4/3 Insect creature with reach and haste. It's still a land.

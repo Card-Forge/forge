@@ -1,6 +1,6 @@
-Name:Apothecary White 
+Name:Apothecary White
 ManaCost:3 W
-Types:Legendary Creature Human Cleric 
+Types:Legendary Creature Human Cleric
 PT:3/4
 K:Vigilance
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigFood | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you create a Food token for each player being attacked. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

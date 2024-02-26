@@ -6,4 +6,4 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:Count$Valid Creature.YouCtrl
 K:Myriad
 DeckHas:Ability$Token
-Oracle:Sumala Rumblers’s power is equal to the number of creatures you control.\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that’s a copy of this creature that’s tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+Oracle:Sumala Rumblers's power is equal to the number of creatures you control.\nMyriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)

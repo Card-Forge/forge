@@ -20,4 +20,4 @@ SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 
 SVar:BuffedBy:Instant.Red,Sorcery.Red
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Token & Type$Monk
-Oracle:[+1]: Create a 1/1 red Monk creature token with prowess.\n[−1]: Exile the top two cards of your library. Choose one of them. You may play that card this turn.\n[−2]: Choose target creature an opponent controls. Whenever you attack this turn, Jaya, Fiery Negotiator deals damage equal to the number of attacking creatures to that creature.\n[−8]: You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."
+Oracle:[+1]: Create a 1/1 red Monk creature token with prowess.\n[-1]: Exile the top two cards of your library. Choose one of them. You may play that card this turn.\n[-2]: Choose target creature an opponent controls. Whenever you attack this turn, Jaya, Fiery Negotiator deals damage equal to the number of attacking creatures to that creature.\n[-8]: You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."

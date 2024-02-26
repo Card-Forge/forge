@@ -2,7 +2,7 @@ Name:Excavation Technique
 ManaCost:3 W
 Types:Sorcery
 K:Demonstrate
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlwaysRemember$ True | RememberLKI$ True  | SubAbility$ DBToken | SpellDescription$ Destroy target nonland permanent.
+A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Destroy target nonland permanent.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ RememberedController | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Its controller creates two Treasure tokens.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

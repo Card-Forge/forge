@@ -10,7 +10,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | Duration$ UntilYourNextTurn 
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | Duration$ UntilYourNextTurn
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Description$ You can't cast spells until your next turn.
 DeckHas:Ability$Token & Type$Clue|Artifact
 Oracle:Parley — Whenever Innocuous Researcher attacks, each player reveals the top card of their library. For each nonland card revealed this way, you investigate. Then each player draws a card.\nAt the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn.

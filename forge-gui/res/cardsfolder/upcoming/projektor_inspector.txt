@@ -1,5 +1,5 @@
 Name:Projektor Inspector
-ManaCost:2 U 
+ManaCost:2 U
 Types:Creature Human Detective
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Detective.YouCtrl+Other,Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME or another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card.
