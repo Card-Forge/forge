@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -213,6 +214,11 @@ public enum AbilityKey {
     }
     public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> map, SpellAbility sa) {
         CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
+        addCardZoneTableParams(map, table);
+        return table;
+    }
+    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> map, Game game) {
+        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         addCardZoneTableParams(map, table);
         return table;
     }
