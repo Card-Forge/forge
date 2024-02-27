@@ -2,6 +2,6 @@ Name:Melt Through
 ManaCost:R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBAnimate | SpellDescription$ CARDNAME deals 2 damage to any target.
-SVar:DBAnimate:DB$ Animate | ConditionDefined$ Targeted | ConditionPresent$ Creature | Defined$ Targeted | StaticAbilities$ PerpetualEffect | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup steps."
+SVar:DBAnimate:DB$ Animate | ConditionDefined$ Targeted | ConditionPresent$ Creature | Defined$ Targeted | staticAbilities$ PerpetualEffect | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup steps."
 SVar:PerpetualEffect:Mode$ NoCleanupDamage | ValidCard$ Card.Self+inZoneBattlefield | Description$ As long as this creature is on the battlefield, damage isn't removed from it during cleanup steps.
 Oracle:Melt Through deals 2 damage to any target. If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup steps."

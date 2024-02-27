@@ -2,7 +2,7 @@ Name:Sarkhan, Wanderer to Shiv
 ManaCost:3 R
 Types:Legendary Planeswalker Sarkhan
 Loyalty:4
-A:AB$ AnimateAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Dragon.YouOwn | Zone$ Hand | StaticAbilities$ DragonReduceCost,DragonAltCost | Duration$ Perpetual | SpellDescription$ Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."
+A:AB$ AnimateAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Dragon.YouOwn | Zone$ Hand | staticAbilities$ DragonReduceCost,DragonAltCost | Duration$ Perpetual | SpellDescription$ Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."
 SVar:DragonReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DragonAltCost:Mode$ Continuous | EffectZone$ All | MayPlay$ True | MayPlayAltManaCost$ ConvertedManaCost | MayPlayDontGrantZonePermissions$ True | Affected$ Card.Self | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ You may pay {X} rather than pay this spell's mana cost, where X is its mana value.
 A:AB$ MakeCard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Conjure$ True | Name$ Shivan Dragon | Zone$ Hand | SpellDescription$ Conjure a Shivan Dragon card into your hand.

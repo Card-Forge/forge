@@ -8,7 +8,7 @@ SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | T
 K:Class:3:1 W U:AddTrigger$ TriggerUpkeep
 SVar:TriggerUpkeep:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. For as long as it remains exiled, it has "You may cast this card from exile as long as you've cast another spell this turn."
 SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay
-SVar:DBMayPlay:DB$ Animate | Defined$ Remembered | StaticAbilities$ StPlay | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBMayPlay:DB$ Animate | Defined$ Remembered | staticAbilities$ StPlay | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:StPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Exile | Affected$ Card.Self+nonLand | AffectedZone$ Exile | CheckSVar$ YouCastThisTurn | SVarCompare$ GE1 | Description$ You may cast this card from exile as long as you've cast another spell this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl

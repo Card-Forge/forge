@@ -9,7 +9,7 @@ SVar:DBDiscard:DB$ Discard | Defined$ Player | DiscardValid$ Card.nonLand | Mode
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigChoosePlayer | PlayerTurn$ True | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a player discards a card during your turn, they choose another player. That player conjures a duplicate of that card into their hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ TriggeredCardOwner | Choices$ Player.Other | ChoiceTitle$ Choose another player | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | Defined$ ChosenPlayer | DefinedName$ TriggeredCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | StaticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
 DeckHas:Ability$Discard

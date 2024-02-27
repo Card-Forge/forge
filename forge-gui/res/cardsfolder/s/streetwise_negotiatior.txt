@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Cat Citizen
 PT:0/2
 K:Backup:1:BackupAbility
-SVar:BackupAbility:DB$ Animate | StaticAbilities$ CDT
+SVar:BackupAbility:DB$ Animate | staticAbilities$ CDT
 SVar:CDT:Mode$ CombatDamageToughness | ValidCard$ Card.Self | Description$ This creature assigns combat damage equal to its toughness rather than its power.
 S:Mode$ CombatDamageToughness | ValidCard$ Card.Self | Description$ This creature assigns combat damage equal to its toughness rather than its power.
 DeckHas:Ability$Counters

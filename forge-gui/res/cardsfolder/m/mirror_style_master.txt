@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Human Warrior
 PT:3/3
 K:Backup:1:BackupAbility
-SVar:BackupAbility:DB$ Animate | Triggers$ AttackTrig | SVars$ AE
+SVar:BackupAbility:DB$ Animate | Triggers$ AttackTrig | sVars$ AE
 SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever this creature attacks, for each attacking modified creature you control, create a tapped and attacking token that's a copy of that creature. Exile those tokens at end of combat. (Equipment, Auras you control, and counters are modifications.)
 SVar:TrigRepeat:DB$ RepeatEach | RepeatCards$ Creature.attacking+modified+YouCtrl | UseImprinted$ True | RepeatSubAbility$ DBClone | SubAbility$ DelTrig | ChangeZoneTable$ True
 SVar:DBClone:DB$ CopyPermanent | Defined$ Imprinted | TokenTapped$ True | TokenAttacking$ True | RememberTokens$ True
