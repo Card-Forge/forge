@@ -6,6 +6,7 @@ Type=Expansion
 ScryfallCode=OTJ
 
 [cards]
+45 R Duelist of the Mind @Darren Tan
 48 R Fblthp, Lost on the Range @Brian Valeza
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
 126 R Hell to Pay @Liiga Smilshkalne
@@ -18,5 +19,6 @@ ScryfallCode=OTJ
 290 M Tinybones, the Pickpocket @Michael Walsh
 296 M Oko, the Ringleader @Dibujante Nocturno
 305 M Oko, the Ringleader @Lie Setiawan
+318 R Duelist of the Mind @Darren Tan
 319 R Fblthp, Lost on the Range @Brian Valeza
 332 R Hell to Pay @Liiga Smilshkalne

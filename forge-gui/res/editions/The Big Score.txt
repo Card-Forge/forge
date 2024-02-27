@@ -8,6 +8,7 @@ ScryfallCode=BIG
 [cards]
 25 M Nexus of Becoming @Adam Volker
 26 M Sword of Wealth and Power @Dominik Mayer
+55 M Nexus of Becoming @Mark Poole
 56 M Sword of Wealth and Power @Artur Nakhodkin
 64 M Sword of Wealth and Power @Artur Nakhodkin
 90 M Nexus of Becoming @Adam Volker
