@@ -1252,11 +1252,12 @@ public class GameAction {
         boolean orderedDesCreats = false;
         boolean orderedNoRegCreats = false;
         boolean orderedSacrificeList = false;
-        CardCollection cardsToUpdateLKI = new CardCollection();
 
         for (int q = 0; q < 9; q++) {
-            checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
             boolean checkAgain = false;
+            CardCollection cardsToUpdateLKI = new CardCollection();
+
+            checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
 
             CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             Map<AbilityKey, Object> mapParams = AbilityKey.newMap();
@@ -1445,10 +1446,14 @@ public class GameAction {
 
             table.triggerChangesZoneAll(game, null);
 
-            if (!checkAgain) {
-                break; // do not continue the loop
-            } else {
+            for (final Card c : cardsToUpdateLKI) {
+                game.updateLastStateForCard(c);
+            }
+
+            if (checkAgain) {
                 performedSBA = true;
+            } else {
+                break; // do not continue the loop
             }
         } // for q=0;q<9
 
@@ -1472,10 +1477,6 @@ public class GameAction {
         // trigger reset above will activate the copy's Always trigger, which needs to be triggered at
         // this point.
         checkStaticAbilities(false, affectedCards, CardCollection.EMPTY);
-
-        for (final Card c : cardsToUpdateLKI) {
-            game.updateLastStateForCard(c);
-        }
 
         if (!refreeze) {
             game.getStack().unfreezeStack();

@@ -13,7 +13,6 @@ import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -85,7 +84,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
-        if (cause != null && cause.isReplacementAbility() && cause.getReplacementEffect().getMode() == ReplacementType.Moved) {
+        if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
             // will be handled by original "cause" instead
             return;
         }
@@ -113,21 +112,25 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null) {
-            if (!containsColumn(destination)) {
-                return allCards;
-            }
+        if (destination != null && !containsColumn(destination)) {
+            return allCards;
         }
         if (origin != null) {
             for (ZoneType z : origin) {
-                CardCollectionView lkiLookup = CardCollection.EMPTY;
-                if (z == ZoneType.Battlefield) {
-                    lkiLookup = lastStateBattlefield;
-                }
                 if (containsRow(z)) {
+                    CardCollectionView lkiLookup = CardCollection.EMPTY;
+                    // CR 603.10a
+                    if (z == ZoneType.Battlefield) {
+                        lkiLookup = lastStateBattlefield;
+                    }
+                    if (z == ZoneType.Graveyard && destination == null) {
+                        lkiLookup = lastStateGraveyard;
+                    }
                     if (destination != null) {
-                        for (Card c : row(z).get(destination)) {
-                            allCards.add(lkiLookup.get(c));
+                        if (row(z).containsKey(destination)) {
+                            for (Card c : row(z).get(destination)) {
+                                allCards.add(lkiLookup.get(c));
+                            }
                         }
                     } else {
                         for (CardCollection cc : row(z).values()) {

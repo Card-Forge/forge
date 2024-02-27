@@ -1899,7 +1899,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void cleanupExiledWith() {
-        if (exiledWith == null) {
+        if (exiledWith == null || exiledWith.isLKI()) {
             return;
         }
 

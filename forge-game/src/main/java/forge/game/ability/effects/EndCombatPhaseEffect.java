@@ -25,6 +25,9 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
             return;
         }
 
+        // CR 721.2a
+        game.getTriggerHandler().clearWaitingTriggers(); 
+
         // 1) All spells and abilities on the stack are exiled.
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
@@ -35,7 +38,6 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
 
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
-        game.getTriggerHandler().clearWaitingTriggers();
 
         // 2) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
@@ -43,7 +45,6 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
 
         // 3) The current phase and step ends. The game skips straight to the postcombat main phase. As this happens,
         // all attacking and blocking creatures are removed from combat and effects that last “until end of combat” expire.
-        game.getPhaseHandler().endCombat();
         game.getPhaseHandler().endCombatPhaseByEffect();
     }
 

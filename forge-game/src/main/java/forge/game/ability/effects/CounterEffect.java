@@ -53,7 +53,7 @@ public class CounterEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        final CardZoneTable table = AbilityKey.addCardZoneTableParams(params, sa);
+        final CardZoneTable table = AbilityKey.addCardZoneTableParams(params, game);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();

@@ -28,7 +28,11 @@ public class EndTurnEffect extends SpellAbilityEffect {
         if (sa.hasParam("Optional") && !ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"), null)) {
             return;
         }
+
         Game game = ender.getGame();
+        // CR 721.1a
+        game.getTriggerHandler().clearWaitingTriggers();
+
         // Steps taken from gatherer's rulings on Time Stop.
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
@@ -42,7 +46,6 @@ public class EndTurnEffect extends SpellAbilityEffect {
 
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
-        game.getTriggerHandler().clearWaitingTriggers();
 
         // 2) All attacking and blocking creatures are removed from combat.
         game.getPhaseHandler().endCombat();
