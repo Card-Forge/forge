@@ -35,6 +35,7 @@ public enum TriggerType {
     BecomesTargetOnce(TriggerBecomesTargetOnce.class),
     BlockersDeclared(TriggerBlockersDeclared.class),
     Blocks(TriggerBlocks.class),
+    CaseSolved(TriggerCaseSolved.class),
     Championed(TriggerChampioned.class),
     ChangesController(TriggerChangesController.class),
     ChangesZone(TriggerChangesZone.class),
