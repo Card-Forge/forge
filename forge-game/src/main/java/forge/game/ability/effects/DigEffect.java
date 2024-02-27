@@ -117,12 +117,13 @@ public class DigEffect extends SpellAbilityEffect {
         final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone")) : ZoneType.Hand;
         final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
-        int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
+        final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
+        final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
+
         int destZone1ChangeNum = 1;
         String changeValid = sa.getParamOrDefault("ChangeValid", "");
         final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
         final boolean optional = sa.hasParam("Optional");
         final boolean noMove = sa.hasParam("NoMove");
         final boolean skipReorder = sa.hasParam("SkipReorder");
@@ -161,7 +162,7 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+        CardZoneTable zoneMovements = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
 
@@ -375,7 +376,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
 
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    AbilityKey.addCardZoneTableParams(moveParams, table);
+                    AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                     for (Card c : movedCards) {
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
@@ -499,7 +500,7 @@ public class DigEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCombatChanged());
         }
 
-        table.triggerChangesZoneAll(game, sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
         counterTable.replaceCounterEffect(game, sa, true);
     }
 

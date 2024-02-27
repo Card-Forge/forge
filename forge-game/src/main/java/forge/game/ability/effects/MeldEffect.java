@@ -42,11 +42,11 @@ public class MeldEffect extends SpellAbilityEffect {
         CardCollection exiled = CardLists.filter(Arrays.asList(hostCard, secondary), CardPredicates.canExiledBy(sa, true));
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         exiled = game.getAction().exile(exiled, sa, moveParams);
-        table.triggerChangesZoneAll(game, sa);
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
 
         if (exiled.size() < 2) {
             return;
@@ -78,10 +78,16 @@ public class MeldEffect extends SpellAbilityEffect {
         primary.setMeldedWith(secondary);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         bf.addToMelded(secondary);
-        Card movedCard = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
+
+        moveParams = AbilityKey.newMap();
+        zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+
+        Card movedCard = game.getAction().moveToPlay(primary, controller, sa, moveParams);
         if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 }

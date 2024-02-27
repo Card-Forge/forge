@@ -1,6 +1,5 @@
 package forge.game.ability;
 
-import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -207,19 +206,14 @@ public enum AbilityKey {
         return runParams;
     }
 
-    public static void addCardZoneTableParams(Map<AbilityKey, Object> map, CardZoneTable table) {
-        map.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
-        map.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
-        map.put(AbilityKey.InternalTriggerTable, table);
-    }
-    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> map, SpellAbility sa) {
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-        addCardZoneTableParams(map, table);
+    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> params, SpellAbility sa) {
+        CardZoneTable table = CardZoneTable.getSimultaneousInstance(sa);
+        addCardZoneTableParams(params, table);
         return table;
     }
-    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> map, Game game) {
-        CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-        addCardZoneTableParams(map, table);
-        return table;
+    public static void addCardZoneTableParams(Map<AbilityKey, Object> params, CardZoneTable table) {
+        params.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
+        params.put(AbilityKey.InternalTriggerTable, table);
     }
 }

@@ -90,8 +90,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.getLastStateGraveyard());
-        AbilityKey.addCardZoneTableParams(params, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (Card c : list) {
@@ -99,7 +98,8 @@ public class DestroyAllEffect extends SpellAbilityEffect {
                 card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
             }
         }
-        table.triggerChangesZoneAll(game, sa);
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 
 }

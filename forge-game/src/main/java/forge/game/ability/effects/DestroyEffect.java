@@ -10,7 +10,6 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -54,14 +53,14 @@ public class DestroyEffect extends SpellAbilityEffect {
             card.clearRemembered();
         }
 
-        CardCollectionView tgtCards = getTargetCards(sa);
         CardCollectionView untargetedCards = CardUtil.getRadiance(sa);
+        CardCollectionView tgtCards = getTargetCards(sa);
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
+        untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        CardZoneTable table = getChangeZoneTable(sa, game.copyLastStateBattlefield(), CardCollection.EMPTY);
-        AbilityKey.addCardZoneTableParams(params, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
@@ -78,15 +77,13 @@ public class DestroyEffect extends SpellAbilityEffect {
             internalDestroy(gameCard, sa, cachedMap, params);
         }
 
-        untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
-
         for (final Card unTgtC : untargetedCards) {
             if (unTgtC.isInPlay()) {
                 internalDestroy(unTgtC, sa, cachedMap, params);
             }
         }
 
-        table.triggerChangesZoneAll(game, sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 
     protected void internalDestroy(Card gameCard, SpellAbility sa, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {

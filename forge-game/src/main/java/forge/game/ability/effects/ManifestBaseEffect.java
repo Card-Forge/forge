@@ -65,20 +65,15 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
             if (fromLibrary) {
                 for (Card c : tgtCards) {
                     // CR 701.34d If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
-                    CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
-
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    AbilityKey.addCardZoneTableParams(moveParams, triggerList);
-
+                    CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
                     internalEffect(c, p, sa, moveParams);
                     triggerList.triggerChangesZoneAll(game, sa);
                 }
             } else {
                 // manifest from other zones should be done at the same time
-                CardZoneTable triggerList = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
-
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                AbilityKey.addCardZoneTableParams(moveParams, triggerList);
+                CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 for (Card c : tgtCards) {
                     internalEffect(c, p, sa, moveParams);
                 }
