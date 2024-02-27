@@ -24,7 +24,6 @@ import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
-import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -948,36 +947,6 @@ public class Game {
     }
     public void setActivePlanes(List<Card> activePlane0) {
         activePlanes = activePlane0;
-    }
-
-    public void archenemy904_10() {
-        //904.10. If a non-ongoing scheme card is face up in the
-        //command zone, and it isn't the source of a triggered ability
-        //that has triggered but not yet left the stack, that scheme card
-        //is turned face down and put on the bottom of its owner's scheme
-        //deck the next time a player would receive priority.
-        //(This is a state-based action. See rule 704.)
-
-        for (int i = 0; i < getCardsIn(ZoneType.Command).size(); i++) {
-            Card c = getCardsIn(ZoneType.Command).get(i);
-            if (c.isScheme() && !c.getType().hasSupertype(Supertype.Ongoing)) {
-                boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : stack) {
-                    if (si.getSourceCard().equals(c)) {
-                        foundonstack = true;
-                        break;
-                    }
-                }
-                if (!foundonstack) {
-                    getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    c.getController().getZone(ZoneType.Command).remove(c);
-                    i--;
-                    getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-                    c.getController().getZone(ZoneType.SchemeDeck).add(c);
-                }
-            }
-        }
     }
 
     public GameStage getAge() {

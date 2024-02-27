@@ -250,10 +250,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null, null);
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, null);
     }
 
     /**

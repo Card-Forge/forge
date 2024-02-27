@@ -7,6 +7,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -47,7 +48,7 @@ public class CostCollectEvidence extends CostPartWithList {
 
         // This may need to be updated if we get a card like "Cards in graveyards can't be exiled to pay for costs"
 
-        return CardLists.getTotalCMC(payer.getCardsIn(ZoneType.Graveyard)) >= amount;
+        return CardLists.getTotalCMC(CardLists.filter(payer.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, effect))) >= amount;
     }
 
     @Override

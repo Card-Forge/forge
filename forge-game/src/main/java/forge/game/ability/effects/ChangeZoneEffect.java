@@ -702,6 +702,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 // might set before card is moved only for nontoken
                 if (destination.equals(ZoneType.Exile)) {
+                    if (!gameCard.canExiledBy(sa, true)) {
+                        continue;
+                    }
                     handleExiledWith(gameCard, sa);
                 }
 
@@ -1384,6 +1387,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 else if (destination.equals(ZoneType.Exile)) {
+                    if (!c.canExiledBy(sa, true)) {
+                        continue;
+                    }
                     movedCard = game.getAction().exile(c, sa, moveParams);
 
                     handleExiledWith(movedCard, sa);
@@ -1553,6 +1559,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else if (srcSA.getParam("Destination").equals("Graveyard")) {
                 movedCard = game.getAction().moveToGraveyard(tgtHost, srcSA, params);
             } else if (srcSA.getParam("Destination").equals("Exile")) {
+                if (!tgtHost.canExiledBy(srcSA, true)) {
+                    return;
+                }
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
                 handleExiledWith(movedCard, srcSA);
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {

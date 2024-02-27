@@ -80,7 +80,7 @@ public class MutateEffect extends SpellAbilityEffect {
         game.getTriggerHandler().clearActiveTriggers(target, null);
         game.getTriggerHandler().registerActiveTrigger(target, false);
 
-        game.getAction().moveTo(p.getZone(ZoneType.Merged), host, sa);
+        game.getAction().moveTo(p.getZone(ZoneType.Merged), host, sa, AbilityKey.newMap());
 
         host.setTapped(target.isTapped());
         host.setFlipped(target.isFlipped());

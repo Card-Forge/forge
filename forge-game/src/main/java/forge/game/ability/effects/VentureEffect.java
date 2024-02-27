@@ -59,9 +59,7 @@ public class VentureEffect  extends SpellAbilityEffect {
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");
         Card dungeon = player.getController().chooseDungeon(player, dungeonCards, message);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, dungeon, sa, moveParams);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(dungeon, sa, moveParams);
 
         return dungeon;
     }

@@ -48,7 +48,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -757,10 +756,7 @@ public final class GameActionUtil {
 
         eff.updateStateForView();
 
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null, null);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
         return eff;
     }

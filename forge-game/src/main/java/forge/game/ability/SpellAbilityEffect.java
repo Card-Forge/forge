@@ -536,11 +536,7 @@ public abstract class SpellAbilityEffect {
             eff.copyChangedTextFrom(card);
         }
 
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, null);
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card eff, final String zone) {
@@ -648,22 +644,9 @@ public abstract class SpellAbilityEffect {
                 eff.copyChangedTextFrom(host);
             }
 
-            final GameCommand endEffect = new GameCommand() {
-                private static final long serialVersionUID = -5861759814760561373L;
+            game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
 
-                @Override
-                public void run() {
-                    game.getAction().exile(eff, null, null);
-                }
-            };
-
-            game.getEndOfTurn().addUntil(endEffect);
-
-            // TODO: Add targeting to the effect so it knows who it's dealing with
-            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa, null);
-            eff.updateStateForView();
-            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            game.getAction().moveToCommand(eff, sa);
         }
     }
 
@@ -990,5 +973,16 @@ public abstract class SpellAbilityEffect {
             return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
         }
         return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
+    }
+
+    public static GameCommand exileEffectCommand(final Game game, final Card effect) {
+        return new GameCommand() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void run() {
+                game.getAction().exileEffect(effect);
+            }
+        };
     }
 }

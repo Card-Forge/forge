@@ -379,8 +379,12 @@ public class DigEffect extends SpellAbilityEffect {
 
                     for (Card c : movedCards) {
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
-                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
+                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                         } else {
+                            if (destZone1.equals(ZoneType.Exile) && !c.canExiledBy(sa, true)) {
+                                continue;
+                            }
+
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
@@ -470,6 +474,9 @@ public class DigEffect extends SpellAbilityEffect {
                         } else {
                             // just move them randomly
                             for (Card c : rest) {
+                                if (destZone2 == ZoneType.Exile && !c.canExiledBy(sa, true)) {
+                                    continue;
+                                }
                                 c = game.getAction().moveTo(destZone2, c, sa, moveParams);
                                 if (destZone2 == ZoneType.Exile) {
                                     if (sa.hasParam("ExileWithCounter")) {

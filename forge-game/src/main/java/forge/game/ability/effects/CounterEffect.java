@@ -265,6 +265,9 @@ public class CounterEffect extends SpellAbilityEffect {
         } else if (destination.equals("Graveyard")) {
             movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
+            if (!c.canExiledBy(srcSA, true)) {
+                return false;
+            }
             movedCard = game.getAction().exile(c, srcSA, params);
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);

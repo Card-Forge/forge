@@ -51,7 +51,6 @@ import java.util.*;
          CardCollection drafted = new CardCollection();
 
          for (int i = 0; i < numToDraft; i++) {
-             String chosen = "";
              Collections.shuffle(spellbook);
              List<Card> draftOptions = new ArrayList<>();
              for (String name : spellbook.subList(0, 3)) {
@@ -69,6 +68,10 @@ import java.util.*;
 
          final CardZoneTable triggerList = new CardZoneTable();
          for (final Card c : drafted) {
+             if (zone.equals(ZoneType.Exile) && !c.canExiledBy(sa, true)) {
+                 continue;
+             }
+
              Card made = game.getAction().moveTo(zone, c, sa, moveParams);
              if (zone.equals(ZoneType.Exile)) {
                  handleExiledWith(made, sa);
