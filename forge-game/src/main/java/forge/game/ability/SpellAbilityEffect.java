@@ -946,11 +946,13 @@ public abstract class SpellAbilityEffect {
         }
     }
     public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        handleExiledWith(movedCard, cause, cause.getHostCard());
+    }
+    public static void handleExiledWith(final Card movedCard, final SpellAbility cause, Card exilingSource) {
         if (movedCard.isToken()) {
             return;
         }
 
-        Card exilingSource = cause.getHostCard();
         // during replacement LKI might be used
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
@@ -972,6 +974,7 @@ public abstract class SpellAbilityEffect {
     public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
         if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved
                 && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+            // if a RE changes the destination zone try to make it simultaneous
             return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
         }
         return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);

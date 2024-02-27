@@ -710,6 +710,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
 
+                if (destination.equals(ZoneType.Exile) && lastStateBattlefield.contains(gameCard) && hostCard.equals(gameCard)) {
+                    // support Parallax Wave returning itself
+                    handleExiledWith(movedCard, sa, lastStateBattlefield.get(gameCard));
+                }
+
                 if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");

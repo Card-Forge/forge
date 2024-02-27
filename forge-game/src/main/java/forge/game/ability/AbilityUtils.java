@@ -1595,9 +1595,6 @@ public class AbilityUtils {
             }
             host.addRemembered(sb.toString());
         }
-
-        // make sure that when this is from a trigger LKI is updated
-        host.getGame().updateLastStateForCard(host);
     }
 
     /**
