@@ -1,0 +1,11 @@
+Name:Case File Auditor
+ManaCost:2 W
+Types:Creature Human Detective
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield and whenever you solve a Case, look at the top six cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+T:Mode$ CaseSolved | ValidPlayer$ You | ValidCard$ Case | Execute$ TrigDig | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and whenever you solve a Case, look at the top six cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Enchantment | RestRandomOrder$ True
+S:Mode$ ManaConvert | ValidPlayer$ You | ValidCard$ Case.YouCtrl | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast Case spells.
+DeckNeeds:Type$Case
+DeckHints:Type$Enchantment
+Oracle:When Case File Auditor enters the battlefield and whenever you solve a Case, look at the top six cards of your library. You may reveal an enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nYou may spend mana as though it were mana of any color to cast Case spells.
