@@ -1,0 +1,12 @@
+Name:Paths of Tuinvale
+ManaCost:1 U
+Types:Instant
+A:SP$ Charm | Choices$ DBDecrease,DBIncrease | MinCharmNum$ 1 | CharmNum$ 2
+SVar:DBDecrease:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Select target creature you control | SubAbility$ DBAnimate | SpellDescription$ Return target creature you control to its owner's hand. That card perpetually gains "This spell costs {1} less to cast."
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ ReduceCost | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+SVar:DBIncrease:DB$ ChangeZone | ValidTgts$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Select target creature you don't control | SubAbility$ DBAnimate2 | SpellDescription$ Return target creature you don't control to its owner's hand. That card perpetually gains "This spell costs {1} more to cast."
+SVar:DBAnimate2:DB$ Animate | Defined$ Remembered | staticAbilities$ RaiseCost | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ None
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} more to cast.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose one or both —\n• Return target creature you control to its owner's hand. That card perpetually gains "This spell costs {1} less to cast."\n• Return target creature you don't control to its owner's hand. That card perpetually gains "This spell costs {1} more to cast."
