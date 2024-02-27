@@ -168,7 +168,7 @@ public class FightAi extends SpellAbilityAi {
     	final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         AbilitySub tgtFight = sa.getSubAbility();
-        while (tgtFight != null && tgtFight.getApi() != ApiType.Fight && tgtFight.getApi() != ApiType.DealDamage) {
+        while (tgtFight != null && tgtFight.getApi() != ApiType.Fight && tgtFight.getApi() != ApiType.DealDamage && tgtFight.getApi() != ApiType.EachDamage) {
             // Search for the Fight/DealDamage subability (matters e.g. for Ent's Fury where the Fight SA is not an immediate child of Pump)
             tgtFight = tgtFight.getSubAbility();
         }
