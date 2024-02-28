@@ -12,7 +12,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -43,13 +42,13 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
+        final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
         CardCollectionView list;
         if (sa.hasParam("Defined")) {
-            list = AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa);
+            list = AbilityUtils.getDefinedCards(host, sa.getParam("Defined"), sa);
         } else {
             list = game.getCardsIn(ZoneType.Battlefield);
             if (sa.hasParam("ValidCards")) {
@@ -59,7 +58,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         if (remSacrificed) {
-            card.clearRemembered();
+            host.clearRemembered();
         }
 
         // update cards that where using LKI
@@ -82,16 +81,15 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
-        Map<Integer, Card> cachedMap = CardUtil.getLKIfromLastState(zoneMovements.getLastStateBattlefield());
 
         for (Card sac : list) {
-            final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
+            final Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
             if (game.getAction().sacrifice(sac, sa, true, params) != null) {
                 if (remSacrificed) {
-                    card.addRemembered(lKICopy);
+                    host.addRemembered(lKICopy);
                 }
                 if (sa.hasParam("ImprintSacrificed")) {
-                    card.addImprintedCard(lKICopy);
+                    host.addImprintedCard(lKICopy);
                 }
             }
         }

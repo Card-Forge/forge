@@ -11,7 +11,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -90,10 +89,9 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
-        Map<Integer, Card> cachedMap = CardUtil.getLKIfromLastState(zoneMovements.getLastStateBattlefield());
         for (Card c : list) {
             if (game.getAction().destroy(c, sa, !noRegen, params) && remDestroyed) {
-                card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
+                card.addRemembered(zoneMovements.getLastStateBattlefield().get(c));
             }
         }
 

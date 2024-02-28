@@ -143,14 +143,6 @@ public final class CardUtil {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
     }
 
-    public static Map<Integer, Card> getLKIfromLastState(CardCollectionView lastState) {
-        Map<Integer, Card> cache = Maps.newHashMap();
-        for (Card c : lastState) {
-            cache.put(c.getId(), c);
-        }
-        return cache;
-    }
-
     public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
         if (in == null) {
             return null;
