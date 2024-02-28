@@ -32,36 +32,33 @@ public class EncodeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Player player = sa.getActivatingPlayer();
-        final Game game = player.getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
 
         if (host.isToken()) {
             return;
         }
 
-        // make list of creatures that controller has on Battlefield
         CardCollectionView choices = host.getController().getCreaturesInPlay();
 
         // if no creatures on battlefield, cannot encoded
         if (choices.isEmpty()) {
             return;
         }
-        // Handle choice of whether or not to encoded
 
-        if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())), null)) {
+        // Handle choice of whether or not to encoded
+        if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())), null)) {
             return;
         }
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
-        // move host card to exile
-        Card movedCard = game.getAction().exile(host, sa, moveParams);
-        table.triggerChangesZoneAll(game, sa);
+        Card moved = game.getAction().exile(host, sa, moveParams);
 
-        // choose a creature
-        Card choice = player.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", false, null);
+        zoneMovements.triggerChangesZoneAll(game, sa);
+
+        Card choice = activator.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseACreatureYouControlToEncode") + " ", false, null);
 
         if (choice == null) {
             return;
@@ -72,8 +69,8 @@ public class EncodeEffect extends SpellAbilityEffect {
         game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, codeLog.toString());
 
         // store hostcard in encoded array
-        choice.addEncodedCard(movedCard);
-        movedCard.setEncodingCard(choice);
+        choice.addEncodedCard(moved);
+        moved.setEncodingCard(choice);
     }
 
 }

@@ -10,8 +10,6 @@ import forge.card.CardType;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Maps;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -24,7 +22,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
@@ -43,7 +40,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final Card card = sa.getHostCard();
+        final Card host = sa.getHostCard();
 
         if (sa.hasParam("Echo")) {
             boolean isPaid;
@@ -51,45 +48,45 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?", null)) {
                 isPaid = true;
             } else {
-                isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
+                isPaid = activator.getController().payManaOptional(host, new Cost(sa.getParam("Echo"), true),
                     sa, Localizer.getInstance().getMessage("lblPayEcho"), ManaPaymentPurpose.Echo);
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
             runParams.put(AbilityKey.EchoPaid, isPaid);
             game.getTriggerHandler().runTrigger(TriggerType.PayEcho, runParams, false);
-            if (isPaid || !card.getController().equals(activator)) {
+            if (isPaid || !host.getController().equals(activator)) {
                 return;
             }
         } else if (sa.hasParam("CumulativeUpkeep")) {
             GameEntityCounterTable table = new GameEntityCounterTable();
-            card.addCounter(CounterEnumType.AGE, 1, activator, table);
+            host.addCounter(CounterEnumType.AGE, 1, activator, table);
 
             table.replaceCounterEffect(game, sa, true);
 
             Cost payCost = new Cost(ManaCost.ZERO, true);
-            int n = card.getCounters(CounterEnumType.AGE);
+            int n = host.getCounters(CounterEnumType.AGE);
             if (n > 0) {
                 Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
                 payCost.mergeTo(cumCost, n, sa);
             }
 
-            game.updateLastStateForCard(card);
+            game.updateLastStateForCard(host);
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Cumulative upkeep for ").append(card);
+            sb.append("Cumulative upkeep for ").append(host);
 
-            boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+            boolean isPaid = activator.getController().payManaOptional(host, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
             runParams.put(AbilityKey.CumulativeUpkeepPaid, isPaid);
             runParams.put(AbilityKey.PayingMana, StringUtils.join(sa.getPayingMana(), ""));
             game.getTriggerHandler().runTrigger(TriggerType.PayCumulativeUpkeep, runParams, false);
-            if (isPaid || !card.getController().equals(activator)) {
+            if (isPaid || !host.getController().equals(activator)) {
                 return;
             }
         }
 
         // Expand Sacrifice keyword here depending on what we need out of it.
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Amount", "1"), sa);
+        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
         final boolean devour = sa.isKeyword(Keyword.DEVOUR);
         final boolean exploit = sa.isKeyword(Keyword.EXPLOIT);
         final boolean sacEachValid = sa.hasParam("SacEachValid");
@@ -102,17 +99,14 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         final boolean optional = sa.hasParam("Optional");
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), CardCollection.EMPTY);
-        AbilityKey.addCardZoneTableParams(params, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
-        if (valid.equals("Self") && game.getZoneOf(card) != null) {
-            if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
+        if (valid.equals("Self") && game.getZoneOf(host) != null) {
+            if (game.getZoneOf(host).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()), null)) {
-                    if (game.getAction().sacrifice(card, sa, true, params) != null) {
-                        if (remSacrificed) {
-                            card.addRemembered(card);
-                        }
+                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getName()), null)) {
+                    if (game.getAction().sacrifice(host, sa, true, params) != null && remSacrificed) {
+                        host.addRemembered(host);
                     }
                 }
             }
@@ -165,35 +159,31 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
-                Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
-                    Card lKICopy = null;
-                    if (devour || exploit || remSacrificed) {
-                        lKICopy = CardUtil.getLKICopy(sac, cachedMap);
-                    }
+                    Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, params);
                     // Run Devour Trigger
                     if (devour) {
-                        card.addDevoured(lKICopy);
+                        host.addDevoured(lKICopy);
                         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                         runParams.put(AbilityKey.Devoured, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                     }
                     if (exploit) {
-                        card.addExploited(lKICopy);
-                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
+                        host.addExploited(lKICopy);
+                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
                         runParams.put(AbilityKey.Exploited, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if ((wasDestroyed || wasSacrificed) && remSacrificed) {
-                        card.addRemembered(lKICopy);
+                        host.addRemembered(lKICopy);
                     }
                 }
             }
         }
 
-        table.triggerChangesZoneAll(game, sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 
     @Override

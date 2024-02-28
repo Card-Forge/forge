@@ -123,11 +123,11 @@ public class CostExileFromStack extends CostPart {
             return true;
         }
 
-        CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, ability);
         CardCollection moved = game.getAction().exile(list, ability, moveParams);
         SpellAbilityEffect.handleExiledWith(moved, ability);
+        zoneMovements.triggerChangesZoneAll(game, ability);
 
         return true;
     }

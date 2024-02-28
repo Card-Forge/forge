@@ -38,11 +38,10 @@ public class EndTurnEffect extends SpellAbilityEffect {
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, moveParams);
-        table.triggerChangesZoneAll(game, sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
 
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();

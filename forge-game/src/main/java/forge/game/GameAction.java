@@ -127,35 +127,26 @@ public class GameAction {
             return c;
         }
 
+        CardCollectionView lastBattlefield = getLastState(AbilityKey.LastStateBattlefield, cause, params, false);
+        CardCollectionView lastGraveyard = getLastState(AbilityKey.LastStateGraveyard, cause, params, false);
+
         // Aura entering indirectly
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            try {
-                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+                found = true;
+            }
+
+            if (!found) {
+                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(c, null))) {
                     found = true;
                 }
-            } catch (Exception e1) {
-                found = false;
             }
 
             if (!found) {
-                try {
-                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
-                        found = true;
-                    }
-                } catch (Exception e2) {
-                    found = false;
-                }
-            }
-
-            if (!found) {
-                try {
-                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
-                        found = true;
-                    }
-                } catch (Exception e3) {
-                    found = false;
+                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(c, null))) {
+                    found = true;
                 }
             }
             if (!found) {
@@ -184,8 +175,6 @@ public class GameAction {
                 lastKnownInfo = (Card) cause.getReplacingObject(AbilityKey.CardLKI);
             }
         }
-        CardCollectionView lastBattlefield = getLastState(AbilityKey.LastStateBattlefield, cause, params);
-        CardCollectionView lastGraveyard = getLastState(AbilityKey.LastStateGraveyard, cause, params);
 
         if (c.isSplitCard()) {
             boolean resetToOriginal = false;
@@ -403,10 +392,10 @@ public class GameAction {
                 if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied, null))) {
+                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(copied, null))) {
+                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
                 if (!found) {
@@ -2608,12 +2597,13 @@ public class GameAction {
         }
     }
 
-    private CardCollectionView getLastState(final AbilityKey key, final SpellAbility cause, final Map<AbilityKey, Object> params) {
+    public CardCollectionView getLastState(final AbilityKey key, final SpellAbility cause, final Map<AbilityKey, Object> params, final boolean refreshIfEmpty) {
         CardCollectionView lastState = null;
         if (params != null) {
             lastState = (CardCollectionView) params.get(key);
         }
         if (lastState == null && cause != null) {
+            // inside RE
             if (key == AbilityKey.LastStateBattlefield) {
                 lastState = cause.getLastStateBattlefield();
             }
@@ -2622,11 +2612,20 @@ public class GameAction {
             }
         }
         if (lastState == null) {
+            // this fallback should be rare unless called when creating a new CardZoneTable
             if (key == AbilityKey.LastStateBattlefield) {
-                lastState = game.getLastStateBattlefield();
+                if (refreshIfEmpty) {
+                    lastState = game.copyLastStateBattlefield();
+                } else {
+                    lastState = game.getLastStateBattlefield();
+                }
             }
             if (key == AbilityKey.LastStateGraveyard) {
-                lastState = game.getLastStateGraveyard();
+                if (refreshIfEmpty) {
+                    lastState = game.copyLastStateGraveyard();
+                } else {
+                    lastState = game.getLastStateGraveyard();
+                }
             }
         }
         return lastState;

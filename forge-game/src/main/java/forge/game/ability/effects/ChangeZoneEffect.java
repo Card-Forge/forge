@@ -470,11 +470,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             libraryPosition = pair.getValue();
         }
 
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+        final GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
+        final CardCollectionView lastStateBattlefield = triggerList.getLastStateBattlefield();
 
-        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
         // changing zones for spells on the stack
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
@@ -1260,10 +1259,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("Imprint");
 
         boolean combatChanged = false;
-
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
-        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
+        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
 
         for (Player player : HiddenOriginChoicesMap.keySet()) {
             boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
@@ -1281,6 +1277,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 AbilityKey.addCardZoneTableParams(moveParams, triggerList);
+
                 if (destination.equals(ZoneType.Library)) {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
@@ -1330,7 +1327,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedTo") && c.isAttachment()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
-                            list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), source.getController(), source, sa);
+                            list = CardLists.getValidCards(triggerList.getLastStateBattlefield(), sa.getParam("AttachedTo"), source.getController(), source, sa);
                         }
                         // only valid choices are when they could be attached
                         // TODO for multiple Auras entering attached this way, need to use LKI info

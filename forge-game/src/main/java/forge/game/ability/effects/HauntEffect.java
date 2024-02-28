@@ -25,11 +25,10 @@ public class HauntEffect extends SpellAbilityEffect {
         } else if (sa.usesTargeting() && !card.isToken() && host.equalsWithTimestamp(card)) {
             // haunt target but only if card is no token and still in grave
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-            AbilityKey.addCardZoneTableParams(moveParams, table);
-            final Card copy = game.getAction().exile(card, sa, moveParams);
-            sa.getTargetCard().addHauntedBy(copy);
-            table.triggerChangesZoneAll(game, sa);
+            CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+            final Card moved = game.getAction().exile(card, sa, moveParams);
+            sa.getTargetCard().addHauntedBy(moved);
+            zoneMovements.triggerChangesZoneAll(game, sa);
         } else if (!sa.usesTargeting() && card.getHaunting() != null) {
             // unhaunt
             card.getHaunting().removeHauntedBy(card);

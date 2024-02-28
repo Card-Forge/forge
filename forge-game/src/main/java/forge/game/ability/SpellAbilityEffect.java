@@ -17,7 +17,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -969,15 +968,6 @@ public abstract class SpellAbilityEffect {
         }
         movedCard.setExiledWith(exilingSource);
         movedCard.setExiledBy(cause.getActivatingPlayer());
-    }
-
-    public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved
-                && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
-            // if a RE changes the destination zone try to make it simultaneous
-            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
-        }
-        return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
     }
 
     public static GameCommand exileEffectCommand(final Game game, final Card effect) {

@@ -11,8 +11,10 @@ import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameAction;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -27,12 +29,6 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     private CardCollectionView lastStateBattlefield;
     private CardCollectionView lastStateGraveyard;
     
-    public CardZoneTable(CardZoneTable cardZoneTable) {
-        this.putAll(cardZoneTable);
-        lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
-        lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
-    }
-
     public CardZoneTable() {
         this(null, null);
     }
@@ -40,6 +36,24 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
         setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
         setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
+    }
+
+    public CardZoneTable(CardZoneTable cardZoneTable) {
+        this.putAll(cardZoneTable);
+        lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
+        lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
+    }
+
+    public static CardZoneTable getSimultaneousInstance(SpellAbility sa) {
+        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved
+                && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+            // if a RE changes the destination zone try to make it simultaneous
+            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
+        }
+        GameAction ga = sa.getHostCard().getGame().getAction();
+        return new CardZoneTable(
+                ga.getLastState(AbilityKey.LastStateBattlefield, sa, null, true),
+                ga.getLastState(AbilityKey.LastStateGraveyard, sa, null, true));
     }
 
     public CardCollectionView getLastStateBattlefield() {

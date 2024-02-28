@@ -30,11 +30,11 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
 
         // 1) All spells and abilities on the stack are exiled.
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
-        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         game.getAction().exile(new CardCollection(game.getStackZone().getCards()), sa, moveParams);
-        table.triggerChangesZoneAll(game, sa);
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
 
         game.getStack().clear();
         game.getStack().clearSimultaneousStack();
