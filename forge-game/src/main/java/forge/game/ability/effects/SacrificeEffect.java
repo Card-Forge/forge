@@ -10,8 +10,6 @@ import forge.card.CardType;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Maps;
-
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -108,10 +106,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()), null)) {
-                    if (game.getAction().sacrifice(card, sa, true, params) != null) {
-                        if (remSacrificed) {
-                            card.addRemembered(card);
-                        }
+                    if (game.getAction().sacrifice(card, sa, true, params) != null && remSacrificed) {
+                        card.addRemembered(card);
                     }
                 }
             }
@@ -164,7 +160,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
-                Map<Integer, Card> cachedMap = Maps.newHashMap();
+                Map<Integer, Card> cachedMap = CardUtil.getLKIfromLastState(zoneMovements.getLastStateBattlefield());
                 for (Card sac : choosenToSacrifice) {
                     Card lKICopy = null;
                     if (devour || exploit || remSacrificed) {

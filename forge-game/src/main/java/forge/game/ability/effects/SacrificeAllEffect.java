@@ -3,8 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -82,9 +80,9 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         list = GameActionUtil.orderCardsByTheirOwners(game, list, ZoneType.Graveyard, sa);
 
-        Map<Integer, Card> cachedMap = Maps.newHashMap();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
+        Map<Integer, Card> cachedMap = CardUtil.getLKIfromLastState(zoneMovements.getLastStateBattlefield());
 
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);

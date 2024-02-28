@@ -29,14 +29,19 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     private CardCollectionView lastStateBattlefield;
     private CardCollectionView lastStateGraveyard;
     
+    public CardZoneTable() {
+        this(null, null);
+    }
+
+    public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
+        setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
+        setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
+    }
+
     public CardZoneTable(CardZoneTable cardZoneTable) {
         this.putAll(cardZoneTable);
         lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
         lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
-    }
-
-    public CardZoneTable() {
-        this(null, null);
     }
 
     public static CardZoneTable getSimultaneousInstance(SpellAbility sa) {
@@ -49,11 +54,6 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return new CardZoneTable(
                 ga.getLastState(AbilityKey.LastStateBattlefield, sa, null, true),
                 ga.getLastState(AbilityKey.LastStateGraveyard, sa, null, true));
-    }
-
-    public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
-        setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
     }
 
     public CardCollectionView getLastStateBattlefield() {

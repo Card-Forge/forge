@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -92,7 +90,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
-        Map<Integer, Card> cachedMap = Maps.newHashMap();
+        Map<Integer, Card> cachedMap = CardUtil.getLKIfromLastState(zoneMovements.getLastStateBattlefield());
         for (Card c : list) {
             if (game.getAction().destroy(c, sa, !noRegen, params) && remDestroyed) {
                 card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
