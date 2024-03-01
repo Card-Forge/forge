@@ -1,0 +1,10 @@
+Name:Sharp-Eyed Rookie
+ManaCost:1 G
+Types:Creature Human Detective
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Condition$ Evolve | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, if its power is greater than CARDNAME's power or its toughness is greater than CARDNAME's toughness, put a +1/+1 counter on CARDNAME and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+DeckHas:Ability$Counters|Investigate|Token|Sacrifice & Type$Clue|Artifact
+Oracle:Vigilance\nWhenever a creature enters the battlefield under your control, if its power is greater than Sharp-Eyed Rookie's power or its toughness is greater than Sharp-Eyed Rookie's toughness, put a +1/+1 counter on Sharp-Eyed Rookie and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
