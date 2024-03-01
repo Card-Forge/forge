@@ -4,7 +4,7 @@ Types:Artifact Vehicle
 PT:3/4
 K:Crew:1
 T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ RememberCrew | Static$ True
-SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberAllPumped$ True
+SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberPumped$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

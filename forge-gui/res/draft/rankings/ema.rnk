@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Jace, the Mind Sculptor|M|EMA
+#2|Mana Crypt|M|EMA
+#3|Force of Will|M|EMA
+#4|Dack Fayden|M|EMA
+#5|Balance|M|EMA
+#6|Argothian Enchantress|M|EMA
+#7|Maelstrom Wanderer|M|EMA
+#8|Sneak Attack|M|EMA
+#9|Sphinx of the Steel Wind|M|EMA
+#10|Vampiric Tutor|M|EMA
+#11|Chrome Mox|M|EMA
+#12|Karakas|M|EMA
+#13|Natural Order|M|EMA
+#14|Necropotence|M|EMA
+#15|Worldgorger Dragon|M|EMA
+#16|Mother of Runes|R|EMA
+#17|Wrath of God|R|EMA
+#18|Visara the Dreadful|R|EMA
+#19|Imperious Perfect|R|EMA
+#20|Maze of Ith|R|EMA
+#21|Toxic Deluge|R|EMA
+#22|Siege-Gang Commander|R|EMA
+#23|Deathrite Shaman|R|EMA
+#24|Control Magic|R|EMA
+#25|Duplicant|R|EMA
+#26|Karmic Guide|R|EMA
+#27|Brago, King Eternal|R|EMA
+#28|Jareth, Leonine Titan|R|EMA
+#29|Sensei's Divining Top|R|EMA
+#30|Vindicate|R|EMA
+#31|Malicious Affliction|R|EMA
+#32|Nevinyrral's Disk|R|EMA
+#33|Sylvan Library|R|EMA
+#34|Isochron Scepter|R|EMA
+#35|Arcanis the Omnipotent|R|EMA
+#36|Glare of Subdual|R|EMA
+#37|Serendib Efreet|R|EMA
+#38|Crater Hellion|R|EMA
+#39|Regal Force|R|EMA
+#40|Silvos, Rogue Elemental|R|EMA
+#41|Green Sun's Zenith|R|EMA
+#42|Swords to Plowshares|U|EMA
+#43|Baleful Strix|R|EMA
+#44|Pyrokinesis|R|EMA
+#45|Eight-and-a-Half-Tails|R|EMA
+#46|Heritage Druid|R|EMA
+#47|Goblin Trenches|R|EMA
+#48|Rorix Bladewing|R|EMA
+#49|Bloodbraid Elf|U|EMA
+#50|Braids, Cabal Minion|R|EMA
+#51|Young Pyromancer|U|EMA
+#52|Shardless Agent|R|EMA
+#53|Chain Lightning|U|EMA
+#54|Serra Angel|U|EMA
+#55|Faith's Fetters|U|EMA
+#56|Nekrataal|U|EMA
+#57|Winter Orb|R|EMA
+#58|Inkwell Leviathan|R|EMA
+#59|Beetleback Chief|U|EMA
+#60|Unexpectedly Absent|R|EMA
+#61|Honden of Infinite Rage|U|EMA
+#62|Honden of Seeing Winds|U|EMA
+#63|Dualcaster Mage|R|EMA
+#64|Entomb|R|EMA
+#65|Fact or Fiction|U|EMA
+#66|Rancor|U|EMA
+#67|Blood Artist|U|EMA
+#68|Call the Skybreaker|R|EMA
+#69|Hymn to Tourach|U|EMA
+#70|Sulfuric Vortex|R|EMA
+#71|Sinkhole|R|EMA
+#72|Timberwatch Elf|U|EMA
+#73|Honden of Life's Web|U|EMA
+#74|Wasteland|R|EMA
+#75|Giant Solifuge|R|EMA
+#76|Glimmerpoint Stag|U|EMA
+#77|Wall of Omens|U|EMA
+#78|Mystical Tutor|R|EMA
+#79|Enlightened Tutor|R|EMA
+#80|Future Sight|R|EMA
+#81|Merfolk Looter|U|EMA
+#82|Phyrexian Ingester|U|EMA
+#83|Honden of Cleansing Fire|U|EMA
+#84|Ghitu Slinger|U|EMA
+#85|Animate Dead|U|EMA
+#86|Void|R|EMA
+#87|Victimize|U|EMA
+#88|Pacifism|C|EMA
+#89|Goblin Charbelcher|R|EMA
+#90|Shaman of the Pack|U|EMA
+#91|Harmonize|U|EMA
+#92|Phyrexian Gargantua|U|EMA
+#93|Thunderclap Wyvern|U|EMA
+#94|Annihilate|U|EMA
+#95|Sprite Noble|U|EMA
+#96|Jetting Glasskite|U|EMA
+#97|Armadillo Cloak|U|EMA
+#98|Brainstorm|U|EMA
+#99|Wirewood Symbiote|U|EMA
+#100|Firebolt|C|EMA
+#101|Wonder|U|EMA
+#102|Ichorid|R|EMA
+#103|Man-o-War|C|EMA
+#104|Gamble|R|EMA
+#105|Llanowar Elves|C|EMA
+#106|Prodigal Sorcerer|U|EMA
+#107|Calciderm|U|EMA
+#108|Civic Wayfinder|C|EMA
+#109|Keldon Champion|U|EMA
+#110|Squadron Hawk|C|EMA
+#111|Havoc Demon|U|EMA
+#112|Eyeblight's Ending|C|EMA
+#113|Sengir Autocrat|U|EMA
+#114|Roar of the Wurm|U|EMA
+#115|Mishra's Factory|U|EMA
+#116|Carbonize|C|EMA
+#117|Burning Vengeance|U|EMA
+#118|Mistral Charger|C|EMA
+#119|Honden of Night's Reach|U|EMA
+#120|Worn Powerstone|U|EMA
+#121|Flame Jab|U|EMA
+#122|Soulcatcher|U|EMA
+#123|Torrent of Souls|U|EMA
+#124|Counterspell|C|EMA
+#125|Flame-Kin Zealot|U|EMA
+#126|Warden of Evos Isle|C|EMA
+#127|Intangible Virtue|U|EMA
+#128|Field of Souls|U|EMA
+#129|Mogg War Marshal|C|EMA
+#130|Deep Analysis|C|EMA
+#131|Tragic Slip|C|EMA
+#132|War Priest of Thune|U|EMA
+#133|Extract from Darkness|U|EMA
+#134|Thornweald Archer|C|EMA
+#135|Coalition Honor Guard|C|EMA
+#136|Lys Alana Huntmaster|C|EMA
+#137|Brawn|U|EMA
+#138|Invigorate|U|EMA
+#139|Raise the Alarm|C|EMA
+#140|Peregrine Drake|C|EMA
+#141|Flinthoof Boar|U|EMA
+#142|Cabal Therapy|U|EMA
+#143|Phantom Monster|C|EMA
+#144|Elvish Vanguard|C|EMA
+#145|Lys Alana Scarblade|U|EMA
+#146|Aven Riftwatcher|C|EMA
+#147|Mesa Enchantress|U|EMA
+#148|Kor Hookmaster|C|EMA
+#149|Werebear|C|EMA
+#150|Phyrexian Rager|C|EMA
+#151|Keldon Marauders|C|EMA
+#152|Daze|U|EMA
+#153|Prismatic Lens|U|EMA
+#154|Centaur Chieftain|U|EMA
+#155|Gravedigger|C|EMA
+#156|Silent Departure|C|EMA
+#157|Battle Squadron|U|EMA
+#158|Elephant Guide|C|EMA
+#159|Stingscourger|C|EMA
+#160|Whitemane Lion|C|EMA
+#161|Wee Dragonauts|U|EMA
+#162|Innocent Blood|C|EMA
+#163|Juggernaut|U|EMA
+#164|Zealous Persecution|U|EMA
+#165|Ballynock Cohort|C|EMA
+#166|Deadbridge Shaman|C|EMA
+#167|Pilgrim's Eye|C|EMA
+#168|Night's Whisper|C|EMA
+#169|Twisted Abomination|C|EMA
+#170|Trygon Predator|U|EMA
+#171|Wakedancer|C|EMA
+#172|Borderland Marauder|C|EMA
+#173|Fervent Cathar|C|EMA
+#174|Shoreline Ranger|C|EMA
+#175|Memory Lapse|C|EMA
+#176|Abundant Growth|C|EMA
+#177|Blightsoil Druid|C|EMA
+#178|Elite Vanguard|C|EMA
+#179|Sentinel Spider|C|EMA
+#180|Ancestral Mask|U|EMA
+#181|Carrion Feeder|C|EMA
+#182|Monk Idealist|C|EMA
+#183|Plague Witch|C|EMA
+#184|Yavimaya Enchantress|C|EMA
+#185|Giant Tortoise|C|EMA
+#186|Mogg Fanatic|C|EMA
+#187|Rally the Peasants|C|EMA
+#188|Faithless Looting|C|EMA
+#189|Benevolent Bodyguard|C|EMA
+#190|Second Thoughts|C|EMA
+#191|Sylvan Might|C|EMA
+#192|Emperor Crocodile|C|EMA
+#193|Roots|C|EMA
+#194|Avarax|C|EMA
+#195|Skulking Ghost|C|EMA
+#196|Glacial Wall|C|EMA
+#197|Wildfire Emissary|C|EMA
+#198|Welkin Guide|C|EMA
+#199|Dragon Egg|C|EMA
+#200|Seal of Strength|C|EMA
+#201|Commune with the Gods|C|EMA
+#202|Shelter|C|EMA
+#203|Reckless Charge|C|EMA
+#204|Pyroblast|U|EMA
+#205|Nimble Mongoose|C|EMA
+#206|Prowling Pangolin|C|EMA
+#207|Seal of Cleansing|C|EMA
+#208|Humble|C|EMA
+#209|Oona's Grace|C|EMA
+#210|Kird Ape|C|EMA
+#211|Hydroblast|U|EMA
+#212|Duress|C|EMA
+#213|Urborg Uprising|C|EMA
+#214|Wake of Vultures|C|EMA
+#215|Ticking Gnomes|U|EMA
+#216|Dream Twist|C|EMA
+#217|Nausea|C|EMA
+#218|Gaseous Form|C|EMA
+#219|Cephalid Sage|C|EMA
+#220|Mindless Automaton|U|EMA
+#221|Price of Progress|U|EMA
+#222|Tranquil Cove|C|EMA
+#223|Desperate Ravings|C|EMA
+#224|Millikin|U|EMA
+#225|Jungle Hollow|C|EMA
+#226|Gaea's Blessing|U|EMA
+#227|Xantid Swarm|R|EMA
+#228|Orcish Oriflamme|C|EMA
+#229|Tidal Wave|C|EMA
+#230|Blossoming Sands|C|EMA
+#231|Screeching Skaab|C|EMA
+#232|Scoured Barrens|C|EMA
+#233|Dismal Backwater|C|EMA
+#234|Bloodfell Caves|C|EMA
+#235|Swiftwater Cliffs|C|EMA
+#236|Thornwood Falls|C|EMA
+#237|Rugged Highlands|C|EMA
+#238|Ashnod's Altar|U|EMA
+#239|Fog|C|EMA
+#240|Tooth and Claw|U|EMA
+#241|Quiet Speculation|U|EMA
+#242|Seismic Stomp|C|EMA
+#243|Undying Rage|C|EMA
+#244|Relic of Progenitus|U|EMA
+#245|Nature's Claim|C|EMA
+#246|Stupefying Touch|C|EMA
+#247|Diminishing Returns|R|EMA
+#248|Wind-Scarred Crag|C|EMA
+#249|Emmessi Tome|U|EMA

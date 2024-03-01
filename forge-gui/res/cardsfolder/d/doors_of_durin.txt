@@ -4,8 +4,8 @@ Types:Legendary Artifact
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, scry 2, then you may reveal the top card of your library. If it's a creature card, put it onto the battlefield tapped and attacking. Until your next turn, it gains trample if you control a Dwarf and hexproof if you control an Elf.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Optional$ True | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBPumpTrample
-SVar:DBPumpTrample:DB$ Pump | Defined$ Remembered | KW$ Trample | Duration$ UntilYourNextTurn | ConditionPresent$ Dwarf.YouCtrl | SubAbility$ DBPumpHexproof 
-SVar:DBPumpHexproof:DB$ Pump | Defined$ Remembered | KW$ Hexproof | Duration$ UntilYourNextTurn | ConditionPresent$ Elf.YouCtrl | SubAbility$ DBCleanup 
+SVar:DBPumpTrample:DB$ Pump | Defined$ Remembered | KW$ Trample | Duration$ UntilYourNextTurn | ConditionPresent$ Dwarf.YouCtrl | SubAbility$ DBPumpHexproof
+SVar:DBPumpHexproof:DB$ Pump | Defined$ Remembered | KW$ Hexproof | Duration$ UntilYourNextTurn | ConditionPresent$ Elf.YouCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Dwarf|Elf
 Oracle:Whenever you attack, scry 2, then you may reveal the top card of your library. If it's a creature card, put it onto the battlefield tapped and attacking. Until your next turn, it gains trample if you control a Dwarf and hexproof if you control an Elf.

@@ -1,10 +1,10 @@
 Name:Mizzix's Mastery
 ManaCost:3 R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 R | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in a graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery.
-A:SP$ ChangeZoneAll | Cost$ 5 R R R | NonBasicSpell$ True | Origin$ Graveyard | Destination$ Exile | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | RememberChanged$ True | SubAbility$ DBPlay | PrecostDesc$ Overload | CostDesc$ {5}{R}{R}{R} | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Exile each card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost.
-SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ ExileMe
-SVar:ExileMe:DB$ ChangeZoneAll | Origin$ Stack | Destination$ Exile | ChangeType$ Card.Self | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in a graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile CARDNAME.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ ExileMe
+SVar:ExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Overload:5 R R R
 AI:RemoveDeck:All
 Oracle:Exile target card that's an instant or sorcery from your graveyard. For each card exiled this way, copy it, and you may cast the copy without paying its mana cost. Exile Mizzix's Mastery.\nOverload {5}{R}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

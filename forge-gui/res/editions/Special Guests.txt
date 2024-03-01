@@ -20,7 +20,7 @@ ScryfallCode=SPG
 12 M Polyraptor @Yeong-Hao Han
 13 M Kalamax, the Stormsire @Sam Burley
 14 M Lord Windgrace @April Prime
-15 R Mirri, Weatherlight Duelist @Michele Giorgi
+15 M Mirri, Weatherlight Duelist @Michele Giorgi
 16 R Thrasios, Triton Hero @Caroline Gariba
 17 M Mana Crypt @Dominik Mayer
 17a M Mana Crypt @Dominik Mayer
@@ -30,3 +30,14 @@ ScryfallCode=SPG
 17e M Mana Crypt @Dominik Mayer
 17f M Mana Crypt @Dominik Mayer
 18 U Star Compass @Alix Branwyn
+19 M Ghostly Prison @Volkan Baǵa
+20 M Fabricate @Fajareka Setiawan
+21 M Show and Tell @Donato Giancola
+22 M Tragic Slip @Scott M. Fischer
+23 M Victimize @Kekai Kotaki
+24 M Gamble @Jason A. Engle
+25 M Crashing Footfalls @Uriah Voth
+26 M Tireless Tracker @Donato Giancola
+27 M Drown in the Loch @Chris Seaman
+28 M Field of the Dead @Ralph Horsley
+44 M Solitude @Campbell White

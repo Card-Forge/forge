@@ -3,6 +3,6 @@ ManaCost:9
 Types:Creature Eldrazi
 PT:10/9
 K:Annihilator:2
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When you cast CARDNAME, you may return target creature card from your graveyard to the battlefield.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When you cast this spell, you may return target creature card from your graveyard to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield
 Oracle:When you cast this spell, you may return target creature card from your graveyard to the battlefield.\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)

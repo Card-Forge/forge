@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Warrior
 PT:3/2
 T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever you scry, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
-SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | Defined$ Self 
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | Defined$ Self
 DeckHas:Ability$Counters
 Oracle:Whenever you scry, put a +1/+1 counter on Chance-Met Elves. This ability triggers only once each turn.

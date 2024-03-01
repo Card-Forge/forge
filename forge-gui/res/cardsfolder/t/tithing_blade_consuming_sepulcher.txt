@@ -4,9 +4,9 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature
 K:Craft:4 B ExileCtrlOrGrave<1/Creature.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$LifeGain|Graveyard
+AlternateMode:DoubleFaced
 Oracle:When Tithing Blade enters the battlefield, each opponent sacrifices a creature.\nCraft with creature {4}{B} ({4}{B}, Exile this artifact, Exile a creature you control or a creature card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE

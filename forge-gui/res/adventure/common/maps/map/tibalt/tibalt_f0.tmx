@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="27" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="195">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="respawnEnemies" type="bool" value="false"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="38401" source="../../tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="54785" source="../../tileset/buildings-nocollide.tsx"/>
+ <layer id="18" name="CollisionBis" width="27" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1dEJwjAQBuA+WmqLj4KO4QSK4g7OotMUA+oI3UbUNeyhodeQXAL3V3zoDwcWQr5eEtMsGzPm/7PLu9+XSZZdPXVra1V1pbXIeeT+Mfe872ksyfF5GmsfcXhGy289EywDOhsUyTPAM2+LvJenuIOyQoWyltOuJIuPR1jc4z2jLDuvZNG9QjkWWCsUcprImFRL8hCOa1lvCMdnHcr+M8qx1qn4lOtQUA5lkTAXP5u/sIbYr1Ck/8TZs/bauO9Vt4Zpa1thPbtnNZvTfC3KfIZ1qEzg/TeK+9+mYXfkWphPazXONyDUk9ZyHaknbbhDkXpKCd/zkFWXeidm2aDWLsVC9MQtX1BrF7PQDre4p/l+vAFhQE9Z
+  </data>
+ </layer>
+ <layer id="16" name="Collision" width="27" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmFEKwjAMhvvqg5fqi4fwWh5gjDHvsScPMPA6UjDQZX+aP+sQfwii7fI1WZpS10tKq2G3x7lmcf6BtQwp5efWlqmPZfof9z7yzPFaHFHx/wKmeV6MHqf2vRSb96bXILwii1X/jjh5SlB52MeLeKgGdEwtDuLVDIZVr9PjaJ72hVi1alZEmlXzvHroYQlD1HpPZ8bFsKL6V1ZP/n7JQr3LYqGeJ3NYjseST4vF8FhWKy7NY+ZvziPVc1he3cd1LF5M0fVa9cJyzmBpH+j7kTzer/az+jxALB0X4lqcInS+IV9ePry5Mp/1EZ1r7RnWPFZ0LREmm79ern6e0RlxejXRMvZuwOxZsTxuxyL3A68/ePyWbz3GsqJ5Q2MMy6qjoyzEbNWrVweaJWJY0ZpDtaJ5Hou981q1WbR87yjonUX3kLcXUO0hFtMPWBbS+8D/BR/JT95n
+  </data>
+ </layer>
+ <layer id="15" name="Background" width="27" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy918FKAzEQANCoJ9mexF6qH6HQL9jD+gGi0Nbv8Et61moXqUjBSsGe97D4Af0gd7oddjaZTGZjcSCU0CQvk022qTHhKPO4NtvTdtHEf1pZNU620LWVPF88HhtzdtLUy2WcRb2QU8zijVDY+XSN9K3+zKZ10TqQU/ra1NcjY67u3bIauWOh5fOkfMC5nvDfDSeuF7JiHNsrnlxL66VzYz7Huraraj3T56autfBZHcqSPOwDFsRm7C8+S5ubbUkexLr6HD64/WItn4cO7afNi54r2+ICHcni3lH2+dVYNEIW1rl330/l3kzrIgVtA++pInet0HMDK+Rx36Fn7/vQWaMeZ0jziHl/tOY8dx3O6pqTZGUdna5WAe+tXLZ2+2y/7rEeOmhwFo6H7bJ3fY7Z0nWcsuTXrazWulw044Y8ehfzza9k5mA7Un9sU+bhdninkxz7efrmFrSIR/tAbI90Hrc2Uik/2g5Ev7rDnAv3mBiLy6NPDMmja64xuPUaJMZcVOUy4Q24I+4szz62HfhtgLYF2a9o3PXq+m3P79HAs8pZrd9UYm3243b9n+KzfM5gn4/taP8TcZbvPvKd8I7WgnCsmetIOcVaNL4SnXMIS+scwtI6f7XA2Qh7oYuVvvDnqsszouUX10S5/w==
+  </data>
+ </layer>
+ <layer id="14" name="Ground" width="27" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy9mNtu00AQhrfxFUouUA7lIIHgCWhoQVxWvjASD5CmKH0JhLgF8Qr0BiRIQkJbqamaNAdVXPrC6gNweADKWyDEjHenO9712jVE/NIvuz7M55ndHTs9rwtxrnx7VYhb4J+w/7ksxPOSsDSC4wvlw7J9nl9zCt6EWO9rcBB8B2K/agjxWvkl+O6qm4WqlaVdOlGsVkWIG7B9BLy3wPqh8uGca3C+XXGzTAVjIaIDm2XyXBxU1dP3R0d6/+xj0q7cR4y3VcnmPN7NziePh+Lji+Pl4qD9bjYvT7yeqOuMgyLO38rfEyIcyv1gV+dmijiunE6f2jaFNfUHdm4kmnNZLIq93hJio+XmxSyWWxqLc0wWjzsFzqzlzo/mC/E460UpOR/SxiqtdnmsEHkqt1HZXT+usVGj+9tQx237OTiLc0iUUxar2RFiwmKdAGdqsLiQhb0kGCTN5WJNOjYvTbOOZvF5+KRiz3nXWM07mre2ZZs4aSzi3Cxn50Nq7mjeMcQeg6dq22xrzsaOvN6cE/R+IZZL+HwTiPFA8e61JWMdtmttzULODBx25VwnXfUkD/sv5RP2HCy1RuaKh6wZsObghcqLOIFak2YvNtdyVo/lvGNkgefgBXjSlhwUssKuvZaplhfx+nD8QzbP35cOh+nXYG18493GeYl4Obwsnb2xORe8Qfo9WAOcR0WYlE98356+NziSf9OcjGA/YN8KmBue83vFOHw+YIyYRe8w1jciR/2JFz/rnuOa/uWeieRiLVtxDUf/hxXzIK9gX44bbpEfP8PhcuJ/W2EsiBl9kmOJ22XpC2MQL3CMexFFA/3t+3VFGvX9ijTpX1mc0/Ds+MSMx8eoG/VhVy9y6VnJZiSeKWV8cF3h2nf1FlPYL3BsKKciol5wGVao+kVeTqboe4reL64ezTnU64rmhCzKiZTHK1K7X1Uhflflft3TY8WVVcsitXsHvy2HNf13Gi+L1fDc59JYD+s6tzSe+f2KotoVEbJ64H4teTzmdd05FeWgNtVvdPyfgGfw4vemMTfCfvE1TvoDIKGPPA==
+  </data>
+ </layer>
+ <layer id="13" name="Foreground" width="27" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl0sOgjAQhgdZGbrwgWzRq7AxsvEuxuBFvIHGjTExHsGFJ/BxAPQe0mBDrZTWMqkm+iWT0ED48vcxAQA5W+953HIBZo1inGTXHbf6GRmpD3DN6uaXu9i72o8SPYyJhisMAPpZDQK5SweVS8y0FjyHjb6LZZfNJZ9J9Jgirl3KZaFgeRj8fIbc+mB7KHy2rpdXorF3TNHZl39XNbq9BNNng6MDcHLseHoWMtnyUGzvCYpN37efr/0SYDjPy8T3DtGq8NkgWthz/flNWO8/I/b/mACMyKuH9WTfrecbk7xizsF8Yu8v+yfQJSbV98XeaOrZKb4v+Ux18lBUmfi5m9bo/apMmKgyfdqDebawfRhzp+PDXCOZj54T6rk08VyyM2D6XXQHH3U5ig==
+  </data>
+ </layer>
+ <layer id="17" name="AboveClutter" width="27" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DggTg3/ezaBbRrGxCvpoOdMLs2DDO7InjoE34gQC8/gQC9/DQKRsEoGAWjYGiAH0DsSyWz/Hlwy9XxQujXVLDHiwdSd3risQ8EFhCQRwYswgwM/4Sw20OtNtUfoPl/gdhchIHBDIiZhSHim7ipb4810HxHILaDYnsRiBzMT9Swh1EYYo+TCELsCiMDw1VGiD1SQDtkqNTumA+0ayE0vH4LQewRZWZgiGKC2BMKtG8rFcMOFl4we8KB9kxkhtgDApTahR52MHuCoPZMYkao3UpEWscFYP5BjqMiJkgYgnAPyE9MCLlgHkickWPfLKCflggj+DA/gez5CLTjJxB/YULVQ459LNCws4L6CWQ+zE8gv4DseseEGobk2IeeFtD99A3qJ1AYTsRi1zYG4vouMHuQ/YNsTyjUP/1A/nsg/R2IAfrkVGU=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="166" template="../../obj/manashards.tx" x="220.318" y="220.045"/>
+  <object id="167" template="../../obj/booster.tx" x="347.898" y="529.832">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="170" template="../../obj/door_down.tx" x="146.537" y="632.155" width="45.8303" height="21.1308" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
+    <property name="teleportObjectId" value="204"/>
+   </properties>
+  </object>
+  <object id="174" template="../../obj/door_down.tx" x="270.927" y="631.04" width="45.8303" height="16.1284" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
+    <property name="teleportObjectId" value="203"/>
+   </properties>
+  </object>
+  <object id="175" template="../../obj/treasure.tx" x="247.342" y="222.438">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="176" template="../../obj/door_down.tx" x="203.912" y="149.787" width="29.8454" height="19.2078" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f4.tmx"/>
+    <property name="teleportObjectId" value="174"/>
+   </properties>
+  </object>
+  <object id="177" template="../../obj/gold.tx" x="362.842" y="499.605"/>
+  <object id="178" template="../../obj/gold.tx" x="379.342" y="510.605"/>
+  <object id="179" template="../../obj/gold.tx" x="336.342" y="547.105"/>
+  <object id="180" template="../../obj/gold.tx" x="353.342" y="541.105"/>
+  <object id="182" template="../../obj/door_down.tx" x="211.919" y="296.502" width="29.8454" height="19.2078" rotation="0.284412">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f1.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
+  <object id="183" template="../../obj/manashards.tx" x="142.842" y="398.772"/>
+  <object id="184" template="../../obj/manashards.tx" x="284.175" y="440.772"/>
+  <object id="185" template="../../obj/treasure.tx" x="195.509" y="222.772">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="186" template="../../obj/treasure.tx" x="298.175" y="280.105">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="187" template="../../obj/treasure.tx" x="338.842" y="566.105">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;colors&quot;: [&quot;Black&quot;,&quot;Red&quot;]
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="188" template="../../obj/enemy.tx" x="193.509" y="438.105">
+   <properties>
+    <property name="displayNameOverride" value="Tibalt's Pet Dragon"/>
+    <property name="enemy" value="Vulcano Dragon"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="189" template="../../obj/collision.tx" x="322.842" y="-7.51957" width="112" height="459.25"/>
+  <object id="190" template="../../obj/collision.tx" x="-3.15789" y="-7.51957" width="122" height="639.916"/>
+  <object id="191" template="../../obj/collision.tx" x="118.175" y="-6.85291" width="206.667" height="93.2497"/>
+  <object id="193" template="../../obj/dialog.tx" x="120.91" y="372.735" width="199.197" height="117.406">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;As you approach, the castle gates swing open with an eerie creak, revealing a darkened courtyard enveloped in an unsettling silence. The ground beneath your feet feels cold and unyielding, as if the very earth recoils from the presence of Tibalt's domain. Sinister gargoyles leer down from the castle walls, their grotesque forms seeming to come alive in the fading light.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;action&quot;: [
+          {
+            &quot;setQuestFlag&quot;: {
+              &quot;key&quot;: &quot;FortressPortal&quot;,
+              &quot;val&quot;: 1
+            },
+              &quot;activateMapObject&quot;: 194,
+              &quot;deleteMapObject&quot;: -1
+          }
+        ],
+        &quot;name&quot;: &quot;(Continue)&quot;
+      }
+    ]
+  }
+]</property>
+   </properties>
+  </object>
+  <object id="194" template="../../obj/portal.tx" x="279.509" y="305.439">
+   <properties>
+    <property name="activeQuestFlag" value="FortressPortal"/>
+    <property name="portalState" value="inactive"/>
+    <property name="sprite" value="sprites/portal3.atlas"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt.tmx"/>
+    <property name="teleportObjectId" value="221"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

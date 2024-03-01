@@ -2,10 +2,8 @@ package forge.game.ability.effects;
 
 import java.util.Collection;
 
-import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -13,8 +11,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 
 public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
@@ -67,19 +63,8 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
         for (final Card c : list) {
             c.incShieldCount();
         }
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
-        final GameCommand untilEOT = new GameCommand() {
-            private static final long serialVersionUID = 259368227093961103L;
-
-            @Override
-            public void run() {
-                game.getAction().exile(eff, null, null);
-            }
-        };
-        game.getEndOfTurn().addUntil(untilEOT);
+        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
     }
 }

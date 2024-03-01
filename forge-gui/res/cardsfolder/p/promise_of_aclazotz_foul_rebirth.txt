@@ -2,7 +2,7 @@ Name:Promise of Aclazotz
 ManaCost:1 B
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPopulate | TriggerDescription$ At the beginning of your end step, you may sacrifice a non-Demon creature. If you do, populate. (Create a token that's a copy of a creature token you control.)
-SVar:TrigPopulate:AB$ CopyPermanent | Cost$ Sac<1/Creature.nonDemon/non-Demon creature> | Choices$ Creature.token+YouCtrl | Populate$ True 
+SVar:TrigPopulate:AB$ CopyPermanent | Cost$ Sac<1/Creature.nonDemon/non-Demon creature> | Choices$ Creature.token+YouCtrl | Populate$ True
 DeckHas:Ability$Token|Sacrifice & Type$Demon|Vampire
 AlternateMode:Adventure
 Oracle:At the beginning of your end step, you may sacrifice a non-Demon creature. If you do, populate. (Create a token that's a copy of a creature token you control.)

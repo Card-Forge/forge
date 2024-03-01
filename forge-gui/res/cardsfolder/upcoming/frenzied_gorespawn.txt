@@ -1,0 +1,9 @@
+Name:Frenzied Gorespawn
+ManaCost:3 B R
+Types:Creature Horror
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGoad | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, goad target creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.OppCtrl | TargetsWithDifferentControllers$ True | TgtPrompt$ Goad up to one target creature that opponent controls
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature | AttackedTarget$ Opponent | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures attack one of your opponents, those creatures gain menace until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | Defined$ TriggeredAttackers | KW$ Menace
+Oracle:When Frenzied Gorespawn enters the battlefield, for each opponent, goad target creature that player controls. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)\nWhenever one or more creatures attack one of your opponents, those creatures gain menace until end of turn.

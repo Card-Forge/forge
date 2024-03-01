@@ -35,7 +35,24 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../../obj/treasure.tx" x="15" y="75.75"/>
+  <object id="48" template="../../obj/treasure.tx" x="15" y="75.75">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
+		&quot;count&quot;: 5
+	},
+	{
+		&quot;type&quot;: &quot;item&quot;,
+		&quot;count&quot;: 1,
+		&quot;probability&quot;: 0.2,
+		&quot;itemName&quot;: &quot;Battle Standard&quot;
+	}
+]</property>
+   </properties>
+  </object>
   <object id="50" template="../../obj/enemy.tx" x="323.5" y="177.5">
    <properties>
     <property name="enemy" value="Goblin Warrior"/>

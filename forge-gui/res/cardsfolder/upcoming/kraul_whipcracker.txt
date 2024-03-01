@@ -1,0 +1,9 @@
+Name:Kraul Whipcracker
+ManaCost:B G
+Types:Creature Insect Assassin
+PT:3/2
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target token an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.token+OppCtrl | TgtPrompt$ Select target token an opponent controls
+SVar:PlayMain1:TRUE
+Oracle:When Kraul Whipcracker enters the battlefield, destroy target token an opponent controls.

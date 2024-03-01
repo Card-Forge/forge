@@ -1,0 +1,12 @@
+Name:Carnage Interpreter
+ManaCost:1 BR BR
+Types:Creature Devil Detective
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand, then investigate four times. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | Num$ 4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ LE1 | Description$ As long as you have one or fewer cards in hand, CARDNAME gets +2/+2 and has menace.
+SVar:X:Count$InYourHand
+DeckHas:Ability$Discard|Token & Type$Clue|Artifact
+DeckHints:Ability$Discard
+Oracle:When Carnage Interpreter enters the battlefield, discard your hand, then investigate four times. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nAs long as you have one or fewer cards in hand, Carnage Interpreter gets +2/+2 and has menace.

@@ -235,7 +235,7 @@ ScryfallCode=DMU
 221 R Stenn, Paranoid Partisan @Mila Pesic
 222 U Tatyova, Steward of Tides @Howard Lyon
 223 U Tori D'Avenant, Fury Rider @Anna Podedworna
-224 U Tura Kennerud, Skyknight @Donato Giancola
+224 U Tura Kennerüd, Skyknight @Donato Giancola
 225 U Uurg, Spawn of Turg @Nicholas Gregory
 226 U Vohar, Vodalian Desecrator @Daarken
 227 U Zar Ojanen, Scion of Efrava @Justine Cruz
@@ -343,7 +343,7 @@ ScryfallCode=DMU
 320 R Stenn, Paranoid Partisan @Tyler Crook
 321 U Tatyova, Steward of Tides @Lisa Heidhoff
 322 U Tori D'Avenant, Fury Rider @Jody Clark
-323 U Tura Kennerud, Skyknight @Benjamin Ee
+323 U Tura Kennerüd, Skyknight @Benjamin Ee
 324 U Uurg, Spawn of Turg @Eugene Frost
 325 U Vohar, Vodalian Desecrator @Nino Vecia
 326 U Zar Ojanen, Scion of Efrava @Eshpur
@@ -384,7 +384,7 @@ ScryfallCode=DMU
 361 R Stenn, Paranoid Partisan @Tyler Crook
 362 U Tatyova, Steward of Tides @Lisa Heidhoff
 363 U Tori D'Avenant, Fury Rider @Jody Clark
-364 U Tura Kennerud, Skyknight @Benjamin Ee
+364 U Tura Kennerüd, Skyknight @Benjamin Ee
 365 U Uurg, Spawn of Turg @Eugene Frost
 366 U Vohar, Vodalian Desecrator @Nino Vecia
 367 U Zar Ojanen, Scion of Efrava @Eshpur
@@ -460,6 +460,25 @@ ScryfallCode=DMU
 434 U Nishoba Brawler @Valera Lutfullina
 435 M Sheoldred, the Apocalypse @Richard Whitters
 436 M Sheoldred, the Apocalypse @Richard Whitters
+
+[rebalanced]
+A1 M A-Karn, Living Legacy @Chris Rahn
+A138 C A-Meria's Outrider @Lius Lasahido
+A141 R A-Radha's Firebrand @Ângelo Bortolini
+A145 U A-Sprouting Goblin @Uriah Voth
+A169 R A-Llanowar Greenwidow @Jokubas Uogintas
+A170 R A-Llanowar Loamspeaker @Zara Alfonso
+A176 C A-Scout the Wilderness @A. M. Sartor
+A181 C A-Sunbathing Rootwalla @Campbell White
+A207 U A-Nael, Avizoa Aeronaut @Miguel Mercado
+A211 U A-Radha, Coalition Warlord @Randy Vargas
+A217 U A-Rulik Mons, Warren Chief @Tuan Duong Chu
+A220 M A-Soul of Windgrace @Liiga Smilshkalne
+A222 U A-Tatyova, Steward of Tides @Howard Lyon
+A225 U A-Uurg, Spawn of Turg @Nicholas Gregory
+A227 U A-Zar Ojanen, Scion of Efrava @Justine Cruz
+A259 R A-Thran Portal @Sarah Finnigan
+A286 R A-Briar Hydra @Caio Monteiro
 
 [lands]
 2 Plains|DMU|1

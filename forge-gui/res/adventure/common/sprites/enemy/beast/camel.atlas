@@ -73,38 +73,20 @@ Walk
   xy: 167, 28
   size: 18, 16
 Death 
-  xy: 6, 49
-  size: 18, 16
+  xy: 3, 49
+  size: 23, 16
 Death 
-  xy: 38, 49
-  size: 18, 16
+  xy: 35, 49
+  size: 23, 16
 Death 
-  xy: 70, 49
-  size: 18, 16
+  xy: 67, 49
+  size: 23, 16
 Death 
-  xy: 102, 49
-  size: 18, 16
+  xy: 99, 49
+  size: 23, 16
 Death 
-  xy: 134, 49
-  size: 18, 16
+  xy: 131, 49
+  size: 23, 16
 Death 
-  xy: 166, 49
-  size: 18, 16
-Death 
-  xy: 198, 49
-  size: 18, 16
-Death 
-  xy: 230, 49
-  size: 18, 16
-Death 
-  xy: 262, 48
-  size: 18, 16
-Death 
-  xy: 294, 49
-  size: 18, 16
-Death 
-  xy: 326, 49
-  size: 18, 16
-Death 
-  xy: 358, 49
-  size: 18, 16
+  xy: 163, 49
+  size: 23, 16

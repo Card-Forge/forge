@@ -1,0 +1,11 @@
+Name:Radiant Smite
+ManaCost:W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature with power 4 or greater. If you weren't the starting player, you gain 4 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+K:Cycling:W
+T:Mode$ Cycled | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ DBGainLifeBis | TriggerDescription$ When you cycle CARDNAME, if you weren't the starting player, you gain 2 life.
+SVar:DBGainLifeBis:DB$ GainLife | LifeAmount$ 2
+SVar:X:Count$StartingPlayer.1.0
+DeckHas:Ability$Discard|LifeGain
+Oracle:Destroy target creature with power 4 or greater. If you weren't the starting player, you gain 4 life.\nCycling {W}\nWhen you cycle Radiant Smite, if you weren't the starting player, you gain 2 life.

@@ -2,15 +2,13 @@ Name:Nicol Bolas, the Deceiver
 ManaCost:5 U B R
 Types:Legendary Planeswalker Bolas
 Loyalty:5
-A:AB$ RepeatEach | Cost$ AddCounter<3/LOYALTY> | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | Planeswalker$ True | SpellDescription$ Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
-SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
-SVar:Discard:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you discard a card
-SVar:SacNonland:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
-# TODO: Most likely the ChooseGenericEffect code can be simplified somehow to avoid the necessity of having a dedicated fallback ability
-SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
-A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Draw a card.
+A:AB$ GenericChoice | Cost$ AddCounter<3/LOYALTY> | Planeswalker$ True | Defined$ Opponent | Choices$ SacNonland,Discard | TempRemember$ Chooser | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost | SpellDescription$ Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
+SVar:Discard:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you discard a card
+SVar:SacNonland:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3
+A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-A:AB$ DealDamage | Cost$ SubCounter<11/LOYALTY> | Defined$ Player.Opponent | NumDmg$ 7 | Planeswalker$ True | Ultimate$ True | SubAbility$ DBDrawSeven | SpellDescription$ CARDNAME deals 7 damage to each opponent. You draw seven cards.
+A:AB$ DealDamage | Cost$ SubCounter<11/LOYALTY> | Defined$ Opponent | NumDmg$ 7 | Planeswalker$ True | Ultimate$ True | SubAbility$ DBDrawSeven | SpellDescription$ CARDNAME deals 7 damage to each opponent. You draw seven cards.
 SVar:DBDrawSeven:DB$ Draw | NumCards$ 7
 SVar:AIPreference:SacCost$Permanent.nonLand | DiscardCost$Card
 DeckHints:Name$Visage of Bolas

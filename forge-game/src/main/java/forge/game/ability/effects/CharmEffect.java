@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class CharmEffect extends SpellAbilityEffect {
             List<AbilitySub> toRemove = Lists.newArrayList();
             for (AbilitySub ch : choices) {
                 // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-                if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                if ((ch.usesTargeting() && ch.getMinTargets() > 0 &&
                         ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
                         (restriction != null && restriction.contains(ch.getDescription()))) {
                     toRemove.add(ch);
@@ -225,7 +224,7 @@ public class CharmEffect extends SpellAbilityEffect {
             //String choosers = sa.getParam("Chooser");
             FCollection<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
             chooser = activator.getController().chooseSingleEntityForEffect(opponents, sa, "Choose an opponent", null);
-            source.setChosenPlayer(chooser);
+            sa.setChoosingPlayer(chooser);
         }
 
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, canRepeat);
@@ -246,7 +245,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         // Sort Chosen by SA order
-        Collections.sort(chosen, new Comparator<AbilitySub>() {
+        chosen.sort(new Comparator<AbilitySub>() {
             @Override
             public int compare(AbilitySub o1, AbilitySub o2) {
                 return Integer.compare(o1.getSVarInt("CharmOrder"), o2.getSVarInt("CharmOrder"));

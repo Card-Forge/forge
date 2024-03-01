@@ -192,13 +192,12 @@ public class AiController {
                 if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                         && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                     return true;
-                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-                        && CardFactoryUtil.isCounterable(host)) {
+                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment() && sa.isCounterableBy(null)) {
                     return true;
-                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)
                         && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
                     return true;
-                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
+                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)) {
                     String hostName = host.getName();
                     for (Card card : ccvGameBattlefield) {
                         if (!card.isToken() && card.sharesNameWith(host)) {
@@ -364,28 +363,26 @@ public class AiController {
             }
         }
 
-        for (final Trigger tr : card.getTriggers()) {
-            if (!card.hasStartOfKeyword("Saga") && !card.hasStartOfKeyword("Read ahead")) {
+        if (card.isSaga()) {
+            for (final Trigger tr : card.getTriggers()) {
+                if (tr.getMode() != TriggerType.CounterAdded || !tr.isChapter()) {
+                    continue;
+                }
+
+                SpellAbility exSA = tr.ensureAbility().copy(activator);
+
+                if (api != null && exSA.getApi() == api) {
+                    rightapi = true;
+                }
+
+                if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
+                    // AI would not run this chapter if given the chance
+                    // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
+                    return false;
+                }
+
                 break;
             }
-
-            if (tr.getMode() != TriggerType.CounterAdded) {
-                continue;
-            }
-
-            SpellAbility exSA = tr.ensureAbility().copy(activator);
-
-            if (api != null && exSA.getApi() == api) {
-                rightapi = true;
-            }
-
-            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
-                // AI would not run this chapter if given the chance
-                // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
-                return false;
-            }
-
-            break;
         }
 
         if (api != null && !rightapi) {
@@ -764,7 +761,7 @@ public class AiController {
 
         return decision;
     }
-    
+
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
@@ -815,7 +812,7 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (!sa.isSpell() || CardFactoryUtil.isCounterable(host)) {
+        if (!sa.isSpell() || sa.isCounterableBy(null)) {
             for (TargetChoices tc : sa.getAllTargetChoices()) {
                 for (Card tgt : tc.getTargetCards()) {
                     // TODO some older cards don't use the keyword, so check for trigger instead
@@ -1304,7 +1301,7 @@ public class AiController {
 
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        AiAttackController aiAtk = new AiAttackController(attacker); 
+        AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
         // Check if we can reinforce with Banding creatures
@@ -1542,8 +1539,7 @@ public class AiController {
         boolean mustRespond = false;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
-            mustRespond |= top.isTrigger() && top.getTrigger().getKeyword() != null
-                    && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
+            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
 
         if (topOwnedByAI) {
@@ -2131,7 +2127,7 @@ public class AiController {
         List<SpellAbility> putCounter = filterListByApi(activePlayerSAs, ApiType.PutCounter);
         List<SpellAbility> putCounterAll = filterListByApi(activePlayerSAs, ApiType.PutCounterAll);
 
-        List<SpellAbility> evolve = filterList(putCounter, SpellAbilityPredicates.hasParam("Evolve"));
+        List<SpellAbility> evolve = filterList(putCounter, CardTraitPredicates.isKeyword(Keyword.EVOLVE));
 
         List<SpellAbility> token = filterListByApi(activePlayerSAs, ApiType.Token);
         List<SpellAbility> pump = filterListByApi(activePlayerSAs, ApiType.Pump);

@@ -1,0 +1,6 @@
+Name:Sliver Army Token
+ManaCost:no cost
+Types:Creature Sliver Army
+Colors:black
+PT:0/0
+Oracle:

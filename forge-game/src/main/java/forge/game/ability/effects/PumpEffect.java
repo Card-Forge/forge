@@ -1,7 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,16 +42,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
-
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && host.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
+        final boolean perpetual = ("Perpetual").equals(duration);
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
@@ -70,12 +63,28 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (a != 0 || d != 0) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("Power", a);
+                params.put("Toughness", d);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "PTBoost");
+                gameCard.addPerpetual(params);
+            }
             gameCard.addPTBoost(a, d, timestamp, 0);
             redrawPT = true;
         }
 
         if (!kws.isEmpty()) {
-            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddKeywords", kws);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "Keywords");
+                gameCard.addPerpetual(params);
+            }
+            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);                
+            
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
@@ -96,7 +105,11 @@ public class PumpEffect extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        if (!"Permanent".equals(duration)) {
+        if (sa.hasParam("RememberPumped")) {
+            host.addRemembered(gameCard);
+        }
+
+        if (!"Permanent".equals(duration) && !perpetual) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -42244224L;
@@ -126,15 +139,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
-        final Card host = sa.getHostCard();
         final String duration = sa.getParam("Duration");
-
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
 
         if (!keywords.isEmpty()) {
             p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
@@ -271,6 +276,10 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card host = sa.getHostCard();
@@ -287,8 +296,15 @@ public class PumpEffect extends SpellAbilityEffect {
                     Localizer.getInstance().getMessage("lblChooseKeyword"), tgtCards.get(0));
             keywords.add(chosen);
         }
-        final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, !sa.hasParam("Double"));
-        final int d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, !sa.hasParam("Double"));
+        
+        int a = 0;
+        int d = 0;
+        if (sa.hasParam("NumAtt") && !sa.getParam("NumAtt").equals("Double")) {
+            a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, true);
+        }
+        if (sa.hasParam("NumDef") && !sa.getParam("NumDef").equals("Double")) {
+            d = AbilityUtils.calculateAmount(host, sa.getParam("NumDef"), sa, true);
+        }
 
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
@@ -411,7 +427,9 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("ClearNotedCardsFor")) {
             for (Player p : tgtPlayers) {
-                p.clearNotesForName(sa.getParam("ClearNotedCardsFor"));
+                for (String s : sa.getParam("ClearNotedCardsFor").split(",")) {
+                    p.clearNotesForName(s);
+                }
             }
         }
 
@@ -434,8 +452,8 @@ public class PumpEffect extends SpellAbilityEffect {
             host.removeImprintedCards(AbilityUtils.getDefinedCards(host, sa.getParam("ForgetImprinted"), sa));
         }
 
-        final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
-                : ZoneType.Battlefield;
+        List<ZoneType> pumpZones = sa.hasParam("PumpZone") ? ZoneType.listValueOf(sa.getParam("PumpZone"))
+                : ZoneType.listValueOf("Battlefield");
 
         for (Card tgtC : tgtCards) {
             // CR 702.26e
@@ -443,8 +461,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // only pump things in PumpZone
-            if (!tgtC.isInZone(pumpZone)) {
+            // only pump things in PumpZones
+            if (!tgtC.isInZones(pumpZones)) {
                 continue;
             }
 
@@ -479,6 +497,13 @@ public class PumpEffect extends SpellAbilityEffect {
                 });
             }
 
+            if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Double")) {
+                a = tgtC.getNetPower();
+            }
+            if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Double")) {
+                d = tgtC.getNetToughness();
+            }
+
             applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
 
@@ -488,7 +513,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         for (final Card tgtC : untargetedCards) {
             // only pump things in PumpZone
-            if (!tgtC.isInZone(pumpZone)) {
+            if (!tgtC.isInZones(pumpZones)) {
                 continue;
             }
 

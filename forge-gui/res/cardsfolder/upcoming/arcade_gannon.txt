@@ -1,0 +1,12 @@
+Name:Arcade Gannon
+ManaCost:2 W U
+Types:Legendary Creature Human Doctor
+PT:2/3
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBPutCounter | SpellDescription$ then discard a card.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ QUEST | SpellDescription$ Put a quest counter on CARDNAME.
+S:Mode$ Continuous | Affected$ Artifact.YouOwn+cmcLEX,Human.YouOwn+cmcLEX | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ For Auld Lang Syne — Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on CARDNAME.
+SVar:X:Count$CardCounters.QUEST
+DeckHas:Ability$Counters|Discard|Graveyard
+DeckHints:Ability$Graveyard|Mill & Type$Artifact|Human
+Oracle:{T}: Draw a card, then discard a card. Put a quest counter on Arcade Gannon.\nFor Auld Lang Syne — Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.

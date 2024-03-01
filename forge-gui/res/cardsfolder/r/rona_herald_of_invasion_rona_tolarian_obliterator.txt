@@ -7,9 +7,9 @@ SVar:TrigUntap:DB$ Untap | Defined$ Self
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 A:AB$ SetState | Cost$ 5 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform NICKNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
-AlternateMode:DoubleFaced
 SVar:BuffedBy:Card.Legendary
 DeckHas:Ability$Discard|Graveyard
+AlternateMode:DoubleFaced
 Oracle:Whenever you cast a legendary spell, untap Rona, Herald of Invasion.\n{T}: Draw a card, then discard a card.\n{5}{B/P}: Transform Rona. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
 
 ALTERNATE

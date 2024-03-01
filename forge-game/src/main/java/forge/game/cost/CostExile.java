@@ -20,6 +20,7 @@ package forge.game.cost;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
@@ -32,6 +33,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The Class CostExile.
@@ -173,8 +175,8 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
         }
 
-        CardCollection list = new CardCollection(zoneRestriction != 1 ? game.getCardsIn(this.from) :
-                payer.getCardsIn(this.from));
+        CardCollection list = CardLists.filter(zoneRestriction != 1 ? game.getCardsIn(this.from) :
+                payer.getCardsIn(this.from), CardPredicates.canExiledBy(ability, effect));
 
         if (this.payCostFromSource()) {
             return list.contains(source);
@@ -214,8 +216,6 @@ public class CostExile extends CostPartWithList {
         }
 
         if (totalCMC) {
-            int needed = Integer.parseInt(this.getAmount().split("\\+")[0]);
-            if (list.size() < needed) return false;
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }
@@ -255,14 +255,14 @@ public class CostExile extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        final Game game = targetCard.getGame();
-        Card newCard = game.getAction().exile(targetCard, null, null);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+        Card newCard = targetCard.getGame().getAction().exile(targetCard, null, moveParams);
         SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;
     }
 
     public String exileMultiZoneCostString(boolean forKW, int xMin) {
-
         final StringBuilder sb = new StringBuilder();
         sb.append("Exile ");
         String amount = this.getAmount();

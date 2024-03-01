@@ -1,0 +1,10 @@
+Name:Vernal Sovereign
+ManaCost:4 G W
+Types:Creature Elemental Elk
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_x_x_elemental_total_creatures | TokenOwner$ You
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:Whenever Vernal Sovereign enters the battlefield or attacks, create a green and white Elemental creature token with "This creature's power and toughness are each equal to the number of creatures you control."

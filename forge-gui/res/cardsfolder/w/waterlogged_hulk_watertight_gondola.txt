@@ -3,9 +3,9 @@ ManaCost:U
 Types:Artifact
 A:AB$ Mill | Cost$ T | SpellDescription$ Mill a card. (Put the top card of your library into your graveyard.)
 K:Craft:3 U ExileCtrlOrGrave<1/Island.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
 Oracle:{T}: Mill a card. (Put the top card of your library into your graveyard.)\nCraft with Island {3}{U} ({3}{U}, Exile this artifact, Exile an Island you control or an Island card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE

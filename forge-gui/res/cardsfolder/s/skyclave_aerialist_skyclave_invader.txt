@@ -15,7 +15,7 @@ Colors:green,blue
 Types:Creature Phyrexian Merfolk Scout
 PT:2/4
 K:Flying
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPeek |  TriggerDescription$ When this creature transforms into CARDNAME, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When this creature transforms into CARDNAME, look at the top card of your library. If it's a land card, you may put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand.
 SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | ForgetChanged$ True | Origin$ Library | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GE1 | SubAbility$ DBHand
 SVar:DBHand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup

@@ -45,85 +45,81 @@
   <object id="57" template="../../obj/enemy.tx" x="841.833" y="798.667" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
-		&quot;options&quot;:
-		[
-			{
-				&quot;name&quot;: &quot;What are you ?&quot;,
-				&quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.&quot;,
-				&quot;options&quot;:
-				[
-					{
-						&quot;name&quot;: &quot;Usurped ? What are you talking about ?&quot;,
-						&quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
-						&quot;options&quot;: [
-							{
-								&quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive ? &quot;,
-								&quot;text&quot;: &quot;Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
-								&quot;options&quot;: [
-									{
-										&quot;name&quot;: &quot;Where is she located ? I will take care of it.&quot;,
-										&quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield dissapear and will you be able to enter her lair.&quot;,
-										&quot;options&quot;: [
-											{
-												&quot;name&quot;: &quot;Consider it done&quot;,
-												&quot;text&quot;: &quot;Once you have dealt with the queen, return to me. Once I'm installed as the hive queen of the slivers of Shandalar, I will promise you to that the Slivers of the Skep will never be a danger to the people of Shandalar. Also, take this Hivestone, It will allow your creatures to become Slivers, causing confusion for the Sliver Queen.&quot;,
-												&quot;action&quot;: [
-													{ &quot;addItem&quot;: &quot;Hivestone&quot; }
-												]
-											}
-										]
-									}
-								]
-							}
-						]
-					}
-				]
-			},
-			{
-				&quot;name&quot;: &quot;The Sliver Queen is no more !&quot;,
-				&quot;text&quot;: &quot;Thank you for what you have done. I'll return to my rightful place as queen of the slivers'&quot;,
-				&quot;condition&quot;:
-				[
-					{
-						&quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot;,
-						&quot;not&quot;: false
-					}
-				],
-				&quot;options&quot;:
-				[
-					{
-						&quot;name&quot;: &quot;Leave&quot;,
-						&quot;text&quot;: &quot;G'day to you, adventurer&quot;,
-                        &quot;condition&quot;:
-                        [
-                        	{
-                        		&quot;checkMapFlag&quot;: &quot;TalkedTo&quot;,
-                        		&quot;not&quot;: true
-                        	}
-                        ],
-                        &quot;options&quot;:
-                        [
-                        	{
-                        		&quot;name&quot;: &quot;leave&quot;,
-                        		&quot;action&quot;:
-                        		[
-                        			{
-                        				&quot;setQuestFlag&quot;:
-                        				{
-                        					&quot;key&quot;: &quot;TalkedTo&quot;,
-                        					&quot;val&quot;: 1
-                        				}
-                        			}
-                        		]
-                        	}
+  {
+    &quot;text&quot;: &quot;The Wounded Sliver looks at you interestedly&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;What are you ?&quot;,
+        &quot;text&quot;: &quot;I'm the queen of the Slivers of the Skep, at least I used to be until my position was usurped.&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;Usurped ? What are you talking about ?&quot;,
+            &quot;text&quot;: &quot;For millenia I've been keeping the Sliver of the Skep healthy and peaceful,keeping them under control to prevent them attacking outsiders. Everything changed when the Sliver Queen attacked the Skep. She attacked me and took control over this hive. As you can see, I was unable to defeat her.&quot;,
+            &quot;options&quot;: [
+              {
+                &quot;name&quot;: &quot;So I guess the Sliver Queen is causing the Slivers of the Skep to be this aggressive ? &quot;,
+                &quot;text&quot;: &quot;Exactly, she's been assembling a mighty host of Slivers from all around the multiverse. Soon enough she will have an army large enough to conquer the whole of Shandalar&quot;,
+                &quot;options&quot;: [
+                  {
+                    &quot;name&quot;: &quot;Where is she located ? I will take care of it.&quot;,
+                    &quot;text&quot;: &quot;I appreciate your enthusiasm, however the queen is not an opponent to take on lightly. First of all, in order to gain access to her lair you need to defeat her three of her lieutenants that are scattered around here in the Skep. Only then will the magic shield dissapear and will you be able to enter her lair.&quot;,
+                    &quot;options&quot;: [
+                      {
+                        &quot;name&quot;: &quot;Consider it done&quot;,
+                        &quot;text&quot;: &quot;Once you have dealt with the queen, return to me. Once I'm installed as the hive queen of the slivers of Shandalar, I will promise you to that the Slivers of the Skep will never be a danger to the people of Shandalar. Also, take this Hivestone, It will allow your creatures to become Slivers, causing confusion for the Sliver Queen.&quot;,
+                        &quot;action&quot;: [
+                          { &quot;addItem&quot;: &quot;Hivestone&quot; },
+                          {
+                            &quot;setMapFlag&quot;: {
+                              &quot;key&quot;: &quot;TalkToFallen&quot;,
+                              &quot;val&quot;: 1
+                            }
+                          }
                         ]
-					}
-				]
-			}
-		]
-	}
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      { &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot; },
+      {
+        &quot;checkMapFlag&quot;: &quot;SliverQueenDefeated&quot;,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;text&quot;: &quot;Weak, ... I am, defeat the Sliver Queen .... Before I lose the last of my strenght.&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;
+      }
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      { &quot;checkMapFlag&quot;: &quot;TalkToFallen&quot; },
+      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+    ],
+    &quot;name&quot;: &quot;The Sliver Queen has been defeated !&quot;,
+    &quot;text&quot;: &quot;My .... my gratitude to you stranger. I feel my strenght slowly returning. As promised I'll take control of the Slivers again as her queen, the people of Shandalar shoudn't fear the Sliver's of the Skep anymore. Though be warned adventurer, my children will still defend against any intruder why goes into the skep. Goodbye Adventurer&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;action&quot;: [
+          { &quot;deleteMapObject&quot;: -1 },
+          {
+          }
+        ]
+      }
+    ]
+  }
 ]</property>
     <property name="enemy" value="Wounded Sliver"/>
     <property name="spawn.Easy" type="bool" value="true"/>
@@ -291,7 +287,7 @@
   <object id="94" template="../../obj/collision.tx" x="-0.25" y="-15.5" width="1600.5" height="16"/>
   <object id="95" template="../../obj/collision.tx" x="-16.75" y="-2" width="17" height="1395"/>
   <object id="97" template="../../obj/collision.tx" x="1600" y="3" width="17" height="1395"/>
-  <object id="98" template="../../obj/enemy.tx" x="328" y="1215.33" width="16" height="16" visible="1">
+  <object id="98" template="../../obj/enemy.tx" x="329.333" y="1215.33" width="16" height="16" visible="1">
    <properties>
     <property name="dialog">[
   {
@@ -352,6 +348,12 @@
    <properties>
     <property name="dialog">[
   {
+    &quot;condition&quot;: [
+      {
+        &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot;,
+        &quot;not&quot;: true
+      }
+    ],
     &quot;text&quot;: &quot;Good day, Adventurer. As you can see, we have quite a situation right here&quot;,
     &quot;options&quot;: [
       {
@@ -374,7 +376,12 @@
                         &quot;name&quot;: &quot;End&quot;,
                         &quot;action&quot;: [
                           { &quot;deleteMapObject&quot;: 249 },
-                          { &quot;advanceMapFlag&quot;: &quot;intro&quot; }
+                          {
+                            &quot;setMapFlag&quot;: {
+                              &quot;key&quot;: &quot;TalkToCommander&quot;,
+                              &quot;val&quot;: 1
+                            }
+                          }
                         ]
                       }
                     ]
@@ -384,23 +391,54 @@
             ]
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      { &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot; },
       {
-        &quot;condition&quot;: [
+        &quot;checkMapFlag&quot;: &quot;SliverQueenDefeated&quot;,
+        &quot;not&quot;: true
+      }
+    ],
+    &quot;text&quot;: &quot;Those things are still creeping beyond the walls, I take it you haven't yet took care of the task ?'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;
+      }
+    ]
+  },
+  {
+    &quot;condition&quot;: [
+      { &quot;checkMapFlag&quot;: &quot;TalkToCommander&quot; },
+      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+    ],
+    &quot;name&quot;: &quot;The Slivers won't be a problem anymore.&quot;,
+    &quot;text&quot;: &quot;I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer. BOYS listen up ! Our job here is done, the leader of these things is dead ! Let's get out of this creepy place, Ales' on me !&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;,
+        &quot;options&quot;: [
           {
-            &quot;checkMapFlag&quot;: &quot;QuestCompleted&quot;,
-            &quot;not&quot;: false
+            &quot;action&quot;: [
+                { &quot;deleteMapObject&quot;: -1 },
+                { &quot;deleteMapObject&quot;: 98 },
+                { &quot;deleteMapObject&quot;: 99 },
+                { &quot;deleteMapObject&quot;: 100 },
+                { &quot;deleteMapObject&quot;: 238 },
+                { &quot;deleteMapObject&quot;: 239 },
+                { &quot;deleteMapObject&quot;: 240 },
+                { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
+            ]
           }
-        ],
-        &quot;name&quot;: &quot;The Slivers won't be a problem anymore.&quot;,
-        &quot;text&quot;: &quot;I didn't think you would actually be able to do that, as promised I'll give you the item I spoke of before. Thanks Adventurer.&quot;,
-        &quot;action&quot;: [
-          { &quot;addItem&quot;: &quot;Armor of the Hivelord&quot; }
         ]
       }
     ]
   }
-]</property>
+]
+        </property>
+    <property name="displayNameOverride" value="Lord Garrin"/>
     <property name="enemy" value="Legionaire"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -1145,7 +1183,7 @@
     <property name="signYOffset" type="float" value="-5"/>
    </properties>
   </object>
-  <object id="256" template="../../obj/dialog.tx" x="627.332" y="812.333" width="116" height="44.3333">
+  <object id="256" template="../../obj/dialog.tx" x="628.999" y="811.666" width="116" height="44.3333">
    <properties>
     <property name="dialog">[
   {
@@ -1284,8 +1322,23 @@
         &quot;name&quot;: &quot;leave&quot;
       }
     ]
+  },
+  {
+   &quot;condition&quot;: [
+      { &quot;checkQuestFlag&quot;: &quot;SliverQueenDefeated&quot; }
+    ],
+    &quot;text&quot;:&quot;Where did all those fancy folk just go to ? Did someone say free ale ?&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;(Continue)&quot;
+      }
+    ]
+    
   }
-]</property>
+]
+
+</property>
+    <property name="displayNameOverride" value="Exhausted Farmer"/>
     <property name="enemy" value="Farmer"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Hard" type="bool" value="true"/>

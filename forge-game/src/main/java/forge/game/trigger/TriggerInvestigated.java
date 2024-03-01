@@ -71,11 +71,12 @@ public class TriggerInvestigated extends Trigger {
             return false;
         }
 
-        if (hasParam("OnlyFirst")) {
-            if ((int) runParams.get(AbilityKey.Num) != 1) {
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
                 return false;
             }
         }
+
         return true;
     }
 

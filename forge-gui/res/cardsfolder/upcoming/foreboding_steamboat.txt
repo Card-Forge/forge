@@ -1,0 +1,15 @@
+Name:Foreboding Steamboat
+ManaCost:3 B B
+Types:Artifact Vehicle
+PT:5/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCataclysm | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until CARDNAME leaves the battlefield.
+SVar:TrigCataclysm:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ ExileChosen
+SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 2 | ImprintChosen$ True | Choices$ Creature.nonToken+nonVehicle+RememberedPlayerCtrl | ChoiceTitle$ Choose two nontoken, non-Vehicle creatures you control
+SVar:ExileChosen:DB$ ChangeZone | Defined$ Imprinted | Origin$ Battlefield | Destination$ Exile | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.
+SVar:TrigInvestigate:AB$ Investigate | Cost$ ExiledMoveToGrave<1/Card.ExiledWithSource/card exiled with CARDNAME>
+K:Crew:2
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+SVar:HasAttackEffect:TRUE
+Oracle:When Foreboding Steamboat enters the battlefield, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until Foreboding Steamboat leaves the battlefield.\nWhenever Foreboding Steamboat attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.\nCrew 2

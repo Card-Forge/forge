@@ -1,14 +1,10 @@
 Name:Snowborn Simulacra
 ManaCost:X U U
 Types:Sorcery
-A:SP$ RepeatEach | ValidTgts$ Permanent.nonToken | TgtPrompt$ Select X target nontoken permanents | TargetMin$ X | TargetMax$ X | RepeatSubAbility$ DBConjure | RepeatTargeted$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Conjure a duplicate of each of X target nontoken permanents into your hand. Those cards perpetually gain "You may spend mana as though it were mana of any color to cast this spell." If X is 5 or more, you may put one of them from your hand onto the battlefield.
-SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ Remembered | Zone$ Hand | ImprintMade$ True
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Snowborn Simulacra's Perpetual Effect | Triggers$ Update | RememberObjects$ Imprinted | SubAbility$ DBPutFromHand
-SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+A:SP$ MakeCard | Conjure$ True | ValidTgts$ Permanent.nonToken | TgtPrompt$ Select X target nontoken permanents | TargetMin$ X | TargetMax$ X | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBAnimate | StackDescription$ REP each of X target nontoken permanents_{c:Targeted} | SpellDescription$ Conjure a duplicate of each of X target nontoken permanents into your hand.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana | Duration$ Perpetual | SubAbility$ DBPutFromHand | StackDescription$ SpellDescription | SpellDescription$ Those cards perpetually gain "You may spend mana as though it were mana of any color to cast this spell."
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
-SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
-SVar:DBUpdate:DB$ UpdateRemember
-SVar:DBPutFromHand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsImprinted | Optional$ True | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBCleanupImprint
-SVar:DBCleanupImprint:DB$ Cleanup | ClearImprinted$ True
+SVar:DBPutFromHand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered | Optional$ True | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If X is 5 or more, you may put one of them from your hand onto the battlefield.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 Oracle:Conjure a duplicate of each of X target nontoken permanents into your hand. Those cards perpetually gain "You may spend mana as though it were mana of any color to cast this spell." If X is 5 or more, you may put one of them from your hand onto the battlefield.

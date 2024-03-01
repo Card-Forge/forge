@@ -35,6 +35,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardUtil;
 import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
@@ -97,6 +98,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (value.equals("Blessing")) {
                 this.setBlessing(true);
+            }
+            if (value.equals("Solved")) {
+                this.setSolved(true);
             }
         }
 
@@ -246,7 +250,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             if (sa.isSpell()) {
                 final CardPlayOption o = c.mayPlay(sa.getMayPlay());
-                if (o == null) {
+                if (o == null || sa.isCastFromPlayEffect()) {
                     return this.getZone() == null || (cardZone != null && cardZone.is(this.getZone()));
                 } else if (o.getPlayer() == activator) {
                     Map<String,String> params = sa.getMayPlay().getMapParams();
@@ -374,6 +378,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
+        if (sa.isKeyword(Keyword.FUSE) && !c.isInZone(ZoneType.Hand)) {
+            return false;
+        }
+
         if (getCardsInHand() != -1) {
             int h = activator.getCardsIn(ZoneType.Hand).size();
             if (getCardsInHand2() != -1) {
@@ -427,6 +435,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
         if (isBlessing()) {
             if (!activator.hasBlessing()) {
+                return false;
+            }
+        }
+        if (isSolved()) {
+            if (!c.isSolved()) {
                 return false;
             }
         }
@@ -588,7 +601,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             return false;
         }
 
-        if (!sa.hasSVar("IsCastFromPlayEffect")) {
+        if (!sa.isCastFromPlayEffect()) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
             }

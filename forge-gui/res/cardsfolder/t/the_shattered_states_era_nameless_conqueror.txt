@@ -1,7 +1,7 @@
 Name:The Shattered States Era
 ManaCost:4 R
 Types:Enchantment Saga
-K:Saga:3:DBGainControl,DBPumpAll,DBTransform
+K:Chapter:3:DBGainControl,DBPumpAll,DBTransform
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

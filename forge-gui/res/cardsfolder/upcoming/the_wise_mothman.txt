@@ -1,0 +1,13 @@
+Name:The Wise Mothman
+ManaCost:1 B G U
+Types:Legendary Creature Insect Mutant
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, each player gets a rad counter.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield attacks, each player gets a rad counter.
+SVar:TrigRadiation:DB$ Radiation | Defined$ Player | Add$ 1
+T:Mode$ MilledAll | ValidPlayer$ Player | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more nonland cards are milled, put a +1/+1 counter on each of up to X target creatures, where X is the number of nonland cards milled this way.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ TriggerCount$Amount | ValidTgts$ Creature | TgtPrompt$ Select up to X target creatures
+DeckHints:Ability$Mill
+DeckHas:Ability$Counters|Mill
+Oracle:Flying\nWhenever The Wise Mothman enters the battlefield or attacks, each player gets a rad counter.\nWhenever one or more nonland cards are milled, put a +1/+1 counter on each of up to X target creatures, where X is the number of nonland cards milled this way.

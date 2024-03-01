@@ -1,7 +1,7 @@
 Name:Medomai's Prophecy
 ManaCost:1 U
 Types:Enchantment Saga
-K:Saga:4:DBScry,DBNameCard,DBEffect,DBLook
+K:Chapter:4:DBScry,DBNameCard,DBEffect,DBLook
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 SVar:DBNameCard:DB$ NameCard | SpellDescription$ Choose a card name.
 SVar:DBEffect:DB$ Effect | Triggers$ NamedCardCast | SubAbility$ DBCleanup | SpellDescription$ When you cast a spell with the chosen name for the first time this turn, draw two cards.

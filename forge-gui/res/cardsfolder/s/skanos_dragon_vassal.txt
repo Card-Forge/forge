@@ -18,7 +18,7 @@ Types:Legendary Creature Dragon Ranger
 PT:4/4
 K:Lifelink
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains lifelink and gets +X/+0 until end of turn, where X is NICKNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Lifelink 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Lifelink
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
@@ -32,7 +32,7 @@ Types:Legendary Creature Dragon Ranger
 PT:4/4
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains flying and gets +X/+0 until end of turn, where X is NICKNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Flying 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Flying
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Keyword$Flying
@@ -46,7 +46,7 @@ Types:Legendary Creature Dragon Ranger
 PT:5/5
 K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains menace and gets +X/+0 until end of turn, where X is NICKNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Menace 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Menace
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Keyword$Menace
@@ -60,7 +60,7 @@ Types:Legendary Creature Dragon Ranger
 PT:5/5
 K:First Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains first strike and gets +X/+0 until end of turn, where X is NICKNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ First Strike 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ First Strike
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
 DeckHas:Keyword$FirstStrike

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Murder at Karlov Manor #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/02/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume both graveyards start empty. Remember that your solution must satisfy all possible blocking scenarios. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Vanquish the Horde;Crime Novelist;Lightning Helix;Song of Totentanz;Hustle // Bustle
+p0battlefield=Goldhound;Goldhound;Kylox's Voltstrider;Plains;Plains;Island;Island;Mountain;Mountain
+p1life=10
+p1battlefield=T:wu_2_2_detective;T:wu_2_2_detective

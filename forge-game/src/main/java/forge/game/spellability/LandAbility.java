@@ -88,7 +88,6 @@ public class LandAbility extends Ability {
 
     @Override
     public String toUnsuppressedString() {
-
         Localizer localizer = Localizer.getInstance();
         StringBuilder sb = new StringBuilder(StringUtils.capitalize(localizer.getMessage("lblPlayLand")));
 

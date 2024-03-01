@@ -5,7 +5,7 @@ A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, th
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 A:AB$ SetState | Cost$ 4 T | Defined$ Self | Mode$ Transform | CheckSVar$ X | SVarCompare$ GE4 | SpellDescription$ Transform CARDNAME. Activate only if there are four or more permanent types among cards in your graveyard. (Artifact, battle, creature, enchantment, land, and planeswalker are permanent types.)
 SVar:X:Count$CardControllerPermanentTypes.Graveyard
-DeckHas:Ability$Discard 
+DeckHas:Ability$Discard
 DeckHints:Ability$Graveyard|Mill|Dredge
 AlternateMode:DoubleFaced
 Oracle:{T}: Draw a card, then discard a card.\n{4}, {T}: Transform Matzalantli, the Great Door. Activate only if there are four or more permanent types among cards in your graveyard. (Artifact, battle, creature, enchantment, land, and planeswalker are permanent types.)

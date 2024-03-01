@@ -1,7 +1,7 @@
 Name:Heaven Sent
 ManaCost:U R
 Types:Enchantment Saga
-K:Saga:3:DBInvestigate,DBInvestigate,DBDamage
+K:Chapter:3:DBInvestigate,DBInvestigate,DBDamage
 SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate.
 SVar:DBDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | SubAbility$ DBBranch | SpellDescription$ CARDNAME deals 1 damage to each opponent. Then if an opponent has 0 or less life, draw seven cards. Otherwise, exile CARDNAME and you may cast it this turn.
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ LE0 | TrueSubAbility$ DBDraw | FalseSubAbility$ DBCastAgain

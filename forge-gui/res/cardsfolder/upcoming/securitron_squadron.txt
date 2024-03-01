@@ -1,0 +1,11 @@
+Name:Securitron Squadron
+ManaCost:1 W
+Types:Artifact Creature Robot
+PT:2/2
+K:Squad:3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature token enters the battlefield under your control, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters
+DeckHints:Ability$Token
+Oracle:Squad {3} (As an additional cost to cast this spell, you may pay {3} any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nVigilance\nWhenever a creature token enters the battlefield under your control, put a +1/+1 counter on it.

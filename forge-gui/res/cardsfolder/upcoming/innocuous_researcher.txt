@@ -1,0 +1,16 @@
+Name:Innocuous Researcher
+ManaCost:3 G
+Types:Creature Centaur Detective
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Card.Self | PrecostDesc$ Parley — | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Parley — Whenever CARDNAME attacks, each player reveals the top card of their library. For each nonland card revealed this way, you investigate. Then each player draws a card.
+SVar:TrigPeek:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | Num$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonLand
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | Duration$ UntilYourNextTurn
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | Description$ You can't cast spells until your next turn.
+DeckHas:Ability$Token & Type$Clue|Artifact
+Oracle:Parley — Whenever Innocuous Researcher attacks, each player reveals the top card of their library. For each nonland card revealed this way, you investigate. Then each player draws a card.\nAt the beginning of your end step, you may untap all lands you control. If you do, you can't cast spells until your next turn.

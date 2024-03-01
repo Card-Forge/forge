@@ -62,7 +62,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                     int amt = part.getAbilityAmount(sa);
                     needed += amt;
-                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa);
+                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa, true);
                     if (toAdd != null) {
                         payingCards.addAll(toAdd);
                     }
@@ -344,12 +344,11 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Iterable<Player> pDefined = Lists.newArrayList(source.getController());
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null && tgt.canTgtPlayer()) {
+            sa.resetTargets();
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opponent)) {
-                sa.resetTargets();
                 sa.getTargets().add(opponent);
             } else if (!isCurse && sa.canTarget(ai)) {
-                sa.resetTargets();
                 sa.getTargets().add(ai);
             }
             if (!sa.isTargetNumberValid()) {
@@ -1398,7 +1397,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 chance = aic.getIntProperty(AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);
             }
             if (MyRandom.percentTrue(chance)) {
-                Collections.sort(aiPlaneswalkers, CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
+                aiPlaneswalkers.sort(CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
                 for (Card pw : aiPlaneswalkers) {
                     int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
                     int freshLoyalty = Integer.valueOf(pw.getCurrentState().getBaseLoyalty());

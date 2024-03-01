@@ -1,0 +1,13 @@
+Name:Craig Boone, Novac Guard
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:3/3
+K:Reach
+K:Lifelink
+T:Mode$ AttackersDeclared | Execute$ TrigPutCounter | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ One for My Baby — Whenever you attack with two or more creatures, put two quest counters on CARDNAME. When you do, NICKNAME deals damage equal to the number of quest counters on it to up to one target creature unless that creature's controller has NICKNAME deal that much damage to them.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ QUEST | CounterNum$ 2 | RememberPut$ True  | SubAbility$ DBImmediateTrigger 
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDealDamage | SpellDescription$ When you do, NICKNAME deals damage equal to the number of quest counters on it to up to one target creature unless that creature's controller has NICKNAME deal that much damage to them.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ X | UnlessCost$ DamageYou<X> | UnlessPayer$ TargetedController
+SVar:X:Count$CardCounters.QUEST
+DeckHas:Ability$LifeGain|Counters
+Oracle:Reach, lifelink\nOne for My Baby — Whenever you attack with two or more creatures, put two quest counters on Craig Boone, Novac Guard. When you do, Craig Boone deals damage equal to the number of quest counters on it to up to one target creature unless that creature's controller has Craig Boone deal that much damage to them.

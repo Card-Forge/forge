@@ -1,0 +1,13 @@
+Name:Yarus, Roar of the Old Gods
+ManaCost:2 R G
+Types:Legendary Creature Centaur Druid
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddKeyword$ Haste | Description$ Other creatures you control have haste.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.faceDown+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever one or more face-down creatures you control deal combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.faceDown+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a face-down creature you control dies, return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | FaceDown$ True | RememberChanged$ True | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBTurnFaceUp | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Permanent
+SVar:DBTurnFaceUp:DB$ SetState | Defined$ Remembered | Mode$ TurnFaceUp | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Keyword$Morph|Disguise
+Oracle:Other creatures you control have haste.\nWhenever one or more face-down creatures you control deal combat damage to a player, draw a card.\nWhenever a face-down creature you control dies, return it to the battlefield face down under its owner's control if it's a permanent card, then turn it face up.

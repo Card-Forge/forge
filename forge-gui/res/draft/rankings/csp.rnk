@@ -1,0 +1,156 @@
+//Rank|Name|Rarity|Set
+#1|Adarkar Valkyrie|R|CSP
+#2|Rimescale Dragon|R|CSP
+#3|Sunscour|R|CSP
+#4|Ohran Viper|R|CSP
+#5|Rimefeather Owl|R|CSP
+#6|Heidar, Rimewind Master|R|CSP
+#7|Darien, King of Kjeldor|R|CSP
+#8|Brooding Saurian|R|CSP
+#9|Stalking Yeti|U|CSP
+#10|Scrying Sheets|R|CSP
+#11|Garza's Assassin|R|CSP
+#12|Juniper Order Ranger|U|CSP
+#13|Resize|U|CSP
+#14|Herald of Leshrac|R|CSP
+#15|Vexing Sphinx|R|CSP
+#16|Mouth of Ronom|U|CSP
+#17|Ronom Hulk|C|CSP
+#18|Void Maw|R|CSP
+#19|Surging Flame|C|CSP
+#20|Lightning Serpent|R|CSP
+#21|Blizzard Specter|U|CSP
+#22|Jotun Owl Keeper|U|CSP
+#23|Phyrexian Ironfoot|U|CSP
+#24|Garza Zol, Plague Queen|R|CSP
+#25|Arctic Nishoba|U|CSP
+#26|Field Marshal|R|CSP
+#27|Coldsteel Heart|U|CSP
+#28|Karplusan Strider|U|CSP
+#29|Shape of the Wiitigo|R|CSP
+#30|Skred|C|CSP
+#31|White Shield Crusader|U|CSP
+#32|Squall Drifter|C|CSP
+#33|Soul Spike|R|CSP
+#34|Panglacial Wurm|R|CSP
+#35|Hibernation's End|R|CSP
+#36|Adarkar Windform|U|CSP
+#37|Krovikan Rot|U|CSP
+#38|Surging Sentinels|C|CSP
+#39|Chill to the Bone|C|CSP
+#40|Frost Raptor|C|CSP
+#41|Rimehorn Aurochs|U|CSP
+#42|Kjeldoran Gargoyle|U|CSP
+#43|Stromgald Crusader|U|CSP
+#44|Diamond Faerie|R|CSP
+#45|Gelid Shackles|C|CSP
+#46|Allosaurus Rider|R|CSP
+#47|Aurochs Herd|C|CSP
+#48|Deathmark|U|CSP
+#49|Zombie Musher|C|CSP
+#50|Boreal Druid|C|CSP
+#51|Boreal Centaur|C|CSP
+#52|Sound the Call|C|CSP
+#53|Disciple of Tevesh Szat|C|CSP
+#54|Woolly Razorback|R|CSP
+#55|Into the North|C|CSP
+#56|Frost Marsh|U|CSP
+#57|Krovikan Mist|C|CSP
+#58|Surging Might|C|CSP
+#59|Krovikan Whispers|U|CSP
+#60|Arctic Flats|U|CSP
+#61|Highland Weald|U|CSP
+#62|Boreal Shelf|U|CSP
+#63|Tresserhorn Sinks|U|CSP
+#64|Boreal Griffin|C|CSP
+#65|Ursine Fylgja|U|CSP
+#66|Phyrexian Snowcrusher|U|CSP
+#67|Feast of Flesh|C|CSP
+#68|Surging Aether|C|CSP
+#69|Magmatic Core|U|CSP
+#70|Deepfire Elemental|U|CSP
+#71|Dark Depths|R|CSP
+#72|Kjeldoran Outrider|C|CSP
+#73|Snow Covered Forest|C|CSP
+#74|Snow Covered Island|C|CSP
+#75|Ronom Unicorn|C|CSP
+#76|Bull Aurochs|C|CSP
+#77|Snow Covered Mountain|C|CSP
+#78|Snow Covered Plains|C|CSP
+#79|Snow Covered Swamp|C|CSP
+#80|Lovisa Coldeyes|R|CSP
+#81|Kjeldoran War Cry|C|CSP
+#82|Frozen Solid|C|CSP
+#83|Rimewind Taskmage|C|CSP
+#84|Karplusan Minotaur|R|CSP
+#85|Sek'Kuar, Deathkeeper|R|CSP
+#86|Phobian Phantasm|U|CSP
+#87|Earthen Goo|U|CSP
+#88|Lightning Storm|U|CSP
+#89|Perilous Research|U|CSP
+#90|Ohran Yeti|C|CSP
+#91|Goblin Rimerunner|C|CSP
+#92|Simian Brawler|C|CSP
+#93|Jester's Scepter|R|CSP
+#94|Martyr of Ashes|C|CSP
+#95|Greater Stone Spirit|U|CSP
+#96|Mishra's Bauble|U|CSP
+#97|Rune Snag|C|CSP
+#98|Frostweb Spider|C|CSP
+#99|Balduvian Fallen|U|CSP
+#100|Balduvian Frostwaker|U|CSP
+#101|Tresserhorn Skyknight|U|CSP
+#102|Thermopod|C|CSP
+#103|Grim Harvest|C|CSP
+#104|Gutless Ghoul|C|CSP
+#105|Swift Maneuver|C|CSP
+#106|Balduvian Warlord|U|CSP
+#107|Drelnoch|C|CSP
+#108|Jotun Grunt|U|CSP
+#109|Surging Dementia|C|CSP
+#110|Steam Spitter|U|CSP
+#111|Balduvian Rage|U|CSP
+#112|Orcish Bloodpainter|C|CSP
+#113|Chilling Shade|C|CSP
+#114|Ronom Serpent|C|CSP
+#115|Thrumming Stone|R|CSP
+#116|Rimebound Dead|C|CSP
+#117|Glacial Plating|U|CSP
+#118|Vanish into Memory|U|CSP
+#119|Sheltering Ancient|U|CSP
+#120|Karplusan Wolverine|C|CSP
+#121|Rime Transfusion|U|CSP
+#122|Krovikan Scoundrel|C|CSP
+#123|Martyr of Sands|C|CSP
+#124|Zur the Enchanter|R|CSP
+#125|Gristle Grinner|U|CSP
+#126|Martyr of Spores|C|CSP
+#127|Kjeldoran Javelineer|C|CSP
+#128|Flashfreeze|U|CSP
+#129|Controvert|U|CSP
+#130|Cryoclasm|U|CSP
+#131|Icefall|C|CSP
+#132|Goblin Furrier|C|CSP
+#133|Survivor of the Unseen|C|CSP
+#134|Martyr of Frost|C|CSP
+#135|Rimewind Cryomancer|U|CSP
+#136|Commandeer|R|CSP
+#137|Counterbalance|U|CSP
+#138|Sun's Bounty|C|CSP
+#139|Mystic Melting|U|CSP
+#140|Thermal Flux|C|CSP
+#141|Martyr of Bones|C|CSP
+#142|Tamanoa|R|CSP
+#143|Rite of Flame|C|CSP
+#144|Fury of the Horde|R|CSP
+#145|Wilderness Elemental|U|CSP
+#146|Wall of Shards|U|CSP
+#147|Luminesce|U|CSP
+#148|Haakon, Stromgald Scourge|R|CSP
+#149|Phyrexian Soulgorger|R|CSP
+#150|Freyalise's Radiance|U|CSP
+#151|Cover of Winter|R|CSP
+#152|Braid of Fire|R|CSP
+#153|Arcum Dagsson|R|CSP
+#154|Phyrexian Etchings|R|CSP
+#155|Jokulmorder|R|CSP

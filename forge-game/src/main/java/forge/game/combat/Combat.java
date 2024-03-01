@@ -31,6 +31,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -154,13 +155,18 @@ public class Combat {
         lkiCache.clear();
         combatantsThatDealtFirstStrikeDamage.clear();
 
+        //clear tracking for cards that care about "this combat"
+        Game game = playerWhoAttacks.getGame();
+        for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.getDamageHistory().endCombat();
+        }
+        playerWhoAttacks.clearAttackedPlayersMyCombat();
+
         //update view for all attackers and blockers
         for (Card c : attackers) {
-            c.getDamageHistory().endCombat();
             c.updateAttackingForView();
         }
         for (Card c : blockers) {
-            c.getDamageHistory().endCombat();
             c.updateBlockingForView();
         }
     }
@@ -293,7 +299,6 @@ public class Combat {
             } else {
                 return def.getController();
             }
-
         }
 
         return null;
@@ -516,7 +521,7 @@ public class Combat {
      * @param blocker the blocking creature.
      */
     public void addBlockerToDamageAssignmentOrder(Card attacker, Card blocker) {
-    	final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
+        final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
     	if (oldBlockers == null || oldBlockers.isEmpty()) {
    			blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blocker));
     	} else {
@@ -810,24 +815,21 @@ public class Combat {
                     defender = getDefenderPlayerByAttacker(attacker);
                 }
 
-                assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) &&
-                        getDefendersCreatures().size() > 0 &&
-                        attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
-                                "a creature defending player controls.") &&
+                assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) && getDefendersCreatures().size() > 0 &&
+                        attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.") &&
                         assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
-                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
-                                        CardTranslation.getTranslatedName(attacker.getName())), null);
-                        if (divideCombatDamageAsChoose) {
-                            if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                                orderedBlockers = getDefendersCreatures();
-                            } else {
-                                for (Card c : getDefendersCreatures()) {
-                                    if (!orderedBlockers.contains(c)) {
-                                        orderedBlockers.add(c);
-                                    }
-                                }
+                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature", CardTranslation.getTranslatedName(attacker.getName())), null);
+                if (divideCombatDamageAsChoose) {
+                    if (orderedBlockers == null || orderedBlockers.isEmpty()) {
+                        orderedBlockers = getDefendersCreatures();
+                    } else {
+                        for (Card c : getDefendersCreatures()) {
+                            if (!orderedBlockers.contains(c)) {
+                                orderedBlockers.add(c);
                             }
                         }
+                    }
+                }
             }
 
             assignedDamage = true;
@@ -904,10 +906,6 @@ public class Combat {
             combatantsThatDealtFirstStrikeDamage.clear();
         }
         return assignedDamage;
-    }
-
-    public final CardDamageMap getDamageMap() {
-        return damageMap;
     }
 
     public void dealAssignedDamage() {

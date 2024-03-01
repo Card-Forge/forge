@@ -3,7 +3,6 @@ package forge.adventure.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -17,16 +16,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.*;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -39,14 +34,6 @@ import forge.adventure.util.pathfinding.NavigationMap;
 import forge.adventure.util.pathfinding.NavigationVertex;
 import forge.adventure.util.pathfinding.ProgressableGraphPath;
 import forge.adventure.world.WorldSave;
-import forge.assets.FBufferedImage;
-import forge.assets.FImageComplex;
-import forge.assets.FSkinImage;
-import forge.card.CardRenderer;
-import forge.card.ColorSet;
-import forge.deck.Deck;
-import forge.deck.DeckProxy;
-import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
@@ -75,18 +62,13 @@ public class MapStage extends GameStage {
     private boolean isLoadingMatch = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
-    private final Dialog dialog;
-    private Stage dialogStage;
-    private boolean dialogOnlyInput;
 
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
-    private final Array<TextraButton> dialogButtonMap = new Array<>();
 
     public InputEvent eventTouchDown, eventTouchUp;
-    TextraButton selectedKey;
     private boolean respawnEnemies;
     private boolean canFailDungeon = false;
     protected ArrayList<EnemySprite> enemies = new ArrayList<>();
@@ -98,13 +80,7 @@ public class MapStage extends GameStage {
     float defaultSpriteSize = 16f;
     float navMapSize =  defaultSpriteSize * collisionWidthMod;
 
-    public boolean getDialogOnlyInput() {
-        return dialogOnlyInput;
-    }
 
-    public Dialog getDialog() {
-        return dialog;
-    }
 
     public boolean canEscape() {
         return !preventEscape;
@@ -130,14 +106,13 @@ public class MapStage extends GameStage {
     }
 
     public PointOfInterestChanges getChanges() {
-        return changes;
+        return TileMapScene.instance().getPointOfInterestChanges();
     }
     private boolean freezeAllEnemyBehaviors = false;
 
     protected MapStage() {
         disposeWorld();
         gdxWorld = new World(new Vector2(0, 0),false);
-        dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
         eventTouchDown.setType(InputEvent.Type.touchDown);
@@ -217,114 +192,7 @@ public class MapStage extends GameStage {
         super.debugCollision(b);
     }
 
-    private void effectDialog(EffectData effectData) {
-        dialog.getButtonTable().clear();
-        dialog.getContentTable().clear();
-        dialog.clearListeners();
-        TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
-        ok.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
-        L.setWrap(true);
-        L.setTypingListener(new TypingAdapter() {
-            @Override
-            public void end() {
-                ok.setVisible(true);
-            }
-        });
-        dialog.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                L.skipToTheEnd();
-                super.clicked(event, x, y);
-            }
-        });
-        dialog.getButtonTable().add(ok).width(240f);
-        dialog.getContentTable().add(L).width(250f);
-        dialog.setKeepWithinStage(true);
-        showDialog();
-    }
 
-    public void showImageDialog(String message, FBufferedImage fb) {
-        dialog.getContentTable().clear();
-        dialog.getButtonTable().clear();
-        dialog.clearListeners();
-
-        if (fb.getTexture() != null) {
-            TextureRegion tr = new TextureRegion(fb.getTexture());
-            tr.flip(true, true);
-            Image image = new Image(tr);
-            image.setScaling(Scaling.fit);
-            dialog.getContentTable().add(image).height(100);
-            dialog.getContentTable().add().row();
-        }
-        TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
-        L.skipToTheEnd();
-        dialog.getContentTable().add(L).width(250f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", () -> {
-            hideDialog();
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    fb.dispose();
-                }
-            }, 0.5f);
-        })).width(240f);
-        dialog.setKeepWithinStage(true);
-        setDialogStage(GameHUD.getInstance());
-        showDialog();
-    }
-
-    public void showDeckAwardDialog(String message, Deck deck) {
-        dialog.getContentTable().clear();
-        dialog.getButtonTable().clear();
-        dialog.clearListeners();
-        DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
-        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
-        if (cardArt != null) {
-            Image art = new Image(cardArt.getTextureRegion());
-            art.setWidth(58);
-            art.setHeight(46);
-            art.setPosition(25, 43);
-            Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
-            image.setWidth(60);
-            image.setHeight(80);
-            image.setPosition(24, 10);
-            ColorSet colorSet = DeckProxy.getColorIdentity(deck);
-            TypingLabel deckColors = Controls.newTypingLabel(Controls.colorIdToTypingString(colorSet, true).toUpperCase());
-            deckColors.skipToTheEnd();
-            deckColors.setAlignment(Align.center);
-            deckColors.setPosition(14, 44);
-            TextraLabel deckname = Controls.newTextraLabel(deck.getName());
-            deckname.setAlignment(Align.center);
-            deckname.setWrap(true);
-            deckname.setWidth(80);
-            deckname.setPosition(14, 28);
-            Group group = new Group();
-            group.addActor(art);
-            group.addActor(image);
-            group.addActor(deckColors);
-            group.addActor(deckname);
-            dialog.getContentTable().add(group).height(100).width(100).center();
-            dialog.getContentTable().add().row();
-        } else {
-            TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
-            label.skipToTheEnd();
-            label.setAlignment(Align.center);
-            dialog.getContentTable().add(label).align(Align.center);
-            dialog.getContentTable().add().row();
-        }
-
-        TypingLabel L = Controls.newTypingLabel(message);
-        L.setWrap(true);
-        L.skipToTheEnd();
-
-        dialog.getContentTable().add(L).width(250);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
-        dialog.setKeepWithinStage(true);
-        setDialogStage(GameHUD.getInstance());
-        showDialog();
-    }
 
     Array<EntryActor> otherEntries = new Array<>();
     Array<EntryActor> spawnClassified = new Array<>();
@@ -612,8 +480,11 @@ public class MapStage extends GameStage {
                         if (enemy != null && !enemy.toString().isEmpty()) {
                             EnemyData EN = WorldData.getEnemy(enemy.toString());
                             if (EN == null) {
-                                System.err.printf("Enemy \"%s\" not found.", enemy);
-                                break;
+                                System.err.printf("Enemy \"%s\" not found, choosing a random one for current biome\n", enemy);
+                                forge.adventure.world.World world = Current.world();
+                                Vector2 poiPos = AdventureQuestController.instance().mostRecentPOI.getPosition();
+                                int currentBiome = forge.adventure.world.World.highestBiome(world.getBiome((int) poiPos.x / world.getTileSize(), (int) poiPos.y / world.getTileSize()));
+                                EN = world.getData().GetBiomes().get(currentBiome).getEnemy(1.0f);
                             }
                             EnemySprite mob = new EnemySprite(id, EN);
                             Object dialogObject = prop.get("dialog"); //Check if the enemy has a dialogue attached to it.
@@ -694,6 +565,9 @@ public class MapStage extends GameStage {
                     case "dummy": //Does nothing. Mostly obstacles to be removed by ID by switches or such.
                         TiledMapTileMapObject obj2 = (TiledMapTileMapObject) obj;
                         DummySprite D = new DummySprite(id, obj2.getTextureRegion(), this);
+                        if (prop.containsKey("blocking")){
+                            D.blocking = Boolean.parseBoolean(prop.get("blocking").toString());
+                        }
                         if (prop.containsKey("hidden")){
                             D.setVisible(!Boolean.parseBoolean(prop.get("hidden").toString()));
                         }
@@ -749,17 +623,11 @@ public class MapStage extends GameStage {
                         }
                         break;
                     case "quest":
-
                         if (prop.containsKey("questtype")) {
-                            TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
                             String questOrigin = prop.containsKey("questtype") ? prop.get("questtype").toString() : "";
-                            AdventureQuestData questInfo = AdventureQuestController.instance().getQuestNPCResponse(TileMapScene.instance().rootPoint.getID(), changes,questOrigin);
-
-                            if (questInfo != null) {
-                                DialogActor questActor = new DialogActor(questInfo, this, id);
-                                questActor.setVisible(false);
-                                addMapActor(obj, questActor);
-                            }
+                            DialogActor questActor = new QuestActor(TileMapScene.instance().rootPoint.getID(),changes,questOrigin, this, id);
+                            questActor.setVisible(false);
+                            addMapActor(obj, questActor);
                         }
                         break;
 
@@ -883,10 +751,10 @@ public class MapStage extends GameStage {
     public boolean exitDungeon() {
         WorldSave.getCurrentSave().autoSave();
         AdventureQuestController.instance().updateQuestsLeave();
+        clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
-        clearIsInMap();
         Forge.switchScene(GameScene.instance());
         return true;
     }
@@ -906,9 +774,12 @@ public class MapStage extends GameStage {
                 public void run() {
                     currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
                     currentMob.resetCollisionHeight();
-                    startPause(0.3f, MapStage.this::getReward);
-                    AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
-                    AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+                    startPause(0.3f, () -> {
+                        MapStage.this.getReward();
+                        AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
+                        AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+                        currentMob = null;
+                    });
                     player.setAnimation(CharacterSprite.AnimationTypes.Idle);
                 }
             }, 1f);
@@ -1046,7 +917,6 @@ public class MapStage extends GameStage {
             player.setAnimation(CharacterSprite.AnimationTypes.Idle);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Idle);
         }
-        currentMob = null;
     }
 
     public void removeAllEnemies() {
@@ -1209,10 +1079,7 @@ public class MapStage extends GameStage {
         return isInMap;
     }
 
-    public boolean isDialogOnlyInput() {
-        return dialogOnlyInput;
-    }
-
+    @Override
     public void showDialog() {
         if (dialogStage == null){
             setDialogStage(GameHUD.getInstance());
@@ -1230,16 +1097,7 @@ public class MapStage extends GameStage {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
-    public void hideDialog() {
-        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
-        dialogOnlyInput = false;
-        selectedKey = null;
-        dialog.clearListeners();
-    }
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
 
     public void resetPosition() {
         if (positions.peek() != null){

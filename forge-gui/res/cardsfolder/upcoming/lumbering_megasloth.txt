@@ -1,0 +1,12 @@
+Name:Lumbering Megasloth
+ManaCost:10 G G
+Types:Creature Sloth Mutant
+PT:8/8
+K:Trample
+K:CARDNAME enters the battlefield tapped.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each counter among players and permanents.
+SVar:X:SVar$Y/Plus.Z
+SVar:Y:Count$Valid Card.Permanent$CardCounters.ALL
+SVar:Z:PlayerCountPlayers$AllCounters
+DeckHints:Ability$Counters
+Oracle:This spell costs {1} less to cast for each counter among players and permanents.\nTrample\nLumbering Megasloth enters the battlefield tapped.

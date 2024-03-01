@@ -57,6 +57,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostCollectEvidence cost) {
+        int c = cost.getAbilityAmount(ability);
+        CardCollectionView chosen = ComputerUtil.chooseCollectEvidence(player, cost, source, c, ability, isEffect());
+
+        return null == chosen ? null : PaymentDecision.card(chosen);
+    }
+
+    @Override
     public PaymentDecision visit(CostDiscard cost) {
         final String type = cost.getType();
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
@@ -162,7 +170,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             // TODO Determine exile from same zone for AI
             return null;
         } else {
-            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost, source, c, ability);
+            CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost, source, c, ability, isEffect());
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
     }
@@ -334,7 +342,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         list = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
 
         if (cost.isSameZone()) {
-            // Jotun Grunt
+            // Jötun Grunt
             // TODO: improve AI
             final FCollectionView<Player> players = game.getPlayers();
             for (Player p : players) {
@@ -498,14 +506,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 
     protected int removeCounter(GameEntityCounterTable table, List<Card> prefs, CounterEnumType cType, int stillToRemove) {
         int removed = 0;
         if (!prefs.isEmpty() && stillToRemove > 0) {
-            Collections.sort(prefs, CardPredicates.compareByCounterType(cType));
+            prefs.sort(CardPredicates.compareByCounterType(cType));
 
             for (Card prefCard : prefs) {
                 // already enough removed
@@ -667,7 +675,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                     return crd.getCounters(CounterEnumType.QUEST) > e;
                 }
             });
-            Collections.sort(prefs, Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
+            prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
 
             for (final Card crd : prefs) {
                 int e = 0;

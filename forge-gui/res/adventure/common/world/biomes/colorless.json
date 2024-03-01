@@ -112,7 +112,11 @@
 	"Slime Cave",
 	"Slobads Factory",
 	"Xiras Hive",
-	"Emrakul"
+	"Emrakul",
+	"Quest_APortalToNowhere",
+	"Quest_DigSite",
+	"Quest_PrimalJungle",
+	"Quest_BanditCave"
 ],
 "structures": [
 	{

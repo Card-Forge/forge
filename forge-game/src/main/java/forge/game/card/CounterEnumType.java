@@ -56,6 +56,8 @@ public enum CounterEnumType {
     BLOOD("BLOOD", 255, 108, 111),
 
     BLOODLINE("BLDLN", 224, 44, 44),
+    
+    BLOODSTAIN("BLDST", 224, 44, 44),
 
     BORE("BORE", 98, 47, 34),
 
@@ -122,6 +124,8 @@ public enum CounterEnumType {
     DREAD ("DREAD", 205, 170, 240),
 
     DREAM("DREAM", 190, 189, 255),
+    
+    DUTY("DUTY", 232, 245, 245),
 
     ECHO("ECHO", 225, 180, 255),
 
@@ -204,6 +208,8 @@ public enum CounterEnumType {
     HUSK("HUSK", 227, 212, 173),
 
     ICE("ICE", 0, 239, 255),
+    
+    IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
 
@@ -399,6 +405,8 @@ public enum CounterEnumType {
 
     UNITY("UNITY", 242, 156, 255),
 
+    UNLOCK("UNLCK", 222, 146, 205),
+
     VALOR("VALOR", 252, 250, 222),
 
     VELOCITY("VELO", 255, 95, 138),
@@ -426,6 +434,8 @@ public enum CounterEnumType {
     EXPERIENCE("EXP"),
 
     POISON("POISN"),
+
+    RAD("RAD"),
 
     TICKET("TICKET"),
 

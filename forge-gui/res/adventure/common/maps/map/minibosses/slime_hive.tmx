@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="148">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="150">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -38,7 +38,7 @@
    eJzt08ENgCAUBFE8aid2YR+CFVCVbRmoRS7ePGAg/iyZV8Fkk3UOAPBmmq0LxnMKbkrzP7bFugAAAAAAxnB564Lv9mBdUM8L7vtQbleSys65ceu49mmpFcoHD6Efoo8bUaEKMg==
   </data>
  </layer>
- <objectgroup id="11" name="obj">
+ <objectgroup id="11" name="Objects">
   <object id="89" template="../../obj/enemy.tx" x="205.774" y="278.737">
    <properties>
     <property name="enemy" value="Ooze"/>
@@ -120,9 +120,10 @@
 </property>
    </properties>
   </object>
-  <object id="135" template="../../obj/enemy.tx" x="136.609" y="546.607">
+  <object id="135" template="../../obj/enemy.tx" x="145.756" y="564.902">
    <properties>
     <property name="enemy" value="Cave Spider"/>
+    <property name="speedModifier" type="float" value="5"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
@@ -154,5 +155,7 @@
   <object id="145" template="../../obj/collision.tx" x="459.875" y="369.322" width="258.669" height="46.7511"/>
   <object id="146" template="../../obj/collision.tx" x="720.367" y="195.986" width="40.6127" height="267.092"/>
   <object id="147" template="../../obj/collision.tx" x="-40.8715" y="202.352" width="40.6127" height="267.092"/>
+  <object id="148" template="../../obj/collision.tx" x="430.61" y="186.615" width="48.684" height="28.1816"/>
+  <object id="149" template="../../obj/collision.tx" x="589.077" y="146.797" width="87.4262" height="28.1816"/>
  </objectgroup>
 </map>

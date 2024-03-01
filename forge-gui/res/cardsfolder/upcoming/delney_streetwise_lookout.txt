@@ -1,0 +1,8 @@
+Name:Delney, Streetwise Lookout
+ManaCost:2 W
+Types:Legendary Creature Human Scout
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl+powerLE2 | ValidBlocker$ Creature.powerGE3 | Description$ Creatures you control with power 2 or less can't be blocked by creatures with power 3 or greater.
+S:Mode$ Panharmonicon | ValidCard$ Creature.YouCtrl+powerLE2 | Description$ If an ability of a creature you control with power 2 or less triggers, that ability triggers an additional time.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control with power 2 or less can't be blocked by creatures with power 3 or greater.\nIf an ability of a creature you control with power 2 or less triggers, that ability triggers an additional time.

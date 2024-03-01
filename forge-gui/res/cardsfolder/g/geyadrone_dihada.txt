@@ -2,7 +2,7 @@ Name:Geyadrone Dihada
 ManaCost:1 U B R
 Types:Legendary Planeswalker Dihada
 Loyalty:4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Permanent.counters_GE1_CORRUPTION:Protection from permanents with corruption counters on them | Description$ Protection from permanents with corruption counters on them
+K:Protection:Permanent.counters_GE1_CORRUPTION:permanents with corruption counters on them
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one other target creature or planeswalker | ValidTgts$ Creature.Other,Planeswalker.Other | SubAbility$ DBLoseLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life. Put a corruption counter on up to one other target creature or planeswalker.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBPutCounter

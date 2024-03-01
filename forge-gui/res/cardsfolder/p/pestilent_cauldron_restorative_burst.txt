@@ -6,8 +6,8 @@ A:AB$ Mill | Cost$ 1 T | Defined$ Opponent | NumCards$ X | SpellDescription$ Eac
 A:AB$ ChangeZone | Cost$ 4 T | TargetMin$ 4 | TargetMax$ 4 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose four target cards from a single graveyard | ValidTgts$ Card | SubAbility$ DBDraw | StackDescription$ Exile four target cards from a single graveyard. ({c:Targeted}) | SpellDescription$ Exile four target cards from a single graveyard.
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:X:Count$LifeYouGainedThisTurn
-AlternateMode:Modal
 DeckHas:Ability$Discard|Token|LifeGain|Mill|Graveyard
+AlternateMode:Modal
 Oracle:{T}, Discard a card: Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."\n{1}, {T}: Each opponent mills cards equal to the amount of life you gained this turn.\n{4}, {T}: Exile four target cards from a single graveyard. Draw a card.
 
 ALTERNATE

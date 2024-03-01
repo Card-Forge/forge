@@ -389,12 +389,21 @@ public class GameCopier {
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                 }
+                if (c.isCloaked()) {
+                    newCard.setCloaked(true);
+                }
             }
             if (c.isMonstrous()) {
                 newCard.setMonstrous(true);
             }
             if (c.isRenowned()) {
                 newCard.setRenowned(true);
+            }
+            if (c.isSolved()) {
+                newCard.setSolved(true);
+            }
+            if (c.isSuspected()) {
+                newCard.setSuspected(true);
             }
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {

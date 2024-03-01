@@ -5,9 +5,9 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage to target tapped creature an opponent controls.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls | NumDmg$ 5
 K:Craft:3 W ExileCtrlOrGrave<1/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice & Type$Artifact
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Flash\nWhen Spring-Loaded Sawblades enters the battlefield, it deals 5 damage to target tapped creature an opponent controls.\nCraft with artifact {3}{W} ({3}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE

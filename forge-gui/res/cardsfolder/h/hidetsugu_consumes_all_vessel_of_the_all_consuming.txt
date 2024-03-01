@@ -1,7 +1,7 @@
 Name:Hidetsugu Consumes All
 ManaCost:1 B R
 Types:Enchantment Saga
-K:Saga:3:DBDestroyAll,DBExile,DBTransform
+K:Chapter:3:DBDestroyAll,DBExile,DBTransform
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand+cmcLE1 | SpellDescription$ Destroy each nonland permanent with mana value 1 or less.
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all graveyards.
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

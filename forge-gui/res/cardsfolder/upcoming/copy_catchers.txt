@@ -1,0 +1,10 @@
+Name:Copy Catchers
+ManaCost:1 U
+Types:Creature Faerie
+PT:2/1
+K:Flying
+T:Mode$ Surveil | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you surveil, you may pay {1}{U}. If you do, create a token that's a copy of CARDNAME.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 U | Defined$ Self
+DeckHas:Ability$Token
+DeckNeeds:Ability$Surveil
+Oracle:Flying\nWhenever you surveil, you may pay {1}{U}. If you do, create a token that's a copy of Copy Catchers.

@@ -1,7 +1,7 @@
 Name:Fugitive of the Judoon
 ManaCost:4 G
 Types:Enchantment Saga
-K:Saga:3:DBToken,DBInvestigate,DBExile
+K:Chapter:3:DBToken,DBInvestigate,DBExile
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human_ward,w_4_4_alien_rhino | SpellDescription$ Create a 1/1 white Human creature token with ward {2} and a 4/4 white Alien Rhino creature token.
 SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate.
 SVar:DBExile:DB$ ChangeZone | Hidden$ True | ChangeType$ EACH Human.YouCtrl & Artifact.YouCtrl | ChangeTypeDesc$ human you control and an artifact you control | Optional$ True | RememberChanged$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBSearch | SpellDescription$ You may exile a Human you control and an artifact you control. If you do, search your library for a Doctor card, put it onto the battlefield, then shuffle.

@@ -1,0 +1,7 @@
+Name:Break Down
+ManaCost:2 G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBToken | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ You | SpellDescription$ Create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Destroy target artifact or enchantment. Create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

@@ -84,7 +84,7 @@ public class ComputerUtilCard {
      * @param list
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
-        Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
+        list.sort(ComputerUtilCard.EvaluateCreatureComparator);
     }
 
     // The AI doesn't really pick the best artifact, just the most expensive.
@@ -552,11 +552,12 @@ public class ComputerUtilCard {
         if (!Iterables.isEmpty(list)) {
             CardCollection cc = CardLists.filter(list,
                     Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
-            Collections.sort(cc, CardLists.CmcComparatorInv);
 
             if (cc.isEmpty()) {
                 return null;
             }
+
+            cc.sort(CardLists.CmcComparatorInv);
 
             Card cheapest = cc.getLast();
             if (cheapest.hasSVar("DoNotDiscardIfAble")) {

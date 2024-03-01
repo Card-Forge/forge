@@ -1,0 +1,10 @@
+Name:Gadget Technician
+ManaCost:2 U R
+Types:Creature Goblin Artificer
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, create a 1/1 colorless Thopter artifact creature token with flying.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You
+K:Disguise:UR UR
+DeckHas:Ability$Token & Type$Artifact|Thopter
+Oracle:When Gadget Technician enters the battlefield or is turned face up, create a 1/1 colorless Thopter artifact creature token with flying.\nDisguise {U/R}{U/R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

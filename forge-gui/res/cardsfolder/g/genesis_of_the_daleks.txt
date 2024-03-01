@@ -1,0 +1,14 @@
+Name:Genesis of the Daleks
+ManaCost:4 B B
+Types:Enchantment Saga
+K:Chapter:4:DBToken,DBToken,DBToken,DBVillainous
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_3_3_a_dalek_menace | SpellDescription$ Create a 3/3 black Dalek artifact creature token with menace for each lore counter on CARDNAME.
+SVar:DBVillainous:DB$ VillainousChoice | Choices$ DBDestroyDalek,DBDestroyNonDalek | ValidTgts$ Opponent | SpellDescription$ Target opponent faces a villainous choice — Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn, or destroy all non-Dalek creatures.
+SVar:DBDestroyDalek:DB$ DestroyAll | ValidCards$ Creature.Dalek | SubAbility$ DBLoseLife | SpellDescription$ Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | Defined$ Opponent
+SVar:DBDestroyNonDalek:DB$ DestroyAll | ValidCards$ Creature.nonDalek | SpellDescription$ Destroy all non-Dalek creatures.
+SVar:X:Count$CardCounters.LORE
+SVar:Y:Count$ThisTurnEntered_Graveyard_from_Battlefield_Dalek$CardPower
+DeckHas:Ability$Token & Type$Artifact|Dalek
+DeckHints:Type$Dalek
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Create a 3/3 black Dalek artifact creature token with menace for each lore counter on Genesis of the Daleks.\nIV — Target opponent faces a villainous choice — Destroy all Dalek creatures and each of your opponents loses life equal to the total power of Daleks that died this turn, or destroy all non-Dalek creatures.

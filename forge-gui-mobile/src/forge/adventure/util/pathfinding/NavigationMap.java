@@ -32,6 +32,73 @@ public class NavigationMap {
         }
     };
 
+//    public void initializeOverworldGeometryGraph() {
+//        navGraph = new NavigationGraph();
+//
+//        int offsetX = 0;
+//        int offsetY = 0;
+//        float width = Current.world().getWidthInTiles();
+//        float height = Current.world().getHeightInTiles();
+//        float tileHeight = 16f;
+//        float tileWidth = 16f;
+//
+//        for (int i = 0; i < width; i++) {
+//            for (int j = 0; j < height; j++) {
+//                if (Current.world().isColliding(i,j)) {
+//                    BodyDef bodyDef = new BodyDef();
+//                    bodyDef.type = BodyDef.BodyType.StaticBody;
+//                    bodyDef.position.set(i + Current.world().getTileSize() / 2f + offsetX, j + Current.world().getTileSize() / 2f + offsetY);
+//                    Body body = WorldStage.getInstance().gdxWorld.createBody(bodyDef);
+//
+//                    PolygonShape polygonShape = new PolygonShape();
+//                    polygonShape.setAsBox(((Current.world().getTileSize() + spriteSize) / 2), ((Current.world().getTileSize() + spriteSize) / 2));
+//                    FixtureDef fixture = new FixtureDef();
+//                    fixture.shape = polygonShape;
+//                    fixture.density = 1;
+//
+//                    body.createFixture(fixture);
+//                    polygonShape.dispose();
+//                }
+//            }
+//        }
+//
+//
+//
+//        NavigationVertex[][] points = new NavigationVertex[(int)width][(int)height];
+//
+//        for (int i = 0; i < width; i++) {
+//            for (int j = 0; j < height; j++) {
+//                points[i][j] = navGraph.addVertex(i* tileWidth + (tileWidth/ 2), j*tileHeight + (tileHeight/ 2));
+//                if (i > 0) {
+//                    navGraph.addEdgeUnchecked(points[i][j],points[i-1][j]);
+//                }
+//
+//                if (j > 0) {
+//                    navGraph.addEdgeUnchecked(points[i][j],points[i][j-1]);
+//                }
+//
+//                if (i > 0 && j > 0) {
+//                    navGraph.addEdgeUnchecked(points[i][j],points[i-1][j-1]);
+//                }
+//
+//                if (i > 0 && j + 1 < height) {
+//                    navGraph.addEdgeUnchecked(points[i][j],points[i-1][j+1]);
+//                }
+//                //remaining connections will be added by subsequent nodes
+//            }
+//        }
+//
+//        Array<Fixture> fixtures = new Array<>();
+//        if (WorldStage.getInstance().gdxWorld != null) {
+//            WorldStage.getInstance().gdxWorld.getFixtures(fixtures);
+//            for (Fixture fix : fixtures) {
+//                navGraph.removeVertexIf(vertex -> fix.testPoint(vertex.pos));
+//            }
+//        }
+//
+//        navGraph.removeVertexIf(v -> navGraph.getConnections(v).isEmpty());
+//    }
+
     public void initializeGeometryGraph() {
         navGraph = new NavigationGraph();
 
@@ -197,5 +264,85 @@ public class NavigationMap {
             throw(e);
         }
     }
+
+//    public ProgressableGraphPath<NavigationVertex> findShortestPathOverworld(Float spriteSize, Vector2 origin, Vector2 destination) {
+//        Array<Fixture> fixtures = new Array<>();
+//        WorldStage.getInstance().gdxWorld.getFixtures(fixtures);
+//
+//        boolean originPrecalculated = navGraph.containsNode(origin);
+//        boolean destinationPrecalculated = navGraph.containsNode(destination);
+//
+//        try {
+//            if (!originPrecalculated)
+//                navGraph.addVertex(origin);
+//
+//            if (!destinationPrecalculated)
+//                navGraph.addVertex(destination);
+//
+//            ArrayList<NavigationVertex> vertices = new ArrayList<>();
+//
+//            if (!(originPrecalculated && destinationPrecalculated)) {
+//                vertices.addAll(navGraph.nodes.values());
+//                vertices.sort(Comparator.comparingInt(o -> Math.round((o.pos.x - origin.x) * (o.pos.x - origin.x) + (o.pos.y - origin.y) * (o.pos.y - origin.y))));
+//            }
+//
+//            if (!originPrecalculated) {
+//                for (int i = 0, j=0; i < vertices.size() && j < 10; i++) {
+//                    if (origin.epsilonEquals(vertices.get(i).pos))
+//                        continue; //rayCast() crashes if params are equal
+//                    rayCollided = false;
+//                    WorldStage.getInstance().gdxWorld.rayCast(callback, origin, vertices.get(i).pos);
+//                    if (!rayCollided) {
+//                        navGraph.addEdge(origin, vertices.get(i));
+//                        j++;
+//                    }
+//                }
+//            }
+//
+//            if (!destinationPrecalculated) {
+//                for (int i = 0, j=0; i < vertices.size() && j < 10; i++) {
+//                    if (destination.epsilonEquals(vertices.get(i).pos))
+//                        continue; //shouldn't happen, but would crash during rayCast if it did
+//                    rayCollided = false;
+//                    WorldStage.getInstance().gdxWorld.rayCast(callback, vertices.get(i).pos, destination);
+//                    if (!rayCollided) {
+//                        navGraph.addEdge(destination, vertices.get(i));
+//                        j++;
+//                    }
+//                }
+//            }
+//
+//
+//            ProgressableGraphPath<NavigationVertex> shortestPath = navGraph.findPath(origin, destination);
+//
+//            if (false) { //todo - re-evaluate. 8-way node links may be smooth enough to skip the extra raycast overhead
+//                //Trim path by cutting any unnecessary nodes
+//                for (int i = 0; i < shortestPath.getCount(); i++) {
+//                    for (int j = shortestPath.getCount() - 1; j > i + 1; j--) {
+//                        rayCollided = false;
+//                        WorldStage.getInstance().gdxWorld.rayCast(callback, shortestPath.get(i).pos, shortestPath.get(j).pos);
+//                        if (!rayCollided) {
+//                            shortestPath.remove(j - 1);
+//                            i = 0;
+//                            j = shortestPath.getCount();
+//                        }
+//                    }
+//                }
+//            }
+//
+//            if (!originPrecalculated)
+//                navGraph.removeVertex(origin);
+//            if (!destinationPrecalculated)
+//                navGraph.removeVertex(destination);
+//            return shortestPath;
+//        }
+//        catch(Exception e){
+//            if (!originPrecalculated && navGraph.lookupIndex(origin) > -1)
+//                navGraph.removeVertex(origin);
+//            if (!destinationPrecalculated && navGraph.lookupIndex(destination) > -1)
+//                navGraph.removeVertex(destination);
+//            throw(e);
+//        }
+//    }
 }
 

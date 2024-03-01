@@ -1,0 +1,10 @@
+Name:Crime Novelist
+ManaCost:2 R
+Types:Creature Goblin Bard
+PT:1/3
+T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, put a +1/+1 counter on CARDNAME and add {R}.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAddMana
+SVar:DBAddMana:DB$ Mana | Produced$ R
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact & Ability$Sacrifice
+Oracle:Whenever you sacrifice an artifact, put a +1/+1 counter on Crime Novelist and add {R}.

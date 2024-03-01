@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="115">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="126">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Sulfuric Vortex|EMA|1&quot; ],
-}</property>
+  <property name="preventEscape" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
@@ -47,10 +45,6 @@
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="78" template="../../obj/block.tx" x="431.273" y="226.258" width="49" height="82.8333" visible="1"/>
-  <object id="79" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="176" width="16" height="16"/>
-  <object id="80" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="191.636" width="16" height="16"/>
-  <object id="81" name="Hidden Door" type="dummy" gid="4119" x="415.818" y="207.818" width="16" height="16"/>
   <object id="82" template="../../obj/booster.tx" x="451.354" y="171.792" width="9.3125" height="9.1875">
    <properties>
     <property name="reward">[
@@ -102,7 +96,7 @@
    </properties>
   </object>
   <object id="87" template="../../obj/gold.tx" x="32.5" y="244.5"/>
-  <object id="88" template="../../obj/gold.tx" x="409" y="186"/>
+  <object id="88" template="../../obj/gold.tx" x="392" y="136"/>
   <object id="89" template="../../obj/enemy.tx" x="308.5" y="235">
    <properties>
     <property name="enemy" value="Blue Prototype"/>
@@ -153,7 +147,7 @@
 		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}],
 		&quot;name&quot;:&quot;Connect a gear from the golem to the lever.&quot; 
 			&quot;options&quot;:[{
-			&quot;action&quot;:[{&quot;deleteMapObject&quot;:78},{&quot;deleteMapObject&quot;:79},{&quot;deleteMapObject&quot;:80},{&quot;deleteMapObject&quot;:81}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:118},{&quot;deleteMapObject&quot;:121},{&quot;deleteMapObject&quot;:123},{&quot;deleteMapObject&quot;:124},{&quot;deleteMapObject&quot;:125}],
 			&quot;name&quot;:&quot;(Continue)&quot; }]
 	},
 	{ &quot;name&quot;:&quot;(Continue)&quot; } 	
@@ -184,6 +178,58 @@
 	</property>
    </properties>
   </object>
+  <object id="115" template="../../obj/treasure.tx" x="464" y="192">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;addMaxCount&quot;: 2
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;itemName&quot;: &quot;Landscape Sketchbook - Urza's Saga&quot;,
+  &quot;count&quot;: 1
+}]</property>
+   </properties>
+  </object>
+  <object id="116" template="../../obj/dialog.tx" x="97" y="194">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;The lever feels solidly attached to the switch, but it swings back and forth freely as if nothing is connected to this mechanism.&quot;, 
+    &quot;options&quot;:[ 
+	{ &quot;name&quot;:&quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}] } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="123" name="dummy" type="dummy" gid="16023" x="416" y="176" width="16" height="16">
+   <properties>
+    <property name="blocking" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="124" name="dummy" type="dummy" gid="16023" x="416" y="192" width="16" height="16">
+   <properties>
+    <property name="blocking" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="125" name="dummy" type="dummy" gid="16023" x="416" y="208" width="16" height="16">
+   <properties>
+    <property name="blocking" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="118" name="dummy" type="dummy" gid="4120" x="432" y="240" width="48" height="112"/>
  </objectgroup>
  <objectgroup id="9" name="Waypoints">
   <object id="92" template="../../obj/waypoint.tx" name="92" x="53.5" y="238.5"/>

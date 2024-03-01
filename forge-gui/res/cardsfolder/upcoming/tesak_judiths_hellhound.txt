@@ -1,0 +1,14 @@
+Name:Tesak, Judith's Hellhound
+ManaCost:3 R
+Types:Legendary Creature Elemental Dog
+PT:3/3
+K:Unleash
+S:Mode$ Continuous | Affected$ Dog.Other+YouCtrl | AddKeyword$ Unleash | Description$ Other Dogs you control have unleash.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Haste | Description$ Creatures you control with counters on them have haste.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R} for each attacking creature.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X
+SVar:X:Count$Valid Creature.attacking
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Type$Dog & Ability$Counters
+Oracle:Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)\nOther Dogs you control have unleash.\nCreatures you control with counters on them have haste.\nWhenever Tesak, Judith's Hellhound attacks, add {R} for each attacking creature.

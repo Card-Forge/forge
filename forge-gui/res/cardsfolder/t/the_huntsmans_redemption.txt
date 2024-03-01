@@ -1,7 +1,7 @@
 Name:The Huntsman's Redemption
 ManaCost:2 G
 Types:Enchantment Saga
-K:Saga:3:DBToken,ABSearch,DBPump
+K:Chapter:3:DBToken,ABSearch,DBPump
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
 SVar:ABSearch:AB$ ChangeZone | Cost$ Sac<1/Creature> | CostDesc$ You may sacrifice a creature. | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Creature | ChangeNum$ 1 | SpellDescription$ If you do, search your library for a creature or basic land card, reveal it, put it into your hand, then shuffle.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | KW$ Trample | SpellDescription$ Up to two target creatures each get +2/+2 and gain trample until end of turn

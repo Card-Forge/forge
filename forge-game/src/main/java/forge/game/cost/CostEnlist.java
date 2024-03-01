@@ -107,7 +107,7 @@ public class CostEnlist extends CostPartWithTrigger {
     }
 
     public static CardCollection getCardsForEnlisting(Player active) {
-        return CardLists.filter(active.getCreaturesInPlay(), c -> c.isUntapped() && !c.isSick() && !c.isAttacking());
+        return CardLists.filter(active.getCreaturesInPlay(), c -> c.canTap() && !c.isSick() && !c.isAttacking());
     }
 
 }

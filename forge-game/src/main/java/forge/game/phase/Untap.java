@@ -44,7 +44,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
-import forge.game.staticability.StaticAbilityCantPhaseOut;
+import forge.game.staticability.StaticAbilityCantPhase;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
@@ -124,11 +124,8 @@ public class Untap extends Phase {
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
-        for (Card c : list) {
-            c.setStartedTheTurnUntapped(c.isUntapped());
-        }
 
-        CardZoneTable triggerList = new CardZoneTable();
+        CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         CardCollection bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
         for (final Card c : bounceList) {
             Card moved = game.getAction().moveToHand(c, null);
@@ -293,7 +290,7 @@ public class Untap extends Phase {
                 // and indirectly, it just phases out indirectly.
                 if (c.isAttachment()) {
                     final Card ent = c.getAttachedTo();
-                    if (ent != null && list.contains(ent) && !StaticAbilityCantPhaseOut.cantPhaseOut(ent)) {
+                    if (ent != null && list.contains(ent) && !StaticAbilityCantPhase.cantPhaseOut(ent)) {
                         continue;
                     }
                 }

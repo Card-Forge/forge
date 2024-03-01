@@ -1,0 +1,8 @@
+[format]
+Name:Timeless (2023-12-12)
+Type:Archived
+Subtype:Vintage
+Effective:2023-12-12
+Sets:KTK, XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI
+Restricted:Channel; Demonic Tutor; Tibalt's Trickery
+Additional:Admiral Brass, Unsinkable; Clavileño, First of the Blessed; Goro-Goro and Satoru; Katilda and Lier; Pantlaza, Sun-Favored; Slimefoot and Squee; Timeless Dragon; Xolatoyac, the Smiling Flood

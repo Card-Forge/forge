@@ -1,0 +1,14 @@
+Name:Barbed Servitor
+ManaCost:3 B
+Types:Artifact Creature Construct
+PT:1/1
+K:Indestructible
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect it. (It has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME is dealt damage, target opponent loses that much life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Indestructible\nWhen Barbed Servitor enters the battlefield, suspect it. (It has menace and can't block.)\nWhenever Barbed Servitor deals combat damage to a player, you draw a card and you lose 1 life.\nWhenever Barbed Servitor is dealt damage, target opponent loses that much life.

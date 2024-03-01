@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Artifact Equipment
 K:For Mirrodin
 K:Equip:1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Goblin Gaveleer onto the battlefield. 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Goblin Gaveleer onto the battlefield.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Goblin Gaveleer | Zone$ Battlefield
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 DeckHas:Ability$Token & Type$Rebel|Goblin|Warrior

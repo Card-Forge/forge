@@ -213,14 +213,14 @@ public class CardRenderer {
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),
-                type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()),
+                type.hasSubtype("Saga"), type.hasSubtype("Class") || type.hasSubtype("Case"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()),
                 type.isPlaneswalker(), isModernFrame(pc), type.isBattle());
     }
 
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
         return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),
-                card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(),
+                card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class") || type.hasSubtype("Case"), type.isDungeon(),
                 card.isFlipCard(), type.isPlaneswalker(), isModernFrame(card), type.isBattle());
     }
 

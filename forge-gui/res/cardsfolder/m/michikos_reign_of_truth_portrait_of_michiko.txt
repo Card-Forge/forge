@@ -1,7 +1,7 @@
 Name:Michiko's Reign of Truth
 ManaCost:1 W
 Types:Enchantment Saga
-K:Saga:3:DBPump,DBPump,DBTransform
+K:Chapter:3:DBPump,DBPump,DBTransform
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | AILogic$ Pump | SpellDescription$ Target creature gets +1/+1 until end of turn for each artifact and/or enchantment you control.
 SVar:X:Count$Valid Artifact.YouCtrl,Enchantment.YouCtrl
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.

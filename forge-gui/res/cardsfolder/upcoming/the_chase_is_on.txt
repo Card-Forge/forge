@@ -1,0 +1,7 @@
+Name:The Chase Is On
+ManaCost:2 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ First Strike | NumAtt$ +3 | SubAbility$ DBInvestigate | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Token|Investigate & Type$Clue|Artifact
+Oracle:Target creature gets +3/+0 and gains first strike until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

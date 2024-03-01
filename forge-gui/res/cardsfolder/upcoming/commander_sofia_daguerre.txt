@@ -1,0 +1,10 @@
+Name:Commander Sofia Daguerre
+ManaCost:3 W
+Types:Legendary Creature Human Pilot
+PT:1/3
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Crash Landing — When CARDNAME enters the battlefield, destroy up to one target legendary permanent. That permanent's controller creates a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.Legendary | TgtPrompt$ Select up to one target legendary permanent | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ TargetedController
+DeckHas:Ability$Token & Type$Junk|Artifact
+Oracle:Flash\nCrash Landing — When Commander Sofia Daguerre enters the battlefield, destroy up to one target legendary permanent. That permanent's controller creates a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

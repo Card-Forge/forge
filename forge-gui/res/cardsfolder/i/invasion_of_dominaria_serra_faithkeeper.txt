@@ -5,8 +5,8 @@ Defense:5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life and draw a card.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
-AlternateMode:DoubleFaced
 DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Dominaria enters the battlefield, you gain 4 life and draw a card.
 
 ALTERNATE

@@ -2,6 +2,7 @@ Name:Akroma's Presence
 ManaCost:no cost
 Colors:White
 Types:Enchantment
-R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
-SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
-Oracle:If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Creatures you control get +1/+1 and have vigilance.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:Creatures you control get +1/+1 and have vigilance.\nAt the beginning of your upkeep, you gain 2 life.

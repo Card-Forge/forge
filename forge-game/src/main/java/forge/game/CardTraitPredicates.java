@@ -3,6 +3,7 @@ package forge.game;
 import com.google.common.base.Predicate;
 
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 
 public class CardTraitPredicates {
 
@@ -11,6 +12,15 @@ public class CardTraitPredicates {
             @Override
             public boolean apply(final CardTraitBase sa) {
                 return host.equals(sa.getHostCard());
+            }
+        };
+    }
+
+    public static final Predicate<CardTraitBase> isKeyword(final Keyword kw) {
+        return new Predicate<CardTraitBase>() {
+            @Override
+            public boolean apply(final CardTraitBase sa) {
+                return sa.isKeyword(kw);
             }
         };
     }

@@ -1,0 +1,10 @@
+Name:Agility Bobblehead
+ManaCost:3
+Types:Artifact Bobblehead
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | Cost$ 3 T |  TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to X target creatures you control | KW$ Haste | SubAbility$ DBUnblockable | SpellDescription$ Up to X target creatures you control each gain haste until end of turn and can't be blocked this turn except by creatures with haste, where X is the number of Bobbleheads you control as you activate this ability.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | ValidBlocker$ Creature.withoutHaste | Description$ This creature can't be blocked this turn except by creatures with haste.
+SVar:X:Count$Valid Bobblehead.YouCtrl
+DeckNeeds:Type$Bobblehead
+Oracle:{T}: Add one mana of any color.\n{3}, {T}: Up to X target creatures you control each gain haste until end of turn and can't be blocked this turn except by creatures with haste, where X is the number of Bobbleheads you control as you activate this ability.

@@ -1,0 +1,151 @@
+//Rank|Name|Rarity|Set
+#1|Earthquake|R|PO2
+#2|Talas Researcher|R|PO2
+#3|Goblin General|R|PO2
+#4|Angel of Fury|R|PO2
+#5|Armageddon|R|PO2
+#6|Talas Warrior|R|PO2
+#7|Wildfire|R|PO2
+#8|Sylvan Basilisk|R|PO2
+#9|Magma Giant|R|PO2
+#10|Vampiric Spirit|R|PO2
+#11|Blaze|U|PO2
+#12|Air Elemental|U|PO2
+#13|Dakmor Plague|U|PO2
+#14|Just Fate|R|PO2
+#15|Relentless Assault|R|PO2
+#16|Righteous Fury|R|PO2
+#17|Alaborn Veteran|R|PO2
+#18|Razorclaw Bear|R|PO2
+#19|Predatory Nightstalker|U|PO2
+#20|Rain of Daggers|R|PO2
+#21|Vengeance|U|PO2
+#22|Ancient Craving|R|PO2
+#23|Angel of Mercy|U|PO2
+#24|Alaborn Cavalier|U|PO2
+#25|Sea Drake|U|PO2
+#26|Nightstalker Engine|R|PO2
+#27|Temporal Manipulation|R|PO2
+#28|Cunning Giant|R|PO2
+#29|Brimstone Dragon|R|PO2
+#30|Volcanic Hammer|C|PO2
+#31|Jagged Lightning|U|PO2
+#32|Archangel|R|PO2
+#33|Piracy|R|PO2
+#34|Return of the Nightstalkers|R|PO2
+#35|Brutal Nightstalker|U|PO2
+#36|Hand of Death|C|PO2
+#37|Deathcoil Wurm|R|PO2
+#38|Coastal Wizard|R|PO2
+#39|Ironhoof Ox|U|PO2
+#40|Hidden Horror|R|PO2
+#41|Cruel Edict|C|PO2
+#42|Dark Offering|U|PO2
+#43|Hurricane|R|PO2
+#44|Foul Spirit|U|PO2
+#45|Apprentice Sorcerer|U|PO2
+#46|Steam Catapult|R|PO2
+#47|Goblin Cavaliers|C|PO2
+#48|Ogre Taskmaster|U|PO2
+#49|Abyssal Nightstalker|U|PO2
+#50|Obsidian Giant|U|PO2
+#51|Norwood Priestess|R|PO2
+#52|Wild Griffin|C|PO2
+#53|Talas Air Ship|C|PO2
+#54|Wild Ox|U|PO2
+#55|Screeching Drake|C|PO2
+#56|Norwood Riders|C|PO2
+#57|Armored Griffin|U|PO2
+#58|Dakmor Sorceress|R|PO2
+#59|Kiss of Death|U|PO2
+#60|Spitting Earth|C|PO2
+#61|Undo|U|PO2
+#62|Plated Wurm|C|PO2
+#63|Bee Sting|U|PO2
+#64|Exhaustion|R|PO2
+#65|Lava Axe|C|PO2
+#66|River Bear|U|PO2
+#67|Ogre Arsonist|U|PO2
+#68|Goblin Matron|U|PO2
+#69|Goblin Firestarter|U|PO2
+#70|Goblin Piker|C|PO2
+#71|Tremor|C|PO2
+#72|Ravenous Rats|C|PO2
+#73|Mystic Denial|U|PO2
+#74|Ogre Berserker|C|PO2
+#75|Golden Bear|C|PO2
+#76|Armored Galleon|U|PO2
+#77|Alaborn Zealot|U|PO2
+#78|Prowling Nightstalker|C|PO2
+#79|Raging Goblin|C|PO2
+#80|Ogre Warrior|C|PO2
+#81|Sleight of Hand|C|PO2
+#82|Barbtooth Wurm|C|PO2
+#83|Moaning Spirit|C|PO2
+#84|Norwood Archers|C|PO2
+#85|Righteous Charge|C|PO2
+#86|Goblin Raider|C|PO2
+#87|Alaborn Musketeer|C|PO2
+#88|Path of Peace|C|PO2
+#89|Nature's Lore|C|PO2
+#90|Goblin War Strike|C|PO2
+#91|Breath of Life|C|PO2
+#92|Lone Wolf|U|PO2
+#93|Goblin Glider|C|PO2
+#94|Lynx|C|PO2
+#95|Raiding Nightstalker|C|PO2
+#96|Norwood Warrior|C|PO2
+#97|Sylvan Yeti|R|PO2
+#98|Time Ebb|C|PO2
+#99|Untamed Wilds|U|PO2
+#100|Touch of Brilliance|C|PO2
+#101|Trokin High Guard|C|PO2
+#102|Theft of Dreams|U|PO2
+#103|False Summoning|C|PO2
+#104|Mind Rot|C|PO2
+#105|Dakmor Scorpion|C|PO2
+#106|Deja Vu|C|PO2
+#107|Extinguish|C|PO2
+#108|Angelic Wall|C|PO2
+#109|Bear Cub|C|PO2
+#110|Stone Rain|C|PO2
+#111|Goblin Mountaineer|C|PO2
+#112|Alaborn Trooper|C|PO2
+#113|Harmony of Nature|U|PO2
+#114|Talas Explorer|C|PO2
+#115|Monstrous Growth|C|PO2
+#116|Temple Acolyte|C|PO2
+#117|Alaborn Grenadier|C|PO2
+#118|Denizen of the Deep|R|PO2
+#119|Warrior's Stand|U|PO2
+#120|Town Sentry|C|PO2
+#121|Angelic Blessing|C|PO2
+#122|Tidal Surge|C|PO2
+#123|Lurking Nightstalker|C|PO2
+#124|Talas Scout|C|PO2
+#125|Alluring Scent|R|PO2
+#126|Dakmor Bat|C|PO2
+#127|Raise Dead|C|PO2
+#128|Temple Elder|U|PO2
+#129|Eye Spy|U|PO2
+#130|Steam Frigate|C|PO2
+#131|Volunteer Militia|C|PO2
+#132|Salvage|C|PO2
+#133|Swarm of Rats|C|PO2
+#134|Coercion|U|PO2
+#135|Muck Rats|C|PO2
+#136|Goblin Lore|U|PO2
+#137|Goblin War Cry|U|PO2
+#138|Talas Merchant|C|PO2
+#139|Rally the Troops|U|PO2
+#140|Remove|U|PO2
+#141|Wind Sail|C|PO2
+#142|Tree Monkey|C|PO2
+#143|Renewing Touch|U|PO2
+#144|Chorus of Woe|C|PO2
+#145|Festival of Trokin|C|PO2
+#146|Norwood Ranger|C|PO2
+#147|Natural Spring|C|PO2
+#148|Bloodcurdling Scream|U|PO2
+#149|Bargain|U|PO2
+#150|Deep Wood|U|PO2

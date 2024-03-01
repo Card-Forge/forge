@@ -70,6 +70,11 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
+        // CR 118.6 cost is unpayable
+        if (getPayCosts().hasManaCost() && getPayCosts().getCostMana().getManaCostFor(this).isNoCost()) {
+            return false;
+        }
+
         Player player = getActivatingPlayer();
         if (player == null) {
             player = this.getHostCard().getController();
@@ -90,7 +95,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
             return false;
         }
 
-        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
+        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this, false);
     }
 
     /** {@inheritDoc} */

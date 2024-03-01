@@ -163,8 +163,14 @@ public abstract class PlayerController {
     public final void reveal(CardCollectionView cards, ZoneType zone, Player owner) {
         reveal(cards, zone, owner, null);
     }
-    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix);
-    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
+    public final void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addMsgSuffix);
+    public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);

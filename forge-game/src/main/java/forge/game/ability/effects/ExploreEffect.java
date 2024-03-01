@@ -17,7 +17,6 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Lang;
@@ -54,34 +53,29 @@ public class ExploreEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         CardCollectionView tgts = GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa);
 
         for (final Card c : tgts) {
+            final Player pl = c.getController();
             for (int i = 0; i < amount; i++) {
-                GameEntityCounterTable table = new GameEntityCounterTable();
-                final CardZoneTable triggerList = new CardZoneTable();
-
                 if (game.getReplacementHandler().run(ReplacementType.Explore, AbilityKey.mapFromAffected(c))
                         != ReplacementResult.NotReplaced) {
                     continue;
                 }
 
+                GameEntityCounterTable table = new GameEntityCounterTable();
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                final CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
+
                 // revealed land card
                 boolean revealedLand = false;
-                final Player pl = c.getController();
                 CardCollection top = pl.getTopXCardsFromLibrary(1);
                 if (!top.isEmpty()) {
-                    Card movedCard = null;
                     game.getAction().reveal(top, pl, false,
                             Localizer.getInstance().getMessage("lblRevealedForExplore") + " - ");
                     final Card r = top.getFirst();
-                    final Zone originZone = game.getZoneOf(r);
                     if (r.isLand()) {
-                        movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
+                        game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
                         revealedLand = true;
                     } else {
                         Map<String, Object> params = Maps.newHashMap();
@@ -89,11 +83,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                         if (pl.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard",
                                         CardTranslation.getTranslatedName(r.getName())), r, params))
-                            movedCard = game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
-                    }
-
-                    if (originZone != null && movedCard != null) {
-                        triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
+                            game.getAction().moveTo(ZoneType.Graveyard, r, sa, moveParams);
                     }
                 }
                 if (!revealedLand) {
@@ -106,6 +96,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
 
                 // a creature does explore even if it isn't on the battlefield anymore
+                pl.addExploredThisTurn();
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                 if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
                 game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);

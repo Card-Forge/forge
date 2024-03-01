@@ -2,7 +2,7 @@ Name:Dragonlord Dromoka
 ManaCost:4 G W
 Types:Legendary Creature Elder Dragon
 PT:5/7
-K:This spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Flying
 K:Lifelink
 S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Your opponents can't cast spells during your turn.

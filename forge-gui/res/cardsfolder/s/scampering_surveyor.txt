@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact Creature Gnome
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card or Cave card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic,Cave | ChangeNum$ 1 
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic,Cave | ChangeNum$ 1
 DeckHints:Type$Cave
 Oracle:When Scampering Surveyor enters the battlefield, search your library for a basic land card or Cave card, put it onto the battlefield tapped, then shuffle.

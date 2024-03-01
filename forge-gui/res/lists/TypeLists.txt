@@ -73,6 +73,7 @@ Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dalek:Daleks
+Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -254,6 +255,7 @@ Siren:Sirens
 Skeleton:Skeletons
 Slith:Sliths
 Sliver:Slivers
+Sloth:Sloths
 Slug:Slugs
 Snake:Snakes
 Soldier:Soldiers
@@ -272,6 +274,7 @@ Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
+Synth:Synths
 Survivor:Survivors
 Tentacle:Tentacles
 Tetravite:Tetravites
@@ -310,12 +313,14 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Chorus
 Lesson
 Trap
 [EnchantmentTypes]
 Aura
 Background
 Cartouche
+Case
 Class
 Curse
 Role
@@ -431,6 +436,7 @@ Alara
 Alfava Metraxis
 Amonkhet
 Antausia
+Apalapucia
 Arcavios
 Arkhos
 Azgol
@@ -438,6 +444,7 @@ Belenon
 Bolas's Meditation Realm
 Capenna
 Cridhe
+Darillium
 Dominaria
 Earth
 Echoir
@@ -449,6 +456,7 @@ Fiora
 Gallifrey
 Gargantikar
 Gobakhan
+Horsehead Nebula
 Ikoria
 Innistrad
 Iquatana

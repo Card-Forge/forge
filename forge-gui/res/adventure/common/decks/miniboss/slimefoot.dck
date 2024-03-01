@@ -17,7 +17,7 @@ Name=slimefoot
 2 Forest|DMU|2
 3 Forest|DMU|3
 2 Ghave, Guru of Spores|PLIST|1
-2 Golgari Germination|DDJ|1
+3 Golgari Germination|DDJ|1
 4 Haunted Mire|DMU|1
 4 Indatha Triome|IKO|1
 2 Llanowar Wastes|BRO|1
@@ -39,7 +39,6 @@ Name=slimefoot
 4 Slimefoot, Thallid Transplant|YDMU|1
 4 Slimefoot, the Stowaway|DOM|1
 3 Sporecrown Thallid|DOM|1
-4 Sporemound|CMR|1
 4 Sproutback Trudge|C21|1
 4 Swamp|DMU|1
 1 Swamp|DMU|2
@@ -48,7 +47,7 @@ Name=slimefoot
 4 Tendershoot Dryad|RIX|1
 4 Thallid|MMA|1
 2 Thelon of Havenwood|TSR|1
-2 Trudge Garden|C21|1
+4 Trudge Garden|C21|1
 4 Verdant Catacombs|MM3|1
 4 Verdant Force|C15|1
 4 Village Rites|GN3|1

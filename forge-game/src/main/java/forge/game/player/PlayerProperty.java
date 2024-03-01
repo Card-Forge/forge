@@ -175,8 +175,18 @@ public class PlayerProperty {
             if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
             }
-        } else if (property.equals("LostLifeThisTurn")) {
-            if (player.getLifeLostThisTurn() <= 0) {
+        } else if (property.startsWith("LostLifeThisTurn")) {
+            String comparator = "GE";
+            int value = 1;
+
+            if (!property.equals("LostLifeThisTurn")) {
+                // Parse value from "LostLifeThisTurn GE3"
+                String compareAndValue = property.split(" ")[1];
+                comparator = compareAndValue.substring(0, 2); // This should typically be GE
+                final String rightString = compareAndValue.substring(2);
+                value = AbilityUtils.calculateAmount(source, rightString, spellAbility);
+            }
+            if (!Expressions.compare(player.getLifeLostThisTurn(), comparator, value)) {
                 return false;
             }
         } else if (property.equals("TappedLandForManaThisTurn")) {
@@ -243,7 +253,7 @@ public class PlayerProperty {
             }
         } else if (property.equals("EnchantedController")) {
             Card enchanting = source.getEnchantingCard();
-            if (enchanting != null && !player.equals(enchanting.getController())) {
+            if (enchanting == null || !player.equals(enchanting.getController())) {
                 return false;
             }
         } else if (property.equals("Chosen")) {

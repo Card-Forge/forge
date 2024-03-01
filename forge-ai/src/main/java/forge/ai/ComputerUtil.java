@@ -30,7 +30,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import forge.ai.AiCardMemory.MemorySet;
-import forge.ai.ability.ChooseGenericEffectAi;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
 import forge.card.CardStateName;
@@ -290,7 +289,7 @@ public class ComputerUtil {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai, true);
 
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA, false) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
             return false;
         }
 
@@ -666,7 +665,34 @@ public class ComputerUtil {
         return sacList;
     }
 
-    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa) {
+    public static CardCollection chooseCollectEvidence(final Player ai, CostCollectEvidence cost, final Card activate, int amount, SpellAbility sa, final boolean effect) {
+        CardCollection typeList = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(sa, effect));
+
+        if (CardLists.getTotalCMC(typeList) < amount) return null;
+
+        // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
+        CardLists.sortByCmcDesc(typeList);
+        Collections.reverse(typeList);
+
+
+        // TODO AI needs some improvements here
+        // Whats the best way to choose evidence to collect?
+        // Probably want to filter out cards that have graveyard abilities/castable from graveyard
+        // Ideally we remove as few cards as possible "Don't overspend"
+
+        final CardCollection exileList = new CardCollection();
+        while(amount > 0) {
+            Card c = typeList.remove(0);
+
+            amount -= c.getCMC();
+
+            exileList.add(c);
+        }
+
+        return exileList;
+    }
+
+    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa, final boolean effect) {
         CardCollection typeList;
         if (cost.zoneRestriction != 1) {
             typeList = new CardCollection(ai.getGame().getCardsIn(cost.from));
@@ -674,6 +700,7 @@ public class ComputerUtil {
             typeList = new CardCollection(ai.getCardsIn(cost.from));
         }
         typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
+        typeList = CardLists.filter(typeList, CardPredicates.canExiledBy(sa, effect));
 
         // don't exile the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
@@ -741,7 +768,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -769,14 +796,13 @@ public class ComputerUtil {
 
         CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.removeAll(exclude);
-        CardCollection typeList =
-                CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
+        CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
         if (sa.hasParam("Crew")) {
             typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
         }
 
-        typeList = CardLists.filter(typeList, Presets.UNTAPPED);
+        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -906,8 +932,8 @@ public class ComputerUtil {
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && (source.hasParam("Devour") || source.hasParam("Exploit"))) {
-            if (source.hasParam("Exploit")) {
+        if (isOptional && (source.isKeyword(Keyword.DEVOUR) || source.isKeyword(Keyword.EXPLOIT))) {
+            if (source.isKeyword(Keyword.EXPLOIT)) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
                         final SpellAbility exSA = t.ensureAbility().copy(ai);
@@ -1177,7 +1203,7 @@ public class ComputerUtil {
             return true;
         }
 
-        if (cardState.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
+        if (cardState.hasKeyword(Keyword.RIOT) && SpecialAiLogic.preferHasteForRiot(sa, ai)) {
             // Planning to choose Haste for Riot, so do this in Main 1
             return true;
         }
@@ -2451,7 +2477,7 @@ public class ComputerUtil {
             return goodChoices;
         }
 
-        Collections.sort(goodChoices, CardLists.TextLenComparator);
+        goodChoices.sort(CardLists.TextLenComparator);
 
         CardLists.sortByCmcDesc(goodChoices);
 

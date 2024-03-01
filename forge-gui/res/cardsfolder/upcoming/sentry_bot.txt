@@ -1,0 +1,13 @@
+Name:Sentry Bot
+ManaCost:4 W
+Types:Artifact Creature Robot
+PT:2/5
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature attacking you.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E} for each creature attacking you.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutCounterAll | TriggerDescription$ At the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on each creature you control.
+SVar:PutCounterAll:AB$ PutCounterAll | Cost$ PayEnergy<3> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 |
+SVar:X:Count$Valid Creature.attackingYou
+DeckHas:Ability$Counters
+Oracle:Flash\nThis spell costs {1} less to cast for each creature attacking you.\nWhen Sentry Bot enters the battlefield, you get {E} for each creature attacking you.\nAt the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on each creature you control.

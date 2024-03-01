@@ -1,7 +1,7 @@
 Name:The First Eruption
 ManaCost:2 R
 Types:Enchantment Saga
-K:Saga:3:TrigDamageAll,TrigMana,TrigSac
+K:Chapter:3:TrigDamageAll,TrigMana,TrigSac
 SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ Each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Mountain | RememberSacrificed$ True | StackDescription$ SpellDescription | SubAbility$ DBDamageAll | SpellDescription$ Sacrifice a Mountain. If you do, CARDNAME deals 3 damage to each creature.

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="48">
+ <properties>
+  <property name="preventEscape" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/rivers.tsx"/>
@@ -27,12 +30,7 @@
   </data>
  </layer>
  <objectgroup id="6" name="Waypoints">
-  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="640"/>
-  <object id="2" template="../../obj/collision.tx" x="-32" y="640" width="544" height="32"/>
-  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="640"/>
-  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
   <object id="5" template="../../obj/waypoint.tx" name="5" x="224" y="352"/>
-  <object id="7" template="../../obj/entry_up.tx" x="96" y="640"/>
   <object id="10" template="../../obj/waypoint.tx" name="10" x="320" y="512"/>
   <object id="11" template="../../obj/waypoint.tx" name="11" x="48" y="496"/>
   <object id="12" template="../../obj/waypoint.tx" name="12" x="416" y="608"/>
@@ -50,15 +48,12 @@
   <object id="24" template="../../obj/waypoint.tx" name="24" x="112" y="320"/>
   <object id="25" template="../../obj/waypoint.tx" name="25" x="272" y="240"/>
   <object id="26" template="../../obj/waypoint.tx" name="26" x="144" y="144"/>
-  <object id="27" template="../../obj/treasure.tx" x="64" y="96"/>
-  <object id="28" template="../../obj/gold.tx" x="432" y="224"/>
-  <object id="29" template="../../obj/gold.tx" x="32" y="400"/>
-  <object id="30" template="../../obj/gold.tx" x="224" y="496"/>
   <object id="37" template="../../obj/waypoint.tx" name="37" x="64" y="352"/>
   <object id="38" template="../../obj/waypoint.tx" name="38" x="416" y="336"/>
  </objectgroup>
  <objectgroup id="5" name="Objects">
-  <object id="8" template="../../obj/treasure.tx" x="304" y="48">
+  <object id="8" template="../../obj/treasure.tx" x="304" y="48"/>
+  <object id="9" template="../../obj/treasure.tx" x="416" y="352">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -73,25 +68,22 @@
 },{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 3,
-  &quot;addMaxCount&quot;: 2
-},
+  &quot;addMaxCount&quot;: 2,
 {
-	&quot;type&quot;: &quot;item&quot;,
-	&quot;probability&quot;: 1,
-	&quot;count&quot;: 1,
-	&quot;itemName&quot;: &quot;Jungle Artifact&quot;
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Landscape Sketchbook - Mirage&quot;
+}
 }]</property>
    </properties>
   </object>
-  <object id="9" template="../../obj/treasure.tx" x="416" y="352"/>
   <object id="31" template="../../obj/gold.tx" x="304" y="112"/>
-  <object id="32" template="../../obj/dialog.tx" x="240" y="80" width="96" height="64">
+  <object id="32" template="../../obj/dialog.tx" x="177" y="125" width="204" height="112">
    <properties>
     <property name="dialog">[
 {
-   &quot;text&quot;: &quot;You don't even have to open it to know that this chest contains the item you are after. A primal power radiates from within.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+   &quot;condition&quot;: [{&quot;actorID&quot;: 8,&quot;not&quot;: true}],
+   &quot;action&quot;: [{&quot;setMapFlag&quot;: {&quot;key&quot;: &quot;SearchedForArtifact&quot;, &quot;val&quot;: 1}, &quot;deleteMapObject&quot;:-1}]
 }
 ]</property>
    </properties>
@@ -233,5 +225,14 @@
     <property name="waypoints" value=""/>
    </properties>
   </object>
+  <object id="1" template="../../obj/collision.tx" x="-32" y="0" width="32" height="640"/>
+  <object id="2" template="../../obj/collision.tx" x="-32" y="640" width="544" height="32"/>
+  <object id="3" template="../../obj/collision.tx" x="480" y="0" width="32" height="640"/>
+  <object id="4" template="../../obj/collision.tx" x="-32" y="-32" width="544" height="32"/>
+  <object id="7" template="../../obj/entry_up.tx" x="35" y="640" width="126" height="16"/>
+  <object id="27" template="../../obj/treasure.tx" x="64" y="96"/>
+  <object id="28" template="../../obj/gold.tx" x="432" y="224"/>
+  <object id="29" template="../../obj/gold.tx" x="32" y="400"/>
+  <object id="30" template="../../obj/gold.tx" x="224" y="496"/>
  </objectgroup>
 </map>

@@ -1,0 +1,8 @@
+Name:Rubblebelt Braggart
+ManaCost:4 R
+Types:Creature Viashino Warrior
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.Self+IsSuspected | PresentCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigSuspect | TriggerDescription$ Whenever CARDNAME attacks, if it's not suspected, you may suspect it. (A suspected creature has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected | Optional$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Rubblebelt Braggart attacks, if it's not suspected, you may suspect it. (A suspected creature has menace and can't block.)

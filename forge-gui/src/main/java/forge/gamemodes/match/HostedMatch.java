@@ -18,6 +18,7 @@ import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
 
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.game.Game;
 import forge.game.GameRules;
 import forge.game.GameType;
@@ -155,6 +156,8 @@ public class HostedMatch {
         SoundSystem.instance.setBackgroundMusic(this.matchPlaylist == null ? MusicPlaylist.MATCH : this.matchPlaylist);
 
         game = match.createGame();
+
+        StaticData.instance().setSourceImageForClone(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
 
         if (game.getRules().getGameType() == GameType.Quest) {
             final QuestController qc = FModel.getQuest();

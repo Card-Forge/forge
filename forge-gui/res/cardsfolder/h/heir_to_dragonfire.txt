@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Warlock
 PT:2/2
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-A:AB$ Effect | Cost$ 2 Reveal<1/CARDNAME> | StaticAbilities$ PerpetualPump | RememberObjects$ Self | Name$ Heir to Dragonfire's Perpetual Effect | Duration$ Permanent | ActivationZone$ Hand | SpellDescription$ CARDNAME perpetually becomes a Dragon, gets +3/+3, and gains flying.
-SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Dragon | AddPower$ 3 | AddToughness$ 3 | EffectZone$ Command | AddKeyword$ Flying | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE  perpetually becomes a Dragon, gets +3/+3, and gains flying.
+A:AB$ Animate | Cost$ 2 R Reveal<1/CARDNAME> | Duration$ Perpetual | Types$ Dragon | RemoveCreatureTypes$ True | ActivationZone$ Hand | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ CARDNAME perpetually becomes a Dragon,
+SVar:DBPump:DB$ Pump | Defined$ Self | PumpZone$ Hand | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ gets +3/+3, and gains flying.
 DeckHas:Type$Dragon
 Oracle:{R}: Heir to Dragonfire gets +1/+0 until end of turn.\n{2}{R}, Reveal Heir to Dragonfire from your hand: Heir to Dragonfire perpetually becomes a Dragon, gets +3/+3, and gains flying.

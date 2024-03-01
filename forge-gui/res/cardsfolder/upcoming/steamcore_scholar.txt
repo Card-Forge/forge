@@ -1,0 +1,12 @@
+Name:Steamcore Scholar
+ManaCost:2 U
+Types:Creature Weird Detective
+PT:2/2
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards. Then discard two cards unless you discard an instant or sorcery card or a creature card with flying.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Creature.withFlying,Instant,Sorcery
+DeckHas:Ability$Discard
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying, vigilance\nWhen Steamcore Scholar enters the battlefield, draw two cards. Then discard two cards unless you discard an instant or sorcery card or a creature card with flying.

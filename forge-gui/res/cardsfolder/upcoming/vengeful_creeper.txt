@@ -1,0 +1,8 @@
+Name:Vengeful Creeper
+ManaCost:4 G
+Types:Creature Plant Elemental
+PT:5/5
+K:Disguise:5 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target artifact or enchantment an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls
+Oracle:Disguise {5}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Vengeful Creeper is turned face up, destroy target artifact or enchantment an opponent controls.

@@ -1,0 +1,7 @@
+Name:Thopter Token
+ManaCost:no cost
+Types:Artifact Creature Thopter
+Colors:colorless
+PT:0/0
+K:Flying
+Oracle:Flying

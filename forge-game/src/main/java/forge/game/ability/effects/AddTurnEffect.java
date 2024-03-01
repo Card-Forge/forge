@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -11,8 +10,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -79,10 +76,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
         eff.addStaticAbility(stEffect);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
     }
 
 }

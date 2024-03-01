@@ -637,7 +637,8 @@
 		"IdentityWhite",
 		"IdentityBlue",
 		"BiomeWhite",
-		"Loner"
+		"Loner",
+		"Minion"
 	]
 },
 {
@@ -916,7 +917,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
-	"scale": 0.75,
+	"scale": 0.85,
 	"life": 25,
 	"rewards": [
 		{
@@ -1707,7 +1708,8 @@
 		"IdentityWhite",
 		"IdentityGreen",
 		"IdentitySelesnya",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -1752,6 +1754,7 @@
 		"Human",
 		"Archer",
 		"Soldier",
+		"Leader",
 		"IdentitySelesnya"
 	]
 },
@@ -1925,6 +1928,67 @@
 		"Mystic",
 		"IdentityBlue",
 		"Dungeon"
+	]
+},
+{
+	"name": "Armadillo",
+	"sprite": "sprites/enemy/beast/armadillo.atlas",
+	"deck": [
+		"decks/standard/armadillo.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.7,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Landfall"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"White",
+				"Green"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			]
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
 	]
 },
 {
@@ -2232,7 +2296,8 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"IdentityBoros",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -2837,7 +2902,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale": 0.6,
+	"scale": 0.7,
 	"life": 20,
 	"rewards": [
 		{
@@ -3260,7 +3325,8 @@
 		"Zombie",
 		"Humanoid",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -3621,7 +3687,8 @@
 		"IdentityRed",
 		"IdentityGreen",
 		"IdentityGruul",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -4103,7 +4170,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -4241,7 +4309,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -4715,12 +4784,13 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"cardName": "Chandra, Fire Of Kaladesh"
+			"cardName": "Chandra, Fire of Kaladesh"
 		},
 		{
 			"type": "Union",
@@ -6838,6 +6908,7 @@
 },
 {
 	"name": "Cyclops",
+	"nameOverride": "Youthful Cyclops",
 	"sprite": "sprites/enemy/giant/cyclops.atlas",
 	"deck": [
 		"decks/standard/cyclops.dck"
@@ -6846,7 +6917,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
-	"life": 19,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -6874,6 +6945,241 @@
 		"Loner",
 		"Mythical",
 		"IdentityRed",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Giant Cyclops",
+	"sprite": "sprites/enemy/giant/cyclops_large.atlas",
+	"deck": [
+		"decks/standard/luckyminotaur.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 16,
+	"scale": 0.7,
+	"life": 30,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Rare",
+				"Uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 200
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Red"
+			],
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"colorType": "MultiColor"
+		}
+	],
+	"colors": "UR",
+	"questTags": [
+		"Humanoid",
+		"Giant",
+		"Barbarian",
+		"Loner",
+		"Mythical",
+		"IdentityRed",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Mountain Ogre",
+	"sprite": "sprites/enemy/monstrosity/ogre_large.atlas",
+	"deck": [
+		"decks/standard/ogre_large.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 16,
+	"scale": 0.6,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Rare",
+				"Uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 15,
+			"addMaxCount": 85
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"cardTypes": [
+				"Ogre"
+			]
+		}
+	],
+	"colors": "BR",
+	"questTags": [
+		"Humanoid",
+		"Giant",
+		"Loner",
+		"Mythical",
+		"IdentityRakdos",
+		"Large",
+		"Dungeon"
+	]
+},
+{
+	"name": "Hermit Crab",
+	"sprite": "sprites/enemy/beast/hermitcrab.atlas",
+	"deck": [
+		"decks/standard/hermitcrab.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "Any"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"White",
+				"Green"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			]
+		}
+	],
+	"colors": "UG",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentitySimic",
+		"BiomeBlue",
+		"Crab"
+	]
+},
+{
+	"name": "Hedgehog",
+	"sprite": "sprites/enemy/beast/hedgehog.atlas",
+	"deck": [
+		"decks/standard/hedgehog.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.7,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "Any"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 50
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"White",
+				"Green"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
 		"BiomeRed"
 	]
 },
@@ -7031,7 +7337,8 @@
 		"Unholy",
 		"Mounted",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -7113,7 +7420,8 @@
 		"Spirit",
 		"Flying",
 		"Ghost",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Minion"
 	]
 },
 {
@@ -7279,7 +7587,8 @@
 		"Unholy",
 		"Mounted",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -7395,7 +7704,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
-	"scale": 0.4,
+	"scale": 0.6,
 	"life": 30,
 	"rewards": [
 		{
@@ -7756,9 +8065,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":1.5,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale": 1.5,
 	"life": 19,
 	"rewards": [
 		{
@@ -8713,7 +9022,8 @@
 		"Mercenary",
 		"IdentityGruul",
 		"IdentityRed",
-		"Dwarf"
+		"Dwarf",
+		"Minion"
 	]
 },
 {
@@ -8795,7 +9105,7 @@
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/dwarf/dwarflarge.atlas",
 	"deck": [
-		"decks/standard/tokens.dck"
+		"decks/standard/dwarf_whitecastle.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -9093,7 +9403,8 @@
 		"IdentityRed",
 		"IdentityWhite",
 		"IdentityBoros",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -9422,7 +9733,8 @@
 		"Humanoid",
 		"Tribal",
 		"IdentityGreen",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -9467,7 +9779,8 @@
 		"Humanoid",
 		"Tribal",
 		"IdentityGreen",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -9551,8 +9864,10 @@
 	"ai": "",
 	"boss": true,
 	"flying": true,
-	"speed": 1,
+	"speed": 25,
+	"scale": 1.5,
 	"life": 100,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -10261,7 +10576,8 @@
 		"Human",
 		"Knight",
 		"Unholy",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Minion"
 	]
 },
 {
@@ -10600,7 +10916,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale": 1.2,
+	"scale": 1.4,
 	"life": 20,
 	"rewards": [
 		{
@@ -11601,7 +11917,7 @@
 		"decks/standard/geonid.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.75,
@@ -11691,6 +12007,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -11761,6 +12078,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 25,
+	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "card",
@@ -11917,7 +12235,8 @@
 		"Ghost",
 		"Flying",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -12035,7 +12354,8 @@
 		"IdentityBlack",
 		"IdentityBlue",
 		"IdentityDimir",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -12176,7 +12496,8 @@
 		"Flying",
 		"Ghost",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -12777,6 +13098,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -12847,6 +13169,7 @@
 	"speed": 15,
 	"scale": 0.5,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13207,7 +13530,8 @@
 		"Thief",
 		"Scavenger",
 		"IdentityRed",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -13271,7 +13595,8 @@
 		"Small",
 		"Artificer",
 		"Scavenger",
-		"IdentityRed"
+		"IdentityRed",
+		"Minion"
 	]
 },
 {
@@ -13324,6 +13649,58 @@
 		"IdentityBlack",
 		"IdentityRakdos",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Goblin Fanatic",
+	"sprite": "sprites/enemy/humanoid/goblin/goblin_3.atlas",
+	"deck": [
+		"decks/standard/goblin_fanatic.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 29,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Goblin",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"IdentityGreen",
+		"IdentityGruul",
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
@@ -13450,6 +13827,56 @@
 	]
 },
 {
+	"name": "Goblin Stalker",
+	"sprite": "sprites/enemy/humanoid/goblin/goblin_4.atlas",
+	"deck": [
+		"decks/standard/evilgoblin.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 29,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	],
+	"colors": "BR",
+	"questTags": [
+		"Goblin",
+		"Warrior",
+		"Humanoid",
+		"Territorial",
+		"Aggressive",
+		"Tribal",
+		"Small",
+		"IdentityRed",
+		"IdentityBlack",
+		"Minion"
+	]
+},
+{
 	"name": "Goblin Warrior",
 	"sprite": "sprites/enemy/humanoid/goblin/wolf_rider.atlas",
 	"deck": [
@@ -13495,12 +13922,13 @@
 		"Tribal",
 		"Small",
 		"IdentityRed",
-		"BiomeRed"
+		"BiomeRed",
+		"Minion"
 	]
 },
 {
 	"name": "Golem",
-	"nameOverride": "Rustic Golem",
+	"nameOverride": "Rusted Golem",
 	"sprite": "sprites/enemy/construct/golem.atlas",
 	"deck": [
 		"decks/standard/golem.json",
@@ -13667,7 +14095,8 @@
 		"Tribal",
 		"IdentityBlack",
 		"IdentityGreen",
-		"IdentityGolgari"
+		"IdentityGolgari",
+		"Leader"
 	]
 },
 {
@@ -14751,7 +15180,8 @@
 		"Mystic",
 		"IdentityGreen",
 		"IdentityBlack",
-		"BiomeGreen"
+		"BiomeGreen",
+		"Minion"
 	]
 },
 {
@@ -14900,7 +15330,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.45,
+	"scale": 0.75,
 	"life": 20,
 	"rewards": [
 		{
@@ -15046,7 +15476,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"scale": 0.7,
+	"scale": 0.8,
 	"life": 17,
 	"rewards": [
 		{
@@ -15054,11 +15484,18 @@
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
+			
 			"rarity": [
 				"rare",
 				"Mythic Rare",
 				"Rare",
 				"Uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Artifact",
+				"Enchantment"
 			]
 		},
 		{
@@ -15077,6 +15514,122 @@
 		"IdentityDimir",
 		"BiomeBlue",
 		"BiomeBlack"
+	]
+},
+{
+	"name": "Holy Paladin",
+	"sprite": "sprites/enemy/humanoid/human/knight/paladin_large.atlas",
+	"deck": [
+		"decks/standard/holypaladin.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"scale": 0.7,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 4,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 20
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"IdentityWhite",
+		"Paladin",
+		"Human",
+		"Holy",
+		"Leader"
+	]
+},
+{
+	"name": "Royal King",
+	"sprite": "sprites/enemy/humanoid/human/knight/king_large.atlas",
+	"deck": [
+		"decks/standard/whiteking.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"scale": 0.7,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 4,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 30,
+			"addMaxCount": 20
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"IdentityWhite",
+		"Warrior",
+		"Human",
+		"Holy",
+		"King"
 	]
 },
 {
@@ -15238,7 +15791,8 @@
 		"IdentityBlue",
 		"IdentityWhite",
 		"IdentityAzorius",
-		"BiomeWhite"
+		"BiomeWhite",
+		"Minion"
 	]
 },
 {
@@ -15400,7 +15954,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"life": 13,
+	"life": 18,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -15570,7 +16124,8 @@
 		"IdentityGreen",
 		"IdentityWhite",
 		"IdentitySelesnya",
-		"Mercenary"
+		"Mercenary",
+		"Minion"
 	]
 },
 {
@@ -15632,6 +16187,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 30,
+	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16117,6 +16673,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -16440,6 +16997,7 @@
 	"speed": 31,
 	"scale": 0.35,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16658,7 +17216,8 @@
 		"IdentityWhite",
 		"Mercenary",
 		"IdentityBlue",
-		"IdentityAzorius"
+		"IdentityAzorius",
+		"Minion"
 	]
 },
 {
@@ -17341,6 +17900,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -17450,7 +18010,8 @@
 		"BiomeWhite",
 		"Leonin",
 		"Armorer",
-		"Equipments"
+		"Equipments",
+		"Minion"
 	]
 },
 {
@@ -17499,7 +18060,8 @@
 		"IdentityWhite",
 		"IdentitySelesnya",
 		"BiomeWhite",
-		"Leonin"
+		"Leonin",
+		"Minion"
 	]
 },
 {
@@ -17618,6 +18180,7 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -17883,7 +18446,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.8,
+	"scale": 0.9,
 	"life": 12,
 	"rewards": [
 		{
@@ -17944,6 +18507,7 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -18593,7 +19157,8 @@
 		"Territorial",
 		"Water",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -18643,7 +19208,8 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySimic",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -18793,7 +19359,8 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySimic",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -18903,7 +19470,8 @@
 		"Soldier",
 		"Territorial",
 		"IdentityBlue",
-		"BiomeBlue"
+		"BiomeBlue",
+		"Minion"
 	]
 },
 {
@@ -19681,7 +20249,8 @@
 		"IdentityBlack",
 		"IdentityOrzhov",
 		"BiomeColorless",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -19697,6 +20266,7 @@
 	"speed": 20,
 	"scale": 2.5,
 	"life": 25,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -19907,6 +20477,63 @@
 	]
 },
 {
+	"name": "Naked Mole Rat",
+	"sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+	"deck": [
+		"decks/standard/shrinemole.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Beast"
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Nantuko Guard",
 	"sprite": "sprites/enemy/humanoid/nantuko/deadlymantis.atlas",
 	"deck": [
@@ -20073,7 +20700,11 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 3,
-			"addMaxCount": 6
+			"addMaxCount": 6,
+			"rarity": [
+				"uncomon",
+				"common"
+			]
 		},
 		{
 			"type": "card",
@@ -20451,6 +21082,7 @@
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "item",
@@ -21078,7 +21710,8 @@
 		"IdentityIzzet",
 		"IdentityJund",
 		"Leader",
-		"Pirate"
+		"Pirate",
+		"Captain"
 	]
 },
 {
@@ -21157,7 +21790,9 @@
 		"Bandit",
 		"Thief",
 		"IdentityBlack",
-		"Dungeon"
+		"Dungeon",
+		"Pirate",
+		"Captain"
 	]
 },
 {
@@ -21422,6 +22057,63 @@
 		"IdentityBlue",
 		"IdentityGreen",
 		"Snow"
+	]
+},
+{
+	"name": "Porcupine",
+	"sprite": "sprites/enemy/beast/porcupine.atlas",
+	"deck": [
+		"decks/standard/porcupine.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.7,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Beast"
+		}
+	],
+	"colors": "GR",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGruul",
+		"BiomeRed"
 	]
 },
 {
@@ -22021,6 +22713,64 @@
 	]
 },
 {
+	"name": "Raccoon",
+	"sprite": "sprites/enemy/beast/raccoon.atlas",
+	"deck": [
+		"decks/standard/enchantment_aggro.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.7,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"colors": [
+				"Green",
+				"White"
+			],
+			"rarity": [
+				"uncommon",
+				"common",
+				"Mythic Rare",
+				"Rare"
+			],
+			"cardText": "Enchantment"
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Animal",
+		"Territorial",
+		"Wild",
+		"Small",
+		"IdentityGreen",
+		"BiomeGreen"
+	]
+},
+{
 	"name": "Parrot",
 	"sprite": "sprites/enemy/beast/parrot.atlas",
 	"deck": [
@@ -22578,7 +23328,8 @@
 		"Skeleton",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -22592,6 +23343,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
+	"scale":1.1,
 	"life": 16,
 	"rewards": [
 		{
@@ -23140,6 +23892,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -23744,7 +24497,8 @@
 		"Skeleton",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -23778,7 +24532,8 @@
 		"Soldier",
 		"Regenerating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -23877,6 +24632,7 @@
 	"speed": 31,
 	"scale": 0.7,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24332,6 +25088,7 @@
 	"speed": 15,
 	"scale": 0.75,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "Card",
@@ -24425,6 +25182,7 @@
 	"boss": true,
 	"speed": 1,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -25086,6 +25844,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
+	"scale":1.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -25429,6 +26188,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -25505,8 +26265,8 @@
 },
 {
 	"name": "The Cheff",
-	"nameOverride": "",
-	"sprite": "sprites/enemy/humanoid/ironcheffboss.atlas",
+	"nameOverride": "Zedruu's Cook",
+	"sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
 	"deck": [
 		"decks/miniboss/thecheff.dck"
 	],
@@ -25518,6 +26278,7 @@
 	"speed": 15,
 	"scale": 0.6,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -25641,6 +26402,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -25794,17 +26556,17 @@
 },
 {
 	"name": "Torturer",
-	"sprite": "sprites/enemy/undead/torturer.atlas",
+	"sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
 	"deck": [
 		"decks/miniboss/torturer.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"scale": 0.7,
 	"life": 30,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26211,6 +26973,7 @@
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 80,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26299,7 +27062,8 @@
 		"Predator",
 		"Nocturnal",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -26490,7 +27254,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.3,
 	"speed": 20,
-	"scale": 0.65,
+	"scale": 0.75,
 	"life": 25,
 	"rewards": [
 		{
@@ -26926,9 +27690,9 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"scale":0.6,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale": 0.6,
 	"life": 36,
 	"rewards": [
 		{
@@ -27679,7 +28443,8 @@
 		"IdentityBlack",
 		"Ghost",
 		"Undead",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {
@@ -27730,6 +28495,7 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 50,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -27916,6 +28682,7 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
+	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -28034,7 +28801,8 @@
 		"Zombie",
 		"Humanoid",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Minion"
 	]
 },
 {

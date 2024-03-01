@@ -17,43 +17,22 @@
  */
 package forge.game.phase;
 
-import java.util.*;
-
-import com.google.common.collect.*;
-import org.apache.commons.lang3.time.StopWatch;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.GlobalRuleChange;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCombatChanged;
-import forge.game.event.GameEventCombatEnded;
-import forge.game.event.GameEventGameRestarted;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventPlayerStatsChanged;
-import forge.game.event.GameEventTokenStateUpdate;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnEnded;
-import forge.game.event.GameEventTurnPhase;
+import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -64,9 +43,14 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
+import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.util.*;
 
 
 /**
@@ -297,12 +281,15 @@ public class PhaseHandler implements java.io.Serializable {
                 case MAIN1:
                     {
                         if (playerTurn.isArchenemy()) {
-                            playerTurn.setSchemeInMotion();
+                            playerTurn.setSchemeInMotion(null);
+                        }
+                        if (playerTurn.hasRadiationEffect()) {
+                            handleRadiation();
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
-                            if (c.getType().hasSubtype("Saga")) {
+                            if (c.isSaga()) {
                                 c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                             }
                         }
@@ -387,15 +374,14 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
+                        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-                        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+                        AbilityKey.addCardZoneTableParams(moveParams, table);
 
-                        final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, false, table, moveParams) != null) {
+                            if (playerTurn.discard(c, null, false, moveParams) != null) {
                                 discarded.add(c);
                             }
                         }
@@ -541,6 +527,35 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
 
+    private void handleRadiation() {
+        int numRad = playerTurn.getCounters(CounterEnumType.RAD);
+        if (numRad == 0) playerTurn.removeRadiationEffect();
+        else {
+            final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            AbilityKey.addCardZoneTableParams(moveParams, table);
+
+            final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
+            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa, moveParams);
+            game.getAction().reveal(milled, playerTurn, false,
+                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn), false);
+            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
+                    Lang.joinHomogenous(milled) + ".");
+            table.triggerChangesZoneAll(game, sa);
+            int n = CardLists.filter(milled, Predicates.not(CardPredicates.Presets.LANDS)).size();
+            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            final int lost = playerTurn.loseLife(n, false, false);
+            if (lost > 0) {
+                lossMap.put(playerTurn, lost);
+            }
+            if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+            }
+            playerTurn.removeRadCounters(n, playerTurn.getRadiationEffect());
+        }
+    }
+
     private void declareAttackersTurnBasedAction() {
         final Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost()
                 ? playerTurn
@@ -657,7 +672,6 @@ public class PhaseHandler implements java.io.Serializable {
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
-        playerTurn.clearAttackedPlayersMyCombat();
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }
@@ -793,6 +807,7 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         List<Card> blocked = Lists.newArrayList();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         for (final Card a : combat.getAttackers()) {
             if (combat.isBlocked(a)) {
@@ -818,8 +833,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(CardUtil.getLKICopy(a));
-                a.addBlockedByThisTurn(CardUtil.getLKICopy(b));
+                b.addBlockedThisTurn(CardUtil.getLKICopy(a, lkiCache));
+                a.addBlockedByThisTurn(CardUtil.getLKICopy(b, lkiCache));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
@@ -857,6 +872,10 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
+
+        for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.setStartedTheTurnUntapped(c.isUntapped());
+        }
 
         game.setMonarchBeginTurn(game.getMonarch());
 
@@ -1079,7 +1098,7 @@ public class PhaseHandler implements java.io.Serializable {
                         // Need to check if Zone did change
                         if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa instanceof LandAbility)) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                            final CardZoneTable triggerList = new CardZoneTable();
+                            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game, sa);
                         }
@@ -1216,6 +1235,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
+        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
@@ -1224,6 +1244,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final void endTurnByEffect() {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
+        game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
         onPhaseBegin();
     }
 
@@ -1252,9 +1273,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
-        for (Player player : game.getPlayers()) {
-            player.resetCombatantsThisCombat();
-        }
         game.getEndOfCombat().executeUntil();
         game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
         if (inCombat()) {

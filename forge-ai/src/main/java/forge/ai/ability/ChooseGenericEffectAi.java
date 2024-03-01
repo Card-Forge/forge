@@ -3,7 +3,6 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -11,9 +10,7 @@ import forge.ai.SpellApiToAi;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.*;
-import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -32,8 +29,6 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("Khans".equals(aiLogic) || "Dragons".equals(aiLogic)) {
-            return true;
-        } else if ("Riot".equals(aiLogic)) {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
@@ -86,9 +81,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
             Map<String, Object> params) {
         Card host = sa.getHostCard();
-        final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final Game game = host.getGame();
-        final Combat combat = game.getCombat();
         final String logic = sa.getParam("AILogic");
         if (logic == null) {
             return spells.get(0);
@@ -287,54 +280,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             if (!filtered.isEmpty()) {
                 return filtered.get(0);
             }
-        } else if ("Riot".equals(logic)) {
-            SpellAbility counterSA = spells.get(0), hasteSA = spells.get(1);
-            return preferHasteForRiot(sa, player) ? hasteSA : counterSA;
         }
         return spells.get(0);   // return first choice if no logic found
-    }
-
-    public static boolean preferHasteForRiot(SpellAbility sa, Player player) {
-        // returning true means preferring Haste, returning false means preferring a +1/+1 counter
-        final Card host = sa.getHostCard();
-        final Game game = host.getGame();
-        final Card copy = CardUtil.getLKICopy(host);
-        copy.setLastKnownZone(player.getZone(ZoneType.Battlefield));
-
-        // check state it would have on the battlefield
-        CardCollection preList = new CardCollection(copy);
-        game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), preList);
-        // reset again?
-        game.getAction().checkStaticAbilities(false);
-
-        // can't gain counters, use Haste
-        if (!copy.canReceiveCounters(CounterEnumType.P1P1)) {
-            return true;
-        }
-
-        // already has Haste, use counter
-        if (copy.hasKeyword(Keyword.HASTE)) {
-            return false;
-        }
-
-        // not AI turn
-        if (!game.getPhaseHandler().isPlayerTurn(player)) {
-            return false;
-        }
-
-        // not before Combat
-        if (!game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            return false;
-        }
-
-        // TODO check other opponents too if able
-        final Player opp = player.getWeakestOpponent();
-        if (opp != null) {
-            // TODO add predict Combat Damage?
-            return opp.getLife() < copy.getNetPower();
-        }
-
-        // haste might not be good enough?
-        return false;
     }
 }

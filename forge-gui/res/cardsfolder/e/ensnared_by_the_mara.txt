@@ -1,0 +1,11 @@
+Name:Ensnared by the Mara
+ManaCost:2 R R
+Types:Sorcery
+A:SP$ VillainousChoice | Defined$ Opponent | Choices$ DBDig,DBDamage | SpellDescription$ Each opponent faces a villainous choice — They exile cards from the top of their library until they exile a nonland card, then you may cast that card without paying its mana cost, or that player exiles the top four cards of their library and CARDNAME deals damage equal to the total mana value of those exiled cards to that player.
+SVar:DBDig:DB$ DigUntil | Defined$ Remembered | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay | SpellDescription$ They exile cards from the top of their library until they exile a nonland card, then you may cast that card without paying its mana cost.
+SVar:DBPlay:DB$ Play | Controller$ You | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ All | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ Dig | RememberChanged$ True | DestinationZone$ Exile | Defined$ Remembered | DigNum$ 4 | ChangeNum$ All | SubAbility$ DamageOpponent | SpellDescription$ That player exiles the top four cards of their library and CARDNAME deals damage equal to the total mana value of those exiled cards to that player.
+SVar:DamageOpponent:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$SumCMC
+Oracle:Each opponent faces a villainous choice — They exile cards from the top of their library until they exile a nonland card, then you may cast that card without paying its mana cost, or that player exiles the top four cards of their library and Ensnared by the Mara deals damage equal to the total mana value of those exiled cards to that player.

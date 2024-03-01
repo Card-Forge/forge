@@ -24,7 +24,6 @@ import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
-import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -211,7 +210,8 @@ public class Game {
                 : null;
 
         if (lookup != null) {
-            lookup.remove(c);
+            lastStateBattlefield.remove(c);
+            lastStateGraveyard.remove(c);
             lookup.add(CardUtil.getLKICopy(c));
         }
     }
@@ -252,7 +252,6 @@ public class Game {
     public List<Card> getLeftBattlefieldThisTurn() {
         return leftBattlefieldThisTurn;
     }
-
     public List<Card> getLeftGraveyardThisTurn() {
         return leftGraveyardThisTurn;
     }
@@ -260,7 +259,6 @@ public class Game {
     public void clearLeftBattlefieldThisTurn() {
         leftBattlefieldThisTurn.clear();
     }
-
     public void clearLeftGraveyardThisTurn() {
         leftGraveyardThisTurn.clear();
     }
@@ -792,8 +790,9 @@ public class Game {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
+        boolean planarOwnerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
-        CardZoneTable triggerList = new CardZoneTable();
+        CardZoneTable triggerList = new CardZoneTable(getLastStateBattlefield(), getLastStateGraveyard());
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
@@ -814,8 +813,13 @@ public class Game {
         }
 
         for (Card c : cards) {
-            if (c.getController().equals(p) && (c.isPlane() || c.isPhenomenon())) {
-                planarControllerLost = true;
+            if (c.isPlane() || c.isPhenomenon()) {
+                if (c.getController().equals(p)) {
+                    planarControllerLost = true;
+                }
+                if (c.getOwner().equals(p)) {
+                    planarOwnerLost = true;
+                }
             }
 
             if (isMultiplayer) {
@@ -845,7 +849,7 @@ public class Game {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
                         si.setActivatingPlayer(c.getController());
                     }
-                    if (c.getController().equals(p)) {
+                    if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
                         getAction().exile(c, null, null);
                         triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
@@ -860,11 +864,33 @@ public class Game {
         // 901.6: If the current planar controller would leave the game, instead the next player
         // in turn order that wouldn't leave the game becomes the planar controller, then the old
         // planar controller leaves
+        if (planarControllerLost) {
+            for (Card c : getActivePlanes()) {
+                if (c != null && !c.getOwner().equals(p)) {
+                    c.setController(getNextPlayerAfter(p), 0);
+                    getAction().controllerChangeZoneCorrection(c);
+                }
+            }
+        }
         // 901.10: When a player leaves the game, all objects owned by that player except abilities
         // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card
         // or phenomenon card, the planar controller turns the top card of his or her planar deck face up.the game.
-        if (planarControllerLost) {
-            getNextPlayerAfter(p).initPlane();
+        if (planarOwnerLost) {
+            Player planarController = getPhaseHandler().getPlayerTurn();
+            if (planarController.equals(p)) {
+                planarController = getNextPlayerAfter(p);
+            }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            CardCollection planesLeavingGame =  new CardCollection();
+            for (Card c : getActivePlanes()) {
+                if (c != null && c.getOwner().equals(p)) {
+                    planesLeavingGame.add(c);
+                    planarController.removeCurrentPlane(c);
+                }
+            }
+            runParams.put(AbilityKey.Cards, planesLeavingGame);
+            getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
+            planarController.planeswalk(null);
         }
 
         if (p.isMonarch()) {
@@ -921,36 +947,6 @@ public class Game {
     }
     public void setActivePlanes(List<Card> activePlane0) {
         activePlanes = activePlane0;
-    }
-
-    public void archenemy904_10() {
-        //904.10. If a non-ongoing scheme card is face up in the
-        //command zone, and it isn't the source of a triggered ability
-        //that has triggered but not yet left the stack, that scheme card
-        //is turned face down and put on the bottom of its owner's scheme
-        //deck the next time a player would receive priority.
-        //(This is a state-based action. See rule 704.)
-
-        for (int i = 0; i < getCardsIn(ZoneType.Command).size(); i++) {
-            Card c = getCardsIn(ZoneType.Command).get(i);
-            if (c.isScheme() && !c.getType().hasSupertype(Supertype.Ongoing)) {
-                boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : stack) {
-                    if (si.getSourceCard().equals(c)) {
-                        foundonstack = true;
-                        break;
-                    }
-                }
-                if (!foundonstack) {
-                    getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    c.getController().getZone(ZoneType.Command).remove(c);
-                    i--;
-                    getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-                    c.getController().getZone(ZoneType.SchemeDeck).add(c);
-                }
-            }
-        }
     }
 
     public GameStage getAge() {

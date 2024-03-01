@@ -1,0 +1,13 @@
+Name:Lazav, Wearer of Faces
+ManaCost:U B
+Types:Legendary Creature Shapeshifter Detective
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target card from a graveyard, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue.YouCtrl | Execute$ TrigClone | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, you may have NICKNAME become a copy of a creature card exiled with it until end of turn.
+SVar:TrigClone:DB$ Clone | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | Optional$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Investigate|Token|Graveyard & Type$Artifact|Clue
+DeckHints:Ability$Graveyard
+Oracle:Whenever Lazav, Wearer of Faces attacks, exile target card from a graveyard, then investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you sacrifice a Clue, you may have Lazav become a copy of a creature card exiled with it until end of turn.

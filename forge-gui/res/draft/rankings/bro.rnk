@@ -1,0 +1,351 @@
+//Rank|Name|Rarity|Set
+#1|Teferi, Temporal Pilgrim|M|BRO
+#2|Wurmcoil Engine|M|BRR
+#3|Platoon Dispenser|M|BRO
+#4|Tyrant of Kher Ridges|R|BRO
+#5|Gix, Yawgmoth Praetor|M|BRO
+#6|Titania's Command|R|BRO
+#7|Phyrexian Fleshgorger|M|BRO
+#8|Steel Seraph|R|BRO
+#9|Gix's Command|R|BRO
+#10|Visions of Phyrexia|R|BRO
+#11|Bladecoil Serpent|M|BRO
+#12|Clay Champion|M|BRO
+#13|Cityscape Leveler|M|BRO
+#14|Portal to Phyrexia|M|BRO
+#15|In the Trenches|M|BRO
+#16|Myrel, Shield of Argive|M|BRO
+#17|Siege Veteran|R|BRO
+#18|Skystrike Officer|R|BRO
+#19|Surge Engine|M|BRO
+#20|Saheeli, Filigree Master|M|BRO
+#21|Gixian Puppeteer|R|BRO
+#22|Phyrexian Dragon Engine|R|BRO
+#23|Simian Simulacrum|R|BRO
+#24|Sarinth Greatwurm|M|BRO
+#25|Liberator, Urza's Battlethopter|R|BRO
+#26|Keening Stone|R|BRR
+#27|Loran of the Third Path|R|BRO
+#28|Autonomous Assembler|R|BRO
+#29|Misery's Shadow|R|BRO
+#30|Transmogrant's Crown|R|BRO
+#31|Draconic Destiny|M|BRO
+#32|Rootwire Amalgam|M|BRO
+#33|Mishra, Claimed by Gix|M|BRO
+#34|Skyfisher Spider|U|BRO
+#35|Urza, Prince of Kroog|R|BRO
+#36|Altar of Dementia|M|BRR
+#37|Staff of Domination|M|BRR
+#38|Urza's Command|R|BRO
+#39|Skitterbeam Battalion|M|BRO
+#40|Legions to Ashes|R|BRO
+#41|Tocasia, Dig Site Mentor|R|BRO
+#42|The Mightstone and Weakstone|R|BRO
+#43|Mazemind Tome|R|BRR
+#44|Precursor Golem|R|BRR
+#45|Arcane Proxy|M|BRO
+#46|Go for the Throat|U|BRO
+#47|Razorlash Transmogrant|R|BRO
+#48|Teething Wurmlet|R|BRO
+#49|Fallaji Vanguard|U|BRO
+#50|Harbin, Vanguard Aviator|R|BRO
+#51|Queen Kayla bin-Kroog|R|BRO
+#52|Phyrexian Processor|R|BRR
+#53|Static Net|U|BRO
+#54|Combat Thresher|U|BRO
+#55|Drafna, Founder of Lat-Nam|R|BRO
+#56|Hurkyl, Master Wizard|R|BRO
+#57|Feldon, Ronom Excavator|R|BRO
+#58|Obliterating Bolt|U|BRO
+#59|Battery Bearer|U|BRO
+#60|Evangel of Synthesis|U|BRO
+#61|Hero of the Dunes|U|BRO
+#62|Junkyard Genius|U|BRO
+#63|Excavation Explosion|C|BRO
+#64|Perilous Vault|M|BRR
+#65|Thopter Mechanic|U|BRO
+#66|Zephyr Sentinel|U|BRO
+#67|Ashnod, Flesh Mechanist|R|BRO
+#68|Overwhelming Remorse|C|BRO
+#69|Mishra's Command|R|BRO
+#70|Mishra's Research Desk|U|BRO
+#71|Obstinate Baloth|U|BRO
+#72|Titania, Voice of Gaea|M|BRO
+#73|Hajar, Loyal Bodyguard|R|BRO
+#74|Mishra, Tamer of Mak Fawa|R|BRO
+#75|Third Path Iconoclast|U|BRO
+#76|Thran Spider|R|BRO
+#77|Yotian Tactician|U|BRO
+#78|Horned Stoneseeker|U|BRO
+#79|Helm of the Host|M|BRR
+#80|Platinum Angel|M|BRR
+#81|Kayla's Command|R|BRO
+#82|Urza's Sylex|M|BRO
+#83|Gurgling Anointer|U|BRO
+#84|Awaken the Woods|M|BRO
+#85|Bushwhack|U|BRO
+#86|Gaea's Courser|U|BRO
+#87|Sarinth Steelseeker|U|BRO
+#88|Arbalest Engineers|U|BRO
+#89|Yotian Dissident|U|BRO
+#90|Prison Sentence|C|BRO
+#91|Foundry Inspector|U|BRR
+#92|Ramos, Dragon Engine|M|BRR
+#93|Scrap Trawler|R|BRR
+#94|Swiftfoot Boots|U|BRR
+#95|Loran, Disciple of History|U|BRO
+#96|Recruitment Officer|U|BRO
+#97|Tocasia's Welcome|R|BRO
+#98|Corrupt|U|BRO
+#99|Disfigure|C|BRO
+#100|Gruesome Realization|U|BRO
+#101|Audacity|U|BRO
+#102|Fauna Shaman|R|BRO
+#103|Iron-Craw Crusher|U|BRO
+#104|Urza, Lord Protector|M|BRO
+#105|Trench Stalker|C|BRO
+#106|Boulderbranch Golem|C|BRO
+#107|Hostile Negotiations|R|BRO
+#108|Scrapwork Mutt|C|BRO
+#109|Chromatic Star|U|BRR
+#110|Lodestone Golem|R|BRR
+#111|Sculpting Steel|R|BRR
+#112|Stern Lesson|C|BRO
+#113|Spotter Thopter|U|BRO
+#114|Dreams of Steel and Oil|U|BRO
+#115|Ashnod's Harvester|U|BRO
+#116|Giant Cindermaw|U|BRO
+#117|Argothian Opportunist|C|BRO
+#118|Epic Confrontation|C|BRO
+#119|Gwenna, Eyes of Gaea|R|BRO
+#120|Deathbloom Ritualist|R|BRO
+#121|Blast Zone|R|BRO
+#122|Penregon Strongbull|C|BRO
+#123|Emergency Weld|C|BRO
+#124|Scrapwork Rager|C|BRO
+#125|Blanchwood Prowler|C|BRO
+#126|Ichor Wellspring|U|BRR
+#127|Key to the City|R|BRR
+#128|Pristine Talisman|U|BRR
+#129|Sundering Titan|M|BRR
+#130|Airlift Chaplain|C|BRO
+#131|Phalanx Vanguard|C|BRO
+#132|Scrapwork Cohort|C|BRO
+#133|Fallaji Archaeologist|C|BRO
+#134|Mightstone's Animation|C|BRO
+#135|Urza, Powerstone Prodigy|U|BRO
+#136|Weakstone's Subjugation|C|BRO
+#137|Combat Courier|C|BRO
+#138|Terisian Mindbreaker|R|BRO
+#139|Battlefield Butcher|U|BRO
+#140|Gix's Caress|C|BRO
+#141|Brotherhood's End|R|BRO
+#142|Mishra, Excavation Prodigy|U|BRO
+#143|Raze to the Ground|C|BRO
+#144|Argothian Sprite|C|BRO
+#145|Gaea's Gift|C|BRO
+#146|Mask of the Jadecrafter|U|BRO
+#147|Rust Goliath|C|BRO
+#148|Fortified Beachhead|R|BRO
+#149|Mishra's Foundry|R|BRO
+#150|Evolving Wilds|C|BRO
+#151|Energy Refractor|C|BRO
+#152|Blitz Automaton|C|BRO
+#153|Wing Commando|C|BRO
+#154|Desynchronize|C|BRO
+#155|Loran's Escape|C|BRO
+#156|Ravenous Gigamole|C|BRO
+#157|Shoot Down|C|BRO
+#158|Elsewhere Flask|U|BRR
+#159|Mind's Eye|M|BRR
+#160|Mishra's Bauble|U|BRR
+#161|Self-Assembler|U|BRR
+#162|Aeronaut Cavalry|C|BRO
+#163|Disenchant|C|BRO
+#164|Soul Partition|R|BRO
+#165|Warlord's Elite|C|BRO
+#166|Flow of Knowledge|U|BRO
+#167|Machine Over Matter|C|BRO
+#168|Third Path Savant|C|BRO
+#169|Urza's Rebuff|C|BRO
+#170|Hulking Metamorph|U|BRO
+#171|The Temporal Anchor|R|BRO
+#172|Disciples of Gix|U|BRO
+#173|No One Left Behind|U|BRO
+#174|Powerstone Fracture|C|BRO
+#175|Transmogrant Altar|U|BRO
+#176|Bitter Reunion|C|BRO
+#177|Monastery Swiftspear|U|BRO
+#178|Sibling Rivalry|C|BRO
+#179|Fallaji Dragon Engine|U|BRO
+#180|Mishra's Juggernaut|C|BRO
+#181|Alloy Animist|U|BRO
+#182|Giant Growth|C|BRO
+#183|Perennial Behemoth|R|BRO
+#184|Argivian Avenger|U|BRO
+#185|Levitating Statue|U|BRO
+#186|Power Plant Worker|C|BRO
+#187|Reconstructed Thopter|U|BRO
+#188|Steel Exemplar|U|BRO
+#189|Argoth, Sanctum of Nature|R|BRO
+#190|Battlefield Forge|R|BRO
+#191|Brushland|R|BRO
+#192|Hall of Tagsin|R|BRO
+#193|Llanowar Wastes|R|BRO
+#194|Underground River|R|BRO
+#195|Burrowing Razormaw|C|BRO
+#196|Tomakul Scrapsmith|C|BRO
+#197|Roc Hunter|C|BRO
+#198|Conscripted Infantry|C|BRO
+#199|Goring Warplow|C|BRO
+#200|Moment of Defiance|C|BRO
+#201|Coastal Bulwark|C|BRO
+#202|Scatter Ray|C|BRO
+#203|Air Marshal|C|BRO
+#204|Gixian Infiltrator|C|BRO
+#205|Gnarlroot Pallbearer|C|BRO
+#206|Tomakul Honor Guard|C|BRO
+#207|Thraxodemon|C|BRO
+#208|Unleash Shell|C|BRO
+#209|Whirling Strike|C|BRO
+#210|Perimeter Patrol|C|BRO
+#211|Burnished Hart|U|BRR
+#212|Chromatic Lantern|R|BRR
+#213|Gilded Lotus|R|BRR
+#214|Phyrexian Revoker|R|BRR
+#215|Psychosis Crawler|R|BRR
+#216|Soul-Guide Lantern|U|BRR
+#217|Mass Production|U|BRO
+#218|Powerstone Engineer|C|BRO
+#219|Repair and Recharge|U|BRO
+#220|Thopter Architect|U|BRO
+#221|Tocasia's Onulet|C|BRO
+#222|Defabricate|U|BRO
+#223|Koilos Roc|C|BRO
+#224|Lat-Nam Adept|C|BRO
+#225|Take Flight|U|BRO
+#226|Depth Charge Colossus|C|BRO
+#227|Diabolic Intent|R|BRO
+#228|Gnawing Vermin|U|BRO
+#229|Clay Revenant|C|BRO
+#230|Fallaji Chaindancer|C|BRO
+#231|Goblin Blast-Runner|C|BRO
+#232|Pyrrhic Blast|U|BRO
+#233|Sardian Cliffstomper|U|BRO
+#234|Heavyweight Demolisher|U|BRO
+#235|Fade from History|R|BRO
+#236|Haywire Mite|U|BRO
+#237|Mine Worker|C|BRO
+#238|Su-Chi Cave Guard|U|BRO
+#239|Symmetry Matrix|U|BRO
+#240|Tocasia's Dig Site|C|BRO
+#241|Tower Worker|C|BRO
+#242|Stone Retrieval Unit|C|BRO
+#243|Meticulous Excavation|U|BRO
+#244|Dwarven Forge-Chanter|C|BRO
+#245|Carrion Locust|C|BRO
+#246|Curate|C|BRO
+#247|Involuntary Cooldown|U|BRO
+#248|Citanul Stalwart|C|BRO
+#249|Hoarding Recluse|C|BRO
+#250|Cradle Clearcutter|U|BRO
+#251|Deadly Riposte|C|BRO
+#252|Gixian Skullflayer|C|BRO
+#253|Kill-Zone Acrobat|C|BRO
+#254|Adaptive Automaton|R|BRR
+#255|Blackblade Reforged|R|BRR
+#256|Journeyer's Kite|R|BRR
+#257|Mystic Forge|M|BRR
+#258|Ambush Paratrooper|C|BRO
+#259|Great Desert Prospector|U|BRO
+#260|Lay Down Arms|U|BRO
+#261|Yotian Medic|C|BRO
+#262|Keeper of the Cadence|U|BRO
+#263|One with the Multiverse|M|BRO
+#264|Ashnod's Intervention|C|BRO
+#265|Painful Quandary|R|BRO
+#266|Thran Vigil|U|BRO
+#267|Mishra's Domination|C|BRO
+#268|Mishra's Onslaught|C|BRO
+#269|Blanchwood Armor|U|BRO
+#270|Wasteful Harvest|C|BRO
+#271|Tawnos, the Toymaker|R|BRO
+#272|Goblin Firebomb|C|BRO
+#273|Aeronaut's Wings|C|BRO
+#274|Retrieval Agent|C|BRO
+#275|Military Discipline|C|BRO
+#276|Dredging Claw|C|BRO
+#277|Ashnod's Altar|R|BRR
+#278|Astral Cornucopia|R|BRR
+#279|Caged Sun|M|BRR
+#280|Inspiring Statuary|R|BRR
+#281|Mesmeric Orb|M|BRR
+#282|Quietus Spike|R|BRR
+#283|Runechanter's Pike|R|BRR
+#284|Semblance Anvil|R|BRR
+#285|Sigil of Valor|U|BRR
+#286|Kayla's Reconstruction|R|BRO
+#287|Recommission|C|BRO
+#288|Survivor of Korlis|C|BRO
+#289|Union of the Third Path|C|BRO
+#290|Yotian Frontliner|U|BRO
+#291|Forging the Anchor|U|BRO
+#292|The Fall of Kroog|U|BRO
+#293|Mechanized Warfare|R|BRO
+#294|Fallaji Excavation|U|BRO
+#295|Tawnos's Tinkering|C|BRO
+#296|Thran Power Suit|U|BRO
+#297|Swiftgear Drake|C|BRO
+#298|Supply Drop|C|BRO
+#299|Cloud Key|R|BRR
+#300|Howling Mine|R|BRR
+#301|Jalum Tome|U|BRR
+#302|Sword of the Meek|R|BRR
+#303|Well of Lost Dreams|R|BRR
+#304|Veteran's Powerblade|C|BRO
+#305|Fateful Handoff|R|BRO
+#306|Fog of War|C|BRO
+#307|Slagstone Refinery|U|BRO
+#308|Over the Top|R|BRO
+#309|Aetherflux Reservoir|M|BRR
+#310|Goblin Charbelcher|R|BRR
+#311|Liquimetal Coating|U|BRR
+#312|Millstone|U|BRR
+#313|Ornithopter|U|BRR
+#314|Quicksilver Amulet|R|BRR
+#315|Springleaf Drum|U|BRR
+#316|Hurkyl's Final Meditation|R|BRO
+#317|Arms Race|U|BRO
+#318|Spectrum Sentinel|U|BRO
+#319|Bone Saw|U|BRR
+#320|Thorn of Amethyst|R|BRR
+#321|Unwinding Clock|R|BRR
+#322|Splitting the Powerstone|U|BRO
+#323|The Stasis Coffin|R|BRO
+#324|The Stone Brain|R|BRO
+#325|Demolition Field|U|BRO
+#326|Defense Grid|R|BRR
+#327|Door to Nothingness|R|BRR
+#328|Ivory Tower|U|BRR
+#329|Mox Amber|M|BRR
+#330|Calamity's Wake|U|BRO
+#331|Plains 1|C|BRO
+#332|Plains 2|C|BRO
+#333|Island 1|C|BRO
+#334|Island 2|C|BRO
+#335|Swamp 1|C|BRO
+#336|Swamp 2|C|BRO
+#337|Mountain 1|C|BRO
+#338|Mountain 2|C|BRO
+#339|Forest 1|C|BRO
+#340|Forest 2|C|BRO
+#341|Plains 3|C|BRO
+#342|Plains 4|C|BRO
+#343|Island 3|C|BRO
+#345|Island 4|C|BRO
+#346|Swamp 3|C|BRO
+#347|Swamp 4|C|BRO
+#348|Mountain 3|C|BRO
+#349|Mountain 4|C|BRO
+#350|Forest 3|C|BRO
+#351|Forest 4|C|BRO

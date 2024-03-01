@@ -398,7 +398,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         public void run(CardPool landsToAdd) {
                                             getMainDeckPage().addCards(landsToAdd);
                                         }
-                                    });
+                                    },null);
                                     dialog.show();
                                     setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
                                 }

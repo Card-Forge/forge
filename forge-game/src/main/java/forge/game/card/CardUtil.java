@@ -267,6 +267,9 @@ public final class CardUtil {
         newCopy.setTributed(in.isTributed());
         newCopy.setMonstrous(in.isMonstrous());
         newCopy.setRenowned(in.isRenowned());
+        newCopy.setSolved(in.isSolved());
+        newCopy.setSuspected(in.isSuspected());
+        newCopy.setSuspectedTimestamp(in.getSuspectedTimestamp());
 
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
@@ -291,6 +294,7 @@ public final class CardUtil {
         }
 
         newCopy.setIntensity(in.getIntensity(false));
+        newCopy.setPerpetual(in);
 
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
@@ -303,6 +307,7 @@ public final class CardUtil {
         if (in.hasChosenNumber()) {
             newCopy.setChosenNumber(in.getChosenNumber());
         }
+        newCopy.setChosenEvenOdd(in.getChosenEvenOdd());
 
         newCopy.getEtbCounters().putAll(in.getEtbCounters());
 
@@ -327,7 +332,7 @@ public final class CardUtil {
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
 
         newCopy.setForetold(in.isForetold());
-        newCopy.setForetoldThisTurn(in.isForetoldThisTurn());
+        newCopy.setTurnInZone(in.getTurnInZone());
         newCopy.setForetoldCostByEffect(in.isForetoldCostByEffect());
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));

@@ -1,0 +1,9 @@
+Name:Red Herring
+ManaCost:1 R
+Types:Artifact Creature Clue Fish
+PT:2/2
+K:Haste
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:Haste\nRed Herring attacks each combat if able.\n{2}, Sacrifice Red Herring: Draw a card.

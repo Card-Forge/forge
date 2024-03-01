@@ -6,7 +6,7 @@ K:Vigilance
 K:Trample
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on each Human you control.
-SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Human+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Human+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Type$Human
 DeckHints:Ability$Counters
 SVar:HasAttackEffect:TRUE

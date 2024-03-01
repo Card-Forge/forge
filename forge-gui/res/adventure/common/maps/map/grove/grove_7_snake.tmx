@@ -10,17 +10,17 @@
  <tileset firstgid="32769" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <layer id="10" name="Collision" width="40" height="50" opacity="0">
   <data encoding="base64" compression="zlib">
-   eJztmMsOwiAQRYk7F7qjH1Qbv9OF9btsv0SJJU4qlMsAhcQ5yU1Mwenpg0eqlCAIgsDhcv6mFe5aqXEJ9bPHHrquX99ttw+B9tK07vd8n39aQrHH5sp+lGEZF31D44MifmmIXxrih3PQn9j1zPymfjftTyls/ZnMu679gFkzqMuebibImrbn/VvX56y5pRxd1x/yM7j2Vbkdfc8G8fPtW3I9b1eNHH6+2qlu6/YUP9c5UE/kP0gttE+sI9LXNa9x5zquX6jPVu3Y9yrGMbUu971HHZGxWYrW/Qyt+xmQsVmTkF9tR8SvpiPqV8sRmQNppi6c6/H3GGU8xQW5htTYucDsFei3t1C4a2NrfqmOXL+9vr9SP0EQ/psXZpPILA==
+   eJztmF0OwiAMgIlve3A+saN4gLnodTySD85zuZ1Em43YaBkFxiCxX9LEAJZvP1AypQRBEIQQTvUnSuGulernwH6m7aHz+rXNcn/n6E9N6X7P9/zDHBjTNmb2w3TzumgLWh8Y8YtD/OIQPz47PYWpZ/Ab+920PVJh8o9o36XOA1AzsMuWbhCcmrbl/fvOH1JzUzlS1+/yA6hz1dqOtmfD8bOdW9Z63lSONfxsuWPdvvtj/Kg5ODmvB95/OLm4Y3wdOWOpfS10rwv1c41Zyu37Xvk4xuYNfe+5jpy1mQrsd6noMTn9gNL9gCW/lGcMLi6/3I4cv5yOXL9cjjDvsZ7qGQ6b49C441z9tmH6vV9wriE2zF4AZwX87c0VobWxNL9Yx1C/rb6/Yj9BEP6bF+81zMs=
   </data>
  </layer>
  <layer id="1" name="Background" width="40" height="50">
   <data encoding="base64" compression="zlib">
-   eJztk0ESgjAQBPEJ4n+MF76EV7+g4eBzrUihqJFdyCyrVdNVfQ3NQKqKEEII8eOy9y74TzYn7wJiDe8GIXnS3Rj0ZtyS0xupb63e97Pndll2js8s7UL2oVruhldjKG9Dd9bh6e6A2bG06dpO95U0IjaT+ry6Hk2NvN/cHZF9sfls+9anbUX25bZD9NXHXovWpNQ3/Ltr7bfEqb6z4XZb5dma/TqDTu27L/2+iP8gNUah07PPcj+Emuf9+v2llFJKkd4ACTLsMw==
+   eJztk0EOwiAUBevSpfU+4qZXqluvoLjwuAZN01qRT+n7QJM3yWzt+ICmIYQQQspxP5Uu2Ca7a+kCog3fxnbp96O1Me2quS+0n3sbg7mZN01bfJZG6svVOz/PpV0anb67trZLow/SZL61BtPmQG3WmtHjef2OiO2efbgvpRG5m9SXAuo8302dvN/SHZF9tvtt+9cX24rs822H6GsvHzVanVLfcHdz7ZdiqO+muN0h8rdj9nsodMb+99TzRdwD12iFzpJ9mvshjPle7e+XUkopRfoCwnDyvA==
   </data>
  </layer>
  <layer id="8" name="Below BackGround" width="40" height="50" opacity="0.6">
   <data encoding="base64" compression="zlib">
-   eJzt1bENgzAQRmEXNEyQxUjFHlhJvAIdiGwWZZvkRAEFEbF94Cvek/4Oi08uoK+c6xljLHJSaQNjjLGys/4vwIfvDENM+Jb35GTpzs7wHVGu6VbPO7Icl4bt2ekbNe/tH1+ssXTWfZJ1n2TdJ+HbrvHOXf3+c6V8w9c27vjk26Tpm+7pZ7fS9r0yfG2Yt7Zp+y6PtHPvsGydti+lNvz2ERERafYBzAhu7g==
+   eJzt1UEKwjAURdEMnLgCN6aj7sOiZgudWXRn4m7048CClZrktfngvfBmDRxSaLtVCB1jjCXOqm1gjDFWd97/BfjwLWFI6V99h/XneyvJ050t4ZsjxTu1zVmJS2G77vVG5b394ks11s67z/Lus7z7LHzjbdsQdu30c7V856etn/DZt0npuxzzz46l9t0KfE18bWhT+zanvHP3+N4wtS+nJn73ERERKXsA0ABu3w==
   </data>
  </layer>
  <layer id="9" name="Belove AboveGrass" width="40" height="50" opacity="0.46">

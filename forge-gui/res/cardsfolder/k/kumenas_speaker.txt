@@ -2,7 +2,7 @@ Name:Kumena's Speaker
 ManaCost:G
 Types:Creature Merfolk Shaman
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Island.YouCtrl,Creature.Merfolk+Other+YouCtrl| PresentCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another Merfolk or an Island.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Island.YouCtrl,Creature.Merfolk+Other+YouCtrl | PresentCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control another Merfolk or an Island.
 SVar:BuffedBy:Island
 SVar:BuffedBy:Merfolk
 Oracle:Kumena's Speaker gets +1/+1 as long as you control another Merfolk or an Island.

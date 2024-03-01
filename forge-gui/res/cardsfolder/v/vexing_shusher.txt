@@ -2,7 +2,8 @@ Name:Vexing Shusher
 ManaCost:RG RG
 Types:Creature Goblin Shaman
 PT:2/2
-K:This spell can't be countered.
-A:AB$ Pump | Cost$ RG | ValidTgts$ Card | TgtZone$ Stack | TargetType$ Spell | PumpZone$ Stack | KW$ HIDDEN CARDNAME can't be countered. | SpellDescription$ Target spell can't be countered.
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+A:AB$ Effect | Cost$ RG | ReplacementEffects$ AntiMagic | RememberObjects$ TargetedSource | ForgetOnMoved$ Stack | ValidTgts$ Card | TgtZone$ Stack | TargetType$ Spell | SpellDescription$ Target spell can't be countered.
+SVar:AntiMagic:Event$ Counter | ValidCard$ Card.IsRemembered | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 AI:RemoveDeck:All
 Oracle:This spell can't be countered.\n{R/G}: Target spell can't be countered.

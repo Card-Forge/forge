@@ -1,0 +1,13 @@
+Name:Contested Game Ball
+ManaCost:2
+Types:Artifact
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidTarget$ You | ValidSource$ Card | TriggerZones$ Battlefield | Execute$ TrigGainGontrol | TriggerDescription$ Whenever you're dealt combat damage, the attacking player gains control of CARDNAME and untaps it.
+SVar:TrigGainGontrol:DB$ GainControl | NewController$ TriggeredAttackingPlayer | Untap$ True
+A:AB$ Draw | Cost$ 2 T | SubAbility$ DBPutCounter | SpellDescription$ Draw a card and put a point counter on CARDNAME. Then if it has five or more point counters on it, sacrifice it and create a Treasure token.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ POINT | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ CountCounters | BranchConditionSVarCompare$ GE5 | TrueSubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE5_POINT | SubAbility$ DBTreasure
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:CountCounters:Count$CardCounters.POINT
+DeckHas:Ability$Counters|Token|Sacrifice & Type$Treasure
+Oracle:Whenever you're dealt combat damage, the attacking player gains control of Contested Game Ball and untaps it.\n{2}, {T}: Draw a card and put a point counter on Contested Game Ball. Then if it has five or more point counters on it, sacrifice it and create a Treasure token.

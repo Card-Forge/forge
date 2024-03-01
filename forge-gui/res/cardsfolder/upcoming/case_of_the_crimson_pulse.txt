@@ -1,0 +1,14 @@
+Name:Case of the Crimson Pulse
+ManaCost:2 R
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoot | TriggerDescription$ When this Case enters the battlefield, discard a card, then draw two cards.
+SVar:TrigLoot:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Hellbent$ True | IsPresent$ Card.Self+IsUnsolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — You have no cards in hand. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+T:Mode$ Phase | Phase$ Upkeep | IsPresent$ Card.Self+IsSolved | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Solved — At the beginning of your upkeep, discard your hand, then draw two cards.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
+DeckHas:Ability$Discard
+DeckHints:Ability$Discard
+Oracle:When this Case enters the battlefield, discard a card, then draw two cards.\nTo solve — You have no cards in hand. (If unsolved, solve at the beginning of your end step.)\nSolved — At the beginning of your upkeep, discard your hand, then draw two cards.

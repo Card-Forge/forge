@@ -68,7 +68,7 @@ ScryfallCode=CMB1
 59 R Planequake @Chris Kiritz
 60 R Problematic Volcano @Gavin Verhey
 61 R Queue of Beetles @Brendan Sell
-62 R Red Herring @Chris Mooney
+62 R P-Red Herring @Chris Mooney
 63 R Seasoned Weaponsmith @Mark L. Gottlieb
 64 R Siege Elemental @Levi Parker
 65 R Throat Wolf @Sam Stoddard

@@ -1,0 +1,16 @@
+Name:Voja, Jaws of the Conclave
+ManaCost:2 R G W
+Types:Legendary Creature Wolf
+PT:5/5
+K:Vigilance
+K:Trample
+K:Ward:3
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigCounters | TriggerDescription$ Whenever CARDNAME attacks, put X +1/+1 counters on each creature you control, where X is the number of Elves you control. Draw a card for each Wolf you control.
+SVar:TrigCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y
+SVar:X:Count$Valid Elf.YouCtrl
+SVar:Y:Count$Valid Wolf.YouCtrl
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Wolf|Elf
+DeckHas:Ability$Counters
+Oracle:Vigilance, trample, ward {3}\nWhenever Voja, Jaws of the Conclave attacks, put X +1/+1 counters on each creature you control, where X is the number of Elves you control. Draw a card for each Wolf you control.

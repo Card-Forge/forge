@@ -1,0 +1,332 @@
+//Rank|Name|Rarity|Set
+#1|Consecrated Sphinx|M|2X2
+#2|Mana Drain|M|2X2
+#3|Damnation|R|2X2
+#4|Liliana, the Last Hope|M|2X2
+#5|Dragonlord Dromoka|M|2X2
+#6|Dragonlord Silumgar|M|2X2
+#7|Hostage Taker|R|2X2
+#8|Supreme Verdict|R|2X2
+#9|Emiel the Blessed|M|2X2
+#10|Restoration Angel|R|2X2
+#11|Backdraft Hellkite|R|2X2
+#12|Hydroid Krasis|R|2X2
+#13|Mulldrifter|U|2X2
+#14|Bitterblossom|M|2X2
+#15|Seasoned Pyromancer|M|2X2
+#16|Eternal Witness|U|2X2
+#17|Mathas, Fiend Seeker|R|2X2
+#18|Rafiq of the Many|R|2X2
+#19|Roon of the Hidden Realm|R|2X2
+#20|Panharmonicon|R|2X2
+#21|Mikaeus, the Lunarch|R|2X2
+#22|Monastery Mentor|M|2X2
+#23|Reveillark|R|2X2
+#24|Talrand, Sky Summoner|R|2X2
+#25|Skinrender|U|2X2
+#26|Unburial Rites|U|2X2
+#27|Aminatou, the Fateshifter|M|2X2
+#28|Lavalanche|R|2X2
+#29|Marchesa, the Black Rose|R|2X2
+#30|Prophetic Bolt|U|2X2
+#31|Psychic Symbiont|U|2X2
+#32|Varina, Lich Queen|R|2X2
+#33|Wasitora, Nekoru Queen|R|2X2
+#34|Wilt-Leaf Liege|R|2X2
+#35|Lightning Bolt|U|2X2
+#36|Oracle of Mul Daya|R|2X2
+#37|Bloodbraid Elf|U|2X2
+#38|Venser, Shaper Savant|R|2X2
+#39|Rancor|U|2X2
+#40|Lightning Helix|U|2X2
+#41|Ruric Thar, the Unbowed|R|2X2
+#42|Sedraxis Specter|U|2X2
+#43|Sidisi, Brood Tyrant|R|2X2
+#44|Flickerwisp|U|2X2
+#45|Mentor of the Meek|U|2X2
+#46|Disciple of the Ring|R|2X2
+#47|Go for the Throat|U|2X2
+#48|Vampire Sovereign|C|2X2
+#49|Anger of the Gods|R|2X2
+#50|Young Pyromancer|U|2X2
+#51|Rishkar, Peema Renegade|R|2X2
+#52|Abzan Charm|U|2X2
+#53|Aurelia, the Warleader|M|2X2
+#54|Conclave Mentor|U|2X2
+#55|Elenda, the Dusk Rose|M|2X2
+#56|Ezuri, Claw of Progress|M|2X2
+#57|Fiery Justice|R|2X2
+#58|Heroic Reinforcements|U|2X2
+#59|Jeskai Ascendancy|R|2X2
+#60|Judith, the Scourge Diva|R|2X2
+#61|Kambal, Consul of Allocation|R|2X2
+#62|Kolaghan's Command|R|2X2
+#63|Master Biomancer|R|2X2
+#64|Nicol Bolas, God-Pharaoh|M|2X2
+#65|Scab-Clan Giant|U|2X2
+#66|Terminate|U|2X2
+#67|Wall of Omens|U|2X2
+#68|Domestication|U|2X2
+#69|Blood Artist|U|2X2
+#70|Yahenni, Undying Partisan|R|2X2
+#71|Abbot of Keral Keep|R|2X2
+#72|Bedlam Reveler|R|2X2
+#73|Travel Preparations|U|2X2
+#74|Abzan Ascendancy|R|2X2
+#75|Bear's Companion|U|2X2
+#76|Bounty of the Luxa|U|2X2
+#77|Crackling Doom|U|2X2
+#78|Creakwood Liege|R|2X2
+#79|Deathbringer Liege|R|2X2
+#80|Doran, the Siege Tower|R|2X2
+#81|Dromoka's Command|R|2X2
+#82|Elsha of the Infinite|R|2X2
+#83|Empyrial Archangel|R|2X2
+#84|Ghave, Guru of Spores|M|2X2
+#85|Lord of Extinction|M|2X2
+#86|Master of Cruelties|M|2X2
+#87|Mistmeadow Witch|U|2X2
+#88|Muldrotha, the Gravetide|M|2X2
+#89|Sedris, the Traitor King|M|2X2
+#90|Sprouting Thrinax|U|2X2
+#91|Teneb, the Harvester|R|2X2
+#92|Thraximundar|R|2X2
+#93|Villainous Wealth|R|2X2
+#94|Wrenn and Six|M|2X2
+#95|Coldsteel Heart|U|2X2
+#96|Mana Vault|M|2X2
+#97|Azorius Chancery|U|2X2
+#98|Boros Garrison|U|2X2
+#99|Dimir Aqueduct|U|2X2
+#100|Golgari Rot Farm|U|2X2
+#101|Gruul Turf|U|2X2
+#102|Izzet Boilerworks|U|2X2
+#103|Orzhov Basilica|U|2X2
+#104|Rakdos Carnarium|U|2X2
+#105|Selesnya Sanctuary|U|2X2
+#106|Simic Growth Chamber|U|2X2
+#107|Intet, the Dreamer|R|2X2
+#108|Lava Coil|C|2X2
+#109|Sultai Soothsayer|U|2X2
+#110|Abzan Falconer|U|2X2
+#111|Path to Exile|U|2X2
+#112|Seeker of the Way|C|2X2
+#113|Rampant Growth|C|2X2
+#114|Anguished Unmaking|R|2X2
+#115|Ashen Rider|R|2X2
+#116|Assassin's Trophy|R|2X2
+#117|Blazing Hellhound|U|2X2
+#118|Boartusk Liege|R|2X2
+#119|Dauntless Escort|R|2X2
+#120|Figure of Destiny|R|2X2
+#121|Grand Arbiter Augustin IV|R|2X2
+#122|Grim Flayer|R|2X2
+#123|Jeskai Charm|U|2X2
+#124|Kaervek the Merciless|R|2X2
+#125|Orzhov Pontiff|U|2X2
+#126|River Hoopoe|U|2X2
+#127|Shattergang Brothers|R|2X2
+#128|Tower Gargoyle|U|2X2
+#129|Uril, the Miststalker|M|2X2
+#130|Staggershock|U|2X2
+#131|Agony Warp|C|2X2
+#132|Coiling Oracle|C|2X2
+#133|Militia Bugler|C|2X2
+#134|Kederekt Leviathan|R|2X2
+#135|Mistfire Adept|U|2X2
+#136|Alesha, Who Smiles at Death|R|2X2
+#137|Devoted Druid|U|2X2
+#138|Elvish Rejuvenator|C|2X2
+#139|Experiment One|C|2X2
+#140|Impervious Greatwurm|R|2X2
+#141|Extract from Darkness|U|2X2
+#142|Tenth District Legionnaire|C|2X2
+#143|Thousand-Year Storm|R|2X2
+#144|Ground Assault|C|2X2
+#145|Settle Beyond Reality|C|2X2
+#146|Gifts Ungiven|R|2X2
+#147|Jeskai Elder|C|2X2
+#148|Pull from Tomorrow|R|2X2
+#149|Rift Bolt|C|2X2
+#150|Gnarlback Rhino|C|2X2
+#151|Tuskguard Captain|C|2X2
+#152|Bant Charm|U|2X2
+#153|Bloodwater Entity|C|2X2
+#154|Burning-Tree Emissary|C|2X2
+#155|Chronicler of Heroes|C|2X2
+#156|Dack's Duplicate|R|2X2
+#157|Drogskol Reaver|R|2X2
+#158|Fireblade Artist|C|2X2
+#159|Magister Sphinx|R|2X2
+#160|Prized Amalgam|R|2X2
+#161|Tariel, Reckoner of Souls|R|2X2
+#162|Bloodforged Battle-Axe|R|2X2
+#163|Conqueror's Flail|R|2X2
+#164|League Guildmage|U|2X2
+#165|Qasali Pridemage|C|2X2
+#166|Ambuscade|C|2X2
+#167|Lyev Skyknight|C|2X2
+#168|Relief Captain|C|2X2
+#169|Call to the Feast|C|2X2
+#170|Disfigure|C|2X2
+#171|Ainok Bond-Kin|C|2X2
+#172|Gods Willing|C|2X2
+#173|Momentary Blink|C|2X2
+#174|Myth Realized|U|2X2
+#175|Wingsteed Rider|C|2X2
+#176|Aethersnipe|C|2X2
+#177|Deep Analysis|C|2X2
+#178|Mana Leak|C|2X2
+#179|Eyeblight's Ending|C|2X2
+#180|Gravecrawler|R|2X2
+#181|Oona's Prowler|R|2X2
+#182|Seekers' Squire|C|2X2
+#183|Unearth|C|2X2
+#184|Dark-Dweller Oracle|C|2X2
+#185|Greater Gargadon|R|2X2
+#186|Labyrinth Champion|U|2X2
+#187|Monastery Swiftspear|C|2X2
+#188|Annoyed Altisaur|C|2X2
+#189|Bloom Tender|R|2X2
+#190|Green Sun's Zenith|R|2X2
+#191|Hardened Scales|R|2X2
+#192|Arjun, the Shifting Flame|R|2X2
+#193|Ashenmoor Liege|R|2X2
+#194|Balefire Liege|R|2X2
+#195|Child of Alara|R|2X2
+#196|Dreg Mangler|C|2X2
+#197|Glen Elendra Liege|R|2X2
+#198|Hellkite Overlord|M|2X2
+#199|Izzet Charm|C|2X2
+#200|Karador, Ghost Chieftain|M|2X2
+#201|Legion's Initiative|R|2X2
+#202|Lotleth Troll|U|2X2
+#203|Murkfiend Liege|R|2X2
+#204|Thistledown Liege|R|2X2
+#205|Ulasht, the Hate Seed|R|2X2
+#206|Sensei's Divining Top|R|2X2
+#207|Fiery Fall|C|2X2
+#208|Hissing Iguanar|C|2X2
+#209|Knightly Valor|C|2X2
+#210|Might of Old Krosa|C|2X2
+#211|Glowspore Shaman|C|2X2
+#212|Auger Spree|C|2X2
+#213|Forbidden Alchemy|C|2X2
+#214|Carrier Thrall|C|2X2
+#215|Deranged Assistant|C|2X2
+#216|Kozilek, Butcher of Truth|M|2X2
+#217|Advanced Stitchwing|C|2X2
+#218|Ingenious Skaab|C|2X2
+#219|Thought Scour|C|2X2
+#220|Graveblade Marauder|U|2X2
+#221|Necrotic Ooze|R|2X2
+#222|Ob Nixilis, Unshackled|R|2X2
+#223|Vampiric Rites|U|2X2
+#224|Chaos Warp|R|2X2
+#225|Dreamshaper Shaman|U|2X2
+#226|Goblin Banneret|U|2X2
+#227|Pirate's Pillage|C|2X2
+#228|Spider Spawning|U|2X2
+#229|Splinterfright|R|2X2
+#230|Webweaver Changeling|C|2X2
+#231|Animar, Soul of Elements|M|2X2
+#232|Atarka's Command|R|2X2
+#233|Atla Palani, Nest Tender|R|2X2
+#234|Cartel Aristocrat|C|2X2
+#235|Firesong and Sunspeaker|R|2X2
+#236|Gloryscale Viashino|U|2X2
+#237|Guided Passage|R|2X2
+#238|Martial Glory|C|2X2
+#239|The Mimeoplasm|R|2X2
+#240|Civic Saber|U|2X2
+#241|Firemind Vessel|U|2X2
+#242|Eel Umbra|C|2X2
+#243|Grapple with the Past|C|2X2
+#244|Hyena Umbra|C|2X2
+#245|Liliana's Elite|C|2X2
+#246|Living Lightning|C|2X2
+#247|Scale Blessing|U|2X2
+#248|Sensor Splicer|C|2X2
+#249|Winged Coatl|C|2X2
+#250|Severed Strands|C|2X2
+#251|Deadly Recluse|C|2X2
+#252|Skeleton Archer|C|2X2
+#253|Nephalia Smuggler|U|2X2
+#254|Biogenic Upgrade|U|2X2
+#255|Ulamog, the Infinite Gyre|M|2X2
+#256|Leonin Arbiter|R|2X2
+#257|Teferi's Protection|R|2X2
+#258|Weathered Wayfarer|R|2X2
+#259|Imperial Seal|M|2X2
+#260|Scion of Darkness|U|2X2
+#261|Hero of the Games|C|2X2
+#262|Surreal Memoir|U|2X2
+#263|Allosaurus Shepherd|M|2X2
+#264|Arachnus Spinner|U|2X2
+#265|Brindle Shoat|C|2X2
+#266|Jodah, Archmage Eternal|R|2X2
+#267|Mindwrack Liege|R|2X2
+#268|Mizzix of the Izmagnus|M|2X2
+#269|Skullbriar, the Walking Grave|R|2X2
+#270|Aether Vial|R|2X2
+#271|Aven Initiate|C|2X2
+#272|Last Breath|C|2X2
+#273|Battlefield Promotion|C|2X2
+#274|Bloodflow Connoisseur|C|2X2
+#275|Purphoros's Emissary|C|2X2
+#276|Strands of Undeath|C|2X2
+#277|Privileged Position|R|2X2
+#278|Livewire Lash|U|2X2
+#279|Emrakul, the Aeons Torn|M|2X2
+#280|Doomed Traveler|C|2X2
+#281|Smothering Tithe|R|2X2
+#282|Body Double|U|2X2
+#283|Breakthrough|U|2X2
+#284|Spell Pierce|C|2X2
+#285|Wash Out|U|2X2
+#286|Balustrade Spy|C|2X2
+#287|Inquisition of Kozilek|U|2X2
+#288|Storm Fleet Pyromancer|C|2X2
+#289|Twinflame|R|2X2
+#290|Warrior's Oath|M|2X2
+#291|Arachnus Web|C|2X2
+#292|Centaur Battlemaster|U|2X2
+#293|Concordant Crossroads|M|2X2
+#294|Aethermage's Touch|U|2X2
+#295|Bring to Light|R|2X2
+#296|Glimpse the Unthinkable|R|2X2
+#297|Kaalia of the Vast|M|2X2
+#298|Zur the Enchanter|R|2X2
+#299|Crucible of Worlds|M|2X2
+#300|Nim Deathmantle|R|2X2
+#301|Phyrexian Altar|R|2X2
+#302|Cavern of Souls|M|2X2
+#303|City of Brass|R|2X2
+#304|Pillar of the Paruns|R|2X2
+#305|Anointer of Valor|C|2X2
+#306|Makeshift Mauler|C|2X2
+#307|Traveler's Amulet|C|2X2
+#308|Sparkmage's Gambit|C|2X2
+#309|Supernatural Stamina|C|2X2
+#310|Titan's Strength|C|2X2
+#311|Kruin Striker|C|2X2
+#312|Kasmina's Transmutation|C|2X2
+#313|Capture Sphere|C|2X2
+#314|Force of Negation|R|2X2
+#315|Dockside Extortionist|M|2X2
+#316|Thrive|C|2X2
+#317|Darksteel Plate|R|2X2
+#318|Dragon Arch|U|2X2
+#319|Planar Bridge|R|2X2
+#320|Mayael's Aria|R|2X2
+#321|Divine Visitation|M|2X2
+#322|As Foretold|M|2X2
+#323|Phyrexian Tyranny|R|2X2
+#324|Pithing Needle|R|2X2
+#325|Vedalken Orrery|R|2X2
+#326|Surgical Extraction|R|2X2
+#327|Food Chain|M|2X2
+#328|Thrumming Stone|R|2X2
+#329|Forbidden Orchard|R|2X2
+#330|Summer Bloom|U|2X2
+#331|Shadowborn Apostle|C|2X2

@@ -1,0 +1,11 @@
+Name:Witch-king of Angmar
+ManaCost:3 B B
+Types:Legendary Creature Wraith Noble
+PT:5/3
+K:Flying
+T:Mode$ DamageDoneOnce | ValidSource$ Creature | TriggerZones$ Battlefield | ValidTarget$ You | CombatDamage$ True | Execute$ TrigSac | TriggerDescription$ Whenever one or more creatures deal combat damage to you, each opponent sacrifices a creature that dealt combat damage to you this turn. The Ring tempts you.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature.dealtCombatDamage You | Defined$ Player.Opponent | SubAbility$ TrigTempt
+SVar:TrigTempt:DB$ RingTemptsYou
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
+SVar:DBTap:DB$ Tap | Defined$ Self
+Oracle:Flying\nWhenever one or more creatures deal combat damage to you, each opponent sacrifices a creature that dealt combat damage to you this turn. The Ring tempts you.\nDiscard a card: Witch-king of Angmar gains indestructible until end of turn. Tap it.

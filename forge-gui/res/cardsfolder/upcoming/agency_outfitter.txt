@@ -1,0 +1,10 @@
+Name:Agency Outfitter
+ManaCost:4 U U
+Types:Creature Sphinx Detective
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your graveyard, hand, and/or library for a card named Magnifying Glass and/or a card named Thinking Cap and put them onto the battlefield. If you search your library this way, shuffle.
+SVar:TrigSearch:DB$ ChangeZone | OriginAlternative$ Graveyard,Hand | Hidden$ True | Origin$ Library | Destination$ Battlefield | DifferentNames$ True | ChangeType$ Card.namedMagnifying Glass,Card.namedThinking Cap | ChangeNum$ 2 | ShuffleNonMandatory$ True
+DeckHas:Ability$Artifact|Equipment
+DeckHints:Name$Thinking Cap|Magnifying Glass
+Oracle:Flying\nWhen Agency Outfitter enters the battlefield, you may search your graveyard, hand, and/or library for a card named Magnifying Glass and/or a card named Thinking Cap and put them onto the battlefield. If you search your library this way, shuffle.

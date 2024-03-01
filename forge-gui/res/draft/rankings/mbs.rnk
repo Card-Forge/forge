@@ -1,0 +1,146 @@
+//Rank|Name|Rarity|Set
+#1|Sword of Feast and Famine|M|MBS
+#2|Massacre Wurm|M|MBS
+#3|Tezzeret, Agent of Bolas|M|MBS
+#4|Consecrated Sphinx|M|MBS
+#5|Thrun, the Last Troll|M|MBS
+#6|Hero of Bladehold|M|MBS
+#7|Hero of Oxid Ridge|M|MBS
+#8|Glissa, the Traitor|M|MBS
+#9|Thopter Assembly|R|MBS
+#10|Black Sun's Zenith|R|MBS
+#11|Phyrexian Rebirth|R|MBS
+#12|Red Sun's Zenith|R|MBS
+#13|Bonehoard|R|MBS
+#14|Mirran Crusader|R|MBS
+#15|Phyrexian Crusader|R|MBS
+#16|Victory's Herald|R|MBS
+#17|Hellkite Igniter|R|MBS
+#18|White Sun's Zenith|R|MBS
+#19|Slagstorm|R|MBS
+#20|Blightsteel Colossus|M|MBS
+#21|Phyrexian Vatmother|R|MBS
+#22|Go for the Throat|U|MBS
+#23|Corrupted Conscience|U|MBS
+#24|Kuldotha Flamefiend|U|MBS
+#25|Vedalken Anatomist|U|MBS
+#26|Viridian Corrupter|U|MBS
+#27|Phyrexian Hydra|R|MBS
+#28|Inkmoth Nexus|R|MBS
+#29|Sangromancer|R|MBS
+#30|Mortarpod|U|MBS
+#31|Flesh Eater Imp|U|MBS
+#32|Spine of Ish Sah|R|MBS
+#33|Into the Core|U|MBS
+#34|Creeping Corrosion|R|MBS
+#35|Myr Turbine|R|MBS
+#36|Burn the Impure|C|MBS
+#37|Green Sun's Zenith|R|MBS
+#38|Spread the Sickness|C|MBS
+#39|Blue Sun's Zenith|R|MBS
+#40|Phyrexian Juggernaut|U|MBS
+#41|Piston Sledge|U|MBS
+#42|Pierce Strider|U|MBS
+#43|Cryptoplasm|R|MBS
+#44|Leonin Relic Warder|U|MBS
+#45|Viridian Claw|U|MBS
+#46|Strandwalker|U|MBS
+#47|Skinwing|U|MBS
+#48|Plague Myr|U|MBS
+#49|Blightwidow|C|MBS
+#50|Lumengrid Gargoyle|U|MBS
+#51|Decimator Web|R|MBS
+#52|Septic Rats|U|MBS
+#53|Peace Strider|U|MBS
+#54|Sphere of the Suns|U|MBS
+#55|Divine Offering|C|MBS
+#56|Accorder Paladin|U|MBS
+#57|Treasure Mage|U|MBS
+#58|Blisterstick Shaman|C|MBS
+#59|Core Prowler|U|MBS
+#60|Fangren Marauder|C|MBS
+#61|Rot Wolf|C|MBS
+#62|Shimmer Myr|R|MBS
+#63|Phyrexian Rager|C|MBS
+#64|Leonin Skyhunter|C|MBS
+#65|Goblin Wardriver|U|MBS
+#66|Signal Pest|U|MBS
+#67|Ichor Wellspring|C|MBS
+#68|Nested Ghoul|U|MBS
+#69|Darksteel Plate|R|MBS
+#70|Viridian Emissary|C|MBS
+#71|Virulent Wound|C|MBS
+#72|Flayer Husk|C|MBS
+#73|Melira's Keepers|U|MBS
+#74|Serum Raker|C|MBS
+#75|Morbid Plunder|C|MBS
+#76|Copper Carapace|C|MBS
+#77|Phyrexian Revoker|R|MBS
+#78|Titan Forge|R|MBS
+#79|Myr Sire|C|MBS
+#80|Choking Fumes|U|MBS
+#81|Plaguemaw Beast|U|MBS
+#82|Master's Call|C|MBS
+#83|Spin Engine|C|MBS
+#84|Contested War Zone|R|MBS
+#85|Psychosis Crawler|R|MBS
+#86|Gust Skimmer|C|MBS
+#87|Steel Sabotage|C|MBS
+#88|Myr Welder|R|MBS
+#89|Rusted Slasher|C|MBS
+#90|Quicksilver Geyser|C|MBS
+#91|Oculus|C|MBS
+#92|Scourge Servant|C|MBS
+#93|Ogre Resister|C|MBS
+#94|Priests of Norn|C|MBS
+#95|Dross Ripper|C|MBS
+#96|Brass Squire|U|MBS
+#97|Phyrexian Digester|C|MBS
+#98|Tangle Mantis|C|MBS
+#99|Mirran Mettle|C|MBS
+#100|Gore Vassal|U|MBS
+#101|Pistus Strike|C|MBS
+#102|Flensermite|C|MBS
+#103|Tangle Hulk|C|MBS
+#104|Vivisection|C|MBS
+#105|Silverskin Armor|U|MBS
+#106|Bladed Sentinel|C|MBS
+#107|Tine Shrike|C|MBS
+#108|Lead the Stampede|U|MBS
+#109|Kuldotha Ringleader|C|MBS
+#110|Crush|C|MBS
+#111|Loxodon Partisan|C|MBS
+#112|Unnatural Predation|C|MBS
+#113|Razorfield Rhino|C|MBS
+#114|Koth's Courier|C|MBS
+#115|Hexplate Golem|C|MBS
+#116|Mirran Spy|C|MBS
+#117|Glissa's Courier|C|MBS
+#118|Fuel for the Cause|C|MBS
+#119|Spire Serpent|C|MBS
+#120|Quilled Slagwurm|U|MBS
+#121|Concussive Bolt|C|MBS
+#122|Banishment Decree|C|MBS
+#123|Ardent Recruit|C|MBS
+#124|Gnathosaur|C|MBS
+#125|Praetor's Counsel|M|MBS
+#126|Neurok Commando|U|MBS
+#127|Galvanoth|R|MBS
+#128|Vedalken Infuser|U|MBS
+#129|Rally the Forces|C|MBS
+#130|Training Drone|C|MBS
+#131|Mirrorworks|R|MBS
+#132|Turn the Tide|C|MBS
+#133|Frantic Salvage|C|MBS
+#134|Caustic Hound|C|MBS
+#135|Metallic Mastery|U|MBS
+#136|Spiraling Duelist|U|MBS
+#137|Phyresis|C|MBS
+#138|Horrifying Revelation|C|MBS
+#139|Shriekhorn|C|MBS
+#140|Gruesome Encore|U|MBS
+#141|Kemba's Legion|U|MBS
+#142|Distant Memories|R|MBS
+#143|Mitotic Manipulation|R|MBS
+#144|Magnetic Mine|R|MBS
+#145|Knowledge Pool|R|MBS

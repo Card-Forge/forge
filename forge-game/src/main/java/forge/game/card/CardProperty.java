@@ -55,8 +55,12 @@ public class CardProperty {
             }
         }
 
-        // by name can also have color names, so needs to happen before colors.
-        if (property.startsWith("named")) {
+        if (property.equals("noName")) {
+            if (!card.hasNoName()) {
+                return false;
+            }
+        } else if (property.startsWith("named")) {
+            // by name can also have color names, so needs to happen before colors.
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // workaround for card name with ","
             name = TextUtil.fastReplace(name, "_", " ");
             if (!card.sharesNameWith(name)) {
@@ -241,6 +245,10 @@ public class CardProperty {
             if (!lp.contains(card.getProtectingPlayer())) {
                 return false;
             }
+        } else if (property.equals("Defending")) {
+            if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("DefendingPlayer")) {
             Player p = property.endsWith("Ctrl") ? controller : card.getOwner();
             if (!game.getPhaseHandler().inCombat()) {
@@ -403,6 +411,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("ExiledWithSourceLKI")) {
             List<Card> exiled = card.getZone().getCardsAddedThisTurn(null);
+            exiled.sort(CardPredicates.compareByTimestamp());
             int idx = exiled.lastIndexOf(card);
             if (idx == -1) {
                 return false;
@@ -1050,8 +1059,21 @@ public class CardProperty {
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
                 return false;
             }
-
             if (!card.wasDiscarded()) {
+                return false;
+            }
+        } else if (property.equals("surveilledThisTurn")) {
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+            if (!card.wasSurveilled()) {
+                return false;
+            }
+        } else if (property.equals("milledThisTurn")) {
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+            if (!card.wasMilled()) {
                 return false;
             }
         } else if (property.equals("hasABasicLandType")) {
@@ -1091,6 +1113,8 @@ public class CardProperty {
             if (card.isFaceDown()) {
                 return false;
             }
+        } else if (property.startsWith("turnedFaceUpThisTurn")) {
+            if (!card.wasTurnedFaceUpThisTurn()) return false;
         } else if (property.startsWith("phasedOut")) {
             if (!card.isPhasedOut()) {
                 return false;
@@ -1099,8 +1123,12 @@ public class CardProperty {
             if (card.isPhasedOut()) {
                 return false;
             }
-        } else if (property.startsWith("manifested")) {
+        } else if (property.equals("manifested")) {
             if (!card.isManifested()) {
+                return false;
+            }
+        } else if (property.equals("cloaked")) {
+            if (!card.isCloaked()) {
                 return false;
             }
         } else if (property.startsWith("DrawnThisTurn")) {
@@ -1597,12 +1625,6 @@ public class CardProperty {
                     return false;
                 }
             }
-            if (property.equals("attackingOpponent")) {
-                Player defender = combat.getDefenderPlayerByAttacker(card);
-                if (!sourceController.isOpponentOf(defender)) {
-                    return false;
-                }
-            }
             if (property.startsWith("attacking ")) { // generic "attacking [DefinedGameEntity]"
                 FCollection<GameEntity> defined = AbilityUtils.getDefinedEntities(source, property.split(" ")[1],
                         spellAbility);
@@ -1873,6 +1895,22 @@ public class CardProperty {
             }
         } else if (property.equals("IsNotRenowned")) {
             if (card.isRenowned()) {
+                return false;
+            }
+        } else if (property.equals("IsSolved")) {
+            if (!card.isSolved()) {
+                return false;
+            }
+        } else if (property.equals("IsUnsolved")) {
+            if (card.isSolved()) {
+                return false;
+            }
+        } else if (property.equals("IsSuspected")) {
+            if (!card.isSuspected()) {
+                return false;
+            }
+        } else if (property.equals("IsUnsuspected")) {
+            if (card.isSuspected()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {

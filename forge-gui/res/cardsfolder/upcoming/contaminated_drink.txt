@@ -1,0 +1,8 @@
+Name:Contaminated Drink
+ManaCost:X U B
+Types:Instant
+A:SP$ Draw | NumCards$ X | SubAbility$ DBRadiation | SpellDescription$ Draw X cards, then you get half X rad counters, rounded up.
+SVar:DBRadiation:DB$ Radiation | Defined$ You | Add$ HalfXUp
+SVar:X:Count$xPaid
+SVar:HalfXUp:Count$xPaid/HalfUp
+Oracle:Draw X cards, then you get half X rad counters, rounded up.

@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Plaguebearer|R|EXO
+#2|Ephemeron|R|EXO
+#3|Thopter Squadron|R|EXO
+#4|Ertai, Wizard Adept|R|EXO
+#5|Dominating Licid|R|EXO
+#6|Exalted Dragon|R|EXO
+#7|Hatred|R|EXO
+#8|Pit Spawn|R|EXO
+#9|Paladin en-Vec|R|EXO
+#10|Seismic Assault|R|EXO
+#11|Erratic Portal|R|EXO
+#12|Ogre Shaman|R|EXO
+#13|Cataclysm|R|EXO
+#14|Spike Hatcher|R|EXO
+#15|Keeper of the Dead|U|EXO
+#16|Slaughter|U|EXO
+#17|Mirri, Cat Warrior|R|EXO
+#18|Merfolk Looter|C|EXO
+#19|Recurring Nightmare|R|EXO
+#20|City of Traitors|R|EXO
+#21|Spike Weaver|R|EXO
+#22|Thalakos Drifters|R|EXO
+#23|Mindless Automaton|R|EXO
+#24|Sabertooth Wyvern|U|EXO
+#25|Equilibrium|R|EXO
+#26|Forbid|U|EXO
+#27|Dauthi Cutthroat|U|EXO
+#28|Mirozel|U|EXO
+#29|Entropic Specter|R|EXO
+#30|Keeper of the Mind|U|EXO
+#31|Crashing Boars|U|EXO
+#32|Dauthi Jackal|C|EXO
+#33|Wayward Soul|C|EXO
+#34|Wall of Nets|R|EXO
+#35|Pandemonium|R|EXO
+#36|Dauthi Warlord|U|EXO
+#37|Spike Cannibal|U|EXO
+#38|Keeper of the Beasts|U|EXO
+#39|Sonic Burst|C|EXO
+#40|Killer Whale|U|EXO
+#41|Curiosity|U|EXO
+#42|Survival of the Fittest|R|EXO
+#43|Mind Over Matter|R|EXO
+#44|Oath of Druids|R|EXO
+#45|Thalakos Scout|C|EXO
+#46|Pegasus Stampede|U|EXO
+#47|Scalding Salamander|U|EXO
+#48|Spike Rogue|U|EXO
+#49|Scrivener|U|EXO
+#50|Carnophage|C|EXO
+#51|Workhorse|R|EXO
+#52|Shackles|C|EXO
+#53|Mage il-Vec|C|EXO
+#54|Soltari Visionary|C|EXO
+#55|Fugue|U|EXO
+#56|Vampire Hounds|C|EXO
+#57|Wood Elves|C|EXO
+#58|Coat of Arms|R|EXO
+#59|Null Brooch|R|EXO
+#60|Rabid Wolverines|C|EXO
+#61|Necrologia|U|EXO
+#62|Keeper of the Flame|U|EXO
+#63|Kor Chant|C|EXO
+#64|Treasure Trove|U|EXO
+#65|Oath of Ghouls|R|EXO
+#66|Treasure Hunter|U|EXO
+#67|Memory Crystal|R|EXO
+#68|Sphere of Resistance|R|EXO
+#69|Reconnaissance|U|EXO
+#70|Transmogrifying Licid|U|EXO
+#71|Anarchist|C|EXO
+#72|Furnace Brood|C|EXO
+#73|Oath of Scholars|R|EXO
+#74|Plated Rootwalla|C|EXO
+#75|Limited Resources|R|EXO
+#76|Soul Warden|C|EXO
+#77|School of Piranha|C|EXO
+#78|Whiptongue Frog|C|EXO
+#79|Cat Burglar|C|EXO
+#80|Keeper of the Light|U|EXO
+#81|Mind Maggots|U|EXO
+#82|Pygmy Troll|C|EXO
+#83|Death's Duet|C|EXO
+#84|Reckless Ogre|C|EXO
+#85|Charging Paladin|C|EXO
+#86|Maniacal Rage|C|EXO
+#87|Thrull Surgeon|C|EXO
+#88|Welkin Hawk|C|EXO
+#89|Standing Troops|C|EXO
+#90|Manabond|R|EXO
+#91|Volrath's Dungeon|R|EXO
+#92|Peace of Mind|U|EXO
+#93|Fade Away|C|EXO
+#94|Cartographer|U|EXO
+#95|Skyshaper|U|EXO
+#96|Avenging Druid|C|EXO
+#97|Angelic Blessing|C|EXO
+#98|Grollub|C|EXO
+#99|Nausea|C|EXO
+#100|Jackalope Herd|C|EXO
+#101|Medicine Bag|U|EXO
+#102|Rootwater Alligator|C|EXO
+#103|Monstrous Hound|R|EXO
+#104|Zealots en-Dal|U|EXO
+#105|Spellshock|U|EXO
+#106|Penance|U|EXO
+#107|Mogg Assassin|U|EXO
+#108|Skyshroud War Beast|R|EXO
+#109|Cursed Flesh|C|EXO
+#110|Theft of Dreams|C|EXO
+#111|Shield Mate|C|EXO
+#112|Shattering Pulse|C|EXO
+#113|Price of Progress|U|EXO
+#114|Onslaught|C|EXO
+#115|Bequeathal|C|EXO
+#116|Ravenous Baboons|R|EXO
+#117|Skyshroud Elite|U|EXO
+#118|Raging Goblin|C|EXO
+#119|Cinder Crawler|C|EXO
+#120|Rootwater Mystic|C|EXO
+#121|Reclaim|C|EXO
+#122|Predatory Hunger|C|EXO
+#123|Allay|C|EXO
+#124|Elvish Berserker|C|EXO
+#125|Dizzying Gaze|C|EXO
+#126|Song of Serenity|U|EXO
+#127|Scare Tactics|C|EXO
+#128|Cunning|C|EXO
+#129|Culling the Weak|C|EXO
+#130|Resuscitate|U|EXO
+#131|Elven Palisade|U|EXO
+#132|Reaping the Rewards|C|EXO
+#133|Oath of Lieges|R|EXO
+#134|Aether Tide|C|EXO
+#135|Fighting Chance|R|EXO
+#136|High Ground|U|EXO
+#137|Robe of Mirrors|C|EXO
+#138|Flowstone Flood|U|EXO
+#139|Oath of Mages|R|EXO
+#140|Mana Breach|U|EXO
+#141|Convalescence|R|EXO
+#142|Paroxysm|U|EXO
+#143|Spellbook|U|EXO

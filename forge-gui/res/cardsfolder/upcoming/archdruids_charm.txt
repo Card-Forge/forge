@@ -1,0 +1,14 @@
+Name:Archdruid's Charm
+ManaCost:G G G
+Types:Instant
+A:SP$ Charm | Cost$ G G G | Choices$ DBTutor,DBPutCounter,DBAntiquate
+SVar:DBTutor:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature,Land | ChangeNum$ 1 | Reveal$ True | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a creature or land card and reveal it. Put it into the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ForgetChanged$ True | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | AILogic$ PowerDmg | StackDescription$ Put a +1/+1 counter on {c:ThisTargetedCard}. | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature you don't control.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+SVar:DBAntiquate:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
+Oracle:Choose one —\n• Search your library for a creature or land card and reveal it. Put it into the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.\n• Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature you don't control.\n• Exile target artifact or enchantment.

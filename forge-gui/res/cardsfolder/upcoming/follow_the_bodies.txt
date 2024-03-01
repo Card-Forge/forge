@@ -1,0 +1,7 @@
+Name:Follow the Bodies
+ManaCost:2 U
+Types:Sorcery
+K:Gravestorm
+A:SP$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Graveyard|Token & Type$Clue|Artifact
+Oracle:Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn.)\nInvestigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
