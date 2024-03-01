@@ -1,0 +1,11 @@
+Name:Codsworth, Handy Helper
+ManaCost:2 W
+Types:Legendary Artifact Creature Robot
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AddKeyword$ Ward:2 | Description$ Commanders you control have ward {2}.
+A:AB$ Mana | Cost$ T | Produced$ W | RestrictValid$ Spell.Aura,Spell.Equipment | Amount$ 2 | SpellDescription$ Add {W}{W}. Spend this mana only to cast Aura and/or Equipment spells.
+A:AB$ Pump | Cost$ T | ValidTgts$ Aura.YouCtrl,Equipment.YouCtrl | TgtPrompt$ Select target Aura or Equipment you control | SubAbility$ DBAttach | SorcerySpeed$ True | SpellDescription$ Attach target Aura or Equipment you control to target creature you control. Activate only as a sorcery.
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+DeckNeeds:Type$Aura|Equipment
+AI:RemoveDeck:NonCommander
+Oracle:Commanders you control have ward {2}.\n{T}: Add {W}{W}. Spend this mana only to cast Aura and/or Equipment spells.\n{T}: Attach target Aura or Equipment you control to target creature you control. Activate only as a sorcery.
