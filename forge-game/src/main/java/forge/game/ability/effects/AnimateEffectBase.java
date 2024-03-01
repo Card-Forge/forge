@@ -92,12 +92,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             params.put("Timestamp", timestamp);
             params.put("Category", "Incorporate");
             c.addPerpetual(params);
-            
+
             final ManaCost incMCost = new ManaCost(new ManaCostParser(incorporate));
             incColors = ColorSet.fromMask(incMCost.getColorProfile());
             final ManaCost newCost = ManaCost.combine(c.getManaCost(), incMCost);
             c.addChangedManaCost(newCost, timestamp, 0);
-            c.setManaCost(c.getManaCost());
             c.updateManaCostForView();
 
             if (c.getFirstSpellAbility() != null) {

@@ -593,7 +593,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void updateManaCostForView() {
-        currentState.getView().updateManaCost(currentState);
+        currentState.getView().updateManaCost(this);
     }
     
     public final void updatePowerToughnessForView() {
@@ -4455,15 +4455,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private int intensity = 0;
     public final void addIntensity(final int n) {
-        intensity = intensity + n;
+        intensity += n;
         view.updateIntensity(this);
     }
     public final int getIntensity(boolean total) {
         if (total && hasKeyword(Keyword.STARTING_INTENSITY)) {
             return getKeywordMagnitude(Keyword.STARTING_INTENSITY) + intensity;
-        } else {
-            return intensity;
         }
+        return intensity;
     }
     public final void setIntensity(final int n) { intensity = n; }
     public final boolean hasIntensity() {
@@ -4528,7 +4527,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 long ts = (long) p.get("Timestamp");
                 final ManaCost cCMC = oldCard.changedCardManaCost.get(ts, (long) 0);
                 addChangedManaCost(cCMC, ts, (long) 0);
-                getCurrentState().setManaCost(cCMC);
                 updateManaCostForView();
 
                 if (getFirstSpellAbility() != null) {
@@ -5205,6 +5203,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         getView().updateChangedColorWords(this);
         getView().updateChangedTypes(this);
+        updateManaCostForView();
 
         currentState.getView().updateAbilityText(this, currentState);
         view.updateNonAbilityText(this);
