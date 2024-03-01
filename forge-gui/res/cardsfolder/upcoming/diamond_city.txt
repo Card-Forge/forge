@@ -1,0 +1,9 @@
+Name:Diamond City
+ManaCost:no cost
+Types:Land
+K:etbCounter:Shield:1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ MoveCounter | Cost$ T | Source$ Self | ValidTgts$ Creature | CheckSVar$ X | SVarCompare$ GE2 | CounterType$ Shield | CounterNum$ 1 | SpellDescription$ Move a shield counter from CARDNAME onto target creature. Activate only if two or more creatures entered the battlefield under your control this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl
+DeckHas:Ability$Counters
+Oracle:Diamond City enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\n{T}: Add {C}.\n{T}: Move a shield counter from Diamond City onto target creature. Activate only if two or more creatures entered the battlefield under your control this turn.
