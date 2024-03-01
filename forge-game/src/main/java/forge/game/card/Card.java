@@ -592,6 +592,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         //view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
 
+    public void updateManaCostForView() {
+        currentState.getView().updateManaCost(currentState);
+    }
+    
     public final void updatePowerToughnessForView() {
         view.updateCounters(this);
     }
@@ -4520,6 +4524,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 long timestamp = (long) p.get("Timestamp");
                 CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
                 addChangedCardTraits(ctc, timestamp, (long) 0);
+            } else if (p.get("Category").equals("Incorporate")) {
+                long ts = (long) p.get("Timestamp");
+                final ManaCost cCMC = oldCard.changedCardManaCost.get(ts, (long) 0);
+                addChangedManaCost(cCMC, ts, (long) 0);
+                getCurrentState().setManaCost(cCMC);
+                updateManaCostForView();
+
+                if (getFirstSpellAbility() != null) {
+                    getFirstSpellAbility().getPayCosts().add(new Cost((String) p.get("Incorporate"), false));
+                }
             } else executePerpetual(p);
         }
     }

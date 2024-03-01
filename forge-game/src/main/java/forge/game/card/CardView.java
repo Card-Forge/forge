@@ -1007,7 +1007,8 @@ public class CardView extends GameEntityView {
 
             // update the color only while in Game
             if (c.getGame() != null) {
-                currentStateView.updateColors(currentState);
+                if (c.hasPerpetual()) currentStateView.updateColors(c);
+                else currentStateView.updateColors(currentState);
                 currentStateView.updateHasChangeColors(!Iterables.isEmpty(c.getChangedCardColors()));
             }
         } else {
