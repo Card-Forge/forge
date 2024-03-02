@@ -107,8 +107,15 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 p = getNewChooser(sa, activator, p);
             }
             if (sa.hasParam("ControlledByPlayer")) {
-                pChoices = CardLists.filterControlledBy(pChoices, game.getNextPlayerAfter(p,
-                        Direction.valueOf(sa.getParam("ControlledByPlayer"))));
+                final String param = sa.getParam("ControlledByPlayer");
+                if (param.equals("Chooser")) {
+                    pChoices = CardLists.filterControlledBy(pChoices, p);
+                } else if (param.equals("Left") || param.equals("Right")) {
+                    pChoices = CardLists.filterControlledBy(pChoices, game.getNextPlayerAfter(p,
+                        Direction.valueOf(param)));
+                } else {
+                    pChoices = CardLists.filterControlledBy(pChoices, AbilityUtils.getDefinedPlayers(host, param, sa));
+                }
             }
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {

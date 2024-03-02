@@ -227,7 +227,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     }
                 }
             } else if (chosenMap) {
-                tgtCards = host.getChosenMap().get(controller);
+                if (sa.hasParam("ChosenMapIndex")) {
+                    final int index = Integer.valueOf(sa.getParam("ChosenMapIndex"));
+                    if (index >= host.getChosenMap().get(controller).size()) continue;
+                    tgtCards.add(host.getChosenMap().get(controller).get(index));
+                } else tgtCards = host.getChosenMap().get(controller);
             } else {
                 tgtCards = getDefinedCardsOrTargeted(sa);
             }
