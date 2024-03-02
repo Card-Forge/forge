@@ -3,9 +3,9 @@ ManaCost:2 R W
 Types:Legendary Creature Human Ranger
 PT:4/3
 K:Vigilance
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+enchanted+YouCtrl,Creature.Other+equipped+YouCtrl,Card.Self+equipped,Card.Self+enchanted | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigChangeZone | Whenever NICKNAME or another creature you control dies, if it was enchanted or equipped, return any number of Aura cards that were attached to it from your graveyard to the battlefield attached to target creature, then attach any number of Equipment that were attached to it to that creature.
-SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Aura.AttachedTo TriggeredCard,Equipment.AttachedTo TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Object$ Card.IsRemembered | ValidTgts$ Creature.YouCtrl | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+enchanted+YouCtrl,Creature.Other+equipped+YouCtrl,Card.Self+equipped,Card.Self+enchanted | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPump | Whenever NICKNAME or another creature you control dies, if it was enchanted or equipped, return any number of Aura cards that were attached to it from your graveyard to the battlefield attached to target creature, then attach any number of Equipment that were attached to it to that creature.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Aura.AttachedTo TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ Targeted | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ Valid Equipment.YouCtrl+AttachedTo TriggeredCard | Optional$ True | Defined$ Targeted
 DeckNeeds:Type$Equipment|Aura
 Oracle:Vigilance\nWhenever Cass or another creature you control dies, if it was enchanted or equipped, return any number of Aura cards that were attached to it from your graveyard to the battlefield attached to target creature, then attach any number of Equipment that were attached to it to that creature.
