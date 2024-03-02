@@ -8,5 +8,5 @@ S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveya
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Artifact.YouCtrl
 DeckHas:Ability$Token|LifeGain|Graveyard & Type$Necron|Warrior
-DeckHint:Type$Artifact
+DeckHints:Type$Artifact
 Oracle:Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile Their Number Is Legion.\nYou may cast Their Number Is Legion from your graveyard.
