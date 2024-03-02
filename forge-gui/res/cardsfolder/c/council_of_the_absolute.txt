@@ -3,7 +3,7 @@ ManaCost:2 W U
 Types:Creature Human Advisor
 PT:2/4
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand+nonCreature | ValidDesc$ Choose a noncreature, nonland card name. | SpellDescription$ As CARDNAME enters the battlefield, choose a noncreature, nonland card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand+nonCreature | ValidDescription$ Choose a noncreature, nonland card name. | SpellDescription$ As CARDNAME enters the battlefield, choose a noncreature, nonland card name.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Caster$ Player.Opponent | Description$ Your opponents can't cast cards with the chosen name.
 S:Mode$ ReduceCost | ValidCard$ Card.NamedCard | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells with the chosen name you cast cost {2} less to cast.
 AI:RemoveDeck:Random
