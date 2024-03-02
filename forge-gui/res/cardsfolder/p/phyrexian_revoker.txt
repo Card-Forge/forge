@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Phyrexian Horror
 PT:2/1
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | Description$ Activated abilities of sources with the chosen name can't be activated.
 AI:RemoveDeck:All
 Oracle:As Phyrexian Revoker enters the battlefield, choose a nonland card name.\nActivated abilities of sources with the chosen name can't be activated.

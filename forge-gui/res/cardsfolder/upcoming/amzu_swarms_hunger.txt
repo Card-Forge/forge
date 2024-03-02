@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Menace
 S:Mode$ Continuous | Affected$ Insect.YouCtrl+Other | AddKeyword$ Menace | Description$ Other Insects you control have menace.
-T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | ResolvedLimit$ 1 | OptionalDecider$ You |  Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, you may create a 1/1 black and green Insect creature token, then put a number of +1/+1 counters on it equal to the greatest mana value among those cards. Do this only once each turn.
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | ResolvedLimit$ 1 | OptionalDecider$ You | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more cards leave your graveyard, you may create a 1/1 black and green Insect creature token, then put a number of +1/+1 counters on it equal to the greatest mana value among those cards. Do this only once each turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_insect | RememberTokens$ True | TokenOwner$ You | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

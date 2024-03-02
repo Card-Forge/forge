@@ -6,7 +6,7 @@ K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Tunnel Snakes Rule! — Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other Rogue and/or Snake you control.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Snake.Other+YouCtrl,Rogue.Other+YouCtrl
-A:AB$ PutCounter | Cost$ 1 B | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterType$ Menace | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a menace counter on another target creature. 
+A:AB$ PutCounter | Cost$ 1 B | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | CounterType$ Menace | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a menace counter on another target creature.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Rogue | Duration$ Permanent | SpellDescription$ It becomes a Rogue in addition to its other types.
 DeckHas:Ability$Counters
 DeckHints:Type$Snake|Rogue
