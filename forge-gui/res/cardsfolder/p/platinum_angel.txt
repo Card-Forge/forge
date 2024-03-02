@@ -3,6 +3,6 @@ ManaCost:7
 Types:Artifact Creature Angel
 PT:4/4
 K:Flying
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
-S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Description$ Opponents can't win the game.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game and your opponents can't win the game.
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
 Oracle:Flying\nYou can't lose the game and your opponents can't win the game.

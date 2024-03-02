@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 K:Trample
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't win the game. | Description$ You can't win the game.
-S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't lose the game. | Description$ Your opponents can't lose the game.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't win the game. | Description$ You can't win the game and your opponents can't lose the game.
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't lose the game. | Secondary$ True | Description$ You can't win the game and your opponents can't lose the game.
 AI:RemoveDeck:All
 Oracle:Flying, trample\nYou can't win the game and your opponents can't lose the game.

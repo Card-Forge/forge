@@ -4,7 +4,7 @@ Types:Creature Cat
 PT:3/3
 A:AB$ Pump | Cost$ G W | KW$ Indestructible | Defined$ Self | SpellDescription$ CARDNAME gains indestructible until end of turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield. It's an Aura enchantment with enchant creature you control and "{G}{W}: Enchanted creature gains indestructible until end of turn," and it loses all other abilities.
-SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ DBAnimate
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveAllAbilities$ True | Keywords$ Enchant creature you control | Abilities$ SPAttach,ABPump | Duration$ Permanent
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
 SVar:ABPump:AB$ Pump | Cost$ G W | KW$ Indestructible | Defined$ Enchanted | SpellDescription$ Enchanted creature gains indestructible until end of turn.
