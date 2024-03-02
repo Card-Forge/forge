@@ -1,0 +1,11 @@
+Name:Guildpact Greenwalker
+ManaCost:2 G
+Types:Creature Plant Rhino
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose a creature card in your hand. If you do, that card perpetually incorporates {1}{G} and gets +4/+4.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may choose a creature card in your hand | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Incorporate$ 1 G | Duration$ Perpetual | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | Duration$ Perpetual | NumAtt$ 4 | NumDef$ 4 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+S:Mode$ Continuous | Affected$ Creature.MultiColor+YouCtrl | AddKeyword$ Ward:2 | Description$ Multicolored creatures you control have ward {2}.
+Oracle:When Guildpact Greenwalker enters the battlefield, you may choose a creature card in your hand. If you do, that card perpetually incorporates {1}{G} and gets +4/+4.\nMulticolored creatures you control have ward {2}.
