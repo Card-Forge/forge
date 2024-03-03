@@ -14,6 +14,7 @@ ScryfallCode=MH3
 216 R Bloodstained Mire @Bruce Brenneise
 220 R Flooded Strand @Alexander Forssberg
 224 R Polluted Delta @Chris Ostrowski
+229 U Snow-Covered Wastes @Mark Poole
 235 R Windswept Heath @Alexander Forssberg
 236 R Wooded Foothills @Chris Ostrowski
 237 M Ajani, Nacatl Pariah @Chris Rallis
@@ -41,6 +42,8 @@ ScryfallCode=MH3
 433 R Psychic Frog @Pete Venters
 435 R Bloodstained Mire @Bruce Brenneise
 436 R Flooded Strand @Alexander Forssberg
+438 R Polluted Delta @Chris Ostrowski
+439 U Snow-Covered Wastes @Mark Poole
 440 R Windswept Heath @Alexander Forssberg
 441 R Wooded Foothills @Chris Ostrowski
 442 M Ajani, Nacatl Pariah @Ilse Gort

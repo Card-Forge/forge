@@ -232,7 +232,7 @@ ScryfallCode=SIR
 220 R Traverse the Ulvenwald @Vincent Proce
 221 C Ulvenwald Captive @Chris Rahn
 222 R Ulvenwald Hydra @Raymond Swanland
-223 U Ulvenwald Mysteries @Nereida
+223 U Ulvenwald Mysteries @Marzena Nereida Piwowar
 224 U Vessel of Nascency @Kieran Yanner
 225 U Veteran Cathar @Deruchenko Alexander
 226 C Weirding Wood @Jung Park
