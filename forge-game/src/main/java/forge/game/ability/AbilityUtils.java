@@ -84,23 +84,19 @@ public class AbilityUtils {
             c = hostCard;
         } else if (defined.equals("CorrectedSelf")) {
             c = game.getCardState(hostCard);
-        }
-        else if (defined.equals("OriginalHost")) {
+        } else if (defined.equals("OriginalHost")) {
             if (sa instanceof SpellAbility) {
                 c = ((SpellAbility)sa).getRootAbility().getOriginalHost();
             } else {
                 c = sa.getOriginalHost();
             }
-        }
-        else if (defined.equals("EffectSource")) {
+        } else if (defined.equals("EffectSource")) {
             if (hostCard.isImmutable()) {
                 c = findEffectRoot(hostCard);
             }
-        }
-        else if (defined.equals("Equipped")) {
+        } else if (defined.equals("Equipped")) {
             c = hostCard.getEquipping();
-        }
-        else if (defined.startsWith("AttachedTo ")) {
+        } else if (defined.startsWith("AttachedTo ")) {
             String v = defined.split(" ")[1];
             for (GameEntity ge : getDefinedEntities(hostCard, v, sa)) {
                 for (Card att : ge.getAttachedCards()) {
@@ -111,8 +107,7 @@ public class AbilityUtils {
                     cards.add(att);
                 }
             }
-        }
-        else if (defined.startsWith("AttachedBy ")) {
+        } else if (defined.startsWith("AttachedBy ")) {
             String v = defined.split(" ")[1];
             for (Card attachment : getDefinedCards(hostCard, v, sa)) {
                 Card attached = attachment.getAttachedTo();
@@ -120,8 +115,7 @@ public class AbilityUtils {
                     cards.add(attached);
                 }
             }
-        }
-        else if (defined.equals("Enchanted")) {
+        } else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
             if (c == null && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility)sa).getRootAbility();
@@ -130,8 +124,7 @@ public class AbilityUtils {
                     c = sacrificed.getFirst().getEnchantingCard();
                 }
             }
-        }
-        else if (defined.equals("TopOfGraveyard")) {
+        } else if (defined.equals("TopOfGraveyard")) {
             final CardCollectionView grave = player.getCardsIn(ZoneType.Graveyard);
 
             if (grave.size() > 0) {
@@ -140,8 +133,7 @@ public class AbilityUtils {
                 // we don't want this to fall through and return the "Self"
                 return cards;
             }
-        }
-        else if (defined.endsWith("OfLibrary")) {
+        } else if (defined.endsWith("OfLibrary")) {
             final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
             int libSize = lib.size();
             if (libSize > 0) { // TopOfLibrary or BottomOfLibrary
@@ -159,29 +151,24 @@ public class AbilityUtils {
                 // we don't want this to fall through and return the "Self"
                 return cards;
             }
-        }
-        else if ((defined.equals("Targeted") || defined.equals("TargetedCard")) && sa instanceof SpellAbility) {
+        } else if ((defined.equals("Targeted") || defined.equals("TargetedCard")) && sa instanceof SpellAbility) {
             for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
                 Iterables.addAll(cards, tc.getTargetCards());
             }
-        }
-        else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
+        } else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
             for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
-        }
-        else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
+        } else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
                 Iterables.addAll(cards, ((SpellAbility)sa).getTargets().getTargetCards());
             }
-        }
-        else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
+        } else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
             final SpellAbility parent = ((SpellAbility)sa).getParentTargetingCard();
             if (parent != null) {
                 Iterables.addAll(cards, parent.getTargets().getTargetCards());
             }
-        }
-        else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
+        }  else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             if (defined.contains("LKICopy")) { //Triggered*LKICopy
                 int lkiPosition = defined.indexOf("LKICopy");
@@ -209,8 +196,7 @@ public class AbilityUtils {
                     cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
                 }
             }
-        }
-        else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             AbilityKey type = AbilityKey.fromString(defined.substring(8));
             final Object crd = root.getReplacingObject(type);
@@ -220,8 +206,7 @@ public class AbilityUtils {
             } else if (crd instanceof Iterable<?>) {
                 cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
             }
-        }
-        else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
+        } else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
             if (!hostCard.hasRemembered()) {
                 final Card newCard = game.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
@@ -977,74 +962,62 @@ public class AbilityUtils {
         } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
             players.addAll(getDefinedPlayers(card, "TargetedController", sa));
-        }
-        else if ((defined.equals("Targeted") || defined.equals("TargetedPlayer")) && sa instanceof SpellAbility) {
+        } else if ((defined.equals("Targeted") || defined.equals("TargetedPlayer")) && sa instanceof SpellAbility) {
             for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
                 players.addAll(tc.getTargetPlayers());
             }
-        }
-        else if (defined.startsWith("PlayerUID_")) {
+        } else if (defined.startsWith("PlayerUID_")) {
             int id = Integer.parseInt(defined.split("PlayerUID_")[1]);
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.getId() == id) {
                     players.add(p);
                 }
             }
-        }
-        else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
+        } else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
             final SpellAbility parent = ((SpellAbility)sa).getParentTargetingPlayer();
             if (parent != null) {
                 players.addAll(parent.getTargets().getTargetPlayers());
             }
-        }
-        else if (defined.equals("ThisTargetedPlayer") && sa instanceof SpellAbility) { // do not add parent targeted
+        } else if (defined.equals("ThisTargetedPlayer") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
                 Iterables.addAll(players, ((SpellAbility)sa).getTargets().getTargetPlayers());
             }
-        }
-        else if (defined.equals("TargetedController")) {
+        } else if (defined.equals("TargetedController")) {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getController());
             }
             for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
                 players.add(s.getActivatingPlayer());
             }
-        }
-        else if (defined.equals("TargetedOwner")) {
+        } else if (defined.equals("TargetedOwner")) {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
                 players.add(c.getOwner());
             }
-        }
-        else if (defined.equals("TargetedAndYou") && sa instanceof SpellAbility) {
+        } else if (defined.equals("TargetedAndYou") && sa instanceof SpellAbility) {
             final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
             if (saTargeting != null) {
                 players.addAll(saTargeting.getTargets().getTargetPlayers());
                 players.add(((SpellAbility)sa).getActivatingPlayer());
             }
-        }
-        else if (defined.equals("ThisTargetedController")) {
+        } else if (defined.equals("ThisTargetedController")) {
             for (final Card c : getDefinedCards(card, "ThisTargetedCard", sa)) {
                 players.add(c.getController());
             }
             for (final SpellAbility s : getDefinedSpellAbilities(card, "ThisTargeted", sa)) {
                 players.add(s.getActivatingPlayer());
             }
-        }
-        else if (defined.equals("ParentTargetedController")) {
+        } else if (defined.equals("ParentTargetedController")) {
             for (final Card c : getDefinedCards(card, "ParentTarget", sa)) {
                 players.add(c.getController());
             }
             for (final SpellAbility s : getDefinedSpellAbilities(card, "Targeted", sa)) {
                 players.add(s.getActivatingPlayer());
             }
-        }
-        else if (defined.startsWith("Remembered")) {
+        } else if (defined.startsWith("Remembered")) {
             addPlayer(card.getRemembered(), defined, players);
-        }
-        else if (defined.startsWith("Imprinted")) {
+        } else if (defined.startsWith("Imprinted")) {
             addPlayer(card.getImprintedCards(), defined, players);
-        }
-        else if (defined.startsWith("EffectSource")) {
+        } else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
@@ -1054,16 +1027,14 @@ public class AbilityUtils {
             if (originalHost != null) {
                 addPlayer(Lists.newArrayList(originalHost), defined, players);
             }
-        }
-        else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
             if (root != null) {
                 addPlayer(root.getTriggerRemembered(), defined, players);
             } else {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
-        }
-        else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             String defParsed = defined.endsWith("AndYou") ? defined.substring(0, defined.indexOf("AndYou")) : defined;
             if (defined.endsWith("AndYou")) {
                 players.add(((SpellAbility)sa).getActivatingPlayer());
@@ -1089,8 +1060,7 @@ public class AbilityUtils {
                     }
                     addPlayer(Iterables.filter((Iterable<Object>)c, Card.class), "Controller", players);
                 }
-            }
-            else if (defParsed.endsWith("Opponent")) {
+            } else if (defParsed.endsWith("Opponent")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
@@ -1104,8 +1074,7 @@ public class AbilityUtils {
                 if (c instanceof CardCollection) {
                     o = ((CardCollection) c).get(0).getController().getOpponents();
                 }
-            }
-            else if (defParsed.endsWith("Owner")) {
+            } else if (defParsed.endsWith("Owner")) {
                 String triggeringType = defParsed.substring(9);
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 5);
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
@@ -1129,12 +1098,10 @@ public class AbilityUtils {
                     players.addAll(Iterables.filter((Iterable<?>)o, Player.class));
                 }
             }
-        }
-        else if (defined.startsWith("OppNon")) {
+        } else if (defined.startsWith("OppNon")) {
             players.addAll(player.getOpponents());
             players.removeAll(getDefinedPlayers(card, defined.substring(6), sa));
-        }
-        else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             Object o = null;
             if (defined.endsWith("Controller")) {
@@ -1147,16 +1114,14 @@ public class AbilityUtils {
                 if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getHostCard().getController();
                 }
-            }
-            else if (defined.endsWith("Owner")) {
+            } else if (defined.endsWith("Owner")) {
                 String replacingType = defined.substring(8);
                 replacingType = replacingType.substring(0, replacingType.length() - 5);
                 final Object c = root.getReplacingObject(AbilityKey.fromString(replacingType));
                 if (c instanceof Card) {
                     o = ((Card) c).getOwner();
                 }
-            }
-            else {
+            } else {
                 final String replacingType = defined.substring(8);
                 o = root.getReplacingObject(AbilityKey.fromString(replacingType));
             }
@@ -1165,67 +1130,52 @@ public class AbilityUtils {
                     players.add((Player) o);
                 }
             }
-        }
-        else if (defined.startsWith("Non")) {
+        } else if (defined.startsWith("Non")) {
             players.addAll(game.getPlayersInTurnOrder());
             players.removeAll(getDefinedPlayers(card, defined.substring(3), sa));
-        }
-        else if (defined.equals("Registered")) {
+        } else if (defined.equals("Registered")) {
             players.addAll(game.getRegisteredPlayers());
-        }
-        else if (defined.equals("EnchantedPlayer")) {
+        } else if (defined.equals("EnchantedPlayer")) {
             final Object o = sa.getHostCard().getEntityAttachedTo();
             if (o instanceof Player) {
                 players.add((Player) o);
             }
-        }
-        else if (defined.startsWith("Enchanted")) {
+        } else if (defined.startsWith("Enchanted")) {
             if (card.isAttachedToEntity()) {
                 addPlayer(Lists.newArrayList(card.getEntityAttachedTo()), defined, players);
             }
-        }
-        else if (defined.startsWith("Equipped")) {
+        } else if (defined.startsWith("Equipped")) {
             if (card.isEquipping()) {
                 addPlayer(Lists.newArrayList(card.getEquipping()), defined, players);
             }
-        }
-        else if (defined.equals("AttackingPlayer")) {
+        } else if (defined.equals("AttackingPlayer")) {
             if (game.getPhaseHandler().inCombat()) {
                 players.add(game.getCombat().getAttackingPlayer());
             }
-        }
-        else if (defined.equals("DefendingPlayer")) {
+        } else if (defined.equals("DefendingPlayer")) {
             players.add(game.getCombat().getDefendingPlayerRelatedTo(card));
-        }
-        else if (defined.equals("ChoosingPlayer")) {
+        } else if (defined.equals("ChoosingPlayer")) {
             players.add(((SpellAbility) sa).getRootAbility().getChoosingPlayer());
-        }
-        else if (defined.equals("ChosenPlayer")) {
+        } else if (defined.equals("ChosenPlayer")) {
             final Player p = card.getChosenPlayer();
             if (p != null) {
                 players.add(p);
             }
-        }
-        else if (defined.startsWith("ChosenCard")) {
+        } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
-        }
-        else if (defined.equals("SourceController")) {
+        } else if (defined.equals("SourceController")) {
             players.add(sa.getHostCard().getController());
-        }
-        else if (defined.equals("CardController")) {
+        } else if (defined.equals("CardController")) {
             players.add(card.getController());
-        }
-        else if (defined.equals("CardOwner")) {
+        } else if (defined.equals("CardOwner")) {
             players.add(card.getOwner());
-        }
-        else if (defined.startsWith("PlayerNamed_")) {
+        } else if (defined.startsWith("PlayerNamed_")) {
             for (Player p : game.getPlayersInTurnOrder()) {
                 if (p.getName().equals(defined.substring(12))) {
                     players.add(p);
                 }
             }
-        }
-        else if (defined.startsWith("Flipped")) {
+        } else if (defined.startsWith("Flipped")) {
             for (Player p : game.getPlayersInTurnOrder()) {
                 if (null != sa.getHostCard().getFlipResult(p)) {
                     if (sa.getHostCard().getFlipResult(p).equals(defined.substring(7))) {
@@ -1233,22 +1183,17 @@ public class AbilityUtils {
                     }
                 }
             }
-        }
-        else if (defined.equals("Caster")) {
+        } else if (defined.equals("Caster")) {
             if (sa.getHostCard().wasCast()) {
                 players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
             }
-        }
-        else if (defined.equals("ActivePlayer")) {
+        } else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
-        }
-        else if (defined.equals("You")) {
+        } else if (defined.equals("You")) {
             players.add(player);
-        }
-        else if (defined.equals("Opponent")) {
+        } else if (defined.equals("Opponent")) {
             players.addAll(player.getOpponents());
-        }
-        else if (defined.startsWith("NextPlayerToYour")) {
+        } else if (defined.startsWith("NextPlayerToYour")) {
             Direction dir = defined.substring(16).equals("Left") ? Direction.Left : Direction.Right;
             players.add(game.getNextPlayerAfter(player, dir));
         } else if (defined.startsWith("NextOpponentToYour")) {
@@ -1258,8 +1203,7 @@ public class AbilityUtils {
                 next = game.getNextPlayerAfter(next, dir);
             }
             players.add(next);
-        }
-        else {
+        } else {
             // will be filtered below
             players.addAll(game.getPlayersInTurnOrder());
         }
@@ -1299,11 +1243,9 @@ public class AbilityUtils {
         // TODO - this probably needs to be fleshed out a bit, but the basics work
         if (defined.equals("Self") && sa instanceof SpellAbility) {
             s = (SpellAbility)sa;
-        }
-        else if (defined.equals("Parent") && sa instanceof SpellAbility) {
+        } else if (defined.equals("Parent") && sa instanceof SpellAbility) {
             s = ((SpellAbility)sa).getRootAbility();
-        }
-        else if (defined.equals("Remembered")) {
+        } else if (defined.equals("Remembered")) {
             for (final Object o : card.getRemembered()) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
@@ -1312,24 +1254,20 @@ public class AbilityUtils {
                     sas.add((SpellAbility) o);
                 }
             }
-        }
-        else if (defined.equals("Imprinted")) {
+        } else if (defined.equals("Imprinted")) {
             for (final Card imp : card.getImprintedCards()) {
                 sas.addAll(imp.getSpellAbilities());
             }
-        }
-        else if (defined.equals("EffectSource")) {
+        } else if (defined.equals("EffectSource")) {
             if (card.getEffectSourceAbility() != null) {
                 sas.add(card.getEffectSourceAbility().getRootAbility());
             }
-        }
-        else if (defined.equals("SourceFirstSpell")) {
+        } else if (defined.equals("SourceFirstSpell")) {
             SpellAbility spell = game.getStack().getSpellMatchingHost(card);
             if (spell != null) {
                 sas.add(spell);
             }
-        }
-        else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
+        } else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
 
             final String triggeringType = defined.substring(9);
@@ -1339,8 +1277,7 @@ public class AbilityUtils {
             } else if (o instanceof SpellAbilityStackInstance) {
                 s = ((SpellAbilityStackInstance) o).getSpellAbility();
             }
-        }
-        else if (defined.endsWith("Targeted") && sa instanceof SpellAbility) {
+        } else if (defined.endsWith("Targeted") && sa instanceof SpellAbility) {
             final List<TargetChoices> targets = defined.startsWith("This") ? Arrays.asList(((SpellAbility)sa).getTargets()) : ((SpellAbility)sa).getAllTargetChoices();
             for (TargetChoices tc : targets) {
                 for (SpellAbility targetSpell : tc.getTargetSpells()) {
