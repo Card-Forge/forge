@@ -103,8 +103,13 @@ public class AbilityUtils {
         else if (defined.startsWith("AttachedTo ")) {
             String v = defined.split(" ")[1];
             for (GameEntity ge : getDefinedEntities(hostCard, v, sa)) {
-                // TODO handle phased out inside attachedCards
-                Iterables.addAll(cards, ge.getAttachedCards());
+                for (Card att : ge.getAttachedCards()) {
+                    // TODO handle phased out inside attachedCards
+                    if (ge instanceof Card && ((Card) ge).isLKI()) {
+                        att = game.getCardState(att);
+                    }
+                    cards.add(att);
+                }
             }
         }
         else if (defined.startsWith("AttachedBy ")) {
@@ -125,7 +130,8 @@ public class AbilityUtils {
                     c = sacrificed.getFirst().getEnchantingCard();
                 }
             }
-        } else if (defined.equals("TopOfGraveyard")) {
+        }
+        else if (defined.equals("TopOfGraveyard")) {
             final CardCollectionView grave = player.getCardsIn(ZoneType.Graveyard);
 
             if (grave.size() > 0) {
@@ -3200,6 +3206,11 @@ public class AbilityUtils {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("DivideEvenlyUp")) {
+            if (secondaryNum == 0) {
+                return 0;
+            }
+            return num / secondaryNum + (num % secondaryNum == 0 ? 0 : 1);
         } else if (s[0].contains("DivideEvenlyDown")) {
             if (secondaryNum == 0) {
                 return 0;
