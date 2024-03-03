@@ -9,4 +9,4 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmou
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 SVar:PlayMain1:TRUE
-Oracle:Whenever you cast an instant or sorcery spell, choose one —\n• That spell gains deathtouch and lifelink.\n• Create a 2/2 red Imp creature token with "When this creature dies, it deals 2 damage to each opponent."
+Oracle:Whenever a creature you control with power 2 or less attacks, it gains skulk until end of turn. (It can't be blocked by creatures with greater power.)\nWhenever a creature with power 4 or greater attacks you, its controller loses 2 life and you gain 2 life.
