@@ -773,11 +773,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
 
-                if (sa.hasParam("RememberToEffectSource")) {
-                    if (hostCard.isImmutable() && hostCard.getEffectSource() != null) {
-                        hostCard.getEffectSource().addRemembered(movedCard);
-                    }
-                }
                 if (remember != null) {
                     hostCard.addRemembered(movedCard);
                     // addRememberedFromCardState ?
