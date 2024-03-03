@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Legendary Artifact Creature Robot
 PT:2/2
 A:AB$ GainControl | Cost$ T | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBImmediateTrigger | PlayerTurn$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent gains control of CARDNAME. When they do, you draw two cards and put a quest counter on NICKNAME.
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Self | ConditionPresent$ Card.ControlledBy ParentTarget | Execute$ DBDraw | StackDescription$ None
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Self | ConditionPresent$ Card.ControlledBy ParentTarget | Execute$ DBDraw | TriggerDescription$ When they do, you draw two cards and put a quest counter on NICKNAME.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Wild Card — When NICKNAME leaves the battlefield, its owner creates a tapped 1/1 white Soldier creature token for each quest counter on it.
