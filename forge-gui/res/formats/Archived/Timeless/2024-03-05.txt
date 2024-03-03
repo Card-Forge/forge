@@ -1,0 +1,8 @@
+[format]
+Name:Timeless (YMKM)
+Type:Archived
+Subtype:Vintage
+Effective:2024-03-05
+Sets:KTK, XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI, MKM, YMKM
+Restricted:Channel; Demonic Tutor; Tibalt's Trickery
+Additional:Admiral Brass, Unsinkable; Burden of Guilt; Clavileño, First of the Blessed; Crashing Footfalls; Duskmantle, House of Shadow; Enlisted Wurm; Evolutionary Leap; Fabricate; Gamble; Ghostly Prison; Goro-Goro and Satoru; Ixidor, Reality Sculptor; Katilda and Lier; Kuldotha Rebirth; Leonin Relic-Warder; Magmaw; Mass Hysteria; Metalspinner's Puzzleknot; Mistveil Plains; Molten Psyche; Monologue Tax; Mystery Key; Nyx Weaver; Pantlaza, Sun-Favored; Possibility Storm; Putrid Warrior; Shard of Broken Glass; Show and Tell; Slimefoot and Squee; Smuggler's Copter; Spell Snare; Timeless Dragon; Treacherous Terrain; Victimize; Xolatoyac, the Smiling Flood
