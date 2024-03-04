@@ -4,7 +4,7 @@ Types:Creature Giant
 PT:6/6
 K:Bargain
 K:Trample
-S:Mode$ ReduceCost | ValidSpell$ Spell.Bargain | Type$ Spell | ValidCard$ Card.Self | Amount$ 2 | EffectZone$ All | Description$This spell costs {2} less to cast if it's bargained.
+S:Mode$ ReduceCost | ValidSpell$ Spell.Bargain | Type$ Spell | ValidCard$ Card.Self | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} less to cast if it's bargained.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 DeckHas:Ability$Sacrifice|LifeGain

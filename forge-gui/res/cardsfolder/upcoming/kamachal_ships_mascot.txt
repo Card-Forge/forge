@@ -1,6 +1,6 @@
 Name:Kamachal, Ship's Mascot
 ManaCost:2 R
-Types:Legendary Creature Dinosoaur Pirate
+Types:Legendary Creature Dinosaur Pirate
 PT:2/2
 K:Menace
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

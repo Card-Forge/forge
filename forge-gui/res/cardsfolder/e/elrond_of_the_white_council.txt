@@ -7,7 +7,7 @@ SVar:TrigVote:DB$ Vote | Defined$ Player | Secret$ True | VoteType$ Fellowship,A
 SVar:Fellowship:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature you control | ImprintChosen$ True | Mandatory$ True
 SVar:AidPlus:DB$ StoreSVar | SVar$ Aid | Type$ CountSVar | Expression$ Aid/Plus.1
 SVar:DBGainControl:DB$ GainControl | Defined$ Imprinted | NewController$ You | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | staticAbilities$ CantAttackOwner | SubAbility$ DBPutCounter
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | StaticAbilities$ CantAttackOwner | SubAbility$ DBPutCounter
 SVar:CantAttackOwner:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.CardOwner | Description$ This creature can't attack its owner.
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ Aid | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearChosenCard$ True | SubAbility$ DBClearSVar

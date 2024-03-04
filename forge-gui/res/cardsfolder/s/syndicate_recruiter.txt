@@ -1,5 +1,5 @@
 Name:Syndicate Recruiter
-ManaCost: 2 U B
+ManaCost:2 U B
 Types:Creature Vampire Rogue
 PT:4/5
 K:Flying

@@ -6,4 +6,4 @@ SVar:Amass1:DB$ Amass | Type$ Orc | Num$ 1 | SpellDescription$ Amass Orcs 1. (Pu
 SVar:Amass2:DB$ Amass | Type$ Orc | Num$ 2 | SpellDescription$ Amass Orcs 2
 SVar:PumpAll:DB$ PumpAll | NumAtt$ +1 | ValidCards$ Creature.YouCtrl | KW$ Menace | SpellDescription$ Creatures you control get +1/+0 and gain menace until end of turn.
 DeckHas:Ability$Token|Counters & Type$Orc|Army
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don"t control an Army, create a 0/0 black Orc Army creature token first.)\nII — Amass Orcs 2.\nIII — Creatures you control get +1/+0 and gain menace until end of turn.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Amass Orcs 1. (Put a +1/+1 counter on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)\nII — Amass Orcs 2.\nIII — Creatures you control get +1/+0 and gain menace until end of turn.

@@ -2,6 +2,6 @@ Name:Corporeal Projection
 ManaCost:U R
 Types:Sorcery
 K:Overload:3 U U R R
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select  target creature you control | KW$ Myriad | SpellDescription$ Target creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Myriad | SpellDescription$ Target creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
 SVar:PlayMain1:TRUE
 Oracle:Target creature you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\nOverload {3}{U}{U}{R}{R} (You may cast this spell for its overload cost. If you do, change "target" in its text to "each.")

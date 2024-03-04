@@ -2,7 +2,7 @@ Name:Nevermore
 ManaCost:1 W W
 Types:Enchantment
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ Spells with the chosen name can't be cast.
 AI:RemoveDeck:Random
 Oracle:As Nevermore enters the battlefield, choose a nonland card name.\nSpells with the chosen name can't be cast.
