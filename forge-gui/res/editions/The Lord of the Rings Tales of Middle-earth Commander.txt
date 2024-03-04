@@ -6,7 +6,7 @@ Type=Commander
 ScryfallCode=LTC
 
 [cards]
-1 M Eowyn, Shieldmaiden @Craig Elliott
+1 M Éowyn, Shieldmaiden @Craig Elliott
 2 M Frodo, Adventurous Hobbit @Axel Sauerwald
 3 M Galadriel, Elven-Queen @Axel Sauerwald
 4 M Sauron, Lord of the Rings @Alex Brock
@@ -18,7 +18,7 @@ ScryfallCode=LTC
 10 R Champions of Minas Tirith @Tatiana Kirgetova
 11 R Field-Tested Frying Pan @Nino Is
 12 R The Gaffer @Tomas Duchek
-13 R Gilraen, Dunedain Protector @Marie Magny
+13 R Gilraen, Dúnedain Protector @Marie Magny
 14 R Grey Host Reinforcements @Patrik Hell
 15 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
 16 R Lossarnach Captain @Justine Cruz
@@ -44,7 +44,7 @@ ScryfallCode=LTC
 36 R Assemble the Entmoot @Alex Brock
 37 R Feasting Hobbit @Lorenzo Mastroianni
 38 R Galadhrim Ambush @John Di Giovanni
-39 R Haldir, Lorien Lieutenant @Syd Mills
+39 R Haldir, Lórien Lieutenant @Syd Mills
 40 R Legolas Greenleaf @Anna Steinbauer
 41 R Mirkwood Elk @Christina Kraus
 42 R Motivated Pony @Claudiu-Antoniu Magherusan
@@ -55,17 +55,17 @@ ScryfallCode=LTC
 47 R Banquet Guests @Viko Menezes
 48 R Bilbo, Birthday Celebrant @Billy Christian
 49 R Boromir, Gondor's Hope @Campbell White
-50 R Cirdan the Shipwright @Filipe Pagliuso
+50 R Círdan the Shipwright @Filipe Pagliuso
 51 R Elrond of the White Council @Javier Charro
-52 R Eomer, King of Rohan @Leonardo Borazio
+52 R Éomer, King of Rohan @Leonardo Borazio
 53 R Erestor of the Council @Syd Mills
 54 R Faramir, Steward of Gondor @Anna Podedworna
 55 R Farmer Cotton @Tomas Duchek
 56 R Forth Eorlingas! @Filipe Pagliuso
-57 R Grima, Saruman's Footman @Matt Stewart
+57 R Gríma, Saruman's Footman @Matt Stewart
 58 R In the Darkness Bind Them @Daarken
 59 R Lidless Gaze @Yigit Koroglu
-60 R Lord of the Nazgul @Anton Solovianchyk
+60 R Lord of the Nazgûl @Anton Solovianchyk
 61 R Merry, Warden of Isengard @Viko Menezes
 62 R Mirkwood Trapper @John Di Giovanni
 63 R Moria Scavenger @Igor Krstic
@@ -74,7 +74,7 @@ ScryfallCode=LTC
 66 R Radagast, Wizard of Wilds @Tomas Duchek
 67 R Riders of Rohan @Stanislav Sherbakov
 68 R Sail into the West @Leonardo Borazio
-69 R Song of Earendil @Torgeir Fjereide
+69 R Song of Eärendil @Torgeir Fjereide
 70 R Summons of Saruman @Svetlin Velinov
 71 R Taunt from the Rampart @Lorenzo Mastroianni
 72 R Too Greedily, Too Deep @Anton Solovianchyk
@@ -82,16 +82,16 @@ ScryfallCode=LTC
 74 R Wake the Dragon @Henry Peters
 75 R Crown of Gondor @Jarel Threat
 76 R Hithlain Rope @Josu Solano
-77 R Lothlorien Blade @Zuzanna Wużyk
+77 R Lothlórien Blade @Zuzanna Wużyk
 78 R Model of Unity @Yuriy Chemezov
 79 R Relic of Sauron @Anton Solovianchyk
 80 R The Black Gate @Marc Simonetti
-81 M Eowyn, Shieldmaiden @Craig Elliott
+81 M Éowyn, Shieldmaiden @Craig Elliott
 82 M Frodo, Adventurous Hobbit @Axel Sauerwald
 83 M Galadriel, Elven-Queen @Axel Sauerwald
 84 M Sauron, Lord of the Rings @Alex Brock
 85 M Aragorn, King of Gondor @Yongjae Choi
-86 M Eowyn, Shieldmaiden @Craig Elliott
+86 M Éowyn, Shieldmaiden @Craig Elliott
 87 M Frodo, Adventurous Hobbit @Axel Sauerwald
 88 M Galadriel, Elven-Queen @Axel Sauerwald
 89 M Gandalf, Westward Voyager @Sidharth Chaturvedi
@@ -102,7 +102,7 @@ ScryfallCode=LTC
 94 R Champions of Minas Tirith @Tatiana Kirgetova
 95 R Field-Tested Frying Pan @Nino Is
 96 R The Gaffer @Tomas Duchek
-97 R Gilraen, Dunedain Protector @Marie Magny
+97 R Gilraen, Dúnedain Protector @Marie Magny
 98 R Grey Host Reinforcements @Patrik Hell
 99 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
 100 R Lossarnach Captain @Justine Cruz
@@ -127,7 +127,7 @@ ScryfallCode=LTC
 119 R Assemble the Entmoot @Alex Brock
 120 R Feasting Hobbit @Lorenzo Mastroianni
 121 R Galadhrim Ambush @John Di Giovanni
-122 R Haldir, Lorien Lieutenant @Syd Mills
+122 R Haldir, Lórien Lieutenant @Syd Mills
 123 R Legolas Greenleaf @Anna Steinbauer
 124 R Mirkwood Elk @Christina Kraus
 125 R Motivated Pony @Claudiu-Antoniu Magherusan
@@ -138,16 +138,16 @@ ScryfallCode=LTC
 130 R Banquet Guests @Viko Menezes
 131 R Bilbo, Birthday Celebrant @Billy Christian
 132 R Boromir, Gondor's Hope @Campbell White
-133 R Cirdan the Shipwright @Filipe Pagliuso
+133 R Círdan the Shipwright @Filipe Pagliuso
 134 R Elrond of the White Council @Javier Charro
-135 R Eomer, King of Rohan @Leonardo Borazio
+135 R Éomer, King of Rohan @Leonardo Borazio
 136 R Erestor of the Council @Syd Mills
 137 R Faramir, Steward of Gondor @Anna Podedworna
 138 R Farmer Cotton @Tomas Duchek
 139 R Forth Eorlingas! @Filipe Pagliuso
-140 R Grima, Saruman's Footman @Matt Stewart
+140 R Gríma, Saruman's Footman @Matt Stewart
 141 R Lidless Gaze @Yigit Koroglu
-142 R Lord of the Nazgul @Anton Solovianchyk
+142 R Lord of the Nazgûl @Anton Solovianchyk
 143 R Merry, Warden of Isengard @Viko Menezes
 144 R Mirkwood Trapper @John Di Giovanni
 145 R Moria Scavenger @Igor Krstic
@@ -162,7 +162,7 @@ ScryfallCode=LTC
 154 R Wake the Dragon @Henry Peters
 155 R Crown of Gondor @Jarel Threat
 156 R Hithlain Rope @Josu Solano
-157 R Lothlorien Blade @Zuzanna Wużyk
+157 R Lothlórien Blade @Zuzanna Wużyk
 158 R Model of Unity @Yuriy Chemezov
 159 R Relic of Sauron @Anton Solovianchyk
 160 R The Black Gate @Marc Simonetti
@@ -420,7 +420,7 @@ ScryfallCode=LTC
 412 R Champions of Minas Tirith @Tatiana Kirgetova
 413 R Field-Tested Frying Pan @Nino Is
 414 R The Gaffer @Tomas Duchek
-415 R Gilraen, Dunedain Protector @Marie Magny
+415 R Gilraen, Dúnedain Protector @Marie Magny
 416 R Grey Host Reinforcements @Patrik Hell
 417 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
 418 R Lossarnach Captain @Justine Cruz
@@ -446,7 +446,7 @@ ScryfallCode=LTC
 438 R Assemble the Entmoot @Alex Brock
 439 R Feasting Hobbit @Lorenzo Mastroianni
 440 R Galadhrim Ambush @John Di Giovanni
-441 R Haldir, Lorien Lieutenant @Syd Mills
+441 R Haldir, Lórien Lieutenant @Syd Mills
 442 R Legolas Greenleaf @Anna Steinbauer
 443 R Mirkwood Elk @Christina Kraus
 444 R Motivated Pony @Claudiu-Antoniu Magherusan
@@ -458,10 +458,10 @@ ScryfallCode=LTC
 450 R Banquet Guests @Viko Menezes
 451 R Bilbo, Birthday Celebrant @Billy Christian
 452 R Boromir, Gondor's Hope @Campbell White
-453 R Cirdan the Shipwright @Filipe Pagliuso
+453 R Círdan the Shipwright @Filipe Pagliuso
 454 R Elrond of the White Council @Javier Charro
-455 R Eomer, King of Rohan @Leonardo Borazio
-456 M Eowyn, Shieldmaiden @Craig Elliott
+455 R Éomer, King of Rohan @Leonardo Borazio
+456 M Éowyn, Shieldmaiden @Craig Elliott
 457 R Erestor of the Council @Syd Mills
 458 R Faramir, Steward of Gondor @Anna Podedworna
 459 R Farmer Cotton @Tomas Duchek
@@ -469,10 +469,10 @@ ScryfallCode=LTC
 461 M Frodo, Adventurous Hobbit @Axel Sauerwald
 462 M Galadriel, Elven-Queen @Axel Sauerwald
 463 M Gandalf, Westward Voyager @Sidharth Chaturvedi
-464 R Grima, Saruman's Footman @Matt Stewart
+464 R Gríma, Saruman's Footman @Matt Stewart
 465 R In the Darkness Bind Them @Lack
 466 R Lidless Gaze @Yigit Koroglu
-467 R Lord of the Nazgul @Anton Solovianchyk
+467 R Lord of the Nazgûl @Anton Solovianchyk
 468 R Merry, Warden of Isengard @Viko Menezes
 469 R Mirkwood Trapper @John Di Giovanni
 470 R Moria Scavenger @Igor Krstic
@@ -484,7 +484,7 @@ ScryfallCode=LTC
 476 M Sam, Loyal Attendant @Campbell White
 477 M Saruman, the White Hand @Leonardo Borazio
 478 M Sauron, Lord of the Rings @Alex Brock
-479 R Song of Earendil @Torgeir Fjereide
+479 R Song of Eärendil @Torgeir Fjereide
 480 R Summons of Saruman @Svetlin Velinov
 481 R Taunt from the Rampart @Lorenzo Mastroianni
 482 R Too Greedily, Too Deep @Anton Solovianchyk
@@ -492,11 +492,11 @@ ScryfallCode=LTC
 484 R Wake the Dragon @Henry Peters
 485 R Crown of Gondor @Jarel Threat
 486 R Hithlain Rope @Josu Solano
-487 R Lothlorien Blade @Zuzanna Wużyk
+487 R Lothlórien Blade @Zuzanna Wużyk
 488 R Model of Unity @Yuriy Chemezov
 489 R Relic of Sauron @Anton Solovianchyk
 490 R The Black Gate @Marc Simonetti
-491 R Anduril, Narsil Reforged @Jason Rainville
+491 R Andúril, Narsil Reforged @Jason Rainville
 492 M Aragorn, Hornburg Hero @Jason Rainville
 493 R Legolas's Quick Reflexes @Jason Rainville
 494 R Gimli's Reckless Might @Jason Rainville
@@ -506,16 +506,16 @@ ScryfallCode=LTC
 498 M Galadriel, Light of Valinor @Alexander Mokhov
 499 R Rally the Galadhrim @Alexander Mokhov
 500 R Galadriel's Dismissal @Alexander Mokhov
-501 R Mists of Lorien @Alexander Mokhov
+501 R Mists of Lórien @Alexander Mokhov
 502 R Galadhrim Brigade @Alexander Mokhov
-503 R Olorin's Searing Light @Matt Stewart
+503 R Olórin's Searing Light @Matt Stewart
 504 R Sorcerous Squall @Matt Stewart
 505 R Rammas Echor, Ancient Shield @Matt Stewart
 506 R Courageous Resolve @Matt Stewart
 507 M Gandalf of the Secret Fire @Matt Stewart
 508 R Fell Beast's Shriek @Matt Stewart
 509 R Call Forth the Tempest @Campbell White
-510 R Nazgul Battle-Mace @Campbell White
+510 R Nazgûl Battle-Mace @Campbell White
 511 M Witch-king, Sky Scourge @Campbell White
 512 R Mordor on the March @Campbell White
 513 R Fell Beast of Mordor @Campbell White
@@ -540,7 +540,7 @@ ScryfallCode=LTC
 532 U Tempt with Discovery @Greg Hildebrandt & Tim Hildebrandt
 533 R Timber Protector @Greg Hildebrandt & Tim Hildebrandt
 534 U Myriad Landscape @Greg Hildebrandt & Tim Hildebrandt
-535 R Anduril, Narsil Reforged @Jason Rainville
+535 R Andúril, Narsil Reforged @Jason Rainville
 536 M Aragorn, Hornburg Hero @Jason Rainville
 537 R Legolas's Quick Reflexes @Jason Rainville
 538 R Gimli's Reckless Might @Jason Rainville
@@ -550,16 +550,16 @@ ScryfallCode=LTC
 542 M Galadriel, Light of Valinor @Alexander Mokhov
 543 R Rally the Galadhrim @Alexander Mokhov
 544 R Galadriel's Dismissal @Alexander Mokhov
-545 R Mists of Lorien @Alexander Mokhov
+545 R Mists of Lórien @Alexander Mokhov
 546 R Galadhrim Brigade @Alexander Mokhov
-547 R Olorin's Searing Light @Matt Stewart
+547 R Olórin's Searing Light @Matt Stewart
 548 R Sorcerous Squall @Matt Stewart
 549 R Rammas Echor, Ancient Shield @Matt Stewart
 550 R Courageous Resolve @Matt Stewart
 551 M Gandalf of the Secret Fire @Matt Stewart
 552 R Fell Beast's Shriek @Matt Stewart
 553 R Call Forth the Tempest @Campbell White
-554 R Nazgul Battle-Mace @Campbell White
+554 R Nazgûl Battle-Mace @Campbell White
 555 M Witch-king, Sky Scourge @Campbell White
 556 R Mordor on the March @Campbell White
 557 R Fell Beast of Mordor @Campbell White

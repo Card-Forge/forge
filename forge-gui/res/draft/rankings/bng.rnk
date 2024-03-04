@@ -1,0 +1,166 @@
+//Rank|Name|Rarity|Set
+#1|Brimaz King of Oreskos|M|BNG
+#2|Kiora the Crashing Wave|M|BNG
+#3|Xenagos God of Revels|M|BNG
+#4|Phenax God of Deception|M|BNG
+#5|Mogis God of Slaughter|M|BNG
+#6|Flame Wreathed Phoenix|M|BNG
+#7|Ephara God of the Polis|M|BNG
+#8|Karametra God of Harvests|M|BNG
+#9|Chromanticore|M|BNG
+#10|Champion of Stray Souls|M|BNG
+#11|Eidolon of Countless Battles|R|BNG
+#12|Herald of Torment|R|BNG
+#13|Courser of Kruphix|R|BNG
+#14|Hero of Iroas|R|BNG
+#15|Forgestoker Dragon|R|BNG
+#16|Nessian Wilds Ravager|R|BNG
+#17|Arbiter of the Ideal|R|BNG
+#18|Gild|R|BNG
+#19|Felhide Spiritbinder|R|BNG
+#20|Fate Unraveler|R|BNG
+#21|Fated Intervention|R|BNG
+#22|Hunters Prowess|R|BNG
+#23|Tromokratis|R|BNG
+#24|Hero of Leina Tower|R|BNG
+#25|Scourge of Skola Vale|R|BNG
+#26|Ornitharch|U|BNG
+#27|Fated Conflagration|R|BNG
+#28|Eater of Hope|R|BNG
+#29|Archetype of Courage|U|BNG
+#30|Pain Seer|R|BNG
+#31|Silent Sentinel|R|BNG
+#32|Spirit of the Labyrinth|R|BNG
+#33|Oracle of Bones|R|BNG
+#34|Fated Retribution|R|BNG
+#35|Bile Blight|U|BNG
+#36|Whelming Wave|R|BNG
+#37|Raised by Wolves|U|BNG
+#38|Ghostblade Eidolon|U|BNG
+#39|Siren of the Fanged Coast|U|BNG
+#40|Aerie Worshippers|U|BNG
+#41|Akroan Skyguard|C|BNG
+#42|Spiteful Returned|U|BNG
+#43|Archetype of Imagination|U|BNG
+#44|Vanguard of Brimaz|U|BNG
+#45|Searing Blood|U|BNG
+#46|Akroan Conscriptor|U|BNG
+#47|Fanatic of Xenagos|U|BNG
+#48|Shrike Harpy|U|BNG
+#49|Drown in Sorrow|U|BNG
+#50|Temple of Enlightenment|R|BNG
+#51|Archetype of Aggression|U|BNG
+#52|Fated Infatuation|R|BNG
+#53|Epharas Enlightenment|U|BNG
+#54|Everflame Eidolon|U|BNG
+#55|Satyr Nyx Smith|U|BNG
+#56|Satyr Firedancer|R|BNG
+#57|Kioras Follower|U|BNG
+#58|Glimpse the Sun God|U|BNG
+#59|Perplexing Chimera|R|BNG
+#60|Siren of the Silent Song|U|BNG
+#61|Thunder Brute|U|BNG
+#62|Fated Return|R|BNG
+#63|Flitterstep Eidolon|U|BNG
+#64|Pheres Band Raiders|U|BNG
+#65|Bolt of Keranos|C|BNG
+#66|Temple of Plenty|R|BNG
+#67|Temple of Malice|R|BNG
+#68|Fall of the Hammer|C|BNG
+#69|Akroan Phalanx|U|BNG
+#70|Reap What Is Sown|U|BNG
+#71|Nessian Demolok|U|BNG
+#72|Forlorn Pseudamma|U|BNG
+#73|Graverobber Spider|U|BNG
+#74|Oracles Insight|U|BNG
+#75|God Favored General|U|BNG
+#76|Noble Quarry|U|BNG
+#77|Asphyxiate|C|BNG
+#78|Vortex Elemental|U|BNG
+#79|Archetype of Finality|U|BNG
+#80|Acolytes Reward|U|BNG
+#81|Ragemonger|U|BNG
+#82|Retraction Helix|C|BNG
+#83|Nyxborn Triton|C|BNG
+#84|Nyxborn Wolf|C|BNG
+#85|Pheres Band Tromper|C|BNG
+#86|Mischief and Mayhem|U|BNG
+#87|Swordwise Centaur|C|BNG
+#88|Nyxborn Shieldmate|C|BNG
+#89|Chorus of the Tides|C|BNG
+#90|Setessan Oathsworn|C|BNG
+#91|Kragma Butcher|C|BNG
+#92|Ashioks Adept|U|BNG
+#93|Springleaf Drum|U|BNG
+#94|Oreskos Sun Guide|C|BNG
+#95|Sudden Storm|C|BNG
+#96|Odunos River Trawler|U|BNG
+#97|Elite Skirmisher|C|BNG
+#98|Stormcaller of Keranos|U|BNG
+#99|Meletis Astronomer|U|BNG
+#100|Excoriate|C|BNG
+#101|Loyal Pegasus|C|BNG
+#102|Divination|C|BNG
+#103|Pinnacle of Rage|U|BNG
+#104|Servant of Tymaret|C|BNG
+#105|Snake of the Golden Grove|C|BNG
+#106|Nyxborn Rollicker|C|BNG
+#107|Black Oak of Odunos|U|BNG
+#108|Mortals Resolve|C|BNG
+#109|Nyxborn Eidolon|C|BNG
+#110|Pharagax Giant|C|BNG
+#111|Gorgons Head|U|BNG
+#112|Stratus Walk|C|BNG
+#113|Peregrination|U|BNG
+#114|Archetype of Endurance|U|BNG
+#115|Deepwater Hypnotist|C|BNG
+#116|Weight of the Underworld|C|BNG
+#117|Fearsome Temper|C|BNG
+#118|Kraken of the Straits|U|BNG
+#119|Mortals Ardor|C|BNG
+#120|Nullify|C|BNG
+#121|Sphinxs Disciple|C|BNG
+#122|Revoke Existence|C|BNG
+#123|Eternity Snare|U|BNG
+#124|Crypsis|C|BNG
+#125|Rise to the Challenge|C|BNG
+#126|Thunderous Might|U|BNG
+#127|Dawn to Dusk|U|BNG
+#128|Aspect of Hydra|C|BNG
+#129|Karametras Favor|C|BNG
+#130|Unravel the Aether|U|BNG
+#131|Pillar of War|U|BNG
+#132|Astral Cornucopia|R|BNG
+#133|Impetuous Sunchaser|C|BNG
+#134|Siren Song Lyre|U|BNG
+#135|Necrobite|C|BNG
+#136|Cyclops of One Eyed Pass|C|BNG
+#137|Floodtide Serpent|C|BNG
+#138|Reckless Reveler|C|BNG
+#139|Mindreaver|R|BNG
+#140|Marshmist Titan|C|BNG
+#141|Warchanter of Mogis|C|BNG
+#142|Felhide Brawler|C|BNG
+#143|Satyr Wayfinder|C|BNG
+#144|Setessan Starbreaker|C|BNG
+#145|Griffin Dreamfinder|C|BNG
+#146|Grisly Transformation|C|BNG
+#147|Lightning Volley|U|BNG
+#148|Eye Gouge|C|BNG
+#149|Thassas Rebuff|U|BNG
+#150|Scouring Sands|C|BNG
+#151|Hold at Bay|C|BNG
+#152|Great Hart|C|BNG
+#153|Claim of Erebos|C|BNG
+#154|Charging Badger|C|BNG
+#155|Forsaken Drifters|C|BNG
+#156|Sunbond|U|BNG
+#157|Skyreaping|U|BNG
+#158|Epharas Radiance|C|BNG
+#159|Evanescent Intellect|C|BNG
+#160|Epiphany Storm|C|BNG
+#161|Culling Mark|C|BNG
+#162|Sanguimancy|U|BNG
+#163|Plea for Guidance|R|BNG
+#164|Whims of the Fates|R|BNG
+#165|Heroes Podium|R|BNG

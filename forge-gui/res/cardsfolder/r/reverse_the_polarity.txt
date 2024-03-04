@@ -1,0 +1,9 @@
+Name:Reverse the Polarity
+ManaCost:1 U U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBSwitch,DBUnblockable
+SVar:DBCounter:DB$ Counter | Defined$ ValidStack Spell.Other | SpellDescription$ Counter all other spells.
+SVar:DBSwitch:DB$ PumpAll | ValidCards$ Creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch each creature's power and toughness until end of turn.
+SVar:DBUnblockable:DB$ Effect | StaticAbilities$ Unblockable | SpellDescription$ Creatures can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature | Description$ Creatures can't be blocked this turn.
+Oracle:Choose one —\n• Counter all other spells.\n• Switch each creature's power and toughness until end of turn.\n• Creatures can't be blocked this turn.

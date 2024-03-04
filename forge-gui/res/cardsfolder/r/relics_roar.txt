@@ -1,0 +1,7 @@
+Name:Relic's Roar
+ManaCost:U
+Types:Instant
+A:SP$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 4 | Toughness$ 3 | Types$ Artifact,Creature,Dinosaur | SpellDescription$ Until end of turn, target artifact or creature becomes a Dinosaur artifact creature with base power and toughness 4/3 in addition to its other types.
+DeckHints:Type$Artifact
+DeckHas:Type$Dinosaur
+Oracle:Until end of turn, target artifact or creature becomes a Dinosaur artifact creature with base power and toughness 4/3 in addition to its other types.

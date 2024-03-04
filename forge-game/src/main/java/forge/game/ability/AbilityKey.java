@@ -2,7 +2,9 @@ package forge.game.ability;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -63,6 +65,7 @@ public enum AbilityKey {
     EffectOnly("EffectOnly"),
     Enlisted("Enlisted"),
     Exploited("Exploited"),
+    Explored("Explored"),
     Explorer("Explorer"),
     ExtraTurn("ExtraTurn"),
     Event("Event"),
@@ -92,8 +95,7 @@ public enum AbilityKey {
     NewCard("NewCard"),
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),
-    Num("Num"), // TODO confirm that this and NumThisTurn can be merged
-    NumThisTurn("NumThisTurn"),
+    Num("Num"),
     Number("Number"),
     Object("Object"),
     Objects("Objects"),
@@ -119,7 +121,6 @@ public enum AbilityKey {
     ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
     Sides("Sides"),
-    SimultaneousETB("SimultaneousETB"),
     Source("Source"),
     Sources("Sources"),
     SourceSA("SourceSA"),
@@ -132,12 +133,14 @@ public enum AbilityKey {
     SurveilNum("SurveilNum"),
     Target("Target"),
     Targets("Targets"),
-    TgtSA("TgtSA"),
     Token("Token"),
     TokenNum("TokenNum"),
     Vehicle("Vehicle"),
-    Won("Won");
+    Won("Won"),
 
+    // below used across different Replacements, don't reuse
+    InternalTriggerTable("InternalTriggerTable"),
+    SimultaneousETB("SimultaneousETB"); // for CR 614.13c
 
     private String key;
 
@@ -201,5 +204,16 @@ public enum AbilityKey {
 
         runParams.put(Map, map);
         return runParams;
+    }
+
+    public static CardZoneTable addCardZoneTableParams(Map<AbilityKey, Object> params, SpellAbility sa) {
+        CardZoneTable table = CardZoneTable.getSimultaneousInstance(sa);
+        addCardZoneTableParams(params, table);
+        return table;
+    }
+    public static void addCardZoneTableParams(Map<AbilityKey, Object> params, CardZoneTable table) {
+        params.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
+        params.put(AbilityKey.InternalTriggerTable, table);
     }
 }

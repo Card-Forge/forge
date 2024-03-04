@@ -1231,7 +1231,7 @@ public class ComputerUtilCombat {
             }
 
             // Extra check for the Exalted trigger in case we're declaring more than one attacker
-            if (combat != null && trigger.getKeyword() != null && trigger.getKeyword().getKeyword() == Keyword.EXALTED) {
+            if (combat != null && trigger.isKeyword(Keyword.EXALTED)) {
                 if (!combat.getAttackers().isEmpty() && !combat.getAttackers().contains(attacker)) {
                     continue;
                 }
@@ -1257,7 +1257,7 @@ public class ComputerUtilCombat {
             sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.hasParam("Cost")) {
-                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                     continue;
                 }
             }
@@ -1454,7 +1454,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (sa.hasParam("Cost")) {
-                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                         continue;
                     }
                 }
@@ -1488,7 +1488,7 @@ public class ComputerUtilCombat {
                     continue;
                 }
                 if (sa.hasParam("Cost")) {
-                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
+                    if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa, true)) {
                         continue;
                     }
                 }
@@ -2582,5 +2582,44 @@ public class ComputerUtilCombat {
             }
         }
         return totalLifeLinkDamage;
+    }
+
+    public static boolean willOpposingCreatureDieInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, atk, combat)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                for (Card blk : combat.getBlockers(combatant)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, blk, combat)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDangerousToSacInCombat(final Player ai, final Card combatant, final Combat combat) {
+        if (combat != null) {
+            if (combat.isBlocking(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+                for (Card atk : combat.getAttackersBlockedBy(combatant)) {
+                    if (atk.hasKeyword(Keyword.TRAMPLE)) {
+                        return true;
+                    }
+                }
+            } else if (combat.isBlocked(combatant)) {
+                if (combatant.hasKeyword(Keyword.BANDING)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

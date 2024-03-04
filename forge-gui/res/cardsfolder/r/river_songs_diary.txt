@@ -1,0 +1,15 @@
+Name:River Song's Diary
+ManaCost:3
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromTheirHand,Sorcery.wasCastFromTheirHand | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ DBExile | Description$ Exile it instead of putting it into a graveyard as it resolves.
+SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | ExiledWithEffectSource$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE4 | Execute$ TrigChooseRandom | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if there are four or more cards exiled with CARDNAME, choose one of them at random. You may cast it without paying its mana cost.
+SVar:TrigChooseRandom:DB$ ChooseCard | ChoiceZone$ Exile | AtRandom$ True | Choices$ Card.ExiledWithSource | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ ChosenCard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:ExiledWith$Amount
+DeckHints:Type$Instant|Sorcery
+Oracle:Imprint — Whenever a player casts an instant or sorcery spell from their hand, exile it instead of putting it into a graveyard as it resolves.\nAt the beginning of your upkeep, if there are four or more cards exiled with River Song's Diary, choose one of them at random. You may cast it without paying its mana cost.

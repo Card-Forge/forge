@@ -1,0 +1,16 @@
+Name:Sycorax Commander
+ManaCost:2 B R
+Types:Creature Alien Soldier
+PT:4/2
+K:First Strike
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChoice | TriggerDescription$ Sanctified Rules of Combat — When CARDNAME enters the battlefield, each opponent faces a villainous choice — That opponent discards all the cards in their hand, then draws that many cards minus one, or CARDNAME deals damage to that player equal to the number of cards in their hand.
+SVar:TrigChoice:DB$ VillainousChoice | Defined$ Opponent | Choices$ DBDiscard,DBDamage
+SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Opponent discards their hand, then draws that many cards minus one.
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanDrawn
+SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True
+# This calculation isn't considering the remembered player, only the remembered cards
+SVar:X:Remembered$Amount/Minus.1
+SVar:DBDamage:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ Y | SpellDescription$ CARDNAME deals damage to opponent equal to the number of cards in their hand.
+SVar:Y:Count$ValidHand Card.OwnedBy Player.IsRemembered
+Oracle:First strike, haste\nSanctified Rules of Combat — When Sycorax Commander enters the battlefield, each opponent faces a villainous choice — That opponent discards all the cards in their hand, then draws that many cards minus one, or Sycorax Commander deals damage to that player equal to the number of cards in their hand.

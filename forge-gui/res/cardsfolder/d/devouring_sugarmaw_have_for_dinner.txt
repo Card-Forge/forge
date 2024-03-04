@@ -1,0 +1,20 @@
+Name:Devouring Sugarmaw
+ManaCost:2 B B
+Types:Creature Horror
+PT:6/6
+K:Menace
+K:Trample
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice an artifact, enchantment, or token. If you don't, tap CARDNAME.
+SVar:TrigTap:DB$ Tap | UnlessCost$ Sac<1/Card.token;Artifact;Enchantment/artifact, enchantment, or token> | UnlessPayer$ You | Defined$ Self
+DeckHas:Ability$Sacrifice|Token & Type$Human|Artifact|Food
+DeckHints:Ability$Token & Type$Artifact|Enchantment
+AlternateMode:Adventure
+Oracle:Menace, trample\nAt the beginning of your upkeep, you may sacrifice an artifact, enchantment, or token. If you don't, tap Devouring Sugarmaw.
+
+ALTERNATE
+
+Name:Have for Dinner
+ManaCost:1 W
+Types:Instant Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human,c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token and a Food token. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create a 1/1 white Human creature token and a Food token.

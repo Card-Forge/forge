@@ -1,0 +1,14 @@
+Name:The Caves of Androzani
+ManaCost:3 W
+Types:Enchantment Saga
+K:Chapter:4:DBStunCounter,DBChooseCard,DBChooseCard,DBSearch
+SVar:DBStunCounter:DB$ PutCounter | ValidTgts$ Creature.tapped | TgtPrompt$ Select up to two target tapped creatures | CounterType$ STUN | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Put two stun counters on each of up to two target tapped creatures.
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Permanent.nonSaga+HasCounters | ChoiceTitle$ Choose any number of non-Saga permanents with counters | MinAmount$ 0 | ChoiceZone$ Battlefield | Amount$ X | SubAbility$ DBAdditionalCounter | SpellDescription$ For each non-Saga permanent, choose a counter on it. You may put an additional counter of that kind on that permanent.
+SVar:X:Count$Valid Permanent.nonSaga+HasCounters
+SVar:DBAdditionalCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ ExistingCounter | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Doctor | ChangeNum$ 1 | Hidden$ True | SpellDescription$ Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+DeckNeeds:Type$Doctor
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Put two stun counters on each of up to two target tapped creatures.\nII, III — For each non-Saga permanent, choose a counter on it. You may put an additional counter of that kind on that permanent.\nIV — Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.

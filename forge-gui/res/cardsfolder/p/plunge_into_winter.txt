@@ -1,0 +1,7 @@
+Name:Plunge into Winter
+ManaCost:1 W
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBScry | SpellDescription$ Tap up to one target creature.
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1, then draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Tap up to one target creature. Scry 1, then draw a card.

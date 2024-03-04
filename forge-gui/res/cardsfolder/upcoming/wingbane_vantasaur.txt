@@ -1,0 +1,10 @@
+Name:Wingbane Vantasaur
+ManaCost:2 G G
+Types:Creature Dinosaur
+PT:4/5
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ SavageStomp,Naturalize
+SVar:SavageStomp:DB$ MakeCard | Conjure$ True | Name$ Savage Stomp | Zone$ Hand | SpellDescription$ Conjure a card named Savage Stomp into your hand.
+SVar:Naturalize:DB$ MakeCard | Conjure$ True | Name$ Naturalize | Zone$ Hand | SpellDescription$ Conjure a card named Naturalize into your hand.
+Oracle:Reach\nWhen Wingbane Vantasaur enters the battlefield, choose one —\n• Conjure a card named Savage Stomp into your hand.\n• Conjure a card named Naturalize into your hand.

@@ -1,0 +1,10 @@
+Name:Brave the Wilds
+ManaCost:G
+Types:Sorcery
+K:Bargain
+A:SP$ Animate | ValidTgts$ Land.YouCtrl | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target land you control | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Duration$ Permanent | SubAbility$ DBChangeZone | Condition$ Bargain | Keywords$ Haste | SpellDescription$ If this spell was bargained, target land you control becomes a 3/3 Elemental creature with haste that's still a land.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:X:Count$Bargained.1.0
+DeckHints:Type$Artifact|Enchantment & Ability$Token
+DeckHas:Ability$Sacrifice & Type$Elemental
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nIf this spell was bargained, target land you control becomes a 3/3 Elemental creature with haste that's still a land.\nSearch your library for a basic land card, reveal it, put it into your hand, then shuffle.

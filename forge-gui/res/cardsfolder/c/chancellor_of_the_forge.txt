@@ -7,9 +7,9 @@ SVar:EffMassToken:DB$ Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ r_
 SVar:X:Count$Valid Creature.YouCtrl
 K:MayEffectFromOpeningHand:RevealCard
 SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ TokenOnUpkeep | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.
-SVar:TokenOnUpkeep:DB$ Effect | Triggers$ TrigToken | Name$ Chancellor of the Forge effect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.
-SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | TriggerDescription$ At the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.
-SVar:EffToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_1_1_phyrexian_goblin_haste | SubAbility$ RemoveMe
-SVar:RemoveMe:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:TokenOnUpkeep:DB$ Effect | Triggers$ TrigToken
+SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | OneOff$ True | TriggerDescription$ At the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.
+SVar:EffToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_1_1_phyrexian_goblin_haste
 SVar:PlayMain1:TRUE
+DeckHas:Type$Goblin
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, create a 1/1 red Phyrexian Goblin creature token with haste.\nWhen Chancellor of the Forge enters the battlefield, create X 1/1 red Phyrexian Goblin creature tokens with haste, where X is the number of creatures you control.

@@ -60,7 +60,11 @@ public class CostPayEnergy extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Pay ");
-        sb.append(Strings.repeat("{E}", Integer.parseInt(getAmount())));
+        if (getAmount().equals("X")) {
+            sb.append("X {E}");
+        } else {
+            sb.append(Strings.repeat("{E}", Integer.parseInt(getAmount())));
+        }
         return sb.toString();
     }
 

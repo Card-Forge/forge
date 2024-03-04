@@ -1,0 +1,9 @@
+Name:Exit Specialist
+ManaCost:1 U
+Types:Creature Human Detective
+PT:2/1
+K:Disguise:1 U
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE3 | Description$ CARDNAME can't be blocked by creatures with power 3 or greater.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return another target creature to its owner's hand.
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Origin$ Battlefield | Destination$ Hand
+Oracle:Exit Specialist can't be blocked by creatures with power 3 or greater.\nDisguise {1}{U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Exit Specialist is turned face up, return another target creature to its owner's hand.

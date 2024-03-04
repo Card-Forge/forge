@@ -1,0 +1,14 @@
+Name:Minas Tirith Garrison
+ManaCost:3 U
+Types:Creature Human Soldier
+PT:*/5
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of cards in your hand.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may tap any number of untapped Humans you control. Draw a card for each Human tapped this way.
+SVar:TrigTap:DB$ Tap | CardChoices$ Human.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Human.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$InYourHand
+SVar:Y:Remembered$Amount
+DeckHints:Type$Human
+SVar:HasAttackEffect:TRUE
+Oracle:Minas Tirith Garrison's power is equal to the number of cards in your hand.\nWhenever Minas Tirith Garrison attacks, you may tap any number of untapped Humans you control. Draw a card for each Human tapped this way.

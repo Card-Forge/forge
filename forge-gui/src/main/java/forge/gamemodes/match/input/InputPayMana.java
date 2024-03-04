@@ -20,6 +20,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.player.actions.PayManaFromPoolAction;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
@@ -115,7 +116,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : card.getManaAbilities()) {
             result.add(sa);
-            result.addAll(GameActionUtil.getAlternativeCosts(sa, player));
+            result.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
         }
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(result.size());
         for (final SpellAbility sa : result) {
@@ -200,6 +201,8 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     public void useManaFromPool(byte colorCode) {
         // find the matching mana in pool.
         if (player.getManaPool().tryPayCostWithColor(colorCode, saPaidFor, manaCost, saPaidFor.getPayingMana())) {
+            // Record paying mana from pool here
+            getController().macros().addRememberedAction(new PayManaFromPoolAction(colorCode));
             onManaAbilityPaid();
             showMessage();
         }
@@ -349,7 +352,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                         }
                     }
 
-                    if (restrictionsMet) {
+                    if (restrictionsMet && !player.getController().isFullControl()) {
                         player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
                     }
                     if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {

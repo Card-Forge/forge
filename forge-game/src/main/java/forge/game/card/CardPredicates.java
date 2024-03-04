@@ -251,6 +251,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> canExiledBy(final SpellAbility sa, final boolean effect) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.canExiledBy(sa, effect);
+            }
+        };
+    }
+
     public static final Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa) {
         return new Predicate<Card>() {
             @Override
@@ -549,6 +558,13 @@ public final class CardPredicates {
             @Override
             public boolean apply(Card c) {
                 return c.isUntapped();
+            }
+        };
+
+        public static final Predicate<Card> CAN_TAP = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.canTap();
             }
         };
         /**

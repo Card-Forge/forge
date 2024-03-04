@@ -1,0 +1,7 @@
+Name:Almost Perfect
+ManaCost:4 G W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 9 | SetToughness$ 10 | AddKeyword$ Indestructible | Description$ Enchanted creature has base power and toughness 9/10 and has indestructible.
+Oracle:Enchant creature\nEnchanted creature has base power and toughness 9/10 and has indestructible.

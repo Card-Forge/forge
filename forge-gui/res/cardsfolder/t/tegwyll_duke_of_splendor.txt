@@ -1,0 +1,12 @@
+Name:Tegwyll, Duke of Splendor
+ManaCost:1 U B
+Types:Legendary Creature Faerie Noble
+PT:2/3
+K:Flying
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Creature.Faerie+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Faerie creatures you control get +1/+1.
+T:Mode$ ChangesZone | ValidCard$ Faerie.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Faerie you control dies, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+DeckHints:Type$Faerie
+Oracle:Flying, deathtouch\nOther Faeries you control get +1/+1.\nWhenever another Faerie you control dies, you draw a card and you lose 1 life.

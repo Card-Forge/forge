@@ -1,0 +1,10 @@
+Name:The Eleventh Hour
+ManaCost:3 U
+Types:Enchantment Saga
+K:Chapter:3:DBSearch,DBFood,DBCopy
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Doctor | ChangeNum$ 1 | SpellDescription$ Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac,w_1_1_human_doctor_reduce | SpellDescription$ Create a Food token and a 1/1 white Human creature token with "Doctor spells you cast cost {1} less to cast."
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Creature | NewName$ Prisoner Zero | SetCreatureTypes$ Alien | AddTypes$ Legendary | SpellDescription$ Create a token that's a copy of target creature, except it's a legendary Alien named Prisoner Zero.
+DeckHas:Ability$Token|Sacrifice & Type$Alien|Human|Food|Artifact|Creature
+DeckNeeds:Type$Doctor
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.\nII — Create a Food token and a 1/1 white Human creature token with "Doctor spells you cast cost {1} less to cast."\nIII — Create a token that's a copy of target creature, except it's a legendary Alien named Prisoner Zero.

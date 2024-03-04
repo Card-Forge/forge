@@ -1,0 +1,9 @@
+Name:Bubble Smuggler
+ManaCost:1 U
+Types:Creature Octopus Fish
+PT:2/1
+K:Disguise:5 U
+R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, put four +1/+1 counters on it.
+SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 4
+DeckHas:Ability$Counters
+Oracle:Disguise {5}{U} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nAs Bubble Smuggler is turned face up, put four +1/+1 counters on it.

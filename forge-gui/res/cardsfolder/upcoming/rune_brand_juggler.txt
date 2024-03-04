@@ -1,0 +1,9 @@
+Name:Rune-Brand Juggler
+ManaCost:B R
+Types:Creature Human Shaman
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect up to one target creature you control. (A suspected creature has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | Attributes$ Suspected | TargetMin$ 0 | TargetMax$ 1
+A:AB$ Pump | Cost$ 3 B R Sac<1/Creature.IsSuspected/suspected creature> | ValidTgts$ Creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-5 until end of turn.
+DeckHas:Ability$Sacrifice
+Oracle:When Rune-Brand Juggler enters the battlefield, suspect up to one target creature you control. (A suspected creature has menace and can't block.)\n{3}{B}{R}, Sacrifice a suspected creature: Target creature gets -5/-5 until end of turn.

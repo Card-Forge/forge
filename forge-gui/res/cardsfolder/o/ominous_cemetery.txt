@@ -1,0 +1,6 @@
+Name:Ominous Cemetery
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 5 T Exile<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Shuffle$ True | SpellDescription$ Target creature's owner shuffles it into their library.
+Oracle:{T}: Add {C}.\n{5}, {T}, Exile Ominous Cemetery: Target creature's owner shuffles it into their library.

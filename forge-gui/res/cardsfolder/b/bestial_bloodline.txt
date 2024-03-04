@@ -1,0 +1,8 @@
+Name:Bestial Bloodline
+ManaCost:1 G
+Types:Enchantment Aura
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
+A:AB$ ChangeZone | Cost$ 4 G | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature\nEnchanted creature gets +2/+2.\n{4}{G}: Return Bestial Bloodline from your graveyard to your hand.

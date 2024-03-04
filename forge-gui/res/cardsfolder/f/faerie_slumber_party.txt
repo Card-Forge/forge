@@ -1,0 +1,11 @@
+Name:Faerie Slumber Party
+ManaCost:4 U U
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Hand | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Return all creatures to their owners' hands.
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ u_1_1_faerie_flying_blockflying | TokenOwner$ You | SubAbility$ DBCleanup | SpellDescription$ For each opponent who controlled a creature returned this way, you create two 1/1 blue Faerie creature tokens with flying and "This creature can block only creatures with flying."
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:SVar$X/Times.2
+SVar:X:PlayerCountRememberedController$HasPropertyOpponent
+DeckHas:Ability$Token & Type$Faerie
+DeckHints:Type$Faerie
+Oracle:Return all creatures to their owners' hands.\nFor each opponent who controlled a creature returned this way, you create two 1/1 blue Faerie creature tokens with flying and "This creature can block only creatures with flying."

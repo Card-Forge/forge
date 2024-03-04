@@ -1,0 +1,8 @@
+Name:Marketwatch Phantom
+ManaCost:1 W
+Types:Creature Spirit Detective
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, CARDNAME gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+SVar:BuffedBy:Creature.powerLE2
+Oracle:Whenever another creature with power 2 or less enters the battlefield under your control, Marketwatch Phantom gains flying until end of turn.

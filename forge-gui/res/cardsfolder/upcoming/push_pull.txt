@@ -1,0 +1,16 @@
+Name:Push
+ManaCost:1 WB
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+DeckHas:Ability$Graveyard|Sacrifice
+AlternateMode:Split
+Oracle:Destroy target tapped creature.
+
+ALTERNATE
+
+Name:Pull
+ManaCost:4 BR BR
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | ValidTgts$ Creature | TgtPrompt$ Select up to two target creature cards from a single graveyard | GainControl$ True | SubAbility$ DBPump | SpellDescription$ Put up to two target creature cards from a single graveyard onto the battlefield under your control. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | AtEOT$ Sacrifice
+Oracle:Put up to two target creature cards from a single graveyard onto the battlefield under your control. They gain haste until end of turn. Sacrifice them at the beginning of the next end step.

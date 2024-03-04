@@ -1,0 +1,7 @@
+Name:Seasoned Consultant
+ManaCost:1 W
+Types:Creature Human Detective
+PT:1/3
+T:Mode$ AttackersDeclared | Execute$ TrigPump | ValidAttackers$ Creature | ValidAttackersAmount$ GE3 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+Oracle:Whenever you attack with three or more creatures, Seasoned Consultant gets +2/+0 until end of turn.

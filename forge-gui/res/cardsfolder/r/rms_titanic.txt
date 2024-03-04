@@ -1,0 +1,13 @@
+Name:RMS Titanic
+ManaCost:3 R
+Types:Legendary Artifact Vehicle
+PT:7/1
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerDescription$ When CARDNAME deals combat damage to a player, sacrifice it and create that many Treasure tokens.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:TriggerCount$DamageAmount
+K:Crew:3
+DeckHas:Ability$Sacrifice|Token & Type$Treasure
+Oracle:Flying, trample\nWhen RMS Titanic deals combat damage to a player, sacrifice it and create that many Treasure tokens.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

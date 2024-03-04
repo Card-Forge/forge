@@ -1,0 +1,14 @@
+Name:Beluna's Gatekeeper
+ManaCost:5 U
+Types:Creature Giant Soldier
+PT:6/5
+AlternateMode:Adventure
+Oracle:
+
+ALTERNATE
+
+Name:Entry Denied
+ManaCost:1 U
+Types:Sorcery Adventure
+A:SP$ ChangeZone | ValidTgts$ Creature.cmcLE3+YouDontCtrl | TgtPrompt$ Select target creature you don't control with mana value 3 or less | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control with mana value 3 or less to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Return target creature you don't control with mana value 3 or less to its owner's hand. (Then exile this card. You may cast the creature later from exile.)

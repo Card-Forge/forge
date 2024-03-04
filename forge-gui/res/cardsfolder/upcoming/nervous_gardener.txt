@@ -1,0 +1,8 @@
+Name:Nervous Gardener
+ManaCost:1 G
+Types:Creature Dryad
+PT:2/2
+K:Disguise:G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.hasABasicLandType | ChangeNum$ 1 | Reveal$ True
+Oracle:Disguise {G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Nervous Gardener is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle.

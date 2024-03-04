@@ -1,0 +1,11 @@
+Name:Gylwain, Casting Director
+ManaCost:1 G W
+Types:Legendary Creature Human Bard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.nonToken+Other+YouCtrl | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME or another nontoken creature enters the battlefield under your control, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBRoyal,DBSorcerer,DBMonster
+SVar:DBRoyal:DB$ Token | TokenAmount$ 1 | TokenScript$ role_royal | TokenOwner$ You | AttachedTo$ TriggeredCard | SpellDescription$ Create a Royal Role token attached to that creature.
+SVar:DBSorcerer:DB$ Token | TokenAmount$ 1 | TokenScript$ role_sorcerer | TokenOwner$ You | AttachedTo$ TriggeredCard | SpellDescription$ Create a Sorcerer Role token attached to that creature.
+SVar:DBMonster:DB$ Token | TokenAmount$ 1 | TokenScript$ role_monster | TokenOwner$ You | AttachedTo$ TriggeredCard | SpellDescription$ Create a Monster Role token attached to that creature.
+DeckHas:Type$Aura|Role & Ability$Token
+Oracle:Whenever Gylwain, Casting Director or another nontoken creature enters the battlefield under your control, choose one —\n• Create a Royal Role token attached to that creature.\n• Create a Sorcerer Role token attached to that creature.\n• Create a Monster Role token attached to that creature.

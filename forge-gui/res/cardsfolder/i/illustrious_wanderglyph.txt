@@ -1,0 +1,12 @@
+Name:Illustrious Wanderglyph
+ManaCost:4 W
+Types:Artifact Creature Golem
+PT:2/2
+K:Ascend
+S:Mode$ Continuous | Affected$ Artifact.Creature+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Condition$ Blessing | Description$ Other artifact creatures you control get +2/+2 as long as you have the city's blessing.
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome | TokenOwner$ You
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact & Type$Creature
+DeckHas:Ability$Token & Type$Gnome
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nOther artifact creatures you control get +2/+2 as long as you have the city's blessing.\nAt the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.

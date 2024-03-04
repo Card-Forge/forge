@@ -1,0 +1,10 @@
+Name:Wilfred Mott
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Look to the Stars — At the beginning of your upkeep, put a time counter on CARDNAME. Then look at the top X cards of your library, where X is the number of time counters on CARDNAME. You may put a nonland permanent card with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent.nonLand+cmcLE3 | DestinationZone$ Battlefield | RestRandomOrder$ True
+SVar:X:Count$CardCounters.Time
+DeckHas:Ability$Counters
+Oracle:Look to the Stars — At the beginning of your upkeep, put a time counter on Wilfred Mott. Then look at the top X cards of your library, where X is the number of time counters on Wilfred Mott. You may put a nonland permanent card with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

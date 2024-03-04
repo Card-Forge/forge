@@ -1,0 +1,9 @@
+Name:Presumed Dead
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield under its owner's control and suspect it." (A suspected creature has menace and can't block.)
+SVar:DBAnimate:DB$ Animate | Triggers$ AbnormalEnduranceChangeZone | Defined$ ParentTarget
+SVar:AbnormalEnduranceChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ AbnormalEnduranceTrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield under its owner's control and suspect it.
+SVar:AbnormalEnduranceTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBSuspect
+SVar:DBSuspect:DB$ AlterAttribute | Attributes$ Suspected | Defined$ TriggeredNewCardLKICopy
+Oracle:Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield under its owner's control and suspect it." (A suspected creature has menace and can't block.)

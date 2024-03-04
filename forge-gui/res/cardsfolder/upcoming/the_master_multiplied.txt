@@ -1,0 +1,9 @@
+Name:The Master, Multiplied
+ManaCost:4 B R
+Types:Legendary Creature Time Lord Rogue
+PT:4/3
+K:Myriad
+S:Mode$ IgnoreLegendRule | ValidCard$ Creature.YouCtrl+token | Description$ The "legend rule" doesn't apply to creature tokens you control.
+S:Mode$ CantSacrifice | ValidCard$ Creature.YouCtrl+token | ValidCause$ Triggered.YouCtrl | ForCost$ False | Description$ Triggered abilities you control can't cause you to sacrifice or exile creature tokens you control.
+S:Mode$ CantExile | ValidCard$ Creature.YouCtrl+token | ValidCause$ Triggered.YouCtrl | ForCost$ False | Secondary$ True | Description$ Triggered abilities you control can't cause you to sacrifice or exile creature tokens you control.
+Oracle:Myriad\nThe "legend rule" doesn't apply to creature tokens you control.\nTriggered abilities you control can't cause you to sacrifice or exile creature tokens you control.

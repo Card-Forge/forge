@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import forge.game.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -131,7 +132,13 @@ public abstract class PlayerController {
 
     public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer, Map<String, Object> params);
 
-    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params);
+    public final boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        return confirmAction(sa, mode, message, Lists.newArrayList(), null, params);
+    }
+    public final boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Card cardToShow, Map<String, Object> params) {
+        return confirmAction(sa, mode, message, Lists.newArrayList(), cardToShow, params);
+    }
+    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, List<String> options, Card cardToShow, Map<String, Object> params);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question);
     public abstract boolean confirmStaticApplication(Card hostCard, PlayerActionConfirmMode mode, String message, String logic);
@@ -156,8 +163,14 @@ public abstract class PlayerController {
     public final void reveal(CardCollectionView cards, ZoneType zone, Player owner) {
         reveal(cards, zone, owner, null);
     }
-    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix);
-    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix);
+    public final void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(CardCollectionView cards, ZoneType zone, Player owner, String messagePrefix, boolean addMsgSuffix);
+    public final void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix) {
+        reveal(cards, zone, owner, null, true);
+    }
+    public abstract void reveal(List<CardView> cards, ZoneType zone, PlayerView owner, String messagePrefix, boolean addMsgSuffix);
 
     /** Shows message to player to reveal chosen cardName, creatureType, number etc. AI must analyze API to understand what that is */
     public abstract void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value);

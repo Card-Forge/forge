@@ -1,0 +1,8 @@
+Name:Felonious Rage
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | KW$ Haste | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature you control gets +2/+0 and gains haste until end of turn.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigToken | SpellDescription$ When that creature dies this turn, create a 2/2 white and blue Detective creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
+DeckHas:Ability$Token & Type$Detective & Color$Blue|White
+Oracle:Target creature you control gets +2/+0 and gains haste until end of turn. When that creature dies this turn, create a 2/2 white and blue Detective creature token.

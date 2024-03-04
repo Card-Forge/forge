@@ -110,6 +110,10 @@ public class CloneEffect extends SpellAbilityEffect {
             return;
         }
 
+        if ("UntilTargetedUntaps".equals(sa.getParam("Duration")) && !cardToCopy.isTapped()) {
+            return;
+        }
+
         // find target of cloning i.e. card becoming a clone
         if (sa.hasParam("CloneTarget")) {
             cloneTargets = AbilityUtils.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
@@ -127,20 +131,16 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         for (Card tgtCard : cloneTargets) {
-            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
-            if (sa.hasParam("CloneZone")) {
-                if (!tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
-                    continue;
-                }
+            if (sa.hasParam("CloneZone") &&
+                    !tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
+                continue;
             }
 
             if (tgtCard.isPhasedOut()) {
                 continue;
             }
 
-            if ("UntilTargetedUntaps".equals(sa.getParam("Duration")) && !cardToCopy.isTapped()) {
-                continue;
-            }
+            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
 
             final Long ts = game.getNextTimestamp();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
@@ -152,6 +152,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             if (!pumpKeywords.isEmpty()) {
                 tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, 0);
+                TokenEffectBase.addPumpUntil(sa, tgtCard, ts);
             }
 
             tgtCard.updateStateForView();
@@ -201,5 +202,4 @@ public class CloneEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCardStatsChanged(tgtCard));
         }
     }
-
 }

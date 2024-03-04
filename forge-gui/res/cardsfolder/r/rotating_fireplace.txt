@@ -1,0 +1,10 @@
+Name:Rotating Fireplace
+ManaCost:3
+Types:Artifact
+K:ETBReplacement:Other:ETBTapped
+SVar:ETBTapped:DB$ Tap | Defined$ Self | SubAbility$ DBAddCounter | ETB$ True | SpellDescription$ CARDNAME enters the battlefield tapped with a time counter on it.
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ TIME | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add an amount of {C} equal to the number of time counters on CARDNAME.
+A:AB$ TimeTravel | Cost$ 4 T | SorcerySpeed$ True | SpellDescription$ Time travel. Activate only as a sorcery. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)
+SVar:X:Count$CardCounters.Time
+Oracle:Rotating Fireplace enters the battlefield tapped with a time counter on it.\n{T}: Add an amount of {C} equal to the number of time counters on Rotating Fireplace.\n{4}, {T}: Time travel. Activate only as a sorcery. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)

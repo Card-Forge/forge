@@ -17,6 +17,7 @@ import forge.game.player.PlayerController;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -53,7 +54,7 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Target", c);
                 params.put("CounterType", counterType);
-                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter",  counterType.getName()) + " ";
+                prompt = Localizer.getInstance().getMessage("lblWhatToDoWithTargetCounter", counterType.getName(), CardTranslation.getTranslatedName(c.getName())) + " ";
                 boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                 if (putCounter) {

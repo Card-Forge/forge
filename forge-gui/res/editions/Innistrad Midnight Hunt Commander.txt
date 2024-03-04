@@ -195,7 +195,7 @@ ScryfallCode=MIC
 187 U Unclaimed Territory @Dimitar Marinski
 
 [tokens]
-b_0_0_army
+b_0_0_zombie_army
 b_2_2_zombie
 b_2_2_zombie_decayed
 c_0_1_eldrazi_spawn_sac

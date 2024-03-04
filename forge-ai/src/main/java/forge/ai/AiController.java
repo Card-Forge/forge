@@ -23,7 +23,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.ChangeZoneAi;
-import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -69,7 +68,10 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -190,13 +192,12 @@ public class AiController {
                 if ("DestroyCreature".equals(curse) && sa.isSpell() && host.isCreature()
                         && !host.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                     return true;
-                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment()
-                        && CardFactoryUtil.isCounterable(host)) {
+                } else if ("CounterEnchantment".equals(curse) && sa.isSpell() && host.isEnchantment() && sa.isCounterableBy(null)) {
                     return true;
-                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)
+                } else if ("ChaliceOfTheVoid".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)
                         && host.getCMC() == c.getCounters(CounterEnumType.CHARGE)) {
                     return true;
-                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && CardFactoryUtil.isCounterable(host)) {
+                } else if ("BazaarOfWonders".equals(curse) && sa.isSpell() && sa.isCounterableBy(null)) {
                     String hostName = host.getName();
                     for (Card card : ccvGameBattlefield) {
                         if (!card.isToken() && card.sharesNameWith(host)) {
@@ -362,28 +363,26 @@ public class AiController {
             }
         }
 
-        for (final Trigger tr : card.getTriggers()) {
-            if (!card.hasStartOfKeyword("Saga") && !card.hasStartOfKeyword("Read ahead")) {
+        if (card.isSaga()) {
+            for (final Trigger tr : card.getTriggers()) {
+                if (tr.getMode() != TriggerType.CounterAdded || !tr.isChapter()) {
+                    continue;
+                }
+
+                SpellAbility exSA = tr.ensureAbility().copy(activator);
+
+                if (api != null && exSA.getApi() == api) {
+                    rightapi = true;
+                }
+
+                if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
+                    // AI would not run this chapter if given the chance
+                    // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
+                    return false;
+                }
+
                 break;
             }
-
-            if (tr.getMode() != TriggerType.CounterAdded) {
-                continue;
-            }
-
-            SpellAbility exSA = tr.ensureAbility().copy(activator);
-
-            if (api != null && exSA.getApi() == api) {
-                rightapi = true;
-            }
-
-            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
-                // AI would not run this chapter if given the chance
-                // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
-                return false;
-            }
-
-            break;
         }
 
         if (api != null && !rightapi) {
@@ -762,7 +761,7 @@ public class AiController {
 
         return decision;
     }
-    
+
     // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
@@ -813,7 +812,7 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
-        if (!sa.isSpell() || CardFactoryUtil.isCounterable(host)) {
+        if (!sa.isSpell() || sa.isCounterableBy(null)) {
             for (TargetChoices tc : sa.getAllTargetChoices()) {
                 for (Card tgt : tc.getTargetCards()) {
                     // TODO some older cards don't use the keyword, so check for trigger instead
@@ -1089,7 +1088,6 @@ public class AiController {
                     return discards;
                 }
             }
-
         }
 
         // look for good discards
@@ -1097,9 +1095,7 @@ public class AiController {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isOpponentOf(player)) {
                 for (Card c : validCards) {
-                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
-                            + " put it onto the battlefield instead of putting it into your graveyard.")
-                            || !c.getSVar("DiscardMeByOpp").isEmpty()) {
+                    if (c.hasSVar("DiscardMeByOpp")) {
                         prefCard = c;
                         break;
                     }
@@ -1305,7 +1301,7 @@ public class AiController {
 
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        AiAttackController aiAtk = new AiAttackController(attacker); 
+        AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
         // Check if we can reinforce with Banding creatures
@@ -1538,7 +1534,13 @@ public class AiController {
             top = game.getStack().peekAbility();
         }
         final boolean topOwnedByAI = top != null && top.getActivatingPlayer().equals(player);
-        final boolean mustRespond = top != null && top.hasParam("AIRespondsToOwnAbility");
+
+        // Must respond: cases where the AI should respond to its own triggers or other abilities (need to add negative stuff to be countered here)
+        boolean mustRespond = false;
+        if (top != null) {
+            mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
+            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
+        }
 
         if (topOwnedByAI) {
             // AI's own spell: should probably let my stuff resolve first, but may want to copy the SA or respond to it
@@ -1613,12 +1615,20 @@ public class AiController {
                     continue;
                 }
             }
-            //living end AI decks
+            // living end AI decks
+            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
             AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
             if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player)) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                        aiPlayDecision = AiPlayDecision.WillPlay;
+                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                && !player.cantLoseForZeroOrLessLife()
+                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                            aiPlayDecision = AiPlayDecision.CantAfford;
+                        } else {
+                            aiPlayDecision = AiPlayDecision.WillPlay;
+                        }
+                    }
                 } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
                     if (isLifeInDanger) { //needs more tune up for certain conditions
                         aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
@@ -1863,6 +1873,8 @@ public class AiController {
                 } else {
                     return options.get(0);
                 }
+            case ChooseNumber:
+                return Aggregates.random(options);
             default:
                 return options.get(0);
         }
@@ -2091,9 +2103,7 @@ public class AiController {
             return simPicker.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
         }
 
-        if (sa.getApi() == ApiType.Explore) {
-            return ExploreAi.shouldPutInGraveyard(fetchList, decider);
-        } else if (sa.getApi() == ApiType.Learn) {
+        if (sa.getApi() == ApiType.Learn) {
             return LearnAi.chooseCardToLearn(fetchList, decider, sa);
         } else {
             return ChangeZoneAi.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player2, decider);
@@ -2117,7 +2127,7 @@ public class AiController {
         List<SpellAbility> putCounter = filterListByApi(activePlayerSAs, ApiType.PutCounter);
         List<SpellAbility> putCounterAll = filterListByApi(activePlayerSAs, ApiType.PutCounterAll);
 
-        List<SpellAbility> evolve = filterList(putCounter, SpellAbilityPredicates.hasParam("Evolve"));
+        List<SpellAbility> evolve = filterList(putCounter, CardTraitPredicates.isKeyword(Keyword.EVOLVE));
 
         List<SpellAbility> token = filterListByApi(activePlayerSAs, ApiType.Token);
         List<SpellAbility> pump = filterListByApi(activePlayerSAs, ApiType.Pump);

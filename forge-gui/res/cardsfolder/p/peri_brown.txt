@@ -1,0 +1,9 @@
+Name:Peri Brown
+ManaCost:3 W
+Types:Legendary Creature Human
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Historic+YouCtrl | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Convoke | Description$ The first historic spell you cast each turn has convoke. (Your creatures can help cast it. Each creature you tap while casting it pays for {1} or one mana of that creature's color.)
+SVar:X:Count$ThisTurnCast_Card.Historic+YouCtrl
+K:Doctor's companion
+DeckHints:Type$Legendary|Saga|Artifact
+Oracle:The first historic spell you cast each turn has convoke. (Your creatures can help cast it. Each creature you tap while casting it pays for {1} or one mana of that creature's color.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)

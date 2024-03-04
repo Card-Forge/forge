@@ -1,0 +1,10 @@
+Name:Cresting Mosasaurus
+ManaCost:6 U U
+Types:Creature Dinosaur
+PT:4/8
+K:Emerge:6 U
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigBounceAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return each non-Dinosaur creature to its owner's hand.
+SVar:TrigBounceAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonDinosaur | Origin$ Battlefield | Destination$ Hand
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Dinosaur
+Oracle:Emerge {6}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen Cresting Mosasaurus enters the battlefield, if you cast it, return each non-Dinosaur creature to its owner's hand.

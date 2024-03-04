@@ -1,0 +1,9 @@
+Name:Torch the Witness
+ManaCost:X R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | ExcessSVar$ Excess | ExcessSVarTargeted$ True | SubAbility$ DBInvestigate | SpellDescription$ CARDNAME deals twice X damage to target creature.
+SVar:DBInvestigate:DB$ Investigate | Num$ 1 | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | SpellDescription$ If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
+DeckHas:Type$Clue|Artifact & Ability$Token
+Oracle:Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

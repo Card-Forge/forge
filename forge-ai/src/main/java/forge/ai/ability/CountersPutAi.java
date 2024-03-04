@@ -308,8 +308,10 @@ public class CountersPutAi extends CountersAi {
         } else if (logic.equals("ChargeToBestCMC")) {
             return doChargeToCMCLogic(ai, sa);
         } else if (logic.equals("ChargeToBestOppControlledCMC")) {
-        return doChargeToOppCtrlCMCLogic(ai, sa);
-    }
+            return doChargeToOppCtrlCMCLogic(ai, sa);
+        } else if (logic.equals("TheOneRing")) {
+            return SpecialCardAi.TheOneRing.consider(ai, sa);
+        }
 
         if (!sa.metConditions() && sa.getSubAbility() == null) {
             return false;
@@ -440,6 +442,9 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
+        final boolean hasSacCost = abCost.hasSpecificCostType(CostSacrifice.class);
+        final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
+
         if (sa.usesTargeting()) {
             if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
                 // only evaluates case where all tokens are placed on a single target
@@ -453,14 +458,14 @@ public class CountersPutAi extends CountersAi {
                         sa.addDividedAllocation(c, amount);
                         return true;
                     } else {
-                        return false;
+                        if (!hasSacCost) { // for Sacrifice costs, evaluate further to see if it's worth using the ability before the card dies
+                            return false;
+                        }
                     }
                 }
             }
 
             sa.resetTargets();
-
-            final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 
             if (sa.isCurse()) {
                 list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
@@ -473,6 +478,8 @@ public class CountersPutAi extends CountersAi {
                 public boolean apply(final Card c) {
                     // don't put the counter on the dead creature
                     if (sacSelf && c.equals(source)) {
+                        return false;
+                    } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
                         return false;
                     }
                     if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
@@ -628,7 +635,7 @@ public class CountersPutAi extends CountersAi {
             }
             // Instant +1/+1
             if (type.equals("P1P1") && !isSorcerySpeed(sa, ai)) {
-                if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
+                if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
             }

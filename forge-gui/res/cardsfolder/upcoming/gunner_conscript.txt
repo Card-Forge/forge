@@ -1,0 +1,15 @@
+Name:Gunner Conscript
+ManaCost:1 G
+Types:Creature Human Mercenary
+PT:2/2
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Aura and Equipment attached to it.
+T:Mode$ ChangesZone | ValidCard$ Card.Self+enchanted | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, if it was enchanted, create a Junk token.
+T:Mode$ ChangesZone | ValidCard$ Card.Self+equipped | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, if it was equipped, create a Junk token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay
+SVar:X:Count$Valid Equipment.Attached,Aura.Attached
+SVar:EnchantMe:Multiple
+SVar:EquipMe:Multiple
+DeckNeeds:Type$Aura|Equipment
+DeckHas:Ability$Token & Type$Artifact|Junk
+Oracle:Trample\nGunner Conscript gets +1/+1 for each Aura and Equipment attached to it.\nWhen Gunner Conscript dies, if it was enchanted, create a Junk token.\nWhen Gunner Conscript dies, if it was equipped, create a Junk token.

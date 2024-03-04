@@ -1,0 +1,19 @@
+Name:Virtue of Courage
+ManaCost:3 R R
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | OptionalDecider$ You | ValidTarget$ Opponent | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a source you control deals noncombat damage to an opponent, you may exile that many cards from the top of your library. You may play those cards this turn.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ RememberedCard | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play those cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+AlternateMode:Adventure
+Oracle:Whenever a source you control deals noncombat damage to an opponent, you may exile that many cards from the top of your library. You may play those cards this turn.
+
+ALTERNATE
+
+Name:Embereth Blaze
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target. (Then exile this card. You may cast the enchantment later from exile.)
+Oracle:Embereth Blaze deals 2 damage to any target. (Then exile this card. You may cast the enchantment later from exile.)

@@ -1,0 +1,8 @@
+Name:Stormkeld Prowler
+ManaCost:1 U
+Types:Creature Human Rogue
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters
+Oracle:Whenever you cast a spell with mana value 5 or greater, put two +1/+1 counters on Stormkeld Prowler.

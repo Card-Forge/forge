@@ -1,0 +1,8 @@
+Name:Archon of the Wild Rose
+ManaCost:2 W W
+Types:Creature Archon
+PT:4/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other+EnchantedBy Aura.YouCtrl | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Flying | Description$ Other creatures you control that are enchanted by Auras you control have base power and toughness 4/4 and have flying.
+DeckNeeds:Type$Aura
+Oracle:Flying\nOther creatures you control that are enchanted by Auras you control have base power and toughness 4/4 and have flying.

@@ -1,0 +1,10 @@
+Name:Glorifier of Suffering
+ManaCost:2 W
+Types:Creature Vampire Soldier
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature or artifact. When you do, put a +1/+1 counter on each of up to two target creatures.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Execute$ TrigPutCounter | TriggerDescription$ When you do, put a +1/+1 counter on each of up to two target creatures.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to 2 target creatures
+DeckHas:Ability$Counters|Sacrifice
+DeckHints:Type$Artifact
+Oracle:When Glorifier of Suffering enters the battlefield, you may sacrifice another creature or artifact. When you do, put a +1/+1 counter on each of up to two target creatures.

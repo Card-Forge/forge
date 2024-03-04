@@ -1,0 +1,8 @@
+[format]
+Name:Historic (KTK)
+Type:Archived
+Subtype:Arena
+Effective:2023-12-12
+Sets:KTK, XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI
+Banned:Agent of Treachery; Blood Moon; Bloodstained Mire; Brainstorm; Channel; Counterspell; Dark Ritual; Demonic Tutor; Field of the Dead; Flooded Strand; Intruder Alarm; Land Tax; Lightning Bolt; Memory Lapse; Mishra's Bauble; Natural Order; Necropotence; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Polluted Delta; Ragavan, Nimble Pilferer; Sneak Attack; Spreading Seas; Swords to Plowshares; Thassa's Oracle; Tibalt's Trickery; Time Warp; Uro, Titan of Nature's Wrath; Veil of Summer; Wilderness Reclamation; Windswept Heath; Wooded Foothills
+Additional:Admiral Brass, Unsinkable; Clavileño, First of the Blessed; Goro-Goro and Satoru; Katilda and Lier; Pantlaza, Sun-Favored; Slimefoot and Squee; Timeless Dragon; Xolatoyac, the Smiling Flood

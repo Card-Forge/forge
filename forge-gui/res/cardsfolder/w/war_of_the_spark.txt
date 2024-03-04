@@ -1,7 +1,7 @@
 Name:War of the Spark
 ManaCost:3 B
 Types:Enchantment Saga
-K:Saga:3:TrigChangeZone,TrigSac,TrigExile
+K:Chapter:3:TrigChangeZone,TrigSac,TrigExile
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Creature.Zombie+setWAR,Planeswalker.setWAR | DefinedPlayer$ Player | ChangeNum$ 1 | SpellDescription$ Each player may put a planeswalker or Zombie card from War of the Spark from their hand or graveyard onto the battlefield.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature,Planeswalker | RememberSacrificed$ True | Optional$ True | SubAbility$ DBEdict | SpellDescription$ Sacrifice any number of creatures and/or planeswalkers. Each opponent sacrifices that many creatures and/or planeswalkers.
 SVar:DBEdict:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature,Planeswalker | SacMessage$ Creature,Planeswalker | Amount$ EdictX

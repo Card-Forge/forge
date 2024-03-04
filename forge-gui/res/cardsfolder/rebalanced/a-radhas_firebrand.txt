@@ -1,0 +1,12 @@
+Name:A-Radha's Firebrand
+ManaCost:1 R
+Types:Creature Human Warrior
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature defending player controls with power less than or equal to CARDNAME's power can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.DefenderCtrl+powerLEX | TgtPrompt$ Select target creature an opponent controls with power less than or equal to CARDNAME's power | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True
+A:AB$ Pump | Cost$ 5 R | ReduceCost$ Y | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. This ability costs {1} less to activate for each basic land type among lands you control. Activate only once each turn.
+SVar:X:Count$CardPower
+SVar:Y:Count$Domain
+SVar:HasAttackEffect:TRUE
+AI:RemoveDeck:Random
+Oracle:Whenever Radha's Firebrand attacks, target creature defending player controls with power less than or equal to Radha's Firebrand's power can't block this turn.\nDomain — {5}{R}: Radha's Firebrand gets +2/+2 until end of turn. This ability costs {1} less to activate for each basic land type among lands you control. Activate only once each turn.

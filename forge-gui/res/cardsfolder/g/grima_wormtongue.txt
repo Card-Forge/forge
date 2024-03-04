@@ -1,4 +1,4 @@
-Name:Grima Wormtongue
+Name:Gríma Wormtongue
 ManaCost:2 B
 Types:Legendary Creature Human Advisor
 PT:1/4

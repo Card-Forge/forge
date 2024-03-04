@@ -29,6 +29,7 @@ import com.google.common.collect.Maps;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
 import forge.game.mana.Mana;
@@ -95,13 +96,13 @@ public class CostPayment extends ManaConversionMatrix {
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(Cost cost, final SpellAbility ability, final boolean effect) {
         if (cost == null) {
             return true;
         }
 
         cost = CostAdjustment.adjust(cost, ability);
-        return cost.canPay(ability, false);
+        return cost.canPay(ability, effect);
     }
 
     /**
@@ -331,7 +332,10 @@ public class CostPayment extends ManaConversionMatrix {
 
     public static boolean handleOfferings(final SpellAbility sa, boolean test, boolean costIsPaid) {
         final Game game = sa.getHostCard().getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        AbilityKey.addCardZoneTableParams(params, table);
+
         if (sa.isOffering()) {
             if (sa.getSacrificedAsOffering() == null) {
                 return false;
@@ -341,7 +345,7 @@ public class CostPayment extends ManaConversionMatrix {
             if (test) {
                 sa.resetSacrificedAsOffering();
             } else if (costIsPaid) {
-                game.getAction().sacrifice(offering, sa, false, table, null);
+                game.getAction().sacrifice(offering, sa, false, params);
             }
         }
         if (sa.isEmerge()) {
@@ -353,7 +357,7 @@ public class CostPayment extends ManaConversionMatrix {
             if (test) {
                 sa.resetSacrificedAsEmerge();
             } else if (costIsPaid) {
-                game.getAction().sacrifice(emerge, sa, false, table, null);
+                game.getAction().sacrifice(emerge, sa, false, params);
                 sa.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             }
         }

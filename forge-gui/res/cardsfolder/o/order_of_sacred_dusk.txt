@@ -1,0 +1,13 @@
+Name:Order of Sacred Dusk
+ManaCost:6 W B
+Types:Creature — Vampire Knight
+PT:5/5
+K:Convoke
+K:Flying
+K:Lifelink
+K:Haste
+K:Exalted
+S:Mode$ Continuous | Affected$ Vampire.Other+YouCtrl | AddKeyword$ Exalted | Description$ Other Vampires you control have exalted.
+DeckHints:Type$Vampire
+DeckHas:Ability$LifeGain
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nFlying, lifelink, haste\nExalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nOther Vampires you control have exalted.

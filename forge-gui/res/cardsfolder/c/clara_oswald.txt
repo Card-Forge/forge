@@ -1,0 +1,9 @@
+Name:Clara Oswald
+ManaCost:6
+Types:Legendary Creature Human Advisor
+PT:2/6
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | Affected$ Card.Self | SetColor$ ChosenColor | Description$ Impossible Girl — If CARDNAME is your commander, choose a color before the game begins. CARDNAME is the chosen color.
+S:Mode$ Panharmonicon | ValidCard$ Doctor.YouCtrl | Description$ If a triggered ability of a Doctor you control triggers, that ability triggers an additional time.
+K:Doctor's companion
+DeckNeeds:Type$Time Lord & Type$Doctor
+Oracle:Impossible Girl — If Clara Oswald is your commander, choose a color before the game begins. Clara Oswald is the chosen color.\nIf a triggered ability of a Doctor you control triggers, that ability triggers an additional time.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

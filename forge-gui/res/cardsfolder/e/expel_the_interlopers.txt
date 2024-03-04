@@ -1,0 +1,7 @@
+Name:Expel the Interlopers
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChooseNumber | Defined$ You | Min$ 0 | Max$ 10 | SubAbility$ DBDestroyAll | AILogic$ SweepCreatures | SpellDescription$ Choose a number between 0 and 10.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.powerGEX | SpellDescription$ Destroy all creatures with power greater than or equal to the chosen number.
+SVar:X:Count$ChosenNumber
+Oracle:Choose a number between 0 and 10. Destroy all creatures with power greater than or equal to the chosen number.

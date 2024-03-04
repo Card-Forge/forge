@@ -1,0 +1,15 @@
+Name:Specter of Mortality
+ManaCost:3 B B
+Types:Creature Specter
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile one or more creature cards from your graveyard. When you do, each other creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | ChangeType$ Creature.YouOwn | Hidden$ True | Destination$ Exile | Optional$ You | ChangeNum$ X | SelectPrompt$ Select one or more creature cards from your graveyard | SubAbility$ DBImmediateTrig | RememberChanged$ True | AITgtOwnCards$ True | AIMinTgts$ 3
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | ConditionCompare$ GE1 | SubAbility$ DBCleanup | Execute$ TrigPumpAll | TriggerDescription$ When you do, each other creature gets -X/-X until end of turn, where X is the number of cards exiled this way.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Other | NumAtt$ -Y | NumDef$ -Y
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:TriggerRemembered$Amount
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill
+Oracle:Flying\nWhen Specter of Mortality enters the battlefield, you may exile one or more creature cards from your graveyard. When you do, each other creature gets -X/-X until end of turn, where X is the number of cards exiled this way.

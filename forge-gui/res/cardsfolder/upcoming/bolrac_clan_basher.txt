@@ -1,0 +1,8 @@
+Name:Bolrac-Clan Basher
+ManaCost:4 R R
+Types:Creature Cyclops Warrior
+PT:3/2
+K:Double Strike
+K:Trample
+K:Disguise:3 R R
+Oracle:Double strike, trample\nDisguise {3}{R}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

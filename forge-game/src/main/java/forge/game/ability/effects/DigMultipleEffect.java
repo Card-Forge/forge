@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -120,7 +121,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
                     if (!sa.hasParam("ChangeLater")) {
                         if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
-                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa);
+                            c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                         } else {
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
@@ -164,7 +165,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     }
                     for (final Card c : afterOrder) {
                         final ZoneType origin = c.getZone().getZoneType();
-                        Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa);
+                        Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, AbilityKey.newMap());
                         if (m != null && !origin.equals(m.getZone().getZoneType())) {
                             table.put(origin, m.getZone().getZoneType(), m);
                         }

@@ -1,0 +1,8 @@
+Name:Final-Word Phantom
+ManaCost:2 U
+Types:Creature Spirit Detective
+PT:1/4
+K:Flash
+K:Flying
+S:Mode$ CastWithFlash | Phases$ End of Turn | PlayerTurn$ Opponent | ValidCard$ Card | ValidSA$ Spell | Caster$ You | Description$ During each opponent's end step, you may cast spells as though they had flash.
+Oracle:Flash\nFlying\nDuring each opponent's end step, you may cast spells as though they had flash.

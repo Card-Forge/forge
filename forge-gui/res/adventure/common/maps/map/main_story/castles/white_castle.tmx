@@ -119,6 +119,7 @@
   </object>
   <object id="67" template="../../../obj/enemy.tx" x="674.667" y="597.666">
    <properties>
+    <property name="deckOverride" value=""/>
     <property name="defeatDialog">[
    {
    &quot;action&quot;: [
@@ -142,7 +143,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Auramancer"/>
+    <property name="enemy" value="Holy Paladin"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -171,7 +172,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Archaeologist"/>
+    <property name="enemy" value="Holy Apparition"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -185,7 +186,8 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Human Captain"/>
+    <property name="enemy" value="Royal King"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="73" template="../../../obj/enemy.tx" x="187.167" y="500.333">

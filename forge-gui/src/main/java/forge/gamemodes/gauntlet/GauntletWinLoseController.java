@@ -1,5 +1,6 @@
 package forge.gamemodes.gauntlet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -29,6 +30,12 @@ public abstract class GauntletWinLoseController {
 
     public void showOutcome() {
         final GauntletData gd = FModel.getGauntletData();
+        if (gd.getEventNames() == null || gd.getEventRecords() == null) {
+            //fix corrupted entry to reset and allow the save to continue instead of crashing due to NPE
+            gd.setEventNames(new ArrayList<>());
+            gd.setEventRecords(new ArrayList<>());
+            gd.reset();
+        }
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
@@ -68,7 +75,7 @@ public abstract class GauntletWinLoseController {
                     message2 = localizer.getMessage("lblGauntletTournament");
 
                     view.getBtnContinue().setVisible(false);
-                    view.getBtnQuit().setText(localizer.getMessage("lblOk"));
+                    view.getBtnQuit().setText(localizer.getMessage("lblOK"));
 
                     // Remove save file if it's a quickie, or just reset it.
                     if (gd.getName().startsWith(GauntletIO.PREFIX_QUICK)) {

@@ -1,0 +1,146 @@
+//Rank|Name|Rarity|Set
+#1|Basilisk Collar|R|WWK
+#2|Admonition Angel|M|WWK
+#3|Comet Storm|M|WWK
+#4|Jace, the Mind Sculptor|M|WWK
+#5|Mordant Dragon|R|WWK
+#6|Archon of Redemption|R|WWK
+#7|Anowon, the Ruin Sage|R|WWK
+#8|Abyssal Persecutor|M|WWK
+#9|Talus Paladin|R|WWK
+#10|Chain Reaction|R|WWK
+#11|Kazuul, Tyrant of the Cliffs|R|WWK
+#12|Wolfbriar Elemental|R|WWK
+#13|Avenger of Zendikar|M|WWK
+#14|Cunning Sparkmage|U|WWK
+#15|Butcher of Malakir|R|WWK
+#16|Vapor Snare|U|WWK
+#17|Marshal's Anthem|R|WWK
+#18|Dragonmaster Outcast|M|WWK
+#19|Smother|U|WWK
+#20|Lodestone Golem|R|WWK
+#21|Strength of the Tajuru|R|WWK
+#22|Goliath Sphinx|R|WWK
+#23|Bestial Menace|U|WWK
+#24|Omnath, Locus of Mana|M|WWK
+#25|Urge to Feed|U|WWK
+#26|Novablast Wurm|M|WWK
+#27|Hammer of Ruin|U|WWK
+#28|Stone Idol Trap|R|WWK
+#29|Celestial Colonnade|R|WWK
+#30|Wrexial, the Risen Deep|M|WWK
+#31|Tideforce Elemental|U|WWK
+#32|Kalastria Highborn|R|WWK
+#33|Voyager Drake|U|WWK
+#34|Lightkeeper of Emeria|U|WWK
+#35|Leatherback Baloth|U|WWK
+#36|Tomb Hex|C|WWK
+#37|Terastodon|R|WWK
+#38|Agadeem Occultist|R|WWK
+#39|Searing Blaze|C|WWK
+#40|Hada Freeblade|U|WWK
+#41|Raging Ravine|R|WWK
+#42|Caustic Crawler|U|WWK
+#43|Joraga Warcaller|R|WWK
+#44|Stoneforge Mystic|R|WWK
+#45|Horizon Drake|U|WWK
+#46|Harabaz Druid|R|WWK
+#47|Creeping Tar Pit|R|WWK
+#48|Bloodhusk Ritualist|U|WWK
+#49|Lavaclaw Reaches|R|WWK
+#50|Jwari Shapeshifter|R|WWK
+#51|Stirring Wildwood|R|WWK
+#52|Kor Firewalker|U|WWK
+#53|Nemesis Trap|U|WWK
+#54|Iona's Judgment|C|WWK
+#55|Refraction Trap|U|WWK
+#56|Graypelt Hunter|C|WWK
+#57|Sejiri Merfolk|U|WWK
+#58|Jagwasp Swarm|C|WWK
+#59|Dread Statuary|U|WWK
+#60|Pilgrim's Eye|C|WWK
+#61|Deathforge Shaman|U|WWK
+#62|Apex Hawks|C|WWK
+#63|Fledgling Griffin|C|WWK
+#64|Join the Ranks|C|WWK
+#65|Ruin Ghost|U|WWK
+#66|Bojuka Brigand|C|WWK
+#67|Ruthless Cullblade|C|WWK
+#68|Slavering Nulls|U|WWK
+#69|Perimeter Captain|U|WWK
+#70|Vastwood Animist|U|WWK
+#71|Shoreline Salvager|U|WWK
+#72|Calcite Snapper|C|WWK
+#73|Tuktuk Scrapper|U|WWK
+#74|Halimar Excavator|C|WWK
+#75|Goblin Roughrider|C|WWK
+#76|Akoum Battlesinger|C|WWK
+#77|Corrupted Zendikon|C|WWK
+#78|Quicksand|C|WWK
+#79|Gnarlid Pack|C|WWK
+#80|Kitesail|C|WWK
+#81|Permafrost Trap|U|WWK
+#82|Summit Apes|U|WWK
+#83|Arbor Elf|C|WWK
+#84|Seer's Sundial|R|WWK
+#85|Marsh Threader|C|WWK
+#86|Death's Shadow|R|WWK
+#87|Everflowing Chalice|U|WWK
+#88|Loam Lion|U|WWK
+#89|Surrakar Banisher|C|WWK
+#90|Crusher Zendikon|C|WWK
+#91|Wind Zendikon|C|WWK
+#92|Mysteries of the Deep|C|WWK
+#93|Grappler Spider|C|WWK
+#94|Dead Reckoning|C|WWK
+#95|Quag Vampires|C|WWK
+#96|Skitter of Lizards|C|WWK
+#97|Groundswell|C|WWK
+#98|Hedron Rover|C|WWK
+#99|Snapping Creeper|C|WWK
+#100|Grotag Thrasher|C|WWK
+#101|Battle Hurda|C|WWK
+#102|Thada Adel, Acquisitor|R|WWK
+#103|Aether Tradewinds|C|WWK
+#104|Explore|C|WWK
+#105|Vastwood Zendikon|C|WWK
+#106|Halimar Depths|C|WWK
+#107|Pulse Tracker|C|WWK
+#108|Tectonic Edge|U|WWK
+#109|Treasure Hunt|C|WWK
+#110|Cosi's Ravager|C|WWK
+#111|Enclave Elite|C|WWK
+#112|Slingbow Trap|U|WWK
+#113|Khalni Garden|C|WWK
+#114|Smoldering Spires|C|WWK
+#115|Walking Atlas|C|WWK
+#116|Claws of Valakut|C|WWK
+#117|Sejiri Steppe|C|WWK
+#118|Kitesail Apprentice|C|WWK
+#119|Guardian Zendikon|C|WWK
+#120|Canopy Cover|U|WWK
+#121|Twitch|C|WWK
+#122|Veteran's Reflexes|C|WWK
+#123|Brink of Disaster|C|WWK
+#124|Spell Contortion|U|WWK
+#125|Ricochet Trap|U|WWK
+#126|Mire's Toll|C|WWK
+#127|Nature's Claim|C|WWK
+#128|Rest for the Weary|C|WWK
+#129|Feral Contest|C|WWK
+#130|Bojuka Bog|C|WWK
+#131|Dispel|C|WWK
+#132|Razor Boomerang|U|WWK
+#133|Bull Rush|C|WWK
+#134|Roiling Terrain|C|WWK
+#135|Scrib Nibblers|U|WWK
+#136|Eye of Ugin|M|WWK
+#137|Bazaar Trader|R|WWK
+#138|Quest for Renewal|U|WWK
+#139|Amulet of Vigor|R|WWK
+#140|Rumbling Aftershocks|U|WWK
+#141|Quest for the Nihil Stone|R|WWK
+#142|Quest for the Goblin Lord|U|WWK
+#143|Selective Memory|R|WWK
+#144|Terra Eternal|R|WWK
+#145|Quest for Ula's Temple|R|WWK

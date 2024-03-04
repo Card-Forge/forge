@@ -1,6 +1,7 @@
 Name:Shower of Sparks
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 1 damage to target creature
-SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ and 1 damage to target player or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 1 | DamageMap$ True | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 1 damage to target creature
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SubAbility$ DBDamageResolve | SpellDescription$ and 1 damage to target player or planeswalker.
+SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Shower of Sparks deals 1 damage to target creature and 1 damage to target player or planeswalker.

@@ -1,0 +1,16 @@
+Name:Fuss
+ManaCost:2 RW
+Types:Instant
+A:SP$ PutCounterAll | ValidCards$ Creature.attacking+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each attacking creature you control.
+DeckHas:Ability$Counters|Token|Graveyard & Type$Artifact|Thopter
+AlternateMode:Split
+Oracle:Put a +1/+1 counter on each attacking creature you control.
+
+ALTERNATE
+
+Name:Bother
+ManaCost:4 WU WU
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 3 | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying | SubAbility$ DBSurveil | SpellDescription$ Create three 1/1 colorless Thopter artifact creature tokens with flying. Surveil 2.
+SVar:DBSurveil:DB$ Surveil | Amount$ 2
+Oracle:Create three 1/1 colorless Thopter artifact creature tokens with flying. Surveil 2.

@@ -312,7 +312,7 @@ public class ReplacementHandler {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 //set original Params to update them later
                 tailend.setReplacingObject(AbilityKey.OriginalParams, runParams);
-                tailend.setReplacingObjectsFrom(runParams, AbilityKey.SimultaneousETB);
+                tailend.setReplacingObjectsFrom(runParams, AbilityKey.InternalTriggerTable, AbilityKey.SimultaneousETB);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
@@ -552,10 +552,7 @@ public class ReplacementHandler {
         // Log the replacement effect
         if (res != ReplacementResult.NotReplaced) {
             String message = re.getDescription();
-            if ( !StringUtils.isEmpty(message)) {
-                if (re.getHostCard() != null) {
-                    message = TextUtil.fastReplace(message, "CARDNAME", re.getHostCard().getName());
-                }
+            if (!StringUtils.isEmpty(message)) {
                 game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
             }
         }

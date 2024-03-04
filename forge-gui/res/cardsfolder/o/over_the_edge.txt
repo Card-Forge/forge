@@ -1,0 +1,8 @@
+Name:Over the Edge
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroy,DBExplore
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+SVar:DBExplore:DB$ Explore | Num$ 2 | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SpellDescription$ Target creature you control explores, then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard. Then repeat this process.)
+DeckHas:Ability$Counters
+Oracle:Choose one —\n• Destroy target artifact or enchantment.\n• Target creature you control explores, then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard. Then repeat this process.)

@@ -1,0 +1,21 @@
+Name:Twists and Turns
+ManaCost:G
+Types:Enchantment
+R:Event$ Explore | ActiveZones$ Battlefield | ValidExplorer$ Creature.YouCtrl | ReplaceWith$ DBScry | Description$ If a creature you control would explore, instead you scry 1, then that creature explores.
+SVar:DBScry:DB$ Scry | SubAbility$ DBExplore
+SVar:DBExplore:DB$ Explore | Defined$ ReplacedCard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control explores.
+SVar:TrigExplore:DB$ Explore | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | CheckSVar$ Count$Valid Land.YouCtrl | SVarCompare$ GE7 | Execute$ TrigTransform | TriggerDescription$ When a land enters the battlefield under your control, if you control seven or more lands, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:If a creature you control would explore, instead you scry 1, then that creature explores.\nWhen Twists and Turns enters the battlefield, target creature you control explores.\nWhen a land enters the battlefield under your control, if you control seven or more lands, transform Twists and Turns.
+
+ALTERNATE
+
+Name:Mycoid Maze
+ManaCost:no cost
+Types:Land Cave
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Dig | Cost$ 3 G T | ForceRevealToController$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:(Transforms from Twists and Turns.)\n{T}: Add {G}.\n{3}{G}, {T}: Look at the top four cards of your library. You may reveal a creature card from among them and put that card into your hand. Put the rest on the bottom of your library in a random order.

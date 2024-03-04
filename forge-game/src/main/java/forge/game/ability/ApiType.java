@@ -18,6 +18,7 @@ public enum ApiType {
     AddOrRemoveCounter (CountersPutOrRemoveEffect.class),
     AddPhase (AddPhaseEffect.class),
     AddTurn (AddTurnEffect.class),
+    AlterAttribute (AlterAttributeEffect.class),
     Amass (AmassEffect.class),
     Animate (AnimateEffect.class),
     AnimateAll (AnimateAllEffect.class),
@@ -52,6 +53,7 @@ public enum ApiType {
     Clash (ClashEffect.class),
     ClassLevelUp (ClassLevelUpEffect.class),
     Cleanup (CleanUpEffect.class),
+    Cloak (CloakEffect.class),
     Clone (CloneEffect.class),
     CompanionChoose (ChooseCompanionEffect.class),
     Connive (ConniveEffect.class),
@@ -72,6 +74,7 @@ public enum ApiType {
     DigMultiple (DigMultipleEffect.class),
     DigUntil (DigUntilEffect.class),
     Discard (DiscardEffect.class),
+    Discover (DiscoverEffect.class),
     DrainMana (DrainManaEffect.class),
     Draft (DraftEffect.class),
     Draw (DrawEffect.class),
@@ -106,6 +109,7 @@ public enum ApiType {
     Learn (LearnEffect.class),
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
+    LosePerpetual (LosePerpetualEffect.class),
     LosesGame (GameLossEffect.class),
     MakeCard (MakeCardEffect.class),
     Mana (ManaEffect.class),
@@ -137,6 +141,7 @@ public enum ApiType {
     PumpAll (PumpAllEffect.class),
     PutCounter (CountersPutEffect.class),
     PutCounterAll (CountersPutAllEffect.class),
+    Radiation (RadiationEffect.class),
     RearrangeTopOfLibrary (RearrangeTopOfLibraryEffect.class),
     Regenerate (RegenerateEffect.class),
     RegenerateAll (RegenerateAllEffect.class),
@@ -191,6 +196,7 @@ public enum ApiType {
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
     Venture (VentureEffect.class),
+    VillainousChoice (VillainousChoiceEffect.class),
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
@@ -198,9 +204,7 @@ public enum ApiType {
     DamageResolve (DamageResolveEffect.class),
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
     InternalLegendaryRule (CharmEffect.class),
-    InternalIgnoreEffect (CharmEffect.class),
-    UpdateRemember (UpdateRememberEffect.class);
-
+    InternalIgnoreEffect (CharmEffect.class);
 
     private final SpellAbilityEffect instanceEffect;
     private final Class<? extends SpellAbilityEffect> clsEffect;

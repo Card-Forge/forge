@@ -1,0 +1,10 @@
+Name:Valiant Batrider
+ManaCost:2 W
+Types:Creature Human Knight
+PT:3/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBoon | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player gets a one-time boon with "When you cast a noncreature spell, you may pay {1}. If you don't, each opponent draws a card."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ Boon | EffectOwner$ TriggeredTarget
+SVar:Boon:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ When you cast a noncreature spell, you may pay {1}. If you don't, each opponent draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Opponent | UnlessCost$ 1 | UnlessPayer$ You | NumCards$ 1
+Oracle:Flying\nWhenever Valiant Batrider deals combat damage to a player, that player gets a one-time boon with "When you cast a noncreature spell, you may pay {1}. If you don't, each opponent draws a card."

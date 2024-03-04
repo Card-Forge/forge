@@ -1,0 +1,11 @@
+Name:Brotherhood Outcast
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBChangeZone,DBPutCounter | CharmNum$ 1
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Aura+YouCtrl+cmcLE3,Card.Equipment+YouCtrl+cmcLE3 | SpellDescription$ Return target Aura or Equipment card with mana value 3 or less from your graveyard to the battlefield.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ SHIELD | SpellDescription$ Put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+DeckHas:Ability$Graveyard|Counters
+DeckNeeds:Type$Equipment|Aura
+Oracle:When Brotherhood Outcast enters the battlefield, choose one —\n• Return target Aura or Equipment card with mana value 3 or less from your graveyard to the battlefield.\n• Put a shield counter on target creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)

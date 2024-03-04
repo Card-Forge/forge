@@ -1,0 +1,12 @@
+Name:Tolsimir, Midnight's Light
+ManaCost:2 G W W
+Types:Legendary Creature Elf Scout
+PT:3/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create Voja Fenstalker, a legendary 5/5 green and white Wolf creature token with trample.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ voja_fenstalker | TokenOwner$ You
+T:Mode$ Attacks | ValidCard$ Wolf.YouCtrl | IsPresent$ Card.Self+attackedThisCombat | TriggerZones$ Battlefield | Execute$ TrigForceBlock | NoResolvingCheck$ True | TriggerDescription$ Whenever a Wolf you control attacks, if NICKNAME attacked this combat, target creature an opponent controls blocks that Wolf this combat if able.
+SVar:TrigForceBlock:DB$ MustBlock | DefinedAttacker$ TriggeredAttacker | Duration$ UntilEndOfCombat | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+DeckHas:Ability$LifeGain|Token & Type$Wolf
+DeckHints:Type$Wolf
+Oracle:Lifelink\nWhen Tolsimir, Midnight's Light enters the battlefield, create Voja Fenstalker, a legendary 5/5 green and white Wolf creature token with trample.\nWhenever a Wolf you control attacks, if Tolsimir attacked this combat, target creature an opponent controls blocks that Wolf this combat if able.

@@ -1,0 +1,58 @@
+[metadata]
+Code=MH3
+Date=2024-06-07
+Name=Modern Horizons 3
+Type=Draft
+ScryfallCode=MH3
+
+[cards]
+6 M Emrakul, the World Anew @Brent Hollowell
+9 U It That Heralds the End @Alex Konstad
+154 R Flare of Cultivation @Billy Christian
+199 R Psychic Frog @Pete Venters
+203 U Scurry of Gremlins @Ben Wootten
+216 R Bloodstained Mire @Bruce Brenneise
+220 R Flooded Strand @Alexander Forssberg
+224 R Polluted Delta @Chris Ostrowski
+229 U Snow-Covered Wastes @Mark Poole
+235 R Windswept Heath @Alexander Forssberg
+236 R Wooded Foothills @Chris Ostrowski
+237 M Ajani, Nacatl Pariah @Chris Rallis
+281 R Laelia, the Blade Reforged @Wisnu Tan
+286 U Priest of Titania @Rebecca Guay
+304 L Plains @Nadia Hurianova
+305 L Island @Samuele Bandini
+306 L Swamp @Yohann Schepacz
+307 L Mountain @Chuck Lukacs
+308 L Forest @Vance Kovacs
+309 U Snow-Covered Wastes @Tomáš Honz
+338 R Flare of Cultivation @Olena Richards
+344 R Psychic Frog @Chuck Lukacs
+352 R Bloodstained Mire @Sean Vo
+353 R Flooded Strand @Salvatorre Zee Yazzie
+356 R Polluted Delta @Vance Kovacs
+360 R Windswept Heath @Samuele Bandini
+361 R Wooded Foothills @Tomáš Honz
+368 R Laelia, the Blade Reforged @Tyler Walpole
+381 M Emrakul, the World Anew @Mark Tedin
+384 M Emrakul, the World Anew @Brent Hollowell
+385 U It That Heralds the End @Alex Konstad
+425 R Flare of Cultivation @Billy Christian
+428 U Priest of Titania @Rebecca Guay
+433 R Psychic Frog @Pete Venters
+435 R Bloodstained Mire @Bruce Brenneise
+436 R Flooded Strand @Alexander Forssberg
+438 R Polluted Delta @Chris Ostrowski
+439 U Snow-Covered Wastes @Mark Poole
+440 R Windswept Heath @Alexander Forssberg
+441 R Wooded Foothills @Chris Ostrowski
+442 M Ajani, Nacatl Pariah @Ilse Gort
+463 R Bloodstained Mire @Bruce Brenneise
+464 R Flooded Strand @Alexander Forssberg
+465 R Polluted Delta @Chris Ostrowski
+466 R Windswept Heath @Alexander Forssberg
+467 R Wooded Foothills @Chris Ostrowski
+468 M Ajani, Nacatl Pariah @Ilse Gort
+473 M Emrakul, the World Anew @Brent Hollowell
+482 R Laelia, the Blade Reforged @Wisnu Tan
+516 U Scurry of Gremlins @Ben Wootten

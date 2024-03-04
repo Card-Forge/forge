@@ -1,0 +1,14 @@
+Name:Admiral Brass, Unsinkable
+ManaCost:2 U B R
+Types:Legendary Creature Human Pirate
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of combat on your turn, you may return target Pirate creature card from your graveyard to the battlefield with a finality counter on it. It has base power and toughness 4/4. It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ValidTgts$ Pirate.YouOwn | Optional$ True | TgtPrompt$ Select target pirate in your graveyard | SubAbility$ DBPump | RememberChanged$ True | AnimateSubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Power$ 4 | Toughness$ 4 | Duration$ Permanent | Defined$ Remembered
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Graveyard|Counters
+DeckHints:Ability$Mill|Graveyard & Type$Pirate
+Oracle:When Admiral Brass, Unsinkable enters the battlefield, mill four cards.\nAt the beginning of combat on your turn, you may return target Pirate creature card from your graveyard to the battlefield with a finality counter on it. It has base power and toughness 4/4. It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)

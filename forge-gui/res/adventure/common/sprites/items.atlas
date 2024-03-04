@@ -405,6 +405,9 @@ BlueRobes
 Armory
   xy: 128,512
   size: 16, 16
+PresenceoftheHydra
+  xy: 288,928
+  size: 16, 16
 HorseHoove
   xy: 80,496
   size: 16, 16
@@ -503,4 +506,10 @@ HallowedSigil
   size:16,16
 UnhallowedSigil
   xy:320,272
+  size:16,16
+SirDonovansAmulet
+  xy:112,880
+  size:16,16
+LandscapeSketchbook
+  xy:80,672
   size:16,16

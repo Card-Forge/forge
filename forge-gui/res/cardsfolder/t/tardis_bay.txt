@@ -1,0 +1,9 @@
+Name:TARDIS Bay
+ManaCost:no cost
+Types:Plane Gallifrey
+S:Mode$ Continuous | Affected$ Card.YouCtrl+cmcGE2 | EffectZone$ Command | Condition$ PlayerTurn | AffectedZone$ Stack | AddKeyword$ Cascade | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ The first spell you cast during each of your turns with mana value 2 or greater has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+SVar:Y:Count$ThisTurnCast_Card.YouCtrl+cmcGE2
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigSteal | TriggerDescription$ When chaos ensues, gain control of target artifact. Then planeswalk.
+SVar:TrigSteal:DB$ GainControl | ValidTgts$ Artifact | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk
+Oracle:The first spell you cast during each of your turns with mana value 2 or greater has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nWhen chaos ensues, gain control of target artifact. Then planeswalk.

@@ -1,0 +1,9 @@
+Name:Burning Sun Cavalry
+ManaCost:1 R
+Types:Creature Human Knight
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Dinosaur.YouCtrl | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks while you control a Dinosaur, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ Blocks | ValidCard$ Card.Self | IsPresent$ Dinosaur.YouCtrl | NoResolvingCheck$ True | Execute$ TrigPump | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks or blocks while you control a Dinosaur, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+DeckHints:Type$Dinosaur
+Oracle:Whenever Burning Sun Cavalry attacks or blocks while you control a Dinosaur, Burning Sun Cavalry gets +1/+1 until end of turn.

@@ -1,0 +1,8 @@
+Name:Echoing Deeps
+ManaCost:no cost
+Types:Land Cave
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Land.Other | ChoiceZone$ Graveyard | IntoPlayTapped$ True | AddTypes$ Cave | SpellDescription$ You may have CARDNAME enter the battlefield tapped as a copy of any land card in a graveyard, except it's a Cave in addition to its other types.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+DeckHints:Ability$Graveyard|Mill
+Oracle:You may have Echoing Deeps enter the battlefield tapped as a copy of any land card in a graveyard, except it's a Cave in addition to its other types.\n{T}: Add {C}.

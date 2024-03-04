@@ -1,0 +1,8 @@
+Name:The Ninth Doctor
+ManaCost:1 U R
+Types:Legendary Creature Time Lord Doctor
+PT:2/4
+K:Haste
+T:Mode$ Untaps | Phase$ Untap | ValidCard$ Card.Self+ActivePlayerCtrl | TriggerZones$ Battlefield | Execute$ TrigAddPhase | TriggerDescription$ Into the TARDIS — Whenever CARDNAME becomes untapped during your untap step, you get an additional upkeep step after this step.
+SVar:TrigAddPhase:DB$ AddPhase | ExtraPhase$ Upkeep
+Oracle:Haste\nInto the TARDIS — Whenever The Ninth Doctor becomes untapped during your untap step, you get an additional upkeep step after this step.

@@ -1,0 +1,8 @@
+Name:Eye of Duskmantle
+ManaCost:5 B B
+Types:Creature Eye
+PT:3/8
+K:Flying
+K:Lifelink
+S:Mode$ Continuous | Affected$ Card.surveilledThisTurn | AffectedZone$ Graveyard | MayPlay$ True | MayPlayAltManaCost$ PayLife<ConvertedManaCost> | Description$ You may play lands and cast spells from among cards in your graveyard you've surveilled this turn. If you cast a spell this way, you pay life equal to its mana value rather than paying its mana cost.
+Oracle:Flying, lifelink\nYou may play lands and cast spells from among cards in your graveyard you've surveilled this turn. If you cast a spell this way, you pay life equal to its mana value rather than paying its mana cost.

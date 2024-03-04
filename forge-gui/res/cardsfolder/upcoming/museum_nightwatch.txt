@@ -1,0 +1,9 @@
+Name:Museum Nightwatch
+ManaCost:3 W
+Types:Creature Centaur Soldier
+PT:3/2
+K:Disguise:1 W
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 2/2 white and blue Detective creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
+DeckHas:Ability$Token & Type$Detective
+Oracle:When Museum Nightwatch dies, create a 2/2 white and blue Detective creature token.\nDisguise {1}{W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

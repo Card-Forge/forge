@@ -1,0 +1,8 @@
+Name:Ian Malcolm, Chaotician
+ManaCost:1 U R
+Types:Legendary Creature Human Scientist
+PT:2/2
+T:Mode$ Drawn | ValidPlayer$ Player | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever a player draws their second card each turn, that player exiles the top card of their library.
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | RememberChanged$ True | DestinationZone$ Exile
+S:Mode$ Continuous | Affected$ Card.ExiledWithSource+YouDontOwn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayIgnoreType$ True | MayPlayPlayer$ ActivePlayer | EffectZone$ Battlefield | AffectedZone$ Exile | Description$ During each player's turn, that player may cast a spell from among the cards they don't own exiled with CARDNAME and mana of any type can be spent to cast it.
+Oracle:Whenever a player draws their second card each turn, that player exiles the top card of their library.\nDuring each player's turn, that player may cast a spell from among the cards they don't own exiled with Ian Malcolm, Chaotician, and mana of any type can be spent to cast it.

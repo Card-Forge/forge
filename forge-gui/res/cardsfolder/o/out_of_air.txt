@@ -1,0 +1,6 @@
+Name:Out of Air
+ManaCost:2 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Spell.Creature | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a creature spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+Oracle:This spell costs {2} less to cast if it targets a creature spell.\nCounter target spell.

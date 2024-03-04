@@ -34,7 +34,7 @@ public class CostPartMana extends CostPart {
     private static final long serialVersionUID = 1L;
     // "Leftover"
     private final ManaCost cost;
-    private boolean xCantBe0 = false;
+    private int xMin = 0;
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
     private boolean isCostPayAnyNumberOfTimes = false;
@@ -49,16 +49,16 @@ public class CostPartMana extends CostPart {
      */
     public CostPartMana(final ManaCost cost, String restriction) {
         this.cost = cost;
-        this.xCantBe0 = "XCantBe0".equals(restriction);
+        if (restriction != null && restriction.startsWith("XMin")) this.xMin = Integer.parseInt(restriction.substring(4));
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
         this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
         this.isCostPayAnyNumberOfTimes = "NumTimes".equalsIgnoreCase(restriction);
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
-    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, boolean XCantBe0) {
+    public CostPartMana(final ManaCost cost, boolean exiledCreatureCost, boolean enchantedCreatureCost, int xMin) {
         this.cost = cost;
-        this.xCantBe0 = XCantBe0;
+        this.xMin = xMin;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
     }
@@ -77,10 +77,10 @@ public class CostPartMana extends CostPart {
     }
 
     /**
-     * @return the xCantBe0
+     * @return the xMin
      */
-    public boolean canXbe0() {
-        return !xCantBe0;
+    public int getXMin() {
+        return xMin;
     }
 
     /**
@@ -118,17 +118,27 @@ public class CostPartMana extends CostPart {
 
     public ManaCost getManaCostFor(SpellAbility sa) {
         if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey, true) != null && !sa.getPaidList(CostExile.HashLKIListKey, true).isEmpty()) {
-            // back from the brink
-            return sa.getPaidList(CostExile.HashLKIListKey, true).get(0).getManaCost();
+            ManaCost mod = sa.getPaidList(CostExile.HashLKIListKey, true).get(0).getManaCost();
+            if (mod.isNoCost()) {
+                return mod;
+            }
+            ManaCostBeingPaid manaCostNew = new ManaCostBeingPaid(getMana());
+            manaCostNew.addManaCost(mod);
+            return manaCostNew.toManaCost();
         }
         if (isEnchantedCreatureCost() && sa.getHostCard().isEnchantingCard()) {
-            // TODO human can still activate on TDFC backside
-            return sa.getHostCard().getEnchantingCard().getManaCost();
+            ManaCost mod = sa.getHostCard().getEnchantingCard().getManaCost();
+            if (mod.isNoCost()) {
+                return mod;
+            }
+            ManaCostBeingPaid manaCostNew = new ManaCostBeingPaid(getMana());
+            manaCostNew.addManaCost(mod);
+            return manaCostNew.toManaCost();
         }
         if (isCostPayAnyNumberOfTimes) {
             int timesToPay = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getSVar("NumTimes"), sa);
             if (timesToPay == 0) {
-                return null;
+                return ManaCost.NO_COST;
             }
             ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getMana());
             for (int i = 1; i < timesToPay; i++) {

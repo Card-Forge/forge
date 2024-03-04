@@ -57,7 +57,8 @@ public class SurveilAi extends SpellAbilityAi {
                 && !isSorcerySpeed(sa, ai)) {
             return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         }
-
+        if (sa.getHostCard() != null && !sa.getHostCard().isPermanent() && !isSorcerySpeed(sa, ai))
+            return ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN);
         // in the player's turn Surveil should only be done in Main1 or in Upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (isSorcerySpeed(sa, ai)) {

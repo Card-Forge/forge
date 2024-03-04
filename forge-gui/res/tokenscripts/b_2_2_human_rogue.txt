@@ -1,0 +1,6 @@
+Name:Human Rogue Token
+ManaCost:no cost
+Types:Creature Human Rogue
+Colors:black
+PT:2/2
+Oracle:

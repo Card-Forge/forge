@@ -18,7 +18,9 @@
 package forge.game.ability.effects;
 
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Lists;
@@ -29,6 +31,7 @@ import forge.card.ColorSet;
 import forge.card.RemoveType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.cost.Cost;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -52,6 +55,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final long timestamp, final String duration) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
+        final boolean perpetual = "Perpetual".equals(duration);
 
         boolean addAllCreatureTypes = sa.hasParam("AddAllCreatureTypes");
 
@@ -78,16 +82,63 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             source.addRemembered(c);
         }
 
+        // Alchemy "incorporate" cost
+        ColorSet incColors = null;
+        if (sa.hasParam("Incorporate")) {
+            final String incorporate = sa.getParam("Incorporate");
+
+            Map <String, Object> params = new HashMap<>();
+            params.put("Incorporate", incorporate);
+            params.put("Timestamp", timestamp);
+            params.put("Category", "Incorporate");
+            c.addPerpetual(params);
+
+            final ManaCost incMCost = new ManaCost(new ManaCostParser(incorporate));
+            incColors = ColorSet.fromMask(incMCost.getColorProfile());
+            final ManaCost newCost = ManaCost.combine(c.getManaCost(), incMCost);
+            c.addChangedManaCost(newCost, timestamp, 0);
+            c.updateManaCostForView();
+
+            if (c.getFirstSpellAbility() != null) {
+                c.getFirstSpellAbility().getPayCosts().add(new Cost(incorporate, false));
+            }
+        }
+        
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || !remove.isEmpty()) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddTypes", addType);
+                params.put("RemoveTypes", removeType);
+                params.put("RemoveXTypes", remove);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "Types");
+                c.addPerpetual(params);
+            }
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, remove, timestamp, 0, true, false);
         }
 
         if (!keywords.isEmpty() || !removeKeywords.isEmpty() || removeAll) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("AddKeywords", keywords);
+                params.put("RemoveAll", removeAll);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "Keywords");
+                c.addPerpetual(params);
+            }
             c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
         }
 
         // do this after changing types in case it wasn't a creature before
         if (power != null || toughness != null) {
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("Power", power);
+                params.put("Toughness", toughness);
+                params.put("Timestamp", timestamp);
+                params.put("Category", "NewPT");
+                c.addPerpetual(params);
+            }
             c.addNewPT(power, toughness, timestamp, 0);
         }
 
@@ -99,7 +150,13 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKeywords);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, 0, false);
+        if (colors != null) {
+            final boolean overwrite = sa.hasParam("OverwriteColors");
+            handleColors(c, colors, timestamp, overwrite, perpetual);
+        }
+        if (incColors != null) {
+            handleColors(c, incColors, timestamp, false, perpetual);
+        }
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
@@ -184,10 +241,16 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+                addedStaticAbilities, removeAll, removeNonManaAbilities, timestamp, 0);
+            if (perpetual) {
+                Map <String, Object> params = new HashMap<>();
+                params.put("Timestamp", timestamp);
+                params.put("Category", "Abilities");
+                c.addPerpetual(params);
+            }
         }
 
-        if (!"Permanent".equals(duration)) {
+        if (!"Permanent".equals(duration) && !perpetual) {
             if ("UntilControllerNextUntap".equals(duration)) {
                 game.getUntap().addUntil(c.getController(), unanimate);
             } else {
@@ -226,6 +289,19 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         c.removeCantHaveKeyword(timestamp);
 
         c.removeHiddenExtrinsicKeywords(timestamp, 0);
+    }
+
+    static void handleColors(final Card c, final ColorSet colors, final long timestamp, final boolean overwrite, 
+                                final boolean perpetual) {
+        if (perpetual) {
+            Map <String, Object> params = new HashMap<>();
+            params.put("Colors", colors);
+            params.put("Overwrite", overwrite);
+            params.put("Timestamp", timestamp);
+            params.put("Category", "Colors");
+            c.addPerpetual(params);
+        }
+        c.addColor(colors, !overwrite, timestamp, 0, false);
     }
 
 }

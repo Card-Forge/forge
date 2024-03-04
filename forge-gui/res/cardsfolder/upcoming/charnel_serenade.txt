@@ -1,0 +1,10 @@
+Name:Charnel Serenade
+ManaCost:4 B B
+Types:Sorcery
+K:Suspend:3:2 B
+A:SP$ Surveil | Amount$ 3 | SubAbility$ DBReturn | SpellDescription$ Surveil 3, then return a creature card from your graveyard to the battlefield with a finality counter on it.
+SVar:DBReturn:DB$ ChangeZone | SubAbility$ DBChange | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ChangeType$ Creature.YouOwn | ChangeTypeDesc$ creature | ChangeNum$ 1 | Hidden$ True | Mandatory$ True
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3 | SpellDescription$ Exile CARDNAME with three time counters on it.
+DeckHas:Ability$Graveyard|Surveil
+DeckHints:Ability$Graveyard|Mill
+Oracle:Surveil 3, then return a creature card from your graveyard to the battlefield with a finality counter on it. Exile Charnel Serenade with three time counters on it.\nSuspend 3—{2}{B} (Rather than cast this card from your hand, you may pay {2}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)

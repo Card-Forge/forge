@@ -1,0 +1,11 @@
+Name:Plasma Caster
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigEnergy | TriggerDescription$ Whenever equipped creature attacks, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ FlipACoin | Cost$ PayEnergy<2> | ValidTgts$ Creature.blockingEquipped | WinSubAbility$ ExileIt | LoseSubAbility$ DamageIt | TgtPrompt$ Select target creature blocking equipped creature | SpellDescription$ Choose target creature that's blocking equipped creature. Flip a coin. If you win the flip, exile the chosen creature. Otherwise, CARDNAME deals 1 damage to it.
+SVar:ExileIt:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Targeted
+SVar:DamageIt:DB$ DealDamage | NumDmg$ 1 | Defined$ Targeted
+K:Equip:2
+Oracle:Equipped creature gets +1/+1.\nWhenever equipped creature attacks, you get {E}{E} (two energy counters).\nPay {E}{E}: Choose target creature that's blocking equipped creature. Flip a coin. If you win the flip, exile the chosen creature. Otherwise, Plasma Caster deals 1 damage to it.\nEquip {2}

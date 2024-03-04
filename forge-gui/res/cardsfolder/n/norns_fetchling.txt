@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Phyrexian Insect
 PT:1/1
 K:Toxic:1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Plains into your hand. If an opponent has three or more poison counters, you may seek a nonland card instead.  
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Plains into your hand. If an opponent has three or more poison counters, you may seek a nonland card instead.
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE3 | TrueSubAbility$ DBGenericChoice | FalseSubAbility$ ConjurePlains
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ SeekNonLand,ConjurePlains
 SVar:SeekNonLand:DB$ Seek | Type$ Card.nonLand | StackDescription$ Seek a nonland card.

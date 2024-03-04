@@ -1,0 +1,12 @@
+Name:Covetous Elegy
+ManaCost:4 W B
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseSac | SubAbility$ DBSac | SpellDescription$ Each player chooses up to two creatures they control, then sacrifices the rest. Then you create a tapped Treasure token for each creature your opponents control.
+SVar:DBChooseSac:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 2 | ChoiceTitle$ Choose two creatures not to be sacrificed | RememberChosen$ True
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.OppCtrl
+AI:RemoveDeck:All
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+Oracle:Each player chooses up to two creatures they control, then sacrifices the rest. Then you create a tapped Treasure token for each creature your opponents control.

@@ -1,0 +1,10 @@
+Name:Thijarian Witness
+ManaCost:1 G
+Types:Creature Alien Cleric
+PT:0/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+attackingAlone,Creature.Other+blockingAlone | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever another creature dies, if it was attacking or blocking alone, exile it and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ TrigInvestigate
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Clue|Artifact
+Oracle:Flash\nBear Witness — Whenever another creature dies, if it was attacking or blocking alone, exile it and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

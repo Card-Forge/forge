@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="208">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="canFailDungeon" type="bool" value="true"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="23809" source="../../tileset/dungeon/DarkAbbeyTiles.tsx"/>
+ <tileset firstgid="23839" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="17" name="Collision" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztlUEKgDAMBIs3L+JBv+TNR/gnH+oTJEhApYa2rKuFDCxEjXEIBUPAMbUhNKMd6UmJzrOeI71TnbQ/9923vJfhmlhPrM51Z3ifry3vp5lMb6m7/ojev7umfp/prc4SoRZvdT3XpTPf9hass10C0xuJe3Nxb5sNPM/3zcW9ubj3wTrj3Cx833iHkqSA+pewvVH81Rvp9fW+a/C+z61l37WeE6b3Dq6GfrU=
+  </data>
+ </layer>
+ <layer id="18" name="BackgroundSub" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJACAQBEGxBi3Q/psQIw2MDHyUGTi4cFOCOK1EF5wZ3ete8XL37gNwR65zAAD8pwNa4AVN
+  </data>
+ </layer>
+ <layer id="13" name="Background" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzVmF9OwzAMxjP+PPBSIW0ta6+CBg9IkzjGJOAk3AKkwSkQBxjPXICzjFqZVdez06Q40/ikT3OiKP3Vcdp0xaVzhZEnpXMPtfeq7uIT0r+d+TYYYi46X0hWzOA18DTe27qLXdPFMGZ54f1S9hmlWOO35ubaTPuGMW87r0t5HonvkNzAuZp5YxvGfMy9Ne6he8nB/T318z5fOffY1spT7ePzZjz3IeoEuUGnLetZs18nx8iNghzzmNf6F3GqrJglLe/77RB3Krsls8bAedHv5Xh2K25+fW4pxxJ3LHvq2ksaYtasccewp+TxL4xS/hdV+8xJYKe5tOYGaftOqptQzkN5z5Fvyq3x5+Dma0JlVSexHpK2F3mOpJyBtNrQntdwZrHg1kTnwPdISq4oN7By/tfdWfyn3aM3lb8G9ENsyc1rd8Pm5n3IyvnRcDaQ1gNr30Kx3KH74Nx0Tul9OlY833StJW7OL/Fo+c7NjXsK4xDX59wbvm8mZfdtib6u9vvQt5UNN+XhbXoPGrdVvaYK1vQ/ci8G1k1bb4t1H6O7ovtFa+PQqWfKVOF/GdR4TcoxxMyVk1njBmvMsdy5lZrrY2H/BfI7g1c=
+  </data>
+ </layer>
+ <layer id="15" name="Walls" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjILhBRaIYse0BoxAO+zFKDOD3u7G5uZEEQQmBdDT3ZSGMzqg1N2gcLQTw49tqOxmGKDE3fPR9C0k05wWcfL0UcvdjgTC1pwXwf4nycBQx4tbLS0BqeGN7G5sbqaXP6iVTugNhou7QeCYMP3dQSqgV3irSqDy1SQgmFwAcjcTEh7K6YQc8BBaftbjKMdh4UtuOY8OqOXugQZDJZ0woaVvcsNfmoI8NgqGB6BHX2oUDDwAAO+NKxM=
+  </data>
+ </layer>
+ <layer id="16" name="Clutter" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJxjYBhAIDqQlo+CgQQOPAPtglGADBYO0bw4GN1tLYZg3xbDrsYeh/hgAoJymGJfeenvDnzgeBIDw4mkgXYFdvBfBLecezIDg0cy/dxCCNSRGK9nUlH579ip5xZag1nAumcBD4Q+KowQR2aD0vl3Qdq64zWR6ljVIDTIvV4pEPqPJG71U4UodhpWMAetrJ1H5bLXWJiwGlqAmdC0gMxfAOXPH2TtFHS3ogNsZfZwBtqM1DOL1ukbG4hjGBxx9lAMlSYG/KKNUwY9mI+WLshtg0pLUO4WUoAtWtySm77p7W5swE4MNx5MwI2TOLGhAEbdTV8wGNwNAJMKKJ0=
+  </data>
+ </layer>
+ <layer id="19" name="HighestLayer" width="46" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlsEOwTAYgP/YwcVcZAs74+rIhRBvIs7EXTzJYjyGF/ASxLPYn67R/FlZ659Osi/503Zq/VptfwA1NTU1/08cAMxCAC9w67EaANxSj3soSuSutBvEL8naU9fuQ/uvunA/M41Xpvu6B7BJY9sTdfztj5qxDr75+8tyb0QArTT8SNSRhIxj46vC5T7OPOZh/ufUuzl6lbJuiq37si3KSYG1k957pe+plVUi87El784N+qmhPisKXW8uNxNvOodd38zDdG8vNHsP+cZbpej+Rq4dETbI/KS7pxATbx3oTT1lOy844PCeZjmchhe49Zb3xEOzT3RudD6c+eSTt3rOTO+NS/cVSPxDb4lNDqTenHDsbx2uvLnnwYmtd9XmRXO92qb9bP8XlIHOM69flda7KK7PwBMe6154
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="46" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1TERACAMA8B6QQ6mkdbDAFtph38FGXJJBABV1u5OAMDLGb7TP/L5qlrTOwYAVwIixgP+
+  </data>
+ </layer>
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="2.65789" offsety="6.89474">
+  <object id="114" template="../../obj/entry_up.tx" x="364.676" y="361.886" width="67" height="50">
+   <properties>
+    <property name="direction" value="right"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f2.tmx"/>
+    <property name="teleportObjectId" value="144"/>
+   </properties>
+  </object>
+  <object id="115" template="../../obj/gold.tx" x="525.88" y="209.537"/>
+  <object id="117" template="../../obj/enemy.tx" x="143.319" y="265.121">
+   <properties>
+    <property name="displayNameOverride" value="Prisoner"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="119" template="../../obj/enemy.tx" x="348.532" y="174.94">
+   <properties>
+    <property name="defeatDialog">[
+	{
+		&quot;text&quot;: &quot;The Torturer unleashes a shrill scream as he falls unto the ground. His blood mixes with that of his tortuered victims, you see the red barrier disapear. The way to Tibalt's chambers is open&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: 201 },
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
+]</property>
+    <property name="displayNameOverride" value="Tibalt's Pet Torturer"/>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Phyrexian Arena&quot;,&quot;Xander's Wake&quot;]
+}</property>
+    <property name="enemy" value="Torturer"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Torturer's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="136" template="../../obj/enemy.tx" x="399.524" y="258.907">
+   <properties>
+    <property name="enemy" value="Horror of Tibalt"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="196,185"/>
+   </properties>
+  </object>
+  <object id="141" template="../../obj/treasure.tx" x="509.503" y="120.175">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 4,
+  &quot;rarity&quot;: [ &quot;uncommon&quot; ],
+  &quot;addMaxCount&quot;: 2
+}]</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="150" template="../../obj/enemy.tx" x="378.676" y="44.1053">
+   <properties>
+    <property name="enemy" value="Necromancer"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value="182,181"/>
+   </properties>
+  </object>
+  <object id="168" template="../../obj/gold.tx" x="525.509" y="246.272"/>
+  <object id="169" template="../../obj/gold.tx" x="540.009" y="209.938"/>
+  <object id="170" template="../../obj/gold.tx" x="525.175" y="231.605"/>
+  <object id="171" template="../../obj/gold.tx" x="538.509" y="246.772"/>
+  <object id="172" template="../../obj/manashards.tx" x="317.675" y="40.7719"/>
+  <object id="173" template="../../obj/manashards.tx" x="476.009" y="179.438"/>
+  <object id="174" template="../../obj/manashards.tx" x="511.009" y="169.105"/>
+  <object id="178" template="../../obj/enemy.tx" x="208.676" y="256.439">
+   <properties>
+    <property name="enemy" value="Devil of Tibalt"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="187,193,195,193"/>
+   </properties>
+  </object>
+  <object id="179" template="../../obj/booster.tx" x="511.009" y="148.772">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="181" template="../../obj/waypoint.tx" x="426.342" y="46.1053"/>
+  <object id="182" template="../../obj/waypoint.tx" x="335.342" y="43.4386"/>
+  <object id="185" template="../../obj/waypoint.tx" x="486.342" y="253.772"/>
+  <object id="187" template="../../obj/waypoint.tx" x="218.676" y="204.438"/>
+  <object id="193" template="../../obj/waypoint.tx" x="213.009" y="353.438"/>
+  <object id="195" template="../../obj/waypoint.tx" x="310.676" y="353.439"/>
+  <object id="196" template="../../obj/waypoint.tx" x="316.675" y="256.105"/>
+  <object id="198" template="../../obj/door_up.tx" x="461.105" y="86.8501" width="32.7127" height="80.0112" rotation="359.74">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/tibalt/tibalt_f4.tmx"/>
+    <property name="teleportObjectId" value="170"/>
+   </properties>
+  </object>
+  <object id="201" name="Ward" type="dialog" gid="23816" x="461.029" y="123.772" width="35.6276" height="16">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A translucent, shimmering red field blocks your path. An ancient Evil is lurking in these crypts, preventing you from entering the room in front of you ...&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;Leave.&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="202" template="../../obj/booster.tx" x="349.342" y="198.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;ISD&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="204" template="../../obj/gate.tx" x="576.842" y="281.439" width="11.6666" height="22">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with Torturer's key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Torturer's Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked, though the key breaks as you open the door&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Torturer's Key&quot;}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="205" template="../../obj/enemy.tx" x="141.675" y="196.105">
+   <properties>
+    <property name="displayNameOverride" value="Prisoner"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="206" template="../../obj/enemy.tx" x="126.342" y="278.439">
+   <properties>
+    <property name="displayNameOverride" value="Prisoner"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="207" template="../../obj/enemy.tx" x="140.009" y="331.772">
+   <properties>
+    <property name="displayNameOverride" value="Prisoner"/>
+    <property name="enemy" value="Farmer"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

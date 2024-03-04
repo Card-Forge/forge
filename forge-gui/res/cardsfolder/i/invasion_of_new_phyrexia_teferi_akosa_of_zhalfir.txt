@@ -28,4 +28,4 @@ SVar:X:Count$TriggerRememberAmount
 SVar:Y:Count$RememberedSize
 DeckHas:Ability$Discard
 DeckHints:Type$Knight
-Oracle:[+1]: Draw two cards. Then discard two cards unless you discard a creature card.\n[−2]: You get an emblem with "Knights you control get +1/+0 and have ward {1}."\n[−3]: Tap any number of untapped creatures you control. When you do, shuffle target nonland permanent an opponent controls with mana value X or less into its owner's library, where X is the number of creatures tapped this way.
+Oracle:[+1]: Draw two cards. Then discard two cards unless you discard a creature card.\n[-2]: You get an emblem with "Knights you control get +1/+0 and have ward {1}."\n[-3]: Tap any number of untapped creatures you control. When you do, shuffle target nonland permanent an opponent controls with mana value X or less into its owner's library, where X is the number of creatures tapped this way.

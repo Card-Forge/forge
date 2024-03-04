@@ -1,0 +1,11 @@
+Name:Phantasmal Extraction
+ManaCost:1 B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast if you weren't the starting player.
+SVar:X:Count$StartingPlayer.0.1
+A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerOwn+cmcLE4 | SubAbility$ DBPumpAll | RememberRevealed$ True | SpellDescription$ Target opponent reveals each nonland card in their hand with mana value 4 or less.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Card.TargetedPlayerOwn | RememberAllPumped$ True | PumpZone$ Graveyard | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand,Graveyard | Choices$ Card.IsRemembered | SubAbility$ DBChangeZone | ChoiceTitle$ Choose a card revealed this way or a card in their graveyard | SpellDescription$ Choose a card revealed this way or a card in their graveyard.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand,Graveyard | Destination$ Exile | SubAbility$ DBCleanup | Hidden$ True | SpellDescription$ Exile that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:If you weren't the starting player, this spell costs {1} less to cast.\nTarget opponent reveals each nonland card in their hand with mana value 4 or less. Choose a card revealed this way or a card in their graveyard. Exile that card.

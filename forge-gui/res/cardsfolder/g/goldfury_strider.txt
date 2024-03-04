@@ -1,0 +1,8 @@
+Name:Goldfury Strider
+ManaCost:4 R
+Types:Artifact Creature Golem
+PT:3/5
+K:Trample
+A:AB$ Pump | Cost$ tapXType<2/Artifact;Creature/artifacts and/or creatures> | ValidTgts$ Creature | SorcerySpeed$ True | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn. Activate only as a sorcery.
+DeckHints:Type$Artifact
+Oracle:Trample\nTap two untapped artifacts and/or creatures you control: Target creature gets +2/+0 until end of turn. Activate only as a sorcery.

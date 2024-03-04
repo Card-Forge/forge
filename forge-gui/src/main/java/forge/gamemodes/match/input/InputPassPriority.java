@@ -24,6 +24,7 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
+import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -74,6 +75,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         passPriority(new Runnable() {
             @Override
             public void run() {
+                getController().macros().addRememberedAction(new PassPriorityAction());
                 stop();
             }
         });
@@ -114,7 +116,7 @@ public class InputPassPriority extends InputSyncronizedBase {
                             if (player.getManaPool().hasBurn()) {
                                 message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                             }
-                            if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOk"), localizer.getMessage("lblCancel"))) {
+                            if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOK"), localizer.getMessage("lblCancel"))) {
                                 runnable.run();
                             }
                         }

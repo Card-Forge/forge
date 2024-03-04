@@ -1,0 +1,10 @@
+Name:Screaming Phantom
+ManaCost:2 B
+Types:Creature Spirit
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, mill a card. (Put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 1
+DeckHas:Ability$Mill|Graveyard
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Screaming Phantom attacks, mill a card. (Put the top card of your library into your graveyard.)

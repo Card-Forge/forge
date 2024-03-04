@@ -1,0 +1,9 @@
+Name:Homicide Investigator
+ManaCost:1 B
+Types:Creature Human Detective
+PT:2/2
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigInvestigate | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more nontoken creatures you control die, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHints:Ability$Sacrifice
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+Oracle:Whenever one or more nontoken creatures you control die, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

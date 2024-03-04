@@ -1,0 +1,12 @@
+Name:Tribune of Rot
+ManaCost:1 BG BG
+Types:Creature Elf Shaman
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, mill two cards. For each creature card milled this way, create a 1/1 green Saproling creature token.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | RememberMilled$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature
+DeckHas:Ability$Mill|Token & Type$Saproling
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Tribune of Rot attacks, mill two cards. For each creature card milled this way, create a 1/1 green Saproling creature token.

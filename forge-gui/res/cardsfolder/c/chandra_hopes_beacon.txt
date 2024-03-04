@@ -12,4 +12,4 @@ A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Ultimate$ 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability triggers only once each turn.\n[+2]: Add two mana in any combination of colors.\n[+1]: Exile the top five cards of your library. Until the end of your next turn, you may cast an instant or sorcery spell from among those exiled cards.\n[−X]: Chandra, Hope's Beacon deals X damage to each of up to two targets.
+Oracle:Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy. This ability triggers only once each turn.\n[+2]: Add two mana in any combination of colors.\n[+1]: Exile the top five cards of your library. Until the end of your next turn, you may cast an instant or sorcery spell from among those exiled cards.\n[-X]: Chandra, Hope's Beacon deals X damage to each of up to two targets.

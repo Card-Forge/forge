@@ -1,0 +1,10 @@
+Name:Case of the Ransacked Lab
+ManaCost:2 U
+Types:Enchantment Case
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl | SVarCompare$ GE4 | IsPresent$ Card.Self+IsUnsolved | Execute$ Solved | TriggerDescription$ To solve – You've cast four or more instant and sorcery spells this turn. (If unsolved, solve at the beginning of your end step.)
+SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+T:Mode$ SpellCast | IsPresent$ Card.Self+IsSolved | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Solved – Whenever you cast an instant or sorcery spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckNeed:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nTo solve – You've cast four or more instant and sorcery spells this turn. (If unsolved, solve at the beginning of your end step.)\nSolved – Whenever you cast an instant or sorcery spell, draw a card.

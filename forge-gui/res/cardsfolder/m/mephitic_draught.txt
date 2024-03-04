@@ -1,0 +1,10 @@
+Name:Mephitic Draught
+ManaCost:1 B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, you draw a card and you lose 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+AI:RemoveDeck:Random
+SVar:SacMe:4
+Oracle:When Mephitic Draught enters the battlefield or is put into a graveyard from the battlefield, you draw a card and you lose 1 life.

@@ -1,4 +1,4 @@
-Name:Anduril, Flame of the West
+Name:Andúril, Flame of the West
 ManaCost:3
 Types:Legendary Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 1 | AddSVar$ AE | Description$ Equipped creature gets +3/+1.

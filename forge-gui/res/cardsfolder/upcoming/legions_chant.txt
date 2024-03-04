@@ -1,0 +1,11 @@
+Name:Legion's Chant
+ManaCost:2 W
+Types:Sorcery Chorus
+K:Starting intensity:3
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithTotalCMC$ X | ChangeNum$ Y | Hidden$ True | AnyNumber$ True | ChangeType$ Creature.YouOwn | SubAbility$ DBIntensify | SpellDescription$ Return any number of creature cards with total mana value X or less from your graveyard to the battlefield, where X is CARDNAME's Intensity.
+SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+Chorus | DefinedDesc$ all Chorus cards you own | SpellDescription$ All Chorus cards you own intensify by 1.
+SVar:Y:Count$ValidGraveyard Creature.YouOwn
+SVar:X:Count$Intensity
+DeckHints:Type$Chorus & Ability$Graveyard|Mill|Discard
+DeckHas:Ability$Graveyard
+Oracle:Starting intensity 3\nReturn any number of creature cards with total mana value X or less from your graveyard to the battlefield, where X is Legion's Chant's intensity.\nAll Chorus cards you own intensify by 1.

@@ -1,4 +1,4 @@
-Name:Ifh-Biff Efreet
+Name:Ifh-Bíff Efreet
 ManaCost:2 G G
 Types:Creature Efreet
 PT:3/3

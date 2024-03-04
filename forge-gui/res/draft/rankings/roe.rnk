@@ -1,0 +1,229 @@
+//Rank|Name|Rarity|Set
+#1|Drana, Kalastria Bloodchief|R|ROE
+#2|Eldrazi Conscription|R|ROE
+#3|Sphinx of Magosi|R|ROE
+#4|Guul Draz Assassin|R|ROE
+#5|Gideon Jura|M|ROE
+#6|Conquering Manticore|R|ROE
+#7|Lord of Shatterskull Pass|R|ROE
+#8|Deathless Angel|R|ROE
+#9|Consuming Vapors|R|ROE
+#10|Kazandu Tuskcaller|R|ROE
+#11|Kozilek, Butcher of Truth|M|ROE
+#12|Coralhelm Commander|R|ROE
+#13|All Is Dust|M|ROE
+#14|Student of Warfare|R|ROE
+#15|Transcendent Master|M|ROE
+#16|Vengevine|M|ROE
+#17|Nirkana Revenant|M|ROE
+#18|Sarkhan the Mad|M|ROE
+#19|Kargan Dragonlord|M|ROE
+#20|Awakening Zone|R|ROE
+#21|Linvala, Keeper of Silence|M|ROE
+#22|Lighthouse Chronologist|M|ROE
+#23|Pestilence Demon|R|ROE
+#24|Magmaw|R|ROE
+#25|Consume the Meek|R|ROE
+#26|Ulamog, the Infinite Gyre|M|ROE
+#27|Gelatinous Genesis|R|ROE
+#28|Corpsehatch|U|ROE
+#29|Pelakka Wurm|U|ROE
+#30|Mul Daya Channelers|R|ROE
+#31|Brimstone Mage|U|ROE
+#32|Domestication|U|ROE
+#33|Beastbreaker of Bala Ged|U|ROE
+#34|Enclave Cryptologist|U|ROE
+#35|Disaster Radius|R|ROE
+#36|Drake Umbra|U|ROE
+#37|Broodwarden|U|ROE
+#38|Hellion Eruption|R|ROE
+#39|Nirkana Cutthroat|U|ROE
+#40|Bear Umbra|R|ROE
+#41|Rage Nimbus|R|ROE
+#42|Staggershock|C|ROE
+#43|Hada Spy Patrol|U|ROE
+#44|Kabira Vindicator|U|ROE
+#45|Joraga Treespeaker|U|ROE
+#46|Gigantomancer|R|ROE
+#47|Hedron Field Purists|R|ROE
+#48|Training Grounds|R|ROE
+#49|Flame Slash|C|ROE
+#50|Boar Umbra|U|ROE
+#51|Vendetta|C|ROE
+#52|Artisan of Kozilek|U|ROE
+#53|Khalni Hydra|M|ROE
+#54|Heat Ray|C|ROE
+#55|Forked Bolt|U|ROE
+#56|Narcolepsy|C|ROE
+#57|Rapacious One|U|ROE
+#58|Tuktuk the Explorer|R|ROE
+#59|Momentous Fall|R|ROE
+#60|Emrakul, the Aeons Torn|M|ROE
+#61|Echo Mage|R|ROE
+#62|Hellcarver Demon|M|ROE
+#63|Merfolk Skyscout|U|ROE
+#64|Kozilek's Predator|C|ROE
+#65|Induce Despair|C|ROE
+#66|Mammoth Umbra|U|ROE
+#67|Oust|U|ROE
+#68|Emrakul's Hatcher|C|ROE
+#69|Knight of Cliffhaven|C|ROE
+#70|Wall of Omens|U|ROE
+#71|Dawnglare Invoker|C|ROE
+#72|Splinter Twin|R|ROE
+#73|Venerated Teacher|C|ROE
+#74|Nomads' Assembly|R|ROE
+#75|Keening Stone|R|ROE
+#76|Skywatcher Adept|C|ROE
+#77|Overgrown Battlement|C|ROE
+#78|Ondu Giant|C|ROE
+#79|Nest Invader|C|ROE
+#80|Traitorous Instinct|U|ROE
+#81|Growth Spasm|C|ROE
+#82|Pawn of Ulamog|U|ROE
+#83|Guard Gomazoa|U|ROE
+#84|Aura Gnarlid|C|ROE
+#85|It That Betrays|R|ROE
+#86|Bramblesnap|U|ROE
+#87|Last Kiss|C|ROE
+#88|Wildheart Invoker|C|ROE
+#89|Halimar Wavewatch|C|ROE
+#90|Ulamog's Crusher|C|ROE
+#91|Time of Heroes|U|ROE
+#92|Spawnsire of Ulamog|R|ROE
+#93|Kor Spiritdancer|R|ROE
+#94|Devastating Summons|R|ROE
+#95|Evolving Wilds|C|ROE
+#96|Lust for War|U|ROE
+#97|Eldrazi Temple|R|ROE
+#98|Dreamstone Hedron|U|ROE
+#99|Frostwind Invoker|C|ROE
+#100|Sea Gate Oracle|C|ROE
+#101|Makindi Griffin|C|ROE
+#102|Null Champion|C|ROE
+#103|Arrogant Bloodlord|U|ROE
+#104|Regress|C|ROE
+#105|Dread Drone|C|ROE
+#106|Caravan Escort|C|ROE
+#107|Cadaver Imp|C|ROE
+#108|Warmonger's Chariot|U|ROE
+#109|Recurring Insight|R|ROE
+#110|Champion's Drake|C|ROE
+#111|Bala Ged Scorpion|C|ROE
+#112|World at War|R|ROE
+#113|Mortician Beetle|R|ROE
+#114|Spawning Breath|C|ROE
+#115|Surrakar Spellblade|R|ROE
+#116|Zulaport Enforcer|C|ROE
+#117|Jaddi Lifestrider|U|ROE
+#118|Kiln Fiend|C|ROE
+#119|Smite|C|ROE
+#120|Hedron Matrix|R|ROE
+#121|Explosive Revelation|U|ROE
+#122|Battle Rattle Shaman|C|ROE
+#123|Surreal Memoir|U|ROE
+#124|Daggerback Basilisk|C|ROE
+#125|Prey's Vengeance|U|ROE
+#126|Prophetic Prism|C|ROE
+#127|Gloomhunter|C|ROE
+#128|Guard Duty|C|ROE
+#129|Valakut Fireboar|U|ROE
+#130|Soulsurge Elemental|U|ROE
+#131|Escaped Null|U|ROE
+#132|Snake Umbra|C|ROE
+#133|Totem Guide Hartebeest|C|ROE
+#134|Thought Gorger|R|ROE
+#135|Mnemonic Wall|C|ROE
+#136|Stomper Cub|C|ROE
+#137|Skeletal Wurm|U|ROE
+#138|Emerge Unscathed|U|ROE
+#139|Ogre's Cleaver|U|ROE
+#140|Vent Sentinel|C|ROE
+#141|Survival Cache|U|ROE
+#142|See Beyond|C|ROE
+#143|Puncturing Light|C|ROE
+#144|Pathrazer of Ulamog|U|ROE
+#145|Bloodrite Invoker|C|ROE
+#146|Gravitational Shift|R|ROE
+#147|Virulent Swipe|U|ROE
+#148|Ikiral Outrider|C|ROE
+#149|Deprive|C|ROE
+#150|Soulbound Guardians|U|ROE
+#151|Skittering Invasion|U|ROE
+#152|Lavafume Invoker|C|ROE
+#153|Affa Guard Hound|U|ROE
+#154|Bloodthrone Vampire|C|ROE
+#155|Hyena Umbra|C|ROE
+#156|Kor Line Slinger|C|ROE
+#157|Might of the Masses|C|ROE
+#158|Wrap in Flames|C|ROE
+#159|Akoum Boulderfoot|U|ROE
+#160|Sporecap Spider|C|ROE
+#161|Distortion Strike|C|ROE
+#162|Eel Umbra|C|ROE
+#163|Brood Birthing|C|ROE
+#164|Tajuru Preserver|R|ROE
+#165|Grotag Siege Runner|C|ROE
+#166|Pennon Blade|U|ROE
+#167|Hand of Emrakul|C|ROE
+#168|Essence Feed|C|ROE
+#169|Repel the Darkness|C|ROE
+#170|Zof Shade|C|ROE
+#171|Lone Missionary|C|ROE
+#172|Ogre Sentry|C|ROE
+#173|Reality Spasm|U|ROE
+#174|Spider Umbra|C|ROE
+#175|Inquisition of Kozilek|U|ROE
+#176|Leaf Arrow|C|ROE
+#177|Lagac Lizard|C|ROE
+#178|Battle Rampart|C|ROE
+#179|Soul's Attendant|C|ROE
+#180|Goblin Tunneler|C|ROE
+#181|Naturalize|C|ROE
+#182|Shrivel|C|ROE
+#183|Lay Bare|C|ROE
+#184|Runed Servitor|U|ROE
+#185|Goblin Arsonist|C|ROE
+#186|Ancient Stirrings|C|ROE
+#187|Angelheart Vial|R|ROE
+#188|Nema Siltlurker|C|ROE
+#189|Jwari Scuttler|C|ROE
+#190|Raid Bombardment|C|ROE
+#191|Merfolk Observer|C|ROE
+#192|Glory Seeker|C|ROE
+#193|Perish the Thought|C|ROE
+#194|Reinforced Bulwark|C|ROE
+#195|Eland Umbra|C|ROE
+#196|Renegade Doppelganger|R|ROE
+#197|Demystify|C|ROE
+#198|Haze Frog|C|ROE
+#199|Stalwart Shield Bearers|C|ROE
+#200|Fleeting Distraction|C|ROE
+#201|Luminous Wake|U|ROE
+#202|Suffer the Past|U|ROE
+#203|Harmless Assault|C|ROE
+#204|Shared Discovery|C|ROE
+#205|Nighthaze|C|ROE
+#206|Cast Through Time|M|ROE
+#207|Aura Finesse|C|ROE
+#208|Death Cultist|C|ROE
+#209|Contaminated Ground|C|ROE
+#210|Fissure Vent|C|ROE
+#211|Unified Will|U|ROE
+#212|Enatu Golem|U|ROE
+#213|Demonic Appetite|C|ROE
+#214|Umbra Mystic|R|ROE
+#215|Irresistible Prey|U|ROE
+#216|Living Destiny|C|ROE
+#217|Sphinx Bone Wand|R|ROE
+#218|Realms Uncharted|R|ROE
+#219|Lightmine Field|R|ROE
+#220|Phantasmal Abomination|U|ROE
+#221|Crab Umbra|U|ROE
+#222|Dormant Gomazoa|R|ROE
+#223|Gravity Well|U|ROE
+#224|Baneful Omen|R|ROE
+#225|Curse of Wizardry|U|ROE
+#226|Not of This World|U|ROE
+#227|Repay in Kind|R|ROE
+#228|Near Death Experience|R|ROE

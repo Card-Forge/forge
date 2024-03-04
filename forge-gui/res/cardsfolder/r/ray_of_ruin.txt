@@ -1,0 +1,6 @@
+Name:Ray of Ruin
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature,Vehicle,Land.nonBasic | TgtPrompt$ Select target creature, Vehicle, or nonbasic land. | SubAbility$ DBScry | SpellDescription$ Exile target creature, Vehicle, or nonbasic land.
+SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Oracle:Exile target creature, Vehicle, or nonbasic land. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)

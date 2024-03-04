@@ -1,0 +1,7 @@
+Name:Forensic Researcher
+ManaCost:2 U
+Types:Creature Merfolk Detective
+PT:1/3
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control | SpellDescription$ Untap another target permanent you control.
+A:AB$ Tap | Cost$ T CollectEvidence<3> | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SpellDescription$ Tap target creature you don't control.
+Oracle:{T}: Untap another target permanent you control.\n{T}, Collect evidence 3: Tap target creature you don't control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)

@@ -9,10 +9,10 @@ SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$
 SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
 DeckHints:Type$Instant|Sorcery
 DeckNeeds:Ability$Token
+AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {2}{W}{U}{B} (You may cast this card converted for {2}{W}{U}{B}.)\nWhenever one or more creature tokens you control deal combat damage to a player, exile target instant or sorcery card with mana value equal to the damage dealt from their graveyard. Copy it. You may cast the copy without paying its mana cost. If you do, convert Soundwave.
 
 ALTERNATE

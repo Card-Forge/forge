@@ -1,0 +1,10 @@
+Name:Hotshot Investigators
+ManaCost:5 U
+Types:Creature Vedalken Detective
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return up to one other target creature to its owner's hand. If you controlled it, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | RememberLKI$ True | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Investigate|Token & Type$Clue
+Oracle:When Hotshot Investigators enters the battlefield, return up to one other target creature to its owner's hand. If you controlled it, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

@@ -14,4 +14,4 @@ SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Creature.IsNotImprinted | SubAbilit
 SVar:DBCleanup2:DB$ Cleanup | ClearChosenCard$ True | ClearImprinted$ True
 DeckHas:Ability$Token|Sacrifice & Type$Samurai
 DeckHints:Keyword$Exalted
-Oracle:No more than one creature can attack The Eternal Wanderer each combat.\n[+1]: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.\n[0]: Create a 2/2 white Samurai creature token with double strike.\n[−4]: For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way.
+Oracle:No more than one creature can attack The Eternal Wanderer each combat.\n[+1]: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.\n[0]: Create a 2/2 white Samurai creature token with double strike.\n[-4]: For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way.

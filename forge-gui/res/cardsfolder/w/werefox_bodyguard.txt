@@ -1,0 +1,10 @@
+Name:Werefox Bodyguard
+ManaCost:1 W W
+Types:Creature Elf Fox Knight
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one other target non-Fox creature until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonFox+Other | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target non-Fox creature | Duration$ UntilHostLeavesPlay
+A:AB$ GainLife | Cost$ 1 W Sac<1/CARDNAME> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+DeckHas:Ability$Sacrifice|LifeGain
+Oracle:Flash\nWhen Werefox Bodyguard enters the battlefield, exile up to one other target non-Fox creature until Werefox Bodyguard leaves the battlefield.\n{1}{W}, Sacrifice Werefox Bodyguard: You gain 2 life.

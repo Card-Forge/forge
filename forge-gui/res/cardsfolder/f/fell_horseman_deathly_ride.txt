@@ -1,0 +1,18 @@
+Name:Fell Horseman
+ManaCost:3 B
+Types:Creature Zombie Knight
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME dies, put it on the bottom of its owner's library.
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
+DeckHints:Type$Adventure
+DeckHas:Ability$Graveyard
+AlternateMode:Adventure
+Oracle:When Fell Horseman dies, put it on the bottom of its owner's library.
+
+ALTERNATE
+
+Name:Deathly Ride
+ManaCost:1 B
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)

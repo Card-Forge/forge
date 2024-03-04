@@ -1,0 +1,10 @@
+Name:Glowcap Lantern
+ManaCost:G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddStaticAbility$ StaticLook | AddTrigger$ TrigAttack | Description$ Equipped creature has "You may look at the top card of your library any time" and "Whenever this creature attacks, it explores." (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
+SVar:StaticLook:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ Whenever this creature attacks, it explores.
+SVar:TrigExplore:DB$ Explore
+DeckHas:Ability$Counters|Graveyard
+K:Equip:2
+Oracle:Equipped creature has "You may look at the top card of your library any time" and "Whenever this creature attacks, it explores." (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)\nEquip {2}

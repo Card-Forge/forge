@@ -1,0 +1,12 @@
+Name:Senator Peacock
+ManaCost:3 U U
+Types:Legendary Creature Human Advisor
+PT:3/4
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddType$ Clue | AddAbility$ ClueSac | Description$ Artifacts you control are Clues in addition to their other types and have "{2}, Sacrifice this artifact: Draw a card."
+SVar:ClueSac:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue | Execute$ TrigUnblockable | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, target creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+DeckHas:Ability$Sacrifice & Type$Clue
+DeckHints:Type$Artifact
+Oracle:Artifacts you control are Clues in addition to their other types and have "{2}, Sacrifice this artifact: Draw a card."\nWhenever you sacrifice a Clue, target creature can't be blocked this turn.

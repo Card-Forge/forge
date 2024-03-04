@@ -1,0 +1,39 @@
+[metadata]
+Code=ACR
+Date=2024-07-05
+Name=Assassin's Creed
+Type=Draft
+ScryfallCode=ACR
+
+[cards]
+20 M Leonardo da Vinci @Wangjie Li
+25 M Ezio Auditore da Firenze @Fajareka Setiawan
+45 M Altaïr Ibn-La'Ahad @Axel Sauerwald
+52 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
+69 R The Animus @Nestor Ossandon Leal
+73 U Hidden Blade @L J Koh
+86 M Temporal Trespass @Borja Pindado
+89 R Cover of Darkness @Paulius Daščioras
+99 M Sword of Feast and Famine @Thanh Tuấn
+113 M Ezio Auditore da Firenze @Alexander Gering
+118 M Leonardo da Vinci @Miklós Ligeti
+119 M Cleopatra, Exiled Pharaoh @Nestor Ossandon Leal
+124 M Sword of Feast and Famine @Bruce Brenneise
+131 M Ezio Auditore da Firenze @Luisa J. Preissler
+137 M Altaïr Ibn-La'Ahad @Alex Negrea
+160 M Temporal Trespass @Borja Pindado
+163 R Cover of Darkness @Paulius Daščioras
+168 R The Animus @Nestor Ossandon Leal
+175 U Haystack @Xabi Gaztelua
+193 M Leonardo da Vinci @Wangjie Li
+196 M Temporal Trespass @Borja Pindado
+201 R Cover of Darkness @Paulius Daščioras
+203 M Ezio Auditore da Firenze @Fajareka Setiawan
+225 M Altaïr Ibn-La'Ahad @Axel Sauerwald
+233 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
+253 R The Animus @Nestor Ossandon Leal
+267 M Ezio Auditore da Firenze @Luisa J. Preissler
+268 M Altaïr Ibn-La'Ahad @Alex Negrea
+274 M Eivor, Battle-Ready @Fajareka Setiawan
+275 M Ezio, Blade of Vengeance @Jake Murray
+307 U Hidden Blade @Evyn Fong

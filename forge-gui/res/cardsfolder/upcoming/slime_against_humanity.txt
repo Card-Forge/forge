@@ -1,0 +1,10 @@
+Name:Slime Against Humanity
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Token | TokenScript$ g_0_0_ooze_trample | RememberTokens$ True | SubAbility$ DBPutCounters | SpellDescription$ Create a 0/0 green Ooze creature token with trample.
+SVar:DBPutCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ Count$ValidGraveyard,Exile Ooze.YouOwn,Card.YouOwn+namedSlime Against Humanity/Plus.2 | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ Put X +1/+1 counters on it, where X is two plus the total number of cards you own in exile and in your graveyard that are Oozes or are named Slime Against Humanity.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:A deck can have any number of cards named CARDNAME.
+DeckHas:Ability$Token & Type$Ooze
+DeckHints:Type$Ooze
+Oracle:Create a 0/0 green Ooze creature token with trample. Put X +1/+1 counters on it, where X is two plus the total number of cards you own in exile and in your graveyard that are Oozes or are named Slime Against Humanity.\nA deck can have any number of cards named Slime Against Humanity.

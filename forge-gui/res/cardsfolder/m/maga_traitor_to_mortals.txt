@@ -4,7 +4,7 @@ Types:Legendary Creature Human Wizard
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerDescription$ When NICKNAME enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Y
 SVar:Y:Count$CardCounters.P1P1
 Oracle:Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.

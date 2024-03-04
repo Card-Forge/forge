@@ -1,0 +1,9 @@
+Name:Acquired Mutation
+ManaCost:2 R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Goad$ True | Description$ Enchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
+T:Mode$ Attacks | ValidCard$ Creature.EnchantedBy | Execute$ TrigRadiation | TriggerDescription$ Whenever enchanted creature attacks, defending player gets two rad counters.
+SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredDefendingPlayer | Add$ 2
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, defending player gets two rad counters.

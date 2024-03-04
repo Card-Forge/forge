@@ -19,13 +19,21 @@ package forge.game.cost;
 
 import java.util.List;
 
+import com.google.common.collect.Sets;
+
+import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -140,15 +148,36 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
+        final Game game = source.getGame();
         if (this.payCostFromSource()) {
-            return source.isInPlay() && (getAbilityAmount(ability) == 0 || source.canReceiveCounters(this.counter));
+            if (isETBReplacement(ability, effect)) {
+                final Card copy = CardUtil.getLKICopy(source);
+                copy.setLastKnownZone(payer.getZone(ZoneType.Battlefield));
+
+                // check state it would have on the battlefield
+                CardCollection preList = new CardCollection(copy);
+                game.getAction().checkStaticAbilities(false, Sets.newHashSet(copy), preList);
+                // reset again?
+                game.getAction().checkStaticAbilities(false);
+                if (copy.canReceiveCounters(getCounter())) {
+                    return true;
+                }
+            } else {
+                if (!source.isInPlay()) {
+                    return false;
+                }
+                if (source.canReceiveCounters(getCounter())) {
+                    return true;
+                }
+            }
+            return getAbilityAmount(ability) == 0;
         }
 
         // 3 Cards have Put a -1/-1 Counter on a Creature you control.
         List<Card> typeList = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
                 this.getType().split(";"), payer, source, ability);
 
-        typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(this.counter));
+        typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(getCounter()));
 
         return !typeList.isEmpty();
     }
@@ -172,8 +201,12 @@ public class CostPutCounter extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        final int i = this.getAbilityAmount(ability);
-        targetCard.addCounter(this.getCounter(), i, payer, counterTable);
+        final int i = getAbilityAmount(ability);
+        if (isETBReplacement(ability, effect)) {
+            targetCard.addEtbCounter(getCounter(), i, payer);
+        } else {
+            targetCard.addCounter(getCounter(), i, payer, counterTable);
+        }
         return targetCard;
     }
 
@@ -208,4 +241,27 @@ public class CostPutCounter extends CostPartWithList {
         counterTable.clear();
     }
 
+    protected boolean isETBReplacement(final SpellAbility ability, final boolean effect) {
+       if (!effect) {
+           return false;
+       }
+       // only for itself?
+       if (!payCostFromSource()) {
+           return false;
+       }
+       if (ability == null) {
+           return false;
+       }
+       if (!ability.isReplacementAbility()) {
+           return false;
+       }
+       ReplacementEffect re = ability.getReplacementEffect();
+       if (re.getMode() != ReplacementType.Moved) {
+           return false;
+       }
+       if (!ability.getHostCard().equals(ability.getReplacingObject(AbilityKey.Card))) {
+           return false;
+       }
+       return true;
+   }
 }

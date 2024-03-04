@@ -1,0 +1,14 @@
+Name:Legion Reconsecrator
+ManaCost:2 B
+Types:Creature Vampire Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target creature card from a graveyard. If you do, conjure a duplicate of it into your graveyard. The duplicate perpetually becomes a black Skeleton with base power and toughness 3/1 in addition to its other colors and types.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature card | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Conjure$ True | DefinedName$ Remembered | Zone$ Graveyard | ImprintMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ Imprinted | Colors$ Black | Types$ Skeleton | Power$ 3 | Toughness$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return another target creature card with power or toughness 1 from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.powerEQ1+YouOwn+Other,Creature.toughnessEQ1+YouOwn+Other | TgtPrompt$ Select another target creature card with power or toughness 1 | Origin$ Graveyard | Destination$ Battlefield
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard & Type$Skeleton
+Oracle:Whenever Legion Reconsecrator attacks, exile up to one target creature card from a graveyard. If you do, conjure a duplicate of it into your graveyard. The duplicate perpetually becomes a black Skeleton with base power and toughness 3/1 in addition to its other colors and types.\nWhen Legion Reconsecrator dies, return another target creature card with power or toughness 1 from your graveyard to the battlefield.

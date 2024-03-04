@@ -3,6 +3,6 @@ ManaCost:3 W W
 Types:Creature Spirit
 PT:3/3
 K:Flying
-A:AB$ Protection | Cost$ Sac<2/Land> | Gains$ Choice | Choices$ AnyColor,artifacts | SpellDescription$ CARDNAME gains protection from artifacts or from the color of your choice until end of turn.
+A:AB$ Protection | Cost$ Sac<2/Land> | Gains$ Choice | Choices$ AnyColor,Artifact | SpellDescription$ CARDNAME gains protection from artifacts or from the color of your choice until end of turn.
 AI:RemoveDeck:All
 Oracle:Flying\nSacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.

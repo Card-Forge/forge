@@ -1,0 +1,8 @@
+Name:Exterminate!
+ManaCost:2 B
+Types:Sorcery
+K:Replicate:tapXType<1/Dalek>
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBDrain | SpellDescription$ Destroy target creature.
+SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | StackDescription$ SpellDescription | LifeAmount$ 3 | SpellDescription$ Its controller loses 3 life.
+DeckNeeds:Type$Dalek
+Oracle:Replicate—Tap an untapped Dalek you control. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nDestroy target creature. Its controller loses 3 life.

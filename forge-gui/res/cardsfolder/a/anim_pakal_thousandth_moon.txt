@@ -1,0 +1,11 @@
+Name:Anim Pakal, Thousandth Moon
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:1/2
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+nonGnome | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on NICKNAME, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:X:Count$CardCounters.P1P1
+DeckHas:Ability$Token|Counters & Type$Gnome
+DeckHints:Ability$Counters
+Oracle:Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on Anim Pakal, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on Anim Pakal.

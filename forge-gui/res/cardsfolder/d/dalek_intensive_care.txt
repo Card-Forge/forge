@@ -1,0 +1,12 @@
+Name:Dalek Intensive Care
+ManaCost:no cost
+Types:Plane The Dalek Asylum
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
+SVar:TrigExile:AB$ Token | Cost$ Mandatory Exile<1/Creature.nonDalek/non-Dalek creature> | TokenAmount$ 1 | TokenScript$ b_3_3_a_dalek_menace | PumpKeywords$ Haste | PumpDuration$ EOT
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, target Dalek you control deals damage equal to its power to target creature you don't control.
+SVar:RolledChaos:DB$ Pump | ValidTgts$ Dalek.YouCtrl | TgtPrompt$ Select target Dalek you control | AILogic$ PowerDmg | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$Token & Type$Artifact|Dalek
+Oracle:When you planeswalk to Dalek Intensive Care and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.\nWhenever chaos ensues, target Dalek you control deals damage equal to its power to target creature you don't control.

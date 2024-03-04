@@ -1,0 +1,144 @@
+//Rank|Name|Rarity|Set
+#1|Deranged Hermit|R|ULG
+#2|Radiant, Archangel|R|ULG
+#3|Phyrexian Plaguelord|R|ULG
+#4|Palinchron|R|ULG
+#5|Weatherseed Treefolk|R|ULG
+#6|Ring of Gix|R|ULG
+#7|No Mercy|R|ULG
+#8|Might of Oaks|R|ULG
+#9|Mother of Runes|U|ULG
+#10|Planar Collapse|R|ULG
+#11|Grim Monolith|R|ULG
+#12|Opportunity|U|ULG
+#13|Fleeting Image|R|ULG
+#14|Multani, Maro-Sorcerer|R|ULG
+#15|Beast of Burden|R|ULG
+#16|Shivan Phoenix|R|ULG
+#17|Phyrexian Defiler|U|ULG
+#18|Archivist|R|ULG
+#19|Bone Shredder|U|ULG
+#20|Urza's Blueprints|R|ULG
+#21|Molten Hydra|R|ULG
+#22|Eviscerator|R|ULG
+#23|Thran Weaponry|R|ULG
+#24|Quicksilver Amulet|R|ULG
+#25|Sustainer of the Realm|U|ULG
+#26|Defense of the Heart|R|ULG
+#27|Treetop Village|U|ULG
+#28|Raven Familiar|U|ULG
+#29|Thran War Machine|U|ULG
+#30|Ghitu Slinger|C|ULG
+#31|Ghitu Fire-Eater|U|ULG
+#32|Rancor|C|ULG
+#33|Lurking Skirge|R|ULG
+#34|Pyromancy|R|ULG
+#35|Ticking Gnomes|U|ULG
+#36|Simian Grunts|C|ULG
+#37|Karmic Guide|R|ULG
+#38|Hidden Gibbons|R|ULG
+#39|Yavimaya Granger|C|ULG
+#40|Phyrexian Debaser|C|ULG
+#41|Vigilant Drake|C|ULG
+#42|Avalanche Riders|U|ULG
+#43|Anthroplasm|R|ULG
+#44|Memory Jar|R|ULG
+#45|Thornwind Faeries|C|ULG
+#46|Viashino Cutthroat|U|ULG
+#47|Multani's Acolyte|C|ULG
+#48|King Crab|U|ULG
+#49|Radiant's Dragoons|U|ULG
+#50|Parch|C|ULG
+#51|Forbidding Watchtower|U|ULG
+#52|Swat|C|ULG
+#53|Faerie Conclave|U|ULG
+#54|Opal Champion|C|ULG
+#55|Snap|C|ULG
+#56|Bloated Toad|U|ULG
+#57|Ghitu Encampment|U|ULG
+#58|Radiant's Judgment|C|ULG
+#59|Gang of Elk|U|ULG
+#60|Miscalculation|C|ULG
+#61|Opal Avenger|R|ULG
+#62|Yavimaya Wurm|C|ULG
+#63|Weatherseed Faeries|C|ULG
+#64|Tethered Skirge|U|ULG
+#65|Defender of Chaos|C|ULG
+#66|Defender of Law|C|ULG
+#67|Second Chance|R|ULG
+#68|Unearth|C|ULG
+#69|Lone Wolf|U|ULG
+#70|Wheel of Torture|R|ULG
+#71|Yavimaya Scion|C|ULG
+#72|Expendable Troops|C|ULG
+#73|Spawning Pool|U|ULG
+#74|Blessed Reversal|R|ULG
+#75|Tinker|U|ULG
+#76|Cessation|C|ULG
+#77|Rank and File|U|ULG
+#78|Darkwatch Elves|U|ULG
+#79|Damping Engine|R|ULG
+#80|Cloud of Faeries|C|ULG
+#81|Viashino Heretic|U|ULG
+#82|Phyrexian Reclamation|U|ULG
+#83|Phyrexian Broodlings|C|ULG
+#84|Rivalry|R|ULG
+#85|Fog of Gnats|C|ULG
+#86|Crawlspace|R|ULG
+#87|Frantic Search|C|ULG
+#88|Lava Axe|C|ULG
+#89|Last-Ditch Effort|U|ULG
+#90|Goblin Welder|R|ULG
+#91|Wing Snare|U|ULG
+#92|Sick and Tired|C|ULG
+#93|Delusions of Mediocrity|R|ULG
+#94|Engineered Plague|U|ULG
+#95|Scrapheap|R|ULG
+#96|Treefolk Mystic|C|ULG
+#97|Phyrexian Denouncer|C|ULG
+#98|Hope and Glory|U|ULG
+#99|Levitation|U|ULG
+#100|Walking Sponge|U|ULG
+#101|Goblin Medics|C|ULG
+#102|Impending Disaster|R|ULG
+#103|Viashino Sandscout|C|ULG
+#104|Bouncing Beebles|C|ULG
+#105|Subversion|R|ULG
+#106|Viashino Bey|C|ULG
+#107|Defense Grid|R|ULG
+#108|Weatherseed Elf|C|ULG
+#109|Giant Cockroach|C|ULG
+#110|Knighthood|U|ULG
+#111|Purify|R|ULG
+#112|Jhoira's Toolbox|U|ULG
+#113|Repopulate|C|ULG
+#114|Ostracize|C|ULG
+#115|Angelic Curator|C|ULG
+#116|Slow Motion|C|ULG
+#117|Ghitu War Cry|U|ULG
+#118|Crop Rotation|C|ULG
+#119|Thran Lens|R|ULG
+#120|Devout Harpist|C|ULG
+#121|Pygmy Pyrosaur|C|ULG
+#122|Sluggishness|C|ULG
+#123|Rebuild|U|ULG
+#124|Silk Net|C|ULG
+#125|Plague Beetle|C|ULG
+#126|Brink of Madness|R|ULG
+#127|Intervene|C|ULG
+#128|About Face|C|ULG
+#129|Tragic Poet|C|ULG
+#130|Erase|C|ULG
+#131|Harmonic Convergence|U|ULG
+#132|Angel's Trumpet|U|ULG
+#133|Aura Flux|C|ULG
+#134|Sleeper's Guile|C|ULG
+#135|Granite Grip|C|ULG
+#136|Iron Will|C|ULG
+#137|Iron Maiden|R|ULG
+#138|Treacherous Link|U|ULG
+#139|Peace and Quiet|U|ULG
+#140|Burst of Energy|C|ULG
+#141|Rack and Ruin|U|ULG
+#142|Martyr's Cause|U|ULG
+#143|Multani's Presence|U|ULG

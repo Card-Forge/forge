@@ -1,0 +1,11 @@
+Name:Mr. House, President and CEO
+ManaCost:R W B
+Types:Legendary Artifact Creature Human
+PT:0/4
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigBranch | ValidPlayer$ You | ValidResult$ GE4 | TriggerDescription$ Whenever you roll a 4 or higher, create a 3/3 colorless Robot artifact creature token. If you rolled 6 or higher, instead create that token and a Treasure token.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ TriggerCount$Result | BranchConditionSVarCompare$ GE6 | TrueSubAbility$ Tokens | FalseSubAbility$ Token
+SVar:Token:DB$ Token | TokenScript$ c_3_3_a_robot
+SVar:Tokens:DB$ Token | TokenScript$ c_3_3_a_robot,c_a_treasure_sac
+A:AB$ RollDice | Cost$ 4 T | Amount$ Count$TotalManaSpent Treasure/Plus.1 | StackDescription$ SpellDescription | SpellDescription$ Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent to activate this ability.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Robot|Treasure
+Oracle:Whenever you roll a 4 or higher, create a 3/3 colorless Robot artifact creature token. If you rolled 6 or higher, instead create that token and a Treasure token.\n{4}, {T}: Roll a six-sided die plus an additional six-sided die for each mana from Treasures spent to activate this ability.

@@ -1,0 +1,12 @@
+Name:Unyielding Gatekeeper
+ManaCost:1 W
+Types:Creature Elephant Cleric
+PT:3/2
+K:Disguise:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME is turned face up, exile another target nonland permanent. If you controlled it, return it to the battlefield tapped. Otherwise, its controller creates a 2/2 white and blue Detective creature token.
+SVar:TrigExile:DB$ ChangeZone | IsCurse$ True | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Choose another target nonland permanent | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | ConditionDefined$ Remembered | GainControl$ True | ConditionPresent$ Card.YouCtrl | Destination$ Battlefield | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ wu_2_2_detective | TokenOwner$ RememberedController | ConditionDefined$ Remembered | ConditionPresent$ Card.YouCtrl | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Detective & Color$Blue
+Oracle:Disguise {1}{W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Unyielding Gatekeeper is turned face up, exile another target nonland permanent. If you controlled it, return it to the battlefield tapped. Otherwise, its controller creates a 2/2 white and blue Detective creature token.

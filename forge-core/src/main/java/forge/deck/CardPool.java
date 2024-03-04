@@ -440,7 +440,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
-        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
+        main2sort.sort(ItemPoolSorter.BY_NAME_THEN_SET);
         final CardDb commonDb = StaticData.instance().getCommonCards();
         StringBuilder sb = new StringBuilder();
 

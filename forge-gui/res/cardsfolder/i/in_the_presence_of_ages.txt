@@ -1,0 +1,6 @@
+Name:In the Presence of Ages
+ManaCost:2 G
+Types:Instant
+A:SP$ DigMultiple | DigNum$ 4 | Reveal$ True | ChangeValid$ Creature,Land | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.
+DeckHints:Ability$Graveyard
+Oracle:Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard.

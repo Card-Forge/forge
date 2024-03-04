@@ -1,0 +1,8 @@
+Name:Undergrowth Recon
+ManaCost:1 G G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, return target land card from your graveyard to the battlefield tapped.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Tapped$ True | TgtPrompt$ Select target land card in your graveyard | Destination$ Battlefield | ValidTgts$ Land.YouOwn
+DeckHints:Ability$Graveyard|Mill|Dredge|Discard
+DeckHas:Ability$Graveyard
+Oracle:At the beginning of your upkeep, return target land card from your graveyard to the battlefield tapped.

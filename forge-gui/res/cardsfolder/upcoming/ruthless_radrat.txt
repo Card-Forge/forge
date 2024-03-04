@@ -1,0 +1,9 @@
+Name:Ruthless Radrat
+ManaCost:1 B B
+Types:Creature Rat Mutant
+PT:2/2
+K:Squad:ExileFromGrave<4/Card/cards>
+K:Menace
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Squad — Exile four cards from your graveyard. (As an additional cost to cast this spell, you may pay its squad cost any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nMenace (This creature can't be blocked except by two or more creatures.)

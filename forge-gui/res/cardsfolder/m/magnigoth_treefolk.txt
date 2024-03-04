@@ -3,8 +3,8 @@ ManaCost:4 G
 Types:Creature Treefolk
 PT:2/6
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Plainswalk | IsPresent$ Plains.YouCtrl | Description$ Domain — For each basic land type among lands you control, CARDNAME has landwalk of that type
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Islandwalk | IsPresent$ Island.YouCtrl 
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Swampwalk | IsPresent$ Swamp.YouCtrl 
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Mountainwalk | IsPresent$ Mountain.YouCtrl 
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Forestwalk | IsPresent$ Forest.YouCtrl 
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Islandwalk | IsPresent$ Island.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Swampwalk | IsPresent$ Swamp.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Mountainwalk | IsPresent$ Mountain.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Forestwalk | IsPresent$ Forest.YouCtrl
 Oracle:Domain — For each basic land type among lands you control, Magnigoth Treefolk has landwalk of that type. (It can't be blocked as long as defending player controls a land of that type.)

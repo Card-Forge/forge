@@ -1,0 +1,12 @@
+Name:Wail of the Forgotten
+ManaCost:U B
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBReturn,DBDiscard,DBLook | AdditionalDescription$ If there are eight or more permanent cards in your graveyard as you cast this spell, choose one or more instead.
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ TgtChoose | SpellDescription$ Target opponent discards a card.
+SVar:DBLook:DB$ Dig | DigNum$ 3 | ChangeValid$ Card | DestinationZone$ Hand | DestinationZone2$ Graveyard | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+SVar:X:Count$Compare Y GE8.3.1
+SVar:Y:Count$ValidGraveyard Permanent.YouOwn
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Ability$Mill|Discard|Sacrifice
+Oracle:Descend 8 — Choose one. If there are eight or more permanent cards in your graveyard as you cast this spell, choose one or more instead.\n• Return target nonland permanent to its owner's hand.\n• Target opponent discards a card.\n• Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.

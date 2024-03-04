@@ -1,0 +1,11 @@
+Name:March of the Canonized
+ManaCost:X W W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create X 1/1 white Vampire creature tokens with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You
+SVar:X:Count$xPaid
+T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ Y | SVarCompare$ GE7 | ValidPlayer$ You | Execute$ TrigTokenDemon | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying.
+SVar:TrigTokenDemon:DB$ Token | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You
+SVar:Y:Count$DevotionDual.White.Black
+DeckHas:Ability$Token & Type$Vampire|Demon
+Oracle:When March of the Canonized enters the battlefield, create X 1/1 white Vampire creature tokens with lifelink.\nAt the beginning of your upkeep, if your devotion to white and black is seven or greater, create a 4/3 white and black Vampire Demon creature token with flying.

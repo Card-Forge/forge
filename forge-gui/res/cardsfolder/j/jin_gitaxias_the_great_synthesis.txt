@@ -9,11 +9,10 @@ A:AB$ ChangeZone | Cost$ 3 U | CheckSVar$ X | SVarCompare$ GE7 | Origin$ Battlef
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
-AlternateMode:DoubleFaced
 DeckHints:Type$Phyrexian
 SVar:BuffedBy:Card.nonCreature+cmcGE3
+AlternateMode:DoubleFaced
 Oracle:Ward {2}\nWhenever you cast a noncreature spell with mana value 3 or greater, draw a card.\n{3}{U}: Exile Jin-Gitaxias, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you have seven or more cards in hand.
-
 
 ALTERNATE
 
@@ -21,7 +20,7 @@ Name:The Great Synthesis
 ManaCost:no cost
 Colors:blue
 Types:Enchantment Saga
-K:Saga:3:DBDraw,DBBounceAll,DBCastAll
+K:Chapter:3:DBDraw,DBBounceAll,DBCastAll
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBEffect | SpellDescription$ Draw cards equal to the number of cards in your hand. You have no maximum hand size for as long as you control CARDNAME.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilLoseControlOfHost
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.

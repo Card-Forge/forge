@@ -1,0 +1,11 @@
+Name:Burden of Proof
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AITgts$ Card.Detective+YouCtrl,Creature.OppCtrl
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Detective+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 as long as it's a Detective you control. Otherwise, it has base power and toughness 1/1 and can't block Detectives.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonDetective,Creature.EnchantedBy+YouDontCtrl | Secondary$ True | SetPower$ 1 | SetToughness$ 1 | Description$ Enchanted creature gets +2/+2 as long as it's a Detective you control. Otherwise, it has base power and toughness 1/1 and can't block Detectives.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Detective | Secondary$ True | ValidBlocker$ Creature.EnchantedBy+nonDetective,Creature.EnchantedBy+YouDontCtrl | Description$ Enchanted creature gets +2/+2 as long as it's a Detective you control. Otherwise, it has base power and toughness 1/1 and can't block Detectives.
+DeckHints:Type$Detective
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +2/+2 as long as it's a Detective you control. Otherwise, it has base power and toughness 1/1 and can't block Detectives.

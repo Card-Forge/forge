@@ -297,23 +297,21 @@ public class DamageDealEffect extends DamageBaseEffect {
             c.setDamage(0);
             c.setHasBeenDealtDeathtouchDamage(false);
             c.clearAssignedDamage();
-        } else {
-            if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
-                    sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
-                damageMap.put(sourceLKI, c, dmgToTarget);
+        } else if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
+                sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
+            damageMap.put(sourceLKI, c, dmgToTarget);
 
-                List<GameEntity> list = AbilityUtils.getDefinedEntities(hostCard, sa.getParam("ExcessDamage"), sa);
+            List<GameEntity> list = AbilityUtils.getDefinedEntities(hostCard, sa.getParam("ExcessDamage"), sa);
 
-                if (!list.isEmpty()) {
-                    damageMap.put(sourceLKI, list.get(0), excess);
-                }
-
-                if (sa.hasParam("RememberRedirectedExcess")) {
-                    hostCard.addRemembered(excess);
-                }
-            } else {
-                damageMap.put(sourceLKI, c, dmg);
+            if (!list.isEmpty()) {
+                damageMap.put(sourceLKI, list.get(0), excess);
             }
+
+            if (sa.hasParam("RememberRedirectedExcess")) {
+                hostCard.addRemembered(excess);
+            }
+        } else {
+            damageMap.put(sourceLKI, c, dmg);
         }
     }
 }

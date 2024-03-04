@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="106">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Abyssal Gatekeeper&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="7" name="SubBackGround" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFxIIm7pFnL73thtlJa7uRzUa3C90N1HQHuj3Y5Iezvehm09JeQhibG2kJBsreUTAK0AEATPcacQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqBGARI1SPLM3TtJQcPlL27aWTvjigExuc3dHXkxNlIthdmJjFxiayOGvbiwtgAshyt7B3Fo5iaWIYHgSkxBwBVXhi5
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy91FEOgyAMBmDexcc9qRdzZ9m8isdQNu82+tCsaai0xfgnjTECH8WELYaw3VAjK82cZx9CinLN/XUufgfzk5+QgXmYXWFb+qUmulJqttYFk+fMrdkal/dJ18XzTcIeJFvjTlH+l6Uz4OMGZ7+aM6VuKS39el1vv+Bq/iWkNK7FbQm668PmHrmWzme+8ryvs9/RaaNZWtdyT1rsM9N6T2rtmml1qf3u/gWh7zXT4/I5NNb90/oBrUrbCw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBjcYIUoaeLUAitxmI9LfLiDNjrY0cKPyhdno619PNC4VBJA5VMLyPJA6DpeBgZzIPZFk4fZiwyQ1UjzUNc97mK47QW57zUV7UKOy5Vo4YxLHTUANjuIFSMXNAL90A7ETWgYl1gzlfy8F+iHfSTg/VT0MyHQxI1Kj4LBBQBImh3y
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="69" template="../../obj/enemy.tx" x="127.7" y="133.6" width="16.6667" height="16">
+   <properties>
+    <property name="displayNameOverride" value="Strange Horror"/>
+    <property name="enemy" value="Devil of Tibalt"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="209.317" y="145.131">
+   <properties>
+    <property name="displayNameOverride" value="Master of Demonology"/>
+    <property name="enemy" value="Adept Black Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="72,81,77,76,81"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="288.117" y="132.743">
+   <properties>
+    <property name="enemy" value="Necrogoyf"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/waypoint.tx" x="207.348" y="108.791"/>
+  <object id="76" template="../../obj/waypoint.tx" x="120.801" y="202.565"/>
+  <object id="77" template="../../obj/waypoint.tx" x="298.541" y="200.969"/>
+  <object id="81" template="../../obj/waypoint.tx" x="208.885" y="202.527"/>
+  <object id="101" template="../../obj/treasure.tx" x="224.945" y="57.9992">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]"/>
+   </properties>
+  </object>
+  <object id="94" template="../../obj/manashards.tx" x="209.123" y="58.295"/>
+  <object id="97" template="../../obj/booster.tx" x="208.716" y="71.4606">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M14&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;Blue&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="100" template="../../obj/treasure.tx" x="194.105" y="57.4273">
+   <properties>
+    <property name="reward" value="[{&quot;type&quot;: &quot;randomCard&quot;, &quot;count&quot;: 10 }, {&quot;type&quot;: &quot;item&quot;,&quot;count&quot;: 1,&quot;probability&quot;:0.2,&quot;itemName&quot;: &quot;Dark Armor&quot;}]"/>
+   </properties>
+  </object>
+  <object id="102" template="../../obj/gate.tx" x="207.807" y="95.793">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. I looks like it is open elsewhere&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="103" name="switch" type="dialog" gid="4426" x="141.352" y="114.291" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:102}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="104" name="switch" type="dialog" gid="4426" x="299.611" y="116.004" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:2}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:102}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="105" template="../../obj/entry_up.tx" x="193.863" y="254.394" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

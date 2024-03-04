@@ -25,7 +25,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OAxXIA+MTwUK4vSEBuVuwBV3MHF0ehSMglEwvAAA4GwIFQ==
+   eJxjYBgFpABxHQYGCR3amT9VnYFhmjqE3anFwNClRTu7SAXIfqd1OAxXIA+MTwUK4vSEBmX239HBHXcwcXR6FIyCUTC8AAAIywkd
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -85,7 +85,7 @@
     <property name="noRestock" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="52" template="../../obj/quest.tx" x="158.5" y="146.25" width="33.75" height="36">
+  <object id="52" template="../../obj/quest.tx" x="159" y="146" width="34" height="16">
    <properties>
     <property name="questtype" value="island_town_identity"/>
    </properties>

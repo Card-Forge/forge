@@ -1,0 +1,15 @@
+Name:The Moment
+ManaCost:2
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a time counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1
+A:AB$ Untap | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPhase | SpellDescription$ Untap target creature you control. It phases out until CARDNAME leaves the battlefield.
+SVar:DBPhase:DB$ Phases | Defined$ Targeted | RememberAffected$ True | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True
+SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ It phases out until CARDNAME leaves the battlefield.
+SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+A:AB$ DestroyAll | Cost$ 3 T | ValidCards$ Permanent.nonLand+cmcLEX | SorcerySpeed$ True | SubAbility$ DBSacrifice | SpellDescription$ Destroy each nonland permanent with mana value less than or equal to the number of time counters on CARDNAME. Then sacrifice CARDNAME. Activate only as a sorcery.
+SVar:DBSacrifice:DB$ Sacrifice | ConditionDefined$ Self
+SVar:X:Count$CardCounters.TIME
+Oracle:At the beginning of your upkeep, put a time counter on The Moment.\n{2}, {T}: Untap target creature you control. It phases out until The Moment leaves the battlefield.\n{3}, {T}: Destroy each nonland permanent with mana value less than or equal to the number of time counters on The Moment. Then sacrifice The Moment. Activate only as a sorcery.

@@ -1,0 +1,8 @@
+Name:The Cave of Skulls
+ManaCost:no cost
+Types:Plane Earth
+S:Mode$ Continuous | Affected$ Creature.YouOwn | AffectedZone$ Graveyard | EffectZone$ Command | AddKeyword$ Scavenge:CardManaCost | Description$ Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost. (Exile a creature card from your graveyard and pay its mana cost: Put a number of +1/+1 counters equal to that card's power on target creature. Scavenge only as a sorcery.)
+T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever chaos ensues, create two 1/1 white Warrior creature tokens.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_warrior | TokenOwner$ You | TokenAmount$ 2
+DeckHas:Ability$Graveyard|Counters|Token & Type$Warrior
+Oracle:Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost. (Exile a creature card from your graveyard and pay its mana cost: Put a number of +1/+1 counters equal to that card's power on target creature. Scavenge only as a sorcery.)\nWhenever chaos ensues, create two 1/1 white Warrior creature tokens.

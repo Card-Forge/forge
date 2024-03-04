@@ -1,0 +1,9 @@
+Name:Trouble in Pairs
+ManaCost:2 W W
+Types:Enchantment
+R:Event$ BeginTurn | ActiveZones$ Battlefield | ValidPlayer$ Opponent | ExtraTurn$ True | Skip$ True | Description$ If an opponent would begin an extra turn, that player skips that turn instead.
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.attackingYou | ValidAttackersAmount$ GE2 | AttackingPlayer$ Opponent | AttackedTarget$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card.
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Whenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card.
+T:Mode$ Drawn | ValidPlayer$ Opponent | Number$ 2 | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Whenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:If an opponent would begin an extra turn, that player skips that turn instead.\nWhenever an opponent attacks you with two or more creatures, draws their second card each turn, or casts their second spell each turn, you draw a card.

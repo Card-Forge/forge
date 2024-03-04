@@ -1,0 +1,10 @@
+Name:Case of the Gateway Express
+ManaCost:1 W
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageEach | TriggerDescription$ When this Case enters the battlefield, choose target creature you don't control. Each creature you control deals 1 damage to that creature.
+SVar:TrigDamageEach:DB$ EachDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | DefinedDamagers$ Valid Creature.YouCtrl | Defined$ Targeted | NumDmg$ 1
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE3 | ValidPlayer$ You | IsPresent$ Card.Self+IsUnsolved | TriggerZones$ Battlefield | Execute$ TrigSolve | TriggerDescription$ To solve — Three or more creatures attacked this turn. (If unsolved, solve at the beginning of your end step.)
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | IsPresent$ Card.Self+IsSolved | Description$ Solved — Creatures you control get +1/+0.
+SVar:X:Count$AttackersDeclared
+Oracle:When this Case enters the battlefield, choose target creature you don't control. Each creature you control deals 1 damage to that creature.\nTo solve — Three or more creatures attacked this turn. (If unsolved, solve at the beginning of your end step.)\nSolved — Creatures you control get +1/+0.

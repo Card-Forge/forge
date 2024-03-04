@@ -1,0 +1,364 @@
+//Rank|Name|Rarity|Set
+#1|Razormane Masticore|R|10E
+#2|Platinum Angel|R|10E
+#3|Wrath of God|R|10E
+#4|Serra Angel|R|10E
+#5|Sengir Vampire|R|10E
+#6|Shivan Dragon|R|10E
+#7|Loxodon Warhammer|R|10E
+#8|Kamahl, Pit Fighter|R|10E
+#9|Mahamoti Djinn|R|10E
+#10|Blaze|U|10E
+#11|Shivan Hellkite|R|10E
+#12|Rhox|R|10E
+#13|Mobilization|R|10E
+#14|Overrun|U|10E
+#15|Voice of All|R|10E
+#16|Beacon of Destruction|R|10E
+#17|Ascendant Evincar|R|10E
+#18|Royal Assassin|R|10E
+#19|Cone of Flame|U|10E
+#20|Siege Gang Commander|R|10E
+#21|Verdant Force|R|10E
+#22|Icy Manipulator|U|10E
+#23|Arcanis the Omnipotent|R|10E
+#24|Hurricane|R|10E
+#25|Air Elemental|U|10E
+#26|Nekrataal|U|10E
+#27|Glorious Anthem|R|10E
+#28|Persuasion|U|10E
+#29|Mortivore|R|10E
+#30|Graveborn Muse|R|10E
+#31|Troll Ascetic|R|10E
+#32|Mirri, Cat Warrior|R|10E
+#33|Pyroclasm|U|10E
+#34|Terror|C|10E
+#35|Hypnotic Specter|R|10E
+#36|Plague Wind|R|10E
+#37|Incinerate|C|10E
+#38|Windborn Muse|R|10E
+#39|Dragon Roost|R|10E
+#40|Grave Pact|R|10E
+#41|Seedborn Muse|R|10E
+#42|Cho Manno, Revolutionary|R|10E
+#43|Reya Dawnbringer|R|10E
+#44|Clone|R|10E
+#45|Nightmare|R|10E
+#46|Paladin en Vec|R|10E
+#47|Chimeric Staff|R|10E
+#48|Molimo, Maro Sorcerer|R|10E
+#49|Tidings|U|10E
+#50|Orcish Artillery|U|10E
+#51|Might of Oaks|R|10E
+#52|Ballista Squad|U|10E
+#53|Thieving Magpie|U|10E
+#54|Furnace Whelp|U|10E
+#55|Essence Drain|C|10E
+#56|Avatar of Might|R|10E
+#57|Flowstone Slide|R|10E
+#58|Lord of the Undead|R|10E
+#59|Scalpelexis|R|10E
+#60|Pacifism|C|10E
+#61|Puppeteer|U|10E
+#62|Hail of Arrows|U|10E
+#63|Birds of Paradise|R|10E
+#64|Condemn|U|10E
+#65|Arcane Teachings|U|10E
+#66|Beacon of Unrest|R|10E
+#67|Prodigal Pyromancer|C|10E
+#68|Shock|C|10E
+#69|Angel of Mercy|C|10E
+#70|Story Circle|R|10E
+#71|Bloodfire Colossus|R|10E
+#72|Consume Spirit|U|10E
+#73|Snapping Drake|C|10E
+#74|Seismic Assault|R|10E
+#75|Juggernaut|U|10E
+#76|Ambassador Laquatus|R|10E
+#77|Citanul Flute|R|10E
+#78|Treetop Village|U|10E
+#79|Phage the Untouchable|R|10E
+#80|Guerrilla Tactics|U|10E
+#81|Quirion Dryad|R|10E
+#82|Serra's Embrace|U|10E
+#83|Lavaborn Muse|R|10E
+#84|Civic Wayfinder|C|10E
+#85|Gravedigger|C|10E
+#86|Rod of Ruin|U|10E
+#87|Phantom Warrior|U|10E
+#88|Aven Windreader|C|10E
+#89|Nantuko Husk|U|10E
+#90|Cruel Edict|U|10E
+#91|Assassinate|C|10E
+#92|Earth Elemental|U|10E
+#93|Stampeding Wildebeests|U|10E
+#94|Jayemdae Tome|R|10E
+#95|Spined Wurm|C|10E
+#96|Karplusan Strider|U|10E
+#97|Scion of the Wild|R|10E
+#98|Skyhunter Patrol|C|10E
+#99|Joiner Adept|R|10E
+#100|Doomed Necromancer|R|10E
+#101|Phyrexian Rager|C|10E
+#102|Thundering Giant|U|10E
+#103|Mantis Engine|U|10E
+#104|Aven Fisher|C|10E
+#105|Mogg Fanatic|U|10E
+#106|Cloud Elemental|C|10E
+#107|Knight of Dusk|U|10E
+#108|Spitting Earth|C|10E
+#109|Loxodon Mystic|C|10E
+#110|Blanchwood Armor|U|10E
+#111|Hunted Wumpus|U|10E
+#112|Merfolk Looter|C|10E
+#113|Wild Griffin|C|10E
+#114|Quicksand|U|10E
+#115|Midnight Ritual|R|10E
+#116|Bog Wraith|U|10E
+#117|Vedalken Mastermind|U|10E
+#118|Elvish Piper|R|10E
+#119|The Hive|R|10E
+#120|Soulblast|R|10E
+#121|Lord of the Pit|R|10E
+#122|Threaten|U|10E
+#123|Rootwalla|C|10E
+#124|Elven Riders|U|10E
+#125|Tangle Spider|U|10E
+#126|Bogardan Firefiend|C|10E
+#127|Giant Spider|C|10E
+#128|Faerie Conclave|U|10E
+#129|Beacon of Immortality|R|10E
+#130|Skyhunter Skirmisher|U|10E
+#131|Femeref Archers|U|10E
+#132|Sylvan Basilisk|U|10E
+#133|Elvish Champion|R|10E
+#134|Mind Stone|U|10E
+#135|Evacuation|R|10E
+#136|Field Marshal|R|10E
+#137|Terramorphic Expanse|C|10E
+#138|Kavu Climber|C|10E
+#139|Benalish Knight|C|10E
+#140|Sift|C|10E
+#141|Severed Legion|C|10E
+#142|Enormous Baloth|U|10E
+#143|Flamewave Invoker|U|10E
+#144|Ghitu Encampment|U|10E
+#145|Bloodrock Cyclops|C|10E
+#146|Leonin Scimitar|U|10E
+#147|Sulfurous Springs|R|10E
+#148|Deathmark|U|10E
+#149|Llanowar Elves|C|10E
+#150|Wall of Air|U|10E
+#151|Squee, Goblin Nabob|R|10E
+#152|Afflict|C|10E
+#153|Giant Growth|C|10E
+#154|Craw Wurm|C|10E
+#155|Kjeldoran Royal Guard|R|10E
+#156|Wall of Swords|U|10E
+#157|Stalking Tiger|C|10E
+#158|Remove Soul|C|10E
+#159|Rampant Growth|C|10E
+#160|Whispersilk Cloak|U|10E
+#161|Bottle Gnomes|U|10E
+#162|Hidden Horror|U|10E
+#163|Forbidding Watchtower|U|10E
+#164|Dusk Imp|C|10E
+#165|Aven Cloudchaser|C|10E
+#166|Millstone|R|10E
+#167|Llanowar Sentinel|C|10E
+#168|Spiketail Hatchling|U|10E
+#169|Counsel of the Soratami|C|10E
+#170|Pariah|R|10E
+#171|Diabolic Tutor|U|10E
+#172|Recover|C|10E
+#173|Karplusan Forest|R|10E
+#174|Abundance|R|10E
+#175|Rootwater Matriarch|R|10E
+#176|Hill Giant|C|10E
+#177|Youthful Knight|C|10E
+#178|Goblin King|R|10E
+#179|Boomerang|C|10E
+#180|Unsummon|C|10E
+#181|Highway Robber|C|10E
+#182|Yavimaya Coast|R|10E
+#183|Telling Time|U|10E
+#184|Spawning Pool|U|10E
+#185|Ravenous Rats|C|10E
+#186|Ghost Warden|C|10E
+#187|Festering Goblin|C|10E
+#188|True Believer|R|10E
+#189|Brushland|R|10E
+#190|Soul Feast|U|10E
+#191|Time Stop|R|10E
+#192|Viashino Runner|C|10E
+#193|Skyhunter Prowler|C|10E
+#194|Starlight Invoker|U|10E
+#195|Loyal Sentry|R|10E
+#196|Ancestor's Chosen|U|10E
+#197|Mass of Ghouls|C|10E
+#198|Viridian Shaman|U|10E
+#199|Righteousness|R|10E
+#200|Drudge Skeletons|U|10E
+#201|Chromatic Star|U|10E
+#202|Soul Warden|U|10E
+#203|Anaba Bodyguard|C|10E
+#204|Llanowar Wastes|R|10E
+#205|Looming Shade|C|10E
+#206|Phyrexian Vault|U|10E
+#207|Fog Elemental|U|10E
+#208|Canopy Spider|C|10E
+#209|Coat of Arms|R|10E
+#210|Traumatize|R|10E
+#211|Colossus of Sardia|R|10E
+#212|Recollect|U|10E
+#213|Caves of Koilos|R|10E
+#214|Scoria Wurm|R|10E
+#215|Sage Owl|C|10E
+#216|Underground River|R|10E
+#217|Dehydration|C|10E
+#218|Sky Weaver|U|10E
+#219|Shivan Reef|R|10E
+#220|Adarkar Wastes|R|10E
+#221|Cephalid Constable|R|10E
+#222|Hate Weaver|U|10E
+#223|Steadfast Guard|C|10E
+#224|Composite Golem|U|10E
+#225|Lava Axe|C|10E
+#226|Rage Weaver|U|10E
+#227|Rushwood Dryad|C|10E
+#228|Battlefield Forge|R|10E
+#229|Icatian Priest|U|10E
+#230|Grizzly Bears|C|10E
+#231|Aggressive Urge|C|10E
+#232|Venerable Monk|C|10E
+#233|Lightning Elemental|C|10E
+#234|Shunt|R|10E
+#235|Might Weaver|U|10E
+#236|Sylvan Scrying|U|10E
+#237|Deluge|U|10E
+#238|Cancel|C|10E
+#239|Nomad Mythmaker|R|10E
+#240|Relentless Assault|R|10E
+#241|Angelic Chorus|R|10E
+#242|Rock Badger|C|10E
+#243|Lure|U|10E
+#244|Pincher Beetles|C|10E
+#245|Mind Rot|C|10E
+#246|Discombobulate|U|10E
+#247|Wall of Fire|U|10E
+#248|Time Stretch|R|10E
+#249|Pithing Needle|R|10E
+#250|Samite Healer|C|10E
+#251|Creeping Mold|U|10E
+#252|Head Games|R|10E
+#253|Spirit Weaver|U|10E
+#254|Denizen of the Deep|R|10E
+#255|Flashfreeze|U|10E
+#256|Uncontrollable Anger|C|10E
+#257|Spirit Link|U|10E
+#258|Twincast|R|10E
+#259|Rootwater Commando|C|10E
+#260|Goblin Piker|C|10E
+#261|Yavimaya Enchantress|U|10E
+#262|Suntail Hawk|C|10E
+#263|Angelic Wall|C|10E
+#264|Dross Crocodile|C|10E
+#265|Thrull Surgeon|U|10E
+#266|Sculpting Steel|R|10E
+#267|Gaea's Herald|R|10E
+#268|Howling Mine|R|10E
+#269|Sea Monster|C|10E
+#270|Underworld Dreams|R|10E
+#271|Dreamborn Muse|R|10E
+#272|Agonizing Memories|U|10E
+#273|Spineless Thug|C|10E
+#274|Spark Elemental|U|10E
+#275|Relentless Rats|U|10E
+#276|Rain of Tears|U|10E
+#277|Peek|C|10E
+#278|Manabarbs|R|10E
+#279|Sunken Hope|R|10E
+#280|Treasure Hunter|U|10E
+#281|Steel Golem|U|10E
+#282|Vampire Bats|C|10E
+#283|Treetop Bracers|C|10E
+#284|Twitch|C|10E
+#285|Naturalize|C|10E
+#286|Heart of Light|C|10E
+#287|Fists of the Anvil|C|10E
+#288|Distress|C|10E
+#289|Horseshoe Crab|C|10E
+#290|Cryoclasm|U|10E
+#291|Plagiarize|R|10E
+#292|Commune with Nature|C|10E
+#293|Cloud Sprite|C|10E
+#294|No Rest for the Wicked|U|10E
+#295|Academy Researchers|U|10E
+#296|Unholy Strength|C|10E
+#297|Scathe Zombies|C|10E
+#298|Warrior's Honor|C|10E
+#299|Overgrowth|C|10E
+#300|Legacy Weapon|R|10E
+#301|Lumengrid Warden|C|10E
+#302|Sudden Impact|U|10E
+#303|Angelic Blessing|C|10E
+#304|Furnace of Rath|R|10E
+#305|Crucible of Worlds|R|10E
+#306|Bandage|C|10E
+#307|Skyshroud Ranger|C|10E
+#308|Aura of Silence|U|10E
+#309|Viashino Sandscout|C|10E
+#310|Elvish Berserker|C|10E
+#311|Aura Graft|U|10E
+#312|Luminesce|U|10E
+#313|Sleeper Agent|R|10E
+#314|Demolish|C|10E
+#315|Tundra Wolves|C|10E
+#316|Smash|C|10E
+#317|Raging Goblin|C|10E
+#318|Goblin Sky Raider|C|10E
+#319|Holy Strength|C|10E
+#320|Holy Day|C|10E
+#321|Plague Beetle|C|10E
+#322|Regeneration|U|10E
+#323|Ornithopter|U|10E
+#324|Stun|C|10E
+#325|Doubling Cube|R|10E
+#326|Contaminated Bond|C|10E
+#327|Reviving Dose|C|10E
+#328|Primal Rage|U|10E
+#329|March of the Machines|R|10E
+#330|Honor Guard|C|10E
+#331|Dragon's Claw|U|10E
+#332|Crafty Pathmage|C|10E
+#333|Goblin Elite Infantry|C|10E
+#334|Mind Bend|R|10E
+#335|Stronghold Discipline|U|10E
+#336|Fountain of Youth|U|10E
+#337|Shatterstorm|U|10E
+#338|Wall of Wood|C|10E
+#339|Hurkyl's Recall|R|10E
+#340|Megrim|U|10E
+#341|Demystify|C|10E
+#342|Root Maze|R|10E
+#343|Tempest of Light|U|10E
+#344|Duct Crawler|C|10E
+#345|Mortal Combat|R|10E
+#346|Kraken's Eye|U|10E
+#347|Rule of Law|U|10E
+#348|Natural Spring|C|10E
+#349|Upwelling|R|10E
+#350|Fear|C|10E
+#351|Goblin Lore|U|10E
+#352|Warp World|R|10E
+#353|Demon's Horn|U|10E
+#354|Angel's Feather|U|10E
+#355|Shimmering Wings|C|10E
+#356|Fugitive Wizard|C|10E
+#357|Robe of Mirrors|C|10E
+#358|Firebreathing|C|10E
+#359|Reminisce|U|10E
+#360|Wurm's Tooth|U|10E
+#361|Telepathy|U|10E
+#362|High Ground|U|10E
+#363|Spellbook|U|10E

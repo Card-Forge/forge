@@ -1,0 +1,11 @@
+Name:Mycelic Ballad
+ManaCost:3 B
+Types:Sorcery Chorus
+K:Starting intensity:2
+A:SP$ Sacrifice | Amount$ X | SacValid$ Creature | Defined$ Player | SubAbility$ DBGainLife | SpellDescription$ Each player sacrifices X creatures and you gain X life, where X is this spell's intensity.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+Chorus | DefinedDesc$ all Chorus cards you own | SpellDescription$ All Chorus cards you own intensify by 1.
+SVar:X:Count$Intensity
+DeckHas:Ability$LifeGain
+DeckHints:Type$Chorus
+Oracle:Starting intensity 2\nEach player sacrifices X creatures and you gain X life, where X is this spell's intensity.\nAll Chorus cards you own intensify by 1.

@@ -1,0 +1,23 @@
+Name:Karvanista, Loyal Lupari
+ManaCost:4 G
+Types:Legendary Creature Alien Dog Soldier
+PT:5/5
+K:Vigilance
+K:Trample
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on each Human you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.Human+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Human
+DeckHints:Ability$Counters
+SVar:HasAttackEffect:TRUE
+AlternateMode:Adventure
+Oracle:Vigilance, trample, haste\nWhenever Karvanista attacks, put a +1/+1 counter on each Human you control.
+
+ALTERNATE
+
+Name:Lupari Shield
+ManaCost:1 G
+Types:Sorcery Adventure
+A:SP$ PumpAll | ValidCards$ Human.YouCtrl | KW$ Indestructible | Duration$ UntilYourNextTurn | SpellDescription$ Humans you control gain indestructible until your next turn. (Then exile this card. You may cast the creature later from exile.)
+SVar:PlayMain1:TRUE
+Oracle:Humans you control gain indestructible until your next turn. (Then exile this card. You may cast the creature later from exile.)

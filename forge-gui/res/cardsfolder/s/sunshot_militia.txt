@@ -1,0 +1,7 @@
+Name:Sunshot Militia
+ManaCost:1 R
+Types:Creature Human Soldier
+PT:1/3
+A:AB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | Cost$ tapXType<2/Artifact;Creature/artifacts and/or creatures> | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 1 damage to each opponent. Activate only as a sorcery.
+DeckHints:Type$Artifact
+Oracle:Tap two untapped artifacts and/or creatures you control: Sunshot Militia deals 1 damage to each opponent. Activate only as a sorcery.

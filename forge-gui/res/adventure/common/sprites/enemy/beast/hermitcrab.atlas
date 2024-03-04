@@ -4,59 +4,59 @@ format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 Avatar
-  xy: 8, 82
-  size: 14, 14
+  xy: 134, 114
+  size: 20, 14
 Idle
-  xy: 6, 16
-  size: 20, 16
+  xy: 0, 00
+  size: 32, 32
 Idle
-  xy: 38, 16
-  size: 20, 16
+  xy: 32, 00
+  size: 32, 32
 Idle
-  xy: 70, 16
-  size: 20, 16
+  xy: 64, 00
+  size: 32, 32
 Idle
-  xy: 102, 16
-  size: 20, 16
+  xy: 96, 00
+  size: 32, 32
 Idle
-  xy: 134, 16
-  size: 20, 16
+  xy: 128, 00
+  size: 32, 32
 Idle
-  xy: 166, 16
-  size: 20, 16
+  xy: 160, 00
+  size: 32, 32
 Walk
-  xy: 6, 48
-  size: 20, 16
+  xy: 0, 32
+  size: 32, 32
 Walk
-  xy: 38, 48
-  size: 20, 16
+  xy: 32, 32
+  size: 32, 32
 Walk
-  xy: 70, 48
-  size: 20, 16
+  xy: 64, 32
+  size: 32, 32
 Walk
-  xy: 102, 48
-  size: 20, 16
+  xy: 96, 32
+  size: 32, 32
 Walk
-  xy: 134, 48
-  size: 20, 16
+  xy: 128, 32
+  size: 32, 32
 Walk
-  xy: 166, 48
-  size: 20, 16
+  xy: 160, 32
+  size: 32, 32
 Death
-  xy: 6, 80
-  size: 20, 16
+  xy: 0, 64
+  size: 32, 32
 Death
-  xy: 38, 80
-  size: 20, 16
+  xy: 32, 64
+  size: 32, 32
 Death
-  xy: 70, 80
-  size: 20, 16
+  xy: 64, 64
+  size: 32, 32
 Death
-  xy: 102, 80
-  size: 20, 16
+  xy: 96, 64
+  size: 32, 32
 Death
-  xy: 134, 80
-  size: 20, 16
+  xy: 128, 64
+  size: 32, 32
 Death
-  xy: 166, 80
-  size: 20, 16
+  xy: 160, 64
+  size: 32, 32

@@ -1,0 +1,11 @@
+Name:Dalek Drone
+ManaCost:3 B B
+Types:Artifact Creature Dalek
+PT:3/3
+K:Flying
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Exterminate! — When CARDNAME enters the battlefield, destroy target creature an opponent controls. That player loses 3 life.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3
+SVar:PlayMain1:TRUE
+Oracle:Flying, menace\nExterminate! — When Dalek Drone enters the battlefield, destroy target creature an opponent controls. That player loses 3 life.

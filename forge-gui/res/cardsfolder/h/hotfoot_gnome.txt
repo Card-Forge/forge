@@ -1,0 +1,7 @@
+Name:Hotfoot Gnome
+ManaCost:2 R
+Types:Artifact Creature Gnome
+PT:3/1
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | KW$ Haste | SpellDescription$ Another target creature gains haste until end of turn.
+Oracle:Haste\n{T}: Another target creature gains haste until end of turn.

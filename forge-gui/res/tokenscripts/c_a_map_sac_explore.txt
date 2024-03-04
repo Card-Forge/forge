@@ -1,0 +1,5 @@
+Name:Map Token
+ManaCost:no cost
+Types:Artifact Map
+A:AB$ Explore | Cost$ 1 T Sac<1/CARDNAME/this artifact> | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | SpellDescription$ Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)
+Oracle:{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)

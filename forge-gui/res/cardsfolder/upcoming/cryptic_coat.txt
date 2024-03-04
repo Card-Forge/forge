@@ -1,0 +1,11 @@
+Name:Cryptic Coat
+ManaCost:2 U
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCloak | TriggerDescription$ When CARDNAME enters the battlefield, cloak the top card of your library, then attach CARDNAME to it. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigCloak:DB$ Cloak | Defined$ TopOfLibrary | RememberCloaked$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Secondary$ True | Description$ Equipped creature gets +1/+0 and can't be blocked.
+A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Hand | Defined$ Self | SpellDescription$ Return CARDNAME to its owner's hand.
+Oracle:When Cryptic Coat enters the battlefield, cloak the top card of your library, then attach Cryptic Coat to it. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)\nEquipped creature gets +1/+0 and can't be blocked.\n{1}{U}: Return Cryptic Coat to its owner's hand.

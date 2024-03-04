@@ -1,0 +1,12 @@
+Name:Incinerator of the Guilty
+ManaCost:4 R R
+Types:Creature Dragon
+PT:6/6
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may collect evidence X. When you do, CARDNAME deals X damage to each creature and each planeswalker that player controls. (To collect evidence X, exile cards with total mana value X or greater from your graveyard.)
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ CollectEvidence<X> | RememberSVarAmount$ X | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals X damage to each creature and each planeswalker that player controls. (To collect evidence X, exile cards with total mana value X or greater from your graveyard.)
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ Count$TriggerRememberAmount | ValidCards$ Creature.ControlledBy Spawner>TriggeredTarget,Planeswalker.ControlledBy Spawner>TriggeredTarget
+SVar:X:Count$xPaid
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+Oracle:Flying, trample\nWhenever Incinerator of the Guilty deals combat damage to a player, you may collect evidence X. When you do, Incinerator of the Guilty deals X damage to each creature and each planeswalker that player controls. (To collect evidence X, exile cards with total mana value X or greater from your graveyard.)

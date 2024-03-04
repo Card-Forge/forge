@@ -12,7 +12,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantSetSchemesInMotion;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 
 public class SetInMotionEffect extends SpellAbilityEffect {
 
@@ -40,16 +39,14 @@ public class SetInMotionEffect extends SpellAbilityEffect {
                     return;
                 }
 
-                game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                game.getAction().moveTo(ZoneType.Command, controller.getActiveScheme(), null, AbilityKey.newMap());
-                game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                game.getAction().moveToCommand(controller.getActiveScheme(), sa);
 
                 // Run triggers
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Scheme, controller.getActiveScheme());
                 game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
             } else {
-                controller.setSchemeInMotion();
+                controller.setSchemeInMotion(sa);
             }
         }
     }

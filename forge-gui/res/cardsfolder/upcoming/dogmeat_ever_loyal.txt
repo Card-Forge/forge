@@ -1,0 +1,12 @@
+Name:Dogmeat, Ever Loyal
+ManaCost:R G W
+Types:Legendary Creature Dog
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters the battlefield, mill five cards, then return an Aura or Equipment card from your graveyard to your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Aura.YouOwn,Equipment.YouOwn | Hidden$ True
+T:Mode$ Attacks | ValidCard$ Creature.enchanted+YouCtrl,Creature.YouCtrl+equipped | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control that's enchanted or equipped attacks, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_junk_sac_exileplay
+DeckHas:Ability$Graveyard|Token|Mill & Type$Artifact
+DeckNeeds:Type$Equipment|Aura
+Oracle:When Dogmeat enters the battlefield, mill five cards, then return an Aura or Equipment card from your graveyard to your hand.\nWhenever a creature you control that's enchanted or equipped attacks, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

@@ -1,0 +1,11 @@
+Name:Merchant of Truth
+ManaCost:2 W W
+Types:Creature Angel Detective
+PT:2/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigInvestigate | TriggerDescription$ Whenever a nontoken creature you control dies, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+S:Mode$ Continuous | Affected$ Clue.YouCtrl | AddKeyword$ Exalted | Description$ Clues you control have exalted. (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
+DeckHas:Ability$Investigate|Token & Type$Clue|Artifact
+DeckHints:Type$Clue
+Oracle:Flying\nWhenever a nontoken creature you control dies, investigate.\nClues you control have exalted. (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn for each instance of exalted among permanents you control.)

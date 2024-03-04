@@ -1,0 +1,12 @@
+Name:Behemoth of Vault 0
+ManaCost:6
+Types:Artifact Creature Robot
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E}{E} (four energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When CARDNAME dies, you may pay an amount of {E} equal to target nonland permanent's mana value. When you do, destroy that permanent.
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | RememberObjects$ Targeted | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy that permanent.
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
+SVar:X:Targeted$CardManaCost
+Oracle:Trample\nWhen Behemoth of Vault 0 enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\nWhen Behemoth of Vault 0 dies, you may pay an amount of {E} equal to target nonland permanent's mana value. When you do, destroy that permanent.

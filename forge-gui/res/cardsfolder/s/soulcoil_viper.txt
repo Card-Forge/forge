@@ -1,0 +1,8 @@
+Name:Soulcoil Viper
+ManaCost:2 B
+Types:Creature Snake
+PT:2/3
+A:AB$ ChangeZone | Cost$ B T Sac<1/CARDNAME> | SorcerySpeed$ True | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ValidTgts$ Creature.YouCtrl | AITgts$ Card.cmcGE5 | TgtPrompt$ Select target creature in your graveyard | SpellDescription$ Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Graveyard|Mill
+Oracle:{B}, {T}, Sacrifice Soulcoil Viper: Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)

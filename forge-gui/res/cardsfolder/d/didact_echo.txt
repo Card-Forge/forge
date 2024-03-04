@@ -1,0 +1,9 @@
+Name:Didact Echo
+ManaCost:4 U
+Types:Creature Spirit Cleric
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddKeyword$ Flying | Description$ Descend 4 — CARDNAME has flying as long as there are four or more permanent cards in your graveyard.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+Oracle:When Didact Echo enters the battlefield, draw a card.\nDescend 4 — Didact Echo has flying as long as there are four or more permanent cards in your graveyard.

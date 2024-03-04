@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Dragonlord Dromoka|M|DTK
+#2|Dragonlord Kolaghan|M|DTK
+#3|Dragonlord Atarka|M|DTK
+#4|Dragonlord Silumgar|M|DTK
+#5|Dragonlord Ojutai|M|DTK
+#6|Ojutai Exemplars|M|DTK
+#7|Deathmist Raptor|M|DTK
+#8|Sarkhan Unbroken|M|DTK
+#9|Narset Transcendent|M|DTK
+#10|Dragon Whisperer|M|DTK
+#11|Shaman of Forgotten Ways|M|DTK
+#12|Shorecrasher Elemental|M|DTK
+#13|Descent of the Dragons|M|DTK
+#14|Risen Executioner|M|DTK
+#15|Thunderbreak Regent|R|DTK
+#16|Sidisi Undead Vizier|R|DTK
+#17|Icefall Regent|R|DTK
+#18|Sunscorch Regent|R|DTK
+#19|Surrak the Hunt Caller|R|DTK
+#20|Necromaster Dragon|R|DTK
+#21|Anafenza Kin Tree Spirit|R|DTK
+#22|Deathbringer Regent|R|DTK
+#23|Boltwing Marauder|R|DTK
+#24|Secure the Wastes|R|DTK
+#25|Hidden Dragonslayer|R|DTK
+#26|Den Protector|R|DTK
+#27|Foe Razer Regent|R|DTK
+#28|Arashin Foremost|R|DTK
+#29|Silumgar Assassin|R|DTK
+#30|Harbinger of the Hunt|R|DTK
+#31|Pristine Skywise|R|DTK
+#32|Dromoka's Command|R|DTK
+#33|Avatar of the Resolute|R|DTK
+#34|Foul Renewal|R|DTK
+#35|Stratus Dancer|R|DTK
+#36|Silumgar's Command|R|DTK
+#37|Pitiless Horde|R|DTK
+#38|Kolaghan's Command|R|DTK
+#39|Blood Chin Fanatic|R|DTK
+#40|Crater Elemental|R|DTK
+#41|Arashin Sovereign|R|DTK
+#42|Ire Shaman|R|DTK
+#43|Atarka's Command|R|DTK
+#44|Ojutai's Command|R|DTK
+#45|Ultimate Price|U|DTK
+#46|Profaner of the Dead|R|DTK
+#47|Berserkers' Onslaught|R|DTK
+#48|Dragonlord's Prerogative|R|DTK
+#49|Rakshasa Gravecaller|U|DTK
+#50|Roast|U|DTK
+#51|Zurgo Bellstriker|R|DTK
+#52|Clone Legion|M|DTK
+#53|Myth Realized|R|DTK
+#54|Gleam of Authority|R|DTK
+#55|Collected Company|R|DTK
+#56|Death Wind|U|DTK
+#57|Corpseweft|R|DTK
+#58|Ukud Cobra|U|DTK
+#59|Draconic Roar|U|DTK
+#60|Damnable Pact|R|DTK
+#61|Assault Formation|R|DTK
+#62|Illusory Gains|R|DTK
+#63|Ruthless Deathfang|U|DTK
+#64|Youthful Scholar|U|DTK
+#65|Silumgar Sorcerer|U|DTK
+#66|Flatten|C|DTK
+#67|Mirror Mockery|R|DTK
+#68|Pacifism|C|DTK
+#69|Swift Warkite|U|DTK
+#70|Foul Tongue Invocation|U|DTK
+#71|Volcanic Vision|R|DTK
+#72|Ambuscade Shaman|U|DTK
+#73|Aven Sunstriker|U|DTK
+#74|Dromoka Captain|U|DTK
+#75|Sunbringer's Touch|R|DTK
+#76|Twin Bolt|C|DTK
+#77|Warbringer|U|DTK
+#78|Enduring Scalelord|U|DTK
+#79|Silkwrap|U|DTK
+#80|Blood Chin Rager|U|DTK
+#81|Qal Sisma Behemoth|U|DTK
+#82|Sarkhan's Rage|C|DTK
+#83|Salt Road Ambushers|U|DTK
+#84|Savage Ventmaw|U|DTK
+#85|Salt Road Quartermasters|U|DTK
+#86|Shieldhide Dragon|U|DTK
+#87|Epic Confrontation|C|DTK
+#88|Atarka Pummeler|U|DTK
+#89|Cunning Breezedancer|U|DTK
+#90|Tail Slash|C|DTK
+#91|Stormcrag Elemental|U|DTK
+#92|Dragon Hunter|U|DTK
+#93|Misthoof Kirin|C|DTK
+#94|Scaleguard Sentinels|U|DTK
+#95|Belltoll Dragon|U|DTK
+#96|Kolaghan Forerunners|U|DTK
+#97|Vulturous Aven|C|DTK
+#98|Acid Spewer Dragon|U|DTK
+#99|Haven of the Spirit Dragon|R|DTK
+#100|Silumgar Spell Eater|U|DTK
+#101|Ainok Survivalist|U|DTK
+#102|Hand of Silumgar|C|DTK
+#103|Gudul Lurker|U|DTK
+#104|Atarka Efreet|C|DTK
+#105|Minister of Pain|U|DTK
+#106|Stormwing Dragon|U|DTK
+#107|Sandcrafter Mage|C|DTK
+#108|Stampeding Elk Herd|C|DTK
+#109|Echoes of the Kin Tree|U|DTK
+#110|Ojutai Interceptor|C|DTK
+#111|Sabertooth Outrider|C|DTK
+#112|Circle of Elders|U|DTK
+#113|Silumgar Butcher|C|DTK
+#114|Sprinting Warbrute|C|DTK
+#115|Herdchaser Dragon|U|DTK
+#116|Aerie Bowmasters|C|DTK
+#117|Radiant Purge|R|DTK
+#118|Palace Familiar|C|DTK
+#119|Ojutai's Summons|C|DTK
+#120|Enduring Victory|C|DTK
+#121|Lightning Berserker|U|DTK
+#122|Atarka Beastbreaker|C|DTK
+#123|Dromoka's Gift|U|DTK
+#124|Great Teacher's Decree|U|DTK
+#125|Strongarm Monk|U|DTK
+#126|Obscuring Aether|R|DTK
+#127|Marang River Skeleton|U|DTK
+#128|Dragon Tempest|R|DTK
+#129|Skywise Teachings|U|DTK
+#130|Hardened Berserker|C|DTK
+#131|Dragon Fodder|C|DTK
+#132|Defeat|C|DTK
+#133|Kolaghan Aspirant|C|DTK
+#134|Dragon Scarred Bear|C|DTK
+#135|Anticipate|C|DTK
+#136|Press the Advantage|U|DTK
+#137|Lurking Arynx|U|DTK
+#138|Coat with Venom|C|DTK
+#139|Glade Watcher|C|DTK
+#140|Evolving Wilds|C|DTK
+#141|Guardian Shield Bearer|C|DTK
+#142|Butcher's Glee|C|DTK
+#143|Dromoka Warrior|C|DTK
+#144|Living Lore|R|DTK
+#145|Screamreach Brawler|C|DTK
+#146|Herald of Dromoka|C|DTK
+#147|Lightwalker|C|DTK
+#148|Gurmag Drowner|C|DTK
+#149|Summit Prowler|C|DTK
+#150|Reckless Imp|C|DTK
+#151|Seismic Rupture|U|DTK
+#152|Scion of Ugin|U|DTK
+#153|Shambling Goblin|C|DTK
+#154|Dutiful Attendant|C|DTK
+#155|Kolaghan Skirmisher|C|DTK
+#156|Scale Blessing|U|DTK
+#157|Explosive Vegetation|U|DTK
+#158|Commune with Lava|R|DTK
+#159|Champion of Arashin|C|DTK
+#160|Elusive Spellfist|C|DTK
+#161|Zephyr Scribe|C|DTK
+#162|Ojutai's Breath|C|DTK
+#163|Artful Maneuver|C|DTK
+#164|Monastery Loremaster|C|DTK
+#165|Reduce in Stature|C|DTK
+#166|Aven Tactician|C|DTK
+#167|Colossodon Yearling|C|DTK
+#168|Student of Ojutai|C|DTK
+#169|Segmented Krotiq|C|DTK
+#170|Dragonlord's Servant|U|DTK
+#171|Center Soul|C|DTK
+#172|Rending Volley|U|DTK
+#173|Marsh Hulk|C|DTK
+#174|Silumgar's Scorn|U|DTK
+#175|Sidisi's Faithful|C|DTK
+#176|Profound Journey|R|DTK
+#177|Tread Upon|C|DTK
+#178|Conifer Strider|C|DTK
+#179|Sight Beyond Sight|U|DTK
+#180|Kolaghan Stormsinger|C|DTK
+#181|Graceblade Artisan|U|DTK
+#182|Self Inflicted Wound|U|DTK
+#183|Sandstorm Charger|C|DTK
+#184|Orator of Ojutai|U|DTK
+#185|Updraft Elemental|C|DTK
+#186|Servant of the Scale|C|DTK
+#187|Territorial Roc|C|DTK
+#188|Qarsi Sadist|C|DTK
+#189|Encase in Ice|U|DTK
+#190|Surge of Righteousness|U|DTK
+#191|Ainok Artillerist|C|DTK
+#192|Tormenting Voice|C|DTK
+#193|Deadly Wanderings|U|DTK
+#194|Void Squall|U|DTK
+#195|Pinion Feast|C|DTK
+#196|Inspiring Call|U|DTK
+#197|Dromoka Dunecaster|C|DTK
+#198|Kindled Fury|C|DTK
+#199|Taigam's Strike|C|DTK
+#200|Glaring Aegis|C|DTK
+#201|Sandsteppe Scavenger|C|DTK
+#202|Silumgar Monument|U|DTK
+#203|Lose Calm|C|DTK
+#204|Battle Mastery|U|DTK
+#205|Sight of the Scalelords|U|DTK
+#206|Dance of the Skywise|U|DTK
+#207|Negate|C|DTK
+#208|Impact Tremors|C|DTK
+#209|Duress|C|DTK
+#210|Sibsig Icebreakers|C|DTK
+#211|Dromoka Monument|U|DTK
+#212|Contradict|C|DTK
+#213|Mind Rot|C|DTK
+#214|Wandering Tombshell|C|DTK
+#215|Ojutai Monument|U|DTK
+#216|Dragonloft Idol|U|DTK
+#217|Sarkhan's Triumph|U|DTK
+#218|Magmatic Chasm|C|DTK
+#219|Blessed Reincarnation|R|DTK
+#220|Volcanic Rush|C|DTK
+#221|Kolaghan Monument|U|DTK
+#222|Sheltered Aerie|C|DTK
+#223|Glint|C|DTK
+#224|Dirgur Nemesis|C|DTK
+#225|Gravepurge|C|DTK
+#226|Atarka Monument|U|DTK
+#227|Mystic Meditation|C|DTK
+#228|Display of Dominance|U|DTK
+#229|Qarsi Deceiver|U|DTK
+#230|Naturalize|C|DTK
+#231|Dragon's Eye Sentry|C|DTK
+#232|Fate Forgotten|C|DTK
+#233|Foul Tongue Shriek|C|DTK
+#234|Ancient Carp|C|DTK
+#235|Shape the Sands|C|DTK
+#236|Revealing Wind|C|DTK
+#237|Resupply|C|DTK
+#238|Vandalize|C|DTK
+#239|Stormrider Rig|U|DTK
+#240|Virulent Plague|U|DTK
+#241|Hedonist's Trove|R|DTK
+#242|Vial of Dragonfire|C|DTK
+#243|Learn from the Past|U|DTK
+#244|Ancestral Statue|C|DTK
+#245|Custodian of the Trove|C|DTK
+#246|Spidersilk Net|C|DTK
+#247|Keeper of the Lens|C|DTK
+#248|Gate Smasher|U|DTK
+#249|Tapestry of the Ages|U|DTK

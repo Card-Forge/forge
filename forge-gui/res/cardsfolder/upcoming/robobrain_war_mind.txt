@@ -1,0 +1,14 @@
+Name:Robobrain War Mind
+ManaCost:3 U
+Types:Artifact Creature Robot
+PT:*/5
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | Description$ CARDNAME's power is equal to the number of cards in your hand.
+SVar:Y:Count$InYourHand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get an amount of {E} (energy counters) equal to the number of artifact creatures you control.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | SpellDescription$ Whenever CARDNAME attacks, you may pay {E}{E}{E}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayEnergy<3> 
+SVar:HasAttackEffect:TRUE
+SVar:X:Count$Valid Artifact.Creature+YouCtrl
+DeckHas:Ability$Counters
+Oracle:Robobrain War Mind's power is equal to the number of cards in your hand.\nWhen Robobrain War Mind enters the battlefield, you get an amount of {E} (energy counters) equal to the number of artifact creatures you control.\nWhenever Robobrain War Mind attacks, you may pay {E}{E}{E}. If you do, draw a card.

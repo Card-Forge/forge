@@ -1,0 +1,250 @@
+//Rank|Name|Rarity|Set
+#1|Ravager Wurm|M|RNA
+#2|Skarrgan Hellkite|M|RNA
+#3|Ethereal Absolution|R|RNA
+#4|Spawn of Mayhem|M|RNA
+#5|Biogenic Ooze|M|RNA
+#6|Hydroid Krasis|M|RNA
+#7|Angel of Grace|M|RNA
+#8|Seraph of the Scales|M|RNA
+#9|Zegana, Utopian Speaker|R|RNA
+#10|Rakdos, the Showstopper|M|RNA
+#11|Thrash Threat|R|RNA
+#12|Dovin, Grand Arbiter|M|RNA
+#13|Judith, the Scourge Diva|R|RNA
+#14|Domri, Chaos Bringer|M|RNA
+#15|Warrant Warden|R|RNA
+#16|Electrodominance|R|RNA
+#17|Kaya's Wrath|R|RNA
+#18|Mesmerizing Benthid|M|RNA
+#19|Mortify|U|RNA
+#20|Bedevil|R|RNA
+#21|Gruul Spellbreaker|R|RNA
+#22|Theater of Horrors|R|RNA
+#23|Incubation Druid|R|RNA
+#24|Deputy of Detention|R|RNA
+#25|Mass Manipulation|R|RNA
+#26|Biomancer's Familiar|R|RNA
+#27|Pestilent Spirit|R|RNA
+#28|End-Raze Forerunners|R|RNA
+#29|Priest of Forgotten Gods|R|RNA
+#30|Guardian Project|R|RNA
+#31|Hero of Precinct One|R|RNA
+#32|Flames of the Raze-Boar|U|RNA
+#33|Rakdos Firewheeler|U|RNA
+#34|Sphinx of Foresight|R|RNA
+#35|Precognitive Perception|R|RNA
+#36|Teysa Karlov|R|RNA
+#37|Lumbering Battlement|R|RNA
+#38|Rix Maadi Reveler|R|RNA
+#39|Bedeck Bedazzle|R|RNA
+#40|Get the Point|C|RNA
+#41|Frenzied Arynx|C|RNA
+#42|Basilica Bell-Haunt|U|RNA
+#43|Sphinx of New Prahv|U|RNA
+#44|Savage Smash|C|RNA
+#45|Sunder Shaman|U|RNA
+#46|Grotesque Demise|C|RNA
+#47|Simic Ascendancy|R|RNA
+#48|Growth-Chamber Guardian|R|RNA
+#49|Consecrate Consume|U|RNA
+#50|Zhur-Taa Goblin|U|RNA
+#51|Frilled Mystic|U|RNA
+#52|Trollbred Guardian|U|RNA
+#53|Senate Guildmage|U|RNA
+#54|Sharktocrab|U|RNA
+#55|Skewer the Critics|C|RNA
+#56|Orzhov Enforcer|U|RNA
+#57|Final Payment|C|RNA
+#58|Lawmage's Binding|C|RNA
+#59|Imperious Oligarch|C|RNA
+#60|Rhythm of the Wild|U|RNA
+#61|Nikya of the Old Ways|R|RNA
+#62|Summary Judgment|C|RNA
+#63|Dagger Caster|U|RNA
+#64|Bolrac-Clan Crusher|U|RNA
+#65|Pitiless Pontiff|U|RNA
+#66|Titanic Brawl|C|RNA
+#67|Essence Capture|U|RNA
+#68|Revival Revenge|R|RNA
+#69|Fireblade Artist|U|RNA
+#70|Azorius Knight-Arbiter|C|RNA
+#71|Aeromunculus|C|RNA
+#72|Incubation Incongruity|U|RNA
+#73|Blade Juggler|C|RNA
+#74|Biogenic Upgrade|U|RNA
+#75|Grasping Thrull|C|RNA
+#76|Gyre Engineer|U|RNA
+#77|Combine Guildmage|U|RNA
+#78|Syndicate Guildmage|U|RNA
+#79|Ministrant of Obligation|U|RNA
+#80|Cult Guildmage|U|RNA
+#81|Azorius Skyguard|U|RNA
+#82|Clan Guildmage|U|RNA
+#83|Dovin's Acuity|U|RNA
+#84|Scorchmark|C|RNA
+#85|Repudiate Replicate|R|RNA
+#86|Clamor Shaman|U|RNA
+#87|Tithe Taker|R|RNA
+#88|Depose Deploy|U|RNA
+#89|Cry of the Carnarium|U|RNA
+#90|Gutterbones|R|RNA
+#91|Verity Circle|R|RNA
+#92|Hackrobat|U|RNA
+#93|Sauroform Hybrid|C|RNA
+#94|Skatewing Spy|U|RNA
+#95|Galloping Lizrog|U|RNA
+#96|Orzhov Racketeers|U|RNA
+#97|Immolation Shaman|R|RNA
+#98|Windstorm Drake|U|RNA
+#99|Arrester's Admonition|C|RNA
+#100|Collision Colossus|U|RNA
+#101|Forbidding Spirit|U|RNA
+#102|Eyes Everywhere|U|RNA
+#103|Gatebreaker Ram|U|RNA
+#104|Sky Tether|U|RNA
+#105|Chillbringer|C|RNA
+#106|Enraged Ceratok|U|RNA
+#107|Applied Biomancy|C|RNA
+#108|Prime Speaker Vannifar|M|RNA
+#109|High Alert|U|RNA
+#110|Smelt-Ward Ignus|U|RNA
+#111|Rakdos Roustabout|C|RNA
+#112|Unbreakable Formation|R|RNA
+#113|Archway Angel|U|RNA
+#114|Spirit of the Spires|U|RNA
+#115|Gates Ablaze|U|RNA
+#116|Captive Audience|M|RNA
+#117|Sentinel's Mark|U|RNA
+#118|Impassioned Orator|C|RNA
+#119|Code of Constraint|U|RNA
+#120|Swirling Torrent|U|RNA
+#121|Clear the Stage|U|RNA
+#122|Vindictive Vampire|U|RNA
+#123|Light Up the Stage|U|RNA
+#124|Absorb|R|RNA
+#125|Breeding Pool|R|RNA
+#126|Hallowed Fountain|R|RNA
+#127|Blood Crypt|R|RNA
+#128|Stomping Ground|R|RNA
+#129|Godless Shrine|R|RNA
+#130|Amplifire|R|RNA
+#131|Carnival Carnage|U|RNA
+#132|Quench|C|RNA
+#133|Angelic Exaltation|U|RNA
+#134|Gruul Beastmaster|U|RNA
+#135|Sphinx of the Guildpact|U|RNA
+#136|Gateway Sneak|U|RNA
+#137|Skitter Eel|C|RNA
+#138|Bloodmist Infiltrator|U|RNA
+#139|Consign to the Pit|C|RNA
+#140|Dead Revels|C|RNA
+#141|Spire Mangler|U|RNA
+#142|Rumbling Ruin|U|RNA
+#143|Open the Gates|C|RNA
+#144|Rubblebelt Runner|C|RNA
+#145|Senate Griffin|C|RNA
+#146|Growth Spiral|C|RNA
+#147|Gate Colossus|U|RNA
+#148|Sphinx's Insight|C|RNA
+#149|Burning-Tree Vandal|C|RNA
+#150|Humongulus|C|RNA
+#151|Drill Bit|U|RNA
+#152|Silhana Wayfinder|U|RNA
+#153|Benthic Biomancer|R|RNA
+#154|Knight of the Last Breath|U|RNA
+#155|Arrester's Zeal|C|RNA
+#156|Concordia Pegasus|C|RNA
+#157|Syndicate Messenger|C|RNA
+#158|Faerie Duelist|C|RNA
+#159|Slimebind|C|RNA
+#160|Ill-Gotten Inheritance|C|RNA
+#161|Plague Wight|C|RNA
+#162|Undercity Scavenger|C|RNA
+#163|Undercity's Embrace|C|RNA
+#164|Ghor-Clan Wrecker|C|RNA
+#165|Axebane Beast|C|RNA
+#166|Mammoth Spider|C|RNA
+#167|Rampaging Rendhorn|C|RNA
+#168|Footlight Fiend|C|RNA
+#169|Rafter Demon|C|RNA
+#170|Pteramander|U|RNA
+#171|Glass of the Guildpact|R|RNA
+#172|Macabre Mockery|U|RNA
+#173|Resolute Watchdog|U|RNA
+#174|Gateway Plaza|C|RNA
+#175|Haazda Officer|C|RNA
+#176|Senate Courier|C|RNA
+#177|Thought Collapse|C|RNA
+#178|Bladebrand|C|RNA
+#179|Carrion Imp|C|RNA
+#180|Noxious Groodion|C|RNA
+#181|Rubblebelt Recluse|C|RNA
+#182|Spikewheel Acrobat|C|RNA
+#183|Storm Strike|C|RNA
+#184|Steeple Creeper|C|RNA
+#185|Stony Strength|C|RNA
+#186|Territorial Boar|C|RNA
+#187|Wrecking Beast|C|RNA
+#188|Rubble Slinger|C|RNA
+#189|Regenesis|U|RNA
+#190|Bring to Trial|C|RNA
+#191|Civic Stalwart|C|RNA
+#192|Twilight Panther|C|RNA
+#193|Sage's Row Savant|C|RNA
+#194|Catacomb Crocodile|C|RNA
+#195|Debtors' Transport|C|RNA
+#196|Rakdos Trumpeter|C|RNA
+#197|Goblin Gathering|C|RNA
+#198|Gravel-Hide Goblin|C|RNA
+#199|Tin Street Dodger|U|RNA
+#200|Gift of Strength|C|RNA
+#201|Sylvan Brushstrider|C|RNA
+#202|Vizkopa Vampire|C|RNA
+#203|Lavinia, Azorius Renegade|R|RNA
+#204|Simic Locket|C|RNA
+#205|Azorius Locket|C|RNA
+#206|Rakdos Locket|C|RNA
+#207|Gruul Locket|C|RNA
+#208|Orzhov Locket|C|RNA
+#209|Wilderness Reclamation|U|RNA
+#210|Burn Bright|C|RNA
+#211|Plaza of Harmony|R|RNA
+#212|Rally to Battle|U|RNA
+#213|Justiciar's Portal|C|RNA
+#214|Knight of Sorrows|C|RNA
+#215|Tenth District Veteran|C|RNA
+#216|Coral Commando|C|RNA
+#217|Shimmer of Possibility|C|RNA
+#218|Act of Treason|C|RNA
+#219|Spear Spewer|C|RNA
+#220|Scuttlegator|C|RNA
+#221|Smothering Tithe|R|RNA
+#222|Mirror March|R|RNA
+#223|Prowling Caracal|C|RNA
+#224|Watchful Giant|C|RNA
+#225|Prying Eyes|C|RNA
+#226|Feral Maaka|C|RNA
+#227|Sagittars' Volley|C|RNA
+#228|Saruli Caretaker|C|RNA
+#229|Bankrupt in Blood|U|RNA
+#230|Awaken the Erstwhile|R|RNA
+#231|Cindervines|R|RNA
+#232|Tome of the Guildpact|R|RNA
+#233|Persistent Petitioners|C|RNA
+#234|Expose to Daylight|C|RNA
+#235|Wall of Lost Thoughts|U|RNA
+#236|Thirsting Shade|C|RNA
+#237|Deface|C|RNA
+#238|Tower Defense|U|RNA
+#239|Junktroller|U|RNA
+#240|Screaming Shield|U|RNA
+#241|Emergency Powers|M|RNA
+#242|Root Snare|C|RNA
+#243|Scrabbling Claws|U|RNA
+#244|Cavalcade of Calamity|U|RNA
+#245|Rubble Reading|C|RNA
+#246|Kaya, Orzhov Usurper|M|RNA
+#247|Clear the Mind|C|RNA
+#248|Rampage of the Clans|R|RNA
+#249|Font of Agonies|R|RNA

@@ -1,0 +1,8 @@
+Name:Unfinished Business
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | SubAbility$ DBAttach | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield, then return up to two target Aura and/or Equipment cards from your graveyard to the battlefield attached to that creature. (If the Auras can't enchant that creature, they remain in your graveyard.)
+SVar:DBAttach:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura.YouCtrl,Equipment.YouCtrl | AttachedTo$ ParentTarget | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target Equipments or Auras from your graveyard
+DeckHas:Ability$Graveyard
+DeckHints:Type$Aura|Equipment
+Oracle:Return target creature card from your graveyard to the battlefield, then return up to two target Aura and/or Equipment cards from your graveyard to the battlefield attached to that creature. (If the Auras can't enchant that creature, they remain in your graveyard.)

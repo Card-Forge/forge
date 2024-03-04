@@ -1,0 +1,13 @@
+Name:Tomik, Wielder of Law
+ManaCost:1 W B
+Types:Legendary Creature Human Advisor
+PT:2/4
+K:Affinity:Planeswalker
+K:Flying
+K:Vigilance
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, that opponent loses 3 life and you draw a card.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredAttackingPlayer | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:X:Count$ValidAll Creature.attackingYouOrYourPWLKI
+DeckHas:Type$Planeswalker
+Oracle:Affinity for planeswalkers (This spell costs {1} less to cast for each planeswalker you control.)\nFlying, vigilance\nWhenever an opponent attacks with creatures, if two or more of those creatures are attacking you and/or planeswalkers you control, that opponent loses 3 life and you draw a card.

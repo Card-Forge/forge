@@ -1,0 +1,8 @@
+Name:Deeproot Historian
+ManaCost:3 G
+Types:Creature Merfolk Druid
+PT:3/3
+S:Mode$ Continuous | AffectedZone$ Graveyard | Affected$ Merfolk.YouOwn,Druid.YouOwn | AddKeyword$ Retrace | Description$ Merfolk and Druid cards in your graveyard have retrace. (You may cast cards with retrace from your graveyard by discarding a land card in addition to paying their other costs.)
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Discard|Graveyard
+Oracle:Merfolk and Druid cards in your graveyard have retrace. (You may cast cards with retrace from your graveyard by discarding a land card in addition to paying their other costs.)

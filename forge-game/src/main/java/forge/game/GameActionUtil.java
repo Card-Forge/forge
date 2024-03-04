@@ -18,6 +18,7 @@
 package forge.game;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +48,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -81,7 +81,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
+    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -115,7 +115,8 @@ public final class GameActionUtil {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes
-                if ((!sa.isBasicSpell() || (sa.costHasManaX() && !sa.getPayCosts().getCostMana().canXbe0())) && o.getPayManaCost() == PayManaCost.NO) {
+                if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
+                        && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
                     continue;
                 }
                 final Card host = o.getHost();
@@ -132,6 +133,9 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     changedManaCost = true;
                 } else {
+                    if (altCostOnly) {
+                        continue;
+                    }
                     newSA = sa.copy(activator);
                 }
 
@@ -744,6 +748,7 @@ public final class GameActionUtil {
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setLayer(ReplacementLayer.Other);
         re.setOverridingAbility(sa);
+        re.setActiveZone(EnumSet.of(ZoneType.Command));
 
         eff.addReplacementEffect(re);
 
@@ -751,10 +756,7 @@ public final class GameActionUtil {
 
         eff.updateStateForView();
 
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null, null);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
         return eff;
     }
@@ -877,7 +879,7 @@ public final class GameActionUtil {
             oldCard.getZone().remove(oldCard);
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
             Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
-            fromZone.add(oldCard, newPosition);
+            fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
             ability.setSpendPhyrexianMana(false);
@@ -913,6 +915,7 @@ public final class GameActionUtil {
         if (ability.getApi() == ApiType.Charm) {
             // reset chain
             ability.setSubAbility(null);
+            ability.setChosenList(null);
         }
 
         ability.clearTargets();

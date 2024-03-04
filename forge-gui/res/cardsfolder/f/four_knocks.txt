@@ -1,0 +1,8 @@
+Name:Four Knocks
+ManaCost:2 W
+Types:Enchantment
+K:Vanishing:4
+T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your precombat main phase, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Counters
+Oracle:Vanishing 4 (This enchantment enters the battlefield with four time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nAt the beginning of your precombat main phase, draw a card.

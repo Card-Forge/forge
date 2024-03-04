@@ -4,7 +4,9 @@
 
 Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wiki) (Somewhat outdated)
 
-Discord channel [here](https://discord.gg/fWfNgCUNRq)
+[Discord channel](https://discord.gg/HcPJNyD66a)
+
+[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
 
 ## Requirements / Tools
 

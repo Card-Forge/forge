@@ -6,7 +6,6 @@ import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -16,8 +15,6 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
 public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
@@ -66,10 +63,7 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
             addForgetOnMovedTrigger(eff, "Battlefield");
         }
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
         o.getView().updatePreventNextDamage(o);
         if (o instanceof Player) {
@@ -81,7 +75,7 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                game.getAction().exile(eff, null, null);
+                game.getAction().exileEffect(eff);
                 o.getView().updatePreventNextDamage(o);
                 if (o instanceof Player) {
                     game.fireEvent(new GameEventPlayerStatsChanged((Player) o, false));

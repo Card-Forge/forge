@@ -85,6 +85,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         add(c, index, null);
     }
     public void add(final Card c, Integer index, final Card latestState) {
+        add(c, index, latestState, false);
+    }
+    public void add(final Card c, Integer index, final Card latestState, final boolean rollback) {
         if (index != null && cardList.isEmpty() && index.intValue() > 0) {
             // something went wrong, most likely the method fired when the game was in an unexpected state
             // (e.g. conceding during the mana payment prompt)
@@ -101,28 +104,30 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             }
         }
 
-        // Immutable cards are usually emblems and effects
-        if (!c.isImmutable()) {
-            final Zone oldZone = game.getZoneOf(c);
-            final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
+        if (!rollback) {
+            // Immutable cards are usually emblems and effects
+            if (!c.isImmutable()) {
+                final Zone oldZone = game.getZoneOf(c);
+                final ZoneType zt = oldZone == null ? ZoneType.Stack : oldZone.getZoneType();
 
-            // only if the zoneType differs from this
-            // don't go in there is its a control change
-            if (zt != zoneType) {
-                c.setTurnInController(getPlayer());
-                c.setTurnInZone(game.getPhaseHandler().getTurn());
-                if (latestState != null) {
-                    cardsAddedThisTurn.add(zt, latestState);
+                // only if the zoneType differs from this
+                // don't go in there is its a control change
+                if (zt != zoneType) {
+                    c.setTurnInController(getPlayer());
+                    c.setTurnInZone(game.getPhaseHandler().getTurn());
+                    if (latestState != null) {
+                        cardsAddedThisTurn.add(zt, latestState);
+                    }
                 }
             }
-        }
 
-        if (zoneType != ZoneType.Battlefield) {
-            c.setTapped(false);
-        }
+            if (zoneType != ZoneType.Battlefield) {
+                c.setTapped(false);
+            }
 
-        if (zoneType == (ZoneType.Graveyard) && c.isPermanent() && !c.isToken()) {
-            c.getOwner().descend();
+            if (zoneType == ZoneType.Graveyard && c.isPermanent() && !c.isToken()) {
+                c.getOwner().descend();
+            }
         }
 
         c.setZone(this);

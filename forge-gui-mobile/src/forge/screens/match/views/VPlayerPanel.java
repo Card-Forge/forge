@@ -472,6 +472,7 @@ public class VPlayerPanel extends FContainer {
         private int energyCounters = player.getCounters(CounterEnumType.ENERGY);
         private int experienceCounters = player.getCounters(CounterEnumType.EXPERIENCE);
         private int ticketCounters = player.getCounters(CounterEnumType.TICKET);
+        private int radCounters = player.getCounters(CounterEnumType.RAD);
         private int manaShards = player.getNumManaShards();
         private String lifeStr = String.valueOf(life);
 
@@ -525,7 +526,7 @@ public class VPlayerPanel extends FContainer {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
             if(Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
-                if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters ==0 && manaShards == 0) {
+                if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0 && ticketCounters == 0 && radCounters == 0 && manaShards == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
                     g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
@@ -552,6 +553,12 @@ public class VPlayerPanel extends FContainer {
                         g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(experienceCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(experienceCounters)).height+1);
                         g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
                         g.drawText(String.valueOf(experienceCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        mod+=1;
+                    }
+                    if (radCounters > 0) {
+                        g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(radCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(radCounters)).height+1);
+                        g.drawImage(FSkinImage.RAD, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
+                        g.drawText(String.valueOf(radCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     if (ticketCounters > 0) {

@@ -1,0 +1,22 @@
+Name:Ojer Pakpatiq, Deepest Epoch
+ManaCost:2 U U
+Types:Legendary Creature God
+PT:4/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourHand | TriggerZones$ Battlefield | ValidActivatingPlayer$ You | Execute$ AddRebound | TriggerDescription$ Whenever you cast an instant spell from your hand, it gains rebound. (Exile it as it resolves. At the beginning of your next upkeep, you may cast it from exile without paying its mana cost.)
+SVar:AddRebound:DB$ Pump | Defined$ TriggeredCard | KW$ Rebound | PumpZone$ Stack
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control with three time counters on it.
+SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Tapped$ True | Destination$ Battlefield | Transformed$ True | WithCountersType$ TIME | WithCountersAmount$ 3
+DeckHints:Type$Instant
+AlternateMode:DoubleFaced
+Oracle:Flying\nWhenever you cast an instant spell from your hand, it gains rebound. (Exile it as it resolves. At the beginning of your next upkeep, you may cast it from exile without paying its mana cost.)\nWhen Ojer Pakpatiq dies, return it to the battlefield tapped and transformed under its owner's control with three time counters on it.
+
+ALTERNATE
+
+Name:Temple of Cyclical Time
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBSubCounter | SpellDescription$ Add {U}. Remove a time counter from CARDNAME.
+SVar:DBSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SpellDescription$ Remove a time counter from CARDNAME.
+A:AB$ SetState | Cost$ 2 U T | IsPresent$ Card.Self+counters_EQ0_TIME | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if it has no time counters on it and only as a sorcery.
+Oracle:(Transforms from Ojer Pakpatiq, Deepest Epoch.)\n{T}: Add {U}. Remove a time counter from Temple of Cyclical Time.\n{2}{U}, {T}: Transform Temple of Cyclical Time. Activate only if it has no time counters on it and only as a sorcery.

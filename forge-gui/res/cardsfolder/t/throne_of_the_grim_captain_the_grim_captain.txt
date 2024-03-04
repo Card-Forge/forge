@@ -1,0 +1,25 @@
+Name:Throne of the Grim Captain
+ManaCost:2
+Types:Legendary Artifact
+A:AB$ Mill | Cost$ T | NumCards$ 2 | SpellDescription$ Mill two cards.
+K:Craft:4 ExileCtrlOrGrave<1/Dinosaur.Other> ExileCtrlOrGrave<1/Merfolk.Other> ExileCtrlOrGrave<1/Pirate.Other> ExileCtrlOrGrave<1/Vampire.Other>:a Dinosaur, a Merfolk, a Pirate, and a Vampire:the four
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Graveyard|Mill
+AlternateMode:DoubleFaced
+Oracle:{T}: Mill two cards.\nCraft with a Dinosaur, a Merfolk, a Pirate, and a Vampire {4} ({4}, Exile this artifact, Exile the four from among permanents you control and/or cards in your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+
+ALTERNATE
+
+Name:The Grim Captain
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Skeleton Spirit Pirate
+PT:7/7
+K:Menace
+K:Trample
+K:Lifelink
+K:Hexproof
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, each opponent sacrifices a nonland permanent. Then you may put an exiled creature card used to craft CARDNAME onto the battlefield under your control tapped and attacking.
+SVar:DBSacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ Permanent.nonLand | Defined$ Opponent | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChooseFromDefined$ ExiledWith | ChangeNum$ 1 | Hidden$ True | Tapped$ True | Attacking$ True | GainControl$ True
+Oracle:Menace, trample, lifelink, hexproof\nWhenever The Grim Captain attacks, each opponent sacrifices a nonland permanent. Then you may put an exiled creature card used to craft The Grim Captain onto the battlefield under your control tapped and attacking.

@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftRc/OK9BX3tbeRgYdKHsU1A+PewFgWvaqDS97CUHDEV7NTUZGLQ0CYtRYq8OHjPMgWnZAogt8aRpXTQ+sfaiJxlxoEMkoI4JBtoXAsShUHtvAhXfQtNwikx7VXGUp6L4AgIJoOevoZiu6GEvvnoRVqcRo4ZUe5HLIlxsUtQN9nAetXfU3qFs7zWg+HUiMTIgVs8NGvtrFAwuAADOvk8x
+   eJxjYBhYMIuXgWE2DfEcXuz2WvDR1l9WOMwftRc/OK9BX3tbeRgYdKHsU1A+PewFgWvaqDQ2cEeH+vaSA4aivZqaDAxamoTFKLFXB7syMDAHpmULILbEk6Z10fjE2oueZMSBDpGAOiYYaF8IEIdC7b0JVHwLTcMpMu1VxVGeiuILCCSAnr+GYrqih7346kVYnUaMGlLtRS6LcLFJUTfYw3nU3lF7h7K914Di14nEyIBYPTdo7K9RMLgAAJK3UDk=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -96,8 +96,7 @@
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
    </properties>
   </object>
-  <object id="53" template="../../obj/spellsmith.tx" x="157" y="225"/>
-  <object id="58" template="../../obj/quest.tx" x="328" y="130">
+  <object id="58" template="../../obj/quest.tx" x="319" y="130" width="34" height="16">
    <properties>
     <property name="questtype" value="plains_town_identity"/>
    </properties>

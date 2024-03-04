@@ -1,0 +1,13 @@
+Name:Unshakable Tail
+ManaCost:2 B
+Types:Creature Zombie Detective
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, surveil 1.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, surveil 1.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from your library, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+A:AB$ ChangeZone | Cost$ 2 Sac<1/Clue> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Sacrifice|Graveyard|Token|Surveil & Type$Clue|Artifact
+DeckHints:Ability$Graveyard & Type$Clue
+Oracle:When Unshakable Tail enters the battlefield and at the beginning of your upkeep, surveil 1.\nWhenever one or more creature cards are put into your graveyard from your library, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\n{2}, Sacrifice a Clue: Return Unshakable Tail from your graveyard to your hand.

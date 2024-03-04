@@ -1,0 +1,8 @@
+Name:Deconstruction Hammer
+ManaCost:W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ ABDestroy | Description$ Equipped creature gets +1/+1 and has "{3}, {T}, Sacrifice CARDNAME: Destroy target artifact or enchantment."
+SVar:ABDestroy:AB$ Destroy | Cost$ 3 T Sac<1/OriginalHost/Deconstruction Hammer> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+K:Equip:1
+DeckHas:Ability$Sacrifice
+Oracle:Equipped creature gets +1/+1 and has "{3}, {T}, Sacrifice Deconstruction Hammer: Destroy target artifact or enchantment."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

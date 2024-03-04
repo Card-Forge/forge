@@ -1,0 +1,6 @@
+Name:Leaping Ambush
+ManaCost:G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+3 and gains reach until end of turn. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:Target creature gets +1/+3 and gains reach until end of turn. Untap it.

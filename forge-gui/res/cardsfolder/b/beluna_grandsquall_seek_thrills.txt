@@ -1,0 +1,20 @@
+Name:Beluna Grandsquall
+ManaCost:G U R
+Types:Legendary Creature Giant Noble
+PT:4/4
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Permanent.AdventureCard | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Permanent spells you cast that have an Adventure cost {1} less to cast.
+DeckHints:Type$Adventure
+DeckHas:Ability$Mill
+AlternateMode:Adventure
+Oracle:Trample\nPermanent spells you cast that have an Adventure cost {1} less to cast.
+
+ALTERNATE
+
+Name:Seek Thrills
+ManaCost:2 G U R
+Types:Instant Adventure
+A:SP$ Mill | NumCards$ 7 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards. Then put all cards that have an Adventure from among the milled cards into your hand.
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+AdventureCard | Origin$ Graveyard,Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill seven cards. Then put all cards that have an Adventure from among the milled cards into your hand.

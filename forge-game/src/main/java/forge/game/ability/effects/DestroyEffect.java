@@ -3,8 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
@@ -24,6 +22,8 @@ public class DestroyEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        // up to X targets and chose 0 or similar situations
+        if (tgtCards.isEmpty()) return sa.getParamOrDefault("SpellDescription", "");
         final boolean justOne = tgtCards.size() == 1;
 
         sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));
@@ -44,23 +44,22 @@ public class DestroyEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
 
-        if (sa.hasParam("RememberDestroyed") || sa.hasParam("RememberAttached")) {
-            card.clearRemembered();
+        if (sa.hasParam("RememberDestroyed")) {
+            host.clearRemembered();
         }
 
-        CardCollectionView tgtCards = getTargetCards(sa);
         CardCollectionView untargetedCards = CardUtil.getRadiance(sa);
+        CardCollectionView tgtCards = getTargetCards(sa);
 
         tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, ZoneType.Graveyard, sa);
+        untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
-        CardZoneTable table = new CardZoneTable();
-        Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
             if (!tgtC.isInPlay()) {
                 continue;
@@ -72,45 +71,42 @@ public class DestroyEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
                 continue;
             }
-            internalDestroy(gameCard, sa, table, cachedMap, params);
+            internalDestroy(gameCard, sa, params, zoneMovements);
         }
-
-        untargetedCards = GameActionUtil.orderCardsByTheirOwners(game, untargetedCards, ZoneType.Graveyard, sa);
 
         for (final Card unTgtC : untargetedCards) {
             if (unTgtC.isInPlay()) {
-                internalDestroy(unTgtC, sa, table, cachedMap, params);
+                internalDestroy(unTgtC, sa, params, zoneMovements);
             }
         }
 
-        table.triggerChangesZoneAll(game, sa);
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 
-    protected void internalDestroy(Card gameCard, SpellAbility sa, CardZoneTable table, Map<Integer, Card> cachedMap, Map<AbilityKey, Object> params) {
-        final Card card = sa.getHostCard();
-        final Game game = card.getGame();
-
+    protected void internalDestroy(Card gameCard, SpellAbility sa, Map<AbilityKey, Object> params, CardZoneTable zoneMovements) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
-        final boolean remAttached = sa.hasParam("RememberAttached");
         final boolean noRegen = sa.hasParam("NoRegen");
         final boolean sac = sa.hasParam("Sacrifice");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
-
         boolean destroyed = false;
-        final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
-        if (remAttached) {
-            card.addRemembered(gameCard.getAttachedCards());
+
+        SpellAbility cause = sa;
+        if (sa.isReplacementAbility()) {
+            cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
         }
+
         if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, sa, true, table, params) != null;
+            destroyed = game.getAction().sacrifice(gameCard, cause, true, params) != null;
         } else {
-            destroyed = game.getAction().destroy(gameCard, sa, !noRegen, table, params);
+            destroyed = game.getAction().destroy(gameCard, cause, !noRegen, params);
         }
         if (destroyed && remDestroyed) {
-            card.addRemembered(gameCard);
+            host.addRemembered(gameCard);
         }
         if ((destroyed || alwaysRem) && sa.hasParam("RememberLKI")) {
-            card.addRemembered(lki);
+            host.addRemembered(zoneMovements.getLastStateBattlefield().get(gameCard));
         }
     }
 

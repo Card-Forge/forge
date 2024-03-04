@@ -3,20 +3,24 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
 
+import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
@@ -144,7 +148,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             return;
         }
 
-        boolean combatChanged = false;
+        CardCollection untapped = new CardCollection();
         for (Card tgtC : tgtCards) {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
@@ -167,27 +171,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
             tgtC.addTempController(newController, tStamp);
 
             if (bUntap) {
-                tgtC.untap(true);
+                if (tgtC.untap(true)) untapped.add(tgtC);
             }
 
-            final List<String> kws = Lists.newArrayList();
-            final List<String> hiddenKws = Lists.newArrayList();
-            if (null != keywords) {
-                for (final String kw : keywords) {
-                    if (kw.startsWith("HIDDEN")) {
-                        hiddenKws.add(kw.substring(7));
-                    } else {
-                        kws.add(kw);
-                    }
-                }
-            }
-
-            if (!kws.isEmpty()) {
-                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, tStamp, 0);
+            if (keywords != null) {
+                tgtC.addChangedCardKeywords(keywords, Lists.newArrayList(), false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
-            }
-            if (hiddenKws.isEmpty()) {
-                tgtC.addHiddenExtrinsicKeywords(tStamp, 0, hiddenKws);
             }
 
             if (remember && !source.isRemembered(tgtC)) {
@@ -238,7 +227,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removeHiddenExtrinsicKeywords(tStamp, 0);
                         tgtC.removeChangedCardKeywords(tStamp, 0);
                     }
                 };
@@ -246,15 +234,14 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             game.getAction().controllerChangeZoneCorrection(tgtC);
-
-            if (addToCombat(tgtC, tgtC.getController(), sa, "Attacking", "Blocking")) {
-                combatChanged = true;
-            }
         } // end foreach target
 
-        if (combatChanged) {
-            game.updateCombatForView();
-            game.fireEvent(new GameEventCombatChanged());
+        if (!untapped.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<Player, CardCollection> map = Maps.newHashMap();
+            map.put(activator, untapped);
+            runParams.put(AbilityKey.Map, map);
+            game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
         }
     }
 

@@ -1,0 +1,9 @@
+Name:The Meep
+ManaCost:2 B
+Types:Legendary Creature Alien
+PT:0/4
+K:Ward:PayLife<3>
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, creatures you control have base power and toughness X/X until end of turn, where X is the sacrificed creature's mana value.
+SVar:TrigAnimateAll:AB$ AnimateAll | Cost$ Sac<1/Creature.Other/another creature> | Power$ X | Toughness$ X | ValidCards$ Creature.YouCtrl
+SVar:X:Sacrificed$CardManaCost
+Oracle:Ward—Pay 3 life.\nWhenever The Meep attacks, you may sacrifice another creature. If you do, creatures you control have base power and toughness X/X until end of turn, where X is the sacrificed creature's mana value.

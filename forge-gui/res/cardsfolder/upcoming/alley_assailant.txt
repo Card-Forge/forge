@@ -1,0 +1,11 @@
+Name:Alley Assailant
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:3/3
+K:Disguise:4 B B
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target opponent loses 3 life and you gain 3 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:Alley Assailant enters the battlefield tapped.\nDisguise {4}{B}{B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Alley Assailant is turned face up, target opponent loses 3 life and you gain 3 life.

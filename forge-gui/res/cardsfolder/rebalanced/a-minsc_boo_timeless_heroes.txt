@@ -14,4 +14,4 @@ SVar:X:TriggerRemembered$CardPower
 K:CARDNAME can be your commander.
 DeckHas:Ability$Sacrifice|Counters|Token
 DeckHints:Keyword$Trample|Haste
-Oracle:When Minsc & Boo, Timeless Heroes enters the battlefield and at the beginning of your upkeep, if you don't control a creature named Boo, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.\n[+1]: Put three +1/+1 counters on up to one target creature with trample or haste.\n[−2]: Sacrifice a creature. When you do, Minsc & Boo, Timeless Heroes deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards.
+Oracle:When Minsc & Boo, Timeless Heroes enters the battlefield and at the beginning of your upkeep, if you don't control a creature named Boo, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.\n[+1]: Put three +1/+1 counters on up to one target creature with trample or haste.\n[-2]: Sacrifice a creature. When you do, Minsc & Boo, Timeless Heroes deals X damage to any target, where X is that creature's power. If the sacrificed creature was a Hamster, draw X cards.

@@ -1,0 +1,9 @@
+Name:Greedy Freebooter
+ManaCost:B
+Types:Creature Human Pirate
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME dies, scry 1 and create a Treasure token. (To scry 1, look at the top card of your library. You may put that card on the bottom. A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:When Greedy Freebooter dies, scry 1 and create a Treasure token. (To scry 1, look at the top card of your library. You may put that card on the bottom. A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

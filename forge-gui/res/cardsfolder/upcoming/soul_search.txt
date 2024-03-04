@@ -1,0 +1,8 @@
+Name:Soul Search
+ManaCost:W B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | RememberChanged$ True | IsCurse$ True | Mandatory$ True | SubAbility$ DBToken | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. Exile that card.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Card.cmcLE1 | SubAbility$ DBCleanup | SpellDescription$ If the card's mana value is 1 or less, create a 1/1 white and black Spirit creature token with flying.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. Exile that card. If the card's mana value is 1 or less, create a 1/1 white and black Spirit creature token with flying.

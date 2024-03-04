@@ -1,0 +1,16 @@
+Name:Twice Upon a Time
+ManaCost:4 U U
+Types:Sorcery
+A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBChange | IsPresent$ Doctor.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Cast this spell only if you control two or more Doctors.,,,,,,Take an extra turn after this one.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+DeckNeeds:Type$Doctor
+AlternateMode:Adventure
+Oracle:Cast this spell only if you control two or more Doctors.\nTake an extra turn after this one. Exile Twice Upon a Time.
+
+ALTERNATE
+
+Name:Unlikely Meeting
+ManaCost:2 U
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Doctor | ChangeNum$ 1 | SpellDescription$ Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.
+Oracle:Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.

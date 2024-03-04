@@ -1,0 +1,318 @@
+//Rank|Name|Rarity|Set
+#1|Sol Ring|U|C14
+#2|Reliquary Tower|U|C14
+#3|Evolving Wilds|C|C14
+#4|Temple of the False God|U|C14
+#5|Swiftfoot Boots|U|C14
+#6|Terramorphic Expanse|C|C14
+#7|Cyclonic Rift|R|C14
+#8|Solemn Simulacrum|R|C14
+#9|Skullclamp|U|C14
+#10|Commander's Sphere|C|C14
+#11|Bojuka Bog|C|C14
+#12|Sun Titan|M|C14
+#13|Burnished Hart|U|C14
+#14|Thran Dynamo|U|C14
+#15|Mind Stone|U|C14
+#16|Myriad Landscape|U|C14
+#17|Caged Sun|R|C14
+#18|Blasphemous Act|R|C14
+#19|Ghost Quarter|U|C14
+#20|Reclamation Sage|U|C14
+#21|Return to Dust|U|C14
+#22|Chaos Warp|R|C14
+#23|Rite of Replication|R|C14
+#24|Worn Powerstone|U|C14
+#25|Arcane Lighthouse|U|C14
+#26|Wood Elves|C|C14
+#27|Elvish Mystic|C|C14
+#28|Buried Ruin|U|C14
+#29|Llanowar Elves|C|C14
+#30|Nevinyrral's Disk|R|C14
+#31|Everflowing Chalice|U|C14
+#32|Crypt Ghast|R|C14
+#33|Steel Hellkite|R|C14
+#34|Grave Titan|M|C14
+#35|Cathars' Crusade|R|C14
+#36|Terastodon|R|C14
+#37|Mulldrifter|C|C14
+#38|Grand Abolisher|R|C14
+#39|Darksteel Citadel|U|C14
+#40|Gray Merchant of Asphodel|C|C14
+#41|Beastmaster Ascension|R|C14
+#42|Victimize|U|C14
+#43|Wurmcoil Engine|M|C14
+#44|Loxodon Warhammer|R|C14
+#45|Black Sun's Zenith|R|C14
+#46|Butcher of Malakir|R|C14
+#47|Wayfarer's Bauble|C|C14
+#48|Faithless Looting|C|C14
+#49|Barren Moor|C|C14
+#50|Mentor of the Meek|R|C14
+#51|Oran-Rief, the Vastwood|R|C14
+#52|Read the Bones|C|C14
+#53|Harrow|C|C14
+#54|Disciple of Bolas|R|C14
+#55|Myr Battlesphere|R|C14
+#56|True Conviction|R|C14
+#57|Farhaven Elf|C|C14
+#58|Tranquil Thicket|C|C14
+#59|Secluded Steppe|C|C14
+#60|Tectonic Edge|U|C14
+#61|Trading Post|R|C14
+#62|Bloodgift Demon|R|C14
+#63|Soul of the Harvest|R|C14
+#64|Emeria, the Sky Ruin|R|C14
+#65|Rampaging Baloths|M|C14
+#66|Shriekmaw|U|C14
+#67|Lonely Sandbar|C|C14
+#68|Forgotten Cave|C|C14
+#69|Dread Return|U|C14
+#70|Praetor's Counsel|M|C14
+#71|Artisan of Kozilek|U|C14
+#72|Great Furnace|C|C14
+#73|Song of the Dryads|R|C14
+#74|Overwhelming Stampede|R|C14
+#75|Spine of Ish Sah|R|C14
+#76|Tragic Slip|C|C14
+#77|Martial Coup|R|C14
+#78|Thunderfoot Baloth|R|C14
+#79|Pongify|U|C14
+#80|Dreamstone Hedron|U|C14
+#81|Sudden Spoiling|R|C14
+#82|Sword of Vengeance|R|C14
+#83|Crypt of Agadeem|R|C14
+#84|Oblation|R|C14
+#85|Sign in Blood|C|C14
+#86|Daretti, Scrap Savant|M|C14
+#87|Stroke of Genius|R|C14
+#88|Priest of Titania|C|C14
+#89|Elvish Visionary|C|C14
+#90|Myr Retriever|U|C14
+#91|Goblin Welder|R|C14
+#92|Condemn|U|C14
+#93|Sapphire Medallion|R|C14
+#94|Teferi, Temporal Archmage|M|C14
+#95|Freyalise, Llanowar's Fury|M|C14
+#96|Jet Medallion|R|C14
+#97|Argentum Armor|R|C14
+#98|Pristine Talisman|C|C14
+#99|Profane Command|R|C14
+#100|Slippery Karst|C|C14
+#101|Mutilate|R|C14
+#102|Polluted Mire|C|C14
+#103|Dualcaster Mage|R|C14
+#104|Ruby Medallion|R|C14
+#105|Elvish Archdruid|R|C14
+#106|Unstable Obelisk|U|C14
+#107|Marshal's Anthem|R|C14
+#108|Palladium Myr|U|C14
+#109|Ghoulcaller Gisa|M|C14
+#110|Magus of the Coffers|R|C14
+#111|Tormod's Crypt|U|C14
+#112|Fire Diamond|U|C14
+#113|Pilgrim's Eye|C|C14
+#114|Overrun|U|C14
+#115|Dismiss|U|C14
+#116|Flamekin Village|R|C14
+#117|Feldon of the Third Path|M|C14
+#118|Sylvan Safekeeper|R|C14
+#119|Titania, Protector of Argoth|M|C14
+#120|Ichor Wellspring|C|C14
+#121|Sunblast Angel|R|C14
+#122|Sky Diamond|U|C14
+#123|Sphinx of Uthuun|R|C14
+#124|White Sun's Zenith|R|C14
+#125|Beetleback Chief|U|C14
+#126|Silverblade Paladin|R|C14
+#127|Syphon Mind|C|C14
+#128|Pearl Medallion|R|C14
+#129|Smoldering Crater|C|C14
+#130|Scrap Mastery|R|C14
+#131|Fog Bank|U|C14
+#132|Pontiff of Blight|R|C14
+#133|Drifting Meadow|C|C14
+#134|Reaper from the Abyss|M|C14
+#135|Tyrant's Familiar|R|C14
+#136|Silklash Spider|R|C14
+#137|Drana, Kalastria Bloodchief|R|C14
+#138|Serra Avatar|M|C14
+#139|Malicious Affliction|R|C14
+#140|Seer's Sundial|R|C14
+#141|Bogardan Hellkite|M|C14
+#142|Masterwork of Ingenuity|R|C14
+#143|Vampire Hexmage|U|C14
+#144|Primordial Sage|R|C14
+#145|Crystal Vein|U|C14
+#146|Charcoal Diamond|U|C14
+#147|Overseer of the Damned|R|C14
+#148|Mycosynth Wellspring|C|C14
+#149|Frost Titan|M|C14
+#150|Starstorm|R|C14
+#151|Essence Warden|C|C14
+#152|Nahiri, the Lithomancer|M|C14
+#153|Phyrexian Ingester|R|C14
+#154|Bonehoard|R|C14
+#155|Strata Scythe|R|C14
+#156|Lashwrithe|R|C14
+#157|Into the Roil|C|C14
+#158|Junk Diver|R|C14
+#159|Imperious Perfect|U|C14
+#160|Lifeblood Hydra|R|C14
+#161|Remote Isle|C|C14
+#162|Haunted Fengraf|C|C14
+#163|Geist-Honored Monk|R|C14
+#164|Well of Ideas|R|C14
+#165|Comeuppance|R|C14
+#166|Flickerwisp|U|C14
+#167|Liliana's Reaver|R|C14
+#168|Phyrexia's Core|U|C14
+#169|Siege Behemoth|R|C14
+#170|Necromantic Selection|R|C14
+#171|Adarkar Valkyrie|R|C14
+#172|Sylvan Ranger|C|C14
+#173|Emerald Medallion|R|C14
+#174|Mask of Memory|U|C14
+#175|Marble Diamond|U|C14
+#176|Wolfbriar Elemental|R|C14
+#177|Assault Suit|U|C14
+#178|Jazal Goldmane|M|C14
+#179|Cackling Counterpart|R|C14
+#180|Decree of Justice|R|C14
+#181|Containment Priest|R|C14
+#182|Compulsive Research|C|C14
+#183|Fell the Mighty|R|C14
+#184|Joraga Warcaller|R|C14
+#185|Promise of Power|R|C14
+#186|Call to Mind|U|C14
+#187|Pentavus|R|C14
+#188|Ob Nixilis of the Black Oath|M|C14
+#189|Skirsdag High Priest|R|C14
+#190|Moonsilver Spear|R|C14
+#191|Hoard-Smelter Dragon|R|C14
+#192|Angel of the Dire Hour|R|C14
+#193|Angelic Field Marshal|R|C14
+#194|Volcanic Offering|R|C14
+#195|Gift of Estates|U|C14
+#196|Word of Seizing|R|C14
+#197|Ezuri, Renegade Leader|R|C14
+#198|Lys Alana Huntmaster|C|C14
+#199|Sea Gate Oracle|C|C14
+#200|Ur-Golem's Eye|U|C14
+#201|Immaculate Magistrate|R|C14
+#202|Sphinx of Magosi|R|C14
+#203|Magmaquake|R|C14
+#204|Nekrataal|U|C14
+#205|Sylvan Offering|R|C14
+#206|Nomads' Assembly|R|C14
+#207|Kemba, Kha Regent|R|C14
+#208|Wellwisher|C|C14
+#209|Ingot Chewer|C|C14
+#210|Liquimetal Coating|U|C14
+#211|Stitcher Geralf|M|C14
+#212|Collective Unconscious|R|C14
+#213|Requiem Angel|R|C14
+#214|Wave of Vitriol|R|C14
+#215|Mobilization|R|C14
+#216|Flametongue Kavu|U|C14
+#217|Ixidron|R|C14
+#218|Twilight Shepherd|R|C14
+#219|Coral Atoll|U|C14
+#220|Karoo|U|C14
+#221|Pestilence Demon|R|C14
+#222|Brave the Elements|U|C14
+#223|Deep-Sea Kraken|R|C14
+#224|Stormsurge Kraken|R|C14
+#225|Zoetic Cavern|U|C14
+#226|Timberwatch Elf|C|C14
+#227|Loreseeker's Stone|U|C14
+#228|Reef Worm|R|C14
+#229|Exclude|C|C14
+#230|Deploy to the Front|R|C14
+#231|Tendrils of Corruption|C|C14
+#232|Willbender|U|C14
+#233|Lorthos, the Tidemaker|M|C14
+#234|Demon of Wailing Agonies|R|C14
+#235|Jungle Basin|U|C14
+#236|Fresh Meat|R|C14
+#237|Masked Admirers|R|C14
+#238|Everglades|U|C14
+#239|Concentrate|U|C14
+#240|Drove of Elves|U|C14
+#241|Skeletal Scrying|U|C14
+#242|Wake the Dead|R|C14
+#243|Raving Dead|R|C14
+#244|Dormant Volcano|U|C14
+#245|Bad Moon|R|C14
+#246|Desert Twister|U|C14
+#247|Tuktuk the Explorer|R|C14
+#248|Tornado Elemental|R|C14
+#249|Predator, Flagship|R|C14
+#250|Intellectual Offering|R|C14
+#251|Domineering Will|R|C14
+#252|Spitebellows|U|C14
+#253|Benevolent Offering|R|C14
+#254|Bosh, Iron Golem|R|C14
+#255|Whitemane Lion|C|C14
+#256|Abyssal Persecutor|M|C14
+#257|Havenwood Battleground|U|C14
+#258|Sacred Mesa|R|C14
+#259|Thornweald Archer|C|C14
+#260|Crown of Doom|R|C14
+#261|Spectral Procession|U|C14
+#262|Wing Shards|U|C14
+#263|Flesh Carver|R|C14
+#264|Infernal Offering|R|C14
+#265|Turn to Frog|U|C14
+#266|Breaching Leviathan|R|C14
+#267|Grave Sifter|R|C14
+#268|Celestial Crusader|U|C14
+#269|Bitter Feud|R|C14
+#270|Wren's Run Packmaster|R|C14
+#271|Fool's Demise|U|C14
+#272|Myr Sire|C|C14
+#273|Gargoyle Castle|R|C14
+#274|Kor Sanctifiers|C|C14
+#275|Rush of Knowledge|C|C14
+#276|Whirlwind|R|C14
+#277|Skyhunter Skirmisher|U|C14
+#278|Moss Diamond|U|C14
+#279|Hallowed Spiritkeeper|R|C14
+#280|Brine Elemental|U|C14
+#281|Dregs of Sorrow|R|C14
+#282|Warmonger Hellkite|R|C14
+#283|Wolfcaller's Howl|R|C14
+#284|Epochrasite|R|C14
+#285|Infinite Reflection|R|C14
+#286|Hunting Triad|U|C14
+#287|Sphinx of Jwar Isle|R|C14
+#288|Titania's Chosen|U|C14
+#289|Impact Resonance|R|C14
+#290|Whipflare|U|C14
+#291|Xathrid Demon|M|C14
+#292|Incite Rebellion|R|C14
+#293|Phyrexian Gargantua|U|C14
+#294|Aether Gale|R|C14
+#295|Afterlife|U|C14
+#296|Distorting Wake|R|C14
+#297|Dulcet Sirens|R|C14
+#298|Spoils of Blood|R|C14
+#299|Midnight Haunting|U|C14
+#300|Elvish Skysweeper|C|C14
+#301|Cathodion|U|C14
+#302|Jalum Tome|R|C14
+#303|Grim Flowering|U|C14
+#304|Creeperhulk|R|C14
+#305|Azure Mage|U|C14
+#306|Aether Snap|R|C14
+#307|Annihilate|U|C14
+#308|Fathom Seer|C|C14
+#309|Hoverguard Sweepers|R|C14
+#310|Bottle Gnomes|U|C14
+#311|Nantuko Shade|R|C14
+#312|Armistice|R|C14
+#313|Riptide Survivor|U|C14
+#314|Panic Spellbomb|C|C14
+#315|Evernight Shade|U|C14
+#316|Morkrut Banshee|U|C14
+#317|Shaper Parasite|C|C14

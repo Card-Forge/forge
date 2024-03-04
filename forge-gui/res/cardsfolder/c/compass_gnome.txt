@@ -1,0 +1,8 @@
+Name:Compass Gnome
+ManaCost:2
+Types:Artifact Creature Gnome
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic,Card.Cave | ChangeTypeDesc$ basic land of Cave card | ChangeNum$ 1 | ShuffleNonMandatory$ True
+DeckHints:Type$Cave
+Oracle:When Compass Gnome enters the battlefield, you may search your library for a basic land card or Cave card, reveal it, then shuffle and put that card on top.

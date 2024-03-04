@@ -1,0 +1,10 @@
+Name:Three Blind Mice
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:4:DBToken,DBCopy,DBCopy,DBPumpAll
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_mouse | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 1/1 white Mouse creature token.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Card.token+YouCtrl | SpellDescription$ Create a token that's a copy of target token you control.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 and gain vigilance until end of turn.
+DeckHas:Ability$Token & Type$Mouse
+DeckHints:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI — Create a 1/1 white Mouse creature token.\nII, III — Create a token that's a copy of target token you control.\nIV — Creatures you control get +1/+1 and gain vigilance until end of turn.

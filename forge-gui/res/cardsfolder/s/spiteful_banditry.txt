@@ -5,5 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature
 SVar:X:Count$xPaid
 T:Mode$ ChangesZoneAll | ValidCards$ Creature.OppCtrl | ActivationLimit$ 1 | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more creatures your opponents control die, you create a Treasure token. This ability triggers only once each turn.
-SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You 
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 Oracle:When Spiteful Banditry enters the battlefield, it deals X damage to each creature.\nWhenever one or more creatures your opponents control die, you create a Treasure token. This ability triggers only once each turn.

@@ -1,0 +1,7 @@
+Name:Basking Capybara
+ManaCost:1 G
+Types:Creature Capybara
+PT:1/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | Description$ Descend 4 — CARDNAME gets +3/+0 as long as there are four or more permanent cards in your graveyard.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+Oracle:Descend 4 — Basking Capybara gets +3/+0 as long as there are four or more permanent cards in your graveyard.

@@ -1,0 +1,8 @@
+Name:Glimpse the Core
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Charm | Choices$ SearchForest,ReturnCave | CharmNum$ 1
+SVar:SearchForest:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Forest+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.
+SVar:ReturnCave:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target Cave card in your graveyard | ValidTgts$ Cave.YouOwn | Tapped$ True | SpellDescription$ Return target Cave card from your graveyard to the battlefield tapped.
+DeckHints:Type$Cave & Ability$Graveyard|Mill
+Oracle:Choose one —\n• Search your library for a basic Forest card, put that card onto the battlefield tapped, then shuffle.\n• Return target Cave card from your graveyard to the battlefield tapped.

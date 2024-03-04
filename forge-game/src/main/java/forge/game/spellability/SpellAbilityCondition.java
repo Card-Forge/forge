@@ -550,7 +550,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue) && !secondCheck) {
                 return false;
             }
-
         }
 
         return true;

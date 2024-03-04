@@ -1,0 +1,11 @@
+Name:Fell Beast's Shriek
+ManaCost:U R
+Types:Sorcery
+K:Splice:Instant,Sorcery:2 U R
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBTapAll | SpellDescription$ Each opponent chooses a creature they control. Tap and goad the chosen creatures. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)
+SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True
+SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Each opponent chooses a creature they control. Tap and goad the chosen creatures. (Until your next turn, those creatures attack each combat if able and attack a player other than you if able.)\nSplice onto instant or sorcery {2}{U}{R} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

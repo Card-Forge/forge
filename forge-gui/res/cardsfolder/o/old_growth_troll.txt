@@ -4,7 +4,7 @@ Types:Creature Troll Warrior
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a tapped 4/4 green Troll Warrior creature token with trample.'"
-SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ DBAnimate
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveAllAbilities$ True | Keywords$ Enchant Forest you control | Abilities$ SPAttach | staticAbilities$ STAura | Duration$ Permanent
 SVar:STAura:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana & ABToken | Description$ Enchanted Forest has '{T}: Add {G}{G}' and '{1}, {T}, Sacrifice this land: Create a tapped 4/4 green Troll Warrior creature token with trample.'
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Forest.YouCtrl | AILogic$ Pump

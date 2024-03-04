@@ -389,12 +389,21 @@ public class GameCopier {
                 if (c.isManifested()) {
                     newCard.setManifested(true);
                 }
+                if (c.isCloaked()) {
+                    newCard.setCloaked(true);
+                }
             }
             if (c.isMonstrous()) {
                 newCard.setMonstrous(true);
             }
             if (c.isRenowned()) {
                 newCard.setRenowned(true);
+            }
+            if (c.isSolved()) {
+                newCard.setSolved(true);
+            }
+            if (c.isSuspected()) {
+                newCard.setSuspected(true);
             }
             if (c.isPlaneswalker()) {
                 for (SpellAbility sa : c.getAllSpellAbilities()) {
@@ -431,7 +440,7 @@ public class GameCopier {
             if (c.hasChosenColor()) {
                 newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
             }
-            if (!c.getNamedCard().isEmpty()) {
+            if (c.hasNamedCard()) {
                 newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
             }
             newCard.setSVars(c.getSVars());

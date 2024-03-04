@@ -1,0 +1,12 @@
+Name:Gemcutter Buccaneer
+ManaCost:3 R
+Types:Creature Orc Pirate Artificer
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Pirate.Other+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Pirate enters the battlefield under your control, create a tapped Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+S:Mode$ Continuous | Affected$ Treasure.YouCtrl | AddType$ Equipment | AddStaticAbility$ TreasureEquip | AddKeyword$ Equip:3 & Equip:1:Creature.Pirate+YouCtrl:Pirate | Description$ Treasures you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0," equip Pirate {1}, and equip {3}.
+SVar:TreasureEquip:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+DeckHas:Ability$Token|Sacrifice & Type$Blood|Equipment
+DeckHas:Ability$Treasure
+DeckHints:Type$Treasure|Pirate
+Oracle:Whenever Gemcutter Buccaneer or another Pirate enters the battlefield under your control, create a tapped Treasure token.\nTreasures you control are Equipment in addition to their other types and have "Equipped creature gets +2/+0," equip Pirate {1}, and equip {3}.

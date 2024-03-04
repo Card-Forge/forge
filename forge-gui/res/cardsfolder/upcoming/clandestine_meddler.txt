@@ -1,0 +1,10 @@
+Name:Clandestine Meddler
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect up to one other target creature you control. (A suspected creature has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouCtrl+Other | Defined$ Targeted | Attributes$ Suspected
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.IsSuspected+YouCtrl | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more suspected creatures you control attack, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Graveyard
+Oracle:When Clandestine Meddler enters the battlefield, suspect up to one other target creature you control. (A suspected creature has menace and can't block.)\nWhenever one or more suspected creatures you control attack, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

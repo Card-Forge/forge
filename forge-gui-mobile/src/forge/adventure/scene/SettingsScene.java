@@ -59,7 +59,7 @@ public class SettingsScene extends UIScene {
         if (somethingWentWrong.get()) {
             if (errorDialog == null) {
                 errorDialog = createGenericDialog("Something went wrong", "Copy was not successful check your access right\n and if the folder is in use",
-                        Forge.getLocalizer().getMessage("lblOk"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
+                        Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
             }
             showDialog(errorDialog);
         } else {
@@ -67,7 +67,7 @@ public class SettingsScene extends UIScene {
                 copyPlane = createGenericDialog("Copied plane", "New plane " + newPlaneName.getText() +
                                 " was created\nYou can now start the editor to change the plane\n" +
                                 "or edit it manually from the folder\n" + Config.instance().getPlanePath("<user>" + newPlaneName.getText()),
-                        Forge.getLocalizer().getMessage("lblOk"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
+                        Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblAbort"), this::removeDialog, this::removeDialog);
             }
             Config.instance().getSettingData().plane = "<user>" + newPlaneName.getText();
             Config.instance().saveSettings();
@@ -78,7 +78,7 @@ public class SettingsScene extends UIScene {
     private void createNewPlane() {
         if (createNewPlane == null) {
             createNewPlane = createGenericDialog("Create your own Plane", "Select a plane to copy",
-                    Forge.getLocalizer().getMessage("lblOk"),
+                    Forge.getLocalizer().getMessage("lblOK"),
                     Forge.getLocalizer().getMessage("lblAbort"), () -> {
                         this.copyNewPlane();
                         removeDialog();

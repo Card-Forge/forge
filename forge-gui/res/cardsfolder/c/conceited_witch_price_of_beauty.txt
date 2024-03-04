@@ -1,0 +1,16 @@
+Name:Conceited Witch
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:2/3
+K:Menace
+DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+AlternateMode:Adventure
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)
+
+ALTERNATE
+
+Name:Price of Beauty
+ManaCost:B
+Types:Sorcery Adventure
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Wicked Role token attached to target creature you control. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Create a Wicked Role token attached to target creature you control. (Then exile this card. You may cast the creature later from exile.)

@@ -17,14 +17,9 @@
  */
 package forge.game.cost;
 
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.Zone;
 
 /**
  * The Class CostPartWithList.
@@ -109,7 +104,6 @@ public abstract class CostPartWithList extends CostPart {
 
     public final boolean executePayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         lkiList.add(CardUtil.getLKICopy(targetCard));
-        final Zone origin = targetCard.getZone();
         final Card newCard = doPayment(payer, ability, targetCard, effect);
 
         // need to update the LKI info to ensure correct interaction with cards which may trigger on this
@@ -117,18 +111,16 @@ public abstract class CostPartWithList extends CostPart {
         targetCard.getGame().updateLastStateForCard(targetCard);
 
         if (newCard != null) {
-            final Zone newZone = newCard.getZone();
             cardList.add(newCard);
-
-            if (!origin.equals(newZone)) {
-                table.put(origin.getZoneType(), newZone.getZoneType(), newCard);
-            }
         }
         return true;
     }
 
     // always returns true, made this to inline with return
     protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        table.setLastStateBattlefield(payer.getGame().copyLastStateBattlefield());
+        table.setLastStateGraveyard(payer.getGame().copyLastStateGraveyard());
+
         handleBeforePayment(payer, ability, targetCards);
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
             for (Card c: targetCards) {
@@ -178,9 +170,7 @@ public abstract class CostPartWithList extends CostPart {
             return;
         }
 
-        // copy table because the original get cleaned after the cost is done
-        final CardZoneTable copyTable = new CardZoneTable(table);
-        copyTable.triggerChangesZoneAll(payer.getGame(), ability);
+        table.triggerChangesZoneAll(payer.getGame(), ability);
     }
 
 }

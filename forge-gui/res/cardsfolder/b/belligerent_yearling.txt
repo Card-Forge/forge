@@ -1,0 +1,10 @@
+Name:Belligerent Yearling
+ManaCost:1 R
+Types:Creature Dinosaur
+PT:3/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dinosaur.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ Whenever another Dinosaur enters the battlefield under your control, you may have CARDNAME base power become equal to that creature's power until end of turn.
+SVar:TrigAnimate:DB$ Animate | Power$ X
+SVar:X:TriggeredCard$CardPower
+DeckHints:Type$Dinosaur
+Oracle:Trample\nWhenever another Dinosaur enters the battlefield under your control, you may have Belligerent Yearling's base power become equal to that creature's power until end of turn.

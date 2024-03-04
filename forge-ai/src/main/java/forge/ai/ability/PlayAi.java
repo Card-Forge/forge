@@ -153,7 +153,7 @@ public class PlayAi extends SpellAbilityAi {
             public boolean apply(final Card c) {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
-                for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
+                for (SpellAbility s : AbilityUtils.getSpellsFromPlayEffect(c, ai, state, false)) {
                     if (!sa.matchesValidParam("ValidSA", s)) {
                         continue;
                     }

@@ -271,7 +271,7 @@ ScryfallCode=MOM
 259 C Flywheel Racer @Joshua Cairos
 260 C Halo Hopper @Daniel Ljunggren
 261 C Kitesail @Ben Hill
-262 C Phyrexian Archivist @Daniel Romanovsky
+262 C Phyrexian Archivist @Andreas Zafiratos
 263 R Realmbreaker, the Invasion Tree @Kekai Kotaki
 264 C Skittering Surveyor @Igor Kieryluk
 265 M Sword of Once and Future @Joshua Cairos
@@ -475,7 +475,6 @@ ScryfallCode=MOM
 4 Invasion of Xerex|MOM
 4 Invasion of Zendikar|MOM
 
-
 [double-face]
 1 Elesh Norn|MOM
 2 Heliod, the Radiant Dawn|MOM
@@ -502,7 +501,6 @@ ScryfallCode=MOM
 3 Herbology Instructor|MOM
 2 Polukranos Reborn|MOM
 1 Vorinclex|MOM
-
 
 [tokens]
 b_2_2_zombie

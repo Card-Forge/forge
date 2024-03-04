@@ -5,6 +5,7 @@ Swamp:Swamps
 Mountain:Mountains
 Forest:Forests
 [LandTypes]
+Cave:Caves
 Desert:Deserts
 Gate:Gates
 Lair
@@ -51,6 +52,7 @@ Brushwagg:Brushwaggs
 Camarid:Camarids
 C'tan:C'tan
 Camel:Camels
+Capybara:Capybaras
 Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
@@ -71,6 +73,7 @@ Cyberman:Cybermen
 Cyborg:Cyborgs
 Cyclops:Cyclopes
 Dalek:Daleks
+Detective:Detectives
 Dauthi:Dauthis
 Demigod:Demigods
 Demon:Demons
@@ -161,6 +164,7 @@ Leviathan:Leviathans
 Lhurgoyf:Lhurgoyfs
 Licid:Licids
 Lizard:Lizards
+Llama:Llamas
 Lobster:Lobsters
 Mammoth:Mammoths
 Manticore:Manticores
@@ -251,6 +255,7 @@ Siren:Sirens
 Skeleton:Skeletons
 Slith:Sliths
 Sliver:Slivers
+Sloth:Sloths
 Slug:Slugs
 Snake:Snakes
 Soldier:Soldiers
@@ -269,6 +274,7 @@ Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
+Synth:Synths
 Survivor:Survivors
 Tentacle:Tentacles
 Tetravite:Tetravites
@@ -307,12 +313,14 @@ Zubera:Zuberas
 [SpellTypes]
 Adventure
 Arcane
+Chorus
 Lesson
 Trap
 [EnchantmentTypes]
 Aura
 Background
 Cartouche
+Case
 Class
 Curse
 Role
@@ -322,6 +330,7 @@ Shrine
 Shard
 [ArtifactTypes]
 Blood
+Bobblehead:Bobbleheads
 Clue:Clues
 Contraption
 Equipment
@@ -329,7 +338,9 @@ Food
 Fortification
 Gold
 Incubator:Incubators
+Junk
 Key:Keys
+Map
 Powerstone
 Treasure
 Vehicle
@@ -386,6 +397,7 @@ Niko
 Nissa
 Nixilis
 Oko
+Quintorius
 Ral
 Rowan
 Saheeli
@@ -419,10 +431,12 @@ Undercity
 [BattleTypes]
 Siege
 [PlanarTypes]
+Androzani Minor
 Alara
 Alfava Metraxis
 Amonkhet
 Antausia
+Apalapucia
 Arcavios
 Arkhos
 Azgol
@@ -430,6 +444,7 @@ Belenon
 Bolas's Meditation Realm
 Capenna
 Cridhe
+Darillium
 Dominaria
 Earth
 Echoir
@@ -441,6 +456,7 @@ Fiora
 Gallifrey
 Gargantikar
 Gobakhan
+Horsehead Nebula
 Ikoria
 Innistrad
 Iquatana
@@ -449,6 +465,7 @@ Ixalan
 Kaladesh
 Kaldheim
 Kamigawa
+Kandoka
 Karsus
 Kephalai
 Kinshala
@@ -462,10 +479,12 @@ Mercadia
 Mirrodin
 Moag
 Mongseng
+Moon
 Muraganda
 Necros
 New Earth
 New Phyrexia
+Outside Mutter's Spiral
 Phyrexia
 Pyrulea
 Rabiah
@@ -484,6 +503,7 @@ The Abyss
 The Dalek Asylum
 The Library
 Theros
+Time
 Trenzalore
 Ulgrotha
 Valla

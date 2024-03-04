@@ -2,11 +2,11 @@ Name:Kytheon, Hero of Akros
 ManaCost:W
 Types:Legendary Creature Human Soldier
 PT:2/1
-T:Mode$ Phase | Mode$ Phase | Phase$ EndCombat | IsPresent$ Card.Self+attackedThisCombat GE3 | Execute$ TrigExile | TriggerDescription$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
+T:Mode$ Phase | Mode$ Phase | Phase$ EndCombat | IsPresent$ Card.Self+attackedThisCombat GE3 | Execute$ TrigExile | TriggerDescription$ At end of combat, if CARDNAME and at least two other creatures attacked this combat, exile NICKNAME, then return him to the battlefield transformed under his owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+A:AB$ Pump | Cost$ 2 W | Defined$ Self | KW$ Indestructible | SpellDescription$ NICKNAME gains indestructible until end of turn.
 AlternateMode:DoubleFaced
 Oracle:At end of combat, if Kytheon, Hero of Akros and at least two other creatures attacked this combat, exile Kytheon, then return him to the battlefield transformed under his owner's control.\n{2}{W}: Kytheon gains indestructible until end of turn.
 

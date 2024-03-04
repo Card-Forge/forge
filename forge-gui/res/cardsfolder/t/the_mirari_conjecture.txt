@@ -1,7 +1,7 @@
 Name:The Mirari Conjecture
 ManaCost:4 U
 Types:Enchantment Saga
-K:Saga:3:DBChangeZoneI,DBChangeZoneII,DBEffect
+K:Chapter:3:DBChangeZoneI,DBChangeZoneII,DBEffect
 SVar:DBChangeZoneI:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl | SpellDescription$ Return target instant card from your graveyard to your hand.
 SVar:DBChangeZoneII:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 SVar:DBEffect:DB$ Effect | Name$ The Mirari Conjecture Effect | Triggers$ InstantSorceryCast | SpellDescription$ Until end of turn, whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.

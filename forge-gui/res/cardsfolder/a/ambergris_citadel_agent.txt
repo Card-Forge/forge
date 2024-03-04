@@ -10,8 +10,8 @@ SVar:DBDraw:DB$ Draw | NumCards$ 2
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard
 DeckHints:Ability$Discard
-Oracle:Haste\nSpecialize {3}\nWhenever Ambergris, Citadel Agent attacks, you may discard your hand and draw two cards.
 AlternateMode:Specialize
+Oracle:Haste\nSpecialize {3}\nWhenever Ambergris, Citadel Agent attacks, you may discard your hand and draw two cards.
 
 SPECIALIZE:WHITE
 

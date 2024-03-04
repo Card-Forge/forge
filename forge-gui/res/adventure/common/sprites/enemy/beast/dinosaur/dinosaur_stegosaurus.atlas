@@ -44,22 +44,22 @@ Idle
   size: 32, 16
 Walk
   xy: 0, 27
-  size: 30, 16
+  size: 32, 16
 Walk
-  xy: 30, 27
-  size: 30, 16
+  xy: 32, 27
+  size: 32, 16
 Walk
-  xy: 65, 27
-  size: 30, 16
+  xy: 64, 27
+  size: 32, 16
 Walk
-  xy: 97, 27
-  size: 30, 16
+  xy: 96, 27
+  size: 32, 16
 Walk
   xy: 128, 27
-  size: 30, 16
+  size: 32, 16
 Walk
-  xy: 159, 27
-  size: 30, 16
+  xy: 160, 27
+  size: 32, 16
 Attack
   xy: 0, 52
   size: 32, 16

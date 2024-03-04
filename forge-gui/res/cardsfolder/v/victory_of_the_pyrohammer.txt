@@ -1,0 +1,9 @@
+Name:Victory of the Pyrohammer
+ManaCost:3 R R
+Types:Enchantment Saga
+K:Chapter:3:DamageAll,PingAll,PingAll
+SVar:DamageAll:DB$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 4 | SubAbility$ DBAnimate | SpellDescription$ CARDNAME deals 4 damage to each creature and each planeswalker. CARDNAME gains "Damage isn't removed from creatures during cleanup steps."
+SVar:DBAnimate:DB$ Animate | staticAbilities$ DamageNotRemoved | Defined$ Self | Duration$ Permanent
+SVar:DamageNotRemoved:Mode$ NoCleanupDamage | ValidCard$ Creature | Description$ Damage isn't removed from creatures during cleanup steps.
+SVar:PingAll:DB$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature and each planeswalker.
+Oracle:(As this Saga enters and after your draw step add a lore counter. Sacrifice after III.)\nI — Victory of the Pyrohammer deals 4 damage to each creature and each planeswalker. Victory of the Pyrohammer gains "Damage isn't removed from creatures during cleanup steps."\nII, III — Victory of the Pyrohammer deals 1 damage to each creature and each planeswalker.

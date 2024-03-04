@@ -5,7 +5,7 @@ PT:6/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | Mandatory$ True | IsCurse$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select up to two target nonland permanents you don't control | TargetMin$ 0 | TargetMax$ 2 | IsCurse$ True | SubAbility$ DBChooseRandom
-SVar:DBChooseRandom:DB$ ChooseCard | AtRandom$ True | Reveal$ True | RevealTitle$ OVERRIDE Randomly chosen permanent: | DefinedCards$ TargetedCard | SubAbility$ DBDestroy
+SVar:DBChooseRandom:DB$ ChooseCard | AtRandom$ True | Reveal$ True | RevealTitle$ Randomly chosen permanent: | DefinedCards$ TargetedCard | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.

@@ -1,0 +1,14 @@
+Name:The Ancient One
+ManaCost:U B
+Types:Legendary Creature Spirit God
+PT:8/8
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ LE7 | Description$ Descend 8 — CARDNAME can't attack or block unless there are eight or more permanent cards in your graveyard.
+A:AB$ Draw | Cost$ 2 U B | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. When you discard a card this way, target player mills cards equal to its mana value.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBImmediateTrig | StackDescription$ then discard a card.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigMill | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ When you discard a card this way, target player mills cards equal to its mana value.
+SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$CardManaCost
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+DeckHas:Ability$Discard|Mill
+Oracle:Descend 8 — The Ancient One can't attack or block unless there are eight or more permanent cards in your graveyard.\n{2}{U}{B}: Draw a card, then discard a card. When you discard a card this way, target player mills cards equal to its mana value.

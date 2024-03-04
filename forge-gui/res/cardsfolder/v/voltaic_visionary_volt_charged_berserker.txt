@@ -7,7 +7,7 @@ SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZo
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | StackDescription$ SpellDescription | SpellDescription$ You may play that card this turn. Activate only as a sorcery.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled card this turn.
-T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI  | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When you play a card exiled with CARDNAME, transform it.
+T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When you play a card exiled with CARDNAME, transform it.
 T:Mode$ LandPlayed | ValidCard$ Land.ExiledWithSourceLKI | Execute$ TrigTransform | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When you play a card exiled with CARDNAME, transform it.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced

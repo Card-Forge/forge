@@ -1,0 +1,10 @@
+Name:Forum Familiar
+ManaCost:W
+Types:Creature Cat
+PT:1/1
+K:Disguise:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return another target permanent you control to its owner's hand and put a +1/+1 counter on CARDNAME.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl+Other | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Disguise {1}{W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Forum Familiar is turned face up, return another target permanent you control to its owner's hand and put a +1/+1 counter on Forum Familiar.

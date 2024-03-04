@@ -1,0 +1,11 @@
+Name:Charging Hooligan
+ManaCost:3 R
+Types:Creature Human Peasant
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each attacking creature. If a Rat is attacking, CARDNAME gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | SubAbility$ DBPumpBis
+SVar:DBPumpBis:DB$ Pump | Defined$ Self | KW$ Trample | ConditionPresent$ Rat.attacking
+SVar:X:Count$Valid Creature.attacking
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Rat
+Oracle:Whenever Charging Hooligan attacks, it gets +1/+0 until end of turn for each attacking creature. If a Rat is attacking, Charging Hooligan gains trample until end of turn.

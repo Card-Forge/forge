@@ -1,0 +1,9 @@
+Name:Tarrian's Soulcleaver
+ManaCost:1
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Vigilance | Description$ Equipped creature has vigilance.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other,Artifact.Other | TriggerZones$ Battlefield | Execute$ TrigGainCounter | TriggerDescription$ Whenever another artifact or creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature.
+SVar:TrigGainCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ 1
+K:Equip:2
+DeckHas:Ability$Counters
+Oracle:Equipped creature has vigilance.\nWhenever another artifact or creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature.\nEquip {2}

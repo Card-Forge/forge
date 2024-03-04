@@ -1,0 +1,7 @@
+Name:Family Reunion
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBPump,DBHexproof
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+SVar:DBHexproof:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Hexproof | SpellDescription$ Creatures you control gain hexproof until end of turn. (They can't be the targets of spells or abilities your opponents control.)
+Oracle:Choose one —\n• Creatures you control get +1/+1 until end of turn.\n• Creatures you control gain hexproof until end of turn. (They can't be the targets of spells or abilities your opponents control.)

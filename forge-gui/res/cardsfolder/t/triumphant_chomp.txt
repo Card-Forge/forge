@@ -1,0 +1,7 @@
+Name:Triumphant Chomp
+ManaCost:R
+Types:Sorcery
+DeckNeeds:Type$Dinosaur
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to 2 or the greatest power among Dinosaurs you control, whichever is greater.
+SVar:X:Count$Valid Dinosaur.YouCtrl$GreatestPower/LimitMin.2
+Oracle:Triumphant Chomp deals damage to target creature equal to 2 or the greatest power among Dinosaurs you control, whichever is greater.

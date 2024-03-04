@@ -1,0 +1,331 @@
+//Rank|Name|Rarity|Set
+#1|Mist Dragon|R|MIR
+#2|Benthic Djinn|R|MIR
+#3|Kaervek's Torch|C|MIR
+#4|Zuberi, Golden Feather|R|MIR
+#5|Taniwha|R|MIR
+#6|Hammer of Bogardan|R|MIR
+#7|Torrent of Lava|R|MIR
+#8|Savage Twister|U|MIR
+#9|Jabari's Influence|R|MIR
+#10|Volcanic Dragon|R|MIR
+#11|Spirit of the Night|R|MIR
+#12|Energy Bolt|R|MIR
+#13|Sidar Jabari|R|MIR
+#14|Volcanic Geyser|U|MIR
+#15|Purraj of Urborg|R|MIR
+#16|Sacred Mesa|R|MIR
+#17|Phyrexian Purge|R|MIR
+#18|Incinerate|C|MIR
+#19|Abyssal Hunter|R|MIR
+#20|Dark Banishing|C|MIR
+#21|Canopy Dragon|R|MIR
+#22|Lion's Eye Diamond|R|MIR
+#23|Tainted Specter|R|MIR
+#24|Pacifism|C|MIR
+#25|Catacomb Dragon|R|MIR
+#26|Cinder Cloud|U|MIR
+#27|Frenetic Efreet|R|MIR
+#28|Hazerider Drake|U|MIR
+#29|Sawback Manticore|R|MIR
+#30|Kaervek's Purge|U|MIR
+#31|Asmira, Holy Avenger|R|MIR
+#32|Wildfire Emissary|U|MIR
+#33|Leering Gargoyle|R|MIR
+#34|Telim'Tor|R|MIR
+#35|Nettletooth Djinn|U|MIR
+#36|Suq'Ata Firewalker|U|MIR
+#37|Cerulean Wyvern|U|MIR
+#38|Harmattan Efreet|U|MIR
+#39|Zirilan of the Claw|R|MIR
+#40|Pearl Dragon|R|MIR
+#41|Crimson Hellkite|R|MIR
+#42|Melesse Spirit|U|MIR
+#43|Rock Basilisk|R|MIR
+#44|Mtenda Griffin|U|MIR
+#45|Divine Retribution|R|MIR
+#46|Afterlife|U|MIR
+#47|Unfulfilled Desires|R|MIR
+#48|Burning Palm Efreet|U|MIR
+#49|Femeref Archers|U|MIR
+#50|Reckless Embermage|R|MIR
+#51|Vaporous Djinn|U|MIR
+#52|Wall of Roots|C|MIR
+#53|Flame Elemental|U|MIR
+#54|Subterranean Spirit|R|MIR
+#55|Shauku, Endbringer|R|MIR
+#56|Unyaro Griffin|U|MIR
+#57|Uktabi Wildcats|R|MIR
+#58|Burning Shield Askari|C|MIR
+#59|Polymorph|R|MIR
+#60|Quirion Elves|C|MIR
+#61|Dread Specter|U|MIR
+#62|Cadaverous Knight|C|MIR
+#63|Ray of Command|C|MIR
+#64|Jolrael's Centaur|C|MIR
+#65|Enfeeblement|C|MIR
+#66|Power Sink|C|MIR
+#67|Searing Spear Askari|C|MIR
+#68|Zhalfirin Knight|C|MIR
+#69|Talruum Minotaur|C|MIR
+#70|Ekundu Griffin|C|MIR
+#71|Harbinger of Night|R|MIR
+#72|Spitting Earth|C|MIR
+#73|Stalking Tiger|C|MIR
+#74|Skulking Ghost|C|MIR
+#75|Feral Shadow|C|MIR
+#76|Spectral Guardian|R|MIR
+#77|Discordant Spirit|R|MIR
+#78|Sky Diamond|U|MIR
+#79|Zhalfirin Commander|U|MIR
+#80|Brushwagg|R|MIR
+#81|Ethereal Champion|R|MIR
+#82|Grinning Totem|R|MIR
+#83|Sunweb|R|MIR
+#84|Drain Life|C|MIR
+#85|Preferred Selection|R|MIR
+#86|Barbed-Back Wurm|U|MIR
+#87|Mangara's Tome|R|MIR
+#88|Jungle Patrol|R|MIR
+#89|Phyrexian Dreadnought|R|MIR
+#90|Amber Prison|R|MIR
+#91|Teremko Griffin|C|MIR
+#92|Flood Plain|U|MIR
+#93|Teeka's Dragon|R|MIR
+#94|Ancestral Memories|R|MIR
+#95|Ether Well|U|MIR
+#96|Carrion|R|MIR
+#97|Charcoal Diamond|U|MIR
+#98|Forsaken Wastes|R|MIR
+#99|Jungle Wurm|C|MIR
+#100|Dissipate|U|MIR
+#101|Fetid Horror|C|MIR
+#102|Wild Elephant|C|MIR
+#103|Shadow Guildmage|C|MIR
+#104|Ashen Powder|R|MIR
+#105|Soul Rend|U|MIR
+#106|Azimaet Drake|C|MIR
+#107|Giant Mantis|C|MIR
+#108|Emberwilde Djinn|R|MIR
+#109|Ekundu Cyclops|C|MIR
+#110|Granger Guildmage|C|MIR
+#111|Unyaro Bee Sting|U|MIR
+#112|Femeref Knight|C|MIR
+#113|Soul Echo|R|MIR
+#114|Hivis of the Scale|R|MIR
+#115|Rampant Growth|C|MIR
+#116|Patagia Golem|U|MIR
+#117|Stupor|U|MIR
+#118|Auspicious Ancestor|R|MIR
+#119|Crypt Cobra|U|MIR
+#120|Dirtwater Wraith|C|MIR
+#121|Floodgate|U|MIR
+#122|Phyrexian Vault|U|MIR
+#123|Mana Prism|U|MIR
+#124|Locust Swarm|U|MIR
+#125|Ravenous Vampire|U|MIR
+#126|Barbed Foliage|U|MIR
+#127|Delirium|U|MIR
+#128|Fire Diamond|U|MIR
+#129|Jungle Troll|U|MIR
+#130|Crimson Roc|U|MIR
+#131|Urborg Panther|C|MIR
+#132|Raging Spirit|C|MIR
+#133|Shauku's Minion|U|MIR
+#134|Crash of Rhinos|C|MIR
+#135|Worldly Tutor|U|MIR
+#136|Mountain Valley|U|MIR
+#137|Hakim, Loreweaver|R|MIR
+#138|Sea Scryer|C|MIR
+#139|Sandbar Crocodile|C|MIR
+#140|Withering Boon|U|MIR
+#141|Wall of Corpses|C|MIR
+#142|Daring Apprentice|R|MIR
+#143|Shallow Grave|R|MIR
+#144|Restless Dead|C|MIR
+#145|Gibbering Hyenas|C|MIR
+#146|Tidal Wave|U|MIR
+#147|Teferi's Drake|C|MIR
+#148|Noble Elephant|C|MIR
+#149|Political Trickery|R|MIR
+#150|Flare|C|MIR
+#151|Emberwilde Caliph|R|MIR
+#152|Moss Diamond|U|MIR
+#153|Igneous Golem|U|MIR
+#154|Mtenda Lion|C|MIR
+#155|Boomerang|C|MIR
+#156|Horrible Hordes|U|MIR
+#157|Maro|R|MIR
+#158|Grave Servitude|C|MIR
+#159|Breathstealer|C|MIR
+#160|Goblin Scouts|U|MIR
+#161|Enlightened Tutor|U|MIR
+#162|Shimmer|R|MIR
+#163|Windreaper Falcon|U|MIR
+#164|Energy Vortex|R|MIR
+#165|Merfolk Seer|C|MIR
+#166|Viashino Warrior|C|MIR
+#167|Dream Cache|C|MIR
+#168|Thirst|C|MIR
+#169|Warping Wurm|R|MIR
+#170|Amulet of Unmaking|R|MIR
+#171|Harbor Guardian|U|MIR
+#172|Marble Diamond|U|MIR
+#173|Iron Tusk Elephant|U|MIR
+#174|Gravebane Zombie|C|MIR
+#175|Mystical Tutor|U|MIR
+#176|Shaper Guildmage|C|MIR
+#177|Cycle of Life|R|MIR
+#178|Infernal Contract|R|MIR
+#179|Afiya Grove|R|MIR
+#180|Wave Elemental|U|MIR
+#181|Basalt Golem|U|MIR
+#182|Bad River|U|MIR
+#183|Lead Golem|U|MIR
+#184|Rashida Scalebane|R|MIR
+#185|Teferi's Imp|R|MIR
+#186|Unerring Sling|U|MIR
+#187|Femeref Healer|C|MIR
+#188|Reign of Terror|U|MIR
+#189|Sand Golem|U|MIR
+#190|Purgatory|R|MIR
+#191|Chaos Charm|C|MIR
+#192|Armor of Thorns|C|MIR
+#193|Bay Falcon|C|MIR
+#194|Memory Lapse|C|MIR
+#195|Illicit Auction|R|MIR
+#196|Sabertooth Cobra|C|MIR
+#197|Dark Ritual|C|MIR
+#198|Zombie Mob|U|MIR
+#199|Lightning Reflexes|C|MIR
+#200|Reparations|R|MIR
+#201|Tropical Storm|U|MIR
+#202|Jolt|C|MIR
+#203|Radiant Essence|U|MIR
+#204|Shadowbane|U|MIR
+#205|Goblin Tinkerer|C|MIR
+#206|Haunting Apparition|U|MIR
+#207|Reflect Damage|R|MIR
+#208|Kukemssa Serpent|C|MIR
+#209|Reign of Chaos|U|MIR
+#210|Bone Harvest|C|MIR
+#211|Blighted Shaman|U|MIR
+#212|Rocky Tar Pit|U|MIR
+#213|Karoo Meerkat|U|MIR
+#214|Circle of Despair|R|MIR
+#215|Chariot of the Sun|U|MIR
+#216|Armorer Guildmage|C|MIR
+#217|Goblin Elite Infantry|C|MIR
+#218|Crystal Vein|U|MIR
+#219|Razor Pendulum|R|MIR
+#220|Cursed Totem|R|MIR
+#221|Lure of Prey|R|MIR
+#222|Femeref Scouts|C|MIR
+#223|Sandstorm|C|MIR
+#224|Wellspring|R|MIR
+#225|Mtenda Herder|C|MIR
+#226|Zebra Unicorn|U|MIR
+#227|Sewer Rats|C|MIR
+#228|Dream Fighter|C|MIR
+#229|Celestial Dawn|R|MIR
+#230|Sapphire Charm|C|MIR
+#231|Pyric Salamander|C|MIR
+#232|Foratog|U|MIR
+#233|Vigilant Martyr|U|MIR
+#234|Reality Ripple|C|MIR
+#235|Unseen Walker|U|MIR
+#236|Grasslands|U|MIR
+#237|Bone Mask|R|MIR
+#238|Painful Memories|U|MIR
+#239|Mind Harness|U|MIR
+#240|Choking Sands|C|MIR
+#241|Fallow Earth|U|MIR
+#242|Uktabi Faerie|C|MIR
+#243|Stone Rain|C|MIR
+#244|Misers' Cage|R|MIR
+#245|Dwarven Miner|U|MIR
+#246|Crystal Golem|U|MIR
+#247|Disenchant|C|MIR
+#248|Prismatic Boon|U|MIR
+#249|Grim Feast|R|MIR
+#250|Blistering Barrier|C|MIR
+#251|Wall of Resistance|C|MIR
+#252|Dwarven Nomad|C|MIR
+#253|Acidic Dagger|R|MIR
+#254|Merfolk Raiders|C|MIR
+#255|Waiting in the Weeds|R|MIR
+#256|Village Elder|C|MIR
+#257|Alarum|C|MIR
+#258|Ward of Lights|C|MIR
+#259|Nocturnal Raid|U|MIR
+#260|Psychic Transfer|R|MIR
+#261|Agility|C|MIR
+#262|Blinding Light|U|MIR
+#263|Sealed Fate|U|MIR
+#264|Final Fortune|R|MIR
+#265|Kukemssa Pirates|R|MIR
+#266|Mindbender Spores|R|MIR
+#267|Phyrexian Tribute|R|MIR
+#268|Benevolent Unicorn|C|MIR
+#269|Yare|R|MIR
+#270|Ebony Charm|C|MIR
+#271|Seedling Charm|C|MIR
+#272|Mangara's Equity|U|MIR
+#273|Civic Guildmage|C|MIR
+#274|Soar|C|MIR
+#275|Cadaverous Bloom|R|MIR
+#276|Ritual of Steel|C|MIR
+#277|Meddle|U|MIR
+#278|Telim'Tor's Darts|U|MIR
+#279|Fog|C|MIR
+#280|Teferi's Isle|R|MIR
+#281|Malignant Growth|R|MIR
+#282|Superior Numbers|U|MIR
+#283|Flash|R|MIR
+#284|Dazzling Beauty|C|MIR
+#285|Divine Offering|C|MIR
+#286|Regeneration|C|MIR
+#287|Teferi's Curse|C|MIR
+#288|Roots of Life|U|MIR
+#289|Tranquil Domain|C|MIR
+#290|Ventifact Bottle|R|MIR
+#291|Natural Balance|R|MIR
+#292|Goblin Soothsayer|U|MIR
+#293|Ersatz Gnomes|U|MIR
+#294|Coral Fighters|U|MIR
+#295|Healing Salve|C|MIR
+#296|Ivory Charm|C|MIR
+#297|Kaervek's Hex|U|MIR
+#298|Builder's Bane|C|MIR
+#299|Spatial Binding|U|MIR
+#300|Vitalizing Cascade|U|MIR
+#301|Binding Agony|C|MIR
+#302|Chaosphere|R|MIR
+#303|Early Harvest|R|MIR
+#304|Blind Fury|U|MIR
+#305|Serene Heart|C|MIR
+#306|Sirocco|U|MIR
+#307|Elixir of Vitality|U|MIR
+#308|Mangara's Blessing|U|MIR
+#309|Barreling Attack|R|MIR
+#310|Decomposition|U|MIR
+#311|Prismatic Circle|C|MIR
+#312|Soulshriek|C|MIR
+#313|Mind Bend|U|MIR
+#314|Mire Shade|U|MIR
+#315|Cloak of Invisibility|C|MIR
+#316|Disempower|C|MIR
+#317|Tombstone Stairwell|R|MIR
+#318|Aleatory|U|MIR
+#319|Forbidden Crypt|R|MIR
+#320|Firebreathing|C|MIR
+#321|Favorable Destiny|U|MIR
+#322|Illumination|U|MIR
+#323|Paupers' Cage|R|MIR
+#324|Seeds of Innocence|R|MIR
+#325|Consuming Ferocity|U|MIR
+#326|Null Chamber|R|MIR
+#327|Bazaar of Wonders|R|MIR
+#328|Prismatic Lace|R|MIR
+#329|Hall of Gemstone|R|MIR
+#330|Telim'Tor's Edict|R|MIR

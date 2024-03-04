@@ -1,0 +1,260 @@
+//Rank|Name|Rarity|Set
+#1|Vraska, Relic Seeker|M|XLN
+#2|Huatli, Warrior Poet|M|XLN
+#3|Burning Sun's Avatar|R|XLN
+#4|Regisaur Alpha|R|XLN
+#5|Carnage Tyrant|M|XLN
+#6|Hostage Taker|R|XLN
+#7|River's Rebuke|R|XLN
+#8|Settle the Wreckage|R|XLN
+#9|Captivating Crew|R|XLN
+#10|Entrancing Melody|R|XLN
+#11|Sanctum Seeker|R|XLN
+#12|Vraska's Contempt|R|XLN
+#13|Vona, Butcher of Magan|M|XLN
+#14|Charging Monstrosaur|U|XLN
+#15|Repeating Barrage|R|XLN
+#16|Gishath, Sun's Avatar|M|XLN
+#17|Walk the Plank|U|XLN
+#18|Lightning Strike|U|XLN
+#19|Vanquisher's Banner|R|XLN
+#20|Mavren Fein, Dusk Apostle|R|XLN
+#21|Rowdy Crew|M|XLN
+#22|Ripjaw Raptor|R|XLN
+#23|Verdant Sun's Avatar|R|XLN
+#24|Tishana, Voice of Thunder|M|XLN
+#25|Daring Saboteur|R|XLN
+#26|Savage Stomp|U|XLN
+#27|Ixalan's Binding|U|XLN
+#28|Dreamcaller Siren|R|XLN
+#29|Fathom Fleet Captain|R|XLN
+#30|Ruin Raider|R|XLN
+#31|Wanted Scoundrels|U|XLN
+#32|Waker of the Wilds|R|XLN
+#33|Admiral Beckett Brass|M|XLN
+#34|Imperial Aerosaur|U|XLN
+#35|Legion's Landing|R|XLN
+#36|Herald of Secret Streams|R|XLN
+#37|Rampaging Ferocidon|R|XLN
+#38|Drover of the Mighty|U|XLN
+#39|Shapers of Nature|U|XLN
+#40|Snapping Sailback|U|XLN
+#41|Kinjalli's Sunwing|R|XLN
+#42|Wakening Sun's Avatar|M|XLN
+#43|Marauding Looter|U|XLN
+#44|Raging Swordtooth|U|XLN
+#45|Fell Flagship|R|XLN
+#46|Adanto Vanguard|U|XLN
+#47|Bishop of Rebirth|R|XLN
+#48|Territorial Hammerskull|C|XLN
+#49|Jace, Cunning Castaway|M|XLN
+#50|Contract Killing|C|XLN
+#51|Firecannon Blast|C|XLN
+#52|Star of Extinction|M|XLN
+#53|Merfolk Branchwalker|U|XLN
+#54|Sky Terror|U|XLN
+#55|Pirate's Cutlass|C|XLN
+#56|Emissary of Sunrise|U|XLN
+#57|Air Elemental|U|XLN
+#58|One With the Wind|C|XLN
+#59|Kitesail Freebooter|U|XLN
+#60|Captain Lannery Storm|R|XLN
+#61|Otepec Huntmaster|U|XLN
+#62|Vance's Blasting Cannons|R|XLN
+#63|Deathgorge Scavenger|R|XLN
+#64|Thundering Spineback|U|XLN
+#65|Vineshaper Mystic|U|XLN
+#66|Dire Fleet Captain|U|XLN
+#67|Bishop's Soldier|C|XLN
+#68|Glorifier of Dusk|U|XLN
+#69|Pious Interdiction|C|XLN
+#70|Overflowing Insight|M|XLN
+#71|Vanquish the Weak|C|XLN
+#72|Emperor's Vanguard|R|XLN
+#73|Call to the Feast|U|XLN
+#74|Deadeye Plunderers|U|XLN
+#75|Treasure Map|R|XLN
+#76|Inspiring Cleric|U|XLN
+#77|Tempest Caller|U|XLN
+#78|Watertrap Weaver|C|XLN
+#79|Anointed Deacon|C|XLN
+#80|Dark Nourishment|U|XLN
+#81|Dire Fleet Ravager|M|XLN
+#82|Angrath's Marauders|R|XLN
+#83|Pounce|C|XLN
+#84|Duskborne Skymarcher|U|XLN
+#85|Siren Lookout|C|XLN
+#86|Deathless Ancient|U|XLN
+#87|Seekers' Squire|U|XLN
+#88|Fathom Fleet Firebrand|C|XLN
+#89|Tilonalli's Skinshifter|R|XLN
+#90|Unfriendly Fire|C|XLN
+#91|Wildgrowth Walker|U|XLN
+#92|Conqueror's Galleon|R|XLN
+#93|Bellowing Aegisaur|U|XLN
+#94|Paladin of the Bloodstained|C|XLN
+#95|Steadfast Armasaur|U|XLN
+#96|Kopala, Warden of Waves|R|XLN
+#97|Search for Azcanta|R|XLN
+#98|Shaper Apprentice|C|XLN
+#99|Siren Stormtamer|U|XLN
+#100|Storm Fleet Aerialist|U|XLN
+#101|Mark of the Vampire|C|XLN
+#102|Ruthless Knave|U|XLN
+#103|Skulduggery|C|XLN
+#104|Bonded Horncrest|U|XLN
+#105|Fiery Cannonade|U|XLN
+#106|Lightning-Rig Crew|U|XLN
+#107|Sunbird's Invocation|R|XLN
+#108|Deeproot Warrior|C|XLN
+#109|Tishana's Wayfinder|C|XLN
+#110|Belligerent Brontodon|U|XLN
+#111|Thaumatic Compass|R|XLN
+#112|Goring Ceratops|R|XLN
+#113|Depths of Desire|C|XLN
+#114|Lookout's Dispersal|U|XLN
+#115|Perilous Voyage|U|XLN
+#116|Bishop of the Bloodstained|U|XLN
+#117|Boneyard Parley|M|XLN
+#118|Skymarch Bloodletter|C|XLN
+#119|Headstrong Brute|C|XLN
+#120|Thrash of Raptors|C|XLN
+#121|Tilonalli's Knight|C|XLN
+#122|Atzocan Archer|U|XLN
+#123|Jade Guardian|C|XLN
+#124|Ranging Raptors|U|XLN
+#125|River Heralds' Boon|C|XLN
+#126|Legion's Judgment|C|XLN
+#127|Raptor Companion|C|XLN
+#128|Slash of Talons|C|XLN
+#129|Vampire's Zeal|C|XLN
+#130|Prosperous Pirates|C|XLN
+#131|River Sneak|U|XLN
+#132|Run Aground|C|XLN
+#133|Sailor of Means|C|XLN
+#134|Bloodcrazed Paladin|R|XLN
+#135|Deadeye Tracker|R|XLN
+#136|Dire Fleet Interloper|C|XLN
+#137|Fathom Fleet Cutthroat|C|XLN
+#138|Lurking Chupacabra|U|XLN
+#139|Raptor Hatchling|U|XLN
+#140|Rigging Runner|U|XLN
+#141|Storm Fleet Arsonist|U|XLN
+#142|Storm Fleet Pyromancer|C|XLN
+#143|Blossom Dryad|C|XLN
+#144|Colossal Dreadmaw|C|XLN
+#145|Grazing Whiptail|C|XLN
+#146|Ixalli's Keeper|C|XLN
+#147|Kumena's Speaker|U|XLN
+#148|Sleek Schooner|U|XLN
+#149|Unclaimed Territory|U|XLN
+#150|Bright Reprisal|U|XLN
+#151|Priest of the Wakening Sun|R|XLN
+#152|Rallying Roar|U|XLN
+#153|Shining Aerosaur|C|XLN
+#154|Skyblade of the Legion|C|XLN
+#155|Chart a Course|U|XLN
+#156|Dive Down|C|XLN
+#157|Fleet Swallower|R|XLN
+#158|Storm Fleet Spy|U|XLN
+#159|Wind Strider|C|XLN
+#160|Dire Fleet Hoarder|C|XLN
+#161|March of the Drowned|C|XLN
+#162|Dinosaur Stampede|U|XLN
+#163|Sure Strike|C|XLN
+#164|Ixalli's Diviner|C|XLN
+#165|New Horizons|C|XLN
+#166|Dowsing Dagger|R|XLN
+#167|Dusk Legion Dreadnought|U|XLN
+#168|Dragonskull Summit|R|XLN
+#169|Drowned Catacomb|R|XLN
+#170|Glacial Fortress|R|XLN
+#171|Rootbound Crag|R|XLN
+#172|Sunpetal Grove|R|XLN
+#173|Legion Conquistador|C|XLN
+#174|Sheltering Light|U|XLN
+#175|Shipwreck Looter|C|XLN
+#176|Storm Sculptor|C|XLN
+#177|Deadeye Tormentor|C|XLN
+#178|Grim Captain's Call|U|XLN
+#179|Queen's Bay Soldier|C|XLN
+#180|Skittering Heartstopper|C|XLN
+#181|Brazen Buccaneers|C|XLN
+#182|Frenzied Raptor|C|XLN
+#183|Makeshift Munitions|U|XLN
+#184|Commune with Dinosaurs|C|XLN
+#185|Ravenous Daggertooth|C|XLN
+#186|Cobbled Wings|C|XLN
+#187|Axis of Mortality|M|XLN
+#188|Kinjalli's Caller|C|XLN
+#189|Queen's Commission|C|XLN
+#190|Sunrise Seeker|C|XLN
+#191|Cancel|C|XLN
+#192|Deadeye Quartermaster|U|XLN
+#193|Pirate's Prize|C|XLN
+#194|Spell Swindle|R|XLN
+#195|Arguel's Blood Fast|R|XLN
+#196|Desperate Castaways|C|XLN
+#197|Raiders' Wake|U|XLN
+#198|Fire Shrine Keeper|C|XLN
+#199|Nest Robber|C|XLN
+#200|Sun-Crowned Hunters|C|XLN
+#201|Crash the Ramparts|C|XLN
+#202|Jungle Delver|C|XLN
+#203|Spike-Tailed Ceratops|C|XLN
+#204|Pillar of Origins|U|XLN
+#205|Pterodon Knight|C|XLN
+#206|Arcane Adaptation|R|XLN
+#207|Favorable Winds|U|XLN
+#208|Opt|C|XLN
+#209|Siren's Ruse|C|XLN
+#210|Blight Keeper|C|XLN
+#211|Costly Plunder|C|XLN
+#212|Duress|C|XLN
+#213|Heartless Pillage|U|XLN
+#214|Vicious Conquistador|U|XLN
+#215|Dual Shot|C|XLN
+#216|Rile|C|XLN
+#217|Swashbuckling|C|XLN
+#218|Trove of Temptation|U|XLN
+#219|Wily Goblin|U|XLN
+#220|Crushing Canopy|C|XLN
+#221|Deeproot Champion|R|XLN
+#222|Emergent Growth|U|XLN
+#223|Growing Rites of Itlimoc|R|XLN
+#224|Elaborate Firecannon|U|XLN
+#225|Hierophant's Chalice|C|XLN
+#226|Prying Blade|C|XLN
+#227|Shadowed Caravel|R|XLN
+#228|Imperial Lancer|U|XLN
+#229|Looming Altisaur|C|XLN
+#230|Deeproot Waters|U|XLN
+#231|Headwater Sentries|C|XLN
+#232|Navigator's Ruin|U|XLN
+#233|Queen's Agent|C|XLN
+#234|Revel in Riches|R|XLN
+#235|Hijack|C|XLN
+#236|Rummaging Goblin|C|XLN
+#237|Ancient Brontodon|C|XLN
+#238|Slice in Twain|U|XLN
+#239|Verdant Rebirth|U|XLN
+#240|Unknown Shores|C|XLN
+#241|Encampment Keeper|C|XLN
+#242|Tocatli Honor Guard|R|XLN
+#243|Shore Keeper|C|XLN
+#244|Spell Pierce|C|XLN
+#245|Sword-Point Diplomacy|R|XLN
+#246|Shapers' Sanctuary|R|XLN
+#247|Sorcerous Spyglass|R|XLN
+#248|Ritual of Rejuvenation|C|XLN
+#249|Old-Growth Dryads|R|XLN
+#250|Field of Ruin|U|XLN
+#251|Demystify|C|XLN
+#252|Sanguine Sacrament|R|XLN
+#253|Demolish|C|XLN
+#254|Gilded Sentinel|C|XLN
+#255|Primal Amulet|R|XLN
+#256|Blinding Fog|C|XLN
+#257|Spreading Rot|C|XLN
+#258|Sentinel Totem|U|XLN
+#259|Ashes of the Abhorrent|R|XLN

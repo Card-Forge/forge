@@ -1,0 +1,9 @@
+Name:Repulsive Mutation
+ManaCost:X G U
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCounter | SpellDescription$ Put X +1/+1 counters on target creature you control.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target spell (to counter) | ValidTgts$ Card | UnlessCost$ Y | UnlessPayer$ ThisTargetedController | SpellDescription$ Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.
+SVar:X:Count$xPaid
+SVar:Y:Count$Valid Creature.YouCtrl$GreatestPower
+DeckHas:Ability$Counters
+Oracle:Put X +1/+1 counters on target creature you control. Then counter up to one target spell unless its controller pays mana equal to the greatest power among creatures you control.

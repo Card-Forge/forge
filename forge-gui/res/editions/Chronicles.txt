@@ -45,7 +45,7 @@ ScryfallCode=CHR
 5 C D'Avenant Archer @Douglas Shuler
 75 R Dakkon Blackblade @Richard Kane Ferguson
 17 R Dance of Many @Sandra Everingham
-18 C Dandan @Drew Tucker
+18 C Dandân @Drew Tucker
 6 C Divine Offering @Jeff A. Menges
 63 C Emerald Dragonfly @Quinton Hoover
 19 U Enchantment Alteration @Brian Snõddy
@@ -58,7 +58,7 @@ ScryfallCode=CHR
 98 C Fountain of Youth @Daniel Gelon
 76 R Gabriel Angelfire @Daniel Gelon
 99 R Gauntlets of Chaos @Dan Frazier
-65 C Ghazban Ogre @Jesper Myrfors
+65 C Ghazbán Ogre @Jesper Myrfors
 33 C Giant Slug @Anson Maddocks
 48 U Goblin Artisans @Julie Baroh
 49 C Goblin Digging Team @Ron Spencer

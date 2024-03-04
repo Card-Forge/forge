@@ -4,7 +4,6 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigChangeHand | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
-SVar:TrigChangeHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target nonland permanent | ValidTgts$ Permanent.YouCtrl+nonLand | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Plains | ConditionCompare$ EQ0 | SubAbility$ TrigChangeBattlefield
-SVar:TrigChangeBattlefield:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | DestinationAlternative$ Hand | AlternativeDestinationMessage$ Would you like to return this permanent to the battlefield (and not to your hand)? | Defined$ Targeted | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.Plains | ConditionCompare$ EQ1
+SVar:TrigChangeHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | DestinationAlternative$ Battlefield | DestAltSVar$ TriggeredCard$Valid Plains | TgtPrompt$ Select target nonland permanent | ValidTgts$ Permanent.YouOwn+nonLand
 SVar:BuffedBy:Land
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.

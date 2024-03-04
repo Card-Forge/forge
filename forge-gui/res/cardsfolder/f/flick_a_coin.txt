@@ -1,0 +1,8 @@
+Name:Flick a Coin
+ManaCost:2 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBTreasure | SpellDescription$ CARDNAME deals 1 damage to any target. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food
+Oracle:Flick a Coin deals 1 damage to any target. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nDraw a card.

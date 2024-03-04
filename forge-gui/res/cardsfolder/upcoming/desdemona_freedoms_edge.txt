@@ -1,0 +1,10 @@
+Name:Desdemona, Freedom's Edge
+ManaCost:2 R W
+Types:Legendary Creature Human Rogue
+PT:3/4
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature card in your graveyard that's an artifact or that has mana value 3 or less gains escape until end of turn. The escape cost is equal to its mana cost plus exile two other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Artifact+YouCtrl,Creature.cmcLE3+YouCtrl | TgtZone$ Graveyard | PumpZone$ Graveyard | TgtPrompt$ Select target creature card in your graveyard that's an artifact or that has mana value 3 or less | KW$ Escape:CardManaCost ExileFromGrave<2/Card.Other/other>
+DeckHas:Ability$Graveyard
+DeckHints:Type$Artifact & Ability$Graveyard|Mill
+Oracle:Vigilance\nWhenever Desdemona, Freedom's Edge attacks, target creature card in your graveyard that's an artifact or that has mana value 3 or less gains escape until end of turn. The escape cost is equal to its mana cost plus exile two other cards from your graveyard. (You may cast it from your graveyard for its escape cost this turn.)

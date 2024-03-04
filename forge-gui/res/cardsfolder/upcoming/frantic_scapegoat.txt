@@ -1,0 +1,13 @@
+Name:Frantic Scapegoat
+ManaCost:R
+Types:Creature Goat
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSuspect | TriggerDescription$ When CARDNAME enters the battlefield, suspect it. (It has menace and can't block.)
+SVar:TrigSuspect:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected
+T:Mode$ ChangesZoneAll | CheckSVar$ Count$ValidSelf Card.IsSuspected | ValidCards$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever one or more other creatures enter the battlefield under your control, if CARDNAME is suspected, you may suspect one of the other creatures. If you do, CARDNAME is no longer suspected.
+SVar:TrigChoose:DB$ ChooseCard | DefinedCards$ TriggeredCards | SubAbility$ SuspectOther
+SVar:SuspectOther:DB$ AlterAttribute | Defined$ ChosenCard | Attributes$ Suspected | RememberAltered$ True | SubAbility$ DBAbsolve
+SVar:DBAbsolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Suspected | Activate$ False | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:Haste\nWhen Frantic Scapegoat enters the battlefield, suspect it. (It has menace and can't block.)\nWhenever one or more other creatures enter the battlefield under your control, if Frantic Scapegoat is suspected, you may suspect one of the other creatures. If you do, Frantic Scapegoat is no longer suspected.

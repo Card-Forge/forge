@@ -1,0 +1,9 @@
+Name:Dutiful Griffin
+ManaCost:3 W W
+Types:Creature Griffin
+PT:4/4
+K:Flying
+A:AB$ ChangeZone | Cost$ 2 W Sac<2/Enchantment> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Enchantment
+Oracle:Flying\n{2}{W}, Sacrifice two enchantments: Return Dutiful Griffin from your graveyard to your hand.

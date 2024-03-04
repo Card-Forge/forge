@@ -1,0 +1,8 @@
+Name:Sorcerous Squall
+ManaCost:6 U U U
+Types:Sorcery
+K:Delve
+A:SP$ Mill | NumCards$ 9 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to mill | SubAbility$ FishyCast | SpellDescription$ Target opponent mills nine cards, then you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
+SVar:FishyCast:DB$ Play | ValidZone$ Graveyard | Valid$ Instant.TargetedPlayerCtrl,Sorcery.TargetedPlayerCtrl | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ 1 | ReplaceGraveyard$ Exile
+DeckHints:Ability$Mill|Graveyard
+Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTarget opponent mills nine cards, then you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.

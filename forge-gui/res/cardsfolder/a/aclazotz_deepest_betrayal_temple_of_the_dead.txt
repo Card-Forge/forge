@@ -1,0 +1,30 @@
+Name:Aclazotz, Deepest Betrayal
+ManaCost:3 B B
+Types:Legendary Creature Bat God
+PT:4/4
+K:Flying
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever NICKNAME attacks, each opponent discards a card. For each opponent who can't, you draw a card.
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$Amount/Minus.Remembered$Amount
+T:Mode$ Discarded | ValidCard$ Land.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an opponent discards a land card, create a 1/1 black Bat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTransform | TriggerDescription$ When NICKNAME dies, return it to the battlefield tapped and transformed under its owner's control.
+SVar:TrigTransform:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | Tapped$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard|LifeGain|Token
+DeckHints:Ability$Discard
+AlternateMode:DoubleFaced
+Oracle:Flying, lifelink\nWhenever Aclazotz attacks, each opponent discards a card. For each opponent who can't, you draw a card.\nWhenever an opponent discards a land card, create a 1/1 black Bat creature token with flying.\nWhen Aclazotz dies, return it to the battlefield tapped and transformed under its owner's control.
+
+ALTERNATE
+
+Name:Temple of the Dead
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ SetState | Cost$ 2 B T | CheckSVar$ X | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. Activate only if a player has one or fewer cards in hand and only as a sorcery.
+SVar:X:PlayerCountPropertyPlayers$HasPropertyHasCardsInHand_Card_LE1
+Oracle:(Transforms from Aclazotz, Deepest Betrayal.)\n{T}: Add {B}.\n{2}{B}, {T}: Transform Temple of the Dead. Activate only if a player has one or fewer cards in hand and only as a sorcery.

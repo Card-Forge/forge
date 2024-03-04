@@ -1,0 +1,9 @@
+Name:Hylda's Crown of Winter
+ManaCost:3
+Types:Legendary Artifact
+A:AB$ Tap | Cost$ 1 T | ValidTgts$ Creature | ReduceCost$ X | SpellDescription$ Tap target creature. This ability costs {1} less to activate during your turn.
+SVar:X:PlayerCountPropertyYou$HasPropertyActive
+A:AB$ Draw | Cost$ 3 Sac<1/CARDNAME> | Defined$ You | NumCards$ Y | SpellDescription$ Draw a card for each tapped creature your opponents control.
+SVar:Y:Count$Valid Creature.tapped+OppCtrl
+DeckHas:Ability$Sacrifice
+Oracle:{1}, {T}: Tap target creature. This ability costs {1} less to activate during your turn.\n{3}, Sacrifice Hylda's Crown of Winter: Draw a card for each tapped creature your opponents control.

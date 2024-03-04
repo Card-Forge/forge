@@ -1,0 +1,8 @@
+[metadata]
+Code=OTC
+Date=2024-04-19
+Name=Outlaws of Thunder Junction Commander
+Type=Commander
+ScryfallCode=OTC
+
+[cards]

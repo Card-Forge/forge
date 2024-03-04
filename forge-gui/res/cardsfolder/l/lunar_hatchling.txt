@@ -1,0 +1,11 @@
+Name:Lunar Hatchling
+ManaCost:4 G U
+Types:Creature Alien Beast
+PT:6/6
+K:Flying
+K:Trample
+K:TypeCycling:Basic:2
+K:Escape:4 G U Exile<1/Land> ExileFromGrave<5/Card.Other/other>
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Ability$Graveyard|Mill
+Oracle:Flying, trample\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)\nEscape—{4}{G}{U}, Exile a land you control, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

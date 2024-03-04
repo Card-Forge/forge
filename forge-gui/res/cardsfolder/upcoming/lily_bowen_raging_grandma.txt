@@ -1,0 +1,17 @@
+Name:Lily Bowen, Raging Grandma
+ManaCost:3 G
+Types:Legendary Creature Mutant Warrior
+PT:0/0
+K:Vigilance
+K:etbCounter:P1P1:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your upkeep, double the number of +1/+1 counters on NICKNAME if its power is 16 or less. Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ Power | BranchConditionSVarCompare$ GT16 | TrueSubAbility$ DBRemoveCounters | FalseSubAbility$ DBPump
+SVar:DBPump:DB$ MultiplyCounter | CounterType$ P1P1 | Defined$ Self
+SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | RememberRemoved$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Count$CardCounters.P1P1/Minus.1
+SVar:X:Count$RememberedSize
+SVar:Power:Count$CardPower
+DeckHas:Ability$Counters|LifeGain
+Oracle:Vigilance\nLily Bowen, Raging Grandma enters the battlefield with two +1/+1 counters on it.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Lily Bowen if its power is 16 or less. Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.

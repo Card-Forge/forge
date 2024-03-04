@@ -1,0 +1,14 @@
+Name:Agrus Kos, Spirit of Justice
+ManaCost:2 R W
+Types:Legendary Creature Spirit Detective
+PT:2/4
+K:Double Strike
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, choose up to one target creature. If it's suspected, exile it. Otherwise, suspect it. (A suspected creature has menace and can't block.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, choose up to one target creature. If it's suspected, exile it. Otherwise, suspect it. (A suspected creature has menace and can't block.)
+SVar:TrigBranch:DB$ Branch | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ ExileIt | FalseSubAbility$ SuspectIt
+SVar:ExileIt:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile
+SVar:SuspectIt:DB$ AlterAttribute | Defined$ Targeted | Attributes$ Suspected
+SVar:X:Targeted$Valid Card.IsSuspected
+SVar:HasAttackEffect:TRUE
+Oracle:Double strike, vigilance\nWhenever Agrus Kos, Spirit of Justice enters the battlefield or attacks, choose up to one target creature. If it's suspected, exile it. Otherwise, suspect it. (A suspected creature has menace and can't block.)

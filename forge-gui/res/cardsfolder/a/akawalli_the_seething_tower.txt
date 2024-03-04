@@ -1,0 +1,9 @@
+Name:Akawalli, the Seething Tower
+ManaCost:1 B G
+Types:Legendary Creature Fungus
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddKeyword$ Trample | Description$ Descend 4 — As long as there are four or more permanent cards in your graveyard, CARDNAME gets +2/+2 and has trample.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | Description$ Descend 8 — As long as there are eight or more permanent cards in your graveyard, NICKNAME gets an additional +2/+2 and can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | IsPresent$ Permanent.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE8 | Secondary$ True | Description$ Descend 8 — As long as there are eight or more permanent cards in your graveyard, NICKNAME gets an additional +2/+2 and can't be blocked by more than one creature.
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+Oracle:Descend 4 — As long as there are four or more permanent cards in your graveyard, Akawalli, the Seething Tower gets +2/+2 and has trample.\nDescend 8 — As long as there are eight or more permanent cards in your graveyard, Akawalli gets an additional +2/+2 and can't be blocked by more than one creature.

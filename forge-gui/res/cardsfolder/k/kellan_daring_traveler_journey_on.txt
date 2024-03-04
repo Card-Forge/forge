@@ -1,0 +1,18 @@
+Name:Kellan, Daring Traveler
+ManaCost:1 W
+Types:Legendary Creature Human Faerie Scout
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, reveal the top card of your library. If it's a creature card with mana value 3 or less, put it into your hand. Otherwise, you may put it into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Reveal$ True | ChangeValid$ Creature.cmcLE3 | DestinationZone$ Hand | DestinationZone2$ Graveyard | DestZone2Optional$ True
+SVar:HasAttackEffect:TRUE
+AlternateMode:Adventure
+Oracle:Whenever Kellan, Daring Traveler attacks, reveal the top card of your library. If it's a creature card with mana value 3 or less, put it into your hand. Otherwise, you may put it into your graveyard.
+
+ALTERNATE
+
+Name:Journey On
+ManaCost:G
+Types:Sorcery Adventure
+A:SP$ Token | TokenScript$ c_a_map_sac_explore | TokenAmount$ PlayerCountOpponents$HasPropertycontrolsArtifact/Plus.1 | StackDescription$ REP Create_{p:You} creates | SpellDescription$ Create X Map tokens, where X is one plus the number of opponents who control an artifact. (Then exile this card. You may cast the creature later from exile.)
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Map
+Oracle:Create X Map tokens, where X is one plus the number of opponents who control an artifact. (Then exile this card. You may cast the creature later from exile.)

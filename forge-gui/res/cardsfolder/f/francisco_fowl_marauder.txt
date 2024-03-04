@@ -1,0 +1,12 @@
+Name:Francisco, Fowl Marauder
+ManaCost:1 B
+Types:Legendary Creature Bird Pirate
+PT:0/1
+K:Flying
+K:Partner
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
+T:Mode$ DamageDoneOnce | ValidSource$ Pirate.YouCtrl | ValidTarget$ Player | Execute$ TrigExplore | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more Pirates you control deal damage to a player, NICKNAME explores.
+SVar:TrigExplore:DB$ Explore
+DeckHints:Type$Pirate
+DeckHas:Ability$Counters|Graveyard
+Oracle:Flying\nFrancisco, Fowl Marauder can't block.\nWhenever one or more Pirates you control deal damage to a player, Francisco explores.\nPartner (You can have two commanders if they both have partner.)

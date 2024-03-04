@@ -185,6 +185,8 @@ public class TriggerHandler {
             if (wt.getTriggers() != null)
                 continue;
 
+            // TODO we don't seem to handle Static ones from this,
+            // so they shouldn't be checked for performance in the first place
             wt.setTriggers(getActiveTrigger(wt.getMode(), wt.getParams()));
         }
     }
@@ -312,7 +314,11 @@ public class TriggerHandler {
         // Static triggers
         for (final Trigger t : Lists.newArrayList(activeTriggers)) {
             if (t.isStatic() && canRunTrigger(t, mode, runParams)) {
-                runSingleTrigger(t, runParams);
+                int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
+
+                for (int i = 0; i < x; ++i) {
+                    runSingleTrigger(t, runParams);
+                }
 
                 checkStatics = true;
             }
@@ -348,27 +354,30 @@ public class TriggerHandler {
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
-        final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
+        final boolean wasCollected = wt.getTriggers() != null;
+        final Iterable<Trigger> triggers = wasCollected ? wt.getTriggers() : activeTriggers;
 
         boolean checkStatics = false;
 
         for (final Trigger t : triggers) {
-            if (!t.isStatic() && t.getHostCard().getController().equals(player) && canRunTrigger(t, mode, runParams)) {
+            if (!t.isStatic() && t.getHostCard().getController().equals(player) && (wasCollected || canRunTrigger(t, mode, runParams))) {
+                if (wasCollected && !t.checkActivationLimit()) {
+                    continue;
+                }
                 int x = 1 + StaticAbilityPanharmonicon.handlePanharmonicon(game, t, runParams);
 
                 for (int i = 0; i < x; ++i) {
-                    runSingleTrigger(t, runParams);
+                    runSingleTrigger(t, runParams, wt.getController(t));
                 }
                 checkStatics = true;
             }
         }
 
         for (final Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (deltrig.getHostCard().getController().equals(player)) {
-                if (isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
-                    delayedTriggers.remove(deltrig);
-                    runSingleTrigger(deltrig, runParams);
-                }
+            if (deltrig.getHostCard().getController().equals(player) &&
+                    isTriggerActive(deltrig) && canRunTrigger(deltrig, mode, runParams)) {
+                delayedTriggers.remove(deltrig);
+                runSingleTrigger(deltrig, runParams);
             }
         }
         return checkStatics;
@@ -379,9 +388,6 @@ public class TriggerHandler {
             return false; // It's not the right phase to go off.
         }
 
-        if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
-            return false; // Morphed cards only have pumped triggers go off.
-        }
         if (TriggerType.Always.equals(regtrig.getMode())) {
             if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
@@ -405,7 +411,6 @@ public class TriggerHandler {
             }
         }
 
-        // Check if a trigger with the same ID is already in activeTriggers
         return true;
     }
 
@@ -415,10 +420,8 @@ public class TriggerHandler {
         }
 
         /* this trigger can only be activated once per turn, verify it hasn't already run */
-        if (regtrig.hasParam("ActivationLimit")) {
-            if (regtrig.getActivationsThisTurn() >= Integer.parseInt(regtrig.getParam("ActivationLimit"))) {
-                return false;
-            }
+        if (!regtrig.checkActivationLimit()) {
+            return false;
         }
 
         if (!regtrig.requirementsCheck(game)) {
@@ -451,6 +454,12 @@ public class TriggerHandler {
     }
 
     private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        runSingleTrigger(regtrig, runParams, null);
+    }
+    private void runSingleTrigger(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
+        if (controller == null) {
+            controller = regtrig.getHostCard().getController();
+        }
         // If the runParams contains MergedCards, it is called from GameAction.changeZone()
         if (runParams.get(AbilityKey.MergedCards) != null) {
             // Check if the trigger cares the origin is from battlefield
@@ -461,47 +470,29 @@ public class TriggerHandler {
             if ("Battlefield".equals(regtrig.getParam("Origin"))) {
                 // If yes, only trigger once
                 newParams.put(AbilityKey.Card, mergedCards);
-                runSingleTriggerInternal(regtrig, newParams);
+                runSingleTriggerInternal(regtrig, newParams, controller);
             } else {
                 // Else, trigger for each merged components
                 for (final Card c : mergedCards) {
                     newParams.put(AbilityKey.Card, c);
-                    runSingleTriggerInternal(regtrig, newParams);
+                    runSingleTriggerInternal(regtrig, newParams, controller);
                 }
             }
         } else {
-            runSingleTriggerInternal(regtrig, runParams);
+            runSingleTriggerInternal(regtrig, runParams, controller);
         }
     }
 
     // Checks if the conditions are right for a single trigger to go off, and
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
-    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+    private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams, Player controller) {
         // All tests passed, execute ability.
-        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (null != abMana && null != abMana.getManaPart()) {
-                abMana.setUndoable(false);
-            }
-        }
-        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
-            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
-            if (null != abMana && null != abMana.getManaPart()) {
-                abMana.setUndoable(false);
-            }
-        }
-        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
-            final Card c = (Card) runParams.get(AbilityKey.Card);
-            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
-                sa.setUndoable(false);
-            }
-        }
 
-        SpellAbility sa = null;
+        adjustUndoStack(regtrig, runParams);
+
         Card host = regtrig.getHostCard();
-
-        sa = regtrig.getOverridingAbility();
+        SpellAbility sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!regtrig.hasParam("Execute")) {
                 sa = new SpellAbility.EmptySa(host);
@@ -516,16 +507,18 @@ public class TriggerHandler {
                 // need to set as Overriding Ability so it can be copied better
                 regtrig.setOverridingAbility(sa);
             }
-            sa.setActivatingPlayer(host.getController());
+            sa.setActivatingPlayer(controller);
 
             if (regtrig.isIntrinsic()) {
                 sa.setIntrinsic(true);
                 sa.changeText();
             }
         } else {
-            Player controller = regtrig.getSpawningAbility() != null ? regtrig.getSpawningAbility().getActivatingPlayer() : host.getController();
+            if (regtrig.getSpawningAbility() != null) {
+                controller = regtrig.getSpawningAbility().getActivatingPlayer();
+            }
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, controller, false);
+            sa = sa.copy(host, controller, false, true);
         }
 
         sa.setTrigger(regtrig);
@@ -541,6 +534,10 @@ public class TriggerHandler {
         if (regtrig.hasParam("RememberTriggeringCard")) {
             Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
             host.addRemembered(triggeredCard);
+        }
+
+        if (!sa.getActivatingPlayer().isInGame()) {
+            return;
         }
 
         sa.setStackDescription(sa.toString());
@@ -575,9 +572,52 @@ public class TriggerHandler {
 
         regtrig.triggerRun();
 
-        if (regtrig.hasParam("OneOff") && host.isImmutable()) {
+        boolean removeBoon = host.isBoon();
+        if (regtrig.hasParam("BoonAmount")) {
+            int x = AbilityUtils.calculateAmount(host, regtrig.getParam("BoonAmount"), wrapperAbility);
+            int y = host.getAbilityActivatedThisGame(regtrig.getOverridingAbility());
+            if (y < x) removeBoon = false;
+        }
+        if (regtrig.hasParam("OneOff") && host.isImmutable() || removeBoon) {
             host.getController().getZone(ZoneType.Command).remove(host);
         }
+    }
+
+    private void adjustUndoStack(Trigger regtrig, Map<AbilityKey, Object> runParams) {
+        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy || regtrig instanceof TriggerAbilityResolves) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+            final Card c = (Card) runParams.get(AbilityKey.Card);
+            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                sa.setUndoable(false);
+            }
+        }  
+        else if (regtrig instanceof TriggerTapAll) {
+            final Iterable<Card> cards = (Iterable<Card>) runParams.get(AbilityKey.Cards);
+            for (Card c : cards) {
+                for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                    sa.setUndoable(false);
+                }
+            }
+        }
+        else if (regtrig instanceof TriggerUntapAll) {
+            final Map<Player, CardCollection> map = (Map<Player, CardCollection>) runParams.get(AbilityKey.Map);
+            for (Card c : Iterables.concat(map.values())) {
+                for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                    sa.setUndoable(false);
+                }
+            }
+        } 
     }
 
     public List<Trigger> getActiveTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams) {

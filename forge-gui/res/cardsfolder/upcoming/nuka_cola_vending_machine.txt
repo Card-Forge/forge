@@ -1,0 +1,9 @@
+Name:Nuka-Cola Vending Machine
+ManaCost:3
+Types:Artifact
+A:AB$ Token | Cost$ 1 T | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ Sacrificed | ValidCard$ Food.YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Food, create a tapped Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Token & Type$Treasure|Food
+DeckHints:Type$Food
+Oracle:{1}, {T}: Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever you sacrifice a Food, create a tapped Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

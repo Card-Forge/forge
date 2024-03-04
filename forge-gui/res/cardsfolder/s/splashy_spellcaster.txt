@@ -1,0 +1,9 @@
+Name:Splashy Spellcaster
+ManaCost:3 U
+Types:Creature Elemental Wizard
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a Sorcerer Role token attached to up to one other target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_sorcerer | TargetMin$ 0 | TargetMax$ 1 | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select up to one other target creature you control
+DeckHas:Ability$Token & Type$Role|Aura
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, create a Sorcerer Role token attached to up to one other target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has "Whenever this creature attacks, scry 1.")

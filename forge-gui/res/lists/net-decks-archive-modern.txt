@@ -3508,9 +3508,9 @@
 2023-01-10 12508261 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-10-12508261-modern-preliminary.zip
 2023-01-10 Modern League (47 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-10-modern-league.zip
 2023-01-11 12509929 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-11-12509929-modern-preliminary.zip
-2023-01-12 12 509932 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12-509932-modern-preliminary.zip
-2023-01-12 12 509935 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12-509935-modern-preliminary.zip
-2023-01-12 12 509939 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12-509939-modern-preliminary.zip
+2023-01-12 12509932 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12509932-modern-preliminary.zip
+2023-01-12 12509935 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12509935-modern-preliminary.zip
+2023-01-12 12509939 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-12-12509939-modern-preliminary.zip
 2023-01-13 12509943 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-13-12509943-modern-preliminary.zip
 2023-01-13 12509949 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-13-12509949-modern-preliminary.zip
 2023-01-13 Modern League (47 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-01-13-modern-league.zip
@@ -3575,7 +3575,7 @@
 2023-02-10 Modern League (41 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-10-modern-league.zip
 2023-02-11 12520650 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-11-12520650-modern-showcase-challenge.zip
 2023-02-11 12520691 Modern Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-11-12520691-modern-challenge-32.zip
-2023-02-12 12 520694 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-12-12-520694-modern-challenge.zip
+2023-02-12 12520694 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-12-12520694-modern-challenge.zip
 2023-02-13 12520702 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-13-12520702-modern-preliminary.zip
 2023-02-13 12520705 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-13-12520705-modern-preliminary.zip
 2023-02-14 12520710 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-02-14-12520710-modern-preliminary.zip
@@ -3633,7 +3633,7 @@
 2023-03-10 Modern League (54 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-10-modern-league.zip
 2023-03-11 12529524 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-11-12529524-modern-showcase-challenge.zip
 2023-03-11 12529558 Modern Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-11-12529558-modern-challenge-32.zip
-2023-03-12 12 529561 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-12-12-529561-modern-challenge.zip
+2023-03-12 12529561 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-12-12529561-modern-challenge.zip
 2023-03-13 12529569 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-13-12529569-modern-preliminary.zip
 2023-03-13 12529572 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-13-12529572-modern-preliminary.zip
 2023-03-14 12529577 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-03-14-12529577-modern-preliminary.zip
@@ -3698,7 +3698,7 @@
 2023-04-11 12540078 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-11-12540078-modern-preliminary.zip
 2023-04-11 12540081 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-11-12540081-modern-preliminary.zip
 2023-04-11 Modern League (66 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-11-modern-league.zip
-2023-04-12 12 541653 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-12-12-541653-modern-preliminary.zip
+2023-04-12 12541653 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-12-12541653-modern-preliminary.zip
 2023-04-13 12541657 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-13-12541657-modern-preliminary.zip
 2023-04-13 12541660 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-13-12541660-modern-preliminary.zip
 2023-04-13 12541664 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-13-12541664-modern-preliminary.zip
@@ -3708,3 +3708,460 @@
 2023-04-15 12541680 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-15-12541680-modern-challenge.zip
 2023-04-15 12541685 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-15-12541685-modern-challenge.zip
 2023-04-16 12541688 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-16-12541688-modern-challenge.zip
+2023-04-17 12541697 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-17-12541697-modern-preliminary.zip
+2023-04-17 12541700 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-17-12541700-modern-preliminary.zip
+2023-04-18 12541705 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-18-12541705-modern-preliminary.zip
+2023-04-18 Modern League (57 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-18-modern-league.zip
+2023-04-19 12543413 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-19-12543413-modern-preliminary.zip
+2023-04-20 12543420 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-20-12543420-modern-preliminary.zip
+2023-04-20 12543424 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-20-12543424-modern-preliminary.zip
+2023-04-21 12543428 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-21-12543428-modern-preliminary.zip
+2023-04-21 12543434 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-21-12543434-modern-challenge.zip
+2023-04-21 Modern League (50 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-21-modern-league.zip
+2023-04-22 12543440 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-22-12543440-modern-challenge.zip
+2023-04-22 12543445 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-22-12543445-modern-challenge.zip
+2023-04-23 12543448 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-23-12543448-modern-challenge.zip
+2023-04-24 12543457 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-24-12543457-modern-preliminary.zip
+2023-04-24 12543460 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-24-12543460-modern-preliminary.zip
+2023-04-25 12543465 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-25-12543465-modern-preliminary.zip
+2023-04-25 12543468 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-25-12543468-modern-preliminary.zip
+2023-04-25 Modern League (60 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-25-modern-league.zip
+2023-04-26 12545340 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-26-12545340-modern-preliminary.zip
+2023-04-27 12545344 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-27-12545344-modern-preliminary.zip
+2023-04-27 12545347 Modern Preliminary (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-27-12545347-modern-preliminary.zip
+2023-04-27 12545351 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-27-12545351-modern-preliminary.zip
+2023-04-28 12545355 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-28-12545355-modern-preliminary.zip
+2023-04-28 12545361 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-28-12545361-modern-challenge.zip
+2023-04-28 Modern League (45 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-28-modern-league.zip
+2023-04-29 12545371 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-29-12545371-modern-challenge.zip
+2023-04-29 12545400 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-29-12545400-modern-showcase-challenge.zip
+2023-04-30 12545374 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-04-30-12545374-modern-challenge.zip
+2023-05-01 12545338 Modern Qualifier (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-01-12545338-modern-qualifier.zip
+2023-05-01 12545382 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-01-12545382-modern-preliminary.zip
+2023-05-01 12545385 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-01-12545385-modern-preliminary.zip
+2023-05-02 12545390 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-02-12545390-modern-preliminary.zip
+2023-05-02 12545393 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-02-12545393-modern-preliminary.zip
+2023-05-02 Modern League (63 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-02-modern-league.zip
+2023-05-03 12547301 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-03-12547301-modern-preliminary.zip
+2023-05-04 12547305 Modern Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-04-12547305-modern-preliminary.zip
+2023-05-04 12547308 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-04-12547308-modern-preliminary.zip
+2023-05-04 12547312 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-04-12547312-modern-preliminary.zip
+2023-05-05 12547316 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-05-12547316-modern-preliminary.zip
+2023-05-05 12547322 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-05-12547322-modern-challenge.zip
+2023-05-05 Modern League (48 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-05-modern-league.zip
+2023-05-06 12547328 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-06-12547328-modern-challenge.zip
+2023-05-06 12547333 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-06-12547333-modern-challenge.zip
+2023-05-07 12547336 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-07-12547336-modern-challenge.zip
+2023-05-08 12547345 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-08-12547345-modern-preliminary.zip
+2023-05-08 12547348 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-08-12547348-modern-preliminary.zip
+2023-05-09 12547353 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-09-12547353-modern-preliminary.zip
+2023-05-09 12547356 Modern Preliminary (14 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-09-12547356-modern-preliminary.zip
+2023-05-09 Modern League (58 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-09-modern-league.zip
+2023-05-10 12549028 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-10-12549028-modern-preliminary.zip
+2023-05-11 12549035 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-11-12549035-modern-preliminary.zip
+2023-05-11 12549430 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-11-12549430-modern-preliminary.zip
+2023-05-12 12549049 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-12-12549049-modern-challenge.zip
+2023-05-12 12549432 Modern Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-12-12549432-modern-preliminary.zip
+2023-05-12 Modern League (49 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-12-modern-league.zip
+2023-05-13 12549055 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-13-12549055-modern-challenge.zip
+2023-05-14 12550084 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-14-12550084-modern-challenge.zip
+2023-05-15 12550092 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-15-12550092-modern-preliminary.zip
+2023-05-16 12550445 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-16-12550445-modern-preliminary.zip
+2023-05-16 12550448 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-16-12550448-modern-preliminary.zip
+2023-05-16 Modern League (56 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-16-modern-league.zip
+2023-05-17 12550835 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-17-12550835-modern-preliminary.zip
+2023-05-18 12550842 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-18-12550842-modern-preliminary.zip
+2023-05-18 12550846 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-18-12550846-modern-preliminary.zip
+2023-05-19 12550850 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-19-12550850-modern-preliminary.zip
+2023-05-19 12550856 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-19-12550856-modern-challenge.zip
+2023-05-19 Modern League (47 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-19-modern-league.zip
+2023-05-20 12550862 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-20-12550862-modern-challenge.zip
+2023-05-21 12550870 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-21-12550870-modern-challenge.zip
+2023-05-22 12550879 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-22-12550879-modern-preliminary.zip
+2023-05-22 12550882 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-22-12550882-modern-preliminary.zip
+2023-05-23 12550887 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-23-12550887-modern-preliminary.zip
+2023-05-23 12550890 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-23-12550890-modern-preliminary.zip
+2023-05-23 Modern League (68 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-23-modern-league.zip
+2023-05-24 12552614 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-24-12552614-modern-preliminary.zip
+2023-05-25 12552621 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-25-12552621-modern-preliminary.zip
+2023-05-26 12552629 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-26-12552629-modern-preliminary.zip
+2023-05-26 12552635 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-26-12552635-modern-challenge.zip
+2023-05-26 Modern League (61 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-26-modern-league.zip
+2023-05-27 12552641 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-27-12552641-modern-challenge.zip
+2023-05-27 12552646 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-27-12552646-modern-challenge.zip
+2023-05-28 12552649 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-28-12552649-modern-challenge.zip
+2023-05-29 12552658 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-29-12552658-modern-preliminary.zip
+2023-05-29 12552661 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-29-12552661-modern-preliminary.zip
+2023-05-30 12552666 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-30-12552666-modern-preliminary.zip
+2023-05-30 12552669 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-30-12552669-modern-preliminary.zip
+2023-05-30 Modern League (83 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-30-modern-league.zip
+2023-05-31 12554942 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-05-31-12554942-modern-preliminary.zip
+2023-06-01 12554946 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-01-12554946-modern-preliminary.zip
+2023-06-01 12554949 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-01-12554949-modern-preliminary.zip
+2023-06-01 12554953 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-01-12554953-modern-preliminary.zip
+2023-06-02 12554957 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-02-12554957-modern-preliminary.zip
+2023-06-02 12554963 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-02-12554963-modern-challenge.zip
+2023-06-02 Modern League (53 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-02-modern-league.zip
+2023-06-03 12554940 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-03-12554940-modern-showcase-challenge.zip
+2023-06-03 12554973 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-03-12554973-modern-challenge.zip
+2023-06-04 12554976 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-04-12554976-modern-challenge.zip
+2023-06-05 12554984 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-05-12554984-modern-preliminary.zip
+2023-06-05 12554987 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-05-12554987-modern-preliminary.zip
+2023-06-06 12554992 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-06-12554992-modern-preliminary.zip
+2023-06-06 12554995 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-06-12554995-modern-preliminary.zip
+2023-06-06 Modern League (63 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-06-modern-league.zip
+2023-06-07 12556858 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-07-12556858-modern-preliminary.zip
+2023-06-08 12556865 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-08-12556865-modern-preliminary.zip
+2023-06-08 12556869 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-08-12556869-modern-preliminary.zip
+2023-06-09 12556873 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-09-12556873-modern-preliminary.zip
+2023-06-09 12556879 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-09-12556879-modern-challenge.zip
+2023-06-09 Modern League (56 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-09-modern-league.zip
+2023-06-10 12556885 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-10-12556885-modern-challenge.zip
+2023-06-10 12556890 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-10-12556890-modern-challenge.zip
+2023-06-11 12556893 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-11-12556893-modern-challenge.zip
+2023-06-12 12556901 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-12-12556901-modern-preliminary.zip
+2023-06-12 12556904 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-12-12556904-modern-preliminary.zip
+2023-06-13 12556909 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-13-12556909-modern-preliminary.zip
+2023-06-13 12556912 Modern Preliminary (14 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-13-12556912-modern-preliminary.zip
+2023-06-13 Modern League (63 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-13-modern-league.zip
+2023-06-14 12558609 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-14-12558609-modern-preliminary.zip
+2023-06-15 12558616 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-15-12558616-modern-preliminary.zip
+2023-06-15 12558620 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-15-12558620-modern-preliminary.zip
+2023-06-16 12558624 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-16-12558624-modern-preliminary.zip
+2023-06-16 12558718 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-16-12558718-modern-challenge.zip
+2023-06-16 Modern League (50 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-16-modern-league.zip
+2023-06-17 12558723 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-17-12558723-modern-challenge.zip
+2023-06-17 12558727 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-17-12558727-modern-challenge.zip
+2023-06-18 12558730 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-18-12558730-modern-challenge.zip
+2023-06-19 12558653 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-19-12558653-modern-preliminary.zip
+2023-06-19 12558656 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-19-12558656-modern-preliminary.zip
+2023-06-20 12558661 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-20-12558661-modern-preliminary.zip
+2023-06-20 12560084 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-20-12560084-modern-preliminary.zip
+2023-06-20 Modern League (57 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-20-modern-league.zip
+2023-06-21 12560092 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-21-12560092-modern-preliminary.zip
+2023-06-22 12560096 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-22-12560096-modern-preliminary.zip
+2023-06-22 12560099 Modern Preliminary (18 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-22-12560099-modern-preliminary.zip
+2023-06-22 12560103 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-22-12560103-modern-preliminary.zip
+2023-06-23 12560107 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-23-12560107-modern-preliminary.zip
+2023-06-23 12560113 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-23-12560113-modern-challenge.zip
+2023-06-23 Modern League (71 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-23-modern-league.zip
+2023-06-24 12560082 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-24-12560082-modern-showcase-challenge.zip
+2023-06-24 12560123 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-24-12560123-modern-challenge.zip
+2023-06-25 12560126 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-25-12560126-modern-challenge.zip
+2023-06-26 12560134 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-26-12560134-modern-preliminary.zip
+2023-06-26 12560137 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-26-12560137-modern-preliminary.zip
+2023-06-27 12560142 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-27-12560142-modern-preliminary.zip
+2023-06-27 12560145 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-27-12560145-modern-preliminary.zip
+2023-06-27 Modern League (66 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-27-modern-league.zip
+2023-06-28 12562332 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-28-12562332-modern-preliminary.zip
+2023-06-29 12562336 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-29-12562336-modern-preliminary.zip
+2023-06-29 12562339 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-29-12562339-modern-preliminary.zip
+2023-06-29 12562343 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-29-12562343-modern-preliminary.zip
+2023-06-30 12562347 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-30-12562347-modern-preliminary.zip
+2023-06-30 12562358 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-30-12562358-modern-challenge.zip
+2023-06-30 Modern League (60 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-06-30-modern-league.zip
+2023-07-01 12562364 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-01-12562364-modern-challenge.zip
+2023-07-01 12562365 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-01-12562365-modern-challenge.zip
+2023-07-02 12562368 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-02-12562368-modern-challenge.zip
+2023-07-03 12562377 Modern Last Chance (31 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-03-12562377-modern-last-chance.zip
+2023-07-03 12562380 Modern Last Chance (25 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-03-12562380-modern-last-chance.zip
+2023-07-04 12562385 Modern Last Chance (21 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-04-12562385-modern-last-chance.zip
+2023-07-04 12562388 Modern Last Chance (26 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-04-12562388-modern-last-chance.zip
+2023-07-04 Modern League (100 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-04-modern-league.zip
+2023-07-05 12564185 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-05-12564185-modern-preliminary.zip
+2023-07-06 12564192 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-06-12564192-modern-preliminary.zip
+2023-07-06 12564196 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-06-12564196-modern-preliminary.zip
+2023-07-07 12564200 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-07-12564200-modern-preliminary.zip
+2023-07-07 12564206 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-07-12564206-modern-challenge.zip
+2023-07-07 Modern League (68 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-07-modern-league.zip
+2023-07-08 12564182 Modern Showcase Qualifier (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-08-12564182-modern-showcase-qualifier.zip
+2023-07-08 12564212 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-08-12564212-modern-challenge.zip
+2023-07-08 12564217 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-08-12564217-modern-challenge.zip
+2023-07-09 12564220 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-09-12564220-modern-challenge.zip
+2023-07-10 12564229 Modern Preliminary (14 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-10-12564229-modern-preliminary.zip
+2023-07-10 12564232 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-10-12564232-modern-preliminary.zip
+2023-07-11 12564237 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-11-12564237-modern-preliminary.zip
+2023-07-11 12564240 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-11-12564240-modern-preliminary.zip
+2023-07-11 Modern League (83 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-11-modern-league.zip
+2023-07-12 12566196 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-12-12566196-modern-preliminary.zip
+2023-07-13 12566200 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-13-12566200-modern-preliminary.zip
+2023-07-13 12566203 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-13-12566203-modern-preliminary.zip
+2023-07-13 12566207 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-13-12566207-modern-preliminary.zip
+2023-07-14 12566211 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-14-12566211-modern-preliminary.zip
+2023-07-14 12566217 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-14-12566217-modern-challenge.zip
+2023-07-14 Modern League (71 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-14-modern-league.zip
+2023-07-15 12566223 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-15-12566223-modern-challenge.zip
+2023-07-15 12566228 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-15-12566228-modern-challenge.zip
+2023-07-16 12566231 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-16-12566231-modern-challenge.zip
+2023-07-17 12566240 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-17-12566240-modern-preliminary.zip
+2023-07-17 12566243 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-17-12566243-modern-preliminary.zip
+2023-07-18 12566248 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-18-12566248-modern-preliminary.zip
+2023-07-18 12566251 Modern Preliminary (18 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-18-12566251-modern-preliminary.zip
+2023-07-18 Modern League (93 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-18-modern-league.zip
+2023-07-19 12568044 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-19-12568044-modern-preliminary.zip
+2023-07-20 12568048 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-20-12568048-modern-preliminary.zip
+2023-07-20 12568051 Modern Preliminary (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-20-12568051-modern-preliminary.zip
+2023-07-20 12568055 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-20-12568055-modern-preliminary.zip
+2023-07-21 12568059 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-21-12568059-modern-preliminary.zip
+2023-07-21 12568065 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-21-12568065-modern-challenge.zip
+2023-07-21 Modern League (60 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-21-modern-league.zip
+2023-07-22 12568071 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-22-12568071-modern-challenge.zip
+2023-07-22 12568076 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-22-12568076-modern-challenge.zip
+2023-07-23 12568079 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-23-12568079-modern-challenge.zip
+2023-07-24 12568088 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-24-12568088-modern-preliminary.zip
+2023-07-24 12568091 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-24-12568091-modern-preliminary.zip
+2023-07-25 12568096 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-25-12568096-modern-preliminary.zip
+2023-07-25 12568099 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-25-12568099-modern-preliminary.zip
+2023-07-25 Modern League (71 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-25-modern-league.zip
+2023-07-26 12569998 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-26-12569998-modern-preliminary.zip
+2023-07-27 12570005 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-27-12570005-modern-preliminary.zip
+2023-07-27 12570009 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-27-12570009-modern-preliminary.zip
+2023-07-28 12570013 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-28-12570013-modern-preliminary.zip
+2023-07-28 12570019 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-28-12570019-modern-challenge.zip
+2023-07-28 Modern League (53 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-28-modern-league.zip
+2023-07-29 12570025 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-29-12570025-modern-challenge.zip
+2023-07-29 12570030 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-29-12570030-modern-challenge.zip
+2023-07-30 12570033 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-30-12570033-modern-challenge.zip
+2023-07-30 12570116 Modern Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-30-12570116-modern-super-qualifier.zip
+2023-07-31 12570042 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-31-12570042-modern-preliminary.zip
+2023-07-31 12570045 Modern Preliminary (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-07-31-12570045-modern-preliminary.zip
+2023-08-01 12570050 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-01-12570050-modern-preliminary.zip
+2023-08-01 12570053 Modern Preliminary (14 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-01-12570053-modern-preliminary.zip
+2023-08-01 Modern League (69 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-01-modern-league.zip
+2023-08-02 12570061 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-02-12570061-modern-preliminary.zip
+2023-08-03 12570065 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-03-12570065-modern-preliminary.zip
+2023-08-03 12571712 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-03-12571712-modern-preliminary.zip
+2023-08-04 12571716 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-04-12571716-modern-preliminary.zip
+2023-08-04 12571722 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-04-12571722-modern-challenge.zip
+2023-08-04 Modern League (54 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-04-modern-league.zip
+2023-08-05 12571728 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-05-12571728-modern-challenge.zip
+2023-08-05 12571733 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-05-12571733-modern-challenge.zip
+2023-08-06 12571736 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-06-12571736-modern-challenge.zip
+2023-08-07 12571745 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-07-12571745-modern-preliminary.zip
+2023-08-07 12571748 Modern Preliminary (19 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-07-12571748-modern-preliminary.zip
+2023-08-08 12571753 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-08-12571753-modern-preliminary.zip
+2023-08-08 12571756 Modern Preliminary (24 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-08-12571756-modern-preliminary.zip
+2023-08-08 Modern League (50 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-08-modern-league.zip
+2023-08-09 12572909 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-09-12572909-modern-preliminary.zip
+2023-08-10 12572913 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-10-12572913-modern-preliminary.zip
+2023-08-10 12572916 Modern Preliminary (20 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-10-12572916-modern-preliminary.zip
+2023-08-10 12572920 Modern Preliminary (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-10-12572920-modern-preliminary.zip
+2023-08-11 12572924 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-11-12572924-modern-preliminary.zip
+2023-08-11 12572930 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-11-12572930-modern-challenge.zip
+2023-08-11 Modern League (58 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-11-modern-league.zip
+2023-08-12 12572906 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-12-12572906-modern-showcase-challenge.zip
+2023-08-12 12572940 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-12-12572940-modern-challenge.zip
+2023-08-13 12572943 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-13-12572943-modern-challenge.zip
+2023-08-14 12572951 Modern Preliminary (17 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-14-12572951-modern-preliminary.zip
+2023-08-14 12572954 Modern Preliminary (18 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-14-12572954-modern-preliminary.zip
+2023-08-15 12572959 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-15-12572959-modern-preliminary.zip
+2023-08-15 12572962 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-15-12572962-modern-preliminary.zip
+2023-08-15 Modern League (58 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-15-modern-league.zip
+2023-08-16 12574088 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-16-12574088-modern-preliminary.zip
+2023-08-17 12574092 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-17-12574092-modern-preliminary.zip
+2023-08-17 12574095 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-17-12574095-modern-preliminary.zip
+2023-08-17 12574100 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-17-12574100-modern-preliminary.zip
+2023-08-18 12574104 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-18-12574104-modern-preliminary.zip
+2023-08-18 12574110 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-18-12574110-modern-challenge.zip
+2023-08-18 Modern League (48 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-18-modern-league.zip
+2023-08-19 12574115 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-19-12574115-modern-challenge.zip
+2023-08-19 12574120 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-19-12574120-modern-challenge.zip
+2023-08-20 12574123 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-20-12574123-modern-challenge.zip
+2023-08-21 12574132 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-21-12574132-modern-preliminary.zip
+2023-08-21 12574135 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-21-12574135-modern-preliminary.zip
+2023-08-22 12574141 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-22-12574141-modern-preliminary.zip
+2023-08-22 12574144 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-22-12574144-modern-preliminary.zip
+2023-08-22 Modern League (65 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-22-modern-league.zip
+2023-08-23 12575764 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-23-12575764-modern-preliminary.zip
+2023-08-24 12575771 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-24-12575771-modern-preliminary.zip
+2023-08-24 12575776 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-24-12575776-modern-preliminary.zip
+2023-08-25 12575780 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-25-12575780-modern-preliminary.zip
+2023-08-25 12575789 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-25-12575789-modern-challenge.zip
+2023-08-25 Modern League (47 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-25-modern-league.zip
+2023-08-26 12575798 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-26-12575798-modern-challenge.zip
+2023-08-26 12575807 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-26-12575807-modern-challenge.zip
+2023-08-27 12575812 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-27-12575812-modern-challenge.zip
+2023-08-28 12575832 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-28-12575832-modern-preliminary.zip
+2023-08-28 12575836 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-28-12575836-modern-preliminary.zip
+2023-08-29 12575845 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-29-12575845-modern-preliminary.zip
+2023-08-29 12575850 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-29-12575850-modern-preliminary.zip
+2023-08-29 Modern League (51 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-29-modern-league.zip
+2023-08-30 12577276 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-30-12577276-modern-preliminary.zip
+2023-08-31 12577305 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-31-12577305-modern-preliminary.zip
+2023-08-31 12577320 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-08-31-12577320-modern-preliminary.zip
+2023-09-01 12577333 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-01-12577333-modern-preliminary.zip
+2023-09-01 12577484 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-01-12577484-modern-challenge.zip
+2023-09-01 Modern League (49 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-01-modern-league.zip
+2023-09-02 12577487 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-02-12577487-modern-challenge.zip
+2023-09-02 12577497 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-02-12577497-modern-challenge.zip
+2023-09-03 12577499 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-03-12577499-modern-challenge.zip
+2023-09-04 12577454 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-04-12577454-modern-preliminary.zip
+2023-09-04 12577469 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-04-12577469-modern-preliminary.zip
+2023-09-05 12577482 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-05-12577482-modern-preliminary.zip
+2023-09-05 12578639 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-05-12578639-modern-preliminary.zip
+2023-09-05 Modern League (56 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-05-modern-league.zip
+2023-09-06 12578851 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-06-12578851-modern-preliminary.zip
+2023-09-07 12578857 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-07-12578857-modern-preliminary.zip
+2023-09-07 12578862 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-07-12578862-modern-preliminary.zip
+2023-09-08 12578865 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-08-12578865-modern-preliminary.zip
+2023-09-08 12578871 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-08-12578871-modern-challenge.zip
+2023-09-08 Modern League (47 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-08-modern-league.zip
+2023-09-09 12578877 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-09-12578877-modern-challenge-96.zip
+2023-09-09 12578882 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-09-12578882-modern-challenge.zip
+2023-09-10 12578844 Modern Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-10-12578844-modern-super-qualifier.zip
+2023-09-11 12578895 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-11-12578895-modern-preliminary.zip
+2023-09-11 12578898 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-11-12578898-modern-preliminary.zip
+2023-09-12 12578903 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-12-12578903-modern-preliminary.zip
+2023-09-12 12578906 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-12-12578906-modern-preliminary.zip
+2023-09-12 Modern League (60 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-12-modern-league.zip
+2023-09-13 12580736 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-13-12580736-modern-preliminary.zip
+2023-09-14 12580739 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-14-12580739-modern-preliminary.zip
+2023-09-14 12580743 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-14-12580743-modern-preliminary.zip
+2023-09-14 12580752 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-14-12580752-modern-preliminary.zip
+2023-09-15 12580772 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-15-12580772-modern-challenge.zip
+2023-09-15 Modern League (58 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-15-modern-league.zip
+2023-09-16 12580784 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-16-12580784-modern-challenge-96.zip
+2023-09-16 12580794 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-16-12580794-modern-challenge.zip
+2023-09-17 12580801 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-17-12580801-modern-challenge.zip
+2023-09-18 12580819 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-18-12580819-modern-preliminary.zip
+2023-09-18 12580822 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-18-12580822-modern-preliminary.zip
+2023-09-19 12580830 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-19-12580830-modern-preliminary.zip
+2023-09-19 Modern League (64 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-19-modern-league.zip
+2023-09-20 12582219 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-20-12582219-modern-preliminary.zip
+2023-09-21 12582226 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-21-12582226-modern-preliminary.zip
+2023-09-21 12582235 Modern Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-21-12582235-modern-preliminary.zip
+2023-09-22 12582255 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-22-12582255-modern-challenge.zip
+2023-09-22 Modern League (52 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-22-modern-league.zip
+2023-09-23 12582267 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-23-12582267-modern-challenge-96.zip
+2023-09-23 12582277 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-23-12582277-modern-challenge.zip
+2023-09-24 12582284 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-24-12582284-modern-challenge.zip
+2023-09-25 12582302 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-25-12582302-modern-preliminary.zip
+2023-09-25 12582305 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-25-12582305-modern-preliminary.zip
+2023-09-26 12582310 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-26-12582310-modern-preliminary.zip
+2023-09-26 12582313 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-26-12582313-modern-preliminary.zip
+2023-09-26 Modern League (56 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-26-modern-league.zip
+2023-09-27 12583577 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-27-12583577-modern-preliminary.zip
+2023-09-28 12583580 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-28-12583580-modern-preliminary.zip
+2023-09-28 12583583 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-28-12583583-modern-preliminary.zip
+2023-09-28 12583588 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-28-12583588-modern-preliminary.zip
+2023-09-29 12583597 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-29-12583597-modern-challenge.zip
+2023-09-29 Modern League (55 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-29-modern-league.zip
+2023-09-30 12583603 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-30-12583603-modern-challenge-96.zip
+2023-09-30 12583608 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-09-30-12583608-modern-challenge.zip
+2023-10-01 12583611 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-01-12583611-modern-challenge.zip
+2023-10-02 12583621 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-02-12583621-modern-preliminary.zip
+2023-10-02 12583624 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-02-12583624-modern-preliminary.zip
+2023-10-03 12583629 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-03-12583629-modern-preliminary.zip
+2023-10-03 12583632 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-03-12583632-modern-preliminary.zip
+2023-10-03 Modern League (56 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-03-modern-league.zip
+2023-10-04 12584808 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-04-12584808-modern-preliminary.zip
+2023-10-05 12584830 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-05-12584830-modern-preliminary.zip
+2023-10-05 12584845 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-05-12584845-modern-preliminary.zip
+2023-10-06 12584856 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-06-12584856-modern-preliminary.zip
+2023-10-06 12584882 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-06-12584882-modern-challenge.zip
+2023-10-06 Modern League (49 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-06-modern-league.zip
+2023-10-07 12584900 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-07-12584900-modern-challenge-96.zip
+2023-10-07 12584919 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-07-12584919-modern-challenge.zip
+2023-10-08 12584930 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-08-12584930-modern-challenge.zip
+2023-10-09 12584973 Modern Preliminary (19 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-09-12584973-modern-preliminary.zip
+2023-10-09 12584984 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-09-12584984-modern-preliminary.zip
+2023-10-10 12585000 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-10-12585000-modern-preliminary.zip
+2023-10-10 12585011 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-10-12585011-modern-preliminary.zip
+2023-10-10 Modern League (64 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-10-modern-league.zip
+2023-10-11 12586262 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-11-12586262-modern-preliminary.zip
+2023-10-12 12586273 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-12-12586273-modern-preliminary.zip
+2023-10-12 12586289 Modern Preliminary (19 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-12-12586289-modern-preliminary.zip
+2023-10-12 12586304 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-12-12586304-modern-preliminary.zip
+2023-10-13 12586315 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-13-12586315-modern-preliminary.zip
+2023-10-13 12586341 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-13-12586341-modern-challenge.zip
+2023-10-13 Modern League (57 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-13-modern-league.zip
+2023-10-14 12586254 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-14-12586254-modern-showcase-challenge.zip
+2023-10-14 12586377 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-14-12586377-modern-challenge.zip
+2023-10-15 12586388 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-15-12586388-modern-challenge.zip
+2023-10-16 12586430 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-16-12586430-modern-preliminary.zip
+2023-10-16 12586441 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-16-12586441-modern-preliminary.zip
+2023-10-17 12586457 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-17-12586457-modern-preliminary.zip
+2023-10-17 12586468 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-17-12586468-modern-preliminary.zip
+2023-10-17 Modern League (62 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-17-modern-league.zip
+2023-10-18 12587831 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-18-12587831-modern-preliminary.zip
+2023-10-19 12587837 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-19-12587837-modern-preliminary.zip
+2023-10-19 12587843 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-19-12587843-modern-preliminary.zip
+2023-10-20 12587847 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-20-12587847-modern-preliminary.zip
+2023-10-20 12587854 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-20-12587854-modern-challenge.zip
+2023-10-20 Modern League (54 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-20-modern-league.zip
+2023-10-21 12587864 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-21-12587864-modern-challenge.zip
+2023-10-21 12588074 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-21-12588074-modern-challenge-96.zip
+2023-10-22 12587867 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-22-12587867-modern-challenge.zip
+2023-10-23 12587876 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-23-12587876-modern-preliminary.zip
+2023-10-23 12587879 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-23-12587879-modern-preliminary.zip
+2023-10-24 12587884 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-24-12587884-modern-preliminary.zip
+2023-10-24 12587887 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-24-12587887-modern-preliminary.zip
+2023-10-24 Modern League (66 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-24-modern-league.zip
+2023-10-25 12589055 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-25-12589055-modern-preliminary.zip
+2023-10-26 12589065 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-26-12589065-modern-preliminary.zip
+2023-10-26 12589077 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-26-12589077-modern-preliminary.zip
+2023-10-26 12589090 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-26-12589090-modern-preliminary.zip
+2023-10-27 12589099 Modern Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-27-12589099-modern-preliminary.zip
+2023-10-27 12589120 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-27-12589120-modern-challenge.zip
+2023-10-27 Modern League (52 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-27-modern-league.zip
+2023-10-28 12589136 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-28-12589136-modern-challenge-96.zip
+2023-10-28 12589151 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-28-12589151-modern-challenge.zip
+2023-10-29 12589160 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-29-12589160-modern-challenge.zip
+2023-10-30 12589193 Modern Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-30-12589193-modern-preliminary.zip
+2023-10-30 12589204 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-30-12589204-modern-preliminary.zip
+2023-10-31 12589218 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-31-12589218-modern-preliminary.zip
+2023-10-31 12589228 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-31-12589228-modern-preliminary.zip
+2023-10-31 Modern League (57 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-10-31-modern-league.zip
+2023-11-01 12590257 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-01-12590257-modern-preliminary.zip
+2023-11-02 12590263 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-02-12590263-modern-preliminary.zip
+2023-11-02 12590268 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-02-12590268-modern-preliminary.zip
+2023-11-03 12590272 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-03-12590272-modern-preliminary.zip
+2023-11-03 12590279 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-03-12590279-modern-challenge.zip
+2023-11-03 Modern League (57 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-03-modern-league.zip
+2023-11-04 12590285 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-04-12590285-modern-challenge-96.zip
+2023-11-04 12590290 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-04-12590290-modern-challenge.zip
+2023-11-05 12590255 Modern Qualifier (16 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-05-12590255-modern-qualifier.zip
+2023-11-05 12590293 Modern Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-05-12590293-modern-challenge.zip
+2023-11-06 12590303 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-06-12590303-modern-preliminary.zip
+2023-11-06 12590306 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-06-12590306-modern-preliminary.zip
+2023-11-07 12590311 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-07-12590311-modern-preliminary.zip
+2023-11-07 12590314 Modern Preliminary (15 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-07-12590314-modern-preliminary.zip
+2023-11-07 Modern League (51 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-07-modern-league.zip
+2023-11-08 12591446 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-08-12591446-modern-preliminary.zip
+2023-11-09 12591449 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-09-12591449-modern-preliminary.zip
+2023-11-09 12591452 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-09-12591452-modern-preliminary.zip
+2023-11-09 12591457 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-09-12591457-modern-preliminary.zip
+2023-11-10 12591461 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-10-12591461-modern-preliminary.zip
+2023-11-10 12591468 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-10-12591468-modern-challenge-64.zip
+2023-11-10 Modern League (46 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-10-modern-league.zip
+2023-11-11 12591474 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-11-12591474-modern-challenge-96.zip
+2023-11-11 12591479 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-11-12591479-modern-challenge-64.zip
+2023-11-12 12591482 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-12-12591482-modern-challenge-96.zip
+2023-11-13 12591492 Modern Preliminary (11 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-13-12591492-modern-preliminary.zip
+2023-11-13 12591495 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-13-12591495-modern-preliminary.zip
+2023-11-14 12591500 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-14-12591500-modern-preliminary.zip
+2023-11-14 12592554 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-14-12592554-modern-preliminary.zip
+2023-11-14 Modern League (55 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-14-modern-league.zip
+2023-11-15 12592564 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-15-12592564-modern-preliminary.zip
+2023-11-16 12592567 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-16-12592567-modern-preliminary.zip
+2023-11-16 12592570 Modern Preliminary (12 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-16-12592570-modern-preliminary.zip
+2023-11-16 12592575 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-16-12592575-modern-preliminary.zip
+2023-11-17 12592579 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-17-12592579-modern-preliminary.zip
+2023-11-17 12592586 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-17-12592586-modern-challenge-64.zip
+2023-11-17 Modern League (58 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-17-modern-league.zip
+2023-11-18 12592596 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-18-12592596-modern-challenge-64.zip
+2023-11-18 12593003 Modern Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-18-12593003-modern-showcase-challenge.zip
+2023-11-20 12592608 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-20-12592608-modern-preliminary.zip
+2023-11-20 12592611 Modern Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-20-12592611-modern-preliminary.zip
+2023-11-21 12592616 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-21-12592616-modern-preliminary.zip
+2023-11-21 12592619 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-21-12592619-modern-preliminary.zip
+2023-11-21 Modern League (60 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-21-modern-league.zip
+2023-11-22 12594342 Modern Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-22-12594342-modern-preliminary.zip
+2023-11-23 12594345 Modern Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-23-12594345-modern-preliminary.zip
+2023-11-23 12594348 Modern Preliminary (10 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-23-12594348-modern-preliminary.zip
+2023-11-23 12594353 Modern Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-23-12594353-modern-preliminary.zip
+2023-11-24 12594357 Modern Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-24-12594357-modern-preliminary.zip
+2023-11-24 12594364 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-24-12594364-modern-challenge-64.zip
+2023-11-24 Modern League (61 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-24-modern-league.zip
+2023-11-25 12594369 Modern Challenge 96 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-25-12594369-modern-challenge-96.zip
+2023-11-25 12594374 Modern Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/modern/2023-11-25-12594374-modern-challenge-64.zip

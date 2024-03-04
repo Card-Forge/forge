@@ -1,0 +1,7 @@
+Name:Ancestors' Aid
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | KW$ First Strike | SubAbility$ DBTreasure | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn.
+SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:Target creature gets +2/+0 and gains first strike until end of turn.\nCreate a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

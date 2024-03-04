@@ -308,9 +308,9 @@ public class FCardImageRenderer {
         int textY = typeY + typeBoxHeight;
         int ptY = textY + textBoxHeight;
 
-        // Adjust layout for Saga, Class and Dungeon cards
+        // Adjust layout for Saga, Class, Case and Dungeon cards
         boolean isSaga = state.getType().hasSubtype("Saga");
-        boolean isClass = state.getType().hasSubtype("Class");
+        boolean isClass = state.getType().hasSubtype("Class") || state.getType().hasSubtype("Case");
         boolean isDungeon = state.getType().isDungeon();
         if (isSaga || isClass || isDungeon) {
             // Move type line to the bottom

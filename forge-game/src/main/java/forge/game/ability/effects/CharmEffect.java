@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class CharmEffect extends SpellAbilityEffect {
             List<AbilitySub> toRemove = Lists.newArrayList();
             for (AbilitySub ch : choices) {
                 // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-                if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                if ((ch.usesTargeting() && ch.getMinTargets() > 0 &&
                         ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
                         (restriction != null && restriction.contains(ch.getDescription()))) {
                     toRemove.add(ch);
@@ -60,7 +59,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         String numParam = sa.getParamOrDefault("CharmNum", "1");
-        boolean isX = numParam.equals("X");
+        boolean isX = numParam.equals("X") && "Count$xPaid".equals(sa.getSVar("X"));
         int num = 0;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
@@ -68,12 +67,14 @@ public class CharmEffect extends SpellAbilityEffect {
         if (source.getController() == null && additionalDesc && !optional) {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
-        } else if (!isX) {
+        } else {
             // fallback needed while ability building
             if (sa.getActivatingPlayer() == null) {
                 sa.setActivatingPlayer(source.getController(), true);
             }
-            num = Math.min(AbilityUtils.calculateAmount(source, numParam, sa), list.size());
+            if (!isX) {
+                num = Math.min(AbilityUtils.calculateAmount(source, numParam, sa), list.size());
+            }
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
@@ -223,7 +224,7 @@ public class CharmEffect extends SpellAbilityEffect {
             //String choosers = sa.getParam("Chooser");
             FCollection<Player> opponents = activator.getOpponents(); // all cards have Choser$ Opponent, so it's hardcoded here
             chooser = activator.getController().chooseSingleEntityForEffect(opponents, sa, "Choose an opponent", null);
-            source.setChosenPlayer(chooser);
+            sa.setChoosingPlayer(chooser);
         }
 
         List<AbilitySub> chosen = chooser.getController().chooseModeForAbility(sa, choices, min, num, canRepeat);
@@ -244,7 +245,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         // Sort Chosen by SA order
-        Collections.sort(chosen, new Comparator<AbilitySub>() {
+        chosen.sort(new Comparator<AbilitySub>() {
             @Override
             public int compare(AbilitySub o1, AbilitySub o2) {
                 return Integer.compare(o1.getSVarInt("CharmOrder"), o2.getSVarInt("CharmOrder"));

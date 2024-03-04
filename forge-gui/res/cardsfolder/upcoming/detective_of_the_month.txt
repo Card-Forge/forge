@@ -1,0 +1,12 @@
+Name:Detective of the Month
+ManaCost:2 U
+Types:Creature Human Detective
+PT:2/3
+K:Ascend
+S:Mode$ CantBlockBy | ValidAttacker$ Detective.YouCtrl | Condition$ Blessing | Description$ As long as you have the city's blessing, Detectives you control can't be blocked.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you draw your second card each turn, create a 2/2 white and blue Detective creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
+SVar:PlayMain1:TRUE
+DeckHints:Type$Detective
+DeckHas:Ability$Token & Type$Detective
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAs long as you have the city's blessing, Detectives you control can't be blocked.\nWhenever you draw your second card each turn, create a 2/2 white and blue Detective creature token.

@@ -1,0 +1,13 @@
+Name:Boomer Scrapper
+ManaCost:1 B R
+Types:Creature Human Soldier
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you lose 1 life and create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you lose 1 life and create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ You
+T:Mode$ ChangesZone | ValidCard$ Card.token+YouCtrl | Origin$ Battlefield | Destination$ Any | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a token you control leaves the battlefield, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Token & Type$Treasure|Food|Junk|Map|Clue
+DeckHas:Ability$Token|Counters & Type$Artifact|Junk
+Oracle:Whenever Boomer Scrapper enters the battlefield or attacks, you lose 1 life and create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")\nWhenever a token you control leaves the battlefield, put a +1/+1 counter on Boomer Scrapper.

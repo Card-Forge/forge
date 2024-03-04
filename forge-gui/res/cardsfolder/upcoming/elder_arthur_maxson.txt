@@ -1,0 +1,10 @@
+Name:Elder Arthur Maxson
+ManaCost:1 W B
+Types:Legendary Creature Human Knight
+PT:4/2
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Training | Description$ Creature tokens you control have training. (Whenever a creature token you control attacks with another creature with greater power, put a +1/+1 counter on that token.)
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | PrecostDesc$ Blind Betrayal - | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn. 
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Creature tokens you control have training. (Whenever a creature token you control attacks with another creature with greater power, put a +1/+1 counter on that token.)\nBlind Betrayal — Sacrifice another creature: Elder Arthur Maxson gains indestructible until end of turn.

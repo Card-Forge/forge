@@ -76,14 +76,14 @@ public class RevealEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RevealToAll") || sa.hasParam("Random")) {
-                game.getAction().reveal(revealed, p, false, sa.getParamOrDefault("RevealTitle", ""));
+                boolean revealTitle = sa.hasParam("RevealTitle");
+                game.getAction().reveal(revealed, p, false, 
+                    revealTitle ? sa.getParam("RevealTitle") : "", !revealTitle);
             } else {
                 game.getAction().reveal(revealed, p);
             }
-            for (final Card c : revealed) {
-                if (sa.hasParam("RememberRevealed")) {
-                    host.addRemembered(c);
-                }
+            if (sa.hasParam("RememberRevealed")) {
+                host.addRemembered(revealed);
             }
         }
     }

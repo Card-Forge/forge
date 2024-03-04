@@ -1,0 +1,8 @@
+Name:Endurance Bobblehead
+ManaCost:3
+Types:Artifact Bobblehead
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | NumAtt$ +1 | TargetMax$ X | KW$ Indestructible | TargetPrompt$ Select up to X target creatures you control | SorcerySpeed$ True | SpellDescription$ Up to X target creatures you control get +1/+0 and gain indestructible until end of turn, where X is the number of Bobbleheads you control as you activate this ability. Activate only as a sorcery.
+SVar:X:Count$Valid Bobblehead.YouCtrl
+DeckNeeds:Type$Bobblehead
+Oracle:{T}: Add one mana of any color.\n{3}, {T}: Up to X target creatures you control get +1/+0 and gain indestructible until end of turn, where X is the number of Bobbleheads you control as you activate this ability. Activate only as a sorcery.

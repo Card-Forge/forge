@@ -108,7 +108,7 @@ public class MenuScene extends UIScene {
         }
     }
 
-    private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
+    void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
         Dialog D = getDialog();
         Localizer L = Forge.getLocalizer();

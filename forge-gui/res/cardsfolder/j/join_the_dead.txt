@@ -1,0 +1,8 @@
+Name:Join the Dead
+ManaCost:1 B B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -5/-5 until end of turn. Descend 4 — That creature gets -10/-10 until end of turn instead if there are four or more permanent cards in your graveyard.
+SVar:X:Count$Compare Y GE4.10.5
+SVar:Y:Count$ValidGraveyard Permanent.YouOwn
+DeckHints:Ability$Sacrifice|Discard|Mill|Dredge|Graveyard
+Oracle:Target creature gets -5/-5 until end of turn.\nDescend 4 — That creature gets -10/-10 until end of turn instead if there are four or more permanent cards in your graveyard.

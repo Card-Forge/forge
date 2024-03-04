@@ -1,0 +1,10 @@
+Name:Tenacious Tomeseeker
+ManaCost:2 U
+Types:Creature Human Knight
+PT:3/2
+K:Bargain
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+bargained | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if it was bargained, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Enchantment|Artifact|Instant|Sorcery & Ability$Token
+Oracle:Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)\nWhen Tenacious Tomeseeker enters the battlefield, if it was bargained, return target instant or sorcery card from your graveyard to your hand.

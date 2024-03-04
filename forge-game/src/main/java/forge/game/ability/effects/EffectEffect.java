@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.GameCommand;
 import forge.ImageKeys;
 import forge.card.CardRarity;
 import forge.game.Game;
@@ -26,7 +25,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -55,14 +53,7 @@ public class EffectEffect extends SpellAbilityEffect {
         String noteCounterDefined = null;
         final String duration = sa.getParam("Duration");
 
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
-                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
-        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
+        if (!checkValidDuration(duration, sa)) {
             return;
         }
 
@@ -101,7 +92,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // don't create Effect if there is no remembered Objects
-            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter"))) {
+            if (rememberList.isEmpty() && (sa.hasParam("ForgetOnMoved") || sa.hasParam("ExileOnMoved") || sa.hasParam("ForgetCounter") || sa.hasParam("ForgetOnPhasedIn"))) {
                 return;
             }
         }
@@ -292,7 +283,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen name
-            if (!hostCard.getNamedCard().isEmpty()) {
+            if (hostCard.hasNamedCard()) {
                 eff.setNamedCards(Lists.newArrayList(hostCard.getNamedCards()));
             }
 
@@ -314,30 +305,14 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (duration == null || !duration.equals("Permanent")) {
-                final GameCommand endEffect = new GameCommand() {
-                    private static final long serialVersionUID = -5861759814760561373L;
-
-                    @Override
-                    public void run() {
-                        game.getAction().exile(eff, null, null);
-                    }
-                };
-
-                addUntilCommand(sa, endEffect, controller);
+                addUntilCommand(sa, exileEffectCommand(game, eff), controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {
                 hostCard.addImprintedCard(eff);
             }
 
-            // TODO: Add targeting to the effect so it knows who it's dealing with
-            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa, params);
-            eff.updateStateForView();
-            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-            //if (effectTriggers != null) {
-            //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);
-            //}
+            game.getAction().moveToCommand(eff, sa);
         }
     }
 

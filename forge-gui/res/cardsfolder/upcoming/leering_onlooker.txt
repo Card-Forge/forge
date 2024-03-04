@@ -1,0 +1,8 @@
+Name:Leering Onlooker
+ManaCost:1 B
+Types:Creature Vampire
+PT:1/3
+K:Flying
+A:AB$ Token | Cost$ 2 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenTapped$ True | TokenAmount$ 2 | TokenScript$ b_1_1_bat_flying | SpellDescription$ Create two tapped 1/1 black Bat creature tokens with flying.
+DeckHas:Ability$Token|Graveyard & Type$Bat
+Oracle:Flying{2}{B}{B}, Exile Leering Onlooker from your graveyard: Create two tapped 1/1 black Bat creature tokens with flying.

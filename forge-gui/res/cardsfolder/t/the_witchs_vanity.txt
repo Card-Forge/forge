@@ -1,0 +1,9 @@
+Name:The Witch's Vanity
+ManaCost:1 B
+Types:Enchantment Saga
+K:Chapter:3:DBDestroy,DBFood,DBRole
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+cmcLE2 | TgtPrompt$ Select target creature an opponent controls with mana value 2 or less | SpellDescription$ Destroy target creature an opponent controls with mana value 2 or less.
+SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBRole:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Wicked Role token attached to target creature you control.
+DeckHas:Ability$Sacrifice|LifeGain|Token & Type$Food|Artifact|Role|Aura
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target creature an opponent controls with mana value 2 or less.\nII — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nIII — Create a Wicked Role token attached to target creature you control.

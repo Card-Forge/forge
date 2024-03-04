@@ -7,8 +7,8 @@ K:Specialize:2::Activate only if a player has 13 or less life.:CheckSVar$ X | SV
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
 SVar:X:PlayerCountPlayers$LowestLifeTotal
-AlternateMode:Specialize
 DeckHas:Ability$Discard
+AlternateMode:Specialize
 Oracle:Deathtouch\nSpecialize {2}. Activate only if a player has 13 or less life.\nAt the beginning of your end step, Shadowheart, Sharran Cleric deals 1 damage to each player.
 
 SPECIALIZE:WHITE

@@ -125,6 +125,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbPerformanceMode(), FPref.PERFORMANCE_MODE));
         lstControls.add(Pair.of(view.getCbSideboardForAI(), FPref.MATCH_SIDEBOARD_FOR_AI));
         lstControls.add(Pair.of(view.getCbFilteredHands(), FPref.FILTERED_HANDS));
+        lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
         lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
         lstControls.add(Pair.of(view.getCbCardBased(), FPref.DECKGEN_CARDBASED));
         lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
@@ -278,6 +279,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializePlayerNameButton();
         initializeDefaultLanguageComboBox();
 
+        disableLazyLoading();
     }
 
     /* (non-Javadoc)
@@ -658,6 +660,12 @@ public enum CSubmenuPreferences implements ICDoc {
         final FLabel btn = view.getBtnPlayerName();
         setPlayerNameButtonText();
         btn.setCommand(getPlayerNameButtonCommand());
+    }
+
+    private void disableLazyLoading() {
+        view.getCbLoadCardsLazily().setSelected(false);
+        view.getCbLoadCardsLazily().setEnabled(false);
+        prefs.save();
     }
 
     private void setPlayerNameButtonText() {

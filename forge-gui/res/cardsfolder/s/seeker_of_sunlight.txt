@@ -1,0 +1,7 @@
+Name:Seeker of Sunlight
+ManaCost:G
+Types:Creature Merfolk Scout
+PT:1/1
+A:AB$ Explore | Cost$ 2 G | SorcerySpeed$ True | SpellDescription$ CARDNAME explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)
+DeckHas:Ability$Counters
+Oracle:{2}{G}: Seeker of Sunlight explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

@@ -1,0 +1,6 @@
+Name:Rampaging Ceratops
+ManaCost:4 R
+Types:Creature Dinosaur
+PT:5/4
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 3 | Description$ CARDNAME can't be blocked except by three or more creatures.
+Oracle:Rampaging Ceratops can't be blocked except by three or more creatures.

@@ -126,7 +126,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        Collections.sort(orderedCards, new Comparator<Card>() {
+        orderedCards.sort(new Comparator<Card>() {
             @Override
             public int compare(final Card card1, final Card card2) {
                 return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
@@ -149,7 +149,7 @@ public class ComputerUtilMana {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
-            Collections.sort(newAbilities, new Comparator<SpellAbility>() {
+            newAbilities.sort(new Comparator<SpellAbility>() {
                 @Override
                 public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                     int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
@@ -195,7 +195,7 @@ public class ComputerUtilMana {
                     final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
                     final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
 
-                    Collections.sort(prefSortedAbilities, new Comparator<SpellAbility>() {
+                    prefSortedAbilities.sort(new Comparator<SpellAbility>() {
                         @Override
                         public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                             if (ability1.getManaPart().mana(ability1).contains(preferredShard))
@@ -206,7 +206,7 @@ public class ComputerUtilMana {
                             return 0;
                         }
                     });
-                    Collections.sort(otherSortedAbilities, new Comparator<SpellAbility>() {
+                    otherSortedAbilities.sort(new Comparator<SpellAbility>() {
                         @Override
                         public int compare(final SpellAbility ability1, final SpellAbility ability2) {
                             if (ability1.getManaPart().mana(ability1).contains(preferredShard))
@@ -592,7 +592,7 @@ public class ComputerUtilMana {
 
         if (cost.isPaid()) {
             // refund any mana taken from mana pool when test
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            ai.getManaPool().refundMana(manaSpentToPay);
             CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
@@ -600,7 +600,7 @@ public class ComputerUtilMana {
         // arrange all mana abilities by color produced.
         final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, true);
         if (manaAbilityMap.isEmpty()) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            ai.getManaPool().refundMana(manaSpentToPay);
             CostPayment.handleOfferings(sa, true, cost.isPaid());
             return manaSources;
         }
@@ -613,7 +613,7 @@ public class ComputerUtilMana {
         ManaCostShard toPay;
         // Loop over mana needed
         while (!cost.isPaid()) {
-            toPay = getNextShardToPay(cost);
+            toPay = getNextShardToPay(cost, sourcesForShards);
 
             Collection<SpellAbility> saList = sourcesForShards.get(toPay);
             if (saList == null) {
@@ -648,7 +648,7 @@ public class ComputerUtilMana {
         }
 
         CostPayment.handleOfferings(sa, true, cost.isPaid());
-        ManaPool.refundMana(manaSpentToPay, ai, sa);
+        ai.getManaPool().refundMana(manaSpentToPay);
 
         return manaSources;
     }
@@ -714,7 +714,7 @@ public class ComputerUtilMana {
                 break;    // no mana abilities to use for paying
             }
 
-            toPay = getNextShardToPay(cost);
+            toPay = getNextShardToPay(cost, sourcesForShards);
 
             boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
 
@@ -855,7 +855,7 @@ public class ComputerUtilMana {
 
         // The cost is still unpaid, so refund the mana and report
         if (!cost.isPaid()) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            manapool.refundMana(manaSpentToPay);
             if (test) {
                 resetPayment(paymentList);
             } else {
@@ -865,7 +865,7 @@ public class ComputerUtilMana {
         }
 
         if (test) {
-            ManaPool.refundMana(manaSpentToPay, ai, sa);
+            manapool.refundMana(manaSpentToPay);
             resetPayment(paymentList);
         }
 
@@ -976,7 +976,7 @@ public class ComputerUtilMana {
             // Check if AI can still play this mana ability
             ma.setActivatingPlayer(ai, true);
             // if the AI can't pay the additional costs skip the mana ability
-            if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
+            if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma, false)) {
                 return false;
             } else if (ma.getRestrictions() != null && ma.getRestrictions().isInstantSpeed()) {
                 return false;
@@ -1091,14 +1091,22 @@ public class ComputerUtilMana {
         return false;
     }
 
-    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost) {
+    private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
+        List<ManaCostShard> shardsToPay = Lists.newArrayList(cost.getDistinctShards());
+        // optimize order so that the shards with less available sources are considered first
+        shardsToPay.sort(new Comparator<ManaCostShard>() {
+            @Override
+            public int compare(final ManaCostShard shard1, final ManaCostShard shard2) {
+                return sourcesForShards.get(shard1).size() - sourcesForShards.get(shard2).size();
+            }
+        });
         // mind the priorities
-        // * Pay mono-colored first,curPhase == PhaseType.CLEANUP
+        // * Pay mono-colored first
         // * Pay 2/C with matching colors
         // * pay hybrids
         // * pay phyrexian, keep mana for colorless
         // * pay generic
-        return cost.getShardToPayByPriority(cost.getDistinctShards(), ColorSet.ALL_COLORS.getColor());
+        return cost.getShardToPayByPriority(shardsToPay, ColorSet.ALL_COLORS.getColor());
     }
 
     private static void adjustManaCostToAvoidNegEffects(ManaCostBeingPaid cost, final Card card, Player ai) {
@@ -1315,7 +1323,7 @@ public class ComputerUtilMana {
                 manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * xCounter;
             }
 
-            if (manaToAdd < 1 && !payCosts.getCostMana().canXbe0()) {
+            if (manaToAdd < 1 && payCosts != null && payCosts.getCostMana().getXMin() > 0) {
                 // AI cannot really handle X costs properly but this keeps AI from violating rules
                 manaToAdd = 1;
             }
@@ -1509,7 +1517,7 @@ public class ComputerUtilMana {
                 if (cost != null) {
                     // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai, true);
-                    if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
+                    if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m, false)) {
                         continue;
                     }
 

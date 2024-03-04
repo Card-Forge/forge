@@ -32,9 +32,11 @@ public class AmassAi extends SpellAbilityAi {
         if (!aiArmies.isEmpty()) {
             return Iterables.any(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         }
-        final String tokenScript = "b_0_0_army";
-        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
         final String type = sa.getParam("Type");
+        StringBuilder sb = new StringBuilder("b_0_0_");
+        sb.append(sa.getOriginalParam("Type").toLowerCase()).append("_army");
+        final String tokenScript = sb.toString();
+        final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
         Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
 

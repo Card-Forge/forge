@@ -1,0 +1,10 @@
+Name:Crimson Caravaneer
+ManaCost:2 R
+Types:Creature Human Scout
+PT:1/2
+K:Double Strike
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ You
+DeckHas:Ability$Token & Type$Junk|Artifact
+Oracle:Double strike, trample\nWhenever Crimson Caravaneer deals combat damage to a player, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

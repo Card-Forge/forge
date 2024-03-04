@@ -1,0 +1,8 @@
+Name:Caparocti Sunborn
+ManaCost:2 R W
+Types:Legendary Creature Human Soldier
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscover | TriggerDescription$ Whenever CARDNAME attacks, you may tap two untapped artifacts and/or creatures you control. If you do, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
+SVar:TrigDiscover:AB$ Discover | Cost$ tapXType<2/Artifact;Creature/artifacts and/or creatures> | Num$ 3
+DeckHints:Type$Artifact|Token
+Oracle:Whenever Caparocti Sunborn attacks, you may tap two untapped artifacts and/or creatures you control. If you do, discover 3. (Exile cards from the top of your library until you exile a nonland card with mana value 3 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)
