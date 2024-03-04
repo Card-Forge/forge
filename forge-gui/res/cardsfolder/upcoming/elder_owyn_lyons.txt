@@ -1,0 +1,11 @@
+Name:Elder Owyn Lyons
+ManaCost:2 W U
+Types:Legendary Creature Human Knight
+PT:3/3
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Ward:1 | Description$ Artifacts you control have ward {1}. (Whenever an artifact you control becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield or dies, return target artifact card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield or dies, return target artifact card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact from your graveyard
+DeckHints:Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:Artifacts you control have ward {1}. (Whenever an artifact you control becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nWhen Elder Owyn Lyons enters the battlefield or dies, return target artifact card from your graveyard to your hand.

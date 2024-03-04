@@ -1,0 +1,12 @@
+Name:Ian the Reckless
+ManaCost:1 R
+Types:Legendary Creature Human Warrior
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Card.Self+modified | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, if it's modified, you may have it deal damage equal to its power to you and any target. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | Defined$ You | NumDmg$ X | DamageMap$ True | SubAbility$ DBDealDamageSelf
+SVar:DBDealDamageSelf:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+SVar:X:Count$CardPower
+DeckHints:Type$Aura|Equipment & Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target. (Equipment, Auras you control, and counters are modifications.)

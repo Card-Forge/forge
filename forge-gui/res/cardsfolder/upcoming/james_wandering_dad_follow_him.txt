@@ -1,0 +1,17 @@
+Name:James, Wandering Dad
+ManaCost:2 U
+Types:Legendary Creature Human Scientist
+PT:2/4
+A:AB$ Mana | Cost$ T | Produced$ C C | RestrictValid$ Activated | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities.
+AlternateMode:Adventure
+DeckHas:Ability$Token & Type$Clue 
+Oracle:Add {C}{C}. Spend this mana only to activate abilities.
+
+ALTERNATE
+
+Name:Follow Him
+ManaCost:X U U
+Types:Instant Adventure
+A:SP$ Investigate | Num$ X | SpellDescription$ Investigate X times. (Then exile this card. You may cast the creature later from exile.)
+SVar:X:Count$xPaid
+Oracle:Investigate X times. (Then exile this card. You may cast the creature later from exile.)

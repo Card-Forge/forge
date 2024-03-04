@@ -152,7 +152,7 @@ public class CostExile extends CostPartWithList {
 
             if (this.getAmount().equals("X")) {
                 String x = chosenX > 0 ? Lang.getNumeral(chosenX) : "any number of";
-                return String.format ("Exile %s %s from your %s", x, desc, origin);
+                return String.format("Exile %s %s from your %s", x, desc, origin);
             }
 
             return String.format("Exile %s from your %s",

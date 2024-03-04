@@ -1,0 +1,10 @@
+Name:HELIOS One
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1 | Cost$ 1 T | SpellDescription$ You get {E} (an energy counter).
+A:AB$ Destroy | Cost$ 3 T PayEnergy<X> Sac<1/CARDNAME> | ValidTgts$ Permanent.nonLand+cmcEQX | TgtPrompt$ Select target nonland permanent with mana value X | SorcerySpeed$ True | SpellDescription$ Destroy target nonland permanent with mana value X. Activate only as a sorcery.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{T}: Add {C}.\n{1}, {T}: You get {E} (an energy counter).\n{3}, {T}, Pay X {E}, Sacrifice HELIOS One: Destroy target nonland permanent with mana value X. Activate only as a sorcery.

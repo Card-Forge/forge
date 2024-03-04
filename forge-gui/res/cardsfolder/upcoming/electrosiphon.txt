@@ -1,0 +1,7 @@
+Name:Electrosiphon
+ManaCost:U U R
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBEnergy | RememberCounteredCMC$ True | SpellDescription$ Counter target spell. You get an amount of {E} (energy counters) equal to its mana value.
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+SVar:X:Count$RememberedNumber
+Oracle:Counter target spell. You get an amount of {E} (energy counters) equal to its mana value.
