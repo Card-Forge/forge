@@ -32,7 +32,7 @@ ScryfallCode=YMKM
 24 R Izzet Polarizer @Michele Giorgi
 25 M Juggle the Performance @Domenico Cava
 26 M Roalesk, Prime Specimen @Maxime Minard
-27 M Tajic, Legion’s Valor @Julia Metzger
-28 U Scour the Scene @Francisco Miyara
+27 U Scour the Scene @Francisco Miyara
+28 M Tajic, Legion's Valor @Julia Metzger
 29 R Thought-String Analyst @Diana Cearley
-30 R Veko, Death’s Doorkeeper @Marzena Nereida Piwowar
+30 R Veko, Death's Doorkeeper @Marzena Nereida Piwowar
