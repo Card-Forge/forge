@@ -1,0 +1,322 @@
+//Rank|Name|Rarity|Set
+#1|Aurelia's Vindicator|M|MKM
+#2|Izoni, Center of the Web|R|MKM
+#3|Agrus Kos, Spirit of Justice|M|MKM
+#4|Tolsimir, Midnight's Light|R|MKM
+#5|Vein Ripper|M|MKM
+#6|Ezrim, Agency Chief|R|MKM
+#7|Cryptic Coat|R|MKM
+#8|Hide in Plain Sight|R|MKM
+#9|Baleful Mastery|R|MKM
+#10|Doppelgang|R|MKM
+#11|Crashing Footfalls|M|MKM
+#12|Teysa, Opulent Oligarch|R|MKM
+#13|Enlisted Wurm|U|MKM
+#14|Tireless Tracker|M|MKM
+#15|Wojek Investigator|R|MKM
+#16|Aurelia, the Law Above|R|MKM
+#17|Rakdos, Patron of Chaos|M|MKM
+#18|Warleader's Call|R|MKM
+#19|Vannifar, Evolved Enigma|M|MKM
+#20|Gleaming Geardrake|U|MKM
+#21|Trostani, Three Whispers|M|MKM
+#22|A Killer Among Us|U|MKM
+#23|Steamcore Scholar|R|MKM
+#24|Kellan, Inquisitive Prodigy|R|MKM
+#25|Ill-Timed Explosion|R|MKM
+#26|Maverick Thopterist|U|MKM
+#27|Novice Inspector|C|MKM
+#28|Kaya, Spirits' Justice|M|MKM
+#29|Buried in the Garden|U|MKM
+#30|Sharp-Eyed Rookie|R|MKM
+#31|Pyrotechnic Performer|R|MKM
+#32|Repulsive Mutation|U|MKM
+#33|Torch the Witness|U|MKM
+#34|Lightning Helix|U|MKM
+#35|Private Eye|U|MKM
+#36|Urgent Necropsy|M|MKM
+#37|Lamplight Phoenix|R|MKM
+#38|Axebane Ferox|R|MKM
+#39|Krenko, Baron of Tin Street|R|MKM
+#40|Fuss Bother|U|MKM
+#41|Reckless Detective|U|MKM
+#42|Proft's Eidetic Memory|R|MKM
+#43|Incinerator of the Guilty|M|MKM
+#44|Neighborhood Guardian|U|MKM
+#45|Makeshift Binding|C|MKM
+#46|Alquist Proft, Master Sleuth|M|MKM
+#47|Dog Walker|C|MKM
+#48|Intrude on the Mind|M|MKM
+#49|Etrata, Deadly Fugitive|M|MKM
+#50|Flourishing Bloom-Kin|U|MKM
+#51|Hunted Bonebrute|R|MKM
+#52|Deadly Cover-Up|R|MKM
+#53|Unyielding Gatekeeper|R|MKM
+#54|Detective's Satchel|U|MKM
+#55|Person of Interest|C|MKM
+#56|Tenth District Hero|R|MKM
+#57|Inside Source|C|MKM
+#58|Case of the Gateway Express|U|MKM
+#59|Coerced to Kill|U|MKM
+#60|Homicide Investigator|R|MKM
+#61|Perimeter Enforcer|U|MKM
+#62|Ranger-Captain of Eos|M|MKM
+#63|Shock|C|MKM
+#64|Sumala Sentry|U|MKM
+#65|Lazav, Wearer of Faces|R|MKM
+#66|Anzrag, the Quake-Mole|M|MKM
+#67|Greenbelt Radical|U|MKM
+#68|Glint Weaver|U|MKM
+#69|Get a Leg Up|U|MKM
+#70|Archdruid's Charm|R|MKM
+#71|Evidence Examiner|U|MKM
+#72|Hard-Hitting Question|U|MKM
+#73|Kraul Whipcracker|U|MKM
+#74|Loxodon Eavesdropper|C|MKM
+#75|Bite Down on Crime|C|MKM
+#76|Massacre Girl, Known Killer|M|MKM
+#77|Kylox's Voltstrider|M|MKM
+#78|Nervous Gardener|C|MKM
+#79|Yarus, Roar of the Old Gods|R|MKM
+#80|Exit Specialist|U|MKM
+#81|Niv-Mizzet, Guildpact|R|MKM
+#82|Hard Evidence|C|MKM
+#83|Fanatical Strength|C|MKM
+#84|Elegant Parlor|R|MKM
+#85|Galvanize|C|MKM
+#86|Long Goodbye|U|MKM
+#87|Case of the Stashed Skeleton|R|MKM
+#88|Fugitive Codebreaker|R|MKM
+#89|Underground Mortuary|R|MKM
+#90|Lush Portico|R|MKM
+#91|No More Lies|U|MKM
+#92|Gadget Technician|C|MKM
+#93|Felonious Rage|C|MKM
+#94|Extract a Confession|C|MKM
+#95|Marketwatch Phantom|C|MKM
+#96|Auspicious Arrival|C|MKM
+#97|Escape Tunnel|C|MKM
+#98|Push Pull|U|MKM
+#99|Granite Witness|C|MKM
+#100|Blood Spatter Analysis|R|MKM
+#101|Tunnel Tipster|C|MKM
+#102|Case of the Locked Hothouse|R|MKM
+#103|Red Herring|C|MKM
+#104|Offender at Large|C|MKM
+#105|Projektor Inspector|C|MKM
+#106|Museum Nightwatch|C|MKM
+#107|Karlov Watchdog|U|MKM
+#108|Vengeful Creeper|C|MKM
+#109|Surveillance Monitor|U|MKM
+#110|Reasonable Doubt|C|MKM
+#111|On the Job|C|MKM
+#112|The Chase Is On|C|MKM
+#113|Jace, Wielder of Mysteries|R|MKM
+#114|Leonin Relic-Warder|U|MKM
+#115|Not on My Watch|U|MKM
+#116|Out Cold|C|MKM
+#117|Meddling Youths|U|MKM
+#118|Thundering Falls|R|MKM
+#119|Hedge Maze|R|MKM
+#120|Vitu-Ghazi Inspector|C|MKM
+#121|Rubblebelt Maverick|C|MKM
+#122|Case of the Burning Masks|U|MKM
+#123|Festerleech|U|MKM
+#124|Lost in the Maze|R|MKM
+#125|Seasoned Consultant|C|MKM
+#126|Wispdrinker Vampire|U|MKM
+#127|Frantic Scapegoat|U|MKM
+#128|Haazda Vigilante|C|MKM
+#129|Cold Case Cracker|C|MKM
+#130|Unauthorized Exit|C|MKM
+#131|Krosan Tusker|C|MKM
+#132|Treacherous Terrain|U|MKM
+#133|Deduce|C|MKM
+#134|Topiary Panther|C|MKM
+#135|Undercity Sewers|R|MKM
+#136|Shadowy Backstreet|R|MKM
+#137|Commercial District|R|MKM
+#138|Drag the Canal|R|MKM
+#139|Rune-Brand Juggler|U|MKM
+#140|Unscrupulous Agent|C|MKM
+#141|Crowd-Control Warden|C|MKM
+#142|Leering Onlooker|U|MKM
+#143|Consign Oblivion|U|MKM
+#144|Hotshot Investigators|C|MKM
+#145|Deadly Complication|U|MKM
+#146|Analyze the Pollen|R|MKM
+#147|Undercity Eliminator|U|MKM
+#148|Crimestopper Sprite|C|MKM
+#149|Persuasive Interrogators|U|MKM
+#150|Forensic Researcher|U|MKM
+#151|They Went This Way|C|MKM
+#152|Goblin Maskmaker|C|MKM
+#153|Cornered Crook|U|MKM
+#154|Sanguine Savior|C|MKM
+#155|Soul Enervation|U|MKM
+#156|Snarling Gorehound|C|MKM
+#157|Eliminate the Impossible|U|MKM
+#158|Make Your Move|C|MKM
+#159|Murder|C|MKM
+#160|Vengeful Tracker|U|MKM
+#161|Nyx Weaver|U|MKM
+#162|Putrid Warrior|C|MKM
+#163|Syr Konrad, the Grim|U|MKM
+#164|Raucous Theater|R|MKM
+#165|Meticulous Archive|R|MKM
+#166|Scene of the Crime|U|MKM
+#167|Sanitation Automaton|C|MKM
+#168|Culvert Ambusher|U|MKM
+#169|Undercover Crocodelf|C|MKM
+#170|Faerie Snoop|C|MKM
+#171|Hedge Whisperer|U|MKM
+#172|Case of the Trampled Garden|U|MKM
+#173|Bolrac-Clan Basher|U|MKM
+#174|Krovod Haunch|U|MKM
+#175|Absolving Lammasu|U|MKM
+#176|Tin Street Gossip|U|MKM
+#177|Krenko's Buzzcrusher|R|MKM
+#178|Furtive Courier|U|MKM
+#179|Dramatic Accusation|C|MKM
+#180|Call a Surprise Witness|U|MKM
+#181|Slice from the Shadows|C|MKM
+#182|Burden of Proof|U|MKM
+#183|Airtight Alibi|C|MKM
+#184|Cease Desist|U|MKM
+#185|Riftburst Hellion|C|MKM
+#186|Sample Collector|U|MKM
+#187|Innocent Bystander|C|MKM
+#188|Case of the Crimson Pulse|R|MKM
+#189|Toxin Analysis|C|MKM
+#190|Case File Auditor|U|MKM
+#191|Audience with Trostani|R|MKM
+#192|Slimy Dualleech|U|MKM
+#193|Worldsoul's Rage|R|MKM
+#194|Magmaw|U|MKM
+#195|Assassin's Trophy|R|MKM
+#196|Nightdrinker Moroii|U|MKM
+#197|Case of the Filched Falcon|U|MKM
+#198|Harried Dronesmith|U|MKM
+#199|Pompous Gadabout|U|MKM
+#200|Aftermath Analyst|U|MKM
+#201|Clandestine Meddler|U|MKM
+#202|Outrageous Robbery|R|MKM
+#203|Sudden Setback|U|MKM
+#204|Bubble Smuggler|C|MKM
+#205|Gravestone Strider|C|MKM
+#206|Mentor of the Meek|U|MKM
+#207|Benthic Criminologists|C|MKM
+#208|Branch of Vitu-Ghazi|U|MKM
+#209|Convenient Target|U|MKM
+#210|No Witnesses|R|MKM
+#211|Delney, Streetwise Lookout|M|MKM
+#212|Defenestrated Phantom|C|MKM
+#213|Gearbane Orangutan|C|MKM
+#214|Treacherous Greed|R|MKM
+#215|Alley Assailant|C|MKM
+#216|Jaded Analyst|C|MKM
+#217|Griffnaut Tracker|C|MKM
+#218|Case of the Shattered Pact|U|MKM
+#219|Mystery Key|U|MKM
+#220|Public Thoroughfare|C|MKM
+#221|Shady Informant|C|MKM
+#222|Rakish Scoundrel|C|MKM
+#223|Presumed Dead|U|MKM
+#224|Macabre Reconstruction|C|MKM
+#225|Mistway Spy|U|MKM
+#226|Conspiracy Unraveler|M|MKM
+#227|Due Diligence|C|MKM
+#228|Hustle Bustle|U|MKM
+#229|Rubblebelt Braggart|C|MKM
+#230|Fae Flight|U|MKM
+#231|Tragic Slip|M|MKM
+#232|Concealed Weapon|U|MKM
+#233|Rot Farm Mortipede|C|MKM
+#234|Polygraph Orb|U|MKM
+#235|Forensic Gadgeteer|R|MKM
+#236|Lumbering Laundry|U|MKM
+#237|Basilica Stalker|C|MKM
+#238|Doorkeeper Thrull|R|MKM
+#239|Suspicious Detonation|C|MKM
+#240|Coveted Falcon|R|MKM
+#241|Wrench|U|MKM
+#242|Demand Answers|C|MKM
+#243|The Pride of Hull Clade|M|MKM
+#244|Pick Your Poison|C|MKM
+#245|Caught Red-Handed|U|MKM
+#246|Repeat Offender|C|MKM
+#247|Barbed Servitor|R|MKM
+#248|Agency Coroner|C|MKM
+#249|Sanctuary Wall|U|MKM
+#250|Thinking Cap|C|MKM
+#251|Soul Search|U|MKM
+#252|Victimize|M|MKM
+#253|Lead Pipe|U|MKM
+#254|Chalk Outline|U|MKM
+#255|Curious Inquiry|U|MKM
+#256|Candlestick|U|MKM
+#257|Essence of Antiquity|U|MKM
+#258|Flotsam Jetsam|U|MKM
+#259|Insidious Roots|U|MKM
+#260|Agency Outfitter|U|MKM
+#261|Forum Familiar|U|MKM
+#262|Magnifying Glass|C|MKM
+#263|Magnetic Snuffler|U|MKM
+#264|Kylox, Visionary Inventor|R|MKM
+#265|Judith, Carnage Connoisseur|R|MKM
+#266|Curious Cadaver|U|MKM
+#267|Knife|U|MKM
+#268|Expose the Culprit|U|MKM
+#269|Crime Novelist|U|MKM
+#270|It Doesn't Add Up|U|MKM
+#271|Case of the Gorgon's Kiss|U|MKM
+#272|Case of the Pilfered Proof|U|MKM
+#273|Cryptex|R|MKM
+#274|Relive the Past|R|MKM
+#275|Slime Against Humanity|C|MKM
+#276|Connecting the Dots|R|MKM
+#277|Behind the Mask|C|MKM
+#278|Case of the Uneaten Feast|R|MKM
+#279|Assemble the Players|R|MKM
+#280|Officious Interrogation|R|MKM
+#281|Leyline of the Guildpact|R|MKM
+#282|Break Out|U|MKM
+#283|Living Conundrum|U|MKM
+#284|Cerebral Confiscation|C|MKM
+#285|Illicit Masquerade|R|MKM
+#286|Reenact the Crime|R|MKM
+#287|Rope|U|MKM
+#288|Combine Chrysalis|U|MKM
+#289|Kuldotha Rebirth|R|MKM
+#290|Case of the Ransacked Lab|R|MKM
+#291|Undergrowth Recon|M|MKM
+#292|Expedited Inheritance|M|MKM
+#293|Anzrag's Rampage|R|MKM
+#294|Bishop of the Bloodstained|U|MKM
+#295|Burden of Guilt|C|MKM
+#296|Cavalier of Thorns|M|MKM
+#297|Death Cloud|R|MKM
+#298|Duskmantle, House of Shadow|U|MKM
+#299|Ghost Quarter|U|MKM
+#300|Gnaw to the Bone|C|MKM
+#301|Goblin Warchief|U|MKM
+#302|High Alert|U|MKM
+#303|Ixidor, Reality Sculptor|R|MKM
+#304|Laid to Rest|U|MKM
+#305|Mass Hysteria|R|MKM
+#306|Metalspinner's Puzzleknot|C|MKM
+#307|Millstone|U|MKM
+#308|Mistveil Plains|U|MKM
+#309|Molten Psyche|R|MKM
+#310|Monologue Tax|R|MKM
+#311|Quintorius, Field Historian|U|MKM
+#312|Shard of Broken Glass|C|MKM
+#313|Spell Snare|U|MKM
+#314|Stromkirk Captain|U|MKM
+#315|Worldspine Wurm|M|MKM
+#316|Ghostly Prison|M|MKM
+#317|Fabricate|M|MKM
+#318|Show and Tell|M|MKM
+#319|Gamble|M|MKM
+#320|Drown in the Loch|M|MKM
+#321|Field of the Dead|M|MKM
