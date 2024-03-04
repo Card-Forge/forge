@@ -268,7 +268,6 @@ public final class CardUtil {
         newCopy.setMonstrous(in.isMonstrous());
         newCopy.setRenowned(in.isRenowned());
         newCopy.setSolved(in.isSolved());
-        newCopy.setSuspected(in.isSuspected());
         newCopy.setSuspectedTimestamp(in.getSuspectedTimestamp());
 
         newCopy.setColor(in.getColor().getColor());

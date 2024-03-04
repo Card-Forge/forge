@@ -3,7 +3,6 @@ ManaCost:3 R R
 Types:Creature Human Warrior
 PT:3/3
 K:Morph:Discard<1/Card>
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Hellbent | CheckSVar$ X | SVarCompare$ EQ1 | Description$ Hellbent — CARDNAME gets +2/+2 as long as you have no cards in hand.
-SVar:X:Count$Valid Card.Self+faceUp
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Hellbent | Description$ Hellbent — CARDNAME gets +2/+2 as long as you have no cards in hand.
 SVar:BuffedBy:Card
 Oracle:Hellbent — Gathan Raiders gets +2/+2 as long as you have no cards in hand.\nMorph—Discard a card. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)
