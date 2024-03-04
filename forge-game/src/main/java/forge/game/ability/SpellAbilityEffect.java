@@ -624,8 +624,8 @@ public abstract class SpellAbilityEffect {
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
-            if (sa.hasParam("ReplaceDyingRemember")) {
-                effect += " | RememberToEffectSource$ True";
+            if (sa.hasParam("ReplaceDyingExiledWith")) {
+                effect += " | ExiledWithEffectSource$ True";
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
@@ -950,6 +950,10 @@ public abstract class SpellAbilityEffect {
     public static void handleExiledWith(final Card movedCard, final SpellAbility cause, Card exilingSource) {
         if (movedCard.isToken()) {
             return;
+        }
+
+        if (cause.hasParam("ExiledWithEffectSource")) {
+            exilingSource = exilingSource.getEffectSource();
         }
 
         // during replacement LKI might be used
