@@ -3438,12 +3438,14 @@ public class AbilityUtils {
             return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
         }
 
-        if (value.contains("AllCounters")) {
-            return doXMath(Aggregates.sum(player.getCounters().values(), Functions.identity()), m, source, ctb);
-        }
-
-        if (value.contains("PoisonCounters")) {
-            return doXMath(player.getPoisonCounters(), m, source, ctb);
+        if (value.contains("Counters")) {
+            int count = 0;
+            if (sq[1].equals("ALL")) {
+                count = Aggregates.sum(player.getCounters().values(), Functions.identity());
+            } else {
+                count = player.getCounters(CounterType.getType(sq[1]));
+            }
+            return doXMath(count, m, source, ctb);
         }
 
         if (value.contains("TopOfLibraryCMC")) {
