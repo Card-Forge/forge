@@ -1,6 +1,8 @@
 package forge.game.player;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -468,6 +470,10 @@ public class PlayerProperty {
             return false;
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
+                return false;
+            }
+        } else if (property.startsWith("Condition")) {
+            if (AbilityUtils.playerXCount(Lists.newArrayList(player), property, source, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("NotedFor")) {
