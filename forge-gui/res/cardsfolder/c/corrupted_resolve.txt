@@ -2,7 +2,7 @@ Name:Corrupted Resolve
 ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Counter target spell if its controller is poisoned.
-SVar:X:TargetedController$PoisonCounters
+SVar:X:TargetedController$Counters.Poison
 SVar:NeedsToPlayVar:X GE1
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Infect
