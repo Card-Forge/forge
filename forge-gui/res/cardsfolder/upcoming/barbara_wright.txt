@@ -1,8 +1,0 @@
-Name:Barbara Wright
-ManaCost:1 W
-Types:Legendary Creature Human Advisor
-PT:1/3
-S:Mode$ Continuous | Affected$ Saga.YouCtrl | AddKeyword$ Read ahead | Description$ History Teacher — Sagas you control have read ahead. (As a Saga enters the battlefield, choose a chapter and start with that many lore counters. Skipped chapters don’t trigger.)
-K:Doctor's companion
-Oracle:History Teacher — Sagas you control have read ahead. (As a Saga enters the battlefield, choose a chapter and start with that many lore counters. Skipped chapters don’t trigger.)\nDoctor’s companion (You can have two commanders if the other is the Doctor.)
-

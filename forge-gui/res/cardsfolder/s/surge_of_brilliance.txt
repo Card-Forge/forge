@@ -1,7 +1,7 @@
 Name:Surge of Brilliance
 ManaCost:1 U
 Types:Instant
-A:SP$ Draw |  NumCards$ X | SpellDescription$ Paradox — Draw a card for each spell you've cast this turn from anywhere other than your hand.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Paradox — Draw a card for each spell you've cast this turn from anywhere other than your hand.
 SVar:X:Count$ThisTurnCast_Card.YouCtrl+wasNotCastFromYourHand
 K:Foretell:1 U
-Oracle:Paradox — Draw a card for each spell you’ve cast this turn from anywhere other than your hand.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:Paradox — Draw a card for each spell you've cast this turn from anywhere other than your hand.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

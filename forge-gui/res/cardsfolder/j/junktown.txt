@@ -1,0 +1,7 @@
+Name:Junktown
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Token | Cost$ 4 R T Sac<1/NICKNAME> | TokenAmount$ 3 | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ You | SpellDescription$ Create three Junk tokens. (They're artifacts with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+DeckHas:Ability$Sacrifice|Token & Type$Junk|Artifact
+Oracle:{T}: Add {C}.\n{4}{R}, {T}, Sacrifice Junktown: Create three Junk tokens. (They're artifacts with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

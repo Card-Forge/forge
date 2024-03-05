@@ -1,0 +1,11 @@
+Name:Break Out
+ManaCost:R G
+Types:Sorcery
+A:SP$ PeekAndReveal | Defined$ You | PeekAmount$ 6 | NoReveal$ True | RememberPeeked$ True | SubAbility$ PickOne | StackDescription$ SpellDescription | SpellDescription$ Look at the top six cards of your library. You may reveal a creature card from among them. If that card has mana value 2 or less, you may put it onto the battlefield and it gains haste until end of turn. If you didn't put the revealed card onto the battlefield this way, put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a creature card to reveal | Choices$ Card.Creature+IsRemembered | ChoiceZone$ Library | Reveal$ True | SubAbility$ DBChangeZoneBattlefield
+SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+cmcLE2+ChosenCard | ConditionCompare$ EQ1 | Optional$ True | Imprint$ True | SubAbility$ DBPump | StackDescription$ None
+SVar:DBPump:DB$ Pump | KW$ Haste | Defined$ Imprinted | ConditionDefined$ Remembered | ConditionPresent$ Creature.IsImprinted+inZoneBattlefield | ConditionCompare$ EQ1 | SubAbility$ DBChangeZoneHand | StackDescription$ None
+SVar:DBChangeZoneHand:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature+ChosenCard+inZoneBattlefield | ConditionCompare$ EQ0 | SubAbility$ DBRestRandomOrder | StackDescription$ None
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:Look at the top six cards of your library. You may reveal a creature card from among them. If that card has mana value 2 or less, you may put it onto the battlefield and it gains haste until end of turn. If you didn't put the revealed card onto the battlefield this way, put it into your hand. Put the rest on the bottom of your library in a random order.

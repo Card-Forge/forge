@@ -1,0 +1,12 @@
+Name:Perimeter Enforcer
+ManaCost:1 W
+Types:Creature Human Detective
+PT:1/1
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Detective.YouCtrl+Other | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Detective.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
+DeckHas:Ability$LifeGain
+DeckHints:Type$Detective
+Oracle:Flying, lifelink\nWhenever another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, Perimeter Enforcer gets +1/+1 until end of turn.

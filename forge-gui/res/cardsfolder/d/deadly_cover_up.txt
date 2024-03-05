@@ -1,0 +1,15 @@
+Name:Deadly Cover-Up
+ManaCost:3 B B
+Types:Sorcery
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBExile | SpellDescription$ Destroy all creatures.
+SVar:DBExile:DB$ ChangeZone | Mandatory$ True | ChangeType$ Card.OppCtrl | Hidden$ True | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ConditionDefined$ Collected | ConditionPresent$ Card | SubAbility$ ExileYard | SpellDescription$ If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them.
+SVar:ExileYard:DB$ ChangeZone | ChangeType$ Remembered.sameName | Origin$ Graveyard | DefinedPlayer$ RememberedController | Chooser$ You | ConditionDefined$ Collected | ConditionPresent$ Card | Destination$ Exile | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ RememberedController | ChangeType$ Remembered.sameName | ConditionDefined$ Collected | ConditionPresent$ Card | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ RememberedController | ChangeType$ Remembered.sameName | ConditionDefined$ Collected | ConditionPresent$ Card | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NumInLib:PlayerCountDefinedRememberedOwner$CardsInLibrary
+SVar:NumInHand:PlayerCountDefinedRememberedOwner$CardsInHand
+SVar:NumInYard:PlayerCountDefinedRememberedOwner$CardsInGraveyard
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+Oracle:As an additional cost to cast this spell, you may collect evidence 6.\nDestroy all creatures. If evidence was collected, exile a card from an opponent's graveyard. Then search its owner's graveyard, hand, and library for any number of cards with that name and exile them.

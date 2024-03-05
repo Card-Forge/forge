@@ -1,9 +1,0 @@
-Name:Concealed Weapon
-ManaCost:1 R
-Types:Artifact Equipment
-K:Disguise:2 R
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | Description$ Equipped creature gets +3/+0.
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, attach it to target creature you control.
-SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control 
-K:Equip:1 R
-Oracle:Equipped creature gets +3/+0.\nDisguise {2}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Concealed Weapon is turned face up, attach it to target creature you control.\nEquip: {1}{R}

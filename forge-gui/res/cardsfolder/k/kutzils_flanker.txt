@@ -11,4 +11,3 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBScry | SpellDescrip
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 SVar:DBExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | SpellDescription$ Exile target player's graveyard.
 Oracle:Flash\nWhen Kutzil's Flanker enters the battlefield, choose one —\n• Put a +1/+1 counter on Kutzil's Flanker for each creature that left the battlefield under your control this turn.\n• You gain 2 life and scry 2.\n• Exile target player's graveyard.
-

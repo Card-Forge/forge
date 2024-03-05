@@ -1,9 +1,0 @@
-Name:Mythweaver Poq
-ManaCost:3 G
-Types:Legendary Creature Cat Shaman
-PT:*/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
-SVar:X:Count$Valid Land.YouCtrl
-T:Mode$ ChangesZoneAll | ValidCards$ Land.YouCtrl+nonToken | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigConjure | TriggerDescription$ Whenever one or more nontoken lands enter the battlefield under your control, for each of them, conjure a duplicate of it onto the battlefield. This ability triggers only once each turn.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCards | Zone$ Battlefield
-Oracle:Mythweaver Poq's power and toughness are each equal to the number of lands you control.\nWhenever one or more nontoken lands enter the battlefield under your control, for each of them, conjure a duplicate of it onto the battlefield. This ability triggers only once each turn.

@@ -1,0 +1,14 @@
+Name:Grim Reaper's Sprint
+ManaCost:4 R
+Types:Enchantment Aura
+K:Enchant creature
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ Morbid — This spell costs {3} less to cast if a creature died this turn.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap each creature you control. If it's your main phase, there is an additional combat phase after this phase.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ConditionPhases$ Main1,Main2
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +2/+2 and has haste.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHints:Ability$Sacrifice
+SVar:PlayMain1:TRUE
+Oracle:Morbid — This spell costs {3} less to cast if a creature died this turn.\nEnchant creature\nWhen Grim Reaper's Sprint enters the battlefield, untap each creature you control. If it's your main phase, there is an additional combat phase after this phase.\nEnchanted creature gets +2/+2 and has haste.

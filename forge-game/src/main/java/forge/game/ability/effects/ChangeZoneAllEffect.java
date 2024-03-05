@@ -12,7 +12,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -55,8 +54,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         CardCollection cards;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
@@ -154,7 +151,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             CardLists.shuffle(cards);
         }
 
-        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
+        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
+
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -170,9 +168,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-            moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+            AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             if (destination == ZoneType.Battlefield) {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
@@ -199,6 +195,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                 movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
+                if (destination == ZoneType.Exile && !c.canExiledBy(sa, true)) {
+                    continue;
+                }
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile) {
                     handleExiledWith(movedCard, sa);

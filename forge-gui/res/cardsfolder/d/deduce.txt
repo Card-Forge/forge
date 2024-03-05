@@ -1,0 +1,7 @@
+Name:Deduce
+ManaCost:1 U
+Types:Instant
+A:SP$ Draw | SubAbility$ DBInvestigate | SpellDescription$ Draw a card.
+SVar:DBInvestigate:DB$ Investigate | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+DeckHas:Ability$Investigate|Token & Type$Clue|Artifact
+Oracle:Draw a card. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

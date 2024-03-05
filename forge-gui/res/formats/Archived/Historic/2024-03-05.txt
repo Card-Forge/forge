@@ -1,0 +1,8 @@
+[format]
+Name:Historic (YMKM)
+Type:Archived
+Subtype:Arena
+Effective:2024-03-05
+Sets:KTK, XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, HA6, EA1, DMU, YDMU, BRO, BRR, YBRO, EA2, ONE, YONE, SIR, SIS, MOM, MUL, MAT, LTR, HA7, EA3, WOE, WOT, YWOE, LCI, YLCI, MKM, YMKM
+Banned:Agent of Treachery; Blood Moon; Bloodstained Mire; Brainstorm; Channel; Counterspell; Dark Ritual; Demonic Tutor; Field of the Dead; Flooded Strand; Intruder Alarm; Land Tax; Lightning Bolt; Memory Lapse; Mishra's Bauble; Natural Order; Necropotence; Nexus of Fate; Oko, Thief of Crowns; Once Upon a Time; Polluted Delta; Ragavan, Nimble Pilferer; Show and Tell; Sneak Attack; Spreading Seas; Swords to Plowshares; Thassa's Oracle; Tibalt's Trickery; Time Warp; Uro, Titan of Nature's Wrath; Veil of Summer; Wilderness Reclamation; Windswept Heath; Wooded Foothills
+Additional:Admiral Brass, Unsinkable; Burden of Guilt; Clavileño, First of the Blessed; Crashing Footfalls; Duskmantle, House of Shadow; Enlisted Wurm; Evolutionary Leap; Fabricate; Gamble; Ghostly Prison; Goro-Goro and Satoru; Ixidor, Reality Sculptor; Katilda and Lier; Kuldotha Rebirth; Leonin Relic-Warder; Magmaw; Mass Hysteria; Metalspinner's Puzzleknot; Mistveil Plains; Molten Psyche; Monologue Tax; Mystery Key; Nyx Weaver; Pantlaza, Sun-Favored; Possibility Storm; Putrid Warrior; Shard of Broken Glass; Slimefoot and Squee; Smuggler's Copter; Spell Snare; Timeless Dragon; Treacherous Terrain; Victimize; Xolatoyac, the Smiling Flood

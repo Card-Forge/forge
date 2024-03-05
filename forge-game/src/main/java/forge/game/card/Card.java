@@ -216,7 +216,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean renowned;
     private boolean solved = false;
-    private boolean suspected = false;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -237,9 +236,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
-    private boolean discarded = false;
 
-    private boolean surveilledThisTurn = false;
+    private boolean discarded, surveilled, milled;
 
     private boolean flipped = false;
     private boolean facedown = false;
@@ -593,6 +591,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         //view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
 
+    public void updateManaCostForView() {
+        currentState.getView().updateManaCost(this);
+    }
+    
     public final void updatePowerToughnessForView() {
         view.updateCounters(this);
     }
@@ -1900,7 +1902,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void cleanupExiledWith() {
-        if (exiledWith == null) {
+        if (exiledWith == null || exiledWith.isLKI()) {
             return;
         }
 
@@ -2661,7 +2663,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (solved) {
             sb.append("Solved\r\n");
         }
-        if (suspected) {
+        if (isSuspected()) {
             sb.append("Suspected\r\n");
         }
         if (manifested) {
@@ -4452,15 +4454,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private int intensity = 0;
     public final void addIntensity(final int n) {
-        intensity = intensity + n;
+        intensity += n;
         view.updateIntensity(this);
     }
     public final int getIntensity(boolean total) {
         if (total && hasKeyword(Keyword.STARTING_INTENSITY)) {
             return getKeywordMagnitude(Keyword.STARTING_INTENSITY) + intensity;
-        } else {
-            return intensity;
         }
+        return intensity;
     }
     public final void setIntensity(final int n) { intensity = n; }
     public final boolean hasIntensity() {
@@ -4521,6 +4522,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 long timestamp = (long) p.get("Timestamp");
                 CardTraitChanges ctc = oldCard.getChangedCardTraits().get(timestamp, (long) 0).copy(this, false);
                 addChangedCardTraits(ctc, timestamp, (long) 0);
+            } else if (p.get("Category").equals("Incorporate")) {
+                long ts = (long) p.get("Timestamp");
+                final ManaCost cCMC = oldCard.changedCardManaCost.get(ts, (long) 0);
+                addChangedManaCost(cCMC, ts, (long) 0);
+                updateManaCostForView();
+
+                if (getFirstSpellAbility() != null) {
+                    getFirstSpellAbility().getPayCosts().add(new Cost((String) p.get("Incorporate"), false));
+                }
             } else executePerpetual(p);
         }
     }
@@ -5192,6 +5202,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         getView().updateChangedColorWords(this);
         getView().updateChangedTypes(this);
+        updateManaCostForView();
 
         currentState.getView().updateAbilityText(this, currentState);
         view.updateNonAbilityText(this);
@@ -6156,11 +6167,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 damageType = DamageType.Deathtouch;
             }
 
-            // 704.8: if it looks like the creature might die from SBA make sure the LKI is refreshed
-            if (hasBeenDealtDeathtouchDamage() || (getDamage() > 0 && getLethal() <= getDamage())) {
-                game.updateLastStateForCard(this);
-            }
-
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
@@ -6282,6 +6288,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean wasDiscarded() { return discarded; }
     public void setDiscarded(boolean state) { discarded = state; }
+    public boolean wasSurveilled() {
+        return this.surveilled;
+    }
+    public void setSurveilled(boolean value) {
+        this.surveilled = value;
+    }
+    public boolean wasMilled() {
+        return milled;
+    }
+    public void setMilled(boolean value) {
+        milled = value;
+    }
 
     public final boolean isRingBearer() {
         return ringbearer;
@@ -6293,6 +6311,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void clearRingBearer() {
         setRingBearer(false);
     }
+
     public final boolean isMonstrous() {
         return monstrous;
     }
@@ -6323,14 +6342,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isSuspected() {
-        return suspected;
+        return suspectedTimestamp != null;
     }
 
     public final boolean setSuspected(final boolean suspected) {
         if (suspected && StaticAbilityCantBeSuspected.cantBeSuspected(this)) {
             return false;
         }
-        this.suspected = suspected;
         if (suspected) {
             if (suspectedTimestamp != null) {
                 // 701.58d A suspected permanent can’t become suspected again.
@@ -6345,11 +6363,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
                 suspectedStatic = StaticAbility.create(effect, this, getCurrentState(), false);
             }
-            this.addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
+            addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
         } else {
             if (suspectedTimestamp != null) {
                 removeChangedCardKeywords(suspectedTimestamp, 0);
-                this.removeChangedCardTraits(suspectedTimestamp, 0);
+                removeChangedCardTraits(suspectedTimestamp, 0);
             }
             suspectedTimestamp = null;
         }
@@ -6913,7 +6931,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetShieldCount();
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
-        setSurveilledThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
@@ -7045,6 +7062,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         return !StaticAbilityCantSacrifice.cantSacrifice(this, source, effect);
+    }
+
+    public final boolean canExiledBy(final SpellAbility source, final boolean effect) {
+        final Card gameCard = game.getCardState(this, null);
+        // gameCard is LKI in that case, the card is not in game anymore
+        // or the timestamp did change
+        // this should check Self too
+        if (gameCard == null || !this.equalsWithTimestamp(gameCard)) {
+            return false;
+        }
+
+        return !StaticAbilityCantExile.cantExile(this, source, effect);
     }
 
     public CardRules getRules() {
@@ -7878,12 +7907,5 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
-    }
-
-    public boolean isSurveilledThisTurn() {
-        return this.surveilledThisTurn;
-    }
-    public void setSurveilledThisTurn(boolean value) {
-        this.surveilledThisTurn = value;
     }
 }

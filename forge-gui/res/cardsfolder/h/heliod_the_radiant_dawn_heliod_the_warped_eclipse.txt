@@ -2,7 +2,7 @@ Name:Heliod, the Radiant Dawn
 ManaCost:2 W W
 Types:Legendary Enchantment Creature God
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone |  TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment card that isn't a God from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment card that isn't a God from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl+nonGod
 A:AB$ SetState | Cost$ 3 UP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery.
 DeckHas:Type$Enchantment

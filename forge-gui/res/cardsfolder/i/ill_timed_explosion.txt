@@ -1,0 +1,10 @@
+Name:Ill-Timed Explosion
+ManaCost:2 U R
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrig | SpellDescription$ Draw two cards. Then you may discard two cards. When you do, CARDNAME deals X damage to each creature, where X is the highest mana value among the discarded cards.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | UnlessCost$ Discard<2/Card> | UnlessPayer$ You | RememberDiscarded$ True | RememberObjects$ Remembered | SubAbility$ DBCleanup | UnlessSwitched$ True | Execute$ TrigDamageAll | TriggerDescription$ When you do, CARDNAME deals X damage to each creature, where X is the highest mana value among the discarded cards.
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerRemembered$GreatestCMC
+DeckHas:Ability$Counters|Discard
+Oracle:Draw two cards. Then you may discard two cards. When you do, Ill-Timed Explosion deals X damage to each creature, where X is the highest mana value among the discarded cards.

@@ -41,3 +41,4 @@ ScryfallCode=SPG
 27 M Drown in the Loch @Chris Seaman
 28 M Field of the Dead @Ralph Horsley
 44 M Solitude @Campbell White
+49 M Solitude @Campbell White

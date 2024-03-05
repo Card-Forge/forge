@@ -1059,8 +1059,21 @@ public class CardProperty {
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
                 return false;
             }
-
             if (!card.wasDiscarded()) {
+                return false;
+            }
+        } else if (property.equals("surveilledThisTurn")) {
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+            if (!card.wasSurveilled()) {
+                return false;
+            }
+        } else if (property.equals("milledThisTurn")) {
+            if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
+                return false;
+            }
+            if (!card.wasMilled()) {
                 return false;
             }
         } else if (property.startsWith("ControlledByPlayerInTheDirection")) {
@@ -2155,10 +2168,6 @@ public class CardProperty {
                 }
             }
             return new CheckCanPayManaCost().check();
-        } else if (property.equals("surveilledThisTurn")) {
-            if (!card.isSurveilledThisTurn()) {
-                return false;
-            }
         } else {
             // StringType done in CardState
             if (!card.getCurrentState().hasProperty(property, sourceController, source, spellAbility)) {

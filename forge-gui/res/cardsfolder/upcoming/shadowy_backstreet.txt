@@ -1,9 +1,0 @@
-Name:Shadowy Backstreet
-ManaCost:no cost
-Types:Land Plains Swamp
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
-SVar:TrigSurveil:DB$ Surveil | Amount$ 1
-DeckHas:Ability$Surveil|Graveyard
-DeckHints:Ability$Graveyard
-Oracle:({T}: Add {W} or {B}.)\nShadowy Backstreet enters the battlefield tapped.\nWhen Shadowy Backstreet enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

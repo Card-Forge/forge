@@ -1,7 +1,0 @@
-Name:Unscrupulous Agent
-ManaCost:1 B 
-Types:Creature Elf Detective
-PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent exiles a card from their hand.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True 
-Oracle:When Unscrupulous Agent enters the battlefield, target opponent exiles a card from their hand.

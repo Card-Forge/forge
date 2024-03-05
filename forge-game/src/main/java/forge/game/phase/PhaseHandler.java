@@ -281,7 +281,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case MAIN1:
                     {
                         if (playerTurn.isArchenemy()) {
-                            playerTurn.setSchemeInMotion();
+                            playerTurn.setSchemeInMotion(null);
                         }
                         if (playerTurn.hasRadiationEffect()) {
                             handleRadiation();
@@ -374,11 +374,9 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
-                        final CardZoneTable table = new CardZoneTable();
+                        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-                        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-                        moveParams.put(AbilityKey.InternalTriggerTable, table);
+                        AbilityKey.addCardZoneTableParams(moveParams, table);
 
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
@@ -401,9 +399,6 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 514.2
                     // Reset Damage received map
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                        c.onCleanupPhase(playerTurn);
-                    }
-                    for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Graveyard)) {
                         c.onCleanupPhase(playerTurn);
                     }
 
@@ -536,11 +531,10 @@ public class PhaseHandler implements java.io.Serializable {
         int numRad = playerTurn.getCounters(CounterEnumType.RAD);
         if (numRad == 0) playerTurn.removeRadiationEffect();
         else {
-            final CardZoneTable table = new CardZoneTable();
+            final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-            moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-            moveParams.put(AbilityKey.InternalTriggerTable, table);
+            AbilityKey.addCardZoneTableParams(moveParams, table);
+
             final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
             final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa, moveParams);
             game.getAction().reveal(milled, playerTurn, false,
@@ -1241,6 +1235,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
+        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
@@ -1249,6 +1244,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final void endTurnByEffect() {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
+        game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
         onPhaseBegin();
     }
 

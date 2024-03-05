@@ -1,9 +1,0 @@
-Name:Pyrotechnic Performer
-ManaCost:1 R
-Types:Creature Viashino Assassin
-PT:3/2
-K:Disguise:R
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, that creature deals damage equal to its power to each opponent.
-SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X | DamageSource$ TriggeredCard 
-SVar:X:TriggeredCard$CardPower
-Oracle:Disguise {R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhenever Pyrotechnic Performer or another creature you control is turned face up, that creature deals damage equal to its power to each opponent.

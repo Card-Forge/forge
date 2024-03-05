@@ -1,0 +1,8 @@
+Name:Atomize
+ManaCost:2 B G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBProliferate | SpellDescription$ Destroy target nonland permanent.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckHas:Ability$Proliferate
+DeckHints:Ability$Counters & Type$Planeswalker
+Oracle:Destroy target nonland permanent. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

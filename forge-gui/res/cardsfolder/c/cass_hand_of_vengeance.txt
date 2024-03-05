@@ -1,0 +1,11 @@
+Name:Cass, Hand of Vengeance
+ManaCost:2 R W
+Types:Legendary Creature Human Ranger
+PT:4/3
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+enchanted+YouCtrl,Creature.Other+equipped+YouCtrl,Card.Self+equipped,Card.Self+enchanted | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever NICKNAME or another creature you control dies, if it was enchanted or equipped, return any number of Aura cards that were attached to it from your graveyard to the battlefield attached to target creature, then attach any number of Equipment that were attached to it to that creature.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | ChangeType$ Card | ChooseFromDefined$ AttachedTo TriggeredCardLKICopy.Aura | OptionalPrompt$ Select any number of Aura cards that were attached to it | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ Targeted | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ AttachedTo TriggeredCardLKICopy.Equipment | Optional$ True | Defined$ Targeted
+DeckNeeds:Type$Equipment|Aura
+Oracle:Vigilance\nWhenever Cass or another creature you control dies, if it was enchanted or equipped, return any number of Aura cards that were attached to it from your graveyard to the battlefield attached to target creature, then attach any number of Equipment that were attached to it to that creature.

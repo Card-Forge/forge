@@ -1,0 +1,9 @@
+Name:Curie, Emergent Intelligence
+ManaCost:1 U
+Types:Legendary Artifact Creature Robot
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw cards equal to its base power.
+SVar:TrigDraw:DB$ Draw | NumCards$ Count$CardBasePower | Defined$ You
+A:AB$ Clone | Cost$ 1 U Exile<1/Artifact.nonToken+Other+Creature/select another target artifact creature> | AddTriggers$ TrigDamage | AddSVars$ TrigDamage,TrigDraw | Defined$ Exiled | SpellDescription$ NICKNAME becomes a copy of the exiled creature, except it has "Whenever this creature deals combat damage to a player, draw cards equal to its base power."
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw cards equal to its base power.
+Oracle:Whenever Curie, Emergent Intelligence deals combat damage to a player, draw cards equal to its base power.\n{1}{U}, Exile another nontoken artifact creature you control: Curie becomes a copy of the exiled creature, except it has "Whenever this creature deals combat damage to a player, draw cards equal to its base power."

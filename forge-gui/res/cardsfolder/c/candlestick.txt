@@ -1,0 +1,10 @@
+Name:Candlestick
+ManaCost:U
+Types:Artifact Clue Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigAttack | Description$ Equipped creature gets +1/+1 and has "Whenever this creature attacks, surveil 2." (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ Whenever this creature attacks, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+K:Equip:2
+DeckHas:Ability$Surveil|Graveyard|Sacrifice
+Oracle:Equipped creature gets +1/+1 and has "Whenever this creature attacks, surveil 2." (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\n{2}, Sacrifice Candlestick: Draw a card.\nEquip {2}

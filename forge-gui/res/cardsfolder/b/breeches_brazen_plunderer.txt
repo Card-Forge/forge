@@ -11,4 +11,3 @@ SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | Effect
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Pirate
 Oracle:Menace\nWhenever one or more Pirates you control deal damage to your opponents, exile the top card of each of those opponents' libraries. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.\nPartner (You can have two commanders if both have partner.)
-

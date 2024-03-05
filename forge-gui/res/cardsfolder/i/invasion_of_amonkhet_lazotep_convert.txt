@@ -6,8 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
-AlternateMode:DoubleFaced
 DeckHas:Ability$Mill
+AlternateMode:DoubleFaced
 Oracle:(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)\nWhen Invasion of Amonkhet enters the battlefield, each player mills three cards, then each opponent discards a card and you draw a card. (To mill three cards, a player puts the top three cards of their library into their graveyard.)
 
 ALTERNATE

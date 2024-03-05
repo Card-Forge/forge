@@ -1,0 +1,13 @@
+Name:Kellogg, Dangerous Mind
+ManaCost:1 B R
+Types:Legendary Creature Human Mercenary
+PT:3/2
+K:First Strike
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature attacks, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+A:AB$ GainControl | Cost$ Sac<5/Treasure> | ValidTgts$ Creature | LoseControl$ LeavesPlay,LoseControl | SorcerySpeed$ True | SpellDescription$ Gain control of target creature for as long as you control NICKNAME. Activate only as a sorcery.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHints:Type$Treasure
+Oracle:First strike, haste\nWhenever Kellogg, Dangerous Mind attacks, create a Treasure token.\nSacrifice five Treasures: Gain control of target creature for as long as you control Kellogg. Activate only as a sorcery.

@@ -53,8 +53,7 @@ public class CounterEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable();
-        params.put(AbilityKey.InternalTriggerTable, table);
+        final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();
@@ -104,8 +103,8 @@ public class CounterEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtSACard);
             }
         }
-        table.triggerChangesZoneAll(game, sa);
-    } // end counterResolve
+        zoneMovements.triggerChangesZoneAll(game, sa);
+    }
 
     public static boolean checkForConditionWouldDestroy(SpellAbility sa, SpellAbility tgtSA) {
         List<SpellAbility> testChain = Lists.newArrayList();
@@ -266,6 +265,9 @@ public class CounterEffect extends SpellAbilityEffect {
         } else if (destination.equals("Graveyard")) {
             movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
+            if (!c.canExiledBy(srcSA, true)) {
+                return false;
+            }
             movedCard = game.getAction().exile(c, srcSA, params);
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);

@@ -1,0 +1,8 @@
+Name:Automated Assembly Line
+ManaCost:1 W
+Types:Artifact
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerDescription$ Whenever one or more artifact creatures you control deal combat damage to a player, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Token | Cost$ PayEnergy<3> | TokenScript$ c_3_3_a_robot | TokenTapped$ True | SpellDescription$ Create a tapped 3/3 colorless Robot artifact creature token.
+DeckHas:Ability$Token & Type$Robot
+Oracle:Whenever one or more artifact creatures you control deal combat damage to a player, you get {E} (an energy counter).\nPay {E}{E}{E}: Create a tapped 3/3 colorless Robot artifact creature token.

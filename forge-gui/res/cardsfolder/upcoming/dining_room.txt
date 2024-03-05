@@ -1,8 +1,0 @@
-Name:Dining Room
-ManaCost:no cost
-Types:Land
-K:CARDNAME enters the battlefield tapped.
-A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
-A:AB$ Investigate | Cost$ 4 T | SpellDescription$ Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-DeckHints:Ability$Investigate|Token
-Oracle:Dining Room enters the battlefield tapped.\n{T}: Add {R} or {G}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

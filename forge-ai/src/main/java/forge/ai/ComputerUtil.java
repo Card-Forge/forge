@@ -665,8 +665,8 @@ public class ComputerUtil {
         return sacList;
     }
 
-    public static CardCollection chooseCollectEvidence(final Player ai, CostCollectEvidence cost, final Card activate, int amount, SpellAbility sa) {
-        CardCollection typeList = new CardCollection(ai.getCardsIn(ZoneType.Graveyard));
+    public static CardCollection chooseCollectEvidence(final Player ai, CostCollectEvidence cost, final Card activate, int amount, SpellAbility sa, final boolean effect) {
+        CardCollection typeList = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(sa, effect));
 
         if (CardLists.getTotalCMC(typeList) < amount) return null;
 
@@ -692,7 +692,7 @@ public class ComputerUtil {
         return exileList;
     }
 
-    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa) {
+    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa, final boolean effect) {
         CardCollection typeList;
         if (cost.zoneRestriction != 1) {
             typeList = new CardCollection(ai.getGame().getCardsIn(cost.from));
@@ -700,6 +700,7 @@ public class ComputerUtil {
             typeList = new CardCollection(ai.getCardsIn(cost.from));
         }
         typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
+        typeList = CardLists.filter(typeList, CardPredicates.canExiledBy(sa, effect));
 
         // don't exile the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);

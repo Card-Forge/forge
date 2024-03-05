@@ -36,11 +36,8 @@ public class SurveilEffect extends SpellAbilityEffect {
 
         boolean isOptional = sa.hasParam("Optional");
 
-        CardZoneTable table = new CardZoneTable(sa.getLastStateBattlefield(), sa.getLastStateGraveyard());
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {

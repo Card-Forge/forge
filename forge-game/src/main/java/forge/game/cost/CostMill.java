@@ -90,13 +90,10 @@ public class CostMill extends CostPart {
 
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        CardZoneTable table = new CardZoneTable();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, ai.getGame().getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, ai.getGame().getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, ability);
         ability.getPaidHash().put("Milled", true, (CardCollection) ai.mill(decision.c, ZoneType.Graveyard, ability, moveParams));
-        table.triggerChangesZoneAll(ai.getGame(), ability);
+        zoneMovements.triggerChangesZoneAll(ai.getGame(), ability);
         return true;
     }
 

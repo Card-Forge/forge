@@ -1,0 +1,11 @@
+Name:Evidence Examiner
+ManaCost:G U
+Types:Creature Merfolk Detective
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEvidence | TriggerDescription$ At the beginning of combat on your turn, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)
+# Empty Effect for Cost
+SVar:TrigEvidence:AB$ Pump | Cost$ CollectEvidence<4> | AILogic$ Always
+T:Mode$ CollectEvidence | ValidPlayer$ You | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you collect evidence, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Token|Counters & Type$Clue
+Oracle:At the beginning of combat on your turn, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)\nWhenever you collect evidence, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

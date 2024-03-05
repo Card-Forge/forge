@@ -908,10 +908,6 @@ public class Combat {
         return assignedDamage;
     }
 
-    public final CardDamageMap getDamageMap() {
-        return damageMap;
-    }
-
     public void dealAssignedDamage() {
         final Game game = playerWhoAttacks.getGame();
         game.copyLastState();

@@ -1,0 +1,13 @@
+Name:ED-E, Lonesome Eyebot
+ManaCost:3
+Types:Legendary Artifact Creature Robot
+PT:2/1
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPutCounter | CheckSVar$ Y | SVarCompare$ GTX | TriggerZones$ Battlefield | TriggerDescription$ ED-E My Love - Whenever you attack, if the number of attacking creatures is greater than the number of quest counters on CARDNAME, put a quest counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
+A:AB$ Draw | Cost$ 2 Sac<1/NICKNAME> | NumCards$ 1 | SubAbility$ DBDraw | SpellDescription$ Draw a card, then draw an additional card for each quest counter on NICKNAME.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:Y:Count$Valid Creature.attacking+YouCtrl
+SVar:X:Count$CardCounters.QUEST
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Flying\nED-E My Love - Whenever you attack, if the number of attacking creatures is greater than the number of quest counters on ED-E, Lonesome Eyebot, put a quest counter on it.\n{2}, Sacrifice ED-E: Draw a card, then draw an additional card for each quest counter on ED-E.

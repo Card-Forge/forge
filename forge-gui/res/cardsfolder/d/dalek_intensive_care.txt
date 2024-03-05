@@ -1,4 +1,5 @@
 Name:Dalek Intensive Care
+ManaCost:no cost
 Types:Plane The Dalek Asylum
 T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When you planeswalk to CARDNAME and at the beginning of your upkeep, exile a non-Dalek creature you control. If you do, create a 3/3 black Dalek artifact creature token with menace. It gains haste until end of turn.

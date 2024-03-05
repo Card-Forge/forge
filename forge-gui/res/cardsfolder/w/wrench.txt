@@ -1,0 +1,9 @@
+Name:Wrench
+ManaCost:W
+Types:Artifact Clue Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ ABTap | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Equipped creature gets +1/+1 and has vigilance and "{3}, {T}: Tap target creature."
+SVar:ABTap:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+K:Equip:2
+DeckHas:Ability$Sacrifice
+Oracle:Equipped creature gets +1/+1 and has vigilance and "{3}, {T}: Tap target creature."\n{2}, Sacrifice Wrench: Draw a card.\nEquip {2}

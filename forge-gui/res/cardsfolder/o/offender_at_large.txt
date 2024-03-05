@@ -1,0 +1,9 @@
+Name:Offender at Large
+ManaCost:4 R
+Types:Creature Giant Rogue
+PT:5/4
+K:Disguise:4 R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, up to one target creature gets +2/+0 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, up to one target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | NumAtt$ +2
+Oracle:Disguise {4}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Offender at Large enters the battlefield or is turned face up, up to one target creature gets +2/+0 until end of turn.

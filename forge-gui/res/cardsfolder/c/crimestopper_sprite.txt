@@ -1,0 +1,10 @@
+Name:Crimestopper Sprite
+ManaCost:2 U
+Types:Creature Faerie Detective
+PT:2/2
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<6> | Description$ As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature. If evidence was collected, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Choose target creature an opponent controls. | SubAbility$ DBStun
+SVar:DBStun:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | ConditionDefined$ CastSA>Collected | ConditionPresent$ Card
+Oracle:As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)\nFlying\nWhen Crimestopper Sprite enters the battlefield, tap target creature. If evidence was collected, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

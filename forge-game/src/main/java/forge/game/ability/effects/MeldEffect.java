@@ -2,11 +2,13 @@ package forge.game.ability.effects;
 
 import forge.card.CardStateName;
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -14,6 +16,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import java.util.Arrays;
+import java.util.Map;
 
 public class MeldEffect extends SpellAbilityEffect {
     @Override
@@ -36,10 +39,21 @@ public class MeldEffect extends SpellAbilityEffect {
 
         Card secondary = controller.getController().chooseSingleEntityForEffect(field, sa, Localizer.getInstance().getMessage("lblChooseCardToMeld"), null);
 
-        CardCollection exiled = new CardCollection(Arrays.asList(hostCard, secondary));
-        exiled = game.getAction().exile(exiled, sa, null);
-        Card primary = exiled.get(0);
-        secondary = exiled.get(1);
+        CardCollection exiled = CardLists.filter(Arrays.asList(hostCard, secondary), CardPredicates.canExiledBy(sa, true));
+
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+
+        exiled = game.getAction().exile(exiled, sa, moveParams);
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
+
+        if (exiled.size() < 2) {
+            return;
+        }
+
+        Card primary = exiled.get(hostCard);
+        secondary = exiled.get(secondary);
 
         // cards has wrong name in exile
         if (!primary.sharesNameWith(primName) || !secondary.sharesNameWith(secName)) {
@@ -64,10 +78,16 @@ public class MeldEffect extends SpellAbilityEffect {
         primary.setMeldedWith(secondary);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         bf.addToMelded(secondary);
-        Card movedCard = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
+
+        moveParams = AbilityKey.newMap();
+        zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+
+        Card movedCard = game.getAction().moveToPlay(primary, controller, sa, moveParams);
         if (addToCombat(movedCard, sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
+
+        zoneMovements.triggerChangesZoneAll(game, sa);
     }
 }

@@ -5,10 +5,10 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 K:Craft:4 U U ExileCtrlOrGrave<1/Artifact.Other>
-AlternateMode:DoubleFaced
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Mill
-Oracle:When Inverted Iceberg enters the battlefield, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.)\nCraft with artifact {4}{U}{U} ({4}{U}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner’s control. Craft only as a sorcery.)
+AlternateMode:DoubleFaced
+Oracle:When Inverted Iceberg enters the battlefield, mill a card, then draw a card. (To mill a card, put the top card of your library into your graveyard.)\nCraft with artifact {4}{U}{U} ({4}{U}{U}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
 ALTERNATE
 

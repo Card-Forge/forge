@@ -4,15 +4,21 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 import java.util.Map;
 
 public class CostCollectEvidence extends CostPartWithList {
     // CollectEvidence<Amount>
+
+    private static final long serialVersionUID = 1L;
 
     public CostCollectEvidence(final String amount) {
         this.setAmount(amount);
@@ -42,7 +48,7 @@ public class CostCollectEvidence extends CostPartWithList {
 
         // This may need to be updated if we get a card like "Cards in graveyards can't be exiled to pay for costs"
 
-        return CardLists.getTotalCMC(payer.getCardsIn(ZoneType.Graveyard)) >= amount;
+        return CardLists.getTotalCMC(CardLists.filter(payer.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, effect))) >= amount;
     }
 
     @Override
@@ -59,14 +65,21 @@ public class CostCollectEvidence extends CostPartWithList {
     }
 
     @Override
+    protected boolean canPayListAtOnce() { return true; }
+
+    @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, boolean effect) {
-        final Game game = targetCard.getGame();
+        return null;
+    }
+
+    @Override
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        final Game game = payer.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
-        Card newCard = game.getAction().exile(targetCard, null, moveParams);
-        SpellAbilityEffect.handleExiledWith(newCard, ability);
-        return newCard;
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+        CardCollection moved = game.getAction().exile(new CardCollection(targetCards), ability, moveParams);
+        SpellAbilityEffect.handleExiledWith(moved, ability);
+        game.getTriggerHandler().runTrigger(TriggerType.CollectEvidence, AbilityKey.mapFromPlayer(payer), false);
+        return moved;
     }
 }

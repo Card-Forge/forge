@@ -5,8 +5,8 @@ PT:3/3
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 white Pegasus creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_pegasus_flying
-AlternateMode:Adventure
 DeckHas:Ability$Token
+AlternateMode:Adventure
 Oracle:Flying\nAt the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 white Pegasus creature token with flying.
 
 ALTERNATE

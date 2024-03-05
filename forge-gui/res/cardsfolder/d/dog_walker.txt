@@ -1,0 +1,10 @@
+Name:Dog Walker
+ManaCost:R W
+Types:Creature Human Citizen
+PT:3/1
+K:Vigilance
+K:Disguise:RW RW
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, create two tapped 1/1 white Dog creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_dog | TokenOwner$ You | TokenTapped$ True
+DeckHas:Ability$Token & Type$Dog
+Oracle:Vigilance\nDisguise {R/W}{R/W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Dog Walker is turned face up, create two tapped 1/1 white Dog creature tokens.

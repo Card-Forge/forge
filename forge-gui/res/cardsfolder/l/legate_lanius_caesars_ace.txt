@@ -1,0 +1,13 @@
+Name:Legate Lanius, Caesar's Ace
+ManaCost:2 B R
+Types:Legendary Creature Human Soldier
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigRepeatEach | TriggerDescription$ Decimate — When CARDNAME enters the battlefield, each opponent sacrifices a tenth of the creatures they control, rounded up.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | Amount$ X | SacValid$ Creature | Defined$ Remembered
+SVar:X:Count$Valid Creature.RememberedPlayerCtrl/DivideEvenlyUp.10
+T:Mode$ Sacrificed | ValidCard$ Creature.OppCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a creature, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:Decimate — When Legate Lanius enters the battlefield, each opponent sacrifices a tenth of the creatures they control, rounded up.\nWhenever an opponent sacrifices a creature, put a +1/+1 counter on Legate Lanius.

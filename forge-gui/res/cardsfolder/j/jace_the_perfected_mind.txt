@@ -13,4 +13,4 @@ SVar:X:Count$xPaid
 SVar:Z:SVar$X/Times.3
 DeckHas:Ability$Mill
 DeckHints:Ability$Mill
-Oracle:Compleated ({U/P} can be paid with {U} or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Until your next turn, up to one target creature gets -3/-0.\n[−2]: Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.\n[−X]: Target player mills three times X cards.
+Oracle:Compleated ({U/P} can be paid with {U} or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Until your next turn, up to one target creature gets -3/-0.\n[-2]: Target player mills three cards. Then if a graveyard has twenty or more cards in it, you draw three cards. Otherwise, you draw a card.\n[-X]: Target player mills three times X cards.

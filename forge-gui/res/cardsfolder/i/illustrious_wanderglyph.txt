@@ -9,4 +9,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome | TokenOw
 SVar:PlayMain1:TRUE
 DeckHints:Type$Artifact & Type$Creature
 DeckHas:Ability$Token & Type$Gnome
-Oracle:Ascend (If you control ten or more permanents, you get the city’s blessing for the rest of the game.)\nOther artifact creatures you control get +2/+2 as long as you have the city's blessing.\nAt the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nOther artifact creatures you control get +2/+2 as long as you have the city's blessing.\nAt the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.

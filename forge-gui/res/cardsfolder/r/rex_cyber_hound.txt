@@ -1,0 +1,12 @@
+Name:Rex, Cyber-Hound
+ManaCost:1 W U
+Types:Legendary Artifact Creature Robot Dog
+PT:2/2
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they mill two cards and you get {E}{E} (two energy counters).
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 2 | SubAbility$ DBEnergy
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ ChangeZone | Cost$ PayEnergy<2> | SorcerySpeed$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | WithCountersType$ BRAIN | AILogic$ Mairsil | SpellDescription$ Choose target creature card in a graveyard. Exile it with a brain counter on it. Activate only as a sorcery.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.counters_GE1_BRAIN | GainsAbilitiesOfZones$ Exile | Description$ NICKNAME has all activated abilities of all cards in exile with brain counters on them.
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Mill|Dredge
+Oracle:Whenever Rex, Cyber-Hound deals combat damage to a player, they mill two cards and you get {E}{E} (two energy counters).\nPay {E}{E}: Choose target creature card in a graveyard. Exile it with a brain counter on it. Activate only as a sorcery.\nRex has all activated abilities of all cards in exile with brain counters on them.

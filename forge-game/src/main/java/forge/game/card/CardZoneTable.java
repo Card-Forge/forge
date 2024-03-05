@@ -11,6 +11,7 @@ import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameAction;
 import forge.game.ability.AbilityKey;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
@@ -28,12 +29,6 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     private CardCollectionView lastStateBattlefield;
     private CardCollectionView lastStateGraveyard;
     
-    public CardZoneTable(CardZoneTable cardZoneTable) {
-        this.putAll(cardZoneTable);
-        lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
-        lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
-    }
-
     public CardZoneTable() {
         this(null, null);
     }
@@ -41,6 +36,24 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
         setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
         setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
+    }
+
+    public CardZoneTable(CardZoneTable cardZoneTable) {
+        this.putAll(cardZoneTable);
+        lastStateBattlefield = cardZoneTable.getLastStateBattlefield();
+        lastStateGraveyard = cardZoneTable.getLastStateGraveyard();
+    }
+
+    public static CardZoneTable getSimultaneousInstance(SpellAbility sa) {
+        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved
+                && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
+            // if a RE changes the destination zone try to make it simultaneous
+            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
+        }
+        GameAction ga = sa.getHostCard().getGame().getAction();
+        return new CardZoneTable(
+                ga.getLastState(AbilityKey.LastStateBattlefield, sa, null, true),
+                ga.getLastState(AbilityKey.LastStateGraveyard, sa, null, true));
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -85,7 +98,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public void triggerChangesZoneAll(final Game game, final SpellAbility cause) {
         triggerTokenCreatedOnce(game);
-        if (cause != null && cause.isReplacementAbility() && cause.getReplacementEffect().getMode() == ReplacementType.Moved) {
+        if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
             // will be handled by original "cause" instead
             return;
         }
@@ -113,21 +126,25 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null) {
-            if (!containsColumn(destination)) {
-                return allCards;
-            }
+        if (destination != null && !containsColumn(destination)) {
+            return allCards;
         }
         if (origin != null) {
             for (ZoneType z : origin) {
-                CardCollectionView lkiLookup = CardCollection.EMPTY;
-                if (z == ZoneType.Battlefield) {
-                    lkiLookup = lastStateBattlefield;
-                }
                 if (containsRow(z)) {
+                    CardCollectionView lkiLookup = CardCollection.EMPTY;
+                    // CR 603.10a
+                    if (z == ZoneType.Battlefield) {
+                        lkiLookup = lastStateBattlefield;
+                    }
+                    if (z == ZoneType.Graveyard && destination == null) {
+                        lkiLookup = lastStateGraveyard;
+                    }
                     if (destination != null) {
-                        for (Card c : row(z).get(destination)) {
-                            allCards.add(lkiLookup.get(c));
+                        if (row(z).containsKey(destination)) {
+                            for (Card c : row(z).get(destination)) {
+                                allCards.add(lkiLookup.get(c));
+                            }
                         }
                     } else {
                         for (CardCollection cc : row(z).values()) {

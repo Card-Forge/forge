@@ -1,7 +1,0 @@
-Name:Pompous Gadabout
-ManaCost:2 G
-Types:Creature Human Citizen
-PT:4/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ CARDNAME has hexproof as long as it’s your turn.
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.noName | Description$ CARDNAME can’t be blocked by creatures that don’t have a name.
-Oracle:Pompous Gadabout has hexproof as long as it’s your turn.\nPompous Gadabout can’t be blocked by creatures that don’t have a name.

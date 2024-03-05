@@ -62,7 +62,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                     int amt = part.getAbilityAmount(sa);
                     needed += amt;
-                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa);
+                    CardCollection toAdd = ComputerUtil.chooseExileFrom(ai, (CostExile) part, source, amt, sa, true);
                     if (toAdd != null) {
                         payingCards.addAll(toAdd);
                     }

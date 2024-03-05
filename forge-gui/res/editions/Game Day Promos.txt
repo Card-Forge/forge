@@ -10,7 +10,7 @@ ScryfallCode=GDY
 2 R Skyclave Apparition @Mila Pesic
 3 M All-Seeing Arbiter @Nicholas Gregory
 4 R Touch the Spirit Realm @Mila Pesic
-5 R Workshop Warchief @Minard Maxime
+5 R Workshop Warchief @Maxime Minard
 6 M Shivan Devastator @Aldo Domínguez
 7 U Recruitment Officer @Zoltan Boros
 8 R Braids, Arisen Nightmare @Anastasia Balakchina

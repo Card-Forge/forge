@@ -65,15 +65,12 @@ public class ConniveEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : controllers) {
-            CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
+            final CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (!connivers.isEmpty()) {
-                GameEntityCounterTable table = new GameEntityCounterTable();
-                final CardZoneTable triggerList = new CardZoneTable();
-                Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
-                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
+                final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+                final GameEntityCounterTable counterPlacements = new GameEntityCounterTable();
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
@@ -98,12 +95,12 @@ public class ConniveEffect extends SpellAbilityEffect {
                 Card gamec = game.getCardState(conniver);
                 // if the card is not in the game anymore, this might still return true, but it's no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
-                    conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
+                    conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                 }
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                 discard(sa, true, discardedMap, moveParams);
-                table.replaceCounterEffect(game, sa, true);
-                triggerList.triggerChangesZoneAll(game, sa);
+                counterPlacements.replaceCounterEffect(game, sa, true);
+                zoneMovements.triggerChangesZoneAll(game, sa);
             }
         }
     }

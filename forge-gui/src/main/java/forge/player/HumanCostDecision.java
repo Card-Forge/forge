@@ -81,7 +81,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostCollectEvidence cost) {
-        CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
+        CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
         final int total = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         final InputSelectCardsFromList inp =
                 new InputSelectCardsFromList(controller, 0, list.size(), list, ability, total);
@@ -239,6 +239,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostExile cost) {
         if (cost.payCostFromSource()) {
+            if (!source.canExiledBy(ability, isEffect())) {
+                return null;
+            }
             return source.getZone() == player.getZone(cost.from.get(0)) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
         }
 
@@ -274,6 +277,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(list);
         }
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
+        list = CardLists.filter(list, CardPredicates.canExiledBy(ability, isEffect()));
 
         if (totalCMC) {
             int needed = Integer.parseInt(cost.getAmount().split("\\+")[0]);

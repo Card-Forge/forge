@@ -536,11 +536,7 @@ public abstract class SpellAbilityEffect {
             eff.copyChangedTextFrom(card);
         }
 
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa, null);
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card eff, final String zone) {
@@ -628,8 +624,8 @@ public abstract class SpellAbilityEffect {
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
-            if (sa.hasParam("ReplaceDyingRemember")) {
-                effect += " | RememberToEffectSource$ True";
+            if (sa.hasParam("ReplaceDyingExiledWith")) {
+                effect += " | ExiledWithEffectSource$ True";
             }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
@@ -648,22 +644,9 @@ public abstract class SpellAbilityEffect {
                 eff.copyChangedTextFrom(host);
             }
 
-            final GameCommand endEffect = new GameCommand() {
-                private static final long serialVersionUID = -5861759814760561373L;
+            game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
 
-                @Override
-                public void run() {
-                    game.getAction().exile(eff, null, null);
-                }
-            };
-
-            game.getEndOfTurn().addUntil(endEffect);
-
-            // TODO: Add targeting to the effect so it knows who it's dealing with
-            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa, null);
-            eff.updateStateForView();
-            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            game.getAction().moveToCommand(eff, sa);
         }
     }
 
@@ -962,11 +945,17 @@ public abstract class SpellAbilityEffect {
         }
     }
     public static void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        handleExiledWith(movedCard, cause, cause.getHostCard());
+    }
+    public static void handleExiledWith(final Card movedCard, final SpellAbility cause, Card exilingSource) {
         if (movedCard.isToken()) {
             return;
         }
 
-        Card exilingSource = cause.getHostCard();
+        if (cause.hasParam("ExiledWithEffectSource")) {
+            exilingSource = exilingSource.getEffectSource();
+        }
+
         // during replacement LKI might be used
         if (cause.isReplacementAbility() && exilingSource.isLKI()) {
             exilingSource = exilingSource.getGame().getCardState(exilingSource);
@@ -985,10 +974,14 @@ public abstract class SpellAbilityEffect {
         movedCard.setExiledBy(cause.getActivatingPlayer());
     }
 
-    public CardZoneTable getChangeZoneTable(SpellAbility sa, CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        if (sa.isReplacementAbility() && sa.getReplacingObject(AbilityKey.InternalTriggerTable) != null) {
-            return (CardZoneTable) sa.getReplacingObject(AbilityKey.InternalTriggerTable);    
-        }
-        return new CardZoneTable(lastStateBattlefield, lastStateGraveyard);
+    public static GameCommand exileEffectCommand(final Game game, final Card effect) {
+        return new GameCommand() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void run() {
+                game.getAction().exileEffect(effect);
+            }
+        };
     }
 }

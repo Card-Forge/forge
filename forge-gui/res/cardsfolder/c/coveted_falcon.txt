@@ -1,0 +1,17 @@
+Name:Coveted Falcon
+ManaCost:1 U U
+Types:Artifact Creature Bird
+PT:1/4
+K:Flying
+K:Disguise:1 U
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSteal | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, gain control of target permanent you own but don't control.
+SVar:TrigSteal:DB$ GainControl | TgtPrompt$ Choose target permanent you own but don't control | ValidTgts$ Permanent.YouOwn+YouDontCtrl
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDonate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target opponent gains control of any number of target permanents you control. Draw a card for each one they gained control of this way.
+SVar:TrigDonate:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select any number of target permanents you control | TargetMin$ 0 | TargetMax$ X | NewController$ ParentTarget | RememberControlled$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.YouCtrl
+SVar:Y:Remembered$Amount
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Coveted Falcon attacks, gain control of target permanent you own but don't control.\nDisguise {1}{U}\nWhen Coveted Falcon is turned face up, target opponent gains control of any number of target permanents you control. Draw a card for each one they gained control of this way.

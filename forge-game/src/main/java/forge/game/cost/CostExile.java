@@ -152,7 +152,7 @@ public class CostExile extends CostPartWithList {
 
             if (this.getAmount().equals("X")) {
                 String x = chosenX > 0 ? Lang.getNumeral(chosenX) : "any number of";
-                return String.format ("Exile %s %s from your %s", x, desc, origin);
+                return String.format("Exile %s %s from your %s", x, desc, origin);
             }
 
             return String.format("Exile %s from your %s",
@@ -175,8 +175,8 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
         }
 
-        CardCollection list = new CardCollection(zoneRestriction != 1 ? game.getCardsIn(this.from) :
-                payer.getCardsIn(this.from));
+        CardCollection list = CardLists.filter(zoneRestriction != 1 ? game.getCardsIn(this.from) :
+                payer.getCardsIn(this.from), CardPredicates.canExiledBy(ability, effect));
 
         if (this.payCostFromSource()) {
             return list.contains(source);
@@ -216,7 +216,6 @@ public class CostExile extends CostPartWithList {
         }
 
         if (totalCMC) {
-            int needed = Integer.parseInt(this.getAmount().split("\\+")[0]);
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }
@@ -257,9 +256,7 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, table.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, table.getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
+        AbilityKey.addCardZoneTableParams(moveParams, table);
         Card newCard = targetCard.getGame().getAction().exile(targetCard, null, moveParams);
         SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;

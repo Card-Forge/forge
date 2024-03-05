@@ -1,0 +1,12 @@
+Name:Colonel Autumn
+ManaCost:1 W B
+Types:Legendary Creature Human Soldier
+PT:2/3
+K:Lifelink
+K:Exploit
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Legendary+Other | AddKeyword$ Exploit | Description$ Other legendary creatures you control have exploit.
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever a creature you control exploits a creature, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Sacrifice|LifeGain|Counters
+DeckHints:Type$Legendary
+Oracle:Lifelink\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nOther legendary creatures you control have exploit.\nWhenever a creature you control exploits a creature, put a +1/+1 counter on each creature you control.

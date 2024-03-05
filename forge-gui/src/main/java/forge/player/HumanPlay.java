@@ -514,7 +514,7 @@ public class HumanPlay {
         final Game game = hostCard.getGame();
         final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.InternalTriggerTable, table);
+        AbilityKey.addCardZoneTableParams(params, table);
 
         if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
             for (final Card c : cardsToDelve) {
