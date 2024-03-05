@@ -1,12 +1,8 @@
 Name:Cataclysm
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 W W | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
-SVar:ChooseArtf:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Artifact.RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True | Mandatory$ True
-SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True | Mandatory$ True
-SVar:ChooseEnch:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Enchantment.RememberedPlayerCtrl | ChoiceTitle$ Choose an enchantment to keep | SubAbility$ ChooseLand | RememberChosen$ True | Mandatory$ True
-SVar:ChooseLand:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land to keep | RememberChosen$ True | Mandatory$ True
-SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ ChooseCard | Defined$ Player | Choices$ Permanent | ChooseEach$ Artifact & Creature & Enchantment & Land | ControlledByPlayer$ Chooser | Mandatory$ True | Reveal$ True | SubAbility$ SacAllOthers | StackDescription$ SpellDescription | SpellDescription$ Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.
+SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonChosenCard
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
 Oracle:Each player chooses from among the permanents they control an artifact, a creature, an enchantment, and a land, then sacrifices the rest.

@@ -137,16 +137,14 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-            } else if (sa.hasParam("ChooseParty")) {
-                Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
-                for (final String type : partyTypes) {
-                    CardCollection valids = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
-                            CardPredicates.isType(type));
-                    valids.removeAll(chosen);
+            } else if (sa.hasParam("ChooseEach")) {
+                for (final String type : sa.getParam("ChooseEach").split(" & ")) {
+                    CardCollection valids = CardLists.filter(pChoices, CardPredicates.isType(type));
                     if (!valids.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " +
                                 Lang.nounWithNumeralExceptOne(1, type);
-                        Card c = p.getController().chooseSingleEntityForEffect(valids, sa, prompt, true, null);
+                        Card c = p.getController().chooseSingleEntityForEffect(valids, sa, prompt, 
+                            !sa.hasParam("Mandatory"), null);
                         if (c != null) {
                             chosen.add(c);
                         }
