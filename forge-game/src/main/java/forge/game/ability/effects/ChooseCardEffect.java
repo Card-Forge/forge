@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.*;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.game.Direction;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
