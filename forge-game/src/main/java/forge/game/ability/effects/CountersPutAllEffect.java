@@ -45,7 +45,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final CounterType type = CounterType.getType(sa.getParam("CounterType"));
-        final int counterAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("CounterNum", "1"), sa);
+        int counterAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("CounterNum", "1"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final Game game = activator.getGame();
@@ -63,11 +63,13 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
 
         Player placer = activator;
-        boolean placerPerCard = false;
+        String placerPerCard = "";
         if (sa.hasParam("Placer")) {
             final String pstr = sa.getParam("Placer");
-            if (pstr.contains("Controller")) {
-                placerPerCard = true;
+            if (pstr.equals("Controller")) {
+                placerPerCard = "Controller";
+            } else if (pstr.equals("Owner")) {
+                placerPerCard = "Owner";
             } else {
                 placer = AbilityUtils.getDefinedPlayers(host, pstr, sa).get(0);
             }
@@ -75,8 +77,17 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
-            if (placerPerCard) {
+            if (placerPerCard.equals("Controller")) {
                 placer = tgtCard.getController();
+            } else if (placerPerCard.equals("Owner")) {
+                placer = tgtCard.getOwner();
+            }
+            if (sa.hasParam("AmountByChosenMap")) {
+                final String[] parse = sa.getParam("AmountByChosenMap").split(" INDEX ");
+                final int index = parse.length > 1 ? Integer.valueOf(parse[1]) : 0;
+                if (index >= host.getChosenMap().get(placer).size()) continue;
+                final Card chosen = host.getChosenMap().get(placer).get(index);
+                counterAmount = AbilityUtils.xCount(chosen, parse[0], sa);
             }
             tgtCard.addCounter(type, counterAmount, placer, table);
         }
@@ -97,7 +108,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
                     AbilityUtils.calculateAmount(host, sa.getParam("CounterNum2"), sa) : counterAmount;
 
             for (final Card tgtCard : cards) {
-                if (placerPerCard) {
+                if (placerPerCard.equals("Controller")) {
                     placer = tgtCard.getController();
                 }
                 tgtCard.addCounter(type2, counterAmount2, placer, table);

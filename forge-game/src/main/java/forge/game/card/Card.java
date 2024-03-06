@@ -113,6 +113,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
+    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
@@ -1160,6 +1161,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearImprintedCards() {
         imprintedCards = view.clearCards(imprintedCards, TrackableProperty.ImprintedCards);
+    }
+
+    public final void addToChosenMap(final Player p, final CardCollection chosen) {
+        chosenMap.put(p, chosen);
+    }
+    public final Map<Player, CardCollection> getChosenMap() {
+        return chosenMap;
     }
 
     public final CardCollectionView getExiledCards() {
