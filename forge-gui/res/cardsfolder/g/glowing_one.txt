@@ -1,0 +1,10 @@
+Name:Galadhrim Bow
+ManaCost:2 G
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control. Untap that creature.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Reach | Description$ Equipped creature gets +1/+2 and has reach.
+K:Equip:2
+Oracle:Flash\nWhen Galadhrim Bow enters the battlefield, attach it to target creature you control. Untap that creature.\nEquipped creature gets +1/+2 and has reach.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
