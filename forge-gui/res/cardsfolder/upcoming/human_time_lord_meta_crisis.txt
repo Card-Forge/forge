@@ -1,0 +1,12 @@
+Name:Human-Time Lord Meta-Crisis
+ManaCost:no cost
+Types:Phenomenon
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | Execute$ TrigChooseCard | TriggerDescription$ When you encounter CARDNAME, each player chooses one or two creatures they control. Each player creates a token that's a copy of the first creature they chose, except it isn't legendary. Then each player who chose a second creature puts a number of +1/+1 counters on the token they created equal to the power of the second creature they chose. (Then planeswalk away from this phenomenon.)
+SVar:TrigChooseCard:DB$ ChooseCard | Defined$ Player | Choices$ Creature | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose one or two creatures you control | Reveal$ True | MinAmount$ 1 | Amount$ 2 | Mandatory$ True | ChosenMap$ True | SubAbility$ DBClone
+SVar:DBClone:DB$ CopyPermanent | Defined$ ChosenMap | ChosenMapIndex$ 0 | NonLegendary$ True | RememberTokens$ True | SubAbility$ DBPutCountersAll
+SVar:DBPutCountersAll:DB$ PutCounterAll | Placer$ Owner | ValidCards$ Card.IsRemembered | CounterType$ P1P1 | AmountByChosenMap$ Count$CardPower INDEX 1 | SubAbility$ DBPlaneswalk
+SVar:DBPlaneswalk:DB$ Planeswalk | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Legendary
+Oracle:When you encounter Human-Time Lord Meta-Crisis, each player chooses one or two creatures they control. Each player creates a token that's a copy of the first creature they chose, except it isn't legendary. Then each player who chose a second creature puts a number of +1/+1 counters on the token they created equal to the power of the second creature they chose. (Then planeswalk away from this phenomenon.)

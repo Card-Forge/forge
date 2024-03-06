@@ -106,6 +106,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
         boolean useZoneTable = true;
+        boolean chosenMap = "ChosenMap".equals(sa.getParam("Defined"));
         CardZoneTable triggerList = sa.getChangeZoneTable();
         if (triggerList == null) {
             triggerList = new CardZoneTable();
@@ -130,6 +131,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
         List<Player> controllers = Lists.newArrayList();
         if (sa.hasParam("Controller")) {
             controllers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Controller"), sa);
+        } else if (chosenMap) {
+            controllers.addAll(host.getChosenMap().keySet());
         }
         if (controllers.isEmpty()) {
             controllers.add(activator);
@@ -223,6 +226,12 @@ public class CopyPermanentEffect extends TokenEffectBase {
                         }
                     }
                 }
+            } else if (chosenMap) {
+                if (sa.hasParam("ChosenMapIndex")) {
+                    final int index = Integer.valueOf(sa.getParam("ChosenMapIndex"));
+                    if (index >= host.getChosenMap().get(controller).size()) continue;
+                    tgtCards.add(host.getChosenMap().get(controller).get(index));
+                } else tgtCards = host.getChosenMap().get(controller);
             } else {
                 tgtCards = getDefinedCardsOrTargeted(sa);
             }
