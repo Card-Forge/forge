@@ -1,0 +1,10 @@
+Name:Nick Valentine, Private Eye
+ManaCost:2 U
+Types:Legendary Artifact Creature Synth Detective
+PT:2/2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact | Description$ CARDNAME can't be blocked except by artifact creatures.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Artifact+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME or another artifact creature you control dies, you may investigate. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate | Optional$ True
+DeckHints:Type$Artifact
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
+Oracle:Nick Valentine, Private Eye can't be blocked except by artifact creatures.\nWhenever Nick Valentine or another artifact creature you control dies, you may investigate. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

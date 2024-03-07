@@ -195,10 +195,8 @@ public class StaticAbilityCantAttackBlock {
         if (!stAb.matchesValidParam("ValidBlockerRelative", blocker, attacker)) {
             return false;
         }
-        if (blocker != null) {
-            if (!stAb.matchesValidParam("ValidDefender", blocker.getController())) {
-                return false;
-            }
+        if (blocker == null || !stAb.matchesValidParam("ValidDefender", blocker.getController())) {
+            return false;
         }
         return true;
     }
