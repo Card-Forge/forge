@@ -1,5 +1,5 @@
 Name:Butch DeLoria, Tunnel Snake
-ManaCost:3
+ManaCost:1 B
 Types:Legendary Creature Human Rogue
 PT:2/2
 K:Menace

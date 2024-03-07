@@ -4,7 +4,7 @@ Types:Creature Phyrexian Horror
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ Corrupted — When CARDNAME enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Creature | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3
-SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:X:PlayerCountOpponents$HighestCounters.Poison
 DeckHints:Keyword$Toxic|Infect
 DeckHas:Ability$Sacrifice
 Oracle:Corrupted — When Ravenous Necrotitan enters the battlefield, sacrifice a creature unless an opponent has three or more poison counters.

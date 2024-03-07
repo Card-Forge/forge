@@ -8,6 +8,6 @@ SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ SeekNonLand,ConjurePlains
 SVar:SeekNonLand:DB$ Seek | Type$ Card.nonLand | StackDescription$ Seek a nonland card.
 SVar:ConjurePlains:DB$ MakeCard | Conjure$ True | Name$ Plains | Zone$ Hand | StackDescription$ Conjure a card named Plains into your hand.
-SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:X:PlayerCountOpponents$HighestCounters.Poison
 DeckHints:Keyword$Toxic|Infect
 Oracle:Toxic 1\nCorrupted - When Norn's Fetchling enters the battlefield, conjure a card named Plains into your hand. If an opponent has three or more poison counters, you may seek a nonland card instead.
