@@ -3,8 +3,8 @@
 Name=Assassin
 Title=Phyrexian Assassins
 Difficulty=easy
-Description=Based on the preconstructed deck "Assassins"
-Icon=Dungeon Crawling Black.jpg
+Description=Based on Urza's Destiny/Theme deck "Assassin". A black theme deck with a creature destruction theme. - Send in a swarm of small, black creatures backed up with creature destruction and discard effects to put a hit on the opposition and keep them on the run.
+Icon=Assassin.jpg
 Deck Type=constructed
 [Main]
 1 Attrition|UDS

@@ -3,8 +3,8 @@
 Name=Black2
 Title=Knights of Yawgmoth
 Difficulty=medium
-Description=Black deck
-Icon=Dungeon Crawling Black.jpg
+Description=A black deck that uses removal, life drain, and powerful enchantments to control the game and punish the opponent.
+Icon=Yawgmoth.jpg
 Deck Type=constructed
 [Main]
 4 Corrupt|USG

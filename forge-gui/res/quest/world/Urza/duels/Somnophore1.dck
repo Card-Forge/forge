@@ -3,8 +3,8 @@
 Name=Somnophore1
 Title=Somnophore
 Difficulty=easy
-Description=Blue deck
-Icon=Dungeon Crawling Blue.jpg
+Description=A Blue deck that uses flying creatures, counterspells, and enchantments to control the game and exploit synergies.
+Icon=Blue.jpg
 Deck Type=constructed
 [Main]
 4 Cloud of Faeries|ULG

@@ -3,8 +3,8 @@
 Name=Black4
 Title=Yawgmoth
 Difficulty=very hard
-Description=Black deck
-Icon=Dungeon Crawling Black.jpg
+Description=A black and white deck that uses fast mana, discard, and powerful enchantments to control the game and drain the opponent’s life.
+Icon=Yawgmoth.jpg
 Deck Type=constructed
 [Main]
 4 Academy Rector|UDS

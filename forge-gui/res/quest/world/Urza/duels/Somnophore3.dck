@@ -3,8 +3,8 @@
 Name=Somnophore3
 Title=Somnophore
 Difficulty=hard
-Description=Blue deck
-Icon=Dungeon Crawling Blue.jpg
+Description=A Blue deck that uses flying creatures, counterspells, and enchantments to control the game and exploit synergies.
+Icon=Blue.jpg
 Deck Type=constructed
 [Main]
 1 Aura Thief|UDS

@@ -3,8 +3,8 @@
 Name=Fiendish Nature
 Title=Fiendish Nature
 Difficulty=easy
-Description=Based on the preconstructed deck "Fiendish Nature"
-Icon=Dungeon Crawling Black.jpg
+Description=Based on Urza's Destiny/Theme deck "Fiendish Nature". Fiendish Nature is a black/green aggro theme deck with an "When this is put into a graveyard from play" or "When this dies" theme. - Uses fast mana sources to power a horde of green uglies with attitude, while a touch of black regrowth keeps the hits coming.
+Icon=KingKong.jpg
 Deck Type=constructed
 [Main]
 1 Ancient Silverback|UDS

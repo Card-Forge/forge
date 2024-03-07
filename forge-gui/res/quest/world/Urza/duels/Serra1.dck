@@ -3,8 +3,8 @@
 Name=Serra1
 Title=Serra
 Difficulty=easy
-Description=White deck
-Icon=Dungeon Crawling White.jpg
+Description=A white deck that uses flying creatures, life gain, and enchantments to control the game and outlast the opponent.
+Icon=Serra's Legacy.jpg
 Deck Type=constructed
 [Main]
 2 Angelic Curator|ULG
