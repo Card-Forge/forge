@@ -59,3 +59,6 @@ ScryfallCode=PMEI
 56 R Pyromancer's Gauntlet @Magali Villeneuve
 57 R Culling the Weak @Scott M. Fischer
 58 R Winged Boots @Filipe Pagliuso
+59 R Goro-Goro, Disciple of Ryusei @Mike Jordana
+60 C Talruum Champion @Pete Venters
+61 C Shield Wall @Scott Kirschner
