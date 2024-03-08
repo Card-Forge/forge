@@ -1,6 +1,6 @@
 [metadata]
 Code=CLU
-Date=2024-02-09
+Date=2024-02-23
 Name=Ravnica: Clue Edition
 Type=Draft
 ScryfallCode=CLU

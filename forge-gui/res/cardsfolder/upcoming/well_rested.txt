@@ -1,0 +1,11 @@
+Name:Well Rested
+ManaCost:1 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ UntapTrigger | AddSVar$ DBPutCounter,DBGainLife,DBDraw | Description$ Enchanted creature has "Whenever this creature becomes untapped, put two +1/+1 counters on it, then you gain 2 life and draw a card. This ability triggers only once each turn."
+SVar:UntapTrigger:Mode$ Untaps | ValidCard$ Card.Self | Execute$ DBPutCounter | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever this creature becomes untapped, put two +1/+1 counters on it, then you gain 2 life and draw a card. This ability triggers only once each turn.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Enchant creature\nEnchanted creature has "Whenever this creature becomes untapped, put two +1/+1 counters on it, then you gain 2 life and draw a card. This ability triggers only once each turn."

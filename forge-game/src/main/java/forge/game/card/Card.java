@@ -113,6 +113,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
     private List<Card> blockedThisTurn = Lists.newArrayList();
     private List<Card> blockedByThisTurn = Lists.newArrayList();
+    private Map<Player, CardCollection> chosenMap = Maps.newHashMap();
 
     private CardCollection untilLeavesBattlefield = new CardCollection();
 
@@ -216,7 +217,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean renowned;
     private boolean solved = false;
-    private boolean suspected = false;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -1161,6 +1161,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearImprintedCards() {
         imprintedCards = view.clearCards(imprintedCards, TrackableProperty.ImprintedCards);
+    }
+
+    public final void addToChosenMap(final Player p, final CardCollection chosen) {
+        chosenMap.put(p, chosen);
+    }
+    public final Map<Player, CardCollection> getChosenMap() {
+        return chosenMap;
     }
 
     public final CardCollectionView getExiledCards() {
@@ -2664,7 +2671,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (solved) {
             sb.append("Solved\r\n");
         }
-        if (suspected) {
+        if (isSuspected()) {
             sb.append("Suspected\r\n");
         }
         if (manifested) {
@@ -6343,14 +6350,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isSuspected() {
-        return suspected;
+        return suspectedTimestamp != null;
     }
 
     public final boolean setSuspected(final boolean suspected) {
         if (suspected && StaticAbilityCantBeSuspected.cantBeSuspected(this)) {
             return false;
         }
-        this.suspected = suspected;
         if (suspected) {
             if (suspectedTimestamp != null) {
                 // 701.58d A suspected permanent can’t become suspected again.
@@ -6365,11 +6371,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
                 suspectedStatic = StaticAbility.create(effect, this, getCurrentState(), false);
             }
-            this.addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
+            addChangedCardTraits(null, null, null, null, ImmutableList.of(suspectedStatic), false, false, suspectedTimestamp, 0);
         } else {
             if (suspectedTimestamp != null) {
                 removeChangedCardKeywords(suspectedTimestamp, 0);
-                this.removeChangedCardTraits(suspectedTimestamp, 0);
+                removeChangedCardTraits(suspectedTimestamp, 0);
             }
             suspectedTimestamp = null;
         }

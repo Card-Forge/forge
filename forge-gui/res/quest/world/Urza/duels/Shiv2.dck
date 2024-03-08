@@ -3,8 +3,8 @@
 Name=Shiv2
 Title=Shiv
 Difficulty=medium
-Description=Red deck
-Icon=Dungeon Crawling Red.jpg
+Description=A Red deck that uses fast and aggressive creatures, direct damage, and land destruction to pressure the opponent.
+Icon=Dracur.jpg
 Deck Type=constructed
 [Main]
 4 Arc Lightning|USG

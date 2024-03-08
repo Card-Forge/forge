@@ -3,8 +3,8 @@
 Name=Serra3
 Title=Serra
 Difficulty=hard
-Description=White deck
-Icon=Dungeon Crawling White.jpg
+Description=A white deck that uses enchantments, board sweepers, and powerful creatures to control the game and gain life.
+Icon=Serra's Legacy.jpg
 Deck Type=constructed
 [Main]
 4 Academy Rector|UDS

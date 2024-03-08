@@ -3,8 +3,8 @@
 Name=Black1
 Title=Knights of Yawgmoth
 Difficulty=easy
-Description=Black deck
-Icon=Dungeon Crawling Black.jpg
+Description=A black deck that uses removal, life drain, and powerful creatures to overwhelm the opponent.
+Icon=Yawgmoth.jpg
 Deck Type=constructed
 [Main]
 3 Abyssal Horror|USG

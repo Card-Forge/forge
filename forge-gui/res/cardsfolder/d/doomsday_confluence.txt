@@ -1,7 +1,7 @@
 Name:Doomsday Confluence
 ManaCost:X X B
 Types:Sorcery
-A:SP$ Charm | CharmNum$ X | Choices$ DBSac,DBToken,DBDiscard | CanRepeatModes$ True
+A:SP$ Charm | CharmNum$ X | Announce$ X | Choices$ DBSac,DBToken,DBDiscard | CanRepeatModes$ True
 SVar:DBSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature.nonArtifact | SpellDescription$ Each player sacrifices a nonartifact creature.
 SVar:DBToken:DB$ Token | TokenScript$ b_3_3_a_dalek_menace | SpellDescription$ Create a 3/3 black Dalek artifact creature token with menace.
 SVar:DBDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose | SpellDescription$ Each opponent discards a card.

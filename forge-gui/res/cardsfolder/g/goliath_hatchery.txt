@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | E
 SVar:TrigChooseCard:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ AffectedX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:X:PlayerCountOpponents$HighestPoisonCounters
+SVar:X:PlayerCountOpponents$HighestCounters.Poison
 SVar:AffectedX:Count$Valid Card.ChosenCard$TotalValue Toxic
 DeckHas:Ability$Token & Type$Beast|Phyrexian
 DeckHints:Keyword$Toxic|Infect

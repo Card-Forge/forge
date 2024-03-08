@@ -3,8 +3,8 @@
 Name=Battle Surge
 Title=Battle Surge
 Difficulty=easy
-Description=Based on the preconstructed deck "Battle Surge"
-Icon=Dungeon Crawling Black.jpg
+Description=Based on Urza's Destiny/Theme deck "Battle Surge". A blue/red theme deck with a haste theme. - Uses blue stalling tactics to hold off opponents while a host of red creatures without summoning sickness mount a decisive attack.
+Icon=Goblin Lord.jpg
 Deck Type=constructed
 [Main]
 1 Aether Sting|UDS

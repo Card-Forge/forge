@@ -453,29 +453,24 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
         cards.addAll(CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards"))));
 
-        //newCards.addAll(InventoryItem data.readObject("cards"))));
-        data.storeObject("newCards", newCards.toFlatList().toArray(new InventoryItem[0]));
-        data.storeObject("autoSellCards", autoSellCards.toFlatList().toArray(new InventoryItem[0]));
-        data.storeObject("noSellCards", noSellCards.toFlatList().toArray(new InventoryItem[0]));
-
-//        if (data.containsKey("newCards")) {
-//            InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
-//            for (InventoryItem item : items){
-//                newCards.add((PaperCard)item);
-//            }
-//        }
-//        if (data.containsKey("noSellCards")) {
-//            PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
-//            for (PaperCard item : items){
-//                noSellCards.add(item);
-//            }
-//        }
-//        if (data.containsKey("autoSellCards")) {
-//            PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-//            for (PaperCard item : items){
-//                autoSellCards.add(item);
-//            }
-//        }
+        if (data.containsKey("newCards")) {
+            InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
+            for (InventoryItem item : items){
+                newCards.add((PaperCard)item);
+            }
+        }
+        if (data.containsKey("noSellCards")) {
+            PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
+            for (PaperCard item : items){
+                noSellCards.add(item);
+            }
+        }
+        if (data.containsKey("autoSellCards")) {
+            PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
+            for (PaperCard item : items){
+                autoSellCards.add(item);
+            }
+        }
 
         fantasyMode = data.containsKey("fantasyMode") && data.readBool("fantasyMode");
         announceFantasy = data.containsKey("announceFantasy") && data.readBool("announceFantasy");

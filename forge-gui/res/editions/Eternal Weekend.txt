@@ -1,10 +1,12 @@
 [metadata]
 Code=PEWK
 Date=2022-11-26
-Name=Eternal Weekend 2022
+Name=Eternal Weekend
 Type=Promo
 ScryfallCode=PEWK
 
 [cards]
 1 R Gush @Sam White
 2 R Ponder @Julie Dillon
+2023a R Dragon's Rage Channeler @Patrik Hell
+2023b M Mental Misstep @Kai Carpenter
