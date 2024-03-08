@@ -2,5 +2,5 @@ Name:Escaped Shapeshifter
 ManaCost:3 U U
 Types:Creature Shapeshifter
 PT:3/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike & Trample & ProtectionColor | SharedKeywordsZone$ Battlefield | SharedRestrictions$ Creature.notnamed Escaped Shapeshifter+OppCtrl | Description$ As long as an opponent controls a creature with flying not named Escaped Shapeshifter, CARDNAME has flying. The same is true for first strike, trample, and protection from any color.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike & Trample & ProtectionColor | SharedKeywordsZone$ Battlefield | SharedRestrictions$ Creature.!namedEscaped Shapeshifter+OppCtrl | Description$ As long as an opponent controls a creature with flying not named Escaped Shapeshifter, CARDNAME has flying. The same is true for first strike, trample, and protection from any color.
 Oracle:As long as an opponent controls a creature with flying not named Escaped Shapeshifter, Escaped Shapeshifter has flying. The same is true for first strike, trample, and protection from any color.
