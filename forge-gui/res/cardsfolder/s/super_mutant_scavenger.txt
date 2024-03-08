@@ -1,0 +1,11 @@
+Name:Super Mutant Scavenger
+ManaCost:4 G
+Types:Creature Mutant Warrior
+PT:5/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield or dies, return up to one target Aura or Equipment card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, return up to one target Aura or Equipment card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Aura.YouOwn,Equipment.YouOwn | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose up to one target Aura or Equipment card in your graveyard
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Aura|Equipment
+Oracle:Trample\nWhen Super Mutant Scavenger enters the battlefield or dies, return up to one target Aura or Equipment card from your graveyard to your hand.
