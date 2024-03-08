@@ -1,7 +1,7 @@
 [metadata]
 Code=PEWK
 Date=2022-11-26
-Name=Eternal Weekend 2022
+Name=Eternal Weekend
 Type=Promo
 ScryfallCode=PEWK
 
