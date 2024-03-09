@@ -235,8 +235,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 ev.receiver.toString(), Lang.nounWithNumeralExceptOne(String.valueOf(change), radCtr),
                 ev.source.toString());
         else message = localizer.getMessage("lblLogPlayerRadRemove",
-                ev.receiver.toString(), Lang.nounWithNumeralExceptOne(String.valueOf(Math.abs(change)), radCtr),
-                ev.source.toString());
+                ev.receiver.toString(), Lang.nounWithNumeralExceptOne(String.valueOf(Math.abs(change)), radCtr));
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
