@@ -5,7 +5,6 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -16,16 +15,18 @@ public class RadiationEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = host.getGame();
-        final int toAdd = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Add", "0"), sa);
-        final int toRem = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Remove", "0"), sa);
+        final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "0"), sa);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) continue;
 
-            if (toAdd >= 1) p.addCounter(CounterEnumType.RAD, toAdd, player, table);
-            else if (toRem >= 1) p.subtractCounter(CounterEnumType.RAD, toRem);
+            if (num >= 1) {
+                p.addRadCounters(num, player, table);
+            } else {
+                p.removeRadCounters(-num);
+            }
         }
         table.replaceCounterEffect(game, sa, true);
     }

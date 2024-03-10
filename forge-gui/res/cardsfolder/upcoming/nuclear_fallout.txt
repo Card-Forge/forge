@@ -2,7 +2,7 @@ Name:Nuclear Fallout
 ManaCost:X B B
 Types:Sorcery
 A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -Y | NumDef$ -Y | SubAbility$ DBRadiation | SpellDescription$ Each creature gets twice -X/-X until end of turn
-SVar:DBRadiation:DB$ Radiation | Defined$ Player | Add$ X | SpellDescription$ Each player gets X rad counters.
+SVar:DBRadiation:DB$ Radiation | Defined$ Player | Num$ X | SpellDescription$ Each player gets X rad counters.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice
 Oracle:Each creature gets twice -X/-X until end of turn. Each player gets X rad counters.

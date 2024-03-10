@@ -955,11 +955,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         addCounter(CounterEnumType.RAD, num, source, table);
     }
     public final void removeRadCounters(final int num) {
-        int oldRad = getCounters(CounterEnumType.RAD);
-        if (oldRad != 0) subtractCounter(CounterEnumType.RAD, num);
-
-        int newRad = getCounters(CounterEnumType.RAD);
-        if (newRad == 0) removeRadiationEffect();
+        subtractCounter(CounterEnumType.RAD, num);
     }
 
     // TODO Merge These calls into the primary counter calls
