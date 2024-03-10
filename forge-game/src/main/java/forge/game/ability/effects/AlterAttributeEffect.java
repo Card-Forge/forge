@@ -49,6 +49,12 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         altered = c.setSuspected(activate);
                         break;
 
+                    case "Saddle":
+                    case "Saddled":
+                        // currently clean up in Card manually
+                        altered = c.setSaddled(activate);
+                        break;
+
                         // Other attributes: renown, monstrous, suspected, etc
 
                     default:
