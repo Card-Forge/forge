@@ -2420,6 +2420,44 @@ public class GameAction {
         }
     }
 
+    public CardCollection mill(final PlayerCollection millers, final int numCards, final ZoneType destination, final SpellAbility sa, final Map<AbilityKey, Object> moveParams) {
+        final boolean reveal = sa != null && !sa.hasParam("NoReveal");
+        final boolean showRevealDialog = sa != null && sa.hasParam("ShowMilledCards");
+
+        final CardCollection milled = new CardCollection();
+
+        for (final Player p : millers) {
+            if (!p.isInGame()) {
+                continue;
+            }
+
+            final CardCollectionView milledPlayer = p.mill(numCards, destination, sa, moveParams);
+            milled.addAll(milledPlayer);
+
+            // Reveal the milled cards, so players don't have to manually inspect the
+            // graveyard to figure out which ones were milled.
+            if (reveal) { // do not reveal when exiling face down
+                String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
+                        Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
+                if (showRevealDialog) {
+                    final String message = Localizer.getInstance().getMessage("lblMilledCards");
+                    final boolean addSuffix = !toZoneStr.equals("");
+                    game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
+                }
+                game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
+                        Lang.joinHomogenous(milled) + toZoneStr + ".");
+            }
+        }
+
+        if (!milled.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cards, milled);
+            game.getTriggerHandler().runTrigger(TriggerType.MilledAll, runParams, false);
+        }
+
+        return milled;
+    }
+
     public void dealDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
             final GameEntityCounterTable counterTable, final SpellAbility cause) {
         // Clear assigned damage if is combat

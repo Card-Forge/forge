@@ -1,12 +1,11 @@
 package forge.game.ability.effects;
 
 import forge.game.Game;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
+import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -24,9 +23,6 @@ public class MillEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-        final boolean facedown = sa.hasParam("ExileFaceDown");
-        final boolean reveal = !sa.hasParam("NoReveal");
-        final boolean showRevealDialog = sa.hasParam("ShowMilledCards");
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             source.clearRemembered();
@@ -37,51 +33,31 @@ public class MillEffect extends SpellAbilityEffect {
             destination = ZoneType.Graveyard;
         }
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
+        final PlayerCollection millers = getTargetPlayers(sa);
 
-        for (final Player p : getTargetPlayers(sa)) {
-            if (!p.isInGame()) {
-                continue;
-            }
-
-            String toZoneStr = destination.equals(ZoneType.Graveyard) ? "" : " (" +
-                    Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
-            if (sa.hasParam("Optional")) {
+        if (sa.hasParam("Optional")) {
+            final PlayerCollection toRemove = new PlayerCollection();
+            for (Player p : millers) {
                 String d = destination.equals(ZoneType.Graveyard) ? "" : " (" + destination.getTranslatedName() + ")";
                 final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().
                         getMessage("lblDoYouWantToMill", Lang.nounWithNumeral(numCards, "card"), d));
                 // CR 701.13b
                 if (numCards > p.getZone(ZoneType.Library).size() || !p.getController().confirmAction(sa, null, prompt, null)) {
-                    continue;
+                    toRemove.add(p);
                 }
             }
-            final CardCollectionView milled = p.mill(numCards, destination, sa, moveParams);
-            // Reveal the milled cards, so players don't have to manually inspect the
-            // graveyard to figure out which ones were milled.
-            if (!facedown && reveal) { // do not reveal when exiling face down
-                if (showRevealDialog) {
-                    final String message = Localizer.getInstance().getMessage("lblMilledCards");
-                    final boolean addSuffix = !toZoneStr.equals("");
-                    game.getAction().reveal(milled, destination, p, false, message, addSuffix);
-                }
-                p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
-                        Lang.joinHomogenous(milled) + toZoneStr + ".");
-            }
-            if (destination.equals(ZoneType.Exile)) {
-                for (final Card c : milled) {
-                    handleExiledWith(c, sa);
-                    if (facedown) {
-                        c.turnFaceDown(true);
-                    }
-                }
-            }
-            if (sa.hasParam("RememberMilled")) {
-                source.addRemembered(milled);
-            }
-            if (sa.hasParam("Imprint")) {
-                source.addImprintedCards(milled);
-            }
+            millers.removeAll(toRemove);
+        }
+
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        final CardZoneTable table = AbilityKey.addCardZoneTableParams(moveParams, sa);
+        CardCollection milled = game.getAction().mill(millers, numCards, destination, sa, moveParams);
+
+        if (sa.hasParam("RememberMilled")) {
+            sa.getHostCard().addRemembered(milled);
+        }
+        if (sa.hasParam("Imprint")) {
+            sa.getHostCard().addImprintedCards(milled);
         }
 
         // run trigger if something got milled
@@ -120,8 +96,6 @@ public class MillEffect extends SpellAbilityEffect {
         sb.append(optional ? "may " : "");
         if ((dest == null) || dest.equals(ZoneType.Graveyard)) {
             sb.append("mill");
-        } else if (dest.equals(ZoneType.Exile)) {
-            sb.append("exile");
         } else if (dest.equals(ZoneType.Ante)) {
             sb.append("ante");
         }

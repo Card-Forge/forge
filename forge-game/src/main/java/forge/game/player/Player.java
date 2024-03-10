@@ -1643,12 +1643,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (Card m : milled) {
             Card moved = game.getAction().moveTo(destination, m, sa, params);
             moved.setMilled(true);
+
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+            runParams.put(AbilityKey.Card, m);
+            game.getTriggerHandler().runTrigger(TriggerType.Milled, runParams, false);
         }
 
-        // MilledAll trigger
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-        runParams.put(AbilityKey.Cards, milled);
-        game.getTriggerHandler().runTrigger(TriggerType.MilledAll, runParams, false);
+        if (!milled.isEmpty()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+            runParams.put(AbilityKey.Cards, milled);
+            game.getTriggerHandler().runTrigger(TriggerType.MilledOnce, runParams, false);
+        }
 
         return milled;
     }
