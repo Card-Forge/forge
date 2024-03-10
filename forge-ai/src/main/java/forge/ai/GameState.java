@@ -1157,7 +1157,7 @@ public abstract class GameState {
                         // (will be overridden later, so the actual value shouldn't matter)
 
                         //FIXME it shouldn't be able to attach itself
-                        c.setEntityAttachedTo(CardFactory.copyCard(c, true));
+                        c.setEntityAttachedTo(new CardCopyService(c).copyCard(true));
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {

@@ -65,6 +65,8 @@ public class HumanPlay {
     public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
+        // Should I be storing state here? It should be the same as last stored state though?
+
         Card source = sa.getHostCard();
         sa.setActivatingPlayer(p);
 
@@ -114,6 +116,7 @@ public class HumanPlay {
                     rollback.addMayLookTemp(p);
                 }
             }
+
             return false;
         }
         return true;
@@ -327,8 +330,7 @@ public class HumanPlay {
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
                     }
                 }
-            }
-            else if (part instanceof CostPutCardToLib) {
+            } else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
                 final boolean sameZone = ((CostPutCardToLib) part).isSameZone();

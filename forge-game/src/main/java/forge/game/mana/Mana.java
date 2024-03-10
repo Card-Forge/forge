@@ -20,7 +20,7 @@ package forge.game.mana;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 
@@ -89,7 +89,7 @@ public class Mana {
     public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
         this.color = color;
         this.manaAbility = manaAbility;
-        this.sourceCard = source.isInPlay() ? CardUtil.getLKICopy(source) : source.getGame().getChangeZoneLKIInfo(source);
+        this.sourceCard = source.isInPlay() ? CardCopyService.getLKICopy(source) : source.getGame().getChangeZoneLKIInfo(source);
     }
 
     @Override

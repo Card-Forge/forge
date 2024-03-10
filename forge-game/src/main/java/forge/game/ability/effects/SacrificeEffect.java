@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import forge.card.CardType;
+import forge.game.card.*;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,13 +18,6 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;

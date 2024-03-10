@@ -35,16 +35,12 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
-import forge.game.CardTraitPredicates;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameLogEntryType;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.event.GameEventSpellAbilityCast;
@@ -345,7 +341,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
 
         if (sp.isSpell() && !sp.isCopied()) {
-            final Card lki = CardUtil.getLKICopy(sp.getHostCard());
+            final Card lki = CardCopyService.getLKICopy(sp.getHostCard());
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(lki);
             sp.getActivatingPlayer().addSpellCastThisTurn();

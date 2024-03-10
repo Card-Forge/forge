@@ -2302,7 +2302,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
 
-        final Card cpy = CardUtil.getLKICopy(c);
+        final Card cpy = CardCopyService.getLKICopy(c);
         sacrificedThisTurn.add(cpy);
 
         // Run triggers
@@ -3738,7 +3738,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addCycled(SpellAbility sp) {
         cycledThisTurn++;
 
-        Map<AbilityKey, Object> cycleParams = AbilityKey.mapFromCard(CardUtil.getLKICopy(game.getCardState(sp.getHostCard())));
+        Map<AbilityKey, Object> cycleParams = AbilityKey.mapFromCard(CardCopyService.getLKICopy(game.getCardState(sp.getHostCard())));
         cycleParams.put(AbilityKey.Cause, sp);
         cycleParams.put(AbilityKey.Player, this);
         cycleParams.put(AbilityKey.FirstTime, cycledThisTurn == 1);
@@ -3780,7 +3780,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (Card c : game.getCardsInOwnedBy(z, this)) {
                 if (!c.isRealFaceDown()) continue;
 
-                Card lki = CardUtil.getLKICopy(c);
+                Card lki = CardCopyService.getLKICopy(c);
                 lki.forceTurnFaceUp();
                 lki.setZone(c.getZone());
                 revealCards.add(lki);

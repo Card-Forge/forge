@@ -18,7 +18,7 @@ import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -86,7 +86,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             final Card card = Card.fromPaperCard(paper, ai);
 
             if (rules.getSplitType() == CardSplitType.Split) {
-                Card copy = CardUtil.getLKICopy(card);
+                Card copy = CardCopyService.getLKICopy(card);
                 // for calcing i need only one split side
                 if (isOther) {
                     copy.getCurrentState().copyFrom(card.getState(CardStateName.RightSplit), true);

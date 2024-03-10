@@ -103,7 +103,7 @@ public class GameAction {
             return c;
         }
         if (zoneFrom == null && !c.isToken()) {
-            zoneTo.add(c, position, CardUtil.getLKICopy(c));
+            zoneTo.add(c, position, CardCopyService.getLKICopy(c));
             checkStaticAbilities();
             game.getTriggerHandler().registerActiveTrigger(c, true);
             game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
@@ -204,7 +204,7 @@ public class GameAction {
             copied = c;
 
             if (lastKnownInfo == null) {
-                lastKnownInfo = CardUtil.getLKICopy(c);
+                lastKnownInfo = CardCopyService.getLKICopy(c);
             }
 
             if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
@@ -227,7 +227,7 @@ public class GameAction {
             }
 
             if (lastKnownInfo == null) {
-                lastKnownInfo = CardUtil.getLKICopy(c);
+                lastKnownInfo = CardCopyService.getLKICopy(c);
             }
 
             // LKI is only needed when something is moved from the battlefield.
@@ -240,7 +240,7 @@ public class GameAction {
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
                 copied = c;
             } else {
-                copied = CardFactory.copyCard(c, false);
+                copied = new CardCopyService(c).copyCard(false);
             }
 
             copied.setTimestamp(c.getTimestamp());
@@ -529,7 +529,7 @@ public class GameAction {
                     zoneTo.add(copied, position, toBattlefield ? null : lastKnownInfo); // the modified state of the card is also reported here (e.g. for Morbid + Awaken)
                 } else {
                     storeChangesZoneAll(card, zoneFrom, zoneTo, params);
-                    zoneTo.add(card, position, CardUtil.getLKICopy(card));
+                    zoneTo.add(card, position, CardCopyService.getLKICopy(card));
                     card.setState(CardStateName.Original, false);
                     card.setBackSide(false);
                     card.updateStateForView();
@@ -652,7 +652,7 @@ public class GameAction {
 
         // rule 504.6: reveal a face-down card leaving the stack
         if (zoneFrom != null && zoneTo != null && zoneFrom.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield) && wasFacedown) {
-            Card revealLKI = CardUtil.getLKICopy(c);
+            Card revealLKI = CardCopyService.getLKICopy(c);
             revealLKI.forceTurnFaceUp();
             reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card moves from the stack: ");
         }
@@ -683,7 +683,7 @@ public class GameAction {
             }
             // Reveal if face-down
             if (wasFacedown) {
-                Card revealLKI = CardUtil.getLKICopy(c);
+                Card revealLKI = CardCopyService.getLKICopy(c);
                 revealLKI.forceTurnFaceUp();
 
                 reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card leaves the battlefield: ");
@@ -969,7 +969,7 @@ public class GameAction {
                 lki = lastBattlefield.get(idx);
             }
             if (lki == null) {
-                lki = CardUtil.getLKICopy(c);
+                lki = CardCopyService.getLKICopy(c);
             }
             game.addChangeZoneLKIInfo(lki);
             if (lki.isInPlay()) {

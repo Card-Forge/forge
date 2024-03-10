@@ -1465,7 +1465,7 @@ public class SpecialCardAi {
                     Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
-                            final Card copy = CardUtil.getLKICopy(card);
+                            final Card copy = CardCopyService.getLKICopy(card);
                             ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
                             return copy.getNetToughness() > 0;
                         }

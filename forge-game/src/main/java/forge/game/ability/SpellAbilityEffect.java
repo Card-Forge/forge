@@ -382,7 +382,7 @@ public abstract class SpellAbilityEffect {
         }
         delTrig.append("| TriggerDescription$ ").append(desc);
 
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), CardUtil.getLKICopy(sa.getHostCard()), intrinsic);
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), CardCopyService.getLKICopy(sa.getHostCard()), intrinsic);
         long ts = sa.getHostCard().getGame().getNextTimestamp();
         for (final Card c : crds) {
             trig.addRemembered(c);
@@ -732,7 +732,7 @@ public abstract class SpellAbilityEffect {
 
         final Card lki;
         if (sa.hasParam("ReturnAbility")) {
-            lki = CardUtil.getLKICopy(hostCard);
+            lki = CardCopyService.getLKICopy(hostCard);
             lki.clearControllers();
             lki.setOwner(sa.getActivatingPlayer());
         } else {

@@ -406,7 +406,7 @@ public class SpecialAiLogic {
         // returning true means preferring Haste, returning false means preferring a +1/+1 counter
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        final Card copy = CardUtil.getLKICopy(host);
+        final Card copy = CardCopyService.getLKICopy(host);
         copy.setLastKnownZone(player.getZone(ZoneType.Battlefield));
 
         // check state it would have on the battlefield
