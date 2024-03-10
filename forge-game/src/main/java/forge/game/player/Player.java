@@ -865,17 +865,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int newValue = addAmount + oldValue;
         this.setCounters(counterType, newValue, source, fireEvents);
 
-        if (counterType.is(CounterEnumType.RAD)) {
-            if (newValue > 0) {
-                String setCode = null;
-                if (params.containsKey(AbilityKey.Cause)) {
-                    SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
-                    setCode = cause.getHostCard().getSetCode();
-                }
-                createRadiationEffect(setCode);
-            } else {
-                removeRadiationEffect();
+        if (counterType.is(CounterEnumType.RAD) && newValue > 0) {
+            String setCode = null;
+            if (params.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
+                setCode = cause.getHostCard().getSetCode();
             }
+            createRadiationEffect(setCode);
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
@@ -942,6 +938,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                 getGame().fireEvent(new GameEventPlayerRadiation(this, source, num - old));
             }
         }
+
+        if (counterType.is(CounterEnumType.RAD) && num <= 0) {
+            removeRadiationEffect();
+        }
     }
 
     @Override
@@ -949,6 +949,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         counters = allCounters;
         view.updateCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
+
+        // create Radiation Effect for GameState
+        if (counters.getOrDefault(CounterType.get(CounterEnumType.RAD), 0) > 0) {
+            this.createRadiationEffect(null);
+        } else {
+            this.removeRadiationEffect();
+        }
     }
 
     public final void addRadCounters(final int num, final Player source, GameEntityCounterTable table) {
