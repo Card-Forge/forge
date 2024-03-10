@@ -1,0 +1,10 @@
+Name:Paladin Elizabeth Taggerdy
+ManaCost:1 R W
+Types:Legendary Creature Human Knight
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigDraw | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, draw a card, then you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is CARDNAME's power.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature.YouCtrl+cmcLEX | Origin$ Hand | Tapped$ True | Attacking$ True | Destination$ Battlefield | TgtPrompt$ Select target creature card in your hand with mana value less or equal to this creatures power
+SVar:X:Count$CardPower
+SVar:HasAttackEffect:TRUE
+Oracle:Battalion — Whenever Paladin Elizabeth Taggerdy and at least two other creatures attack, draw a card, then you may put a creature card with mana value X or less from your hand onto the battlefield tapped and attacking, where X is Paladin Elizabeth Taggerdy's power.

@@ -1,0 +1,11 @@
+Name:The Master, Transcendent
+ManaCost:1 B G U
+Types:Legendary Artifact Creature Mutant
+PT:2/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerDescription$ When CARDNAME enters the battlefield, target player gets two rad counters.
+SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Num$ 2
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.milledThisTurn | TgtPrompt$ Select target creature in a graveyard that was milled this turn | AnimateSubAbility$ Animate | SpellDescription$ Put target creature card in a graveyard that was milled this turn onto the battlefield under your control. It's a green Mutant with base power and toughness 3/3. (It loses its other colors and creature types.)
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Mutant | Colors$ Green | OverwriteColors$ True | Power$ 3 | Toughness$ 3 | RemoveCreatureTypes$ True | Duration$ Permanent 
+DeckHas:Ability$Mill
+DeckHints:Ability$Mill
+Oracle:When The Master, Transcendent enters the battlefield, target player gets two rad counters.\n{T}: Put target creature card in a graveyard that was milled this turn onto the battlefield under your control. It's a green Mutant with base power and toughness 3/3. (It loses its other colors and creature types.)
