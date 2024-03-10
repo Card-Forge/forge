@@ -6,7 +6,7 @@ K:Flying
 K:etbCounter:P1P1:5
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage, remove that many +1/+1 counters it, then give each player a rad counter for each +1/+1 counter removed this way.
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y | RememberRemoved$ True | SubAbility$ DBRadiation
-SVar:DBRadiation:DB$ Radiation | Defined$ Player | Add$ Y
+SVar:DBRadiation:DB$ Radiation | Defined$ Player | Num$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters

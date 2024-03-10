@@ -640,7 +640,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return -1;
         }
         cnt -= lostEnergy;
-        this.setCounters(CounterEnumType.ENERGY, cnt, true);
+        this.setCounters(CounterEnumType.ENERGY, cnt, null, true);
         return cnt;
     }
 
@@ -863,7 +863,16 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final int oldValue = getCounters(counterType);
         final int newValue = addAmount + oldValue;
-        this.setCounters(counterType, newValue, fireEvents);
+        this.setCounters(counterType, newValue, source, fireEvents);
+
+        if (counterType.is(CounterEnumType.RAD) && newValue > 0) {
+            String setCode = null;
+            if (params.containsKey(AbilityKey.Cause)) {
+                SpellAbility cause = (SpellAbility) params.get(AbilityKey.Cause);
+                setCode = cause.getHostCard().getSetCode();
+            }
+            createRadiationEffect(setCode);
+        }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Source, source);
@@ -892,7 +901,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final int delta = oldValue - newValue;
         if (delta == 0) { return; }
 
-        setCounters(counterName, newValue, true);
+        setCounters(counterName, newValue, null, true);
 
         /* TODO Run triggers when something cares
         int curCounters = oldValue;
@@ -913,16 +922,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
     }
 
-    public void setCounters(final CounterEnumType counterType, final Integer num, boolean fireEvents) {
-        this.setCounters(CounterType.get(counterType), num, fireEvents);
+    public void setCounters(final CounterEnumType counterType, final Integer num, Player source, boolean fireEvents) {
+        this.setCounters(CounterType.get(counterType), num, source, fireEvents);
     }
 
-    public void setCounters(final CounterType counterType, final Integer num, boolean fireEvents) {
+    public void setCounters(final CounterType counterType, final Integer num, Player source, boolean fireEvents) {
         Integer old = getCounters(counterType);
         setCounters(counterType, num);
         view.updateCounters(this);
         if (fireEvents) {
             getGame().fireEvent(new GameEventPlayerCounters(this, counterType, old, num));
+            if (counterType.is(CounterEnumType.POISON)) {
+                getGame().fireEvent(new GameEventPlayerPoisoned(this, source, old, num - old));
+            } else if (counterType.is(CounterEnumType.RAD)) {
+                getGame().fireEvent(new GameEventPlayerRadiation(this, source, num - old));
+            }
+        }
+
+        if (counterType.is(CounterEnumType.RAD) && num <= 0) {
+            removeRadiationEffect();
         }
     }
 
@@ -931,18 +949,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         counters = allCounters;
         view.updateCounters(this);
         getGame().fireEvent(new GameEventPlayerCounters(this, null, 0, 0));
+
+        // create Radiation Effect for GameState
+        if (counters.getOrDefault(CounterType.get(CounterEnumType.RAD), 0) > 0) {
+            this.createRadiationEffect(null);
+        } else {
+            this.removeRadiationEffect();
+        }
     }
 
-    public final void addRadCounters(final int num, final Card source, GameEntityCounterTable table) {
-        addCounter(CounterEnumType.RAD, num, source.getController(), table);
+    public final void addRadCounters(final int num, final Player source, GameEntityCounterTable table) {
+        addCounter(CounterEnumType.RAD, num, source, table);
     }
-    public final void removeRadCounters(final int num, final Card source) {
-        int oldRad = getCounters(CounterEnumType.RAD);
-        if (oldRad != 0) subtractCounter(CounterEnumType.RAD, num);
-
-        int newRad = getCounters(CounterEnumType.RAD);
-        if (newRad == 0) removeRadiationEffect();
-        if (oldRad != newRad) game.fireEvent(new GameEventPlayerRadiation(this, source, newRad - oldRad));
+    public final void removeRadCounters(final int num) {
+        subtractCounter(CounterEnumType.RAD, num);
     }
 
     // TODO Merge These calls into the primary counter calls
@@ -950,25 +970,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         return getCounters(CounterEnumType.POISON);
     }
     public final void setPoisonCounters(final int num, Player source) {
-        int oldPoison = getCounters(CounterEnumType.POISON);
-        setCounters(CounterEnumType.POISON, num, true);
-        game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
+        setCounters(CounterEnumType.POISON, num, source, true);
     }
     public final void addPoisonCounters(final int num, final Player source, GameEntityCounterTable table) {
-        int oldPoison = getCounters(CounterEnumType.POISON);
         addCounter(CounterEnumType.POISON, num, source, table);
-
-        if (oldPoison != getCounters(CounterEnumType.POISON)) {
-            game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
-        }
     }
     public final void removePoisonCounters(final int num, final Player source) {
-        int oldPoison = getCounters(CounterEnumType.POISON);
         subtractCounter(CounterEnumType.POISON, num);
-
-        if (oldPoison != getCounters(CounterEnumType.POISON)) {
-            game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
-        }
     }
     // ================ POISON Merged =================================
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
@@ -3453,12 +3461,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             radiationEffect.setImmutable(true);
             radiationEffect.setImageKey("t:radiation");
             radiationEffect.setName("Radiation");
-            radiationEffect.setSetCode(setCode);
-            String desc = "Mode$ Continuous | Affected$ Card.Self | Description$ At the beginning of your precombat " +
-                    "main phase, if you have any rad counters, mill that many cards. For each nonland card milled " +
-                    "this way, you lose 1 life and a rad counter.";
-            StaticAbility st = StaticAbility.create(desc, radiationEffect, radiationEffect.getCurrentState(), true);
-            radiationEffect.addStaticAbility(st);
+            if (setCode != null) {
+                radiationEffect.setSetCode(setCode);
+            }
+
+            String trigStr = "Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | TriggerDescription$ " +
+            "At the beginning of your precombat main phase, if you have any rad counters, mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter.";
+
+            Trigger tr = TriggerHandler.parseTrigger(trigStr, radiationEffect, true);
+            SpellAbility sa = AbilityFactory.getAbility("DB$ InternalRadiation", radiationEffect);
+            tr.setOverridingAbility(sa);
+
+            radiationEffect.addTrigger(tr);
             radiationEffect.updateStateForView();
         }
         com.add(radiationEffect);

@@ -17,7 +17,6 @@
  */
 package forge.game.phase;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -43,8 +42,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
-import forge.util.Lang;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -282,9 +279,6 @@ public class PhaseHandler implements java.io.Serializable {
                     {
                         if (playerTurn.isArchenemy()) {
                             playerTurn.setSchemeInMotion(null);
-                        }
-                        if (playerTurn.hasRadiationEffect()) {
-                            handleRadiation();
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
@@ -524,35 +518,6 @@ public class PhaseHandler implements java.io.Serializable {
                 game.fireEvent(new GameEventTurnEnded());
                 break;
             default: // no action
-        }
-    }
-
-    private void handleRadiation() {
-        int numRad = playerTurn.getCounters(CounterEnumType.RAD);
-        if (numRad == 0) playerTurn.removeRadiationEffect();
-        else {
-            final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            AbilityKey.addCardZoneTableParams(moveParams, table);
-
-            final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
-            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa, moveParams);
-            game.getAction().reveal(milled, playerTurn, false,
-                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn), false);
-            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
-                    Lang.joinHomogenous(milled) + ".");
-            table.triggerChangesZoneAll(game, sa);
-            int n = CardLists.filter(milled, Predicates.not(CardPredicates.Presets.LANDS)).size();
-            final Map<Player, Integer> lossMap = Maps.newHashMap();
-            final int lost = playerTurn.loseLife(n, false, false);
-            if (lost > 0) {
-                lossMap.put(playerTurn, lost);
-            }
-            if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
-            }
-            playerTurn.removeRadCounters(n, playerTurn.getRadiationEffect());
         }
     }
 

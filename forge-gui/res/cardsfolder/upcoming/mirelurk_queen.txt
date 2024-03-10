@@ -4,7 +4,7 @@ Types:Creature Crab Mutant
 PT:4/4
 K:Vigilance
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerDescription$ When CARDNAME enters the battlefield, target player gets two rad counters.
-SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Add$ 2
+SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Num$ 2
 T:Mode$ MilledAll | ValidPlayer$ Player | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more nonland cards are milled, draw a card, then put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1

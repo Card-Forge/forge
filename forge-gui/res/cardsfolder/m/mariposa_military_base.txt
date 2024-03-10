@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:DBTap:Optional
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | SubAbility$ DBRadiation | SpellDescription$ You may have CARDNAME enter the battlefield tapped. If you do, you get two rad counters.
-SVar:DBRadiation:DB$ Radiation | Defined$ You | Add$ 2
+SVar:DBRadiation:DB$ Radiation | Defined$ You | Num$ 2
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each rad counter you have.
 SVar:X:Count$YourCountersRAD
