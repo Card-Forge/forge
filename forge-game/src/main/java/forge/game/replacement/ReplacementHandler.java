@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -41,12 +42,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
@@ -96,7 +91,7 @@ public class ReplacementHandler {
 
             // Rule 614.12 Enter the Battlefield Replacement Effects look at what the card would be on the battlefield
             affectedCard = (Card) runParams.get(AbilityKey.Affected);
-            affectedLKI = CardUtil.getLKICopy(affectedCard);
+            affectedLKI = CardCopyService.getLKICopy(affectedCard);
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
 
             // need to apply Counters to check its future state on the battlefield
@@ -172,7 +167,7 @@ public class ReplacementHandler {
                    affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
                 }
                 runParams.put(AbilityKey.Affected, affectedCard);
-                runParams.put(AbilityKey.NewCard, CardUtil.getLKICopy(affectedLKI));
+                runParams.put(AbilityKey.NewCard, CardCopyService.getLKICopy(affectedLKI));
             }
             game.getAction().checkStaticAbilities(false);
         }

@@ -2,7 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtil;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -12,7 +12,7 @@ public class CloakAi extends ManifestBaseAi {
     protected boolean shouldApply(final Card card, final Player ai, final SpellAbility sa) {
         // check to ensure that there are no replacement effects that prevent creatures ETBing from library
         // (e.g. Grafdigger's Cage)
-        Card topCopy = CardUtil.getLKICopy(card);
+        Card topCopy = CardCopyService.getLKICopy(card);
         topCopy.turnFaceDownNoUpdate();
         topCopy.setCloaked(true);
 

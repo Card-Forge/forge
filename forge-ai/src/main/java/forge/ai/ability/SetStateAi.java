@@ -11,13 +11,7 @@ import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -141,7 +135,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         // need a copy for evaluation
-        Card transformed = CardUtil.getLKICopy(card);
+        Card transformed = CardCopyService.getLKICopy(card);
         transformed.getCurrentState().copyFrom(card.getAlternateState(), true);
         transformed.updateStateForView();
 
@@ -182,7 +176,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         // need a copy for evaluation
-        Card transformed = CardUtil.getLKICopy(card);
+        Card transformed = CardCopyService.getLKICopy(card);
         if (!card.isFaceDown()) {
             transformed.turnFaceDown(true);
         } else {

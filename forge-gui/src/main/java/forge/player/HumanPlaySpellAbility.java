@@ -174,6 +174,7 @@ public class HumanPlaySpellAbility {
             } else {
                 GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
             }
+
             if (!refreeze) {
                 game.getStack().unfreezeStack();
             }

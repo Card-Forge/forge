@@ -420,7 +420,7 @@ public class AnimateAi extends SpellAbilityAi {
     }
 
     public static Card becomeAnimated(final Card card, final SpellAbility sa) {
-        final Card copy = CardUtil.getLKICopy(card);
+        final Card copy = CardCopyService.getLKICopy(card);
         becomeAnimated(copy, card.hasSickness(), sa);
         return copy;
     }

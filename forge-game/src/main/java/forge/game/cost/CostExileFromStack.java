@@ -22,12 +22,7 @@ import java.util.Map;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -112,7 +107,7 @@ public class CostExileFromStack extends CostPart {
         Game game = ai.getGame();
         CardCollection list = new CardCollection();
         for (final SpellAbility sa : decision.sp) {
-            ability.addCostToHashList(CardUtil.getLKICopy(sa.getHostCard()), "Exiled", true);
+            ability.addCostToHashList(CardCopyService.getLKICopy(sa.getHostCard()), "Exiled", true);
             SpellAbilityStackInstance si = game.getStack().getInstanceMatchingSpellAbilityID(sa);
             if (si != null) {
                 game.getStack().remove(si);

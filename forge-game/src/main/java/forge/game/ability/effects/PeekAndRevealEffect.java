@@ -8,11 +8,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
@@ -101,19 +97,19 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 if (rememberRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
                     for (Card c : revealableCards) {
-                        source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
+                        source.addRemembered(CardCopyService.getLKICopy(c, cachedMap));
                     }
                 }
                 if (imprintRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
                     for (Card c : revealableCards) {
-                        source.addImprintedCard(CardUtil.getLKICopy(c, cachedMap));
+                        source.addImprintedCard(CardCopyService.getLKICopy(c, cachedMap));
                     }
                 }
             } else if (sa.hasParam("RememberPeeked")) {
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card c : revealableCards) {
-                    source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
+                    source.addRemembered(CardCopyService.getLKICopy(c, cachedMap));
                 }
             }
         }

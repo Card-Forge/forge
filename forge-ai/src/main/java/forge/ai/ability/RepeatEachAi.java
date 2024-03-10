@@ -9,11 +9,8 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -84,7 +81,7 @@ public class RepeatEachAi extends SpellAbilityAi {
 
             boolean hitOpp = false;
             // need a copy for source so YouCtrl can be faked
-            final Card sourceLKI = CardUtil.getLKICopy(source);
+            final Card sourceLKI = CardCopyService.getLKICopy(source);
 
             // check if any opponent is affected
             for (final Player opp : aiPlayer.getOpponents()) {

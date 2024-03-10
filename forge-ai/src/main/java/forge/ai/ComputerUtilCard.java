@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Function;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.card.mana.ManaCost;
+import forge.game.card.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -28,14 +29,6 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactory;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -1757,7 +1750,7 @@ public class ComputerUtilCard {
      */
     public static Card getPumpedCreature(final Player ai, final SpellAbility sa,
                                          final Card c, int toughness, int power, final List<String> keywords) {
-        Card pumped = CardFactory.copyCard(c, false);
+        Card pumped = new CardCopyService(c).copyCard(false);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
         final List<String> kws = Lists.newArrayList();

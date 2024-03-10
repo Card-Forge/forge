@@ -798,8 +798,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(CardUtil.getLKICopy(a, lkiCache));
-                a.addBlockedByThisTurn(CardUtil.getLKICopy(b, lkiCache));
+                b.addBlockedThisTurn(CardCopyService.getLKICopy(a, lkiCache));
+                a.addBlockedByThisTurn(CardCopyService.getLKICopy(b, lkiCache));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);

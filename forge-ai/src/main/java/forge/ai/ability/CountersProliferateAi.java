@@ -14,11 +14,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.GameEntity;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -151,7 +147,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 return (T)c;
             }
 
-            final Card lki = CardUtil.getLKICopy(c);
+            final Card lki = CardCopyService.getLKICopy(c);
             // update all the counters there
             boolean hasNegative = false;
             for (final CounterType ct : c.getCounters().keySet()) {

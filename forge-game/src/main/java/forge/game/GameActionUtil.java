@@ -276,7 +276,7 @@ public final class GameActionUtil {
                     Zone oldZone = source.getLastKnownZone();
                     Card blitzCopy = source;
                     if (!source.isLKI()) {
-                        blitzCopy = CardUtil.getLKICopy(source);
+                        blitzCopy = CardCopyService.getLKICopy(source);
                     }
                     blitzCopy.setLastKnownZone(game.getStackZone());
                     lkicheck = true;

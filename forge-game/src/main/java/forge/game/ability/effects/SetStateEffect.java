@@ -109,13 +109,13 @@ public class SetStateEffect extends SpellAbilityEffect {
                         }
                     }
                     if (hasNonPermanent) {
-                        Card lki = CardUtil.getLKICopy(nonPermanentCard);
+                        Card lki = CardCopyService.getLKICopy(nonPermanentCard);
                         lki.forceTurnFaceUp();
                         game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
                         continue;
                     }
                 } else if (!gameCard.getState(CardStateName.Original).getType().isPermanent()) {
-                    Card lki = CardUtil.getLKICopy(gameCard);
+                    Card lki = CardCopyService.getLKICopy(gameCard);
                     lki.forceTurnFaceUp();
                     game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
 

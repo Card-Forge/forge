@@ -2327,7 +2327,7 @@ public class ComputerUtilCombat {
         if (original.isTransformable() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
-                    Card transformed = CardUtil.getLKICopy(original);
+                    Card transformed = CardCopyService.getLKICopy(original);
                     transformed.getCurrentState().copyFrom(original.getAlternateState(), true);
                     transformed.updateStateForView();
                     return transformed;

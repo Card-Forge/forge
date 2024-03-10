@@ -21,7 +21,7 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
@@ -125,7 +125,7 @@ public class TriggerDamageDone extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         // TODO try to reuse LKI of CardDamageHistory.registerDamage
-        sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
+        sa.setTriggeringObject(AbilityKey.Source, CardCopyService.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(
             runParams,

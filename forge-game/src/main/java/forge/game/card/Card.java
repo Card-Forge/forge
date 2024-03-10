@@ -7246,7 +7246,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // if Card is Facedown, need to check if MayPlay still applies
             if (isFaceDown()) {
                 lkicheck = true;
-                source = CardUtil.getLKICopy(source);
+                source = CardCopyService.getLKICopy(source);
                 source.forceTurnFaceUp();
             }
 
@@ -7282,7 +7282,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 LandAbility la = new LandAbility(this, player, null);
                 la.setCardState(modal);
 
-                Card source = CardUtil.getLKICopy(this);
+                Card source = CardCopyService.getLKICopy(this);
                 boolean lkicheck = true;
 
                 // if Card is Facedown, need to check if MayPlay still applies

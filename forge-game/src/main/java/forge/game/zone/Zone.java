@@ -31,10 +31,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.GameType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
@@ -293,7 +290,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public Zone getLKICopy(Map<Integer, Card> cachedMap) {
         Zone result = new Zone(zoneType, game);
 
-        result.setCards(CardUtil.getLKICopyList(getCards(), cachedMap));
+        result.setCards(CardCopyService.getLKICopyList(getCards(), cachedMap));
 
         return result;
     }
@@ -304,6 +301,6 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (zt == zoneType) {
             return;
         }
-        cardsAddedThisTurn.add(zt, CardUtil.getLKICopy(c));
+        cardsAddedThisTurn.add(zt, CardCopyService.getLKICopy(c));
     }
 }

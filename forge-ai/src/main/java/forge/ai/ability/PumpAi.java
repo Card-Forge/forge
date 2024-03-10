@@ -182,7 +182,7 @@ public class PumpAi extends PumpAiBase {
                                 return false;
                             }
 
-                            final Card srcCardCpy = CardUtil.getLKICopy(card);
+                            final Card srcCardCpy = CardCopyService.getLKICopy(card);
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
@@ -231,7 +231,7 @@ public class PumpAi extends PumpAiBase {
                                     return false;
                                 }
 
-                                final Card srcCardCpy = CardUtil.getLKICopy(card);
+                                final Card srcCardCpy = CardCopyService.getLKICopy(card);
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 

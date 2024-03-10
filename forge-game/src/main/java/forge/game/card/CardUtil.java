@@ -18,12 +18,10 @@
 package forge.game.card;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.ImageKeys;
@@ -33,7 +31,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -43,8 +40,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
-import io.sentry.Breadcrumb;
-import io.sentry.Sentry;
 
 public final class CardUtil {
     // disable instantiation
@@ -68,7 +63,7 @@ public final class CardUtil {
     public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(
             "walk", "cycling", "offering").build();
 
-    public static final boolean isKeywordModifiable(final String kw) {
+    public static boolean isKeywordModifiable(final String kw) {
         for (final String modKw : modifiableKeywords) {
             if (kw.startsWith(modKw)) {
                 return true;
@@ -141,227 +136,6 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
-    }
-
-    public static List<Card> getLKICopyList(final Iterable<Card> in, Map<Integer, Card> cachedMap) {
-        if (in == null) {
-            return null;
-        }
-        List<Card> result = Lists.newArrayList();
-        for (final Card c : in) {
-            result.add(getLKICopy(c, cachedMap));
-        }
-        return result;
-    }
-
-    public static GameEntity getLKICopy(final GameEntity in, Map<Integer, Card> cachedMap) {
-        if (in instanceof Card) {
-            return getLKICopy((Card)in, cachedMap);
-        }
-        return in;
-    }
-    /**
-     * @param in  a Card to copy.
-     * @return a copy of C with LastKnownInfo stuff retained.
-     */
-    public static Card getLKICopy(final Card in) {
-        if (in == null) {
-            return null;
-        }
-        return getLKICopy(in, Maps.newHashMap());
-    }
-    public static Card getLKICopy(final Card in, Map<Integer, Card> cachedMap) {
-        if (in == null) {
-            return null;
-        }
-        Card cachedCard = cachedMap.get(in.getId());
-        if (cachedCard != null) {
-            return cachedCard;
-        }
-        String msg = "CardUtil:getLKICopy copy object";
-
-        Breadcrumb bread = new Breadcrumb(msg);
-        bread.setData("Card", in.getName());
-        bread.setData("CardState", in.getCurrentStateName().toString());
-        bread.setData("Player", in.getController().getName());
-        Sentry.addBreadcrumb(bread, in);
-
-        final Card newCopy = new Card(in.getId(), in.getPaperCard(), in.getGame(), null);
-        cachedMap.put(in.getId(), newCopy);
-        newCopy.setSetCode(in.getSetCode());
-        newCopy.setOwner(in.getOwner());
-        newCopy.setController(in.getController(), 0);
-        newCopy.setCommander(in.isCommander());
-
-        newCopy.setRules(in.getRules());
-        
-        // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
-        // (e.g. Scrap Trawler + transformed Harvest Hand)
-        newCopy.setLKICMC(in.getCMC());
-        // used for the purpose of cards that care about the zone the card was known to be in last
-        newCopy.setLastKnownZone(in.getLastKnownZone());
-        // copy EffectSource for description
-        newCopy.setEffectSource(getLKICopy(in.getEffectSource(), cachedMap));
-
-        if (in.isFlipCard()) {
-            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.Flipped, false);
-            newCopy.getState(CardStateName.Flipped).copyFrom(in.getState(CardStateName.Flipped), true);
-        } else if (in.isTransformable()) {
-            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.Transformed, false);
-            newCopy.getState(CardStateName.Transformed).copyFrom(in.getState(CardStateName.Transformed), true);
-        } else if (in.isAdventureCard()) {
-            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.Adventure, false);
-            newCopy.getState(CardStateName.Adventure).copyFrom(in.getState(CardStateName.Adventure), true);
-        } else if (in.isSplitCard()) {
-            newCopy.getState(CardStateName.Original).copyFrom(in.getState(CardStateName.Original), true);
-            newCopy.addAlternateState(CardStateName.LeftSplit, false);
-            newCopy.getState(CardStateName.LeftSplit).copyFrom(in.getState(CardStateName.LeftSplit), true);
-            newCopy.addAlternateState(CardStateName.RightSplit, false);
-            newCopy.getState(CardStateName.RightSplit).copyFrom(in.getState(CardStateName.RightSplit), true);
-        } else {
-            newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
-        }
-        newCopy.setFlipped(in.isFlipped());
-        newCopy.setBackSide(in.isBackSide());
-        if (in.isTransformed()) {
-            newCopy.incrementTransformedTimestamp();
-        }
-        if (newCopy.hasAlternateState()) {
-            newCopy.setState(in.getCurrentStateName(), false, true);
-        }
-        if (in.isFaceDown()) {
-            newCopy.turnFaceDownNoUpdate();
-            newCopy.setType(new CardType(in.getFaceDownState().getType()));
-        }
-        // prevent StackDescription from revealing face
-        newCopy.updateStateForView();
-
-        /*
-        if (in.isCloned()) {
-            newCopy.addAlternateState(CardStateName.Cloner, false);
-            newCopy.getState(CardStateName.Cloner).copyFrom(in.getState(CardStateName.Cloner), true);
-        }
-        */
-
-        newCopy.setToken(in.isToken());
-        newCopy.setCopiedSpell(in.isCopiedSpell());
-        newCopy.setImmutable(in.isImmutable());
-        newCopy.setEmblem(in.isEmblem());
-
-        // lock in the current P/T
-        newCopy.setBasePower(in.getCurrentPower());
-        newCopy.setBaseToughness(in.getCurrentToughness());
-
-        // printed P/T
-        newCopy.setBasePowerString(in.getCurrentState().getBasePowerString());
-        newCopy.setBaseToughnessString(in.getCurrentState().getBaseToughnessString());
-
-        // extra copy PT boost
-        newCopy.setPTBoost(in.getPTBoostTable());
-
-        newCopy.setCounters(Maps.newHashMap(in.getCounters()));
-
-        newCopy.setTributed(in.isTributed());
-        newCopy.setMonstrous(in.isMonstrous());
-        newCopy.setRenowned(in.isRenowned());
-        newCopy.setSolved(in.isSolved());
-        newCopy.setSuspectedTimestamp(in.getSuspectedTimestamp());
-
-        newCopy.setColor(in.getColor().getColor());
-        newCopy.setPhasedOut(in.getPhasedOut());
-
-        newCopy.setTapped(in.isTapped());
-
-        newCopy.setDamageHistory(in.getDamageHistory());
-        newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
-
-        // these are LKI already
-        newCopy.getBlockedThisTurn().addAll(in.getBlockedThisTurn());
-        newCopy.getBlockedByThisTurn().addAll(in.getBlockedByThisTurn());
-
-        newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
-        newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
-
-        newCopy.setCopiedPermanent(in.getCopiedPermanent());
-
-        newCopy.setHaunting(in.getHaunting());
-        for (final Card haunter : in.getHauntedBy()) {
-            newCopy.addHauntedBy(haunter, false);
-        }
-
-        newCopy.setIntensity(in.getIntensity(false));
-        newCopy.setPerpetual(in);
-
-        newCopy.addRemembered(in.getRemembered());
-        newCopy.addImprintedCards(in.getImprintedCards());
-        newCopy.setChosenCards(in.getChosenCards());
-
-        newCopy.setChosenType(in.getChosenType());
-        newCopy.setChosenType2(in.getChosenType2());
-        newCopy.setNamedCards(Lists.newArrayList(in.getNamedCards()));
-        newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
-        if (in.hasChosenNumber()) {
-            newCopy.setChosenNumber(in.getChosenNumber());
-        }
-        newCopy.setChosenEvenOdd(in.getChosenEvenOdd());
-
-        newCopy.getEtbCounters().putAll(in.getEtbCounters());
-
-        newCopy.setUnearthed(in.isUnearthed());
-
-        newCopy.setChangedCardColors(in.getChangedCardColorsTable());
-        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningTable());
-        newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(in.getChangedCardTypesTable());
-        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningTable());
-        newCopy.setChangedCardNames(in.getChangedCardNames());
-        newCopy.setChangedCardTraits(in.getChangedCardTraits());
-
-        // for getReplacementList (run after setChangedCardKeywords for caching)
-        newCopy.setStoredKeywords(in.getStoredKeywords(), true);
-        newCopy.setStoredReplacements(in.getStoredReplacements());
-
-        newCopy.copyChangedTextFrom(in);
-
-        newCopy.setTimestamp(in.getTimestamp());
-
-        newCopy.setBestowTimestamp(in.getBestowTimestamp());
-
-        newCopy.setForetold(in.isForetold());
-        newCopy.setTurnInZone(in.getTurnInZone());
-        newCopy.setForetoldCostByEffect(in.isForetoldCostByEffect());
-
-        newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
-
-        // update keyword cache on all states
-        for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
-        }
-
-        newCopy.setKickerMagnitude(in.getKickerMagnitude());
-
-        if (in.getCastSA() != null) {
-            SpellAbility castSA = in.getCastSA().copy(newCopy, true);
-            castSA.setLastStateBattlefield(CardCollection.EMPTY);
-            castSA.setLastStateGraveyard(CardCollection.EMPTY);
-            newCopy.setCastSA(castSA);
-        }
-        newCopy.setCastFrom(in.getCastFrom());
-
-        newCopy.setExiledBy(in.getExiledBy());
-        newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
-        newCopy.addExiledCards(in.getExiledCards());
-
-        if (in.getGame().getCombat() != null && in.isPermanent()) {
-            newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
-        }
-
-        newCopy.getGoadMap().putAll(in.getGoadMap());
-
-        return newCopy;
     }
 
     public static CardCollection getRadiance(final SpellAbility sa) {

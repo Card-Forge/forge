@@ -24,13 +24,7 @@ import com.google.common.collect.Sets;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
@@ -151,7 +145,7 @@ public class CostPutCounter extends CostPartWithList {
         final Game game = source.getGame();
         if (this.payCostFromSource()) {
             if (isETBReplacement(ability, effect)) {
-                final Card copy = CardUtil.getLKICopy(source);
+                final Card copy = CardCopyService.getLKICopy(source);
                 copy.setLastKnownZone(payer.getZone(ZoneType.Battlefield));
 
                 // check state it would have on the battlefield

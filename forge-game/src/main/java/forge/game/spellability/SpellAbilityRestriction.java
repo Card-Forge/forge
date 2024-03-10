@@ -29,11 +29,7 @@ import forge.game.GameObject;
 import forge.game.GameObjectPredicates;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -220,7 +216,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             // if card is lki and bestowed, then do nothing there, it got already animated
             if (!(c.isLKI() && c.isBestowed())) {
                 if (!c.isLKI()) {
-                    cp = CardUtil.getLKICopy(c);
+                    cp = CardCopyService.getLKICopy(c);
                 }
 
                 cp.animateBestow(!cp.isLKI());
@@ -500,7 +496,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (sa.isMorphUp() && c.isInPlay()) {
             Card cp = c;
             if (!c.isLKI()) {
-                cp = CardUtil.getLKICopy(c);
+                cp = CardCopyService.getLKICopy(c);
             }
             cp.forceTurnFaceUp();
 
