@@ -270,6 +270,14 @@ public final class GameActionUtil {
                     alternatives.add(foretold);
                 }
 
+                if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner()) && !source.enteredThisTurn()) {
+                    final SpellAbility plotted = sa.copyWithNoManaCost(activator);
+                    plotted.setAlternativeCost(AlternativeCost.Plotted);
+                    plotted.getRestrictions().setZone(ZoneType.Exile);
+                    plotted.putParam("AfterDescription", "(Plotted)");
+                    alternatives.add(plotted);
+                }
+
                 // some needs to check after ability was put on the stack
                 // Currently this is only checked for Toolbox and that only cares about creature spells
                 if (source.isCreature() && game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
