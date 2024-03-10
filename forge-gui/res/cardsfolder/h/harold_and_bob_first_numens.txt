@@ -1,0 +1,14 @@
+Name:Harold and Bob, First Numens
+ManaCost:2 G
+Types:Legendary Creature Treefolk Mutant
+PT:3/3
+K:Vigilance
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add three mana of any one color. You get two rad counters.'" NICKNAME loses all other abilities.
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveAllAbilities$ True | Keywords$ Enchant Forest you control | Abilities$ SPAttach | staticAbilities$ STAura | Duration$ Permanent
+SVar:STAura:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted Forest has '{T}: Add three mana of any one color. You get two rad counters.'
+SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Forest.YouCtrl | AILogic$ Pump
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any  | Amount$ 3 | SubAbility$ DBRadiation | SpellDescription$ Add three mana of any one color. You get two rad counters.
+SVar:DBRadiation:DB$ Radiation | Defined$ You | Num$ 2
+Oracle:When Harold and Bob, First Numens dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add three mana of any one color. You get two rad counters.'" Harold and Bob loses all other abilities.

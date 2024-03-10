@@ -1,0 +1,7 @@
+Name:Wasteland Survival Guide
+ManaCost:no cost
+Types:Token Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each quest counter among permanents you control.
+SVar:X:Count$Valid Card.Permanent+YouCtrl$CardCounters.QUEST
+K:Equip:1
+Oracle:Equipped creature gets +1/+1 for each quest counter among permanents you control.\nEquip {1}
