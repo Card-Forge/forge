@@ -127,8 +127,8 @@ public class HumanPlaySpellAbility {
 
         if (!ability.isCopied()) {
             if (ability.isSpell()) { // Apply by Option
-                if (option != null && option.applyManaConvert(payment)) {
-                    manaColorConversion = true;
+                if (option != null) {
+                    manaColorConversion = option.applyManaConvert(payment);
                 }
 
                 if (option != null && option.isIgnoreSnowSourceManaCostColor()) {
@@ -142,6 +142,11 @@ public class HumanPlaySpellAbility {
             }
 
             if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+                manaColorConversion = true;
+            }
+
+            if (ability.hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, ability.getParam("ManaConversion"));
                 manaColorConversion = true;
             }
         }

@@ -432,6 +432,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.putParam("CastTransformed", "True");
             }
 
+            if (sa.hasParam("ManaConversion")) {
+                tgtSA.putParam("ManaConversion", sa.getParam("ManaConversion"));
+            }
+
             if (tgtSA.usesTargeting() && !optional) {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
