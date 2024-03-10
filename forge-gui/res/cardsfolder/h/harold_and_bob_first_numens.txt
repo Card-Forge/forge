@@ -10,5 +10,5 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment,Aura | Rem
 SVar:STAura:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted Forest has '{T}: Add three mana of any one color. You get two rad counters.'
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Forest.YouCtrl | AILogic$ Pump
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any  | Amount$ 3 | SubAbility$ DBRadiation | SpellDescription$ Add three mana of any one color. You get two rad counters.
-SVar:DBRadiation:DB$ Radiation | Defined$ You | Add$ 2
+SVar:DBRadiation:DB$ Radiation | Defined$ You | Num$ 2
 Oracle:When Harold and Bob, First Numens dies, if it was a creature, return it to the battlefield. It's an Aura enchantment with enchant Forest you control and "Enchanted Forest has '{T}: Add three mana of any one color. You get two rad counters.'" Harold and Bob loses all other abilities.
