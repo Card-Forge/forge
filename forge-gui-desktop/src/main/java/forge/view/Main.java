@@ -48,7 +48,8 @@ public final class Main {
         System.setProperty("sun.java2d.d3d", "false");
         
         //Turn on OpenGl acceleration to improve performance
-        System.setProperty("sun.java2d.opengl", "true");
+        // This seems to be crashing people systems. We should move it to a flag
+        //System.setProperty("sun.java2d.opengl", "True");
 
         //setup GUI interface
         GuiBase.setInterface(new GuiDesktop());
