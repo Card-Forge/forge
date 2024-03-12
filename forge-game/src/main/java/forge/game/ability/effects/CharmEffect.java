@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -83,21 +84,24 @@ public class CharmEffect extends SpellAbilityEffect {
         boolean limit = sa.hasParam("ActivationLimit");
         boolean gameLimit = sa.hasParam("GameActivationLimit");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
+        boolean spree = sa.hasParam("Spree");
 
         StringBuilder sb = new StringBuilder();
         sb.append(sa.getCostDescription());
-        sb.append(oppChooses ? "An opponent chooses " : "Choose ");
 
-        if (isX) {
-            sb.append("X");
-        } else if (num == min || num == Integer.MAX_VALUE) {
-            sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
-        } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
-            sb.append("any number ");
-        } else if (min == 0) {
-            sb.append("up to ").append(Lang.getNumeral(num));
-        } else {
-            sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
+        if (!spree) {
+            sb.append(oppChooses ? "An opponent chooses " : "Choose ");
+            if (isX) {
+                sb.append("X");
+            } else if (num == min || num == Integer.MAX_VALUE) {
+                sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
+            } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
+                sb.append("any number ");
+            } else if (min == 0) {
+                sb.append("up to ").append(Lang.getNumeral(num));
+            } else {
+                sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
+            }
         }
 
         if (sa.hasParam("ChoiceRestriction")) {
@@ -148,12 +152,14 @@ public class CharmEffect extends SpellAbilityEffect {
         if (!includeChosen) {
             sb.append(num == 1 ? " mode." : " modes.");
         } else if (!list.isEmpty()) {
-            if (!repeat && !additionalDesc && !limit && !gameLimit) {
-                sb.append(" \u2014");
+            if (!spree) {
+                if (!repeat && !additionalDesc && !limit && !gameLimit) {
+                    sb.append(" \u2014");
+                }
+                sb.append("\r\n");
             }
-            sb.append("\r\n");
             for (AbilitySub sub : list) {
-                sb.append("\u2022 ").append(sub.getParam("SpellDescription"));
+                sb.append(spree ? "+" + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014" : "\u2022 ").append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
             }
             sb.append("\r\n");
