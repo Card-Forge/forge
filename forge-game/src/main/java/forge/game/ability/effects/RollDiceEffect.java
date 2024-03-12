@@ -85,6 +85,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             return 0;
         }
         int total = 0;
+        int countMaxRolls = 0;
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
 
         for (int i = 0; i < amount; i++) {
@@ -144,6 +145,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
             } else {
                 oddResults++;
             }
+            if (i == sides) {
+                countMaxRolls++;
+            }
         }
         if (sa.hasParam("EvenOddResults")) {
             sa.setSVar("EvenResults", Integer.toString(evenResults));
@@ -151,6 +155,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("DifferentResults")) {
             sa.setSVar("DifferentResults", Integer.toString(differentResults));
+        }
+        if (sa.hasParam("MaxRollsResults")) {
+            sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
         }
         total += modifier;
 
