@@ -7,12 +7,12 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityUnspentMana;
 import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
@@ -40,7 +40,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
             }
             List<Mana> cleared = p.getManaPool().clearPool(false);
             drained.addAll(cleared);
-            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn)) {
+            if (StaticAbilityUnspentMana.hasManaBurn(p)) {
                 final int lost = p.loseLife(cleared.size(), false, true);
                 if (lost > 0) {
                     lossMap.put(p, lost);
