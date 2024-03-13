@@ -232,14 +232,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return false;
         }
 
-        final Card gameCard = attach.getGame().getCardState(attach, null);
-        // gameCard is LKI in that case, the card is not in game anymore
-        // or the timestamp did change
-        // this should check Self too
-        if (gameCard == null || !attach.equalsWithTimestamp(gameCard)) {
-            return false;
-        }
-
         // check for rules
         if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;
