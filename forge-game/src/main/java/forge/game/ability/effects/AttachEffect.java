@@ -121,10 +121,11 @@ public class AttachEffect extends SpellAbilityEffect {
             attachTo = chooser.getController().chooseSingleEntityForEffect(targets, sa, title, params);
         }
 
-        String attachToName = null;
         if (attachTo == null) {
             return;
-        } else if (attachTo instanceof Card) {
+        }
+        String attachToName;
+        if (attachTo instanceof Card) {
             attachToName = CardTranslation.getTranslatedName(((Card)attachTo).getName());
         } else {
             attachToName = attachTo.toString();
