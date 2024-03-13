@@ -97,8 +97,6 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        boolean manaColorConversion = false;
-
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         boolean refreeze = game.getStack().isFrozen();
         game.getStack().freezeStack();
@@ -119,11 +117,12 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
-
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
+
+        final boolean playerManaConversion = human.hasManaConversion()
+                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
+        boolean manaColorConversion = false;
 
         if (!ability.isCopied()) {
             if (ability.isSpell()) { // Apply by Option
@@ -142,6 +141,11 @@ public class HumanPlaySpellAbility {
             }
 
             if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
+                manaColorConversion = true;
+            }
+
+            if (ability.hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, ability.getParam("ManaConversion"));
                 manaColorConversion = true;
             }
         }
