@@ -797,13 +797,6 @@ public class CardView extends GameEntityView {
 
         sb.append(getRemembered());
 
-        PlayerView chosenPlayer = getChosenPlayer();
-        if (chosenPlayer != null) {
-            sb.append("\r\n[Chosen player: ");
-            sb.append(chosenPlayer);
-            sb.append("]\r\n");
-        }
-
         Direction chosenDirection = getChosenDirection();
         if (chosenDirection != null) {
             sb.append("\r\n[Chosen direction: ");
@@ -837,7 +830,6 @@ public class CardView extends GameEntityView {
                 sb.append(" each combat.");
                 sb.append("\r\n");
             }
-
         }
 
         Set<String> cantHaveKeyword = this.getCantHaveKeyword();

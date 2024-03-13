@@ -57,8 +57,8 @@ public class InputQueue extends Observable {
         if (topMostInput != inp) {
             System.out.println("Cannot remove input " + inp.getClass().getSimpleName() + " because it's not on top of stack. Stack = " + inputStack );
         } else {
-	    inputStack.pop();
-	}
+          inputStack.pop();
+        }
         updateObservers();
     }
 

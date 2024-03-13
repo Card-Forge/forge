@@ -1,0 +1,9 @@
+Name:Thrill-Kill Disciple
+ManaCost:2 R
+Types:Creature Human Mercenary
+PT:3/2
+K:Squad:1 Discard<1/Card>
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Junk token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_junk_sac_exileplay
+DeckHas:Ability$Token|Discard
+Oracle:Squad—{1}, Discard a card. (As an additional cost to cast this spell, you may pay its squad cost any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nWhen Thrill-Kill Disciple dies, create a Junk token.

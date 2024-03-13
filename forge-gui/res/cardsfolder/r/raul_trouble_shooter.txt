@@ -1,0 +1,9 @@
+Name:Raul, Trouble Shooter
+ManaCost:1 U B
+Types:Legendary Creature Zombie Mutant Rogue
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.nonLand+milledThisTurn+YouOwn | MayPlayLimit$ 1 | MayPlay$ True | AffectedZone$ Graveyard | Condition$ PlayerTurn | Description$ Once during each of your turns, you may cast a spell from among cards in your graveyard that were milled this turn.
+A:AB$ Mill | Cost$ T | NumCards$ 1 | Defined$ Player | SpellDescription$ Each player mills a card. (They each put the top card of their library in their graveyard.)
+DeckHas:Ability$Mill
+DeckHints:Ability$Mill
+Oracle:Once during each of your turns, you may cast a spell from among cards in your graveyard that were milled this turn.\n{T}: Each player mills a card. (They each put the top card of their library in their graveyard.)

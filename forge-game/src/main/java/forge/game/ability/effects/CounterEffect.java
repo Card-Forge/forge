@@ -202,7 +202,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue; // Should account for Protection/Hexproof/etc.
             }
 
-            Card toBeDestroyed = CardFactory.copyCard(aff, true);
+            Card toBeDestroyed = new CardCopyService(aff).copyCard(true);
 
             game.getTriggerHandler().setSuppressAllTriggers(true);
             boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testParams);

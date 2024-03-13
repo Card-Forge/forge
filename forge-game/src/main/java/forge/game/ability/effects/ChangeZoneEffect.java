@@ -532,7 +532,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RememberLKI")) {
-                hostCard.addRemembered(CardUtil.getLKICopy(gameCard));
+                hostCard.addRemembered(CardCopyService.getLKICopy(gameCard));
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
@@ -578,7 +578,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (gameCard.isTransformable()) {
                         // need LKI before Animate does apply
                         if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                            moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
+                            moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(gameCard));
                         }
                         gameCard.changeCardState("Transform", null, sa);
                     } else {
@@ -642,7 +642,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
                     if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                        moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
+                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(gameCard));
                     }
 
                     final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
@@ -1283,7 +1283,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                         // need LKI before Animate does apply
-                        moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                        moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
 
                         final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                         source.addRemembered(c);
@@ -1310,7 +1310,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (c.isTransformable()) {
                             // need LKI before Animate does apply
                             if (!moveParams.containsKey(AbilityKey.CardLKI)) {
-                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                                moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
                             }
                             c.changeCardState("Transform", null, sa);
                         } else {
@@ -1452,7 +1452,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("RememberLKI")) {
-                    source.addRemembered(CardUtil.getLKICopy(c));
+                    source.addRemembered(CardCopyService.getLKICopy(c));
                 }
                 if (forget) {
                     source.removeRemembered(movedCard);

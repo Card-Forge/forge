@@ -11,12 +11,7 @@ import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -73,7 +68,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                         }
                         if (ph.getCombat().isAttacking(c)) {
                             // get copy of creature with removed Counter
-                            final Card cpy = CardUtil.getLKICopy(c);
+                            final Card cpy = CardCopyService.getLKICopy(c);
                             // cant use substract on Copy
                             cpy.setCounters(cType, a - amount);
 
@@ -177,11 +172,11 @@ public class CountersMoveAi extends SpellAbilityAi {
                     return false;
                 }
 
-                final Card srcCopy = CardUtil.getLKICopy(src);
+                final Card srcCopy = CardCopyService.getLKICopy(src);
                 // cant use substract on Copy
                 srcCopy.setCounters(cType, a - amount);
 
-                final Card destCopy = CardUtil.getLKICopy(dest);
+                final Card destCopy = CardCopyService.getLKICopy(dest);
                 destCopy.setCounters(cType, dest.getCounters(cType) + amount);
 
                 int oldEval = ComputerUtilCard.evaluateCreature(src) + ComputerUtilCard.evaluateCreature(dest);
@@ -275,7 +270,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                             return false;
                         }
 
-                        final Card srcCardCpy = CardUtil.getLKICopy(card);
+                        final Card srcCardCpy = CardCopyService.getLKICopy(card);
                         // cant use substract on Copy
                         srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
@@ -368,8 +363,8 @@ public class CountersMoveAi extends SpellAbilityAi {
                 return false;
             }
 
-            Card lkiWithCounters = CardUtil.getLKICopy(src);
-            Card lkiWithoutCounters = CardUtil.getLKICopy(src);
+            Card lkiWithCounters = CardCopyService.getLKICopy(src);
+            Card lkiWithoutCounters = CardCopyService.getLKICopy(src);
             if (cType == null) {
                 lkiWithoutCounters.clearCounters();
             } else {

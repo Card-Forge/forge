@@ -755,7 +755,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // (e.g. Reassembing Skeleton + Elesh Norn, Grand Cenobite)
                 for (final Card c : retrieval) {
                     if (c.isCreature()) {
-                        final Card copy = CardUtil.getLKICopy(c);
+                        final Card copy = CardCopyService.getLKICopy(c);
                         ComputerUtilCard.applyStaticContPT(c.getGame(), copy, null);
                         if (copy.getNetToughness() <= 0) {
                             return false;

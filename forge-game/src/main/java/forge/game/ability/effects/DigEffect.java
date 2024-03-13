@@ -406,7 +406,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                                 // need LKI before Animate does apply
-                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                                moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
 
                                 final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                                 host.addRemembered(c);

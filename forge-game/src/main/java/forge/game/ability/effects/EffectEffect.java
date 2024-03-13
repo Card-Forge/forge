@@ -102,7 +102,7 @@ public class EffectEffect extends SpellAbilityEffect {
             for (final String rem : sa.getParam("RememberLKI").split(",")) {
                 CardCollection def = AbilityUtils.getDefinedCards(hostCard, rem, sa);
                 for (Card c : def) {
-                    rememberList.add(CardUtil.getLKICopy(c));
+                    rememberList.add(CardCopyService.getLKICopy(c));
                 }
             }
 

@@ -1,0 +1,10 @@
+Name:Moira Brown, Guide Author
+ManaCost:1 R W
+Types:Legendary Creature Human Citizen
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Equipment artifact token named Wasteland Survival Guide with "Equipped creature gets +1/+1 for each quest counter among permanents you control" and equip {1}.
+SVar:TrigToken:DB$ Token | TokenScript$ wasteland_survival_guide
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, put a quest counter on target nonland permanent you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | CounterType$ QUEST
+DeckHas:Ability$Token|Counters & Type$Artifact
+Oracle:When Moira Brown, Guide Author enters the battlefield, create a colorless Equipment artifact token named Wasteland Survival Guide with "Equipped creature gets +1/+1 for each quest counter among permanents you control" and equip {1}.\nWhenever you attack, put a quest counter on target nonland permanent you control.

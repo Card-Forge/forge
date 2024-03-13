@@ -5,7 +5,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardUtil;
+import forge.game.card.CardCopyService;
 import forge.game.spellability.SpellAbility;
 import forge.util.Expressions;
 import forge.util.Localizer;
@@ -54,7 +54,7 @@ public class TriggerDamageDoneOnce extends Trigger {
 
         Object target = runParams.get(AbilityKey.DamageTarget);
         if (target instanceof Card) {
-            target = CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));
+            target = CardCopyService.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));
         }
         sa.setTriggeringObject(AbilityKey.Target, target);
         sa.setTriggeringObject(AbilityKey.Sources, getDamageSources(damageMap));

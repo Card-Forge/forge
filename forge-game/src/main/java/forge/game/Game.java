@@ -212,7 +212,7 @@ public class Game {
         if (lookup != null) {
             lastStateBattlefield.remove(c);
             lastStateGraveyard.remove(c);
-            lookup.add(CardUtil.getLKICopy(c));
+            lookup.add(CardCopyService.getLKICopy(c));
         }
     }
 
@@ -362,6 +362,14 @@ public class Game {
         return players;
     }
 
+    public final PlayerCollection getPlayersInTurnOrder(Player p) {
+        PlayerCollection players = getPlayersInTurnOrder();
+
+        int i = players.indexOf(p);
+        Collections.rotate(players, i);
+        return players;
+    }
+
     /**
      * Gets the nonactive players who are still fighting to win, in turn order.
      */
@@ -495,6 +503,10 @@ public class Game {
     }
     public final long getTimestamp() {
         return timestamp;
+    }
+
+    public void dangerouslySetTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public final GameOutcome getOutcome() {
@@ -1124,7 +1136,7 @@ public class Game {
             result = Lists.newArrayList();
             countersAddedThisTurn.put(cType, putter, result);
         }
-        result.add(Pair.of(CardUtil.getLKICopy(card), value));
+        result.add(Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
@@ -1163,7 +1175,7 @@ public class Game {
     }
 
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
-        countersRemovedThisTurn.put(cType, Pair.of(CardUtil.getLKICopy(card), value));
+        countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
     public int getCounterRemovedThisTurn(CounterType cType, String validCard, Card source, Player sourceController, CardTraitBase ctb) {

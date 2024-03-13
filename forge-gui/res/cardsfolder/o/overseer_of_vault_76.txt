@@ -1,0 +1,12 @@
+Name:Overseer of Vault 76
+ManaCost:2 W
+Types:Legendary Creature Human Advisor
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.powerLE3+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ First Contact — Whenever CARDNAME or another creature with power 3 or less enters the battlefield under your control, put a quest counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ Quest | CounterNum$ 1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may remove three quest counters from among permanents you control. When you do, put a +1/+1 counter on each creature you control and they gain vigilance until end of turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ RemoveAnyCounter<3/QUEST/Permanent.YouCtrl/among permanents you control> | Execute$ TrigPutCounterAll | TriggerDescription$ When you do, put a +1/+1 counter on each creature you control and they gain vigilance until end of turn.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
+DeckHas:Ability$Counters
+Oracle:First Contact — Whenever Overseer of Vault 76 or another creature with power 3 or less enters the battlefield under your control, put a quest counter on Overseer of Vault 76.\nAt the beginning of combat on your turn, you may remove three quest counters from among permanents you control. When you do, put a +1/+1 counter on each creature you control and they gain vigilance until end of turn.

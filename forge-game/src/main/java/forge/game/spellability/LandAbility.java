@@ -20,8 +20,8 @@ package forge.game.spellability;
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardPlayOption;
-import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
@@ -53,7 +53,7 @@ public class LandAbility extends Ability {
 
         if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
             if (!land.isLKI()) {
-                land = CardUtil.getLKICopy(land);
+                land = CardCopyService.getLKICopy(land);
             }
             CardStateName stateName = getCardStateName();
             if (!land.hasState(stateName)) {

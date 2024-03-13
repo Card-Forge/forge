@@ -103,7 +103,7 @@ public abstract class CostPartWithList extends CostPart {
     }
 
     public final boolean executePayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        lkiList.add(CardUtil.getLKICopy(targetCard));
+        lkiList.add(CardCopyService.getLKICopy(targetCard));
         final Card newCard = doPayment(payer, ability, targetCard, effect);
 
         // need to update the LKI info to ensure correct interaction with cards which may trigger on this
@@ -124,7 +124,7 @@ public abstract class CostPartWithList extends CostPart {
         handleBeforePayment(payer, ability, targetCards);
         if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
             for (Card c: targetCards) {
-                lkiList.add(CardUtil.getLKICopy(c));
+                lkiList.add(CardCopyService.getLKICopy(c));
             }
             cardList.addAll(doListPayment(payer, ability, targetCards, effect));
         } else {

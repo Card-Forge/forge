@@ -10,13 +10,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -164,7 +158,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (remLKI) {
-                source.addRemembered(CardUtil.getLKICopy(c));
+                source.addRemembered(CardCopyService.getLKICopy(c));
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -174,7 +168,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
-                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                    moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
 
                     final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                     source.addRemembered(c);

@@ -1,0 +1,8 @@
+Name:Tinybones, the Pickpocket
+ManaCost:B
+Types:Legendary Creature Skeleton Rogue
+PT:1/1
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigCast | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast target nonland permanent card from that player's graveyard, and mana of any type can be spent to cast that spell.
+SVar:TrigCast:DB$ Play | ValidTgts$ Permanent.nonLand+ControlledBy TriggeredTarget | TgtZone$ Graveyard | ValidSA$ Spell | Optional$ True | ManaConversion$ AnyType->AnyType
+Oracle:Deathtouch\nWhenever Tinybones, the Pickpocket deals combat damage to a player, you may cast target nonland permanent card from that player's graveyard, and mana of any type can be spent to cast that spell.

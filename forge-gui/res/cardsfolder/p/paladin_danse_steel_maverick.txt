@@ -1,0 +1,10 @@
+Name:Paladin Danse, Steel Maverick
+ManaCost:2 W
+Types:Legendary Artifact Creature Synth Knight
+PT:3/3
+K:Vigilance
+K:Lifelink
+A:AB$ PumpAll | Cost$ Exile<1/CARDNAME> | ValidCards$ Creature.Human+YouCtrl,Creature.Artifact+YouCtrl | KW$ Indestructible | SpellDescription$ Each creature you control that's an artifact or Human gains indestructible until end of turn.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Artifact|Human
+Oracle:Vigilance, lifelink\nExile Paladin Danse, Steel Maverick: Each creature you control that's an artifact or Human gains indestructible until end of turn.

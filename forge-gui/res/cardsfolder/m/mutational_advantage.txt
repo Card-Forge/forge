@@ -1,0 +1,9 @@
+Name:Mutational Advantage
+ManaCost:1 G U
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Permanent.YouCtrl+HasCounters | KW$ Hexproof & Indestructible | SubAbility$ DBPrevent | SpellDescription$ Permanents you control with counters on them gain hexproof and indestructible until end of turn. 
+SVar:DBPrevent:DB$ Effect | ReplacementEffects$ RPrevent| RememberObjects$ Valid Permanent.YouCtrl+HasCounters  | SubAbility$ DBProliferate | SpellDescription$ Prevent all damage that would be dealt to those permanents this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to those permanents this turn.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+DeckNeeds:Ability$Counters
+Oracle:Permanents you control with counters on them gain hexproof and indestructible until end of turn. Prevent all damage that would be dealt to those permanents this turn. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

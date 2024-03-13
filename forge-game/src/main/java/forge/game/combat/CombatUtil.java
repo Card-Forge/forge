@@ -407,7 +407,7 @@ public class CombatUtil {
 
         c.getDamageHistory().setCreatureAttackedThisCombat(defender, otherAttackers.size());
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c), defender);
+        c.getController().addCreaturesAttackedThisTurn(CardCopyService.getLKICopy(c), defender);
     }
 
     /**

@@ -23,10 +23,7 @@ import forge.game.GameObjectMap;
 import forge.game.GameRules;
 import forge.game.Match;
 import forge.game.StaticEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCloneStates;
-import forge.game.card.CardFactory;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.mana.Mana;
@@ -288,7 +285,7 @@ public class GameCopier {
             }
             if (card.getCopiedPermanent() != null) {
                 // TODO would it be safe to simply reuse the prototype?
-                otherCard.setCopiedPermanent(CardFactory.copyCard(card.getCopiedPermanent(), false));
+                otherCard.setCopiedPermanent(new CardCopyService(card.getCopiedPermanent()).copyCard(false));
             }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.
         }
@@ -300,7 +297,7 @@ public class GameCopier {
     private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
-            CardFactory.copyCopiableCharacteristics(c, result, null, null);
+            new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
             return result;
         }
         if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {

@@ -19,6 +19,7 @@ package forge.ai;
 
 import java.util.*;
 
+import forge.game.card.*;
 import forge.game.cost.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,16 +48,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -2767,8 +2759,8 @@ public class ComputerUtil {
             int tokenScore = ComputerUtilCard.evaluateCreature(token);
 
             // score check similar to Fabricate
-            Card sourceNumbers = CardUtil.getLKICopy(source);
-            Card sourceStrength = CardUtil.getLKICopy(source);
+            Card sourceNumbers = CardCopyService.getLKICopy(source);
+            Card sourceStrength = CardCopyService.getLKICopy(source);
 
             sourceNumbers.setCounters(p1p1Type, sourceNumbers.getCounters(p1p1Type) + numStrength);
             sourceNumbers.setZone(source.getZone());

@@ -924,7 +924,7 @@ public class AiController {
         }
         Card spellHost = card;
         if (sa.isSpell()) {
-            spellHost = CardUtil.getLKICopy(spellHost);
+            spellHost = CardCopyService.getLKICopy(spellHost);
             spellHost.setLKICMC(-1); // to reset the cmc
             spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
             spellHost.setCastFrom(card.getZone());

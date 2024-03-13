@@ -489,7 +489,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                     if (sa.isKeyword(Keyword.TRIBUTE)) {
                         // make a copy to check if it would be on the battlefield
-                        Card noTributeLKI = CardUtil.getLKICopy(gameCard);
+                        Card noTributeLKI = CardCopyService.getLKICopy(gameCard);
                         // this check needs to check if this card would be on the battlefield
                         noTributeLKI.setLastKnownZone(activator.getZone(ZoneType.Battlefield));
 
