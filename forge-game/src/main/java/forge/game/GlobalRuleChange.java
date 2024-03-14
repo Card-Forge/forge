@@ -23,7 +23,6 @@ package forge.game;
 public enum GlobalRuleChange {
 
     attackerChoosesBlockers ("The attacking player chooses how each creature blocks each combat."),
-    manaBurn ("A player losing unspent mana causes that player to lose that much life."),
     noNight ("It can't become night."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),

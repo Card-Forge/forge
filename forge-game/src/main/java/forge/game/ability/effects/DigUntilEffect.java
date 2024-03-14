@@ -193,16 +193,13 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 while (itr.hasNext()) {
                     final Card c = itr.next();
 
-                    if (optionalFound) {
-                        boolean result = p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null);
-                        if (!result) {
-                            if (ZoneType.None.equals(optionalNoDestination)) {
-                                itr.remove();
-                                continue;
-                            } else {
-                                foundDest = optionalNoDestination;;
-                            }
+                    if (optionalFound &&
+                            !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
+                        if (ZoneType.None.equals(optionalNoDestination)) {
+                            itr.remove();
+                            continue;
                         }
+                        foundDest = optionalNoDestination;
                     }
 
                     CardZoneTable tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());

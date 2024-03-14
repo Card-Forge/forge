@@ -2,11 +2,18 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
+
+import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityUnspentMana;
+import forge.game.trigger.TriggerType;
 import forge.util.Lang;
 
 public class DrainManaEffect extends SpellAbilityEffect {
@@ -23,13 +30,27 @@ public class DrainManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        List<Mana> drained = new ArrayList<>();
+        final Game game = sa.getHostCard().getGame();
+        final List<Mana> drained = new ArrayList<>();
+        final Map<Player, Integer> lossMap = Maps.newHashMap();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
                 continue;
             }
-            drained.addAll(p.getManaPool().clearPool(false));
+            List<Mana> cleared = p.getManaPool().clearPool(false);
+            drained.addAll(cleared);
+            if (StaticAbilityUnspentMana.hasManaBurn(p)) {
+                final int lost = p.loseLife(cleared.size(), false, true);
+                if (lost > 0) {
+                    lossMap.put(p, lost);
+                }
+            }
+        }
+
+        if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
+            final Map<AbilityKey, Object> runLifeLostParams = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runLifeLostParams, false);
         }
 
         if (sa.hasParam("DrainMana")) {

@@ -29,7 +29,6 @@ import com.google.common.collect.Lists;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.cost.CostPayment;
 import forge.game.event.EventValueChangeType;
@@ -112,7 +111,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     public final boolean hasBurn() {
         final Game game = owner.getGame();
-        return game.getRules().hasManaBurn() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn);
+        return game.getRules().hasManaBurn() || StaticAbilityUnspentMana.hasManaBurn(owner);
     }
 
     public final List<Mana> clearPool(boolean isEndOfPhase) {
