@@ -1,7 +1,7 @@
 Name:Scrap Mastery
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 R R | ChangeType$ Artifact | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSacrifice | SpellDescription$ Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts they control, then puts all cards they exiled this way onto the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBSacrifice | SpellDescription$ Each player exiles all artifact cards from their graveyard, then sacrifices all artifacts they control, then puts all cards they exiled this way onto the battlefield.
 SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Artifact | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

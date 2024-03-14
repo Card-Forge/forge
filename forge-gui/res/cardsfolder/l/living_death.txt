@@ -1,7 +1,7 @@
 Name:Living Death
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBSacrifice | AILogic$ LivingDeath | SpellDescription$ Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBSacrifice | AILogic$ LivingDeath | SpellDescription$ Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.
 SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Creature | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
