@@ -24,6 +24,7 @@ Hellkite Tyrant|The Hoard|You made your bed of treasure, now lie in it!
 Laboratory Maniac|The Insanity|No more questions? I'm omniscient now!
 Lich's Mastery|The Absence of Lifeforce|Life's a lich, then you die.
 Liliana's Contract|The Contractual Immortality|Never mind the small print.
+Luck Bobblehead|Jackpot|Sometimes... the house loses.
 Mayael's Aria|The Gargantuan|Just my shadow weighs a ton!
 Maze's End|The Labyrinth|What? No bossfight?
 Mechanized Production|The Rise of Replicas|Welcome to the future of mass production!

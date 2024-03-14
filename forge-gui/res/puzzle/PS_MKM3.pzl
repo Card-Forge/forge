@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Murder at Karlov Manor #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/03/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Among other cards, your library contains three additional copies of each creature in your hand. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Rankle's Prank;Fauna Shaman;Placid Rottentail;Kami of Whispered Hopes;Forensic Researcher
+p0library=Forensic Researcher;Forensic Researcher;Forensic Researcher;Kami of Whispered Hopes;Kami of Whispered Hopes;Kami of Whispered Hopes;Placid Rottentail;Placid Rottentail;Placid Rottentail;Fauna Shaman;Fauna Shaman;Fauna Shaman;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Insidious Roots;T:g_0_1_plant|Counters:P1P1=1;Tyvar, Jubilant Brawler|Counters:LOYALTY=1;Agatha's Soul Cauldron;Restless Cottage;Restless Cottage;Restless Cottage;Restless Vinestalk;Restless Vinestalk;Restless Vinestalk
+p1life=43
+p1battlefield=Tolsimir, Midnight's Light;T:voja_fenstalker;Axebane Ferox
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle
