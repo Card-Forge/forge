@@ -202,16 +202,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (!movedCard.getZone().equals(originZone)) {
-                if (remember != null) {
-                    final Card newSource = game.getCardState(source);
-                    newSource.addRemembered(movedCard);
+                if (remember != null && (remember.equalsIgnoreCase("True") ||
+                        movedCard.isValid(remember, sa.getActivatingPlayer(), source, sa))) {
                     if (!source.isRemembered(movedCard)) {
                         source.addRemembered(movedCard);
                     }
                     if (c.getMeldedWith() != null) {
                         Card meld = game.getCardState(c.getMeldedWith(), null);
                         if (meld != null) {
-                            newSource.addRemembered(meld);
                             if (!source.isRemembered(meld)) {
                                 source.addRemembered(meld);
                             }
@@ -220,7 +218,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     if (c.hasMergedCard()) {
                         for (final Card card : c.getMergedCards()) {
                             if (card == c) continue;
-                            newSource.addRemembered(card);
                             if (!source.isRemembered(card)) {
                                 source.addRemembered(card);
                             }
@@ -228,10 +225,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     }
                 }
                 if (forget != null) {
-                    game.getCardState(source).removeRemembered(c);
+                    source.removeRemembered(c);
                 }
                 if (imprint != null) {
-                    game.getCardState(source).addImprintedCard(movedCard);
+                    source.addImprintedCard(movedCard);
                 }
             }
         }

@@ -135,6 +135,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
         boolean sequential = digSite == ZoneType.Library && revealedDest != null && revealedDest.equals(foundDest);
 
         CardZoneTable table = new CardZoneTable(game.copyLastStateBattlefield(), game.copyLastStateGraveyard());
+        CardZoneTable tableSeq = null;
+        if (!sequential) {
+            tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
+        }
         boolean combatChanged = false;
 
         for (final Player p : getTargetPlayers(sa)) {
@@ -148,7 +152,6 @@ public class DigUntilEffect extends SpellAbilityEffect {
             CardCollection revealed = new CardCollection();
 
             final PlayerZone library = p.getZone(digSite);
-
             final int maxToDig = maxRevealed != null ? maxRevealed : library.size();
 
             for (int i = 0; i < maxToDig; i++) {
@@ -202,7 +205,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         foundDest = optionalNoDestination;
                     }
 
-                    CardZoneTable tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
+                    if (sequential) {
+                        tableSeq = new CardZoneTable(table.getLastStateBattlefield(), table.getLastStateGraveyard());
+                    }
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     AbilityKey.addCardZoneTableParams(moveParams, tableSeq);
 
@@ -241,7 +246,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         game.getAction().moveTo(foundDest, c, foundLibPos, sa, moveParams);
                     }
 
-                    tableSeq.triggerChangesZoneAll(game, sa);
+                    if (sequential) {
+                        tableSeq.triggerChangesZoneAll(game, sa);
+                    }
                 }
                 revealed.removeAll(found);
             }
@@ -279,9 +286,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 AbilityKey.addCardZoneTableParams(moveParams, table);
 
-                final Iterator<Card> itr = revealed.iterator();
-                while (itr.hasNext()) {
-                    final Card c = itr.next();
+                for (Card c : revealed) {
                     game.getAction().moveTo(finalDest, c, finalPos, sa, moveParams);
                 }
             }
@@ -293,6 +298,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
         if (combatChanged) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
+        }
+        if (!sequential) {
+            tableSeq.triggerChangesZoneAll(game, sa);   
         }
         table.triggerChangesZoneAll(game, sa);
     }

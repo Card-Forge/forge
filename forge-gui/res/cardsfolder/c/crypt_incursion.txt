@@ -1,8 +1,8 @@
 Name:Crypt Incursion
 ManaCost:2 B
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Creature | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBGainLife | SpellDescription$ Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Z
-SVar:Z:SVar$X/Thrice
-SVar:X:Remembered$Amount
+A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Creature | RememberChanged$ True | SubAbility$ DBGainLife | SpellDescription$ Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount/Thrice
 Oracle:Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.

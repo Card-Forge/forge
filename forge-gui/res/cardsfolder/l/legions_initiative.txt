@@ -4,8 +4,8 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Red+YouCtrl | AddPower$ 1 | Description$ Red creatures you control get +1/+0.
 S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddToughness$ 1 | Description$ White creatures you control get +0/+1.
 A:AB$ ChangeZoneAll | Cost$ R W Exile<1/CARDNAME> | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBDelayTrig | SpellDescription$ Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gains haste until end of turn.
-SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gains haste until end of turn.
-SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBPump
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player | Execute$ TrigReturn | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gains haste until end of turn.
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsTriggerRemembered | Origin$ Exile | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Red creatures you control get +1/+0.\nWhite creatures you control get +0/+1.\n{R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.
