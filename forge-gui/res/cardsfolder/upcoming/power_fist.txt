@@ -1,0 +1,9 @@
+Name:Power Fist
+ManaCost:1 G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | AddTrigger$ DamageTrigger | Description$ Equipped creature has trample and "Whenever this creature deals combat damage to a player, put that many +1/+1 counters on it."
+SVar:DamageTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature deals combat damage to a player, put that many +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+K:Equip:2
+Oracle:Equipped creature has trample and "Whenever this creature deals combat damage to a player, put that many +1/+1 counters on it."\nEquip {2}

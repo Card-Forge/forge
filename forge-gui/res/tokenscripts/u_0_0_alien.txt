@@ -1,0 +1,6 @@
+Name:Alien Token
+ManaCost:no cost
+Types:Creature Alien
+Colors:blue
+PT:0/0
+Oracle:
