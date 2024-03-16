@@ -1,6 +1,6 @@
 Name:Silver Shroud Costume
 ManaCost:2
-Types:Artifact — Equipment
+Types:Artifact Equipment
 K:Flash
 K:Equip:3
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Description$ Equipped creature can't be blocked.
