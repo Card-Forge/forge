@@ -48,7 +48,6 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     case "Suspected":
                         altered = c.setSuspected(activate);
                         break;
-
                     case "Saddle":
                     case "Saddled":
                         // currently clean up in Card manually
