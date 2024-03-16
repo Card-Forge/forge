@@ -9,4 +9,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ Y
 SVar:Y:Count$Valid Artifact.YouCtrl
 DeckNeeds:Type$Artifact
+SVar:HasAttackEffect:TRUE
 Oracle:Haste\nAs long as an artifact entered the battlefield under your control this turn, creatures you control get +2/+2.\nBattalion — Whenever Sentinel Sarah Lyons and at least two other creatures attack, Sentinel Sarah Lyons deals damage equal to the number of artifacts you control to target player.
