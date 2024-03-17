@@ -1,5 +1,6 @@
 package forge.game.trigger;
 
+import java.util.List;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
@@ -28,7 +29,11 @@ public class TriggerDiscardedAll extends Trigger {
         }
 
         if (hasParam("FirstTime")) {
-            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+            List<Card> discardedBefore = (List<Card>) runParams.get(AbilityKey.DiscardedBefore);
+            if (hasParam("ValidCard")) {
+                discardedBefore = CardLists.getValidCardsAsList(discardedBefore, getParam("ValidCard"), getHostCard().getController(), getHostCard(), this);
+            }
+            if (discardedBefore.size() > 0) {
                 return false;
             }
         }

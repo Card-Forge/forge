@@ -60,6 +60,7 @@ public enum AbilityKey {
     DefendingPlayer("DefendingPlayer"),
     Destination("Destination"),
     Devoured("Devoured"),
+    DiscardedBefore("DiscardedBefore"),
     DividedShieldAmount("DividedShieldAmount"),
     EchoPaid("EchoPaid"),
     EffectOnly("EffectOnly"),

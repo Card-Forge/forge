@@ -106,7 +106,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisTurn;
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
-    private int numDiscardedThisTurn;
     private int numExploredThisTurn;
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
@@ -131,6 +130,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int descended = 0;
 
     private List<Card> sacrificedThisTurn = new ArrayList<>();
+    private List<Card> discardedThisTurn = new ArrayList<>();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -1472,6 +1472,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
+        discardedThisTurn.add(CardCopyService.getLKICopy(c));
+
         StringBuilder sb = new StringBuilder();
         sb.append(this).append(" discards ").append(c);
         final Card newCard;
@@ -1488,11 +1490,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             newCard = game.getAction().moveToGraveyard(c, sa, params);
             // Play the Discard sound
         }
+        sb.append(".");
 
         newCard.setDiscarded(true);
 
-        sb.append(".");
-        numDiscardedThisTurn++;
         // Run triggers
         Card cause = null;
         if (sa != null) {
@@ -1552,12 +1553,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         numForetoldThisTurn = 0;
     }
 
-    public final int getNumDiscardedThisTurn() {
-        return numDiscardedThisTurn;
+    public final List<Card> getDiscardedThisTurn() {
+        return discardedThisTurn;
     }
-
-    public final void resetNumDiscardedThisTurn() {
-        numDiscardedThisTurn = 0;
+    public final void resetDiscardedThisTurn() {
+        discardedThisTurn.clear();
     }
 
     public final int getNumExploredThisTurn() {
@@ -2509,7 +2509,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
-        resetNumDiscardedThisTurn();
         resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
@@ -2522,6 +2521,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSurveilThisTurn();
         resetCycledThisTurn();
         resetEquippedThisTurn();
+        resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
         setRevolt(false);
@@ -3821,7 +3821,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().reveal(new CardCollection(c), c.getOwner(), true);
             game.getAction().moveTo(ZoneType.Hand, c, sa, params);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
-            boolean firstDiscard = getNumDiscardedThisTurn() == 0;
+            List<Card> discardedBefore = Lists.newArrayList(getDiscardedThisTurn());
             if (discard(c, sa, true, params) != null) {
                 // Change this if something would make multiple player learn at the same time
 
@@ -3829,7 +3829,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
                 runParams.put(AbilityKey.Cards, new CardCollection(c));
                 runParams.put(AbilityKey.Cause, sa);
-                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                 if (params != null) {
                     runParams.putAll(params);
                 }
