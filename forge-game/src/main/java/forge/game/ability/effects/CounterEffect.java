@@ -241,8 +241,8 @@ public class CounterEffect extends SpellAbilityEffect {
 
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
-        repParams.put(AbilityKey.SpellAbility, tgtSA);
         repParams.put(AbilityKey.Cause, srcSA);
+        repParams.put(AbilityKey.SpellAbility, tgtSA);
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
@@ -295,7 +295,6 @@ public class CounterEffect extends SpellAbilityEffect {
         }
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-        runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
         runParams.put(AbilityKey.Cause, srcSA);
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
