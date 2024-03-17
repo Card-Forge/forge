@@ -11,5 +11,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Enclave:DB$ Animate | Defined$ Self | Triggers$ EnclaveTrig | Duration$ Permanent | SpellDescription$ Enclave
 SVar:EnclaveTrig:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ You | AttackingPlayer$ Player | Execute$ TrigRadiation | TriggerZones$ Battlefield | TriggerDescription$ Enclave — Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.
 SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredAttackingPlayer | Num$ X
-SVar:X:Count$TriggeredAttackers/Times.2
+SVar:X:TriggeredCards$Amount/Times.2
 Oracle:As Struggle for Project Purity enters the battlefield, choose Brotherhood or Enclave.\n• Brotherhood — At the beginning of your upkeep, each opponent draws a card. You draw a card for each card drawn this way.\n• Enclave — Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.
