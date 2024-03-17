@@ -91,17 +91,19 @@ public class VoteEffect extends SpellAbilityEffect {
             voteAmount += p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyAdditionalVotesDoYouWant"), 0, optionalVotes, params);
 
             for (int i = 0; i < voteAmount; i++) {
-                Object result = realVoter.getController().vote(sa, host + " " + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes, p);
+                Object result = realVoter.getController().vote(sa, host + " " + Localizer.getInstance().getMessage("lblVote") + ":", voteType, votes, p, sa.hasParam("UpTo"));
 
-                votes.put(result, p);
-                if (!secret) {
-                    game.getAction().notifyOfValue(sa, p, result + "\r\n" +
-                            Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
+                if (result != null) {
+                    votes.put(result, p);
+                    if (!secret) {
+                        game.getAction().notifyOfValue(sa, p, result + "\r\n" +
+                                Localizer.getInstance().getMessage("lblCurrentVote") + ":" + votes, p);
+                    }
+                    if (record.length() > 0) {
+                        record.append("\r\n");
+                    }
+                    record.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
                 }
-                if (record.length() > 0) {
-                    record.append("\r\n");
-                }
-                record.append(p).append(" ").append(Localizer.getInstance().getMessage("lblVotedFor", result));
             }
         }
 
