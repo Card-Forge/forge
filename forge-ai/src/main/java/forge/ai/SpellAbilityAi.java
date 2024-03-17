@@ -287,7 +287,7 @@ public abstract class SpellAbilityAi {
         if (sa.isPwAbility() && phase.is(PhaseType.MAIN2)) {
             return true;
         }
-        if (sa.isSpell() && !sa.isBuyBackAbility()) {
+        if (sa.isSpell() && !sa.isBuyback()) {
             return false;
         }
 

@@ -1669,7 +1669,7 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("Bargain")) {
-                    return doXMath(calculateAmount(c, sq[sa.isBargain() ? 1 : 2], ctb), expr, c, ctb);
+                    return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
                 // Count$Madness.<True>.<False>

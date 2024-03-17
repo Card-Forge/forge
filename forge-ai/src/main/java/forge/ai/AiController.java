@@ -865,7 +865,7 @@ public class AiController {
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
-            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyBackAbility() && !canPlaySpellWithoutBuyback(card, sa)) {
+            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyback() && !canPlaySpellWithoutBuyback(card, sa)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
         }
