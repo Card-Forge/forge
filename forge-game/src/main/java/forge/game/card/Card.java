@@ -595,7 +595,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void updateManaCostForView() {
         currentState.getView().updateManaCost(this);
     }
-    
+
     public final void updatePowerToughnessForView() {
         view.updateCounters(this);
     }
@@ -5387,19 +5387,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isBattle()      { return getType().isBattle(); }
     public final boolean isEnchantment()    { return getType().isEnchantment(); }
 
-    public final boolean isEquipment()  { return getType().hasSubtype("Equipment"); }
-    public final boolean isFortification()  { return getType().hasSubtype("Fortification"); }
+    public final boolean isEquipment()  { return getType().isEquipment(); }
+    public final boolean isFortification()  { return getType().isFortification(); }
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
-    public final boolean isAura()           { return getType().hasSubtype("Aura"); }
+    public final boolean isAura()           { return getType().isAura(); }
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
-    public final boolean isSaga()           { return getType().hasSubtype("Saga"); }
+    public final boolean isSaga()           { return getType().isSaga(); }
 
-    public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
-    public final boolean isHistoric()   { return getType().isLegendary() || isArtifact() || isSaga(); }
+    public final boolean isAttachment() { return getType().isAttachment(); }
+    public final boolean isHistoric()   { return getType().isHistoric(); }
 
     public final boolean isScheme()     { return getType().isScheme(); }
     public final boolean isPhenomenon() { return getType().isPhenomenon(); }
     public final boolean isPlane()      { return getType().isPlane(); }
+
+    public final boolean isOutlaw()     { return getType().isOutlaw(); }
 
     /** {@inheritDoc} */
     @Override
