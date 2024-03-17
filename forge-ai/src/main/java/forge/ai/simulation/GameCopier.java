@@ -399,6 +399,9 @@ public class GameCopier {
             if (c.isSolved()) {
                 newCard.setSolved(true);
             }
+            if (c.isSaddled()) {
+                newCard.setSaddled(true);
+            }
             if (c.isSuspected()) {
                 newCard.setSuspected(true);
             }

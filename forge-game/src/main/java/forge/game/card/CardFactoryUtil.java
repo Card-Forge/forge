@@ -3386,6 +3386,18 @@ public class CardFactoryUtil {
                 sa.setSVar("X", "Count$xPaid");
             }
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Saddle")) {
+            final String[] k = keyword.split(":");
+            final String power = k[1];
+
+            // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
+            String effect = "AB$ AlterAttribute | Cost$ tapXType<Any/Creature.Other+withTotalPowerGE" + power + ">" +
+                    "| CostDesc$ Saddle " + power + " | Attributes$ Saddle | Secondary$ True | Defined$ Self | SorcerySpeed$ True " +
+                    "| SpellDescription$ (" + inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Scavenge")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

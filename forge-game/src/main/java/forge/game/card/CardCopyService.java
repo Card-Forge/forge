@@ -297,6 +297,7 @@ public class CardCopyService {
         newCopy.setMonstrous(copyFrom.isMonstrous());
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
+        newCopy.setSaddled(copyFrom.isSaddled());
         newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
 
         newCopy.setColor(copyFrom.getColor().getColor());

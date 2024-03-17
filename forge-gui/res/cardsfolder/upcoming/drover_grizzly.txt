@@ -1,0 +1,8 @@
+Name:Drover Grizzly
+ManaCost:2 G
+Types:Creature Bear Mount
+PT:4/2
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while saddled, creatures you control gain trample until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample
+K:Saddle:1
+Oracle:Whenever Drover Grizzly attacks while saddled, creatures you control gain trample until end of turn.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

@@ -217,6 +217,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean renowned;
     private boolean solved = false;
+    private boolean saddled = false;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -2364,6 +2365,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
+                        || keyword.startsWith("Saddle")
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
@@ -2670,6 +2672,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (solved) {
             sb.append("Solved\r\n");
+        }
+        if (saddled) {
+            sb.append("Saddled\r\n");
         }
         if (isSuspected()) {
             sb.append("Suspected\r\n");
@@ -6342,6 +6347,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return true;
     }
 
+    public final boolean isSaddled() {
+        return saddled;
+    }
+    public final boolean setSaddled(final boolean saddled) {
+        this.saddled = saddled;
+        return true;
+    }
+
     public Long getSuspectedTimestamp() {
         return this.suspectedTimestamp;
     }
@@ -6933,6 +6946,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!StaticAbilityNoCleanupDamage.damageNotRemoved(this)) {
             setDamage(0);
         }
+        setSaddled(false);
         setHasBeenDealtDeathtouchDamage(false);
         setHasBeenDealtExcessDamageThisTurn(false);
         setRegeneratedThisTurn(0);
