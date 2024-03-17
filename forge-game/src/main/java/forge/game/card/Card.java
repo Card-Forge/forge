@@ -844,7 +844,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             game.getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
             // Run triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(CardCopyService.getLKICopy(this));
             runParams.put(AbilityKey.Cause, cause);
 
             triggerHandler.registerActiveTrigger(this, false);
