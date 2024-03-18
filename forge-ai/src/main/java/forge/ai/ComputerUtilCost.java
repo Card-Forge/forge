@@ -180,14 +180,14 @@ public class ComputerUtilCost {
      *            the remaining life
      * @return true, if successful
      */
-    public static boolean checkDamageCost(final Player ai, final Cost cost, final Card source, final int remainingLife) {
+    public static boolean checkDamageCost(final Player ai, final Cost cost, final Card source, final int remainingLife, final SpellAbility sa) {
         if (cost == null) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDamage) {
                 final CostDamage pay = (CostDamage) part;
-                int realDamage = ComputerUtilCombat.predictDamageTo(ai, pay.convertAmount(), source, false);
+                int realDamage = ComputerUtilCombat.predictDamageTo(ai, pay.getAbilityAmount(sa), source, false);
                 if (ai.getLife() - realDamage < remainingLife
                         && realDamage > 0 && !ai.cantLoseForZeroOrLessLife()
                         && ai.canLoseLife()) {
@@ -814,7 +814,7 @@ public class ComputerUtilCost {
         // Didn't have any of the data on the original SA to pay dependant costs
 
         return checkLifeCost(payer, cost, source, 4, sa)
-                && checkDamageCost(payer, cost, source, 4)
+                && checkDamageCost(payer, cost, source, 4, sa)
                 && (isMine || checkSacrificeCost(payer, cost, source, sa))
                 && (isMine || checkDiscardCost(payer, cost, source, sa))
                 && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)

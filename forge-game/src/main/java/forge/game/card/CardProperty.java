@@ -1808,7 +1808,7 @@ public class CardProperty {
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
-            return card.getCastSA().isBargain();
+            return card.getCastSA().isBargained();
         } else if (property.equals("surged")) {
             if (card.getCastSA() == null) {
                 return false;

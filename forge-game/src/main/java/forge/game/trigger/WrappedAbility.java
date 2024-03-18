@@ -287,8 +287,8 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public boolean isBuyBackAbility() {
-        return sa.isBuyBackAbility();
+    public boolean isBuyback() {
+        return sa.isBuyback();
     }
 
     @Override
@@ -307,8 +307,8 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public boolean isFlashBackAbility() {
-        return sa.isFlashBackAbility();
+    public boolean isFlashback() {
+        return sa.isFlashback();
     }
 
     @Override

@@ -789,11 +789,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    public boolean isBargain() {
+    public boolean isBargained() {
         return isOptionalCostPaid(OptionalCost.Bargain);
     }
 
-    public boolean isBuyBackAbility() {
+    public boolean isBuyback() {
         return isOptionalCostPaid(OptionalCost.Buyback);
     }
 
@@ -1096,7 +1096,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         basicSpell = basicSpell0;
     }
 
-    public boolean isFlashBackAbility() {
+    public boolean isFlashback() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
 

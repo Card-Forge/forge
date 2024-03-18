@@ -57,25 +57,11 @@ public class TriggerCountered extends Trigger {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
-            return false;
-        }
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
-
-        if (hasParam("ValidType")) {
-            // TODO: if necessary, expand the syntax to account for multiple valid types (e.g. Spell,Ability)
-            SpellAbility ctrdSA = (SpellAbility) runParams.get(AbilityKey.CounteredSA);
-            String validType = getParam("ValidType");
-            if (ctrdSA != null) {
-                if (validType.equals("Spell") && !ctrdSA.isSpell()) {
-                    return false;
-                } else if (validType.equals("Ability") && !ctrdSA.isAbility()) {
-                    return false;
-                }
-            }
-            
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.CounteredSA))) {
+            return false;
         }
         return true;
     }
@@ -87,7 +73,6 @@ public class TriggerCountered extends Trigger {
             runParams,
             AbilityKey.Card,
             AbilityKey.Cause,
-            AbilityKey.Player,
             AbilityKey.CounteredSA
         );
     }

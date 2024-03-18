@@ -1407,7 +1407,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
-                       final ListMultimap<Object, Player> votes, Player forPlayer) {
+                       final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
+        if (optional) {
+            return getGui().oneOrNone(prompt, options);
+        }
         return getGui().one(prompt, options);
     }
 
