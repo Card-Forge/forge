@@ -23,7 +23,6 @@ public enum ReplacementType {
     DealtDamage(ReplaceDealtDamage.class),
     DeclareBlocker(ReplaceDeclareBlocker.class),
     Destroy(ReplaceDestroy.class),
-    Discard(ReplaceDiscard.class),
     Draw(ReplaceDraw.class),
     DrawCards(ReplaceDrawCards.class),
     Explore(ReplaceExplore.class),

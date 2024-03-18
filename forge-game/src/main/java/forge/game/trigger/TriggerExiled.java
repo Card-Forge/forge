@@ -23,6 +23,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -56,6 +57,8 @@ public class TriggerExiled extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
+
         if (hasParam("Origin")) {
             if (!getParam("Origin").equals("Any")) {
                 if (getParam("Origin") == null) {
@@ -73,12 +76,18 @@ public class TriggerExiled extends Trigger {
             return false;
         }
 
-        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+        if (!matchesValidParam("ValidCause", cause)) {
             return false;
         }
 
         if (hasParam("WhileKeyword") && !whileKeywordCheck(getParam("WhileKeyword"), runParams)) {
             return false;
+        }
+
+        if (hasParam("Madness")) {
+            if (cause == null || !cause.isKeyword(Keyword.MADNESS)) {
+                return false;
+            }
         }
 
         return true;

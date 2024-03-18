@@ -60,6 +60,7 @@ public enum AbilityKey {
     DefendingPlayer("DefendingPlayer"),
     Destination("Destination"),
     Devoured("Devoured"),
+    Discard("Discard"),
     DiscardedBefore("DiscardedBefore"),
     DividedShieldAmount("DividedShieldAmount"),
     EchoPaid("EchoPaid"),
@@ -82,7 +83,6 @@ public enum AbilityKey {
     IsCombatDamage("IsCombatDamage"),
     IsDamage("IsDamage"),
     IndividualCostPaymentInstance("IndividualCostPaymentInstance"),
-    IsMadness("IsMadness"),
     LastStateBattlefield("LastStateBattlefield"),
     LastStateGraveyard("LastStateGraveyard"),
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged

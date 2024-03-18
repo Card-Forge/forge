@@ -331,7 +331,7 @@ public class ReplacementHandler {
 
             String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
-            final String question = replacementEffect instanceof ReplaceDiscard
+            final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
                 : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", name, effectDesc);
             GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);

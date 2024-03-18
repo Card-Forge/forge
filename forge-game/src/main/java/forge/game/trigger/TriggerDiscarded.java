@@ -64,12 +64,6 @@ public class TriggerDiscarded extends Trigger {
             return false;
         }
 
-        if (hasParam("IsMadness")) {
-            Boolean madness = (Boolean) runParams.get(AbilityKey.IsMadness);
-            if (getParam("IsMadness").equals("True") ^ madness) {
-                return false;
-            }
-        }
         return true;
     }
 
