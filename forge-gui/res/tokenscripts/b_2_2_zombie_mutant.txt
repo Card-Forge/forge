@@ -1,0 +1,6 @@
+Name:Zombie Mutant Token
+ManaCost:no cost
+Types:Creature Zombie Mutant
+Colors:black
+PT:2/2
+Oracle:

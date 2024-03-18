@@ -1,0 +1,10 @@
+Name:Silver Shroud Costume
+ManaCost:2
+Types:Artifact Equipment
+K:Flash
+K:Equip:3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EquippedBy | Description$ Equipped creature can't be blocked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control. That creature gains shroud until end of turn. (It can't be the target of spells or abilities.)
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Shroud
+Oracle:Flash\nWhen Silver Shroud Costume enters the battlefield, attach it to target creature you control. That creature gains shroud until end of turn. (It can't be the target of spells or abilities.)\nEquipped creature can't be blocked.\nEquip {3}

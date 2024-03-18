@@ -1,0 +1,12 @@
+Name:Strong Back
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ ReduceCost | ValidTarget$ Creature.EnchantedBy | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 3 | Description$ Equip abilities you activate that target enchanted creature cost {3} less to activate.
+S:Mode$ ReduceCost | ValidCard$ Aura | ValidTarget$ Creature.EnchantedBy | Activator$ You | Type$ Spell | Amount$ 3 | Description$ Aura spells you cast that target enchanted creature cost {3} less to cast.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +2/+2 for each Aura and Equipment attached to it.
+SVar:X:Count$Valid Aura.AttachedTo Creature.EnchantedBy,Equipment.AttachedTo Creature.EnchantedBy/Times.2
+SVar:BuffedBy:Artifact,Enchantment
+DeckHints:Type$Artifact|Enchantment
+Oracle:Enchant creature\nEquip abilities you activate that target enchanted creature cost {3} less to activate.\nAura spells you cast that target enchanted creature cost {3} less to cast.\nEnchanted creature gets +2/+2 for each Aura and Equipment attached to it.
