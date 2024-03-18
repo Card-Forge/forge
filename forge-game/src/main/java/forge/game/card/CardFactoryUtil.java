@@ -2341,8 +2341,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Madness")) {
-            // Set Madness Replacement effects
-            String repeffstr = "Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Secondary$ True "
+            String repeffstr = "Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | Discard$ True | Secondary$ True "
                     + " | Description$ Madness: If you discard this card, discard it into exile.";
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
             String sVarMadness = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard";
