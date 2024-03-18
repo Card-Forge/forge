@@ -3465,7 +3465,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("CardsDiscardedThisTurn")) {
-            return doXMath(player.getNumDiscardedThisTurn(), m, source, ctb);
+            return doXMath(player.getDiscardedThisTurn().size(), m, source, ctb);
         }
 
         if (value.contains("ExploredThisTurn")) {

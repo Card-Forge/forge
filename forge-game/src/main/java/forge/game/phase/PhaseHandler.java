@@ -373,7 +373,7 @@ public class PhaseHandler implements java.io.Serializable {
                         AbilityKey.addCardZoneTableParams(moveParams, table);
 
                         final CardCollection discarded = new CardCollection();
-                        boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
+                        List<Card> discardedBefore = Lists.newArrayList(playerTurn.getDiscardedThisTurn());
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
                             if (playerTurn.discard(c, null, false, moveParams) != null) {
                                 discarded.add(c);
@@ -385,7 +385,7 @@ public class PhaseHandler implements java.io.Serializable {
                             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                             runParams.put(AbilityKey.Cards, discarded);
                             runParams.put(AbilityKey.Cause, null);
-                            runParams.put(AbilityKey.FirstTime, firstDiscarded);
+                            runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                             game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
                         }
                     }

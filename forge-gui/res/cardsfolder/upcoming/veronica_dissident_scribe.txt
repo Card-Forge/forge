@@ -1,0 +1,12 @@
+Name:Veronica, Dissident Scribe
+ManaCost:2 R
+Types:Legendary Creature Human Artificer Rogue
+PT:3/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
+T:Mode$ DiscardedAll | ValidPlayer$ You | FirstTime$ True | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you discard one or more nonland cards for the first time each turn, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_junk_sac_exileplay
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Discard
+Oracle:Menace\nWhenever Veronica, Dissident Scribe attacks, you may discard a card. If you do, draw a card.\nWhenever you discard one or more nonland cards for the first time each turn, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
