@@ -748,6 +748,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.addMayLookTemp(player);
                 }
 
+                // CR 400.7k
                 if (sa.hasParam("TrackDiscarded")) {
                     movedCard.setDiscarded(true);
                 }

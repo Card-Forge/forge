@@ -31,7 +31,6 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
@@ -1451,74 +1450,31 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
 
-        final Card source = sa != null ? sa.getHostCard() : null;
-
-        boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
-        boolean discardMadness = sa != null && sa.hasParam("Madness");
-
-        // DiscardToTopOfLibrary and Madness are replacement discards,
-        // that should not trigger other Replacement again
-        if (!discardToTopOfLibrary && !discardMadness) {
-            // Replacement effects
-            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
-            repRunParams.put(AbilityKey.Source, source);
-            repRunParams.put(AbilityKey.Affected, this);
-            if (params != null) {
-                repRunParams.putAll(params);
-            }
-
-            if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
-                return null;
-            }
-        }
-
         discardedThisTurn.add(CardCopyService.getLKICopy(c));
+
+        params.put(AbilityKey.Discard, true);
+        params.put(AbilityKey.EffectOnly, effect);
+        final Card newCard = game.getAction().moveToGraveyard(c, sa, params);
 
         StringBuilder sb = new StringBuilder();
         sb.append(this).append(" discards ").append(c);
-        final Card newCard;
-        if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa, params);
-            sb.append(" to the library");
-            // Play the Discard sound
-        }
-        else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa, params);
-            sb.append(" with Madness");
-        }
-        else {
-            newCard = game.getAction().moveToGraveyard(c, sa, params);
-            // Play the Discard sound
-        }
+        //sb.append(" to the library");
+        //sb.append(" with Madness");
         sb.append(".");
+        // Play the Discard sound
+        game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
 
         newCard.setDiscarded(true);
 
-        // Run triggers
-        Card cause = null;
-        if (sa != null) {
-            if (sa.hasParam("RememberDiscarded")) {
-                source.addRemembered(newCard);
-            }
-
-            cause = sa.getHostCard();
-            // for Replacement of the discard Cause
-            if (sa.hasParam("Cause")) {
-                final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
-                if (!col.isEmpty()) {
-                    cause = col.getFirst();
-                }
-            }
+        if (sa != null && sa.hasParam("RememberDiscarded")) {
+            sa.getHostCard().addRemembered(newCard);
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Card, c);
-        runParams.put(AbilityKey.Cause, cause);
-        runParams.put(AbilityKey.IsMadness, discardMadness);
-        if (params != null) {
-            runParams.putAll(params);
-        }
+        runParams.put(AbilityKey.Cause, sa);
+        runParams.putAll(params);
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
-        game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
+
         return newCard;
     }
 
@@ -3793,12 +3749,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (hasLost()) {
             return;
         }
-        // Replacement effects
+
         Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Cause, sa);
-        if (params != null) {
-            repParams.putAll(params);
-        }
+        repParams.putAll(params);
         if (game.getReplacementHandler().run(ReplacementType.Learn, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
