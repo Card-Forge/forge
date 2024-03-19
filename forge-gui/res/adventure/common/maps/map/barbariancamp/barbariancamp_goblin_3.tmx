@@ -10,7 +10,7 @@
  <tileset firstgid="38401" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="11" name="Collision" width="30" height="25">
   <data encoding="base64" compression="zlib">
-   eJy7JsxAEvgrCMGUgs2ipNlZIkK5naTaS01Aqn8Hs70JRKgrBsbXNRLT1mC2e44QceqoaTexdsLAUEjbIMAnAMEDYS8uICYKwSCwRRR/HNIqbYMAIT9RKo8LgPwkhkcvIT9TI+3hsh+f2bRM86DyEJQWsGFq1UfYwFDJx9QAV4VpG5Yj1U5YeUZvf44C+gAAdjQqlw==
+   eJwz4WMgCZjwQTClgBQzqGUnqfZSE5Dq38Fsb4IgcWbRIqwHyu45QsSpo6bdxNqJbPdAAFLt5ROA4IGwFxcQE4VgENgCpK8J47eXVmG9WRS/PCF7yXVXsQjC/7jMxWc2NcIDl/20thef2fgwLe0dCDAQ9tI6LEeqnfRIp6Ng4AAAwYwSpg==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="25">
