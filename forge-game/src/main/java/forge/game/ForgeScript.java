@@ -331,8 +331,9 @@ public class ForgeScript {
             return Expressions.compare(targets.size(), comparator, y);
         } else if (property.startsWith("IsTargeting")) {
             String[] k = property.split(" ", 2);
+            String unescaped = k[1].replace("~", "+");
             boolean found = false;
-            for (GameObject o : AbilityUtils.getDefinedObjects(source, k[1], spellAbility)) {
+            for (GameObject o : AbilityUtils.getDefinedObjects(source, unescaped, spellAbility)) {
                 if (sa.isTargeting(o)) {
                     found = true;
                     break;
