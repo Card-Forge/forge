@@ -489,6 +489,33 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
+    @Override
+    public final boolean isAura()           { return hasSubtype("Aura"); }
+    @Override
+    public final boolean isEquipment()  { return hasSubtype("Equipment"); }
+    @Override
+    public final boolean isFortification()  { return hasSubtype("Fortification"); }
+
+    @Override
+    public boolean isSaga() {
+        return hasSubtype("Saga");
+    }
+
+    @Override
+    public boolean isHistoric() {
+        return isLegendary() || isArtifact() || isSaga();
+    }
+
+    @Override
+    public boolean isOutlaw() {
+        if (subtypes.isEmpty()) {
+            return false;
+        }
+        return !Collections.disjoint(subtypes, Constant.OUTLAW_TYPES);
+    }
+
+    @Override
     public String toString() {
         if (calculatedType == null) {
             StringBuilder sb = new StringBuilder(StringUtils.join(getTypesBeforeDash(), ' '));
@@ -814,6 +841,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 pluralTypes.put(c.name(), c.pluralName);
             }
         }
+
+
+        public static final Set<String> OUTLAW_TYPES = Sets.newHashSet(
+                "Assassin",
+                "Mercenary",
+                "Pirate",
+                "Rogue",
+                "Warlock");
     }
     public static class Predicates {
         public static Predicate<String> IS_LAND_TYPE = new Predicate<String>() {

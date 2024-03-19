@@ -104,6 +104,8 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.equals("Outlaw")) {
+            return cardState.getTypeWithChanges().isOutlaw();
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !cardState.getTypeWithChanges().hasStringType(property.substring(3));
