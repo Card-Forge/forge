@@ -147,7 +147,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     @Override
     public boolean contains(Object o) {
         if (o instanceof Card) {
-            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithTimestamp((Card) o));
+            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithGameTimestamp((Card) o));
         }
         return super.contains(o);
     }

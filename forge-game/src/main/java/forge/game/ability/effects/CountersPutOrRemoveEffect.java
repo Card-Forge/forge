@@ -76,7 +76,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
             if (!eachExisting && sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,

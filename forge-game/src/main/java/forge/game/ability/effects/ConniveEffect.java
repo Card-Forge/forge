@@ -94,7 +94,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
                 Card gamec = game.getCardState(conniver);
                 // if the card is not in the game anymore, this might still return true, but it's no problem
-                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
+                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                 }
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));

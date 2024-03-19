@@ -3135,7 +3135,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
         final String name = "Planar Dice";
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setOwner(this);
         eff.setImmutable(true);
