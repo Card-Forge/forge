@@ -7073,8 +7073,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canExiledBy(final SpellAbility source, final boolean effect) {
-        if (game.getCardState(this, null) == null) return false;
-        // LKI in that case, the card is not in game anymore (this should check Self too)
         return !StaticAbilityCantExile.cantExile(this, source, effect);
     }
 

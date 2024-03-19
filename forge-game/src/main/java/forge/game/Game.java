@@ -712,9 +712,6 @@ public class Game {
             if (!visitor.visitAll(player.getInboundTokens())) {
                 return;
             }
-            if (!visitor.visitAll(player.getZone(ZoneType.None).getCards())) {
-                return;
-            }
         }
         visitor.visitAll(getStackZone().getCards());
     }
