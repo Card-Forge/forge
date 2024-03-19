@@ -25,7 +25,7 @@
  </layer>
  <layer id="13" name="Background" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJzVmF9OwzAMxjP+PPBSIW0ta6+CBg9IkzjGJOAk3AKkwSkQBxjPXICzjFqZVdez06Q40/ikT3OiKP3Vcdp0xaVzhZEnpXMPtfeq7uIT0r+d+TYYYi46X0hWzOA18DTe27qLXdPFMGZ54f1S9hmlWOO35ubaTPuGMW87r0t5HonvkNzAuZp5YxvGfMy9Ne6he8nB/T318z5fOffY1spT7ePzZjz3IeoEuUGnLetZs18nx8iNghzzmNf6F3GqrJglLe/77RB3Krsls8bAedHv5Xh2K25+fW4pxxJ3LHvq2ksaYtasccewp+TxL4xS/hdV+8xJYKe5tOYGaftOqptQzkN5z5Fvyq3x5+Dma0JlVSexHpK2F3mOpJyBtNrQntdwZrHg1kTnwPdISq4oN7By/tfdWfyn3aM3lb8G9ENsyc1rd8Pm5n3IyvnRcDaQ1gNr30Kx3KH74Nx0Tul9OlY833StJW7OL/Fo+c7NjXsK4xDX59wbvm8mZfdtib6u9vvQt5UNN+XhbXoPGrdVvaYK1vQ/ci8G1k1bb4t1H6O7ovtFa+PQqWfKVOF/GdR4TcoxxMyVk1njBmvMsdy5lZrrY2H/BfI7g1c=
+   eJzVmFFKAzEQhlPFB18Woc3S3atI64NQ8BgFb6VQPYV4gPbZC3iW1iEdMh1nssk6KfWHn86GkP12ZtJN29w51xh54p177oLXXYyvyPh+Fq7BEHPR9VKyYgZvgKcP3ncxdn2MYc7qNvjFnzJKscZvzc21nZ4a5rwdvfHyOhLfObmBcz0LxmuY8zEP1riHnqUG99dUrutNP577HH0icfM+uUTulHiv74hLZcUsafWUz13KbsmsMXBe9Lsfz27Fze/PLeVY4s5lL629pCFmzRp3DntJHv/CKOV/0Tp3XcBOc2nNDdL2ndQ3qZyn8l4j35Rb46/BzWtCZdUnuR6Sthd5jqScgbTe0L6v4cxiwa2JroHvkZJcUW5g5fyvx7P4988eXbbhHjAOsSU3790tW5uPISvnR8PZQKoH9r6FcrlTz8G56ZrS+3SseL5prSVuzi/xaPmuzY17CuMU1+c8GH7fTHz8bYm+b3+PoR9aG27Kw6/pM2jcVv1aKqjpf+ReDNRNq7dF3cfosYmfaG0euvRMWSr8L4Ma70k5hpi5ajJr3GCNOZe7tkpzfSnsB2DMf7M=
   </data>
  </layer>
  <layer id="15" name="Walls" width="46" height="28">
@@ -35,7 +35,7 @@
  </layer>
  <layer id="16" name="Clutter" width="46" height="28">
   <data encoding="base64" compression="zlib">
-   eJxjYBhAIDqQlo+CgQQOPAPtglGADBYO0bw4GN1tLYZg3xbDrsYeh/hgAoJymGJfeenvDnzgeBIDw4mkgXYFdvBfBLecezIDg0cy/dxCCNSRGK9nUlH579ip5xZag1nAumcBD4Q+KowQR2aD0vl3Qdq64zWR6ljVIDTIvV4pEPqPJG71U4UodhpWMAetrJ1H5bLXWJiwGlqAmdC0gMxfAOXPH2TtFHS3ogNsZfZwBtqM1DOL1ukbG4hjGBxx9lAMlSYG/KKNUwY9mI+WLshtg0pLUO4WUoAtWtySm77p7W5swE4MNx5MwI2TOLGhAEbdTV8wGNwNAJMKKJ0=
+   eJxjYBhAIDqQlo+CgQQOPAh2qiQDQ5rkwLmFFNAojmAzSzEwsEhhlxtqYOEQzYuD0d3WYgj2bTHsauxxiA8mICiHKfaVl/7uwAeOJzEwnEgaaFdgB/9FcMu5JzMweCTTzy2EQB2J8XomFZX/jp16bqE1mAWsexbwQOijwghxZDYonX8XpK07XhOpjlUNQoPc65UCof/gqS+nClHsNKxgDlpZO4/KZa+xMGE1tAAzoWkBmb8Ayp/Pg13PQAF0t6IDbGX2cAbajNQzi9bpGxuIYxgccfZQDJUmBvyijVMGPZiPli7IbYNKS1DuFlKALVrckpu+6e1ubMBODDceTMCNkzixoQBG3U1fMBjcDQDqgSsF
   </data>
  </layer>
  <layer id="19" name="HighestLayer" width="46" height="28">
