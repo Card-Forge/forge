@@ -77,13 +77,6 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/gold.tx" x="320" y="384" visible="0">
-   <properties>
-    <property name="reward">[{
- &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 250
-}]</property>
-   </properties>
-  </object>
   <object id="60" template="../../obj/enemy.tx" x="364.086" y="354.805">
    <properties>
     <property name="enemy" value="Hidden Snake"/>
