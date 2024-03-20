@@ -1911,8 +1911,6 @@ public class GameAction {
             runParams.putAll(params);
         }
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
-        // in case the destroyed card has such a trigger
-        game.getTriggerHandler().registerActiveLTBTrigger(c);
 
         final Card sacrificed = sacrificeDestroy(c, sa, params);
         return sacrificed != null;
