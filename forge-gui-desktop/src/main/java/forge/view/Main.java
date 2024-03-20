@@ -41,7 +41,7 @@ public final class Main {
             options.setTag("Java Version", System.getProperty("java.version"));
         }, true);
 
-        // HACK - temporary solution to "Comparison method violates it's general contract!" crash
+        // HACK - temporary solution to "Comparison method violates its general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 
         //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
@@ -67,7 +67,7 @@ public final class Main {
 
         // command line startup here
         String mode = args[0].toLowerCase();
-        
+
         switch(mode) {
             case "sim":
                 SimulateMatch.simulate(args);
@@ -80,23 +80,19 @@ public final class Main {
             case "server":
                 System.out.println("Dedicated server mode.\nNot implemented.");
                 break;
-            
+
             default:
                 System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
                 break;
         }
-        
-        System.exit(0);
-    }
 
-    @SuppressWarnings("deprecation")
-	@Override
-    protected void finalize() throws Throwable {
         try {
             ExceptionHandler.unregisterErrorHandling();
-        } finally {
-            super.finalize();
+        } catch (java.io.IOException e) {
+            System.out.println(e.getMessage());
         }
+
+        System.exit(0);
     }
 
     // disallow instantiation
