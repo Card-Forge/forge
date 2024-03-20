@@ -9,7 +9,7 @@ SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ Pay Energy for abil
 SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBExile | ConditionCheckSVar$ X 
 SVar:DBExile:DB$ Dig | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenNumber$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber
 DeckHas:Ability$Counters
