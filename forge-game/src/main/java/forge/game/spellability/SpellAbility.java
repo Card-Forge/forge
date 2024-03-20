@@ -1244,6 +1244,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return null; // the ability was not copyable, e.g. a Suspend SA may get here
         }
         newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+        // currently needed by AI
         if (!newSA.hasParam("WithoutManaCost")) {
             newSA.mapParams.put("WithoutManaCost", "True");
         }
