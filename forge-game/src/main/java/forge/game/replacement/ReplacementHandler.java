@@ -120,18 +120,17 @@ public class ReplacementHandler {
                 Zone cardZone = game.getZoneOf(c);
 
                 // only when not prelist
-                boolean noLKIstate = c != crd || event != ReplacementType.Moved || !ZoneType.Battlefield.equals(runParams.get(AbilityKey.Origin));;
-                // might be inbound token
-                noLKIstate |= !runParams.containsKey(AbilityKey.LastStateBattlefield) || runParams.get(AbilityKey.LastStateBattlefield) == null;
+                boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
                 if (!noLKIstate) {
-                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(crd);
-                    // no LKI found for this card so it shouldn't apply, this can happen during simultaneous zone changes
-                    if (lastState == crd) {
+                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
+                    if (lastState != c) {
+                        // use LKI because it has the right RE from the state before the effect started
+                        c = lastState;
+                        cardZone = lastState.getLastKnownZone();
+                    } else if (cardZone.is(ZoneType.Battlefield)) {
+                        // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
                         return true;
                     }
-                    // use the LKI because it has the right RE from the state before the effect started
-                    c = lastState;
-                    cardZone = lastState.getLastKnownZone();
                 }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
