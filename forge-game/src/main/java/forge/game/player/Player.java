@@ -3776,12 +3776,13 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveTo(ZoneType.Hand, c, sa, params);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
             List<Card> discardedBefore = Lists.newArrayList(getDiscardedThisTurn());
-            if (discard(c, sa, true, params) != null) {
+            Card moved = discard(c, sa, true, params);
+            if (moved != null) {
                 // Change this if something would make multiple player learn at the same time
 
                 // Discard Trigger outside Effect
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-                runParams.put(AbilityKey.Cards, new CardCollection(c));
+                runParams.put(AbilityKey.Cards, new CardCollection(moved));
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                 if (params != null) {
