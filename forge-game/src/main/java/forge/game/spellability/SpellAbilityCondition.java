@@ -402,7 +402,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 }
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), host, sa)));
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, host, sa)));
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
@@ -433,7 +433,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 }
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent2().split(","), sa.getActivatingPlayer(), host, sa)));
+            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent2().split(","), activator, host, sa)));
 
             final String rightString = this.getPresentCompare2().substring(2);
             int right = AbilityUtils.calculateAmount(host, rightString, sa);
@@ -487,7 +487,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             while (abSub != null && !result) {
                 for (final GameObject o : abSub.getTargets()) {
-                    if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), host, sa)) {
+                    if (o.isValid(this.getTargetValidTargeting().split(","), activator, host, sa)) {
                         result = true;
                         break;
                     }
