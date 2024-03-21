@@ -1835,7 +1835,7 @@ public class ComputerUtilCard {
         for (final Card c : list) {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                vCard.removePTBoost(c.getTimestamp(), stAb.getId());
+                vCard.removePTBoost(c.getLayerTimestamp(), stAb.getId());
                 if (!stAb.checkMode("Continuous")) {
                     continue;
                 }
@@ -1858,7 +1858,7 @@ public class ComputerUtilCard {
                     String addT = stAb.getParam("AddToughness");
                     def = AbilityUtils.calculateAmount(addT.contains("Affected") ? vCard : c, addT, stAb, true);
                 }
-                vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
+                vCard.addPTBoost(att, def, c.getLayerTimestamp(), stAb.getId());
             }
         }
     }

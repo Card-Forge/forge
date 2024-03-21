@@ -1,0 +1,12 @@
+Name:T-45 Power Armor
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Equipped creature gets +3/+3 and doesn't untap during its controller's untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may pay {E}. If you do, untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it.
+SVar:TrigUntap:AB$ Untap | Cost$ PayEnergy<1> | Defined$ Equipped | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ Menace,Trample,Lifelink | Defined$ Equipped
+DeckHas:Ability$Counters|LifeGain
+K:Equip:3
+Oracle:When T-45 Power Armor enters the battlefield, you get {E}{E} (two energy counters).\nEquipped creature gets +3/+3 and doesn't untap during its controller's untap step.\nAt the beginning of your upkeep, you may pay {E}. If you do, untap equipped creature, then put your choice of a menace, trample, or lifelink counter on it.\nEquip {3}

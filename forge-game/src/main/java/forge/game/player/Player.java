@@ -31,7 +31,6 @@ import forge.card.mana.ManaCostShard;
 import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
@@ -106,7 +105,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numDrawnThisTurn;
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
-    private int numDiscardedThisTurn;
     private int numExploredThisTurn;
     private int numTokenCreatedThisTurn;
     private int numForetoldThisTurn;
@@ -131,6 +129,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int descended = 0;
 
     private List<Card> sacrificedThisTurn = new ArrayList<>();
+    private List<Card> discardedThisTurn = new ArrayList<>();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -1451,73 +1450,31 @@ public class Player extends GameEntity implements Comparable<Player> {
             return null;
         }
 
-        final Card source = sa != null ? sa.getHostCard() : null;
+        discardedThisTurn.add(CardCopyService.getLKICopy(c));
 
-        boolean discardToTopOfLibrary = null != sa && sa.hasParam("DiscardToTopOfLibrary");
-        boolean discardMadness = sa != null && sa.hasParam("Madness");
-
-        // DiscardToTopOfLibrary and Madness are replacement discards,
-        // that should not trigger other Replacement again
-        if (!discardToTopOfLibrary && !discardMadness) {
-            // Replacement effects
-            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
-            repRunParams.put(AbilityKey.Source, source);
-            repRunParams.put(AbilityKey.Affected, this);
-            if (params != null) {
-                repRunParams.putAll(params);
-            }
-
-            if (game.getReplacementHandler().run(ReplacementType.Discard, repRunParams) != ReplacementResult.NotReplaced) {
-                return null;
-            }
-        }
+        params.put(AbilityKey.Discard, true);
+        params.put(AbilityKey.EffectOnly, effect);
+        final Card newCard = game.getAction().moveToGraveyard(c, sa, params);
 
         StringBuilder sb = new StringBuilder();
         sb.append(this).append(" discards ").append(c);
-        final Card newCard;
-        if (discardToTopOfLibrary) {
-            newCard = game.getAction().moveToLibrary(c, 0, sa, params);
-            sb.append(" to the library");
-            // Play the Discard sound
-        }
-        else if (discardMadness) {
-            newCard = game.getAction().exile(c, sa, params);
-            sb.append(" with Madness");
-        }
-        else {
-            newCard = game.getAction().moveToGraveyard(c, sa, params);
-            // Play the Discard sound
-        }
+        //sb.append(" to the library");
+        //sb.append(" with Madness");
+        sb.append(".");
+        // Play the Discard sound
+        game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
 
         newCard.setDiscarded(true);
 
-        sb.append(".");
-        numDiscardedThisTurn++;
-        // Run triggers
-        Card cause = null;
-        if (sa != null) {
-            if (sa.hasParam("RememberDiscarded")) {
-                source.addRemembered(newCard);
-            }
-
-            cause = sa.getHostCard();
-            // for Replacement of the discard Cause
-            if (sa.hasParam("Cause")) {
-                final CardCollection col = AbilityUtils.getDefinedCards(cause, sa.getParam("Cause"), sa);
-                if (!col.isEmpty()) {
-                    cause = col.getFirst();
-                }
-            }
+        if (sa != null && sa.hasParam("RememberDiscarded")) {
+            sa.getHostCard().addRemembered(newCard);
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Card, c);
-        runParams.put(AbilityKey.Cause, cause);
-        runParams.put(AbilityKey.IsMadness, discardMadness);
-        if (params != null) {
-            runParams.putAll(params);
-        }
+        runParams.put(AbilityKey.Cause, sa);
+        runParams.putAll(params);
         game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
-        game.getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
+
         return newCard;
     }
 
@@ -1552,12 +1509,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         numForetoldThisTurn = 0;
     }
 
-    public final int getNumDiscardedThisTurn() {
-        return numDiscardedThisTurn;
+    public final List<Card> getDiscardedThisTurn() {
+        return discardedThisTurn;
     }
-
-    public final void resetNumDiscardedThisTurn() {
-        numDiscardedThisTurn = 0;
+    public final void resetDiscardedThisTurn() {
+        discardedThisTurn.clear();
     }
 
     public final int getNumExploredThisTurn() {
@@ -2509,7 +2465,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
-        resetNumDiscardedThisTurn();
         resetNumExploredThisTurn();
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
@@ -2522,6 +2477,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSurveilThisTurn();
         resetCycledThisTurn();
         resetEquippedThisTurn();
+        resetDiscardedThisTurn();
         resetSacrificedThisTurn();
         resetVenturedThisTurn();
         setRevolt(false);
@@ -3179,7 +3135,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
         final String name = "Planar Dice";
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setOwner(this);
         eff.setImmutable(true);
@@ -3793,12 +3749,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (hasLost()) {
             return;
         }
-        // Replacement effects
+
         Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Cause, sa);
-        if (params != null) {
-            repParams.putAll(params);
-        }
+        repParams.putAll(params);
         if (game.getReplacementHandler().run(ReplacementType.Learn, repParams) != ReplacementResult.NotReplaced) {
             return;
         }
@@ -3821,15 +3775,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().reveal(new CardCollection(c), c.getOwner(), true);
             game.getAction().moveTo(ZoneType.Hand, c, sa, params);
         } else if (c.isInZone(ZoneType.Hand)) { // Discard and Draw
-            boolean firstDiscard = getNumDiscardedThisTurn() == 0;
-            if (discard(c, sa, true, params) != null) {
+            List<Card> discardedBefore = Lists.newArrayList(getDiscardedThisTurn());
+            Card moved = discard(c, sa, true, params);
+            if (moved != null) {
                 // Change this if something would make multiple player learn at the same time
 
                 // Discard Trigger outside Effect
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-                runParams.put(AbilityKey.Cards, new CardCollection(c));
+                runParams.put(AbilityKey.Cards, new CardCollection(moved));
                 runParams.put(AbilityKey.Cause, sa);
-                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                 if (params != null) {
                     runParams.putAll(params);
                 }

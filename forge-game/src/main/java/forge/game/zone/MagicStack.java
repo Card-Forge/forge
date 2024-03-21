@@ -660,7 +660,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         final Card card = (Card) o;
                         Card current = game.getCardState(card);
                         if (current != null) {
-                            invalidTarget = current.getTimestamp() != card.getTimestamp();
+                            invalidTarget = !current.equalsWithGameTimestamp(card);
                         }
                         invalidTarget = invalidTarget || !sa.canTarget(card);
                     } else if (o instanceof SpellAbility) {
@@ -669,6 +669,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     } else {
                         invalidTarget = !sa.canTarget(o);
                     }
+                    // TODO remove targets only after the Loop
                     // Remove targets
                     if (invalidTarget) {
                         choices.remove(o);

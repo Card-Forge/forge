@@ -243,7 +243,7 @@ public class GameAction {
                 copied = new CardCopyService(c).copyCard(false);
             }
 
-            copied.setTimestamp(c.getTimestamp());
+            copied.setGameTimestamp(c.getGameTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
                 // try not to copy changed stats when moving to stack
@@ -379,7 +379,7 @@ public class GameAction {
 
         if (!zoneTo.is(ZoneType.Stack)) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
-            copied.setTimestamp(game.getNextTimestamp());
+            copied.setGameTimestamp(game.getNextTimestamp());
         }
 
         copied.getOwner().removeInboundToken(copied);
@@ -479,7 +479,7 @@ public class GameAction {
                 if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
                     KeywordInterface ki = c.getCastSA().getKeyword();
                     ki.setHostCard(copied);
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), 0, true);
                 }
 
                 // 607.2q linked ability can find cards exiled as cost while it was a spell
@@ -1112,7 +1112,7 @@ public class GameAction {
             public int compare(final StaticAbility a, final StaticAbility b) {
                 return ComparisonChain.start()
                         .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
-                        .compare(a.getHostCard().getTimestamp(), b.getHostCard().getTimestamp())
+                        .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
                         .result();
             }
         };
@@ -1528,7 +1528,7 @@ public class GameAction {
                 continue;
             }
             // sort by game timestamp
-            rolesByPlayer.sort(CardPredicates.compareByTimestamp());
+            rolesByPlayer.sort(CardPredicates.compareByGameTimestamp());
             removeList.addAll(rolesByPlayer.subList(0, rolesByPlayer.size() - 1));
             checkAgain = true;
         }
@@ -1847,7 +1847,7 @@ public class GameAction {
         long ts = 0;
 
         for (final Card crd : worlds) {
-            long crdTs = crd.getTimestamp();
+            long crdTs = crd.getGameTimestamp();
             if (crdTs > ts) {
                 ts = crdTs;
                 toKeep.clear();
@@ -1882,14 +1882,12 @@ public class GameAction {
             return false;
         }
 
-        // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(c);
         repRunParams.put(AbilityKey.Cause, sa);
         repRunParams.put(AbilityKey.Regeneration, regenerate);
         if (params != null) {
             repRunParams.putAll(params);
         }
-
         if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
         }
@@ -1904,15 +1902,12 @@ public class GameAction {
         // Play the Destroy sound
         game.fireEvent(new GameEventCardDestroyed());
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Causer, activator);
         if (params != null) {
             runParams.putAll(params);
         }
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
-        // in case the destroyed card has such a trigger
-        game.getTriggerHandler().registerActiveLTBTrigger(c);
 
         final Card sacrificed = sacrificeDestroy(c, sa, params);
         return sacrificed != null;

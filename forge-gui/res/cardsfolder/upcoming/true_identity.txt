@@ -1,0 +1,8 @@
+Name:True Identity
+ManaCost:1 W
+Types:Enchantment
+K:Disguise:W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Permanent.Other+YouCtrl | Execute$ TrigScry | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever CARDNAME or another permanent you control is turned face up, scry 1, then draw a card. This ability triggers only once each turn.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever True Identity or another permanent you control is turned face up, scry 1, then draw a card. This ability triggers only once each turn.\nDisguise {W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

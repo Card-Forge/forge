@@ -1,0 +1,10 @@
+Name:Survivor's Med Kit
+ManaCost:1
+Types:Artifact
+A:AB$ Charm | Cost$ 1 T | Choices$ DBDraw,DBFood,DBRadAway | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Stimpak — Draw a card.
+SVar:DBFood:DB$ Token | TokenScript$ c_a_food_sac | SpellDescription$ Fancy Lads Snack Cakes — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:DBRadAway:DB$ RemoveCounter | ValidTgts$ Player | TgtPrompt$ Select target player | CounterType$ RAD | CounterNum$ All | SubAbility$ DBSacSelf | SpellDescription$ RadAway — Target player loses all rad counters. Sacrifice CARDNAME.
+SVar:DBSacSelf:DB$ Sacrifice
+DeckHas:Ability$Sacrifice|LifeGain|Tokens & Type$Food
+Oracle:{1}, {T}: Choose one that hasn't been chosen —\n• Stimpak — Draw a card.\n• Fancy Lads Snack Cakes — Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\n• RadAway — Target player loses all rad counters. Sacrifice Survivor's Med Kit.

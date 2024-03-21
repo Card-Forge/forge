@@ -215,5 +215,13 @@ public abstract class Lang {
         return Integer.toString(n);
     }
 
-    public abstract String getNickName(final String name);
+    public String getNickName(final String name) {
+        if (name.contains(",")) {
+            return name.split(",")[0];
+        }
+        if (name.contains(":")) {
+            return name.split(":")[0];
+        }
+        return name.split(" ")[0];
+    }
 }

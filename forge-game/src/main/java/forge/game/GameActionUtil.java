@@ -719,7 +719,7 @@ public final class GameActionUtil {
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
         eff.setOwner(controller);
 

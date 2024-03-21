@@ -81,7 +81,7 @@ public class DebuffEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
 

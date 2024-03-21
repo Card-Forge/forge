@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Creature Elephant Soldier
 PT:4/4
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-R:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ValidSource$ Card.OppCtrl | ReplaceWith$ SurpriseETB | DiscardFromEffect$ True | Description$ If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
-SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
+R:Event$ Moved | ActiveZones$ Hand | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Discard$ True | EffectOnly$ True | ReplaceWith$ SurpriseETB | Description$ If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
+SVar:SurpriseETB:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
 SVar:DiscardMeByOpp:2
 Oracle:This spell can't be countered.\nIf a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.

@@ -263,7 +263,8 @@ public class GameCopier {
 
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
-            otherCard.setTimestamp(card.getTimestamp());
+            otherCard.setGameTimestamp(card.getGameTimestamp());
+            otherCard.setLayerTimestamp(card.getLayerTimestamp());
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
             if (card.isAttachedToEntity()) {
@@ -398,6 +399,9 @@ public class GameCopier {
             }
             if (c.isSolved()) {
                 newCard.setSolved(true);
+            }
+            if (c.isSaddled()) {
+                newCard.setSaddled(true);
             }
             if (c.isSuspected()) {
                 newCard.setSuspected(true);

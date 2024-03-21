@@ -91,7 +91,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 while (sa.getParam("AtRandom").equals("Urza") && i < chosenSAs.size()) {
                     if (!chosenSAs.get(i).usesTargeting()) {
                         i++;
-                    } else if (sa.getTargetRestrictions().hasCandidates(chosenSAs.get(i))) {
+                    } else if (chosenSAs.get(i).getTargetRestrictions().hasCandidates(chosenSAs.get(i))) {
                         p.getController().chooseTargetsFor(chosenSAs.get(i));
                         i++;
                     } else {

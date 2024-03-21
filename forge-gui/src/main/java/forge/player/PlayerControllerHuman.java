@@ -1407,7 +1407,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
-                       final ListMultimap<Object, Player> votes, Player forPlayer) {
+                       final ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
+        if (optional) {
+            return getGui().oneOrNone(prompt, options);
+        }
         return getGui().one(prompt, options);
     }
 
@@ -2840,7 +2843,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             PaperCard c = carddb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
-            forgeCard.setTimestamp(getGame().getNextTimestamp());
+            forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
             PaperCard finalC = c;
             getGame().getAction().invoke(() -> {

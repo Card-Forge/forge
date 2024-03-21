@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:4/5
 K:Split second
 K:Shroud
-T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigReturn | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
+T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigReturn | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand
 SVar:DiscardMeByOpp:1
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nShroud (This creature can't be the target of spells or abilities.)\nWhen a spell or ability an opponent controls causes you to discard Quagnoth, return it to your hand.

@@ -3,6 +3,8 @@ package forge.game.ability.effects;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.game.ability.AbilityUtils;
@@ -65,7 +67,7 @@ public class CharmEffect extends SpellAbilityEffect {
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
         // hotfix for complex cards when using getCardForUi
-        if (source.getController() == null && additionalDesc && !optional) {
+        if (source.getController() == null && !StringUtils.isNumeric(numParam) && additionalDesc && !optional) {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
         } else {

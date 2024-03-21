@@ -560,7 +560,7 @@ public abstract class SpellAbilityEffect {
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
 
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
@@ -761,7 +761,7 @@ public abstract class SpellAbilityEffect {
                         }
                         // better check if card didn't changed zones again?
                         Card newCard = game.getCardState(c, null);
-                        if (newCard == null || !newCard.equalsWithTimestamp(c)) {
+                        if (newCard == null || !newCard.equalsWithGameTimestamp(c)) {
                             continue;
                         }
                         if (sa.hasAdditionalAbility("ReturnAbility")) {
@@ -798,12 +798,15 @@ public abstract class SpellAbilityEffect {
 
     protected static void discard(SpellAbility sa, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
         Set<Player> discarders = discardedMap.keySet();
+        Map<Player, List<Card>> discardedBefore = Maps.newHashMap();
         for (Player p : discarders) {
+            discardedBefore.put(p, Lists.newArrayList(p.getDiscardedThisTurn()));
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, effect, params) != null) {
-                    discardedByPlayer.add(card);
+                Card moved = p.discard(card, sa, effect, params);
+                if (moved != null) {
+                    discardedByPlayer.add(moved);
                 }
             }
             discardedMap.put(p, discardedByPlayer);
@@ -812,11 +815,10 @@ public abstract class SpellAbilityEffect {
         for (Player p : discarders) {
             CardCollectionView discardedByPlayer = discardedMap.get(p);
             if (!discardedByPlayer.isEmpty()) {
-                boolean firstDiscard = p.getNumDiscardedThisTurn() - discardedByPlayer.size() == 0;
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.Cards, discardedByPlayer);
                 runParams.put(AbilityKey.Cause, sa);
-                runParams.put(AbilityKey.FirstTime, firstDiscard);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore.get(p));
                 p.getGame().getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
 
                 if (sa.hasParam("RememberDiscardingPlayers")) {

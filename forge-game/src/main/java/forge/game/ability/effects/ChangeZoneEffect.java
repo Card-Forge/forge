@@ -527,7 +527,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard) || gameCard.isPhasedOut()) {
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard) || gameCard.isPhasedOut()) {
                 continue;
             }
 
@@ -748,6 +748,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard.addMayLookTemp(player);
                 }
 
+                // CR 400.7k
                 if (sa.hasParam("TrackDiscarded")) {
                     movedCard.setDiscarded(true);
                 }

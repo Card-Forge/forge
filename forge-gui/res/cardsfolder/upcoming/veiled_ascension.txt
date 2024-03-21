@@ -1,0 +1,10 @@
+Name:Veiled Ascension
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a flying counter on each face-down creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.faceDown+YouCtrl | CounterType$ Flying | CounterNum$ 1
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.faceDown+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ Flying | CounterNum$ 1 | SpellDescription$ Face-down creatures you control enter the battlefield with a flying counter on them.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCloak | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may cloak the top card of your library.
+SVar:TrigCloak:DB$ Cloak | Amount$ 1 | Defined$ TopOfLibrary
+Oracle:When Veiled Ascension enters the battlefield, put a flying counter on each face-down creature you control.\nFace-down creatures you control enter the battlefield with a flying counter on them.\nAt the beginning of your upkeep, you may cloak the top card of your library.

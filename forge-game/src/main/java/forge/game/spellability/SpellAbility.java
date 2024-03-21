@@ -789,11 +789,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
     }
 
-    public boolean isBargain() {
+    public boolean isBargained() {
         return isOptionalCostPaid(OptionalCost.Bargain);
     }
 
-    public boolean isBuyBackAbility() {
+    public boolean isBuyback() {
         return isOptionalCostPaid(OptionalCost.Buyback);
     }
 
@@ -1096,7 +1096,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         basicSpell = basicSpell0;
     }
 
-    public boolean isFlashBackAbility() {
+    public boolean isFlashback() {
         return this.isAlternativeCost(AlternativeCost.Flashback);
     }
 
@@ -1244,6 +1244,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return null; // the ability was not copyable, e.g. a Suspend SA may get here
         }
         newSA.setPayCosts(newSA.getPayCosts().copyWithNoMana());
+        // currently needed by AI
         if (!newSA.hasParam("WithoutManaCost")) {
             newSA.mapParams.put("WithoutManaCost", "True");
         }

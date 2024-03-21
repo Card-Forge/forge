@@ -118,22 +118,19 @@ public class ReplacementHandler {
             public boolean visit(Card crd) {
                 Card c = preList.get(crd);
                 Zone cardZone = game.getZoneOf(c);
-                Zone lkiZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
 
                 // only when not prelist
-                boolean noLKIstate = c != crd || event != ReplacementType.Moved;
-                // might be inbound token
-                noLKIstate |= lkiZone == null || !lkiZone.is(ZoneType.Battlefield);
-                noLKIstate |= !runParams.containsKey(AbilityKey.LastStateBattlefield) || runParams.get(AbilityKey.LastStateBattlefield) == null;
+                boolean noLKIstate = c != crd || event != ReplacementType.Moved || c.isImmutable() || runParams.get(AbilityKey.LastStateBattlefield) == null;
                 if (!noLKIstate) {
-                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(crd);
-                    // no LKI found for this card so it shouldn't apply, this can happen during simultaneous zone changes
-                    if (lastState == crd) {
+                    Card lastState = ((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).get(c);
+                    if (lastState != c) {
+                        // use LKI because it has the right RE from the state before the effect started
+                        c = lastState;
+                        cardZone = lastState.getLastKnownZone();
+                    } else if (cardZone.is(ZoneType.Battlefield)) {
+                        // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
                         return true;
                     }
-                    // use the LKI because it has the right RE from the state before the effect started
-                    c = lastState;
-                    cardZone = lkiZone;
                 }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
@@ -331,7 +328,7 @@ public class ReplacementHandler {
 
             String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
-            final String question = replacementEffect instanceof ReplaceDiscard
+            final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)
                 : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", name, effectDesc);
             GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);

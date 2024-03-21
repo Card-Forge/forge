@@ -299,7 +299,7 @@ public class AbilityUtils {
                 Card gameState = game.getCardState(cl, null);
                 // cards that use this should only care about if it is still in that zone
                 // TODO if all LKI needs to be returned, need to change CardCollection return from this function
-                if (gameState != null && gameState.equalsWithTimestamp(cl)) {
+                if (gameState != null && gameState.equalsWithGameTimestamp(cl)) {
                     cards.add(gameState);
                 }
             }
@@ -1669,7 +1669,7 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("Bargain")) {
-                    return doXMath(calculateAmount(c, sq[sa.isBargain() ? 1 : 2], ctb), expr, c, ctb);
+                    return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
                 // Count$Madness.<True>.<False>
@@ -2341,7 +2341,7 @@ public class AbilityUtils {
             for (Card attacker : attackers) {
                 boolean add = true;
                 for (Card different : differentAttackers) {
-                    if (different.equalsWithTimestamp(attacker)) {
+                    if (different.equalsWithGameTimestamp(attacker)) {
                         add = false;
                         break;
                     }
@@ -3465,7 +3465,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("CardsDiscardedThisTurn")) {
-            return doXMath(player.getNumDiscardedThisTurn(), m, source, ctb);
+            return doXMath(player.getDiscardedThisTurn().size(), m, source, ctb);
         }
 
         if (value.contains("ExploredThisTurn")) {

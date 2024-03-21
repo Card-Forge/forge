@@ -95,7 +95,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             return SpecialCardAi.Timetwister.consider(ai, sa);
         } else if ("RetDiscardedThisTurn".equals(aiLogic)) {
             // e.g. Shadow of the Grave
-            return ai.getNumDiscardedThisTurn() > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
+            return ai.getDiscardedThisTurn().size() > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN);
         } else if ("ExileGraveyards".equals(aiLogic)) {
             for (Player opp : ai.getOpponents()) {
                 CardCollectionView cardsGY = opp.getCardsIn(ZoneType.Graveyard);

@@ -108,7 +108,7 @@ public class TriggerChangesZone extends Trigger {
                 moved = (Card) runParams.get(AbilityKey.CardLKI);
             } else if ("Battlefield".equals(runParams.get(AbilityKey.Destination))) {
                 List<Card> etbLKI = moved.getController().getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
-                etbLKI.sort(CardPredicates.compareByTimestamp());
+                etbLKI.sort(CardPredicates.compareByGameTimestamp());
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
             }
 
@@ -152,16 +152,9 @@ public class TriggerChangesZone extends Trigger {
                 return false;
             }
 
-            final Card card = (Card) runParams.get(AbilityKey.Card);
-            if (card == null) {
-                return false;
-            }
+            final Card card = (Card) runParams.get(AbilityKey.CardLKI);
             final int rightSide = AbilityUtils.calculateAmount(getHostCard(), cond.substring(2), this);
-
-            // need to check the ChangeZone LKI copy for damage, otherwise it'll return 0 for a new object in the new zone
-            Card lkiCard = card.getGame().getChangeZoneLKIInfo(card);
-
-            final boolean expr = Expressions.compare(lkiCard.getAssignedDamage(), cond, rightSide);
+            final boolean expr = Expressions.compare(card.getAssignedDamage(), cond, rightSide);
             if (!expr) {
                 return false;
             }

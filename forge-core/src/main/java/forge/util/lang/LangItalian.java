@@ -23,13 +23,4 @@ public class LangItalian extends Lang {
         return getPossesive(owner) + " " + object;
     }
 
-    @Override
-    public String getNickName(final String name) {
-        if (name.contains(",")) {
-            return name.split(",")[0];
-        } else {
-            return name.split(" ")[0];
-        }
-    }
-
 }

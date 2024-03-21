@@ -1,0 +1,14 @@
+Name:The Motherlode, Excavator
+ManaCost:3 R R
+Types:Legendary Artifact Creature Robot
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, choose target opponent. You get an amount of {E} (energy counters) equal to the number of nonbasic lands that player controls.
+SVar:TrigPump:DB$ Pump | IsCurse$ True | ValidTgts$ Opponent | TgtPrompt$ Select target Opponent | SubAbility$ DBEnergy
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
+SVar:X:Count$Valid Land.nonBasic+TargetedPlayerCtrl
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, you may pay {E}{E}{E}{E}. When you do, destroy target nonbasic land defending player controls, and creatures that player controls without flying can't block this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<4> | Execute$ TrigDestroy | SpellDescription$ When you do, destroy target nonbasic land defending player controls, and creatures that player controls without flying can't block this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic+ControlledBy Spawner>TriggeredDefendingPlayer | TgtPrompt$ Select target nonbasic land defending player controls | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Static | RememberObjects$ TargetedController
+SVar:Static:Mode$ CantBlockBy | ValidAttacker$ Creature | ValidBlocker$ Creature.withoutFlying+RememberedPlayerCtrl | Description$ Creatures that player controls without flying can't block this turn.
+Oracle:When The Motherlode, Excavator enters the battlefield, choose target opponent. You get an amount of {E} (energy counters) equal to the number of nonbasic lands that player controls.\nWhenever The Motherlode attacks, you may pay {E}{E}{E}{E}. When you do, destroy target nonbasic land defending player controls, and creatures that player controls without flying can't block this turn.

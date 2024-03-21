@@ -1,0 +1,13 @@
+Name:Rose, Cutthroat Raider
+ManaCost:2 R R
+Types:Legendary Artifact Creature Robot
+PT:3/2
+K:First Strike
+T:Mode$ Phase | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | CheckSVar$ RaidTest | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Raid — At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ You
+SVar:RaidTest:Count$AttackersDeclared
+SVar:X:PlayerCountRegisteredOpponents$HasPropertyBeenAttackedThisCombat
+T:Mode$ Sacrificed | ValidCard$ Junk.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever you sacrifice a Junk, add {R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1
+DeckHas:Ability$Sacrifice|Token & Type$Junk|Artifact
+Oracle:First strike\nRaid — At end of combat on your turn, if you attacked this turn, create a Junk token for each opponent you attacked. (It’s an artifact with “{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.”)\nWhenever you sacrifice a Junk, add {R}.

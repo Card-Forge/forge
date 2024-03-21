@@ -204,7 +204,7 @@ public abstract class PlayerController {
     public abstract PlanarDice choosePDRollToIgnore(List<PlanarDice> rolls);
     public abstract Integer chooseRollToIgnore(List<Integer> rolls);
 
-    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
+    public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional);
 
     public abstract boolean mulliganKeepHand(Player player, int cardsToReturn);
     public abstract CardCollectionView londonMulliganReturnCards(Player mulliganingPlayer, int cardsToReturn);

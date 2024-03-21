@@ -1267,6 +1267,8 @@ public abstract class GameState {
                     c.setRenowned(true);
                 } else if (info.startsWith("Solved")) {
                     c.setSolved(true);
+                } else if (info.startsWith("Saddled")) {
+                    c.setSaddled(true);
                 } else if (info.startsWith("Suspected")) {
                     c.setSuspected(true);
                 } else if (info.startsWith("Monstrous")) {

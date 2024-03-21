@@ -2,7 +2,7 @@ Name:Library of Leng
 ManaCost:1
 Types:Artifact
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
-R:Event$ Discard | ActiveZones$ Battlefield | ValidCard$ Card.YouCtrl | ReplaceWith$ DiscardToLibrary | Optional$ True | DiscardFromEffect$ True | Description$ If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.
-SVar:DiscardToLibrary:DB$ Discard | Defined$ ReplacedPlayer | Mode$ Defined | DefinedCards$ ReplacedCard | DiscardToTopOfLibrary$ True
+R:Event$ Moved | ActiveZones$ Battlefield | ValidCard$ Card.YouCtrl | Discard$ True | EffectOnly$ True | ReplaceWith$ DiscardToLibrary | Optional$ True | Description$ If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.
+SVar:DiscardToLibrary:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard
 SVar:NonStackingEffect:True
 Oracle:You have no maximum hand size.\nIf an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.

@@ -1,0 +1,11 @@
+Name:Vault 12: The Necropolis
+ManaCost:4 B B
+Types:Enchantment Saga
+K:Chapter:3:DBRadiation,DBToken,DBPutCounterAll
+SVar:DBRadiation:DB$ Radiation | Defined$ Player | Num$ 3 | SpellDescription$ Each player gets three rad counters.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie_mutant | TokenOwner$ You | SpellDescription$ Create X 2/2 black Zombie Mutant creature tokens, where X is the total number of rad counters among players.
+SVar:X:PlayerCountPlayers$Counters.RAD
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Zombie.YouCtrl,Mutant.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each creature you control that's a Zombie or Mutant.
+DeckHas:Ability$Token & Type$Zombie|Mutant
+DeckHints:Type$Zombie|Mutant
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player gets three rad counters.\nII — Create X 2/2 black Zombie Mutant creature tokens, where X is the total number of rad counters among players.\nIII — Put two +1/+1 counters on each creature you control that's a Zombie or Mutant.

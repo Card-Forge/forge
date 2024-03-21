@@ -223,7 +223,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (cardsAddedThisTurn.get(origin).contains(card)) {
             List<Card> cardsAddedThisTurnOrigin = getCardsAddedThisTurn(origin);
             int cardIndexOrigin = cardsAddedThisTurnOrigin.lastIndexOf(card);
-            long cardTimestampOrigin = cardsAddedThisTurnOrigin.get(cardIndexOrigin).getTimestamp();
+            long cardTimestampOrigin = cardsAddedThisTurnOrigin.get(cardIndexOrigin).getGameTimestamp();
             // need to check other zones if card didn't change again
             for (ZoneType z : cardsAddedThisTurn.keySet()) {
                 if (z == origin) {
@@ -233,7 +233,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                 if (cardsAddedThisTurn.get(z).contains(card)) {
                     List<Card> cardsAddedThisTurnNonOrigin = getCardsAddedThisTurn(z);
                     int cardIndex = cardsAddedThisTurnNonOrigin.lastIndexOf(card);
-                    long cardTimestamp = cardsAddedThisTurnNonOrigin.get(cardIndex).getTimestamp();
+                    long cardTimestamp = cardsAddedThisTurnNonOrigin.get(cardIndex).getGameTimestamp();
                     // the most recent version of this card did not come from the requested zone
                     if (cardTimestamp > cardTimestampOrigin) {
                         return false;

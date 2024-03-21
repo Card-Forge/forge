@@ -1,0 +1,10 @@
+Name:Experiment Twelve
+ManaCost:3 G
+Types:Creature Elf Lizard Warrior
+PT:4/4
+K:Trample
+K:Disguise:4 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigPutCounters | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, put +1/+1 counters on that creature equal to its power.
+SVar:TrigPutCounters:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardPower
+Oracle:Trample\nWhenever Experiment Twelve or another creature you control is turned face up, put +1/+1 counters on that creature equal to its power.\nDisguise {4}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

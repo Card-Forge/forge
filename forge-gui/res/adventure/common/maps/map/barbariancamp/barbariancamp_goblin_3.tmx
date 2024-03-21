@@ -10,7 +10,7 @@
  <tileset firstgid="38401" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="11" name="Collision" width="30" height="25">
   <data encoding="base64" compression="zlib">
-   eJy7JsxAEvgrCMGUgs2ipNlZIkK5naTaS01Aqn8Hs70JRKgrBsbXNRLT1mC2e44QceqoaTexdsLAUEjbIABKZ6T6jRr24rNTTBSCQWCLKP44pFXaBgFCfqJUHhcA+UkMj15CfqZG2sNlPz6zaZnmQekUlBawYWrVR9jAUMnH1ABXhWkbliPVTlh5Rm9/jgL6AAAtkCyn
+   eJwz4WMgCZjwQTClgBQzqGUnqfZSE5Dq38Fk71ReBoYZQHyJD4JnAtnTeQmbRYzd6OYi8y9h0U8Nu0F2XEaSv8iHyscGzIlQQ4zdhOSQMbF2Ems2LnFzCtMbqfaS4zdS7TVDiwdCdoqJQjAIbAHS14Tx20vIbj4B8vy5WRS/PKE8BbL3EhlhWyyC8D8ue8lN18QCXPbT2l58ZuPDtLR3IMBA2EvrsBypdtIjnY6CgQMAxz0qnQ==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="25">
@@ -164,9 +164,6 @@
 ]</property>
    </properties>
   </object>
-  <object id="80" template="../../obj/exit.tx" x="145.742" y="82.2095" width="140.016" height="60.5811"/>
-  <object id="81" template="../../obj/exit.tx" x="282.992" y="60.7095" width="60.016" height="63.0811"/>
-  <object id="82" template="../../obj/exit.tx" x="163.742" y="141.209" width="73.516" height="47.5811"/>
   <object id="84" template="../../obj/treasure.tx" x="144.5" y="273">
    <properties>
     <property name="reward">[
