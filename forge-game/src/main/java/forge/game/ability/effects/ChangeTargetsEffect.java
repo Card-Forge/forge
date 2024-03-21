@@ -7,6 +7,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 
 import forge.game.GameEntity;
@@ -35,9 +36,21 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final List<SpellAbility> sas = getTargetSpells(sa);
         final Player activator = sa.getActivatingPlayer();
-        final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : sa.getActivatingPlayer();
+        final Player chooser = sa.hasParam("Chooser") ? getDefinedPlayersOrTargeted(sa, "Chooser").get(0) : activator;
 
         final MagicStack stack = activator.getGame().getStack();
+        if (sa.hasParam("Any")) {
+            List<SpellAbility> stackAbs = new ArrayList<>();
+            for (SpellAbilityStackInstance stackinst : stack) {
+                final SpellAbility stSA = stackinst.getSpellAbility();
+                if (stSA.usesTargeting()) { // no need to change targets if it doesn't target
+                    stackAbs.add(stSA);
+                }
+            }
+            sas.addAll(chooser.getController().chooseSpellAbilitiesForEffect(stackAbs, sa, "Choose some now", 
+                0, stackAbs.size(), ImmutableMap.of()));
+        }
+
         for (final SpellAbility tgtSA : sas) {
             SpellAbilityStackInstance si = stack.getInstanceMatchingSpellAbilityID(tgtSA);
             if (si == null) {
