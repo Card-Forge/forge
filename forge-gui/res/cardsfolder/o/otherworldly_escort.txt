@@ -9,4 +9,5 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Grav
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | RemoveCreatureTypes$ True | Types$ Spirit,Detective | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Destroy | Cost$ 1 W T SubCounter<1/CHARGE> | ValidTgts$ Creature.dealtDamageToYouThisTurn | TgtPrompt$ Select target creature that dealt damage to you this turn | SpellDescription$ Destroy target creature that dealt damage to you this turn.
+DeckHas:Type$Spirit & Ability$Counters
 Oracle:When Otherworldly Escort dies, if it's not a Spirit, return it to the battlefield under its owner's control with four charge counters on it. It's a Spirit Detective. (It's no longer a Human.)\n{1}{W}, {T}, Remove a charge counter from Otherworldly Escort: Destroy target creature that dealt damage to you this turn.
