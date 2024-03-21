@@ -1,0 +1,9 @@
+Name:Tato Farmer
+ManaCost:2 G
+Types:Creature Zombie Mutant Peasant
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigRadiation | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may get two rad counters.
+SVar:TrigRadiation:DB$ Radiation | Defined$ You | Num$ 2
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Land.milledThisTurn | Tapped$ True | TgtPrompt$ Select target land card in a graveyard that was milled this turn | SpellDescription$ Put target land card in a graveyard that was milled this turn onto the battlefield under your control tapped.
+DeckHints:Ability$Mill
+Oracle:Landfall — Whenever a land enters the battlefield under your control, you may get two rad counters.\n{T}: Put target land card in a graveyard that was milled this turn onto the battlefield under your control tapped.

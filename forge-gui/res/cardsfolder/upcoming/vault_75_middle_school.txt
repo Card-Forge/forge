@@ -1,0 +1,8 @@
+Name:Vault 75: Middle School
+ManaCost:2 W W
+Types:Enchantment Saga
+K:Chapter:3:DBExileAll,DBPutCounterAll,DBPutCounterAll
+SVar:DBExileAll:DB$ ChangeZoneAll | ChangeType$ Creature.powerGE4 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures with power 4 or greater.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile all creatures with power 4 or greater.\nII, III — Put a +1/+1 counter on each creature you control.
