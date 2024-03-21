@@ -153,12 +153,16 @@ public class AbilityUtils {
             }
         } else if ((defined.equals("Targeted") || defined.equals("TargetedCard")) && sa instanceof SpellAbility) {
             for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
-                Iterables.addAll(cards, tc.getTargetCards());
+                for (Card tgt : tc.getTargetCards()) {
+                    cards.add(game.getChangeZoneLKIInfo(tgt));
+                }
             }
         } else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
-            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) for (SpellAbility s : tc.getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
+            }
         } else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
                 Iterables.addAll(cards, ((SpellAbility)sa).getTargets().getTargetCards());
@@ -1554,7 +1558,7 @@ public class AbilityUtils {
      *            a {@link forge.game.CardTraitBase} object.
      * @return a int.
      */
-    public static int xCount(final Card c, final String s, final CardTraitBase ctb) {
+    public static int xCount(Card c, final String s, final CardTraitBase ctb) {
         final String s2 = applyAbilityTextChangeEffects(s, ctb);
         final String[] l = s2.split("/");
         final String expr = CardFactoryUtil.extractOperators(s2);
@@ -1589,6 +1593,8 @@ public class AbilityUtils {
         sq = l[0].split("\\.");
 
         final Game game = c.getGame();
+        // CR 608.2h
+        c = game.getChangeZoneLKIInfo(c);
 
         if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>

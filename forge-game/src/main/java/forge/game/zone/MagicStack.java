@@ -572,8 +572,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         finishResolving(sa, thisHasFizzled);
 
         game.copyLastState();
-        if (isEmpty()) {
-            // FIXME: assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object). Is this correct?
+        if (isEmpty() && !hasSimultaneousStackEntries()) {
+            // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)
             game.clearChangeZoneLKIInfo();
         }
     }
