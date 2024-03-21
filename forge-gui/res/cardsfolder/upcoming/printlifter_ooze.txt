@@ -1,0 +1,10 @@
+Name:Printlifter Ooze
+ManaCost:1 G
+Types:Creature Ooze
+PT:2/2
+K:Deathtouch
+K:Disguise:3 G
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, create a 0/0 green Ooze creature token with trample. The token enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures you control.
+SVar:TrigToken:DB$ Token | TokenScript$ g_0_0_ooze_trample | WithCountersType$ P1P1 | WithCountersAmount$ X
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Deathtouch\nWhenever Printlifter Ooze or another creature you control is turned face up, create a 0/0 green Ooze creature token with trample. The token enters the battlefield with X +1/+1 counters on it, where X is the number of other creatures you control.\nDisguise {3}{G}

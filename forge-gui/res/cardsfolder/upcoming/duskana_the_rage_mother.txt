@@ -1,0 +1,11 @@
+Name:Duskana, the Rage Mother
+ManaCost:2 R G W
+Types:Legendary Creature Bear
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each creature you control with base power and toughness 2/2.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+basePowerEQ2+baseToughnessEQ2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control with base power and toughness 2/2 attacks, it gets +3/+3 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ 3 | NumDef$ 3
+SVar:X:Count$Valid Creature.YouCtrl+basePowerEQ2+baseToughnessEQ2
+SVar:BuffedBy:Creature.powerEQ2,Creature.toughnessEQ2
+Oracle:When Duskana, the Rage Mother enters the battlefield, draw a card for each creature you control with base power and toughness 2/2.\nWhenever a creature you control with base power and toughness 2/2 attacks, it gets +3/+3 until end of turn.
