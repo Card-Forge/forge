@@ -261,7 +261,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (obj instanceof Card) {
                     Card tgtCard = (Card) obj;
                     Card gameCard = game.getCardState(tgtCard, null);
-                    if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                    if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                         tgtObjects.remove(obj);
                     } else {
                         targets.add(gameCard);
@@ -296,7 +296,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     // gameCard is LKI in that case, the card is not in game anymore
                     // or the timestamp did change
                     // this should check Self too
-                    if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+                    if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                         continue;
                     }
                 }

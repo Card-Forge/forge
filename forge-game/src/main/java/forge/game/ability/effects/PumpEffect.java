@@ -46,7 +46,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
-        if (gameCard == null || !applyTo.equalsWithTimestamp(gameCard)) {
+        if (gameCard == null || !applyTo.equalsWithGameTimestamp(gameCard)) {
             return;
         }
         final List<String> kws = Lists.newArrayList();

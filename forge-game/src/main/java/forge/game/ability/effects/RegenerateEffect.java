@@ -47,7 +47,7 @@ public class RegenerateEffect extends RegenerateBaseEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !c.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
             result.add(gameCard);

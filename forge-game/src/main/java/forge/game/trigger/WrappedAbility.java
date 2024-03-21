@@ -512,7 +512,7 @@ public class WrappedAbility extends Ability {
             if (ev.getValue() instanceof Card) {
                 Card card = (Card) ev.getValue();
                 Card current = game.getCardState(card);
-                if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
+                if (card.isInPlay() && current.isInPlay() && !current.equalsWithGameTimestamp(card)) {
                     // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
                     sa.getTriggeringObjects().remove(ev.getKey());
                 }

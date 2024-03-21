@@ -111,7 +111,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             Card dest = tgtCards.get(0);
 
             Card cur = game.getCardState(dest, null);
-            if (cur == null || !cur.equalsWithTimestamp(dest)) {
+            if (cur == null || !cur.equalsWithGameTimestamp(dest)) {
                 // Test to see if the card we're trying to add is in the expected state
                 return;
             }
@@ -205,7 +205,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 }
 
                 Card cur = game.getCardState(dest, null);
-                if (cur == null || !cur.equalsWithTimestamp(dest)) {
+                if (cur == null || !cur.equalsWithGameTimestamp(dest)) {
                     // Test to see if the card we're trying to add is in the expected state
                     continue;
                 }
@@ -261,7 +261,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         continue;
                     }
                     Card cur = game.getCardState(dest, null);
-                    if (cur == null || !cur.equalsWithTimestamp(dest)) {
+                    if (cur == null || !cur.equalsWithGameTimestamp(dest)) {
                         // Test to see if the card we're trying to add is in the expected state
                         continue;
                     }

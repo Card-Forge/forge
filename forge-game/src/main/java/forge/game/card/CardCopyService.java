@@ -356,7 +356,8 @@ public class CardCopyService {
 
         newCopy.copyChangedTextFrom(copyFrom);
 
-        newCopy.setTimestamp(copyFrom.getTimestamp());
+        newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
+        newCopy.setLayerTimestamp(copyFrom.getLayerTimestamp());
 
         newCopy.setBestowTimestamp(copyFrom.getBestowTimestamp());
 
