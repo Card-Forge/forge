@@ -749,7 +749,7 @@ public class PlayerControllerForTests extends PlayerController {
 
 	@Override
 	public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title,
-			int min, int max, Map<String, Object> params) {
+			int num, Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		return null;
 	}

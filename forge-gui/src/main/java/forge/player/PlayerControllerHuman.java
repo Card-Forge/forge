@@ -747,13 +747,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title, int min, int max, Map<String, Object> params) {
+    public List<SpellAbility> chooseSpellAbilitiesForEffect(List<SpellAbility> spells, SpellAbility sa, String title, int num, Map<String, Object> params) {
         List<SpellAbility> result = Lists.newArrayList();
         // create a mapping between a spell's view and the spell itself
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
 
         //override generic
-        List<SpellAbilityView> chosen = getGui().getChoices(title, min, max, Lists.newArrayList(spellViewCache.keySet()));
+        List<SpellAbilityView> chosen = getGui().getChoices(title, num, num, Lists.newArrayList(spellViewCache.keySet()));
 
         for (SpellAbilityView view : chosen) {
             if (spellViewCache.containsKey(view)) {
