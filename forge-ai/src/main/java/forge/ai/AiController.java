@@ -1859,6 +1859,8 @@ public class AiController {
                 maxCreatures = Math.max(maxCreatures, opp.getCreaturesInPlay().size());
             }
             return Math.min(choiceLimit, Math.max(minAllowedChoice, maxCreatures));
+        } else if ("Random".equals(logic)) {
+            return MyRandom.getRandom().nextInt((max - min) + 1) + min;
         }
         return max;
     }

@@ -141,6 +141,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     lowestNum.add(player);
                 }
             }
+            boolean matched = highestNum.size() == chooseMap.size();
             card.getGame().getAction().notifyOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
                 SpellAbility sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
@@ -207,6 +208,16 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 AbilityUtils.resolve(sub);
                 card.clearChosenNumber();
                 card.removeRemembered(guessPair.getKey());
+            }
+
+            if (matched && sa.hasParam("MatchedAbility")) {
+                SpellAbility sub = sa.getAdditionalAbility("MatchedAbility");
+                AbilityUtils.resolve(sub);
+            }
+
+            if (!matched && sa.hasParam("UnmatchedAbility")) {
+                SpellAbility sub = sa.getAdditionalAbility("UnmatchedAbility");
+                AbilityUtils.resolve(sub);
             }
         }
 
