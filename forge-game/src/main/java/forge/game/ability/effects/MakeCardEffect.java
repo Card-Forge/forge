@@ -49,7 +49,13 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     !player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(desc), null)) {
             		return;
             }
-            if (sa.hasParam("Name")) {
+            if (sa.hasParam("Choices")) {
+                for (String name : sa.getParam("Choices").split(",")) {
+                    // Cardnames that include "," must use ";" instead in Choices$ (i.e. Tovolar; Dire Overlord)
+                    name = name.replace(";", ",");
+                    faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                }
+            } else if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
                 if (n.equals("ChosenName")) {
                     if (source.hasNamedCard()) {
@@ -105,8 +111,13 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     } else {
                         String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
                                 CardTranslation.getTranslatedName(source.getName());
-                        chosen = player.getController().chooseCardName(sa, faces,
-                                Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName));
+                        String message = "";
+                        if (sa.hasParam("Choices")) {
+                            message = Localizer.getInstance().getMessage("lblChooseaCard");
+                        } else {
+                            message = Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName);
+                        }
+                        chosen = player.getController().chooseCardName(sa, faces, message);
                     }
                     names.add(chosen);
                     faces.remove(StaticData.instance().getCommonCards().getFaceByName(chosen));
