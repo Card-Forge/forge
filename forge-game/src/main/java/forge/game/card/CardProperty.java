@@ -605,6 +605,12 @@ public class CardProperty {
             if (!card.canBeAttached(source, null)) {
                 return false;
             }
+        } else if (property.startsWith("CanBeTargetedBy")) {
+            final String def = property.substring(15);
+            final SpellAbility targetingSA = AbilityUtils.getDefinedSpellAbilities(source, def, spellAbility).get(0);
+            if (!card.canBeTargetedBy(targetingSA)) {
+                return false;
+            }
         } else if (property.startsWith("HauntedBy")) {
             if (!card.isHauntedBy(source)) {
                 return false;
