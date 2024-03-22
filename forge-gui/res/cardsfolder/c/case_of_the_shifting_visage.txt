@@ -1,0 +1,11 @@
+Name:Case of the Shifting Visage
+ManaCost:1 U U
+Types:Enchantment Case
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1.
+SVar:TrigSurveil:DB$ Surveil
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.YouOwn | PresentCompare$ GE15 | PresentZone$ Graveyard | IsPresent2$ Card.Self+IsUnsolved | Execute$ Solved | TriggerDescription$ To solve — There are fifteen or more cards in your graveyard. (If unsolved, solve at the beginning of your end step.)
+SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+T:Mode$ SpellCast | ValidCard$ Creature.nonLegendary | IsPresent$ Card.Self+IsSolved | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Solved — Whenever you cast a nonlegendary creature spell, copy that spell. (The copy becomes a token.)
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+DeckHas:Ability$Token|Surveil|Graveyard
+Oracle:At the beginning of your upkeep, surveil 1.\nTo solve — There are fifteen or more cards in your graveyard. (If unsolved, solve at the beginning of your end step.)\nSolved — Whenever you cast a nonlegendary creature spell, copy that spell. (The copy becomes a token.)
