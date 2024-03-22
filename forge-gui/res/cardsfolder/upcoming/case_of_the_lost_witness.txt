@@ -2,7 +2,7 @@ Name:Case of the Lost Witness
 ManaCost:1 U
 Types:Enchantment Case
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this Case enters the battlefield, conjure four cards named Fblthp, the Lost into your library, then shuffle. Draw a card.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Fblthp; the Lost | Zone$ Library | Amount$ 4 | SubAbility$ DBDraw
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Fblthp, the Lost | Zone$ Library | Amount$ 4 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Homunculus.YouCtrl+Legendary | IsPresent2$ Card.Self+IsUnsolved | Execute$ TrigSolve | TriggerDescription$ To solve — You control a legendary Homunculus.
 SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
