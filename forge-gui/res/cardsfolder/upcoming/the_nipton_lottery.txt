@@ -1,0 +1,7 @@
+Name:The Nipton Lottery
+ManaCost:2 B R
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature | AtRandom$ True | SubAbility$ DBGainControl | SpellDescription$ Choose a creature at random. You gain control of that creature until end of turn. Untap it. It gains haste until end of turn. Then destroy all other creatures.
+SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBDestroyAll
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard
+Oracle:Choose a creature at random. You gain control of that creature until end of turn. Untap it. It gains haste until end of turn. Then destroy all other creatures.
