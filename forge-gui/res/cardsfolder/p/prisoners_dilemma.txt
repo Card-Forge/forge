@@ -1,0 +1,15 @@
+Name:Prisoner's Dilemma
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ GenericChoice | Defined$ Opponent | TempRemember$ Chooser | Secretly$ True | Choices$ Silence,Snitch | SubAbility$ DBSilenceBranch | StackDescription$ SpellDescription | SpellDescription$ Each opponent secretly chooses silence or snitch, then the choices are revealed. If each opponent chose silence, CARDNAME deals 4 damage to each of them. If each opponent chose snitch, CARDNAME deals 8 damage to each of them. Otherwise, CARDNAME deals 12 damage to each opponent who chose silence.
+SVar:Silence:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Silence | SpellDescription$ Silence
+SVar:Snitch:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Snitch | SpellDescription$ Snitch
+SVar:DBSilenceBranch:DB$ Branch | BranchConditionSVar$ PlayerCountPropertyOpponents$HasPropertyNotedForSilence | BranchConditionSVarCompare$ EQPlayerCountOpponents$Amount | TrueSubAbility$ Damage4 | FalseSubAbility$ DBSnitchBranch
+SVar:DBSnitchBranch:DB$ Branch | BranchConditionSVar$ PlayerCountPropertyOpponents$HasPropertyNotedForSnitch | BranchConditionSVarCompare$ EQPlayerCountOpponents$Amount | TrueSubAbility$ Damage8 | FalseSubAbility$ Damage12
+SVar:Damage4:DB$ DealDamage | Defined$ Opponent | NumDmg$ 4 | SubAbility$ DBCleanup
+SVar:Damage8:DB$ DealDamage | Defined$ Opponent | NumDmg$ 8 | SubAbility$ DBCleanup
+SVar:Damage12:DB$ DealDamage | Defined$ Opponent.NotedForSilence | NumDmg$ 12 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Silence,Snitch
+K:Flashback:5 R R
+DeckHas:Ability$Graveyard
+Oracle:Each opponent secretly chooses silence or snitch, then the choices are revealed. If each opponent chose silence, Prisoner's Dilemma deals 4 damage to each of them. If each opponent chose snitch, Prisoner's Dilemma deals 8 damage to each of them. Otherwise, Prisoner's Dilemma deals 12 damage to each opponent who chose silence.\nFlashback {5}{R}{R}

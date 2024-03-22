@@ -19,6 +19,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -49,6 +50,8 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
         
         final boolean tempRem = sa.hasParam("TempRemember");
+        final boolean secretly = sa.hasParam("Secretly");
+        final StringBuilder record = new StringBuilder();
         final boolean changeZoneTable = sa.hasParam("ChangeZoneTable");
         final boolean damageMap = sa.hasParam("DamageMap");
 
@@ -113,6 +116,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     if (sa.hasParam("ShowChoice")) {
                         boolean dontNotifySelf = sa.getParam("ShowChoice").equals("ExceptSelf");
                         game.getAction().notifyOfValue(sa, p, chosenValue, dontNotifySelf ? p : null);
+                    } else if (secretly) {
+                        if (record.length() > 0) record.append("\r\n");
+                        record.append(Localizer.getInstance().getMessage("lblPlayerChooseValue", p, chosenValue));
+
                     }
                     if (sa.hasParam("SetChosenMode")) {
                         sa.getHostCard().setChosenMode(chosenValue);
@@ -136,6 +143,9 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 host.removeRemembered(p);
                 host.addRemembered(oldRem);
             } 
+        }
+        if (secretly) {
+            game.getAction().notifyOfValue(sa, host, record.toString(), null);
         }
         if (damageMap) game.getAction().dealDamage(false, sa.getDamageMap(), sa.getPreventMap(), 
                     sa.getCounterTable(), sa);
