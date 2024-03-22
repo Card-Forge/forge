@@ -40,7 +40,7 @@ SVar:DealDamage3M:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGa
 SVar:DBGainLife3M:DB$ GainLife | Defined$ You | LifeAmount$ 4
 SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
 SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M
-SVar:X4M:TargetedLKI$CardToughness
+SVar:X4M:Targeted$CardToughness
 SVar:Effect5M:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
 SVar:STPump5M:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:ChangeZone6M:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.

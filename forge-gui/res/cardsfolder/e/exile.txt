@@ -3,5 +3,5 @@ ManaCost:2 W
 Types:Instant
 A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.attacking+nonWhite | TgtPrompt$ Select target nonwhite attacking creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target nonwhite attacking creature. You gain life equal to its toughness.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
-SVar:X:TargetedLKI$CardToughness
+SVar:X:Targeted$CardToughness
 Oracle:Exile target nonwhite attacking creature. You gain life equal to its toughness.
