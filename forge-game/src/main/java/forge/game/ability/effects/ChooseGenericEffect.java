@@ -153,6 +153,9 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             sa.getChangeZoneTable().triggerChangesZoneAll(game, sa);
             sa.setChangeZoneTable(null);
         }
+        if (sa.hasParam("Guess")) {
+            game.incPiledGuessedSA();
+        }
     }
 
 }

@@ -116,6 +116,8 @@ public class Game {
 
     private Boolean daytime = null;
 
+    private int numPiledGuessedSA;
+
     private long timestamp = 0;
     public final GameAction action;
     private final Match match;
@@ -1117,7 +1119,18 @@ public class Game {
         return result;
     }
 
+    public void incPiledGuessedSA() {
+        numPiledGuessedSA++;
+    }
+    public int getNumPiledGuessedSA() {
+        return numPiledGuessedSA;
+    }
+    public void resetNumPiledGuessedSA() {
+        numPiledGuessedSA = 0;
+    }
+
     public void onCleanupPhase() {
+        resetNumPiledGuessedSA();
         clearLeftBattlefieldThisTurn();
         clearLeftGraveyardThisTurn();
         clearCounterAddedThisTurn();
