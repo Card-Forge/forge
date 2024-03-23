@@ -1,0 +1,15 @@
+Name:Dimir Strandcatcher
+ManaCost:2 UB UB
+Types:Creature Faerie Rogue
+PT:3/3
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, surveil X, where X is the number of opponents being attacked.
+SVar:TrigSurveil:DB$ Surveil | Amount$ X
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Y | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if three or more cards were put into your graveyard from anywhere other than the battlefield this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
+SVar:Y:Count$ThisTurnEntered_Graveyard_Card.YouOwn/Minus.CountHand
+SVar:CountHand:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.YouOwn
+DeckHints:Ability$Mill
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying\nWhenever you attack, surveil X, where X is the number of opponents being attacked.\nAt the beginning of each end step, if three or more cards were put into your graveyard from anywhere other than the battlefield this turn, draw a card.
