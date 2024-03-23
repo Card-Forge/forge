@@ -386,6 +386,10 @@ public class CardCopyService {
         newCopy.setExiledWith(getLKICopy(copyFrom.getExiledWith(), cachedMap));
         newCopy.addExiledCards(copyFrom.getExiledCards());
 
+        newCopy.setDiscarded(copyFrom.wasDiscarded());
+        newCopy.setMilled(copyFrom.wasMilled());
+        newCopy.setSurveilled(copyFrom.wasSurveilled());
+
         if (copyFrom.getGame().getCombat() != null && copyFrom.isPermanent()) {
             newCopy.setCombatLKI(copyFrom.getGame().getCombat().saveLKI(newCopy));
         }
