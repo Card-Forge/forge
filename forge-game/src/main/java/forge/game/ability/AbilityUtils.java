@@ -1593,8 +1593,11 @@ public class AbilityUtils {
         sq = l[0].split("\\.");
 
         final Game game = c.getGame();
-        // CR 608.2h
-        c = game.getChangeZoneLKIInfo(c);
+        // might get called from editor
+        if (game != null) {
+            // CR 608.2h
+            c = game.getChangeZoneLKIInfo(c);
+        }
 
         if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>

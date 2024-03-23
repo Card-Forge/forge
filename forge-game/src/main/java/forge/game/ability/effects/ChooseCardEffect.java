@@ -98,7 +98,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             return;
         }
 
-        boolean revealTitle = (sa.hasParam("RevealTitle"));
+        boolean revealTitle = sa.hasParam("RevealTitle");
         for (Player p : tgtPlayers) {
             CardCollectionView pChoices = choices;
             CardCollection chosen = new CardCollection();
