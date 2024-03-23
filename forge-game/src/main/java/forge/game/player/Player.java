@@ -99,6 +99,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedThisTurn;
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
+    private int commitedCrimeThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
@@ -2493,6 +2494,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLibrarySearched(0);
         setNumManaConversion(0);
 
+        setCommitedCrimeThisTurn(0);
+
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
 
@@ -3793,5 +3796,22 @@ public class Player extends GameEntity implements Comparable<Player> {
                 drawCards(1, sa, params);
             }
         }
+    }
+
+    public void commitCrime() {
+        //boolean firstTime = this.commitedCrimeThisTurn == 0;
+        commitedCrimeThisTurn++;
+
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
+        game.getTriggerHandler().runTrigger(TriggerType.CommitCrime, runParams, false);
+
+    }
+
+    public int getCommitedCrimeThisTurn() {
+        return commitedCrimeThisTurn;
+    }
+    public void setCommitedCrimeThisTurn(int v) {
+        commitedCrimeThisTurn = v;
     }
 }
