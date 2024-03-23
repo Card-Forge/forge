@@ -1,7 +1,7 @@
 Name:Dismantle
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Destroy | ValidTgts$ Artifact | SubAbility$ DBPutCounter | RememberLKI$ True | SpellDescription$ Destroy target artifact.
-SVar:DBPutCounter:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ P1P1,CHARGE | CounterNum$ X | CounterTypePerDefined$ True | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.HasCounters | SpellDescription$ If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
-SVar:X:RememberedLKI$CardCounters.ALL
+A:SP$ Destroy | ValidTgts$ Artifact | SubAbility$ DBPutCounter | SpellDescription$ Destroy target artifact.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Artifact.YouCtrl | CounterType$ P1P1,CHARGE | CounterNum$ X | ConditionDefined$ Targeted | ConditionPresent$ Card.HasCounters | SpellDescription$ If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
+SVar:X:Targeted$CardCounters.ALL
 Oracle:Destroy target artifact. If that artifact had counters on it, put that many +1/+1 counters or charge counters on an artifact you control.
