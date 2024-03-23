@@ -1,0 +1,9 @@
+Name:Raven of Fell Omens
+ManaCost:1 B
+Types:Creature Bird
+PT:1/2
+K:Flying
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, each opponent loses 1 life and you gain 1 life. This ability triggers only once each turn. (Targeting oppenents, anything they control, and/or cards in their graveyard is a crime.)
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nWhenever you commit a crime, each opponent loses 1 life and you gain 1 life. This ability triggers only once each turn. (Targeting oppenents, anything they control, and/or cards in their graveyard is a crime.)
