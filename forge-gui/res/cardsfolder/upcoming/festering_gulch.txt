@@ -1,0 +1,8 @@
+Name:Festering Gulch
+ManaCost:no cost
+Types:Land Desert
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target opponent.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+Oracle:Festering Gulch enters the battlefield tapped.\nWhen Festering Gulch enters the battlefield, it deals 1 damage to target opponent.\n{T}:Add {B} or {G}.
