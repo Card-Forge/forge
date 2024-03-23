@@ -3,7 +3,7 @@ ManaCost:3 G U
 Types:Legendary Creature Elf Noble
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Secret council — When CARDNAME enters the battlefield, each player secretly votes for fellowship or aid, then those votes are revealed. For each fellowship vote, the voter chooses a creature they control. You gain control of each creature chosen this way, and they gain "This creature can't attack its owner." Then for each aid vote, put a +1/+1 counter on each creature you control.
-SVar:TrigVote:DB$ Vote | Defined$ Player | Secret$ True | VoteType$ Fellowship,Aid | VoteFellowship$ Fellowship | VoteAid$ AidPlus | EachVote$ True | SubAbility$ DBGainControl
+SVar:TrigVote:DB$ Vote | Defined$ Player | Secretly$ True | VoteType$ Fellowship,Aid | VoteFellowship$ Fellowship | VoteAid$ AidPlus | EachVote$ True | SubAbility$ DBGainControl
 SVar:Fellowship:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature you control | ImprintChosen$ True | Mandatory$ True
 SVar:AidPlus:DB$ StoreSVar | SVar$ Aid | Type$ CountSVar | Expression$ Aid/Plus.1
 SVar:DBGainControl:DB$ GainControl | Defined$ Imprinted | NewController$ You | SubAbility$ DBAnimate
