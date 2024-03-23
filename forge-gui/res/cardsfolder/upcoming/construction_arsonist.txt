@@ -1,0 +1,13 @@
+Name:Construction Arsonist
+ManaCost:1 R
+Types:Creature Goblin Rogue Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose an instant or sorcery card in your hand. If you do, that card perpetually incorporates {R} and gains "When you cast this spell, it deals 2 damage to each opponent."
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Instant.YouOwn,Sorcery.YouOwn | ChoiceTitle$ You may choose an instant or sorcery card in your hand | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Incorporate$ R | Triggers$ SpellCastTrig | Duration$ Perpetual
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When you cast this spell, it deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a multicolored spell, CARDNAME gets +1/+1 until end of turn for each of that spell's colors.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
+SVar:X:TriggeredCard$CardNumColors
+Oracle:When Construction Arsonist enters the battlefield, you may choose an instant or sorcery card in your hand. If you do, that card perpetually incorporates {R} and gains "When you cast this spell, it deals 2 damage to each opponent."\nWhenever you cast a multicolored spell, Construction Arsonist gets +1/+1 until end of turn for each of that spell's colors.
