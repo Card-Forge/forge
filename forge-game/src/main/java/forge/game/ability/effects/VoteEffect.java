@@ -59,7 +59,7 @@ public class VoteEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
 
         final boolean secret = sa.hasParam("Secretly");
-        final boolean other = sa.hasParam("VotePlayer") & sa.getParam("VotePlayer").equals("Other");
+        final boolean other = sa.hasParam("VotePlayer") && sa.getParam("VotePlayer").equals("Other");
         final StringBuilder record = new StringBuilder();
 
         if (sa.hasParam("VoteType")) {
