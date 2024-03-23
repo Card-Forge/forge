@@ -11,11 +11,10 @@ SVar:PayForTransmute:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield
 SVar:CostNotPaid:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ LTY | StackDescription$ None | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 # Everything working but when no artifact is sacrificed
 # SackedCMC to be overridden to see if a sacrifice actually happened
-SVar:Y:Remembered$CardManaCost
+SVar:Y:RememberedLKI$CardManaCost
 SVar:SackedCMC:Number$0
 SVar:X:SVar$Y/Minus.SackedCMC
 AI:RemoveDeck:Random
-#ChangeType$ Card.IsRemembered
 DeckHas:Ability$Sacrifice
 DeckNeeds:Type$Artifact
 Oracle:Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle.
