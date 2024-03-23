@@ -373,6 +373,10 @@ public abstract class Trigger extends TriggerReplacementBase {
                 getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
             return false;
         }
+        if (hasParam("GameActivationLimit") && 
+            getActivationsThisGame() >= Integer.parseInt(getParam("GameActivationLimit"))) {
+                return false;
+        }
         return true;
     }
 
@@ -572,6 +576,10 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     public int getActivationsThisTurn() {
         return hostCard.getAbilityActivatedThisTurn(this.getOverridingAbility());
+    }
+
+    public int getActivationsThisGame() {
+        return hostCard.getAbilityActivatedThisGame(this.getOverridingAbility());
     }
 
     public void triggerRun() {

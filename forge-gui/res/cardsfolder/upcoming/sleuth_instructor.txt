@@ -1,0 +1,11 @@
+Name:Sleuth Instructor
+ManaCost:1 W
+Types:Creature Elephant Detective
+PT:3/2
+K:Disguise:1 W
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigSeek | TriggerZones$ Battlefield | GameActivationLimit$ 1 | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, seek a non-Elephant creature card with mana value 3 or less and cloak it. This ability triggers only once.
+SVar:TrigSeek:DB$ Seek | Type$ Creature.nonElephant+cmcLE3 | RememberFound$ True | SubAbility$ DBCloak
+SVar:DBCloak:DB$ Cloak | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Keyword$Morph|Megamorph|Disguise
+Oracle:Disguise {1}{W}\nWhenever Sleuth Instructor or another permanent you control is turned face up, seek a non-Elephant creature card with mana value 3 or less and cloak it. This ability triggers only once.
