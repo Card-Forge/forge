@@ -1,8 +1,7 @@
 Name:Rite of the Serpent
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBToken | RememberLKI$ True | SpellDescription$ Destroy target creature.
-SVar:DBToken:DB$ Token | TokenScript$ g_1_1_snake | ConditionDefined$ RememberedLKI | ConditionPresent$ Creature.counters_GE1_P1P1 | SubAbility$ DBCleanup | SpellDescription$ If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Destroy target creature.
+SVar:DBToken:DB$ Token | TokenScript$ g_1_1_snake | ConditionDefined$ Targeted | ConditionPresent$ Creature.counters_GE1_P1P1 | SpellDescription$ If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token.
 DeckHas:Ability$Token & Type$Snake
 Oracle:Destroy target creature. If that creature had a +1/+1 counter on it, create a 1/1 green Snake creature token.

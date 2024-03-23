@@ -1,7 +1,6 @@
 Name:Reality Shift
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBManifest | RememberLKI$ True | AITgts$ Card.cmcGE3,Card.powerGE3 | SpellDescription$ Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)
-SVar:DBManifest:DB$ Manifest | DefinedPlayer$ RememberedController | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBManifest | AITgts$ Card.cmcGE3,Card.powerGE3 | SpellDescription$ Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)
+SVar:DBManifest:DB$ Manifest | DefinedPlayer$ TargetedController
 Oracle:Exile target creature. Its controller manifests the top card of their library. (That player puts the top card of their library onto the battlefield face down as a 2/2 creature. If it's a creature card, it can be turned face up any time for its mana cost.)
