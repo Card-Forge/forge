@@ -1,0 +1,13 @@
+Name:Feather, Radiant Arbiter
+ManaCost:R W W
+Types:Legendary Creature Angel
+PT:4/3
+K:Flying
+K:Lifelink
+T:Mode$ SpellAbilityCast | ValidSA$ Spell.nonCreature | ValidActivatingPlayer$ You | IsSingleTarget$ True | TargetsValid$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell that targets only CARDNAME, you may choose any number of other creatures that spell could target and pay {2} for each of those creatures. If you do, for each of those creatures, copy that spell. The copy targets that creature. (Copies of permanent spells become tokens.)
+SVar:TrigChoose:DB$ ChooseCard | ChoiceTitle$ Choose any number of other creatures that spell could target | Choices$ Creature.Other+CanBeTargetedByTriggeredSpellAbility | MinAmount$ 0 | Amount$ Count$Valid Creature.Other+CanBeTargetedByTriggeredSpellAbility | SubAbility$ CopySpell
+SVar:CopySpell:DB$ CopySpellAbility | DefinedTarget$ ChosenCard | UnlessCost$ CopyCost | UnlessPayer$ You | UnlessSwitched$ True | Defined$ TriggeredSpellAbility | Controller$ You | SubAbility$ DBCleanup
+SVar:CopyCost:Count$ChosenSize/Times.2
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nWhenever you cast a noncreature spell that targets only Feather, Radiant Arbiter, you may choose any number of other creatures that spell could target and pay {2} for each of those creatures. If you do, for each of those creatures, copy that spell. The copy targets that creature. (Copies of permanent spells become tokens.)
