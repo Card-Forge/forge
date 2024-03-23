@@ -1,0 +1,9 @@
+Name:Suppressor Skyguard
+ManaCost:2 W U
+Types:Creature Human Knight
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player | AttackedTarget$ You | Condition$ AttackerHasUnattackedOpp | TriggerZones$ Battlefield | Execute$ TrigSuppression | TriggerDescription$ Whenever a player attacks you, if that player has another opponent who isn't being attacked, prevent all combat damage that would be dealt to you this combat.
+SVar:TrigSuppression:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilEndOfCombat | AILogic$ Fog
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all combat damage that would be dealt to you this combat.
+Oracle:Flying\nWhenever a player attacks you, if that player has another opponent who isn't being attacked, prevent all combat damage that would be dealt to you this combat.

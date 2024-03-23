@@ -443,6 +443,11 @@ public abstract class Trigger extends TriggerReplacementBase {
                     this.getHostCard().getController(), this.getHostCard(), null)) {
                 return false;
             }
+        } else if ("AttackerHasUnattackedOpp".equals(condition)) {
+            Player attacker = (Player) runParams.get(AbilityKey.AttackingPlayer);
+            if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
+                return false;
+            }
         }
         return true;
     }
