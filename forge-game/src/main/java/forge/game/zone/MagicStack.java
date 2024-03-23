@@ -518,7 +518,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Card source = sa.getHostCard();
         curResolvingCard = source;
 
-        boolean thisHasFizzled = hasFizzled(sa, source, null);
+        boolean thisHasFizzled = hasFizzled(sa, source);
 
         if (!thisHasFizzled) {
             game.copyLastState();
@@ -637,71 +637,62 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
+    private final boolean hasFizzled(final SpellAbility sa, final Card source) {
         // Can't fizzle unless there are some targets
-        Boolean fizzle = null;
+        boolean fizzle = false;
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
 
-        if (sa.usesTargeting()) {
-            if (sa.isZeroTargets()) {
-                // Nothing targeted, and nothing needs to be targeted.
-            } else {
-                // Some targets were chosen, fizzling for this subability is now possible
-                //fizzle = true;
-                // With multi-targets, as long as one target is still legal,
-                // we'll try to go through as much as possible
-                final TargetChoices choices = sa.getTargets();
-                for (final GameObject o : Lists.newArrayList(sa.getTargets())) {
-                    boolean invalidTarget = false;
-                    if (rememberTgt) {
-                        source.addRemembered(o);
-                    }
-                    if (o instanceof Card) {
-                        final Card card = (Card) o;
-                        Card current = game.getCardState(card);
-                        if (current != null) {
-                            invalidTarget = !current.equalsWithGameTimestamp(card);
-                        }
-                        invalidTarget = invalidTarget || !sa.canTarget(card);
-                    } else if (o instanceof SpellAbility) {
-                        SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
-                        invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility());
-                    } else {
-                        invalidTarget = !sa.canTarget(o);
-                    }
-                    // TODO remove targets only after the Loop
-                    // Remove targets
-                    if (invalidTarget) {
-                        choices.remove(o);
-                    } else {
-                        fizzle = false;
-                    }
-
-                    if (sa.hasParam("CantFizzle")) {
-                        // Gilded Drake cannot be countered by rules if the
-                        // targeted card is not valid
-                        fizzle = false;
-                    }
+        List<GameObject> toRemove = Lists.newArrayList();
+        if (sa.usesTargeting() && !sa.isZeroTargets()) {
+            fizzle = true;
+            // Some targets were chosen, fizzling for this subability is now possible
+            //fizzle = true;
+            // With multi-targets, as long as one target is still legal,
+            // we'll try to go through as much as possible
+            for (final GameObject o : sa.getTargets()) {
+                boolean invalidTarget = false;
+                if (rememberTgt) {
+                    source.addRemembered(o);
                 }
-                if (fizzle == null) {
-                    fizzle = true;
+                if (o instanceof Card) {
+                    final Card card = (Card) o;
+                    Card current = game.getCardState(card);
+                    if (current != null) {
+                        invalidTarget = !current.equalsWithGameTimestamp(card);
+                    }
+                    invalidTarget = invalidTarget || !sa.canTarget(card);
+                } else if (o instanceof SpellAbility) {
+                    SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
+                    invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility());
+                } else {
+                    invalidTarget = !sa.canTarget(o);
+                }
+
+                if (invalidTarget) {
+                    toRemove.add(o);
+                } else {
+                    fizzle = false;
+                }
+
+                if (sa.hasParam("CantFizzle")) {
+                    // Gilded Drake cannot be countered by rules if the
+                    // targeted card is not valid
+                    fizzle = false;
                 }
             }
         }
-        else if (sa.getTargetCard() != null) {
-            fizzle = !sa.canTarget(sa.getTargetCard());
-        } else {
-            // Set fizzle to the same as the parent if there's no target info
-            fizzle = parentFizzled;
+        if (sa.getSubAbility() != null) {
+            fizzle = hasFizzled(sa.getSubAbility(), source) && fizzle;
+        }
+        if (fizzle && rememberTgt) {
+            source.clearRemembered();
         }
 
-        if (sa.getSubAbility() == null) {
-            if (fizzle != null && fizzle && rememberTgt) {
-                source.clearRemembered();
-            }
-            return fizzle != null && fizzle.booleanValue();
+        // Remove targets
+        if (sa.usesTargeting() && !sa.isZeroTargets()) {
+            sa.getTargets().removeAll(toRemove);
         }
-        return hasFizzled(sa.getSubAbility(), source, fizzle) && (fizzle == null || fizzle.booleanValue());
+        return fizzle;
     }
 
     public final SpellAbilityStackInstance peek() {
