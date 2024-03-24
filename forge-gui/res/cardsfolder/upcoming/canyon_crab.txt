@@ -1,0 +1,10 @@
+Name:Canyon Crab
+ManaCost:1 U
+Types:Creature Crab
+PT:0/5
+A:AB$ Pump | Cost$ 1 U | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ CARDNAME gets +2/-2 until end of turn.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
+SVar:X:Count$ThisTurnCast_Card.wasCastFromYourHandByYou
+Oracle:{1}{U}: Canyon Crab gets +2/-2 until end of turn.\nAt the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card, then discard a card.

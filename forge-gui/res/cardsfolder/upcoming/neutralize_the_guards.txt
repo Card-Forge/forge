@@ -1,0 +1,7 @@
+Name:Neutralize the Guards
+ManaCost:2 B
+Types:Instant
+A:SP$ PumpAll | ValidTgts$ Opponent | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | Subability$ DBSurveil | SpellDescription$ Creatures target opponent controls get -1/-1 until end of turn. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Creatures target opponent controls get -1/-1 until end of turn. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
