@@ -90,9 +90,9 @@ public class EnemyData implements Serializable {
             GameFormat fmt = FModel.getFormats().getStandard();
             int rand = MyRandom.getRandom().nextInt(100);
             if (rand > 90) {
-                fmt = FModel.getFormats().getFormat("Legacy");
+                fmt = FModel.getFormats().getLegacy();
             } else if (rand > 50) {
-                fmt = FModel.getFormats().getFormat("Modern");
+                fmt = FModel.getFormats().getModern();
             }
             return DeckgenUtil.buildLDACArchetypeDeck(fmt, true);
         }
