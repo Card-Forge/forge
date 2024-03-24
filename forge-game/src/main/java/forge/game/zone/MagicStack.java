@@ -29,6 +29,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -50,6 +51,7 @@ import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -432,6 +434,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, s.getHostCard());
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+        }
+
+        if (sp.getActivatingPlayer() != null && commitCrimeCheck(sp.getActivatingPlayer(), chosenTargets)) {
+            sp.getActivatingPlayer().commitCrime();
         }
 
         game.fireEvent(new GameEventZone(ZoneType.Stack, sp.getActivatingPlayer(), EventValueChangeType.Added, source));
@@ -964,5 +970,28 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     @Override
     public String toString() {
         return TextUtil.concatNoSpace(simultaneousStackEntryList.toString(),"==", frozenStack.toString(), "==", stack.toString());
+    }
+
+    static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets)
+    {
+        List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
+
+        for (TargetChoices tc : chosenTargets) {
+            if (Iterables.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {
+                return true;
+            }
+            for (SpellAbility sp : tc.getTargetSpells()) {
+                if (sp.getActivatingPlayer().isOpponentOf(p)) {
+                    return true;
+                }
+            }
+
+            for (Card c : tc.getTargetCards()) {
+                if (c.isInZones(zoneList) && c.getController().isOpponentOf(p)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

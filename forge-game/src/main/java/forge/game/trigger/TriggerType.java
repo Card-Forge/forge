@@ -43,6 +43,7 @@ public enum TriggerType {
     ChaosEnsues(TriggerChaosEnsues.class),
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
+    CommitCrime(TriggerCommitCrime.class),
     ConjureAll(TriggerConjureAll.class),
     CollectEvidence(TriggerCollectEvidence.class),
     CounterAdded(TriggerCounterAdded.class),
