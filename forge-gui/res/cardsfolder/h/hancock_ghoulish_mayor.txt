@@ -2,7 +2,7 @@ Name:Hancock, Ghoulish Mayor
 ManaCost:2 B
 Types:Legendary Creature Zombie Mutant Advisor
 PT:2/1
-S:Mode$ Continuous | Affected$ Creature.Zombie+YouCtrl,Creature.Mutant+YouCtrl | AddPower$ X | AddToughness$ X | EffectZone$ Battlefield | Description$ Each other creature you control that's a Zombie or Mutant gets +X/+X, where X is the number of counters on CARDNAME.
+S:Mode$ Continuous | Affected$ Creature.Zombie+YouCtrl+Other,Creature.Mutant+YouCtrl+Other | AddPower$ X | AddToughness$ X | EffectZone$ Battlefield | Description$ Each other creature you control that's a Zombie or Mutant gets +X/+X, where X is the number of counters on CARDNAME.
 SVar:X:Count$CardCounters.ALL
 K:Undying
 DeckHints:Ability$Counters & Type$Zombie|Mutant
