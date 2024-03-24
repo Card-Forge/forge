@@ -1,4 +1,4 @@
-Name:Incubator
+Name:Incubator Token
 Types:Artifact Incubator
 A:AB$ SetState | Cost$ 2 | Mode$ Transform | SpellDescription$ Transform this artifact.
 AlternateMode:DoubleFaced
