@@ -1,0 +1,10 @@
+Name:Malcolm, the Eyes
+ManaCost:U R
+Types:Legendary Creature Siren Pirate
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigInvestigate | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHints:Ability$Investigate|Token
+Oracle:Flying, haste\nWhenever you cast your second spell each turn, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
