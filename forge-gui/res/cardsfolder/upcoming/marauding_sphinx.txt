@@ -1,0 +1,11 @@
+Name:Marauding Sphinx
+ManaCost:3 U U
+Types:Creature Sphinx Rogue
+PT:3/5
+K:Flying
+K:Vigilance
+K:Ward:2
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, surveil 2. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flying, vigilance, ward {2}\nWhenever you commit a crime, surveil 2. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
