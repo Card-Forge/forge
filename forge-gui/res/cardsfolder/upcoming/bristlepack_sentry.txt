@@ -1,0 +1,8 @@
+Name:Bristlepack Sentry
+ManaCost:1 G
+Types:Creature Plant Wolf
+PT:3/3
+K:Defender
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self | IsPresent$ Creature.powerGE4+YouCtrl | Description$ As long as you control a creature with power 4 or greater, CARDNAME can attack as though it didn't have defender.
+SVar:BuffedBy:Creature.powerGE4
+Oracle:Defender\nAs long as you control a creature with power 4 or greater, Bristlepack Sentry can attack as though it didn't have defender.
