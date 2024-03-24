@@ -76,6 +76,7 @@ import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
+import forge.game.staticability.StaticAbilityPlotZone;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -3299,6 +3300,56 @@ public class CardFactoryUtil {
             newSA.setIntrinsic(intrinsic);
             newSA.setAlternativeCost(AlternativeCost.Overload);
             inst.addSpellAbility(newSA);
+        } else if (keyword.startsWith("Plot")) {
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+
+            final SpellAbility plot = new AbilityStatic(card.getCard(), new Cost(manacost, false), null) {
+                @Override
+                public boolean canPlay() {
+                    // Reset the ZoneCheck
+                    getRestrictions().setZone(ZoneType.Hand);
+
+                    // add Extra Zone Check for Fblthp
+                    if (StaticAbilityPlotZone.plotZone(getHostCard())) {
+                        getRestrictions().setZone(getHostCard().getLastKnownZone().getZoneType());
+                    }
+
+                    if (!getRestrictions().canPlay(getHostCard(), this)) {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                @Override
+                public void resolve() {
+                    final Game game = getHostCard().getGame();
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, this);
+
+                    final Card c = game.getAction().exile(getHostCard(), this, moveParams);
+                    zoneMovements.triggerChangesZoneAll(game, this);
+
+                    c.setPlotted(true);
+                    c.turnFaceDown(true);
+                    // look at the exiled card
+                    c.addMayLookTemp(getActivatingPlayer());
+
+                    // TODO add GameEvent
+                }
+            };
+
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Plot (").append(inst.getReminderText()).append(")");
+            plot.setDescription(sbDesc.toString());
+            plot.putParam("Secondary", "True");
+
+            plot.setCardState(card);
+
+            plot.getRestrictions().setSorcerySpeed(true);
+            plot.setIntrinsic(intrinsic);
+            inst.addSpellAbility(plot);
         } else if (keyword.startsWith("Prototype")) {
             final String[] k = keyword.split(":");
             if (k.length < 4) {
