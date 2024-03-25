@@ -104,16 +104,18 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            Card rollback = p.getGame().getCardState(source);
-            if (castFaceDown) {
-                rollback.setFaceDown(false);
-            } else if (flippedToCast) {
-                // need to get the changed card if able
-                rollback.turnFaceDown(true);
-                //need to set correct imagekey when forcing facedown
-                rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
-                if (rollback.isInZone(ZoneType.Exile)) {
-                    rollback.addMayLookTemp(p);
+            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                Card rollback = p.getGame().getCardState(source);
+                if (castFaceDown) {
+                    rollback.setFaceDown(false);
+                } else if (flippedToCast) {
+                    // need to get the changed card if able
+                    rollback.turnFaceDown(true);
+                    //need to set correct imagekey when forcing facedown
+                    rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
+                    if (rollback.isInZone(ZoneType.Exile)) {
+                        rollback.addMayLookTemp(p);
+                    }
                 }
             }
 

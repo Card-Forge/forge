@@ -35,7 +35,8 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         awaitLatchRelease();
     }
 
-    protected final void stop() {
+    @Override
+    public final void stop() {
         onStop();
 
         // ensure input won't accept any user actions.

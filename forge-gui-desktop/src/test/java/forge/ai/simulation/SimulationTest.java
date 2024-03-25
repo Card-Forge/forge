@@ -48,6 +48,7 @@ public class SimulationTest {
         Match match = new Match(rules, players, "Test");
         Game game = new Game(players, rules, match);
         game.setAge(GameStage.Play);
+        game.EXPERIMENTAL_RESTORE_SNAPSHOT = false;
 
         return game;
     }

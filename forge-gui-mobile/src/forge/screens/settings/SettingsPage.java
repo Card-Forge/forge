@@ -229,6 +229,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbSideboardForAI"),
                 Forge.getLocalizer().getMessage("nlSideboardForAI")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,
+                        Forge.getLocalizer().getMessage("cbExperimentalRestore"),
+                        Forge.getLocalizer().getMessage("nlExperimentalRestore")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.FILTERED_HANDS,
                 Forge.getLocalizer().getMessage("cbFilteredHands"),
                 Forge.getLocalizer().getMessage("nlFilteredHands")),

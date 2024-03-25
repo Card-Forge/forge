@@ -78,6 +78,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final Stack<SpellAbility> undoStack = new Stack<>();
     private Player undoStackOwner;
 
+    private SpellAbility primaryAbility = null;
     private boolean frozen = false;
     private boolean bResolving = false;
 
@@ -107,6 +108,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         clear();
         simultaneousStackEntryList.clear();
         frozen = false;
+        primaryAbility = null;
         lastTurnCast.clear();
         thisTurnCast.clear();
         curResolvingCard = null;
@@ -124,7 +126,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return false;
     }
 
-    public final void freezeStack() {
+    public final void freezeStack(SpellAbility ability) {
+        if (primaryAbility == null) {
+            // Only the first ability to freeze the stack is considered the primary ability
+            primaryAbility = ability;
+        }
         frozen = true;
     }
 
@@ -133,6 +139,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
+        // Why is this happening here instead of add()?
         if (ability.isSpell() && !source.isCopiedSpell()) {
             if (!source.isInZone(ZoneType.Stack)) {
                 ability.setHostCard(game.getAction().moveToStack(source, ability));
@@ -148,13 +155,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             source.cleanupExiledWith();
         }
 
-        // Always add the ability here and always unfreeze the stack
         add(ability);
-        unfreezeStack();
+        if (primaryAbility == null || ability.equals(primaryAbility)) {
+            unfreezeStack();
+        } // else is for mana abilities
     }
 
     public final void unfreezeStack() {
         frozen = false;
+        primaryAbility = null;
 
         // Add all Frozen Abilities onto the stack
         while (!frozenStack.isEmpty()) {
@@ -240,16 +249,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        //either push onto or clear undo stack based on whether spell/ability is undoable
-        if (sp.isUndoable()) {
-            if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
-                undoStackOwner = activator;
-            }
-            undoStack.push(sp);
-        } else {
-            clearUndoStack();
-        }
+        recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             if (!sp.isCopied() && !sp.isTrigger()) {
@@ -450,6 +450,19 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
+    private void recordUndoableActions(SpellAbility sp, Player activator) {
+        // either push onto or clear undo stack based on whether spell/ability is undoable
+        if (sp.isUndoable()) {
+            if (!canUndo(activator)) {
+                clearUndoStack(); //clear if undo stack owner changes
+                undoStackOwner = activator;
+            }
+            undoStack.push(sp);
+        } else {
+            clearUndoStack();
+        }
+    }
+
     public final int size() {
         return stack.size();
     }
@@ -503,10 +516,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void resolveStack() {
-        // Resolving the Stack
-
         // freeze the stack while we're in the middle of resolving
-        freezeStack();
+        freezeStack(null);
         setResolving(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
@@ -777,18 +788,23 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
 
-        Player whoAddsToStack = playerTurn;
-        do {
-            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, false);
-            // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
-            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
-        // 603.3b (Strict Proctor)
-        whoAddsToStack = playerTurn;
-        do {
-            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, true);
-            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
+        // Grab players in turn order starting with the active player
+        List<Player> players = game.getPlayersInTurnOrder(playerTurn);
+
+        for(Player p : players) {
+            if (p.hasLost()) {
+                continue;
+            }
+            result |= chooseOrderOfSimultaneousStackEntry(p, false);
+        }
+
+        for(Player p : players) {
+            if (p.hasLost()) {
+                continue;
+            }
+            result |= chooseOrderOfSimultaneousStackEntry(p, true);
+        }
+
         return result;
     }
 
