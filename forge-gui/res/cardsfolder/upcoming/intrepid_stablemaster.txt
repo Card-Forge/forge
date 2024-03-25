@@ -1,0 +1,8 @@
+Name:Intrepid Stablemaster
+ManaCost:1 G
+Types:Creature Human Scout
+PT:2/2
+K:Reach
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Mount,Spell.Vehicle | SpellDescription$ Add two mana of any one color. Spend this mana only to cast Mount or Vehicle spells.
+Oracle:Reach\n{T}: Add {G}.\n{T}: Add two mana of any one color. Spend this mana only to cast Mount or Vehicle spells.

@@ -1,0 +1,9 @@
+Name:At Knifepoint
+ManaCost:1 B R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Outlaw+YouCtrl | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, outlaws you control have first strike. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery." This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
+DeckHas:Ability$Token & Type$Mercenary
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:As long as it's your turn, outlaws you control have first strike. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nWhenever you commit a crime, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery." This ability triggers only once each turn.

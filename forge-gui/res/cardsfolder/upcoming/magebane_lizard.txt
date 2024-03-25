@@ -1,0 +1,8 @@
+Name:Magebane Lizard
+ManaCost:1 R
+Types:Creature Lizard
+PT:1/4
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigDmg | TriggerDescription$ Whenever a player casts a noncreature spell, CARDNAME deals damage to that player equal to the number of noncreature spells they've cast this turn.
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ X
+SVar:X:Count$ThisTurnCast_Card.nonCreature+ControlledBy TriggeredPlayer
+Oracle:Whenever a player casts a noncreature spell, Magebane Lizard deals damage to that player equal to the number of noncreature spells they've cast this turn.
