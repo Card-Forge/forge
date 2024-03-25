@@ -3148,6 +3148,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void autoPassCancel() {
+        if (getGui() == null) {
+            return;
+        }
+
         getGui().autoPassCancel(getLocalPlayerView());
     }
 
@@ -3159,6 +3163,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();
+    }
+
+    @Override
+    public void resetInputs() {
+        final Input inp = inputProxy.getInput();
+        if (inp != null) {
+            inp.selectButtonCancel();
+        }
     }
 
     @Override

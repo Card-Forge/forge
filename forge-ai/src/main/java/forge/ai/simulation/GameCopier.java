@@ -16,13 +16,7 @@ import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
-import forge.game.GameObjectMap;
-import forge.game.GameRules;
-import forge.game.Match;
-import forge.game.StaticEffect;
+import forge.game.*;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -54,9 +48,13 @@ public class GameCopier {
     private BiMap<Player, Player> playerMap = HashBiMap.create();
     private BiMap<Card, Card> cardMap = HashBiMap.create();
     private CopiedGameObjectMap gameObjectMap;
+    private GameSnapshot snapshot = null;
 
     public GameCopier(Game origGame) {
         this.origGame = origGame;
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            this.snapshot = new GameSnapshot(origGame);
+        }
     }
 
     public Game getOriginalGame() {
@@ -68,7 +66,11 @@ public class GameCopier {
     }
 
     public Game makeCopy() {
-        return makeCopy(null, null);
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return snapshot.makeCopy();
+        } else {
+            return makeCopy(null, null);
+        }
     }
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
@@ -83,7 +85,7 @@ public class GameCopier {
 
         for (int i = 0; i < origGame.getPlayers().size(); i++) {
             Player origPlayer = origGame.getPlayers().get(i);
-            Player newPlayer = newGame.getPlayers().get(i);
+            Player newPlayer = newGame.getPlayer(origPlayer.getId());
             newPlayer.setLife(origPlayer.getLife(), null);
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
@@ -201,7 +203,7 @@ public class GameCopier {
         return newGame;
     }
 
-    private static void copyStack(Game origGame, Game newGame, GameObjectMap map) {
+    private static void copyStack(Game origGame, Game newGame, IEntityMap map) {
         for (SpellAbilityStackInstance origEntry : origGame.getStack()) {
             SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
@@ -234,6 +236,7 @@ public class GameCopier {
     }
 
     private void copyGameState(Game newGame, Player aiPlayer) {
+        newGame.EXPERIMENTAL_RESTORE_SNAPSHOT = origGame.EXPERIMENTAL_RESTORE_SNAPSHOT;
         newGame.setAge(origGame.getAge());
 
         // TODO countersAddedThisTurn
@@ -472,8 +475,8 @@ public class GameCopier {
         return null;
     }
 
-    private class CopiedGameObjectMap extends GameObjectMap {
-        private Game copiedGame;
+    private class CopiedGameObjectMap implements IEntityMap {
+        private final Game copiedGame;
 
         public CopiedGameObjectMap(Game copiedGame) {
             this.copiedGame = copiedGame;
@@ -491,18 +494,32 @@ public class GameCopier {
     }
 
     public GameObject find(GameObject o) {
-        GameObject result = cardMap.get(o);
-        if (result != null)
-            return result;
-        // TODO: Have only one GameObject map?
-        result = playerMap.get(o);
-        if (result != null)
-            return result;
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return snapshot.find(o);
+        }
+
+        GameObject result = null;
+        if (o instanceof Card) {
+            result = cardMap.get(o);
+            if (result != null) {
+                return result;
+            } else {
+                System.out.println("Couldn't map " + o + "/" + System.identityHashCode(o));
+            }
+        } else if (o instanceof Player) {
+            result = playerMap.get(o);
+            if (result != null)
+                return result;
+        }
         if (o != null)
             throw new RuntimeException("Couldn't map " + o + "/" + System.identityHashCode(o));
-        return null;
+        return result;
     }
     public GameObject reverseFind(GameObject o) {
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return snapshot.reverseFind(o);
+        }
+
         GameObject result = cardMap.inverse().get(o);
         if (result != null)
             return result;

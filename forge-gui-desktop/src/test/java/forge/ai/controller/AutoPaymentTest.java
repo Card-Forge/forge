@@ -74,6 +74,7 @@ public class AutoPaymentTest extends SimulationTest {
 
         Card dragonBF = findCardWithName(simGame, shivan);
         AssertJUnit.assertNotNull(dragonBF);
+        AssertJUnit.assertEquals(dragonBF.getZone().getZoneType(), ZoneType.Battlefield);
 
         Card squireCopy = findCardWithName(simGame, squire);
         AssertJUnit.assertNotNull(squireCopy);

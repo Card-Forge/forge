@@ -39,16 +39,18 @@ public class CardCopyService {
     // Straight copying for things like moving a card to a different zone or using GameCopier
     public final Card copyCard(boolean assignNewId, Player owner) {
         Card out;
-        if (!(copyFrom.isRealToken() || copyFrom.getCopiedPermanent() != null)) {
-            // TODO There was a crash here where copyFrom.getPaperCard() was null?
-            out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
-                    : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
-        } else { // token
+        if (copyFrom.isRealToken() || copyFrom.getCopiedPermanent() != null || copyFrom.getPaperCard() == null) {
             out = copyStats(copyFrom, owner, assignNewId);
-            out.setToken(true);
+            out.setToken(copyFrom.isToken());
+            out.setEffectSource(copyFrom.getEffectSource());
+            out.setBoon(copyFrom.isBoon());
+            out.dangerouslySetGame(toGame);
 
             // need to copy this values for the tokens
             out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+        } else {
+            out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
+                    : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
         }
 
         out.setZone(copyFrom.getZone());

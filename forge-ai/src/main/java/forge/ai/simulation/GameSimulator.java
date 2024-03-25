@@ -33,7 +33,8 @@ public class GameSimulator {
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
-        simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
+        simGame = copier.makeCopy();
+        // simGame.advanceToPhase(advanceToPhase, origAiPlayer)
 
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
@@ -199,7 +200,7 @@ public class GameSimulator {
                 System.out.println();
             }
             final SpellAbility playingSa = sa;
-
+            // Is this right?
             simGame.copyLastState();
             boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
                 if (interceptor != null) {

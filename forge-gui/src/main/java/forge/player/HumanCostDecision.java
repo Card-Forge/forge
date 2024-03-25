@@ -626,7 +626,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         // for costs declared mandatory, this is only reachable with a valid amount
         if (player.canPayLife(c, isEffect(), ability) && confirmAction(cost, message)) {
             //force mandatory if paylife is paid.. todo add check if all can be paid
-            mandatory = true;
+            if (!player.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                // If we can restore the game state, don't force the SA to be mandatory
+                mandatory = true;
+            }
             return PaymentDecision.number(c);
         }
         return null;

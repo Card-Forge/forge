@@ -154,6 +154,7 @@ public class GameSimulationTest extends SimulationTest {
     @Test
     public void testEtbTriggers() {
         Game game = initAndCreateGame();
+        Player p0 =  game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
         addCard("Black Knight", p);
         addCards("Swamp", 5, p);
@@ -171,13 +172,17 @@ public class GameSimulationTest extends SimulationTest {
         int score = sim.simulateSpellAbility(playMerchantSa).value;
         AssertJUnit.assertTrue(String.format("score=%d vs. origScore=%d", score, origScore), score > origScore);
         Game simGame = sim.getSimulatedGameState();
-        AssertJUnit.assertEquals(24, simGame.getPlayers().get(1).getLife());
-        AssertJUnit.assertEquals(16, simGame.getPlayers().get(0).getLife());
+
+        Player simP0 = simGame.getPlayer(p0.getId());
+        Player simP = simGame.getPlayer(p.getId());
+        AssertJUnit.assertEquals(24, simP.getLife());
+        AssertJUnit.assertEquals(16, simP0.getLife());
     }
 
     @Test
     public void testSimulateUnmorph() {
         Game game = initAndCreateGame();
+        Player p0 = game.getPlayers().get(0);
         Player p = game.getPlayers().get(1);
         Card ripper = createCard("Ruthless Ripper", p);
         ripper.turnFaceDownNoUpdate();
@@ -194,7 +199,9 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility unmorphSA = findSAWithPrefix(ripper, "Morph — Reveal a black card");
         AssertJUnit.assertNotNull(unmorphSA);
         sim.simulateSpellAbility(unmorphSA);
-        AssertJUnit.assertEquals(18, simGame.getPlayers().get(0).getLife());
+
+        Player simP0 = simGame.getPlayer(p0.getId());
+        AssertJUnit.assertEquals(18, simP0.getLife());
     }
 
     @Test
@@ -216,8 +223,10 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(fractureSa);
         fractureSa.getTargets().add(p0);
         sim.simulateSpellAbility(fractureSa);
-        AssertJUnit.assertEquals(1, simGame.getPlayers().get(0).getCardsIn(ZoneType.Hand).size());
-        AssertJUnit.assertEquals(0, simGame.getPlayers().get(1).getCardsIn(ZoneType.Hand).size());
+        Player simP0 = simGame.getPlayer(p0.getId());
+        Player simP1 = simGame.getPlayer(p1.getId());
+        AssertJUnit.assertEquals(1, simP0.getCardsIn(ZoneType.Hand).size());
+        AssertJUnit.assertEquals(0, simP1.getCardsIn(ZoneType.Hand).size());
     }
 
     @Test
@@ -243,7 +252,7 @@ public class GameSimulationTest extends SimulationTest {
         Card vampireToken = findCardWithName(simGame, "Vampire Token");
         AssertJUnit.assertNotNull(vampireToken);
 
-        Player simP = simGame.getPlayers().get(1);
+        Player simP = simGame.getPlayer(p.getId());
         cards = ComputerUtilAbility.getAvailableCards(simGame, simP);
         abilities = ComputerUtilAbility.getSpellAbilities(cards, simP);
         SpellAbility minusTwoSim = findSAWithPrefix(abilities, "-2: Create a 2/2 black Vampire");
@@ -254,7 +263,7 @@ public class GameSimulationTest extends SimulationTest {
 
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
-        Player copyP = copy.getPlayers().get(1);
+        Player copyP = copy.getPlayer(p.getId());
         cards = ComputerUtilAbility.getAvailableCards(copy, copyP);
         abilities = ComputerUtilAbility.getSpellAbilities(cards, copyP);
         SpellAbility minusTwoCopy = findSAWithPrefix(abilities, "-2: Create a 2/2 black Vampire");
@@ -1031,44 +1040,46 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim = createSimulator(game, p);
         sim.simulateSpellAbility(playTurtle);
         Game simGame = sim.getSimulatedGameState();
-        Player simP = simGame.getPlayers().get(1);
+        Player simP = simGame.getPlayer(p.getId());
         AssertJUnit.assertEquals(2, simP.getCounters(CounterEnumType.ENERGY));
 
         GameCopier copier = new GameCopier(simGame);
         Game copy = copier.makeCopy();
-        Player copyP = copy.getPlayers().get(1);
+        Player copyP = copy.getPlayer(p.getId());
         AssertJUnit.assertEquals(2, copyP.getCounters(CounterEnumType.ENERGY));
     }
 
     @Test
     public void testFloatingMana() {
         Game game = initAndCreateGame();
-        Player p = game.getPlayers().get(1);
-        addCard("Swamp", p);
-        Card darkRitualCard = addCardToZone("Dark Ritual", p, ZoneType.Hand);
-        Card darkConfidantCard = addCardToZone("Dark Confidant", p, ZoneType.Hand);
-        Card deathriteCard = addCardToZone("Deathrite Shaman", p, ZoneType.Hand);
+        Player p0 = game.getPlayers().get(0);
+        Player p1 = game.getPlayers().get(1);
+        addCard("Swamp", p1);
+        Card darkRitualCard = addCardToZone("Dark Ritual", p1, ZoneType.Hand);
+        Card darkConfidantCard = addCardToZone("Dark Confidant", p1, ZoneType.Hand);
+        Card deathriteCard = addCardToZone("Deathrite Shaman", p1, ZoneType.Hand);
 
-        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p1);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertTrue(p.getManaPool().isEmpty());
+        AssertJUnit.assertTrue(p1.getManaPool().isEmpty());
 
         SpellAbility playRitual = darkRitualCard.getSpellAbilities().get(0);
-        GameSimulator sim = createSimulator(game, p);
+        GameSimulator sim = createSimulator(game, p1);
         sim.simulateSpellAbility(playRitual);
         Game simGame = sim.getSimulatedGameState();
-        Player simP = simGame.getPlayers().get(1);
-        AssertJUnit.assertEquals(3, simP.getManaPool().totalMana());
-        AssertJUnit.assertEquals(3, simP.getManaPool().getAmountOfColor(MagicColor.BLACK));
+
+        Player simP1 = simGame.getPlayer(p1.getId());
+        AssertJUnit.assertEquals(3, simP1.getManaPool().totalMana());
+        AssertJUnit.assertEquals(3, simP1.getManaPool().getAmountOfColor(MagicColor.BLACK));
 
         Card darkConfidantCard2 = (Card) sim.getGameCopier().find(darkConfidantCard);
         SpellAbility playDarkConfidant2 = darkConfidantCard2.getSpellAbilities().get(0);
         Card deathriteCard2 = (Card) sim.getGameCopier().find(deathriteCard);
 
-        GameSimulator sim2 = createSimulator(simGame, simP);
+        GameSimulator sim2 = createSimulator(simGame, simP1);
         sim2.simulateSpellAbility(playDarkConfidant2);
         Game sim2Game = sim2.getSimulatedGameState();
-        Player sim2P = sim2Game.getPlayers().get(1);
+        Player sim2P = sim2Game.getPlayer(simP1.getId());
         AssertJUnit.assertEquals(1, sim2P.getManaPool().totalMana());
         AssertJUnit.assertEquals(1, sim2P.getManaPool().getAmountOfColor(MagicColor.BLACK));
 
@@ -1078,7 +1089,7 @@ public class GameSimulationTest extends SimulationTest {
         GameSimulator sim3 = createSimulator(sim2Game, sim2P);
         sim3.simulateSpellAbility(playDeathriteCard3);
         Game sim3Game = sim3.getSimulatedGameState();
-        Player sim3P = sim3Game.getPlayers().get(1);
+        Player sim3P = sim3Game.getPlayer(sim2P.getId());
         AssertJUnit.assertEquals(0, sim3P.getManaPool().totalMana());
         AssertJUnit.assertEquals(0, sim3P.getManaPool().getAmountOfColor(MagicColor.BLACK));
     }
@@ -2296,7 +2307,8 @@ public class GameSimulationTest extends SimulationTest {
 
         // 2 times 7 damage with life gain = 14 + 20 = 34 (damage to Stormwild Capridor
         // is prevented)
-        AssertJUnit.assertEquals(34, simGame.getPlayers().get(0).getLife());
+        Player simplayer1 = simGame.getPlayer(p1.getId());
+        AssertJUnit.assertEquals(34, simplayer1.getLife());
     }
 
     @Test

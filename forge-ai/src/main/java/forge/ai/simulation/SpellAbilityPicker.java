@@ -34,7 +34,7 @@ public class SpellAbilityPicker {
     private Game game;
     private Player player;
     private Score bestScore;
-    private boolean printOutput;
+    private boolean printOutput = false;
     private SpellAbilityChoicesIterator interceptor;
 
     private Plan plan;
@@ -90,7 +90,7 @@ public class SpellAbilityPicker {
     }
 
     public SpellAbility chooseSpellAbilityToPlay(SimulationController controller) {
-        printOutput = controller == null;
+        //printOutput = controller == null;
 
         // Pass if top of stack is owned by me.
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getActivatingPlayer().equals(player)) {
@@ -162,12 +162,16 @@ public class SpellAbilityPicker {
             List<SpellAbility> candidateSAs2 = new ArrayList<>();
             for (SpellAbility sa : candidateSAs) {
                 if (!isSorcerySpeed(sa, player)) {
-                    System.err.println("Not sorcery: " + sa);
+                    if (printOutput) {
+                        System.err.println("Not sorcery: " + sa);
+                    }
                     candidateSAs2.add(sa);
                 }
             }
             if (!candidateSAs2.isEmpty()) {
-                System.err.println("Formula plan with phase bloom");
+                if (printOutput) {
+                    System.err.println("Formula plan with phase bloom");
+                }
                 Plan afterBlockersPlan = formulatePlanWithPhase(origGameScore, candidateSAs2, PhaseType.COMBAT_DECLARE_BLOCKERS);
                 if (afterBlockersPlan != null && afterBlockersPlan.getFinalScore().value >= bestPlan.getFinalScore().value) {
                     printPlan(afterBlockersPlan, "After blockers");
@@ -376,6 +380,7 @@ public class SpellAbilityPicker {
             MyRandom.setRandom(new Random(randomSeedToUse));
             GameSimulator simulator = new GameSimulator(controller, game, player, phase);
             simulator.setInterceptor(choicesIterator);
+            // I feel like something here is making a wrong assumption about what the target is
             lastScore = simulator.simulateSpellAbility(sa);
             numSimulations++;
             if (lastScore.value > bestScore.value) {
