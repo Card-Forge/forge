@@ -518,7 +518,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Card source = sa.getHostCard();
         curResolvingCard = source;
 
-        boolean thisHasFizzled = hasFizzled(sa, source);
+        boolean thisHasFizzled = hasFizzled(sa, source, null);
 
         if (!thisHasFizzled) {
             game.copyLastState();
@@ -637,16 +637,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source) {
-        // Can't fizzle unless there are some targets
-        boolean fizzle = false;
+    private final boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
         boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
 
         List<GameObject> toRemove = Lists.newArrayList();
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
-            fizzle = true;
+            if (fizzle == null) {
+                // don't overwrite previous result
+                fizzle = true;
+            }
             // Some targets were chosen, fizzling for this subability is now possible
-            //fizzle = true;
             // With multi-targets, as long as one target is still legal,
             // we'll try to go through as much as possible
             for (final GameObject o : sa.getTargets()) {
@@ -682,9 +682,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         if (sa.getSubAbility() != null) {
-            fizzle = hasFizzled(sa.getSubAbility(), source) && fizzle;
+            fizzle = hasFizzled(sa.getSubAbility(), source, fizzle);
         }
-        if (fizzle && rememberTgt) {
+        if (fizzle != null && fizzle && rememberTgt) {
             source.clearRemembered();
         }
 
@@ -692,7 +692,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
             sa.getTargets().removeAll(toRemove);
         }
-        return fizzle;
+        return fizzle != null && fizzle;
     }
 
     public final SpellAbilityStackInstance peek() {
