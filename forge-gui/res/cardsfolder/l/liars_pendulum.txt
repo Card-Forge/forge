@@ -2,7 +2,7 @@ Name:Liar's Pendulum
 ManaCost:1
 Types:Artifact
 A:AB$ NameCard | Cost$ 2 T | Defined$ You | SubAbility$ DBGuess | SpellDescription$ Choose a card name. Target opponent guesses whether a card with that name is in your hand. You may reveal your hand. If you do and your opponent guessed wrong, draw a card.
-SVar:DBGuess:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ GuessInHand,GuessNotInHand | AILogic$ Random | ShowChoice$ True
+SVar:DBGuess:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ GuessInHand,GuessNotInHand | AILogic$ Random | ShowChoice$ True | Guess$ True
 SVar:GuessInHand:DB$ RevealHand | Defined$ You | Optional$ True | RememberRevealedPlayer$ True | SubAbility$ DBInHandDraw | SpellDescription$ A card with the chosen name is in that player's hand
 SVar:GuessNotInHand:DB$ RevealHand | Defined$ You | Optional$ True | RememberRevealedPlayer$ True | SubAbility$ DBNotInHandDraw | SpellDescription$ A card with the chosen name is not in that player's hand
 SVar:DBInHandDraw:DB$ Draw | Defined$ You | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
