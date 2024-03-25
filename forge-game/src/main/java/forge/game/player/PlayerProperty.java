@@ -463,7 +463,7 @@ public class PlayerProperty {
             }
         } else if (property.equals("BeenAttackedThisCombat")) {
             for (Player p : game.getRegisteredPlayers()) {
-                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                if (p.getAttackedPlayersMyCombat().contains(player)) {
                     return true;
                 }
             }
