@@ -61,6 +61,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public int getId() {
         return id;
     }
+    public void dangerouslySetId(int i) { id = i; }
 
     public String getName() {
         return name;
@@ -186,10 +187,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return hasCardAttachment(cardName);
     }
 
-    /**
-     * internal method
-     * @param Card c
-     */
     public final void addAttachedCard(final Card c) {
         if (attachedCards.add(c)) {
             updateAttachedCards();
@@ -197,10 +194,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
-    /**
-     * internal method
-     * @param Card c
-     */
     public final void removeAttachedCard(final Card c) {
         if (attachedCards.remove(c)) {
             updateAttachedCards();

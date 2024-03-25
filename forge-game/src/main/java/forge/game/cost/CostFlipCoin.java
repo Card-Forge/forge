@@ -54,6 +54,12 @@ public class CostFlipCoin extends CostPart {
     }
 
     @Override
+    public int paymentOrder() {
+        // In a world where costs are fully undoable, determining  random information should be done last.
+        return 22;
+    }
+
+    @Override
     public final String toString() {
         return Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), "Coin");
     }

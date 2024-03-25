@@ -50,7 +50,10 @@ public class CostMill extends CostPart {
     }
 
     @Override
-    public int paymentOrder() { return 10; }
+    public int paymentOrder() {
+        // In a world where costs are fully undoable, revealing unknown information should be done last.
+        return 20;
+    }
 
     /*
      * (non-Javadoc)

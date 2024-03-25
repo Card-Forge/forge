@@ -1329,6 +1329,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.updateZone(zone);
     }
 
+    public void updateAllZonesForView() {
+        for (PlayerZone zone : zones.values()) {
+            updateZoneForView(zone);
+        }
+    }
+
     public final CardCollectionView getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
     }
@@ -2599,6 +2605,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (controller != null) {
             throw new IllegalStateException("Controller creator already assigned");
         }
+        dangerouslySetController(ctrlr);
+    }
+
+    public final void dangerouslySetController(PlayerController ctrlr) {
         controller = ctrlr;
         updateAvatar();
         updateSleeve();

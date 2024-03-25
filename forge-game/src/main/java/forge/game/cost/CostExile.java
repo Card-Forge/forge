@@ -99,7 +99,13 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    public int paymentOrder() { return 15; }
+    public int paymentOrder() {
+        if (this.from.contains(ZoneType.Library)) {
+            // In a world where costs are fully undoable, revealing unknown information should be done last.
+            return 20;
+        }
+        return 15;
+    }
 
     @Override
     public final String toString() {
