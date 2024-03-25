@@ -1,0 +1,9 @@
+Name:Fblthp, Lost on the Range
+ManaCost:1 U U
+Types:Legendary Creature Homunculus
+PT:1/1
+K:Ward:2
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | AddKeyword$ Plot:CardManaCost | Description$ The top card of your library has plot. The plot cost is equal to its mana cost.
+S:Mode$ PlotZone | ValidCard$ Card.TopLibrary+YouCtrl+nonLand | Description$ You may plot nonland cards from the top of your library.
+Oracle:Ward {2}\nYou may look at the top card of your library any time.\nThe top card of your library has plot. The plot cost is equal to its mana cost.\nYou may plot nonland cards from the top of your library.

@@ -68,8 +68,14 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     names.add(s);
                 }
             } else if (sa.hasParam("DefinedName")) {
-                final CardCollection def = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa);
-                for (final Card c : def) {
+                final String def = sa.getParam("DefinedName");
+                CardCollection cards = new CardCollection();
+                if (def.equals("ChosenMap")) {
+                    cards = source.getChosenMap().get(player);
+                } else {
+                    cards = AbilityUtils.getDefinedCards(source, def, sa);
+                }
+                for (final Card c : cards) {
                     names.add(c.getName());
                 }
             } else if (sa.hasParam("Spellbook")) {

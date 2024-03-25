@@ -365,6 +365,8 @@ public class CardCopyService {
         newCopy.setTurnInZone(copyFrom.getTurnInZone());
         newCopy.setForetoldCostByEffect(copyFrom.isForetoldCostByEffect());
 
+        newCopy.setPlotted(copyFrom.isPlotted());
+
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
 
         // update keyword cache on all states

@@ -1,0 +1,7 @@
+Name:Rodeo Pyromancers
+ManaCost:3 R
+Types:Creature Human Mercenary
+PT:3/4
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | ValidCard$ Card | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell each turn, add {R}{R}.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 2
+Oracle:Whenever you cast your first spell each turn, add {R}{R}.

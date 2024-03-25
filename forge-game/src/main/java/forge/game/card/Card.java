@@ -227,6 +227,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretold;
     private boolean foretoldCostByEffect;
 
+    private boolean plotted;
+
     private boolean specialized;
 
     private int timesCrewedThisTurn = 0;
@@ -1840,6 +1842,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         turnInZone = turn;
     }
 
+    public final boolean enteredThisTurn() {
+        return getTurnInZone() == game.getPhaseHandler().getTurn();
+    }
+
     public final Player getTurnInController() {
         return turnInController;
     }
@@ -2217,7 +2223,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
-                        || keyword.startsWith("Level up")) {
+                        || keyword.startsWith("Level up") || keyword.startsWith("Plot")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -6437,6 +6443,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.foretold = foretold;
     }
 
+    public final boolean isPlotted() {
+        return this.plotted;
+    }
+    public final void setPlotted(final boolean plotted) {
+        this.plotted = plotted;
+    }
+
     public boolean isForetoldCostByEffect() {
         return foretoldCostByEffect;
     }
@@ -6445,7 +6458,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isForetoldThisTurn() {
-        return getTurnInZone() == game.getPhaseHandler().getTurn();
+        return this.enteredThisTurn();
     }
 
     public boolean isSpecialized() {

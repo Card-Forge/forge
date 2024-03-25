@@ -1,0 +1,9 @@
+Name:Boltbender
+ManaCost:3 R
+Types:Creature Goblin Wizard
+PT:4/2
+K:Disguise:1 R
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChangeTgts | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ When CARDNAME is turned face up, you may choose new targets for any number of other spells and/or abilities.
+SVar:TrigChangeTgts:DB$ ChangeTargets | Defined$ ValidStack SpellAbility | Optional$ True
+AI:RemoveDeck:All
+Oracle:Disguise {1}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)\nWhen Boltbender is turned face up, you may choose new targets for any number of other spells and/or abilities.
