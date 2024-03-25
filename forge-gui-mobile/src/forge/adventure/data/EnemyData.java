@@ -1,8 +1,14 @@
 package forge.adventure.data;
 
-import forge.adventure.util.*;
+import forge.adventure.util.CardUtil;
+import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
+import forge.game.GameFormat;
+import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -78,10 +84,23 @@ public class EnemyData implements Serializable {
     }
 
     public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
-        if (randomizeDeck) {
-            return CardUtil.getDeck(Aggregates.random(deck), true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+        boolean canUseGeneticAI = useGeneticAI && life > 16;
+
+        if (canUseGeneticAI && Config.instance().getSettingData().generateLDADecks) {
+            GameFormat fmt = FModel.getFormats().getStandard();
+            int rand = MyRandom.getRandom().nextInt(100);
+            if (rand > 90) {
+                fmt = FModel.getFormats().getLegacy();
+            } else if (rand > 50) {
+                fmt = FModel.getFormats().getModern();
+            }
+            return DeckgenUtil.buildLDACArchetypeDeck(fmt, true);
         }
-        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.getName(), deck.length)], true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
+
+        if (randomizeDeck) {
+            return CardUtil.getDeck(Aggregates.random(deck), true, isFantasyMode, colors, life > 13, canUseGeneticAI);
+        }
+        return CardUtil.getDeck(deck[Current.player().getEnemyDeckNumber(this.getName(), deck.length)], true, isFantasyMode, colors, life > 13, canUseGeneticAI);
     }
 
     public String getName(){
