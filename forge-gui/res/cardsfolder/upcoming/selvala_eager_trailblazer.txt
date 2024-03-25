@@ -9,5 +9,5 @@ A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$
 SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
 SVar:X:Count$DifferentPower_Creature.YouCtrl
-DeckHas:Ability$Token & Type$Mercenary
+DeckHas:Ability$Token & Type$Mercenary & Color$Red
 Oracle:Vigilance\nWhenever you cast a creature spell, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."\n{T}: Choose a color. Add one mana of that color for each different power among creatures you control.
