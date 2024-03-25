@@ -86,10 +86,12 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 }
                 // don't notify here, because most scripts I've seen don't store that number in a long term
             }
-            if (secretlyChoose) {
+            if (secretlyChoose && sa.hasParam("KeepSecret")) {
+                card.setChosenNumber(chosen, true);
+            } else if (secretlyChoose) {
                 chooseMap.put(p, chosen);
             } else {
-                card.setChosenNumber(chosen);
+                card.setChosenNumber(chosen, false);
             }
             if (sa.hasParam("Notify")) {
                 p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().
