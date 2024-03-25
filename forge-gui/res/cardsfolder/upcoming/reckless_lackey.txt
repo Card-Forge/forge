@@ -1,0 +1,9 @@
+Name:Reckless Lackey
+ManaCost:R
+Types:Creature Goblin Pirate
+PT:1/2
+K:First Strike
+K:Haste
+A:AB$ Draw | Cost$ 2 R Sac<1/CARDNAME> | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Draw a card and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+Oracle:First strike, haste\n{2}{R}, Sacrifice Reckless Lackey: Draw a card and create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

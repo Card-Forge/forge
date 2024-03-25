@@ -1,0 +1,7 @@
+Name:Deadeye Duelist
+ManaCost:1 R
+Types:Creature Human Assassin
+PT:1/3
+K:Reach
+A:AB$ DealDamage | Cost$ 1 T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target opponent.
+Oracle:Reach\n{1}, {T}: Deadeye Duelist deals 1 damage to target opponent.
