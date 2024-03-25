@@ -1957,6 +1957,9 @@ public class AbilityUtils {
         if (sq[0].equals("CardNumAttacksThisTurn")) {
             return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), expr, c, ctb);
         }
+        if (sq[0].equals("CardNumAttacksThisGame")) {
+            return doXMath(c.getDamageHistory().getAttacksThisGame(), expr, c, ctb);
+        }
 
         if (sq[0].equals("Intensity")) {
             return doXMath(c.getIntensity(true), expr, c, ctb);
