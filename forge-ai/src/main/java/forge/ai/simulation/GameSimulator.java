@@ -151,9 +151,12 @@ public class GameSimulator {
     }
 
     public Score simulateSpellAbility(SpellAbility origSa) {
-        return simulateSpellAbility(origSa, this.eval);
+        return simulateSpellAbility(origSa, this.eval, true);
     }
-    public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
+    public Score simulateSpellAbility(SpellAbility origSa, boolean resolve) {
+        return simulateSpellAbility(origSa, this.eval, resolve);
+    }
+    public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval, boolean resolve) {
         SpellAbility sa;
         if (origSa instanceof LandAbility) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
@@ -209,9 +212,11 @@ public class GameSimulator {
             }
         }
 
-        // TODO: Support multiple opponents.
-        Player opponent = aiPlayer.getWeakestOpponent();
-        resolveStack(simGame, opponent);
+        if (resolve) {
+            // TODO: Support multiple opponents.
+            Player opponent = aiPlayer.getWeakestOpponent();
+            resolveStack(simGame, opponent);
+        }
 
         // TODO: If this is during combat, before blockers are declared,
         // we should simulate how combat will resolve and evaluate that
