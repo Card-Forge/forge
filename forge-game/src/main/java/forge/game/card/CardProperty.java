@@ -1203,7 +1203,11 @@ public class CardProperty {
             if (!found) {
                 return false;
             }
-        } else if (property.startsWith("Damaged")) {
+        } else if (property.equals("isDamaged")) { // with any damage
+            if (card.getDamage() <= 0) {
+                return false;
+            }
+        } else if (property.startsWith("Damaged")) { // gets cards that Damaged source
             boolean found = false;
             for (Pair<Integer, Boolean> p : source.getDamageReceivedThisTurn()) {
                 if (game.getDamageLKI(p).getLeft().equalsWithGameTimestamp(card)) {
