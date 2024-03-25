@@ -95,6 +95,15 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             if (!faces.isEmpty()) {
+                if (sa.hasParam("Filter")) {
+                    List<ICardFace> filtered = new ArrayList<>();
+                    for (ICardFace face : faces) {
+                        PaperCard pc = StaticData.instance().getCommonCards().getUniqueByName(face.getName());
+                        if (Card.fromPaperCard(pc, player).isValid(sa.getParam("Filter"), player, source, sa)) filtered.add(face);
+                    }
+                    faces = filtered;
+                    if (faces.isEmpty()) continue;
+                }
                 int i = sa.hasParam("SpellbookAmount") ?
                         AbilityUtils.calculateAmount(source, sa.getParam("SpellbookAmount"), sa) : 1;
                 while (i > 0) {
