@@ -2236,6 +2236,10 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[game.isNight() ? 1 : 2], ctb), expr, c, ctb);
         }
 
+        if (sq[0].equals("NumPiledGuessedSA")) {
+            return doXMath(game.getNumPiledGuessedSA(), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("CommanderCastFromCommandZone")) {
             // only used by Opal Palace, and it does add the trigger to the card
             return doXMath(player.getCommanderCast(c), expr, c, ctb);

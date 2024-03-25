@@ -600,13 +600,11 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get("Historic");
         }
 
-        public GameFormat getModern() {
-            return this.map.get("Modern");
-        }
+        public GameFormat getModern() { return this.map.get("Modern"); }
 
-        public GameFormat getVintage() {
-            return this.map.get("Vintage");
-        }
+        public GameFormat getLegacy() { return this.map.get("Legacy"); }
+
+        public GameFormat getVintage() { return this.map.get("Vintage"); }
 
         public GameFormat getPremodern() { return this.map.get("Premodern"); }
 

@@ -2,7 +2,7 @@ Name:Najeela, the Blade-Blossom
 ManaCost:2 R
 Types:Legendary Creature Human Warrior
 PT:3/2
-T:Mode$ Attacks | ValidCard$ Warrior | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerController$ You | TriggerDescription$ Whenever a Warrior attacks, you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking.
+T:Mode$ Attacks | ValidCard$ Warrior | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever a Warrior attacks, you may have its controller create a 1/1 white Warrior creature token that's tapped and attacking.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior | TokenOwner$ TriggeredAttackerController | TokenTapped$ True | TokenAttacking$ True | AILogic$ OnlyOnAlliedAttack
 A:AB$ UntapAll | Cost$ W U B R G | ValidCards$ Creature.attacking | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBAddCombat | SpellDescription$ Untap all attacking creatures. They gain trample, lifelink, and haste until end of turn. After this phase, there is an additional combat phase. Activate only during combat.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | SubAbility$ DBPumpAll

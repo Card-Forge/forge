@@ -38,16 +38,16 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card card = sa.getHostCard();
+        final Card source = sa.getHostCard();
 
         final boolean random = sa.hasParam("Random");
         final boolean anyNumber = sa.hasParam("ChooseAnyNumber");
         final boolean secretlyChoose = sa.hasParam("SecretlyChoose");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
-        final int min = AbilityUtils.calculateAmount(card, sMin, sa);
+        final int min = AbilityUtils.calculateAmount(source, sMin, sa);
         final String sMax = sa.getParamOrDefault("Max", "99");
-        final int max = AbilityUtils.calculateAmount(card, sMax, sa);
+        final int max = AbilityUtils.calculateAmount(source, sMax, sa);
 
         final Map<Player, Integer> chooseMap = Maps.newHashMap();
 
@@ -76,7 +76,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     for (int i = min; i <= max; i++) {
                         choices.add(i);
                     }
-                    for (Object o : card.getRemembered()) {
+                    for (Object o : source.getRemembered()) {
                         if (o instanceof Integer) choices.remove((Integer) o);
                     }
                     if (choices.isEmpty()) continue;
@@ -87,19 +87,19 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 // don't notify here, because most scripts I've seen don't store that number in a long term
             }
             if (secretlyChoose && sa.hasParam("KeepSecret")) {
-                card.setChosenNumber(chosen, true);
+                source.setChosenNumber(chosen, true);
             } else if (secretlyChoose) {
                 chooseMap.put(p, chosen);
             } else {
-                card.setChosenNumber(chosen, false);
+                source.setChosenNumber(chosen, false);
             }
             if (sa.hasParam("Notify")) {
-                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().
+                p.getGame().getAction().notifyOfValue(sa, source, Localizer.getInstance().
                 getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
             }
             if (sa.hasParam("Guesser") && chosen != null) { // if nothing was chosen, there is nothing to guess
                 final FCollectionView<Player> gChoices = 
-                    AbilityUtils.getDefinedPlayers(card, sa.getParam("Guesser"), sa);
+                    AbilityUtils.getDefinedPlayers(source, sa.getParam("Guesser"), sa);
                 final Player guesser = choices.isEmpty() ? null : p.getController().
                     chooseSingleEntityForEffect(gChoices, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), 
                         false, null);
@@ -109,6 +109,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     // if more complicated effects require this in the future it may be worth a unique message
                     if (chooseMap.containsValue(guessPair.getValue())) guessedCorrect = true;
                 }
+                source.getGame().incPiledGuessedSA();
             }
         }
 
@@ -143,16 +144,18 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     lowestNum.add(player);
                 }
             }
+
             boolean matched = highestNum.size() == chooseMap.size();
-            card.getGame().getAction().notifyOfValue(sa, card, sb.toString(), null);
+            source.getGame().getAction().notifyOfValue(sa, source, sb.toString(), null);
+
             if (sa.hasParam("ChooseNumberSubAbility")) {
                 SpellAbility sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
 
                 for (Player p : chooseMap.keySet()) {
-                    card.addRemembered(p);
-                    card.setChosenNumber(chooseMap.get(p));
+                    source.addRemembered(p);
+                    source.setChosenNumber(chooseMap.get(p));
                     AbilityUtils.resolve(sub);
-                    card.clearRemembered();
+                    source.clearRemembered();
                 }
             }
 
@@ -160,10 +163,10 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 SpellAbility sub = sa.getAdditionalAbility("Lowest");
 
                 for (Player p : lowestNum) {
-                    card.addRemembered(p);
-                    card.setChosenNumber(lowest);
+                    source.addRemembered(p);
+                    source.setChosenNumber(lowest);
                     AbilityUtils.resolve(sub);
-                    card.clearRemembered();
+                    source.clearRemembered();
                 }
             }
 
@@ -177,9 +180,9 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 SpellAbility sub = sa.getAdditionalAbility("NotLowest");
 
                 for (Player p : notLowestNum) {
-                    card.addRemembered(p);
+                    source.addRemembered(p);
                     AbilityUtils.resolve(sub);
-                    card.clearRemembered();
+                    source.clearRemembered();
                 }
             }
 
@@ -187,13 +190,13 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 SpellAbility sub = sa.getAdditionalAbility("Highest");
 
                 for (Player p : highestNum) {
-                    card.addRemembered(p);
-                    card.setChosenNumber(highest);
+                    source.addRemembered(p);
+                    source.setChosenNumber(highest);
                     AbilityUtils.resolve(sub);
-                    card.clearRemembered();
+                    source.clearRemembered();
                 }
                 if (sa.hasParam("RememberHighest")) {
-                    card.addRemembered(highestNum);
+                    source.addRemembered(highestNum);
                 }
             }
 
@@ -205,11 +208,11 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             if (sa.hasParam("GuessWrong") && guessPair != null && !guessedCorrect) {
                 SpellAbility sub = sa.getAdditionalAbility("GuessWrong");
                 // wrong currently uses the guess, not the chosen
-                card.setChosenNumber(guessPair.getValue());
-                card.addRemembered(guessPair.getKey());
+                source.setChosenNumber(guessPair.getValue());
+                source.addRemembered(guessPair.getKey());
                 AbilityUtils.resolve(sub);
-                card.clearChosenNumber();
-                card.removeRemembered(guessPair.getKey());
+                source.clearChosenNumber();
+                source.removeRemembered(guessPair.getKey());
             }
 
             if (matched && sa.hasParam("MatchedAbility")) {
@@ -223,7 +226,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("RememberChosen")) card.addRemembered(chooseMap.values());
+        if (sa.hasParam("RememberChosen")) source.addRemembered(chooseMap.values());
     }
 
 }
