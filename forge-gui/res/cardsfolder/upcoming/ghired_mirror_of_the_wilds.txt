@@ -1,0 +1,10 @@
+Name:Ghired, Mirror of the Wilds
+ManaCost:R G W
+Types:Legendary Creature Human Shaman
+PT:3/3
+K:Haste
+S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddAbility$ ABCopyPermanent | Description$ Nontoken creatures you control have "{T}: Create a token that's a copy of target token you control that entered the battlefield this turn."
+SVar:ABCopyPermanent:AB$ CopyPermanent | Cost$ T | ValidTgts$ Permanent.token+YouCtrl+ThisTurnEntered | NumCopies$ 1 | TgtPrompt$ Select target token you control that entered the battlefield this turn | SpellDescription$ Create a token that's a copy of target token you control that entered the battlefield this turn.
+DeckHas:Ability$Token
+DeckNeeds:Ability$Token
+Oracle:Haste\nNontoken creatures you control have "{T}: Create a token that's a copy of target token you control that entered the battlefield this turn."
