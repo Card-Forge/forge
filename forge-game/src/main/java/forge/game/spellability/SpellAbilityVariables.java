@@ -137,7 +137,7 @@ public class SpellAbilityVariables implements Cloneable {
     private String lifeAmount = "GE1";
 
     /** The shareAllColors. */
-    private String shareAllColors = null;
+    private String noDifferentColors = null;
 
     /** The mana spent. */
     private String manaSpent = "";
@@ -554,12 +554,12 @@ public class SpellAbilityVariables implements Cloneable {
 
     public final boolean isSolved() {     return this.solved;  }
 
-    public String getShareAllColors() {
-        return shareAllColors;
+    public String getNoDifferentColors() {
+        return noDifferentColors;
     }
 
-    public void setShareAllColors(String shareAllColors) {
-        this.shareAllColors = shareAllColors;
+    public void setNoDifferentColors(String noDifferentColors) {
+        this.noDifferentColors = noDifferentColors;
     }
 
     /**

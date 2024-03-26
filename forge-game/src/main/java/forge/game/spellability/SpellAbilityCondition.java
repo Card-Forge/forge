@@ -215,8 +215,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (params.containsKey("ConditionShareAllColors")) {
-            this.setShareAllColors(params.get("ConditionShareAllColors"));
+        if (params.containsKey("ConditionNoDifferentColors")) {
+            this.setNoDifferentColors(params.get("ConditionNoDifferentColors"));
         }
 
         if (params.containsKey("ConditionManaSpent")) {
@@ -313,8 +313,8 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (this.getShareAllColors() != null) {
-            List<Card> tgts = AbilityUtils.getDefinedCards(host, this.getShareAllColors(), sa);
+        if (this.getNoDifferentColors() != null) {
+            List<Card> tgts = AbilityUtils.getDefinedCards(host, this.getNoDifferentColors(), sa);
             Card first = Iterables.getFirst(tgts, null);
             if (first == null) {
                 return false;
