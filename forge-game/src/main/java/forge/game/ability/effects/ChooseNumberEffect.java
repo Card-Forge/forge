@@ -42,7 +42,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         final boolean random = sa.hasParam("Random");
         final boolean anyNumber = sa.hasParam("ChooseAnyNumber");
-        final boolean secretlyChoose = sa.hasParam("SecretlyChoose");
+        final boolean secretlyChoose = sa.hasParam("Secretly");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
         final int min = AbilityUtils.calculateAmount(source, sMin, sa);
