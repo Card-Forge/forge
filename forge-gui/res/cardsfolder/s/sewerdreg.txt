@@ -2,7 +2,7 @@ Name:Sewerdreg
 ManaCost:3 B B
 Types:Creature Spirit
 PT:3/3
-K:Swampwalk
+K:Landwalk:Swamp
 A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 AI:RemoveDeck:All
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nSacrifice Sewerdreg: Exile target card from a graveyard.

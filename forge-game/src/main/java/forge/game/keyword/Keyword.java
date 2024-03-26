@@ -112,7 +112,7 @@ public enum Keyword {
     INTIMIDATE("Intimidate", SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER("Kicker", Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     JUMP_START("Jump-start", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
-    LANDWALK("Landwalk", KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
+    LANDWALK("Landwalk", KeywordWithType.class, false, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "As long as it's your turn, this Vehicle is also a creature."),
@@ -249,19 +249,11 @@ public enum Keyword {
             int idx = k.indexOf(' ');
             String enumName = k.replace(" ", "_").toUpperCase(Locale.ROOT);
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (firstWord.endsWith("WALK")) {
-                keyword = Keyword.LANDWALK;
-                details = firstWord.substring(0, firstWord.length() - 4);
-            }
-            else if (idx != -1) {
+            if (idx != -1) {
                 idx = k.indexOf(' ', idx + 1);
                 String secondWord = idx == -1 ? enumName.substring(firstWord.length() + 1) : enumName.substring(firstWord.length() + 1, idx);
                 if (secondWord.equalsIgnoreCase("OFFERING")) {
                     keyword = Keyword.OFFERING;
-                    details = firstWord;
-                }
-                else if (secondWord.equalsIgnoreCase("LANDWALK")) {
-                    keyword = Keyword.LANDWALK;
                     details = firstWord;
                 }
             }

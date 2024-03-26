@@ -2,7 +2,7 @@ Name:Benthic Djinn
 ManaCost:2 U B
 Types:Creature Djinn
 PT:5/3
-K:Islandwalk
+K:Landwalk:Island
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nAt the beginning of your upkeep, you lose 2 life.

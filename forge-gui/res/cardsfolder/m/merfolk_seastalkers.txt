@@ -2,6 +2,6 @@ Name:Merfolk Seastalkers
 ManaCost:3 U
 Types:Creature Merfolk Scout
 PT:2/3
-K:Islandwalk
+K:Landwalk:Island
 A:AB$ Tap | Cost$ 2 U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{2}{U}: Tap target creature without flying.

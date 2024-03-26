@@ -2,5 +2,5 @@ Name:Koth's Courier
 ManaCost:1 R R
 Types:Creature Human Rogue
 PT:2/3
-K:Forestwalk
+K:Landwalk:Forest
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

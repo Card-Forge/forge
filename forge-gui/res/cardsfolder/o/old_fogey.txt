@@ -7,7 +7,7 @@ K:Cumulative upkeep:1
 K:Echo:G G
 K:Fading:3
 K:Bands with Other Dinosaurs
-K:Snow plainswalk
+K:Landwalk:Plains.Snow:Snow Plains
 K:Protection:Homarid:Homarids
 K:Flanking
 K:Rampage:2

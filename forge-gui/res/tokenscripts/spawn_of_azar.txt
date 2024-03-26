@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Creature Spawn
 Colors:black
 PT:*/*
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk

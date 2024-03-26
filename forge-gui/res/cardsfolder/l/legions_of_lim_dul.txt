@@ -2,5 +2,5 @@ Name:Legions of Lim-Dûl
 ManaCost:1 B B
 Types:Creature Zombie
 PT:2/3
-K:Snow swampwalk
+K:Landwalk:Swamp.Snow:snow Swamp
 Oracle:Snow swampwalk (This creature can't be blocked as long as defending player controls a snow Swamp.)

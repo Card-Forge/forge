@@ -2,7 +2,8 @@ Name:Zombie Musher
 ManaCost:3 B
 Types:Snow Creature Zombie
 PT:2/3
-K:Snow landwalk
+
+K:Landwalk:Land.Snow:snow Land
 A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random

@@ -2,7 +2,7 @@ Name:Cold-Eyed Selkie
 ManaCost:1 GU GU
 Types:Creature Merfolk Rogue
 PT:1/1
-K:Islandwalk
+K:Landwalk:Island
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw that many cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | OptionalDecider$ You
 SVar:X:TriggerCount$DamageAmount

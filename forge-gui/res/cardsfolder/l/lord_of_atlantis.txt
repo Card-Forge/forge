@@ -2,7 +2,7 @@ Name:Lord of Atlantis
 ManaCost:U U
 Types:Creature Merfolk
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Merfolk+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Islandwalk | Description$ Other Merfolk get +1/+1 and have islandwalk. (They can't be blocked as long as defending player controls an Island.)
+S:Mode$ Continuous | Affected$ Card.Merfolk+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Landwalk:Island | Description$ Other Merfolk get +1/+1 and have islandwalk. (They can't be blocked as long as defending player controls an Island.)
 SVar:PlayMain1:TRUE
 DeckHas:Keyword$Islandwalk
 DeckHints:Type$Merfolk

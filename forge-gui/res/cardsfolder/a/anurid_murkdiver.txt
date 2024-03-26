@@ -2,5 +2,5 @@ Name:Anurid Murkdiver
 ManaCost:4 B B
 Types:Creature Zombie Frog Beast
 PT:4/3
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

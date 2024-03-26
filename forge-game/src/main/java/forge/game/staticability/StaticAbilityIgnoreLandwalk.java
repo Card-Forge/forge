@@ -33,7 +33,10 @@ public class StaticAbilityIgnoreLandwalk {
         if (!stAb.matchesValidParam("ValidBlocker", blocker)) {
             return false;
         }
-        //
+        if (!stAb.matchesValidParam("ValidKeyword", k.getOriginal())) {
+            return false;
+        }
+
         return true;
     }
 }

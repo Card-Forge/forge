@@ -2,7 +2,7 @@ Name:Bog-Strider Ash
 ManaCost:3 G
 Types:Creature Treefolk Shaman
 PT:2/4
-K:Swampwalk
+K:Landwalk:Swamp
 T:Mode$ SpellCast | ValidCard$ Goblin | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a Goblin spell, you may pay {G}. If you do, you gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ G | Defined$ You | LifeAmount$ 2
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nWhenever a player casts a Goblin spell, you may pay {G}. If you do, you gain 2 life.

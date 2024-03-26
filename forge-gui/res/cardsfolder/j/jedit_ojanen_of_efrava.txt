@@ -2,7 +2,7 @@ Name:Jedit Ojanen of Efrava
 ManaCost:3 G G G
 Types:Legendary Creature Cat Warrior
 PT:5/5
-K:Forestwalk
+K:Landwalk:Forest
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk
