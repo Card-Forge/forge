@@ -1649,6 +1649,8 @@ public class CardProperty {
             }
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(card);
+        } else if (property.startsWith("enlistedThisCombat")) {
+            if (!card.getEnlistedThisCombat() == true) return false;
         } else if (property.startsWith("attackedThisCombat")) {
             if (null == combat || card.getDamageHistory().getCreatureAttackedThisCombat() == 0) {
                 return false;
