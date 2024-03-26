@@ -6,11 +6,16 @@ Type=Expansion
 ScryfallCode=OTJ
 
 [cards]
+12 R Fortune, Loyal Steed @Artur Nakhodkin
 45 R Duelist of the Mind @Darren Tan
 48 R Fblthp, Lost on the Range @Brian Valeza
+91 R Insatiable Avarice @Scott Murphy
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
 126 R Hell to Pay @Liiga Smilshkalne
 223 M Oko, the Ringleader @Magali Villeneuve
+231 M Selvala, Eager Trailblazer @Viko Menezes
+236 R Vraska Joins Up @Wylie Beckert
+243 U Lavaspur Boots @Mila Pesic
 272 L Plains @Salvatorre Zee Yazzie
 273 L Island @Salvatorre Zee Yazzie
 274 L Swamp @Salvatorre Zee Yazzie
