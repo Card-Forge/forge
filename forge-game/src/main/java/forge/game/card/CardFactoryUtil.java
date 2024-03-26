@@ -510,9 +510,9 @@ public class CardFactoryUtil {
         for (Card c : cards) {
             for (KeywordInterface inst : c.getKeywords()) {
                 final String k = inst.getOriginal();
-                if (k.endsWith("walk")) {
+                if (k.endsWith("walk") || inst.getKeyword().equals(Keyword.LANDWALK)) {
                     landkw.add(k);
-                } else if (k.startsWith("Protection")) {
+                } else if (inst.getKeyword().equals(Keyword.PROTECTION)) {
                     protectionkw.add(k);
                     for (byte col : MagicColor.WUBRG) {
                         final String colString = MagicColor.toLongString(col);
@@ -521,9 +521,9 @@ public class CardFactoryUtil {
                             protectionColorkw.add(protString);
                         }
                     }
-                } else if (k.startsWith("Hexproof")) {
+                } else if (inst.getKeyword().equals(Keyword.HEXPROOF)) {
                     hexproofkw.add(k);
-                } else if (k.startsWith("Trample")) {
+                } else if (inst.getKeyword().equals(Keyword.TRAMPLE)) {
                     tramplekw.add(k);
                 } else {
                     allkw.add(k.toLowerCase());
@@ -3836,7 +3836,7 @@ public class CardFactoryUtil {
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
             inst.addStaticAbility(st);
         } else if (keyword.equals("Defender")) {
-            String effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
+            String effect = "Mode$ CantAttack | ValidCard$ Card.Self | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Devoid")) {
             String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
@@ -3886,7 +3886,7 @@ public class CardFactoryUtil {
                 sbValid.append("| ValidSource$ ").append(k[1]);
             }
 
-            String effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -3946,7 +3946,7 @@ public class CardFactoryUtil {
                     " | Description$ Chapter abilities of this Saga can't trigger the turn it entered the battlefield unless it has exactly the number of lore counters on it specified in the chapter symbol of that ability.";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Shroud")) {
-            String effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
+            String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Skulk")) {
