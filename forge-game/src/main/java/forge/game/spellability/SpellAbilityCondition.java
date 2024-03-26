@@ -114,9 +114,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Bargain")) {
                 this.bargain = true;
             }
-            if (value.equals("AllTargetsLegal")) {
-                this.setAllTargetsLegal(true);
-            }
             if (value.equals("AltCost"))
                 this.altCostPaid = true;
 
@@ -302,14 +299,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             if (revealed + ctrl == 0) {
                 return false;
-            }
-        }
-
-        if (this.isAllTargetsLegal()) {
-            for (Card c : sa.getTargets().getTargetCards()) {
-                if (!sa.canTarget(c)) {
-                    return false;
-                }
             }
         }
 

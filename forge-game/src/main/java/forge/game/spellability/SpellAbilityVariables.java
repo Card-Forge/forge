@@ -95,8 +95,6 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean blessing = false;
     private boolean solved = false;
 
-    private boolean allTargetsLegal = false;
-
     /** The s is present. */
     private String isPresent = null;
     private String isPresent2 = null;
@@ -360,20 +358,6 @@ public class SpellAbilityVariables implements Cloneable {
     protected boolean bargain = false;
     protected boolean foretold = false;
 
-    /**
-     * @return the allTargetsLegal
-     */
-    public boolean isAllTargetsLegal() {
-        return allTargetsLegal;
-    }
-
-    /**
-     * @param allTargets the allTargetsLegal to set
-     */
-    public void setAllTargetsLegal(boolean allTargets) {
-        this.allTargetsLegal = allTargets;
-    }
-
     // IsPresent for Valid battlefield stuff
 
     /**
@@ -557,7 +541,6 @@ public class SpellAbilityVariables implements Cloneable {
     public String getNoDifferentColors() {
         return noDifferentColors;
     }
-
     public void setNoDifferentColors(String noDifferentColors) {
         this.noDifferentColors = noDifferentColors;
     }
