@@ -1,0 +1,10 @@
+Name:Ominous Lockbox
+ManaCost:1 U
+Types:Artifact Clue
+K:ETBReplacement:Other:ChooseNum
+SVar:ChooseNum:DB$ ChooseNumber | Secretly$ True | Min$ 1 | Max$ 20 | KeepSecret$ True | SpellDescription$ As CARDNAME enters the battlefield, secretly choose a number between 1 and 20.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQCount$ChosenNumber | TriggerZones$ Battlefield | ValidActivatingPlayer$ Opponent | Execute$ TrigCopy | TriggerDescription$ When an opponent casts a spell with mana value equal to the chosen number, sacrifice CARDNAME. If you do, copy that spell, and you may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ Mandatory Sac<1/CARDNAME> | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:As Ominous Lockbox enters the battlefield, secretly choose a number between 1 and 20.\nWhen an opponent casts a spell with mana value equal to the chosen number, sacrifice Ominous Lockbox. If you do, copy that spell, and you may choose new targets for the copy.\n{2}, Sacrifice Ominous Lockbox: Draw a card.

@@ -42,7 +42,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         final boolean random = sa.hasParam("Random");
         final boolean anyNumber = sa.hasParam("ChooseAnyNumber");
-        final boolean secretlyChoose = sa.hasParam("SecretlyChoose");
+        final boolean secretlyChoose = sa.hasParam("Secretly");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
         final int min = AbilityUtils.calculateAmount(source, sMin, sa);
@@ -86,10 +86,12 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                 }
                 // don't notify here, because most scripts I've seen don't store that number in a long term
             }
-            if (secretlyChoose) {
+            if (secretlyChoose && sa.hasParam("KeepSecret")) {
+                source.setChosenNumber(chosen, true);
+            } else if (secretlyChoose) {
                 chooseMap.put(p, chosen);
             } else {
-                source.setChosenNumber(chosen);
+                source.setChosenNumber(chosen, false);
             }
             if (sa.hasParam("Notify")) {
                 p.getGame().getAction().notifyOfValue(sa, source, Localizer.getInstance().
