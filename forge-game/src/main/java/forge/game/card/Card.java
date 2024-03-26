@@ -2810,7 +2810,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 addedManaStrings.add(sAbility);
             }
 
-            if (!sAbility.endsWith(state.getName() + "\r\n")) {
+            boolean alwaysShow = false;
+            if (!sa.isIntrinsic()) alwaysShow = true; // allows added abilities to show on face-down stuff (e.g. Morph,Cloaked)
+            if (!sAbility.endsWith(state.getName() + "\r\n") || alwaysShow) {
                 sb.append(sAbility);
                 sb.append("\r\n");
             }
