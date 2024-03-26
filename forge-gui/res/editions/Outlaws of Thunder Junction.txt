@@ -6,16 +6,56 @@ Type=Expansion
 ScryfallCode=OTJ
 
 [cards]
+3 C Armored Armadillo @Leon Tukker
+11 M Final Showdown @Izzy
 12 R Fortune, Loyal Steed @Artur Nakhodkin
+13 U Frontier Seeker @Raluca Marinescu
+16 C Holy Cow @Justyna Dura
+36 C Trained Arynx @Milivoj Ćeran
+44 M Double Down @Javier Charro
 45 R Duelist of the Mind @Darren Tan
 48 R Fblthp, Lost on the Range @Brian Valeza
+54 R The Key to the Vault @Leon Tukker
+62 U Plan the Heist @Fariba Khamseh
+67 U Slickshot Lockpicker @Wei Wei
+89 M Gisa, the Hellraiser @Chris Rahn
 91 R Insatiable Avarice @Scott Murphy
+99 U Rakish Crew @Ilse Gort
+100 U Rattleback Apothecary @Loïc Canavaggia
+108 R Tinybones Joins Up @Wylie Beckert
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
+111 U Unfortunate Accident @Josiah Cameron
+125 R Great Train Heist @Campbell White
 126 R Hell to Pay @Liiga Smilshkalne
+133 R Magda, the Hoardmaster @Diego Gisbert
+139 C Quilled Charger @Diego Gisbert
+145 U Scorching Shot @Caio Monteiro
+146 R Slickshot Show-Off @Augusto Quirino
+158 C Cactarantula @Filip Burburan
+159 R Colossal Rattlewurm @Filip Burburan
+163 R Freestrider Lookout @Matt Zeilinger
+168 C Hardbristle Bandit @Francis Tneh
+190 M Annie Flash, the Veteran @Kieran Yanner
+204 U Form a Posse @J. Lonnee
+206 M The Gitrog, Ravenous Ride @Johan Grenier
+207 U Honest Rutstein @Javier Charro
+210 U Jolene, Plundering Pugilist @Andreas Zafiratos
+214 U Kraum, Violent Cacophony @Artur Nakhodkin
+213 M Kellan, the Kid @Magali Villeneuve
+216 U Lazav, Familiar Stranger @Tyler Jacobson
+218 U Make Your Own Luck @Chris Seaman
+221 U Miriam, Herd Whisperer @Viko Menezes
 223 M Oko, the Ringleader @Magali Villeneuve
+226 M Rakdos, the Muscle @Victor Maury
+229 U Ruthless Lawbringer @Joshua Raphael
+230 R Satoru, the Infiltrator @Heonhwa
 231 M Selvala, Eager Trailblazer @Viko Menezes
+235 U Vial Smasher, Gleeful Grenadier @Borja Pindado
 236 R Vraska Joins Up @Wylie Beckert
+237 M Vraska, the Silencer @Kieran Yanner
 243 U Lavaspur Boots @Mila Pesic
+245 U Mobile Homestead @Artur Nakhodkin
+271 M Jace Reawakened @Cristi Balanescu
 272 L Plains @Salvatorre Zee Yazzie
 273 L Island @Salvatorre Zee Yazzie
 274 L Swamp @Salvatorre Zee Yazzie
