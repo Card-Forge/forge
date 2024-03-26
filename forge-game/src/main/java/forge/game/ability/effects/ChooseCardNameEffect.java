@@ -21,6 +21,7 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
 
@@ -119,6 +120,10 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 Predicate<ICardFace> cpp = Predicates.alwaysTrue();
                 if (sa.hasParam("ValidCards")) {
                     //Calculating/replacing this must happen before running valid in CardFacePredicates
+                    if (valid.contains("cmcEQ") && !StringUtils.isNumeric(valid.split("cmcEQ")[1])) {
+                        String s = valid.split("cmcEQ")[1];
+                        valid = valid.replace(s, String.valueOf(AbilityUtils.calculateAmount(host, s, sa)));
+                    }
                     if (valid.contains("ManaCost=")) {
                         if (valid.contains("ManaCost=Equipped")) {
                             String s = host.getEquipping().getManaCost().getShortString();

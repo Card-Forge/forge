@@ -103,6 +103,9 @@ public final class CardFacePredicates {
                         if (!hasManaCost(input, manaCost)) {
                             return false;
                         }
+                    } else if (m.contains("cmcEQ")) {
+                        int i = Integer.parseInt(m.substring(5));
+                        if (!hasCMC(input, i)) return false;
                     } else if (!hasProperty(input, m)) {
                         return false;
                     }
@@ -120,6 +123,11 @@ public final class CardFacePredicates {
 
         static protected boolean hasManaCost(ICardFace input, final String mC) {
             return mC.equals(input.getManaCost().getShortString());
+        }
+
+        static protected boolean hasCMC(ICardFace input, final int value) {
+            ManaCost cost = input.getManaCost();
+            return cost != null && cost.getCMC() == value;
         }
 
     }
