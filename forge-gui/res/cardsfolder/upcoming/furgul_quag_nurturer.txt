@@ -1,0 +1,12 @@
+Name:Furgul, Quag Nurturer
+ManaCost:2 B G
+Types:Legendary Creature Elf Shaman
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigBranch | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, conjure a card named Slimy Dualleech onto the battlefield if you control no Leeches. Otherwise, put a +1/+1 counter on each Leech you control.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ Count$Valid Leech.YouCtrl | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBConjure | FalseSubAbility$ DBPutCounter
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Slimy Dualleech | Zone$ Battlefield
+SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Leech.YouCtrl | CounterType$ P1P1
+A:AB$ Mana | Cost$ T Sac<1/Creature> | Produced$ G | Amount$ Sacrificed$CardPower | SpellDescription$ Add an amount of {G} equal to the sacrificed creature's power.
+DeckHas:Ability$Counters|Sacrifice & Type$Leech
+DeckHints:Type$Leech
+Oracle:At the beginning of your end step, conjure a card named Slimy Dualleech onto the battlefield if you control no Leeches. Otherwise, put a +1/+1 counter on each Leech you control.\n{T}, Sacrifice a creature: Add an amount of {G} equal to the sacrificed creature's power.

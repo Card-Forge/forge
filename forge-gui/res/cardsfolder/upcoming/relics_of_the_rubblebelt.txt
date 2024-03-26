@@ -1,0 +1,6 @@
+Name:Relics of the Rubblebelt
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Draft | DraftNum$ 2 | Spellbook$ Azorius Signet,Boros Signet,Dimir Signet,Golgari Signet,Gruul Signet,Izzet Signet,Orzhov Signet,Rakdos Signet | RememberDrafted$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Draft a card from CARDNAME's spellbook twice, then put one of those cards onto the battlefield tapped.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered+YouOwn | SelectPrompt$ Select a card to put onto the battlefield tapped | Mandatory$ True | Tapped$ True | StackDescription$ None
+Oracle:Draft a card from Relics of the Rubblebelt's spellbook twice, then put one of those cards onto the battlefield tapped.
