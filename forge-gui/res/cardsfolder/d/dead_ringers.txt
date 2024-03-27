@@ -1,7 +1,6 @@
 Name:Dead Ringers
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B | TargetMin$ 2 | TargetMax$ 2 | NoRegen$ True | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | RememberOriginalTargets$ True | SubAbility$ DBCleanup | ConditionShareAllColors$ DirectRemembered | SpellDescription$ Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | NoRegen$ True | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | ConditionNoDifferentColors$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card | ConditionPresentCompare$ EQ2 | SpellDescription$ Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
 AI:RemoveDeck:All
 Oracle:Destroy two target nonblack creatures unless either one is a color the other isn't. They can't be regenerated.
