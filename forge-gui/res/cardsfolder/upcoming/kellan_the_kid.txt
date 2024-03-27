@@ -9,5 +9,6 @@ SVar:DBChoice:DB$ GenericChoice | Defined$ You | Choices$ CastSpell,PlayLand
 SVar:CastSpell:DB$ Play | Valid$ Permanent.YouOwn+cmcLEX | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Optional$ True | SpellDescription$ You may cast a permanent spell with equal or lesser mana value from your hand without paying its mana cost.
 SVar:X:TriggeredCard$CardManaCost
 SVar:PlayLand:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.YouCtrl | Optional$ True | SpellDescription$ You may put a land card from your hand onto the battlefield.
+DeckHas:Ability$LifeGain
 DeckHints:Keyword$Cascade|Discover|Disturb|Escape|Flashback|Foretell|Jump-start|Madness|Plot|Retrace|Suspend & Type$Adventure
 Oracle:Flying, lifelink\nWhenever you cast a spell from anywhere other than your hand, you may cast a permanent spell with equal or lesser mana value from your hand without paying its mana cost. If you don't, you may put a land card from your hand onto the battlefield.
