@@ -6983,7 +6983,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             chosenModesYourCombat.clear();
             chosenModesYourCombatStatic.clear();
             updateAbilityTextForView();
-            enlistedThisCombat = false;
         }
     }
 

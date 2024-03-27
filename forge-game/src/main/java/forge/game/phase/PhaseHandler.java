@@ -342,6 +342,7 @@ public class PhaseHandler implements java.io.Serializable {
                     // End Combat always happens
                     for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                         c.onEndOfCombat(playerTurn);
+                        c.setEnlistedThisCombat(false);
                     }
                     game.getEndOfCombat().executeAt();
 
