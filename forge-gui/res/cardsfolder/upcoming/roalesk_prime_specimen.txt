@@ -1,0 +1,16 @@
+Name:Roalesk, Prime Specimen
+ManaCost:2 G U
+Types:Legendary Creature Human Mutant
+PT:4/5
+K:Flying
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Permanent.Other+YouCtrl | Execute$ TrigRandom | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another permanent you control is turned face up, you may pay {X}. If you do, if X is 1 or more, conjure a duplicate of a random creature card with mana value X into your hand. Cloak it. It gains "{G/U}: Turn this creature face up" for as long as it remains face down.
+SVar:TrigRandom:AB$ NameCard | Cost$ X | ConditionCheckSVar$ X | ValidCards$ Creature.cmcEQX | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | ConditionCheckSVar$ X | Zone$ Hand | RememberMade$ True | SubAbility$ DBCloak
+SVar:DBCloak:DB$ Cloak | Defined$ Remembered | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ UntilAnimatedFaceup | Abilities$ ABTurn | SubAbility$ DBCleanup
+SVar:ABTurn:AB$ SetState | Cost$ GU | Defined$ Self | Mode$ TurnFaceUp | SpellDescription$ Turn this creature face up.
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True | ClearRemembered$ True
+SVar:X:Count$xPaid
+K:Disguise:G U
+DeckHints:Keyword$Morph|Megamorph|Disguise
+Oracle:Flying\nWhenever Roalesk, Prime Specimen or another permanent you control is turned face up, you may pay {X}. If you do, if X is 1 or more, conjure a duplicate of a random creature card with mana value X into your hand. Cloak it. It gains "{G/U}: Turn this creature face up" for as long as it remains face down.\nDisguise {G}{U}
