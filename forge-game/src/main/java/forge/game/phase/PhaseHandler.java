@@ -1057,7 +1057,7 @@ public class PhaseHandler implements java.io.Serializable {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
 
-                        if (pPlayerPriority.getController().playChosenSpellAbility(sa) || sa instanceof LandAbility) {
+                        if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
                             // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
                             // that player receives priority afterward.
                             pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve

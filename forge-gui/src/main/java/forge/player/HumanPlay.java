@@ -74,7 +74,7 @@ public class HumanPlay {
             if (sa.canPlay()) {
                 sa.resolve();
             }
-            return false;
+            return true;
         }
 
         boolean isforetold = source.isForetold();

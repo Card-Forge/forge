@@ -627,12 +627,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertNull(sa);
-        // Decided to wait til after declare blockers to play removal
-
-        game.getPhaseHandler().devModeSet(PhaseType.COMBAT_DECLARE_BLOCKERS, p);
-
-        sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals("Destroy target nonblack creature.", sa.toString());
         AssertJUnit.assertEquals(blocker, sa.getTargetCard());
