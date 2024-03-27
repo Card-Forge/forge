@@ -748,6 +748,14 @@ public class CardProperty {
                             return false;
                         }
                         break;
+                    case "TriggeredProduced":
+                        final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
+                        final Object prod = (Object) root.getTriggeringObject(AbilityKey.Produced);
+                        if (!(prod instanceof String)) return false;
+                        String produced = (String) prod;
+                        ColorSet cs = ColorSet.fromNames(produced.split(" "));
+                        if (!card.getColor().hasAnyColor(cs.getColor())) return false;
+                        break;
                     default:
                         if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesColorWith(card))) {
                             return false;

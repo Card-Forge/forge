@@ -1,0 +1,9 @@
+Name:C.A.M.P.
+ManaCost:3
+Types:Artifact Fortification
+T:Mode$ TapsForMana | ValidCard$ Card.FortifiedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever fortified land is tapped for mana, put a +1/+1 counter on target creature you control. If that creature shares a color with the mana that land produced, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | SubAbility$ DBJunk
+SVar:DBJunk:DB$ Token | ConditionDefined$ Targeted | ConditionPresent$ Card.SharesColorWith TriggeredProduced | TokenScript$ c_a_junk_sac_exileplay
+K:Fortify:3
+DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Junk
+Oracle:Whenever fortified land is tapped for mana, put a +1/+1 counter on target creature you control. If that creature shares a color with the mana that land produced, create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")\nFortify {3} ({3}: Attach to target land you control. Fortify only as a sorcery.)
