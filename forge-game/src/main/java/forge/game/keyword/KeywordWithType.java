@@ -3,7 +3,7 @@ package forge.game.keyword;
 import forge.card.CardType;
 
 public class KeywordWithType extends KeywordInstance<KeywordWithType> {
-    private String type;
+    protected String type;
 
     @Override
     protected void parse(String details) {
@@ -12,6 +12,7 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
         } else if (details.contains(":")) {
             switch (getKeyword()) {
             case AFFINITY:
+            case HEXPROOF:
             case LANDWALK:
                 type = details.split(":")[1];
                 break;
