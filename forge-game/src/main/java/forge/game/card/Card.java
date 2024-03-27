@@ -1910,11 +1910,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final Integer getChosenNumber() {
         return chosenNumber;
     }
-    public final void setChosenNumber(final int i) {
+    
+    public final void setChosenNumber(final int i) { setChosenNumber(i, false); }
+    public final void setChosenNumber(final int i, final boolean secret) {
         chosenNumber = i;
-        view.updateChosenNumber(this);
+        if (!secret) view.updateChosenNumber(this);
     }
-
     public final void clearChosenNumber() {
         chosenNumber = null;
         view.clearChosenNumber();

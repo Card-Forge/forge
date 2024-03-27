@@ -1,7 +1,7 @@
 Name:Goblin Game
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ ChooseNumber | Defined$ Player | Cost$ 5 R R | Min$ 1 | SecretlyChoose$ True | ChooseNumberSubAbility$ DBLoseLife | Lowest$ DBLoseHalfLife | AILogic$ LowestLoseLife | SpellDescription$ Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items they revealed. The player who revealed the fewest items then loses half their life, rounded up. If two or more players are tied for fewest, each loses half their life, rounded up.
+A:SP$ ChooseNumber | Defined$ Player | Min$ 1 | Secretly$ True | ChooseNumberSubAbility$ DBLoseLife | Lowest$ DBLoseHalfLife | AILogic$ LowestLoseLife | SpellDescription$ Each player hides at least one item, then all players reveal them simultaneously. Each player loses life equal to the number of items they revealed. The player who revealed the fewest items then loses half their life, rounded up. If two or more players are tied for fewest, each loses half their life, rounded up.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X
 SVar:X:Count$ChosenNumber
 SVar:DBLoseHalfLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ Y
