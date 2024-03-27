@@ -8,5 +8,5 @@ SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 1 | Defined$ TriggeredCard | Remember
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Artifact,Treasure | RemoveCardTypes$ True | Abilities$ TreasureSac | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:TreasureSac:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Type$Treasure
+DeckHas:Type$Artifact|Treasure
 Oracle:Deathtouch\nWhenever a nontoken creature an opponent controls dies, you may pay {1}. If you do, return that card to the battlefield tapped under your control. It's a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other card types.
