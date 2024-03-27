@@ -404,7 +404,7 @@ public class Game {
         PlayerCollection players = getPlayersInTurnOrder();
 
         int i = players.indexOf(p);
-        Collections.rotate(players, i);
+        Collections.rotate(players, -i);
         return players;
     }
 
