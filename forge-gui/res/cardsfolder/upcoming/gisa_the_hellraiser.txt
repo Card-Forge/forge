@@ -8,4 +8,4 @@ T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ ub_2_2_zombie_rogue | TokenTapped$ True | TokenOwner$ You
 DeckHas:Ability$Token & Type$Zombie|Rogue & Color$Blue
 DeckHints:Type$Zombie|Skeleton
-Oracle:Ward — {2}, Pay 2 life.\nSkeletons and Zombies you control get +1/+1 and have menace.\nWhenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
+Oracle:Ward—{2}, Pay 2 life.\nSkeletons and Zombies you control get +1/+1 and have menace.\nWhenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
