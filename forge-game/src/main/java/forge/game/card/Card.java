@@ -202,6 +202,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
     private boolean becameTargetThisTurn = false;
+    private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
@@ -2135,6 +2136,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setFoughtThisTurn(final boolean b) {
         foughtThisTurn = b;
+    }
+
+    public final boolean getEnlistedThisCombat()  {
+        return enlistedThisCombat;
+    }
+    public final void setEnlistedThisCombat(final boolean b) {
+        enlistedThisCombat = b;
     }
 
     public final CardCollectionView getGainControlTargets() { //used primarily with AbilityFactory_GainControl
