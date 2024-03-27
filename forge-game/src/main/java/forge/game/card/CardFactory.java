@@ -155,9 +155,9 @@ public class CardFactory {
             copySA.setOriginalAbility(targetSA);
         }
 
-        // Copied spell is not cast face down
         if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
+            // Copied spell is not cast face down
             spell.setCastFaceDown(false);
             c.setCastSA(copySA);
         }

@@ -661,12 +661,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     if (current != null) {
                         invalidTarget = !current.equalsWithGameTimestamp(card);
                     }
-                    invalidTarget = invalidTarget || !sa.canTarget(card);
+                    invalidTarget = invalidTarget || !sa.canTarget(card, true);
                 } else if (o instanceof SpellAbility) {
                     SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
-                    invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility());
+                    invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(), true);
                 } else {
-                    invalidTarget = !sa.canTarget(o);
+                    invalidTarget = !sa.canTarget(o, true);
                 }
 
                 if (invalidTarget) {

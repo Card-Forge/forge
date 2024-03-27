@@ -52,10 +52,11 @@ public class TargetRestrictions {
 
     // The target SA of this SA must be targeting a Valid X
     private String saValidTargeting = null;
-    
+
     // Additional restrictions that may not fit into Valid
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
+    private boolean forEachPlayer = false;
     private boolean differentControllers = false;
     private boolean differentCMC = false;
     private boolean equalToughness = false;
@@ -99,6 +100,7 @@ public class TargetRestrictions {
         this.saValidTargeting = target.getSAValidTargeting();
         this.uniqueTargets = target.isUniqueTargets();
         this.singleZone = target.isSingleZone();
+        this.forEachPlayer = target.isForEachPlayer();
         this.differentControllers = target.isDifferentControllers();
         this.differentCMC = target.isDifferentCMC();
         this.equalToughness = target.isEqualToughness();
@@ -646,6 +648,14 @@ public class TargetRestrictions {
     public void setDifferentControllers(boolean different) {
         this.differentControllers = different;
     }
+
+    public boolean isForEachPlayer() {
+        return forEachPlayer;
+    }
+    public void setForEachPlayer(boolean each) {
+        this.forEachPlayer = each;
+    }
+
     /**
      * Checks if is same controller.
      * 
