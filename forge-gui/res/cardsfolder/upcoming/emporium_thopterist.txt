@@ -1,0 +1,10 @@
+Name:Emporium Thopterist
+ManaCost:1 U
+Types:Creature Vedalken Artificer
+PT:1/1
+S:Mode$ Continuous | Affected$ Thopter.YouCtrl | AddPower$ 2 | Description$ Thopters you control get +2/+0.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, conjure a card named Ornithopter into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Ornithopter | Zone$ Hand
+DeckHints:Type$Thopter
+DeckHas:Type$Artifact|Construct
+Oracle:Thopters you control get +2/+0.\nAt the beginning of your upkeep, conjure a card named Ornithopter into your hand.

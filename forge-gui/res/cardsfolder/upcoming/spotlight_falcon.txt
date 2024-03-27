@@ -1,0 +1,11 @@
+Name:Spotlight Falcon
+ManaCost:2 W W
+Types:Artifact Creature Bird
+PT:4/3
+S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ CollectEvidence<5> | Description$ As an additional cost to cast this spell, you may collect evidence 5.
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | CheckSVar$ X | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, if evidence was collected, conjure a card named Spotlight Falcon into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Spotlight Falcon | Zone$ Hand
+SVar:X:CastSA>Collected$Amount
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
+Oracle:As an additional cost to cast this spell, you may collect evidence 5.\nFlying\nWhen Spotlight Falcon enters the battlefield, if evidence was collected, conjure a card named Spotlight Falcon into your hand.
