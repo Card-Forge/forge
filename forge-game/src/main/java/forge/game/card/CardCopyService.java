@@ -176,19 +176,16 @@ public class CardCopyService {
         return result;
     }
 
-    @Deprecated
     public static Card getLKICopy(Card c) {
         // Ideally, we'd just convert all calls to getLKICopy to use the Map version
         return new CardCopyService(c).getLKICopy();
     }
 
-    @Deprecated
     public static Card getLKICopy(final Card c, Map<Integer, Card> cachedMap) {
         return new CardCopyService(c).getLKICopy(cachedMap);
     }
 
 
-    @Deprecated
     public static GameEntity getLKICopy(final GameEntity c, Map<Integer, Card> cachedMap) {
         // Ideally, we'd just convert all calls to getLKICopy to use the Map version
         if (c instanceof Card) {

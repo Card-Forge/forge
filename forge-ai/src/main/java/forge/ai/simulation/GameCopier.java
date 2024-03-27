@@ -73,6 +73,11 @@ public class GameCopier {
         }
     }
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            // How do we advance to phase when using restores?
+            return snapshot.makeCopy();
+        }
+
         List<RegisteredPlayer> origPlayers = origGame.getMatch().getPlayers();
         List<RegisteredPlayer> newPlayers = new ArrayList<>();
         for (RegisteredPlayer p : origPlayers) {

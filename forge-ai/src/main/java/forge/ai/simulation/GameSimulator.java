@@ -33,8 +33,7 @@ public class GameSimulator {
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
         copier = new GameCopier(origGame);
-        simGame = copier.makeCopy();
-        // simGame.advanceToPhase(advanceToPhase, origAiPlayer)
+        simGame = copier.makeCopy(advanceToPhase, origAiPlayer);
 
         aiPlayer = (Player) copier.find(origAiPlayer);
         eval = new GameStateEvaluator();
