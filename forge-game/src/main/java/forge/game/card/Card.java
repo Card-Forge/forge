@@ -2452,7 +2452,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
                     final boolean onlyMana = cost.isOnlyManaCost();
-                    final boolean complex = k[1].contains("X") || k[1].contains("Sac<");
+                    final boolean complex = k[1].contains("X") || (k[1].contains (" ") && k[1].contains("<"));
                     final String extra = k.length > 2 ? ", " + k[2] + "." : "";
 
                     sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
