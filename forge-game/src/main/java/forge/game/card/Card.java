@@ -6468,10 +6468,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.foretoldCostByEffect = val;
     }
 
-    public boolean isForetoldThisTurn() {
-        return this.enteredThisTurn();
-    }
-
     public boolean isSpecialized() {
         return specialized;
     }
@@ -6978,6 +6974,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void onEndOfCombat(final Player active) {
+        setEnlistedThisCombat(false);
         if (this.getController().equals(active)) {
             chosenModesYourLastCombat.clear();
             chosenModesYourLastCombatStatic.clear();
