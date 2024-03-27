@@ -112,7 +112,7 @@ public enum Keyword {
     INTIMIDATE("Intimidate", SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER("Kicker", Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     JUMP_START("Jump-start", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
-    LANDWALK("Landwalk", KeywordWithType.class, false, "This creature is unblockable as long as defending player controls {1:%s}."),
+    LANDWALK("Landwalk", Landwalk.class, false, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "As long as it's your turn, this Vehicle is also a creature."),
