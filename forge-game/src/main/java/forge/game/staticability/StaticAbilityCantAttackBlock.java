@@ -83,7 +83,7 @@ public class StaticAbilityCantAttackBlock {
             return false;
         }
 
-        if (stAb.hasParam("DefenderKeyword")) {
+        if (stAb.isKeyword(Keyword.DEFENDER)) {
             // check for "can attack as if didn't have defender" static
             if (StaticAbilityCanAttackDefender.canAttack(card, target)) {
                 return false;
@@ -197,6 +197,11 @@ public class StaticAbilityCantAttackBlock {
         }
         if (blocker == null || !stAb.matchesValidParam("ValidDefender", blocker.getController())) {
             return false;
+        }
+        if (stAb.isKeyword(Keyword.LANDWALK)) {
+            if (StaticAbilityIgnoreLandwalk.ignoreLandWalk(attacker, blocker, stAb.getKeyword())) {
+                return false;
+            }
         }
         return true;
     }

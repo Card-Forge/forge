@@ -2,7 +2,7 @@ Name:Inkwell Leviathan
 ManaCost:7 U U
 Types:Artifact Creature Leviathan
 PT:7/11
-K:Islandwalk
+K:Landwalk:Island
 K:Trample
 K:Shroud
 Oracle:Trample\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)\nShroud (This creature can't be the target of spells or abilities.)

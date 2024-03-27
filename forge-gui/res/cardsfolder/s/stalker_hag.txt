@@ -2,6 +2,6 @@ Name:Stalker Hag
 ManaCost:BG BG BG
 Types:Creature Hag
 PT:3/2
-K:Swampwalk
-K:Forestwalk
+K:Landwalk:Swamp
+K:Landwalk:Forest
 Oracle:Swampwalk, forestwalk (This creature can't be blocked as long as defending player controls a Swamp or a Forest.)

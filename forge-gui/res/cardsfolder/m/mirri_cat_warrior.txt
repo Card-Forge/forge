@@ -3,6 +3,6 @@ ManaCost:1 G G
 Types:Legendary Creature Cat Warrior
 PT:2/3
 K:First Strike
-K:Forestwalk
+K:Landwalk:Forest
 K:Vigilance
 Oracle:First strike, forestwalk, vigilance (This creature deals combat damage before creatures without first strike, it can't be blocked as long as defending player controls a Forest, and attacking doesn't cause this creature to tap.)

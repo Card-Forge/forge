@@ -2,5 +2,5 @@ Name:Trailblazer's Boots
 ManaCost:2
 Types:Artifact Equipment
 K:Equip:2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Nonbasic landwalk | Description$ Equipped creature has nonbasic landwalk.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Landwalk:Land.nonBasic:Nonbasic land | Description$ Equipped creature has nonbasic landwalk.
 Oracle:Equipped creature has nonbasic landwalk. (It can't be blocked as long as defending player controls a nonbasic land.)\nEquip {2}

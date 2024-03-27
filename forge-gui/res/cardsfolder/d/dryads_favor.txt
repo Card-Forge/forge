@@ -3,5 +3,5 @@ ManaCost:G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Forestwalk | Description$ Enchanted creature has forestwalk. (It can't be blocked as long as defending player controls a Forest.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Landwalk:Forest | Description$ Enchanted creature has forestwalk. (It can't be blocked as long as defending player controls a Forest.)
 Oracle:Enchant creature\nEnchanted creature has forestwalk. (It can't be blocked as long as defending player controls a Forest.)

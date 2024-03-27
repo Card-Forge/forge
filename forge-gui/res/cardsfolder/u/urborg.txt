@@ -4,6 +4,6 @@ Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B}.
 A:AB$ GenericChoice | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Choices$ DebuffFS,DebuffSW | Defined$ You | SpellDescription$ Target creature loses first strike or swampwalk until end of turn.
 SVar:DebuffFS:DB$ Debuff | Keywords$ First Strike | Defined$ Targeted | SpellDescription$ Target creature loses first strike until end of turn.
-SVar:DebuffSW:DB$ Debuff | Defined$ Targeted | Keywords$ Swampwalk | SpellDescription$ Target creature loses swampwalk until end of turn.
+SVar:DebuffSW:DB$ Debuff | Defined$ Targeted | Keywords$ Landwalk:Swamp | SpellDescription$ Target creature loses swampwalk until end of turn.
 AI:RemoveDeck:All
 Oracle:{T}: Add {B}.\n{T}: Target creature loses first strike or swampwalk until end of turn.

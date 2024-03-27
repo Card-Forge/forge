@@ -2,5 +2,5 @@ Name:Lumbering Satyr
 ManaCost:2 G G
 Types:Creature Satyr Beast
 PT:5/4
-S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Forestwalk | Description$ All creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Landwalk:Forest | Description$ All creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)
 Oracle:All creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)

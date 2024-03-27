@@ -135,11 +135,11 @@ public class StaticAbilityCantTarget {
         final Card source = spellAbility.getHostCard();
         final Player activator = spellAbility.getActivatingPlayer();
 
-        if (stAb.hasParam("Hexproof") && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.HEXPROOF)) {
+        if (stAb.isKeyword(Keyword.HEXPROOF) && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.HEXPROOF)) {
             return false;
         }
 
-        if (stAb.hasParam("Shroud") && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.SHROUD)) {
+        if (stAb.isKeyword(Keyword.SHROUD) && StaticAbilityIgnoreHexproofShroud.ignore(entity, spellAbility, Keyword.SHROUD)) {
             return false;
         }
 

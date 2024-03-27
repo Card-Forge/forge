@@ -2,7 +2,7 @@ Name:Chatterfang, Squirrel General
 ManaCost:2 G
 Types:Legendary Creature Squirrel Warrior
 PT:3/3
-K:Forestwalk
+K:Landwalk:Forest
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead.
 SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | ValidCard$ Card.YouCtrl | TokenScript$ g_1_1_squirrel
 A:AB$ Pump | Cost$ B Sac<X/Squirrel> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ -X | SpellDescription$ Target creature gets +X/-X until end of turn.

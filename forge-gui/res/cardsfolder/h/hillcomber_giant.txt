@@ -2,5 +2,5 @@ Name:Hillcomber Giant
 ManaCost:2 W W
 Types:Creature Giant Scout
 PT:3/3
-K:Mountainwalk
+K:Landwalk:Mountain
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

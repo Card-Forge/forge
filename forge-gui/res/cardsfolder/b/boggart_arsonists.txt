@@ -2,7 +2,7 @@ Name:Boggart Arsonists
 ManaCost:2 R
 Types:Creature Goblin Rogue
 PT:2/1
-K:Plainswalk
+K:Landwalk:Plains
 A:AB$ Destroy | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Scarecrow,Plains | TgtPrompt$ Select target Scarecrow or Plains | SpellDescription$ Destroy target Scarecrow or Plains.
 AI:RemoveDeck:Random
 Oracle:Plainswalk (This creature can't be blocked as long as defending player controls a Plains.)\n{2}{R}, Sacrifice Boggart Arsonists: Destroy target Scarecrow or Plains.

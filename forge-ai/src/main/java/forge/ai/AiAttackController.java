@@ -551,8 +551,8 @@ public class AiAttackController {
         }
 
         if (bandingCreatures != null) {
-            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
-                    "Forestwalk", "Mountainwalk", "Swampwalk");
+            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Landwalk:Plains", "Landwalk:Island",
+                    "Landwalk:Forest", "Landwalk:Mountain", "Landwalk:Swamp");
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             for (Card c : bandingCreatures) {

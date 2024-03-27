@@ -2,7 +2,7 @@ Name:Sygg, River Guide
 ManaCost:W U
 Types:Legendary Creature Merfolk Wizard
 PT:2/2
-K:Islandwalk
+K:Landwalk:Island
 A:AB$ Protection | Cost$ 1 W | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target Merfolk you control gains protection from the color of your choice until end of turn.
 DeckHints:Type$Merfolk
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.

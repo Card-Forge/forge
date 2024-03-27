@@ -2,5 +2,5 @@ Name:Zodiac Pig
 ManaCost:3 B
 Types:Creature Boar
 PT:3/3
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

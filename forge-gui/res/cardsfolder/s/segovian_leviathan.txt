@@ -2,5 +2,5 @@ Name:Segovian Leviathan
 ManaCost:4 U
 Types:Creature Leviathan
 PT:3/3
-K:Islandwalk
+K:Landwalk:Island
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

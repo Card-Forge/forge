@@ -2,7 +2,7 @@ Name:Merrow Harbinger
 ManaCost:3 U
 Types:Creature Merfolk Wizard
 PT:2/3
-K:Islandwalk
+K:Landwalk:Island
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle and put that card on top.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Merfolk | ChangeNum$ 1 | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random

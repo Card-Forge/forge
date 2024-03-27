@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Djinn
 PT:4/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep. (It can't be blocked as long as defending player controls a Forest.)
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.nonWall+OppCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Forestwalk | Duration$ UntilYourNextUpkeep
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.nonWall+OppCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Landwalk:Forest | Duration$ UntilYourNextUpkeep
 DeckHas:Ability$Forestwalk
 Oracle:At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep. (It can't be blocked as long as defending player controls a Forest.)

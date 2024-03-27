@@ -2,5 +2,5 @@ Name:Glissa's Courier
 ManaCost:1 G G
 Types:Creature Phyrexian Horror
 PT:2/3
-K:Mountainwalk
+K:Landwalk:Mountain
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)
