@@ -138,6 +138,10 @@ public final class CardUtil {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
     }
 
+    public static List<Card> getCastSinceBeginningOfYourLastTurn(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(controller.getSpellsCastSinceBegOfYourLastTurn(), valid, controller, src, ctb);
+    }
+
     public static CardCollection getRadiance(final SpellAbility sa) {
         SpellAbility targetSA = sa.getSATargetingCard();
         if (targetSA == null || !targetSA.usesTargeting() || !targetSA.hasParam("Radiance")) {
