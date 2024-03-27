@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Wizard
 PT:1/2
 K:Haste
-A:AB$ SetState | Cost$ T | ValidTgts$ Creature.YouCtrl+faceDown | Mode$ TurnFaceUp | SubAbility$ DBPump | SpellDescription$ Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
+A:AB$ SetState | Cost$ T | ValidTgts$ Creature.YouCtrl+faceDown | TgtPrompt$ Select target face-down creature you control | Mode$ TurnFaceUp | SubAbility$ DBPump | StackDescription$ Turn {c:Targeted} face up. | SpellDescription$ Turn target face-down creature you control face up.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice | StackDescription$ SpellDescription | SpellDescription$ At the beginning of the next end step, sacrifice it.
 AI:RemoveDeck:All
 Oracle:Haste\n{T}: Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.

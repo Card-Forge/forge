@@ -159,8 +159,8 @@ public class PlayEffect extends SpellAbilityEffect {
             } else {
                 return;
             }
-        } else if (sa.hasParam("CopyFromChosenName")) {
-            String name = controller.getNamedCard();
+        } else if (sa.hasParam("CopyFromChosenName") || sa.hasParam("CopyFromNotedName")) {
+            String name = sa.hasParam("CopyFromChosenName") ? controller.getNamedCard() : source.getNotedName();
             if (name.trim().isEmpty()) return;
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack
