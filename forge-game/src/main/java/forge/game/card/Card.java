@@ -6170,19 +6170,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0;
         }
 
-        // Run replacement effects
         getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
 
-        // Run triggers
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.DamageAmount, damageIn);
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
-        if (!isCombat) {
-            runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
-        }
         // Defending player at the time the damage was dealt
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, true);

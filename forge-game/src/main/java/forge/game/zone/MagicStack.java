@@ -627,7 +627,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
             Map<AbilityKey, Object> params = AbilityKey.newMap();
             params.put(AbilityKey.StackSa, sa);
-            params.put(AbilityKey.StackSi, si);
             params.put(AbilityKey.Fizzle, fizzle);
             game.getAction().moveToGraveyard(source, null, params);
         }
