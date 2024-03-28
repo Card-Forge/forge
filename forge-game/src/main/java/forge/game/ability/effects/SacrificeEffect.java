@@ -153,6 +153,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
+                boolean didSac = false;
                 for (Card sac : choosenToSacrifice) {
                     Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
@@ -170,9 +171,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         runParams.put(AbilityKey.Exploited, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
-                    if ((wasDestroyed || wasSacrificed) && remSacrificed) {
-                        host.addRemembered(lKICopy);
+                    if ((wasDestroyed || wasSacrificed)) {
+                        didSac = true;
+                        if (remSacrificed) host.addRemembered(lKICopy);
                     }
+                }
+                if (!didSac && sa.hasParam("RememberCantPlayers")) {
+                    host.addRemembered(p);
                 }
             }
         }
