@@ -1,0 +1,9 @@
+Name:Vadmir, New Blood
+ManaCost:1 B
+Types:Legendary Creature Vampire Rogue
+PT:2/2
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_P1P1 | AddKeyword$ Menace & Lifelink | Description$ As long as NICKNAME has four or more +1/+1 counters on it, it has menace and lifelink.
+DeckHas:Ability$Counters|LifeGain
+Oracle:Whenever you commit a crime, put a +1/+1 counter on Vadmir, New Blood. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\nAs long as Vadmir has four or more +1/+1 counters on it, it has menace and lifelink.
