@@ -85,6 +85,8 @@ public class PlayerProperty {
             if (!(player.getDescended() > 0)) {
                 return false;
             }
+        } else if (property.equals("committedCrimeThisTurn")) {
+            if (player.getCommitedCrimeThisTurn() < 1) return false;
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
