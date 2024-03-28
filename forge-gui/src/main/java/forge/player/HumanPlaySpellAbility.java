@@ -166,13 +166,12 @@ public class HumanPlaySpellAbility {
         // We need to split up this super conditional to know WHY somethings prequisites failed.
         // Failing because there's no legal targets is different than failing because the player canceled paying costs
 
-        final boolean announcePrequiste = announceType() && announceValuesLikeX();
-        final boolean abilityRestrictions = ability.checkRestrictions(human);
-        final boolean canChooseTargets = (!mayChooseTargets || ability.setupTargets());
-        final boolean canCastTiming = ability.canCastTiming(human);
-        final boolean isLegalAfterStack = ability.isLegalAfterStack();
+        boolean preCostRequisites = announceType() && announceValuesLikeX();
+        preCostRequisites &= ability.checkRestrictions(human);
+        preCostRequisites &= (!mayChooseTargets || ability.setupTargets());
+        preCostRequisites &= ability.canCastTiming(human);
+        preCostRequisites &= ability.isLegalAfterStack();
 
-        final boolean preCostRequisites = announcePrequiste && abilityRestrictions && canChooseTargets && canCastTiming && isLegalAfterStack;
         final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);

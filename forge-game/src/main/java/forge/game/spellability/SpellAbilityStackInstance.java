@@ -44,7 +44,7 @@ import forge.util.TextUtil;
  */
 public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private static int maxId = 0;
-    private static int nextId() { return ++maxId; }
+    public static int nextId() { return ++maxId; }
 
     // At some point I want this functioning more like Target/Target Choices
     // where the SA has an "active"
@@ -65,8 +65,11 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     private final StackItemView view;
 
     public SpellAbilityStackInstance(final SpellAbility sa) {
+        this(sa, nextId());
+    }
+    public SpellAbilityStackInstance(final SpellAbility sa, int assignedId) {
         // Base SA info
-        id = nextId();
+        id = assignedId;
         ability = sa;
         stackDescription = sa.getStackDescription();
 

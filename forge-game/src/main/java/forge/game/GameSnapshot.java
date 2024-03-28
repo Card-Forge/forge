@@ -1,11 +1,9 @@
 package forge.game;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Table;
 
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -148,7 +146,7 @@ public class GameSnapshot {
 //        toGame.getTriggerHandler().resetActiveTriggers();
 
         if (includeStack) {
-            copyStack(fromGame, toGame);
+            copyStack(fromGame, toGame, restore);
         }
 
         if (restore) {
@@ -185,15 +183,47 @@ public class GameSnapshot {
         newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
         newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
         // TODO creatureAttackedThisTurn
-        for (Mana m : origPlayer.getManaPool()) {
-            // TODO Mana pool isn't being restored properly?
-            newPlayer.getManaPool().addMana(m, false);
-        }
+
+        // Copy mana pool
+        copyManaPool(origPlayer, newPlayer);
+
         newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
     }
 
-    private void copyStack(Game fromGame, Game toGame) {
+    private void copyManaPool(Player fromPlayer, Player toPlayer) {
+        Game toGame = toPlayer.getGame();
+        toPlayer.getManaPool().resetPool();
+        for (Mana m : fromPlayer.getManaPool()) {
+            // TODO the mana object here needs to be copied to the new game
+            toPlayer.getManaPool().addMana(m, false);
+        }
+        toPlayer.updateManaForView();
+    }
+
+    private void copyStack(Game fromGame, Game toGame, boolean restore) {
+        // Try to match the StackInstance ID. If we don't find it, generate a new stack instance that matches
+        // If we do find it, we may need to alter the existing stack instance
+        // If we find it and we're restoring, we dont need to do anything
+
+        Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap();
+        for (SpellAbilityStackInstance toEntry : toGame.getStack()) {
+            stackIds.put(toEntry.getId(), toEntry);
+        }
+
         for (SpellAbilityStackInstance origEntry : fromGame.getStack()) {
+            int id = origEntry.getId();
+            SpellAbilityStackInstance instance = stackIds.getOrDefault(id, null);
+
+            if (instance != null) {
+                if (!restore) {
+                    System.out.println("Might need to alter " + origEntry.getSpellAbility() + " on stack");
+                }
+
+                continue;
+            }
+
+            System.out.println("Adding " + origEntry.getSpellAbility() + " to stack");
+
             SpellAbility origSa = origEntry.getSpellAbility();
             Card origHostCard = origSa.getHostCard();
             Card newCard = findBy(toGame, origHostCard);
@@ -203,10 +233,16 @@ public class GameSnapshot {
                 newCard = createCardCopy(toGame, findBy(toGame, origHostCard.getOwner()), origHostCard);
             }
 
+            // FInd newEntry from origEntrys
+
             SpellAbility newSa = null;
             if (origSa.isSpell()) {
                 newSa = findSAInCard(origSa, newCard);
+            } else {
+
             }
+
+            // Is the SA on the stack?
             if (newSa != null) {
                 newSa.setActivatingPlayer(findBy(toGame, origSa.getActivatingPlayer()), true);
                 if (origSa.usesTargeting()) {
@@ -220,7 +256,7 @@ public class GameSnapshot {
                         }
                     }
                 }
-                toGame.getStack().add(newSa);
+                toGame.getStack().add(newSa, id);
             }
         }
     }
@@ -231,7 +267,6 @@ public class GameSnapshot {
 
         // TODO countersAddedThisTurn
 
-        // I think this is slightly wrong. I Don't think we need player maps
         if (fromGame.getStartingPlayer() != null) {
             toGame.setStartingPlayer(findBy(toGame, fromGame.getStartingPlayer()));
         }
@@ -319,108 +354,6 @@ public class GameSnapshot {
         Card newCard = new CardCopyService(c, newGame).copyCard(false, newOwner);
         newCard.dangerouslySetGame(newGame);
         return newCard;
-    }
-
-    private void addCard(Game toGame, ZoneType zone, Card c) {
-        // Can i delete this?
-        final Player owner = findBy(toGame, c.getOwner());
-        final Card newCard = createCardCopy(toGame, owner, c);
-
-        // TODO ExiledWith
-
-        Player zoneOwner = owner;
-        // everything the CreatureEvaluator checks must be set here
-        if (zone == ZoneType.Battlefield) {
-            zoneOwner = findBy(toGame, c.getController());
-            // TODO: Controllers' list with timestamps should be copied.
-            newCard.setController(zoneOwner, 0);
-
-            if (c.isBattle()) {
-                newCard.setProtectingPlayer(findBy(toGame, c.getProtectingPlayer()));
-            }
-
-            newCard.setCameUnderControlSinceLastUpkeep(c.cameUnderControlSinceLastUpkeep());
-
-            newCard.setPTTable(c.getSetPTTable());
-            newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
-
-            newCard.setPTBoost(c.getPTBoostTable());
-            // TODO copy by map
-            newCard.setDamage(c.getDamage());
-            newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
-
-            newCard.setChangedCardColors(c.getChangedCardColorsTable());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
-
-            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
-            newCard.setChangedCardKeywords(c.getChangedCardKeywords());
-            newCard.setChangedCardNames(c.getChangedCardNames());
-
-            for (Table.Cell<Long, Long, List<String>> kw : c.getHiddenExtrinsicKeywordsTable().cellSet()) {
-                newCard.addHiddenExtrinsicKeywords(kw.getRowKey(), kw.getColumnKey(), kw.getValue());
-            }
-            newCard.updateKeywordsCache(newCard.getCurrentState());
-
-            // Is any of this really needed?
-            newCard.setTapped(c.isTapped());
-
-            if (c.isFaceDown()) {
-                newCard.turnFaceDown(c.isFaceDown());
-            }
-            newCard.setManifested(c.isManifested());
-
-            newCard.setMonstrous(c.isMonstrous());
-            newCard.setRenowned(c.isRenowned());
-            if (c.isPlaneswalker()) {
-                // Why is this limited to planeswalkers?
-                for (SpellAbility sa : c.getAllSpellAbilities()) {
-                    int active = sa.getActivationsThisTurn();
-                    if (sa.isPwAbility() && active > 0) {
-                        SpellAbility newSa = findSAInCard(sa, newCard);
-                        if (newSa != null) {
-                            for (int i = 0; i < active; i++) {
-                                newCard.addAbilityActivated(newSa);
-                            }
-                        }
-                    }
-                }
-            }
-
-            newCard.setFlipped(c.isFlipped());
-            for (Map.Entry<Long, CardCloneStates> e : c.getCloneStates().entrySet()) {
-                newCard.addCloneState(e.getValue().copy(newCard, true), e.getKey());
-            }
-
-            Map<CounterType, Integer> counters = c.getCounters();
-            if (!counters.isEmpty()) {
-                newCard.setCounters(Maps.newHashMap(counters));
-            }
-            if (c.hasChosenPlayer()) {
-                newCard.setChosenPlayer(findBy(toGame, c.getChosenPlayer()));
-            }
-            if (c.hasChosenType()) {
-                newCard.setChosenType(c.getChosenType());
-            }
-            if (c.hasChosenType2()) {
-                newCard.setChosenType2(c.getChosenType2());
-            }
-            if (c.hasChosenColor()) {
-                newCard.setChosenColors(Lists.newArrayList(c.getChosenColors()));
-            }
-            if (c.hasNamedCard()) {
-                newCard.setNamedCards(Lists.newArrayList(c.getNamedCards()));
-            }
-            newCard.setSVars(c.getSVars());
-            newCard.copyChangedSVarsFrom(c);
-        }
-
-        if (zone == ZoneType.Stack) {
-            toGame.getStackZone().add(newCard);
-        } else {
-            zoneOwner.getZone(zone).add(newCard);
-        }
-        // Update view?
     }
 
     private static SpellAbility findSAInCard(SpellAbility sa, Card c) {
