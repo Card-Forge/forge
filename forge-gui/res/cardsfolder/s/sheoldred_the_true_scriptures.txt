@@ -20,7 +20,7 @@ ManaCost:no cost
 Colors:black
 Types:Enchantment Saga
 K:Chapter:3:DBDestroy,DBDiscard,DBRiseAll
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ For each opponent, select up to one target creature or planeswalker | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, destroy up to one target creature or planeswalker that player controls.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ For each opponent, select up to one target creature or planeswalker | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target creature or planeswalker that player controls.
 SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 3 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Each opponent discards three cards, then mills three cards.
 SVar:DBMill:DB$ Mill | Defined$ Opponent | NumCards$ 3 | StackDescription$ None
 SVar:DBRiseAll:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBExileSelf | Ultimate$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control. Exile CARDNAME, then return it to the battlefield (front face up).

@@ -2,7 +2,7 @@ Name:The Curse of Fenric
 ManaCost:2 G W
 Types:Enchantment Saga
 K:Chapter:3:DBDestroy,DBAnimate,DBFight
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ For each player, destroy up to one target creature that player controls. For each creature destroyed this way, its controller creates a 3/3 green Mutant creature token with deathtouch.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ For each player, destroy up to one target creature that player controls. For each creature destroyed this way, its controller creates a 3/3 green Mutant creature token with deathtouch.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_mutant_deathtouch | TokenOwner$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Power$ 6 | Toughness$ 6 | RemoveAllAbilities$ True | Types$ Legendary,Creature,Horror | RemoveCreatureTypes$ True | Name$ Fenric | Duration$ Permanent | SpellDescription$ Target nontoken creature becomes a 6/6 legendary Horror creature named Fenric and loses all abilities.

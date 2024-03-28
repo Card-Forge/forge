@@ -46,6 +46,8 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     private final FCollection<GameObject> targets = new FCollection<>();
 
+    private final Map<Card, Player> cardControllers = Maps.newHashMap();
+
     private final Map<GameObject, Integer> dividedMap = Maps.newHashMap();
 
     public final int getTotalTargetedCMC() {
@@ -64,8 +66,16 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         return totalPower;
     }
 
+    public final boolean forEachControllerChanged(Card c) {
+        return !c.getController().equals(cardControllers.get(c));
+    }
+
     public final boolean add(final GameObject o) {
         if (o instanceof Player || o instanceof Card || o instanceof SpellAbility) {
+            if (o instanceof Card) {
+                Card c = (Card) o;
+                cardControllers.put(c, c.getController());
+            }
             return super.add(o);
         }
         return false;
@@ -77,6 +87,9 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         for (Object e : collection) {
             this.dividedMap.remove(e);
         }
+        for (Object e : collection) {
+            this.cardControllers.remove(e);
+        }
         return result;
     }
 
@@ -84,6 +97,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     public boolean remove(Object object) {
         boolean result = super.remove(object);
         dividedMap.remove(object);
+        cardControllers.remove(object);
         return result;
     }
 
@@ -137,6 +151,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
         TargetChoices tc = new TargetChoices();
         tc.targets.addAll(targets);
         tc.dividedMap.putAll(dividedMap);
+        tc.cardControllers.putAll(cardControllers);
         return tc;
     }
     @Override

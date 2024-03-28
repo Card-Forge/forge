@@ -37,10 +37,10 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
-        final Player player = sa.getActivatingPlayer();
-        final Game game = player.getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
         if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
-                !player.getController().confirmAction(sa, null, sa.getParam("OptionPrompt"), null)) {
+                !activator.getController().confirmAction(sa, null, sa.getParam("OptionPrompt"), null)) {
             return;
         }
 
@@ -92,7 +92,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         if (loopOverCards) {
             if (sa.hasParam("ChooseOrder") && repeatCards.size() > 1) {
-                final Player chooser = sa.getParam("ChooseOrder").equals("True") ? player :
+                final Player chooser = sa.getParam("ChooseOrder").equals("True") ? activator :
                         AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
                 repeatCards = chooser.getController().orderMoveToZoneList(repeatCards, ZoneType.None, sa);
             }
@@ -138,7 +138,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             if (def.startsWith("ThisTurnCast")) {
                 final String[] workingCopy = def.split("_");
                 final String validFilter = workingCopy[1];
-                res = CardUtil.getThisTurnCast(validFilter, source, sa, player);
+                res = CardUtil.getThisTurnCast(validFilter, source, sa, activator);
             } else if (def.startsWith("Defined ")) {
                 res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
             } else {
@@ -153,7 +153,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
 
             final String storedType = source.getChosenType();
-            Player chooser = player;
+            Player chooser = activator;
             if (sa.hasParam("ChooseOrder") && !sa.getParam("ChooseOrder").equals("True")) {
                 chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
             }
@@ -174,7 +174,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
             boolean nextTurn = sa.hasParam("NextTurnForEachPlayer");
             if (sa.hasParam("StartingWithActivator")) {
-                int aidx = repeatPlayers.indexOf(player);
+                int aidx = repeatPlayers.indexOf(activator);
                 if (aidx != -1) {
                     Collections.rotate(repeatPlayers, -aidx);
                 }

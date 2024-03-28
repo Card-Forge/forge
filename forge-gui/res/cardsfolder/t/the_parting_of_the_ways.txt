@@ -8,6 +8,6 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ TIME | Cou
 SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.IsRemembered+withoutSuspend | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent
 SVar:X:Remembered$CardManaCost
 SVar:DBTimeTravel:DB$ TimeTravel | Amount$ 2 | SpellDescription$ Time travel, then time travel.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Choose up to one target artifact each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, destroy up to one target artifact that player controls.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Choose up to one target artifact each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target artifact that player controls.
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Exile the top five cards of your library. For each nonland card exiled this way, put a number of time counters on that card equal to its mana value. If it doesn't have suspend, it gains suspend.\nII — Time travel, then time travel.\nIII — For each opponent, destroy up to one target artifact that player controls.

@@ -395,6 +395,9 @@ public final class AbilityFactory {
         if (mapParams.containsKey("TargetsWithDifferentControllers")) {
             abTgt.setDifferentControllers(true);
         }
+        if (mapParams.containsKey("TargetsForEachPlayer")) {
+            abTgt.setForEachPlayer(true);
+        }
         if (mapParams.containsKey("TargetsWithDifferentCMC")) {
             abTgt.setDifferentCMC(true);
         }
