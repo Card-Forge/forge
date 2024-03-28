@@ -2,7 +2,7 @@ Name:Vault 13: Dweller's Journey
 ManaCost:3 W
 Types:Enchantment Saga
 K:Chapter:3:DBExile,DBGainLife,DBReturn
-SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment,Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target enchantment or creature each player controls | Duration$ UntilHostLeavesPlay | SpellDescription$ For each player, exile up to one other target enchantment or creature that player controls until NICKNAME leaves the battlefield.
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment,Creature | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | TgtPrompt$ Select up to one target enchantment or creature each player controls | Duration$ UntilHostLeavesPlay | SpellDescription$ For each player, exile up to one other target enchantment or creature that player controls until NICKNAME leaves the battlefield.
 SVar:OneEach:PlayerCountPlayers$Amount
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
