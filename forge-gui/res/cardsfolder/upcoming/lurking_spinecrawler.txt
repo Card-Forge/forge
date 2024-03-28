@@ -7,8 +7,8 @@ SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Incorporate$ 1 B | Triggers$ CastTrig | Duration$ Perpetual | SubAbility$ DBCleanChosen
 SVar:DBCleanChosen:DB$ Cleanup | ClearChosenCard$ True
 SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When you cast this spell, each opponent sacrifices a creature. Each opponent who can't discards a card.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | RememberCantPlayers$ True | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | NumCards$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ OppNonRememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you cast a multicolored spell, for each of that spell's colors, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ TriggeredCard$CardNumColors | SubAbility$ DBGainLife
