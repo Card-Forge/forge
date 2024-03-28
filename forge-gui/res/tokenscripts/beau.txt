@@ -1,0 +1,8 @@
+Name:Beau
+ManaCost:no cost
+Types:Legendary Creature Ox
+Colors:blue
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+Oracle:This creature's power and toughness are each equal to the number of lands you control.
