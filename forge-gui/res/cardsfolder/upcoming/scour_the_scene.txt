@@ -1,0 +1,12 @@
+Name:Scour the Scene
+ManaCost:W U
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 white and blue Detective creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
+T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigChooseCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, choose a creature card in your hand or a creature you control. It perpetually gets +1/+0.
+SVar:TrigChooseCard:DB$ ChooseCard | ChoiceZone$ Hand,Battlefield | ChoiceTitle$ Choose a creature card in your hand or a creature you control | Mandatory$ True | Choices$ Creature.YouCtrl | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand,Battlefield | Defined$ ChosenCard | NumAtt$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$Token & Type$Detective
+DeckHints:Type$Artifact
+Oracle:When Scour the Scene enters the battlefield, create a 2/2 white and blue Detective creature token.\nWhenever you sacrifice an artifact, choose a creature card in your hand or a creature you control. It perpetually gets +1/+0.
