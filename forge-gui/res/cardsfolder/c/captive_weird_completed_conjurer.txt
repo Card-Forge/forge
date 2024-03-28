@@ -17,6 +17,6 @@ PT:3/3
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature transforms into CARDNAME, exile the top card of your library. Until the end of your next turn, you may play that card.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When this creature transforms into Compleated Conjurer, exile the top card of your library. Until the end of your next turn, you may play that card.
