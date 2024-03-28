@@ -1,0 +1,17 @@
+Name:Rakdos, the Muscle
+ManaCost:2 B B R
+Types:Legendary Creature Demon Mercenary
+PT:6/5
+K:Flying
+K:Trample
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you sacrifice another creature, exile cards equal to its mana value from the top of target player's library. Until your next end step, you may play those cards and mana of any type can be spent to cast those spells.
+SVar:TrigExile:DB$ Dig | DigNum$ X | ChangeNum$ All | ValidTgts$ Player | TgtPrompt$ Choose a player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards and mana of any type can be spent to cast those spells.
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Indestructible | ActivationLimit$ 1 | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it. Activate only once each turn.
+SVar:DBTap:DB$ Tap | Defined$ Self
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Sacrifice
+Oracle:Flying, trample\nWhenever you sacrifice another creature, exile cards equal to its mana value from the top of target player's library. Until your next end step, you may play those cards and mana of any type can be spent to cast those spells.\nSacrifice another creature: Rakdos, the Muscle gains indestructible until end of turn. Tap it. Activate only once each turn.

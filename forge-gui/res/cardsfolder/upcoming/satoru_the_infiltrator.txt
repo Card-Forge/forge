@@ -1,0 +1,9 @@
+Name:Satoru, the Infiltrator
+ManaCost:U B
+Types:Legendary Creature Human Ninja Rogue
+PT:2/3
+K:Menace
+T:Mode$ ChangesZoneAll | Origin$ Any | Destination$ Battlefield | ValidCards$ Creature.YouCtrl+nonToken+wasNotCast,Creature.YouCtrl+nonToken+CastSa Spell.ManaSpent EQ0 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME and/or one or more other nontoken creatures enter the battlefield under your control, if none of them were cast or no mana was spent to cast them, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHints:Keyword$Cascade|Discover|Ninjutsu|Persist|Plot|Suspend|Undying|Unearth
+Oracle:Menace\nWhenever Satoru, the Infiltrator and/or one or more other nontoken creatures enter the battlefield under your control, if none of them were cast or no mana was spent to cast them, draw a card.
