@@ -235,9 +235,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void add(SpellAbility sp) {
-        add(sp, null);
+        add(sp, null, SpellAbilityStackInstance.nextId());
     }
+    public final void add(SpellAbility sp, int id) {
+        add(sp, null, id);
+    }
+
     public final void add(SpellAbility sp, SpellAbilityStackInstance si) {
+        add(sp, si, si.getId());
+    }
+
+    public final void add(SpellAbility sp, SpellAbilityStackInstance si, int id) {
         final Card source = sp.getHostCard();
         Player activator = sp.getActivatingPlayer();
 
@@ -321,7 +329,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (frozen && !sp.hasParam("IgnoreFreeze")) {
-            si = new SpellAbilityStackInstance(sp);
+            si = new SpellAbilityStackInstance(sp, id);
             frozenStack.push(si);
             return;
         }
@@ -337,7 +345,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // The ability is added to stack HERE
-        si = push(sp, si);
+        si = push(sp, si, id);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
@@ -472,7 +480,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     // Push should only be used by add.
-    private SpellAbilityStackInstance push(final SpellAbility sp, SpellAbilityStackInstance si) {
+    private SpellAbilityStackInstance push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getHostCard().getController());
             System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
@@ -481,7 +489,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isSpell() && sp.getMayPlay() != null) {
             sp.getMayPlay().incMayPlayTurn();
         }
-        si = si == null ? new SpellAbilityStackInstance(sp) : si;
+        si = si == null ? new SpellAbilityStackInstance(sp, id) : si;
 
         stack.addFirst(si);
         int stackIndex = stack.size() - 1;
