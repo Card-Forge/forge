@@ -1,0 +1,6 @@
+Name:Zombie Rogue Token
+ManaCost:no cost
+Types:Creature Zombie Rogue
+Colors:blue,black
+PT:2/2
+Oracle:
