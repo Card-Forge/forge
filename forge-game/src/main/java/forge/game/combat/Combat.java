@@ -72,7 +72,7 @@ public class Combat {
         initConstraints();
     }
 
-    public Combat(Combat combat, GameObjectMap map) {
+    public Combat(Combat combat, IEntityMap map) {
         playerWhoAttacks = map.map(combat.playerWhoAttacks);
         for (GameEntity entry : combat.attackableEntries) {
             attackableEntries.add(map.map(entry));

@@ -108,7 +108,11 @@ public class TokenInfo {
     }
 
     private Card toCard(Game game) {
-        final Card c = new Card(game.nextCardId(), game);
+        return toCard(game, game.nextCardId());
+    }
+
+    private Card toCard(Game game, int id) {
+        final Card c = new Card(id, game);
         c.setName(name);
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
@@ -139,8 +143,12 @@ public class TokenInfo {
     }
 
     public Card makeOneToken(final Player controller) {
+        return makeOneToken(controller, controller.getGame().nextCardId());
+    }
+
+    public Card makeOneToken(final Player controller, int id) {
         final Game game = controller.getGame();
-        final Card c = toCard(game);
+        final Card c = toCard(game, id);
 
         c.setOwner(controller);
         c.setToken(true);

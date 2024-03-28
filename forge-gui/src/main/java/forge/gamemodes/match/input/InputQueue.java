@@ -62,6 +62,14 @@ public class InputQueue extends Observable {
         updateObservers();
     }
 
+    public final void clearInputs() {
+        while(!inputStack.isEmpty()) {
+            inputStack.pop().stop();
+        }
+
+        updateObservers();
+    }
+
     public final Input getActualInput(final PlayerControllerHuman controller) {
         final Input topMost = inputStack.peek(); // incoming input to Control
         if (topMost != null && !gameView.isGameOver()) {
