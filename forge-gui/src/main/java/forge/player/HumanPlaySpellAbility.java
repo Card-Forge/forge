@@ -163,14 +163,11 @@ public class HumanPlaySpellAbility {
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
 
-        // We need to split up this super conditional to know WHY somethings prequisites failed.
-        // Failing because there's no legal targets is different than failing because the player canceled paying costs
-
-        boolean preCostRequisites = announceType() && announceValuesLikeX();
-        preCostRequisites &= ability.checkRestrictions(human);
-        preCostRequisites &= (!mayChooseTargets || ability.setupTargets());
-        preCostRequisites &= ability.canCastTiming(human);
-        preCostRequisites &= ability.isLegalAfterStack();
+        boolean preCostRequisites = announceType() && announceValuesLikeX() &&
+            ability.checkRestrictions(human) &&
+            (!mayChooseTargets || ability.setupTargets()) &&
+            ability.canCastTiming(human) &&
+            ability.isLegalAfterStack();
 
         final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
