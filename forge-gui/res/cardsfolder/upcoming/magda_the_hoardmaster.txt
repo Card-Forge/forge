@@ -1,0 +1,10 @@
+Name:Magda, the Hoardmaster
+ManaCost:1 R
+Types:Legendary Creature Dwarf Berserker
+PT:2/2
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, create a tapped Treasure token. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True | SpellDescription$ Create a tapped Treasure token.
+A:AB$ Token | Cost$ Sac<3/Treasure> | TokenScript$ r_4_4_scorpion_dragon_flying_haste | SorcerySpeed$ True | SpellDescription$ Create a 4/4 red Scorpion Dragon creature token with flying and haste. Activate only as a sorcery.
+DeckHas:Ability$Counters|Token|LifeGain|Sacrifice & Type$Treasure|Artifact|Dragon|Scorpion
+DeckHints:Type$Treasure
+Oracle:Whenever you commit a crime, create a tapped Treasure token. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\nSacrifice three Treasures: Create a 4/4 red Scorpion Dragon creature token with flying and haste. Activate only as a sorcery.
