@@ -1,0 +1,12 @@
+Name:Olivia, Opulent Outlaw
+ManaCost:1 R W B
+Types:Legendary Creature Vampire Assassin
+PT:3/3
+K:Flying
+K:Lifelink
+T:Mode$ DamageDoneOnce | ValidSource$ Card.Outlaw+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more outlaws you control deal combat damage to a player, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+A:AB$ PutCounterAll | Cost$ 3 Sac<2/Treasure> | ValidCards$ Creature.YouCtrl | ValidCardsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on each creature you control. Activate only as a sorcery.
+DeckHas:Ability$LifeGain|Token|Sacrifice|Counters & Type$Treasure|Artifact
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Flying, lifelink\nWhenever one or more outlaws you control deal combat damage to a player, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\n{3}, Sacrifice two Treasures: Put two +1/+1 counters on each creature you control. Activate only as a sorcery.
