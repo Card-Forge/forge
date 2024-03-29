@@ -1107,6 +1107,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.isAlternativeCost(AlternativeCost.Foretold);
     }
 
+    public boolean isPlotting() {
+        return false;
+    }
+    
     /**
      * @return the aftermath
      */

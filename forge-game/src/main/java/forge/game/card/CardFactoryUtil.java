@@ -3324,6 +3324,11 @@ public class CardFactoryUtil {
                 }
 
                 @Override
+                public boolean isPlotting() {
+                    return true;
+                }
+
+                @Override
                 public void resolve() {
                     final Game game = getHostCard().getGame();
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();

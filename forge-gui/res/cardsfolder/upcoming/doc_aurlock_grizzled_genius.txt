@@ -1,0 +1,8 @@
+Name:Doc Aurlock, Grizzled Genius
+ManaCost:G U
+Types:Legendary Creature Bear Druid
+PT:2/3
+S:Mode$ ReduceCost | ValidCard$ Card.wasCastFromYourGraveyard,Card.wasCastFromExile | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells you cast from your graveyard or from exile cost {2} less to cast.
+S:Mode$ ReduceCost | ValidSpell$ Static.Plotting | AffectedZone$ Hand | Activator$ You | Amount$ 2 | Description$ Plotting cards from your hand costs {2} less.
+DeckHints:Ability$Graveyard & Keyword$Plot
+Oracle:Spells you cast from your graveyard or from exile cost {2} less to cast.\nPlotting cards from your hand costs {2} less.
