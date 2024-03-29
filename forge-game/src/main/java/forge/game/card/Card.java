@@ -6459,6 +6459,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return this.plotted;
     }
     public final void setPlotted(final boolean plotted) {
+        if (plotted == true && !isLKI()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+            game.getTriggerHandler().runTrigger(TriggerType.BecomesPlotted, runParams, false);
+        }
         this.plotted = plotted;
     }
 
