@@ -2639,6 +2639,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
+        if (plotted) sb.append("Plotted\r\n");
+
         if (type.isInstant() || type.isSorcery()) {
             sb.append(abilityTextInstantSorcery(state));
 
@@ -6458,12 +6460,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isPlotted() {
         return this.plotted;
     }
-    public final void setPlotted(final boolean plotted) {
+    public final boolean setPlotted(final boolean plotted) {
+        this.plotted = plotted;
         if (plotted == true && !isLKI()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             game.getTriggerHandler().runTrigger(TriggerType.BecomesPlotted, runParams, false);
-        }
-        this.plotted = plotted;
+        }    
+        return true;
     }
 
     public boolean isForetoldCostByEffect() {

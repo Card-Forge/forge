@@ -3,9 +3,7 @@ package forge.game.trigger;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -29,10 +27,11 @@ public class TriggerBecomesPlotted extends Trigger {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
-     @Override
+    @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblPlotted")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
+        sb.append(Localizer.getInstance().getMessage("lblPlotted")).append(": ");
+        sb.append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
  
