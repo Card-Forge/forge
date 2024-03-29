@@ -1,0 +1,9 @@
+Name:Assimilation Aegis
+ManaCost:1 W U
+Types:Artifact Equipment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target creature until CARDNAME leaves the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilHostLeavesPlay
+T:Mode$ Attached | ValidSource$ Card.Self | TriggerZones$ Battlefield | ValidTarget$ Creature | Execute$ TrigClone | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, for as long as CARDNAME remains attached to it, that creature becomes a copy of a creature card exiled with CARDNAME.
+SVar:TrigClone:DB$ Clone | Choices$ Creature.ExiledWithSource | CloneTarget$ TriggeredTargetLKICopy | Duration$ UntilUnattached | ChoiceZone$ Exile
+K:Equip:2
+Oracle:When Assimilation Aegis enters the battlefield, exile up to one target creature until Assimilation Aegis leaves the battlefield.\nWhenever Assimilation Aegis becomes attached to a creature, for as long as Assimilation Aegis remains attached to it, that creature becomes a copy of a creature card exiled with Assimilation Aegis.\nEquip {2}

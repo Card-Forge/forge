@@ -3,7 +3,7 @@ ManaCost:2 R W
 Types:Legendary Creature Human Warrior
 PT:4/3
 S:Mode$ Continuous | Affected$ Ox.YouCtrl | AddKeyword$ Double Strike | Description$ Oxen you control have double strike.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$Whenever CARDNAME enters the battlefield or attacks, exile the top card of your library. If it's a land card, create a 2/2 white Ox creature token. Otherwise, you may cast it until the end of your next turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile the top card of your library. If it's a land card, create a 2/2 white Ox creature token. Otherwise, you may cast it until the end of your next turn.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile the top card of your library. If it's a land card, create a 2/2 white Ox creature token. Otherwise, you may cast it until the end of your next turn.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | DestinationZone$ Exile | RememberChanged$ True | ChangeNum$ All | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_2_2_ox | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Land | SubAbility$ DBEffect
