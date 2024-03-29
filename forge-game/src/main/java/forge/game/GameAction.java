@@ -618,7 +618,6 @@ public class GameAction {
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType().name() : null);
         runParams.put(AbilityKey.Destination, zoneTo.getZoneType().name());
-        runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
         runParams.put(AbilityKey.IndividualCostPaymentInstance, game.costPaymentStack.peek());
         runParams.put(AbilityKey.MergedCards, mergedCards);
 
