@@ -3333,9 +3333,6 @@ public class CardFactoryUtil {
                     zoneMovements.triggerChangesZoneAll(game, this);
 
                     c.setPlotted(true);
-                    c.turnFaceDown(true);
-                    // look at the exiled card
-                    c.addMayLookTemp(getActivatingPlayer());
 
                     // TODO add GameEvent
                 }
