@@ -8,5 +8,5 @@ SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken |
 SVar:TrigToken:DB$ Token | TokenScript$ wu_2_2_detective
 S:Mode$ Continuous | Affected$ Creature.MultiColor+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Multicolored creatures you control get +1/+1.
 DeckHints:Type$Detective
-DeckHas:Ability$Token & Type$Detective
+DeckHas:Ability$Token & Type$Detective & Color$Blue
 Oracle:When Scrutiny of the Guildpact enters the battlefield, you may choose a creature card in your hand. If you do, that card perpetually incorporates {W} and gains "When you cast this spell, create a 2/2 white and blue Detective creature token."\nMulticolored creatures you control get +1/+1.
