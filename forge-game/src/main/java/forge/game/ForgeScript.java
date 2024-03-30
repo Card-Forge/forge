@@ -257,6 +257,8 @@ public class ForgeScript {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
             return sa.isForetold();
+        } else if (property.equals("Plotting")) {
+            return sa.isPlotting();
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
         } else if (property.equals("Daybound")) {

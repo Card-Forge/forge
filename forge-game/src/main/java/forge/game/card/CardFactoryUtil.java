@@ -3324,6 +3324,11 @@ public class CardFactoryUtil {
                 }
 
                 @Override
+                public boolean isPlotting() {
+                    return true;
+                }
+
+                @Override
                 public void resolve() {
                     final Game game = getHostCard().getGame();
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -3333,9 +3338,6 @@ public class CardFactoryUtil {
                     zoneMovements.triggerChangesZoneAll(game, this);
 
                     c.setPlotted(true);
-                    c.turnFaceDown(true);
-                    // look at the exiled card
-                    c.addMayLookTemp(getActivatingPlayer());
 
                     // TODO add GameEvent
                 }
