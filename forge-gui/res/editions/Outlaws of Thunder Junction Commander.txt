@@ -6,3 +6,7 @@ Type=Commander
 ScryfallCode=OTC
 
 [cards]
+1 M Gonti, Canny Acquisitor @Anna Podedworna
+2 M Olivia, Opulent Outlaw @Anna Steinbauer
+3 M Stella Lee, Wild Card @Fajareka Setiawan
+4 M Yuma, Proud Protector @Matt Stewart
