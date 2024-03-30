@@ -1,0 +1,11 @@
+Name:Breeches, the Blastmaker
+ManaCost:1 U R
+Types:Legendary Creature Goblin Pirate
+PT:3/3
+K:Menace
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFlip | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, you may sacrifice an artifact. If you do, flip a coin. When you win the flip, copy that spell. You may choose new targets for the copy. When you lose the flip,CARDNAME deals damage equal to that spell's mana value to any target.
+SVar:TrigFlip:AB$ FlipACoin | Cost$ Sac<1/Artifact> | WinSubAbility$ DBCopy | LoseSubAbility$ DBDamage
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | SpellDescription$ When you win the flip, copy that spell. You may choose new targets for the copy.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ When you lose the flip, CARDNAME deals damage equal to that spell's mana value to any target.
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+Oracle:Menace\nWhenever you cast your second spell each turn, you may sacrifice an artifact. If you do, flip a coin. When you win the flip, copy that spell. You may choose new targets for the copy. When you lose the flip, Breeches, the Blastmaker deals damage equal to that spell's mana value to any target.

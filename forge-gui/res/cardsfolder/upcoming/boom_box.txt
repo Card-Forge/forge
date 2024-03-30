@@ -1,0 +1,8 @@
+Name:Boom Box
+ManaCost:2
+Types:Artifact
+A:AB$ Destroy | Cost$ 6 T Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDestroyCreature | SpellDescription$ Destroy up to one target artifact, up to one target creature, and up to one target land.
+SVar:DBDestroyCreature:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDestroyLand
+SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select up to one target land | TargetMin$ 0 | TargetMax$ 1
+DeckHas:Ability$Sacrifice
+Oracle:{6}, {T}, Sacrifice Boom Box: Destroy up to one target artifact, up to one target creature, and up to one target land.
