@@ -35,6 +35,9 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                 boolean altered = false;
 
                 switch (attr.trim()) {
+                    case "Plotted":
+                        altered = c.setPlotted(activate);
+                        break;
                     case "Solve":
                     case "Solved":
                         altered = c.setSolved(activate);

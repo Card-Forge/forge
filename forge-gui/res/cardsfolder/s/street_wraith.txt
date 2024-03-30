@@ -2,6 +2,6 @@ Name:Street Wraith
 ManaCost:3 B B
 Types:Creature Wraith
 PT:3/4
-K:Swampwalk
+K:Landwalk:Swamp
 K:Cycling:PayLife<2>
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nCycling—Pay 2 life. (Pay 2 life, Discard this card: Draw a card.)

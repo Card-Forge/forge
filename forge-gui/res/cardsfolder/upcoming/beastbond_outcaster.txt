@@ -1,0 +1,8 @@
+Name:Beastbond Outcaster
+ManaCost:2 G
+Types:Creature Human Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl+powerGE4 | PresentCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control a creature with power 4 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+K:Plot:1 G
+Oracle:When Beastbond Outcaster enters the battlefield, if you control a creature with power 4 or greater, draw a card.\nPlot {1}{G} (You may pay 1 this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

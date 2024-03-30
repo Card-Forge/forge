@@ -2,5 +2,5 @@ Name:Bull Hippo
 ManaCost:3 G
 Types:Creature Hippo
 PT:3/3
-K:Islandwalk
+K:Landwalk:Island
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

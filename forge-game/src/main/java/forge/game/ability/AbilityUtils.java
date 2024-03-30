@@ -1593,11 +1593,6 @@ public class AbilityUtils {
         sq = l[0].split("\\.");
 
         final Game game = c.getGame();
-        // might get called from editor
-        if (game != null) {
-            // CR 608.2h
-            c = game.getChangeZoneLKIInfo(c);
-        }
 
         if (ctb != null) {
             // Count$Compare <int comparator value>.<True>.<False>
@@ -1820,7 +1815,6 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
-
             } else {
                 // fallback if ctb isn't a spellability
                 if (sq[0].startsWith("LastStateBattlefield")) {
@@ -1884,7 +1878,6 @@ public class AbilityUtils {
                 }
                 return doXMath(colorOccurrences, expr, c, ctb);
             }
-
         } // end ctb != null
 
         //Count$SearchedLibrary.<DefinedPlayer>
@@ -1894,6 +1887,91 @@ public class AbilityUtils {
                 sum += p.getLibrarySearched();
             }
             return doXMath(sum, expr, c, ctb);
+        }
+
+        String[] paidparts = l[0].split("\\$", 2);
+        Iterable<Card> someCards = null;
+
+        // count valid cards in any specified zone/s
+        if (sq[0].startsWith("Valid")) {
+            String[] lparts = paidparts[0].split(" ", 2);
+
+            CardCollectionView cardsInZones = null;
+            if (lparts[0].contains("All")) {
+                cardsInZones = game.getCardsInGame();
+            } else if (lparts[0].endsWith("Self")) {
+                cardsInZones = new CardCollection(c);
+            } else {
+                final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
+                boolean usedLastState = false;
+                if (ctb instanceof SpellAbility && zones.size() == 1) {
+                    SpellAbility sa = (SpellAbility) ctb;
+                    if (sa.isReplacementAbility()) {
+                        if (zones.get(0).equals(ZoneType.Battlefield)) {
+                            cardsInZones = sa.getRootAbility().getLastStateBattlefield();
+                            usedLastState = true;
+                        } else if (zones.get(0).equals(ZoneType.Graveyard)) {
+                            cardsInZones = sa.getRootAbility().getLastStateGraveyard();
+                            usedLastState = true;
+                        }
+                    }
+                }
+                if (!usedLastState) {
+                    cardsInZones = game.getCardsIn(zones);
+                }
+            }
+
+            someCards = CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb);
+        }
+
+        if (sq[0].startsWith("RememberedSize")) {
+            return doXMath(c.getRememberedCount(), expr, c, ctb);
+        }
+        if (sq[0].startsWith("ChosenSize")) {
+            return doXMath(c.getChosenCards().size(), expr, c, ctb);
+        }
+        if (sq[0].startsWith("ImprintedSize")) {
+            return doXMath(c.getImprintedCards().size(), expr, c, ctb);
+        }
+
+        if (sq[0].startsWith("RememberedNumber")) {
+            int num = 0;
+            for (final Object o : c.getRemembered()) {
+                if (o instanceof Integer) {
+                    num += (Integer) o;
+                }
+            }
+            return doXMath(num, expr, c, ctb);
+        }
+
+        if (sq[0].startsWith("RememberedWithSharedCardType")) {
+            int maxNum = 1;
+            for (final Object o : c.getRemembered()) {
+                if (o instanceof Card) {
+                    int num = 1;
+                    Card firstCard = (Card) o;
+                    for (final Object p : c.getRemembered()) {
+                        if (p instanceof Card) {
+                            Card secondCard = (Card) p;
+                            if (!firstCard.equals(secondCard) && firstCard.sharesCardTypeWith(secondCard)) {
+                                num++;
+                            }
+                        }
+                    }
+                    if (num > maxNum) {
+                        maxNum = num;
+                    }
+                }
+            }
+            return doXMath(maxNum, expr, c, ctb);
+        }
+
+        // might get called from editor
+        if (game != null) {
+            // CR 608.2h
+            // we'll want to avoid grabbing LKI for params that can handle internal information
+            // e. g. the remembering on Xenagos, the Reveler
+            c = game.getChangeZoneLKIInfo(c);
         }
 
         ////////////////////
@@ -1997,7 +2075,6 @@ public class AbilityUtils {
             return doXMath(c.getRegeneratedThisTurn(), expr, c, ctb);
         }
 
-        // Count$Converge
         if (sq[0].contains("Converge")) {
             SpellAbility castSA = c.getCastSA();
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), expr, c, ctb);
@@ -2103,48 +2180,6 @@ public class AbilityUtils {
             return doXMath(cmc, expr, c, ctb);
         }
 
-        if (sq[0].startsWith("RememberedSize")) {
-            return doXMath(c.getRememberedCount(), expr, c, ctb);
-        }
-        if (sq[0].startsWith("ChosenSize")) {
-            return doXMath(c.getChosenCards().size(), expr, c, ctb);
-        }
-        if (sq[0].startsWith("ImprintedSize")) {
-            return doXMath(c.getImprintedCards().size(), expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("RememberedNumber")) {
-            int num = 0;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Integer) {
-                    num += (Integer) o;
-                }
-            }
-            return doXMath(num, expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("RememberedWithSharedCardType")) {
-            int maxNum = 1;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Card) {
-                    int num = 1;
-                    Card firstCard = (Card) o;
-                    for (final Object p : c.getRemembered()) {
-                        if (p instanceof Card) {
-                            Card secondCard = (Card) p;
-                            if (!firstCard.equals(secondCard) && firstCard.sharesCardTypeWith(secondCard)) {
-                                num++;
-                            }
-                        }
-                    }
-                    if (num > maxNum) {
-                        maxNum = num;
-                    }
-                }
-            }
-            return doXMath(maxNum, expr, c, ctb);
-        }
-
         // Count$EnchantedControllerCreatures
         if (sq[0].equals("EnchantedControllerCreatures")) { // maybe refactor into a Valid with ControlledBy
             int v = 0;
@@ -2188,6 +2223,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("Threshold")) {
             return doXMath(calculateAmount(c, sq[player.hasThreshold() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].equals("CommittedCrimeThisTurn")) {
+            return doXMath(calculateAmount(c, sq[player.getCommitedCrimeThisTurn() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("ExtraTurn")) {
             return doXMath(calculateAmount(c, sq[game.getPhaseHandler().getPlayerTurn().isExtraTurn() ? 1 : 2], ctb), expr, c, ctb);
@@ -2406,9 +2444,9 @@ public class AbilityUtils {
         if (sq[0].startsWith("Domain")) {
             int n = 0;
             Player neededPlayer = sq[0].equals("DomainActivePlayer") ? game.getPhaseHandler().getPlayerTurn() : player;
-            CardCollection someCards = neededPlayer.getLandsInPlay();
+            CardCollection lands = neededPlayer.getLandsInPlay();
             for (String basic : MagicColor.Constant.BASIC_LANDS) {
-                if (!CardLists.getType(someCards, basic).isEmpty()) {
+                if (!CardLists.getType(lands, basic).isEmpty()) {
                     n++;
                 }
             }
@@ -2416,8 +2454,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].contains("AbilityYouCtrl")) {
-            CardCollection all = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature", player,
-                    c, ctb);
+            CardCollection all = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), "Creature", player, c, ctb);
             int count = 0;
             for (String ab : sq[0].substring(15).split(",")) {
                 CardCollection found = CardLists.getValidCards(all, "Creature.with" + ab, player, c, ctb);
@@ -2654,9 +2691,6 @@ public class AbilityUtils {
             return MyRandom.getRandom().nextInt(1+max-min) + min;
         }
 
-        String[] paidparts = l[0].split("\\$", 2);
-        Iterable<Card> someCards = null;
-
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
@@ -2696,38 +2730,6 @@ public class AbilityUtils {
             CounterType cType = CounterType.getType(parts[1]);
 
             return doXMath(game.getCounterRemovedThisTurn(cType, parts[2], c, player, ctb), expr, c, ctb);
-        }
-
-        // count valid cards in any specified zone/s
-        if (sq[0].startsWith("Valid")) {
-            String[] lparts = paidparts[0].split(" ", 2);
-
-            CardCollectionView cardsInZones = null;
-            if (lparts[0].contains("All")) {
-                cardsInZones = game.getCardsInGame();
-            } else if (lparts[0].endsWith("Self")) {
-                cardsInZones = new CardCollection(c);
-            } else {
-                final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
-                boolean usedLastState = false;
-                if (ctb instanceof SpellAbility && zones.size() == 1) {
-                    SpellAbility sa = (SpellAbility) ctb;
-                    if (sa.isReplacementAbility()) {
-                        if (zones.get(0).equals(ZoneType.Battlefield)) {
-                            cardsInZones = sa.getRootAbility().getLastStateBattlefield();
-                            usedLastState = true;
-                        } else if (zones.get(0).equals(ZoneType.Graveyard)) {
-                            cardsInZones = sa.getRootAbility().getLastStateGraveyard();
-                            usedLastState = true;
-                        }
-                    }
-                }
-                if (!usedLastState) {
-                    cardsInZones = game.getCardsIn(zones);
-                }
-            }
-
-            someCards = CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb);
         }
 
         if (sq[0].startsWith("MostCardName")) {

@@ -6,10 +6,23 @@ Type=Expansion
 ScryfallCode=BIG
 
 [cards]
+3 M Oltec Matterweaver @Villarrte
+20 M Vaultborn Tyrant @Loïc Canavaggia
 25 M Nexus of Becoming @Adam Volker
 26 M Sword of Wealth and Power @Dominik Mayer
+27 M Torpor Orb @Robin Olausson
+28 M Transmutation Font @Mark Poole
+33 M Oltec Matterweaver @Inkognit
+50 M Vaultborn Tyrant @Simon Dominic
 55 M Nexus of Becoming @Mark Poole
 56 M Sword of Wealth and Power @Artur Nakhodkin
+57 M Torpor Orb @Svetlin Velinov
+58 M Transmutation Font @David Astruga
+61 M Vaultborn Tyrant
 64 M Sword of Wealth and Power @Artur Nakhodkin
+68 M Oltec Matterweaver @Villarrte
+85 M Vaultborn Tyrant @Loïc Canavaggia
 90 M Nexus of Becoming @Adam Volker
 91 M Sword of Wealth and Power @Dominik Mayer
+92 M Torpor Orb @Robin Olausson
+93 M Transmutation Font @Mark Poole

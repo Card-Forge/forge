@@ -127,7 +127,7 @@ public class ReplacementHandler {
                         // use LKI because it has the right RE from the state before the effect started
                         c = lastState;
                         cardZone = lastState.getLastKnownZone();
-                    } else if (cardZone.is(ZoneType.Battlefield)) {
+                    } else if (cardZone != null && cardZone.is(ZoneType.Battlefield)) {
                         // no LKI found so it shouldn't apply, this can happen during simultaneous zone changes
                         return true;
                     }

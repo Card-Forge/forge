@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Creature Cat Warrior
 Colors:green
 PT:2/2
-K:Forestwalk
+K:Landwalk:Forest
 Oracle:Forestwalk

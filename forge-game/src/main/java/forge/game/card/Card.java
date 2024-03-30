@@ -202,6 +202,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
     private boolean becameTargetThisTurn = false;
+    private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
@@ -2137,6 +2138,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         foughtThisTurn = b;
     }
 
+    public final boolean getEnlistedThisCombat()  {
+        return enlistedThisCombat;
+    }
+    public final void setEnlistedThisCombat(final boolean b) {
+        enlistedThisCombat = b;
+    }
+
     public final CardCollectionView getGainControlTargets() { //used primarily with AbilityFactory_GainControl
         return CardCollection.getView(gainControlTargets);
     }
@@ -2475,6 +2483,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
+                        || keyword.startsWith("Landwalk")
                         || keyword.startsWith("Alternative Cost")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
@@ -2629,6 +2638,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sb.append("\r\n");
             }
         }
+
+        if (plotted) sb.append("Plotted\r\n");
 
         if (type.isInstant() || type.isSorcery()) {
             sb.append(abilityTextInstantSorcery(state));
@@ -2811,7 +2822,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 addedManaStrings.add(sAbility);
             }
 
-            if (!sAbility.endsWith(state.getName() + "\r\n")) {
+            boolean alwaysShow = false;
+            if (!sa.isIntrinsic()) alwaysShow = true; // allows added abilities to show on face-down stuff (e.g. Morph,Cloaked)
+            if (!sAbility.endsWith(state.getName() + "\r\n") || alwaysShow) {
                 sb.append(sAbility);
                 sb.append("\r\n");
             }
@@ -6160,19 +6173,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0;
         }
 
-        // Run replacement effects
         getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
 
-        // Run triggers
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
         runParams.put(AbilityKey.DamageTarget, this);
         runParams.put(AbilityKey.Cause, cause);
         runParams.put(AbilityKey.DamageAmount, damageIn);
         runParams.put(AbilityKey.IsCombatDamage, isCombat);
-        if (!isCombat) {
-            runParams.put(AbilityKey.SpellAbilityStackInstance, game.stack.peek());
-        }
         // Defending player at the time the damage was dealt
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
         getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, true);
@@ -6447,8 +6455,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isPlotted() {
         return this.plotted;
     }
-    public final void setPlotted(final boolean plotted) {
+    public final boolean setPlotted(final boolean plotted) {
         this.plotted = plotted;
+        if (plotted == true && !isLKI()) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+            game.getTriggerHandler().runTrigger(TriggerType.BecomesPlotted, runParams, false);
+        }    
+        return true;
     }
 
     public boolean isForetoldCostByEffect() {
@@ -6456,10 +6469,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void setForetoldCostByEffect(final boolean val) {
         this.foretoldCostByEffect = val;
-    }
-
-    public boolean isForetoldThisTurn() {
-        return this.enteredThisTurn();
     }
 
     public boolean isSpecialized() {
@@ -6968,6 +6977,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void onEndOfCombat(final Player active) {
+        setEnlistedThisCombat(false);
         if (this.getController().equals(active)) {
             chosenModesYourLastCombat.clear();
             chosenModesYourLastCombatStatic.clear();

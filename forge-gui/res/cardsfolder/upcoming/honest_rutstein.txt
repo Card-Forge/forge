@@ -1,0 +1,10 @@
+Name:Honest Rutstein
+ManaCost:1 B G
+Types:Legendary Creature Human Warlock
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
+S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells you cast cost {1} less to cast.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill
+Oracle:When Honest Rutstein enters the battlefield, return target creature card from your graveyard to your hand.\nCreature spells you cast cost {1} less to cast.

@@ -1,0 +1,9 @@
+Name:Ruthless Lawbringer
+ManaCost:1 W B
+Types:Creature Vampire Assassin
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature. When you do, destroy target nonland permanent.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target nonland permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+DeckHas:Ability$Sacrifice
+Oracle:When Ruthless Lawbringer enters the battlefield, you may sacrifice another creature. When you do, destroy target nonland permanent.

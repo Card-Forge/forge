@@ -2,5 +2,5 @@ Name:Viscid Lemures
 ManaCost:4 B
 Types:Creature Spirit
 PT:4/3
-A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ -1 | KW$ Swampwalk | SpellDescription$ CARDNAME gets -1/-0 and gains swampwalk until end of turn. (It can't be blocked as long as defending player controls a Swamp.)
+A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ -1 | KW$ Landwalk:Swamp | SpellDescription$ CARDNAME gets -1/-0 and gains swampwalk until end of turn. (It can't be blocked as long as defending player controls a Swamp.)
 Oracle:{0}: Viscid Lemures gets -1/-0 and gains swampwalk until end of turn. (It can't be blocked as long as defending player controls a Swamp.)

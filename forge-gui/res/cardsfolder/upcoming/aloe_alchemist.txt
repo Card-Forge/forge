@@ -1,0 +1,9 @@
+Name:Aloe Alchemist
+ManaCost:1 G
+Types:Creature Plant Warlock
+PT:3/2
+K:Trample
+T:Mode$ BecomesPlotted | ValidCard$ Card.Self | TriggerZones$ Exile | Execute$ TrigPump | TriggerDescription$ When CARDNAME becomes plotted, target creature gets +3/+2 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ 3 | NumDef$ 2 | KW$ Trample
+K:Plot:1 G
+Oracle:Trample\nWhen Aloe Alchemist becomes plotted, target creature gets +3/+2 and gains trample until end of turn.\nPlot {1}{G} (You may pay {1}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

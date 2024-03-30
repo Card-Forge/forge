@@ -2,5 +2,5 @@ Name:Zodiac Dog
 ManaCost:2 R
 Types:Creature Dog
 PT:2/2
-K:Mountainwalk
+K:Landwalk:Mountain
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

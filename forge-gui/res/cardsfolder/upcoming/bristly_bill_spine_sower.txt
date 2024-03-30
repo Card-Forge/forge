@@ -1,0 +1,10 @@
+Name:Bristly Bill, Spine Sower
+ManaCost:1 G
+Types:Legendary Creature Plant Druid
+PT:2/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ MultiplyCounter | Cost$ 3 G G  | Defined$ Valid Creature.YouCtrl | CounterType$ P1P1 | SpellDescription$ Double the number of +1/+1 counters on each creature you control.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on target creature.\n{3}{G}{G}: Double the number of +1/+1 counters on each creature you control.

@@ -2,7 +2,7 @@ Name:Goblins of the Flarg
 ManaCost:R
 Types:Creature Goblin Warrior
 PT:1/1
-K:Mountainwalk
+K:Landwalk:Mountain
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Dwarf.YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a Dwarf, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlayVar:DwarfsYouCtrl EQ0

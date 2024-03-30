@@ -2,5 +2,5 @@ Name:Pygmy Allosaurus
 ManaCost:2 G
 Types:Creature Dinosaur
 PT:2/2
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

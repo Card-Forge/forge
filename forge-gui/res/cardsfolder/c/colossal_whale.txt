@@ -2,7 +2,7 @@ Name:Colossal Whale
 ManaCost:5 U U
 Types:Creature Whale
 PT:5/5
-K:Islandwalk
+K:Landwalk:Island
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may exile target creature defending player controls until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player control | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE

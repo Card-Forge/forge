@@ -1,0 +1,11 @@
+Name:Gonti, Canny Acquisitor
+ManaCost:2 B G U
+Types:Legendary Creature Aetherborn Rogue
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.YouDontOwn | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast but don't own cost {1} less to cast.
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ Permanent
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Spells you cast but don't own cost {1} less to cast.\nWhenever one or more creatures you control deal combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast that spell.

@@ -2,7 +2,7 @@ Name:Sol'kanar the Swamp King
 ManaCost:2 U B R
 Types:Legendary Creature Demon
 PT:5/5
-K:Swampwalk
+K:Landwalk:Swamp
 T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain

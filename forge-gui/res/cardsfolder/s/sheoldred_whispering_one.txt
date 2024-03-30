@@ -2,7 +2,7 @@ Name:Sheoldred, Whispering One
 ManaCost:5 B B
 Types:Legendary Creature Phyrexian Praetor
 PT:6/6
-K:Swampwalk
+K:Landwalk:Swamp
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each opponent's upkeep, that player sacrifices a creature.

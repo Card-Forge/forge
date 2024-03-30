@@ -2,6 +2,6 @@ Name:Woodlot Crawler
 ManaCost:U B
 Types:Creature Insect
 PT:2/1
-K:Forestwalk
+K:Landwalk:Forest
 K:Protection from green
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\nProtection from green

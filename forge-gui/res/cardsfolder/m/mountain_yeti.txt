@@ -2,6 +2,6 @@ Name:Mountain Yeti
 ManaCost:2 R R
 Types:Creature Yeti
 PT:3/3
-K:Mountainwalk
+K:Landwalk:Mountain
 K:Protection from white
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)\nProtection from white

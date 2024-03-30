@@ -1,0 +1,8 @@
+Name:Sproutwatch Dryad
+ManaCost:1 G G
+Types:Creature Dryad
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of each combat, CARDNAME gains flying until end of turn if a creature you control or a card in your hand has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Card.Self | KW$ First Strike & Flying & Deathtouch & Double Strike & Haste & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Hand,Battlefield | SharedRestrictions$ Creature.YouCtrl
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of each combat, Sproutwatch Dryad gains flying until end of turn if a creature you control or a card in your hand has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.

@@ -2,5 +2,5 @@ Name:Devouring Deep
 ManaCost:2 U
 Types:Creature Fish
 PT:1/2
-K:Islandwalk
+K:Landwalk:Island
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)

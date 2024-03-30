@@ -1,0 +1,8 @@
+Name:Armored Armadillo
+ManaCost:W
+Types:Creature Armadillo
+PT:0/4
+K:Ward:1
+A:AB$ Pump | Cost$ 3 W | NumAtt$ X | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is its toughness.
+SVar:X:Count$CardToughness
+Oracle:Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\n{3}{W}: Armored Armadillo gets +X/+0 until end of turn, where X is its toughness.

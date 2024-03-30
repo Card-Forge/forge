@@ -3,5 +3,6 @@ ManaCost:G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities. | Description$ Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.
+S:Mode$ IgnoreLandWalk | ValidBlocker$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature can block creatures with landwalk abilities as though they didn't have those abilities.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.

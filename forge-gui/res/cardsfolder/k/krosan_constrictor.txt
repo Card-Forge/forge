@@ -2,6 +2,6 @@ Name:Krosan Constrictor
 ManaCost:3 G
 Types:Creature Snake
 PT:2/2
-K:Swampwalk
+K:Landwalk:Swamp
 A:AB$ Pump | Cost$ T | NumAtt$ -2 | IsCurse$ True | TgtPrompt$ Choose target Black creature | ValidTgts$ Creature.Black | SpellDescription$ Target black creature gets -2/-0 until end of turn.
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{T}: Target black creature gets -2/-0 until end of turn.

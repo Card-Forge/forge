@@ -1,0 +1,11 @@
+Name:Snarlfang Vermin
+ManaCost:B
+Types:Creature Rat
+PT:2/1
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigSuspect | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, if that creature is still on the battlefield, suspect that creature. It perpetually gains this ability.
+SVar:TrigSuspect:DB$ AlterAttribute | Defined$ TriggeredTargetLKICopy | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Card.inZoneBattlefield | Attributes$ Suspected | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredTargetLKICopy | ConditionDefined$ TriggeredTargetLKICopy | ConditionPresent$ Card.inZoneBattlefield | Triggers$ CombatTrig | Duration$ Perpetual
+SVar:CombatTrig:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigSuspect | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, if that creature is still on the battlefield, suspect that creature. It perpetually gains this ability.
+T:Mode$ ChangesZone | Origin$ Battlefield | TriggerZones$ Graveyard | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+IsSuspected | Execute$ TrigLoseLife | TriggerDescription$ Whenever a suspected creature an opponent controls dies while CARDNAME is in your graveyard, that opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ TriggeredCardController
+Oracle:Whenever Snarlfang Vermin deals combat damage to a creature, if that creature is still on the battlefield, suspect that creature. It perpetually gains this ability.\nWhenever a suspected creature an opponent controls dies while Snarlfang Vermin is in your graveyard, that opponent loses 1 life.

@@ -253,6 +253,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         if (!"Permanent".equals(duration) && !perpetual) {
             if ("UntilControllerNextUntap".equals(duration)) {
                 game.getUntap().addUntil(c.getController(), unanimate);
+            } else if ("UntilAnimatedFaceup".equals(duration)) {
+                c.addFaceupCommand(unanimate);
             } else {
                 addUntilCommand(sa, unanimate);
             }

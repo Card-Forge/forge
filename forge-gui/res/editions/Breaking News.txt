@@ -6,7 +6,16 @@ Type=Collector_Edition
 ScryfallCode=OTP
 
 [cards]
+6 R Path to Exile @Calder Moore
+11 M Mana Drain @Florey
 20 M Thoughtseize @William Tempest
+28 U Clear Shot @Justine Mara Andersen
 39 M Crime // Punishment @William Tempest
+50 M Oko, Thief of Crowns @Michael Walsh
+65 R Dust Bowl @Yohann Schepacz
+67 M Mana Drain @Florey
 70 M Thoughtseize @William Tempest
 75 M Crime // Punishment @William Tempest
+77 M Oko, Thief of Crowns @Michael Walsh
+79 M Grindstone @Alejandro Mirabal
+92 M Grindstone @Alejandro Mirabal

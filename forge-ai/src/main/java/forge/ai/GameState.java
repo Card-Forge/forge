@@ -406,9 +406,9 @@ public abstract class GameState {
             }
             if (c.isForetold()) {
                 newText.append("|Foretold");
-            }
-            if (c.isForetoldThisTurn()) {
-                newText.append("|ForetoldThisTurn");
+                if (c.enteredThisTurn()) {
+                    newText.append("|ForetoldThisTurn");
+                }
             }
         }
 

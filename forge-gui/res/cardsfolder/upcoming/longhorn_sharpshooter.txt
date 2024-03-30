@@ -1,0 +1,9 @@
+Name:Longhorn Sharpshooter
+ManaCost:2 R
+Types:Creature Minotaur Rogue
+PT:3/3
+K:Reach
+T:Mode$ BecomesPlotted | ValidCard$ Card.Self | TriggerZones$ Exile | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME becomes plotted, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+K:Plot:3 R
+Oracle:Reach\nWhen Longhorn Sharpshooter becomes plotted, it deals 2 damage to any target.\nPlot {3}{R} (You may pay {3}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

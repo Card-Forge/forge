@@ -1545,7 +1545,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Map<AbilityKey,Object> params = AbilityKey.newMap();
         params.put(AbilityKey.StackSa, tgtSA);
-        params.put(AbilityKey.StackSi, si);
         AbilityKey.addCardZoneTableParams(params, triggerList);
 
         Card movedCard = null;

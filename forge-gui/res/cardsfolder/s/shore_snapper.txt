@@ -2,5 +2,5 @@ Name:Shore Snapper
 ManaCost:2 B
 Types:Creature Beast
 PT:2/2
-A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Islandwalk | SpellDescription$ CARDNAME gains islandwalk until end of turn. (It can't be blocked as long as defending player controls an Island.)
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Landwalk:Island | SpellDescription$ CARDNAME gains islandwalk until end of turn. (It can't be blocked as long as defending player controls an Island.)
 Oracle:{U}: Shore Snapper gains islandwalk until end of turn. (It can't be blocked as long as defending player controls an Island.)

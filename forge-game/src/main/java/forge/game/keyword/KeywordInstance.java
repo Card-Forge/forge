@@ -303,7 +303,15 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      */
     @Override
     public boolean redundant(Collection<KeywordInterface> list) {
-        return !list.isEmpty() && keyword.isMultipleRedundant;
+        if (!keyword.isMultipleRedundant) {
+            return false;
+        }
+        for (KeywordInterface i : list) {
+            if (i.getOriginal().equals(getOriginal())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

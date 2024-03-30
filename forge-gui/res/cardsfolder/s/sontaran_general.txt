@@ -5,7 +5,7 @@ PT:5/5
 K:Trample
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | Execute$ TrigGoad | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, for each opponent, goad up to one target creature that player controls. Those creatures can't block this turn. (Until your next turn, they attack each combat if able and attack a player other than you if able.)
-SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature that opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBNoBlock
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to one target creature that opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBNoBlock
 SVar:DBNoBlock:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ CantBlock
 SVar:CantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.IsRemembered | Description$ Those creatures can't block this turn.
 SVar:OneEach:PlayerCountOpponents$Amount

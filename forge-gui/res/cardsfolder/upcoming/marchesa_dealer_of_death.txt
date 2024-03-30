@@ -1,0 +1,8 @@
+Name:Marchesa, Dealer of Death
+ManaCost:U B R
+Types:Legendary Creature Human Rogue
+PT:3/4
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever you commit a crime, you may pay {1}. If you do, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigDig:AB$ Dig | Cost$ 1 | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard | NoReveal$ True
+DeckHas:Ability$Graveyard
+Oracle:Whenever you commit a crime, you may pay {1}. If you do, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

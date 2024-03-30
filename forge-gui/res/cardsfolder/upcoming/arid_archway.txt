@@ -1,0 +1,11 @@
+Name:Arid Archway
+ManaCost:no cost
+Types:Land Desert
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | RememberLKI$ True | AILogic$ NeverBounceItself | SubAbility$ DBSurveil
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 1 | ConditionDefined$ RememberedLKI | ConditionPresent$ Desert.Other | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Desert
+Oracle:Arid Archway enters the battlefield tapped.\nWhen Arid Archway enters the battlefield, return a land you control to its owner's hand. If another Desert was returned this way, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{T}: Add {C}{C}.

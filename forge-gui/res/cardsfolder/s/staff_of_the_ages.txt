@@ -1,7 +1,7 @@
 Name:Staff of the Ages
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ May be blocked as though it doesn't have landwalk. | Description$ Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
+S:Mode$ IgnoreLandWalk | Description$ Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
