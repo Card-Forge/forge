@@ -1327,6 +1327,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean canTarget(final GameObject entity) {
+        return canTarget(entity, false);
+    }
+    public final boolean canTarget(final GameObject entity, boolean fizzleCheck) {
         if (entity == null) {
             return false;
         }
@@ -1444,7 +1447,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isEqualToughness() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
                         return false;
                     }
@@ -1454,23 +1457,29 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (tr.isSameController() && entity instanceof Card) {
                 Player newController;
                 newController = ((Card) entity).getController();
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.getController().equals(newController))
                         return false;
                 }
             }
 
-            if (tr.isDifferentControllers() && entity instanceof Card) {
-                Player newController;
-                newController = ((Card) entity).getController();
-                for (final Card c : targetChosen.getTargetCards()) {
+            if ((tr.isDifferentControllers() || (tr.isForEachPlayer() && !fizzleCheck)) && entity instanceof Card) {
+                Player newController = ((Card) entity).getController();
+                for (Card c : getTargets().getTargetCards()) {
+                    // can still determine controller only to check whether the other creature is a legal target
+                    c = getHostCard().getGame().getChangeZoneLKIInfo(c);
                     if (entity != c && c.getController().equals(newController))
                         return false;
                 }
             }
 
+            if (tr.isForEachPlayer() && fizzleCheck && entity instanceof Card) {
+                if (getTargets().forEachControllerChanged((Card) entity))
+                    return false;
+            }
+
             if (tr.isWithoutSameCreatureType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.sharesCreatureTypeWith((Card) entity)) {
                         return false;
                     }
@@ -1478,7 +1487,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isWithSameCreatureType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
                         return false;
                     }
@@ -1486,7 +1495,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isWithSameCardType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.sharesCardTypeWith((Card) entity)) {
                         return false;
                     }

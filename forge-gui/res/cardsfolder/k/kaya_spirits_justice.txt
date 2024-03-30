@@ -8,7 +8,7 @@ A:AB$ Surveil | Cost$ AddCounter<2/LOYALTY> | Amount$ 2 | Planeswalker$ True | S
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | SelectPrompt$ Select a card from a graveyard | Mandatory$ True | Hidden$ True
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ wb_1_1_spirit_flying | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DBForEach | SpellDescription$ Exile target creature you control. For each other player, exile up to one target creature that player controls.
-SVar:DBForEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature each other player controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
+SVar:DBForEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature each other player controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True
 SVar:OneEach:PlayerCountOther$Amount
 DeckHas:Ability$Counters|Token & Type$Spirit
 DeckHints:Ability$Token

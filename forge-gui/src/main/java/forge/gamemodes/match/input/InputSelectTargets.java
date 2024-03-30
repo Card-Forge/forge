@@ -241,7 +241,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         // If all cards must have different controllers
-        if (tgt.isDifferentControllers()) {
+        if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             final List<Player> targetedControllers = new ArrayList<>();
             for (final GameObject o : targets) {
                 if (o instanceof Card) {

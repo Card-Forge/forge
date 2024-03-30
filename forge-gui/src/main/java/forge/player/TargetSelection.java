@@ -115,7 +115,7 @@ public class TargetSelection {
 
         List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
-        if (tgt.isDifferentControllers()) {
+        if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
             Iterables.filter(candidates, Card.class).forEach(c -> controllers.add(c.getController()));
             hasEnoughCandidates &= controllers.size() >= minTargets;
