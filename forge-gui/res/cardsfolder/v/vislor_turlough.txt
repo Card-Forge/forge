@@ -5,7 +5,7 @@ PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | OptionalDecider$ You | TriggerDescription$ Deal with the Black Guardian — When CARDNAME enters the battlefield, you may have an opponent gain control of it. If you do, it's goaded for as long as they control it.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ ChosenPlayer | SubAbility$ DBGoad
-SVar:DBGoad:DB$ Goad | Defined$ Self | Duration$ UntilLoseControlOfHost
+SVar:DBGoad:DB$ Goad | Defined$ Self | Duration$ AsLongAsControl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw a card, then you lose life equal to the number of cards in your hand.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
