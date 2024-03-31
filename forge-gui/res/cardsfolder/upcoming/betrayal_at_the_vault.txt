@@ -1,0 +1,7 @@
+Name:Betrayal at the Vault
+ManaCost:4 G G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TgtPrompt$ Select two other target creatures | DamageSource$ ParentTarget | NumDmg$ X | SpellDescription$ deals damage equal to its power to each of two other target creatures.
+SVar:X:ParentTargeted$CardPower
+Oracle:Target creature you control deals damage equal to its power to each of two other target creatures.
