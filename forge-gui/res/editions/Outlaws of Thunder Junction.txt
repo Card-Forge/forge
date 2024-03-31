@@ -53,6 +53,7 @@ ScryfallCode=OTJ
 54 R The Key to the Vault @Leon Tukker
 55 C Loan Shark @Wayne Reynolds
 56 U Marauding Sphinx @Mila Pesic
+57 U Metamorphic Blast @Michal Ivan
 58 U Nimble Brigand @Kim Sokol
 59 U Outlaw Stitcher @Alix Branwyn
 60 C Peerless Ropemaster @Wayne Wu
@@ -119,6 +120,7 @@ ScryfallCode=OTJ
 139 C Quilled Charger @Diego Gisbert
 140 C Reckless Lackey @Edgar Sánchez Hidalgo
 141 U Resilient Roadrunner @David Auden Nash
+142 U Return the Favor @Eli Minaya
 143 C Rodeo Pyromancers @Kim Sokol
 144 U Scalestorm Summoner @Xabi Gaztelua
 145 U Scorching Shot @Caio Monteiro
@@ -137,6 +139,7 @@ ScryfallCode=OTJ
 163 R Freestrider Lookout @Matt Zeilinger
 164 U Full Steam Ahead @Inkognit
 166 U Gold Rush @Eric Wilkerson
+167 M Goldvein Hydra @David Auden Nash
 168 C Hardbristle Bandit @Francis Tneh
 169 U Intrepid Stablemaster @Svetlin Velinov
 170 U Map the Frontier @Darrell Riche
@@ -156,6 +159,7 @@ ScryfallCode=OTJ
 187 C Tumbleweed Rising @Jason Smith
 188 C Voracious Varmint @Adrián Rodríguez Pérez
 190 M Annie Flash, the Veteran @Kieran Yanner
+191 R Annie Joins Up @Wylie Beckert
 192 M Assimilation Aegis @Matt Stewart
 193 U At Knifepoint @Francisco Miyara
 194 U Badlands Revival @Carlos Palma Cruchaga
@@ -173,6 +177,7 @@ ScryfallCode=OTJ
 206 M The Gitrog, Ravenous Ride @Johan Grenier
 207 U Honest Rutstein @Javier Charro
 208 U Intimidation Campaign @Svetlin Velinov
+209 U Jem Lightfoote, Sky Explorer @Darren Tan
 210 U Jolene, Plundering Pugilist @Andreas Zafiratos
 211 R Kambal, Profiteering Mayor @Andreas Zafiratos
 212 R Kellan Joins Up @Wylie Beckert
@@ -202,6 +207,7 @@ ScryfallCode=OTJ
 236 R Vraska Joins Up @Wylie Beckert
 237 M Vraska, the Silencer @Kieran Yanner
 238 U Wrangler of the Damned @Michal Ivan
+239 R Wylie Duke, Atiin Hero @Ekaterina Burmak
 240 U Bandit's Haul @Monztre
 241 U Boom Box @Caio Monteiro
 242 C Gold Pan @Gaboleps
@@ -293,6 +299,7 @@ ScryfallCode=OTJ
 350 R Bruse Tarl, Roving Rancher @Forrest Imel
 351 M Ghired, Mirror of the Wilds @Diego Gisbert
 352 M The Gitrog, Ravenous Ride @Johan Grenier
+353 R Kambal, Profiteering Mayor @Andreas Zafiratos
 354 R Kellan Joins Up @Wylie Beckert
 355 R Laughing Jasper Flint @Francis Tneh
 356 R Lilah, Undefeated Slickshot @Andreas Zafiratos
