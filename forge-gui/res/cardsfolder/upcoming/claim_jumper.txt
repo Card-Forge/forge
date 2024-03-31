@@ -4,9 +4,8 @@ Types:Creature Rabbit Mercenary
 PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ GTY | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped. Then if an opponent controls more lands than you, repeat this process once. If you search your library this way, shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains | ChangeNum$ 1 | RememberChanged$ True | Tapped$ True | NoShuffle$ True | SubAbility$ DBBranch
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GTY | TrueSubAbility$ DBChangeZone | FalseSubAbility$ DBShuffle
-SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains | ChangeNum$ 1 | RememberChanged$ True | Tapped$ True | NoShuffle$ True | SubAbility$ DBShuffle
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Plains | ChangeNum$ 1 | RememberChanged$ True | Tapped$ True | NoShuffle$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | ChangeType$ Land.Plains | ChangeNum$ 1 | RememberChanged$ True | Tapped$ True | NoShuffle$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | ConditionCheckSVar$ Z | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountOpponents$HighestValid Land.YouCtrl
