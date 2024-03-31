@@ -30,6 +30,7 @@ import com.google.common.collect.Sets;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.spellability.SpellAbility;
@@ -95,6 +96,14 @@ public class TriggerChangesZone extends Trigger {
             if (ArrayUtils.contains(
                 getParam("ExcludedDestinations").split(","), runParams.get(AbilityKey.Destination)
             )) {
+                return false;
+            }
+        }
+
+        if ("Battlefield".equals(getParam("Origin")) && getActiveZone() != null && getActiveZone().contains(ZoneType.Graveyard)) {
+            // extra check for Boneyard Scourge
+            CardCollectionView lastState = (CardCollectionView) runParams.get(AbilityKey.LastStateGraveyard);
+            if (!lastState.contains(getHostCard())) {
                 return false;
             }
         }
