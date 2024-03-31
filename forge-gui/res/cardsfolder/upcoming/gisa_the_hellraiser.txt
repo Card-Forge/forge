@@ -1,0 +1,11 @@
+Name:Gisa, the Hellraiser
+ManaCost:3 B B
+Types:Legendary Creature Human Warlock
+PT:4/4
+K:Ward:2 PayLife<2>
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl,Skeleton.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | Description$ Skeletons and Zombies you control get +1/+1 and have menace.
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ ub_2_2_zombie_rogue | TokenTapped$ True | TokenOwner$ You
+DeckHas:Ability$Token & Type$Zombie|Rogue & Color$Blue
+DeckHints:Type$Zombie|Skeleton
+Oracle:Ward—{2}, Pay 2 life.\nSkeletons and Zombies you control get +1/+1 and have menace.\nWhenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue creature tokens. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyard is a crime.)
