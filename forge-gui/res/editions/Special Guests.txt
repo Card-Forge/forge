@@ -49,5 +49,6 @@ ScryfallCode=SPG
 35 R Mystic Snake @Svetlin Velinov
 36 R Notion Thief @Alix Branwyn
 37 U Desert @Lucas Graciano
+38 M Prismatic Vista @Sam Burley
 44 M Solitude @Campbell White
 49 M Solitude @Campbell White
