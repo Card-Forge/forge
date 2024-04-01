@@ -324,6 +324,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
     private final List<GameCommand> faceupCommandList = Lists.newArrayList();
     private final List<GameCommand> facedownCommandList = Lists.newArrayList();
+    private final List<GameCommand> phaseOutCommandList = Lists.newArrayList();
     private final List<Object[]> staticCommandList = Lists.newArrayList();
 
     // Zone-changing spells should store card's zone here
@@ -3518,6 +3519,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addChangeControllerCommand(final GameCommand c) {
         changeControllerCommandList.add(c);
     }
+    public final void addPhaseOutCommand(final GameCommand c) {
+        phaseOutCommandList.add(c);
+    }
 
     public final List<GameCommand> getLeavesPlayCommands() {
         return leavePlayCommandList;
@@ -3561,6 +3565,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         changeControllerCommandList.clear();
+    }
+    public final void runPhaseOutCommands() {
+        for (final GameCommand c : phaseOutCommandList) {
+            c.run();
+        }
+        phaseOutCommandList.clear();
     }
 
     public final void setSickness(boolean sickness0) {
@@ -5542,9 +5552,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, true);
-            // when it doesn't exist the game will no longer see it as tapped
-            runUntapCommands();
-            // TODO CR 702.26f need to run LeavesPlay + changeController commands but only when worded "for as long as"
+            // CR 702.26f
+            runPhaseOutCommands();
 
             // these links also break
             clearEncodedCards();

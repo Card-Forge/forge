@@ -4,5 +4,5 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target Spirit card from your graveyard to your hand.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select target Spirit card in your graveyard | ValidTgts$ Spirit.YouCtrl
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target Spirit card in your graveyard | ValidTgts$ Spirit.YouCtrl
 Oracle:Flying\nAt the beginning of your upkeep, return target Spirit card from your graveyard to your hand.
