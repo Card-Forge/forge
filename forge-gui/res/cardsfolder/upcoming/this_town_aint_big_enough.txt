@@ -1,0 +1,6 @@
+Name:This Town Ain't Big Enough
+ManaCost:4 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Permanent.YouCtrl | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a permanent you control.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Return up to two target nonland permanents to their owner's hands.
+Oracle:This spell costs {3} less to cast if it targets a permanent you control.\nReturn up to two target nonland permanents to their owners' hands.
