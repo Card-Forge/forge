@@ -1,0 +1,9 @@
+Name:Desperate Bloodseeker
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills two cards. (They put the top two cards of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player
+DeckHas:Ability$LifeGain|Mill
+Oracle:Lifelink\nWhen Desperate Bloodseeker enters the battlefield, target player mills two cards. (They put the top two cards of their library into their graveyard.)
