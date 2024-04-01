@@ -24,6 +24,7 @@ Antelope:Antelopes
 Ape:Apes
 Archer:Archers
 Archon:Archons
+Armadillo:Armadillos
 Artificer:Artificers
 Army:Armies
 Assassin:Assassins
@@ -67,6 +68,7 @@ Cockatrice:Cockatrices
 Construct:Constructs
 Cow:Cows
 Coward:Cowards
+Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
 Cyberman:Cybermen

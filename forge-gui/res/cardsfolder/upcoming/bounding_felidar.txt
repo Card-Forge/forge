@@ -1,0 +1,11 @@
+Name:Bounding Felidar
+ManaCost:5 W
+Types:Creature Cat Beast Mount
+PT:4/7
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME attacks while saddled, put a +1/+1 counter on each other creature you control. You gain 1 life for each of those creatures.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Creature.YouCtrl+StrictlyOther
+K:Saddle:2
+DeckHas:Ability$Counters|LifeGain
+Oracle:Whenever Bounding Felidar attacks while saddled, put a +1/+1 counter on each other creature you control. You gain 1 life for each of those creatures.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

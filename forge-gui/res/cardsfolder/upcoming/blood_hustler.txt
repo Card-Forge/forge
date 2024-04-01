@@ -1,0 +1,10 @@
+Name:Blood Hustler
+ManaCost:1 B
+Types:Creature Vampire Rogue
+PT:1/1
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ LoseLife | Cost$ 3 B | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain|Counters
+Oracle:Whenever you commit a crime, put a +1/+1 counter on Blood Hustler. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n{3}{B}: Target opponent loses 1 life and you gain 1 life.
