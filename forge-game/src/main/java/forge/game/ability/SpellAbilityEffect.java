@@ -940,6 +940,12 @@ public abstract class SpellAbilityEffect {
         if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
             return false;
         }
+        if ("UntilTargetedUntaps".equals(sa.getParam("Duration"))) {
+            Card tgt = sa.getSATargetingCard().getTargetCard();
+            if (!tgt.isTapped() || tgt.isPhasedOut()) {
+                return false;
+            }
+        }
         return true;
     }
 
