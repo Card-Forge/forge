@@ -1,0 +1,9 @@
+Name:Tumbleweed Rising
+ManaCost:1 G
+Types:Sorcery
+K:Plot:2 G
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Elemental creature token, where X is the greatest power among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:NeedsToPlay:Creature.YouCtrl
+DeckHas:Ability$Token & Type$Elemental
+Oracle:Create an X/X green Elemental creature token, where X is the greatest power among creatures you control.\nPlot {2}{G} (You may pay {2}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
