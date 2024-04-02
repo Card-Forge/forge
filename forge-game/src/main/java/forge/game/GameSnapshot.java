@@ -194,10 +194,21 @@ public class GameSnapshot {
         Game toGame = toPlayer.getGame();
         toPlayer.getManaPool().resetPool();
         for (Mana m : fromPlayer.getManaPool()) {
-            // TODO the mana object here needs to be copied to the new game
-            toPlayer.getManaPool().addMana(m, false);
+            toPlayer.getManaPool().addMana(copyMana(m, toGame), false);
         }
         toPlayer.updateManaForView();
+    }
+
+    private Mana copyMana(Mana m, Game toGame) {
+        Card fromCard = m.getSourceCard();
+        Card toCard = findBy(toGame, fromCard);
+        // Are we copying over mana abilities properly?
+        if (toCard == null) {
+            return m;
+        }
+        Mana newMana = new Mana(m.getColor(), toCard, m.getManaAbility());
+        newMana.getManaAbility().setSourceCard(toCard);
+        return newMana;
     }
 
     private void copyStack(Game fromGame, Game toGame, boolean restore) {
