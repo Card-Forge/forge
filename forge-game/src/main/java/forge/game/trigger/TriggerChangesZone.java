@@ -121,7 +121,7 @@ public class TriggerChangesZone extends Trigger {
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
             }
 
-            if (!matchesValid(moved, getParam("ValidCard").split(","))) {
+            if (!matchesValidParam("ValidCard", moved)) {
                 return false;
             }
         }

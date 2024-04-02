@@ -127,7 +127,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
                 for (final GameEntity ge : sa.getTargets().getTargetEntities()) {
-                    if (matchesValid(ge, getParam("TargetsValid").split(","))) {
+                    if (matchesValidParam("TargetsValid", ge)) {
                         validTgtFound = true;
                         break;
                     }
