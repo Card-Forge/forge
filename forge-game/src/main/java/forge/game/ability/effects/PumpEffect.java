@@ -377,7 +377,7 @@ public class PumpEffect extends SpellAbilityEffect {
             for (final Card c : AbilityUtils.getDefinedCards(host, landtype, sa)) {
                 for (String type : c.getType()) {
                     if (CardType.isALandType(type)) {
-                        keywords.add(type + "walk");
+                        keywords.add("Landwalk:" +type);
                     }
                 }
             }
