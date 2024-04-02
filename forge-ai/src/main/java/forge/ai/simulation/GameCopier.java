@@ -363,6 +363,7 @@ public class GameCopier {
             newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
 
             newCard.setPTBoost(c.getPTBoostTable());
+            newCard.setSwitchPTTable(c.getSwitchPTTable());
             // TODO copy by map
             newCard.setDamage(c.getDamage());
             newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());

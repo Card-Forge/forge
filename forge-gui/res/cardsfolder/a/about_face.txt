@@ -1,6 +1,5 @@
 Name:About Face
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn.
-AI:RemoveDeck:All
+A:SP$ Pump | ValidTgts$ Creature | SwitchPT$ True | SpellDescription$ Switch target creature's power and toughness until end of turn.
 Oracle:Switch target creature's power and toughness until end of turn.
