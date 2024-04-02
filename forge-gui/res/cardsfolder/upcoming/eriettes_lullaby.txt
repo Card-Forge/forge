@@ -1,0 +1,7 @@
+Name:Eriette's Lullaby
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target tapped creature.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+DeckHas:Ability$LifeGain
+Oracle:Destroy target tapped creature. You gain 2 life.

@@ -1,0 +1,7 @@
+Name:Failed Fording
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBSurveil | SpellDescription$ Return target nonland permanent to its owner's hand.
+SVar:DBSurveil:DB$ Surveil | Amount$ 1 | ConditionPresent$ Desert.YouCtrl | ConditionCompare$ GE1 | SpellDescription$ If you control a Desert, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+DeckHints:Type$Desert
+Oracle:Return target nonland permanent to its owner's hand. If you control a Desert, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

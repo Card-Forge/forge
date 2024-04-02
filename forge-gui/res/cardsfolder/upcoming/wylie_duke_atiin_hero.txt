@@ -1,0 +1,10 @@
+Name:Wylie Duke, Atiin Hero
+ManaCost:1 G W
+Types:Legendary Creature Human Ranger
+PT:4/2
+K:Vigilance
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME becomes tapped, you gain 1 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$LifeGain
+Oracle:Vigilance\nWhenever Wylie Duke, Atiin Hero becomes tapped, you gain 1 life and draw a card.

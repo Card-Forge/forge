@@ -3398,8 +3398,8 @@ public class AbilityUtils {
             final CardCollectionView someCards = player.getLandsInPlay();
             final List<String> basic = MagicColor.Constant.BASIC_LANDS;
 
-            for (int i = 0; i < basic.size(); i++) {
-                if (!CardLists.getType(someCards, basic.get(i)).isEmpty()) {
+            for (String type : basic) {
+                if (!CardLists.getType(someCards, type).isEmpty()) {
                     n++;
                 }
             }

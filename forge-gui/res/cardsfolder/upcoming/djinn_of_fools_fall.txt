@@ -1,0 +1,7 @@
+Name:Djinn of Fool's Fall
+ManaCost:4 U
+Types:Creature Djinn
+PT:4/3
+K:Flying
+K:Plot:3 U
+Oracle:Flying\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
