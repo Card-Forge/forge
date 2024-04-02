@@ -60,6 +60,10 @@ public class TriggerAttached extends Trigger {
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.AttachTarget))) {
             return false;
         }
+        if (!matchesValidParam("TargetRelativeToSource", runParams.get(AbilityKey.AttachTarget),
+                (Card) runParams.get(AbilityKey.AttachSource))) {
+            return false;
+        }
         
         return true;
     }
