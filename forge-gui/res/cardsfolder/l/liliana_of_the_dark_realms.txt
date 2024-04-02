@@ -2,7 +2,7 @@ Name:Liliana of the Dark Realms
 ManaCost:2 B B
 Types:Legendary Planeswalker Liliana
 Loyalty:3
-A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Hand | Planeswalker$ True | NumCards$ 1 | ChangeType$ Swamp | Mandatory$ True | SpellDescription$ Search your library for a swamp card, reveal it, put it into your hand, then shuffle.
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Hand | Planeswalker$ True | NumCards$ 1 | ChangeType$ Swamp | SpellDescription$ Search your library for a swamp card, reveal it, put it into your hand, then shuffle.
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ ABChoice | SpellDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control. | StackDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Liliana Of The Dark Realms | Image$ emblem_liliana_of_the_dark_realms | StaticAbilities$ SwampBoost | Stackable$ False | Duration$ Permanent | SpellDescription$ You get an emblem with "Swamps you control have '{T}: Add {B}{B}{B}{B}.'".
 SVar:X:Count$Valid Swamp.YouCtrl

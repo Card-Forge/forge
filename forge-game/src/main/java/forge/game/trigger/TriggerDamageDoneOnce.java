@@ -91,7 +91,7 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
         CardCollection result = new CardCollection();
         for (Card c : damageMap.keySet()) {
-            if (matchesValid(c, getParam("ValidSource").split(","))) {
+            if (matchesValidParam("ValidSource", c)) {
                 result.add(c);
             }
         }

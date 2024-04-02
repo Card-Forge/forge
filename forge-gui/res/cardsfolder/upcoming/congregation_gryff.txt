@@ -1,0 +1,13 @@
+Name:Congregation Gryff
+ManaCost:1 G W
+Types:Creature Hippogriff Mount
+PT:1/4
+K:Flying
+K:Lifelink
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while saddled, it gets +X/+X until end of turn, where X is the number of Mounts you control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X
+SVar:X:Count$Valid Mount.YouCtrl
+K:Saddle:3
+DeckHints:Type$Mount
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nWhenever Congregation Gryff attacks while saddled, it gets +X/+X until end of turn, where X is the number of Mounts you control.\nSaddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

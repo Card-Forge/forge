@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:3/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target card from a graveyard.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | Mandatory$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card
 K:Unearth:1 B
 DeckHas:Ability$Graveyard
 DeckHints:Color$Black

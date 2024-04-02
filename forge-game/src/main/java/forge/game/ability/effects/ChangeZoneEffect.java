@@ -112,8 +112,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         final String cardTag = type.contains("card") ? "" : " card";
 
-        final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
-                sa.getParam("ChangeNum"), sa) : 1;
+        final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa) : 1;
         boolean tapped = sa.hasParam("Tapped");
         boolean attacking = sa.hasParam("Attacking");
         if (sa.isNinjutsu()) {
@@ -952,11 +951,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
-            // this needs to be zero indexed. Top = 0, Third = 2
-            int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
-
-            int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
-
             if (sa.hasParam("Optional")) {
                 String prompt;
                 if (sa.hasParam("OptionalPrompt")) {
@@ -970,7 +964,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 String message = MessageUtil.formatMessage(prompt , decider, player);
                 if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message, null)) {
-                    return;
+                    continue;
                 }
             }
 
@@ -979,6 +973,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (player.isControlled()) {
                 origin.remove(ZoneType.Sideboard);
             }
+
+            // this needs to be zero indexed. Top = 0, Third = 2
+            int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
+
+            int changeNum = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(source, sa.getParam("ChangeNum"), sa) : 1;
 
             CardCollection fetchList;
             boolean shuffleMandatory = true;
@@ -1078,6 +1077,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (!defined && !changeType.equals("") && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
+            fetchList.sort();
 
             if (sa.hasParam("NoShuffle") || "False".equals(sa.getParam("Shuffle"))) {
                 shuffleMandatory = false;
@@ -1095,8 +1095,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final String totalpower = sa.getParam("WithTotalPower");
             int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
             int totpower = AbilityUtils.calculateAmount(source, totalpower, sa);
-
-            fetchList.sort();
 
             CardCollection chosenCards = new CardCollection();
             if (changeType.startsWith("EACH")) {

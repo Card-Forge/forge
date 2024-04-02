@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Read ahead
 K:Chapter:3:DBPhase,DBPhase,DBDestroyAll
 SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | TgtPrompt$ Select another target nonland permanent | SubAbility$ DBEffect | SpellDescription$ Another target nonland permanent phases out. It can't phase in for as long as you control CARDNAME.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ CantPhaseIn | RememberObjects$ Targeted | Duration$ UntilLoseControlOfHost
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantPhaseIn | RememberObjects$ Targeted | Duration$ AsLongAsControl
 SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | Description$ It can't phase in for as long as you control EFFECTSOURCE.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. For each creature destroyed this way, its controller creates a 2/2 black Phyrexian creature token.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True

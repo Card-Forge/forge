@@ -1,0 +1,9 @@
+Name:Cactusfolk Sureshot
+ManaCost:2 R G
+Types:Creature Plant Mercenary
+PT:4/4
+K:Reach
+K:Ward:2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, other creatures you control with power 4 or greater gain trample and haste until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl+powerGE4 | KW$ Trample & Haste
+Oracle:Reach\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nAt the beginning of combat on your turn, other creatures you control with power 4 or greater gain trample and haste until end of turn.

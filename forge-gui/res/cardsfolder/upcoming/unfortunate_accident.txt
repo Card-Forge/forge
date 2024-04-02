@@ -1,0 +1,9 @@
+Name:Unfortunate Accident
+ManaCost:B
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBMurder,DBRecruit | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBMurder:DB$ Destroy | SpreeCost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+SVar:DBRecruit:DB$ Token | SpreeCost$ 1 | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You | SpellDescription$ Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+DeckHas:Ability$Token & Type$Mercenary & Color$Red
+Oracle:Spree (Choose one or more additional costs.)\n+ {2}{B} — Destroy target creature.\n+ {1} — Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

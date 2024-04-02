@@ -1,0 +1,10 @@
+Name:Bridled Bighorn
+ManaCost:3 W
+Types:Creature Sheep Mount
+PT:3/4
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks while saddled, create a 1/1 white Sheep creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_sheep
+K:Saddle:2
+DeckHas:Ability$Token
+Oracle:Vigilance\nWhenever Bridled Bighorn attacks while saddled, create a 1/1 white Sheep creature token.\nSaddle 2

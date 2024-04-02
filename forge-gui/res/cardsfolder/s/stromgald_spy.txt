@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Human Rogue
 PT:2/4
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have defending player play with their hand revealed for as long as CARDNAME remains on the battlefield. If you do, CARDNAME assigns no combat damage this turn.
-SVar:TrigExile:DB$ Effect | StaticAbilities$ STRevealHand | RememberObjects$ DefendingPlayer | Duration$ UntilHostLeavesPlay | SubAbility$ DBPump
+SVar:TrigExile:DB$ Effect | StaticAbilities$ STRevealHand | RememberObjects$ DefendingPlayer | Duration$ AsLongAsInPlay | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:STRevealHand:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.RememberedPlayerOwn | MayLookAt$ Player | Description$ The defending player plays with their hand revealed.
 AI:RemoveDeck:All

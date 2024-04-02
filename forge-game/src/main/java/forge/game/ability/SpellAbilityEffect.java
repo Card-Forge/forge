@@ -892,9 +892,17 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilLoseControlOfHost".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addChangeControllerCommand(until);
+        } else if ("AsLongAsControl".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            host.addChangeControllerCommand(until);
+            host.addPhaseOutCommand(until);
+        } else if ("AsLongAsInPlay".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            host.addPhaseOutCommand(until);
         } else if ("UntilUntaps".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addUntapCommand(until);
+            host.addPhaseOutCommand(until);
         } else if ("UntilTargetedUntaps".equals(duration)) {
             Card tgt = sa.getSATargetingCard().getTargetCard();
             tgt.addLeavesPlayCommand(until);
@@ -902,6 +910,7 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUnattached".equals(duration)) {
             host.addLeavesPlayCommand(until); //if it leaves play, it's unattached
             host.addUnattachCommand(until);
+            host.addPhaseOutCommand(until);
         } else if ("UntilFacedown".equals(duration)) {
             host.addFacedownCommand(until);
         } else {
@@ -917,15 +926,25 @@ public abstract class SpellAbilityEffect {
 
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if ((duration.startsWith("UntilHostLeavesPlay") || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
+        if ((duration.startsWith("UntilHostLeavesPlay") || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration)
+                || "AsLongAsControl".equals(duration) || "AsLongAsInPlay".equals(duration))
                 && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return false;
         }
-        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+        if (("AsLongAsControl".equals(duration) || "AsLongAsInPlay".equals(duration)) && hostCard.isPhasedOut()) {
+            return false;
+        }
+        if (("UntilLoseControlOfHost".equals(duration) || "ForAsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
             return false;
         }
         if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
             return false;
+        }
+        if ("UntilTargetedUntaps".equals(sa.getParam("Duration"))) {
+            Card tgt = sa.getSATargetingCard().getTargetCard();
+            if (!tgt.isTapped() || tgt.isPhasedOut()) {
+                return false;
+            }
         }
         return true;
     }

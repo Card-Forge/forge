@@ -1,0 +1,8 @@
+Name:Double Down
+ManaCost:3 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidCard$ Card.Outlaw | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an outlaw spell, copy that spell. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Copies of permanent spells become tokens.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+DeckHas:Ability$Token
+Oracle:Whenever you cast an outlaw spell, copy that spell. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Copies of permanent spells become tokens.)

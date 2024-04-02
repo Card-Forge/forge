@@ -1,0 +1,12 @@
+Name:Roxanne, Starfall Savant
+ManaCost:3 R G
+Types:Legendary Creature Cat Druid
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a tapped colorless artifact token named Meteorite with "When Meteorite enters the battlefield, it deals 2 damage to any target" and "{T}: Add one mana of any color."
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a tapped colorless artifact token named Meteorite with "When Meteorite enters the battlefield, it deals 2 damage to any target" and "{T}: Add one mana of any color."
+SVar:TrigToken:DB$ Token | TokenScript$ meteorite | TokenAmount$ 1 | TokenTapped$ True | TokenOwner$ You
+T:Mode$ TapsForMana | ValidCard$ Artifact.token | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap an artifact token for mana, add one mana of any type that permanent produced.
+SVar:TrigMana:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
+DeckHas:Ability$Token & Type$Artifact
+DeckHints:Ability$Token & Type$Artifact|Token
+Oracle:Whenever Roxanne, Starfall Savant enters the battlefield or attacks, create a tapped colorless artifact token named Meteorite with "When Meteorite enters the battlefield, it deals 2 damage to any target" and "{T}: Add one mana of any color."\nWhenever you tap an artifact token for mana, add one mana of any type that artifact token produced.
