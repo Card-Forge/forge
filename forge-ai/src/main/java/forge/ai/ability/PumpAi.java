@@ -499,7 +499,7 @@ public class PumpAi extends PumpAiBase {
                             return false;
                         }
                         // check if switching PT causes it to be lethal
-                        Card lki = CardUtil.getLKICopy(input);
+                        Card lki = CardCopyService.getLKICopy(input);
                         lki.addSwitchPT(-1, 0);
 
                         // check if creature could regenerate
