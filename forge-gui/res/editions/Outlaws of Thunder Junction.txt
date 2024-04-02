@@ -14,6 +14,7 @@ ScryfallCode=OTJ
 6 U Bovine Intervention @Julia Metzger
 7 C Bridled Bighorn @Edgar Sánchez Hidalgo
 8 R Claim Jumper @Gaboleps
+9 R Dust Animus @Uriah Voth
 10 C Eriette's Lullaby @Anton Solovianchyk
 11 M Final Showdown @Izzy
 12 R Fortune, Loyal Steed @Artur Nakhodkin
@@ -27,20 +28,25 @@ ScryfallCode=OTJ
 20 U Nurturing Pixie @Iris Compiet
 21 U Omenport Vigilante @Forrest Imel
 22 R One Last Job @Caroline Gariba
+23 C Outlaw Medic @Nino Vecia
 24 U Prairie Dog @Kevin Sidharta
 25 U Prosperity Tycoon @Caio Monteiro
 26 U Requisition Raid @Viko Menezes
 27 U Rustler Rampage @Josu Hernaiz
 28 U Shepherd of the Clouds @Valera Lutfullina
 29 U Sheriff of Safe Passage @Brian Valeza
+30 C Stagecoach Security @Nino Vecia
 31 C Steer Clear @Edgar Sánchez Hidalgo
 32 C Sterling Keykeeper @David Astruga
+33 C Sterling Supplier @Camille Alquier
+34 C Take Up the Shield @Josiah "Jo" Cameron
 35 U Thunder Lasso @Camille Alquier
 36 C Trained Arynx @Milivoj Ćeran
 37 C Vengeful Townsfolk @Irina Nordsol
 38 C Wanted Griffin @Alexandre Honoré
 39 R Archmage's Newt @Edgar Sánchez Hidalgo
 40 U Canyon Crab @Ignatius Budi
+41 C Daring Thunder-Thief @Inkognit
 42 U Deepmuck Desperado @Loïc Canavaggia
 43 C Djinn of Fool's Fall @Inkognit
 44 M Double Down @Javier Charro
@@ -50,6 +56,9 @@ ScryfallCode=OTJ
 48 R Fblthp, Lost on the Range @Brian Valeza
 49 U Fleeting Reflection @Camille Alquier
 50 M Geralf, the Fleshwright @Chris Rahn
+51 C Geyser Drake @Daniel Romanovsky
+52 C Harrier Strix @Brian Valeza
+53 C Jailbreak Scheme @Inkognit
 54 R The Key to the Vault @Leon Tukker
 55 C Loan Shark @Wayne Reynolds
 56 U Marauding Sphinx @Mila Pesic
@@ -57,8 +66,10 @@ ScryfallCode=OTJ
 58 U Nimble Brigand @Kim Sokol
 59 U Outlaw Stitcher @Alix Branwyn
 60 C Peerless Ropemaster @Wayne Wu
+61 C Phantom Interference @Ruxing Gao
 62 U Plan the Heist @Fariba Khamseh
 63 C Razzle-Dazzler @Wayne Wu
+64 C Seize the Secrets @Miranda Meeks
 65 U Shackle Slinger @Josh Hass
 66 U Shifting Grift @Marzena Nereida Piwowar
 67 U Slickshot Lockpicker @Wei Wei
@@ -66,14 +77,20 @@ ScryfallCode=OTJ
 69 C Spring Splasher @Loïc Canavaggia
 70 R Step Between Worlds @Chris Ostrowski
 71 R Stoic Sphinx @Andreas Zafiratos
+72 C Stop Cold @David Astruga
+73 C Take the Fall @Eduardo Francisco
 74 U This Town Ain't Big Enough @Andrew Mar
 75 R Three Steps Ahead @Francisco Miyara
 76 U Visage Bandit @Miranda Meeks
+77 C Ambush Gigapede @Kekai Kotaki
 78 U Binding Negotiation @Caroline Gariba
 79 C Blacksnag Buzzard @Michele Giorgi
 80 U Blood Hustler @Anna Pavleeva
 81 C Boneyard Desecrator @Maxime Minard
 82 R Caustic Bronco @Brent Hollowell
+83 C Consuming Ashes @Campbell White
+84 C Corrupted Conviction @Inkognit
+85 C Desert's Due @David Palumbo
 86 C Desperate Bloodseeker @Camille Alquier
 87 C Fake Your Own Death @Monztre
 88 U Forsaken Miner @Andrey Kuzinskiy
@@ -82,7 +99,10 @@ ScryfallCode=OTJ
 91 R Insatiable Avarice @Scott Murphy
 92 R Kaervek, the Punisher @Cristi Balanescu
 93 U Lively Dirge @Warren Mahy
+94 C Mourner's Surprise @Zuzanna Wużyk
 95 U Neutralize the Guards @Marzena Nereida Piwowar
+96 C Nezumi Linkbreaker @Miro Petrov
+97 C Overzealous Muscle @Sam White
 98 R Pitiless Carnage @Richard Kane Ferguson
 99 U Rakish Crew @Ilse Gort
 100 U Rattleback Apothecary @Loïc Canavaggia
@@ -92,16 +112,19 @@ ScryfallCode=OTJ
 104 R Rush of Dread @Chris Seaman
 105 U Servant of the Stinger @Steven Russell Black
 106 U Shoot the Sheriff @Fariba Khamseh
+107 C Skulduggery @Miro Petrov
 108 R Tinybones Joins Up @Wylie Beckert
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
 110 U Treasure Dredger @Marzena Nereida Piwowar
 111 U Unfortunate Accident @Josiah "Jo" Cameron
 112 U Unscrupulous Contractor @Mila Pesic
 113 R Vadmir, New Blood @Andreas Zafiratos
+114 C Vault Plunderer @Evyn Fong
 115 U Brimstone Roundup @Milivoj Ćeran
 116 R Calamity, Galloping Inferno @Artur Nakhodkin
 117 U Caught in the Crossfire @Xabi Gaztelua
 118 U Cunning Coyote @David Auden Nash
+119 C Deadeye Duelist @Diana Cearley
 120 U Demonic Ruckus @Andrew Mar
 121 C Discerning Peddler @Josu Hernaiz
 122 C Explosive Derailment @Leon Tukker
@@ -111,12 +134,16 @@ ScryfallCode=OTJ
 126 R Hell to Pay @Liiga Smilshkalne
 127 U Hellspur Brute @Caio Monteiro
 128 R Hellspur Posse Boss @Artur Nakhodkin
+129 C Highway Robbery @Scott Murphy
 130 C Irascible Wolverine @Darrell Riche
+131 C Iron-Fist Pulverizer @Xabi Gaztelua
 132 U Longhorn Sharpshooter @Diego Gisbert
 133 R Magda, the Hoardmaster @Diego Gisbert
 134 U Magebane Lizard @Camille Alquier
 135 C Mine Raider @Warren Mahy
 136 C Outlaws' Fury @Diego Gisbert
+137 C Prickly Pair @Brian Valeza
+138 C Quick Draw @Lie Setiawan
 139 C Quilled Charger @Diego Gisbert
 140 C Reckless Lackey @Edgar Sánchez Hidalgo
 141 U Resilient Roadrunner @David Auden Nash
@@ -128,7 +155,10 @@ ScryfallCode=OTJ
 147 R Stingerback Terror @Slawomir Maniak
 148 U Take for a Ride @Artur Treffner
 149 M Terror of the Peaks @Joshua Raphael
+150 C Thunder Salvo @Johann Bodin
+151 C Trick Shot @Brian Valeza
 152 U Aloe Alchemist @Borja Pindado
+153 C Ankle Biter @Monztre
 154 U Beastbond Outcaster @Viko Menezes
 155 U Betrayal at the Vault @Andreas Zafiratos
 156 C Bristlepack Sentry @Josiah "Jo" Cameron
@@ -136,8 +166,11 @@ ScryfallCode=OTJ
 158 C Cactarantula @Filip Burburan
 159 R Colossal Rattlewurm @Filip Burburan
 160 C Dance of the Tumbleweeds @Dan Murayama Scott
+161 C Drover Grizzly @Adrián Rodríguez Pérez
+162 C Freestrider Commando @Adrián Rodríguez Pérez
 163 R Freestrider Lookout @Matt Zeilinger
 164 U Full Steam Ahead @Inkognit
+165 C Giant Beaver @Lars Grant-West
 166 U Gold Rush @Eric Wilkerson
 167 M Goldvein Hydra @David Auden Nash
 168 C Hardbristle Bandit @Francis Tneh
@@ -153,11 +186,15 @@ ScryfallCode=OTJ
 178 C Reach for the Sky @Villarrte
 179 U Rise of the Varmints @Ralph Horsley
 180 R Smuggler's Surprise @Jonas De Ro
+181 C Snakeskin Veil @Dan Murayama Scott
 182 U Spinewoods Armadillo @Iris Compiet
+183 C Spinewoods Paladin @Kai Carpenter
 184 U Stubborn Burrowfiend @Ângelo Bortolini
+185 C Throw from the Saddle @Eilene Cherie
 186 U Trash the Town @David Auden Nash
 187 C Tumbleweed Rising @Jason Smith
 188 C Voracious Varmint @Adrián Rodríguez Pérez
+189 R Akul the Unrepentant @Kekai Kotaki
 190 M Annie Flash, the Veteran @Kieran Yanner
 191 R Annie Joins Up @Wylie Beckert
 192 M Assimilation Aegis @Matt Stewart
@@ -216,10 +253,13 @@ ScryfallCode=OTJ
 245 U Mobile Homestead @Artur Nakhodkin
 246 C Oasis Gardener @Kristina Carroll
 247 U Redrock Sentinel @Milivoj Ćeran
+248 C Silver Deputy @Artur Nakhodkin
+249 C Sterling Hound @Leon Tukker
 250 U Tomb Trawler @Anton Solovianchyk
 251 C Abraded Bluffs @Piotr Dura
 252 U Arid Archway @Raymond Bonilla
 253 C Bristling Backwoods @Viko Menezes
+254 C Conduit Pylons @Raymond Bonilla
 255 C Creosote Heath @Leon Tukker
 256 C Eroded Canyon @Piotr Dura
 257 C Festering Gulch @Daniel Romanovsky
@@ -227,6 +267,7 @@ ScryfallCode=OTJ
 259 C Jagged Barrens @Leonardo Borazio
 260 C Lonely Arroyo @Josu Hernaiz
 261 C Lush Oasis @Piotr Dura
+262 C Mirage Mesa @Andrew Mar
 263 U Sandstorm Verge @Jorge Jacinto
 264 C Soured Springs @Leonardo Borazio
 265 U Bucolic Ranch @Leonardo Borazio
@@ -265,9 +306,11 @@ ScryfallCode=OTJ
 308 M Archangel of Tithes @Denys Tsiperko
 309 R Aven Interrupter @Daniel Romanovsky
 310 R Claim Jumper @Gaboleps
+311 R Dust Animus @Uriah Voth
 312 M Final Showdown @Izzy
 313 R Fortune, Loyal Steed @Artur Nakhodkin
 314 R High Noon @Eduardo Francisco
+315 R One Last Job @Caroline Gariba
 316 R Archmage's Newt @Edgar Sánchez Hidalgo
 317 M Double Down @Javier Charro
 318 R Duelist of the Mind @Darren Tan
@@ -276,10 +319,13 @@ ScryfallCode=OTJ
 321 R Step Between Worlds @Chris Ostrowski
 322 R Stoic Sphinx @Andreas Zafiratos
 323 R Three Steps Ahead @Francisco Miyara
+324 R Caustic Bronco @Brent Hollowell
 325 R Insatiable Avarice @Scott Murphy
+326 R Pitiless Carnage @Richard Kane Ferguson
 327 R Rush of Dread @Chris Seaman
 328 R Tinybones Joins Up @Wylie Beckert
 329 R Vadmir, New Blood @Andreas Zafiratos
+330 R Calamity, Galloping Inferno @Artur Nakhodkin
 331 R Great Train Heist @Campbell White
 332 R Hell to Pay @Liiga Smilshkalne
 333 R Hellspur Posse Boss @Artur Nakhodkin
@@ -290,10 +336,13 @@ ScryfallCode=OTJ
 338 M Bristly Bill, Spine Sower @Daniel Zrom
 339 R Colossal Rattlewurm @Filip Burburan
 340 R Freestrider Lookout @Matt Zeilinger
+341 M Goldvein Hydra @David Auden Nash
 342 R Ornery Tumblewagg @Izzy
 343 R Outcaster Trailblazer @Denys Tsiperko
 344 M Railway Brawler @Kevin Sidharta
 345 R Smuggler's Surprise @Jonas De Ro
+346 R Akul the Unrepentant @Kekai Kotaki
+347 R Annie Joins Up @Wylie Beckert
 348 M Assimilation Aegis @Matt Stewart
 349 R Bonny Pall, Clearcutter @Bryan Sola
 350 R Bruse Tarl, Roving Rancher @Forrest Imel
@@ -306,11 +355,14 @@ ScryfallCode=OTJ
 357 R Marchesa, Dealer of Death @Ryan Pancoast
 358 R Obeka, Splitter of Seconds @Ryan Pancoast
 359 R Pillage the Bog @Forrest Imel
+360 R Rakdos Joins Up @Wylie Beckert
 361 R Riku of Many Paths @Denys Tsiperko
 362 R Roxanne, Starfall Savant @Ina Wong
 363 M Selvala, Eager Trailblazer @Viko Menezes
+364 R Seraphic Steed @Jonas De Ro
 365 R Taii Wakeen, Perfect Shot @David Auden Nash
 366 R Vraska Joins Up @Wylie Beckert
+367 R Wylie Duke, Atiin Hero @Ekaterina Burmak
 368 U Frontier Seeker @Raluca Marinescu
 369 U Scorching Shot @Caio Monteiro
 370 U Honest Rutstein @Javier Charro
