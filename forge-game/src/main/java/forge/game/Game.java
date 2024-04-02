@@ -401,7 +401,7 @@ public class Game {
     }
 
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
-        PlayerCollection players = getPlayersInTurnOrder();
+        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
 
         int i = players.indexOf(p);
         Collections.rotate(players, -i);

@@ -82,14 +82,10 @@ public class AbilityManaPart implements java.io.Serializable {
 
     // Spells paid with this mana spell can't be countered.
 
-
     /**
      * <p>
      * Dev Mode Constructor for AbilityMana.
      * </p>
-     *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      */
     public AbilityManaPart(final SpellAbility sourceSA, final Map<String, String> params) {
         this(sourceSA.getHostCard(), params);
@@ -108,6 +104,20 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
+    }
+
+    public AbilityManaPart(final Card newSource, AbilityManaPart oldMana) {
+        this.sourceCard = newSource;
+        this.origProduced = oldMana.origProduced;
+        this.manaRestrictions = oldMana.manaRestrictions;
+        this.cannotCounterSpell = oldMana.cannotCounterSpell;
+        this.addsKeywords = oldMana.addsKeywords;
+        this.addsKeywordsType = oldMana.addsKeywordsType;
+        this.addsKeywordsUntil = oldMana.addsKeywordsUntil;
+        this.addsCounters = oldMana.addsCounters;
+        this.triggersWhenSpent = oldMana.triggersWhenSpent;
+        this.persistentMana = oldMana.persistentMana;
+        // Do we need to copy over last mana produced somehow? Its kinda gross
     }
 
     /**
