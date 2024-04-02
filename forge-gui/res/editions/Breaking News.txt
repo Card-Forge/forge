@@ -6,16 +6,51 @@ Type=Collector_Edition
 ScryfallCode=OTP
 
 [cards]
+3 U Journey to Nowhere @Adam Volker
+4 M Leyline Binding @Yohann Schepacz
 6 R Path to Exile @Calder Moore
+7 R Archive Trap @William Tempest
 11 M Mana Drain @Florey
+12 M Mindbreak Trap @Arik Roper
+13 U Repulse @Mark A. Nelson
+14 U Heartless Pillage @Mark A. Nelson
+16 U Murder @Willem Hampson
+19 R Surgical Extraction @Arik Roper
 20 M Thoughtseize @William Tempest
+22 M Crackle with Power @Mark A. Nelson
+23 R Electrodominance @Mark A. Nelson
+24 U Fling @Florey
+26 U Skewer the Critics @Florey
 28 U Clear Shot @Justine Mara Andersen
+32 R Primal Might @Jon Juarez
+33 U Thornado @Yohann Schepacz
+34 R Abrupt Decay @Sean Murray
+35 M Anguished Unmaking @Arik Roper
+37 R Bedevil @Arik Roper
+38 U Buried in the Garden @Justine Mara Andersen
 39 M Crime // Punishment @William Tempest
+41 R Decimate @Yohann Schepacz
+42 U Decisive Denial @Mark A. Nelson
+44 R Endless Detour @Yohann Schepacz
+45 M Fractured Identity @Yohann Schepacz
+47 U Humiliate @Mark A. Nelson
+48 U Hypothesizzle @Mark A. Nelson
 50 M Oko, Thief of Crowns @Michael Walsh
+52 U Ride Down @William Tempest
+53 U Savage Smash @Magnus Jansson
+54 R Siphon Insight @Michal Ivan
+55 U Terminal Agony @Michael Walsh
+58 R Villainous Wealth @Magnus Jansson
+60 R Voidslime @Tyler Crook
+62 M Grindstone @Alejandro Mirabal
+64 R Unlicensed Hearse @Sean Murray
 65 R Dust Bowl @Yohann Schepacz
+66 M Leyline Binding @Yohann Schepacz
 67 M Mana Drain @Florey
 70 M Thoughtseize @William Tempest
+71 M Crackle with Power @Mark A. Nelson
+74 M Anguished Unmaking @Arik Roper
 75 M Crime // Punishment @William Tempest
+76 M Fractured Identity @Yohann Schepacz
 77 M Oko, Thief of Crowns @Michael Walsh
 79 M Grindstone @Alejandro Mirabal
-92 M Grindstone @Alejandro Mirabal
