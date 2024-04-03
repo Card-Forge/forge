@@ -1,0 +1,8 @@
+Name:Emmara, Voice of the Conclave
+ManaCost:1 G W
+Types:Legendary Creature Elf Cleric
+PT:2/3
+K:Convoke
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Ancient Imperiosaur,Conclave Tribunal,Knight-Errant of Eos,Loxodon Restorer,March of the Multitudes,Nissa's Expedition,Overwhelm,Triplicate Spirits,Venerated Loxodon
+Oracle:Convoke\nWhen Emmara, Voice of the Conclave enters the battlefield, draft a card from Emmara, Voice of the Conclave's spellbook.

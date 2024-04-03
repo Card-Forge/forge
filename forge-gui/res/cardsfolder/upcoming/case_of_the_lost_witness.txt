@@ -1,0 +1,11 @@
+Name:Case of the Lost Witness
+ManaCost:1 U
+Types:Enchantment Case
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this Case enters the battlefield, conjure four cards named Fblthp, the Lost into your library, then shuffle. Draw a card.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Fblthp, the Lost | Zone$ Library | Amount$ 4 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Homunculus.YouCtrl+Legendary | IsPresent2$ Card.Self+IsUnsolved | Execute$ TrigSolve | TriggerDescription$ To solve — You control a legendary Homunculus.
+SVar:TrigSolve:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | IsPresent$ Card.Self+IsSolved | AffectedZone$ Library | MayLookAt$ You | MayPlay$ True | Description$ Solved — You may look at the top card of your library any time and you may play lands and cast spells from the top of your library.
+DeckHints:Type$Homunculus
+Oracle:When this Case enters the battlefield, conjure four cards named Fblthp, the Lost into your library, then shuffle. Draw a card.\nTo solve — You control a legendary Homunculus.\nSolved — You may look at the top card of your library any time and you may play lands and cast spells from the top of your library.
