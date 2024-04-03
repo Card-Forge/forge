@@ -259,6 +259,7 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                 } else {
+                    // TODO look for "exiled until leaves" of own stuff
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
                 //option to hold removal instead only applies for single targeted removal

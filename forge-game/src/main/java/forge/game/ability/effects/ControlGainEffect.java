@@ -84,7 +84,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
             sb.append(" until end of turn.");
         }
 
-
         return sb.toString();
     }
 

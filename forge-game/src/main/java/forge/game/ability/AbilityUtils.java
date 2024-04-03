@@ -2228,7 +2228,7 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[player.hasThreshold() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("CommittedCrimeThisTurn")) {
-            return doXMath(calculateAmount(c, sq[player.getCommitedCrimeThisTurn() > 0 ? 1 : 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[player.getCommittedCrimeThisTurn() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("ExtraTurn")) {
             return doXMath(calculateAmount(c, sq[game.getPhaseHandler().getPlayerTurn().isExtraTurn() ? 1 : 2], ctb), expr, c, ctb);
