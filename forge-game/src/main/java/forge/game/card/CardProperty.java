@@ -1937,6 +1937,10 @@ public class CardProperty {
             if (!card.isSaddled()) {
                 return false;
             }
+        } else if (property.equals("SaddledThisTurn")) {
+            if (!source.getSaddledByThisTurn().contains(card)) {
+                return false;
+            }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
                 return false;

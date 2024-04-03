@@ -219,6 +219,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean renowned;
     private boolean solved = false;
     private boolean saddled = false;
+    private int timesSaddledThisTurn = 0;
+    private CardCollection saddledByThisTurn;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -6393,11 +6395,32 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return true;
     }
 
+    public final int getTimesSaddledThisTurn() {
+        return timesSaddledThisTurn;
+    }
+    public final CardCollection getSaddledByThisTurn() {
+        return saddledByThisTurn;
+    }
+    public final void addSaddledByThisTurn(final CardCollection saddlers) {
+        if (saddledByThisTurn != null) saddledByThisTurn.addAll(saddlers);
+        else saddledByThisTurn = saddlers;
+    }
+    public final void setSaddledByThisTurn(final CardCollection saddlers) {
+        saddledByThisTurn = saddlers;
+    }
+    public void resetSaddled() {
+        final boolean changed = isSaddled();
+        setSaddled(false);
+        if (saddledByThisTurn != null) saddledByThisTurn = null;
+        timesSaddledThisTurn = 0;
+        if (changed) updateAbilityTextForView();
+    }
     public final boolean isSaddled() {
         return saddled;
     }
     public final boolean setSaddled(final boolean saddled) {
         this.saddled = saddled;
+        if (saddled) timesSaddledThisTurn++;
         return true;
     }
 
@@ -7028,7 +7051,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!StaticAbilityNoCleanupDamage.damageNotRemoved(this)) {
             setDamage(0);
         }
-        setSaddled(false);
         setHasBeenDealtDeathtouchDamage(false);
         setHasBeenDealtExcessDamageThisTurn(false);
         setRegeneratedThisTurn(0);
@@ -7045,6 +7067,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetMayPlayTurn();
         resetExertedThisTurn();
         resetCrewed();
+        resetSaddled();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

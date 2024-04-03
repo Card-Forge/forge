@@ -1,0 +1,11 @@
+Name:Calamity, Galloping Inferno
+ManaCost:4 R R
+Types:Legendary Creature Horse Mount
+PT:4/6
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks while saddled, choose a nonlegendary creature that saddled it this turn and create a tapped and attacking token that's a copy of it. Sacrifice that token at the beginning of the next end step. Repeat this process once.
+SVar:TrigCopy:DB$ CopyPermanent | Choices$ Creature.nonLegendary+SaddledThisTurn | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ CopyPermanent | Choices$ Creature.nonLegendary+SaddledThisTurn | TokenTapped$ True | TokenAttacking$ True | AtEOT$ Sacrifice
+K:Saddle:1
+DeckHas:Ability$Sacrifice
+Oracle:Haste\nWhenever Calamity, Galloping Inferno attacks while saddled, choose a nonlegendary creature that saddled it this turn and create a tapped and attacking token that's a copy of it. Sacrifice that token at the beginning of the next end step. Repeat this process once.\nSaddle 1

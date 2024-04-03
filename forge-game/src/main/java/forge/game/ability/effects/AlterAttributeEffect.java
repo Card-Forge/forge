@@ -55,6 +55,13 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     case "Saddled":
                         // currently clean up in Card manually
                         altered = c.setSaddled(activate);
+                        if (altered) {
+                            CardCollection saddlers = (CardCollection) sa.getPaidList("TappedCards", true);
+                            c.addSaddledByThisTurn(saddlers);
+                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+                            runParams.put(AbilityKey.Crew, saddlers);
+                            c.getGame().getTriggerHandler().runTrigger(TriggerType.BecomesSaddled, runParams, false);
+                        }
                         break;
 
                         // Other attributes: renown, monstrous, suspected, etc
