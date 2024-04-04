@@ -282,6 +282,8 @@ ScryfallCode=OTJ
 274 L Swamp @Salvatorre Zee Yazzie
 275 L Mountain @Salvatorre Zee Yazzie
 276 L Forest @Salvatorre Zee Yazzie
+
+[showcase]
 287 M Geralf, the Fleshwright @Pedro Potier
 288 M Gisa, the Hellraiser @Greg Staples
 289 R Kaervek, the Punisher @Pedro Potier
@@ -295,6 +297,8 @@ ScryfallCode=OTJ
 297 M Rakdos, the Muscle @Greg Staples
 298 R Satoru, the Infiltrator @Denis Medri
 299 M Vraska, the Silencer @Jarel Threat
+
+[borderless]
 300 R Blooming Marsh @Piotr Dura
 301 R Botanical Sanctum @Piotr Dura
 302 R Concealed Courtyard @Piotr Dura
@@ -302,6 +306,8 @@ ScryfallCode=OTJ
 304 R Spirebluff Canal @Piotr Dura
 305 M Oko, the Ringleader @Lie Setiawan
 306 M Jace Reawakened @Chris Rallis
+
+[extended art]
 307 R Another Round @Darrell Riche
 308 M Archangel of Tithes @Denys Tsiperko
 309 R Aven Interrupter @Daniel Romanovsky
@@ -363,10 +369,14 @@ ScryfallCode=OTJ
 365 R Taii Wakeen, Perfect Shot @David Auden Nash
 366 R Vraska Joins Up @Wylie Beckert
 367 R Wylie Duke, Atiin Hero @Ekaterina Burmak
+
+[promo]
 368 U Frontier Seeker @Raluca Marinescu
 369 U Scorching Shot @Caio Monteiro
 370 U Honest Rutstein @Javier Charro
 371 U Make Your Own Luck @Chris Seaman
 372 U Ruthless Lawbringer @Joshua Raphael
 373 R The Key to the Vault @Eli Minaya
+
+[buy a box]
 374 R Magda, the Hoardmaster @Loïc Canavaggia
