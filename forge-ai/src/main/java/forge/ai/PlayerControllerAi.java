@@ -774,8 +774,8 @@ public class PlayerControllerAi extends PlayerController {
                             }
                             break;
                         case "BetterTgtThanRemembered":
-                            if (source.hasRemembered()) {
-                                Card rem = (Card) source.getFirstRemembered();
+                            if (source.hasGainControlTarget()) {
+                                Card rem = source.getGainControlTargets().get(0);
                                 //  avoid pumping opponent creature
                                 if (!rem.isInPlay() || rem.getController().isOpponentOf(source.getController())) {
                                     return true;

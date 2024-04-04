@@ -116,6 +116,8 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
+                    host.removeGainControlTargets(gameCard);
+
                     gameCard.removePTBoost(timestamp, 0);
                     boolean updateText = gameCard.removeCanBlockAny(timestamp);
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
@@ -132,6 +134,9 @@ public class PumpEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
             };
+            if ("UntilUntaps".equals(duration)) {
+                host.addGainControlTarget(gameCard);
+            }
             addUntilCommand(sa, untilEOT);
         }
         game.fireEvent(new GameEventCardStatsChanged(gameCard));
