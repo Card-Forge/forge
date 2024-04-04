@@ -10,14 +10,17 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
         if (CardType.isACardType(details)) {
             type = details.toLowerCase();
         } else if (details.contains(":")) {
+            String[] detailSpl = details.split(":");
             switch (getKeyword()) {
             case AFFINITY:
+                type = (detailSpl.length > 2) ? detailSpl[2] : detailSpl[1];
+                break;
             case HEXPROOF:
             case LANDWALK:
-                type = details.split(":")[1];
+                type = detailSpl[1];
                 break;
             default:
-                type = details.split(":")[0];
+                type = detailSpl[0];
             }
         } else {
             type = details;
