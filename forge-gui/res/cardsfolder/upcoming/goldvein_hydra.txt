@@ -1,0 +1,14 @@
+Name:Goldvein Hydra
+ManaCost:X G
+Types:Creature Hydra
+PT:0/0
+K:Vigilance
+K:Trample
+K:Haste
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a number of tapped Treasure tokens equal to its power.
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenOwner$ TriggeredCardController
+SVar:Y:TriggeredCard$CardPower
+DeckHas:Ability$Counters|Token & Type$Artifact|Treasure
+Oracle:Vigilance, trample, haste\nGoldvein Hydra enters the battlefield with X +1/+1 counters on it.\nWhen Goldvein Hydra dies, create a number of tapped Treasure tokens equal to its power.
