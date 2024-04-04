@@ -8,7 +8,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
-
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -157,6 +156,17 @@ public class StaticAbilityPanharmonicon {
                 return false;
             }
         } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce)) {
+            if (stAb.hasParam("ValidSource")) {
+                if (trigMode.equals(TriggerType.DamageDone) && 
+                    !stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) return false;
+                else if (trigMode.equals(TriggerType.DamageDoneOnce) && 
+                    (int) runParams.get(AbilityKey.DamageAmount) <= 0) return false;
+                //DamageAmount is filtered by ValidSource in TriggerDamageDoneOnce
+            }
+            if (stAb.hasParam("CombatDamage")) {
+                if (stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
+                    (Boolean) runParams.get(AbilityKey.IsCombatDamage)) return false;
+            }
             if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
                 return false;
             }
