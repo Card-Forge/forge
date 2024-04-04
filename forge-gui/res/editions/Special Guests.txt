@@ -13,7 +13,7 @@ ScryfallCode=SPG
 5 U Pitiless Plunderer @Johan Grenier
 6 U Breeches, Brazen Plunderer @Filip Burburan
 7 U Dargo, the Shipwrecker @Kai Carpenter
-8 R Rampaging Ferocidon @Dan Scott
+8 R Rampaging Ferocidon @Dan Murayama Scott
 9 R Underworld Breach @Piotr Dura
 10 M Carnage Tyrant @Monztre
 11 R Ghalta, Primal Hunger @Joshua Raphael
@@ -40,15 +40,15 @@ ScryfallCode=SPG
 26 M Tireless Tracker @Donato Giancola
 27 M Drown in the Loch @Chris Seaman
 28 M Field of the Dead @Ralph Horsley
-29 R Stoneforge Mystic @Livia Prima
+29 M Stoneforge Mystic @Livia Prima
 30 M Brazen Borrower @Jesper Ejsing
-31 R Desertion @Donato Giancola
+31 M Desertion @Donato Giancola
 32 M Morbid Opportunist @Chris Seaman
 33 M Port Razer @Zoltan Boros
 34 M Scapeshift @Joseph Meehan
-35 R Mystic Snake @Svetlin Velinov
-36 R Notion Thief @Alix Branwyn
-37 U Desert @Lucas Graciano
+35 M Mystic Snake @Svetlin Velinov
+36 M Notion Thief @Alix Branwyn
+37 M Desert @Lucas Graciano
 38 M Prismatic Vista @Sam Burley
 44 M Solitude @Campbell White
 49 M Solitude @Campbell White
