@@ -1737,6 +1737,19 @@ public class AbilityUtils {
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
+                // Count$NumTimesChoseMode
+                if (sq[0].startsWith("NumTimesChoseMode")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    int amount = 0;
+                    if (root != null) {
+                        SpellAbility sub = root;
+                        while(sub != null) {
+                            if (!sub.getSVar("CharmOrder").equals("")) amount++;
+                            sub = sub.getSubAbility();
+                        }
+                    }
+                    return doXMath(amount, expr, c, ctb);
+                }
                 // Count$ManaColorsPaid
                 if (sq[0].equals("ManaColorsPaid")) {
                     final SpellAbility root = sa.getRootAbility();

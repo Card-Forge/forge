@@ -93,7 +93,9 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (!spree) {
             sb.append(oppChooses ? "An opponent chooses " : "Choose ");
-            if (isX) {
+            if (sa.hasParam("ChoiceDesc")) {
+                sb.append(sa.getParam("ChoiceDesc"));
+            } else if (isX) {
                 sb.append("X");
             } else if (num == min || num == Integer.MAX_VALUE) {
                 sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
