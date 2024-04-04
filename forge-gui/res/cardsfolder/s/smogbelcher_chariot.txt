@@ -5,13 +5,8 @@ PT:3/3
 K:Menace
 K:Deathtouch
 K:Lifelink
-T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ RememberCrew | Static$ True
-SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberPumped$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Card.IsRemembered | TgtPrompt$ Select target creature that crewed it this turn | KWChoice$ Menace,Deathtouch,Lifelink | Duration$ Perpetual
+SVar:TrigPump:DB$ Pump | ValidTgts$ Card.CrewedThisTurn | TgtPrompt$ Select target creature that crewed it this turn | KWChoice$ Menace,Deathtouch,Lifelink | Duration$ Perpetual
 K:Crew:3
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain

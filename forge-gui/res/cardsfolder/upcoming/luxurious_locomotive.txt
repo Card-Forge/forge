@@ -1,0 +1,9 @@
+Name:Luxurious Locomotive
+ManaCost:5
+Types:Artifact Vehicle
+PT:6/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token for each creature that crewed it this turn. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigTreasure:DB$ Token | TokenAmount$ Count$CrewSize | TokenScript$ c_a_treasure_sac
+K:Crew:1:ActivationLimit$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Luxurious Locomotive attacks, create a Treasure token for each creature that crewed it this turn. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")\nCrew 1. Activate only once each turn. (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

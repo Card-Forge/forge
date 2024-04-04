@@ -1893,6 +1893,10 @@ public class CardProperty {
             if (!card.isForetold()) {
                 return false;
             }
+        } else if (property.equals("CrewedThisTurn")) {
+            if (!source.getCrewedByThisTurn().contains(card)) {
+                return false;
+            }
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
