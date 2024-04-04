@@ -1,10 +1,8 @@
 Name:Take the Fall
 ManaCost:U
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.) Draw a card.
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ DBShrinkFour | FalseSubAbility$ DBShrinkOne
-SVar:DBShrinkFour:DB$ Pump | Defined$ Targeted | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw
-SVar:DBShrinkOne:DB$ Pump | Defined$ Targeted | NumAtt$ -1 | IsCurse$ True | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | IsCurse$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.) Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:X:Count$Valid Permanent.Outlaw
+SVar:X:Count$Compare Y GE1.4.1
+SVar:Y:Count$Valid Creature.Outlaw
 Oracle:Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nDraw a card.
