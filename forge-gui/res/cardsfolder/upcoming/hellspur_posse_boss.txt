@@ -1,0 +1,10 @@
+Name:Hellspur Posse Boss
+ManaCost:2 R R
+Types:Creature Lizard Rogue
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Outlaw+YouCtrl+Other | AddKeyword$ Haste | Description$ Other outlaws you control have haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 red Mercenary creature tokens with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
+DeckHints:Type$Mercenary|Pirate|Rogue|Warlock
+DeckHas:Ability$Token
+Oracle:Other outlaws you control have haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nWhen Hellspur Posse Boss enters the battlefield, create two 1/1 red Mercenary creature tokens with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

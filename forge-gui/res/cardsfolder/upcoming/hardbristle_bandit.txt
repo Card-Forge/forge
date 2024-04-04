@@ -1,0 +1,8 @@
+Name:Hardbristle Bandit
+ManaCost:1 G
+Types:Creature Plant Rogue
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, untap CARDNAME. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigUntap:DB$ Untap | Defined$ Self
+Oracle:{T}: Add one mana of any color.\nWhenever you commit a crime, untap Hardbristle Bandit. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
