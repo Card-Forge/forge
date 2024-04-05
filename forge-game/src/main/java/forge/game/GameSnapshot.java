@@ -20,6 +20,7 @@ import forge.game.zone.ZoneType;
 public class GameSnapshot {
     private final Game origGame;
     private Game newGame = null;
+    private boolean restore = false;
 
     private final SnapshotEntityMap gameObjectMap = new SnapshotEntityMap();
 
@@ -45,7 +46,8 @@ public class GameSnapshot {
         GameRules currentRules = origGame.getRules();
         Match newMatch = new Match(currentRules, newPlayers, origGame.getView().getTitle());
         newGame = new Game(newPlayers, currentRules, newMatch);
-        assignGameState(origGame, newGame, includeStack, false);
+        restore = false;
+        assignGameState(origGame, newGame, includeStack);
         //System.out.println("Storing game state with timestamp of :" + origGame.getTimestamp());
 
         return newGame;
@@ -53,15 +55,15 @@ public class GameSnapshot {
 
     public void restoreGameState(Game currentGame) {
         System.out.println("Restoring game state with timestamp of :" + newGame.getTimestamp());
-
-        assignGameState(newGame, currentGame, true, true);
+        restore = true;
+        assignGameState(newGame, currentGame, true);
     }
 
-    public void assignGameState(Game fromGame, Game toGame, boolean includeStack, boolean restore) {
+    public void assignGameState(Game fromGame, Game toGame, boolean includeStack) {
         for (int i = 0; i < fromGame.getPlayers().size(); i++) {
             Player origPlayer = fromGame.getPlayers().get(i);
             Player newPlayer = findBy(toGame, origPlayer);
-            assignPlayerState(origPlayer, newPlayer, restore);
+            assignPlayerState(origPlayer, newPlayer);
         }
 
         PhaseHandler origPhaseHandler = fromGame.getPhaseHandler();
@@ -72,7 +74,7 @@ public class GameSnapshot {
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
 
-        copyGameState(fromGame, toGame, restore);
+        copyGameState(fromGame, toGame);
 
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
@@ -138,7 +140,9 @@ public class GameSnapshot {
 //        }
 
         if (origPhaseHandler.getCombat() != null) {
-            toGame.getPhaseHandler().setCombat(new Combat(origPhaseHandler.getCombat(), gameObjectMap));
+            Combat combat = new Combat(origPhaseHandler.getCombat(), gameObjectMap);
+            toGame.getPhaseHandler().setCombat(combat);
+            //System.out.println(origPhaseHandler.getCombat().toString());
         }
 
         // I think re-assigning this is killing something?
@@ -146,7 +150,7 @@ public class GameSnapshot {
 //        toGame.getTriggerHandler().resetActiveTriggers();
 
         if (includeStack) {
-            copyStack(fromGame, toGame, restore);
+            copyStack(fromGame, toGame);
         }
 
         if (restore) {
@@ -154,14 +158,20 @@ public class GameSnapshot {
                 p.updateAllZonesForView();
             }
 
-            System.out.println("RESTORED");
+            Combat combat = toGame.getPhaseHandler().getCombat();
+            if (combat != null) {
+                //System.out.println(combat.toString());
+                toGame.updateCombatForView();
+            }
+            //System.out.println("RESTORED");
         }
 
         // TODO update thisTurnCast
     }
 
-    public void assignPlayerState(Player origPlayer, Player newPlayer, boolean restore) {
+    public void assignPlayerState(Player origPlayer, Player newPlayer) {
         if (restore) {
+            // Player controller of the original player isn't associated with the GUI at this point?
             origPlayer.dangerouslySetController(newPlayer.getController());
         }
         newPlayer.setLife(origPlayer.getLife(), null);
@@ -177,6 +187,7 @@ public class GameSnapshot {
         newPlayer.setRevolt(origPlayer.hasRevolt());
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
+        newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommitedCrimeThisTurn());
         for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
             newPlayer.addSpellCastThisTurn();
         }
@@ -211,12 +222,12 @@ public class GameSnapshot {
         return newMana;
     }
 
-    private void copyStack(Game fromGame, Game toGame, boolean restore) {
+    private void copyStack(Game fromGame, Game toGame) {
         // Try to match the StackInstance ID. If we don't find it, generate a new stack instance that matches
         // If we do find it, we may need to alter the existing stack instance
         // If we find it and we're restoring, we dont need to do anything
 
-        Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap();
+        Map<Integer, SpellAbilityStackInstance> stackIds = new HashMap<>();
         for (SpellAbilityStackInstance toEntry : toGame.getStack()) {
             stackIds.put(toEntry.getId(), toEntry);
         }
@@ -249,8 +260,6 @@ public class GameSnapshot {
             SpellAbility newSa = null;
             if (origSa.isSpell()) {
                 newSa = findSAInCard(origSa, newCard);
-            } else {
-
             }
 
             // Is the SA on the stack?
@@ -272,7 +281,7 @@ public class GameSnapshot {
         }
     }
 
-    public void copyGameState(Game fromGame, Game toGame, boolean restore) {
+    public void copyGameState(Game fromGame, Game toGame) {
         toGame.setAge(fromGame.getAge());
         toGame.dangerouslySetTimestamp(fromGame.getTimestamp());
 
@@ -315,14 +324,15 @@ public class GameSnapshot {
 
             if (fromType.equals(ZoneType.Stack)) {
                 toGame.getStackZone().add(newCard);
+                newCard.setZone(toGame.getStackZone());
             } else {
                 toPlayer.getZone(fromType).add(newCard);
+                newCard.setZone(toPlayer.getZone(fromType));
             }
 
             // TODO: This is a bit of a mess. We should probably have a method to copy a card's state.
             newCard.setGameTimestamp(fromCard.getGameTimestamp());
             newCard.setLayerTimestamp(fromCard.getLayerTimestamp());
-            newCard.setZone(fromCard.getZone());
             newCard.setTapped(fromCard.isTapped());
             newCard.setFaceDown(fromCard.isFaceDown());
             newCard.setManifested(fromCard.isManifested());
@@ -389,38 +399,31 @@ public class GameSnapshot {
     public class SnapshotEntityMap implements IEntityMap {
         @Override
         public Game getGame() {
+            if (restore) {
+                return origGame;
+            }
             return newGame;
         }
 
         @Override
         public GameObject map(GameObject o) {
             if (o instanceof Player) {
-                return findBy(newGame, (Player) o);
+                return findBy(getGame(), (Player) o);
             } else if (o instanceof Card) {
-                return findBy(newGame, (Card) o);
+                return findBy(getGame(), (Card) o);
             }
             return null;
         }
 
         @Override
         public Card map(final Card c) {
-            return findBy(newGame, c);
+            return findBy(getGame(), c);
         }
 
         @Override
         public Player map(final Player p) {
-            return findBy(newGame, p);
+            return findBy(getGame(), p);
         }
-    }
-
-    private GameEntity findBy(Game toGame, GameEntity fromEntity) {
-        if (fromEntity instanceof Card) {
-            return toGame.findById(fromEntity.getId());
-        } else if (fromEntity instanceof Player) {
-            return toGame.getPlayer(fromEntity.getId());
-        }
-
-        return null;
     }
 
     private Card findBy(Game toGame, Card fromCard) {
