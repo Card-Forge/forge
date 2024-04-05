@@ -1,0 +1,7 @@
+Name:Take for a Ride
+ManaCost:2 R
+Types:Sorcery
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Flash | CheckSVar$ Count$CommittedCrimeThisTurn.1.0 | Description$ CARDNAME has flash as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:Take for a Ride has flash as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\nGain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
