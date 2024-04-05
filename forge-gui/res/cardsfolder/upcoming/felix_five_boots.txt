@@ -4,5 +4,5 @@ Types:Legendary Creature Ooze Rogue
 PT:5/4
 K:Menace
 K:Ward:2
-S:Mode$ Panharmonicon | ValidMode$ DamageDoneOnce,DamageDone | ValidSource$ Creature.YouCtrl | CombatDamage$ True | ValidTarget$ Player | ValidCard$ Permanent.YouCtrl | Description$ If a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ DamageDoneOnce,DamageDone,DamageAll | ValidSource$ Creature.YouCtrl | CombatDamage$ True | ValidTarget$ Player | ValidCard$ Permanent.YouCtrl | Description$ If a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 Oracle:Menace, ward {2}\nIf a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

@@ -1,6 +1,7 @@
 package forge.game.staticability;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -155,20 +156,23 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidActivator", sa.getActivatingPlayer())) {
                 return false;
             }
-        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce)) {
+        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce) 
+                || trigMode.equals(TriggerType.DamageAll)) {
             if (stAb.hasParam("ValidSource")) {
-                if (trigMode.equals(TriggerType.DamageDone) && 
-                    !stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) return false;
-                else if (trigMode.equals(TriggerType.DamageDoneOnce) && 
-                    (int) runParams.get(AbilityKey.DamageAmount) <= 0) return false;
-                //DamageAmount is filtered by ValidSource in TriggerDamageDoneOnce
+                if (trigMode.equals(TriggerType.DamageDone)) {
+                    if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) return false;
+                } else {
+                    if (!checkEach(stAb, runParams.get(AbilityKey.Sources), "ValidSource")) return false;
+                } 
             }
             if (stAb.hasParam("CombatDamage")) {
                 if (stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
                     (Boolean) runParams.get(AbilityKey.IsCombatDamage)) return false;
             }
-            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
-                return false;
+            if (stAb.hasParam("ValidTarget")) {
+                if (trigMode.equals(TriggerType.DamageAll)) {
+                    if (!checkEach(stAb, runParams.get(AbilityKey.Targets), "ValidTarget")) return false;
+                } else if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) return false;
             }
         } else if (trigMode.equals(TriggerType.TurnFaceUp)) {
             if (!stAb.matchesValidParam("ValidTurned", runParams.get(AbilityKey.Card))) {
@@ -177,5 +181,16 @@ public class StaticAbilityPanharmonicon {
         }
 
         return true;
+    }
+
+    private static boolean checkEach(final StaticAbility stAb, final Object obj, final String param) {
+        boolean found = false;
+        for (Object o : Sets.newHashSet(obj)) {
+            if (stAb.matchesValidParam(param, o)) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 }
