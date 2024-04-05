@@ -9,8 +9,8 @@ SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Rem
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:DBPump:DB$ Pump | KW$ Trample | StackDescription$ SpellDescription | SpellDescription$ It gains trample until end of turn.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains trample until end of turn.
+SVar:DBPump:DB$ Pump | KW$ Trample | StackDescription$ It gains trample until end of turn.
 SVar:DBToken:DB$ Token | TokenScript$ u_1_1_bird_flying | SpellDescription$ Create a 1/1 blue Bird creature token with flying.
 DeckHas:Ability$Counters|Token & Type$Bird
 AI:RemoveDeck:Random
