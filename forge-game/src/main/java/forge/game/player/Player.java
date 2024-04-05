@@ -99,7 +99,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedThisTurn;
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
-    private int commitedCrimeThisTurn;
+    private int committedCrimeThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
@@ -3800,7 +3800,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void commitCrime() {
         //boolean firstTime = this.commitedCrimeThisTurn == 0;
-        commitedCrimeThisTurn++;
+        committedCrimeThisTurn++;
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
@@ -3808,10 +3808,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     }
 
-    public int getCommitedCrimeThisTurn() {
-        return commitedCrimeThisTurn;
+    public int getCommittedCrimeThisTurn() {
+        return committedCrimeThisTurn;
     }
     public void setCommitedCrimeThisTurn(int v) {
-        commitedCrimeThisTurn = v;
+        committedCrimeThisTurn = v;
     }
 }

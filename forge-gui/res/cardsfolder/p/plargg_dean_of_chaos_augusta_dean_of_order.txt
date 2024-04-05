@@ -20,5 +20,5 @@ S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl+Other | AddPower$ 1 | Des
 S:Mode$ Continuous | Affected$ Creature.untapped+YouCtrl+Other | AddToughness$ 1 | Description$ Other untapped creatures you control get +0/+1.
 T:Mode$ AttackersDeclared | Execute$ DBUnTapAll | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack, untap each creature you control, then tap any number of creatures you control.
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBTap
-SVar:DBTap:DB$ Tap | Defined$ CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped
+SVar:DBTap:DB$ Tap | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped
 Oracle:Other tapped creatures you control get +1/+0.\nOther untapped creatures you control get +0/+1.\nWhenever you attack, untap each creature you control, then tap any number of creatures you control.

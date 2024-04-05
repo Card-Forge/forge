@@ -2,9 +2,6 @@ Name:Endoskeleton
 ManaCost:2
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +0/+3 for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddToughness$ 3
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | NumDef$ 3 | Duration$ UntilUntaps | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +0/+3 for as long as CARDNAME remains tapped.
 SVar:AIUntapPreference:BetterTgtThanRemembered
 Oracle:You may choose not to untap Endoskeleton during your untap step.\n{2}, {T}: Target creature gets +0/+3 for as long as Endoskeleton remains tapped.

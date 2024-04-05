@@ -116,6 +116,8 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
+                    host.removeGainControlTargets(gameCard);
+
                     gameCard.removePTBoost(timestamp, 0);
                     boolean updateText = gameCard.removeCanBlockAny(timestamp);
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
@@ -132,6 +134,9 @@ public class PumpEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
             };
+            if ("UntilUntaps".equals(duration)) {
+                host.addGainControlTarget(gameCard);
+            }
             addUntilCommand(sa, untilEOT);
         }
         game.fireEvent(new GameEventCardStatsChanged(gameCard));
@@ -264,8 +269,13 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(" each combat");
             }
 
-            if (!"Permanent".equals(sa.getParam("Duration"))) {
-                sb.append(" until end of turn.");
+            String duration = sa.getParam("Duration");
+            if (!"Permanent".equals(duration)) {
+                if ("UntilUntaps".equals(duration)) {
+                    sb.append(" for as long as CARDNAME remains tapped.");
+                } else {
+                    sb.append(" until end of turn.");
+                }
             } else {
                 sb.append(".");
             }

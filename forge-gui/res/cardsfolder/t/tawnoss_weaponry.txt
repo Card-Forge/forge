@@ -2,9 +2,5 @@ Name:Tawnos's Weaponry
 ManaCost:2
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +1/+1 for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddPower$ 1 | AddToughness$ 1
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
-SVar:AIUntapPreference:BetterTgtThanRemembered
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | Duration$ UntilUntaps | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +1/+1 for as long as CARDNAME remains tapped.
 Oracle:You may choose not to untap Tawnos's Weaponry during your untap step.\n{2}, {T}: Target creature gets +1/+1 for as long as Tawnos's Weaponry remains tapped.
