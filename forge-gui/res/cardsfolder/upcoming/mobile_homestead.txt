@@ -1,0 +1,11 @@
+Name:Mobile Homestead
+ManaCost:2
+Types:Artifact Vehicle
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Mount.YouCtrl | Description$ CARDNAME has haste as long as you control a Mount.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDig | TriggerDescription$ Whenever CARDNAME attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.
+SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | Tapped$ True | ChangeValid$ Card.Land | ForceRevealToController$ True | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0
+K:Crew:2
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Mount
+Oracle:Mobile Homestead has haste as long as you control a Mount.\nWhenever Mobile Homestead attacks, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

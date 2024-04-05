@@ -1,0 +1,8 @@
+Name:Ambush Gigapede
+ManaCost:4 B B
+Types:Creature Insect
+PT:6/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -2/-2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
+Oracle:Flash\nWhen Ambush Gigapede enters the battlefield, target creature an opponent controls gets -2/-2 until end of turn.

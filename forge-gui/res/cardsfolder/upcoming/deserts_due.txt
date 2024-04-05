@@ -1,0 +1,7 @@
+Name:Desert's Due
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. It gets an additional -1/-1 until end of turn for each Desert you control.
+SVar:X:Count$Valid Desert.YouCtrl/Plus.2
+DeckNeeds:Type$Desert
+Oracle:Target creature gets -2/-2 until end of turn. It gets an additional -1/-1 until end of turn for each Desert you control.
