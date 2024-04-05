@@ -1,0 +1,9 @@
+Name:Spinewoods Paladin
+ManaCost:4 G
+Types:Creature Human Knight
+PT:5/4
+K:Trample
+K:Plot:3 G
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:Trample\nWhen Spinewoods Paladin enters the battlefield, you gain 3 life.\nPlot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

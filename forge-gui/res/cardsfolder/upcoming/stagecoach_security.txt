@@ -1,0 +1,9 @@
+Name:Stagecoach Security
+ManaCost:4 W
+Types:Creature Human Soldier
+PT:4/5
+K:Plot:3 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance
+SVar:PlayMain1:TRUE
+Oracle:When Stagecoach Security enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.\nPlot {3}{W} (You may pay {3}{W} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
