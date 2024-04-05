@@ -10,17 +10,22 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
         if (CardType.isACardType(details)) {
             type = details.toLowerCase();
         } else if (details.contains(":")) {
-            String[] detailSpl = details.split(":");
             switch (getKeyword()) {
             case AFFINITY:
-                type = (detailSpl.length > 2) ? detailSpl[2] : detailSpl[1];
+                type = details.split(":")[1];
+                // type lists defined by rules should not be changed by TextChange in reminder text 
+                if (type.equalsIgnoreCase("Outlaw")) {
+                    type = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
+                } else if (type.equalsIgnoreCase("historic permanent")) {
+                    type = "artifact, legendary, and/or Saga permanent";
+                }
                 break;
             case HEXPROOF:
             case LANDWALK:
-                type = detailSpl[1];
+                type = details.split(":")[1];
                 break;
             default:
-                type = detailSpl[0];
+                type = details.split(":")[0];
             }
         } else {
             type = details;
