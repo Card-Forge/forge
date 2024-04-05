@@ -1,0 +1,10 @@
+Name:Kraum, Violent Cacophony
+ManaCost:2 U R
+Types:Legendary Creature Zombie Horror
+PT:2/3
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever you cast your second spell each turn, put a +1/+1 counter on Kraum, Violent Cacophony and draw a card.
