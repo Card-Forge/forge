@@ -62,7 +62,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         String numParam = sa.getParamOrDefault("CharmNum", "1");
-        boolean isX = numParam.equals("X") && "Count$xPaid".equals(sa.getSVar("X"));
+        boolean isX = numParam.equals("X");
         int num = 0;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
@@ -93,10 +93,8 @@ public class CharmEffect extends SpellAbilityEffect {
 
         if (!spree) {
             sb.append(oppChooses ? "An opponent chooses " : "Choose ");
-            if (sa.hasParam("ChoiceDesc")) {
-                sb.append(sa.getParam("ChoiceDesc"));
-            } else if (isX) {
-                sb.append("X");
+            if (isX) {
+                sb.append(min == 0 ? "up to " : "").append("X");
             } else if (num == min || num == Integer.MAX_VALUE) {
                 sb.append(num == 0 ? "up to that many" : Lang.getNumeral(min));
             } else if (min == 0 && num == sa.getParam("Choices").split(",").length) {
@@ -148,6 +146,8 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append(". ").append(addDescS.trim());
             } else if (addDescS.startsWith(("."))) {
                 sb.append(addDescS.trim());
+            } else if (addDescS.startsWith("where X")) {
+                sb.append(", ").append(addDescS.trim()).append(" \u2014");
             } else {
                 sb.append(" ").append(addDescS.trim());
             }
