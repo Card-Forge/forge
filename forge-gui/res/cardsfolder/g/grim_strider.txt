@@ -5,6 +5,5 @@ PT:6/6
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
 SVar:X:Count$InYourHand
 SVar:BuffedBy:Card
-SVar:NeedsToPlayVar:Y LE5
-SVar:Y:Count$CardsInYourHand
+SVar:NeedsToPlayVar:X LE5
 Oracle:Grim Strider gets -1/-1 for each card in your hand.
