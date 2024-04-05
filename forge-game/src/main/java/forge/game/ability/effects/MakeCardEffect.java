@@ -124,11 +124,28 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
 
-            final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
+            final boolean attach = sa.hasParam("AttachedTo");
+            final ZoneType zone = attach ? ZoneType.Battlefield : 
+                ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
+            if (zone == null) return;
+
             final int amount = sa.hasParam("Amount") ?
                     AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
 
             CardCollection cards = new CardCollection();
+            final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
+            final GameEntityCounterTable counterTable = new GameEntityCounterTable();
+            final CardCollectionView lastStateBattlefield = triggerList.getLastStateBattlefield();
+            CardCollection attachList = new CardCollection();
+
+            if (attach) {
+                attachList = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
+                if (attachList.isEmpty()) {
+                    attachList = CardLists.getValidCards(lastStateBattlefield, 
+                        sa.getParam("AttachedTo"), source.getController(), source, sa);
+                }
+                if (attachList.isEmpty()) return; // nothing to attach to
+            }
 
             for (final String name : names) {
                 int toMake = amount;
@@ -155,35 +172,41 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
 
-            final CardZoneTable triggerList = new CardZoneTable();
-            GameEntityCounterTable counterTable = new GameEntityCounterTable();
             CardCollection madeCards = new CardCollection();
+            final boolean wCounter = sa.hasParam("WithCounter");
+            final boolean battlefield = zone.equals(ZoneType.Battlefield);
+            
             for (final Card c : cards) {
-                if (sa.hasParam("WithCounter") && zone != null && zone.equals(ZoneType.Battlefield)) {
-                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")),
-                            AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
-                            player);
-                }
-
-                final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, sa.getParam("LibraryPosition"), sa) : 0;
-                Card made = game.getAction().moveTo(zone, c, libraryPos, sa, moveParams);
-
-                if (sa.hasParam("WithCounter") && zone != null && !zone.equals(ZoneType.Battlefield)) {
-                    made.addCounter(CounterType.getType(sa.getParam("WithCounter")),
-                            AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
-                            player, counterTable);
-                }
-
-                if (sa.hasParam("FaceDown")) {
-                    made.turnFaceDown(true);
-                }
-                triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
-                madeCards.add(made);
-                if (sa.hasParam("RememberMade")) {
-                    source.addRemembered(made);
-                }
-                if (sa.hasParam("ImprintMade")) {
-                    source.addImprintedCard(made);
+                if (wCounter && battlefield) {
+                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), 
+                        AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), 
+                        sa), player);
+                }        
+                if (attach) {
+                    for (Card a : attachList) {
+                        Card cc;
+                        if (c.getZone().getZoneType().equals(ZoneType.None)) cc = c;
+                        else { // make another copy
+                            PaperCard next = StaticData.instance().getCommonCards().getUniqueByName(c.getName());
+                            cc = Card.fromPaperCard(next, player);
+                            game.getAction().moveTo(ZoneType.None, cc, sa, moveParams);
+                        }
+                        cc.attachToEntity(game.getCardState(a), sa, true);
+                        game.getAction().moveTo(zone, cc, sa, moveParams);
+                        triggerList.put(ZoneType.None, cc.getZone().getZoneType(), cc);
+                        madeCards.add(finishMaking(sa, cc, source));
+                    }
+                } else {
+                    final int libraryPos = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(source, 
+                    sa.getParam("LibraryPosition"), sa) : 0;
+                    final Card made = game.getAction().moveTo(zone, c, libraryPos, sa, moveParams);
+                    if (wCounter && !battlefield) {
+                        made.addCounter(CounterType.getType(sa.getParam("WithCounter")),
+                                AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", 
+                                "1"), sa), player, counterTable);
+                    }
+                    triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
+                    madeCards.add(finishMaking(sa, made, source));            
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
@@ -206,7 +229,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         }
     }
 
-    public List<ICardFace> parseFaces (final SpellAbility sa, final String param) {
+    private List<ICardFace> parseFaces (final SpellAbility sa, final String param) {
         List<ICardFace> parsedFaces = new ArrayList<>();
         for (String s : sa.getParam(param).split(",")) {
             // Cardnames that include "," must use ";" instead (i.e. Tovolar; Dire Overlord)
@@ -218,5 +241,12 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 throw new RuntimeException("MakeCardEffect didn't find card face by name: " + s);
         }
         return parsedFaces;
-    } 
+    }
+
+    private Card finishMaking (final SpellAbility sa, final Card made, final Card source) {
+        if (sa.hasParam("FaceDown")) made.turnFaceDown(true);
+        if (sa.hasParam("RememberMade")) source.addRemembered(made);
+        if (sa.hasParam("ImprintMade")) source.addImprintedCard(made);
+        return made;
+    }
 }
