@@ -1894,9 +1894,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("CrewedThisTurn")) {
-            if (!source.getCrewedByThisTurn().contains(card)) {
-                return false;
-            }
+            if (!hasTimestampMatch(card, source.getCrewedByThisTurn())) return false;
         } else if (property.equals("HasDevoured")) {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
@@ -1938,9 +1936,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("SaddledThisTurn")) {
-            if (!source.getSaddledByThisTurn().contains(card)) {
-                return false;
-            }
+            if (!hasTimestampMatch(card, source.getSaddledByThisTurn())) return false;
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
                 return false;
@@ -2195,4 +2191,14 @@ public class CardProperty {
         return true;
     }
 
+    private static boolean hasTimestampMatch (final Card card, final CardCollection coll) {
+        boolean match = false;
+            for (Card c : coll) {
+                if (c.equalsWithGameTimestamp(card)) {
+                    match = true;
+                    break;
+                }
+            }
+        return match;
+    }
 }
