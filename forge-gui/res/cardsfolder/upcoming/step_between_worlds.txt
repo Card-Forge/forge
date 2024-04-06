@@ -8,6 +8,6 @@ SVar:Homebody:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ H
 SVar:DBTimetwister:DB$ ChangeZoneAll | ChangeType$ Card.OwnedBy Player.NotedForStargate | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | RememberChanged$ True | UseAllOriginZones$ True | SubAbility$ DBRepeatDraw | StackDescription$ None
 SVar:DBRepeatDraw:DB$ Draw | Defined$ RememberedController | NumCards$ 7 | SubAbility$ DBClearNoted | StackDescription$ None
 SVar:DBClearNoted:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Stargate,Homebody | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChange 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChange | StackDescription$ None
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 Oracle:Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. Exile Step Between Worlds.\nPlot {4}{U}{U} (You may pay {4}{U}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
