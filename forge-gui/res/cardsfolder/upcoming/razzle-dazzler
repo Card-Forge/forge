@@ -1,0 +1,10 @@
+Name:Razzle-Dazzler
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME. It can't be blocked this turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on Razzle-Dazzler. It can't be blocked this turn.
