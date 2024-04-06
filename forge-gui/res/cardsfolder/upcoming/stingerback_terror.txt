@@ -1,0 +1,12 @@
+Name:Stingerback Terror
+ManaCost:2 R R
+Types:Creature Scorpion Dragon
+PT:7/7
+K:Flying
+K:Trample
+K:Plot:2 R
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in your hand.
+SVar:X:Count$InYourHand
+SVar:NeedsToPlayVar:X LE6
+SVar:BuffedBy:Card
+Oracle:Flying, trample\nStingerback Terror gets -1/-1 for each card in your hand.\nPlot {2}{R} (You may pay {2}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
