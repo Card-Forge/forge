@@ -3662,6 +3662,9 @@ public class CardFactoryUtil {
                     "CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
                     " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Artifact,Creature | " +
                     "SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+            if (k.length > 2) {
+                effect += " | " + k[2];
+            }
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);

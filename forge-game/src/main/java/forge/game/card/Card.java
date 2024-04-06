@@ -233,6 +233,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean specialized;
 
     private int timesCrewedThisTurn = 0;
+    private CardCollection crewedByThisTurn;
 
     private int classLevel = 1;
     private long bestowTimestamp = -1;
@@ -2387,14 +2388,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
-                        || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
+                        || keyword.startsWith("Saddle") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
                         || keyword.startsWith("Graft") || keyword.startsWith("Fading") || keyword.startsWith("Vanishing:")
                         || keyword.startsWith("Afterlife") || keyword.startsWith("Hideaway") || keyword.startsWith("Toxic")
                         || keyword.startsWith("Afflict") || keyword.startsWith ("Poisonous") || keyword.startsWith("Rampage")
-                        || keyword.startsWith("Saddle")
                         || keyword.startsWith("Renown") || keyword.startsWith("Annihilator") || keyword.startsWith("Devour")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Crew")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append("Crew ").append(k[1]);
+                    if (k.length > 2) {
+                        if (k[2].contains("ActivationLimit$ 1")) {
+                            sbLong.append(". Activate only once each turn.");
+                        }
+                    }
+                    sbLong.append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Casualty")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Casualty ").append(k[1]);
@@ -6503,10 +6512,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public void becomesCrewed(SpellAbility sa) {
         timesCrewedThisTurn++;
+        CardCollection crew = sa.getPaidList("TappedCards", true);
+        addCrewedByThisTurn(crew);
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Vehicle, this);
-        runParams.put(AbilityKey.Crew, sa.getPaidList("TappedCards", true));
+        runParams.put(AbilityKey.Crew, crew);
         game.getTriggerHandler().runTrigger(TriggerType.BecomesCrewed, runParams, false);
+    }
+    public void resetCrewed() {
+        resetTimesCrewedThisTurn();
+        if (crewedByThisTurn != null) crewedByThisTurn = null;
+    }
+
+    public final void addCrewedByThisTurn(final CardCollection crew) {
+        if (crewedByThisTurn != null) crewedByThisTurn.addAll(crew);
+        else crewedByThisTurn = crew;
+    }
+    public final CardCollection getCrewedByThisTurn() {
+        return crewedByThisTurn;
+    }
+    public final void setCrewedByThisTurn(final CardCollection crew) {
+        crewedByThisTurn = crew;
     }
 
     public final int getClassLevel() {
@@ -7018,7 +7044,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         clearBlockedThisTurn();
         resetMayPlayTurn();
         resetExertedThisTurn();
-        resetTimesCrewedThisTurn();
+        resetCrewed();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

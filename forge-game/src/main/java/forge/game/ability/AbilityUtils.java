@@ -2042,6 +2042,10 @@ public class AbilityUtils {
             return doXMath(c.getDamageHistory().getAttacksThisGame(), expr, c, ctb);
         }
 
+        if (sq[0].equals("CrewSize")) {
+            return doXMath(c.getCrewedByThisTurn().size(), expr, c, ctb);
+        }
+
         if (sq[0].equals("Intensity")) {
             return doXMath(c.getIntensity(true), expr, c, ctb);
         }

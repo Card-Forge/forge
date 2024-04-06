@@ -273,6 +273,9 @@ public class GameCopier {
                 otherCard.setEntityAttachedTo(ge);
                 ge.addAttachedCard(otherCard);
             }
+            if (card.getCrewedByThisTurn() != null) {
+                otherCard.setCrewedByThisTurn(card.getCrewedByThisTurn());
+            }
             if (card.getCloneOrigin() != null) {
                 otherCard.setCloneOrigin(cardMap.get(card.getCloneOrigin()));
             }
