@@ -6,9 +6,9 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone
 SVar:X:Count$ValidGraveyard Creature.YouOwn
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, any number of target opponents each discard a card. For each of those opponents who didn't discard a card with mana value 4 or greater, draw a card.
-SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | TgtPrompt$ Select any number of target opponents | TargetMin$ 0 | TargetMax$ MaxTgt | SubAbility$ DBDraw
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | RememberDiscarded$ True | Mode$ TgtChoose | TgtPrompt$ Select any number of target opponents | TargetMin$ 0 | TargetMax$ MaxTgt | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You
-SVar:Y:PlayerCountOpponents$Amount/Minus.Discarded$Valid Card.cmcLE3
+SVar:Y:PlayerCountOpponents$Amount/Minus.Remembered$Valid Card.cmcLE3
 SVar:MaxTgt:PlayerCountOpponents$Amount
 DeckHints:Ability$Graveyard|Mill
 DeckHas:Ability$Discard
