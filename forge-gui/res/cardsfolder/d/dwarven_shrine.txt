@@ -2,7 +2,7 @@ Name:Dwarven Shrine
 ManaCost:1 R R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player casts a spell, CARDNAME deals X damage to that player, where X is twice the number of cards in all graveyards with the same name as that spell.
-SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ X
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ X
 SVar:X:Count$ValidGraveyard Card.sharesNameWith TriggeredCard/Twice
 AI:RemoveDeck:Random
 Oracle:Whenever a player casts a spell, Dwarven Shrine deals X damage to that player, where X is twice the number of cards in all graveyards with the same name as that spell.

@@ -1,0 +1,9 @@
+Name:Outlaw Medic
+ManaCost:1 W
+Types:Creature Human Rogue
+PT:1/3
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nWhen Outlaw Medic dies, draw a card.
