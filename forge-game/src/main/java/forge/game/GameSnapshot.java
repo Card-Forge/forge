@@ -187,7 +187,7 @@ public class GameSnapshot {
         newPlayer.setRevolt(origPlayer.hasRevolt());
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
-        newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommitedCrimeThisTurn());
+        newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
         for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
             newPlayer.addSpellCastThisTurn();
         }
