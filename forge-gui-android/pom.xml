@@ -239,7 +239,6 @@
                                 <buildTools>30.0.3</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
@@ -266,6 +265,17 @@
                                 <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                                <configuration>
+                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -306,7 +316,6 @@
                                 <verbose>false</verbose>
                             </zipalign>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
@@ -333,6 +342,17 @@
                                 <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                                <configuration>
+                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -413,6 +433,15 @@
                                 <goals>
                                     <goal>zipalign</goal>
                                 </goals>
+                            </execution>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                                <configuration>
+                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
