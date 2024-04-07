@@ -954,8 +954,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return TextUtil.concatNoSpace(simultaneousStackEntryList.toString(),"==", frozenStack.toString(), "==", stack.toString());
     }
 
-    static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets)
-    {
+    static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets) {
         List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {
