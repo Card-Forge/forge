@@ -491,7 +491,6 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-
                 }
             }
         }
