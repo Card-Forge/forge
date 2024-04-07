@@ -30,6 +30,8 @@ import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.lang.LangEnglish;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -372,6 +374,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void buildRenamedCards() {
         Lang lang = Lang.getInstance();
+        if (lang == null) {
+            // for some tests
+            lang = new LangEnglish();
+        }
         // for now just check Universes Within
         for (CardInSet cis : editions.get("SLX").getCards()) {
             String orgName = alternateName.get(cis.name);

@@ -450,9 +450,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      */
     private void changeKnownOriginResolve(final SpellAbility sa) {
         CardCollectionView tgtCards = getTargetCards(sa);
-        final Player player = sa.getActivatingPlayer();
+        final Player activator = sa.getActivatingPlayer();
         final Card hostCard = sa.getHostCard();
-        final Game game = player.getGame();
+        final Game game = activator.getGame();
         final CardCollection commandCards = new CardCollection();
 
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
@@ -464,7 +464,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         int libraryPosition = sa.hasParam("LibraryPosition") ?
                 AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
         if (sa.hasParam("DestinationAlternative")) {
-            Pair<ZoneType, Integer> pair = handleAltDest(sa, hostCard, destination, libraryPosition, player);
+            Pair<ZoneType, Integer> pair = handleAltDest(sa, hostCard, destination, libraryPosition, activator);
             destination = pair.getKey();
             libraryPosition = pair.getValue();
         }
@@ -503,7 +503,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final boolean shuffle = sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle"));
         boolean combatChanged = false;
 
-        Player chooser = player;
+        Player chooser = activator;
         if (sa.hasParam("Chooser")) {
             chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
         }
@@ -588,11 +588,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    gameCard.addEtbCounter(cType, cAmount, player);
+                    gameCard.addEtbCounter(cType, cAmount, activator);
                 }
                 if (sa.hasParam("GainControl")) {
                     final String g = sa.getParam("GainControl");
-                    Player newController = g.equals("True") ? player :
+                    Player newController = g.equals("True") ? activator :
                         AbilityUtils.getDefinedPlayers(hostCard, g, sa).get(0);
                     if (newController != null) {
                         if (newController != gameCard.getController()) {
@@ -615,7 +615,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (!list.isEmpty()) {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Attach", gameCard);
-                        Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
+                        Card attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
 
                         // TODO can't attach later or moveToPlay would attach indirectly
                         // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
@@ -630,7 +630,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (!list.isEmpty()) {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Attach", gameCard);
-                        Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
+                        Player attachedTo = activator.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
                         gameCard.attachToEntity(attachedTo, sa);
                     }
                     else { // When it should enter the battlefield attached to an illegal player it fails
@@ -715,7 +715,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                 if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                     StringBuilder sb = new StringBuilder();
-                    sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
+                    sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(activator).append("'s hand.");
                     game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
                     commandCards.add(movedCard); //add to list to reveal the commandzone cards
                 }
@@ -732,7 +732,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    movedCard.addCounter(cType, cAmount, player, counterTable);
+                    movedCard.addCounter(cType, cAmount, activator, counterTable);
                 }
 
                 if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
@@ -744,7 +744,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.setForetoldCostByEffect(true);
                     }
                     // look at the exiled card
-                    movedCard.addMayLookTemp(player);
+                    movedCard.addMayLookTemp(activator);
                 }
 
                 // CR 400.7k
@@ -759,7 +759,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        meld.addCounter(cType, cAmount, player, counterTable);
+                        meld.addCounter(cType, cAmount, activator, counterTable);
                     }
                 }
                 if (gameCard.hasMergedCard()) {
@@ -768,7 +768,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (sa.hasParam("WithCountersType")) {
                             CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                             int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                            c.addCounter(cType, cAmount, player, counterTable);
+                            c.addCounter(cType, cAmount, activator, counterTable);
                         }
                     }
                 }
@@ -819,7 +819,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         //reveal command cards that changes zone from command zone to player's hand
         if (!commandCards.isEmpty()) {
-            game.getAction().reveal(commandCards, player, true, "Revealed cards in ");
+            game.getAction().reveal(commandCards, activator, true, "Revealed cards in ");
         }
 
         triggerList.triggerChangesZoneAll(game, sa);
@@ -848,8 +848,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // FCollection already does use set.
                     pl.add(tgtC.getOwner());
                 }
+                if (pl.isEmpty()) {
+                    pl.add(activator);
+                }
             }
-
             for (final Player p : pl) {
                 p.shuffle(sa);
             }
