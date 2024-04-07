@@ -1,0 +1,9 @@
+Name:Oasis Gardener
+ManaCost:3
+Types:Artifact Creature Scarecrow
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$LifeGain
+Oracle:When Oasis Gardener enters the battlefield, you gain 2 life.\n{T}: Add one mana of any color.
