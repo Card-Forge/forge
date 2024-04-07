@@ -1,13 +1,13 @@
 package forge.game.staticability;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -73,7 +73,7 @@ public class StaticAbilityPanharmonicon {
     }
 
     public static boolean applyPanharmoniconAbility(final StaticAbility stAb, final Trigger trigger, final Map<AbilityKey, Object> runParams) {
-        final Card card = stAb.getHostCard();
+        final Card host = stAb.getHostCard();
 
         final TriggerType trigMode = trigger.getMode();
 
@@ -131,7 +131,7 @@ public class StaticAbilityPanharmonicon {
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {
@@ -157,22 +157,69 @@ public class StaticAbilityPanharmonicon {
                 return false;
             }
         } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce) 
-                || trigMode.equals(TriggerType.DamageAll)) {
-            if (stAb.hasParam("ValidSource")) {
-                if (trigMode.equals(TriggerType.DamageDone)) {
-                    if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) return false;
-                } else {
-                    if (!checkEach(stAb, runParams.get(AbilityKey.Sources), "ValidSource")) return false;
-                } 
+                || trigMode.equals(TriggerType.DamageAll) || trigMode.equals(TriggerType.DamageDealtOnce)) {
+            if (stAb.hasParam("CombatDamage") && stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
+                    (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
+                return false;
             }
-            if (stAb.hasParam("CombatDamage")) {
-                if (stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
-                    (Boolean) runParams.get(AbilityKey.IsCombatDamage)) return false;
+            if (trigMode.equals(TriggerType.DamageDone)) {
+                if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+                    return false;
+                }
+                if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+                    return false;
+                }
             }
-            if (stAb.hasParam("ValidTarget")) {
-                if (trigMode.equals(TriggerType.DamageAll)) {
-                    if (!checkEach(stAb, runParams.get(AbilityKey.Targets), "ValidTarget")) return false;
-                } else if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) return false;
+            if (trigMode.equals(TriggerType.DamageDoneOnce)) {
+                if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+                    return false;
+                }
+                Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
+                boolean found = false;
+                for (Card c : dmgMap.keySet()) {
+                    // 1. check it's valid cause for static
+                    if (!stAb.matchesValidParam("ValidSource", c)) {
+                        continue;
+                    }
+                    // 2. and it must also be valid for trigger event
+                    if (!trigger.matchesValidParam("ValidSource", c)) {
+                        continue;
+                    }
+                    // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
+                    found = true;
+                    break;
+                }
+                if (!found) {
+                    return false;
+                }
+            }
+            if (trigMode.equals(TriggerType.DamageDealtOnce)) {
+                if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+                    return false;
+                }
+                Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
+                boolean found = false;
+                for (Card c : dmgMap.keySet()) {
+                    if (!stAb.matchesValidParam("ValidTarget", c)) {
+                        continue;
+                    }
+                    if (!trigger.matchesValidParam("ValidTarget", c)) {
+                        continue;
+                    }
+                    found = true;
+                    break;
+                }
+                if (!found) {
+                    return false;
+                }
+            }
+            if (trigMode.equals(TriggerType.DamageAll)) {
+                CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+                table = table.filteredMap(trigger.getParam("ValidSource"), trigger.getParam("ValidTarget"), trigger.getHostCard(), trigger);
+                table = table.filteredMap(stAb.getParam("ValidSource"), stAb.getParam("ValidTarget"), host, stAb);
+                if (table.isEmpty()) {
+                    return false;
+                }
             }
         } else if (trigMode.equals(TriggerType.TurnFaceUp)) {
             if (!stAb.matchesValidParam("ValidTurned", runParams.get(AbilityKey.Card))) {
@@ -181,16 +228,5 @@ public class StaticAbilityPanharmonicon {
         }
 
         return true;
-    }
-
-    private static boolean checkEach(final StaticAbility stAb, final Object obj, final String param) {
-        boolean found = false;
-        for (Object o : Sets.newHashSet(obj)) {
-            if (stAb.matchesValidParam(param, o)) {
-                found = true;
-                break;
-            }
-        }
-        return found;
     }
 }

@@ -6,8 +6,8 @@ K:Flying
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ As CARDNAME enters the battlefield, choose two players.
 SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse
-T:Mode$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.Chosen | Execute$ TrigLoseLifeRemembered | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
-T:Mode$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Player.IsRemembered | Execute$ TrigLoseLifeChosen | Secondary$ True | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
+T:Mode$ DamageDoneOnce | ActiveZones$ Battlefield | ValidTarget$ Player.Chosen | Execute$ TrigLoseLifeRemembered | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
+T:Mode$ DamageDoneOnce | ActiveZones$ Battlefield | ValidTarget$ Player.IsRemembered | Execute$ TrigLoseLifeChosen | Secondary$ True | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
 SVar:TrigLoseLifeRemembered:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:TrigLoseLifeChosen:DB$ LoseLife | Defined$ Player.Chosen | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
