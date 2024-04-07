@@ -13,23 +13,28 @@ ScryfallCode=BIG
 5 M Esoteric Duplicator @Anton Solovianchyk
 6 M Simulacrum Synthesizer @Anton Solovianchyk
 7 M Worldwalker Helm @Camille Alquier
+8 M Greed's Gambit @Inkognit
 9 M Harvester of Misery @Jorge Jacinto
 10 M Hostile Investigator @Andrew Mar
 11 M Generous Plunderer @Alexander Mokhov
 12 M Legion Extruder @Anton Solovianchyk
 13 M Memory Vessel @Diego Gisbert
 14 M Molten Duplication @Justyna Dura
+15 M Territory Forge @Mirko Failoni
 16 M Ancient Cornucopia @Bartek Fedyczak
 17 M Bristlebud Farmer @Adrián Rodríguez Pérez
 18 M Omenpath Journey @Marzena Nereida Piwowar
+19 M Sandstorm Salvager @Francis Tneh
 20 M Vaultborn Tyrant @Loïc Canavaggia
 21 M Loot, the Key to Everything @Rudy Siswanto
 22 M Pest Control @Jonas De Ro
+23 M Lost Jitte @Yeong-Hao Han
 24 M Lotus Ring @Alayna Danner
 25 M Nexus of Becoming @Adam Volker
 26 M Sword of Wealth and Power @Dominik Mayer
 27 M Torpor Orb @Robin Olausson
 28 M Transmutation Font @Mark Poole
+29 M Fomori Vault @Jonas De Ro
 30 M Tarnation Vista @Alayna Danner
 31 M Collector's Cage @Ben Hill
 32 M Grand Abolisher @David Astruga
@@ -38,14 +43,18 @@ ScryfallCode=BIG
 35 M Esoteric Duplicator @Ben Hill
 36 M Simulacrum Synthesizer @Svetlin Velinov
 37 M Worldwalker Helm @David Astruga
+38 M Greed's Gambit @Xabi Gaztelua
 39 M Harvester of Misery @Yeong-Hao Han
+40 M Hostile Investigator @Loïc Canavaggia
 41 M Generous Plunderer @Josiah "Jo" Cameron
 42 M Legion Extruder @Kev Fang
 43 M Memory Vessel @Nino Vecia
 44 M Molten Duplication @Inkognit
+45 M Territory Forge @David Astruga
 46 M Ancient Cornucopia @Mark Poole
 47 M Bristlebud Farmer @Artur Nakhodkin
 48 M Omenpath Journey @Raymond Swanland
+49 M Sandstorm Salvager @Xabi Gaztelua
 50 M Vaultborn Tyrant @Simon Dominic
 51 M Loot, the Key to Everything @Gaboleps
 52 M Pest Control @Nino Vecia
@@ -55,25 +64,32 @@ ScryfallCode=BIG
 56 M Sword of Wealth and Power @Artur Nakhodkin
 57 M Torpor Orb @Svetlin Velinov
 58 M Transmutation Font @David Astruga
+59 M Fomori Vault @Pablo Rivera
+60 M Tarnation Vista @Artur Nakhodkin
 61 M Vaultborn Tyrant @Simon Dominic
 62 M Loot, the Key to Everything @Gaboleps
 63 M Lotus Ring @Ben Hill
 64 M Sword of Wealth and Power @Artur Nakhodkin
 65 M Tarnation Vista @Artur Nakhodkin
+66 M Collector's Cage @Bartek Fedyczak
 67 M Grand Abolisher @Aurore Folny
 68 M Oltec Matterweaver @Villarrte
 69 M Rest in Peace @Grady Frederick
 70 M Esoteric Duplicator @Anton Solovianchyk
 71 M Simulacrum Synthesizer @Anton Solovianchyk
 72 M Worldwalker Helm @Camille Alquier
+73 M Greed's Gambit @Inkognit
 74 M Harvester of Misery @Jorge Jacinto
+75 M Hostile Investigator @Andrew Mar
 76 M Generous Plunderer @Alexander Mokhov
 77 M Legion Extruder @Anton Solovianchyk
 78 M Memory Vessel @Diego Gisbert
 79 M Molten Duplication @Justyna Dura
+80 M Territory Forge @Mirko Failoni
 81 M Ancient Cornucopia @Bartek Fedyczak
 82 M Bristlebud Farmer @Adrián Rodríguez Pérez
 83 M Omenpath Journey @Marzena Nereida Piwowar
+84 M Sandstorm Salvager @Francis Tneh
 85 M Vaultborn Tyrant @Loïc Canavaggia
 86 M Loot, the Key to Everything @Rudy Siswanto
 87 M Pest Control @Jonas De Ro
@@ -83,3 +99,14 @@ ScryfallCode=BIG
 91 M Sword of Wealth and Power @Dominik Mayer
 92 M Torpor Orb @Robin Olausson
 93 M Transmutation Font @Mark Poole
+94 M Fomori Vault @Jonas De Ro
+95 M Tarnation Vista @Alayna Danner
+
+[tokens]
+b_2_1_bat_flying
+c_0_0_a_construct_total_artifacts
+c_1_1_a_gnome
+c_3_3_a_golem
+c_a_blood_draw
+c_a_food_sac
+c_a_map_sac_explore

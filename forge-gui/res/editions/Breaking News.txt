@@ -86,3 +86,10 @@ ScryfallCode=OTP
 78 M Contagion Engine @Magnus Jansson
 79 M Grindstone @Alejandro Mirabal
 80 M Mindslaver @Gossip Goblin
+
+[tokens]
+bg_1_1_pest_lifegain
+c_a_food_sac
+rw_1_2_human_rogue_haste_damage
+rw_2_1_human_cleric_lifelink_haste
+rw_3_1_human_warrior_trample_haste

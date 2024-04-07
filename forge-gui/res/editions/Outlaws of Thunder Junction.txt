@@ -282,6 +282,16 @@ ScryfallCode=OTJ
 274 L Swamp @Salvatorre Zee Yazzie
 275 L Mountain @Salvatorre Zee Yazzie
 276 L Forest @Salvatorre Zee Yazzie
+277 L Plains @Sergey Glushakov
+278 L Plains @Adam Paquette
+279 L Island @Sergey Glushakov
+280 L Island @Adam Paquette
+281 L Swamp @Sergey Glushakov
+282 L Swamp @Adam Paquette
+283 L Mountain @Sergey Glushakov
+284 L Mountain @Adam Paquette
+285 L Forest @Sergey Glushakov
+286 L Forest @Adam Paquette
 
 [showcase]
 287 M Geralf, the Fleshwright @Pedro Potier
@@ -380,3 +390,22 @@ ScryfallCode=OTJ
 
 [buy a box]
 374 R Magda, the Hoardmaster @Loïc Canavaggia
+
+[tokens]
+b_1_1_vampire_rogue_lifelink
+beau
+c_a_clue_draw
+c_a_treasure_sac
+g_2_1_varmint
+g_3_3_elk
+g_x_x_elemental
+meteorite
+r_1_1_mercenary_tappump
+r_3_1_dinosaur
+r_4_4_scorpion_dragon_flying_haste
+u_1_1_bird_flying
+ub_2_2_zombie_rogue
+w_1_1_sheep
+w_2_2_ox
+w_2_2_spirit_flying
+w_3_3_angel_flying
