@@ -5,5 +5,5 @@ A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature.cmcEQX;Artifact.cmcEQX/artifact or c
 SVar:MaxTgts:Count$Valid Creature
 SVar:AIPreference:SacCost$Creature,Artifact
 #X needs to be set this way to allow cost checks to pass - will be overwritten by Announce
-SVar:X:Count$Valid Permanent.YouCtrl$GreatestCMC
+SVar:X:Count$Valid Creature.YouCtrl,Artifact.YouCtrl$GreatestCMC
 Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature with mana value X.\nNahiri's Sacrifice deals X damage divided as you choose among any number of target creatures.
