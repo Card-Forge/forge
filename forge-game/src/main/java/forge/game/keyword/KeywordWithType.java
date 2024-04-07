@@ -12,6 +12,14 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
         } else if (details.contains(":")) {
             switch (getKeyword()) {
             case AFFINITY:
+                type = details.split(":")[1];
+                // type lists defined by rules should not be changed by TextChange in reminder text 
+                if (type.equalsIgnoreCase("Outlaw")) {
+                    type = "Assassin, Mercenary, Pirate, Rogue, and/or Warlock";
+                } else if (type.equalsIgnoreCase("historic permanent")) {
+                    type = "artifact, legendary, and/or Saga permanent";
+                }
+                break;
             case HEXPROOF:
             case LANDWALK:
                 type = details.split(":")[1];
