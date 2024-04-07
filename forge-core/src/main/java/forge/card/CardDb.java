@@ -371,6 +371,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void buildRenamedCards() {
+        Lang lang = Lang.getInstance();
         // for now just check Universes Within
         for (CardInSet cis : editions.get("SLX").getCards()) {
             String orgName = alternateName.get(cis.name);
@@ -382,7 +383,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 renamedMain.setName(renamedMain.getAltName());
                 renamedMain.setAltName(null);
                 // TODO this could mess up some "named ..." cardname literals but there's no printing like that currently
-                renamedMain.setOracleText(renamedMain.getOracleText().replace(orgName, renamedMain.getName()));
+                renamedMain.setOracleText(renamedMain.getOracleText()
+                        .replace(orgName, renamedMain.getName())
+                        .replace(lang.getNickName(orgName), lang.getNickName(renamedMain.getName()))
+                        );
                 facesByName.put(renamedMain.getName(), renamedMain);
                 CardFace renamedOther = null;
                 if (org.getOtherPart() != null) {
@@ -390,7 +394,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     orgName = renamedOther.getName();
                     renamedOther.setName(renamedOther.getAltName());
                     renamedOther.setAltName(null);
-                    renamedOther.setOracleText(renamedOther.getOracleText().replace(orgName, renamedOther.getName()));
+                    renamedOther.setOracleText(renamedOther.getOracleText()
+                            .replace(orgName, renamedOther.getName())
+                            .replace(lang.getNickName(orgName), lang.getNickName(renamedOther.getName()))
+                            );
                     facesByName.put(renamedOther.getName(), renamedOther);
                 }
 
