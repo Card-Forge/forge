@@ -1,0 +1,9 @@
+Name:Rambling Possum
+ManaCost:2 G
+Types:Creature Possum Mount
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while saddled, it gains +1/+2 until end of turn. Then you may return any number of creatures that saddled it this turn to their owner's hand.
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 2 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.SaddledThisTurn | ChangeNum$ Count$Valid Creature.SaddledThisTurn | Hidden$ True
+K:Saddle:1
+Oracle:Whenever Rambling Possum attacks while saddled, it gains +1/+2 until end of turn. Then you may return any number of creatures that saddled it this turn to their owner's hand.\nSaddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

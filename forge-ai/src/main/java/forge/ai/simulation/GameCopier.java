@@ -282,6 +282,9 @@ public class GameCopier {
             if (card.getHaunting() != null) {
                 otherCard.setHaunting(cardMap.get(card.getHaunting()));
             }
+            if (card.getSaddledByThisTurn() != null) {
+                otherCard.setSaddledByThisTurn(card.getSaddledByThisTurn());
+            }
             if (card.getEffectSource() != null) {
                 otherCard.setEffectSource(cardMap.get(card.getEffectSource()));
             }

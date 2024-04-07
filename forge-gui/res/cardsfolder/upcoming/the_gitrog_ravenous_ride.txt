@@ -1,0 +1,11 @@
+Name:The Gitrog, Ravenous Ride
+ManaCost:3 B G
+Types:Legendary Creature Frog Horror Mount
+PT:6/5
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice a creature that saddled it this turn. If you do, draw X cards, then put up to X land cards from your hand onto the battlefield tapped, where X is the sacrificed creature's power.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Creature.SaddledThisTurn/creature that saddled it this turn> | NumCards$ Sacrificed$CardPower | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Sacrificed | ConditionPresent$ Card | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ Sacrificed$CardPower | Tapped$ True
+K:Saddle:1
+Oracle:Trample, haste\nWhenever The Gitrog, Ravenous Ride deals combat damage to a player, you may sacrifice a creature that saddled it this turn. If you do, draw X cards, then put up to X land cards from your hand onto the battlefield tapped, where X is the sacrificed creature's power.\nSaddle 1
