@@ -1,0 +1,8 @@
+Name:Silver Deputy
+ManaCost:2
+Types:Artifact Creature Mercenary
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card or a Desert card, reveal it, then shuffle and put that card on top.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic,Desert | ChangeTypeDesc$ basic land card or a Desert card | ChangeNum$ 1 | ShuffleNonMandatory$ True
+A:AB$ Pump | Cost$ T | NumAtt$ 1 | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.
+Oracle:When Silver Deputy enters the battlefield, you may search your library for a basic land card or a Desert card, reveal it, then shuffle and put it on top.\n{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.
