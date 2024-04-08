@@ -1,6 +1,8 @@
 package forge.game.staticability;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -8,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -175,41 +178,25 @@ public class StaticAbilityPanharmonicon {
                     return false;
                 }
                 Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
-                boolean found = false;
-                for (Card c : dmgMap.keySet()) {
-                    // 1. check it's valid cause for static
-                    if (!stAb.matchesValidParam("ValidSource", c)) {
-                        continue;
-                    }
-                    // 2. and it must also be valid for trigger event
-                    if (!trigger.matchesValidParam("ValidSource", c)) {
-                        continue;
-                    }
-                    // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
-                    found = true;
-                    break;
-                }
-                if (!found) {
+                // 1. check it's valid cause for static
+                // 2. and it must also be valid for trigger event
+                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
+                        CardPredicates.matchesValidParam(stAb, "ValidSource"),
+                        CardPredicates.matchesValidParam(trigger, "ValidSource")
+                        ))) {
                     return false;
                 }
+                // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
             }
             if (trigMode.equals(TriggerType.DamageDealtOnce)) {
                 if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
                     return false;
                 }
                 Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
-                boolean found = false;
-                for (Card c : dmgMap.keySet()) {
-                    if (!stAb.matchesValidParam("ValidTarget", c)) {
-                        continue;
-                    }
-                    if (!trigger.matchesValidParam("ValidTarget", c)) {
-                        continue;
-                    }
-                    found = true;
-                    break;
-                }
-                if (!found) {
+                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
+                        CardPredicates.matchesValidParam(stAb, "ValidTarget"),
+                        CardPredicates.matchesValidParam(trigger, "ValidTarget")
+                        ))) {
                     return false;
                 }
             }

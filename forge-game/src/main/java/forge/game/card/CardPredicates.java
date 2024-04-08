@@ -242,6 +242,15 @@ public final class CardPredicates {
         };
     }
 
+    public static final Predicate<Card> matchesValidParam(final CardTraitBase ctb, final String param) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return ctb.matchesValidParam(param, c);
+            }
+        };
+    }
+
     public static final Predicate<Card> canBeSacrificedBy(final SpellAbility sa, final boolean effect) {
         return new Predicate<Card>() {
             @Override
