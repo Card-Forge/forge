@@ -199,7 +199,7 @@ public class GameSimulator {
                 System.out.println();
             }
             final SpellAbility playingSa = sa;
-
+            // Is this right?
             simGame.copyLastState();
             boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
                 if (interceptor != null) {

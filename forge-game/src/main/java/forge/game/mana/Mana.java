@@ -34,6 +34,11 @@ import forge.game.spellability.SpellAbility;
  * @version $Id$
  */
 public class Mana {
+
+    private byte color;
+    private Card sourceCard = null;
+    private AbilityManaPart manaAbility = null;
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -81,10 +86,6 @@ public class Mana {
 
         return mp == mp2 || (mp.getManaRestrictions().equals(mp2.getManaRestrictions()) && mp.getExtraManaRestriction().equals(mp2.getExtraManaRestriction()));
     }
-
-    private byte color;
-    private Card sourceCard = null;
-    private AbilityManaPart manaAbility = null;
 
     public Mana(final byte color, final Card source, final AbilityManaPart manaAbility) {
         this.color = color;

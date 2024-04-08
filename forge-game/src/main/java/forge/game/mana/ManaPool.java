@@ -114,6 +114,11 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return game.getRules().hasManaBurn() || StaticAbilityUnspentMana.hasManaBurn(owner);
     }
 
+    public final void resetPool() {
+        // This should only be used to reset the pool to empty by things like restores.
+        floatingMana.clear();
+    }
+
     public final List<Mana> clearPool(boolean isEndOfPhase) {
         // isEndOfPhase parameter: true = end of phase, false = mana drain effect
         List<Mana> cleared = Lists.newArrayList();

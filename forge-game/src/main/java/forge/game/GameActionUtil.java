@@ -876,6 +876,13 @@ public final class GameActionUtil {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
+        if (game.restoreGameState()) {
+            // If we're able to restore the whole game state when rolling back an ability don't try to manually roll back
+            System.out.println("Restored state from snapshot! Rolled back: " + ability.getHostCard().getName() + " - " + ability.getActivatingPlayer());
+
+            return;
+        }
+
         if (fromZone != null) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();

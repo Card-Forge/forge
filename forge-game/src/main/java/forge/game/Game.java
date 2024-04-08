@@ -90,6 +90,11 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
+    public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+    // While this is false here, its really set by the Match/Preferences
+
+    // If this merges with LKI In the future, it will need to change forms
+    private GameSnapshot previousGameState = null;
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
@@ -176,6 +181,24 @@ public class Game {
         return lastStateGraveyard;
     }
 
+    public void stashGameState() {
+        // Take a snapshot of the current state to restore to previous state
+        if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            previousGameState = new GameSnapshot(this);
+            previousGameState.makeCopy();
+        }
+    }
+
+    public boolean restoreGameState() {
+        // Restore game state snapshot
+        if (previousGameState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return false;
+        }
+
+        previousGameState.restoreGameState(this);
+        return true;
+    }
+
     public void copyLastState() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
@@ -224,6 +247,17 @@ public class Game {
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
+
+    public Player getPlayer(int id) {
+        for(Player p : allPlayers) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+
     public void addPlayer(int id, Player player) {
         playerCache.put(Integer.valueOf(id), player);
     }
@@ -367,10 +401,10 @@ public class Game {
     }
 
     public final PlayerCollection getPlayersInTurnOrder(Player p) {
-        PlayerCollection players = getPlayersInTurnOrder();
+        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
 
         int i = players.indexOf(p);
-        Collections.rotate(players, i);
+        Collections.rotate(players, -i);
         return players;
     }
 

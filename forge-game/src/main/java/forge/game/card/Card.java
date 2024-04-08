@@ -90,7 +90,7 @@ import java.util.Map.Entry;
  * @version $Id$
  */
 public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
-    private final Game game;
+    private Game game;
     private final IPaperCard paperCard;
 
     private final Map<CardStateName, CardState> states = Maps.newEnumMap(CardStateName.class);
@@ -7278,6 +7278,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public Game getGame() {
         return game;
+    }
+
+    public void dangerouslySetGame(Game newGame) {
+        game = newGame;
     }
 
     public List<SpellAbility> getAllPossibleAbilities(final Player player, final boolean removeUnplayable) {

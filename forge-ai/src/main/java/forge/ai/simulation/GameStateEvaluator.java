@@ -49,8 +49,16 @@ public class GameStateEvaluator {
         if (evalGame.getPhaseHandler().getPlayerTurn().getCreaturesInPlay().isEmpty()) {
             return null;
         }
+
+        Game gameCopy;
         GameCopier copier = new GameCopier(evalGame);
-        Game gameCopy = copier.makeCopy(null, aiPlayer);
+
+        if (evalGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            gameCopy = copier.makeCopy();
+        } else {
+            gameCopy = copier.makeCopy(null, aiPlayer);
+        }
+
         gameCopy.getPhaseHandler().devAdvanceToPhase(PhaseType.COMBAT_DAMAGE, new Runnable() {
             @Override
             public void run() {

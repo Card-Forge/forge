@@ -99,7 +99,7 @@ public class HumanPlaySpellAbility {
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         boolean refreeze = game.getStack().isFrozen();
-        game.getStack().freezeStack();
+        game.getStack().freezeStack(ability);
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
@@ -162,19 +162,29 @@ public class HumanPlaySpellAbility {
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
-        final boolean prerequisitesMet = announceType()
-                && announceValuesLikeX()
-                && ability.checkRestrictions(human)
-                && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
-                && ability.canCastTiming(human)
-                && ability.isLegalAfterStack()
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
+
+        boolean preCostRequisites = announceType() && announceValuesLikeX() &&
+            ability.checkRestrictions(human) &&
+            (!mayChooseTargets || ability.setupTargets()) &&
+            ability.canCastTiming(human) &&
+            ability.isLegalAfterStack();
+
+        final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
 
         if (!prerequisitesMet) {
+            // Would love to restore game state when undoing a trigger rather than just declining all costs.
+            // Is there a way to tell the difference?
+
             if (ability.isTrigger()) {
-                payment.refundPayment();
+                // Only roll back triggers if they were not paid for
+                if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
+                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                } else {
+                    // If precost requsities failed, then there probably isn't anything to refund during experimental
+                    payment.refundPayment();
+                }
             } else {
                 GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
             }
@@ -183,6 +193,7 @@ public class HumanPlaySpellAbility {
                 game.getStack().unfreezeStack();
             }
 
+            // These restores may not need to happen if we're restoring from snapshot
             if (manaColorConversion) {
                 manapool.restoreColorReplacements();
             }

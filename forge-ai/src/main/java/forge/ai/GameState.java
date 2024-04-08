@@ -639,6 +639,9 @@ public abstract class GameState {
         // prevent interactions with objects from old state
         game.copyLastState();
 
+        // Store snapshot for restoring
+        game.stashGameState();
+
         // Set negative or zero life after state effects if need be, important for some puzzles that rely on
         // pre-setting negative life (e.g. PS_NEO4).
         for (int i = 0; i < playerStates.size(); i++) {
