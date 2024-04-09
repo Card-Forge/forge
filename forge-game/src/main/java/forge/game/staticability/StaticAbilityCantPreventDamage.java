@@ -26,7 +26,7 @@ public class StaticAbilityCantPreventDamage {
 
     public static boolean applyCantPreventDamage(final StaticAbility stAb, final Card source, final boolean isCombat) {
         if (stAb.hasParam("IsCombat")) {
-            if (stAb.getParamOrDefault("IsCombat", "False").equals("True") != isCombat) {
+            if (stAb.getParam("IsCombat").equals("True") != isCombat) {
                 return false;
             }
         }
