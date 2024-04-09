@@ -1,0 +1,15 @@
+Name:Hollow Marauder
+ManaCost:6 B
+Types:Creature Specter Rogue
+PT:4/2
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
+SVar:X:Count$ValidGraveyard Creature.YouOwn
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, any number of target opponents each discard a card. For each of those opponents who didn't discard a card with mana value 4 or greater, draw a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | RememberDiscarded$ True | Mode$ TgtChoose | TgtPrompt$ Select any number of target opponents | TargetMin$ 0 | TargetMax$ MaxTgt | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Y | Defined$ You
+SVar:Y:TargetedPlayer$Amount/Minus.Remembered$Valid Card.cmcGE4
+SVar:MaxTgt:PlayerCountOpponents$Amount
+DeckHints:Ability$Graveyard|Mill
+DeckHas:Ability$Discard
+Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nFlying\nWhen Hollow Marauder enters the battlefield, any number of target opponents each discard a card. For each of those opponents who didn't discard a card with mana value 4 or greater, draw a card.

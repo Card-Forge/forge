@@ -1,0 +1,10 @@
+Name:Jolene, Plundering Pugilist
+ManaCost:1 R G
+Types:Legendary Creature Human Mercenary
+PT:4/2
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+powerGE4 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you attack with one or more creatures with power 4 or greater, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+A:AB$ DealDamage | Cost$ 1 R Sac<1/Treasure> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+DeckHints:Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Whenever you attack with one or more creatures with power 4 or greater, create a Treasure token.\n{1}{R}, Sacrifice a Treasure: Jolene, Plundering Pugilist deals 1 damage to any target.
