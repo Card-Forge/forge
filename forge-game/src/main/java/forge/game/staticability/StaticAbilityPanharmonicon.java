@@ -1,14 +1,18 @@
 package forge.game.staticability;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageMap;
+import forge.game.GameObjectPredicates;
 import forge.game.card.CardZoneTable;
-
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -73,7 +77,7 @@ public class StaticAbilityPanharmonicon {
     }
 
     public static boolean applyPanharmoniconAbility(final StaticAbility stAb, final Trigger trigger, final Map<AbilityKey, Object> runParams) {
-        final Card card = stAb.getHostCard();
+        final Card host = stAb.getHostCard();
 
         final TriggerType trigMode = trigger.getMode();
 
@@ -131,7 +135,7 @@ public class StaticAbilityPanharmonicon {
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {
@@ -156,9 +160,54 @@ public class StaticAbilityPanharmonicon {
             if (!stAb.matchesValidParam("ValidActivator", sa.getActivatingPlayer())) {
                 return false;
             }
-        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce)) {
-            if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+        } else if (trigMode.equals(TriggerType.DamageDone) || trigMode.equals(TriggerType.DamageDoneOnce) 
+                || trigMode.equals(TriggerType.DamageAll) || trigMode.equals(TriggerType.DamageDealtOnce)) {
+            if (stAb.hasParam("CombatDamage") && stAb.getParam("CombatDamage").equalsIgnoreCase("True") != 
+                    (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
                 return false;
+            }
+            if (trigMode.equals(TriggerType.DamageDone)) {
+                if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+                    return false;
+                }
+                if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+                    return false;
+                }
+            }
+            if (trigMode.equals(TriggerType.DamageDoneOnce)) {
+                if (!stAb.matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
+                    return false;
+                }
+                Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
+                // 1. check it's valid cause for static
+                // 2. and it must also be valid for trigger event
+                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource"),
+                        GameObjectPredicates.matchesValidParam(trigger, "ValidSource")
+                        ))) {
+                    return false;
+                }
+                // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
+            }
+            if (trigMode.equals(TriggerType.DamageDealtOnce)) {
+                if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
+                    return false;
+                }
+                Map<GameEntity, Integer> dmgMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
+                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidTarget"),
+                        GameObjectPredicates.matchesValidParam(trigger, "ValidTarget")
+                        ))) {
+                    return false;
+                }
+            }
+            if (trigMode.equals(TriggerType.DamageAll)) {
+                CardDamageMap table = (CardDamageMap) runParams.get(AbilityKey.DamageMap);
+                table = table.filteredMap(trigger.getParam("ValidSource"), trigger.getParam("ValidTarget"), trigger.getHostCard(), trigger);
+                table = table.filteredMap(stAb.getParam("ValidSource"), stAb.getParam("ValidTarget"), host, stAb);
+                if (table.isEmpty()) {
+                    return false;
+                }
             }
         } else if (trigMode.equals(TriggerType.TurnFaceUp)) {
             if (!stAb.matchesValidParam("ValidTurned", runParams.get(AbilityKey.Card))) {
