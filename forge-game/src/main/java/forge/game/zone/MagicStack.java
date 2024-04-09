@@ -118,7 +118,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final boolean isSplitSecondOnStack() {
-        for(SpellAbilityStackInstance si : stack) {
+        for (SpellAbilityStackInstance si : stack) {
             if (si.isSpell() && si.getSourceCard().hasKeyword(Keyword.SPLIT_SECOND)) {
                 return true;
             }
