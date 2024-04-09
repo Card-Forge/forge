@@ -509,10 +509,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean isOutlaw() {
-        if (subtypes.isEmpty()) {
+        if (!isCreature() && !isTribal()) {
             return false;
         }
-        return !Collections.disjoint(subtypes, Constant.OUTLAW_TYPES);
+        return !Collections.disjoint(getCreatureTypes(), Constant.OUTLAW_TYPES);
     }
 
     @Override
