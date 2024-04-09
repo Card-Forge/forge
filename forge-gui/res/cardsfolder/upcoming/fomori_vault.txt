@@ -2,7 +2,7 @@ Name:Fomori Vault
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Dig | Cost$ 3 T Discard<1/Card> | DigNum$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+A:AB$ Dig | Cost$ 3 T Discard<1/Card> | DigNum$ X | RestRandomOrder$ True | SpellDescription$ Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
 SVar:X:Count$Valid Artifact.YouCtrl
 DeckHas:Ability$Discard
 DeckNeeds:Type$Artifact

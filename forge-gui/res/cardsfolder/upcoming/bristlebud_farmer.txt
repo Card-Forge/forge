@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigFood:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_food_sac | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice a Food. If you do, mill three cards. You may put a permanent card from among them into your hand.
 SVar:TrigMill:AB$ Mill | Cost$ Sac<1/Food> | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.Permanent+YouOwn | Optional$ True | SelectPrompt$ You may select a permanent milled this way | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.Permanent+YouOwn+IsRemembered | Optional$ True | SelectPrompt$ You may select a permanent milled this way | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token|LifeGain|Sacrifice|Mill & Type$Food
 DeckHints:Type$Food
