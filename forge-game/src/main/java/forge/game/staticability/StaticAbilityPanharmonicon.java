@@ -5,12 +5,13 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
-import forge.game.card.CardPredicates;
+import forge.game.GameObjectPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -181,8 +182,8 @@ public class StaticAbilityPanharmonicon {
                 // 1. check it's valid cause for static
                 // 2. and it must also be valid for trigger event
                 if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        CardPredicates.matchesValidParam(stAb, "ValidSource"),
-                        CardPredicates.matchesValidParam(trigger, "ValidSource")
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource"),
+                        GameObjectPredicates.matchesValidParam(trigger, "ValidSource")
                         ))) {
                     return false;
                 }
@@ -192,10 +193,10 @@ public class StaticAbilityPanharmonicon {
                 if (!stAb.matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
                     return false;
                 }
-                Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
+                Map<GameEntity, Integer> dmgMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
                 if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        CardPredicates.matchesValidParam(stAb, "ValidTarget"),
-                        CardPredicates.matchesValidParam(trigger, "ValidTarget")
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidTarget"),
+                        GameObjectPredicates.matchesValidParam(trigger, "ValidTarget")
                         ))) {
                     return false;
                 }

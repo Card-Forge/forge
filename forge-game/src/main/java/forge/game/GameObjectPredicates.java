@@ -40,4 +40,14 @@ public final class GameObjectPredicates {
             }
         };
     }
+
+    public static final Predicate<GameObject> matchesValidParam(final CardTraitBase ctb, final String param) {
+        return new Predicate<GameObject>() {
+            @Override
+            public boolean apply(final GameObject c) {
+                return ctb.matchesValidParam(param, c);
+            }
+        };
+    }
+
 }
