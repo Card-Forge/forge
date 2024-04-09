@@ -2192,13 +2192,16 @@ public class CardProperty {
     }
 
     private static boolean hasTimestampMatch (final Card card, final CardCollection coll) {
+        if (coll == null) {
+            return false;
+        }
         boolean match = false;
-            for (Card c : coll) {
-                if (c.equalsWithGameTimestamp(card)) {
-                    match = true;
-                    break;
-                }
+        for (Card c : coll) {
+            if (c.equalsWithGameTimestamp(card)) {
+                match = true;
+                break;
             }
+        }
         return match;
     }
 }
