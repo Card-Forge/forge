@@ -1,0 +1,9 @@
+Name:Shackle Slinger
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, choose target creature an opponent controls. If it's tapped, put a stun counter on it. Otherwise, tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ STUN | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature.tapped | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Creature.untapped
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, choose target creature an opponent controls. If it's tapped, put a stun counter on it. Otherwise, tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
