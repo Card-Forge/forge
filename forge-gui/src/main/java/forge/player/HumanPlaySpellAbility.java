@@ -99,7 +99,6 @@ public class HumanPlaySpellAbility {
 
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         boolean refreeze = game.getStack().isFrozen();
-        game.getStack().freezeStack(ability);
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
@@ -169,6 +168,8 @@ public class HumanPlaySpellAbility {
             ability.canCastTiming(human) &&
             ability.isLegalAfterStack();
 
+        // Freeze the stack just before we start paying costs but after the ability is fully set up
+        game.getStack().freezeStack(ability);
         final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
