@@ -1,0 +1,6 @@
+Name:Raucous Entertainer
+ManaCost:1 G
+Types:Creature Plant Bard
+PT:2/2
+A:AB$ PutCounterAll | Cost$ 1 T | ValidCards$ Creature.YouCtrl+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control that entered the battlefield this turn.
+Oracle:{1}, {T}: Put a +1/+1 counter on each creature you control that entered the battlefield this turn.
