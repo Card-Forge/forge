@@ -1,0 +1,9 @@
+Name:Inventive Wingsmith
+ManaCost:2 W
+Types:Creature Dwarf Artificer
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ EQ0 | IsPresent$ Card.Self+counters_EQ0_Flying | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you haven't cast a spell from your hand this turn and CARDNAME doesn't have a flying counter on it, put a flying counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ Flying | CounterNum$ 1
+SVar:X:Count$ThisTurnCast_Card.wasCastFromYourHandByYou
+DeckHas:Ability$Counters
+Oracle:At the beginning of your end step, if you haven't cast a spell from your hand this turn and Inventive Wingsmith doesn't have a flying counter on it, put a flying counter on it.
