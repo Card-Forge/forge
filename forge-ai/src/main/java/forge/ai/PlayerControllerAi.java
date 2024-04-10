@@ -188,11 +188,17 @@ public class PlayerControllerAi extends PlayerController {
     public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
         int toPay = getAi().attemptToAssist(sa, max, requested);
 
-        // TODO Figure out how to pay toPay amount
         if (toPay == 0) {
-            //return true;
+            return true;
+        } else {
+            ManaCost manaCost = ManaCost.get(toPay);
+            ManaCostBeingPaid assistCost = new ManaCostBeingPaid(manaCost);
+            if (ComputerUtilMana.canPayManaCost(assistCost, sa, player, false)) {
+                ComputerUtilMana.payManaCost(assistCost, sa, player, false);
+                cost.decreaseGenericMana(toPay);
+                return true;
+            }
         }
-
         return true;
     }
 

@@ -1897,27 +1897,27 @@ public class AiController {
 
         PlayerCollection allies = player.getAllies();
 
-        if (allies.size() > 0) {
-            // AI has allies, don't help out anyone but allies.
-            if (!allies.contains(activator)) {
-                return 0;
-            }
-        } else {
+        if (allies.isEmpty()) {
             // AI only has opponents.
             // TODO: Maybe help out someone if it seems good for us, but who knows how you calculate that.
             // Probably needs some specific AI here.
             // If the spell is a creature, probably don't help.
             // If spell is a instant/sorcery, help based on the situation
             return 0;
+        } else {
+            // AI has allies, don't help out anyone but allies.
+            if (!allies.contains(activator)) {
+                return 0;
+            }
         }
 
         // AI has decided to help. Now let's figure out how much they can help
-        int mana = ComputerUtilMana.getAvailableManaEstimate(player, false);
+        int mana = ComputerUtilMana.getAvailableManaEstimate(player, true);
 
         // TODO We should make a logical guess here, but for now just uh yknow randomly decide?
         // What do I want to play next? Can I still pay for that and have mana left over to help?
         // Is the spell I'm helping cast better for me than the thing I would cast?
-        if (MyRandom.getRandom().nextInt(100) < 80) {
+        if (MyRandom.percentTrue(80)) {
             return 0;
         }
 

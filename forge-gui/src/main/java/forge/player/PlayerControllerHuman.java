@@ -616,13 +616,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         InputPayMana inpPayment = new InputPayManaOfCostPayment(this, assistCost, sa, this.getPlayer(), null, true);
         inpPayment.setMessagePrefix("Paying for assist - ");
         inpPayment.showAndWait();
-        // Once you pay, loop in the paid SAs and add them to cost
 
         if (inpPayment.isPaid()) {
             // Apply payments from assistCost to cost
             // If cost is canceled, how do we make sure mana gets undone?
 
-            final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
             cost.decreaseGenericMana(willPay);
             return true;
         } else if (sa.getHostCard().getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
