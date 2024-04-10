@@ -1,0 +1,12 @@
+Name:Railway Brawler
+ManaCost:3 G G
+Types:Creature Rhino Warrior
+PT:5/5
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield under your control, put X +1/+1 counters on it, where X is its power.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggeredCard$CardPower
+K:Plot:3 G
+DeckHas:Ability$Counters
+Oracle:Reach, trample\nWhenever another creature enters the battlefield under your control, put X +1/+1 counters on it, where X is its power.\nPlot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
