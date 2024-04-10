@@ -1,0 +1,7 @@
+Name:Charging Binox
+ManaCost:7 G
+Types:Creature Beast
+PT:7/5
+K:Assist
+K:Trample
+Oracle:Assist (Another player can pay up to {7} of this spell's cost.)\nTrample
