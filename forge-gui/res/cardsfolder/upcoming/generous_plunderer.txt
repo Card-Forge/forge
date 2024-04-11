@@ -8,7 +8,6 @@ SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | RememberTokens$ Tr
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigToken | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | SpellDescription$ When you do, target opponent creates a tapped Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ c_a_treasure_sac | TokenTapped$ True 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Whenever Generous Plunderer attacks, it deals damage to defending player equal to the number of artifacts they control.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to defending player equal to the number of artifacts they control.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
 SVar:X:Count$Valid Artifact.ControlledBy TriggeredDefendingPlayer
