@@ -9,10 +9,9 @@ SVar:TrigInstantEffect:DB$ Effect | StaticAbilities$ CascadeInstant | Triggers$ 
 SVar:DBSorceryEffect:DB$ Effect | StaticAbilities$ CascadeSorcery | Triggers$ ExileSorceryEff
 SVar:CascadeInstant:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Instant+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next instant spell you cast this turn has cascade.
 SVar:CascadeSorcery:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Sorcery+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next sorcery spell you cast this turn has cascade.
-SVar:ExileInstantEff:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.Instant+YouCtrl | Execute$ RemoveInstantEff | Static$ True
-SVar:ExileSorceryEff:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.Sorcery+YouCtrl | Execute$ RemoveSorceryEff | Static$ True
-SVar:RemoveInstantEff:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:RemoveSorceryEff:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:ExileInstantEff:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.Instant+YouCtrl | Execute$ RemoveEff | Static$ True
+SVar:ExileSorceryEff:Mode$ SpellCast | EffectZone$ Command | ValidCard$ Card.Sorcery+YouCtrl | Execute$ RemoveEff | Static$ True
+SVar:RemoveEff:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:HasAttackEffect:TRUE
 K:Crew:2
 DeckHas:Keyword$Cascade
