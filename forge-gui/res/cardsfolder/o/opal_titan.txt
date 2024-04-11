@@ -2,6 +2,6 @@ Name:Opal Titan
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | Execute$ TrigAnimate | IsPresent$ Card.Self+Enchantment | TriggerZones$ Battlefield | TriggerDescription$ When an opponent casts a creature spell, if CARDNAME is an enchantment, CARDNAME becomes a 4/4 Giant creature with protection from each of that spell's colors.
-SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Giant | Power$ 4 | Toughness$ 4 | RemoveCardTypes$ True | Duration$ Permanent | SubAbility$ DBProtection | Duration$ Permanent
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Types$ Creature,Giant | Power$ 4 | Toughness$ 4 | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Duration$ Permanent | SubAbility$ DBProtection | Duration$ Permanent
 SVar:DBProtection:DB$ Protection | Gains$ Defined TriggeredCard | Duration$ Permanent
 Oracle:When an opponent casts a creature spell, if Opal Titan is an enchantment, Opal Titan becomes a 4/4 Giant creature with protection from each of that spell's colors.
