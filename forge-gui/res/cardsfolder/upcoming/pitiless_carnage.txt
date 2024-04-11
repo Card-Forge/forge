@@ -1,0 +1,9 @@
+Name:Pitiless Carnage
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Sacrifice | Amount$ Count$Valid Permanent.YouCtrl | SacValid$ Permanent.YouCtrl | SacMessage$ permanent | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Sacrifice any number of permanents you control, then draw that many cards.
+SVar:DBDraw:DB$ Draw | NumCards$ Count$RememberedSize | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Plot:1 B B
+DeckHas:Ability$Sacrifice
+Oracle:Sacrifice any number of permanents you control, then draw that many cards.\nPlot {1}{B}{B} (You may pay {1}{B}{B} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
