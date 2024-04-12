@@ -29,6 +29,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
@@ -490,7 +491,7 @@ public class HumanPlay {
         sourceAbility.clearManaPaid();
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, null, hcd.isEffect());
         if (!paid) {
-            p.getManaPool().refundManaPaid(sourceAbility);
+            new ManaRefundService(sourceAbility).refundManaPaid();
         }
         return paid;
     }

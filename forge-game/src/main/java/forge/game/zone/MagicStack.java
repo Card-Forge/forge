@@ -50,6 +50,7 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
@@ -197,7 +198,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         SpellAbility sa = undoStack.peek();
         if (sa.undo()) {
             clearUndoStack(sa);
-            sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+            new ManaRefundService(sa).refundManaPaid();
         } else {
             clearUndoStack(sa);
             for (Mana pay : sa.getPayingMana()) {
