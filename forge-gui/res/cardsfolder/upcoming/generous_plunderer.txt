@@ -9,7 +9,7 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ c_a_treasure_sac | TokenTapped$ True 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to defending player equal to the number of artifacts they control.
-SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ X
 SVar:X:Count$Valid Artifact.ControlledBy TriggeredDefendingPlayer
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|Sacrifice & Type$Treasure
