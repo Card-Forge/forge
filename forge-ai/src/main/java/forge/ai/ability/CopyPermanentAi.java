@@ -72,7 +72,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+        if (sa.isEmbalm() || sa.isEternalize()) {
             // E.g. Vizier of Many Faces: check to make sure it makes sense to make the token now
             if (ComputerUtilCard.checkNeedsToPlayReqs(sa.getHostCard(), sa) != AiPlayDecision.WillPlay) {
                 return false;

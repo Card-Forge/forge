@@ -312,6 +312,9 @@ public class CardState extends GameObject implements IHasSVars {
     public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
         return intrinsicKeywords.remove(s);
     }
+    public final boolean removeIntrinsicKeyword(final Keyword k) {
+        return intrinsicKeywords.removeAll(k);
+    }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>(manaAbilities);

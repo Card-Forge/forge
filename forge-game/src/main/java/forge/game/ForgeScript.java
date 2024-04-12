@@ -225,6 +225,10 @@ public class ForgeScript {
             return sa.isDash();
         } else if (property.equals("Disturb")) {
             return sa.isDisturb();
+        } else if (property.equals("Embalm")) {
+            return sa.isEmbalm();
+        } else if (property.equals("Eternalize")) {
+            return sa.isEternalize();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
         } else if (property.equals("Jumpstart")) {
