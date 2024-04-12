@@ -190,12 +190,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
-        if (hasParam("Outlast")) {
-            if (!spellAbility.isOutlast()) {
-                return false;
-            }
-        }
-
         if (hasParam("EternalizeOrEmbalm")) {
             if (!spellAbility.hasParam("Eternalize") && !spellAbility.hasParam("Embalm")) {
                 return false;

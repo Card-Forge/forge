@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 PT:1/2
 K:Outlast:2 W
-T:Mode$ AbilityCast | ValidCard$ Card.Self | ValidActivatingPlayer$ You | Outlast$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you activate CARDNAME's outlast ability, create a 1/1 white Warrior creature token.
+T:Mode$ AbilityCast | ValidCard$ Card.Self | ValidActivatingPlayer$ You | ValidSA$ Activated.Outlast | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you activate CARDNAME's outlast ability, create a 1/1 white Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_warrior | TokenOwner$ You
 DeckHints:Ability$Counters
 DeckHas:Ability$Counters|Token

@@ -3255,7 +3255,6 @@ public class CardFactoryUtil {
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
-            sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Overload")) {
             final String[] k = keyword.split(":");
