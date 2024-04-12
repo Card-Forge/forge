@@ -1,0 +1,8 @@
+Name:Rise of the Varmints
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ Count$ValidGraveyard Creature.YouCtrl | TokenScript$ g_2_1_varmint | SpellDescription$ Create X 2/1 green Varmint creature tokens, where X is the number of creature cards in your graveyard.
+K:Plot:2 G
+DeckHas:Ability$Token & Type$Varmint
+DeckHints:Ability$Discard|Sacrifice
+Oracle:Create X 2/1 green Varmint creature tokens, where X is the number of creature cards in your graveyard.\nPlot {2}{G} (You may pay {2}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
