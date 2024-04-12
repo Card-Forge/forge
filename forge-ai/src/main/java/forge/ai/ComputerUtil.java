@@ -87,7 +87,6 @@ public class ComputerUtil {
         return handlePlayingSpellAbility(ai, sa, game, null);
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
-        game.getStack().freezeStack(sa);
         final Card source = sa.getHostCard();
         source.setSplitStateToPlayAbility(sa);
 
@@ -129,6 +128,7 @@ public class ComputerUtil {
 
         // Remember the now-forgotten kicker cost? Why is this needed?
         sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
+        game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {

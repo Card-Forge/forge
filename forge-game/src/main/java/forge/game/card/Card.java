@@ -193,8 +193,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Player, String> flipResult;
     private List<Integer> storedRolls;
 
-    private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
-
     private boolean isCommander = false;
     private boolean canMoveToCommandZone = false;
 
@@ -218,9 +216,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean renowned;
     private boolean solved = false;
-    private boolean saddled = false;
-    private int timesSaddledThisTurn = 0;
-    private CardCollection saddledByThisTurn;
     private Long suspectedTimestamp = null;
     private StaticAbility suspectedStatic = null;
 
@@ -237,11 +232,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesCrewedThisTurn = 0;
     private CardCollection crewedByThisTurn;
 
+    private boolean saddled = false;
+    private int timesSaddledThisTurn = 0;
+    private CardCollection saddledByThisTurn;
+
     private int classLevel = 1;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
-    private long mutatedTimestamp = -1;
     private long prototypeTimestamp = -1;
+    private long mutatedTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
 
@@ -279,6 +278,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private String oracleText = "";
 
+    private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
     private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
     private boolean hasBeenDealtExcessDamageThisTurn;

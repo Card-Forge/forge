@@ -1,0 +1,9 @@
+Name:Highway Robbery
+ManaCost:1 R
+Types:Sorcery
+A:SP$ GenericChoice | Choices$ DBDiscardToDraw,DBSacToDraw | SpellDescription$ You may discard a card or sacrifice a land. If you do, draw two cards.
+SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Land> | NumCards$ 2 | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Sacrifice a Land: Draw two cards.
+SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | NumCards$ 2 | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a card: Draw two cards.
+K:Plot:1 R
+DeckHas:Ability$Sacrifice|Discard
+Oracle:You may discard a card or sacrifice a land. If you do, draw two cards.\nPlot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

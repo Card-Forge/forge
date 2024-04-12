@@ -19,6 +19,10 @@ public class RollPlanarDiceAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        if (ai.getGame().getActivePlanes() == null) {
+            return false;
+        }
+        
         for (Card c : ai.getGame().getActivePlanes()) {
             if (willRollOnPlane(ai, c)) {
                 return true;

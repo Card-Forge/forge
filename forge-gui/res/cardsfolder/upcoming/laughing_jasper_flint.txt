@@ -1,0 +1,13 @@
+Name:Laughing Jasper Flint
+ManaCost:1 B R
+Types:Legendary Creature Lizard Rogue
+PT:4/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+YouDontOwn | AddType$ Mercenary | Description$ Creatures you control but don't own are Mercenaries in addition to their other types.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, exile the top X cards of target opponent's library, where X is the number of outlaws you control. Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.
+SVar:TrigDig:DB$ Dig | ValidTgts$ Opponent | DigNum$ X | ChangeNum$ All | RememberChanged$ True | DestinationZone$ Exile | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.Outlaw+YouCtrl
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Creatures you control but don't own are Mercenaries in addition to their other types.\nAt the beginning of your upkeep, exile the top X cards of target opponent's library, where X is the number of outlaws you control. Until end of turn, you may cast spells from among those cards, and mana of any type can be spent to cast those spells.

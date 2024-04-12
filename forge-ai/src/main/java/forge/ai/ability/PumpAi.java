@@ -426,6 +426,10 @@ public class PumpAi extends PumpAiBase {
                             && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
                         canDieToPump.add(c);
                     }
+                    // Also, don't pump itself if the SA involves a sacrifice self cost
+                    if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+                        canDieToPump.add(c);
+                    }
                 }
                 list.removeAll(canDieToPump);
 

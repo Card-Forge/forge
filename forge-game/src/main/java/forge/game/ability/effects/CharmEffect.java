@@ -163,7 +163,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append("\r\n");
             }
             for (AbilitySub sub : list) {
-                sb.append(spree ? "+" + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014" : "\u2022 ").append(sub.getParam("SpellDescription"));
+                sb.append(spree ? "+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 " : "\u2022 ").append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
             }
             sb.append("\r\n");
