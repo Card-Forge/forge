@@ -33,7 +33,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.cost.CostPayment;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
-import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementLayer;
@@ -41,7 +40,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
