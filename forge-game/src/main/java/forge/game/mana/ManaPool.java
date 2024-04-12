@@ -303,36 +303,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         manaSpent.clear();
     }
 
-    public final void refundManaPaid(final SpellAbility sa) {
-        Player p = sa.getActivatingPlayer();
-
-        // Send all mana back to your mana pool, before accounting for it.
-
-        // move non-undoable paying mana back to floating
-        refundMana(sa.getPayingMana());
-
-        List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
-
-        // start with the most recent
-        Collections.reverse(payingAbilities);
-
-        for (final SpellAbility am : payingAbilities) {
-            // undo paying abilities if we can
-            am.undo();
-        }
-
-        for (final SpellAbility am : payingAbilities) {
-            // Recursively refund abilities that were used.
-            refundManaPaid(am);
-            p.getGame().getStack().clearUndoStack(am);
-        }
-
-        payingAbilities.clear();
-
-        // update battlefield of activating player - to redraw cards used to pay mana as untapped
-        p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
-    }
-
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {
         if (shard.isOfKind(ManaAtom.COLORLESS) && color == ManaAtom.GENERIC) {
             return false; // FIXME: testing Colorless against Generic is a recipe for disaster, but probably there should be a better fix.
