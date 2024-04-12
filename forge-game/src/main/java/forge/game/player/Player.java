@@ -2519,20 +2519,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return now.isPlayerTurn(this) && now.getPhase().isMain() && game.getStack().isEmpty();
     }
 
-    //NOTE: for conditions the stack must only have the sa being checked
-    public boolean couldCastSorcery(final SpellAbility sa) {
-        final Card source = sa.getRootAbility().getHostCard();
-
-        for (final Card card : game.getCardsIn(ZoneType.Stack)) {
-            if (!card.equals(source)) {
-                return false;
-            }
-        }
-
-        PhaseHandler now = game.getPhaseHandler();
-        return now.isPlayerTurn(this) && now.getPhase().isMain();
-    }
-
     public final PlayerController getController() {
         if (!controlledBy.isEmpty()) {
             return controlledBy.lastEntry().getValue().getValue();

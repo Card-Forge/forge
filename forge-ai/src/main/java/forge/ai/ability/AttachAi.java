@@ -59,7 +59,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
         // and gaining card advantage
-        if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+        if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             return false;
         }
 

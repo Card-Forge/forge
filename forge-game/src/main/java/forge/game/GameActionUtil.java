@@ -111,7 +111,7 @@ public final class GameActionUtil {
 
             for (CardPlayOption o : source.mayPlay(activator)) {
                 // do not appear if it can be cast with SorcerySpeed
-                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.couldCastSorcery(sa)) {
+                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.canCastSorcery()) {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes

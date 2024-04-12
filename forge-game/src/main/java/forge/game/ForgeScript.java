@@ -340,7 +340,7 @@ public class ForgeScript {
             String unescaped = k[1].replace("~", "+");
             boolean found = false;
             for (GameObject o : AbilityUtils.getDefinedObjects(source, unescaped, spellAbility)) {
-                if (sa.isTargeting(o)) {
+                if (sa.getRootAbility().isTargeting(o)) {
                     found = true;
                     break;
                 }
