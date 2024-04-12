@@ -1,0 +1,7 @@
+Name:Gang Up
+ManaCost:X B
+Types:Instant
+K:Assist
+A:SP$ Destroy | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Destroy target creature with power X or less.
+SVar:X:Count$xPaid
+Oracle:Assist (Another player can pay up to {X} of this spell's cost. You choose the value of X.)\nDestroy target creature with power X or less.
