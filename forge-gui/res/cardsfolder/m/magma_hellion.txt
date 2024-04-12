@@ -1,0 +1,8 @@
+Name:Magma Hellion
+ManaCost:6 R
+Types:Creature Hellion
+PT:5/4
+K:Assist
+K:Trample
+K:Haste
+Oracle:Assist (Another player can pay up to {6} of this spell's cost.)\nTrample, haste
