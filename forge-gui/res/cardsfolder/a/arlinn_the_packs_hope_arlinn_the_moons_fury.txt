@@ -21,5 +21,5 @@ Types:Legendary Planeswalker Arlinn
 Loyalty:4
 K:Nightbound
 A:AB$ Mana | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R G | SpellDescription$ Add {R}{G}.
-A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Trample & Indestructible & Haste | Types$ Creature,Werewolf | RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Werewolf creature with trample, indestructible, and haste.
+A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Trample & Indestructible & Haste | Types$ Creature,Werewolf | RemoveCreatureTypes$ True | RemoveCardTypes$ True | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Werewolf creature with trample, indestructible, and haste.
 Oracle:Nightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)\n[+2]: Add {R}{G}.\n[0]: Until end of turn, Arlinn, the Moon's Fury becomes a 5/5 Werewolf creature with trample, indestructible, and haste.
