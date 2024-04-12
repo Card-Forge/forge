@@ -47,6 +47,7 @@ import forge.StaticData;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.CardDb;
+import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -2849,10 +2850,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGame().getAction().invoke(() -> {
                 if (targetZone == ZoneType.Battlefield) {
                     if (!forgeCard.getName().equals(f.getName())) {
-                        forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
-                        if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
-                                forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
-                            forgeCard.setBackSide(true);
+                        if (forgeCard.getRules().getSplitType().equals(CardSplitType.Specialize)) {
+                            for (Map.Entry<CardStateName, ICardFace> e : forgeCard.getRules().getSpecializeParts().entrySet()) {
+                                if (f.getName().equals(e.getValue().getName())) {
+                                    forgeCard.changeToState(e.getKey());
+                                    break;
+                                }
+                            }
+                        } else {
+                            forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
+                            if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
+                                    forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                                forgeCard.setBackSide(true);
+                            }
                         }
                     }
 

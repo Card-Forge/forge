@@ -432,6 +432,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
             //also include main part for split cards
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
+        } else if (paperCard.getRules().getSplitType() == CardSplitType.Specialize) {
+            //also include specialize faces
+            for (ICardFace face : paperCard.getRules().getSpecializeParts().values()) allCardsByName.put(face.getName(), paperCard);
         }
     }
 
