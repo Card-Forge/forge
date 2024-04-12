@@ -2068,7 +2068,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getTargets().contains(o)) {
             return true;
         }
-        SpellAbility p = getParent();
+        SpellAbility p = getSubAbility();
         return p != null && p.isTargeting(o);
     }
 

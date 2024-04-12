@@ -29,7 +29,7 @@ public class PermanentAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card card = sa.getHostCard();
 
-        if (card.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+        if (card.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             // AiPlayDecision.AnotherTime
             return false;
         }

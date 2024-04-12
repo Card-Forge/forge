@@ -305,7 +305,7 @@ public class CardProperty {
                 return false;
             }
             SpellAbility sp = (SpellAbility)spellAbility;
-            if (!sp.isTargeting(card)) {
+            if (!sp.getRootAbility().isTargeting(card)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -607,9 +607,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeTargetedBy")) {
             final String def = property.substring(15);
-            final SpellAbility targetingSA = AbilityUtils.getDefinedSpellAbilities(source, def, spellAbility).get(0);
-            if (!targetingSA.canTarget(card)) {
-                return false;
+            SpellAbility targetingSA = AbilityUtils.getDefinedSpellAbilities(source, def, spellAbility).get(0);
+            while (targetingSA != null) {
+                if (targetingSA.usesTargeting() && !targetingSA.canTarget(card)) {
+                    return false;
+                }
+                targetingSA = targetingSA.getSubAbility();
             }
         } else if (property.startsWith("HauntedBy")) {
             if (!card.isHauntedBy(source)) {
