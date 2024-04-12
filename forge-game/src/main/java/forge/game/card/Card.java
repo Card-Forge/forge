@@ -6303,12 +6303,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isEmbalmed() {
         SpellAbility sa = getTokenSpawningAbility();
-        return sa != null && sa.hasParam("Embalm");
+        return sa != null && sa.isEmbalm();
     }
 
     public final boolean isEternalized() {
         SpellAbility sa = getTokenSpawningAbility();
-        return sa != null && sa.hasParam("Eternalize");
+        return sa != null && sa.isEternalize();
     }
 
     public final int getExertedThisTurn() {

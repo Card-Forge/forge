@@ -571,6 +571,12 @@ public class CardFactory {
         for (Map.Entry<CardStateName, CardState> e : result.entrySet()) {
             final CardState originalState = out.getState(e.getKey());
             final CardState state = e.getValue();
+
+            // has Embalm Condition for extra changes of Vizier of Many Faces
+            if (sa.hasParam("Embalm") && !out.isEmbalmed()) {
+                continue;
+            }
+
             // update the names for the states
             if (sa.hasParam("KeepName")) {
                 state.setName(originalState.getName());
@@ -638,7 +644,6 @@ public class CardFactory {
                 state.setBaseLoyalty(String.valueOf(AbilityUtils.calculateAmount(host, sa.getParam("SetLoyalty"), sa)));
             }
 
-            // Planning a Vizier of Many Faces rework; always might come in handy
             if (sa.hasParam("RemoveCost")) {
                 state.setManaCost(ManaCost.NO_COST);
             }
@@ -706,34 +711,20 @@ public class CardFactory {
             }
 
             // Special Rules for Embalm and Eternalize
-            if (sa.hasParam("Embalm") && out.isEmbalmed()) {
-                state.addType("Zombie");
-                state.setColor(MagicColor.WHITE);
-                state.setManaCost(ManaCost.NO_COST);
-
-                if (sa.isIntrinsic()) {
-                    String name = TextUtil.fastReplace(
-                            TextUtil.fastReplace(host.getName(), ",", ""),
-                            " ", "_").toLowerCase();
-                    String set = host.getSetCode().toLowerCase();
-                    state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
-                }
+            if (sa.isEmbalm() && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
             }
 
-            if (sa.hasParam("Eternalize") && out.isEternalized()) {
-                state.addType("Zombie");
-                state.setColor(MagicColor.BLACK);
-                state.setManaCost(ManaCost.NO_COST);
-                state.setBasePower(4);
-                state.setBaseToughness(4);
-
-                if (sa.isIntrinsic()) {
-                    String name = TextUtil.fastReplace(
-                        TextUtil.fastReplace(host.getName(), ",", ""),
-                            " ", "_").toLowerCase();
-                    String set = host.getSetCode().toLowerCase();
-                    state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
-                }
+            if (sa.isEternalize() && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                    TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
             if (sa.hasParam("GainTextOf") && originalState != null) {
@@ -748,35 +739,28 @@ public class CardFactory {
                     continue;
                 }
 
-                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetPower"))
-                        state.removeStaticAbility(sta);
+                if (sa.hasParam("SetPower") && sta.hasParam("SetPower"))
+                    state.removeStaticAbility(sta);
+
+                if (sa.hasParam("SetToughness") && sta.hasParam("SetToughness"))
+                    state.removeStaticAbility(sta);
+
+                // currently only Changeling and similar should be affected by that
+                // other cards using AddType$ ChosenType should not
+                if (sa.hasParam("SetCreatureTypes") && sta.hasParam("AddAllCreatureTypes")) {
+                    state.removeStaticAbility(sta);
                 }
-                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetToughness"))
-                        state.removeStaticAbility(sta);
-                }
-                if (sa.hasParam("SetCreatureTypes")) {
-                    // currently only Changeling and similar should be affected by that
-                    // other cards using AddType$ ChosenType should not
-                    if (sta.hasParam("AddAllCreatureTypes")) {
-                        state.removeStaticAbility(sta);
-                    }
-                }
-                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetColor")) {
-                        state.removeStaticAbility(sta);
-                    }
+                if ((sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) && sta.hasParam("SetColor")) {
+                    state.removeStaticAbility(sta);
                 }
             }
 
             // remove some keywords
             if (sa.hasParam("SetCreatureTypes")) {
-                state.removeIntrinsicKeyword("Changeling");
+                state.removeIntrinsicKeyword(Keyword.CHANGELING);
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")
-                    || sa.hasParam("SetColorByManaCost")) {
-                state.removeIntrinsicKeyword("Devoid");
+            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
+                state.removeIntrinsicKeyword(Keyword.DEVOID);
             }
         }
         return result;

@@ -190,12 +190,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
-        if (hasParam("EternalizeOrEmbalm")) {
-            if (!spellAbility.hasParam("Eternalize") && !spellAbility.hasParam("Embalm")) {
-                return false;
-            }
-        }
-
         // use numTargets instead?
         if (hasParam("IsSingleTarget")) {
             Set<GameObject> targets = Sets.newHashSet();

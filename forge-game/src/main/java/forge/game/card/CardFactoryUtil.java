@@ -2832,7 +2832,8 @@ public class CardFactoryUtil {
             String costStr = kw[1];
 
             String effect = "AB$ CopyPermanent | Cost$ " + costStr + " ExileFromGrave<1/CARDNAME> " +
-            "| ActivationZone$ Graveyard | SorcerySpeed$ True | Embalm$ True " +
+            "| ActivationZone$ Graveyard | SorcerySpeed$ True " +
+            "| RemoveCost$ True | SetColor$ White | AddTypes$ Zombie" +
             "| PrecostDesc$ Embalm | CostDesc$ " + ManaCostParser.parse(costStr) + " | Defined$ Self " +
             "| StackDescription$ Embalm - CARDNAME "+
             "| SpellDescription$ (" + inst.getReminderText() + ")" ;
@@ -2968,7 +2969,8 @@ public class CardFactoryUtil {
             StringBuilder sb = new StringBuilder();
 
             sb.append("AB$ CopyPermanent | Cost$ ").append(costStr).append(" ExileFromGrave<1/CARDNAME>")
-            .append(" | Defined$ Self | ActivationZone$ Graveyard | SorcerySpeed$ True | Eternalize$ True");
+            .append(" | Defined$ Self | ActivationZone$ Graveyard | SorcerySpeed$ True")
+            .append(" | RemoveCost$ True | SetColor$ Black | AddTypes$ Zombie | SetPower$ 4 | SetToughness$ 4");
 
             sb.append(" | PrecostDesc$ Eternalize");
             if (!cost.isOnlyManaCost()) { //Something other than a mana cost
@@ -2976,7 +2978,7 @@ public class CardFactoryUtil {
             } else {
                 sb.append(" ");
             }
-            // don't use SimpleString there because it does has "and" between cost i dont want that
+            // don't use SimpleString there because it does has "and" between cost i don't want that
             costStr = cost.toString();
             // but now it has ": " at the end i want to remove
             sb.append("| CostDesc$ ").append(costStr, 0, costStr.length() - 2);
