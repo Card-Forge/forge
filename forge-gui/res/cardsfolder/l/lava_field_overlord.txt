@@ -1,0 +1,9 @@
+Name:Lava-Field Overlord
+ManaCost:7 R R
+Types:Creature Dragon
+PT:5/4
+K:Assist
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target creature an opponent controls.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 4
+Oracle:Assist (Another player can pay up to {7} of this spell's cost.)\nFlying\nWhen Lava-Field Overlord enters the battlefield, it deals 4 damage to target creature an opponent controls.
