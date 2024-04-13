@@ -85,6 +85,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     private final List<Card> thisTurnCast = Lists.newArrayList();
     private List<Card> lastTurnCast = Lists.newArrayList();
+    private final List<SpellAbility> abilitiesActivatedThisTurn = Lists.newArrayList();
+
     private Card curResolvingCard = null;
     private final Map<String, List<GameCommand>> commandList = Maps.newHashMap();
 
@@ -263,7 +265,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
-                source.addAbilityActivated(sp);
+                addAbilityActivatedThisTurn(sp, source);
             }
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
@@ -336,7 +338,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
-            source.addAbilityActivated(sp);
+            addAbilityActivatedThisTurn(sp, source);
         }
 
         if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
@@ -388,11 +390,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Run Cycled triggers
             if (sp.isCycling()) {
                 activator.addCycled(sp);
-            }
-
-            // Log number of Equips
-            if (sp.isEquip()) {
-                activator.addEquipped();
             }
 
             if (sp.hasParam("Crew")) {
@@ -894,6 +891,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final void onNextTurn() {
         game.getStackZone().resetCardsAddedThisTurn();
+        this.abilitiesActivatedThisTurn.clear();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
             return;
@@ -905,6 +903,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final List<Card> getSpellsCastLastTurn() {
         return lastTurnCast;
+    }
+
+    public void addAbilityActivatedThisTurn(SpellAbility sa, final Card source) {
+        source.addAbilityActivated(sa);
+        abilitiesActivatedThisTurn.add(sa.copy(CardCopyService.getLKICopy(source), true));
+    }
+
+    public List<SpellAbility> getAbilityActivatedThisTurn() {
+        return abilitiesActivatedThisTurn;
     }
 
     public final void addCastCommand(final String valid, final GameCommand c) {

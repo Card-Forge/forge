@@ -3679,7 +3679,6 @@ public class CardFactoryUtil {
             sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("TypeCycling")) {
@@ -3704,7 +3703,6 @@ public class CardFactoryUtil {
             sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
-            sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         }

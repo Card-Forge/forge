@@ -560,7 +560,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCycling() {
-        return isAlternativeCost(AlternativeCost.Cycling);
+        return isKeyword(Keyword.CYCLING) || isKeyword(Keyword.TYPECYCLING);
     }
 
     public boolean isBackup() {

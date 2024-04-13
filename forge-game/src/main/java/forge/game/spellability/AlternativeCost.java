@@ -4,7 +4,6 @@ public enum AlternativeCost {
     Awaken,
     Bestow,
     Blitz,
-    Cycling, // ActivatedAbility
     Dash,
     Disturb,
     Emerge,
