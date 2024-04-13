@@ -8,4 +8,4 @@ A:AB$ ChangeZone | Cost$ Sac<3/Creature.Other/other creatures> | Hidden$ True | 
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
-Oracle:Flying, trample\nSacrifice three other creatures: You may put a creature card from your hand onto the battlefield. Activate only as a sorcery and only once each turn. 
+Oracle:Flying, trample\nSacrifice three other creatures: You may put a creature card from your hand onto the battlefield. Activate only as a sorcery and only once each turn.

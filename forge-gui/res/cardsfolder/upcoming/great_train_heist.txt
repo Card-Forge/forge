@@ -1,7 +1,7 @@
 Name:Great Train Heist
 ManaCost:R
 Types:Instant
-K:Spree 
+K:Spree
 A:SP$ Charm | Choices$ DBUntapAll,DBPumpAll,DBCombatTrig | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
 SVar:DBUntapAll:DB$ UntapAll | SpreeCost$ 2 R | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures you control. If it's your combat phase, there is an additional combat phase after this phase.
 SVar:DBAddCombat:DB$ AddPhase | ConditionPhases$ BeginCombat->EndCombat | ConditionPlayerTurn$ True | AfterPhase$ EndCombat | ExtraPhase$ Combat

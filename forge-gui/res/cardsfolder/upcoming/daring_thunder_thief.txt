@@ -1,5 +1,5 @@
 Name:Daring Thunder-Thief
-ManaCost:3 U 
+ManaCost:3 U
 Types:Creature Turtle Rogue
 PT:4/4
 K:Flash

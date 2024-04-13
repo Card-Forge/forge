@@ -1,5 +1,5 @@
 Name:Fleeting Reflection
-ManaCost:1 U 
+ManaCost:1 U
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBUntap | SpellDescription$ Target creature you control gains hexproof until end of turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBClone | SpellDescription$ Untap that creature.
