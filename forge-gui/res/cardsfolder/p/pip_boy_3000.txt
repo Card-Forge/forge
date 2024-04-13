@@ -5,8 +5,8 @@ T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigChoose | TriggerDesc
 SVar:TrigChoose:DB$ Charm | Choices$ DBDraw,DBPutCounter,DBUntap | CharmNum$ 1
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Sort Inventory — Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
-SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 |  Defined$ Equipped | CounterNum$ 1 | SpellDescription$ Pick a Perk — Put a +1/+1 counter on that creature.
-SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target lands | SpellDescription$  Check Map — Untap up to two target lands.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Equipped | CounterNum$ 1 | SpellDescription$ Pick a Perk — Put a +1/+1 counter on that creature.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target lands | SpellDescription$ Check Map — Untap up to two target lands.
 K:Equip:2
 DeckHas:Ability$Counters|Discard
 Oracle:Whenever equipped creature attacks, choose one —\n• Sort Inventory — Draw a card, then discard a card.\n• Pick a Perk — Put a +1/+1 counter on that creature.\n• Check Map — Untap up to two target lands.\nEquip {2}
