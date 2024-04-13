@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Construct
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Equipment card from your graveyard to the battlefield attached to CARDNAME.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Equipment.YouOwn | TgtPrompt$ Select target Equipment card from your graveyard | AttachedTo$ Self |
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Equipment.YouOwn | TgtPrompt$ Select target Equipment card from your graveyard | AttachedTo$ Self
 T:Mode$ Sacrificed | ValidCard$ Artifact | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice an artifact, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHints:Type$Artifact|Clue|Map|Treasure|Food & Ability$Sacrifice|Graveyard|Counters
