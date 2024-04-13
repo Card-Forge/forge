@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Damage
 SVar:Damage:TriggeredCard$CardPower
 DeckHas:Ability$Graveyard|Counters
-DeckHints:Ability$Graveyard|Mill|Discard|Sacrifice  & Type$Legendary
+DeckHints:Ability$Graveyard|Mill|Discard|Sacrifice & Type$Legendary
 Oracle:When Rakdos Joins Up enters the battlefield, return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it.\nWhenever a legendary creature you control dies, Rakdos Joins Up deals damage equal to that creature's power to target opponent.
