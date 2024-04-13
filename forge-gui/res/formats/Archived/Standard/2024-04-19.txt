@@ -1,7 +1,7 @@
 [format]
-Name:Standard
-Order:101
+Name:Standard (OTJ)
+Type:Archived
 Subtype:Standard
-Type:Sanctioned
+Effective:2024-04-19
 Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG
 Banned:Fable of the Mirror-Breaker; Invoke Despair; Reckoner Bankbuster; The Meathook Massacre
