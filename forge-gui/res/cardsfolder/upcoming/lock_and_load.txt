@@ -1,0 +1,8 @@
+Name:Lock and Load
+ManaCost:2 U
+Types:Sorcery
+K:Plot:3 U
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDrawX | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then draw a card for each other instant and sorcery spell you've cast this turn.
+SVar:DBDrawX:DB$ Draw | Defined$ You | NumCards$ X | StackDescription$ None
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl/Minus.1
+Oracle:Draw a card, then draw a card for each other instant and sorcery spell you've cast this turn.\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)
