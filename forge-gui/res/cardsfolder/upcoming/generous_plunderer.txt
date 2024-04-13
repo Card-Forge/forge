@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Rogue
 PT:2/2
 K:Menace
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTreasure | OptionalDecider$ You  | TriggerDescription$ At the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTreasure | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | RememberTokens$ True | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigToken | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | SpellDescription$ When you do, target opponent creates a tapped Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ c_a_treasure_sac | TokenTapped$ True
