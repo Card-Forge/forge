@@ -1,0 +1,9 @@
+Name:Legion Extruder
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+A:AB$ Token | Cost$ 2 T Sac<1/Artifact.Other/another artifact> | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Golem artifact creature token.
+DeckHints:Ability$Sacrifice
+DeckHas:Ability$Token & Type$Golem
+Oracle:When Legion Extruder enters the battlefield, it deals 2 damage to any target.\n{2}, {T}, Sacrifice another artifact: Create a 3/3 colorless Golem artifact creature token.
