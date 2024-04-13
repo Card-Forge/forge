@@ -7,4 +7,5 @@ SVar:RetreatTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ 
 T:Mode$ SpellCast | ValidCard$ Card.Outlaw | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast your first outlaw spell each turn, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+DeckNeeds:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
 Oracle:Enchant land\nEnchanted land has "{T}: Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities from outlaw sources." (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nWhenever you cast your first outlaw spell each turn, you draw a card and you lose 1 life.
