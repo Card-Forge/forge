@@ -2269,14 +2269,6 @@ public class AbilityUtils {
             return doXMath(player.getOpponentsGreatestLifeTotal(), expr, c, ctb);
         }
 
-        if (sq[0].equals("YouCycledThisTurn")) {
-            return doXMath(player.getCycledThisTurn(), expr, c, ctb);
-        }
-
-        if (sq[0].equals("YouEquippedThisTurn")) {
-            return doXMath(player.getEquippedThisTurn(), expr, c, ctb);
-        }
-
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
@@ -2726,6 +2718,12 @@ public class AbilityUtils {
             } else {
                 someCards = CardUtil.getLastTurnCast(validFilter, c, ctb, player);
             }
+        }
+        if (sq[0].startsWith("ThisTurnActivated")) {
+            final String[] workingCopy = paidparts[0].split("_");
+            final String validFilter = workingCopy[1];
+            // use objectXCount ?
+            return CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
