@@ -8,4 +8,4 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Valid
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:Flying\nWhen Nurturing Pixie enters the battlefield, return up to one target non-Faerie, nonland permanent you control to its owner’s hand. If a permanent was returned this way, put a +1/+1 counter on Nurturing Pixie.
+Oracle:Flying\nWhen Nurturing Pixie enters the battlefield, return up to one target non-Faerie, nonland permanent you control to its owner's hand. If a permanent was returned this way, put a +1/+1 counter on Nurturing Pixie.
