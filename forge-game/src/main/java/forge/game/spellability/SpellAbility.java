@@ -131,8 +131,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean blessing = false;
-
     /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions;
@@ -1134,13 +1132,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public boolean isEquip() {
         return hasParam("Equip");
-    }
-
-    public boolean isBlessing() {
-        return blessing;
-    }
-    public void setBlessing(boolean blessing0) {
-        blessing = blessing0;
     }
 
     public boolean isChapter() {

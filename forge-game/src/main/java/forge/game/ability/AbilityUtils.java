@@ -1341,7 +1341,7 @@ public class AbilityUtils {
         }
 
         // do blessing there before condition checks
-        if (sa.isSpell() && sa.isBlessing() && !sa.getHostCard().isPermanent()) {
+        if (sa.isSpell() && !sa.getHostCard().isPermanent() && sa.getHostCard().hasKeyword(Keyword.ASCEND)) {
             if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
                 pl.setBlessing(true);
             }

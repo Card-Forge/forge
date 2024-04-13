@@ -797,11 +797,6 @@ public class CardFactoryUtil {
                 trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
                 inst.addTrigger(trigger);
-            } else {
-                SpellAbility sa = card.getFirstSpellAbility();
-                if (sa != null && sa.isSpell()) {
-                    sa.setBlessing(true);
-                }
             }
         } else if (keyword.startsWith("Backup")) {
             final String[] k = keyword.split(":");
