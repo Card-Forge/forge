@@ -1,0 +1,10 @@
+Name:Crackling Spellslinger
+ManaCost:3 R R
+Types:Creature Human Wizard
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCast+Self | Execute$ TrigDelay | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, the next instant or sorcery spell you cast this turn has storm. (When you cast that spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
+SVar:TrigDelay:DB$ DelayedTrigger | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ AddStorm
+SVar:AddStorm:DB$ Pump | Defined$ TriggeredCard | KW$ Storm | PumpZone$ Stack
+DeckHints:Type$Instant|Sorcery
+Oracle:Flash\nWhen Crackling Spellslinger enters the battlefield, if you cast it, the next instant or sorcery spell you cast this turn has storm. (When you cast that spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
