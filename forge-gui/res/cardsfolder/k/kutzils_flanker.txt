@@ -1,6 +1,6 @@
 Name:Kutzil's Flanker
 ManaCost:2 W
-Types:Creature — Cat Warrior
+Types:Creature Cat Warrior
 PT:3/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
