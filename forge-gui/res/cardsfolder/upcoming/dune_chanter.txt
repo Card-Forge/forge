@@ -10,4 +10,5 @@ A:AB$ Mill | Cost$ T | NumCards$ 2 | Defined$ You | RememberMilled$ True | SubAb
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.Land
+DeckHas:Ability$Graveyard|LifeGain & Type$Desert
 Oracle:Reach\nLands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.\nLands you control have "{T}: Add one mana of any color."\n{T}: Mill two cards. You gain 1 life for each land card milled this way.
