@@ -3102,6 +3102,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbBefore.append(" You may choose new targets for the copies.");
                     }
                     sbBefore.append(")\r\n");
+                } else if (keyword.equals("Assist")) {
+                    sbBefore.append(keyword).append(" (").
+                    append(String.format(inst.getReminderText(), "{" + getManaCost().getGenericCost() + "}"))
+                    .append(")");
+                    sbBefore.append("\r\n\r\n");
                 } else if (keyword.startsWith("DeckLimit")) {
                     final String[] k = keyword.split(":");
                     sbBefore.append(k[2]).append("\r\n");
