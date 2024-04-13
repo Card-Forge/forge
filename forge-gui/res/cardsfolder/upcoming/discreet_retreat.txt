@@ -1,6 +1,7 @@
 Name:Discreet Retreat
 ManaCost:3 B
 Types:Enchantment Aura
+K:Enchant land
 A:SP$ Attach | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ RetreatTap | Description$ Enchanted land has "{T}: Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities from outlaw sources." (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
 SVar:RetreatTap:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.Outlaw,Activated.Outlaw | SpellDescription$ Add two mana of any one color. Spend this mana only to cast outlaw spells or activate abilities from outlaw sources. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
