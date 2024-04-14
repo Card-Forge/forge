@@ -12,4 +12,4 @@ SVar:ReanimateSelf:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Self
 SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast EFFECTSOURCE from your graveyard this turn.
 DeckHints:Ability$Proliferate
 DeckHas:Ability$Graveyard
-Oracle:Flying, defender\nAs long as Ichor Aberration's power is 7 or greater, it can attack as though it didn't have defender.\nWhenever you proliferate, if Ichor Aberation is in your graveyard or on the battlefield, Ichor Aberration perpetually gets +1/+1. You may cast it from your graveyard this turn.
+Oracle:Flying, defender\nAs long as Ichor Aberration's power is 7 or greater, it can attack as though it didn't have defender.\nWhenever you proliferate, if Ichor Aberration is in your graveyard or on the battlefield, Ichor Aberration perpetually gets +1/+1. You may cast it from your graveyard this turn.
