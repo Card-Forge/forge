@@ -1,0 +1,10 @@
+Name:Starlight Spectacular
+ManaCost:2 W W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoop | TriggerDescription$ Parade! — At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it. (Places everyone! The first creature in line gets +0/+0.)
+SVar:TrigLoop:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | ChooseOrder$ True | SubAbility$ DBCleanup | RepeatSubAbility$ ParadePump | ClearRemembered$ True | UseImprinted$ True
+SVar:ParadePump:DB$ Pump | Defined$ Imprinted | NumAtt$ X | NumDef$ X | RememberPumped$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:PlayMain1:TRUE
+Oracle:Parade! — At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it. (Places everyone! The first creature in line gets +0/+0.)
