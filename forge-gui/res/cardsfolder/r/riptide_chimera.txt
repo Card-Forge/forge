@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Enchantment Creature Chimera
 PT:3/4
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return an enchanment you control to its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return an enchantment you control to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Enchantment.YouCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE2
