@@ -32,10 +32,12 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -389,10 +391,19 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContains")) {
-                if (restriction.endsWith("X") && sa.costHasManaX()) {
+                Game game = sa.getHostCard().getGame();
+                Cost payment = sa.getPayCosts();
+                if (game.getStack().isResolving() && sa.hasParam("UnlessCost")) {
+                    payment = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
+                }
+                if (payment.hasNoManaCost()) {
+                    continue;
+                }
+                // TODO Thassa's Intervention with "twice {X}" is tricky
+                if (restriction.endsWith("X") && payment.getCostMana().getAmountOfX() > 0) {
                     return true;
                 }
-                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
+                if (restriction.endsWith("C") && payment.getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;
