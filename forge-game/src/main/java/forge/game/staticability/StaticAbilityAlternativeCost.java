@@ -2,7 +2,7 @@ package forge.game.staticability;
 
 import java.util.List;
 
-import org.testng.collections.Lists;
+import com.google.common.collect.Lists;
 
 import forge.card.mana.ManaCostParser;
 import forge.game.Game;
