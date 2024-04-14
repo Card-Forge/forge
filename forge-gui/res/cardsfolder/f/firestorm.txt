@@ -5,6 +5,6 @@ A:SP$ DealDamage | Cost$ R Discard<X/Card> | ValidTgts$ Any | TargetMin$ 0 | Tar
 SVar:X:TargetedObjects$Amount
 SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxPermanents
 SVar:MaxPlayers:PlayerCountPlayers$Amount
-SVar:MaxPermanents:Count$Valid Creature,Planeswalker
+SVar:MaxPermanents:Count$Valid Any
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, discard X cards.\nFirestorm deals X damage to each of X targets.
