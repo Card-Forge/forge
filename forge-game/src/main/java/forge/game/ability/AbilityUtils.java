@@ -2665,19 +2665,28 @@ public class AbilityUtils {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
+        if (sq[0].equals("AllTypes")) {
+            List<Card> cards = getDefinedCards(c, sq[1], ctb);
+
+            int amount = countCardTypesFromList(cards, false) +
+                    countSuperTypesFromList(cards) +
+                    countSubTypesFromList(cards);
+
+            return doXMath(amount, expr, c, ctb);
+        }
         if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb), false), expr, c, ctb);
+            return doXMath(countCardTypesFromList(getDefinedCards(c, sq[1], ctb), false), expr, c, ctb);
         }
         if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), false), expr, c, ctb);
+            return doXMath(countCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), false), expr, c, ctb);
         }
         if (sq[0].contains("CardControllerPermanentTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
+            return doXMath(countCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
         }
         if (sq[0].startsWith("OppTypesInGrave")) {
             final PlayerCollection opponents = player.getOpponents();
             CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
-            return doXMath(getCardTypesFromList(oppCards, false), expr, c, ctb);
+            return doXMath(countCardTypesFromList(oppCards, false), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -3404,7 +3413,7 @@ public class AbilityUtils {
 
         //SacrificedPermanentTypesThisTurn
         if (l[0].startsWith("SacrificedPermanentTypesThisTurn")) {
-            return doXMath(getCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
+            return doXMath(countCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
         }
 
         final String[] sq = l[0].split("\\.");
@@ -3907,13 +3916,31 @@ public class AbilityUtils {
         return types.size();
     }
 
-    public static int getCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
+    public static int countCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
         if (permanentTypes)
             return (int) types.stream().filter(type -> type.isPermanent).count();
+        return types.size();
+    }
+
+    public static int countSuperTypesFromList(final Iterable<Card> list) {
+        EnumSet<CardType.Supertype> types = EnumSet.noneOf(CardType.Supertype.class);
+        for (Card c1 : list) {
+            Iterables.addAll(types, c1.getType().getSupertypes());
+        }
+
+        return types.size();
+    }
+
+    public static int countSubTypesFromList(final Iterable<Card> list) {
+        Set<String> types = new HashSet<>();
+        for (Card c1 : list) {
+            Iterables.addAll(types, c1.getType().getSubtypes());
+        }
+
         return types.size();
     }
 
