@@ -192,7 +192,7 @@ public class AnimateEffect extends AnimateEffectBase {
                 c.addImprintedCards(AbilityUtils.getDefinedCards(source, animateImprinted, sa));
             }
 
-            if (sa.hasParam("Crew")) {
+            if (sa.isCrew()) {
                 c.becomesCrewed(sa);
                 c.updatePowerToughnessForView();
             }

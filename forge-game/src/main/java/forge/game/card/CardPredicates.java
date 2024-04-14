@@ -567,6 +567,13 @@ public final class CardPredicates {
                 return c.canTap();
             }
         };
+
+        public static final Predicate<Card> CAN_CREW = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.canCrew();
+            }
+        };
         /**
          * a Predicate<Card> to get all creatures.
          */

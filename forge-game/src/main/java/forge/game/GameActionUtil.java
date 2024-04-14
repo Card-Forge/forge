@@ -25,12 +25,12 @@ import java.util.Map;
 import com.google.common.collect.*;
 import forge.game.card.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
@@ -328,61 +328,10 @@ public final class GameActionUtil {
                 }
                 alternatives.add(newSA);
             }
-
-            // below are for some special cases of activated abilities
-            if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-                for (final KeywordInterface inst : source.getKeywords()) {
-                    // need to find the correct Keyword from which this Ability is from
-                    if (!inst.getAbilities().contains(sa)) {
-                        continue;
-                    }
-
-                    // set the cost to this directly to bypass non mana cost
-                    final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
-                    newSA.setActivatingPlayer(activator);
-                    newSA.putParam("CostDesc", ManaCostParser.parse("0"));
-
-                    // need to build a new Keyword to get better Reminder Text
-                    String data[] = inst.getOriginal().split(":");
-                    data[1] = "0";
-                    KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
-
-                    // makes new SpellDescription
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(newSA.getCostDescription());
-                    sb.append("(").append(newKi.getReminderText()).append(")");
-                    newSA.setDescription(sb.toString());
-
-                    alternatives.add(newSA);
-                }
-            }
-            if (sa.isEquip() && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
-                for (final KeywordInterface inst : source.getKeywords()) {
-                    // need to find the correct Keyword from which this Ability is from
-                    if (!inst.getAbilities().contains(sa)) {
-                        continue;
-                    }
-
-                    // set the cost to this directly to bypass non mana cost
-                    SpellAbility newSA = sa.copyWithDefinedCost("0");
-                    newSA.setActivatingPlayer(activator);
-                    newSA.putParam("CostDesc", ManaCostParser.parse("0"));
-
-                    // need to build a new Keyword to get better Reminder Text
-                    String data[] = inst.getOriginal().split(":");
-                    data[1] = "0";
-                    KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
-
-                    // makes new SpellDescription
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(newSA.getCostDescription());
-                    sb.append("(").append(newKi.getReminderText()).append(")");
-                    newSA.setDescription(sb.toString());
-
-                    alternatives.add(newSA);
-                }
-            }
         }
+
+        alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(sa, activator));
+
         return alternatives;
     }
 

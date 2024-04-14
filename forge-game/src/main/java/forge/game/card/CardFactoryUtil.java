@@ -3654,8 +3654,8 @@ public class CardFactoryUtil {
 
             // tapXType has a special check for withTotalPower, and NEEDS it to be "+withTotalPowerGE"
             String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.Other+withTotalPowerGE" + power + "> | " +
-                    "CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
-                    " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Artifact,Creature | " +
+                    "PrecostDesc$ Crew | CostDesc$ " + power + " (Tap any number of creatures you control with total power " + power +
+                    " or more: | Secondary$ True | Defined$ Self | Types$ Artifact,Creature | " +
                     "SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
             if (k.length > 2) {
                 effect += " | " + k[2];

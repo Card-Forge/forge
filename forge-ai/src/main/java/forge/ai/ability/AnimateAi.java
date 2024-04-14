@@ -196,7 +196,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
 
                 if (!isSorcerySpeed(sa, aiPlayer) && !"Permanent".equals(sa.getParam("Duration"))) {
-                    if (sa.hasParam("Crew") && c.isCreature()) {
+                    if (sa.isCrew() && c.isCreature()) {
                         // Do not try to crew a vehicle which is already a creature
                         return false;
                     }

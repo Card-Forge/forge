@@ -1130,6 +1130,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isCraft() {
         return isKeyword(Keyword.CRAFT);
     }
+    public boolean isCrew() {
+        return isKeyword(Keyword.CREW);
+    }
     public boolean isEquip() {
         return isKeyword(Keyword.EQUIP);
     }
