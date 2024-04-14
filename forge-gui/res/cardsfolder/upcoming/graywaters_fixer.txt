@@ -1,0 +1,8 @@
+Name:Graywater's Fixer
+ManaCost:2 B R
+Types:Creature Lizard Mercenary
+PT:4/4
+S:Mode$ Continuous | EffectZone$ Battlefield | AffectedZone$ Graveyard | Affected$ Creature.Outlaw+YouCtrl | AddKeyword$ Encore:ConvertedManaCost | Description$ Each outlaw creature card in your graveyard has encore {X}, where X is its mana value. (Exile it and pay its encore cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
+DeckHas:Ability$Token|Graveyard
+DeckHints:Type$Mercenary|Assassin|Warlock|Pirate|Assassin
+Oracle:Each outlaw creature card in your graveyard has encore {X}, where X is its mana value. (Exile it and pay its encore cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
