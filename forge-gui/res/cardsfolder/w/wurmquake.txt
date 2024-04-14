@@ -7,5 +7,5 @@ SVar:X:Count$CastTotalManaSpent
 SVar:Y:PlayerCountOpponents$HasPropertyIsCorrupted
 K:Flashback:8 G G
 DeckHas:Ability$Token|Graveyard & Type$Phyrexian|Wurm & Keyword$Toxic
-DeckHints:Keyword$Toxic|Poisenous
+DeckHints:Keyword$Toxic|Poisonous
 Oracle:Corrupted — Create an X/X green Phyrexian Wurm creature token with trample and toxic 1, where X is the amount of mana spent to cast this spell. Then for each opponent with three or more poison counters, you create another one of those tokens.\nFlashback {8}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
