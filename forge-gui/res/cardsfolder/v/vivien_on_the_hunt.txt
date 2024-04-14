@@ -1,7 +1,7 @@
 Name:Vivien on the Hunt
 ManaCost:4 G G
 Types:Legendary Planeswalker Vivien
-Loyalty: 4
+Loyalty:4
 A:AB$ Sacrifice | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Optional$ True | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBChangeZone | SpellDescription$ You may sacrifice a creature. If you do, search your library for a creature card with mana value equal to 1 plus the sacrificed creature's mana value, put it onto the battlefield, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeTypeDesc$ creature card with mana value equal to 1 plus the sacrificed creature's mana value | ChangeNum$ 1 | SubAbility$ DBCleanup
 SVar:X:Remembered$CardManaCost/Plus.1

@@ -1,7 +1,7 @@
 Name:Final Showdown
 ManaCost:W
 Types:Instant
-K:Spree 
+K:Spree
 A:SP$ Charm | Choices$ DBDebuffAll,DBChooseCard,DBDestroyAll | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
 SVar:DBDebuffAll:DB$ AnimateAll | SpreeCost$ 1 | ValidCards$ Creature | RemoveAllAbilities$ True | SpellDescription$ All creatures lose all abilities until end of turn.
 SVar:DBChooseCard:DB$ ChooseCard | SpreeCost$ 1 | Choices$ Creature.YouCtrl | Mandatory$ True | ChoiceTitle$ Choose a creature you control | SubAbility$ DBPump | SpellDescription$ Choose a creature you control. It gains indestructible until end of turn.
