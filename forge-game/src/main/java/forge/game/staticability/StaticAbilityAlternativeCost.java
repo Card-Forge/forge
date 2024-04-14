@@ -31,12 +31,14 @@ public class StaticAbilityAlternativeCost {
 
                 Cost cost = new Cost(stAb.getParam("Cost"), sa.isAbility());
                 // set the cost to this directly to bypass non mana cost
-                final SpellAbility newSA = sa.copyWithDefinedCost(cost);
+                final SpellAbility newSA = sa.copyWithManaCostReplaced(pl, cost);
                 newSA.setActivatingPlayer(pl);
                 newSA.setBasicSpell(false);
 
                 // CostDesc only for ManaCost?
-                newSA.putParam("CostDesc", stAb.hasParam("CostDesc") ? ManaCostParser.parse(stAb.getParam("CostDesc")) : cost.toSimpleString());
+                if (sa.isAbility()) {
+                    newSA.putParam("CostDesc", stAb.hasParam("CostDesc") ? ManaCostParser.parse(stAb.getParam("CostDesc")) : cost.toSimpleString());
+                }
 
                 // makes new SpellDescription
                 final StringBuilder sb = new StringBuilder();
@@ -44,7 +46,7 @@ public class StaticAbilityAlternativeCost {
                 // skip reminder text for now, Keywords might be too complicated
                 //sb.append("(").append(newKi.getReminderText()).append(")");
                 if (sa.isSpell()) {
-                    sb.append(" ").append(sa.getDescription());
+                    sb.append(" ").append(sa.getDescription()).append(" (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 }
                 newSA.setDescription(sb.toString());
 
