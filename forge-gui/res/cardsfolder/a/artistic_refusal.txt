@@ -7,4 +7,4 @@ SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescript
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 DeckHas:Ability$Discard
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one or both —\n• Counter target spell.\n•Draw two cards, then discard a card.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one or both —\n• Counter target spell.\n• Draw two cards, then discard a card.
