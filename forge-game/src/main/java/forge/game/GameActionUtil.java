@@ -37,7 +37,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -109,71 +108,19 @@ public final class GameActionUtil {
                 game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
             }
 
-            for (CardPlayOption o : source.mayPlay(activator)) {
-                // do not appear if it can be cast with SorcerySpeed
-                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.canCastSorcery()) {
-                    continue;
+            // Alt Cost only for Basic Spells
+            if (sa.isBasicSpell()) {
+                for (SpellAbility newSA : StaticAbilityAlternativeCost.alternativeCosts(sa, source, activator)) {
+                    alternatives.add(newSA);
+                    // should only add MayPlay Zones
+                    alternatives.addAll(getMayPlaySpellOptions(newSA, source, activator, altCostOnly));
                 }
-                // non basic are only allowed if PayManaCost is yes
-                if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
-                        && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
-                    continue;
-                }
-                final Card host = o.getHost();
-
-                SpellAbility newSA = null;
-
-                boolean changedManaCost = false;
-                if (o.getPayManaCost() == PayManaCost.NO) {
-                    newSA = sa.copyWithNoManaCost(activator);
-                    newSA.setBasicSpell(false);
-                    changedManaCost = true;
-                } else if (o.getAltManaCost() != null) {
-                    newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
-                    newSA.setBasicSpell(false);
-                    changedManaCost = true;
-                } else {
-                    if (altCostOnly) {
-                        continue;
-                    }
-                    newSA = sa.copy(activator);
-                }
-
-                if (o.getAbility().hasParam("ValidAfterStack")) {
-                    newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
-                }
-
-                final SpellAbilityRestriction sar = newSA.getRestrictions();
-                if (o.isWithFlash()) {
-                    sar.setInstantSpeed(true);
-                }
-                sar.setZone(null);
-                newSA.setMayPlay(o);
-
-                if (changedManaCost) {
-                    if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
-                        sar.setLimitToCheck(null);
-                    }
-                }
-
-                final StringBuilder sb = new StringBuilder(sa.getDescription());
-                if (!source.equals(host)) {
-                    sb.append(" by ");
-                    if (host.isImmutable() && host.getEffectSource() != null) {
-                        sb.append(host.getEffectSource());
-                    } else {
-                        sb.append(host);
-                    }
-                }
-                if (o.getAbility().hasParam("MayPlayText")) {
-                    sb.append(" (").append(o.getAbility().getParam("MayPlayText")).append(")");
-                }
-                sb.append(o.toString(false));
-                newSA.setDescription(sb.toString());
-                alternatives.add(newSA);
             }
 
+            alternatives.addAll(getMayPlaySpellOptions(sa, source, activator, altCostOnly));
+
             // need to be done there before static abilities does reset the card
+            // These Keywords depend on the Mana Cost of for Split Cards
             if (sa.isBasicSpell()) {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
@@ -279,32 +226,30 @@ public final class GameActionUtil {
                 }
 
                 // some needs to check after ability was put on the stack
-                // Currently this is only checked for Toolbox and that only cares about creature spells
-                if (source.isCreature() && game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+                if (game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
                     Zone oldZone = source.getLastKnownZone();
-                    Card blitzCopy = source;
+                    Card stackCopy = source;
                     if (!source.isLKI()) {
-                        blitzCopy = CardCopyService.getLKICopy(source);
+                        stackCopy = CardCopyService.getLKICopy(source);
                     }
-                    blitzCopy.setLastKnownZone(game.getStackZone());
+                    stackCopy.setLastKnownZone(game.getStackZone());
                     lkicheck = true;
 
-                    blitzCopy.clearStaticChangedCardKeywords(false);
-                    CardCollection preList = new CardCollection(blitzCopy);
-                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(blitzCopy), preList);
+                    stackCopy.clearStaticChangedCardKeywords(false);
+                    CardCollection preList = new CardCollection(stackCopy);
+                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(stackCopy), preList);
 
-                    // currently only for Keyword BLitz, but should affect Dash probably too
-                    for (final KeywordInterface inst : blitzCopy.getKeywords(Keyword.BLITZ)) {
-                        // TODO with mana value 4 or greater has blitz.
+                    for (final KeywordInterface inst : stackCopy.getUnhiddenKeywords()) {
                         for (SpellAbility iSa : inst.getAbilities()) {
                             // do only non intrinsic
-                            if (!iSa.isIntrinsic()) {
+                            if (iSa.isSpell() && !iSa.isIntrinsic()) {
                                 alternatives.add(iSa);
+                                alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(iSa, source, activator));
                             }
                         }
                     }
                     // need to reset to Old Zone, or canPlay would fail
-                    blitzCopy.setLastKnownZone(oldZone);
+                    stackCopy.setLastKnownZone(oldZone);
                 }
             }
 
@@ -328,9 +273,83 @@ public final class GameActionUtil {
                 }
                 alternatives.add(newSA);
             }
+            // alternative Cost for activated abilities
+            alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(sa, source, activator));
         }
 
-        alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(sa, activator));
+        return alternatives;
+    }
+
+    public static List<SpellAbility> getMayPlaySpellOptions(final SpellAbility sa, final Card source, final Player activator, boolean altCostOnly) {
+        final List<SpellAbility> alternatives = Lists.newArrayList();
+
+        if (sa.isSpell() && source.isInPlay()) {
+            return alternatives;
+        }
+
+        for (CardPlayOption o : source.mayPlay(activator)) {
+            // do not appear if it can be cast with SorcerySpeed
+            if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.canCastSorcery()) {
+                continue;
+            }
+            // non basic are only allowed if PayManaCost is yes
+            if ((!sa.isBasicSpell() || (sa.costHasManaX() && sa.getPayCosts().getCostMana() != null
+                    && sa.getPayCosts().getCostMana().getXMin() > 0)) && o.getPayManaCost() == PayManaCost.NO) {
+                continue;
+            }
+            final Card host = o.getHost();
+
+            SpellAbility newSA = null;
+
+            boolean changedManaCost = false;
+            if (o.getPayManaCost() == PayManaCost.NO) {
+                newSA = sa.copyWithNoManaCost(activator);
+                newSA.setBasicSpell(false);
+                changedManaCost = true;
+            } else if (o.getAltManaCost() != null) {
+                newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
+                newSA.setBasicSpell(false);
+                changedManaCost = true;
+            } else {
+                if (altCostOnly) {
+                    continue;
+                }
+                newSA = sa.copy(activator);
+            }
+
+            if (o.getAbility().hasParam("ValidAfterStack")) {
+                newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
+            }
+
+            final SpellAbilityRestriction sar = newSA.getRestrictions();
+            if (o.isWithFlash()) {
+                sar.setInstantSpeed(true);
+            }
+            sar.setZone(null);
+            newSA.setMayPlay(o);
+
+            if (changedManaCost) {
+                if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
+                    sar.setLimitToCheck(null);
+                }
+            }
+
+            final StringBuilder sb = new StringBuilder(sa.getDescription());
+            if (!source.equals(host)) {
+                sb.append(" by ");
+                if (host.isImmutable() && host.getEffectSource() != null) {
+                    sb.append(host.getEffectSource());
+                } else {
+                    sb.append(host);
+                }
+            }
+            if (o.getAbility().hasParam("MayPlayText")) {
+                sb.append(" (").append(o.getAbility().getParam("MayPlayText")).append(")");
+            }
+            sb.append(o.toString(false));
+            newSA.setDescription(sb.toString());
+            alternatives.add(newSA);
+        }
 
         return alternatives;
     }
@@ -835,7 +854,7 @@ public final class GameActionUtil {
         if (fromZone != null) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
- 
+
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);
             // add back to where it came from, hopefully old state

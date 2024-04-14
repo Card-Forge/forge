@@ -16,7 +16,7 @@ public class StaticAbilityAlternativeCost {
 
     static String MODE = "AlternativeCost";
 
-    public static List<SpellAbility> alternativeCosts(final SpellAbility sa, final Player pl) {
+    public static List<SpellAbility> alternativeCosts(final SpellAbility sa, final Card source, final Player pl) {
         List<SpellAbility> result = Lists.newArrayList();
         final Game game = sa.getHostCard().getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
@@ -25,7 +25,7 @@ public class StaticAbilityAlternativeCost {
                     continue;
                 }
 
-                if (!apply(stAb, sa, pl)) {
+                if (!apply(stAb, sa, source, pl)) {
                     continue;
                 }
 
@@ -33,6 +33,7 @@ public class StaticAbilityAlternativeCost {
                 // set the cost to this directly to bypass non mana cost
                 final SpellAbility newSA = sa.copyWithDefinedCost(cost);
                 newSA.setActivatingPlayer(pl);
+                newSA.setBasicSpell(false);
 
                 // CostDesc only for ManaCost?
                 newSA.putParam("CostDesc", stAb.hasParam("CostDesc") ? ManaCostParser.parse(stAb.getParam("CostDesc")) : cost.toSimpleString());
@@ -42,6 +43,9 @@ public class StaticAbilityAlternativeCost {
                 sb.append(newSA.getCostDescription());
                 // skip reminder text for now, Keywords might be too complicated
                 //sb.append("(").append(newKi.getReminderText()).append(")");
+                if (sa.isSpell()) {
+                    sb.append(" ").append(sa.getDescription());
+                }
                 newSA.setDescription(sb.toString());
 
                 result.add(newSA);
@@ -50,11 +54,11 @@ public class StaticAbilityAlternativeCost {
         return result;
     }
 
-    private static boolean apply(final StaticAbility stAb, final SpellAbility sa, final Player pl) {
+    private static boolean apply(final StaticAbility stAb, final SpellAbility sa, final Card source, final Player pl) {
         if (!stAb.matchesValidParam("ValidSA", sa)) {
             return false;
         }
-        if (!stAb.matchesValidParam("ValidCard", sa.getHostCard())) {
+        if (!stAb.matchesValidParam("ValidCard", source)) {
             return false;
         }
         if (!stAb.matchesValidParam("ValidPlayer", pl)) {
