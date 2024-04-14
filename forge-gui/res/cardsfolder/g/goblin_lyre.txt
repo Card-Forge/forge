@@ -1,10 +1,10 @@
 Name:Goblin Lyre
 ManaCost:3
 Types:Artifact
-A:AB$ FlipACoin | Cost$ Sac<1/CARDNAME> | WinSubAbility$ DBDamageOpp | LoseSubAbility$ DBDamageYou | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | SpellDescription$ Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent controls.
+A:AB$ FlipACoin | Cost$ Sac<1/CARDNAME> | WinSubAbility$ DBDamageOpp | LoseSubAbility$ DBDamageYou | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Choose target opponent or planeswalker | SpellDescription$ Flip a coin. If you win the flip, CARDNAME deals damage to target opponent or planeswalker equal to the number of creatures you control. If you lose the flip, CARDNAME deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls.
 SVar:DBDamageOpp:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:DBDamageYou:DB$ DealDamage | Defined$ You | NumDmg$ Y
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Y:Count$Valid Creature.OppCtrl
+SVar:Y:Count$Valid Creature.ControlledBy TargetedOrController
 AI:RemoveDeck:All
 Oracle:Sacrifice Goblin Lyre: Flip a coin. If you win the flip, Goblin Lyre deals damage to target opponent or planeswalker equal to the number of creatures you control. If you lose the flip, Goblin Lyre deals damage to you equal to the number of creatures that opponent or that planeswalker's controller controls.

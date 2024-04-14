@@ -54,7 +54,7 @@ public class ManaRefundService {
         payingAbilities.clear();
 
         // update battlefield of all activating players - to redraw cards used to pay mana as untapped
-        for(Player p : payers) {
+        for (Player p : payers) {
             p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
         }
     }

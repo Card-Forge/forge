@@ -1418,17 +1418,7 @@ public class AbilityUtils {
         // The cost
         Cost cost;
         String unlessCost = sa.getParam("UnlessCost").trim();
-        if (unlessCost.equals("CardManaCost")) {
-            cost = new Cost(source.getManaCost(), true);
-        }
-        else if (unlessCost.equals("ChosenManaCost")) {
-            if (!source.hasChosenCard()) {
-                cost = new Cost(ManaCost.ZERO, true);
-            } else {
-                cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
-            }
-        }
-        else if (unlessCost.equals("ChosenNumber")) {
+        if (unlessCost.equals("ChosenNumber")) {
             cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
