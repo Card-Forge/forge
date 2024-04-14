@@ -11,4 +11,4 @@ SVar:DamageSac:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac 
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$LifeGain|Sacrifice & Type$Cleric|Phyrexian
-Oracle:{2}, Pay 2 life: Choose one. Activate only once.\n• Subversive Acolyte becomes a Human Cleric. It gets +1/+1 and gains lifelink.\n•Subversive Acolyte becomes a Phyrexian. It gets +3/+2 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."
+Oracle:{2}, Pay 2 life: Choose one. Activate only once.\n• Subversive Acolyte becomes a Human Cleric. It gets +1/+1 and gains lifelink.\n• Subversive Acolyte becomes a Phyrexian. It gets +3/+2 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."
