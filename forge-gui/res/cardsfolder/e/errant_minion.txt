@@ -7,9 +7,9 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execut
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ReplaceWith$ DBReplace | PreventionEffect$ True | Secondary$ True
 SVar:DBReplace:DB$ ReplaceDamage | Amount$ PaidAmount
 SVar:DBPay:DB$ ChooseNumber | Defined$ EnchantedController | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | AILogic$ PowerLeakMaxMana.2 | SubAbility$ DBStore
-SVar:DBStore:DB$ StoreSVar | SVar$ PaidAmount | Type$ CountSVar | Expression$ X | UnlessCost$ X | UnlessPayer$ EnchantedController | UnlessSwitched$ True | SubAbility$ DBDmg
+SVar:DBStore:DB$ StoreSVar | SVar$ PaidAmount | Type$ CountSVar | Expression$ Y | UnlessCost$ Y | UnlessPayer$ EnchantedController | UnlessSwitched$ True | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ EnchantedController | NumDmg$ 2 | SubAbility$ DBReset | StackDescription$ None
 SVar:DBReset:DB$ StoreSVar | SVar$ PaidAmount | Type$ Number | Expression$ 0
-SVar:X:Count$ChosenNumber
+SVar:Y:Count$ChosenNumber
 SVar:PaidAmount:Number$0
 Oracle:Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
