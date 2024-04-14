@@ -2,8 +2,8 @@ Name:Hotel of Fears
 ManaCost:no cost
 Types:Plane Spacecraft
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, exile the top card of your library. You lose life equal to its mana value. You may play that card this turn.
-SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBloseLife
-SVar:DBloseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBEffect
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play them this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

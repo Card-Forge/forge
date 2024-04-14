@@ -7,8 +7,8 @@ SVar:DBDealDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ ValidExile Card.ExiledWithSource | ForgetOnMoved$ Exile
 SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ You may play the exiled cards until the end of your next turn.
-SVar:MaxTgt:SVar$MaxPl/Plus.MaxPerm
-SVar:MaxPl:PlayerCountPlayers$Amount
-SVar:MaxPerm:Count$Valid Creature,Planeswalker
+SVar:MaxTgt:SVar$MaxPlayers/Plus.MaxCreaturesAndPW
+SVar:MaxPlayers:PlayerCountPlayers$Amount
+SVar:MaxCreaturesAndPW:Count$Valid Creature,Planeswalker
 SVar:X:Imprinted$CardManaCost
 Oracle:Choose any number of target creatures, planeswalkers, and/or players. For each of them, exile the top card of your library, then Soulfire Eruption deals damage equal to that card's mana value to that permanent or player. You may play the exiled cards until the end of your next turn.
