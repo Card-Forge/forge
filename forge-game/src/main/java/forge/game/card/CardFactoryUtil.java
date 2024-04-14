@@ -808,8 +808,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | " +
                     "Secondary$ True | TriggerDescription$ " + descStr;
 
-            final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude
-                    + " | CounterType$ P1P1 | Backup$ True";
+            final String putCounter = "DB$ PutCounter | ValidTgts$ Creature | CounterNum$ " + magnitude + " | CounterType$ P1P1";
 
             final String addAbility = backupVar + " | ConditionDefined$ Targeted | ConditionPresent$ Card.Other | " +
                     "Defined$ Targeted";
@@ -1041,7 +1040,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
 
             final String transformTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Night | IsPresent$ Card.Self+FrontSide | Secondary$ True | TriggerDescription$ As it becomes night, if this permanent is front face up, transform it.";
-            String transformEff = "DB$ SetState | Mode$ Transform | Daybound$ True";
+            String transformEff = "DB$ SetState | Mode$ Transform";
 
             trigger = TriggerHandler.parseTrigger(transformTrig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
@@ -1547,7 +1546,7 @@ public class CardFactoryUtil {
             inst.addTrigger(triggerDrawn);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
-                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX | Modular$ True";
+                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
                     " | OptionalDecider$ TriggeredCardController" +
@@ -1588,7 +1587,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
 
             final String transformTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Day | IsPresent$ Card.Self+BackSide | Secondary$ True | TriggerDescription$ As it becomes day, if this permanent is back face up, transform it";
-            String transformEff = "DB$ SetState | Mode$ Transform | Nightbound$ True";
+            String transformEff = "DB$ SetState | Mode$ Transform";
 
             trigger = TriggerHandler.parseTrigger(transformTrig, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
@@ -2214,7 +2213,7 @@ public class CardFactoryUtil {
             inst.addReplacement(re);
         } else if (keyword.equals("Daybound")) {
             final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | ReplacementResult$ Updated | Description$ If it is night, this permanent enters the battlefield transformed.";
-            final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True | Daybound$ True";
+            final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, host, intrinsic, card);
 
@@ -2898,7 +2897,7 @@ public class CardFactoryUtil {
             // Create return transformed ability string
             String ab = "AB$ ChangeZone | CostDesc$ " + cd.toString() + " | Cost$ Exile<1/CARDNAME> " + k[1] + " | " +
                     "Origin$ Exile | Destination$ Battlefield | Transformed$ True | Defined$ CorrectedSelf | " +
-                    "Craft$ True | XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
+                    "XAnnounceTitle$ " + Localizer.getInstance().getMessage("lblCraft") + " | " +
                     "SorcerySpeed$ True | StackDescription$ Return this card transformed under its owner's control. " +
                     "(Craft) | SpellDescription$ (" + inst.getReminderText() + ")";
             final SpellAbility newSA = AbilityFactory.getAbility(ab, card);
@@ -2924,7 +2923,7 @@ public class CardFactoryUtil {
             abilityStr.append("| ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
             // the if the Equipment can really attach should be part of the Attach Effect
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump");
+            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump");
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
@@ -3210,7 +3209,7 @@ public class CardFactoryUtil {
             String effect = "AB$ ChangeZone | Cost$ " + manacost +
                     " Return<1/Creature.attacking+unblocked/unblocked attacker> " +
                     "| PrecostDesc$ " + desc + " | CostDesc$ " + ManaCostParser.parse(manacost) +
-                    "| ActivationZone$ Hand | Origin$ Hand | Ninjutsu$ True " +
+                    "| ActivationZone$ Hand | Origin$ Hand" +
                     "| Destination$ Battlefield | Defined$ Self " +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
@@ -3223,7 +3222,7 @@ public class CardFactoryUtil {
                 effect = "AB$ ChangeZone | Cost$ " + manacost +
                         " Return<1/Creature.attacking+unblocked/unblocked attacker> " +
                         "| PrecostDesc$ " + desc + " | CostDesc$ " + ManaCostParser.parse(manacost) +
-                        "| ActivationZone$ Command | Origin$ Command | Ninjutsu$ True " +
+                        "| ActivationZone$ Command | Origin$ Command" +
                         "| Destination$ Battlefield | Defined$ Self | Secondary$ True " +
                         "| SpellDescription$ (" + inst.getReminderText() + ")";
 

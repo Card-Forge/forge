@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -248,7 +249,7 @@ public class ForgeScript {
         } else if (property.equals("isCastFaceDown")) {
             return sa.isCastFaceDown();
         } else if (property.equals("Modular")) {
-            return sa.hasParam("Modular");
+            return sa.isKeyword(Keyword.MODULAR);
         } else if (property.equals("Equip")) {
             return sa.isEquip();
         } else if (property.equals("Boast")) {
@@ -270,9 +271,9 @@ public class ForgeScript {
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
         } else if (property.equals("Daybound")) {
-            return sa.hasParam("Daybound");
+            return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
-            return sa.hasParam("Nightbound");
+            return sa.isKeyword(Keyword.NIGHTBOUND);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
         } else if (property.equals("ChapterNotLore")) {

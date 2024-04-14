@@ -564,7 +564,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isBackup() {
-        return this.hasParam("Backup");
+        return this.isKeyword(Keyword.BACKUP);
     }
 
     public boolean isBoast() {
@@ -572,7 +572,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isNinjutsu() {
-        return this.hasParam("Ninjutsu");
+        return this.isKeyword(Keyword.NINJUTSU);
     }
 
     public boolean isCumulativeUpkeep() {
@@ -1128,10 +1128,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCraft() {
-        return hasParam("Craft");
+        return isKeyword(Keyword.CRAFT);
     }
     public boolean isEquip() {
-        return hasParam("Equip");
+        return isKeyword(Keyword.EQUIP);
     }
 
     public boolean isChapter() {
