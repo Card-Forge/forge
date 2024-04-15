@@ -1,5 +1,5 @@
 Name:Generous Plunderer
-ManaCost:1 B
+ManaCost:1 R
 Types:Creature Human Rogue
 PT:2/2
 K:Menace
