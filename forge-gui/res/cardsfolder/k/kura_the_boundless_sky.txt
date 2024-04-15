@@ -10,4 +10,4 @@ SVar:RampThree:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType
 SVar:SpiritLand:DB$ Token | TokenScript$ g_x_x_spirit | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Spirit creature token, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 DeckHas:Ability$Token
-Oracle:Flying, deathtouch\nWhen Kura, the Boundless Sky dies, choose one:\n• Search your library for up to three land cards, reveal them, put them into your hand, then shuffle.\n• Create an X/X green Spirit creature token, where X is the number of lands you control.
+Oracle:Flying, deathtouch\nWhen Kura, the Boundless Sky dies, choose one —\n• Search your library for up to three land cards, reveal them, put them into your hand, then shuffle.\n• Create an X/X green Spirit creature token, where X is the number of lands you control.
