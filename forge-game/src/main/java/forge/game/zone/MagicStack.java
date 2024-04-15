@@ -191,6 +191,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         bResolving = b;
     }
 
+    public final boolean isResolving(Card c) {
+        if (!isResolving() || curResolvingCard == null) {
+            return false;
+        }
+        return c.equals(curResolvingCard);
+    }
+
     public final boolean canUndo(Player player) {
         return undoStackOwner == player;
     }
@@ -935,13 +942,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (int i = 0; i < length; i++) {
             c.remove(0).run();
         }
-    }
-
-    public final boolean isResolving(Card c) {
-        if (!isResolving() || curResolvingCard == null) {
-            return false;
-        }
-        return c.equals(curResolvingCard);
     }
 
     public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {
