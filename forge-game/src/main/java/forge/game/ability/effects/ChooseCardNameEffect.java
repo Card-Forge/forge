@@ -45,7 +45,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
-            validDesc = sa.getParam("ValidDesc");
+            validDesc = sa.getParam("ValidDescription");
         }
 
         boolean randomChoice = sa.hasParam("AtRandom");
