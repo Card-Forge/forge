@@ -133,8 +133,8 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
 
         if (sa != null) {
             if (sa.getPayCosts().hasSpecificCostType(CostTapType.class) &&
-                (sa.hasParam("Crew") || sa.isKeyword(Keyword.SADDLE))) {
-                msg.append((sa.hasParam("Crew"))  ? "\nCrewing: " : "\nSaddling: ");
+                (sa.isCrew() || sa.isKeyword(Keyword.SADDLE))) {
+                msg.append((sa.isCrew())  ? "\nCrewing: " : "\nSaddling: ");
                 msg.append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true));
                 msg.append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().
                     getCostPartByType(CostTapType.class).getType(), 

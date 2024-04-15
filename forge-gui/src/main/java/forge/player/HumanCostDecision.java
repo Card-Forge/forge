@@ -1150,11 +1150,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,
                 source, ability);
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
-
-        if (ability.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
+        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         Integer c = null;
         if (!amount.equals("Any")) {
@@ -1201,7 +1197,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.hasParam("Crew")) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.isCrew()) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

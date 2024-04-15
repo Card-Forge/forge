@@ -138,7 +138,7 @@ public class AiAttackController {
                     continue;
                 }
                 sa.setActivatingPlayer(defender);
-                if (sa.hasParam("Crew") && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
+                if (sa.isCrew() && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
                 } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     continue;

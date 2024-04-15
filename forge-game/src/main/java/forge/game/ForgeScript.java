@@ -220,6 +220,8 @@ public class ForgeScript {
             return sa.isBuyback();
         } else if (property.equals("Craft")) {
             return sa.isCraft();
+        } else if (property.equals("Crew")) {
+            return sa.isCrew();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {

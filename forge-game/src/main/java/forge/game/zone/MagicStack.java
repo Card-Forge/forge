@@ -399,7 +399,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator.addCycled(sp);
             }
 
-            if (sp.hasParam("Crew")) {
+            if (sp.isCrew()) {
                 // Trigger crews!
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
                 runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards", true));

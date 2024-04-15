@@ -6529,6 +6529,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
     }
 
+    public boolean canCrew() {
+        return canTap() && !StaticAbilityCantCrew.cantCrew(this);
+    }
+
     public int getTimesCrewedThisTurn() {
         return timesCrewedThisTurn;
     }
