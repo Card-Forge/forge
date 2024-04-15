@@ -812,7 +812,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean playChosenSpellAbility(SpellAbility sa) {
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             if (sa.canPlay()) {
                 sa.resolve();
             }

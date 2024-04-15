@@ -2877,7 +2877,7 @@ public class AbilityUtils {
         }
 
         for (SpellAbility s : list) {
-            if (s instanceof LandAbility) {
+            if (s.isLandAbility()) {
                 // CR 305.3
                 if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
                     sas.add(s);
@@ -2905,9 +2905,7 @@ public class AbilityUtils {
 
     private static void collectSpellsForPlayEffect(final List<SpellAbility> result, final CardState state, final Player controller, final boolean withAltCost) {
         if (state.getType().isLand()) {
-            LandAbility la = new LandAbility(state.getCard(), controller, null);
-            la.setCardState(state);
-            result.add(la);
+            result.add(state.getFirstSpellAbility());
         }
         final Iterable<SpellAbility> spells = state.getSpellAbilities();
         for (SpellAbility sa : spells) {

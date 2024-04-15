@@ -35,7 +35,7 @@ import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -1069,7 +1069,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final Zone currentZone = saHost.getZone();
 
                         // Need to check if Zone did change
-                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa instanceof LandAbility)) {
+                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
                             final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);

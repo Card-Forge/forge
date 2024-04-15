@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -15,7 +13,7 @@ import forge.game.cost.CostPart;
 import forge.game.cost.CostReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -94,7 +92,7 @@ public class DiscoverEffect extends SpellAbilityEffect {
                     List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(found, p);
 
                     // filter out land abilities due to MDFC or similar
-                    Iterables.removeIf(sas, Predicates.instanceOf(LandAbility.class));
+                    sas.removeIf(sp -> sp.isLandAbility());
                     // the spell must also have a mana value equal to or less than the discover number
                     sas.removeIf(sp -> sp.getPayCosts().getTotalMana().getCMC() > num);
 

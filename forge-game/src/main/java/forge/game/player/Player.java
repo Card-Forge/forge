@@ -46,7 +46,7 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.*;
 import forge.game.trigger.Trigger;
@@ -1675,7 +1675,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
-            if (cause instanceof LandAbility) {
+            if (cause.isLandAbility()) {
                 land.changeToState(cause.getCardStateName());
             }
         }
