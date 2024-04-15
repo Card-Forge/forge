@@ -6,4 +6,4 @@ SVar:DBRoll:DB$ RollDice | ResultSubAbilities$ 1-3:AddC,Else:AddAny | AILogic$ M
 SVar:AddC:DB$ Mana | Produced$ C | Defined$ Targeted
 SVar:AddAny:DB$ Mana | Produced$ Any | Defined$ Targeted
 SVar:PlayMain1:TRUE
-Oracle:{T}: Roll a six-sided die. On a 3 or lower,\ntarget player adds {C}. Otherwise, that player adds one mana of any color they choose.
+Oracle:{T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose.
