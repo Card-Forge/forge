@@ -32,7 +32,7 @@ public class StaticAbilityAlternativeCost {
 
                 Cost cost = new Cost(stAb.getParam("Cost"), sa.isAbility());
                 // set the cost to this directly to bypass non mana cost
-                final SpellAbility newSA = sa.copyWithManaCostReplaced(pl, cost);
+                final SpellAbility newSA = sa.isAbility() ? sa.copyWithDefinedCost(cost) : sa.copyWithManaCostReplaced(pl, cost);
                 newSA.setActivatingPlayer(pl);
                 newSA.setBasicSpell(false);
 
