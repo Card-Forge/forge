@@ -1,0 +1,11 @@
+Name:Bria, Riptide Rogue
+ManaCost:2 U R
+Types:Legendary Creature Otter Rogue
+PT:3/3
+K:Prowess
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Prowess | Description$ Other creatures you control have prowess.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever you cast a noncreature spell, target creature you control can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.YouCtrl | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:BuffedBy:Card.nonCreature
+Oracle:Prowess\nOther creatures you control have prowess.\nWhenever you cast a noncreature spell, target creature you control can't be blocked this turn.
