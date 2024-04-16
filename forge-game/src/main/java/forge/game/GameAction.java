@@ -117,7 +117,7 @@ public class GameAction {
 
         // Rule 111.8: A token that has left the battlefield can't move to another zone
         if (!c.isSpell() && c.isToken() && !fromBattlefield && zoneFrom != null && !zoneFrom.is(ZoneType.Stack)
-                && (cause == null || !(cause instanceof SpellPermanent) || !cause.isCastFromPlayEffect())) {
+                && (cause == null || !(cause instanceof SpellPermanent || cause.isCastFaceDown()) || !cause.isCastFromPlayEffect())) {
             return c;
         }
 
