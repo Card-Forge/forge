@@ -54,6 +54,10 @@ public class StaticAbilityAlternativeCost {
                     newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("EffectZone")));
                 }
 
+                if (stAb.hasParam("StackDescription")) {
+                    newSA.putParam("StackDescription", stAb.getParam("StackDescription"));
+                }
+
                 // makes new SpellDescription
                 final StringBuilder sb = new StringBuilder();
 
