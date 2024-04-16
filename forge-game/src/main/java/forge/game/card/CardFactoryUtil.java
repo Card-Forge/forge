@@ -69,7 +69,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
@@ -603,15 +602,6 @@ public class CardFactoryUtil {
 
         for (KeywordInterface inst : card.getKeywords()) {
             inst.createTraits(card, true);
-        }
-
-        // AltCost
-        String altCost = card.getSVar("AltCost");
-        if (StringUtils.isNotBlank(altCost)) {
-            final SpellAbility sa1 = card.getFirstSpellAbility();
-            if (sa1 != null && sa1.isSpell()) {
-                card.addSpellAbility(makeAltCostAbility(card, altCost, sa1));
-            }
         }
     }
 
@@ -3972,50 +3962,6 @@ public class CardFactoryUtil {
                 + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         }
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param card
-     * @param altCost
-     * @param sa
-     * @return
-     */
-    private static SpellAbility makeAltCostAbility(final Card card, final String altCost, final SpellAbility sa) {
-        final Map<String, String> params = AbilityFactory.getMapParams(altCost);
-
-        final Cost abCost = new Cost(params.get("Cost"), sa.isAbility());
-        final SpellAbility altCostSA = sa.copyWithDefinedCost(abCost);
-        altCostSA.setBasicSpell(false);
-        altCostSA.addOptionalCost(OptionalCost.AltCost);
-
-        final SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-        restriction.setRestrictions(params);
-        if (!params.containsKey("ActivationZone")) {
-            restriction.setZone(ZoneType.Hand);
-        }
-        altCostSA.setRestrictions(restriction);
-
-        String costDescription = TextUtil.fastReplace(params.get("Description"), "CARDNAME", card.getName());
-        if (costDescription == null || costDescription.isEmpty()) {
-            costDescription = TextUtil.concatWithSpace("You may", abCost.toStringAlt(), "rather than pay", TextUtil.addSuffix(card.getName(), "'s mana cost."));
-        }
-
-        altCostSA.setDescription(costDescription);
-
-        if (params.containsKey("StackDescription")) {
-            altCostSA.setStackDescription(params.get("StackDescription"));
-        }
-
-        if (params.containsKey("Announce")) {
-            altCostSA.addAnnounceVar(params.get("Announce"));
-        }
-
-        if (params.containsKey("ManaRestriction")) {
-            altCostSA.putParam("ManaRestriction", params.get("ManaRestriction"));
-        }
-
-        return altCostSA;
     }
 
     public static void setupSiegeAbilities(Card card) {
