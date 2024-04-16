@@ -18,8 +18,9 @@ public class StaticAbilityAlternativeCost {
 
     public static List<SpellAbility> alternativeCosts(final SpellAbility sa, final Card source, final Player pl) {
         List<SpellAbility> result = Lists.newArrayList();
-        CardCollection list = new CardCollection(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
-        list.add(source);
+        // add source first in case it's LKI (alternate host)
+        CardCollection list = new CardCollection(source);
+        list.addAll(source.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         for (final Card ca : list) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(MODE)) {
@@ -36,18 +37,23 @@ public class StaticAbilityAlternativeCost {
                 newSA.setActivatingPlayer(pl);
                 newSA.setBasicSpell(false);
 
-                // CostDesc only for ManaCost?
-                if (sa.isAbility()) {
-                    newSA.putParam("CostDesc", stAb.hasParam("CostDesc") ? ManaCostParser.parse(stAb.getParam("CostDesc")) : cost.toSimpleString());
+                if (cost.hasXInAnyCostPart()) {
+                    newSA.setSVar("X", stAb.getSVar("X"));
                 }
 
                 // makes new SpellDescription
                 final StringBuilder sb = new StringBuilder();
-                sb.append(newSA.getCostDescription());
+
+                // CostDesc only for ManaCost?
+                if (sa.isAbility()) {
+                    newSA.putParam("CostDesc", stAb.hasParam("CostDesc") ? ManaCostParser.parse(stAb.getParam("CostDesc")) : cost.toSimpleString());
+                    sb.append(newSA.getCostDescription());
+                }
+
                 // skip reminder text for now, Keywords might be too complicated
                 //sb.append("(").append(newKi.getReminderText()).append(")");
                 if (sa.isSpell()) {
-                    sb.append(" ").append(sa.getDescription()).append(" (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                    sb.append(sa.getDescription()).append(" (by paying " + cost.toSimpleString() + " instead of its mana cost)");
                 }
                 newSA.setDescription(sb.toString());
 
