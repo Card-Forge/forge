@@ -2607,23 +2607,7 @@ public class CardFactoryUtil {
     public static void addSpellAbility(final KeywordInterface inst, final CardState card, final boolean intrinsic) {
         String keyword = inst.getOriginal();
         Card host = card.getCard();
-        if (keyword.startsWith("Alternative Cost") && !host.isLand()) {
-            final String[] kw = keyword.split(":");
-            String costStr = kw[1];
-            for (SpellAbility sa : host.getBasicSpells()) {
-                if (costStr.equals("ConvertedManaCost")) {
-                    costStr = Integer.toString(host.getCMC());
-                }
-                final Cost cost = new Cost(costStr, false).add(sa.getPayCosts().copyWithNoMana());
-                final SpellAbility newSA = sa.copyWithDefinedCost(cost);
-                newSA.setBasicSpell(false);
-                newSA.putParam("Secondary", "True");
-                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
-                newSA.setIntrinsic(intrinsic);
-
-                inst.addSpellAbility(newSA);
-            }
-        } else if (keyword.startsWith("Adapt")) {
+        if (keyword.startsWith("Adapt")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
             final String manacost = k[2];
