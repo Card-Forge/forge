@@ -1,0 +1,9 @@
+Name:Cactus Preserve
+Types:Land Desert
+ManaCost:no cost
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that a land you control could produce.
+A:AB$ Animate | Cost$ 3 | Defined$ Self | Power$ X | Toughness$ X | Colors$ Green | OverwriteColors$ True | Types$ Creature,Plant | Keywords$ Reach | SpellDescription$ Until end of turn, CARDNAME becomes an X/X green Plant creature with reach, where X is the greatest mana value among your commanders. It's still a land.
+SVar:X:Count$ValidAll Card.IsCommander+YouOwn$GreatestCMC
+AI:RemoveDeck:NonCommander
+Oracle:Cactus Preserve enters the battlefield tapped.\n{T}: Add one mana of any type that a land you control could produce.\n{3}: Until end of turn, Cactus Preserve becomes an X/X green Plant creature with reach, where X is the greatest mana value among your commanders. It's still a land.
