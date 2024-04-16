@@ -1,0 +1,9 @@
+Name:Resilient Roadrunner
+ManaCost:1 R
+Types:Creature Bird
+PT:2/2
+K:Haste
+K:Protection:Coyote
+A:AB$ Effect | Cost$ 3 | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ CARDNAME can't be blocked this turn except by creatures with haste.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.withoutHaste | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked this turn except by creatures with haste.
+Oracle:Haste, protection from Coyotes\n{3}: Resilient Roadrunner can't be blocked this turn except by creatures with haste.
