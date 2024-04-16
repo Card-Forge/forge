@@ -9,6 +9,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -41,6 +42,14 @@ public class StaticAbilityAlternativeCost {
                     newSA.setSVar("X", stAb.getSVar("X"));
                 }
 
+                if (stAb.hasParam("Announce")) {
+                    newSA.putParam("Announce", stAb.getParam("Announce"));
+                }
+
+                if (stAb.hasParam("ManaRestriction")) {
+                    newSA.putParam("ManaRestriction", stAb.getParam("ManaRestriction"));
+                }
+
                 // makes new SpellDescription
                 final StringBuilder sb = new StringBuilder();
 
@@ -53,7 +62,13 @@ public class StaticAbilityAlternativeCost {
                 // skip reminder text for now, Keywords might be too complicated
                 //sb.append("(").append(newKi.getReminderText()).append(")");
                 if (sa.isSpell()) {
-                    sb.append(sa.getDescription()).append(" (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                    sb.append(sa.getDescription());
+                    if (source.equals(stAb.getHostCard())) {
+                        newSA.addOptionalCost(OptionalCost.AltCost);
+                        sb.append(" ("+ stAb.getParam("Description") +") ");
+                    } else {
+                        sb.append(" (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                    }
                 }
                 newSA.setDescription(sb.toString());
 
