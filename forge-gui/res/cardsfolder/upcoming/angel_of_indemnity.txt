@@ -1,0 +1,11 @@
+Name:Angel of Indemnity
+ManaCost:5 W
+Types:Creature Angel Warrior
+PT:5/5
+K:Flying
+K:Lifelink
+K:Encore:6 W W
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card with mana value 4 or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+cmcLE4 | TgtPrompt$ Select target permanent card with mana value 4 in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+DeckHas:Ability$LifeGain|Graveyard|Token
+Oracle:Flying, lifelink\nWhen Angel of Indemnity enters the battlefield, return target permanent card with mana value 4 or less from your graveyard to the battlefield.\nEncore {6}{W}{W} ({6}{W}{W}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

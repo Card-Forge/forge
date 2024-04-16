@@ -1,0 +1,12 @@
+Name:Charred Graverobber
+ManaCost:2 B
+Types:Creature Skeleton Mercenary
+PT:3/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target outlaw card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Card.Outlaw+YouOwn | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target outlaw card from your graveyard
+K:Escape:3 B ExileFromGrave<4/Card.Other/other>
+K:etbCounter:P1P1:1:ValidCard$ Card.Self+escaped:CARDNAME escapes with a +1/+1 counter on it.
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Counters|Graveyard 
+DekcHints:Type$Mercenary|Pirate|Assassin|Rogue|Warlock
+Oracle:When Charred Graverobber enters the battlefield, return target outlaw card from your graveyard to your hand.\nEscape—{3}{B}, Exile four other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nCharred Graverobber escapes with a +1/+1 counter on it.
