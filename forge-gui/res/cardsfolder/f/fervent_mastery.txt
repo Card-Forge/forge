@@ -1,7 +1,7 @@
 Name:Fervent Mastery
 ManaCost:3 R R
 Types:Sorcery
-SVar:AltCost:Cost$ 2 R R | Description$ You may pay {2}{R}{R} rather than pay this spell's mana cost. | StackDescription$ If the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards. Search your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ 2 R R | Description$ You may pay {2}{R}{R} rather than pay this spell's mana cost. | StackDescription$ If the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards. Search your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
 A:SP$ Branch | BranchConditionSVar$ AltCostPaid | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ OppDiscard | FalseSubAbility$ DBSearch | StackDescription$ Search your library for up to three cards, put them into your hand, shuffle, then discard three cards at random. | SpellDescription$ If the {2}{R}{R} cost was paid, an opponent discards any number of cards, then draws that many cards. Search your library for up to three cards, put them into your hand, shuffle, then discard three cards at random.
 SVar:OppDiscard:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ ChosenPlayer | AILogic$ DiscardUncastableAndExcess | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
