@@ -1,0 +1,15 @@
+Name:Altaïr Ibn-La'Ahad
+ManaCost:R W B
+Types:Legendary Creature Human Assassin
+PT:3/3
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target Assassin creature card from your graveyard with a memory counter on it. Then for each creature card you own in exile with a memory counter on it, create a tapped and attacking token that’s a copy of it. Exile those tokens at end of combat.
+SVar:TrigExile:DB$ ChangeZone | Imprint$ True | ValidTgts$ Creature.Assassin+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Assassin creature card from your graveyard | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ MEMORY | CounterNum$ 1 | Defined$ Imprinted | SubAbility$ DBCopyPermanent
+SVar:DBCopyPermanent:DB$ CopyPermanent | Defined$ ValidExile Card.Creature+YouOwn+counters_GE1_MEMORY | NumCopies$ 1 | TokenTapped$ True | TokenAttacking$ True | RememberTokens$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExileTokens | RememberObjects$ Remembered | TriggerDescription$ At end of combat, exile those tokens. | SubAbility$ DBCleanup
+SVar:TrigExileTokens:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+DeckHas:Ability$Counters|Graveyard|Token
+DeckHints:Ability$Sacrifice|Discard|Mill & Type$Assassin
+Oracle:First strike\nWhenever Altaïr Ibn-La'Ahad attacks, exile up to one target Assassin creature card from your graveyard with a memory counter on it. Then for each creature card you own in exile with a memory counter on it, create a tapped and attacking token that’s a copy of it. Exile those tokens at end of combat.

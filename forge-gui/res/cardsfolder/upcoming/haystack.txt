@@ -1,0 +1,5 @@
+Name:Haystack
+ManaCost:1 W
+Types:Artifact
+A:AB$ Phases | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control 
+Oracle:{2}, {T}: Target creature you control phases out.
