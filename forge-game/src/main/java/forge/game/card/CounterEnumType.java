@@ -241,6 +241,8 @@ public enum CounterEnumType {
 
     LEVEL("LEVEL", 60, 222, 185),
 
+    LOOT("LOOT", 255, 215, 0),
+
     LORE("LORE", 209, 198, 161),
 
     LUCK("LUCK", 185, 174, 255),
