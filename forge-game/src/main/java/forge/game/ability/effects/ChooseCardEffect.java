@@ -237,7 +237,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 dontRevealToOwner = false;
             } else {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                if (sa.hasParam ("ChoiceTitleAppend")) {
+                if (sa.hasParam("ChoiceTitleAppend")) {
                     String tag = "";
                     String value = sa.getParam("ChoiceTitleAppend");
                     if (value.startsWith("Defined ")) {
