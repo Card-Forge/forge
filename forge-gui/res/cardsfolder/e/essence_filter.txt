@@ -1,4 +1,4 @@
-Name:Essence Filter 2
+Name:Essence Filter
 ManaCost:1 G G
 Types:Sorcery
 A:SP$ GenericChoice | Choices$ DBKillAllEnch,DBKillNonWEnch | Defined$ You | AILogic$ BestOption | StackDescription$ SpellDescription | SpellDescription$ Destroy all enchantments or all nonwhite enchantments.
