@@ -19,4 +19,5 @@ SVar:MaybeRepeat:DB$ ImmediateTrigger | ConditionPresent$ Card | ConditionDefine
 SVar:TrigHostLeaves:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted | TriggerZones$ Command | Execute$ OnHostLost
 SVar:OnHostLost:DB$ Cleanup | ClearImprinted$ True
 
+AI:RemoveDeck:All
 Oracle:Flying\nAt the beginning of your end step, choose a random nonland Magic card name. Until your next end step, you may cast a copy of a spell with that name, and mana of any type can be spent to cast it. If you cast a spell this way, copy this ability if Discord is on the battlefield.
