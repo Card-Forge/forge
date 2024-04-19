@@ -1,5 +1,5 @@
 Name:Depose
-ManaCost:1 W/U
+ManaCost:1 WU
 Types:Instant
 A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
