@@ -131,3 +131,4 @@ The Lost Caverns of Ixalan, 3/6/LCI, LCI
 Alchemy: Ixalan, 3/6/LCI, YLCI
 Ravnica Remastered, 3/6/RAV, RVR
 Murders at Karlov Manor, 3/6/MKM, MKM
+Outlaws of Thunder Junction, 3/6/OTJ, OTJ
