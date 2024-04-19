@@ -1,6 +1,6 @@
 Name:Abolish
 ManaCost:1 W W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:AltCost:Cost$ Discard<1/Plains>
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ Discard<1/Plains> | Description$ You may discard a Plains card rather than pay this spell's mana cost.
 Oracle:You may discard a Plains card rather than pay this spell's mana cost.\nDestroy target artifact or enchantment.

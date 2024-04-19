@@ -281,7 +281,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("CopyCard")) {
                 final Card original = tgtCard;
                 final Zone zone = tgtCard.getZone();
-                tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
+                tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), controller);
 
                 tgtCard.setToken(true);
                 tgtCard.setZone(zone);

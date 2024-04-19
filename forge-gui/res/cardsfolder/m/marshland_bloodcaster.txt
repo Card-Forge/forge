@@ -3,8 +3,9 @@ ManaCost:4 B
 Types:Creature Vampire Warlock
 PT:3/5
 K:Flying
-A:AB$ Effect | Cost$ 1 B T | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell
-SVar:ReduceCost:Mode$ Continuous | Affected$ Card.nonLand+YouCtrl | AddKeyword$ Alternative Cost:PayLife<ConvertedManaCost> | AffectedZone$ Hand,Graveyard,Exile,Library,Command | EffectZone$ Command | Description$ Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.
+A:AB$ Effect | Cost$ 1 B T | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SpellDescription$ Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.
+SVar:ReduceCost:Mode$ AlternativeCost | ValidSA$ Spell | ValidPlayer$ You | Cost$ PayLife<X> | Description$ Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.
 SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+SVar:X:Count$CardManaCost
 Oracle:Flying\n{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.

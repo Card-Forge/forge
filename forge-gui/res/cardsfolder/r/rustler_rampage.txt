@@ -1,0 +1,8 @@
+Name:Rustler Rampage
+ManaCost:W
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBUntap,DBPump | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBUntap:DB$ UntapAll | SpreeCost$ 1 | ValidTgts$ Player | ValidCards$ Creature | SpellDescription$ Untap all creatures target player controls.
+SVar:DBPump:DB$ Pump | SpreeCost$ 1 | ValidTgts$ Creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+Oracle:Spree (Choose one or more additional costs.)\n+ {1} — Untap all creatures target player controls.\n+ {1} — Target creature gains double strike until end of turn.
