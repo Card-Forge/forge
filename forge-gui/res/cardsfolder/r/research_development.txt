@@ -1,7 +1,7 @@
 Name:Research
 ManaCost:G U
 Types:Instant
-A:SP$ ChangeZone | Cost$ G U | Origin$ Sideboard | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 4 | Hidden$ True | StackDescription$ {p:You} shuffles up to four cards they own from outside the game into their library. | SpellDescription$ Shuffle up to four cards you own from outside the game into your library.
+A:SP$ ChangeZone | Origin$ Sideboard | Destination$ Library | Shuffle$ True | ChangeType$ Card.YouOwn | ChangeNum$ 4 | Hidden$ True | StackDescription$ {p:You} shuffles up to four cards they own from outside the game into their library. | SpellDescription$ Shuffle up to four cards you own from outside the game into your library.
 AI:RemoveDeck:Random
 AlternateMode:Split
 Oracle:Shuffle up to four cards you own from outside the game into your library.
@@ -11,6 +11,6 @@ ALTERNATE
 Name:Development
 ManaCost:3 U R
 Types:Instant
-A:SP$ Repeat | Cost$ 3 U R | RepeatSubAbility$ DBToken | MaxRepeat$ 3 | StackDescription$ SpellDescription | SpellDescription$ Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
+A:SP$ Repeat | RepeatSubAbility$ DBToken | MaxRepeat$ 3 | StackDescription$ SpellDescription | SpellDescription$ Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_3_1_elemental | TokenOwner$ You | UnlessPayer$ Player.Opponent | UnlessCost$ Draw<1/Player.YouActivator> | UnlessAI$ MorePowerful
 Oracle:Create a 3/1 red Elemental creature token unless any opponent has you draw a card. Repeat this process two more times.

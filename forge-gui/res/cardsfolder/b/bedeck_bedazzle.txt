@@ -1,7 +1,7 @@
 Name:Bedeck
 ManaCost:BR BR
 Types:Instant
-A:SP$ Pump | Cost$ BR BR | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
 AlternateMode:Split
 Oracle:Target creature gets +3/-3 until end of turn.
 
@@ -10,6 +10,6 @@ ALTERNATE
 Name:Bedazzle
 ManaCost:4 B R
 Types:Instant
-A:SP$ Destroy | Cost$ 4 B R | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | SubAbility$ DBDamage | SpellDescription$ Destroy target nonbasic land. CARDNAME deals 2 damage to target opponent or planeswalker.
+A:SP$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land. | SubAbility$ DBDamage | SpellDescription$ Destroy target nonbasic land. CARDNAME deals 2 damage to target opponent or planeswalker.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player.Opponent,Card.Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
 Oracle:Destroy target nonbasic land. Bedazzle deals 2 damage to target opponent or planeswalker.

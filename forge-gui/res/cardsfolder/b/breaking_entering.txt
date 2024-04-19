@@ -2,7 +2,7 @@ Name:Breaking
 ManaCost:U B
 Types:Sorcery
 K:Fuse
-A:SP$ Mill | Cost$ U B | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills eight cards.
+A:SP$ Mill | NumCards$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills eight cards.
 AlternateMode:Split
 Oracle:Target player mills eight cards.\nFuse (You may cast one or both halves of this card from your hand.)
 

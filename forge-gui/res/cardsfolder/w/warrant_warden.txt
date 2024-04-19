@@ -1,7 +1,7 @@
 Name:Warrant
-ManaCost:W/U W/U
+ManaCost:WU WU
 Types:Instant
-A:SP$ ChangeZone | Cost$ WU WU | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
 AlternateMode:Split
 Oracle:Put target attacking or blocking creature on top of its owner's library.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Warden
 ManaCost:3 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W U | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ wu_4_4_sphinx_flying_vigilance | SpellDescription$ Create a 4/4 white and blue Sphinx creature token with flying and vigilance.
+A:SP$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ wu_4_4_sphinx_flying_vigilance | SpellDescription$ Create a 4/4 white and blue Sphinx creature token with flying and vigilance.
 Oracle:Create a 4/4 white and blue Sphinx creature token with flying and vigilance.

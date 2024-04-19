@@ -1,7 +1,7 @@
 Name:Discovery
-ManaCost:1 U/B
+ManaCost:1 UB
 Types:Sorcery
-A:SP$ Surveil | Cost$ 1 U/B | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw a card.
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Surveil|Graveyard
 AlternateMode:Split
@@ -12,7 +12,7 @@ ALTERNATE
 Name:Dispersal
 ManaCost:3 U B
 Types:Instant
-A:SP$ RepeatEach | Cost$ 3 U B | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigChooseReturn | SubAbility$ DBReturn | SpellDescription$ Each opponent returns a nonland permanent they control with the highest mana value among permanents they control to its owner's hand, then discards a card.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigChooseReturn | SubAbility$ DBReturn | SpellDescription$ Each opponent returns a nonland permanent they control with the highest mana value among permanents they control to its owner's hand, then discards a card.
 SVar:TrigChooseReturn:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.greatestCMC_NonLandPermanentControlledByRemembered | ChoiceTitle$ Choose a nonland permanent with the highest mana value | Mandatory$ True | RememberChosen$ True
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBCleanup

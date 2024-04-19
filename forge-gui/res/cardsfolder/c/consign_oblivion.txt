@@ -1,7 +1,7 @@
 Name:Consign
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
 AlternateMode:Split
 Oracle:Return target nonland permanent to its owner's hand.
 
@@ -11,5 +11,5 @@ Name:Oblivion
 ManaCost:4 B
 Types:Sorcery
 K:Aftermath
-A:SP$ Discard | Cost$ 4 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget opponent discards two cards.

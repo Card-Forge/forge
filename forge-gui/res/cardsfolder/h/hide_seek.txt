@@ -1,7 +1,7 @@
 Name:Hide
 ManaCost:R W
 Types:Instant
-A:SP$ ChangeZone | Cost$ R W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact or enchantment on the bottom of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact or enchantment on the bottom of its owner's library.
 AlternateMode:Split
 Oracle:Put target artifact or enchantment on the bottom of its owner's library.
 
@@ -10,7 +10,7 @@ ALTERNATE
 Name:Seek
 ManaCost:W B
 Types:Instant
-A:SP$ ChangeZone | Cost$ W B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | Changetype$ Card | ChangeNum$ 1 | RememberChanged$ True | IsCurse$ True | AILogic$ BestCard | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles.
+A:SP$ ChangeZone | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Library | DefinedPlayer$ Targeted | Chooser$ You | Destination$ Exile | Changetype$ Card | ChangeNum$ 1 | RememberChanged$ True | IsCurse$ True | AILogic$ BestCard | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a card and exile it. You gain life equal to its mana value. Then that player shuffles.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

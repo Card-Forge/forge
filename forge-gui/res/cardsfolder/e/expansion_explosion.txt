@@ -1,7 +1,7 @@
 Name:Expansion
-ManaCost:U/R U/R
+ManaCost:UR UR
 Types:Instant
-A:SP$ CopySpellAbility | Cost$ U/R U/R | ValidTgts$ Card.Instant+cmcLE4,Card.Sorcery+cmcLE4 | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell with mana value 4 or less. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | ValidTgts$ Card.Instant+cmcLE4,Card.Sorcery+cmcLE4 | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell with mana value 4 or less. You may choose new targets for the copy.
 AlternateMode:Split
 Oracle:Copy target instant or sorcery spell with mana value 4 or less. You may choose new targets for the copy.
 
@@ -10,7 +10,7 @@ ALTERNATE
 Name:Explosion
 ManaCost:X U U R R
 Types:Instant
-A:SP$ DealDamage | Cost$ X U U R R | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to any target. Target player draws X cards.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to any target. Target player draws X cards.
 SVar:DBDraw:DB$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:X:Count$xPaid
 Oracle:Explosion deals X damage to any target. Target player draws X cards.

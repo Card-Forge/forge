@@ -1,7 +1,7 @@
 Name:Boom
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | TgtPrompt$ Choose target land you control to destroy | ValidTgts$ Land.YouCtrl | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyOpp | SpellDescription$ Destroy target land you control and target land you don't control. | StackDescription$ None
+A:SP$ Pump | TgtPrompt$ Choose target land you control to destroy | ValidTgts$ Land.YouCtrl | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyOpp | SpellDescription$ Destroy target land you control and target land you don't control. | StackDescription$ None
 SVar:DestroyOpp:DB$ Pump | TgtPrompt$ Choose target land you don't control to destroy | ValidTgts$ Land.YouDontCtrl | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 AlternateMode:Split
@@ -12,5 +12,5 @@ ALTERNATE
 Name:Bust
 ManaCost:5 R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 5 R | ValidCards$ Land | SpellDescription$ Destroy all lands.
+A:SP$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
 Oracle:Destroy all lands.

@@ -1,7 +1,7 @@
 Name:Rags
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 AlternateMode:Split
 Oracle:All creatures get -2/-2 until end of turn.
 
@@ -11,7 +11,7 @@ Name:Riches
 ManaCost:5 U U
 Types:Sorcery
 K:Aftermath
-A:SP$ RepeatEach | Cost$ 5 U U | AILogic$ OpponentHasCreatures | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseCreature | SubAbility$ StealChosen | SpellDescription$ Each opponent chooses a creature they control. You gain control of those creatures.
+A:SP$ RepeatEach | AILogic$ OpponentHasCreatures | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseCreature | SubAbility$ StealChosen | SpellDescription$ Each opponent chooses a creature they control. You gain control of those creatures.
 SVar:ChooseCreature:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to be stolen | AILogic$ WorstCard | RememberChosen$ True | Mandatory$ True
 SVar:StealChosen:DB$ GainControl | AllValid$ Permanent.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
