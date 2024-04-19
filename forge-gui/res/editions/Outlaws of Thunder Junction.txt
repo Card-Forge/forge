@@ -4,6 +4,10 @@ Date=2024-04-19
 Name=Outlaws of Thunder Junction
 Type=Expansion
 ScryfallCode=OTJ
+Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 Land, 1 Any, 1 Any OTP, 1 Any+
+ChanceReplaceCommonWith=.20F fromsheet("OTJ outlaw list")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 
 [cards]
 1 R Another Round @Darrell Riche
@@ -390,6 +394,48 @@ ScryfallCode=OTJ
 
 [buy a box]
 374 R Magda, the Hoardmaster @Loïc Canavaggia
+
+[outlaw list]
+1 Stoneforge Mystic|SPG
+1 Brazen Borrower|SPG
+1 Desertion|SPG
+1 Morbid Opportunist|SPG
+1 Port Razer|SPG
+1 Scapeshift|SPG
+1 Mystic Snake|SPG
+1 Notion Thief|SPG
+1 Desert|SPG
+1 Prismatic Vista|SPG
+1 Collector's Cage|BIG
+1 Grand Abolisher|BIG
+1 Oltec Matterweaver|BIG
+1 Rest in Peace|BIG
+1 Esoteric Duplicator|BIG
+1 Simulacrum Synthesizer|BIG
+1 Worldwalker Helm|BIG
+1 Greed's Gambit|BIG
+1 Harvester of Misery|BIG
+1 Hostile Investigator|BIG
+1 Generous Plunderer|BIG
+1 Legion Extruder|BIG
+1 Memory Vessel|BIG
+1 Molten Duplication|BIG
+1 Territory Forge|BIG
+1 Ancient Cornucopia|BIG
+1 Bristlebud Farmer|BIG
+1 Omenpath Journey|BIG
+1 Sandstorm Salvager|BIG
+1 Vaultborn Tyrant|BIG
+1 Loot, the Key to Everything|BIG
+1 Pest Control|BIG
+1 Lost Jitte|BIG
+1 Lotus Ring|BIG
+1 Nexus of Becoming|BIG
+1 Sword of Wealth and Power|BIG
+1 Torpor Orb|BIG
+1 Transmutation Font|BIG
+1 Fomori Vault|BIG
+1 Tarnation Vista|BIG
 
 [tokens]
 b_1_1_vampire_rogue_lifelink
