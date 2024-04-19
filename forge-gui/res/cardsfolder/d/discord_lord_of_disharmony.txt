@@ -9,7 +9,7 @@ SVar:ChooseName:DB$ NameCard | ValidCards$ Card.nonLand | Defined$ You | AtRando
 SVar:CreateAbility:DB$ Effect | Abilities$ DiscordCast | Triggers$ TrigHostLeaves | Duration$ UntilYourNextEndStep | ImprintCards$ OriginalHost.inZoneBattlefield | SubAbility$ CleanupName
 SVar:CleanupName:DB$ Cleanup | ClearNamedCard$ True
 
-SVar:DiscordCast:ST$ Play | ActivationZone$ Command | Cost$ 0 | CopyFromChosenName$ True | ManaConversion$ AnyType->AnyColor | ValidSA$ Spell.CouldCastTiming+NamedSpell | Optional$ True | RememberPlayed$ True | SubAbility$ CheckCast | SpellDescription$ Cast a copy of the spell with the chosen name. If NICKNAME is on the battlefield, copy its ability.
+SVar:DiscordCast:ST$ Play | ActivationZone$ Command | Cost$ 0 | CopyFromChosenName$ True | ManaConversion$ AnyType->AnyColor | ValidSA$ Spell.CouldCastTiming+NamedSpell | Optional$ True | RememberPlayed$ True | SubAbility$ CheckCast | DescriptionFromChosenName$ True | SpellDescription$ Cast a copy of the spell with the chosen name. If NICKNAME is on the battlefield, copy its ability.
 SVar:WasCast:Remembered$Valid Card
 SVar:CheckCast:DB$ Branch | BranchConditionSVar$ WasCast | TrueSubAbility$ ExileAbility
 SVar:ExileAbility:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | SubAbility$ CleanupMemory
