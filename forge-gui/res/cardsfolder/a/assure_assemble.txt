@@ -1,5 +1,5 @@
 Name:Assure
-ManaCost:G/W G/W
+ManaCost:GW GW
 Types:Instant
 A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
