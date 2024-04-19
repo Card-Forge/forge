@@ -464,18 +464,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return clStates.get(state);
     }
 
-    public CardState getStateFromCardName(String cardName) {
-        if (cardName == null || cardName.trim().isEmpty()) {
-            return null;
-        }
-        for (CardState state : states.values()) {
-            if (cardName.equals(state.getName())) {
-                return state;
-            }
-        }
-        return null;
-    }
-
     public boolean hasState(final CardStateName state) {
         if (state == CardStateName.FaceDown) {
             return true;
@@ -2838,22 +2826,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             } else if (sa.hasParam("DescriptionFromChosenName") && !getNamedCard().isEmpty()) {
                 String name = getNamedCard();
-                Card namedCard = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), getController());
-                CardState namedState = namedCard.getStateFromCardName(name);
-                if (namedState == null) {
-                    namedState = namedCard.getCurrentState();
-                }
-                CardView.CardStateView view = namedState.getView();
+                ICardFace namedFace = StaticData.instance().getCommonCards().getFaceByName(name);
                 StringBuilder sbSA = new StringBuilder(sAbility);
                 sbSA.append(linebreak);
                 sbSA.append(Localizer.getInstance().getMessage("lblSpell"));
                 sbSA.append(" — ");
-                if(!view.getManaCost().isNoCost()) {
-                    sbSA.append(view.getManaCost().getSimpleString()).append(": ");
+                if(!namedFace.getManaCost().isNoCost()) {
+                    sbSA.append(namedFace.getManaCost().getSimpleString()).append(": ");
                 }
-                sbSA.append(view.getOracleText()).append("\r\n");
-                sbSA.append(view.getType()).append("\r\n");
-                sbSA.append(view.getOracleText());
+                sbSA.append(namedFace.getName()).append("\r\n");
+                sbSA.append(namedFace.getType()).append("\r\n");
+                sbSA.append(namedFace.getOracleText().replaceAll("\\\\n", "\r\n"));
                 sbSA.append(linebreak);
                 sAbility = sbSA.toString();
             }
