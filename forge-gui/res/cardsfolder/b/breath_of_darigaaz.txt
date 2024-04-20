@@ -2,6 +2,6 @@ Name:Breath of Darigaaz
 ManaCost:1 R
 Types:Sorcery
 K:Kicker:2
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player. If CARDNAME was kicked, it deals 4 damage instead.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player. If CARDNAME was kicked, it deals 4 damage instead.
 SVar:WasKicked:Count$Kicked.4.1
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nBreath of Darigaaz deals 1 damage to each creature without flying and each player. If this spell was kicked, it deals 4 damage to each creature without flying and each player instead.

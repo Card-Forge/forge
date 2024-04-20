@@ -1,6 +1,6 @@
 Name:Burst of Energy
 ManaCost:W
 Types:Instant
-A:SP$ Untap | Cost$ W | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent | SpellDescription$ Untap target Permanent.
+A:SP$ Untap | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent | SpellDescription$ Untap target Permanent.
 AI:RemoveDeck:Random
 Oracle:Untap target permanent.

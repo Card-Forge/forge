@@ -1,6 +1,6 @@
 Name:Broken Bond
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact or enchantment. You may put a land card from your hand onto the battlefield.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact or enchantment. You may put a land card from your hand onto the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You
 Oracle:Destroy target artifact or enchantment. You may put a land card from your hand onto the battlefield.

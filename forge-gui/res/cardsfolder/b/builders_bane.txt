@@ -1,7 +1,7 @@
 Name:Builder's Bane
 ManaCost:X X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X X R | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ MaxTgt | RememberTargets$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Destroy X target artifacts. CARDNAME deals damage to each player equal to the number of artifacts they controlled that were put into a graveyard this way.
+A:SP$ Destroy | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ MaxTgt | RememberTargets$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Destroy X target artifacts. CARDNAME deals damage to each player equal to the number of artifacts they controlled that were put into a graveyard this way.
 SVar:MaxTgt:Count$Valid Artifact
 SVar:X:TargetedObjects$Amount
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDmg | SubAbility$ DBCleanup | DamageMap$ True
