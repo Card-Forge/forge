@@ -599,21 +599,8 @@ public class AbilityUtils {
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility) {
             final SpellAbility sa = (SpellAbility) ability;
-            if (calcX[0].startsWith("Modes")) {
-                int chosenModes = 0;
-                SpellAbility sub = sa;
-                while(sub != null) {
-                    if (!sub.getSVar("CharmOrder").equals("")) {
-                        chosenModes++;
-                    }
-                    sub = sub.getSubAbility();
-                }
-                // Count Math
-                final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                val = doXMath(chosenModes, m, card, ability);
-            }
             // Player attribute counting
-            else if (calcX[0].startsWith("TargetedPlayer")) {
+            if (calcX[0].startsWith("TargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (null != saTargeting) {
@@ -1739,14 +1726,11 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    final SpellAbility root = sa.getRootAbility();
+                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    if (root != null) {
-                        SpellAbility sub = root;
-                        while(sub != null) {
-                            if (!sub.getSVar("CharmOrder").equals("")) amount++;
-                            sub = sub.getSubAbility();
-                        }
+                    while (sub != null) {
+                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
+                        sub = sub.getSubAbility();
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
@@ -2037,9 +2021,6 @@ public class AbilityUtils {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
 
-        if (sq[0].equals("CardNumTypes")) {
-            return doXMath(getNumberOfTypes(c), expr, c, ctb);
-        }
         if (sq[0].equals("CardNumNotedTypes")) {
             return doXMath(c.getNumNotedTypes(), expr, c, ctb);
         }
@@ -2651,21 +2632,6 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
-        }
-
-        if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb), false), expr, c, ctb);
-        }
-        if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), false), expr, c, ctb);
-        }
-        if (sq[0].contains("CardControllerPermanentTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
-        }
-        if (sq[0].startsWith("OppTypesInGrave")) {
-            final PlayerCollection opponents = player.getOpponents();
-            CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
-            return doXMath(getCardTypesFromList(oppCards, false), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -3680,6 +3646,10 @@ public class AbilityUtils {
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
+        if (string.startsWith("CardTypes")) {
+            return doXMath(getCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
         String filteredString = string;
         Iterable<Card> filteredList = paidList;
         final String[] filter = filteredString.split("_");
@@ -3893,12 +3863,6 @@ public class AbilityUtils {
             }
         }
         return list;
-    }
-
-    public static int getNumberOfTypes(final Card card) {
-        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
-        Iterables.addAll(types, card.getType().getCoreTypes());
-        return types.size();
     }
 
     public static int getCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {

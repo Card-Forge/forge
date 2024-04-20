@@ -368,7 +368,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            boolean unpayableCost = tgtSA.getHostCard().getManaCost().isNoCost();
+            boolean unpayableCost = tgtSA.getPayCosts().getCostMana().getMana().isNoCost();
             if (sa.hasParam("WithoutManaCost")) {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayCost")) {

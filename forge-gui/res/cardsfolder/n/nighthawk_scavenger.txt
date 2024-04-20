@@ -6,5 +6,5 @@ K:Flying
 K:Deathtouch
 K:Lifelink
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of card types among cards in your opponents' graveyards. (Cards in graveyards have only the characteristics of their front face.)
-SVar:X:Count$OppTypesInGrave/Plus.1
+SVar:X:Count$ValidGraveyard Card.OppOwn$CardTypes/Plus.1
 Oracle:Flying, deathtouch, lifelink\nNighthawk Scavenger's power is equal to 1 plus the number of card types among cards in your opponents' graveyards. (Cards in graveyards have only the characteristics of their front face.)

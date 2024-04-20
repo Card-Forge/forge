@@ -4,6 +4,6 @@ Types:Creature Ooze
 Colors:green
 PT:*/*+1
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-SVar:X:Count$CardControllerTypes.Graveyard
-SVar:Y:Count$CardControllerTypes.Graveyard/Plus.1
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+SVar:Y:SVar$X/Plus.1
 Oracle:This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
