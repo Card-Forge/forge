@@ -1,7 +1,7 @@
 Name:Driven
 ManaCost:1 G
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | Keywords$ Trample | Triggers$ Trig1 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain trample and "Whenever this creature deals combat damage to a player, draw a card."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Keywords$ Trample | Triggers$ Trig1 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain trample and "Whenever this creature deals combat damage to a player, draw a card."
 SVar:Trig1:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Eff1 | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:Eff1:DB$ Draw | NumCards$ 1
 AlternateMode:Split
@@ -13,7 +13,7 @@ Name:Despair
 ManaCost:1 B
 Types:Sorcery
 K:Aftermath
-A:SP$ AnimateAll | Cost$ 1 B | ValidCards$ Creature.YouCtrl | Keywords$ Menace | Triggers$ Trig2 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Keywords$ Menace | Triggers$ Trig2 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."
 SVar:Trig2:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Eff2 | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, that player discards a card.
 SVar:Eff2:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nUntil end of turn, creatures you control gain menace and "Whenever this creature deals combat damage to a player, that player discards a card."

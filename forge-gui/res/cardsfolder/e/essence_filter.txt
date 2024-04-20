@@ -1,7 +1,8 @@
 Name:Essence Filter
 ManaCost:1 G G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments
-A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Enchantment.nonWhite | SpellDescription$ or all nonwhite enchantments.
+A:SP$ GenericChoice | Choices$ DBKillAllEnch,DBKillNonWEnch | Defined$ You | AILogic$ BestOption | StackDescription$ SpellDescription | SpellDescription$ Destroy all enchantments or all nonwhite enchantments.
+SVar:DBKillAllEnch:DB$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+SVar:DBKillNonWEnch:DB$ DestroyAll | ValidCards$ Enchantment.nonWhite | SpellDescription$ Destroy all nonwhite enchantments.
 DeckHints:Color$White
 Oracle:Destroy all enchantments or all nonwhite enchantments.

@@ -2,7 +2,7 @@ Name:Far
 ManaCost:1 U
 Types:Instant
 K:Fuse
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 AlternateMode:Split
 Oracle:Return target creature to its owner's hand.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,5 +11,5 @@ ALTERNATE
 Name:Away
 ManaCost:2 B
 Types:Instant
-A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
 Oracle:Target player sacrifices a creature.\nFuse (You may cast one or both halves of this card from your hand.)

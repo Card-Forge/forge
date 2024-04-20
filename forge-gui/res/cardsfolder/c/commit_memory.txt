@@ -1,7 +1,7 @@
 Name:Commit
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Library | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtPrompt$ Select target spell or nonland permanent | LibraryPosition$ 1 | Fizzle$ True | SpellDescription$ Put target spell or nonland permanent into its owner's library second from the top.
+A:SP$ ChangeZone | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Destination$ Library | ValidTgts$ Permanent.nonLand,Card.inZoneStack | TgtPrompt$ Select target spell or nonland permanent | LibraryPosition$ 1 | Fizzle$ True | SpellDescription$ Put target spell or nonland permanent into its owner's library second from the top.
 # Library Position is zero indexed. So 1 is second from the top
 AlternateMode:Split
 Oracle:Put target spell or nonland permanent into its owner's library second from the top.
@@ -12,6 +12,6 @@ Name:Memory
 ManaCost:4 U U
 Types:Sorcery
 K:Aftermath
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | StackDescription$ None
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach player shuffles their hand and graveyard into their library, then draws seven cards.

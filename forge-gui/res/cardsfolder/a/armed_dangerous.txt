@@ -2,7 +2,7 @@ Name:Armed
 ManaCost:1 R
 Types:Sorcery
 K:Fuse
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+1 and gains double strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+1 and gains double strike until end of turn.
 AlternateMode:Split
 Oracle:Target creature gets +1/+1 and gains double strike until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,5 +11,5 @@ ALTERNATE
 Name:Dangerous
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so this turn.
 Oracle:All creatures able to block target creature this turn do so.\nFuse (You may cast one or both halves of this card from your hand.)

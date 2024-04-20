@@ -1,7 +1,7 @@
 Name:Incubation
 ManaCost:GU
 Types:Sorcery
-A:SP$ Dig | Cost$ GU | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 AlternateMode:Split
 Oracle:Look at the top five cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 
@@ -10,6 +10,6 @@ ALTERNATE
 Name:Incongruity
 ManaCost:1 G U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 G U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. That creature's controller creates a 3/3 green Frog Lizard creature token.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. That creature's controller creates a 3/3 green Frog Lizard creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ TargetedController | TokenScript$ g_3_3_frog_lizard
 Oracle:Exile target creature. That creature's controller creates a 3/3 green Frog Lizard creature token.

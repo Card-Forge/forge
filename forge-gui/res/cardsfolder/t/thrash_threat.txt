@@ -1,7 +1,7 @@
 Name:Thrash
-ManaCost:R/G R/G
+ManaCost:RG RG
 Types:Instant
-A:SP$ Pump | Cost$ RG RG | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 AlternateMode:Split
@@ -12,6 +12,6 @@ ALTERNATE
 Name:Threat
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rg_4_4_beast_trample | SpellDescription$ Create a 4/4 red and green Beast creature token with trample.
+A:SP$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rg_4_4_beast_trample | SpellDescription$ Create a 4/4 red and green Beast creature token with trample.
 DeckHas:Ability$Token
 Oracle:Create a 4/4 red and green Beast creature token with trample.
