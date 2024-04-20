@@ -1,5 +1,5 @@
 Name:Avenging Arrow
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.dealtDamageThisTurn | TgtPrompt$ Select target creature that dealt damage this turn. | SpellDescription$ Destroy target creature that dealt damage this turn.
+A:SP$ Destroy | ValidTgts$ Creature.dealtDamageThisTurn | TgtPrompt$ Select target creature that dealt damage this turn. | SpellDescription$ Destroy target creature that dealt damage this turn.
 Oracle:Destroy target creature that dealt damage this turn.

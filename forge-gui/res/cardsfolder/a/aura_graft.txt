@@ -1,7 +1,7 @@
 Name:Aura Graft
 ManaCost:1 U
 Types:Instant
-A:SP$ GainControl | Cost$ 1 U | ValidTgts$ Aura.AttachedTo Permanent | TgtPrompt$ Select target Aura attached to a permanent | SubAbility$ ReEnchant | StackDescription$ SpellDescription | SpellDescription$ Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
+A:SP$ GainControl | ValidTgts$ Aura.AttachedTo Permanent | TgtPrompt$ Select target Aura attached to a permanent | SubAbility$ ReEnchant | StackDescription$ SpellDescription | SpellDescription$ Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.
 SVar:ReEnchant:DB$ Attach | Object$ ParentTarget | Move$ True | Choices$ Permanent | StackDescription$ None
 AI:RemoveDeck:All
 Oracle:Gain control of target Aura that's attached to a permanent. Attach it to another permanent it can enchant.

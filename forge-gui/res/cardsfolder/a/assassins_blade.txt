@@ -1,6 +1,6 @@
 Name:Assassin's Blade
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack+attacking | TgtPrompt$ Select target nonblack attacking creature | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Destroy target nonblack attacking creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack+attacking | TgtPrompt$ Select target nonblack attacking creature | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Destroy target nonblack attacking creature.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nDestroy target nonblack attacking creature.

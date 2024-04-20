@@ -1,5 +1,5 @@
 Name:Arc Lightning
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
 Oracle:Arc Lightning deals 3 damage divided as you choose among one, two, or three targets.

@@ -3,5 +3,5 @@ ManaCost:4 W
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each opponent you're attacking.
 SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
-A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 Oracle:This spell costs {1} less to cast for each opponent you're attacking.\nExile target creature.

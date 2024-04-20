@@ -1,7 +1,7 @@
 Name:Armed Response
 ManaCost:2 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking creature equal to the number of Equipment you control.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking creature equal to the number of Equipment you control.
 SVar:X:Count$Valid Equipment.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Armed Response deals damage to target attacking creature equal to the number of Equipment you control.
