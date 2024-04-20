@@ -4,6 +4,6 @@ Types:Tribal Artifact Lhurgoyf
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyards.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
 S:Mode$ Continuous | Affected$ Creature.Lhurgoyf+YouCtrl | AddKeyword$ Trample | Description$ Lhurgoyf creatures you control have trample.
-SVar:X:Count$CardTypes.ValidGraveyard Card
+SVar:X:Count$ValidGraveyard Card$CardTypes
 SVar:PlayMain1:TRUE
 Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyards.\nLhurgoyf creatures you control have trample.

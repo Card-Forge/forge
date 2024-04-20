@@ -6,6 +6,6 @@ A:AB$ LoseLife | Cost$ T Sac<X/Permanent> | XMaxLimit$ 3 | CostDesc$ {T}, Sacrif
 SVar:DBGainThree:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDrawThree | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
 SVar:DBDrawThree:DB$ Draw | NumCards$ 3 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
 SVar:X:Count$xPaid
-SVar:Y:Count$CardTypes.Sacrificed
+SVar:Y:Sacrificed$CardTypes
 DeckHas:Ability$Sacrifice
 Oracle:{T}, Sacrifice up to three permanents: If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.

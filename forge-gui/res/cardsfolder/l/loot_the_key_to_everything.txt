@@ -8,5 +8,5 @@ SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZo
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$CardTypes.Valid Permanent.nonLand+Other+YouCtrl
+SVar:X:Count$Valid Permanent.nonLand+Other+YouCtrl$CardTypes
 Oracle:Ward {1}\nAt the beginning of your upkeep, exile the top X cards of your library, where X is the number of card types among other nonland permanents you control. You may play those cards this turn.

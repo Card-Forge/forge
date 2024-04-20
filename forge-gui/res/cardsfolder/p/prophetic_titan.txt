@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigCharm:DB$ Charm | CharmNum$ Count$Compare Y GE4.2.1 | Choices$ DBDealDamage,DBDig | AdditionalDescription$ . If there are four or more card types among cards in your graveyard, choose both.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 SVar:DBDig:DB$ Dig | DigNum$ 4 | RestRandomOrder$ True | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
-SVar:Y:Count$CardControllerTypes.Graveyard
+SVar:Y:Count$ValidGraveyard Card.YouOwn$CardTypes
 SVar:PlayMain1:TRUE
 Oracle:Delirium — When Prophetic Titan enters the battlefield, choose one. If there are four or more card types among cards in your graveyard, choose both instead.\n• Prophetic Titan deals 4 damage to any target.\n• Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
