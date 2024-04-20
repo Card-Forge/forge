@@ -1,6 +1,6 @@
 Name:Bolt of Keranos
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Bolt of Keranos deals 3 damage to any target. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

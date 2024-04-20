@@ -2,7 +2,7 @@ Name:Blood for the Blood God!
 ManaCost:8 B B R
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature that died this turn.
-A:SP$ Discard | Cost$ 8 B B R | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw eight cards.
+A:SP$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw eight cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 8 | SubAbility$ DBKhorne
 SVar:DBKhorne:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 8 | SubAbility$ DBChangeZone | SpellDescription$ CARDNAME deals 8 damage to each opponent.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.

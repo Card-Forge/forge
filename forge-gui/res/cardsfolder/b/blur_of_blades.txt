@@ -1,7 +1,7 @@
 Name:Blur of Blades
 ManaCost:1 R
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBDealDamage | SpellDescription$ Put a -1/-1 counter on target creature. CARDNAME deals 2 damage to that creature's controller.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBDealDamage | SpellDescription$ Put a -1/-1 counter on target creature. CARDNAME deals 2 damage to that creature's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 DeckHas:Ability$Counters
 Oracle:Put a -1/-1 counter on target creature. Blur of Blades deals 2 damage to that creature's controller.

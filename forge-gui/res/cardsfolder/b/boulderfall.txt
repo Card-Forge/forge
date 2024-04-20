@@ -1,5 +1,5 @@
 Name:Boulderfall
 ManaCost:6 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 6 R R | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of targets.
 Oracle:Boulderfall deals 5 damage divided as you choose among any number of targets.

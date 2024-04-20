@@ -1,6 +1,6 @@
 Name:Bond of Discipline
 ManaCost:4 W
 Types:Sorcery
-A:SP$ TapAll | Cost$ 4 W | ValidCards$ Creature.OppCtrl | AILogic$ AtLeast3 | SubAbility$ DBPumpAll | SpellDescription$ Tap all creatures your opponents control. Creatures you control gain lifelink until end of turn.
+A:SP$ TapAll | ValidCards$ Creature.OppCtrl | AILogic$ AtLeast3 | SubAbility$ DBPumpAll | SpellDescription$ Tap all creatures your opponents control. Creatures you control gain lifelink until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink
 Oracle:Tap all creatures your opponents control. Creatures you control gain lifelink until end of turn.

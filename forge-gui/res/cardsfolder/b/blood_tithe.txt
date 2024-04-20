@@ -1,7 +1,7 @@
 Name:Blood Tithe
 ManaCost:3 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 3 B | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life. You gain life equal to the life lost this way.
+A:SP$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 3 life. You gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
 SVar:AFLifeLost:Number$0
 #AFLifeLost will be set by LoseLife

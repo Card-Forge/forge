@@ -1,7 +1,7 @@
 Name:Blood Curdle
 ManaCost:3 B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Destroy target creature. Put a menace counter on a creature you control.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Destroy target creature. Put a menace counter on a creature you control.
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | CounterType$ Menace | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Destroy target creature. Put a menace counter on a creature you control. (It can't be blocked except by two or more creatures.)

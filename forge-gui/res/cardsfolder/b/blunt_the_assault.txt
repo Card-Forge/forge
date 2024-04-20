@@ -1,7 +1,7 @@
 Name:Blunt the Assault
 ManaCost:3 G
 Types:Instant
-A:SP$ GainLife | Cost$ 3 G | Defined$ You | LifeAmount$ X | SubAbility$ DBFog | SpellDescription$ You gain 1 life for each creature on the battlefield.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBFog | SpellDescription$ You gain 1 life for each creature on the battlefield.
 SVar:DBFog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:X:Count$Valid Creature
 Oracle:You gain 1 life for each creature on the battlefield. Prevent all combat damage that would be dealt this turn.

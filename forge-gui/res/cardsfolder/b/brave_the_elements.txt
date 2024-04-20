@@ -1,7 +1,7 @@
 Name:Brave the Elements
 ManaCost:W
 Types:Instant
-A:SP$ ChooseColor | Cost$ W | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Choose a color. White creatures you control gain protection from the chosen color until end of turn.
+A:SP$ ChooseColor | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Choose a color. White creatures you control gain protection from the chosen color until end of turn.
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.White+YouCtrl | Gains$ ChosenColor
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All

@@ -1,6 +1,6 @@
 Name:Blazing Hope
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.powerGEX | TgtPrompt$ Select target creature with power greater than or equal to your life total. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power greater than or equal to your life total.
+A:SP$ ChangeZone | ValidTgts$ Creature.powerGEX | TgtPrompt$ Select target creature with power greater than or equal to your life total. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power greater than or equal to your life total.
 SVar:X:Count$YourLifeTotal
 Oracle:Exile target creature with power greater than or equal to your life total.

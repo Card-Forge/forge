@@ -1,7 +1,7 @@
 Name:Blindblast
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPumpCurse | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPumpCurse | SpellDescription$ CARDNAME deals 1 damage to target creature. That creature can't block this turn.
 SVar:DBPumpCurse:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:PlayMain1:TRUE

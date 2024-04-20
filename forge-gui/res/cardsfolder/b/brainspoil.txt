@@ -1,6 +1,6 @@
 Name:Brainspoil
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.unenchanted | TgtPrompt$ Select target creature that isn't enchanted | NoRegen$ True | SpellDescription$ Destroy target creature that isn't enchanted. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature.unenchanted | TgtPrompt$ Select target creature that isn't enchanted | NoRegen$ True | SpellDescription$ Destroy target creature that isn't enchanted. It can't be regenerated.
 K:Transmute:1 B B
 Oracle:Destroy target creature that isn't enchanted. It can't be regenerated.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)
