@@ -8,4 +8,4 @@ SVar:TrigMana:DB$ Mana | Produced$ R R
 DeckHints:Type$Artifact
 DeckHas:Ability$Discard
 SVar:AIPreference:DiscardCost$Card.Artifact
-Oracle:{1},{T}, Discard a card: Draw a card.\nWhenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
+Oracle:{1}, {T}, Discard a card: Draw a card.\nWhenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.

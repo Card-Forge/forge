@@ -8,4 +8,4 @@ SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ 
 SVar:NoPrevent:Mode$ CantPreventDamage | Affected$ Creature.IsRemembered | Description$ Damage that would be dealt to that creature this turn can't be prevented.
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigExile | TriggerDescription$ When the creature dies this turn, exile the creature.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
-Oracle:{G}{G},{T}: Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.
+Oracle:{G}{G}, {T}: Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.

@@ -13,4 +13,4 @@ SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Exile
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Discard|LifeGain
-Oracle:{T}: Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2},Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+Oracle:{T}: Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2}, Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
