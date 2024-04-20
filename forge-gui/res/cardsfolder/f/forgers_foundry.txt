@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ U | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add {U}. When you spend this mana to cast an instant or sorcery spell with mana value 3 or less, you may exile that spell instead of putting it into its owner's graveyard as it resolves.
 SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Instant.cmcLE3+YouCtrl,Sorcery.cmcLE3+YouCtrl | ValidActivatingPlayer$ You | Execute$ TrigEffect | TriggerDescription$ When you spend this mana to cast an instant or sorcery spell with mana value 3 or less, you may exile that spell instead of putting it into its owner's graveyard as it resolves.
-SVar:TrigEffect:DB$ Effect | ReplacementEffects$ MoveToExileReplace | RememberObjects$ TriggeredCard | ExileOnMoved$ Stack | SpellDescription$ You may exile that spell instead of putting it into its owner's graveyard as it resolves.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ MoveToExileReplace | RememberObjects$ TriggeredCard | ExileOnMoved$ Stack
 SVar:MoveToExileReplace:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ ReplaceExile | Optional$ True | Description$ You may exile that spell instead of putting it into its owner's graveyard as it resolves.
 SVar:ReplaceExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | ExiledWithEffectSource$ True
 A:AB$ Play | Cost$ 3 U U T | Defined$ ExiledWith | ValidSA$ Spell | Amount$ All | WithoutManaCost$ True | Optional$ True | SorcerySpeed$ True | SpellDescription$ You may cast any number of spells from among cards exiled with CARDNAME without paying their mana costs. Activate only as a sorcery.
