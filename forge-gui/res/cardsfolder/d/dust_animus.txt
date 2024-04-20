@@ -4,8 +4,8 @@ Types:Creature Spirit
 PT:2/3
 K:Flying
 K:ETBReplacement:Other:CounterChoice
-SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterNum$ 2 | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionCompare$ GE5 | SubAbility$ LifelinkCounter | SpellDescription$ If you control five or more untapped lands, CARDNAME enters the battlefield with two +1/+1 counters and a lifelink counter on it.
-SVar:LifelinkCounter:DB$ PutCounter | ConditionCheckSVar$ X | ConditionCompare$ GE5 | ETB$ True | CounterType$ Lifelink
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterNum$ 2 | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ LifelinkCounter | SpellDescription$ If you control five or more untapped lands, CARDNAME enters the battlefield with two +1/+1 counters and a lifelink counter on it.
+SVar:LifelinkCounter:DB$ PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | ETB$ True | CounterType$ Lifelink
 SVar:X:Count$Valid Land.YouCtrl+untapped
 K:Plot:1 W
 DeckHas:Ability$Counters|LifeGain
