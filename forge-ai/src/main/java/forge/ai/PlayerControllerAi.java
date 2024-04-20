@@ -2,10 +2,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
@@ -105,8 +102,88 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        // AI does not know how to sideboard
-        return null;
+        if (!getAi().getBooleanProperty(AiProps.SIDEBOARDING_ENABLE)) {
+            return null;
+        }
+
+        boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
+        int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
+
+        if (!sbLimitedFormats && gameType.isCardPoolLimited()) {
+            return null;
+        }
+
+        if (MyRandom.getRandom().nextInt(100) < sbChanceOnWin) {
+            GameOutcome lastOutcome = brains.getGame().getMatch().getOutcomeById(brains.getGame().getId() - 1);
+            if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())) {
+                return null;
+            }
+        }
+
+        List<PaperCard> main = deck.get(DeckSection.Main).toFlatList();
+        List<PaperCard> sideboard = deck.get(DeckSection.Sideboard).toFlatList();
+
+        // Devise a sideboarding plan
+        // TODO: Allow a pre-planned (e.g. fully transformative) sideboard via deck metadata of some kind?
+        List<PaperCard> processed = Lists.newArrayList();
+        Map<PaperCard, PaperCard> sideboardPlan = Maps.newHashMap();
+        for (PaperCard cSide : sideboard) {
+            if (processed.contains(cSide)) {
+                continue;
+            } else if (cSide.getRules().getAiHints().getRemAIDecks()) {
+                continue; // don't sideboard in anything that we don't know how to play
+            } else if (cSide.getRules().getType().isLand()) {
+                continue; // don't know how to sideboard lands yet
+            }
+
+            for (PaperCard cMain : main) {
+                if (processed.contains(cMain)) {
+                    continue;
+                } else if (cMain.equals(cSide)) {
+                    continue;
+                } else if (cMain.getRules().getType().isLand()) {
+                    continue; // don't know how to sideboard lands efficiently yet
+                }
+
+                if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                    || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                    continue; // Creature exception: only trade a creature for another creature
+                }
+
+                if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
+                    continue; // Mana Ability exception: Don't sideboard out cards that produce mana, can screw up the mana base
+                }
+
+                // Try not to screw up the mana curve or color distribution too much
+                if (cSide.getRules().getColor().hasNoColorsExcept(cMain.getRules().getColor())
+                    && cMain.getRules().getManaCost().getCMC() == cSide.getRules().getManaCost().getCMC()) {
+                    sideboardPlan.put(cMain, cSide);
+                    processed.add(cSide);
+                    processed.add(cMain);
+                    break;
+                }
+            }
+        }
+
+        // Make changes according to the sideboard plan suggested above
+        for (Map.Entry<PaperCard, PaperCard> ent : sideboardPlan.entrySet()) {
+            if (MyRandom.getRandom().nextInt(100) < sbChancePerCard) {
+                continue;
+            }
+            long inMain = main.stream().filter(pc -> pc.getCardName().equals(ent.getKey().getName())).count();
+            long inSide = sideboard.stream().filter(pc -> pc.getCardName().equals(ent.getValue().getName())).count();
+            while (inMain-- > 0 && inSide-- > 0) {
+                sideboard.remove(ent.getValue());
+                sideboard.add(ent.getKey());
+                main.add(ent.getValue());
+                main.remove(ent.getKey());
+            }
+        }
+
+        // Return the new Main. It's important to make sure that the overall content of the deck (Main+Sideboard)
+        // does not change above, or the AI may cheat (sneak some cards in or remove them from the deck altogether).
+        return main;
     }
 
     @Override
