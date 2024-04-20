@@ -2,6 +2,6 @@ Name:Battle Screech
 ManaCost:2 W W
 Types:Sorcery
 K:Flashback:tapXType<3/Creature.White/white creature>
-A:SP$ Token | Cost$ 2 W W | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | SpellDescription$ Create two 1/1 white Bird creature tokens with flying.
+A:SP$ Token | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying | SpellDescription$ Create two 1/1 white Bird creature tokens with flying.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Bird creature tokens with flying.\nFlashback—Tap three untapped white creatures you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

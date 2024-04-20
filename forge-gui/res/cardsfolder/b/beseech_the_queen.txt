@@ -1,7 +1,7 @@
 Name:Beseech the Queen
 ManaCost:2/B 2/B 2/B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2/B 2/B 2/B | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcLEX | ChangeNum$ 1 | SpellDescription$ Search your library for a card with mana value less than or equal to the number of lands you control, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcLEX | ChangeNum$ 1 | SpellDescription$ Search your library for a card with mana value less than or equal to the number of lands you control, reveal it, put it into your hand, then shuffle.
 SVar:X:Count$Valid Land.YouCtrl
 AI:RemoveDeck:Random
 Oracle:({2/B} can be paid with any two mana or with {B}. This card's mana value is 6.)\nSearch your library for a card with mana value less than or equal to the number of lands you control, reveal it, put it into your hand, then shuffle.

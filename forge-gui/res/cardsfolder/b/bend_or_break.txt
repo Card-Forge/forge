@@ -1,7 +1,7 @@
 Name:Bend or Break
 ManaCost:3 R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 R | RepeatPlayers$ Player | RepeatSubAbility$ DBChoosePlayer | SpellDescription$ Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoosePlayer | SpellDescription$ Each player separates all nontoken lands they control into two piles. For each player, one of their piles is chosen by one of their opponents of their choice. Destroy all lands in the chosen piles. Tap all lands in the other piles.
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ Remembered | Choices$ Player.OpponentOf Remembered | AILogic$ Curse | SubAbility$ DBTwoPiles
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered | Chooser$ ChosenPlayer | ChosenPile$ DBBreak | UnchosenPile$ DBBend | ValidCards$ Land.nonToken+RememberedPlayerCtrl | Zone$ Battlefield | SubAbility$ DBCleanupChosen
 SVar:DBBreak:DB$ DestroyAll | ValidCards$ Land.IsRemembered

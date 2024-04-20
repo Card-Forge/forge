@@ -1,7 +1,7 @@
 Name:Barrin's Spite
 ManaCost:2 U B
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 U B | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.
 SVar:DBChooseSac:DB$ ChooseCard | Choices$ Card.IsRemembered | Defined$ TargetedController | ChoiceTitle$ Choose one to sacrifice | ForgetChosen$ True | SubAbility$ DBSac | StackDescription$ None | AILogic$ WorstCard
 SVar:DBSac:DB$ Destroy | Defined$ ChosenCard | Sacrifice$ True | SubAbility$ DBBounce | StackDescription$ None
 SVar:DBBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | StackDescription$ None

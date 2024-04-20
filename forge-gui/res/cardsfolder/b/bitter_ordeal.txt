@@ -1,6 +1,6 @@
 Name:Bitter Ordeal
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Search target player's library for a card and exile it. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Search target player's library for a card and exile it. Then that player shuffles.
 K:Gravestorm
 Oracle:Search target player's library for a card and exile it. Then that player shuffles.\nGravestorm (When you cast this spell, copy it for each permanent put into a graveyard this turn. You may choose new targets for the copies.)

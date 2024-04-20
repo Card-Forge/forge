@@ -2,5 +2,5 @@ Name:Bash to Bits
 ManaCost:3 R
 Types:Instant
 K:Flashback:4 R R
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
 Oracle:Destroy target artifact.\nFlashback {4}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

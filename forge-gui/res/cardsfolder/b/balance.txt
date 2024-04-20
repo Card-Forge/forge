@@ -1,7 +1,7 @@
 Name:Balance
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Balance | Cost$ 1 W | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceHands | SpellDescription$ Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
+A:SP$ Balance | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceHands | SpellDescription$ Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
 SVar:BalanceHands:DB$ Balance | Zone$ Hand | SubAbility$ BalanceCreatures
 SVar:BalanceCreatures:DB$ Balance | Valid$ Creature
 DeckHas:Ability$Discard|Sacrifice

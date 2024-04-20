@@ -1,7 +1,7 @@
 Name:Bile Blight
 ManaCost:B B
 Types:Instant
-A:SP$ Pump | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | RememberTargets$ True | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | RememberTargets$ True | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Remembered.sameName+Other+Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target creature and all other creatures with the same name as that creature get -3/-3 until end of turn.

@@ -1,6 +1,6 @@
 Name:Barrier Breach
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | ValidTgts$ Enchantment | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile up to three target enchantments.
+A:SP$ ChangeZone | ValidTgts$ Enchantment | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile up to three target enchantments.
 K:Cycling:2
 Oracle:Exile up to three target enchantments.\nCycling {2} ({2}, Discard this card: Draw a card.)

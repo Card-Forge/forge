@@ -1,7 +1,7 @@
 Name:Blacksmith's Skill
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ Hexproof & Indestructible | SubAbility$ DBPump | SpellDescription$ Target permanent gains hexproof and indestructible until end of turn. If it's an artifact creature, it gets +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ Hexproof & Indestructible | SubAbility$ DBPump | SpellDescription$ Target permanent gains hexproof and indestructible until end of turn. If it's an artifact creature, it gets +2/+2 until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | ConditionDefined$ Targeted | ConditionPresent$ Creature.Artifact
 DeckHints:Type$Artifact
 Oracle:Target permanent gains hexproof and indestructible until end of turn. If it's an artifact creature, it gets +2/+2 until end of turn.
