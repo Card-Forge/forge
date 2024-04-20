@@ -1,7 +1,7 @@
 Name:Ad Nauseam
 ManaCost:3 B B
 Types:Instant
-A:SP$ Repeat | Cost$ 3 B B | RepeatSubAbility$ DBDig | RepeatOptional$ True | StackDescription$ Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times. | SpellDescription$ Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times.
+A:SP$ Repeat | RepeatSubAbility$ DBDig | RepeatOptional$ True | StackDescription$ Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times. | SpellDescription$ Reveal the top card of your library and put that card into your hand. You lose life equal to its mana value. You may repeat this process any number of times.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ DBLose
 SVar:DBLose:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -2,5 +2,5 @@ Name:Abrupt Decay
 ManaCost:B G
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ Destroy | Cost$ B G | ValidTgts$ Permanent.nonLand+cmcLE3 | TgtPrompt$ Select target nonland permanent with mana value 3 or less | SpellDescription$ Destroy target nonland permanent with mana value 3 or less.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand+cmcLE3 | TgtPrompt$ Select target nonland permanent with mana value 3 or less | SpellDescription$ Destroy target nonland permanent with mana value 3 or less.
 Oracle:This spell can't be countered.\nDestroy target nonland permanent with mana value 3 or less.

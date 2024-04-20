@@ -1,6 +1,6 @@
 Name:Absorb
 ManaCost:W U U
 Types:Instant
-A:SP$ Counter | Cost$ W U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 3 life. | SubAbility$ DBGainLife
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 3 life. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Counter target spell. You gain 3 life.

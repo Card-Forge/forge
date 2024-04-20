@@ -1,7 +1,7 @@
 Name:Ancestral Memories
 ManaCost:2 U U U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U U U | DigNum$ 7 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Delirium
 Oracle:Look at the top seven cards of your library. Put two of them into your hand and the rest into your graveyard.

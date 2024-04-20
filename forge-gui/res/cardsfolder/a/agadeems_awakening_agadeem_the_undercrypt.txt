@@ -1,7 +1,7 @@
 Name:Agadeem's Awakening
 ManaCost:X B B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X B B B | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select any number of target creature cards in your graveyard with different mana value X or less | TargetsWithDifferentCMC$ True | StackDescription$ {p:You} returns {c:Targeted} from the graveyard to the battlefield. | SpellDescription$ Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ Y | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select any number of target creature cards in your graveyard with different mana value X or less | TargetsWithDifferentCMC$ True | StackDescription$ {p:You} returns {c:Targeted} from the graveyard to the battlefield. | SpellDescription$ Return from your graveyard to the battlefield any number of target creature cards that each have a different mana value X or less.
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard

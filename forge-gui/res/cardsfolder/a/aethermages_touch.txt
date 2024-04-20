@@ -1,7 +1,7 @@
 Name:Aethermage's Touch
 ManaCost:2 W U
 Types:Instant
-A:SP$ Dig | Cost$ 2 W U | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains "At the beginning of your end step, return this creature to its owner's hand." Then put the rest of the cards revealed this way on the bottom of your library in any order. | StackDescription$ SpellDescription
+A:SP$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Reveal the top four cards of your library. You may put a creature card from among them onto the battlefield. It gains "At the beginning of your end step, return this creature to its owner's hand." Then put the rest of the cards revealed this way on the bottom of your library in any order. | StackDescription$ SpellDescription
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ Permanent | Triggers$ TrigAethermage | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigAethermage:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ BounceAethermage | TriggerDescription$ At the beginning of your end step, return CARDNAME to its owner's hand.

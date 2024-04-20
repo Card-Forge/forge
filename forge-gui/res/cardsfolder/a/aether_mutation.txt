@@ -1,7 +1,7 @@
 Name:Aether Mutation
 ManaCost:3 G U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ TrigToken | SpellDescription$ Return target creature to its owner's hand. Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ TrigToken | SpellDescription$ Return target creature to its owner's hand. Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.
 #X will be the Converted Mana Cost of the target of Aether Mutation
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:X:Targeted$CardManaCost
