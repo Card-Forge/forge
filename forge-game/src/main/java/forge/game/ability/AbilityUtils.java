@@ -599,21 +599,8 @@ public class AbilityUtils {
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility) {
             final SpellAbility sa = (SpellAbility) ability;
-            if (calcX[0].startsWith("Modes")) {
-                int chosenModes = 0;
-                SpellAbility sub = sa;
-                while(sub != null) {
-                    if (!sub.getSVar("CharmOrder").equals("")) {
-                        chosenModes++;
-                    }
-                    sub = sub.getSubAbility();
-                }
-                // Count Math
-                final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                val = doXMath(chosenModes, m, card, ability);
-            }
             // Player attribute counting
-            else if (calcX[0].startsWith("TargetedPlayer")) {
+            if (calcX[0].startsWith("TargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (null != saTargeting) {
@@ -1739,14 +1726,11 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    final SpellAbility root = sa.getRootAbility();
+                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    if (root != null) {
-                        SpellAbility sub = root;
-                        while(sub != null) {
-                            if (!sub.getSVar("CharmOrder").equals("")) amount++;
-                            sub = sub.getSubAbility();
-                        }
+                    while (sub != null) {
+                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
+                        sub = sub.getSubAbility();
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
