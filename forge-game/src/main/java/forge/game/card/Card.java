@@ -2824,6 +2824,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sAbility = sbSA.toString();
             } else if (sa.isSpell() && sa.isBasicSpell()) {
                 continue;
+            } else if (sa.hasParam("DescriptionFromChosenName") && !getNamedCard().isEmpty()) {
+                String name = getNamedCard();
+                ICardFace namedFace = StaticData.instance().getCommonCards().getFaceByName(name);
+                StringBuilder sbSA = new StringBuilder(sAbility);
+                sbSA.append(linebreak);
+                sbSA.append(Localizer.getInstance().getMessage("lblSpell"));
+                sbSA.append(" — ");
+                if(!namedFace.getManaCost().isNoCost()) {
+                    sbSA.append(namedFace.getManaCost().getSimpleString()).append(": ");
+                }
+                sbSA.append(namedFace.getName()).append("\r\n");
+                sbSA.append(namedFace.getType()).append("\r\n");
+                sbSA.append(namedFace.getOracleText().replaceAll("\\\\n", "\r\n"));
+                sbSA.append(linebreak);
+                sAbility = sbSA.toString();
             }
 
             if (sa.getManaPart() != null) {

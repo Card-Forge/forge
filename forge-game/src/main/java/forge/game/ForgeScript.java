@@ -19,6 +19,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -388,6 +389,34 @@ public class ForgeScript {
             if (sa.isManaAbilityFor(paidFor, colorCanUse)) {
                 return false;
             }
+        } else if(property.equals("NamedSpell")) {
+            boolean found = false;
+            for (String name : source.getNamedCards()) {
+                if (sa.cardState.getName().equals(name)) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+        else if (property.equals("CouldCastTiming")) {
+            Card host = sa.getHostCard();
+            Game game = host.getGame();
+            if (game.getStack().isSplitSecondOnStack()) {
+                return false;
+            }
+            // Adapted from SpellAbility.canCastTiming, to determine if the SA could be cast at the current timing (assuming the controller had priority).
+
+            if (sourceController.canCastSorcery() || sa.getRestrictions().isInstantSpeed()) {
+                return true;
+            }
+            if (sa.isSpell()) {
+                return host.isInstant() || host.hasKeyword(Keyword.FLASH) || StaticAbilityCastWithFlash.anyWithFlash(sa, host, sourceController);
+            }
+            if (sa.isActivatedAbility()) {
+                return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
+            }
+            return true;
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

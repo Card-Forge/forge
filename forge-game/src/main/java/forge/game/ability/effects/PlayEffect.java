@@ -160,16 +160,23 @@ public class PlayEffect extends SpellAbilityEffect {
                 return;
             }
         } else if (sa.hasParam("CopyFromChosenName")) {
-            String name = controller.getNamedCard();
-            if (name.trim().isEmpty()) return;
+            String name = source.getNamedCard();
+            if (name.trim().isEmpty()) {
+                name = controller.getNamedCard();
+                if(name.trim().isEmpty()) {
+                    return;
+                }
+            }
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack
             card.setCopiedPermanent(card);
+            // Keeps adventures from leaving the recast effect
+            card.setCopiedSpell(true);
             card.setToken(true);
             tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
-            // filter only cards that didn't changed zones
+            // filter only cards that didn't change zones
             for (Card c : getTargetCards(sa)) {
                 Card gameCard = game.getCardState(c, null);
                 if (c.equalsWithGameTimestamp(gameCard)) {
@@ -280,6 +287,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtCard.setZone(zone);
                 // to fix the CMC
                 tgtCard.setCopiedPermanent(original);
+                tgtCard.setCopiedSpell(true);
                 if (zone != null) {
                     zone.add(tgtCard);
                 }
