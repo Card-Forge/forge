@@ -7,7 +7,7 @@ SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | R
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ CopySpellAbility | Cost$ T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | MayChooseTarget$ True | CheckSVar$ Count$ThisTurnCast_Card.YouCtrl | SVarCompare$ GE3 | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn.
+A:AB$ CopySpellAbility | Cost$ T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | MayChooseTarget$ True | CheckSVar$ Count$ThisTurnCast_Card.YouCtrl | SVarCompare$ GE3 | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn.
 DeckNeeds:Type$Instant|Sorcery
 DeckHints:Keyword$Flash
 Oracle:Whenever you cast your second spell each turn, exile the top card of your library. Until the end of your next turn, you may play that card.\n{T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if you've cast three or more spells this turn.
