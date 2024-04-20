@@ -1,7 +1,7 @@
 Name:Arm with Aether
 ManaCost:2 U
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ 2 U | ValidCards$ Creature.YouCtrl | Triggers$ Trig | SpellDescription$ Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ Trig | SpellDescription$ Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
 SVar:Trig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ Eff | TriggerDescription$ Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand.
 SVar:Eff:DB$ ChangeZone | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | TgtPrompt$ Select target creature that player controls. | Origin$ Battlefield | Destination$ Hand
 Oracle:Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."

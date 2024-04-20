@@ -2,5 +2,5 @@ Name:Army of the Damned
 ManaCost:5 B B B
 Types:Sorcery
 K:Flashback:7 B B B
-A:SP$ Token | Cost$ 5 B B B | TokenAmount$ 13 | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create thirteen tapped 2/2 black Zombie creature tokens.
+A:SP$ Token | TokenAmount$ 13 | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create thirteen tapped 2/2 black Zombie creature tokens.
 Oracle:Create thirteen tapped 2/2 black Zombie creature tokens.\nFlashback {7}{B}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

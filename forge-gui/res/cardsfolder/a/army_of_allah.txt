@@ -1,5 +1,5 @@
 Name:Army of Allah
 ManaCost:1 W W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn.
 Oracle:Attacking creatures get +2/+0 until end of turn.

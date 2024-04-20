@@ -1,7 +1,7 @@
 Name:Angrath's Rampage
 ManaCost:B R
 Types:Sorcery
-A:SP$ Charm | Cost$ B R | Choices$ SacArtifact,SacCreature,SacPW
+A:SP$ Charm | Choices$ SacArtifact,SacCreature,SacPW
 SVar:SacArtifact:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Artifact | Amount$ 1 | SpellDescription$ Target player sacrifices an artifact.
 SVar:SacCreature:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | Amount$ 1 | SpellDescription$ Target player sacrifices a creature.
 SVar:SacPW:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Planeswalker | Amount$ 1 | SpellDescription$ Target player sacrifices a planeswalker.

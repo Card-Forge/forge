@@ -1,6 +1,6 @@
 Name:Appetite for Brains
 ManaCost:B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ B | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand.
+A:SP$ RevealHand | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand.
 SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.cmcGE4 | IsCurse$ True | Mandatory$ True | AlreadyRevealed$ True | StackDescription$ SpellDescription | SpellDescription$ You choose a card from it with mana value 4 or greater and exile that card.
 Oracle:Target opponent reveals their hand. You choose a card from it with mana value 4 or greater and exile that card.

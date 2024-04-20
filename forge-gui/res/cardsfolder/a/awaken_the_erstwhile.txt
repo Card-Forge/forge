@@ -1,7 +1,7 @@
 Name:Awaken the Erstwhile
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then creates that many 2/2 black Zombie creature tokens.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then creates that many 2/2 black Zombie creature tokens.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount

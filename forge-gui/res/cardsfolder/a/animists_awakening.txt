@@ -1,7 +1,7 @@
 Name:Animist's Awakening
 ManaCost:X G
 Types:Sorcery
-A:SP$ Dig | Cost$ X G | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | RememberChanged$ True | RestRandomOrder$ True | SubAbility$ DBUntap | SpellDescription$ Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.
+A:SP$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | Tapped$ True | RememberChanged$ True | RestRandomOrder$ True | SubAbility$ DBUntap | SpellDescription$ Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.
 SVar:DBUntap:DB$ Untap | Defined$ Remembered | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE2
 SVar:X:Count$xPaid
 Oracle:Reveal the top X cards of your library. Put all land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, untap those lands.

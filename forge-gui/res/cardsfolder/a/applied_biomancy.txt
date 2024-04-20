@@ -1,7 +1,7 @@
 Name:Applied Biomancy
 ManaCost:G U
 Types:Instant
-A:SP$ Charm | Cost$ G U | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPump,DBUnsummon
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPump,DBUnsummon
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
 SVar:DBUnsummon:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature to return to owner's hand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 Oracle:Choose one or both —\n• Target creature gets +1/+1 until end of turn.\n• Return target creature to its owner's hand.

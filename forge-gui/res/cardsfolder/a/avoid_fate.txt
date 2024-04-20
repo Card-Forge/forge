@@ -1,5 +1,5 @@
 Name:Avoid Fate
 ManaCost:G
 Types:Instant
-A:SP$ Counter | Cost$ G | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant,Aura | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target instant or Aura spell that targets a permanent you control.
 Oracle:Counter target instant or Aura spell that targets a permanent you control.

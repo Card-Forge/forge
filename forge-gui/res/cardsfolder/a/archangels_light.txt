@@ -1,7 +1,7 @@
 Name:Archangel's Light
 ManaCost:7 W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 7 W | LifeAmount$ X | SubAbility$ DBShuffle | SpellDescription$ You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
+A:SP$ GainLife | LifeAmount$ X | SubAbility$ DBShuffle | SpellDescription$ You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:X:Count$InYourYard/Times.2
 Oracle:You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library.

@@ -1,7 +1,7 @@
 Name:Aphotic Wisps
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SubAbility$ DBDraw | SpellDescription$ Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.) Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear | SubAbility$ DBDraw | SpellDescription$ Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.) Draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBColor | NumCards$ 1
 SVar:DBColor:DB$ Animate | Colors$ Black | OverwriteColors$ True | Defined$ Targeted
 Oracle:Target creature becomes black and gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)\nDraw a card.

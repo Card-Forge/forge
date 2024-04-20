@@ -1,7 +1,7 @@
 Name:Archmage's Charm
 ManaCost:U U U
 Types:Instant
-A:SP$ Charm | Cost$ U U U | Choices$ DBCounter,DBDraw,DBControl
+A:SP$ Charm | Choices$ DBCounter,DBDraw,DBControl
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | SpellDescription$ Counter target spell.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | SpellDescription$ Target player draws two cards.
 SVar:DBControl:DB$ GainControl | ValidTgts$ Permanent.nonLand+cmcLE1 | TgtPrompt$ Select target nonland permanent with mana value 1 or less. | SpellDescription$ Gain control of target nonland permanent with mana value 1 or less.
