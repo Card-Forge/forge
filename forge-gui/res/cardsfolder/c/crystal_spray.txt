@@ -1,7 +1,7 @@
 Name:Crystal Spray
 ManaCost:2 U
 Types:Instant
-A:SP$ GenericChoice | Cost$ 2 U | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | Choices$ ChangeColor,ChangeType | Defined$ You | StackDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. Draw a card. | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. Draw a card.
+A:SP$ GenericChoice | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | Choices$ ChangeColor,ChangeType | Defined$ You | StackDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. Draw a card. | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. Draw a card.
 SVar:ChangeColor:DB$ ChangeText | Defined$ ParentTarget | ChangeColorWord$ Choose Choose | SubAbility$ DBDraw | SpellDescription$ Change color
 SVar:ChangeType:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | SubAbility$ DBDraw | SpellDescription$ Change type
 SVar:DBDraw:DB$ Draw | NumCards$ 1

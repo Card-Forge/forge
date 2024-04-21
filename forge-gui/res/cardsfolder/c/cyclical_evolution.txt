@@ -2,7 +2,7 @@ Name:Cyclical Evolution
 ManaCost:3 G G
 Types:Sorcery
 K:Suspend:3:2 G
-A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBChange | SpellDescription$ Target creature gets +3/+3 until end of turn. Exile CARDNAME with three time counters on it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBChange | SpellDescription$ Target creature gets +3/+3 until end of turn. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3
 AI:RemoveDeck:Random
 Oracle:Target creature gets +3/+3 until end of turn. Exile Cyclical Evolution with three time counters on it.\nSuspend 3—{2}{G} (Rather than cast this card from your hand, you may pay {2}{G} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

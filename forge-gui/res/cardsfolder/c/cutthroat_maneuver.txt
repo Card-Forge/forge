@@ -1,5 +1,5 @@
 Name:Cutthroat Maneuver
 ManaCost:3 B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +1/+1 and gain lifelink until end of turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +1/+1 and gain lifelink until end of turn.
 Oracle:Up to two target creatures each get +1/+1 and gain lifelink until end of turn.
