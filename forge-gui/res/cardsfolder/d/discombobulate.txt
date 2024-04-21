@@ -1,6 +1,6 @@
 Name:Discombobulate
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SubAbility$ DBRearrange | SpellDescription$ Counter target spell. Look at the top four cards of your library, then put them back in any order.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SubAbility$ DBRearrange | SpellDescription$ Counter target spell. Look at the top four cards of your library, then put them back in any order.
 SVar:DBRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
 Oracle:Counter target spell. Look at the top four cards of your library, then put them back in any order.

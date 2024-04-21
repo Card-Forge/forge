@@ -1,6 +1,6 @@
 Name:Deploy the Gatewatch
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ Dig | Cost$ 4 W W | DigNum$ 7 | ChangeNum$ 2 | ChangeValid$ Planeswalker | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True | ForceRevealToController$ True | SpellDescription$ Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ 2 | ChangeValid$ Planeswalker | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True | ForceRevealToController$ True | SpellDescription$ Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 AI:RemoveDeck:Random
 Oracle:Look at the top seven cards of your library. Put up to two planeswalker cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

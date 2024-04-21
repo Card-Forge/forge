@@ -2,7 +2,7 @@ Name:Disharmony
 ManaCost:2 R
 Types:Instant
 Text:Cast CARDNAME only during combat before blockers are declared.
-A:SP$ Untap | Cost$ 2 R | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ActivationPhases$ BeginCombat->Declare Attackers | SpellDescription$ Untap target attacking creature and remove it from combat. Gain control of that creature until end of turn. | SubAbility$ DBGainControl
+A:SP$ Untap | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ActivationPhases$ BeginCombat->Declare Attackers | SpellDescription$ Untap target attacking creature and remove it from combat. Gain control of that creature until end of turn. | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | Defined$ Targeted | LoseControl$ EOT | SubAbility$ RemCombat
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Targeted
 AI:RemoveDeck:All

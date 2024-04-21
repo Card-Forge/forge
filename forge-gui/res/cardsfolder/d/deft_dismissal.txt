@@ -1,5 +1,5 @@
 Name:Deft Dismissal
 ManaCost:3 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
 Oracle:Deft Dismissal deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
