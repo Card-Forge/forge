@@ -22,9 +22,8 @@ import forge.card.CardType;
 import java.util.Map;
 import java.util.Set;
 
-import org.testng.collections.Sets;
-
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
