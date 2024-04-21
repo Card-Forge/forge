@@ -142,7 +142,7 @@ public class PlayerControllerAi extends PlayerController {
             for (PaperCard cMain : main) {
                 if (processed.contains(cMain)) {
                     continue;
-                } else if (cMain.equals(cSide)) {
+                } else if (cMain.getName().equals(cSide.getName())) {
                     continue;
                 } else if (cMain.getRules().getType().isLand()) {
                     continue; // don't know how to sideboard lands efficiently yet
@@ -162,6 +162,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
 
                 if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
+                    processed.add(cMain);
                     continue; // Mana Ability exception: Don't sideboard out cards that produce mana, can screw up the mana base
                 }
 
