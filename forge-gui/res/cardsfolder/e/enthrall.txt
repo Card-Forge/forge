@@ -1,6 +1,6 @@
 Name:Enthrall
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a card for each spell you've cast this turn.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a card for each spell you've cast this turn.
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 Oracle:Target player discards a card for each spell you've cast this turn.

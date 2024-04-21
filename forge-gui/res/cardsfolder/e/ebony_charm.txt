@@ -1,7 +1,7 @@
 Name:Ebony Charm
 ManaCost:B
 Types:Instant
-A:SP$ Charm | Cost$ B | Choices$ EbonyDrain,EbonyExile,EbonyFear | Defined$ You
+A:SP$ Charm | Choices$ EbonyDrain,EbonyExile,EbonyFear | Defined$ You
 SVar:EbonyDrain:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ 1 | SubAbility$ EbonyGain | SpellDescription$ Target opponent loses 1 life and you gain 1 life.
 SVar:EbonyGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:EbonyExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard.

@@ -2,7 +2,7 @@ Name:Endless Swarm
 ManaCost:5 G G G
 Types:Sorcery
 K:Epic
-A:SP$ Token | Cost$ 5 G G G | TokenAmount$ X | TokenScript$ g_1_1_snake | TokenOwner$ You | SpellDescription$ Create a 1/1 green Snake creature token for each card in your hand.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_snake | TokenOwner$ You | SpellDescription$ Create a 1/1 green Snake creature token for each card in your hand.
 SVar:X:Count$InYourHand
 #NOTE: The AI will not stop making land drops after casting this spell (so, random decks may also utilize manlands and other cards with activation cost already on the battlefield to the maximum effect)
 AI:RemoveDeck:Random

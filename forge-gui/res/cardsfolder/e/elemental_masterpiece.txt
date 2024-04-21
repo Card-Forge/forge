@@ -1,7 +1,7 @@
 Name:Elemental Masterpiece
 ManaCost:5 U R
 Types:Sorcery
-A:SP$ Token | Cost$ 5 U R | TokenAmount$ 2 | TokenScript$ ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create two 4/4 blue and red Elemental creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create two 4/4 blue and red Elemental creature tokens.
 A:AB$ Token | Cost$ UR UR Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ c_a_treasure_sac | AILogic$ AlwaysOnDiscard | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token
 Oracle:Create two 4/4 blue and red Elemental creature tokens.\n{U/R}{U/R}, Discard Elemental Masterpiece: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

@@ -1,5 +1,5 @@
 Name:Enlarge
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +7 | NumDef$ +7 | KW$ Trample & HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +7 | NumDef$ +7 | KW$ Trample & HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)
 Oracle:Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)

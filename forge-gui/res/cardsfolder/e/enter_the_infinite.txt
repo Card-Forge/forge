@@ -1,7 +1,7 @@
 Name:Enter the Infinite
 ManaCost:8 U U U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 8 U U U U | NumCards$ X | SubAbility$ DBTop | SpellDescription$ Draw cards equal to the number of cards in your library, then put a card from your hand on top of your library. You have no maximum hand size until your next turn.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBTop | SpellDescription$ Draw cards equal to the number of cards in your library, then put a card from your hand on top of your library. You have no maximum hand size until your next turn.
 SVar:DBTop:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Hidden$ True | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.

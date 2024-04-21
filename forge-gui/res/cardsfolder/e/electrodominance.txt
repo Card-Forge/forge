@@ -1,7 +1,7 @@
 Name:Electrodominance
 ManaCost:X R R
 Types:Instant
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBPlay | SpellDescription$ CARDNAME deals X damage to any target. You may cast a spell with mana value X or less from your hand without paying its mana cost.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBPlay | SpellDescription$ CARDNAME deals X damage to any target. You may cast a spell with mana value X or less from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLEX | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:X:Count$xPaid
 Oracle:Electrodominance deals X damage to any target. You may cast a spell with mana value X or less from your hand without paying its mana cost.

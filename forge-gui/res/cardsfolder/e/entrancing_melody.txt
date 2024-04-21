@@ -1,7 +1,7 @@
 Name:Entrancing Melody
 ManaCost:X U U
 Types:Sorcery
-A:SP$ GainControl | Cost$ X U U | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X.
+A:SP$ GainControl | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Gain control of target creature with mana value X.

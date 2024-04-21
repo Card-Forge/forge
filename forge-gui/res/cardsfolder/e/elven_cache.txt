@@ -1,5 +1,5 @@
 Name:Elven Cache
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 Oracle:Return target card from your graveyard to your hand.

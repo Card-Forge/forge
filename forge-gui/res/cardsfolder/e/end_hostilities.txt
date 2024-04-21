@@ -1,5 +1,5 @@
 Name:End Hostilities
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature,Permanent.AttachedTo Creature | SpellDescription$ Destroy all creatures and all permanents attached to creatures.
+A:SP$ DestroyAll | ValidCards$ Creature,Permanent.AttachedTo Creature | SpellDescription$ Destroy all creatures and all permanents attached to creatures.
 Oracle:Destroy all creatures and all permanents attached to creatures.

@@ -1,6 +1,6 @@
 Name:Errand of Duty
 ManaCost:1 W
 Types:Instant
-A:SP$ Token | Cost$ 1 W | TokenAmount$ 1 | TokenScript$ w_1_1_knight_banding | TokenOwner$ You | SpellDescription$ Create a 1/1 white Knight creature token with banding.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_knight_banding | TokenOwner$ You | SpellDescription$ Create a 1/1 white Knight creature token with banding.
 AI:RemoveDeck:All
 Oracle:Create a 1/1 white Knight creature token with banding. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
