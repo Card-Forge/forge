@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
+import forge.StaticData;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
@@ -106,6 +107,38 @@ public class PlayerControllerAi extends PlayerController {
             return null;
         }
 
+        Map<PaperCard, PaperCard> sideboardPlan = Maps.newHashMap();
+        List<PaperCard> main = deck.get(DeckSection.Main).toFlatList();
+        List<PaperCard> sideboard = deck.get(DeckSection.Sideboard).toFlatList();
+
+        // Predefined sideboard plan from deck metadata (AI hints)
+        boolean definedSideboardPlan = false;
+        String sideboardAiHint = deck.getAiHint("SideboardingPlan");
+        if (!sideboardAiHint.isEmpty()) {
+            for (String element : sideboardAiHint.split(";")) {
+                String[] cardPair = element.split("->");
+                PaperCard src = null, tgt = null;
+                for (PaperCard cMain : main) {
+                    if (cMain.getCardName().equals(cardPair[0].trim())) {
+                        src = cMain;
+                        break;
+                    }
+                }
+                for (PaperCard cSide : sideboard) {
+                    if (cSide.getCardName().equals(cardPair[1].trim())) {
+                        tgt = cSide;
+                        break;
+                    }
+                }
+                if (src != null && tgt != null) {
+                    sideboardPlan.put(src, tgt);
+                }
+            }
+            if (!sideboardPlan.isEmpty()) {
+                definedSideboardPlan = true;
+            }
+        }
+
         boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
         boolean sbSharedTypesOnly = getAi().getBooleanProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
         boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
@@ -122,63 +155,60 @@ public class PlayerControllerAi extends PlayerController {
             return null;
         }
 
-        List<PaperCard> main = deck.get(DeckSection.Main).toFlatList();
-        List<PaperCard> sideboard = deck.get(DeckSection.Sideboard).toFlatList();
-
         // Devise a sideboarding plan
-        // TODO: Allow a pre-planned (e.g. fully transformative) sideboard via deck metadata of some kind?
-        List<PaperCard> processed = Lists.newArrayList();
-        Map<PaperCard, PaperCard> sideboardPlan = Maps.newHashMap();
-        for (PaperCard cSide : sideboard) {
-            if (processed.contains(cSide)) {
-                continue;
-            } else if (cSide.getRules().getAiHints().getRemAIDecks()) {
-                continue; // don't sideboard in anything that we don't know how to play
-            } else if (cSide.getRules().getType().isLand()) {
-                continue; // don't know how to sideboard lands efficiently yet
-            }
-
-            for (PaperCard cMain : main) {
-                if (processed.contains(cMain)) {
+        if (!definedSideboardPlan) {
+            List<PaperCard> processed = Lists.newArrayList();
+            for (PaperCard cSide : sideboard) {
+                if (processed.contains(cSide)) {
                     continue;
-                } else if (cMain.getName().equals(cSide.getName())) {
-                    continue;
-                } else if (cMain.getRules().getType().isLand()) {
+                } else if (cSide.getRules().getAiHints().getRemAIDecks()) {
+                    continue; // don't sideboard in anything that we don't know how to play
+                } else if (cSide.getRules().getType().isLand()) {
                     continue; // don't know how to sideboard lands efficiently yet
                 }
 
-                if (sbSharedTypesOnly) {
-                    if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
-                        continue; // Only equivalent types allowed
+                for (PaperCard cMain : main) {
+                    if (processed.contains(cMain)) {
+                        continue;
+                    } else if (cMain.getName().equals(cSide.getName())) {
+                        continue;
+                    } else if (cMain.getRules().getType().isLand()) {
+                        continue; // don't know how to sideboard lands efficiently yet
                     }
-                } else {
-                    if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
-                            || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                        if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
-                            continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+
+                    if (sbSharedTypesOnly) {
+                        if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
+                            continue; // Only equivalent types allowed
+                        }
+                    } else {
+                        if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                                || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                            if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                                continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+                            }
                         }
                     }
-                }
 
-                if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
-                    processed.add(cMain);
-                    continue; // Mana Ability exception: Don't sideboard out cards that produce mana, can screw up the mana base
-                }
+                    if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
+                        processed.add(cMain);
+                        continue; // Mana Ability exception: Don't sideboard out cards that produce mana, can screw up the mana base
+                    }
 
-                // Try not to screw up the mana curve or color distribution too much
-                if (cSide.getRules().getColor().hasNoColorsExcept(cMain.getRules().getColor())
-                    && cMain.getRules().getManaCost().getCMC() == cSide.getRules().getManaCost().getCMC()) {
-                    sideboardPlan.put(cMain, cSide);
-                    processed.add(cSide);
-                    processed.add(cMain);
-                    break;
+                    // Try not to screw up the mana curve or color distribution too much
+                    if (cSide.getRules().getColor().hasNoColorsExcept(cMain.getRules().getColor())
+                            && cMain.getRules().getManaCost().getCMC() == cSide.getRules().getManaCost().getCMC()) {
+                        sideboardPlan.put(cMain, cSide);
+                        processed.add(cSide);
+                        processed.add(cMain);
+                        break;
+                    }
                 }
             }
         }
 
         // Make changes according to the sideboarding plan suggested above
         for (Map.Entry<PaperCard, PaperCard> ent : sideboardPlan.entrySet()) {
-            if (MyRandom.getRandom().nextInt(100) < sbChancePerCard) {
+            if (!definedSideboardPlan && MyRandom.getRandom().nextInt(100) < sbChancePerCard) {
                 continue;
             }
             long inMain = main.stream().filter(pc -> pc.getCardName().equals(ent.getKey().getName())).count();
