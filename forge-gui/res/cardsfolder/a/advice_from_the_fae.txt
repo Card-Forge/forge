@@ -1,7 +1,7 @@
 Name:Advice from the Fae
 ManaCost:2/U 2/U 2/U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2/U 2/U 2/U | DigNum$ 5 | ChangeNum$ 1 | SubAbility$ Dig2 | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | SpellDescription$ Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 1 | SubAbility$ Dig2 | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | SpellDescription$ Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 SVar:Dig2:DB$ Dig | DigNum$ 5 | ChangeNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:PlayerCountOther$HighestValid Creature.YouCtrl

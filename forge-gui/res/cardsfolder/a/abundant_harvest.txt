@@ -1,7 +1,7 @@
 Name:Abundant Harvest
 ManaCost:G
 Types:Sorcery
-A:SP$ GenericChoice | Cost$ G | Choices$ DigLand,DigNonland | SpellDescription$ Choose land or nonland. Reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and the rest on the bottom of your library in a random order.
+A:SP$ GenericChoice | Choices$ DigLand,DigNonland | SpellDescription$ Choose land or nonland. Reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and the rest on the bottom of your library in a random order.
 SVar:DigLand:DB$ DigUntil | Valid$ Card.Land | ValidDescription$ land | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Land
 SVar:DigNonland:DB$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SpellDescription$ Nonland
 AI:RemoveDeck:All

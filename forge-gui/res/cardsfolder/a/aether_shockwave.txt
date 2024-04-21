@@ -1,7 +1,7 @@
 Name:Aether Shockwave
 ManaCost:3 W
 Types:Instant
-A:SP$ Charm | Cost$ 3 W | Choices$ DBTapAll,DBTapAll2
+A:SP$ Charm | Choices$ DBTapAll,DBTapAll2
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Spirit | SpellDescription$ Tap all Spirits.
 SVar:DBTapAll2:DB$ TapAll | ValidCards$ Creature.nonSpirit | SpellDescription$ Tap all non-Spirit creatures.
 AI:RemoveDeck:All

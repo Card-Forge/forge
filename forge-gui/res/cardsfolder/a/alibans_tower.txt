@@ -1,5 +1,5 @@
 Name:Aliban's Tower
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | NumAtt$ 3 | NumDef$ 1 | SpellDescription$ Target blocking creature gets +3/+1 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.blocking | TgtPrompt$ Select target blocking creature | NumAtt$ 3 | NumDef$ 1 | SpellDescription$ Target blocking creature gets +3/+1 until end of turn.
 Oracle:Target blocking creature gets +3/+1 until end of turn.

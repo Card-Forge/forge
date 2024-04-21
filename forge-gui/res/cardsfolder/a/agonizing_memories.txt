@@ -1,5 +1,5 @@
 Name:Agonizing Memories
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0 | IsCurse$ True | Mandatory$ True | SpellDescription$ Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
+A:SP$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | LibraryPosition$ 0 | IsCurse$ True | Mandatory$ True | SpellDescription$ Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.
 Oracle:Look at target player's hand and choose two cards from it. Put them on top of that player's library in any order.

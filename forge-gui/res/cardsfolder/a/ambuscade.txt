@@ -1,7 +1,7 @@
 Name:Ambuscade
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBDealDamage | AILogic$ Fight | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to target creature an opponent controls.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBDealDamage | AILogic$ Fight | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to target creature an opponent controls.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to target creature an opponent controls.

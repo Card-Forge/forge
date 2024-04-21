@@ -1,7 +1,7 @@
 Name:Active Volcano
 ManaCost:R
 Types:Instant
-A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBChangeZone
+A:SP$ Charm | Choices$ DBDestroy,DBChangeZone
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Island | TgtPrompt$ Select target Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Island to its owner's hand.
 AI:RemoveDeck:Random

@@ -2,6 +2,6 @@ Name:Ajani's Presence
 ManaCost:W
 Types:Instant
 K:Strive:2 W
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | KW$ Indestructible | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+1 and gain indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+1 and gain indestructible until end of turn.
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {2}{W} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+1 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

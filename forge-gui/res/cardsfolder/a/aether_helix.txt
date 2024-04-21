@@ -1,6 +1,6 @@
 Name:Aether Helix
 ManaCost:3 G U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to your hand.
 Oracle:Return target permanent to its owner's hand. Return target permanent card from your graveyard to your hand.
