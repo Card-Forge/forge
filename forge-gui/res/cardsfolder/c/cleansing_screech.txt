@@ -1,5 +1,5 @@
 Name:Cleansing Screech
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 Oracle:Cleansing Screech deals 4 damage to any target.

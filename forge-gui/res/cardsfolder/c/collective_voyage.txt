@@ -1,7 +1,7 @@
 Name:Collective Voyage
 ManaCost:G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ G | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBSearch | StackDescription$ SpellDescription | SpellDescription$ Join forces — Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles.
+A:SP$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBSearch | StackDescription$ SpellDescription | SpellDescription$ Join forces — Starting with you, each player may pay any amount of mana. Each player searches their library for up to X basic land cards, where X is the total amount of mana paid this way, puts them onto the battlefield tapped, then shuffles.
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBStore
 SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.Y | UnlessCost$ Y | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn
 SVar:DBSearch:DB$ ChangeZone | DefinedPlayer$ Player | ChangeType$ Land.Basic | ChangeNum$ JoinForcesAmount | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ DBReset | StackDescription$ None

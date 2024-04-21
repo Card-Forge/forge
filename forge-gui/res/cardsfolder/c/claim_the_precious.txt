@@ -1,6 +1,6 @@
 Name:Claim the Precious
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ TrigTempt | SpellDescription$ Destroy target creature. The Ring tempts you.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ TrigTempt | SpellDescription$ Destroy target creature. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 Oracle:Destroy target creature. The Ring tempts you.

@@ -1,7 +1,7 @@
 Name:Clear the Mind
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library.
 AI:RemoveDeck:Random
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target player shuffles their graveyard into their library.\nDraw a card.

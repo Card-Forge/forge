@@ -1,7 +1,7 @@
 Name:Collected Conjuring
 ManaCost:2 U R
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U R | Defined$ You | DigNum$ 6 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile the top six cards of your library. You may cast up to two sorcery spells with mana value 3 or less from among them without paying their mana costs. Put the exiled cards not cast this way on the bottom of your library in a random order.
+A:SP$ Dig | Defined$ You | DigNum$ 6 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile the top six cards of your library. You may cast up to two sorcery spells with mana value 3 or less from among them without paying their mana costs. Put the exiled cards not cast this way on the bottom of your library in a random order.
 SVar:DBPlay:DB$ Play | Valid$ Sorcery.cmcLE3+IsRemembered+YouOwn | ValidZone$ Exile | Amount$ 2 | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBLibrary
 SVar:DBLibrary:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card.IsRemembered+YouOwn | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

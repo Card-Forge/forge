@@ -1,5 +1,5 @@
 Name:Cleaver Riot
 ManaCost:4 R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 4 R | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn.
 Oracle:Creatures you control gain double strike until end of turn. (They deal both first-strike and regular combat damage.)

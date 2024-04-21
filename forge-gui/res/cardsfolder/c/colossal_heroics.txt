@@ -2,7 +2,7 @@ Name:Colossal Heroics
 ManaCost:2 G
 Types:Instant
 K:Strive:1 G
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBUntap | SpellDescription$ Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBUntap | SpellDescription$ Any number of target creatures each get +2/+2 until end of turn. Untap those creatures.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {1}{G} more to cast for each target beyond the first.\nAny number of target creatures each get +2/+2 until end of turn. Untap those creatures.

@@ -1,7 +1,7 @@
 Name:Code of Constraint
 ManaCost:2 U
 Types:Instant
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -4/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -4/-0 until end of turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card. | SubAbility$ DBAddendum
 SVar:DBAddendum:DB$ Tap | Defined$ Targeted | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBPump | SpellDescription$ Addendum - If you cast this spell during your main phase, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
