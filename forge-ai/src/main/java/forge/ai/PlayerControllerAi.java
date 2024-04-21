@@ -116,11 +116,10 @@ public class PlayerControllerAi extends PlayerController {
             return null;
         }
 
-        if (MyRandom.getRandom().nextInt(100) < sbChanceOnWin) {
-            GameOutcome lastOutcome = brains.getGame().getMatch().getOutcomeById(brains.getGame().getId() - 1);
-            if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())) {
-                return null;
-            }
+        GameOutcome lastOutcome = brains.getGame().getMatch().getLastOutcome();
+        if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())
+            && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
+            return null;
         }
 
         List<PaperCard> main = deck.get(DeckSection.Main).toFlatList();
