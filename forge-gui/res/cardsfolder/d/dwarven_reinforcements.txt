@@ -1,7 +1,7 @@
 Name:Dwarven Reinforcements
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You | SpellDescription$ Create two 2/1 red Dwarf Berserker creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You | SpellDescription$ Create two 2/1 red Dwarf Berserker creature tokens.
 K:Foretell:1 R
 DeckHas:Ability$Token
 Oracle:Create two 2/1 red Dwarf Berserker creature tokens.\nForetell {1}{R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

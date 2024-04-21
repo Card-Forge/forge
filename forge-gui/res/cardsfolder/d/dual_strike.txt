@@ -1,7 +1,7 @@
 Name:Dual Strike
 ManaCost:R R
 Types:Instant
-A:SP$ DelayedTrigger | Cost$ R R | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant.cmcLE4,Sorcery.cmcLE4 | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell with mana value 4 or less this turn, copy that spell. You may choose new targets for the copy.
+A:SP$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant.cmcLE4,Sorcery.cmcLE4 | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell with mana value 4 or less this turn, copy that spell. You may choose new targets for the copy.
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:AIPriorityModifier:9
 K:Foretell:R
