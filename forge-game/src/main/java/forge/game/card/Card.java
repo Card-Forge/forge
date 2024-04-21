@@ -7781,19 +7781,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public ActivationTable getAbilityActivatedThisTurn() {
+        return numberTurnActivations;
+    }
+    public ActivationTable getAbilityActivatedThisGame() {
+        return numberGameActivations;
+    }
+    public ActivationTable getAbilityResolvedThisTurn() {
+        return numberAbilityResolved;
+    }
+
     public int getAbilityActivatedThisTurn(SpellAbility ability) {
         return numberTurnActivations.get(ability);
     }
-
     public int getAbilityActivatedThisGame(SpellAbility ability) {
         return numberGameActivations.get(ability);
+    }
+    public int getAbilityResolvedThisTurn(SpellAbility ability) {
+        return numberAbilityResolved.get(ability);
     }
 
     public void addAbilityResolved(SpellAbility ability) {
         numberAbilityResolved.add(ability);
-    }
-    public int getAbilityResolvedThisTurn(SpellAbility ability) {
-        return numberAbilityResolved.get(ability);
     }
     public List<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
         return numberAbilityResolved.getActivators(ability);
