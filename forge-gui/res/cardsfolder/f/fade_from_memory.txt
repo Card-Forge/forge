@@ -1,6 +1,6 @@
 Name:Fade from Memory
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 K:Cycling:B
 Oracle:Exile target card from a graveyard.\nCycling {B} ({B}, Discard this card: Draw a card.)

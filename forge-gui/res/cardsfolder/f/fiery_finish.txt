@@ -1,5 +1,5 @@
 Name:Fiery Finish
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature.
 Oracle:Fiery Finish deals 7 damage to target creature.

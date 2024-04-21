@@ -1,5 +1,5 @@
 Name:Feast of Dreams
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.enchanted,Creature.Enchantment | TgtPrompt$ Select target enchanted creature or enchantment creature | SpellDescription$ Destroy target enchanted creature or enchantment creature.
+A:SP$ Destroy | ValidTgts$ Creature.enchanted,Creature.Enchantment | TgtPrompt$ Select target enchanted creature or enchantment creature | SpellDescription$ Destroy target enchanted creature or enchantment creature.
 Oracle:Destroy target enchanted creature or enchantment creature.

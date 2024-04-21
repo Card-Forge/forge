@@ -1,6 +1,6 @@
 Name:Fault Line
 ManaCost:X R R
 Types:Instant
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
 SVar:X:Count$xPaid
 Oracle:Fault Line deals X damage to each creature without flying and each player.

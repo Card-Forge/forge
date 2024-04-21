@@ -1,6 +1,6 @@
 Name:Festival of Trokin
 ManaCost:W
 Types:Sorcery
-A:SP$ GainLife | Cost$ W | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
 Oracle:You gain 2 life for each creature you control.

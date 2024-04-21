@@ -1,7 +1,7 @@
 Name:Feral Contest
 ManaCost:3 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBMustBlock | SpellDescription$ Put a +1/+1 counter on target creature you control. Another target creature blocks it this turn if able.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBMustBlock | SpellDescription$ Put a +1/+1 counter on target creature you control. Another target creature blocks it this turn if able.
 SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to block
 AI:RemoveDeck:All
 Oracle:Put a +1/+1 counter on target creature you control. Another target creature blocks it this turn if able.

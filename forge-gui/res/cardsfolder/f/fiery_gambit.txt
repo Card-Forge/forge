@@ -2,7 +2,7 @@ Name:Fiery Gambit
 ManaCost:2 R
 Types:Sorcery
 # Target a creature for three damage
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Choose target creature for 3 damage | SubAbility$ RepeatFlip | StackDescription$ None | SpellDescription$ Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, CARDNAME has no effect. If you win one or more flips, CARDNAME deals 3 damage to target creature. If you win two or more flips, CARDNAME deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature for 3 damage | SubAbility$ RepeatFlip | StackDescription$ None | SpellDescription$ Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, CARDNAME has no effect. If you win one or more flips, CARDNAME deals 3 damage to target creature. If you win two or more flips, CARDNAME deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
 # Repeat Flip
 SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | RepeatCheckSVar$ Loss | RepeatSVarCompare$ EQ0 | RepeatOptional$ True | SubAbility$ DamageCreature
 SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementWins | LoseSubAbility$ IncrementLoss
