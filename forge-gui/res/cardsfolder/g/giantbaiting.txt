@@ -1,7 +1,7 @@
 Name:Giantbaiting
 ManaCost:2 RG
 Types:Sorcery
-A:SP$ Token | Cost$ 2 RG | TokenScript$ rg_4_4_giant_warrior_haste | AtEOT$ Exile | SpellDescription$ Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step.
+A:SP$ Token | TokenScript$ rg_4_4_giant_warrior_haste | AtEOT$ Exile | SpellDescription$ Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step.
 K:Conspire
 DeckHas:Ability$Token
 Oracle:Create a 4/4 red and green Giant Warrior creature token with haste. Exile it at the beginning of the next end step.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.)

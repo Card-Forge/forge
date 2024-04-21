@@ -1,6 +1,6 @@
 Name:Gather the Townsfolk
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Token | Cost$ 1 W | TokenAmount$ X | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. Fateful hour — If you have 5 or less life, create five of those tokens instead.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. Fateful hour — If you have 5 or less life, create five of those tokens instead.
 SVar:X:Count$FatefulHour.5.2
 Oracle:Create two 1/1 white Human creature tokens.\nFateful hour — If you have 5 or less life, create five of those tokens instead.

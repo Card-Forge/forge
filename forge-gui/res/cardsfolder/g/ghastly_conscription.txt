@@ -1,7 +1,7 @@
 Name:Ghastly Conscription
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 B B | ChangeType$ Creature | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBManifest | AILogic$ ManifestCreatsFromGraveyard | SpellDescription$ Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+A:SP$ ChangeZoneAll | ChangeType$ Creature | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBManifest | AILogic$ ManifestCreatsFromGraveyard | SpellDescription$ Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
 SVar:DBManifest:DB$ Manifest | Defined$ Remembered | DefinedPlayer$ You | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile all creature cards from target player's graveyard in a face-down pile, shuffle that pile, then manifest those cards. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

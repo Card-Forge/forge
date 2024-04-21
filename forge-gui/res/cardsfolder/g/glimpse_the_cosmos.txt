@@ -1,7 +1,7 @@
 Name:Glimpse the Cosmos
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AffectedZone$ Graveyard | MayPlay$ True | MayPlayAltManaCost$ U | IsPresent$ Giant.YouCtrl | Description$ As long as you control a Giant, you may cast CARDNAME from your graveyard by paying {U} rather than paying its mana cost. If you cast CARDNAME this way and it would be put into your graveyard, exile it instead.
 R:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile

@@ -1,5 +1,5 @@
 Name:Give No Ground
 ManaCost:3 W
 Types:Instant
-A:SP$ Pump | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +6 | CanBlockAny$ True | SpellDescription$ Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +6 | CanBlockAny$ True | SpellDescription$ Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.
 Oracle:Target creature gets +2/+6 until end of turn and can block any number of creatures this turn.

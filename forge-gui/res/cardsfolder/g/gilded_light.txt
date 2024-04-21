@@ -1,7 +1,7 @@
 Name:Gilded Light
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | Defined$ You | KW$ Shroud | SpellDescription$ You gain shroud until end of turn. (You can't be the target of spells or abilities.)
+A:SP$ Pump | Defined$ You | KW$ Shroud | SpellDescription$ You gain shroud until end of turn. (You can't be the target of spells or abilities.)
 K:Cycling:2
 AI:RemoveDeck:All
 Oracle:You gain shroud until end of turn. (You can't be the target of spells or abilities.)\nCycling {2} ({2}, Discard this card: Draw a card.)

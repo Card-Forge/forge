@@ -1,6 +1,6 @@
 Name:Goblin Offensive
 ManaCost:X 1 R R
 Types:Sorcery
-A:SP$ Token | Cost$ X 1 R R | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create X 1/1 red Goblin creature tokens.
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create X 1/1 red Goblin creature tokens.
 SVar:X:Count$xPaid
 Oracle:Create X 1/1 red Goblin creature tokens.

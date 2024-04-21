@@ -1,7 +1,7 @@
 Name:Gather the Pack
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 G | DigNum$ 5 | Reveal$ True | ChangeNum$ X | ChangeValid$ Creature | Optional$ True | DestinationZone$ Hand | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.
+A:SP$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ X | ChangeValid$ Creature | Optional$ True | DestinationZone$ Hand | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.
 SVar:X:Count$Compare Y GE2.2.1
 SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 Oracle:Reveal the top five cards of your library. You may put a creature card from among them into your hand. Put the rest into your graveyard.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, put up to two creature cards from among the revealed cards into your hand instead of one.

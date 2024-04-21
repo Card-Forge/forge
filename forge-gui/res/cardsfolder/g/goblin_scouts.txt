@@ -1,5 +1,5 @@
 Name:Goblin Scouts
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R R | TokenAmount$ 3 | TokenScript$ r_1_1_goblin_scout_mountainwalk | TokenOwner$ You | SpellDescription$ Create three 1/1 red Goblin Scout creature tokens with mountainwalk. (They can't be blocked as long as defending player controls a Mountain.)
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_goblin_scout_mountainwalk | TokenOwner$ You | SpellDescription$ Create three 1/1 red Goblin Scout creature tokens with mountainwalk. (They can't be blocked as long as defending player controls a Mountain.)
 Oracle:Create three 1/1 red Goblin Scout creature tokens with mountainwalk. (They can't be blocked as long as defending player controls a Mountain.)

@@ -1,7 +1,7 @@
 Name:Goblin Gathering
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create a number of 1/1 red Goblin creature tokens equal to two plus the number of cards named Goblin Gathering in your graveyard.
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create a number of 1/1 red Goblin creature tokens equal to two plus the number of cards named Goblin Gathering in your graveyard.
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedGoblin Gathering/Plus.2
 DeckHints:Name$Goblin Gathering
 DeckHas:Ability$Token

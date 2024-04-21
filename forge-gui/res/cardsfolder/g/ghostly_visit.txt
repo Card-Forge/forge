@@ -1,5 +1,5 @@
 Name:Ghostly Visit
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 Oracle:Destroy target nonblack creature.

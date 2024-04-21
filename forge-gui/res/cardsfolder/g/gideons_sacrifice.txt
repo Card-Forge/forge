@@ -1,7 +1,7 @@
 Name:Gideon's Sacrifice
 ManaCost:W
 Types:Instant
-A:SP$ ChooseCard | Cost$ W | Choices$ Creature.YouCtrl,Planeswalker.YouCtrl | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ Choose a creature or planeswalker you control. All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
+A:SP$ ChooseCard | Choices$ Creature.YouCtrl,Planeswalker.YouCtrl | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ Choose a creature or planeswalker you control. All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ DamageEvent | ExileOnMoved$ Battlefield | RememberObjects$ ChosenCard
 SVar:DamageEvent:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ GideonSac | DamageTarget$ Remembered | Description$ All damage that would be dealt this turn to you and permanents you control is dealt to the chosen permanent instead (if it's still on the battlefield).
 SVar:GideonSac:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card
