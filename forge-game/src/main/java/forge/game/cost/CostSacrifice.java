@@ -20,6 +20,9 @@ package forge.game.cost;
 import forge.card.CardType;
 
 import java.util.Map;
+import java.util.Set;
+
+import org.testng.collections.Sets;
 
 import com.google.common.collect.Iterables;
 
@@ -39,9 +42,6 @@ import forge.util.Lang;
  */
 public class CostSacrifice extends CostPartWithList {
 
-    /**
-     * Serializables need a version ID.
-     */
     private static final long serialVersionUID = 1L;
 
     /**
@@ -64,9 +64,29 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
+
+        String type = getType();
+        boolean differentNames = false;
+        if (type.contains("+WithDifferentNames")) {
+            type = type.replace("+WithDifferentNames", "");
+            differentNames = true;
+        }
+
         CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
+        typeList = CardLists.getValidCards(typeList, type.split(";"), payer, source, ability);
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
+        if (differentNames) {
+            // TODO rewrite with sharesName to respect Spy Kit
+            final Set<String> crdname = Sets.newHashSet();
+            for (final Card card : typeList) {
+                String name = card.getName();
+                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                if (!card.hasNoName()) {
+                    crdname.add(name);
+                }
+            }
+            return crdname.size();
+        }
         return typeList.size();
     }
 
