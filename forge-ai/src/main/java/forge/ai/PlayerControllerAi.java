@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
-import forge.StaticData;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
