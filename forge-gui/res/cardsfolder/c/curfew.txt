@@ -1,7 +1,7 @@
 Name:Curfew
 ManaCost:U
 Types:Instant
-A:SP$ RepeatEach | Cost$ U | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoose | SubAbility$ BounceAll | SpellDescription$ Each player returns a creature they control to its owner's hand.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoose | SubAbility$ BounceAll | SpellDescription$ Each player returns a creature they control to its owner's hand.
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | AILogic$ WorstCard | ChoiceTitle$ Choose a creature you control | RememberChosen$ True
 SVar:BounceAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

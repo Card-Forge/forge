@@ -1,7 +1,7 @@
 Name:Cunning Wish
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | Reveal$ True | Origin$ Sideboard | Destination$ Hand | ChangeType$ Instant.YouOwn | ChangeTypeDesc$ instant card they own | ChangeNum$ 1 | SubAbility$ DBChange | Hidden$ True | SpellDescription$ You may reveal an instant card you own from outside the game and put it into your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Reveal$ True | Origin$ Sideboard | Destination$ Hand | ChangeType$ Instant.YouOwn | ChangeTypeDesc$ instant card they own | ChangeNum$ 1 | SubAbility$ DBChange | Hidden$ True | SpellDescription$ You may reveal an instant card you own from outside the game and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:Random
 Oracle:You may reveal an instant card you own from outside the game and put it into your hand. Exile Cunning Wish.

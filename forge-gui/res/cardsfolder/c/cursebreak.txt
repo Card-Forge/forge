@@ -1,6 +1,6 @@
 Name:Cursebreak
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain 2 life.
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target enchantment. You gain 2 life.

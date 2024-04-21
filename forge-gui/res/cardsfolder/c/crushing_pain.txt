@@ -1,5 +1,5 @@
 Name:Crushing Pain
 ManaCost:1 R
 Types:Instant Arcane
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature that was dealt damage this turn.
+A:SP$ DealDamage | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature that was dealt damage this turn.
 Oracle:Crushing Pain deals 6 damage to target creature that was dealt damage this turn.

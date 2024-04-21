@@ -3,7 +3,7 @@ ManaCost:9 B
 Types:Sorcery
 K:Suspend:2:2 B B
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigCursePayUP | TriggerZones$ Exile | IsPresent$ Card.suspended+Self | PresentZone$ Exile | TriggerDescription$ At the beginning of each player's upkeep, if CARDNAME is suspended, that player may sacrifice a permanent. If the player does, put two time counters on CARDNAME.
-A:SP$ Sacrifice | Cost$ 9 B | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ CurseX | SacValid$ Permanent | SpellDescription$ Target player sacrifices half the permanents they control, rounded down.
+A:SP$ Sacrifice | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ CurseX | SacValid$ Permanent | SpellDescription$ Target player sacrifices half the permanents they control, rounded down.
 SVar:TrigCursePayUP:DB$ Sacrifice | Amount$ 1 | SacValid$ Permanent | Defined$ TriggeredPlayer | Optional$ True | AILogic$ OpponentOnly | RememberSacrificed$ True | SubAbility$ DBCursePutCounter
 SVar:DBCursePutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ 2 | ConditionCheckSVar$ CurseY | ConditionSVarCompare$ GT0 | SubAbility$ DBCurseCleanup
 SVar:DBCurseCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -2,5 +2,5 @@ Name:Curtains' Call
 ManaCost:5 B
 Types:Instant
 K:Undaunted
-A:SP$ Destroy | Cost$ 5 B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy two target creatures.
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy two target creatures.
 Oracle:Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures.
