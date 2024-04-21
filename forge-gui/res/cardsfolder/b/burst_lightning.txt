@@ -2,6 +2,6 @@ Name:Burst Lightning
 ManaCost:R
 Types:Instant
 K:Kicker:4
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to any target. If CARDNAME was kicked, it deals 4 damage instead.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to any target. If CARDNAME was kicked, it deals 4 damage instead.
 SVar:WasKicked:Count$Kicked.4.2
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nBurst Lightning deals 2 damage to any target. If this spell was kicked, it deals 4 damage instead.

@@ -1,6 +1,6 @@
 Name:Burning Inquiry
 ManaCost:R
 Types:Sorcery
-A:SP$ Draw | Cost$ R | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard3 | SpellDescription$ Each player draws three cards, then discards three cards at random.
+A:SP$ Draw | Defined$ Player | NumCards$ 3 | SubAbility$ DBDiscard3 | SpellDescription$ Each player draws three cards, then discards three cards at random.
 SVar:DBDiscard3:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 3
 Oracle:Each player draws three cards, then discards three cards at random.

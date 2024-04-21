@@ -1,7 +1,7 @@
 Name:Breaking of the Fellowship
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | SubAbility$ MutinyDamage | StackDescription$ None | SpellDescription$ Target creature an opponent controls deals damage equal to its power to another target creature that player controls. The Ring tempts you.
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature an opponent controls | SubAbility$ MutinyDamage | StackDescription$ None | SpellDescription$ Target creature an opponent controls deals damage equal to its power to another target creature that player controls. The Ring tempts you.
 SVar:MutinyDamage:DB$ DealDamage | ValidTgts$ Creature | TargetUnique$ True | TargetsWithDefinedController$ ParentTargetedController | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget | SubAbility$ TrigTempt
 SVar:X:ParentTargeted$CardPower
 SVar:TrigTempt:DB$ RingTemptsYou

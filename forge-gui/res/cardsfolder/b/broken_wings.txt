@@ -1,5 +1,5 @@
 Name:Broken Wings
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, enchantment or creature with flying | SpellDescription$ Destroy target artifact, enchantment or creature with flying.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, enchantment or creature with flying | SpellDescription$ Destroy target artifact, enchantment or creature with flying.
 Oracle:Destroy target artifact, enchantment, or creature with flying.

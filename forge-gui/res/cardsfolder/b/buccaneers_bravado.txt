@@ -1,7 +1,7 @@
 Name:Buccaneer's Bravado
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | CharmNum$ 1 | Choices$ DBPump,DBPump2
+A:SP$ Charm | CharmNum$ 1 | Choices$ DBPump,DBPump2
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+1 and gains first strike until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Pirate | TgtPrompt$ Select target Pirate | NumAtt$ 1 | NumDef$ 1 | KW$ Double Strike | SpellDescription$ Target Pirate gets +1/+1 and gains double strike until end of turn.
 Oracle:Choose one —\n• Target creature gets +1/+1 and gains first strike until end of turn.\n• Target Pirate gets +1/+1 and gains double strike until end of turn.

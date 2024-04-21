@@ -1,6 +1,6 @@
 Name:Bright Reprisal
 ManaCost:4 W
 Types:Instant
-A:SP$ Destroy | Cost$ 4 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBDraw | SpellDescription$ Destroy target attacking creature. Draw a card.
+A:SP$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBDraw | SpellDescription$ Destroy target attacking creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Destroy target attacking creature.\nDraw a card.
