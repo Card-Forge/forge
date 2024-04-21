@@ -1,5 +1,5 @@
 Name:Clip Wings
 ManaCost:1 G
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 G | Defined$ Player.Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | SpellDescription$ Each opponent sacrifices a creature with flying.
+A:SP$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | SpellDescription$ Each opponent sacrifices a creature with flying.
 Oracle:Each opponent sacrifices a creature with flying.

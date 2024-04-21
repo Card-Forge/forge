@@ -2,6 +2,6 @@ Name:Clockspinning
 ManaCost:U
 Types:Instant
 K:Buyback:3
-A:SP$ AddOrRemoveCounter | Cost$ U | CounterNum$ 1 | ValidTgts$ Permanent.inZoneBattlefield,Card.suspended | TgtZone$ Battlefield,Exile | AITgts$ Card.HasCounters | TgtPrompt$ Select target permanent or suspended card. | SpellDescription$ Choose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it.
+A:SP$ AddOrRemoveCounter | CounterNum$ 1 | ValidTgts$ Permanent.inZoneBattlefield,Card.suspended | TgtZone$ Battlefield,Exile | AITgts$ Card.HasCounters | TgtPrompt$ Select target permanent or suspended card. | SpellDescription$ Choose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it.
 AI:RemoveDeck:Random
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nChoose a counter on target permanent or suspended card. Remove that counter from that permanent or card or put another of those counters on it.

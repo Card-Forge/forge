@@ -1,6 +1,6 @@
 Name:Clash of Wills
 ManaCost:X U
 Types:Instant
-A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {X}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {X}.
 SVar:X:Count$xPaid
 Oracle:Counter target spell unless its controller pays {X}.

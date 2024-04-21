@@ -1,7 +1,7 @@
 Name:Clutch of the Undercity
 ManaCost:1 U U B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Its controller loses 3 life. | SubAbility$ DBDrain
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Its controller loses 3 life. | SubAbility$ DBDrain
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3
 K:Transmute:1 U B
 Oracle:Return target permanent to its owner's hand. Its controller loses 3 life.\nTransmute {1}{U}{B} ({1}{U}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

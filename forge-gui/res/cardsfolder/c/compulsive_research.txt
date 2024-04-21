@@ -1,6 +1,6 @@
 Name:Compulsive Research
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws three cards. Then that player discards two cards unless they discard a land card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws three cards. Then that player discards two cards unless they discard a land card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Land
 Oracle:Target player draws three cards. Then that player discards two cards unless they discard a land card.

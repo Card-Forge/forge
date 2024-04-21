@@ -2,7 +2,7 @@ Name:Closing Statement
 ManaCost:3 W B
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | Phases$ End of Turn | PlayerTurn$ You | EffectZone$ All | Description$ This spell costs {2} less to cast during your end step.
-A:SP$ Destroy | Cost$ 3 W B | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker you don't control | SubAbility$ DBPutCounter | SpellDescription$ Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
+A:SP$ Destroy | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker you don't control | SubAbility$ DBPutCounter | SpellDescription$ Destroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:This spell costs {2} less to cast during your end step.\nDestroy target creature or planeswalker you don't control. Put a +1/+1 counter on up to one target creature you control.

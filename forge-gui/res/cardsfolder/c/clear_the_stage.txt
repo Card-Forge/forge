@@ -1,6 +1,6 @@
 Name:Clear the Stage
 ManaCost:4 B
 Types:Instant
-A:SP$ Pump | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBChangeZone | SpellDescription$ Target creature gets -3/-3 until end of turn. If you control a creature with power 4 or greater, you may return up to one target creature card from your graveyard to your hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBChangeZone | SpellDescription$ Target creature gets -3/-3 until end of turn. If you control a creature with power 4 or greater, you may return up to one target creature card from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | ConditionPresent$ Creature.YouCtrl+powerGE4
 Oracle:Target creature gets -3/-3 until end of turn. If you control a creature with power 4 or greater, you may return up to one target creature card from your graveyard to your hand.

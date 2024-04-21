@@ -1,6 +1,6 @@
 Name:Chorus of Might
 ManaCost:3 G
 Types:Instant
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.

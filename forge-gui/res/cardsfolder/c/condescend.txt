@@ -1,7 +1,7 @@
 Name:Condescend
 ManaCost:X U
 Types:Instant
-A:SP$ Counter | Cost$ X U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBScry | SpellDescription$ Counter target spell unless its controller pays {X}. Scry 2.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBScry | SpellDescription$ Counter target spell unless its controller pays {X}. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 SVar:X:Count$xPaid
 Oracle:Counter target spell unless its controller pays {X}. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

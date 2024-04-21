@@ -2,7 +2,7 @@ Name:Collective Effort
 ManaCost:1 W W
 Types:Sorcery
 K:Escalate:tapXType<1/Creature>
-A:SP$ Charm | Cost$ 1 W W | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBDestroyCreature,DBDestroyEnchantment,DBPutCounterAll
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBDestroyCreature,DBDestroyEnchantment,DBPutCounterAll
 SVar:DBDestroyCreature:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidTgts$ Player | ValidCards$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature target player controls.

@@ -1,6 +1,6 @@
 Name:Commune with Dinosaurs
 ManaCost:G
 Types:Sorcery
-A:SP$ Dig | Cost$ G | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Dinosaur,Land | Optional$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a Dinosaur or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Dinosaur,Land | Optional$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a Dinosaur or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 DeckHints:Type$Dinosaur
 Oracle:Look at the top five cards of your library. You may reveal a Dinosaur or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

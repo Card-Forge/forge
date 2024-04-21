@@ -1,7 +1,7 @@
 Name:Circular Logic
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {1} for each card in your graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {1} for each card in your graveyard.
 K:Madness:U
 SVar:Y:Count$InYourYard
 Oracle:Counter target spell unless its controller pays {1} for each card in your graveyard.\nMadness {U} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
