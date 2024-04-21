@@ -1,6 +1,6 @@
 Name:Constricting Tendrils
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
 K:Cycling:2
 Oracle:Target creature gets -3/-0 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

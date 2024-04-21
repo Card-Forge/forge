@@ -1,7 +1,7 @@
 Name:Courage in Crisis
 ManaCost:2 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBProliferate | SpellDescription$ Put a +1/+1 counter on target creature, then proliferate. (any number of permanents and/or players, then give each another counter of each kind already there.)
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBProliferate | SpellDescription$ Put a +1/+1 counter on target creature, then proliferate. (any number of permanents and/or players, then give each another counter of each kind already there.)
 SVar:DBProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters

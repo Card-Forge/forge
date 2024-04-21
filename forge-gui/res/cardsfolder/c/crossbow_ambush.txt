@@ -1,6 +1,6 @@
 Name:Crossbow Ambush
 ManaCost:G
 Types:Instant
-A:SP$ PumpAll | Cost$ G | ValidCards$ Creature.YouCtrl | KW$ Reach | SpellDescription$ Creatures you control gain reach until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Reach | SpellDescription$ Creatures you control gain reach until end of turn.
 AI:RemoveDeck:All
 Oracle:Creatures you control gain reach until end of turn. (They can block creatures with flying.)

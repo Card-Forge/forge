@@ -2,6 +2,6 @@ Name:Cruel Feeding
 ManaCost:B
 Types:Instant
 K:Strive:2 B
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | KW$ Lifelink | NumAtt$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+0 and gain lifelink until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Lifelink | NumAtt$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +1/+0 and gain lifelink until end of turn.
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {2}{B} more to cast for each target beyond the first.\nAny number of target creatures each get +1/+0 and gain lifelink until end of turn. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

@@ -1,6 +1,6 @@
 Name:Crash Through
 ManaCost:R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Trample | SubAbility$ DBDraw | SpellDescription$ Creatures you control gain trample until end of turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.) Draw a card.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | SubAbility$ DBDraw | SpellDescription$ Creatures you control gain trample until end of turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.) Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Creatures you control gain trample until end of turn. (A creature with trample can deal excess combat damage to the player or planeswalker it's attacking.)\nDraw a card.

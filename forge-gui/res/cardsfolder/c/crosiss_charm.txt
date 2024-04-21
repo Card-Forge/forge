@@ -1,7 +1,7 @@
 Name:Crosis's Charm
 ManaCost:U B R
 Types:Instant
-A:SP$ Charm | Cost$ U B R | Choices$ DBChangeZone,DBDestroy,DBDestroy2
+A:SP$ Charm | Choices$ DBChangeZone,DBDestroy,DBDestroy2
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.

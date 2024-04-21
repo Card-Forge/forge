@@ -1,6 +1,6 @@
 Name:Council's Judgment
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ Vote | Cost$ 1 W W | Defined$ Player | VoteSubAbility$ DBExile | VoteCard$ Permanent.nonLand+YouDontCtrl | VoteMessage$ for a nonland permanent you don't control | AILogic$ Judgment | SpellDescription$ Will of the Council — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
+A:SP$ Vote | Defined$ Player | VoteSubAbility$ DBExile | VoteCard$ Permanent.nonLand+YouDontCtrl | VoteMessage$ for a nonland permanent you don't control | AILogic$ Judgment | SpellDescription$ Will of the Council — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile
 Oracle:Will of the council — Starting with you, each player votes for a nonland permanent you don't control. Exile each permanent with the most votes or tied for most votes.

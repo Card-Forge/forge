@@ -1,6 +1,6 @@
 Name:Crippling Fear
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 2 B B | Defined$ You | Type$ Creature | SubAbility$ DBPumpOther | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBPumpOther | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn.
 SVar:DBPumpOther:DB$ PumpAll | ValidCards$ Creature.IsNotChosenType | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 Oracle:Choose a creature type. Creatures that aren't of the chosen type get -3/-3 until end of turn.

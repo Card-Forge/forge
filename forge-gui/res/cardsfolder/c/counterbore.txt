@@ -1,7 +1,7 @@
 Name:Counterbore
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | ValidTgts$ Card | SubAbility$ ExileYard | SpellDescription$ Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SubAbility$ ExileYard | SpellDescription$ Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. Then that player shuffles.
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ TargetedController | ChangeType$ TargetedCard.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ TargetedCard.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ TargetedCard.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | StackDescription$ None

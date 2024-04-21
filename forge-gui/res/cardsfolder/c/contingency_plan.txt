@@ -1,7 +1,7 @@
 Name:Contingency Plan
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Surveil | Cost$ 1 U | Amount$ 5 | SpellDescription$ Surveil 5. (Look at the top five cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Surveil | Amount$ 5 | SpellDescription$ Surveil 5. (Look at the top five cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 AI:RemoveDeck:All
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 5. (Look at the top five cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

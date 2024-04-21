@@ -1,7 +1,7 @@
 Name:Cruel Ultimatum
 ManaCost:U U B B B R R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ U U B B B R R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SacValid$ Creature | SubAbility$ DBDiscardOpp | SpellDescription$ Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
+A:SP$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SacValid$ Creature | SubAbility$ DBDiscardOpp | SpellDescription$ Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
 SVar:DBDiscardOpp:DB$ Discard | Defined$ Targeted | NumCards$ 3 | Mode$ TgtChoose | SubAbility$ DBLoseLifeOpp
 SVar:DBLoseLifeOpp:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 5 | SubAbility$ DBResurrectYou
 SVar:DBResurrectYou:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBDrawYou
