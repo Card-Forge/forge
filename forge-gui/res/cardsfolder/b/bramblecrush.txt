@@ -1,5 +1,5 @@
 Name:Bramblecrush
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | SpellDescription$ Destroy target noncreature permanent.
 Oracle:Destroy target noncreature permanent.

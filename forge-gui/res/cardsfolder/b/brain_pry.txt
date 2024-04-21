@@ -1,7 +1,7 @@
 Name:Brain Pry
 ManaCost:1 B
 Types:Sorcery
-A:SP$ NameCard | Cost$ 1 B | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ RevealHand | SpellDescription$ Choose a nonland card name. Target player reveals their hand. That player discards a card with that name. If they can't, you draw a card.
+A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ RevealHand | SpellDescription$ Choose a nonland card name. Target player reveals their hand. That player discards a card with that name. If they can't, you draw a card.
 SVar:RevealHand:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | DiscardValid$ Card.NamedCard | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ0 | SubAbility$ DBCleanup

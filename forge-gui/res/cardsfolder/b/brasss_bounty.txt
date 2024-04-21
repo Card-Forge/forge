@@ -1,7 +1,7 @@
 Name:Brass's Bounty
 ManaCost:6 R
 Types:Sorcery
-A:SP$ Token | Cost$ 6 R | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ For each land you control, create a Treasure token.
+A:SP$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ For each land you control, create a Treasure token.
 SVar:X:Count$TypeYouCtrl.Land
 DeckHas:Ability$Token
 Oracle:For each land you control, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

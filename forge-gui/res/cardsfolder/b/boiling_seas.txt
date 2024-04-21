@@ -1,6 +1,6 @@
 Name:Boiling Seas
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy all Islands.
+A:SP$ DestroyAll | ValidCards$ Island | SpellDescription$ Destroy all Islands.
 AI:RemoveDeck:Random
 Oracle:Destroy all Islands.

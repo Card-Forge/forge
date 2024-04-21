@@ -1,5 +1,5 @@
 Name:Blazing Volley
 ManaCost:R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ R | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
+A:SP$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
 Oracle:Blazing Volley deals 1 damage to each creature your opponents control.

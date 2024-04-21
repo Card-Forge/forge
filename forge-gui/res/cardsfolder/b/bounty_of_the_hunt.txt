@@ -1,7 +1,7 @@
 Name:Bounty of the Hunt
 ManaCost:3 G G
 Types:Instant
-A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | RemovePhase$ Cleanup | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | RemovePhase$ Cleanup | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
 S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ExileFromHand<1/Card.Green+Other> | Description$ You may exile a green card from your hand rather than pay this spell's mana cost.
 DeckHas:Ability$Counters
 AI:RemoveDeck:All

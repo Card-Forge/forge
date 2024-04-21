@@ -1,7 +1,7 @@
 Name:Blaze of Glory
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | CanBlockAny$ True | SubAbility$ GoingDownInStyle | ActivationPhases$ BeginCombat->Declare Attackers | StackDescription$ {c:Targeted} can block any number of creatures this turn. It blocks each attacking creature this turn if able. | SpellDescription$ Cast CARDNAME only during combat before blockers are declared. Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
+A:SP$ Pump | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | CanBlockAny$ True | SubAbility$ GoingDownInStyle | ActivationPhases$ BeginCombat->Declare Attackers | StackDescription$ {c:Targeted} can block any number of creatures this turn. It blocks each attacking creature this turn if able. | SpellDescription$ Cast CARDNAME only during combat before blockers are declared. Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.
 SVar:GoingDownInStyle:DB$ MustBlock | Defined$ ParentTarget | DefinedAttacker$ Valid Card.attacking | BlockAllDefined$ True | StackDescription$ None
 AI:RemoveDeck:All
 Oracle:Cast this spell only during combat before blockers are declared.\nTarget creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.

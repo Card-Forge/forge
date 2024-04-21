@@ -2,7 +2,7 @@ Name:Blood Tribute
 ManaCost:4 B B
 Types:Sorcery
 K:Kicker:tapXType<1/Vampire>
-A:SP$ LoseLife | Cost$ 4 B B | ValidTgts$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses half their life, rounded up. If this spell was kicked, you gain life equal to the life lost this way.
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses half their life, rounded up. If this spell was kicked, you gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | Condition$ Kicked | ConditionDescription$ If it was kicked,
 SVar:X:TargetedPlayer$LifeTotal/HalfUp
 #This SVar will be overridden by AF LoseLife

@@ -1,5 +1,5 @@
 Name:Blossoming Defense
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | KW$ Hexproof | SpellDescription$ Target creature you control gets +2/+2 and gains hexproof until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | KW$ Hexproof | SpellDescription$ Target creature you control gets +2/+2 and gains hexproof until end of turn.
 Oracle:Target creature you control gets +2/+2 and gains hexproof until end of turn.
