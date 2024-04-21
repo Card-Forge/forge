@@ -1,7 +1,7 @@
 Name:Dispatch
 ManaCost:W
 Types:Instant
-A:SP$ Tap | Cost$ W | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBExile | SpellDescription$ Tap target creature. Metalcraft — If you control three or more artifacts, exile that creature.
+A:SP$ Tap | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBExile | SpellDescription$ Tap target creature. Metalcraft — If you control three or more artifacts, exile that creature.
 SVar:DBExile:DB$ ChangeZone | Condition$ Metalcraft | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDescription$ If you control three or more artifacts,
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Artifact.YouCtrl

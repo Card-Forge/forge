@@ -1,6 +1,6 @@
 Name:Dramatic Rescue
 ManaCost:W U
 Types:Instant
-A:SP$ ChangeZone | Cost$ W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBGainLife | SpellDescription$ Return target creature to its owner's hand. You gain 2 life.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBGainLife | SpellDescription$ Return target creature to its owner's hand. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 Oracle:Return target creature to its owner's hand. You gain 2 life.

@@ -1,7 +1,7 @@
 Name:Dominate
 ManaCost:X 1 U U
 Types:Instant
-A:SP$ GainControl | Cost$ X 1 U U | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X or less.
+A:SP$ GainControl | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X or less.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Gain control of target creature with mana value X or less.

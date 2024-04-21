@@ -1,7 +1,7 @@
 Name:Drown in Filth
 ManaCost:B G
 Types:Sorcery
-A:SP$ Mill | Cost$ B G | NumCards$ 4 | Defined$ You | SubAbility$ DBPump | SpellDescription$ Choose target creature. Mill four cards, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
+A:SP$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBPump | SpellDescription$ Choose target creature. Mill four cards, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:X:Count$ValidGraveyard Land.YouOwn
 DeckHas:Ability$Graveyard

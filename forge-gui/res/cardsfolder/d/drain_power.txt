@@ -1,6 +1,6 @@
 Name:Drain Power
 ManaCost:U U
 Types:Sorcery
-A:SP$ ActivateAbility | Cost$ U U | ValidTgts$ Player | Type$ Land | ManaAbility$ True | SubAbility$ DBDrainMana | SpellDescription$ Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.
+A:SP$ ActivateAbility | ValidTgts$ Player | Type$ Land | ManaAbility$ True | SubAbility$ DBDrainMana | SpellDescription$ Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.
 SVar:DBDrainMana:DB$ DrainMana | Defined$ Targeted | DrainMana$ True
 Oracle:Target player activates a mana ability of each land they control. Then that player loses all unspent mana and you add the mana lost this way.

@@ -1,7 +1,7 @@
 Name:Display of Dominance
 ManaCost:1 G
 Types:Instant
-A:SP$ Charm | Cost$ 1 G | Choices$ DBDestroy,DBProtect
+A:SP$ Charm | Choices$ DBDestroy,DBProtect
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature+Blue,Permanent.nonCreature+Black | TgtPrompt$ Select target blue or black noncreature permanent | SpellDescription$ Destroy target blue or black noncreature permanent.
 SVar:DBProtect:DB$ Effect | StaticAbilities$ STCantBeTarget | SpellDescription$ Permanents you control can't be the targets of blue or black spells your opponents control this turn.
 SVar:STCantBeTarget:Mode$ CantTarget | ValidCard$ Permanent.YouCtrl | ValidSource$ Card.Blue+OppCtrl,Card.Black+OppCtrl | ValidSA$ Spell | EffectZone$ Command | Description$ Permanents you control can't be the targets of blue or black spells your opponents control this turn.
