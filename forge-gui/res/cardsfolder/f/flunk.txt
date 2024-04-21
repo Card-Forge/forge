@@ -1,6 +1,6 @@
 Name:Flunk
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is 7 minus the number of cards in that creature's controller's hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is 7 minus the number of cards in that creature's controller's hand.
 SVar:X:TargetedController$CardsInHand/NMinus.7
 Oracle:Target creature gets -X/-X until end of turn, where X is 7 minus the number of cards in that creature's controller's hand.

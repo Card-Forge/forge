@@ -1,7 +1,7 @@
 Name:Final Parting
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B B | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | RememberChanged$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Search your library for two cards. Put one into your hand and the other into your graveyard. Then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | RememberChanged$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Search your library for two cards. Put one into your hand and the other into your graveyard. Then shuffle.
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card to go to your hand | Shuffle$ False | NoReveal$ True | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card to go to your graveyard | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

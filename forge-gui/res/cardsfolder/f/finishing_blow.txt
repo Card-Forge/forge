@@ -1,5 +1,5 @@
 Name:Finishing Blow
 ManaCost:4 B
 Types:Instant
-A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 Oracle:Destroy target creature or planeswalker.
