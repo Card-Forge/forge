@@ -1,7 +1,7 @@
 Name:Dangerous Wager
 ManaCost:1 R
 Types:Instant
-A:SP$ Discard | Cost$ 1 R | Mode$ Hand | Defined$ You | SubAbility$ BetThat | SpellDescription$ Discard your hand, then draw two cards.
+A:SP$ Discard | Mode$ Hand | Defined$ You | SubAbility$ BetThat | SpellDescription$ Discard your hand, then draw two cards.
 SVar:BetThat:DB$ Draw | Defined$ You | NumCards$ 2
 AI:RemoveDeck:Random
 AI:RemoveDeck:All

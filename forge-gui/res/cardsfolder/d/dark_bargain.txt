@@ -1,7 +1,7 @@
 Name:Dark Bargain
 ManaCost:3 B
 Types:Instant
-A:SP$ Dig | Cost$ 3 B | DigNum$ 3 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SubAbility$ DBPain | SpellDescription$ Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard. CARDNAME deals 2 damage to you.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SubAbility$ DBPain | SpellDescription$ Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard. CARDNAME deals 2 damage to you.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 2 | Defined$ You
 DeckHas:Ability$Graveyard
 Oracle:Look at the top three cards of your library. Put two of them into your hand and the other into your graveyard. Dark Bargain deals 2 damage to you.

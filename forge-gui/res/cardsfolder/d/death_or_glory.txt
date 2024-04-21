@@ -1,7 +1,7 @@
 Name:Death or Glory
 ManaCost:4 W
 Types:Sorcery
-A:SP$ TwoPiles | Cost$ 4 W | Defined$ You | Separator$ You | Chooser$ Opponent | ChosenPile$ DBExile | UnchosenPile$ DBReturn | ValidCards$ Creature | Zone$ Graveyard | AILogic$ Worst | SpellDescription$ Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.
+A:SP$ TwoPiles | Defined$ You | Separator$ You | Chooser$ Opponent | ChosenPile$ DBExile | UnchosenPile$ DBReturn | ValidCards$ Creature | Zone$ Graveyard | AILogic$ Worst | SpellDescription$ Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Exile
 Oracle:Separate all creature cards in your graveyard into two piles. Exile the pile of an opponent's choice and return the other to the battlefield.

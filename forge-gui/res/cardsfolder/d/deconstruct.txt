@@ -1,6 +1,6 @@
 Name:Deconstruct
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBMana | SpellDescription$ Destroy target artifact. Add {G}{G}{G}.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBMana | SpellDescription$ Destroy target artifact. Add {G}{G}{G}.
 SVar:DBMana:DB$ Mana | Produced$ G | Amount$ 3
 Oracle:Destroy target artifact. Add {G}{G}{G}.

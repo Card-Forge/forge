@@ -1,5 +1,5 @@
 Name:Dance of Shadows
 ManaCost:3 B B
 Types:Sorcery Arcane
-A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Fear | SpellDescription$ Creatures you control get +1/+0 and gain fear until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Fear | SpellDescription$ Creatures you control get +1/+0 and gain fear until end of turn.
 Oracle:Creatures you control get +1/+0 and gain fear until end of turn. (They can't be blocked except by artifact creatures and/or black creatures.)

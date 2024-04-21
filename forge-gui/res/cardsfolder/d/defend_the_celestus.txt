@@ -1,6 +1,6 @@
 Name:Defend the Celestus
 ManaCost:2 G G
 Types:Instant
-A:SP$ PutCounter | Cost$ 2 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures.
 DeckHas:Ability$Counters
 Oracle:Distribute three +1/+1 counters among one, two or three target creatures you control.

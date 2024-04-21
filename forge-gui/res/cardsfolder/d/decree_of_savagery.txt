@@ -2,7 +2,7 @@ Name:Decree of Savagery
 ManaCost:7 G G
 Types:Instant
 K:Cycling:4 G G
-A:SP$ PutCounterAll | Cost$ 7 G G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on each creature you control.
+A:SP$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ Put four +1/+1 counters on each creature you control.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When you cycle CARDNAME, you may put four +1/+1 counters on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 4
 Oracle:Put four +1/+1 counters on each creature you control.\nCycling {4}{G}{G} ({4}{G}{G}, Discard this card: Draw a card.)\nWhen you cycle Decree of Savagery, you may put four +1/+1 counters on target creature.
