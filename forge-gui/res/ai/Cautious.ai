@@ -313,6 +313,8 @@ SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS=true
 # A creature should evaluate to no more than this much to be considered for default SacCost preference
 SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL=135
 
+# Allow replacing a creature with a planeswalker and vice versa when sideboarding
+SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false
 # Master toggle enabling AI sideboarding
 SIDEBOARDING_ENABLE=true
 # Enable sideboarding in limited formats (e.g. Sealed, Draft)
@@ -321,3 +323,5 @@ SIDEBOARDING_IN_LIMITED_FORMATS=false
 SIDEBOARDING_CHANCE_PER_CARD=50
 # Chance to do some sideboarding after winning a game
 SIDEBOARDING_CHANCE_ON_WIN=0
+# Allow replacing a creature with a planeswalker and vice versa when sideboarding
+SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false

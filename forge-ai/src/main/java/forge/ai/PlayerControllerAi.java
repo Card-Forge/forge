@@ -107,6 +107,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
         int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
         int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
 
@@ -134,7 +135,7 @@ public class PlayerControllerAi extends PlayerController {
             } else if (cSide.getRules().getAiHints().getRemAIDecks()) {
                 continue; // don't sideboard in anything that we don't know how to play
             } else if (cSide.getRules().getType().isLand()) {
-                continue; // don't know how to sideboard lands yet
+                continue; // don't know how to sideboard lands efficiently yet
             }
 
             for (PaperCard cMain : main) {
@@ -148,7 +149,9 @@ public class PlayerControllerAi extends PlayerController {
 
                 if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
                     || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                    continue; // Creature exception: only trade a creature for another creature
+                    if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                        continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+                    }
                 }
 
                 if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
@@ -166,7 +169,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        // Make changes according to the sideboard plan suggested above
+        // Make changes according to the sideboarding plan suggested above
         for (Map.Entry<PaperCard, PaperCard> ent : sideboardPlan.entrySet()) {
             if (MyRandom.getRandom().nextInt(100) < sbChancePerCard) {
                 continue;

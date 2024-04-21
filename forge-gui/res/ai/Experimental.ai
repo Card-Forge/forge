@@ -322,6 +322,8 @@ SIDEBOARDING_IN_LIMITED_FORMATS=false
 SIDEBOARDING_CHANCE_PER_CARD=50
 # Chance to do some sideboarding after winning a game
 SIDEBOARDING_CHANCE_ON_WIN=25
+# Allow replacing a creature with a planeswalker and vice versa when sideboarding
+SIDEBOARDING_PLANESWALKER_EQ_CREATURE=true
 
 # -- Experimental feature toggles which only exist until the testing procedure for the relevant --
 # -- features is over. These toggles will be removed later, or may be reintroduced under a --
