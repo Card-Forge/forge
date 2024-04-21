@@ -2,7 +2,7 @@ Name:Gust of Wind
 ManaCost:3 U
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Creature.YouCtrl+withFlying | Description$ This spell costs {2} less to cast if you control a creature with flying.
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent you don't control to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent you don't control to its owner's hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:BuffedBy:Creature.withFlying
 DeckHints:Keyword$Flying

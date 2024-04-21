@@ -1,5 +1,5 @@
 Name:Guardians' Pledge
 ManaCost:1 W W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.White+YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ White creatures you control get +2/+2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.White+YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ White creatures you control get +2/+2 until end of turn.
 Oracle:White creatures you control get +2/+2 until end of turn.

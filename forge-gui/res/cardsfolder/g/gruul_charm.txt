@@ -1,7 +1,7 @@
 Name:Gruul Charm
 ManaCost:R G
 Types:Instant
-A:SP$ Charm | Cost$ R G | Choices$ CantBlockEffect,DBGainCtrl,DmgAll | CharmNum$ 1
+A:SP$ Charm | Choices$ CantBlockEffect,DBGainCtrl,DmgAll | CharmNum$ 1
 SVar:CantBlockEffect:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Creatures without flying can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
 SVar:DBGainCtrl:DB$ GainControl | AllValid$ Permanent.YouOwn | SpellDescription$ Gain control of all permanents you own.

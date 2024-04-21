@@ -2,7 +2,7 @@ Name:Goblin War Party
 ManaCost:3 R
 Types:Sorcery
 K:Entwine:2 R
-A:SP$ Charm | Cost$ 3 R | Choices$ DBTokens,DBBuff | Defined$ You | CharmNum$ 1
+A:SP$ Charm | Choices$ DBTokens,DBBuff | Defined$ You | CharmNum$ 1
 SVar:DBTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create three 1/1 red Goblin creature tokens.
 SVar:DBBuff:DB$ PumpAll | NumAtt$ 1 | NumDef$ 1 | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control get +1/+1 and gain haste until end of turn.
 DeckHas:Ability$Token

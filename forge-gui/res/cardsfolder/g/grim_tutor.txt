@@ -1,7 +1,7 @@
 Name:Grim Tutor
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBLoseLife | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SubAbility$ DBLoseLife | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
 #TODO: The AI will currently search for the most expensive valid card in the library. This can be used to the AI's advantage with
 #careful deck design (which is why this card only works in properly designed AI decks). Consider improving tutoring logic with priorities.

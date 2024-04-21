@@ -1,7 +1,7 @@
 Name:Grip of Phyresis
 ManaCost:2 U
 Types:Instant
-A:SP$ GainControl | Cost$ 2 U | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | SubAbility$ DBToken | SpellDescription$ Gain control of target Equipment, then create a 0/0 black Phyrexian Germ creature token and attach that Equipment to it.
+A:SP$ GainControl | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | SubAbility$ DBToken | SpellDescription$ Gain control of target Equipment, then create a 0/0 black Phyrexian Germ creature token and attach that Equipment to it.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_phyrexian_germ | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

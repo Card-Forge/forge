@@ -1,6 +1,6 @@
 Name:Gridlock
 ManaCost:X U
 Types:Instant
-A:SP$ Tap | Cost$ X U | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Tap X target nonland permanents.
+A:SP$ Tap | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Tap X target nonland permanents.
 SVar:X:Count$xPaid
 Oracle:Tap X target nonland permanents.

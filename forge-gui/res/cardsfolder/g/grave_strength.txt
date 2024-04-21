@@ -1,7 +1,7 @@
 Name:Grave Strength
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Mill | Cost$ 1 B | NumCards$ 3 | Defined$ You | SubAbility$ DBPutCounter | AILogic$ Main1 | SpellDescription$ Choose target creature. Mill three cards, then put a +1/+1 counter on that creature for each creature card in your graveyard.
+A:SP$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBPutCounter | AILogic$ Main1 | SpellDescription$ Choose target creature. Mill three cards, then put a +1/+1 counter on that creature for each creature card in your graveyard.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$ValidGraveyard Creature.YouOwn
 DeckHas:Ability$Graveyard
