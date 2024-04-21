@@ -1,7 +1,7 @@
 Name:Chart a Course
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards. Then discard a card unless you attacked this turn.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards. Then discard a card unless you attacked this turn.
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Draw two cards. Then discard a card unless you attacked this turn.

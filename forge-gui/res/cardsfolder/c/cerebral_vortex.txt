@@ -1,7 +1,7 @@
 Name:Cerebral Vortex
 ManaCost:1 U R
 Types:Instant
-A:SP$ Draw | Cost$ 1 U R | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDamage | SpellDescription$ Target player draws two cards, then CARDNAME deals damage to that player equal to the number of cards they've drawn this turn.
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDamage | SpellDescription$ Target player draws two cards, then CARDNAME deals damage to that player equal to the number of cards they've drawn this turn.
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:TargetedPlayer$CardsDrawn
 AI:RemoveDeck:All

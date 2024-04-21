@@ -1,7 +1,7 @@
 Name:Chandra's Ignition
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 R R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ IgnitionDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to each other creature and each opponent.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ IgnitionDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to each other creature and each opponent.
 SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | ValidPlayers$ Player.Opponent | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to each other creature and each opponent.

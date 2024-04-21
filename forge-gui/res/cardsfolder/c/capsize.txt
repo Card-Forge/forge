@@ -1,6 +1,6 @@
 Name:Capsize
 ManaCost:1 U U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | AILogic$ PriorityOptionalCost | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | AILogic$ PriorityOptionalCost | SpellDescription$ Return target permanent to its owner's hand.
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nReturn target permanent to its owner's hand.

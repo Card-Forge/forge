@@ -1,7 +1,7 @@
 Name:Charge Across the Araba
 ManaCost:4 W
 Types:Instant Arcane
-A:SP$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Hand | ChangeType$ Plains.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Sweep — Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Plains.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Sweep — Return any number of Plains you control to their owner's hand. Creatures you control get +1/+1 until end of turn for each Plains returned this way.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | NumDef$ +Y
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Y:Remembered$Amount

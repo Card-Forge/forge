@@ -1,7 +1,7 @@
 Name:Carom
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next 1 damage that would be dealt to target creature this turn is dealt to another target creature instead. Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next 1 damage that would be dealt to target creature this turn is dealt to another target creature instead. Draw a card.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ CaromDamage | Triggers$ OutOfSight | RememberObjects$ ParentTarget | ImprintCards$ ThisTargetedCard | ExileOnMoved$ Battlefield | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | ConditionCompare$ GE1 | SubAbility$ DBDraw
 SVar:CaromDamage:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ CaromDmg | DamageTarget$ Imprinted | Description$ The next 1 damage that would be dealt to target creature this turn is dealt to another target creature instead.
 SVar:CaromDmg:DB$ ReplaceSplitDamage | DamageTarget$ Imprinted

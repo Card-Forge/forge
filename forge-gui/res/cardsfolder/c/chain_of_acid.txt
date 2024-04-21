@@ -1,7 +1,7 @@
 Name:Chain of Acid
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Permanent.nonCreature | SubAbility$ DBCopy | SpellDescription$ Destroy target noncreature permanent. Then that permanent's controller may copy this spell and may choose a new target for that copy.
+A:SP$ Destroy | ValidTgts$ Permanent.nonCreature | SubAbility$ DBCopy | SpellDescription$ Destroy target noncreature permanent. Then that permanent's controller may copy this spell and may choose a new target for that copy.
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedController | Optional$ True | AILogic$ ChainOfAcid | StackDescription$ None | MayChooseTarget$ True
 AI:RemoveDeck:Random
 Oracle:Destroy target noncreature permanent. Then that permanent's controller may copy this spell and may choose a new target for that copy.

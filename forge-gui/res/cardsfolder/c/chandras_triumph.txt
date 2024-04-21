@@ -1,7 +1,7 @@
 Name:Chandra's Triumph
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker an opponent controls. CARDNAME deals 5 damage instead if you control a Chandra planeswalker.
+A:SP$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker an opponent controls. CARDNAME deals 5 damage instead if you control a Chandra planeswalker.
 SVar:Y:Count$Valid Planeswalker.Chandra+YouCtrl
 SVar:X:Count$Compare Y GE1.5.3
 Oracle:Chandra's Triumph deals 3 damage to target creature or planeswalker an opponent controls. Chandra's Triumph deals 5 damage instead if you control a Chandra planeswalker.

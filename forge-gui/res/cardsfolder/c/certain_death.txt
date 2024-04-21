@@ -1,7 +1,7 @@
 Name:Certain Death
 ManaCost:5 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses 2 life and you gain 2 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses 2 life and you gain 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target creature. Its controller loses 2 life and you gain 2 life.

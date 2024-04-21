@@ -1,6 +1,6 @@
 Name:Chain Lightning
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | TgtPrompt$ Select target | NumDmg$ 3 | SubAbility$ DBCopy1 | SpellDescription$ CARDNAME deals 3 damage to any target. Then that player or that permanent's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select target | NumDmg$ 3 | SubAbility$ DBCopy1 | SpellDescription$ CARDNAME deals 3 damage to any target. Then that player or that permanent's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy.
 SVar:DBCopy1:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedOrController | UnlessPayer$ TargetedOrController | UnlessCost$ R R | UnlessSwitched$ True | MayChooseTarget$ True | StackDescription$ None
 Oracle:Chain Lightning deals 3 damage to any target. Then that player or that permanent's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy.
