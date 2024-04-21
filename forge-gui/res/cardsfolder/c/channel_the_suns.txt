@@ -1,6 +1,6 @@
 Name:Channel the Suns
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Mana | Cost$ 3 G | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
+A:SP$ Mana | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
 AI:RemoveDeck:All
 Oracle:Add {W}{U}{B}{R}{G}.

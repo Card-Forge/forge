@@ -1,6 +1,6 @@
 Name:Chain of Vapor
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCopy | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCopy | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedController | UnlessPayer$ TargetedController | UnlessCost$ Sac<1/Land> | UnlessSwitched$ True | StackDescription$ None | MayChooseTarget$ True
 Oracle:Return target nonland permanent to its owner's hand. Then that permanent's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.

@@ -2,5 +2,5 @@ Name:Center Soul
 ManaCost:1 W
 Types:Instant
 K:Rebound
-A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

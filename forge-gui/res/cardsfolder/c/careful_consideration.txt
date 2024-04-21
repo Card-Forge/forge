@@ -1,7 +1,7 @@
 Name:Careful Consideration
 ManaCost:2 U U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDiscard | SpellDescription$ Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards.
+A:SP$ Draw | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDiscard | SpellDescription$ Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards.
 SVar:DBDiscard:DB$ Discard | NumCards$ X | Mode$ TgtChoose | Defined$ Targeted
 SVar:X:Count$IfCastInOwnMainPhase.2.3
 Oracle:Target player draws four cards, then discards three cards. If you cast this spell during your main phase, instead that player draws four cards, then discards two cards.

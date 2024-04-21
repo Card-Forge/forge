@@ -1,7 +1,7 @@
 Name:Cerulean Wisps
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | SubAbility$ DBUntap | SpellDescription$ Target creature becomes blue until end of turn. Untap that creature. Draw a card.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | SubAbility$ DBUntap | SpellDescription$ Target creature becomes blue until end of turn. Untap that creature. Draw a card.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All

@@ -2,5 +2,5 @@ Name:Cenn's Enlistment
 ManaCost:3 W
 Types:Sorcery
 K:Retrace
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | SpellDescription$ Create two 1/1 white Kithkin Soldier creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | SpellDescription$ Create two 1/1 white Kithkin Soldier creature tokens.
 Oracle:Create two 1/1 white Kithkin Soldier creature tokens.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

@@ -2,7 +2,7 @@ Name:Call the Scions
 ManaCost:2 G
 Types:Sorcery
 K:Devoid
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ Create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:Devoid (This card has no color.)\nCreate two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}."

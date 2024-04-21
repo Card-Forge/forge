@@ -2,6 +2,6 @@ Name:Chatterstorm
 ManaCost:1 G
 Types:Sorcery
 K:Storm
-A:SP$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create a 1/1 green Squirrel creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create a 1/1 green Squirrel creature token.
 DeckHas:Ability$Token
 Oracle:Create a 1/1 green Squirrel creature token.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

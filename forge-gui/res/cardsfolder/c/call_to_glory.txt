@@ -1,7 +1,7 @@
 Name:Call to Glory
 ManaCost:1 W
 Types:Instant
-A:SP$ UntapAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control. Samurai creatures you control get +1/+1 until end of turn. | SubAbility$ DBPumpYourSamurai
+A:SP$ UntapAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control. Samurai creatures you control get +1/+1 until end of turn. | SubAbility$ DBPumpYourSamurai
 SVar:DBPumpYourSamurai:DB$ PumpAll | ValidCards$ Creature.Samurai+YouCtrl | NumAtt$ +1 | NumDef$ +1
 AI:RemoveDeck:Random
 DeckNeeds:Type$Samurai

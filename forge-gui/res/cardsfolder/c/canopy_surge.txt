@@ -2,6 +2,6 @@ Name:Canopy Surge
 ManaCost:1 G
 Types:Sorcery
 K:Kicker:2
-A:SP$ DamageAll | Cost$ 1 G | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player. If CARDNAME was kicked, it deals 4 damage instead.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player. If CARDNAME was kicked, it deals 4 damage instead.
 SVar:X:Count$Kicked.4.1
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nCanopy Surge deals 1 damage to each creature with flying and each player. If this spell was kicked, it deals 4 damage to each creature with flying and each player instead.
