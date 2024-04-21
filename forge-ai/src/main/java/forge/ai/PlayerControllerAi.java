@@ -107,6 +107,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        boolean sbSharedTypesOnly = getAi().getBooleanProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
         boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
         int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
         int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
@@ -147,10 +148,16 @@ public class PlayerControllerAi extends PlayerController {
                     continue; // don't know how to sideboard lands efficiently yet
                 }
 
-                if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
-                    || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
-                    if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
-                        continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+                if (sbSharedTypesOnly) {
+                    if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
+                        continue; // Only equivalent types allowed
+                    }
+                } else {
+                    if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                            || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                        if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                            continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+                        }
                     }
                 }
 
