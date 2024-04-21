@@ -1,6 +1,6 @@
 Name:Expose to Daylight
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBScry | SpellDescription$ Destroy target artifact or enchantment. Scry 1.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBScry | SpellDescription$ Destroy target artifact or enchantment. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Destroy target artifact or enchantment. Scry 1.

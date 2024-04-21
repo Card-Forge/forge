@@ -1,7 +1,7 @@
 Name:Ether Well
 ManaCost:3 U
 Types:Instant
-A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
+A:SP$ Pump | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
 SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBBottomLibChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.

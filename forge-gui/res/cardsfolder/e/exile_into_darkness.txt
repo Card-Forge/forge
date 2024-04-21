@@ -1,7 +1,7 @@
 Name:Exile into Darkness
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 B | ValidTgts$ Player | SacValid$ Creature.cmcLE3 | SacMessage$ creature with mana value 3 or less | SpellDescription$ Target player sacrifices a creature with mana value 3 or less.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.cmcLE3 | SacMessage$ creature with mana value 3 or less | SpellDescription$ Target player sacrifices a creature with mana value 3 or less.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GTY | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return CARDNAME from your graveyard to your hand.
 SVar:X:Count$InYourHand
 SVar:Y:PlayerCountOpponents$HighestCardsInHand

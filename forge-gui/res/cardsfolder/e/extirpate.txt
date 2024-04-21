@@ -2,7 +2,7 @@ Name:Extirpate
 ManaCost:B
 Types:Instant
 K:Split second
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonBasic | TgtPrompt$ Select target card in a graveyard other than a basic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ ExileYard | SpellDescription$ Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonBasic | TgtPrompt$ Select target card in a graveyard other than a basic land | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ ExileYard | SpellDescription$ Choose target card in a graveyard other than a basic land card. Search its owner's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles.
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ TargetedController | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None

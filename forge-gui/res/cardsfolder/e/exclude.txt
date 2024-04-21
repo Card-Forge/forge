@@ -1,6 +1,6 @@
 Name:Exclude
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Counter target creature spell. Draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Counter target creature spell. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target creature spell.\nDraw a card.

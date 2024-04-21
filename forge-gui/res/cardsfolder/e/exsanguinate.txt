@@ -1,7 +1,7 @@
 Name:Exsanguinate
 ManaCost:X B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ X B B | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses X life. You gain life equal to the life lost this way.
+A:SP$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses X life. You gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
 SVar:X:Count$xPaid
 SVar:AFLifeLost:Number$0

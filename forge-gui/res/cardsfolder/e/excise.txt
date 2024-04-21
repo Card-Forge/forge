@@ -1,6 +1,6 @@
 Name:Excise
 ManaCost:X W
 Types:Instant
-A:SP$ ChangeZone | Cost$ X W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Exile target attacking creature unless its controller pays {X}.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Exile target attacking creature unless its controller pays {X}.
 SVar:X:Count$xPaid
 Oracle:Exile target attacking creature unless its controller pays {X}.

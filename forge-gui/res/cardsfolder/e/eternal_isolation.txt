@@ -1,5 +1,5 @@
 Name:Eternal Isolation
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target creature with power 4 or greater on the bottom of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target creature with power 4 or greater on the bottom of its owner's library.
 Oracle:Put target creature with power 4 or greater on the bottom of its owner's library.

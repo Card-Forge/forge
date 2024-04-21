@@ -1,6 +1,6 @@
 Name:Evaporate
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature.White,Creature.Blue | ValidDescription$ each creature that's white or blue. | SpellDescription$ CARDNAME deals 1 damage to each creature that's white or blue.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.White,Creature.Blue | ValidDescription$ each creature that's white or blue. | SpellDescription$ CARDNAME deals 1 damage to each creature that's white or blue.
 AI:RemoveDeck:Random
 Oracle:Evaporate deals 1 damage to each white and/or blue creature.

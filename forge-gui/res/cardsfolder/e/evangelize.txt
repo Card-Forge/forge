@@ -2,5 +2,5 @@ Name:Evangelize
 ManaCost:4 W
 Types:Sorcery
 K:Buyback:2 W W
-A:SP$ GainControl | Cost$ 4 W | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | SpellDescription$ Gain control of target creature of an opponent's choice they control.
+A:SP$ GainControl | ValidTgts$ Creature | TargetingPlayer$ Player.Opponent | TargetingPlayerControls$ True | SpellDescription$ Gain control of target creature of an opponent's choice they control.
 Oracle:Buyback {2}{W}{W} (You may pay an additional {2}{W}{W} as you cast this spell. If you do, put this card into your hand as it resolves.)\nGain control of target creature of an opponent's choice they control.

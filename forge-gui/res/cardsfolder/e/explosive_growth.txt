@@ -2,6 +2,6 @@ Name:Explosive Growth
 ManaCost:G
 Types:Instant
 K:Kicker:5
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ WasKicked | NumDef$ WasKicked | SpellDescription$ Target creature gets +2/+2 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ WasKicked | NumDef$ WasKicked | SpellDescription$ Target creature gets +2/+2 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead.
 SVar:WasKicked:Count$Kicked.5.2
 Oracle:Kicker {5} (You may pay an additional {5} as you cast this spell.)\nTarget creature gets +2/+2 until end of turn. If this spell was kicked, that creature gets +5/+5 until end of turn instead.
