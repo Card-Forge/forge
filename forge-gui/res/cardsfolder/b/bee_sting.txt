@@ -1,5 +1,5 @@
 Name:Bee Sting
 ManaCost:3 G
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 G | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Bee Sting deals 2 damage to any target.

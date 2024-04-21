@@ -2,6 +2,6 @@ Name:Become Immense
 ManaCost:5 G
 Types:Instant
 K:Delve
-A:SP$ Pump | Cost$ 5 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | SpellDescription$ Target creature gets +6/+6 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | SpellDescription$ Target creature gets +6/+6 until end of turn.
 DeckHints:Ability$Graveyard
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTarget creature gets +6/+6 until end of turn.

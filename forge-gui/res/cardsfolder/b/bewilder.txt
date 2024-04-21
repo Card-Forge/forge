@@ -1,6 +1,6 @@
 Name:Bewilder
 ManaCost:2 U
 Types:Instant
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn. | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target creature gets -3/-0 until end of turn.\nDraw a card.

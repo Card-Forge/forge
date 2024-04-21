@@ -1,5 +1,5 @@
 Name:Blackmail
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ 3 | NumCards$ 1 | SpellDescription$ Target player reveals three cards from their hand and you choose one of them. That player discards that card.
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ 3 | NumCards$ 1 | SpellDescription$ Target player reveals three cards from their hand and you choose one of them. That player discards that card.
 Oracle:Target player reveals three cards from their hand and you choose one of them. That player discards that card.

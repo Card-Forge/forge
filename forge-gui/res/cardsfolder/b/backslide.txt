@@ -1,7 +1,7 @@
 Name:Backslide
 ManaCost:1 U
 Types:Instant
-A:SP$ SetState | Cost$ 1 U | ValidTgts$ Creature.withMorph,Creature.withMegamorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFaceDown | SpellDescription$ Turn target creature with a morph ability face down.
+A:SP$ SetState | ValidTgts$ Creature.withMorph,Creature.withMegamorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFaceDown | SpellDescription$ Turn target creature with a morph ability face down.
 K:Cycling:U
 AI:RemoveDeck:All
 Oracle:Turn target creature with a morph ability face down.\nCycling {U} ({U}, Discard this card: Draw a card.)

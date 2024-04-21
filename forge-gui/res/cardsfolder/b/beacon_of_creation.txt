@@ -1,7 +1,7 @@
 Name:Beacon of Creation
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_insect | TokenOwner$ You | SubAbility$ DBShuffle | SpellDescription$ Create a 1/1 green Insect creature token for each Forest you control. Shuffle CARDNAME into its owner's library.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_insect | TokenOwner$ You | SubAbility$ DBShuffle | SpellDescription$ Create a 1/1 green Insect creature token for each Forest you control. Shuffle CARDNAME into its owner's library.
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 SVar:X:Count$TypeYouCtrl.Forest
 Oracle:Create a 1/1 green Insect creature token for each Forest you control. Shuffle Beacon of Creation into its owner's library.

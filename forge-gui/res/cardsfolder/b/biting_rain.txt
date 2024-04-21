@@ -1,7 +1,7 @@
 Name:Biting Rain
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 K:Madness:2 B
 DeckHints:Ability$Discard
 Oracle:All creatures get -2/-2 until end of turn.\nMadness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

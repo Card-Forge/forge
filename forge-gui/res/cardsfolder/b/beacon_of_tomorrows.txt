@@ -1,6 +1,6 @@
 Name:Beacon of Tomorrows
 ManaCost:6 U U
 Types:Sorcery
-A:SP$ AddTurn | Cost$ 6 U U | ValidTgts$ Player | NumTurns$ 1 | SubAbility$ DBShuffle | SpellDescription$ Target player takes an extra turn after this one. Shuffle CARDNAME into its owner's library.
+A:SP$ AddTurn | ValidTgts$ Player | NumTurns$ 1 | SubAbility$ DBShuffle | SpellDescription$ Target player takes an extra turn after this one. Shuffle CARDNAME into its owner's library.
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Target player takes an extra turn after this one. Shuffle Beacon of Tomorrows into its owner's library.

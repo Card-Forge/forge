@@ -1,6 +1,6 @@
 Name:Bar the Gate
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker spell | SubAbility$ DBVenture | SpellDescription$ Counter target creature or planeswalker spell. Venture into the dungeon. (Enter the first room or advance to the next room.)
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker spell | SubAbility$ DBVenture | SpellDescription$ Counter target creature or planeswalker spell. Venture into the dungeon. (Enter the first room or advance to the next room.)
 SVar:DBVenture:DB$ Venture
 Oracle:Counter target creature or planeswalker spell. Venture into the dungeon. (Enter the first room or advance to the next room.)

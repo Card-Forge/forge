@@ -1,7 +1,7 @@
 Name:Barrage of Boulders
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 1 | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 1 damage to each creature you don't control. Ferocious — If you control a creature with power 4 or greater, creatures can't block this turn.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 1 damage to each creature you don't control. Ferocious — If you control a creature with power 4 or greater, creatures can't block this turn.
 SVar:DBPumpAll:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures can't block this turn.
 SVar:X:Count$Valid Creature.powerGE4+YouCtrl
