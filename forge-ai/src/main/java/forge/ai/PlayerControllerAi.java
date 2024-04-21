@@ -203,7 +203,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
-        // TODO: AI current can't use this so this is not implemented.
+        // TODO: AI currently can't use this so this is not implemented.
         return new HashMap<>();
     }
 
