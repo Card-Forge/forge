@@ -1,7 +1,7 @@
 Name:Fossil Find
 ManaCost:RG
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ RG | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBReturn | SpellDescription$ Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
+A:SP$ ChooseCard | Choices$ Card.YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBReturn | SpellDescription$ Return a card at random from your graveyard to your hand, then reorder your graveyard as you choose.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBReorder
 SVar:DBReorder:DB$ ReorderZone | Zone$ Graveyard | Defined$ You
 AI:RemoveDeck:All

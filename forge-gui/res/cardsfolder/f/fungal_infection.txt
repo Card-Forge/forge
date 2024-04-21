@@ -1,7 +1,7 @@
 Name:Fungal Infection
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBSaproling | SpellDescription$ Target creature gets -1/-1 until end of turn. Create a 1/1 green Saproling creature token.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBSaproling | SpellDescription$ Target creature gets -1/-1 until end of turn. Create a 1/1 green Saproling creature token.
 SVar:DBSaproling:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Target creature gets -1/-1 until end of turn. Create a 1/1 green Saproling creature token.

@@ -1,7 +1,7 @@
 Name:Fracturing Gust
 ManaCost:2 GW GW GW
 Types:Instant
-A:SP$ DestroyAll | Cost$ 2 GW GW GW | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Remembered$Amount/Twice
 Oracle:Destroy all artifacts and enchantments. You gain 2 life for each permanent destroyed this way.
