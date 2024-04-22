@@ -1,7 +1,7 @@
 Name:Genesis Wave
 ManaCost:X G G G
 Types:Sorcery
-A:SP$ Dig | Cost$ X G G G | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Permanent.cmcLEX | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.
+A:SP$ Dig | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Permanent.cmcLEX | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top X cards of your library. You may put any number of permanent cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.
 SVar:X:Count$xPaid
 SVar:NeedsToPlayVar:Z GE6
 SVar:Z:Count$Valid Land.YouCtrl+untapped

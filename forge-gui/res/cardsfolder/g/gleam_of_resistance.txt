@@ -1,7 +1,7 @@
 Name:Gleam of Resistance
 ManaCost:4 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2 | AILogic$ UntapCombatTrick | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+2 until end of turn. Untap those creatures.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2 | AILogic$ UntapCombatTrick | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+2 until end of turn. Untap those creatures.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 K:TypeCycling:Basic:1 W
 Oracle:Creatures you control get +1/+2 until end of turn. Untap those creatures.\nBasic landcycling {1}{W} ({1}{W}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

@@ -11,5 +11,5 @@ ALTERNATE
 Name:Chop Down
 ManaCost:2 W
 Types:Instant Adventure
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Destroy target creature with power 4 or greater. (Then exile this card. You may cast the creature later from exile.)

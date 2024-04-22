@@ -1,7 +1,7 @@
 Name:Global Ruin
 ManaCost:4 W
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 4 W | Defined$ Player | EachBasicType$ Controlled | SubAbility$ DBDestroy | SpellDescription$ Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest. | StackDescription$ SpellDescription
+A:SP$ ChooseCard | Defined$ Player | EachBasicType$ Controlled | SubAbility$ DBDestroy | SpellDescription$ Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest. | StackDescription$ SpellDescription
 SVar:DBDestroy:DB$ SacrificeAll | ValidCards$ Land.nonChosenCard | StackDescription$ None
 AI:RemoveDeck:Random
 Oracle:Each player chooses from the lands they control a land of each basic land type, then sacrifices the rest.

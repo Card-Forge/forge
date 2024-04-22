@@ -2,7 +2,7 @@ Name:Galvanic Relay
 ManaCost:2 R
 Types:Sorcery
 K:Storm
-A:SP$ Dig | Cost$ 2 R | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBDelay | SpellDescription$ Exile the top card of your library. During your next turn, you may play that card.
+A:SP$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBDelay | SpellDescription$ Exile the top card of your library. During your next turn, you may play that card.
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBEffect | RememberObjects$ Remembered | Static$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ DelayTriggerRemembered | ForgetOnMoved$ Exile

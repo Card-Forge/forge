@@ -1,7 +1,7 @@
 Name:Game of Chaos
 ManaCost:R R R
 Types:Sorcery
-A:SP$ Repeat | Cost$ R R R | ValidTgts$ Opponent | IsCurse$ True | StackDescription$ SpellDescription | RepeatOptional$ True | RepeatSubAbility$ DBCleanup | RepeatOptionalDecider$ Remembered | SubAbility$ DBRestore | SpellDescription$ Flip a coin. If you win the flip, you gain 1 life and target opponent loses 1 life, and you decide whether to flip again. If you lose the flip, you lose 1 life and that opponent gains 1 life, and that player decides whether to flip again. Double the life stakes with each flip.
+A:SP$ Repeat | ValidTgts$ Opponent | IsCurse$ True | StackDescription$ SpellDescription | RepeatOptional$ True | RepeatSubAbility$ DBCleanup | RepeatOptionalDecider$ Remembered | SubAbility$ DBRestore | SpellDescription$ Flip a coin. If you win the flip, you gain 1 life and target opponent loses 1 life, and you decide whether to flip again. If you lose the flip, you lose 1 life and that opponent gains 1 life, and that player decides whether to flip again. Double the life stakes with each flip.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBFlip
 SVar:DBFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ GainLifeYou | LoseSubAbility$ GainLifeOpp | SubAbility$ DoubleLifeStake
 SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ NumLife | SubAbility$ LoseLifeOpp

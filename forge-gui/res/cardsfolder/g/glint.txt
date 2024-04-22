@@ -1,5 +1,5 @@
 Name:Glint
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDef$ +3 | KW$ Hexproof | SpellDescription$ Target creature you control gets +0/+3 and gains hexproof until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDef$ +3 | KW$ Hexproof | SpellDescription$ Target creature you control gets +0/+3 and gains hexproof until end of turn.
 Oracle:Target creature you control gets +0/+3 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
