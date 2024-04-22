@@ -2,7 +2,7 @@ Name:Fireball
 ManaCost:X R
 Types:Sorcery
 S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | Relative$ True | EffectZone$ All | Description$ This spell costs {1} more to cast for each target beyond the first.
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTargets | DivideEvenly$ RoundedDown | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among any number of targets.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTargets | DivideEvenly$ RoundedDown | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among any number of targets.
 SVar:X:Count$xPaid
 SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxPermanents
 SVar:MaxPlayers:PlayerCountPlayers$Amount

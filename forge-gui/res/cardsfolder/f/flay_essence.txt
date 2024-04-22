@@ -1,7 +1,7 @@
 Name:Flay Essence
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature or planeswalker. You gain life equal to the number of counters on it.
+A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature or planeswalker. You gain life equal to the number of counters on it.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardCounters.ALL
 Oracle:Exile target creature or planeswalker. You gain life equal to the number of counters on it.

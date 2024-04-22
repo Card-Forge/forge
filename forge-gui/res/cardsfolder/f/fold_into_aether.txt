@@ -1,7 +1,7 @@
 Name:Fold into Aether
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Creature | Origin$ Hand | Destination$ Battlefield | ChangeNum$ 1 | ConditionDefined$ Remembered | DefinedPlayer$ TargetedController | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Counter target spell. If that spell is countered this way, its controller may put a creature card from their hand onto the battlefield.

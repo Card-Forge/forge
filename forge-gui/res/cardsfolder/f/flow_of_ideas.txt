@@ -1,7 +1,7 @@
 Name:Flow of Ideas
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 5 U | NumCards$ X | SpellDescription$ Draw a card for each Island you control.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each Island you control.
 SVar:X:Count$TypeYouCtrl.Island
 AI:RemoveDeck:Random
 Oracle:Draw a card for each Island you control.

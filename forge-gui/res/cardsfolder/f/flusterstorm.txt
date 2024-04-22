@@ -1,6 +1,6 @@
 Name:Flusterstorm
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ 1 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {1}.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | UnlessCost$ 1 | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {1}.
 K:Storm
 Oracle:Counter target instant or sorcery spell unless its controller pays {1}.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

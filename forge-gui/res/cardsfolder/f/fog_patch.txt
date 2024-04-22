@@ -2,6 +2,6 @@ Name:Fog Patch
 ManaCost:1 G
 Types:Instant
 Text:Cast this spell only during the declare blockers step.
-A:SP$ BecomesBlocked | Cost$ 1 G | Defined$ Valid Creature.attacking | ActivationPhases$ Declare Blockers | SpellDescription$ Attacking creatures become blocked. (This spell works on creatures that can't be blocked.)
+A:SP$ BecomesBlocked | Defined$ Valid Creature.attacking | ActivationPhases$ Declare Blockers | SpellDescription$ Attacking creatures become blocked. (This spell works on creatures that can't be blocked.)
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare blockers step.\nAttacking creatures become blocked. (This spell works on creatures that can't be blocked.)

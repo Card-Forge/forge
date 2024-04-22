@@ -1,5 +1,5 @@
 Name:Fork
 ManaCost:R R
 Types:Instant
-A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SetColor$ Red | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SetColor$ Red | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
 Oracle:Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.

@@ -2,7 +2,7 @@ Name:Flaming Gambit
 ManaCost:X R
 Types:Instant
 K:Flashback:X R R
-A:SP$ Pump | Cost$ X R | IsCurse$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | SubAbility$ DBChooseCard | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to target player or planeswalker. That player may choose a creature they control and have CARDNAME deal that damage to it instead.
+A:SP$ Pump | IsCurse$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | SubAbility$ DBChooseCard | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to target player or planeswalker. That player may choose a creature they control and have CARDNAME deal that damage to it instead.
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Card.Creature | Defined$ TargetedOrController | MinAmount$ 0 | TargetControls$ True | AILogic$ WorstCard | SubAbility$ DBDamagePlayer
 SVar:DBDamagePlayer:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBDamageCreature
 SVar:DBDamageCreature:DB$ DealDamage | Defined$ ChosenCard | NumDmg$ X | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup

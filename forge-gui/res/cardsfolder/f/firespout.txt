@@ -1,7 +1,7 @@
 Name:Firespout
 ManaCost:2 RG
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 RG | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying if {R} was spent to cast it. | NumDmg$ 3 | ConditionManaSpent$ R | SubAbility$ GPaid | SpellDescription$ CARDNAME deals 3 damage to each creature without flying if {R} was spent to cast this spell and 3 damage to each creature with flying if {G} was spent to cast this spell. (Do both if {R}{G} was spent.)
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying if {R} was spent to cast it. | NumDmg$ 3 | ConditionManaSpent$ R | SubAbility$ GPaid | SpellDescription$ CARDNAME deals 3 damage to each creature without flying if {R} was spent to cast this spell and 3 damage to each creature with flying if {G} was spent to cast this spell. (Do both if {R}{G} was spent.)
 SVar:GPaid:DB$ DamageAll | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying if {R} was spent to cast it. (Do both if {R}{G} was spent. | NumDmg$ 3 | ConditionManaSpent$ G
 AI:RemoveDeck:All
 Oracle:Firespout deals 3 damage to each creature without flying if {R} was spent to cast this spell and 3 damage to each creature with flying if {G} was spent to cast this spell. (Do both if {R}{G} was spent.)

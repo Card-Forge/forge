@@ -2,7 +2,7 @@ Name:Flaring Pain
 ManaCost:1 R
 Types:Instant
 K:Flashback:R
-A:SP$ Effect | Cost$ 1 R | StaticAbilities$ STCantPrevent | SpellDescription$ Damage can't be prevented this turn.
+A:SP$ Effect | StaticAbilities$ STCantPrevent | SpellDescription$ Damage can't be prevented this turn.
 SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

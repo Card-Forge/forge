@@ -1,7 +1,7 @@
 Name:Forbidden Ritual
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Repeat | Cost$ 2 B B | ValidTgts$ Opponent | RepeatSubAbility$ DBSac | RepeatOptional$ True | StackDescription$ SpellDescription | SpellDescription$ Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless that player sacrifices a permanent or discards a card. You may repeat this process any number of times.
+A:SP$ Repeat | ValidTgts$ Opponent | RepeatSubAbility$ DBSac | RepeatOptional$ True | StackDescription$ SpellDescription | SpellDescription$ Sacrifice a nontoken permanent. If you do, target opponent loses 2 life unless that player sacrifices a permanent or discards a card. You may repeat this process any number of times.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Permanent.nonToken | SacMessage$ nontoken permanent | RememberSacrificed$ True | SubAbility$ DBGenericChoice
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ PaySac,PayDiscard | Defined$ Targeted | AILogic$ PayUnlessCost | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:PaySac:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ Targeted | UnlessAI$ LifeLE2 | SpellDescription$ You lose 2 life unless you sacrifice a permanent

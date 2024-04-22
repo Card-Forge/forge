@@ -2,5 +2,5 @@ Name:Final Payment
 ManaCost:W B
 Types:Instant
 K:AlternateAdditionalCost:PayLife<5>:Sac<1/Creature;Enchantment/creature or enchantment>
-A:SP$ Destroy | Cost$ W B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 Oracle:As an additional cost to cast this spell, pay 5 life or sacrifice a creature or enchantment.\nDestroy target creature.

@@ -1,7 +1,7 @@
 Name:Finale of Eternity
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ X B B | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature.toughnessLEX | SubAbility$ DBChangeZone | SpellDescription$ Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
+A:SP$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature.toughnessLEX | SubAbility$ DBChangeZone | SpellDescription$ Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
 SVar:X:Count$xPaid
 Oracle:Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.

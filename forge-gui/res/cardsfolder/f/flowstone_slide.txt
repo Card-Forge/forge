@@ -1,7 +1,7 @@
 Name:Flowstone Slide
 ManaCost:X 2 R R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ X 2 R R | ValidCards$ Creature | IsCurse$ True | NumAtt$ +X | NumDef$ -X | SpellDescription$ All Creatures get +X/-X until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | IsCurse$ True | NumAtt$ +X | NumDef$ -X | SpellDescription$ All Creatures get +X/-X until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:All creatures get +X/-X until end of turn.
