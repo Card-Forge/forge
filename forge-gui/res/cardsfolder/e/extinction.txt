@@ -1,6 +1,6 @@
 Name:Extinction
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 4 B | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SubAbility$ DBDestroyAll | SpellDescription$ Destroy all creatures of the creature type of your choice.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SubAbility$ DBDestroyAll | SpellDescription$ Destroy all creatures of the creature type of your choice.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.ChosenType
 Oracle:Destroy all creatures of the creature type of your choice.

@@ -1,7 +1,7 @@
 Name:Exploding Borders
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 R G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBDealDamage | SpellDescription$ Domain — Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBDealDamage | SpellDescription$ Domain — Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker, where X is the number of basic land types among lands you control.
 SVar:X:Count$Domain
 Oracle:Domain — Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Exploding Borders deals X damage to target player or planeswalker, where X is the number of basic land types among lands you control.

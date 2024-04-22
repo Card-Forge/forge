@@ -1,5 +1,5 @@
 Name:Eyeblight Massacre
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature.nonElf | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Non-Elf creatures get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.nonElf | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Non-Elf creatures get -2/-2 until end of turn.
 Oracle:Non-Elf creatures get -2/-2 until end of turn.

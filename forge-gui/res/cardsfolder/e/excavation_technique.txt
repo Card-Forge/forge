@@ -2,7 +2,7 @@ Name:Excavation Technique
 ManaCost:3 W
 Types:Sorcery
 K:Demonstrate
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBToken | SpellDescription$ Destroy target nonland permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBToken | SpellDescription$ Destroy target nonland permanent.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController | StackDescription$ SpellDescription | SpellDescription$ Its controller creates two Treasure tokens.
 DeckHas:Ability$Token
 Oracle:Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nDestroy target nonland permanent. Its controller creates two Treasure tokens.

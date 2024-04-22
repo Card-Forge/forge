@@ -1,7 +1,7 @@
 Name:Eunuchs' Intrigues
 ManaCost:2 R
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | SubAbility$ DBPumpAll | AILogic$ BestBlocker | SpellDescription$ Target opponent chooses a creature they control. Other creatures they control can't block this turn.
+A:SP$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | SubAbility$ DBPumpAll | AILogic$ BestBlocker | SpellDescription$ Target opponent chooses a creature they control. Other creatures they control can't block this turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.nonChosenCard+TargetedPlayerCtrl | KW$ HIDDEN CARDNAME can't block.
 AI:RemoveDeck:All
 Oracle:Target opponent chooses a creature they control. Other creatures they control can't block this turn.

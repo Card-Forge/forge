@@ -1,7 +1,7 @@
 Name:Explosive Welcome
 ManaCost:7 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 7 R | ValidTgts$ Any | TgtPrompt$ Select any target (5 damage) | NumDmg$ 5 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to any target and 3 damage to any other target. Add {R}{R}{R}.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target (5 damage) | NumDmg$ 5 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to any target and 3 damage to any other target. Add {R}{R}{R}.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target (3 damage) | TargetUnique$ True | NumDmg$ 3 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 3
