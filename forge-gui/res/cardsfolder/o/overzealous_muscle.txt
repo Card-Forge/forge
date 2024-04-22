@@ -3,5 +3,5 @@ ManaCost:4 B
 Types:Creature Ogre Mercenary
 PT:5/4
 T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | PlayerTurn$ True | TriggerDescription$ Whenever you commit a crime during your turn, CARDNAME gains indestructible until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Damage and effects that say "destroy" don't destroy a creature with indestructible.)
-SVar:TrigPump:DB$ Pump | Defined$ Card.Self | KW$ Indestructible
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible
 Oracle:Whenever you commit a crime during your turn, Overzealous Muscle gains indestructible until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Damage and effects that say "destroy" don't destroy a creature with indestructible.)
