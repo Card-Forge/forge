@@ -1,7 +1,7 @@
 Name:Echoing Ruin
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDestroyAll | SpellDescription$ Destroy target artifact and all other artifacts with the same name as that artifact.
+A:SP$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDestroyAll | SpellDescription$ Destroy target artifact and all other artifacts with the same name as that artifact.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ TargetedCard.Self,Artifact.NotDefinedTargeted+sharesNameWith Targeted
 AI:RemoveDeck:All
 Oracle:Destroy target artifact and all other artifacts with the same name as that artifact.

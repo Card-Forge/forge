@@ -1,7 +1,7 @@
 Name:Echo of Eons
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ TimeTwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player
 K:Flashback:2 U
 Oracle:Each player shuffles their hand and graveyard into their library, then draws seven cards.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

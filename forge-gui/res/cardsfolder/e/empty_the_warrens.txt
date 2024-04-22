@@ -1,6 +1,6 @@
 Name:Empty the Warrens
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin creature tokens.
 K:Storm
 Oracle:Create two 1/1 red Goblin creature tokens.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

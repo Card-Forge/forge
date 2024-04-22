@@ -1,7 +1,7 @@
 Name:Entreat the Dead
 ManaCost:X X B B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X X B B B | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return X target creature cards from your graveyard to the battlefield.
+A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return X target creature cards from your graveyard to the battlefield.
 K:Miracle:X B B
 SVar:X:Count$xPaid
 Oracle:Return X target creature cards from your graveyard to the battlefield.\nMiracle {X}{B}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
