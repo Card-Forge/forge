@@ -1,7 +1,7 @@
 Name:Horncaller's Chant
 ManaCost:7 G
 Types:Sorcery
-A:SP$ Token | Cost$ 7 G | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | SubAbility$ DBCopy | SpellDescription$ Create a 4/4 green Rhino creature token with trample, then populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | SubAbility$ DBCopy | SpellDescription$ Create a 4/4 green Rhino creature token with trample, then populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token

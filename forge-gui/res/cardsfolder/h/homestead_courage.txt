@@ -2,7 +2,7 @@ Name:Homestead Courage
 ManaCost:W
 Types:Sorcery
 K:Flashback:W
-A:SP$ PutCounter | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
 DeckHas:Ability$Counters
 Oracle:Put a +1/+1 counter on target creature you control. That creature gains vigilance until end of turn.\nFlashback {W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

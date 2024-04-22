@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ This spell costs {1} less to cast if an opponent controls no basic lands.
 SVar:X:PlayerCountOpponents$LowestValid Land.Basic+YouCtrl
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 AlternateMode:Modal
 Oracle:This spell costs {1} less to cast if an opponent controls no basic lands.\nDestroy target creature.
 
