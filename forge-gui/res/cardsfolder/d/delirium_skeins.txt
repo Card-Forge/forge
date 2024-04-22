@@ -1,7 +1,7 @@
 Name:Delirium Skeins
 ManaCost:2 B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 B | RepeatPlayers$ Player | RepeatSubAbility$ DeliriumDiscard | SpellDescription$ Each player discards three cards.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DeliriumDiscard | SpellDescription$ Each player discards three cards.
 SVar:DeliriumDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Remembered | NumCards$ 3
 AI:RemoveDeck:Random
 Oracle:Each player discards three cards.

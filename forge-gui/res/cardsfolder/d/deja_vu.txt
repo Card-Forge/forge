@@ -1,5 +1,5 @@
 Name:Déjà Vu
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target sorcery card in your graveyard | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target sorcery card in your graveyard | ValidTgts$ Sorcery.YouCtrl | SpellDescription$ Return target sorcery card from your graveyard to your hand.
 Oracle:Return target sorcery card from your graveyard to your hand.

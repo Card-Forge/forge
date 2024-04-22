@@ -1,7 +1,7 @@
 Name:Die Young
 ManaCost:1 B
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 1 B | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature. You get {E}{E} (two energy counters), then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.
+A:SP$ PutCounter | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature. You get {E}{E} (two energy counters), then you may pay any amount of {E}. The creature gets -1/-1 until end of turn for each {E} paid this way.
 SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ Pay Energy for -X/-X | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True
 SVar:Max:Count$YourCountersEnergy

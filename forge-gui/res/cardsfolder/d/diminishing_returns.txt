@@ -1,7 +1,7 @@
 Name:Diminishing Returns
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Card | Origin$ Graveyard,Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBExile | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard,Hand | Destination$ Library | Shuffle$ True | SubAbility$ DBExile | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library.
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | SubAbility$ DBDraw | StackDescription$ {p:You} exiles the top ten cards of their library. | SpellDescription$ You exile the top ten cards of your library.
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7 | Upto$ True | AILogic$ OptionalDraw | StackDescription$ SpellDescription | SpellDescription$ Then each player draws up to seven cards.
 AI:RemoveDeck:All

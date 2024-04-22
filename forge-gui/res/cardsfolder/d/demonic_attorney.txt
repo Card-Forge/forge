@@ -2,7 +2,7 @@ Name:Demonic Attorney
 ManaCost:1 B B
 Types:Sorcery
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:SP$ Dig | Cost$ 1 B B | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Ante | SpellDescription$ Each player antes the top card of their library.
+A:SP$ Dig | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Ante | SpellDescription$ Each player antes the top card of their library.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Remove Demonic Attorney from your deck before playing if you're not playing for ante.\nEach player antes the top card of their library.

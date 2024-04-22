@@ -1,6 +1,6 @@
 Name:Defile
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn for each Swamp you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn for each Swamp you control.
 SVar:X:Count$TypeYouCtrl.Swamp
 Oracle:Target creature gets -1/-1 until end of turn for each Swamp you control.

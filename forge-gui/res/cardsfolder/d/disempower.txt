@@ -1,5 +1,5 @@
 Name:Disempower
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact or enchantment on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact or enchantment on top of its owner's library.
 Oracle:Put target artifact or enchantment on top of its owner's library.

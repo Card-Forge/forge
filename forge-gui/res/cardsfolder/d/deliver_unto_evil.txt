@@ -1,7 +1,7 @@
 Name:Deliver Unto Evil
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | TargetMin$ 0 | TargetMax$ 4 | TgtZone$ Graveyard | RememberTargets$ True | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to your hand. Otherwise, an opponent chooses two of them. Leave the chosen cards in your graveyard and put the rest into your hand. Exile CARDNAME.
+A:SP$ Pump | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | TargetMin$ 0 | TargetMax$ 4 | TgtZone$ Graveyard | RememberTargets$ True | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Choose up to four target cards in your graveyard. If you control a Bolas planeswalker, return those cards to your hand. Otherwise, an opponent chooses two of them. Leave the chosen cards in your graveyard and put the rest into your hand. Exile CARDNAME.
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ DBChangeZone | FalseSubAbility$ DBChooseOpp | SubAbility$ DBCleanup
 SVar:X:Count$Valid Planeswalker.Bolas+YouCtrl
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand

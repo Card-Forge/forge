@@ -1,6 +1,6 @@
 Name:Deploy to the Front
 ManaCost:5 W W
 Types:Sorcery
-A:SP$ Token | Cost$ 5 W W | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature
 Oracle:Create X 1/1 white Soldier creature tokens, where X is the number of creatures on the battlefield.

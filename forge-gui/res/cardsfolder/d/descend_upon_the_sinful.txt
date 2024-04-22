@@ -1,7 +1,7 @@
 Name:Descend upon the Sinful
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile all creatures. Delirium — Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile all creatures. Delirium — Create a 4/4 white Angel creature token with flying if there are four or more card types among cards in your graveyard.
 SVar:DBToken:DB$ Token | Condition$ Delirium | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium|Token

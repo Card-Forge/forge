@@ -1,5 +1,5 @@
 Name:Desert Twister
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 G G | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
+A:SP$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy target permanent.
 Oracle:Destroy target permanent.
