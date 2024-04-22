@@ -1,7 +1,7 @@
 Name:Foul-Tongue Shriek
 ManaCost:B
 Types:Instant
-A:SP$ LoseLife | Cost$ B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life for each attacking creature you control. You gain that much life.
+A:SP$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 1 life for each attacking creature you control. You gain that much life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 AI:RemoveDeck:All

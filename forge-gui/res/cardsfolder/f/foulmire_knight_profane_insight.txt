@@ -11,6 +11,6 @@ ALTERNATE
 Name:Profane Insight
 ManaCost:2 B
 Types:Instant Adventure
-A:SP$ Draw | Cost$ 2 B | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 Oracle:You draw a card and you lose 1 life. (Then exile this card. You may cast the creature later from exile.)

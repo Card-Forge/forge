@@ -1,7 +1,7 @@
 Name:Fungal Sprouting
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 DeckHas:Ability$Token
 Oracle:Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.

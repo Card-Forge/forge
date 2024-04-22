@@ -1,7 +1,7 @@
 Name:From the Ashes
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Land.nonBasic | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles.
+A:SP$ DestroyAll | ValidCards$ Land.nonBasic | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all nonbasic lands. For each land destroyed this way, its controller may search their library for a basic land card and put it onto the battlefield. Then each player who searched their library this way shuffles.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBSearch | SubAbility$ DBShuffle
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | DefinedPlayer$ ImprintedController | Chooser$ ImprintedController | NoShuffle$ True | Optional$ True
 SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup

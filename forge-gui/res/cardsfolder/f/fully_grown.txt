@@ -1,7 +1,7 @@
 Name:Fully Grown
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ PutCounter | SpellDescription$ Target creature gets +3/+3 until end of turn. Put a trample counter on it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ PutCounter | SpellDescription$ Target creature gets +3/+3 until end of turn. Put a trample counter on it.
 SVar:PutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Trample | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Target creature gets +3/+3 until end of turn. Put a trample counter on it.

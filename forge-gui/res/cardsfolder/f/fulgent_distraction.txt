@@ -1,6 +1,6 @@
 Name:Fulgent Distraction
 ManaCost:2 W
 Types:Instant
-A:SP$ Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBUnattach | SpellDescription$ Choose two target creatures. Tap those creatures, then unattach all Equipment from them.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SubAbility$ DBUnattach | SpellDescription$ Choose two target creatures. Tap those creatures, then unattach all Equipment from them.
 SVar:DBUnattach:DB$ UnattachAll | Defined$ Targeted | UnattachValid$ Equipment
 Oracle:Choose two target creatures. Tap those creatures, then unattach all Equipment from them.
