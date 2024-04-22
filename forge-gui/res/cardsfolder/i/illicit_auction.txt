@@ -1,7 +1,7 @@
 Name:Illicit Auction
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ BidLife | Cost$ 3 R R | ValidTgts$ Creature | AILogic$ Min | AIBidMax$ 8 | BidSubAbility$ DBLoseLife | SpellDescription$ Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature. (This effect lasts indefinitely.)
+A:SP$ BidLife | ValidTgts$ Creature | AILogic$ Min | AIBidMax$ 8 | BidSubAbility$ DBLoseLife | SpellDescription$ Each player may bid life for control of target creature. You start the bidding with a bid of 0. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and gains control of the creature. (This effect lasts indefinitely.)
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBControl
 SVar:DBControl:DB$ GainControl | Defined$ Targeted | NewController$ Remembered
 SVar:X:Count$ChosenNumber

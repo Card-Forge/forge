@@ -2,7 +2,7 @@ Name:Inscription of Abundance
 ManaCost:1 G
 Types:Instant
 K:Kicker:2 G
-A:SP$ Charm | Cost$ 1 G | MinCharmNum$ X | CharmNum$ Y | Choices$ DBPutCounter,DBGainLife,DBPump | AdditionalDescription$ . If this spell was kicked, choose any number instead.
+A:SP$ Charm | MinCharmNum$ X | CharmNum$ Y | Choices$ DBPutCounter,DBGainLife,DBPump | AdditionalDescription$ . If this spell was kicked, choose any number instead.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
 SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ Z | SpellDescription$ Target player gains X life, where X is the greatest power among creatures they control.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Fight | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control.

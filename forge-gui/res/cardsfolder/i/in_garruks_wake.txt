@@ -1,5 +1,5 @@
 Name:In Garruk's Wake
 ManaCost:7 B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 7 B B | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | SpellDescription$ Destroy all creatures you don't control and all planeswalkers you don't control.
+A:SP$ DestroyAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | SpellDescription$ Destroy all creatures you don't control and all planeswalkers you don't control.
 Oracle:Destroy all creatures you don't control and all planeswalkers you don't control.

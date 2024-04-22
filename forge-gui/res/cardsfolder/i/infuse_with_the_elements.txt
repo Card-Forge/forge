@@ -1,7 +1,7 @@
 Name:Infuse with the Elements
 ManaCost:3 G
 Types:Instant
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPump | SpellDescription$ Converge — Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast this spell. That creature gains trample until end of turn.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBPump | SpellDescription$ Converge — Put X +1/+1 counters on target creature, where X is the number of colors of mana spent to cast this spell. That creature gains trample until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample
 SVar:X:Count$Converge
 AI:RemoveDeck:All

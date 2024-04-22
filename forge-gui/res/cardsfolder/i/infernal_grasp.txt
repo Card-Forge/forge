@@ -1,6 +1,6 @@
 Name:Infernal Grasp
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. You lose 2 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. You lose 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target creature. You lose 2 life.

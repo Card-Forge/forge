@@ -2,5 +2,5 @@ Name:Inescapable Blaze
 ManaCost:4 R R
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Any | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to any target.
 Oracle:This spell can't be countered.\nInescapable Blaze deals 6 damage to any target.

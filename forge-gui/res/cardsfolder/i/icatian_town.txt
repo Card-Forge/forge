@@ -1,5 +1,5 @@
 Name:Icatian Town
 ManaCost:5 W
 Types:Sorcery
-A:SP$ Token | Cost$ 5 W | TokenAmount$ 4 | TokenScript$ w_1_1_citizen | TokenOwner$ You | SpellDescription$ Create four 1/1 white Citizen creature tokens.
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ w_1_1_citizen | TokenOwner$ You | SpellDescription$ Create four 1/1 white Citizen creature tokens.
 Oracle:Create four 1/1 white Citizen creature tokens.

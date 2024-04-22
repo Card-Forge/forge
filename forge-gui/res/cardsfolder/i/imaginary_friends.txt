@@ -1,6 +1,6 @@
 Name:Imaginary Friends
 ManaCost:1 W
 Types:Sorcery Arcane
-A:SP$ Token | Cost$ 1 W | TokenAmount$ 3 | TokenScript$ w_0_0_spirit_flying | TokenOwner$ You | SpellDescription$ Create three 0/0 white Spirit creature tokens with flying.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_0_0_spirit_flying | TokenOwner$ You | SpellDescription$ Create three 0/0 white Spirit creature tokens with flying.
 DeckHas:Ability$Token
 Oracle:Create three 0/0 white Spirit creature tokens with flying.

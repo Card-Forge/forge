@@ -1,7 +1,7 @@
 Name:Infernal Reckoning
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | ValidTgts$ Creature.Colorless | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target colorless creature. You gain life equal to its power. | StackDescription$ SpellDescription | SubAbility$ DBGainLife
+A:SP$ ChangeZone | ValidTgts$ Creature.Colorless | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target colorless creature. You gain life equal to its power. | StackDescription$ SpellDescription | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardPower
 Oracle:Exile target colorless creature. You gain life equal to its power.

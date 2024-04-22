@@ -2,7 +2,7 @@ Name:Increasing Devotion
 ManaCost:3 W W
 Types:Sorcery
 K:Flashback:7 W W
-A:SP$ Token | Cost$ 3 W W | TokenAmount$ X | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.
 SVar:X:Count$wasCastFromGraveyard.10.5
 DeckHas:Ability$Token
 Oracle:Create five 1/1 white Human creature tokens. If this spell was cast from a graveyard, create ten of those tokens instead.\nFlashback {7}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

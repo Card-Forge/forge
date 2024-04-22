@@ -1,7 +1,7 @@
 Name:Incite Rebellion
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 R R | RepeatPlayers$ Player | RepeatSubAbility$ DmgEach | DamageMap$ True | SpellDescription$ For each player, CARDNAME deals damage to that player and each creature that player controls equal to the number of creatures they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DmgEach | DamageMap$ True | SpellDescription$ For each player, CARDNAME deals damage to that player and each creature that player controls equal to the number of creatures they control.
 SVar:DmgEach:DB$ DamageAll | ValidPlayers$ Remembered | ValidCards$ Creature.RememberedPlayerCtrl | NumDmg$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:All

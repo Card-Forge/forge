@@ -1,6 +1,6 @@
 Name:Into the Maw of Hell
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land. CARDNAME deals 13 damage to target creature.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land. CARDNAME deals 13 damage to target creature.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 13
 Oracle:Destroy target land. Into the Maw of Hell deals 13 damage to target creature.

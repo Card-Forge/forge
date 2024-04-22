@@ -1,5 +1,5 @@
 Name:Impale
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 Oracle:Destroy target creature.

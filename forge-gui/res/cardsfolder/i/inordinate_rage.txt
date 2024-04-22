@@ -1,6 +1,6 @@
 Name:Inordinate Rage
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +2 | AILogic$ Pump | SubAbility$ DBScry | SpellDescription$ Target creature gets +3/+2 until end of turn. Scry 1.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +2 | AILogic$ Pump | SubAbility$ DBScry | SpellDescription$ Target creature gets +3/+2 until end of turn. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Target creature gets +3/+2 until end of turn. Scry 1.
