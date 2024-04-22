@@ -1,7 +1,7 @@
 Name:Kaya's Wrath
 ManaCost:W W B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ W W B B | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain life equal to the number of creatures you controlled that were destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain life equal to the number of creatures you controlled that were destroyed this way.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$FilterControlledByYou_Number$1

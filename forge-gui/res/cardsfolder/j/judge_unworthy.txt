@@ -1,7 +1,7 @@
 Name:Judge Unworthy
 ManaCost:1 W
 Types:Instant
-A:SP$ Scry | Cost$ 1 W | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose target attacking or blocking creature. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's mana value to that creature.
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose target attacking or blocking creature. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's mana value to that creature.
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature
 SVar:X:Count$TopOfLibraryCMC

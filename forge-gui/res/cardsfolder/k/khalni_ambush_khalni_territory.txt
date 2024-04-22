@@ -1,7 +1,7 @@
 Name:Khalni Ambush
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 AlternateMode:Modal
 Oracle:Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)

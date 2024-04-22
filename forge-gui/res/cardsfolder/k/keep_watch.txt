@@ -1,7 +1,7 @@
 Name:Keep Watch
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | SpellDescription$ Draw a card for each attacking creature.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each attacking creature.
 SVar:X:Count$Valid Creature.attacking
 SVar:NeedsToPlay:Creature.attacking
 Oracle:Draw a card for each attacking creature.

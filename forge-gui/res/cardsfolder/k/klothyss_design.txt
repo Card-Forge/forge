@@ -1,6 +1,6 @@
 Name:Klothys's Design
 ManaCost:5 G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 5 G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is your devotion to green.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | SpellDescription$ Creatures you control get +X/+X until end of turn, where X is your devotion to green.
 SVar:X:Count$Devotion.Green
 Oracle:Creatures you control get +X/+X until end of turn, where X is your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

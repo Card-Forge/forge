@@ -1,7 +1,7 @@
 Name:Kor Dirge
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage from | SubAbility$ DBChooseSource | StackDescription$ SpellDescription | SpellDescription$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect the damage from | SubAbility$ DBChooseSource | StackDescription$ SpellDescription | SpellDescription$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.
 SVar:DBChooseSource:DB$ ChooseSource | Choices$ Card,Emblem | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | ImprintCards$ ParentTarget | RememberObjects$ ThisTargetedCard | SubAbility$ DBCleanup | ConditionDefined$ ParentTarget | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ Remembered | Description$ All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead.

@@ -1,6 +1,6 @@
 Name:Kaervek's Hex
 ManaCost:3 B
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 B | NumDmg$ 1 | ValidCards$ Creature.nonBlack | ValidDescription$ each nonblack creature. | SubAbility$ DBDamageAll | SpellDescription$ CARDNAME deals 1 damage to each nonblack creature and an additional 1 damage to each green creature.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.nonBlack | ValidDescription$ each nonblack creature. | SubAbility$ DBDamageAll | SpellDescription$ CARDNAME deals 1 damage to each nonblack creature and an additional 1 damage to each green creature.
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.Green | ValidDescription$ each green creature.
 Oracle:Kaervek's Hex deals 1 damage to each nonblack creature and an additional 1 damage to each green creature.

@@ -1,5 +1,5 @@
 Name:Joraga Invocation
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
 Oracle:Each creature you control gets +3/+3 until end of turn and must be blocked this turn if able.
