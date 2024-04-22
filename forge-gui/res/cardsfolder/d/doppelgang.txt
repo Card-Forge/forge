@@ -1,6 +1,6 @@
 Name:Doppelgang
 ManaCost:X X X G U
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ X X X G U | ValidTgts$ Permanent | TgtPrompt$ Select X target permanents | TargetMin$ X | TargetMax$ X | NumCopies$ X | SpellDescription$ For each of X target permanents, create X tokens that are copies of that permanent.
+A:SP$ CopyPermanent | ValidTgts$ Permanent | TgtPrompt$ Select X target permanents | TargetMin$ X | TargetMax$ X | NumCopies$ X | SpellDescription$ For each of X target permanents, create X tokens that are copies of that permanent.
 SVar:X:Count$xPaid
 Oracle:For each of X target permanents, create X tokens that are copies of that permanent.

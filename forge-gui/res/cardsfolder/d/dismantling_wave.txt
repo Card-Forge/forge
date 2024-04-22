@@ -1,7 +1,7 @@
 Name:Dismantling Wave
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select up to one target artifact or enchantment each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target artifact or enchantment that player controls.
+A:SP$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select up to one target artifact or enchantment each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, destroy up to one target artifact or enchantment that player controls.
 SVar:OneEach:PlayerCountOpponents$Amount
 K:Cycling:6 W W
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cycle CARDNAME, destroy all artifacts and enchantments.

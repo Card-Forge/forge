@@ -1,7 +1,7 @@
 Name:Dominaria's Judgment
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | KW$ Protection from white | ConditionPresent$ Plains.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Plains, | SubAbility$ DBBlue | SpellDescription$ Until end of turn, creatures you control gain protection from white if you control a Plains, from blue if you control an Island, from black if you control a Swamp, from red if you control a Mountain, and from green if you control a Forest.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from white | ConditionPresent$ Plains.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Plains, | SubAbility$ DBBlue | SpellDescription$ Until end of turn, creatures you control gain protection from white if you control a Plains, from blue if you control an Island, from black if you control a Swamp, from red if you control a Mountain, and from green if you control a Forest.
 SVar:DBBlue:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from blue | ConditionPresent$ Island.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Island, | SubAbility$ DBBlack
 SVar:DBBlack:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from black | ConditionPresent$ Swamp.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Swamp, | SubAbility$ DBRed
 SVar:DBRed:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from red | ConditionPresent$ Mountain.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an Mountain, | SubAbility$ DBGreen

@@ -1,7 +1,7 @@
 Name:Divine Offering
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact. You gain life equal to its mana value.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact. You gain life equal to its mana value.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$LifeGain

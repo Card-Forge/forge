@@ -1,5 +1,5 @@
 Name:Dispel
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant | TgtPrompt$ Select target Instant Spell | SpellDescription$ Counter target instant spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant | TgtPrompt$ Select target Instant Spell | SpellDescription$ Counter target instant spell.
 Oracle:Counter target instant spell.

@@ -1,5 +1,5 @@
 Name:Divine Arrow
 ManaCost:1 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature.
 Oracle:Divine Arrow deals 4 damage to target attacking or blocking creature.

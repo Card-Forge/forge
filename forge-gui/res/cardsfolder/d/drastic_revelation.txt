@@ -1,7 +1,7 @@
 Name:Drastic Revelation
 ManaCost:2 U B R
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 U B R | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard your hand. Draw seven cards, then discard three cards at random.
+A:SP$ Discard | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard your hand. Draw seven cards, then discard three cards at random.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 3 | Mode$ Random
 Oracle:Discard your hand. Draw seven cards, then discard three cards at random.

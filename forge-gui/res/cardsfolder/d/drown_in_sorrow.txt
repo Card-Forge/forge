@@ -1,6 +1,6 @@
 Name:Drown in Sorrow
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBScry | SpellDescription$ All creatures get -2/-2 until end of turn. Scry 1.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBScry | SpellDescription$ All creatures get -2/-2 until end of turn. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:All creatures get -2/-2 until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
