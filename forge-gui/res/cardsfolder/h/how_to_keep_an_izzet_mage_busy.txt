@@ -1,5 +1,5 @@
 Name:How to Keep an Izzet Mage Busy
 ManaCost:UR
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ UR | Origin$ Stack | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:SP$ ChangeZone | Origin$ Stack | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 Oracle:Return How to Keep an Izzet Mage Busy to its owner's hand.

@@ -1,6 +1,6 @@
 Name:Hydrolash
 ManaCost:2 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.attacking | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Attacking creatures get -2/-0 until end of turn. Draw a card. | SubAbility$ DBDraw
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Attacking creatures get -2/-0 until end of turn. Draw a card. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Attacking creatures get -2/-0 until end of turn.\nDraw a card.

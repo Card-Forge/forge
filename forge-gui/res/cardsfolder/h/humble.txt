@@ -1,5 +1,5 @@
 Name:Humble
 ManaCost:1 W
 Types:Instant
-A:SP$ Animate | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and has base power and toughness 0/1.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and has base power and toughness 0/1.
 Oracle:Until end of turn, target creature loses all abilities and has base power and toughness 0/1.

@@ -1,6 +1,6 @@
 Name:Hour of Devastation
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ 3 R R | ValidCards$ Creature | RemoveKeywords$ Indestructible | SubAbility$ DBDealDamage | StackDescription$ SpellDescription | SpellDescription$ All creatures lose indestructible until end of turn.
+A:SP$ AnimateAll | ValidCards$ Creature | RemoveKeywords$ Indestructible | SubAbility$ DBDealDamage | StackDescription$ SpellDescription | SpellDescription$ All creatures lose indestructible until end of turn.
 SVar:DBDealDamage:DB$ DamageAll | ValidCards$ Creature,Planeswalker.nonBolas | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to each creature and each non-Bolas planeswalker.
 Oracle:All creatures lose indestructible until end of turn. Hour of Devastation deals 5 damage to each creature and each non-Bolas planeswalker.

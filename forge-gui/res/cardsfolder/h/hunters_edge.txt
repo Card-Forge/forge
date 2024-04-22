@@ -1,7 +1,7 @@
 Name:Hunter's Edge
 ManaCost:3 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | AILogic$ PowerDmg | StackDescription$ Put a +1/+1 counter on {c:ThisTargetedCard}. | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature you don't control.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | AILogic$ PowerDmg | StackDescription$ Put a +1/+1 counter on {c:ThisTargetedCard}. | SpellDescription$ Put a +1/+1 counter on target creature you control. Then that creature deals damage equal to its power to target creature you don't control.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget | AILogic$ PowerDmg | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
 SVar:X:ParentTargeted$CardPower
 DeckHas:Ability$Counters
