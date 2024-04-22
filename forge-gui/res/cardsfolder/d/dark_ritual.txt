@@ -1,5 +1,5 @@
 Name:Dark Ritual
 ManaCost:B
 Types:Instant
-A:SP$ Mana | Cost$ B | Produced$ B | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B}{B}{B}.
+A:SP$ Mana | Produced$ B | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B}{B}{B}.
 Oracle:Add {B}{B}{B}.

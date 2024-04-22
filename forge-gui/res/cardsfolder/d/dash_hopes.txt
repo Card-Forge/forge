@@ -3,5 +3,5 @@ ManaCost:B B
 Types:Instant
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast this spell, any player may pay 5 life. If a player does, counter CARDNAME.
 SVar:TrigCounter:DB$ Counter | UnlessCost$ PayLife<5> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True
-A:SP$ Counter | Cost$ B B | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 Oracle:When you cast this spell, any player may pay 5 life. If a player does, counter Dash Hopes.\nCounter target spell.

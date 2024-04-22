@@ -1,6 +1,6 @@
 Name:Deathsprout
 ManaCost:1 B B G
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBSearch | SpellDescription$ Destroy target creature. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBSearch | SpellDescription$ Destroy target creature. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
 Oracle:Destroy target creature. Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

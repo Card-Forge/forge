@@ -1,7 +1,7 @@
 Name:Dazzling Lights
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | Subability$ DBSurveil | SpellDescription$ Target creature gets -3/-0 until end of turn. Surveil 2.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | Subability$ DBSurveil | SpellDescription$ Target creature gets -3/-0 until end of turn. Surveil 2.
 SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 2
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Target creature gets -3/-0 until end of turn.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

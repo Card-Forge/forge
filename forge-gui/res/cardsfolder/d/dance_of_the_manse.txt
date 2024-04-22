@@ -1,7 +1,7 @@
 Name:Dance of the Manse
 ManaCost:X W U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X W U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.cmcLEX+YouOwn,Enchantment.cmcLEX+YouOwn+nonAura | TgtPrompt$ Select target artifact or non-Aura enchantment in your graveyard | TargetMin$ 0 | TargetMax$ X | AnimateSubAbility$ DBAnimate | SpellDescription$ Return up to X target artifact and/or non-Aura enchantment cards with mana value X or less from your graveyard to the battlefield. If X is 6 or more, those permanents are 4/4 creatures in addition to their other types.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.cmcLEX+YouOwn,Enchantment.cmcLEX+YouOwn+nonAura | TgtPrompt$ Select target artifact or non-Aura enchantment in your graveyard | TargetMin$ 0 | TargetMax$ X | AnimateSubAbility$ DBAnimate | SpellDescription$ Return up to X target artifact and/or non-Aura enchantment cards with mana value X or less from your graveyard to the battlefield. If X is 6 or more, those permanents are 4/4 creatures in addition to their other types.
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Creature | Power$ 4 | Toughness$ 4 | Duration$ Permanent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

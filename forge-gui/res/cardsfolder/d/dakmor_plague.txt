@@ -1,5 +1,5 @@
 Name:Dakmor Plague
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 B B | NumDmg$ 3 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature and each player.
+A:SP$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature and each player.
 Oracle:Dakmor Plague deals 3 damage to each creature and each player.

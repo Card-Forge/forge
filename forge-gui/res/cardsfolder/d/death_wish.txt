@@ -1,7 +1,7 @@
 Name:Death Wish
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B B | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeTypeDesc$ card they own | ChangeNum$ 1 | SubAbility$ DBLoseLife | Hidden$ True | SpellDescription$ You may put a card you own from outside the game into your hand. You lose half your life, rounded up. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeTypeDesc$ card they own | ChangeNum$ 1 | SubAbility$ DBLoseLife | Hidden$ True | SpellDescription$ You may put a card you own from outside the game into your hand. You lose half your life, rounded up. Exile CARDNAME.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:X:Count$YourLifeTotal/HalfUp

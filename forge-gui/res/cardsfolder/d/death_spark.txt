@@ -1,7 +1,7 @@
 Name:Death Spark
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+DirectlyAbove | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return CARDNAME to your hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:NeedsOrderedGraveyard:TRUE
