@@ -1,7 +1,7 @@
 Name:Fate Transfer
 ManaCost:1 UB
 Types:Instant
-A:SP$ MoveCounter | Cost$ 1 UB | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures to move counters | CounterType$ All | CounterNum$ All | SpellDescription$ Move all counters from target creature onto another target creature.
+A:SP$ MoveCounter | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures to move counters | CounterType$ All | CounterNum$ All | SpellDescription$ Move all counters from target creature onto another target creature.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Move all counters from target creature onto another target creature.

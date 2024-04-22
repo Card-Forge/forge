@@ -1,7 +1,7 @@
 Name:Fated Return
 ManaCost:4 B B B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 B B B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Indestructible | Duration$ Permanent | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPlayerTurn$ True
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. It gains indestructible. If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

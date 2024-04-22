@@ -1,7 +1,7 @@
 Name:Fatal Lore
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 B B | Chooser$ Opponent | Choices$ DrawThree,DestroyAndDraw
+A:SP$ Charm | Chooser$ Opponent | Choices$ DrawThree,DestroyAndDraw
 SVar:DrawThree:DB$ Draw | NumCards$ 3 | Defined$ You | SpellDescription$ You draw three cards.
 SVar:DestroyAndDraw:DB$ Destroy | ValidTgts$ Creature.ControlledBy ChoosingPlayer | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | NoRegen$ True | SpellDescription$ You destroy up to two target creatures that opponent controls and that player draws up to three cards. Those creatures can't be regenerated. | SubAbility$ ChooserDraws
 SVar:ChooserDraws:DB$ Draw | NumCards$ 3 | Defined$ ChoosingPlayer | UpTo$ True

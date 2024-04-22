@@ -1,5 +1,5 @@
 Name:Fiery Cannonade
 ManaCost:2 R
 Types:Instant
-A:SP$ DamageAll | Cost$ 2 R | NumDmg$ 2 | ValidCards$ Creature.nonPirate | ValidDescription$ each non-Pirate creature. | SpellDescription$ CARDNAME deals 2 damage to each non-Pirate creature.
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.nonPirate | ValidDescription$ each non-Pirate creature. | SpellDescription$ CARDNAME deals 2 damage to each non-Pirate creature.
 Oracle:Fiery Cannonade deals 2 damage to each non-Pirate creature.

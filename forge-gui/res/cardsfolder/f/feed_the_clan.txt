@@ -1,7 +1,7 @@
 Name:Feed the Clan
 ManaCost:1 G
 Types:Instant
-A:SP$ GainLife | Cost$ 1 G | LifeAmount$ X | SpellDescription$ You gain 5 life. Ferocious — You gain 10 life instead if you control a creature with power 4 or greater.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 5 life. Ferocious — You gain 10 life instead if you control a creature with power 4 or greater.
 SVar:Y:Count$Valid Creature.powerGE4+YouCtrl
 SVar:X:Count$Compare Y GE1.10.5
 Oracle:You gain 5 life.\nFerocious — You gain 10 life instead if you control a creature with power 4 or greater.

@@ -1,7 +1,7 @@
 Name:Fever Charm
 ManaCost:R
 Types:Instant
-A:SP$ Charm | Cost$ R | Choices$ DBPump,DBPump2,DBDmg
+A:SP$ Charm | Choices$ DBPump,DBPump2,DBDmg
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature.Wizard | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target Wizard creature.

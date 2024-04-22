@@ -2,6 +2,6 @@ Name:Fall of the Titans
 ManaCost:X X R
 Types:Instant
 K:Surge:X R
-A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ 2 | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each of up to two targets.
+A:SP$ DealDamage | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ 2 | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each of up to two targets.
 SVar:X:Count$xPaid
 Oracle:Surge {X}{R} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nFall of the Titans deals X damage to each of up to two targets.

@@ -11,5 +11,5 @@ ALTERNATE
 Name:Gift of the Fae
 ManaCost:1 W
 Types:Sorcery Adventure
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 1 | KW$ Flying | SpellDescription$ Target creature gets +2/+1 and gains flying until end of turn. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 1 | KW$ Flying | SpellDescription$ Target creature gets +2/+1 and gains flying until end of turn. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Target creature gets +2/+1 and gains flying until end of turn. (Then exile this card. You may cast the creature later from exile.)

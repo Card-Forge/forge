@@ -1,7 +1,7 @@
 Name:Fade Away
 ManaCost:2 U
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ DBRepeatCreature | SpellDescription$ For each creature, its controller sacrifices a permanent unless they pay {1}.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRepeatCreature | SpellDescription$ For each creature, its controller sacrifices a permanent unless they pay {1}.
 SVar:DBRepeatCreature:DB$ RepeatEach | RepeatCards$ Creature.RememberedPlayerCtrl | Zone$ Battlefield | RepeatSubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Permanent | SacMessage$ permanent | UnlessCost$ 1 | UnlessPayer$ Player.IsRemembered
 AI:RemoveDeck:All
