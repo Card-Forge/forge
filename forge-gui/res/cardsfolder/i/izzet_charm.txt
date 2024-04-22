@@ -1,7 +1,7 @@
 Name:Izzet Charm
 ManaCost:U R
 Types:Instant
-A:SP$ Charm | Cost$ U R | Choices$ DBCounter,DBDealDamage,DBDraw
+A:SP$ Charm | Choices$ DBCounter,DBDealDamage,DBDraw
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target nonCreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 2 | SpellDescription$ Counter target noncreature spell unless its controller pays {2}.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 SVar:DBDraw:DB$ Draw | Cost$ U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard two cards.
