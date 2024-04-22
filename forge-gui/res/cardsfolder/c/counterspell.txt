@@ -1,5 +1,5 @@
 Name:Counterspell
 ManaCost:U U
 Types:Instant
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 Oracle:Counter target spell.

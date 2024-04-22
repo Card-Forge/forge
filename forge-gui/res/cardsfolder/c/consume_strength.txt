@@ -1,6 +1,6 @@
 Name:Consume Strength
 ManaCost:1 B G
 Types:Instant
-A:SP$ Pump | Cost$ 1 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+2 | TargetUnique$ True | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+2 | TargetUnique$ True | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.
 SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get -2/-2 | TargetUnique$ True | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 Oracle:Target creature gets +2/+2 until end of turn. Another target creature gets -2/-2 until end of turn.

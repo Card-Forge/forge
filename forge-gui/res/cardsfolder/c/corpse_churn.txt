@@ -1,7 +1,7 @@
 Name:Corpse Churn
 ManaCost:1 B
 Types:Instant
-A:SP$ Mill | Cost$ 1 B | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then you may return a creature card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+A:SP$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then you may return a creature card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True
 DeckHas:Ability$Graveyard
 Oracle:Mill three cards, then you may return a creature card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)

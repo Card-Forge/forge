@@ -1,7 +1,7 @@
 Name:Consider
 ManaCost:U
 Types:Instant
-A:SP$ Surveil | Cost$ U | Amount$ 1 | SubAbility$ DBDraw | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+A:SP$ Surveil | Amount$ 1 | SubAbility$ DBDraw | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\nDraw a card.

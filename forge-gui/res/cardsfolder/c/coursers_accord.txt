@@ -1,7 +1,7 @@
 Name:Coursers' Accord
 ManaCost:4 G W
 Types:Sorcery
-A:SP$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SubAbility$ DBCopy | SpellDescription$ Create a 3/3 green Centaur creature token, then populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SubAbility$ DBCopy | SpellDescription$ Create a 3/3 green Centaur creature token, then populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHas:Ability$Token
 DeckHints:Ability$Token

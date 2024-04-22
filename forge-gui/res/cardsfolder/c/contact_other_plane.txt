@@ -1,7 +1,7 @@
 Name:Contact Other Plane
 ManaCost:3 U
 Types:Instant
-A:SP$ RollDice | Cost$ 3 U | Sides$ 20 | ResultSubAbilities$ 1-9:DBDraw2,10-19:DBScry2,20:DBScry3 | SpellDescription$ Roll a d20.
+A:SP$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBDraw2,10-19:DBScry2,20:DBScry3 | SpellDescription$ Roll a d20.
 SVar:DBDraw2:DB$ Draw | NumCards$ 2 | SpellDescription$ 1—9 VERT Draw two cards.
 SVar:DBScry2:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw2 | SpellDescription$ 10—19 VERT Scry 2, then draw two cards.
 SVar:DBScry3:DB$ Scry | ScryNum$ 3 | SubAbility$ DBDraw3 | SpellDescription$ 20 VERT Scry 3, then draw three cards.

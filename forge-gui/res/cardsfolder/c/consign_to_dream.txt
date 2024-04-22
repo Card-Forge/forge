@@ -1,7 +1,7 @@
 Name:Consign to Dream
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Card.Green,Card.Red | ConditionCompare$ EQ0 | SpellDescription$ Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | ConditionDefined$ Targeted | ConditionPresent$ Card.Green,Card.Red | ConditionCompare$ EQ0 | SpellDescription$ Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ConditionDefined$ Targeted | ConditionPresent$ Card.Green,Card.Red | ConditionCompare$ GE1
 AI:RemoveDeck:All
 Oracle:Return target permanent to its owner's hand. If that permanent is red or green, put it on top of its owner's library instead.
