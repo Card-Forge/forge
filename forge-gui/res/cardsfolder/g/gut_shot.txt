@@ -1,5 +1,5 @@
 Name:Gut Shot
 ManaCost:RP
 Types:Instant
-A:SP$ DealDamage | Cost$ RP | ValidTgts$ Any | NumDmg$ 1 | AIPhyrexianPayment$ OnFatalDamage.1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | AIPhyrexianPayment$ OnFatalDamage.1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nGut Shot deals 1 damage to any target.

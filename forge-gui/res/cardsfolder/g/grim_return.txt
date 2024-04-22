@@ -1,5 +1,5 @@
 Name:Grim Return
 ManaCost:2 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Card.Creature+ThisTurnEnteredFrom_Battlefield | TgtPrompt$ Select target creature card in a graveyard that was put there from the battlefield this turn | SpellDescription$ Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Card.Creature+ThisTurnEnteredFrom_Battlefield | TgtPrompt$ Select target creature card in a graveyard that was put there from the battlefield this turn | SpellDescription$ Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.
 Oracle:Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control.

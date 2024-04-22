@@ -2,5 +2,5 @@ Name:Great Teacher's Decree
 ManaCost:3 W
 Types:Sorcery
 K:Rebound
-A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
 Oracle:Creatures you control get +2/+1 until end of turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

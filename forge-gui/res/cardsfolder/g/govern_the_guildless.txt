@@ -1,7 +1,7 @@
 Name:Govern the Guildless
 ManaCost:5 U
 Types:Sorcery
-A:SP$ GainControl | Cost$ 5 U | ValidTgts$ Creature.MonoColor | TgtPrompt$ Select target monocolored creature | SpellDescription$ Gain control of target monocolored creature.
+A:SP$ GainControl | ValidTgts$ Creature.MonoColor | TgtPrompt$ Select target monocolored creature | SpellDescription$ Gain control of target monocolored creature.
 A:AB$ ChooseColor | Cost$ 1 U Reveal<1/CARDNAME> | Defined$ You | OrColors$ True | SubAbility$ Animate | Forecast$ True | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn. (Activate only during your upkeep and only once each turn.)
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True
 Oracle:Gain control of target monocolored creature.\nForecast — {1}{U}, Reveal Govern the Guildless from your hand: Target creature becomes the color or colors of your choice until end of turn. (Activate only during your upkeep and only once each turn.)

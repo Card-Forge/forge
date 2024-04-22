@@ -1,6 +1,6 @@
 Name:Golden Ratio
 ManaCost:1 G U
 Types:Sorcery
-A:SP$ Draw | Cost$ 1 G U | NumCards$ X | SpellDescription$ Draw a card for each different power among creatures you control.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each different power among creatures you control.
 SVar:X:Count$DifferentPower_Creature.YouCtrl
 Oracle:Draw a card for each different power among creatures you control.

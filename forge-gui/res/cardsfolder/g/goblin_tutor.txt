@@ -1,7 +1,7 @@
 Name:Goblin Tutor
 ManaCost:R
 Types:Instant
-A:SP$ RollDice | Cost$ R | ResultSubAbilities$ 2:GetGobTut,3:GetEnch,4:GetArtif,5:GetCreat,6:GetSpell | SpellDescription$ Roll a six-sided die. If you roll a 1, CARDNAME has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle.
+A:SP$ RollDice | ResultSubAbilities$ 2:GetGobTut,3:GetEnch,4:GetArtif,5:GetCreat,6:GetSpell | SpellDescription$ Roll a six-sided die. If you roll a 1, CARDNAME has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle.
 SVar:GetGobTut:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedGoblin Tutor | ChangeNum$ 1 | SpellDescription$ 2 — A card named Goblin Tutor
 SVar:GetEnch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ 3 — An enchantment
 SVar:GetArtif:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ 4 — An artifact

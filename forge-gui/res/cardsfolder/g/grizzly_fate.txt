@@ -2,6 +2,6 @@ Name:Grizzly Fate
 ManaCost:3 G G
 Types:Sorcery
 K:Flashback:5 G G
-A:SP$ Token | Cost$ 3 G G | TokenAmount$ X | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create two 2/2 green Bear creature tokens. Threshold — Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create two 2/2 green Bear creature tokens. Threshold — Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.4.2
 Oracle:Create two 2/2 green Bear creature tokens.\nThreshold — Create four 2/2 green Bear creature tokens instead if seven or more cards are in your graveyard.\nFlashback {5}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

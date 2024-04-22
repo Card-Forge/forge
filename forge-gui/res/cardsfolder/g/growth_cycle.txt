@@ -1,7 +1,7 @@
 Name:Growth Cycle
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBPump | SpellDescription$ Target creature gets +3/+3 until end of turn. It gets an additional +2/+2 until end of turn for each card named Growth Cycle in your graveyard.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBPump | SpellDescription$ Target creature gets +3/+3 until end of turn. It gets an additional +2/+2 until end of turn for each card named Growth Cycle in your graveyard.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$ValidGraveyard Card.namedGrowth Cycle/Times.2
 Oracle:Target creature gets +3/+3 until end of turn. It gets an additional +2/+2 until end of turn for each card named Growth Cycle in your graveyard.
