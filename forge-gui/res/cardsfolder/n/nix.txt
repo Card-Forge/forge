@@ -1,6 +1,6 @@
 Name:Nix
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Card | CounterNoManaSpell$ True | SpellDescription$ Counter target spell if no mana was spent to cast it.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | CounterNoManaSpell$ True | SpellDescription$ Counter target spell if no mana was spent to cast it.
 AI:RemoveDeck:Random
 Oracle:Counter target spell if no mana was spent to cast it.

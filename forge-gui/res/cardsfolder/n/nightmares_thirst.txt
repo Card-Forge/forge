@@ -1,7 +1,7 @@
 Name:Nightmare's Thirst
 ManaCost:B
 Types:Instant
-A:SP$ GainLife | Cost$ B | LifeAmount$ 1 | SubAbility$ DBLifeCurse | SpellDescription$ You gain 1 life. Target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
+A:SP$ GainLife | LifeAmount$ 1 | SubAbility$ DBLifeCurse | SpellDescription$ You gain 1 life. Target creature gets -X/-X until end of turn, where X is the amount of life you gained this turn.
 SVar:DBLifeCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$LifeGain

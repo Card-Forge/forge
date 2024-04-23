@@ -1,6 +1,6 @@
 Name:Necrobite
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SubAbility$ DBRegen | SpellDescription$ Target creature gains deathtouch until end of turn. Regenerate it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SubAbility$ DBRegen | SpellDescription$ Target creature gains deathtouch until end of turn. Regenerate it.
 SVar:DBRegen:DB$ Regenerate | Defined$ Targeted
 Oracle:Target creature gains deathtouch until end of turn. Regenerate it. (The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat. Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)

@@ -1,7 +1,7 @@
 Name:Necromentia
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ NameCard | Cost$ 1 B B | Defined$ You | ValidCards$ Card.nonBasic | ValidDescription$ card other than a basic land | SubAbility$ ExileYard | StackDescription$ SpellDescription | SpellDescription$ Choose a card name other than a basic land card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way.
+A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDescription$ card other than a basic land | SubAbility$ ExileYard | StackDescription$ SpellDescription | SpellDescription$ Choose a card name other than a basic land card name. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then creates a 2/2 black Zombie creature token for each card exiled from their hand this way.
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | RememberChanged$ True | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBToken | StackDescription$ None

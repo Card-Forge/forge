@@ -1,5 +1,5 @@
 Name:Neck Snap
 ManaCost:3 W
 Types:Instant
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Destroy target attacking or blocking creature.
+A:SP$ Destroy | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Destroy target attacking or blocking creature.
 Oracle:Destroy target attacking or blocking creature.
