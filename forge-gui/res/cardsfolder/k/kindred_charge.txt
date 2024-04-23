@@ -1,7 +1,7 @@
 Name:Kindred Charge
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 4 R R | Defined$ You | Type$ Creature | SubAbility$ DBClone | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. For each creature you control of the chosen type, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBClone | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. For each creature you control of the chosen type, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Valid Creature.ChosenType+YouCtrl | PumpKeywords$ Haste | NumCopies$ 1 | AtEOT$ Exile
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.YouCtrl

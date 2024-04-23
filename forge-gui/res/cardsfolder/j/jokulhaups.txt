@@ -1,6 +1,6 @@
 Name:Jokulhaups
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 R R | ValidCards$ Artifact,Creature,Land | NoRegen$ True | SpellDescription$ Destroy all artifacts, creatures, and lands. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Artifact,Creature,Land | NoRegen$ True | SpellDescription$ Destroy all artifacts, creatures, and lands. They can't be regenerated.
 AI:RemoveDeck:Random
 Oracle:Destroy all artifacts, creatures, and lands. They can't be regenerated.
