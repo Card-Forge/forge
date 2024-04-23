@@ -1,7 +1,7 @@
 Name:Lava Burst
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ CreatureDmg | SpellDescription$ CARDNAME deals X damage to any target. If CARDNAME would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ CreatureDmg | SpellDescription$ CARDNAME deals X damage to any target. If CARDNAME would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player.
 SVar:CreatureDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ True | NoRedirection$ True | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StackDescription$ If CARDNAME would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player.
 SVar:X:Count$xPaid
 Oracle:Lava Burst deals X damage to any target. If Lava Burst would deal damage to a creature, that damage can't be prevented or dealt instead to another permanent or player.

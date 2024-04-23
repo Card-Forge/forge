@@ -1,7 +1,7 @@
 Name:Living Wish
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Sideboard | Destination$ Hand | ChangeType$ Creature.YouOwn,Land.YouOwn | ChangeTypeDesc$ creature or land card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SubAbility$ DBChange | SpellDescription$ You may reveal a creature or land card you own from outside the game and put it into your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Creature.YouOwn,Land.YouOwn | ChangeTypeDesc$ creature or land card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SubAbility$ DBChange | SpellDescription$ You may reveal a creature or land card you own from outside the game and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:Random
 Oracle:You may reveal a creature or land card you own from outside the game and put it into your hand. Exile Living Wish.

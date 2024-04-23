@@ -1,6 +1,6 @@
 Name:Lab Rats
 ManaCost:B
 Types:Sorcery
-A:SP$ Token | Cost$ B | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | SpellDescription$ Create a 1/1 black Rat creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat | TokenOwner$ You | SpellDescription$ Create a 1/1 black Rat creature token.
 K:Buyback:4
 Oracle:Buyback {4} (You may pay an additional {4} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreate a 1/1 black Rat creature token.

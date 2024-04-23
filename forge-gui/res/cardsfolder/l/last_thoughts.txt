@@ -2,7 +2,7 @@ Name:Last Thoughts
 ManaCost:3 U
 Types:Sorcery
 K:Cipher
-A:SP$ Draw | Cost$ 3 U | Defined$ You | NumCards$ 1 | SubAbility$ Cipher | SpellDescription$ Draw a card.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ Cipher | SpellDescription$ Draw a card.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 Oracle:Draw a card.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

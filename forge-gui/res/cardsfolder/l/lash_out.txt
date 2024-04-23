@@ -1,7 +1,7 @@
 Name:Lash Out
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBClash | SpellDescription$ CARDNAME deals 3 damage to target creature. Clash with an opponent. If you win, CARDNAME deals 3 damage to that creature's controller.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBClash | SpellDescription$ CARDNAME deals 3 damage to target creature. Clash with an opponent. If you win, CARDNAME deals 3 damage to that creature's controller.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBDamageController
 SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 Oracle:Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

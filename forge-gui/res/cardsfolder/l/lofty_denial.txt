@@ -1,7 +1,7 @@
 Name:Lofty Denial
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Z | SpellDescription$ Counter target spell unless its controller pays {1}. If you control a creature with flying, counter that spell unless its controller pays {4} instead.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Z | SpellDescription$ Counter target spell unless its controller pays {1}. If you control a creature with flying, counter that spell unless its controller pays {4} instead.
 SVar:Y:Count$Valid Creature.YouCtrl+withFlying
 SVar:Z:Count$Compare Y GE1.4.1
 DeckHints:Keyword$Flying

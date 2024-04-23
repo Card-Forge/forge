@@ -1,6 +1,6 @@
 Name:Liliana's Triumph
 ManaCost:1 B
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 B | Defined$ Opponent | SacValid$ Creature | SubAbility$ DiscardIf | SpellDescription$ Each opponent sacrifices a creature. If you control a Liliana planeswalker, each opponent also discards a card.
+A:SP$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SubAbility$ DiscardIf | SpellDescription$ Each opponent sacrifices a creature. If you control a Liliana planeswalker, each opponent also discards a card.
 SVar:DiscardIf:DB$ Discard | Defined$ Opponent | ConditionPresent$ Planeswalker.Liliana+YouCtrl | ConditionCompare$ GE1 | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Each opponent sacrifices a creature. If you control a Liliana planeswalker, each opponent also discards a card.

@@ -1,7 +1,7 @@
 Name:Liliana's Indignation
 ManaCost:X B
 Types:Sorcery
-A:SP$ Mill | Cost$ X B | NumCards$ X | Defined$ You | RememberMilled$ True | SubAbility$ DBLoseLife | SpellDescription$ Mill X cards. Target player loses 2 life for each creature card put into the graveyard this way.
+A:SP$ Mill | NumCards$ X | Defined$ You | RememberMilled$ True | SubAbility$ DBLoseLife | SpellDescription$ Mill X cards. Target player loses 2 life for each creature card put into the graveyard this way.
 SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Creature.IsRemembered/Times.2

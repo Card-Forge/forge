@@ -1,7 +1,7 @@
 Name:Last Stand
 ManaCost:W U B R G
 Types:Sorcery
-A:SP$ LoseLife | Cost$ W U B R G | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ SwampsYouControl | SubAbility$ DBDamageMountain | SpellDescription$ Target opponent loses 2 life for each Swamp you control. CARDNAME deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
+A:SP$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ SwampsYouControl | SubAbility$ DBDamageMountain | SpellDescription$ Target opponent loses 2 life for each Swamp you control. CARDNAME deals damage to target creature equal to the number of Mountains you control. Create a 1/1 green Saproling creature token for each Forest you control. You gain 2 life for each Plains you control. Draw a card for each Island you control, then discard that many cards.
 SVar:DBDamageMountain:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ MountainsYouControl | SubAbility$ DBTokenForest
 SVar:DBTokenForest:DB$ Token | TokenAmount$ ForestsYouControl | TokenScript$ g_1_1_saproling | TokenOwner$ You | SubAbility$ DBGainLifePlains
 SVar:DBGainLifePlains:DB$ GainLife | Defined$ You | LifeAmount$ PlainsYouControl | SubAbility$ DBDrawCardIsland

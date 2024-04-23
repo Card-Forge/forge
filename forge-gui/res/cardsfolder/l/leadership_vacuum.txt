@@ -1,7 +1,7 @@
 Name:Leadership Vacuum
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 U | ValidTgts$ Player | Origin$ Battlefield | Destination$ Command | ChangeType$ Permanent.IsCommander+TargetedPlayerCtrl | SubAbility$ DBDraw | SpellDescription$ Target player returns each commander they control from the battlefield to the command zone. Draw a card.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | Origin$ Battlefield | Destination$ Command | ChangeType$ Permanent.IsCommander+TargetedPlayerCtrl | SubAbility$ DBDraw | SpellDescription$ Target player returns each commander they control from the battlefield to the command zone. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 Oracle:Target player returns each commander they control from the battlefield to the command zone.\nDraw a card.

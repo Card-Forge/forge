@@ -1,7 +1,7 @@
 Name:Lithomancer's Focus
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +2/+2 until end of turn. Prevent all damage that would be dealt to that creature this turn by colorless sources.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBEffect | SpellDescription$ Target creature gets +2/+2 until end of turn. Prevent all damage that would be dealt to that creature this turn by colorless sources.
 SVar:DBEffect:DB$ Effect | Defined$ Targeted | ReplacementEffects$ PreventColorless | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield
 SVar:PreventColorless:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Card.ColorlessSource,Emblem.ColorlessSource | ValidTarget$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to that creature this turn by colorless sources.
 Oracle:Target creature gets +2/+2 until end of turn. Prevent all damage that would be dealt to that creature this turn by colorless sources.

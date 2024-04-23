@@ -1,6 +1,6 @@
 Name:Last One Standing
 ManaCost:1 B R
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 1 B R | Defined$ You | Amount$ 1 | Choices$ Creature | AtRandom$ True | SubAbility$ DBDestroyAll | SpellDescription$ Choose a creature at random, then destroy the rest.
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature | AtRandom$ True | SubAbility$ DBDestroyAll | SpellDescription$ Choose a creature at random, then destroy the rest.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard
 Oracle:Choose a creature at random, then destroy the rest.

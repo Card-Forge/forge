@@ -1,7 +1,7 @@
 Name:Laquatus's Disdain
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell cast from a graveyard | ValidTgts$ Card.wasCastFromGraveyard | SubAbility$ DBDraw | SpellDescription$ Counter target spell cast from a graveyard. Draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell cast from a graveyard | ValidTgts$ Card.wasCastFromGraveyard | SubAbility$ DBDraw | SpellDescription$ Counter target spell cast from a graveyard. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 Oracle:Counter target spell cast from a graveyard.\nDraw a card.
