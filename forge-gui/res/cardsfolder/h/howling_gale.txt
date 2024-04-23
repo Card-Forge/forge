@@ -2,5 +2,5 @@ Name:Howling Gale
 ManaCost:1 G
 Types:Instant
 K:Flashback:1 G
-A:SP$ DamageAll | Cost$ 1 G | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player.
 Oracle:Howling Gale deals 1 damage to each creature with flying and each player.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

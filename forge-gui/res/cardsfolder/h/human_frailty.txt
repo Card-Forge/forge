@@ -1,5 +1,5 @@
 Name:Human Frailty
 ManaCost:B
 Types:Instant
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Human | TgtPrompt$ Choose target Human creature. | SpellDescription$ Destroy target Human creature.
+A:SP$ Destroy | ValidTgts$ Creature.Human | TgtPrompt$ Choose target Human creature. | SpellDescription$ Destroy target Human creature.
 Oracle:Destroy target Human creature.

@@ -1,5 +1,5 @@
 Name:Hymn to Tourach
 ManaCost:B B
 Types:Sorcery
-A:SP$ Discard | Cost$ B B | ValidTgts$ Player | NumCards$ 2 | Mode$ Random | SpellDescription$ Target player discards two cards at random.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ Random | SpellDescription$ Target player discards two cards at random.
 Oracle:Target player discards two cards at random.
