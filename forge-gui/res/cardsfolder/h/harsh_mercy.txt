@@ -1,7 +1,7 @@
 Name:Harsh Mercy
 ManaCost:2 W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 W | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseType | SubAbility$ DBDestroyAll | StackDescription$ SpellDescription | SpellDescription$ Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseType | SubAbility$ DBDestroyAll | StackDescription$ SpellDescription | SpellDescription$ Each player chooses a creature type. Destroy all creatures that aren't of a type chosen this way. They can't be regenerated.
 SVar:DBChooseType:DB$ ChooseType | Defined$ Player.IsRemembered | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBRemember
 SVar:DBRemember:DB$ PumpAll | ValidCards$ Creature.ChosenType | RememberPumped$ True
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | NoRegen$ True | SubAbility$ DBCleanup | StackDescription$ None

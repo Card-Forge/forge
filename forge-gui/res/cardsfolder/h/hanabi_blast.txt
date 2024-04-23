@@ -1,7 +1,7 @@
 Name:Hanabi Blast
 ManaCost:1 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBBounce | SpellDescription$ CARDNAME deals 2 damage to any target. Return CARDNAME to its owner's hand, then discard a card at random.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBBounce | SpellDescription$ CARDNAME deals 2 damage to any target. Return CARDNAME to its owner's hand, then discard a card at random.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Parent | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ Random | NumCards$ 1
 Oracle:Hanabi Blast deals 2 damage to any target. Return Hanabi Blast to its owner's hand, then discard a card at random.

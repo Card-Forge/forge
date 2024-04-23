@@ -1,7 +1,7 @@
 Name:Healing Grace
 ManaCost:W
 Types:Instant
-A:SP$ ChooseSource | Cost$ W | Choices$ Card,Emblem | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice. You gain 3 life.
+A:SP$ ChooseSource | Choices$ Card,Emblem | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice. You gain 3 life.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | ReplacementEffects$ GraceDamage | ForgetOnMoved$ Battlefield | RememberObjects$ Targeted | SubAbility$ DBGainLife
 SVar:GraceDamage:Event$ DamageDone | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ GraceDmg | PreventionEffect$ True | Description$ Prevent the next 3 damage that would be dealt to any target this turn by a source of your choice.
 SVar:GraceDmg:DB$ ReplaceDamage | Amount$ ShieldAmount

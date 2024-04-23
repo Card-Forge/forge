@@ -1,6 +1,6 @@
 Name:Hieroglyphic Illumination
 ManaCost:3 U
 Types:Instant
-A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:Cycling:U
 Oracle:Draw two cards.\nCycling {U} ({U}, Discard this card: Draw a card.)

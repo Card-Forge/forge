@@ -1,7 +1,7 @@
 Name:Healing Salve
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ DBGainLife,DBPreventDmg | CharmNum$ 1
+A:SP$ Charm | Choices$ DBGainLife,DBPreventDmg | CharmNum$ 1
 SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
 SVar:DBPreventDmg:DB$ PreventDamage | ValidTgts$ Any | Amount$ 3 | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn.
 DeckHas:Ability$LifeGain

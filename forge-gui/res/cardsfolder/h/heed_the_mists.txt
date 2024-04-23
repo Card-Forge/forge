@@ -1,7 +1,7 @@
 Name:Heed the Mists
 ManaCost:3 U U
 Types:Sorcery Arcane
-A:SP$ Mill | Cost$ 3 U U | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigDraw | SpellDescription$ Mill a card, then draw cards equal to the milled card's mana value.
+A:SP$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigDraw | SpellDescription$ Mill a card, then draw cards equal to the milled card's mana value.
 SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

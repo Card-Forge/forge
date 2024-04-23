@@ -1,7 +1,7 @@
 Name:Honor's Reward
 ManaCost:2 W
 Types:Instant
-A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 4 | Defined$ You | SubAbility$ DBBolster | SpellDescription$ You gain 4 life. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
+A:SP$ GainLife | LifeAmount$ 4 | Defined$ You | SubAbility$ DBBolster | SpellDescription$ You gain 4 life. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
 SVar:DBBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 2 | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:You gain 4 life. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
