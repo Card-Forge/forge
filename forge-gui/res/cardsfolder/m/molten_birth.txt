@@ -1,7 +1,7 @@
 Name:Molten Birth
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 1 R R | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | SubAbility$ MoltenFlip | SpellDescription$ Create two 1/1 red Elemental creature tokens, then flip a coin. If you win the flip, return CARDNAME to its owner's hand.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | SubAbility$ MoltenFlip | SpellDescription$ Create two 1/1 red Elemental creature tokens, then flip a coin. If you win the flip, return CARDNAME to its owner's hand.
 SVar:MoltenFlip:DB$ FlipACoin | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | Defined$ Parent
 Oracle:Create two 1/1 red Elemental creature tokens, then flip a coin. If you win the flip, return Molten Birth to its owner's hand.

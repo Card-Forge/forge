@@ -1,7 +1,7 @@
 Name:Might of the Nephilim
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +2/+2 until end of turn for each of its colors.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +2/+2 until end of turn for each of its colors.
 SVar:X:Targeted$CardNumColors/Times.2
 AI:RemoveDeck:All
 Oracle:Target creature gets +2/+2 until end of turn for each of its colors.

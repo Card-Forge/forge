@@ -1,6 +1,6 @@
 Name:Migration Path
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 2 | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 2 | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 K:Cycling:2
 Oracle:Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,7 +1,7 @@
 Name:Minamo's Meddling
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDisCard | RememberSplicedOntoCounteredSpell$ True | SpellDescription$ Counter target spell. That spell's controller reveals their hand, then discards each card with the same name as a card spliced onto that spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDisCard | RememberSplicedOntoCounteredSpell$ True | SpellDescription$ Counter target spell. That spell's controller reveals their hand, then discards each card with the same name as a card spliced onto that spell.
 SVar:DBDisCard:DB$ Discard | Defined$ TargetedController | DiscardValid$ Card.sharesNameWith Remembered | Mode$ RevealDiscardAll | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Counter target spell. That spell's controller reveals their hand, then discards each card with the same name as a card spliced onto that spell.

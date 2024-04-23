@@ -2,7 +2,7 @@ Name:Mind's Desire
 ManaCost:4 U U
 Types:Sorcery
 K:Storm
-A:SP$ Shuffle | Cost$ 4 U U | SubAbility$ DBExile | AILogic$ Always | SpellDescription$ Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
+A:SP$ Shuffle | SubAbility$ DBExile | AILogic$ Always | SpellDescription$ Shuffle your library. Then exile the top card of your library. Until end of turn, you may play that card without paying its mana cost.
 SVar:DBExile:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.

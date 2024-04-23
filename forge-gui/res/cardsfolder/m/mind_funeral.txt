@@ -1,5 +1,5 @@
 Name:Mind Funeral
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 1 U B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Amount$ 4 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | IsCurse$ True | SpellDescription$ Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard.
+A:SP$ DigUntil | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Amount$ 4 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | IsCurse$ True | SpellDescription$ Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard.
 Oracle:Target opponent reveals cards from the top of their library until four land cards are revealed. That player puts all cards revealed this way into their graveyard.
