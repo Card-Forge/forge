@@ -1,7 +1,7 @@
 Name:March from the Tomb
 ManaCost:3 W B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ 8 | ValidTgts$ Creature.Ally+YouCtrl | TgtPrompt$ Select target Ally creature card in your graveyard. | SpellDescription$ Return any number of target Ally creature cards with total mana value 8 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ 8 | ValidTgts$ Creature.Ally+YouCtrl | TgtPrompt$ Select target Ally creature card in your graveyard. | SpellDescription$ Return any number of target Ally creature cards with total mana value 8 or less from your graveyard to the battlefield.
 SVar:X:Count$ValidGraveyard Creature.Ally+YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Type$Ally

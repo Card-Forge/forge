@@ -1,6 +1,6 @@
 Name:Master Warcraft
 ManaCost:2 RW RW
 Types:Instant
-A:SP$ DeclareCombatants | Cost$ 2 RW RW | DeclareAttackers$ True | DeclareBlockers$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | Until$ EndOfTurn | SpellDescription$ Cast this spell only before attackers are declared. You choose which creatures attack this turn. You choose which creatures block this turn and how those creatures block.
+A:SP$ DeclareCombatants | DeclareAttackers$ True | DeclareBlockers$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | Until$ EndOfTurn | SpellDescription$ Cast this spell only before attackers are declared. You choose which creatures attack this turn. You choose which creatures block this turn and how those creatures block.
 AI:RemoveDeck:All
 Oracle:Cast this spell only before attackers are declared.\nYou choose which creatures attack this turn.\nYou choose which creatures block this turn and how those creatures block.

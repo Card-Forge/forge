@@ -1,5 +1,5 @@
 Name:Marrow Shards
 ManaCost:WP
 Types:Instant
-A:SP$ DamageAll | Cost$ WP | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | NumDmg$ 1 | AIPhyrexianPayment$ Never | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
+A:SP$ DamageAll | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | NumDmg$ 1 | AIPhyrexianPayment$ Never | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
 Oracle:({W/P} can be paid with either {W} or 2 life.)\nMarrow Shards deals 1 damage to each attacking creature.

@@ -1,6 +1,6 @@
 Name:Make Mischief
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 1 damage to any target. Create a 1/1 red Devil creature token. It has "When this creature dies, it deals 1 damage to any target."
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 1 damage to any target. Create a 1/1 red Devil creature token. It has "When this creature dies, it deals 1 damage to any target."
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You
 Oracle:Make Mischief deals 1 damage to any target. Create a 1/1 red Devil creature token. It has "When this creature dies, it deals 1 damage to any target."

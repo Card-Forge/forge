@@ -1,6 +1,6 @@
 Name:Mascot Exhibition
 ManaCost:7
 Types:Sorcery Lesson
-A:SP$ Token | Cost$ 7 | TokenAmount$ 1 | TokenScript$ wb_2_1_inkling_flying,rw_3_2_spirit,ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create a 2/1 white and black Inkling creature token with flying, a 3/2 red and white Spirit creature token, and a 4/4 blue and red Elemental creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ wb_2_1_inkling_flying,rw_3_2_spirit,ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create a 2/1 white and black Inkling creature token with flying, a 3/2 red and white Spirit creature token, and a 4/4 blue and red Elemental creature token.
 DeckHas:Ability$Token
 Oracle:Create a 2/1 white and black Inkling creature token with flying, a 3/2 red and white Spirit creature token, and a 4/4 blue and red Elemental creature token.

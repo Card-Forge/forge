@@ -1,5 +1,5 @@
 Name:Marsh Gas
 ManaCost:B
 Types:Instant
-A:SP$ PumpAll | Cost$ B | ValidCards$ Creature | IsCurse$ True | NumAtt$ -2 | SpellDescription$ All creatures get -2/-0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | IsCurse$ True | NumAtt$ -2 | SpellDescription$ All creatures get -2/-0 until end of turn.
 Oracle:All creatures get -2/-0 until end of turn.

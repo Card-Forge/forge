@@ -1,7 +1,7 @@
 Name:Makeshift Mannequin
 ManaCost:3 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ MANNEQUIN | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ MANNEQUIN | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MannequinStatic | Duration$ Permanent | SubAbility$ DBCleanup | ForgetOnMoved$ Battlefield | ForgetCounter$ MANNEQUIN
 SVar:MannequinStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddTrigger$ MannequinBecomesTarget | Description$ For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
 SVar:MannequinBecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ MakeshiftSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
