@@ -1,7 +1,7 @@
 Name:Postmortem Lunge
 ManaCost:X BP
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X BP | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQX | TgtPrompt$ Choose target creature with mana value equal to X. | SubAbility$ DBHaste | AILogic$ BeforeCombat | SpellDescription$ Return target creature card with mana value X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQX | TgtPrompt$ Choose target creature with mana value equal to X. | SubAbility$ DBHaste | AILogic$ BeforeCombat | SpellDescription$ Return target creature card with mana value X from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
 SVar:DBHaste:DB$ Animate | Defined$ Targeted | Keywords$ Haste | Duration$ Permanent | AtEOT$ Exile
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

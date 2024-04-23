@@ -1,7 +1,7 @@
 Name:Provoke the Trolls
 ManaCost:3 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 3 damage to any target. If a creature is dealt damage this way, it gets +5/+0 until end of turn. | StackDescription$ SpellDescription
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | RememberDamaged$ True | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 3 damage to any target. If a creature is dealt damage this way, it gets +5/+0 until end of turn. | StackDescription$ SpellDescription
 SVar:DBPump:DB$ Pump | Defined$ Remembered.Creature | NumAtt$ +5 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Provoke the Trolls deals 3 damage to any target. If a creature is dealt damage this way, it gets +5/+0 until end of turn.

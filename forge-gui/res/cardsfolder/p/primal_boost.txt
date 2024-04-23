@@ -2,7 +2,7 @@ Name:Primal Boost
 ManaCost:2 G
 Types:Instant
 K:Cycling:2 G
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
 T:Mode$ Cycled | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ When you cycle CARDNAME, you may have target creature get +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
 Oracle:Target creature gets +4/+4 until end of turn.\nCycling {2}{G} ({2}{G}, Discard this card: Draw a card.)\nWhen you cycle Primal Boost, you may have target creature get +1/+1 until end of turn.

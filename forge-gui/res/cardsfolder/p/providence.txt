@@ -6,5 +6,5 @@ SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ SetLifeOnUpkeep |
 SVar:SetLifeOnUpkeep:DB$ Effect | Triggers$ TrigSetLife
 SVar:TrigSetLife:Mode$ Phase | Phase$ Upkeep | Execute$ EffSetLife | OneOff$ True | TriggerDescription$ At the beginning of the first upkeep, your life total becomes 26.
 SVar:EffSetLife:DB$ SetLife | LifeAmount$ 26 | Defined$ You
-A:SP$ SetLife | Cost$ 5 W W | LifeAmount$ 26 | Defined$ You | SpellDescription$ Your life total becomes 26.
+A:SP$ SetLife | LifeAmount$ 26 | Defined$ You | SpellDescription$ Your life total becomes 26.
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.\nYour life total becomes 26.

@@ -2,7 +2,7 @@ Name:Probe
 ManaCost:2 U
 Types:Sorcery
 K:Kicker:1 B
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ DBDiscardYou | SpellDescription$ Draw three cards,
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscardYou | SpellDescription$ Draw three cards,
 SVar:DBDiscardYou:DB$ Discard | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscardTarget | Mode$ TgtChoose | SpellDescription$ then discard two cards.
 SVar:DBDiscardTarget:DB$ Discard | Condition$ Kicked | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ If CARDNAME was kicked, target player discards two cards.
 DeckHints:Color$Black

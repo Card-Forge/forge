@@ -1,6 +1,6 @@
 Name:Psychic Barrier
 ManaCost:U U
 Types:Instant
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDrain | SpellDescription$ Counter target creature spell. Its controller loses 1 life.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDrain | SpellDescription$ Counter target creature spell. Its controller loses 1 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 1
 Oracle:Counter target creature spell. Its controller loses 1 life.

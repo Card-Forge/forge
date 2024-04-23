@@ -1,7 +1,7 @@
 Name:Primal Might
 ManaCost:X G
 Types:Sorcery
-A:SP$ Pump | Cost$ X G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | NumDef$ +X | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X | NumDef$ +X | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +X/+X until end of turn. Then it fights up to one target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control
 SVar:X:Count$xPaid
 SVar:PlayMain1:TRUE

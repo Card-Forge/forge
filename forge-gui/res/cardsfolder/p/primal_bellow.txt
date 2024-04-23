@@ -1,6 +1,6 @@
 Name:Primal Bellow
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each Forest you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each Forest you control.
 SVar:X:Count$TypeYouCtrl.Forest
 Oracle:Target creature gets +1/+1 until end of turn for each Forest you control.
