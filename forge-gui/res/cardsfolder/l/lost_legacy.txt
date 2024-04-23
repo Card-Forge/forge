@@ -1,7 +1,7 @@
 Name:Lost Legacy
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ NameCard | Cost$ 1 B B | Defined$ You | ValidCards$ Card.nonLand+nonArtifact | ValidDescription$ nonartifact, nonland | SubAbility$ ExileHand | SpellDescription$ Choose a nonartifact, nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. | StackDescription$ SpellDescription
+A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonLand+nonArtifact | ValidDescription$ nonartifact, nonland | SubAbility$ ExileHand | SpellDescription$ Choose a nonartifact, nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. | StackDescription$ SpellDescription
 SVar:ExileHand:DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player | RememberTargets$ True | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | RememberChanged$ True | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | SubAbility$ ExileYard | StackDescription$ None
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.NamedCard | ChangeNum$ NumInYard | Chooser$ You | Hidden$ True | SubAbility$ Draw | StackDescription$ None

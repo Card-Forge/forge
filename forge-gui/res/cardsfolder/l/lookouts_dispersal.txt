@@ -2,5 +2,5 @@ Name:Lookout's Dispersal
 ManaCost:2 U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Pirate.YouCtrl | Description$ This spell costs {1} less to cast if you control a Pirate.
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays {4}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays {4}.
 Oracle:This spell costs {1} less to cast if you control a Pirate.\nCounter target spell unless its controller pays {4}.

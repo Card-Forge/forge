@@ -1,6 +1,6 @@
 Name:Lose Hope
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBScry | SpellDescription$ Target creature gets -1/-1 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBScry | SpellDescription$ Target creature gets -1/-1 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Target creature gets -1/-1 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

@@ -4,6 +4,6 @@ Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ XGrave | Relative$ True | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a creature whose player has eight or more cards in their graveyard.
 SVar:XGrave:Count$Compare CheckTgt GE8.3.0
 SVar:CheckTgt:TargetedController$CardsInGraveyard
-A:SP$ GainControl | Cost$ X U U U | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X.
+A:SP$ GainControl | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | SpellDescription$ Gain control of target creature with mana value X.
 SVar:X:Count$xPaid
 Oracle:This spell costs {3} less to cast if it targets a creature whose controller has eight or more cards in their graveyard.\nGain control of target creature with mana value X.
