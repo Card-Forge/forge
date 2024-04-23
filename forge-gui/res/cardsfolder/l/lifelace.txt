@@ -1,7 +1,7 @@
 Name:Lifelace
 ManaCost:G
 Types:Instant
-A:SP$ Animate | Cost$ G | Colors$ Green | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes green. (Mana symbols on that permanent remain unchanged.)
+A:SP$ Animate | Colors$ Green | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes green. (Mana symbols on that permanent remain unchanged.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Target spell or permanent becomes green. (Mana symbols on that permanent remain unchanged.)

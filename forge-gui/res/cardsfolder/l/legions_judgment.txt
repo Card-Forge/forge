@@ -1,5 +1,5 @@
 Name:Legion's Judgment
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 Oracle:Destroy target creature with power 4 or greater.

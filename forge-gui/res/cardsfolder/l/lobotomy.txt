@@ -1,7 +1,7 @@
 Name:Lobotomy
 ManaCost:2 U B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 U B | ValidTgts$ Player | SubAbility$ ChooseCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand,
+A:SP$ RevealHand | ValidTgts$ Player | SubAbility$ ChooseCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand,
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.nonBasic+TargetedPlayerCtrl+inZoneHand | ChoiceZone$ Hand | SubAbility$ ExileYard | RememberChosen$ True | ForgetOtherTargets$ True | SpellDescription$ then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles.
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Targeted | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | AlreadyRevealed$ True | StackDescription$ None

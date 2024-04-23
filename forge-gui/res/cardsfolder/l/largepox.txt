@@ -1,7 +1,7 @@
 Name:Largepox
 ManaCost:B B B B
 Types:Sorcery
-A:SP$ Discard | Cost$ B B B B | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBLoseLife | SpellDescription$ Each player discards a card, then loses 1 life, then sacrifices an artifact, a creature, an enchantment, a land, a planeswalker, and a tribal permanent, then exiles a card from their graveyard, then puts the top card of their library into their graveyard, then removes a counter from a permanent they control, then gets a poison counter.
+A:SP$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBLoseLife | SpellDescription$ Each player discards a card, then loses 1 life, then sacrifices an artifact, a creature, an enchantment, a land, a planeswalker, and a tribal permanent, then exiles a card from their graveyard, then puts the top card of their library into their graveyard, then removes a counter from a permanent they control, then gets a poison counter.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 1 | AILifeThreshold$ 1 | SubAbility$ DBSacArtifact
 SVar:DBSacArtifact:DB$ Sacrifice | SacValid$ Artifact | Defined$ Player | SubAbility$ DBSacCreature
 SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SubAbility$ DBSacEnchantment
