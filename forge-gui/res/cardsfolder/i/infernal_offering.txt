@@ -1,7 +1,7 @@
 Name:Infernal Offering
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChoosePlayer | Cost$ 4 B | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBSac | SpellDescription$ Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards. Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield.
+A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBSac | SpellDescription$ Choose an opponent. You and that player each sacrifice a creature. Each player who sacrificed a creature this way draws two cards. Choose an opponent. Return a creature card from your graveyard to the battlefield, then that player returns a creature card from their graveyard to the battlefield.
 SVar:DBSac:DB$ Sacrifice | Defined$ .Chosen,You | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ .Chosen,You | RepeatSubAbility$ DBDraw | SubAbility$ DBChoose
 SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1

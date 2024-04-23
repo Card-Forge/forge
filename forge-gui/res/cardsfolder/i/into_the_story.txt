@@ -3,5 +3,5 @@ ManaCost:5 U U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE7 | Description$ CARDNAME costs {3} less to cast if an opponent has seven or more cards in their graveyard.
 SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
-A:SP$ Draw | Cost$ 5 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
 Oracle:This spell costs {3} less to cast if an opponent has seven or more cards in their graveyard.\nDraw four cards.

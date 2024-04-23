@@ -1,6 +1,6 @@
 Name:Inaction Injunction
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | SubAbility$ DBDraw | SpellDescription$ Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | Duration$ UntilYourNextTurn | SubAbility$ DBDraw | SpellDescription$ Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)\nDraw a card.

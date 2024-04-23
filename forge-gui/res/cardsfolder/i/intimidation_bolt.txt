@@ -1,7 +1,7 @@
 Name:Intimidation Bolt
 ManaCost:1 R W
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 3 damage to target creature. Other creatures can't attack this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DBPumpAll | SpellDescription$ CARDNAME deals 3 damage to target creature. Other creatures can't attack this turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.Creature+Other | KW$ HIDDEN CARDNAME can't attack.
 AI:RemoveDeck:All
 Oracle:Intimidation Bolt deals 3 damage to target creature. Other creatures can't attack this turn.

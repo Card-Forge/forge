@@ -1,5 +1,5 @@
 Name:Infuriate
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +2 | SpellDescription$ Target creature gets +3/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +2 | SpellDescription$ Target creature gets +3/+2 until end of turn.
 Oracle:Target creature gets +3/+2 until end of turn.
