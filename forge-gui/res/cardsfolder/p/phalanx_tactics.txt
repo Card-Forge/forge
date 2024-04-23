@@ -1,6 +1,6 @@
 Name:Phalanx Tactics
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | TgtPrompt$ Select target creature you control | SubAbility$ DBPumpAll | SpellDescription$ Target creature you control gets +2/+1 until end of turn. Each other creature you control gets +1/+1 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | TgtPrompt$ Select target creature you control | SubAbility$ DBPumpAll | SpellDescription$ Target creature you control gets +2/+1 until end of turn. Each other creature you control gets +1/+1 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.Other+YouCtrl+Creature | NumAtt$ +1 | NumDef$ +1
 Oracle:Target creature you control gets +2/+1 until end of turn. Each other creature you control gets +1/+1 until end of turn.

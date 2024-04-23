@@ -1,5 +1,5 @@
 Name:Pierce the Sky
 ManaCost:1 G
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature with flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature with flying.
 Oracle:Pierce the Sky deals 7 damage to target creature with flying.

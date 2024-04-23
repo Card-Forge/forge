@@ -1,6 +1,6 @@
 Name:Pharika's Cure
 ManaCost:B B
 Types:Instant
-A:SP$ DealDamage | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to target creature and you gain 2 life.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to target creature and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Pharika's Cure deals 2 damage to target creature and you gain 2 life.

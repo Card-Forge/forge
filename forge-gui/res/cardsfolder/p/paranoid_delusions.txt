@@ -2,7 +2,7 @@ Name:Paranoid Delusions
 ManaCost:U B
 Types:Sorcery
 K:Cipher
-A:SP$ Mill | Cost$ U B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ Cipher | SpellDescription$ Target player mills three cards.
+A:SP$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ Cipher | SpellDescription$ Target player mills three cards.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 Oracle:Target player mills three cards.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

@@ -1,7 +1,7 @@
 Name:Pale Moon
 ManaCost:1 U
 Types:Instant
-A:SP$ Effect | Cost$ 1 U | ReplacementEffects$ ReplaceColorless | SpellDescription$ Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.
+A:SP$ Effect | ReplacementEffects$ ReplaceColorless | SpellDescription$ Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.
 SVar:ReplaceColorless:Event$ ProduceMana | ActiveZones$ Command | ValidCard$ Land.nonBasic | ReplaceWith$ ProduceColorless | Description$ If a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.
 SVar:ProduceColorless:DB$ ReplaceMana | ReplaceType$ C
 AI:RemoveDeck:All

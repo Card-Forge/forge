@@ -1,7 +1,7 @@
 Name:Perilous Predicament
 ManaCost:4 B
 Types:Instant
-A:SP$ RepeatEach | Cost$ 4 B | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBSacAll | SpellDescription$ Each opponent sacrifices an artifact creature and a nonartifact creature.
+A:SP$ RepeatEach | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBSacAll | SpellDescription$ Each opponent sacrifices an artifact creature and a nonartifact creature.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.Artifact+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | ChoiceTitle$ Choose target artifact creature | AILogic$ WorstCard | SubAbility$ DBChoose2
 SVar:DBChoose2:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonArtifact+IsNotRemembered+RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | ChoiceTitle$ Choose target nonartifact creature | AILogic$ WorstCard
 SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ DBCleanup

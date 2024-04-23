@@ -1,6 +1,6 @@
 Name:Pistus Strike
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBPoison | SpellDescription$ Destroy target creature with flying. Its controller gets a poison counter.
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBPoison | SpellDescription$ Destroy target creature with flying. Its controller gets a poison counter.
 SVar:DBPoison:DB$ Poison | Defined$ TargetedController | Num$ 1
 Oracle:Destroy target creature with flying. Its controller gets a poison counter.
