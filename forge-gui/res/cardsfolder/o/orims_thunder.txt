@@ -2,7 +2,7 @@ Name:Orim's Thunder
 ManaCost:2 W
 Types:Instant
 K:Kicker:R
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact or enchantment.
 SVar:DBDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | TargetMin$ Y | TargetMax$ Y | SpellDescription$ If CARDNAME was kicked, it deals damage equal to that permanent's mana value to target creature.
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$Kicked.1.0

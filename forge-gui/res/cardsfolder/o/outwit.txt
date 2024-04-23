@@ -1,5 +1,5 @@
 Name:Outwit
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Player | SpellDescription$ Counter target spell that targets a player.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Player | SpellDescription$ Counter target spell that targets a player.
 Oracle:Counter target spell that targets a player.

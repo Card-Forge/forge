@@ -1,7 +1,7 @@
 Name:Ojutai's Command
 ManaCost:2 W U
 Types:Instant
-A:SP$ Charm | Cost$ 2 W U | Choices$ DBReturn,DBGainLife,DBCounter,DBDraw | CharmNum$ 2
+A:SP$ Charm | Choices$ DBReturn,DBGainLife,DBCounter,DBDraw | CharmNum$ 2
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | TgtPrompt$ Select target creature card with mana value 2 or less | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.

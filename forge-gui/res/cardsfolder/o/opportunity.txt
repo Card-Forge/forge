@@ -1,5 +1,5 @@
 Name:Opportunity
 ManaCost:4 U U
 Types:Instant
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws four cards.
+A:SP$ Draw | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws four cards.
 Oracle:Target player draws four cards.

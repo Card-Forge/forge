@@ -1,6 +1,6 @@
 Name:Offering to Asha
 ManaCost:2 W U
 Types:Instant
-A:SP$ Counter | Cost$ 2 W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SubAbility$ DBGainLife | SpellDescription$ Counter target spell unless its controller pays {4}. You gain 4 life.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SubAbility$ DBGainLife | SpellDescription$ Counter target spell unless its controller pays {4}. You gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 Oracle:Counter target spell unless its controller pays {4}. You gain 4 life.
