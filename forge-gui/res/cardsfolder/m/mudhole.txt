@@ -1,6 +1,6 @@
 Name:Mudhole
 ManaCost:2 R
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Land | SpellDescription$ Target player exiles all land cards from their graveyard.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Land | SpellDescription$ Target player exiles all land cards from their graveyard.
 AI:RemoveDeck:Random
 Oracle:Target player exiles all land cards from their graveyard.

@@ -1,7 +1,7 @@
 Name:Mythos of Illuna
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 2 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | ConditionManaNotSpent$ R G | SubAbility$ CopyFight | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of target permanent. If {R}{G} was spent to cast this spell, instead create a token that's a copy of that permanent, except the token has "When this permanent enters the battlefield, if it's a creature, it fights up to one target creature you don't control."
+A:SP$ CopyPermanent | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | ConditionManaNotSpent$ R G | SubAbility$ CopyFight | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of target permanent. If {R}{G} was spent to cast this spell, instead create a token that's a copy of that permanent, except the token has "When this permanent enters the battlefield, if it's a creature, it fights up to one target creature you don't control."
 SVar:CopyFight:DB$ CopyPermanent | Defined$ Targeted | ConditionManaSpent$ R G | AddTriggers$ TrigChange | AddSVars$ TrigFight,TrigChange | StackDescription$ None
 SVar:TrigChange:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, if it's a creature, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1

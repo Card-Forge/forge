@@ -3,5 +3,5 @@ ManaCost:2 B G
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2} less to cast if you gained life this turn.
 SVar:X:Count$LifeYouGainedThisTurn
-A:SP$ Destroy | Cost$ 2 B G | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.
 Oracle:This spell costs {2} less to cast if you gained life this turn.\nDestroy target nonland permanent.

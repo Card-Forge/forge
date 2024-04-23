@@ -1,7 +1,7 @@
 Name:Moonlace
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes colorless.
+A:SP$ Animate | Colors$ Colorless | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes colorless.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Target spell or permanent becomes colorless.

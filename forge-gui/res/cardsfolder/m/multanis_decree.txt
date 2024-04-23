@@ -1,7 +1,7 @@
 Name:Multani's Decree
 ManaCost:3 G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Enchantment | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Remembered$Amount/Twice
 Oracle:Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.

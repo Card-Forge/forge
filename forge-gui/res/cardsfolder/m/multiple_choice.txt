@@ -1,7 +1,7 @@
 Name:Multiple Choice
 ManaCost:X U
 Types:Sorcery
-A:SP$ Scry | Cost$ X U | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBDraw | AILogic$ MultipleChoice | AICheckCanPlayWithDefinedX$ True | StackDescription$ SpellDescription | SpellDescription$ If X is 1, scry 1,
+A:SP$ Scry | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBDraw | AILogic$ MultipleChoice | AICheckCanPlayWithDefinedX$ True | StackDescription$ SpellDescription | SpellDescription$ If X is 1, scry 1,
 SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBChoosePlayer | StackDescription$ SpellDescription | SpellDescription$ then draw a card.
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player | Optional$ True | AILogic$ Curse | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ If X is 2, you may choose a player.
 SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ ChosenPlayer | Chooser$ ChosenPlayer | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.ChosenCtrl | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ2 | OrOtherConditionSVarCompare$ GE4 | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ They return a creature they control to its owner's hand.

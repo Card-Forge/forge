@@ -1,7 +1,7 @@
 Name:Mystic Confluence
 ManaCost:3 U U
 Types:Instant
-A:SP$ Charm | Cost$ 3 U U | Choices$ DBCounter,DBReturn,DBDraw | CharmNum$ 3 | CanRepeatModes$ True
+A:SP$ Charm | Choices$ DBCounter,DBReturn,DBDraw | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ 3 | UnlessPayer$ ThisTargetedController | SpellDescription$ Counter target spell unless its controller pays {3}.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Return target creature to its owner's hand.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.

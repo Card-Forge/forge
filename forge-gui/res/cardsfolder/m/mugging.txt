@@ -1,7 +1,7 @@
 Name:Mugging
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBPumpCurse | SpellDescription$ CARDNAME deals 2 damage to target creature. That creature can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | SubAbility$ DBPumpCurse | SpellDescription$ CARDNAME deals 2 damage to target creature. That creature can't block this turn.
 SVar:DBPumpCurse:DB$ Pump | Defined$ Targeted | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
 SVar:PlayMain1:TRUE
 Oracle:Mugging deals 2 damage to target creature. That creature can't block this turn.
