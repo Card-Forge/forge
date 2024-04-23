@@ -1,5 +1,5 @@
 Name:Pyretic Ritual
 ManaCost:1 R
 Types:Instant
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
+A:SP$ Mana | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
 Oracle:Add {R}{R}{R}.
