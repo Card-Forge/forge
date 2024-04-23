@@ -1,7 +1,7 @@
 Name:Invoke the Firemind
 ManaCost:X U U R
 Types:Sorcery
-A:SP$ Charm | Cost$ X U U R | Choices$ DBDraw,DBDmg | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDraw,DBDmg | CharmNum$ 1
 SVar:DBDraw:DB$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid

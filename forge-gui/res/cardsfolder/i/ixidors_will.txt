@@ -1,7 +1,7 @@
 Name:Ixidor's Will
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {2} for each Wizard on the battlefield.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {2} for each Wizard on the battlefield.
 SVar:Y:Count$TypeYouCtrl.Wizard/Twice
 AI:RemoveDeck:Random
 Oracle:Counter target spell unless its controller pays {2} for each Wizard on the battlefield.

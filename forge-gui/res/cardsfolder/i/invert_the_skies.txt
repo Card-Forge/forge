@@ -1,7 +1,7 @@
 Name:Invert the Skies
 ManaCost:3 GU
 Types:Instant
-A:SP$ AnimateAll | Cost$ 3 GU | ValidCards$ Creature.OppCtrl | RemoveKeywords$ Flying | ConditionManaSpent$ G | SubAbility$ UPaid | SpellDescription$ Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell, and creatures you control gain flying until end of turn if {U} was spent to cast this spell. (Do both if {G}{U} was spent.)
+A:SP$ AnimateAll | ValidCards$ Creature.OppCtrl | RemoveKeywords$ Flying | ConditionManaSpent$ G | SubAbility$ UPaid | SpellDescription$ Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell, and creatures you control gain flying until end of turn if {U} was spent to cast this spell. (Do both if {G}{U} was spent.)
 SVar:UPaid:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Flying | ConditionManaSpent$ U
 AI:RemoveDeck:All
 Oracle:Creatures your opponents control lose flying until end of turn if {G} was spent to cast this spell, and creatures you control gain flying until end of turn if {U} was spent to cast this spell. (Do both if {G}{U} was spent.)

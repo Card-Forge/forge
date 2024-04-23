@@ -1,5 +1,5 @@
 Name:Isolate
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W | ValidTgts$ Permanent.cmcEQ1 | TgtPrompt$ Select target permanent with mana value 1 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent with mana value 1.
+A:SP$ ChangeZone | ValidTgts$ Permanent.cmcEQ1 | TgtPrompt$ Select target permanent with mana value 1 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent with mana value 1.
 Oracle:Exile target permanent with mana value 1.
