@@ -2,7 +2,7 @@ Name:Reweave
 ManaCost:5 U
 Types:Instant Arcane
 K:Splice:Arcane:2 U U
-A:SP$ Destroy | Cost$ 5 U | ValidTgts$ Permanent | Sacrifice$ True | SubAbility$ DBDigUntil | RememberLKI$ True | StackDescription$ {p:TargetedController} destroys {c:Targeted}. If {p:TargetedController} does, | SpellDescription$ Target permanent's controller sacrifices it. If the player does, they reveal cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, put that card onto the battlefield, then shuffle.
+A:SP$ Destroy | ValidTgts$ Permanent | Sacrifice$ True | SubAbility$ DBDigUntil | RememberLKI$ True | StackDescription$ {p:TargetedController} destroys {c:Targeted}. If {p:TargetedController} does, | SpellDescription$ Target permanent's controller sacrifices it. If the player does, they reveal cards from the top of their library until they reveal a permanent card that shares a card type with the sacrificed permanent, put that card onto the battlefield, then shuffle.
 SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | Valid$ Permanent.sharesCardTypeWith RememberedLKI | ValidDescription$ permanent card that shares a card type with the sacrificed permanent | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True | StackDescription$ they reveal cards from the top of their library until they reveal a permanent card that shares a card type with {c:Targeted}, put that card onto the battlefield, then shuffle their library. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

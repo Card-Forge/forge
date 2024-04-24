@@ -1,7 +1,7 @@
 Name:Rip Apart
 ManaCost:R W
 Types:Sorcery
-A:SP$ Charm | Cost$ R W | Choices$ DBDmg,DBDestroy
+A:SP$ Charm | Choices$ DBDmg,DBDestroy
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Choose one —\n• Rip Apart deals 3 damage to target creature or planeswalker.\n• Destroy target artifact or enchantment.

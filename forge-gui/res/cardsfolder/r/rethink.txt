@@ -1,6 +1,6 @@
 Name:Rethink
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays {X}, where X is its mana value.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ X | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays {X}, where X is its mana value.
 SVar:X:Targeted$CardManaCost
 Oracle:Counter target spell unless its controller pays {X}, where X is its mana value.

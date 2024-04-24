@@ -1,5 +1,5 @@
 Name:Rise of the Dark Realms
 ManaCost:7 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 7 B B | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
 Oracle:Put all creature cards from all graveyards onto the battlefield under your control.
