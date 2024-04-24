@@ -1,7 +1,7 @@
 Name:Weird Harvest
 ManaCost:X G G
 Types:Sorcery
-A:SP$ ChangeZone | Optional$ True | Cost$ X G G | Origin$ Library | Destination$ Hand | DefinedPlayer$ Player | ChangeType$ Card.Creature | Reveal$ True | ShuffleNonMandatory$ True | ChangeNum$ X | SpellDescription$ Each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | DefinedPlayer$ Player | ChangeType$ Card.Creature | Reveal$ True | Optional$ True | ShuffleNonMandatory$ True | ChangeNum$ X | SpellDescription$ Each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Each player may search their library for up to X creature cards, reveal those cards, put them into their hand, then shuffle.

@@ -1,6 +1,6 @@
 Name:Wing Shards
 ManaCost:1 W W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 W W | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ Creature | SpellDescription$ Target player sacrifices an attacking creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ Creature | SpellDescription$ Target player sacrifices an attacking creature.
 K:Storm
 Oracle:Target player sacrifices an attacking creature.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

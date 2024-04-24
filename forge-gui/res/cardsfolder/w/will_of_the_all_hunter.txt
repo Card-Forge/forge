@@ -1,7 +1,7 @@
 Name:Will of the All-Hunter
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's blocking, instead put two +1/+1 counters on it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's blocking, instead put two +1/+1 counters on it.
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ PutCounter | FalseSubAbility$ Pump
 SVar:PutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 2
 SVar:Pump:DB$ Pump | Defined$ Targeted | NumAtt$ 2 | NumDef$ 2

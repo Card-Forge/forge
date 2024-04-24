@@ -1,6 +1,6 @@
 Name:Wallop
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Creature.Blue+withFlying,Creature.Black+withFlying | TgtPrompt$ Select target blue or black creature with flying | SpellDescription$ Destroy target blue or black creature with flying.
+A:SP$ Destroy | ValidTgts$ Creature.Blue+withFlying,Creature.Black+withFlying | TgtPrompt$ Select target blue or black creature with flying | SpellDescription$ Destroy target blue or black creature with flying.
 AI:RemoveDeck:Random
 Oracle:Destroy target blue or black creature with flying.

@@ -1,5 +1,5 @@
 Name:Windborne Charge
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 W W | TargetMin$ 2 | TargetMax$ 2 | KW$ Flying | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Two target creatures you control each get +2/+2 and gain flying until end of turn.
+A:SP$ Pump | TargetMin$ 2 | TargetMax$ 2 | KW$ Flying | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Two target creatures you control each get +2/+2 and gain flying until end of turn.
 Oracle:Two target creatures you control each get +2/+2 and gain flying until end of turn.
