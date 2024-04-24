@@ -1,6 +1,6 @@
 Name:Selective Snare
 ManaCost:X U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U | AnnounceType$ CreatureType | AILogic$ MostProminentOppControls | ValidTgts$ Creature.ChosenType | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures of the chosen creature type | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return X target creatures of the creature type of your choice to their owner's hand.
+A:SP$ ChangeZone | AnnounceType$ CreatureType | AILogic$ MostProminentOppControls | ValidTgts$ Creature.ChosenType | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures of the chosen creature type | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return X target creatures of the creature type of your choice to their owner's hand.
 SVar:X:Count$xPaid
 Oracle:Return X target creatures of the creature type of your choice to their owner's hand.

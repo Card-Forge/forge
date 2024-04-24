@@ -1,6 +1,6 @@
 Name:Second Harvest
 ManaCost:2 G G
 Types:Instant
-A:SP$ CopyPermanent | Cost$ 2 G G | Defined$ Valid Permanent.token+YouCtrl | AILogic$ DuplicatePerms | SpellDescription$ For each token you control, create a token that's a copy of that permanent.
+A:SP$ CopyPermanent | Defined$ Valid Permanent.token+YouCtrl | AILogic$ DuplicatePerms | SpellDescription$ For each token you control, create a token that's a copy of that permanent.
 AI:RemoveDeck:Random
 Oracle:For each token you control, create a token that's a copy of that permanent.

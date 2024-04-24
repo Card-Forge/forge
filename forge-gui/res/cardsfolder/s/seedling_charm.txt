@@ -1,7 +1,7 @@
 Name:Seedling Charm
 ManaCost:G
 Types:Instant
-A:SP$ Charm | Cost$ G | Choices$ DBChangeZone,DBRegen,DBPump | CharmNum$ 1
+A:SP$ Charm | Choices$ DBChangeZone,DBRegen,DBPump | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Aura attached to a creature to its owner's hand.
 SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature. | SpellDescription$ Regenerate target green creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.

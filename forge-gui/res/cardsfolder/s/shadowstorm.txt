@@ -1,6 +1,6 @@
 Name:Shadowstorm
 ManaCost:R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ R | NumDmg$ 2 | ValidCards$ Creature.withShadow | ValidDescription$ each creature with shadow. | SpellDescription$ CARDNAME deals 2 damage to each creature with shadow.
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.withShadow | ValidDescription$ each creature with shadow. | SpellDescription$ CARDNAME deals 2 damage to each creature with shadow.
 AI:RemoveDeck:Random
 Oracle:Shadowstorm deals 2 damage to each creature with shadow.

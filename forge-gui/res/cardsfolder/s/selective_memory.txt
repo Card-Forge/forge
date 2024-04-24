@@ -1,7 +1,7 @@
 Name:Selective Memory
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U | Origin$ Library | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ XFetch | SpellDescription$ Search your library for any number of nonland cards, exile them, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ XFetch | SpellDescription$ Search your library for any number of nonland cards, exile them, then shuffle.
 SVar:XFetch:Count$InYourLibrary
 AI:RemoveDeck:Random
 Oracle:Search your library for any number of nonland cards, exile them, then shuffle.

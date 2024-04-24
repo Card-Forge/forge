@@ -1,6 +1,6 @@
 Name:Sheltering Light
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SubAbility$ DBScry | SpellDescription$ Target creature gains indestructible until end of turn. Scry 1. (Damage and effects that say "destroy" don't destroy the creature.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SubAbility$ DBScry | SpellDescription$ Target creature gains indestructible until end of turn. Scry 1. (Damage and effects that say "destroy" don't destroy the creature.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Target creature gains indestructible until end of turn. Scry 1. (Damage and effects that say "destroy" don't destroy the creature.)

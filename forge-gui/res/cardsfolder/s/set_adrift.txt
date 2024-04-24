@@ -2,6 +2,6 @@ Name:Set Adrift
 ManaCost:5 U
 Types:Sorcery
 K:Delve
-A:SP$ ChangeZone | Cost$ 5 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
 DeckHints:Ability$Graveyard
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nPut target nonland permanent on top of its owner's library.

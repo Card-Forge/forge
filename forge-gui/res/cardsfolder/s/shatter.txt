@@ -1,5 +1,5 @@
 Name:Shatter
 ManaCost:1 R
 Types:Instant
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 Oracle:Destroy target artifact.

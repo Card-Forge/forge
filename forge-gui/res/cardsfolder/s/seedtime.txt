@@ -1,7 +1,7 @@
 Name:Seedtime
 ManaCost:1 G
 Types:Instant
-A:SP$ AddTurn | Cost$ 1 G | NumTurns$ 1 | PlayerTurn$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Cast this spell only during your turn. Take an extra turn after this one if an opponent cast a blue spell this turn.
+A:SP$ AddTurn | NumTurns$ 1 | PlayerTurn$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Cast this spell only during your turn. Take an extra turn after this one if an opponent cast a blue spell this turn.
 SVar:X:Count$ThisTurnCast_Card.Blue+OppCtrl
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Shatterskull Smashing
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | NumDmg$ Y | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 2 | DividedAsYouChoose$ Y | TgtPrompt$ Select up to two target creatures and/or planeswalkers | SpellDescription$ CARDNAME deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, CARDNAME deals twice X damage divided as you choose among them instead.
+A:SP$ DealDamage | NumDmg$ Y | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 2 | DividedAsYouChoose$ Y | TgtPrompt$ Select up to two target creatures and/or planeswalkers | SpellDescription$ CARDNAME deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, CARDNAME deals twice X damage divided as you choose among them instead.
 SVar:X:Count$xPaid
 SVar:Y:Count$Compare X LT6.X.Z
 SVar:Z:Count$xPaid/Twice

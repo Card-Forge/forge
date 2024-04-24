@@ -1,7 +1,7 @@
 Name:Seed Spark
 ManaCost:3 W
 Types:Instant
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ MakeToken | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ MakeToken | SpellDescription$ Destroy target artifact or enchantment.
 SVar:MakeToken:DB$ Token | ConditionManaSpent$ G | TokenAmount$ 2 | TokenOwner$ You | TokenScript$ g_1_1_saproling | SpellDescription$ If {G} was spent to cast CARDNAME, create two 1/1 green Saproling creature tokens.
 SVar:ManaNeededToAvoidNegativeEffect:green
 AI:RemoveDeck:Random
