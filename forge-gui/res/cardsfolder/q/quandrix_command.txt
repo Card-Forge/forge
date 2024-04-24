@@ -1,7 +1,7 @@
 Name:Quandrix Command
 ManaCost:1 G U
 Types:Instant
-A:SP$ Charm | Cost$ 1 G U | Choices$ DBBounce,DBAnnul,DBCounters,DBBlessing | CharmNum$ 2
+A:SP$ Charm | Choices$ DBBounce,DBAnnul,DBCounters,DBBlessing | CharmNum$ 2
 SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target creature or planeswalker | SpellDescription$ Return target creature or planeswalker to its owner's hand.
 SVar:DBAnnul:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target artifact or enchantment spell | ValidTgts$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
 SVar:DBCounters:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
