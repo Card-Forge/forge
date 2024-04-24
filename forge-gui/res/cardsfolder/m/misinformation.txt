@@ -1,6 +1,6 @@
 Name:Misinformation
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in opponent's graveyard | ValidTgts$ Card.OppOwn | TargetMin$ 0 | TargetMax$ 3 | Chooser$ You | SpellDescription$ Put up to three target cards from an opponent's graveyard on top of their library in any order.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in opponent's graveyard | ValidTgts$ Card.OppOwn | TargetMin$ 0 | TargetMax$ 3 | Chooser$ You | SpellDescription$ Put up to three target cards from an opponent's graveyard on top of their library in any order.
 AI:RemoveDeck:All
 Oracle:Put up to three target cards from an opponent's graveyard on top of their library in any order.

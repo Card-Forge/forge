@@ -1,6 +1,6 @@
 Name:Might of the Masses
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each creature you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 Oracle:Target creature gets +1/+1 until end of turn for each creature you control.

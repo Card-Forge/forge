@@ -1,6 +1,6 @@
 Name:Metal Fatigue
 ManaCost:2 W
 Types:Instant
-A:SP$ TapAll | Cost$ 2 W | ValidCards$ Artifact | SpellDescription$ Tap all artifacts.
+A:SP$ TapAll | ValidCards$ Artifact | SpellDescription$ Tap all artifacts.
 AI:RemoveDeck:Random
 Oracle:Tap all artifacts.

@@ -1,7 +1,7 @@
 Name:Moment of Truth
 ManaCost:1 U
 Types:Instant
-A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ 1 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBDig | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library. | StackDescription$ SpellDescription
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBDig | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library. | StackDescription$ SpellDescription
 SVar:DBDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Graveyard | NoLooking$ True | StackDescription$ None
 DeckHints:Ability$Graveyard
 Oracle:Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library.

@@ -1,5 +1,5 @@
 Name:Mischief and Mayhem
 ManaCost:4 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 G | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +4 | NumDef$ +4 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +4/+4 until end of turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +4 | NumDef$ +4 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +4/+4 until end of turn.
 Oracle:Up to two target creatures each get +4/+4 until end of turn.

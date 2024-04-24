@@ -1,7 +1,7 @@
 Name:Mnemonic Deluge
 ManaCost:6 U U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 6 U U U | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery card in a graveyard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target instant or sorcery card from a graveyard. Copy that card three times. You may cast the copies without paying their mana costs. Exile CARDNAME.
+A:SP$ ChangeZone | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery card in a graveyard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target instant or sorcery card from a graveyard. Copy that card three times. You may cast the copies without paying their mana costs. Exile CARDNAME.
 SVar:DBPlay:DB$ Play | Defined$ Remembered | CopyCard$ True | Amount$ 3 | AllowRepeats$ True | Controller$ You | Optional$ True | WithoutManaCost$ True | ValidSA$ Spell | SubAbility$ DBExile | StackDescription$ Copy it three times. {p:You} may cast the copies without paying their mana cost.
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

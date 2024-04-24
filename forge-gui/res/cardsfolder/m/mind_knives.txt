@@ -1,5 +1,5 @@
 Name:Mind Knives
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random.
 Oracle:Target opponent discards a card at random.
