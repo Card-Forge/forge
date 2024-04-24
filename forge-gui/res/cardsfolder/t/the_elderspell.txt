@@ -1,7 +1,7 @@
 Name:The Elderspell
 ManaCost:B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBPutLoyalty | RememberDestroyed$ True | SpellDescription$ Destroy any number of target planeswalkers. Choose a planeswalker you control. Put two loyalty counters on it for each planeswalker destroyed this way.
+A:SP$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBPutLoyalty | RememberDestroyed$ True | SpellDescription$ Destroy any number of target planeswalkers. Choose a planeswalker you control. Put two loyalty counters on it for each planeswalker destroyed this way.
 SVar:DBPutLoyalty:DB$ PutCounter | Choices$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTargets:Count$Valid Planeswalker

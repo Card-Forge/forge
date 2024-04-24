@@ -1,7 +1,7 @@
 Name:Tangletrap
 ManaCost:1 G
 Types:Instant
-A:SP$ Charm | Cost$ 1 G | Choices$ DBDmg1,DBDestroy
+A:SP$ Charm | Choices$ DBDmg1,DBDestroy
 SVar:DBDmg1:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature with flying.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Tangletrap deals 5 damage to target creature with flying.\n• Destroy target artifact.

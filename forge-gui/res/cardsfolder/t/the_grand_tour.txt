@@ -1,7 +1,7 @@
 Name:The Grand Tour
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonToken | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nontoken permanent | RememberTargets$ True | SubAbility$ DBHand | SpellDescription$ Exile target permanent,
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonToken | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nontoken permanent | RememberTargets$ True | SubAbility$ DBHand | SpellDescription$ Exile target permanent,
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBDiscard | SpellDescription$ then put it into its owner's hand.
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ RememberedOwner | DefinedCards$ Remembered | SubAbility$ DBLibrary | SpellDescription$ That player discards that card,
 SVar:DBLibrary:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | Defined$ Remembered | SubAbility$ DBReturn | SpellDescription$ then puts it on top of their library.

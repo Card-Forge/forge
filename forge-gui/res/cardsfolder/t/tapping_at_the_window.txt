@@ -2,6 +2,6 @@ Name:Tapping at the Window
 ManaCost:1 G
 Types:Sorcery
 K:Flashback:2 G
-A:SP$ Dig | Cost$ 1 G | DigNum$ 3 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Hand | DestinationZone2$ Graveyard | ForceRevealToController$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest into your graveyard.
+A:SP$ Dig | DigNum$ 3 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Hand | DestinationZone2$ Graveyard | ForceRevealToController$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest into your graveyard.
 DeckHas:Ability$Graveyard
 Oracle:Look at the top three cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest into your graveyard.\nFlashback {2}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

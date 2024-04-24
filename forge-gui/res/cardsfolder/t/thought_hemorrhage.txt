@@ -1,7 +1,7 @@
 Name:Thought Hemorrhage
 ManaCost:2 B R
 Types:Sorcery
-A:SP$ NameCard | Cost$ 2 B R | ValidCards$ Card.nonLand | SubAbility$ DBReveal | ValidDescription$ nonland | SpellDescription$ Choose a nonland card name. Target player reveals their hand. CARDNAME deals 3 damage to that player for each card with the chosen name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library.
+A:SP$ NameCard | ValidCards$ Card.nonLand | SubAbility$ DBReveal | ValidDescription$ nonland | SpellDescription$ Choose a nonland card name. Target player reveals their hand. CARDNAME deals 3 damage to that player for each card with the chosen name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library.
 SVar:DBReveal:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ ExileYard
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Targeted | ChangeType$ Card.NamedCard | SubAbility$ ExileHand | StackDescription$ None
