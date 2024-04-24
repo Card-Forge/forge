@@ -1,7 +1,7 @@
 Name:You See a Pair of Goblins
 ManaCost:2 R
 Types:Instant
-A:SP$ Charm | Cost$ 2 R | Choices$ ChargeThem,BefriendThem
+A:SP$ Charm | Choices$ ChargeThem,BefriendThem
 SVar:ChargeThem:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Charge Them — Creatures you control get +2/+0 until end of turn.
 SVar:BefriendThem:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ Befriend Them — Create two 1/1 red Goblin creature tokens.
 Oracle:Choose one —\n• Charge Them — Creatures you control get +2/+0 until end of turn.\n• Befriend Them — Create two 1/1 red Goblin creature tokens.

@@ -1,7 +1,7 @@
 Name:Undercity's Embrace
 ManaCost:2 B
 Types:Instant
-A:SP$ Sacrifice | Cost$ 2 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBGainLife | SpellDescription$ Target opponent sacrifices a creature. If you control a creature with power 4 or greater, you gain 4 life. | StackDescription$ SpellDescription
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBGainLife | SpellDescription$ Target opponent sacrifices a creature. If you control a creature with power 4 or greater, you gain 4 life. | StackDescription$ SpellDescription
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | Defined$ You | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | StackDescription$ If you control a creature with power 4 or greater, you gain 4 life.
 DeckHas:Ability$LifeGain
 Oracle:Target opponent sacrifices a creature. If you control a creature with power 4 or greater, you gain 4 life.

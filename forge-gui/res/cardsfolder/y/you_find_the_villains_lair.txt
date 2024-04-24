@@ -1,7 +1,7 @@
 Name:You Find the Villains' Lair
 ManaCost:1 U U
 Types:Instant
-A:SP$ Charm | Cost$ 1 U U | Choices$ DBCounter,DBDraw
+A:SP$ Charm | Choices$ DBCounter,DBDraw
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Foil Their Scheme — Counter target spell.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Learn Their Secrets — Draw two cards, then discard two cards.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose

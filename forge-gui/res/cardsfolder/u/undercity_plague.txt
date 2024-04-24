@@ -2,7 +2,7 @@ Name:Undercity Plague
 ManaCost:4 B B
 Types:Sorcery
 K:Cipher
-A:SP$ LoseLife | Cost$ 4 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBDiscard | SpellDescription$ Target player loses 1 life, discards a card, then sacrifices a permanent.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 1 | SubAbility$ DBDiscard | SpellDescription$ Target player loses 1 life, discards a card, then sacrifices a permanent.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBSacPermanent
 SVar:DBSacPermanent:DB$ Sacrifice | Defined$ Targeted | SacValid$ Permanent | Amount$ 1 | SubAbility$ Cipher
 SVar:Cipher:DB$ Encode | Defined$ Self

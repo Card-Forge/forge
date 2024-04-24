@@ -1,6 +1,6 @@
 Name:Unlicensed Disintegration
 ManaCost:1 B R
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamageController | SpellDescription$ Destroy target creature. If you control an artifact, CARDNAME deals 3 damage to that creature's controller. | StackDescription$ SpellDescription
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamageController | SpellDescription$ Destroy target creature. If you control an artifact, CARDNAME deals 3 damage to that creature's controller. | StackDescription$ SpellDescription
 SVar:DBDamageController:DB$ DealDamage | Defined$ ParentTargetedController | NumDmg$ 3 | ConditionPresent$ Artifact.YouCtrl | StackDescription$ None
 Oracle:Destroy target creature. If you control an artifact, Unlicensed Disintegration deals 3 damage to that creature's controller.

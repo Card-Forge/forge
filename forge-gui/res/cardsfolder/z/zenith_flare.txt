@@ -1,7 +1,7 @@
 Name:Zenith Flare
 ManaCost:2 R W
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R W | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of cards with a cycling ability in your graveyard.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of cards with a cycling ability in your graveyard.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$ValidGraveyard Card.YouOwn+withCycling,Card.YouOwn+withTypeCycling
 DeckHas:Ability$LifeGain

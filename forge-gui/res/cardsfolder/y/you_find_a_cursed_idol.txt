@@ -1,7 +1,7 @@
 Name:You Find a Cursed Idol
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 G | Choices$ SmashIt,LiftTheCurse,StealItsEyes
+A:SP$ Charm | Choices$ SmashIt,LiftTheCurse,StealItsEyes
 SVar:SmashIt:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Smash It — Destroy target artifact.
 SVar:LiftTheCurse:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Lift the Curse — Destroy target enchantment.
 SVar:StealItsEyes:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBVenture | SpellDescription$ Steal Its Eyes — Create a Treasure token and venture into the dungeon. (Enter the first room or advance to the next room.)

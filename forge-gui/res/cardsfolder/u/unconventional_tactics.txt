@@ -1,7 +1,7 @@
 Name:Unconventional Tactics
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Flying | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Flying | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Zombie+YouCtrl | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Zombie enters the battlefield under your control, you may pay {W}. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigChange:AB$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Hand
 DeckHints:Type$Zombie

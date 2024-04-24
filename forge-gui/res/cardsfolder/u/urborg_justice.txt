@@ -1,6 +1,6 @@
 Name:Urborg Justice
 ManaCost:B B
 Types:Instant
-A:SP$ Sacrifice | Cost$ B B | ValidTgts$ Opponent | Amount$ X | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
+A:SP$ Sacrifice | ValidTgts$ Opponent | Amount$ X | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouOwn
 Oracle:Target opponent sacrifices a creature for each creature put into your graveyard from the battlefield this turn.
