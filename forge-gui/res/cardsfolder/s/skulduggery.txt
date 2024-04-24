@@ -1,6 +1,6 @@
 Name:Skulduggery
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | StackDescription$ None | SubAbility$ DBPump2 | SpellDescription$ Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | StackDescription$ None | SubAbility$ DBPump2 | SpellDescription$ Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls to get -1/-1 | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | StackDescription$ None
 Oracle:Until end of turn, target creature you control gets +1/+1 and target creature an opponent controls gets -1/-1.

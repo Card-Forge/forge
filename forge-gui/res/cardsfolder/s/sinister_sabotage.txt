@@ -1,7 +1,7 @@
 Name:Sinister Sabotage
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Subability$ DBSurveil | SpellDescription$ Counter target spell. Surveil 1 (Look at the top card of your library. You may put that card into your graveyard.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Subability$ DBSurveil | SpellDescription$ Counter target spell. Surveil 1 (Look at the top card of your library. You may put that card into your graveyard.)
 SVar:DBSurveil:DB$ Surveil | Amount$ 1
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Counter target spell.\nSurveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

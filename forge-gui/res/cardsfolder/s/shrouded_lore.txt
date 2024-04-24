@@ -1,7 +1,7 @@
 Name:Shrouded Lore
 ManaCost:B
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ B | ValidTgts$ Opponent | ChoiceZone$ Graveyard | Choices$ Card.YouOwn | AILogic$ WorstCard | Mandatory$ True | RememberChosen$ True | SubAbility$ DBRepeat | SpellDescription$ Target opponent chooses a card in your graveyard. You may pay {B}. If you do, repeat this process except that opponent can't choose a card already chosen for CARDNAME. Then put the last chosen card into your hand.
+A:SP$ ChooseCard | ValidTgts$ Opponent | ChoiceZone$ Graveyard | Choices$ Card.YouOwn | AILogic$ WorstCard | Mandatory$ True | RememberChosen$ True | SubAbility$ DBRepeat | SpellDescription$ Target opponent chooses a card in your graveyard. You may pay {B}. If you do, repeat this process except that opponent can't choose a card already chosen for CARDNAME. Then put the last chosen card into your hand.
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBChooseAgain | ConditionCheckSVar$ ChoiceNum | ConditionSVarCompare$ GE1 | SubAbility$ DBMoveChosen | RepeatCheckSVar$ CheckRepeat | RepeatSVarCompare$ GT0 | StackDescription$ You may pay B. If you do, repeat this process except that opponent can't choose a card already chosen for CARDNAME.
 SVar:DBChooseAgain:DB$ ChooseCard | Defined$ ParentTarget | ChoiceZone$ Graveyard | Choices$ Card.YouOwn+IsNotRemembered | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | UnlessCost$ B | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBStoreSVar | ShowCurrentCard$ ChosenCard
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckNotPaid | Type$ Number | Expression$ 0

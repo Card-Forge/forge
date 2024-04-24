@@ -1,6 +1,6 @@
 Name:Shocking Grasp
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -2/-0 until end of turn. Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -2/-0 until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Target creature gets -2/-0 until end of turn.\nDraw a card.

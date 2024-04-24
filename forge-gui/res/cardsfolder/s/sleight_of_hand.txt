@@ -1,5 +1,5 @@
 Name:Sleight of Hand
 ManaCost:U
 Types:Sorcery
-A:SP$ Dig | Cost$ U | DigNum$ 2 | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+A:SP$ Dig | DigNum$ 2 | NoReveal$ True | SpellDescription$ Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 Oracle:Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.

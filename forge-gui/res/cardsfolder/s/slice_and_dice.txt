@@ -2,7 +2,7 @@ Name:Slice and Dice
 ManaCost:4 R R
 Types:Sorcery
 K:Cycling:2 R
-A:SP$ DamageAll | Cost$ 4 R R | NumDmg$ 4 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 4 damage to each creature.
+A:SP$ DamageAll | NumDmg$ 4 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 4 damage to each creature.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamageAll | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have it deal 1 damage to each creature.
 SVar:TrigDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidDescription$ each creature.
 Oracle:Slice and Dice deals 4 damage to each creature.\nCycling {2}{R} ({2}{R}, Discard this card: Draw a card.)\nWhen you cycle Slice and Dice, you may have it deal 1 damage to each creature.

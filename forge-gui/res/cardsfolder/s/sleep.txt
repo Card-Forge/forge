@@ -1,6 +1,6 @@
 Name:Sleep
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ TapAll | Cost$ 2 U U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.
+A:SP$ TapAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | SubAbility$ DBPumpAll | SpellDescription$ Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.
 SVar:DBPumpAll:DB$ PumpAll | Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 Oracle:Tap all creatures target player controls. Those creatures don't untap during that player's next untap step.

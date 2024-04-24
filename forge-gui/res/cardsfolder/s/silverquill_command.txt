@@ -1,7 +1,7 @@
 Name:Silverquill Command
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 W B | Choices$ DBPump,DBReturn,DBDraw,SacCreature | CharmNum$ 2
+A:SP$ Charm | Choices$ DBPump,DBReturn,DBDraw,SacCreature | CharmNum$ 2
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouOwn | TgtPrompt$ Select target creature card with mana value 2 or less | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 SVar:DBDraw:DB$ Draw | ValidTgts$ Player | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ Target player draws a card and loses 1 life.

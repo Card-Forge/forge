@@ -2,6 +2,6 @@ Name:Shivan Fire
 ManaCost:R
 Types:Instant
 K:Kicker:4
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to target creature. If CARDNAME was kicked, it deals 4 damage instead.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ WasKicked | SpellDescription$ CARDNAME deals 2 damage to target creature. If CARDNAME was kicked, it deals 4 damage instead.
 SVar:WasKicked:Count$Kicked.4.2
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nShivan Fire deals 2 damage to target creature. If this spell was kicked, it deals 4 damage instead.

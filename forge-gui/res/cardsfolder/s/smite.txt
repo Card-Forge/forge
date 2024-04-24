@@ -1,6 +1,6 @@
 Name:Smite
 ManaCost:W
 Types:Instant
-A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | SpellDescription$ Destroy target blocked creature.
+A:SP$ Destroy | ValidTgts$ Creature.blocked | TgtPrompt$ Select target blocked creature | SpellDescription$ Destroy target blocked creature.
 AI:RemoveDeck:All
 Oracle:Destroy target blocked creature.

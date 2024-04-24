@@ -1,6 +1,6 @@
 Name:Skyreaping
 ManaCost:1 G
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 G | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | SpellDescription$ CARDNAME deals damage to each creature with flying equal to your devotion to green.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | SpellDescription$ CARDNAME deals damage to each creature with flying equal to your devotion to green.
 SVar:X:Count$Devotion.Green
 Oracle:Skyreaping deals damage to each creature with flying equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

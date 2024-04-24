@@ -1,7 +1,7 @@
 Name:Silumgar's Command
 ManaCost:3 U B
 Types:Instant
-A:SP$ Charm | Cost$ 3 U B | Choices$ DBCounter,DBReturn,DBPump,DBDestroy | CharmNum$ 2
+A:SP$ Charm | Choices$ DBCounter,DBReturn,DBPump,DBDestroy | CharmNum$ 2
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | TgtPrompt$ Select target creature | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
