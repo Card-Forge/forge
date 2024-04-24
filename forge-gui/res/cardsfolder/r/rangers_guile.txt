@@ -1,5 +1,5 @@
 Name:Ranger's Guile
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +1 | KW$ Hexproof | SpellDescription$ Target creature you control gets +1/+1 and gains hexproof until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | NumDef$ +1 | KW$ Hexproof | SpellDescription$ Target creature you control gets +1/+1 and gains hexproof until end of turn.
 Oracle:Target creature you control gets +1/+1 and gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

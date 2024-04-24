@@ -2,7 +2,7 @@ Name:Rapid Fire
 ManaCost:3 W
 Types:Instant
 Text:Cast this spell only before blockers are declared.
-A:SP$ Pump | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | ActivationPhases$ Upkeep->Declare Attackers | ActivationFirstCombat$ True | SubAbility$ DBPump | SpellDescription$ Target creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever the creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | ActivationPhases$ Upkeep->Declare Attackers | ActivationFirstCombat$ True | SubAbility$ DBPump | SpellDescription$ Target creature gains first strike until end of turn. If it doesn't have rampage, that creature gains rampage 2 until end of turn. (Whenever the creature becomes blocked, it gets +2/+2 until end of turn for each creature blocking it beyond the first.)
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Rampage:2 | ConditionDefined$ Targeted | ConditionPresent$ Creature.withoutRampage
 AI:RemoveDeck:All
 DeckHas:Keyword$FirstStrike|Rampage

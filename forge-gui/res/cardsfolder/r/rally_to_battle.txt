@@ -1,6 +1,6 @@
 Name:Rally to Battle
 ManaCost:3 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+3 until end of turn. Untap them.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+3 until end of turn. Untap them.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 Oracle:Creatures you control get +1/+3 until end of turn. Untap them.

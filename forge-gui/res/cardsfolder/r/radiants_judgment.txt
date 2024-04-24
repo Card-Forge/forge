@@ -1,6 +1,6 @@
 Name:Radiant's Judgment
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 K:Cycling:2
 Oracle:Destroy target creature with power 4 or greater.\nCycling {2} ({2}, Discard this card: Draw a card.)

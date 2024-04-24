@@ -1,7 +1,7 @@
 Name:Reap Intellect
 ManaCost:X 2 U B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X 2 U B | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | IsCurse$ True | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Target opponent reveals their hand. You choose up to X nonland cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles their library.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ X | IsCurse$ True | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Target opponent reveals their hand. You choose up to X nonland cards from among them. Search that player's library, hand and graveyard for cards with the same name as those cards and exile them. Then, that player shuffles their library.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Exile | RepeatSubAbility$ ExileYard | SubAbility$ DBCleanup
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ NumInYard | Chooser$ You | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedPlayer | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None

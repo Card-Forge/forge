@@ -1,5 +1,5 @@
 Name:Rain of Salt
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy two target lands.
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy two target lands.
 Oracle:Destroy two target lands.

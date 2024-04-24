@@ -1,7 +1,7 @@
 Name:Rain of Filth
 ManaCost:B
 Types:Instant
-A:SP$ AnimateAll | Cost$ B | ValidCards$ Land.YouCtrl | Abilities$ ABMana | SpellDescription$ Until end of turn, lands you control gain "Sacrifice this land: Add {B}."
+A:SP$ AnimateAll | ValidCards$ Land.YouCtrl | Abilities$ ABMana | SpellDescription$ Until end of turn, lands you control gain "Sacrifice this land: Add {B}."
 SVar:ABMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ B | SpellDescription$ Add {B}.
 AI:RemoveDeck:All
 Oracle:Until end of turn, lands you control gain "Sacrifice this land: Add {B}."

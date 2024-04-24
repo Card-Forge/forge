@@ -1,6 +1,6 @@
 Name:Ravnica at War
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 W | ChangeType$ Permanent.MultiColor | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all multicolored permanents.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.MultiColor | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all multicolored permanents.
 AI:RemoveDeck:Random
 Oracle:Exile all multicolored permanents.

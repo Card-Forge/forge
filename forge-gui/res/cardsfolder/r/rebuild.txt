@@ -1,6 +1,6 @@
 Name:Rebuild
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 U | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts to their owners' hands.
 K:Cycling:2
 Oracle:Return all artifacts to their owners' hands.\nCycling {2} ({2}, Discard this card: Draw a card.)
