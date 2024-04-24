@@ -1,5 +1,5 @@
 Name:Ruinous Ultimatum
 ManaCost:R R W W W B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ R R W W W B B | ValidCards$ Permanent.nonLand+OppCtrl | SpellDescription$ Destroy all nonland permanents your opponents control.
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand+OppCtrl | SpellDescription$ Destroy all nonland permanents your opponents control.
 Oracle:Destroy all nonland permanents your opponents control.

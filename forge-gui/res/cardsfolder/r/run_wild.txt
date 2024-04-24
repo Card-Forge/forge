@@ -1,7 +1,7 @@
 Name:Run Wild
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gains trample and "{G}: Regenerate this creature."
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gains trample and "{G}: Regenerate this creature."
 SVar:DBAnimate:DB$ Animate | Abilities$ ABRegenerate | Defined$ Targeted
 SVar:ABRegenerate:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 Oracle:Until end of turn, target creature gains trample and "{G}: Regenerate this creature."

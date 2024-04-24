@@ -2,7 +2,7 @@ Name:Rousing Refrain
 ManaCost:3 R R
 Types:Sorcery
 K:Suspend:3:1 R
-A:SP$ Mana | Cost$ 3 R R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBMana | AILogic$ ManaRitual | Produced$ R | Amount$ Z | PersistentMana$ True | Defined$ You | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, you don't lose this mana as steps and phases end.
+A:SP$ Mana | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBMana | AILogic$ ManaRitual | Produced$ R | Amount$ Z | PersistentMana$ True | Defined$ You | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, you don't lose this mana as steps and phases end.
 SVar:Z:TargetedPlayer$CardsInHand
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3 | SpellDescription$ Exile CARDNAME with three time counters on it.
 Oracle:Add {R} for each card in target opponent's hand. Until end of turn, you don't lose this mana as steps and phases end. Exile Rousing Refrain with three time counters on it.\nSuspend 3—{1}{R} (Rather than cast this card from your hand, you may pay {1}{R} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
