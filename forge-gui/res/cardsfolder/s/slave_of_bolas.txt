@@ -1,7 +1,7 @@
 Name:Slave of Bolas
 ManaCost:3 UR B
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 UR B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | SubAbility$ DBPump | SpellDescription$ Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | SubAbility$ DBPump | SpellDescription$ Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | AtEOT$ Sacrifice
 SVar:PlayMain1:TRUE
 Oracle:Gain control of target creature. Untap that creature. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.

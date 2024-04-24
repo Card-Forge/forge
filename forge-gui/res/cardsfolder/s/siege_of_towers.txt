@@ -2,5 +2,5 @@ Name:Siege of Towers
 ManaCost:1 R
 Types:Sorcery
 K:Replicate:1 R
-A:SP$ Animate | Cost$ 1 R | ValidTgts$ Mountain | Power$ 3 | Toughness$ 1 | Types$ Creature | Duration$ Permanent | SpellDescription$ Target Mountain becomes a 3/1 creature. It's still a land.
+A:SP$ Animate | ValidTgts$ Mountain | Power$ 3 | Toughness$ 1 | Types$ Creature | Duration$ Permanent | SpellDescription$ Target Mountain becomes a 3/1 creature. It's still a land.
 Oracle:Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTarget Mountain becomes a 3/1 creature. It's still a land.

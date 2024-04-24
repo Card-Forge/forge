@@ -1,7 +1,7 @@
 Name:Smallpox
 ManaCost:B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ B B | Defined$ Player | LifeAmount$ 1 | AILifeThreshold$ 1 | SpellDescription$ Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land. | SubAbility$ DBDiscard
+A:SP$ LoseLife | Defined$ Player | LifeAmount$ 1 | AILifeThreshold$ 1 | SpellDescription$ Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBSacCreature
 SVar:DBSacCreature:DB$ Sacrifice | SacValid$ Creature | Defined$ Player | SubAbility$ DBSacLand
 SVar:DBSacLand:DB$ Sacrifice | SacValid$ Land | Defined$ Player
