@@ -1,5 +1,5 @@
 Name:Shadow of the Grave
 ManaCost:1 B
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 B | ChangeType$ Card.YouOwn+DiscardedThisTurn | Origin$ Graveyard | Destination$ Hand | AILogic$ RetDiscardedThisTurn | SpellDescription$ Return to your hand all cards in your graveyard that you cycled or discarded this turn.
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouOwn+DiscardedThisTurn | Origin$ Graveyard | Destination$ Hand | AILogic$ RetDiscardedThisTurn | SpellDescription$ Return to your hand all cards in your graveyard that you cycled or discarded this turn.
 Oracle:Return to your hand all cards in your graveyard that you cycled or discarded this turn.

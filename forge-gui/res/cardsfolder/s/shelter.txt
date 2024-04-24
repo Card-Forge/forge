@@ -1,6 +1,6 @@
 Name:Shelter
 ManaCost:1 W
 Types:Instant
-A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Draw a card.
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBDraw | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.\nDraw a card.

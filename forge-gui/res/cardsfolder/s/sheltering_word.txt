@@ -1,7 +1,7 @@
 Name:Sheltering Word
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ LifeTough | SpellDescription$ Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ LifeTough | SpellDescription$ Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness.
 SVar:LifeTough:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
 Oracle:Target creature you control gains hexproof until end of turn. You gain life equal to that creature's toughness. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

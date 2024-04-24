@@ -1,6 +1,6 @@
 Name:See the Truth
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ X | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. If this spell was cast from anywhere other than your hand, put each of those cards into your hand instead.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ X | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. If this spell was cast from anywhere other than your hand, put each of those cards into your hand instead.
 SVar:X:Count$wasCastFromYourHand.1.3
 Oracle:Look at the top three cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order. If this spell was cast from anywhere other than your hand, put each of those cards into your hand instead.

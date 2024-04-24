@@ -1,6 +1,6 @@
 Name:Serum Visions
 ManaCost:U
 Types:Sorcery
-A:SP$ Draw | Cost$ U | Defined$ You | NumCards$ 1 | SubAbility$ DBScry | SpellDescription$ Draw a card. Scry 2.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBScry | SpellDescription$ Draw a card. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Draw a card. Scry 2.

@@ -1,5 +1,5 @@
 Name:Seek the Horizon
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 3 | SpellDescription$ Search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 3 | SpellDescription$ Search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.
 Oracle:Search your library for up to three basic land cards, reveal them, put them into your hand, then shuffle.

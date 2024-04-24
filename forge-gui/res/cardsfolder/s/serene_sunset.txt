@@ -1,7 +1,7 @@
 Name:Serene Sunset
 ManaCost:X G
 Types:Instant
-A:SP$ Effect | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage X target creatures would deal this turn.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage X target creatures would deal this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage target creatures would deal this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
