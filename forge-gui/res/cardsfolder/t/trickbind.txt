@@ -2,7 +2,7 @@ Name:Trickbind
 ManaCost:1 U
 Types:Instant
 K:Split second
-A:SP$ Counter | Cost$ 1 U | TargetType$ Activated,Triggered | TgtPrompt$ Choose target ability | RememberCountered$ True | ValidTgts$ Card,Emblem | SubAbility$ DBEffect | SpellDescription$ Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn. (Mana abilities can't be targeted.)
+A:SP$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Choose target ability | RememberCountered$ True | ValidTgts$ Card,Emblem | SubAbility$ DBEffect | SpellDescription$ Counter target activated or triggered ability. If a permanent's ability is countered this way, activated abilities of that permanent can't be activated this turn. (Mana abilities can't be targeted.)
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeActivated | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card.inZoneBattlefield | ConditionCompare$ EQ1 | ExileOnMoved$ Battlefield
 SVar:STCantBeActivated:Mode$ CantBeActivated | EffectZone$ Command | ValidCard$ Permanent.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
