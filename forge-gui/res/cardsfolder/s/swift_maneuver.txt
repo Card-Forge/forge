@@ -1,7 +1,7 @@
 Name:Swift Maneuver
 ManaCost:1 W
 Types:Instant
-A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Any | Amount$ 2 | SubAbility$ DelTrigSlowtrip | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn. Draw a card at the beginning of the next turn's upkeep.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ 2 | SubAbility$ DelTrigSlowtrip | SpellDescription$ Prevent the next 2 damage that would be dealt to any target this turn. Draw a card at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Prevent the next 2 damage that would be dealt to any target this turn.\nDraw a card at the beginning of the next turn's upkeep.

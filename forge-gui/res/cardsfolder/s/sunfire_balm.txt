@@ -1,7 +1,7 @@
 Name:Sunfire Balm
 ManaCost:2 W
 Types:Instant
-A:SP$ PreventDamage | Cost$ 2 W | ValidTgts$ Any | Amount$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt to any target this turn.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt to any target this turn.
 K:Cycling:1 W
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPrevent | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may prevent the next 1 damage that would be dealt to any target this turn.
 SVar:TrigPrevent:DB$ PreventDamage | ValidTgts$ Any | Amount$ 1

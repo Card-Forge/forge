@@ -2,5 +2,5 @@ Name:Sudden Edict
 ManaCost:1 B
 Types:Instant
 K:Split second
-A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nTarget player sacrifices a creature.

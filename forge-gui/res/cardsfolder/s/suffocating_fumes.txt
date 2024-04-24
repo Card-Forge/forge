@@ -1,6 +1,6 @@
 Name:Suffocating Fumes
 ManaCost:2 B
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
 K:Cycling:2
 Oracle:Creatures your opponents control get -1/-1 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

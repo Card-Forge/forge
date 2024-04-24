@@ -1,7 +1,7 @@
 Name:Sway of the Stars
 ManaCost:8 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 8 U U | ChangeType$ Card | Origin$ Hand,Graveyard,Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand, graveyard, and all permanents they own into their library, then draws seven cards. Each player's life total becomes 7.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard,Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand, graveyard, and all permanents they own into their library, then draws seven cards. Each player's life total becomes 7.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBSetLife | StackDescription$ None
 SVar:DBSetLife:DB$ SetLife | Defined$ Player | LifeAmount$ 7 | StackDescription$ None
 AI:RemoveDeck:All

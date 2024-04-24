@@ -2,7 +2,7 @@ Name:Swarm Surge
 ManaCost:2 B
 Types:Sorcery
 K:Devoid
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +2/+0 until end of turn. Colorless creatures you control also gain first strike until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +2/+0 until end of turn. Colorless creatures you control also gain first strike until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.Colorless+YouCtrl | KW$ First Strike
 DeckHints:Color$Colorless & Keyword$Devoid
 Oracle:Devoid (This card has no color.)\nCreatures you control get +2/+0 until end of turn. Colorless creatures you control also gain first strike until end of turn.

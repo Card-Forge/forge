@@ -1,6 +1,6 @@
 Name:Swat
 ManaCost:1 B B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ Destroy target creature with power 2 or less.
+A:SP$ Destroy | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ Destroy target creature with power 2 or less.
 K:Cycling:2
 Oracle:Destroy target creature with power 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)

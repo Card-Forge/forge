@@ -1,5 +1,5 @@
 Name:Sunlance
 ManaCost:W
 Types:Sorcery
-A:SP$ DealDamage | Cost$ W | ValidTgts$ Creature.nonWhite | TgtPrompt$ Select target nonwhite Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target nonwhite creature.
+A:SP$ DealDamage | ValidTgts$ Creature.nonWhite | TgtPrompt$ Select target nonwhite Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target nonwhite creature.
 Oracle:Sunlance deals 3 damage to target nonwhite creature.
