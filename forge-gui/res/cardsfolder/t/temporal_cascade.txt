@@ -2,7 +2,7 @@ Name:Temporal Cascade
 ManaCost:5 U U
 Types:Sorcery
 K:Entwine:2
-A:SP$ Charm | Cost$ 5 U U | Choices$ DBChangeZone,DBDraw | CharmNum$ 1
+A:SP$ Charm | Choices$ DBChangeZone,DBDraw | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SpellDescription$ Each player shuffles their hand and graveyard into their library.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SpellDescription$ Each player draws seven cards.
 AI:RemoveDeck:All

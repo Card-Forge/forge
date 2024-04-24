@@ -1,6 +1,6 @@
 Name:Thornado
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 K:Cycling:1 G
 Oracle:Destroy target creature with flying.\nCycling {1}{G} ({1}{G}, Discard this card: Draw a card.)

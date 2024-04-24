@@ -1,6 +1,6 @@
 Name:Thoughtflare
 ManaCost:3 U R
 Types:Instant
-A:SP$ Draw | Cost$ 3 U R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard two cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards, then discard two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Draw four cards, then discard two cards.
