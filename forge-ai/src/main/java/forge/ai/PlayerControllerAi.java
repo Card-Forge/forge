@@ -102,7 +102,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        if (!getAi().getBooleanProperty(AiProps.SIDEBOARDING_ENABLE)
+        if (!brains.getGame().getRules().getAISideboardingEnabled()
             || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
