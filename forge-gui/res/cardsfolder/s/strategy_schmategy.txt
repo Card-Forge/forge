@@ -1,7 +1,7 @@
 Name:Strategy, Schmategy
 ManaCost:1 R
 Types:Sorcery
-A:SP$ StoreSVar | Cost$ 1 R | SVar$ Left | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
+A:SP$ StoreSVar | SVar$ Left | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ Repeat | RepeatCheckSVar$ Left | RepeatSVarCompare$ GT0 | RepeatSubAbility$ Roll | StackDescription$ Roll a six-sided die. CARDNAME has the indicated effect.
 SVar:Roll:DB$ RollDice | ResultSubAbilities$ 1:DBNothing,2:DBArtif,3:DBLand,4:DBDamage,5:DBWheel,6:DBTwoMore | SubAbility$ DBDecr
 SVar:DBNothing:DB$ Pump | SpellDescription$ 1 — Do nothing.

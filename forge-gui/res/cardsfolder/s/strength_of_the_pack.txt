@@ -1,5 +1,5 @@
 Name:Strength of the Pack
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ PutCounterAll | Cost$ 4 G G | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each creature you control.
+A:SP$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each creature you control.
 Oracle:Put two +1/+1 counters on each creature you control.

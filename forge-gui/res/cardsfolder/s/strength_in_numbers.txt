@@ -1,6 +1,6 @@
 Name:Strength in Numbers
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of attacking creatures.

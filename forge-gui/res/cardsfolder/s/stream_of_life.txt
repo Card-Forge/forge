@@ -1,7 +1,7 @@
 Name:Stream of Life
 ManaCost:X G
 Types:Sorcery
-A:SP$ GainLife | Cost$ X G | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
+A:SP$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
 SVar:X:Count$xPaid
 DeckHas:Ability$LifeGain
 Oracle:Target player gains X life.

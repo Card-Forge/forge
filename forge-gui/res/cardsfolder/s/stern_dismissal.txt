@@ -1,5 +1,5 @@
 Name:Stern Dismissal
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target creature or enchantment an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature or enchantment an opponent controls to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target creature or enchantment an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature or enchantment an opponent controls to its owner's hand.
 Oracle:Return target creature or enchantment an opponent controls to its owner's hand.

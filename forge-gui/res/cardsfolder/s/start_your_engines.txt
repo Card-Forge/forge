@@ -1,6 +1,6 @@
 Name:Start Your Engines
 ManaCost:3 R
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ 3 R | Types$ Creature,Artifact | ValidCards$ Vehicle.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Vehicles you control become artifact creatures until end of turn. Creatures you control get +2/+0 until end of turn.
+A:SP$ AnimateAll | Types$ Creature,Artifact | ValidCards$ Vehicle.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Vehicles you control become artifact creatures until end of turn. Creatures you control get +2/+0 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2
 Oracle:Vehicles you control become artifact creatures until end of turn. Creatures you control get +2/+0 until end of turn.

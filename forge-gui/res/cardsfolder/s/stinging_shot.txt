@@ -1,7 +1,7 @@
 Name:Stinging Shot
 ManaCost:G
 Types:Instant
-A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | CounterType$ M1M1 | CounterNum$ 3 | IsCurse$ True | SpellDescription$ Put three -1/-1 counters on target creature with flying.
+A:SP$ PutCounter | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | CounterType$ M1M1 | CounterNum$ 3 | IsCurse$ True | SpellDescription$ Put three -1/-1 counters on target creature with flying.
 K:Cycling:2
 DeckHas:Ability$Counters
 Oracle:Put three -1/-1 counters on target creature with flying.\nCycling {2} ({2}, Discard this card: Draw a card.)
