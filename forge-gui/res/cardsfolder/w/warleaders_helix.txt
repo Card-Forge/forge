@@ -1,6 +1,6 @@
 Name:Warleader's Helix
 ManaCost:2 R W
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R W | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 Oracle:Warleader's Helix deals 4 damage to any target and you gain 4 life.

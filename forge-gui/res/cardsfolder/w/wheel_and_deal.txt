@@ -1,7 +1,7 @@
 Name:Wheel and Deal
 ManaCost:3 U
 Types:Instant
-A:SP$ Discard | Cost$ 3 U | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTgt | Mode$ Hand | SpellDescription$ Any number of target opponents each discard their hands, then draw seven cards. | SubAbility$ DBDrawOpp
+A:SP$ Discard | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTgt | Mode$ Hand | SpellDescription$ Any number of target opponents each discard their hands, then draw seven cards. | SubAbility$ DBDrawOpp
 SVar:DBDrawOpp:DB$ Draw | Defined$ Targeted | NumCards$ 7 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:MaxTgt:PlayerCountPlayers$Amount

@@ -1,7 +1,7 @@
 Name:Wake the Past
 ManaCost:5 R W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 R W | ChangeType$ Artifact.YouOwn | RememberChanged$ True | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBPumpAll | SpellDescription$ Return all artifact cards from your graveyard to the battlefield. They gain haste until end of turn.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact.YouOwn | RememberChanged$ True | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBPumpAll | SpellDescription$ Return all artifact cards from your graveyard to the battlefield. They gain haste until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Return all artifact cards from your graveyard to the battlefield. They gain haste until end of turn.

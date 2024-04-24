@@ -1,7 +1,7 @@
 Name:Wake of Destruction
 ManaCost:3 R R R
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 R R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBWakeofDestructionDestroyThemAll | SpellDescription$ Destroy target land and all other lands with the same name as that land.
+A:SP$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBWakeofDestructionDestroyThemAll | SpellDescription$ Destroy target land and all other lands with the same name as that land.
 SVar:DBWakeofDestructionDestroyThemAll:DB$ DestroyAll | ValidCards$ TargetedCard.Self,Land.NotDefinedTargeted+sharesNameWith Targeted
 AI:RemoveDeck:All
 Oracle:Destroy target land and all other lands with the same name as that land.

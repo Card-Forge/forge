@@ -2,6 +2,6 @@ Name:Whir of Invention
 ManaCost:X U U U
 Types:Instant
 K:Improvise
-A:SP$ ChangeZone | Cost$ X U U U | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle.
 SVar:X:Count$xPaid
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nSearch your library for an artifact card with mana value X or less, put it onto the battlefield, then shuffle.

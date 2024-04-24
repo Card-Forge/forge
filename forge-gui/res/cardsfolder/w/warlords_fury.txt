@@ -1,6 +1,6 @@
 Name:Warlord's Fury
 ManaCost:R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ First Strike | SubAbility$ DBDraw | SpellDescription$ Creatures you control gain first strike until end of turn. Draw a card.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | SubAbility$ DBDraw | SpellDescription$ Creatures you control gain first strike until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Creatures you control gain first strike until end of turn.\nDraw a card.

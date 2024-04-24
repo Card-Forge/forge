@@ -1,6 +1,6 @@
 Name:Winds of Rebuke
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBMill | SpellDescription$ Return target nonland permanent to its owner's hand. Each player mills two cards.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBMill | SpellDescription$ Return target nonland permanent to its owner's hand. Each player mills two cards.
 SVar:DBMill:DB$ Mill | Defined$ Player | NumCards$ 2
 Oracle:Return target nonland permanent to its owner's hand. Each player mills two cards.

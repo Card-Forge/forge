@@ -2,7 +2,7 @@ Name:Wail of the Nim
 ManaCost:2 B
 Types:Instant
 K:Entwine:B
-A:SP$ Charm | Cost$ 2 B | Choices$ DBRegenerate,DBDamageAll | CharmNum$ 1
+A:SP$ Charm | Choices$ DBRegenerate,DBDamageAll | CharmNum$ 1
 SVar:DBRegenerate:DB$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 Oracle:Choose one —\n• Regenerate each creature you control.\n• Wail of the Nim deals 1 damage to each creature and each player.\nEntwine {B} (Choose both if you pay the entwine cost.)

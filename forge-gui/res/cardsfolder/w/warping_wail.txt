@@ -1,7 +1,7 @@
 Name:Warping Wail
 ManaCost:1 C
 Types:Instant
-A:SP$ Charm | Cost$ 1 C | Choices$ DBExile,DBCounter,DBToken
+A:SP$ Charm | Choices$ DBExile,DBCounter,DBToken
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.powerLE1,Creature.toughnessLE1 | TgtPrompt$ Choose target creature with power or toughness 1 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power or toughness 1 or less.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.Sorcery | TgtPrompt$ Counter target sorcery spell | SpellDescription$ Counter target sorcery spell.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."

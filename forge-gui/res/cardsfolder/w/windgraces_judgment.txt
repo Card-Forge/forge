@@ -1,6 +1,6 @@
 Name:Windgrace's Judgment
 ManaCost:3 B G
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B G | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls to destroy. | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For any number of opponents, destroy target nonland permanent that player controls.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls to destroy. | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For any number of opponents, destroy target nonland permanent that player controls.
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:For any number of opponents, destroy target nonland permanent that player controls.
