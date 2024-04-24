@@ -1,7 +1,7 @@
 Name:Wistful Thinking
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards four cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards four cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 4 | Mode$ TgtChoose
 AI:RemoveDeck:All
 Oracle:Target player draws two cards, then discards four cards.

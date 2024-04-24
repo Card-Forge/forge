@@ -2,6 +2,6 @@ Name:Wizard's Retort
 ManaCost:1 U U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Wizard.YouCtrl | Description$ This spell costs {1} less to cast if you control a Wizard.
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 DeckNeeds:Type$Wizard
 Oracle:This spell costs {1} less to cast if you control a Wizard.\nCounter target spell.

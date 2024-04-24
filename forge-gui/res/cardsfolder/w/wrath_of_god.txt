@@ -1,5 +1,5 @@
 Name:Wrath of God
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 Oracle:Destroy all creatures. They can't be regenerated.

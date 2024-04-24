@@ -1,6 +1,6 @@
 Name:Withdraw
 ManaCost:U U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return target creature to its owner's hand. Then return another target creature to its owner's hand unless its controller pays {1}.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return target creature to its owner's hand. Then return another target creature to its owner's hand unless its controller pays {1}.
 SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | Origin$ Battlefield | Destination$ Hand | UnlessCost$ 1 | UnlessPayer$ TargetedController
 Oracle:Return target creature to its owner's hand. Then return another target creature to its owner's hand unless its controller pays {1}.

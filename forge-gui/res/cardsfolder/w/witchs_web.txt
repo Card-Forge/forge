@@ -1,6 +1,6 @@
 Name:Witch's Web
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +3/+3 and gains reach until end of turn. Untap it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +3/+3 and gains reach until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Target creature gets +3/+3 and gains reach until end of turn. Untap it.
