@@ -2,7 +2,7 @@ Name:Worm Harvest
 ManaCost:2 BG BG BG
 Types:Sorcery
 K:Retrace
-A:SP$ Token | Cost$ 2 BG BG BG | TokenAmount$ X | TokenScript$ bg_1_1_worm | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Worm creature token for each land card in your graveyard.
+A:SP$ Token | TokenAmount$ X | TokenScript$ bg_1_1_worm | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Worm creature token for each land card in your graveyard.
 SVar:X:Count$TypeInYourYard.Land
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$ValidGraveyard Land.YouOwn

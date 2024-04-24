@@ -1,7 +1,7 @@
 Name:Write into Being
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U | DigNum$ 2 | ChangeNum$ 1 | NoLooking$ True | RememberChanged$ True | PrimaryPrompt$ Choose a card to Manifest | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBManifest | SpellDescription$ Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.) | StackDescription$ SpellDescription
+A:SP$ Dig | DigNum$ 2 | ChangeNum$ 1 | NoLooking$ True | RememberChanged$ True | PrimaryPrompt$ Choose a card to Manifest | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBManifest | SpellDescription$ Look at the top two cards of your library. Manifest one of those cards, then put the other on the top or bottom of your library. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.) | StackDescription$ SpellDescription
 SVar:DBManifest:DB$ Manifest | Amount$ 1 | Defined$ Remembered | SubAbility$ DBDigRemaining
 SVar:DBDigRemaining:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | NoReveal$ True | NoLooking$ True | Optional$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

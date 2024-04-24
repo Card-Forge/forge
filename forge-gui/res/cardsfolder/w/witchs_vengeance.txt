@@ -1,6 +1,6 @@
 Name:Witch's Vengeance
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 1 B B | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get -3/-3 until end of turn.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentOppControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get -3/-3 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 Oracle:Creatures of the creature type of your choice get -3/-3 until end of turn.
