@@ -286,6 +286,10 @@ public class CombatUtil {
         // If there's a better way of handling this somewhere deeper in the code, feel free to remove
         final SpellAbility fakeSA = new SpellAbility.EmptySa(attacker, attacker.getController());
         fakeSA.setCardState(attacker.getCurrentState());
+        // need to set this for "CostContainsX" restriction
+        fakeSA.setPayCosts(attackCost);
+        // prevent recalculating X
+        fakeSA.setSVar("X", "0");
         return attacker.getController().getController().payManaOptional(attacker, attackCost, fakeSA,
                 "Pay additional cost to declare " + attacker + " an attacker", ManaPaymentPurpose.DeclareAttacker);
     }
@@ -347,6 +351,8 @@ public class CombatUtil {
 
         SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
         fakeSA.setCardState(blocker.getCurrentState());
+        fakeSA.setPayCosts(blockCost);
+        fakeSA.setSVar("X", "0");
         return blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 

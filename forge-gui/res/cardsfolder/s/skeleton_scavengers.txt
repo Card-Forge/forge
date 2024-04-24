@@ -3,9 +3,9 @@ ManaCost:2 B
 Types:Creature Skeleton
 PT:0/0
 K:etbCounter:P1P1:1
-A:AB$ Regenerate | Cost$ X | CostDesc$ Pay {1} for each +1/+1 counter on CARDNAME: | RegenerationAbility$ DBImmediateTrigger | StackDescription$ SpellDescription | SpellDescription$ Regenerate CARDNAME. When it regenerates this way, put a +1/+1 counter on it.
+A:AB$ Regenerate | Cost$ Mana<1\NumTimes> | CostDesc$ Pay {1} for each +1/+1 counter on CARDNAME: | RegenerationAbility$ DBImmediateTrigger | StackDescription$ SpellDescription | SpellDescription$ Regenerate CARDNAME. When it regenerates this way, put a +1/+1 counter on it.
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounter | TriggerDescription$ When it regenerates this way, put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ EffectSource | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ When it regenerates this way, put a +1/+1 counter on it.
-SVar:X:Count$CardCounters.P1P1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ EffectSource | CounterType$ P1P1 | CounterNum$ 1
+SVar:NumTimes:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
 Oracle:Skeleton Scavengers enters the battlefield with a +1/+1 counter on it.\nPay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.

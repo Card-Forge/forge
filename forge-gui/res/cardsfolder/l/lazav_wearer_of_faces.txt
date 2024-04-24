@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Clue.YouCtrl | Execute$ TrigClone | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Clue, you may have NICKNAME become a copy of a creature card exiled with it until end of turn.
-SVar:TrigClone:DB$ Clone | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | Optional$ True
+SVar:TrigClone:DB$ Clone | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | Optional$ True | Duration$ UntilEndOfTurn
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Investigate|Token|Graveyard & Type$Artifact|Clue
 DeckHints:Ability$Graveyard
