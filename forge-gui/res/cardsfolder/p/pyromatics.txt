@@ -2,5 +2,5 @@ Name:Pyromatics
 ManaCost:1 R
 Types:Instant
 K:Replicate:1 R
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nPyromatics deals 1 damage to any target.
