@@ -1,7 +1,7 @@
 Name:Topple the Statue
 ManaCost:2 W
 Types:Instant
-A:SP$ Tap | Cost$ 2 W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDestroyAll | SpellDescription$ Tap target permanent. If it's an artifact, destroy it.
+A:SP$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDestroyAll | SpellDescription$ Tap target permanent. If it's an artifact, destroy it.
 SVar:DBDestroyAll:DB$ Destroy | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Artifact | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Tap target permanent. If it's an artifact, destroy it.\nDraw a card.

@@ -1,5 +1,5 @@
 Name:Tranquility
 ManaCost:2 G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+A:SP$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 Oracle:Destroy all enchantments.

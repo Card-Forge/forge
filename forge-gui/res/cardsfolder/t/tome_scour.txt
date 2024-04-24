@@ -1,5 +1,5 @@
 Name:Tome Scour
 ManaCost:U
 Types:Sorcery
-A:SP$ Mill | Cost$ U | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills five cards.
+A:SP$ Mill | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills five cards.
 Oracle:Target player mills five cards.

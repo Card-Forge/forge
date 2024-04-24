@@ -1,7 +1,7 @@
 Name:Transmute Artifact
 ManaCost:U U
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ U U | SacValid$ Artifact | RememberSacrificed$ True | SpellDescription$ Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle. | SubAbility$ StoreCanSearch | StackDescription$ SpellDescription
+A:SP$ Sacrifice | SacValid$ Artifact | RememberSacrificed$ True | SpellDescription$ Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle. | SubAbility$ StoreCanSearch | StackDescription$ SpellDescription
 SVar:StoreCanSearch:DB$ StoreSVar | SVar$ SackedCMC | Type$ Number | Expression$ -1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ StoreCMC
 SVar:StoreCMC:DB$ StoreSVar | SVar$ SackedCMC | Type$ Calculate | Expression$ Y | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBClear
 SVar:DBClear:DB$ Cleanup | ClearRemembered$ True | SubAbility$ SearchLibrary

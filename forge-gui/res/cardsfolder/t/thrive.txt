@@ -1,6 +1,6 @@
 Name:Thrive
 ManaCost:X G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ X G | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Put a +1/+1 counter on each of X target creatures.
+A:SP$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Put a +1/+1 counter on each of X target creatures.
 SVar:X:Count$xPaid
 Oracle:Put a +1/+1 counter on each of X target creatures.

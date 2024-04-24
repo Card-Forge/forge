@@ -1,6 +1,6 @@
 Name:Transmogrify
 ManaCost:3 R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 R | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | NoRegen$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDig | SpellDescription$ Exile target creature. That creature's controller reveals cards from the top of their library until they reveal a creature card. That player puts that card onto the battlefield, then shuffles the rest into their library.
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | NoRegen$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDig | SpellDescription$ Exile target creature. That creature's controller reveals cards from the top of their library until they reveal a creature card. That player puts that card onto the battlefield, then shuffles the rest into their library.
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
 Oracle:Exile target creature. That creature's controller reveals cards from the top of their library until they reveal a creature card. That player puts that card onto the battlefield, then shuffles the rest into their library.

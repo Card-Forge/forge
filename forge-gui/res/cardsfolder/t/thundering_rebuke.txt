@@ -1,5 +1,5 @@
 Name:Thundering Rebuke
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker.
 Oracle:Thundering Rebuke deals 4 damage to target creature or planeswalker.

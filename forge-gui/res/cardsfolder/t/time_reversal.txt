@@ -1,7 +1,7 @@
 Name:Time Reversal
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBDraw | AILogic$ Timetwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards. Exile CARDNAME.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBDraw | AILogic$ Timetwister | SpellDescription$ Each player shuffles their graveyard and hand into their library, then draws seven cards. Exile CARDNAME.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Each player shuffles their hand and graveyard into their library, then draws seven cards. Exile Time Reversal.

@@ -1,6 +1,6 @@
 Name:Time and Tide
 ManaCost:U U
 Types:Instant
-A:SP$ Phases | Cost$ U U | AllValid$ Creature.hasKeywordPhasing,Card.phasedOutCreature | PhaseInOrOut$ True | SpellDescription$ Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.
+A:SP$ Phases | AllValid$ Creature.hasKeywordPhasing,Card.phasedOutCreature | PhaseInOrOut$ True | SpellDescription$ Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.
 AI:RemoveDeck:All
 Oracle:Simultaneously, all phased-out creatures phase in and all creatures with phasing phase out.
