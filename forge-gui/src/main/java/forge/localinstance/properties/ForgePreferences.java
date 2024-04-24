@@ -205,7 +205,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_SETTINGS ("false"),
         SUBMENU_UTILITIES ("false"),
 
-        MATCH_AI_SIDEBOARDING_MODE("Human for AI"),
+        MATCH_AI_SIDEBOARDING_MODE("Human For AI"),
         MATCH_EXPERIMENTAL_RESTORE("false"),
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
