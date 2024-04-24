@@ -1,5 +1,5 @@
 Name:Premature Burial
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack+EnteredSinceYourLastTurn | TgtPrompt$ Select target nonblack creature that entered the battlefield since your last turn ended | SpellDescription$ Destroy target nonblack creature that entered the battlefield since your last turn ended.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack+EnteredSinceYourLastTurn | TgtPrompt$ Select target nonblack creature that entered the battlefield since your last turn ended | SpellDescription$ Destroy target nonblack creature that entered the battlefield since your last turn ended.
 Oracle:Destroy target nonblack creature that entered the battlefield since your last turn ended.

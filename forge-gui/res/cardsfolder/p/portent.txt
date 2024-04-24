@@ -1,7 +1,7 @@
 Name:Portent
 ManaCost:U
 Types:Sorcery
-A:SP$ RearrangeTopOfLibrary | Cost$ U | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SubAbility$ DelTrigSlowtrip | SpellDescription$ Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle. Draw a card at the beginning of the next turn's upkeep.
+A:SP$ RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SubAbility$ DelTrigSlowtrip | SpellDescription$ Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle. Draw a card at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle.\nDraw a card at the beginning of the next turn's upkeep.

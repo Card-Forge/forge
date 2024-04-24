@@ -1,7 +1,7 @@
 Name:Prosperity
 ManaCost:X U
 Types:Sorcery
-A:SP$ Draw | Cost$ X U | Defined$ Player | NumCards$ X | SpellDescription$ Each player draws X cards.
+A:SP$ Draw | Defined$ Player | NumCards$ X | SpellDescription$ Each player draws X cards.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:Each player draws X cards.

@@ -1,7 +1,7 @@
 Name:Pulse of Murasa
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature or land card in a graveyard | ValidTgts$ Creature,Land | SubAbility$ DBGainLife | SpellDescription$ Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature or land card in a graveyard | ValidTgts$ Creature,Land | SubAbility$ DBGainLife | SpellDescription$ Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 6
 DeckHas:Ability$LifeGain
 Oracle:Return target creature or land card from a graveyard to its owner's hand. You gain 6 life.

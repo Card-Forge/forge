@@ -1,7 +1,7 @@
 Name:Pulse of the Fields
 ManaCost:1 W W
 Types:Instant
-A:SP$ GainLife | Cost$ 1 W W | Defined$ You | LifeAmount$ 4 | SubAbility$ TrigReturn | SpellDescription$ You gain 4 life. Then if an opponent has more life than you, return CARDNAME to its owner's hand.
+A:SP$ GainLife | Defined$ You | LifeAmount$ 4 | SubAbility$ TrigReturn | SpellDescription$ You gain 4 life. Then if an opponent has more life than you, return CARDNAME to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | ConditionLifeTotal$ You | ConditionLifeAmount$ LTX | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionDescription$ If an opponent has more life than you,
 SVar:X:PlayerCountOpponents$HighestLifeTotal
 Oracle:You gain 4 life. Then if an opponent has more life than you, return Pulse of the Fields to its owner's hand.

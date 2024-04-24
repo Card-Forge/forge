@@ -2,5 +2,5 @@ Name:Profound Journey
 ManaCost:5 W W
 Types:Sorcery
 K:Rebound
-A:SP$ ChangeZone | Cost$ 5 W W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to the battlefield.
 Oracle:Return target permanent card from your graveyard to the battlefield.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

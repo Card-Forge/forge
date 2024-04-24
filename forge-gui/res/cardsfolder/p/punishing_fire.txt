@@ -1,7 +1,7 @@
 Name:Punishing Fire
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 T:Mode$ LifeGained | ValidPlayer$ Opponent | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever an opponent gains life, you may pay {R}. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigChange:AB$ ChangeZone | Cost$ R | Origin$ Graveyard | Destination$ Hand
 Oracle:Punishing Fire deals 2 damage to any target.\nWhenever an opponent gains life, you may pay {R}. If you do, return Punishing Fire from your graveyard to your hand.
