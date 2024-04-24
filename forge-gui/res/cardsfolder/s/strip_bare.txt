@@ -1,6 +1,6 @@
 Name:Strip Bare
 ManaCost:W
 Types:Instant
-A:SP$ DestroyAll | Cost$ W | ValidCards$ Card.AttachedTo Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy all Auras and Equipment attached to target creature.
+A:SP$ DestroyAll | ValidCards$ Card.AttachedTo Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy all Auras and Equipment attached to target creature.
 AI:RemoveDeck:All
 Oracle:Destroy all Auras and Equipment attached to target creature.

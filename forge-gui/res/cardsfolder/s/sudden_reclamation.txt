@@ -1,7 +1,7 @@
 Name:Sudden Reclamation
 ManaCost:3 G
 Types:Instant
-A:SP$ Mill | Cost$ 3 G | NumCards$ 4 | Defined$ You | SubAbility$ DBChangeZone1 | SpellDescription$ Mill four cards, then return a creature card and a land card from your graveyard to your hand.
+A:SP$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBChangeZone1 | SpellDescription$ Mill four cards, then return a creature card and a land card from your graveyard to your hand.
 SVar:DBChangeZone1:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand
 AI:RemoveDeck:Random

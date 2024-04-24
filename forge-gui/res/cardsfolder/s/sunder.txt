@@ -1,5 +1,5 @@
 Name:Sunder
 ManaCost:3 U U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all lands to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all lands to their owners' hands.
 Oracle:Return all lands to their owners' hands.

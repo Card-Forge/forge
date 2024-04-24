@@ -1,6 +1,6 @@
 Name:Swift Reckoning
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | IsPresent$ Instant.YouOwn,Sorcery.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE2 | Description$ Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may cast CARDNAME as though it had flash.
 Oracle:Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may cast Swift Reckoning as though it had flash. (You may cast it any time you could cast an instant.)\nDestroy target tapped creature.

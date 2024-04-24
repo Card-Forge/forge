@@ -1,5 +1,5 @@
 Name:Sure Strike
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ First Strike | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ First Strike | SpellDescription$ Target creature gets +3/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
 Oracle:Target creature gets +3/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)
