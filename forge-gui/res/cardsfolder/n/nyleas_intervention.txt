@@ -1,7 +1,7 @@
 Name:Nylea's Intervention
 ManaCost:X G G
 Types:Sorcery
-A:SP$ Charm | Cost$ X G G | Choices$ DBSearch,DBDamage
+A:SP$ Charm | Choices$ DBSearch,DBDamage
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ X | SpellDescription$ Search your library for up to X land cards, reveal them, put them into your hand, then shuffle.
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ XX | SpellDescription$ CARDNAME deals twice X damage to each creature with flying.
 SVar:X:Count$xPaid

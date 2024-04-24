@@ -1,5 +1,5 @@
 Name:Naturalize
 ManaCost:1 G
 Types:Instant
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Destroy target artifact or enchantment.

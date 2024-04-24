@@ -2,7 +2,7 @@ Name:Neverending Torment
 ManaCost:4 B B
 Types:Sorcery
 K:Epic
-A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | SpellDescription$ Search target player's library for X cards, where X is the number of cards in your hand, and exile it. Then that player shuffles their library.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | SpellDescription$ Search target player's library for X cards, where X is the number of cards in your hand, and exile it. Then that player shuffles their library.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Search target player's library for X cards, where X is the number of cards in your hand, and exile them. Then that player shuffles.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)
