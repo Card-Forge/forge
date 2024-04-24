@@ -1,7 +1,7 @@
 Name:A-Alrund's Epiphany
 ManaCost:5 U U
 Types:Sorcery
-A:SP$ AddTurn | Cost$ 5 U U | NumTurns$ 1 | SubAbility$ DBToken | StackDescription$ None | SpellDescription$ Take an extra turn after this one. If this spell was foretold, create two 1/1 blue Bird creature tokens with flying. Exile CARDNAME.
+A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBToken | StackDescription$ None | SpellDescription$ Take an extra turn after this one. If this spell was foretold, create two 1/1 blue Bird creature tokens with flying. Exile CARDNAME.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_bird_flying | TokenOwner$ You | Condition$ Foretold | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 K:Foretell:5 U U

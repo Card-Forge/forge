@@ -1,7 +1,7 @@
 Name:A-Incriminate
 ManaCost:B
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. That player sacrifices one of them.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose two target creatures controlled by the same player | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | IsCurse$ True | SubAbility$ DBChooseSac | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same player. That player sacrifices one of them.
 SVar:DBChooseSac:DB$ ChooseCard | Choices$ Card.IsRemembered | Defined$ TargetedController | ChoiceTitle$ Choose one to sacrifice | SubAbility$ DBSac | StackDescription$ None | AILogic$ WorstCard
 SVar:DBSac:DB$ Destroy | Defined$ ChosenCard | Sacrifice$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

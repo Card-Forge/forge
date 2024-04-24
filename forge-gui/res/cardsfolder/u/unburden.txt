@@ -1,6 +1,6 @@
 Name:Unburden
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 K:Cycling:2
 Oracle:Target player discards two cards.\nCycling {2} ({2}, Discard this card: Draw a card.)

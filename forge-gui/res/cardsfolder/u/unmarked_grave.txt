@@ -1,7 +1,7 @@
 Name:Unmarked Grave
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.nonLegendary | ChangeNum$ 1 | SpellDescription$ Search your library for a nonlegendary card, put that card into your graveyard, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.nonLegendary | ChangeNum$ 1 | SpellDescription$ Search your library for a nonlegendary card, put that card into your graveyard, then shuffle.
 DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
 Oracle:Search your library for a nonlegendary card, put that card into your graveyard, then shuffle.

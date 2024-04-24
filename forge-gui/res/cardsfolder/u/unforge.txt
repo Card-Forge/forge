@@ -1,7 +1,7 @@
 Name:Unforge
 ManaCost:2 R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Equipment | IsCurse$ True | SubAbility$ DBRem | StackDescription$ SpellDescription | SpellDescription$ Destroy target Equipment. If that Equipment was attached to a creature, CARDNAME deals 2 damage to that creature.
+A:SP$ Pump | ValidTgts$ Equipment | IsCurse$ True | SubAbility$ DBRem | StackDescription$ SpellDescription | SpellDescription$ Destroy target Equipment. If that Equipment was attached to a creature, CARDNAME deals 2 damage to that creature.
 SVar:DBRem:DB$ PumpAll | ValidCards$ Creature.EquippedByTargeted | RememberPumped$ True | StackDescription$ None | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | SubAbility$ DBDmg | StackDescription$ None
 SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StackDescription$ None | SubAbility$ DBCleanup

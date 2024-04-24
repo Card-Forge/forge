@@ -1,7 +1,7 @@
 Name:A-Buy Your Silence
 ManaCost:4 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TgtPromt$ Select target nonland permanent | SubAbility$ DBTreasure | StackDescription$ SpellDescription | SpellDescription$ Exile target nonland permanent. Its controller creates a Treasure token.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TgtPromt$ Select target nonland permanent | SubAbility$ DBTreasure | StackDescription$ SpellDescription | SpellDescription$ Exile target nonland permanent. Its controller creates a Treasure token.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
 Oracle:Exile target nonland permanent. Its controller creates a Treasure token.

@@ -1,7 +1,7 @@
 Name:A-Return Upon the Tide
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBToken | SpellDescription$ Return target creature card from your graveyard to the battlefield. If it's an Elf, create three 1/1 green Elf Warrior creature tokens.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBToken | SpellDescription$ Return target creature card from your graveyard to the battlefield. If it's an Elf, create three 1/1 green Elf Warrior creature tokens.
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Targeted$Valid Elf
 K:Foretell:3 B

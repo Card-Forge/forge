@@ -1,5 +1,5 @@
 Name:Unlikely Aid
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Indestructible | SpellDescription$ Target creature gets +2/+0 and gains indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Indestructible | SpellDescription$ Target creature gets +2/+0 and gains indestructible until end of turn.
 Oracle:Target creature gets +2/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

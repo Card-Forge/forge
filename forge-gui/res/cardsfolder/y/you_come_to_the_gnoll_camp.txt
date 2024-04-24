@@ -1,7 +1,7 @@
 Name:You Come to the Gnoll Camp
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ IntimidateThem,FendThemOff
+A:SP$ Charm | Choices$ IntimidateThem,FendThemOff
 SVar:IntimidateThem:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Intimidate Them — Up to two target creatures can't block this turn.
 SVar:FendThemOff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Fend Them Off — Target creature gets +3/+1 until end of turn.
 Oracle:Choose one —\n• Intimidate Them — Up to two target creatures can't block this turn.\n• Fend Them Off — Target creature gets +3/+1 until end of turn.

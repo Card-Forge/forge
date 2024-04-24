@@ -1,7 +1,7 @@
 Name:You're Ambushed on the Road
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ MakeARetreat,StandAndFight
+A:SP$ Charm | Choices$ MakeARetreat,StandAndFight
 SVar:MakeARetreat:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Make a Retreat — Return target creature you control to its owner's hand.
 SVar:StandAndFight:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +3 | TgtPrompt$ Select target creature | SpellDescription$ Stand and Fight — Target creature gets +1/+3 until end of turn.
 Oracle:Choose one —\n• Make a Retreat — Return target creature you control to its owner's hand.\n• Stand and Fight — Target creature gets +1/+3 until end of turn.

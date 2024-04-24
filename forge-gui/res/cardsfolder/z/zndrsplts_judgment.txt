@@ -1,7 +1,7 @@
 Name:Zndrsplt's Judgment
 ManaCost:4 U
 Types:Sorcery
-A:SP$ AssignGroup | Cost$ 4 U | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend creates a token that's a copy of a creature they control. Each foe returns a creature they control to its owner's hand.
+A:SP$ AssignGroup | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend creates a token that's a copy of a creature they control. Each foe returns a creature they control to its owner's hand.
 SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$ DBClone | ClearRememberedBeforeLoop$ True | ChangeZoneTable$ True | StackDescription$ Each friend creates a token that's a copy of a creature they control. | SpellDescription$ Friend creates a token that's a copy of a creature they control.
 SVar:DBClone:DB$ CopyPermanent | Choices$ Creature.RememberedPlayerCtrl | Chooser$ Remembered | Controller$ Remembered
 SVar:FoeRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$ PlayChoose | ClearRememberedBeforeLoop$ True | SubAbility$ BounceAll | StackDescription$ Each foe returns a creature they control to its owner's hand. | SpellDescription$ Foe returns a creature they control to its owner's hand.

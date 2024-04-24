@@ -1,6 +1,6 @@
 Name:Undying Evil
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Undying | SpellDescription$ Target creature gains undying until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Undying | SpellDescription$ Target creature gains undying until end of turn.
 AI:RemoveDeck:All
 Oracle:Target creature gains undying until end of turn. (When it dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)

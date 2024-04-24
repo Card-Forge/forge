@@ -1,5 +1,5 @@
 Name:Zealous Strike
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+2 and gains first strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ First Strike | SpellDescription$ Target creature gets +2/+2 and gains first strike until end of turn.
 Oracle:Target creature gets +2/+2 and gains first strike until end of turn.
