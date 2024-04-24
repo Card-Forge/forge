@@ -1,6 +1,6 @@
 Name:Synchronized Strike
 ManaCost:2 G
 Types:Instant
-A:SP$ Untap | Cost$ 2 G | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap up to two target creatures. They each get +2/+2 until end of turn.
+A:SP$ Untap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap up to two target creatures. They each get +2/+2 until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2
 Oracle:Untap up to two target creatures. They each get +2/+2 until end of turn.
