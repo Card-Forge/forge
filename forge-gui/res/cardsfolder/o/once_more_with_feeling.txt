@@ -2,7 +2,7 @@ Name:Once More with Feeling
 ManaCost:W W W W
 Types:Sorcery
 K:DeckLimit:1:DCI ruling - A deck can have only one card named Once More with Feeling.
-A:SP$ ChangeZoneAll | Cost$ W W W W | ChangeType$ Permanent | Origin$ Battlefield,Graveyard | Destination$ Exile | SubAbility$ DBShuffle | SpellDescription$ Exile all permanents and all cards from all graveyards. Each player shuffles their hand into their library, then draws seven cards. Each player's life total becomes 10. Exile CARDNAME.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield,Graveyard | Destination$ Exile | SubAbility$ DBShuffle | SpellDescription$ Exile all permanents and all cards from all graveyards. Each player shuffles their hand into their library, then draws seven cards. Each player's life total becomes 10. Exile CARDNAME.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBDraw | StackDescription$ None
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ SetAllLife | StackDescription$ None
 SVar:SetAllLife:DB$ SetLife | Defined$ Player | LifeAmount$ 10 | SubAbility$ ExileSelf | StackDescription$ None

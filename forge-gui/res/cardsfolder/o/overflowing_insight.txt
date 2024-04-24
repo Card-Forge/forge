@@ -1,5 +1,5 @@
 Name:Overflowing Insight
 ManaCost:4 U U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U U U | NumCards$ 7 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws seven cards.
+A:SP$ Draw | NumCards$ 7 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws seven cards.
 Oracle:Target player draws seven cards.

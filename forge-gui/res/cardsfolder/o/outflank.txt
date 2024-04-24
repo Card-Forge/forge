@@ -1,6 +1,6 @@
 Name:Outflank
 ManaCost:W
 Types:Instant
-A:SP$ DealDamage | Cost$ W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking or blocking creature equal to the number of creatures you control.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking or blocking creature equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Outflank deals damage to target attacking or blocking creature equal to the number of creatures you control.

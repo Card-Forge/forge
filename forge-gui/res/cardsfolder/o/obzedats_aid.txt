@@ -1,5 +1,5 @@
 Name:Obzedat's Aid
 ManaCost:3 W B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to the battlefield.
 Oracle:Return target permanent card from your graveyard to the battlefield.

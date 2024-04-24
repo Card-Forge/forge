@@ -1,6 +1,6 @@
 Name:Oblivion's Hunger
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Target creature you control gains indestructible until end of turn. Draw a card if that creature has a +1/+1 counter on it. (Damage and effects that say "destroy" don't destroy the creature.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Target creature you control gains indestructible until end of turn. Draw a card if that creature has a +1/+1 counter on it. (Damage and effects that say "destroy" don't destroy the creature.)
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Card.counters_GE1_P1P1 | StackDescription$ None
 Oracle:Target creature you control gains indestructible until end of turn. Draw a card if that creature has a +1/+1 counter on it. (Damage and effects that say "destroy" don't destroy the creature.)

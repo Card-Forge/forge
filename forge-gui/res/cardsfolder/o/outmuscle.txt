@@ -1,7 +1,7 @@
 Name:Outmuscle
 ManaCost:3 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | RememberTargets$ True | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Fight | AIManaPref$ G | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control, then it fights target creature you don't control. (Each deals damage equal to its power to the other.) Adamant — If at least three green mana was spent to cast this spell, the creature you control gains indestructible until end of turn.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | RememberTargets$ True | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ Fight | AIManaPref$ G | SubAbility$ DBFight | SpellDescription$ Put a +1/+1 counter on target creature you control, then it fights target creature you don't control. (Each deals damage equal to its power to the other.) Adamant — If at least three green mana was spent to cast this spell, the creature you control gains indestructible until end of turn.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | AILogic$ Always | TgtPrompt$ Choose target creature you don't control | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Indestructible | ConditionCheckSVar$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

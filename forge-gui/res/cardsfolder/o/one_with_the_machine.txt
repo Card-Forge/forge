@@ -1,6 +1,6 @@
 Name:One with the Machine
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the highest mana value among artifacts you control.
+A:SP$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the highest mana value among artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
 Oracle:Draw cards equal to the highest mana value among artifacts you control.
