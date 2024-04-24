@@ -1,7 +1,7 @@
 Name:Spell Contortion
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays {2}. Draw a card for each time CARDNAME was kicked.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays {2}. Draw a card for each time CARDNAME was kicked.
 K:Multikicker:1 U
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$TimesKicked

@@ -1,6 +1,6 @@
 Name:Sparkmage's Gambit
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME can't block.
 Oracle:Sparkmage's Gambit deals 1 damage to each of up to two target creatures. Those creatures can't block this turn.

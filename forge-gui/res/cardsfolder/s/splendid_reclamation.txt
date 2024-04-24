@@ -1,6 +1,6 @@
 Name:Splendid Reclamation
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 G | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all land cards from your graveyard to the battlefield tapped.
+A:SP$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all land cards from your graveyard to the battlefield tapped.
 DeckHints:Ability$Graveyard
 Oracle:Return all land cards from your graveyard to the battlefield tapped.

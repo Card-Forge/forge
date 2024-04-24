@@ -1,5 +1,5 @@
 Name:Soul Parry
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ 2 | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage one or two target creatures would deal this turn.
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ 2 | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage one or two target creatures would deal this turn.
 Oracle:Prevent all damage one or two target creatures would deal this turn.

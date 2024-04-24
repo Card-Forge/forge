@@ -1,6 +1,6 @@
 Name:Soulshriek
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | AILogic$ Berserk | AtEOT$ Sacrifice | SpellDescription$ Target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard. Sacrifice that creature at the beginning of the next end step.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | AILogic$ Berserk | AtEOT$ Sacrifice | SpellDescription$ Target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard. Sacrifice that creature at the beginning of the next end step.
 SVar:X:Count$TypeInYourYard.Creature
 Oracle:Target creature you control gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard. Sacrifice that creature at the beginning of the next end step.

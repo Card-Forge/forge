@@ -1,7 +1,7 @@
 Name:Soulfire Eruption
 ManaCost:6 R R R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 R R R | ValidTgts$ Any | TgtPrompt$ Choose any number of target creatures, planeswalkers, and/or players | TargetMin$ 0 | TargetMax$ MaxTgt | RepeatSubAbility$ DBDig | RepeatTargeted$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Choose any number of target creatures, planeswalkers, and/or players. For each of them, exile the top card of your library, then CARDNAME deals damage equal to that card's mana value to that permanent or player. You may play the exiled cards until the end of your next turn.
+A:SP$ RepeatEach | ValidTgts$ Any | TgtPrompt$ Choose any number of target creatures, planeswalkers, and/or players | TargetMin$ 0 | TargetMax$ MaxTgt | RepeatSubAbility$ DBDig | RepeatTargeted$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Choose any number of target creatures, planeswalkers, and/or players. For each of them, exile the top card of your library, then CARDNAME deals damage equal to that card's mana value to that permanent or player. You may play the exiled cards until the end of your next turn.
 SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ImprintRevealed$ True | Reveal$ True | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True

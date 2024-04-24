@@ -1,7 +1,7 @@
 Name:Soul's Grace
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ You gain life equal to target creature's power.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ You gain life equal to target creature's power.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All

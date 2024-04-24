@@ -1,6 +1,6 @@
 Name:Spatial Contortion
 ManaCost:1 C
 Types:Instant
-A:SP$ Pump | Cost$ 1 C | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
 DeckNeeds:Ability$Mana.Colorless
 Oracle:({C} represents colorless mana.)\nTarget creature gets +3/-3 until end of turn.

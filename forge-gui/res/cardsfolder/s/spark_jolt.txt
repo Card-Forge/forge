@@ -1,6 +1,6 @@
 Name:Spark Jolt
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target. Scry 1. | SubAbility$ DBScry
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target. Scry 1. | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Spark Jolt deals 1 damage to any target. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

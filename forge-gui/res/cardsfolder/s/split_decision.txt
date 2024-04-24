@@ -1,7 +1,7 @@
 Name:Split Decision
 ManaCost:1 U
 Types:Instant
-A:SP$ Vote | Cost$ 1 U | ValidTgts$ Instant,Sorcery | TgtZone$ Stack | TargetType$ Spell | Defined$ Player | VoteDenial$ DBDenial | VoteDuplication$ DBDuplication | Tied$ DBDuplication | VoteType$ Denial,Duplication | SpellDescription$ Will of the Council — Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter that spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy.
+A:SP$ Vote | ValidTgts$ Instant,Sorcery | TgtZone$ Stack | TargetType$ Spell | Defined$ Player | VoteDenial$ DBDenial | VoteDuplication$ DBDuplication | Tied$ DBDuplication | VoteType$ Denial,Duplication | SpellDescription$ Will of the Council — Choose target instant or sorcery spell. Starting with you, each player votes for denial or duplication. If denial gets more votes, counter that spell. If duplication gets more votes or the vote is tied, copy the spell. You may choose new targets for the copy.
 SVar:DBDenial:DB$ Counter | Defined$ Targeted
 SVar:DBDuplication:DB$ CopySpellAbility | Defined$ Targeted | MayChooseTarget$ True
 AI:RemoveDeck:All
