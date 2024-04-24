@@ -2,7 +2,7 @@ Name:Stolen Identity
 ManaCost:4 U U
 Types:Sorcery
 K:Cipher
-A:SP$ CopyPermanent | Cost$ 4 U U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target creature or artifact | NumCopies$ 1 | SubAbility$ Cipher | SpellDescription$ Create a token that's a copy of target artifact or creature.
+A:SP$ CopyPermanent | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target creature or artifact | NumCopies$ 1 | SubAbility$ Cipher | SpellDescription$ Create a token that's a copy of target artifact or creature.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 Oracle:Create a token that's a copy of target artifact or creature.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

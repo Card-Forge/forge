@@ -1,7 +1,7 @@
 Name:Squee's Revenge
 ManaCost:1 U R
 Types:Sorcery
-A:SP$ ChooseNumber | Cost$ 1 U R | SubAbility$ RepeatFlip | SpellDescription$ Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
+A:SP$ ChooseNumber | SubAbility$ RepeatFlip | SpellDescription$ Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
 # Repeat Flip
 SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | ConditionCheckSVar$ TimesToFlip | ConditionSVarCompare$ GT0 | RepeatCheckSVar$ FlipsDone | RepeatSVarCompare$ LTTimesToFlip | SubAbility$ DrawIfWin
 SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementFlips | LoseSubAbility$ IncrementLoss

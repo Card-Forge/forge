@@ -1,7 +1,7 @@
 Name:Storm the Citadel
 ManaCost:4 G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 4 G | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBAnimateAll | SpellDescription$ Until end of turn, creatures you control get +2/+2 and gain "Whenever this creature deals combat damage to a player or planeswalker, destroy target artifact or enchantment defending player controls."
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBAnimateAll | SpellDescription$ Until end of turn, creatures you control get +2/+2 and gain "Whenever this creature deals combat damage to a player or planeswalker, destroy target artifact or enchantment defending player controls."
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ Trig
 SVar:Trig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ Eff | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, destroy target artifact or enchantment defending player controls.
 SVar:Eff:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TargetsWithDefinedController$ TriggeredDefendingPlayer | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target artifact or enchantment defending player controls.

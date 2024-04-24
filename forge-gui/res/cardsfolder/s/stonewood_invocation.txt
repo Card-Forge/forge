@@ -2,5 +2,5 @@ Name:Stonewood Invocation
 ManaCost:3 G
 Types:Instant
 K:Split second
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | KW$ Shroud | SpellDescription$ Target creature gets +5/+5 and gains shroud until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | KW$ Shroud | SpellDescription$ Target creature gets +5/+5 and gains shroud until end of turn.
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nTarget creature gets +5/+5 and gains shroud until end of turn. (It can't be the target of spells or abilities.)

@@ -1,7 +1,7 @@
 Name:Spore Burst
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Domain — Create a 1/1 green Saproling creature token for each basic land type among lands you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Domain — Create a 1/1 green Saproling creature token for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 DeckHas:Ability$Token
