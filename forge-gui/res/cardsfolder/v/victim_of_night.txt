@@ -1,5 +1,5 @@
 Name:Victim of Night
 ManaCost:B B
 Types:Instant
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature.nonVampire+nonWerewolf+nonZombie | TgtPrompt$ Select target non-Vampire, non-Werewolf, non-Zombie creature | SpellDescription$ Destroy target non-Vampire, non-Werewolf, non-Zombie creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonVampire+nonWerewolf+nonZombie | TgtPrompt$ Select target non-Vampire, non-Werewolf, non-Zombie creature | SpellDescription$ Destroy target non-Vampire, non-Werewolf, non-Zombie creature.
 Oracle:Destroy target non-Vampire, non-Werewolf, non-Zombie creature.

@@ -1,7 +1,7 @@
 Name:Visions of Beyond
 ManaCost:U
 Types:Instant
-A:SP$ Draw | Cost$ U | NumCards$ X | SpellDescription$ Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.
 SVar:X:Count$Compare CheckGrave GE20.3.1
 SVar:CheckGrave:PlayerCountPlayers$HighestValidGraveyard Card.YouOwn
 Oracle:Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead.

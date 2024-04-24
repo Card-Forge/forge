@@ -1,6 +1,6 @@
 Name:Vivify
 ManaCost:2 G
 Types:Instant
-A:SP$ Animate | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land. Draw a card.
+A:SP$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Target land becomes a 3/3 creature until end of turn. It's still a land.\nDraw a card.

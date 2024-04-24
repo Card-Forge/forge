@@ -1,7 +1,7 @@
 Name:Voices from the Void
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 4 B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Domain — Target player discards a card for each basic land type among lands you control.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Domain — Target player discards a card for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 Oracle:Domain — Target player discards a card for each basic land type among lands you control.

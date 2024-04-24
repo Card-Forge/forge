@@ -1,7 +1,7 @@
 Name:Vandalize
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Destroy1,Destroy2
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Destroy1,Destroy2
 SVar:Destroy1:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Destroy2:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 Oracle:Choose one or both —\n• Destroy target artifact.\n• Destroy target land.

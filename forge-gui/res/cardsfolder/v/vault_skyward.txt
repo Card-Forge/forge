@@ -1,6 +1,6 @@
 Name:Vault Skyward
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ DBUntap | SpellDescription$ Target creature gains flying until end of turn. Untap it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ DBUntap | SpellDescription$ Target creature gains flying until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Target creature gains flying until end of turn. Untap it.

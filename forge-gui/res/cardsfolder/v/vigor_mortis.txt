@@ -1,7 +1,7 @@
 Name:Vigor Mortis
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter | ConditionManaNotSpent$ G | SpellDescription$ Return target creature card from your graveyard to the battlefield. If {G} was spent to cast this spell, that creature enters the battlefield with an additional +1/+1 counter on it.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCounter | ConditionManaNotSpent$ G | SpellDescription$ Return target creature card from your graveyard to the battlefield. If {G} was spent to cast this spell, that creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:DBCounter:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ P1P1 | ConditionManaSpent$ G | StackDescription$ None
 SVar:ManaNeededToAvoidNegativeEffect:green
 AI:RemoveDeck:Random

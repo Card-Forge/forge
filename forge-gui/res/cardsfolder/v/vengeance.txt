@@ -1,5 +1,5 @@
 Name:Vengeance
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 Oracle:Destroy target tapped creature.
