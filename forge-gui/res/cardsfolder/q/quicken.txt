@@ -1,7 +1,7 @@
 Name:Quicken
 ManaCost:U
 Types:Instant
-A:SP$ Effect | Cost$ U | StaticAbilities$ QuickenStA | Triggers$ SpellCastTrig | SubAbility$ DBDraw | SpellDescription$ The next sorcery spell you cast this turn can be cast as though it had flash.
+A:SP$ Effect | StaticAbilities$ QuickenStA | Triggers$ SpellCastTrig | SubAbility$ DBDraw | SpellDescription$ The next sorcery spell you cast this turn can be cast as though it had flash.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:QuickenStA:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | EffectZone$ Command | Caster$ You
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ Quickened | Static$ True | TriggerDescription$ The next sorcery spell you cast this turn can be cast as though it had flash.

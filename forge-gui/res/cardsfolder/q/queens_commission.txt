@@ -1,6 +1,6 @@
 Name:Queen's Commission
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create two 1/1 white Vampire creature tokens with lifelink.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create two 1/1 white Vampire creature tokens with lifelink.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Vampire creature tokens with lifelink.

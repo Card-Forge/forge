@@ -1,5 +1,5 @@
 Name:Quicksilver Geyser
 ManaCost:4 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 U | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Return up to two target nonland permanents to their owner's hands.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target nonland permanent | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Return up to two target nonland permanents to their owner's hands.
 Oracle:Return up to two target nonland permanents to their owners' hands.
