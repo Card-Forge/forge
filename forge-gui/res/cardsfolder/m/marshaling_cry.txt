@@ -2,6 +2,6 @@ Name:Marshaling Cry
 ManaCost:1 W W
 Types:Sorcery
 K:Flashback:3 W
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | SpellDescription$ Creatures you control get +1/+1 and gain vigilance until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | SpellDescription$ Creatures you control get +1/+1 and gain vigilance until end of turn.
 K:Cycling:2
 Oracle:Creatures you control get +1/+1 and gain vigilance until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)\nFlashback {3}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

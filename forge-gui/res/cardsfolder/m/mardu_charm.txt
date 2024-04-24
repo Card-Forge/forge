@@ -1,7 +1,7 @@
 Name:Mardu Charm
 ManaCost:R W B
 Types:Instant
-A:SP$ Charm | Cost$ R W B | Choices$ DealDmg,Warrior,DBDiscard | CharmNum$ 1
+A:SP$ Charm | Choices$ DealDmg,Warrior,DBDiscard | CharmNum$ 1
 SVar:DealDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 SVar:Warrior:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_warrior | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPumpFirstStrike | SpellDescription$ Create two 1/1 white Warrior creature tokens. They gain first strike until end of turn.
 SVar:DBPumpFirstStrike:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ First Strike | SubAbility$ DBCleanUp

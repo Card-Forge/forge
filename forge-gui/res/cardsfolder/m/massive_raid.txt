@@ -1,6 +1,6 @@
 Name:Massive Raid
 ManaCost:1 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of creatures you control.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Massive Raid deals damage to any target equal to the number of creatures you control.

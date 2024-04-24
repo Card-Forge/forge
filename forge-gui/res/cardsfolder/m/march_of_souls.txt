@@ -1,7 +1,7 @@
 Name:March of Souls
 ManaCost:4 W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 W | ValidCards$ Creature | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ Player.IsRemembered | SpellDescription$ They can't be regenerated. For each creature destroyed this way, its controller creates a 1/1 white Spirit creature token with flying.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

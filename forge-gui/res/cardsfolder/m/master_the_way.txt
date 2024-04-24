@@ -1,7 +1,7 @@
 Name:Master the Way
 ManaCost:3 U R
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U R | NumCards$ 1 | SubAbility$ DBDamage | SpellDescription$ Draw a card. CARDNAME deals damage to any target equal to the number of cards in your hand.
+A:SP$ Draw | NumCards$ 1 | SubAbility$ DBDamage | SpellDescription$ Draw a card. CARDNAME deals damage to any target equal to the number of cards in your hand.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$CardsInYourHand
 Oracle:Draw a card. Master the Way deals damage to any target equal to the number of cards in your hand.

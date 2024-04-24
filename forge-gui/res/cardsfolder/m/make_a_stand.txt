@@ -1,5 +1,5 @@
 Name:Make a Stand
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Creatures you control get +1/+0 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Creatures you control get +1/+0 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)
 Oracle:Creatures you control get +1/+0 and gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

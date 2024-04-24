@@ -2,7 +2,7 @@ Name:Maddening Cacophony
 ManaCost:1 U
 Types:Sorcery
 K:Kicker:3 U
-A:SP$ RepeatEach | Cost$ 1 U | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBMill | SpellDescription$ Each opponent mills eight cards. If this spell was kicked, instead each opponent mills half their library, rounded up.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBMill | SpellDescription$ Each opponent mills eight cards. If this spell was kicked, instead each opponent mills half their library, rounded up.
 SVar:DBMill:DB$ Mill | Defined$ Player.IsRemembered | NumCards$ 8 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBMillKicked
 SVar:DBMillKicked:DB$ Mill | Defined$ Player.IsRemembered | NumCards$ Y | Condition$ Kicked
 SVar:X:Count$TimesKicked
