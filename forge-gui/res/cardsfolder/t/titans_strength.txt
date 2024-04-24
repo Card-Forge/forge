@@ -1,6 +1,6 @@
 Name:Titan's Strength
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Target creature gets +3/+1 until end of turn. Scry 1. | SubAbility$ DBScry
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Target creature gets +3/+1 until end of turn. Scry 1. | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Target creature gets +3/+1 until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

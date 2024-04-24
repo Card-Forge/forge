@@ -1,7 +1,7 @@
 Name:Touch of Vitae
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gains haste and "{0}: Untap this creature. Activate only once." Draw a card at the beginning of the next turn's upkeep.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gains haste and "{0}: Untap this creature. Activate only once." Draw a card at the beginning of the next turn's upkeep.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ ABUntap | SubAbility$ DelTrigSlowtrip
 SVar:ABUntap:AB$ Untap | Cost$ 0 | Defined$ Self | GameActivationLimit$ 1 | SpellDescription$ Untap this creature. Activate only once.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.

@@ -1,6 +1,6 @@
 Name:Tidal Wave
 ManaCost:2 U
 Types:Instant
-A:SP$ Token | Cost$ 2 U | TokenAmount$ 1 | TokenScript$ u_5_5_wall_defender | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ u_5_5_wall_defender | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.
 AI:RemoveDeck:All
 Oracle:Create a 5/5 blue Wall creature token with defender. Sacrifice it at the beginning of the next end step.
