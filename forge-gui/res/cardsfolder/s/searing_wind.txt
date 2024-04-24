@@ -1,5 +1,5 @@
 Name:Searing Wind
 ManaCost:8 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 8 R | ValidTgts$ Any | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 10 | SpellDescription$ CARDNAME deals 10 damage to any target.
 Oracle:Searing Wind deals 10 damage to any target.

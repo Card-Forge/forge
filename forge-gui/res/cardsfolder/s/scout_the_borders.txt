@@ -1,6 +1,6 @@
 Name:Scout the Borders
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 G | DigNum$ 5 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature,Land | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
+A:SP$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature,Land | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.
 DeckHas:Ability$Graveyard
 Oracle:Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.

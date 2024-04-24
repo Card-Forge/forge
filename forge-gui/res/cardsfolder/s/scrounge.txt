@@ -1,5 +1,5 @@
 Name:Scrounge
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Opponent | Hidden$ True | ChangeType$ Artifact.TargetedPlayerCtrl | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | Chooser$ Targeted | Mandatory$ True | SpellDescription$ Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Opponent | Hidden$ True | ChangeType$ Artifact.TargetedPlayerCtrl | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | Chooser$ Targeted | Mandatory$ True | SpellDescription$ Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.
 Oracle:Target opponent chooses an artifact card in their graveyard. Put that card onto the battlefield under your control.

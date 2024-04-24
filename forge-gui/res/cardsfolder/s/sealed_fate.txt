@@ -1,7 +1,7 @@
 Name:Sealed Fate
 ManaCost:X U B
 Types:Sorcery
-A:SP$ Dig | Cost$ X U B | ValidTgts$ Opponent | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
+A:SP$ Dig | ValidTgts$ Opponent | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Look at the top X cards of target opponent's library. Exile one of those cards and put the rest back on top of that player's library in any order.

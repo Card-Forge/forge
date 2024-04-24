@@ -1,7 +1,7 @@
 Name:Scouting Trek
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | ChangeNum$ X | ChangeType$ Land.Basic | Origin$ Library | Destination$ Library | Reorder$ True | LibraryPosition$ 0 | SpellDescription$ Search your library for any number of basic land cards, reveal those cards, then shuffle and put them on top.
+A:SP$ ChangeZone | ChangeNum$ X | ChangeType$ Land.Basic | Origin$ Library | Destination$ Library | Reorder$ True | LibraryPosition$ 0 | SpellDescription$ Search your library for any number of basic land cards, reveal those cards, then shuffle and put them on top.
 SVar:X:Count$InYourLibrary.Land.Basic
 AI:RemoveDeck:All
 Oracle:Search your library for any number of basic land cards, reveal those cards, then shuffle and put them on top.

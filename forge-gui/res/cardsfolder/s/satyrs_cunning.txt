@@ -1,7 +1,7 @@
 Name:Satyr's Cunning
 ManaCost:R
 Types:Sorcery
-A:SP$ Token | Cost$ R | TokenAmount$ 1 | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You | SpellDescription$ Create a 1/1 red Satyr creature token with "This creature can't block."
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_satyr_noblock | TokenOwner$ You | SpellDescription$ Create a 1/1 red Satyr creature token with "This creature can't block."
 K:Escape:2 R ExileFromGrave<2/Card.Other/other>
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 DeckHas:Ability$Token

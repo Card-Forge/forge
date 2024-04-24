@@ -1,7 +1,7 @@
 Name:Scent of Cinder
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Reveal | Cost$ 1 R | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfCinderDamage | SpellDescription$ Reveal any number of red cards in your hand. CARDNAME deals X damage to any target, where X is the number of cards revealed this way.
+A:SP$ Reveal | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfCinderDamage | SpellDescription$ Reveal any number of red cards in your hand. CARDNAME deals X damage to any target, where X is the number of cards revealed this way.
 SVar:DBScentOfCinderDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ ScentOfCinderX | SubAbility$ DBScentOfCinderCleanup
 SVar:ScentOfCinderX:Remembered$Amount
 SVar:DBScentOfCinderCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -2,6 +2,6 @@ Name:Saheeli's Directive
 ManaCost:X R R R
 Types:Sorcery
 K:Improvise
-A:SP$ Dig | Cost$ X R R R | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Artifact.cmcLEX | ChangeNum$ X | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top X cards of your library. You may put any number of artifact cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.
+A:SP$ Dig | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Artifact.cmcLEX | ChangeNum$ X | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top X cards of your library. You may put any number of artifact cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.
 SVar:X:Count$xPaid
 Oracle:Improvise (Each artifact you tap after you're done activating mana abilities pays for {1}.)\nReveal the top X cards of your library. You may put any number of artifact cards with mana value X or less from among them onto the battlefield. Then put all cards revealed this way that weren't put onto the battlefield into your graveyard.

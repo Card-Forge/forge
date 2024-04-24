@@ -1,7 +1,7 @@
 Name:Searing Barrage
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | AIManaPref$ R | SpellDescription$ CARDNAME deals 5 damage to target creature. Adamant — If at least three red mana was spent to cast this spell, CARDNAME deals 3 damage to that creature's controller. | SubAbility$ DBDmg
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | AIManaPref$ R | SpellDescription$ CARDNAME deals 5 damage to target creature. Adamant — If at least three red mana was spent to cast this spell, CARDNAME deals 3 damage to that creature's controller. | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionCheckSVar$ X
 SVar:X:Count$Adamant.Red.1.0
 Oracle:Searing Barrage deals 5 damage to target creature.\nAdamant — If at least three red mana was spent to cast this spell, Searing Barrage deals 3 damage to that creature's controller.
