@@ -1,6 +1,6 @@
 Name:Vanquish the Foul
 ManaCost:5 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 5 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ DBScry | SpellDescription$ Destroy target creature with power 4 or greater. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ DBScry | SpellDescription$ Destroy target creature with power 4 or greater. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Destroy target creature with power 4 or greater. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

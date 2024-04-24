@@ -3,5 +3,5 @@ ManaCost:10 R R
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the total power of creatures you control.
 SVar:X:Count$SumPower_Creature.YouCtrl
-A:SP$ DealDamage | Cost$ 10 R R | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature and/or planeswalkers | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each of up to two target creatures and/or planeswalkers.
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature and/or planeswalkers | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each of up to two target creatures and/or planeswalkers.
 Oracle:This spell costs {X} less to cast, where X is the total power of creatures you control.\nVolcanic Salvo deals 6 damage to each of up to two target creatures and/or planeswalkers.

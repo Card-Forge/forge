@@ -1,6 +1,6 @@
 Name:Vivid Revival
 ManaCost:4 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target multicolor cards in your graveyard | ValidTgts$ Card.MultiColor | SubAbility$ DBChange | SpellDescription$ Return up to three target multicolored cards from your graveyard to your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target multicolor cards in your graveyard | ValidTgts$ Card.MultiColor | SubAbility$ DBChange | SpellDescription$ Return up to three target multicolored cards from your graveyard to your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Return up to three target multicolored cards from your graveyard to your hand. Exile Vivid Revival.

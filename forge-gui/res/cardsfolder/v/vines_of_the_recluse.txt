@@ -1,6 +1,6 @@
 Name:Vines of the Recluse
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+2 and gains reach until end of turn. Untap it. (A creature with reach can block creatures with flying.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | KW$ Reach | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+2 and gains reach until end of turn. Untap it. (A creature with reach can block creatures with flying.)
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Target creature gets +1/+2 and gains reach until end of turn. Untap it. (A creature with reach can block creatures with flying.)
