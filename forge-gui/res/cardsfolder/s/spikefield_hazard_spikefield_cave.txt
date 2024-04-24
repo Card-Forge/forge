@@ -1,7 +1,7 @@
 Name:Spikefield Hazard
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | NumDmg$ 1 | ValidTgts$ Any | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead.
+A:SP$ DealDamage | NumDmg$ 1 | ValidTgts$ Any | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:Modal
 Oracle:Spikefield Hazard deals 1 damage to any target. If a permanent dealt damage this way would die this turn, exile it instead.

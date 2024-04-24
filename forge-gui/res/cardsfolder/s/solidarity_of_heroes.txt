@@ -2,7 +2,7 @@ Name:Solidarity of Heroes
 ManaCost:1 G
 Types:Instant
 K:Strive:1 G
-A:SP$ MultiplyCounter | Cost$ 1 G | CounterType$ P1P1 | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Choose any number of target creatures. Double the number of +1/+1 counters on each of them.
+A:SP$ MultiplyCounter | CounterType$ P1P1 | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Choose any number of target creatures. Double the number of +1/+1 counters on each of them.
 SVar:MaxTargets:Count$Valid Creature
 DeckNeeds:Ability$Counters
 Oracle:Strive — This spell costs {1}{G} more to cast for each target beyond the first.\nChoose any number of target creatures. Double the number of +1/+1 counters on each of them.

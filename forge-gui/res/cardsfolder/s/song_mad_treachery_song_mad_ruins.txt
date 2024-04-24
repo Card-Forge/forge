@@ -1,7 +1,7 @@
 Name:Song-Mad Treachery
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | StackDescription$ {p:You} gains control of {c:Targeted} until end of turn. Untap it. It gains haste until end of turn. | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | StackDescription$ {p:You} gains control of {c:Targeted} until end of turn. Untap it. It gains haste until end of turn. | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 AlternateMode:Modal
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 

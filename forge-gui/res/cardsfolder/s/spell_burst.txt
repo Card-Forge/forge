@@ -1,7 +1,7 @@
 Name:Spell Burst
 ManaCost:X U
 Types:Instant
-A:SP$ Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card.cmcEQX | SpellDescription$ Counter target spell with mana value X.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.cmcEQX | SpellDescription$ Counter target spell with mana value X.
 SVar:X:Count$xPaid
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCounter target spell with mana value X.

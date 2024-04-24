@@ -2,5 +2,5 @@ Name:Spiritual Visit
 ManaCost:W
 Types:Instant Arcane
 K:Splice:Arcane:W
-A:SP$ Token | Cost$ W | TokenAmount$ 1 | TokenScript$ c_1_1_spirit | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Spirit creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_spirit | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Spirit creature token.
 Oracle:Create a 1/1 colorless Spirit creature token.\nSplice onto Arcane {W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

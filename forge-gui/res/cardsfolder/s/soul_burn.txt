@@ -1,7 +1,7 @@
 Name:Soul Burn
 ManaCost:X 2 B
 Types:Sorcery
-A:SP$ StoreSVar | Cost$ X 2 B | XColor$ Black,Red | ValidTgts$ Any | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtPW | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ Spend only black and/or red mana on X. CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more than the amount of {B} spent on X, the player's life total before the damage was dealt, the planeswalker's loyalty before the damage was dealt, or the creature's toughness.
+A:SP$ StoreSVar | XColor$ Black,Red | ValidTgts$ Any | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtPW | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ Spend only black and/or red mana on X. CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more than the amount of {B} spent on X, the player's life total before the damage was dealt, the planeswalker's loyalty before the damage was dealt, or the creature's toughness.
 SVar:StoreTgtPW:DB$ StoreSVar | SVar$ Limit | Type$ Targeted | Expression$ CardCounters.LOYALTY | SubAbility$ StoreTgtP | ConditionDefined$ Targeted | ConditionPresent$ Card.Planeswalker | ConditionCheckSVar$ Loyalty | ConditionSVarCompare$ LTLimit
 SVar:StoreTgtP:DB$ StoreSVar | SVar$ Limit | Type$ Calculate | Expression$ TargetedPlayer$LifeTotal | SubAbility$ DBDamage | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature,Card.Planeswalker | ConditionCompare$ EQ0
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBGainLife | AILogic$ XLifeDrain

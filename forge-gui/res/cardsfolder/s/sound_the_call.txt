@@ -1,6 +1,6 @@
 Name:Sound the Call
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_1_1_wolf_sound_the_call | TokenOwner$ You | SpellDescription$ Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_wolf_sound_the_call | TokenOwner$ You | SpellDescription$ Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."
 DeckHints:Name$Sound the Call
 Oracle:Create a 1/1 green Wolf creature token. It has "This creature gets +1/+1 for each card named Sound the Call in each graveyard."

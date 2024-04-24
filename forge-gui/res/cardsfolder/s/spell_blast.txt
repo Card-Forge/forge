@@ -1,6 +1,6 @@
 Name:Spell Blast
 ManaCost:X U
 Types:Instant
-A:SP$ Counter | Cost$ X U | TargetType$ Spell | ValidTgts$ Card.cmcEQX | SpellDescription$ Counter target spell with mana value X. (For example, if that spell's mana cost is {3}{U}{U}, X is 5.)
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.cmcEQX | SpellDescription$ Counter target spell with mana value X. (For example, if that spell's mana cost is {3}{U}{U}, X is 5.)
 SVar:X:Count$xPaid
 Oracle:Counter target spell with mana value X. (For example, if that spell's mana cost is {3}{U}{U}, X is 5.)

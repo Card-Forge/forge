@@ -1,7 +1,7 @@
 Name:Snakeform
 ManaCost:2 GU
 Types:Instant
-A:SP$ Animate | Cost$ 2 GU | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Snake | RemoveCreatureTypes$ True | SubAbility$ DBDraw | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1. Draw a card.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Snake | RemoveCreatureTypes$ True | SubAbility$ DBDraw | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
 Oracle:Until end of turn, target creature loses all abilities and becomes a green Snake with base power and toughness 1/1.\nDraw a card.

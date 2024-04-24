@@ -1,6 +1,6 @@
 Name:Soul Feast
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 3 B B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 4 life and you gain 4 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 4 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 4 life and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 Oracle:Target player loses 4 life and you gain 4 life.

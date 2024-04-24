@@ -1,7 +1,7 @@
 Name:Spiteful Blow
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLand | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target creature and target land. | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLand | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target creature and target land. | StackDescription$ None
 SVar:DBLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:Destroy target creature and target land.

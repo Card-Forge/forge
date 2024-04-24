@@ -1,7 +1,7 @@
 Name:Spell Snuff
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. Fateful hour — If you have 5 or less life, draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. Fateful hour — If you have 5 or less life, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:FatefulHour:Count$YourLifeTotal
 Oracle:Counter target spell.\nFateful hour — If you have 5 or less life, draw a card.

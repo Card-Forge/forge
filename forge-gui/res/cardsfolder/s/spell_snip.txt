@@ -1,6 +1,6 @@
 Name:Spell Snip
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
 K:Cycling:2
 Oracle:Counter target spell unless its controller pays {1}.\nCycling {2} ({2}, Discard this card: Draw a card.)

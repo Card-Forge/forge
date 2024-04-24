@@ -1,7 +1,7 @@
 Name:Soul Nova
 ManaCost:3 W W
 Types:Instant
-A:SP$ Pump | Cost$ 3 W W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
+A:SP$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile target attacking creature and all Equipment attached to it.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Equipment.AttachedTo Targeted | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target attacking creature and all Equipment attached to it.
