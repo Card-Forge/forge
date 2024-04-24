@@ -1,5 +1,5 @@
 Name:Mortify
 ManaCost:1 W B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W B | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
+A:SP$ Destroy | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
 Oracle:Destroy target creature or enchantment.

@@ -1,7 +1,7 @@
 Name:Morbid Bloom
 ManaCost:4 B G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B G | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard, then create X 1/1 green Saproling creature tokens, where X is the exiled card's toughness.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You
 SVar:X:Targeted$CardToughness
 DeckHas:Ability$Token

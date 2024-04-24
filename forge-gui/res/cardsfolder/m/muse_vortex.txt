@@ -1,7 +1,7 @@
 Name:Muse Vortex
 ManaCost:X U U
 Types:Sorcery
-A:SP$ Dig | Cost$ X U U | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Exile the top X cards of your library. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. Then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order.
+A:SP$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Exile the top X cards of your library. You may cast an instant or sorcery spell with mana value X or less from among them without paying its mana cost. Then put the exiled instant and sorcery cards that weren't cast this way into your hand and the rest on the bottom of your library in a random order.
 SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered+YouOwn | ValidSA$ Instant.cmcLEX,Sorcery.cmcLEX | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Optional$ True | ForgetPlayed$ True | Amount$ 1 | SubAbility$ DBHand | StackDescription$ None
 SVar:DBHand:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Instant.IsRemembered+YouOwn,Sorcery.IsRemembered+YouOwn | ForgetChanged$ True | SubAbility$ DBLibrary
 SVar:DBLibrary:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Library | ChangeType$ Card.IsRemembered+YouOwn | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
