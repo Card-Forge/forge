@@ -1,7 +1,7 @@
 Name:Reviving Melody
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 G | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeCreature,ChangeEnchantment
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeCreature,ChangeEnchantment
 SVar:ChangeCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:ChangeEnchantment:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Enchantment.YouCtrl | SpellDescription$ Return target enchantment card from your graveyard to your hand.
 Oracle:Choose one or both —\n• Return target creature card from your graveyard to your hand.\n• Return target enchantment card from your graveyard to your hand.

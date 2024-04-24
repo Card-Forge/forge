@@ -2,7 +2,7 @@ Name:Roar of Jukai
 ManaCost:2 G
 Types:Instant Arcane
 K:Splice:Arcane:GainLife<5/Player.Opponent>
-A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.blocked | NumAtt$ +2 | NumDef$ +2 | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ GE1 | SpellDescription$ If you control a Forest, each blocked creature gets +2/+2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.blocked | NumAtt$ +2 | NumDef$ +2 | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ GE1 | SpellDescription$ If you control a Forest, each blocked creature gets +2/+2 until end of turn.
 AI:RemoveDeck:All
 DeckHints:Type$Arcane
 Oracle:If you control a Forest, each blocked creature gets +2/+2 until end of turn.\nSplice onto Arcane—An opponent gains 5 life. (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

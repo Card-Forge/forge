@@ -1,6 +1,6 @@
 Name:Rhystic Syphon
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 3 B B | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Target a player to lose life | SubAbility$ DBGainLife | UnlessCost$ 3 | UnlessPayer$ Targeted | UnlessResolveSubs$ WhenNotPaid | SpellDescription$ Unless target player pays {3}, that player loses 5 life and you gain 5 life.
+A:SP$ LoseLife | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Target a player to lose life | SubAbility$ DBGainLife | UnlessCost$ 3 | UnlessPayer$ Targeted | UnlessResolveSubs$ WhenNotPaid | SpellDescription$ Unless target player pays {3}, that player loses 5 life and you gain 5 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 Oracle:Unless target player pays {3}, that player loses 5 life and you gain 5 life.

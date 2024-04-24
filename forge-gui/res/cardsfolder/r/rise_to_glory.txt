@@ -1,7 +1,7 @@
 Name:Rise to Glory
 ManaCost:3 W B
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 W B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBReturnCreature,DBReturnAura
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBReturnCreature,DBReturnAura
 SVar:DBReturnCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:DBReturnAura:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target Aura card in your graveyard | ValidTgts$ Aura.YouOwn | SpellDescription$ Return target Aura card from your graveyard to the battlefield.
 Oracle:Choose one or both —\n• Return target creature card from your graveyard to the battlefield.\n• Return target Aura card from your graveyard to the battlefield.

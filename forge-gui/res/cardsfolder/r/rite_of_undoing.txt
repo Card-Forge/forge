@@ -2,7 +2,7 @@ Name:Rite of Undoing
 ManaCost:4 U
 Types:Instant
 K:Delve
-A:SP$ ChangeZone | Cost$ 4 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBChange | SpellDescription$ Return target nonland permanent you control and target nonland permanent you don't control to their owners' hands.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBChange | SpellDescription$ Return target nonland permanent you control and target nonland permanent you don't control to their owners' hands.
 SVar:DBChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouDontCtrl+nonLand | TgtPrompt$ Select target nonland permanent you don't control
 AI:RemoveDeck:All
 DeckHints:Ability$Graveyard

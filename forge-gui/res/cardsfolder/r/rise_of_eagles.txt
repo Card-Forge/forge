@@ -1,6 +1,6 @@
 Name:Rise of Eagles
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ Token | Cost$ 4 U U | TokenAmount$ 2 | TokenScript$ u_2_2_e_bird_flying | TokenOwner$ You | SubAbility$ DBScry | SpellDescription$ Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ u_2_2_e_bird_flying | TokenOwner$ You | SubAbility$ DBScry | SpellDescription$ Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Create two 2/2 blue Bird enchantment creature tokens with flying. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

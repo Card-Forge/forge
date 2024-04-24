@@ -2,6 +2,6 @@ Name:Return to the Ranks
 ManaCost:X W W
 Types:Sorcery
 K:Convoke
-A:SP$ ChangeZone | Cost$ X W W | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE2 | TgtPrompt$ Select X target creatures with mana value 2 or less | TargetMin$ X | TargetMax$ X | SpellDescription$ Return X target creature cards with mana value 2 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE2 | TgtPrompt$ Select X target creatures with mana value 2 or less | TargetMin$ X | TargetMax$ X | SpellDescription$ Return X target creature cards with mana value 2 or less from your graveyard to the battlefield.
 SVar:X:Count$xPaid
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nReturn X target creature cards with mana value 2 or less from your graveyard to the battlefield.

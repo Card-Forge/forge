@@ -1,7 +1,7 @@
 Name:River's Grasp
 ManaCost:3 UB
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 UB | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature to bounce | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | ConditionManaSpent$ U | SubAbility$ BPaid | SpellDescription$ If {U} was spent to cast this spell, return up to one target creature to its owner's hand. If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card. (Do both if {U}{B} was spent.)
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature to bounce | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | ConditionManaSpent$ U | SubAbility$ BPaid | SpellDescription$ If {U} was spent to cast this spell, return up to one target creature to its owner's hand. If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card. (Do both if {U}{B} was spent.)
 SVar:BPaid:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | ConditionManaSpent$ B
 AI:RemoveDeck:All
 Oracle:If {U} was spent to cast this spell, return up to one target creature to its owner's hand. If {B} was spent to cast this spell, target player reveals their hand, you choose a nonland card from it, then that player discards that card. (Do both if {U}{B} was spent.)

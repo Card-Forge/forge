@@ -1,7 +1,7 @@
 Name:Rites of Refusal
 ManaCost:1 U
 Types:Instant
-A:SP$ Discard | Cost$ 1 U | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBCounter | SpellDescription$ Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
+A:SP$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBCounter | SpellDescription$ Discard any number of cards. Counter target spell unless its controller pays {3} for each card discarded this way.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | UnlessCost$ Y | UnlessPayer$ TargetedController | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount
 SVar:Y:SVar$X/Times.3

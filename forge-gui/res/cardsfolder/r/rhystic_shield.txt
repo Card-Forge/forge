@@ -1,7 +1,7 @@
 Name:Rhystic Shield
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumDef$ +1 | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +0/+1 until end of turn. They get an additional +0/+2 until end of turn unless any player pays {2}.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +1 | SubAbility$ DBPumpAll | SpellDescription$ Creatures you control get +0/+1 until end of turn. They get an additional +0/+2 until end of turn unless any player pays {2}.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2 | UnlessCost$ 2 | UnlessPayer$ Player
 AI:RemoveDeck:All
 Oracle:Creatures you control get +0/+1 until end of turn. They get an additional +0/+2 until end of turn unless any player pays {2}.
