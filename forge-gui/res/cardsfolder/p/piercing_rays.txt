@@ -1,6 +1,6 @@
 Name:Piercing Rays
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target tapped creature.
+A:SP$ ChangeZone | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target tapped creature.
 A:AB$ Tap | Cost$ 2 W Reveal<1/CARDNAME> | TgtPrompt$ Select target untapped creature | ValidTgts$ Creature.untapped | Forecast$ True | SpellDescription$ Tap target untapped creature. (Activate this ability only during your upkeep and only once each turn.)
 Oracle:Exile target tapped creature.\nForecast — {2}{W}, Reveal Piercing Rays from your hand: Tap target untapped creature. (Activate this ability only during your upkeep and only once each turn.)

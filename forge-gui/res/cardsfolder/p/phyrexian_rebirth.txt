@@ -1,7 +1,7 @@
 Name:Phyrexian Rebirth
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, where X is the number of creatures destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBToken | SpellDescription$ Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, where X is the number of creatures destroyed this way.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_phyrexian_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X
 SVar:X:Remembered$Amount
 Oracle:Destroy all creatures, then create an X/X colorless Phyrexian Horror artifact creature token, where X is the number of creatures destroyed this way.

@@ -1,7 +1,7 @@
 Name:Pieces of the Puzzle
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U | DigNum$ 5 | Reveal$ True | ChangeNum$ 2 | ChangeValid$ Instant,Sorcery | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. Put up to two instant and/or sorcery cards from among them into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 5 | Reveal$ True | ChangeNum$ 2 | ChangeValid$ Instant,Sorcery | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. Put up to two instant and/or sorcery cards from among them into your hand and the rest into your graveyard.
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
 Oracle:Reveal the top five cards of your library. Put up to two instant and/or sorcery cards from among them into your hand and the rest into your graveyard.

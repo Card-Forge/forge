@@ -2,7 +2,7 @@ Name:Parallel Evolution
 ManaCost:3 G G
 Types:Sorcery
 K:Flashback:4 G G G
-A:SP$ RepeatEach | Cost$ 3 G G | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token | AILogic$ CloneAllTokens | ChangeZoneTable$ True | SpellDescription$ For each creature token on the battlefield, its controller creates a token that's a copy of that creature.
+A:SP$ RepeatEach | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token | AILogic$ CloneAllTokens | ChangeZoneTable$ True | SpellDescription$ For each creature token on the battlefield, its controller creates a token that's a copy of that creature.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ RememberedController
 AI:RemoveDeck:Random
 Oracle:For each creature token on the battlefield, its controller creates a token that's a copy of that creature.\nFlashback {4}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

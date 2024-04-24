@@ -1,7 +1,7 @@
 Name:Pack Hunt
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for up to three cards with the same name as target creature, reveal them, put them into your hand, then shuffle.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for up to three cards with the same name as target creature, reveal them, put them into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Targeted.sameName | ChangeNum$ 3 | StackDescription$ Search your library for up to three cards with the same name as target creature, reveal them, put them into your hand, then shuffle.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

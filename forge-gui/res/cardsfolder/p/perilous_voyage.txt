@@ -1,6 +1,6 @@
 Name:Perilous Voyage
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target nonland permanent you don't control to its owner's hand. If its mana value was 2 or less, scry 2.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target nonland permanent you don't control to its owner's hand. If its mana value was 2 or less, scry 2.
 SVar:DBScry:DB$ Scry | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLE2 | ConditionCompare$ EQ1 | ScryNum$ 2
 Oracle:Return target nonland permanent you don't control to its owner's hand. If its mana value was 2 or less, scry 2.
