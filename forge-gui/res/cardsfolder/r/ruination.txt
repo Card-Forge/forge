@@ -1,5 +1,5 @@
 Name:Ruination
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Land.nonBasic | SpellDescription$ Destroy all nonbasic lands.
+A:SP$ DestroyAll | ValidCards$ Land.nonBasic | SpellDescription$ Destroy all nonbasic lands.
 Oracle:Destroy all nonbasic lands.

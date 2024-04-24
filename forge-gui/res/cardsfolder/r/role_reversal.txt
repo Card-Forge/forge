@@ -1,7 +1,7 @@
 Name:Role Reversal
 ManaCost:U U R
 Types:Sorcery
-A:SP$ ExchangeControl | Cost$ U U R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanents that share a permanent type | TargetsWithSameCardType$ True | SpellDescription$ Exchange control of two target permanents that share a permanent type.
+A:SP$ ExchangeControl | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanents that share a permanent type | TargetsWithSameCardType$ True | SpellDescription$ Exchange control of two target permanents that share a permanent type.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Exchange control of two target permanents that share a permanent type.

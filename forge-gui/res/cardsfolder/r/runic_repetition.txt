@@ -1,6 +1,6 @@
 Name:Runic Repetition
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | Origin$ Exile | Destination$ Hand | TgtPrompt$ Select target exiled card with flashback you own | ValidTgts$ Card.YouOwn+withFlashback | SpellDescription$ Return target exiled card with flashback you own to your hand.
+A:SP$ ChangeZone | Origin$ Exile | Destination$ Hand | TgtPrompt$ Select target exiled card with flashback you own | ValidTgts$ Card.YouOwn+withFlashback | SpellDescription$ Return target exiled card with flashback you own to your hand.
 AI:RemoveDeck:Random
 Oracle:Return target exiled card with flashback you own to your hand.

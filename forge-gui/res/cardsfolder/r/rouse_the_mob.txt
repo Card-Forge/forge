@@ -2,6 +2,6 @@ Name:Rouse the Mob
 ManaCost:R
 Types:Instant
 K:Strive:2 R
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ Trample | NumAtt$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +2/+0 and gain trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +2 | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures each get +2/+0 and gain trample until end of turn.
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {2}{R} more to cast for each target beyond the first.\nAny number of target creatures each get +2/+0 and gain trample until end of turn.

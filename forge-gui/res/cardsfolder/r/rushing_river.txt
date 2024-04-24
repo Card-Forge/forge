@@ -2,7 +2,7 @@ Name:Rushing River
 ManaCost:2 U
 Types:Instant
 K:Kicker:Sac<1/Land>
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand. If this spell was kicked, return another target nonland permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand. If this spell was kicked, return another target nonland permanent to its owner's hand.
 SVar:X:Count$Kicked.2.1
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$Valid Permanent.nonLand+OppCtrl

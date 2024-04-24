@@ -1,7 +1,7 @@
 Name:Rolling Thunder
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any number of targets to distribute damage to | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets.
 SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.MaxPermanents
 SVar:MaxPermanents:Count$Valid Any
 SVar:X:Count$xPaid
