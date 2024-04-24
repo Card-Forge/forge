@@ -2,5 +2,5 @@ Name:Raven's Crime
 ManaCost:B
 Types:Sorcery
 K:Retrace
-A:SP$ Discard | Cost$ B | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+A:SP$ Discard | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 Oracle:Target player discards a card.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

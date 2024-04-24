@@ -1,7 +1,7 @@
 Name:Rapid Decay
 ManaCost:1 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 B | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to three target cards from a single graveyard.
 K:Cycling:2
 AI:RemoveDeck:All
 Oracle:Exile up to three target cards from a single graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)

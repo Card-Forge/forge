@@ -1,5 +1,5 @@
 Name:Radiant Purge
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature.MultiColor,Enchantment.MultiColor | TgtPrompt$ Select target multicolored creature or multicolored enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target multicolored creature or multicolored enchantment.
+A:SP$ ChangeZone | ValidTgts$ Creature.MultiColor,Enchantment.MultiColor | TgtPrompt$ Select target multicolored creature or multicolored enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target multicolored creature or multicolored enchantment.
 Oracle:Exile target multicolored creature or multicolored enchantment.

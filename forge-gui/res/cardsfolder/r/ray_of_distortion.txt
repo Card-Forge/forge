@@ -2,5 +2,5 @@ Name:Ray of Distortion
 ManaCost:3 W
 Types:Instant
 K:Flashback:4 W W
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment. | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Destroy target artifact or enchantment.\nFlashback {4}{W}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

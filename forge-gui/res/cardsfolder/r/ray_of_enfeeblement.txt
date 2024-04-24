@@ -1,7 +1,7 @@
 Name:Ray of Enfeeblement
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -4 | NumDef$ -X | SpellDescription$ Target creature gets -4/-1 until end of turn. If that creature is white, it gets -4/-4 until end of turn instead.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -4 | NumDef$ -X | SpellDescription$ Target creature gets -4/-1 until end of turn. If that creature is white, it gets -4/-4 until end of turn instead.
 SVar:X:Count$Compare Y GE1.4.1
 SVar:Y:Targeted$Valid Creature.White
 Oracle:Target creature gets -4/-1 until end of turn. If that creature is white, it gets -4/-4 until end of turn instead.

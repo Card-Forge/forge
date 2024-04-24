@@ -1,5 +1,5 @@
 Name:Rally the Forces
 ManaCost:2 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Attacking creatures get +1/+0 and gain first strike until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Attacking creatures get +1/+0 and gain first strike until end of turn.
 Oracle:Attacking creatures get +1/+0 and gain first strike until end of turn.

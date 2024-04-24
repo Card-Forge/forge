@@ -1,5 +1,5 @@
 Name:Reaver Ambush
 ManaCost:2 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 3 or less.
+A:SP$ ChangeZone | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 3 or less.
 Oracle:Exile target creature with power 3 or less.

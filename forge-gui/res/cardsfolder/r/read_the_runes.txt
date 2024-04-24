@@ -1,7 +1,7 @@
 Name:Read the Runes
 ManaCost:X U
 Types:Instant
-A:SP$ Draw | Cost$ X U | NumCards$ X | SubAbility$ DBRepeat | RememberDrawn$ AllReplaced | SpellDescription$ Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBRepeat | RememberDrawn$ AllReplaced | SpellDescription$ Draw X cards. For each card drawn this way, discard a card unless you sacrifice a permanent.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | Zone$ Hand | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

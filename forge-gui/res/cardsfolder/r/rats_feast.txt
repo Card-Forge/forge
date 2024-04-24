@@ -1,7 +1,7 @@
 Name:Rats' Feast
 ManaCost:X B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X B | TargetMin$ X | TargetMax$ X | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target cards in a single graveyard | ValidTgts$ Card | StackDescription$ Exile {c:Targeted}. | SpellDescription$ Exile X target cards from a single graveyard.
+A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target cards in a single graveyard | ValidTgts$ Card | StackDescription$ Exile {c:Targeted}. | SpellDescription$ Exile X target cards from a single graveyard.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Reach Through Mists
 ManaCost:U
 Types:Instant Arcane
-A:SP$ Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckNeeds:Type$Arcane
 DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable & Type$Spirit
 Oracle:Draw a card.
