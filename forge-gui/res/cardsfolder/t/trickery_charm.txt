@@ -1,7 +1,7 @@
 Name:Trickery Charm
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ DBPump,DBChooseType,DBRearrage
+A:SP$ Charm | Choices$ DBPump,DBChooseType,DBRearrage
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:DBChooseType:DB$ ChooseType | Type$ Creature | Defined$ You | SubAbility$ DBAnimate | SpellDescription$ Target creature becomes the creature type of your choice until end of turn.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ ChosenType | RemoveCreatureTypes$ True

@@ -1,7 +1,7 @@
 Name:Tsabo's Decree
 ManaCost:5 B
 Types:Instant
-A:SP$ ChooseType | Cost$ 5 B | Defined$ You | Type$ Creature | SubAbility$ TsabosDiscard | StackDescription$ None | SpellDescription$ Choose a creature type. Target player reveals their hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ TsabosDiscard | StackDescription$ None | SpellDescription$ Choose a creature type. Target player reveals their hand and discards all creature cards of that type. Then destroy all creatures of that type that player controls. They can't be regenerated.
 SVar:TsabosDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Creature.ChosenType | SubAbility$ TsabosDestroy
 SVar:TsabosDestroy:DB$ DestroyAll | ValidCards$ Creature.ChosenType+TargetedPlayerCtrl | NoRegen$ True
 AI:RemoveDeck:All

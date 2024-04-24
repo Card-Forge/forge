@@ -1,7 +1,7 @@
 Name:Triton Tactics
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | TargetMin$ 0 | TargetMax$ 2 | NumDef$ +3 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBUntap | SpellDescription$ Up to two target creatures each get +0/+3 until end of turn. Untap those creatures. At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumDef$ +3 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBUntap | SpellDescription$ Up to two target creatures each get +0/+3 until end of turn. Untap those creatures. At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.
 SVar:DBUntap:DB$ Untap | Defined$ ParentTarget | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | ThisTurn$ True | Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemember | TriggerDescription$ At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step. | RememberObjects$ ParentTarget
 SVar:TrigRemember:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigTap

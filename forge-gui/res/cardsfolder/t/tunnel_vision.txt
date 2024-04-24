@@ -1,7 +1,7 @@
 Name:Tunnel Vision
 ManaCost:5 U
 Types:Sorcery
-A:SP$ NameCard | Cost$ 5 U | Defined$ You | SubAbility$ FindThePrecious | AILogic$ MostProminentInHumanDeck | SpellDescription$ Choose a card name. Target player reveals cards from the top of their library until a card with that name is revealed. If it is, that player puts the rest of the revealed cards into their graveyard and puts the card with the chosen name on top of their library. Otherwise, the player shuffles.
+A:SP$ NameCard | Defined$ You | SubAbility$ FindThePrecious | AILogic$ MostProminentInHumanDeck | SpellDescription$ Choose a card name. Target player reveals cards from the top of their library until a card with that name is revealed. If it is, that player puts the rest of the revealed cards into their graveyard and puts the card with the chosen name on top of their library. Otherwise, the player shuffles.
 SVar:FindThePrecious:DB$ DigUntil | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | Valid$ Card.NamedCard | ValidDescription$ the named | NoMoveFound$ True | FoundDestination$ Library | FoundLibraryPosition$ 0 | RevealedDestination$ Graveyard | NoneFoundDestination$ Library | NoneFoundLibraryPosition$ 0 | Shuffle$ True | ShuffleCondition$ NoneFound
 AI:RemoveDeck:All
 Oracle:Choose a card name. Target player reveals cards from the top of their library until a card with that name is revealed. If it is, that player puts the rest of the revealed cards into their graveyard and puts the card with the chosen name on top of their library. Otherwise, the player shuffles.

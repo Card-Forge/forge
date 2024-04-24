@@ -1,7 +1,7 @@
 Name:Treacherous Urge
 ManaCost:4 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Hand | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | IsCurse$ True | SpellDescription$ Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | IsCurse$ True | SpellDescription$ Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step.

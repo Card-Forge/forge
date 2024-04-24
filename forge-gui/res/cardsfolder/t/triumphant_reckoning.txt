@@ -1,7 +1,7 @@
 Name:Triumphant Reckoning
 ManaCost:6 W W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 6 W W W | ChangeType$ Artifact.YouOwn,Enchantment.YouOwn,Planeswalker.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact, enchantment, and planeswalker cards from your graveyard to the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact.YouOwn,Enchantment.YouOwn,Planeswalker.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact, enchantment, and planeswalker cards from your graveyard to the battlefield.
 DeckNeeds:Type$Artifact|Enchantment|Planeswalker
 DeckHas:Ability$Graveyard
 Oracle:Return all artifact, enchantment, and planeswalker cards from your graveyard to the battlefield.

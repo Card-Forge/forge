@@ -1,6 +1,6 @@
 Name:Traumatize
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Mill | Cost$ 3 U U | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
+A:SP$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SpellDescription$ Target player mills half their library, rounded down.
 SVar:X:TargetedPlayer$CardsInLibrary/HalfDown
 Oracle:Target player mills half their library, rounded down.
