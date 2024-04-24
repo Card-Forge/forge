@@ -1,5 +1,5 @@
 Name:Renounce the Guilds
 ManaCost:1 W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 W | SacValid$ Permanent.MultiColor | Defined$ Player | SpellDescription$ Each player sacrifices a multicolored permanent.
+A:SP$ Sacrifice | SacValid$ Permanent.MultiColor | Defined$ Player | SpellDescription$ Each player sacrifices a multicolored permanent.
 Oracle:Each player sacrifices a multicolored permanent.

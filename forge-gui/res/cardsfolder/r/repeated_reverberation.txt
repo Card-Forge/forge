@@ -1,6 +1,6 @@
 Name:Repeated Reverberation
 ManaCost:2 R R
 Types:Instant
-A:SP$ DelayedTrigger | Cost$ 2 R R | AILogic$ SpellCopy | Mode$ SpellAbilityCast | ValidSA$ Spell.Instant,Spell.Sorcery,Activated.Loyalty | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
+A:SP$ DelayedTrigger | AILogic$ SpellCopy | Mode$ SpellAbilityCast | ValidSA$ Spell.Instant,Spell.Sorcery,Activated.Loyalty | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
 Oracle:When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.

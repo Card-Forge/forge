@@ -1,6 +1,6 @@
 Name:Remove
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Hand | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Return target attacking creature to its owner's hand.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nReturn target attacking creature to its owner's hand.

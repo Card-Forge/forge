@@ -1,7 +1,7 @@
 Name:Release the Gremlins
 ManaCost:X X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X X R | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | SubAbility$ DBToken | SpellDescription$ Destroy X target artifacts.
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | SubAbility$ DBToken | SpellDescription$ Destroy X target artifacts.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_2_2_gremlin | TokenOwner$ You | SpellDescription$ Create X 2/2 red Gremlin creature tokens.
 SVar:X:Count$xPaid
 Oracle:Destroy X target artifacts. Create X 2/2 red Gremlin creature tokens.

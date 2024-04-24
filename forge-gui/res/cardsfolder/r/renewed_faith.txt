@@ -2,7 +2,7 @@ Name:Renewed Faith
 ManaCost:2 W
 Types:Instant
 K:Cycling:1 W
-A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+A:SP$ GainLife | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 T:Mode$ Cycled | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ When you cycle CARDNAME, you may gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 Oracle:You gain 6 life.\nCycling {1}{W} ({1}{W}, Discard this card: Draw a card.)\nWhen you cycle Renewed Faith, you may gain 2 life.

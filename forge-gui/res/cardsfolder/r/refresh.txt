@@ -1,6 +1,6 @@
 Name:Refresh
 ManaCost:2 G
 Types:Instant
-A:SP$ Regenerate | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature. Draw a card. | SubAbility$ DBDraw
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature. Draw a card. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Regenerate target creature.\nDraw a card.
