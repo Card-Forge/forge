@@ -1,6 +1,6 @@
 Name:Resourceful Return
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBDraw | SpellDescription$ Return target creature card from your graveyard to your hand. If you control an artifact, draw a card.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBDraw | SpellDescription$ Return target creature card from your graveyard to your hand. If you control an artifact, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE1
 Oracle:Return target creature card from your graveyard to your hand. If you control an artifact, draw a card.

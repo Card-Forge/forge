@@ -1,7 +1,7 @@
 Name:Release to Memory
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Exile target opponent's graveyard. For each creature card exiled this way, create a 1/1 colorless Spirit creature token.
+A:SP$ ChangeZoneAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ Exile target opponent's graveyard. For each creature card exiled this way, create a 1/1 colorless Spirit creature token.
 SVar:DBToken:DB$ Token | TokenScript$ c_1_1_spirit | TokenAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature

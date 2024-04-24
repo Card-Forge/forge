@@ -2,6 +2,6 @@ Name:Recruit the Worthy
 ManaCost:W
 Types:Instant
 K:Buyback:3
-A:SP$ Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Soldier creature token.
 DeckHas:Ability$Token
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreate a 1/1 white Soldier creature token.

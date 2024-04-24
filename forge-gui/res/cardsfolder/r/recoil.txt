@@ -1,6 +1,6 @@
 Name:Recoil
 ManaCost:1 U B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Then that player discard a card. | SubAbility$ DBDiscard
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand. Then that player discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Return target permanent to its owner's hand. Then that player discards a card.

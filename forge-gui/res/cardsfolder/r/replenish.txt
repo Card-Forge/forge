@@ -1,5 +1,5 @@
 Name:Replenish
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 W | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all enchantment cards from your graveyard to the battlefield. (Auras with nothing to enchant remain in your graveyard.)
+A:SP$ ChangeZoneAll | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all enchantment cards from your graveyard to the battlefield. (Auras with nothing to enchant remain in your graveyard.)
 Oracle:Return all enchantment cards from your graveyard to the battlefield. (Auras with nothing to enchant remain in your graveyard.)

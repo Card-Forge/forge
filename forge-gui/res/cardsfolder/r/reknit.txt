@@ -1,5 +1,5 @@
 Name:Reknit
 ManaCost:1 GW
 Types:Instant
-A:SP$ Regenerate | Cost$ 1 GW | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Regenerate target permanent.
+A:SP$ Regenerate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Regenerate target permanent.
 Oracle:Regenerate target permanent.

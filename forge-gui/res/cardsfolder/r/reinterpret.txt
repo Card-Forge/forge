@@ -1,7 +1,7 @@
 Name:Reinterpret
 ManaCost:2 U R
 Types:Instant
-A:SP$ Counter | Cost$ 2 U R | TargetType$ Spell | TgtPrompt$ Select target spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBPlay | SpellDescription$ Counter target spell. You may cast a spell with an equal or lesser mana value from your hand without paying its mana cost.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBPlay | SpellDescription$ Counter target spell. You may cast a spell with an equal or lesser mana value from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLEX | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

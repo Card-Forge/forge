@@ -1,5 +1,5 @@
 Name:Reclaiming Vines
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment or land | SpellDescription$ Destroy target artifact, enchantment or land.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment or land | SpellDescription$ Destroy target artifact, enchantment or land.
 Oracle:Destroy target artifact, enchantment, or land.
