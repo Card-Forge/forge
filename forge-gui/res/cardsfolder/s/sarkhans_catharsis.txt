@@ -1,5 +1,5 @@
 Name:Sarkhan's Catharsis
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player or planeswalker.
 Oracle:Sarkhan's Catharsis deals 5 damage to target player or planeswalker.

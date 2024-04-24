@@ -2,7 +2,7 @@ Name:Scorching Lava
 ManaCost:1 R
 Types:Instant
 K:Kicker:R
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | ReplaceDyingDefined$ ThisTargetedCard.Creature | ReplaceDyingCondition$ Kicked | SubAbility$ KickingLava | SpellDescription$ CARDNAME deals 2 damage to any target. If this spell was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | ReplaceDyingDefined$ ThisTargetedCard.Creature | ReplaceDyingCondition$ Kicked | SubAbility$ KickingLava | SpellDescription$ CARDNAME deals 2 damage to any target. If this spell was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.
 SVar:KickingLava:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | Condition$ Kicked | StackDescription$ None | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nScorching Lava deals 2 damage to any target. If this spell was kicked, that creature can't be regenerated this turn and if it would die this turn, exile it instead.

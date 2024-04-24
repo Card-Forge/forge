@@ -2,7 +2,7 @@ Name:Saproling Migration
 ManaCost:1 G
 Types:Sorcery
 K:Kicker:4
-A:SP$ Token | Cost$ 1 G | TokenAmount$ WasKicked | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create two 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead.
+A:SP$ Token | TokenAmount$ WasKicked | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create two 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead.
 SVar:WasKicked:Count$Kicked.4.2
 DeckHas:Ability$Token
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nCreate two 1/1 green Saproling creature tokens. If this spell was kicked, create four of those tokens instead.

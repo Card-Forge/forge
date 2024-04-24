@@ -1,6 +1,6 @@
 Name:Scatter Arc
 ManaCost:3 U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBDraw | SpellDescription$ Counter target noncreature spell. Draw a card.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBDraw | SpellDescription$ Counter target noncreature spell. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target noncreature spell.\nDraw a card.

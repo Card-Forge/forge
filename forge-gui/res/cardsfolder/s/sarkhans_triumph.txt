@@ -1,7 +1,7 @@
 Name:Sarkhan's Triumph
 ManaCost:2 R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 R | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Dragon
 Oracle:Search your library for a Dragon creature card, reveal it, put it into your hand, then shuffle.

@@ -1,7 +1,7 @@
 Name:Scent of Nightshade
 ManaCost:1 B
 Types:Instant
-A:SP$ Reveal | Cost$ 1 B | Defined$ You | RevealValid$ Card.Black | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfNightshadePump | SpellDescription$ Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
+A:SP$ Reveal | Defined$ You | RevealValid$ Card.Black | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBScentOfNightshadePump | SpellDescription$ Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
 SVar:DBScentOfNightshadePump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -ScentOfNightshadeX | NumDef$ -ScentOfNightshadeX | SubAbility$ DBScentOfNightshadeCleanup
 SVar:DBScentOfNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:ScentOfNightshadeX:Remembered$Amount

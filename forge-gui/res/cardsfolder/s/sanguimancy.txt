@@ -1,7 +1,7 @@
 Name:Sanguimancy
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 B | NumCards$ X | SubAbility$ DBLoseLife | SpellDescription$ You draw X cards and you lose X life, where X is your devotion to black.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBLoseLife | SpellDescription$ You draw X cards and you lose X life, where X is your devotion to black.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Devotion.Black
 AI:RemoveDeck:All
