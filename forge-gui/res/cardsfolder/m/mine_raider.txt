@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Rogue
 PT:3/2
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Outlaw+StrictlyOther | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Outlaw+StrictlyOther+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Trample\nWhen Mine Raider enters the battlefield, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

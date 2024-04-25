@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Sorcery
 K:Spree
 A:SP$ Charm | Choices$ DBSacrifice,DBDiscard,DBLoseLife | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
-SVar:DBSacrifice:DB$ Sacrifice | SpreeCost$ 1 | ValidTgts$ Opponent | Amount$ Count$Valid Creature.ThisTargetedPlayerCtrl/HalfUp | SacValid$ Creature | Mode$ TgtChoose | SpellDescription$ Target opponent sacrifices half the creatures they control, rounded up.
+SVar:DBSacrifice:DB$ Sacrifice | SpreeCost$ 1 | ValidTgts$ Opponent | Amount$ ThisTargetedPlayer$Valid Creature.YouCtrl/HalfUp | SacValid$ Creature | Mode$ TgtChoose | SpellDescription$ Target opponent sacrifices half the creatures they control, rounded up.
 SVar:DBDiscard:DB$ Discard | SpreeCost$ 1 | ValidTgts$ Opponent | NumCards$ ThisTargetedPlayer$CardsInHand/HalfUp | Mode$ TgtChoose | SpellDescription$ Target opponent discards half the cards in their hand, rounded up.
 SVar:DBLoseLife:DB$ LoseLife | SpreeCost$ 2 | ValidTgts$ Opponent | LifeAmount$ ThisTargetedPlayer$LifeTotal/HalfUp | SpellDescription$ Target opponent loses half their life, rounded up.
 Oracle:Spree (Choose one or more additional costs.)\n+ {1} — Target opponent sacrifices half the creatures they control, rounded up.\n+ {2} — Target opponent discards half the cards in their hand, rounded up.\n+ {2} — Target opponent loses half their life, rounded up.
