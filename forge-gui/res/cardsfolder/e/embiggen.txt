@@ -1,0 +1,6 @@
+Name:Embiggen
+ManaCost:G
+Types:Instant
+A:SP$ Pump | Cost$ G | ValidTgts$ Creature.nonBrushwagg | TgtPrompt$ Select target non Brushwagg creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Until end of turn, target non-Brushwagg creature gets +1/+1 for each supertype, card type, and subtype it has.
+SVar:X:Count$AllTypes.Targeted
+Oracle:Until end of turn, target non-Brushwagg creature gets +1/+1 for each supertype, card type, and subtype it has.
