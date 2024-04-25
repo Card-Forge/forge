@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.ai.AiProfileUtil;
 import forge.gui.control.PlaybackSpeed;
 import org.apache.commons.lang3.StringUtils;
 
@@ -89,9 +90,23 @@ public class HostedMatch {
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-        gameRules.setSideboardForAI(FModel.getPreferences().getPrefBoolean(FPref.MATCH_SIDEBOARD_FOR_AI));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
+        // AI specific sideboarding rules
+        switch (AiProfileUtil.getAISideboardingMode()) {
+            case Off:
+                gameRules.setAISideboardingEnabled(false);
+                gameRules.setSideboardForAI(false);
+                break;
+            case AI:
+                gameRules.setAISideboardingEnabled(true);
+                gameRules.setSideboardForAI(false);
+                break;
+            case HumanForAI:
+                gameRules.setAISideboardingEnabled(true);
+                gameRules.setSideboardForAI(true);
+                break;
+        }
         return gameRules;
     }
 
