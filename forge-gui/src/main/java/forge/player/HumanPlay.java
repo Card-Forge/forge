@@ -596,14 +596,6 @@ public class HumanPlay {
             }
         }
 
-        int timesPseudokicked = source.getPseudoKickerMagnitude();
-        if (timesPseudokicked > 0 && ability.isAnnouncing("Pseudo-multikicker")) {
-            ManaCost mkCost = ability.getMultiKickerManaCost();
-            for (int i = 0; i < timesPseudokicked; i++) {
-                toPay.addManaCost(mkCost);
-            }
-        }
-
         CardCollection cardsToDelve = new CardCollection();
         if (!effect) {
             CostAdjustment.adjust(toPay, ability, cardsToDelve, false);

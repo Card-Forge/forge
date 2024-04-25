@@ -1831,10 +1831,6 @@ public class CardProperty {
                 if ("1".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
                 if ("2".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
             }
-        } else if (property.startsWith("pseudokicked")) {
-            if (property.equals("pseudokicked")) {
-                if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
-            }
         } else if (property.equals("bargained")) {
             if (card.getCastSA() == null) {
                 return false;

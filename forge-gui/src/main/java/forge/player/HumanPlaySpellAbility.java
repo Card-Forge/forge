@@ -251,8 +251,6 @@ public class HumanPlaySpellAbility {
                     ability.setSVar(varName, value.toString());
                     if ("Multikicker".equals(varName)) {
                         card.setKickerMagnitude(value);
-                    } else if ("Pseudo-multikicker".equals(varName)) {
-                        card.setPseudoMultiKickerMagnitude(value);
                     } else {
                         card.setSVar(varName, value.toString());
                     }

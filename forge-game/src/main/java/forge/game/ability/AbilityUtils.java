@@ -2065,9 +2065,6 @@ public class AbilityUtils {
         if (sq[0].contains("TimesKicked")) {
             return doXMath(isUnlinkedFromCastSA(ctb, c) ? 0 : c.getKickerMagnitude(), expr, c, ctb);
         }
-        if (sq[0].contains("TimesPseudokicked")) {
-            return doXMath(c.getPseudoKickerMagnitude(), expr, c, ctb);
-        }
         if (sq[0].contains("TimesMutated")) {
             return doXMath(c.getTimesMutated(), expr, c, ctb);
         }
