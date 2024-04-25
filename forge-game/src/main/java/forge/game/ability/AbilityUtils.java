@@ -2631,6 +2631,16 @@ public class AbilityUtils {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
+        if (sq[0].equals("AllTypes")) {
+            List<Card> cards = getDefinedCards(c, sq[1], ctb);
+
+            int amount = countCardTypesFromList(cards, false) +
+                    countSuperTypesFromList(cards) +
+                    countSubTypesFromList(cards);
+
+            return doXMath(amount, expr, c, ctb);
+        }
+
         if (sq[0].equals("TotalTurns")) {
             return doXMath(game.getPhaseHandler().getTurn(), expr, c, ctb);
         }
@@ -3361,7 +3371,7 @@ public class AbilityUtils {
 
         //SacrificedPermanentTypesThisTurn
         if (l[0].startsWith("SacrificedPermanentTypesThisTurn")) {
-            return doXMath(getCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
+            return doXMath(countCardTypesFromList(player.getSacrificedThisTurn(), true), m, source, ctb);
         }
 
         final String[] sq = l[0].split("\\.");
@@ -3644,7 +3654,7 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("CardTypes")) {
-            return doXMath(getCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+            return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         String filteredString = string;
@@ -3862,13 +3872,31 @@ public class AbilityUtils {
         return list;
     }
 
-    public static int getCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
+    public static int countCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
         if (permanentTypes)
             return (int) types.stream().filter(type -> type.isPermanent).count();
+        return types.size();
+    }
+
+    public static int countSuperTypesFromList(final Iterable<Card> list) {
+        EnumSet<CardType.Supertype> types = EnumSet.noneOf(CardType.Supertype.class);
+        for (Card c1 : list) {
+            Iterables.addAll(types, c1.getType().getSupertypes());
+        }
+
+        return types.size();
+    }
+
+    public static int countSubTypesFromList(final Iterable<Card> list) {
+        Set<String> types = new HashSet<>();
+        for (Card c1 : list) {
+            Iterables.addAll(types, c1.getType().getSubtypes());
+        }
+
         return types.size();
     }
 

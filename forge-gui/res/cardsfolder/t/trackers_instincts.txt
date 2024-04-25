@@ -2,5 +2,5 @@ Name:Tracker's Instincts
 ManaCost:1 G
 Types:Sorcery
 K:Flashback:2 U
-A:SP$ Dig | Cost$ 1 G | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Creature | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.
 Oracle:Reveal the top four cards of your library. Put a creature card from among them into your hand and the rest into your graveyard.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

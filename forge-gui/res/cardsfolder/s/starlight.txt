@@ -1,7 +1,7 @@
 Name:Starlight
 ManaCost:1 W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 1 W | ValidTgts$ Opponent | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 3 life for each black creature target opponent controls.
+A:SP$ GainLife | ValidTgts$ Opponent | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 3 life for each black creature target opponent controls.
 SVar:X:Count$Valid Creature.TargetedPlayerCtrl+Black/Times.3
 AI:RemoveDeck:Random
 Oracle:You gain 3 life for each black creature target opponent controls.

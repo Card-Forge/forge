@@ -2,6 +2,6 @@ Name:Temporal Trespass
 ManaCost:8 U U U
 Types:Sorcery
 K:Delve
-A:SP$ AddTurn | Cost$ 8 U U U | NumTurns$ 1 | SubAbility$ DBExile | SpellDescription$ Take an extra turn after this one. Exile CARDNAME.
+A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBExile | SpellDescription$ Take an extra turn after this one. Exile CARDNAME.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nTake an extra turn after this one. Exile Temporal Trespass.

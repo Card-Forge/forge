@@ -1,7 +1,7 @@
 Name:Weed Strangle
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBClash | SpellDescription$ Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBClash | SpellDescription$ Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBGain
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness

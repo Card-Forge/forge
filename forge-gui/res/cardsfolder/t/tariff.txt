@@ -1,7 +1,7 @@
 Name:Tariff
 ManaCost:1 W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 W | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SpellDescription$ Each player sacrifices the creature they control with the highest mana value unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest, that player chooses one.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SpellDescription$ Each player sacrifices the creature they control with the highest mana value unless they pay that creature's mana cost. If two or more creatures a player controls are tied for highest, that player chooses one.
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestCMC_CreatureControlledByRemembered | Mandatory$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Card.ChosenCard | SacMessage$ the creature with the highest mana value | UnlessCost$ DefinedCost_ChosenCard | UnlessPayer$ Player.IsRemembered
 AI:RemoveDeck:All

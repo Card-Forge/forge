@@ -1,7 +1,7 @@
 Name:Tower Above
 ManaCost:2/G 2/G 2/G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2G 2G 2G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | KW$ Trample & Wither | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able." (It deals damage to creatures in the form of -1/-1 counters.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | KW$ Trample & Wither | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +4/+4 and gains trample, wither, and "When this creature attacks, target creature blocks it this turn if able." (It deals damage to creatures in the form of -1/-1 counters.)
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ TrigAttack
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TowerAboveTrigBlock | TriggerDescription$ Whenever CARDNAME attacks, target creature blocks it this turn if able
 SVar:TowerAboveTrigBlock:DB$ MustBlock | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.

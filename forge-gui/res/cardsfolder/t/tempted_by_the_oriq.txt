@@ -1,6 +1,6 @@
 Name:Tempted by the Oriq
 ManaCost:1 U U U
 Types:Sorcery
-A:SP$ GainControl | Cost$ 1 U U U | ValidTgts$ Creature.OppCtrl+cmcLE3,Planeswalker.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature or planeswalker an opponent controls with mana value 3 or less to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, gain control of up to one target creature or planeswalker that player controls with mana value 3 or less.
+A:SP$ GainControl | ValidTgts$ Creature.OppCtrl+cmcLE3,Planeswalker.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature or planeswalker an opponent controls with mana value 3 or less to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, gain control of up to one target creature or planeswalker that player controls with mana value 3 or less.
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:For each opponent, gain control of up to one target creature or planeswalker that player controls with mana value 3 or less.

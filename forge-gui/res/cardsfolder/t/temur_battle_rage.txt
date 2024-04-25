@@ -1,6 +1,6 @@
 Name:Temur Battle Rage
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SubAbility$ DBPump | SpellDescription$ Target creature gains double strike until end of turn. Ferocious — That creature also gains trample until end of turn if you control a creature with power 4 or greater.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SubAbility$ DBPump | SpellDescription$ Target creature gains double strike until end of turn. Ferocious — That creature also gains trample until end of turn if you control a creature with power 4 or greater.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | ConditionDescription$ If you control a creature with power 4 or greater.
 Oracle:Target creature gains double strike until end of turn.\nFerocious — That creature also gains trample until end of turn if you control a creature with power 4 or greater.

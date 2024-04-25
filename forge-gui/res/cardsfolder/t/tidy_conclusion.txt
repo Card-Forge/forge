@@ -1,7 +1,7 @@
 Name:Tidy Conclusion
 ManaCost:3 B B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain 1 life for each artifact you control.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. You gain 1 life for each artifact you control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:Destroy target creature. You gain 1 life for each artifact you control.

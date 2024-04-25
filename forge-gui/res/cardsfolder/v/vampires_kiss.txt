@@ -1,7 +1,7 @@
 Name:Vampire's Kiss
 ManaCost:1 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | StackDescription$ {p:Targeted} loses 2 life | SpellDescription$ Target player loses 2 life and you gain 2 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | StackDescription$ {p:Targeted} loses 2 life | SpellDescription$ Target player loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | StackDescription$ and {p:You} gains 2 life. | SubAbility$ DBBlood
 SVar:DBBlood:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_blood_draw | TokenOwner$ You | SpellDescription$ Create two Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
 DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Blood

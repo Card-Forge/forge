@@ -1,7 +1,7 @@
 Name:Tainted Pact
 ManaCost:1 B
 Types:Instant
-A:SP$ Repeat | Cost$ 1 B | RepeatSubAbility$ DBRepeat | RepeatCheckSVar$ TaintedCheck | RepeatSVarCompare$ EQ0 | RepeatDefined$ Imprinted | RepeatPresent$ Card.sharesNameWith Remembered | RepeatCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.
+A:SP$ Repeat | RepeatSubAbility$ DBRepeat | RepeatCheckSVar$ TaintedCheck | RepeatSVarCompare$ EQ0 | RepeatDefined$ Imprinted | RepeatPresent$ Card.sharesNameWith Remembered | RepeatCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.
 SVar:DBRepeat:DB$ Pump | RememberObjects$ Imprinted | SubAbility$ DBForget
 SVar:DBForget:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBReturnToHand

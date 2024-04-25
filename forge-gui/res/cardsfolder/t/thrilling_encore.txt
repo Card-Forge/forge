@@ -1,6 +1,6 @@
 Name:Thrilling Encore
 ManaCost:4 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.ThisTurnEnteredFrom_Battlefield | GainControl$ True | SpellDescription$ Put onto the battlefield under your control all creature cards in all graveyards that were put there from the battlefield this turn.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Creature.ThisTurnEnteredFrom_Battlefield | GainControl$ True | SpellDescription$ Put onto the battlefield under your control all creature cards in all graveyards that were put there from the battlefield this turn.
 DeckHas:Ability$Graveyard
 Oracle:Put onto the battlefield under your control all creature cards in all graveyards that were put there from the battlefield this turn.

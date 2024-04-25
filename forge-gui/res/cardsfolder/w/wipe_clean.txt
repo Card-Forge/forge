@@ -1,6 +1,6 @@
 Name:Wipe Clean
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
+A:SP$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 K:Cycling:3
 Oracle:Exile target enchantment.\nCycling {3} ({3}, Discard this card: Draw a card.)

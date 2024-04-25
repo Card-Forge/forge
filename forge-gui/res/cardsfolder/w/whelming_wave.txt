@@ -1,6 +1,6 @@
 Name:Whelming Wave
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Creature.nonKraken+nonLeviathan+nonOctopus+nonSerpent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.nonKraken+nonLeviathan+nonOctopus+nonSerpent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses and Serpents.
 AI:RemoveDeck:Random
 Oracle:Return all creatures to their owners' hands except for Krakens, Leviathans, Octopuses, and Serpents.

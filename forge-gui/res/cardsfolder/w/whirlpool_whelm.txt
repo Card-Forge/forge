@@ -1,7 +1,7 @@
 Name:Whirlpool Whelm
 ManaCost:1 U
 Types:Instant
-A:SP$ Clash | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | WinSubAbility$ DBLibrary | OtherwiseSubAbility$ DBHand | RememberTargets$ True | SpellDescription$ Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead.
+A:SP$ Clash | ValidTgts$ Creature | TgtPrompt$ Select target creature | WinSubAbility$ DBLibrary | OtherwiseSubAbility$ DBHand | RememberTargets$ True | SpellDescription$ Clash with an opponent, then return target creature to its owner's hand. If you win, you may put that creature on top of its owner's library instead.
 SVar:DBLibrary:DB$ ChangeZone | DefinedPlayer$ TargetedController | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | ChangeType$ Card.IsRemembered | Hidden$ True | Chooser$ You | SubAbility$ DBDeclined
 SVar:DBDeclined:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:DBHand:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand

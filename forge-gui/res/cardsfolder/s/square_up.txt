@@ -1,6 +1,6 @@
 Name:Square Up
 ManaCost:1 GU
 Types:Instant
-A:SP$ Animate | Cost$ 1 GU | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 4 | Toughness$ 4 | SpellDescription$ Target creature has base power and toughness 4/4 until end of turn.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 4 | Toughness$ 4 | SpellDescription$ Target creature has base power and toughness 4/4 until end of turn.
 AI:RemoveDeck:All
 Oracle:Target creature has base power and toughness 4/4 until end of turn.

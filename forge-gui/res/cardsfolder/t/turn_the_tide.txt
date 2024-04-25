@@ -1,5 +1,5 @@
 Name:Turn the Tide
 ManaCost:1 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 U | ValidCards$ Creature.OppCtrl | IsCurse$ True | NumAtt$ -2 | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | IsCurse$ True | NumAtt$ -2 | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
 Oracle:Creatures your opponents control get -2/-0 until end of turn.

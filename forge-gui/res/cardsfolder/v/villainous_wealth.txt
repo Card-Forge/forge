@@ -1,7 +1,7 @@
 Name:Villainous Wealth
 ManaCost:X B G U
 Types:Sorcery
-A:SP$ Dig | Cost$ X B G U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent exiles the top X cards of their library. You may cast any number of spells with mana value X or less from among them without paying their mana costs.
+A:SP$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Target opponent exiles the top X cards of their library. You may cast any number of spells with mana value X or less from among them without paying their mana costs.
 SVar:DBPlay:DB$ Play | WithoutManaCost$ True | ValidZone$ Exile | Valid$ Card.IsRemembered | ValidSA$ Spell.cmcLEX | Amount$ All | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

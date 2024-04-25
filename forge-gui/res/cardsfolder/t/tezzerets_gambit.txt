@@ -1,7 +1,7 @@
 Name:Tezzeret's Gambit
 ManaCost:3 UP
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 UP | Defined$ You | NumCards$ 2 | SubAbility$ DBProlif | SpellDescription$ Draw two cards, then proliferate.
+A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBProlif | SpellDescription$ Draw two cards, then proliferate.
 SVar:DBProlif:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters

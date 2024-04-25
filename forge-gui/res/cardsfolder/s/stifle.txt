@@ -1,6 +1,6 @@
 Name:Stifle
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TgtPrompt$ Choose target ability | ValidTgts$ Card,Emblem | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.
+A:SP$ Counter | TgtPrompt$ Choose target ability | ValidTgts$ Card,Emblem | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.
 AI:RemoveDeck:All
 Oracle:Counter target activated or triggered ability. (Mana abilities can't be targeted.)

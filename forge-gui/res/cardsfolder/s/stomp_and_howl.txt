@@ -1,7 +1,7 @@
 Name:Stomp and Howl
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | SpellDescription$ Destroy target artifact and target enchantment. | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | SpellDescription$ Destroy target artifact and target enchantment. | StackDescription$ None
 SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:Destroy target artifact and target enchantment.

@@ -2,5 +2,5 @@ Name:Travel Preparations
 ManaCost:1 G
 Types:Sorcery
 K:Flashback:1 W
-A:SP$ PutCounter | Cost$ 1 G | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures.
+A:SP$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creatures | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures.
 Oracle:Put a +1/+1 counter on each of up to two target creatures.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

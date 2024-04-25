@@ -1,6 +1,6 @@
 Name:Vile Rebirth
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 Oracle:Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token.

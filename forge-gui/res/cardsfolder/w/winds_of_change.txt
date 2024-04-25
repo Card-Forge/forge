@@ -1,7 +1,7 @@
 Name:Winds of Change
 ManaCost:R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ R | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards.
 SVar:ShuffleHand:DB$ ChangeZoneAll | Defined$ Player.IsRemembered | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | Shuffle$ True | SubAbility$ WindDraw
 SVar:WindDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanTheWind
 SVar:CleanTheWind:DB$ Cleanup | ClearRemembered$ True

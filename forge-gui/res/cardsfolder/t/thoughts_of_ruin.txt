@@ -1,7 +1,7 @@
 Name:Thoughts of Ruin
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 R R | SacValid$ Land | Amount$ X | Defined$ Player | SpellDescription$ Each player sacrifices a land for each card in your hand.
+A:SP$ Sacrifice | SacValid$ Land | Amount$ X | Defined$ Player | SpellDescription$ Each player sacrifices a land for each card in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Each player sacrifices a land for each card in your hand.

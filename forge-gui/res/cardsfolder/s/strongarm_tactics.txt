@@ -1,7 +1,7 @@
 Name:Strongarm Tactics
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | Mode$ TgtChoose | Defined$ Player | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBRepeat | SpellDescription$ Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.
+A:SP$ Discard | Mode$ TgtChoose | Defined$ Player | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBRepeat | SpellDescription$ Each player discards a card. Then each player who didn't discard a creature card this way loses 4 life.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 4 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Defined$ Player.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

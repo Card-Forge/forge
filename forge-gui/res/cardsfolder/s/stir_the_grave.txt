@@ -1,6 +1,6 @@
 Name:Stir the Grave
 ManaCost:X B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card with mana value X or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card with mana value X or less from your graveyard to the battlefield.
 SVar:X:Targeted$CardManaCost
 Oracle:Return target creature card with mana value X or less from your graveyard to the battlefield.

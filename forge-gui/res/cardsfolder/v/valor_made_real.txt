@@ -1,6 +1,6 @@
 Name:Valor Made Real
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CanBlockAny$ True | SpellDescription$ Target creature can block any number of creatures this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | CanBlockAny$ True | SpellDescription$ Target creature can block any number of creatures this turn.
 AI:RemoveDeck:All
 Oracle:Target creature can block any number of creatures this turn.

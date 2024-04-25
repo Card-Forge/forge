@@ -1,7 +1,7 @@
 Name:Volcanic Eruption
 ManaCost:X U U U
 Types:Sorcery
-A:SP$ Destroy | Cost$ X U U U | TargetMin$ X | TargetMax$ X | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | RememberTargets$ True | SpellDescription$ Destroy X target Mountains. CARDNAME deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way. | SubAbility$ DBDamage
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | RememberTargets$ True | SpellDescription$ Destroy X target Mountains. CARDNAME deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way. | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ Y | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SubAbility$ DBCleanup
 SVar:X:Count$xPaid
 SVar:Y:Count$ValidGraveyard Mountain.IsRemembered

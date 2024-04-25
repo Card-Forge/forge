@@ -1,6 +1,6 @@
 Name:Wojek Siren
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | Radiance$ True | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Radiance — Target creature and each other creature that shares a color with it get +1/+1 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | Radiance$ True | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Radiance — Target creature and each other creature that shares a color with it get +1/+1 until end of turn.
 AI:RemoveDeck:All
 Oracle:Radiance — Target creature and each other creature that shares a color with it get +1/+1 until end of turn.

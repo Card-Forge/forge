@@ -2,6 +2,6 @@ Name:Transgress the Mind
 ManaCost:1 B
 Types:Sorcery
 K:Devoid
-A:SP$ RevealHand | Cost$ 1 B | Defined$ Targeted | ValidTgts$ Player | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand.
+A:SP$ RevealHand | Defined$ Targeted | ValidTgts$ Player | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand.
 SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.cmcGE3 | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | AlreadyRevealed$ True | StackDescription$ You choose a card from it with mana value 3 or greater and exile that card.
 Oracle:Devoid (This card has no color.)\nTarget player reveals their hand. You choose a card from it with mana value 3 or greater and exile that card.

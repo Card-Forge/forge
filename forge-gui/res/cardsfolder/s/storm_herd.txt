@@ -1,6 +1,6 @@
 Name:Storm Herd
 ManaCost:8 W W
 Types:Sorcery
-A:SP$ Token | Cost$ 8 W W | TokenAmount$ X | TokenScript$ w_1_1_pegasus_flying | TokenOwner$ You | SpellDescription$ Create X 1/1 white Pegasus creature tokens with flying, where X is your life total.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_pegasus_flying | TokenOwner$ You | SpellDescription$ Create X 1/1 white Pegasus creature tokens with flying, where X is your life total.
 SVar:X:Count$YourLifeTotal
 Oracle:Create X 1/1 white Pegasus creature tokens with flying, where X is your life total.

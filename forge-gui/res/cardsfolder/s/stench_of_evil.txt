@@ -1,7 +1,7 @@
 Name:Stench of Evil
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 B B | ValidCards$ Plains | RememberDestroyed$ True | SubAbility$ DBPay | SpellDescription$ Destroy all Plains. For each land destroyed this way, CARDNAME deals 1 damage to that land's controller unless they pay {2}.
+A:SP$ DestroyAll | ValidCards$ Plains | RememberDestroyed$ True | SubAbility$ DBPay | SpellDescription$ Destroy all Plains. For each land destroyed this way, CARDNAME deals 1 damage to that land's controller unless they pay {2}.
 SVar:DBPay:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBDmg | SubAbility$ DBCleanup | DamageMap$ True
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ ImprintedController | UnlessCost$ 2 | UnlessPayer$ ImprintedController | ShowCurrentCard$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

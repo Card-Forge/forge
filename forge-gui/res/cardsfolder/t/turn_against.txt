@@ -2,5 +2,5 @@ Name:Turn Against
 ManaCost:4 R
 Types:Instant
 K:Devoid
-A:SP$ GainControl | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
 Oracle:Devoid (This card has no color.)\nGain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.

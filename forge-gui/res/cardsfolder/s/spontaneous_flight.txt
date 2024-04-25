@@ -1,7 +1,7 @@
 Name:Spontaneous Flight
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. Put a flying counter on it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. Put a flying counter on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Flying | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Target creature gets +2/+2 until end of turn. Put a flying counter on it.

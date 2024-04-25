@@ -1,7 +1,7 @@
 Name:Spring Cleaning
 ManaCost:1 G
 Types:Instant
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Enchantment | SubAbility$ DBClash | SpellDescription$ Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control.
+A:SP$ Destroy | ValidTgts$ Enchantment | SubAbility$ DBClash | SpellDescription$ Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Enchantment.OppCtrl
 Oracle:Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

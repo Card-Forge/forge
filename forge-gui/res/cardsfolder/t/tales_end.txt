@@ -1,6 +1,6 @@
 Name:Tale's End
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Activated,Triggered,Spell.Legendary | TgtPrompt$ Select target activated ability, triggered ability, or legendary spell | ValidTgts$ Card,Emblem | SpellDescription$ Counter target activated ability, triggered ability, or legendary spell.
+A:SP$ Counter | TargetType$ Activated,Triggered,Spell.Legendary | TgtPrompt$ Select target activated ability, triggered ability, or legendary spell | ValidTgts$ Card,Emblem | SpellDescription$ Counter target activated ability, triggered ability, or legendary spell.
 AI:RemoveDeck:Random
 Oracle:Counter target activated ability, triggered ability, or legendary spell.

@@ -1,7 +1,7 @@
 Name:Traitor's Roar
 ManaCost:4 BR
 Types:Sorcery
-A:SP$ Tap | Cost$ 4 BR | ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. It deals damage equal to its power to its controller.
+A:SP$ Tap | ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. It deals damage equal to its power to its controller.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | DamageSource$ Targeted | NumDmg$ X
 SVar:X:Targeted$CardPower
 K:Conspire

@@ -1,5 +1,5 @@
 Name:Stream of Acid
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Land,Creature.nonBlack | TgtPrompt$ Select target land or nonblack creature | SpellDescription$ Destroy target land or nonblack creature.
+A:SP$ Destroy | ValidTgts$ Land,Creature.nonBlack | TgtPrompt$ Select target land or nonblack creature | SpellDescription$ Destroy target land or nonblack creature.
 Oracle:Destroy target land or nonblack creature.

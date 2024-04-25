@@ -1,5 +1,5 @@
 Name:Surge of Zeal
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | Radiance$ True | KW$ Haste | SpellDescription$ Radiance — Target creature and each other creature that shares a color with it gain haste until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | Radiance$ True | KW$ Haste | SpellDescription$ Radiance — Target creature and each other creature that shares a color with it gain haste until end of turn.
 Oracle:Radiance — Target creature and each other creature that shares a color with it gain haste until end of turn.

@@ -1,7 +1,7 @@
 Name:Winterflame
 ManaCost:1 U R
 Types:Instant
-A:SP$ Charm | Cost$ 1 U R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBTap,DBDmg
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBTap,DBDmg
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature to tap. | SpellDescription$ Tap target creature.
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to be dealt 2 damage. | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 Oracle:Choose one or both —\n• Tap target creature.\n• Winterflame deals 2 damage to target creature.

@@ -1,7 +1,7 @@
 Name:Warp World
 ManaCost:5 R R R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 5 R R R | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ ChangePermanent | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ ChangePermanent | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all permanents they own into their library, then reveals that many cards from the top of their library. Each player puts all artifact, creature, and land cards revealed this way onto the battlefield, then does the same for enchantment cards, then puts all cards revealed this way that weren't put onto the battlefield on the bottom of their library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Permanent.RememberedPlayerOwn | Imprint$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDig
 SVar:DBDig:DB$ PeekAndReveal | Defined$ Remembered | PeekAmount$ WarpX | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBCleanImprint
 SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True

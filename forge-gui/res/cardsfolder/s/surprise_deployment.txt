@@ -1,7 +1,7 @@
 Name:Surprise Deployment
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DelTrig | SpellDescription$ Cast this spell only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Creature.nonWhite | ChangeNum$ 1 | RememberChanged$ True | TgtPrompt$ Select target creature | ActivationPhases$ BeginCombat->EndCombat | AILogic$ SurpriseBlock | SubAbility$ DelTrig | SpellDescription$ Cast this spell only during combat. You may put a nonwhite creature card from your hand onto the battlefield. At the beginning of the next end step, return that creature to your hand. (Return it only if it's on the battlefield.)
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigBounce | RememberObjects$ RememberedLKI | TriggerDescription$ At the beginning of the next end step, return that creature to your hand. | AILogic$ Always | SubAbility$ DBCleanup
 SVar:TrigBounce:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

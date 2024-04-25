@@ -1,7 +1,7 @@
 Name:Whiteout
 ManaCost:1 G
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 G | ValidCards$ Creature | RemoveKeywords$ Flying | SpellDescription$ All creatures lose flying until end of turn.
+A:SP$ AnimateAll | ValidCards$ Creature | RemoveKeywords$ Flying | SpellDescription$ All creatures lose flying until end of turn.
 A:AB$ ChangeZone | Cost$ Sac<1/Land.Snow/snow land> | ActivationZone$ Graveyard | Defined$ Self | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

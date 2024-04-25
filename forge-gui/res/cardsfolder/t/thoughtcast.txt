@@ -1,6 +1,6 @@
 Name:Thoughtcast
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:Affinity:Artifact
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nDraw two cards.

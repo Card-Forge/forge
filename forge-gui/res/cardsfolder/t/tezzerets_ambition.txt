@@ -1,6 +1,6 @@
 Name:Tezzeret's Ambition
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Draw three cards. If you control no artifacts, discard a card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards. If you control no artifacts, discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ EQ0 | Mode$ TgtChoose
 Oracle:Draw three cards. If you control no artifacts, discard a card.

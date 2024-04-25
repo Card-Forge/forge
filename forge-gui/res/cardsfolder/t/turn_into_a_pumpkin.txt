@@ -1,7 +1,7 @@
 Name:Turn into a Pumpkin
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | AIManaPref$ U | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card. Adamant — If at least three blue mana was spent to cast this spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | AIManaPref$ U | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card. Adamant — If at least three blue mana was spent to cast this spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:X:Count$Adamant.Blue.1.0
