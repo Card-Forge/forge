@@ -54,7 +54,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.62-SNAPSHOT";
+    public static final String CURRENT_VERSION = "1.6.63-SNAPSHOT";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
