@@ -3148,11 +3148,7 @@ public class CardFactoryUtil {
             final String[] n = keyword.split(":");
             final SpellAbility sa = card.getFirstSpellAbility();
             sa.setMultiKickerManaCost(new ManaCost(new ManaCostParser(n[1])));
-            if (keyword.endsWith("Generic")) {
-                sa.addAnnounceVar("Pseudo-multikicker");
-            } else {
-                sa.addAnnounceVar("Multikicker");
-            }
+            sa.addAnnounceVar("Multikicker");
         } else if (keyword.startsWith("Mutate")) {
             final String[] params = keyword.split(":");
             final String cost = params[1];
