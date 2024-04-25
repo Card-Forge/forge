@@ -1116,7 +1116,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             final CardCollection chosen = new CardCollection();
             while (c > 0) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, ability);
-                inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), "%d"));
+                inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), c));
                 inp.setCancelAllowed(true);
                 inp.showAndWait();
                 if (inp.hasCancelled()) {
