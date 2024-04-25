@@ -1,7 +1,7 @@
 Name:Pelakka Predation
 ManaCost:2 B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ {p:Targeted} reveals their hand. | SpellDescription$ Target opponent reveals their hand. You choose a card from it with mana value 3 or greater. That player discards that card.
+A:SP$ RevealHand | ValidTgts$ Opponent | RememberRevealed$ True | SubAbility$ DBChoose | StackDescription$ {p:Targeted} reveals their hand. | SpellDescription$ Target opponent reveals their hand. You choose a card from it with mana value 3 or greater. That player discards that card.
 SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.cmcGE3+IsRemembered | ChoiceTitle$ You may choose a card with mana value 3 or greater | MinAmount$ 0 | Amount$ 1 | SubAbility$ DBDiscard | StackDescription$ {p:You} may choose a card from it with mana value 3 or greater.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ TgtChoose | DiscardValid$ Card.ChosenCard | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ {p:Targeted} discards that card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True

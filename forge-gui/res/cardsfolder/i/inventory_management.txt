@@ -2,7 +2,7 @@ Name:Inventory Management
 ManaCost:R W
 Types:Instant
 K:Split Second
-A:SP$ RepeatEach |RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl | RepeatSubAbility$ DBAttach | SpellDescription$ For each Aura and Equipment you control, you may attach it to a creature you control.
+A:SP$ RepeatEach | RepeatCards$ Aura.YouCtrl,Equipment.YouCtrl | RepeatSubAbility$ DBAttach | SpellDescription$ For each Aura and Equipment you control, you may attach it to a creature you control.
 SVar:DBAttach:DB$ Attach | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | Object$ Remembered | Optional$ True
 DeckNeeds:Type$Equipment|Aura
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nFor each Aura and Equipment you control, you may attach it to a creature you control.

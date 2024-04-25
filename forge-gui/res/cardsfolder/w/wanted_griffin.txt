@@ -1,0 +1,9 @@
+Name:Wanted Griffin
+ManaCost:3 W
+Types:Creature Griffin
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
+DeckHas:Ability$Token & Type$Mercenary & Color$Red
+Oracle:Flying\nWhen Wanted Griffin dies, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

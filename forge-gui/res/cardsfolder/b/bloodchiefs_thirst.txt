@@ -2,7 +2,7 @@ Name:Bloodchief's Thirst
 ManaCost:B
 Types:Sorcery
 K:Kicker:2 B
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.cmcLE2,Planeswalker.cmcLE2 | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target creature or planeswalker with mana value 2 or less | SubAbility$ DBDestroy | AILogic$ AssumeAtLeastOneTarget | StackDescription$ SpellDescription | SpellDescription$ Destroy target creature or planeswalker with mana value 2 or less. If this spell was kicked, instead destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE2,Planeswalker.cmcLE2 | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target creature or planeswalker with mana value 2 or less | SubAbility$ DBDestroy | AILogic$ AssumeAtLeastOneTarget | StackDescription$ SpellDescription | SpellDescription$ Destroy target creature or planeswalker with mana value 2 or less. If this spell was kicked, instead destroy target creature or planeswalker.
 SVar:DBDestroy:DB$ Destroy | TargetMin$ Y | TargetMax$ Y | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | StackDescription$ [{c:ThisTargetedCard}]
 SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.1.0

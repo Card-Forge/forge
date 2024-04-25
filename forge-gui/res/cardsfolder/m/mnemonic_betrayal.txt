@@ -1,7 +1,7 @@
 Name:Mnemonic Betrayal
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 1 U B | Defined$ Player.Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all card from all opponents' graveyards. You may cast those cards this turn, and you may spend it as though it were mana of any type to cast those spells. At the beginning of the next end step, if any of those cards remain exiled, return them to their owner's graveyards. Exile CARDNAME.
+A:SP$ ChangeZoneAll | Defined$ Player.Opponent | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all card from all opponents' graveyards. You may cast those cards this turn, and you may spend it as though it were mana of any type to cast those spells. At the beginning of the next end step, if any of those cards remain exiled, return them to their owner's graveyards. Exile CARDNAME.
 SVar:DBEffect:DB$ Effect | Duration$ Permanent | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DelTrig
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast those cards this turn, and you may spend mana as though it were mana of any type to cast those spells.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ At the beginning of the next end step, if any of those cards remain exiled, return them to their owner's graveyards. | SubAbility$ ExileSelf

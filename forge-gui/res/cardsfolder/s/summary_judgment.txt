@@ -1,6 +1,6 @@
 Name:Summary Judgment
 ManaCost:1 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.tapped | NumDmg$ X | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 3 damage to target tapped creature. If you cast this spell during your main phase, CARDNAME deals 5 damage instead.
+A:SP$ DealDamage | ValidTgts$ Creature.tapped | NumDmg$ X | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 3 damage to target tapped creature. If you cast this spell during your main phase, CARDNAME deals 5 damage instead.
 SVar:X:Count$IfCastInOwnMainPhase.5.3
 Oracle:Summary Judgment deals 3 damage to target tapped creature.\nAddendum — If you cast this spell during your main phase, it deals 5 damage instead.

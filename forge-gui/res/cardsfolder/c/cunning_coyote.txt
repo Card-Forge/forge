@@ -1,0 +1,9 @@
+Name:Cunning Coyote
+ManaCost:1 R
+Types:Creature Coyote
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target creature you control gets +1/+1 and gains haste until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | NumAtt$ +1 | NumDef$ +1 | KW$ Haste
+K:Plot:1 R
+Oracle:Haste\nWhen Cunning Coyote enters the battlefield, another target creature you control gets +1/+1 and gains haste until end of turn.\nPlot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

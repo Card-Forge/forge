@@ -1,0 +1,10 @@
+Name:Juggle the Performance
+ManaCost:1 B R
+Types:Sorcery
+A:SP$ Discard | Defined$ Player | Mode$ Hand | SubAbility$ DBChooseCard | StackDescription$ SpellDescription | SpellDescription$ Each player discards their hand,
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player | Amount$ 7 | AtRandom$ True | ChoiceZone$ Library | ControlledByPlayer$ Right | ChosenMap$ True | SubAbility$ DBConjure | StackDescription$ None
+SVar:DBConjure:DB$ MakeCard | Defined$ Player | DefinedName$ ChosenMap | Zone$ Hand | StackDescription$ SpellDescription | RememberMade$ True | SubAbility$ DBPerpetual | SpellDescription$ then conjures a duplicate of each of seven random cards from the library of the player to their right into their hand.
+SVar:DBPerpetual:DB$ Animate | Defined$ Remembered | staticAbilities$ AnyType | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ The duplicates perpetually gain "Mana of any type can be spent to cast this spell."
+SVar:AnyType:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyType | Description$ Mana of any type can be spent to cast this spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Each player discards their hand, then conjures a duplicate of each of seven random cards from the library of the player to their right into their hand. The duplicates perpetually gain "Mana of any type can be spent to cast this spell."

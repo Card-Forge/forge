@@ -1,7 +1,7 @@
 Name:Nahiri's Lithoforming
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ X R R | SacValid$ Land | Amount$ X | RememberSacrificed$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
+A:SP$ Sacrifice | SacValid$ Land | Amount$ X | RememberSacrificed$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Sacrifice X lands. For each land sacrificed this way, draw a card. You may play X additional lands this turn. Lands you control enter the battlefield tapped this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBStoreSVar | StackDescription$ None
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ XLands | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayMoreLand | ReplacementEffects$ LandETB | SubAbility$ DBCleanup

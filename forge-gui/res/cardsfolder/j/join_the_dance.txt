@@ -2,6 +2,6 @@ Name:Join the Dance
 ManaCost:G W
 Types:Sorcery
 K:Flashback:3 G W
-A:SP$ Token | Cost$ G W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Human creature tokens.\nFlashback {3}{G}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

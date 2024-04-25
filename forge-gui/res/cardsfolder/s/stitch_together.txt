@@ -1,7 +1,7 @@
 Name:Stitch Together
 ManaCost:B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | ConditionCheckSVar$ X | ConditionSVarCompare$ LE6 | SubAbility$ DBChangeZone | SpellDescription$ Return target creature card from your graveyard to your hand. Threshold — Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | ConditionCheckSVar$ X | ConditionSVarCompare$ LE6 | SubAbility$ DBChangeZone | SpellDescription$ Return target creature card from your graveyard to your hand. Threshold — Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7
 SVar:X:Count$InYourYard
 Oracle:Return target creature card from your graveyard to your hand.\nThreshold — Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.

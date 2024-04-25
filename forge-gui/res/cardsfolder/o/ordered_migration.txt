@@ -1,7 +1,7 @@
 Name:Ordered Migration
 ManaCost:3 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W U | TokenAmount$ X | TokenScript$ u_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Domain — Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ u_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Domain — Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 Oracle:Domain — Create a 1/1 blue Bird creature token with flying for each basic land type among lands you control.

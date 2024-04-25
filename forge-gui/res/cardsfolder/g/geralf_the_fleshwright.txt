@@ -1,0 +1,12 @@
+Name:Geralf, the Fleshwright
+ManaCost:2 U
+Types:Legendary Creature Human Warlock
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | ActivatorThisTurnCast$ GT1 | Execute$ TrigToken | TriggerDescription$ Whenever you cast a spell during your turn other than your first spell that turn, create a 2/2 blue and black Zombie Rogue creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Zombie.YouCtrl | Execute$ DBPutCounter | TriggerDescription$ Whenever a Zombie enters the battlefield under your control, put a +1/+1 counter on it for each other Zombie that entered the battlefield under your control this turn.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredCard | CounterNum$ X | CounterType$ P1P1
+SVar:X:Count$ThisTurnEntered_Battlefield_Zombie.YouCtrl+NotTriggeredCard
+DeckHas:Ability$Token|Counters & Type$Zombie|Rogue & Color$Black
+DeckHints:Type$Zombie
+Oracle:Whenever you cast a spell during your turn other than your first spell that turn, create a 2/2 blue and black Zombie Rogue creature token.\nWhenever a Zombie enters the battlefield under your control, put a +1/+1 counter on it for each other Zombie that entered the battlefield under your control this turn.

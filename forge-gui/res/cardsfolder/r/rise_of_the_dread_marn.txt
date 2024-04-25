@@ -1,7 +1,7 @@
 Name:Rise of the Dread Marn
 ManaCost:2 B
 Types:Instant
-A:SP$ Token | Cost$ 2 B | TokenAmount$ X | TokenScript$ b_2_2_zombie_berserker | TokenOwner$ You | SpellDescription$ Create X 2/2 black Zombie Berserker creature tokens, where X is the number of nontoken creatures that died this turn.
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie_berserker | TokenOwner$ You | SpellDescription$ Create X 2/2 black Zombie Berserker creature tokens, where X is the number of nontoken creatures that died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken
 K:Foretell:B
 DeckHas:Ability$Token

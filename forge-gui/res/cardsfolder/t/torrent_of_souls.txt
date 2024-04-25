@@ -1,7 +1,7 @@
 Name:Torrent of Souls
 ManaCost:4 BR
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 BR | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature card in your graveyard to return | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | ConditionManaSpent$ B | SubAbility$ RPaid | SpellDescription$ Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast this spell. Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast this spell. (Do both if {B}{R} was spent.)
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature card in your graveyard to return | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | ConditionManaSpent$ B | SubAbility$ RPaid | SpellDescription$ Return up to one target creature card from your graveyard to the battlefield if {B} was spent to cast this spell. Creatures target player controls get +2/+0 and gain haste until end of turn if {R} was spent to cast this spell. (Do both if {B}{R} was spent.)
 SVar:RPaid:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ 2 | KW$ Haste | ConditionManaSpent$ R
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:Random

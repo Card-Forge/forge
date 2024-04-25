@@ -2,5 +2,5 @@ Name:River Merfolk
 ManaCost:U U
 Types:Creature Merfolk
 PT:2/1
-A:AB$ Pump | Cost$ U | KW$ Mountainwalk | Defined$ Self | SpellDescription$ CARDNAME gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)
+A:AB$ Pump | Cost$ U | KW$ Landwalk:Mountain | Defined$ Self | SpellDescription$ CARDNAME gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)
 Oracle:{U}: River Merfolk gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)

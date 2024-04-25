@@ -1,5 +1,5 @@
 Name:Mulch
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 G | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
 Oracle:Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.

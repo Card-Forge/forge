@@ -1,7 +1,7 @@
 Name:Fumigate
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain 1 life for each creature destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain 1 life for each creature destroyed this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | SubAbility$ DBCleanup | LifeAmount$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

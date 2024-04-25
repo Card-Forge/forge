@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Creature Alien Salamander
 Colors:green
 PT:2/2
-K:Islandwalk
+K:Landwalk:Island
 Oracle:Islandwalk

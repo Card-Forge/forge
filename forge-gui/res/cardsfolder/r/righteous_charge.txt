@@ -1,5 +1,5 @@
 Name:Righteous Charge
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Creatures you control get +2/+2 until end of turn.
 Oracle:Creatures you control get +2/+2 until end of turn.

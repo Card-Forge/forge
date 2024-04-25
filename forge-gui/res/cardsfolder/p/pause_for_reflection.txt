@@ -2,5 +2,5 @@ Name:Pause for Reflection
 ManaCost:2 G
 Types:Instant
 K:Convoke
-A:SP$ Fog | Cost$ 2 G | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+A:SP$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPrevent all combat damage that would be dealt this turn.

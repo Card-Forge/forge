@@ -1,0 +1,11 @@
+Name:Unscrupulous Contractor
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature> | Execute$ TrigDraw | TriggerDescription$ When you do, target player draws two cards and loses 2 life.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
+K:Plot:2 B
+DeckHas:Ability$Sacrifice
+Oracle:When Unscrupulous Contractor enters the battlefield, you may sacrifice a creature. When you do, target player draws two cards and loses 2 life.\nPlot {2}{B} (You may pay {2}{B} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

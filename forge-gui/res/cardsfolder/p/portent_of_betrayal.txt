@@ -1,6 +1,6 @@
 Name:Portent of Betrayal
 ManaCost:3 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBScry | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Scry 1.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBScry | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

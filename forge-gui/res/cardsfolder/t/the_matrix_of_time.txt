@@ -5,7 +5,7 @@ T:Mode$ PlaneswalkedTo | ValidCard$ Plane.Self | Execute$ TrigExile | TriggerDes
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile
 S:Mode$ Continuous | Affected$ Card.ExiledWithSource | MayPlay$ True | Condition$ PlayerTurn | EffectZone$ Command | AffectedZone$ Exile | Description$ During your turn, you may play lands and cast spells from among cards exiled with CARDNAME.
 T:Mode$ SpellCast | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever you play a land or cast a spell from among cards exiled with CARDNAME, that card's owner loses 3 life and exiles the top card of their library.
-T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Command | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whhenever you play a land or cast a spell from among cards exiled with CARDNAME, that card's owner loses 3 life and exiles the top card of their library.
+T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Command | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever you play a land or cast a spell from among cards exiled with CARDNAME, that card's owner loses 3 life and exiles the top card of their library.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ TriggeredCardOwner | SubAbility$ DBExileTop
 SVar:DBExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredCardOwner | DestinationZone$ Exile
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ TrigTreasure | TriggerDescription$ Whenever chaos ensues, create two Treasure tokens.

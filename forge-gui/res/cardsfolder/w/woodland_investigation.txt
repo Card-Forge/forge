@@ -1,0 +1,9 @@
+Name:Woodland Investigation
+ManaCost:G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBAnimate | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+SVar:DBAnimate:DB$ Animate | Types$ Clue,Artifact | Duration$ Perpetual | Abilities$ ClueSac | Defined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ It perpetually becomes a Clue artifact in addition to its other types and gains "{2}, Sacrifice this permanent: Draw a card."
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:ClueSac:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this permanent> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Type$Clue|Artifact & Ability$Sacrifice
+Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle. It perpetually becomes a Clue artifact in addition to its other types and gains "{2}, Sacrifice this permanent: Draw a card."

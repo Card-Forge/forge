@@ -1,5 +1,5 @@
 Name:Natural State
 ManaCost:G
 Types:Instant
-A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact.cmcLE3,Enchantment.cmcLE3 | TgtPrompt$ Select target artifact or enchantment with mana value 3 or less | SpellDescription$ Destroy target artifact or enchantment with mana value 3 or less.
+A:SP$ Destroy | ValidTgts$ Artifact.cmcLE3,Enchantment.cmcLE3 | TgtPrompt$ Select target artifact or enchantment with mana value 3 or less | SpellDescription$ Destroy target artifact or enchantment with mana value 3 or less.
 Oracle:Destroy target artifact or enchantment with mana value 3 or less.

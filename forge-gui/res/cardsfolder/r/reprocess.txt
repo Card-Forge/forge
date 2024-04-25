@@ -1,7 +1,7 @@
 Name:Reprocess
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 B B | Defined$ You | Amount$ SacX | SacValid$ Artifact,Creature,Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw | SpellDescription$ Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Artifact,Creature,Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDraw | SpellDescription$ Sacrifice any number of artifacts, creatures, and/or lands. Draw a card for each permanent sacrificed this way.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ DrawX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl

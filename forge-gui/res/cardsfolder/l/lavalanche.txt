@@ -1,7 +1,7 @@
 Name:Lavalanche
 ManaCost:X B R G
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X B R G | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ X | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ X | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals X damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
 SVar:DmgAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:Count$xPaid

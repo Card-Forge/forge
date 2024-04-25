@@ -2,7 +2,7 @@ Name:Overblaze
 ManaCost:3 R
 Types:Instant Arcane
 K:Splice:Arcane:2 R R
-A:SP$ Effect | Cost$ 3 R | ValidTgts$ Permanent,Player | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent | SpellDescription$ Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.
+A:SP$ Effect | ValidTgts$ Permanent,Player | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent | SpellDescription$ Each time target permanent would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.
 SVar:OverblazeEvent:Event$ DamageDone | ValidSource$ Permanent.IsRemembered | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ Each time target permanent would deal noncombat damage to a permanent or player this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice

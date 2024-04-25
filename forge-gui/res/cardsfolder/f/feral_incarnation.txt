@@ -2,5 +2,5 @@ Name:Feral Incarnation
 ManaCost:8 G
 Types:Sorcery
 K:Convoke
-A:SP$ Token | Cost$ 8 G | TokenAmount$ 3 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create three 3/3 green Beast creature tokens.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create three 3/3 green Beast creature tokens.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate three 3/3 green Beast creature tokens.

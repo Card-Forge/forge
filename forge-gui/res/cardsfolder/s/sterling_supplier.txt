@@ -1,0 +1,9 @@
+Name:Sterling Supplier
+ManaCost:4 W
+Types:Creature Bird Soldier
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on another target creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Sterling Supplier enters the battlefield, put a +1/+1 counter on another target creature you control.

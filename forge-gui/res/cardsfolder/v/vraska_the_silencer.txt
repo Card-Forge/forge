@@ -1,0 +1,11 @@
+Name:Vraska, the Silencer
+ManaCost:1 B G
+Types:Legendary Creature Gorgon Assassin
+PT:3/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Whenever a nontoken creature an opponent controls dies, you may pay {1}. If you do, return that card to the battlefield tapped under your control. It's a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other card types.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 1 | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Tapped$ True | AnimateSubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Artifact,Treasure | RemoveCardTypes$ True | Abilities$ TreasureSac | Duration$ Permanent
+SVar:TreasureSac:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Type$Artifact|Treasure
+Oracle:Deathtouch\nWhenever a nontoken creature an opponent controls dies, you may pay {1}. If you do, return that card to the battlefield tapped under your control. It's a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other card types.

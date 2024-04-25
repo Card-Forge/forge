@@ -138,7 +138,7 @@ public class AiAttackController {
                     continue;
                 }
                 sa.setActivatingPlayer(defender);
-                if (sa.hasParam("Crew") && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
+                if (sa.isCrew() && !ComputerUtilCost.checkTapTypeCost(defender, sa.getPayCosts(), c, sa, tappedDefenders)) {
                     continue;
                 } else if (!ComputerUtilCost.canPayCost(sa, defender, false) || !sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                     continue;
@@ -551,8 +551,8 @@ public class AiAttackController {
         }
 
         if (bandingCreatures != null) {
-            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Plainswalk", "Islandwalk",
-                    "Forestwalk", "Mountainwalk", "Swampwalk");
+            List<String> evasionKeywords = Arrays.asList("Flying", "Horsemanship", "Shadow", "Landwalk:Plains", "Landwalk:Island",
+                    "Landwalk:Forest", "Landwalk:Mountain", "Landwalk:Swamp");
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             for (Card c : bandingCreatures) {

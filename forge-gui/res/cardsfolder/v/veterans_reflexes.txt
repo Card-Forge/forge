@@ -1,6 +1,6 @@
 Name:Veteran's Reflexes
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+1 until end of turn. Untap that creature.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+1 until end of turn. Untap that creature.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Target creature gets +1/+1 until end of turn. Untap that creature.

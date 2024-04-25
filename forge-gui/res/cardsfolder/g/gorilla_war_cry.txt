@@ -1,7 +1,7 @@
 Name:Gorilla War Cry
 ManaCost:1 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature | KW$ Menace | ActivationPhases$ BeginCombat->Declare Attackers | SubAbility$ DelTrigSlowtrip | SpellDescription$ All creatures gain menace until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | KW$ Menace | ActivationPhases$ BeginCombat->Declare Attackers | SubAbility$ DelTrigSlowtrip | SpellDescription$ All creatures gain menace until end of turn.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Cast this spell only during combat before blockers are declared.\nAll creatures gain menace until end of turn. (They can't be blocked except by two or more creatures.)\nDraw a card at the beginning of the next turn's upkeep.

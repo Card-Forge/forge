@@ -1,10 +1,9 @@
 Name:Meteor Shower
 ManaCost:X X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X X R | ValidTgts$ Any | TgtPrompt$ Select targets to distribute damage to | NumDmg$ DistroDmg | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ DistroDmg | SpellDescription$ CARDNAME deals X plus 1 damage divided as you choose among any number of targets.
-SVar:NumPlayers:PlayerCountPlayers$Amount/Plus.NumCreaturesAndPlaneswalkers
-SVar:NumCreaturesAndPlaneswalkers:Count$Valid Any
-SVar:MaxTgts:SVar$NumPlayers
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select targets to distribute damage to | NumDmg$ DistroDmg | TargetMin$ 0 | TargetMax$ MaxTgts | DividedAsYouChoose$ DistroDmg | SpellDescription$ CARDNAME deals X plus 1 damage divided as you choose among any number of targets.
+SVar:MaxTgts:PlayerCountPlayers$Amount/Plus.MaxPermanents
+SVar:MaxPermanents:Count$Valid Any
 SVar:DistroDmg:SVar$X/Plus.1
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

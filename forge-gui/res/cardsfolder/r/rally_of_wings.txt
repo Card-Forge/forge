@@ -1,6 +1,6 @@
 Name:Rally of Wings
 ManaCost:1 W
 Types:Instant
-A:SP$ UntapAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Untap all creatures you control. Creatures you control with flying get +2/+2 until end of turn.
+A:SP$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBPumpAll | SpellDescription$ Untap all creatures you control. Creatures you control with flying get +2/+2 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+withFlying | NumAtt$ +2 | NumDef$ +2
 Oracle:Untap all creatures you control. Creatures you control with flying get +2/+2 until end of turn.

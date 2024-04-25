@@ -1,7 +1,7 @@
 Name:Supplant Form
 ManaCost:4 U U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | RememberLKI$ True | SubAbility$ DBCopy | SpellDescription$ Return target creature to its owner's hand. You create a token that's a copy of that creature.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | RememberLKI$ True | SubAbility$ DBCopy | SpellDescription$ Return target creature to its owner's hand. You create a token that's a copy of that creature.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ DirectRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 # use DirectRemembered to copy the LKI

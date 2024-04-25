@@ -1,7 +1,7 @@
 Name:Crash Landing
 ManaCost:2 G
 Types:Instant
-A:SP$ Debuff | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Keywords$ Flying | SubAbility$ DBDamage | SpellDescription$ Target creature with flying loses flying until end of turn. CARDNAME deals damage to that creature equal to the number of Forests you control.
+A:SP$ Debuff | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Keywords$ Flying | SubAbility$ DBDamage | SpellDescription$ Target creature with flying loses flying until end of turn. CARDNAME deals damage to that creature equal to the number of Forests you control.
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:Count$Valid Forest.YouCtrl
 Oracle:Target creature with flying loses flying until end of turn. Crash Landing deals damage to that creature equal to the number of Forests you control.

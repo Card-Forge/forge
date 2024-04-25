@@ -2,7 +2,7 @@ Name:Sprouting Renewal
 ManaCost:2 G
 Types:Sorcery
 K:Convoke
-A:SP$ Charm | Cost$ 2 G | Choices$ DBToken,DBDestroy
+A:SP$ Charm | Choices$ DBToken,DBDestroy
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create a 2/2 green and white Elf Knight creature token with vigilance.
 DeckHas:Ability$Token

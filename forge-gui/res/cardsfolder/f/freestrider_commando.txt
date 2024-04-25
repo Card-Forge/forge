@@ -1,0 +1,9 @@
+Name:Freestrider Commando
+ManaCost:2 G
+Types:Creature Centaur Mercenary
+PT:3/3
+K:etbCounter:P1P1:2:CheckSVar$ X | SVarCompare$ EQ0:CARDNAME enters the battlefield with two +1/+1 counters on it if it wasn't cast or no mana was spent to cast it.
+SVar:X:Count$CastTotalManaSpent
+K:Plot:3 G
+DeckHas:Ability$Counters
+Oracle:Freestrider Commando enters the battlefield with two +1/+1 counters on it if it wasn't cast or no mana was spent to cast it.\nPlot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

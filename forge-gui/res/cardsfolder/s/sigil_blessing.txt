@@ -1,6 +1,6 @@
 Name:Sigil Blessing
 ManaCost:G W
 Types:Instant
-A:SP$ Pump | Cost$ G W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBPumpAll | SpellDescription$ Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBPumpAll | SpellDescription$ Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.Other+YouCtrl+Creature | NumAtt$ +1 | NumDef$ +1
 Oracle:Until end of turn, target creature you control gets +3/+3 and other creatures you control get +1/+1.

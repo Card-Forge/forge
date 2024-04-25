@@ -1,7 +1,7 @@
 Name:Fertile Imagination
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 2 G G | Defined$ You | Type$ Card | SubAbility$ DBReveal | SpellDescription$ Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way.
+A:SP$ ChooseType | Defined$ You | Type$ Card | SubAbility$ DBReveal | SpellDescription$ Choose a card type. Target opponent reveals their hand. Create two 1/1 green Saproling creature tokens for each card of the chosen type revealed this way.
 SVar:DBReveal:DB$ RevealHand | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -1,0 +1,13 @@
+Name:Outlaw Stitcher
+ManaCost:3 U
+Types:Creature Human Warlock
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 blue and black Zombie Rogue creature token, then put two +1/+1 counters on that token for each spell you've cast this turn other than the first.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPutCounters
+SVar:DBPutCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:SVar$Y/Twice
+SVar:Y:Count$ThisTurnCast_Card.YouCtrl/Minus.1
+DeckHas:Ability$Token|Counters & Type$Zombie|Rogue & Color$Black
+K:Plot:4 U
+Oracle:When Outlaw Stitcher enters the battlefield, create a 2/2 blue and black Zombie Rogue creature token, then put two +1/+1 counters on that token for each spell you've cast this turn other than the first.\nPlot {4}{U} (You may pay {4}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

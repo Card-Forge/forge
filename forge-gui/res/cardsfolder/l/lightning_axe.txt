@@ -2,7 +2,7 @@ Name:Lightning Axe
 ManaCost:R
 Types:Instant
 K:AlternateAdditionalCost:Discard<1/Card>:5
-A:SP$ DealDamage | Cost$ R | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 5 damage to target creature.
+A:SP$ DealDamage | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 5 damage to target creature.
 SVar:AIPreference:DiscardCost$Card.cmcLE2
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium

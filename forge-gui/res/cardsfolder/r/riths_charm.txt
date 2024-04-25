@@ -1,7 +1,7 @@
 Name:Rith's Charm
 ManaCost:R G W
 Types:Instant
-A:SP$ Charm | Cost$ R G W | CharmNum$ 1 | Choices$ Bash,Token,Prevent
+A:SP$ Charm | CharmNum$ 1 | Choices$ Bash,Token,Prevent
 SVar:Bash:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:Token:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create three 1/1 green Saproling creature tokens.
 SVar:Prevent:DB$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a source of your choice would deal this turn.

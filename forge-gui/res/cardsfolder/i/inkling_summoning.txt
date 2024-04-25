@@ -1,6 +1,6 @@
 Name:Inkling Summoning
 ManaCost:1 WB WB
 Types:Sorcery Lesson
-A:SP$ Token | Cost$ 1 WB WB | TokenScript$ wb_2_1_inkling_flying | TokenOwner$ You | SpellDescription$ Create a 2/1 white and black Inkling creature token with flying.
+A:SP$ Token | TokenScript$ wb_2_1_inkling_flying | TokenOwner$ You | SpellDescription$ Create a 2/1 white and black Inkling creature token with flying.
 DeckHas:Ability$Token
 Oracle:Create a 2/1 white and black Inkling creature token with flying.

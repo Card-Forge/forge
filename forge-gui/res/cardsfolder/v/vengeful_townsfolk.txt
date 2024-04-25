@@ -1,0 +1,8 @@
+Name:Vengeful Townsfolk
+ManaCost:2 W
+Types:Creature Human Citizen
+PT:3/3
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more other creatures you control die, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Whenever one or more other creatures you control die, put a +1/+1 counter on Vengeful Townsfolk.

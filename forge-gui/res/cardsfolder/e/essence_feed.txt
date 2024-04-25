@@ -1,7 +1,7 @@
 Name:Essence Feed
 ManaCost:5 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 5 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life. You gain 3 life and create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life. You gain 3 life and create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
 DeckHints:Type$Eldrazi

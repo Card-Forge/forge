@@ -33,7 +33,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.cost.CostPayment;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventManaPool;
-import forge.game.event.GameEventZone;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementLayer;
@@ -41,7 +40,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
-import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -112,6 +110,11 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     public final boolean hasBurn() {
         final Game game = owner.getGame();
         return game.getRules().hasManaBurn() || StaticAbilityUnspentMana.hasManaBurn(owner);
+    }
+
+    public final void resetPool() {
+        // This should only be used to reset the pool to empty by things like restores.
+        floatingMana.clear();
     }
 
     public final List<Mana> clearPool(boolean isEndOfPhase) {
@@ -296,36 +299,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     public void refundMana(List<Mana> manaSpent) {
         add(manaSpent);
         manaSpent.clear();
-    }
-
-    public final void refundManaPaid(final SpellAbility sa) {
-        Player p = sa.getActivatingPlayer();
-
-        // Send all mana back to your mana pool, before accounting for it.
-
-        // move non-undoable paying mana back to floating
-        refundMana(sa.getPayingMana());
-
-        List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
-
-        // start with the most recent
-        Collections.reverse(payingAbilities);
-
-        for (final SpellAbility am : payingAbilities) {
-            // undo paying abilities if we can
-            am.undo();
-        }
-
-        for (final SpellAbility am : payingAbilities) {
-            // Recursively refund abilities that were used.
-            refundManaPaid(am);
-            p.getGame().getStack().clearUndoStack(am);
-        }
-
-        payingAbilities.clear();
-
-        // update battlefield of activating player - to redraw cards used to pay mana as untapped
-        p.getGame().fireEvent(new GameEventZone(ZoneType.Battlefield, p, EventValueChangeType.ComplexUpdate, null));
     }
 
     public boolean canPayForShardWithColor(ManaCostShard shard, byte color) {

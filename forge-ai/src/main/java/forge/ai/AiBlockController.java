@@ -270,7 +270,6 @@ public class AiBlockController {
 
                     // check for triggers when unblocked
                     for (Trigger trigger : attacker.getTriggers()) {
-                        final Map<String, String> trigParams = trigger.getMapParams();
                         TriggerType mode = trigger.getMode();
 
                         if (!trigger.requirementsCheck(attacker.getGame())) {
@@ -284,7 +283,7 @@ public class AiBlockController {
                                 value += 50;
                             }
                         } else if (mode == TriggerType.AttackerUnblocked) {
-                            if (trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))) {
+                            if (trigger.matchesValidParam("ValidCard", attacker)) {
                                 value += 50;
                             }
                         }

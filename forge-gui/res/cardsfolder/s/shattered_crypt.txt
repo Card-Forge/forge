@@ -1,7 +1,7 @@
 Name:Shattered Crypt
 ManaCost:X B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X B B | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creature cards from your graveyard | TargetMin$ X | TargetMax$ X | SubAbility$ DBLoseLife | SpellDescription$ Return X target creature cards from your graveyard to your hand. You lose X life.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creature cards from your graveyard | TargetMin$ X | TargetMax$ X | SubAbility$ DBLoseLife | SpellDescription$ Return X target creature cards from your graveyard to your hand. You lose X life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

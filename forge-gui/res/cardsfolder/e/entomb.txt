@@ -1,5 +1,5 @@
 Name:Entomb
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Graveyard | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your graveyard, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your graveyard, then shuffle.
 Oracle:Search your library for a card, put that card into your graveyard, then shuffle.

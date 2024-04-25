@@ -1,7 +1,7 @@
 Name:Shadowbane
 ManaCost:1 W
 Types:Instant
-A:SP$ ChooseSource | Cost$ 1 W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage. If damage from a black source is prevented this way, you gain that much life.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage. If damage from a black source is prevented this way, you gain that much life.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RepDmg | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:RepDmg:Event$ DamageDone | ValidTarget$ You,Creature.YouCtrl | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you and/or creatures you control this turn, prevent that damage. If damage from a black source is prevented this way, you gain that much life.
 SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ ExileEffect

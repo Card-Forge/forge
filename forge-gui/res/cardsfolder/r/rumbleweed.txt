@@ -1,0 +1,12 @@
+Name:Rumbleweed
+ManaCost:10 G
+Types:Creature Plant Elemental
+PT:8/8
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each land card in your graveyard.
+SVar:X:Count$TypeInYourYard.Land
+K:Vigilance
+K:Reach
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, other creatures you control get +3/+3 and gain trample until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.StrictlyOther+YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample
+Oracle:This spell costs {1} less to cast for each land card in your graveyard.\nVigilance, reach, trample\nWhen Rumbleweed enters the battlefield, other creatures you control get +3/+3 and gain trample until end of turn.

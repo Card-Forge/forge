@@ -1,0 +1,11 @@
+Name:Mabel, Heir to Cragflame
+ManaCost:1 R W
+Types:Legendary Creature Mouse Soldier
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Mouse+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Mice creatures you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create Cragflame, a legendary colorless Equipment artifact token with "Equipped creature gets +1/+1 and has vigilance, trample, and haste" and equip {2}.
+SVar:TrigToken:DB$ Token | TokenScript$ cragflame
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Artifact|Equipment
+DeckHints:Type$Mouse
+Oracle:Other Mice creatures you control get +1/+1.\nWhen Mabel, Heir to Cragflame enters, create Cragflame, a legendary colorless Equipment artifact token with "Equipped creature gets +1/+1 and has vigilance, trample, and haste" and equip {2}.

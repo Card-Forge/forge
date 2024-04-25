@@ -1,7 +1,7 @@
 Name:Shifting Loyalties
 ManaCost:5 U
 Types:Sorcery
-A:SP$ ExchangeControl | Cost$ 5 U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanents that share a permanent type | TargetsWithSameCardType$ True | SpellDescription$ Exchange control of two target permanents that share a card type.
+A:SP$ ExchangeControl | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanents that share a permanent type | TargetsWithSameCardType$ True | SpellDescription$ Exchange control of two target permanents that share a card type.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Exchange control of two target permanents that share a card type. (Artifact, creature, enchantment, land, and planeswalker are card types.)

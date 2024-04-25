@@ -1,0 +1,8 @@
+Name:Visage Bandit
+ManaCost:3 U
+Types:Creature Shapeshifter Rogue
+PT:2/2
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl | AddTypes$ Shapeshifter & Rogue | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.
+K:Plot:2 U
+Oracle:You may have Visage Bandit enter the battlefield as a copy of a creature you control, except it's a Shapeshifter Rogue in addition to its other types.\nPlot {2}{U} (You may pay {2}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

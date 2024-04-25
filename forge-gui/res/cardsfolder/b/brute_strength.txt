@@ -1,5 +1,5 @@
 Name:Brute Strength
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | KW$ Trample | SpellDescription$ Target creature gets +3/+1 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +1 | KW$ Trample | SpellDescription$ Target creature gets +3/+1 and gains trample until end of turn.
 Oracle:Target creature gets +3/+1 and gains trample until end of turn.

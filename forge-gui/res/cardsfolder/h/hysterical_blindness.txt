@@ -1,5 +1,5 @@
 Name:Hysterical Blindness
 ManaCost:2 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
 Oracle:Creatures your opponents control get -4/-0 until end of turn.

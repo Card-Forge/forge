@@ -1,7 +1,7 @@
 Name:Slagstorm
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 R R | Choices$ DBDmg1,DBDmg2 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDmg1,DBDmg2 | CharmNum$ 1
 SVar:DBDmg1:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 3 damage to each creature.
 SVar:DBDmg2:DB$ DamageAll | NumDmg$ 3 | ValidPlayers$ Player | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 3 damage to each player.
 Oracle:Choose one —\n• Slagstorm deals 3 damage to each creature.\n• Slagstorm deals 3 damage to each player.

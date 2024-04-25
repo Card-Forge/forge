@@ -1,6 +1,6 @@
 Name:Ornamental Courage
 ManaCost:G
 Types:Instant
-A:SP$ Untap | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +1/+3 until end of turn.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +1/+3 until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +1 | NumDef$ +3
 Oracle:Untap target creature. It gets +1/+3 until end of turn.

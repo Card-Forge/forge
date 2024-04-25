@@ -1,7 +1,7 @@
 Name:Predator's Rapport
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Choose target creature you control. You gain life equal to that creature's power plus its toughness.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Choose target creature you control. You gain life equal to that creature's power plus its toughness.
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Targeted$CardSumPT
 Oracle:Choose target creature you control. You gain life equal to that creature's power plus its toughness.

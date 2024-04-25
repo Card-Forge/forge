@@ -85,6 +85,8 @@ public class PlayerProperty {
             if (!(player.getDescended() > 0)) {
                 return false;
             }
+        } else if (property.equals("committedCrimeThisTurn")) {
+            if (player.getCommittedCrimeThisTurn() < 1) return false;
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
@@ -463,7 +465,7 @@ public class PlayerProperty {
             }
         } else if (property.equals("BeenAttackedThisCombat")) {
             for (Player p : game.getRegisteredPlayers()) {
-                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                if (p.getAttackedPlayersMyCombat().contains(player)) {
                     return true;
                 }
             }

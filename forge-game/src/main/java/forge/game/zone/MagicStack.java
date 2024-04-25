@@ -50,6 +50,7 @@ import forge.game.event.GameEventSpellResolved;
 import forge.game.event.GameEventZone;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
+import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilityStatic;
@@ -78,11 +79,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     private final Stack<SpellAbility> undoStack = new Stack<>();
     private Player undoStackOwner;
 
+    private SpellAbility primaryAbility = null;
     private boolean frozen = false;
     private boolean bResolving = false;
 
     private final List<Card> thisTurnCast = Lists.newArrayList();
     private List<Card> lastTurnCast = Lists.newArrayList();
+    private final List<SpellAbility> abilitiesActivatedThisTurn = Lists.newArrayList();
+
     private Card curResolvingCard = null;
     private final Map<String, List<GameCommand>> commandList = Maps.newHashMap();
 
@@ -107,6 +111,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         clear();
         simultaneousStackEntryList.clear();
         frozen = false;
+        primaryAbility = null;
         lastTurnCast.clear();
         thisTurnCast.clear();
         curResolvingCard = null;
@@ -116,7 +121,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final boolean isSplitSecondOnStack() {
-        for(SpellAbilityStackInstance si : stack) {
+        for (SpellAbilityStackInstance si : stack) {
             if (si.isSpell() && si.getSourceCard().hasKeyword(Keyword.SPLIT_SECOND)) {
                 return true;
             }
@@ -124,7 +129,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return false;
     }
 
-    public final void freezeStack() {
+    public final void freezeStack(SpellAbility ability) {
+        if (primaryAbility == null) {
+            // Only the first ability to freeze the stack is considered the primary ability
+            primaryAbility = ability;
+        }
         frozen = true;
     }
 
@@ -133,6 +142,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
+        // Why is this happening here instead of add()?
         if (ability.isSpell() && !source.isCopiedSpell()) {
             if (!source.isInZone(ZoneType.Stack)) {
                 ability.setHostCard(game.getAction().moveToStack(source, ability));
@@ -148,13 +158,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             source.cleanupExiledWith();
         }
 
-        // Always add the ability here and always unfreeze the stack
         add(ability);
-        unfreezeStack();
+        if (primaryAbility == null || ability.equals(primaryAbility)) {
+            unfreezeStack();
+        } // else is for mana abilities
     }
 
     public final void unfreezeStack() {
         frozen = false;
+        primaryAbility = null;
 
         // Add all Frozen Abilities onto the stack
         while (!frozenStack.isEmpty()) {
@@ -179,6 +191,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         bResolving = b;
     }
 
+    public final boolean isResolving(Card c) {
+        if (!isResolving() || curResolvingCard == null) {
+            return false;
+        }
+        return c.equals(curResolvingCard);
+    }
+
     public final boolean canUndo(Player player) {
         return undoStackOwner == player;
     }
@@ -188,7 +207,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         SpellAbility sa = undoStack.peek();
         if (sa.undo()) {
             clearUndoStack(sa);
-            sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
+            new ManaRefundService(sa).refundManaPaid();
         } else {
             clearUndoStack(sa);
             for (Mana pay : sa.getPayingMana()) {
@@ -226,9 +245,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void add(SpellAbility sp) {
-        add(sp, null);
+        add(sp, null, SpellAbilityStackInstance.nextId());
     }
+    public final void add(SpellAbility sp, int id) {
+        add(sp, null, id);
+    }
+
     public final void add(SpellAbility sp, SpellAbilityStackInstance si) {
+        add(sp, si, si.getId());
+    }
+
+    public final void add(SpellAbility sp, SpellAbilityStackInstance si, int id) {
         final Card source = sp.getHostCard();
         Player activator = sp.getActivatingPlayer();
 
@@ -240,21 +267,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.out.println(source.getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        //either push onto or clear undo stack based on whether spell/ability is undoable
-        if (sp.isUndoable()) {
-            if (!canUndo(activator)) {
-                clearUndoStack(); //clear if undo stack owner changes
-                undoStackOwner = activator;
-            }
-            undoStack.push(sp);
-        } else {
-            clearUndoStack();
-        }
+        recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
-                source.addAbilityActivated(sp);
+                addAbilityActivatedThisTurn(sp, source);
             }
             Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
@@ -321,13 +339,13 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (frozen && !sp.hasParam("IgnoreFreeze")) {
-            si = new SpellAbilityStackInstance(sp);
+            si = new SpellAbilityStackInstance(sp, id);
             frozenStack.push(si);
             return;
         }
 
         if (sp.isAbility() && !sp.isCopied() && !sp.isTrigger()) {
-            source.addAbilityActivated(sp);
+            addAbilityActivatedThisTurn(sp, source);
         }
 
         if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
@@ -337,7 +355,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         // The ability is added to stack HERE
-        si = push(sp, si);
+        si = push(sp, si, id);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
@@ -381,12 +399,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator.addCycled(sp);
             }
 
-            // Log number of Equips
-            if (sp.isEquip()) {
-                activator.addEquipped();
-            }
-
-            if (sp.hasParam("Crew")) {
+            if (sp.isCrew()) {
                 // Trigger crews!
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
                 runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards", true));
@@ -450,6 +463,19 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
+    private void recordUndoableActions(SpellAbility sp, Player activator) {
+        // either push onto or clear undo stack based on whether spell/ability is undoable
+        if (sp.isUndoable()) {
+            if (!canUndo(activator)) {
+                clearUndoStack(); //clear if undo stack owner changes
+                undoStackOwner = activator;
+            }
+            undoStack.push(sp);
+        } else {
+            clearUndoStack();
+        }
+    }
+
     public final int size() {
         return stack.size();
     }
@@ -459,7 +485,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     // Push should only be used by add.
-    private SpellAbilityStackInstance push(final SpellAbility sp, SpellAbilityStackInstance si) {
+    private SpellAbilityStackInstance push(final SpellAbility sp, SpellAbilityStackInstance si, int id) {
         if (null == sp.getActivatingPlayer()) {
             sp.setActivatingPlayer(sp.getHostCard().getController());
             System.out.println(sp.getHostCard().getName() + " - activatingPlayer not set before adding to stack.");
@@ -468,7 +494,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sp.isSpell() && sp.getMayPlay() != null) {
             sp.getMayPlay().incMayPlayTurn();
         }
-        si = si == null ? new SpellAbilityStackInstance(sp) : si;
+        si = si == null ? new SpellAbilityStackInstance(sp, id) : si;
 
         stack.addFirst(si);
         int stackIndex = stack.size() - 1;
@@ -503,10 +529,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void resolveStack() {
-        // Resolving the Stack
-
         // freeze the stack while we're in the middle of resolving
-        freezeStack();
+        freezeStack(null);
         setResolving(true);
 
         // The SpellAbility isn't removed from the Stack until it finishes resolving
@@ -627,7 +651,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // If Spell and still on the Stack then let it goto the graveyard or replace its own movement
             Map<AbilityKey, Object> params = AbilityKey.newMap();
             params.put(AbilityKey.StackSa, sa);
-            params.put(AbilityKey.StackSi, si);
             params.put(AbilityKey.Fizzle, fizzle);
             game.getAction().moveToGraveyard(source, null, params);
         }
@@ -643,71 +666,54 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, final Boolean parentFizzled) {
-        // Can't fizzle unless there are some targets
-        Boolean fizzle = null;
-        boolean rememberTgt = sa.getRootAbility().hasParam("RememberOriginalTargets");
-
-        if (sa.usesTargeting()) {
-            if (sa.isZeroTargets()) {
-                // Nothing targeted, and nothing needs to be targeted.
-            } else {
-                // Some targets were chosen, fizzling for this subability is now possible
-                //fizzle = true;
-                // With multi-targets, as long as one target is still legal,
-                // we'll try to go through as much as possible
-                final TargetChoices choices = sa.getTargets();
-                for (final GameObject o : Lists.newArrayList(sa.getTargets())) {
-                    boolean invalidTarget = false;
-                    if (rememberTgt) {
-                        source.addRemembered(o);
+    private final boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
+        List<GameObject> toRemove = Lists.newArrayList();
+        if (sa.usesTargeting() && !sa.isZeroTargets()) {
+            if (fizzle == null) {
+                // don't overwrite previous result
+                fizzle = true;
+            }
+            // Some targets were chosen, fizzling for this subability is now possible
+            // With multi-targets, as long as one target is still legal,
+            // we'll try to go through as much as possible
+            for (final GameObject o : sa.getTargets()) {
+                boolean invalidTarget = false;
+                if (o instanceof Card) {
+                    final Card card = (Card) o;
+                    Card current = game.getCardState(card);
+                    if (current != null) {
+                        invalidTarget = !current.equalsWithGameTimestamp(card);
                     }
-                    if (o instanceof Card) {
-                        final Card card = (Card) o;
-                        Card current = game.getCardState(card);
-                        if (current != null) {
-                            invalidTarget = !current.equalsWithGameTimestamp(card);
-                        }
-                        invalidTarget = invalidTarget || !sa.canTarget(card);
-                    } else if (o instanceof SpellAbility) {
-                        SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
-                        invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility());
-                    } else {
-                        invalidTarget = !sa.canTarget(o);
-                    }
-                    // TODO remove targets only after the Loop
-                    // Remove targets
-                    if (invalidTarget) {
-                        choices.remove(o);
-                    } else {
-                        fizzle = false;
-                    }
-
-                    if (sa.hasParam("CantFizzle")) {
-                        // Gilded Drake cannot be countered by rules if the
-                        // targeted card is not valid
-                        fizzle = false;
-                    }
+                    invalidTarget = invalidTarget || !sa.canTarget(card, true);
+                } else if (o instanceof SpellAbility) {
+                    SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID((SpellAbility)o);
+                    invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(), true);
+                } else {
+                    invalidTarget = !sa.canTarget(o, true);
                 }
-                if (fizzle == null) {
-                    fizzle = true;
+
+                if (invalidTarget) {
+                    toRemove.add(o);
+                } else {
+                    fizzle = false;
+                }
+
+                if (sa.hasParam("CantFizzle")) {
+                    // Gilded Drake cannot be countered by rules if the
+                    // targeted card is not valid
+                    fizzle = false;
                 }
             }
         }
-        else if (sa.getTargetCard() != null) {
-            fizzle = !sa.canTarget(sa.getTargetCard());
-        } else {
-            // Set fizzle to the same as the parent if there's no target info
-            fizzle = parentFizzled;
+        if (sa.getSubAbility() != null) {
+            fizzle = hasFizzled(sa.getSubAbility(), source, fizzle);
         }
 
-        if (sa.getSubAbility() == null) {
-            if (fizzle != null && fizzle && rememberTgt) {
-                source.clearRemembered();
-            }
-            return fizzle != null && fizzle.booleanValue();
+        // Remove targets
+        if (sa.usesTargeting() && !sa.isZeroTargets()) {
+            sa.getTargets().removeAll(toRemove);
         }
-        return hasFizzled(sa.getSubAbility(), source, fizzle) && (fizzle == null || fizzle.booleanValue());
+        return fizzle != null && fizzle;
     }
 
     public final SpellAbilityStackInstance peek() {
@@ -795,18 +801,23 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             playerTurn = game.getNextPlayerAfter(playerTurn);
         }
 
-        Player whoAddsToStack = playerTurn;
-        do {
-            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, false);
-            // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
-            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
-        // 603.3b (Strict Proctor)
-        whoAddsToStack = playerTurn;
-        do {
-            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, true);
-            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
+        // Grab players in turn order starting with the active player
+        List<Player> players = game.getPlayersInTurnOrder(playerTurn);
+
+        for(Player p : players) {
+            if (p.hasLost()) {
+                continue;
+            }
+            result |= chooseOrderOfSimultaneousStackEntry(p, false);
+        }
+
+        for(Player p : players) {
+            if (p.hasLost()) {
+                continue;
+            }
+            result |= chooseOrderOfSimultaneousStackEntry(p, true);
+        }
+
         return result;
     }
 
@@ -849,7 +860,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Trigger trig = sa.getTrigger();
         final Card newHost = game.getCardState(host);
         if (host.isAura() && newHost.isInZone(ZoneType.Graveyard) && trig.getMode() == TriggerType.ChangesZone && 
-                "Graveyard".equals(trig.getParam("Destination")) && "Card.EnchantedBy".equals(trig.getParam("ValidCard"))) {
+                "Battlefield".equals(trig.getParam("Origin")) && "Card.EnchantedBy".equals(trig.getParam("ValidCard"))) {
             sa.setHostCard(newHost);
         }
     }
@@ -888,6 +899,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void onNextTurn() {
         final Player active = game.getPhaseHandler().getPlayerTurn();
         game.getStackZone().resetCardsAddedThisTurn();
+        this.abilitiesActivatedThisTurn.clear();
         if (thisTurnCast.isEmpty()) {
             lastTurnCast = Lists.newArrayList();
             active.resetSpellCastSinceBegOfYourLastTurn();
@@ -904,6 +916,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public final List<Card> getSpellsCastLastTurn() {
         return lastTurnCast;
+    }
+
+    public void addAbilityActivatedThisTurn(SpellAbility sa, final Card source) {
+        source.addAbilityActivated(sa);
+        abilitiesActivatedThisTurn.add(sa.copy(CardCopyService.getLKICopy(source), true));
+    }
+
+    public List<SpellAbility> getAbilityActivatedThisTurn() {
+        return abilitiesActivatedThisTurn;
     }
 
     public final void addCastCommand(final String valid, final GameCommand c) {
@@ -927,13 +948,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (int i = 0; i < length; i++) {
             c.remove(0).run();
         }
-    }
-
-    public final boolean isResolving(Card c) {
-        if (!isResolving() || curResolvingCard == null) {
-            return false;
-        }
-        return c.equals(curResolvingCard);
     }
 
     public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {
@@ -978,8 +992,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return TextUtil.concatNoSpace(simultaneousStackEntryList.toString(),"==", frozenStack.toString(), "==", stack.toString());
     }
 
-    static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets)
-    {
+    static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets) {
         List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {

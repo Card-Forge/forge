@@ -1,7 +1,7 @@
 Name:Resolute Strike
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | AILogic$ Pump | SubAbility$ DBAttach | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's a Warrior, you may attach an Equipment you control to it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | AILogic$ Pump | SubAbility$ DBAttach | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's a Warrior, you may attach an Equipment you control to it.
 SVar:DBAttach:DB$ Attach | ConditionDefined$ ParentTarget | ConditionPresent$ Warrior | ConditionCompare$ EQ1 | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Optional$ True | Defined$ ParentTarget | StackDescription$ If it's a Warrior, you may attach an Equipment you control to it.
 DeckHints:Type$Warrior|Equipment
 Oracle:Target creature gets +2/+2 until end of turn. If it's a Warrior, you may attach an Equipment you control to it.

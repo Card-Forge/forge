@@ -1,7 +1,7 @@
 Name:Status
-ManaCost:B/G
+ManaCost:BG
 Types:Instant
-A:SP$ Pump | Cost$ B/G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+1 and gains deathtouch until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+1 and gains deathtouch until end of turn.
 AlternateMode:Split
 Oracle:Target creature gets +1/+1 and gains deathtouch until end of turn.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Statue
 ManaCost:2 B G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B G | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature or enchantment | SpellDescription$ Destroy target artifact, creature or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature or enchantment | SpellDescription$ Destroy target artifact, creature or enchantment.
 Oracle:Destroy target artifact, creature, or enchantment.

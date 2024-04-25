@@ -1,5 +1,5 @@
 Name:Kruphix's Insight
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 G | DigNum$ 6 | ChangeNum$ 3 | Optional$ True | ChangeValid$ Enchantment | DestinationZone2$ Graveyard | Reveal$ True | SpellDescription$ Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.
+A:SP$ Dig | DigNum$ 6 | ChangeNum$ 3 | Optional$ True | ChangeValid$ Enchantment | DestinationZone2$ Graveyard | Reveal$ True | SpellDescription$ Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.
 Oracle:Reveal the top six cards of your library. Put up to three enchantment cards from among them into your hand and the rest of the revealed cards into your graveyard.

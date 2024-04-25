@@ -1,5 +1,5 @@
 Name:Wrap in Vigor
 ManaCost:1 G
 Types:Instant
-A:SP$ RegenerateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
+A:SP$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.
 Oracle:Regenerate each creature you control.

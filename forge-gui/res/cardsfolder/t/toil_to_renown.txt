@@ -1,6 +1,6 @@
 Name:Toil to Renown
 ManaCost:1 G
 Types:Sorcery
-A:SP$ GainLife | Cost$ 1 G | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 1 life for each tapped artifact, creature, and land you control.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 1 life for each tapped artifact, creature, and land you control.
 SVar:X:Count$Valid Artifact.YouCtrl+tapped,Creature.YouCtrl+tapped,Land.YouCtrl+tapped
 Oracle:You gain 1 life for each tapped artifact, creature, and land you control.

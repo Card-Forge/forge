@@ -1,10 +1,9 @@
 Name:Molten Collapse
 ManaCost:B R
 Types:Sorcery
-A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBDestroy,DBDsestroynoncreatue | AdditionalDescription$ . If you descended this turn, you may choose both instead. (You descended if a permanent card was put into your graveyard from anywhere.)
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBDestroy,DBDsestroynoncreatue | AdditionalDescription$ . If you descended this turn, you may choose both instead. (You descended if a permanent card was put into your graveyard from anywhere.)
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature,Planeswalker | TgtsDescription$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 SVar:DBDsestroynoncreatue:DB$ Destroy | ValidTgts$ Permanent.nonCreature+nonLand+cmcLE1 | TgtPrompt$ Select target noncreature, nonland permanent with mana value 1 or less | SpellDescription$ Destroy target noncreature, nonland permanent with mana value 1 or less.
-SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$YouDescendedThisTurn
 DeckHints:Ability$Mill|Graveyard|Dredge|Sacrifice
 Oracle:Choose one. If you descended this turn, you may choose both instead. (You descended if a permanent card was put into your graveyard from anywhere.)\n• Destroy target creature or planeswalker.\n• Destroy target noncreature, nonland permanent with mana value 1 or less.

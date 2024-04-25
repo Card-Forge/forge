@@ -1,0 +1,11 @@
+Name:Duelist of the Mind
+ManaCost:1 U
+Types:Creature Human Advisor
+PT:*/3
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of cards you've drawn this turn.
+SVar:X:Count$YouDrewThisTurn
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, you may draw a card. If you do, discard a card. This ability triggers only once each turn.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
+Oracle:Flying, vigilance\nDuelist of the Mind's power is equal to the number of cards you've drawn this turn.\nWhenever you commit a crime, you may draw a card. If you do, discard a card. This ability triggers only once each turn.

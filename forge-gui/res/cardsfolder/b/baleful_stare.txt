@@ -1,7 +1,7 @@
 Name:Baleful Stare
 ManaCost:2 U
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals their hand. You draw a card for each Mountain and red card in it.
+A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals their hand. You draw a card for each Mountain and red card in it.
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$ValidHand Mountain.TargetedPlayerCtrl,Card.TargetedPlayerCtrl+Red
 AI:RemoveDeck:Random

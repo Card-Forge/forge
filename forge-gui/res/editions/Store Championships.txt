@@ -29,3 +29,6 @@ ScryfallCode=SCH
 21 R Mortify @Andreia Ugrai
 22 R Angel of Despair @Andreia Ugrai
 23 R Dauthi Voidwalker @Andreia Ugrai
+24 R Blazing Rootwalla @Brian Valeza
+25 R Hollow One @Adam Volker
+26 R Vengevine @Brian Valeza

@@ -1,6 +1,6 @@
 Name:Arbor Armament
 ManaCost:G
 Types:Instant
-A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Reach
 Oracle:Put a +1/+1 counter on target creature. That creature gains reach until end of turn.

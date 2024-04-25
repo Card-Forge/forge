@@ -237,7 +237,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 dontRevealToOwner = false;
             } else {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                if (sa.hasParam ("ChoiceTitleAppend")) {
+                if (sa.hasParam("ChoiceTitleAppend")) {
                     String tag = "";
                     String value = sa.getParam("ChoiceTitleAppend");
                     if (value.startsWith("Defined ")) {
@@ -281,7 +281,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                             !sa.hasParam("Mandatory"), null));
                 }
             }
-            if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {
+            if (sa.hasParam("Reveal") && !sa.hasParam("Secretly")) {
                 game.getAction().reveal(chosen, p, dontRevealToOwner, revealTitle ? sa.getParam("RevealTitle") : 
                     Localizer.getInstance().getMessage("lblChosenCards") + " ", !revealTitle);
             }
@@ -290,7 +290,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             }
             allChosen.addAll(chosen);
         }
-        if (sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
+        if (sa.hasParam("Reveal") && sa.hasParam("Secretly")) {
             for (final Player p : tgtPlayers) {
                 game.getAction().reveal(allChosen, p, true, revealTitle ?
                         sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ", 

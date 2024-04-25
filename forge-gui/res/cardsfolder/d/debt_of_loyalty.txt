@@ -1,7 +1,7 @@
 Name:Debt of Loyalty
 ManaCost:1 W W
 Types:Instant
-A:SP$ Regenerate | Cost$ 1 W W | ValidTgts$ Creature | TgtPrompt$ Select target creature | RegenerationAbility$ TrigGainControl | SpellDescription$ Regenerate target creature. You gain control of that creature if it regenerates this way.
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | RegenerationAbility$ TrigGainControl | SpellDescription$ Regenerate target creature. You gain control of that creature if it regenerates this way.
 SVar:TrigGainControl:DB$ GainControl | Defined$ ReplacedCard | NewController$ You
 AI:RemoveDeck:All
 Oracle:Regenerate target creature. You gain control of that creature if it regenerates this way.

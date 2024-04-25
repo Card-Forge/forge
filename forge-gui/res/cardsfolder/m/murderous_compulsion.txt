@@ -1,7 +1,7 @@
 Name:Murderous Compulsion
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 K:Madness:1 B
 DeckHints:Ability$Discard
 Oracle:Destroy target tapped creature.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

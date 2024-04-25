@@ -1,6 +1,6 @@
 Name:Blastfire Bolt
 ManaCost:5 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SubAbility$ ChompEquip | SpellDescription$ CARDNAME deals 5 damage to target creature. Destroy all Equipment attached to that creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SubAbility$ ChompEquip | SpellDescription$ CARDNAME deals 5 damage to target creature. Destroy all Equipment attached to that creature.
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Equipment+Attached
 Oracle:Blastfire Bolt deals 5 damage to target creature. Destroy all Equipment attached to that creature.

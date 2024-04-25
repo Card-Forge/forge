@@ -1,6 +1,6 @@
 Name:Concussive Bolt
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or Planeswalker | NumDmg$ 4 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker. Metalcraft — If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or Planeswalker | NumDmg$ 4 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker. Metalcraft — If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.
 SVar:DBPump:DB$ PumpAll | Defined$ TargetedOrController | ValidCards$ Creature | Condition$ Metalcraft | KW$ HIDDEN CARDNAME can't block.
 Oracle:Concussive Bolt deals 4 damage to target player or planeswalker.\nMetalcraft — If you control three or more artifacts, creatures controlled by that player or by that planeswalker's controller can't block this turn.

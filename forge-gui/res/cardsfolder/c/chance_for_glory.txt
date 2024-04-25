@@ -1,7 +1,7 @@
 Name:Chance for Glory
 ManaCost:1 R W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 R W | ValidCards$ Creature.YouCtrl | KW$ Indestructible | Duration$ Permanent | SubAbility$ DBAddTurn | SpellDescription$ Creatures you control gain indestructible.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | Duration$ Permanent | SubAbility$ DBAddTurn | SpellDescription$ Creatures you control gain indestructible.
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | ExtraTurnDelayedTriggerExcute$ TrigLose | SpellDescription$ Take an extra turn after this one. At the beginning of that turn's end step, you lose the game.
 SVar:DBDelTrig:ThisTurn$ True | Mode$ Phase | Phase$ End of Turn | TriggerDescription$ At the beginning of that turn's end step, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You

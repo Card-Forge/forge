@@ -1,7 +1,7 @@
 Name:Muscle Burst
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.
 SVar:X:Count$NamedInAllYards.Muscle Burst/Plus.Y
 SVar:Y:Count$ValidGraveyard Card.hasKeywordCARDNAME count as Muscle Burst./Plus.3
 DeckHints:Name$Diligent Farmhand|Muscle Burst

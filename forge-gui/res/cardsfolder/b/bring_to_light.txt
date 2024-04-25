@@ -1,7 +1,7 @@
 Name:Bring to Light
 ManaCost:3 G U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G U | Origin$ Library | Destination$ Exile | ChangeType$ Creature.cmcLEX,Instant.cmcLEX,Sorcery.cmcLEX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle. You may cast that card without paying its mana cost.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Creature.cmcLEX,Instant.cmcLEX,Sorcery.cmcLEX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle. You may cast that card without paying its mana cost.
 SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Converge

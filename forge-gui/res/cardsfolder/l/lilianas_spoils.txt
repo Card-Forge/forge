@@ -1,7 +1,7 @@
 Name:Liliana's Spoils
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDig | SpellDescription$ Target opponent discards a card.
+A:SP$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDig | SpellDescription$ Target opponent discards a card.
 SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Black | RestRandomOrder$ True | SpellDescription$ Look at the top five cards of your library. You may reveal a black card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 DeckHas:Ability$Discard
 Oracle:Target opponent discards a card.\nLook at the top five cards of your library. You may reveal a black card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

@@ -1,7 +1,7 @@
 Name:Road of Return
 ManaCost:G G
 Types:Sorcery
-A:SP$ Charm | Cost$ G G | Choices$ DBReturn,DBChangeZone
+A:SP$ Charm | Choices$ DBReturn,DBChangeZone
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | ChangeType$ Card.IsCommander+YouOwn | SelectPrompt$ Select a commander | ChangeNum$ 1 | Mandatory$ True | Origin$ Command | Destination$ Hand | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Put your commander into your hand from the command zone.
 K:Entwine:2

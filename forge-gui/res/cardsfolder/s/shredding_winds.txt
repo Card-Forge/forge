@@ -1,5 +1,5 @@
 Name:Shredding Winds
 ManaCost:2 G
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select a target creature with flying | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature with flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select a target creature with flying | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target creature with flying.
 Oracle:Shredding Winds deals 7 damage to target creature with flying.

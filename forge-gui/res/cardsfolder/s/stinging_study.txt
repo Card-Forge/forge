@@ -1,7 +1,7 @@
 Name:Stinging Study
 ManaCost:4 B
 Types:Instant
-A:SP$ ChooseCard | Cost$ 4 B | Choices$ Card.IsCommander+YouOwn | RememberChosen$ True | MinAmount$ 0 | ChoiceTitle$ Choose a commander on the battlefield | SubAbility$ ChooseCommand | ConditionPresent$ Card.IsCommander+YouOwn | SpellDescription$ You draw X cards and you lose X life, where X is the mana value of a commander you own on the battlefield or in the command zone.
+A:SP$ ChooseCard | Choices$ Card.IsCommander+YouOwn | RememberChosen$ True | MinAmount$ 0 | ChoiceTitle$ Choose a commander on the battlefield | SubAbility$ ChooseCommand | ConditionPresent$ Card.IsCommander+YouOwn | SpellDescription$ You draw X cards and you lose X life, where X is the mana value of a commander you own on the battlefield or in the command zone.
 SVar:ChooseCommand:DB$ ChooseCard | ChoiceZone$ Command | Choices$ Card.IsCommander+YouOwn | RememberChosen$ True | ChoiceTitle$ Choose a commander in command | SubAbility$ ChooseBF | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | Mandatory$ True
 SVar:ChooseBF:DB$ ChooseCard | ChoiceZone$ Battlefield | Choices$ Card.IsCommander+YouOwn | RememberChosen$ True | ChoiceTitle$ Choose a commander on the battlefield | SubAbility$ DBDraw | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ EQ0 | Mandatory$ True
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife

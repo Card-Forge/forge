@@ -1,6 +1,6 @@
 Name:Clear
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 K:Cycling:2
 Oracle:Destroy target enchantment.\nCycling {2} ({2}, Discard this card: Draw a card.)

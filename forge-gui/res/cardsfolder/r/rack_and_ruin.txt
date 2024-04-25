@@ -1,5 +1,5 @@
 Name:Rack and Ruin
 ManaCost:2 R
 Types:Instant
-A:SP$ Destroy | Cost$ 2 R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy two target artifacts.
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy two target artifacts.
 Oracle:Destroy two target artifacts.

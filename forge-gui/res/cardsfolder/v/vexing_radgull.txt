@@ -1,0 +1,11 @@
+Name:Vexing Radgull
+ManaCost:1 U
+Types:Creature Bird Mutant
+PT:1/2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigBranch | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player gets two rad counters if they don't have any rad counters. Otherwise, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigBranch:DB$ Branch | Defined$ TriggeredTarget | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBRadiation | FalseSubAbility$ DBProliferate
+SVar:DBRadiation:DB$ Radiation | Defined$ TriggeredTarget | Num$ 2
+SVar:DBProliferate:DB$ Proliferate
+SVar:X:TriggeredTarget$Counters.RAD
+Oracle:Flying\nWhenever Vexing Radgull deals combat damage to a player, that player gets two rad counters if they don't have any rad counters. Otherwise, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

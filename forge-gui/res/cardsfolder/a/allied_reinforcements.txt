@@ -1,6 +1,6 @@
 Name:Allied Reinforcements
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ w_2_2_knight_ally | TokenOwner$ You | SpellDescription$ Create two 2/2 white Knight Ally creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_2_2_knight_ally | TokenOwner$ You | SpellDescription$ Create two 2/2 white Knight Ally creature tokens.
 DeckHints:Type$Ally
 Oracle:Create two 2/2 white Knight Ally creature tokens.

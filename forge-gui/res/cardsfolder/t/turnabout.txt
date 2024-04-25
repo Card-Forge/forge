@@ -1,7 +1,7 @@
 Name:Turnabout
 ManaCost:2 U U
 Types:Instant
-A:SP$ ChooseType | Cost$ 2 U U | Type$ Card | ValidTypes$ Artifact,Creature,Land | SubAbility$ DBTapOrUntapAll | SpellDescription$ Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
+A:SP$ ChooseType | Type$ Card | ValidTypes$ Artifact,Creature,Land | SubAbility$ DBTapOrUntapAll | SpellDescription$ Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.
 SVar:DBTapOrUntapAll:DB$ TapOrUntapAll | ValidTgts$ Player | ValidCards$ Card.ChosenType | ValidMessage$ permanents of the chosen type target player controls
 AI:RemoveDeck:All
 Oracle:Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls.

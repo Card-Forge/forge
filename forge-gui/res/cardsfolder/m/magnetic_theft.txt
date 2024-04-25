@@ -1,7 +1,7 @@
 Name:Magnetic Theft
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | IsCurse$ True | SubAbility$ MagneticTheft | StackDescription$ None | SpellDescription$ Attach target Equipment to target creature. (Control of the Equipment doesn't change.)
+A:SP$ Pump | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | IsCurse$ True | SubAbility$ MagneticTheft | StackDescription$ None | SpellDescription$ Attach target Equipment to target creature. (Control of the Equipment doesn't change.)
 SVar:MagneticTheft:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature
 AI:RemoveDeck:All
 Oracle:Attach target Equipment to target creature. (Control of the Equipment doesn't change.)

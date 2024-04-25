@@ -1,0 +1,9 @@
+Name:Throw from the Saddle
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ConditionDefined$ ThisTargetedCard | ConditionPresent$ Card.!Mount | NumAtt$ 1 | NumDef$ 1 | AILogic$ PowerDmg | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Target creature you control gets +1/+1 until end of turn. Put a +1/+1 counter on it instead if it's a Mount. Then it deals damage equal to its power to target creature you don't control.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | ConditionDefined$ ParentTarget | ConditionPresent$ Card.Mount | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDealDamage | StackDescription$ None
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ ParentTargeted$CardPower | DamageSource$ ParentTarget | StackDescription$ None
+DeckHas:Ability$Counters
+DeckHints:Type$Mount
+Oracle:Target creature you control gets +1/+1 until end of turn. Put a +1/+1 counter on it instead if it's a Mount. Then it deals damage equal to its power to target creature you don't control.

@@ -1,5 +1,5 @@
 Name:Power Word Kill
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonAngel+nonDemon+nonDevil+nonDragon | TgtPrompt$ Select target non-Angel, non-Demon, non-Devil, non-Dragon creature | SpellDescription$ Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonAngel+nonDemon+nonDevil+nonDragon | TgtPrompt$ Select target non-Angel, non-Demon, non-Devil, non-Dragon creature | SpellDescription$ Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.
 Oracle:Destroy target non-Angel, non-Demon, non-Devil, non-Dragon creature.

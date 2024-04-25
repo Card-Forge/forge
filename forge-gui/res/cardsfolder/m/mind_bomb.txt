@@ -1,7 +1,7 @@
 Name:Mind Bomb
 ManaCost:U
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ U | RepeatSubAbility$ DBChoose | RepeatPlayers$ Player | SpellDescription$ Each player may discard up to three cards. CARDNAME deals damage to each player equal to 3 minus the number of cards they discarded this way.
+A:SP$ RepeatEach | RepeatSubAbility$ DBChoose | RepeatPlayers$ Player | SpellDescription$ Each player may discard up to three cards. CARDNAME deals damage to each player equal to 3 minus the number of cards they discarded this way.
 SVar:DBChoose:DB$ ChooseNumber | Defined$ Player.IsRemembered | Min$ 0 | Max$ 3 | AILogic$ LoseLife | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | NumCards$ X | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ Z | SubAbility$ DBCleanup

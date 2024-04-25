@@ -1,5 +1,5 @@
 Name:Gaea's Bounty
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, reveal those cards, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, reveal those cards, put them into your hand, then shuffle.
 Oracle:Search your library for up to two Forest cards, reveal those cards, put them into your hand, then shuffle.

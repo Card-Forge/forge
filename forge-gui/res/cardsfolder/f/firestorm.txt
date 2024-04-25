@@ -3,8 +3,8 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R Discard<X/Card> | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ MaxTargets | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each of X targets.
 SVar:X:TargetedObjects$Amount
-SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxCreaturesAndPlaneswalkers
+SVar:MaxTargets:SVar$MaxPlayers/Plus.MaxPermanents
 SVar:MaxPlayers:PlayerCountPlayers$Amount
-SVar:MaxCreaturesAndPlaneswalkers:Count$Valid Creature,Planeswalker
+SVar:MaxPermanents:Count$Valid Any
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, discard X cards.\nFirestorm deals X damage to each of X targets.

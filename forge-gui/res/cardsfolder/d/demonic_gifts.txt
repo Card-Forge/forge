@@ -1,7 +1,7 @@
 Name:Demonic Gifts
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Choose target creature | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield under its owner's control." | StackDescription$ Spelldescription
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield under its owner's control." | StackDescription$ Spelldescription
 SVar:DBAnimate:DB$ Animate | Triggers$ TrigDies | Defined$ ParentTarget | StackDescription$ None
 SVar:TrigDies:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield under its owner's control.
 SVar:TrigReturn:DB$ ChangeZone | DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield

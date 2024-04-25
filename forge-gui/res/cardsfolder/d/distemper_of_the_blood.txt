@@ -1,7 +1,7 @@
 Name:Distemper of the Blood
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
 K:Madness:R
 DeckHints:Ability$Discard
 Oracle:Target creature gets +2/+2 and gains trample until end of turn.\nMadness {R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

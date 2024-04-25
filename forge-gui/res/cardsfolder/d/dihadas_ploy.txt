@@ -2,7 +2,7 @@ Name:Dihada's Ploy
 ManaCost:1 U B
 Types:Instant
 K:Jump-start
-A:SP$ Draw | Cost$ 1 U B | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. You gain life equal to the number of cards you've discarded this turn. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. You gain life equal to the number of cards you've discarded this turn. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn

@@ -1,0 +1,7 @@
+Name:Fan Favorite
+ManaCost:3 B
+Types:Creature Human Rogue
+PT:2/2
+K:Assist
+A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | Activator$ Player | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Any player may activate this ability.
+Oracle:Assist (Another player can pay up to {3} of this spell's cost.)\n{2}: Fan Favorite gets +1/+1 until end of turn. Any player may activate this ability.

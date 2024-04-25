@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:white
 Types:Sorcery
 K:Suspend:6:W
-A:SP$ Balance | Cost$ 0 | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceCreatures | SpellDescription$ Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way. | ActivationLimit$ 0
+A:SP$ Balance | Valid$ Land | AILogic$ BalanceCreaturesAndLands | SubAbility$ BalanceCreatures | SpellDescription$ Each player chooses a number of lands they control equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
 SVar:BalanceCreatures:DB$ Balance | Valid$ Creature | SubAbility$ BalanceHands
 SVar:BalanceHands:DB$ Balance | Zone$ Hand
 AI:RemoveDeck:All

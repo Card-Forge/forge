@@ -1,5 +1,5 @@
 Name:Retaliate
 ManaCost:2 W W
 Types:Instant
-A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.dealtDamageToYouThisTurn | SpellDescription$ Destroy all creatures that dealt damage to you this turn.
+A:SP$ DestroyAll | ValidCards$ Creature.dealtDamageToYouThisTurn | SpellDescription$ Destroy all creatures that dealt damage to you this turn.
 Oracle:Destroy all creatures that dealt damage to you this turn.

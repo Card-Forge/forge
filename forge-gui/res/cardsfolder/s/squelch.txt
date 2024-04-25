@@ -1,6 +1,6 @@
 Name:Squelch
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | SubAbility$ DBDraw | SpellDescription$ Counter target activated ability. Draw a card.
+A:SP$ Counter | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | SubAbility$ DBDraw | SpellDescription$ Counter target activated ability. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target activated ability. (Mana abilities can't be targeted.)\nDraw a card.

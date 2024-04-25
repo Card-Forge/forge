@@ -1,7 +1,7 @@
 Name:Radiant Flames
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 R | NumDmg$ X | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ Converge — CARDNAME deals X damage to each creature, where X is the number of colors of mana spent to cast this spell.
+A:SP$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ Converge — CARDNAME deals X damage to each creature, where X is the number of colors of mana spent to cast this spell.
 SVar:X:Count$Converge
 AI:RemoveDeck:All
 Oracle:Converge — Radiant Flames deals X damage to each creature, where X is the number of colors of mana spent to cast this spell.

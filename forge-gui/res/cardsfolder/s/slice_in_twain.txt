@@ -1,6 +1,6 @@
 Name:Slice in Twain
 ManaCost:2 G G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. | SubAbility$ DBDraw
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Destroy target artifact or enchantment.\nDraw a card.

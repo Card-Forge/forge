@@ -1,0 +1,5 @@
+Name:Shoot the Sheriff
+ManaCost:1 B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.!Outlaw | TgtPrompt$ Select target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyone else is fair game.) | SpellDescription$ Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyone else is fair game.)
+Oracle:Destroy target non-outlaw creature. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. Everyone else is fair game.)

@@ -1,7 +1,7 @@
 Name:Shallow Grave
 ManaCost:1 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+YouCtrl | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.TopGraveyardCreature+YouCtrl | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsOrderedGraveyard:TRUE

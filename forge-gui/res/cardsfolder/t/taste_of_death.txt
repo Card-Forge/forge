@@ -1,7 +1,7 @@
 Name:Taste of Death
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 B B | Amount$ 3 | Defined$ Player | SacValid$ Creature | SpellDescription$ Each player sacrifices three creatures. You create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.") | SubAbility$ DBToken
+A:SP$ Sacrifice | Amount$ 3 | Defined$ Player | SacValid$ Creature | SpellDescription$ Each player sacrifices three creatures. You create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.") | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_food_sac | TokenOwner$ You
 DeckHas:Ability$LifeGain|Token|Food
 Oracle:Each player sacrifices three creatures. You create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

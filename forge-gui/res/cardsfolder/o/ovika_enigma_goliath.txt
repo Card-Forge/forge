@@ -9,4 +9,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_phyrexian_goblin 
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 SVar:BuffedBy:Card.nonCreature
 DeckHas:Ability$Token & Type$Goblin
-Oracle:Flying\nWard — {3}, Pay 3 life.\nWhenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.
+Oracle:Flying\nWard—{3}, Pay 3 life.\nWhenever you cast a noncreature spell, create X 1/1 red Phyrexian Goblin creature tokens, where X is the mana value of that spell. They gain haste until end of turn.

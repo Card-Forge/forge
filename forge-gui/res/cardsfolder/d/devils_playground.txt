@@ -1,5 +1,5 @@
 Name:Devils' Playground
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 4 R R | TokenAmount$ 4 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | SpellDescription$ Create four 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | SpellDescription$ Create four 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."
 Oracle:Create four 1/1 red Devil creature tokens. They have "When this creature dies, it deals 1 damage to any target."

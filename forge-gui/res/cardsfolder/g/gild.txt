@@ -1,6 +1,6 @@
 Name:Gild
 ManaCost:3 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. Create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | SpellDescription$ Exile target creature. Create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")
 SVar:DBToken:DB$ Token | TokenScript$ c_a_gold_sac | TokenOwner$ You
 Oracle:Exile target creature. Create a Gold token. (It's an artifact with "Sacrifice this artifact: Add one mana of any color.")

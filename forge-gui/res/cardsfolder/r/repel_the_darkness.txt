@@ -1,6 +1,6 @@
 Name:Repel the Darkness
 ManaCost:2 W
 Types:Instant
-A:SP$ Tap | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures. | SubAbility$ DBDraw
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Tap up to two target creatures.\nDraw a card.

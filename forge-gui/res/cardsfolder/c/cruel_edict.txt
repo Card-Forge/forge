@@ -1,5 +1,5 @@
 Name:Cruel Edict
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target opponent sacrifices a creature.
 Oracle:Target opponent sacrifices a creature.

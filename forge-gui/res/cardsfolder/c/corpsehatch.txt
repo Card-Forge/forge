@@ -1,7 +1,7 @@
 Name:Corpsehatch
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Choose target nonblack creature. | SubAbility$ DBToken | SpellDescription$ Destroy target nonblack creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Choose target nonblack creature. | SubAbility$ DBToken | SpellDescription$ Destroy target nonblack creature.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ Create two 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token

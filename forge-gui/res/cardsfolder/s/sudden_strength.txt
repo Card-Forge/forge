@@ -1,6 +1,6 @@
 Name:Sudden Strength
 ManaCost:3 G
 Types:Instant
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn. | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target creature gets +3/+3 until end of turn.\nDraw a card.

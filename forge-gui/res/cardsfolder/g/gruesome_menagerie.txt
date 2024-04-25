@@ -1,7 +1,7 @@
 Name:Gruesome Menagerie
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 3 B B | Defined$ You | Choices$ Creature.YouOwn+cmcEQ1 | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBChoose2 | RememberChosen$ True | SpellDescription$ Choose a creature card with mana value 1 in your graveyard, then do the same for creature cards with mana value 2 and 3. Return those cards to the battlefield.
+A:SP$ ChooseCard | Defined$ You | Choices$ Creature.YouOwn+cmcEQ1 | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBChoose2 | RememberChosen$ True | SpellDescription$ Choose a creature card with mana value 1 in your graveyard, then do the same for creature cards with mana value 2 and 3. Return those cards to the battlefield.
 SVar:DBChoose2:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouOwn+cmcEQ2 | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBChoose3 | RememberChosen$ True | SpellDescription$ Choose a creature card with mana value 2 in your graveyard.
 SVar:DBChoose3:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouOwn+cmcEQ3 | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBReturn | RememberChosen$ True | SpellDescription$ Choose a creature card with mana value 3 in your graveyard.
 SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup

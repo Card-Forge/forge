@@ -2,5 +2,5 @@ Name:Saving Grasp
 ManaCost:U
 Types:Instant
 K:Flashback:W
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card you own | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature card you own to your hand.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card you own | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature card you own to your hand.
 Oracle:Return target creature you own to your hand.\nFlashback {W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

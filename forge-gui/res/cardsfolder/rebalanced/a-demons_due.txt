@@ -1,7 +1,7 @@
 Name:A-Demon's Due
 ManaCost:3 B
 Types:Instant
-A:SP$ Dig | Cost$ 3 B | DigNum$ 4 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SubAbility$ DBLoseLife | SpellDescription$ Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 2 | DestinationZone2$ Graveyard | SubAbility$ DBLoseLife | SpellDescription$ Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$Graveyard
 Oracle:Look at the top four cards of your library. Put two of them into your hand and the rest into your graveyard. You lose 2 life.

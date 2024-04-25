@@ -1,5 +1,5 @@
 Name:Venser's Diffusion
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent.nonLand+inZoneBattlefield,Card.suspended | TgtPrompt$ Select target permanent or suspended card. | TgtZone$ Battlefield,Exile | Destination$ Hand | SpellDescription$ Return target nonland permanent or suspended card to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+inZoneBattlefield,Card.suspended | TgtPrompt$ Select target permanent or suspended card. | TgtZone$ Battlefield,Exile | Destination$ Hand | SpellDescription$ Return target nonland permanent or suspended card to its owner's hand.
 Oracle:Return target nonland permanent or suspended card to its owner's hand.

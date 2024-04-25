@@ -1,6 +1,6 @@
 Name:Saw It Coming
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 K:Foretell:1 U
 Oracle:Counter target spell.\nForetell {1}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

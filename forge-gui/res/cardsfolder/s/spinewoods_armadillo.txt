@@ -1,0 +1,10 @@
+Name:Spinewoods Armadillo
+ManaCost:4 G G
+Types:Creature Armadillo
+PT:7/7
+K:Reach
+K:Ward:3
+A:AB$ ChangeZone | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Desert | ChangeNum$ 1 | ChangeTypeDesc$ basic land card or a Desert card | SubAbility$ DBGainLife | SpellDescription$ Search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Discard|LifeGain
+Oracle:Reach\nWard {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\n{1}{G}, Discard Spinewoods Armadillo: Search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle. You gain 3 life.

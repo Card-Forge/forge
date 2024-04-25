@@ -12,5 +12,5 @@ ALTERNATE
 Name:Alter Fate
 ManaCost:1 B
 Types:Sorcery Adventure
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Return target creature card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)

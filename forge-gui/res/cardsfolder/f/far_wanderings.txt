@@ -1,6 +1,6 @@
 Name:Far Wanderings
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ X | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Threshold — If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ X | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Threshold — If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.
 SVar:X:Count$Threshold.3.1
 Oracle:Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.\nThreshold — If seven or more cards are in your graveyard, instead search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle.

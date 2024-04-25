@@ -1,6 +1,6 @@
 Name:Icefall
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land. | SpellDescription$ Destroy target artifact or land.
+A:SP$ Destroy | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land. | SpellDescription$ Destroy target artifact or land.
 K:Recover:R R
 Oracle:Destroy target artifact or land.\nRecover {R}{R} (When a creature is put into your graveyard from the battlefield, you may pay {R}{R}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)

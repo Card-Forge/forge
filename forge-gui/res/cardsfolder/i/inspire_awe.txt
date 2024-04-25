@@ -1,7 +1,7 @@
 Name:Inspire Awe
 ManaCost:3 G
 Types:Instant
-A:SP$ Effect | Cost$ 3 G | ReplacementEffects$ Curse | SubAbility$ DBScry | SpellDescription$ Prevent all combat damage that would be dealt this turn except combat damage that would be dealt by enchanted creatures and enchantment creatures. Scry 2.
+A:SP$ Effect | ReplacementEffects$ Curse | SubAbility$ DBScry | SpellDescription$ Prevent all combat damage that would be dealt this turn except combat damage that would be dealt by enchanted creatures and enchantment creatures. Scry 2.
 SVar:Curse:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.unenchanted+nonEnchantment | Description$ Prevent all combat damage that would be dealt this turn except by enchanted creatures and enchantment creatures.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Prevent all combat damage that would be dealt this turn except combat damage that would be dealt by enchanted creatures and enchantment creatures. Scry 2.

@@ -1,7 +1,7 @@
 Name:Avalanche
 ManaCost:X 2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X 2 R R | TargetMin$ X | TargetMax$ X | ValidTgts$ Land.Snow | TgtPrompt$ Select X target snow lands | SpellDescription$ Destroy X target snow lands.
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Land.Snow | TgtPrompt$ Select X target snow lands | SpellDescription$ Destroy X target snow lands.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:Destroy X target snow lands.

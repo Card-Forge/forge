@@ -1,0 +1,9 @@
+Name:Ancient Cornucopia
+ManaCost:2 G
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card.nonColorless | ValidActivatingPlayer$ You | Execute$ TrigGainLife | ResolvedLimit$ 1 | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell that's one or more colors, you may gain 1 life for each of that spell's colors. Do this only once each turn.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:TriggeredCard$CardNumColors
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$LifeGain
+Oracle:Whenever you cast a spell that's one or more colors, you may gain 1 life for each of that spell's colors. Do this only once each turn.\n{T}: Add one mana of any color.

@@ -1,7 +1,7 @@
 Name:Victimize
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 B | Defined$ You | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ Rise | SpellDescription$ Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
+A:SP$ Sacrifice | Defined$ You | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ Rise | SpellDescription$ Choose two target creature cards in your graveyard. Sacrifice a creature. If you do, return the chosen cards to the battlefield tapped.
 SVar:Rise:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | ConditionDescription$ If you do, | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

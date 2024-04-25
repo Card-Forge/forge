@@ -1,7 +1,7 @@
 Name:Ruthless Instincts
 ManaCost:2 G
 Types:Instant
-A:SP$ Charm | Cost$ 2 G | Choices$ DBPump1,DBPump2
+A:SP$ Charm | Choices$ DBPump1,DBPump2
 SVar:DBPump1:DB$ Pump | ValidTgts$ Creature.notattacking | TgtPrompt$ Select target nonattacking creature | KW$ Reach & Deathtouch | SubAbility$ DBUntap | SpellDescription$ Target nonattacking creature gains reach and deathtouch until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target attacking creature gets +2/+2 and gains trample until end of turn.

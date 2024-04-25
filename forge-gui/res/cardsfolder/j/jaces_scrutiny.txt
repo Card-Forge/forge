@@ -1,7 +1,7 @@
 Name:Jace's Scrutiny
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBInvestigate | SpellDescription$ Target creature gets -4/-0 until end of turn. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBInvestigate | SpellDescription$ Target creature gets -4/-0 until end of turn. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token
 Oracle:Target creature gets -4/-0 until end of turn.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

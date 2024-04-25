@@ -1,7 +1,7 @@
 Name:Hallowed Moonlight
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ ReplaceExile | SubAbility$ DBDraw | AILogic$ NonCastCreature | SpellDescription$ Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead. Draw a card.
+A:SP$ Effect | ReplacementEffects$ ReplaceExile | SubAbility$ DBDraw | AILogic$ NonCastCreature | SpellDescription$ Until end of turn, if a creature would enter the battlefield and it wasn't cast, exile it instead. Draw a card.
 SVar:ReplaceExile:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.wasNotCast | ReplaceWith$ DBExile | Description$ If a creature would enter the battlefield and it wasn't cast, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:DBDraw:DB$ Draw | NumCards$ 1

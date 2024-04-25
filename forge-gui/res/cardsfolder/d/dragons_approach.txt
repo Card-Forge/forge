@@ -2,6 +2,6 @@ Name:Dragon's Approach
 ManaCost:2 R
 Types:Sorcery
 K:A deck can have any number of cards named CARDNAME.
-A:SP$ DealDamage | Cost$ 2 R | Defined$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 3 damage to each opponent. You may exile CARDNAME and four cards named Dragon's Approach from your graveyard. If you do, search your library for a Dragon creature card, put it onto the battlefield, then shuffle.
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 3 damage to each opponent. You may exile CARDNAME and four cards named Dragon's Approach from your graveyard. If you do, search your library for a Dragon creature card, put it onto the battlefield, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | UnlessCost$ ExileFromGrave<4/Card.namedDragon's Approach> ExileFromStack<1/Card.Self> | UnlessSwitched$ True | UnlessPayer$ You | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Dragon | ChangeNum$ 1 | SpellDescription$ Search your library for a Dragon creature card, put it onto the battlefield, then shuffle.
 Oracle:Dragon's Approach deals 3 damage to each opponent. You may exile Dragon's Approach and four cards named Dragon's Approach from your graveyard. If you do, search your library for a Dragon creature card, put it onto the battlefield, then shuffle.\nA deck can have any number of cards named Dragon's Approach.

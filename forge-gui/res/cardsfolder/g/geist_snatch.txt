@@ -1,6 +1,6 @@
 Name:Geist Snatch
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_spirit_flying | TokenOwner$ You
 Oracle:Counter target creature spell. Create a 1/1 blue Spirit creature token with flying.

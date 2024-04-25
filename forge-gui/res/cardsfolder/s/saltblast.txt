@@ -1,5 +1,5 @@
 Name:Saltblast
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 W W | ValidTgts$ Permanent.nonWhite | TgtPrompt$ Select target nonwhite permanent | SpellDescription$ Destroy target nonwhite permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.nonWhite | TgtPrompt$ Select target nonwhite permanent | SpellDescription$ Destroy target nonwhite permanent.
 Oracle:Destroy target nonwhite permanent.

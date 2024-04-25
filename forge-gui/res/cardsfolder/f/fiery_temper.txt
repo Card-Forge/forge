@@ -1,7 +1,7 @@
 Name:Fiery Temper
 ManaCost:1 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 K:Madness:R
 DeckHints:Ability$Discard
 Oracle:Fiery Temper deals 3 damage to any target.\nMadness {R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

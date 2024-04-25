@@ -2,6 +2,6 @@ Name:Syphon Life
 ManaCost:1 B B
 Types:Sorcery
 K:Retrace
-A:SP$ LoseLife | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Target player loses 2 life and you gain 2 life.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

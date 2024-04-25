@@ -52,6 +52,10 @@ public class CloneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         List<Card> cloneTargets = new ArrayList<>();
@@ -107,10 +111,6 @@ public class CloneEffect extends SpellAbilityEffect {
 
         final boolean optional = sa.hasParam("Optional");
         if (optional && !host.getController().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantCopy", CardTranslation.getTranslatedName(cardToCopy.getName())), null)) {
-            return;
-        }
-
-        if ("UntilTargetedUntaps".equals(sa.getParam("Duration")) && !cardToCopy.isTapped()) {
             return;
         }
 

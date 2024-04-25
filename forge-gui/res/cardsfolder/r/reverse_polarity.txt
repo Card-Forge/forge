@@ -1,7 +1,7 @@
 Name:Reverse Polarity
 ManaCost:W W
 Types:Instant
-A:SP$ GainLife | Cost$ W W | Defined$ You | LifeAmount$ X | SpellDescription$ You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain X life, where X is twice the damage dealt to you so far this turn by artifacts.
 SVar:X:Count$DamageThisTurn Artifact You/Times.2
 AI:RemoveDeck:Random
 DeckHas:Ability$LifeGain

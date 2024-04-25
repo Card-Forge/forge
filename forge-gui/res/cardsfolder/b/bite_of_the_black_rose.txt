@@ -1,7 +1,7 @@
 Name:Bite of the Black Rose
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Vote | Cost$ 3 B | Defined$ Player | VoteSickness$ DBPumpAll | VotePsychosis$ DBDiscard | Tied$ DBDiscard | VoteType$ Sickness,Psychosis | SpellDescription$ Will of the Council — Starting with you, each player votes for sickness or psychosis. If sickness gets more votes, creatures your opponents control get -2/-2 until end of turn. If psychosis gets more votes or the vote is tied, each opponent discards two cards.
+A:SP$ Vote | Defined$ Player | VoteSickness$ DBPumpAll | VotePsychosis$ DBDiscard | Tied$ DBDiscard | VoteType$ Sickness,Psychosis | SpellDescription$ Will of the Council — Starting with you, each player votes for sickness or psychosis. If sickness gets more votes, creatures your opponents control get -2/-2 until end of turn. If psychosis gets more votes or the vote is tied, each opponent discards two cards.
 SVar:DBPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.OppCtrl | IsCurse$ True
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose
 AI:RemoveDeck:All

@@ -1,0 +1,14 @@
+Name:Lumra, Bellow of the Woods
+ManaCost:4 G G
+Types:Legendary Creature Elemental Bear
+PT:*/*
+K:Vigilance
+K:Reach
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When NICKNAME enters, mill four cards. Then return all land cards from your graveyard to the battlefield tapped.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:Vigilance, reach\nLumra, Bellow of the Woods’s power and toughness are each equal to the number of lands you control.\nWhen Lumra enters, mill four cards. Then return all land cards from your graveyard to the battlefield tapped.

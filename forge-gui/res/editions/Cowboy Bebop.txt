@@ -1,0 +1,13 @@
+[metadata]
+Code=PCBB
+Date=2024-08-02
+Name=Cowboy Bebop
+Type=Promo
+ScryfallCode=PCBB
+
+[cards]
+1 R Ossification @Maxilla
+2 R Disdainful Stroke @Maxilla
+3 R Go for the Throat @Maxilla
+4 R Lightning Strike @Maxilla
+5 R Snakeskin Veil @Maxilla

@@ -1,7 +1,7 @@
 Name:Sunbringer's Touch
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 2 G G | Bolster$ True | CounterNum$ X | SubAbility$ DBPumpAll | CounterType$ P1P1 | SpellDescription$ Bolster X, where X is the number of cards in your hand. Each creature you control with a +1/+1 counter on it gains trample until end of turn. (To bolster X, choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)
+A:SP$ PutCounter | Bolster$ True | CounterNum$ X | SubAbility$ DBPumpAll | CounterType$ P1P1 | SpellDescription$ Bolster X, where X is the number of cards in your hand. Each creature you control with a +1/+1 counter on it gains trample until end of turn. (To bolster X, choose a creature with the least toughness among creatures you control and put X +1/+1 counters on it.)
 SVar:X:Count$InYourHand
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | KW$ Trample
 SVar:NeedsToPlayVar:X GE2

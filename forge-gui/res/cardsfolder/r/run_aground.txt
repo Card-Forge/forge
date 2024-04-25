@@ -1,5 +1,5 @@
 Name:Run Aground
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact or creature on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact or creature on top of its owner's library.
 Oracle:Put target artifact or creature on top of its owner's library.

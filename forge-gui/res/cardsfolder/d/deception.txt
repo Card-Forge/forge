@@ -1,5 +1,5 @@
 Name:Deception
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 Oracle:Target opponent discards two cards.

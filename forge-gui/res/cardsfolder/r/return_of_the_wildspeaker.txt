@@ -1,7 +1,7 @@
 Name:Return of the Wildspeaker
 ManaCost:4 G
 Types:Instant
-A:SP$ Charm | Cost$ 4 G | Choices$ DBDraw,DBPumpAll
+A:SP$ Charm | Choices$ DBDraw,DBPumpAll
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among non-Human creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl+nonHuman$GreatestPower
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+nonHuman | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Non-Human creatures you control get +3/+3 until end of turn.

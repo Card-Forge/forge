@@ -1,6 +1,6 @@
 Name:Change of Heart
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack. | IsCurse$ True | SpellDescription$ Target creature can't attack this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack. | IsCurse$ True | SpellDescription$ Target creature can't attack this turn.
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget creature can't attack this turn.

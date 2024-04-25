@@ -1,0 +1,15 @@
+Name:Jace Reawakened
+ManaCost:U U
+Types:Legendary Planeswalker Jace
+Loyalty:3
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | Caster$ Player.Active | CheckSVar$ Count$YourTurns | SVarCompare$ LE3 | Description$ You can't cast this spell during your first, second, or third turns of the game.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand+cmcLE3 | RememberChanged$ True | SubAbility$ DBPlot | StackDescription$ SpellDescription | SpellDescription$ You may exile a nonland card with mana value 3 or less from your hand.
+SVar:DBPlot:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Plotted | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you do, it becomes plotted.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Triggers$ CastTrig | SpellDescription$ Until end of turn, whenever you cast a spell, copy it. You may choose new targets for the copy.
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Command | TriggerDescription$ Whenever you cast a spell, copy it. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHas:Ability$Discard|Token
+Oracle:You can't cast this spell during your first, second, or third turns of the game.\n[+1]: Draw a card, then discard a card.\n[+1]: You may exile a nonland card with mana value 3 or less from your hand. If you do, it becomes plotted.\n[-6]: Until end of turn, whenever you cast a spell, copy it. You may choose new targets for the copy.

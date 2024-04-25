@@ -1,5 +1,5 @@
 Name:Mental Misstep
 ManaCost:UP
 Types:Instant
-A:SP$ Counter | Cost$ UP | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 1 | ValidTgts$ Card.cmcEQ1 | AIPhyrexianPayment$ Never | SpellDescription$ Counter target spell with mana value 1.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 1 | ValidTgts$ Card.cmcEQ1 | AIPhyrexianPayment$ Never | SpellDescription$ Counter target spell with mana value 1.
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nCounter target spell with mana value 1.

@@ -7,4 +7,4 @@ SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeValid$ Artifact.cmcLEY | AnyNumber$ Tru
 S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | IsPresent$ Artifact.DefenderCtrl | PresentCompare$ GE3 | Description$ NICKNAME can't be blocked as long as defending player controls three or more artifacts.
 SVar:Y:Count$CardPower
 DeckHints:Type$Artifact
-Oracle:Whenever Ayesha Tanaka, Armorer attacks,look at the top four cards of your library. You may put any number of artifact cards with mana value less than or equal to Ayesha's power from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.\nAyesha can't be blocked as long as defending player controls three or more artifacts.
+Oracle:Whenever Ayesha Tanaka, Armorer attacks, look at the top four cards of your library. You may put any number of artifact cards with mana value less than or equal to Ayesha's power from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.\nAyesha can't be blocked as long as defending player controls three or more artifacts.

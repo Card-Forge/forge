@@ -1,7 +1,7 @@
 Name:Ghostly Flicker
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select 2 target artifacts, creatures, or lands that you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile two target artifacts, creatures and/or lands you control, then return those cards to the battlefield under your control.
+A:SP$ ChangeZone | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl,Land.YouCtrl | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select 2 target artifacts, creatures, or lands that you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile two target artifacts, creatures and/or lands you control, then return those cards to the battlefield under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

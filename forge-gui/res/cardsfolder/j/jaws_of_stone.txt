@@ -1,6 +1,6 @@
 Name:Jaws of Stone
 ManaCost:5 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ OrigMountains | TargetMin$ 0 | TargetMax$ OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ OrigMountains | TargetMin$ 0 | TargetMax$ OrigMountains | DividedAsYouChoose$ OrigMountains | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.
 SVar:OrigMountains:Count$LastStateBattlefieldWithFallback Mountain.YouCtrl
 Oracle:Jaws of Stone deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.

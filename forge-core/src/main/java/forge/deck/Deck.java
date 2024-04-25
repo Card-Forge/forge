@@ -48,6 +48,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
+    private final Set<String> aiHints = new TreeSet<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
     private String lastCardArtPreferenceUsed = "";
@@ -207,6 +208,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.parts.put(kv.getKey(), cp);
             cp.addAll(kv.getValue());
         }
+        result.setAiHints(StringUtils.join(aiHints, " | "));
     }
 
     /*
@@ -534,6 +536,29 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         // do not include schemes / avatars and any non-regular cards
         return allCards;
+    }
+
+    public void setAiHints(String aiHintsInfo) {
+        if (aiHintsInfo == null || aiHintsInfo.trim().equals("")) {
+            return;
+        }
+        String[] hints = aiHintsInfo.split("\\|");
+        for (String hint : hints) {
+            aiHints.add(hint.trim());
+        }
+    }
+
+    public Set<String> getAiHints() {
+        return aiHints;
+    }
+
+    public String getAiHint(String name) {
+        for (String aiHint : aiHints) {
+            if (aiHint.toLowerCase().startsWith(name.toLowerCase() + "$")) {
+                return aiHint.substring(aiHint.indexOf("$") + 1).trim();
+            }
+        }
+        return "";
     }
 
     public UnplayableAICards getUnplayableAICards() {

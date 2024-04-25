@@ -1,7 +1,7 @@
 Name:Expressive Iteration
 ManaCost:U R
 Types:Sorcery
-A:SP$ Dig | Cost$ U R | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | LibraryPosition2$ 0 | SkipReorder$ True | SkipShuffle$ True | SubAbility$ DBDig2 | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn. | StackDescription$ Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | LibraryPosition2$ 0 | SkipReorder$ True | SkipShuffle$ True | SubAbility$ DBDig2 | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn. | StackDescription$ Look at the top three cards of your library. Put one of them into your hand, put one of them on the bottom of your library, and exile one of them. You may play the exiled card this turn.
 SVar:DBDig2:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | NoReveal$ True | DestinationZone$ Library | LibraryPosition2$ 0 | SkipShuffle$ True | SubAbility$ DBDig1 | StackDescription$ None
 SVar:DBDig1:DB$ Dig | DigNum$ 1 | ChangeNum$ All | NoReveal$ True | DestinationZone$ Exile | SkipReorder$ True | SkipShuffle$ True | RememberChanged$ True | SubAbility$ DBEffect | NoLooking$ True | StackDescription$ None
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile

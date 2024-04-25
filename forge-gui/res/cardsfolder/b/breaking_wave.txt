@@ -2,7 +2,7 @@ Name:Breaking Wave
 ManaCost:2 U U
 Types:Sorcery
 K:MayFlashCost:2
-A:SP$ UntapAll | Cost$ 2 U U | ValidCards$ Creature.tapped | RememberUntapped$ True | SubAbility$ DBTap | SpellDescription$ Simultaneously untap all tapped creatures and tap all untapped creatures.
+A:SP$ UntapAll | ValidCards$ Creature.tapped | RememberUntapped$ True | SubAbility$ DBTap | SpellDescription$ Simultaneously untap all tapped creatures and tap all untapped creatures.
 SVar:DBTap:DB$ TapAll | ValidCards$ Creature.untapped+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

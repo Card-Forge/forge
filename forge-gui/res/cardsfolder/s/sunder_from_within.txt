@@ -1,5 +1,5 @@
 Name:Sunder from Within
 ManaCost:2 R R
 Types:Sorcery Arcane
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
+A:SP$ Destroy | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 Oracle:Destroy target artifact or land.

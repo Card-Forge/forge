@@ -2,7 +2,7 @@ Name:Kyren Legate
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Alternative Cost:0 | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Plains and you control a Mountain, you may cast this spell without paying its mana cost.
+S:Mode$ AlternativeCost | ValidSA$ Spell | ValidCard$ Card.Self | ValidPlayer$ You | Cost$ 0 | EffectZone$ All | CheckSVar$ X | CheckSecondSVar$ Y | Description$ If an opponent controls a Plains and you control a Mountain, you may cast this spell without paying its mana cost.
 K:Haste
 SVar:X:Count$Valid Plains.OppCtrl
 SVar:Y:Count$Valid Mountain.YouCtrl

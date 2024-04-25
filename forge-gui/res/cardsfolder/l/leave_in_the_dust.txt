@@ -1,6 +1,6 @@
 Name:Leave in the Dust
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Return target nonland permanent to its owner's hand.\nDraw a card.

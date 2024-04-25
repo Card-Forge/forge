@@ -313,3 +313,15 @@ SACRIFICE_DEFAULT_PREF_MAX_CMC=2
 SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS=true
 # A creature should evaluate to no more than this much to be considered for default SacCost preference
 SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL=135
+
+# Enable sideboarding in limited formats (e.g. Sealed, Draft)
+SIDEBOARDING_IN_LIMITED_FORMATS=false
+# Chance to proceed with sideboarding any given pair of cards in the devised sideboarding plan
+SIDEBOARDING_CHANCE_PER_CARD=50
+# Chance to do some sideboarding after winning a game
+SIDEBOARDING_CHANCE_ON_WIN=0
+# Only allow replacing a card with another card that shares the same core types. If disabled, mixing types will be
+# allowed, although a creature is still only replaced with another creature (or planeswalker, see the next option)
+SIDEBOARDING_SHARED_TYPE_ONLY=false
+# Allow replacing a creature with a planeswalker and vice versa when sideboarding if the previous option is disabled
+SIDEBOARDING_PLANESWALKER_EQ_CREATURE=false

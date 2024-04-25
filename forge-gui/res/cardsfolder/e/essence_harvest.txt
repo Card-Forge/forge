@@ -1,7 +1,7 @@
 Name:Essence Harvest
 ManaCost:2 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target player loses X life and you gain X life, where X is the highest power amongst creatures you control.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Target player loses X life and you gain X life, where X is the highest power amongst creatures you control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 Oracle:Target player loses X life and you gain X life, where X is the greatest power among creatures you control.

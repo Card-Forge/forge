@@ -53,6 +53,9 @@ public class DeckSerializer {
         if (!d.getTags().isEmpty()) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.TAGS,"=", StringUtils.join(d.getTags(), DeckFileHeader.TAGS_SEPARATOR)));
         }
+        if (!d.getAiHints().isEmpty()) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.AI_HINTS, "=", StringUtils.join(d.getAiHints(), " | ")));
+        }
     
         for(Entry<DeckSection, CardPool> s : d) {
             out.add(TextUtil.enclosedBracket(s.getKey().toString()));
@@ -77,6 +80,7 @@ public class DeckSerializer {
 
         Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
+        d.setAiHints(dh.getAiHints());
         d.getTags().addAll(dh.getTags());
         d.setDeferredSections(sections);
         return d;

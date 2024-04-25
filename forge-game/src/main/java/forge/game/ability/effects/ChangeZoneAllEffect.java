@@ -36,12 +36,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getHostCard();
-
         if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
+        final Card source = sa.getHostCard();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
@@ -51,6 +50,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
+            tgtPlayers = game.getPlayers();
         } else {
             cards = new CardCollection();
             for (final Player p : tgtPlayers) {
@@ -239,13 +239,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
 
-        // if Shuffle parameter exists, and any amount of cards were owned by
-        // that player, then shuffle that library
+        // CR 701.20d If an effect would cause a player to shuffle a set of objects into a library,
+        // that library is shuffled even if there are no objects in that set. 
         if (sa.hasParam("Shuffle")) {
-            for (Player p : game.getPlayers()) {
-                if (Iterables.any(cards, CardPredicates.isOwner(p))) {
-                    p.shuffle(sa);
-                }
+            for (Player p : tgtPlayers) {
+                p.shuffle(sa);
             }
         }
     }

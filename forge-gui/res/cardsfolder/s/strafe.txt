@@ -1,5 +1,5 @@
 Name:Strafe
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.nonRed | TgtPrompt$ Select target nonred Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target nonred creature.
+A:SP$ DealDamage | ValidTgts$ Creature.nonRed | TgtPrompt$ Select target nonred Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target nonred creature.
 Oracle:Strafe deals 3 damage to target nonred creature.

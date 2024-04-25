@@ -1,6 +1,6 @@
 Name:Nissa's Renewal
 ManaCost:5 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 G | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3 | SubAbility$ DBGainLife | SpellDescription$ Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You gain 7 life.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 3 | SubAbility$ DBGainLife | SpellDescription$ Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You gain 7 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 7
 Oracle:Search your library for up to three basic land cards, put them onto the battlefield tapped, then shuffle. You gain 7 life.

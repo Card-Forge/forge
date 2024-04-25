@@ -635,8 +635,7 @@ public class Cost implements Serializable {
      * refundPaidCost.
      * </p>
      *
-     * @param source
-     *            a {@link forge.game.card.Card} object.
+     * @param source a {@link Card} object.
      */
     public final void refundPaidCost(final Card source) {
         // prereq: isUndoable is called first

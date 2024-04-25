@@ -1,0 +1,11 @@
+Name:Tinybones Joins Up
+ManaCost:B
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, any number of target players each discard a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Legendary | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a legendary creature enters the battlefield under your control, any number of target players each mill a card and lose 1 life.
+SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Targeted
+SVar:MaxTgt:PlayerCountPlayers$Amount
+DeckHas:Ability$Discard|Mill
+Oracle:When Tinybones Joins Up enters the battlefield, any number of target players each discard a card.\nWhenever a legendary creature enters the battlefield under your control, any number of target players each mill a card and lose 1 life.

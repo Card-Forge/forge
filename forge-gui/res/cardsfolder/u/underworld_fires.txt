@@ -1,6 +1,6 @@
 Name:Underworld Fires
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature,Planeswalker | NumDmg$ 1 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to each creature and each planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.
+A:SP$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 1 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to each creature and each planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Underworld Fires deals 1 damage to each creature and each planeswalker. If a permanent dealt damage this way would die this turn, exile it instead.

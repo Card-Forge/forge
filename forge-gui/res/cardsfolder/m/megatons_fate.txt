@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Sorcery
 A:SP$ Charm | Choices$ Disarm,Detonate
 SVar:Disarm:DB$ Destroy | ValidTgts$ Artifact | SubAbility$ TrigToken | SpellDescription$ Disarm — Destroy target artifact. Create four Treasure tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_a_treasure_sac 
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ c_a_treasure_sac
 SVar:Detonate:DB$ DamageAll | NumDmg$ 8 | ValidCards$ Creature | SubAbility$ DBRadiation | SpellDescription$ Detonate — CARDNAME deals 8 damage to each creature. Each player gets four rad counters.
 SVar:DBRadiation:DB$ Radiation | Defined$ Player | Num$ 4
 DeckHas:Ability$Token & Type$Artifact|Treasure

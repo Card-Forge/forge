@@ -1,0 +1,7 @@
+Name:Sterling Keykeeper
+ManaCost:1 W
+Types:Creature Human Mercenary
+PT:2/2
+A:AB$ Tap | Cost$ 2 T | ValidTgts$ Creature.nonMount | TgtPrompt$ Select target non-Mount creature | SpellDescription$ Tap target non-Mount creature.
+SVar:NonCombatPriority:1
+Oracle:{2}, {T}: Tap target non-Mount creature.

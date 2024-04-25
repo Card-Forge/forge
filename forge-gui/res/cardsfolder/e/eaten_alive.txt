@@ -3,5 +3,5 @@ ManaCost:B
 Types:Sorcery
 K:AlternateAdditionalCost:Sac<1/Creature>:3 B
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
-A:SP$ ChangeZone | Cost$ B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or planeswalker.
+A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or planeswalker.
 Oracle:As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.\nExile target creature or planeswalker.

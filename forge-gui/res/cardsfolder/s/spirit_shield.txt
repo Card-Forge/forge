@@ -2,9 +2,6 @@ Name:Spirit Shield
 ManaCost:3
 Types:Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +0/+2 for as long as CARDNAME remains tapped. | StackDescription$ SpellDescription
-S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddToughness$ 2
-T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
-SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ 2 | Duration$ UntilUntaps | AILogic$ ContinuousBonus | SpellDescription$ Target creature gets +0/+2 for as long as CARDNAME remains tapped.
 SVar:AIUntapPreference:BetterTgtThanRemembered
 Oracle:You may choose not to untap Spirit Shield during your untap step.\n{2}, {T}: Target creature gets +0/+2 for as long as Spirit Shield remains tapped.

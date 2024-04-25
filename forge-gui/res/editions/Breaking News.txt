@@ -6,7 +6,90 @@ Type=Collector_Edition
 ScryfallCode=OTP
 
 [cards]
+1 R Fell the Mighty @Magnus Jansson
+2 U Fierce Retribution @Magnus Jansson
+3 U Journey to Nowhere @Adam Volker
+4 M Leyline Binding @Yohann Schepacz
+5 R Pariah @Magnus Jansson
+6 R Path to Exile @Calder Moore
+7 R Archive Trap @William Tempest
+8 R Archmage's Charm @Justine Mara Andersen
+9 R Commandeer @Magnus Jansson
+10 U Essence Capture @Adam Volker
+11 M Mana Drain @Florey
+12 M Mindbreak Trap @Arik Roper
+13 U Repulse @Mark A. Nelson
+14 U Heartless Pillage @Mark A. Nelson
+15 R Imp's Mischief @Justine Mara Andersen
+16 U Murder @Willem Hampson
+17 M Overwhelming Forces @Willem Hampson
+18 R Reanimate @Michal Ivan
+19 R Surgical Extraction @Arik Roper
 20 M Thoughtseize @William Tempest
+21 R Collective Defiance @William Tempest
+22 M Crackle with Power @Mark A. Nelson
+23 R Electrodominance @Mark A. Nelson
+24 U Fling @Florey
+25 M Indomitable Creativity @Tyler Crook
+26 U Skewer the Critics @Florey
+27 R Skullcrack @Mark A. Nelson
+28 U Clear Shot @Justine Mara Andersen
+29 M Force of Vigor @Adam Volker
+30 R Pest Infestation @Michael Walsh
+31 R Primal Command @Arik Roper
+32 R Primal Might @Jon Juarez
+33 U Thornado @Yohann Schepacz
+34 R Abrupt Decay @Sean Murray
+35 M Anguished Unmaking @Arik Roper
+36 U Back for More @Florey
+37 R Bedevil @Arik Roper
+38 U Buried in the Garden @Justine Mara Andersen
 39 M Crime // Punishment @William Tempest
+40 R Cruel Ultimatum @Michal Ivan
+41 R Decimate @Yohann Schepacz
+42 U Decisive Denial @Mark A. Nelson
+43 R Detention Sphere @Justine Mara Andersen
+44 R Endless Detour @Yohann Schepacz
+45 M Fractured Identity @Yohann Schepacz
+46 U Hindering Light @Magnus Jansson
+47 U Humiliate @Mark A. Nelson
+48 U Hypothesizzle @Mark A. Nelson
+49 R Ionize @Arik Roper
+50 M Oko, Thief of Crowns @Michael Walsh
+51 R Outlaws' Merriment @Willem Hampson
+52 U Ride Down @William Tempest
+53 U Savage Smash @Magnus Jansson
+54 R Siphon Insight @Michal Ivan
+55 U Terminal Agony @Michael Walsh
+56 U Tyrant's Scorn @William Tempest
+57 R Vanishing Verse @Sean Murray
+58 R Villainous Wealth @Magnus Jansson
+59 R Void Rend @William Tempest
+60 R Voidslime @Tyler Crook
+61 M Contagion Engine @Magnus Jansson
+62 M Grindstone @Alejandro Mirabal
+63 M Mindslaver @Gossip Goblin
+64 R Unlicensed Hearse @Sean Murray
+65 R Dust Bowl @Yohann Schepacz
+66 M Leyline Binding @Yohann Schepacz
+67 M Mana Drain @Florey
+68 M Mindbreak Trap @Arik Roper
+69 M Overwhelming Forces @Willem Hampson
 70 M Thoughtseize @William Tempest
+71 M Crackle with Power @Mark A. Nelson
+72 M Indomitable Creativity @Tyler Crook
+73 M Force of Vigor @Adam Volker
+74 M Anguished Unmaking @Arik Roper
 75 M Crime // Punishment @William Tempest
+76 M Fractured Identity @Yohann Schepacz
+77 M Oko, Thief of Crowns @Michael Walsh
+78 M Contagion Engine @Magnus Jansson
+79 M Grindstone @Alejandro Mirabal
+80 M Mindslaver @Gossip Goblin
+
+[tokens]
+bg_1_1_pest_lifegain
+c_a_food_sac
+rw_1_2_human_rogue_haste_damage
+rw_2_1_human_cleric_lifelink_haste
+rw_3_1_human_warrior_trample_haste

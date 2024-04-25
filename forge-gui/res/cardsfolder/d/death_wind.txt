@@ -1,6 +1,6 @@
 Name:Death Wind
 ManaCost:X B
 Types:Instant
-A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:Count$xPaid
 Oracle:Target creature gets -X/-X until end of turn.

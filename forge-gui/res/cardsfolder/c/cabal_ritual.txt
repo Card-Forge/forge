@@ -1,7 +1,7 @@
 Name:Cabal Ritual
 ManaCost:1 B
 Types:Instant
-A:SP$ Mana | Cost$ 1 B | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B}{B}{B}. Threshold — Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard.
+A:SP$ Mana | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B}{B}{B}. Threshold — Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.5.3
 AI:RemoveDeck:Random
 Oracle:Add {B}{B}{B}.\nThreshold — Add {B}{B}{B}{B}{B} instead if seven or more cards are in your graveyard.

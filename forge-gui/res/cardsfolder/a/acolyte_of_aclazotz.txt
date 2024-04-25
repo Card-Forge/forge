@@ -2,7 +2,7 @@ Name:Acolyte of Aclazotz
 ManaCost:2 B
 Types:Creature Vampire Cleric
 PT:1/4
-A:AB$ LoseLife | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | LifeAmount$ 1 | Defined$ Opponent | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
+A:AB$ LoseLife | Cost$ T Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | LifeAmount$ 1 | Defined$ Opponent | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life and you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
 DeckHas:Ability$Sacrifice|Counters|LifeGain
 DeckHints:Type$Artifact

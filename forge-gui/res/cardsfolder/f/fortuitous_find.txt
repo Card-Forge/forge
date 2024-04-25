@@ -1,7 +1,7 @@
 Name:Fortuitous Find
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeArtifact,ChangeCreature
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeArtifact,ChangeCreature
 SVar:ChangeArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:ChangeCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 Oracle:Choose one or both —\n• Return target artifact card from your graveyard to your hand.\n• Return target creature card from your graveyard to your hand.

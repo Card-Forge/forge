@@ -1,7 +1,7 @@
 Name:Feral Instinct
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Target creature gets +1/+1 until end of turn. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Target creature gets +1/+1 until end of turn.\nDraw a card at the beginning of the next turn's upkeep.

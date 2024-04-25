@@ -1,7 +1,7 @@
 Name:White Sun's Zenith
 ManaCost:X W W W
 Types:Instant
-A:SP$ Token | Cost$ X W W W | TokenAmount$ X | TokenScript$ w_2_2_cat | TokenOwner$ You | SubAbility$ DBShuffle | SpellDescription$ Create X 2/2 white Cat creature tokens. Shuffle CARDNAME into its owner's library.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_2_2_cat | TokenOwner$ You | SubAbility$ DBShuffle | SpellDescription$ Create X 2/2 white Cat creature tokens. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Create X 2/2 white Cat creature tokens. Shuffle White Sun's Zenith into its owner's library.

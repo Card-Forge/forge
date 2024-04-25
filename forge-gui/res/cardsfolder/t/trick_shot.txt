@@ -1,0 +1,7 @@
+Name:Trick Shot
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 6 | DamageMap$ True | SubAbility$ MoreDamage | SpellDescription$ CARDNAME deals 6 damage to target creature and 2 damage to up to one other target creature token.
+SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Creature.token | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature token | TargetUnique$ True | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDamageResolve:DB$ DamageResolve
+Oracle:Trick Shot deals 6 damage to target creature and 2 damage to up to one other target creature token.

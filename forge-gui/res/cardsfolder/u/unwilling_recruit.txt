@@ -1,7 +1,7 @@
 Name:Unwilling Recruit
 ManaCost:X R R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ X R R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ X | KW$ Haste
 SVar:X:Count$xPaid
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gets +X/+0 and gains haste until end of turn.

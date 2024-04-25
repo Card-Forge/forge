@@ -1,5 +1,5 @@
 Name:Citywide Bust
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Creature.toughnessGE4 | SpellDescription$ Destroy all creatures with toughness 4 or greater.
+A:SP$ DestroyAll | ValidCards$ Creature.toughnessGE4 | SpellDescription$ Destroy all creatures with toughness 4 or greater.
 Oracle:Destroy all creatures with toughness 4 or greater.

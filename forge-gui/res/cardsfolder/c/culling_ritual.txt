@@ -1,7 +1,7 @@
 Name:Culling Ritual
 ManaCost:2 B G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 B G | ValidCards$ Permanent.nonLand+cmcLE2 | RememberDestroyed$ True | SubAbility$ DBAddMana | SpellDescription$ Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand+cmcLE2 | RememberDestroyed$ True | SubAbility$ DBAddMana | SpellDescription$ Destroy each nonland permanent with mana value 2 or less. Add {B} or {G} for each permanent destroyed this way.
 SVar:DBAddMana:DB$ Mana | Produced$ Combo B G | Amount$ X | SubAbility$ DBCleanup
 SVar:X:Remembered$Amount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -2,7 +2,7 @@ Name:Choking Tethers
 ManaCost:3 U
 Types:Instant
 K:Cycling:1 U
-A:SP$ Tap | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 4 | SpellDescription$ Tap up to four target creatures.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 4 | SpellDescription$ Tap up to four target creatures.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigTap | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may tap target creature
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 Oracle:Tap up to four target creatures.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle Choking Tethers, you may tap target creature.

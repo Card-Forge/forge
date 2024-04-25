@@ -1,6 +1,6 @@
 Name:Bargain
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to draw a card | NumCards$ 1 | SubAbility$ DBGainLife | AILogic$ LifeLessThan.5 | SpellDescription$ Target opponent draws a card. You gain 7 life.
+A:SP$ Draw | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to draw a card | NumCards$ 1 | SubAbility$ DBGainLife | AILogic$ LifeLessThan.5 | SpellDescription$ Target opponent draws a card. You gain 7 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 7 | Defined$ You
 Oracle:Target opponent draws a card.\nYou gain 7 life.

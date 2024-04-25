@@ -1,6 +1,6 @@
 Name:Needle Drop
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.wasDealtDamageThisTurn,Player.wasDealtDamageThisTurn | TgtPrompt$ Select target creature or player that was dealt damage this turn | NumDmg$ 1 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 1 damage to any target that was dealt damage this turn.
+A:SP$ DealDamage | ValidTgts$ Creature.wasDealtDamageThisTurn,Player.wasDealtDamageThisTurn | TgtPrompt$ Select target creature or player that was dealt damage this turn | NumDmg$ 1 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 1 damage to any target that was dealt damage this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Needle Drop deals 1 damage to any target that was dealt damage this turn.\nDraw a card.

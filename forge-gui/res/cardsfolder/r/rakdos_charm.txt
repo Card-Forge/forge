@@ -1,7 +1,7 @@
 Name:Rakdos Charm
 ManaCost:B R
 Types:Instant
-A:SP$ Charm | Cost$ B R | Choices$ Exile,Smash,CreatureDamage | CharmNum$ 1
+A:SP$ Charm | Choices$ Exile,Smash,CreatureDamage | CharmNum$ 1
 SVar:Exile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | SpellDescription$ Exile all cards from target player's graveyard.
 SVar:Smash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:CreatureDamage:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBDamage | DamageMap$ True | SpellDescription$ Each creature deals 1 damage to its controller.

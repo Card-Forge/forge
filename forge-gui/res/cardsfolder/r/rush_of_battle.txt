@@ -1,7 +1,7 @@
 Name:Rush of Battle
 ManaCost:3 W
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Creatures you control get +2/+1 until end of turn. Warrior creatures you control gain lifelink until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Creatures you control get +2/+1 until end of turn. Warrior creatures you control gain lifelink until end of turn.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+Warrior | KW$ Lifelink
 AI:RemoveDeck:Random
 DeckNeeds:Type$Warrior

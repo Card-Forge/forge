@@ -1,7 +1,7 @@
 Name:Dredge the Mire
 ManaCost:3 B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 B | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZone | SpellDescription$ Each opponent chooses a creature card in their graveyard. Put those cards onto the battlefield under your control.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZone | SpellDescription$ Each opponent chooses a creature card in their graveyard. Put those cards onto the battlefield under your control.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Mandatory$ True | Choices$ Creature.RememberedPlayerOwn | ChoiceTitle$ Choose a creature card in your graveyard | ChoiceZone$ Graveyard | RememberChosen$ True | AILogic$ WorstCard
 SVar:DBChangeZone:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True

@@ -1,7 +1,7 @@
 Name:An Offer You Can't Refuse
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBToken | SpellDescription$ Counter target noncreature spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBToken | SpellDescription$ Counter target noncreature spell.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController | StackDescription$ SpellDescription | SpellDescription$ Its controller creates two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 Oracle:Counter target noncreature spell. Its controller creates two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

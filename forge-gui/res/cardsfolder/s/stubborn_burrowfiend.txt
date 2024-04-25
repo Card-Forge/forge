@@ -1,0 +1,11 @@
+Name:Stubborn Burrowfiend
+ManaCost:1 G
+Types:Creature Badger Beast Mount
+PT:2/2
+T:Mode$ BecomesSaddled | ValidSaddled$ Card.Self | FirstTimeSaddled$ True | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes saddled for the first time each turn, mill two cards, then CARDNAME gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | NumAtt$ Count$TypeInYourYard.Creature | NumDef$ Count$TypeInYourYard.Creature
+K:Saddle:2
+DeckHas:Ability$Mill
+DeckHints:Ability$Sacrifice|Mill|Dredge|Discard
+Oracle:Whenever Stubborn Burrowfiend becomes saddled for the first time each turn, mill two cards, then Stubborn Burrowfiend gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

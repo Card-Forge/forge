@@ -2,7 +2,7 @@ Name:Universal Surveillance
 ManaCost:X U U U
 Types:Sorcery
 K:Improvise
-A:SP$ Draw | Cost$ X U U U | NumCards$ X | SpellDescription$ Draw X cards.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
 SVar:X:Count$xPaid
 DeckHints:Type$Artifact
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw X cards.

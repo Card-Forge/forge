@@ -1,7 +1,7 @@
 Name:Find
-ManaCost:B/G B/G
+ManaCost:BG BG
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B/G B/G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 AlternateMode:Split
 Oracle:Return up to two target creature cards from your graveyard to your hand.
 
@@ -10,7 +10,7 @@ ALTERNATE
 Name:Finality
 ManaCost:4 B G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 4 B G | Choices$ Creature.YouCtrl | ChoiceOptional$ True | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll | StackDescription$ SpellDescription | SpellDescription$ You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.
+A:SP$ PutCounter | Choices$ Creature.YouCtrl | ChoiceOptional$ True | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll | StackDescription$ SpellDescription | SpellDescription$ You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True
 DeckHas:Ability$Counters
 Oracle:You may put two +1/+1 counters on a creature you control. Then all creatures get -4/-4 until end of turn.

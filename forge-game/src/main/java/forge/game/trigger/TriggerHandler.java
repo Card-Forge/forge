@@ -266,7 +266,7 @@ public class TriggerHandler {
 
         if (mode == TriggerType.Always) {
             runStateTrigger(runParams);
-        } else if (game.getStack().isFrozen() || holdTrigger) {
+        } else if ((game.getStack().isFrozen() || holdTrigger) && mode != TriggerType.TapsForMana && mode != TriggerType.ManaAdded) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));

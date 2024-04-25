@@ -88,10 +88,6 @@ public class ControlSpellEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (!tgtC.equals(sa.getHostCard()) && !sa.getHostCard().getGainControlTargets().contains(tgtC)) {
-                sa.getHostCard().addGainControlTarget(tgtC);
-            }
-
             if (remember) {
                 source.addRemembered(tgtC);
             }

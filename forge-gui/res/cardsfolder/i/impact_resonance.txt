@@ -1,7 +1,7 @@
 Name:Impact Resonance
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | NumDmg$ X | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | NumDmg$ X | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
 SVar:X:Count$MaxDamageThisTurn Card Permanent,Player
 SVar:MaxTgts:Count$Valid Creature
 Oracle:Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.

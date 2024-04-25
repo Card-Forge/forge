@@ -1,7 +1,7 @@
 Name:Cleansing Wildfire
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBChange | SpellDescription$ Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBChange | SpellDescription$ Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:DBChange:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | DefinedPlayer$ TargetedController | ShuffleNonMandatory$ True | SubAbility$ DBDraw | StackDescription$ Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle their library.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Destroy target land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.\nDraw a card.

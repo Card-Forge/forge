@@ -1,0 +1,9 @@
+Name:Stoic Sphinx
+ManaCost:2 U U
+Types:Creature Sphinx
+PT:5/3
+K:Flash
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | CheckSVar$ X | SVarCompare$ LT1 | Description$ CARDNAME has hexproof as long as you haven't cast a spell this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:Flash\nFlying\nStoic Sphinx has hexproof as long as you haven't cast a spell this turn.

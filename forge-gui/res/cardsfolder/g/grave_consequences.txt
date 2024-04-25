@@ -2,7 +2,7 @@ Name:Grave Consequences
 ManaCost:1 B
 Types:Instant
 #AI will exile all cards from its graveyard currently
-A:SP$ RepeatEach | Cost$ 1 B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseNum | SubAbility$ DBExile | SpellDescription$ Each player may exile any number of cards from their graveyard. Then each player loses 1 life for each card in their graveyard. Draw a card.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseNum | SubAbility$ DBExile | SpellDescription$ Each player may exile any number of cards from their graveyard. Then each player loses 1 life for each card in their graveyard. Draw a card.
 SVar:DBChooseNum:DB$ ChooseNumber | Defined$ Player.IsRemembered | Min$ 0 | Max$ X | ListTitle$ Exile how many cards in your graveyard? | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Amount$ Y | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Graveyard | Mandatory$ True | RememberChosen$ True
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBRepeat

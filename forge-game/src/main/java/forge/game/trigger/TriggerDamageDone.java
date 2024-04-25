@@ -54,7 +54,8 @@ public class TriggerDamageDone extends Trigger {
     }
 
     /** {@inheritDoc}
-     * @param runParams*/
+     * @param runParams
+     */
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.DamageSource))) {
@@ -92,7 +93,11 @@ public class TriggerDamageDone extends Trigger {
             final String fullParam = getParam("DamageAmount");
 
             final String operator = fullParam.substring(0, 2);
-            final int operand = Integer.parseInt(fullParam.substring(2));
+            int operand;
+            if (fullParam.substring(2).equals("TargetToughness")) {
+                final Card target = (Card) runParams.get(AbilityKey.DamageTarget);
+                operand = target.getNetToughness();
+            } else operand = Integer.parseInt(fullParam.substring(2));
             final int actualAmount = (Integer) runParams.get(AbilityKey.DamageAmount);
 
             if (!Expressions.compare(actualAmount, operator, operand)) {

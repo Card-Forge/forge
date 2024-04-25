@@ -1,6 +1,6 @@
 Name:Yahenni's Expertise
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBPlay | SpellDescription$ All creatures get -3/-3 until end of turn. You may cast a spell with mana value 3 or less from your hand without paying its mana cost.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBPlay | SpellDescription$ All creatures get -3/-3 until end of turn. You may cast a spell with mana value 3 or less from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLE3 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 Oracle:All creatures get -3/-3 until end of turn.\nYou may cast a spell with mana value 3 or less from your hand without paying its mana cost.

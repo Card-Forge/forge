@@ -1,5 +1,5 @@
 Name:Overrun
 ManaCost:2 G G G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Creatures you control get +3/+3 and gain trample until end of turn.
 Oracle:Creatures you control get +3/+3 and gain trample until end of turn.

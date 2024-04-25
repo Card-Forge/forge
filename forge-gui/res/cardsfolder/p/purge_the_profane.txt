@@ -1,6 +1,6 @@
 Name:Purge the Profane
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 W B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBGainLife | SpellDescription$ Target opponent discards two cards and you gain 2 life.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBGainLife | SpellDescription$ Target opponent discards two cards and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You
 Oracle:Target opponent discards two cards and you gain 2 life.

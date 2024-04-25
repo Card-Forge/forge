@@ -2,5 +2,5 @@ Name:Meditation Puzzle
 ManaCost:3 W W
 Types:Instant
 K:Convoke
-A:SP$ GainLife | Cost$ 3 W W | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
+A:SP$ GainLife | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nYou gain 8 life.

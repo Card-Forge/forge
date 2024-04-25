@@ -131,8 +131,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean blessing = false;
-
     /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions;
@@ -562,11 +560,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCycling() {
-        return isAlternativeCost(AlternativeCost.Cycling);
+        return isKeyword(Keyword.CYCLING) || isKeyword(Keyword.TYPECYCLING);
     }
 
     public boolean isBackup() {
-        return this.hasParam("Backup");
+        return this.isKeyword(Keyword.BACKUP);
     }
 
     public boolean isBoast() {
@@ -574,7 +572,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isNinjutsu() {
-        return this.hasParam("Ninjutsu");
+        return this.isKeyword(Keyword.NINJUTSU);
     }
 
     public boolean isCumulativeUpkeep() {
@@ -1107,6 +1105,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.isAlternativeCost(AlternativeCost.Foretold);
     }
 
+    public boolean isPlotting() {
+        return false;
+    }
+    
     /**
      * @return the aftermath
      */
@@ -1122,21 +1124,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOutlast() {
-        return isAlternativeCost(AlternativeCost.Outlast);
+        return isKeyword(Keyword.OUTLAST);
     }
 
     public boolean isCraft() {
-        return hasParam("Craft");
+        return isKeyword(Keyword.CRAFT);
+    }
+    public boolean isCrew() {
+        return isKeyword(Keyword.CREW);
     }
     public boolean isEquip() {
-        return hasParam("Equip");
-    }
-
-    public boolean isBlessing() {
-        return blessing;
-    }
-    public void setBlessing(boolean blessing0) {
-        blessing = blessing0;
+        return isKeyword(Keyword.EQUIP);
     }
 
     public boolean isChapter() {
@@ -1323,6 +1321,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public final boolean canTarget(final GameObject entity) {
+        return canTarget(entity, false);
+    }
+    public final boolean canTarget(final GameObject entity, boolean fizzleCheck) {
         if (entity == null) {
             return false;
         }
@@ -1440,7 +1441,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isEqualToughness() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.getNetToughness() != (((Card) entity).getNetToughness())) {
                         return false;
                     }
@@ -1450,23 +1451,29 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (tr.isSameController() && entity instanceof Card) {
                 Player newController;
                 newController = ((Card) entity).getController();
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.getController().equals(newController))
                         return false;
                 }
             }
 
-            if (tr.isDifferentControllers() && entity instanceof Card) {
-                Player newController;
-                newController = ((Card) entity).getController();
-                for (final Card c : targetChosen.getTargetCards()) {
+            if ((tr.isDifferentControllers() || (tr.isForEachPlayer() && !fizzleCheck)) && entity instanceof Card) {
+                Player newController = ((Card) entity).getController();
+                for (Card c : getTargets().getTargetCards()) {
+                    // can still determine controller only to check whether the other creature is a legal target
+                    c = getHostCard().getGame().getChangeZoneLKIInfo(c);
                     if (entity != c && c.getController().equals(newController))
                         return false;
                 }
             }
 
+            if (tr.isForEachPlayer() && fizzleCheck && entity instanceof Card) {
+                if (getTargets().forEachControllerChanged((Card) entity))
+                    return false;
+            }
+
             if (tr.isWithoutSameCreatureType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && c.sharesCreatureTypeWith((Card) entity)) {
                         return false;
                     }
@@ -1474,7 +1481,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isWithSameCreatureType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
                         return false;
                     }
@@ -1482,7 +1489,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (tr.isWithSameCardType() && entity instanceof Card) {
-                for (final Card c : targetChosen.getTargetCards()) {
+                for (final Card c : getTargets().getTargetCards()) {
                     if (entity != c && !c.sharesCardTypeWith((Card) entity)) {
                         return false;
                     }
@@ -2055,7 +2062,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getTargets().contains(o)) {
             return true;
         }
-        SpellAbility p = getParent();
+        SpellAbility p = getSubAbility();
         return p != null && p.isTargeting(o);
     }
 

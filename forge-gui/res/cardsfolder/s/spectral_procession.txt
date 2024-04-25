@@ -1,5 +1,5 @@
 Name:Spectral Procession
 ManaCost:2/W 2/W 2/W
 Types:Sorcery
-A:SP$ Token | Cost$ 2/W 2/W 2/W | TokenAmount$ 3 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create three 1/1 white Spirit creature tokens with flying.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create three 1/1 white Spirit creature tokens with flying.
 Oracle:Create three 1/1 white Spirit creature tokens with flying.

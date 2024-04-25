@@ -1,6 +1,6 @@
 Name:Tombfire
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.withFlashback | SpellDescription$ Target player exiles all cards with flashback from their graveyard.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.withFlashback | SpellDescription$ Target player exiles all cards with flashback from their graveyard.
 AI:RemoveDeck:Random
 Oracle:Target player exiles all cards with flashback from their graveyard.

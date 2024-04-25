@@ -1,0 +1,12 @@
+Name:Vaultborn Tyrant
+ManaCost:5 G G
+Types:Creature Dinosaur
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.powerGE4+Other+YouCtrl | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME or another creature with power 4 or greater enters the battlefield under your control, you gain 3 life and draw a card.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+!token | Execute$ DBCopy | TriggerDescription$ When CARDNAME dies, if it's not a token, create a token that's a copy of it, except it's an artifact in addition to its other types.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCard | AddTypes$ Artifact
+DeckHas:Ability$Token & Type$Artifact
+Oracle:Trample\nWhenever Vaultborn Tyrant or another creature with power 4 or greater enters the battlefield under your control, you gain 3 life and draw a card.\nWhen Vaultborn Tyrant dies, if it's not a token, create a token that's a copy of it, except it's an artifact in addition to its other types.

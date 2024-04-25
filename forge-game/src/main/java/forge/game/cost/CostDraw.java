@@ -33,17 +33,15 @@ public class CostDraw extends CostPart {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * CostDraw.
-     * @param amount
-     * @param playerSelector
-     */
     public CostDraw(final String amount, final String playerSelector) {
         super(amount, playerSelector, null);
     }
 
     @Override
-    public int paymentOrder() { return 15; }
+    public int paymentOrder() {
+        // In a world where costs are fully undoable, revealing unknown information should be done last.
+        return 20;
+    }
 
     /*
      * (non-Javadoc)
@@ -58,11 +56,6 @@ public class CostDraw extends CostPart {
         return sb.toString();
     }
 
-    /** 
-     * getPotentialPlayers.
-     * @param payer
-     * @param source
-     */
     public PlayerCollection getPotentialPlayers(final Player payer, final SpellAbility ability) {
         PlayerCollection res = new PlayerCollection();
         String type = this.getType();

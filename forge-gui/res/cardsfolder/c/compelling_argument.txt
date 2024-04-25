@@ -1,6 +1,6 @@
 Name:Compelling Argument
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Mill | Cost$ 1 U | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills five cards.
+A:SP$ Mill | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills five cards.
 K:Cycling:U
 Oracle:Target player mills five cards.\nCycling {U} ({U}, Discard this card: Draw a card.)

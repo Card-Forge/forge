@@ -1,6 +1,6 @@
 Name:Redirect
 ManaCost:U U
 Types:Instant
-A:SP$ ChangeTargets | Cost$ U U | TargetType$ Spell | Optional$ True | ValidTgts$ Card | SpellDescription$ You may choose new targets for target spell.
+A:SP$ ChangeTargets | TargetType$ Spell | Optional$ True | ValidTgts$ Card | SpellDescription$ You may choose new targets for target spell.
 AI:RemoveDeck:All
 Oracle:You may choose new targets for target spell.

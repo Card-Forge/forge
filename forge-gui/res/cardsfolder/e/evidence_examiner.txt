@@ -1,7 +1,7 @@
 Name:Evidence Examiner
 ManaCost:G U
 Types:Creature Merfolk Detective
-PT:3/3
+PT:2/2
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEvidence | TriggerDescription$ At the beginning of combat on your turn, you may collect evidence 4. (Exile cards with total mana value 4 or greater from your graveyard.)
 # Empty Effect for Cost
 SVar:TrigEvidence:AB$ Pump | Cost$ CollectEvidence<4> | AILogic$ Always

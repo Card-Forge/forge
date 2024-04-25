@@ -1,0 +1,7 @@
+Name:Bovine Intervention
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | SubAbility$ DBToken | SpellDescription$ Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token.
+SVar:DBToken:DB$ Token | TokenScript$ w_2_2_ox | TokenOwner$ TargetedController | TokenAmount$ 1
+DeckHas:Ability$Token & Type$Ox
+Oracle:Destroy target artifact or creature. Its controller creates a 2/2 white Ox creature token.

@@ -1,7 +1,7 @@
 Name:Flash of Insight
 ManaCost:X 1 U
 Types:Instant
-A:SP$ Dig | Cost$ X 1 U | DigNum$ X | ChangeNum$ 1 | NoReveal$ True | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | SpellDescription$ Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ X | ChangeNum$ 1 | NoReveal$ True | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | SpellDescription$ Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 K:Flashback:1 U ExileFromGrave<X/Card.Blue+Other/blue cards>
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

@@ -1,6 +1,6 @@
 Name:Psionic Blast
 ManaCost:2 U
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 U | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to any target and 2 damage to you.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to any target and 2 damage to you.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 Oracle:Psionic Blast deals 4 damage to any target and 2 damage to you.

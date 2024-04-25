@@ -2,7 +2,7 @@ Name:Polymorphous Rush
 ManaCost:2 U
 Types:Instant
 K:Strive:1 U
-A:SP$ ChooseCard | Cost$ 2 U | Defined$ You | Amount$ 1 | Choices$ Creature | Mandatory$ True | SubAbility$ Pump4Tgt | AILogic$ Clone | SpellDescription$ Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature | Mandatory$ True | SubAbility$ Pump4Tgt | AILogic$ Clone | SpellDescription$ Choose a creature on the battlefield. Any number of target creatures you control each become a copy of that creature until end of turn.
 SVar:Pump4Tgt:DB$ RepeatEach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | TargetMin$ 0 | TargetMax$ MaxTargets | DefinedCards$ Targeted | RepeatSubAbility$ ShapeTgt | SubAbility$ DBCleanup
 SVar:ShapeTgt:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Remembered | Duration$ UntilEndOfTurn
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

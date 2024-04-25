@@ -1,7 +1,7 @@
 Name:Filigree Fracture
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ RememberedLKI | ConditionPresent$ Permanent.Blue,Permanent.Black | ConditionCompare$ EQ1 | ConditionDescription$ If that permanent was blue or black, | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Destroy target artifact or enchantment. If that permanent was blue or black, draw a card.

@@ -1,7 +1,7 @@
 Name:Cannibalize
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | IsCurse$ True | SpellDescription$ Choose two target creatures controlled by the same player. Exile one of those creatures and put two +1/+1 counters on the other.
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TargetUnique$ True | TargetsWithSameController$ True | RememberTargets$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | IsCurse$ True | SpellDescription$ Choose two target creatures controlled by the same player. Exile one of those creatures and put two +1/+1 counters on the other.
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ForgetChosen$ True | Mandatory$ True | ChoiceTitle$ Choose one to exile | Amount$ 1 | SubAbility$ ExileChosen | StackDescription$ None
 SVar:ExileChosen:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutCounter | StackDescription$ None
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBCleanup | StackDescription$ None

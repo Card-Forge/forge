@@ -1,6 +1,6 @@
 Name:Brain Freeze
 ManaCost:1 U
 Types:Instant
-A:SP$ Mill | Cost$ 1 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
+A:SP$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills three cards.
 K:Storm
 Oracle:Target player mills three cards.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

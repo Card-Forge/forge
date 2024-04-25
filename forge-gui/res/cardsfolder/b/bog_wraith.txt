@@ -2,5 +2,5 @@ Name:Bog Wraith
 ManaCost:3 B
 Types:Creature Wraith
 PT:3/3
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

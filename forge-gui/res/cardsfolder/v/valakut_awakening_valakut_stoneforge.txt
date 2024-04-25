@@ -1,7 +1,7 @@
 Name:Valakut Awakening
 ManaCost:2 R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 R | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBDraw | StackDescription$ {p:You} puts any number of cards from their hand on the bottom of their library, | SpellDescription$ Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeType$ Card | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBDraw | StackDescription$ {p:You} puts any number of cards from their hand on the bottom of their library, | SpellDescription$ Put any number of cards from your hand on the bottom of your library, then draw that many cards plus one.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup | StackDescription$ then draws that many cards plus one.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand

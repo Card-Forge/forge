@@ -30,6 +30,7 @@ import com.google.common.collect.Sets;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.spellability.SpellAbility;
@@ -99,6 +100,14 @@ public class TriggerChangesZone extends Trigger {
             }
         }
 
+        if ("Battlefield".equals(getParam("Origin")) && getActiveZone() != null && getActiveZone().contains(ZoneType.Graveyard)) {
+            // extra check for Boneyard Scourge
+            CardCollectionView lastState = (CardCollectionView) runParams.get(AbilityKey.LastStateGraveyard);
+            if (!lastState.contains(getHostCard())) {
+                return false;
+            }
+        }
+
         if (hasParam("ValidCard")) {
             Card moved = (Card) runParams.get(AbilityKey.Card);
 
@@ -112,7 +121,7 @@ public class TriggerChangesZone extends Trigger {
                 moved = etbLKI.get(etbLKI.lastIndexOf(moved));
             }
 
-            if (!matchesValid(moved, getParam("ValidCard").split(","))) {
+            if (!matchesValidParam("ValidCard", moved)) {
                 return false;
             }
         }

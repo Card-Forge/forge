@@ -1,6 +1,6 @@
 Name:Eaten by Spiders
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | IsCurse$ True | SubAbility$ ChompEquip | StackDescription$ REP target creature with flying_{c:Targeted} | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
+A:SP$ Pump | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | IsCurse$ True | SubAbility$ ChompEquip | StackDescription$ REP target creature with flying_{c:Targeted} | SpellDescription$ Destroy target creature with flying and all Equipment attached to that creature.
 SVar:ChompEquip:DB$ DestroyAll | ValidCards$ Targeted.Self,Card.Equipment+Attached | StackDescription$ None
 Oracle:Destroy target creature with flying and all Equipment attached to that creature.

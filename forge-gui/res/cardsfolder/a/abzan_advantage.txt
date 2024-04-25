@@ -1,7 +1,7 @@
 Name:Abzan Advantage
 ManaCost:1 W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 W | ValidTgts$ Player | SacValid$ Enchantment | SacMessage$ Enchantment | SubAbility$ DBBolster | SpellDescription$ Target player sacrifices an enchantment. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Enchantment | SacMessage$ Enchantment | SubAbility$ DBBolster | SpellDescription$ Target player sacrifices an enchantment. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:DBBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Target player sacrifices an enchantment. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

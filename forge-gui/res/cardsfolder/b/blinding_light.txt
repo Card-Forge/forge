@@ -1,6 +1,6 @@
 Name:Blinding Light
 ManaCost:2 W
 Types:Sorcery
-A:SP$ TapAll | Cost$ 2 W | ValidCards$ Creature.nonWhite | SpellDescription$ Tap all nonwhite creatures.
+A:SP$ TapAll | ValidCards$ Creature.nonWhite | SpellDescription$ Tap all nonwhite creatures.
 AI:RemoveDeck:Random
 Oracle:Tap all nonwhite creatures.

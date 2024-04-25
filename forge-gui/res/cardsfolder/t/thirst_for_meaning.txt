@@ -1,7 +1,7 @@
 Name:Thirst for Meaning
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards. Then discard two cards unless you discard an enchantment card.
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards. Then discard two cards unless you discard an enchantment card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Enchantment
 DeckHas:Ability$Discard
 Oracle:Draw three cards. Then discard two cards unless you discard an enchantment card.

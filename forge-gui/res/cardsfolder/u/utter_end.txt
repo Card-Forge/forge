@@ -1,5 +1,5 @@
 Name:Utter End
 ManaCost:2 W B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W B | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target nonland permanent.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target nonland permanent.
 Oracle:Exile target nonland permanent.

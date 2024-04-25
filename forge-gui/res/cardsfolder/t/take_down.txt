@@ -1,7 +1,7 @@
 Name:Take Down
 ManaCost:G
 Types:Sorcery
-A:SP$ Charm | Cost$ G | Choices$ DBDealDamage,DBDamageAll | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDealDamage,DBDamageAll | CharmNum$ 1
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature with flying.
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature with flying.
 Oracle:Choose one —\n• Take Down deals 4 damage to target creature with flying.\n• Take Down deals 1 damage to each creature with flying.

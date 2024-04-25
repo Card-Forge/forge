@@ -20,6 +20,7 @@ import forge.util.collect.FCollection;
  */
 public class CardDamageHistory {
 
+    private int attacksThisGame = 0;
     // amount only needed for Kytheon
     private int creatureAttackedThisCombat = 0;
     private boolean creatureBlockedThisCombat = false;
@@ -57,6 +58,7 @@ public class CardDamageHistory {
         this.creatureAttackedThisCombat = 1 + numOtherAttackers;
 
         if (defender != null) {
+            this.attacksThisGame++;
             attackedThisTurn.add(defender);
             if (defender instanceof Card) {
                 final Card def = (Card) defender;
@@ -91,6 +93,10 @@ public class CardDamageHistory {
     }
     public final boolean hasAttackedBattleThisTurn() {
         return this.attackedBattleThisTurn;
+    }
+
+    public final int getAttacksThisGame() {
+        return this.attacksThisGame;
     }
     /**
      * <p>

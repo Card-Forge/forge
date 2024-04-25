@@ -1,5 +1,5 @@
 Name:Death by Dragons
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Token | Cost$ 4 R R | ValidTgts$ Player | TgtPrompt$ Select target player to NOT create a token | AITgts$ Opponent | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ NonTargeted | StackDescription$ SpellDescription | SpellDescription$ Each player other than target player creates a 5/5 red Dragon creature token with flying.
+A:SP$ Token | ValidTgts$ Player | TgtPrompt$ Select target player to NOT create a token | AITgts$ Opponent | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | TokenOwner$ NonTargeted | StackDescription$ SpellDescription | SpellDescription$ Each player other than target player creates a 5/5 red Dragon creature token with flying.
 Oracle:Each player other than target player creates a 5/5 red Dragon creature token with flying.

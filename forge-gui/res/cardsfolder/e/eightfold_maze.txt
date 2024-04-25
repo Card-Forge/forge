@@ -1,6 +1,6 @@
 Name:Eightfold Maze
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Destroy target attacking creature.
+A:SP$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Destroy target attacking creature.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nDestroy target attacking creature.

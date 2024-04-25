@@ -1,7 +1,7 @@
 Name:Pyrophobia
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ CantBlockEffect | SpellDescription$ CARDNAME deals 3 damage to target creature. Cowards can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ CantBlockEffect | SpellDescription$ CARDNAME deals 3 damage to target creature. Cowards can't block this turn.
 SVar:CantBlockEffect:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Cowards can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.Coward | AddHiddenKeyword$ CARDNAME can't block. | Description$ Cowards can't block this turn.
 SVar:PlayMain1:TRUE

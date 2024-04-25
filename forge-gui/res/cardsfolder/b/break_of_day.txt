@@ -1,7 +1,7 @@
 Name:Break of Day
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ FatefulHourPump | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ FatefulHourPump | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:FatefulHourPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5 | SpellDescription$ Fateful hour — If you have 5 or less life, those creatures gain indestructible until end of turn.
 SVar:FatefulHour:Count$YourLifeTotal
 Oracle:Creatures you control get +1/+1 until end of turn.\nFateful hour — If you have 5 or less life, those creatures gain indestructible until end of turn. (Damage and effects that say "destroy" don't destroy them.)

@@ -1,7 +1,7 @@
 Name:Spoils of Evil
 ManaCost:2 B
 Types:Instant
-A:SP$ GainLife | Cost$ 2 B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | LifeAmount$ X | SubAbility$ DBMana | SpellDescription$ For each artifact or creature card in target opponent's graveyard, add {1} and you gain 1 life.
+A:SP$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | LifeAmount$ X | SubAbility$ DBMana | SpellDescription$ For each artifact or creature card in target opponent's graveyard, add {1} and you gain 1 life.
 SVar:DBMana:DB$ Mana | Produced$ C | Amount$ X
 SVar:X:Count$ValidGraveyard Creature.OppOwn,Artifact.OppOwn
 AI:RemoveDeck:All

@@ -10,6 +10,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardView;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostTapType;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
@@ -130,14 +131,21 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 ? String.format(message, selected.size())
                         : String.format(message, max - selected.size()));
 
-        if (sa != null && sa.hasParam("Crew") && sa.getPayCosts().hasSpecificCostType(CostTapType.class)) {
-            msg.append("\nCrewing: ").
-            append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true)).
-            append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.Other+withTotalPowerGE", ""));
-        } else if (sa != null && sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
-            msg.append("\n").append(Localizer.getInstance().getMessage("lblCMC")).append(": ");
-            msg.append(CardLists.getTotalCMC((FCollection<Card>)getSelected())).append(" / ").append(tally);
+        if (sa != null) {
+            if (sa.getPayCosts().hasSpecificCostType(CostTapType.class) &&
+                (sa.isCrew() || sa.isKeyword(Keyword.SADDLE))) {
+                msg.append((sa.isCrew())  ? "\nCrewing: " : "\nSaddling: ");
+                msg.append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true));
+                msg.append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().
+                    getCostPartByType(CostTapType.class).getType(), 
+                    "Creature.Other+withTotalPowerGE", ""));
+    
+            }
+            else if (sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
+                msg.append("\n").append(Localizer.getInstance().getMessage("lblCMC")).append(": ");
+                msg.append(CardLists.getTotalCMC((FCollection<Card>)getSelected())).append(" / ").append(tally);
         }
+    }
 
         return msg.toString();
     }

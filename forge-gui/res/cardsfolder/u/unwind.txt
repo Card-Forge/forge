@@ -1,6 +1,6 @@
 Name:Unwind
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SubAbility$ DBUntap | SpellDescription$ Counter target noncreature spell. Untap up to three lands.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SubAbility$ DBUntap | SpellDescription$ Counter target noncreature spell. Untap up to three lands.
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 3
 Oracle:Counter target noncreature spell. Untap up to three lands.

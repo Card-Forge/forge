@@ -1,7 +1,7 @@
 Name:Verdant Touch
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Animate | Cost$ 1 G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 2 | Toughness$ 2 | Types$ Creature | Duration$ Permanent | SpellDescription$ Target land becomes a 2/2 creature that's still a land. (This effect lasts indefinitely.)
+A:SP$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 2 | Toughness$ 2 | Types$ Creature | Duration$ Permanent | SpellDescription$ Target land becomes a 2/2 creature that's still a land. (This effect lasts indefinitely.)
 K:Buyback:3
 AI:RemoveDeck:Random
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget land becomes a 2/2 creature that's still a land. (This effect lasts indefinitely.)

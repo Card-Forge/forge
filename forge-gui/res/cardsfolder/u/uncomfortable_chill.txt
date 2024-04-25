@@ -1,6 +1,6 @@
 Name:Uncomfortable Chill
 ManaCost:2 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | NumDef$ -0 | SubAbility$ DBDraw | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | NumDef$ -0 | SubAbility$ DBDraw | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Creatures your opponents control get -2/-0 until end of turn.\nDraw a card.

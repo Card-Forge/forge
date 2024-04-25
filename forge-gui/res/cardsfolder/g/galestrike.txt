@@ -1,6 +1,6 @@
 Name:Galestrike
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target tapped creature to its owner's hand. Draw a card.
+A:SP$ ChangeZone | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target tapped creature to its owner's hand. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Return target tapped creature to its owner's hand.\nDraw a card.

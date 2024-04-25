@@ -1,6 +1,6 @@
 Name:Sylvan Bounty
 ManaCost:5 G
 Types:Instant
-A:SP$ GainLife | Cost$ 5 G | LifeAmount$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 8 life.
+A:SP$ GainLife | LifeAmount$ 8 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player gains 8 life.
 K:TypeCycling:Basic:1 G
 Oracle:Target player gains 8 life.\nBasic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

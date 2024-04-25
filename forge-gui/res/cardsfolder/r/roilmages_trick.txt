@@ -1,7 +1,7 @@
 Name:Roilmage's Trick
 ManaCost:3 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 U | ValidCards$ Creature.OppCtrl | NumAtt$ -X | NumDef$ 0 | SubAbility$ DBDraw | SpellDescription$ Converge — Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast this spell. Draw a card.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -X | NumDef$ 0 | SubAbility$ DBDraw | SpellDescription$ Converge — Creatures your opponents control get -X/-0 until end of turn, where X is the number of colors of mana spent to cast this spell. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$Converge
 AI:RemoveDeck:All

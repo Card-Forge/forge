@@ -22,4 +22,5 @@ public class SettingData {
     public boolean disableWinLose;
     public boolean showShopOverlay;
     public boolean useAllCardVariants;
+    public boolean generateLDADecks;
 }

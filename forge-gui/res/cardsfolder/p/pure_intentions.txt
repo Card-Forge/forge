@@ -1,7 +1,7 @@
 Name:Pure Intentions
 ManaCost:W
 Types:Instant Arcane
-A:SP$ Effect | Cost$ W | Triggers$ PureDiscarded | SpellDescription$ Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
+A:SP$ Effect | Triggers$ PureDiscarded | SpellDescription$ Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
 SVar:PureDiscarded:Mode$ DiscardedAll | ValidCard$ Card.YouCtrl | ValidCause$ SpellAbility.OppCtrl | TriggerZones$ Command | Execute$ TrigPureChange | TriggerDescription$ Whenever a spell or ability an opponent controls causes you to discard cards this turn, return those cards from your graveyard to your hand.
 SVar:TrigPureChange:DB$ ChangeZone | Defined$ TriggeredCards | Origin$ Graveyard | Destination$ Hand
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigDelay | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, return CARDNAME from your graveyard to your hand at the beginning of the next end step.

@@ -1,6 +1,6 @@
 Name:Sarkhan's Dragonfire
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to any target.
 SVar:DBDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Red | SpellDescription$ Look at the top five cards of your library. You may reveal a red card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 Oracle:Sarkhan's Dragonfire deals 3 damage to any target.\nLook at the top five cards of your library. You may reveal a red card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

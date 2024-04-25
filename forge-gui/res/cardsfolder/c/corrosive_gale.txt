@@ -1,6 +1,6 @@
 Name:Corrosive Gale
 ManaCost:X GP
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X GP | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying.
 SVar:X:Count$xPaid
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nCorrosive Gale deals X damage to each creature with flying.

@@ -1,7 +1,7 @@
 Name:Puppet's Verdict
 ManaCost:1 R R
 Types:Instant
-A:SP$ FlipACoin | Cost$ 1 R R | WinSubAbility$ DBDestroySmall | LoseSubAbility$ DBDestroyBig | SpellDescription$ Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater.
+A:SP$ FlipACoin | WinSubAbility$ DBDestroySmall | LoseSubAbility$ DBDestroyBig | SpellDescription$ Flip a coin. If you win the flip, destroy all creatures with power 2 or less. If you lose the flip, destroy all creatures with power 3 or greater.
 SVar:DBDestroySmall:DB$ DestroyAll | ValidCards$ Creature.powerLE2
 SVar:DBDestroyBig:DB$ DestroyAll | ValidCards$ Creature.powerGE3
 AI:RemoveDeck:All

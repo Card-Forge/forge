@@ -1,7 +1,7 @@
 Name:Ignite the Beacon
 ManaCost:4 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 W | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | ChangeNum$ 2 | SpellDescription$ Search your library for up to two planeswalker cards, reveal them, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | ChangeNum$ 2 | SpellDescription$ Search your library for up to two planeswalker cards, reveal them, put them into your hand, then shuffle.
 DeckNeeds:Type$Planeswalker
 AI:RemoveDeck:Random
 Oracle:Search your library for up to two planeswalker cards, reveal them, put them into your hand, then shuffle.

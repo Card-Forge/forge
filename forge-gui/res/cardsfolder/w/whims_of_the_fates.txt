@@ -1,7 +1,7 @@
 Name:Whims of the Fates
 ManaCost:5 R
 Types:Sorcery
-A:SP$ MultiplePiles | Cost$ 5 R | Defined$ Player | Zone$ Battlefield | ValidCards$ Permanent | RandomChosen$ True | Piles$ 3 | ChosenPile$ DBSacrifice | SpellDescription$ Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents. (Piles can be empty.)
+A:SP$ MultiplePiles | Defined$ Player | Zone$ Battlefield | ValidCards$ Permanent | RandomChosen$ True | Piles$ 3 | ChosenPile$ DBSacrifice | SpellDescription$ Starting with you, each player separates all permanents they control into three piles. Then each player chooses one of their piles at random and sacrifices those permanents. (Piles can be empty.)
 SVar:DBSacrifice:DB$ SacrificeAll | ValidCards$ Card.IsRemembered
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

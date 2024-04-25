@@ -1,0 +1,10 @@
+Name:Final Showdown
+ManaCost:W
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBDebuffAll,DBChooseCard,DBDestroyAll | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBDebuffAll:DB$ AnimateAll | SpreeCost$ 1 | ValidCards$ Creature | RemoveAllAbilities$ True | SpellDescription$ All creatures lose all abilities until end of turn.
+SVar:DBChooseCard:DB$ ChooseCard | SpreeCost$ 1 | Choices$ Creature.YouCtrl | Mandatory$ True | ChoiceTitle$ Choose a creature you control | SubAbility$ DBPump | SpellDescription$ Choose a creature you control. It gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Indestructible
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SpreeCost$ 3 W W | SpellDescription$ Destroy all creatures.
+Oracle:Spree (Choose one or more additional costs.)\n+ {1} — All creatures lose all abilities until end of turn.\n+ {1} — Choose a creature you control. It gains indestructible until end of turn.\n+ {3}{W}{W} — Destroy all creatures.

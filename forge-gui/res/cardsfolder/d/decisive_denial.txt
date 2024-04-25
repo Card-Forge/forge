@@ -1,7 +1,7 @@
 Name:Decisive Denial
 ManaCost:G U
 Types:Instant
-A:SP$ Charm | Cost$ G U | Choices$ DBFightInit,DBCounter
+A:SP$ Charm | Choices$ DBFightInit,DBCounter
 SVar:DBFightInit:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 3 | SpellDescription$ Counter target noncreature spell unless its controller pays {3}.

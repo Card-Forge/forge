@@ -1,0 +1,9 @@
+Name:It That Heralds the End
+ManaCost:1 C
+Types:Creature Eldrazi Drone
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Card.Colorless+cmcGE7 | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Colorless spells you cast with mana value 7 or greater cost {1} less to cast.
+S:Mode$ Continuous | Affected$ Creature.Colorless+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other colorless creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Color$Colorless
+Oracle:Colorless spells you cast with mana value 7 or greater cost {1} less to cast.\nOther colorless creatures you control get +1/+1.

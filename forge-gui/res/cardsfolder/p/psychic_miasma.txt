@@ -1,7 +1,7 @@
 Name:Psychic Miasma
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Target player discards a card. If a land card is discarded this way, return CARDNAME to its owner's hand.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Target player discards a card. If a land card is discarded this way, return CARDNAME to its owner's hand.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target player discards a card. If a land card is discarded this way, return Psychic Miasma to its owner's hand.

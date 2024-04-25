@@ -1,7 +1,7 @@
 Name:Waxing Moon
 ManaCost:1 G
 Types:Instant
-A:SP$ SetState | Cost$ 1 G | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card.Werewolf+YouCtrl | TgtPrompt$ Select target Werewolf you control | Mode$ Transform | SubAbility$ DBPumpAll | SpellDescription$ Transform up to one target Werewolf you control. Creatures you control gain trample until end of turn.
+A:SP$ SetState | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card.Werewolf+YouCtrl | TgtPrompt$ Select target Werewolf you control | Mode$ Transform | SubAbility$ DBPumpAll | SpellDescription$ Transform up to one target Werewolf you control. Creatures you control gain trample until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | KW$ Trample | ValidCards$ Creature.YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Type$Werewolf

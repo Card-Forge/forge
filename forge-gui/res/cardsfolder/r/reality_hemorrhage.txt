@@ -2,5 +2,5 @@ Name:Reality Hemorrhage
 ManaCost:1 R
 Types:Instant
 K:Devoid
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Devoid (This card has no color.)\nReality Hemorrhage deals 2 damage to any target.

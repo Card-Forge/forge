@@ -1,7 +1,7 @@
 Name:Irresistible Prey
 ManaCost:G
 Types:Sorcery
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SubAbility$ DBDraw | SpellDescription$ Target creature must be blocked this turn if able.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SubAbility$ DBDraw | SpellDescription$ Target creature must be blocked this turn if able.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:Target creature must be blocked this turn if able.\nDraw a card.

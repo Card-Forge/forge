@@ -1,6 +1,6 @@
 Name:Eye Spy
 ManaCost:U
 Types:Sorcery
-A:SP$ Dig | Cost$ U | ValidTgts$ Player | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of target player's library. You may put that card into their graveyard.
+A:SP$ Dig | ValidTgts$ Player | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of target player's library. You may put that card into their graveyard.
 AI:RemoveDeck:All
 Oracle:Look at the top card of target player's library. You may put that card into their graveyard.

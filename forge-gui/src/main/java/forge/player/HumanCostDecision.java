@@ -626,7 +626,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         // for costs declared mandatory, this is only reachable with a valid amount
         if (player.canPayLife(c, isEffect(), ability) && confirmAction(cost, message)) {
             //force mandatory if paylife is paid.. todo add check if all can be paid
-            mandatory = true;
+            if (!player.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                // If we can restore the game state, don't force the SA to be mandatory
+                mandatory = true;
+            }
             return PaymentDecision.number(c);
         }
         return null;
@@ -1147,11 +1150,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,
                 source, ability);
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
-
-        if (ability.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
+        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         Integer c = null;
         if (!amount.equals("Any")) {
@@ -1198,7 +1197,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.hasParam("Crew")) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.isCrew()) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

@@ -2,6 +2,6 @@ Name:Cinderclasm
 ManaCost:1 R
 Types:Instant
 K:Kicker:R
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ X | ValidCards$ Creature | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to each creature. If it was kicked, it deals 2 damage to each creature instead.
+A:SP$ DamageAll | NumDmg$ X | ValidCards$ Creature | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to each creature. If it was kicked, it deals 2 damage to each creature instead.
 SVar:X:Count$Kicked.2.1
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nCinderclasm deals 1 damage to each creature. If it was kicked, it deals 2 damage to each creature instead.

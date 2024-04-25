@@ -1,5 +1,5 @@
 Name:Blessed Light
 ManaCost:4 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or enchantment.
+A:SP$ ChangeZone | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature or enchantment.
 Oracle:Exile target creature or enchantment.

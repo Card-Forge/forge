@@ -1,7 +1,7 @@
 Name:Mythos of Brokkos
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G G | Origin$ Library | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card | ConditionManaSpent$ U B | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ If {U}{B} was spent to cast this spell, search your library for a card, put that card into your graveyard, then shuffle. Return up to two permanent cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card | ConditionManaSpent$ U B | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ If {U}{B} was spent to cast this spell, search your library for a card, put that card into your graveyard, then shuffle. Return up to two permanent cards from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Permanent.YouOwn | Hidden$ True | StackDescription$ None
 DeckHas:Ability$Graveyard
 Oracle:If {U}{B} was spent to cast this spell, search your library for a card, put that card into your graveyard, then shuffle.\nReturn up to two permanent cards from your graveyard to your hand.

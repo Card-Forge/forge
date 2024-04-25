@@ -1,5 +1,5 @@
 Name:Fire Tempest
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 5 R R | NumDmg$ 6 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
+A:SP$ DamageAll | NumDmg$ 6 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 Oracle:Fire Tempest deals 6 damage to each creature and each player.

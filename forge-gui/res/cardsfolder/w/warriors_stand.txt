@@ -1,7 +1,7 @@
 Name:Warrior's Stand
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Creatures you control get +2/+2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Creatures you control get +2/+2 until end of turn.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nCreatures you control get +2/+2 until end of turn.

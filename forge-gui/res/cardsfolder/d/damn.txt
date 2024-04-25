@@ -1,6 +1,6 @@
 Name:Damn
 ManaCost:B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. A creature destroyed this way can't be regenerated.
-A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy each creature. A creature destroyed this way can't be regenerated.
+K:Overload:2 W W
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. A creature destroyed this way can't be regenerated.
 Oracle:Destroy target creature. A creature destroyed this way can't be regenerated.\nOverload {2}{W}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

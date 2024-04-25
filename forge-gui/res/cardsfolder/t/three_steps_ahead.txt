@@ -1,0 +1,11 @@
+Name:Three Steps Ahead
+ManaCost:U
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBCounter,DBCopy,DBLoot | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBCounter:DB$ Counter | SpreeCost$ 1 U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:DBCopy:DB$ CopyPermanent | SpreeCost$ 3 | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target creature or artifact you control | NumCopies$ 1 | SpellDescription$ Create a token that's a copy of target artifact or creature you control.
+SVar:DBLoot:DB$ Draw | SpreeCost$ 2 | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHas:Ability$Token|Discard
+Oracle:Spree (Choose one or more additional costs.)\n+ {1}{U} — Counter target spell.\n+ {3} — Create a token that's a copy of target artifact or creature you control.\n+ {2} — Draw two cards, then discard a card.

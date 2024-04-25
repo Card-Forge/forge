@@ -45,7 +45,7 @@ public class MessageUtil {
                         ? Localizer.getInstance().getMessage("lblRandomColorChosen", value)
                         : Localizer.getInstance().getMessage("lblPlayerPickedChosen", choser, value);
             case ChooseNumber:
-                if (sa.hasParam("SecretlyChoose")) {
+                if (sa.hasParam("Secretly")) {
                     return value;
                 }
                 return sa.hasParam("Random")

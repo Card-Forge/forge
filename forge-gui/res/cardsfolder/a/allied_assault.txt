@@ -1,7 +1,7 @@
 Name:Allied Assault
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ X | NumDef$ X | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures each get +X/+X until end of turn, where X is the number of creatures in your party.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ X | NumDef$ X | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures each get +X/+X until end of turn, where X is the number of creatures in your party.
 SVar:X:Count$Party
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard

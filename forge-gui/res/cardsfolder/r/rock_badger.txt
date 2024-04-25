@@ -2,5 +2,5 @@ Name:Rock Badger
 ManaCost:4 R
 Types:Creature Badger Beast
 PT:3/3
-K:Mountainwalk
+K:Landwalk:Mountain
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)

@@ -3,5 +3,5 @@ ManaCost:2 G G
 Types:Instant
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE0 | Description$ Cast this spell only if an opponent cast a creature spell this turn.
 SVar:X:Count$ThisTurnCast_Creature.OppCtrl
-A:SP$ ChangeZone | Cost$ 2 G G | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | SpellDescription$ You may put a green creature card from your hand onto the battlefield.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | SpellDescription$ You may put a green creature card from your hand onto the battlefield.
 Oracle:Cast this spell only if an opponent cast a creature spell this turn.\nYou may put a green creature card from your hand onto the battlefield.

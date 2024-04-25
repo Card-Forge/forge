@@ -1,6 +1,6 @@
 Name:Narset's Reversal
 ManaCost:U U
 Types:Instant
-A:SP$ CopySpellAbility | Cost$ U U | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SubAbility$ DBReturn | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | SubAbility$ DBReturn | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Targeted | Origin$ Stack | Destination$ Hand
 Oracle:Copy target instant or sorcery spell, then return it to its owner's hand. You may choose new targets for the copy.

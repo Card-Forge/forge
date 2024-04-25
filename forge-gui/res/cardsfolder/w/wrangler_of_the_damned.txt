@@ -1,0 +1,10 @@
+Name:Wrangler of the Damned
+ManaCost:3 W U
+Types:Creature Human Soldier
+PT:1/4
+K:Flash
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you haven't cast a spell from your hand this turn, create a 2/2 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_spirit_flying | TokenAmount$ 1 | TokenOwner$ You
+SVar:X:Count$ThisTurnCast_Card.wasCastFromYourHandByYou
+DeckHas:Ability$Token & Type$Spirit
+Oracle:Flash\nAt the beginning of your end step, if you haven't cast a spell from your hand this turn, create a 2/2 white Spirit creature token with flying.

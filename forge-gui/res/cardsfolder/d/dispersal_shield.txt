@@ -1,7 +1,7 @@
 Name:Dispersal Shield
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | SpellDescription$ Counter target spell if its mana value is less than or equal to the highest mana value among permanents you control.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | SpellDescription$ Counter target spell if its mana value is less than or equal to the highest mana value among permanents you control.
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$Valid Permanent.YouCtrl$GreatestCMC
 AI:RemoveDeck:All

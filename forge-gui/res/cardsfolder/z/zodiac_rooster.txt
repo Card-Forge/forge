@@ -2,5 +2,5 @@ Name:Zodiac Rooster
 ManaCost:1 G
 Types:Creature Bird
 PT:2/1
-K:Plainswalk
+K:Landwalk:Plains
 Oracle:Plainswalk (This creature can't be blocked as long as defending player controls a Plains.)

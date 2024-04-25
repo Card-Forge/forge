@@ -2,7 +2,7 @@ Name:Captain's Maneuver
 ManaCost:X R W
 Types:Instant
 # turn targeted creature or player into chosen
-A:SP$ ChoosePlayer | Cost$ X R W | ValidTgts$ Creature,Player,Planeswalker | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ DBChooseCreature | StackDescription$ SpellDescription | SpellDescription$ The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.
+A:SP$ ChoosePlayer | ValidTgts$ Creature,Player,Planeswalker | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ DBChooseCreature | StackDescription$ SpellDescription | SpellDescription$ The next X damage that would be dealt to target creature, planeswalker, or player this turn is dealt to another target creature, planeswalker, or player instead.
 SVar:DBChooseCreature:DB$ ChooseCard | DefinedCards$ ParentTargeted | Mandatory$ True | Defined$ You | SubAbility$ DBSetVarBefore
 SVar:DBSetVarBefore:DB$ StoreSVar | SVar$ Y | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TargetUnique$ True | TgtPrompt$ Select another target to redirect the damage to | ReplacementEffects$ ManeuverDamage | Triggers$ OutOfSight | RememberObjects$ ThisTargetedCard,ThisTargetedPlayer | SubAbility$ DBCleanup

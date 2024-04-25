@@ -1,0 +1,7 @@
+Name:Pest Control
+ManaCost:W B
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand+cmcLE1 | SpellDescription$ Destroy all nonland permanents with mana value 1 or less.
+K:Cycling:2
+DeckHas:Ability$Discard
+Oracle:Destroy all nonland permanents with mana value 1 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,7 @@
+Name:Form a Posse
+ManaCost:X R W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You | SpellDescription$ Create X 1/1 red Mercenary creature tokens with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Mercenary
+Oracle:Create X 1/1 red Mercenary creature tokens with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

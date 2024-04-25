@@ -1,0 +1,12 @@
+Name:Thunderclap Drake
+ManaCost:1 U
+Types:Creature Drake
+PT:2/1
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+A:AB$ DelayedTrigger | Cost$ 2 U Sac<1/CARDNAME> | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | MayChooseTarget$ True
+SVar:X:Count$TotalCommanderCastFromCommandZone
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nInstant and sorcery spells you cast cost {1} less to cast.\n{2}{U}, Sacrifice Thunderclap Drake: When you cast your next instant or sorcery spell this turn, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.

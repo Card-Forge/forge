@@ -1,7 +1,7 @@
 Name:Calming Verse
 ManaCost:3 G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment.YouDontCtrl | SubAbility$ DBDestroyAll | SpellDescription$ Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control.
+A:SP$ DestroyAll | ValidCards$ Enchantment.YouDontCtrl | SubAbility$ DBDestroyAll | SpellDescription$ Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Enchantment.YouCtrl | ConditionPresent$ Land.untapped+YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control an untapped land,
 AI:RemoveDeck:All
 Oracle:Destroy all enchantments you don't control. Then if you control an untapped land, destroy all enchantments you control.

@@ -1,5 +1,5 @@
 Name:Flame Rift
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 4 | ValidPlayers$ Player | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 4 damage to each player.
+A:SP$ DamageAll | NumDmg$ 4 | ValidPlayers$ Player | ValidDescription$ each player. | SpellDescription$ CARDNAME deals 4 damage to each player.
 Oracle:Flame Rift deals 4 damage to each player.

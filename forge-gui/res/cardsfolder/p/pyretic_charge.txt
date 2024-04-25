@@ -1,0 +1,11 @@
+Name:Pyretic Charge
+ManaCost:4 R
+Types:Sorcery
+K:Plot:3 R
+A:SP$ Discard | Mode$ Hand | RememberDiscarded$ True | Defined$ You | SubAbility$ BetThat | SpellDescription$ Discard your hand, then draw four cards. For each card discarded this way, creatures you control get +1/+0 until end of turn.
+SVar:BetThat:DB$ Draw | Defined$ You | NumCards$ 4 | SubAbility$ DBPumpAll
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Discard
+Oracle:Discard your hand, then draw four cards. For each card discarded this way, creatures you control get +1/+0 until end of turn.\nPlot {3}{R} (You may pay {3}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

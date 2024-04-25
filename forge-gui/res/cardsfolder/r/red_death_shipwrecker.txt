@@ -1,0 +1,8 @@
+Name:Red Death, Shipwrecker
+ManaCost:U R
+Types:Legendary Creature Crab Mutant
+PT:1/3
+A:AB$ Goad | PrecostDesc$ Alluring Eyes — | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBDraw | SpellDescription$ Goad target creature an opponent controls. That player draws a card. You add {R}. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | SubAbility$ DBMana
+SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 1
+Oracle:Alluring Eyes — {T}: Goad target creature an opponent controls. That player draws a card. You add {R}. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

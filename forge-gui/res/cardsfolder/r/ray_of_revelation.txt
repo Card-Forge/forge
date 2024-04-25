@@ -2,5 +2,5 @@ Name:Ray of Revelation
 ManaCost:1 W
 Types:Instant
 K:Flashback:G
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment. | SpellDescription$ Destroy target enchantment.
 Oracle:Destroy target enchantment.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

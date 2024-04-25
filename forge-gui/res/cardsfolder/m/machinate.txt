@@ -1,6 +1,6 @@
 Name:Machinate
 ManaCost:1 U U
 Types:Instant
-A:SP$ Dig | Cost$ 1 U U | DigNum$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ X | SpellDescription$ Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:Look at the top X cards of your library, where X is the number of artifacts you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.

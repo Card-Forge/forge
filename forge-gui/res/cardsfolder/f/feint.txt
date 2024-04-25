@@ -1,7 +1,7 @@
 Name:Feint
 ManaCost:R
 Types:Instant
-A:SP$ TapAll | Cost$ R | ValidCards$ Creature.blockingRemembered | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberTargets$ True | SubAbility$ FeintPump | SpellDescription$ Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.
+A:SP$ TapAll | ValidCards$ Creature.blockingRemembered | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberTargets$ True | SubAbility$ FeintPump | SpellDescription$ Tap all creatures blocking target attacking creature. Prevent all combat damage that would be dealt this turn by that creature and each creature blocking it.
 SVar:FeintPump:DB$ Pump | Defined$ Remembered | KW$ Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ FeintPumpAll
 SVar:FeintPumpAll:DB$ Pump | Defined$ Valid Creature.blockingRemembered | KW$ Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

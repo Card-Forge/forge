@@ -1,0 +1,11 @@
+Name:Rakdos Joins Up
+ManaCost:3 B R
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | WithCountersType$ P1P1 | WithCountersAmount$ 2 | TgtPrompt$ Select target creature card in your graveyard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Legendary+YouCtrl | Execute$ TrigDamage | TriggerDescription$ Whenever a legendary creature you control dies, CARDNAME deals damage equal to that creature's power to target opponent.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Damage
+SVar:Damage:TriggeredCard$CardPower
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Graveyard|Mill|Discard|Sacrifice & Type$Legendary
+Oracle:When Rakdos Joins Up enters the battlefield, return target creature card from your graveyard to the battlefield with two additional +1/+1 counters on it.\nWhenever a legendary creature you control dies, Rakdos Joins Up deals damage equal to that creature's power to target opponent.

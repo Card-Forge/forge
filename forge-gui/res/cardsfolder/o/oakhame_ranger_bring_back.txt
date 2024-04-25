@@ -11,6 +11,6 @@ ALTERNATE
 Name:Bring Back
 ManaCost:G/W G/W G/W G/W
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ G/W G/W G/W G/W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)

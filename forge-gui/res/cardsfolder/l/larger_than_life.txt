@@ -1,5 +1,5 @@
 Name:Larger Than Life
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ Target creature gets +4/+4 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ Target creature gets +4/+4 and gains trample until end of turn.
 Oracle:Target creature gets +4/+4 and gains trample until end of turn.

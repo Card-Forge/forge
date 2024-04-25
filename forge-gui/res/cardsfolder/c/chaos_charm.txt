@@ -1,7 +1,7 @@
 Name:Chaos Charm
 ManaCost:R
 Types:Instant
-A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBDealDamage,DBPump
+A:SP$ Charm | Choices$ DBDestroy,DBDealDamage,DBPump
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Wall | TgtPrompt$ Select target wall | SpellDescription$ Destroy target Wall.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Haste | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains haste until end of turn.

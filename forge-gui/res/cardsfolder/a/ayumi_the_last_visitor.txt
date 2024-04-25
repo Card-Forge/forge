@@ -2,5 +2,5 @@ Name:Ayumi, the Last Visitor
 ManaCost:3 G G
 Types:Legendary Creature Spirit
 PT:7/3
-K:Legendary landwalk
+K:Landwalk:Land.Legendary:Legendary land
 Oracle:Legendary landwalk (This creature can't be blocked as long as defending player controls a legendary land.)

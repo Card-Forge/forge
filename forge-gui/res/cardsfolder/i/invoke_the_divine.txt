@@ -1,7 +1,7 @@
 Name:Invoke the Divine
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ NaturalLife | SpellDescription$ Destroy target artifact or enchantment. You gain 4 life.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ NaturalLife | SpellDescription$ Destroy target artifact or enchantment. You gain 4 life.
 SVar:NaturalLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 DeckHas:Ability$LifeGain
 Oracle:Destroy target artifact or enchantment. You gain 4 life.

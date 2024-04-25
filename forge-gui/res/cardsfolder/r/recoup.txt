@@ -2,5 +2,5 @@ Name:Recoup
 ManaCost:1 R
 Types:Sorcery
 K:Flashback:3 R
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Sorcery.YouCtrl.Other | TgtZone$ Graveyard | TgtPrompt$ Select target sorcery card | KW$ Flashback | PumpZone$ Graveyard | SpellDescription$ Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (Mana cost includes color.)
+A:SP$ Pump | ValidTgts$ Sorcery.YouCtrl.Other | TgtZone$ Graveyard | TgtPrompt$ Select target sorcery card | KW$ Flashback | PumpZone$ Graveyard | SpellDescription$ Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (Mana cost includes color.)
 Oracle:Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost. (Mana cost includes color.)\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

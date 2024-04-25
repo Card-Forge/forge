@@ -59,7 +59,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
         // and gaining card advantage
-        if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+        if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             return false;
         }
 
@@ -1574,7 +1574,7 @@ public class AttachAi extends SpellAbilityAi {
         final boolean evasive = keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
-                || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");
+                || keyword.startsWith("Landwalk") || keyword.equals("All creatures able to block CARDNAME do so.");
         // give evasive keywords to creatures that can attack and deal damage
 
         boolean canBeBlocked = false;

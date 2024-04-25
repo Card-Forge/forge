@@ -1,0 +1,8 @@
+Name:Perforator Crocodile
+ManaCost:3 B B B
+Types:Creature Crocodile
+PT:6/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, for each creature your opponents control, conjure a card named Stab Wound onto the battlefield attached to that creature.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Stab Wound | AttachedTo$ Creature.OppCtrl
+K:Cycling:1 B
+Oracle:When Perforator Crocodile enters the battlefield, for each creature your opponents control, conjure a card named Stab Wound onto the battlefield attached to that creature.\nCycling {1}{B}

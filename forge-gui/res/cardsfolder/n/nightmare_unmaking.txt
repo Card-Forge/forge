@@ -1,7 +1,7 @@
 Name:Nightmare Unmaking
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 B B | Choices$ Exile1,Exile2
+A:SP$ Charm | Choices$ Exile1,Exile2
 SVar:Exile1:DB$ ChangeZoneAll | ChangeType$ Creature.powerGTX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each creature with power greater than the number of cards in your hand.
 SVar:Exile2:DB$ ChangeZoneAll | ChangeType$ Creature.powerLTX | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile each creature with power less than the number of cards in your hand.
 SVar:X:Count$InYourHand

@@ -1,7 +1,7 @@
 Name:Ravaging Blaze
 ManaCost:X R R
 Types:Instant
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DmgController | SpellDescription$ CARDNAME deals X damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DmgController | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:DmgController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | ConditionPresent$ Instant.YouOwn,Sorcery.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE2 | SpellDescription$ Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, CARDNAME also deals X damage to that creature's controller.
 SVar:X:Count$xPaid
 Oracle:Ravaging Blaze deals X damage to target creature.\nSpell mastery — If there are two or more instant and/or sorcery cards in your graveyard, Ravaging Blaze also deals X damage to that creature's controller.

@@ -2,7 +2,7 @@ Name:Falling Timber
 ManaCost:2 G
 Types:Instant
 K:Kicker:Sac<1/Land>
-A:SP$ Effect | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ X | TargetMax$ X | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage target creature would deal this turn. If this spell was kicked, prevent all combat damage another target creature would deal this turn.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ X | TargetMax$ X | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage target creature would deal this turn. If this spell was kicked, prevent all combat damage another target creature would deal this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage target creatures would deal this turn.
 SVar:X:Count$Kicked.2.1
 Oracle:Kicker—Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell.)\nPrevent all combat damage target creature would deal this turn. If this spell was kicked, prevent all combat damage another target creature would deal this turn.

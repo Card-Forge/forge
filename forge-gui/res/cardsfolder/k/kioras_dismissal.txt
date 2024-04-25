@@ -2,7 +2,7 @@ Name:Kiora's Dismissal
 ManaCost:U
 Types:Instant
 K:Strive:U
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target enchantments to their owners' hands.
+A:SP$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target enchantments to their owners' hands.
 SVar:X:Count$Valid Enchantment
 AI:RemoveDeck:Random
 Oracle:Strive — This spell costs {U} more to cast for each target beyond the first.\nReturn any number of target enchantments to their owners' hands.

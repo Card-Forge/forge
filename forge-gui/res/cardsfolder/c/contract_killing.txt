@@ -1,6 +1,6 @@
 Name:Contract Killing
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBTreasure | SpellDescription$ Destroy target creature. Create two Treasure tokens.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBTreasure | SpellDescription$ Destroy target creature. Create two Treasure tokens.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 Oracle:Destroy target creature. Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

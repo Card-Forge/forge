@@ -2,7 +2,7 @@ Name:Resounding Roar
 ManaCost:1 G
 Types:Instant
 K:Cycling:5 R G W
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you cycle CARDNAME, target creature gets +6/+6 until end of turn
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6
 AI:RemoveDeck:All

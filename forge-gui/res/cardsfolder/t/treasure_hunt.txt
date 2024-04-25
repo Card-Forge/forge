@@ -1,5 +1,5 @@
 Name:Treasure Hunt
 ManaCost:1 U
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 1 U | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Hand | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.
+A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Hand | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.
 Oracle:Reveal cards from the top of your library until you reveal a nonland card, then put all cards revealed this way into your hand.

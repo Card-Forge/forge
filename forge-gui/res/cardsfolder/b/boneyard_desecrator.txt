@@ -1,0 +1,10 @@
+Name:Boneyard Desecrator
+ManaCost:3 B
+Types:Creature Zombie Mercenary
+PT:3/4
+K:Menace
+A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBToken | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionDefined$ Sacrificed | ConditionPresent$ Card.Outlaw | SpellDescription$ If an outlaw was sacrificed this way, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+DeckHas:Ability$Sacrifice|Counters|Token & Type$Treasure
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Menace\n{1}{B}, Sacrifice another creature: Put a +1/+1 counter on Boneyard Desecrator. If an outlaw was sacrificed this way, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)

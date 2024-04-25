@@ -1,6 +1,6 @@
 Name:Assert Authority
 ManaCost:5 U U
 Types:Instant
-A:SP$ Counter | Cost$ 5 U U | TargetType$ Spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 K:Affinity:Artifact
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nCounter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

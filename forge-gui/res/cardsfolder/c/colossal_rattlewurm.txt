@@ -1,0 +1,10 @@
+Name:Colossal Rattlewurm
+ManaCost:2 G G
+Types:Creature Wurm
+PT:6/5
+K:Trample
+S:Mode$ Continuous | CharacteristicDefining$ True | AddKeyword$ Flash | IsPresent$ Desert.YouCtrl | Description$ CARDNAME has flash as long as you control a Desert.
+A:AB$ ChangeZone | Cost$ 1 G ExileFromGrave<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | ChangeType$ Desert | ChangeNum$ 1 | SpellDescription$ Search your library for a Desert card, put it onto the battlefield tapped, then shuffle.
+DeckHas:Ability$Graveyard
+DeckNeeds:Type$Desert
+Oracle:Colossal Rattlewurm has flash as long as you control a Desert.\nTrample\n{1}{G}, Exile Colossal Rattlewurm from your graveyard: Search your library for a Desert card, put it onto the battlefield tapped, then shuffle.

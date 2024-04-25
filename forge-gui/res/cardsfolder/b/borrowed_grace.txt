@@ -2,7 +2,7 @@ Name:Borrowed Grace
 ManaCost:2 W
 Types:Instant
 K:Escalate:1 W
-A:SP$ Charm | Cost$ 2 W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpPower,DBPumpToughness
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpPower,DBPumpToughness
 SVar:DBPumpPower:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 SVar:DBPumpToughness:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SpellDescription$ Creatures you control get +0/+2 until end of turn.
 Oracle:Escalate {1}{W} (Pay this cost for each mode chosen beyond the first.)\nChoose one or both —\n• Creatures you control get +2/+0 until end of turn.\n• Creatures you control get +0/+2 until end of turn.

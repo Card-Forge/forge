@@ -1,7 +1,7 @@
 Name:Profane Transfusion
 ManaCost:6 B B B
 Types:Sorcery
-A:SP$ ExchangeLife | Cost$ 6 B B B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | RememberDifference$ True | SubAbility$ DBToken | SpellDescription$ Two target players exchange life totals. You create an X/X colorless Horror artifact creature token, where X is the difference between those players' life totals.
+A:SP$ ExchangeLife | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | RememberDifference$ True | SubAbility$ DBToken | SpellDescription$ Two target players exchange life totals. You create an X/X colorless Horror artifact creature token, where X is the difference between those players' life totals.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup | StackDescription$ {p:You} creates an X/X colorless Horror artifact creature token, where X is the difference between those players' life totals.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber/Abs

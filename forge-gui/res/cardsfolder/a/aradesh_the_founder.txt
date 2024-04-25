@@ -1,0 +1,10 @@
+Name:Aradesh, the Founder
+ManaCost:2 W
+Types:Legendary Creature Human Soldier
+PT:1/4
+K:Enlist
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+enlistedThisCombat | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks, if it enlisted a creature this combat, the creature that attacked gains double strike until end of turn. If that creature's power is 4 or greater, draw a card.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ TriggeredAttacker$CardPower | ConditionSVarCompare$ GE4
+DeckHints:Keyword$Enlist
+Oracle:Enlist (As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature's until end of turn.)\nWhenever a creature you control attacks, if it enlisted a creature this combat, the creature that attacked gains double strike until end of turn. If that creature's power is 4 or greater, draw a card.

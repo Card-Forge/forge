@@ -1,6 +1,6 @@
 Name:Feast of Succession
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 4 B B | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | SubAbility$ DBMonarch | SpellDescription$ All creatures get -4/-4 until end of turn. You become the monarch.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | SubAbility$ DBMonarch | SpellDescription$ All creatures get -4/-4 until end of turn. You become the monarch.
 SVar:DBMonarch:DB$ BecomeMonarch | Defined$ You
 Oracle:All creatures get -4/-4 until end of turn. You become the monarch.

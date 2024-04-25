@@ -1,7 +1,7 @@
 Name:Exotic Disease
 ManaCost:4 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Domain — Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ X | SubAbility$ DBGainLife | SpellDescription$ Domain — Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Domain
 AI:RemoveDeck:Random

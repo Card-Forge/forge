@@ -1,6 +1,6 @@
 Name:Mind Shatter
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Discard | Cost$ X B B | ValidTgts$ Player | NumCards$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ Random | SpellDescription$ Target player discards X cards at random.
 SVar:X:Count$xPaid
 Oracle:Target player discards X cards at random.

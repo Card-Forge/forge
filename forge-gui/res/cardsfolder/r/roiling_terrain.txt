@@ -1,7 +1,7 @@
 Name:Roiling Terrain
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land, then CARDNAME deals damage to that land's controller equal to the number of land cards in that player's graveyard.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land, then CARDNAME deals damage to that land's controller equal to the number of land cards in that player's graveyard.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X
 SVar:X:TargetedController$LandsInGraveyard
 AI:RemoveDeck:Random

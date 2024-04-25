@@ -2,6 +2,6 @@ Name:Stream of Thought
 ManaCost:U
 Types:Sorcery
 K:Replicate:2 U U
-A:SP$ Mill | Cost$ U | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBChangeZone | SpellDescription$ Target player mills four cards. You shuffle up to four cards from your graveyard into your library.
+A:SP$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBChangeZone | SpellDescription$ Target player mills four cards. You shuffle up to four cards from your graveyard into your library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | DefinedPlayer$ You | Hidden$ True | ChangeNum$ 4 | ChangeType$ Card.YouOwn | Shuffle$ True
 Oracle:Target player mills four cards. You shuffle up to four cards from your graveyard into your library.\nReplicate {2}{U}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)

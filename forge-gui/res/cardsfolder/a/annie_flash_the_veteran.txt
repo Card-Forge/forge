@@ -1,0 +1,15 @@
+Name:Annie Flash, the Veteran
+ManaCost:3 R G W
+Types:Legendary Creature Human Rogue
+PT:4/5
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 or less in your graveyard | Tapped$ True
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ ExileTwo | TriggerDescription$ Whenever NICKNAME becomes tapped, exile the top two cards of your library. You may play those cards this turn.
+SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ EndOfTurn
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+Oracle:Flash\nWhen Annie Flash, the Veteran enters the battlefield, if you cast it, return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped.\nWhenever Annie Flash becomes tapped, exile the top two cards of your library. You may play those cards this turn.

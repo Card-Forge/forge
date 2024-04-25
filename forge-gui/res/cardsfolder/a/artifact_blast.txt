@@ -1,5 +1,5 @@
 Name:Artifact Blast
 ManaCost:R
 Types:Instant
-A:SP$ Counter | Cost$ R | TargetType$ Spell | ValidTgts$ Artifact | SpellDescription$ Counter target artifact spell.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Artifact | SpellDescription$ Counter target artifact spell.
 Oracle:Counter target artifact spell.

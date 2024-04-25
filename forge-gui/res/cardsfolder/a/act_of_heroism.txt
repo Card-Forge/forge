@@ -1,6 +1,6 @@
 Name:Act of Heroism
 ManaCost:1 W
 Types:Instant
-A:SP$ Untap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 until end of turn and can block an additional creature this turn.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 until end of turn and can block an additional creature this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | CanBlockAmount$ 1
 Oracle:Untap target creature. It gets +2/+2 until end of turn and can block an additional creature this turn.

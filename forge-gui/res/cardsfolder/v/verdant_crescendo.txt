@@ -1,7 +1,7 @@
 Name:Verdant Crescendo
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Search your library and graveyard for a card named Nissa, Nature's Artisan, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Search your library and graveyard for a card named Nissa, Nature's Artisan, reveal it, put it into your hand, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedNissa; Nature's Artisan | ChangeNum$ 1
 DeckHints:Name$Nissa, Nature's Artisan
 Oracle:Search your library for a basic land card and put it onto the battlefield tapped. Search your library and graveyard for a card named Nissa, Nature's Artisan, reveal it, put it into your hand, then shuffle.

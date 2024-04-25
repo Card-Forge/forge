@@ -1,7 +1,7 @@
 Name:Cankerous Thirst
 ManaCost:3 BG
 Types:Instant
-A:SP$ Pump | Cost$ 3 BG | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -3/-3 | Optional$ True | OptionQuestion$ Do you want TARGETS to get -3/-3? | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | ConditionManaSpent$ B | SubAbility$ GPaid | SpellDescription$ If {B} was spent to cast CARDNAME, you may have target creature get -3/-3 until end of turn. If G was spent to cast CARDNAME, you may have target creature get +3/+3 until end of turn. (Do both if {B}{G} was spent.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -3/-3 | Optional$ True | OptionQuestion$ Do you want TARGETS to get -3/-3? | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | ConditionManaSpent$ B | SubAbility$ GPaid | SpellDescription$ If {B} was spent to cast CARDNAME, you may have target creature get -3/-3 until end of turn. If G was spent to cast CARDNAME, you may have target creature get +3/+3 until end of turn. (Do both if {B}{G} was spent.)
 SVar:GPaid:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +3/+3 | Optional$ True | OptionQuestion$ Do you want TARGETS to get +3/+3? | NumAtt$ 3 | NumDef$ 3 | ConditionManaSpent$ G
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:Random

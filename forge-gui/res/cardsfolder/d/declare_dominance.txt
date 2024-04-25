@@ -1,5 +1,5 @@
 Name:Declare Dominance
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Target creature gets +3/+3 until end of turn. All creatures able to block it this turn do so.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Target creature gets +3/+3 until end of turn. All creatures able to block it this turn do so.
 Oracle:Target creature gets +3/+3 until end of turn. All creatures able to block it this turn do so.

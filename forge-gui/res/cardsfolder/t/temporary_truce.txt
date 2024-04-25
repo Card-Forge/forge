@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Draw | Defined$ Player | Upto$ True | NumCards$ 2 | SubAbility$ DBRepeat | AILogic$ GainLife | SpellDescription$ Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainLife | StackDescription$ For each card less than two a player draws this way, that player gains 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ AFNotDrawnNum | Defined$ Player.IsRemembered
-SVar:Y:Count$SVar$AFNotDrawnNum/NMinus.2
+SVar:Y:SVar$AFNotDrawnNum/NMinus.2
 SVar:X:SVar$Y/Twice
 AI:RemoveDeck:All
 Oracle:Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.

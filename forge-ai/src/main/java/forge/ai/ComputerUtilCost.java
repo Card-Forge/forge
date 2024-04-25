@@ -451,7 +451,7 @@ public class ComputerUtilCost {
                  * - block against evasive (flyers, intimidate, etc.)
                  * - break board stall by racing with evasive vehicle
                  */
-                if (sa.hasParam("Crew")) {
+                if (sa.isCrew()) {
                     Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                     String totalP = type.split("withTotalPowerGE")[1];

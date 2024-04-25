@@ -1,7 +1,7 @@
 Name:Mob Rule
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 R R | Choices$ DBBig,DBSmall
+A:SP$ Charm | Choices$ DBBig,DBSmall
 SVar:DBBig:DB$ GainControl | AllValid$ Creature.powerGE4 | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | SpellDescription$ Gain control of all creatures with power 4 or greater until end of turn. Untap them. They gain haste until end of turn.
 SVar:DBSmall:DB$ GainControl | AllValid$ Creature.powerLE3 | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | SpellDescription$ Gain control of all creatures with power 3 or less until end of turn. Untap them. They gain haste until end of turn.
 Oracle:Choose one —\n• Gain control of all creatures with power 4 or greater until end of turn. Untap those creatures. They gain haste until end of turn.\n• Gain control of all creatures with power 3 or less until end of turn. Untap those creatures. They gain haste until end of turn.

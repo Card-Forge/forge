@@ -1,7 +1,7 @@
 Name:Exhume
 ManaCost:1 B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 B | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SpellDescription$ Each player puts a creature card from their graveyard onto the battlefield.
+A:SP$ RepeatEach | RepeatSubAbility$ DBChangeZone | RepeatPlayers$ Player | SpellDescription$ Each player puts a creature card from their graveyard onto the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered | ChangeNum$ 1 | Hidden$ True | Mandatory$ True
 SVar:X:Count$TypeInYourYard.Creature
 SVar:NeedsToPlayVar:X GE1

@@ -1,7 +1,7 @@
 Name:Fire and Brimstone
 ManaCost:3 W W
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 W W | ValidTgts$ Player.attackedWithCreaturesThisTurn | SubAbility$ DBDealDamage | TgtPrompt$ Select target player who declared an attacking creature this turn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player who attacked this turn and 4 damage to you.
+A:SP$ DealDamage | ValidTgts$ Player.attackedWithCreaturesThisTurn | SubAbility$ DBDealDamage | TgtPrompt$ Select target player who declared an attacking creature this turn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player who attacked this turn and 4 damage to you.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 4
 AI:RemoveDeck:All
 Oracle:Fire and Brimstone deals 4 damage to target player who attacked this turn and 4 damage to you.

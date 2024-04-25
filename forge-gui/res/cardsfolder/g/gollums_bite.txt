@@ -1,6 +1,6 @@
 Name:Gollum's Bite
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 A:AB$ RingTemptsYou | Cost$ 3 B ExileFromGrave<1/CARDNAME> | SorcerySpeed$ True | ActivationZone$ Graveyard | SpellDescription$ The Ring tempts you. Activate only as a sorcery.
 Oracle:Target creature gets -2/-2 until end of turn.\n{3}{B}, Exile Gollum's Bite from your graveyard: The Ring tempts you. Activate only as a sorcery.

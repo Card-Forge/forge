@@ -1,7 +1,7 @@
 Name:Deadfall
 ManaCost:2 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Forestwalk. | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
+S:Mode$ IgnoreLandWalk | ValidKeyword$ Landwalk:Forest | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Creatures with forestwalk can be blocked as though they didn't have forestwalk.

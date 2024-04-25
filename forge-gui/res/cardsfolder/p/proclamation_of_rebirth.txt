@@ -1,7 +1,7 @@
 Name:Proclamation of Rebirth
 ManaCost:2 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 3 | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 1 or less in your graveyard | ValidTgts$ Creature.cmcLE1+YouCtrl | SpellDescription$ Return up to three target creature cards with mana value 1 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 1 or less in your graveyard | ValidTgts$ Creature.cmcLE1+YouCtrl | SpellDescription$ Return up to three target creature cards with mana value 1 or less from your graveyard to the battlefield.
 A:AB$ ChangeZone | Cost$ 5 W Reveal<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 1 or less in your graveyard | ValidTgts$ Creature.cmcLE1+YouCtrl | Forecast$ True | SpellDescription$ Return target creature card with mana value 1 or less from your graveyard to the battlefield. (Activate only during your upkeep and only once each turn.)
 AI:RemoveDeck:All
 Oracle:Return up to three target creature cards with mana value 1 or less from your graveyard to the battlefield.\nForecast — {5}{W}, Reveal Proclamation of Rebirth from your hand: Return target creature card with mana value 1 or less from your graveyard to the battlefield. (Activate only during your upkeep and only once each turn.)

@@ -1,5 +1,5 @@
 Name:Cradle to Grave
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonBlack+ThisTurnEntered | TgtPrompt$ Select target nonblack creature that entered the battlefield this turn | SpellDescription$ Destroy target nonblack creature that entered the battlefield this turn.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack+ThisTurnEntered | TgtPrompt$ Select target nonblack creature that entered the battlefield this turn | SpellDescription$ Destroy target nonblack creature that entered the battlefield this turn.
 Oracle:Destroy target nonblack creature that entered the battlefield this turn.

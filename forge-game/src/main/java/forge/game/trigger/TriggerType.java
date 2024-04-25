@@ -31,6 +31,8 @@ public enum TriggerType {
     BecomeMonstrous(TriggerBecomeMonstrous.class),
     BecomeRenowned(TriggerBecomeRenowned.class),
     BecomesCrewed(TriggerBecomesCrewed.class),
+    BecomesPlotted(TriggerBecomesPlotted.class),
+    BecomesSaddled(TriggerBecomesSaddled.class),
     BecomesTarget(TriggerBecomesTarget.class),
     BecomesTargetOnce(TriggerBecomesTargetOnce.class),
     BlockersDeclared(TriggerBlockersDeclared.class),

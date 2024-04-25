@@ -1,0 +1,10 @@
+Name:Esoteric Duplicator
+ManaCost:2 U
+Types:Artifact Clue
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self,Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDelayedTrig | TriggerDescription$ Whenever you sacrifice CARDNAME or another artifact, you may pay {2}. If you do, at the beginning of the next end step, create a token that's a copy of that artifact.
+SVar:TrigDelayedTrig:AB$ DelayedTrigger | Cost$ 2 | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | RememberObjects$ TriggeredCardLKICopy | Execute$ TrigCopy | TriggerDescription$ At the beginning of the next end step, create a token that's a copy of that artifact.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ DelayTriggerRememberedLKI
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:Whenever you sacrifice Esoteric Duplicator or another artifact, you may pay {2}. If you do, at the beginning of the next end step, create a token that's a copy of that artifact.\n{2}, Sacrifice Esoteric Duplicator: Draw a card.

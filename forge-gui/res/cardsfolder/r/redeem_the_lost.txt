@@ -1,7 +1,7 @@
 Name:Redeem the Lost
 ManaCost:1 W
 Types:Instant
-A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | Gains$ Choice | Choices$ AnyColor | TgtPrompt$ Select target creature | SubAbility$ DBClash | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl | Gains$ Choice | Choices$ AnyColor | TgtPrompt$ Select target creature | SubAbility$ DBClash | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand
 Oracle:Target creature you control gains protection from the color of your choice until end of turn. Clash with an opponent. If you win, return Redeem the Lost to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

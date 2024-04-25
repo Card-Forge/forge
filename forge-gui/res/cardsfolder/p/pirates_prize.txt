@@ -1,6 +1,6 @@
 Name:Pirate's Prize
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SubAbility$ DBTreasure | SpellDescription$ Draw two cards. Create a Treasure token.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBTreasure | SpellDescription$ Draw two cards. Create a Treasure token.
 SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 Oracle:Draw two cards. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

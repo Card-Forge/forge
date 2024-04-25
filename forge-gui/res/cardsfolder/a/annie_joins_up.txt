@@ -1,0 +1,8 @@
+Name:Annie Joins Up
+ManaCost:1 R G W
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 5 damage to target creature or planeswalker an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ 5
+S:Mode$ Panharmonicon | ValidCard$ Creature.YouCtrl+Legendary | Description$ If a triggered ability of a legendary creature you control triggers, that ability triggers an additional time.
+DeckHints:Type$Legendary
+Oracle:When Annie Joins Up enters the battlefield, it deals 5 damage to target creature or planeswalker an opponent controls.\nIf a triggered ability of a legendary creature you control triggers, that ability triggers an additional time.

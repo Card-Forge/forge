@@ -1,6 +1,6 @@
 Name:Break Open
 ManaCost:1 R
 Types:Instant
-A:SP$ SetState | Cost$ 1 R | ValidTgts$ Creature.faceDown+OppCtrl | TgtPrompt$ Select target facedown creature you don't control. | Mode$ TurnFaceUp | SpellDescription$ Turn target face-down creature an opponent controls face up.
+A:SP$ SetState | ValidTgts$ Creature.faceDown+OppCtrl | TgtPrompt$ Select target facedown creature you don't control. | Mode$ TurnFaceUp | SpellDescription$ Turn target face-down creature an opponent controls face up.
 AI:RemoveDeck:Random
 Oracle:Turn target face-down creature an opponent controls face up.

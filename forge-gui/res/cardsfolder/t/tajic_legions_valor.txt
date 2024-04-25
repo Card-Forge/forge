@@ -1,0 +1,15 @@
+Name:Tajic, Legion's Valor
+ManaCost:2 R W
+Types:Legendary Creature Human Soldier
+PT:1/1
+K:Indestructible
+K:Haste
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on CARDNAME. Then conjure a card with mana value equal to the number of +1/+1 counters on it from CARDNAME's spellbook onto the battlefield. It gains haste until end of turn and attacks this combat if able.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Filter$ Card.cmcEQCount$CardCounters.P1P1 | Spellbook$ Aurelia; the Law Above,Boros Recruit,Skyknight Legionnaire,Spark Trooper,Swiftblade Vindicator | Zone$ Battlefield | RememberMade$ True | SubAbility$ DBPumpTurn
+SVar:DBPumpTurn:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBPumpCombat
+SVar:DBPumpCombat:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | Duration$ UntilEndOfCombat | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this combat if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Indestructible, haste\nAt the beginning of combat on your turn, put a +1/+1 counter on Tajic, Legion's Valor. Then conjure a card with mana value equal to the number of +1/+1 counters on it from Tajic, Legion's Valor's spellbook onto the battlefield. It gains haste until end of turn and attacks this combat if able.

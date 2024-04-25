@@ -1,7 +1,7 @@
 Name:Retribution
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select two target creature an opponent controls | TargetMin$ 2 | TargetMax$ 2 | TargetsFromSingleZone$ True | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures an opponent controls. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other.
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select two target creature an opponent controls | TargetMin$ 2 | TargetMax$ 2 | TargetsFromSingleZone$ True | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures an opponent controls. That player chooses and sacrifices one of those creatures. Put a -1/-1 counter on the other.
 SVar:DBChoose:DB$ ChooseCard | Defined$ TargetedController | Mandatory$ True | Choices$ Creature.IsRemembered | ChoiceTitle$ Choose one to sacrifice | ForgetChosen$ True | AILogic$ WorstCard | SubAbility$ DBSac | StackDescription$ None
 SVar:DBSac:DB$ Destroy | Defined$ ChosenCard | Sacrifice$ True | SubAbility$ DBPutCounter | StackDescription$ None
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ M1M1 | CounterNum$ 1 | StackDescription$ None | SubAbility$ DBCleanup

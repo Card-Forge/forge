@@ -1,7 +1,7 @@
 Name:Doublecast
 ManaCost:R R
 Types:Sorcery
-A:SP$ DelayedTrigger | Cost$ R R | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+A:SP$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:AIPriorityModifier:9
 Oracle:When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.

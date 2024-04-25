@@ -1,7 +1,7 @@
 Name:Perilous Research
 ManaCost:1 U
 Types:Instant
-A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBSac | SpellDescription$ Draw two cards, then sacrifice a permanent.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBSac | SpellDescription$ Draw two cards, then sacrifice a permanent.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Permanent
 SVar:NeedsToPlay:Permanent.YouCtrl+HasSVar SacMe
 AI:RemoveDeck:Random

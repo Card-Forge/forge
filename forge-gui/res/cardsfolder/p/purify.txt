@@ -1,5 +1,5 @@
 Name:Purify
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
+A:SP$ DestroyAll | ValidCards$ Artifact,Enchantment | SpellDescription$ Destroy all artifacts and enchantments.
 Oracle:Destroy all artifacts and enchantments.

@@ -1,0 +1,9 @@
+Name:Trained Arynx
+ManaCost:1 W
+Types:Creature Cat Beast Mount
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks while saddled, it gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigPump:DB$ Pump | KW$ First Strike | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry
+K:Saddle:2
+Oracle:Whenever Trained Arynx attacks while saddled, it gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

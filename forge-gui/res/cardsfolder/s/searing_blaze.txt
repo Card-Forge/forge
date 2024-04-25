@@ -1,7 +1,7 @@
 Name:Searing Blaze
 ManaCost:R R
 Types:Instant
-A:SP$ DealDamage | Cost$ R R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ SearingX | DamageMap$ True | SubAbility$ SearingDamage | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls. Landfall — If you had a land enter the battlefield under your control this turn, CARDNAME deals 3 damage to that player or planeswalker and 3 damage to that creature instead.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ SearingX | DamageMap$ True | SubAbility$ SearingDamage | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker and 1 damage to target creature that player or that planeswalker's controller controls. Landfall — If you had a land enter the battlefield under your control this turn, CARDNAME deals 3 damage to that player or planeswalker and 3 damage to that creature instead.
 SVar:SearingDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy ParentTargetedController,Creature.ControlledBy ParentTarget | TgtPrompt$ Select target creature that player or that planeswalker's controller controls | NumDmg$ SearingX | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:SearingX:Count$Landfall.3.1

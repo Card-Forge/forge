@@ -1,6 +1,6 @@
 Name:Sram's Expertise
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ Token | Cost$ 2 W W | TokenAmount$ 3 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | SubAbility$ DBPlay | SpellDescription$ Create three 1/1 colorless Servo artifact creature tokens. You may cast a spell with mana value 3 or less from your hand without paying its mana cost.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | SubAbility$ DBPlay | SpellDescription$ Create three 1/1 colorless Servo artifact creature tokens. You may cast a spell with mana value 3 or less from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLE3 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 Oracle:Create three 1/1 colorless Servo artifact creature tokens.\nYou may cast a spell with mana value 3 or less from your hand without paying its mana cost.

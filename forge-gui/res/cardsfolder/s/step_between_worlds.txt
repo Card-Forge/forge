@@ -1,0 +1,12 @@
+Name:Step Between Worlds
+ManaCost:3 U U
+Types:Sorcery
+K:Plot:4 U U
+A:SP$ GenericChoice | Defined$ Player | TempRemember$ Chooser | Choices$ Stargate,Homebody | ShowChoice$ ExceptSelf | SubAbility$ DBTimetwister | AILogic$ Timetwister | StackDescription$ SpellDescription | SpellDescription$ Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. Exile CARDNAME.
+SVar:Stargate:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Stargate | SpellDescription$ Yes, I want to shuffle my hand and graveyard into my library.
+SVar:Homebody:DB$ Pump | Defined$ Remembered | SpellDescription$ NO, I DO NOT want to shuffle my hand and graveyard into my library.
+SVar:DBTimetwister:DB$ ChangeZoneAll | ChangeType$ Card.OwnedBy Player.NotedForStargate | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBRepeatDraw | StackDescription$ None
+SVar:DBRepeatDraw:DB$ Draw | Defined$ Player.NotedForStargate | NumCards$ 7 | SubAbility$ DBClearNoted | StackDescription$ None
+SVar:DBClearNoted:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Stargate | SubAbility$ DBChange | StackDescription$ None
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
+Oracle:Each player may shuffle their hand and graveyard into their library. Each player who does draws seven cards. Exile Step Between Worlds.\nPlot {4}{U}{U} (You may pay {4}{U}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

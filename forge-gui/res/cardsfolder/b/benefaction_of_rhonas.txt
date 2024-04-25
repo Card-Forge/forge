@@ -1,5 +1,5 @@
 Name:Benefaction of Rhonas
 ManaCost:2 G
 Types:Sorcery
-A:SP$ DigMultiple | Cost$ 2 G | DigNum$ 5 | Reveal$ True | ChangeValid$ Creature,Enchantment | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. You may put a creature card and/or an enchantment card from among them into your hand. Put the rest into your graveyard.
+A:SP$ DigMultiple | DigNum$ 5 | Reveal$ True | ChangeValid$ Creature,Enchantment | DestinationZone2$ Graveyard | Optional$ True | SpellDescription$ Reveal the top five cards of your library. You may put a creature card and/or an enchantment card from among them into your hand. Put the rest into your graveyard.
 Oracle:Reveal the top five cards of your library. You may put a creature card and/or an enchantment card from among them into your hand. Put the rest into your graveyard.

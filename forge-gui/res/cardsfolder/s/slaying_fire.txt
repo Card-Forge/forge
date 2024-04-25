@@ -1,6 +1,6 @@
 Name:Slaying Fire
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ X | AIManaPref$ R | SpellDescription$ CARDNAME deals 3 damage to any target. Adamant — If at least three red mana was spent to cast this spell, it deals 4 damage instead.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | AIManaPref$ R | SpellDescription$ CARDNAME deals 3 damage to any target. Adamant — If at least three red mana was spent to cast this spell, it deals 4 damage instead.
 SVar:X:Count$Adamant.Red.4.3
 Oracle:Slaying Fire deals 3 damage to any target.\nAdamant — If at least three red mana was spent to cast this spell, it deals 4 damage instead.

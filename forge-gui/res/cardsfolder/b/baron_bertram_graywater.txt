@@ -1,0 +1,10 @@
+Name:Baron Bertram Graywater
+ManaCost:2 W B
+Types:Legendary Creature Vampire Noble
+PT:3/4
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more tokens enter the battlefield under your control, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_vampire_rogue_lifelink
+A:AB$ Draw | Cost$ 1 B Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice|Token|LifeGain & Type$Rogue
+DeckHints:Ability$Token
+Oracle:Whenever one or more tokens enter the battlefield under your control, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.\n{1}{B}, Sacrifice another creature or artifact: Draw a card.

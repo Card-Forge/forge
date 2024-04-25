@@ -2,5 +2,5 @@ Name:Cat Warriors
 ManaCost:1 G G
 Types:Creature Cat Warrior
 PT:2/2
-K:Forestwalk
+K:Landwalk:Forest
 Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)

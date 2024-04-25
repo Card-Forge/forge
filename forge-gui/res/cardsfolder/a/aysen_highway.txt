@@ -1,7 +1,7 @@
 Name:Aysen Highway
 ManaCost:3 W W W
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.White | AddKeyword$ Plainswalk | Description$ White creatures have plainswalk.
+S:Mode$ Continuous | Affected$ Creature.White | AddKeyword$ Landwalk:Plains | Description$ White creatures have plainswalk.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:White creatures have plainswalk. (They can't be blocked as long as defending player controls a Plains.)

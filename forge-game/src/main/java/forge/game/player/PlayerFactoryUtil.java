@@ -23,14 +23,14 @@ public class PlayerFactoryUtil {
                 sbValid.append("| ValidSource$ ").append(k[1]);
             }
 
-            String effect = "Mode$ CantTarget | Hexproof$ True | ValidPlayer$ Player.You | Secondary$ True "
+            String effect = "Mode$ CantTarget | ValidPlayer$ Player.You | Secondary$ True "
                     + sbValid.toString() + " | Activator$ Opponent | EffectZone$ Command | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         } else if (keyword.equals("Shroud")) {
-            String effect = "Mode$ CantTarget | Shroud$ True | ValidPlayer$ Player.You | Secondary$ True "
+            String effect = "Mode$ CantTarget | ValidPlayer$ Player.You | Secondary$ True "
                     + "| EffectZone$ Command | Description$ Shroud (" + inst.getReminderText() + ")";
 
             final Card card = player.getKeywordCard();

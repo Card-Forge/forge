@@ -1,7 +1,7 @@
 Name:Scapeshift
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 G G | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBShift | SpellDescription$ Sacrifice any number of lands. Search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Land | RememberSacrificed$ True | Optional$ True | SubAbility$ DBShift | SpellDescription$ Sacrifice any number of lands. Search your library for up to that many land cards, put them onto the battlefield tapped, then shuffle.
 SVar:DBShift:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ ShiftX | Tapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Land.YouCtrl

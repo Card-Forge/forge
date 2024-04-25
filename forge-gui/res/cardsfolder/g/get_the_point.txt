@@ -1,6 +1,6 @@
 Name:Get the Point
 ManaCost:3 B R
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBScry | SpellDescription$ Destroy target creature. Scry 1.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBScry | SpellDescription$ Destroy target creature. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Destroy target creature. Scry 1.

@@ -1,5 +1,5 @@
 Name:Hero's Demise
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | SpellDescription$ Destroy target legendary creature.
+A:SP$ Destroy | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature | SpellDescription$ Destroy target legendary creature.
 Oracle:Destroy target legendary creature.

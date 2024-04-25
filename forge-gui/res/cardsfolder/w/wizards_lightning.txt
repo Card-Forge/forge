@@ -2,6 +2,6 @@ Name:Wizard's Lightning
 ManaCost:2 R
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Wizard.YouCtrl | Description$ This spell costs {2} less to cast if you control a Wizard.
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | TgtPrompt$ Select target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 DeckNeeds:Type$Wizard
 Oracle:This spell costs {2} less to cast if you control a Wizard.\nWizard's Lightning deals 3 damage to any target.

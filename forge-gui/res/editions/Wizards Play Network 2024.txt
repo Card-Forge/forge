@@ -15,3 +15,7 @@ ScryfallCode=PW24
 8 R Commander's Sphere @Andrea Radeck
 9 R Underworld Connections @Yeong-Hao Han
 10 R Rogue's Passage @Christine Choi
+11 M Transmutation Font @José Parodi
+12 M Oltec Matterweaver @Borja Pindado
+13 R Diabolic Tutor @Greg Staples
+14 R Costly Plunder @Ben Maier

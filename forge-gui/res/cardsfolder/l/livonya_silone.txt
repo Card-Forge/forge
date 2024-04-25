@@ -3,5 +3,5 @@ ManaCost:2 R R G G
 Types:Legendary Creature Human Warrior
 PT:4/4
 K:First Strike
-K:Legendary landwalk
+K:Landwalk:Land.Legendary:Legendary land
 Oracle:First strike; legendary landwalk (This creature can't be blocked as long as defending player controls a legendary land.)

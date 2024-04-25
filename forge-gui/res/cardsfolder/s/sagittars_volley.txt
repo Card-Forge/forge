@@ -1,6 +1,6 @@
 Name:Sagittars' Volley
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBDamageAll | SpellDescription$ Destroy target creature with flying. CARDNAME deals 1 damage to each creature with flying your opponents control.
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBDamageAll | SpellDescription$ Destroy target creature with flying. CARDNAME deals 1 damage to each creature with flying your opponents control.
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withFlying+OppCtrl
 Oracle:Destroy target creature with flying. Sagittars' Volley deals 1 damage to each creature with flying your opponents control.

@@ -1,5 +1,5 @@
 Name:Into the Core
 ManaCost:2 R R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 R R | Origin$ Battlefield | Destination$ Exile | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile two target artifacts.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile two target artifacts.
 Oracle:Exile two target artifacts.

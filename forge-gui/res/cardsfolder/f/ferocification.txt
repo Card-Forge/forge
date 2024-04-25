@@ -1,0 +1,8 @@
+Name:Ferocification
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBPumpKW | CharmNum$ 1
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +2/+0 until end of turn.
+SVar:DBPumpKW:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Menace & Haste | SpellDescription$ Target creature you control gains menace and haste until end of turn.
+Oracle:At the beginning of combat on your turn, choose one —\n• Target creature you control gets +2/+0 until end of turn.\n• Target creature you control gains menace and haste until end of turn.

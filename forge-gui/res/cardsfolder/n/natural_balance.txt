@@ -1,7 +1,7 @@
 Name:Natural Balance
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 G G | RepeatPlayers$ Player | RepeatSubAbility$ BalanceLands | AILogic$ BalanceLands | SpellDescription$ Each player who controls six or more lands chooses five lands they control and sacrifices the rest. Each player who controls four or fewer lands may search their library for up to X basic land cards and put them onto the battlefield, where X is five minus the number of lands they control. Then each player who searched their library this way shuffles.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ BalanceLands | AILogic$ BalanceLands | SpellDescription$ Each player who controls six or more lands chooses five lands they control and sacrifices the rest. Each player who controls four or fewer lands may search their library for up to X basic land cards and put them onto the battlefield, where X is five minus the number of lands they control. Then each player who searched their library this way shuffles.
 SVar:BalanceLands:DB$ Sacrifice | SacValid$ Land | Amount$ SacX | Defined$ Remembered | ConditionCheckSVar$ SacX | ConditionSVarCompare$ GT0 | SubAbility$ FetchLands
 SVar:FetchLands:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ FetchX | DefinedPlayer$ Remembered | ConditionCheckSVar$ FetchX | ConditionSVarCompare$ GT0 | ShuffleNonMandatory$ True
 SVar:LandsControlled:Count$Valid Land.RememberedPlayerCtrl

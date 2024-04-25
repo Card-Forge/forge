@@ -1,7 +1,7 @@
 Name:Rite of Ruin
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ GenericChoice | Cost$ 5 R R | Choices$ ChooseC1L2A3,ChooseL1C2A3,ChooseA1L2C3,ChooseA1C2L3,ChooseC1A2L3,ChooseL1A2C3 | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.
+A:SP$ GenericChoice | Choices$ ChooseC1L2A3,ChooseL1C2A3,ChooseA1L2C3,ChooseA1C2L3,ChooseC1A2L3,ChooseL1A2C3 | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose an order for artifacts, creatures, and lands. Each player sacrifices one permanent of the first type, sacrifices two of the second type, then sacrifices three of the third type.
 SVar:ChooseC1L2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseC1 | SubAbility$ SacC1L2A3 | SpellDescription$ Creature,Land,Artifact
 SVar:ChooseL1C2A3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseL1 | SubAbility$ SacL1C2A3 | SpellDescription$ Land,Creature,Artifact
 SVar:ChooseA1L2C3:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseA1 | SubAbility$ SacA1L2C3 | SpellDescription$ Artifact,Land,Creature

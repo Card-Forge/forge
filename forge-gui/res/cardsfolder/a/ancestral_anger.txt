@@ -1,7 +1,7 @@
 Name:Ancestral Anger
 ManaCost:R
 Types:Sorcery
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+0, where X is 1 plus the number of cards named Ancestral Anger in your graveyard.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Trample | NumAtt$ +X | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+0, where X is 1 plus the number of cards named Ancestral Anger in your graveyard.
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedAncestral Anger/Plus.1
 DeckHints:Name$Ancestral Anger

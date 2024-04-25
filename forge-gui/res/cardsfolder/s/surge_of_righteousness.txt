@@ -1,7 +1,7 @@
 Name:Surge of Righteousness
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.Black+attacking,Creature.Black+blocking,Creature.Red+attacking,Creature.Red+blocking | TgtPrompt$ Select target black or red creature that's attacking or blocking | SubAbility$ NaturalLife | SpellDescription$ Destroy target black or red creature that's attacking or blocking. You gain 2 life.
+A:SP$ Destroy | ValidTgts$ Creature.Black+attacking,Creature.Black+blocking,Creature.Red+attacking,Creature.Red+blocking | TgtPrompt$ Select target black or red creature that's attacking or blocking | SubAbility$ NaturalLife | SpellDescription$ Destroy target black or red creature that's attacking or blocking. You gain 2 life.
 SVar:NaturalLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 AI:RemoveDeck:Random
 Oracle:Destroy target black or red creature that's attacking or blocking. You gain 2 life.

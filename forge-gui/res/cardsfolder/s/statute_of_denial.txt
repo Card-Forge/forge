@@ -1,7 +1,7 @@
 Name:Statute of Denial
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. If you control a blue creature, draw a card, then discard a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. If you control a blue creature, draw a card, then discard a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Creature.Blue+YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a blue creature, | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Creature.Blue+YouCtrl | ConditionCompare$ GE1
 Oracle:Counter target spell. If you control a blue creature, draw a card, then discard a card.

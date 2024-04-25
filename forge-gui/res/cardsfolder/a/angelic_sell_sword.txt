@@ -1,0 +1,12 @@
+Name:Angelic Sell-Sword
+ManaCost:4 W
+Types:Creature Angel Mercenary
+PT:4/4
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.nonToken+Other+YouCtrl | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another nontoken creature enters the battlefield under your control, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | IsPresent$ Card.Self+powerGE6 | TriggerDescription$ Whenever CARDNAME attacks, if its power is 6 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw 
+DeckHas:Ability$Counters
+Oracle:Flying, vigilance\nWhenever Angelic Sell-Sword or another nontoken creature enters the battlefield under your control, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."\nWhenever Angelic Sell-Sword attacks, if its power is 6 or greater, draw a card.

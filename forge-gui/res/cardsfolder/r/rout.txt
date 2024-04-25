@@ -2,5 +2,5 @@ Name:Rout
 ManaCost:3 W W
 Types:Sorcery
 K:MayFlashCost:2
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 Oracle:You may cast Rout as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)\nDestroy all creatures. They can't be regenerated.

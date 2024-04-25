@@ -1,7 +1,7 @@
 Name:Cut
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 AlternateMode:Split
 Oracle:Cut deals 4 damage to target creature.
 
@@ -11,6 +11,6 @@ Name:Ribbons
 ManaCost:X B B
 Types:Sorcery
 K:Aftermath
-A:SP$ LoseLife | Cost$ X B B | Defined$ Player.Opponent | LifeAmount$ X | SpellDescription$ Each opponent loses X life.
+A:SP$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SpellDescription$ Each opponent loses X life.
 SVar:X:Count$xPaid
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nEach opponent loses X life.

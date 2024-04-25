@@ -25,8 +25,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = source.getGame();
         // Usually a number leaving possibility for X, Sacrifice X land: Manifest X creatures.
-        final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source,
-                sa.getParam("Amount"), sa) : 1;
+        final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             CardCollection tgtCards;

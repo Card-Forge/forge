@@ -2,6 +2,6 @@ Name:Organic Extinction
 ManaCost:8 W W
 Types:Sorcery
 K:Improvise
-A:SP$ DestroyAll | Cost$ 8 W W | ValidCards$ Creature.nonArtifact | SpellDescription$ Destroy all nonartifact creatures.
+A:SP$ DestroyAll | ValidCards$ Creature.nonArtifact | SpellDescription$ Destroy all nonartifact creatures.
 DeckNeeds:Type$Artifact
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.\nDestroy all nonartifact creatures.

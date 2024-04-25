@@ -2,7 +2,7 @@ Name:Midnight Recovery
 ManaCost:3 B
 Types:Sorcery
 K:Cipher
-A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ Cipher | SpellDescription$ Return target creature card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ Cipher | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 Oracle:Return target creature card from your graveyard to your hand.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

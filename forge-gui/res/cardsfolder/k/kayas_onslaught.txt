@@ -1,6 +1,6 @@
 Name:Kaya's Onslaught
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+1 and gains double strike until end of turn. | StackDescription$ SpellDescription
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+1 and gains double strike until end of turn. | StackDescription$ SpellDescription
 K:Foretell:W
 Oracle:Target creature gets +1/+1 and gains double strike until end of turn.\nForetell {W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,7 +1,7 @@
 Name:Razia's Purification
 ManaCost:4 R W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 R W | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseSac | SubAbility$ DBSac | SpellDescription$ Each player chooses three permanents they control, then sacrifices the rest.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseSac | SubAbility$ DBSac | SpellDescription$ Each player chooses three permanents they control, then sacrifices the rest.
 SVar:DBChooseSac:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ 3 | ChoiceTitle$ Choose three cards not to be sacrificed | RememberChosen$ True | Mandatory$ True
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

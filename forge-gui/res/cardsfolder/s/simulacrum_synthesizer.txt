@@ -1,0 +1,10 @@
+Name:Simulacrum Synthesizer
+ManaCost:2 U
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl+cmcGE3+Other | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever another artifact with mana value 3 or greater enters the battlefield under your control, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+SVar:TrigToken:DB$ Token | TokenScript$ c_0_0_a_construct_total_artifacts
+DeckHas:Ability$Token & Type$Golem
+DeckHints:Type$Artifact
+Oracle:When Simulacrum Synthesizer enters the battlefield, scry 2.\nWhenever another artifact with mana value 3 or greater enters the battlefield under your control, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."

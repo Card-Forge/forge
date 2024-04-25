@@ -1,7 +1,7 @@
 Name:Aid the Fallen
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCreature,DBPlaneswalker
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCreature,DBPlaneswalker
 SVar:DBCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | SpellDescription$ Return target creature card from your graveyard to your hand
 SVar:DBPlaneswalker:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Planeswalker.YouCtrl | TgtPrompt$ Select target planeswalker in your graveyard | SpellDescription$ Return target planeswalker card from your graveyard to your hand
 Oracle:Choose one or both —\n• Return target creature card from your graveyard to your hand.\n• Return target planeswalker card from your graveyard to your hand.

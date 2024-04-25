@@ -5,7 +5,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Self+wasCastFromYourHandByYou | Execute$ Tri
 # TODO check ruling with Twinning Staff
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE1 | MayChooseTarget$ True | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | ConditionPresent$ Enchantment.YouCtrl | ConditionCompare$ GE1 | MayChooseTarget$ True
-A:SP$ ChangeZone | Cost$ 4 W U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBToken | SpellDescription$ Return target nonland permanent to its owner's hand. You create a 2/2 white Knight creature token with vigilance.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBToken | SpellDescription$ Return target nonland permanent to its owner's hand. You create a 2/2 white Knight creature token with vigilance.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:When you cast this spell from your hand, copy it if you control an artifact, then copy it if you control an enchantment. You may choose new targets for the copies.\nReturn target nonland permanent to its owner's hand. You create a 2/2 white Knight creature token with vigilance.

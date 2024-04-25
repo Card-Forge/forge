@@ -5,7 +5,7 @@ PT:7/7
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.
 SVar:TrigExile:DB$ Dig | DigNum$ 7 | ChangeNum$ All | Defined$ TriggeredTarget | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ PickOne
-SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose creature to put on the battlefied under your control | Choices$ Creature.IsRemembered | ChoiceZone$ Exile | SubAbility$ MoveChosen
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose creature to put on the battlefield under your control | Choices$ Creature.IsRemembered | ChoiceZone$ Exile | SubAbility$ MoveChosen
 SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | GainControl$ True | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nWhenever Lord of the Void deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.

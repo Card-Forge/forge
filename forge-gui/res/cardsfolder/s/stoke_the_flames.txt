@@ -2,5 +2,5 @@ Name:Stoke the Flames
 ManaCost:2 R R
 Types:Instant
 K:Convoke
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nStoke the Flames deals 4 damage to any target.

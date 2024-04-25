@@ -2,7 +2,7 @@ Name:Blessed Reincarnation
 ManaCost:3 U
 Types:Instant
 K:Rebound
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDig | SpellDescription$ Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library.
+A:SP$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDig | SpellDescription$ Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library.
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
 AI:RemoveDeck:All
 Oracle:Exile target creature an opponent controls. That player reveals cards from the top of their library until a creature card is revealed. The player puts that card onto the battlefield, then shuffles the rest into their library.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

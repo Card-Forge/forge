@@ -1,0 +1,14 @@
+Name:Cackling Observer
+ManaCost:1 B B
+Types:Creature Imp
+PT:3/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals each nonland card in their hand. You choose one of those cards and exile it.
+SVar:TrigReveal:DB$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerCtrl | RememberRevealed$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand+nonCreature | Imprint$ True | Mandatory$ True | SubAbility$ DBClearRemembered
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigSeek | TriggerDescription$ When CARDNAME leaves the battlefield, the exiled card's owner seeks a nonland card with lesser mana value than the exiled card.
+SVar:TrigSeek:DB$ Seek | Defined$ ImprintedController | Type$ Card.cmcLTX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost
+Oracle:Flying\nWhen Cackling Observer enters the battlefield, target opponent reveals each nonland card in their hand. You choose one of those cards and exile it.\nWhen Cackling Observer leaves the battlefield, the exiled card's owner seeks a nonland card with lesser mana value than the exiled card.

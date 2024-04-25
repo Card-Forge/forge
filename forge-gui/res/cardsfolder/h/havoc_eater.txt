@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGoad | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, goad up to one target creature that opponent controls. Put X +1/+1 counters on CARDNAME, where X is the total power of creatures goaded this way.
-SVar:TrigGoad:DB$ Goad | TargetMin$ 0 | SubAbility$ DBPutCounter | TargetMax$ X | ValidTgts$ Creature.OppCtrl | TargetsWithDifferentControllers$ True | RememberGoaded$ True | TgtPrompt$ Goad up to one target creature that opponent controls
+SVar:TrigGoad:DB$ Goad | TargetMin$ 0 | SubAbility$ DBPutCounter | TargetMax$ X | ValidTgts$ Creature.OppCtrl | TargetsForEachPlayer$ True | RememberGoaded$ True | TgtPrompt$ Goad up to one target creature that opponent controls
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:PlayerCountOpponents$Amount

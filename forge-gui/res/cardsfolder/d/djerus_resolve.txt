@@ -1,7 +1,7 @@
 Name:Djeru's Resolve
 ManaCost:W
 Types:Instant
-A:SP$ Untap | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. Prevent all damage that would be dealt to it this turn.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. Prevent all damage that would be dealt to it this turn.
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all damage that would be dealt to that creature this turn.
 K:Cycling:2

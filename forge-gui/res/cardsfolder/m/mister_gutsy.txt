@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ SpellCast | ValidCard$ Aura,Equipment | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Aura or Equipment spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterNum$ 1 | CounterType$ P1P1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X Junk tokens, where X is the number of +1/+1 counters on it. (They're artifacts with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ TriggeredCardController 
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_junk_sac_exileplay | TokenOwner$ TriggeredCardController
 SVar:X:TriggeredCard$CardCounters.P1P1
 DeckHas:Ability$Counters|Token & Type$Junk|Artifact
 DeckNeeds:Type$Aura|Equipment

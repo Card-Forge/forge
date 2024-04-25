@@ -1,0 +1,11 @@
+Name:Eivor, Battle-Ready
+ManaCost:3 R W
+Types:Legendary Creature Human Assassin Warrior
+PT:5/5
+K:Vigilance
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage equal to the number of Equipment you control to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:X:Count$Valid Equipment.YouCtrl
+DeckNeeds:Type$Equipment
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nHaste (This creature can attack as soon as it comes under your control.)\nWhenever Eivor, Battle-Ready attacks, it deals damage equal to the number of Equipment you control to each opponent.

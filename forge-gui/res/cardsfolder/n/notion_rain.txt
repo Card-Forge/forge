@@ -1,7 +1,7 @@
 Name:Notion Rain
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ Surveil | Cost$ 1 U B | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards. CARDNAME deals 2 damage to you.
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards. CARDNAME deals 2 damage to you.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 DeckHas:Ability$Surveil|Graveyard

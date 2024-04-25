@@ -1,5 +1,5 @@
 Name:Rend Flesh
 ManaCost:2 B
 Types:Instant Arcane
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonSpirit | TgtPrompt$ Select target non-Spirit creature | SpellDescription$ Destroy target non-Spirit creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonSpirit | TgtPrompt$ Select target non-Spirit creature | SpellDescription$ Destroy target non-Spirit creature.
 Oracle:Destroy target non-Spirit creature.

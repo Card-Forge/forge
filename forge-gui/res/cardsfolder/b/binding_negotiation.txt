@@ -1,0 +1,7 @@
+Name:Binding Negotiation
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | Optional$ True | DiscardValid$ Card.nonLand | DiscardValidDesc$ nonland card | RememberDiscarded$ True | SubAbility$ DBReturn | SpellDescription$ Target opponent reveals their hand. You may choose a nonland card from it. If you do, they discard it. Otherwise, you may put a face-up exiled card they own into their graveyard.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.faceUp+TargetedPlayerOwn | Hidden$ True | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target opponent reveals their hand. You may choose a nonland card from it. If you do, they discard it. Otherwise, you may put a face-up exiled card they own into their graveyard.

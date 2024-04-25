@@ -1,0 +1,7 @@
+Name:Slickshot Vault-Buster
+ManaCost:2 U
+Types:Creature Human Rogue
+PT:1/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ Count$CommittedCrimeThisTurn.1.0 | Description$ CARDNAME gets +2/+0 as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+Oracle:Vigilance\nSlickshot Vault-Buster gets +2/+0 as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

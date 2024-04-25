@@ -1,5 +1,5 @@
 Name:Roast
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature without flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature without flying.
 Oracle:Roast deals 5 damage to target creature without flying.

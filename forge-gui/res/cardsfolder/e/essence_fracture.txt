@@ -1,6 +1,6 @@
 Name:Essence Fracture
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
 K:Cycling:2 U
 Oracle:Return two target creatures to their owners' hands.\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)

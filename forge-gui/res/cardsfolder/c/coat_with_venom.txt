@@ -1,5 +1,5 @@
 Name:Coat with Venom
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+2 and gains deathtouch until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | KW$ Deathtouch | SpellDescription$ Target creature gets +1/+2 and gains deathtouch until end of turn.
 Oracle:Target creature gets +1/+2 and gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

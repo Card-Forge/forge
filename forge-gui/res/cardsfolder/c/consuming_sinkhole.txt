@@ -2,7 +2,7 @@ Name:Consuming Sinkhole
 ManaCost:3 R
 Types:Instant
 K:Devoid
-A:SP$ Charm | Cost$ 3 R | Choices$ ExileLandCreature,DealDmg | CharmNum$ 1
+A:SP$ Charm | Choices$ ExileLandCreature,DealDmg | CharmNum$ 1
 SVar:ExileLandCreature:DB$ ChangeZone | ValidTgts$ Creature.Land | TgtPrompt$ Choose target land creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land creature.
 SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Choose player or planeswalker | AILogic$ ChoiceBurn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
 Oracle:Devoid (This card has no color.)\nChoose one —\n• Exile target land creature.\n• Consuming Sinkhole deals 4 damage to target player or planeswalker.

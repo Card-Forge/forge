@@ -6,8 +6,8 @@ A:SP$ Attach | ValidTgts$ Opponent | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, enchanted opponent creates a Clue token, a Food token, and a Junk token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw,c_a_food_sac,c_a_junk_sac_exileplay | TokenOwner$ EnchantedPlayer
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Opponent.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ At the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat.
-SVar:TrigEffect:DB$ Effect | UnlessCost$ X | UnlessPayer$ EnchantedPlayer | Duration$ UntilEndOfCombat | StaticAbilities$ StaticCantAttack
+SVar:TrigEffect:DB$ Effect | UnlessCost$ Y | UnlessPayer$ EnchantedPlayer | Duration$ UntilEndOfCombat | StaticAbilities$ StaticCantAttack
 SVar:StaticCantAttack:Mode$ CantAttack | ValidCard$ Creature | Description$ Creatures can't attack this turn.
-SVar:X:Count$Valid Artifact.EnchantedPlayerCtrl
+SVar:Y:Count$Valid Artifact.EnchantedPlayerCtrl
 DeckHas:Ability$Token & Type$Clue|Food|Junk
 Oracle:Enchant opponent\nWhen Overencumbered enters the battlefield, enchanted opponent creates a Clue token, a Food token, and a Junk token.\nAt the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat.

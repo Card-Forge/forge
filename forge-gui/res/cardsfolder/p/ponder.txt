@@ -1,6 +1,6 @@
 Name:Ponder
 ManaCost:U
 Types:Sorcery
-A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ DBDraw | SpellDescription$ Look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.
+A:SP$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ DBDraw | SpellDescription$ Look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card.

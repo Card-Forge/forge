@@ -1,0 +1,10 @@
+Name:Miriam, Herd Whisperer
+ManaCost:G W
+Types:Legendary Creature Human Druid
+PT:3/2
+S:Mode$ Continuous | Affected$ Mount.YouCtrl,Vehicle.YouCtrl | AddKeyword$ Hexproof | Condition$ PlayerTurn | Description$ As long as it's your turn, Mounts and Vehicles you control have hexproof.
+T:Mode$ Attacks | ValidCard$ Mount.YouCtrl,Vehicle.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mount or Vehicle you control attacks, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Mount|Vehicle
+Oracle:As long as it's your turn, Mounts and Vehicles you control have hexproof.\nWhenever a Mount or Vehicle you control attacks, put a +1/+1 counter on it.

@@ -1,7 +1,7 @@
 Name:Render Silent
 ManaCost:W U U
 Types:Instant
-A:SP$ Counter | Cost$ W U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBEffect | SpellDescription$ Counter target spell. Its controller can't cast spells this turn.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBEffect | SpellDescription$ Counter target spell. Its controller can't cast spells this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantBeCast | RememberObjects$ TargetedController
 SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Its controller can't cast spells this turn.
 Oracle:Counter target spell. Its controller can't cast spells this turn.

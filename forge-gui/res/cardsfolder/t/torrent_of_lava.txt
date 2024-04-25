@@ -1,7 +1,7 @@
 Name:Torrent of Lava
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
 SVar:X:Count$xPaid
 S:Mode$ Continuous | Affected$ Creature | AddAbility$ TOPrevent | AddSVar$ DBPrevent & DBReplace | EffectZone$ Stack | Description$ As long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn."
 SVar:TOPrevent:AB$ Effect | Cost$ T | RememberObjects$ Self | ImprintCards$ OriginalHost | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn. | StackDescription$ SpellDescription

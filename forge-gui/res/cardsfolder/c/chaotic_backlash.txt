@@ -1,6 +1,6 @@
 Name:Chaotic Backlash
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | NumDmg$ Backlash | TgtPrompt$ Select target player to damage | ValidTgts$ Player | SpellDescription$ CARDNAME deals damage to target player equal to twice the number of white and/or blue permanents they control.
+A:SP$ DealDamage | NumDmg$ Backlash | TgtPrompt$ Select target player to damage | ValidTgts$ Player | SpellDescription$ CARDNAME deals damage to target player equal to twice the number of white and/or blue permanents they control.
 SVar:Backlash:Count$Valid Permanent.Blue+TargetedPlayerCtrl,Permanent.White+TargetedPlayerCtrl/Times.2
 Oracle:Chaotic Backlash deals damage to target player equal to twice the number of white and/or blue permanents they control.

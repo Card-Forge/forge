@@ -1,11 +1,10 @@
 Name:Ether Well
 ManaCost:3 U
 Types:Instant
-A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
-SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
-SVar:DBChoose:DB$ GenericChoice | Choices$ DBBottomLibChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
-SVar:DBBottomLibChoice:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ If that creature is red, you may put it on the bottom of its owner's library instead.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$Valid Creature.IsRemembered+Red
+A:SP$ Pump | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.
+SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Choices$ DBBottomLibChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
+SVar:DBBottomLibChoice:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ If that creature is red, you may put it on the bottom of its owner's library instead.
+SVar:X:Targeted$Valid Creature.Red
 Oracle:Put target creature on top of its owner's library. If that creature is red, you may put it on the bottom of its owner's library instead.

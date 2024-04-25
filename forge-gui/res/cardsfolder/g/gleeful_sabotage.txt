@@ -1,6 +1,6 @@
 Name:Gleeful Sabotage
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 K:Conspire
 Oracle:Destroy target artifact or enchantment.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

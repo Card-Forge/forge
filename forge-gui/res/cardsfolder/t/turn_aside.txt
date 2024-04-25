@@ -1,5 +1,5 @@
 Name:Turn Aside
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a permanent you control.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a permanent you control.
 Oracle:Counter target spell that targets a permanent you control.

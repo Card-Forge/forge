@@ -1,5 +1,5 @@
 Name:Hijack
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn.
 Oracle:Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn.

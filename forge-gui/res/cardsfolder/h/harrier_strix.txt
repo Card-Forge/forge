@@ -1,0 +1,11 @@
+Name:Harrier Strix
+ManaCost:U
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target permanent.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent
+A:AB$ Draw | Cost$ 2 U | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:Flying\nWhen Harrier Strix enters the battlefield, tap target permanent.\n{2}{U}: Draw a card, then discard a card.

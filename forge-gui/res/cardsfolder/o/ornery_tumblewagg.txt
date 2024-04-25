@@ -1,0 +1,13 @@
+Name:Ornery Tumblewagg
+ManaCost:2 G
+Types:Creature Brushwagg Mount
+PT:2/2
+K:Saddle:2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self+IsSaddled | TriggerZones$ Battlefield | Execute$ TrigDoubleCounters | TriggerDescription$ Whenever CARDNAME attacks while saddled, double the number of +1/+1 counters on target creature.
+SVar:TrigDoubleCounters:DB$ MultiplyCounter | ValidTgts$ Creature | CounterType$ P1P1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:At the beginning of combat on your turn, put a +1/+1 counter on target creature.\nWhenever Ornery Tumblewagg attacks while saddled, double the number of +1/+1 counters on target creature.\nSaddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)

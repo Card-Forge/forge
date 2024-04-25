@@ -2,7 +2,7 @@ Name:Strength of the Tajuru
 ManaCost:X G G
 Types:Instant
 K:Multikicker:1
-A:SP$ PutCounter | CounterType$ P1P1 | CounterNum$ X | Cost$ X G G | Announce$ Multikicker | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ TargetsNum | TargetMax$ TargetsNum | SpellDescription$ Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them.
+A:SP$ PutCounter | Announce$ Multikicker | CounterType$ P1P1 | CounterNum$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ TargetsNum | TargetMax$ TargetsNum | SpellDescription$ Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them.
 SVar:X:Count$xPaid
 SVar:TargetsNum:Count$TimesKicked/Plus.1
 DeckHas:Ability$Counters

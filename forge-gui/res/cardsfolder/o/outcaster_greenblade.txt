@@ -1,0 +1,10 @@
+Name:Outcaster Greenblade
+ManaCost:2 G
+Types:Creature Human Mercenary
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic,Desert | ChangeNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Desert you control.
+SVar:X:Count$Valid Desert.YouCtrl
+DeckHints:Type$Desert
+Oracle:When Outcaster Greenblade enters the battlefield, search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle.\nOutcaster Greenblade gets +1/+1 for each Desert you control.

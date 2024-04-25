@@ -1,7 +1,7 @@
 Name:Niveous Wisps
 ManaCost:W
 Types:Instant
-A:SP$ Animate | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ White | OverwriteColors$ True | SubAbility$ DBDraw | SpellDescription$ Target creature becomes white until end of turn. Tap that creature. Draw a card.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ White | OverwriteColors$ True | SubAbility$ DBDraw | SpellDescription$ Target creature becomes white until end of turn. Tap that creature. Draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBTap | NumCards$ 1
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 AI:RemoveDeck:All

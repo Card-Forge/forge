@@ -1,7 +1,7 @@
 Name:Squall Line
 ManaCost:X G G
 Types:Instant
-A:SP$ DamageAll | Cost$ X G G | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:Squall Line deals X damage to each creature with flying and each player.

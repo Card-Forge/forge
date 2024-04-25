@@ -1,13 +1,9 @@
 Name:Siren's Ruse
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | SubAbility$ DBRememberPirate | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card. | StackDescription$ SpellDescription
-SVar:DBRememberPirate:DB$ StoreSVar | SVar$ WasPirate | Type$ Number | Expression$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Pirate | ConditionCompare$ EQ1 | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Battlefield | Destination$ Exile | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBPirateDraw
-SVar:DBPirateDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ WasPirate | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReinitialize
-SVar:DBReinitialize:DB$ StoreSVar | SVar$ WasPirate | Type$ Number | Expression$ 0
-SVar:WasPirate:Number$0
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Imprint$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card. | StackDescription$ SpellDescription
+SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ All | Destination$ Battlefield | SubAbility$ DBPirateDraw | StackDescription$ None
+SVar:DBPirateDraw:DB$ Draw | NumCards$ 1 | ConditionDefined Remembered | ConditionPresent$ Pirate | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AI:RemoveDeck:All
 Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card.

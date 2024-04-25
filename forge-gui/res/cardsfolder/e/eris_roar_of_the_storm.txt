@@ -1,0 +1,13 @@
+Name:Eris, Roar of the Storm
+ManaCost:8 U R
+Types:Legendary Creature Elemental Warlock
+PT:4/4
+K:Flying
+K:Prowess
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {2} less to cast for each different mana value among instant and sorcery cards in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn$DifferentCMC/Times.2
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, create a 4/4 red Dragon Elemental creature token with flying and prowess.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_elemental_flying_prowess | TokenOwner$ You
+DeckHas:Ability$Token & Type$Dragon|Elemental
+DeckHints:Type$Instant|Sorcery
+Oracle:This spell costs {2} less to cast for each different mana value among instant and sorcery cards in your graveyard.\nFlying, prowess\nWhenever you cast your second spell each turn, create a 4/4 red Dragon Elemental creature token with flying and prowess.

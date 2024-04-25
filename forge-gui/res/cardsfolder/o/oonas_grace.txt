@@ -2,5 +2,5 @@ Name:Oona's Grace
 ManaCost:2 U
 Types:Instant
 K:Retrace
-A:SP$ Draw | Cost$ 2 U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
+A:SP$ Draw | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
 Oracle:Target player draws a card.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

@@ -1,7 +1,7 @@
 Name:Brilliant Spectrum
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | NumCards$ X | SpellDescription$ Converge — Draw X cards, where X is the number of colors of mana spent to cast Brilliant Spectrum. Then discard two cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ X | SpellDescription$ Converge — Draw X cards, where X is the number of colors of mana spent to cast Brilliant Spectrum. Then discard two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 SVar:X:Count$Converge
 AI:RemoveDeck:All

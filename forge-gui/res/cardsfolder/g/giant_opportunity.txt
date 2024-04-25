@@ -1,7 +1,7 @@
 Name:Giant Opportunity
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 G | SacValid$ Food | Defined$ You | Amount$ 2 | Optional$ True | StrictAmount$ True | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. Otherwise, create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+A:SP$ Sacrifice | SacValid$ Food | Defined$ You | Amount$ 2 | Optional$ True | StrictAmount$ True | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ You may sacrifice two Foods. If you do, create a 7/7 green Giant creature token. Otherwise, create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_7_7_giant | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Food | ConditionCompare$ EQ2 | SubAbility$ DBToken2
 SVar:DBToken2:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_food_sac | TokenOwner$ You | ConditionDefined$ RememberedLKI | ConditionPresent$ Food | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

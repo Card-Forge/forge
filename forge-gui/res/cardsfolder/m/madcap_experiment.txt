@@ -1,7 +1,7 @@
 Name:Madcap Experiment
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 3 R | Valid$ Artifact | ValidDescription$ artifact | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberRevealed$ True | SubAbility$ DBDealDamage | SpellDescription$ Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. CARDNAME deals damage to you equal to the number of cards revealed this way.
+A:SP$ DigUntil | Valid$ Artifact | ValidDescription$ artifact | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | RememberRevealed$ True | SubAbility$ DBDealDamage | SpellDescription$ Reveal cards from the top of your library until you reveal an artifact card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. CARDNAME deals damage to you equal to the number of cards revealed this way.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

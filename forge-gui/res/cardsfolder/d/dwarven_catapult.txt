@@ -1,7 +1,7 @@
 Name:Dwarven Catapult
 ManaCost:X R
 Types:Instant
-A:SP$ DamageAll | Cost$ X R | ValidTgts$ Opponent | TgtPrompt$ Select a opponent | ValidCards$ Creature | NumDmg$ Z | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among all creatures target opponent controls.
+A:SP$ DamageAll | ValidTgts$ Opponent | TgtPrompt$ Select a opponent | ValidCards$ Creature | NumDmg$ Z | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among all creatures target opponent controls.
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Creature.TargetedPlayerCtrl
 SVar:Z:SVar$X/DivideEvenlyDown.Y

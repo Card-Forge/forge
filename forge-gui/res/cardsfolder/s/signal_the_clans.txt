@@ -1,7 +1,7 @@
 Name:Signal the Clans
 ManaCost:R G
 Types:Instant
-A:SP$ ChangeZone | Cost$ R G | Origin$ Library | Destination$ Library | ChangeType$ Creature | ChangeNum$ 3 | RememberChanged$ True | Reveal$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChoose | SpellDescription$ Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature | ChangeNum$ 3 | RememberChanged$ True | Reveal$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChoose | SpellDescription$ Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library.
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | ChoiceZone$ Library | SubAbility$ DBChange | StackDescription$ None | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3
 SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ ChosenCard | StackDescription$ None | SubAbility$ DBShuffle | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ3
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup

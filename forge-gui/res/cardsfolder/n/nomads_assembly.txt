@@ -2,6 +2,6 @@ Name:Nomads' Assembly
 ManaCost:4 W W
 Types:Sorcery
 K:Rebound
-A:SP$ Token | Cost$ 4 W W | TokenAmount$ X | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kor Soldier creature token for each creature you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kor Soldier creature token for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Create a 1/1 white Kor Soldier creature token for each creature you control.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

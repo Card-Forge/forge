@@ -255,6 +255,17 @@ public final class StaticAbilityContinuous {
                             }
                             return true;
                         }
+                        if (input.contains("YourBasic")) {
+                            CardCollectionView lands = hostCard.getController().getLandsInPlay();
+                            final List<String> basic = MagicColor.Constant.BASIC_LANDS;
+                            for (String type : basic) {
+                                if (Iterables.any(lands, CardPredicates.isType(type))) {
+                                    String y = input.replaceAll("YourBasic", type);
+                                    newKeywords.add(y);
+                                }
+                            }
+                            return true;
+                        }
                         if (input.contains("EachCMCAmongDefined")) {
                             String keywordDefined = params.get("KeywordDefined");
                             CardCollectionView definedCards = game.getCardsIn(ZoneType.Battlefield);

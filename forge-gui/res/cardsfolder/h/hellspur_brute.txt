@@ -1,0 +1,8 @@
+Name:Hellspur Brute
+ManaCost:4 R
+Types:Creature Minotaur Mercenary
+PT:5/4
+K:Affinity:Card.Outlaw:outlaw
+K:Trample
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Affinity for outlaws (This spell costs {1} less to cast for each Assassin, Mercenary, Pirate, Rogue, and/or Warlock you control.)\nTrample

@@ -1,6 +1,6 @@
 Name:Lose Calm
 ManaCost:3 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste and menace until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste and menace until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste & Menace
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste and menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)

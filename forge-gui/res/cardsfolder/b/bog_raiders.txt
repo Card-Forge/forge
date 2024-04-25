@@ -2,5 +2,5 @@ Name:Bog Raiders
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
-K:Swampwalk
+K:Landwalk:Swamp
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)

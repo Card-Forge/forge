@@ -1,7 +1,7 @@
 Name:Repopulate
 ManaCost:1 G
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 G | Origin$ Graveyard | Destination$ Library | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Creature | Shuffle$ True | SpellDescription$ Shuffle all creature cards from target player's graveyard into that player's library.
+A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Library | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Creature | Shuffle$ True | SpellDescription$ Shuffle all creature cards from target player's graveyard into that player's library.
 K:Cycling:2
 AI:RemoveDeck:Random
 Oracle:Shuffle all creature cards from target player's graveyard into that player's library.\nCycling {2} ({2}, Discard this card: Draw a card.)

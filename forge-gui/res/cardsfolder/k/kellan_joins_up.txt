@@ -1,0 +1,12 @@
+Name:Kellan Joins Up
+ManaCost:G W U
+Types:Legendary Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile a nonland card with mana value 3 or less from your hand. If you do, it becomes plotted. (You may cast it as a sorcery on a later turn without paying its mana cost.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand+cmcLE3 | RememberChanged$ True | SubAbility$ DBPlot
+SVar:DBPlot:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Plotted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Legendary | TriggerZones$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ Whenever a legendary creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Legendary
+Oracle:When Kellan Joins Up enters the battlefield, you may exile a nonland card with mana value 3 or less from your hand. If you do, it becomes plotted. (You may cast it as a sorcery on a later turn without paying its mana cost.)\nWhenever a legendary creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.

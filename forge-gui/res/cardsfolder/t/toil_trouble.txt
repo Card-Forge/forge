@@ -2,7 +2,7 @@ Name:Toil
 ManaCost:2 B
 Types:Sorcery
 K:Fuse
-A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted
 AlternateMode:Split
 Oracle:Target player draws two cards and loses 2 life.\nFuse (You may cast one or both halves of this card from your hand.)
@@ -12,6 +12,6 @@ ALTERNATE
 Name:Trouble
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
+A:SP$ DealDamage | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of cards in target player's hand to that player.
 SVar:X:TargetedPlayer$CardsInHand
 Oracle:Trouble deals damage to target player equal to the number of cards in that player's hand.\nFuse (You may cast one or both halves of this card from your hand.)

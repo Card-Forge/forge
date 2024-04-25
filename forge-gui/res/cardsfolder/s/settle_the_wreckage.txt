@@ -1,7 +1,7 @@
 Name:Settle the Wreckage
 ManaCost:2 W W
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 W W | ValidTgts$ Player | ChangeType$ Creature.attacking | TgtPrompt$ Select target player | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBGetLands | SpellDescription$ Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | ChangeType$ Creature.attacking | TgtPrompt$ Select target player | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBGetLands | SpellDescription$ Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle.
 SVar:DBGetLands:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ X | DefinedPlayer$ TargetedPlayer | ShuffleNonMandatory$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize

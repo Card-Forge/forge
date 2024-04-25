@@ -3,5 +3,5 @@ ManaCost:5 U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Dragon.YouCtrl | Description$ This spell costs {2} less to cast if you control a Dragon.
 DeckHints:Type$Dragon
-A:SP$ Draw | Cost$ 5 U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 Oracle:This spell costs {2} less to cast if you control a Dragon.\nDraw three cards.

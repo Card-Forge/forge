@@ -2,5 +2,5 @@ Name:Crowd's Favor
 ManaCost:R
 Types:Instant
 K:Convoke
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nTarget creature gets +1/+0 and gains first strike until end of turn. (It deals combat damage before creatures without first strike.)

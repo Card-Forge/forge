@@ -1,7 +1,7 @@
 Name:Hour of Eternity
 ManaCost:X X U U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X X U U U | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target creature cards from your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | SubAbility$ DBClone | RememberChanged$ True | StackDescription$ {p:You} exiles {c:Targeted} from their graveyard. | SpellDescription$ Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose X target creature cards from your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | SubAbility$ DBClone | RememberChanged$ True | StackDescription$ {p:You} exiles {c:Targeted} from their graveyard. | SpellDescription$ Exile X target creature cards from your graveyard. For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | NumCopies$ 1 | SubAbility$ DBCleanup | StackDescription$ For each card exiled this way, create a token that's a copy of that card, except it's a 4/4 black Zombie.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

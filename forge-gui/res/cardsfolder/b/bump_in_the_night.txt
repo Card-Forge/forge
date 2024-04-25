@@ -2,5 +2,5 @@ Name:Bump in the Night
 ManaCost:B
 Types:Sorcery
 K:Flashback:5 R
-A:SP$ LoseLife | Cost$ B | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life.
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SpellDescription$ Target opponent loses 3 life.
 Oracle:Target opponent loses 3 life.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

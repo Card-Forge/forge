@@ -1,0 +1,6 @@
+Name:Play of the Game
+ManaCost:6 W W
+Types:Sorcery
+K:Assist
+A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand | IsCurse$ True | SpellDescription$ Exile all nonland permanents.
+Oracle:Assist (Another player can pay up to {6} of this spell's cost.)\nExile all nonland permanents.

@@ -1,0 +1,8 @@
+Name:Explosive Derailment
+ManaCost:R
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBDamage,DBDestroy | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBDamage:DB$ DealDamage | SpreeCost$ 2 | ValidTgts$ Creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+SVar:DBDestroy:DB$ Destroy | SpreeCost$ 2 | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | SpellDescription$ Destroy target artifact.
+Oracle:Spree (Choose one or more additional costs.)\n+ {2} — Explosive Derailment deals 4 damage to target creature.\n+ {2} — Destroy target artifact.

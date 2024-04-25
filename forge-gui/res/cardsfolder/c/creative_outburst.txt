@@ -1,7 +1,7 @@
 Name:Creative Outburst
 ManaCost:3 U U R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 U U R R | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 5 damage to any target. Look at the top five cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 5 damage to any target. Look at the top five cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
 SVar:DBDig:DB$ Dig | DigNum$ 5 | RestRandomOrder$ True | NoReveal$ True
 A:AB$ Token | Cost$ UR UR Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ c_a_treasure_sac | AILogic$ AlwaysOnDiscard | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token

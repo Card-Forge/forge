@@ -1,7 +1,7 @@
 Name:Bleeding Edge
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 B B | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBAmass | SpellDescription$ Up to one target creature gets -2/-2 until end of turn. Amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBAmass | SpellDescription$ Up to one target creature gets -2/-2 until end of turn. Amass Zombies 2. (Put two +1/+1 counters on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ 2
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass|Counters|Token

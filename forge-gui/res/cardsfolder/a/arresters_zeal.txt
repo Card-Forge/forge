@@ -1,6 +1,6 @@
 Name:Arrester's Zeal
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBAddendum | AILogic$ Main1IfAble | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBAddendum | AILogic$ Main1IfAble | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:DBAddendum:DB$ Pump | Defined$ Targeted | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | KW$ Flying | SpellDescription$ Addendum - If you cast this spell during your main phase, that creature gains flying until end of turn.
 Oracle:Target creature gets +2/+2 until end of turn.\nAddendum — If you cast this spell during your main phase, that creature gains flying until end of turn.

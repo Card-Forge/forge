@@ -1,6 +1,6 @@
 Name:Thought Scour
 ManaCost:U
 Types:Instant
-A:SP$ Mill | Cost$ U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards. Draw a card. | SubAbility$ DBDraw
+A:SP$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards. Draw a card. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Target player mills two cards.\nDraw a card.

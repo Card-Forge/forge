@@ -1,0 +1,12 @@
+Name:Kaervek, the Punisher
+ManaCost:1 B B
+Types:Legendary Creature Human Warlock
+PT:3/3
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you commit a crime, exile up to one target black card from your graveyard and copy it. You may cast the copy. If you do, you lose 2 life. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Copies of permanent spells become tokens.)
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Card.Black+YouOwn | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to one target black card from your graveyard | Imprint$ True | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | Valid$ Card.IsImprinted | ValidZone$ Exile | CopyCard$ True | ValidSA$ Spell | Optional$ True | RememberPlayed$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill|Graveyard
+Oracle:Whenever you commit a crime, exile up to one target black card from your graveyard and copy it. You may cast the copy. If you do, you lose 2 life. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Copies of permanent spells become tokens.)

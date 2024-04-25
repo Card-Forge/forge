@@ -1,6 +1,6 @@
 Name:Schismotivate
 ManaCost:1 U R
 Types:Instant
-A:SP$ Pump | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +4/+0 | NumAtt$ +4 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +4/+0 | NumAtt$ +4 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.
 SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get -4/+0 | TargetUnique$ True | NumAtt$ -4 | IsCurse$ True
 Oracle:Target creature gets +4/+0 until end of turn. Another target creature gets -4/-0 until end of turn.

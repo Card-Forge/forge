@@ -4,10 +4,8 @@ Types:Sorcery
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X
 SVar:X:Count$TotalCommanderCastFromCommandZone
-A:SP$ Sacrifice | Cost$ 7 B B | Defined$ Player.Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
-SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ0
+A:SP$ Sacrifice | Defined$ Opponent | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ OppNonRememberedController | RepeatSubAbility$ DBLoseLife | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ PlayerCountRemembered$LifeTotal/HalfUp
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:Y:PlayerCountRemembered$LifeTotal/HalfUp
-SVar:Z:RememberedLKI$Valid Card.RememberedPlayerCtrl
 Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game.\nEach opponent sacrifices a creature. Each opponent who can't loses half their life, rounded up.

@@ -1,0 +1,8 @@
+Name:Omenpath Journey
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to five land cards that have different names, exile them, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | ChangeType$ Land.YouOwn | DifferentNames$ True | ChangeNum$ 5 | Origin$ Library | Destination$ Exile
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeBattlefield | TriggerDescription$ At the beginning of your end step, choose a card at random exiled with CARDNAME and put it onto the battlefield tapped.
+SVar:TrigChangeBattlefield:DB$ ChangeZone | Hidden$ True | Origin$ Exile | Destination$ Battlefield | Tapped$ True | AtRandom$ True | ChangeType$ Card.ExiledWithSource
+Oracle:When Omenpath Journey enters the battlefield, search your library for up to five land cards that have different names, exile them, then shuffle.\nAt the beginning of your end step, choose a card at random exiled with Omenpath Journey and put it onto the battlefield tapped.

@@ -1,0 +1,7 @@
+Name:Full Steam Ahead
+ManaCost:3 G G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SubAbility$ DBAnimateAll | SpellDescription$ Until end of turn, each creature you control gets +2/+2 and gains trample and "This creature can't be blocked by more than one creature."
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | staticAbilities$ MinMaxBlocked
+SVar:MinMaxBlocked:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ This creature can't be blocked by more than one creature.
+Oracle:Until end of turn, each creature you control gets +2/+2 and gains trample and "This creature can't be blocked by more than one creature."

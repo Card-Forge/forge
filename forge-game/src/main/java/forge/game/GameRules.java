@@ -11,6 +11,7 @@ public class GameRules {
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
     private boolean matchAnteRarity = false;
+    private boolean AISideboardingEnabled = false;
     private boolean sideboardForAI = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
 
@@ -75,6 +76,14 @@ public class GameRules {
 
     public void setSideboardForAI(final boolean sideboard) {
         sideboardForAI = sideboard;
+    }
+
+    public boolean getAISideboardingEnabled() {
+        return AISideboardingEnabled;
+    }
+
+    public void setAISideboardingEnabled(final boolean aiSideboarding) {
+        AISideboardingEnabled = aiSideboarding;
     }
 
     public int getGamesToWinMatch() {

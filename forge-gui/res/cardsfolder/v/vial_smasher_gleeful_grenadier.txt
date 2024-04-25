@@ -1,0 +1,8 @@
+Name:Vial Smasher, Gleeful Grenadier
+ManaCost:B R
+Types:Legendary Creature Goblin Mercenary
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Outlaw+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another outlaw enters the battlefield under your control, CARDNAME deals 1 damage to target opponent. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Whenever another outlaw enters the battlefield under your control, Vial Smasher, Gleeful Grenadier deals 1 damage to target opponent. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)

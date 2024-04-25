@@ -1,0 +1,12 @@
+Name:Excogitator Sphinx
+ManaCost:2 U U
+Types:Creature Sphinx Detective
+PT:4/4
+K:Flying
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, investigate.
+SVar:TrigInvestigate:DB$ Investigate
+A:AB$ Seek | Cost$ 1 Sac<1/Clue> | Type$ Instant,Sorcery | SpellDescription$ Seek an instant or sorcery card.
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
+DeckHints:Type$Clue
+DeckNeeds:Type$Sorcery|Instant
+Oracle:Flying\nWhenever one or more creatures you control deal combat damage to a player, investigate.\n{1}, Sacrifice a Clue: Seek an instant or sorcery card.

@@ -3,7 +3,7 @@ ManaCost:W U
 Types:Creature Human Wizard
 PT:2/2
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ Spells with the chosen name can't be cast.
 AI:RemoveDeck:Random
 Oracle:As Meddling Mage enters the battlefield, choose a nonland card name.\nSpells with the chosen name can't be cast.

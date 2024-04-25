@@ -1,0 +1,7 @@
+Name:Voracious Varmint
+ManaCost:1 G
+Types:Creature Varmint
+PT:2/2
+K:Vigilance
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:Vigilance\n{1}, Sacrifice Voracious Varmint: Destroy target artifact or enchantment.

@@ -1,7 +1,7 @@
 Name:Showstopper
 ManaCost:1 B R
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 B R | ValidCards$ Creature.YouCtrl | Triggers$ DiesTrigger | SpellDescription$ Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Triggers$ DiesTrigger | SpellDescription$ Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."
 SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ ShowstopperTrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 2 damage to target creature an opponent controls.
 SVar:ShowstopperTrigDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 2
 AI:RemoveDeck:All

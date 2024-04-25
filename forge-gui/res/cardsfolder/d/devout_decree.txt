@@ -1,7 +1,7 @@
 Name:Devout Decree
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature.Black,Planeswalker.Red,Creature.Red,Planeswalker.Black | TgtPrompt$ Select target creature or planeswalker that's black or red | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBScry | SpellDescription$ Exile target creature or planeswalker that's black or red. Scry 1.
+A:SP$ ChangeZone | ValidTgts$ Creature.Black,Planeswalker.Red,Creature.Red,Planeswalker.Black | TgtPrompt$ Select target creature or planeswalker that's black or red | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBScry | SpellDescription$ Exile target creature or planeswalker that's black or red. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 AI:RemoveDeck:All
 Oracle:Exile target creature or planeswalker that's black or red. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

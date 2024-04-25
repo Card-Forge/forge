@@ -1,6 +1,6 @@
 Name:Chain of Silence
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | TgtPrompt$ Select target creature | SubAbility$ DBCopy | SpellDescription$ Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy. | StackDescription$ SpellDescription
+A:SP$ Pump | ValidTgts$ Creature | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | TgtPrompt$ Select target creature | SubAbility$ DBCopy | SpellDescription$ Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy. | StackDescription$ SpellDescription
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedController | Optional$ True | UnlessPayer$ TargetedController | UnlessCost$ Sac<1/Land> | UnlessSwitched$ True | UnlessAI$ Never | StackDescription$ None | MayChooseTarget$ True
 Oracle:Prevent all damage target creature would deal this turn. That creature's controller may sacrifice a land. If the player does, they may copy this spell and may choose a new target for that copy.

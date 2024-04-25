@@ -1,5 +1,5 @@
 Name:Stench of Decay
 ManaCost:1 B B
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature.nonArtifact | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Nonartifact creatures get -1/-1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.nonArtifact | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Nonartifact creatures get -1/-1 until end of turn.
 Oracle:Nonartifact creatures get -1/-1 until end of turn.

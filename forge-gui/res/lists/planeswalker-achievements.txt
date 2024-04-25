@@ -81,6 +81,7 @@ Huatli, Dinosaur Knight|Huatli's Dino Thunder|Victory is ours forever more!
 Huatli, Radiant Champion|Huatli's Herd|Seize. Release. Feast.
 Huatli, Warrior Poet|Huatli's Poetry|Knock knock, open up the door, it's real!
 Jace Beleren|Jace's Grind|Nice memories... not!
+Jace Reawakened|Jace's Double Trouble|If it's worth doing, it's worth doing twice.
 Jace, Arcane Strategist|Jace's Secret Passage|Don't worry. I know the way through these minds.
 Jace, Architect of Thought|Jace's Incantation|I like that one. I'll steal it!
 Jace, Cunning Castaway|Jace's Mirror Image|Who is real and who is fake?
@@ -150,6 +151,7 @@ Nissa, Worldwaker|Nissa's Awakening|The whole country is here!
 Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifices sometimes.
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
 Ob Nixilis, the Adversary|Ob Nixilis's Pact|The price is, let's see... everything.
+Oko, the Ringleader|Oko's Fearsome Posse|Meet new mooks, same as the old mooks.
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
 Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.

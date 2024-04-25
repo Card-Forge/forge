@@ -2,7 +2,7 @@ Name:Voidwalk
 ManaCost:3 U
 Types:Sorcery
 K:Cipher
-A:SP$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | RememberTargets$ True | ForgetOtherTargets$ True | TgtPrompt$ Select target creature | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at end of turn.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | RememberTargets$ True | ForgetOtherTargets$ True | TgtPrompt$ Select target creature | SubAbility$ DelTrig | SpellDescription$ Exile target creature. Return that card to the battlefield under its owner's control at end of turn.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return exiled card to the battlefield. | SubAbility$ Cipher
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:Cipher:DB$ Encode | Defined$ Self

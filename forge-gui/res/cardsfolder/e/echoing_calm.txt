@@ -1,7 +1,7 @@
 Name:Echoing Calm
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBDestroyAll | SpellDescription$ Destroy target enchantment and all other enchantments with the same name as that enchantment.
+A:SP$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBDestroyAll | SpellDescription$ Destroy target enchantment and all other enchantments with the same name as that enchantment.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ TargetedCard.Self,Enchantment.NotDefinedTargeted+sharesNameWith Targeted
 AI:RemoveDeck:All
 Oracle:Destroy target enchantment and all other enchantments with the same name as that enchantment.

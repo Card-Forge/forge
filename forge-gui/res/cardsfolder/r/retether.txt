@@ -1,7 +1,7 @@
 Name:Retether
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Aura.YouOwn | AttachedTo$ Creature | AILogic$ Pump | SpellDescription$ Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way. (Aura cards that can't enchant a creature on the battlefield remain in your graveyard.)
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Aura.YouOwn | AttachedTo$ Creature | AILogic$ Pump | SpellDescription$ Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way. (Aura cards that can't enchant a creature on the battlefield remain in your graveyard.)
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:NeedsToPlay:Creature.YouCtrl

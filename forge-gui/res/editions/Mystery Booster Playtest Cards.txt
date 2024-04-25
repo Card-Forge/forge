@@ -103,7 +103,7 @@ ScryfallCode=CMB1
 94 R Kaya, Ghost Haunter @Sydney Adams
 95 R Louvaq, the Aberrant @Cynthia Sheppard
 96 R Personal Decoy @Alison Luhrs
-97 R Pick Your Poison @Corey Bowen
+97 R P-Pick Your Poison @Corey Bowen
 98 R Seek Bolas's Counsel @Matt Warren
 99 R Sliv-Mizzet, Hivemind @Jeff Stewart
 100 R Smelt // Herd // Saw @Alli Steele

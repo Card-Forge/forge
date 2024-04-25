@@ -1,6 +1,6 @@
 Name:Cultural Exchange
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ExchangeControlVariant | Cost$ 4 U U | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | Zone$ Battlefield | Type$ Creature | SpellDescription$ Choose any number of creatures target player controls. Choose the same number of creatures another target player controls. Those players exchange control of those creatures. (This effect lasts indefinitely.)
+A:SP$ ExchangeControlVariant | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | Zone$ Battlefield | Type$ Creature | SpellDescription$ Choose any number of creatures target player controls. Choose the same number of creatures another target player controls. Those players exchange control of those creatures. (This effect lasts indefinitely.)
 AI:RemoveDeck:All
 Oracle:Choose any number of creatures target player controls. Choose the same number of creatures another target player controls. Those players exchange control of those creatures. (This effect lasts indefinitely.)

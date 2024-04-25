@@ -1,6 +1,6 @@
 Name:Reckless Spite
 ManaCost:1 B B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | SubAbility$ DBLoseLife | SpellDescription$ Destroy two target nonblack creatures. You lose 5 life.
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creatures | SubAbility$ DBLoseLife | SpellDescription$ Destroy two target nonblack creatures. You lose 5 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5
 Oracle:Destroy two target nonblack creatures. You lose 5 life.

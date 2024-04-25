@@ -1,7 +1,7 @@
 Name:Death Denied
 ManaCost:X B B
 Types:Instant Arcane
-A:SP$ ChangeZone | Cost$ X B B | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return X target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select X target creatures in your graveyard | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return X target creature cards from your graveyard to your hand.
 SVar:X:Count$xPaid
 SVar:MaxTgts:Count$TypeInYourYard.Creature
 Oracle:Return X target creature cards from your graveyard to your hand.

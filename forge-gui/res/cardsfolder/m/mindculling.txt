@@ -1,6 +1,6 @@
 Name:Mindculling
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Discard | Cost$ 5 U | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ You draw two cards and target opponent discards two cards.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ You draw two cards and target opponent discards two cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 Oracle:You draw two cards and target opponent discards two cards.

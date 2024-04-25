@@ -1,6 +1,6 @@
 Name:Mystic Meditation
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard a creature card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard a creature card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Creature
 Oracle:Draw three cards. Then discard two cards unless you discard a creature card.

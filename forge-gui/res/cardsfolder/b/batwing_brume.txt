@@ -1,7 +1,7 @@
 Name:Batwing Brume
 ManaCost:1 WB
 Types:Instant
-A:SP$ Fog | Cost$ 1 WB | ConditionManaSpent$ W | SubAbility$ BatwingRepeat | SpellDescription$ Prevent all combat damage that would be dealt this turn if {W} was spent to cast this spell. Each player loses 1 life for each attacking creature they control if {B} was spent to cast this spell. (Do both if {W}{B} was spent.) | StackDescription$ SpellDescription
+A:SP$ Fog | ConditionManaSpent$ W | SubAbility$ BatwingRepeat | SpellDescription$ Prevent all combat damage that would be dealt this turn if {W} was spent to cast this spell. Each player loses 1 life for each attacking creature they control if {B} was spent to cast this spell. (Do both if {W}{B} was spent.) | StackDescription$ SpellDescription
 SVar:BatwingRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ BatwingLoseLife
 SVar:BatwingLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Remembered | ConditionManaSpent$ B
 SVar:X:PlayerCountRemembered$Valid Creature.YouCtrl+attacking

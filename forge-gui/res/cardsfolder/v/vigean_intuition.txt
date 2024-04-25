@@ -1,7 +1,7 @@
 Name:Vigean Intuition
 ManaCost:3 G U
 Types:Instant
-A:SP$ ChooseType | Cost$ 3 G U | Defined$ You | Type$ Card | SubAbility$ DBDig | SpellDescription$ Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+A:SP$ ChooseType | Defined$ You | Type$ Card | SubAbility$ DBDig | SpellDescription$ Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
 SVar:DBDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Graveyard
 AI:RemoveDeck:All
 Oracle:Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)

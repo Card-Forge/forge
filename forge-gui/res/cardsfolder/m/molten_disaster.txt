@@ -3,6 +3,6 @@ ManaCost:X R R
 Types:Sorcery
 K:Kicker:R
 S:Mode$ Continuous | EffectZone$ All | IsPresent$ Card.Self+kicked | PresentZone$ Stack | CharacteristicDefining$ True | AddKeyword$ Split second | Description$ If this spell was kicked, it has split second. (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
 SVar:X:Count$xPaid
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nIf this spell was kicked, it has split second. (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nMolten Disaster deals X damage to each creature without flying and each player.

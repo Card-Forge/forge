@@ -1,7 +1,7 @@
 Name:Settle Beyond Reality
 ManaCost:4 W
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBFlicker
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBFlicker
 SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SpellDescription$ Exile target creature you don't control.
 SVar:DBFlicker:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control. | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return it to the battlefield under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup

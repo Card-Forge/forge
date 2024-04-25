@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Outlaws of Thunder Junction #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/04/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all possible blocking decisions.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Gold Rush;Akul the Unrepentant;Trick Shot;Vein Ripper
+p0battlefield=Vihaan, Goldwaker;Luxurious Locomotive;T:r_1_1_mercenary_tappump;T:r_1_1_mercenary_tappump;T:c_a_treasure_sac;T:c_a_treasure_sac;Swamp;Swamp;Mountain;Mountain
+p1life=18
+p1battlefield=Archangel of Tithes

@@ -1,5 +1,5 @@
 Name:Nature's Chant
 ManaCost:1 GW
 Types:Instant
-A:SP$ Destroy | Cost$ 1 GW | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Destroy target artifact or enchantment.

@@ -1,7 +1,7 @@
 Name:Flurry of Wings
 ManaCost:G W U
 Types:Instant
-A:SP$ Token | Cost$ G W U | TokenAmount$ X | TokenScript$ w_1_1_bird_soldier_flying | TokenOwner$ You | SpellDescription$ Create X 1/1 white Bird Soldier creature tokens with flying, where X is the number of attacking creatures.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_bird_soldier_flying | TokenOwner$ You | SpellDescription$ Create X 1/1 white Bird Soldier creature tokens with flying, where X is the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 AI:RemoveDeck:All
 Oracle:Create X 1/1 white Bird Soldier creature tokens with flying, where X is the number of attacking creatures.

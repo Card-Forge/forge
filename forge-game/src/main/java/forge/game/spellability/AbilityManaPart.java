@@ -32,10 +32,12 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -82,14 +84,10 @@ public class AbilityManaPart implements java.io.Serializable {
 
     // Spells paid with this mana spell can't be countered.
 
-
     /**
      * <p>
      * Dev Mode Constructor for AbilityMana.
      * </p>
-     *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      */
     public AbilityManaPart(final SpellAbility sourceSA, final Map<String, String> params) {
         this(sourceSA.getHostCard(), params);
@@ -108,6 +106,20 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
+    }
+
+    public AbilityManaPart(final Card newSource, AbilityManaPart oldMana) {
+        this.sourceCard = newSource;
+        this.origProduced = oldMana.origProduced;
+        this.manaRestrictions = oldMana.manaRestrictions;
+        this.cannotCounterSpell = oldMana.cannotCounterSpell;
+        this.addsKeywords = oldMana.addsKeywords;
+        this.addsKeywordsType = oldMana.addsKeywordsType;
+        this.addsKeywordsUntil = oldMana.addsKeywordsUntil;
+        this.addsCounters = oldMana.addsCounters;
+        this.triggersWhenSpent = oldMana.triggersWhenSpent;
+        this.persistentMana = oldMana.persistentMana;
+        // Do we need to copy over last mana produced somehow? Its kinda gross
     }
 
     /**
@@ -379,10 +391,19 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContains")) {
-                if (restriction.endsWith("X") && sa.costHasManaX()) {
+                Game game = sa.getHostCard().getGame();
+                Cost payment = sa.getPayCosts();
+                if (game.getStack().isResolving() && sa.hasParam("UnlessCost")) {
+                    payment = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
+                }
+                if (payment.hasNoManaCost()) {
+                    continue;
+                }
+                // TODO Thassa's Intervention with "twice {X}" is tricky
+                if (restriction.endsWith("X") && payment.getCostMana().getAmountOfX() > 0) {
                     return true;
                 }
-                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
+                if (restriction.endsWith("C") && payment.getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;

@@ -1,6 +1,6 @@
 Name:Open the Vaults
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Artifact,Enchantment | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact,Enchantment | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control.
 AI:RemoveDeck:Random
 Oracle:Return all artifact and enchantment cards from all graveyards to the battlefield under their owners' control. (Auras with nothing to enchant remain in graveyards.)

@@ -1,6 +1,6 @@
 Name:Harrowing Journey
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards and loses 3 life.
+A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards and loses 3 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted
 Oracle:Target player draws three cards and loses 3 life.

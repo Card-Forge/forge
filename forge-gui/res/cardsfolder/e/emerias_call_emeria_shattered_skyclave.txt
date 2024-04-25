@@ -1,7 +1,7 @@
 Name:Emeria's Call
 ManaCost:4 W W W
 Types:Sorcery
-A:SP$ Token | Cost$ 4 W W W | TokenAmount$ 2 | TokenScript$ w_4_4_angel_warrior_flying | SubAbility$ DBPumpAll | SpellDescription$ Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_4_4_angel_warrior_flying | SubAbility$ DBPumpAll | SpellDescription$ Create two 4/4 white Angel Warrior creature tokens with flying. Non-Angel creatures you control gain indestructible until your next turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.nonAngel+YouCtrl | KW$ Indestructible | Duration$ UntilYourNextTurn
 DeckHas:Ability$Token
 AlternateMode:Modal

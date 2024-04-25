@@ -1,7 +1,7 @@
 Name:Steelshaper's Gift
 ManaCost:W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Hand | ChangeType$ Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for an Equipment card, reveal that card, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for an Equipment card, reveal that card, put it into your hand, then shuffle.
 AI:RemoveDeck:Random
 DeckNeeds:Type$Equipment
 Oracle:Search your library for an Equipment card, reveal that card, put it into your hand, then shuffle.

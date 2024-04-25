@@ -1,6 +1,6 @@
 Name:Horrifying Revelation
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target player discards a card, then mills a card.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target player discards a card, then mills a card.
 SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ Targeted
 Oracle:Target player discards a card, then mills a card.

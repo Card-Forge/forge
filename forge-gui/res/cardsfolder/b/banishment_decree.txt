@@ -1,5 +1,5 @@
 Name:Banishment Decree
 ManaCost:3 W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W W | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact, creature, or enchantment on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature,Enchantment | TgtPrompt$ Select target artifact, creature, or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target artifact, creature, or enchantment on top of its owner's library.
 Oracle:Put target artifact, creature, or enchantment on top of its owner's library.

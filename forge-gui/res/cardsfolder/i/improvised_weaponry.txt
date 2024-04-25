@@ -1,7 +1,7 @@
 Name:Improvised Weaponry
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token
 Oracle:Improvised Weaponry deals 2 damage to any target. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

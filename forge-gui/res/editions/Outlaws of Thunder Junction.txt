@@ -4,21 +4,454 @@ Date=2024-04-19
 Name=Outlaws of Thunder Junction
 Type=Expansion
 ScryfallCode=OTJ
+Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 Land, 1 Any, 1 Any OTP, 1 Any+
+ChanceReplaceCommonWith=.20F fromsheet("OTJ outlaw list")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 
 [cards]
+1 R Another Round @Darrell Riche
+2 M Archangel of Tithes @Denys Tsiperko
+3 C Armored Armadillo @Leon Tukker
+4 R Aven Interrupter @Daniel Romanovsky
+5 U Bounding Felidar @Lars Grant-West
+6 U Bovine Intervention @Julia Metzger
+7 C Bridled Bighorn @Edgar Sánchez Hidalgo
+8 R Claim Jumper @Gaboleps
+9 R Dust Animus @Uriah Voth
+10 C Eriette's Lullaby @Anton Solovianchyk
+11 M Final Showdown @Izzy
+12 R Fortune, Loyal Steed @Artur Nakhodkin
+13 U Frontier Seeker @Raluca Marinescu
+14 U Getaway Glamer @Forrest Imel
+15 R High Noon @Eduardo Francisco
+16 C Holy Cow @Justyna Dura
+17 C Inventive Wingsmith @David Astruga
+18 U Lassoed by the Law @Leanna Crossan
+19 C Mystical Tether @Adam Volker
+20 U Nurturing Pixie @Iris Compiet
+21 U Omenport Vigilante @Forrest Imel
+22 R One Last Job @Caroline Gariba
+23 C Outlaw Medic @Nino Vecia
+24 U Prairie Dog @Kevin Sidharta
+25 U Prosperity Tycoon @Caio Monteiro
+26 U Requisition Raid @Viko Menezes
+27 U Rustler Rampage @Josu Hernaiz
+28 U Shepherd of the Clouds @Valera Lutfullina
+29 U Sheriff of Safe Passage @Brian Valeza
+30 C Stagecoach Security @Nino Vecia
+31 C Steer Clear @Edgar Sánchez Hidalgo
+32 C Sterling Keykeeper @David Astruga
+33 C Sterling Supplier @Camille Alquier
+34 C Take Up the Shield @Josiah "Jo" Cameron
+35 U Thunder Lasso @Camille Alquier
+36 C Trained Arynx @Milivoj Ćeran
+37 C Vengeful Townsfolk @Irina Nordsol
+38 C Wanted Griffin @Alexandre Honoré
+39 R Archmage's Newt @Edgar Sánchez Hidalgo
+40 U Canyon Crab @Ignatius Budi
+41 C Daring Thunder-Thief @Inkognit
+42 U Deepmuck Desperado @Loïc Canavaggia
+43 C Djinn of Fool's Fall @Inkognit
+44 M Double Down @Javier Charro
 45 R Duelist of the Mind @Darren Tan
+46 U Emergent Haunting @Jorge Jacinto
+47 C Failed Fording @José Parodi
 48 R Fblthp, Lost on the Range @Brian Valeza
+49 U Fleeting Reflection @Camille Alquier
+50 M Geralf, the Fleshwright @Chris Rahn
+51 C Geyser Drake @Daniel Romanovsky
+52 C Harrier Strix @Brian Valeza
+53 C Jailbreak Scheme @Inkognit
+54 R The Key to the Vault @Leon Tukker
+55 C Loan Shark @Wayne Reynolds
+56 U Marauding Sphinx @Mila Pesic
+57 U Metamorphic Blast @Michal Ivan
+58 U Nimble Brigand @Kim Sokol
+59 U Outlaw Stitcher @Alix Branwyn
+60 C Peerless Ropemaster @Wayne Wu
+61 C Phantom Interference @Ruxing Gao
+62 U Plan the Heist @Fariba Khamseh
+63 C Razzle-Dazzler @Wayne Wu
+64 C Seize the Secrets @Miranda Meeks
+65 U Shackle Slinger @Josh Hass
+66 U Shifting Grift @Marzena Nereida Piwowar
+67 U Slickshot Lockpicker @Wei Wei
+68 C Slickshot Vault-Buster @Julia Metzger
+69 C Spring Splasher @Loïc Canavaggia
+70 R Step Between Worlds @Chris Ostrowski
+71 R Stoic Sphinx @Andreas Zafiratos
+72 C Stop Cold @David Astruga
+73 C Take the Fall @Eduardo Francisco
+74 U This Town Ain't Big Enough @Andrew Mar
+75 R Three Steps Ahead @Francisco Miyara
+76 U Visage Bandit @Miranda Meeks
+77 C Ambush Gigapede @Kekai Kotaki
+78 U Binding Negotiation @Caroline Gariba
+79 C Blacksnag Buzzard @Michele Giorgi
+80 U Blood Hustler @Anna Pavleeva
+81 C Boneyard Desecrator @Maxime Minard
+82 R Caustic Bronco @Brent Hollowell
+83 C Consuming Ashes @Campbell White
+84 C Corrupted Conviction @Inkognit
+85 C Desert's Due @David Palumbo
+86 C Desperate Bloodseeker @Camille Alquier
+87 C Fake Your Own Death @Monztre
+88 U Forsaken Miner @Andrey Kuzinskiy
+89 M Gisa, the Hellraiser @Chris Rahn
+90 U Hollow Marauder @Wero Gallo
+91 R Insatiable Avarice @Scott Murphy
+92 R Kaervek, the Punisher @Cristi Balanescu
+93 U Lively Dirge @Warren Mahy
+94 C Mourner's Surprise @Zuzanna Wużyk
+95 U Neutralize the Guards @Marzena Nereida Piwowar
+96 C Nezumi Linkbreaker @Miro Petrov
+97 C Overzealous Muscle @Sam White
+98 R Pitiless Carnage @Richard Kane Ferguson
+99 U Rakish Crew @Ilse Gort
+100 U Rattleback Apothecary @Loïc Canavaggia
+101 C Raven of Fell Omens @Justin Cornell
+102 U Rictus Robber @Caio Monteiro
+103 C Rooftop Assassin @Josu Hernaiz
+104 R Rush of Dread @Chris Seaman
+105 U Servant of the Stinger @Steven Russell Black
+106 U Shoot the Sheriff @Fariba Khamseh
+107 C Skulduggery @Miro Petrov
+108 R Tinybones Joins Up @Wylie Beckert
 109 M Tinybones, the Pickpocket @Ekaterina Burmak
+110 U Treasure Dredger @Marzena Nereida Piwowar
+111 U Unfortunate Accident @Josiah "Jo" Cameron
+112 U Unscrupulous Contractor @Mila Pesic
+113 R Vadmir, New Blood @Andreas Zafiratos
+114 C Vault Plunderer @Evyn Fong
+115 U Brimstone Roundup @Milivoj Ćeran
+116 R Calamity, Galloping Inferno @Artur Nakhodkin
+117 U Caught in the Crossfire @Xabi Gaztelua
+118 U Cunning Coyote @David Auden Nash
+119 C Deadeye Duelist @Diana Cearley
+120 U Demonic Ruckus @Andrew Mar
+121 C Discerning Peddler @Josu Hernaiz
+122 C Explosive Derailment @Leon Tukker
+123 U Ferocification @Mila Pesic
+124 U Gila Courser @Brent Hollowell
+125 R Great Train Heist @Campbell White
 126 R Hell to Pay @Liiga Smilshkalne
+127 U Hellspur Brute @Caio Monteiro
+128 R Hellspur Posse Boss @Artur Nakhodkin
+129 C Highway Robbery @Scott Murphy
+130 C Irascible Wolverine @Darrell Riche
+131 C Iron-Fist Pulverizer @Xabi Gaztelua
+132 U Longhorn Sharpshooter @Diego Gisbert
+133 R Magda, the Hoardmaster @Diego Gisbert
+134 U Magebane Lizard @Camille Alquier
+135 C Mine Raider @Warren Mahy
+136 C Outlaws' Fury @Diego Gisbert
+137 C Prickly Pair @Brian Valeza
+138 C Quick Draw @Lie Setiawan
+139 C Quilled Charger @Diego Gisbert
+140 C Reckless Lackey @Edgar Sánchez Hidalgo
+141 U Resilient Roadrunner @David Auden Nash
+142 U Return the Favor @Eli Minaya
+143 C Rodeo Pyromancers @Kim Sokol
+144 U Scalestorm Summoner @Xabi Gaztelua
+145 U Scorching Shot @Caio Monteiro
+146 R Slickshot Show-Off @Augusto Quirino
+147 R Stingerback Terror @Slawomir Maniak
+148 U Take for a Ride @Artur Treffner
+149 M Terror of the Peaks @Joshua Raphael
+150 C Thunder Salvo @Johann Bodin
+151 C Trick Shot @Brian Valeza
+152 U Aloe Alchemist @Borja Pindado
+153 C Ankle Biter @Monztre
+154 U Beastbond Outcaster @Viko Menezes
+155 U Betrayal at the Vault @Andreas Zafiratos
+156 C Bristlepack Sentry @Josiah "Jo" Cameron
+157 M Bristly Bill, Spine Sower @Daniel Zrom
+158 C Cactarantula @Filip Burburan
+159 R Colossal Rattlewurm @Filip Burburan
+160 C Dance of the Tumbleweeds @Dan Murayama Scott
+161 C Drover Grizzly @Adrián Rodríguez Pérez
+162 C Freestrider Commando @Adrián Rodríguez Pérez
+163 R Freestrider Lookout @Matt Zeilinger
+164 U Full Steam Ahead @Inkognit
+165 C Giant Beaver @Lars Grant-West
+166 U Gold Rush @Eric Wilkerson
+167 M Goldvein Hydra @David Auden Nash
+168 C Hardbristle Bandit @Francis Tneh
+169 U Intrepid Stablemaster @Svetlin Velinov
+170 U Map the Frontier @Darrell Riche
+171 R Ornery Tumblewagg @Izzy
+172 U Outcaster Greenblade @Josu Hernaiz
+173 R Outcaster Trailblazer @Denys Tsiperko
+174 C Patient Naturalist @Inka Schulz
+175 M Railway Brawler @Kevin Sidharta
+176 U Rambling Possum @Adrián Rodríguez Pérez
+177 U Raucous Entertainer @Forrest Imel
+178 C Reach for the Sky @Villarrte
+179 U Rise of the Varmints @Ralph Horsley
+180 R Smuggler's Surprise @Jonas De Ro
+181 C Snakeskin Veil @Dan Murayama Scott
+182 U Spinewoods Armadillo @Iris Compiet
+183 C Spinewoods Paladin @Kai Carpenter
+184 U Stubborn Burrowfiend @Ângelo Bortolini
+185 C Throw from the Saddle @Eilene Cherie
+186 U Trash the Town @David Auden Nash
+187 C Tumbleweed Rising @Jason Smith
+188 C Voracious Varmint @Adrián Rodríguez Pérez
+189 R Akul the Unrepentant @Kekai Kotaki
+190 M Annie Flash, the Veteran @Kieran Yanner
+191 R Annie Joins Up @Wylie Beckert
+192 M Assimilation Aegis @Matt Stewart
+193 U At Knifepoint @Francisco Miyara
+194 U Badlands Revival @Carlos Palma Cruchaga
+195 U Baron Bertram Graywater @Johan Grenier
+196 R Bonny Pall, Clearcutter @Bryan Sola
+197 R Breeches, the Blastmaker @Dmitry Burmak
+198 R Bruse Tarl, Roving Rancher @Forrest Imel
+199 U Cactusfolk Sureshot @Artur Nakhodkin
+200 U Congregation Gryff @Joseph Meehan
+201 U Doc Aurlock, Grizzled Genius @Jesper Ejsing
+202 R Eriette, the Beguiler @Chris Rallis
+203 U Ertha Jo, Frontier Mentor @Michal Ivan
+204 U Form a Posse @J.Lonnee
+205 M Ghired, Mirror of the Wilds @Diego Gisbert
+206 M The Gitrog, Ravenous Ride @Johan Grenier
+207 U Honest Rutstein @Javier Charro
+208 U Intimidation Campaign @Svetlin Velinov
+209 U Jem Lightfoote, Sky Explorer @Darren Tan
+210 U Jolene, Plundering Pugilist @Andreas Zafiratos
+211 R Kambal, Profiteering Mayor @Andreas Zafiratos
+212 R Kellan Joins Up @Wylie Beckert
+213 M Kellan, the Kid @Magali Villeneuve
+214 U Kraum, Violent Cacophony @Artur Nakhodkin
+215 R Laughing Jasper Flint @Francis Tneh
+216 U Lazav, Familiar Stranger @Tyler Jacobson
+217 R Lilah, Undefeated Slickshot @Andreas Zafiratos
+218 U Make Your Own Luck @Chris Seaman
+219 R Malcolm, the Eyes @Dmitry Burmak
+220 R Marchesa, Dealer of Death @Ryan Pancoast
+221 U Miriam, Herd Whisperer @Viko Menezes
+222 R Obeka, Splitter of Seconds @Ryan Pancoast
 223 M Oko, the Ringleader @Magali Villeneuve
+224 R Pillage the Bog @Forrest Imel
+225 R Rakdos Joins Up @Wylie Beckert
+226 M Rakdos, the Muscle @Victor Maury
+227 R Riku of Many Paths @Denys Tsiperko
+228 R Roxanne, Starfall Savant @Ina Wong
+229 U Ruthless Lawbringer @Joshua Raphael
+230 R Satoru, the Infiltrator @Heonhwa Choe
+231 M Selvala, Eager Trailblazer @Viko Menezes
+232 R Seraphic Steed @Jonas De Ro
+233 U Slick Sequence @Fajareka Setiawan
+234 R Taii Wakeen, Perfect Shot @David Auden Nash
+235 U Vial Smasher, Gleeful Grenadier @Borja Pindado
+236 R Vraska Joins Up @Wylie Beckert
+237 M Vraska, the Silencer @Kieran Yanner
+238 U Wrangler of the Damned @Michal Ivan
+239 R Wylie Duke, Atiin Hero @Ekaterina Burmak
+240 U Bandit's Haul @Monztre
+241 U Boom Box @Caio Monteiro
+242 C Gold Pan @Gaboleps
+243 U Lavaspur Boots @Mila Pesic
+244 U Luxurious Locomotive @Leon Tukker
+245 U Mobile Homestead @Artur Nakhodkin
+246 C Oasis Gardener @Kristina Carroll
+247 U Redrock Sentinel @Milivoj Ćeran
+248 C Silver Deputy @Artur Nakhodkin
+249 C Sterling Hound @Leon Tukker
+250 U Tomb Trawler @Anton Solovianchyk
+251 C Abraded Bluffs @Piotr Dura
+252 U Arid Archway @Raymond Bonilla
+253 C Bristling Backwoods @Viko Menezes
+254 C Conduit Pylons @Raymond Bonilla
+255 C Creosote Heath @Leon Tukker
+256 C Eroded Canyon @Piotr Dura
+257 C Festering Gulch @Daniel Romanovsky
+258 C Forlorn Flats @Robin Olausson
+259 C Jagged Barrens @Leonardo Borazio
+260 C Lonely Arroyo @Josu Hernaiz
+261 C Lush Oasis @Piotr Dura
+262 C Mirage Mesa @Andrew Mar
+263 U Sandstorm Verge @Jorge Jacinto
+264 C Soured Springs @Leonardo Borazio
+265 U Bucolic Ranch @Leonardo Borazio
+266 R Blooming Marsh @Yeong-Hao Han
+267 R Botanical Sanctum @Jorge Jacinto
+268 R Concealed Courtyard @Rockey Chen
+269 R Inspiring Vantage @Volkan Baǵa
+270 R Spirebluff Canal @Ron Spears
+271 M Jace Reawakened @Cristi Balanescu
 272 L Plains @Salvatorre Zee Yazzie
 273 L Island @Salvatorre Zee Yazzie
 274 L Swamp @Salvatorre Zee Yazzie
 275 L Mountain @Salvatorre Zee Yazzie
 276 L Forest @Salvatorre Zee Yazzie
+277 L Plains @Sergey Glushakov
+278 L Plains @Adam Paquette
+279 L Island @Sergey Glushakov
+280 L Island @Adam Paquette
+281 L Swamp @Sergey Glushakov
+282 L Swamp @Adam Paquette
+283 L Mountain @Sergey Glushakov
+284 L Mountain @Adam Paquette
+285 L Forest @Sergey Glushakov
+286 L Forest @Adam Paquette
+
+[showcase]
+287 M Geralf, the Fleshwright @Pedro Potier
+288 M Gisa, the Hellraiser @Greg Staples
+289 R Kaervek, the Punisher @Pedro Potier
 290 M Tinybones, the Pickpocket @Michael Walsh
+291 M Annie Flash, the Veteran @Justine Mara Andersen
+292 R Breeches, the Blastmaker @Michael Walsh
+293 R Eriette, the Beguiler @Dibujante Nocturno
+294 M Kellan, the Kid @Benjamin Ee
+295 R Malcolm, the Eyes @Michael Walsh
 296 M Oko, the Ringleader @Dibujante Nocturno
+297 M Rakdos, the Muscle @Greg Staples
+298 R Satoru, the Infiltrator @Denis Medri
+299 M Vraska, the Silencer @Jarel Threat
+
+[borderless]
+300 R Blooming Marsh @Piotr Dura
+301 R Botanical Sanctum @Piotr Dura
+302 R Concealed Courtyard @Piotr Dura
+303 R Inspiring Vantage @Piotr Dura
+304 R Spirebluff Canal @Piotr Dura
 305 M Oko, the Ringleader @Lie Setiawan
+306 M Jace Reawakened @Chris Rallis
+
+[extended art]
+307 R Another Round @Darrell Riche
+308 M Archangel of Tithes @Denys Tsiperko
+309 R Aven Interrupter @Daniel Romanovsky
+310 R Claim Jumper @Gaboleps
+311 R Dust Animus @Uriah Voth
+312 M Final Showdown @Izzy
+313 R Fortune, Loyal Steed @Artur Nakhodkin
+314 R High Noon @Eduardo Francisco
+315 R One Last Job @Caroline Gariba
+316 R Archmage's Newt @Edgar Sánchez Hidalgo
+317 M Double Down @Javier Charro
 318 R Duelist of the Mind @Darren Tan
 319 R Fblthp, Lost on the Range @Brian Valeza
+320 R The Key to the Vault @Leon Tukker
+321 R Step Between Worlds @Chris Ostrowski
+322 R Stoic Sphinx @Andreas Zafiratos
+323 R Three Steps Ahead @Francisco Miyara
+324 R Caustic Bronco @Brent Hollowell
+325 R Insatiable Avarice @Scott Murphy
+326 R Pitiless Carnage @Richard Kane Ferguson
+327 R Rush of Dread @Chris Seaman
+328 R Tinybones Joins Up @Wylie Beckert
+329 R Vadmir, New Blood @Andreas Zafiratos
+330 R Calamity, Galloping Inferno @Artur Nakhodkin
+331 R Great Train Heist @Campbell White
 332 R Hell to Pay @Liiga Smilshkalne
+333 R Hellspur Posse Boss @Artur Nakhodkin
+334 R Magda, the Hoardmaster @Diego Gisbert
+335 R Slickshot Show-Off @Augusto Quirino
+336 R Stingerback Terror @Slawomir Maniak
+337 M Terror of the Peaks @Joshua Raphael
+338 M Bristly Bill, Spine Sower @Daniel Zrom
+339 R Colossal Rattlewurm @Filip Burburan
+340 R Freestrider Lookout @Matt Zeilinger
+341 M Goldvein Hydra @David Auden Nash
+342 R Ornery Tumblewagg @Izzy
+343 R Outcaster Trailblazer @Denys Tsiperko
+344 M Railway Brawler @Kevin Sidharta
+345 R Smuggler's Surprise @Jonas De Ro
+346 R Akul the Unrepentant @Kekai Kotaki
+347 R Annie Joins Up @Wylie Beckert
+348 M Assimilation Aegis @Matt Stewart
+349 R Bonny Pall, Clearcutter @Bryan Sola
+350 R Bruse Tarl, Roving Rancher @Forrest Imel
+351 M Ghired, Mirror of the Wilds @Diego Gisbert
+352 M The Gitrog, Ravenous Ride @Johan Grenier
+353 R Kambal, Profiteering Mayor @Andreas Zafiratos
+354 R Kellan Joins Up @Wylie Beckert
+355 R Laughing Jasper Flint @Francis Tneh
+356 R Lilah, Undefeated Slickshot @Andreas Zafiratos
+357 R Marchesa, Dealer of Death @Ryan Pancoast
+358 R Obeka, Splitter of Seconds @Ryan Pancoast
+359 R Pillage the Bog @Forrest Imel
+360 R Rakdos Joins Up @Wylie Beckert
+361 R Riku of Many Paths @Denys Tsiperko
+362 R Roxanne, Starfall Savant @Ina Wong
+363 M Selvala, Eager Trailblazer @Viko Menezes
+364 R Seraphic Steed @Jonas De Ro
+365 R Taii Wakeen, Perfect Shot @David Auden Nash
+366 R Vraska Joins Up @Wylie Beckert
+367 R Wylie Duke, Atiin Hero @Ekaterina Burmak
+
+[promo]
+368 U Frontier Seeker @Raluca Marinescu
+369 U Scorching Shot @Caio Monteiro
+370 U Honest Rutstein @Javier Charro
+371 U Make Your Own Luck @Chris Seaman
+372 U Ruthless Lawbringer @Joshua Raphael
+373 R The Key to the Vault @Eli Minaya
+
+[buy a box]
+374 R Magda, the Hoardmaster @Loïc Canavaggia
+
+[outlaw list]
+1 Stoneforge Mystic|SPG
+1 Brazen Borrower|SPG
+1 Desertion|SPG
+1 Morbid Opportunist|SPG
+1 Port Razer|SPG
+1 Scapeshift|SPG
+1 Mystic Snake|SPG
+1 Notion Thief|SPG
+1 Desert|SPG
+1 Prismatic Vista|SPG
+1 Collector's Cage|BIG
+1 Grand Abolisher|BIG
+1 Oltec Matterweaver|BIG
+1 Rest in Peace|BIG
+1 Esoteric Duplicator|BIG
+1 Simulacrum Synthesizer|BIG
+1 Worldwalker Helm|BIG
+1 Greed's Gambit|BIG
+1 Harvester of Misery|BIG
+1 Hostile Investigator|BIG
+1 Generous Plunderer|BIG
+1 Legion Extruder|BIG
+1 Memory Vessel|BIG
+1 Molten Duplication|BIG
+1 Territory Forge|BIG
+1 Ancient Cornucopia|BIG
+1 Bristlebud Farmer|BIG
+1 Omenpath Journey|BIG
+1 Sandstorm Salvager|BIG
+1 Vaultborn Tyrant|BIG
+1 Loot, the Key to Everything|BIG
+1 Pest Control|BIG
+1 Lost Jitte|BIG
+1 Lotus Ring|BIG
+1 Nexus of Becoming|BIG
+1 Sword of Wealth and Power|BIG
+1 Torpor Orb|BIG
+1 Transmutation Font|BIG
+1 Fomori Vault|BIG
+1 Tarnation Vista|BIG
+
+[tokens]
+b_1_1_vampire_rogue_lifelink
+beau
+c_a_clue_draw
+c_a_treasure_sac
+g_2_1_varmint
+g_3_3_elk
+g_x_x_elemental
+meteorite
+r_1_1_mercenary_tappump
+r_3_1_dinosaur
+r_4_4_scorpion_dragon_flying_haste
+u_1_1_bird_flying
+ub_2_2_zombie_rogue
+w_1_1_sheep
+w_2_2_ox
+w_2_2_spirit_flying
+w_3_3_angel_flying

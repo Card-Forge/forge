@@ -1,7 +1,7 @@
 Name:Flood of Tears
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way, you may put a permanent card from your hand onto the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way, you may put a permanent card from your hand onto the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.YouCtrl | Optional$ True | ChangeNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Permanent.nonToken+YouCtrl | ConditionCompare$ GE4 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Return all nonland permanents to their owners' hands. If you return four or more nontoken permanents you control this way, you may put a permanent card from your hand onto the battlefield.

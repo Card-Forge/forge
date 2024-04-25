@@ -1,0 +1,8 @@
+Name:Game Plan
+ManaCost:5 U
+Types:Sorcery
+K:Assist
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | UseAllOriginZones$ True | SubAbility$ DBDraw | AILogic$ Timetwister | SpellDescription$ Each player shuffles their hand and graveyard into their library, then draws seven cards. Exile CARDNAME.
+SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Assist (Another player can pay up to {5} of this spell's cost.)\nEach player shuffles their hand and graveyard into their library, then draws seven cards. Exile Game Plan.

@@ -2,6 +2,6 @@ Name:Covenant of Blood
 ManaCost:6 B
 Types:Sorcery
 K:Convoke
-A:SP$ DealDamage | Cost$ 6 B | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to any target and you gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCovenant of Blood deals 4 damage to any target and you gain 4 life.

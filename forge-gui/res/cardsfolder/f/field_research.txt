@@ -2,6 +2,6 @@ Name:Field Research
 ManaCost:2 U
 Types:Sorcery
 K:Kicker:2 U
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | SpellDescription$ Draw two cards. If this spell was kicked, draw three cards instead.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw two cards. If this spell was kicked, draw three cards instead.
 SVar:X:Count$Kicked.3.2
 Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nDraw two cards. If this spell was kicked, draw three cards instead.

@@ -84,7 +84,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
             sb.append(" until end of turn.");
         }
 
-
         return sb.toString();
     }
 
@@ -210,6 +209,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
                     source.addStaticCommandList(new Object[]{leftVar, rightVar, tgtC, loseControl});
+                }
+                if (lose.contains("UntilSourceUnattached")) {
+                    Card attachment = (Card) sa.getTriggeringObject(AbilityKey.Source);
+                    attachment.addLeavesPlayCommand(loseControl);
+                    attachment.addPhaseOutCommand(loseControl);
+                    attachment.addUnattachCommand(loseControl);
                 }
                 if (lose.contains("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {

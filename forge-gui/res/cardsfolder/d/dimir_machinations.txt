@@ -1,7 +1,7 @@
 Name:Dimir Machinations
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 B | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | AnyNumber$ True | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.
+A:SP$ Dig | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | AnyNumber$ True | DestinationZone$ Exile | LibraryPosition2$ 0 | SpellDescription$ Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.
 K:Transmute:1 B B
 AI:RemoveDeck:All
 Oracle:Look at the top three cards of target player's library. Exile any number of those cards, then put the rest back in any order.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

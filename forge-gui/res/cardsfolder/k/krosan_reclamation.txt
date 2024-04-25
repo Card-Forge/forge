@@ -2,7 +2,7 @@ Name:Krosan Reclamation
 ManaCost:1 G
 Types:Instant
 K:Flashback:1 G
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to two target cards from their graveyard into their library.
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Target player shuffles up to two target cards from their graveyard into their library.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | Shuffle$ True | TgtPrompt$ Choose target card | ValidTgts$ Card
 AI:RemoveDeck:All
 Oracle:Target player shuffles up to two target cards from their graveyard into their library.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

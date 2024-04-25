@@ -1,7 +1,7 @@
 Name:Hurl Through Hell
 ManaCost:2 B R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ You may cast the exiled card and you may spend mana as though it were mana of any color to cast that spell.

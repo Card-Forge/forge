@@ -1,5 +1,5 @@
 Name:Infest
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 Oracle:All creatures get -2/-2 until end of turn.

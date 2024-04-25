@@ -1,6 +1,6 @@
 Name:Savage Smash
 ManaCost:1 R G
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R G | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature you control gets +2/+2 until end of turn. It fights target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select target creature you control | SubAbility$ DBFight | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature you control gets +2/+2 until end of turn. It fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control
 Oracle:Target creature you control gets +2/+2 until end of turn. It fights target creature you don't control. (Each deals damage equal to its power to the other.)

@@ -1,6 +1,6 @@
 Name:Mental Journey
 ManaCost:4 U U
 Types:Instant
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 K:TypeCycling:Basic:1 U
 Oracle:Draw three cards.\nBasic landcycling {1}{U} ({1}{U}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

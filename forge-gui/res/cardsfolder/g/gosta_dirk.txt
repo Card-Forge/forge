@@ -2,6 +2,6 @@ Name:Gosta Dirk
 ManaCost:3 W W U U
 Types:Legendary Creature Human Warrior
 PT:4/4
-S:Mode$ Continuous | Affected$ Creature.withIslandwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Islandwalk. | Description$ Creatures with islandwalk can be blocked as though they didn't have islandwalk.
+S:Mode$ IgnoreLandWalk | ValidKeyword$ Landwalk:Island | Description$ Creatures with islandwalk can be blocked as though they didn't have islandwalk.
 K:First Strike
 Oracle:First strike\nCreatures with islandwalk can be blocked as though they didn't have islandwalk.

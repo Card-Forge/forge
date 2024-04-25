@@ -1,7 +1,7 @@
 Name:Blasphemous Act
 ManaCost:8 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 8 R | NumDmg$ 13 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 13 damage to each creature.
+A:SP$ DamageAll | NumDmg$ 13 | ValidCards$ Creature | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals 13 damage to each creature.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each creature on the battlefield.
 SVar:X:Count$Valid Creature
 Oracle:This spell costs {1} less to cast for each creature on the battlefield.\nBlasphemous Act deals 13 damage to each creature.

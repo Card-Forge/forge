@@ -1,6 +1,6 @@
 Name:Tragic Fall
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn. Hellbent — That creature gets -13/-13 until end of turn instead if you have no cards in hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn. Hellbent — That creature gets -13/-13 until end of turn instead if you have no cards in hand.
 SVar:X:Count$Hellbent.13.3
 Oracle:Target creature gets -3/-3 until end of turn.\nHellbent — That creature gets -13/-13 until end of turn instead if you have no cards in hand.

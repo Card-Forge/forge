@@ -1,6 +1,6 @@
 Name:Rolling Earthquake
 ManaCost:X R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutHorsemanship | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without horsemanship and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withoutHorsemanship | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without horsemanship and each player.
 SVar:X:Count$xPaid
 Oracle:Rolling Earthquake deals X damage to each creature without horsemanship and each player.

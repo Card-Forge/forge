@@ -1,7 +1,7 @@
 Name:Creeping Chill
 ManaCost:3 B
 Types:Sorcery
-A:SP$ DamageAll | StackDescription$ CARDNAME deals 3 damage to each opponent and | Cost$ 3 B | ValidPlayers$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to each opponent and you gain 3 life.
+A:SP$ DamageAll | ValidPlayers$ Player.Opponent | StackDescription$ CARDNAME deals 3 damage to each opponent and | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to each opponent and you gain 3 life.
 T:Mode$ ChangesZone | Origin$ Library | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME is put into your graveyard from your library, you may exile it. If you do, CARDNAME deals 3 damage to each opponent and you gain 3 life.
 SVar:TrigExile:AB$ DealDamage | Cost$ ExileAnyGrave<1/Card.TriggeredCard> | Defined$ Player.Opponent | NumDmg$ 3 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3

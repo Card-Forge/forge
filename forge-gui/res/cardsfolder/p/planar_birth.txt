@@ -1,6 +1,6 @@
 Name:Planar Birth
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 1 W | ChangeType$ Land.Basic | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.
+A:SP$ ChangeZoneAll | ChangeType$ Land.Basic | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.
 AI:RemoveDeck:Random
 Oracle:Return all basic land cards from all graveyards to the battlefield tapped under their owners' control.

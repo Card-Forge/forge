@@ -1,7 +1,7 @@
 Name:Startled Awake
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Mill | Cost$ 2 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
+A:SP$ Mill | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
 A:AB$ ChangeZone | Cost$ 3 U U | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard onto the battlefield transformed. Activate only any time you could cast a sorcery.
 AlternateMode:DoubleFaced
 Oracle:Target opponent mills thirteen cards.\n{3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate only as a sorcery.

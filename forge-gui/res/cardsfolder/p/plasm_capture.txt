@@ -1,7 +1,7 @@
 Name:Plasm Capture
 ManaCost:G G U U
 Types:Instant
-A:SP$ Counter | Cost$ G G U U | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBDelTrig | SpellDescription$ Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value.
+A:SP$ Counter | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBDelTrig | SpellDescription$ Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | Execute$ AddMana | TriggerDescription$ At the beginning of your next precombat main phase, add X mana in any combination of colors, where X is that spell's mana value. | RememberNumber$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AddMana:DB$ Mana | Produced$ Combo Any | Amount$ X

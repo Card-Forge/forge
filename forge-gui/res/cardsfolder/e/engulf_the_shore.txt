@@ -1,6 +1,6 @@
 Name:Engulf the Shore
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 U | ChangeType$ Creature.toughnessLEX | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.toughnessLEX | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 Oracle:Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control.

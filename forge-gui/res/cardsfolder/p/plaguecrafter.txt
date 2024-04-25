@@ -2,10 +2,8 @@ Name:Plaguecrafter
 ManaCost:2 B
 Types:Creature Human Shaman
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBRepeat | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature or planeswalker. Each player who can't discards a card.
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseSac | SubAbility$ TrigSac
-SVar:ChooseSac:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl,Planeswalker.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature or planeswalker to sacrifice | AILogic$ WorstCard | Mandatory$ True | RememberChosen$ True
-SVar:TrigSac:DB$ SacrificeAll | Defined$ Remembered | SubAbility$ Discard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices a creature or planeswalker. Each player who can't discards a card.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature,Planeswalker | RememberSacrificed$ True | SubAbility$ Discard
 SVar:Discard:DB$ Discard | Mode$ TgtChoose | NumCards$ 1 | Defined$ NonRememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlay:Creature.OppCtrl,Planeswalker.OppCtrl

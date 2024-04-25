@@ -87,7 +87,6 @@ public class ComputerUtil {
         return handlePlayingSpellAbility(ai, sa, game, null);
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
-        game.getStack().freezeStack();
         final Card source = sa.getHostCard();
         source.setSplitStateToPlayAbility(sa);
 
@@ -124,14 +123,16 @@ public class ComputerUtil {
                 return false;
             }
         }
-
+        // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
         // Remember the now-forgotten kicker cost? Why is this needed?
         sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
+        game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
+            // Is this fork even used for anything anymore?
             if (ComputerUtilMana.payManaCost(ai, sa, false)) {
                 game.getStack().addAndUnfreeze(sa);
                 return true;
@@ -790,11 +791,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        if (sa.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
-
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, sa.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -816,7 +813,7 @@ public class ComputerUtil {
                 tapList.clear();
             }
             tapList.add(next);
-            totalPower = CardLists.getTotalPower(tapList, true, sa.hasParam("Crew"));
+            totalPower = CardLists.getTotalPower(tapList, true, sa.isCrew());
             if (totalPower >= amount) {
                 break;
             }

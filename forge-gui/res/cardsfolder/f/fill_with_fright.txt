@@ -1,6 +1,6 @@
 Name:Fill with Fright
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | TgtPrompt$ Select a player | Mode$ TgtChoose | NumCards$ 2 | SubAbility$ DBScry | SpellDescription$ Target player discards two cards.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | Mode$ TgtChoose | NumCards$ 2 | SubAbility$ DBScry | SpellDescription$ Target player discards two cards.
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2.
 Oracle:Target player discards two cards. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

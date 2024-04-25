@@ -1,6 +1,6 @@
 Name:Hammer of Bogardan
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 A:AB$ ChangeZone | Cost$ 2 R R R | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only during your upkeep.
 Oracle:Hammer of Bogardan deals 3 damage to any target.\n{2}{R}{R}{R}: Return Hammer of Bogardan from your graveyard to your hand. Activate only during your upkeep.

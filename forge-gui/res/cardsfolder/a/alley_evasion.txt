@@ -1,7 +1,7 @@
 Name:Alley Evasion
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ DBPump,DBChangeZone
+A:SP$ Charm | Choices$ DBPump,DBChangeZone
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +2 | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +1/+2 until end of turn.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you control to its owner's hand.
 Oracle:Choose one —\n• Target creature you control gets +1/+2 until end of turn.\n• Return target creature you control to its owner's hand.

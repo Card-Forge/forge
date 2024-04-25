@@ -1,7 +1,7 @@
 Name:Spell Swindle
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X Treasure tokens, where X is that spell's mana value.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X Treasure tokens, where X is that spell's mana value.
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

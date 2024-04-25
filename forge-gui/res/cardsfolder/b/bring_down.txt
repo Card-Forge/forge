@@ -1,0 +1,6 @@
+Name:Bring Down
+ManaCost:3 W
+Types:Sorcery
+K:Assist
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+Oracle:Assist (Another player can pay up to {3} of this spell's cost.)\nDestroy target creature with power 4 or greater.

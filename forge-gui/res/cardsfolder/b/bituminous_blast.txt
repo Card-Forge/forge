@@ -2,5 +2,5 @@ Name:Bituminous Blast
 ManaCost:3 B R
 Types:Instant
 K:Cascade
-A:SP$ DealDamage | Cost$ 3 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nBituminous Blast deals 4 damage to target creature.

@@ -1,5 +1,5 @@
 Name:Storm's Wrath
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 R R | ValidCards$ Creature,Planeswalker | NumDmg$ 4 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 4 damage to each creature and each planeswalker.
+A:SP$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 4 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 4 damage to each creature and each planeswalker.
 Oracle:Storm's Wrath deals 4 damage to each creature and each planeswalker.

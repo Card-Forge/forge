@@ -1,7 +1,7 @@
 Name:Failure
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Card | TargetType$ Spell | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Card | TargetType$ Spell | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell to its owner's hand.
 AlternateMode:Split
 Oracle:Return target spell to its owner's hand.
 
@@ -11,7 +11,7 @@ Name:Comply
 ManaCost:W
 Types:Sorcery
 K:Aftermath
-A:SP$ NameCard | Cost$ W | Defined$ You | SubAbility$ DBEffect | SpellDescription$ Choose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
+A:SP$ NameCard | Defined$ You | SubAbility$ DBEffect | SpellDescription$ Choose a card name. Until your next turn, your opponents can't cast spells with the chosen name.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn
 SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+NamedCard | Caster$ Opponent | EffectZone$ Command | Description$ Your opponents can't cast spells with the chosen name.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nChoose a card name. Until your next turn, your opponents can't cast spells with the chosen name.

@@ -1,7 +1,7 @@
 Name:Ideas Unbound
 ManaCost:U U
 Types:Sorcery Arcane
-A:SP$ Draw | Cost$ U U | Defined$ You | NumCards$ 3 | SubAbility$ DelayedDiscard | SpellDescription$ Draw three cards. Discard three cards at the beginning of the next end step.
+A:SP$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DelayedDiscard | SpellDescription$ Draw three cards. Discard three cards at the beginning of the next end step.
 SVar:DelayedDiscard:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ Discard | TriggerDescription$ Discard three cards.
 SVar:Discard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
 AI:RemoveDeck:All

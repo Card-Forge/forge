@@ -274,6 +274,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // Next, expected to use Thespian's Stage to copy Dark Depths.
         Plan.Decision d2 = picker.getPlan().getDecisions().get(1);
         String expected = "{2}, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.";
+
+        AssertJUnit.assertNotNull(d2.saRef);
         AssertJUnit.assertEquals(expected, d2.saRef.toString());
         AssertJUnit.assertTrue(d2.targets.toString().contains("Dark Depths"));
     }
@@ -534,7 +536,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(saDesc, saDesc.startsWith("Lightning Bolt deals 3 damage to any target."));
     }
 
-    @Test
+    @Test(enabled = true)
     public void testPlayingPumpSpellsAfterBlocks() {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
@@ -542,7 +544,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         opponent.setLife(2, null);
 
         Card blocker = addCard("Fugitive Wizard", opponent);
-        Card attacker1 = addCard("Dwarven Trader", p);
+        Card attacker1 = addCard("Gray Ogre", p);
         attacker1.setSickness(false);
         Card attacker2 = addCard("Dwarven Trader", p);
         attacker2.setSickness(false);
@@ -574,6 +576,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         combat.getBandOfAttacker(attacker2).setBlocked(false);
         combat.orderBlockersForDamageAssignment();
         combat.orderAttackersForDamageAssignment();
+        game.getAction().checkStateEffects(true);
+
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals("Target creature gets +3/+3 until end of turn.", sa.toString());

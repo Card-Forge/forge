@@ -1,0 +1,6 @@
+Name:Ox Token
+ManaCost:no cost
+Types:Creature Ox
+Colors:white
+PT:2/2
+Oracle:

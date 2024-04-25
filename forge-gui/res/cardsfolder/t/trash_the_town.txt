@@ -1,0 +1,12 @@
+Name:Trash the Town
+ManaCost:G
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBCounters,DBTrample,DBDrawTwo | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBCounters:DB$ PutCounter | SpreeCost$ 2 | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
+SVar:DBTrample:DB$ Pump | SpreeCost$ 1 | ValidTgts$ Creature | KW$ Trample | SpellDescription$ Target creature gains trample until end of turn.
+SVar:DBDrawTwo:DB$ Animate | SpreeCost$ 1 | ValidTgts$ Creature | Triggers$ TrigCDPlayer | SpellDescription$ Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, draw two cards."
+SVar:TrigCDPlayer:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ DBDraw | CombatDamage$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+DeckHas:Ability$Counters
+Oracle:Spree (Choose one or more additional costs.)\n+ {2} — Put two +1/+1 counters on target creature.\n+ {1} — Target creature gains trample until end of turn.\n+ {1} — Until end of turn, target creature gains "Whenever this creature deals combat damage to a player, draw two cards."

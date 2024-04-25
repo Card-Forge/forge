@@ -1,5 +1,5 @@
 Name:Nausea
 ManaCost:1 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 B | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
 Oracle:All creatures get -1/-1 until end of turn.

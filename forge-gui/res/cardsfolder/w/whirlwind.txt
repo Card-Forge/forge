@@ -1,5 +1,5 @@
 Name:Whirlwind
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 G G | ValidCards$ Creature.withFlying | SpellDescription$ Destroy all creatures with flying.
+A:SP$ DestroyAll | ValidCards$ Creature.withFlying | SpellDescription$ Destroy all creatures with flying.
 Oracle:Destroy all creatures with flying.

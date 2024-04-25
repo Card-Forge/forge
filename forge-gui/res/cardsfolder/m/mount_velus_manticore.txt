@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigDiscard | T
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | TriggerDescription$ When you do, CARDNAME deals X damage to any target, where X is the number of card types the discarded card has.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
-SVar:X:TriggerRemembered$CardNumTypes
+SVar:X:TriggerRemembered$CardTypes
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 Oracle:At the beginning of combat on your turn, you may discard a card. When you do, Mount Velus Manticore deals X damage to any target, where X is the number of card types the discarded card has.

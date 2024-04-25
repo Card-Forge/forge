@@ -1,0 +1,12 @@
+Name:Three Dog, Galaxy News DJ
+ManaCost:1 R W
+Types:Legendary Creature Human Bard
+PT:1/5
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {2} and sacrifice an Aura attached to CARDNAME. When you sacrifice an Aura this way, for each other attacking creature you control, create a token that's a copy of that Aura attached to that creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 2 Sac<1/Aura.Attached/Aura attached to CARDNAME> | CostDesc$ You may pay {2} and sacrifice an Aura attached to CARDNAME. | Execute$ DBRepeatCopy | ConditionDefined$ Sacrificed | ConditionPresent$ Aura | ConditionCompare$ GE1 | TriggerDescription$ When you sacrifice an Aura this way, for each other attacking creature you control, create a token that's a copy of that Aura attached to that creature.
+SVar:DBRepeatCopy:DB$ RepeatEach | RepeatCards$ Creature.attacking+Other+YouCtrl | Zone$ Battlefield | RepeatSubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Spawner>Sacrificed | NumCopies$ 1 | AttachedTo$ Remembered
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice
+DeckNeeds:Type$Aura|Enchantment
+Oracle:Whenever you attack, you may pay {2} and sacrifice an Aura attached to Three Dog, Galaxy News DJ. When you sacrifice an Aura this way, for each other attacking creature you control, create a token that's a copy of that Aura attached to that creature.

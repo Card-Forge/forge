@@ -1,7 +1,7 @@
 Name:Choice of Damnations
 ManaCost:5 B
 Types:Sorcery Arcane
-A:SP$ ChooseNumber | Cost$ 5 B | ValidTgts$ Opponent | AILogic$ Damnation | Notify$ True | SubAbility$ DBChoice | SpellDescription$ Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.
+A:SP$ ChooseNumber | ValidTgts$ Opponent | AILogic$ Damnation | Notify$ True | SubAbility$ DBChoice | SpellDescription$ Target opponent chooses a number. You may have that player lose that much life. If you don't, that player sacrifices all but that many permanents.
 SVar:DBChoice:DB$ GenericChoice | Choices$ DBLoseLife,DBSac
 SVar:DBLoseLife:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ X | SpellDescription$ That player lose that much life.
 SVar:DBSac:DB$ Sacrifice | Defined$ ParentTarget | SacValid$ Permanent | Amount$ Y | SpellDescription$ That player sacrifices all but that many permanents.

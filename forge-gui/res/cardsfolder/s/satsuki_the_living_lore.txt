@@ -9,4 +9,4 @@ SVar:BounceSaga:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Valid
 SVar:GraveSaga:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Saga card in your graveyard | ValidTgts$ Saga | ChangeNum$ 1 | SpellDescription$ Return target Saga card from your graveyard to your hand.
 DeckHints:Type$Saga
 DeckHas:Ability$Graveyard
-Oracle:{T}: Put a lore counter on each Saga you control. Activate only as a sorcery.\nWhen Satsuki, the Living Lore dies, choose up to one:\n• Return target Saga or enchantment creature you control to it owner's hand.\n• Return target Saga card from your graveyard to your hand.
+Oracle:{T}: Put a lore counter on each Saga you control. Activate only as a sorcery.\nWhen Satsuki, the Living Lore dies, choose up to one —\n• Return target Saga or enchantment creature you control to it owner's hand.\n• Return target Saga card from your graveyard to your hand.

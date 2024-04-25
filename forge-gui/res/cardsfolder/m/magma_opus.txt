@@ -1,7 +1,7 @@
 Name:Magma Opus
 ManaCost:6 U R
 Types:Instant
-A:SP$ DealDamage | Cost$ 6 U R | ValidTgts$ Any | TgtPrompt$ Select any targets to distribute damage to | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SubAbility$ DBTap | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets. Tap two target permanents. Create a 4/4 blue and red Elemental creature token. Draw two cards.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any targets to distribute damage to | NumDmg$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SubAbility$ DBTap | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets. Tap two target permanents. Create a 4/4 blue and red Elemental creature token. Draw two cards.
 SVar:DBTap:DB$ Tap | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2

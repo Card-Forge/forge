@@ -56,7 +56,7 @@ public class StaticEffect {
         this.ability = ability;
     }
 
-    private StaticEffect makeMappedCopy(GameObjectMap map) {
+    private StaticEffect makeMappedCopy(IEntityMap map) {
         StaticEffect copy = new StaticEffect(map.map(this.source));
         copy.ability = this.ability;
         copy.affectedCards = map.mapCollection(this.affectedCards);
@@ -101,7 +101,7 @@ public class StaticEffect {
      * Getter for the field <code>affectedCards</code>.
      * </p>
      *
-     * @return a {@link forge.CardList} object.
+     * @return a {@link CardCollectionView} object.
      */
     public final CardCollectionView getAffectedCards() {
         return affectedCards;
@@ -113,7 +113,7 @@ public class StaticEffect {
      * </p>
      *
      * @param list
-     *            a {@link forge.CardList} object.
+     *            a {@link CardCollectionView} object.
      */
     public final void setAffectedCards(final CardCollectionView list) {
         affectedCards = list;
@@ -296,7 +296,7 @@ public class StaticEffect {
         return affectedCards;
     }
 
-    public void removeMapped(GameObjectMap map) {
+    public void removeMapped(IEntityMap map) {
         makeMappedCopy(map).remove();
     }
 

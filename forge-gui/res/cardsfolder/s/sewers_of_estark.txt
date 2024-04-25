@@ -1,7 +1,7 @@
 Name:Sewers of Estark
 ManaCost:2 B B
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | RememberObjects$ Targeted | StackDescription$ SpellDescription | SubAbility$ DBUnblockable | SpellDescription$ Choose target creature. If it's attacking, it can't be blocked this turn. If it's blocking, prevent all combat damage that would be dealt this combat by it and each creature it's blocking.
+A:SP$ Pump | ValidTgts$ Creature | StackDescription$ SpellDescription | SubAbility$ DBUnblockable | SpellDescription$ Choose target creature. If it's attacking, it can't be blocked this turn. If it's blocking, prevent all combat damage that would be dealt this combat by it and each creature it's blocking.
 SVar:DBUnblockable:DB$ Effect | ConditionDefined$ Targeted | ConditionPresent$ Creature.attacking | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBPumpAll
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ TargetedCard.Self,Creature.blockedByValidThisTurn Targeted | StackDescription$ None | Duration$ UntilEndOfCombat | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | ConditionDefined$ Targeted | ConditionPresent$ Creature.blocking

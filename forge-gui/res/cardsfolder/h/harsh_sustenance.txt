@@ -1,7 +1,7 @@
 Name:Harsh Sustenance
 ManaCost:1 W B
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 W B | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of creatures you control.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to any target and you gain X life, where X is the number of creatures you control.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Harsh Sustenance deals X damage to any target and you gain X life, where X is the number of creatures you control.

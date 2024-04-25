@@ -1,5 +1,5 @@
 Name:Defenestrate
 ManaCost:2 B
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Destroy target creature without flying.
+A:SP$ Destroy | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Destroy target creature without flying.
 Oracle:Destroy target creature without flying.

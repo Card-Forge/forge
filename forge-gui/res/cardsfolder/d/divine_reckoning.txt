@@ -2,7 +2,7 @@ Name:Divine Reckoning
 ManaCost:2 W W
 Types:Sorcery
 K:Flashback:5 W W
-A:SP$ RepeatEach | Cost$ 2 W W | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll | SpellDescription$ Each player chooses a creature they control. Destroy the rest.
+A:SP$ RepeatEach | AILogic$ OpponentHasMultipleCreatures | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll | SpellDescription$ Each player chooses a creature they control. Destroy the rest.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

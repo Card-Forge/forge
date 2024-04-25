@@ -1,0 +1,7 @@
+Name:Bat Token
+ManaCost:no cost
+Types:Creature Bat
+Colors:black
+PT:2/1
+K:Flying
+Oracle:Flying

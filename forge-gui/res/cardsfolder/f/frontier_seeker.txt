@@ -1,0 +1,8 @@
+Name:Frontier Seeker
+ManaCost:1 W
+Types:Creature Human Scout
+PT:2/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top five cards of your library. You may reveal a Mount creature card or a Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Creature.Mount,Plains | RestRandomOrder$ True
+DeckHints:Type$Mount|Plains
+Oracle:When Frontier Seeker enters the battlefield, look at the top five cards of your library. You may reveal a Mount creature card or a Plains card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

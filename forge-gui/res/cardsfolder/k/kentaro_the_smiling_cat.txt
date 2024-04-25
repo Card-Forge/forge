@@ -3,5 +3,6 @@ ManaCost:1 W
 Types:Legendary Creature Human Samurai
 PT:2/1
 K:Bushido:1
-S:Mode$ Continuous | Affected$ Card.Samurai+YouCtrl | AddKeyword$ Alternative Cost:ConvertedManaCost | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Samurai | ValidPlayer$ You | Cost$ X | Description$ You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value.
+SVar:X:Count$CardManaCost
 Oracle:Bushido 1 (Whenever this creature blocks or becomes blocked, it gets +1/+1 until end of turn.)\nYou may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's mana value.

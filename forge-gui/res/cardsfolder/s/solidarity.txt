@@ -1,6 +1,6 @@
 Name:Solidarity
 ManaCost:3 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumDef$ +5 | SpellDescription$ Creatures you control get +0/+5 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +5 | SpellDescription$ Creatures you control get +0/+5 until end of turn.
 AI:RemoveDeck:All
 Oracle:Creatures you control get +0/+5 until end of turn.
