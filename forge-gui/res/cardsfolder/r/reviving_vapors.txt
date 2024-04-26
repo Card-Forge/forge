@@ -1,7 +1,7 @@
 Name:Reviving Vapors
 ManaCost:2 W U
 Types:Instant
-A:SP$ Dig | Cost$ 2 W U | DigNum$ 3 | Reveal$ True | SkipReorder$ True | ChangeNum$ 1 | ChangeValid$ Card | LibraryPosition2$ 0 | RememberRevealed$ True | Imprint$ True | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard.
+A:SP$ Dig | DigNum$ 3 | Reveal$ True | SkipReorder$ True | ChangeNum$ 1 | ChangeValid$ Card | LibraryPosition2$ 0 | RememberRevealed$ True | Imprint$ True | SubAbility$ DBGainLife | StackDescription$ SpellDescription | SpellDescription$ Reveal the top three cards of your library and put one of them into your hand. You gain life equal to that card's mana value. Put all other cards revealed this way into your graveyard.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBChange | StackDescription$ None
 SVar:X:Imprinted$CardManaCost
 SVar:DBChange:DB$ ChangeZoneAll | Defined$ You | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup | StackDescription$ None

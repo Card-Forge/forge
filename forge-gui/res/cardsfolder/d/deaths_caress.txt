@@ -1,7 +1,7 @@
 Name:Death's Caress
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. If that creature was a Human, you gain life equal to its toughness.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. If that creature was a Human, you gain life equal to its toughness.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | ConditionCheckSVar$ IsHuman | ConditionSVarCompare$ GE1
 SVar:IsHuman:Targeted$Valid Creature.Human
 SVar:Y:Targeted$CardToughness

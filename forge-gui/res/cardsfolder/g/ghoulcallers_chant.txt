@@ -1,7 +1,7 @@
 Name:Ghoulcaller's Chant
 ManaCost:B
 Types:Sorcery
-A:SP$ Charm | Cost$ B | CharmNum$ 1 | Choices$ DBChangeZone1,DBChangeZone2
+A:SP$ Charm | CharmNum$ 1 | Choices$ DBChangeZone1,DBChangeZone2
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | TgtPrompt$ Select two target Zombie cards in your graveyard | ValidTgts$ Zombie.YouOwn | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Return two target Zombie cards from your graveyard to your hand.
 AI:RemoveDeck:All

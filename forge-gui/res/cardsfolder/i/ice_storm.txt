@@ -1,5 +1,5 @@
 Name:Ice Storm
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 Oracle:Destroy target land.

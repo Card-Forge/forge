@@ -1,7 +1,7 @@
 Name:Emergent Ultimatum
 ManaCost:B B G G G U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B B G G G U U | Origin$ Library | Hidden$ True | ChangeNum$ 3 | ChangeType$ Card.MonoColor | DifferentNames$ True | Destination$ Exile | RememberChanged$ True | SubAbility$ DBShuffle | Shuffle$ False | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to three monocolored cards with different names and exile them. An opponent chooses one of those cards. Shuffle that card into your library. You may cast the other cards without paying their mana costs. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Library | Hidden$ True | ChangeNum$ 3 | ChangeType$ Card.MonoColor | DifferentNames$ True | Destination$ Exile | RememberChanged$ True | SubAbility$ DBShuffle | Shuffle$ False | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to three monocolored cards with different names and exile them. An opponent chooses one of those cards. Shuffle that card into your library. You may cast the other cards without paying their mana costs. Exile CARDNAME.
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Exile | Destination$ Library | ChangeType$ Card.IsRemembered | Mandatory$ True | ForgetChanged$ True | Hidden$ True | Chooser$ Opponent | Shuffle$ True | SubAbility$ DBCast | StackDescription$ None
 SVar:DBCast:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBExileSelf | StackDescription$ None
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | StackDescription$ None

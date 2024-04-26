@@ -301,15 +301,12 @@ public final class GameActionUtil {
 
             SpellAbility newSA = null;
 
-            boolean changedManaCost = false;
             if (o.getPayManaCost() == PayManaCost.NO) {
                 newSA = sa.copyWithNoManaCost(activator);
                 newSA.setBasicSpell(false);
-                changedManaCost = true;
             } else if (o.getAltManaCost() != null) {
                 newSA = sa.copyWithManaCostReplaced(activator, o.getAltManaCost());
                 newSA.setBasicSpell(false);
-                changedManaCost = true;
             } else {
                 if (altCostOnly) {
                     continue;
@@ -327,12 +324,6 @@ public final class GameActionUtil {
             }
             sar.setZone(null);
             newSA.setMayPlay(o);
-
-            if (changedManaCost) {
-                if ("0".equals(sa.getParam("ActivationLimit")) && sa.getHostCard().getManaCost().isNoCost()) {
-                    sar.setLimitToCheck(null);
-                }
-            }
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
             if (!source.equals(host)) {

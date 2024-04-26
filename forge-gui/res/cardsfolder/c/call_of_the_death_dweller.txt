@@ -1,7 +1,7 @@
 Name:Call of the Death-Dweller
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | MaxTotalTargetCMC$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to two target creature cards with total mana value 3 or less | SubAbility$ DBPutCounter | RememberChanged$ True | StackDescription$ SpellDescription | SpellDescription$ Return up to two target creature cards with total mana value 3 or less from your graveyard to the battlefield. Put a deathtouch counter on either of them. Then put a menace counter on either of them.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | MaxTotalTargetCMC$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to two target creature cards with total mana value 3 or less | SubAbility$ DBPutCounter | RememberChanged$ True | StackDescription$ SpellDescription | SpellDescription$ Return up to two target creature cards with total mana value 3 or less from your graveyard to the battlefield. Put a deathtouch counter on either of them. Then put a menace counter on either of them.
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.IsRemembered | ChoiceTitle$ Choose a creature to put a deathtouch counter on | CounterType$ Deathtouch | CounterNum$ 1 | SubAbility$ DBPutCounter2 | StackDescription$ None
 SVar:DBPutCounter2:DB$ PutCounter | Choices$ Creature.IsRemembered | ChoiceTitle$ Choose a creature to put a menace counter on | CounterType$ Menace | CounterNum$ 1 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

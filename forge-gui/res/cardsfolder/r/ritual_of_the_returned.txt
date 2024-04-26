@@ -1,7 +1,7 @@
 Name:Ritual of the Returned
 ManaCost:3 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 B | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Exile target creature card from your graveyard. Create a black Zombie creature token. Its power is equal to that card's power and its toughness is equal to that card's toughness.
+A:SP$ ChangeZone | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Exile target creature card from your graveyard. Create a black Zombie creature token. Its power is equal to that card's power and its toughness is equal to that card's toughness.
 SVar:DBToken:DB$ Token | TokenScript$ b_x_x_zombie | TokenPower$ X | TokenToughness$ Y | TokenOwner$ You | TokenAmount$ 1 | SubAbility$ DBCleanup
 SVar:X:Remembered$CardPower
 SVar:Y:Remembered$CardToughness

@@ -1,7 +1,7 @@
 Name:Witherbloom Command
 ManaCost:B G
 Types:Sorcery
-A:SP$ Charm | Cost$ B G | CharmNum$ 2 | Choices$ DBMill,DBDestroy,DBPump,DBLoseLife
+A:SP$ Charm | CharmNum$ 2 | Choices$ DBMill,DBDestroy,DBPump,DBLoseLife
 SVar:DBMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBReturn | SpellDescription$ Target player mills three cards, then you return a land card from your graveyard to your hand.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouOwn
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonCreature+nonLand+cmcLE2 | TgtPrompt$ Select target noncreature, nonland permanent with mana value 2 or less | SpellDescription$ Destroy target noncreature, nonland permanent with mana value 2 or less.

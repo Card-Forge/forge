@@ -1,7 +1,7 @@
 Name:Fell the Pheasant
 ManaCost:1 G
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 5 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 5 damage to target creature with flying. Create a card token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 5 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 5 damage to target creature with flying. Create a card token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
 DeckHas:Ability$Token|LifeGain|Food
 Oracle:Fell the Pheasant deals 5 damage to target creature with flying. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

@@ -1,7 +1,7 @@
 Name:Din of the Fireherd
 ManaCost:5 BR BR BR
 Types:Sorcery
-A:SP$ Token | Cost$ 5 BR BR BR | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ br_5_5_elemental | SubAbility$ DBSac1 | SpellDescription$ Create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
+A:SP$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ br_5_5_elemental | SubAbility$ DBSac1 | SpellDescription$ Create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control.
 SVar:DBSac1:DB$ Sacrifice | SacValid$ Creature | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to make sacrifices | Amount$ X | SubAbility$ DBSac2
 SVar:DBSac2:DB$ Sacrifice | SacValid$ Land | Defined$ Targeted | Amount$ Y
 SVar:X:Count$Valid Creature.Black+YouCtrl

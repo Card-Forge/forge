@@ -471,8 +471,8 @@ public abstract class SpellAbilityEffect {
         card.addTrigger(parsedTrigger2);
     }
 
-    protected static void addForgetOnCastTrigger(final Card card) {
-        String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+    protected static void addForgetOnCastTrigger(final Card card, String valid) {
+        String trig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ " + valid;
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));

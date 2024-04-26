@@ -1,7 +1,7 @@
 Name:Sift Through Sands
 ManaCost:1 U U
 Types:Instant Arcane
-A:SP$ Draw | Cost$ 1 U U | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle.
+A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBUnspeakable
 SVar:DBUnspeakable:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Unspeakable | ChangeNum$ 1 | ConditionCheckSVar$ PeerReachTotal | ConditionSVarCompare$ EQ2 | ShuffleNonMandatory$ True
 SVar:PeerReachTotal:SVar$Peer/Plus.Reach

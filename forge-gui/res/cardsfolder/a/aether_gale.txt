@@ -1,5 +1,5 @@
 Name:Aether Gale
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | TargetMin$ 6 | TargetMax$ 6 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return six target nonland permanents to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 6 | TargetMax$ 6 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return six target nonland permanents to their owners' hands.
 Oracle:Return six target nonland permanents to their owners' hands.

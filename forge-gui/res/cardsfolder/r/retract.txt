@@ -1,6 +1,6 @@
 Name:Retract
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ U | ChangeType$ Artifact.YouCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts you control to their owner's hand.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact.YouCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts you control to their owner's hand.
 AI:RemoveDeck:Random
 Oracle:Return all artifacts you control to their owner's hand.

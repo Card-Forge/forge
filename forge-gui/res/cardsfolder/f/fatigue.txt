@@ -1,6 +1,6 @@
 Name:Fatigue
 ManaCost:1 U
 Types:Sorcery
-A:SP$ SkipPhase | Cost$ 1 U | ValidTgts$ Player | TgtPrompt$ Select target player | Step$ Draw | SpellDescription$ Target player skips their next draw step.
+A:SP$ SkipPhase | ValidTgts$ Player | TgtPrompt$ Select target player | Step$ Draw | SpellDescription$ Target player skips their next draw step.
 AI:RemoveDeck:All
 Oracle:Target player skips their next draw step.

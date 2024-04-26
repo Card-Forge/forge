@@ -2824,6 +2824,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sAbility = sbSA.toString();
             } else if (sa.isSpell() && sa.isBasicSpell()) {
                 continue;
+            } else if (sa.hasParam("DescriptionFromChosenName") && !getNamedCard().isEmpty()) {
+                String name = getNamedCard();
+                ICardFace namedFace = StaticData.instance().getCommonCards().getFaceByName(name);
+                StringBuilder sbSA = new StringBuilder(sAbility);
+                sbSA.append(linebreak);
+                sbSA.append(Localizer.getInstance().getMessage("lblSpell"));
+                sbSA.append(" — ");
+                if(!namedFace.getManaCost().isNoCost()) {
+                    sbSA.append(namedFace.getManaCost().getSimpleString()).append(": ");
+                }
+                sbSA.append(namedFace.getName()).append("\r\n");
+                sbSA.append(namedFace.getType()).append("\r\n");
+                sbSA.append(namedFace.getOracleText().replaceAll("\\\\n", "\r\n"));
+                sbSA.append(linebreak);
+                sAbility = sbSA.toString();
             }
 
             if (sa.getManaPart() != null) {
@@ -4615,11 +4630,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
-
-    private int pseudoKickerMagnitude = 0;
-    public final void addPseudoMultiKickerMagnitude(final int n) { pseudoKickerMagnitude += n; }
-    public final void setPseudoMultiKickerMagnitude(final int n) { pseudoKickerMagnitude = n; }
-    public final int getPseudoKickerMagnitude() { return pseudoKickerMagnitude; }
 
     // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
@@ -7766,19 +7776,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public ActivationTable getAbilityActivatedThisTurn() {
+        return numberTurnActivations;
+    }
+    public ActivationTable getAbilityActivatedThisGame() {
+        return numberGameActivations;
+    }
+    public ActivationTable getAbilityResolvedThisTurn() {
+        return numberAbilityResolved;
+    }
+
     public int getAbilityActivatedThisTurn(SpellAbility ability) {
         return numberTurnActivations.get(ability);
     }
-
     public int getAbilityActivatedThisGame(SpellAbility ability) {
         return numberGameActivations.get(ability);
+    }
+    public int getAbilityResolvedThisTurn(SpellAbility ability) {
+        return numberAbilityResolved.get(ability);
     }
 
     public void addAbilityResolved(SpellAbility ability) {
         numberAbilityResolved.add(ability);
-    }
-    public int getAbilityResolvedThisTurn(SpellAbility ability) {
-        return numberAbilityResolved.get(ability);
     }
     public List<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
         return numberAbilityResolved.getActivators(ability);

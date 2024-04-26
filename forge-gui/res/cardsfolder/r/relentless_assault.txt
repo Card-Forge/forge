@@ -1,6 +1,6 @@
 Name:Relentless Assault
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ UntapAll | Cost$ 2 R R | ValidCards$ Creature.attackedThisTurn | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
+A:SP$ UntapAll | ValidCards$ Creature.attackedThisTurn | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
 Oracle:Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.

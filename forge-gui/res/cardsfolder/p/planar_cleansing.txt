@@ -1,5 +1,5 @@
 Name:Planar Cleansing
 ManaCost:3 W W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W W | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
 Oracle:Destroy all nonland permanents.

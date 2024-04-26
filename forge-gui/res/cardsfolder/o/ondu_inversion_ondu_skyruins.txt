@@ -1,7 +1,7 @@
 Name:Ondu Inversion
 ManaCost:6 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 6 W W | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
 AlternateMode:Modal
 Oracle:Destroy all nonland permanents.
 

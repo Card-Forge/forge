@@ -1,7 +1,7 @@
 Name:Concerted Defense
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ Y | SpellDescription$ Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature for your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ Y | SpellDescription$ Counter target noncreature spell unless its controller pays {1} plus an additional {1} for each creature for your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
 SVar:Y:Count$Party/Plus.1
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard

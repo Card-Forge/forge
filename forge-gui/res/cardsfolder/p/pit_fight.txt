@@ -1,6 +1,6 @@
 Name:Pit Fight
 ManaCost:1 RG
 Types:Instant
-A:SP$ Pump | Cost$ 1 RG | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBPitFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
+A:SP$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBPitFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
 SVar:DBPitFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
 Oracle:Target creature you control fights another target creature. (Each deals damage equal to its power to the other.)

@@ -2,7 +2,7 @@ Name:March of the Multitudes
 ManaCost:X G W W
 Types:Instant
 K:Convoke
-A:SP$ Token | Cost$ X G W W | TokenAmount$ X | TokenScript$ w_1_1_soldier_lifelink | SpellDescription$ Create X 1/1 white Soldier creature tokens with lifelink.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier_lifelink | SpellDescription$ Create X 1/1 white Soldier creature tokens with lifelink.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token|LifeGain
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate X 1/1 white Soldier creature tokens with lifelink.

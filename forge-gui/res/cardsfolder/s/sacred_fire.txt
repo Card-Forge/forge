@@ -2,7 +2,7 @@ Name:Sacred Fire
 ManaCost:R W
 Types:Instant
 K:Flashback:4 R W
-A:SP$ DealDamage | Cost$ R W | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to any target and you gain 2 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to any target and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 Oracle:Sacred Fire deals 2 damage to any target and you gain 2 life.\nFlashback {4}{R}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,7 +1,7 @@
 Name:Bant Charm
 ManaCost:G W U
 Types:Instant
-A:SP$ Charm | Cost$ G W U | Choices$ DBDestroy,DBChangeZone,DBCounter
+A:SP$ Charm | Choices$ DBDestroy,DBChangeZone,DBCounter
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target creature on the bottom of it's owner's library.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Instant | SpellDescription$ Counter target instant spell.

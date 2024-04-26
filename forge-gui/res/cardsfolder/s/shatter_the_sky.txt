@@ -1,7 +1,7 @@
 Name:Shatter the Sky
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 W W | NumCards$ 1 | Defined$ Player.controlsCreature.powerGE4_GE1 | SubAbility$ DBDestroy | SpellDescription$ Each player who controls a creature with power 4 or greater draws a card. Then destroy all creatures.
+A:SP$ Draw | NumCards$ 1 | Defined$ Player.controlsCreature.powerGE4_GE1 | SubAbility$ DBDestroy | SpellDescription$ Each player who controls a creature with power 4 or greater draws a card. Then destroy all creatures.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature
 AI:RemoveDeck:Random
 Oracle:Each player who controls a creature with power 4 or greater draws a card. Then destroy all creatures.

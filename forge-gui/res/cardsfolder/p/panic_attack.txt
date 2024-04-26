@@ -1,6 +1,6 @@
 Name:Panic Attack
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select target creature. | SpellDescription$ Up to three target creatures can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select target creature. | SpellDescription$ Up to three target creatures can't block this turn.
 AI:RemoveDeck:Random
 Oracle:Up to three target creatures can't block this turn.

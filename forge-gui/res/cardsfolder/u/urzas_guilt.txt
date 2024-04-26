@@ -1,7 +1,7 @@
 Name:Urza's Guilt
 ManaCost:2 U B
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U B | Defined$ Player | NumCards$ 2 | SpellDescription$ Each player draws two cards, then discards three cards, then loses 4 life. | SubAbility$ DBDiscard
+A:SP$ Draw | Defined$ Player | NumCards$ 2 | SpellDescription$ Each player draws two cards, then discards three cards, then loses 4 life. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 3 | Mode$ TgtChoose | Defined$ Player | SubAbility$ DBLose
 SVar:DBLose:DB$ LoseLife | LifeAmount$ 4 | Defined$ Player
 Oracle:Each player draws two cards, then discards three cards, then loses 4 life.

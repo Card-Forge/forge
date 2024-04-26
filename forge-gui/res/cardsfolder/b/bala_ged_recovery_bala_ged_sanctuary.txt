@@ -1,7 +1,7 @@
 Name:Bala Ged Recovery
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+A:SP$ ChangeZone | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 DeckHas:Ability$Graveyard
 AlternateMode:Modal
 Oracle:Return target card from your graveyard to your hand.

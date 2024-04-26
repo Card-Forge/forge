@@ -1,6 +1,6 @@
 Name:Beacon of Unrest
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select a target creature or artifact in a graveyard | ValidTgts$ Creature,Artifact | SubAbility$ DBShuffle | SpellDescription$ Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle CARDNAME into its owner's library.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Select a target creature or artifact in a graveyard | ValidTgts$ Creature,Artifact | SubAbility$ DBShuffle | SpellDescription$ Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle CARDNAME into its owner's library.
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Put target artifact or creature card from a graveyard onto the battlefield under your control. Shuffle Beacon of Unrest into its owner's library.

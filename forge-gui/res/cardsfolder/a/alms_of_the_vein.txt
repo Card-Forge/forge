@@ -1,7 +1,7 @@
 Name:Alms of the Vein
 ManaCost:2 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 3 life and you gain 3 life.
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 K:Madness:B
 DeckHints:Ability$Discard

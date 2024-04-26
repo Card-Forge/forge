@@ -1,0 +1,8 @@
+Name:Bandit's Haul
+ManaCost:3
+Types:Artifact
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, put a loot counter on CARDNAME. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigLoot:DB$ PutCounter | Defined$ Self | CounterType$ LOOT | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ 2 T SubCounter<2/LOOT> | SpellDescription$ Draw a card.
+Oracle:Whenever you commit a crime, put a loot counter on Bandit's Haul. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n{T}: Add one mana of any color.\n{2}, {T}, Remove two loot counters from Bandit's Haul: Draw a card.

@@ -1,7 +1,7 @@
 Name:Dawn to Dusk
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 W W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Change,Destroy
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Change,Destroy
 SVar:Change:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target enchantment card in your graveyard | ValidTgts$ Enchantment.YouCtrl | SpellDescription$ Return target enchantment card from your graveyard to your hand.
 SVar:Destroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Choose one or both —\n• Return target enchantment card from your graveyard to your hand.\n• Destroy target enchantment.

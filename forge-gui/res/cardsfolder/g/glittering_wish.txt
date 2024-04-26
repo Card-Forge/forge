@@ -1,7 +1,7 @@
 Name:Glittering Wish
 ManaCost:G W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ G W | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.MultiColor+YouOwn | ChangeTypeDesc$ multicolored card they own | ChangeNum$ 1 | Hidden$ True | Reveal$ True | SubAbility$ DBChange | SpellDescription$ You may reveal a multicolored card you own from outside the game and put it into your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.MultiColor+YouOwn | ChangeTypeDesc$ multicolored card they own | ChangeNum$ 1 | Hidden$ True | Reveal$ True | SubAbility$ DBChange | SpellDescription$ You may reveal a multicolored card you own from outside the game and put it into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:Random
 Oracle:You may reveal a multicolored card you own from outside the game and put it into your hand. Exile Glittering Wish.

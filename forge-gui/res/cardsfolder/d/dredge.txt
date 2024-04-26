@@ -1,7 +1,7 @@
 Name:Dredge
 ManaCost:B
 Types:Instant
-A:SP$ Sacrifice | Cost$ B | SacValid$ Creature,Land | SacMessage$ Creature or Land | SpellDescription$ Sacrifice a creature or land. | SubAbility$ DBDraw
+A:SP$ Sacrifice | SacValid$ Creature,Land | SacMessage$ Creature or Land | SpellDescription$ Sacrifice a creature or land. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 Oracle:Sacrifice a creature or land.\nDraw a card.

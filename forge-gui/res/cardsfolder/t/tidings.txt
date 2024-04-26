@@ -1,5 +1,5 @@
 Name:Tidings
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
 Oracle:Draw four cards.

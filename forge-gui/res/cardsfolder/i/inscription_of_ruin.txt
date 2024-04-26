@@ -2,7 +2,7 @@ Name:Inscription of Ruin
 ManaCost:2 B
 Types:Sorcery
 K:Kicker:2 B B
-A:SP$ Charm | Cost$ 2 B | MinCharmNum$ X | CharmNum$ Y | Choices$ DBDiscard,DBReturn,DBDestroy | AdditionalDescription$ . If this spell was kicked, choose any number instead.
+A:SP$ Charm | MinCharmNum$ X | CharmNum$ Y | Choices$ DBDiscard,DBReturn,DBDestroy | AdditionalDescription$ . If this spell was kicked, choose any number instead.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouOwn | TgtPrompt$ Select target creature card with mana value 2 or less | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | SpellDescription$ Destroy target creature with mana value 3 or less.

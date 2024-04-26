@@ -1,5 +1,5 @@
 Name:Topple
 ManaCost:2 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.greatestPower | TgtPrompt$ Select target creature with the greatest power among creatures on the battlefield | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with the greatest power among creatures on the battlefield. (If two or more creatures are tied for greatest power, target any one of them.)
+A:SP$ ChangeZone | ValidTgts$ Creature.greatestPower | TgtPrompt$ Select target creature with the greatest power among creatures on the battlefield | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with the greatest power among creatures on the battlefield. (If two or more creatures are tied for greatest power, target any one of them.)
 Oracle:Exile target creature with the greatest power among creatures on the battlefield. (If two or more creatures are tied for greatest power, target any one of them.)

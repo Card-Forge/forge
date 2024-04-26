@@ -1,7 +1,7 @@
 Name:Induce Paranoia
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBMill | SpellDescription$ Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBMill | SpellDescription$ Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value.
 SVar:DBMill:DB$ Mill | NumCards$ X | Defined$ TargetedController | ConditionManaSpent$ B | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

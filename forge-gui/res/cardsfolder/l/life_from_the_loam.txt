@@ -1,6 +1,6 @@
 Name:Life from the Loam
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return up to three target land cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return up to three target land cards from your graveyard to your hand.
 K:Dredge:3
 Oracle:Return up to three target land cards from your graveyard to your hand.\nDredge 3 (If you would draw a card, you may mill three cards instead. If you do, return this card from your graveyard to your hand.)

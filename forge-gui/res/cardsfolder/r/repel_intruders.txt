@@ -1,7 +1,7 @@
 Name:Repel Intruders
 ManaCost:3 WU
 Types:Instant
-A:SP$ Token | Cost$ 3 WU | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell. Counter up to one target creature spell if {U} was spent to cast this spell. (Do both if {W}{U} was spent.)
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | ConditionManaSpent$ W | SubAbility$ UPaid | SpellDescription$ Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell. Counter up to one target creature spell if {U} was spent to cast this spell. (Do both if {W}{U} was spent.)
 SVar:UPaid:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | ConditionManaSpent$ U
 AI:RemoveDeck:All
 Oracle:Create two 1/1 white Kithkin Soldier creature tokens if {W} was spent to cast this spell. Counter up to one target creature spell if {U} was spent to cast this spell. (Do both if {W}{U} was spent.)

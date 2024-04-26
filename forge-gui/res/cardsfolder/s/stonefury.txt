@@ -1,6 +1,6 @@
 Name:Stonefury
 ManaCost:3 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 Oracle:Stonefury deals damage to target creature equal to the number of lands you control.

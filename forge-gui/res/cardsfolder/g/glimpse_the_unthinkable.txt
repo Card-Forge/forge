@@ -1,5 +1,5 @@
 Name:Glimpse the Unthinkable
 ManaCost:U B
 Types:Sorcery
-A:SP$ Mill | Cost$ U B | NumCards$ 10 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills ten cards.
+A:SP$ Mill | NumCards$ 10 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills ten cards.
 Oracle:Target player mills ten cards.

@@ -1,7 +1,7 @@
 Name:Scaled Destruction
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 W W | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBSmall,DBMedium,DBLarge | SubAbility$ DBNoop
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBSmall,DBMedium,DBLarge | SubAbility$ DBNoop
 SVar:DBSmall:DB$ DestroyAll | ValidCards$ Creature.totalPT_LE4 | SpellDescription$ Destroy all small creatures.
 SVar:DBMedium:DB$ DestroyAll | ValidCards$ Creature.totalPT_GE5+totalPT_LE8 | SpellDescription$ Destroy all medium creatures.
 SVar:DBLarge:DB$ DestroyAll | ValidCards$ Creature.totalPT_GE9 | SpellDescription$ Destroy all large creatures.

@@ -1,7 +1,7 @@
 Name:Embolden
 ManaCost:2 W
 Types:Instant
-A:SP$ PreventDamage | Cost$ 2 W | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | Amount$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt this turn to any number of targets, divided as you choose.
+A:SP$ PreventDamage | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | Amount$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt this turn to any number of targets, divided as you choose.
 K:Flashback:1 W
 AI:RemoveDeck:All
 Oracle:Prevent the next 4 damage that would be dealt this turn to any number of targets, divided as you choose.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

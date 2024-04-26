@@ -1,7 +1,7 @@
 Name:Final Revels
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 B | Choices$ DBPump,DBPump2
+A:SP$ Charm | Choices$ DBPump,DBPump2
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature | NumAtt$ +2 | SpellDescription$ All creatures get +2/+0 until end of turn.
 SVar:DBPump2:DB$ PumpAll | ValidCards$ Creature | NumDef$ -2 | SpellDescription$ All creatures get -0/-2 until end of turn.
 AI:RemoveDeck:All

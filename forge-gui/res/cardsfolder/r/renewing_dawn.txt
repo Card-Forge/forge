@@ -1,7 +1,7 @@
 Name:Renewing Dawn
 ManaCost:1 W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 1 W | LifeAmount$ X | SpellDescription$ You gain 2 life for each Mountain target opponent controls.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 2 life for each Mountain target opponent controls.
 SVar:X:Count$TypeOppCtrl.Mountain/Times.2
 AI:RemoveDeck:Random
 Oracle:You gain 2 life for each Mountain target opponent controls.

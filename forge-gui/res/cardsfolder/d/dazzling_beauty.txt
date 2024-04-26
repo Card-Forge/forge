@@ -2,7 +2,7 @@ Name:Dazzling Beauty
 ManaCost:2 W
 Types:Instant
 Text:Cast this spell only during the declare blockers step.
-A:SP$ BecomesBlocked | Cost$ 2 W | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | SubAbility$ DelTrigSlowtrip | ActivationPhases$ Declare Blockers | SpellDescription$ Target unblocked attacking creature becomes blocked. (This spell works on creatures that can't be blocked.) Draw a card at the beginning of the next turn's upkeep.
+A:SP$ BecomesBlocked | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | SubAbility$ DelTrigSlowtrip | ActivationPhases$ Declare Blockers | SpellDescription$ Target unblocked attacking creature becomes blocked. (This spell works on creatures that can't be blocked.) Draw a card at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Cast this spell only during the declare blockers step.\nTarget unblocked attacking creature becomes blocked. (This spell works on creatures that can't be blocked.)\nDraw a card at the beginning of the next turn's upkeep.

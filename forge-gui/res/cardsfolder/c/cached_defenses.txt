@@ -1,6 +1,6 @@
 Name:Cached Defenses
 ManaCost:2 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 2 G | Bolster$ True | CounterNum$ 3 | CounterType$ P1P1 | SpellDescription$ Bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)
+A:SP$ PutCounter | Bolster$ True | CounterNum$ 3 | CounterType$ P1P1 | SpellDescription$ Bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)
 DeckHas:Ability$Counters
 Oracle:Bolster 3. (Choose a creature with the least toughness among creatures you control and put three +1/+1 counters on it.)

@@ -1,6 +1,6 @@
 Name:Foresee
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Scry | Cost$ 3 U | ScryNum$ 4 | SpellDescription$ Scry 4, then draw two cards. | SubAbility$ DBDraw
+A:SP$ Scry | ScryNum$ 4 | SpellDescription$ Scry 4, then draw two cards. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2
 Oracle:Scry 4, then draw two cards.

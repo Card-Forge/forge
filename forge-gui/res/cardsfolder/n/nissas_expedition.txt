@@ -2,5 +2,5 @@ Name:Nissa's Expedition
 ManaCost:4 G
 Types:Sorcery
 K:Convoke
-A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.

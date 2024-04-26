@@ -1,7 +1,7 @@
 Name:Execute
 ManaCost:2 B
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | NoRegen$ True | SpellDescription$ Destroy target white creature. It can't be regenerated. | SubAbility$ DBDraw
+A:SP$ Destroy | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | NoRegen$ True | SpellDescription$ Destroy target white creature. It can't be regenerated. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 Oracle:Destroy target white creature. It can't be regenerated.\nDraw a card.

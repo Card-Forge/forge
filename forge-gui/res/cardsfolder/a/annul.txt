@@ -1,5 +1,5 @@
 Name:Annul
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target artifact or enchantment spell | ValidTgts$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target artifact or enchantment spell | ValidTgts$ Artifact,Enchantment | SpellDescription$ Counter target artifact or enchantment spell.
 Oracle:Counter target artifact or enchantment spell.

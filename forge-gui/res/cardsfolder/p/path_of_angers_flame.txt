@@ -1,5 +1,5 @@
 Name:Path of Anger's Flame
 ManaCost:2 R
 Types:Instant Arcane
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 Oracle:Creatures you control get +2/+0 until end of turn.

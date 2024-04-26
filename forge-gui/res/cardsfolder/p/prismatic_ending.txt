@@ -1,7 +1,7 @@
 Name:Prismatic Ending
 ManaCost:X W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X W | ValidTgts$ Permanent.nonLand | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nonland permanent | ConditionDefined$ Targeted | ConditionPresent$ Permanent.nonLand+cmcLEY | ConditionCompare$ EQ1 | SpellDescription$ Exile target nonland permanent if its mana value is less than or equal to the number of colors of mana spent to cast this spell.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target nonland permanent | ConditionDefined$ Targeted | ConditionPresent$ Permanent.nonLand+cmcLEY | ConditionCompare$ EQ1 | SpellDescription$ Exile target nonland permanent if its mana value is less than or equal to the number of colors of mana spent to cast this spell.
 SVar:X:Count$xPaid
 SVar:Y:Count$Converge
 AI:RemoveDeck:All

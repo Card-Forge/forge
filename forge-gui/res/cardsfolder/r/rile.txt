@@ -1,7 +1,7 @@
 Name:Rile
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.
+A:SP$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Trample | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Rile deals 1 damage to target creature you control. That creature gains trample until end of turn.\nDraw a card.

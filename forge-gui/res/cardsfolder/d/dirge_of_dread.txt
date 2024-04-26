@@ -1,7 +1,7 @@
 Name:Dirge of Dread
 ManaCost:2 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature | KW$ Fear | SpellDescription$ All creatures gain fear until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | KW$ Fear | SpellDescription$ All creatures gain fear until end of turn.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have target creature gain fear until end of turn
 K:Cycling:1 B
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Fear

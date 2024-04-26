@@ -2,7 +2,7 @@ Name:Mental Vapors
 ManaCost:3 B
 Types:Sorcery
 K:Cipher
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ Cipher | SpellDescription$ Target player discards a card.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ Cipher | SpellDescription$ Target player discards a card.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 Oracle:Target player discards a card.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

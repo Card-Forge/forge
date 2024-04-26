@@ -1,7 +1,7 @@
 Name:Battlefield Promotion
 ManaCost:1 W
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains first strike until end of turn. You gain 2 life.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains first strike until end of turn. You gain 2 life.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ First Strike | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$Counters

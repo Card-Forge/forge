@@ -1,7 +1,7 @@
 Name:Icy Blast
 ManaCost:X U
 Types:Instant
-A:SP$ Tap | Cost$ X U | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | SubAbility$ DBPump | SpellDescription$ Tap X target creatures. Ferocious — If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | SubAbility$ DBPump | SpellDescription$ Tap X target creatures. Ferocious — If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step. | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1
 SVar:X:Count$xPaid
 Oracle:Tap X target creatures.\nFerocious — If you control a creature with power 4 or greater, those creatures don't untap during their controllers' next untap steps.

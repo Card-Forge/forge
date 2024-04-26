@@ -1,6 +1,6 @@
 Name:Desecrated Earth
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDiscard | SpellDescription$ Destroy target land. Its controller discards a card.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDiscard | SpellDescription$ Destroy target land. Its controller discards a card.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Destroy target land. Its controller discards a card.

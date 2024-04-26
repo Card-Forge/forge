@@ -1,6 +1,6 @@
 Name:Suffocating Blast
 ManaCost:1 U U R
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U R | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDamage | SpellDescription$ Counter target spell and CARDNAME deals 3 damage to target creature.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDamage | SpellDescription$ Counter target spell and CARDNAME deals 3 damage to target creature.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3
 Oracle:Counter target spell and Suffocating Blast deals 3 damage to target creature.

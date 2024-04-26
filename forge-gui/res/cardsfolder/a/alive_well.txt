@@ -2,7 +2,7 @@ Name:Alive
 ManaCost:3 G
 Types:Sorcery
 K:Fuse
-A:SP$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SpellDescription$ Create a 3/3 green Centaur creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_centaur | TokenOwner$ You | SpellDescription$ Create a 3/3 green Centaur creature token.
 DeckHas:Ability$Token
 AlternateMode:Split
 Oracle:Create a 3/3 green Centaur creature token.\nFuse (You may cast one or both halves of this card from your hand.)
@@ -12,6 +12,6 @@ ALTERNATE
 Name:Well
 ManaCost:W
 Types:Sorcery
-A:SP$ GainLife | Cost$ W | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature/Times.2
 Oracle:You gain 2 life for each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)

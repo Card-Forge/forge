@@ -1,7 +1,7 @@
 Name:Death Frenzy
 ManaCost:3 B G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 B G | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ All creatures get -2/-2 until end of turn. Whenever a creature dies this turn, you gain 1 life.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ All creatures get -2/-2 until end of turn. Whenever a creature dies this turn, you gain 1 life.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigDies
 SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature dies this turn, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1

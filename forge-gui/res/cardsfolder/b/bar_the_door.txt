@@ -1,5 +1,5 @@
 Name:Bar the Door
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumDef$ +4 | SpellDescription$ Creatures you control get +0/+4 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +4 | SpellDescription$ Creatures you control get +0/+4 until end of turn.
 Oracle:Creatures you control get +0/+4 until end of turn.

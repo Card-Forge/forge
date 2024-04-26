@@ -1,7 +1,7 @@
 Name:Price of Progress
 ManaCost:1 R
 Types:Instant
-A:SP$ RepeatEach | Cost$ 1 R | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | DamageMap$ True | AILogic$ PriceOfProgress | SpellDescription$ CARDNAME deals 2 damage to each player for each nonbasic land they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | DamageMap$ True | AILogic$ PriceOfProgress | SpellDescription$ CARDNAME deals 2 damage to each player for each nonbasic land they control.
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl/Times.2
 AI:RemoveDeck:Random

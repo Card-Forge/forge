@@ -1,7 +1,7 @@
 Name:Nature's Resurgence
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 G G | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player draws a card for each creature card in their graveyard.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDraw | SpellDescription$ Each player draws a card for each creature card in their graveyard.
 SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:X:Count$ValidGraveyard Creature.RememberedPlayerCtrl
 Oracle:Each player draws a card for each creature card in their graveyard.

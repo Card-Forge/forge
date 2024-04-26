@@ -1,7 +1,7 @@
 Name:Diabolic Revelation
 ManaCost:X 3 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X 3 B B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ X | SpellDescription$ Search your library for up to X cards, put those cards into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ X | SpellDescription$ Search your library for up to X cards, put those cards into your hand, then shuffle.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Search your library for up to X cards, put those cards into your hand, then shuffle.

@@ -1,7 +1,7 @@
 Name:Expose Evil
 ManaCost:1 W
 Types:Instant
-A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBInvestigate | SpellDescription$ Tap up to two target creatures. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBInvestigate | SpellDescription$ Tap up to two target creatures. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token
 Oracle:Tap up to two target creatures.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

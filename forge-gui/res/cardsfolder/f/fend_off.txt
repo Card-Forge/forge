@@ -1,7 +1,7 @@
 Name:Fend Off
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target creature this turn.
 K:Cycling:2
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Boros Charm
 ManaCost:R W
 Types:Instant
-A:SP$ Charm | Cost$ R W | Choices$ DealDmg,PumpAll,PumpDouble | CharmNum$ 1
+A:SP$ Charm | Choices$ DealDmg,PumpAll,PumpDouble | CharmNum$ 1
 SVar:DealDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | AILogic$ ChoiceBurn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SpellDescription$ Permanents you control gain indestructible until end of turn.
 SVar:PumpDouble:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.

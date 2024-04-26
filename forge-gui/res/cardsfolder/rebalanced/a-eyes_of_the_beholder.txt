@@ -1,5 +1,5 @@
 Name:A-Eyes of the Beholder
 ManaCost:3 B B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -11 | NumDef$ -11 | IsCurse$ True | SpellDescription$ Target creature gets -11/-11 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -11 | NumDef$ -11 | IsCurse$ True | SpellDescription$ Target creature gets -11/-11 until end of turn.
 Oracle:Target creature gets -11/-11 until end of turn.

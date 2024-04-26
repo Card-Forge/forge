@@ -1,6 +1,6 @@
 Name:Enlightened Tutor
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact or enchantment card, reveal it, then shuffle and put that card on top.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Artifact,Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact or enchantment card, reveal it, then shuffle and put that card on top.
 AI:RemoveDeck:Random
 Oracle:Search your library for an artifact or enchantment card, reveal it, then shuffle and put that card on top.

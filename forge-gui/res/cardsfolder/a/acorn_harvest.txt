@@ -2,5 +2,5 @@ Name:Acorn Harvest
 ManaCost:3 G
 Types:Sorcery
 K:Flashback:1 G PayLife<3>
-A:SP$ Token | Cost$ 3 G | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create two 1/1 green Squirrel creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create two 1/1 green Squirrel creature tokens.
 Oracle:Create two 1/1 green Squirrel creature tokens.\nFlashback—{1}{G}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

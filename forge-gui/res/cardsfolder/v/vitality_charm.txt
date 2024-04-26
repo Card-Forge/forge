@@ -1,7 +1,7 @@
 Name:Vitality Charm
 ManaCost:G
 Types:Instant
-A:SP$ Charm | Cost$ G | Choices$ DBToken,DBPump,DBReg
+A:SP$ Charm | Choices$ DBToken,DBPump,DBReg
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You | SpellDescription$ Create a 1/1 green Insect creature token.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +1/+1 and gains trample until end of turn.
 SVar:DBReg:DB$ Regenerate | ValidTgts$ Beast | TgtPrompt$ Select target Beast | SpellDescription$ Regenerate target Beast.

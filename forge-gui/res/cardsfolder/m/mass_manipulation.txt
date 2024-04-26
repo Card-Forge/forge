@@ -1,7 +1,7 @@
 Name:Mass Manipulation
 ManaCost:X X U U U U
 Types:Sorcery
-A:SP$ GainControl | Cost$ X X U U U U | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select X target creatures or planeswalkers | TargetMin$ X | TargetMax$ X | SpellDescription$ Gain control of X target creatures and/or planeswalkers.
+A:SP$ GainControl | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select X target creatures or planeswalkers | TargetMin$ X | TargetMax$ X | SpellDescription$ Gain control of X target creatures and/or planeswalkers.
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:Gain control of X target creatures and/or planeswalkers.

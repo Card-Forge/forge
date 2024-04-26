@@ -2,6 +2,6 @@ Name:Temporal Mastery
 ManaCost:5 U U
 Types:Sorcery
 K:Miracle:1 U
-A:SP$ AddTurn | Cost$ 5 U U | NumTurns$ 1 | SubAbility$ DBExile | SpellDescription$ Take an extra turn after this one. Exile Temporal Mastery.
+A:SP$ AddTurn | NumTurns$ 1 | SubAbility$ DBExile | SpellDescription$ Take an extra turn after this one. Exile Temporal Mastery.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Take an extra turn after this one. Exile Temporal Mastery.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

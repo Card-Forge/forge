@@ -5,4 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ Any | IsPresent$ Card.Self+ThisTurnEntered | SpellDescription$ Add one mana of any color. Activate only if CARDNAME entered the battlefield this turn.
 A:AB$ Token | Cost$ 3 T | TokenScript$ c_1_1_a_phyrexian_mite_toxic_noblock | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)
 DeckHas:Ability$Token & Type$Phyrexian|Mite|Artifact
-Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Activate only if Mirrex entered the battlefield this turn.\n{3},{T}: Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Activate only if Mirrex entered the battlefield this turn.\n{3}, {T}: Create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block." (Players dealt combat damage by it also get a poison counter.)

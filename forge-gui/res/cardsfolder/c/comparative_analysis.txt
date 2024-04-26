@@ -2,5 +2,5 @@ Name:Comparative Analysis
 ManaCost:3 U
 Types:Instant
 K:Surge:2 U
-A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards.
 Oracle:Surge {2}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nTarget player draws two cards.

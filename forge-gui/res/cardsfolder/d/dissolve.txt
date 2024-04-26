@@ -1,6 +1,6 @@
 Name:Dissolve
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBScry | Destination$ Graveyard | SpellDescription$ Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBScry | Destination$ Graveyard | SpellDescription$ Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Counter target spell. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

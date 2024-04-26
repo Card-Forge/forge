@@ -2,5 +2,5 @@ Name:Banishing Stroke
 ManaCost:5 W
 Types:Instant
 K:Miracle:W
-A:SP$ ChangeZone | Cost$ 5 W | ValidTgts$ Artifact,Creature,Enchantment | IsCurse$ True | TgtPrompt$ Select target artifact, creature or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact, creature or enchantment on the bottom of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Creature,Enchantment | IsCurse$ True | TgtPrompt$ Select target artifact, creature or enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact, creature or enchantment on the bottom of its owner's library.
 Oracle:Put target artifact, creature, or enchantment on the bottom of its owner's library.\nMiracle {W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

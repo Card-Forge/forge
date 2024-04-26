@@ -2,7 +2,7 @@ Name:Glamerdye
 ManaCost:1 U
 Types:Instant
 K:Retrace
-A:SP$ ChangeText | Cost$ 1 U | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeColorWord$ Choose Choose | Duration$ Permanent | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another.
+A:SP$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeColorWord$ Choose Choose | Duration$ Permanent | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Change the text of target spell or permanent by replacing all instances of one color word with another.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

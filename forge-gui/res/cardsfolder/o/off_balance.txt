@@ -1,6 +1,6 @@
 Name:Off Balance
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | SpellDescription$ Target creature can't attack or block this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | SpellDescription$ Target creature can't attack or block this turn.
 SVar:PlayMain1:TRUE
 Oracle:Target creature can't attack or block this turn.

@@ -1,5 +1,5 @@
 Name:Shattering Blow
 ManaCost:1 RW
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 RW | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile target artifact.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Exile target artifact.
 Oracle:Exile target artifact.

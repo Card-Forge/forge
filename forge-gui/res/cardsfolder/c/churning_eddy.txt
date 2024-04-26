@@ -1,6 +1,6 @@
 Name:Churning Eddy
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Return target creature and target land to their owners' hands. | SubAbility$ spBounce
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Return target creature and target land to their owners' hands. | SubAbility$ spBounce
 SVar:spBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Land | TgtPrompt$ Select target land
 Oracle:Return target creature and target land to their owners' hands.

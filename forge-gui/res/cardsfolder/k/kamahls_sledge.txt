@@ -1,7 +1,7 @@
 Name:Kamahl's Sledge
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 5 R R | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Threshold — If seven or more cards are in your graveyard, instead CARDNAME deals 4 damage to that creature and 4 damage to that creature's controller.
+A:SP$ DealDamage | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamage | DamageMap$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Threshold — If seven or more cards are in your graveyard, instead CARDNAME deals 4 damage to that creature and 4 damage to that creature's controller.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 4 | Condition$ Threshold | Defined$ TargetedController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Kamahl's Sledge deals 4 damage to target creature.\nThreshold — If seven or more cards are in your graveyard, instead Kamahl's Sledge deals 4 damage to that creature and 4 damage to that creature's controller.

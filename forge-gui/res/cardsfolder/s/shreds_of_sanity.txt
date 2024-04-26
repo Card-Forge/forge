@@ -1,7 +1,7 @@
 Name:Shreds of Sanity
 ManaCost:2 R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 R | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target instant card in your graveyard | ValidTgts$ Instant.YouCtrl | SpellDescription$ Return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card. Exile CARDNAME. | SubAbility$ DBReturn
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target instant card in your graveyard | ValidTgts$ Instant.YouCtrl | SpellDescription$ Return up to one target instant card and up to one target sorcery card from your graveyard to your hand, then discard a card. Exile CARDNAME. | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Sorcery.YouCtrl | TgtPrompt$ Select target sorcery card in your graveyard | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile

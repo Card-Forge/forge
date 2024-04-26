@@ -2,6 +2,6 @@ Name:Blinding Flare
 ManaCost:R
 Types:Sorcery
 K:Strive:R
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Any number of target creatures can't block this turn.
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {R} more to cast for each target beyond the first.\nAny number of target creatures can't block this turn.

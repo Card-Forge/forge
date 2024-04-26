@@ -1,5 +1,5 @@
 Name:Forked Lightning
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among one, two, or three target creatures.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among one, two, or three target creatures.
 Oracle:Forked Lightning deals 4 damage divided as you choose among one, two, or three target creatures.

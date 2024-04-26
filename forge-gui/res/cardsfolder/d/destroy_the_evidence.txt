@@ -1,6 +1,6 @@
 Name:Destroy the Evidence
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDigUntil | SpellDescription$ Destroy target land. Its controller reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDigUntil | SpellDescription$ Destroy target land. Its controller reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.
 SVar:DBDigUntil:DB$ DigUntil | Defined$ TargetedController | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 Oracle:Destroy target land. Its controller reveals cards from the top of their library until they reveal a land card, then puts those cards into their graveyard.

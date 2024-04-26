@@ -1,7 +1,7 @@
 Name:Deadly Brew
 ManaCost:B G
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ B G | SacValid$ Creature,Planeswalker | Defined$ Player | RememberSacrificed$ True | SubAbility$ DBChangeZone | SpellDescription$ Each player sacrifices a creature or planeswalker. If you sacrificed a permanent this way, you may return another permanent card from your graveyard to your hand.
+A:SP$ Sacrifice | SacValid$ Creature,Planeswalker | Defined$ Player | RememberSacrificed$ True | SubAbility$ DBChangeZone | SpellDescription$ Each player sacrifices a creature or planeswalker. If you sacrificed a permanent this way, you may return another permanent card from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card.Permanent+YouCtrl | ConditionCompare$ GE1 | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.YouCtrl+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Each player sacrifices a creature or planeswalker. If you sacrificed a permanent this way, you may return another permanent card from your graveyard to your hand.

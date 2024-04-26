@@ -1,6 +1,6 @@
 Name:Silhouette
 ManaCost:1 U
 Types:Instant
-A:SP$ Effect | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ReplacementEffects$ RPrevent | StackDescription$ SpellDescription | SpellDescription$ Choose target creature. If a spell or ability that targets that creature would cause a source to deal damage to that creature this turn, prevent that damage.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ReplacementEffects$ RPrevent | StackDescription$ SpellDescription | SpellDescription$ Choose target creature. If a spell or ability that targets that creature would cause a source to deal damage to that creature this turn, prevent that damage.
 SVar:RPrevent:Event$ DamageDone | ValidCause$ SpellAbility.IsTargeting Remembered | ValidTarget$ Card.IsRemembered | Prevent$ True | Description$ If a spell or ability that targets that creature would cause a source to deal damage to that creature this turn, prevent that damage.
 Oracle:Choose target creature. If a spell or ability that targets that creature would cause a source to deal damage to that creature this turn, prevent that damage.

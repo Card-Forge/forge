@@ -1,7 +1,7 @@
 Name:Grim Discovery
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeCreature,ChangeLand
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ChangeCreature,ChangeLand
 SVar:ChangeCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:ChangeLand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouCtrl | SpellDescription$ Return target land card from your graveyard to your hand.
 Oracle:Choose one or both —\n• Return target creature card from your graveyard to your hand.\n• Return target land card from your graveyard to your hand.

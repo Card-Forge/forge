@@ -1,5 +1,5 @@
 Name:Assassinate
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 Oracle:Destroy target tapped creature.

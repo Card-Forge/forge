@@ -1,5 +1,5 @@
 Name:Enchantment Alteration
 ManaCost:U
 Types:Instant
-A:SP$ Attach | Cost$ U | ValidTgts$ Aura.AttachedTo Creature,Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a creature or land | Object$ Targeted | Choices$ Permanent.sharesCardTypeWith AttachedBy Targeted | Move$ True | AILogic$ MoveTgtAura | StackDescription$ SpellDescription | SpellDescription$ Attach target Aura attached to a creature or land to another permanent of that type.
+A:SP$ Attach | ValidTgts$ Aura.AttachedTo Creature,Aura.AttachedTo Land | TgtPrompt$ Select target Aura attached to a creature or land | Object$ Targeted | Choices$ Permanent.sharesCardTypeWith AttachedBy Targeted | Move$ True | AILogic$ MoveTgtAura | StackDescription$ SpellDescription | SpellDescription$ Attach target Aura attached to a creature or land to another permanent of that type.
 Oracle:Attach target Aura attached to a creature or land to another permanent of that type.

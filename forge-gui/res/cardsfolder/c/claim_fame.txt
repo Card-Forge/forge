@@ -1,7 +1,7 @@
 Name:Claim
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLE2 | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLE2 | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 AlternateMode:Split
 Oracle:Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 
@@ -11,5 +11,5 @@ Name:Fame
 ManaCost:1 R
 Types:Sorcery
 K:Aftermath
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Haste | SpellDescription$ Target creature gets +2/+0 and gains haste until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | KW$ Haste | SpellDescription$ Target creature gets +2/+0 and gains haste until end of turn.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget creature gets +2/+0 and gains haste until end of turn.

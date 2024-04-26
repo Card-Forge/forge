@@ -1,6 +1,6 @@
 Name:Attune with Aether
 ManaCost:G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | SubAbility$ DBEnergy | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You get {E}{E} (two energy counters).
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | SubAbility$ DBEnergy | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You get {E}{E} (two energy counters).
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 Oracle:Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You get {E}{E} (two energy counters).

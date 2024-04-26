@@ -1,6 +1,6 @@
 Name:Hindering Light
 ManaCost:W U
 Types:Instant
-A:SP$ Counter | Cost$ W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield,You | SpellDescription$ Counter target spell that targets you or a permanent you control. Draw a card. | SubAbility$ DB
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield,You | SpellDescription$ Counter target spell that targets you or a permanent you control. Draw a card. | SubAbility$ DB
 SVar:DB:DB$ Draw | NumCards$ 1
 Oracle:Counter target spell that targets you or a permanent you control.\nDraw a card.

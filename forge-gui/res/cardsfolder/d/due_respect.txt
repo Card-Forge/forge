@@ -1,7 +1,7 @@
 Name:Due Respect
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ RepETB | SubAbility$ DBDraw | AILogic$ BeginningOfOppTurn | SpellDescription$ Permanents enter the battlefield tapped this turn.
+A:SP$ Effect | ReplacementEffects$ RepETB | SubAbility$ DBDraw | AILogic$ BeginningOfOppTurn | SpellDescription$ Permanents enter the battlefield tapped this turn.
 SVar:RepETB:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ Permanents enter the battlefield tapped this turn.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.

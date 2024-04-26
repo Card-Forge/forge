@@ -1,7 +1,7 @@
 Name:Armed and Armored
 ManaCost:1 W
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 W | Types$ Creature,Artifact | ValidCards$ Vehicle.YouCtrl | SubAbility$ ArmDwarf | StackDescription$ Vehicles {p:You} controls become artifact creatures until end of turn. | SpellDescription$ Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it.
+A:SP$ AnimateAll | Types$ Creature,Artifact | ValidCards$ Vehicle.YouCtrl | SubAbility$ ArmDwarf | StackDescription$ Vehicles {p:You} controls become artifact creatures until end of turn. | SpellDescription$ Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it.
 SVar:ArmDwarf:DB$ Attach | Object$ Valid Equipment.YouCtrl | Defined$ Valid Dwarf.YouCtrl | Optional$ True | StackDescription$ {p:You} chooses a Dwarf they control and attaches any number of Equipment they control to it.
 DeckNeeds:Type$Vehicle|Dwarf
 DeckHints:Type$Equipment

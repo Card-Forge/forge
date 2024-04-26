@@ -1,5 +1,5 @@
 Name:Quiet Purity
 ManaCost:W
 Types:Instant Arcane
-A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Destroy target enchantment.

@@ -1,6 +1,6 @@
 Name:Cytoshape
 ManaCost:1 G U
 Types:Instant
-A:SP$ Clone | Cost$ 1 G U | Choices$ Creature.nonLegendary | ChoiceTitle$ Choose a nonlegendary creature to copy | ValidTgts$ Creature | TgtPrompt$ Choose target creature to become a copy | Duration$ UntilEndOfTurn | StackDescription$ SpellDescription | SpellDescription$ Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
+A:SP$ Clone | Choices$ Creature.nonLegendary | ChoiceTitle$ Choose a nonlegendary creature to copy | ValidTgts$ Creature | TgtPrompt$ Choose target creature to become a copy | Duration$ UntilEndOfTurn | StackDescription$ SpellDescription | SpellDescription$ Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.
 AI:RemoveDeck:All
 Oracle:Choose a nonlegendary creature on the battlefield. Target creature becomes a copy of that creature until end of turn.

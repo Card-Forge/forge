@@ -1,7 +1,7 @@
 Name:Backlash
 ManaCost:1 B R
 Types:Instant
-A:SP$ Tap | Cost$ 1 B R | ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. That creature deals damage equal to its power to its controller.
+A:SP$ Tap | ValidTgts$ Creature.untapped | TgtPrompt$ Select an untapped creature | SubAbility$ DBDamage | SpellDescription$ Tap target untapped creature. That creature deals damage equal to its power to its controller.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | DamageSource$ Targeted | NumDmg$ X
 SVar:X:Targeted$CardPower
 Oracle:Tap target untapped creature. That creature deals damage equal to its power to its controller.

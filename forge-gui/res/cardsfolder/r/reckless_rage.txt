@@ -1,6 +1,6 @@
 Name:Reckless Rage
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control (4 damage) | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature you don't control and 2 damage to target creature you control.
+A:SP$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control (4 damage) | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature you don't control and 2 damage to target creature you control.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control (2 damage) | NumDmg$ 2
 Oracle:Reckless Rage deals 4 damage to target creature you don't control and 2 damage to target creature you control.

@@ -1,7 +1,7 @@
 Name:Stolen by the Fae
 ManaCost:X U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcEQX | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Return target creature with mana value X to its owner's hand. You create X 1/1 blue Faerie creature tokens with flying.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcEQX | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Return target creature with mana value X to its owner's hand. You create X 1/1 blue Faerie creature tokens with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You
 SVar:X:Count$xPaid
 DeckHas:Ability$Token

@@ -2,7 +2,7 @@ Name:Goblin Barrage
 ManaCost:3 R
 Types:Sorcery
 K:Kicker:Sac<1/Artifact;Goblin/artifact or Goblin>
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature. If this spell was kicked, it also deals 4 damage to target player or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature. If this spell was kicked, it also deals 4 damage to target player or planeswalker.
 SVar:DBDealDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Player,Planeswalker | NumDmg$ 4 | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select target player or planeswalker
 SVar:X:Count$Kicked.1.0
 SVar:AIPreference:SacCost$Creature.Goblin+token,Creature.Goblin+cmcLE1,Artifact.token,Artifact.cmcEQ1

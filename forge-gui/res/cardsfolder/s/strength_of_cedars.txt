@@ -1,6 +1,6 @@
 Name:Strength of Cedars
 ManaCost:4 G
 Types:Instant Arcane
-A:SP$ Pump | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of lands you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
 Oracle:Target creature gets +X/+X until end of turn, where X is the number of lands you control.

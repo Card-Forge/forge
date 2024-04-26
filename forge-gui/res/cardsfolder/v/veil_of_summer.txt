@@ -1,7 +1,7 @@
 Name:Veil of Summer
 ManaCost:G
 Types:Instant
-A:SP$ Draw | Cost$ G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBEffect | AILogic$ VeilOfSummer | StackDescription$ SpellDescription | SpellDescription$ Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
+A:SP$ Draw | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBEffect | AILogic$ VeilOfSummer | StackDescription$ SpellDescription | SpellDescription$ Draw a card if an opponent has cast a blue or black spell this turn. Spells you control can't be countered this turn. You and permanents you control gain hexproof from blue and from black until end of turn. (You and they can't be the targets of blue or black spells or abilities your opponents control.)
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ AntiMagic | SubAbility$ DBPump
 SVar:AntiMagic:Event$ Counter | ValidSA$ Spell.YouCtrl | Layer$ CantHappen | Description$ Spells you control can't be countered this turn.
 SVar:DBPump:DB$ Pump | Defined$ You | KW$ Hexproof:Card.Black:black & Hexproof:Card.Blue:blue | SubAbility$ DBPumpAll | StackDescription$ None

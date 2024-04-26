@@ -1,7 +1,7 @@
 Name:Chilling Trap
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -4/-0 until end of turn. If you control a Wizard, draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -4/-0 until end of turn. If you control a Wizard, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Wizard.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Wizard,
 DeckHints:Type$Wizard
 Oracle:Target creature gets -4/-0 until end of turn. If you control a Wizard, draw a card.

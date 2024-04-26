@@ -1,5 +1,5 @@
 Name:Rally
 ManaCost:W W
 Types:Instant
-A:SP$ PumpAll | Cost$ W W | ValidCards$ Creature.blocking | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Blocking creatures get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.blocking | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Blocking creatures get +1/+1 until end of turn.
 Oracle:Blocking creatures get +1/+1 until end of turn.

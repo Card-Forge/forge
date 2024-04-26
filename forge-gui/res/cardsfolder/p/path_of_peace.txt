@@ -1,6 +1,6 @@
 Name:Path of Peace
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. Its owner gains 4 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. Its owner gains 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedOwner | LifeAmount$ 4
 Oracle:Destroy target creature. Its owner gains 4 life.

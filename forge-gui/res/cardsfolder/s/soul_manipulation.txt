@@ -1,7 +1,7 @@
 Name:Soul Manipulation
 ManaCost:1 U B
 Types:Instant
-A:SP$ Charm | Cost$ 1 U B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCounter,DBChangeZone
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCounter,DBChangeZone
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 Oracle:Choose one or both —\n• Counter target creature spell.\n• Return target creature card from your graveyard to your hand.

@@ -1,7 +1,7 @@
 Name:Winnow
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Permanent.nonLand | ConditionCheckSVar$ WinnowCheck | ConditionSVarCompare$ GE2 | SubAbility$ DBDraw | SpellDescription$ Destroy target nonland permanent if another permanent with the same name is on the battlefield. Draw a card.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | ConditionCheckSVar$ WinnowCheck | ConditionSVarCompare$ GE2 | SubAbility$ DBDraw | SpellDescription$ Destroy target nonland permanent if another permanent with the same name is on the battlefield. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:WinnowCheck:Count$Valid Permanent.sharesNameWith Targeted
 AI:RemoveDeck:All

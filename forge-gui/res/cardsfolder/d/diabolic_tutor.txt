@@ -1,7 +1,7 @@
 Name:Diabolic Tutor
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
 #TODO: Improve the tutoring logic for the AI. Currently will generally look for the most expensive castable thing in the library (which can, of course, be used to advantage in properly constructed AI decks).
 AI:RemoveDeck:Random
 Oracle:Search your library for a card, put that card into your hand, then shuffle.

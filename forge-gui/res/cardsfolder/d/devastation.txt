@@ -1,5 +1,5 @@
 Name:Devastation
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 5 R R | ValidCards$ Creature,Land | SpellDescription$ Destroy all creatures and lands.
+A:SP$ DestroyAll | ValidCards$ Creature,Land | SpellDescription$ Destroy all creatures and lands.
 Oracle:Destroy all creatures and lands.

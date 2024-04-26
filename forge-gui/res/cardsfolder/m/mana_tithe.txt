@@ -1,5 +1,5 @@
 Name:Mana Tithe
 ManaCost:W
 Types:Instant
-A:SP$ Counter | Cost$ W | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
 Oracle:Counter target spell unless its controller pays {1}.

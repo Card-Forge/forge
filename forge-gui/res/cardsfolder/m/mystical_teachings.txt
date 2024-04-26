@@ -2,7 +2,7 @@ Name:Mystical Teachings
 ManaCost:3 U
 Types:Instant
 K:Flashback:5 B
-A:SP$ ChangeZone | Cost$ 3 U | ChangeType$ Instant,Card.hasKeywordFlash | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | SpellDescription$ Search your library for an instant card or a card with flash, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | ChangeType$ Instant,Card.hasKeywordFlash | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | SpellDescription$ Search your library for an instant card or a card with flash, reveal it, put it into your hand, then shuffle.
 #TODO: The AI will currently search for the most expensive valid card in the library. This can be used to the AI's advantage with
 #careful deck design (which is why this card only works in properly designed AI decks). Consider improving tutoring logic with priorities.
 AI:RemoveDeck:Random

@@ -2,5 +2,5 @@ Name:Dig Through Time
 ManaCost:6 U U
 Types:Instant
 K:Delve
-A:SP$ Dig | Cost$ 6 U U | DigNum$ 7 | ChangeNum$ 2 | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ 2 | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nLook at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in any order.

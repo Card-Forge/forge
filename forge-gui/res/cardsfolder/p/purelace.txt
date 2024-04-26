@@ -1,7 +1,7 @@
 Name:Purelace
 ManaCost:W
 Types:Instant
-A:SP$ Animate | Cost$ W | Colors$ White | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)
+A:SP$ Animate | Colors$ White | OverwriteColors$ True | ValidTgts$ Card | TgtZone$ Stack,Battlefield | Duration$ Permanent | SpellDescription$ Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)

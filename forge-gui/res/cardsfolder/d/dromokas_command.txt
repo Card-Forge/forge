@@ -1,7 +1,7 @@
 Name:Dromoka's Command
 ManaCost:G W
 Types:Instant
-A:SP$ Charm | Cost$ G W | Choices$ DBPrevent,DBSacrifice,DBPutCounter,DBPump | CharmNum$ 2
+A:SP$ Charm | Choices$ DBPrevent,DBSacrifice,DBPutCounter,DBPump | CharmNum$ 2
 SVar:DBPrevent:DB$ Effect | ValidTgts$ Instant,Sorcery | AILogic$ Prevent | TgtZone$ Stack | TgtPrompt$ Select target instant or sorcery spell to prevent damage from | StaticAbilities$ PreventDmg | ExileOnMoved$ Stack | RememberObjects$ TargetedSource | SpellDescription$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:PreventDmg:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Stack | Affected$ Card.IsRemembered | AddKeyword$ Prevent all damage that would be dealt by CARDNAME. | Description$ Prevent all damage target instant or sorcery spell would deal this turn.
 SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Player | TgtPrompt$ Select target player to sacrifice an enchantment | SacValid$ Enchantment | SacMessage$ Enchantment | SpellDescription$ Target player sacrifices an enchantment.

@@ -1,7 +1,7 @@
 Name:Professor's Warning
 ManaCost:B
 Types:Instant
-A:SP$ Charm | Cost$ B | Choices$ DBPutCounter,DBPump | Defined$ You
+A:SP$ Charm | Choices$ DBPutCounter,DBPump | Defined$ You
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 DeckHas:Ability$Counters

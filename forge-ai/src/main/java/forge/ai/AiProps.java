@@ -139,7 +139,13 @@ public enum AiProps { /** */
     SACRIFICE_DEFAULT_PREF_MIN_CMC("0"),
     SACRIFICE_DEFAULT_PREF_MAX_CMC("2"),
     SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS("true"),
-    SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL("135");
+    SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL("135"),
+    SIDEBOARDING_ENABLE("true"),
+    SIDEBOARDING_CHANCE_PER_CARD("50"),
+    SIDEBOARDING_CHANCE_ON_WIN("0"),
+    SIDEBOARDING_IN_LIMITED_FORMATS("false"),
+    SIDEBOARDING_SHARED_TYPE_ONLY("false"),
+    SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false");
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

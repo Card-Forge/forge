@@ -1,5 +1,5 @@
 Name:Celestial Purge
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.Black,Permanent.Red | TgtPrompt$ Select target black or red permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target black or red permanent.
+A:SP$ ChangeZone | ValidTgts$ Permanent.Black,Permanent.Red | TgtPrompt$ Select target black or red permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target black or red permanent.
 Oracle:Exile target black or red permanent.

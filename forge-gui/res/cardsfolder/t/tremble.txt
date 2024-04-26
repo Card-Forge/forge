@@ -1,6 +1,6 @@
 Name:Tremble
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 1 R | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices a land.
+A:SP$ Sacrifice | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices a land.
 AI:RemoveDeck:Random
 Oracle:Each player sacrifices a land.

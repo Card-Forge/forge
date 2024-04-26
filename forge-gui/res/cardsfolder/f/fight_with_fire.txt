@@ -2,7 +2,7 @@ Name:Fight with Fire
 ManaCost:2 R
 Types:Sorcery
 K:Kicker:5 R
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | TargetMin$ X | TargetMax$ X | SubAbility$ DBDealDamage | AILogic$ AssumeAtLeastOneTarget | SpellDescription$ CARDNAME deals 5 damage to target creature. If this spell was kicked, it deals 10 damage divided as you choose among any number of targets instead.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | TargetMin$ X | TargetMax$ X | SubAbility$ DBDealDamage | AILogic$ AssumeAtLeastOneTarget | SpellDescription$ CARDNAME deals 5 damage to target creature. If this spell was kicked, it deals 10 damage divided as you choose among any number of targets instead.
 SVar:DBDealDamage:DB$ DealDamage | Condition$ Kicked | ValidTgts$ Any | NumDmg$ 10 | TargetMin$ 0 | TargetMax$ Z | DividedAsYouChoose$ Z | AILogic$ AssumeAtLeastOneTarget
 SVar:X:Count$Kicked.0.1
 SVar:Z:Count$Kicked.10.0

@@ -1,5 +1,5 @@
 Name:Wing Snare
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 Oracle:Destroy target creature with flying.

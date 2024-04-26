@@ -11,5 +11,5 @@ ALTERNATE
 Name:Boulder Rush
 ManaCost:R
 Types:Instant Adventure
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | SpellDescription$ Target creature gets +2/+0 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | SpellDescription$ Target creature gets +2/+0 until end of turn. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Target creature gets +2/+0 until end of turn. (Then exile this card. You may cast the creature later from exile.)

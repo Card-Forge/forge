@@ -1,7 +1,7 @@
 Name:Back in Town
 Types:Sorcery
 ManaCost:X 2 B
-A:SP$ ChangeZone | Cost$ X 2 B | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn+Outlaw | TgtPrompt$ Select X target outlaw creatures in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return X target outlaw creature cards from your graveyard to the battlefield.
+A:SP$ ChangeZone | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.YouOwn+Outlaw | TgtPrompt$ Select X target outlaw creatures in your graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return X target outlaw creature cards from your graveyard to the battlefield.
 SVar:X:Count$xPaid
 DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
 Oracle:Return X target outlaw creature cards from your graveyard to the battlefield. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)

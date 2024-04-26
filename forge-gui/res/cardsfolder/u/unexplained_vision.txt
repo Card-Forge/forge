@@ -1,7 +1,7 @@
 Name:Unexplained Vision
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U | NumCards$ 3 | SubAbility$ DBScry | AIManaPref$ U | SpellDescription$ Draw three cards. Adamant — If at least three blue mana was spent to cast this spell, scry 3.
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBScry | AIManaPref$ U | SpellDescription$ Draw three cards. Adamant — If at least three blue mana was spent to cast this spell, scry 3.
 SVar:DBScry:DB$ Scry | ScryNum$ 3 | ConditionCheckSVar$ X
 SVar:X:Count$Adamant.Blue.1.0
 Oracle:Draw three cards.\nAdamant — If at least three blue mana was spent to cast this spell, scry 3.

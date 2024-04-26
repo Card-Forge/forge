@@ -1,7 +1,7 @@
 Name:Academic Probation
 ManaCost:1 W
 Types:Sorcery Lesson
-A:SP$ Charm | Cost$ 1 W | Choices$ DBNameCard,DBPump
+A:SP$ Charm | Choices$ DBNameCard,DBPump
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ DBEffect | SpellDescription$ Choose a nonland card name. Until your next turn, your opponents can't cast spells with the chosen name.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ CantCast | Duration$ UntilYourNextTurn
 SVar:CantCast:Mode$ CantBeCast | ValidCard$ Card.nonLand+NamedCard | Caster$ Opponent | EffectZone$ Command | Description$ Your opponents can't cast spells with the chosen name.

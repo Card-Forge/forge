@@ -1078,7 +1078,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostSacrifice cost) {
         final String amount = cost.getAmount();
-        final String type = cost.getType();
+        String type = cost.getType();
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.canBeSacrificedBy(ability, isEffect())) {
@@ -1095,6 +1095,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
+        boolean differentNames = false;
+        if (type.contains("+WithDifferentNames")) {
+            type = type.replace("+WithDifferentNames", "");
+            differentNames = true;
+        }
+
         CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability, isEffect()));
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
 
@@ -1106,6 +1112,24 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (0 == c) {
             return PaymentDecision.number(0);
         }
+        if (differentNames) {
+            final CardCollection chosen = new CardCollection();
+            while (c > 0) {
+                final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, ability);
+                inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), c));
+                inp.setCancelAllowed(true);
+                inp.showAndWait();
+                if (inp.hasCancelled()) {
+                    return null;
+                }
+                final Card first = inp.getFirstSelected();
+                chosen.add(first);
+                list = CardLists.filter(list, Predicates.not(CardPredicates.sharesNameWith(first)));
+                c--;
+            }
+            return PaymentDecision.card(chosen);
+        }
+
         if (list.size() < c) {
             return null;
         }

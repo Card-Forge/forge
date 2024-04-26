@@ -1,7 +1,7 @@
 Name:Spy Network
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target player. | SubAbility$ DBHand | StackDescription$ SpellDescription | SpellDescription$ Look at target player's hand, the top card of that player's library, and any face-down creatures they control.
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player. | SubAbility$ DBHand | StackDescription$ SpellDescription | SpellDescription$ Look at target player's hand, the top card of that player's library, and any face-down creatures they control.
 SVar:DBHand:DB$ LookAt | Defined$ ValidHand Card.TargetedPlayerCtrl | SubAbility$ DBTopLibrary | StackDescription$ None
 SVar:DBTopLibrary:DB$ LookAt | Defined$ ValidAll Card.TopLibrary+TargetedPlayerCtrl | SubAbility$ DBFaceDown | StackDescription$ None
 SVar:DBFaceDown:DB$ LookAt | Defined$ Valid Creature.faceDown+TargetedPlayerCtrl | SubAbility$ DBRearrange | StackDescription$ None

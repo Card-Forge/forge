@@ -1,6 +1,6 @@
 Name:Nature's Cloak
 ManaCost:2 G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.Green+YouCtrl | KW$ Landwalk:Forest | SpellDescription$ Green creatures you control gain forestwalk until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.Green+YouCtrl | KW$ Landwalk:Forest | SpellDescription$ Green creatures you control gain forestwalk until end of turn.
 AI:RemoveDeck:Random
 Oracle:Green creatures you control gain forestwalk until end of turn. (They can't be blocked as long as defending player controls a Forest.)

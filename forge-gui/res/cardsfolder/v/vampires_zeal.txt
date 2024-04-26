@@ -1,6 +1,6 @@
 Name:Vampire's Zeal
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's a Vampire, it gains first strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's a Vampire, it gains first strike until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ First Strike | ConditionDefined$ Targeted | ConditionPresent$ Vampire
 Oracle:Target creature gets +2/+2 until end of turn. If it's a Vampire, it gains first strike until end of turn.

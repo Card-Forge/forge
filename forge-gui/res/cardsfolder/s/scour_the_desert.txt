@@ -1,7 +1,7 @@
 Name:Scour the Desert
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W W | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | SubAbility$ DBToken | SpellDescription$ Exile target creature card from your graveyard. Create X 1/1 white Bird creature tokens with flying, where X is the exiled card's toughness.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | SubAbility$ DBToken | SpellDescription$ Exile target creature card from your graveyard. Create X 1/1 white Bird creature tokens with flying, where X is the exiled card's toughness.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_bird_flying | TokenOwner$ You
 SVar:X:Targeted$CardToughness
 DeckHas:Ability$Token

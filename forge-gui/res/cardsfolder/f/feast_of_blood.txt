@@ -1,7 +1,7 @@
 Name:Feast of Blood
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | IsPresent$ Vampire.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Cast this spell only if you control two or more Vampires. Destroy target creature. You gain 4 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | IsPresent$ Vampire.YouCtrl | PresentCompare$ GE2 | SpellDescription$ Cast this spell only if you control two or more Vampires. Destroy target creature. You gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 AI:RemoveDeck:Random
 Oracle:Cast this spell only if you control two or more Vampires.\nDestroy target creature. You gain 4 life.

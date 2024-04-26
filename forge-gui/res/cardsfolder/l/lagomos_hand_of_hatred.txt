@@ -7,4 +7,4 @@ SVar:TrigToken:DB$ Token | TokenScript$ r_2_1_elemental_trample_haste | TokenAmo
 A:AB$ ChangeZone | Cost$ T | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | CheckSVar$ X | SVarCompare$ GE5 | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle. Activate only if five or more creatures died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHas:Ability$Counters|Sacrifice|Token & Type$Elemental
-Oracle:\nAt the beginning of combat on your turn, create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.\n{T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.
+Oracle:At the beginning of combat on your turn, create a 2/1 red Elemental creature token with trample and haste. Sacrifice it at the beginning of the next end step.\n{T}: Search your library for a card, put it into your hand, then shuffle. Activate only if five or more creatures died this turn.

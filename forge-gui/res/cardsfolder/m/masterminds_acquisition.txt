@@ -1,7 +1,7 @@
 Name:Mastermind's Acquisition
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 B B | Choices$ DBSearch,DBWish
+A:SP$ Charm | Choices$ DBSearch,DBWish
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put it into your hand, then shuffle.
 SVar:DBWish:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Mandatory$ True | Hidden$ True | SpellDescription$ Put a card you own from outside the game into your hand.
 Oracle:Choose one —\n• Search your library for a card, put it into your hand, then shuffle.\n• Put a card you own from outside the game into your hand.

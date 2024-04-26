@@ -1,6 +1,6 @@
 Name:Galvanic Blast
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to any target. Metalcraft — CARDNAME deals 4 damage instead if you control 3 or more artifacts.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to any target. Metalcraft — CARDNAME deals 4 damage instead if you control 3 or more artifacts.
 SVar:X:Count$Metalcraft.4.2
 Oracle:Galvanic Blast deals 2 damage to any target.\nMetalcraft — Galvanic Blast deals 4 damage instead if you control three or more artifacts.

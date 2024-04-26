@@ -1,7 +1,7 @@
 Name:Kindred Summons
 ManaCost:5 G G
 Types:Instant
-A:SP$ ChooseType | Cost$ 5 G G | Defined$ You | Type$ Creature | SubAbility$ DBDigUntil | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Reveal cards from the top of your library until you reveal X creature cards of the chosen type, where X is the number of creatures you control of that type. Put those cards onto the battlefield, then shuffle the rest of the revealed cards into your library.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDigUntil | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Reveal cards from the top of your library until you reveal X creature cards of the chosen type, where X is the number of creatures you control of that type. Put those cards onto the battlefield, then shuffle the rest of the revealed cards into your library.
 SVar:DBDigUntil:DB$ DigUntil | Amount$ X | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Valid$ Creature.ChosenType+YouOwn | ValidDescription$ creature with chosen type | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | FoundDestination$ Battlefield | Shuffle$ True
 SVar:X:Count$Valid Creature.ChosenType+YouCtrl
 AI:RemoveDeck:Random

@@ -1,6 +1,6 @@
 Name:Natural Affinity
 ManaCost:2 G
 Types:Instant
-A:SP$ AnimateAll | Cost$ 2 G | ValidCards$ Land | Types$ Creature | Power$ 2 | Toughness$ 2 | SpellDescription$ All lands become 2/2 creatures until end of turn. They're still lands.
+A:SP$ AnimateAll | ValidCards$ Land | Types$ Creature | Power$ 2 | Toughness$ 2 | SpellDescription$ All lands become 2/2 creatures until end of turn. They're still lands.
 AI:RemoveDeck:All
 Oracle:All lands become 2/2 creatures until end of turn. They're still lands.

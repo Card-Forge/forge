@@ -1,6 +1,6 @@
 Name:Devastate
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | SpellDescription$ Destroy target land. CARDNAME deals 1 damage to each creature and each player.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | SubAbility$ DBDamageAll | SpellDescription$ Destroy target land. CARDNAME deals 1 damage to each creature and each player.
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player.
 Oracle:Destroy target land. Devastate deals 1 damage to each creature and each player.

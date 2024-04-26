@@ -1,6 +1,6 @@
 Name:Nightmare Incursion
 ManaCost:5 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | Shuffle$ True | SpellDescription$ Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | Shuffle$ True | SpellDescription$ Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles.
 SVar:X:Count$Valid Swamp.YouCtrl
 Oracle:Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles.

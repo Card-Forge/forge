@@ -1,6 +1,6 @@
 Name:Fated Conflagration
 ManaCost:1 R R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker. If it's your turn, scry 2.
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker. If it's your turn, scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPlayerTurn$ True
 Oracle:Fated Conflagration deals 5 damage to target creature or planeswalker. If it's your turn, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

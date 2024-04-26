@@ -1,7 +1,7 @@
 Name:Unified Front
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenAmount$ X | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | SpellDescription$ Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | SpellDescription$ Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.
 SVar:X:Count$Converge
 DeckHints:Type$Ally
 Oracle:Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.

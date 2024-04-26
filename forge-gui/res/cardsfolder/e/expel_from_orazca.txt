@@ -2,7 +2,7 @@ Name:Expel from Orazca
 ManaCost:1 U
 Types:Instant
 K:Ascend
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead.
+A:SP$ Pump | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target nonland permanent to its owner's hand. If you have the city's blessing, you may put that permanent on top of its owner's library instead.
 SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBHandChoice,DBTopLibChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:DBHandChoice:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Hand

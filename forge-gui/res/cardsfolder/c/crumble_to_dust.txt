@@ -2,7 +2,7 @@ Name:Crumble to Dust
 ManaCost:3 R
 Types:Sorcery
 K:Devoid
-A:SP$ ChangeZone | Cost$ 3 R | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberChanged$ True | SubAbility$ ExileYard | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | RememberChanged$ True | SubAbility$ ExileYard | SpellDescription$ Exile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles his or library.
 SVar:ExileYard:DB$ ChangeZone | ChangeType$ Remembered.sameName | Origin$ Graveyard | DefinedPlayer$ TargetedController | Chooser$ You | Destination$ Exile | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup

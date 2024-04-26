@@ -2,7 +2,7 @@ Name:Reality Scramble
 ManaCost:2 R R
 Types:Sorcery
 K:Retrace
-A:SP$ ChangeZone | Cost$ 2 R R | ValidTgts$ Permanent.YouOwn | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | RememberLKI$ True | SubAbility$ DBRevealUntilShare | SpellDescription$ Put target permanent you own on the bottom of your library. Reveal cards from the top of your library until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
+A:SP$ ChangeZone | ValidTgts$ Permanent.YouOwn | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | RememberLKI$ True | SubAbility$ DBRevealUntilShare | SpellDescription$ Put target permanent you own on the bottom of your library. Reveal cards from the top of your library until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
 SVar:DBRevealUntilShare:DB$ DigUntil | Valid$ Card.sharesCardTypeWith RememberedLKI | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Put target permanent you own on the bottom of your library. Reveal cards from the top of your library until you reveal a card that shares a card type with that permanent. Put that card onto the battlefield and the rest on the bottom of your library in a random order.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

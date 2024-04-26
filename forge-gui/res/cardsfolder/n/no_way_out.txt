@@ -1,7 +1,7 @@
 Name:No Way Out
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBToken | SpellDescription$ Target opponent discards two cards.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBToken | SpellDescription$ Target opponent discards two cards.
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ You create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
 DeckHas:Ability$Discard|Token & Type$Zombie
 Oracle:Target opponent discards two cards. You create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)

@@ -1,7 +1,7 @@
 Name:Subterranean Tremors
 ManaCost:X R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutFlying | NumDmg$ X | SubAbility$ DBDestroyAll | SpellDescription$ CARDNAME deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, create an 8/8 red Lizard creature token.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SubAbility$ DBDestroyAll | SpellDescription$ CARDNAME deals X damage to each creature without flying. If X is 4 or more, destroy all artifacts. If X is 8 or more, create an 8/8 red Lizard creature token.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Artifact | ConditionCheckSVar$ X | ConditionSVarCompare$ GE4 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_8_8_lizard | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE8
 SVar:X:Count$xPaid

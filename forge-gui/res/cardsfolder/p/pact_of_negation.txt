@@ -2,7 +2,7 @@ Name:Pact of Negation
 ManaCost:0
 Colors:blue
 Types:Instant
-A:SP$ Counter | Cost$ 0 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDelTrig | SpellDescription$ Counter target spell. At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDelTrig | SpellDescription$ Counter target spell. At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
 SVar:TrigLoseGame:DB$ LosesGame | UnlessCost$ 3 U U | UnlessPayer$ You | Defined$ You
 SVar:NeedsToPlayVar:NumLands GE5

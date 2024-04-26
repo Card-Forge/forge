@@ -1,7 +1,7 @@
 Name:Coalition Victory
 ManaCost:3 W U B R G
 Types:Sorcery
-A:SP$ WinsGame | Cost$ 3 W U B R G | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ10 | SpellDescription$ You win the game if you control a land of each basic land type and a creature of each color.
+A:SP$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ10 | SpellDescription$ You win the game if you control a land of each basic land type and a creature of each color.
 SVar:Z:Count$ColorsCtrl Creature
 SVar:Y:Count$Domain
 SVar:X:SVar$Y/Plus.Z

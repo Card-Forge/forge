@@ -1,6 +1,6 @@
 Name:Magnetic Flux
 ManaCost:2 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 U | ValidCards$ Creature.Artifact+YouCtrl | KW$ Flying | SpellDescription$ Artifact creatures you control gain flying until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.Artifact+YouCtrl | KW$ Flying | SpellDescription$ Artifact creatures you control gain flying until end of turn.
 AI:RemoveDeck:Random
 Oracle:Artifact creatures you control gain flying until end of turn.

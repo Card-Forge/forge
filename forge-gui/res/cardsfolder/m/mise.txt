@@ -1,7 +1,7 @@
 Name:Mise
 ManaCost:U
 Types:Instant
-A:SP$ NameCard | Cost$ U | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ DBReveal | SpellDescription$ Choose a nonland card name,
+A:SP$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDescription$ nonland | SubAbility$ DBReveal | SpellDescription$ Choose a nonland card name,
 SVar:DBReveal:DB$ PeekAndReveal | RememberRevealed$ True | SubAbility$ DBDraw | SpellDescription$ then reveal the top card of your library.
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ GE1 | SubAbility$ DBCleanup | SpellDescription$ If that card has the chosen name, you draw three cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

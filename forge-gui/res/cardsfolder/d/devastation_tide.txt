@@ -2,5 +2,5 @@ Name:Devastation Tide
 ManaCost:3 U U
 Types:Sorcery
 K:Miracle:1 U
-A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands.
 Oracle:Return all nonland permanents to their owners' hands.\nMiracle {1}{U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

@@ -1,7 +1,7 @@
 Name:Standardize
 ManaCost:U U
 Types:Instant
-A:SP$ ChooseType | Cost$ U U | Defined$ You | Type$ Creature | InvalidTypes$ Wall | SubAbility$ DBAnimateAll | SpellDescription$ Choose a creature type other than Wall. Each creature becomes that type until end of turn.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | InvalidTypes$ Wall | SubAbility$ DBAnimateAll | SpellDescription$ Choose a creature type other than Wall. Each creature becomes that type until end of turn.
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature | Types$ ChosenType | RemoveCreatureTypes$ True
 AI:RemoveDeck:All
 Oracle:Choose a creature type other than Wall. Each creature becomes that type until end of turn.

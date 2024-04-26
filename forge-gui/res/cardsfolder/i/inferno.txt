@@ -1,5 +1,5 @@
 Name:Inferno
 ManaCost:5 R R
 Types:Instant
-A:SP$ DamageAll | Cost$ 5 R R | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
+A:SP$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 6 damage to each creature and each player.
 Oracle:Inferno deals 6 damage to each creature and each player.

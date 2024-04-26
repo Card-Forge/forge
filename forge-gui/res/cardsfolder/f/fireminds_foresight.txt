@@ -1,7 +1,7 @@
 Name:Firemind's Foresight
 ManaCost:5 U R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 5 U R | ChangeType$ Instant.cmcEQ3 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | SubAbility$ FindCMC2 | StackDescription$ Search your library for an instant card with mana value 3, reveal it, and put it into your hand. | SpellDescription$ Search your library for an instant card with mana value 3, reveal it, and put it into your hand. Then repeat this process for instant cards with mana values 2 and 1. Then shuffle.
+A:SP$ ChangeZone | ChangeType$ Instant.cmcEQ3 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | SubAbility$ FindCMC2 | StackDescription$ Search your library for an instant card with mana value 3, reveal it, and put it into your hand. | SpellDescription$ Search your library for an instant card with mana value 3, reveal it, and put it into your hand. Then repeat this process for instant cards with mana values 2 and 1. Then shuffle.
 SVar:FindCMC2:DB$ ChangeZone | ChangeType$ Instant.cmcEQ2 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | SubAbility$ FindCMC1 | StackDescription$ Then repeat this process for instant cards with mana value 2 and 1.
 SVar:FindCMC1:DB$ ChangeZone | ChangeType$ Instant.cmcEQ1 | ChangeNum$ 1 | Origin$ Library | Destination$ Hand | Shuffle$ True | StackDescription$ Then shuffle.
 DeckHints:Type$Instant

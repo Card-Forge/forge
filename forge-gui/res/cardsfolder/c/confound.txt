@@ -1,6 +1,6 @@
 Name:Confound
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.inRealZoneBattlefield | SubAbility$ DBDraw | SpellDescription$ Counter target spell that targets a creature. Draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.inRealZoneBattlefield | SubAbility$ DBDraw | SpellDescription$ Counter target spell that targets a creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target spell that targets a creature.\nDraw a card.

@@ -1,7 +1,7 @@
 Name:Dizzy Spell
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-0 until end of turn.
 K:Transmute:1 U U
 #TODO: The AI doesn't seem to use transmute, but otherwise uses this card just fine. Maybe need to improve the Transmute part before removing RemoveDeck.
 AI:RemoveDeck:All

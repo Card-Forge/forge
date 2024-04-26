@@ -1,7 +1,7 @@
 Name:Aerial Assault
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target tapped creature. You gain 1 life for each creature you control with flying.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target tapped creature. You gain 1 life for each creature you control with flying.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl+withFlying
 Oracle:Destroy target tapped creature. You gain 1 life for each creature you control with flying.

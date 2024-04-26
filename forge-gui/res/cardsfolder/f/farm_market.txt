@@ -1,7 +1,7 @@
 Name:Farm
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Destroy target attacking or blocking creature.
+A:SP$ Destroy | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SpellDescription$ Destroy target attacking or blocking creature.
 AlternateMode:Split
 Oracle:Destroy target attacking or blocking creature.
 
@@ -11,6 +11,6 @@ Name:Market
 ManaCost:2 U
 Types:Sorcery
 K:Aftermath
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDraw two cards, then discard two cards.

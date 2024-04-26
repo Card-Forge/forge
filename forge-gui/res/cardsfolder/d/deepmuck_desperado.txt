@@ -1,0 +1,7 @@
+Name:Deepmuck Desperado
+ManaCost:2 U
+Types:Creature Homarid Mercenary
+PT:2/4
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | ActivationLimit$ 1 | TriggerDescription$ Whenever you commit a crime, each opponent mills three cards. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ Player.Opponent
+Oracle:Whenever you commit a crime, each opponent mills three cards. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

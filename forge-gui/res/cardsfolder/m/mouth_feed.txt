@@ -1,7 +1,7 @@
 Name:Mouth
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_3_3_hippo | TokenOwner$ You | SpellDescription$ Create a 3/3 green Hippo creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_hippo | TokenOwner$ You | SpellDescription$ Create a 3/3 green Hippo creature token.
 DeckHas:Ability$Token
 AlternateMode:Split
 Oracle:Create a 3/3 green Hippo creature token.
@@ -12,6 +12,6 @@ Name:Feed
 ManaCost:3 G
 Types:Sorcery
 K:Aftermath
-A:SP$ Draw | Cost$ 3 G | NumCards$ X | SpellDescription$ Draw a card for each creature you control with power 3 or greater.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each creature you control with power 3 or greater.
 SVar:X:Count$Valid Creature.YouCtrl+powerGE3
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDraw a card for each creature you control with power 3 or greater.

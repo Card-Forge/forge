@@ -1,6 +1,6 @@
 Name:Meditate
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ 4 | Defined$ You | SpellDescription$ Draw four cards. You skip your next turn. | SubAbility$ DBSkip
+A:SP$ Draw | NumCards$ 4 | Defined$ You | SpellDescription$ Draw four cards. You skip your next turn. | SubAbility$ DBSkip
 SVar:DBSkip:DB$ SkipTurn | Defined$ You | NumTurns$ 1
 Oracle:Draw four cards. You skip your next turn.

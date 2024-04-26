@@ -1,7 +1,7 @@
 Name:Mind Games
 ManaCost:U
 Types:Instant
-A:SP$ Tap | Cost$ U | TgtPrompt$ Choose target artifact, creature or land | ValidTgts$ Artifact,Creature,Land | SpellDescription$ Tap target artifact, creature or land.
+A:SP$ Tap | TgtPrompt$ Choose target artifact, creature or land | ValidTgts$ Artifact,Creature,Land | SpellDescription$ Tap target artifact, creature or land.
 K:Buyback:2 U
 AI:RemoveDeck:All
 Oracle:Buyback {2}{U} (You may pay an additional {2}{U} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTap target artifact, creature, or land.

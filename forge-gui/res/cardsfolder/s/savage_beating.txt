@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Instant
 Text:Cast this spell only during your turn and only during combat.
 K:Entwine:1 R
-A:SP$ Charm | Cost$ 3 R R | Choices$ DBPump,DBUntapAll | CharmNum$ 1 | PlayerTurn$ True | ActivationPhases$ BeginCombat->EndCombat
+A:SP$ Charm | Choices$ DBPump,DBUntapAll | CharmNum$ 1 | PlayerTurn$ True | ActivationPhases$ BeginCombat->EndCombat
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Creatures you control gain double strike until end of turn.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures you control. After this phase, there is an additional combat phase.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat

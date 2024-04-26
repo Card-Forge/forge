@@ -1,7 +1,7 @@
 Name:Khorvath's Fury
 ManaCost:4 R
 Types:Sorcery
-A:SP$ AssignGroup | Cost$ 4 R | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend discards all cards from their hand, then draws that many cards plus one. CARDNAME deals damage to each foe equal to the number of cards in their hand.
+A:SP$ AssignGroup | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend discards all cards from their hand, then draws that many cards plus one. CARDNAME deals damage to each foe equal to the number of cards in their hand.
 SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Each friend discards all cards from their hand, then draws that many cards plus one.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ DBCleanup

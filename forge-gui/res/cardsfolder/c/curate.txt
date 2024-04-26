@@ -1,7 +1,7 @@
 Name:Curate
 ManaCost:1 U
 Types:Instant
-A:SP$ Surveil | Cost$ 1 U | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nDraw a card.

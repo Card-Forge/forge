@@ -12,7 +12,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.62-SNAPSHOT</version>
+        <version>1.6.63-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-ios</artifactId>

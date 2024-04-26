@@ -1,7 +1,7 @@
 Name:Nissa's Revelation
 ManaCost:5 G G
 Types:Sorcery
-A:SP$ Scry | Cost$ 5 G G | ScryNum$ 5 | SubAbility$ DBReveal | SpellDescription$ Scry 5, then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness.
+A:SP$ Scry | ScryNum$ 5 | SubAbility$ DBReveal | SpellDescription$ Scry 5, then reveal the top card of your library. If it's a creature card, you draw cards equal to its power and you gain life equal to its toughness.
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup

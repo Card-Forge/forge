@@ -1,7 +1,7 @@
 Name:Fortify
 ManaCost:2 W
 Types:Instant
-A:SP$ Charm | Cost$ 2 W | Choices$ DBPump,DBPump2
+A:SP$ Charm | Choices$ DBPump,DBPump2
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 SVar:DBPump2:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SpellDescription$ Creatures you control get +0/+2 until end of turn.
 Oracle:Choose one —\n• Creatures you control get +2/+0 until end of turn.\n• Creatures you control get +0/+2 until end of turn.

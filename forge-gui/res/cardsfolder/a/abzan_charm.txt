@@ -1,7 +1,7 @@
 Name:Abzan Charm
 ManaCost:W B G
 Types:Instant
-A:SP$ Charm | Cost$ W B G | Choices$ DBExile,DBDraw,DBCounters
+A:SP$ Charm | Choices$ DBExile,DBDraw,DBCounters
 SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.powerGE3 | TgtPrompt$ Choose target creature with power 3 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 3 or greater.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards and you lose 2 life.
 SVar:DBCounters:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.

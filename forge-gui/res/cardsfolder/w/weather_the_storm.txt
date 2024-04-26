@@ -1,6 +1,6 @@
 Name:Weather the Storm
 ManaCost:1 G
 Types:Instant
-A:SP$ GainLife | Cost$ 1 G | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:SP$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 K:Storm
 Oracle:You gain 3 life.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

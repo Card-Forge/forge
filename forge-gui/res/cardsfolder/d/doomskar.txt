@@ -1,6 +1,6 @@
 Name:Doomskar
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+A:SP$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 K:Foretell:1 W W
 Oracle:Destroy all creatures.\nForetell {1}{W}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

@@ -1,7 +1,7 @@
 Name:Confiscation Coup
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 3 U U | Defined$ You | CounterType$ ENERGY | CounterNum$ 4 | SubAbility$ DBGainControl | SpellDescription$ Choose target artifact or creature. You get {E}{E}{E}{E} (four energy counters), then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it.
+A:SP$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4 | SubAbility$ DBGainControl | SpellDescription$ Choose target artifact or creature. You get {E}{E}{E}{E} (four energy counters), then you may pay an amount of {E} equal to that permanent's mana value. If you do, gain control of it.
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True
 AI:RemoveDeck:All
 SVar:X:Targeted$CardManaCost

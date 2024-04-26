@@ -1,7 +1,7 @@
 Name:Fire Prophecy
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ DBBottom | SpellDescription$ CARDNAME deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 3 | SubAbility$ DBBottom | SpellDescription$ CARDNAME deals 3 damage to target creature. You may put a card from your hand on the bottom of your library. If you do, draw a card.
 SVar:DBBottom:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

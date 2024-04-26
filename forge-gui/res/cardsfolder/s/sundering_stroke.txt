@@ -1,7 +1,7 @@
 Name:Sundering Stroke
 ManaCost:6 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 6 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 7 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmgAll | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 7 damage divided as you choose among one, two, or three targets. If at least seven red mana was spent to cast this spell, instead CARDNAME deals 7 damage to each of those permanents and/or players.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 7 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmgAll | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 7 damage divided as you choose among one, two, or three targets. If at least seven red mana was spent to cast this spell, instead CARDNAME deals 7 damage to each of those permanents and/or players.
 SVar:DBDmgAll:DB$ DealDamage | Defined$ Targeted | NumDmg$ 7 | ConditionCheckSVar$ X | StackDescription$ None
 SVar:X:Count$Adamant_7.Red.1.0
 Oracle:Sundering Stroke deals 7 damage divided as you choose among one, two, or three targets. If at least seven red mana was spent to cast this spell, instead Sundering Stroke deals 7 damage to each of those permanents and/or players.

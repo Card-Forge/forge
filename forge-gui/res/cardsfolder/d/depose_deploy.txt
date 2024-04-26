@@ -1,7 +1,7 @@
 Name:Depose
-ManaCost:1 W/U
+ManaCost:1 WU
 Types:Instant
-A:SP$ Tap | Cost$ 1 WU | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap target creature. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AlternateMode:Split
 Oracle:Tap target creature.\nDraw a card.
@@ -11,7 +11,7 @@ ALTERNATE
 Name:Deploy
 ManaCost:2 W U
 Types:Instant
-A:SP$ Token | Cost$ 2 W U | TokenAmount$ 2 | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying | SubAbility$ DBGainLife | SpellDescription$ Create two 1/1 colorless Thopter artifact creature tokens with flying, then you gain 1 life for each creature you control.
+A:SP$ Token | TokenAmount$ 2 | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying | SubAbility$ DBGainLife | SpellDescription$ Create two 1/1 colorless Thopter artifact creature tokens with flying, then you gain 1 life for each creature you control.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$TypeYouCtrl.Creature
 DeckHas:Ability$Token

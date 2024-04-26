@@ -1,7 +1,7 @@
 Name:Take Inventory
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SubAbility$ DBDraw | SpellDescription$ Draw a card, then draw cards equal to the number of cards named Take Inventory in your graveyard.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDraw | SpellDescription$ Draw a card, then draw cards equal to the number of cards named Take Inventory in your graveyard.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedTake Inventory
 DeckNeeds:Name$Take Inventory

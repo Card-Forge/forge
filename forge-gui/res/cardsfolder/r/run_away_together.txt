@@ -1,6 +1,6 @@
 Name:Run Away Together
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers$ True | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Choose two target creatures by different players. Return those creatures to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers$ True | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Choose two target creatures by different players. Return those creatures to their owners' hands.
 AI:RemoveDeck:All
 Oracle:Choose two target creatures controlled by different players. Return those creatures to their owners' hands.

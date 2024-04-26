@@ -1,5 +1,5 @@
 Name:Sizzling Barrage
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.blockedThisTurn | TgtPrompt$ Select target creature that blocked this turn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature that blocked this turn.
+A:SP$ DealDamage | ValidTgts$ Creature.blockedThisTurn | TgtPrompt$ Select target creature that blocked this turn | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature that blocked this turn.
 Oracle:Sizzling Barrage deals 4 damage to target creature that blocked this turn.

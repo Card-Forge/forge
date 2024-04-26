@@ -1,6 +1,6 @@
 Name:Bull's Strength
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn. Untap it. | SubAbility$ DBUntap
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn. Untap it. | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Target creature gets +2/+2 and gains trample until end of turn. Untap it.

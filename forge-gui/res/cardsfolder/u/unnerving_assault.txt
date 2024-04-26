@@ -1,7 +1,7 @@
 Name:Unnerving Assault
 ManaCost:2 UR
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 UR | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | IsCurse$ True | ConditionManaSpent$ U | SubAbility$ RPaid | SpellDescription$ Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast this spell, and creatures you control get +1/+0 until end of turn if {R} was spent to cast this spell. (Do both if {U}{R} was spent.)
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | IsCurse$ True | ConditionManaSpent$ U | SubAbility$ RPaid | SpellDescription$ Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast this spell, and creatures you control get +1/+0 until end of turn if {R} was spent to cast this spell. (Do both if {U}{R} was spent.)
 SVar:RPaid:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | ConditionManaSpent$ R
 AI:RemoveDeck:All
 Oracle:Creatures your opponents control get -1/-0 until end of turn if {U} was spent to cast this spell, and creatures you control get +1/+0 until end of turn if {R} was spent to cast this spell. (Do both if {U}{R} was spent.)

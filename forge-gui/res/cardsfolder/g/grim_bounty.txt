@@ -1,7 +1,7 @@
 Name:Grim Bounty
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature or planeswalker.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token
 Oracle:Destroy target creature or planeswalker. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

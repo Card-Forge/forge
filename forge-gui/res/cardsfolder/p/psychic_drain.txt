@@ -1,7 +1,7 @@
 Name:Psychic Drain
 ManaCost:X U B
 Types:Sorcery
-A:SP$ Mill | Cost$ X U B | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SubAbility$ DBYouGainLife | SpellDescription$ Target player mills X cards and you gain X life.
+A:SP$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X | SubAbility$ DBYouGainLife | SpellDescription$ Target player mills X cards and you gain X life.
 SVar:DBYouGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$xPaid
 Oracle:Target player mills X cards and you gain X life.

@@ -1,7 +1,7 @@
 Name:Roots of Wisdom
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Mill | Cost$ 1 G | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then return a land card or Elf card from your graveyard to your hand. If you can't, draw a card.
+A:SP$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then return a land card or Elf card from your graveyard to your hand. If you can't, draw a card.
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Elf.YouOwn,Land.YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

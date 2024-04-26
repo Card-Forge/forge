@@ -1,7 +1,7 @@
 Name:Subtle Strike
 ManaCost:1 B
 Types:Instant
-A:SP$ Charm | Cost$ 1 B | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPump,DBPutCounter
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPump,DBPutCounter
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature (-1/-1) | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature (+1/+1 counter) | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 Oracle:Choose one or both —\n• Target creature gets -1/-1 until end of turn.\n• Put a +1/+1 counter on target creature.

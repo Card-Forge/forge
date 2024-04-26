@@ -1,7 +1,7 @@
 Name:Back for More
 ManaCost:4 B G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 B G | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBImmediateTrigger | StackDescription$ SpellDescription | SpellDescription$ Return target creature card from your graveyard to the battlefield. When you do, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBImmediateTrigger | StackDescription$ SpellDescription | SpellDescription$ Return target creature card from your graveyard to the battlefield. When you do, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ Targeted | Execute$ DBFight | Secondary$ True | TriggerDescription$ When you do, it fights up to one target creature you don't control. (Each deals damage equal to its power to the other.)
 SVar:DBFight:DB$ Fight | Defined$ DelayTriggerRemembered | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | AILogic$ ChosenAsTgt | TgtPrompt$ Choose up to one target creature you don't control | StackDescription$ None
 DeckHas:Ability$Graveyard

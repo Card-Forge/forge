@@ -2,5 +2,5 @@ Name:Complete Disregard
 ManaCost:2 B
 Types:Instant
 K:Devoid
-A:SP$ ChangeZone | Cost$ 2 B | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 3 or less.
+A:SP$ ChangeZone | ValidTgts$ Creature.powerLE3 | TgtPrompt$ Select target creature with power 3 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 3 or less.
 Oracle:Devoid (This card has no color.)\nExile target creature with power 3 or less.

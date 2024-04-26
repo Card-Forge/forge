@@ -1,7 +1,7 @@
 Name:Beckon Apparition
 ManaCost:WB
 Types:Instant
-A:SP$ ChangeZone | Cost$ WB | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Create a 1/1 white and black Spirit creature token with flying.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Create a 1/1 white and black Spirit creature token with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Exile target card from a graveyard. Create a 1/1 white and black Spirit creature token with flying.

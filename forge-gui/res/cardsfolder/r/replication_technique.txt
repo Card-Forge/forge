@@ -2,6 +2,6 @@ Name:Replication Technique
 ManaCost:4 U
 Types:Sorcery
 K:Demonstrate
-A:SP$ CopyPermanent | Cost$ 4 U | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of target permanent you control.
+A:SP$ CopyPermanent | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | StackDescription$ SpellDescription | SpellDescription$ Create a token that's a copy of target permanent you control.
 DeckHas:Ability$Token
 Oracle:Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nCreate a token that's a copy of target permanent you control.

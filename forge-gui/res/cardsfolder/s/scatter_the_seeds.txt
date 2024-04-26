@@ -2,6 +2,6 @@ Name:Scatter the Seeds
 ManaCost:3 G G
 Types:Instant
 K:Convoke
-A:SP$ Token | Cost$ 3 G G | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create three 1/1 green Saproling creature tokens.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create three 1/1 green Saproling creature tokens.
 DeckHas:Ability$Token
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCreate three 1/1 green Saproling creature tokens.

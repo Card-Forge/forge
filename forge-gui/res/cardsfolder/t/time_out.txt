@@ -1,6 +1,6 @@
 Name:Time Out
 ManaCost:4 U
 Types:Instant
-A:SP$ RollDice | Cost$ 4 U | ResultSVar$ X | SubAbility$ Tuck
+A:SP$ RollDice | ResultSVar$ X | SubAbility$ Tuck
 SVar:Tuck:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
 Oracle:Roll a six-sided die. Put target nonland permanent into its owner's library just beneath the top X cards of that library, where X is the result.

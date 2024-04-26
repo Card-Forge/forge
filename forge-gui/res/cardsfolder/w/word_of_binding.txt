@@ -1,6 +1,6 @@
 Name:Word of Binding
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Tap | Cost$ X B B | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Tap X target creatures.
+A:SP$ Tap | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Tap X target creatures.
 SVar:X:Count$xPaid
 Oracle:Tap X target creatures.

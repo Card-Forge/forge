@@ -1,7 +1,7 @@
 Name:Venomous Breath
 ManaCost:3 G
 Types:Instant
-A:SP$ DelayedTrigger | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Mode$ Phase | ThisTurn$ True | Phase$ EndCombat | ValidPlayer$ Player | Execute$ VenomousBreathTrigDestroy | SpellDescription$ Choose target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn. | RememberObjects$ Targeted
+A:SP$ DelayedTrigger | ValidTgts$ Creature | TgtPrompt$ Select target creature | Mode$ Phase | ThisTurn$ True | Phase$ EndCombat | ValidPlayer$ Player | Execute$ VenomousBreathTrigDestroy | SpellDescription$ Choose target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn. | RememberObjects$ Targeted
 SVar:VenomousBreathTrigDestroy:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -1,7 +1,7 @@
 Name:Zombie Apocalypse
 ManaCost:3 B B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B B | SubAbility$ DBDestroy | ChangeType$ Creature.Zombie+YouCtrl | Tapped$ True | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
+A:SP$ ChangeZoneAll | SubAbility$ DBDestroy | ChangeType$ Creature.Zombie+YouCtrl | Tapped$ True | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Human
 AI:RemoveDeck:Random
 Oracle:Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.

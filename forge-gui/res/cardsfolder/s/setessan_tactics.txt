@@ -2,7 +2,7 @@ Name:Setessan Tactics
 ManaCost:1 G
 Types:Instant
 K:Strive:G
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | TargetMin$ 0 | TargetMax$ MaxTargets | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures each get +1/+1 and gain "{T}: This creature fights another target creature."
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ SetessanFight
 SVar:SetessanFight:AB$ Fight | Cost$ T | Defined$ Self | ValidTgts$ Creature.Other | TgtPrompt$ Select another creature | SpellDescription$ CARDNAME fights another target creature.
 SVar:MaxTargets:Count$Valid Creature

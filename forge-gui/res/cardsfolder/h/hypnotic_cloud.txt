@@ -2,7 +2,7 @@ Name:Hypnotic Cloud
 ManaCost:1 B
 Types:Sorcery
 K:Kicker:4
-A:SP$ Discard | Cost$ 1 B | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Target player discards a card. If this spell was kicked, that player discards three cards instead.
+A:SP$ Discard | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | SpellDescription$ Target player discards a card. If this spell was kicked, that player discards three cards instead.
 SVar:X:Count$Kicked.3.1
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$ValidHand Card.OppOwn

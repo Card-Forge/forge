@@ -2,7 +2,7 @@ Name:Akroma's Blessing
 ManaCost:2 W
 Types:Instant
 K:Cycling:W
-A:SP$ ChooseColor | Cost$ 2 W | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Choose a color. Creatures you control gain protection from the chosen color until end of turn.
+A:SP$ ChooseColor | Defined$ You | AILogic$ MostProminentAttackers | SubAbility$ DBProtection | SpellDescription$ Choose a color. Creatures you control gain protection from the chosen color until end of turn.
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.YouCtrl | Gains$ ChosenColor
 AI:RemoveDeck:All
 Oracle:Choose a color. Creatures you control gain protection from the chosen color until end of turn.\nCycling {W} ({W}, Discard this card: Draw a card.)

@@ -1,5 +1,5 @@
 Name:Searing Light
 ManaCost:W
 Types:Instant
-A:SP$ Destroy | Cost$ W | ValidTgts$ Creature.attacking+powerLE2,Creature.blocking+powerLE2 | TgtPrompt$ Select target attacking or blocking creature with power 2 or less. | SpellDescription$ Destroy target attacking or blocking creature with power 2 or less.
+A:SP$ Destroy | ValidTgts$ Creature.attacking+powerLE2,Creature.blocking+powerLE2 | TgtPrompt$ Select target attacking or blocking creature with power 2 or less. | SpellDescription$ Destroy target attacking or blocking creature with power 2 or less.
 Oracle:Destroy target attacking or blocking creature with power 2 or less.

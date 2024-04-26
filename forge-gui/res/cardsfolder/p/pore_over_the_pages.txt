@@ -1,7 +1,7 @@
 Name:Pore Over the Pages
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | SubAbility$ DBUntap | SpellDescription$ Draw three cards, untap up to two lands, then discard a card.
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBUntap | SpellDescription$ Draw three cards, untap up to two lands, then discard a card.
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard

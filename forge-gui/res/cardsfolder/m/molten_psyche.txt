@@ -1,7 +1,7 @@
 Name:Molten Psyche
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 R R | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards. Metalcraft — If you control three or more artifacts, CARDNAME deals damage to each opponent equal to the number of cards that player has drawn this turn.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards. Metalcraft — If you control three or more artifacts, CARDNAME deals damage to each opponent equal to the number of cards that player has drawn this turn.
 SVar:ShuffleHand:DB$ ChangeZoneAll | Defined$ Player.IsRemembered | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | Shuffle$ True | SubAbility$ PsychoDraw
 SVar:PsychoDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ MindFlame
 SVar:MindFlame:DB$ DealDamage | Defined$ Player.Opponent+IsRemembered | NumDmg$ Y | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | StackDescription$ None | SubAbility$ DBCleanup

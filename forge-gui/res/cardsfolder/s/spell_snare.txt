@@ -1,5 +1,5 @@
 Name:Spell Snare
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 2 | ValidTgts$ Card.cmcEQ2 | SpellDescription$ Counter target spell with mana value 2.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 2 | ValidTgts$ Card.cmcEQ2 | SpellDescription$ Counter target spell with mana value 2.
 Oracle:Counter target spell with mana value 2.

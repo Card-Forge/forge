@@ -1,7 +1,7 @@
 Name:Unmoored Ego
 ManaCost:1 U B
 Types:Sorcery
-A:SP$ NameCard | Cost$ 1 U B | Defined$ You | SubAbility$ ExileYard | StackDescription$ SpellDescription | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.
+A:SP$ NameCard | Defined$ You | SubAbility$ ExileYard | StackDescription$ SpellDescription | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way.
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ 4 | Hidden$ True | RememberChanged$ True | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | RememberChanged$ True | Imprint$ True | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | RememberChanged$ True | Search$ True | Shuffle$ True | SubAbility$ DBDraw | StackDescription$ None

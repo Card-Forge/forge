@@ -1,7 +1,7 @@
 Name:Mercadia's Downfall
 ManaCost:2 R
 Types:Instant
-A:SP$ RepeatEach | Cost$ 2 R | RepeatCards$ Creature.attacking | RepeatSubAbility$ DBPump | SpellDescription$ Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
+A:SP$ RepeatEach | RepeatCards$ Creature.attacking | RepeatSubAbility$ DBPump | SpellDescription$ Each attacking creature gets +1/+0 until end of turn for each nonbasic land defending player controls.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X
 SVar:X:Count$Valid Land.nonBasic+DefenderCtrlForRemembered
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Rites of Spring
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 G | Defined$ You | AnyNumber$ True | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Discard any number of cards. Search your library for up to that many basic land cards, reveal them, put them into your hand, then shuffle.
+A:SP$ Discard | Defined$ You | AnyNumber$ True | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Discard any number of cards. Search your library for up to that many basic land cards, reveal them, put them into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

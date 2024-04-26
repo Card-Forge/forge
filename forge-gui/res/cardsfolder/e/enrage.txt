@@ -1,6 +1,6 @@
 Name:Enrage
 ManaCost:X R
 Types:Instant
-A:SP$ Pump | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 Oracle:Target creature gets +X/+0 until end of turn.

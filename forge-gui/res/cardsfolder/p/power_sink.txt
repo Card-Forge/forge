@@ -1,7 +1,7 @@
 Name:Power Sink
 ManaCost:X U
 Types:Instant
-A:SP$ Counter | Cost$ X U | UnlessCost$ X | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ TapLands | UnlessResolveSubs$ WhenNotPaid | SpellDescription$ Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana. | StackDescription$ Countering [{s:Targeted}] unless {p:TargetedController} pays X.
+A:SP$ Counter | UnlessCost$ X | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ TapLands | UnlessResolveSubs$ WhenNotPaid | SpellDescription$ Counter target spell unless its controller pays {X}. If that player doesn't, they tap all lands with mana abilities they control and lose all unspent mana. | StackDescription$ Countering [{s:Targeted}] unless {p:TargetedController} pays X.
 SVar:TapLands:DB$ TapAll | ValidCards$ Land.hasManaAbility | Defined$ TargetedController | TapperController$ True | SubAbility$ ManaLose | StackDescription$ If {p:TargetedController} doesn't, that player taps all lands with mana abilities they control and
 SVar:ManaLose:DB$ DrainMana | Defined$ TargetedController
 SVar:X:Count$xPaid

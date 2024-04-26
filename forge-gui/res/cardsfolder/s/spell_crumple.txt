@@ -1,6 +1,6 @@
 Name:Spell Crumple
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ BottomOfLibrary | SubAbility$ DBChange | SpellDescription$ Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put CARDNAME on the bottom of its owner's library.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ BottomOfLibrary | SubAbility$ DBChange | SpellDescription$ Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put CARDNAME on the bottom of its owner's library.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ -1 | Defined$ Parent
 Oracle:Counter target spell. If that spell is countered this way, put it on the bottom of its owner's library instead of into that player's graveyard. Put Spell Crumple on the bottom of its owner's library.

@@ -1,7 +1,7 @@
 Name:Pest Infestation
 ManaCost:X X G
 Types:Sorcery
-A:SP$ Destroy | Cost$ X X G | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to X target artifacts and/or enchantments | SubAbility$ DBToken | SpellDescription$ Destroy up to X target artifacts and/or enchantments.
+A:SP$ Destroy | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to X target artifacts and/or enchantments | SubAbility$ DBToken | SpellDescription$ Destroy up to X target artifacts and/or enchantments.
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | SpellDescription$ Create twice X 1/1 black and green Pest creature tokens with "When this creature dies, you gain 1 life."
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice

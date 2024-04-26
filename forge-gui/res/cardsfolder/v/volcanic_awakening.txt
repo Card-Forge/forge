@@ -1,6 +1,6 @@
 Name:Volcanic Awakening
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 K:Storm
 Oracle:Destroy target land.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

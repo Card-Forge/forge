@@ -1,7 +1,7 @@
 Name:Awe Strike
 ManaCost:W
 Types:Instant
-A:SP$ Effect | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature to entrance | Name$ Awe Struck | ReplacementEffects$ StrikeWithAwe | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | AILogic$ Fog | SpellDescription$ The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to entrance | Name$ Awe Struck | ReplacementEffects$ StrikeWithAwe | ExileOnMoved$ Battlefield | RememberObjects$ Targeted | AILogic$ Fog | SpellDescription$ The next time target creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:StrikeWithAwe:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ GainLifeInstead | PreventionEffect$ True | Description$ The next time the targeted creature would deal damage this turn, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

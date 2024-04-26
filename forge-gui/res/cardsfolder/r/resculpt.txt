@@ -1,7 +1,7 @@
 Name:Resculpt
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
+A:SP$ ChangeZone | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ur_4_4_elemental | TokenOwner$ TargetedController
 DeckHas:Ability$Token
 Oracle:Exile target artifact or creature. Its controller creates a 4/4 blue and red Elemental creature token.

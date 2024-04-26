@@ -2,7 +2,7 @@ Name:Battle at the Bridge
 ManaCost:X B
 Types:Sorcery
 K:Improvise
-A:SP$ Pump | Cost$ X B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -X/-X until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SpellDescription$ You gain X life.
 SVar:X:Count$xPaid
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nTarget creature gets -X/-X until end of turn. You gain X life.

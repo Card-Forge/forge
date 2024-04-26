@@ -1,6 +1,6 @@
 Name:Fiery Justice
 ManaCost:R G W
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R G W | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | AILogic$ OpponentGainLife | SubAbility$ Justice | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of targets. Target opponent gains 5 life.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 5 | TargetMin$ 0 | TargetMax$ 5 | DividedAsYouChoose$ 5 | AILogic$ OpponentGainLife | SubAbility$ Justice | SpellDescription$ CARDNAME deals 5 damage divided as you choose among any number of targets. Target opponent gains 5 life.
 SVar:Justice:DB$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to gain life | LifeAmount$ 5
 Oracle:Fiery Justice deals 5 damage divided as you choose among any number of targets. Target opponent gains 5 life.

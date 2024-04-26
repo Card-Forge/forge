@@ -1,7 +1,7 @@
 Name:Dark Intimations
 ManaCost:2 U B R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 U B R | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | Defined$ Player.Opponent | SubAbility$ DBDiscard | SpellDescription$ Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card.
+A:SP$ Sacrifice | SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | Defined$ Player.Opponent | SubAbility$ DBDiscard | SpellDescription$ Each opponent sacrifices a creature or planeswalker, then discards a card. You return a creature or planeswalker card from your graveyard to your hand, then draw a card.
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player.Opponent | SubAbility$ DBRaiseDead
 SVar:DBRaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn,Planeswalker.YouOwn | SubAbility$ DBDraw | StackDescription$ You return a creature or planeswalker card from your graveyard to your hand
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You

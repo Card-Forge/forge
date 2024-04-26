@@ -1,7 +1,7 @@
 Name:Bonus Round
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ Effect | Cost$ 1 R R | Triggers$ TrigSpellCast | SpellDescription$ Until end of turn, whenever a player casts an instant or sorcery spell, that player copies it and may choose new targets for the copy.
+A:SP$ Effect | Triggers$ TrigSpellCast | SpellDescription$ Until end of turn, whenever a player casts an instant or sorcery spell, that player copies it and may choose new targets for the copy.
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | TriggerZones$ Command | ValidActivatingPlayer$ Player | Execute$ TrigCopySpell | TriggerDescription$ Until end of turn, whenever a player casts an instant or sorcery spell, that player copies it and may choose new targets for the copy.
 SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | Controller$ TriggeredCardController | MayChooseTarget$ True
 DeckNeeds:Type$Instant|Sorcery

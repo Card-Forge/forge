@@ -1,7 +1,7 @@
 Name:Countervailing Winds
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {1} for each card in your graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Counter target spell unless its controller pays {1} for each card in your graveyard.
 K:Cycling:2
 SVar:Y:Count$InYourYard
 Oracle:Counter target spell unless its controller pays {1} for each card in your graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)

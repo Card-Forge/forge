@@ -1,7 +1,7 @@
 Name:Humble the Brute
 ManaCost:4 W
 Types:Instant
-A:SP$ Destroy | Cost$ 4 W | ValidTgts$ Creature.powerGE4 | SubAbility$ DBInvestigate | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | SubAbility$ DBInvestigate | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token
 Oracle:Destroy target creature with power 4 or greater.\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

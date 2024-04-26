@@ -1,5 +1,5 @@
 Name:Collar the Culprit
 ManaCost:3 W
 Types:Instant
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Select target creature with toughness 4 or greater | SpellDescription$ Destroy target creature with toughness 4 or greater.
+A:SP$ Destroy | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Select target creature with toughness 4 or greater | SpellDescription$ Destroy target creature with toughness 4 or greater.
 Oracle:Destroy target creature with toughness 4 or greater.

@@ -1,5 +1,5 @@
 Name:Flame Javelin
 ManaCost:2/R 2/R 2/R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2/R 2/R 2/R | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 Oracle:({2/R} can be paid with any two mana or with {R}. This card's mana value is 6.)\nFlame Javelin deals 4 damage to any target.

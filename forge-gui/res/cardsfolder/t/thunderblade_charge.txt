@@ -1,7 +1,7 @@
 Name:Thunderblade Charge
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Graveyard | PresentZone$ Graveyard | IsPresent$ Card.StrictlySelf | Execute$ TrigPlay | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, if CARDNAME is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.
 SVar:TrigPlay:AB$ Play | Cost$ 2 R R R | WithoutManaCost$ True | Optional$ True
 Oracle:Thunderblade Charge deals 3 damage to any target.\nWhenever one or more creatures you control deal combat damage to a player, if Thunderblade Charge is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.

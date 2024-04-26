@@ -1,7 +1,7 @@
 Name:Conjurer's Ban
 ManaCost:W B
 Types:Sorcery
-A:SP$ NameCard | Cost$ W B | Defined$ You | SubAbility$ DBEffect | AILogic$ MostProminentInHumanDeck | SpellDescription$ Choose a card name. Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played.
+A:SP$ NameCard | Defined$ You | SubAbility$ DBEffect | AILogic$ MostProminentInHumanDeck | SpellDescription$ Choose a card name. Until your next turn, spells with the chosen name can't be cast and lands with the chosen name can't be played.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantCast,STCantPlayLand | SubAbility$ DBDraw | Duration$ UntilYourNextTurn
 SVar:STCantCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.NamedCard | Description$ Spells with the chosen name can't be cast and lands with the chosen name can't be played.
 SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | ValidCard$ Card.NamedCard

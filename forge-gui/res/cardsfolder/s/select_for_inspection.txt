@@ -1,6 +1,6 @@
 Name:Select for Inspection
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target tapped creature to its owner's hand. Scry 1.
+A:SP$ ChangeZone | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target tapped creature to its owner's hand. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Return target tapped creature to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

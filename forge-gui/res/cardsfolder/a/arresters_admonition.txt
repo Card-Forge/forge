@@ -1,6 +1,6 @@
 Name:Arrester's Admonition
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBAddendum | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBAddendum | SpellDescription$ Return target creature to its owner's hand.
 SVar:DBAddendum:DB$ Draw | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SpellDescription$ Addendum - If you cast this spell during your main phase, draw a card.
 Oracle:Return target creature to its owner's hand.\nAddendum — If you cast this spell during your main phase, draw a card.

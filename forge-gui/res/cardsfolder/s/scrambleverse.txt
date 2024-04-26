@@ -1,7 +1,7 @@
 Name:Scrambleverse
 ManaCost:6 R R
 Types:Sorcery
-A:SP$ GainControlVariant | Cost$ 6 R R | AllValid$ Permanent.nonLand | ChangeController$ Random | SubAbility$ DBUntap | SpellDescription$ For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents.
+A:SP$ GainControlVariant | AllValid$ Permanent.nonLand | ChangeController$ Random | SubAbility$ DBUntap | SpellDescription$ For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which they were chosen. Untap those permanents.
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Permanent.nonLand
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

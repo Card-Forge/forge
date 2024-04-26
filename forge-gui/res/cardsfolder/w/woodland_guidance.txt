@@ -1,7 +1,7 @@
 Name:Woodland Guidance
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. Exile CARDNAME.
+A:SP$ ChangeZone | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target card from your graveyard to your hand. Clash with an opponent. If you win, untap all Forests you control. Exile CARDNAME.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBUntap | OtherwiseSubAbility$ DBExile
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Forest.YouCtrl | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile

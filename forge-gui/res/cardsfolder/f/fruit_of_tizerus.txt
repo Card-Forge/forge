@@ -1,7 +1,7 @@
 Name:Fruit of Tizerus
 ManaCost:B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 2 | SpellDescription$ Target player loses 2 life.
 K:Escape:3 B ExileFromGrave<3/Card.Other/other>
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 Oracle:Target player loses 2 life.\nEscape—{3}{B}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

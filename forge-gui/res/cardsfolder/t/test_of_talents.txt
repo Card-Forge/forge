@@ -1,7 +1,7 @@
 Name:Test of Talents
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | SubAbility$ ExileYard | SpellDescription$ Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. | StackDescription$ SpellDescription
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | SubAbility$ ExileYard | SpellDescription$ Counter target spell. Search its controller's graveyard, hand, and library for all cards with the same name as that spell and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. | StackDescription$ SpellDescription
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ TargetedController | ChangeType$ TargetedCard.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ TargetedCard.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None | RememberChanged$ True
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ TargetedCard.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ Draw | StackDescription$ None

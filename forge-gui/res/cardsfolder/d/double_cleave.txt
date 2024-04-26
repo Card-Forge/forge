@@ -1,5 +1,5 @@
 Name:Double Cleave
 ManaCost:1 RW
 Types:Instant
-A:SP$ Pump | Cost$ 1 RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 Oracle:Target creature gains double strike until end of turn. (It deals both first-strike and regular combat damage.)

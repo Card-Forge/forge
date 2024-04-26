@@ -1,5 +1,5 @@
 Name:Needle Storm
 ManaCost:2 G
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 G | NumDmg$ 4 | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 4 damage to each creature with flying.
+A:SP$ DamageAll | NumDmg$ 4 | ValidCards$ Creature.withFlying | ValidDescription$ each creature with flying. | SpellDescription$ CARDNAME deals 4 damage to each creature with flying.
 Oracle:Needle Storm deals 4 damage to each creature with flying.

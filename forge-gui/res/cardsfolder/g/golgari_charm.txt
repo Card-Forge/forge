@@ -1,7 +1,7 @@
 Name:Golgari Charm
 ManaCost:B G
 Types:Instant
-A:SP$ Charm | Cost$ B G | Choices$ PumpAll,DestroyEnch,RegenAll | CharmNum$ 1
+A:SP$ Charm | Choices$ PumpAll,DestroyEnch,RegenAll | CharmNum$ 1
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ All creatures get -1/-1 until end of turn.
 SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:RegenAll:DB$ RegenerateAll | ValidCards$ Creature.YouCtrl | SpellDescription$ Regenerate each creature you control.

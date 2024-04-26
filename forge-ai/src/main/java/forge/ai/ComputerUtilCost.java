@@ -355,7 +355,7 @@ public class ComputerUtilCost {
                 final CostSacrifice sac = (CostSacrifice) part;
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 
-                final String type = sac.getType();
+                String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
                     if (!important) {
@@ -382,7 +382,25 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
+
+                boolean differentNames = false;
+                if (type.contains("+WithDifferentNames")) {
+                    type = type.replace("+WithDifferentNames", "");
+                    differentNames = true;
+                }
+
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+                if (differentNames) {
+                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    for (final Card card : typeList) {
+                        // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                        if (!card.hasNoName()) {
+                            uniqueNameCards.add(card);
+                        }
+                    }
+                    typeList.clear();
+                    typeList.addAll(uniqueNameCards);
+                }
 
                 // don't sacrifice the card we're pumping
                 typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);

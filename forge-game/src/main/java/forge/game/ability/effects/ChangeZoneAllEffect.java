@@ -50,6 +50,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
+            tgtPlayers = game.getPlayers();
         } else {
             cards = new CardCollection();
             for (final Player p : tgtPlayers) {

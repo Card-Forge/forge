@@ -1,7 +1,7 @@
 Name:Harness Infinity
 ManaCost:1 B B B G G G
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 B B B G G G | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exchange your hand and graveyard.
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Graveyard | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exchange your hand and graveyard.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.YouCtrl+IsNotRemembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup | SpellDescription$ Exile CARDNAME.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -1,7 +1,7 @@
 Name:Assure
-ManaCost:G/W G/W
+ManaCost:GW GW
 Types:Instant
-A:SP$ PutCounter | Cost$ G/W G/W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
 AlternateMode:Split
 Oracle:Put a +1/+1 counter on target creature. That creature gains indestructible until end of turn.
@@ -11,6 +11,6 @@ ALTERNATE
 Name:Assemble
 ManaCost:4 G W
 Types:Instant
-A:SP$ Token | Cost$ 4 G W | TokenAmount$ 3 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create three 2/2 green and white Elf Knight creature tokens with vigilance.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create three 2/2 green and white Elf Knight creature tokens with vigilance.
 DeckHas:Ability$Counters|Token
 Oracle:Create three 2/2 green and white Elf Knight creature tokens with vigilance.

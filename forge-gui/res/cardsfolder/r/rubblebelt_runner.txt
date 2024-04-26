@@ -2,5 +2,5 @@ Name:Rubblebelt Runner
 ManaCost:1 R G
 Types:Creature Viashino Warrior
 PT:3/3
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Saproling | Description$ CARDNAME can't be blocked by creature tokens.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.token | Description$ CARDNAME can't be blocked by creature tokens.
 Oracle:Rubblebelt Runner can't be blocked by creature tokens.

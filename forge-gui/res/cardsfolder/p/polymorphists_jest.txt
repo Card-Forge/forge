@@ -1,6 +1,6 @@
 Name:Polymorphist's Jest
 ManaCost:1 U U
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 U U | ValidTgts$ Player | TgtPrompt$ Select target Player | ValidCards$ Creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Frog | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1.
+A:SP$ AnimateAll | ValidTgts$ Player | TgtPrompt$ Select target Player | ValidCards$ Creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Frog | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1.
 AI:RemoveDeck:All
 Oracle:Until end of turn, each creature target player controls loses all abilities and becomes a blue Frog with base power and toughness 1/1.

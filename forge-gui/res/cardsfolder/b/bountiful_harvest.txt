@@ -1,6 +1,6 @@
 Name:Bountiful Harvest
 ManaCost:4 G
 Types:Sorcery
-A:SP$ GainLife | Cost$ 4 G | LifeAmount$ X | SpellDescription$ You gain 1 life for each land you control.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 1 life for each land you control.
 SVar:X:Count$TypeYouCtrl.Land
 Oracle:You gain 1 life for each land you control.

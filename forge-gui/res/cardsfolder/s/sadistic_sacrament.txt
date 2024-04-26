@@ -2,6 +2,6 @@ Name:Sadistic Sacrament
 ManaCost:B B B
 Types:Sorcery
 K:Kicker:7
-A:SP$ ChangeZone | Cost$ B B B | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | Chooser$ You | Shuffle$ True | SpellDescription$ Search target player's library for up to three cards, exile them, then that player shuffles. If this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ X | IsCurse$ True | Chooser$ You | Shuffle$ True | SpellDescription$ Search target player's library for up to three cards, exile them, then that player shuffles. If this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles.
 SVar:X:Count$Kicked.15.3
 Oracle:Kicker {7} (You may pay an additional {7} as you cast this spell.)\nSearch target player's library for up to three cards, exile them, then that player shuffles. If this spell was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles.

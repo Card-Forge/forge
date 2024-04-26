@@ -1,7 +1,7 @@
 Name:Fractured Identity
 ManaCost:3 W U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBClone | SpellDescription$ Exile target nonland permanent. Each player other than its controller creates a token that's a copy of it.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBClone | SpellDescription$ Exile target nonland permanent. Each player other than its controller creates a token that's a copy of it.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ NonRememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target nonland permanent. Each player other than its controller creates a token that's a copy of it.

@@ -1,5 +1,5 @@
 Name:Lair Delve
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 G | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature,Land | DestinationZone2$ Library | SpellDescription$ Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature,Land | DestinationZone2$ Library | SpellDescription$ Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.
 Oracle:Reveal the top two cards of your library. Put all creature and land cards revealed this way into your hand and the rest on the bottom of your library in any order.

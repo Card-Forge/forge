@@ -1,7 +1,7 @@
 Name:Explosion of Riches
 ManaCost:5 R
 Types:Sorcery
-A:SP$ Draw | Cost$ 5 R | Defined$ You | NumCards$ 1 | SubAbility$ DBDraw | StackDescription$ SpellDescription | RememberDrawn$ AllReplaced | SpellDescription$ Draw a card, then each other player may draw a card. Whenever a card is drawn this way, CARDNAME deals 5 damage to target opponent chosen at random from among your opponents.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDraw | StackDescription$ SpellDescription | RememberDrawn$ AllReplaced | SpellDescription$ Draw a card, then each other player may draw a card. Whenever a card is drawn this way, CARDNAME deals 5 damage to target opponent chosen at random from among your opponents.
 SVar:DBDraw:DB$ Draw | Defined$ Player.Other | OptionalDecider$ True | NumCards$ 1 | RememberDrawn$ AllReplaced | SubAbility$ DBRepeatEach | StackDescription$ None
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Card.IsRemembered | Zone$ Hand | RepeatSubAbility$ DBImmediateTrigger | SubAbility$ DBCleanup
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever a card is drawn this way, CARDNAME deals 5 damage to target opponent chosen at random from among your opponents.

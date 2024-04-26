@@ -1,6 +1,6 @@
 Name:Shape Anew
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Sacrifice$ True | SubAbility$ DBDig | SpellDescription$ The controller of target artifact sacrifices it, then reveals cards from the top of their library until they reveal an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Sacrifice$ True | SubAbility$ DBDig | SpellDescription$ The controller of target artifact sacrifices it, then reveals cards from the top of their library until they reveal an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library.
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Artifact | ValidDescription$ artifact | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True
 Oracle:The controller of target artifact sacrifices it, then reveals cards from the top of their library until they reveal an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into their library.

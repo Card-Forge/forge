@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.62-SNAPSHOT</alpha-version>
+        <alpha-version>1.6.63-SNAPSHOT</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.62-SNAPSHOT</version>
+        <version>1.6.63-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>

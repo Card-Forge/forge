@@ -1,7 +1,7 @@
 Name:Bad Deal
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 B B | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ You draw two cards and each opponent discards two cards. Each player loses 2 life.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ You draw two cards and each opponent discards two cards. Each player loses 2 life.
 SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player
 DeckHas:Ability$Discard

@@ -2,7 +2,7 @@ Name:Ruin in Their Wake
 ManaCost:1 G
 Types:Sorcery
 K:Devoid
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic | ChangeNum$ 1 | Reveal$ True | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card and reveal it. You may put that card onto the battlefield tapped if you control a land named Wastes. Otherwise, put that card into your hand. Then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic | ChangeNum$ 1 | Reveal$ True | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card and reveal it. You may put that card onto the battlefield tapped if you control a land named Wastes. Otherwise, put that card into your hand. Then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | ConditionPresent$ Land.namedWastes+YouCtrl | ForgetChanged$ True | Optional$ True | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup

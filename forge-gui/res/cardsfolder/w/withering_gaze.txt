@@ -1,7 +1,7 @@
 Name:Withering Gaze
 ManaCost:2 U
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals their hand. You draw a card for each Forest and green card in it.
+A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | SpellDescription$ Target opponent reveals their hand. You draw a card for each Forest and green card in it.
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$ValidHand Forest.TargetedPlayerCtrl,Card.Green+TargetedPlayerCtrl
 AI:RemoveDeck:Random

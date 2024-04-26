@@ -1,6 +1,6 @@
 Name:Lightning Javelin
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Lightning Javelin deals 3 damage to any target. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

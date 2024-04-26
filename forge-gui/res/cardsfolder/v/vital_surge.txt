@@ -2,6 +2,6 @@ Name:Vital Surge
 ManaCost:1 G
 Types:Instant Arcane
 K:Splice:Arcane:1 G
-A:SP$ GainLife | Cost$ 1 G | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+A:SP$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHints:Type$Arcane
 Oracle:You gain 3 life.\nSplice onto Arcane {1}{G} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

@@ -7,6 +7,6 @@ SVar:LoseGain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ D
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 2
 A:AB$ Repeat | Cost$ T Sac<1/Creature.Other/another creature> | RepeatSubAbility$ DBDraw | MaxRepeat$ 2 | RepeatPresent$ Land.YouCtrl | RepeatCompare$ GE8 | StackDescription$ SpellDescription | SpellDescription$ Draw a card. You may put a land card from your hand onto the battlefield tapped. If you control eight or more lands, repeat this process once.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBChangeZone
-DeckHas:Ability$LifeGain|Sacrifice
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
+DeckHas:Ability$LifeGain|Sacrifice
 Oracle:Whenever you draw your second card each turn, target opponent loses 2 life and you gain 2 life.\n{T}, Sacrifice another creature: Draw a card. You may put a land card from your hand onto the battlefield tapped. If you control eight or more lands, repeat this process once.

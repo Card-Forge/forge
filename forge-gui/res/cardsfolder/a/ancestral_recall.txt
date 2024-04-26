@@ -1,5 +1,5 @@
 Name:Ancestral Recall
 ManaCost:U
 Types:Instant
-A:SP$ Draw | Cost$ U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws three cards.
+A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws three cards.
 Oracle:Target player draws three cards.

@@ -1,6 +1,6 @@
 Name:Crushing Disappointment
 ManaCost:3 B
 Types:Instant
-A:SP$ LoseLife | Cost$ 3 B | Defined$ Player | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ Each player loses 2 life.
+A:SP$ LoseLife | Defined$ Player | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ Each player loses 2 life.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SpellDescription$ You draw two cards.
 Oracle:Each player loses 2 life. You draw two cards.

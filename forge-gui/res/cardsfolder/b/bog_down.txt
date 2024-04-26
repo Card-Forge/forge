@@ -2,7 +2,7 @@ Name:Bog Down
 ManaCost:2 B
 Types:Sorcery
 K:Kicker:Sac<2/Land>
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ WasKicked | Mode$ TgtChoose | SpellDescription$ Target player discards two cards. If CARDNAME was kicked, that player discards three cards instead.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ WasKicked | Mode$ TgtChoose | SpellDescription$ Target player discards two cards. If CARDNAME was kicked, that player discards three cards instead.
 SVar:WasKicked:Count$Kicked.3.2
 SVar:NeedsToPlayKickedVar:Z GE3
 SVar:Z:Count$ValidHand Card.OppOwn

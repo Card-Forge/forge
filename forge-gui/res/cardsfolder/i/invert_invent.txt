@@ -1,7 +1,7 @@
 Name:Invert
-ManaCost:U/R
+ManaCost:UR
 Types:Instant
-A:SP$ Pump | Cost$ U/R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch the power and toughness of each of up to two target creatures until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch the power and toughness of each of up to two target creatures until end of turn.
 AlternateMode:Split
 Oracle:Switch the power and toughness of each of up to two target creatures until end of turn.
 
@@ -10,7 +10,7 @@ ALTERNATE
 Name:Invent
 ManaCost:4 U R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 U R | Origin$ Library | Destination$ Hand | ChangeType$ EACH Instant & Sorcery | SpellDescription$ Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ EACH Instant & Sorcery | SpellDescription$ Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle.
 AI:RemoveDeck:Random
 DeckHints:Type$Instant|Sorcery
 Oracle:Search your library for an instant card and/or a sorcery card, reveal them, put them into your hand, then shuffle.

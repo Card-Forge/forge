@@ -1,7 +1,7 @@
 Name:Subdue
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | NumAtt$ 0 | NumDef$ +X | KW$ Prevent all combat damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn. That creature gets +0/+X until end of turn, where X is its mana value.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 0 | NumDef$ +X | KW$ Prevent all combat damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn. That creature gets +0/+X until end of turn, where X is its mana value.
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 Oracle:Prevent all combat damage that would be dealt by target creature this turn. That creature gets +0/+X until end of turn, where X is its mana value.

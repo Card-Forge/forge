@@ -1,6 +1,6 @@
 Name:Mass Mutiny
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls to gain control of. | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls to gain control of. | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.

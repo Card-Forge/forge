@@ -1,5 +1,5 @@
 Name:Dauntless Onslaught
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +2/+2 until end of turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +2/+2 until end of turn.
 Oracle:Up to two target creatures each get +2/+2 until end of turn.

@@ -1,6 +1,6 @@
 Name:Force Away
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | SubAbility$ DBDiscard | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Ferocious — If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | SubAbility$ DBDiscard | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Ferocious — If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Draw<1/You> | UnlessPayer$ You | UnlessSwitched$ True | ConditionPresent$ Creature.YouCtrl+powerGE4
 Oracle:Return target creature to its owner's hand.\nFerocious — If you control a creature with power 4 or greater, you may draw a card. If you do, discard a card.

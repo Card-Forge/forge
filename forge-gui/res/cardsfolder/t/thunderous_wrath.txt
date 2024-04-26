@@ -2,5 +2,5 @@ Name:Thunderous Wrath
 ManaCost:4 R R
 Types:Instant
 K:Miracle:R
-A:SP$ DealDamage | Cost$ 4 R R | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
 Oracle:Thunderous Wrath deals 5 damage to any target.\nMiracle {R} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

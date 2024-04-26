@@ -1,7 +1,7 @@
 Name:Riddle of Lightning
 ManaCost:3 R R
 Types:Instant
-A:SP$ Scry | Cost$ 3 R R | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose any target. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's mana value to that permanent or player.
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose any target. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's mana value to that permanent or player.
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | StackDescription$ CARDNAME deals damage equal to that card's mana value to that permanent or player.
 SVar:X:Count$TopOfLibraryCMC

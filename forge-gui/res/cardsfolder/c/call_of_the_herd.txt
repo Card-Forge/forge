@@ -2,5 +2,5 @@ Name:Call of the Herd
 ManaCost:2 G
 Types:Sorcery
 K:Flashback:3 G
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
 Oracle:Create a 3/3 green Elephant creature token.\nFlashback {3}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

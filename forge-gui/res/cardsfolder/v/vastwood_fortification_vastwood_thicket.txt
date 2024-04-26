@@ -1,7 +1,7 @@
 Name:Vastwood Fortification
 ManaCost:G
 Types:Instant
-A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 DeckHas:Ability$Counters
 AlternateMode:Modal
 Oracle:Put a +1/+1 counter on target creature.

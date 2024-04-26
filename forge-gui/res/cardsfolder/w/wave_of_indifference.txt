@@ -1,7 +1,7 @@
 Name:Wave of Indifference
 ManaCost:X R
 Types:Sorcery
-A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME can't block. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | StackDescription$ X target creatures [{c:Targeted}] can't block this turn. | SpellDescription$ X target creatures can't block this turn.
+A:SP$ Pump | KW$ HIDDEN CARDNAME can't block. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | StackDescription$ X target creatures [{c:Targeted}] can't block this turn. | SpellDescription$ X target creatures can't block this turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:X target creatures can't block this turn.

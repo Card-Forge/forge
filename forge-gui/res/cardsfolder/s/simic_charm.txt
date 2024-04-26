@@ -1,7 +1,7 @@
 Name:Simic Charm
 ManaCost:G U
 Types:Instant
-A:SP$ Charm | Cost$ G U | Choices$ PumpGiant,PumpHexproof,ReturnCard | CharmNum$ 1
+A:SP$ Charm | Choices$ PumpGiant,PumpHexproof,ReturnCard | CharmNum$ 1
 SVar:PumpGiant:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:PumpHexproof:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof | SpellDescription$ Permanents you control gain hexproof until end of turn.
 SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature. | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.

@@ -1,6 +1,6 @@
 Name:Evasive Action
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Domain — Counter target spell unless its controller pays {1} for each basic land type among lands you control.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ Y | SpellDescription$ Domain — Counter target spell unless its controller pays {1} for each basic land type among lands you control.
 SVar:Y:Count$Domain
 Oracle:Domain — Counter target spell unless its controller pays {1} for each basic land type among lands you control.

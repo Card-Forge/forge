@@ -1,7 +1,7 @@
 Name:Brood Birthing
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Token | Cost$ 1 R | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}." Otherwise, create one of those tokens.
+A:SP$ Token | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ If you control an Eldrazi Spawn, create three 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}." Otherwise, create one of those tokens.
 SVar:X:Count$Compare Y GE1.3.1
 SVar:Y:Count$Valid Card.YouCtrl+Eldrazi+Spawn
 DeckHints:Type$Eldrazi

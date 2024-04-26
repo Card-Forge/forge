@@ -1,7 +1,7 @@
 Name:Mages' Contest
 ManaCost:1 R R
 Types:Instant
-A:SP$ BidLife | Cost$ 1 R R | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | OtherBidder$ TargetedController | StartBidding$ 1 | AILogic$ Min | AIBidMax$ 8 | BidSubAbility$ DBLoseLife | SpellDescription$ You and target spell's controller bid life. You start the bidding with a bid of 1. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid. If you win the bidding, counter that spell.
+A:SP$ BidLife | TargetType$ Spell | ValidTgts$ Card | TgtZone$ Stack | OtherBidder$ TargetedController | StartBidding$ 1 | AILogic$ Min | AIBidMax$ 8 | BidSubAbility$ DBLoseLife | SpellDescription$ You and target spell's controller bid life. You start the bidding with a bid of 1. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid. If you win the bidding, counter that spell.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | ConditionPlayerDefined$ Remembered | ConditionPlayerContains$ You
 SVar:X:Count$ChosenNumber

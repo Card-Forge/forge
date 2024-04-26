@@ -1,6 +1,6 @@
 Name:Undermine
 ManaCost:U U B
 Types:Instant
-A:SP$ Counter | Cost$ U U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDrain | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller loses 3 life.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDrain | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller loses 3 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3
 Oracle:Counter target spell. Its controller loses 3 life.

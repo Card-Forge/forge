@@ -1,0 +1,11 @@
+Name:Transmutation Font
+ManaCost:5
+Types:Artifact
+A:AB$ GenericChoice | Cost$ T | Defined$ You | Choices$ Blood,Clue,Food | SpellDescription$ Create your choice of a Blood token, a Clue token, or a Food token.
+SVar:Blood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwner$ You | SpellDescription$ Blood
+SVar:Clue:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | SpellDescription$ Clue
+SVar:Food:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Food
+A:AB$ ChangeZone | Cost$ 3 T Sac<3/Artifact.token+WithDifferentNames/artifact tokens with different names> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 1 | SorcerySpeed$ True | SpellDescription$ Search your library for an artifact card, put it onto the battlefield, then shuffle.
+SVar:AIPreference:SacCost$Artifact.token
+Oracle:{T}: Create your choice of a Blood token, a Clue token, or a Food token.\n{3}, {T}, Sacrifice three artifact tokens with different names: Search your library for an artifact card, put it onto the battlefield, then shuffle. Activate only as a sorcery.
+

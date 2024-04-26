@@ -1,7 +1,7 @@
 Name:Clinging Mists
 ManaCost:2 G
 Types:Instant
-A:SP$ Fog | Cost$ 2 G | SubAbility$ DBTapAll | SpellDescription$ Prevent all combat damage that would be dealt this turn. Fateful hour — If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controllers next untap step.
+A:SP$ Fog | SubAbility$ DBTapAll | SpellDescription$ Prevent all combat damage that would be dealt this turn. Fateful hour — If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controllers next untap step.
 SVar:DBTapAll:DB$ TapAll | Cost$ 1 G G | ValidCards$ Creature.attacking | SubAbility$ DBPumpAll | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5
 SVar:FatefulHour:Count$YourLifeTotal

@@ -1,7 +1,7 @@
 Name:Blessed Respite
 ManaCost:1 G
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 G | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBFog | SpellDescription$ Target player shuffles their graveyard into their library. Prevent all combat damage that would be dealt this turn.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBFog | SpellDescription$ Target player shuffles their graveyard into their library. Prevent all combat damage that would be dealt this turn.
 SVar:DBFog:DB$ Fog
 AI:RemoveDeck:Random
 Oracle:Target player shuffles their graveyard into their library. Prevent all combat damage that would be dealt this turn.

@@ -11,7 +11,7 @@ ALTERNATE
 Name:Curry Favor
 ManaCost:B
 Types:Sorcery Adventure
-A:SP$ GainLife | Cost$ B | Defined$ You | LifeAmount$ X | SubAbility$ DBLoseLife | SpellDescription$ You gain X life and each opponent loses X life, where X is the number of Knights you control.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBLoseLife | SpellDescription$ You gain X life and each opponent loses X life, where X is the number of Knights you control.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X
 SVar:X:Count$Valid Knight.YouCtrl
 DeckHas:Ability$LifeGain

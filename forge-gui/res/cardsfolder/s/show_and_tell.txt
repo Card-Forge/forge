@@ -1,7 +1,7 @@
 Name:Show and Tell
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Artifact,Enchantment,Land | DefinedPlayer$ Player | ChangeNum$ 1 | SpellDescription$ Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature,Artifact,Enchantment,Land | DefinedPlayer$ Player | ChangeNum$ 1 | SpellDescription$ Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE4
 Oracle:Each player may put an artifact, creature, enchantment, or land card from their hand onto the battlefield.

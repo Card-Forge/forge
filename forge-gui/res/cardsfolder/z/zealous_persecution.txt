@@ -1,6 +1,6 @@
 Name:Zealous Persecution
 ManaCost:W B
 Types:Instant
-A:SP$ PumpAll | Cost$ W B | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Until end of turn, creatures you control get +1/+1 and creatures your opponents control get -1/-1. | SubAbility$ DBPumpAll
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Until end of turn, creatures you control get +1/+1 and creatures your opponents control get -1/-1. | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1
 Oracle:Until end of turn, creatures you control get +1/+1 and creatures your opponents control get -1/-1.

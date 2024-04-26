@@ -1,5 +1,5 @@
 Name:Trumpet Blast
 ManaCost:2 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
 Oracle:Attacking creatures get +2/+0 until end of turn.

@@ -1,7 +1,7 @@
 Name:Ambitious Assault
 ManaCost:2 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBDraw | SpellDescription$ Creatures you control get +2/+0 until end of turn. If you control a modified creature, draw a card. (Equipment, Auras you control, and counters are modifications.)
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBDraw | SpellDescription$ Creatures you control get +2/+0 until end of turn. If you control a modified creature, draw a card. (Equipment, Auras you control, and counters are modifications.)
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Creature.YouCtrl+modified | ConditionCompare$ GE1
 DeckHints:Type$Equipment|Aura & Ability$Counters
 Oracle:Creatures you control get +2/+0 until end of turn. If you control a modified creature, draw a card. (Equipment, Auras you control, and counters are modifications.)

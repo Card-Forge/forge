@@ -1,6 +1,6 @@
 Name:Spark Spray
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 K:Cycling:R
 Oracle:Spark Spray deals 1 damage to any target.\nCycling {R} ({R}, Discard this card: Draw a card.)

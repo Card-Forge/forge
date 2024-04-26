@@ -1,5 +1,5 @@
 Name:Dual Shot
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each of up to two target creatures.
+A:SP$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each of up to two target creatures.
 Oracle:Dual Shot deals 1 damage to each of up to two target creatures.

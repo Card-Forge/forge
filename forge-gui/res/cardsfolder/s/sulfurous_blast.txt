@@ -1,6 +1,6 @@
 Name:Sulfurous Blast
 ManaCost:2 R R
 Types:Instant
-A:SP$ DamageAll | Cost$ 2 R R | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player. If you cast this spell during your main phase, CARDNAME deals 3 damage to each creature and each player instead.
+A:SP$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player. If you cast this spell during your main phase, CARDNAME deals 3 damage to each creature and each player instead.
 SVar:X:Count$IfCastInOwnMainPhase.3.2
 Oracle:Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.

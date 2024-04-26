@@ -1,7 +1,7 @@
 Name:Paradoxical Outcome
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent.nonLand+nonToken+YouCtrl | TgtPrompt$ Select target nonland, nontoken permanent you control | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+nonToken+YouCtrl | TgtPrompt$ Select target nonland, nontoken permanent you control | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return any number of target nonland, nontoken permanents you control to their owners' hands. Draw a card for each card returned to your hand this way.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.nonLand+nonToken+YouCtrl

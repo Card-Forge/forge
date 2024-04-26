@@ -1,5 +1,5 @@
 Name:Natural Connection
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

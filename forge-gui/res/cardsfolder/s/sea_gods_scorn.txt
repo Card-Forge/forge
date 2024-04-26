@@ -1,5 +1,5 @@
 Name:Sea God's Scorn
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 U U | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to three target creatures and/or enchantments to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to three target creatures and/or enchantments to their owners' hands.
 Oracle:Return up to three target creatures and/or enchantments to their owners' hands.

@@ -1,6 +1,6 @@
 Name:Thoughtweft Gambit
 ManaCost:4 WU WU
 Types:Instant
-A:SP$ TapAll | Cost$ 4 WU WU | ValidCards$ Creature.OppCtrl | SubAbility$ DBUnTap | SpellDescription$ Tap all creatures your opponents control and untap all creatures you control.
+A:SP$ TapAll | ValidCards$ Creature.OppCtrl | SubAbility$ DBUnTap | SpellDescription$ Tap all creatures your opponents control and untap all creatures you control.
 SVar:DBUnTap:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 Oracle:Tap all creatures your opponents control and untap all creatures you control.

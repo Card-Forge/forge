@@ -1,6 +1,6 @@
 Name:Ground Assault
 ManaCost:R G
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of lands you control to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of lands you control to target creature.
 SVar:X:Count$TypeYouCtrl.Land
 Oracle:Ground Assault deals damage to target creature equal to the number of lands you control.

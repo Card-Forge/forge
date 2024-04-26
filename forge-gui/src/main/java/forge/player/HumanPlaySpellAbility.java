@@ -77,7 +77,6 @@ public class HumanPlaySpellAbility {
                         game.clearTopLibsCast(ability);
                         return false;
                     }
-                    needX = false;
                 }
                 if (!CharmEffect.makeChoices(ability)) {
                     game.clearTopLibsCast(ability);
@@ -236,7 +235,7 @@ public class HumanPlaySpellAbility {
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         final String announce = ability.getParam("Announce");
-        if (announce != null) {
+        if (announce != null && needX) {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
 
@@ -252,8 +251,6 @@ public class HumanPlaySpellAbility {
                     ability.setSVar(varName, value.toString());
                     if ("Multikicker".equals(varName)) {
                         card.setKickerMagnitude(value);
-                    } else if ("Pseudo-multikicker".equals(varName)) {
-                        card.setPseudoMultiKickerMagnitude(value);
                     } else {
                         card.setSVar(varName, value.toString());
                     }

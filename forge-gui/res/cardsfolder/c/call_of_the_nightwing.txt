@@ -2,7 +2,7 @@ Name:Call of the Nightwing
 ManaCost:2 U B
 Types:Sorcery
 K:Cipher
-A:SP$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenScript$ ub_1_1_horror_flying | TokenOwner$ You | SubAbility$ Cipher | SpellDescription$ Create a 1/1 blue and black Horror creature token with flying.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ ub_1_1_horror_flying | TokenOwner$ You | SubAbility$ Cipher | SpellDescription$ Create a 1/1 blue and black Horror creature token with flying.
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckHas:Ability$Token
 DeckNeeds:Type$Creature

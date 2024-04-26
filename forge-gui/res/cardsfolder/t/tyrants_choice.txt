@@ -1,7 +1,7 @@
 Name:Tyrant's Choice
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Vote | Cost$ 1 B | Defined$ Player | VoteDeath$ TyrantsChoiceSac | VoteTorture$ TyrantsChoiceLoseLife | Tied$ TyrantsChoiceLoseLife | VoteType$ Death,Torture | AILogic$ Torture | SpellDescription$ Will of the Council — Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.
+A:SP$ Vote | Defined$ Player | VoteDeath$ TyrantsChoiceSac | VoteTorture$ TyrantsChoiceLoseLife | Tied$ TyrantsChoiceLoseLife | VoteType$ Death,Torture | AILogic$ Torture | SpellDescription$ Will of the Council — Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.
 SVar:TyrantsChoiceSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature
 SVar:TyrantsChoiceLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 4
 Oracle:Will of the council — Starting with you, each player votes for death or torture. If death gets more votes, each opponent sacrifices a creature. If torture gets more votes or the vote is tied, each opponent loses 4 life.

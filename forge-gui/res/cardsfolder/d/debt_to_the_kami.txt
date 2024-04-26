@@ -1,7 +1,7 @@
 Name:Debt to the Kami
 ManaCost:2 B
 Types:Instant
-A:SP$ Charm | Cost$ 2 B | Choices$ ExileCreature,ExileEnchantment | Defined$ You
+A:SP$ Charm | Choices$ ExileCreature,ExileEnchantment | Defined$ You
 SVar:ExileCreature:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent exiles a creature they control.
 SVar:ExileEnchantment:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Enchantment | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent exiles an enchantment they control.
 Oracle:Choose one —\n• Target opponent exiles a creature they control.\n• Target opponent exiles an enchantment they control.

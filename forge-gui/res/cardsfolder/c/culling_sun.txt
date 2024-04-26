@@ -1,5 +1,5 @@
 Name:Culling Sun
 ManaCost:2 W W B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 W W B | ValidCards$ Creature.cmcLE3 | SpellDescription$ Destroy each creature with mana value 3 or less.
+A:SP$ DestroyAll | ValidCards$ Creature.cmcLE3 | SpellDescription$ Destroy each creature with mana value 3 or less.
 Oracle:Destroy each creature with mana value 3 or less.

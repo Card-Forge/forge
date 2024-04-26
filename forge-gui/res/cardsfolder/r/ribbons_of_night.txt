@@ -1,7 +1,7 @@
 Name:Ribbons of Night
 ManaCost:4 B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 B | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature and you gain 4 life. If {U} was spent to cast this spell, draw a card.
+A:SP$ DealDamage | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature and you gain 4 life. If {U} was spent to cast this spell, draw a card.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionManaSpent$ U
 SVar:ManaNeededToAvoidNegativeEffect:blue

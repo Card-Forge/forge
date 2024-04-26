@@ -1,6 +1,6 @@
 Name:Frightful Delusion
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBDiscard | SpellDescription$ Counter target spell unless its controller pays {1}. That player discards a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBDiscard | SpellDescription$ Counter target spell unless its controller pays {1}. That player discards a card.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Counter target spell unless its controller pays {1}. That player discards a card.

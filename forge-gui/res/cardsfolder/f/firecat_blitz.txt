@@ -1,7 +1,7 @@
 Name:Firecat Blitz
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Token | Cost$ X R R | TokenAmount$ X | TokenScript$ r_1_1_elemental_cat_haste | AtEOT$ Exile | SpellDescription$ Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental_cat_haste | AtEOT$ Exile | SpellDescription$ Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:X:Count$xPaid
 #X Will get overwritten by Announce
 K:Flashback:R R Sac<X/Mountain>

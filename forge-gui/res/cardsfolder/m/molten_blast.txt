@@ -1,7 +1,7 @@
 Name:Molten Blast
 ManaCost:2 R
 Types:Instant
-A:SP$ Charm | Cost$ 2 R | CharmNum$ 1 | Choices$ Shock,DestroyArtifact
+A:SP$ Charm | CharmNum$ 1 | Choices$ Shock,DestroyArtifact
 SVar:Shock:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker.
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Molten Blast deals 2 damage to target creature or planeswalker.\n• Destroy target artifact.

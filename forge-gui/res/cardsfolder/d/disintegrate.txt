@@ -1,7 +1,7 @@
 Name:Disintegrate
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | SubAbility$ DB | ReplaceDyingDefined$ ThisTargetedCard.Creature | SpellDescription$ CARDNAME deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DB | ReplaceDyingDefined$ ThisTargetedCard.Creature | SpellDescription$ CARDNAME deals X damage to any target. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.
 SVar:DB:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 SVar:X:Count$xPaid

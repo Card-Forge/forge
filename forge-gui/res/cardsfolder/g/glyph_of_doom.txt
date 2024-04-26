@@ -1,7 +1,7 @@
 Name:Glyph of Doom
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall creature | SubAbility$ DelTrig | StackDescription$ SpellDescription | SpellDescription$ Choose target Wall creature. At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn.
+A:SP$ Pump | ValidTgts$ Creature.Wall | TgtPrompt$ Select target Wall creature | SubAbility$ DelTrig | StackDescription$ SpellDescription | SpellDescription$ Choose target Wall creature. At this turn's next end of combat, destroy all creatures that were blocked by that creature this turn.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Targeted | Execute$ TrigRem | ThisTurn$ True | TriggerDescription$ At end of combat, destroy all creatures that were blocked by that creature this turn.
 SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigDestroy
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedByRemembered | SubAbility$ DBCleanup

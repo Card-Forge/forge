@@ -2,6 +2,6 @@ Name:Dauntless Unity
 ManaCost:1 W
 Types:Instant
 K:Kicker:1 W
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn. If this spell was kicked, those creatures get +2/+1 until end of turn instead.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn. If this spell was kicked, those creatures get +2/+1 until end of turn instead.
 SVar:X:Count$Kicked.2.1
 Oracle:Kicker {1}{W} (You may pay an additional {1}{W} as you cast this spell.)\nCreatures you control get +1/+1 until end of turn. If this spell was kicked, those creatures get +2/+1 until end of turn instead.

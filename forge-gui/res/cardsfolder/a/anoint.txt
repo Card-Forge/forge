@@ -1,6 +1,6 @@
 Name:Anoint
 ManaCost:W
 Types:Instant
-A:SP$ PreventDamage | Cost$ W | ValidTgts$ Creature | Amount$ 3 | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn.
+A:SP$ PreventDamage | ValidTgts$ Creature | Amount$ 3 | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next 3 damage that would be dealt to target creature this turn.
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nPrevent the next 3 damage that would be dealt to target creature this turn.

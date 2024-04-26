@@ -1,5 +1,5 @@
 Name:Eviscerate
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 Oracle:Destroy target creature.

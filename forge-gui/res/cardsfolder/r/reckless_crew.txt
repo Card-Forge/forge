@@ -1,7 +1,7 @@
 Name:Reckless Crew
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R | TokenAmount$ X | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You | SubAbility$ DBRepeat | RememberTokens$ True | SpellDescription$ Create X 2/1 red Dwarf Berserker creature tokens, where X is the number of Vehicles you control plus the number of Equipment you control. For each of those tokens, you may attach an Equipment you control to it.
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_2_1_dwarf_berserker | TokenOwner$ You | SubAbility$ DBRepeat | RememberTokens$ True | SpellDescription$ Create X 2/1 red Dwarf Berserker creature tokens, where X is the number of Vehicles you control plus the number of Equipment you control. For each of those tokens, you may attach an Equipment you control to it.
 SVar:X:Count$Valid Vehicle.YouCtrl,Equipment.YouCtrl
 SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ ArmToken | DefinedCards$ RememberedCard | ClearRemembered$ True | StackDescription$ None
 SVar:ArmToken:DB$ Attach | Choices$ Equipment.YouCtrl | Defined$ Remembered | Optional$ True | StackDescription$ None

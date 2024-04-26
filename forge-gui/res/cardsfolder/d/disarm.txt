@@ -1,6 +1,6 @@
 Name:Disarm
 ManaCost:U
 Types:Instant
-A:SP$ UnattachAll | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnattachValid$ Equipment | SpellDescription$ Unattach all Equipment from target creature.
+A:SP$ UnattachAll | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnattachValid$ Equipment | SpellDescription$ Unattach all Equipment from target creature.
 AI:RemoveDeck:All
 Oracle:Unattach all Equipment from target creature.

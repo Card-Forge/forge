@@ -1,5 +1,5 @@
 Name:Bedevil
 ManaCost:B B R
 Types:Instant
-A:SP$ Destroy | Cost$ B B R | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature or planeswalker | SpellDescription$ Destroy target artifact, creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature or planeswalker | SpellDescription$ Destroy target artifact, creature or planeswalker.
 Oracle:Destroy target artifact, creature, or planeswalker.

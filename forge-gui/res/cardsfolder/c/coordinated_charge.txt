@@ -1,6 +1,6 @@
 Name:Coordinated Charge
 ManaCost:4 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Creatures you control get +2/+1 until end of turn.
 K:Cycling:2
 Oracle:Creatures you control get +2/+1 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

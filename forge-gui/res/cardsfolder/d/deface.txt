@@ -1,7 +1,7 @@
 Name:Deface
 ManaCost:R
 Types:Sorcery
-A:SP$ Charm | Cost$ R | Choices$ DBDestroy,DBDestroy2
+A:SP$ Charm | Choices$ DBDestroy,DBDestroy2
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target Artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender | SpellDescription$ Destroy target creature with defender.
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target creature with defender.

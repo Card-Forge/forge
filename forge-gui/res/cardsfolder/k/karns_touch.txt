@@ -1,7 +1,7 @@
 Name:Karn's Touch
 ManaCost:U U
 Types:Instant
-A:SP$ Animate | Cost$ U U | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn. (It retains its abilities.)
+A:SP$ Animate | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn. (It retains its abilities.)
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 Oracle:Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn. (It retains its abilities.)

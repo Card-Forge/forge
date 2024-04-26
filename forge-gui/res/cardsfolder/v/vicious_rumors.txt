@@ -1,7 +1,7 @@
 Name:Vicious Rumors
 ManaCost:B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ B | Defined$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 1 damage to each opponent. Each opponent discards a card, then mills a card. You gain 1 life.
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 1 damage to each opponent. Each opponent discards a card, then mills a card. You gain 1 life.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1

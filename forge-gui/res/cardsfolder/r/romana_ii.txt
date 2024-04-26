@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Legendary Creature Time Lord Scientist
 PT:3/3
 K:Vigilance
-A:AB$ CopyPermanent | Cost$ 1 T | ValidTgts$ Permanent.token+ThisTurnEntered | TgtPrompt$ Select target token that entered the battlefield this turn | TokenTapped$ True
+A:AB$ CopyPermanent | Cost$ 1 T | ValidTgts$ Permanent.token+ThisTurnEntered | TgtPrompt$ Select target token that entered the battlefield this turn | TokenTapped$ True | SpellDescription$ Create a tapped token that's a copy of target token that entered the battlefield this turn.
 K:Doctor's companion
 DeckHas:Ability$Token
 DeckNeeds:Ability$Token

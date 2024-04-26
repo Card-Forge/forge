@@ -2,7 +2,7 @@ Name:False Orders
 ManaCost:R
 Types:Instant
 Text:Cast CARDNAME only during the declare blockers step.
-A:SP$ RemoveFromCombat | Cost$ R | ActivationPhases$ Declare Blockers | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | Defined$ Targeted | UnblockCreaturesBlockedOnlyBy$ Targeted | SubAbility$ ChooseAttacker | SpellDescription$ Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. | StackDescription$ SpellDescription
+A:SP$ RemoveFromCombat | ActivationPhases$ Declare Blockers | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | Defined$ Targeted | UnblockCreaturesBlockedOnlyBy$ Targeted | SubAbility$ ChooseAttacker | SpellDescription$ Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. | StackDescription$ SpellDescription
 SVar:ChooseAttacker:DB$ ChooseCard | Defined$ You | Choices$ Creature.attacking | MinAmount$ 0 | ChoiceTitle$ Choose an attacker to block | SubAbility$ Block
 SVar:Block:DB$ Block | DefinedAttacker$ ChosenCard | DefinedBlocker$ ParentTarget | SpellDescription$ You may have it block an attacking creature of your choice.
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Pir's Whim
 ManaCost:3 G
 Types:Sorcery
-A:SP$ AssignGroup | Cost$ 3 G | Defined$ Player | Choices$ DBSearch,DBSacrifice | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend searches their library for a land card, puts it onto the battlefield tapped, then shuffles. Each foe sacrifices an artifact or enchantment they control.
+A:SP$ AssignGroup | Defined$ Player | Choices$ DBSearch,DBSacrifice | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend searches their library for a land card, puts it onto the battlefield tapped, then shuffles. Each foe sacrifices an artifact or enchantment they control.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ Remembered | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True | StackDescription$ Each friend searches their library for a land card, puts it onto the battlefield tapped, then shuffles their library. | SpellDescription$ Friend searches their library for a land card, puts it onto the battlefield tapped, then shuffles their library.
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Remembered | SacValid$ Artifact,Enchantment | SacMessage$ artifact or enchantment | StackDescription$ Each foe sacrifices an artifact or enchantment they control. | SpellDescription$ Foe sacrifices an artifact or enchantment they control.
 SVar:NeedsToPlayVar:Z GE1

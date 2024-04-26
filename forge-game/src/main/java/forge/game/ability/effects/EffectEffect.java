@@ -232,10 +232,8 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved")) && !"False".equalsIgnoreCase(sa.getParam("ForgetOnCast"))) {
-                        addForgetOnCastTrigger(eff);
+                        addForgetOnCastTrigger(eff, "Card.IsRemembered");
                     }
-                } else if (sa.hasParam("ForgetOnCast")) {
-                    addForgetOnCastTrigger(eff);
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
                 }
@@ -245,6 +243,9 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
+            }
+            if (sa.hasParam("ForgetOnCast")) {
+                addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
             }
 
             // Set Imprinted

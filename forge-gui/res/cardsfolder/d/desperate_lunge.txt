@@ -1,7 +1,7 @@
 Name:Desperate Lunge
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SubAbility$ DBGainLife | SpellDescription$ Target creature gets +2/+2 and gains flying until end of turn. You gain 2 life.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SubAbility$ DBGainLife | SpellDescription$ Target creature gets +2/+2 and gains flying until end of turn. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 Oracle:Target creature gets +2/+2 and gains flying until end of turn. You gain 2 life.

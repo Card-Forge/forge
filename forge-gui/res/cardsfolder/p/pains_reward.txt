@@ -1,7 +1,7 @@
 Name:Pain's Reward
 ManaCost:2 B
 Types:Sorcery
-A:SP$ BidLife | Cost$ 2 B | StartBidding$ Any | AILogic$ Min | AIBidMax$ 10 | BidSubAbility$ DBLoseLife | SpellDescription$ Each player may bid life. You start the bidding with a bid of any number. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and draws four cards.
+A:SP$ BidLife | StartBidding$ Any | AILogic$ Min | AIBidMax$ 10 | BidSubAbility$ DBLoseLife | SpellDescription$ Each player may bid life. You start the bidding with a bid of any number. In turn order, each player may top the high bid. The bidding ends if the high bid stands. The high bidder loses life equal to the high bid and draws four cards.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ 4
 SVar:X:Count$ChosenNumber

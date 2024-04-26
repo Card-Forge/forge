@@ -1,6 +1,6 @@
 Name:Teferi's Response
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card.OppCtrl | DestroyPermanent$ True | TargetValidTargeting$ Land.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent. Draw two cards. | SubAbility$ DB
+A:SP$ Counter | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card.OppCtrl | DestroyPermanent$ True | TargetValidTargeting$ Land.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent. Draw two cards. | SubAbility$ DB
 SVar:DB:DB$ Draw | NumCards$ 2
 Oracle:Counter target spell or ability an opponent controls that targets a land you control. If a permanent's ability is countered this way, destroy that permanent.\nDraw two cards.

@@ -1,6 +1,6 @@
 Name:Wreak Havoc
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R G | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
+A:SP$ Destroy | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 Oracle:This spell can't be countered.\nDestroy target artifact or land.

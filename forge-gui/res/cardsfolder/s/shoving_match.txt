@@ -1,7 +1,7 @@
 Name:Shoving Match
 ManaCost:2 U
 Types:Instant
-A:SP$ AnimateAll | Cost$ 2 U | ValidCards$ Creature | Abilities$ ShovingMatch | SpellDescription$ Until end of turn, all creatures gain "{T}: Tap target creature."
+A:SP$ AnimateAll | ValidCards$ Creature | Abilities$ ShovingMatch | SpellDescription$ Until end of turn, all creatures gain "{T}: Tap target creature."
 SVar:ShovingMatch:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 AI:RemoveDeck:All
 Oracle:Until end of turn, all creatures gain "{T}: Tap target creature."

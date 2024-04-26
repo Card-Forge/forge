@@ -1,7 +1,7 @@
 Name:Resuscitate
 ManaCost:1 G
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | Abilities$ ABRegen | SpellDescription$ Until end of turn, creatures you control gain "{1}: Regenerate this creature."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Abilities$ ABRegen | SpellDescription$ Until end of turn, creatures you control gain "{1}: Regenerate this creature."
 SVar:ABRegen:AB$Regenerate | Cost$ 1 | SpellDescription$ Regenerate this creature.
 AI:RemoveDeck:All
 Oracle:Until end of turn, creatures you control gain "{1}: Regenerate this creature."

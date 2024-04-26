@@ -1,7 +1,7 @@
 Name:Scour
 ManaCost:2 W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | RememberLKI$ True | ForgetOtherTargets$ True | SubAbility$ ExileYard | SpellDescription$ Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | RememberLKI$ True | ForgetOtherTargets$ True | SubAbility$ ExileYard | SpellDescription$ Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles.
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ TargetedController | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None

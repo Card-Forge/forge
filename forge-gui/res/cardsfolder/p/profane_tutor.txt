@@ -3,5 +3,5 @@ ManaCost:no cost
 Colors:black
 Types:Sorcery
 K:Suspend:2:1 B
-A:SP$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
 Oracle:Suspend 2—{1}{B} (Rather than cast this card from your hand, pay {1}{B} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nSearch your library for a card, put that card into your hand, then shuffle.

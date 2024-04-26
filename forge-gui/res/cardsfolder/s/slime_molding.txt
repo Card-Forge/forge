@@ -1,7 +1,7 @@
 Name:Slime Molding
 ManaCost:X G
 Types:Sorcery
-A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
 Oracle:Create an X/X green Ooze creature token.

@@ -1,6 +1,6 @@
 Name:Built to Smash
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBPump | SpellDescription$ Target attacking creature gets +3/+3 until end of turn. If it's an artifact creature, it gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBPump | SpellDescription$ Target attacking creature gets +3/+3 until end of turn. If it's an artifact creature, it gains trample until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Trample | ConditionDefined$ Targeted | ConditionPresent$ Artifact
 Oracle:Target attacking creature gets +3/+3 until end of turn. If it's an artifact creature, it gains trample until end of turn.

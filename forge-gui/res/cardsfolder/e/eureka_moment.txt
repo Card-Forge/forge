@@ -1,6 +1,6 @@
 Name:Eureka Moment
 ManaCost:2 G U
 Types:Instant
-A:SP$ Draw | Cost$ 2 G U | Defined$ You | NumCards$ 2 | SubAbility$ DBChangeZone | SpellDescription$ Draw two cards.
+A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBChangeZone | SpellDescription$ Draw two cards.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
 Oracle:Draw two cards. You may put a land card from your hand onto the battlefield.

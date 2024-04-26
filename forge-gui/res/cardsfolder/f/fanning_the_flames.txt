@@ -1,7 +1,7 @@
 Name:Fanning the Flames
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 K:Buyback:3
 SVar:X:Count$xPaid
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nFanning the Flames deals X damage to any target.

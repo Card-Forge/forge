@@ -1,7 +1,7 @@
 Name:Exhilarating Elocution
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 2 W B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll | SpellDescription$ Put two +1/+1 counters on target creature you control. Other creatures you control get +1/+1 until end of turn.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPumpAll | SpellDescription$ Put two +1/+1 counters on target creature you control. Other creatures you control get +1/+1 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.Other+YouCtrl+Creature | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Counters
 Oracle:Put two +1/+1 counters on target creature you control. Other creatures you control get +1/+1 until end of turn.

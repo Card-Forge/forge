@@ -2,6 +2,6 @@ Name:Shifting Borders
 ManaCost:3 U
 Types:Instant Arcane
 K:Splice:Arcane:3 U
-A:SP$ ExchangeControl | Cost$ 3 U | ValidTgts$ Land | TgtPrompt$ Select target Land | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target lands.
+A:SP$ ExchangeControl | ValidTgts$ Land | TgtPrompt$ Select target Land | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target lands.
 AI:RemoveDeck:All
 Oracle:Exchange control of two target lands.\nSplice onto Arcane {3}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

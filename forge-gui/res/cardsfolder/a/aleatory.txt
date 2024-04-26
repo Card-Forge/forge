@@ -2,7 +2,7 @@ Name:Aleatory
 ManaCost:1 R
 Types:Instant
 Text:Cast CARDNAME only during combat after blockers are declared.
-A:SP$ FlipACoin | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain +1/+1 | WinSubAbility$ AleatoryPump | LoseSubAbility$ DelTrigSlowtrip | ActivationPhases$ Declare Blockers->EndCombat | SpellDescription$ Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn. Draw a card at the beginning of the next turn's upkeep.
+A:SP$ FlipACoin | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain +1/+1 | WinSubAbility$ AleatoryPump | LoseSubAbility$ DelTrigSlowtrip | ActivationPhases$ Declare Blockers->EndCombat | SpellDescription$ Flip a coin. If you win the flip, target creature gets +1/+1 until end of turn. Draw a card at the beginning of the next turn's upkeep.
 SVar:AleatoryPump:DB$ Pump | Defined$ Targeted | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DelTrigSlowtrip
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | Defined$ You

@@ -1,6 +1,6 @@
 Name:Easy Prey
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with mana value 2 or less | SpellDescription$ Destroy target creature with mana value 2 or less.
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE2 | TgtPrompt$ Select target creature with mana value 2 or less | SpellDescription$ Destroy target creature with mana value 2 or less.
 K:Cycling:2
 Oracle:Destroy target creature with mana value 2 or less.\nCycling {2} ({2}, Discard this card: Draw a card.)

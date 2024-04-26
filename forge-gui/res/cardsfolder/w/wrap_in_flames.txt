@@ -1,6 +1,6 @@
 Name:Wrap in Flames
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to each of up to three target creatures. Those creatures can't block this turn.
+A:SP$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 1 damage to each of up to three target creatures. Those creatures can't block this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME can't block.
 Oracle:Wrap in Flames deals 1 damage to each of up to three target creatures. Those creatures can't block this turn.

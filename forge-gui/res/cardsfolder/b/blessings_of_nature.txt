@@ -2,6 +2,6 @@ Name:Blessings of Nature
 ManaCost:4 G
 Types:Sorcery
 K:Miracle:G
-A:SP$ PutCounter | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Distribute four +1/+1 counters among any number of target creatures.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ Distribute four +1/+1 counters among any number of target creatures.
 #TODO: The AI uses this card well, but it only distributes all counters to a single creature, it seems. Might be improved.
 Oracle:Distribute four +1/+1 counters among any number of target creatures.\nMiracle {G} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

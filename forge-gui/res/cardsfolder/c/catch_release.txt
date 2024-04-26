@@ -2,7 +2,7 @@ Name:Catch
 ManaCost:1 U R
 Types:Sorcery
 K:Fuse
-A:SP$ GainControl | Cost$ 1 U R | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.
 AlternateMode:Split
 Oracle:Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,6 +11,6 @@ ALTERNATE
 Name:Release
 ManaCost:4 R W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 R W | RepeatPlayers$ Player | RepeatSubAbility$ DBSac | SpellDescription$ Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSac | SpellDescription$ Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Artifact & Creature & Enchantment & Land & Planeswalker | SacEachValid$ True
 Oracle:Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.\nFuse (You may cast one or both halves of this card from your hand.)

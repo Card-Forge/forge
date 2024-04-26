@@ -1,6 +1,6 @@
 Name:Seething Anger
 ManaCost:R
 Types:Sorcery
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | SpellDescription$ Target creature gets +3/+0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | SpellDescription$ Target creature gets +3/+0 until end of turn.
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget creature gets +3/+0 until end of turn.

@@ -2,7 +2,7 @@ Name:Solar Tide
 ManaCost:4 W W
 Types:Sorcery
 K:Entwine:Sac<2/Land>
-A:SP$ Charm | Cost$ 4 W W | Choices$ DBDestroyAll,DBDestroyAll2 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDestroyAll,DBDestroyAll2 | CharmNum$ 1
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.powerLE2 | SpellDescription$ Destroy all creatures with power 2 or less.
 SVar:DBDestroyAll2:DB$ DestroyAll | ValidCards$ Creature.powerGE3 | SpellDescription$ Destroy all creatures with power 3 or greater.
 Oracle:Choose one —\n• Destroy all creatures with power 2 or less.\n• Destroy all creatures with power 3 or greater.\nEntwine—Sacrifice two lands. (Choose both if you pay the entwine cost.)

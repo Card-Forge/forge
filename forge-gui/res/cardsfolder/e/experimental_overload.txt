@@ -1,7 +1,7 @@
 Name:Experimental Overload
 ManaCost:2 U R
 Types:Sorcery
-A:SP$ Token | Cost$ 2 U R | TokenAmount$ 1 | TokenScript$ ur_x_x_weird | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Create an X/X blue and red Weird creature token, where X is the number of instant and sorcery cards in your graveyard. Then you may return an instant or sorcery card from your graveyard to your hand. Exile CARDNAME.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ ur_x_x_weird | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Create an X/X blue and red Weird creature token, where X is the number of instant and sorcery cards in your graveyard. Then you may return an instant or sorcery card from your graveyard to your hand. Exile CARDNAME.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | ChangeNum$ 1 | SubAbility$ DBExile | StackDescription$ None
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn

@@ -1,5 +1,5 @@
 Name:Shimmer of Possibility
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 U | DigNum$ 4 | ChangeNum$ 1 | RestRandomOrder$ True | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 1 | RestRandomOrder$ True | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.
 Oracle:Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in a random order.

@@ -2,5 +2,5 @@ Name:Volcanic Fallout
 ManaCost:1 R R
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DamageAll | Cost$ 1 R R | NumDmg$ 2 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player.
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 2 damage to each creature and each player.
 Oracle:This spell can't be countered.\nVolcanic Fallout deals 2 damage to each creature and each player.

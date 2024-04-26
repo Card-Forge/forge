@@ -1,7 +1,7 @@
 Name:Benefactor's Draught
 ManaCost:1 G
 Types:Instant
-A:SP$ UntapAll | Cost$ 1 G | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ Untap all creatures. Until end of turn, whenever a creature an opponent controls blocks, draw a card. Draw a card.
+A:SP$ UntapAll | ValidCards$ Creature | SubAbility$ DBEffect | SpellDescription$ Untap all creatures. Until end of turn, whenever a creature an opponent controls blocks, draw a card. Draw a card.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigBlock | SubAbility$ DBDraw
 SVar:TrigBlock:Mode$ Blocks | ValidCard$ Creature.OppCtrl | Execute$ EffDraw | TriggerDescription$ Whenever a creature an opponent controls blocks, draw a card.
 SVar:EffDraw:DB$ Draw | NumCards$ 1

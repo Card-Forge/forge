@@ -1,5 +1,5 @@
 Name:Executioner's Swing
 ManaCost:W B
 Types:Instant
-A:SP$ Pump | Cost$ W B | IsCurse$ True | ValidTgts$ Creature.dealtDamageThisTurn | TgtPrompt$ Select target creature that dealt damage this turn | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature that dealt damage this turn gets -5/-5 until end of turn.
+A:SP$ Pump | IsCurse$ True | ValidTgts$ Creature.dealtDamageThisTurn | TgtPrompt$ Select target creature that dealt damage this turn | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature that dealt damage this turn gets -5/-5 until end of turn.
 Oracle:Target creature that dealt damage this turn gets -5/-5 until end of turn.

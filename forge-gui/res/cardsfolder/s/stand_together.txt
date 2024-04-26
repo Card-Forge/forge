@@ -1,6 +1,6 @@
 Name:Stand Together
 ManaCost:3 G G
 Types:Instant
-A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPutTwo | SpellDescription$ Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPutTwo | SpellDescription$ Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.
 SVar:DBPutTwo:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select another target creature | TargetUnique$ True | CounterType$ P1P1 | CounterNum$ 2
 Oracle:Put two +1/+1 counters on target creature and two +1/+1 counters on another target creature.

@@ -1,6 +1,6 @@
 Name:Stoic Rebuttal
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | IsPresent$ Artifact.YouCtrl | PresentCompare$ LT3 | SpellDescription$ Counter target spell.
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Activation$ Metalcraft | CostDesc$ Metalcraft — | SpellDescription$ This spell costs {1} less to cast if you control 3 or more artifacts.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Condition$ Metalcraft | Description$ Metalcraft — This spell costs {1} less to cast if you control three or more artifacts.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 Oracle:Metalcraft — This spell costs {1} less to cast if you control three or more artifacts.\nCounter target spell.

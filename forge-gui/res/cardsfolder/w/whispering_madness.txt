@@ -2,7 +2,7 @@ Name:Whispering Madness
 ManaCost:2 U B
 Types:Sorcery
 K:Cipher
-A:SP$ RepeatEach | Cost$ 2 U B | RepeatPlayers$ Player | RepeatSubAbility$ MadnessDiscard | SubAbility$ MadnessDraw | SpellDescription$ Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ MadnessDiscard | SubAbility$ MadnessDraw | SpellDescription$ Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way.
 SVar:MadnessDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ MadnessSaveAmount
 SVar:MadnessSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ MadnessCleanUp
 SVar:MadnessCleanUp:DB$ Cleanup | ClearRemembered$ True

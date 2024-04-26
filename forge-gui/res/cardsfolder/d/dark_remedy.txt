@@ -1,5 +1,5 @@
 Name:Dark Remedy
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SpellDescription$ Target creature gets +1/+3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SpellDescription$ Target creature gets +1/+3 until end of turn.
 Oracle:Target creature gets +1/+3 until end of turn.

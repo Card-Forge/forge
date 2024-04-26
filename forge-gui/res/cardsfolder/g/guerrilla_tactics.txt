@@ -1,7 +1,7 @@
 Name:Guerrilla Tactics
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigDoubleDmg | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, CARDNAME deals 4 damage to any target.
 SVar:TrigDoubleDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
 SVar:DiscardMeByOpp:3

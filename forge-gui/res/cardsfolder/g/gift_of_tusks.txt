@@ -1,6 +1,6 @@
 Name:Gift of Tusks
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 3 | Toughness$ 3 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Elephant | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 3 | Toughness$ 3 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Elephant | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3.
 AI:RemoveDeck:All
 Oracle:Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3.

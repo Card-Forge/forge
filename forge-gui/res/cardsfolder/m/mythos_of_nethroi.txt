@@ -1,6 +1,6 @@
 Name:Mythos of Nethroi
 ManaCost:2 B
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | ConditionManaNotSpent$ G W | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Destroy target nonland permanent if it's a creature or if {G}{W} was spent to cast this spell.
+A:SP$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | ConditionManaNotSpent$ G W | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Destroy target nonland permanent if it's a creature or if {G}{W} was spent to cast this spell.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionManaSpent$ G W | StackDescription$ None
 Oracle:Destroy target nonland permanent if it's a creature or if {G}{W} was spent to cast this spell.

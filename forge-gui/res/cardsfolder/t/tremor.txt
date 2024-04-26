@@ -1,5 +1,5 @@
 Name:Tremor
 ManaCost:R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 Oracle:Tremor deals 1 damage to each creature without flying.

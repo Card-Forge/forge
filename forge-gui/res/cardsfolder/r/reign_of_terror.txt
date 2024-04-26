@@ -1,7 +1,7 @@
 Name:Reign of Terror
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ GenericChoice | Cost$ 3 B B | Choices$ DestroyWhite,DestroyGreen | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Destroy all white or green creatures. They can't be regenerated. You lose 2 life for each creature that died this way.
+A:SP$ GenericChoice | Choices$ DestroyWhite,DestroyGreen | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Destroy all white or green creatures. They can't be regenerated. You lose 2 life for each creature that died this way.
 SVar:DestroyWhite:DB$ DestroyAll | ValidCards$ Creature.White | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy all white creatures
 SVar:DestroyGreen:DB$ DestroyAll | ValidCards$ Creature.Green | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy all green creatures
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ You | SubAbility$ DBCleanup

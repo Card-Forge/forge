@@ -1,6 +1,6 @@
 Name:Prophetic Bolt
 ManaCost:3 U R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 U R | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to any target. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to any target. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:DBDig:DB$ Dig | DigNum$ 4
 Oracle:Prophetic Bolt deals 4 damage to any target. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.

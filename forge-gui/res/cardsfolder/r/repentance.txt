@@ -1,7 +1,7 @@
 Name:Repentance
 ManaCost:2 W
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 AI:RemoveDeck:All
 Oracle:Target creature deals damage to itself equal to its power.

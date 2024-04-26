@@ -1,7 +1,7 @@
 Name:Guardian Angel
 ManaCost:X W
 Types:Instant
-A:SP$ PreventDamage | Cost$ X W | ValidTgts$ Any | Amount$ X | SubAbility$ GuardianEffect | SpellDescription$ Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ X | SubAbility$ GuardianEffect | SpellDescription$ Prevent the next X damage that would be dealt to any target this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn.
 SVar:GuardianEffect:DB$ Effect | Abilities$ ABProtect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield
 SVar:ABProtect:AB$ PreventDamage | ActivationZone$ Command | Cost$ 1 | InstantSpeed$ True | Defined$ Remembered | Amount$ 1 | SpellDescription$ You may pay 1 any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that permanent or player this turn.
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Psychic Purge
 ManaCost:U
 Types:Sorcery
-A:SP$ DealDamage | Cost$ U | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ SpellAbility.OppCtrl | Execute$ TrigLoseLife | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, that player loses 5 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCauseController | LifeAmount$ 5
 SVar:DiscardMeByOpp:3

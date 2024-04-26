@@ -1,7 +1,7 @@
 Name:Read the Bones
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Scry | Cost$ 2 B | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw two cards. You lose 2 life.
+A:SP$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw two cards. You lose 2 life.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
 Oracle:Scry 2, then draw two cards. You lose 2 life.

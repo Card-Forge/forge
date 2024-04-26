@@ -1,6 +1,6 @@
 Name:Thirst for Knowledge
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard an artifact card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard an artifact card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
 Oracle:Draw three cards. Then discard two cards unless you discard an artifact card.

@@ -1,7 +1,7 @@
 Name:Jolt
 ManaCost:2 U
 Types:Instant
-A:SP$ TapOrUntap | Cost$ 2 U | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DelTrigSlowtrip | SpellDescription$ You may tap or untap target artifact, creature, or land. Draw a card at the beginning of the next turn's upkeep.
+A:SP$ TapOrUntap | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DelTrigSlowtrip | SpellDescription$ You may tap or untap target artifact, creature, or land. Draw a card at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 AI:RemoveDeck:All

@@ -1,5 +1,5 @@
 Name:Clash of Titans
 ManaCost:3 R R
 Types:Instant
-A:SP$ Fight | Cost$ 3 R R | ValidTgts$ Creature | TgtPrompt$ Select target creatures | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target creature fights another target creature. (Each deals damage equal to its power to the other.)
+A:SP$ Fight | ValidTgts$ Creature | TgtPrompt$ Select target creatures | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Target creature fights another target creature. (Each deals damage equal to its power to the other.)
 Oracle:Target creature fights another target creature. (Each deals damage equal to its power to the other.)

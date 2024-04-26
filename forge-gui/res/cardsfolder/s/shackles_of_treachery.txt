@@ -1,7 +1,7 @@
 Name:Shackles of Treachery
 ManaCost:2 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and "Whenever this creature deals damage, destroy target Equipment attached to it."
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and "Whenever this creature deals damage, destroy target Equipment attached to it."
 SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Triggers$ Shackles
 SVar:Shackles:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever this creature deals damage, destroy target Equipment attached to it.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Equipment.Attached | TgtPrompt$ Select target Equipment attached to the creature

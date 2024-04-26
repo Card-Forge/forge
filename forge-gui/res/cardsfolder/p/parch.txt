@@ -1,7 +1,7 @@
 Name:Parch
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ DBDmg1,DBDmg2 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDmg1,DBDmg2 | CharmNum$ 1
 SVar:DBDmg1:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Any | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:DBDmg2:DB$ DealDamage | NumDmg$ 4 | ValidTgts$ Creature.Blue | TgtPrompt$ Select target blue creature. | SpellDescription$ CARDNAME deals 4 damage to target blue creature.
 Oracle:Choose one —\n• Parch deals 2 damage to any target.\n• Parch deals 4 damage to target blue creature.

@@ -2,7 +2,7 @@ Name:Plunge into Darkness
 ManaCost:1 B
 Types:Instant
 K:Entwine:B
-A:SP$ Charm | Cost$ 1 B | Choices$ DBSac,DBChooseNumber | CharmNum$ 1
+A:SP$ Charm | Choices$ DBSac,DBChooseNumber | CharmNum$ 1
 SVar:DBSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ GainLifeX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

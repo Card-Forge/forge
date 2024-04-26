@@ -1,7 +1,7 @@
 Name:Cease-Fire
 ManaCost:2 W
 Types:Instant
-A:SP$ Effect | Cost$ 2 W | ValidTgts$ Player | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Target player can't cast creature spells this turn.
+A:SP$ Effect | ValidTgts$ Player | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Target player can't cast creature spells this turn.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Creature | Caster$ Player.IsRemembered | Description$ Target player can't cast creature spells this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target player can't cast creature spells this turn.\nDraw a card.

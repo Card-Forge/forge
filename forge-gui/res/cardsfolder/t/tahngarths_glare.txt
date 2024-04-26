@@ -1,6 +1,6 @@
 Name:Tahngarth's Glare
 ManaCost:R
 Types:Sorcery
-A:SP$ RearrangeTopOfLibrary | Cost$ R | ValidTgts$ Opponent | NumCards$ 3 | SubAbility$ DBRearange | SpellDescription$ Look at the top three cards of target opponent's library, then put them back in any order. That player looks at the top three cards of your library, then puts them back in any order.
+A:SP$ RearrangeTopOfLibrary | ValidTgts$ Opponent | NumCards$ 3 | SubAbility$ DBRearange | SpellDescription$ Look at the top three cards of target opponent's library, then put them back in any order. That player looks at the top three cards of your library, then puts them back in any order.
 SVar:DBRearange:DB$ RearrangeTopOfLibrary | Defined$ You | RearrangePlayer$ Targeted | NumCards$ 3
 Oracle:Look at the top three cards of target opponent's library, then put them back in any order. That player looks at the top three cards of your library, then puts them back in any order.

@@ -1,5 +1,5 @@
 Name:Beast Hunt
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 3 G | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.
 Oracle:Reveal the top three cards of your library. Put all creature cards revealed this way into your hand and the rest into your graveyard.

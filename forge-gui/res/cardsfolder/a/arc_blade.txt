@@ -2,6 +2,6 @@ Name:Arc Blade
 ManaCost:3 R R
 Types:Sorcery
 K:Suspend:3:2 R
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBChange | SpellDescription$ CARDNAME deals 2 damage to any target. Exile CARDNAME with three time counters on it.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBChange | SpellDescription$ CARDNAME deals 2 damage to any target. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3
 Oracle:Arc Blade deals 2 damage to any target. Exile Arc Blade with three time counters on it.\nSuspend 3—{2}{R} (Rather than cast this card from your hand, you may pay {2}{R} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

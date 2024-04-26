@@ -1,7 +1,7 @@
 Name:Showstopping Surprise
 ManaCost:3 R R
 Types:Instant
-A:SP$ SetState | Cost$ 3 R R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | Mode$ TurnFaceUp | SubAbility$ IgnitionDamage | StackDescription$ None | SpellDescription$ Choose target creature you control. Turn it face up if it's face down. Then it deals damage equal to its power to each other creature.
+A:SP$ SetState | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | Mode$ TurnFaceUp | SubAbility$ IgnitionDamage | StackDescription$ None | SpellDescription$ Choose target creature you control. Turn it face up if it's face down. Then it deals damage equal to its power to each other creature.
 SVar:IgnitionDamage:DB$ DamageAll | ValidCards$ Creature.NotDefinedTargeted | NumDmg$ X | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Choose target creature you control. Turn it face up if it's face down. Then it deals damage equal to its power to each other creature.

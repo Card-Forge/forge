@@ -1,6 +1,6 @@
 Name:Startling Development
 ManaCost:1 U
 Types:Instant
-A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | Types$ Serpent | RemoveCreatureTypes$ True | Power$ 4 | Toughness$ 4 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, target creature becomes a blue Serpent with base power and toughness 4/4.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ Blue | OverwriteColors$ True | Types$ Serpent | RemoveCreatureTypes$ True | Power$ 4 | Toughness$ 4 | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, target creature becomes a blue Serpent with base power and toughness 4/4.
 K:Cycling:1
 Oracle:Until end of turn, target creature becomes a blue Serpent with base power and toughness 4/4.\nCycling {1} ({1}, Discard this card: Draw a card.)

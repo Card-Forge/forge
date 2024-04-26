@@ -1,6 +1,6 @@
 Name:Inspirit
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +4 | SubAbility$ DBUntap | SpellDescription$ Untap target creature. It gets +2/+4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +4 | SubAbility$ DBUntap | SpellDescription$ Untap target creature. It gets +2/+4 until end of turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Untap target creature. It gets +2/+4 until end of turn.

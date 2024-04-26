@@ -1,5 +1,5 @@
 Name:Bring to Trial
 ManaCost:2 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 4 or greater.
+A:SP$ ChangeZone | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 4 or greater.
 Oracle:Exile target creature with power 4 or greater.

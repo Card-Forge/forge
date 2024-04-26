@@ -1,7 +1,7 @@
 Name:Uncage the Menagerie
 ManaCost:X G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X G G | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcEQX | ChangeNum$ X | DifferentNames$ True | SpellDescription$ Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcEQX | ChangeNum$ X | DifferentNames$ True | SpellDescription$ Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Search your library for up to X creature cards with different names that each have mana value X, reveal them, put them into your hand, then shuffle.

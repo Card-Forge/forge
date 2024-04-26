@@ -1,5 +1,5 @@
 Name:Banners Raised
 ManaCost:R
 Types:Instant
-A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 Oracle:Creatures you control get +1/+0 until end of turn.

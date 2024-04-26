@@ -2,5 +2,5 @@ Name:Rolling Temblor
 ManaCost:2 R
 Types:Sorcery
 K:Flashback:4 R R
-A:SP$ DamageAll | Cost$ 2 R | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature without flying.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature without flying.
 Oracle:Rolling Temblor deals 2 damage to each creature without flying.\nFlashback {4}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

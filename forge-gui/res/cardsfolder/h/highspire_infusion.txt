@@ -1,6 +1,6 @@
 Name:Highspire Infusion
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBEnergy | SpellDescription$ Target creature gets +3/+3 until end of turn. You get {E}{E} (two energy counters).
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SubAbility$ DBEnergy | SpellDescription$ Target creature gets +3/+3 until end of turn. You get {E}{E} (two energy counters).
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 Oracle:Target creature gets +3/+3 until end of turn. You get {E}{E} (two energy counters).

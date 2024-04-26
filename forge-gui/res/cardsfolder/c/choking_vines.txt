@@ -2,7 +2,7 @@ Name:Choking Vines
 ManaCost:X G
 Types:Instant
 Text:Cast CARDNAME only during the declare blockers step.
-A:SP$ BecomesBlocked | Cost$ X G | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | TargetMin$ 0 | TargetMax$ MaxTgt | ActivationPhases$ Declare Blockers | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ X target attacking creatures become blocked. CARDNAME deals 1 damage to each of those creatures. (This spell works on creatures that can't be blocked.)
+A:SP$ BecomesBlocked | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | TargetMin$ 0 | TargetMax$ MaxTgt | ActivationPhases$ Declare Blockers | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ X target attacking creatures become blocked. CARDNAME deals 1 damage to each of those creatures. (This spell works on creatures that can't be blocked.)
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.IsRemembered | NumDmg$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedObjects$Amount

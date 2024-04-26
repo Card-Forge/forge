@@ -1,6 +1,6 @@
 Name:Join the Ranks
 ManaCost:3 W
 Types:Instant
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ w_1_1_soldier_ally | TokenOwner$ You | SpellDescription$ Create two 1/1 white Soldier Ally creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier_ally | TokenOwner$ You | SpellDescription$ Create two 1/1 white Soldier Ally creature tokens.
 SVar:PlayMain1:TRUE
 Oracle:Create two 1/1 white Soldier Ally creature tokens.
