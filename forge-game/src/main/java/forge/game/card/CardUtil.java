@@ -144,6 +144,10 @@ public final class CardUtil {
         return Lists.newArrayList(Iterables.filter(src.getGame().getStack().getAbilityActivatedThisTurn(), SpellAbilityPredicates.isValid(valid.split(","), controller, src, ctb)));
     }
 
+    public static List<Card> getCastSinceBeginningOfYourLastTurn(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(controller.getSpellsCastSinceBegOfYourLastTurn(), valid, controller, src, ctb);
+    }
+
     public static CardCollection getRadiance(final SpellAbility sa) {
         SpellAbility targetSA = sa.getSATargetingCard();
         if (targetSA == null || !targetSA.usesTargeting() || !targetSA.hasParam("Radiance")) {
