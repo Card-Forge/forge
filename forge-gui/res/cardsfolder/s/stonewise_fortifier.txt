@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Human Wizard
 PT:2/2
 A:AB$ Effect | Cost$ 4 W | ValidTgts$ Creature | RememberObjects$ Targeted | ImprintCards$ Self | ForgetOnMoved$ Battlefield | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT | SpellDescription$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
-SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.IsImprinted | ValidSource$ Creature.IsRemembered | Description$ Prevent all damage that would be dealt to CARDNAME by target creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.IsImprinted | ValidSource$ Creature.IsRemembered | Description$ Prevent all damage that would be dealt to EFFECTSOURCE by target creature this turn.
 AI:RemoveDeck:All
 Oracle:{4}{W}: Prevent all damage that would be dealt to Stonewise Fortifier by target creature this turn.

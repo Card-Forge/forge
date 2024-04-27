@@ -2,8 +2,8 @@ Name:Saffi Eriksdotter
 ManaCost:G W
 Types:Legendary Creature Human Scout
 PT:2/2
-A:AB$ Effect | Cost$ Sac<1/CARDNAME> | Name$ Saffi Eriksdotter | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigChangesZone | ForgetOnMoved$ Graveyard | RememberObjects$ Targeted | SpellDescription$ When target creature is put into your graveyard this turn, return that card to the battlefield.
-SVar:TrigChangesZone:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered+YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBounceMe | TriggerDescription$ If the targeted card of Saffi Eriksdotter is put into your graveyard from the battlefield this turn, return it to the battlefield.
+A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigChangesZone | ForgetOnMoved$ Graveyard | RememberObjects$ Targeted | SpellDescription$ When target creature is put into your graveyard this turn, return that card to the battlefield.
+SVar:TrigChangesZone:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered+YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBounceMe | TriggerDescription$ When this creature is put into your graveyard from the battlefield this turn, return it to the battlefield.
 SVar:TrigBounceMe:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield
 AI:RemoveDeck:All
 Oracle:Sacrifice Saffi Eriksdotter: When target creature is put into your graveyard this turn, return that card to the battlefield.

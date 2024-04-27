@@ -2,7 +2,7 @@ Name:Silent Gravestone
 ManaCost:1
 Types:Artifact
 S:Mode$ CantTarget | AffectedZone$ Graveyard | Description$ Cards in graveyards can't be the targets of spells or abilities.
-A:AB$ ChangeZone | Cost$ 4 T | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.Self | AILogic$ ExileGraveyards | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile Silent Gravestone and all cards from all graveyards. Draw a card.
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.Self | AILogic$ ExileGraveyards | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile CARDNAME and all cards from all graveyards. Draw a card.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 // It probably doesn't matter whether graveyards are exiled simultaneously with Silent Gravestone, but nevertheless, is there a way to do it?

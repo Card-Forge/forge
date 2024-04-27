@@ -1,7 +1,7 @@
 Name:Torch Breath
 ManaCost:X R
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Permanent.Blue | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a a blue permanent.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | ValidTarget$ Permanent.Blue | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a blue permanent.
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker.
 SVar:X:Count$xPaid

@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Squirrel
 PT:2/2
 K:Reach
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | Description$ Scurrid Colony gets +2/+2 as long as you control eight or more lands.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE8 | Description$ CARDNAME gets +2/+2 as long as you control eight or more lands.
 Oracle:Reach\nScurrid Colony gets +2/+2 as long as you control eight or more lands.

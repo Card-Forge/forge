@@ -2,8 +2,8 @@ Name:Spark Fiend
 ManaCost:4 R
 Types:Creature Beast
 PT:5/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRollETB | TriggerDescription$ When Spark Fiend enters the battlefield, roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice CARDNAME. If you rolled 7 or 11, don't roll dice for CARDNAME during any of your following upkeeps. If you rolled any other total, note that total.
-SVar:TrigRollETB:DB$ RollDice | Amount$ 2 | ResultSubAbilities$ 2-3:DBSac,12:DBSac,7:DBSafe,Else:DBNote | ResultSVar$ Result
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRollETB | TriggerDescription$ When CARDNAME enters the battlefield, roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice CARDNAME. If you rolled 7 or 11, don't roll dice for CARDNAME during any of your following upkeeps. If you rolled any other total, note that total.
+SVar:TrigRollETB:DB$ RollDice | Amount$ 2 | ResultSubAbilities$ 2-3:DBSac,12:DBSac,7:DBSafe,11:DBSafe,Else:DBNote | ResultSVar$ Result
 SVar:DBSac:DB$ Sacrifice
 SVar:Safe:Number$1
 SVar:Noted:Number$0

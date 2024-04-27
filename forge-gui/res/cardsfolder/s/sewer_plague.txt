@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | Duration$ Perpetual | SubAbility$ DBAnimate | StackDescription$ {c:Targeted} perpetually gets -2/-2 | SpellDescription$ Target creature an opponent controls perpetually gets -2/-2
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ PerpetualUpkeep | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ and gains "At the beginning of each upkeep, this creature perpetually gets -1/-1."
-SVar:PerpetualUpkeep:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of each upkeep, this creature perpetually gets -1/-1.
+SVar:PerpetualUpkeep:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ At the beginning of each upkeep, CARDNAME perpetually gets -1/-1.
 SVar:DBPump:DB$ Pump | NumAtt$ -1 | NumDef$ -1 | Duration$ Perpetual
 Oracle:Target creature an opponent controls perpetually gets -2/-2 and gains "At the beginning of each upkeep, this creature perpetually gets -1/-1."

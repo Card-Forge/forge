@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ Scry | Cost$ 2 U U R T Sac<1/CARDNAME> | ScryNum$ 2 | SubAbility$ DBDamageAll | SorcerySpeed$ True | SpellDescription$ Scry 2. Surtland Frostpyre deals 2 damage to each creature. Activate only any time you could cast a sorcery.
+A:AB$ Scry | Cost$ 2 U U R T Sac<1/CARDNAME> | ScryNum$ 2 | SubAbility$ DBDamageAll | SorcerySpeed$ True | SpellDescription$ Scry 2. CARDNAME deals 2 damage to each creature. Activate only any time you could cast a sorcery.
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2
 Oracle:Surtland Frostpyre enters the battlefield tapped.\n{T}: Add {R}.\n{2}{U}{U}{R}, {T}, Sacrifice Surtland Frostpyre: Scry 2. Surtland Frostpyre deals 2 damage to each creature. Activate only as a sorcery.

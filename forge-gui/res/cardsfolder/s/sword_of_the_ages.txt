@@ -2,7 +2,7 @@ Name:Sword of the Ages
 ManaCost:6
 Types:Artifact
 K:CARDNAME enters the battlefield tapped.
-A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> Sac<X/Creature.Other/creature> | NumDmg$ Y | ValidTgts$ Any | CostDesc$ Sacrifice Sword of the Ages and any number of creatures you control: | SubAbility$ DBExile | SpellDescription$ CARDNAME deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile CARDNAME and those creature cards.
+A:AB$ DealDamage | Cost$ T Sac<1/CARDNAME> Sac<X/Creature.Other/creature> | NumDmg$ Y | ValidTgts$ Any | CostDesc$ Sacrifice CARDNAME and any number of creatures you control: | SubAbility$ DBExile | SpellDescription$ CARDNAME deals X damage to any target, where X is the total power of the creatures sacrificed this way, then exile CARDNAME and those creature cards.
 SVar:DBExile:DB$ ChangeZone | Defined$ SacrificedCards | Origin$ Graveyard | Destination$ Exile
 SVar:X:Count$xPaid
 SVar:Y:Sacrificed$CardPower

@@ -2,7 +2,7 @@ Name:Stensia Innkeeper
 ManaCost:3 R
 Types:Creature Vampire
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, enters the battlefield, tap target land an opponent controls. That land doesn't untap during its controller's next untap step.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target land an opponent controls. That land doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls. | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:PlayMain1:TRUE

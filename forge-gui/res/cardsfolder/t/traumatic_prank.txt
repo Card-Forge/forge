@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBAnimate | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Gain control of target creature until end of turn. Untap that creature.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Keywords$ Haste | staticAbilities$ CantBlock | Triggers$ PingUpkeep | Duration$ Perpetual | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains haste, "This creature can't block," and "At the beginning of your upkeep, this creature deals 1 damage to you."
-SVar:CantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ This creature can't block.
-SVar:PingUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, this creature deals 1 damage to you.
+SVar:CantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
+SVar:PingUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
 SVar:TrigDamage:DB$ DealDamage | Defined$ CardController | NumDmg$ 1
 Oracle:Gain control of target creature until end of turn. Untap that creature. It perpetually gains haste, "This creature can't block," and "At the beginning of your upkeep, this creature deals 1 damage to you."
