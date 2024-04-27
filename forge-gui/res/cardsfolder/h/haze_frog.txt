@@ -4,7 +4,7 @@ Types:Creature Frog
 PT:2/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, prevent all combat damage that other creatures would deal this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Haze Frog Effect | ReplacementEffects$ RPrevent | RememberObjects$ Self
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Self
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.IsNotRemembered | Description$ Prevent all combat damage that other creatures would deal this turn.
 SVar:AmbushAI:True
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Haze Frog enters the battlefield, prevent all combat damage that other creatures would deal this turn.

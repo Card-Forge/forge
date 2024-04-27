@@ -2,7 +2,7 @@ Name:Duskmantle Guildmage
 ManaCost:U B
 Types:Creature Human Wizard
 PT:2/2
-A:AB$ Effect | Cost$ 1 U B | Name$ Duskmantle Guildmage Effect | Triggers$ DuskmantleCardToGrave | SpellDescription$ Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
+A:AB$ Effect | Cost$ 1 U B | Triggers$ DuskmantleCardToGrave | SpellDescription$ Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
 SVar:DuskmantleCardToGrave:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+OppOwn | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 A:AB$ Mill | Cost$ 2 U B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards.

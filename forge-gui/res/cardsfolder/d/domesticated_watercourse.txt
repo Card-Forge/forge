@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
-A:AB$ Animate | Cost$ U B | Defined$ Self | Types$ Artifact,Equipment | RemoveCardTypes$ True | Keywords$ Equip:2 | SpellDescription$ Until end of turn, Domesticated Watercourse becomes an Equipment artifact with equip {2}.
+A:AB$ Animate | Cost$ U B | Defined$ Self | Types$ Artifact,Equipment | RemoveCardTypes$ True | Keywords$ Equip:2 | SpellDescription$ Until end of turn, CARDNAME becomes an Equipment artifact with equip {2}.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Domesticated Watercourse enters the battlefield tapped.\n{T}: Add {U} or {B}.\n{U}{B}: Until end of turn, Domesticated Watercourse becomes an Equipment artifact with equip {2}.\nWhenever equipped creature deals combat damage to a player, draw a card.

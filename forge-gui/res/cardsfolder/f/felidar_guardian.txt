@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Cat Beast
 PT:1/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ RestorationExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile another target permanent you control, then return that card to the battlefield under your control.
-SVar:RestorationExile:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | AILogic$ BounceOnce | SubAbility$ RestorationReturn
+SVar:RestorationExile:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | TgtPrompt$ Select another target permanent you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | AILogic$ BounceOnce | SubAbility$ RestorationReturn
 SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 Oracle:When Felidar Guardian enters the battlefield, you may exile another target permanent you control, then return that card to the battlefield under its owner's control.

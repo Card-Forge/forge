@@ -2,8 +2,8 @@ Name:Dandân
 ManaCost:U U
 Types:Creature Fish
 PT:4/1
-S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ Dandân can't attack unless defending player controls an Island.
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice Dandân.
+S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Island.YouCtrl
 DeckHas:Ability$Sacrifice

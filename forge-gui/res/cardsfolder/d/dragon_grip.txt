@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | Condition$ Ferocious | Description$ Ferocious — If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash.
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | EffectZone$ All | Caster$ You | Condition$ Ferocious | Description$ Ferocious — If you control a creature with power 4 or greater, you may cast CARDNAME as though it had flash.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | AddPower$ 2 | Description$ Enchanted creature gets +2/+0 and has first strike.
 Oracle:Ferocious — If you control a creature with power 4 or greater, you may cast Dragon Grip as though it had flash. (You may cast it any time you could cast an instant.)\nEnchant creature\nEnchanted creature gets +2/+0 and has first strike.

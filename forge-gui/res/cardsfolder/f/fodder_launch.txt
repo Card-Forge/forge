@@ -1,7 +1,7 @@
 Name:Fodder Launch
 ManaCost:3 B
 Types:Tribal Sorcery Goblin
-A:SP$ Pump | Cost$ 3 B Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SubAbility$ DBDealDamage | SpellDescription$ Target creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.
+A:SP$ Pump | Cost$ 3 B Sac<1/Goblin> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SubAbility$ DBDealDamage | SpellDescription$ Target creature gets -5/-5 until end of turn. CARDNAME deals 5 damage to that creature's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 5
 AI:RemoveDeck:Random
 Oracle:As an additional cost to cast this spell, sacrifice a Goblin.\nTarget creature gets -5/-5 until end of turn. Fodder Launch deals 5 damage to that creature's controller.

@@ -2,7 +2,7 @@ Name:Fire Juggler
 ManaCost:2 R
 Types:Creature Goblin Shaman
 PT:2/2
-T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClash | TriggerDescription$ Whenever CARDNAME becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClash | TriggerDescription$ Whenever CARDNAME becomes blocked, clash with an opponent. If you win, CARDNAME deals 4 damage to each creature blocking it.
 SVar:TrigClash:DB$ Clash | WinSubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature.blockingSource
 Oracle:Whenever Fire Juggler becomes blocked, clash with an opponent. If you win, Fire Juggler deals 4 damage to each creature blocking it. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)
