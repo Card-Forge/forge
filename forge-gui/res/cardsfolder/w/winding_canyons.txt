@@ -2,7 +2,7 @@ Name:Winding Canyons
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Effect | Cost$ 2 T | Name$ Winding Canyons Effect | StaticAbilities$ GiveFlash | SpellDescription$ Until end of turn, you may cast creature spells as though they had flash.
+A:AB$ Effect | Cost$ 2 T | StaticAbilities$ GiveFlash | SpellDescription$ Until end of turn, you may cast creature spells as though they had flash.
 SVar:GiveFlash:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | EffectZone$ Command | Caster$ You | AffectedZone$ Exile,Graveyard,Hand,Library,Command | Description$ Until end of turn, you may cast creature spells as though they had flash.
 AI:RemoveDeck:All
 Oracle:{T}: Add {C}.\n{2}, {T}: You may cast creature spells this turn as though they had flash.

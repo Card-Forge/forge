@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GreatMind | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.
 SVar:GreatMind:DB$ Draw | Defined$ You | NumCards$ 4 | SubAbility$ Unfathomable
-SVar:Unfathomable:DB$ Effect | Name$ Unfathomable Mind Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
+SVar:Unfathomable:DB$ Effect | StaticAbilities$ STHandSize | Duration$ UntilYourNextTurn
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 Oracle:When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.

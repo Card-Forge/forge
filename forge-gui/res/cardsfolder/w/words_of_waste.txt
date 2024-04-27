@@ -1,7 +1,7 @@
 Name:Words of Waste
 ManaCost:2 B
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | Name$ Words of Waste Effect | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, each opponent discards a card instead.
+A:AB$ Effect | Cost$ 1 | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, each opponent discards a card instead.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WasteCard | Description$ The next time you would draw a card this turn, each opponent discards a card instead.
 SVar:WasteCard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

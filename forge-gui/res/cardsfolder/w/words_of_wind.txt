@@ -1,7 +1,7 @@
 Name:Words of Wind
 ManaCost:2 U
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | Name$ Words of Wind Effect | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
+A:AB$ Effect | Cost$ 1 | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ Repeat | Description$ The next time you would draw a card this turn, each player returns a permanent they control to its owner's hand instead.
 SVar:Repeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ PlayChoose | SubAbility$ BounceAll
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | AILogic$ WorstCard | ChoiceTitle$ Choose a permanent you control | RememberChosen$ True
