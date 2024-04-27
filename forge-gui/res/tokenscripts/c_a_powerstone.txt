@@ -1,4 +1,4 @@
-Name:Powerstone token
+Name:Powerstone Token
 ManaCost:no cost
 Types:Artifact Powerstone
 Colors:colorless

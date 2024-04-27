@@ -4,5 +4,4 @@ Colors:green
 Types:Creature Wolf
 PT:1/1
 K:Bands with Other Creatures named Wolves of the Hunt
-DeckHas:Ability$Token & Type$Wolf
 Oracle:Bands with other creatures named Wolves of the Hunt.

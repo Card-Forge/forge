@@ -5,6 +5,4 @@ PT:2/2
 Colors:white
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-DeckHints:Ability$LifeGain
-DeckHas:Ability$Counters
 Oracle:Whenever you gain life, put a +1/+1 counter on Ajani's Pridemate.
