@@ -1,4 +1,4 @@
-Name:Torrent of Lava 2
+Name:Torrent of Lava
 ManaCost:X R R
 Types:Sorcery
 A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
