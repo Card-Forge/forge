@@ -12,7 +12,7 @@ T:Mode$ LandPlayed | ValidCard$ Card.ExiledWithSourceLKI | TriggerZones$ Battlef
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:More Than Meets the Eye {2}{W} (You may cast this card converted for {2}{W}}.)\nWhenever Prowl attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it.\nWhenever a player plays a card exiled with Prowl, you draw a card and convert Prowl.
+Oracle:More Than Meets the Eye {2}{W} (You may cast this card converted for {2}{W}.)\nWhenever Prowl attacks, exile up to one other target tapped creature or Vehicle. For as long as that card remains exiled, its owner may play it.\nWhenever a player plays a card exiled with Prowl, you draw a card and convert Prowl.
 
 ALTERNATE
 

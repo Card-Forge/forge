@@ -2,7 +2,7 @@ Name:Putrid Cyclops
 ManaCost:2 B
 Types:Creature Zombie Cyclops
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSrcy | TriggerDescription$ When CARDNAME enters the battlefield, scry 1, then reveal the top card of your library. Putrid Cyclops gets -X/-X until end of turn, where X is that card's mana value. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSrcy | TriggerDescription$ When CARDNAME enters the battlefield, scry 1, then reveal the top card of your library. CARDNAME gets -X/-X until end of turn, where X is that card's mana value. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
 SVar:TrigSrcy:DB$ Scry | ScryNum$ 1 | SubAbility$ DBReveal
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ -X | NumDef$ -X

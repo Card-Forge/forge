@@ -1,7 +1,7 @@
 Name:Pia's Revolution
 ManaCost:2 R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouOwn+nonToken | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a nontoken artifact is put into your graveyard from the battlefield, return that card to your hand unless target opponent has Pia's Revolution deal 3 damage to them.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouOwn+nonToken | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a nontoken artifact is put into your graveyard from the battlefield, return that card to your hand unless target opponent has CARDNAME deal 3 damage to them.
 SVar:TrigReturn:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand | UnlessCost$ DamageYou<3> | UnlessPayer$ Targeted | UnlessAI$ nonToken
 SVar:BuffedBy:Permanent.White,Permanent.Black

@@ -3,7 +3,7 @@ ManaCost:4 G U
 Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTriggers$ ProgenitorTrig | AddSVars$ ProgenitorCopy,ProgenitorTrig | SpellDescription$ You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield, except it has "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature."
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTriggers$ ProgenitorTrig | AddSVars$ ProgenitorCopy,ProgenitorTrig | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it has "At the beginning of your upkeep, if this creature isn't a token, create a token that's a copy of this creature."
 SVar:ProgenitorTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ProgenitorCopy | IsPresent$ Card.Self+nonToken | TriggerDescription$ At the beginning of your upkeep, if CARDNAME isn't a token, create a token that's a copy of CARDNAME."
 SVar:ProgenitorCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:NeedsToPlay:Creature

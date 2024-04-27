@@ -4,6 +4,6 @@ Types:Creature Human Warrior
 PT:2/2
 S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigPump | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, it gets +1/+1 until end of turn and can't be blocked by creatures with power 2 or less this turn. (An exerted creature won't untap during your next untap step.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SubAbility$ TrigEffect | SpellDescription$ When you do, it gets +1/+1 until end of turn and can't be blocked by creatures with power 2 or less this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Rhonas's Stalwart Effect | StaticAbilities$ KWPump
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.powerLE2 | EffectZone$ Command | Description$ EFFECTSOURCE can't be blocked by creatures with power 2 or less this turn.
 Oracle:You may exert Rhonas's Stalwart as it attacks. When you do, it gets +1/+1 until end of turn and can't be blocked by creatures with power 2 or less this turn. (An exerted creature won't untap during your next untap step.)

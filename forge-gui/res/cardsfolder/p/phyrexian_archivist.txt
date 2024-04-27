@@ -3,6 +3,6 @@ ManaCost:6
 Types:Artifact Creature Phyrexian Construct
 PT:4/5
 K:Reach
-A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Card | TgtPrompt$ TgtPrompt$ Select target card from a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from a graveyard on the bottom of its owner's library.
 DeckHas:Ability$Graveyard
 Oracle:Reach\n{2}, {T}: Put target card from a graveyard on the bottom of its owner's library.

@@ -1,7 +1,7 @@
 Name:Ring of Ma'rûf
 ManaCost:5
 Types:Artifact
-A:AB$ Effect | Cost$ 5 T Exile<1/CARDNAME> | Name$ Ring of Ma'rûf Effect | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, instead put a card you own from outside the game into your hand.
+A:AB$ Effect | Cost$ 5 T Exile<1/CARDNAME> | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, instead put a card you own from outside the game into your hand.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ TutorSideboard | Description$ The next time you would draw a card this turn, instead put a card you own from outside the game into your hand.
 SVar:TutorSideboard:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
