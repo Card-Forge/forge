@@ -5,9 +5,9 @@ PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as NICKNAME remains on the battlefield.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 2 U | Defined$ TopOfLibrary | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STMayLookAt | ForgetOnMoved$ Exile | Duration$ Permanent | SubAbility$ DBEffect2
+SVar:DBEffect:DB$ Effect | Name$ Intet, the Dreamer's Effect - May Look | RememberObjects$ Remembered | StaticAbilities$ STMayLookAt | ForgetOnMoved$ Exile | Duration$ Permanent | SubAbility$ DBEffect2
 SVar:STMayLookAt:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayLookAt$ You | AffectedZone$ Exile | Description$ You may look at that card for as long as it remains exiled.
-SVar:DBEffect2:DB$ Effect | Name$ Intet, the Dreamer Effect | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
-SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play that card without paying its mana cost for as long as Intet remains on the battlefield.
+SVar:DBEffect2:DB$ Effect | Name$ Intet, the Dreamer's Effect - May Play | StaticAbilities$ STMayPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilHostLeavesPlay | SubAbility$ DBCleanup
+SVar:STMayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ You may play that card without paying its mana cost for as long as EFFECTSOURCE remains on the battlefield.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nWhenever Intet, the Dreamer deals combat damage to a player, you may pay {2}{U}. If you do, exile the top card of your library face down. You may look at that card for as long as it remains exiled. You may play that card without paying its mana cost for as long as Intet remains on the battlefield.

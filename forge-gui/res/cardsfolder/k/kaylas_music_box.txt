@@ -4,6 +4,6 @@ Types:Legendary Artifact
 A:AB$ Dig | Cost$ W T | DigNum$ 1 | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | SpellDescription$ Look at the top card of your library, then exile it face down. (You may look at it any time.)
 S:Mode$ Continuous | MayLookAt$ You | Affected$ Card.ExiledWithSource+YouOwn | AffectedZone$ Exile
 A:AB$ Effect | Cost$ T | StaticAbilities$ MayPlay | SpellDescription$ Until end of turn, you may play cards you own exiled with CARDNAME.
-SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.ExiledWithEffectSource+YouOwn | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may play cards you own exiled with CARDNAME.
+SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.ExiledWithEffectSource+YouOwn | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may play cards you own exiled with EFFECTSOURCE.
 DeckHints:Color$White
 Oracle:{W}, {T}: Look at the top card of your library, then exile it face down. (You may look at it any time.)\n{T}: Until end of turn, you may play cards you own exiled with Kayla's Music Box.

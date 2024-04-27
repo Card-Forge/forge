@@ -2,7 +2,7 @@ Name:Ogre Errant
 ManaCost:3 R
 Types:Creature Ogre Knight
 PT:3/4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking Knight gains menace gains menace until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target attacking Knight gains menace until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Knight.Other+attacking | TgtPrompt$ Select another target attacking creature | KW$ Menace
 DeckHints:Type$Knight
 Oracle:Whenever Ogre Errant attacks, another target attacking Knight gains menace until end of turn. (It can't be blocked except by two or more creatures.)

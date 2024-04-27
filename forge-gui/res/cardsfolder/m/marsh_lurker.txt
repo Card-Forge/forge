@@ -2,6 +2,6 @@ Name:Marsh Lurker
 ManaCost:3 B
 Types:Creature Beast
 PT:3/2
-A:AB$ Pump | Cost$ Sac<1/Swamp> | Defined$ Self | KW$ Fear | SpellDescription$ Marsh Lurker gains fear until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Swamp> | Defined$ Self | KW$ Fear | SpellDescription$ CARDNAME gains fear until end of turn.
 AI:RemoveDeck:All
 Oracle:Sacrifice a Swamp: Marsh Lurker gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)

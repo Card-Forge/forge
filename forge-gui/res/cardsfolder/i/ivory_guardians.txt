@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Giant Cleric
 PT:3/3
 K:Protection from red
-S:Mode$ Continuous | Affected$ Creature.namedIvory Guardians | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Permanent.Red+nonToken+OppCtrl | Description$ Creatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.
+S:Mode$ Continuous | Affected$ Creature.namedIvory Guardians | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Permanent.Red+nonToken+OppCtrl | Description$ Creatures named CARDNAME get +1/+1 as long as an opponent controls a nontoken red permanent.
 AI:RemoveDeck:Random
 DeckNeeds:Name$Ivory Guardians
 Oracle:Protection from red\nCreatures named Ivory Guardians get +1/+1 as long as an opponent controls a nontoken red permanent.

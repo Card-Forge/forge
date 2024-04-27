@@ -3,5 +3,5 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
 K:First Strike
-A:AB$ Tap | Cost$ 1 W | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking Master of Arms | SpellDescription$ Tap target creature blocking CARDNAME.
+A:AB$ Tap | Cost$ 1 W | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking CARDNAME | SpellDescription$ Tap target creature blocking CARDNAME.
 Oracle:First strike\n{1}{W}: Tap target creature blocking Master of Arms.

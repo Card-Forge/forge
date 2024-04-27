@@ -5,7 +5,7 @@ PT:0/0
 K:Changeling
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Permanent.Other+YouCtrl | AddTypes$ Legendary & Snow | SubAbility$ DBConditionEffect | AddKeywords$ Changeling | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a permanent you control, except it's legendary and snow in addition to its other types and, if it's a creature, it enters with two additional +1/+1 counters on it and has changeling.
-SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Self | Name$ Moritte of the Frost Effect | ReplacementEffects$ ETBCreat
+SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Self | ReplacementEffects$ ETBCreat
 SVar:ETBCreat:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ If it's a creature, it enters with two additional +1/+1 counters on it.
 SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

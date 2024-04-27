@@ -1,7 +1,7 @@
 Name:Killer Cosplay
 ManaCost:G
 Types:Artifact Equipment
-T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, choose a creature card name with an identical mana cost. That creature becomes a copy of the card with the chosen name until Killer Cosplay becomes unattached from it.
+T:Mode$ Attached | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME becomes attached to a creature, choose a creature card name with an identical mana cost. That creature becomes a copy of the card with the chosen name until CARDNAME becomes unattached from it.
 SVar:TrigChoose:DB$ NameCard | Defined$ You | ValidCards$ Creature.ManaCost=Equipped | SubAbility$ DBCopy
 SVar:DBCopy:DB$ Clone | CopyFromChosenName$ True | CloneTarget$ TriggeredTarget | Duration$ UntilUnattached | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True

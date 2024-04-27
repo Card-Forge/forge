@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Treefolk
 PT:7/7
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain gain 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
 DeckHas:Ability$LifeGain
 Oracle:Trample\nWhen Mossbeard Ancient enters the battlefield, you gain 5 life.

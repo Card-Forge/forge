@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Creature Faerie Rogue
 PT:3/1
 K:Flying
-A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ -2 | Activator$ Player | SpellDescription$ Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
+A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | NumAtt$ -2 | Activator$ Player | SpellDescription$ CARDNAME gets -2/-0 until end of turn. Any player may activate this ability.
 Oracle:Flying\nDiscard a card: Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.

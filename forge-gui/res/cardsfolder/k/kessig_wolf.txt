@@ -2,5 +2,5 @@ Name:Kessig Wolf
 ManaCost:2 R
 Types:Creature Wolf
 PT:3/1
-A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SpellDescription$ Kessig Wolf gains first strike until end of turn.
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | KW$ First Strike | SpellDescription$ CARDNAME gains first strike until end of turn.
 Oracle:{1}{R}: Kessig Wolf gains first strike until end of turn.

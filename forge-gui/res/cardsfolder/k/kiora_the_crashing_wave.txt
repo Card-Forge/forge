@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Kiora
 Loyalty:2
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls | Planeswalker$ True | KW$ Prevent all damage that would be dealt to and dealt by CARDNAME. | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBEffect | SpellDescription$ Draw a card. You may play an additional land this turn.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
+SVar:DBEffect:DB$ Effect | Name$ Kiora, the Crashing Wave's Effect - Exploration | StaticAbilities$ Exploration
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 A:AB$ Effect | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Kiora, the Crashing Wave | Triggers$ EOTTrig | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of your end step, create a 9/9 blue Kraken creature token."
 SVar:EOTTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ KioraToken | TriggerDescription$ At the beginning of your end step, create a 9/9 blue Kraken creature token.
