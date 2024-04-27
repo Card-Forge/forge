@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent can't cast instant or sorcery spells during that player's next turn.
 SVar:TrigChange:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | NextTurnForEachPlayer$ True | RepeatSubAbility$ DBEffect | SpellDescription$ Each opponent can't cast instant or sorcery spells during that player's next turn.
-SVar:DBEffect:DB$ Effect | Name$ Azor, the Lawbringer's Effect | StaticAbilities$ STCantBeCast | EffectOwner$ Remembered
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | EffectOwner$ Remembered
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ You | EffectZone$ Command | Description$ You can't cast instant or sorcery spells.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME attacks, you may pay {X}{W}{U}{U}. If you do, you gain X life and draw X cards.
 SVar:TrigDraw:AB$ GainLife | Cost$ X W U U | Defined$ You | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards.

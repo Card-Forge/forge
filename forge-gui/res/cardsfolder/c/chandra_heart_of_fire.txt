@@ -4,12 +4,12 @@ Types:Legendary Planeswalker Chandra
 Loyalty:5
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Mode$ Hand | Defined$ You | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Discard your hand, then exile the top three cards of your library. Until end of turn, you may play cards exiled this way.
 SVar:DBDig:DB$ Dig | DigNum$ 3 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:DBEffect:DB$ Effect | Name$ Chandra, Heart of Fire's Effect - +1 May Play | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of turn, you may play cards exiled this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 A:AB$ ChangeZone | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard,Library | Destination$ Exile | ChangeType$ Instant.Red,Sorcery.Red | RememberChanged$ True | ChangeNum$ Z | SubAbility$ DBEffect2 | StackDescription$ SpellDescription | SpellDescription$ Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn. Add six {R}.
-SVar:DBEffect2:DB$ Effect | Name$ Chandra, Heart of Fire Ultimate Effect | RememberObjects$ Remembered | StaticAbilities$ Play2 | SubAbility$ DBMana | ForgetOnMoved$ Exile
+SVar:DBEffect2:DB$ Effect | Name$ Chandra, Heart of Fire's Effect - Ultimate May Cast | RememberObjects$ Remembered | StaticAbilities$ Play2 | SubAbility$ DBMana | ForgetOnMoved$ Exile
 SVar:Play2:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast the exiled red instant and/or sorcery spells this turn.
 SVar:DBMana:DB$ Mana | Produced$ R | Amount$ 6 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:X:Count$ValidGraveyard Instant.Red+YouOwn,Sorcery.Red+YouOwn

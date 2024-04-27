@@ -1,7 +1,7 @@
 Name:Buzzing Whack-a-Doodle
 ManaCost:4
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseOpp | Static$ True | TriggerDescription$ As Buzzing Whack-a-Doodle enters the battlefield, you and an opponent each secretly choose Whack or Doodle. Then those choices are revealed. If the choices match, Buzzing Whack-a-Doodle has that ability. Otherwise, it has Buzz. • Whack — {T}: Target player loses 2 life. • Doodle — {T}: You gain 3 life. • Buzz — {2}, {T}: Draw a card.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseOpp | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, you and an opponent each secretly choose Whack or Doodle. Then those choices are revealed. If the choices match, CARDNAME has that ability. Otherwise, it has Buzz. • Whack — {T}: Target player loses 2 life. • Doodle — {T}: You gain 3 life. • Buzz — {2}, {T}: Draw a card.
 SVar:ChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ YouChoice
 SVar:YouChoice:DB$ GenericChoice | Choices$ YouWhack,YouDoodle | Defined$ You | AILogic$ Random | SubAbility$ StoreYou
 SVar:YouWhack:DB$ StoreSVar | SVar$ Doodles | Type$ Number | Expression$ 0 | SpellDescription$ Whack

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Ongoing Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseOpponent | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent. Creatures the chosen player controls can't attack you or planeswalkers you control.
 SVar:ChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ CantAttackEffect
-SVar:CantAttackEffect:DB$ Effect | Name$ Bow to My Command Effect | StaticAbilities$ STCantAttack | Triggers$ TrigAbandoned | RememberObjects$ Self | Duration$ Permanent
+SVar:CantAttackEffect:DB$ Effect | StaticAbilities$ STCantAttack | Triggers$ TrigAbandoned | RememberObjects$ Self | Duration$ Permanent
 SVar:TrigAbandoned:Mode$ Abandoned | ValidCard$ Card.IsRemembered | Execute$ EffectCleanup | Static$ True
 SVar:EffectCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.ChosenCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures the chosen player controls can't attack you or planeswalkers you control.

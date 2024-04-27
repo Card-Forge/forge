@@ -2,7 +2,7 @@ Name:Cromat
 ManaCost:W U B R G
 Types:Legendary Creature Illusion
 PT:5/5
-A:AB$ Destroy | Cost$ W B | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking or blocked by Cromat | SpellDescription$ Destroy target creature blocking or blocked by CARDNAME.
+A:AB$ Destroy | Cost$ W B | ValidTgts$ Creature.blockingSource,Creature.blockedBySource | TgtPrompt$ Select target creature blocking or blocked by CARDNAME | SpellDescription$ Destroy target creature blocking or blocked by CARDNAME.
 A:AB$ Pump | Cost$ U R | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 A:AB$ Regenerate | Cost$ B G | SpellDescription$ Regenerate CARDNAME.
 A:AB$ Pump | Cost$ R W | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.

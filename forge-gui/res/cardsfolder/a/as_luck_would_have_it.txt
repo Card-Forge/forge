@@ -2,7 +2,7 @@ Name:As Luck Would Have It
 ManaCost:G
 Types:Enchantment
 K:Hexproof
-T:Mode$ RolledDie | Execute$ TrigCounters | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you roll a die, put a number of luck counters on As Luck Would Have It equal to the result. Then if there are 100 or more luck counters on As Luck Would Have It, you win the game.
+T:Mode$ RolledDie | Execute$ TrigCounters | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you roll a die, put a number of luck counters on CARDNAME equal to the result. Then if there are 100 or more luck counters on CARDNAME, you win the game.
 SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ LUCK | CounterNum$ X | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionPresent$ Card.Self+counters_GE100_LUCK
 SVar:X:TriggerCount$Result

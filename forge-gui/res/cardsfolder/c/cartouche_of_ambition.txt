@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Enchantment Aura Cartouche
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, enters the battlefield, you may put a -1/-1 counter on target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, you may put a -1/-1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Enchanted creature gets +1/+1 and has lifelink.
 DeckHints:Name$Trial of Ambition

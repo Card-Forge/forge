@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Dinosaur
 PT:2/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigEffect | TriggerDescription$ When CARDNAME dies, you may cast Dinosaur spells this turn as though they had flash, and whenever you cast a Dinosaur spell this turn, it gains "When this creature enters the battlefield, you may have it fight another target creature."
-SVar:TrigEffect:DB$ Effect | Name$ Cherished Hatchling Effect | StaticAbilities$ STFlash | Triggers$ HatchlingCast
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ STFlash | Triggers$ HatchlingCast
 SVar:STFlash:Mode$ CastWithFlash | ValidCard$ Dinosaur | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast Dinosaur spells this turn as though they had flash.
 SVar:HatchlingCast:Mode$ SpellCast | ValidCard$ Dinosaur | ValidActivatingPlayer$ You | Execute$ TrigHatchlingAnimate | TriggerZones$ Command | TriggerDescription$ Whenever you cast a Dinosaur spell this turn, it gains "When this creature enters the battlefield, you may have it fight another target creature."
 SVar:TrigHatchlingAnimate:DB$ Animate | Defined$ TriggeredCard | Duration$ Permanent | Triggers$ TrigETBHatchling

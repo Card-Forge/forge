@@ -2,7 +2,7 @@ Name:Cosima, God of the Voyage
 ManaCost:2 U
 Types:Legendary Creature God
 PT:2/4
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile NICKNAME. If you do, it gains "Whenever a land enters the battlefield under your control, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it."
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile NICKNAME. If you do, it gains "Whenever a land enters the battlefield under your control, if NICKNAME is exiled, you may put a voyage counter on it. If you don't, return NICKNAME to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it."
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ LandEnter | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
