@@ -1,10 +1,12 @@
-Name:Torrent of Lava
+Name:Torrent of Lava 2
 ManaCost:X R R
 Types:Sorcery
 A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
 SVar:X:Count$xPaid
 S:Mode$ Continuous | Affected$ Creature | AddAbility$ TOPrevent | AddSVar$ DBPrevent & DBReplace | EffectZone$ Stack | Description$ As long as CARDNAME is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn."
-SVar:TOPrevent:AB$ Effect | Cost$ T | RememberObjects$ Self | ImprintCards$ OriginalHost | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn. | StackDescription$ SpellDescription
-SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ Prevent the next 1 damage that would be dealt to this creature by EFFECTSOURCE this turn.
-SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+SVar:TOPrevent:AB$ Effect | Cost$ T | RememberObjects$ Self | ImprintCards$ OriginalHost | ReplacementEffects$ DBPrevent | Duration$ UntilHostLeavesPlayOrEOT | ForgetOnMoved$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME by ORIGINALHOST this turn. | StackDescription$ SpellDescription
+SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ Prevent the next 1 damage that would be dealt to CARDNAME by ORIGINALHOST this turn.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1 | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 Oracle:Torrent of Lava deals X damage to each creature without flying.\nAs long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn."
