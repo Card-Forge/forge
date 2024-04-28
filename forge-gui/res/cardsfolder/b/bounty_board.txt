@@ -3,7 +3,7 @@ Types:Artifact
 ManaCost:3
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SorcerySpeed$ True | SpellDescription$ Put a bounty counter on target creature.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_BOUNTY | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature with a bounty counter on it dies, each of it's controller's opponents draws a card and gains 2 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_BOUNTY | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature with a bounty counter on it dies, each of its controller's opponents draws a card and gains 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ Player.OpponentOf TriggeredCardController | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player.OpponentOf TriggeredCardController | NumCards$ 1
 DeckHints:Name$Bounty Hunter|Mathas, Fiend Seeker|Termination Facilitator|Chevill, Bane of Monsters
