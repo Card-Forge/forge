@@ -19,7 +19,7 @@ ManaCost:2 W W
 Types:Legendary Creature Human Monk
 PT:4/4
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature specializes, target creature card exiled with this creature perpetually loses all abilities and has base power and toughness 1/1.
-SVar:TrigEffect:DB$ Effect | TgtPrompt$ Select target creature card exiled with this creature | ValidTgts$ Creature.IsRemembered+ExiledWithSource | TgtZone$ Exile | IsCurse$ True | RememberObjects$ Targeted | StaticAbilities$ PerpetualLoss | Name$ Rasaad, Radiant Monk's Perpetual Effect | Duration$ Permanent
+SVar:TrigEffect:DB$ Effect | Name$ Rasaad, Radiant Monk's Perpetual Effect | TgtPrompt$ Select target creature card exiled with this creature | ValidTgts$ Creature.IsRemembered+ExiledWithSource | TgtZone$ Exile | IsCurse$ True | RememberObjects$ Targeted | StaticAbilities$ PerpetualLoss | Duration$ Permanent
 SVar:PerpetualLoss:Mode$ Continuous | SetPower$ 1 | SetToughness$ 1 | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses all abilities and has base power and toughness 1/1.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard

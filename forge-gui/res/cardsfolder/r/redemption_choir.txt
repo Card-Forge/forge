@@ -4,7 +4,7 @@ Types:Creature Vampire Cleric
 PT:3/3
 K:Lifelink
 T:Mode$ ChangesZone | CheckSVar$ X | SVarCompare$ GE3 | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Coven — Whenever CARDNAME enters the battlefield or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
-T:Mode$ Attacks | CheckSVar$ X | SVarCompare$ GE3 | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Coven — Whenever Redemption Choir enters the battlefield or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
+T:Mode$ Attacks | CheckSVar$ X | SVarCompare$ GE3 | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Coven — Whenever CARDNAME enters the battlefield or attacks, if you control three or more creatures with different powers, return target permanent card with mana value 3 or less from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE3
 SVar:X:Count$DifferentPower_Creature.YouCtrl
 DeckHas:Ability$LifeGain|Graveyard

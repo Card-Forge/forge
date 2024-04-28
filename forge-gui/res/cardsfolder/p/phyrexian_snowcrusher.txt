@@ -3,5 +3,5 @@ ManaCost:6
 Types:Snow Artifact Creature Phyrexian Juggernaut
 PT:6/5
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
-A:AB$ Pump | Cost$ 1 S | Defined$ Self | NumAtt$ +1 | SpellDescription$ Phyrexian Snowcrusher gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ 1 S | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:Phyrexian Snowcrusher attacks each combat if able.\n{1}{S}: Phyrexian Snowcrusher gets +1/+0 until end of turn. ({S} can be paid with one mana from a snow source.)

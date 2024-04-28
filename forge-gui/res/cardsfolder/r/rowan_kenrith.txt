@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Rowan
 Loyalty:4
 Text:CARDNAME can be your commander.
 K:Partner:Will Kenrith:Will
-A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Name$ Rowan Kenrith Taunt Effect | ValidTgts$ Player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | IsCurse$ True | Triggers$ RemoveEffect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ During target player's next turn, each creature that player controls attacks if able.
+A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Name$ Rowan Kenrith's Effect - Taunting | ValidTgts$ Player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | IsCurse$ True | Triggers$ RemoveEffect | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ During target player's next turn, each creature that player controls attacks if able.
 SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | Description$ Creatures target opponent controls attack this turn if able.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

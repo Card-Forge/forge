@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | KW$ Haste | TargetMin$ 1 | TargetMax$ 2 | SubAbility$ DBEffect | TgtPrompt$ Select one or two target creatures | SpellDescription$ One or two target creatures each gain haste until end of turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ KWPump | RememberObjects$ Targeted | SpellDescription$ They can't be blocked this turn except by creatures with haste.
-SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutHaste | EffectZone$ Command | Description$ They can't be blocked this turn except by creatures with haste.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutHaste | EffectZone$ Command | Description$ These creatures can't be blocked this turn except by creatures with haste.
 K:Escape:2 U R ExileFromGrave<4/Card.Other/other>
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Graveyard|Mill

@@ -2,7 +2,7 @@ Name:Raptor Hatchling
 ManaCost:1 R
 Types:Creature Dinosaur
 PT:1/1
-T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever Raptor Hatchling is dealt damage, create a 3/3 green Dinosaur creature token with trample.
+T:Mode$ DamageDoneOnce | Execute$ TrigToken | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, create a 3/3 green Dinosaur creature token with trample.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | TokenAmount$ 1
 SVar:HasCombatEffect:TRUE
 DeckHas:Ability$Token

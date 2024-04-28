@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
-A:AB$ GainLife | Cost$ 2 W U B R G Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw two cards. Target opponent loses 2 life. Path to the World Tree deals 2 damage to up to one target creature. You create a 2/2 green Bear creature token.
+A:AB$ GainLife | Cost$ 2 W U B R G Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw two cards. Target opponent loses 2 life. CARDNAME deals 2 damage to up to one target creature. You create a 2/2 green Bear creature token.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | ValidTgts$ Player.Opponent | TgtPrompt$ Choose an opponent | LifeAmount$ 2 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBToken

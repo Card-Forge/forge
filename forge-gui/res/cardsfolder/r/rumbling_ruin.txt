@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigStore | TriggerDescription$ When CARDNAME enters the battlefield, count the number of +1/+1 counters on creatures you control. Creatures your opponents control with power less than or equal to that number can't block this turn.
 SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ Y | SubAbility$ TrigEffect
-SVar:TrigEffect:DB$ Effect | Name$ Rumbling Ruin Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures your opponents control with power less than or equal to that number can't block this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures your opponents control with power less than or equal to that number can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.OppCtrl+powerLEX | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures your opponents control with power less than or equal to that number can't block this turn.
 SVar:X:Number$0
 SVar:Y:Count$Valid Creature.YouCtrl$CardCounters.P1P1
