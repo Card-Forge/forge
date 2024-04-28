@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ DealDamage | Cost$ 1 B R R T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SubAbility$ DBDiscard | SorcerySpeed$ True | SpellDescription$ Immersturm Skullcairn deals 3 damage to target player. That player discards a card. Activate only any time you could cast a sorcery.
+A:AB$ DealDamage | Cost$ 1 B R R T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SubAbility$ DBDiscard | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 3 damage to target player. That player discards a card. Activate only any time you could cast a sorcery.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Immersturm Skullcairn enters the battlefield tapped.\n{T}: Add {B}.\n{1}{B}{R}{R}, {T}, Sacrifice Immersturm Skullcairn: It deals 3 damage to target player. That player discards a card. Activate only as a sorcery.

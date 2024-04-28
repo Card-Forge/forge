@@ -1,9 +1,9 @@
 Name:Imaginary Threats
 ManaCost:2 U U
 Types:Instant
-A:SP$ Effect | Name$ Imaginary Threats Effect 1 | ValidTgts$ Opponent | StaticAbilities$ MustAttack | RememberObjects$ Targeted | SubAbility$ DBEffect | SpellDescription$ Creatures target player controls attack this turn if able.
+A:SP$ Effect | Name$ Imaginary Threats's Effect - Must Attack | ValidTgts$ Opponent | StaticAbilities$ MustAttack | RememberObjects$ Targeted | SubAbility$ DBEffect | SpellDescription$ Creatures target player controls attack this turn if able.
 SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | Description$ Creatures target opponent controls attack this turn if able.
-SVar:DBEffect:DB$ Effect | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | RememberObjects$ Targeted | Name$ Imaginary Threats Effect 2 | SubAbility$ DBCleanup | SpellDescription$ During that player's next untap step, creatures they control don't untap.
+SVar:DBEffect:DB$ Effect | Name$ Imaginary Threats's Effect - Stunned | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | RememberObjects$ Targeted | SubAbility$ DBCleanup | SpellDescription$ During that player's next untap step, creatures they control don't untap.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step. | Description$ Creatures target opponent controls don't untap during their next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Legendary Creature Human Cleric
 PT:1/3
 A:AB$ Pump | Cost$ T | KW$ Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
-A:AB$ Effect | Cost$ Discard<1/Card.namedOriss, Samite Guardian> | CostDesc$ Grandeur — Discard another card named Oriss, Samite Guardian: | Name$ Oriss Effect | IsCurse$ True | StaticAbilities$ CantBeCast,CantAttack | ValidTgts$ Player | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
+A:AB$ Effect | Cost$ Discard<1/Card.namedOriss, Samite Guardian> | CostDesc$ Grandeur — Discard another card named Oriss, Samite Guardian: | IsCurse$ True | StaticAbilities$ CantBeCast,CantAttack | ValidTgts$ Player | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't cast spells this turn, and creatures that player controls can't attack this turn.
 SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Targeted player can't cast spells this turn.
 SVar:CantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | Description$ Creatures targeted player controls can't attack this turn.
 AI:RemoveDeck:All

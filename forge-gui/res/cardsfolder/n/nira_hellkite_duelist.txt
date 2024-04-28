@@ -7,7 +7,7 @@ K:Flying
 K:Trample
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigNoLose | TriggerDescription$ When CARDNAME enters the battlefield, the next time you would lose the game this turn, instead draw three cards and your life total becomes 5.
-SVar:TrigNoLose:DB$ Effect | Name$ Nira, Hellkite Duelist Effect | ReplacementEffects$ LoseReplace
+SVar:TrigNoLose:DB$ Effect | ReplacementEffects$ LoseReplace
 SVar:LoseReplace:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DrawSeven | Description$ The next time you would lose the game this turn, instead draw three cards and your life total becomes 5.
 SVar:DrawSeven:DB$ Draw | NumCards$ 3 | SubAbility$ DBSetLife
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 5 | SubAbility$ ExileEffect

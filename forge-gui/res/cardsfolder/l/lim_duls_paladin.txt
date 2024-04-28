@@ -10,7 +10,7 @@ SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompar
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigBlockedPump | TriggerDescription$ Whenever CARDNAME becomes blocked, CARDNAME get +6/+3 until end of turn.
 SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ 6 | NumDef$ 3
-T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigUnBlockedPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever Lim-Dûl's Paladin attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 4 life.
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigUnBlockedPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 4 life.
 SVar:TrigUnBlockedPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 4
 SVar:X:Remembered$Amount

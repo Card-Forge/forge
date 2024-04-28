@@ -2,7 +2,7 @@ Name:Kitsune Mystic
 ManaCost:3 W
 Types:Creature Fox Wizard
 PT:2/3
-T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Aura.Attached | PresentCompare$ GE2 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Aura.Attached | PresentCompare$ GE2 | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if CARDNAME is enchanted by two or more Auras, flip it.
 SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura

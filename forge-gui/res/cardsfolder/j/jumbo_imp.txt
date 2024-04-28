@@ -4,13 +4,13 @@ Types:Creature Imp
 PT:0/0
 K:ETBReplacement:Other:RollCounters
 SVar:X:Count$xPaid
-SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCountersETB | SpellDescription$ As Jumbo Imp enters the battlefield, roll a six-sided die. Jumbo Imp enters the battlefield with a number of +1/+1 counters on it equal to the result.
+SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCountersETB | SpellDescription$ As CARDNAME enters the battlefield, roll a six-sided die. CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the result.
 SVar:DBCountersETB:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result | ETB$ True
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollUpkeep | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die and put a number of +1/+1 counters on CARDNAME equal to the result.
 SVar:TrigRollUpkeep:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCountersUpkeep
 SVar:DBCountersUpkeep:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollEnd | TriggerDescription$ At the beginning of your end step, roll a six-sided die and remove a number of +1/+1 counters from Jumbo Imp equal to the result.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollEnd | TriggerDescription$ At the beginning of your end step, roll a six-sided die and remove a number of +1/+1 counters from CARDNAME equal to the result.
 SVar:TrigRollEnd:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCountersEnd
 SVar:DBCountersEnd:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result
 DeckHas:Ability$Counters

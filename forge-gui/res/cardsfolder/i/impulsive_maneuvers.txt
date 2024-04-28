@@ -4,12 +4,12 @@ Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature | Execute$ CoinFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.
 SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
 # Winning Effect
-SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers Win Effect | ReplacementEffects$ EventWinDamageDone | ImprintCards$ TriggeredAttacker
+SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers's Effect - Won The Flip | ReplacementEffects$ EventWinDamageDone | ImprintCards$ TriggeredAttacker
 SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ WinX | SubAbility$ ExileEffect
 SVar:WinX:ReplaceCount$DamageAmount/Twice
 # Losing Effect
-SVar:CreateLossEffect:DB$ Effect | Name$ Impulsive Maneuvers Loss Effect | ReplacementEffects$ EventLossDamageDone | ImprintCards$ TriggeredAttacker
+SVar:CreateLossEffect:DB$ Effect | Name$ Impulsive Maneuvers's Effect - Lost The Flip | ReplacementEffects$ EventLossDamageDone | ImprintCards$ TriggeredAttacker
 SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | IsCombat$ True | Description$ The next time creature would deal combat damage this turn, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:Random

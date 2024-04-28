@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Troll Soldier
 PT:4/4
 K:Trample
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | IsPresent$ Goblin.YouCtrl,Orc.YouCtrl | PresentCompare$ EQ0 | Description$ Olog-hai Crusher can't block unless you control a Goblin or Orc.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | IsPresent$ Goblin.YouCtrl,Orc.YouCtrl | PresentCompare$ EQ0 | Description$ CARDNAME can't block unless you control a Goblin or Orc.
 DeckHints:Type$Goblin|Orc
 Oracle:Trample\nOlog-hai Crusher can't block unless you control a Goblin or Orc.

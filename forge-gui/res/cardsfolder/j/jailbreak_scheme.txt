@@ -5,7 +5,7 @@ K:Spree
 A:SP$ Charm | Choices$ DBPutCounter,DBChangeZone | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
 SVar:DBPutCounter:DB$ PutCounter | SpreeCost$ 3 | ValidTgts$ Creature | CounterType$ P1P1 | SubAbility$ DBEffect | SpellDescription$ Put a +1/+1 counter on target creature. It can't be blocked this turn.
 SVar:DBEffect:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ ParentTarget | StaticAbilities$ Unblockable
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ It can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBChangeZone:DB$ ChangeZone | SpreeCost$ 2 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | AlternativeDecider$ ThisTargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ REP Target artifact or creature_{c:ThisTargetedCard} | SpellDescription$ Target artifact or creature's owner puts it on the top or bottom of their library.
 DeckHas:Ability$Counters
 Oracle:Spree (Choose one or more additional costs.)\n+ {3} — Put a +1/+1 counter on target creature. It can't be blocked this turn.\n+ {2} — Target artifact or creature's owner puts it on the top or bottom of their library.

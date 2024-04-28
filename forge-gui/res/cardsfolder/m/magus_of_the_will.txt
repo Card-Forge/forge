@@ -2,7 +2,7 @@ Name:Magus of the Will
 ManaCost:2 B
 Types:Creature Human Wizard
 PT:3/3
-A:AB$ Effect | Cost$ 2 B T Exile<1/CARDNAME> | Name$ Magus of the Will Effect | ReplacementEffects$ GraveToExile | StaticAbilities$ STPlay | AILogic$ YawgmothsWill | SpellDescription$ Until end of turn, you may play lands and cast spells from your graveyard. If a card would be put into your graveyard from anywhere this turn, exile that card instead.
+A:AB$ Effect | Cost$ 2 B T Exile<1/CARDNAME> | ReplacementEffects$ GraveToExile | StaticAbilities$ STPlay | AILogic$ YawgmothsWill | SpellDescription$ Until end of turn, you may play lands and cast spells from your graveyard. If a card would be put into your graveyard from anywhere this turn, exile that card instead.
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | MayPlay$ True | Description$ You may play cards from your graveyard.
 SVar:GraveToExile:Event$ Moved | ActiveZones$ Command | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ Exile | Description$ If a card would be put into your graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard

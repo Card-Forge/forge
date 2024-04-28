@@ -10,7 +10,7 @@ SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Condi
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerRemembered$CardManaCost
-A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Narset of the Ancient Way | Image$ emblem_narset_of_the_ancient_way | Triggers$ TrigSpellCast | Duration$ Permanent | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a noncreature spell, this emblem deals 2 damage to any target."
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Narset of the Ancient Way | Image$ emblem_narset_of_the_ancient_way | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a noncreature spell, this emblem deals 2 damage to any target."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidCard$ Card.nonCreature | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a noncreature spell, this emblem deals 2 damage to any target.
 SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 DeckHas:Ability$LifeGain|Discard

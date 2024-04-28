@@ -2,7 +2,7 @@ Name:Island Sanctuary
 ManaCost:1 W
 Types:Enchantment
 R:Event$ Draw | ActiveZones$ Battlefield | ActivePhases$ Draw | PlayerTurn$ True | ValidPlayer$ You | Optional$ True | ReplaceWith$ SanctuaryEffect | Description$ If you would draw a card during your draw step, instead you may skip that draw. If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk.
-SVar:SanctuaryEffect:DB$ Effect | Name$ Sanctuary Effect | StaticAbilities$ IslandRetreat | Duration$ UntilYourNextTurn
+SVar:SanctuaryEffect:DB$ Effect | StaticAbilities$ IslandRetreat | Duration$ UntilYourNextTurn
 SVar:IslandRetreat:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.withoutFlying+!hasKeywordLandwalk:Island | Target$ You | Description$ Creatures without flying and/or islandwalk can't attack you.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
