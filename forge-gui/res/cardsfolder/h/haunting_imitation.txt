@@ -1,7 +1,7 @@
 Name:Haunting Imitation
 ManaCost:2 U
 Types:Sorcery
-A:SP$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBRepeatEach | StackDescription$ SpellDescription | SpellDescription$ Each player reveals the top card of their library. For each creature card revealed this way, create a token that's a copy of that card, except it's 1/1, it's a Spirit in addition to its other types, and it has flying. If no creature cards were revealed this way, return Haunting Imitation to its owner's hand.
+A:SP$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBRepeatEach | StackDescription$ SpellDescription | SpellDescription$ Each player reveals the top card of their library. For each creature card revealed this way, create a token that's a copy of that card, except it's 1/1, it's a Spirit in addition to its other types, and it has flying. If no creature cards were revealed this way, return CARDNAME to its owner's hand.
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.IsRemembered | Zone$ Library | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBReturn
 SVar:DBToken:DB$ CopyPermanent | Defined$ Imprinted | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Spirit | AddKeywords$ Flying
 SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ None

@@ -2,5 +2,5 @@ Name:Enslaved Scout
 ManaCost:2 R
 Types:Creature Goblin Scout
 PT:2/2
-A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Landwalk:Mountain | SpellDescription$ Enslaved Scout gains mountainwalk until end of turn.
+A:AB$ Pump | Cost$ 2 | Defined$ Self | KW$ Landwalk:Mountain | SpellDescription$ CARDNAME gains mountainwalk until end of turn.
 Oracle:{2}: Enslaved Scout gains mountainwalk until end of turn. (It can't be blocked as long as defending player controls a Mountain.)

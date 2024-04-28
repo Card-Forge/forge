@@ -6,8 +6,8 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature | ExileFaceDown$ True
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigGetCreature | TriggerController$ TriggeredPlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses a card exiled with Free-for-All at random and puts it onto the battlefield.
-SVar:TrigGetCreature:DB$ ChooseCard | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | SubAbility$ DBFaceUp | SpellDescription$ Choose a card at random that was exiled with CARDNAME. Put that card into its owner's hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigGetCreature | TriggerController$ TriggeredPlayer | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses a card exiled with CARDNAME at random and puts it onto the battlefield.
+SVar:TrigGetCreature:DB$ ChooseCard | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | SubAbility$ DBFaceUp | SpellDescription$ Choose a card at random that was exiled with CARDNAME. Put that card onto the battlefield.
 SVar:DBFaceUp:DB$ SetState | Defined$ ChosenCard | SubAbility$ DBChangeZone | Mode$ TurnFaceUp
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | GainControl$ True | Origin$ Exile | Destination$ Battlefield | ForgetChanged$ True | Hidden$ True
 Oracle:When Free-for-All enters the battlefield, exile all creatures face down.\nAt the beginning of each player's upkeep, that player chooses a card exiled with Free-for-All at random and puts it onto the battlefield.\nWhen Free-for-All leaves the battlefield, put all cards exiled with it into their owners' graveyards.

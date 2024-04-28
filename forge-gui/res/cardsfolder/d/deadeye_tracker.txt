@@ -2,7 +2,7 @@ Name:Deadeye Tracker
 ManaCost:B
 Types:Creature Human Pirate
 PT:1/1
-A:AB$ ChangeZone | Cost$ 1 B T | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SubAbility$ TrigExplore | SpellDescription$ Exile two target cards from an opponent's graveyard. Deadeye Tracker explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
+A:AB$ ChangeZone | Cost$ 1 B T | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SubAbility$ TrigExplore | SpellDescription$ Exile two target cards from an opponent's graveyard. CARDNAME explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back on top or into your graveyard.)
 SVar:TrigExplore:DB$ Explore
 DeckHas:Ability$Counters
 Oracle:{1}{B}, {T}: Exile two target cards from an opponent's graveyard. Deadeye Tracker explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)

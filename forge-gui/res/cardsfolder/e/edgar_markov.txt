@@ -2,8 +2,8 @@ Name:Edgar Markov
 ManaCost:3 R W B
 Types:Legendary Creature Vampire Knight
 PT:4/4
-T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Command | PresentZone$ Command | IsPresent$ Card.StrictlySelf | Execute$ TrigToken | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
-T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PresentZone$ Battlefield | IsPresent$ Card.StrictlySelf | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
+T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Command | PresentZone$ Command | IsPresent$ Card.StrictlySelf | Execute$ TrigToken | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if CARDNAME is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
+T:Mode$ SpellCast | ValidCard$ Card.Vampire+Other | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PresentZone$ Battlefield | IsPresent$ Card.StrictlySelf | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Eminence — Whenever you cast another Vampire spell, if CARDNAME is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_vampire | TokenOwner$ You
 K:First Strike
 K:Haste

@@ -3,5 +3,5 @@ ManaCost:3 B
 Types:Creature Shade Spirit
 PT:1/1
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Darkling Stalker gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 Oracle:{B}: Regenerate Darkling Stalker.\n{B}: Darkling Stalker gets +1/+1 until end of turn.

@@ -4,7 +4,7 @@ Types:Artifact Creature Vedalken Wizard
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, prevent all damage that would be dealt to artifact creatures this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Ethersworn Shieldmage Effect | ReplacementEffects$ PreventArtifact | SpellDescription$ Prevent all damage that would be dealt to artifact creatures this turn.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ PreventArtifact | SpellDescription$ Prevent all damage that would be dealt to artifact creatures this turn.
 SVar:PreventArtifact:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Creature.Artifact | Description$ Prevent all damage that would be dealt to artifact creatures this turn.
 SVar:AmbushAI:True
 Oracle:Flash\nWhen Ethersworn Shieldmage enters the battlefield, prevent all damage that would be dealt to artifact creatures this turn.

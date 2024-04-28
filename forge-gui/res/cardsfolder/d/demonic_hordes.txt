@@ -2,7 +2,7 @@ Name:Demonic Hordes
 ManaCost:3 B B B
 Types:Creature Demon
 PT:5/5
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTap | TriggerDescription$ At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTap | TriggerDescription$ At the beginning of your upkeep, unless you pay {B}{B}{B}, tap CARDNAME and sacrifice a land of an opponent's choice.
 A:AB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T | SpellDescription$ Destroy target land.
 SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ B B B | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBChooseOpponent
 SVar:DBChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChooseLand

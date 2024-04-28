@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Elemental
 PT:3/2
 K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, Geyserfield Stalker gets +2/+2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Land
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nLandfall — Whenever a land enters the battlefield under your control, Geyserfield Stalker gets +2/+2 until end of turn.

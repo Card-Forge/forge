@@ -15,8 +15,8 @@ Name:Dire Blunderbuss
 Colors:red
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddTrigger$ AttacksTrig | Description$ Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than CARDNAME. When you do, this creature deals damage equal to its power to target creature."
-SVar:AttacksTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever this creature attacks, you may sacrifice an artifact other than ORIGINALHOST. When you do, this creature deals damage equal to its power to target creature.
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact.NotDefinedOriginalHost/another artifact> | Execute$ TrigDamage | CopyTriggeringObjects$ True | TriggerDescription$ When you do, this creature deals damage equal to its power to target creature.
+SVar:AttacksTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice an artifact other than ORIGINALHOST. When you do, CARDNAME deals damage equal to its power to target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact.NotDefinedOriginalHost/another artifact> | Execute$ TrigDamage | CopyTriggeringObjects$ True | TriggerDescription$ When you do, CARDNAME deals damage equal to its power to target creature.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Count$CardPower
 K:Equip:1
 Oracle:Equipped creature gets +3/+0 and has "Whenever this creature attacks, you may sacrifice an artifact other than Dire Blunderbuss. When you do, this creature deals damage equal to its power to target creature."\nEquip {1}

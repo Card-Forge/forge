@@ -8,7 +8,7 @@ SVar:DBToken:DB$ Token | TokenScript$ w_1_1_halfling | RememberTokens$ True | Su
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | Object$ Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddTrigger$ GainLifeTrig | Description$ Equipped creature has "Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained."
-SVar:GainLifeTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, this creature gets +X/+X until end of turn, where X is the amount of life you gained.
+SVar:GainLifeTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gets +X/+X until end of turn, where X is the amount of life you gained.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:TriggerCount$LifeAmount
 DeckHas:Ability$Token|LifeGain|Sacrifice & Type$Food|Artifact|Halfling

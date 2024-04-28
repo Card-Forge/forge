@@ -3,6 +3,6 @@ ManaCost:1 W W
 Types:Creature Spirit Cleric
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TempAttackTax | TriggerDescription$ When CARDNAME enters the battlefield, until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays {2} for each of those creatures.
-SVar:TempAttackTax:DB$ Effect | Name$ Forbidding Spirit Effect | StaticAbilities$ TempoCantAttack | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures can't attack you or a planeswalker you control unless their controller pays {2} for each of those creatures.
+SVar:TempAttackTax:DB$ Effect | StaticAbilities$ TempoCantAttack | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures can't attack you or a planeswalker you control unless their controller pays {2} for each of those creatures.
 SVar:TempoCantAttack:Mode$ CantAttackUnless | EffectZone$ Command | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ 2 | Description$ Until your next turn, creatures can't attack you or a planeswalker you control unless their controller pays {2} for each of those creatures.
 Oracle:When Forbidding Spirit enters the battlefield, until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays {2} for each of those creatures.

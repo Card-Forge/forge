@@ -4,7 +4,7 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 A:AB$ Animate | Cost$ U B | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Horror | RemoveCreatureTypes$ True | Colors$ Blue,Black | OverwriteColors$ True | SubAbility$ DBUnblockable | SpellDescription$ CARDNAME becomes a 2/2 blue and black Horror artifact creature until end of turn and can't be blocked this turn.
 SVar:DBUnblockable:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ Self | StaticAbilities$ Unblockable
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 AI:RemoveDeck:Random
 DeckHas:Type$Horror
 DeckNeeds:Color$Blue|Black
