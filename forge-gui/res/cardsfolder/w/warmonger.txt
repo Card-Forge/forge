@@ -2,6 +2,6 @@ Name:Warmonger
 ManaCost:3 R
 Types:Creature Minotaur Monger
 PT:3/3
-A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | Activator$ Player | ValidDescription$ each creature without flying and and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player. Any player may activate this ability.
+A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | Activator$ Player | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player. Any player may activate this ability.
 AI:RemoveDeck:Random
 Oracle:{2}: Warmonger deals 1 damage to each creature without flying and each player. Any player may activate this ability.

@@ -1,7 +1,7 @@
 Name:Words of Worship
 ManaCost:2 W
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | Name$ Words of Worship Effect | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, you gain 5 life instead.
+A:AB$ Effect | Cost$ 1 | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, you gain 5 life instead.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WordLife | Description$ The next time you would draw a card this turn, you gain 5 life instead.
 SVar:WordLife:DB$ GainLife | LifeAmount$ 5 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

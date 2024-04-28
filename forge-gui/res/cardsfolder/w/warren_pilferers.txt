@@ -2,7 +2,7 @@ Name:Warren Pilferers
 ManaCost:4 B
 Types:Creature Goblin Rogue
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMove | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to your hand. If that card is a Goblin card, Warren Pilferers gains haste until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMove | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to your hand. If that card is a Goblin card, CARDNAME gains haste until end of turn.
 SVar:TrigMove:DB$ ChangeZone | Mandatory$ True | ValidTgts$ Card.Creature+YouCtrl | TgtPrompt$ Select target creature card | Origin$ Graveyard | Destination$ Hand | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Haste | SubAbility$ DBCleanUp | ConditionPresent$ Card.Goblin+IsRemembered | ConditionDefined$ Remembered | ConditionCompare$ EQ1
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True

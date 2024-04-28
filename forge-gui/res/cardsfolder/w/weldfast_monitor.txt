@@ -2,6 +2,6 @@ Name:Weldfast Monitor
 ManaCost:3
 Types:Artifact Creature Lizard
 PT:3/2
-A:AB$ Pump | Cost$ R | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains gains menace until end of turn.
+A:AB$ Pump | Cost$ R | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains menace until end of turn.
 AI:RemoveDeck:Random
 Oracle:{R}: Weldfast Monitor gains menace until end of turn.
