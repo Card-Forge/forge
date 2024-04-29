@@ -31,7 +31,6 @@ import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
-import forge.download.AutoUpdater;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -162,9 +161,7 @@ public final class FModel {
             }
         };
 
-        if (new AutoUpdater(true).attemptToUpdate()) {
-            //
-        }
+        //if (new AutoUpdater(true).attemptToUpdate()) {}
         // load types before loading cards
         loadDynamicGamedata();
 
