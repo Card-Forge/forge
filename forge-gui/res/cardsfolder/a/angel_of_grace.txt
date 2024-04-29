@@ -5,7 +5,7 @@ PT:5/4
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SVar:TrigEffect:DB$ Effect | Name$ Angel of Grace Effect | ReplacementEffects$ SelflessDamage | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:SelflessDamage:Event$ LifeReduced | ValidPlayer$ You.lifeGE1 | Result$ LT1 | IsDamage$ True | ReplaceWith$ ReduceLoss | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Amount | VarValue$ X
 SVar:X:ReplaceCount$Amount/LimitMax.Difference

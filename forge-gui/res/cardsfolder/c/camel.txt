@@ -3,5 +3,5 @@ ManaCost:W
 Types:Creature Camel
 PT:0/1
 K:Banding
-R:Event$ DamageDone | Prevent$ True | ValidSource$ Desert | ValidTarget$ Creature.Self+attacking,Creature.attackersBandedWith | Description$ As long as CARDNAME is attacking, prevent all damage Deserts would deal to Camel and to creatures banded with CARDNAME.
+R:Event$ DamageDone | Prevent$ True | ValidSource$ Desert | ValidTarget$ Creature.Self+attacking,Creature.attackersBandedWith | Description$ As long as CARDNAME is attacking, prevent all damage Deserts would deal to CARDNAME and to creatures banded with CARDNAME.
 Oracle:Banding (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\nAs long as Camel is attacking, prevent all damage Deserts would deal to Camel and to creatures banded with Camel.

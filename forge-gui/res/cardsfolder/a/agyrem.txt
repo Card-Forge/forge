@@ -2,16 +2,16 @@ Name:Agyrem
 ManaCost:no cost
 Types:Plane Ravnica
 T:Mode$ ChangesZone | ValidCard$ Creature.White | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelay | TriggerZones$ Command | TriggerDescription$ Whenever a white creature dies, return it to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigDelay:DB$ Effect | Name$ Agyrem Effect For White Creatures | Triggers$ TrigEOT | RememberObjects$ TriggeredCard | Duration$ Permanent
+SVar:TrigDelay:DB$ Effect | Name$ Agyrem's Effect - White Creatures Feign Death | Triggers$ TrigEOT | RememberObjects$ TriggeredCard | Duration$ Permanent
 SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | Execute$ AgyremReturn | TriggerDescription$ Return creature to the battlefield under its owner's control at the beginning of the next end step.
 SVar:AgyremReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ AgyremCleanup
 SVar:AgyremCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ ChangesZone | ValidCard$ Creature.nonWhite | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDelay2 | TriggerZones$ Command | TriggerDescription$ Whenever a nonwhite creature dies, return it to its owner's hand at the beginning of the next end step.
-SVar:TrigDelay2:DB$ Effect | Name$ Agyrem Effect For non-White Creatures | Triggers$ TrigEOT2 | RememberObjects$ TriggeredCard | Duration$ Permanent
+SVar:TrigDelay2:DB$ Effect | Name$ Agyrem's Effect - Nonwhite Creatures Rebirthed | Triggers$ TrigEOT2 | RememberObjects$ TriggeredCard | Duration$ Permanent
 SVar:TrigEOT2:Mode$ Phase | Phase$ End of Turn | Execute$ AgyremReturn2 | TriggerDescription$ Return creature to its owner's hand at the beginning of the next end step.
 SVar:AgyremReturn2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Hand | SubAbility$ AgyremCleanup
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, creatures can't attack you until a player planeswalks.
-SVar:RolledChaos:DB$ Effect | Name$ Agyrem Effect - Can't Attack | StaticAbilities$ STCantAttack | Triggers$ TrigPlaneswalk | Duration$ Permanent
+SVar:RolledChaos:DB$ Effect | Name$ Agyrem's Effect - None Can Attack You | StaticAbilities$ STCantAttack | Triggers$ TrigPlaneswalk | Duration$ Permanent
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you until a player planeswalks.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ AgyremCleanup | Static$ True
 SVar:AIRollPlanarDieParams:Mode$ Always

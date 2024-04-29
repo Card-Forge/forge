@@ -1,7 +1,7 @@
 Name:Call from the Grave
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | AtRandom$ True | GainControl$ True | RememberChanged$ True | SubAbility$ DBDealDamage | StackDescription$ SpellDescription | SpellDescription$ Put a random creature from a random graveyard into play under your control. Call from the Grave deals to you an amount of damage equal to that creature's casting cost.
+A:SP$ ChangeZone | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | AtRandom$ True | GainControl$ True | RememberChanged$ True | SubAbility$ DBDealDamage | StackDescription$ SpellDescription | SpellDescription$ Put a random creature from a random graveyard into play under your control. CARDNAME deals to you an amount of damage equal to that creature's casting cost.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ You | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

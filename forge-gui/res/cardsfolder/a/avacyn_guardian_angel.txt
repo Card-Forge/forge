@@ -5,10 +5,10 @@ PT:5/4
 K:Flying
 K:Vigilance
 A:AB$ ChooseColor | Cost$ 1 W | Defined$ You | SubAbility$ DBEffect | SpellDescription$ Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Name$ Avacyn, Guardian Angel Effect 1 | ReplacementEffects$ RPreventCreature | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield
+SVar:DBEffect:DB$ Effect | Name$ Avacyn, Guardian Angel Effect - Protect Creature | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | ReplacementEffects$ RPreventCreature | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield
 SVar:RPreventCreature:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.IsRemembered | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.
 A:AB$ ChooseColor | Cost$ 5 W W | Defined$ You | SubAbility$ DBEffect2 | SpellDescription$ Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice.
-SVar:DBEffect2:DB$ Effect | ValidTgts$ Player,Planeswalker | Name$ Avacyn, Guardian Angel Effect 2 | ReplacementEffects$ RPreventPlayer | AILogic$ Fog | RememberObjects$ Targeted
+SVar:DBEffect2:DB$ Effect | Name$ Avacyn, Guardian Angel's Effect - Protect Player | ValidTgts$ Player,Planeswalker | ReplacementEffects$ RPreventPlayer | AILogic$ Fog | RememberObjects$ Targeted
 SVar:RPreventPlayer:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Player.IsRemembered,Planeswalker.IsRemembered | ValidSource$ Card.ChosenColor | Description$ Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice.
 AI:RemoveDeck:All
 Oracle:Flying, vigilance\n{1}{W}: Prevent all damage that would be dealt to another target creature this turn by sources of the color of your choice.\n{5}{W}{W}: Prevent all damage that would be dealt to target player or planeswalker this turn by sources of the color of your choice.

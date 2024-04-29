@@ -2,8 +2,8 @@ Name:Bloodhall Priest
 ManaCost:2 B R
 Types:Creature Vampire Cleric
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to any target.
-T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, Bloodhall Priest deals 2 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, CARDNAME deals 2 damage to any target.
+T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, if you have no cards in hand, CARDNAME deals 2 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 SVar:HasAttackEffect:TRUE
 K:Madness:1 B R

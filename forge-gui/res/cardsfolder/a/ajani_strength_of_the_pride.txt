@@ -6,8 +6,9 @@ A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | LifeAmount$ 
 SVar:NumCreatures:Count$Valid Creature.YouCtrl/Plus.NumPlaneswalkers
 SVar:NumPlaneswalkers:Count$Valid Planeswalker.YouCtrl
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ ajanis_pridemate | SpellDescription$ Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on Ajani's Pridemate."
-DeckHas:Ability$Token|Counters|LifeGain
 A:AB$ ChangeZoneAll | Cost$ SubCounter<0/LOYALTY> | ConditionCheckSVar$ CurLife | ConditionSVarCompare$ GEInitLife | Planeswalker$ True | Ultimate$ True | ChangeType$ Card.Self,Creature.OppCtrl,Artifact.OppCtrl | Origin$ Battlefield | Destination$ Exile | SpellDescription$ If you have at least 15 life more than your starting life total, exile CARDNAME and each artifact and creature your opponents control.
 SVar:CurLife:Count$YourLifeTotal
 SVar:InitLife:Count$YourStartingLife/Plus.15
+DeckHas:Ability$Token|Counters|LifeGain
+DeckHints:Ability$LifeGain
 Oracle:[+1]: You gain life equal to the number of creatures you control plus the number of planeswalkers you control.\n[-2]: Create a 2/2 white Cat Soldier creature token named Ajani's Pridemate with "Whenever you gain life, put a +1/+1 counter on Ajani's Pridemate."\n[0]: If you have at least 15 life more than your starting life total, exile Ajani, Strength of the Pride and each artifact and creature your opponents control.

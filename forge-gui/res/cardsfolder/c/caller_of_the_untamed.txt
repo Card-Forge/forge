@@ -4,7 +4,7 @@ Types:Creature Elf Shaman
 PT:2/4
 K:MayEffectFromOpeningDeck:DBReveal
 SVar:DBReveal:DB$ Reveal | RevealDefined$ Self | SubAbility$ DBExile | SpellDescription$ Before you shuffle your deck to start the game, you may reveal this card from your deck and exile an instant or sorcery card you drafted that isn't in your deck.
-SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | SubAbility$ DBPump | ConditionGameTypes$ Draft,QuestDraft | SelectPrompt$ Exile with Caller of the Untamed
+SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | SubAbility$ DBPump | ConditionGameTypes$ Draft,QuestDraft | SelectPrompt$ Exile with CARDNAME
 SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ CallerOfTheUntamed | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ CopyPermanent | Cost$ RevealFromExile<1/Creature.YouOwn+NotedForCallerOfTheUntamed> X T | CostDesc$ {X}, {T} | Defined$ Revealed | SpellDescription$ Create a token that's a copy of a card you exiled with cards named Caller of the Untamed. X is the mana value of that card. | SubAbility$ DBCleanup

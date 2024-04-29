@@ -4,7 +4,7 @@ Types:Creature Human Pirate
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, each token that would be created under an opponent's control this turn is created under your control instead.
-SVar:TrigEffect:DB$ Effect | Name$ Crafty Cutpurse Effect | ReplacementEffects$ OppCreatEnters
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ OppCreatEnters
 SVar:OppCreatEnters:Event$ CreateToken | ActiveZones$ Command | ValidToken$ Card.OppCtrl | ReplaceWith$ ETBYourCtrl | Layer$ Control | Description$ Each token that would be created under an opponent's control this turn is created under your control instead.
 SVar:ETBYourCtrl:DB$ ReplaceToken | Type$ ReplaceController | ValidCard$ Card.OppCtrl | NewController$ You
 Oracle:Flash\nWhen Crafty Cutpurse enters the battlefield, each token that would be created under an opponent's control this turn is created under your control instead.

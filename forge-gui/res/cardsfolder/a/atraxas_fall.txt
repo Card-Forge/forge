@@ -1,6 +1,6 @@
 Name:Atraxa's Fall
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Destroy | ValidTgts$ Artifact,Battle,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, battle, enchantment, or creature with flying | SpellDescription$ Destroy target artifact, artifact, battle, enchantment, or creature with flying.
+A:SP$ Destroy | ValidTgts$ Artifact,Battle,Enchantment,Creature.withFlying | TgtPrompt$ Select target artifact, battle, enchantment, or creature with flying | SpellDescription$ Destroy target artifact, battle, enchantment, or creature with flying.
 AI:RemoveDeck:Random
 Oracle:Destroy target artifact, battle, enchantment, or creature with flying.

@@ -5,6 +5,6 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
 A:AB$ Animate | Cost$ 1 U B | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Elemental | Colors$ Blue,Black | OverwriteColors$ True | SubAbility$ DBUnblockable | SpellDescription$ CARDNAME becomes a 3/2 blue and black Elemental creature until end of turn and can't be blocked this turn. It's still a land.
 SVar:DBUnblockable:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ Self | StaticAbilities$ Unblockable
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 DeckHas:Type$Elemental
 Oracle:Creeping Tar Pit enters the battlefield tapped.\n{T}: Add {U} or {B}.\n{1}{U}{B}: Creeping Tar Pit becomes a 3/2 blue and black Elemental creature until end of turn and can't be blocked this turn. It's still a land.

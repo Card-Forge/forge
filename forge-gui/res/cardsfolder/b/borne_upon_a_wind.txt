@@ -1,7 +1,7 @@
 Name:Borne Upon a Wind
 ManaCost:1 U
 Types:Instant
-A:SP$ Effect | Name$ Borne Upon a Wind Effect | StaticAbilities$ QuickSpell | SubAbility$ DBDraw | SpellDescription$ You may cast spells this turn as though they had flash.
+A:SP$ Effect | StaticAbilities$ QuickSpell | SubAbility$ DBDraw | SpellDescription$ You may cast spells this turn as though they had flash.
 SVar:QuickSpell:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast spells this turn as though they had flash.
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
 Oracle:You may cast spells this turn as though they had flash.\nDraw a card.

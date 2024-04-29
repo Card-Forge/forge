@@ -3,15 +3,15 @@ ManaCost:6
 Types:Artifact
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.nonToken+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put Bronze Tablet into its owner's graveyard. Otherwise, that player owns Bronze Tablet and you own the other exiled card.
+A:AB$ Pump | Cost$ 4 T | ValidTgts$ Permanent.nonToken+OppOwn | TgtPrompt$ Select target nontoken permanent an opponent owns | RememberObjects$ TargetedController | SubAbility$ Choice1 | StackDescription$ SpellDescription | SpellDescription$ Exile CARDNAME and target nontoken permanent an opponent owns. That player may pay 10 life. If they do, put CARDNAME into its owner's graveyard. Otherwise, that player owns CARDNAME and you own the other exiled card.
 SVar:Choice1:DB$ GenericChoice | Choices$ ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | ConditionSVarCompare$ LT10 | SubAbility$ Choice2 | StackDescription$ None
 SVar:Choice2:DB$ GenericChoice | Choices$ PayLife,ExchangeOwnership,Concede | Defined$ TargetedOwner | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | StackDescription$ None
 SVar:X:PlayerCountRemembered$LifeTotal
-SVar:ExchangeOwnership:DB$ GainOwnership | Defined$ Targeted | DefinedPlayer$ You | SubAbility$ TargetToExile1 | SpellDescription$ Exchange ownership of your card for Bronze Tablet (both cards remain exiled)
+SVar:ExchangeOwnership:DB$ GainOwnership | Defined$ Targeted | DefinedPlayer$ You | SubAbility$ TargetToExile1 | SpellDescription$ Exchange ownership of your card for CARDNAME. (Both cards remain exiled.)
 SVar:TargetToExile1:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ BronzeExchange
 SVar:BronzeExchange:DB$ GainOwnership | Defined$ Self | DefinedPlayer$ Remembered | SubAbility$ TabletToExile1
 SVar:TabletToExile1:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ DBCleanup
-SVar:PayLife:DB$ LoseLife | LifeAmount$ 10 | Defined$ TargetedOwner | SubAbility$ TargetToExile2 | SpellDescription$ Pay 10 life (your card remains exiled and Bronze Tablet goes to its owner's graveyard)
+SVar:PayLife:DB$ LoseLife | LifeAmount$ 10 | Defined$ TargetedOwner | SubAbility$ TargetToExile2 | SpellDescription$ Pay 10 life. (Your card remains exiled and CARDNAME goes to its owner's graveyard.)
 SVar:TargetToExile2:DB$ ChangeZone | Defined$ Targeted | Origin$ All | Destination$ Exile | SubAbility$ TabletToExile2
 SVar:TabletToExile2:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Exile | SubAbility$ TabletToGraveyard
 SVar:TabletToGraveyard:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBCleanup

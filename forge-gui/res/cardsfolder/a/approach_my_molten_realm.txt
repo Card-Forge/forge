@@ -2,7 +2,7 @@ Name:Approach My Molten Realm
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MoltenEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
-SVar:MoltenEffect:DB$ Effect | Name$ Molten Realm Effect | ReplacementEffects$ MoltenRealm | Duration$ UntilYourNextTurn
+SVar:MoltenEffect:DB$ Effect | ReplacementEffects$ MoltenRealm | Duration$ UntilYourNextTurn
 SVar:MoltenRealm:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card,Emblem | ReplaceWith$ DmgTwice | Description$ Until your next turn, if a source would deal damage, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ MoltenX
 SVar:MoltenX:ReplaceCount$DamageAmount/Twice
