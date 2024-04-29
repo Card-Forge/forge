@@ -1,4 +1,4 @@
-Name:Calix, Guided By Fate
+Name:Calix, Guided by Fate
 ManaCost:1 G W
 Types:Legendary Enchantment Creature Human Druid
 PT:2/2

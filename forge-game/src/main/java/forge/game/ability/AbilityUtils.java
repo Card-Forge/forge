@@ -2037,7 +2037,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].equals("CrewSize")) {
-            return doXMath(c.getCrewedByThisTurn().size(), expr, c, ctb);
+            return doXMath(c.getCrewedByThisTurn() == null ? 0 : c.getCrewedByThisTurn().size(), expr, c, ctb);
         }
 
         if (sq[0].equals("Intensity")) {
