@@ -84,10 +84,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         pnlContent.setOpaque(false);
 
         if (javaRecentEnough()) {
-            // With Blacksmith we would upload the releases and the /latest would redirect to the right URL
-            // That currently doesn't happen so lets comment out this button for now
-//            pnlContent.add(btnCheckForUpdates, constraintsBTN);
-//            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
+            // Github actions now uploading the latest version predictably. So we should be able to use this again.
+            pnlContent.add(btnCheckForUpdates, constraintsBTN);
+            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
