@@ -3,7 +3,7 @@ ManaCost:4 U B R
 Types:Legendary Creature Zombie Assassin
 PT:6/6
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever Thraximundar attacks, defending player sacrifices a creature.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks, defending player sacrifices a creature.
 T:Mode$ Sacrificed | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player sacrifices a creature, you may put a +1/+1 counter on CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayer | SacValid$ Creature
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1

@@ -3,7 +3,7 @@ ManaCost:3 U R
 Types:Legendary Creature Human Scientist
 PT:3/4
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | OptionalDecider$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may create a tapped and attacking token that's a copy of target attacking legendary creature you control other than NICKNAME, except it's not legendary and it's a Synth artifact creature in addition to its other types.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.attacking+Other+Legendary+YouCtrl | TgtPrompt$ target attacking legendary creature you control other than Shaun | NonLegendary$ True | AddTypes$ Artifact & Synth | TokenTapped$ True | TokenAttacking$ True
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.attacking+Other+Legendary+YouCtrl | TgtPrompt$ Select target attacking legendary creature you control other than NICKNAME | NonLegendary$ True | AddTypes$ Artifact & Synth | TokenTapped$ True | TokenAttacking$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME leaves the battlefield, exile all Synth tokens you control.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Synth.YouCtrl+token
 DeckHas:Ability$Token & Type$Synth

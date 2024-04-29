@@ -2,7 +2,7 @@ Name:Silent Assassin
 ManaCost:B B
 Types:Creature Human Mercenary Assassin
 PT:2/1
-A:AB$ Effect | Cost$ 3 B | ValidTgts$ Creature.blocking | Name$ Assassin Tracking Effect | TgtPrompt$ Select target blocking creature | IsCurse$ True | RememberObjects$ Targeted | Triggers$ DelTrig | SpellDescription$ Destroy target blocking creature at end of combat.
+A:AB$ Effect | Cost$ 3 B | ValidTgts$ Creature.blocking | Name$ Silent Assassin's Effect - Tracking... | TgtPrompt$ Select target blocking creature | IsCurse$ True | RememberObjects$ Targeted | Triggers$ DelTrig | SpellDescription$ Destroy target blocking creature at end of combat.
 SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy the blocking creature at end of combat.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Remembered | SpellDescription$ Destroy the blocking creature.
 AI:RemoveDeck:All

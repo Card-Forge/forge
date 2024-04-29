@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Warlock
 PT:1/3
 K:Deathtouch
-T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigSearch | CombatDamage$ True | ValidTarget$ Player | CheckDefinedPlayer$ You.committedCrimeThisTurn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you've committed a crime this turn, you may sacrifice Servant of the Stinger. If you do, search your library for a card, put it into your hand, then shuffle. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigSearch | CombatDamage$ True | ValidTarget$ Player | CheckDefinedPlayer$ You.committedCrimeThisTurn | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you've committed a crime this turn, you may sacrifice CARDNAME. If you do, search your library for a card, put it into your hand, then shuffle. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 SVar:TrigSearch:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Card | Mandatory$ True
 DeckHas:Ability$Sacrifice
 Oracle:Deathtouch\nWhenever Servant of the Stinger deals combat damage to a player, if you've committed a crime this turn, you may sacrifice Servant of the Stinger. If you do, search your library for a card, put it into your hand, then shuffle. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

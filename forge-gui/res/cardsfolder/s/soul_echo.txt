@@ -9,7 +9,7 @@ SVar:TrigSac:DB$ Sacrifice | ConditionPresent$ Card.Self+counters_EQ0_ECHO | Sub
 SVar:TrigChoose:DB$ GenericChoice | AILogic$ SoulEcho | ConditionPresent$ Card.Self+counters_GT0_ECHO | ValidTgts$ Opponent | Choices$ RemoveCounters,DealDamage
 SVar:DealDamage:DB$ Pump | Defined$ You | SpellDescription$ Damage will be applied to this player's life as usual.
 SVar:RemoveCounters:DB$ Effect | ReplacementEffects$ Damage | ExileOnMoved$ Exile | Duration$ UntilYourNextUpkeep | SpellDescription$ For each 1 damage that would be dealt to this player until their next upkeep, they remove an echo counter from CARDNAME instead.
-SVar:Damage:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ Counters | Description$ For each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.
+SVar:Damage:Event$ DamageDone | ValidTarget$ You | ReplaceWith$ Counters | Description$ For each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from EFFECTSOURCE instead.
 SVar:Counters:DB$ RemoveCounter | Defined$ EffectSource | CounterType$ ECHO | CounterNum$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters

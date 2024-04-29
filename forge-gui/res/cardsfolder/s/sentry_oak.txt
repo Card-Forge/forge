@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Treefolk Warrior
 PT:3/5
 K:Defender
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigClash | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may clash with an opponent. If you win, Sentry Oak gets +2/+0 and loses defender until end of turn. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigClash | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may clash with an opponent. If you win, CARDNAME gets +2/+0 and loses defender until end of turn. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)
 SVar:TrigClash:DB$ Clash | WinSubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | SubAbility$ DBDebuff
 SVar:DBDebuff:DB$ Debuff | Defined$ Self | Keywords$ Defender

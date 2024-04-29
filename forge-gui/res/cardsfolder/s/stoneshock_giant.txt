@@ -4,7 +4,7 @@ Types:Creature Giant
 PT:5/4
 K:Monstrosity:3:6 R R
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME becomes monstrous, creatures without flying your opponents control can't block this turn.
-SVar:TrigPump:DB$ Effect | Name$ Stoneshock Giant Effect | StaticAbilities$ KWPump
+SVar:TrigPump:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withoutFlying+OppCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying your opponents control can't block this turn.
 DeckHas:Ability$Counters
 Oracle:{6}{R}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Stoneshock Giant becomes monstrous, creatures without flying your opponents control can't block this turn.

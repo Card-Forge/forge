@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Elf Druid Ally
 PT:2/3
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self,Creature.Land+YouCtrl | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE6 | Description$ As long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.
+S:Mode$ Continuous | Affected$ Card.Self,Creature.Land+YouCtrl | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE6 | Description$ As long as you control six or more lands, CARDNAME and land creatures you control get +2/+2.
 Oracle:Vigilance\nAs long as you control six or more lands, Sylvan Advocate and land creatures you control get +2/+2.

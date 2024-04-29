@@ -3,8 +3,8 @@ ManaCost:2 R W
 Types:Creature Soltari Soldier
 PT:3/2
 K:Shadow
-A:AB$ Effect | Cost$ 0 | Name$ Soltari Guerrillas Effect | ReplacementEffects$ EventGuerrillasDamageDone | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time CARDNAME would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
-SVar:EventGuerrillasDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ValidTarget$ Opponent | ReplaceWith$ DamageGuerrillasCreature | IsCombat$ True | Description$ The next time Soltari Guerrillas would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
+A:AB$ Effect | Cost$ 0 | ReplacementEffects$ EventGuerrillasDamageDone | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ The next time CARDNAME would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
+SVar:EventGuerrillasDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | ValidTarget$ Opponent | ReplaceWith$ DamageGuerrillasCreature | IsCombat$ True | Description$ The next time EFFECTSOURCE would deal combat damage to an opponent this turn, it deals that damage to target creature instead.
 SVar:DamageGuerrillasCreature:DB$ DealDamage | CombatDamage$ True | NumDmg$ GuerrillasX | Defined$ Remembered | DamageSource$ Imprinted
 SVar:GuerrillasX:ReplaceCount$DamageAmount
 AI:RemoveDeck:All

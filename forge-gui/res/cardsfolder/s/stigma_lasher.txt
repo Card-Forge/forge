@@ -4,6 +4,6 @@ Types:Creature Elemental Shaman
 PT:2/2
 K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player can't gain life for the rest of the game.
-SVar:TrigEffect:DB$ Effect | Name$ Stigma Lasher Effect | StaticAbilities$ CantGainLife | Duration$ Permanent | RememberObjects$ TriggeredTarget
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ CantGainLife | Duration$ Permanent | RememberObjects$ TriggeredTarget
 SVar:CantGainLife:Mode$ CantGainLife | ValidPlayer$ Player.IsRemembered | Description$ The damaged player can't gain life for the rest of the game.
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nWhenever Stigma Lasher deals damage to a player, that player can't gain life for the rest of the game.

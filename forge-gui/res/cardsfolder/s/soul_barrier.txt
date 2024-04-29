@@ -1,6 +1,6 @@
 Name:Soul Barrier
 ManaCost:2 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a creature spell, Soul Barrier deals 2 damage to that player unless they pay {2}.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent casts a creature spell, CARDNAME deals 2 damage to that player unless they pay {2}.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | UnlessCost$ 2 | UnlessPayer$ TriggeredPlayer | NumDmg$ 2
 Oracle:Whenever an opponent casts a creature spell, Soul Barrier deals 2 damage to that player unless they pay {2}.

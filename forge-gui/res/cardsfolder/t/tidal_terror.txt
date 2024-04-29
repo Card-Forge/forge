@@ -5,7 +5,7 @@ PT:5/6
 K:TypeCycling:Island:2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may tap two other untapped creatures you control. If you do, CARDNAME can't be blocked this turn.
 SVar:TrigUnblockable:AB$ Effect | Cost$ tapXType<2/Creature> | RememberObjects$ TriggeredAttacker | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard
 Oracle:Whenever Tidal Terror attacks, you may tap two other untapped creatures you control. If you do, Tidal Terror can't be blocked this turn.\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

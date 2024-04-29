@@ -9,7 +9,7 @@ SVar:DBEffect:DB$ Effect | EffectOwner$ Remembered | StaticAbilities$ STPlay | R
 SVar:RDraw:Event$ Draw | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DBChooseOpp | Description$ If you would draw a card, exile the top card of an opponent's library face down instead.
 SVar:DBChooseOpp:DB$ ChoosePlayer | ChoiceTitle$ Choose an opponent whose top library card to exile | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBExile | DontNotify$ True
 SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | Defined$ Player.Chosen | RememberChanged$ True
-SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play cards exiled with Shared Fate.
+SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play cards exiled with EFFECTSOURCE.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead.\nEach player may look at cards they exiled with Shared Fate, and they may play lands and cast spells from among those cards.
