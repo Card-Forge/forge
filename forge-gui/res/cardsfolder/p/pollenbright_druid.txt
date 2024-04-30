@@ -2,7 +2,7 @@ Name:Pollenbright Druid
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When Pollenbright Druid enters the battlefield, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBProliferate
 SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature | Tgtprompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

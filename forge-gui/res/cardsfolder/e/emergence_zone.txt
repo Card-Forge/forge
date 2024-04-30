@@ -2,7 +2,7 @@ Name:Emergence Zone
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Effect | Cost$ 1 T Sac<1/CARDNAME> | Name$ Emergence Zone Effect | StaticAbilities$ QuickSpell | SpellDescription$ You may cast spells this turn as though they had flash.
+A:AB$ Effect | Cost$ 1 T Sac<1/CARDNAME> | StaticAbilities$ QuickSpell | SpellDescription$ You may cast spells this turn as though they had flash.
 SVar:QuickSpell:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast spells this turn as though they had flash.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random

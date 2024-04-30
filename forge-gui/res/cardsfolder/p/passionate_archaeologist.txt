@@ -2,7 +2,7 @@ Name:Passionate Archaeologist
 ManaCost:1 R
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ CastFromExile | Description$ Commander creatures you own have "Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent."
-SVar:CastFromExile:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, this creature deals damage equal to that spell's mana value to target opponent.
+SVar:CastFromExile:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, CARDNAME deals damage equal to that spell's mana value to target opponent.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 DeckHints:Type$Adventure & Keyword$Foretell

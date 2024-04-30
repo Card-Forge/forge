@@ -1,7 +1,7 @@
 Name:The Toymaker's Trap
 ManaCost:2 B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseNumber | TriggerDescription$ At the beginning of your upkeep, secretly choose a number between 1 and 5 that hasn't been chosen. If you do, an opponent guesses which number you chose, then you reveal the number you chose. If they guessed wrong, they lose life equal to the number they guessed and you draw a card. If they guessed right, sacrifice The Toymaker's Trap.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseNumber | TriggerDescription$ At the beginning of your upkeep, secretly choose a number between 1 and 5 that hasn't been chosen. If you do, an opponent guesses which number you chose, then you reveal the number you chose. If they guessed wrong, they lose life equal to the number they guessed and you draw a card. If they guessed right, sacrifice CARDNAME.
 SVar:TrigChooseNumber:DB$ ChooseNumber | Secretly$ True | Min$ 1 | Max$ 5 | RemoveChoices$ Remembered | Guesser$ Opponent | GuessWrong$ DBLoseLife | GuessCorrect$ DBSac | RememberChosen$ True | SubAbility$ DBCleanup
 SVar:DBLoseLife:DB$ LoseLife | Defined$ RememberedPlayer | LifeAmount$ Count$ChosenNumber | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw

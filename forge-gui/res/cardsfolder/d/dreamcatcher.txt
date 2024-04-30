@@ -2,7 +2,7 @@ Name:Dreamcatcher
 ManaCost:U
 Types:Creature Spirit
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may sacrifice CARDNAME. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All
 Oracle:Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.

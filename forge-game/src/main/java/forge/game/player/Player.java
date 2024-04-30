@@ -88,6 +88,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int spellsCastThisTurn;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
+    private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
     private int landsPlayedThisTurn;
     private int landsPlayedLastTurn;
     private int investigatedThisTurn;
@@ -2283,6 +2284,21 @@ public class Player extends GameEntity implements Comparable<Player> {
         sacrificedThisTurn.clear();
     }
 
+    public final List<Card> getSpellsCastSinceBegOfYourLastTurn() {
+        List<Card> all = new ArrayList<>(game.getStack().getSpellsCastThisTurn());
+        all.addAll(spellsCastSinceBeginningOfLastTurn);
+        return all;
+    }
+    public final void resetSpellCastSinceBegOfYourLastTurn() {
+        spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
+    }
+    public final void setSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
+        spellsCastSinceBeginningOfLastTurn = new ArrayList<>(spells);
+    }
+    public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
+        spellsCastSinceBeginningOfLastTurn.addAll(spells);
+    }
+    
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }

@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:Defender
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self+powerGE7 | Description$ As long as CARDNAME's power is 7 or greater, it can attack as though it didn't have defender.
-T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerZones$ Battlefield | IsPresent$ Card.Self | PresentZone$ Battlefield | Execute$ TrigPerpetualBuff | TriggerDescription$ Whenever you proliferate, if CARDNAME is in your graveyard or on the battlefield, CARDNAME perpetually gets +1/+1. You may cast it from your graveyard this turn.
+T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self | PresentZone$ Battlefield | Execute$ TrigPerpetualBuff | TriggerDescription$ Whenever you proliferate, if CARDNAME is in your graveyard or on the battlefield, CARDNAME perpetually gets +1/+1. You may cast it from your graveyard this turn.
 T:Mode$ Proliferate | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Secondary$ True | Execute$ TrigPerpetualBuff | TriggerDescription$ Whenever you proliferate, if CARDNAME is in your graveyard or on the battlefield, CARDNAME perpetually gets +1/+1. You may cast it from your graveyard this turn.
 SVar:TrigPerpetualBuff:DB$ Pump | PumpZone$ Battlefield,Graveyard | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ ReanimateSelf
 SVar:ReanimateSelf:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Self

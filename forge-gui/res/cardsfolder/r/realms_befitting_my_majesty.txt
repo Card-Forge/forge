@@ -1,6 +1,6 @@
 Name:Realms Befitting My Majesty
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | ValidCard$ Card.Self | Execute$ GetRealms | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ GetRealms | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 SVar:GetRealms:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 2
 Oracle:When you set this scheme in motion, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.

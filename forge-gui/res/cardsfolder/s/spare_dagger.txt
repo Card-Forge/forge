@@ -2,8 +2,8 @@ Name:Spare Dagger
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddTrigger$ AttackTrigger | Description$ Equipped creature gets +1/+0 and has "Whenever this creature attacks, you may sacrifice Spare Dagger. When you do, this creature deals 1 damage to any target."
-SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature attacks, you may sacrifice CARDNAME. When you do, this creature deals 1 damage to any target.
-SVar:TrigDealDamage:AB$ ImmediateTrigger | Cost$ Sac<1/OriginalHost/Spare Dagger> | Execute$ TrigDamage | TriggerDescription$ When you do, this creature deals 1 damage to any target.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddTrigger$ AttackTrigger | Description$ Equipped creature gets +1/+0 and has "Whenever this creature attacks, you may sacrifice CARDNAME. When you do, this creature deals 1 damage to any target."
+SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice ORIGINALHOST. When you do, CARDNAME deals 1 damage to any target.
+SVar:TrigDealDamage:AB$ ImmediateTrigger | Cost$ Sac<1/OriginalHost/Spare Dagger> | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals 1 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 Oracle:Equipped creature gets +1/+0 and has "Whenever this creature attacks, you may sacrifice Spare Dagger. When you do, this creature deals 1 damage to any target."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

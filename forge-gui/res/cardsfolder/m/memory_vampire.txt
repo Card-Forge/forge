@@ -6,7 +6,7 @@ K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, any number of target players each mill that many cards. Then you may collect evidence 9. When you do, you may cast target nonland card from defending player's graveyard without paying its mana cost.
 SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ X | SubAbility$ TrigImmediateTrig
 SVar:TrigImmediateTrig:DB$ ImmediateTrigger | UnlessCost$ CollectEvidence<9> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigCast | TriggerDescription$ When you do, you may cast target nonland card from defending player's graveyard without paying its mana cost.
-SVar:TrigCast:DB$ Play | ValidTgts$ Card.nonLand+OwnedBy Spawner>TriggeredDefendingPlayer | TgtZone$ Graveyard | TgtPrompt$ Select target nonland card card in defending player's graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | AILogic$ ReplaySpell
+SVar:TrigCast:DB$ Play | ValidTgts$ Card.nonLand+OwnedBy Spawner>TriggeredDefendingPlayer | TgtZone$ Graveyard | TgtPrompt$ Select target nonland card in defending player's graveyard | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | AILogic$ ReplaySpell
 SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Mill

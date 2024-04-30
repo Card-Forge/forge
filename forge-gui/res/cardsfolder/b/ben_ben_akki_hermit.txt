@@ -2,7 +2,7 @@ Name:Ben-Ben, Akki Hermit
 ManaCost:2 R R
 Types:Legendary Creature Goblin Shaman
 PT:1/1
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ X | SpellDescription$ Ben-Ben, Akki Hermit deals damage to target attacking creature equal to the number of untapped Mountains you control.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking creature equal to the number of untapped Mountains you control.
 SVar:X:Count$Valid Mountain.untapped+YouCtrl
 SVar:NonCombatPriority:1
 Oracle:{T}: Ben-Ben, Akki Hermit deals damage to target attacking creature equal to the number of untapped Mountains you control.

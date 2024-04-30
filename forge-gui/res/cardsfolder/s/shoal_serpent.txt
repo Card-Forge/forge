@@ -3,7 +3,7 @@ ManaCost:5 U
 Types:Creature Serpent
 PT:5/5
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDebuff | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigDebuff | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME loses defender until end of turn.
 SVar:TrigDebuff:DB$ Debuff | Defined$ Self | Keywords$ Defender
 SVar:BuffedBy:Land
 Oracle:Defender\nLandfall — Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.

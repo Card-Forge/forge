@@ -4,7 +4,7 @@ Types:Legendary Creature Shapeshifter
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
 SVar:TrigSurveil:DB$ Surveil | Amount$ 1
-A:AB$ Clone | Cost$ X | ValidTgts$ Creature.YouOwn+cmcEQX | TgtZone$ Graveyard | TgtPrompt$ Select target creature card in your graveyard | AddTypes$ Legendary | NewName$ Lazav, the Multifarious | GainThisAbility$ True | SpellDescription$ CARDNAME becomes a copy of target creature card in your graveyard with mana value X, except its name is CARDNAME, it's legendary in addition to its other types, and it has this ability.
+A:AB$ Clone | Cost$ X | ValidTgts$ Creature.YouOwn+cmcEQX | TgtZone$ Graveyard | TgtPrompt$ Select target creature card in your graveyard | AddTypes$ Legendary | NewName$ Lazav, the Multifarious | GainThisAbility$ True | SpellDescription$ CARDNAME becomes a copy of target creature card in your graveyard with mana value X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability.
 SVar:X:Count$xPaid
 DeckHas:Ability$Surveil|Graveyard
 Oracle:When Lazav, the Multifarious enters the battlefield, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)\n{X}: Lazav, the Multifarious becomes a copy of target creature card in your graveyard with mana value X, except its name is Lazav, the Multifarious, it's legendary in addition to its other types, and it has this ability.

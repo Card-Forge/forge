@@ -1,7 +1,7 @@
 Name:Tower of Coireall
 ManaCost:2
 Types:Artifact
-A:AB$ Effect | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | Name$ Tower of Coireall Effect | StaticAbilities$ KWPump | SpellDescription$ Target creature can't be blocked by Walls this turn.
-SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.Wall | EffectZone$ Command | Description$ Remembered creature can't be blocked by Walls this turn.
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberObjects$ Targeted | StaticAbilities$ KWPump | SpellDescription$ Target creature can't be blocked by Walls this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.Wall | EffectZone$ Command | Description$ This creature can't be blocked by Walls this turn.
 AI:RemoveDeck:Random
 Oracle:{T}: Target creature can't be blocked by Walls this turn.

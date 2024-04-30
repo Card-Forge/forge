@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Spirit Bird
 PT:1/1
 K:Flying
-A:AB$ Mill | Cost$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | SubAbility$ DBPump | RememberMilled$ True | SpellDescription$ Target player mills a card. Mindshrieker gets +X/+X until end of turn, where X is the milled card's mana value.
+A:AB$ Mill | Cost$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | SubAbility$ DBPump | RememberMilled$ True | SpellDescription$ Target player mills a card. CARDNAME gets +X/+X until end of turn, where X is the milled card's mana value.
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

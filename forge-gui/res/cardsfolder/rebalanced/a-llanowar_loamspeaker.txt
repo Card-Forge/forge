@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Elf Druid
 PT:1/3
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | SorcerySpeed$ True | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. Activate only as as sorcery.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | SorcerySpeed$ True | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. Activate only as a sorcery.
 DeckHas:Type$Elemental
 Oracle:{T}: Add one mana of any color.\n{T}: Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. Activate only as a sorcery.

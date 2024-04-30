@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBDraw | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw two cards. You may play an additional land this turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ This World Belongs to Me Effect | StaticAbilities$ Exploration | AILogic$ Always
+SVar:DBEffect:DB$ Effect | Name$ This World Belongs to Me's Effect - Exploration | StaticAbilities$ Exploration | AILogic$ Always
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 Oracle:When you set this scheme in motion, draw two cards. You may play an additional land this turn.

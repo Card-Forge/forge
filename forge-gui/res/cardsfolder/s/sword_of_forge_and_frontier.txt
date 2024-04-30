@@ -7,7 +7,7 @@ T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | Co
 SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ EndOfTurn | SubAbility$ DBEffectBis
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the exiled cards this turn.
-SVar:DBEffectBis:DB$ Effect | Name$ Sword of Forge and Frontier Exploration Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBCleanup
+SVar:DBEffectBis:DB$ Effect | Name$ Sword of Forge and Frontier's Effect - Exploration | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBCleanup
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Equipped creature gets +2/+2 and has protection from red and from green.\nWhenever equipped creature deals combat damage to a player, exile the top two cards of your library. You may play those cards this turn. You may play an additional land this turn.\nEquip {2}

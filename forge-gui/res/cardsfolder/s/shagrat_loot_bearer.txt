@@ -3,7 +3,7 @@ ManaCost:2 B R
 Types:Legendary Creature Orc Soldier
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, attach up to one target Equipment to it. Then amass Orcs X, where X is the number of Equipment attached to NICKNAME. (Control of the Equipment doesn't change. To amass Orcs X, put X +1/+1 counters on an Army you control. It's also an Orc. If you don't control an Army, create a 0/0 black Orc Army creature token first.)
-SVar:TrigAttach:DB$ Attach | ValidTgts$ Equipment | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target equipment to attach to Shagrat | Object$ Targeted | Defined$ Self | SubAbility$ DBAmass
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Equipment | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target equipment to attach to NICKNAME | Object$ Targeted | Defined$ Self | SubAbility$ DBAmass
 SVar:DBAmass:DB$ Amass | Type$ Orc | Num$ X
 SVar:X:Count$Valid Equipment.Attached
 DeckHas:Ability$Token|Counters & Type$Orc|Army

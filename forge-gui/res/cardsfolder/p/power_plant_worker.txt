@@ -2,7 +2,7 @@ Name:Power Plant Worker
 ManaCost:5
 Types:Artifact Creature Assembly-Worker
 PT:4/4
-A:AB$ Branch | Cost$ 3 | BranchConditionSVar$ UrzaCheck | BranchConditionSVarCompare$ GE2 | FalseSubAbility$ DBPump | TrueSubAbility$ DBPutCounter | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. If you control creatures named Mine Worker and Tower Worker, put two +1/+1 counters on Power Plant Worker instead. Activate only once each turn.
+A:AB$ Branch | Cost$ 3 | BranchConditionSVar$ UrzaCheck | BranchConditionSVarCompare$ GE2 | FalseSubAbility$ DBPump | TrueSubAbility$ DBPutCounter | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. If you control creatures named Mine Worker and Tower Worker, put two +1/+1 counters on CARDNAME instead. Activate only once each turn.
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 DeckHas:Ability$Counters

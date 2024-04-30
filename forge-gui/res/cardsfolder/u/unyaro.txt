@@ -1,7 +1,7 @@
 Name:Unyaro
 ManaCost:no cost
 Types:Plane Zhalfir
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of your end step, if you planeswalked to Unyaro this turn, untap all creatures. They phase out until a player planeswalks. (Treat them and anything attached to them as though they didn't exist.)
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigUntapAll | TriggerDescription$ At the beginning of your end step, if you planeswalked to CARDNAME this turn, untap all creatures. They phase out until a player planeswalks. (Treat them and anything attached to them as though they didn't exist.)
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature | SubAbility$ DBPhaseOut
 SVar:DBPhaseOut:DB$ Phases | AllValid$ Creature | WontPhaseInNormal$ True | RememberAffected$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ PlaneswalkTrig | OneOff$ True | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnPhasedIn$ True | SubAbility$ DBCleanup

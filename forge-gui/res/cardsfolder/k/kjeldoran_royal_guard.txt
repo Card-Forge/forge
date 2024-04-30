@@ -2,7 +2,7 @@ Name:Kjeldoran Royal Guard
 ManaCost:3 W W
 Types:Creature Human Soldier
 PT:2/5
-A:AB$ Effect | Cost$ T | Name$ Kjeldoran Royal Guard Effect | ReplacementEffects$ DamageEvent | AILogic$ Fog | SpellDescription$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to CARDNAME instead.
-SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ True | DamageTarget$ EffectSource | Description$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
+A:AB$ Effect | Cost$ T | ReplacementEffects$ DamageEvent | AILogic$ Fog | SpellDescription$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to CARDNAME instead.
+SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.unblocked | ValidTarget$ You | ReplaceWith$ DmgSelf | IsCombat$ True | DamageTarget$ EffectSource | Description$ All combat damage that would be dealt to you by unblocked creatures this turn is dealt to EFFECTSOURCE instead.
 SVar:DmgSelf:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card
 Oracle:{T}: All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.

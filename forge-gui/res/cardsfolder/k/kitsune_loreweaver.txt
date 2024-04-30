@@ -2,6 +2,6 @@ Name:Kitsune Loreweaver
 ManaCost:1 W
 Types:Creature Fox Cleric
 PT:2/1
-A:AB$ Pump | Cost$ 1 W | NumDef$ +X | SpellDescription$ Kitsune Loreweaver gets +0/+X until end of turn, where X is the number of cards in your hand.
+A:AB$ Pump | Cost$ 1 W | NumDef$ +X | SpellDescription$ CARDNAME gets +0/+X until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 Oracle:{1}{W}: Kitsune Loreweaver gets +0/+X until end of turn, where X is the number of cards in your hand.

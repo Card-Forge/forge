@@ -2,8 +2,8 @@ Name:Sawtooth Ogre
 ManaCost:2 R R
 Types:Creature Ogre
 PT:3/3
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature at end of combat.
+T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature at end of combat.
 SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamage | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ CARDNAME deals 1 damage to blocked creature at end of combat.
 SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamage | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ CARDNAME deals 1 damage to blocking creature at end of combat.
 SVar:TrigDamage:DB$ DealDamage | Defined$ DelayTriggerRememberedLKI | NumDmg$ 1

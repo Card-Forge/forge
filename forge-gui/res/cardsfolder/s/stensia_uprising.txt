@@ -1,7 +1,7 @@
 Name:Stensia Uprising
 ManaCost:2 R R
 Types:Enchantment
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 red Human creature token. Then if you control exactly thirteen permanents, you may sacrifice Stensia Uprising. When you do, it deals 7 damage to any target.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 red Human creature token. Then if you control exactly thirteen permanents, you may sacrifice CARDNAME. When you do, it deals 7 damage to any target.
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_human | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | ConditionPresent$ Permanent.YouCtrl | ConditionCompare$ EQ13 | SacValid$ Self | Optional$ True | RememberSacrificed$ True | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$ When you sacrifice CARDNAME, it deals 7 damage to any target.

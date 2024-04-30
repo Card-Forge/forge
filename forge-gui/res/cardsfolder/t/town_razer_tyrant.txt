@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target nonbasic land you don't control loses all abilities except mana abilities and gains "At the beginning of your end step, this permanent deals 2 damage to you unless you sacrifice it."
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.nonBasic+YouDontCtrl | TgtPrompt$ Select target nonbasic land you don't control | RemoveNonManaAbilities$ True | Triggers$ EndofTurnShock | Duration$ Permanent
-SVar:EndofTurnShock:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, this permanent deals 2 damage to you unless you sacrifice it.
+SVar:EndofTurnShock:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 2 damage to you unless you sacrifice it.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | UnlessCost$ Sac<1/CARDNAME> | UnlessPayer$ TriggeredPlayer
 Oracle:Flying\nWhen Town-Razer Tyrant enters the battlefield, target nonbasic land you don't control loses all abilities except mana abilities and gains "At the beginning of your end step, this permanent deals 2 damage to you unless you sacrifice it."

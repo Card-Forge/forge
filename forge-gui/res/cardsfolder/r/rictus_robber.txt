@@ -1,7 +1,7 @@
 Name:Rictus Robber
-ManaCost:3 U
+ManaCost:3 B
 Types:Creature Human Warlock
-PT:1/4
+PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | CheckSVar$ Morbid | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature

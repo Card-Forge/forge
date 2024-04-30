@@ -2,7 +2,7 @@ Name:Davriel, Soul Broker
 ManaCost:2 B B
 Types:Legendary Planeswalker Davriel
 Loyalty:4
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ AttackTrigger | Duration$ UntilYourNextTurn | Name$ Davriel, Soul Broker's +1 Effect | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Name$ Davriel, Soul Broker's Effect - +1 Attack Tax | Triggers$ AttackTrigger | Duration$ UntilYourNextTurn | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.
 SVar:AttackTrigger:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | AttackedTarget$ You,Planeswalker.YouCtrl | NoResolvingCheck$ True | TriggerZones$ Command | Execute$ TrigDiscard | TriggerDescription$ Whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.attacking | Defined$ TriggeredAttackingPlayer | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0

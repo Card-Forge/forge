@@ -2,7 +2,7 @@ Name:Blade of the Bloodchief
 ManaCost:1
 Types:Artifact Equipment
 K:Equip:1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainCounter | TriggerDescription$ Whenever Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigGainCounter | TriggerDescription$ Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.
 SVar:TrigGainCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$Valid Creature.EquippedBy+Vampire/Plus.1
 Oracle:Whenever a creature dies, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.\nEquip {1}

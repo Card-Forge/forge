@@ -2,5 +2,5 @@ Name:Knight of Dusk
 ManaCost:1 B B
 Types:Creature Human Knight
 PT:2/2
-A:AB$ Destroy | Cost$ B B | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking Knight of Dusk | SpellDescription$ Destroy target creature blocking CARDNAME.
+A:AB$ Destroy | Cost$ B B | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target creature blocking CARDNAME | SpellDescription$ Destroy target creature blocking CARDNAME.
 Oracle:{B}{B}: Destroy target creature blocking Knight of Dusk.

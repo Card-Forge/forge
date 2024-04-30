@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human Monk
 PT:1/3
 K:ETBReplacement:Other:DBReveal
-SVar:DBReveal:DB$ Reveal | RevealValid$ Dragon | RememberRevealed$ True | Optional$ True | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Dragon card from your hand. If you do, or if you control a Dragon, Dragon's Disciple enters the battlefield with a +1/+1 counter on it.
+SVar:DBReveal:DB$ Reveal | RevealValid$ Dragon | RememberRevealed$ True | Optional$ True | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Dragon card from your hand. If you do, or if you control a Dragon, CARDNAME enters the battlefield with a +1/+1 counter on it.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | Defined$ Self | ConditionCheckSVar$ DragonPresence | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DragonPresence:Count$RememberedSize/Plus.DragonControlled

@@ -2,5 +2,5 @@ Name:Barbed-Back Wurm
 ManaCost:4 B
 Types:Creature Wurm
 PT:4/3
-A:AB$ Pump | Cost$ B | ValidTgts$ Creature.Green+blockingSource | TgtPrompt$ Select target green creature blocking Barbed-Back Wurm | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target green creature blocking CARDNAME gets -1/-1 until end of turn.
+A:AB$ Pump | Cost$ B | ValidTgts$ Creature.Green+blockingSource | TgtPrompt$ Select target green creature blocking CARDNAME | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target green creature blocking CARDNAME gets -1/-1 until end of turn.
 Oracle:{B}: Target green creature blocking Barbed-Back Wurm gets -1/-1 until end of turn.

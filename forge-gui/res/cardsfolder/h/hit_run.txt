@@ -1,7 +1,7 @@
 Name:Hit
 ManaCost:1 B R
 Types:Instant
-A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Artifact | SacMessage$ Creature or Artifact | RememberSacrificed$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Artifact | SacMessage$ Creature or Artifact | RememberSacrificed$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact or creature. CARDNAME deals damage to that player equal to that permanent's mana value.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

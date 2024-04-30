@@ -5,7 +5,7 @@ K:Equip:3
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ DivinerDraw | AddTrigger$ TrigDraw | AddSVar$ DivinerTrigPump | Description$ Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Wizard | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Wizard creature enters the battlefield, you may attach CARDNAME to it.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
-SVar:TrigDraw:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DivinerTrigPump | TriggerDescription$ Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn
+SVar:TrigDraw:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ DivinerTrigPump | TriggerDescription$ Whenever you draw a card, CARDNAME gets +1/+1 and gains flying until end of turn
 SVar:DivinerTrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ Flying
 SVar:DivinerDraw:AB$Draw | Cost$ 4 | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Equipped creature has "Whenever you draw a card, this creature gets +1/+1 and gains flying until end of turn" and "{4}: Draw a card."\nWhenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.\nEquip {3}

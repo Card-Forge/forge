@@ -2,7 +2,7 @@ Name:Jace, Cunning Castaway
 ManaCost:1 U U
 Types:Legendary Planeswalker Jace
 Loyalty:3
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigDrawDiscard | Duration$ EndOfTurn | AILogic$ Main1 | Name$ Jace, Cunning Castaway Effect | SpellDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigDrawDiscard | Duration$ EndOfTurn | AILogic$ Main1 | SpellDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
 SVar:TrigDrawDiscard:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Command | ValidTarget$ Player | Execute$ DBDraw | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player this turn, draw a card, then discard a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose

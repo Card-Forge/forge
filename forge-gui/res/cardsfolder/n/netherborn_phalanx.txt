@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
-Oracle:When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature they control.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then then shuffle. Transmute only as a sorcery.)
+Oracle:When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature they control.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

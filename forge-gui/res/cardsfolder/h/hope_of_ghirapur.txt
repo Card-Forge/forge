@@ -3,6 +3,6 @@ ManaCost:1
 Types:Legendary Artifact Creature Thopter
 PT:1/1
 K:Flying
-A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player.wasDealtCombatDamageThisTurnBySource | Name$ Hope of Ghirapur Effect | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, target player who was dealt combat damage by Hope of Ghirapur can't cast noncreature spells.
-SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.
+A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ValidTgts$ Player.wasDealtCombatDamageThisTurnBySource | StaticAbilities$ STCantBeCast | RememberObjects$ Targeted | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, target player who was dealt combat damage by CARDNAME can't cast noncreature spells.
+SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player.IsRemembered | Description$ Until your next turn, target player who was dealt combat damage by EFFECTSOURCE this turn can't cast noncreature spells.
 Oracle:Flying\nSacrifice Hope of Ghirapur: Until your next turn, target player who was dealt combat damage by Hope of Ghirapur this turn can't cast noncreature spells.

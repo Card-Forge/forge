@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Creature Zombie Snake
 PT:3/3
 A:AB$ ChooseColor | Cost$ 1 B | Defined$ You | AILogic$ MostProminentInHumanDeck | SorcerySpeed$ True | SubAbility$ DBEffect | SpellDescription$ Choose a color. Whenever CARDNAME becomes blocked by a creature of that color this turn, destroy that creature. Activate only as a sorcery.
-SVar:DBEffect:DB$ Effect | Name$ Zombie Boa Effect | Triggers$ TrigBlocked | RememberObjects$ Self
-SVar:TrigBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Execute$ ABDestroy | TriggerDescription$ Whenever Zombie Boa becomes blocked by a creature of the chosen color this turn, destroy that creature.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigBlocked | RememberObjects$ Self
+SVar:TrigBlocked:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Execute$ ABDestroy | TriggerDescription$ Whenever EFFECTSOURCE becomes blocked by a creature of the chosen color this turn, destroy that creature.
 SVar:ABDestroy:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
 AI:RemoveDeck:All
 Oracle:{1}{B}: Choose a color. Whenever Zombie Boa becomes blocked by a creature of that color this turn, destroy that creature. Activate only as a sorcery.

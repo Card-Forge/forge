@@ -72,7 +72,7 @@ PT:3/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, draw a card and you may play an additional land this turn.
 SVar:TrigDraw:AB$ Draw | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
+SVar:DBEffect:DB$ Effect | Name$ Imoen, Wise Trickster's Effect - Exploration | StaticAbilities$ Exploration
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Wise Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, draw a card and you may play an additional land this turn.

@@ -2,6 +2,6 @@ Name:Consuming Ashes
 ManaCost:2 B B
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBSurveil | SpellDescription$ Exile target creature.
-SVar:DBSurveil:DB$ Scry | Defined$ You | Amount$ 2 | ConditionDefined$ Targeted | StackDescription$ SpellDescription | ConditionPresent$ Card.cmcLE3 | SpellDescription$ If it had mana value 3 or less, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 2 | ConditionDefined$ Targeted | StackDescription$ SpellDescription | ConditionPresent$ Card.cmcLE3 | SpellDescription$ If it had mana value 3 or less, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Exile target creature. If it had mana value 3 or less, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

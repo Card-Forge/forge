@@ -4,8 +4,8 @@ Types:Creature Zombie Wizard
 PT:4/4
 A:AB$ Effect | Name$ Havengul Lich Delayed Trigger | Cost$ 1 | ValidTgts$ Creature | TgtZone$ Graveyard | TgtPrompt$ Select target creature card | StaticAbilities$ STPlay | Triggers$ DTCast | RememberObjects$ Targeted | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target creature card in a graveyard this turn. When you cast it this turn, CARDNAME gains all activated abilities of that card until end of turn.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast a creature card in a graveyard.
-SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered+nonLand | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
+SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered+nonLand | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, EFFECTSOURCE gains all activated abilities of that card until end of turn.
 SVar:StealAbs:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | Duration$ UntilHostLeavesPlayOrEOT
-SVar:STSteal:Mode$ Continuous | Affected$ Card.EffectSource | EffectZone$ Command | GainsAbilitiesOfDefined$ RememberedLKI | Description$ Havengul Lich gains all activated abilities of that card until end of turn.
+SVar:STSteal:Mode$ Continuous | Affected$ Card.EffectSource | EffectZone$ Command | GainsAbilitiesOfDefined$ RememberedLKI | Description$ EFFECTSOURCE gains all activated abilities of that card until end of turn.
 AI:RemoveDeck:All
 Oracle:{1}: You may cast target creature card in a graveyard this turn. When you cast it this turn, Havengul Lich gains all activated abilities of that card until end of turn.

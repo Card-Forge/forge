@@ -2,7 +2,7 @@ Name:Crimson Hellkite
 ManaCost:6 R R R
 Types:Creature Dragon
 PT:6/6
-A:AB$ DealDamage | Cost$ T X | XColor$ Red | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ Crimson Hellkite deals X damage to target creature. Spend only red mana on X.
+A:AB$ DealDamage | Cost$ T X | XColor$ Red | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature. Spend only red mana on X.
 K:Flying
 SVar:X:Count$xPaid
 Oracle:Flying\n{X}, {T}: Crimson Hellkite deals X damage to target creature. Spend only red mana on X.

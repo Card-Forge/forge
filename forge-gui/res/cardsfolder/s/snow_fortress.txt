@@ -5,5 +5,5 @@ PT:0/4
 K:Defender
 A:AB$ Pump | Cost$ 1 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 A:AB$ Pump | Cost$ 1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
-A:AB$ DealDamage | Cost$ 3 | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target target creature without flying that's attacking you | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature without flying that's attacking you.
+A:AB$ DealDamage | Cost$ 3 | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target creature without flying that's attacking you | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature without flying that's attacking you.
 Oracle:Defender (This creature can't attack.)\n{1}: Snow Fortress gets +1/+0 until end of turn.\n{1}: Snow Fortress gets +0/+1 until end of turn.\n{3}: Snow Fortress deals 1 damage to target creature without flying that's attacking you.

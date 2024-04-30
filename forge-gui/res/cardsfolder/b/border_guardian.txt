@@ -7,7 +7,7 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 T:Mode$ SpellCast | ValidCard$ Card.BorderColorBlack | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUnblock | TriggerDescription$ Whenever you cast a black-bordered spell, CARDNAME can't be blocked this turn.
 SVar:TrigUnblock:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
-T:Mode$ SpellCast | ValidCard$ Card.BorderColorWhite | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDS | TriggerDescription$ Whenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.BorderColorWhite | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDS | TriggerDescription$ Whenever you cast a white-bordered spell, CARDNAME gains double strike until end of turn.
 SVar:TrigDS:DB$ Pump | Defined$ Self | KW$ Double Strike
 DeckHas:Ability$Counters
 Oracle:Whenever you cast a silver-bordered spell, put a +1/+1 counter on Border Guardian.\nWhenever you cast a black-bordered spell, Border Guardian can't be blocked this turn.\nWhenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.

@@ -1,6 +1,6 @@
 Name:Undiscovered Paradise
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand. | SubAbility$ DBReturn
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color. During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand. | SubAbility$ DBReturn
 SVar:DBReturn:DB$ Pump | Defined$ Self | KW$ HIDDEN During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand. | Duration$ Permanent
 Oracle:{T}: Add one mana of any color. During your next untap step, as you untap your permanents, return Undiscovered Paradise to its owner's hand.

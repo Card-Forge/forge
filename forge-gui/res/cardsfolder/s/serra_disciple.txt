@@ -4,7 +4,7 @@ Types:Creature Bird Cleric
 PT:1/1
 K:Flying
 K:First Strike
-T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn. (Artifacts, legendaries, and Sagas are historic.)
+T:Mode$ SpellCast | ValidCard$ Card.Historic | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a historic spell, CARDNAME gets +1/+1 until end of turn. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 SVar:BuffedBy:Historic
 Oracle:Flying, first strike\nWhenever you cast a historic spell, Serra Disciple gets +1/+1 until end of turn. (Artifacts, legendaries, and Sagas are historic.)

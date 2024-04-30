@@ -1,4 +1,4 @@
-Name:Dragon
+Name:Dragon Token
 ManaCost:no cost
 Types:Creature Dragon
 Colors:red,black

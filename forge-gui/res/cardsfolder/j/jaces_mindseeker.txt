@@ -3,8 +3,8 @@ ManaCost:4 U U
 Types:Creature Fish Illusion
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ MindFishing | TriggerDescription$ When Jace's Mindseeker enters the battlefield, target opponent mills five cards. You may cast an instant or sorcery card from among them without paying its mana cost.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ MindFishing | TriggerDescription$ When CARDNAME enters the battlefield, target opponent mills five cards. You may cast an instant or sorcery card from among them without paying its mana cost.
 SVar:MindFishing:DB$ Mill | NumCards$ 5 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to mill | RememberMilled$ True | SubAbility$ FishyCast
-SVar:FishyCast:DB$ Play | ValidZone$ Graveyard | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
+SVar:FishyCast:DB$ Play | ValidZone$ Graveyard,Exile | Valid$ Instant.IsRemembered,Sorcery.IsRemembered | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying\nWhen Jace's Mindseeker enters the battlefield, target opponent mills five cards. You may cast an instant or sorcery spell from among them without paying its mana cost.
