@@ -2,7 +2,7 @@ Name:Vexing Puzzlebox
 ManaCost:3
 Types:Artifact
 T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you roll one or more dice, put a number of charge counters on CARDNAME equal to the result.
-SVar:DiceResult:TriggerCountMax$Result
+SVar:DiceResult:TriggerCount$Result
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ DiceResult
 A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBRollDice | SpellDescription$ Add one mana of any color. Roll a d20.
 SVar:DBRollDice:DB$ RollDice | Sides$ 20
