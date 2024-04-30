@@ -7,38 +7,69 @@ ScryfallCode=MH3
 
 [cards]
 6 M Emrakul, the World Anew @Brent Hollowell
+8 M Herigast, Erupting Nullkite @Lucas Graciano
 9 U It That Heralds the End @Alex Konstad
+12 U Null Elemental Blast @Milivoj Ćeran
+13 R Nulldrifter @Johann Bodin
+40 R Phelia, Exuberant Shepherd @Rudy Siswanto
+62 R Flare of Denial @Jason A. Engle
+83 R Chthonian Nightmare @Josu Solano
+103 M Nethergoyf @Xavier Ribeiro
+140 U Spawn-Gang Commander @Chris Seaman
 154 R Flare of Cultivation @Billy Christian
+192 R Kudo, King Among Bears @Ekaterina Burmak
 199 R Psychic Frog @Pete Venters
 203 U Scurry of Gremlins @Ben Wootten
+207 R Wight of the Reliquary @Scott Murphy
+213 R Winter Moon @Drew Baker
 216 R Bloodstained Mire @Bruce Brenneise
 220 R Flooded Strand @Alexander Forssberg
 224 R Polluted Delta @Chris Ostrowski
 229 U Snow-Covered Wastes @Mark Poole
+233 M Ugin's Labyrinth @Mark Poole
+234 U Urza's Cave @Mark Poole
 235 R Windswept Heath @Alexander Forssberg
 236 R Wooded Foothills @Chris Ostrowski
 237 M Ajani, Nacatl Pariah @Chris Rallis
+265 R Orim's Chant @Kev Walker
+270 R Kappa Cannoneer @Jesper Ejsing
 281 R Laelia, the Blade Reforged @Wisnu Tan
+282 U Meltdown @Donato Giancola
 286 U Priest of Titania @Rebecca Guay
+287 R Sylvan Safekeeper @Magali Villeneuve
 304 L Plains @Nadia Hurianova
 305 L Island @Samuele Bandini
 306 L Swamp @Yohann Schepacz
 307 L Mountain @Chuck Lukacs
 308 L Forest @Vance Kovacs
 309 U Snow-Covered Wastes @Tomáš Honz
+323 R Orim's Chant @Olena Richards
+326 R Flare of Denial @Marie Magny
+330 R Chthonian Nightmare @Thomas M. Baxa
 338 R Flare of Cultivation @Olena Richards
 344 R Psychic Frog @Chuck Lukacs
 352 R Bloodstained Mire @Sean Vo
 353 R Flooded Strand @Salvatorre Zee Yazzie
 356 R Polluted Delta @Vance Kovacs
+359 M Ugin's Labyrinth @Samuele Bandini
 360 R Windswept Heath @Samuele Bandini
 361 R Wooded Foothills @Tomáš Honz
+362 M Herigast, Erupting Nullkite @Tyler Walpole
+364 R Phelia, Exuberant Shepherd @Allison Carl
 368 R Laelia, the Blade Reforged @Tyler Walpole
+376 R Kudo, King Among Bears @Peter Diamond
 381 M Emrakul, the World Anew @Mark Tedin
 384 M Emrakul, the World Anew @Brent Hollowell
 385 U It That Heralds the End @Alex Konstad
+387 U Null Elemental Blast @Milivoj Ćeran
+388 R Nulldrifter @Johann Bodin
+400 R Flare of Denial @Jason A. Engle
+401 R Kappa Cannoneer @Jesper Ejsing
+406 R Chthonian Nightmare @Josu Solano
+418 U Meltdown @Donato Giancola
 425 R Flare of Cultivation @Billy Christian
 428 U Priest of Titania @Rebecca Guay
+432 R Kudo, King Among Bears @Ekaterina Burmak
 433 R Psychic Frog @Pete Venters
 435 R Bloodstained Mire @Bruce Brenneise
 436 R Flooded Strand @Alexander Forssberg
@@ -47,6 +78,9 @@ ScryfallCode=MH3
 440 R Windswept Heath @Alexander Forssberg
 441 R Wooded Foothills @Chris Ostrowski
 442 M Ajani, Nacatl Pariah @Ilse Gort
+454 M Nethergoyf @Xavier Ribeiro
+460 R Wight of the Reliquary @Scott Murphy
+462 R Winter Moon @Drew Baker
 463 R Bloodstained Mire @Bruce Brenneise
 464 R Flooded Strand @Alexander Forssberg
 465 R Polluted Delta @Chris Ostrowski
@@ -54,5 +88,8 @@ ScryfallCode=MH3
 467 R Wooded Foothills @Chris Ostrowski
 468 M Ajani, Nacatl Pariah @Ilse Gort
 473 M Emrakul, the World Anew @Brent Hollowell
+474 M Herigast, Erupting Nullkite @Lucas Graciano
+478 R Phelia, Exuberant Shepherd @Rudy Siswanto
 482 R Laelia, the Blade Reforged @Wisnu Tan
+490 R Kudo, King Among Bears @Ekaterina Burmak
 516 U Scurry of Gremlins @Ben Wootten

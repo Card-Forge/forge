@@ -2,7 +2,7 @@
 Name:Constructed (3ED)
 Type:Archived
 Subtype:Vintage
-Effective:1994-04-01
+Effective:1994-04-11
 Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED
 Restricted:Ali from Cairo; Ancestral Recall; Berserk; Black Lotus; Braingeyser; Channel; Copy Artifact; Demonic Tutor; Dingus Egg; Gauntlet of Might; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Regrowth; Sol Ring; Time Walk; Timetwister; Wheel of Fortune
 Banned:Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Shahrazad; Time Vault

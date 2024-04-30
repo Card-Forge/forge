@@ -1,0 +1,10 @@
+[metadata]
+Code=YOTJ
+Date=2024-05-07
+Name=Alchemy: Thunder Junction
+Type=Online
+ScryfallCode=YOTJ
+
+[cards]
+0 R Sapphire Collector @Francis Tneh
+0 R Grenzo, Crooked Jailer @Darren Tan

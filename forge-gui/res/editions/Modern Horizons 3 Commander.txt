@@ -6,3 +6,11 @@ Type=Commander
 ScryfallCode=M3C
 
 [cards]
+48 R March from Velis Vel @Carlos Palma Cruchaga
+52 R Final Act @Nils Hamm
+61 R Siege-Gang Lieutenant @Warren Mahy
+80 R Planar Nexus @Sam Burley
+100 R March from Velis Vel @Carlos Palma Cruchaga
+104 R Final Act @Nils Hamm
+113 R Siege-Gang Lieutenant @Warren Mahy
+132 R Planar Nexus @Sam Burley
