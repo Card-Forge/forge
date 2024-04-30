@@ -4,9 +4,7 @@ Types:Creature Human Artificer
 PT:2/1
 K:Haste
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Lieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | PumpKeywords$ Haste | PumpDuration$ EOT
 DeckHas:Ability$Token
 DeckHints:Ability$Token
 Oracle:Haste\nLieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn.

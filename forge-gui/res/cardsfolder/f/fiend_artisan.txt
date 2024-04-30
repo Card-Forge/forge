@@ -1,5 +1,5 @@
 Name:Fiend Artisan
-ManaCost:B/G B/G
+ManaCost:BG BG
 Types:Creature Nightmare
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Y | AddToughness$ Y | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.

@@ -1,0 +1,12 @@
+Name:Spawn-Gang Commander
+ManaCost:3 R R
+Types:Creature Eldrazi Goblin
+PT:2/2
+K:Devoid
+A:AB$ DealDamage | Cost$ 1 C Sac<1/Eldrazi> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create three 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+SVar:AIPreference:SacCost$Creature.Eldrazi+token,Creature.Eldrazi+cmcLE1
+DeckHas:Ability$Mana.Colorless|Token
+DeckHints:Type$Eldrazi
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell, create three 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."\n{1}{C}, Sacrifice an Eldrazi: Spawn-Gang Commander deals 2 damage to any target.
