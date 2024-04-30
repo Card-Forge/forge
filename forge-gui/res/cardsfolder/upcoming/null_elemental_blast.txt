@@ -1,0 +1,8 @@
+Name:Null Elemental Blast
+ManaCost:C
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBDestroy
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.MultiColor | TgtPrompt$ Select target multicolored spell | SpellDescription$ Counter target multicolored spell.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent. | SpellDescription$ Destroy target multicolored permanent.
+AI:RemoveDeck:Random
+Oracle:Choose one —\n• Counter target multicolored spell.\n• Destroy target multicolored permanent.
