@@ -1,6 +1,6 @@
 Name:Veteran's Armaments
 ManaCost:2
-Types:Tribal Artifact Soldier Equipment
+Types:Kindred Artifact Soldier Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddTrigger$ HeroAttack & HeroBlock | AddSVar$ HeroPump & ArmamentsX | Description$ Equipped creature has "Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature."
 SVar:HeroAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HeroPump | TriggerDescription$ Whenever CARDNAME attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.
