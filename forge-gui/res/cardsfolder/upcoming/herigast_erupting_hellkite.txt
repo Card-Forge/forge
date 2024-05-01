@@ -1,0 +1,10 @@
+Name:Herigast, Erupting Nullkite
+ManaCost:9
+Types:Legendary Creature Eldrazi Dragon
+PT:6/6
+K:Emerge:6 R R
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, you may exile your hand. If you do, draw three cards.
+SVar:TrigDraw:AB$ Draw | Cost$ ExileFromHand<1/All> | Defined$ You | NumCards$ 3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Emerge:CardManaCost | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each creature spell you cast has emerge. The emerge cost is equal to its mana cost.
+Oracle:Emerge {6}{R}{R} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature’s mana value.)\nWhen you cast this spell, you may exile your hand. If you do, draw three cards.\nFlying\nEach creature spell you cast has emerge. The emerge cost is equal to its mana cost.
