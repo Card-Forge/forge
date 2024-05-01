@@ -5449,7 +5449,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
     public final boolean isSnow()       { return getType().isSnow(); }
 
-    public final boolean isTribal()     { return getType().isTribal(); }
+    public final boolean isKindred()     { return getType().isKindred(); }
     public final boolean isSorcery()    { return getType().isSorcery(); }
     public final boolean isInstant()    { return getType().isInstant(); }
 
