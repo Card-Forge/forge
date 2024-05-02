@@ -274,7 +274,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (type.equals("All")) {
-            return PaymentDecision.card(list);
+            if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileNCardsFromYourZone", list.size(), cost.from.get(0).getTranslatedName()))) {
+                return PaymentDecision.card(list);
+            }
+            return null;
         }
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
         list = CardLists.filter(list, CardPredicates.canExiledBy(ability, isEffect()));
