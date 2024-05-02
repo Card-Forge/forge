@@ -7199,6 +7199,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
+        // can't sacrifice it for mana ability if it is already marked as sacrifice
+        if (source != null && source.isManaAbility() && isUsedToPay()) {
+            return false;
+        }
+
         final Card gameCard = game.getCardState(this, null);
         // gameCard is LKI in that case, the card is not in game anymore
         // or the timestamp did change
