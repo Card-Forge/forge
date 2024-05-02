@@ -2793,6 +2793,7 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Emerge);
 
             newSA.setDescription(sa.getDescription() + " (Emerge)");
+            newSA.putParam("AfterDescription", "(Emerge)");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Embalm")) {
