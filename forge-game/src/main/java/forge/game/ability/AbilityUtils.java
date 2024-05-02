@@ -673,17 +673,18 @@ public class AbilityUtils {
                 final SpellAbility root = sa.getRootAbility();
                 final String[] l = calcX[1].split("/");
                 final String m = CardFactoryUtil.extractOperators(calcX[1]);
+                final Object to = root.getTriggeringObject(AbilityKey.fromString(l[0]));
                 Integer count = null;
-                if (calcX[0].endsWith("Max")) {
+                if (to instanceof Iterable<?>) {
                     @SuppressWarnings("unchecked")
-                    Iterable<Integer> numbers = (Iterable<Integer>) root.getTriggeringObject(AbilityKey.fromString(l[0]));
-                    for (Integer n : numbers) {
-                        if (count == null || n > count) {
-                            count = n;
-                        }
+                    Iterable<Integer> numbers = (Iterable<Integer>) to;
+                    if (calcX[0].endsWith("Max")) {
+                        count = Aggregates.max(numbers, Functions.identity());
+                    } else {
+                        count = Aggregates.sum(numbers, Functions.identity());
                     }
                 } else {
-                    count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+                    count = (Integer) to;
                 }
 
                 val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
