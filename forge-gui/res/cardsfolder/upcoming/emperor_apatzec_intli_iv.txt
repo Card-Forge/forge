@@ -1,0 +1,12 @@
+Name:Emperor Apatzec Intli IV
+ManaCost:R G W
+Types:Legendary Creature Human Noble
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+powerGE4 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, that creature perpetually gains haste if its power is 4 or greater. If its toughness is 4 or greater, you gain 4 life. If its mana value is 4 or greater, seek a creature card.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste | Duration$ Perpetual
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Secondary$ True | ValidCard$ Creature.Other+toughnessGE4 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, that creature perpetually gains haste if its power is 4 or greater. If its toughness is 4 or greater, you gain 4 life. If its mana value is 4 or greater, seek a creature card.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | Secondary$ True | ValidCard$ Creature.Other+cmcGE4 | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ Whenever another creature enters the battlefield under your control, that creature perpetually gains haste if its power is 4 or greater. If its toughness is 4 or greater, you gain 4 life. If its mana value is 4 or greater, seek a creature card.
+SVar:TrigSeek:DB$ Seek | Defined$ Player | Type$ Creature
+DeckHas:Ability$LifeGain
+Oracle:Whenever another creature enters the battlefield under your control, that creature perpetually gains haste if its power is 4 or greater. If its toughness is 4 or greater, you gain 4 life. If its mana value is 4 or greater, seek a creature card.
