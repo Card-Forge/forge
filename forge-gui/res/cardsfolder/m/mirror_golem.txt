@@ -8,20 +8,22 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSourceLKI | Origin$ Exile | Execute$ DBForget | Static$ True
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Creature | CheckSVar$ CheckCreature | SVarCompare$ GE1 | Description$ CARDNAME has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Creature | CheckSVar$ CheckCreature | SVarCompare$ GE1 | Description$ CARDNAME has protection from each of the exiled card's card types. (Artifact, battle, creature, enchantment, instant, kindred, land, planeswalker, and sorcery are card types.)
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Land | CheckSVar$ CheckLand | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Enchantment | CheckSVar$ CheckEnchantment | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Artifact | CheckSVar$ CheckArtifact | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Instant | CheckSVar$ CheckInstant | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Sorcery | CheckSVar$ CheckSorcery | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Planeswalker | CheckSVar$ CheckPlaneswalker | SVarCompare$ GE1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Tribal | CheckSVar$ CheckTribal | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Kindred | CheckSVar$ CheckKindred | SVarCompare$ GE1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Battle | CheckSVar$ CheckBattle | SVarCompare$ GE1
 SVar:CheckCreature:Imprinted$Valid Creature
 SVar:CheckArtifact:Imprinted$Valid Artifact
 SVar:CheckEnchantment:Imprinted$Valid Enchantment
 SVar:CheckInstant:Imprinted$Valid Instant
 SVar:CheckSorcery:Imprinted$Valid Sorcery
 SVar:CheckPlaneswalker:Imprinted$Valid Planeswalker
-SVar:CheckTribal:Imprinted$Valid Tribal
+SVar:CheckKindred:Imprinted$Valid Kindred
+SVar:CheckBattle:Imprinted$Valid Battle
 SVar:CheckLand:Imprinted$Valid Land
-Oracle:Imprint — When Mirror Golem enters the battlefield, you may exile target card from a graveyard.\nMirror Golem has protection from each of the exiled card's card types. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+Oracle:Imprint — When Mirror Golem enters the battlefield, you may exile target card from a graveyard.\nMirror Golem has protection from each of the exiled card's card types. (Artifact, battle, creature, enchantment, instant, kindred, land, planeswalker, and sorcery are card types.)

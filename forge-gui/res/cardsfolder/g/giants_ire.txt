@@ -1,6 +1,6 @@
 Name:Giant's Ire
 ManaCost:3 R
-Types:Tribal Sorcery Giant
+Types:Kindred Sorcery Giant
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker. If you control a Giant, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Giant.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Giant,
 AI:RemoveDeck:Random
