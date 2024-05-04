@@ -1,0 +1,14 @@
+Name:Twins of Discord
+ManaCost:7
+Types:Creature Eldrazi
+PT:8/6
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigGenericChoice | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, choose odd or even. Creatures with mana value of that quality can't block this turn.
+SVar:TrigGenericChoice:DB$ GenericChoice | Choices$ Odd,Even | Defined$ You 
+SVar:Odd:DB$ Effect | StaticAbilities$ CantBlockOdd | SpellDescription$ Odd
+SVar:CantBlockOdd:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.cmcOdd | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with odd mana value can't block this this.
+SVar:Even:DB$ Effect | StaticAbilities$ CantBlockEven | SpellDescription$ Even
+SVar:CantBlockEven:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.cmcEven | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with even mana value can't block this this.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl+Colorless | AddKeyword$ Bloodthirst:2 | Description$ Each other colorless creature you control has bloodthirst 2.
+DeckHas:Ability$Counters
+DeckHints:Type$Eldrazi|Construct|Scarecrow|Juggernaut
+Oracle:Whenever you attack, choose odd or even. Creatures with mana value of that quality can't block this turn.\nEach other colorless creature you control has bloodthirst 2.
