@@ -654,7 +654,7 @@ public class ComputerUtilMana {
     }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
-        if (!CostPayment.handleOfferings(sa, test, cost.isPaid())) {
+        if ((sa.isOffering() && sa.getSacrificedAsOffering() == null) || (sa.isEmerge() && sa.getSacrificedAsEmerge() == null)) {
             // nothing was chosen
             return false;
         }
@@ -682,14 +682,14 @@ public class ComputerUtilMana {
         }
         StaticAbilityManaConvert.manaConvert(manapool, ai, sa.getHostCard(), effect && !sa.isCastFromPlayEffect() ? null : sa);
 
-        if (ManaPool.payManaCostFromPool(cost, sa, ai, test, manaSpentToPay)) {
+        if (manapool.payManaCostFromPool(cost, sa, test, manaSpentToPay)) {
+            CostPayment.handleOfferings(sa, test, cost.isPaid());
             return true;    // paid all from floating mana
         }
 
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         boolean hasConverge = sa.getHostCard().hasConverge();
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
-                checkPlayable, hasConverge);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test, checkPlayable, hasConverge);
 
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         ManaCostShard toPay = null;
