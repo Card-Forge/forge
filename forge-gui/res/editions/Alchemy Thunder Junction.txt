@@ -37,5 +37,5 @@ ScryfallCode=YOTJ
 29 U Weave the Nightmare @Wayne Wu
 30 U Runecarved Obelisk @Jorge Jacinto
 
-[token]
+[tokens]
 w_x_x_avatar
