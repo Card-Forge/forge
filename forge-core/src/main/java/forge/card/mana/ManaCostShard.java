@@ -52,6 +52,13 @@ public enum ManaCostShard {
     R2(ManaAtom.RED | ManaAtom.OR_2_GENERIC, "2/R", "2R"),
     G2(ManaAtom.GREEN | ManaAtom.OR_2_GENERIC, "2/G", "2G"),
 
+    /* Or Colorless */
+    CW(ManaAtom.WHITE | ManaAtom.COLORLESS, "C/W", "CW"),
+    CU(ManaAtom.BLUE | ManaAtom.COLORLESS, "C/U", "CU"),
+    CB(ManaAtom.BLACK | ManaAtom.COLORLESS, "C/B", "CB"),
+    CR(ManaAtom.RED | ManaAtom.COLORLESS, "C/R", "CR"),
+    CG(ManaAtom.GREEN | ManaAtom.COLORLESS, "C/G", "CG"),
+
     // Snow and colorless
     S(ManaAtom.IS_SNOW, "S"),
     GENERIC(ManaAtom.GENERIC, "1"),
