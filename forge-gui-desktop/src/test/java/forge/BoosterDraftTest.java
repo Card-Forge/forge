@@ -2,6 +2,7 @@ package forge;
 
 import java.util.List;
 
+import forge.gamemodes.limited.LimitedPlayer;
 import org.testng.annotations.Test;
 
 import forge.deck.CardPool;
@@ -29,6 +30,16 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     @Test(timeOut = 1000)
     public Deck[] getDecks() {
+        return null;
+    }
+
+    @Override
+    public LimitedPlayer[] getOpposingPlayers() {
+        return new LimitedPlayer[0];
+    }
+
+    @Override
+    public LimitedPlayer getHumanPlayer() {
         return null;
     }
 
