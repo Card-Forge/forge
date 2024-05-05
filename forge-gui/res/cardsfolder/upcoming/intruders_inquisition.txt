@@ -5,5 +5,5 @@ A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | RememberTargets$ True | TgtPrompt$ Select target creature an opponent controls | AILogic$ PowerDmg | NumDmg$ ParentTargeted$CardPower | ExcessSVar$ Excess | DamageSource$ ParentTarget | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | Defined$ RememberedController | NumCards$ 1 | DiscardValid$ Card.nonLand+cmcEQX | Mode$ TgtChoose | SubAbility$ DBCleanup | SpellDescription$ If excess damage was dealt to a creature this way, its controller discards a card with the greatest mana value among cards in their hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ValidHand Card.ControlledBy RememberedController$GreatestCMC
+SVar:X:Count$ValidHand Card.OwnedBy RememberedController$GreatestCMC
 Oracle:Target creature you control deals damage equal to its power to target creature an opponent controls. If excess damage was dealt to a creature this way, its controller discards a card with the greatest mana value among cards in their hand.
