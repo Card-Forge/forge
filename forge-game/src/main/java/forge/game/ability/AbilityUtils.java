@@ -2358,6 +2358,23 @@ public class AbilityUtils {
             return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
         }
 
+        if (sq[0].equals("DraftNotesHighest")) {
+            // Just in case you are playing this card in a deck without draft notes
+            String note = player.getDraftNotes().getOrDefault(sq[1],  "0");
+            int highest = 0;
+            for (String n : note.split(",")) {
+                int num = Integer.parseInt(n);
+                if (num > highest) {
+                    highest = num;
+                }
+            }
+
+            return doXMath(highest, expr, c, ctb);
+            // Other draft notes include: Names, Colors, Players, Creature Type.
+            // But these aren't really things you count so they'll show up in properties most likely
+        }
+
+
         //Count$TypesSharedWith [defined]
         if (sq[0].startsWith("TypesSharedWith")) {
             Set<CardType.CoreType> thisTypes = Sets.newHashSet(c.getType().getCoreTypes());

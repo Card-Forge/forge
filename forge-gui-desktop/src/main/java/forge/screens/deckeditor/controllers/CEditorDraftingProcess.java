@@ -27,6 +27,7 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -114,6 +115,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // get next booster pack
         this.boosterDraft.setChoice(card);
+
+        // TODO I just drafted something. Does it have a When drafted effect?
+
+        // TODO I'm about to pass cards.
 
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;
@@ -212,16 +217,30 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         } while(s == null || s.isEmpty());
 
-        saved = true;
-
         // Construct computer's decks and save draft
         final Deck[] computer = this.boosterDraft.getDecks();
+        final LimitedPlayer[] players = this.boosterDraft.getOpposingPlayers();
 
+        for(int i = 0; i < computer.length; i++) {
+            Deck deck = computer[i];
+            LimitedPlayer player = players[i];
+
+            deck.setDraftNotes(player.getSerializedDraftNotes());
+        }
+
+        // Assigned noted stuff to deck from LimitedPlayer
         final DeckGroup finishedDraft = new DeckGroup(s);
-        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
+        final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
+
+        Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
+        humanDeck.setDraftNotes(player.getSerializedDraftNotes());
+        finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);
+
+        saved = true;
+
         CSubmenuDraft.SINGLETON_INSTANCE.update();
         FScreen.DRAFTING_PROCESS.close();
 

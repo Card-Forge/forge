@@ -387,6 +387,16 @@ public class BoosterDraft implements IBoosterDraft {
         return decks;
     }
 
+    @Override
+    public LimitedPlayer[] getOpposingPlayers() {
+        return this.players.toArray(new LimitedPlayer[7]);
+    }
+
+    @Override
+    public LimitedPlayer getHumanPlayer() {
+        return this.localPlayer;
+    }
+
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
@@ -404,7 +414,10 @@ public class BoosterDraft implements IBoosterDraft {
                 continue;
 
             if (!passingPack.isEmpty()) {
-                // TODO Canal Dredger for passing a pack with a single card in it
+                if (passingPack.size() == 1) {
+                    // TODO Canal Dredger for passing a pack with a single card in it
+
+                }
 
                 int passTo = (i + adjust + N_PLAYERS) % N_PLAYERS;
                 this.players.get(passTo).receiveOpenedPack(passingPack);

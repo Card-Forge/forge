@@ -49,6 +49,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
+    private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
     private String lastCardArtPreferenceUsed = "";
@@ -94,7 +95,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         for (final Entry<DeckSection, CardPool> sections : other.parts.entrySet()) {
             parts.put(sections.getKey(), new CardPool(sections.getValue()));
         }
+        aiHints.addAll(other.getAiHints());
         tags.addAll(other.getTags());
+        draftNotes.putAll(other.getDraftNotes());
     }
 
     @Override
@@ -209,6 +212,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             cp.addAll(kv.getValue());
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
+        result.setDraftNotes(draftNotes);
     }
 
     /*
@@ -559,6 +563,24 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return "";
+    }
+
+    public void setDraftNotes(Map<String, String> draftNotes) {
+        if (draftNotes == null) {
+            return;
+        }
+
+        for(String key : draftNotes.keySet()) {
+            String notes = draftNotes.get(key);
+            if (notes == null || notes.isEmpty()) {
+                continue;
+            }
+            this.draftNotes.put(key, notes.trim());
+        }
+    }
+
+    public Map<String, String> getDraftNotes() {
+        return draftNotes;
     }
 
     public UnplayableAICards getUnplayableAICards() {
