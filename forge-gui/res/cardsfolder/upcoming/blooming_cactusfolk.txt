@@ -1,0 +1,9 @@
+Name:Blooming Cactusfolk
+ManaCost:3 G G
+Types:Creature Plant Druid
+PT:5/5
+K:Trample
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ At the beginning of your end step, nonland cards in your hand perpetually gain "This spell {1} costs less to cast."
+SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Card.nonLand+YouOwn | Zone$ Hand | staticAbilities$ ReduceCost | Duration$ Perpetual
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+Oracle:Trample\nAt the beginning of your end step, nonland cards in your hand perpetually gain "This spell {1} costs less to cast."

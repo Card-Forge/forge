@@ -1,0 +1,23 @@
+Name:Albiorix, Goose Tyrant
+ManaCost:1 G U
+Types:Legendary Creature Bird
+PT:3/3
+K:Flying
+K:Trample
+K:Ward:1
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.token | TriggerZones$ Battlefield,Exile | Execute$ TrigPump | Execute$ TrigPump | TriggerDescription$ Whenever you sacrifice a token, NICKNAME perpetually gets +1/+1. This ability also triggers if NICKNAME is in exile.
+SVar:TrigPump:DB$ Pump | PumpZone$ Battlefield,Exile | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
+AlternateMode:Adventure
+DeckHas:Ability$Discard|Token & Type$Food 
+DeckHints:Ability$Token & Type$Treasure|Food|Clue
+Oracle:Flying, Trample, Ward {1}\nWhenever you sacrifice a token, Albiorix perpetually gets +1/+1. This ability also triggers if Albiorix is in exile.
+
+ALTERNATE
+
+Name:Wild Goose Chase
+ManaCost:U G
+Types:Instant Adventure
+A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ TrigDiscard | SpellDescription$ Draw two cards, then discard two cards
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+Oracle:Draw two cards, then discard two cards. Create a Food token.
