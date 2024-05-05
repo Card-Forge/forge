@@ -1318,7 +1318,7 @@ public class GameAction {
                 final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
 
                 if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
+                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7, null);
                     checkAgainCard = true;
                 }
 
@@ -1330,7 +1330,7 @@ public class GameAction {
                         c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), counterTable);
                         counterTable.replaceCounterEffect(game, null, false);
                     } else if (loyal > beeble) {
-                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
+                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble, null);
                     }
                     // Only check again if counters actually changed
                     if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
@@ -1633,8 +1633,8 @@ public class GameAction {
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
             // smaller of the number of +1/+1 and -1/-1 counters on it.
             // This should fire remove counters trigger
-            c.subtractCounter(p1p1, remove);
-            c.subtractCounter(m1m1, remove);
+            c.subtractCounter(p1p1, remove, null);
+            c.subtractCounter(m1m1, remove, null);
             checkAgain = true;
         }
         return checkAgain;

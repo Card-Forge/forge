@@ -243,8 +243,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
-            }
-            if (sa.hasParam("ForgetOnCast")) {
+            } else if (sa.hasParam("ForgetOnCast")) {
                 addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
             }
 

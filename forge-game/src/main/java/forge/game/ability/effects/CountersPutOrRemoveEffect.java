@@ -133,7 +133,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
         if (putCounter) {
             tgtCard.addCounter(chosenType, counterAmount, pl, table);
         } else {
-            tgtCard.subtractCounter(chosenType, counterAmount);
+            tgtCard.subtractCounter(chosenType, counterAmount, pl);
             if (sa.hasParam("RememberRemovedCards")) {
                 sa.getHostCard().addRemembered(tgtCard);
             }
