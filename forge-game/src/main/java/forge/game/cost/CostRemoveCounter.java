@@ -179,7 +179,7 @@ public class CostRemoveCounter extends CostPart {
         // for this cost, the list should be only one
         for (Card c : decision.cards) {
             removed += toRemove;
-            c.subtractCounter(counter, toRemove);
+            c.subtractCounter(counter, toRemove, ai);
             c.getGame().updateLastStateForCard(c);
         }
 

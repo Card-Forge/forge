@@ -37,7 +37,6 @@ import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputPayMana;
 import forge.gamemodes.match.input.InputPayManaOfCostPayment;
@@ -546,22 +545,6 @@ public class HumanPlay {
                 ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             } else {
                 ability.resetSacrificedAsEmerge();
-            }
-        }
-        if (ability.getTappedForConvoke() != null) {
-            game.getTriggerHandler().suppressMode(TriggerType.Taps);
-            CardCollection tapped = new CardCollection();
-            for (final Card c : ability.getTappedForConvoke()) {
-                c.setTapped(false);
-                if (!manaInputCancelled) {
-                    if (c.tap(true, ability, ability.getActivatingPlayer())) tapped.add(c);
-                }
-            }
-            game.getTriggerHandler().clearSuppression(TriggerType.Taps);
-            if (!tapped.isEmpty()) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Cards, tapped);
-                game.getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
             }
         }
         if (!table.isEmpty() && !manaInputCancelled) {

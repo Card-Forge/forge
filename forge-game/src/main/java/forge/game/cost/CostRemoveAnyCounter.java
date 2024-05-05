@@ -122,7 +122,7 @@ public class CostRemoveAnyCounter extends CostPart {
         for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.absent()).entrySet()) {
             for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {
                 removed += v.getValue();
-                e.getKey().subtractCounter(v.getKey(), v.getValue());
+                e.getKey().subtractCounter(v.getKey(), v.getValue(), ai);
             }
             if (e.getKey() instanceof Card) {
                 e.getKey().getGame().updateLastStateForCard((Card) e.getKey());

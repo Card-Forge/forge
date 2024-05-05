@@ -884,6 +884,10 @@ public final class GameActionUtil {
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
             }
+
+            for (Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
+            }
         }
 
         if (ability.getApi() == ApiType.Charm) {

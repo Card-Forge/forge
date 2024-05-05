@@ -1675,11 +1675,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     @Override
-    public final void subtractCounter(final CounterType counterName, final int n) {
-        subtractCounter(counterName, n, false);
+    public final void subtractCounter(final CounterType counterName, final int n, final Player remover) {
+        subtractCounter(counterName, n, remover, false);
     }
 
-    public final void subtractCounter(final CounterType counterName, final int n, final boolean isDamage) {
+    public final void subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - n, 0);
 
@@ -1731,6 +1731,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         int curCounters = oldValue;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.CounterType, counterName);
+        runParams.put(AbilityKey.Player, remover);
         for (int i = 0; i < delta && curCounters != 0; i++) {
             runParams.put(AbilityKey.NewCounterAmount, --curCounters);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, AbilityKey.newMap(runParams), false);
@@ -5449,7 +5450,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
     public final boolean isSnow()       { return getType().isSnow(); }
 
-    public final boolean isTribal()     { return getType().isTribal(); }
+    public final boolean isKindred()     { return getType().isKindred(); }
     public final boolean isSorcery()    { return getType().isSorcery(); }
     public final boolean isInstant()    { return getType().isInstant(); }
 
@@ -6222,10 +6223,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
-            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, true);
+            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, null, true);
         }
         if (isBattle()) {
-            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, true);
+            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, null, true);
         }
         if (isCreature()) {
             if (source.isWitherDamage()) { // 120.3d
@@ -7196,6 +7197,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (!isInPlay() || isPhasedOut()) {
+            return false;
+        }
+
+        // can't sacrifice it for mana ability if it is already marked as sacrifice
+        if (source != null && source.isManaAbility() && isUsedToPay()) {
             return false;
         }
 
