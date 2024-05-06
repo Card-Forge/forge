@@ -1,0 +1,13 @@
+Name:Pearl Collector
+ManaCost:2 B
+Types:Creature Human Warlock
+PT:3/3
+K:Deathtouch
+K:Lifelink
+T:Mode$ Phase | Phase$ Main2 | CheckSVar$ YouLifeGained | SVarCompare$ GE4 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | GameActivationLimit$ 1 | TriggerDescription$ At the beginning of your postcombat main phase, if you gained 4 or more life this turn, conjure a card named Mox Pearl into your hand. This ability triggers only once.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mox Pearl | Zone$ Hand
+A:AB$ Pump | Cost$ 2 W | KW$ Lifelink | ValidTgts$ Creature.Other | TargetPrompt$ Select up to one other target creature | Duration$ Perpetual | SpellDescription$ Another target creature perpetually gains lifelink.
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Type$Artifact & Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:At the beginning of your postcombat main phase, if four or more cards are in your graveyard, conjure a card named Mox Jet into your hand. This ability triggers only once.\n{X}{B}: Put target creature card with mana value X from your graveyard onto the battlefield with a finality counter on it. Activate only as a sorcery.
