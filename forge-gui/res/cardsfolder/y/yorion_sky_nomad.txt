@@ -1,5 +1,5 @@
 Name:Yorion, Sky Nomad
-ManaCost:3 W/U W/U
+ManaCost:3 WU WU
 Types:Legendary Creature Bird Serpent
 PT:4/5
 K:Companion:Special:DeckSizePlus20:Your starting deck contains at least twenty cards more than the minimum deck size.

@@ -1,5 +1,5 @@
 Name:Shadewing Laureate
-ManaCost:W W/B B
+ManaCost:W WB B
 Types:Creature Human Warlock
 PT:2/2
 K:Flying

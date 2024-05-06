@@ -1,5 +1,5 @@
 Name:Jubilant Skybonder
-ManaCost:1 W/U W/U
+ManaCost:1 WU WU
 Types:Creature Human Wizard
 PT:2/2
 K:Flying
