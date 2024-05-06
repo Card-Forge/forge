@@ -6,7 +6,7 @@ K:Defender
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game and your opponents can't win the game.
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Hydra.Other+YouCtrl
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Other Hydras you control enter the battlefield with two extra +1/+1 counters on them. 
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Other Hydras you control enter the battlefield with two extra +1/+1 counters on them.
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend
 SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.withoutSuspend+YouOwn | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent

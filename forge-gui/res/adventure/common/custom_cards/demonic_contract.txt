@@ -1,6 +1,6 @@
 Name:Demonic Contract
 ManaCost:no cost
-Colors:Black
+Colors:black
 Types:Artifact
 A:AB$ DigUntil | Cost$ PayShards<3> PayLife<X> | XMin$ 1 | ActivationZone$ Command | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Library | RevealedDestination$ Library | FoundLibraryPosition$ -1 | RevealedLibraryPosition$ -1 | RememberFound$ True | Shuffle$ True | SubAbility$ DBScry | SpellDescription$ Reveal cards from the top of your library until you reveal a nonland card. Note that card name. Then shuffle the revealed cards back into your library.
 SVar:DBScry:DB$ Scry | ScryNum$ X
