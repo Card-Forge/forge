@@ -14,7 +14,6 @@ import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -41,6 +40,7 @@ public class CharmAi extends SpellAbilityAi {
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
+        sa.setSubAbility(null);
         List<AbilitySub> chosenList;
         
         if (!ai.equals(sa.getActivatingPlayer())) {
@@ -51,7 +51,7 @@ public class CharmAi extends SpellAbilityAi {
             chosenList = chooseTriskaidekaphobia(choices, ai);
         } else {
             // only randomize if not all possible together
-            if (num < choices.size() || source.hasKeyword(Keyword.ESCALATE)) {
+            if (num < choices.size()) {
                 Collections.shuffle(choices);
             }
 
@@ -80,7 +80,13 @@ public class CharmAi extends SpellAbilityAi {
                 return false;
             }
         }
+
+        // store the choices so they'll get reused
         sa.setChosenList(chosenList);
+        if (sa.isSpell()) {
+            // prebuild chain to improve cost calculation accuracy
+            CharmEffect.chainAbilities(sa, chosenList);
+        }
 
         // prevent run-away activations - first time will always return true
         return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
