@@ -103,6 +103,7 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 import forge.Singletons;
+import forge.card.mana.ManaCostShard;
 import forge.gui.FThreads;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ILocalRepaint;
@@ -1418,72 +1419,18 @@ public class FSkin {
             }
         }
 
-        addEncodingSymbol("W", FSkinProp.IMG_MANA_W);
-        addEncodingSymbol("U", FSkinProp.IMG_MANA_U);
-        addEncodingSymbol("B", FSkinProp.IMG_MANA_B);
-        addEncodingSymbol("R", FSkinProp.IMG_MANA_R);
-        addEncodingSymbol("G", FSkinProp.IMG_MANA_G);
-        addEncodingSymbol("C", FSkinProp.IMG_MANA_COLORLESS);
-        addEncodingSymbol("W/U", FSkinProp.IMG_MANA_HYBRID_WU);
-        addEncodingSymbol("U/B", FSkinProp.IMG_MANA_HYBRID_UB);
-        addEncodingSymbol("B/R", FSkinProp.IMG_MANA_HYBRID_BR);
-        addEncodingSymbol("R/G", FSkinProp.IMG_MANA_HYBRID_RG);
-        addEncodingSymbol("G/W", FSkinProp.IMG_MANA_HYBRID_GW);
-        addEncodingSymbol("W/B", FSkinProp.IMG_MANA_HYBRID_WB);
-        addEncodingSymbol("U/R", FSkinProp.IMG_MANA_HYBRID_UR);
-        addEncodingSymbol("B/G", FSkinProp.IMG_MANA_HYBRID_BG);
-        addEncodingSymbol("R/W", FSkinProp.IMG_MANA_HYBRID_RW);
-        addEncodingSymbol("G/U", FSkinProp.IMG_MANA_HYBRID_GU);
-        addEncodingSymbol("2/W", FSkinProp.IMG_MANA_2W);
-        addEncodingSymbol("2/U", FSkinProp.IMG_MANA_2U);
-        addEncodingSymbol("2/B", FSkinProp.IMG_MANA_2B);
-        addEncodingSymbol("2/R", FSkinProp.IMG_MANA_2R);
-        addEncodingSymbol("2/G", FSkinProp.IMG_MANA_2G);
-        addEncodingSymbol("C/W", FSkinProp.IMG_MANA_HYBRID_CW);
-        addEncodingSymbol("C/U", FSkinProp.IMG_MANA_HYBRID_CU);
-        addEncodingSymbol("C/B", FSkinProp.IMG_MANA_HYBRID_CB);
-        addEncodingSymbol("C/R", FSkinProp.IMG_MANA_HYBRID_CR);
-        addEncodingSymbol("C/G", FSkinProp.IMG_MANA_HYBRID_CG);
-        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);
-        addEncodingSymbol("P/W", FSkinProp.IMG_MANA_PHRYX_W);
-        addEncodingSymbol("P/U", FSkinProp.IMG_MANA_PHRYX_U);
-        addEncodingSymbol("P/B", FSkinProp.IMG_MANA_PHRYX_B);
-        addEncodingSymbol("P/R", FSkinProp.IMG_MANA_PHRYX_R);
-        addEncodingSymbol("P/G", FSkinProp.IMG_MANA_PHRYX_G);
-        addEncodingSymbol("W/P", FSkinProp.IMG_MANA_PHRYX_W);
-        addEncodingSymbol("U/P", FSkinProp.IMG_MANA_PHRYX_U);
-        addEncodingSymbol("B/P", FSkinProp.IMG_MANA_PHRYX_B);
-        addEncodingSymbol("R/P", FSkinProp.IMG_MANA_PHRYX_R);
-        addEncodingSymbol("G/P", FSkinProp.IMG_MANA_PHRYX_G);
-        addEncodingSymbol("P/B/G", FSkinProp.IMG_MANA_PHRYX_BG);
-        addEncodingSymbol("P/B/R", FSkinProp.IMG_MANA_PHRYX_BR);
-        addEncodingSymbol("P/G/U", FSkinProp.IMG_MANA_PHRYX_GU);
-        addEncodingSymbol("P/G/W", FSkinProp.IMG_MANA_PHRYX_GW);
-        addEncodingSymbol("P/R/G", FSkinProp.IMG_MANA_PHRYX_RG);
-        addEncodingSymbol("P/R/W", FSkinProp.IMG_MANA_PHRYX_RW);
-        addEncodingSymbol("P/U/B", FSkinProp.IMG_MANA_PHRYX_UB);
-        addEncodingSymbol("P/U/R", FSkinProp.IMG_MANA_PHRYX_UR);
-        addEncodingSymbol("P/W/B", FSkinProp.IMG_MANA_PHRYX_WB);
-        addEncodingSymbol("P/W/U", FSkinProp.IMG_MANA_PHRYX_WU);
-        addEncodingSymbol("B/G/P", FSkinProp.IMG_MANA_PHRYX_BG);
-        addEncodingSymbol("B/R/P", FSkinProp.IMG_MANA_PHRYX_BR);
-        addEncodingSymbol("G/U/P", FSkinProp.IMG_MANA_PHRYX_GU);
-        addEncodingSymbol("G/W/P", FSkinProp.IMG_MANA_PHRYX_GW);
-        addEncodingSymbol("R/G/P", FSkinProp.IMG_MANA_PHRYX_RG);
-        addEncodingSymbol("R/W/P", FSkinProp.IMG_MANA_PHRYX_RW);
-        addEncodingSymbol("U/B/P", FSkinProp.IMG_MANA_PHRYX_UB);
-        addEncodingSymbol("U/R/P", FSkinProp.IMG_MANA_PHRYX_UR);
-        addEncodingSymbol("W/B/P", FSkinProp.IMG_MANA_PHRYX_WB);
-        addEncodingSymbol("W/U/P", FSkinProp.IMG_MANA_PHRYX_WU);
+        for (Map.Entry<ManaCostShard, FSkinProp> e : FSkinProp.SHARD_IMG.entrySet()) {
+            addEncodingSymbol(e.getKey().getImageKey(), e.getValue());
+        }
+
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
-        }
-        addEncodingSymbol("X", FSkinProp.IMG_MANA_X);
+
+        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);}
         addEncodingSymbol("Y", FSkinProp.IMG_MANA_Y);
         addEncodingSymbol("Z", FSkinProp.IMG_MANA_Z);
         addEncodingSymbol("CHAOS", FSkinProp.IMG_CHAOS);
         addEncodingSymbol("Q", FSkinProp.IMG_UNTAP);
-        addEncodingSymbol("S", FSkinProp.IMG_MANA_SNOW);
         addEncodingSymbol("T", FSkinProp.IMG_TAP);
         addEncodingSymbol("E", FSkinProp.IMG_ENERGY);
         addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
