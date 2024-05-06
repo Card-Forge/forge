@@ -109,6 +109,11 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("2R", FSkin.getImage(FSkinProp.IMG_MANA_2R));
         MANA_IMAGES.put("2G", FSkin.getImage(FSkinProp.IMG_MANA_2G));
         MANA_IMAGES.put("2B", FSkin.getImage(FSkinProp.IMG_MANA_2B));
+        MANA_IMAGES.put("CW", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_CW));
+        MANA_IMAGES.put("CU", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_CU));
+        MANA_IMAGES.put("CR", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_CR));
+        MANA_IMAGES.put("CG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_CG));
+        MANA_IMAGES.put("CB", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_CB));
 
         MANA_IMAGES.put("S", FSkin.getImage(FSkinProp.IMG_MANA_SNOW));
         MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP));

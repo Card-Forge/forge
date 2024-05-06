@@ -1098,7 +1098,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
-    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimDefaultSleeve,
+    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimColorlessHybrid, bimDefaultSleeve,
             bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int defaultFontSize = 12;
@@ -1239,8 +1239,9 @@ public class FSkin {
         final File f15 = new File(defaultDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f16 = new File(preferredDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f17 = new File(defaultDir + ForgeConstants.SPRITE_WATERMARK_FILE);
-        final File f18 = new File(defaultDir +ForgeConstants.SPRITE_PHYREXIAN_FILE);
-        final File f19 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
+        final File f18 = new File(defaultDir + ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        final File f19 = new File(defaultDir + ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
+        final File f20 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
 
         try {
             int p = 0;
@@ -1251,6 +1252,8 @@ public class FSkin {
             bimManaIcons = ImageIO.read(f11);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPhyrexian = ImageIO.read(f18);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimColorlessHybrid = ImageIO.read(f19);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1266,7 +1269,7 @@ public class FSkin {
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultDeckbox = ImageIO.read(f14);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
-            bimDefaultDraftRank = ImageIO.read(f19);
+            bimDefaultDraftRank = ImageIO.read(f20);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1336,6 +1339,9 @@ public class FSkin {
                 case PHYREXIAN:
                     setImage(prop, bimPhyrexian);
                     break;
+                case COLORLESS_HYBRID:
+                    setImage(prop, bimColorlessHybrid);
+                    break;
                 case DECKBOX:
                     setImage(prop, bimDefaultDeckbox);
                     break;
@@ -1378,6 +1384,7 @@ public class FSkin {
         bimTrophies.flush();
         bimAbilities.flush();
         bimPhyrexian.flush();
+        bimColorlessHybrid.flush();
         bimManaIcons.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
@@ -1398,6 +1405,7 @@ public class FSkin {
         bimTrophies = null;
         bimAbilities = null;
         bimPhyrexian = null;
+        bimColorlessHybrid = null;
         bimManaIcons = null;
 
         //establish encoding symbols
@@ -1431,6 +1439,11 @@ public class FSkin {
         addEncodingSymbol("2/B", FSkinProp.IMG_MANA_2B);
         addEncodingSymbol("2/R", FSkinProp.IMG_MANA_2R);
         addEncodingSymbol("2/G", FSkinProp.IMG_MANA_2G);
+        addEncodingSymbol("C/W", FSkinProp.IMG_MANA_HYBRID_CW);
+        addEncodingSymbol("C/U", FSkinProp.IMG_MANA_HYBRID_CU);
+        addEncodingSymbol("C/B", FSkinProp.IMG_MANA_HYBRID_CB);
+        addEncodingSymbol("C/R", FSkinProp.IMG_MANA_HYBRID_CR);
+        addEncodingSymbol("C/G", FSkinProp.IMG_MANA_HYBRID_CG);
         addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);
         addEncodingSymbol("P/W", FSkinProp.IMG_MANA_PHRYX_W);
         addEncodingSymbol("P/U", FSkinProp.IMG_MANA_PHRYX_U);

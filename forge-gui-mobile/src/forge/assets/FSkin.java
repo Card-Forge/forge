@@ -239,6 +239,8 @@ public class FSkin {
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
         final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
+        //final FileHandle f7b = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        //final FileHandle f7c = getDefaultSkinFile(ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
@@ -248,7 +250,6 @@ public class FSkin {
         final FileHandle f12b = getDefaultSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
         final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
-        final FileHandle f18 = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
         final FileHandle f19 = getDefaultSkinFile(ForgeConstants.SPRITE_CURSOR_FILE);
         final FileHandle f20 = getSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f21 = getSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);

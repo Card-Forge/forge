@@ -40,6 +40,11 @@ public class TextRenderer {
         Forge.getAssets().symbolLookup().put("2/B", FSkinImage.MANA_2B);
         Forge.getAssets().symbolLookup().put("2/R", FSkinImage.MANA_2R);
         Forge.getAssets().symbolLookup().put("2/G", FSkinImage.MANA_2G);
+        Forge.getAssets().symbolLookup().put("C/W", FSkinImage.MANA_HYBRID_CW);
+        Forge.getAssets().symbolLookup().put("C/U", FSkinImage.MANA_HYBRID_CU);
+        Forge.getAssets().symbolLookup().put("C/B", FSkinImage.MANA_HYBRID_CB);
+        Forge.getAssets().symbolLookup().put("C/R", FSkinImage.MANA_HYBRID_CR);
+        Forge.getAssets().symbolLookup().put("C/G", FSkinImage.MANA_HYBRID_CG);
         Forge.getAssets().symbolLookup().put("P", FSkinImage.MANA_PHRYX);
         Forge.getAssets().symbolLookup().put("P/W", FSkinImage.MANA_PHRYX_W);
         Forge.getAssets().symbolLookup().put("P/U", FSkinImage.MANA_PHRYX_U);

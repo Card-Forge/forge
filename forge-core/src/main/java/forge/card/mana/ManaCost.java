@@ -319,9 +319,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
         return i;
     }
     
-    public boolean hasHybrid() {
+    public boolean hasMultiColor() {
         for (ManaCostShard shard : shards) {
-            if (shard.isHybrid()) {
+            if (shard.isMultiColor()) {
                 return true;
             }
         }

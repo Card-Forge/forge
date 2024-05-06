@@ -90,6 +90,11 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("2R", FSkinImage.MANA_2R);
         Forge.getAssets().manaImages().put("2G", FSkinImage.MANA_2G);
         Forge.getAssets().manaImages().put("2B", FSkinImage.MANA_2B);
+        Forge.getAssets().manaImages().put("CW", FSkinImage.MANA_HYBRID_CW);
+        Forge.getAssets().manaImages().put("CU", FSkinImage.MANA_HYBRID_CU);
+        Forge.getAssets().manaImages().put("CR", FSkinImage.MANA_HYBRID_CR);
+        Forge.getAssets().manaImages().put("CG", FSkinImage.MANA_HYBRID_CG);
+        Forge.getAssets().manaImages().put("CB", FSkinImage.MANA_HYBRID_CB);
 
         Forge.getAssets().manaImages().put("S", FSkinImage.MANA_SNOW);
         Forge.getAssets().manaImages().put("T", FSkinImage.TAP);
