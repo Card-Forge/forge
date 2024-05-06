@@ -791,7 +791,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.costHasX() || host.hasKeyword(Keyword.STRIVE);
+        boolean xCost = sa.costHasX() || host.hasKeyword(Keyword.STRIVE) || sa.getApi() == ApiType.Charm;
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -820,7 +820,7 @@ public class AiController {
                     if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
                         Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                         if (wardCost.hasManaCost()) {
-                            xCost = wardCost.getTotalMana().getCMC() > 0;
+                            xCost |= wardCost.getTotalMana().getCMC() > 0;
                         }
                         SpellAbilityAi topAI = new SpellAbilityAi() {};
                         if (!topAI.willPayCosts(player, sa, wardCost, host)) {
