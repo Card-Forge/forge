@@ -6079,7 +6079,7 @@
 						"POIReference": ""
 					}
 				],
-				"name": "Giant bugs holding balls eh ? Count me out. (Decline Quest)",
+				"name": "Giant bugs holding balls, eh? Count me out. (Decline Quest)",
 				"text": "Figured you weren't up to the challenge, come back to me when you are.",
 				"options": [
 					{
@@ -8346,7 +8346,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "With the Goblin attacks halted, the people of $(poi_3) shower you with thanks and quite a few coins as well. (+2 Local Reputation, +500 gold)",
+		"text": "With the Goblin attacks halted, the people of $(poi_3) shower you with thanks and quite a few coins as well. (+2 Local Reputation, +500 Gold)",
 		"options": [
 			{
 				"action": [
@@ -8530,7 +8530,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Whether the merfolk got sufficient revenge, or your efforts drove them away, $(poi_3) is no longer under attack. (+2 Local Reputation, +500 gold)",
+		"text": "Whether the merfolk got sufficient revenge, or your efforts drove them away, $(poi_3) is no longer under attack. (+2 Local Reputation, +500 Gold)",
 		"options": [
 			{
 				"action": [
@@ -8714,7 +8714,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Tonight, $(poi_3) can rest more easily, as the dead do not rise before they can be burned. (+2 Local Reputation, +500 gold)",
+		"text": "Tonight, $(poi_3) can rest more easily, as the dead do not rise before they can be burned. (+2 Local Reputation, +500 Gold)",
 		"options": [
 			{
 				"action": [
@@ -8897,7 +8897,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "The elves are still angry about the defilement of their sacred tree, but your efforts in defending $(poi_3) have convinced them to forgo revenge for now. (+2 Local Reputation, +500 gold)",
+		"text": "The elves are still angry about the defilement of their sacred tree, but your efforts in defending $(poi_3) have convinced them to forgo revenge for now. (+2 Local Reputation, +500 Gold)",
 		"options": [
 			{
 				"action": [
@@ -9081,7 +9081,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "The leaders of $(poi_3) have you to thank for their freedom, and likely their heads. (+2 Local Reputation, +500 gold)",
+		"text": "The leaders of $(poi_3) have you to thank for their freedom, and likely their heads. (+2 Local Reputation, +500 Gold)",
 		"options": [
 			{
 				"action": [
@@ -9275,7 +9275,7 @@
 				"options": [
 					{
 						"name": "(Continue)",
-						"text": "The townsfolk offer you a small discount in their shops for having helped them and suggest that there may be more work available. Continue to explore via quests and build up a little bit more of a Reputation in the process. Remember to track this quest to find more sources, or track the quests you take on to find their objectives.",
+						"text": "The townsfolk offer you a small discount in their shops for having helped them and suggest that there may be more work available. Continue to explore via quests and build up a little bit more of a reputation in the process. Remember to track this quest to find more sources, or track the quests you take on to find their objectives.",
 						"options": [
 							{
 								"name": "(Continue"
@@ -9493,7 +9493,7 @@
 						"POIReference": "$(poi_1)"
 					}
 				],
-				"text": "After you explain what you found, and what you didn't find, Sir Donovan hands you a pouch of coins that are most certainly spendable. \"You didn't find anything, but that doesn't mean you put in no effort on my behalf.\" (+500 gold)",
+				"text": "After you explain what you found, and what you didn't find, Sir Donovan hands you a pouch of coins that are most certainly spendable. \"You didn't find anything, but that doesn't mean you put in no effort on my behalf.\" (+500 Gold)",
 				"options": [
 					{
 						"name": "(Continue)",
@@ -9741,7 +9741,7 @@
 													}
 												],
 												"name": "\"So what now?\"",
-												"text": "\"Standard 'Keep working for us' fee.\" He slides you a coin pouch of a familiar size. \"Give me a couple days to track down the boss and bring him up to speed. I'll meet you here again soon.\" (+500 gold)",
+												"text": "\"Standard 'Keep working for us' fee.\" He slides you a coin pouch of a familiar size. \"Give me a couple days to track down the boss and bring him up to speed. I'll meet you here again soon.\" (+500 Gold)",
 												"options": [
 													{
 														"name": "(Continue)"
@@ -10038,7 +10038,7 @@
 											}
 										],
 										"name": "(Continue)",
-										"text": "\"Now, about the golems. I'm curious if they are related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+										"text": "\"Now, about the golems. I'm curious if they are related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 Gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
 										"options": [
 											{
 												"action": [
@@ -10064,7 +10064,7 @@
 									}
 								],
 								"name": "\"About that...\" You hand him the research before telling Donovan about the giant automaton at the top of the library.",
-								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+1000 Gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
 								"options": [
 									{
 										"action": [
@@ -10085,7 +10085,7 @@
 									}
 								],
 								"name": "Hand him the research and tell him about the occupants of the library.",
-								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+500 gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
+								"text": "\"I'm curious if this is related to another incident.\" Donovan pilfers through his satchel for a moment before giving you a map and your latest wages (+500 Gold). \"A historian got quite a surprise recently at a dig site, and I would like to know if the two groups have a common source.\"",
 								"options": [
 									{
 										"action": [
@@ -10248,7 +10248,7 @@
 									}
 								],
 								"name": "\"That's quite an unusual accent you have.\"",
-								"text": "Viv shrugs. \"I says that evah-time one's of you blabs the samewise. And me jingle works samewise.\" To demonstrate her point, she shakes the usual coin pouch before tossing it to you. (+500 gold)\n\"So blabs it. Same metal men?\"",
+								"text": "Viv shrugs. \"I says that evah-time one's of you blabs the samewise. And me jingle works samewise.\" To demonstrate her point, she shakes the usual coin pouch before tossing it to you. (+500 Gold)\n\"So blabs it. Same metal men?\"",
 								"options": [
 									{
 										"name": "\"I don't think so.\"",
