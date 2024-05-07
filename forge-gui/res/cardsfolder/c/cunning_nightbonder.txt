@@ -1,5 +1,5 @@
 Name:Cunning Nightbonder
-ManaCost:U/B U/B
+ManaCost:UB UB
 Types:Creature Human Rogue
 PT:2/2
 K:Flash

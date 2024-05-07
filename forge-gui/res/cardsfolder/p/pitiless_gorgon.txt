@@ -1,5 +1,5 @@
 Name:Pitiless Gorgon
-ManaCost:1 B/G B/G
+ManaCost:1 BG BG
 Types:Creature Gorgon
 PT:2/2
 K:Deathtouch

@@ -1,0 +1,11 @@
+Name:Jet Collector
+ManaCost:1 G
+Types:Creature Merfolk Scout
+PT:2/2
+T:Mode$ Phase | Phase$ Main2 | IsPresent$ Card.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | GameActivationLimit$ 1 | TriggerDescription$ At the beginning of your postcombat main phase, if four or more cards are in your graveyard, conjure a card named Mox Jet into your hand. This ability triggers only once.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mox Jet | Zone$ Hand
+A:AB$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn+cmcEQX | WithCountersType$ FINALITY | SorcerySpeed$ True | SpellDescription$ Put target creature card with mana value X from your graveyard onto the battlefield with a finality counter on it. Activate only as a sorcery.
+SVar:X:Count$xPaid
+DeckHas:Type$Artifact|Graveyard|Counters
+DeckHints:Ability$Mill|Graveyard
+Oracle:At the beginning of your postcombat main phase, if four or more cards are in your graveyard, conjure a card named Mox Jet into your hand. This ability triggers only once.\n{X}{B}: Put target creature card with mana value X from your graveyard onto the battlefield with a finality counter on it. Activate only as a sorcery.

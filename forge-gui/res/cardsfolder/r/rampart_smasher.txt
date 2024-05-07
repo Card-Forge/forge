@@ -1,5 +1,5 @@
 Name:Rampart Smasher
-ManaCost:R/G R/G R/G R/G
+ManaCost:RG RG RG RG
 Types:Creature Giant
 PT:5/5
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Knight,Creature.Wall | Description$ CARDNAME can't be blocked by Knights or Walls.

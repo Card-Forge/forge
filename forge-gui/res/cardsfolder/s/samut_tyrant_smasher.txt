@@ -1,5 +1,5 @@
 Name:Samut, Tyrant Smasher
-ManaCost:2 R/G R/G
+ManaCost:2 RG RG
 Types:Legendary Planeswalker Samut
 Loyalty:5
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.

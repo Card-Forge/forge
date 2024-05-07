@@ -1,5 +1,5 @@
 Name:Thunderous Snapper
-ManaCost:G/U G/U G/U G/U
+ManaCost:GU GU GU GU
 Types:Creature Turtle Hydra
 PT:4/4
 T:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater, draw a card.

@@ -1,6 +1,6 @@
 Name:Jace's Signature Hoodie
 ManaCost:no cost
-Colors:Blue
+Colors:blue
 Types:Enchantment
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, each opponent mills a card.
 SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 1

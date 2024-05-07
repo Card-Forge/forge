@@ -9,5 +9,5 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_sliver | SpellDescr
 SVar:DBChoose:DB$ ChooseCard | AtRandom$ True | Choices$ Creature.nonToken+OppCtrl | SubAbility$ DBCopy | SpellDescription$ Create a token of a random nontoken creature your opponent controls. That creature becomes a Sliver in addition to its other types.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ ChosenCard | AddTypes$ Sliver | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:DBSeek:DB$ Seek | Type$ Card.Sliver | SpellDescription$ Seek a Sliver card. 
+SVar:DBSeek:DB$ Seek | Type$ Card.Sliver | SpellDescription$ Seek a Sliver card.
 Oracle:{4}: Create a 1/1 colorless Sliver creature token. Every player may activate this ability but only once each turn. \n At the gebinning of your upkeep, choose one at random\n• Create a 1/1 colorless Sliver creature token.\nCreate a token of a random nontoken creature your opponent controls. That creature becomes a Sliver in addition to its other types.\n• Seek a Sliver card.

@@ -1,5 +1,5 @@
 Name:Alert Heedbonder
-ManaCost:1 G/W G/W
+ManaCost:1 GW GW
 Types:Creature Human Scout
 PT:2/4
 K:Vigilance

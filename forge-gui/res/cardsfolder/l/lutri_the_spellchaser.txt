@@ -1,5 +1,5 @@
 Name:Lutri, the Spellchaser
-ManaCost:1 U/R U/R
+ManaCost:1 UR UR
 Types:Legendary Creature Elemental Otter
 PT:3/2
 K:Companion:Special:UniqueNames:Each nonland card in your starting deck has a different name.

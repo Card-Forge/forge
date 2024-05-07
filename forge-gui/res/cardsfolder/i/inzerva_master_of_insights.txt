@@ -1,5 +1,5 @@
 Name:Inzerva, Master of Insights
-ManaCost:1 2/U 2/R
+ManaCost:1 2U 2R
 Types:Legendary Planeswalker Inzerva
 Loyalty:4
 A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard

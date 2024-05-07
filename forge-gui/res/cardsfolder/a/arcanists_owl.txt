@@ -1,5 +1,5 @@
 Name:Arcanist's Owl
-ManaCost:W/U W/U W/U W/U
+ManaCost:WU WU WU WU
 Types:Artifact Creature Bird
 PT:3/3
 K:Flying
