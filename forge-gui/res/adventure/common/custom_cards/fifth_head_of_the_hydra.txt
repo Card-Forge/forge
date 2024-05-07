@@ -5,8 +5,8 @@ PT:1/4
 K:Defender
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game and your opponents can't win the game.
 S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
-T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of each opponents end step, that player exiles 4 cards. 
-SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 4 | DestinationZone$ Exile 
+T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of each opponents end step, that player exiles 4 cards.
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 4 | DestinationZone$ Exile
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend
 SVar:GiveSuspend:DB$ PumpAll | ValidCards$ Card.withoutSuspend+YouOwn | KW$ Suspend | PumpZone$ Exile | Duration$ Permanent
