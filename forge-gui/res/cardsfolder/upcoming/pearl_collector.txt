@@ -10,4 +10,4 @@ A:AB$ Pump | Cost$ 2 W | KW$ Lifelink | ValidTgts$ Creature.Other | TargetPrompt
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
 DeckHas:Type$Artifact & Ability$LifeGain
 DeckHints:Ability$LifeGain
-Oracle:At the beginning of your postcombat main phase, if four or more cards are in your graveyard, conjure a card named Mox Jet into your hand. This ability triggers only once.\n{X}{B}: Put target creature card with mana value X from your graveyard onto the battlefield with a finality counter on it. Activate only as a sorcery.
+Oracle:Deathtouch, Lifelink\nAt the beginning of your postcombat main phase, if you gained 4 or more life this turn, conjure a card named Mox Pearl into your hand. This ability triggers only once.\n{2}{W}: Another target creature perpetually gains lifelink.
