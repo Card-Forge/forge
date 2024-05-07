@@ -1,5 +1,5 @@
 Name:Connive
-ManaCost:2 U/B U/B
+ManaCost:2 UB UB
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | SpellDescription$ Gain control of target creature with power 2 or less.
 AlternateMode:Split

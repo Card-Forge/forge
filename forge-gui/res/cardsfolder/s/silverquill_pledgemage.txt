@@ -1,5 +1,5 @@
 Name:Silverquill Pledgemage
-ManaCost:1 W/B W/B
+ManaCost:1 WB WB
 Types:Creature Vampire Cleric
 PT:3/1
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, CARDNAME gains your choice of flying or lifelink until end of turn.

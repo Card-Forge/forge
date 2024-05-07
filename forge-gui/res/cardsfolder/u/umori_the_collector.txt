@@ -1,5 +1,5 @@
 Name:Umori, the Collector
-ManaCost:2 B/G B/G
+ManaCost:2 BG BG
 Types:Legendary Creature Ooze
 PT:4/5
 K:Companion:Special:SharesCardType:Each nonland card in your starting deck shares a card type.

@@ -1,5 +1,5 @@
 Name:Loch Dragon
-ManaCost:U/R U/R U/R U/R
+ManaCost:UR UR UR UR
 Types:Creature Dragon
 PT:3/2
 K:Flying
