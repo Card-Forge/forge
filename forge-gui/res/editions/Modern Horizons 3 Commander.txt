@@ -6,6 +6,8 @@ Type=Commander
 ScryfallCode=M3C
 
 [cards]
+16 M Ulalek, Fused Atrocity @Cosmin Podar
+37 R Twins of Discord @Lorenzo Lanfranconi
 48 R March from Velis Vel @Carlos Palma Cruchaga
 52 R Final Act @Nils Hamm
 61 R Siege-Gang Lieutenant @Warren Mahy
