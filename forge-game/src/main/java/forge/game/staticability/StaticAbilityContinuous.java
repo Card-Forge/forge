@@ -753,10 +753,8 @@ public final class StaticAbilityContinuous {
                     Iterables.removeIf(newKeywords, new Predicate<String>() {
                         @Override
                         public boolean apply(String input) {
-                            if (input.contains("CardManaCost")) {
-                                if (affectedCard.getManaCost().isNoCost()) {
-                                    return true;
-                                }
+                            if (input.contains("CardManaCost") && affectedCard.getManaCost().isNoCost()) {
+                                return true;
                             }
                             // replace one Keyword with list of keywords
                             if (input.startsWith("Protection") && input.contains("CardColors")) {
@@ -897,7 +895,7 @@ public final class StaticAbilityContinuous {
                     }
                 }
 
-                if (!addedAbilities.isEmpty() || addReplacements != null || addTriggers != null || addStatics != null
+                if (!addedAbilities.isEmpty() || !addedTrigger.isEmpty() || addReplacements != null || addStatics != null
                     || removeAllAbilities) {
                     affectedCard.addChangedCardTraits(
                         addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana,
