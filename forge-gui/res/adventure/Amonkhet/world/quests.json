@@ -3,7 +3,7 @@
 	"id": 1,
 	"isTemplate": true,
 	"name": "Go Forth and Slay",
-	"description": "Defeat two $(enemy_1)s and collect a reward",
+	"description": "Defeat two $(enemy_1)s and collect a reward.",
 	"offerDialog": {
 		"text": "\"Hey, you! Yeah, you, the big bad wizard with a surprised look on your face.\" A haggard old man shouts at you from the spot in which he sits, you could have sworn that side of the street was empty just seconds before.",
 		"options": [
@@ -132,7 +132,7 @@
 				"text": "The wasteland biome is usually a good place to look for $(enemy_1)s.",
 				"options": [
 					{
-						"name": "(Continue your quest)"
+						"name": "(Continue Your Quest)"
 					}
 				]
 			},
@@ -226,7 +226,7 @@
 	"id": 2,
 	"isTemplate": true,
 	"name": "Wanderlust",
-	"description": "Make a delivery to a distant location",
+	"description": "Make a delivery to a distant location.",
 	"offerDialog": {
 		"text": "\"Excuse me, but you look like a well traveled individual.\" A frazzled looking mage gets your attention. \"I have a letter of some great importance that MUST be hand delivered. Would you be willing to handle this for me?\"",
 		"options": [
@@ -318,11 +318,11 @@
 										"POIReference": ""
 									}
 								],
-								"name": "\"I guess I should have asked for the reward first.\" (+1 local reputation. Complete Quest)"
+								"name": "\"I guess I should have asked for the reward first.\" (+1 Local Reputation. Complete Quest)"
 							},
 							{
 								"name": "(Break down the door)",
-								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 local reputation)",
+								"text": "Several people in the village have turned their attention to you after the woman's outburst. Perhaps this isn't a good idea after all. (-1 Local Reputation)",
 								"options": [
 									{
 										"name": "You mutter to yourself. \"Not worth a scene I suppose.\" (Complete Quest)"
@@ -369,8 +369,8 @@
 										"POIReference": ""
 									}
 								],
-								"name": "You take the coins and place the letter in the bucket. \"I have to say, I do I find your demeanor unnerving.\" ",
-								"text": "(+2 local reputation)",
+								"name": "You take the coins and place the letter in the bucket. \"I have to say, I do I find your demeanor unnerving.\"",
+								"text": "(+2 Local Reputation)",
 								"options": [
 									{
 										"name": "(Complete Quest)"
@@ -404,7 +404,7 @@
 		{
 			"id": 1,
 			"name": "Travel",
-			"description": "Make the long journey",
+			"description": "Make the long journey.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 80,
@@ -414,10 +414,10 @@
 			],
 			"objective": "Travel",
 			"prologue": {
-				"text": "Nothing like a really long journey to strech the legs, right? You could likely save yourself some time with the right spells, but... is that going to be safe?",
+				"text": "Nothing like a really long journey to stretch the legs, right? You could likely save yourself some time with the right spells, but... is that going to be safe?",
 				"options": [
 					{
-						"name": "(Begin your quest)"
+						"name": "(Begin Your Quest)"
 					}
 				]
 			},
@@ -430,7 +430,7 @@
 	"id": 3,
 	"isTemplate": true,
 	"name": "(Almost) Open for Business",
-	"description": "Assist a new merchant as they open their shop",
+	"description": "Assist a new merchant as they open their shop.",
 	"offerDialog": {
 		"text": "A portly man in the corner of the tavern catches your eye. \"I hear you're looking for work.\"",
 		"options": [
@@ -496,7 +496,7 @@
 				"POIReference": "$(poi_4)"
 			}
 		],
-		"text": "Not every venture is meant to succeed. In this case, two have failed: A business venture and an adventure. (-5 local reputation)",
+		"text": "Not every venture is meant to succeed. In this case, two have failed: A business venture and an adventure. (-5 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -516,16 +516,16 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town",
+			"description": "Leave town.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
 			"prologue": {},
 			"epilogue": {
-				"text": "(As a reminder, you can track this quest from your quest log to get directions to your destination)",
+				"text": "(As a reminder, you can track this quest from your quest log to get directions to your destination.)",
 				"options": [
 					{
-						"name": "(Begin your quest)"
+						"name": "(Begin Your Quest)"
 					}
 				]
 			},
@@ -534,7 +534,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Go to the $(poi_2) to pick up the vendor's merchandise",
+			"description": "Go to the $(poi_2) to pick up the vendor's merchandise.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 50,
@@ -546,7 +546,7 @@
 			"objective": "Travel",
 			"prologue": {},
 			"epilogue": {
-				"text": "Upon arriving at the pickup point, you find a rather modest looking spellbook among the supplies. Presumably, this is the merchandise your employer is planning to sell",
+				"text": "Upon arriving at the pickup point, you find a rather modest looking spellbook among the supplies. Presumably, this is the merchandise your employer is planning to sell.",
 				"options": [
 					{
 						"name": "You pick up the goods and begin your journey back. (Leave)"
@@ -558,14 +558,14 @@
 		{
 			"id": 3,
 			"name": "Leave",
-			"description": "Leave $(poi_2) and take the merchant's supplies back to him",
+			"description": "Leave $(poi_2) and take the merchant's supplies back to him.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 50,
 			"count2": 20,
 			"prologue": {},
 			"epilogue": {
-				"text": "Just as you leave town, the spellbook slides out of a rip you hadn't noticed in the sack of goods. It opens as it lands on the ground.\t ",
+				"text": "Just as you leave town, the spellbook slides out of a rip you hadn't noticed in the sack of goods. It opens as it lands on the ground.\t",
 				"options": [
 					{
 						"name": "You decide to investigate the spellbook.",
@@ -585,7 +585,7 @@
 										]
 									}
 								],
-								"name": "Quickly and discretely help yourself to a spell before continuing",
+								"name": "Quickly and discretely help yourself to a spell before continuing.",
 								"text": "You receive a spell of dubious quality.",
 								"options": [
 									{
@@ -594,14 +594,14 @@
 								]
 							},
 							{
-								"name": "Move the items to another bag and carry on"
+								"name": "Move the items to another bag and carry on."
 							},
 							{
 								"name": "Search for something more useful",
 								"text": "Toward the back of the collection, you find some things that are at least a little more uncommon. And you also notice a young boy watching you from beneath a tree near the road.",
 								"options": [
 									{
-										"name": "Move the items to another bag and carry on (Continue quest)"
+										"name": "Move the items to another bag and carry on. (Continue Quest)"
 									},
 									{
 										"action": [
@@ -644,10 +644,10 @@
 											}
 										],
 										"name": "\"It's just a kid. Whatever.\" You take one of the cards and leave.",
-										"text": "(-2 local reputation)",
+										"text": "(-2 Local Reputation)",
 										"options": [
 											{
-												"name": "(Continue your quest)"
+												"name": "(Continue Your Quest)"
 											}
 										]
 									}
@@ -755,7 +755,7 @@
 					}
 				],
 				"name": "\"I have better things to do right now.\" (Decline Quest)",
-				"text": "The naga says nothing, but looks disappointed. (-1 town reputation)",
+				"text": "The naga says nothing, but looks disappointed. (-1 Town Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -764,7 +764,7 @@
 			},
 			{
 				"name": "\"Is there a bounty posted?\"",
-				"text": "\"Officially, no.\"  The naga thinks for a moment. \"But unofficially, I can offer you a small selection of spells and mana shards.\"",
+				"text": "\"Officially, no.\" The naga thinks for a moment. \"But unofficially, I can offer you a small selection of spells and mana shards.\"",
 				"options": [
 					{
 						"action": [
@@ -804,7 +804,7 @@
 							}
 						],
 						"name": "\"For a $(enemy_2)? No thank you.\" (Decline Quest)",
-						"text": "The naga says nothing, but looks disappointed. (-2 town reputation)",
+						"text": "The naga says nothing, but looks disappointed. (-2 Town Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -817,7 +817,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 local reputation)",
+		"text": "Consciously or unconsciously, you brush your shoulders off as you walk back in to town. The locals appear delighted that you have taken care of their problem. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -871,7 +871,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "You gave it your best effort, but today was not a successful hunt by any means. The $(enemy_2) will continue to be a problem for the area. (-2 town reputation)",
+		"text": "You gave it your best effort, but today was not a successful hunt by any means. The $(enemy_2) will continue to be a problem for the area. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -908,7 +908,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to begin the hunt",
+			"description": "Leave town to begin the hunt.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -935,7 +935,7 @@
 		{
 			"id": 3,
 			"name": "Travel",
-			"description": "Head back to town to collect the $(enemy_2) bounty",
+			"description": "Head back to town to collect the $(enemy_2) bounty.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -998,7 +998,7 @@
 					}
 				],
 				"name": "\"That's rather ominous\" (Decline Quest)",
-				"text": "The silence that follows is much more ominous, but the figure eventually turns away and leaves. (-1 town reputation)",
+				"text": "The silence that follows is much more ominous, but the figure eventually turns away and leaves. (-1 Town Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -1007,7 +1007,7 @@
 			},
 			{
 				"name": "\"Urgency is expensive.\"",
-				"text": "\"So is not being the next scheduled burial.\" As you're still processesing that statement, the figure continues. \"Ten mana shards. And you can keep the bones.\"",
+				"text": "\"So is not being the next scheduled burial.\" As you're still processing that statement, the figure continues. \"Ten mana shards. And you can keep the bones.\"",
 				"options": [
 					{
 						"action": [
@@ -1047,7 +1047,7 @@
 							}
 						],
 						"name": "\"For a $(enemy_2)? No thank you.\" (Decline Quest)",
-						"text": "The air grows cold for a moment as they turn and walk away. (-2 town reputation)",
+						"text": "The air grows cold for a moment as they turn and walk away. (-2 Town Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1060,7 +1060,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "No sooner than you walk through the gates, a pair of ghouls scamper over and take the corpse from you. They disappear into a nearby building. Mere moments later, one returns with a wooden chest while the other carries away a matching one. (+3 local reputation)",
+		"text": "No sooner than you walk through the gates, a pair of ghouls scamper over and take the corpse from you. They disappear into a nearby building. Mere moments later, one returns with a wooden chest while the other carries away a matching one. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1124,7 +1124,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "The $(enemy_2) escapes, and your opportunity is missed. Hopefully that doesn't result in your parts being harvested next. (-2 town reputation)",
+		"text": "The $(enemy_2) escapes, and your opportunity is missed. Hopefully that doesn't result in your parts being harvested next. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1161,7 +1161,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to locate your victim",
+			"description": "Leave town to locate your victim.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -1244,7 +1244,7 @@
 						]
 					},
 					{
-						"name": "You approach the suspect. ",
+						"name": "You approach the suspect.",
 						"text": "Hearing your footsteps, the $(enemy_2) takes off at a full run.",
 						"options": [
 							{
@@ -1323,7 +1323,7 @@
 									}
 								],
 								"name": "Investigate the dropped bag",
-								"text": "They get away, but you find some trinkets and gold inside the bag, all very likely stolen. (-2 reputation)",
+								"text": "They get away, but you find some trinkets and gold inside the bag, all very likely stolen. (-2 Reputation)",
 								"options": [
 									{
 										"name": "(Continue, Decline Quest)"
@@ -1374,7 +1374,7 @@
 				"POIReference": ""
 			}
 		],
-		"text": "You seek out the town guard barracks, ready to claim the reward for $(enemy_2). The militia captain nods as you explain what happened, then hands over a meager reward. (+3 local reputation)",
+		"text": "You seek out the town guard barracks, ready to claim the reward for $(enemy_2). The militia captain nods as you explain what happened, then hands over a meager reward. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1406,7 +1406,7 @@
 				"options": [
 					{
 						"name": "Turn over the stolen loot. (Complete Quest)",
-						"text": " (+1 Reputation) You receive a second nod, more respectful than the previous acknowledgement. \"Thank you, citizen.\"",
+						"text": "You receive a second nod, more respectful than the previous acknowledgement. \"Thank you, citizen.\" (+1 Reputation)",
 						"options": [
 							{
 								"action": [
@@ -1525,7 +1525,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "The $(enemy_2) has escaped, and will likely be trouble again in the future. (-2 town reputation)",
+		"text": "The $(enemy_2) has escaped, and will likely be trouble again in the future. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1562,7 +1562,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Begin the chase",
+			"description": "Begin the chase.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -1590,7 +1590,7 @@
 		{
 			"id": 3,
 			"name": "Travel",
-			"description": "Head back to town to collect the $(enemy_2) bounty",
+			"description": "Head back to town to collect the $(enemy_2) bounty.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -1657,7 +1657,7 @@
 							}
 						],
 						"name": "\"I don't like sand.\" (Decline Quest)",
-						"text": "The naga's tail whips back and forth. \"The gods will remember this.\" (-2 reputation)",
+						"text": "The naga's tail whips back and forth. \"The gods will remember this.\" (-2 Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1685,7 +1685,7 @@
 					}
 				],
 				"name": "You walk by without slowing. (Decline Quest)",
-				"text": "The naga's tail twitches as you walk by, but they let you go. (-1 town reputation)",
+				"text": "The naga's tail twitches as you walk by, but they let you go. (-1 Town Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -1696,7 +1696,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "The naga holds still for a moment, regarding you with a long evaluating look. \"Vizier Imhotep thanks you, and wishes your eggs to hatch well.\" (+3 local reputation)",
+		"text": "The naga holds still for a moment, regarding you with a long evaluating look. \"Vizier Imhotep thanks you, and wishes your eggs to hatch well.\" (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1740,7 +1740,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "The $(enemy_2) will not be receiving vengeance today. (-2 town reputation)",
+		"text": "The $(enemy_2) will not be receiving vengeance today. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -1777,7 +1777,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to begin the hunt",
+			"description": "Leave town to begin the hunt.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -1804,7 +1804,7 @@
 		{
 			"id": 3,
 			"name": "Travel",
-			"description": "Head back to town to collect the $(enemy_2) bounty",
+			"description": "Head back to town to collect the $(enemy_2) bounty.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -1825,7 +1825,7 @@
 	"id": 8,
 	"isTemplate": true,
 	"name": "Remote Instruction",
-	"description": "Find the $(enemy_2) before it escapes and put on a show",
+	"description": "Find the $(enemy_2) before it escapes and put on a show.",
 	"offerDialog": {
 		"text": "A robed wizard leads a more mundane dressed individual over to you. \"You there, you are a battle mage, yes?\"",
 		"options": [
@@ -1839,7 +1839,7 @@
 						"options": [
 							{
 								"name": "You pause for a moment, considering your words carefully. \"I'm not so sure I'm comfortable with that.\" (Decline Quest)",
-								"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 town reputation)"
+								"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 Town Reputation)"
 							},
 							{
 								"action": [
@@ -1883,7 +1883,7 @@
 					}
 				],
 				"name": "\"And a busy one as well.\" (Decline Quest)",
-				"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 town reputation)",
+				"text": "The wizard frowns and vanishes. His confused companion turns around and walks back the way they had come from. (-1 Town Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -1913,7 +1913,7 @@
 							}
 						],
 						"name": "\"Oh my! Of course I didn't recognize the fabled master of illusions! What can I do for you?\"",
-						"text": "(+1 reputation) \"My new apprentice believes that he wishes to be a battle mage himself. To dissuade him, I shall have him scry over you as you fight a $(enemy_2).\"",
+						"text": "\"My new apprentice believes that he wishes to be a battle mage himself. To dissuade him, I shall have him scry over you as you fight a $(enemy_2).\" (+1 Reputation)",
 						"options": [
 							{
 								"name": "You pause for a moment, considering your words carefully. \"I'm not so sure I'm comfortable with that.\" (Decline Quest)",
@@ -1964,7 +1964,7 @@
 							}
 						],
 						"name": "\"Morelith The Great? More or less average is more like it. I don't have time for this.\" (Decline Quest)",
-						"text": "The indignant wizard teleports himself and his companion away. The marketplace crowd takes notice and quiets slightly. Perhaps Morelith is an important figure here. (-2 town reputation)",
+						"text": "The indignant wizard teleports himself and his companion away. The marketplace crowd takes notice and quiets slightly. Perhaps Morelith is an important figure here. (-2 Town Reputation)",
 						"options": [
 							{
 								"name": "(Continue)"
@@ -1977,7 +1977,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "You feel a sense of elation joining the eery feeling that some has been watching you. You also wonder if you heard an indignant huff, or you just imagined it. Regardless, your pockets bulge with conjured rewards. (+3 local reputation)",
+		"text": "You feel a sense of elation joining the eery feeling that some has been watching you. You also wonder if you heard an indignant huff, or you just imagined it. Regardless, your pockets bulge with conjured rewards. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -2041,7 +2041,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "You now feel as though you are being both watched AND mocked. (-2 town reputation)",
+		"text": "You now feel as though you are being both watched AND mocked. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -2078,7 +2078,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to begin the hunt",
+			"description": "Leave town to begin the hunt.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -2112,7 +2112,7 @@
 		{
 			"id": 3,
 			"name": "Travel",
-			"description": "Head back to town to collect the $(enemy_2) bounty",
+			"description": "Head back to town to collect the $(enemy_2) bounty.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -2238,7 +2238,7 @@
 						"options": [
 							{
 								"name": "You continue to read.",
-								"text": "Secondly, another handwriting has scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday\"",
+								"text": "Secondly, another handwriting has scrawled over what might have actually been a romantic bit with the following. \"Don't bother. I killed him yesterday.\"",
 								"options": [
 									{
 										"name": "You shake your head and walk away. (Decline Quest)"
@@ -2265,7 +2265,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "Your unknown employer is still nowhere to be seen, and is not heard from again either. But you find a box waiting for you beneath the job board. The box is warded, as the scorch marks off to one side and smell of burnt hair confirm, but it opens at your approach. (+3 local reputation)",
+		"text": "Your unknown employer is still nowhere to be seen, and is not heard from again either. But you find a box waiting for you beneath the job board. The box is warded, as the scorch marks off to one side and smell of burnt hair confirm, but it opens at your approach. (+3 Local Reputation)",
 		"options": [
 			{
 				"action": [
@@ -2328,7 +2328,7 @@
 		]
 	},
 	"failureDialog": {
-		"text": "The $(enemy_2) eludes you. (-2 town reputation)",
+		"text": "The $(enemy_2) eludes you. (-2 Town Reputation)",
 		"options": [
 			{
 				"action": [
@@ -2365,7 +2365,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to begin the hunt",
+			"description": "Leave town to begin the hunt.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 15,
@@ -2392,7 +2392,7 @@
 		{
 			"id": 3,
 			"name": "Travel",
-			"description": "Head back to town to collect the $(enemy_2) bounty",
+			"description": "Head back to town to collect the $(enemy_2) bounty.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -2412,7 +2412,7 @@
 	"id": 10,
 	"isTemplate": true,
 	"name": "Room for New Growth",
-	"description": "Clear out all enemies in the $(poi_1) and report back",
+	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
 		"text": "A druid approaches you. \"Will you help save our world?\"",
 		"options": [
@@ -2435,7 +2435,7 @@
 					}
 				],
 				"name": "What do you think I'm trying to do? (Decline Quest)",
-				"text": "Stunned, the Druid watches you leave. (-1 local reputation)",
+				"text": "Stunned, the Druid watches you leave. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -2488,7 +2488,7 @@
 									}
 								],
 								"name": "\"Sorry, I've got bigger things to worry about right now.\" (Decline Quest)",
-								"text": "(-1 Local Reputation) The druid keeps a passive look on her face. \"Soon those things will be balanced as well.\"",
+								"text": "The druid keeps a passive look on her face. \"Soon those things will be balanced as well.\" (-1 Local Reputation)",
 								"options": [
 									{
 										"name": "(Continue)"
@@ -2648,7 +2648,7 @@
 					}
 				],
 				"name": "\"Almost. I believe there's a reward due to level the scales.\"",
-				"text": "(-1 Local Reputation) The druid frowns slightly, but hands you a bundle wrapped in small vines.",
+				"text": "The druid frowns slightly, but hands you a bundle wrapped in small vines. (-1 Local Reputation)",
 				"options": [
 					{
 						"action": [
@@ -2821,13 +2821,13 @@
 	"id": 11,
 	"isTemplate": true,
 	"name": "Eviction Notice",
-	"description": "Clear all enemies from a dungeon",
+	"description": "Clear all enemies from a dungeon.",
 	"offerDialog": {
-		"text": "As you approach the town square, a man climbs down from a packed wagon. He glances around, then walks toward you.\"You there, you look like a capable individual!\"",
+		"text": "As you approach the town square, a man climbs down from a packed wagon. He glances around, then walks toward you. \"You there, you look like a capable individual!\"",
 		"options": [
 			{
 				"name": "\"Capable just so happens to be my middle name.\"",
-				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me\"",
+				"text": "He looks perplexed for a moment, but glances back at the wagon as though distracted by it. \"I was hoping you could handle some business for me.\"",
 				"options": [
 					{
 						"name": "Business? What sort of business?",
@@ -2992,7 +2992,7 @@
 		{
 			"id": 1,
 			"name": "Clear",
-			"description": "Travel to the  $(poi_1) and defeat all enemies inside.",
+			"description": "Travel to the $(poi_1) and defeat all enemies inside.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count2": 25,
@@ -3008,7 +3008,7 @@
 		{
 			"id": 2,
 			"name": "Leave",
-			"description": "Exit the newly cleared (but not yet cleaned) dungeon",
+			"description": "Exit the newly cleared (but not yet cleaned) dungeon.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -3022,7 +3022,7 @@
 	"id": 12,
 	"isTemplate": true,
 	"name": "A Freshly Plowed Field",
-	"description": "Clear out all enemies in the $(poi_2) and report back",
+	"description": "Clear out all enemies in the $(poi_2) and report back.",
 	"offerDialog": {
 		"text": "\"We need a new field to increase our harvest.\" A weathered but intimidating man in simple farmer's garb addresses you directly. \"This town is growing faster than my grain.\"",
 		"options": [
@@ -3092,7 +3092,7 @@
 					}
 				],
 				"name": "\"That doesn't seem to be my problem.\" (Decline Quest)",
-				"text": "(-1 Local Reputation) He shrugs and moves on. ",
+				"text": "He shrugs and moves on. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -3249,7 +3249,7 @@
 	"id": 13,
 	"isTemplate": true,
 	"name": "The Onyx Compass",
-	"description": "Clear out all enemies in the $(poi_2) and report back",
+	"description": "Clear out all enemies in the $(poi_2) and report back.",
 	"offerDialog": {
 		"text": "\"You. Come here.\" The gnome speaking to you seems very out of place here. He wears a white pristine robe that was either a shirt or custom tailored for him. He acts like he belongs and that he owns the place, however.",
 		"options": [
@@ -3361,7 +3361,7 @@
 					}
 				],
 				"name": "You hold out your hand. \"Sorry, must be this tall to give orders\" (Decline Quest)",
-				"text": "(-1 Local Reputation) He scowls and stomps away, one tiny step at a time.",
+				"text": "He scowls and stomps away, one tiny step at a time. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -3609,7 +3609,7 @@
 		{
 			"id": 3,
 			"name": "Leave",
-			"description": "Leave town to begin your quest",
+			"description": "Leave town to begin your quest.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -3645,7 +3645,7 @@
 		{
 			"id": 2,
 			"name": "Clear",
-			"description": "Travel to the $(poi_2) and defeat all enemies inside. The target location is in the Swamp biome",
+			"description": "Travel to the $(poi_2) and defeat all enemies inside. The target location is in the Swamp Biome.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count2": 25,
@@ -3686,7 +3686,7 @@
 	"id": 14,
 	"isTemplate": true,
 	"name": "A Vision of Destruction",
-	"description": "Clear out all enemies in the $(poi_1) and report back",
+	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
 		"text": "Walking in to the village, an old man looks up as if expecting you and rushes over (to the extent that he is able) \"$(playername). I need you to turn around and leave. NOW.\"",
 		"options": [
@@ -3696,7 +3696,7 @@
 				"options": [
 					{
 						"name": "You give a wry grin. \"I was under the impression that destruction, fire, and ruin were popular hobbies around here.\"",
-						"text": "(-1 Local Reputation) He scowls at you and continues. \"This is no laughing matter. A spawn of Lathliss seeks a new home, and will come here soon unless we intervene.\"",
+						"text": "He scowls at you and continues. \"This is no laughing matter. A spawn of Lathliss seeks a new home, and will come here soon unless we intervene.\" (-1 Local Reputation)",
 						"options": [
 							{
 								"name": "\"A fight with a dragon? I look forward to the challenge!\"",
@@ -3759,7 +3759,7 @@
 							}
 						],
 						"name": "\"Tell me more about this vision, elder.\"",
-						"text": "(+1 Local Reputation) He continues with great urgency. \"A spawn of Lathliss seeks a new home, and will come here soon unless we intervene.\"",
+						"text": "He continues with great urgency. \"A spawn of Lathliss seeks a new home, and will come here soon unless we intervene.\" (+1 Local Reputation)",
 						"options": [
 							{
 								"name": "\"A fight with a dragon? No thanks. I'll be leaving now.\" (Decline Quest)"
@@ -3804,7 +3804,7 @@
 			},
 			{
 				"name": "\"I'll take my chances, thanks.\" (Decline Quest)",
-				"text": "He exclaims at you as you walk by. \"Leave. NOW!!! You must leave!!!\" (-2 local reputation)",
+				"text": "He exclaims at you as you walk by. \"Leave. NOW!!! You must leave!!!\" (-2 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -3992,7 +3992,7 @@
 	"id": 15,
 	"isTemplate": true,
 	"name": "A Private Island",
-	"description": "Clear out all enemies in the $(poi_1) and report back",
+	"description": "Clear out all enemies in the $(poi_1) and report back.",
 	"offerDialog": {
 		"text": "\"Excuse me, adventurer, but I'm in need of assistance.\" The man appears of modest means at first glance, but a closer inspection reveals that his average looking clothing is may as well be made for a king.",
 		"options": [
@@ -4227,7 +4227,7 @@
 	"id": 16,
 	"isTemplate": true,
 	"name": "Clearing the ledger",
-	"description": "Clear out all enemies in the $(poi_1)and report back",
+	"description": "Clear out all enemies in the $(poi_1)and report back.",
 	"offerDialog": {
 		"text": "As you introduce yourself to the inside of the local inn for the night, another patron approaches you.",
 		"options": [
@@ -4237,7 +4237,7 @@
 				"options": [
 					{
 						"name": "You wait for him to continue.",
-						"text": "\"I've come in to an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\" ",
+						"text": "\"I've come in to an inheritance of a small estate that I've been expecting for years. Recently, I've had some hard times, and I've convinced some individuals to let me borrow against the land.\"",
 						"options": [
 							{
 								"name": "\"I see.\" You think you know where this is headed.",
@@ -4269,7 +4269,7 @@
 							},
 							{
 								"name": "\"And why exactly do you need me?\"",
-								"text": "\"Well, it seems the land isn't empty, and I need someone to fix that. You look like the sort that could handle it.\" ",
+								"text": "\"Well, it seems the land isn't empty, and I need someone to fix that. You look like the sort that could handle it.\"",
 								"options": [
 									{
 										"action": [
@@ -4318,7 +4318,7 @@
 					}
 				],
 				"name": "\"You have the wrong person. I promise you that.\" (Decline Quest)",
-				"text": "(-1 Local Reputation) A few other people in the inn stop and look, but the man walks away without making a scene.",
+				"text": "A few other people in the inn stop and look, but the man walks away without making a scene. (-1 Local Reputation)",
 				"options": [
 					{
 						"name": "(Continue)"
@@ -4465,7 +4465,7 @@
 	"id": 17,
 	"isTemplate": true,
 	"name": "Bone Collector",
-	"description": "Defeat 3 $(enemy_1)s",
+	"description": "Defeat 3 $(enemy_1)s.",
 	"offerDialog": {
 		"text": "A job board has been constructed outside the local inn, and you see that it is covered in various papers and posters.",
 		"options": [
@@ -4477,8 +4477,8 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
-						"text": "It reads: \"Gimgee's self-replicating paper. When you need unlimited paper or to clear a forest from afar, it's got to be Gimgee's\".",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
+						"text": "It reads: \"Gimgee's self-replicating paper. When you need unlimited paper or to clear a forest from afar, it's got to be Gimgee's.\"",
 						"options": [
 							{
 								"name": "\"I'll file that away under things that make sense yet don't.\" (Decline Quest)"
@@ -4486,7 +4486,7 @@
 						]
 					},
 					{
-						"name": "A folded piece of paper is nailed to the board. ",
+						"name": "A folded piece of paper is nailed to the board.",
 						"text": "The visible portion says 'Take one' in clear and measured handwriting.",
 						"options": [
 							{
@@ -4501,7 +4501,7 @@
 									},
 									{
 										"name": "Undeterred and intrigued, you open the paper and begin to read.",
-										"text": "\"$(playername): Please harvest at least three $(enemy_1) and bring them to the tavern on a Tuesday\".",
+										"text": "\"$(playername): Please harvest at least three $(enemy_1) and bring them to the tavern on a Tuesday.\"",
 										"options": [
 											{
 												"action": [
@@ -4644,7 +4644,7 @@
 												]
 											}
 										],
-										"name": "You dump the $(enemy_1s) and collect your rewards.  (+3 Local Reputation)"
+										"name": "You dump the $(enemy_1s) and collect your rewards. (+3 Local Reputation)"
 									}
 								]
 							}
@@ -4735,7 +4735,7 @@
 	"id": 18,
 	"isTemplate": true,
 	"name": "A Focused Mind",
-	"description": "Defeat 3 $(enemy_2)s",
+	"description": "Defeat 3 $(enemy_2)s.",
 	"offerDialog": {
 		"text": "A job board has been constructed outside the local inn, and you see that it is covered in various papers and posters.",
 		"options": [
@@ -4747,7 +4747,7 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
 						"text": "\"A focused mind receives great rewards. Focus on defeating 3 $(enemy_2)s, and be rewarded.\"",
 						"options": [
 							{
@@ -4837,7 +4837,7 @@
 					}
 				],
 				"name": "Warily take the items.",
-				"text": "No sooner than you do, the Djinn dissapears in a puff of smoke. When you turn back, the $(enemy_2) you just defeated has vanished as well.",
+				"text": "No sooner than you do, the Djinn disappears in a puff of smoke. When you turn back, the $(enemy_2) you just defeated has vanished as well.",
 				"options": [
 					{
 						"action": [
@@ -4881,7 +4881,7 @@
 				"POIReference": "$(poi_1)"
 			}
 		],
-		"text": "You decide you have better things to do than hunt $(enemy_2)s, and you scratch this entry out of your logbook. (-2 local reputation)",
+		"text": "You decide you have better things to do than hunt $(enemy_2)s, and you scratch this entry out of your logbook. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -4901,7 +4901,7 @@
 		{
 			"id": 1,
 			"name": "Leave",
-			"description": "Leave town to begin your quest",
+			"description": "Leave town to begin your quest.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Leave",
@@ -4937,7 +4937,7 @@
 	"id": 19,
 	"isTemplate": true,
 	"name": "Population Control",
-	"description": "Defeat 3 $(enemy_1)s",
+	"description": "Defeat 3 $(enemy_1)s.",
 	"offerDialog": {
 		"text": "A haggard and tired looking elf puts down his bow at the door of the tavern. Another elf calls out to him. \"Long day's hunt?\"",
 		"options": [
@@ -5138,7 +5138,7 @@
 				"POIReference": "$(poi_2)"
 			}
 		],
-		"text": "You decide you have better things to do than hunt $(enemy_1)s, and you scratch this entry out of your logbook. (-2 local reputation)",
+		"text": "You decide you have better things to do than hunt $(enemy_1)s, and you scratch this entry out of your logbook. (-2 Local Reputation)",
 		"options": [
 			{
 				"name": "(Quest Failed)"
@@ -5175,7 +5175,7 @@
 		{
 			"id": 2,
 			"name": "Travel",
-			"description": "Return to the hunter and report your success,",
+			"description": "Return to the hunter and report your success.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"here": true,
@@ -5197,7 +5197,7 @@
 	"id": 20,
 	"isTemplate": true,
 	"name": "Proving Yourself Worthy",
-	"description": "Defeat 3 $(enemy_1)s",
+	"description": "Defeat 3 $(enemy_1)s.",
 	"offerDialog": {
 		"text": "\"Are you worthy, citizen?\" A heavily armored soldier stands at the center of the town square and is occasionally calling out at bypassers. \"Are YOU?\", he calls out to another one.",
 		"options": [
@@ -5278,7 +5278,7 @@
 														"text": "His brow furrows, not accustomed to being spoken to in such a manner. (-1 Local Reputation)",
 														"options": [
 															{
-																"name": "\"Go on. Off with you!\"  (Continue)"
+																"name": "\"Go on. Off with you!\" (Continue)"
 															}
 														]
 													},
@@ -5306,7 +5306,7 @@
 										]
 									},
 									{
-										"name": "\"Good\" You nod. \"I'm glad we've established that.\"",
+										"name": "\"Good!\" You nod. \"I'm glad we've established that.\"",
 										"text": "He blinks several times, then resumes the conversation on his terms. \"Will you accept my challenge to defeat 3 $(enemy_1)s?\"",
 										"options": [
 											{
@@ -5460,7 +5460,7 @@
 	"id": 21,
 	"isTemplate": true,
 	"name": "In the Name of Science",
-	"description": "Defeat 3 $(enemy_1)s",
+	"description": "Defeat 3 $(enemy_1)s.",
 	"offerDialog": {
 		"text": "\"...but it's for SCIENCE!!!\" A young woman leaves the tavern in a hurry, with someone yelling at her back from the other side of the doorway. A dwarf in a labcoat with goggles on his head comes shuffling after.",
 		"options": [
@@ -5469,7 +5469,7 @@
 				"text": "With little hope of catching the damsel, he turns his attention to you. \"Can I interest you in assisting me with some scientific experiments?\"",
 				"options": [
 					{
-						"name": "\"It really depends on what they are.\" You look at him suspsiciously.",
+						"name": "\"It really depends on what they are.\" You look at him suspiciously.",
 						"text": "\"You're not a farmhand, so it will have to be.\" He thinks for a moment, pulling out a well worn notebook and flipping through the pages.",
 						"options": [
 							{
@@ -5523,7 +5523,7 @@
 		"action": [
 			{}
 		],
-		"text": "You walk back into the town with the requested cargo of $(enemy_1)s. You're unsure if they will be useful, but the dwarf seems extremely excited to begin his work. (+3 Local Reputation) ",
+		"text": "You walk back into the town with the requested cargo of $(enemy_1)s. You're unsure if they will be useful, but the dwarf seems extremely excited to begin his work. (+3 Local Reputation)",
 		"options": [
 			{
 				"name": "You try to talk to him, but the dwarf is completely lost in his work already. You take the bundle he was carrying, assuming it to be your rewards. (Complete Quest)"
@@ -5605,7 +5605,7 @@
 	"id": 22,
 	"isTemplate": true,
 	"name": "Shamanic Totems",
-	"description": "Defeat 3 $(enemy_1)s",
+	"description": "Defeat 3 $(enemy_1)s.",
 	"offerDialog": {
 		"text": "A job board has been constructed outside the local inn, and you see that it is covered in various papers and posters.",
 		"options": [
@@ -5617,8 +5617,8 @@
 				"text": "Most of the ads are nondescript, weather worn, or written in an unfamiliar language. A few catch your eye, however.",
 				"options": [
 					{
-						"name": "You look at what seems to be an advertisment of some sort off to one side.",
-						"text": "It reads: \"Gimgee's rocks. When you need a good rock, think Gimgee's\".",
+						"name": "You look at what seems to be an advertisement of some sort off to one side.",
+						"text": "It reads: \"Gimgee's rocks. When you need a good rock, think Gimgee's.\"",
 						"options": [
 							{
 								"name": "\"I'll file that away under things that make sense yet don't.\" (Decline Quest)"
@@ -5767,7 +5767,7 @@
 	"id": 23,
 	"isTemplate": true,
 	"name": "Heart of a Champion",
-	"description": "Enter and win an upcoming arena event",
+	"description": "Enter and win an upcoming arena event.",
 	"offerDialog": {
 		"text": "\"DO YOU HAVE WHAT IT TAKES? ARE YOU THE BEST IN SHANDALAR???\" A young girl yells at the top of her lungs at each passer by in the town. Most people come in to view already covering their ears, having heard this plenty of times before.",
 		"options": [
@@ -5863,7 +5863,7 @@
 	},
 	"prologue": {},
 	"epilogue": {
-		"text": "The crowd goes wild as you finish your last opponent. You won't be paying for drinks in the $(poi_1) for quite some time. (+3 reputation in $(poi_1))",
+		"text": "The crowd goes wild as you finish your last opponent. You won't be paying for drinks in the $(poi_1) for quite some time. (+3 Reputation in $(poi_1))",
 		"options": [
 			{
 				"action": [
@@ -5911,7 +5911,7 @@
 				"POIReference": "$(poi_1)"
 			}
 		],
-		"text": "The $(poi_1) arena is too much for you at the moment, but there's always another day. (-2 reputation in $(poi_1))",
+		"text": "The $(poi_1) arena is too much for you at the moment, but there's always another day. (-2 Reputation in $(poi_1))",
 		"options": [
 			{
 				"action": [
@@ -5948,7 +5948,7 @@
 		{
 			"id": 1,
 			"name": "Travel",
-			"description": "Make your way to the $(poi_1)",
+			"description": "Make your way to the $(poi_1).",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"count1": 60,
@@ -5959,7 +5959,7 @@
 			"objective": "Travel",
 			"prologue": {},
 			"epilogue": {
-				"text": "As you walk through the $(poi_1) gates, you can feel the excitement building, eminating, radiating from the city's arena. Most of the populace is already there or on their way. ",
+				"text": "As you walk through the $(poi_1) gates, you can feel the excitement building, emanating, radiating from the city's arena. Most of the populace is already there or on their way.",
 				"options": [
 					{
 						"name": "(continue)",
@@ -5977,7 +5977,7 @@
 		{
 			"id": 2,
 			"name": "Arena",
-			"description": "Prove yourself to be the champion of the $(poi_1) arena",
+			"description": "Prove yourself to be the champion of the $(poi_1) arena.",
 			"mapFlag": "",
 			"mapFlagValue": 1,
 			"objective": "Arena",
