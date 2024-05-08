@@ -2290,12 +2290,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                                 ? ", or " : n + 2 == costs.length ? " or " : ", ");
                     }
                 } else if (keyword.startsWith("Multikicker")) {
-                    if (!keyword.endsWith("Generic")) {
-                        final String[] n = keyword.split(":");
-                        final Cost cost = new Cost(n[1], false);
-                        sbLong.append("Multikicker ").append(cost.toSimpleString());
-                        sbLong.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
-                    }
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
+                    sbLong.append("Multikicker ").append(cost.toSimpleString());
+                    sbLong.append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Kicker")) {
                     sbLong.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("Trample:")) {
@@ -2583,41 +2581,34 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final Cost cost = new Cost(n[1], false);
         final String costStr = cost.toSimpleString();
         final boolean manaOnly = cost.isOnlyManaCost();
-        if (!keyword.endsWith("Generic")) {
-            sbx.append("Kicker").append(manaOnly ? " " + costStr : "—" + costStr + ".");
-            if (Lists.newArrayList(n).size() > 2) {
-                sbx.append(" and/or ");
-                final Cost cost2 = new Cost(n[2], false);
-                sbx.append(cost2.toSimpleString());
-            }
-            if (!manaOnly) {
-                if (cost.hasNoManaCost()) {
-                    remText = remText.replaceFirst(" pay an additional", "");
-                    remText = remText.replace(remText.charAt(8), Character.toLowerCase(remText.charAt(8)));
-                } else {
-                    remText = remText.replaceFirst(" an additional", "");
-                    char c = remText.charAt(remText.indexOf(",") + 2);
-                    remText = remText.replace(c, Character.toLowerCase(c));
-                    remText = remText.replaceFirst(", ", " and ");
-                }
-                remText = remText.replaceFirst("as", "in addition to any other costs as");
-                if (remText.contains(" tap ")) {
-                    if (remText.contains("tap a")) {
-                        String noun = remText.substring(remText.indexOf("untapped") + 9, remText.indexOf(" in "));
-                        remText = remText.replace(remText.substring(12, remText.indexOf(" in ")),
-                                Lang.nounWithNumeralExceptOne(1, noun) + " ");
-                    } else {
-                        remText = remText.replaceFirst(" untapped ", "");
-                    }
-                }
-            }
-            sbx.append(" (").append(remText).append(")\r\n");
-        } else {
-            sbx.append("As an additional cost to cast this spell, you may ");
-            String costS = StringUtils.uncapitalize(costStr);
-            sbx.append(cost.hasManaCost() ? "pay " + costS : costS);
-            sbx.append(".").append("\r\n");
+        sbx.append("Kicker").append(manaOnly ? " " + costStr : "—" + costStr + ".");
+        if (Lists.newArrayList(n).size() > 2) {
+            sbx.append(" and/or ");
+            final Cost cost2 = new Cost(n[2], false);
+            sbx.append(cost2.toSimpleString());
         }
+        if (!manaOnly) {
+            if (cost.hasNoManaCost()) {
+                remText = remText.replaceFirst(" pay an additional", "");
+                remText = remText.replace(remText.charAt(8), Character.toLowerCase(remText.charAt(8)));
+            } else {
+                remText = remText.replaceFirst(" an additional", "");
+                char c = remText.charAt(remText.indexOf(",") + 2);
+                remText = remText.replace(c, Character.toLowerCase(c));
+                remText = remText.replaceFirst(", ", " and ");
+            }
+            remText = remText.replaceFirst("as", "in addition to any other costs as");
+            if (remText.contains(" tap ")) {
+                if (remText.contains("tap a")) {
+                    String noun = remText.substring(remText.indexOf("untapped") + 9, remText.indexOf(" in "));
+                    remText = remText.replace(remText.substring(12, remText.indexOf(" in ")),
+                            Lang.nounWithNumeralExceptOne(1, noun) + " ");
+                } else {
+                    remText = remText.replaceFirst(" untapped ", "");
+                }
+            }
+        }
+        sbx.append(" (").append(remText).append(")\r\n");
         return sbx.toString();
     }
 
@@ -3028,11 +3019,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbBefore.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Multikicker")) {
-                    if (!keyword.endsWith("Generic")) {
-                        final String[] n = keyword.split(":");
-                        final Cost cost = new Cost(n[1], false);
-                        sbBefore.append("Multikicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
-                    }
+                    final String[] n = keyword.split(":");
+                    final Cost cost = new Cost(n[1], false);
+                    sbBefore.append("Multikicker ").append(cost.toSimpleString()).append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Kicker")) {
                     sbBefore.append(kickerDesc(keyword, inst.getReminderText())).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
@@ -4622,7 +4611,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private int multiKickerMagnitude = 0;
-    public final void addMultiKickerMagnitude(final int n) { multiKickerMagnitude += n; }
     public final void setKickerMagnitude(final int n) { multiKickerMagnitude = n; }
     public final int getKickerMagnitude() {
         if (multiKickerMagnitude > 0) {
@@ -4673,7 +4661,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isUntapped() {
         return !tapped;
     }
-
     public final boolean isTapped() {
         return tapped;
     }
