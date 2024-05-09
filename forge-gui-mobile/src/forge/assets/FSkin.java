@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -232,12 +231,12 @@ public class FSkin {
         Forge.getAssets().sleeves().clear();
 
         // Grab and test various sprite files.
-        final FileHandle f1 = getDefaultSkinFile(SourceFile.ICONS.getFilename());
-        final FileHandle f2 = getSkinFile(SourceFile.ICONS.getFilename());
-        final FileHandle f3 = getDefaultSkinFile(SourceFile.FOILS.getFilename());
+        final FileHandle f1 = getDefaultSkinFile(ForgeConstants.SPRITE_ICONS_FILE);
+        final FileHandle f2 = getSkinFile(ForgeConstants.SPRITE_ICONS_FILE);
+        final FileHandle f3 = getDefaultSkinFile(ForgeConstants.SPRITE_FOILS_FILE);
         final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
+        final FileHandle f6 = getDefaultSkinFile(ForgeConstants.SPRITE_OLD_FOILS_FILE);
         final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
         //final FileHandle f7b = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
         //final FileHandle f7c = getDefaultSkinFile(ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
@@ -481,7 +480,7 @@ public class FSkin {
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
                     + "preferred icons, or foils.");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         // Run through enums and load their coords.
@@ -561,7 +560,7 @@ public class FSkin {
         return allSkins;
     }
 
-    public static Map<FSkinProp, FSkinImage> getImages() {
+    public static Map<FSkinProp, FSkinImageInterface> getImages() {
         return Forge.getAssets().images();
     }
 

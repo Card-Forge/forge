@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinImageInterface;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.error.BugReporter;
@@ -248,7 +249,7 @@ public class CardFaceSymbols {
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
-            FSkinImage image = Forge.getAssets().manaImages().get(symbol);
+            FSkinImageInterface image = Forge.getAssets().manaImages().get(symbol);
             if (image == null) {
                 BugReporter.reportBug("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;

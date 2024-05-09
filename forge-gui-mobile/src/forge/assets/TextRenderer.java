@@ -206,7 +206,7 @@ public class TextRenderer {
                 if (inSymbolCount > 0) {
                     inSymbolCount--;
                     if (text.length() > 0) {
-                        FSkinImage symbol = Forge.getAssets().symbolLookup().get(text.toString());
+                        FSkinImageInterface symbol = Forge.getAssets().symbolLookup().get(text.toString());
                         if (symbol != null) {
                             pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {
@@ -671,9 +671,9 @@ public class TextRenderer {
     }
 
     private class SymbolPiece extends Piece {
-        private FSkinImage image;
+        private FSkinImageInterface image;
 
-        private SymbolPiece(FSkinImage image0, boolean inReminderText0) {
+        private SymbolPiece(FSkinImageInterface image0, boolean inReminderText0) {
             super(inReminderText0);
             image = image0;
         }
