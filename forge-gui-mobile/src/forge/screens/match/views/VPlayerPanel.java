@@ -16,11 +16,13 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinImageInterface;
 import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
@@ -88,7 +90,7 @@ public class VPlayerPanel extends FContainer {
         addZoneDisplay(ZoneType.Flashback, Forge.hdbuttons ? FSkinImage.HDFLASHBACK :FSkinImage.FLASHBACK);
 
         VManaPool manaPool = add(new VManaPool(player));
-        tabManaPool = add(new InfoTab(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : FSkinImage.MANA_X, manaPool));
+        tabManaPool = add(new InfoTab(Forge.hdbuttons ? FSkinImage.HDMANAPOOL : Forge.getAssets().images().get(FSkinProp.IMG_MANA_X), manaPool));
         tabs.add(tabManaPool);
 
         addZoneDisplay(ZoneType.Exile, Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE);
@@ -602,15 +604,15 @@ public class VPlayerPanel extends FContainer {
 
     public class InfoTab extends FDisplayObject {
         private String value = "0";
-        private final FSkinImage icon;
+        private final FSkinImageInterface icon;
         private final VDisplayArea displayArea;
 
-        private InfoTab(FSkinImage icon0, VDisplayArea displayArea0) {
+        private InfoTab(FSkinImageInterface icon0, VDisplayArea displayArea0) {
             icon = icon0;
             displayArea = displayArea0;
         }
 
-        public FSkinImage getIcon() {
+        public FSkinImageInterface getIcon() {
             return icon;
         }
         public VDisplayArea getDisplayArea() {
