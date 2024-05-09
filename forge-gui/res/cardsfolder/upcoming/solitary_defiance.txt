@@ -1,0 +1,9 @@
+Name:Solitary Defiance
+ManaCost:2 U
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance & Ward:2 | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ1 | Description$ As long as you control exactly one creature, that creature has vigilance and ward {2}.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSeek | Alone$ True | TriggerDescription$ Whenever a creature you control attacks alone, seek two nonland cards, then discard a card.
+SVar:TrigSeek:DB$ Seek | Num$ 2 | Type$ Card.nonLand | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:As long as you control exactly one creature, that creature has vigilance and ward {2}.\nWhenever a creature you control attacks alone, seek two nonland cards, then discard a card.

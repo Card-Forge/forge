@@ -1,0 +1,13 @@
+Name:Switchgrass Grazer
+ManaCost:2 R R
+Types:Creature Horse Mount
+PT:4/4
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to any target. If CARDNAME is saddled and a creature was dealt damage this way, that creature perpetually gains "This creature can't block" and "Damage isn't removed from this creature during cleanup steps."
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | RememberDamaged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ CantBlock,NoDamageRemoval | Duration$ Perpetual | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionPresent2$ Card.Self+IsSaddled | SubAbility$ DBCleanup
+SVar:CantBlock:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.
+SVar:NoDamageRemoval:Mode$ NoCleanupDamage | ValidCard$ Card.Self | Description$ Damage isn't removed from this creature during cleanup steps.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Saddle:1
+Oracle:Haste\nWhenever Switchgrass Grazer attacks, it deals 1 damage to any target. If Switchgrass Grazer is saddled and a creature was dealt damage this way, that creature perpetually gains "This creature can't block" and "Damage isn't removed from this creature during cleanup steps."\nSaddle 1
