@@ -485,7 +485,7 @@ public class FSkin {
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
                     + "preferred icons, or foils.");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         // Run through enums and load their coords.
