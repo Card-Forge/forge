@@ -755,6 +755,22 @@
 	]
 },
 {
+	"name": "CaveCE",
+	"displayName": "Cave",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "../common/maps/map/cave/cave_fog.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Hostile",
+		"Cave",
+		"BiomeColorless",
+		"Sidequest"
+	]
+},
+{
 	"name": "CaveG",
 	"displayName": "Cave",
 	"type": "cave",
