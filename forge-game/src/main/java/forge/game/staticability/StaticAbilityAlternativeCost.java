@@ -50,7 +50,7 @@ public class StaticAbilityAlternativeCost {
                     newSA.putParam("ManaRestriction", stAb.getParam("ManaRestriction"));
                 }
 
-                if (!"All".equals(stAb.getParam("EffectZone"))) {
+                if (stAb.hasParam("EffectZone") && !"All".equals(stAb.getParam("EffectZone"))) {
                     newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("EffectZone")));
                 }
 
