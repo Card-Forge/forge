@@ -3,8 +3,8 @@ ManaCost:3 G W
 Types:Creature Centaur Soldier
 PT:4/4
 K:Disguise:3 GW GW
-K:etbCounter:P1P1:X
-R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Description$ As CARDNAME enters the battlefield or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control.
+K:etbCounter:P1P1:X:no Condition:As CARDNAME enters the battlefield or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control.
+R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ AddCounters | ActiveZones$ Battlefield | Secondary$ True | Description$ As CARDNAME enters the battlefield or is turned face up, put X +1/+1 counters on it, where X is the number of other creatures you control.
 SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterNum$ X | CounterType$ P1P1
 SVar:X:Count$Valid Creature.YouCtrl+Other
 DeckHas:Ability$Counters

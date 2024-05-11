@@ -2,7 +2,7 @@ Name:Tidewalker
 ManaCost:2 U
 Types:Creature Elemental
 PT:*/*
-K:etbCounter:TIME:X:no Condition:Tidewalker enters the battlefield with a time counter on it for each Island you control.
+K:etbCounter:TIME:X:no Condition:CARDNAME enters the battlefield with a time counter on it for each Island you control.
 K:Vanishing
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of time counters on it.
 SVar:X:Count$Valid Island.YouCtrl
