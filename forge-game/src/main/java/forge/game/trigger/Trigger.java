@@ -32,7 +32,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
@@ -398,11 +397,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if ("AltCost".equals(condition)) {
-            final Card moved = (Card) runParams.get(AbilityKey.Card);
-            if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
-                return false;
-        } else if ("LifePaid".equals(condition)) {
+        if ("LifePaid".equals(condition)) {
             final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
             if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
                 return false;
