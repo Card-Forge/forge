@@ -319,7 +319,11 @@ public final class GameActionUtil {
                 newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
             }
             if (o.getAbility().hasParam("RaiseCost")) {
-                newSA.getMapParams().put("RaiseCost", Integer.toString(AbilityUtils.calculateAmount(host, o.getAbility().getParam("RaiseCost"), o.getAbility())));
+                String raise = o.getAbility().getParam("RaiseCost");
+                if (o.getAbility().hasSVar(raise)) {
+                    raise = Integer.toString(AbilityUtils.calculateAmount(host, raise, o.getAbility()));
+                }
+                newSA.getMapParams().put("RaiseCost", raise);
             }
 
             final SpellAbilityRestriction sar = newSA.getRestrictions();
