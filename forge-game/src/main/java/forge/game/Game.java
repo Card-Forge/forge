@@ -38,6 +38,7 @@ import forge.game.player.*;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityCantChangeDayTime;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.CostPaymentStack;
@@ -1331,6 +1332,9 @@ public class Game {
         return this.daytime;
     }
     public void setDayTime(Boolean value) {
+        if (StaticAbilityCantChangeDayTime.cantChangeDay(this, value)) {
+            return;
+        }
         Boolean previous = this.daytime;
         this.daytime = value;
 
