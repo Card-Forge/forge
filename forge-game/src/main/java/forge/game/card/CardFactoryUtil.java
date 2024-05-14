@@ -2895,7 +2895,7 @@ public class CardFactoryUtil {
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
-            abilityStr.append("| ValidTgts$ ").append(valid);
+            abilityStr.append(" | ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
             // the if the Equipment can really attach should be part of the Attach Effect
             abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump");
@@ -2903,7 +2903,7 @@ public class CardFactoryUtil {
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
             }
-            abilityStr.append("| PrecostDesc$ Equip");
+            abilityStr.append(" | PrecostDesc$ Equip");
             if (k.length > 3 && !k[3].isEmpty()) {
                 abilityStr.append(" ").append(vstr);
             }
@@ -2916,7 +2916,7 @@ public class CardFactoryUtil {
             if (!altCost) {
                 abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
             }
-            abilityStr.append("| SpellDescription$ ");
+            abilityStr.append(" | SpellDescription$ ");
             if (!extraDesc.isEmpty()) {
                 abilityStr.append(". ").append(extraDesc).append(". ");
             }
@@ -3369,12 +3369,12 @@ public class CardFactoryUtil {
                 return;
             }
             String[] k = keyword.split(":");
-            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure ";
+            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure | Secondary$ True";
             final StringBuilder attachStr = new StringBuilder();
-            attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you ");
-            attachStr.append("control | AILogic$ Pump | Secondary$ True | SpellDescription$ Attach ").append(bothStr);
+            attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you control ");
+            attachStr.append("| AILogic$ Pump | SpellDescription$ Attach ").append(bothStr);
             final StringBuilder unattachStr = new StringBuilder();
-            unattachStr.append("AB$ Unattach | Defined$ Self | SpellDescription$ Unattach | Secondary$ True | IsPresent$ Card.Self+AttachedTo Creature");
+            unattachStr.append("AB$ Unattach | Defined$ Self | SpellDescription$ Unattach | IsPresent$ Card.Self+AttachedTo Creature");
             unattachStr.append(bothStr);
             // instantiate attach ability
             SpellAbility attachSA = AbilityFactory.getAbility(attachStr.toString(), card);
@@ -3390,8 +3390,7 @@ public class CardFactoryUtil {
             final String manacost = k[2];
 
             StringBuilder sb = new StringBuilder();
-            sb.append("AB$ PutCounter | CounterType$ P1P1 | ActivationZone$ Hand");
-            sb.append("| ValidTgts$ Creature | TgtPrompt$ Select target creature");
+            sb.append("AB$ PutCounter | CounterType$ P1P1 | ActivationZone$ Hand | ValidTgts$ Creature ");
             sb.append("| Cost$ ").append(manacost).append(" Discard<1/CARDNAME>");
             sb.append("| CounterNum$ ").append(n);
             sb.append("| CostDesc$ ").append(ManaCostParser.parse(manacost)); // to hide the Discard from the cost
