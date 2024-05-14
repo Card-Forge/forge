@@ -938,15 +938,11 @@ public final class StaticAbilityContinuous {
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
-                boolean additional = mayPlayAltCost != null && mayPlayAltCost.contains("RegularCost");
 
                 if (mayPlayAltCost != null) {
                     if (mayPlayAltCost.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(affectedCard.getCMC());
                         mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
-                    } else if (additional) {
-                        final String regCost = affectedCard.getManaCost().getShortString();
-                        mayPlayAltCost = mayPlayAltManaCost.replace("RegularCost", regCost);
                     }
                 }
 
@@ -954,7 +950,7 @@ public final class StaticAbilityContinuous {
                     AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
                     controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
-                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, additional, mayPlayWithFlash,
+                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
                         mayPlayGrantZonePermissions, stAb);
 
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
@@ -962,7 +958,7 @@ public final class StaticAbilityContinuous {
                     for (final Player p : game.getPlayers()) {
                         if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
                             affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
-                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null, additional,
+                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                                     mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
                         }
                     }

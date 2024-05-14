@@ -449,13 +449,13 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceGraveyard")) {
                 if (!sa.hasParam("ReplaceGraveyardValid")
                         || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), controller, source, sa)) {
-                    addReplaceGraveyardEffect(tgtCard, sa, tgtSA, sa.getParam("ReplaceGraveyard"), moveParams);
+                    addReplaceGraveyardEffect(tgtCard, source, sa, tgtSA, sa.getParam("ReplaceGraveyard"));
                 }
             }
 
             // For Illusionary Mask effect
             if (sa.hasParam("ReplaceIlluMask")) {
-                addIllusionaryMaskReplace(tgtCard, sa, moveParams);
+                addIllusionaryMaskReplace(tgtCard, sa);
             }
 
             // Add controlled by player to target SA so when the spell is resolving, the controller would be changed again
@@ -500,8 +500,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     }
 
-    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, SpellAbility tgtSA, String zone, Map<AbilityKey, Object> moveParams) {
-        final Card hostCard = sa.getHostCard();
+    public static void addReplaceGraveyardEffect(Card c, Card hostCard, SpellAbility sa, SpellAbility tgtSA, String zone) {
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
         final String name = hostCard.getName() + "'s Effect";
@@ -535,7 +534,7 @@ public class PlayEffect extends SpellAbilityEffect {
         game.getAction().moveToCommand(eff, sa);
     }
 
-    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
+    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
