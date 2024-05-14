@@ -30,7 +30,6 @@ import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -311,9 +310,8 @@ public class Untap extends Phase {
         }
         final Game game = previous.getGame();
         List<Card> casted = game.getStack().getSpellsCastLastTurn();
-        boolean cantBeNight = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noNight);
 
-        if (game.isDay() && !cantBeNight && !Iterables.any(casted, CardPredicates.isController(previous))) {
+        if (game.isDay() && !Iterables.any(casted, CardPredicates.isController(previous))) {
             game.setDayTime(true);
         } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
             game.setDayTime(false);
