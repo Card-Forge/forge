@@ -44,4 +44,6 @@ public interface IBoosterDraft {
     String[] CUSTOM_RANKINGS_FILE = { null };
     boolean isPileDraft();
 
+    void setLogEntry(IDraftLog draftingProcess);
+    IDraftLog getDraftLog();
 }

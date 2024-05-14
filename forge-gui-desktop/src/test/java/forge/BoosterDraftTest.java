@@ -2,6 +2,7 @@ package forge;
 
 import java.util.List;
 
+import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import org.testng.annotations.Test;
 
@@ -79,5 +80,15 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public boolean isPileDraft() {
         return false;
+    }
+
+    @Override
+    public void setLogEntry(IDraftLog draftingProcess) {
+
+    }
+
+    @Override
+    public IDraftLog getDraftLog() {
+        return null;
     }
 }

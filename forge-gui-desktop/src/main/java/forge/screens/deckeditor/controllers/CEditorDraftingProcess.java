@@ -27,6 +27,7 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
@@ -35,13 +36,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
@@ -56,7 +51,7 @@ import forge.util.Localizer;
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
-public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
+public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> implements IDraftLog {
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
@@ -66,7 +61,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
+
+    private DragCell draftLogParent = null;
     private boolean saved = false;
+    private final CEditorLog editorLog = new CEditorLog(this);
     private final Localizer localizer = Localizer.getInstance();
 
     //========== Constructor
@@ -90,6 +88,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
+
+
     }
 
     /**
@@ -100,6 +100,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
+        this.boosterDraft.setLogEntry(this);
+
+    }
+
+    public void addLogEntry(String message) {
+        editorLog.addLogEntry(message);
     }
 
     /* (non-Javadoc)
@@ -111,6 +117,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
+
+        // Verify if card is in the activate pack?
         this.getDeckManager().addItem(card, 1);
 
         // get next booster pack
@@ -312,12 +320,14 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        draftLogParent = removeTab(editorLog.getView());
 
         // set catalog table to single-selection only mode
         getCatalogManager().setAllowMultipleSelections(false);
 
         // this appears to be needed to actually show the available draft choices
         getCatalogManager().refresh();
+        draftLogParent.setVisible(true);
     }
 
     /* (non-Javadoc)
@@ -346,6 +356,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
+        if (editorLog.getView().getParentCell() != null) {
+            editorLog.getView().getParentCell().setVisible(true);
+        }
 
         //Re-add tabs
         if (deckGenParent != null) {
@@ -365,6 +378,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        }
+        if (draftLogParent != null) {
+            draftLogParent.addDoc(editorLog.getView());
         }
 
         // set catalog table back to free-selection mode

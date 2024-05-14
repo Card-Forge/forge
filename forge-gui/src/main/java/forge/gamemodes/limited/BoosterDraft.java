@@ -62,7 +62,9 @@ public class BoosterDraft implements IBoosterDraft {
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
-    private LimitedPlayer localPlayer;
+    private final LimitedPlayer localPlayer;
+
+    private IDraftLog draftLog = null;
 
     private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
     protected int nextBoosterGroup = 0;
@@ -264,18 +266,32 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     protected BoosterDraft(final LimitedPoolType draftType) {
+        this(draftType, N_PLAYERS);
+    }
+
+    protected BoosterDraft(final LimitedPoolType draftType, int numPlayers) {
         this.draftFormat = draftType;
 
-        localPlayer = new LimitedPlayer(0);
+        localPlayer = new LimitedPlayer(0, this);
         players.add(localPlayer);
-        for (int i = 1; i < N_PLAYERS; i++) {
-            players.add(new LimitedPlayerAI(i));
+        for (int i = 1; i < numPlayers; i++) {
+            players.add(new LimitedPlayerAI(i, this));
         }
     }
 
     @Override
     public boolean isPileDraft() {
         return false;
+    }
+
+    @Override
+    public void setLogEntry(IDraftLog draftingProcess) {
+        draftLog = draftingProcess;
+    }
+
+    @Override
+    public IDraftLog getDraftLog() {
+        return draftLog;
     }
 
     private void setupCustomDraft(final CustomLimited draft) {

@@ -86,6 +86,7 @@ public enum CDeckEditorUI implements ICDoc {
         this.vBrawlDecks.setCDetailPicture(cDetailPicture);
         this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
         this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
+        // TODO Is this where i need stuff?!
     }
 
     public CDetailPicture getCDetailPicture() {

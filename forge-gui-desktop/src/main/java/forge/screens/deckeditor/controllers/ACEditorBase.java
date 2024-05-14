@@ -59,6 +59,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.menus.CDeckEditorUIMenus;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.deckeditor.views.VCurrentDeck;
+import forge.screens.deckeditor.views.VEditorLog;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;

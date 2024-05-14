@@ -38,12 +38,15 @@ public class LimitedPlayer {
     private final Map<String, List<String>> noted = new HashMap<>();
     //private Map<DraftPower, Integer> powers = new HashMap<>();
 
-    public LimitedPlayer(int seatingOrder) {
+    IBoosterDraft draft = null;
+
+    public LimitedPlayer(int seatingOrder, IBoosterDraft draft) {
         order = seatingOrder;
         deck = new Deck();
 
         packQueue = new LinkedList<>();
         unopenedPacks = new LinkedList<>();
+        this.draft = draft;
     }
 
     public Map<String, List<String>> getDraftNotes() {
@@ -89,14 +92,15 @@ public class LimitedPlayer {
         // Draft Actions
         Set<String> draftActions = Sets.newHashSet(bestPick.getRules().getMainPart().getDraftActions());
         if (draftActions.contains("Reveal CARDNAME as you draft it.")) {
-            System.out.println("Revealing " + bestPick.getName() + " as you draft it.");
             revealed.add(bestPick);
 
             if (draftActions.contains("Note how many cards you've drafted this draft round, including CARDNAME.")) {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.valueOf(draftedThisRound));
 
-                System.out.println(bestPick.getName() + " has been noted as having " + draftedThisRound + " cards drafted this round.");
+                addLog(name() + " revealed " + bestPick.getName() + " and noted " + draftedThisRound + " cards drafted this round.");
+            } else {
+                addLog(name() + " revealed " + bestPick.getName() + " as they drafted it.");
             }
         }
 
@@ -107,6 +111,10 @@ public class LimitedPlayer {
         // TODO Note Aether Searcher (for the next card)
 
         return true;
+    }
+
+    public void addLog(String message) {
+        this.draft.getDraftLog().addLogEntry(message);
     }
 
     public List<PaperCard> nextChoice() {
@@ -132,6 +140,14 @@ public class LimitedPlayer {
 
     public void receiveOpenedPack(List<PaperCard> pack) {
         packQueue.add(pack);
+    }
+
+    public String name() {
+        if (this instanceof LimitedPlayerAI) {
+            return "Player[" + order + "]";
+        }
+
+        return "You";
     }
 
     /*
