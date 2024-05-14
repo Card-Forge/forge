@@ -1851,7 +1851,11 @@ public class AiController {
         } else if (sa.hasSVar("EnergyToPay")) {
             return AbilityUtils.calculateAmount(source, sa.getSVar("EnergyToPay"), sa);
         } else if ("Vermin".equals(logic)) {
-            return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
+            if (player.getLife() < 5) {
+                return min;
+            }
+
+            return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 1));
         } else if ("SweepCreatures".equals(logic)) {
             int minAllowedChoice = AbilityUtils.calculateAmount(source, sa.getParam("Min"), sa);
             int choiceLimit = AbilityUtils.calculateAmount(source, sa.getParam("Max"), sa);
