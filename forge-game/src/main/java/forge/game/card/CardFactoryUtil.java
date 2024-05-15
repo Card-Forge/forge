@@ -2896,9 +2896,9 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append(" | ValidTgts$ ").append(valid);
-            abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
+            abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control");
             // the if the Equipment can really attach should be part of the Attach Effect
-            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump");
+            abilityStr.append(" | SorcerySpeed$ True | AILogic$ Pump");
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
@@ -3052,8 +3052,8 @@ public class CardFactoryUtil {
             abilityStr.append("| PrecostDesc$ Fortify");
             Cost cost = new Cost(equipCost, true);
             abilityStr.append(cost.isOnlyManaCost() ? " " : "—");
-            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
-            abilityStr.append("| SpellDescription$ (");
+            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString());
+            abilityStr.append(" | SpellDescription$ (");
             abilityStr.append(inst.getReminderText()).append(")");
 
             // instantiate attach ability
@@ -3217,8 +3217,8 @@ public class CardFactoryUtil {
             } else {
                 abilityStr.append(" ");
             }
-            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
-            abilityStr.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
+            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString());
+            abilityStr.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             sa.setIntrinsic(intrinsic);
@@ -3369,7 +3369,8 @@ public class CardFactoryUtil {
                 return;
             }
             String[] k = keyword.split(":");
-            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure | Secondary$ True";
+            String extra = k.length > 2 ? " | AlternateCost$ " + k[2] : "";
+            String bothStr = "| Cost$ " + k[1] + " | SorcerySpeed$ True | Reconfigure$ True | PrecostDesc$ Reconfigure | Secondary$ True" + extra;
             final StringBuilder attachStr = new StringBuilder();
             attachStr.append("AB$ Attach | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select target creature you control ");
             attachStr.append("| AILogic$ Pump | SpellDescription$ Attach ").append(bothStr);
@@ -3644,8 +3645,8 @@ public class CardFactoryUtil {
             sb.append(manacost);
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Cycling");
             sb.append(cost.isOnlyManaCost() ? " " : "—");
-            sb.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
-            sb.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
+            sb.append("| CostDesc$ ").append(cost.toSimpleString());
+            sb.append(" | SpellDescription$ (").append(inst.getReminderText()).append(")");
 
             SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
@@ -3972,15 +3973,14 @@ public class CardFactoryUtil {
 
         // Defeated trigger
         StringBuilder triggerDefeated = new StringBuilder();
-        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield | ");
+        triggerDefeated.append("Mode$ CounterRemovedOnce | ValidCard$ Card.Self | Secondary$ True | CounterType$ DEFENSE | Remaining$ 0 | TriggerZones$ Battlefield |");
         triggerDefeated.append(" TriggerDescription$ When CARDNAME is defeated, exile it, then cast it transformed.");
 
         String castExileBattle = "DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True";
         // note full rules text:
         // When the last defense counter is removed from this permanent, exile it, then you may cast it transformed
         // without paying its mana cost.
-        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | " +
-                "CastTransformed$ True";
+        String castDefeatedBattle = "DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | CastTransformed$ True";
 
         Trigger defeatedTrigger = TriggerHandler.parseTrigger(triggerDefeated.toString(), card, true);
         SpellAbility exileAbility = AbilityFactory.getAbility(castExileBattle, card);

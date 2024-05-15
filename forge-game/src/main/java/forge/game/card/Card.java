@@ -2247,12 +2247,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         } else {
                             sbLong.append("—");
                         }
-                        sbLong.append(mCost.toString());
-                        if (!mCost.isOnlyManaCost()) {
-                            sbLong.append(".");
-                        }
-                        if (k.length > 2) {
-                            sbLong.append(". " + k[3]);
+                        if (keyword.startsWith("Reconfigure") && k.length > 2) {
+                            final String[] altCost = new Cost(k[2], true).toString().split(" ");
+                            sbLong.append("—").append(altCost[0]).append(" ").append(mCost.toString()).append(" or ").append(altCost[1]);
+                        } else {
+                            sbLong.append(mCost.toString());
+                            if (!mCost.isOnlyManaCost()) {
+                                sbLong.append(".");
+                            }
+                            if (k.length > 2) {
+                                sbLong.append(". " + k[3]);
+                            }
                         }
                         sbLong.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append("\r\n");
