@@ -3,6 +3,7 @@ ManaCost:4 G
 Types:Creature Ouphe
 PT:3/3
 K:Persist
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature with flying.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ It deals damage equal to its power to target creature with flying.
 SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Sacrifice
 Oracle:Sacrifice Aerie Ouphes: It deals damage equal to its power to target creature with flying.\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

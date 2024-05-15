@@ -1,5 +1,6 @@
 Name:Font of Ire
 ManaCost:1 R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ 3 R Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player or planeswalker.
+A:AB$ DealDamage | Cost$ 3 R Sac<1/CARDNAME> | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 5 | SpellDescription$ It deals 5 damage to target player or planeswalker.
+DeckHas:Ability$Sacrifice
 Oracle:{3}{R}, Sacrifice Font of Ire: It deals 5 damage to target player or planeswalker.
