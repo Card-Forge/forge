@@ -1876,7 +1876,7 @@ public class ComputerUtil {
                     }
 
                     // don't use it on creatures that can't be regenerated
-                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) &&
+                    if ((saviourApi == ApiType.Regenerate) &&
                             (!c.canBeShielded() || noRegen)) {
                         continue;
                     }
@@ -1985,7 +1985,7 @@ public class ComputerUtil {
         }
         // Destroy => regeneration/bounce/shroud
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
+                && ((saviourApi == ApiType.Regenerate
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
