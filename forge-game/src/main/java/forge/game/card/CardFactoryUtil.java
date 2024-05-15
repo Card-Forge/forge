@@ -2454,10 +2454,20 @@ public class CardFactoryUtil {
             re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
 
             inst.addReplacement(re);
-        } else if (keyword.equals("Totem armor")) {
-            String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy"
-                    + " | Secondary$ True | TotemArmor$ True"
-                    + " | Description$ Totem armor (" + inst.getReminderText() + ")";
+        } else if (keyword.startsWith("Tribute")) {
+            final String[] k = keyword.split(":");
+            final String tributeAmount = k[1];
+
+            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ " + tributeAmount
+                    + " | ETB$ True | SpellDescription$ Tribute " + tributeAmount
+                    + " (" + inst.getReminderText() + ")";
+
+            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
+
+            inst.addReplacement(cardre);
+        } else if (keyword.equals("Umbra armor")) {
+            String repeffstr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | Secondary$ True"
+                    + " | Description$ Umbra armor (" + inst.getReminderText() + ")";
 
             String abprevDamage = "DB$ DealDamage | Defined$ ReplacedCard | Remove$ All ";
             String abdestroy = "DB$ Destroy | Defined$ Self";
@@ -2477,17 +2487,6 @@ public class CardFactoryUtil {
             re.setOverridingAbility(sa);
 
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Tribute")) {
-            final String[] k = keyword.split(":");
-            final String tributeAmount = k[1];
-
-            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ " + tributeAmount
-                    + " | ETB$ True | SpellDescription$ Tribute " + tributeAmount
-                    + " (" + inst.getReminderText() + ")";
-
-            ReplacementEffect cardre = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", "");
-
-            inst.addReplacement(cardre);
         } else if (keyword.equals("Unleash")) {
             String effect = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SpellDescription$ Unleash (" + inst.getReminderText() + ")";
 
