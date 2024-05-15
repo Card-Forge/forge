@@ -6,4 +6,4 @@ SVar:RazorDamage:AB$ DealDamage | Cost$ T Unattach<OriginalHost/Razor Boomerang>
 SVar:BoomerangCatch:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ OriginalHost
 K:Equip:2
 SVar:NonStackingAttachEffect:True
-Oracle:Equipped creature has "{T}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to any target. Return Razor Boomerang to its owner's hand."\nEquip {2}
+Oracle:Equipped creature has "{T}, Unattach Razor Boomerang: It deals 1 damage to any target. Return Razor Boomerang to its owner's hand."\nEquip {2}
