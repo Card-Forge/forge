@@ -62,7 +62,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             PaperCard ran = Aggregates.random(cards);
             random = CardFactory.getCard(ran, activator, game);
             cards.remove(ran);
-        } while (!activator.canPlayLand(random, false));
+        } while (!activator.canPlayLand(random, false, random.getFirstSpellAbility()));
 
         source.addCloneState(CardFactory.getCloneStates(random, source, sa), game.getNextTimestamp());
         source.updateStateForView();

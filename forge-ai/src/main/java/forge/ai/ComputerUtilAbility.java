@@ -48,7 +48,7 @@ public class ComputerUtilAbility {
                         return false;
                     }
                 }
-                return player.canPlayLand(c);
+                return player.canPlayLand(c, false, c.getFirstSpellAbility());
             }
         });
 

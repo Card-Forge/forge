@@ -469,7 +469,7 @@ public class AiController {
                     }
                 }
 
-                return player.canPlayLand(c);
+                return player.canPlayLand(c, false, c.getFirstSpellAbility());
             }
         });
         return landList;
