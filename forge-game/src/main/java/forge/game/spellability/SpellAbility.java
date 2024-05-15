@@ -1134,7 +1134,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isKeyword(Keyword.CREW);
     }
     public boolean isEquip() {
-        return isKeyword(Keyword.EQUIP);
+        return isKeyword(Keyword.EQUIP) || hasParam("Equip");
     }
 
     public boolean isChapter() {

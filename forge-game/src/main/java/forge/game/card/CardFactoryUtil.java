@@ -2898,7 +2898,7 @@ public class CardFactoryUtil {
             abilityStr.append("| ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
             // the if the Equipment can really attach should be part of the Attach Effect
-            abilityStr.append("| SorcerySpeed$ True | AILogic$ Pump");
+            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump");
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
