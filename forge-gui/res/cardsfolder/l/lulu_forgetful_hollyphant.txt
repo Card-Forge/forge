@@ -33,7 +33,7 @@ PT:2/4
 K:Flying
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, draw that many cards, then discard a card.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose |  Defined$ You | NumCards$ 1
 SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying
 DeckHas:Ability$Discard
 Oracle:Flying\nWhenever you attack with one or more other creatures with flying, draw that many cards, then discard a card.

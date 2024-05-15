@@ -31,22 +31,16 @@ import forge.util.WaitCallback;
 
 public class AutoUpdater {
     private final String SNAPSHOT_VERSION_INDEX = "https://downloads.cardforge.org/dailysnapshots/";
-    private final String SNAPSHOT_VERSION_URL = SNAPSHOT_VERSION_INDEX + "version.txt";
-    private final String SNAPSHOT_PACKAGE = SNAPSHOT_VERSION_INDEX + "latest/";
     private final String RELEASE_VERSION_INDEX = "https://releases.cardforge.org/";
-    private final String RELEASE_VERSION_URL = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/version.txt";
-    private final String RELEASE_PACKAGE = RELEASE_VERSION_INDEX + "latest/";
-    private final String RELEASE_MAVEN_METADATA = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/maven-metadata.xml";
     private static final boolean VERSION_FROM_METADATA = true;
-    private static final String TMP_DIR = "tmp/";
     private static final Localizer localizer = Localizer.getInstance();
 
     public static String[] updateChannels = new String[]{ "none", "snapshot", "release"};
 
-    private boolean isLoading;
+    private final boolean isLoading;
     private String updateChannel;
     private String version;
-    private String buildVersion;
+    private final String buildVersion;
     private String versionUrlString;
     private String packageUrl;
     private String packagePath;
@@ -56,6 +50,11 @@ public class AutoUpdater {
         isLoading = loading;
         updateChannel = FModel.getPreferences().getPref(ForgePreferences.FPref.AUTO_UPDATE);
         buildVersion = BuildInfo.getVersionString();
+    }
+
+    public boolean updateAvailable() {
+        // TODO Check if an update is available, and add a UI element to notify the user.
+        return verifyUpdateable();
     }
 
     public boolean attemptToUpdate() {
@@ -101,11 +100,13 @@ public class AutoUpdater {
                 return false;
             }
 
-            versionUrlString = SNAPSHOT_VERSION_URL;
-            packageUrl = SNAPSHOT_PACKAGE;
+            versionUrlString = SNAPSHOT_VERSION_INDEX + "version.txt";
         } else {
-            versionUrlString = RELEASE_VERSION_URL;
-            packageUrl = RELEASE_PACKAGE;
+            if (!updateChannel.equals("release")) {
+                System.out.println("Release build versions must use release update channel to work");
+                return false;
+            }
+            versionUrlString = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/version.txt";
         }
 
         // Check the internet connection
@@ -148,31 +149,21 @@ public class AutoUpdater {
     }
 
     private void retrieveVersion() throws MalformedURLException {
-        if (VERSION_FROM_METADATA) {
-            if (updateChannel.equals("release")) {
-                extractVersionFromMavenRelease();
-            } else {
-                extractVersionFromSnapshotIndex();
-            }
+        if (VERSION_FROM_METADATA && updateChannel.equals("release")) {
+            extractVersionFromMavenRelease();
         } else {
             URL versionUrl = new URL(versionUrlString);
             version = FileUtil.readFileToString(versionUrl);
         }
-    }
-
-    private void extractVersionFromSnapshotIndex() throws MalformedURLException {
-        URL metadataUrl = new URL(SNAPSHOT_VERSION_INDEX);
-        String index = FileUtil.readFileToString(metadataUrl);
-
-        System.out.println(index);
-        Pattern p = Pattern.compile(">forge-(.*SNAPSHOT)");
-        Matcher m = p.matcher(index);
-        while (m.find()) {
-            version = m.group(1);
+        if (updateChannel.equals("release")) {
+            packageUrl = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
+        } else {
+            packageUrl = SNAPSHOT_VERSION_INDEX + "forge-gui-desktop-" + version + ".tar.bz2";
         }
     }
 
     private void extractVersionFromMavenRelease() throws MalformedURLException {
+        String RELEASE_MAVEN_METADATA = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/maven-metadata.xml";
         URL metadataUrl = new URL(RELEASE_MAVEN_METADATA);
         String xml = FileUtil.readFileToString(metadataUrl);
 
@@ -213,6 +204,7 @@ public class AutoUpdater {
     }
 
     private boolean downloadFromForge() {
+        System.out.println("Downloading update from " + packageUrl + " to tmp/");
         WaitCallback<Boolean> callback = new WaitCallback<Boolean>() {
             @Override
             public void run() {
@@ -234,7 +226,7 @@ public class AutoUpdater {
     }
 
     private void extractUpdate() {
-        // TODOD Something like https://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java
+        // TODO Something like https://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java
         final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null) {
             try {

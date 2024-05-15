@@ -1594,7 +1594,7 @@ public class CardFactoryUtil {
 
             final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
                     " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
-                    " | Hidden$ True | Chooser$ Targeted | Optional$ Targeted";
+                    " | Hidden$ True | Chooser$ Targeted | Optional$ True";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2898,7 +2898,7 @@ public class CardFactoryUtil {
             abilityStr.append(" | ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control");
             // the if the Equipment can really attach should be part of the Attach Effect
-            abilityStr.append(" | SorcerySpeed$ True | AILogic$ Pump");
+            abilityStr.append(" | SorcerySpeed$ True | Equip$ True | AILogic$ Pump");
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
@@ -3954,7 +3954,7 @@ public class CardFactoryUtil {
             String effect = "Mode$ AttackVigilance | ValidCard$ Card.Self | Secondary$ True | Description$ Vigilance (" + inst.getReminderText() + ")";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("MayFlashSac")) {
-            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
+            String effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True | MayPlayDontGrantZonePermissions$ True"
                 + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
                 + " | AffectedZone$ Exile,Graveyard,Hand,Library,Stack | Description$ " + inst.getReminderText();
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
@@ -4011,7 +4011,7 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell+nonToken";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();

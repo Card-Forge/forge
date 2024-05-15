@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.nonBasic+OppOwn | TgtPrompt$ Select target card other than a basic land in an opponent's graveyard | RememberChanged$ True | SubAbility$ ExileYard | StackDescription$ None
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInYard | Chooser$ You | Hidden$ True | RememberChanged$ True | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | RememberChanged$ True | SubAbility$ ExileLib | StackDescription$ None
-SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ None
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ TargetedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ None
 SVar:NumInYard:TargetedController$CardsInGraveyard
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInLib:TargetedController$CardsInLibrary

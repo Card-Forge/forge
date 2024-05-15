@@ -6,6 +6,8 @@ Type=Draft
 ScryfallCode=MH3
 
 [cards]
+1 U Breaker of Creation @Yohann Schepacz
+2 R Devourer of Destiny @Raph Lomotan
 6 M Emrakul, the World Anew @Brent Hollowell
 8 M Herigast, Erupting Nullkite @Lucas Graciano
 9 U It That Heralds the End @Alex Konstad

@@ -370,7 +370,8 @@ public class ComputerUtil {
                                 if (c.isCreature()) {
                                     if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
                                         continue;
-                                    } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                    }
+                                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
                                         continue;
                                     }
                                     toRemove.add(c);
