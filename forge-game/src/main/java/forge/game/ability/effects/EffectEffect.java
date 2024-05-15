@@ -289,8 +289,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // chosen number
             if (sa.hasParam("SetChosenNumber")) {
-                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard,
-                        sa.getParam("SetChosenNumber"), sa));
+                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
             }
