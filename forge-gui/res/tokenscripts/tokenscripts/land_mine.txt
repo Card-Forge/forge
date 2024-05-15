@@ -1,0 +1,5 @@
+Name:Land Mine
+ManaCost:no cost
+Types:Artifact
+A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | NumDmg$ 2 | SpellDescription$ It deals 2 damage to target attacking creature without flying.
+Oracle:{R}, Sacrifice this artifact: It deals 2 damage to target attacking creature without flying.
