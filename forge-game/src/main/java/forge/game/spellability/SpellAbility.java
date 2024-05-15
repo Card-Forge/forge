@@ -943,7 +943,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         StringBuilder sb = new StringBuilder();
         // descriptors
         if (hasParam("PrecostDesc")) {
-            equip = getParam("PrecostDesc").equals("Equip");
+            equip = getParam("PrecostDesc").startsWith("Equip");
             sb.append(getParam("PrecostDesc")).append(" ");
         }
         if (hasParam("CostDesc")) {
