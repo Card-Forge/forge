@@ -9,7 +9,7 @@ SVar:X:Count$ValidGraveyard Card$CardTypes
 SVar:Y:SVar$X/Plus.1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may mill that many cards. If you do, you may put a creature card from among them into your hand.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ Z | RememberMilled$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Creature.IsRemembered | SelectPrompt$ You may select a creature card among the card milled this way  | Optional$ True | SelectPrompt$ You may select a creature card and/or a land card. | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Creature.IsRemembered | SelectPrompt$ You may select a creature card among the cards milled this way  | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:TriggerCount$DamageAmount
 DeckHas:Ability$Mill|Graveyard|LifeGain
