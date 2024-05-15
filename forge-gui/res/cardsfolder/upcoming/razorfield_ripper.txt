@@ -1,0 +1,11 @@
+Name:Razorfield Ripper 
+ManaCost:2 W
+Types:Artifact Creature Equipment Rhino
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or equipped creature attacks, you get {E}, then it gets +X/+X until end of turn, where X is the amount of {E} you have.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
+K:Reconfigure:2:PayEnergy<3>
+SVar:X:Count$YourCountersEnergy
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Razorfield Ripper or equipped creature attacks, you get {E} (an energy counter), then it gets +X/+X until end of turn, where X is the amount of {E} you have.\nReconfigure – Pay {2} or {E}{E}{E}.(Pay {2} or {E}{E}{E}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)
