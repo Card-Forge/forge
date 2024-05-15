@@ -2350,7 +2350,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Double team") || keyword.equals("Living metal")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
-                        || keyword.equals("Ascend") || keyword.equals("Totem armor")
+                        || keyword.equals("Ascend") || keyword.equals("Umbra armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
                         || keyword.equals("Friends forever") || keyword.equals("Choose a Background")
