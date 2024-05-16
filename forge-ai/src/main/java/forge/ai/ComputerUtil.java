@@ -1720,7 +1720,6 @@ public class ComputerUtil {
                     }
                 }
             }
-
         }
 
         return damage;
@@ -1759,6 +1758,9 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
+                spell = spell.getOriginalAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
@@ -1770,6 +1772,9 @@ public class ComputerUtil {
             }
         }
 
+        // align threatened with resolve order
+        // matters if stack contains multiple activations (e.g. Temur Sabertooth)
+        Collections.reverse(objects);
         return objects;
     }
 
@@ -2126,7 +2131,6 @@ public class ComputerUtil {
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
         return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
     }
-
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
         final Game game = ai.getGame();
 
