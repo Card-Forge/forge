@@ -1,0 +1,7 @@
+Name:Harbinger of the Seas
+ManaCost:1 U U
+Types:Creature Merfolk Wizard
+PT:2/2
+S:Mode$ Continuous | Affected$ Land.nonBasic | AddType$ Island | RemoveLandTypes$ True | Description$ Nonbasic lands are Islands.
+AI:RemoveDeck:Random
+Oracle:Nonbasic lands are Islands.
