@@ -251,7 +251,7 @@ public abstract class PlayerController {
     public abstract String chooseKeywordForPump(List<String> options, SpellAbility sa, String prompt, Card tgtCard);
 
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
-    public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers);
+    public abstract ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers);
     public abstract StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleReplacers);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);
 

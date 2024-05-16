@@ -70,6 +70,7 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -2292,6 +2293,33 @@ public class AiController {
             // before normal prevention
             if (!prevention.isEmpty()) {
                 return Iterables.getFirst(prevention, null);
+            }
+        } else if (mode.equals(ReplacementType.Destroy)) {
+            List<ReplacementEffect> shield = filterList(list, CardTraitPredicates.hasParam("ShieldCounter"));
+            List<ReplacementEffect> regeneration = filterList(list, CardTraitPredicates.hasParam("Regeneration"));
+            List<ReplacementEffect> umbraArmor = filterList(list, CardTraitPredicates.isKeyword(Keyword.UMBRA_ARMOR));
+            List<ReplacementEffect> umbraArmorIndestructible = filterList(umbraArmor, Predicates.compose(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE), CardTraitBase::getHostCard));
+
+            // Indestructible umbra armor is the best
+            if (!umbraArmorIndestructible.isEmpty()) {
+                return Iterables.getFirst(umbraArmorIndestructible, null);
+            }
+
+            // then it might be better to remove shield counter if able?
+            if (!shield.isEmpty()) {
+                return Iterables.getFirst(shield, null);
+            }
+
+            // TODO get the RunParams for Affected to check if the creature already dealt combat damage for Regeneration effects
+            // is using a Regeneration Effect better than using a Umbra Armor?
+            if (!regeneration.isEmpty()) {
+                return Iterables.getFirst(regeneration, null);
+            }
+
+            if (!umbraArmor.isEmpty()) {
+                // sort them by cmc
+                umbraArmor.sort(Comparator.comparing(CardTraitBase::getHostCard, Comparator.comparing(Card::getCMC)));
+                return Iterables.getFirst(umbraArmor, null);
             }
         }
 

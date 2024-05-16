@@ -6942,7 +6942,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 shieldCounterReplaceDamage.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
             if (shieldCounterReplaceDestroy == null) {
-                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidCause$ SpellAbility | Secondary$ True "
+                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidCause$ SpellAbility | Secondary$ True | ShieldCounter$ True "
             + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it.";
                 shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));

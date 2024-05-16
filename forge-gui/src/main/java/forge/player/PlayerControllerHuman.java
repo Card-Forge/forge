@@ -1891,11 +1891,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
         }
+        String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         final String firstStr = first.toString();
         for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
