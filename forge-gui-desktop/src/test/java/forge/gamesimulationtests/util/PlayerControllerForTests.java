@@ -541,7 +541,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleReplacers, null);
     }
