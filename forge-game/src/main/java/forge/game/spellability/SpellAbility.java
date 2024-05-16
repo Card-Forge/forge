@@ -937,36 +937,38 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public String getCostDescription() {
         if (payCosts == null || (this instanceof AbilitySub)) { // SubAbilities don't have Costs or Cost
             return "";
-        } else {
-            StringBuilder sb = new StringBuilder();
-            // descriptors
-            if (hasParam("PrecostDesc")) {
-                sb.append(getParam("PrecostDesc")).append(" ");
-            }
-            if (hasParam("CostDesc")) {
-                sb.append(getParam("CostDesc")).append(" ");
-            } else {
-                if (hasParam("AlternateCost")) {
-                    Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
-                    boolean altOnlyMana = alternateCost.isOnlyManaCost();
-                    if (payCosts.isOnlyManaCost() && !altOnlyMana) {
-                        sb.append("Pay ");
-                    }
-                    sb.append(payCosts.toString());
-                    sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
-                            StringUtils.uncapitalize(alternateCost.toString()));
-                    sb.append(isEquip() && !altOnlyMana ? "." : "");
-                } else {
-                    sb.append(payCosts.toString());
-                }
-
-                if (payCosts.isAbility() && !isEquip()) {
-                    sb.append(": ");
-                }
-            }
-
-            return sb.toString();
         }
+
+        boolean equip = false;
+        StringBuilder sb = new StringBuilder();
+        // descriptors
+        if (hasParam("PrecostDesc")) {
+            equip = getParam("PrecostDesc").startsWith("Equip");
+            sb.append(getParam("PrecostDesc")).append(" ");
+        }
+        if (hasParam("CostDesc")) {
+            sb.append(getParam("CostDesc")).append(" ");
+        } else {
+            if (hasParam("AlternateCost")) {
+                Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
+                boolean altOnlyMana = alternateCost.isOnlyManaCost();
+                if (payCosts.isOnlyManaCost() && !altOnlyMana) {
+                    sb.append("Pay ");
+                }
+                sb.append(payCosts.toString());
+                sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
+                    StringUtils.uncapitalize(alternateCost.toString()));
+                sb.append(equip && !altOnlyMana ? "." : "");
+            } else {
+                sb.append(payCosts.toString());
+            }
+
+            if (payCosts.isAbility() && !equip) {
+                sb.append(": ");
+            }
+        }
+
+        return sb.toString();
     }
 
     public void rebuiltDescription() {
@@ -1134,7 +1136,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isKeyword(Keyword.CREW);
     }
     public boolean isEquip() {
-        return isKeyword(Keyword.EQUIP) || hasParam("Equip");
+        return isKeyword(Keyword.EQUIP);
     }
 
     public boolean isChapter() {

@@ -1956,12 +1956,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 String saStr = currentSa.toString();
 
                 // if current SA isn't a trigger and it uses Targeting, try to show prompt
-                if (!currentSa.isTrigger() && currentSa.usesTargeting()) {
+                if (currentSa.isTrigger()) {
+                    needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
+                } else if (currentSa.usesTargeting()) {
                     needPrompt = true;
                 }
-                if (!needPrompt && !saStr.equals(firstStr) && !currentSa.hasParam("OrderDuplicates")) {
-                    needPrompt = true; // prompt by default unless all abilities
-                    // are the same
+                if (!needPrompt && !saStr.equals(firstStr)) {
+                    // prompt by default unless all abilities are the same
+                    needPrompt = true;
                 }
 
                 saLookupKey.append(delim).append(saStr);

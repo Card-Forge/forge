@@ -1356,14 +1356,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
         if (!game.getStack().isEmpty()) {
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
-
-            final List<Card> threatenedTargets = new ArrayList<>();
-
-            for (final Card c : aiPermanents) {
-                if (objects.contains(c)) {
-                    threatenedTargets.add(c);
-                }
-            }
+            final List<Card> threatenedTargets = Lists.newArrayList(aiPermanents);
+            threatenedTargets.retainAll(objects);
 
             if (!threatenedTargets.isEmpty()) {
                 // Choose "best" of the remaining to save
