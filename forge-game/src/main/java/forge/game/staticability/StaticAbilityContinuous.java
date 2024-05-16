@@ -423,6 +423,10 @@ public final class StaticAbilityContinuous {
                             newTypes.addAll(CardType.getBasicTypes());
                             return true;
                         }
+                        if (input.equals("AllNonBasicLandType")) {
+                            newTypes.addAll(CardType.getNonBasicTypes());
+                            return true;
+                        }
                         return false;
                     }
                 });
