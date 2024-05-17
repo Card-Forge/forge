@@ -93,11 +93,9 @@ public class StaticAbilityPanharmonicon {
             }
         }
 
-        // outside of Room Entered abilities, Panharmonicon effects always talk about Permanents you control which means only Battlefield
-        if (!trigMode.equals(TriggerType.RoomEntered)) {
-            if (!trigger.getHostCard().isInZone(ZoneType.Battlefield)) {
-                return false;
-            }
+        final List<ZoneType> validZones = ZoneType.listValueOf(stAb.getParamOrDefault("ValidZone", "Battlefield"));
+        if (!validZones.contains(trigger.getHostCard().getZone().getZoneType())) {
+            return false;
         }
 
         if (trigMode.equals(TriggerType.ChangesZone)) {
