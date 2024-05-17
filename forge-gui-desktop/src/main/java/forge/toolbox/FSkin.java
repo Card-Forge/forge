@@ -1425,8 +1425,8 @@ public class FSkin {
 
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
-
-        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);}
+        }
+        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);
         addEncodingSymbol("Y", FSkinProp.IMG_MANA_Y);
         addEncodingSymbol("Z", FSkinProp.IMG_MANA_Z);
         addEncodingSymbol("CHAOS", FSkinProp.IMG_CHAOS);
