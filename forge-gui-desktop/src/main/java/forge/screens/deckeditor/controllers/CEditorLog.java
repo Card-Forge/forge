@@ -11,15 +11,16 @@ import forge.screens.match.views.VLog;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public class CEditorLog implements ICDoc {
+public enum CEditorLog implements ICDoc {
+    SINGLETON_INSTANCE;
+
     /** */
     CEditorDraftingProcess draftingProcess;
 
     private final VEditorLog view;
 
-    CEditorLog(final CEditorDraftingProcess draftingProcess) {
-        this.draftingProcess = draftingProcess;
-        this.view = new VEditorLog(this);
+    CEditorLog() {
+        this.view = VEditorLog.SINGLETON_INSTANCE;
     }
 
     //========== Overridden methods
@@ -41,12 +42,13 @@ public class CEditorLog implements ICDoc {
      */
     @Override
     public void initialize() {
+        FThreads.invokeInEdtNowOrLater(reset);
     }
 
-    private final Runnable r = new Runnable() {
+    private final Runnable reset = new Runnable() {
         @Override
         public void run() {
-            view.updateConsole();
+            view.resetNewDraft();
         }
     };
 
@@ -55,6 +57,11 @@ public class CEditorLog implements ICDoc {
      */
     @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(r);
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
+            @Override
+            public void run() {
+                view.updateConsole();
+            }
+        });
     }
 }

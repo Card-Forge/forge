@@ -21,7 +21,8 @@ import java.util.List;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public class VEditorLog implements IVDoc<CEditorLog> {
+public enum VEditorLog implements IVDoc<CEditorLog> {
+    SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
@@ -36,11 +37,7 @@ public class VEditorLog implements IVDoc<CEditorLog> {
 
     private final List<String> editorLogEntries = Lists.newArrayList();
 
-    private final CEditorLog controller;
-
-
-    public VEditorLog(final CEditorLog controller) {
-        this.controller = controller;
+    VEditorLog() {
         pnlContent.setOpaque(false);
         scroller.getViewport().setBorder(null);
 
@@ -59,9 +56,16 @@ public class VEditorLog implements IVDoc<CEditorLog> {
         return tab;
     }
 
+    public void showView() {
+        tab.setVisible(true);
+        tab.setOpaque(true);
+        pnlContent.setOpaque(true);
+        pnlContent.setVisible(true);
+    }
+
     @Override
     public CEditorLog getLayoutControl() {
-        return controller;
+        return CEditorLog.SINGLETON_INSTANCE;
     }
 
     @Override
@@ -82,14 +86,14 @@ public class VEditorLog implements IVDoc<CEditorLog> {
         parentBody.add(gameLog, "w 10:100%, h 100%");
     }
 
-    private void resetNewDraft() {
+    public void resetNewDraft() {
         // Should we store the draft?
         gameLog.reset();
         editorLogEntries.clear();
     }
 
     public void updateConsole() {
-        resetNewDraft();
+        gameLog.updateUI();
     }
 
     public void addLogEntry(String entry) {

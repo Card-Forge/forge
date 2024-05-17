@@ -390,6 +390,9 @@ public class BoosterDraft implements IBoosterDraft {
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
         }
+        if (this.getDraftLog() != null) {
+            this.getDraftLog().addLogEntry("Round " + this.nextBoosterGroup + " is starting...");
+        }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
     }

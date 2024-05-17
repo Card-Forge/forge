@@ -61,10 +61,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
-
     private DragCell draftLogParent = null;
     private boolean saved = false;
-    private final CEditorLog editorLog = new CEditorLog(this);
     private final Localizer localizer = Localizer.getInstance();
 
     //========== Constructor
@@ -88,8 +86,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
-
-
     }
 
     /**
@@ -102,10 +98,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.boosterDraft = inBoosterDraft;
         this.boosterDraft.setLogEntry(this);
 
+        this.addLogEntry("Drafting process started.");
     }
 
     public void addLogEntry(String message) {
-        editorLog.addLogEntry(message);
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message);
     }
 
     /* (non-Javadoc)
@@ -294,6 +291,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
         this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
 
+        if (VEditorLog.SINGLETON_INSTANCE.getParentCell() == null) {
+            VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
+            VEditorLog.SINGLETON_INSTANCE.showView();
+        }
+
         ccAddLabel = this.getBtnAdd().getText();
 
         if (this.getDeckManager().getPool() == null) { //avoid showing next choice or resetting pool if just switching back to Draft screen
@@ -320,14 +322,12 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
-        draftLogParent = removeTab(editorLog.getView());
 
         // set catalog table to single-selection only mode
         getCatalogManager().setAllowMultipleSelections(false);
 
         // this appears to be needed to actually show the available draft choices
         getCatalogManager().refresh();
-        draftLogParent.setVisible(true);
     }
 
     /* (non-Javadoc)
@@ -356,9 +356,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
-        if (editorLog.getView().getParentCell() != null) {
-            editorLog.getView().getParentCell().setVisible(true);
-        }
+        VEditorLog.SINGLETON_INSTANCE.getParentCell().setVisible(true);
 
         //Re-add tabs
         if (deckGenParent != null) {
@@ -380,7 +378,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
         if (draftLogParent != null) {
-            draftLogParent.addDoc(editorLog.getView());
+            draftLogParent.addDoc(VEditorLog.SINGLETON_INSTANCE);
         }
 
         // set catalog table back to free-selection mode
