@@ -3,7 +3,6 @@ package forge.screens.deckeditor.controllers;
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
 import forge.screens.deckeditor.views.VEditorLog;
-import forge.screens.match.views.VLog;
 
 /**
  * Controls the "editor log" panel in the deck editor UI.

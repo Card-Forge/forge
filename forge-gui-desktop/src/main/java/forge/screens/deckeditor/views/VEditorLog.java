@@ -4,12 +4,9 @@ import javax.swing.JPanel;
 
 import com.google.common.collect.Lists;
 import forge.gui.framework.*;
-import forge.screens.deckeditor.controllers.CEditorDraftingProcess;
 import forge.screens.deckeditor.controllers.CEditorLog;
 import forge.screens.match.GameLogPanel;
-import forge.screens.match.controllers.CLog;
 import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
