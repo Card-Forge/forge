@@ -5,7 +5,6 @@ R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw 
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.
 SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
 SVar:X:Count$xPaid
-SVar:LifeTotal:Count$YourLifeTotal
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 5 | Description$ Your maximum hand size is five.
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.YouCtrl,Card.token+YouCtrl | ReplaceWith$ Exile | Description$ If a card or token would be put into your graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
