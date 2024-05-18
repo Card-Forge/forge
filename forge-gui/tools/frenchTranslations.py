@@ -30,7 +30,7 @@ url = 'https://www.play-in.com/recherche/result.php?s='
 SUCCESS_STATUS = 200
 
 # Generate by the method mapAlphabet()
-utils = {'A': 0, 'B': 1396, 'C': 2795, 'D': 4515, 'E': 5927, 'F': 6804, 'G': 7869, 'H': 9184, 'I': 10029, 'J': 10639, 'K': 10914, 'L': 11584, 'M': 12336, 'N': 13765, 'O': 14349, 'P': 14849, 'Q': 15970, 'R': 16063, 'S': 17391, 'T': 20691, 'U': 22167, 'V': 22485, 'W': 23145, 'X': 23978, 'Y': 23999, 'Z': 24099}
+utils = {'A': 0, 'B': 1420, 'C': 2842, 'D': 4586, 'E': 6011, 'F': 6900, 'G': 7976, 'H': 9306, 'I': 10158, 'J': 10780, 'K': 11058, 'L': 11738, 'M': 12496, 'N': 13954, 'O': 14547, 'P': 15053, 'Q': 16190, 'R': 16283, 'S': 17612, 'T': 20918, 'U': 22401, 'V': 22721, 'W': 23382, 'X': 24218, 'Y': 24239, 'Z': 24339}
 
 
 """
@@ -82,7 +82,7 @@ def getMissingCards():
 
 
 """
-  " Function to find new cards after scryfall scrap and keep
+  " Function to find new cards after scryfall scrap (cardnamesTranslations.py with setting fr-FR) and keep
   " old cards too with their translation.
 """
 def findNewCards():
