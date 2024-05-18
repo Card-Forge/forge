@@ -121,10 +121,6 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         // get next booster pack
         this.boosterDraft.setChoice(card);
 
-        // TODO I just drafted something. Does it have a When drafted effect?
-
-        // TODO I'm about to pass cards.
-
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;
         if (nextChoice) {

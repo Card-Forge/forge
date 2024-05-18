@@ -1,15 +1,14 @@
 package forge.gamemodes.limited;
 
-import java.util.*;
-
-//import com.google.common.collect.Lists;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.util.TextUtil;
+
+import java.util.*;
 //import forge.gamemodes.limited.powers.DraftPower;
 
 public class LimitedPlayer {
@@ -90,11 +89,11 @@ public class LimitedPlayer {
         }
 
         // Draft Actions
-        Set<String> draftActions = Sets.newHashSet(bestPick.getRules().getMainPart().getDraftActions());
-        if (draftActions.contains("Reveal CARDNAME as you draft it.")) {
+        Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
+        if (Iterables.contains(draftActions, "Reveal CARDNAME as you draft it.")) {
             revealed.add(bestPick);
 
-            if (draftActions.contains("Note how many cards you've drafted this draft round, including CARDNAME.")) {
+            if (Iterables.contains(draftActions, "Note how many cards you've drafted this draft round, including CARDNAME.")) {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.valueOf(draftedThisRound));
 
