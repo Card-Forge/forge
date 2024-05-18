@@ -34,18 +34,10 @@ public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
 
     public static void loadImages() {
-        for (Map.Entry<ManaCostShard, FSkinProp> e : FSkinProp.SHARD_IMG.entrySet()) {
-            Forge.getAssets().manaImages().put(e.getKey().getImageKey(), Forge.getAssets().images().get(e.getValue()));
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            Forge.getAssets().manaImages().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
         }
-        for (int i = 0; i <= 20; i++) {
-            Forge.getAssets().manaImages().put(String.valueOf(i), Forge.getAssets().images().get(FSkinProp.valueOf("IMG_MANA_" + i)));
-        }
-        Forge.getAssets().manaImages().put("X", Forge.getAssets().images().get(FSkinProp.IMG_MANA_X));
-        Forge.getAssets().manaImages().put("Y", Forge.getAssets().images().get(FSkinProp.IMG_MANA_Y));
-        Forge.getAssets().manaImages().put("Z", Forge.getAssets().images().get(FSkinProp.IMG_MANA_Z));
 
-        Forge.getAssets().manaImages().put("P", Forge.getAssets().images().get(FSkinProp.IMG_MANA_PHRYX));
-        Forge.getAssets().manaImages().put("T", FSkinImage.TAP);
         Forge.getAssets().manaImages().put("E", FSkinImage.ENERGY);
         Forge.getAssets().manaImages().put("TK", FSkinImage.TICKET);
         Forge.getAssets().manaImages().put("slash", FSkinImage.SLASH);

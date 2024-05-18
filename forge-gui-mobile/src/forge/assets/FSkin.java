@@ -332,7 +332,7 @@ public class FSkin {
                     image.load(preferredIcons);
                 }
             }
-            for (FSkinProp prop : FSkinProp.SHARD_IMG.values()) {
+            for (FSkinProp prop : FSkinProp.MANA_IMG.values()) {
                 FSkinImageImpl image = new FSkinImageImpl(prop);
                 image.load(preferredIcons);
                 FSkin.getImages().put(prop, image);

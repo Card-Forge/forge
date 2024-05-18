@@ -61,8 +61,6 @@ public enum FSkinImage implements FSkinImageInterface {
     DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S),
 
     //Gameplay
-    TAP             (FSkinProp.IMG_TAP),
-    UNTAP           (FSkinProp.IMG_UNTAP),
     CHAOS           (FSkinProp.IMG_CHAOS),
     SLASH           (FSkinProp.IMG_SLASH),
     ATTACK          (FSkinProp.IMG_ATTACK),

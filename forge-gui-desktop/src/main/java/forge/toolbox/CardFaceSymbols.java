@@ -50,19 +50,10 @@ public class CardFaceSymbols {
         DECK_COLORSET.put("U", FSkin.getImage(FSkinProp.IMG_MANA_U));
         DECK_COLORSET.put("W", FSkin.getImage(FSkinProp.IMG_MANA_W));
 
-        for (int i = 0; i <= 20; i++) {
-            MANA_IMAGES.put(String.valueOf(i), FSkin.getImage(FSkinProp.valueOf("IMG_MANA_" + i)));
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            MANA_IMAGES.put(e.getKey(), FSkin.getImage(e.getValue()));
         }
 
-        MANA_IMAGES.put("Y", FSkin.getImage(FSkinProp.IMG_MANA_Y));
-        MANA_IMAGES.put("Z", FSkin.getImage(FSkinProp.IMG_MANA_Z));
-
-        for (Map.Entry<ManaCostShard, FSkinProp> e : FSkinProp.SHARD_IMG.entrySet()) {
-            MANA_IMAGES.put(e.getKey().getImageKey(),  FSkin.getImage(e.getValue()));
-        }
-
-        MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP));
-        MANA_IMAGES.put("Q", FSkin.getImage(FSkinProp.IMG_UNTAP));
         MANA_IMAGES.put("E", FSkin.getImage(FSkinProp.IMG_ENERGY, 40, 40));
         MANA_IMAGES.put("TK", FSkin.getImage(FSkinProp.IMG_TICKET, 40, 40));
         MANA_IMAGES.put("EXPERIENCE", FSkin.getImage(FSkinProp.IMG_EXPERIENCE, 40, 30));

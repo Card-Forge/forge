@@ -20,6 +20,7 @@ package forge.localinstance.skin;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 
 import forge.card.mana.ManaCostShard;
 import forge.localinstance.properties.ForgeConstants;
@@ -634,6 +635,23 @@ public enum FSkinProp {
             .put(ManaCostShard.X, IMG_MANA_X)
 
             .build();
+
+    public static Map<String, FSkinProp> MANA_IMG = Maps.newHashMap();
+    static {
+        for (Map.Entry<ManaCostShard, FSkinProp> e : SHARD_IMG.entrySet()) {
+            MANA_IMG.put(e.getKey().getImageKey(), e.getValue());
+        }
+        for (int i = 0; i <= 20; i++) {
+            MANA_IMG.put(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
+        }
+
+        MANA_IMG.put("P", FSkinProp.IMG_MANA_PHRYX);
+        MANA_IMG.put("Y", FSkinProp.IMG_MANA_Y);
+        MANA_IMG.put("Z", FSkinProp.IMG_MANA_Z);
+        MANA_IMG.put("CHAOS", FSkinProp.IMG_CHAOS);
+        MANA_IMG.put("Q", FSkinProp.IMG_UNTAP);
+        MANA_IMG.put("T", FSkinProp.IMG_TAP);
+    }
 
     public enum PropType {
         BACKGROUND(null),

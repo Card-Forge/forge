@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardFaceSymbols;
-import forge.card.mana.ManaCostShard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -22,19 +21,10 @@ import forge.util.TextBounds;
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
     static {
-        for (Map.Entry<ManaCostShard, FSkinProp> e : FSkinProp.SHARD_IMG.entrySet()) {
-            Forge.getAssets().symbolLookup().put(e.getKey().getImageKey(),Forge.getAssets().images().get(e.getValue()));
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            Forge.getAssets().symbolLookup().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
         }
 
-        for (int i = 0; i <= 20; i++) {
-            Forge.getAssets().symbolLookup().put(String.valueOf(i), Forge.getAssets().images().get(FSkinProp.valueOf("IMG_MANA_" + i)));
-        }
-        Forge.getAssets().symbolLookup().put("P", Forge.getAssets().images().get(FSkinProp.IMG_MANA_PHRYX));
-        Forge.getAssets().symbolLookup().put("Y", Forge.getAssets().images().get(FSkinProp.IMG_MANA_Y));
-        Forge.getAssets().symbolLookup().put("Z", Forge.getAssets().images().get(FSkinProp.IMG_MANA_Z));
-        Forge.getAssets().symbolLookup().put("CHAOS", FSkinImage.CHAOS);
-        Forge.getAssets().symbolLookup().put("Q", FSkinImage.UNTAP);
-        Forge.getAssets().symbolLookup().put("T", FSkinImage.TAP);
         Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
         Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
         Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
@@ -155,7 +145,7 @@ public class TextRenderer {
                 if (inSymbolCount > 0) {
                     inSymbolCount--;
                     if (text.length() > 0) {
-                        FSkinImageInterface symbol = Forge.getAssets().symbolLookup().get(text.toString());
+                        FSkinImageInterface symbol = Forge.getAssets().symbolLookup().get(text.toString().replace("/", ""));
                         if (symbol != null) {
                             pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {

@@ -103,7 +103,6 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 import forge.Singletons;
-import forge.card.mana.ManaCostShard;
 import forge.gui.FThreads;
 import forge.gui.GuiUtils;
 import forge.gui.framework.ILocalRepaint;
@@ -1419,19 +1418,10 @@ public class FSkin {
             }
         }
 
-        for (Map.Entry<ManaCostShard, FSkinProp> e : FSkinProp.SHARD_IMG.entrySet()) {
-            addEncodingSymbol(e.getKey().getImageKey(), e.getValue());
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            addEncodingSymbol(e.getKey(), e.getValue());
         }
 
-        for (int i = 0; i <= 20; i++) {
-            addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
-        }
-        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);
-        addEncodingSymbol("Y", FSkinProp.IMG_MANA_Y);
-        addEncodingSymbol("Z", FSkinProp.IMG_MANA_Z);
-        addEncodingSymbol("CHAOS", FSkinProp.IMG_CHAOS);
-        addEncodingSymbol("Q", FSkinProp.IMG_UNTAP);
-        addEncodingSymbol("T", FSkinProp.IMG_TAP);
         addEncodingSymbol("E", FSkinProp.IMG_ENERGY);
         addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
         addEncodingSymbol("EXPERIENCE", FSkinProp.IMG_EXPERIENCE);
