@@ -1,15 +1,17 @@
 package forge.screens.deckeditor.views;
 
-import javax.swing.JPanel;
-
 import com.google.common.collect.Lists;
-import forge.gui.framework.*;
+import forge.gui.framework.DragCell;
+import forge.gui.framework.DragTab;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.IVDoc;
 import forge.screens.deckeditor.controllers.CEditorLog;
 import forge.screens.match.GameLogPanel;
 import forge.toolbox.FScrollPane;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -94,7 +96,6 @@ public enum VEditorLog implements IVDoc<CEditorLog> {
     }
 
     public void addLogEntry(String entry) {
-        System.out.println(entry);
         gameLog.addLogEntry(entry);
         this.editorLogEntries.add(entry);
     }

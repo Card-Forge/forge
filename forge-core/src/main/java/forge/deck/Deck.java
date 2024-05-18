@@ -95,9 +95,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         for (final Entry<DeckSection, CardPool> sections : other.parts.entrySet()) {
             parts.put(sections.getKey(), new CardPool(sections.getValue()));
         }
-        aiHints.addAll(other.getAiHints());
-        tags.addAll(other.getTags());
-        draftNotes.putAll(other.getDraftNotes());
     }
 
     @Override
@@ -213,6 +210,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
         result.setDraftNotes(draftNotes);
+        tags.addAll(result.getTags());
     }
 
     /*
