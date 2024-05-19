@@ -2,6 +2,6 @@ Name:Magus of the Vineyard
 ManaCost:G
 Types:Creature Human Wizard
 PT:1/1
-T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ Player | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G}.
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G}.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 Oracle:At the beginning of each player's precombat main phase, that player adds {G}{G}.

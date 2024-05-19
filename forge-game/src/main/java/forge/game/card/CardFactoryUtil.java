@@ -3885,7 +3885,7 @@ public class CardFactoryUtil {
 
             // Block
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Secondary$ True ";
-            String desc = "Protection ( " + inst.getReminderText() + ")";
+            String desc = "Protection (" + inst.getReminderText() + ")";
             if (!valid.isEmpty()) {
                 effect += "| ValidBlocker$ " + valid;
             }
