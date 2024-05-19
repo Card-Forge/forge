@@ -656,7 +656,7 @@ public enum FSkinProp {
     public enum PropType {
         BACKGROUND(null),
         COLOR(null),
-        IMAGE(null),
+        IMAGE(ForgeConstants.SPRITE_ICONS_FILE),
         ICON(ForgeConstants.SPRITE_ICONS_FILE),
         FOIL(ForgeConstants.SPRITE_FOILS_FILE),
         OLD_FOIL(ForgeConstants.SPRITE_OLD_FOILS_FILE),
