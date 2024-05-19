@@ -141,6 +141,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     c.turnFaceDown(true);
                     CardFactoryUtil.setFaceDownState(c, sa);
                 }
+                if (sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(c, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    c.addEtbCounter(cType, cAmount,sa.getActivatingPlayer());
+                }
             }
             Card movedCard = null;
             if (sa.hasParam("GainControl")) {
