@@ -244,12 +244,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (hasParam("PreCombatMain")) {
-            if (!phaseHandler.isPreCombatMain()) {
-                return false;
-            }
-        }
-
         if (hasParam("PlayerTurn")) {
             if (!phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
                 return false;

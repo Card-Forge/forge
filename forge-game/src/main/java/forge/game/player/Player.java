@@ -3432,7 +3432,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 radiationEffect.setSetCode(setCode);
             }
 
-            String trigStr = "Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Command | TriggerDescription$ " +
+            String trigStr = "Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | TriggerDescription$ " +
             "At the beginning of your precombat main phase, if you have any rad counters, mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter.";
 
             Trigger tr = TriggerHandler.parseTrigger(trigStr, radiationEffect, true);

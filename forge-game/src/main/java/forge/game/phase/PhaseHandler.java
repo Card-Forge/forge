@@ -984,11 +984,6 @@ public class PhaseHandler implements java.io.Serializable {
         return is(PhaseType.UPKEEP) && nUpkeepsThisGame == 0;
     }
 
-    public final boolean isPreCombatMain() {
-        // 505.1a. Only the first main phase of the turn is a precombat main phase.
-        return is(PhaseType.MAIN1);
-    }
-
     public final boolean beforeFirstPostCombatMainEnd() {
         return nMain2sThisTurn == 0;
     }
