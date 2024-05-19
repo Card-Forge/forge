@@ -1,4 +1,4 @@
-Name:Tarmogoyf Token
+Name:Tarmogoyf
 ManaCost:1 G
 Types:Creature Lhurgoyf
 PT:*/1+*
