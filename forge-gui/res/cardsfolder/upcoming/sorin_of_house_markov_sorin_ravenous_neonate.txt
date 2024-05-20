@@ -21,6 +21,7 @@ ManaCost:no cost
 Types:Legendary Planeswalker Sorin
 Colors:white,black
 Loyalty:3
+K:Extort
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
 A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the amount of life you gained this turn to any target.
 A:AB$ GainControl | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAnimate | SpellDescription$ Gain control of target creature. It becomes a Vampire in addition to its other types. Put a lifelink counter on it if you control a white permanent other than that creature or NICKNAME.
