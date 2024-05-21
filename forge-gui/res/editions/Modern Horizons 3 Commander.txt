@@ -6,13 +6,46 @@ Type=Commander
 ScryfallCode=M3C
 
 [cards]
+1 M Disa the Restless @Jana Schirmer
+2 M Omo, Queen of Vesuva @Alex Brock
+3 M Satya, Aetherflux Genius @Aaron Miller
+4 M Ulalek, Fused Atrocity @Alex Konstad
+5 M Azlask, the Swelling Scourge @Alexander Mokhov
+6 M Cayth, Famed Mechanist @Eric Wilkerson
+7 M Coram, the Undertaker @Kai Carpenter
+8 M Jyoti, Moag Ancient @Brent Hollowell
 16 M Ulalek, Fused Atrocity @Cosmin Podar
+17 M Azlask, the Swelling Scourge @Alexander Mokhov
+18 M Cayth, Famed Mechanist @Eric Wilkerson
+19 M Coram, the Undertaker @Kai Carpenter
+20 M Disa the Restless @Jana Schirmer
+21 M Jyoti, Moag Ancient @Brent Hollowell
+22 M Omo, Queen of Vesuva @Alex Brock
+23 M Satya, Aetherflux Genius @Aaron Miller
+24 M Ulalek, Fused Atrocity @Alex Konstad
+25 M Azlask, the Swelling Scourge @Alexander Mokhov
+26 M Cayth, Famed Mechanist @Eric Wilkerson
+27 M Coram, the Undertaker @Kai Carpenter
+28 M Disa the Restless @Jana Schirmer
+29 M Jyoti, Moag Ancient @Brent Hollowell
+30 M Omo, Queen of Vesuva @Alex Brock
+31 M Satya, Aetherflux Genius @Aaron Miller
 37 R Twins of Discord @Lorenzo Lanfranconi
 48 R March from Velis Vel @Carlos Palma Cruchaga
 52 R Final Act @Nils Hamm
+54 R Aether Refinery @Daniel Ljunggren
+57 R Hideous Taskmaster @Helge C. Balzer
 61 R Siege-Gang Lieutenant @Warren Mahy
+70 R Bloodbraid Challenger @Lie Setiawan
 80 R Planar Nexus @Sam Burley
 100 R March from Velis Vel @Carlos Palma Cruchaga
 104 R Final Act @Nils Hamm
+109 R Hideous Taskmaster @Helge C. Balzer
 113 R Siege-Gang Lieutenant @Warren Mahy
+122 R Bloodbraid Challenger @Lie Setiawan
 132 R Planar Nexus @Sam Burley
+158 M Oblivion Sower @Jamie Jones
+168 U Crib Swap @Michele Giorgi
+182 R Drowner of Hope @Nicholas Gregory
+197 M Archon of Cruelty @Andrew Mar
+220 M Apex Devastator @Svetlin Velinov
