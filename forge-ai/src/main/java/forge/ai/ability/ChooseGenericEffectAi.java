@@ -280,7 +280,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         } else if ("FoodOrTreasure".equals(logic)) {
             // Tireless Provisioner
             // TODO: implement a better way to check for possible benefits in each case. If made generic, replace
-            // fixed spells.get(N) with a day to detect which SA creates which token
+            // fixed spells.get(N) with a way to detect which SA creates which token
             return ComputerUtil.aiLifeInDanger(player, false, 0) ? spells.get(0) : spells.get(1);
         }
         return spells.get(0);   // return first choice if no logic found
