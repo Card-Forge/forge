@@ -55,7 +55,7 @@ public class LimitedPlayer {
     public Map<String, String> getSerializedDraftNotes() {
         Map<String, String> serialized = new HashMap<>();
         for (Map.Entry<String, List<String>> entry : noted.entrySet()) {
-            serialized.put(entry.getKey(), TextUtil.join(entry.getValue(), ", "));
+            serialized.put(entry.getKey(), TextUtil.join(entry.getValue(), ","));
         }
         return serialized;
     }
