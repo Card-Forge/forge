@@ -1,13 +1,14 @@
 package forge.gamemodes.limited;
 
-import java.util.List;
-
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
+
+import java.util.Collections;
+import java.util.List;
 
 public class LimitedPlayerAI extends LimitedPlayer {
     protected DeckColors deckCols;
@@ -33,6 +34,9 @@ public class LimitedPlayerAI extends LimitedPlayer {
             System.out.println("Player[" + order + "] pack: " + chooseFrom.toString());
         }
 
+        // TODO Archdemon of Paliano random draft while active
+
+
         final ColorSet chosenColors = deckCols.getChosenColors();
         final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
@@ -53,5 +57,26 @@ public class LimitedPlayerAI extends LimitedPlayer {
     public Deck buildDeck(String landSetCode) {
         CardPool section = deck.getOrCreate(DeckSection.Sideboard);
         return new BoosterDeckBuilder(section.toFlatList(), deckCols).buildDeck(landSetCode);
+    }
+
+    @Override
+    protected String chooseColor(List<String> colors, LimitedPlayer player, String title) {
+        if (player.equals(this)) {
+            // For Paliano, choose one of my colors
+            // For Regicie, random is fine?
+        } else {
+            // For Paliano, if player has revealed anything, try to avoid that color
+            // For Regicide, don't choose one of my colors
+        }
+        Collections.shuffle(colors);
+        return colors.get(0);
+    }
+
+    @Override
+    protected boolean removeWithAnimus(PaperCard bestPick) {
+        // TODO Animus of Predation logic
+        // Feel free to remove any cards that we won't play and can give us a bonus
+        // We should verify we don't already have the keyword bonus that card would grant
+        return false;
     }
 }

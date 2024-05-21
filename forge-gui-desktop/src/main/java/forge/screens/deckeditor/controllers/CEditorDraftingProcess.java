@@ -17,9 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.HashSet;
-import java.util.Map.Entry;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -42,6 +39,9 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+
+import java.util.HashSet;
+import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -132,6 +132,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             this.showChoices(pool);
         }
         else {
+            // TODO Deal Broker
+            // Offer trades before saving
+
             this.saveDraft();
         }
     }

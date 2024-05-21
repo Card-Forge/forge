@@ -9,7 +9,10 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.EvenOdd;
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -2097,6 +2100,16 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("NotedColor")) {
+            String colors = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            if (colors == null) {
+                return false;
+            }
+            return (colors.contains("white") && card.getColor().hasWhite()) ||
+                    (colors.contains("blue") && card.getColor().hasBlue()) ||
+                    (colors.contains("black") && card.getColor().hasBlack()) ||
+                    (colors.contains("red") && card.getColor().hasRed()) ||
+                    (colors.contains("green") && card.getColor().hasGreen());
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
