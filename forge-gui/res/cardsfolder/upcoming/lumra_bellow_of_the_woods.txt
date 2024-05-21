@@ -11,4 +11,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 DeckHas:Ability$Mill|Graveyard
-Oracle:Vigilance, reach\nLumra, Bellow of the Woods’s power and toughness are each equal to the number of lands you control.\nWhen Lumra enters, mill four cards. Then return all land cards from your graveyard to the battlefield tapped.
+Oracle:Vigilance, reach\nLumra, Bellow of the Woods's power and toughness are each equal to the number of lands you control.\nWhen Lumra enters, mill four cards. Then return all land cards from your graveyard to the battlefield tapped.
