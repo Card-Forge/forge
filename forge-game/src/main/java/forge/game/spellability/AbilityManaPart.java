@@ -17,13 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -48,9 +42,13 @@ import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -524,6 +522,9 @@ public class AbilityManaPart implements java.io.Serializable {
             return getComboColors(sa);
         }
         String produced = this.getOrigProduced();
+        if (produced.contains("NotedColor")) {
+            produced = produced.replace("NotedColor", sa.getActivatingPlayer().getDraftNotes().get(""));
+        }
         if (produced.contains("Chosen")) {
             produced = produced.replace("Chosen", this.getChosenColor(sa));
         }
@@ -663,6 +664,23 @@ public class AbilityManaPart implements java.io.Serializable {
         if (origProduced.contains("Chosen")) {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
+        if (origProduced.contains("NotedColors")) {
+            String colors = sa.getActivatingPlayer().getDraftNotes().get(sa.getHostCard().getName());
+            if (colors == null) {
+                return "";
+            }
+            // Colors here is an comma separated color list, potentially with duplicates
+            // We need to remove duplicates and convert to single letters
+            StringBuilder sb = new StringBuilder();
+            for (String color : colors.split(",")) {
+                String shortColor = MagicColor.toShortString(color);
+                if (sb.indexOf(shortColor) == -1) {
+                    sb.append(shortColor).append(" ");
+                }
+            }
+            origProduced = origProduced.replace("NotedColors", sb.toString().trim());
+        }
+
         if (!origProduced.contains("ColorIdentity")) {
             return TextUtil.fastReplace(origProduced, "Combo ", "");
         }
