@@ -14,6 +14,13 @@ ScryfallCode=M3C
 6 M Cayth, Famed Mechanist @Eric Wilkerson
 7 M Coram, the Undertaker @Kai Carpenter
 8 M Jyoti, Moag Ancient @Brent Hollowell
+9 M Azlask, the Swelling Scourge @Cosmin Podar
+10 M Cayth, Famed Mechanist @Boell Oyino
+11 M Coram, the Undertaker @Zara H
+12 M Disa the Restless @Boell Oyino
+13 M Jyoti, Moag Ancient @Alex Stone
+14 M Omo, Queen of Vesuva @Chun Lo
+15 M Satya, Aetherflux Genius @Cosmin Podar
 16 M Ulalek, Fused Atrocity @Cosmin Podar
 17 M Azlask, the Swelling Scourge @Alexander Mokhov
 18 M Cayth, Famed Mechanist @Eric Wilkerson
