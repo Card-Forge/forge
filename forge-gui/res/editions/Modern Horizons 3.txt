@@ -8,21 +8,28 @@ ScryfallCode=MH3
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
 2 R Devourer of Destiny @Raph Lomotan
+4 R Echoes of Eternity @Isis
 6 M Emrakul, the World Anew @Brent Hollowell
 8 M Herigast, Erupting Nullkite @Lucas Graciano
 9 U It That Heralds the End @Alex Konstad
 12 U Null Elemental Blast @Milivoj Ćeran
 13 R Nulldrifter @Johann Bodin
 40 R Phelia, Exuberant Shepherd @Rudy Siswanto
+56 C Corrupted Shapeshifter @Ralph Horsley
 62 R Flare of Denial @Jason A. Engle
+65 U Kozilek's Unsealing @Raph Lomotan
+66 C Petrifying Meddler @Mathias Kollros
 83 R Chthonian Nightmare @Josu Solano
 103 M Nethergoyf @Xavier Ribeiro
 140 U Spawn-Gang Commander @Chris Seaman
+145 C Basking Broodscale @Caio Monteiro
 154 R Flare of Cultivation @Billy Christian
+176 U Wumpus Aberration @Filip Burburan
 192 R Kudo, King Among Bears @Ekaterina Burmak
 199 R Psychic Frog @Pete Venters
 203 U Scurry of Gremlins @Ben Wootten
 207 R Wight of the Reliquary @Scott Murphy
+208 C Writhing Chrysalis @Domenico Cava
 213 R Winter Moon @Drew Baker
 216 R Bloodstained Mire @Bruce Brenneise
 220 R Flooded Strand @Alexander Forssberg
@@ -45,6 +52,7 @@ ScryfallCode=MH3
 307 L Mountain @Chuck Lukacs
 308 L Forest @Vance Kovacs
 309 U Snow-Covered Wastes @Tomáš Honz
+320 R Echoes of Eternity @Clint Lockwood
 323 R Orim's Chant @Olena Richards
 326 R Flare of Denial @Marie Magny
 330 R Chthonian Nightmare @Thomas M. Baxa
