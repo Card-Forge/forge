@@ -62,7 +62,9 @@ public class BoosterDraft implements IBoosterDraft {
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
-    private LimitedPlayer localPlayer;
+    private final LimitedPlayer localPlayer;
+
+    private IDraftLog draftLog = null;
 
     private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
     protected int nextBoosterGroup = 0;
@@ -264,18 +266,32 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     protected BoosterDraft(final LimitedPoolType draftType) {
+        this(draftType, N_PLAYERS);
+    }
+
+    protected BoosterDraft(final LimitedPoolType draftType, int numPlayers) {
         this.draftFormat = draftType;
 
-        localPlayer = new LimitedPlayer(0);
+        localPlayer = new LimitedPlayer(0, this);
         players.add(localPlayer);
-        for (int i = 1; i < N_PLAYERS; i++) {
-            players.add(new LimitedPlayerAI(i));
+        for (int i = 1; i < numPlayers; i++) {
+            players.add(new LimitedPlayerAI(i, this));
         }
     }
 
     @Override
     public boolean isPileDraft() {
         return false;
+    }
+
+    @Override
+    public void setLogEntry(IDraftLog draftingProcess) {
+        draftLog = draftingProcess;
+    }
+
+    @Override
+    public IDraftLog getDraftLog() {
+        return draftLog;
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
@@ -374,6 +390,9 @@ public class BoosterDraft implements IBoosterDraft {
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
         }
+        if (this.getDraftLog() != null) {
+            this.getDraftLog().addLogEntry("Round " + this.nextBoosterGroup + " is starting...");
+        }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
     }
@@ -385,6 +404,16 @@ public class BoosterDraft implements IBoosterDraft {
             decks[i - 1] = ((LimitedPlayerAI) this.players.get(i)).buildDeck(IBoosterDraft.LAND_SET_CODE[0] != null ? IBoosterDraft.LAND_SET_CODE[0].getCode() : null);
         }
         return decks;
+    }
+
+    @Override
+    public LimitedPlayer[] getOpposingPlayers() {
+        return this.players.toArray(new LimitedPlayer[7]);
+    }
+
+    @Override
+    public LimitedPlayer getHumanPlayer() {
+        return this.localPlayer;
     }
 
     public void passPacks() {
@@ -404,7 +433,10 @@ public class BoosterDraft implements IBoosterDraft {
                 continue;
 
             if (!passingPack.isEmpty()) {
-                // TODO Canal Dredger for passing a pack with a single card in it
+                if (passingPack.size() == 1) {
+                    // TODO Canal Dredger for passing a pack with a single card in it
+
+                }
 
                 int passTo = (i + adjust + N_PLAYERS) % N_PLAYERS;
                 this.players.get(passTo).receiveOpenedPack(passingPack);

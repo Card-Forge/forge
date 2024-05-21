@@ -5,16 +5,7 @@ package forge.gui.framework;
 
 import com.google.common.collect.ObjectArrays;
 
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCardCatalog;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VProbabilities;
-import forge.screens.deckeditor.views.VStatistics;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.gauntlet.*;
 import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.home.puzzle.VSubmenuPuzzleCreate;
@@ -61,6 +52,7 @@ public enum EDocID {
     EDITOR_BRAWL (VBrawlDecks.SINGLETON_INSTANCE),
     EDITOR_TINY_LEADERS (VTinyLeadersDecks.SINGLETON_INSTANCE),
     EDITOR_OATHBREAKER (VOathbreakerDecks.SINGLETON_INSTANCE),
+    EDITOR_LOG(VEditorLog.SINGLETON_INSTANCE),
 
     WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
     WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),

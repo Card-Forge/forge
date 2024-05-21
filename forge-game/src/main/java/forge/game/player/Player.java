@@ -124,6 +124,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
     private final Map<String, Integer> notedNum = Maps.newHashMap();
+    private final Map<String, String> draftNotes = Maps.newHashMap();
 
     private boolean revolt = false;
     private int descended = 0;
@@ -2374,6 +2375,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 1;
         }
         return getName().compareTo(o.getName());
+    }
+
+    public void setDraftNotes(Map<String, String> notes) {
+        this.draftNotes.clear();
+        this.draftNotes.putAll(notes);
+    }
+
+    public Map<String, String> getDraftNotes() {
+        return draftNotes;
     }
 
     public static class Accessors {

@@ -51,6 +51,7 @@ final class CardFace implements ICardFace, Cloneable {
     private List<String> abilities = null;
     private List<String> staticAbilities = null;
     private List<String> triggers = null;
+    private List<String> draftActions = null;
     private List<String> replacements = null;
     private Map<String, String> variables = null;
 
@@ -74,6 +75,7 @@ final class CardFace implements ICardFace, Cloneable {
     @Override public Iterable<String> getAbilities()  { return abilities; }
     @Override public Iterable<String> getStaticAbilities() { return staticAbilities; }
     @Override public Iterable<String> getTriggers()   { return triggers; }
+    @Override public Iterable<String> getDraftActions()   { return draftActions; }
     @Override public Iterable<String> getReplacements() { return replacements; }
     @Override public String getNonAbilityText()       { return nonAbilityText; }
     @Override public Iterable<Entry<String, String>> getVariables() { return variables.entrySet(); }
@@ -125,6 +127,7 @@ final class CardFace implements ICardFace, Cloneable {
     void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<>(); } this.keywords.add(value); }
     void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<>(); } this.abilities.add(value);}
     void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<>(); } this.triggers.add(value);}
+    void addDraftAction(String value)        { if (null == this.draftActions) { this.draftActions = new ArrayList<>(); } this.draftActions.add(value);}
     void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<>(); } this.staticAbilities.add(value);}
     void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<>(); } this.replacements.add(value);}
     void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }

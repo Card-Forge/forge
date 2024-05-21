@@ -12,8 +12,8 @@ import forge.localinstance.properties.ForgePreferences;
 public class LimitedPlayerAI extends LimitedPlayer {
     protected DeckColors deckCols;
 
-    public LimitedPlayerAI(int seatingOrder) {
-        super(seatingOrder);
+    public LimitedPlayerAI(int seatingOrder, BoosterDraft draft) {
+        super(seatingOrder, draft);
         deckCols = new DeckColors();
     }
 

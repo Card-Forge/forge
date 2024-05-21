@@ -27,6 +27,8 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.IDraftLog;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -34,13 +36,7 @@ import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
@@ -55,7 +51,7 @@ import forge.util.Localizer;
  * @author Forge
  * @version $Id: CEditorDraftingProcess.java 24872 2014-02-17 07:35:47Z drdev $
  */
-public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
+public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> implements IDraftLog {
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = Localizer.getInstance().getMessage("lblAddcard");
@@ -65,6 +61,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
+    private DragCell draftLogParent = null;
     private boolean saved = false;
     private final Localizer localizer = Localizer.getInstance();
 
@@ -99,6 +96,13 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
      */
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
+        this.boosterDraft.setLogEntry(this);
+
+        this.addLogEntry("Drafting process started.");
+    }
+
+    public void addLogEntry(String message) {
+        CEditorLog.SINGLETON_INSTANCE.addLogEntry(message);
     }
 
     /* (non-Javadoc)
@@ -110,6 +114,8 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
+
+        // Verify if card is in the activate pack?
         this.getDeckManager().addItem(card, 1);
 
         // get next booster pack
@@ -212,16 +218,30 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
 
         } while(s == null || s.isEmpty());
 
-        saved = true;
-
         // Construct computer's decks and save draft
         final Deck[] computer = this.boosterDraft.getDecks();
+        final LimitedPlayer[] players = this.boosterDraft.getOpposingPlayers();
 
+        for(int i = 0; i < computer.length; i++) {
+            Deck deck = computer[i];
+            LimitedPlayer player = players[i];
+
+            deck.setDraftNotes(player.getSerializedDraftNotes());
+        }
+
+        // Assigned noted stuff to deck from LimitedPlayer
         final DeckGroup finishedDraft = new DeckGroup(s);
-        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
+        final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
+
+        Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
+        humanDeck.setDraftNotes(player.getSerializedDraftNotes());
+        finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 
         FModel.getDecks().getDraft().add(finishedDraft);
+
+        saved = true;
+
         CSubmenuDraft.SINGLETON_INSTANCE.update();
         FScreen.DRAFTING_PROCESS.close();
 
@@ -266,6 +286,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
     public void update() {
         this.getCatalogManager().setup(ItemManagerConfig.DRAFT_PACK);
         this.getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
+
+        if (VEditorLog.SINGLETON_INSTANCE.getParentCell() == null) {
+            VCardCatalog.SINGLETON_INSTANCE.getParentCell().addDoc(VEditorLog.SINGLETON_INSTANCE);
+            VEditorLog.SINGLETON_INSTANCE.showView();
+        }
 
         ccAddLabel = this.getBtnAdd().getText();
 
@@ -327,6 +352,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.getBtnRemove4().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
+        VEditorLog.SINGLETON_INSTANCE.getParentCell().setVisible(true);
 
         //Re-add tabs
         if (deckGenParent != null) {
@@ -346,6 +372,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> {
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
+        }
+        if (draftLogParent != null) {
+            draftLogParent.addDoc(VEditorLog.SINGLETON_INSTANCE);
         }
 
         // set catalog table back to free-selection mode

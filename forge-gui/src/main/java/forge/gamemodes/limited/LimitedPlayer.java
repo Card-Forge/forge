@@ -1,14 +1,14 @@
 package forge.gamemodes.limited;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-//import com.google.common.collect.Lists;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
+import forge.util.TextUtil;
+
+import java.util.*;
 //import forge.gamemodes.limited.powers.DraftPower;
 
 public class LimitedPlayer {
@@ -21,31 +21,43 @@ public class LimitedPlayer {
     protected Queue<List<PaperCard>> packQueue;
     protected Queue<List<PaperCard>> unopenedPacks;
 
-    // WIP - Draft Matters cards
-    /*
-    private static int  CantDraftThisRound = 1,
-                        SpyNextCardDrafted = 1 << 1,
-                        ReceiveLastCard = 1 << 2,
-                        CanRemoveAfterDraft = 1 << 3,
-                        CanTradeAfterDraft = 1 << 4;
+    private static final int  CantDraftThisRound = 1;
+    private static final int SpyNextCardDrafted = 1 << 1;
+    private static final int ReceiveLastCard = 1 << 2;
+    private static final int CanRemoveAfterDraft = 1 << 3;
+    private static final int CanTradeAfterDraft = 1 << 4;
 
-    private static int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
+    private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
                                     | CanTradeAfterDraft;
 
+    private final int playerFlags = 0;
 
-    private int playerFlags = 0;
+    private final List<PaperCard> faceUp = Lists.newArrayList();
+    private final List<PaperCard> revealed = Lists.newArrayList();
+    private final Map<String, List<String>> noted = new HashMap<>();
+    //private Map<DraftPower, Integer> powers = new HashMap<>();
 
-    private List<PaperCard> revealed = Lists.newArrayList();
-    private Map<String, List<Object>> noted = new HashMap<>();
-    private Map<DraftPower, Integer> powers = new HashMap<>();
-    */
+    IBoosterDraft draft = null;
 
-    public LimitedPlayer(int seatingOrder) {
+    public LimitedPlayer(int seatingOrder, IBoosterDraft draft) {
         order = seatingOrder;
         deck = new Deck();
 
         packQueue = new LinkedList<>();
         unopenedPacks = new LinkedList<>();
+        this.draft = draft;
+    }
+
+    public Map<String, List<String>> getDraftNotes() {
+        return noted;
+    }
+
+    public Map<String, String> getSerializedDraftNotes() {
+        Map<String, String> serialized = new HashMap<>();
+        for (Map.Entry<String, List<String>> entry : noted.entrySet()) {
+            serialized.put(entry.getKey(), TextUtil.join(entry.getValue(), ","));
+        }
+        return serialized;
     }
 
     public PaperCard chooseCard() {
@@ -72,14 +84,36 @@ public class LimitedPlayer {
         pool.add(bestPick);
         draftedThisRound++;
 
-        // TODO Note Lurking Automaton
+        if (bestPick.getRules().getMainPart().getDraftActions() == null) {
+            return true;
+        }
+
+        // Draft Actions
+        Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
+        if (Iterables.contains(draftActions, "Reveal CARDNAME as you draft it.")) {
+            revealed.add(bestPick);
+
+            if (Iterables.contains(draftActions, "Note how many cards you've drafted this draft round, including CARDNAME.")) {
+                List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
+                note.add(String.valueOf(draftedThisRound));
+
+                addLog(name() + " revealed " + bestPick.getName() + " and noted " + draftedThisRound + " cards drafted this round.");
+            } else {
+                addLog(name() + " revealed " + bestPick.getName() + " as they drafted it.");
+            }
+        }
+
+        // Colors
         // TODO Note Paliano, the High City
-        // TODO Note Aether Searcher
-        // TODO Note Custodi Peacepeeper
+        // TODO Note Regicide
         // TODO Note Paliano Vanguard
-        // TODO Note Garbage Fire
+        // TODO Note Aether Searcher (for the next card)
 
         return true;
+    }
+
+    public void addLog(String message) {
+        this.draft.getDraftLog().addLogEntry(message);
     }
 
     public List<PaperCard> nextChoice() {
@@ -105,6 +139,14 @@ public class LimitedPlayer {
 
     public void receiveOpenedPack(List<PaperCard> pack) {
         packQueue.add(pack);
+    }
+
+    public String name() {
+        if (this instanceof LimitedPlayerAI) {
+            return "Player[" + order + "]";
+        }
+
+        return "You";
     }
 
     /*
