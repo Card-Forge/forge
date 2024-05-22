@@ -47,11 +47,20 @@ ScryfallCode=M3C
 80 R Planar Nexus @Sam Burley
 100 R March from Velis Vel @Carlos Palma Cruchaga
 104 R Final Act @Nils Hamm
+106 R Aether Refinery @Daniel Ljunggren
 109 R Hideous Taskmaster @Helge C. Balzer
 113 R Siege-Gang Lieutenant @Warren Mahy
 122 R Bloodbraid Challenger @Lie Setiawan
 132 R Planar Nexus @Sam Burley
-158 M Oblivion Sower @Jamie Jones
+136 M Azlask, the Swelling Scourge @Cosmin Podar
+137 M Cayth, Famed Mechanist @Boell Oyino
+138 M Coram, the Undertaker @Zara H
+139 M Disa the Restless @Boell Oyino
+140 M Jyoti, Moag Ancient @Alex Stone
+141 M Omo, Queen of Vesuva @Chun Lo
+142 M Satya, Aetherflux Genius @Cosmin Podar
+143 M Ulalek, Fused Atrocity @Cosmin Podar
+158 M Oblivion Sower @Jaime Jones
 168 U Crib Swap @Michele Giorgi
 182 R Drowner of Hope @Nicholas Gregory
 197 M Archon of Cruelty @Andrew Mar

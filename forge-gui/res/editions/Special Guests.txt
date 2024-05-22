@@ -50,5 +50,18 @@ ScryfallCode=SPG
 36 M Notion Thief @Alix Branwyn
 37 M Desert @Lucas Graciano
 38 M Prismatic Vista @Sam Burley
+39 R Thought-Knot Seer @Antonio José Manzanedo
+40 M Prismatic Ending @Dominik Mayer
+41 M Dismember @Martin de Diego Sádaba
+42 M Persist @Jarel Threat
+43 M Expressive Iteration @Kai Carpenter
 44 M Solitude @Campbell White
+45 M Subtlety @Campbell White
+46 M Grief @Campbell White
+47 M Fury @Campbell White
+48 M Endurance @Campbell White
 49 M Solitude @Campbell White
+50 M Subtlety @Campbell White
+51 M Grief @Campbell White
+52 M Fury @Campbell White
+53 M Endurance @Campbell White
