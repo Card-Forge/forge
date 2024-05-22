@@ -458,6 +458,7 @@ public enum CounterEnumType {
     TRAMPLE("Trample"),
     VIGILANCE("Vigilance")
     SHADOW("Shadow")
+    EXALTED("Exalted")
 //*/
     ;
 
