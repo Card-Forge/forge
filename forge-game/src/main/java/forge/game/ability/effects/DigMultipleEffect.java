@@ -184,9 +184,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("ImprintRest")) {
-                for (Card c : rest) {
-                    host.addImprintedCard(c);
-                }
+                host.addImprintedCards(rest);
             }
         }
         //table trigger there
