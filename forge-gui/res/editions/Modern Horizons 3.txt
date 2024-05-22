@@ -24,8 +24,8 @@ ScryfallCode=MH3
 39 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
 40 R Phelia, Exuberant Shepherd @Rudy Siswanto
 45 C Thraben Charm @Carlos Palma Cruchaga
-47 R White Orchid Phantom @Zoltan Boros
 46 U Voltstorm Angel @Andrew Theophilopoulos
+47 R White Orchid Phantom @Zoltan Boros
 49 R Wrath of the Skies @Franz Vohwinkel
 53 U Brainsurge @Liiga Smilshkalne
 56 C Corrupted Shapeshifter @Ralph Horsley
