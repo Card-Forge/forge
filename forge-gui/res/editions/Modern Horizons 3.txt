@@ -16,16 +16,21 @@ ScryfallCode=MH3
 12 U Null Elemental Blast @Milivoj Ćeran
 13 R Nulldrifter @Johann Bodin
 15 M Ulamog, the Defiler @Chase Stone
+22 C Dog Umbra @Brian Valeza
 26 R Flare of Fortitude @Winona Nelson
 39 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
 40 R Phelia, Exuberant Shepherd @Rudy Siswanto
+45 C Thraben Charm @Carlos Palma Cruchaga
+47 R White Orchid Phantom @Zoltan Boros
 53 U Brainsurge @Liiga Smilshkalne
 56 C Corrupted Shapeshifter @Ralph Horsley
 62 R Flare of Denial @Jason A. Engle
+63 R Harbinger of the Seas @Winona Nelson
 65 U Kozilek's Unsealing @Raph Lomotan
 66 C Petrifying Meddler @Mathias Kollros
 69 C Serum Visionary @Warren Mahy
 70 M Shadow of the Second Sun @Danny Schwartz
+79 R Volatile Stormdrake @Campbell White
 83 R Chthonian Nightmare @Josu Solano
 95 R Flare of Malice @David Palumbo
 97 U Grim Servant @David Astruga
@@ -42,12 +47,13 @@ ScryfallCode=MH3
 144 R Wheel of Potential @Drew Baker
 145 C Basking Broodscale @Caio Monteiro
 149 M Eladamri, Korvecdal @Zoltan Boros
-151 C Evolution Witness @Nereida
+151 C Evolution Witness @Marzena Nereida Piwowar
 154 R Flare of Cultivation @Billy Christian
 169 R Six @Andrew Mar
 174 R Thief of Existence @Raph Lomotan
 175 U Trickster's Elk @Karl Kopinski
 176 U Wumpus Aberration @Filip Burburan
+178 M Arna Kennerüd, Skycaptain @Cristi Balanescu
 186 R Genku, Future Shaper @Chuck Lukacs
 191 U Izzet Generatorium @Yeong-Hao Han
 192 R Kudo, King Among Bears @Ekaterina Burmak
@@ -69,8 +75,10 @@ ScryfallCode=MH3
 242 M Tamiyo, Inquisitive Student @Magali Villeneuve
 245 M Sorin of House Markov @Matt Stewart
 247 M Ral, Monsoon Mage @Dmitry Burmak
+250 U Disciple of Freyalise @Valera Lutfullina
 251 M Grist, Voracious Larva @Chris Rahn
 265 R Orim's Chant @Kev Walker
+268 U Deep Analysis @Jesper Ejsing
 270 R Kappa Cannoneer @Jesper Ejsing
 274 R K'rrik, Son of Yawgmoth @Chase Stone
 281 R Laelia, the Blade Reforged @Wisnu Tan
@@ -91,11 +99,11 @@ ScryfallCode=MH3
 307 L Mountain @Chuck Lukacs
 308 L Forest @Vance Kovacs
 309 U Snow-Covered Wastes @Tomáš Honz
-310 L Plains @Volkan Baga
+310 L Plains @Volkan Baǵa
 311 L Plains @Lius Lasahido
 312 L Island @Alayna Danner
 313 L Island @Raph Lomotan
-314 L Swamp @David Alvarez
+314 L Swamp @David Álvarez
 315 L Swamp @Carlos Palma Cruchaga
 316 L Mountain @Carlos Palma Cruchaga
 317 L Mountain @Paolo Parente
@@ -133,6 +141,7 @@ ScryfallCode=MH3
 368 R Laelia, the Blade Reforged @Tyler Walpole
 369 M Eladamri, Korvecdal @Tyler Walpole
 370 R Six @Ivan Shavrin
+371 M Arna Kennerüd, Skycaptain @Grant Griffin
 372 M Breya, Etherium Shaper @Jack Hughes
 373 R Genku, Future Shaper @Ivan Shavrin
 375 M Kaalia of the Vast @Jack Hughes
@@ -147,6 +156,7 @@ ScryfallCode=MH3
 388 R Nulldrifter @Johann Bodin
 389 M Ulamog, the Defiler @Chase Stone
 391 R Flare of Fortitude @Winona Nelson
+396 R White Orchid Phantom @Zoltan Boros
 399 U Brainsurge @Liiga Smilshkalne
 400 R Flare of Denial @Jason A. Engle
 401 R Kappa Cannoneer @Jesper Ejsing
@@ -159,7 +169,7 @@ ScryfallCode=MH3
 418 U Meltdown @Donato Giancola
 422 R Wheel of Potential @Drew Baker
 423 M Eladamri, Korvecdal @Zoltan Boros
-424 C Evolution Witness @Nereida
+424 C Evolution Witness @Marzena Nereida Piwowar
 425 R Flare of Cultivation @Billy Christian
 428 U Priest of Titania @Rebecca Guay
 430 R Six @Andrew Mar
@@ -200,6 +210,7 @@ ScryfallCode=MH3
 482 R Laelia, the Blade Reforged @Wisnu Tan
 483 M Eladamri, Korvecdal @Zoltan Boros
 484 R Six @Andrew Mar
+485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
 486 M Breya, Etherium Shaper @Tiffany Turrill
 487 R Genku, Future Shaper @Chuck Lukacs
 489 M Kaalia of the Vast @Justyna Dura
