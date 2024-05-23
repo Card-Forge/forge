@@ -36,12 +36,16 @@ ScryfallCode=MH3
 69 C Serum Visionary @Warren Mahy
 70 M Shadow of the Second Sun @Danny Schwartz
 71 R Strix Serenade @Filipe Pagliuso
+72 U Tamiyo Meets the Story Circle @Xabi Gaztelua
+75 C Tune the Narrative @Marzena Nereida Piwowar
 79 R Volatile Stormdrake @Campbell White
 83 R Chthonian Nightmare @Josu Solano
 89 C Drossclaw @Néstor Ossandón Leal
 90 R Emperor of Bones @Josh Hass
 95 R Flare of Malice @David Palumbo
 97 U Grim Servant @David Astruga
+98 C Kami of Jealous Thirst @Xavier Ribeiro
+100 U Marionette Apprentice @Steve Ellis
 103 M Nethergoyf @Xavier Ribeiro
 108 C Scurrilous Sentry @Leonardo Santanna
 110 R Warren Soultrader @Pete Venters
@@ -61,6 +65,7 @@ ScryfallCode=MH3
 149 M Eladamri, Korvecdal @Zoltan Boros
 151 C Evolution Witness @Marzena Nereida Piwowar
 154 R Flare of Cultivation @Billy Christian
+165 U Path of Annihilation @Ben Hill
 169 R Six @Andrew Mar
 174 R Thief of Existence @Raph Lomotan
 175 U Trickster's Elk @Karl Kopinski
@@ -81,6 +86,7 @@ ScryfallCode=MH3
 220 R Flooded Strand @Alexander Forssberg
 224 R Polluted Delta @Chris Ostrowski
 229 U Snow-Covered Wastes @Mark Poole
+230 R Spymaster's Vault @David Álvarez
 233 M Ugin's Labyrinth @Mark Poole
 234 U Urza's Cave @Mark Poole
 235 R Windswept Heath @Alexander Forssberg
@@ -108,6 +114,7 @@ ScryfallCode=MH3
 274 R K'rrik, Son of Yawgmoth @Chase Stone
 276 R Ophiomancer @John Stanko
 278 U Victimize @Craig J Spearing
+279 R Cursed Mirror @David Gaillet
 281 R Laelia, the Blade Reforged @Wisnu Tan
 282 U Meltdown @Donato Giancola
 286 U Priest of Titania @Rebecca Guay
@@ -145,6 +152,7 @@ ScryfallCode=MH3
 323 R Orim's Chant @Olena Richards
 324 R White Orchid Phantom @Richard Kane Ferguson
 326 R Flare of Denial @Marie Magny
+327 R Strix Serenade @Nils Hamm
 329 R Volatile Stormdrake @Xavier Ribeiro
 330 R Chthonian Nightmare @Thomas M. Baxa
 331 R Flare of Malice @Ron Spears
@@ -162,6 +170,7 @@ ScryfallCode=MH3
 352 R Bloodstained Mire @Sean Vo
 353 R Flooded Strand @Salvatorre Zee Yazzie
 356 R Polluted Delta @Vance Kovacs
+358 R Spymaster's Vault @Hector Ortiz
 359 M Ugin's Labyrinth @Samuele Bandini
 360 R Windswept Heath @Samuele Bandini
 361 R Wooded Foothills @Tomáš Honz
@@ -177,6 +186,8 @@ ScryfallCode=MH3
 373 R Genku, Future Shaper @Ivan Shavrin
 375 M Kaalia of the Vast @Jack Hughes
 376 R Kudo, King Among Bears @Peter Diamond
+378 R The Necrobloom @Ivan Shavrin
+379 R Phlage, Titan of Fire's Fury @Alex Dos Diaz
 381 M Emrakul, the World Anew @Mark Tedin
 382 M Kozilek, the Broken Reality @Richard Whitters
 383 M Ulamog, the Defiler @Vincent Proce
@@ -196,8 +207,10 @@ ScryfallCode=MH3
 406 R Chthonian Nightmare @Josu Solano
 408 R Flare of Malice @David Palumbo
 409 U Grim Servant @David Astruga
+410 U Marionette Apprentice @Steve Ellis
 416 R Flare of Duplication @Olivier Bernard
 418 U Meltdown @Donato Giancola
+421 U Unstable Amulet @José Parodi
 422 R Wheel of Potential @Drew Baker
 423 M Eladamri, Korvecdal @Zoltan Boros
 424 C Evolution Witness @Marzena Nereida Piwowar
@@ -217,6 +230,7 @@ ScryfallCode=MH3
 444 M Sorin of House Markov @Livia Prima
 445 M Ral, Monsoon Mage @Borja Pindado
 446 M Grist, Voracious Larva @Ron Spencer
+447 R Argent Dais @Carlos Palma Cruchaga
 454 M Nethergoyf @Xavier Ribeiro
 457 R Detective's Phoenix @Deruchenko Alexander
 460 R Wight of the Reliquary @Scott Murphy
@@ -246,8 +260,9 @@ ScryfallCode=MH3
 487 R Genku, Future Shaper @Chuck Lukacs
 489 M Kaalia of the Vast @Justyna Dura
 490 R Kudo, King Among Bears @Ekaterina Burmak
+492 R The Necrobloom @Igor Krstic
+493 R Phlage, Titan of Fire's Fury @Lucas Graciano
 495 R Powerbalance @Liiga Smilshkalne
-493 M Phlage, Titan of Fire's Fury @Lucas Graciano
 496 R Flusterstorm @Andrew Mar
 514 U Unstable Amulet @José Parodi
 516 U Scurry of Gremlins @Ben Wootten
