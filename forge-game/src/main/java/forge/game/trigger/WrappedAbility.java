@@ -21,6 +21,7 @@ import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
 import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
 import forge.game.spellability.AbilitySub;
@@ -588,5 +589,9 @@ public class WrappedAbility extends Ability {
 
     public boolean isIntrinsic() {
         return sa.isIntrinsic();
+    }
+
+    public boolean isKeyword(Keyword kw) {
+        return sa.isKeyword(kw);
     }
 }
