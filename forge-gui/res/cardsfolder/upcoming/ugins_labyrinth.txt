@@ -1,0 +1,12 @@
+Name:Ugin's Labyrinth
+ManaCost:no cost
+Types:Land
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a colorless card with mana value 7 or greater from your hand.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Imprint$ True | ChangeType$ Card.Colorless+cmcGE7 | ChangeNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C}. If a card is exiled with CARDNAME, add {C}{C} instead.
+A:AB$ ChangeZone | Cost$ T | Defined$ Imprinted | Origin$ Exile | Destination$ Hand | SpellDescription$ Return the exiled card to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:X:Count$Compare Y GE1.2.1
+SVar:Y:Count$ValidExile Card.IsImprinted
+Oracle:Imprint — When Ugin's Labyrinth enters the battlefield, you may exile a colorless card with mana value 7 or greater from your hand.\n{T}: Add {C}. If a card is exiled with Ugin's Labyrinth, add {C}{C} instead.\n{T}: Return the exiled card to its owner's hand.
