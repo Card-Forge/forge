@@ -1,0 +1,12 @@
+Name:Grim Servant
+ManaCost:3 B
+Types:Creature Zombie Warlock
+PT:3/2 
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a card with mana value less than or equal to your devotion to black, reveal it, put it into your hand, then shuffle. You lose 3 life. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcLEX | ChangeNum$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
+SVar:X:Count$Devotion.Black
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill
+Oracle:When Grim Servant enters the battlefield, search your library for a card with mana value less than or equal to your devotion to black, reveal it, put it into your hand, then shuffle. You lose 3 life. (Each {B} in the mana costs of permanents you control counts toward your devotion to black.)
