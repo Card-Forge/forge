@@ -107,7 +107,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         } else {
             CardCollectionView choosenToSacrifice = null;
             for (final Player p : getTargetPlayers(sa)) {
-                CardCollectionView battlefield = p.getCardsIn(ZoneType.Battlefield);
+                CardCollectionView battlefield = CardLists.filter(zoneMovements.getLastStateBattlefield(), CardPredicates.isController(p));
                 if (sacEachValid) { // Sacrifice maximum permanents in any combination of types specified by SacValid
                     String [] validArray = valid.split(" & ");
                     String [] msgArray = msg.split(" & ");
@@ -154,6 +154,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
                 for (Card sac : choosenToSacrifice) {
+                    if (sac.isLKI()) {
+                        // expected during ETB replacement
+                        sac = game.getCardState(sac);
+                    }
                     Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
                     boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
                     boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, params);
