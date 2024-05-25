@@ -1,15 +1,11 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
+import com.google.common.collect.Lists;
+import forge.card.mana.ManaCost;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.mana.ManaCost;
+import java.util.*;
+import java.util.Map.Entry;
 
 //
 // DO NOT AUTOFORMAT / CHECKSTYLE THIS FILE
@@ -51,7 +47,7 @@ final class CardFace implements ICardFace, Cloneable {
     private List<String> abilities = null;
     private List<String> staticAbilities = null;
     private List<String> triggers = null;
-    private List<String> draftActions = null;
+    private List<String> draftActions = Lists.newArrayList();
     private List<String> replacements = null;
     private Map<String, String> variables = null;
 
