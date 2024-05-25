@@ -2,8 +2,8 @@ Name:Birthing Ritual
 ManaCost:1 G
 Types:Enchantment
 T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | Execute$ TrigPeek | TriggerDescription$ At the beginning of your end step, if you control a creature, look at the top seven cards of your library. Then you may sacrifice a creature. If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature’s mana value. Put the rest on the bottom of your library in a random order.
-SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | NoReveal$ True | RememberPeeked$ True | PeekAmount$ 7 | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLEX+IsRemembered | ChangeNum$ 1
+SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | NoReveal$ True | PeekAmount$ 7 | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | DigNum$ 7 | RestRandomOrder$ True | ChangeValid$ Creature.cmcLEX | ChangeNum$ 1
 SVar:X:Sacrificed$CardManaCost/Plus.1
 DeckHas:Ability$Sacrifice
 Oracle:At the beginning of your end step, if you control a creature, look at the top seven cards of your library. Then you may sacrifice a creature. If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature's mana value. Put the rest on the bottom of your library in a random order.
