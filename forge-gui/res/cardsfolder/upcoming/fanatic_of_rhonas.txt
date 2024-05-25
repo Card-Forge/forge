@@ -1,6 +1,6 @@
 Name:Fanatic of Rhonas
 ManaCost:1 G
-Types:Creature — Snake Druid
+Types:Creature Snake Druid
 PT:1/4
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 4 | IsPresent$ Creature.YouCtrl+powerGE4 | PrecostDesc$ Ferocious — | SpellDescription$ Add {G}{G}{G}{G}. Activate only if you control a creature with power 4 or greater.
