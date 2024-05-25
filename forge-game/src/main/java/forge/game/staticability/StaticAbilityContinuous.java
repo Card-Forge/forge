@@ -820,15 +820,15 @@ public final class StaticAbilityContinuous {
                 List<StaticAbility> addedStaticAbility = Lists.newArrayList();
                 // add abilities
                 if (addAbilities != null) {
-                    for (String abilty : addAbilities) {
-                        if (abilty.contains("CardManaCost")) {
-                            abilty = TextUtil.fastReplace(abilty, "CardManaCost", affectedCard.getManaCost().getShortString());
-                        } else if (abilty.contains("ConvertedManaCost")) {
+                    for (String ability : addAbilities) {
+                        if (ability.contains("CardManaCost")) {
+                            ability = TextUtil.fastReplace(ability, "CardManaCost", affectedCard.getManaCost().getShortString());
+                        } else if (ability.contains("ConvertedManaCost")) {
                             final String costcmc = Integer.toString(affectedCard.getCMC());
-                            abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
+                            ability = TextUtil.fastReplace(ability, "ConvertedManaCost", costcmc);
                         }
-                        if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(abilty, stAb));
+                        if (ability.startsWith("AB") || ability.startsWith("ST")) { // grant the ability
+                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(ability, stAb));
                         }
                     }
                 }

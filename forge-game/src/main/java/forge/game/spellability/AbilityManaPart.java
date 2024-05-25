@@ -400,6 +400,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     continue;
                 }
                 // TODO Thassa's Intervention with "twice {X}" is tricky
+                // TODO Volcano Hellion can't be handled without refactor to just have it passed down directly
                 if (restriction.endsWith("X") && payment.getCostMana().getAmountOfX() > 0) {
                     return true;
                 }

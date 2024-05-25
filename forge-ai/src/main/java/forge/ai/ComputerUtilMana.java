@@ -1323,7 +1323,7 @@ public class ComputerUtilMana {
                 final int multiplicator = Math.max(xCounter, 1);
                 manaToAdd = extraMana * multiplicator;
             } else {
-                manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * xCounter;
+                manaToAdd = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("XAlternative", "X"), sa) * xCounter;
             }
 
             if (manaToAdd < 1 && payCosts != null && payCosts.getCostMana().getXMin() > 0) {
