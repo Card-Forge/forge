@@ -241,7 +241,7 @@ ScryfallCode=MH3
 371 M Arna Kennerüd, Skycaptain @Grant Griffin
 372 M Breya, Etherium Shaper @Jack Hughes
 373 R Genku, Future Shaper @Ivan Shavrin
-374 R Imskir Iron-Eater
+374 R Imskir Iron-Eater @Tyler Walpole
 375 M Kaalia of the Vast @Jack Hughes
 376 R Kudo, King Among Bears @Peter Diamond
 377 R Nadu, Winged Wisdom @Gossip Goblin
