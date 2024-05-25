@@ -664,6 +664,10 @@ public class AbilityManaPart implements java.io.Serializable {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
         if (origProduced.contains("NotedColors")) {
+            if (sa.getActivatingPlayer() == null) {
+                return "";
+            }
+
             String colors = sa.getActivatingPlayer().getDraftNotes().get(sa.getHostCard().getName());
             if (colors == null) {
                 return "";

@@ -237,10 +237,11 @@ ScryfallCode=CN2
 
 [Draft Matters]
 Adriana's Valor
+Animus of Predation
 Assemble the Rank and Vile
 Custodi Peacekeeper
 Echoing Boon
-#Emissary's Ploy
+Emissary's Ploy
 Garbage Fire
 Hired Heist
 Hold the Perimeter
@@ -248,7 +249,7 @@ Hymn of the Wilds
 Incendiary Dissent
 Natural Unity
 Pyretic Hunter
-#Sovereign's Realm
+Sovereign's Realm
 Summoner's Bond
 Weight Advantage
 

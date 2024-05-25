@@ -238,7 +238,7 @@ ScryfallCode=CNS
 #1 Lore Seeker|CNS
 1 Lurking Automaton|CNS
 1 Muzzio's Preparations|CNS
-#1 Paliano, the High City|CNS
+1 Paliano, the High City|CNS
 #1 Power Play|CNS
 1 Secret Summoning|CNS
 1 Secrets of Paradise|CNS

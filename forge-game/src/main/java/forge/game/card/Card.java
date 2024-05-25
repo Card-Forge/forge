@@ -20,22 +20,13 @@ package forge.game.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
-
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.CardArtPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.CardTraitBase;
-import forge.game.Direction;
-import forge.game.EvenOdd;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameStage;
-import forge.game.IHasSVars;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -48,12 +39,7 @@ import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
-import forge.game.replacement.ReplaceMoved;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementResult;
-import forge.game.replacement.ReplacementType;
+import forge.game.replacement.*;
 import forge.game.spellability.*;
 import forge.game.staticability.*;
 import forge.game.trigger.Trigger;
@@ -190,6 +176,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final CardChangedWords changedTextTypes = new CardChangedWords();
 
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
+    private final List<String> draftActions = Lists.newArrayList();
     private Map<Player, String> flipResult;
     private List<Integer> storedRolls;
 
@@ -409,6 +396,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChangedTypes(this);
         view.updateSickness(this);
         view.updateClassLevel(this);
+        view.updateDraftAction(this);
     }
 
     public boolean changeToState(final CardStateName state) {
@@ -5184,6 +5172,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 return;
             }
         }
+    }
+
+    public List<String> getDraftActions() {
+        return draftActions;
+    }
+
+    public void addDraftAction(String s) {
+        draftActions.add(s);
     }
 
     /**

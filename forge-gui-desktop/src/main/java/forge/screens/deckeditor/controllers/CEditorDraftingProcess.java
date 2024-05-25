@@ -97,6 +97,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
         this.boosterDraft.setLogEntry(this);
+        VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
 
         this.addLogEntry("Drafting process started.");
     }
