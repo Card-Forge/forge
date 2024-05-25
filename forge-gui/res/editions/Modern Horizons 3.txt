@@ -17,10 +17,14 @@ ScryfallCode=MH3
 12 U Null Elemental Blast @Milivoj Ćeran
 13 R Nulldrifter @Johann Bodin
 15 M Ulamog, the Defiler @Chase Stone
+19 U Ajani Fells the Godsire @Piotr Dura
 20 R Argent Dais @Carlos Palma Cruchaga
+21 U Charitable Levy @Eli Minaya
 22 C Dog Umbra @Brian Valeza
 24 U Essence Reliquary @Kevin Sidharta
 26 R Flare of Fortitude @Winona Nelson
+28 U Guardian of the Forgotten @Ron Spears
+29 R Guide of Souls @Ryan Valle
 34 C Mandibular Kite @Bruno Biazotto
 39 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
 40 R Phelia, Exuberant Shepherd @Rudy Siswanto
@@ -31,6 +35,7 @@ ScryfallCode=MH3
 53 U Brainsurge @Liiga Smilshkalne
 55 U Copycrook @Peter Polach
 56 C Corrupted Shapeshifter @Ralph Horsley
+61 U Emrakul's Messenger @David Álvarez
 62 R Flare of Denial @Jason A. Engle
 63 R Harbinger of the Seas @Winona Nelson
 65 U Kozilek's Unsealing @Raph Lomotan
@@ -45,21 +50,28 @@ ScryfallCode=MH3
 75 C Tune the Narrative @Marzena Nereida Piwowar
 79 R Volatile Stormdrake @Campbell White
 83 R Chthonian Nightmare @Josu Solano
+85 R Crabomination @Nicholas Gregory
+87 U Dreadmobile @Rockey Chen
 89 C Drossclaw @Néstor Ossandón Leal
 90 R Emperor of Bones @Josh Hass
+93 C Eviscerator's Insight @Sam White
 95 R Flare of Malice @David Palumbo
 97 U Grim Servant @David Astruga
 98 C Kami of Jealous Thirst @Xavier Ribeiro
 100 U Marionette Apprentice @Steve Ellis
+101 U Mindless Conscription @Warren Mahy
+102 M Necrodominance @Robin Olausson
 103 M Nethergoyf @Xavier Ribeiro
 108 C Scurrilous Sentry @Leonardo Santanna
 110 R Warren Soultrader @Pete Venters
 112 U Wurmcoil Larva @David Astruga
+113 R Aether Revolt @Filipe Pagliuso
 114 U Amped Raptor @Alex Konstad
 116 R Detective's Phoenix @Deruchenko Alexander
 119 R Flare of Duplication @Olivier Bernard
 120 U Frogmyr Enforcer @Maxime Minard
 122 C Galvanic Discharge @Zoltan Boros
+123 U Ghostfire Slice @Johann Bodin
 124 C Glimpse the Impossible @Justine Jones
 127 U Mogg Mob @Joseph Weston
 131 R Powerbalance @Steve Ellis
@@ -69,10 +81,15 @@ ScryfallCode=MH3
 142 U Unstable Amulet @José Parodi
 144 R Wheel of Potential @Drew Baker
 145 C Basking Broodscale @Caio Monteiro
+146 M Birthing Ritual @Drew Tucker
 147 U Collective Resistance @Raoul Vitale
 149 M Eladamri, Korvecdal @Zoltan Boros
 151 C Evolution Witness @Marzena Nereida Piwowar
+152 R Fanatic of Rhonas @Scott Murphy
 154 R Flare of Cultivation @Billy Christian
+158 U The Hunger Tide Rises @Liiga Smilshkalne
+159 U Hydra Trainer @Ryan Pancoast
+164 C Nyxborn Hydra @Vincent Christiaens
 165 U Path of Annihilation @Ben Hill
 166 R Primal Prayers @Yeong-Hao Han
 168 U Signature Slam @Slawomir Maniak
@@ -82,14 +99,18 @@ ScryfallCode=MH3
 174 R Thief of Existence @Raph Lomotan
 175 U Trickster's Elk @Karl Kopinski
 176 U Wumpus Aberration @Filip Burburan
+177 R Abstruse Appropriation @Jason Rainville
 178 M Arna Kennerüd, Skycaptain @Cristi Balanescu
 179 C Conduit Goblin @Bruno Biazotto
 180 C Cranial Ram @Allen Williams
 184 C Expanding Ooze @Randy Gallegos
 186 R Genku, Future Shaper @Chuck Lukacs
+187 U Golden-Tail Trainer @Nino Vecia
+188 U Horrid Shadowspinner @Ben Wootten
 189 R Imskir Iron-Eater @Xavier Ribeiro
 191 U Izzet Generatorium @Yeong-Hao Han
 192 R Kudo, King Among Bears @Ekaterina Burmak
+193 R Nadu, Winged Wisdom @Daren Bader
 194 R The Necrobloom @Igor Krstic
 197 M Phlage, Titan of Fire's Fury @Lucas Graciano
 199 R Psychic Frog @Pete Venters
@@ -133,10 +154,12 @@ ScryfallCode=MH3
 260 U Suppression Ray @Gabor Szikszai
 261 U Waterlogged Teachings @Douglas Shuler
 265 R Orim's Chant @Kev Walker
+266 M Recruiter of the Guard @Eric Wilkerson
 268 U Deep Analysis @Jesper Ejsing
 269 R Estrid's Invocation @Johannes Voss
 270 R Kappa Cannoneer @Jesper Ejsing
 271 U Reef Worm @Dan Murayama Scott
+273 U Buried Alive @Greg Staples
 274 R K'rrik, Son of Yawgmoth @Chase Stone
 276 R Ophiomancer @John Stanko
 277 R Toxic Deluge @Svetlin Velinov
@@ -158,6 +181,7 @@ ScryfallCode=MH3
 299 U Barbarian Ring @John Avon
 300 U Cephalid Coliseum @John Avon
 301 R Deserted Temple @Rob Alexander
+303 M Phyrexian Tower @Martin de Diego Sádaba
 304 L Plains @Nadia Hurianova
 305 L Island @Samuele Bandini
 306 L Swamp @Yohann Schepacz
@@ -188,6 +212,7 @@ ScryfallCode=MH3
 333 R Flare of Duplication @Isis
 335 R Powerbalance @Leanna Crossan
 336 R Wheel of Potential @Olena Richards
+337 M Birthing Ritual @Alix Branwyn
 338 R Flare of Cultivation @Olena Richards
 340 R Sowing Mycospawn @Nils Hamm
 343 M Kaalia of the Vast @Livia Prima
@@ -199,6 +224,7 @@ ScryfallCode=MH3
 349 R Sapphire Medallion @Ron Spears
 352 R Bloodstained Mire @Sean Vo
 353 R Flooded Strand @Salvatorre Zee Yazzie
+355 M Phyrexian Tower @Yohann Schepacz
 356 R Polluted Delta @Vance Kovacs
 357 R Shifting Woodland @Piotr Dura
 358 R Spymaster's Vault @Hector Ortiz
@@ -215,10 +241,13 @@ ScryfallCode=MH3
 371 M Arna Kennerüd, Skycaptain @Grant Griffin
 372 M Breya, Etherium Shaper @Jack Hughes
 373 R Genku, Future Shaper @Ivan Shavrin
+374 R Imskir Iron-Eater
 375 M Kaalia of the Vast @Jack Hughes
 376 R Kudo, King Among Bears @Peter Diamond
+377 R Nadu, Winged Wisdom @Gossip Goblin
 378 R The Necrobloom @Ivan Shavrin
-379 R Phlage, Titan of Fire's Fury @Alex Dos Diaz
+379 M Phlage, Titan of Fire's Fury @Alex Dos Diaz
+380 R Rosheen, Roaring Prophet @Ivan Shavrin
 381 M Emrakul, the World Anew @Mark Tedin
 382 M Kozilek, the Broken Reality @Richard Whitters
 383 M Ulamog, the Defiler @Vincent Proce
@@ -228,7 +257,9 @@ ScryfallCode=MH3
 387 U Null Elemental Blast @Milivoj Ćeran
 388 R Nulldrifter @Johann Bodin
 389 M Ulamog, the Defiler @Chase Stone
+390 U Charitable Levy @Eli Minaya
 391 R Flare of Fortitude @Winona Nelson
+395 M Recruiter of the Guard @Eric Wilkerson
 396 R White Orchid Phantom @Zoltan Boros
 397 R Wrath of the Skies @Franz Vohwinkel
 399 U Brainsurge @Liiga Smilshkalne
@@ -241,6 +272,9 @@ ScryfallCode=MH3
 408 R Flare of Malice @David Palumbo
 409 U Grim Servant @David Astruga
 410 U Marionette Apprentice @Steve Ellis
+411 M Necrodominance @Robin Olausson
+412 R Toxic Deluge @Svetlin Velinov
+413 U Victimize @Craig J Spearing
 414 R Warren Soultrader @Pete Venters
 416 R Flare of Duplication @Olivier Bernard
 417 C Galvanic Discharge @Zoltan Boros
@@ -253,8 +287,10 @@ ScryfallCode=MH3
 425 R Flare of Cultivation @Billy Christian
 428 U Priest of Titania @Rebecca Guay
 430 R Six @Andrew Mar
+431 R Imskir Iron-Eater @Xavier Ribeiro
 432 R Kudo, King Among Bears @Ekaterina Burmak
 433 R Psychic Frog @Pete Venters
+434 R Rosheen, Roaring Prophet @Fang Xinyu
 435 R Bloodstained Mire @Bruce Brenneise
 436 R Flooded Strand @Alexander Forssberg
 438 R Polluted Delta @Chris Ostrowski
@@ -267,11 +303,15 @@ ScryfallCode=MH3
 445 M Ral, Monsoon Mage @Borja Pindado
 446 M Grist, Voracious Larva @Ron Spencer
 447 R Argent Dais @Carlos Palma Cruchaga
+448 R Guide of Souls @Ryan Valle
 451 R Harbinger of the Seas @Winona Nelson
+452 R Crabomination @Nicholas Gregory
 453 R Emperor of Bones @Josh Hass
 454 M Nethergoyf @Xavier Ribeiro
+456 R Aether Revolt @Filipe Pagliuso
 457 R Detective's Phoenix @Deruchenko Alexander
 460 R Wight of the Reliquary @Scott Murphy
+461 R Disruptor Flute @Xavier Ribeiro
 462 R Winter Moon @Drew Baker
 463 R Bloodstained Mire @Bruce Brenneise
 464 R Flooded Strand @Alexander Forssberg
@@ -296,10 +336,13 @@ ScryfallCode=MH3
 485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
 486 M Breya, Etherium Shaper @Tiffany Turrill
 487 R Genku, Future Shaper @Chuck Lukacs
+488 R Imskir Iron-Eater @Xavier Ribeiro
 489 M Kaalia of the Vast @Justyna Dura
 490 R Kudo, King Among Bears @Ekaterina Burmak
+491 R Nadu, Winged Wisdom @Daren Bader
 492 R The Necrobloom @Igor Krstic
-493 R Phlage, Titan of Fire's Fury @Lucas Graciano
+493 M Phlage, Titan of Fire's Fury @Lucas Graciano
+494 R Rosheen, Roaring Prophet @Fang Xinyu
 495 R Powerbalance @Liiga Smilshkalne
 496 R Flusterstorm @Andrew Mar
 514 U Unstable Amulet @José Parodi
