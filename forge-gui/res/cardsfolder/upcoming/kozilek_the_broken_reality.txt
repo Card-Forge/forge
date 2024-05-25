@@ -1,0 +1,12 @@
+Name:Kozilek, the Broken Reality
+ManaCost:9
+Types:Legendary Creature Eldrazi
+PT:9/9
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigManifest | TriggerDescription$ When you cast this spell, up to two target players each manifest two cards from their hands. For each card manifested this way, you draw a card. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigManifest:DB$ Manifest | ValidTgts$ Player | TargetMin$ 0 | Amount$ 2 | TargetMax$ 2 | RememberManifested$ True | SubAbility$ DBDraw | TgtPrompt$ Select up to two target players | Choices$ Card.TargetedPlayerOwn | ChoiceZone$ Hand | DefinedPlayer$ Targeted
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+S:Mode$ Continuous | Affected$ Creature.Colorless+YouCtrl+Other | AddPower$ 3 | AddToughness$ 2 | Description$ Other colorless creatures you control get +3/+2.
+DeckHints:Color$Colorless & Type$Construct|Eldrazi|Juggernaut|Scarecrow
+Oracle:When you cast this spell, up to two target players each manifest two cards from their hands. For each card manifested this way, you draw a card. (To manifest a card, put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nOther colorless creatures you control get +3/+2.

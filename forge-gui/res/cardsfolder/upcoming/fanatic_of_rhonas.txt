@@ -1,0 +1,9 @@
+Name:Fanatic of Rhonas
+ManaCost:1 G
+Types:Creature Snake Druid
+PT:1/4
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 4 | IsPresent$ Creature.YouCtrl+powerGE4 | PrecostDesc$ Ferocious — | SpellDescription$ Add {G}{G}{G}{G}. Activate only if you control a creature with power 4 or greater.
+K:Eternalize:2 G G
+DeckHas:Ability$Token & Type$Zombie
+Oracle:{T}: Add {G}.\nFerocious — {T}: Add {G}{G}{G}{G}. Activate only if you control a creature with power 4 or greater.\nEternalize {2}{G}{G} ({2}{G}{G}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a 4/4 black Zombie Snake Druid with no mana cost. Eternalize only as a sorcery.)
