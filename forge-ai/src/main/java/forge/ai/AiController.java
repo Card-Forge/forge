@@ -69,11 +69,7 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -1882,6 +1878,31 @@ public class AiController {
                     return options.get(0);
                 }
             case ChooseNumber:
+                if (sa.getHostCard().getName().equals("Emissary's Ploy")) {
+                    // Count the amount of creatures in each CMC of 1,2,3 and choose that number
+                    // If you have multiple ploys, technically AI should choose different numbers
+                    // But thats not what happens currently
+                    List<Integer> counter = Lists.newArrayList(0,0,0);
+                    int max = 0;
+                    int slot = 0;
+                    for (Card c : relatedPlayer.getZone(ZoneType.Library).getCards()) {
+                        if (!c.isCreature()) {
+                            continue;
+                        }
+
+                        if (c.getCMC() > 0 && c.getCMC() < 4) {
+                            counter.set(c.getCMC() - 1, counter.get(c.getCMC() - 1) + 1);
+                        }
+                    }
+                    for(int i = 0; i < counter.size(); i++) {
+                        if (counter.get(i) >= max) {
+                            max = counter.get(i);
+                            slot = i;
+                        }
+                    }
+                    return slot;
+                }
+
                 return Aggregates.random(options);
             default:
                 return options.get(0);
