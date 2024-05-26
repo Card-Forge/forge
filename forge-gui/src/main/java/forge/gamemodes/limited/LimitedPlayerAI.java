@@ -63,7 +63,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
     protected String chooseColor(List<String> colors, LimitedPlayer player, String title) {
         if (player.equals(this)) {
             // For Paliano, choose one of my colors
-            // For Regicie, random is fine?
+            // For Regicide, random is fine?
         } else {
             // For Paliano, if player has revealed anything, try to avoid that color
             // For Regicide, don't choose one of my colors

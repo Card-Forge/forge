@@ -11,7 +11,6 @@ import forge.item.PaperCard;
 import forge.util.TextUtil;
 
 import java.util.*;
-//import forge.gamemodes.limited.powers.DraftPower;
 
 public class LimitedPlayer {
     // A Player class for inside some type of limited environment, like Draft.
@@ -63,6 +62,14 @@ public class LimitedPlayer {
         return serialized;
     }
 
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public List<PaperCard> getRemovedFromCardPool() {
+        return removedFromCardPool;
+    }
+
     public PaperCard chooseCard() {
         // A non-AI LimitedPlayer chooses cards via the UI instead of this function
         // TODO Archdemon of Paliano random draft while active
@@ -85,16 +92,65 @@ public class LimitedPlayer {
 
         chooseFrom.remove(bestPick);
 
+        draftedThisRound++;
+
         if ((playerFlags & AnimusRemoveFromPool) == AnimusRemoveFromPool &&
                 removeWithAnimus(bestPick)) {
             removedFromCardPool.add(bestPick);
+            addLog(name() + " removed " + bestPick.getName() + " from the draft for Animus of Predation.");
+
+            List<String> keywords = new ArrayList<String>();
+            if (bestPick.getRules().getType().isCreature()) {
+                for (String keyword : bestPick.getRules().getMainPart().getKeywords()) {
+                    switch (keyword) {
+                        case "Flying":
+                            keywords.add("Flying");
+                            break;
+                        case "First strike":
+                            keywords.add("First Strike");
+                            break;
+                        case "Double strike":
+                            keywords.add("Double Strike");
+                            break;
+                        case "Deathtouch":
+                            keywords.add("Deathtouch");
+                            break;
+                        case "Haste":
+                            keywords.add("Haste");
+                            break;
+                        case "Hexproof":
+                            keywords.add("Hexproof");
+                            break;
+                        case "Indestructible":
+                            keywords.add("Indestructible");
+                            break;
+                        case "Lifelink":
+                            keywords.add("Lifelink");
+                            break;
+                        case "Menace":
+                            keywords.add("Menace");
+                            break;
+                        case "Reach":
+                            keywords.add("Reach");
+                            break;
+                        case "Vigilance":
+                            keywords.add("Vigilance");
+                            break;
+                    }
+                }
+
+                if (!keywords.isEmpty()) {
+                    List<String> note = noted.computeIfAbsent("Animus of Predation", k -> Lists.newArrayList());
+                    note.add(String.join(",", keywords));
+                    addLog(name() + " added " + String.join(",", keywords) + " for Animus of Predation.");
+                }
+            }
+
             return true;
         } else {
             CardPool pool = deck.getOrCreate(section);
             pool.add(bestPick);
         }
-
-        draftedThisRound++;
 
         if (bestPick.getRules().getMainPart().getDraftActions() == null) {
             return true;
@@ -133,7 +189,7 @@ public class LimitedPlayer {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.join(",", chosenColors));
 
-                addLog(name() + " revealed " + bestPick.getName() + " and noted " + chosenColors + " chosen.");
+                addLog(name() + " revealed " + bestPick.getName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
             }
             else {
                 addLog(name() + " revealed " + bestPick.getName() + " as they drafted it.");
@@ -148,9 +204,8 @@ public class LimitedPlayer {
             // TODO Paliano Vanguard
             // As you draft a VALID, you may Note its [name/type/], and turn this face down
 
-
-            // TODO Animus of Predation
             if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)")) {
+                // Animus of Predation
                 playerFlags |= AnimusRemoveFromPool;
             }
             // As you draft a VALID, you may remove it face up. (It's no longer in your draft pool)
