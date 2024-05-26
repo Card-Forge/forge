@@ -1,11 +1,12 @@
 Name:Birthing Ritual
 ManaCost:1 G
 Types:Enchantment
-T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | Execute$ TrigPeek | TriggerDescription$ At the beginning of your end step, if you control a creature, look at the top seven cards of your library. Then you may sacrifice a creature. If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature’s mana value. Put the rest on the bottom of your library in a random order.
-SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | NoReveal$ True | PeekAmount$ 7 | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBDig
-SVar:DBDig:DB$ Dig | DigNum$ 7 | RestRandomOrder$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ChangeValid$ Creature.cmcLEX | ChangeNum$ 1 | Optional$ True | DestinationZone$ Battlefield | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
-SVar:X:Remembered$CardManaCost/Plus.1
+T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl | Execute$ TrigPeek | TriggerDescription$ At the beginning of your end step, if you control a creature, look at the top seven cards of your library. Then you may sacrifice a creature. If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature's mana value. Put the rest on the bottom of your library in a random order.
+SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | RememberPeeked$ True | NoReveal$ True | PeekAmount$ 7 | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature | ImprintSacrificed$ True | Optional$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 7 | RestRandomOrder$ True | ConditionDefined$ Imprinted | ConditionPresent$ Card | ChangeValid$ Creature.cmcLEX | ChangeNum$ 1 | SubAbility$ DBRestRandomOrder | Optional$ True | DestinationZone$ Battlefield
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Imprinted$CardManaCost/Plus.1
 DeckHas:Ability$Sacrifice
 Oracle:At the beginning of your end step, if you control a creature, look at the top seven cards of your library. Then you may sacrifice a creature. If you do, you may put a creature card with mana value X or less from among those cards onto the battlefield, where X is 1 plus the sacrificed creature's mana value. Put the rest on the bottom of your library in a random order.

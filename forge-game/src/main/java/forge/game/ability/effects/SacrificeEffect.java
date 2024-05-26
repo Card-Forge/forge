@@ -173,6 +173,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     if ((wasDestroyed || wasSacrificed) && remSacrificed) {
                         host.addRemembered(lKICopy);
                     }
+                    if (sa.hasParam("ImprintSacrificed")) {
+                        host.addImprintedCard(lKICopy);
+                    }
                 }
             }
         }
