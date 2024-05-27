@@ -1,0 +1,10 @@
+Name:Skittering Precursor
+ManaCost:2 R
+Types:Creature Eldrazi Drone
+PT:3/3
+K:Devoid
+K:Menace
+T:Mode$ Sacrificed | ValidCard$ Permanent.nonToken+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice a nontoken permanent, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice
+Oracle:Devoid (This card has no color.)\nMenace\nWhenever you sacrifice a nontoken permanent, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."

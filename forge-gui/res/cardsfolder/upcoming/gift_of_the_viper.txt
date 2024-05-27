@@ -1,0 +1,6 @@
+Name:Gift of the Viper
+ManaCost:G
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1,Reach,Deathtouch | CounterNum$ 1 | SubAbility$ DBUntap | SpellDescription$ Put a +1/+1 counter, a reach counter, and a deathtouch counter on target creature. Untap it.
+SVar:DBUntap:DB$ Untap | Defined$ Targeted
+Oracle:Put a +1/+1 counter, a reach counter, and a deathtouch counter on target creature. Untap it.

@@ -1,0 +1,7 @@
+Name:Faithful Watchdog
+ManaCost:G W
+Types:Creature Dog
+PT:0/0
+K:Vigilance
+K:etbCounter:P1P1:3
+Oracle:Vigilance\nFaithful Watchdog enters the battlefield with three +1/+1 counters on it.
