@@ -1,0 +1,9 @@
+Name:Wurmcoil Larva
+ManaCost:3 B B
+Types:Artifact Creature Phyrexian Wurm
+PT:3/3
+K:Deathtouch
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/2 black Phyrexian Wurm artifact creature token with deathtouch and a 2/1 black Phyrexian Wurm artifact creature token with lifelink.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_2_a_phyrexian_wurm_deathtouch,b_2_1_a_phyrexian_wurm_lifelink
+Oracle:Deathtouch, lifelink\nWhen Wurmcoil Larva dies, create a 1/2 black Phyrexian Wurm artifact creature token with deathtouch and a 2/1 black Phyrexian Wurm artifact creature token with lifelink.
