@@ -1,0 +1,11 @@
+Name:Electrozoa
+ManaCost:2 U
+Types:Creature Jellyfish
+PT:3/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | At the beginning of your precombat main phase, tap CARDNAME unless you pay {E}.
+SVar:TrigTap:DB$ Tap | UnlessCost$ PayEnergy<1> | UnlessPayer$ You | Defined$ Self
+Oracle:Flash\nFlying\nWhen Electrozoa enters the battlefield, you get {E}{E} (two energy counters).\nAt the beginning of your precombat main phase, tap Electrozoa unless you pay {E}.
