@@ -7,4 +7,5 @@ SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcLEY,Creature.cmcLEY,E
 SVar:X:Count$xPaid
 SVar:Max:Count$YourCountersEnergy
 SVar:Y:Count$ChosenNumber
+AI:RemoveDeck:All
 Oracle:You get X {E} (energy counters), then you may pay any amount of {E}. Destroy each artifact, creature, and enchantment with mana value less than or equal to the amount of {E} paid this way.
