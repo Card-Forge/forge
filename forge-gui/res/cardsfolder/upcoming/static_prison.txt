@@ -1,0 +1,11 @@
+Name:Static Prison
+ManaCost:W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield. You get {E}{E} (two energy counters).
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | SubAbility$ DBEnergy | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | At the beginning of your precombat main phase, sacrifice CARDNAME unless you pay {E}.
+SVar:TrigSac:DB$ Sacrifice | UnlessCost$ PayEnergy<1> | UnlessPayer$ You
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When Static Prison enters the battlefield, exile target nonland permanent an opponent controls until Static Prison leaves the battlefield. You get {E}{E} (two energy counters).\nAt the beginning of your precombat main phase, sacrifice Static Prison unless you pay {E}.
