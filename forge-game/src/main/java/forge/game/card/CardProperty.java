@@ -2110,6 +2110,12 @@ public class CardProperty {
                     (colors.contains("black") && card.getColor().hasBlack()) ||
                     (colors.contains("red") && card.getColor().hasRed()) ||
                     (colors.contains("green") && card.getColor().hasGreen());
+        } else if (property.equals("NotedName")) {
+          String names = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            return names.contains(card.getName());
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);

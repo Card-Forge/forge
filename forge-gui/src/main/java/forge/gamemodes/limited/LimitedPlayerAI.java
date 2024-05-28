@@ -79,4 +79,16 @@ public class LimitedPlayerAI extends LimitedPlayer {
         // We should verify we don't already have the keyword bonus that card would grant
         return false;
     }
+
+    @Override
+    protected boolean revealWithBanneret(PaperCard bestPick) {
+        // Just choose the first creature that we haven't noted yet.
+        // This is a very simple heuristic, but it's good enough for now.
+        if (!bestPick.getRules().getType().isCreature()) {
+            return false;
+        }
+
+        List<String> nobleBanneret = getDraftNotes().getOrDefault("Noble Banneret", null);
+        return nobleBanneret == null || !nobleBanneret.contains(bestPick.getName());
+    }
 }

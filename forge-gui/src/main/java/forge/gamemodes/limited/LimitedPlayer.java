@@ -23,15 +23,16 @@ public class LimitedPlayer {
     protected Queue<List<PaperCard>> unopenedPacks;
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
 
-    private static final int  CantDraftThisRound = 1;
+    private static final int CantDraftThisRound = 1;
     private static final int SpyNextCardDrafted = 1 << 1;
     private static final int ReceiveLastCard = 1 << 2;
     private static final int CanRemoveAfterDraft = 1 << 3;
     private static final int CanTradeAfterDraft = 1 << 4;
     private static final int AnimusRemoveFromPool = 1 << 5;
+    private static final int NobleBanneretActive = 1 << 6;
 
     private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
-                                    | CanTradeAfterDraft | AnimusRemoveFromPool;
+                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive;
 
     private int playerFlags = 0;
 
@@ -90,67 +91,19 @@ public class LimitedPlayer {
             return false;
         }
 
+        boolean alreadyRevealed = false;
+
         chooseFrom.remove(bestPick);
 
         draftedThisRound++;
 
-        if ((playerFlags & AnimusRemoveFromPool) == AnimusRemoveFromPool &&
-                removeWithAnimus(bestPick)) {
-            removedFromCardPool.add(bestPick);
-            addLog(name() + " removed " + bestPick.getName() + " from the draft for Animus of Predation.");
-
-            List<String> keywords = new ArrayList<String>();
-            if (bestPick.getRules().getType().isCreature()) {
-                for (String keyword : bestPick.getRules().getMainPart().getKeywords()) {
-                    switch (keyword) {
-                        case "Flying":
-                            keywords.add("Flying");
-                            break;
-                        case "First strike":
-                            keywords.add("First Strike");
-                            break;
-                        case "Double strike":
-                            keywords.add("Double Strike");
-                            break;
-                        case "Deathtouch":
-                            keywords.add("Deathtouch");
-                            break;
-                        case "Haste":
-                            keywords.add("Haste");
-                            break;
-                        case "Hexproof":
-                            keywords.add("Hexproof");
-                            break;
-                        case "Indestructible":
-                            keywords.add("Indestructible");
-                            break;
-                        case "Lifelink":
-                            keywords.add("Lifelink");
-                            break;
-                        case "Menace":
-                            keywords.add("Menace");
-                            break;
-                        case "Reach":
-                            keywords.add("Reach");
-                            break;
-                        case "Vigilance":
-                            keywords.add("Vigilance");
-                            break;
-                    }
-                }
-
-                if (!keywords.isEmpty()) {
-                    List<String> note = noted.computeIfAbsent("Animus of Predation", k -> Lists.newArrayList());
-                    note.add(String.join(",", keywords));
-                    addLog(name() + " added " + String.join(",", keywords) + " for Animus of Predation.");
-                }
-            }
-
-            return true;
-        } else {
+        if (!handleAnimusOfPredation(bestPick)) {
             CardPool pool = deck.getOrCreate(section);
             pool.add(bestPick);
         }
+
+        alreadyRevealed |= handleNobleBanneret(bestPick);
+
 
         if (bestPick.getRules().getMainPart().getDraftActions() == null) {
             return true;
@@ -159,8 +112,10 @@ public class LimitedPlayer {
         // Draft Actions
         Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
         if (Iterables.contains(draftActions, "Reveal CARDNAME as you draft it.")) {
-            revealed.add(bestPick);
-            showRevealedCard(bestPick);
+            if (!alreadyRevealed) {
+                revealed.add(bestPick);
+                showRevealedCard(bestPick);
+            }
 
             if (Iterables.contains(draftActions, "Note how many cards you've drafted this draft round, including CARDNAME.")) {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
@@ -198,15 +153,18 @@ public class LimitedPlayer {
         if (Iterables.contains(draftActions, "Draft CARDNAME face up.")) {
             faceUp.add(bestPick);
             addLog(name() + " drafted " + bestPick.getName() + " face up.");
-            showRevealedCard(bestPick);
+            if (!alreadyRevealed) {
+                showRevealedCard(bestPick);
+            }
 
-            // TODO Noble Banneret
             // TODO Paliano Vanguard
             // As you draft a VALID, you may Note its [name/type/], and turn this face down
 
             if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)")) {
                 // Animus of Predation
                 playerFlags |= AnimusRemoveFromPool;
+            } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
+                playerFlags |= NobleBanneretActive;
             }
             // As you draft a VALID, you may remove it face up. (It's no longer in your draft pool)
             // TODO We need a deck section that's not your sideboard but is your cardpool?
@@ -267,6 +225,10 @@ public class LimitedPlayer {
         return SGuiChoose.one("Remove this " + bestPick + " from the draft for ANnimus of Predation?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
+    protected boolean revealWithBanneret(PaperCard bestPick) {
+        return SGuiChoose.one("Reveal this " + bestPick + " for Noble Banneret?", Lists.newArrayList("Yes", "No")).equals("Yes");
+    }
+
     public String name() {
         if (this instanceof LimitedPlayerAI) {
             return "Player[" + order + "]";
@@ -278,6 +240,117 @@ public class LimitedPlayer {
     public void showRevealedCard(PaperCard pick) {
         // TODO Show the revealed card in the CardDetailPanel
 
+    }
+
+    public boolean handleAnimusOfPredation(PaperCard bestPick) {
+        if ((playerFlags & AnimusRemoveFromPool) != AnimusRemoveFromPool) {
+            return false;
+        }
+
+        if (!removeWithAnimus(bestPick)) {
+            return false;
+        }
+
+        removedFromCardPool.add(bestPick);
+        addLog(name() + " removed " + bestPick.getName() + " from the draft for Animus of Predation.");
+
+        List<String> keywords = new ArrayList<String>();
+        if (bestPick.getRules().getType().isCreature()) {
+            for (String keyword : bestPick.getRules().getMainPart().getKeywords()) {
+                switch (keyword) {
+                    case "Flying":
+                        keywords.add("Flying");
+                        break;
+                    case "First strike":
+                        keywords.add("First Strike");
+                        break;
+                    case "Double strike":
+                        keywords.add("Double Strike");
+                        break;
+                    case "Deathtouch":
+                        keywords.add("Deathtouch");
+                        break;
+                    case "Haste":
+                        keywords.add("Haste");
+                        break;
+                    case "Hexproof":
+                        keywords.add("Hexproof");
+                        break;
+                    case "Indestructible":
+                        keywords.add("Indestructible");
+                        break;
+                    case "Lifelink":
+                        keywords.add("Lifelink");
+                        break;
+                    case "Menace":
+                        keywords.add("Menace");
+                        break;
+                    case "Reach":
+                        keywords.add("Reach");
+                        break;
+                    case "Vigilance":
+                        keywords.add("Vigilance");
+                        break;
+                }
+            }
+
+            if (!keywords.isEmpty()) {
+                List<String> note = noted.computeIfAbsent("Animus of Predation", k -> Lists.newArrayList());
+                note.add(String.join(",", keywords));
+                addLog(name() + " added " + String.join(",", keywords) + " for Animus of Predation.");
+            }
+        }
+
+        return true;
+    }
+
+    public boolean handleNobleBanneret(PaperCard bestPick) {
+        boolean alreadyRevealed = false;
+        if ((playerFlags & NobleBanneretActive) != NobleBanneretActive) {
+            return false;
+        }
+
+        if (!bestPick.getRules().getType().isCreature()) {
+            return false;
+        }
+
+        boolean remaining = false;
+        PaperCard found = null;
+
+        for(PaperCard c : faceUp) {
+            if (c.getName().equals("Noble Banneret")) {
+                if (found == null) {
+                    found = c;
+                } else {
+                    remaining = true;
+                    break;
+                }
+            }
+        }
+
+        if (found == null) {
+            playerFlags &= ~NobleBanneretActive;
+            return false;
+        }
+
+        if (!revealWithBanneret(bestPick)) {
+            return false;
+        }
+
+        // As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.
+        List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
+        revealed.add(bestPick);
+        note.add(bestPick.getName());
+        addLog(name() + " revealed " + bestPick.getName() + " and noted its name for Noble Banneret.");
+        addLog(name() + " has flipped Noble Banneret face down.");
+        alreadyRevealed = true;
+
+        faceUp.remove(found);
+
+        if (!remaining) {
+            playerFlags &= ~NobleBanneretActive;
+        }
+        return alreadyRevealed;
     }
 
     /*
