@@ -30,9 +30,10 @@ public class LimitedPlayer {
     private static final int CanTradeAfterDraft = 1 << 4;
     private static final int AnimusRemoveFromPool = 1 << 5;
     private static final int NobleBanneretActive = 1 << 6;
+    private static final int PalianoVanguardActive = 1 << 7;
 
     private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
-                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive;
+                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive;
 
     private int playerFlags = 0;
 
@@ -103,14 +104,15 @@ public class LimitedPlayer {
         }
 
         alreadyRevealed |= handleNobleBanneret(bestPick);
+        alreadyRevealed |= handlePalianoVanguard(bestPick);
 
-
-        if (bestPick.getRules().getMainPart().getDraftActions() == null) {
+        Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
+        if (draftActions == null || !draftActions.iterator().hasNext()) {
             return true;
         }
 
         // Draft Actions
-        Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
+
         if (Iterables.contains(draftActions, "Reveal CARDNAME as you draft it.")) {
             if (!alreadyRevealed) {
                 revealed.add(bestPick);
@@ -165,11 +167,9 @@ public class LimitedPlayer {
                 playerFlags |= AnimusRemoveFromPool;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
                 playerFlags |= NobleBanneretActive;
+            } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
+                playerFlags |= PalianoVanguardActive;
             }
-            // As you draft a VALID, you may remove it face up. (It's no longer in your draft pool)
-            // TODO We need a deck section that's not your sideboard but is your cardpool?
-            // Keyword absorption: If creature is absorbed, it gains all the abilities of the creature it absorbed. This includes
-            // flying, first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, and vigilance.
         }
 
         // Note who passed it to you. (Either player before you in draft passing order except if you receive the last card
@@ -222,11 +222,15 @@ public class LimitedPlayer {
     }
 
     protected boolean removeWithAnimus(PaperCard bestPick) {
-        return SGuiChoose.one("Remove this " + bestPick + " from the draft for ANnimus of Predation?", Lists.newArrayList("Yes", "No")).equals("Yes");
+        return SGuiChoose.one("Remove this " + bestPick + " from the draft for Animus of Predation?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
     protected boolean revealWithBanneret(PaperCard bestPick) {
         return SGuiChoose.one("Reveal this " + bestPick + " for Noble Banneret?", Lists.newArrayList("Yes", "No")).equals("Yes");
+    }
+
+    protected boolean revealWithVanguard(PaperCard bestPick) {
+        return SGuiChoose.one("Reveal this " + bestPick + " for Paliano Vanguard?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
     public String name() {
@@ -349,6 +353,55 @@ public class LimitedPlayer {
 
         if (!remaining) {
             playerFlags &= ~NobleBanneretActive;
+        }
+        return alreadyRevealed;
+    }
+
+    public boolean handlePalianoVanguard(PaperCard bestPick) {
+        boolean alreadyRevealed = false;
+        if ((playerFlags & PalianoVanguardActive) != PalianoVanguardActive) {
+            return false;
+        }
+
+        if (!bestPick.getRules().getType().isCreature()) {
+            return false;
+        }
+
+        boolean remaining = false;
+        PaperCard found = null;
+
+        for(PaperCard c : faceUp) {
+            if (c.getName().equals("Paliano Vanguard")) {
+                if (found == null) {
+                    found = c;
+                } else {
+                    remaining = true;
+                    break;
+                }
+            }
+        }
+
+        if (found == null) {
+            playerFlags &= ~PalianoVanguardActive;
+            return false;
+        }
+
+        if (!revealWithVanguard(bestPick)) {
+            return false;
+        }
+
+        // As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.
+        List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
+        revealed.add(bestPick);
+        note.addAll(bestPick.getRules().getType().getCreatureTypes());
+        addLog(name() + " revealed " + bestPick.getName() + " and noted - " + TextUtil.join(bestPick.getRules().getType().getCreatureTypes(), ",") + " for Paliano Vanguard.");
+        addLog(name() + " has flipped Paliano Vanguard face down.");
+        alreadyRevealed = true;
+
+        faceUp.remove(found);
+
+        if (!remaining) {
+            playerFlags &= ~PalianoVanguardActive;
         }
         return alreadyRevealed;
     }

@@ -9,6 +9,7 @@ import forge.localinstance.properties.ForgePreferences;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class LimitedPlayerAI extends LimitedPlayer {
     protected DeckColors deckCols;
@@ -90,5 +91,24 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         List<String> nobleBanneret = getDraftNotes().getOrDefault("Noble Banneret", null);
         return nobleBanneret == null || !nobleBanneret.contains(bestPick.getName());
+    }
+
+    @Override
+    protected boolean revealWithVanguard(PaperCard bestPick) {
+        // Just choose the first creature that we haven't noted types of yet.
+        // This is a very simple heuristic, but it's good enough for now.
+        if (!bestPick.getRules().getType().isCreature()) {
+            return false;
+        }
+
+        List<String> notedTypes = getDraftNotes().getOrDefault("Paliano Vanguard", null);
+
+        Set<String> types = bestPick.getRules().getType().getCreatureTypes();
+
+        if (notedTypes == null || types.isEmpty()) {
+            return false;
+        }
+
+        return types.containsAll(notedTypes);
     }
 }
