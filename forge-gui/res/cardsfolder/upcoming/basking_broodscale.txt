@@ -1,0 +1,10 @@
+Name:Basking Broodscale
+ManaCost:1 G
+Types:Creature Eldrazi Lizard
+PT:2/2
+K:Devoid
+K:Adapt:1:1 G
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | CounterType$ P1P1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, you may create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+DeckHas:Ability$Counters|Token & Type$Spawn
+Oracle:Devoid (This card has no color.)\n{1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever one or more +1/+1 counters are put on Basking Broodscale, you may create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
