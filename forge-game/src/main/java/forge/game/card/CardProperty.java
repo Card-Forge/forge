@@ -2113,6 +2113,14 @@ public class CardProperty {
                 return false;
             }
             return names.contains(card.getName());
+        } else if (property.equals("NotedTypes")) {
+            String types = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            if (types == null || types.isEmpty()) {
+                return false;
+            }
+            List<String> typeList = Lists.newArrayList(types.split(","));
+
+            return Iterables.any(card.getType().getCreatureTypes(), typeList::contains);
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
