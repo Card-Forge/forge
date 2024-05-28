@@ -1,0 +1,11 @@
+Name:Cayth, Famed Mechanist
+ManaCost:1 U R W
+Types:Legendary Creature Dwarf Artificer
+PT:3/3
+K:Fabricate:1
+S:Mode$ Continuous | Affected$ Creature.Other+nonToken+YouCtrl | AddKeyword$ Fabricate:1 | Description$ Other nontoken creatures you control have fabricate 1.
+A:AB$ Charm | Cost$ 2 T | Choices$ DBPopulate,DBProliferate | Defined$ You
+SVar:DBPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SpellDescription$ Populate.
+SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate.
+DeckHas:Ability$Counters|Token|Proliferate
+Oracle:Fabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)\nOther nontoken creatures you control have fabricate 1.\n{2}, {T}: Choose one —\n• Populate.\n• Proliferate.
