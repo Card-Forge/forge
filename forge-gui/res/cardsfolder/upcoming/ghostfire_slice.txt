@@ -1,0 +1,7 @@
+Name:Ghostfire Slice
+ManaCost:2 R
+Types:Instant
+K:Devoid
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Permanent.MultiColor+OppCtrl | Description$ This spell costs {2} less to cast if an opponent controls a multicolored permanent.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
+Oracle:Devoid (This card has no color.)\nThis spell costs {2} less to cast if an opponent controls a multicolored permanent.\Ghostfire Slice deals 4 damage to any target.
