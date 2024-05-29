@@ -23,6 +23,7 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
     protected boolean allowCancel = false;
     protected SpellAbility sa = null;
     protected CardView card;
+    protected String tallyType;
     protected int tally;
 
     protected String message = "Source-Card-Name - Select %d more card(s)";
@@ -44,12 +45,13 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         }
     }
 
-    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa0, final int tally0) {
+    protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final SpellAbility sa0, final String tallyType0, final int tally0) {
         this(controller,min,max);
         this.sa = sa0;
         if (sa0 != null) {
             this.card = sa0.getView().getHostCard();
         }
+        this.tallyType = tallyType0;
         this.tally = tally0;
     }
 
