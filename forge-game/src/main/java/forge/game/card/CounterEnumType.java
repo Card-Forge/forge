@@ -79,7 +79,7 @@ public enum CounterEnumType {
 
     CHORUS("CHRUS", 0, 192, 246),
 
-    COIN("COIN",255,215,0),
+    COIN("COIN", 255, 215, 0),
 
     COLLECTION("CLLCT", 255, 215, 0),
 
@@ -165,7 +165,7 @@ public enum CounterEnumType {
 
     FLOOD("FLOOD", 0, 203, 255),
 
-    FORESHADOW("FRSHD",144, 99, 207),
+    FORESHADOW("FRSHD", 144, 99, 207),
 
     FUNGUS("FNGUS", 121, 219, 151),
 
