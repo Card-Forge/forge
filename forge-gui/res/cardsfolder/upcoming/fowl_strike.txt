@@ -1,0 +1,6 @@
+Name:Fowl Strike
+ManaCost:1 G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+K:Reinforce:2:2 G
+Oracle:Destroy target creature with flying.\nReinforce 2—{2}{G} ({2}{G}, Discard this card: Put two +1/+1 counters on target creature.)
