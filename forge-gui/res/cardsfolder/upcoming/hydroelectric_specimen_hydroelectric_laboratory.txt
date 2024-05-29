@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Weird
 PT:1/4
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may change a target of target instant or sorcery spell with a single target to Hydroelectric Specimen.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may change a target of target instant or sorcery spell with a single target to CARDNAME.
 SVar:TrigChange:DB$ ChangeTargets | TargetType$ Instant.singleTarget,Sorcery.singleTarget | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True
 AlternateMode:Modal
 Oracle:Flash\nWhen Hydroelectric Specimen enters the battlefield, you may change a target of target instant or sorcery spell with a single target to Hydroelectric Specimen.
