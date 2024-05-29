@@ -1,0 +1,10 @@
+Name:Final Act
+ManaCost:4 B B
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 5 | Choices$ DestroyAllCreatures,DestroyAllPlaneswalkers,DestroyAllBattles,ExileAllGraveyards,RemoveAllCounters
+SVar:DestroyAllCreatures:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+SVar:DestroyAllPlaneswalkers:DB$ DestroyAll | ValidCards$ Planeswalker | SpellDescription$ Destroy all planeswalkers.
+SVar:DestroyAllBattles:DB$ DestroyAll | ValidCards$ Battle | SpellDescription$ Destroy all battles.
+SVar:ExileAllGraveyards:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all graveyards.
+SVar:RemoveAllCounters:DB$ RemoveCounter | CounterType$ All | CounterNum$ All | Defined$ Opponent | SpellDescription$ Each opponent loses all counters.
+Oracle:Choose one or more —\n• Destroy all creatures.\n• Destroy all planeswalkers.\n• Destroy all battles.\n• Exile all graveyards.\n• Each opponent loses all counters.
