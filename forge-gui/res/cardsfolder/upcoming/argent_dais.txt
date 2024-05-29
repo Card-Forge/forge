@@ -1,0 +1,11 @@
+Name:Argent Dais
+ManaCost:1 W
+Types:Artifact
+K:etbCounter:OIL:2
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever two or more creatures attack, put an oil counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ 2 T SubCounter<2/OIL> | ValidTgts$ Permanent.Other+nonLand | TgtPrompt$ Select another nonland permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Exile another target nonland permanent. Its controller draws two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | Defined$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Argent Dais enters the battlefield with two oil counters on it.\nWhenever two or more creatures attack, put an oil counter on Argent Dais.\n{2}, {T}, Remove two oil counters from Argent Dais: Exile another target nonland permanent. Its controller draws two cards.
