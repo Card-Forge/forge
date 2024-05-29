@@ -10,5 +10,4 @@ SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ PayEnergy<3> | Execute$ TrigDamage |
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$CardPower
 DeckHints:Type$Instant|Sorcery
-BuffedBy:Card.nonCreature
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Cyclops Superconductor enters the battlefield, you get {E}{E}{E} (three energy counters).\nWhen Cyclops Superconductor dies, you may pay {E}{E}{E}. When you do, Cyclops Superconductor deals damage equal to its power to any target.
