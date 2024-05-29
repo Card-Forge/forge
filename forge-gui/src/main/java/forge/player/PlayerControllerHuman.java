@@ -526,6 +526,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return new CardCollection(inp.getSelected());
     }
 
+    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList, final SpellAbility sa) {
+        //this can be used to stop zone select GUI when certain APIs would reveal illegal zone information
+        //initially created for HeistEffect which showed library placement
+        if (sa.getApi().equals(ApiType.Heist)) return false;
+        return useSelectCardsInput(sourceList);
+    }
+
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
         if (FThreads.isGuiThread()) {
@@ -662,7 +669,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-        if (useSelectCardsInput(optionList)) {
+        if (useSelectCardsInput(optionList, sa)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
