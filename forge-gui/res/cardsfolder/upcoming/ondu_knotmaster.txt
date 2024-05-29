@@ -13,5 +13,5 @@ ALTERNATE
 Name:Throw a Line
 ManaCost:W B
 Types:Sorcery Adventure
-A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select one or two creatures to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.
 Oracle:Distribute two +1/+1 counters among one or two target creatures. (Then exile this card. You may cast the creature later from exile.)
