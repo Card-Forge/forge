@@ -38,19 +38,43 @@ ScryfallCode=M3C
 30 M Omo, Queen of Vesuva @Alex Brock
 31 M Satya, Aetherflux Genius @Aaron Miller
 37 R Twins of Discord @Lorenzo Lanfranconi
+40 R Hourglass of the Lost @Lindsey Look
+41 R Localized Destruction @Olivier Bernard
+42 R Razorfield Ripper @Samuel Perin
+43 R Salvation Colossus @José Parodi
+44 R Silverquill Lecturer @Ryan Pancoast
+45 R Aurora Shifter @Justyna Dura
 48 R March from Velis Vel @Carlos Palma Cruchaga
 52 R Final Act @Nils Hamm
 54 R Aether Refinery @Daniel Ljunggren
+55 R Blaster Hulk @Lie Setiawan
+56 R Filigree Racer @Gaboleps
 57 R Hideous Taskmaster @Helge C. Balzer
+58 R Overclocked Electromancer @Brent Hollowell
 61 R Siege-Gang Lieutenant @Warren Mahy
 70 R Bloodbraid Challenger @Lie Setiawan
+75 R Sphinx of the Revelation @Maxime Minard
+76 R Conversion Apparatus @Alayna Danner
+77 R Stone Idol Generator @Julian Kok Joon Wen
 80 R Planar Nexus @Sam Burley
+92 R Hourglass of the Lost @Lindsey Look
+93 R Localized Destruction @Olivier Bernard
+94 R Razorfield Ripper @Samuel Perin
+95 R Salvation Colossus @José Parodi
+96 R Silverquill Lecturer @Ryan Pancoast
+97 R Aurora Shifter @Justyna Dura
 100 R March from Velis Vel @Carlos Palma Cruchaga
 104 R Final Act @Nils Hamm
 106 R Aether Refinery @Daniel Ljunggren
+107 R Blaster Hulk @Lie Setiawan
+108 R Filigree Racer @Gaboleps
 109 R Hideous Taskmaster @Helge C. Balzer
+110 R Overclocked Electromancer @Brent Hollowell
 113 R Siege-Gang Lieutenant @Warren Mahy
 122 R Bloodbraid Challenger @Lie Setiawan
+127 R Sphinx of the Revelation @Maxime Minard
+128 R Conversion Apparatus @Alayna Danner
+129 R Stone Idol Generator @Julian Kok Joon Wen
 132 R Planar Nexus @Sam Burley
 136 M Azlask, the Swelling Scourge @Cosmin Podar
 137 M Cayth, Famed Mechanist @Boell Oyino
@@ -61,7 +85,64 @@ ScryfallCode=M3C
 142 M Satya, Aetherflux Genius @Cosmin Podar
 143 M Ulalek, Fused Atrocity @Cosmin Podar
 158 M Oblivion Sower @Jaime Jones
+163 R Aethergeode Miner @Winona Nelson
+164 R Aetherstorm Roc @Scott Murphy
+165 R Akroma's Will @Antonio José Manzanedo
+166 M Angel of Invention @Volkan Baǵa
+167 R Austere Command @Anna Steinbauer
 168 U Crib Swap @Michele Giorgi
+170 R Farewell @Seb McKinnon
+171 M Legion Loyalty @Michal Ivan
+172 R Skyclave Apparition @Donato Giancola
+173 U Swords to Plowshares @Jesper Ejsing
+174 R Aethersquall Ancient @Sam Burley
+175 R Aethertide Whale @Steven Belledin
+177 R Bident of Thassa @Yeong-Hao Han
+178 R Confiscation Coup @Joseph Meehan
 182 R Drowner of Hope @Nicholas Gregory
+183 U Era of Innovation @Jason Rainville
+187 U Glimmer of Genius @Tommy Arnold
+189 R Midnight Clock @Alexander Forssberg
+194 R Tezzeret's Gambit @Karl Kopinski
 197 M Archon of Cruelty @Andrew Mar
+210 M Combustible Gearhulk @Daarken
+212 M Goldspan Dragon @Andrew Mar
+213 R Grenzo, Havoc Raiser @Svetlin Velinov
+215 M Lightning Runner @Raymond Swanland
+216 R Professional Face-Breaker @Dan Murayama Scott
 220 M Apex Devastator @Svetlin Velinov
+257 M Brudiclad, Telchor Engineer @Daarken
+278 U Whirler Virtuoso @Lake Hurwitz
+280 R Aethersphere Harvester @Christine Choi
+281 M Aetherworks Marvel @James Paick
+283 C Arcane Signet @Dan Murayama Scott
+284 U Burnished Hart @Yeong-Hao Han
+286 R Coalition Relic @Donato Giancola
+287 R Coveted Jewel @Jason A. Engle
+288 U Decoction Module @Aaron Miller
+294 M Gonti's Aether Heart @Vincent Proce
+301 R Myr Battlesphere @Franz Vohwinkel
+305 U Sol Ring @Mike Bierek
+306 R Solemn Simulacrum @Dan Murayama Scott
+307 U Talisman of Conviction @Lindsey Look
+308 U Talisman of Creativity @Lindsey Look
+313 U Talisman of Progress @Mike Dringenberg
+315 C Wayfarer's Bauble @Darrell Riche
+316 R Adarkar Wastes @Piotr Dura
+317 U Aether Hub @Sam Burley
+319 C Azorius Chancery @John Avon
+321 R Battlefield Forge @Thomas Stoop
+327 R Castle Vantress @John Avon
+331 C Command Tower @Ryan Yee
+335 U Demolition Field @Kamila Szutenberg
+344 R Frostboil Snarl @Sam Burley
+345 R Furycalm Snarl @Sam Burley
+350 U Izzet Boilerworks @John Avon
+359 R Mystic Gate @Fred Fields
+360 U Mystic Monastery @Florian de Gesincourt
+364 R Port Town @Kamila Szutenberg
+365 R Prairie Stream @Adam Paquette
+375 R Shivan Reef @Andrew Mar
+386 R Temple of Enlightenment @Svetlin Velinov
+387 R Temple of Epiphany @Adam Paquette
+392 R Temple of Triumph @Piotr Dura
