@@ -4,7 +4,7 @@ Types:Creature Eldrazi
 PT:3/5
 K:Devoid
 K:Kicker:C
-T:Mode$ SpellCast | ValidCard$ Card.Self+kicked 1 | Execute$ TrigCharm | TriggerDescription$ When you cast this spell, choose one. If it was kicked, choose both instead.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When you cast this spell, choose one. If it was kicked, choose both instead.
 SVar:TrigCharm:DB$ Charm | CharmNum$ Count$Compare X GE1.2.1 | Choices$ DBChangeZone,DBDraw | AdditionalDescription$ If CARDNAME was kicked, choose both instead.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player to draw two cards, then discard a card | Defined$ ThisTargetedPlayer | SubAbility$ DBDiscard | SpellDescription$ Target player draws two cards, then discards a card.
