@@ -1,0 +1,8 @@
+Name:Phyrexian Ironworks
+ManaCost:2 R
+Types:Artifact
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Token | Cost$ T PayEnergy<3> | SorcerySpeed$ True | TokenScript$ c_3_3_a_phyrexian_golem | SpellDescription$ Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.
+DeckHas:Ability$Token & Type$Phyrexian|Golem
+Oracle:Whenever you attack, you get {E} (an energy counter).\n{T}, Pay {E}{E}{E}: Create a 3/3 colorless Phyrexian Golem artifact creature token. Activate only as a sorcery.
