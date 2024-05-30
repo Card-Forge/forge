@@ -1,6 +1,6 @@
 Name:Furnace Hellkite
 ManaCost:5 R R
-Types:Creature Dragon
+Types:Artifact Creature Dragon
 PT:5/5
 K:Affinity:Artifact
 K:Flying
