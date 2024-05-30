@@ -1,0 +1,9 @@
+Name:Nyxborn Unicorn
+ManaCost:1 W
+Types:Enchantment Creature Unicorn
+PT:2/2
+K:Bestow:3 W
+K:Mentor
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Mentor | Description$ Enchanted creature gets +2/+2 and has mentor.
+DeckHas:Ability$Counters
+Oracle:Bestow {3}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nEnchanted creature gets +2/+2 and has mentor.
