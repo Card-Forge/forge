@@ -141,7 +141,7 @@ ScryfallCode=MH3
 133 U Reckless Pyrosurfer @LA Draws
 134 U Reiterating Bolt @G-host Lee
 135 C Sarpadian Simulacrum @Forrest Schehl
-136 C 754 @Joshua Cairos
+136 C Siege Smash @Joshua Cairos
 137 U Skittering Precursor @Tuan Duong Chu
 138 C Skoa, Embermage @Kevin Sidharta
 139 C Smelted Chargebug @Jonas De Ro
