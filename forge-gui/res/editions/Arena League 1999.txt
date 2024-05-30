@@ -15,4 +15,3 @@ ScryfallCode=PAL99
 7 R Plains @Rob Alexander
 8 R Karn, Silver Golem @Mark Zug
 9 R Swamp @John Avon
-3† R Island @Donato Giancola
