@@ -122,7 +122,6 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         if (sa.hasParam("RememberCards")) { // remembers whether counters actually placed or not
             host.addRemembered(table.columnKeySet());
         }
-
     }
 
 }
