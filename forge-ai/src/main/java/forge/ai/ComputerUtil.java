@@ -305,8 +305,8 @@ public class ComputerUtil {
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
 
         // do this after card got added to stack
-        if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+        if (!newSA.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
             return false;
         }
         
@@ -1280,7 +1280,6 @@ public class ComputerUtil {
             if (cardState.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
-
         } // BuffedBy
 
         // there's a good chance AI will attack weak target

@@ -1,7 +1,7 @@
 Name:Titans' Vanguard
-ManaCost:1 R G
+ManaCost:3 R G
 Types:Creature Eldrazi
-PT:2/2
+PT:5/5
 K:Devoid
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, put a +1/+1 counter on each colorless creature you control.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, put a +1/+1 counter on each colorless creature you control.
