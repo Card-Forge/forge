@@ -2,7 +2,7 @@ Name:Legion Leadership
 ManaCost:1 RW
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | NumAtt$ Double | KW$ First Strike | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, double target creature's power and it gains first strike.
-Oracle:Until end of turn, double target creature’s power and it gains first strike.
+Oracle:Until end of turn, double target creature's power and it gains first strike.
 AlternateMode:Modal
 
 ALTERNATE
