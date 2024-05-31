@@ -2311,7 +2311,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             k[2] = k[1].substring(5).toLowerCase();
                         }
                         sbLong.append(k[2]);
-                        if (!k[2].contains(" and ")) { // skip reminder text for more complicated Hexproofs
+                        // skip reminder text for more complicated Hexproofs
+                        if (!k[2].contains(" and ") && !k[2].contains("each")) {
                             sbLong.append(" (").append(inst.getReminderText().replace("chosen", k[2]));
                             sbLong.append(")");
                         }
@@ -6773,8 +6774,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
                 } else if (k[2].toString().equals("monocolored")) {
                     hexproofKey += "monocolored:";
-                } else if (k[2].toString().equals("each color")) {
-                    hexproofKey += "W:U:B:R:G:";
                 }
             }
         }
