@@ -209,7 +209,7 @@ ScryfallCode=MH3
 201 C Riddle Gate Gargoyle @Bartek Fedyczak
 202 R Rosheen, Roaring Prophet @Fang Xinyu
 203 U Scurry of Gremlins @Ben Wootten
-204 C Snapping Void craw @Camille Alquier
+204 C Snapping Voidcraw @Camille Alquier
 205 C Sneaky Snacker @Irina Nordsol
 206 U Titans' Vanguard @Richard Kane Ferguson
 207 R Wight of the Reliquary @Scott Murphy
@@ -277,15 +277,15 @@ ScryfallCode=MH3
 269 R Estrid's Invocation @Johannes Voss
 270 R Kappa Cannoneer @Jesper Ejsing
 271 U Reef Worm @Dan Murayama Scott
-272 C Shrieking Drake @Ian Miller
+272 U Shrieking Drake @Ian Miller
 273 U Buried Alive @Greg Staples
 274 R K'rrik, Son of Yawgmoth @Chase Stone
-275 C Nadier's Nightblade @Randy Vargas
+275 U Nadier's Nightblade @Randy Vargas
 276 R Ophiomancer @John Stanko
 277 R Toxic Deluge @Svetlin Velinov
 278 U Victimize @Craig J Spearing
 279 R Cursed Mirror @David Gaillet
-280 R Fledgling Dragon @Greg Staples
+280 U Fledgling Dragon @Greg Staples
 281 R Laelia, the Blade Reforged @Wisnu Tan
 282 U Meltdown @Donato Giancola
 283 U Meteoric Mace @Randy Vargas
@@ -307,7 +307,7 @@ ScryfallCode=MH3
 299 U Barbarian Ring @John Avon
 300 U Cephalid Coliseum @John Avon
 301 R Deserted Temple @Rob Alexander
-302 R Nesting Grounds @Yeong-Hao Han
+302 U Nesting Grounds @Yeong-Hao Han
 303 M Phyrexian Tower @Martin de Diego Sádaba
 304 L Plains @Nadia Hurianova
 305 L Island @Samuele Bandini
@@ -442,7 +442,7 @@ ScryfallCode=MH3
 434 R Rosheen, Roaring Prophet @Fang Xinyu
 435 R Bloodstained Mire @Bruce Brenneise
 436 R Flooded Strand @Alexander Forssberg
-437 R Nesting Grounds @Yeong-Hao Han
+437 U Nesting Grounds @Yeong-Hao Han
 438 R Polluted Delta @Chris Ostrowski
 439 U Snow-Covered Wastes @Mark Poole
 440 R Windswept Heath @Alexander Forssberg
