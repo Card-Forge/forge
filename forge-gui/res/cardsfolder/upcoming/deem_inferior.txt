@@ -1,0 +1,6 @@
+Name:Deem Inferior
+ManaCost:3 U
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Count$YouDrewThisTurn | EffectZone$ All | Description$ This spell costs {1} less to cast for each card you've drawn this turn.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 1 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | StackDescription$ {p:TargetedOwner} puts {c:Targeted} into their library second from the top or on the bottom. | SpellDescription$ The owner of target nonland permanent puts it into their library second from the top or on the bottom.
+Oracle:This spell costs {1} less to cast for each card you've drawn this turn.\nThe owner of target nonland permanent puts it into their library second from the top or on the bottom.

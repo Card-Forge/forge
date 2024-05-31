@@ -6773,6 +6773,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
                 } else if (k[2].toString().equals("monocolored")) {
                     hexproofKey += "monocolored:";
+                } else if (k[2].toString().equals("each color")) {
+                    hexproofKey += "W:U:B:R:G:";
                 }
             }
         }
