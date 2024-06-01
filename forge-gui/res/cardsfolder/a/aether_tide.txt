@@ -1,7 +1,8 @@
 Name:Aether Tide
 ManaCost:X U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U Discard<X/Creature/creature(s)> | CostDesc$ As an additional cost to cast this spell, discard X creature cards. | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Return X target creatures to their owners' hands.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ Discard<X/Creature/creature(s)> | EffectZone$ All | Description$ As an additional cost to cast this spell, discard X creature cards.
+A:SP$ ChangeZone | Cost$ X U | TargetMin$ X | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | SpellDescription$ Return X target creatures to their owners' hands.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, discard X creature cards.\nReturn X target creatures to their owners' hands.
