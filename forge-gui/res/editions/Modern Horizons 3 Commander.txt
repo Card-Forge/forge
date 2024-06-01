@@ -64,7 +64,7 @@ ScryfallCode=M3C
 56 R Filigree Racer @Gaboleps
 57 R Hideous Taskmaster @Helge C. Balzer
 58 R Overclocked Electromancer @Brent Hollowell
-59 C Pyrogoyf @Xabi Gaztelua
+59 R Pyrogoyf @Xabi Gaztelua
 60 R Sawhorn Nemesis @Monztre
 61 R Siege-Gang Lieutenant @Warren Mahy
 62 R Tempt with Mayhem @Deruchenko Alexander
@@ -84,7 +84,11 @@ ScryfallCode=M3C
 76 R Conversion Apparatus @Alayna Danner
 77 R Stone Idol Generator @Julian Kok Joon Wen
 78 R Horizon of Progress @Julian Kok Joon Wen
+79 R Lazotep Quarry @Sam Burley
 80 R Planar Nexus @Sam Burley
+81 R Sunken Palace @Julian Kok Joon Wen
+82 R Talon Gates of Madara @Steven Belledin
+83 R Trenchpost @Carlos Palma Cruchaga
 92 R Hourglass of the Lost @Lindsey Look
 93 R Localized Destruction @Olivier Bernard
 94 R Razorfield Ripper @Samuel Perin
@@ -94,18 +98,28 @@ ScryfallCode=M3C
 99 R Copy Land @Hristo D. Chukov
 100 R March from Velis Vel @Carlos Palma Cruchaga
 101 R Wonderscape Sage @Daneen Wilkerson
+102 R Barrowgoyf @Igor Kieryluk
 104 R Final Act @Nils Hamm
 106 R Aether Refinery @Daniel Ljunggren
 107 R Blaster Hulk @Lie Setiawan
 108 R Filigree Racer @Gaboleps
 109 R Hideous Taskmaster @Helge C. Balzer
 110 R Overclocked Electromancer @Brent Hollowell
+111 R Pyrogoyf @Xabi Gaztelua
+112 R Sawhorn Nemesis @Monztre
 113 R Siege-Gang Lieutenant @Warren Mahy
+114 R Tempt with Mayhem @Deruchenko Alexander
 116 R Desert Warfare @Alexandre Honoré
+117 R Polygoyf @Helge C. Balzer
 118 R Rampant Frogantua @Filipe Pagliuso
 119 R Sage of the Maze @Yeong-Hao Han
+120 R Tarmogoyf Nest @Filipe Pagliuso
 121 R Aggressive Biomancy @Dominik Mayer
 122 R Bloodbraid Challenger @Lie Setiawan
+123 R Broodmate Tyrant @Chris Rahn
+124 R Exterminator Magmarch @Monztre
+125 R Gluttonous Hellkite @Josiah "Jo" Cameron
+126 R Infested Thrinax @David Astruga
 127 R Sphinx of the Revelation @Maxime Minard
 128 R Conversion Apparatus @Alayna Danner
 129 R Stone Idol Generator @Julian Kok Joon Wen
@@ -169,35 +183,55 @@ ScryfallCode=M3C
 195 C Treasure Cruise @Cynthia Sheppard
 196 R Ugin's Insight @Tyler Jacobson
 197 M Archon of Cruelty @Andrew Mar
+198 U Graveshifter @Jakub Kasper
+199 M Junji, the Midnight Sky @Chase Stone
+200 M Liliana, Death's Majesty @Chris Rallis
+201 R Mortivore @Anthony S. Waters
+202 R Necrogoyf @Nicholas Gregory
 203 R Sifter of Skulls @Slawomir Maniak
+204 U Stitcher's Supplier @Pete Venters
 205 U Suffer the Past @Trevor Claxton
+206 C Syphon Mind @Jeff Easley
+207 U Syr Konrad, the Grim @Anna Steinbauer
+208 U Anger @Svetlin Velinov
+209 R Chandra's Ignition @Eric Deschamps
 210 M Combustible Gearhulk @Daarken
+211 C Faithless Looting @Gabor Szikszai
 212 M Goldspan Dragon @Andrew Mar
 213 R Grenzo, Havoc Raiser @Svetlin Velinov
 214 M Kozilek's Return @Lius Lasahido
 215 M Lightning Runner @Raymond Swanland
 216 R Professional Face-Breaker @Dan Murayama Scott
+217 R The Reaver Cleaver @Yigit Koroglu
 218 U Acidic Slime @Karl Kopinski
 219 C Ancient Stirrings @Vincent Proce
 220 M Apex Devastator @Svetlin Velinov
 221 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
 222 R Awakening Zone @Johann Bodin
 223 U Beast Within @Jesper Ejsing
+224 U Brawn @Matt Cavotta
 225 R Dryad of the Ilysian Grove @Leanna Crossan
 226 C Elvish Rejuvenator @Winona Nelson
+227 U Eternal Witness @Chris Rahn
 228 C Floriferous Vinewall @Jakub Kasper
 229 U Garruk's Uprising @Wisnu Tan
+230 C Grapple with the Past @Howard Lyon
 231 U Harmonize @Dan Murayama Scott
 232 R Hour of Promise @Jonas De Ro
 233 R Hydra Broodmaster @Steve Prescott
+234 R Ignoble Hierarch @Mark Zug
+235 R Lhurgoyf @Pete Venters
 236 R Magus of the Candelabra @Jason A. Engle
 237 R Mana Reflection @Chris Seaman
 238 C Poison Dart Frog @Julia Metzger
 239 R Rampaging Baloths @Steve Prescott
+240 C Rampant Growth @Steven Belledin
 241 R Ramunap Excavator @Mark Behm
 242 R Return of the Wildspeaker @Chris Rallis
+243 C Sakura-Tribe Elder @Anastasia Ovchinnikova
 244 C Satyr Wayfinder @Steve Prescott
 245 R Scute Swarm @Alex Konstad
+246 M Selvala, Heart of the Wilds @Tyler Jacobson
 247 U Skullwinder @Nicholas Gregory
 248 U Sylvan Scrying @Daniel Ljunggren
 249 R Terastodon @Lars Grant-West
@@ -205,19 +239,35 @@ ScryfallCode=M3C
 251 R Vile Redeemer @Jason Rainville
 252 M Vivien Reid @Anna Steinbauer
 253 M World Breaker @Jaime Jones
+254 C Yavimaya Elder @Matt Cavotta
+255 U Bituminous Blast @Raymond Swanland
+256 U Bloodbraid Elf @Raymond Swanland
 257 M Brudiclad, Telchor Engineer @Daarken
+258 M Deadbridge Chant @Zoltan Boros
+259 U Deathreap Ritual @Steve Argyle
 260 C Eureka Moment @Anna Steinbauer
+261 R Find // Finality @Steve Ellis
+262 M Garruk, Apex Predator @Tyler Jacobson
+263 C Grisly Salvage @Dave Kendall
+264 M Grist, the Hunger Tide @Yongjae Choi
 265 C Growth Spiral @Seb McKinnon
 266 M Hydroid Krasis @Jason Felix
+267 R Izoni, Thousand-Eyed @Eric Deschamps
+268 R Kolaghan's Command @Daarken
+269 R Maelstrom Pulse @Anthony Francisco
 270 M Nissa, Steward of Elements @Howard Lyon
+271 U Riveteers Charm @Steve Argyle
 272 M Sire of Stagnation @Tyler Jacobson
 273 U Tatyova, Benthic Druid @Mathias Kollros
+274 C Terminate @Wayne Reynolds
 275 U Ulamog's Nullifier @Aleksi Briclot
 276 U Urban Evolution @Eytan Zana
 277 M Uro, Titan of Nature's Wrath @Vincent Proce
 278 U Whirler Virtuoso @Lake Hurwitz
+279 M Ziatora, the Incinerator @Chris Rahn
 280 R Aethersphere Harvester @Christine Choi
 281 M Aetherworks Marvel @James Paick
+282 U Altar of the Goyf @Yeong-Hao Han
 283 C Arcane Signet @Dan Murayama Scott
 284 U Burnished Hart @Yeong-Hao Han
 285 R Chromatic Lantern @Jung Park
@@ -233,6 +283,8 @@ ScryfallCode=M3C
 295 U Hedron Archive @Craig J Spearing
 296 U Herald's Horn @Jason Felix
 297 R Idol of Oblivion @Piotr Dura
+298 U Lightning Greaves @Michael Komarck
+299 R Maskwood Nexus @Jason A. Engle
 300 R Mirage Mirror @Craig J Spearing
 301 R Myr Battlesphere @Franz Vohwinkel
 302 R Mystic Forge @Titus Lunter
@@ -245,6 +297,7 @@ ScryfallCode=M3C
 309 U Talisman of Curiosity @Lindsey Look
 310 U Talisman of Dominance @Mike Dringenberg
 311 U Talisman of Impulse @Mike Dringenberg
+312 U Talisman of Indulgence @Mike Dringenberg
 313 U Talisman of Progress @Mike Dringenberg
 314 U Talisman of Resilience @Lindsey Look
 315 C Wayfarer's Bauble @Darrell Riche
@@ -257,20 +310,25 @@ ScryfallCode=M3C
 322 R Blast Zone @Jorge Jacinto
 323 R Bonders' Enclave @Cliff Childs
 324 R Brushland @Thomas Stoop
+325 R Canyon Slough @Titus Lunter
 326 R Cascading Cataracts @Paul Scott Canavan
 327 R Castle Vantress @John Avon
 328 R Caves of Koilos @Julian Kok Joon Wen
+329 R Cinder Glade @Adam Paquette
 330 C Cloudpost @Martina Pilcerova
 331 C Command Tower @Ryan Yee
 332 R Corrupted Crossroads @Ryan Pancoast
+333 U Dakmor Salvage @John Avon
 334 M Dark Depths @Mathias Kollros
 335 U Demolition Field @Kamila Szutenberg
 336 C Desert of the Indomitable @James Paick
 337 C Desert of the Mindful @Christine Choi
 338 R Dreamroot Cascade @Sam Burley
 339 U Eldrazi Temple @Jorge Jacinto
+340 C Evolving Wilds @Alayna Danner
 341 R Exotic Orchard @Steven Belledin
 342 R Flooded Grove @Dave Kendall
+343 C Forgotten Cave @Wayne Wu
 344 R Frostboil Snarl @Sam Burley
 345 R Furycalm Snarl @Sam Burley
 346 C Glimmerpost @Matt Cavotta
@@ -279,10 +337,13 @@ ScryfallCode=M3C
 349 C Hidden Nursery @Álvaro Calvo Escudero
 350 U Izzet Boilerworks @John Avon
 351 R Karplusan Forest @Sam Burley
+352 R Kessig Wolf Run @Eytan Zana
 353 R Lair of the Hydra @Johannes Voss
 354 R Llanowar Wastes @Lucas Graciano
 355 R Lumbering Falls @Titus Lunter
 356 C Lush Oasis @Piotr Dura
+357 R Mossfire Valley @John Avon
+358 U Myriad Landscape @Richard Wright
 359 R Mystic Gate @Fred Fields
 360 U Mystic Monastery @Florian de Gesincourt
 361 C Opal Palace @Andreas Rocha
@@ -291,26 +352,38 @@ ScryfallCode=M3C
 364 R Port Town @Kamila Szutenberg
 365 R Prairie Stream @Adam Paquette
 366 C Quandrix Campus @Piotr Dura
+367 R Raging Ravine @Todd Lockwood
 368 U Reliquary Tower @Jesper Ejsing
+369 C Riveteers Overlook @Lucas Staniec
 370 R Ruins of Oran-Rief @Jason Felix
+371 U Savage Lands @Vance Kovacs
 372 U Secluded Courtyard @Sam Burley
+373 R Shadowblood Ridge @Sam White
+374 R Sheltered Thicket @Sung Choi
 375 R Shivan Reef @Andrew Mar
 376 R Shrine of the Forsaken Gods @Daniel Ljunggren
 377 C Simic Growth Chamber @John Avon
 378 C Simic Guildgate @Svetlin Velinov
+379 R Smoldering Marsh @Adam Paquette
 380 U Spawning Bed @Jason Felix
 381 R Sulfurous Springs @Bruce Brenneise
+382 U Tainted Peak @Tony Szczudlo
+383 U Tainted Wood @Rob Alexander
 384 U Tectonic Edge @Vincent Proce
+385 R Temple of Abandon @Mike Bierek
 386 R Temple of Enlightenment @Svetlin Velinov
 387 R Temple of Epiphany @Adam Paquette
 388 R Temple of Malady @Titus Lunter
+389 R Temple of Malice @Sam Burley
 390 R Temple of Mystery @Piotr Dura
 391 R Temple of Silence @Adam Paquette
 392 R Temple of Triumph @Piotr Dura
 393 R Tendo Ice Bridge @Rob Alexander
+394 C Terramorphic Expanse @Adam Burn
 395 R Thespian's Stage @John Avon
 396 C Thornwood Falls @Roman Kuteynikov
 397 U Tomb of the Spirit Dragon @Sam Burley
+398 C Tranquil Thicket @Heather Hudson
 399 U Unclaimed Territory @Dimitar Marinski
 400 R Underground River @Volkan Baǵa
 401 C Urza's Mine @Brian Snõddy
@@ -318,8 +391,37 @@ ScryfallCode=M3C
 403 C Urza's Tower @Brian Snõddy
 404 R Vesuva @Zoltan Boros & Gabor Szikszai
 405 R Vineglimmer Snarl @Sam Burley
+406 R Viridescent Bog @Piotr Dura
 407 U Volatile Fault @Andrew Mar
 408 L Wastes @Raymond Swanland
 409 R Yavimaya, Cradle of Growth @Sarah Finnigan
 410 R Yavimaya Coast @Jesper Ejsing
 411 R Rishkar's Expertise @Magali Villeneuve
+
+[tokens]
+b_3_3_beast_deathtouch
+b_x_x_aetherborn
+c_10_10_eldrazi
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_1_1_eldrazi_scion_sac
+c_1_1_shapeshifter_changeling
+c_2_2_spirit
+c_4_4_eldrazi_angel_flying_vigilance
+c_6_12_a_construct_trample
+g_1_1_forest_dryad
+g_1_1_saproling
+g_2_2_boar
+g_3_3_ape
+g_3_3_beast
+g_3_3_elephant
+g_4_4_beast
+g_x_x_hydra
+marit_lage
+r_1_1_goblin
+r_5_5_dragon_flying
+rgw_1_1_sand_warrior
+tarmogoyf
+u_2_1_a_phyrexian_myr
+u_2_2_shapeshifter_changeling
+u_x_x_illusion
