@@ -1,4 +1,5 @@
 Name:Vexing Bauble
+ManaCost:1
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player| TriggerZones$ Battlefield | Execute$ TrigCounter | ValidSA$ Spell.ManaSpent EQ0 | TriggerDescription$ Whenever a player casts a spell, if no mana was spent to cast it, counter that spell.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
