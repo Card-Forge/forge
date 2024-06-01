@@ -17,6 +17,8 @@
  */
 package forge.game.card;
 
+import static org.apache.commons.lang3.StringUtils.indexOf;
+
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
@@ -2668,8 +2670,22 @@ public class CardFactoryUtil {
             sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
 
             final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
-            sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
-                    " (" + inst.getReminderText() + ")");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Bestow");
+            final Cost bCost = new Cost(cost, false);
+            final boolean onlyMana = bCost.isOnlyManaCost();
+            String remTxt = inst.getReminderText();
+            if (!onlyMana) {
+                String oText = card.getCard().getOracleText();
+                String bestowStr = oText.substring(indexOf(oText, "Bestow"), indexOf(oText, "\\n"));
+                if (bestowStr.contains("(")) {
+                    String s = bestowStr.substring(indexOf(bestowStr, "(") + 1, indexOf(bestowStr, ")"));
+                    if (!s.equals("")) remTxt = s;
+                }
+            }
+            sbDesc.append(onlyMana ? " " : "—").append(bCost.toSimpleString()).append(!onlyMana ? "." : "");
+            sbDesc.append(" (").append(remTxt).append(")");
+            sa.setDescription(sbDesc.toString());
             sa.setStackDescription("Bestow - " + card.getName());
             sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
