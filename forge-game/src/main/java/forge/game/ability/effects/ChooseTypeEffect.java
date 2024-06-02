@@ -72,6 +72,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             case "Basic Land":
                 validTypes.addAll(CardType.getBasicTypes());
                 break;
+            case "Nonbasic Land":
+                validTypes.addAll(CardType.getNonBasicTypes());
+                break;
             case "Land":
                 validTypes.addAll(CardType.getAllLandTypes());
                 break;
