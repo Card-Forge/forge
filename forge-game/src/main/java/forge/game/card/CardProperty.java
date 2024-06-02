@@ -1867,9 +1867,6 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
-            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
-                return false;
-            }
             return card.getCastSA().isEscape();
         } else if (property.equals("evoked")) {
             if (card.getCastSA() == null) {
