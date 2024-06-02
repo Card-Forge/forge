@@ -301,7 +301,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private String originalText = "", text = "";
     private String chosenType = "";
     private String chosenType2 = "";
-    private String notedName = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
     private List<String> chosenName = new ArrayList<>();
@@ -1985,15 +1984,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final boolean hasChosenType2() {
         return chosenType2 != null && !chosenType2.isEmpty();
-    }
-
-    public final void noteName(final String name) {
-        notedName = name;
-        view.updateNotedName(this);
-    }
-
-    public final String getNotedName() {
-        return notedName;
     }
 
     public final boolean hasAnyNotedType() {

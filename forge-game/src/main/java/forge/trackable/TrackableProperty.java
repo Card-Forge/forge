@@ -63,7 +63,6 @@ public enum TrackableProperty {
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
     ChosenType2(TrackableTypes.StringType),
-    NotedName(TrackableTypes.StringType),
     NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),

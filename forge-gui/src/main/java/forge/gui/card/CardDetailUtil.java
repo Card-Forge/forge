@@ -442,14 +442,6 @@ public class CardDetailUtil {
             area.append(")");
         }
 
-        // noted name
-        if (!card.getNotedName().isEmpty()) {
-            if (area.length() != 0) {
-                area.append("\n");
-            }
-            area.append("(noted name: ").append(card.getNotedName()).append(")");
-        }
-
         // chosen color
         if (card.getChosenColors() != null && !card.getChosenColors().isEmpty()) {
             if (area.length() != 0) {
