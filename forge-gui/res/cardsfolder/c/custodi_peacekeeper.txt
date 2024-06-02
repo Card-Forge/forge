@@ -1,0 +1,9 @@
+Name:Custodi Peacekeeper
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:2/3
+Draft:Reveal CARDNAME as you draft it.
+Draft:Note how many cards you've drafted this draft round, including CARDNAME.
+A:AB$ Tap | Cost$ W T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Tap target creature with power less than or equal to the highest number you noted for cards named Custodi Peacekeeper. | SpellDescription$ Tap target creature with power less than or equal to the highest number you noted for cards named Custodi Peacekeeper.
+SVar:X:Count$DraftNotesHighest.Custodi Peacekeeper
+Oracle:Reveal Custodi Peacekeeper as you draft it and note how many cards you've drafted this draft round, including Custodi Peacekeeper.\n{W}, {T}: Tap target creature with power less than or equal to the highest number you noted for cards named Custodi Peacekeeper.

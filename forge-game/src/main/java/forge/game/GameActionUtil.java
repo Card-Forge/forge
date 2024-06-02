@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardPlayOption.PayManaCost;
@@ -316,6 +317,13 @@ public final class GameActionUtil {
 
             if (o.getAbility().hasParam("ValidAfterStack")) {
                 newSA.getMapParams().put("ValidAfterStack", o.getAbility().getParam("ValidAfterStack"));
+            }
+            if (o.getAbility().hasParam("RaiseCost")) {
+                String raise = o.getAbility().getParam("RaiseCost");
+                if (o.getAbility().hasSVar(raise)) {
+                    raise = Integer.toString(AbilityUtils.calculateAmount(host, raise, o.getAbility()));
+                }
+                newSA.getMapParams().put("RaiseCost", raise);
             }
 
             final SpellAbilityRestriction sar = newSA.getRestrictions();
@@ -883,6 +891,10 @@ public final class GameActionUtil {
 
             if (ability.hasParam("Prototype")) {
                 oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
+            }
+
+            for (Card c : ability.getTappedForConvoke()) {
+                c.setTapped(false);
             }
         }
 

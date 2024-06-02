@@ -1,0 +1,7 @@
+Name:Planar Nexus
+ManaCost:no cost
+Types:Land
+S:Mode$ Continuous | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllNonBasicLandType | Description$ CARDNAME is every nonbasic land type.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Planar Nexus is every nonbasic land type.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.

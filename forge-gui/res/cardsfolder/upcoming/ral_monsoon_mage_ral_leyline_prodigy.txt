@@ -1,0 +1,34 @@
+Name:Ral, Monsoon Mage
+ManaCost:1 R
+Types:Legendary Creature Human Wizard
+PT:1/3
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigFlip | TriggerDescription$ Whenever you cast an instant or sorcery spell during your turn, flip a coin. If you lose the flip, CARDNAME deals 1 damage to you. If you win the flip, you may exile NICKNAME. If you do, return him to the battlefield transformed under his owner's control.
+SVar:TrigFlip:DB$ FlipACoin | WinSubAbility$ DBTransform | LoseSubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Optional$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell during your turn, flip a coin. If you lose the flip, Ral, Monsoon Mage deals 1 damage to you. If you win the flip, you may exile Ral. If you do, return him to the battlefield transformed under his owner's control.
+
+ALTERNATE
+
+Name:Ral, Leyline Prodigy
+ManaCost:no cost
+Colors:blue,red
+Types:Legendary Planeswalker Ral
+Loyalty:2
+K:etbCounter:LOYALTY:X:no Condition:CARDNAME enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ RalReduceCost | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
+SVar:RalReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
+A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBDraw | SpellDescription$ NICKNAME deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than NICKNAME.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionPresent$ Permanent.Blue+YouCtrl+Other
+A:AB$ Dig | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | DigNum$ 8 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.Instant+IsRemembered,Card.Sorcery+IsRemembered | AffectedZone$ Exile | Description$ You may cast instant and sorcery cards from among the exiled cards this turn without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+DeckNeeds:Type$Instant|Sorcery
+Oracle:Ral, Leyline Prodigy enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.\n[+1]: Until your next turn, instant and sorcery spells you cast cost {1} less to cast.\n[-2]: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral.\n[-8]: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs.

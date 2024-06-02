@@ -635,33 +635,6 @@
 1 Wayfaring Temple|RTR
 1 Wild Beastmaster|RTR
 
-[CNS Draft Matters]
-#1 Advantageous Proclamation|CNS
-#1 AEther Searcher|CNS
-#1 Agent of Acquisitions|CNS
-#1 Backup Plan|CNS
-1 Brago's Favor|CNS
-#1 Canal Dredger|CNS
-#1 Cogwork Grinder|CNS
-#1 Cogwork Librarian|CNS
-#1 Cogwork Spy|CNS
-#1 Cogwork Tracker|CNS
-#1 Deal Broker|CNS
-#1 Double Stroke|CNS
-1 Immediate Action|CNS
-#1 Iterative Analysis|CNS
-#1 Lore Seeker|CNS
-#1 Lurking Automaton|CNS
-1 Muzzio's Preparations|CNS
-#1 Paliano, the High City|CNS
-#1 Power Play|CNS
-1 Secret Summoning|CNS
-1 Secrets of Paradise|CNS
-#1 Sentinel Dispatch|CNS
-#1 Unexpected Potential|CNS
-#1 Whispergear Sneak|CNS
-#1 Worldknit|CNS
-
 [M15 Sample Cards]
 1 Aegis Angel|M15
 1 Cancel|M15
@@ -964,21 +937,6 @@ Mana Confluence|EXP
 Strip Mine|EXP
 Tectonic Edge|EXP
 Wasteland|EXP
-
-
-[CN2 Draft Matters]
-Adriana's Valor
-Assemble the Rank and Vile
-Echoing Boon
-#Emissary's Ploy
-Hired Heist
-Hold the Perimeter
-Hymn of the Wilds
-Incendiary Dissent
-Natural Unity
-#Sovereign's Realm
-Summoner's Bond
-Weight Advantage
 
 [MPS Amonkhet Invocations]
 Austere Command|MPS_AKH
@@ -1482,24 +1440,6 @@ Slaying Fire|ELD|2
 Kenrith's Transformation|ELD|2
 Improbable Alliance|ELD|2
 Inspiring Veteran|ELD|2
-
-[CN2 Not In Normal Slots]
-Adriana's Valor
-Assemble the Rank and Vile
-Echoing Boon
-#Emissary's Ploy
-Hired Heist
-Hold the Perimeter
-Hymn of the Wilds
-Incendiary Dissent
-Natural Unity
-#Sovereign's Realm
-Summoner's Bond
-Weight Advantage
-Kaya, Ghost Assassin|CN2|2
-
-[CN2 Foil Kaya]
-Kaya, Ghost Assassin|CN2|2
 
 [JMP Above the Clouds 1]
 1 Warden of Evos Isle|JMP

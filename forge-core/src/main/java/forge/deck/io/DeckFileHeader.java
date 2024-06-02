@@ -17,6 +17,7 @@
  */
 package forge.deck.io;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -37,9 +38,10 @@ public class DeckFileHeader {
     /** The Constant DECK_TYPE. */
     public static final String DECK_TYPE = "Deck Type";
     public static final String TAGS = "Tags";
-    
+
     public static final String TAGS_SEPARATOR = ",";
-    
+    public static final String DRAFT_NOTES = "DraftNotes";
+
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
     private static final String PLAYER = "Player";
@@ -54,30 +56,19 @@ public class DeckFileHeader {
     private final String comment;
 
     private final Set<String> tags;
+    private final HashMap<String, String> draftNotes;
 
     private final boolean intendedForAi;
     private final String aiHints;
 
-    /**
-     * @return the intendedForAi
-     */
     public boolean isIntendedForAi() {
         return intendedForAi;
     }
 
-    /**
-     * @return the AI hints
-     */
     public String getAiHints() {
         return aiHints;
     }
 
-    /**
-     * TODO: Write javadoc for Constructor.
-     * 
-     * @param kvPairs
-     *            the kv pairs
-     */
     public DeckFileHeader(final FileSection kvPairs) {
         this.name = kvPairs.get(DeckFileHeader.NAME);
         this.comment = kvPairs.get(DeckFileHeader.COMMENT);
@@ -85,6 +76,7 @@ public class DeckFileHeader {
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
         this.aiHints = kvPairs.get(DeckFileHeader.AI_HINTS);
+
         this.tags = new TreeSet<>();
         
         String rawTags = kvPairs.get(DeckFileHeader.TAGS);
@@ -93,42 +85,42 @@ public class DeckFileHeader {
                 if ( StringUtils.isNotBlank(t))
                     tags.add(t.trim());
         }
-        
-            
+        this.draftNotes = new HashMap<>();
+        extractDraftNotes(kvPairs.get(DeckFileHeader.DRAFT_NOTES));
     }
 
-    /**
-     * Checks if is custom pool.
-     * 
-     * @return true, if is custom pool
-     */
+    private void extractDraftNotes(String rawNotes) {
+        if(StringUtils.isBlank(rawNotes) ) {
+            return;
+        }
+
+        for(String t : rawNotes.split("\\|")) {
+            if (StringUtils.isBlank(t)) {
+                continue;
+            }
+
+            String[] notes = t.trim().split(":", 2);
+
+            if (notes[0].trim().isEmpty() || notes[1].trim().isEmpty()) {
+                continue;
+            }
+
+            draftNotes.put(notes[0].trim(), notes[1].trim());
+        }
+    }
+
     public final boolean isCustomPool() {
         return this.customPool;
     }
 
-    /**
-     * Gets the name.
-     * 
-     * @return the name
-     */
     public final String getName() {
         return this.name;
     }
 
-    /**
-     * Gets the comment.
-     * 
-     * @return the comment
-     */
     public final String getComment() {
         return this.comment;
     }
 
-    /**
-     * Gets the deck type.
-     * 
-     * @return the deck type
-     */
     public final DeckFormat getDeckType() {
         return this.deckType;
     }
@@ -137,4 +129,7 @@ public class DeckFileHeader {
         return tags;
     }
 
+    public final HashMap<String, String> getDraftNotes() {
+        return draftNotes;
+    }
 }

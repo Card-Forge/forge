@@ -381,8 +381,6 @@ public class ComputerUtilCost {
                     continue;
                 }
 
-                final CardCollection sacList = new CardCollection();
-
                 boolean differentNames = false;
                 if (type.contains("+WithDifferentNames")) {
                     type = type.replace("+WithDifferentNames", "");
@@ -411,7 +409,6 @@ public class ComputerUtilCost {
                     if (prefCard == null) {
                         return false;
                     }
-                    sacList.add(prefCard);
                     typeList.remove(prefCard);
                     count++;
                 }

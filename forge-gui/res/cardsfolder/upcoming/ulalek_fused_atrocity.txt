@@ -1,0 +1,9 @@
+Name:Ulalek, Fused Atrocity
+ManaCost:CW CU CB CR CG
+Types:Legendary Creature Eldrazi
+PT:2/5
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Eldrazi | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Eldrazi spell, you may pay {C}{C}. If you do, copy all spells you control, then copy all other activated and triggered abilities you control. You may choose new targets for the copies. (Mana abilities can't be copied.)
+SVar:TrigCopySpell:AB$ CopySpellAbility | Cost$ C C | Defined$ ValidStack Spell.YouCtrl | MayChooseTarget$ True | IgnoreFreeze$ True | SubAbility$ TrigCopyAbilities
+SVar:TrigCopyAbilities:DB$ CopySpellAbility | Defined$ ValidStack Ability.YouCtrl+otherAbility | MayChooseTarget$ True | IgnoreFreeze$ True
+Oracle:Devoid\nWhenever you cast an Eldrazi spell, you may pay {C}{C}. If you do, copy all spells you control, then copy all other activated and triggered abilities you control. You may choose new targets for the copies. (Mana abilities can't be copied.)

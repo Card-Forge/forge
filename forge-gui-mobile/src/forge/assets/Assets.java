@@ -35,9 +35,9 @@ public class Assets implements Disposable {
     private HashMap<Integer, FSkinFont> fonts;
     private HashMap<String, FImageComplex> cardArtCache;
     private HashMap<String, FImage> avatarImages;
-    private HashMap<String, FSkinImage> manaImages;
-    private HashMap<String, FSkinImage> symbolLookup;
-    private HashMap<FSkinProp, FSkinImage> images;
+    private HashMap<String, FSkinImageInterface> manaImages;
+    private HashMap<String, FSkinImageInterface> symbolLookup;
+    private HashMap<FSkinProp, FSkinImageInterface> images;
     private HashMap<Integer, TextureRegion> avatars;
     private HashMap<Integer, TextureRegion> sleeves;
     private HashMap<Integer, TextureRegion> cracks;
@@ -147,19 +147,19 @@ public class Assets implements Disposable {
         return avatarImages;
     }
 
-    public HashMap<String, FSkinImage> manaImages() {
+    public HashMap<String, FSkinImageInterface> manaImages() {
         if (manaImages == null)
             manaImages = new HashMap<>();
         return manaImages;
     }
 
-    public HashMap<String, FSkinImage> symbolLookup() {
+    public HashMap<String, FSkinImageInterface> symbolLookup() {
         if (symbolLookup == null)
             symbolLookup = new HashMap<>();
         return symbolLookup;
     }
 
-    public HashMap<FSkinProp, FSkinImage> images() {
+    public HashMap<FSkinProp, FSkinImageInterface> images() {
         if (images == null)
             images = new HashMap<>();
         return images;

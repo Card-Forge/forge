@@ -2,6 +2,6 @@ Name:Kitsune Palliator
 ManaCost:2 W
 Types:Creature Fox Cleric
 PT:0/2
-A:AB$ PreventDamageAll | Cost$ T | ValidCards$ Creature | ValidPlayers$ Player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to each creature and each player this turn.
+A:AB$ PreventDamage | Cost$ T | Defined$ Valid Creature & Player | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to each creature and each player this turn.
 AI:RemoveDeck:All
 Oracle:{T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.

@@ -21,6 +21,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
@@ -84,7 +85,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
         final int total = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
         final InputSelectCardsFromList inp =
-                new InputSelectCardsFromList(controller, 0, list.size(), list, ability, total);
+                new InputSelectCardsFromList(controller, 0, list.size(), list, ability, "CMC", total);
         inp.setMessage(Localizer.getInstance().getMessage("lblCollectEvidence", total));
         inp.setCancelAllowed(true);
         inp.showAndWait();
@@ -265,6 +266,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             sharedType = true;
             type = TextUtil.fastReplace(type, "+withSharedCardType", "");
         }
+        int nTypes = -1;
+        if (type.contains("+withTypesGE")) {
+            String num = type.split("withTypesGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTypesGE", num), "");
+            nTypes = Integer.parseInt(num);
+        }
 
         CardCollection list;
         if (cost.zoneRestriction != 1) {
@@ -286,13 +293,28 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             int needed = Integer.parseInt(cost.getAmount().split("\\+")[0]);
             final int total = AbilityUtils.calculateAmount(source, totalM, ability);
             final InputSelectCardsFromList inp =
-                    new InputSelectCardsFromList(controller, needed, list.size(), list, ability, total);
+                    new InputSelectCardsFromList(controller, needed, list.size(), list, ability, "CMC", total);
             inp.setMessage(Localizer.getInstance().getMessage("lblSelectToExile", Lang.getNumeral(needed)));
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
             if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) != total) {
                 return null;
+            }
+            return PaymentDecision.card(inp.getSelected());
+        }
+
+        if (nTypes > -1) {
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, list.size(), list, 
+                ability, "Types", nTypes);
+            inp.setMessage(cost.getAmount().equals("X") ?
+                Localizer.getInstance().getMessage("lblSelectAnyNumToExile") :
+                Localizer.getInstance().getMessage("lblSelectToExile", Lang.getNumeral(nTypes)));
+            inp.setCancelAllowed(true);
+            inp.showAndWait();
+            if (inp.hasCancelled() || 
+                !Expressions.compare(CardFactoryUtil.getCardTypesFromList(list), "GE", nTypes)) {
+                    return null;
             }
             return PaymentDecision.card(inp.getSelected());
         }

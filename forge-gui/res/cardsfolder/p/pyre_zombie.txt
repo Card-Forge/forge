@@ -2,10 +2,11 @@ Name:Pyre Zombie
 ManaCost:1 B R
 Types:Creature Zombie
 PT:2/1
-A:AB$ DealDamage | Cost$ 1 R R Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ 1 R R Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ It deals 2 damage to any target.
 #The IsPresent stuff in the trigger is necessary because it must be checked on resolve as well.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may pay {1}{B}{B}. If you do, return CARDNAME to your hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B B | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:2
 SVar:DiscardMe:1
+DeckHas:Ability$Sacrifice
 Oracle:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.\n{1}{R}{R}, Sacrifice Pyre Zombie: It deals 2 damage to any target.

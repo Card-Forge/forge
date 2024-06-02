@@ -1,0 +1,8 @@
+Name:Siege Smash
+ManaCost:1 R
+Types:Instant
+K:Split second
+A:SP$ Charm | Choices$ DBDestroy,DBPump
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +3/+2 and trample | NumAtt$ +3 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +3/+2 and gains trample until end of turn.
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nChoose one —\n• Destroy target artifact.\n• Target creature gets +3/+2 and gains trample until end of turn.

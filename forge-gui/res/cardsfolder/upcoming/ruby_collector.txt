@@ -1,0 +1,9 @@
+Name:Ruby Collector
+ManaCost:W
+Types:Creature Human Detective
+PT:1/1
+T:Mode$ AttackersDeclared | Execute$ TrigConjure | ValidAttackers$ Creature | ValidAttackersAmount$ GE3 | GameActivationLimit$ 1 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ When you attack with three or more creatures, conjure a card named Mox Ruby into your hand. This ability triggers only once.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mox Ruby | Zone$ Hand
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+DeckHas:Type$Artifact
+Oracle:When you attack with three or more creatures, conjure a card named Mox Ruby into your hand. This ability triggers only once.\n{1}{R}: Creatures you control get +1/+0 until end of turn.

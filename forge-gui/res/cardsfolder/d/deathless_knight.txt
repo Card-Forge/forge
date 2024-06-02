@@ -1,5 +1,5 @@
 Name:Deathless Knight
-ManaCost:B/G B/G B/G B/G
+ManaCost:BG BG BG BG
 Types:Creature Skeleton Knight
 PT:4/2
 K:Haste

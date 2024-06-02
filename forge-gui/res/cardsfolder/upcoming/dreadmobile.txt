@@ -1,0 +1,9 @@
+Name:Dreadmobile
+ManaCost:2 B
+Types:Artifact Vehicle
+PT:3/3
+K:Menace
+A:AB$ PutCounter | Cost$ 1 Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+K:Crew:1
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Menace\n{1}, Sacrifice another artifact or creature: Put a +1/+1 counter on Dreadmobile.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

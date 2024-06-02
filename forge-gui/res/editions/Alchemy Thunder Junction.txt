@@ -6,5 +6,36 @@ Type=Online
 ScryfallCode=YOTJ
 
 [cards]
-0 R Sapphire Collector @Francis Tneh
-0 R Grenzo, Crooked Jailer @Darren Tan
+1 R Prairie Survivalist @Francis Tneh
+2 U Resolute Rejection @Anastasia Ovchinnikova
+3 R Ruby Collector @Cristi Balanescu
+4 M Saint Elenda @Ernanda Souza
+5 R Stalwart Realmwarden @Borja Pindado
+6 R Emerald Collector @Andreas Zafiratos
+7 R Solitary Defiance @Ernanda Souza
+8 U Thieving Aven @Michele Giorgi
+9 U Grave Expectations @Anastasia Ovchinnikova
+10 R Pearl Collector @Andreas Zafiratos
+11 M Rankle, Pitiless Trickster @Andrew Mar
+12 U Impetuous Lootmonger @Inkognit
+13 R Sapphire Collector @Francis Tneh
+14 U Switchgrass Grazer @Leanna Crossan
+15 C Wagon Wrecker @Wero Gallo
+16 R Blooming Cactusfolk @David Szabo
+17 M Jessie Zane, Fangbringer @Francisco Miyara
+18 R Jet Collector @Francis Tneh
+19 R Albiorix, Goose Tyrant @Filip Burburan
+20 U Cathartic Operation @Julia Metzger
+21 M Emperor Apatzec Intli IV @Johan Grenier
+22 R Grenzo, Crooked Jailer @Darren Tan
+23 U Intruder's Inquisition @Diego Gisbert
+24 R Nashi, Illusion Gadgeteer @Kev Fang
+25 U Silent Extraction @Fajareka Setiawan
+26 M Teysa of the Ghost Council @David Astruga
+27 R Triumphant Getaway @Caio Monteiro
+28 R Vona de ledo, the Antifex @Fajareka Setiawan
+29 U Weave the Nightmare @Wayne Wu
+30 U Runecarved Obelisk @Jorge Jacinto
+
+[tokens]
+w_x_x_avatar

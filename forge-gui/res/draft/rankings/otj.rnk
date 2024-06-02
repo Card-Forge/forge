@@ -40,7 +40,7 @@
 #39|Honest Rutstein|U|OTJ
 #40|Morbid Opportunist|M|OTJ
 #41|Primal Might|R|OTP
-#42|Vanishing Verse|R|OTJ
+#42|Vanishing Verse|R|OTP
 #43|Vadmir, New Blood|R|OTJ
 #44|Terror of the Peaks|M|OTJ
 #45|Beastbond Outcaster|U|OTJ
@@ -48,7 +48,7 @@
 #47|Congregation Gryff|U|OTJ
 #48|Laughing Jasper Flint|R|OTJ
 #49|Ruthless Lawbringer|U|OTJ
-#50|Cruel Ultimatum|R|OTJ
+#50|Cruel Ultimatum|R|OTP
 #51|Getaway Glamer|U|OTJ
 #52|Stoic Sphinx|R|OTJ
 #53|Caustic Bronco|R|OTJ
@@ -66,7 +66,7 @@
 #65|Take Up the Shield|C|OTJ
 #66|Consuming Ashes|C|OTJ
 #67|Snakeskin Veil|C|OTJ
-#68|Brazen Borrower|M|OTJ
+#68|Brazen Borrower|M|SPG
 #69|Leyline Binding|M|OTJ
 #70|Primal Command|R|OTJ
 #71|Back for More|U|OTJ
@@ -116,7 +116,7 @@
 #115|Repulse|U|OTJ
 #116|Murder|U|OTJ
 #117|Crackle with Power|M|OTP
-#118|Crime Punishment|M|OTJ
+#118|Crime Punishment|M|OTP
 #119|Void Rend|R|OTJ
 #120|Sterling Keykeeper|C|OTJ
 #121|Blood Hustler|U|OTJ
@@ -145,7 +145,7 @@
 #144|Bristling Backwoods|C|OTJ
 #145|Lush Oasis|C|OTJ
 #146|Soured Springs|C|OTJ
-#147|Fell the Mighty|R|OTJ
+#147|Fell the Mighty|R|OTP
 #148|One Last Job|R|OTJ
 #149|Metamorphic Blast|U|OTJ
 #150|Rictus Robber|U|OTJ
@@ -181,12 +181,12 @@
 #180|Mirage Mesa|C|OTJ
 #181|Abraded Bluffs|C|OTJ
 #182|Jagged Barrens|C|OTJ
-#183|Endless Detour|R|OTJ
+#183|Endless Detour|R|OTP
 #184|Villainous Wealth|R|OTP
 #185|Fierce Retribution|U|OTJ
 #186|Archmage's Charm|R|OTJ
 #187|Reanimate|R|OTJ
-#188|Collective Defiance|R|OTJ
+#188|Collective Defiance|R|OTP
 #189|Detention Sphere|R|OTJ
 #190|Claim Jumper|R|OTJ
 #191|Nurturing Pixie|U|OTJ
@@ -202,9 +202,9 @@
 #201|Ankle Biter|C|OTJ
 #202|Akul the Unrepentant|R|OTJ
 #203|Lonely Arroyo|C|OTJ
-#204|Heartless Pillage|U|OTJ
-#205|Siphon Insight|R|OTJ
-#206|Contagion Engine|M|OTJ
+#204|Heartless Pillage|U|OTP
+#205|Siphon Insight|R|OTP
+#206|Contagion Engine|M|OTP
 #207|Omenport Vigilante|U|OTJ
 #208|Requisition Raid|U|OTJ
 #209|Steer Clear|C|OTJ
@@ -230,7 +230,7 @@
 #229|Prickly Pair|C|OTJ
 #230|Freestrider Commando|C|OTJ
 #231|Eroded Canyon|C|OTJ
-#232|Decisive Denial|U|OTJ
+#232|Decisive Denial|U|OTP
 #233|Savage Smash|U|OTP
 #234|Loot, the Key to Everything|M|BIG
 #235|Legion Extruder|M|OTJ
@@ -250,7 +250,7 @@
 #249|Notion Thief|M|OTJ
 #250|Electrodominance|R|OTP
 #251|Skewer the Critics|U|OTJ
-#252|Anguished Unmaking|M|OTJ
+#252|Anguished Unmaking|M|OTP
 #253|Bedevil|R|OTJ
 #254|Terminal Agony|U|OTJ
 #255|Sword of Wealth and Power|M|OTJ
@@ -288,7 +288,7 @@
 #287|Arid Archway|U|OTJ
 #288|Harrier Strix|C|OTJ
 #289|Highway Robbery|C|OTJ
-#290|Prismatic Vista|M|OTJ
+#290|Prismatic Vista|M|SPG
 #291|Desert|M|OTJ
 #292|Ancient Cornucopia|M|OTJ
 #293|Armored Armadillo|C|OTJ
@@ -305,7 +305,7 @@
 #304|Geyser Drake|C|OTJ
 #305|Deadeye Duelist|C|OTJ
 #306|Iron-Fist Pulverizer|C|OTJ
-#307|Thornado|U|OTJ
+#307|Thornado|U|OTP
 #308|Inventive Wingsmith|C|OTJ
 #309|At Knifepoint|U|OTJ
 #310|Jace Reawakened|M|OTJ
@@ -315,7 +315,7 @@
 #314|Boom Box|U|OTJ
 #315|Daring Thunder-Thief|C|OTJ
 #316|Silver Deputy|C|OTJ
-#317|Fling|U|OTJ
+#317|Fling|U|OTP
 #318|Mindslaver|M|OTP
 #319|Greed's Gambit|M|OTJ
 #320|Bovine Intervention|U|OTJ
@@ -350,28 +350,28 @@
 #349|Skullcrack|R|OTJ
 #350|Hindering Light|U|OTJ
 #351|Grand Abolisher|M|OTJ
-#352|Omenpath Journey|M|OTP
+#352|Omenpath Journey|M|BIG
 #353|Another Round|R|OTJ
 #354|Step Between Worlds|R|OTJ
 #355|Pitiless Carnage|R|OTJ
 #356|Kellan Joins Up|R|OTJ
 #357|Obeka, Splitter of Seconds|R|OTJ
 #358|Scapeshift|M|OTJ
-#359|Mindbreak Trap|M|OTJ
+#359|Mindbreak Trap|M|OTP
 #360|Surgical Extraction|R|OTJ
 #361|Decimate|R|OTJ
-#362|Grindstone|M|OTJ
+#362|Grindstone|M|OTP
 #363|Dust Bowl|R|OTJ
 #364|Commandeer|R|OTJ
 #365|Indomitable Creativity|M|OTJ
-#366|Force of Vigor|M|OTJ
-#367|Torpor Orb|M|OTJ
+#366|Force of Vigor|M|OTP
+#367|Torpor Orb|M|BIG
 #368|Simulacrum Synthesizer|M|OTJ
 #369|Rest in Peace|M|OTJ
 #370|Esoteric Duplicator|M|OTJ
-#371|Worldwalker Helm|M|OTJ
+#371|Worldwalker Helm|M|BIG
 #372|Memory Vessel|M|OTJ
-#373|Molten Duplication|M|OTJ
+#373|Molten Duplication|M|BIG
 #374|Pest Control|M|OTJ
 #375|Fomori Vault|M|OTJ
 #376|Territory Forge|M|BIG

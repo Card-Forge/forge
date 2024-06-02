@@ -30,12 +30,12 @@ public class TimeTravelEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Player p = sa.getActivatingPlayer();
+        final Player activator = sa.getActivatingPlayer();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         int num = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
 
-        PlayerController pc = p.getController();
+        PlayerController pc = activator.getController();
 
         final CounterEnumType counterType = CounterEnumType.TIME;
 
@@ -43,14 +43,14 @@ public class TimeTravelEffect extends SpellAbilityEffect {
             FCollection<Card> list = new FCollection<>();
 
             // card you own that is suspended
-            list.addAll(CardLists.filter(p.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend()));
+            list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend()));
             // permanent you control with time counter
-            list.addAll(CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
+            list.addAll(CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(counterType)));
 
             GameEntityCounterTable table = new GameEntityCounterTable();
 
             String prompt = Localizer.getInstance().getMessage("lblChooseaCard");
-            for (Card c : pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa, prompt, p, null)) {
+            for (Card c : pc.chooseEntitiesForEffect(list, 0, list.size(), null, sa, prompt, activator, null)) {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Target", c);
                 params.put("CounterType", counterType);
@@ -58,9 +58,9 @@ public class TimeTravelEffect extends SpellAbilityEffect {
                 boolean putCounter = pc.chooseBinary(sa, prompt, BinaryChoiceType.AddOrRemove, params);
 
                 if (putCounter) {
-                    c.addCounter(counterType, 1, p, table);
+                    c.addCounter(counterType, 1, activator, table);
                 } else {
-                    c.subtractCounter(counterType, 1);
+                    c.subtractCounter(counterType, 1, activator);
                 }
             }
             table.replaceCounterEffect(game, sa, true);

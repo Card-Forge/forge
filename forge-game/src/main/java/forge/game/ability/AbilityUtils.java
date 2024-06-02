@@ -1293,10 +1293,10 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.startsWith("ValidStack")) {
-            String[] valid = defined.split(" ", 2);
+            String valid = changedDef.split(" ", 2)[1];
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
                 SpellAbility instanceSA = stackInstance.getSpellAbility();
-                if (instanceSA != null && instanceSA.isValid(valid[1], player, card, s)) {
+                if (instanceSA != null && instanceSA.isValid(valid, player, card, sa)) {
                     sas.add(instanceSA);
                 }
             }
@@ -2357,6 +2357,23 @@ public class AbilityUtils {
         if (sq[0].equals("NotedNumber")) {
             return doXMath(player.getNotedNumberForName(c.getName()), expr, c, ctb);
         }
+
+        if (sq[0].equals("DraftNotesHighest")) {
+            // Just in case you are playing this card in a deck without draft notes
+            String note = player.getDraftNotes().getOrDefault(sq[1],  "0");
+            int highest = 0;
+            for (String n : note.split(",")) {
+                int num = Integer.parseInt(n);
+                if (num > highest) {
+                    highest = num;
+                }
+            }
+
+            return doXMath(highest, expr, c, ctb);
+            // Other draft notes include: Names, Colors, Players, Creature Type.
+            // But these aren't really things you count so they'll show up in properties most likely
+        }
+
 
         //Count$TypesSharedWith [defined]
         if (sq[0].startsWith("TypesSharedWith")) {

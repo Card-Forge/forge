@@ -90,7 +90,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
         if (sa.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             if (targetCards.size() == 0) {
                 return stringBuilder.toString();
             }
@@ -132,7 +132,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             // if use targeting we show all targets and corresponding counters
         } else if (sa.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
                 stringBuilder.append(targetCard);
@@ -151,7 +151,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
             stringBuilder.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             final Iterator<Card> it = targetCards.iterator();
             while (it.hasNext()) {
                 final Card targetCard = it.next();

@@ -1,0 +1,15 @@
+Name:Legion Leadership
+ManaCost:1 RW
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ Double | KW$ First Strike | StackDescription$ REP target creature_{c:Targeted} | SpellDescription$ Until end of turn, double target creature's power and it gains first strike.
+Oracle:Until end of turn, double target creature's power and it gains first strike.
+AlternateMode:Modal
+
+ALTERNATE
+
+Name:Legion Stronghold
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
+Oracle:Legion Stronghold enters the battlefield tapped.\n{T}: Add {R} or {W}.

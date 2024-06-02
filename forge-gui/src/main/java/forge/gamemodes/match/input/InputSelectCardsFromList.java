@@ -24,8 +24,8 @@ public class InputSelectCardsFromList extends InputSelectEntitiesFromList<Card> 
     	super(controller, min, max, validCards, sa);
     }
 
-    public InputSelectCardsFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<Card> validCards, final SpellAbility sa, final int tally) {
-        super(controller, min, max, validCards, sa, tally);
+    public InputSelectCardsFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<Card> validCards, final SpellAbility sa, final String tallyType, final int tally) {
+        super(controller, min, max, validCards, sa, tallyType, tally);
     }
 
 }

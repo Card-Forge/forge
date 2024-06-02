@@ -215,7 +215,7 @@ public class ReplacementHandler {
         if (layer == ReplacementLayer.CantHappen) {
             chosenRE = possibleReplacers.get(0);
         } else {
-            chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+            chosenRE = decider.getController().chooseSingleReplacementEffect(possibleReplacers);
         }
 
         possibleReplacers.remove(chosenRE);
@@ -657,7 +657,7 @@ public class ReplacementHandler {
             }
 
             List<ReplacementEffect> possibleReplacers = new ArrayList<>(replaceCandidateMap.keySet());
-            ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+            ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(possibleReplacers);
             List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(chosenRE);
 
             if (!executedDamageMap.containsKey(chosenRE)) {

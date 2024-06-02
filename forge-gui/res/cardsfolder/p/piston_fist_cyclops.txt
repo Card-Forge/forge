@@ -1,5 +1,5 @@
 Name:Piston-Fist Cyclops
-ManaCost:1 U/R U/R
+ManaCost:1 UR UR
 Types:Creature Cyclops
 PT:4/3
 K:Defender

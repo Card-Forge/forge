@@ -1,0 +1,9 @@
+Name:Ripples of Undeath
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | UnlessCost$ 1 PayLife<3> | UnlessPayer$ You | UnlessSwitched$ True | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SelectPrompt$ You may put a card from among them into your hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.

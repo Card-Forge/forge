@@ -1,0 +1,24 @@
+[metadata]
+Code=H2R
+Date=2024-06-07
+Name=Modern Horizons 2 Timeshifts
+Type=Draft
+ScryfallCode=H2R
+
+[cards]
+1 U Abiding Grace @Ravenna Tran
+2 R Esper Sentinel @Eric Deschamps
+3 M Solitude @Evan Shipard
+4 R Dress Down @Iain McCaig
+5 C Hard Evidence @Yeong-Hao Han
+6 M Subtlety @Anastasia Ovchinnikova
+7 M Grief @Nicholas Gregory
+8 U Sling-Gang Lieutenant @Craig J Spearing
+9 U Dragon's Rage Channeler @Martina Fačková
+10 M Fury @Raoul Vitale
+11 M Ragavan, Nimble Pilferer @Simon Dominic
+12 U Strike It Rich @Volkan Baǵa
+13 C Unholy Heat @Kari Christensen
+14 M Endurance @Anastasia Ovchinnikova
+15 U Tireless Provisioner @Josu Hernaiz
+16 U Munitions Expert @Jesper Ejsing

@@ -1,0 +1,8 @@
+Name:Breathe Your Last
+ManaCost:1 B B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature or planeswalker. You gain 1 life for each of its colors.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Targeted$CardNumColors
+DeckHas:Ability$LifeGain
+Oracle:Destroy target creature or planeswalker. You gain 1 life for each of its colors.

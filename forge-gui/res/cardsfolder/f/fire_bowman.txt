@@ -2,5 +2,6 @@ Name:Fire Bowman
 ManaCost:R
 Types:Creature Human Soldier Archer
 PT:1/1
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ CARDNAME deals 1 damage to any target. Activate only during your turn, before attackers are declared.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ It deals 1 damage to any target. Activate only during your turn, before attackers are declared.
+DeckHas:Ability$Sacrifice
 Oracle:Sacrifice Fire Bowman: It deals 1 damage to any target. Activate only during your turn, before attackers are declared.

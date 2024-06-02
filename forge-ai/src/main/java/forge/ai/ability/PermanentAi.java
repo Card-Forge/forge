@@ -153,8 +153,7 @@ public class PermanentAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
-            // String announce = sa.getParam("Announce");
+        if (sa.isAnnouncing("Multikicker")) {
             ManaCost mkCost = sa.getMultiKickerManaCost();
             ManaCost mCost = sa.getPayCosts().getTotalMana();
             boolean isZeroCost = mCost.isZero();

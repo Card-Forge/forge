@@ -1,0 +1,9 @@
+Name:Gravedig
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBChangeZone | Defined$ You | CharmNum$ 1
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Target player creates a 2/2 black Zombie creature token.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature in your graveyard | SpellDescription$ Return target creature card from your graveyard to your hand.
+K:Entwine:2
+DeckHas:Ability$Token|Graveyard & Type$Zombie
+Oracle:Choose one —\n• Target player creates a 2/2 black Zombie creature token.\n• Return target creature card from your graveyard to your hand.\nEntwine {2} (Choose both if you pay the entwine cost.)

@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Outlaws of Thunder Junction #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/05/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent can cast their Collective Nightmare at any point. Ensure your solution takes that into account, as well as all possible blocking decisions!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Epic Confrontation;Gold Rush
+p0battlefield=Stoic Sphinx;Ornery Tumblewagg|Counters:P1P1=2;Ramosian Greatsword;Suspicious Bookcase;Bristling Backwoods;Bristling Backwoods;Botanical Sanctum;Botanical Sanctum
+p1life=10
+p1hand=Collective Nightmare
+p1battlefield=Harvester of Misery;Swamp;Swamp;Swamp

@@ -249,7 +249,7 @@ public class CharmEffect extends SpellAbilityEffect {
         return true;
     }
 
-    private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
+    public static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
         if (chosen == null) {
             return;
         }

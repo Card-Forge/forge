@@ -47,7 +47,7 @@ public class ReplaceMill extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        
+
         return true;
     }
 

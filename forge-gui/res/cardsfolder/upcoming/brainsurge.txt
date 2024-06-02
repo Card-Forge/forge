@@ -1,0 +1,6 @@
+Name:Brainsurge 
+ManaCost:2 U
+Types:Instant 
+A:SP$ Draw | NumCards$ 4 | StackDescription$ {p:You} draws four cards, | SpellDescription$ Draw four cards, then put two cards from your hand on top of your library in any order | SubAbility$ ChangeZoneDB
+SVar:ChangeZoneDB:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | Reorder$ True | StackDescription$ then puts two cards from their hand on top of their library in any order.
+Oracle:Draw four cards, then put two cards from your hand on top of your library in any order.

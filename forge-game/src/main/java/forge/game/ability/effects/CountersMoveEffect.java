@@ -82,8 +82,8 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final String counterName = sa.getParam("CounterType");
         final String counterNum = sa.getParamOrDefault("CounterNum", "1");
-        final Player player = sa.getActivatingPlayer();
-        final PlayerController pc = player.getController();
+        final Player activator = sa.getActivatingPlayer();
+        final PlayerController pc = activator.getController();
         final Game game = host.getGame();
 
         CounterType cType = null;
@@ -102,7 +102,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         // this needs given counter type
         if (sa.hasParam("ValidSource")) {
             CardCollectionView srcCards = game.getCardsIn(ZoneType.Battlefield);
-            srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, host, sa);
+            srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), activator, host, sa);
             List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
             if (tgtCards.isEmpty()) {
@@ -124,7 +124,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 // only select cards if the counterNum is any
                 if (counterNum.equals("Any")) {
                     srcCards = CardLists.filter(srcCards, CardPredicates.hasCounters());
-                    srcCards = player.getController().chooseCardsForEffect(srcCards, sa,
+                    srcCards = activator.getController().chooseCardsForEffect(srcCards, sa,
                             Localizer.getInstance().getMessage("lblChooseTakeCountersCard", "any"), 0,
                             srcCards.size(), true, params);
                 }
@@ -138,7 +138,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 // only select cards if the counterNum is any
                 if (counterNum.equals("Any")) {
                     params.put("CounterType", cType);
-                    srcCards = player.getController().chooseCardsForEffect(srcCards, sa,
+                    srcCards = activator.getController().chooseCardsForEffect(srcCards, sa,
                             Localizer.getInstance().getMessage("lblChooseTakeCountersCard", cType.getName()), 0,
                             srcCards.size(), true, params);
                 }
@@ -162,7 +162,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 }
             }
             for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                dest.addCounter(e.getKey(), e.getValue(), player, table);
+                dest.addCounter(e.getKey(), e.getValue(), activator, table);
             }
 
             game.updateLastStateForCard(dest);
@@ -184,10 +184,10 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             params.put("Source", source);
 
             CardCollectionView tgtCards = game.getCardsIn(ZoneType.Battlefield);
-            tgtCards = CardLists.getValidCards(tgtCards, sa.getParam("ValidDefined"), player, host, sa);
+            tgtCards = CardLists.getValidCards(tgtCards, sa.getParam("ValidDefined"), activator, host, sa);
 
             if (counterNum.equals("Any")) {
-                tgtCards = player.getController().chooseCardsForEffect(
+                tgtCards = activator.getController().chooseCardsForEffect(
                         tgtCards, sa, Localizer.getInstance().getMessage("lblChooseCardToGetCountersFrom",
                                 cType.getName(), CardTranslation.getTranslatedName(source.getName())),
                         0, tgtCards.size(), true, params);
@@ -214,14 +214,14 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 params.put("CounterType", cType);
                 params.put("Source", source);
                 params.put("Target", cur);
-                int cnum = player.getController().chooseNumber(sa,
+                int cnum = activator.getController().chooseNumber(sa,
                         Localizer.getInstance().getMessage("lblPutHowManyTargetCounterOnCard", cType.getName(),
                                 CardTranslation.getTranslatedName(cur.getName())),
                         0, source.getCounters(cType), params);
 
                 if (cnum > 0) {
-                    source.subtractCounter(cType, cnum);
-                    cur.addCounter(cType, cnum, player, table);
+                    source.subtractCounter(cType, cnum, activator);
+                    cur.addCounter(cType, cnum, activator, table);
                     game.updateLastStateForCard(cur);
                     updateSource = true;
                 }
@@ -313,7 +313,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     }
 
                     for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                        cur.addCounter(e.getKey(), e.getValue(), player, table);
+                        cur.addCounter(e.getKey(), e.getValue(), activator, table);
                     }
                 }
             }
@@ -325,8 +325,8 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
     protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Map<CounterType, Integer> countersToAdd) {
         final Card host = sa.getHostCard();
-        final Player player = sa.getActivatingPlayer();
-        final PlayerController pc = player.getController();
+        final Player activator = sa.getActivatingPlayer();
+        final PlayerController pc = activator.getController();
         final Game game = host.getGame();
 
         // rule 121.5: If the first and second objects are the same object, nothing happens
@@ -360,7 +360,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             cnum = Math.min(cmax, AbilityUtils.calculateAmount(host, counterNum, sa));
         }
         if (cnum > 0) {
-            src.subtractCounter(cType, cnum);
+            src.subtractCounter(cType, cnum, activator);
             game.updateLastStateForCard(src);
             countersToAdd.put(cType, (countersToAdd.containsKey(cType) ? countersToAdd.get(cType) : 0) + cnum);
         }

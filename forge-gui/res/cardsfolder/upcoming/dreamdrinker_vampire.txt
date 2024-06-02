@@ -1,0 +1,11 @@
+Name:Dreamdrinker Vampire
+ManaCost:1 B
+Types:Creature Vampire
+PT:2/1
+K:Lifelink
+K:Adapt:1:1 B
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigPump | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, it gains menace until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Menace
+DeckHas:Ability$Counters|LifeGain
+DeckHints:Ability$Counters
+Oracle:Lifelink\n{1}{B}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever one or more +1/+1 counters are put on Dreamdrinker Vampire, it gains menace until end of turn.

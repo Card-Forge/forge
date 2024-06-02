@@ -305,8 +305,8 @@ public class ComputerUtil {
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
 
         // do this after card got added to stack
-        if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+        if (!newSA.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
             return false;
         }
         
@@ -370,7 +370,8 @@ public class ComputerUtil {
                                 if (c.isCreature()) {
                                     if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
                                         continue;
-                                    } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                    }
+                                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
                                         continue;
                                     }
                                     toRemove.add(c);
@@ -1279,7 +1280,6 @@ public class ComputerUtil {
             if (cardState.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
-
         } // BuffedBy
 
         // there's a good chance AI will attack weak target
@@ -1719,7 +1719,6 @@ public class ComputerUtil {
                     }
                 }
             }
-
         }
 
         return damage;
@@ -1758,6 +1757,9 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
+                spell = spell.getOriginalAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
@@ -1769,6 +1771,9 @@ public class ComputerUtil {
             }
         }
 
+        // align threatened with resolve order
+        // matters if stack contains multiple activations (e.g. Temur Sabertooth)
+        Collections.reverse(objects);
         return objects;
     }
 
@@ -1875,7 +1880,7 @@ public class ComputerUtil {
                     }
 
                     // don't use it on creatures that can't be regenerated
-                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) &&
+                    if ((saviourApi == ApiType.Regenerate) &&
                             (!c.canBeShielded() || noRegen)) {
                         continue;
                     }
@@ -1984,7 +1989,7 @@ public class ComputerUtil {
         }
         // Destroy => regeneration/bounce/shroud
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
+                && ((saviourApi == ApiType.Regenerate
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
@@ -2125,7 +2130,6 @@ public class ComputerUtil {
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
         return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
     }
-
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
         final Game game = ai.getGame();
 

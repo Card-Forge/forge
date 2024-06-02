@@ -35,8 +35,11 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Player activator = sa.getActivatingPlayer();
-        PlayerController pc = activator.getController();
+        Player tapper = sa.getActivatingPlayer();
+        if (sa.hasParam("Tapper")) {
+            tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
+        }
+        PlayerController pc = tapper.getController();
 
         CardCollection tapped = new CardCollection();
         final Map<Player, CardCollection> untapMap = Maps.newHashMap();
@@ -50,12 +53,8 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
 
             // If the effected card is controlled by the same controller of the SA, default to untap.
             boolean tap = pc.chooseBinary(sa, Localizer.getInstance().getMessage("lblTapOrUntapTarget", CardTranslation.getTranslatedName(tgtC.getName())), PlayerController.BinaryChoiceType.TapOrUntap,
-                    !tgtC.getController().equals(activator) );
+                    !tgtC.getController().equals(tapper) );
 
-            Player tapper = activator;
-            if (sa.hasParam("Tapper")) {
-                tapper = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Tapper"), sa).getFirst();
-            }
             if (tap) {
                 if (tgtC.tap(true, sa, tapper)) tapped.add(tgtC);
             } else if (tgtC.untap(true)) {
@@ -65,12 +64,12 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
         if (!untapMap.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Map, untapMap);
-            activator.getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
+            tapper.getGame().getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
         }
         if (!tapped.isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, tapped);
-            activator.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+            tapper.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
         }
     }
 

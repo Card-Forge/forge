@@ -1,0 +1,8 @@
+Name:Intruder's Inquisition
+ManaCost:B R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature an opponent controls.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | AILogic$ PowerDmg | NumDmg$ ParentTargeted$CardPower | ExcessSVar$ Excess | DamageSource$ ParentTarget | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | ConditionCheckSVar$ Excess | ConditionSVarCompare$ GE1 | Defined$ ParentTargetedController | NumCards$ 1 | DiscardValid$ Card.cmcEQX | Mode$ TgtChoose | SpellDescription$ If excess damage was dealt to a creature this way, its controller discards a card with the greatest mana value among cards in their hand.
+SVar:X:Count$ValidHand Card.ControlledBy ParentTargetedController$GreatestCMC
+Oracle:Target creature you control deals damage equal to its power to target creature an opponent controls. If excess damage was dealt to a creature this way, its controller discards a card with the greatest mana value among cards in their hand.

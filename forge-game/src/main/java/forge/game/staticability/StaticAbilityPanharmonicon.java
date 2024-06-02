@@ -41,12 +41,6 @@ public class StaticAbilityPanharmonicon {
             return n;
         }
 
-        // "triggers only once" means it can't happen
-        if (t.hasParam("ActivationLimit")) {
-            // currently no other limits, so no further calculation needed
-            return n;
-        }
-
         CardCollectionView cardList = null;
         // if LTB look back
         if (t.getMode() == TriggerType.Exploited || t.getMode() == TriggerType.Sacrificed || t.getMode() == TriggerType.Destroyed ||
@@ -66,6 +60,11 @@ public class StaticAbilityPanharmonicon {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.checkConditions(MODE)) {
                     continue;
+                }
+                // it can't trigger more times than the limit allows
+                if (t.hasParam("ActivationLimit") &&
+                        t.getActivationsThisTurn() + n + 1 >= Integer.parseInt(t.getParam("ActivationLimit"))) {
+                    break;
                 }
                 if (applyPanharmoniconAbility(stAb, t, runParams)) {
                     n++;
@@ -93,11 +92,9 @@ public class StaticAbilityPanharmonicon {
             }
         }
 
-        // outside of Room Entered abilities, Panharmonicon effects always talk about Permanents you control which means only Battlefield
-        if (!trigMode.equals(TriggerType.RoomEntered)) {
-            if (!trigger.getHostCard().isInZone(ZoneType.Battlefield)) {
-                return false;
-            }
+        final List<ZoneType> validZones = ZoneType.listValueOf(stAb.getParamOrDefault("ValidZone", "Battlefield"));
+        if (!validZones.contains(trigger.getHostCard().getZone().getZoneType())) {
+            return false;
         }
 
         if (trigMode.equals(TriggerType.ChangesZone)) {

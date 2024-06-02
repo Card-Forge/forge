@@ -1,0 +1,7 @@
+Name:Warren Soultrader
+ManaCost:2 B
+Types:Creature Zombie Goblin Wizard
+PT:3/3
+A:AB$ Token | Cost$ PayLife<1> Sac<1/Creature.Other/another creature> | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Sacrifice|Token & Type$Treasure
+Oracle:Pay 1 life, Sacrifice another creature: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

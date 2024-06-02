@@ -1,0 +1,14 @@
+Name:Emrakul, the World Anew
+ManaCost:12
+Types:Legendary Creature Eldrazi
+PT:12/12
+K:Flying
+K:Protection:Spell.ThisTurnCast:spells that were cast this turn
+K:Protection:Permanent.ThisTurnCast:permanents that were cast this turn
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When you cast this spell, gain control of all creatures target player controls.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Player | TgtPrompt$ Select target player to gain control of all of their creatures | AllValid$ Creature.TargetedPlayerCtrl | NewController$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSacrificeAll | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice all creatures you control.
+SVar:TrigSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.YouCtrl
+K:Madness:C C C C C C
+DeckHints:Ability$Discard
+Oracle:When you cast this spell, gain control of all creatures target player controls.\nFlying, protection from spells and from permanents that were cast this turn\nWhen Emrakul, the World Anew leaves the battlefield, sacrifice all creatures you control.\nMadness—Pay six {C}.

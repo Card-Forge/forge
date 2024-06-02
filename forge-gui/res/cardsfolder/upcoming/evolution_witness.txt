@@ -1,0 +1,9 @@
+Name:Evolution Witness
+ManaCost:2 G
+Types:Creature Elf Shaman Mutant
+PT:2/1
+K:Adapt:2:1 G
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigChangeZone | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, return target permanent card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent card from your graveyard
+DeckHas:Ability$Counters|Graveyard
+Oracle:{1}{G}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nWhenever one or more +1/+1 counters are put on Evolution Witness, return target permanent card from your graveyard to your hand.

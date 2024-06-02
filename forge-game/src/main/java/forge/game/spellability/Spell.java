@@ -74,9 +74,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
-        ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
-
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -89,6 +86,9 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         if (game.getStack().isSplitSecondOnStack()) {
             return false;
         }
+
+        // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
+        ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
 
         // do performanceMode only for cases where the activator is different than controller
         if (!Spell.performanceMode && !card.getController().equals(activator)) {
@@ -105,10 +105,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
         // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
         // but ignore if it comes from PlayEffect
-        if (!isCastFaceDown()
-                && !isCastFromPlayEffect()
-                && isBasicSpell()
-                && origCost.isNoCost()) {
+        if (!isCastFaceDown() && !isCastFromPlayEffect()
+                && isBasicSpell() && origCost.isNoCost()) {
             return false;
         }
 
@@ -117,7 +115,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         return true;
-    } // canPlay()
+    }
 
     /** {@inheritDoc} */
     @Override

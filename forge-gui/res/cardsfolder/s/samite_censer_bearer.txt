@@ -2,6 +2,6 @@ Name:Samite Censer-Bearer
 ManaCost:W
 Types:Creature Human Rebel Cleric
 PT:1/1
-A:AB$ PreventDamageAll | Cost$ W Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to each creature you control this turn.
+A:AB$ PreventDamage | Cost$ W Sac<1/CARDNAME> | Defined$ Valid Creature.YouCtrl | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to each creature you control this turn.
 AI:RemoveDeck:All
 Oracle:{W}, Sacrifice Samite Censer-Bearer: Prevent the next 1 damage that would be dealt to each creature you control this turn.

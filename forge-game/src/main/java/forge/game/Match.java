@@ -288,6 +288,7 @@ public class Match {
             }
 
             Deck myDeck = psc.getDeck();
+            player.setDraftNotes(myDeck.getDraftNotes());
 
             Set<PaperCard> myRemovedAnteCards = null;
             if (!rules.useAnte()) {

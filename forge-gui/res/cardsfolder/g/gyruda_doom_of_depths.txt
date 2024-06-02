@@ -1,5 +1,5 @@
 Name:Gyruda, Doom of Depths
-ManaCost:4 U/B U/B
+ManaCost:4 UB UB
 Types:Legendary Creature Demon Kraken
 PT:6/6
 K:Companion:Card.cmcM20:Your starting deck contains only cards with even mana value. (If this card is your chosen companion, you may cast it once from outside the game.)

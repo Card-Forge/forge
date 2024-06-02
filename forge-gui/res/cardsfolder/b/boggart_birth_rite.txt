@@ -1,6 +1,6 @@
 Name:Boggart Birth Rite
 ManaCost:B
-Types:Tribal Sorcery Goblin
+Types:Kindred Sorcery Goblin
 A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl | SpellDescription$ Return target Goblin card from your graveyard to your hand.
 AI:RemoveDeck:Random
 Oracle:Return target Goblin card from your graveyard to your hand.

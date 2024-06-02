@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Imprint$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card. | StackDescription$ SpellDescription
 SVar:DBReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ All | Destination$ Battlefield | SubAbility$ DBPirateDraw | StackDescription$ None
-SVar:DBPirateDraw:DB$ Draw | NumCards$ 1 | ConditionDefined Remembered | ConditionPresent$ Pirate | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBPirateDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Pirate | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AI:RemoveDeck:All
 Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control. If a Pirate was exiled this way, draw a card.

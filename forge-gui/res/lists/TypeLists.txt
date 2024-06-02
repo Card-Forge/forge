@@ -368,6 +368,7 @@ Dack
 Dakkon
 Daretti
 Davriel
+Deb
 Dihada
 Domri
 Dovin
@@ -385,6 +386,7 @@ Guff
 Huatli
 Inzerva
 Jace
+Jared
 Jaya
 Jeska
 Kaito
@@ -415,6 +417,7 @@ Sorin
 Stone
 Szat
 Tamiyo
+Tasha
 Teferi
 Teyo
 Tezzeret

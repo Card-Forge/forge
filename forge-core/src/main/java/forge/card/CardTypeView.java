@@ -49,7 +49,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean isBasicLand();
     boolean isPlane();
     boolean isPhenomenon();
-    boolean isTribal();
+    boolean isKindred();
     boolean isDungeon();
 
     boolean isAttachment();

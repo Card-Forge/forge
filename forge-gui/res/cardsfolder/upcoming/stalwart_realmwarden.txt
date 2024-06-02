@@ -1,0 +1,13 @@
+Name:Stalwart Realmwarden
+ManaCost:1 W W
+Types:Creature Human Soldier
+PT:2/2
+K:First Strike
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, the next noncreature spell target opponent casts costs {2} more to cast.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ RaiseCost | ValidTgts$ Opponent | EffectOwner$ Targeted | Triggers$ TrigCastSpell
+SVar:RaiseCost:Mode$ RaiseCost  | EffectZone$ Command | Type$ Spell | ValidCard$ Card.nonCreature | Activator$ You | Amount$ 2 | Description$ The next noncreature spell target opponent casts costs {2} more to cast.
+SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
+SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+DeckHas:Ability$LifeGain
+Oracle:First strike, Lifelink\nWhen Stalwart Realmwarden enters the battlefield, the next noncreature spell target opponent casts costs {2} more to cast.

@@ -42,13 +42,7 @@ import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.screens.deckeditor.controllers.CStatistics;
 import forge.screens.deckeditor.controllers.DeckController;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCardCatalog;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
@@ -72,6 +66,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final VOathbreakerDecks vOathbreakerDecks;
     private final VBrawlDecks vBrawlDecks;
     private final VTinyLeadersDecks vTinyLeadersDecks;
+    private final VEditorLog vEditorLog;
 
     CDeckEditorUI() {
         screenChildControllers = new HashMap<>();
@@ -86,6 +81,7 @@ public enum CDeckEditorUI implements ICDoc {
         this.vBrawlDecks.setCDetailPicture(cDetailPicture);
         this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
         this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
+        this.vEditorLog = VEditorLog.SINGLETON_INSTANCE;
     }
 
     public CDetailPicture getCDetailPicture() {
@@ -230,9 +226,9 @@ public enum CDeckEditorUI implements ICDoc {
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                         if (e.isControlDown() || e.isMetaDown()) {
-                        deckView.focus();
-                        e.consume(); //prevent losing selection
-}
+                            deckView.focus();
+                            e.consume(); //prevent losing selection
+                        }
                     }
                 }
             });
@@ -308,6 +304,7 @@ public enum CDeckEditorUI implements ICDoc {
     public void register() {
         EDocID.CARD_PICTURE.setDoc(cDetailPicture.getCPicture().getView());
         EDocID.CARD_DETAIL.setDoc(cDetailPicture.getCDetail().getView());
+        EDocID.EDITOR_LOG.setDoc(vEditorLog);
     }
 
     /* (non-Javadoc)

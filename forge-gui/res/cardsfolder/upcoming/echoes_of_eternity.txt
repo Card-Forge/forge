@@ -1,0 +1,8 @@
+Name:Echoes of Eternity
+ManaCost:3 C C C
+Types:Kindred Enchantment Eldrazi
+S:Mode$ Panharmonicon | ValidCard$ Card.YouCtrl+Colorless+Other | ValidZone$ Battlefield,Stack | Description$ If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a colorless spell, copy it and you may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Eldrazi|Construct
+Oracle:If a triggered ability of a colorless spell you control or another colorless permanent you control triggers, that ability triggers an additional time.\nWhenever you cast a colorless spell, copy it and you may choose new targets for the copy.

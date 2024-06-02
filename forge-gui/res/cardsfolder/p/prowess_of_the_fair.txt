@@ -1,6 +1,6 @@
 Name:Prowess of the Fair
 ManaCost:1 B
-Types:Tribal Enchantment Elf
+Types:Kindred Enchantment Elf
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elf.nonToken+Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
 AI:RemoveDeck:Random

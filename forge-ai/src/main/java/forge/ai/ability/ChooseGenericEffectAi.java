@@ -3,10 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCost;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.card.*;
@@ -280,6 +277,11 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             if (!filtered.isEmpty()) {
                 return filtered.get(0);
             }
+        } else if ("FoodOrTreasure".equals(logic)) {
+            // Tireless Provisioner
+            // TODO: implement a better way to check for possible benefits in each case. If made generic, replace
+            // fixed spells.get(N) with a way to detect which SA creates which token
+            return ComputerUtil.aiLifeInDanger(player, false, 0) ? spells.get(0) : spells.get(1);
         }
         return spells.get(0);   // return first choice if no logic found
     }

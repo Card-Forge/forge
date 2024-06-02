@@ -1,5 +1,5 @@
 Name:Zirda, the Dawnwaker
-ManaCost:1 R/W R/W
+ManaCost:1 RW RW
 Types:Legendary Creature Elemental Fox
 PT:3/3
 K:Companion:Permanent.hasActivatedAbility,Instant,Sorcery:Each permanent card in your starting deck has an activated ability.

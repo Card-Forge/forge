@@ -1,0 +1,6 @@
+Name:Consign to Memory
+ManaCost:U
+Types:Instant
+K:Replicate:1
+A:SP$ Counter | TargetType$ Spell.Colorless,Triggered | TgtPrompt$ Select target triggered ability or colorless spell | ValidTgts$ Card,Emblem | SpellDescription$ Counter target triggered ability or colorless spell.
+Oracle:Replicate {1} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nCounter target triggered ability or colorless spell.

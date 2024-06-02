@@ -39,6 +39,7 @@ public class StaticAbilityAlternativeCost {
                 newSA.setBasicSpell(false);
 
                 if (cost.hasXInAnyCostPart()) {
+                    // TODO this is problematic for Spells that already have (non-mana) X SVar
                     newSA.setSVar("X", stAb.getSVar("X"));
                 }
 
@@ -50,7 +51,9 @@ public class StaticAbilityAlternativeCost {
                     newSA.putParam("ManaRestriction", stAb.getParam("ManaRestriction"));
                 }
 
-                if (!"All".equals(stAb.getParam("EffectZone"))) {
+                if (stAb.hasParam("AffectedZone")) {
+                    newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("AffectedZone")));
+                } else if (!stAb.getHostCard().isImmutable() && stAb.hasParam("EffectZone") && !"All".equals(stAb.getParam("EffectZone"))) {
                     newSA.getRestrictions().setZone(ZoneType.smartValueOf(stAb.getParam("EffectZone")));
                 }
 

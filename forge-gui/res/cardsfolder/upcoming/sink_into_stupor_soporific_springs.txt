@@ -1,0 +1,16 @@
+Name:Sink into Stupor 
+ManaCost:1 U U
+Types:Instant 
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl,Card.inZoneStack+OppCtrl | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or nonland permanent an opponent controls to its owner's hand.
+Oracle:Return target spell or nonland permanent an opponent controls to its owner's hand.
+AlternateMode:Modal
+
+ALTERNATE
+
+Name:Soporific Springs
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:As Soporific Springs enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.\n{T}: Add {U}.

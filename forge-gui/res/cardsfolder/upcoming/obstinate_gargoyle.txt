@@ -1,0 +1,7 @@
+Name:Obstinate Gargoyle
+ManaCost:1 W B
+Types:Artifact Creature Gargoyle
+PT:2/2
+S:Mode$ Continuous | Affected$ Card.Self+modified | AddKeyword$ Flying | Description$ CARDNAME has flying as long as it's modified. (Equipment, Auras you control, and counters are modifications.)
+K:Persist
+Oracle:Obstinate Gargoyle has flying as long as it's modified. (Equipment, Auras you control, and counters are modifications.)\nPersist (When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

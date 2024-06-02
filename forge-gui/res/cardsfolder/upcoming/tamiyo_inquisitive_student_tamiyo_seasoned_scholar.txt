@@ -1,0 +1,34 @@
+Name:Tamiyo, Inquisitive Student
+ManaCost:U
+Types:Legendary Creature Moonfolk Wizard
+PT:0/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 3 | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Whenever you draw your third card in a turn, exile NICKNAME, then return her to the battlefield transformed under her owner's control.
+SVar:TrigTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+DeckHints:Ability$Investigate
+DeckHas:Ability$Investigate|Token
+Oracle:Flying\nWhenever Tamiyo, Inquisitive Student attacks, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nWhenever you draw your third card in a turn, exile Tamiyo, then return her to the battlefield transformed under her owner's control.
+
+ALTERNATE
+
+Name:Tamiyo, Seasoned Scholar
+ManaCost:no cost
+Colors:green,blue
+Types:Legendary Planeswalker Tamiyo
+Loyalty:2
+A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | Duration$ UntilYourNextTurn | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever a creature an opponent controls attacks you or a planeswalker you control, it gets -1/-0 until end of turn.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.OppCtrl | Attacked$ You,Planeswalker.YouCtrl |  TriggerZones$ Command | Execute$ TamiyoPump | TriggerDescription$ Until your next turn, whenever a creature an opponent controls attacks you or a planeswalker you control, it gets -1/-0 until end of turn.
+SVar:TamiyoPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ -1
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberTargets$ True | SubAbility$ DBAddMana | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. If it's a green card, add one mana of any color.
+SVar:DBAddMana:DB$ Mana | Produced$ Any | AILogic$ MostProminentInComputerHand | ConditionDefined$ Remembered | ConditionPresent$ Card.Green | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | NumCards$ X | SubAbility$ DBEmblem | SpellDescription$ Draw cards equal to half the number of cards in your library, rounded up. You get an emblem with "You have no maximum hand size."
+SVar:DBEmblem:DB$ Effect | Name$ Emblem - Tamiyo, Seasoned Scholar | Image$ emblem_tamiyo_seasoned_scholar | StaticAbilities$ UnlimitedHand | Stackable$ False | Duration$ Permanent | AILogic$ Always
+SVar:UnlimitedHand:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+SVar:X:Count$InYourLibrary/HalfUp
+Oracle:[+2]: Until your next turn, whenever a creature an opponent controls attacks you or a planeswalker you control, it gets -1/-0 until end of turn.\n[-3]: Return target instant or sorcery card from your graveyard to your hand. If it's a green card, add one mana of any color.\n[-7]: Draw cards equal to half the number of cards in your library, rounded up. You get an emblem with "You have no maximum hand size."

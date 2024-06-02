@@ -243,8 +243,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
-            }
-            if (sa.hasParam("ForgetOnCast")) {
+            } else if (sa.hasParam("ForgetOnCast")) {
                 addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
             }
 
@@ -290,8 +289,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // chosen number
             if (sa.hasParam("SetChosenNumber")) {
-                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard,
-                        sa.getParam("SetChosenNumber"), sa));
+                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
             }

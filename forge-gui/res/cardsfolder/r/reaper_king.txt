@@ -1,5 +1,5 @@
 Name:Reaper King
-ManaCost:2/W 2/U 2/B 2/R 2/G
+ManaCost:2W 2U 2B 2R 2G
 Types:Legendary Artifact Creature Scarecrow
 PT:6/6
 S:Mode$ Continuous | Affected$ Creature.Scarecrow+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Scarecrow creatures you control get +1/+1.

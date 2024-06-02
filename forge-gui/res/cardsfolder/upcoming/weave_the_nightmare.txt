@@ -1,0 +1,9 @@
+Name:Weave the Nightmare
+ManaCost:1 U B
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBHeist,DBPump,DBCounter | AdditionalDescription$ If you control a nonland permanent you don't own as you cast this spell, you may choose two instead.
+SVar:DBHeist:DB$ Heist | ValidTgts$ Opponent | SpellDescription$ Heist target opponent's library.
+SVar:DBPump:DB$ Pump | IsCurse$ True | ValidTgts$ Creature | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+SVar:Y:Count$Valid Permanent.nonLand+YouDontOwn+YouCtrl
+Oracle:Choose one. If you control a nonland permanent you don't own as you cast this spell, you may choose two instead.\n• Heist target opponent's library.\n• Target creature gets -5/-5 until end of turn.\n• Counter target noncreature spell.
