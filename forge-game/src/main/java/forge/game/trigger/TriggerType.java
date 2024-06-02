@@ -138,6 +138,7 @@ public enum TriggerType {
     Unattach(TriggerUnattach.class),
     UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),
+    VisitAttraction(TriggerVisitAttraction.class),
     Vote(TriggerVote.class);
 
     private final Constructor<? extends Trigger> constructor;

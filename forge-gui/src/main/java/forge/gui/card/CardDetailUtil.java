@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardDetailUtil {
@@ -208,6 +209,17 @@ public class CardDetailUtil {
         if (card.isBattle()) {
             ptText.append(Localizer.getInstance().getMessage("lblDefense")).append(": ");
             ptText.append(card.getDefense());
+        }
+
+        if (card.isAttraction()) {
+            ptText.append(Localizer.getInstance().getMessage("lblLights")).append(": (");
+            Set<Integer> lights = card.getAttractionLights();
+            //TODO: It'd be really nice if the actual lights were drawn as symbols here. Need to look into that...
+            if (lights == null || lights.isEmpty())
+                ptText.append(Localizer.getInstance().getMessage("lblNone"));
+            else
+                ptText.append(StringUtils.join(lights, ", "));
+            ptText.append(")");
         }
 
         return ptText.toString();

@@ -459,8 +459,7 @@ public class DeckImportController {
         // Account for any [un]foiled version
         PaperCard cardKey;
         if (card.isFoil())
-            cardKey = new PaperCard(card.getRules(), card.getEdition(), card.getRarity(), card.getArtIndex(),
-                               false, card.getCollectorNumber(), card.getArtist());
+            cardKey = card.getUnFoiled();
         else
             cardKey = card.getFoiled();
 

@@ -262,6 +262,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean isImmutable = false;
     private boolean isEmblem = false;
     private boolean isBoon = false;
+    private boolean isAttractionCard = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -4229,6 +4230,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setBaseDefense(Integer.toString(n));
     }
 
+    public final Set<Integer> getAttractionLights() {
+        return currentState.getAttractionLights();
+    }
+    public final void setAttractionLights(Set<Integer> attractionLights) {
+        currentState.setAttractionLights(attractionLights);
+    }
+
+
     public final int getBasePower() {
         return currentState.getBasePower();
     }
@@ -5461,6 +5470,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isEquipment()  { return getType().isEquipment(); }
     public final boolean isFortification()  { return getType().isFortification(); }
+    public final boolean isAttraction()     { return getType().isAttraction(); }
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
     public final boolean isAura()           { return getType().isAura(); }
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
@@ -5835,6 +5845,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setBoon(final boolean isBoon0) {
         isBoon = isBoon0;
         view.updateBoon(this);
+    }
+
+    /**
+     * @return true if this is physically an Attraction card with an Astrotorium card back. False otherwise.
+     */
+    public final boolean isAttractionCard() {
+        return this.isAttractionCard;
+    }
+    public final void setAttractionCard(boolean isAttractionCard) {
+        this.isAttractionCard = isAttractionCard;
     }
 
     /*

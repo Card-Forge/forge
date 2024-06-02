@@ -49,7 +49,15 @@ public enum DeckFormat {
     //               Main board: allowed size             SB: restriction   Max distinct non basic cards
     Constructed    ( Range.between(60, Integer.MAX_VALUE), Range.between(0, 15), 4),
     QuestDeck      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
-    Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE),
+    Limited        ( Range.between(40, Integer.MAX_VALUE), null, Integer.MAX_VALUE) {
+        @Override
+        public String getAttractionDeckConformanceProblem(Deck deck) {
+            //Limited attraction decks have a minimum size of 3 and no singleton restriction.
+            if (deck.get(DeckSection.Attractions).countAll() < 3)
+                return "must contain at least 3 attractions, or none at all";
+            return null;
+        }
+    },
     Commander      ( Range.is(99),                         Range.between(0, 10), 1, null, new Predicate<PaperCard>() {
         @Override
         public boolean apply(PaperCard card) {
@@ -321,6 +329,12 @@ public enum DeckFormat {
             }
         }
 
+        if (deck.has(DeckSection.Attractions)) {
+            String attractionError = getAttractionDeckConformanceProblem(deck);
+            if (attractionError != null)
+                return attractionError;
+        }
+
         final int maxCopies = getMaxCardCopies();
         //Must contain no more than 4 of the same card
         //shared among the main deck and sideboard, except
@@ -362,6 +376,18 @@ public enum DeckFormat {
             : TextUtil.concatWithSpace("must have a sideboard of", String.valueOf(sbRange.getMinimum()), "to", String.valueOf(sbRange.getMaximum()), "cards or no sideboard at all");
         }
 
+        return null;
+    }
+
+    public String getAttractionDeckConformanceProblem(Deck deck) {
+        CardPool attractionDeck = deck.get(DeckSection.Attractions);
+        if (attractionDeck.countAll() < 10)
+            return "must contain at least 10 attractions, or none at all";
+        for (Entry<PaperCard, Integer> cp : attractionDeck) {
+            //Constructed Attraction deck must be singleton
+            if (attractionDeck.countByName(cp.getKey().getName(), false) > 1)
+                return TextUtil.concatWithSpace("contains more than 1 copy of the attraction", cp.getKey().getName());
+        }
         return null;
     }
 

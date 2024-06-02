@@ -151,6 +151,8 @@ public class DeckRecognizer {
                 matchedSection = DeckSection.Conspiracy;
             else if (sectionName.equals("planes"))
                 matchedSection = DeckSection.Planes;
+            else if (sectionName.equals("attractions"))
+                matchedSection = DeckSection.Attractions;
 
             if (matchedSection == null)  // no match found
                 return null;

@@ -61,6 +61,7 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -78,7 +79,8 @@ import java.util.Map.Entry;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.Junkyard,
+            ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -161,6 +163,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private CardCollection currentPlanes = new CardCollection();
     private CardCollection planeswalkedToThisTurn = new CardCollection();
+
+    private int attractionsVisitedThisTurn = 0; //TODO: Is "number of attractions you visited this turn" supposed to mean unique ones or just total visits?
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -1947,6 +1951,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> getPlaneswalkedToThisTurn() {
         return planeswalkedToThisTurn;
     }
+    public final void incrementAttractionsVisitedThisTurn() {
+        this.attractionsVisitedThisTurn++;
+    }
+    public final int getAttractionsVisitedThisTurn() {
+        return attractionsVisitedThisTurn;
+    }
 
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
@@ -2517,6 +2527,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
 
+        attractionsVisitedThisTurn = 0;
+
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
             setBeenDealtCombatDamageSinceLastTurn(false);
@@ -2951,6 +2963,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
             com.add(conspire);
         }
+
+        // Attractions
+        PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+        for (IPaperCard cp : registeredPlayer.getAttractions()) {
+            attractionDeck.add(Card.fromPaperCard(cp, this));
+        }
+        if (!attractionDeck.isEmpty())
+            attractionDeck.shuffle();
 
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
@@ -3801,5 +3821,82 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public void visitAttractions(int light) {
+        CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
+        if(attractions.isEmpty())
+            return;
+        for (Card c : attractions) {
+            incrementAttractionsVisitedThisTurn();
+
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Card, c);
+            runParams.put(AbilityKey.Player, this);
+            game.getTriggerHandler().runTrigger(TriggerType.VisitAttraction, runParams, false);
+        }
+    }
+    public void rollToVisitAttractions() {
+        //Essentially a retread of RollDiceEffect.rollDiceForPlayer, but without the parts that require a spell ability.
+        int amount = 1, sides = 6, ignore = 0;
+        Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
+
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Number, amount);
+        repParams.put(AbilityKey.Ignore, ignore);
+        repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
+
+        if(getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams) == ReplacementResult.Updated) {
+            amount = (int) repParams.get(AbilityKey.Number);
+            ignore = (int) repParams.get(AbilityKey.Ignore);
+            //noinspection unchecked
+            ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
+        }
+        if (amount == 0)
+            return;
+        int total = 0;
+        List<Integer> naturalRolls = new ArrayList<>();
+
+        for (int i = 0; i < amount; i++) {
+            int roll = MyRandom.getRandom().nextInt(sides) + 1;
+            // Play the die roll sound
+            getGame().fireEvent(new GameEventRollDie());
+            roll();
+            naturalRolls.add(roll);
+            total += roll;
+        }
+
+        naturalRolls.sort(null);
+
+        List<Integer> ignored = new ArrayList<>();
+        // Ignore the lowest rolls
+        if (ignore > 0) {
+            for (int i = ignore - 1; i >= 0; --i) {
+                total -= naturalRolls.get(i);
+                ignored.add(naturalRolls.get(i));
+                naturalRolls.remove(i);
+            }
+        }
+        // Player chooses to ignore rolls
+        for (Player chooser : ignoreChosenMap.keySet()) {
+            for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
+                Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
+                total -= ign;
+                ignored.add(ign);
+                naturalRolls.remove(ign);
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String rollResults = StringUtils.join(naturalRolls, ", ");
+        String resultMessage = "lblAttractionRollResult";
+        sb.append(Localizer.getInstance().getMessage(resultMessage, this, rollResults));
+        if (!ignored.isEmpty()) {
+            sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
+                    StringUtils.join(ignored, ", ")));
+        }
+        getGame().getAction().notifyOfValue(null, this, sb.toString(), null);
+
+        this.visitAttractions(total);
     }
 }

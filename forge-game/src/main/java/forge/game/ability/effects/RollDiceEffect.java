@@ -12,6 +12,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,13 @@ public class RollDiceEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final PlayerCollection player = getTargetPlayers(sa);
+
+        if(sa.hasParam("ToVisitYourAttractions")) {
+            if (player.size() == 1 && player.get(0).equals(sa.getActivatingPlayer()))
+                return "Roll to Visit Your Attractions.";
+            else
+                return String.format("%s %s to visit their Attractions.", Lang.joinHomogenous(player), Lang.joinVerb(player, "roll"));
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
         if (player.size() == 1 && player.get(0).equals(sa.getActivatingPlayer())) {
@@ -121,8 +129,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         //Notify of results
         if (amount > 0) {
             StringBuilder sb = new StringBuilder();
-            sb.append(Localizer.getInstance().getMessage("lblPlayerRolledResult", player,
-                    StringUtils.join(naturalRolls, ", ")));
+            String rollResults = StringUtils.join(naturalRolls, ", ");
+            String resultMessage = sa.hasParam("ToVisitYourAttractions") ? "lblAttractionRollResult" : "lblPlayerRolledResult";
+            sb.append(Localizer.getInstance().getMessage(resultMessage, player, rollResults));
             if (!ignored.isEmpty()) {
                 sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
                         StringUtils.join(ignored, ", ")));
@@ -278,6 +287,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
             } else {
                 int result = rollDice(sa, player, amount, sides);
                 results.add(result);
+                if (sa.hasParam("ToVisitYourAttractions")) {
+                    player.visitAttractions(result);
+                }
             }
         }
         if (rememberHighest) {

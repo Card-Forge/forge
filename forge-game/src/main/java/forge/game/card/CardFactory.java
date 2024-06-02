@@ -44,9 +44,7 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -189,6 +187,8 @@ public class CardFactory {
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
+
+        c.setAttractionCard(cardRules.getType().isAttraction());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -393,6 +393,8 @@ public class CardFactory {
             c.setBaseToughnessString(face.getToughness());
         }
 
+        c.setAttractionLights(face.getAttractionLights());
+
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
             // this is the "default" spell for permanents like creatures and artifacts
@@ -409,6 +411,73 @@ public class CardFactory {
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+
+        if (face.hasFunctionalVariants()) {
+            applyFunctionalVariant(c, face);
+        }
+    }
+
+    private static void applyFunctionalVariant(Card c, ICardFace originalFace) {
+        String variantName = c.getPaperCard().getFunctionalVariant();
+        if (IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName))
+            return;
+        ICardFace variant = originalFace.getFunctionalVariant(variantName);
+        if (variant == null) {
+            System.out.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", originalFace.getName(), variantName);
+            return;
+        }
+
+        if (variant.getVariables() != null)
+            for (Entry<String, String> v : variant.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+        if (variant.getReplacements() != null)
+            for (String r : variant.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+        if (variant.getStaticAbilities() != null)
+            for (String s : variant.getStaticAbilities())
+                c.addStaticAbility(s);
+        if (variant.getTriggers() != null)
+            for (String t : variant.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
+
+        if (variant.getKeywords() != null)
+            c.addIntrinsicKeywords(variant.getKeywords(), false);
+
+        if (variant.getManaCost() != ManaCost.NO_COST)
+            c.setManaCost(variant.getManaCost());
+        if (variant.getNonAbilityText() != null)
+            c.setText(variant.getNonAbilityText());
+
+        if (!"".equals(variant.getInitialLoyalty()))
+            c.getCurrentState().setBaseLoyalty(variant.getInitialLoyalty());
+        if (!"".equals(variant.getDefense()))
+            c.getCurrentState().setBaseDefense(variant.getDefense());
+
+        if (variant.getOracleText() != null)
+            c.setOracleText(variant.getOracleText());
+
+        if (variant.getType() != null) {
+            for(String type : variant.getType())
+                c.addType(type);
+        }
+
+        if (variant.getColor() != null)
+            c.setColor(variant.getColor().getColor());
+
+        if (variant.getIntPower() != Integer.MAX_VALUE) {
+            c.setBasePower(variant.getIntPower());
+            c.setBasePowerString(variant.getPower());
+        }
+        if (variant.getIntToughness() != Integer.MAX_VALUE) {
+            c.setBaseToughness(variant.getIntToughness());
+            c.setBaseToughnessString(variant.getToughness());
+        }
+
+        if (variant.getAttractionLights() != null)
+            c.setAttractionLights(variant.getAttractionLights());
+
+        if (variant.getAbilities() != null)
+            CardFactoryUtil.addAbilityFactoryAbilities(c, variant.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {

@@ -102,7 +102,7 @@ public final class FModel {
     private static GameFormat.Collection formats;
     private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards,
             brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool,
-            avatarPool, conspiracyPool, dungeonPool;
+            avatarPool, conspiracyPool, dungeonPool, attractionPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -297,6 +297,7 @@ public final class FModel {
         allCardsNoAlt = getAllCardsNoAlt();
         archenemyCards = getArchenemyCards();
         planechaseCards = getPlanechaseCards();
+        attractionPool = getAttractionPool();
         if (GuiBase.getInterface().isLibgdxPort()) {
             //preload mobile Itempool
             uniqueCardsNoAlt = getUniqueCardsNoAlt();
@@ -392,6 +393,11 @@ public final class FModel {
         return dungeonPool;
     }
 
+    public static ItemPool<PaperCard> getAttractionPool() {
+        if (attractionPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_ATTRACTION, PaperCard.FN_GET_RULES)), PaperCard.class);
+        return attractionPool;
+    }
     private static boolean keywordsLoaded = false;
 
     /**

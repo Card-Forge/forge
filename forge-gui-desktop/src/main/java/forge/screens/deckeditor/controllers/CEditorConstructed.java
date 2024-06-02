@@ -56,7 +56,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
-            commanderPool, dungeonPool;
+            commanderPool, dungeonPool, attractionPool;
 
     CardManager catalogManager;
     CardManager deckManager;
@@ -130,6 +130,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 break;
             default:
         }
+
+        allSections.add(DeckSection.Attractions);
+        attractionPool = FModel.getAttractionPool();
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false, false);
         deckManager = new CardManager(getCDetailPicture(), false, false, false);
@@ -342,6 +345,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Dungeon:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodungeondeck"));
             break;
+        case Attractions:
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoattractiondeck"));
+            break;
         }
     }
 
@@ -373,6 +379,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Dungeon:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdungeondeck"));
+            break;
+        case Attractions:
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromattractiondeck"));
             break;
         }
         if (foilAvailable) {
@@ -482,6 +491,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                         this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Dungeon));
                         break;
+                    case Attractions:
+                        this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                        this.getCatalogManager().setPool(attractionPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Attractions));
+                        break;
                 }
             case Commander:
             case Oathbreaker:
@@ -505,6 +520,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                         this.getCatalogManager().setPool(commanderPool, true);
                         this.getCatalogManager().setAllowMultipleSelections(false);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
+                        break;
+                    case Attractions:
+                        this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                        this.getCatalogManager().setPool(attractionPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Attractions));
                         break;
                     default:
                         break;

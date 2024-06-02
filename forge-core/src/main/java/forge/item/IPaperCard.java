@@ -21,6 +21,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     int DEFAULT_ART_INDEX = 1;
     int NO_ART_INDEX = -1;  // Placeholder when NO ArtIndex is Specified
     String NO_ARTIST_NAME = "";
+    String NO_FUNCTIONAL_VARIANT = "";
 
     /**
      * Number of filters based on CardPrinted values.
@@ -243,6 +244,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getName();
     String getEdition();
     String getCollectorNumber();
+    String getFunctionalVariant();
     int getArtIndex();
     boolean isFoil();
     boolean isToken();

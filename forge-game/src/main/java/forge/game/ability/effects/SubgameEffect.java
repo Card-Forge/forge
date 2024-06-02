@@ -141,12 +141,16 @@ public class SubgameEffect extends SpellAbilityEffect {
             // Planes
             setCardsInZone(player, ZoneType.PlanarDeck, maingamePlayer.getCardsIn(ZoneType.PlanarDeck), false);
 
+            // Attractions
+            setCardsInZone(player, ZoneType.AttractionDeck, maingamePlayer.getCardsIn(ZoneType.AttractionDeck), false);
+
             // Vanguard and Commanders
             initVariantsZonesSubgame(subgame, maingamePlayer, player);
 
             player.shuffle(null);
             player.getZone(ZoneType.SchemeDeck).shuffle();
             player.getZone(ZoneType.PlanarDeck).shuffle();
+            player.getZone(ZoneType.AttractionDeck).shuffle();
         }
     }
 
@@ -249,6 +253,7 @@ public class SubgameEffect extends SpellAbilityEffect {
             player.shuffle(sa);
             player.getZone(ZoneType.SchemeDeck).shuffle();
             player.getZone(ZoneType.PlanarDeck).shuffle();
+            player.getZone(ZoneType.AttractionDeck).shuffle();
         }
     }
 

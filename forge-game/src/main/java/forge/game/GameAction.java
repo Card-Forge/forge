@@ -158,6 +158,16 @@ public class GameAction {
             }
         }
 
+        //717.6. If a card with an Astrotorium card back would be put into a zone other than the battlefield, exile,
+        //or the command zone from anywhere, instead its owner puts it into the junkyard.
+        if (c.isAttractionCard() && !toBattlefield && !zoneTo.is(ZoneType.AttractionDeck)
+                && !zoneTo.is(ZoneType.Junkyard) && !zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Command)) {
+            //This should technically be a replacement effect, but with the "can apply more than once to the same event"
+            //clause, this seems sufficient for now.
+            //TODO: Figure out what on earth happens if you animate an attraction, mutate a creature/commander/token onto it, and it dies...
+            return moveToJunkyard(c, cause, params);
+        }
+
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
@@ -449,7 +459,8 @@ public class GameAction {
                 }
                 game.getCombat().removeFromCombat(c);
             }
-            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck) || zoneFrom.is(ZoneType.SchemeDeck))
+            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck)
+                    || zoneFrom.is(ZoneType.SchemeDeck) || zoneFrom.is(ZoneType.AttractionDeck))
                     && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
             }
@@ -509,7 +520,7 @@ public class GameAction {
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
-                // 723.3e & 903.9a
+                // 727.3e & 903.9a
                 if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
@@ -756,6 +767,8 @@ public class GameAction {
             case Stack:         return moveToStack(c, cause, params);
             case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
             case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
+            case AttractionDeck: return moveToVariantDeck(c, ZoneType.AttractionDeck, libPosition, cause, params);
+            case Junkyard:      return moveToJunkyard(c, cause, params);
             default: // sideboard will also get there
                 return moveTo(c.getOwner().getZone(name), c, cause);
         }
@@ -900,6 +913,11 @@ public class GameAction {
             deckPosition = deck.size();
         }
         return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
+    }
+    
+    public final Card moveToJunkyard(Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone junkyard = c.getOwner().getZone(ZoneType.Junkyard);
+        return moveTo(junkyard, c, cause, params);
     }
 
     public final CardCollection exile(final CardCollection cards, SpellAbility cause, Map<AbilityKey, Object> params) {

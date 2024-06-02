@@ -151,6 +151,12 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
+    public String getFunctionalVariant() {
+        //Tokens aren't differentiated by name, so they don't really need support for this.
+        return IPaperCard.NO_FUNCTIONAL_VARIANT;
+    }
+
+    @Override
     public int getArtIndex() {
         return artIndex;
     }

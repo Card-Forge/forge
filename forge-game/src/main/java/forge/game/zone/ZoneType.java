@@ -25,6 +25,8 @@ public enum ZoneType {
     Merged(false, "lblBattlefieldZone"),
     SchemeDeck(true, "lblSchemeDeckZone"),
     PlanarDeck(true, "lblPlanarDeckZone"),
+    AttractionDeck(true, "lblAttractionDeckZone"),
+    Junkyard(false, "lblJunkyardZone"),
     Subgame(true, "lblSubgameZone"),
     None(true, "lblNoneZone");
 

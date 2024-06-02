@@ -57,6 +57,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final boolean foil;
     private Boolean hasImage;
     private String sortableName;
+    private final String functionalVariant;
 
     // Calculated fields are below:
     private transient CardRarity rarity; // rarity is given in ctor when set is assigned
@@ -78,6 +79,11 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         if (collectorNumber == null)
             collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
         return collectorNumber;
+    }
+
+    @Override
+    public String getFunctionalVariant() {
+        return functionalVariant;
     }
 
     @Override
@@ -121,7 +127,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
         if (this.foiledVersion == null) {
             this.foiledVersion = new PaperCard(this.rules, this.edition, this.rarity,
-                    this.artIndex, true, String.valueOf(collectorNumber), this.artist);
+                    this.artIndex, true, String.valueOf(collectorNumber), this.artist, this.functionalVariant);
         }
         return this.foiledVersion;
     }
@@ -130,7 +136,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
             return this;
 
         PaperCard unFoiledVersion = new PaperCard(this.rules, this.edition, this.rarity,
-                this.artIndex, false, String.valueOf(collectorNumber), this.artist);
+                this.artIndex, false, String.valueOf(collectorNumber), this.artist, this.functionalVariant);
         return unFoiledVersion;
     }
 
@@ -173,11 +179,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
         this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false,
-                IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME);
+                IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME, "");
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
-                     final int artIndex0, final boolean foil0, final String collectorNumber0, final String artist0) {
+                     final int artIndex0, final boolean foil0, final String collectorNumber0,
+                     final String artist0, final String functionalVariant) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -192,6 +199,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         // If the user changes the language this will make cards sort by the old language until they restart the game.
         // This is a good tradeoff
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
+        this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
     }
 
     // Want this class to be a key for HashTable

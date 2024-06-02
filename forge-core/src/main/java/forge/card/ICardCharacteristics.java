@@ -2,6 +2,8 @@ package forge.card;
 
 import forge.card.mana.ManaCost;
 
+import java.util.Set;
+
 public interface ICardCharacteristics {
     String   getName();
     CardType getType();
@@ -14,6 +16,7 @@ public interface ICardCharacteristics {
     String getToughness();
     String getInitialLoyalty();
     String getDefense();
+    Set<Integer> getAttractionLights();
 
     String getOracleText();
 }

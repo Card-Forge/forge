@@ -217,13 +217,21 @@ F208 C Dart Throw @Gaboleps
 209 C Drop Tower @Dmitry Burmak
 210 R Ferris Wheel @Kirsten Zirngibl
 211 C Foam Weapons Kiosk @Matt Gaser
-212 C Fortune Teller @Jamroz Gary
+212a C Fortune Teller @Jamroz Gary $A
+212b C Fortune Teller @Jamroz Gary $B
+212c C Fortune Teller @Jamroz Gary $C
+212d C Fortune Teller @Jamroz Gary $D
+212e C Fortune Teller @Jamroz Gary $E
+212f C Fortune Teller @Jamroz Gary $F
 F213 R Gallery of Legends @Jakub Kasper
 F214 R Gift Shop @Matt Gaser
 F215 U Guess Your Fate @Bruce Brenneise
 216 R Hall of Mirrors @Vincent Christiaens
 217 R Haunted House @Dmitry Burmak
-218 U Information Booth @Gaboleps
+218a U Information Booth @Gaboleps $A
+218b U Information Booth @Gaboleps $B
+218c U Information Booth @Gaboleps $C
+218d U Information Booth @Gaboleps $D
 219 C Kiddie Coaster @Marco Bucci
 F220 R Log Flume @Marco Bucci
 F221 R Memory Test @Setor Fiadzigbey

@@ -20,6 +20,7 @@ package forge.game.card;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -64,6 +65,7 @@ public class CardState extends GameObject implements IHasSVars {
     private String baseLoyalty = "";
     private String baseDefense = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
+    private Set<Integer> attractionLights = null;
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<>();
     private final FCollection<SpellAbility> manaAbilities = new FCollection<>();
@@ -238,6 +240,15 @@ public class CardState extends GameObject implements IHasSVars {
     public final void setBaseDefense(final String string) {
         baseDefense = string;
         view.updateDefense(this);
+    }
+
+    public Set<Integer> getAttractionLights() {
+        return this.attractionLights;
+    }
+
+    public final void setAttractionLights(Set<Integer> attractionLights) {
+        this.attractionLights = attractionLights;
+        view.updateAttractionLights(this);
     }
 
     public final Collection<KeywordInterface> getCachedKeywords() {
@@ -588,6 +599,7 @@ public class CardState extends GameObject implements IHasSVars {
         setBaseToughness(source.getBaseToughness());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
+        setAttractionLights(source.getAttractionLights());
         setSVars(source.getSVars());
 
         manaAbilities.clear();

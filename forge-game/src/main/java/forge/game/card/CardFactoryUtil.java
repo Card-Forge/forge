@@ -1964,6 +1964,20 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
+        } else if (keyword.startsWith("Visit")) {
+            final String[] k = keyword.split(":");
+            //final String dbVar = card.getSVar(k[1]);
+
+            SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
+            String descStr = "Visit — " + sa.getDescription();
+
+            final String trigStr = "Mode$ VisitAttraction | TriggerZones$ Battlefield | ValidCard$ Card.Self" +
+                    "| TriggerDescription$ " + descStr;
+
+            final Trigger t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            t.setOverridingAbility(sa);
+            inst.addTrigger(t);
+
         } else if (keyword.startsWith("Dungeon")) {
             final List<String> abs = Arrays.asList(keyword.substring("Dungeon:".length()).split(","));
             final Map<String, SpellAbility> saMap = new LinkedHashMap<>();
