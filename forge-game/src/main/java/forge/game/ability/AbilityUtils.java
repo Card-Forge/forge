@@ -340,7 +340,7 @@ public class AbilityUtils {
         } else if (defined.equals("Convoked")) {
             cards.addAll(hostCard.getConvoked());
         } else {
-            CardCollection list = getPaidCards(sa, defined);
+            CardCollection list = getPaidCards(sa, incR[0]);
             if (list != null) {
                 cards.addAll(list);
             }
@@ -949,7 +949,7 @@ public class AbilityUtils {
 
         if (defined.equals("Self") || defined.equals("TargetedCard") || defined.equals("ThisTargetedCard")
                 || defined.equals("Convoked")
-                || defined.startsWith("Valid") || getPaidCards(sa, defined) != null || defined.equals("TargetedSource")
+                || defined.startsWith("Valid") || getPaidCards(sa, incR[0]) != null || defined.equals("TargetedSource")
                 || defined.startsWith("CardUID_")) {
             // defined syntax indicates cards only, so don't include any players
         } else if (defined.equals("TargetedOrController")) {
@@ -3569,6 +3569,7 @@ public class AbilityUtils {
             }
             return doXMath(amount, m, source, ctb);
         }
+
         if (value.startsWith("PlaneswalkedToThisTurn")) {
             int found = 0;
             String name = value.split(" ")[1];
@@ -3857,40 +3858,11 @@ public class AbilityUtils {
         return someCards;
     }
 
-    public static CardCollection getPaidCards(CardTraitBase sa, String defined) {
+    private static CardCollection getPaidCards(CardTraitBase sa, String defined) {
         CardCollection list = null;
         if (sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
-            // TODO do we really need these checks?
-            if (defined.startsWith("SacrificedCards")) {
-                list = root.getPaidList("SacrificedCards", true);
-            } else if (defined.startsWith("Sacrificed")) {
-                list = root.getPaidList("Sacrificed", true);
-            } else if (defined.startsWith("Revealed")) {
-                list = root.getPaidList("Revealed", true);
-            } else if (defined.startsWith("DiscardedCards")) {
-                list = root.getPaidList("DiscardedCards", true);
-            } else if (defined.startsWith("Discarded")) {
-                list = root.getPaidList("Discarded", true);
-            } else if (defined.startsWith("ExiledCards")) {
-                list = root.getPaidList("ExiledCards", true);
-            } else if (defined.startsWith("Exiled")) {
-                list = root.getPaidList("Exiled", true);
-            } else if (defined.startsWith("Milled")) {
-                list = root.getPaidList("Milled", true);
-            } else if (defined.startsWith("TappedCards")) {
-                list = root.getPaidList("TappedCards", true);
-            } else if (defined.startsWith("Tapped")) {
-                list = root.getPaidList("Tapped", true);
-            } else if (defined.startsWith("UntappedCards")) {
-                list = root.getPaidList("UntappedCards", true);
-            } else if (defined.startsWith("Untapped")) {
-                list = root.getPaidList("Untapped", true);
-            } else if (defined.startsWith("CollectedCards")) {
-                list = root.getPaidList("CollectedCards", true);
-            } else if (defined.startsWith("Collected")) {
-                list = root.getPaidList("Collected", true);
-            }
+            list = root.getPaidList(defined, true);
         }
         return list;
     }
