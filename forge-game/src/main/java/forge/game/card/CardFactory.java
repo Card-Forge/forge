@@ -701,6 +701,11 @@ public class CardFactory {
             if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
+                // Aurora Shifter
+                if (root.isTrigger() && root.getTrigger().getSpawningAbility() != null) {
+                    root = root.getTrigger().getSpawningAbility();
+                }
+
                 if (root.isTrigger()) {
                     state.addTrigger(root.getTrigger().copy(out, false));
                 } else if (root.isReplacementAbility()) {
