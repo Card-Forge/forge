@@ -739,8 +739,7 @@ public class CardFactoryUtil {
                     " | ValidBlocker$ Creature | Secondary$ True " +
                     " | TriggerDescription$ Afflict " + n + " (" + inst.getReminderText() + ")";
 
-            final String abStringAfflict = "DB$ LoseLife | Defined$ TriggeredDefendingPlayer" +
-                    " | LifeAmount$ " + n;
+            final String abStringAfflict = "DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ " + n;
 
             final Trigger afflictTrigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic, null);
             afflictTrigger.setOverridingAbility(AbilityFactory.getAbility(abStringAfflict, card));
@@ -754,7 +753,7 @@ public class CardFactoryUtil {
             sb.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self ");
             sb.append("| Secondary$ True | TriggerDescription$ ").append(name);
             sb.append(" (").append(inst.getReminderText()).append(")");
-            final String effect = "DB$ Token | TokenAmount$ " + k[1] +  " | TokenScript$ wb_1_1_spirit_flying";
+            final String effect = "DB$ Token | TokenAmount$ " + k[1] + " | TokenScript$ wb_1_1_spirit_flying";
 
             final Trigger trigger = TriggerHandler.parseTrigger(sb.toString(), card, intrinsic);
 
@@ -2609,7 +2608,7 @@ public class CardFactoryUtil {
 
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
+                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
             }
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
 

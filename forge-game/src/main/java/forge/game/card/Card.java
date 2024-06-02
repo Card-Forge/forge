@@ -1657,7 +1657,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         long timestamp = game.getNextTimestamp();
         counterTypeTimestamps.put(counterType, timestamp);
-        addChangedCardKeywords(ImmutableList.of(counterType.toString()), null, false, timestamp, 0, updateView);
+
+        int num = 1;
+        if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
+            num = getCounters(counterType);
+        }
+        addChangedCardKeywords(Collections.nCopies(num, counterType.toString()), null, false, timestamp, 0, updateView);
         return true;
     }
 
