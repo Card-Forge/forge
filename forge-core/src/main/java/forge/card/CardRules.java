@@ -564,6 +564,8 @@ public final class CardRules implements ICardCharacteristics {
                         has = new DeckHints(value);
                     } else if ("Defense".equals(key)) {
                         face.setDefense(value);
+                    } else if ("Draft".equals(key)) {
+                        face.addDraftAction(value);
                     }
                     break;
 

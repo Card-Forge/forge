@@ -205,49 +205,141 @@ F192 R Souvenir T-Shirt @Michael Phillippi
 F197 U The Big Top @Kirsten Zirngibl
 F198 C Nearby Planet @Bruce Brenneise
 F199 R Urza's Fun House @Dmitry Burmak
-200 U Balloon Stand @Jakub Kasper
-201 U Bounce Chamber @Dmitry Burmak
-202 U Bumper Cars @Gabor Szikszai
-F203 R Centrifuge @Greg Staples
-204 C Clown Extruder @Marco Bucci
-205 U Concession Stand @David Sladek
-206 C Costume Shop @Raluca Marinescu
-F207 C Cover the Spot @Jeff Miracola
-F208 C Dart Throw @Gaboleps
-209 C Drop Tower @Dmitry Burmak
+200a U Balloon Stand @Jakub Kasper $A
+200b U Balloon Stand @Jakub Kasper $B
+200c U Balloon Stand @Jakub Kasper $C
+200d U Balloon Stand @Jakub Kasper $D
+201a U Bounce Chamber @Dmitry Burmak $A
+201b U Bounce Chamber @Dmitry Burmak $B
+201c U Bounce Chamber @Dmitry Burmak $C
+201d U Bounce Chamber @Dmitry Burmak $D
+202a U Bumper Cars @Gabor Szikszai $A
+202b U Bumper Cars @Gabor Szikszai $B
+202c U Bumper Cars @Gabor Szikszai $C
+202d U Bumper Cars @Gabor Szikszai $D
+202e U Bumper Cars @Gabor Szikszai $E
+202f U Bumper Cars @Gabor Szikszai $F
+F203a R Centrifuge @Greg Staples $A
+F203b R Centrifuge @Greg Staples $B
+204a C Clown Extruder @Marco Bucci $A
+204b C Clown Extruder @Marco Bucci $B
+204c C Clown Extruder @Marco Bucci $C
+204d C Clown Extruder @Marco Bucci $D
+205a U Concession Stand @David Sladek $A
+205b U Concession Stand @David Sladek $B
+205c U Concession Stand @David Sladek $C
+205d U Concession Stand @David Sladek $D
+206a C Costume Shop @Raluca Marinescu $A
+206b C Costume Shop @Raluca Marinescu $B
+206c C Costume Shop @Raluca Marinescu $C
+206d C Costume Shop @Raluca Marinescu $D
+206e C Costume Shop @Raluca Marinescu $E
+206f C Costume Shop @Raluca Marinescu $F
+F207a C Cover the Spot @Jeff Miracola $A
+F207b C Cover the Spot @Jeff Miracola $B
+F207c C Cover the Spot @Jeff Miracola $C
+F207d C Cover the Spot @Jeff Miracola $D
+F208a C Dart Throw @Gaboleps $A
+F208b C Dart Throw @Gaboleps $B
+F208c C Dart Throw @Gaboleps $C
+F208d C Dart Throw @Gaboleps $D
+209a C Drop Tower @Dmitry Burmak $A
+209b C Drop Tower @Dmitry Burmak $B
+209c C Drop Tower @Dmitry Burmak $C
+209d C Drop Tower @Dmitry Burmak $D
+209e C Drop Tower @Dmitry Burmak $E
+209f C Drop Tower @Dmitry Burmak $F
 210 R Ferris Wheel @Kirsten Zirngibl
-211 C Foam Weapons Kiosk @Matt Gaser
+211a C Foam Weapons Kiosk @Matt Gaser $A
+211b C Foam Weapons Kiosk @Matt Gaser $B
+211c C Foam Weapons Kiosk @Matt Gaser $C
+211d C Foam Weapons Kiosk @Matt Gaser $D
 212a C Fortune Teller @Jamroz Gary $A
 212b C Fortune Teller @Jamroz Gary $B
 212c C Fortune Teller @Jamroz Gary $C
 212d C Fortune Teller @Jamroz Gary $D
 212e C Fortune Teller @Jamroz Gary $E
 212f C Fortune Teller @Jamroz Gary $F
-F213 R Gallery of Legends @Jakub Kasper
-F214 R Gift Shop @Matt Gaser
-F215 U Guess Your Fate @Bruce Brenneise
-216 R Hall of Mirrors @Vincent Christiaens
-217 R Haunted House @Dmitry Burmak
+F213a R Gallery of Legends @Jakub Kasper $A
+F213b R Gallery of Legends @Jakub Kasper $B
+F214a R Gift Shop @Matt Gaser $A
+F214b R Gift Shop @Matt Gaser $B
+F215a U Guess Your Fate @Bruce Brenneise $A
+F215b U Guess Your Fate @Bruce Brenneise $B
+F215c U Guess Your Fate @Bruce Brenneise $C
+F215d U Guess Your Fate @Bruce Brenneise $D
+216a R Hall of Mirrors @Vincent Christiaens $A
+216b R Hall of Mirrors @Vincent Christiaens $B
+217a R Haunted House @Dmitry Burmak $A
+217b R Haunted House @Dmitry Burmak $B
 218a U Information Booth @Gaboleps $A
 218b U Information Booth @Gaboleps $B
 218c U Information Booth @Gaboleps $C
 218d U Information Booth @Gaboleps $D
-219 C Kiddie Coaster @Marco Bucci
-F220 R Log Flume @Marco Bucci
-F221 R Memory Test @Setor Fiadzigbey
-222 R Merry-Go-Round @Carl Critchlow
-223 C Pick-a-Beeble @Dave Greco
-F224 R Push Your Luck @Sebastian Giacobino
-225 U Roller Coaster @Gabor Szikszai
-F226 U Scavenger Hunt @Jamroz Gary
-227 C Spinny Ride @Aaron J. Riley
-F228 U Squirrel Stack @Andrea Radeck
-229 R Storybook Ride @Dmitry Burmak
-F230 U The Superlatorium @Simon Dominic
-231 R Swinging Ship @Mike Burns
-232 U Trash Bin @Greg Bobrowski
-F233 U Trivia Contest @Caroline Gariba
-234 R Tunnel of Love @Vladimir Krisetskiy
+219a C Kiddie Coaster @Marco Bucci $A
+219b C Kiddie Coaster @Marco Bucci $B
+219c C Kiddie Coaster @Marco Bucci $C
+219d C Kiddie Coaster @Marco Bucci $D
+219e C Kiddie Coaster @Marco Bucci $E
+219f C Kiddie Coaster @Marco Bucci $F
+F220a R Log Flume @Marco Bucci $A
+F220b R Log Flume @Marco Bucci $B
+F221a R Memory Test @Setor Fiadzigbey $A
+F221b R Memory Test @Setor Fiadzigbey $B
+222a R Merry-Go-Round @Carl Critchlow $A
+222b R Merry-Go-Round @Carl Critchlow $B
+223a C Pick-a-Beeble @Dave Greco $A
+223b C Pick-a-Beeble @Dave Greco $B
+223c C Pick-a-Beeble @Dave Greco $C
+223d C Pick-a-Beeble @Dave Greco $D
+223e C Pick-a-Beeble @Dave Greco $E
+223f C Pick-a-Beeble @Dave Greco $F
+F224a R Push Your Luck @Sebastian Giacobino $A
+F224b R Push Your Luck @Sebastian Giacobino $B
+225a U Roller Coaster @Gabor Szikszai $A
+225b U Roller Coaster @Gabor Szikszai $B
+225c U Roller Coaster @Gabor Szikszai $C
+225d U Roller Coaster @Gabor Szikszai $D
+F226a U Scavenger Hunt @Jamroz Gary $A
+F226b U Scavenger Hunt @Jamroz Gary $B
+F226c U Scavenger Hunt @Jamroz Gary $C
+F226d U Scavenger Hunt @Jamroz Gary $D
+F226e U Scavenger Hunt @Jamroz Gary $E
+F226f U Scavenger Hunt @Jamroz Gary $F
+227a C Spinny Ride @Aaron J. Riley $A
+227b C Spinny Ride @Aaron J. Riley $B
+227c C Spinny Ride @Aaron J. Riley $C
+227d C Spinny Ride @Aaron J. Riley $D
+227e C Spinny Ride @Aaron J. Riley $E
+227f C Spinny Ride @Aaron J. Riley $F
+F228a U Squirrel Stack @Andrea Radeck $A
+F228b U Squirrel Stack @Andrea Radeck $B
+F228c U Squirrel Stack @Andrea Radeck $C
+F228d U Squirrel Stack @Andrea Radeck $D
+F228e U Squirrel Stack @Andrea Radeck $E
+F228f U Squirrel Stack @Andrea Radeck $F
+229a R Storybook Ride @Dmitry Burmak $A
+229b R Storybook Ride @Dmitry Burmak $B
+F230a U The Superlatorium @Simon Dominic $A
+F230b U The Superlatorium @Simon Dominic $B
+F230c U The Superlatorium @Simon Dominic $C
+F230d U The Superlatorium @Simon Dominic $D
+F230e U The Superlatorium @Simon Dominic $E
+F230f U The Superlatorium @Simon Dominic $F
+231a R Swinging Ship @Mike Burns $A
+231b R Swinging Ship @Mike Burns $B
+232a U Trash Bin @Greg Bobrowski $A
+232b U Trash Bin @Greg Bobrowski $B
+232c U Trash Bin @Greg Bobrowski $C
+232d U Trash Bin @Greg Bobrowski $D
+F233a U Trivia Contest @Caroline Gariba $A
+F233b U Trivia Contest @Caroline Gariba $B
+F233c U Trivia Contest @Caroline Gariba $C
+F233d U Trivia Contest @Caroline Gariba $D
+F233e U Trivia Contest @Caroline Gariba $E
+F233f U Trivia Contest @Caroline Gariba $F
+234a R Tunnel of Love @Vladimir Krisetskiy $A
+234b R Tunnel of Love @Vladimir Krisetskiy $B
 235 L Plains @Adam Paquette
 236 L Island @Adam Paquette
 237 L Swamp @Adam Paquette
