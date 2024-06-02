@@ -2608,7 +2608,7 @@ public class CardFactoryUtil {
 
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
+                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
             }
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
 

@@ -71,7 +71,10 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
             immediateTrig.setOverridingAbility(overridingSA);
         }
 
-        // Instead of registering this, add to the delayed triggers as an immediate trigger type? Which means it'll fire as soon as possible
-        game.getTriggerHandler().registerDelayedTrigger(immediateTrig);
+        int amt = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TriggerAmount", "1"), sa);
+        for (int i = 0; i < amt; i++) {
+            // Instead of registering this, add to the delayed triggers as an immediate trigger type? Which means it'll fire as soon as possible
+            game.getTriggerHandler().registerDelayedTrigger(immediateTrig);
+        }
     }
 }
