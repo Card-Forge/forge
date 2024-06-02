@@ -17,10 +17,7 @@
  */
 package forge.game.phase;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
@@ -288,7 +285,7 @@ public class PhaseHandler implements java.io.Serializable {
                             }
                         }
                         // roll for attractions if we have any
-                        if (CardLists.count(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS) > 0) {
+                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
                             playerTurn.rollToVisitAttractions();
                         }
                         table.replaceCounterEffect(game, null, false);

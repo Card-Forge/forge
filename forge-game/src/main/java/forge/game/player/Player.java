@@ -3840,9 +3840,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (Card c : attractions) {
             incrementAttractionsVisitedThisTurn();
 
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
             runParams.put(AbilityKey.Card, c);
-            runParams.put(AbilityKey.Player, this);
             game.getTriggerHandler().runTrigger(TriggerType.VisitAttraction, runParams, false);
         }
     }
