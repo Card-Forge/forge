@@ -9,5 +9,5 @@ SVar:OneEach:PlayerCountOpponents$Amount
 K:Trample
 K:Haste
 K:Annihilator:1
-SVar:PlayMain1
+SVar:PlayMain1:TRUE
 Oracle:Devoid\nWhen you cast this spell, for each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain trample, haste, and annihilator 1 until end of turn.\nTrample, haste, annihilator 1
