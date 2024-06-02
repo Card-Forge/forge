@@ -7,7 +7,7 @@ S:Mode$ Continuous | AddPower$ X | AddToughness$ X | Affected$ Card.Self | Descr
 SVar:X:PlayerCountHasLost$Amount/Times.10
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may mill that many cards. Put any number of land cards from among them onto the battlefield tapped.
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ Y | RememberMilled$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land.IsRemembered | ChangeNum$ Z | AnyNumber$ True | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Land.IsRemembered | Hidden$ True | ChangeNum$ Z | AnyNumber$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:TriggerCount$DamageAmount
 SVar:Z:Count$ValidGraveyard Land.YouOwn+IsRemembered
