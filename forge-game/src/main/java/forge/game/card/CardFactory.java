@@ -370,7 +370,9 @@ public class CardFactory {
 
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
-        face.getDraftActions().forEach(c::addDraftAction);
+        if (face.getDraftActions() != null) {
+            face.getDraftActions().forEach(c::addDraftAction);
+        }
 
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());

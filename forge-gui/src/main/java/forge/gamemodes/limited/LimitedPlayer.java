@@ -159,9 +159,6 @@ public class LimitedPlayer {
                 showRevealedCard(bestPick);
             }
 
-            // TODO Paliano Vanguard
-            // As you draft a VALID, you may Note its [name/type/], and turn this face down
-
             if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)")) {
                 // Animus of Predation
                 playerFlags |= AnimusRemoveFromPool;

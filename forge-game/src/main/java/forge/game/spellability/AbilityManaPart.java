@@ -522,9 +522,6 @@ public class AbilityManaPart implements java.io.Serializable {
             return getComboColors(sa);
         }
         String produced = this.getOrigProduced();
-        if (produced.contains("NotedColor")) {
-            produced = produced.replace("NotedColor", sa.getActivatingPlayer().getDraftNotes().get(""));
-        }
         if (produced.contains("Chosen")) {
             produced = produced.replace("Chosen", this.getChosenColor(sa));
         }
@@ -665,11 +662,12 @@ public class AbilityManaPart implements java.io.Serializable {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
         if (origProduced.contains("NotedColors")) {
+            // Should only be used for Paliano, the High City
             if (sa.getActivatingPlayer() == null) {
                 return "";
             }
 
-            String colors = sa.getActivatingPlayer().getDraftNotes().get(sa.getHostCard().getName());
+            String colors = sa.getActivatingPlayer().getDraftNotes().get("Paliano, the High City");
             if (colors == null) {
                 return "";
             }
