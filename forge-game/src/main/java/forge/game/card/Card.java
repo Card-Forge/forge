@@ -112,7 +112,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private GameEntity entityAttachedTo;
 
-    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
+    private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects
 
@@ -3783,6 +3783,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void removeMayPlay(final StaticAbility sta) {
         this.mayPlay.remove(sta);
         this.updateMayPlay();
+    }
+    public final Map<StaticAbility, CardPlayOption> getMayPlay() {
+        return Maps.newHashMap(mayPlay);
+    }
+    public final Map<StaticAbility, CardPlayOption> setMayPlay(Map<StaticAbility, CardPlayOption> mp) {
+        return mayPlay = mp;
     }
 
     public void resetMayPlayTurn() {
