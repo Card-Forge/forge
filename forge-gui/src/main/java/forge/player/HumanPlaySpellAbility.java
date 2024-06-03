@@ -260,7 +260,7 @@ public class HumanPlaySpellAbility {
 
         if (needX) {
             if (cost.hasXInAnyCostPart()) {
-                final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
+                final String sVar = ability.getParamOrDefault("XAlternative", ability.getSVar("X")); //only prompt for new X value if card doesn't determine it another way
                 // check if X != 0 is even allowed or the X shard got removed
                 boolean replacedXshard = ability.isSpell() && ability.getHostCard().getManaCost().countX() > 0 && !cost.hasXInAnyCostPart();
                 if (("Count$xPaid".equals(sVar) && !replacedXshard) || sVar.isEmpty()) {

@@ -557,13 +557,13 @@ public class HumanPlay {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost);
 
-        String xInCard = ability.getSVar("X");
+        String xInCard = ability.getParamOrDefault("XAlternative", ability.getSVar("X"));
         String xColor = ability.getXColor();
         if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
             xColor = "WUBRGX";
         }
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
-            int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
+            int xPaid = AbilityUtils.calculateAmount(source, xInCard, ability);
             toPay.setXManaCostPaid(xPaid, xColor);
             ability.setXManaCostPaid(xPaid);
         }

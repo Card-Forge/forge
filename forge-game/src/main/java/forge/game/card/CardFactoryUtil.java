@@ -3432,11 +3432,12 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
+            final String extra = k.length > 2 ? "| " + k[2] : "";
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
                     "| SorcerySpeed$ True | Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
-                    "| SpellDescription$ (" + inst.getReminderText() + ")";
+                    "| SpellDescription$ (" + inst.getReminderText() + ")" + extra;
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
 
