@@ -1,0 +1,10 @@
+Name:Thraben Charm
+ManaCost:1 W
+Types:Instant
+A:SP$ Charm | Choices$ DBDealDamage,DBDestroy,DBExileYards
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to twice the number of creatures you control to target creature.
+SVar:X:Count$Valid Creature.YouCtrl/Times.2
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBExileYards:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select any number of target players to exile their graveyards | TargetMin$ 0 | TargetMax$ MaxTgt | ChangeType$ Card | SpellDescription$ Exile any number of target players' graveyards.
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:Choose one —\n• Thraben Charm deals damage equal to twice the number of creatures you control to target creature.\n• Destroy target enchantment.\n• Exile any number of target players' graveyards.

@@ -1,0 +1,7 @@
+Name:Moonfolk Token
+ManaCost:no cost
+Types:Creature Moonfolk
+Colors:blue
+PT:1/2
+K:Flying
+Oracle:Flying

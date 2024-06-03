@@ -1,0 +1,7 @@
+Name:Fox Token
+ManaCost:no cost
+Types:Creature Fox
+Colors:white
+PT:2/2
+K:Vigilance
+Oracle:Vigilance
