@@ -228,6 +228,7 @@ public final class GameActionUtil {
 
                 // some needs to check after ability was put on the stack
                 if (game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+                    Map<StaticAbility, CardPlayOption> oldMayPlay = source.getMayPlay();
                     Zone oldZone = source.getLastKnownZone();
                     Card stackCopy = source;
                     if (!source.isLKI()) {
@@ -240,12 +241,15 @@ public final class GameActionUtil {
                     CardCollection preList = new CardCollection(stackCopy);
                     game.getAction().checkStaticAbilities(false, Sets.newHashSet(stackCopy), preList);
 
+                    stackCopy.setMayPlay(oldMayPlay);
+
                     for (final KeywordInterface inst : stackCopy.getUnhiddenKeywords()) {
                         for (SpellAbility iSa : inst.getAbilities()) {
                             // do only non intrinsic
                             if (iSa.isSpell() && !iSa.isIntrinsic()) {
                                 alternatives.add(iSa);
-                                alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(iSa, source, activator));
+                                alternatives.addAll(getMayPlaySpellOptions(iSa, source, activator, altCostOnly));
+                                // currently only AltCost get added this way
                             }
                         }
                     }
