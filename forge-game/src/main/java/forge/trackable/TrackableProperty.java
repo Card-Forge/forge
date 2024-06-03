@@ -172,6 +172,8 @@ public enum TrackableProperty {
     HasHaste(TrackableTypes.BooleanType),
     HasInfect(TrackableTypes.BooleanType),
     HasStorm(TrackableTypes.BooleanType),
+    HasWard(TrackableTypes.BooleanType),
+    HasWither(TrackableTypes.BooleanType),
     YouMayLook(TrackableTypes.BooleanType),
     OpponentMayLook(TrackableTypes.BooleanType),
     BlockAdditional(TrackableTypes.IntegerType),

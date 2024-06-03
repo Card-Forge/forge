@@ -1468,6 +1468,8 @@ public class CardView extends GameEntityView {
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
         public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
         public boolean hasHorsemanship() { return get(TrackableProperty.HasHorsemanship); }
+        public boolean hasWard() { return get(TrackableProperty.HasWard); }
+        public boolean hasWither() { return get(TrackableProperty.HasWither); }
         public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
         public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
         public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
@@ -1542,6 +1544,8 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
             set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
+            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state));
+            set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
             set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));
