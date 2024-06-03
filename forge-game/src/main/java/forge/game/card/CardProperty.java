@@ -2101,7 +2101,8 @@ public class CardProperty {
             }
             return false;
         } else if (property.equals("NotedColor")) {
-            String colors = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            // Should Regicide be hardcoded here or part of the property?
+            String colors = sourceController.getDraftNotes().get("Regicide");
             if (colors == null) {
                 return false;
             }
@@ -2111,13 +2112,15 @@ public class CardProperty {
                     (colors.contains("red") && card.getColor().hasRed()) ||
                     (colors.contains("green") && card.getColor().hasGreen());
         } else if (property.equals("NotedName")) {
-          String names = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            // Should Noble Banneret be hardcoded here or part of the property?
+            String names = sourceController.getDraftNotes().get("Noble Banneret");
             if (names == null || names.isEmpty()) {
                 return false;
             }
             return names.contains(card.getName());
         } else if (property.equals("NotedTypes")) {
-            String types = sourceController.getDraftNotes().get(spellAbility.getHostCard().getName());
+            // Should Paliano Vanguard be hardcoded here or part of the property?
+            String types = sourceController.getDraftNotes().get("Paliano Vanguard");
             if (types == null || types.isEmpty()) {
                 return false;
             }

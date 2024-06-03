@@ -1,6 +1,5 @@
 package forge.card;
 
-import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,7 +46,7 @@ final class CardFace implements ICardFace, Cloneable {
     private List<String> abilities = null;
     private List<String> staticAbilities = null;
     private List<String> triggers = null;
-    private List<String> draftActions = Lists.newArrayList();
+    private List<String> draftActions = null;
     private List<String> replacements = null;
     private Map<String, String> variables = null;
 
