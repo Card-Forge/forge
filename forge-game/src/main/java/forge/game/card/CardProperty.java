@@ -2117,7 +2117,9 @@ public class CardProperty {
             if (names == null || names.isEmpty()) {
                 return false;
             }
-            return names.contains(card.getName());
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
         } else if (property.equals("NotedTypes")) {
             // Should Paliano Vanguard be hardcoded here or part of the property?
             String types = sourceController.getDraftNotes().get("Paliano Vanguard");

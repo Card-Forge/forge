@@ -2,6 +2,7 @@ package forge.gamemodes.limited;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -31,17 +32,20 @@ public class LimitedPlayer {
     private static final int AnimusRemoveFromPool = 1 << 5;
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
+    private static final int GrinderRemoveFromPool = 1 << 8;
 
     private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
-                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive;
+                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive
+                                    | GrinderRemoveFromPool;
 
     private int playerFlags = 0;
 
     private final List<PaperCard> faceUp = Lists.newArrayList();
     private final List<PaperCard> revealed = Lists.newArrayList();
     private final Map<String, List<String>> noted = new HashMap<>();
+    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder");
 
-    IBoosterDraft draft = null;
+    IBoosterDraft draft;
 
     public LimitedPlayer(int seatingOrder, IBoosterDraft draft) {
         order = seatingOrder;
@@ -59,7 +63,8 @@ public class LimitedPlayer {
     public Map<String, String> getSerializedDraftNotes() {
         Map<String, String> serialized = new HashMap<>();
         for (Map.Entry<String, List<String>> entry : noted.entrySet()) {
-            serialized.put(entry.getKey(), TextUtil.join(entry.getValue(), ","));
+            serialized.put(entry.getKey(), TextUtil.join(entry.getValue(),
+                    semicolonDelimiter.contains(entry.getKey()) ? ";" : ","));
         }
         return serialized;
     }
@@ -92,16 +97,45 @@ public class LimitedPlayer {
             return false;
         }
 
+        boolean removedFromPool = false;
         boolean alreadyRevealed = false;
 
         chooseFrom.remove(bestPick);
 
         draftedThisRound++;
 
-        if (!handleAnimusOfPredation(bestPick)) {
-            CardPool pool = deck.getOrCreate(section);
-            pool.add(bestPick);
+        List<String> removeFromSource = Lists.newArrayList();
+        String choice = null;
+        if ((playerFlags & AnimusRemoveFromPool) == AnimusRemoveFromPool) {
+            removeFromSource.add("Animus of Predation");
         }
+        if ((playerFlags & GrinderRemoveFromPool) == GrinderRemoveFromPool) {
+            removeFromSource.add("Cogwork Grinder");
+        }
+
+        if (!removeFromSource.isEmpty()) {
+            removeFromSource.add(0, "Don't Remove");
+            choice = removeWithAny(bestPick, removeFromSource);
+        }
+        if (choice != null && !choice.equals("Don't Remove")) {
+            removedFromPool = true;
+            removedFromCardPool.add(bestPick);
+            if (choice.equals("Animus of Predation")) {
+                addLog(name() + " removed " + bestPick.getName() + " from the draft with " + choice + ".");
+            } else if (choice.equals("Cogwork Grinder")) {
+                addLog(name() + " removed a card face down from the draft with " + choice + ".");
+            }
+
+            recordRemoveFromDraft(bestPick, choice);
+        }
+
+        if (removedFromPool) {
+            // Can we hide this from UI?
+            return true;
+        }
+
+        CardPool pool = deck.getOrCreate(section);
+        pool.add(bestPick);
 
         alreadyRevealed |= handleNobleBanneret(bestPick);
         alreadyRevealed |= handlePalianoVanguard(bestPick);
@@ -112,7 +146,6 @@ public class LimitedPlayer {
         }
 
         // Draft Actions
-
         if (Iterables.contains(draftActions, "Reveal CARDNAME as you draft it.")) {
             if (!alreadyRevealed) {
                 revealed.add(bestPick);
@@ -125,11 +158,11 @@ public class LimitedPlayer {
 
                 addLog(name() + " revealed " + bestPick.getName() + " and noted " + draftedThisRound + " cards drafted this round.");
             } else if (Iterables.contains(draftActions, "As you draft CARDNAME, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.")) {
-                List<String> chosenColors = new ArrayList<String>();
+                List<String> chosenColors = new ArrayList<>();
 
                 LimitedPlayer leftPlayer = draft.getNeighbor(this, true);
                 LimitedPlayer rightPlayer = draft.getNeighbor(this, false);
-                List<String> availableColors = new ArrayList<String>(MagicColor.Constant.ONLY_COLORS);
+                List<String> availableColors = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
 
                 String c = rightPlayer.chooseColor(availableColors, this, bestPick.getName());
                 chosenColors.add(c);
@@ -159,9 +192,12 @@ public class LimitedPlayer {
                 showRevealedCard(bestPick);
             }
 
-            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)")) {
-                // Animus of Predation
+            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)") &&
+                    bestPick.getName().equals("Animus of Predation")) {
                 playerFlags |= AnimusRemoveFromPool;
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face down. (Those cards aren’t in your card pool.)") &&
+                    bestPick.getName().equals("Cogwork Grinder")) {
+                playerFlags |= GrinderRemoveFromPool;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
                 playerFlags |= NobleBanneretActive;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
@@ -171,7 +207,6 @@ public class LimitedPlayer {
 
         // Note who passed it to you. (Either player before you in draft passing order except if you receive the last card
         // TODO Cogwork Tracker
-
 
         // Note next card on this card
         // TODO Aether Searcher (for the next card)
@@ -218,8 +253,8 @@ public class LimitedPlayer {
         return SGuiChoose.one(player.name() + " drafted " + title + ": Choose a color", colors);
     }
 
-    protected boolean removeWithAnimus(PaperCard bestPick) {
-        return SGuiChoose.one("Remove this " + bestPick + " from the draft for Animus of Predation?", Lists.newArrayList("Yes", "No")).equals("Yes");
+    protected String removeWithAny(PaperCard bestPick, List<String> options) {
+        return SGuiChoose.one("Remove this " + bestPick + " from the draft with?", options);
     }
 
     protected boolean revealWithBanneret(PaperCard bestPick) {
@@ -243,29 +278,28 @@ public class LimitedPlayer {
 
     }
 
-    public boolean handleAnimusOfPredation(PaperCard bestPick) {
-        if ((playerFlags & AnimusRemoveFromPool) != AnimusRemoveFromPool) {
-            return false;
-        }
+    public void recordRemoveFromDraft(PaperCard bestPick, String host) {
+        List<String> note = noted.computeIfAbsent(host, k -> Lists.newArrayList());
 
-        if (!removeWithAnimus(bestPick)) {
-            return false;
-        }
-
-        removedFromCardPool.add(bestPick);
-        addLog(name() + " removed " + bestPick.getName() + " from the draft for Animus of Predation.");
-
-        List<String> keywords = new ArrayList<String>();
-        if (bestPick.getRules().getType().isCreature()) {
+        if (host.equals("Animus of Predation")) {
+            if (!bestPick.getRules().getType().isCreature()) {
+                return;
+            }
+            List<String> keywords = new ArrayList<>();
             for (String keyword : bestPick.getRules().getMainPart().getKeywords()) {
+                if (keyword.startsWith("Hexproof")) {
+                    keywords.add(keyword);
+                    continue;
+                }
+
                 switch (keyword) {
                     case "Flying":
                         keywords.add("Flying");
                         break;
-                    case "First strike":
+                    case "First Strike":
                         keywords.add("First Strike");
                         break;
-                    case "Double strike":
+                    case "Double Strike":
                         keywords.add("Double Strike");
                         break;
                     case "Deathtouch":
@@ -273,9 +307,6 @@ public class LimitedPlayer {
                         break;
                     case "Haste":
                         keywords.add("Haste");
-                        break;
-                    case "Hexproof":
-                        keywords.add("Hexproof");
                         break;
                     case "Indestructible":
                         keywords.add("Indestructible");
@@ -295,18 +326,14 @@ public class LimitedPlayer {
                 }
             }
 
-            if (!keywords.isEmpty()) {
-                List<String> note = noted.computeIfAbsent("Animus of Predation", k -> Lists.newArrayList());
-                note.add(String.join(",", keywords));
-                addLog(name() + " added " + String.join(",", keywords) + " for Animus of Predation.");
-            }
+            note.add(String.join(",", keywords));
+        } else if (host.equals("Cogwork Grinder")) {
+            note.add(bestPick.getName());
         }
-
-        return true;
     }
 
     public boolean handleNobleBanneret(PaperCard bestPick) {
-        boolean alreadyRevealed = false;
+        boolean alreadyRevealed;
         if ((playerFlags & NobleBanneretActive) != NobleBanneretActive) {
             return false;
         }
@@ -355,7 +382,7 @@ public class LimitedPlayer {
     }
 
     public boolean handlePalianoVanguard(PaperCard bestPick) {
-        boolean alreadyRevealed = false;
+        boolean alreadyRevealed;
         if ((playerFlags & PalianoVanguardActive) != PalianoVanguardActive) {
             return false;
         }

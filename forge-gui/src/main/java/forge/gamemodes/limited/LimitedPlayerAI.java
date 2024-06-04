@@ -32,7 +32,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         CardPool pool = deck.getOrCreate(DeckSection.Sideboard);
         if (ForgePreferences.DEV_MODE) {
-            System.out.println("Player[" + order + "] pack: " + chooseFrom.toString());
+            System.out.println("Player[" + order + "] pack: " + chooseFrom);
         }
 
         // TODO Archdemon of Paliano random draft while active
@@ -74,10 +74,40 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
-    protected boolean removeWithAnimus(PaperCard bestPick) {
+    protected String removeWithAny(PaperCard bestPick, List<String> options) {
+        // If we have multiple remove from draft options, do none of them for now
+
+        Collections.shuffle(options);
+        if (options.get(0).equals("Animus of Predation")) {
+            if (removeWithAnimus(bestPick)) {
+                return "Animus of Predation";
+            }
+        } else if (options.get(0).equals("Cogwork Grinder")) {
+            if (removeWithGrinder(bestPick)) {
+                return "Cogwork Grinder";
+            }
+        }
+
+        return null;
+    }
+
+    private boolean removeWithAnimus(PaperCard bestPick) {
         // TODO Animus of Predation logic
         // Feel free to remove any cards that we won't play and can give us a bonus
         // We should verify we don't already have the keyword bonus that card would grant
+        return false;
+    }
+
+    private boolean removeWithGrinder(PaperCard bestPick) {
+        // TODO Cogwork Grinder logic
+        // Feel free to remove any cards that we won't play and can give us a bonus
+        // We should verify we don't already have the keyword bonus that card would grant
+        return false;
+    }
+
+    private boolean isUsefulCard(PaperCard bestPick) {
+        // Determine if this card is useful. How likely is it to make the deck we're building.
+        // If no, then we need to figure out which card we should remove it for
         return false;
     }
 
