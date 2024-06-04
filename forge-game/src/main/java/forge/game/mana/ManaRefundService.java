@@ -24,7 +24,9 @@ public class ManaRefundService {
 
         // move non-undoable paying mana back to floating
         for (Mana mana : sa.getPayingMana()) {
-            Player pl = mana.getManaAbility().getSourceSA().getActivatingPlayer();
+            Player pl = mana.getManaAbility().getSourceSA() ==  null // null means mana likely added by dev cheat
+                ? mana.getManaAbility().getSourceCard().getOwner()
+                : mana.getManaAbility().getSourceSA().getActivatingPlayer();
 
             pl.getManaPool().addMana(mana);
             if (!payers.contains(pl)) {
