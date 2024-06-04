@@ -17,8 +17,6 @@
  */
 package forge.game.card;
 
-import static org.apache.commons.lang3.StringUtils.indexOf;
-
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.LinkedHashMap;
@@ -33,6 +31,7 @@ import java.util.stream.IntStream;
 import forge.GameCommand;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.event.GameEventCardForetold;
 import forge.util.Localizer;
 
@@ -62,6 +61,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
+import forge.game.cost.CostCollectEvidence;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -2676,12 +2676,19 @@ public class CardFactoryUtil {
             final boolean onlyMana = bCost.isOnlyManaCost();
             String remTxt = inst.getReminderText();
             if (!onlyMana) {
-                String oText = card.getCard().getOracleText();
-                String bestowStr = oText.substring(indexOf(oText, "Bestow"), indexOf(oText, "\\n"));
-                if (bestowStr.contains("(")) {
-                    String s = bestowStr.substring(indexOf(bestowStr, "(") + 1, indexOf(bestowStr, ")"));
-                    if (!s.equals("")) remTxt = s;
+                final StringBuilder sbRem = new StringBuilder();
+                sbRem.append("To pay this bestow cost, ");
+                int i = 0;
+                for (CostPart part : bCost.getCostParts()) {
+                    if (part instanceof CostPartMana) sbRem.append("pay ").append(part);
+                    else if (part instanceof CostCollectEvidence) {
+                        sbRem.append("exile cards with total mana value ").append(part.getAmount());
+                        sbRem.append(" or greater from your graveyard");
+                    } else sbRem.append(part);
+                    sbRem.append(i + 1 == bCost.getCostParts().size() ? "." : " and ");
+                    i++;
                 }
+                remTxt = sbRem.toString();   
             }
             sbDesc.append(onlyMana ? " " : "—").append(bCost.toSimpleString()).append(!onlyMana ? "." : "");
             sbDesc.append(" (").append(remTxt).append(")");
