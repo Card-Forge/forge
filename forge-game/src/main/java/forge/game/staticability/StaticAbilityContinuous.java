@@ -65,7 +65,6 @@ public final class StaticAbilityContinuous {
      * @param layer
      *            the {@link StaticAbilityLayer} of effects to apply.
      * @return a {@link CardCollectionView} of cards that have been affected.
-     * @see #getAffectedCards(StaticAbility)
      * @see #applyContinuousAbility(StaticAbility, CardCollectionView,
      *      StaticAbilityLayer)
      */
@@ -314,7 +313,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("FromDraftNotes")) {
-                    addKeywords = Lists.newArrayList(hostCard.getController().getDraftNotes().getOrDefault(hostCard.getName(), "").split(","));
+                    addKeywords = Lists.newArrayList(hostCard.getController().getDraftNotes().getOrDefault(params.get("FromDraftNotes"), "").split(","));
                 }
 
             } else if (params.containsKey("ShareRememberedKeywords")) {
