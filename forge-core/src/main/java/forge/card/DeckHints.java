@@ -12,7 +12,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.StaticData;
 import forge.item.PaperCard;
+import forge.token.TokenDb;
 import forge.util.PredicateString.StringOp;
 import forge.util.collect.FCollection;
 
@@ -196,7 +198,27 @@ public class DeckHints {
     }
 
     private Iterable<PaperCard> getMatchingItems(Iterable<PaperCard> source, Predicate<CardRules> predicate, Function<PaperCard, CardRules> fn) {
-        return Iterables.filter(source, Predicates.compose(predicate, fn));
+        // TODO should token generators be counted differently for their potential?
+        return Iterables.filter(source, Predicates.compose(rulesWithTokens(predicate), fn));
+    }
+
+    public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {
+        TokenDb tdb = StaticData.instance().getAllTokens();
+        return new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules card) {
+                if (predicate.apply(card)) {
+                    return true;
+                }
+                // TODO find a way to ignore some e.g. on Urza's Mine
+                for (String tok : card.getTokens()) {
+                    if (tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
+                        return true;
+                    } 
+                }
+                return false;
+            }
+        };
     }
 
 }
