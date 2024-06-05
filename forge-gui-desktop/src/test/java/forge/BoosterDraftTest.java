@@ -1,19 +1,18 @@
 package forge;
 
-import java.util.List;
-
-import forge.gamemodes.limited.IDraftLog;
-import forge.gamemodes.limited.LimitedPlayer;
-import org.testng.annotations.Test;
-
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.IDraftLog;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.item.generation.BoosterGenerator;
 import forge.model.FModel;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * <p>
@@ -89,6 +88,11 @@ public class BoosterDraftTest implements IBoosterDraft {
 
     @Override
     public IDraftLog getDraftLog() {
+        return null;
+    }
+
+    @Override
+    public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {
         return null;
     }
 }

@@ -7,7 +7,7 @@ S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile three cards at random from your graveyard. Choose a noncreature, nonland card from among them and copy it. You may cast the copy without paying its mana cost.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | AtRandom$ True | Hidden$ True | ChangeType$ Card.YouOwn | ChangeNum$ 3 | RememberChanged$ True | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Exile | Amount$ 1 | Choices$ Card.IsRemembered+nonLand+nonCreature | ChoiceTitle$ Choose a noncreature, nonland card | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ ChosenCard | ValidSA$ Spell | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ Play | Defined$ ChosenCard | ValidSA$ Spell | Controller$ You | CopyCard$ True | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill

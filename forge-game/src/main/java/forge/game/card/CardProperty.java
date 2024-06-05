@@ -9,7 +9,10 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.EvenOdd;
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -1097,6 +1100,10 @@ public class CardProperty {
             if (!card.hasABasicLandType()) {
                 return false;
             }
+        } else if (property.equals("hasANonBasicLandType")) {
+            if (!card.hasANonBasicLandType()) {
+                return false;
+            }
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
             if (!card.hasKeyword(property.substring(10))) {
@@ -2094,6 +2101,35 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("NotedColor")) {
+            // Should Regicide be hardcoded here or part of the property?
+            String colors = sourceController.getDraftNotes().get("Regicide");
+            if (colors == null) {
+                return false;
+            }
+            return (colors.contains("white") && card.getColor().hasWhite()) ||
+                    (colors.contains("blue") && card.getColor().hasBlue()) ||
+                    (colors.contains("black") && card.getColor().hasBlack()) ||
+                    (colors.contains("red") && card.getColor().hasRed()) ||
+                    (colors.contains("green") && card.getColor().hasGreen());
+        } else if (property.equals("NotedName")) {
+            // Should Noble Banneret be hardcoded here or part of the property?
+            String names = sourceController.getDraftNotes().get("Noble Banneret");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedTypes")) {
+            // Should Paliano Vanguard be hardcoded here or part of the property?
+            String types = sourceController.getDraftNotes().get("Paliano Vanguard");
+            if (types == null || types.isEmpty()) {
+                return false;
+            }
+            List<String> typeList = Lists.newArrayList(types.split(","));
+
+            return Iterables.any(card.getType().getCreatureTypes(), typeList::contains);
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);

@@ -1,0 +1,12 @@
+Name:Thief of Existence
+ManaCost:1 C G
+Types:Creature Eldrazi
+PT:3/4
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cast this spell, exile up to one target noncreature, nonland permanent an opponent controls with mana value 4 or less. If you do, CARDNAME gains "When this creature leaves the battlefield, target opponent draws a card."
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonCreature+nonLand+OppCtrl+cmcLE4 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target noncreature, nonland permanent an opponent controls with mana value 4 or less | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Triggers$ LeavesTrig | Duration$ Permanent | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:LeavesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature leaves the battlefield, target opponent draws a card.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell, exile up to one target noncreature, nonland permanent an opponent controls with mana value 4 or less. If you do, Thief of Existence gains "When this creature leaves the battlefield, target opponent draws a card."

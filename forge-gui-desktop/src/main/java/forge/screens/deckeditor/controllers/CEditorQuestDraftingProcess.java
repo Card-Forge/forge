@@ -17,8 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.Map.Entry;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
@@ -31,18 +29,14 @@ import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.home.quest.CSubmenuQuestDraft;
 import forge.screens.home.quest.VSubmenuQuestDraft;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+
+import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -211,6 +205,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
      * </p>
      */
     private void saveDraft() {
+        // This should be inheriting more from CEditorDraftingProcess
 
         saved = true;
 

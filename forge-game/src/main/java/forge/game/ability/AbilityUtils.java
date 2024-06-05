@@ -29,11 +29,7 @@ import forge.game.spellability.*;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Expressions;
-import forge.util.Localizer;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
@@ -2368,6 +2364,20 @@ public class AbilityUtils {
                     highest = num;
                 }
             }
+
+            return doXMath(highest, expr, c, ctb);
+            // Other draft notes include: Names, Colors, Players, Creature Type.
+            // But these aren't really things you count so they'll show up in properties most likely
+        }
+
+        if (sq[0].equals("DraftNotesCount")) {
+            // Just in case you are playing this card in a deck without draft notes
+            String note = player.getDraftNotes().getOrDefault(sq[1],  null);
+
+            if (note == null) {
+                return 0;
+            }
+            int highest = note.split(";").length;
 
             return doXMath(highest, expr, c, ctb);
             // Other draft notes include: Names, Colors, Players, Creature Type.
