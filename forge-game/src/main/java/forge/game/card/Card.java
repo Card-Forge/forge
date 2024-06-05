@@ -5965,6 +5965,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasABasicLandType() {
         return getType().hasABasicLandType();
     }
+    public final boolean hasANonBasicLandType() {
+        return getType().hasANonBasicLandType();
+    }
 
     public final boolean isUsedToPay() {
         return usedToPayCost;
