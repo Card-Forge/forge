@@ -336,4 +336,8 @@ public enum Keyword {
         }
         return result;
     }
+
+    public boolean isMultipleRedundant() {
+        return isMultipleRedundant;
+    }
 }

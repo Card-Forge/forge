@@ -1,0 +1,13 @@
+Name:Coram, the Undertaker
+ManaCost:1 B R G
+Types:Legendary Creature Human Warrior
+PT:0/5
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the greatest power among creature cards in all graveyards.
+SVar:X:Count$ValidGraveyard Creature$GreatestPower
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, each player mills a card.
+SVar:TrigMill:DB$ Mill | Defined$ Player | NumCards$ 1
+S:Mode$ Continuous | Affected$ Land.ThisTurnEnteredFrom_Library | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | MayPlayText$ Land | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.
+S:Mode$ Continuous | Affected$ Card.nonLand+ThisTurnEnteredFrom_Library | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Secondary$ True | Description$ During each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Ability$Graveyard
+Oracle:Coram, the Undertaker gets +X/+0, where X is the greatest power among creature cards in all graveyards.\nWhenever Coram attacks, each player mills a card.\nDuring each of your turns, you may play a land and cast a spell from among cards in graveyards that were put there from libraries this turn.

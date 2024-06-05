@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put an everything counter on each of up to one target land and up to one target creature.
 SVar:TrigPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land | TgtPrompt$ Select up to one target land | CounterType$ EVERYTHING | CounterNum$ 1 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ EVERYTHING | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Land.counters_GE1_EVERYTHING | AddType$ AllBasicLandType,AllNonBasicLandType | Description$ Each land with an everything counter on it is every land type in addition to its other types.
+S:Mode$ Continuous | Affected$ Land.counters_GE1_EVERYTHING | AddType$ AllBasicLandType & AllNonBasicLandType | Description$ Each land with an everything counter on it is every land type in addition to its other types.
 S:Mode$ Continuous | Affected$ Creature.nonLand+counters_GE1_EVERYTHING | AddAllCreatureTypes$ True | Description$ Each nonland creature with an everything counter on it is every creature type.
 DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE

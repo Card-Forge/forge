@@ -1,0 +1,11 @@
+Name:Amped Raptor
+ManaCost:1 R
+Types:Creature Dinosaur
+PT:2/1
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters). Then if you cast it from your hand, exile cards from the top of your library until you exile a nonland card. You may cast that card by paying an amount of {E} equal to its mana value rather than paying its mana cost.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.wasCastFromYourHandByYou | Valid$ Card.nonLand | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | PlayCost$ PayEnergy<ConvertedManaCost> | Optional$ True | SubAbility$ DBChange | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:First strike\nWhen Amped Raptor enters the battlefield, you get {E}{E} (two energy counters). Then if you cast it from your hand, exile cards from the top of your library until you exile a nonland card. You may cast that card by paying an amount of {E} equal to its mana value rather than paying its mana cost.
