@@ -203,7 +203,13 @@ public class DeckHints {
     }
 
     public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {
-        TokenDb tdb = StaticData.instance().getAllTokens();
+        final TokenDb tdb;
+        if (StaticData.instance() != null) {
+            // not available on some test setups
+            tdb = StaticData.instance().getAllTokens();
+        } else {
+            tdb = null;
+        }
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
@@ -212,7 +218,7 @@ public class DeckHints {
                 }
                 // TODO find a way to ignore some e.g. on Urza's Mine
                 for (String tok : card.getTokens()) {
-                    if (tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
+                    if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
                         return true;
                     } 
                 }
