@@ -635,21 +635,20 @@ public class Player extends GameEntity implements Comparable<Player> {
         return cnt >= energyPayment;
     }
 
-    public final int loseEnergy(int lostEnergy) {
+    public final boolean loseEnergy(int lostEnergy) {
         int cnt = getCounters(CounterEnumType.ENERGY);
         if (lostEnergy > cnt) {
-            return -1;
+            return false;
         }
-        cnt -= lostEnergy;
-        this.setCounters(CounterEnumType.ENERGY, cnt, null, true);
-        return cnt;
+        subtractCounter(CounterEnumType.ENERGY, lostEnergy, this);
+        return true;
     }
 
     public final boolean payEnergy(final int energyPayment, final Card source) {
         if (energyPayment <= 0)
             return true;
 
-        return canPayEnergy(energyPayment) && loseEnergy(energyPayment) > -1;
+        return canPayEnergy(energyPayment) && loseEnergy(energyPayment);
     }
 
     public final boolean canPayShards(final int shardPayment) {
@@ -904,6 +903,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         setCounters(counterName, newValue, null, true);
 
+        getGame().addCounterRemovedThisTurn(counterName, this, delta);
+        
         /* TODO Run triggers when something cares
         int curCounters = oldValue;
         for (int i = 0; i < delta && curCounters != 0; i++) {
