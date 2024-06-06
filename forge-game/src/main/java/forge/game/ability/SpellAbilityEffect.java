@@ -84,9 +84,11 @@ public abstract class SpellAbilityEffect {
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc,
                             sa.getHostCard().getName());
 
-                    int idx = spellDesc.indexOf("(");
-                    if (idx > 0) { //trim reminder text from StackDesc
-                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    //trim reminder text from StackDesc
+                    int idxL = spellDesc.indexOf(" (");
+                    int idxR = spellDesc.indexOf(")");
+                    if (idxL > 0 && idxR > idxL) {
+                        spellDesc = spellDesc.replace(spellDesc.substring(idxL, idxR + 1), "");
                     }
 
                     if (reps != null) {
