@@ -37,6 +37,12 @@ public class LimitedPlayer {
     private static final int SearcherNoteNext = 1 << 9;
     private static final int WhispergearBoosterPeek = 1 << 10;
     private static final int IllusionaryInformantPeek = 1 << 11;
+    private static final int SearcherNoteNext = 1 << 9;
+    private static final int WhispergearBoosterPeek = 1 << 10;
+
+    private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
+                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive
+                                    | GrinderRemoveFromPool;
 
     private int playerFlags = 0;
 
@@ -546,6 +552,5 @@ public class LimitedPlayer {
         // TODO Lore Seeker
         // Generate booster pack then, insert it "before" the pack we're currently drafting from
     }
-
     */
 }
