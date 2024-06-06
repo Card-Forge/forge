@@ -86,7 +86,8 @@ public abstract class SpellAbilityEffect {
 
                     int idx = spellDesc.indexOf("(");
                     if (idx > 0) { //trim reminder text from StackDesc
-                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                        String rem = spellDesc.substring(idx - 1, spellDesc.indexOf(")") + 1);
+                        spellDesc = spellDesc.replace(rem, "");
                     }
 
                     if (reps != null) {

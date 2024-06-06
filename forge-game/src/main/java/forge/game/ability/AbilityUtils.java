@@ -948,7 +948,7 @@ public class AbilityUtils {
         String defined = incR[0];
 
         if (defined.equals("Self") || defined.equals("TargetedCard") || defined.equals("ThisTargetedCard")
-                || defined.equals("Convoked")
+                || defined.equals("Convoked") || defined.equals("ExiledWith")
                 || defined.startsWith("Valid") || getPaidCards(sa, incR[0]) != null || defined.equals("TargetedSource")
                 || defined.startsWith("CardUID_")) {
             // defined syntax indicates cards only, so don't include any players

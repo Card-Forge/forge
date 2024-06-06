@@ -1,0 +1,14 @@
+Name:Wheel of Potential
+ManaCost:2 R
+Types:Sorcery
+A:SP$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ ChooseX | StackDescription$ REP You get_{p:You} gets & you_ | SpellDescription$ You get {E}{E}{E} (three energy counters), then you may pay X {E}.,,,,,,
+SVar:ChooseX:DB$ ChooseNumber | Max$ Count$YourCountersEnergy | ListTitle$ Choose amount for X | SubAbility$ Pay | StackDescription$ None
+SVar:Pay:DB$ Pump | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ Repeat | StackDescription$ None
+SVar:Repeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ Draw | SubAbility$ Effect | SpellDescription$ Each player may exile their hand and draw X cards.
+SVar:Draw:DB$ Draw | UnlessCost$ ExileFromHand<1/All> | UnlessPayer$ Remembered | UnlessSwitched$ True | Defined$ Remembered | NumCards$ X
+SVar:Effect:DB$ Effect | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | RememberObjects$ ExiledWith.YouOwn | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ If X is 7 or more, you may play cards you own exiled this way until the end of your next turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.YouOwn+IsRemembered | AffectedZone$ Exile | Description$ You may play cards you own exiled this way until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ChosenNumber
+AI:RemoveDeck:All
+Oracle:You get {E}{E}{E} (three energy counters), then you may pay X {E}.\nEach player may exile their hand and draw X cards. If X is 7 or more, you may play cards you own exiled this way until the end of your next turn.

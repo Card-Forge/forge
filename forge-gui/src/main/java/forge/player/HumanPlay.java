@@ -282,11 +282,12 @@ public class HumanPlay {
                 CostExile costExile = (CostExile) part;
 
                 if ("All".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileAllCardYouGraveyard"), sourceAbility)) {
-                        return false;
-                    }
-
-                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility, hcd.isEffect());
+                    ZoneType zone = costExile.getFrom().get(0);
+                    prompt = ZoneType.Graveyard.equals(zone) ? "lblDoYouWantExileAllCardYouGraveyard" :
+                        "lblDoYouWantExileAllCardHand";
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage(prompt), 
+                        sourceAbility)) return false;
+                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(zone)), sourceAbility, hcd.isEffect());
                 } else {
                     CardCollection list = new CardCollection();
                     List<ZoneType> fromZones = costExile.getFrom();
