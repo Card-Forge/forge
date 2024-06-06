@@ -33,6 +33,8 @@ public class LimitedPlayer {
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
     private static final int GrinderRemoveFromPool = 1 << 8;
+    private static final int SearcherNoteNext = 1 << 9;
+    private static final int WhispergearBoosterPeek = 1 << 10;
 
     private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
                                     | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive
@@ -129,6 +131,27 @@ public class LimitedPlayer {
             recordRemoveFromDraft(bestPick, choice);
         }
 
+        LimitedPlayer fromPlayer = receivedFrom();
+        // If the previous player has an active Cogwork Spy, show them this card
+        if ((fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {
+            if (fromPlayer instanceof LimitedPlayerAI) {
+                // I'm honestly not sure what the AI would do by learning this information
+                // But just log that a reveal "happened"
+                addLog(this.name() + " revealed a card to " + fromPlayer.name() + " via Cogwork Spy.");
+            } else {
+                addLog(this.name() + " revealed " + bestPick.getName() + " to you with Cogwork Spy.");
+            }
+
+            fromPlayer.playerFlags &= ~SpyNextCardDrafted;
+        }
+
+        if ((playerFlags & SearcherNoteNext) == SearcherNoteNext) {
+            addLog(name() + " revealed " + bestPick.getName() + " for Aether Searcher.");
+            playerFlags &= ~SearcherNoteNext;
+            List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
+            note.add(String.valueOf(bestPick.getName()));
+        }
+
         if (removedFromPool) {
             // Can we hide this from UI?
             return true;
@@ -182,6 +205,20 @@ public class LimitedPlayer {
                 addLog(name() + " revealed " + bestPick.getName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
             }
             else {
+                if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
+                    // Cogwork Spy
+                    playerFlags |= SpyNextCardDrafted;
+                }
+
+                if (Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
+                    // Note who passed it to you.
+                    // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
+                    List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
+                    note.add(String.valueOf(fromPlayer.order));
+                } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
+                    playerFlags |= SearcherNoteNext;
+                }
+
                 addLog(name() + " revealed " + bestPick.getName() + " as they drafted it.");
             }
         }
@@ -202,17 +239,14 @@ public class LimitedPlayer {
                 playerFlags |= NobleBanneretActive;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
                 playerFlags |= PalianoVanguardActive;
+            } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.")) {
+                playerFlags |= WhispergearBoosterPeek;
             }
         }
-
-        // Note who passed it to you. (Either player before you in draft passing order except if you receive the last card
-        // TODO Cogwork Tracker
-
-        // Note next card on this card
+        
+        // Note next card in this pack
         // TODO Aether Searcher (for the next card)
 
-        // Peek at next card from this pack
-        // TODO Cogwork Spy
 
         // TODO Lore Seeker
         // This adds a pack and MIGHT screw up all of our assumptions about pack passing. Do this last probably
@@ -226,6 +260,10 @@ public class LimitedPlayer {
 
     public List<PaperCard> nextChoice() {
         return packQueue.peek();
+    }
+
+    public LimitedPlayer receivedFrom() {
+        return draft.getNeighbor(this, draft.getRound() % 2 == 0);
     }
 
     public void newPack() {

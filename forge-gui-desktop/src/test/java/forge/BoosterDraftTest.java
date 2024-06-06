@@ -26,6 +26,7 @@ import java.util.List;
 public class BoosterDraftTest implements IBoosterDraft {
 
     private int n = 3;
+    private int round = 1;
 
     @Override
     @Test(timeOut = 1000)
@@ -41,6 +42,11 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public LimitedPlayer getHumanPlayer() {
         return null;
+    }
+
+    @Override
+    public int getRound() {
+        return round;
     }
 
     @Override

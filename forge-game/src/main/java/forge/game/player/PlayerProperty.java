@@ -2,7 +2,6 @@ package forge.game.player;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -15,6 +14,7 @@ import forge.util.Expressions;
 import forge.util.TextUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -264,6 +264,10 @@ public class PlayerProperty {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(player)) {
                 return false;
             }
+        } else if (property.equals("NotedDefender")) {
+            String tracker = player.getDraftNotes().getOrDefault("Cogwork Tracker", "");
+
+            return Iterables.contains(Arrays.asList(tracker.split(",")), String.valueOf(player));
         } else if (property.startsWith("life")) {
             int life = player.getLife();
             int amount = AbilityUtils.calculateAmount(source, property.substring(6), spellAbility);
