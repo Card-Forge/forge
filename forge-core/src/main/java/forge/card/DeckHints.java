@@ -29,6 +29,8 @@ public class DeckHints {
      * Enum of types of DeckHints.
      */
     public enum Type {
+        /** extra logic */
+        MODIFIER,
         /** The Ability */
         ABILITY,
         /** The Color. */
@@ -44,7 +46,8 @@ public class DeckHints {
     }
 
     private boolean valid = false;
-    public List<Pair<Type, String>> filters = null;
+    private boolean tokens = true;
+    private List<Pair<Type, String>> filters = null;
 
     /**
      * Construct a DeckHints from the SVar string.
@@ -58,6 +61,12 @@ public class DeckHints {
             for (String piece : pieces) {
                 Pair<Type, String> pair = parseHint(piece.trim());
                 if (pair != null) {
+                    if (pair.getKey() == Type.MODIFIER) {
+                        if (pair.getRight().contains("NoToken")) {
+                            tokens = false;
+                        }
+                        continue;
+                    }
                     if (filters == null) {
                         filters = new ArrayList<>();
                     }
@@ -199,7 +208,7 @@ public class DeckHints {
 
     private Iterable<PaperCard> getMatchingItems(Iterable<PaperCard> source, Predicate<CardRules> predicate, Function<PaperCard, CardRules> fn) {
         // TODO should token generators be counted differently for their potential?
-        return Iterables.filter(source, Predicates.compose(rulesWithTokens(predicate), fn));
+        return Iterables.filter(source, Predicates.compose(tokens ? rulesWithTokens(predicate) : predicate, fn));
     }
 
     public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {
@@ -216,7 +225,6 @@ public class DeckHints {
                 if (predicate.apply(card)) {
                     return true;
                 }
-                // TODO find a way to ignore some e.g. on Urza's Mine
                 for (String tok : card.getTokens()) {
                     if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
                         return true;
