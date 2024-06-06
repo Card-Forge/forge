@@ -7,4 +7,5 @@ A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target lan
 A:AB$ Untap | Cost$ tapXType<1/Gate> | SpellDescription$ Untap CARDNAME.
 SVar:X:Count$Valid Gate.YouCtrl/Twice
 DeckHints:Type$Gate
+DeckHas:Type$Citizen
 Oracle:{T}: Add two mana in any combination of colors.\n{T}: Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.\nTap an untapped Gate you control: Untap Sage of the Maze.
