@@ -223,7 +223,15 @@ public class CostAdjustment {
         // Reduce cost
         int sumGeneric = 0;
         if (sa.hasParam("ReduceCost")) {
-            sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
+            String cst = sa.getParam("ReduceCost");
+            String amt = sa.getParamOrDefault("ReduceAmount", cst);
+            int num = AbilityUtils.calculateAmount(originalCard, amt, sa);
+
+            if (sa.hasParam("ReduceAmount") && num > 0) {
+                cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
+            } else {
+                sumGeneric += num;
+            }
         }
 
         while (!reduceAbilities.isEmpty()) {
