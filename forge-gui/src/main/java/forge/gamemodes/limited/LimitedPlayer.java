@@ -152,6 +152,13 @@ public class LimitedPlayer {
             note.add(String.valueOf(bestPick.getName()));
         }
 
+        if ((playerFlags & WhispergearBoosterPeek) == WhispergearBoosterPeek) {
+            if (handleWhispergearSneak()) {
+                addLog(name() + " peeked at a booster pack with Whispergear Sneak and turned it face down.");
+                playerFlags &= ~WhispergearBoosterPeek;
+            }
+        }
+
         if (removedFromPool) {
             // Can we hide this from UI?
             return true;
@@ -468,10 +475,47 @@ public class LimitedPlayer {
         return alreadyRevealed;
     }
 
+    public boolean handleWhispergearSneak() {
+        if (Objects.equals(SGuiChoose.oneOrNone("Peek at a booster pack with Whispergear Sneak?", Lists.newArrayList("Yes", "No")), "No")) {
+            return false;
+        }
+
+        int round = 3;
+        if (draft.getRound() != 3) {
+            round = SGuiChoose.getInteger("Which round would you like to peek at?", draft.getRound(), 3);
+        }
+
+        int playerId = SGuiChoose.getInteger("Which player would you like to peek at?", 0, draft.getOpposingPlayers().length + 1);
+        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, playerId));
+        return true;
+    }
+
+    protected List<PaperCard> peekAtBoosterPack(int round, int playerNumber) {
+        if (draft.getRound() > round) {
+            // There aren't any unopened packs from earlier rounds
+            return null;
+        }
+
+        int relativeRound = round - draft.getRound();
+        LimitedPlayer player;
+        if (playerNumber == 0) {
+            player = this.draft.getHumanPlayer();
+        } else {
+            player = this.draft.getOpposingPlayers()[playerNumber - 1];
+        }
+        if (relativeRound == 0) {
+            // I want to see a pack from the current round
+            return player.packQueue.peek();
+        } else {
+            return player.unopenedPacks.peek();
+        }
+    }
+
     /*
     public void addSingleBoosterPack(boolean random) {
         // TODO Lore Seeker
         // Generate booster pack then, insert it "before" the pack we're currently drafting from
     }
+
     */
 }

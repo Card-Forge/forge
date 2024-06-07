@@ -141,4 +141,19 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         return types.containsAll(notedTypes);
     }
+
+    @Override
+    public boolean handleWhispergearSneak() {
+        // Always choose the next pack I will open
+        // What do I do with this information? Great question. I have no idea.
+        List<PaperCard> cards;
+        if (draft.getRound() == 3) {
+            // Take a peek at the pack you are about to get if its the last round
+            cards = peekAtBoosterPack(this.order, 1);
+        } else {
+            cards = peekAtBoosterPack(this.order, draft.getRound() + 1);
+        }
+
+        return true;
+    }
 }
