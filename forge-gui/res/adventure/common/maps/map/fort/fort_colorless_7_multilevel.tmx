@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="65">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1z0OwjAMQOEMWSombstVuvQGviNCKCKy0vKT2MXRGz6JAZU8JYawLimtAAAAgKHbJaVt+czjvWevt7fhH1qu+Uny6/UvDXVLed4Rq44RDbrlqMe6o7eh0A36cyJ16D2J3qHnz7pDDDt0S/QOmaCjbok6H/psRe6Y5Vx5zLkY74fH926936PvJa27iUVH684w4p7Ymgmv+eht0Q1n/Q7qjm//R71r8O6QvL+usu7Wedxbu8d9FwAAAAAwhzseddN4
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzNWm1OIzEMHWAkdqa9A3COLtA/iHPBIfhZ7d26nGO3VvtUY2zH8SQVT6qQSibxd+w3XU3D8L4ahs95MDEe1nwon+tJX787fP/k7CfxOtsybOfjfo/zed1fY+/psO5h7Z+1mc+y054bY69/v47n7gwdNaxOtqQPlwM6wF58Xcn2HsaCbFwHzycvyvcrYUu+z+P8fS10sUA2qIkJSwfLJ/tTbGi6cBl2TtwS7ta6T/CsZQPrvKvTWSN79nr6KseG2YbbMhsXlizShpoOlFtkS5zN8w8Yhewc9D/oTPl4vz7+JfB9LZC/n+fzXxm3dN4Nk+dG0QN1gj50NnKer3sO2NbyMXzUomZae7wx+Xkewt5kn61inxJ4TBJa1EzkjJV71v4tYzKKUs208t9Dq5iU2DbIf4pVryZeKfbIxqQE928UMj4Bzy84hz+XjUlt39bxqZ2NeMBH0yV7H/SIT6o/mp/kmR8Vvo+iRXyS/OgtvH7gJXBnZdA6Pj0dIuctwZL4rNEBwP3bQxfsX7t3VA9pI+qPIr7OwPML+iuZw5Eed2k9ysCqmVRjRqVmwg+lHiHSy7WCVy/3p/Nl3a3pceCXnvBqJu6QUs2EvffOmkv6RYLseC/iDf22XBeZ1UiXqcM9WAuvH4O9ZZ5l5/ZeKPEABGlrrveT0V+2QnY2jEByCKVZZikys2EUqN0/CVl7Uh3o1YtY6JWXl6q7GT5NPg9Ysvasu9nZkIM/53HghF49YmY25OjFbWdROxsSarlti6PQsL89yHQbl5+QmQ0j3LbM7U0Ff5jRg5CZFb7dC5BxWn53Z/UAonwaX8O52lK9iNppqR5RPo3nu9TBuvNrfL5UD0KETwNq+YbofSj1aP1OR+uXfs/t50PNH947HYDzaR4ifFp0PpTg73SsuCrx7bV8GnzscdbRmVx7pxPJD34fZfm00nvi6Hxo1TmpR4kzz/Jpozj7j/JsaT4kWH0R1yPCmY+TX+8JXr0cK/wo50MOuTf0qOHML8mnafVO64u4P1r3yK34NG0+lD5fcg/W8GnAa9I/Wt3lWKJHDZ9GIB28d8uoiZFYlLnD9ai9y63fAUEuXi9b/fZJ6oL8l/6I3OUcd8r/NT6t92+ftLjKvP/n0Pi0/97OU/0=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1I0KQDAUhmFzTculmuvCBUk6mRI7fuqj96mV1LQ326oKAAAAeN9Qlw1l8/rGgjX2wi2lDUaxxdtglFrOzsHc13/gvDT1/rNnbqTjMXRodeS8d5a3+035Wrpwba7C//jLvrrTMQp1pLDupyv7vQ3LNxRYi7dDqcEkZ4dig8n32BHlBpPCdpy9/4J44y4DAAAAAKDEBFRKOCU=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgDAQRcHgmcT7H83qg4Vgoqhhmam3ecWGTWsAAPC+bbmeWTtm/tTTELO2jDTEbC13GmKWlmPDaE/mZ2kBzj15q8KeU1Wl/ahwl0SFOzEq3O1R4R8FAAAAX9sBjtYFKw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmsGNAjEMReGCtpC9cYIitwHohVZohDsKaFZRZCf+jj32IJ7EBYbJj+fbjhG7Hc31h/mA4bzHrrfiQui8ItcO9imJA3XfLdPGrxcDq71ftN8zjj3nHY6Tk++5+7bvI/tHc5qjXRONmRYk1mtpsgB5hlupNXU/0PjOK6+iqZ9fHZeo/hlNiUHE3qX9xivfovNYsn9Ko1T3p+Yvuq/bwUcHQrTXZtCeC7VwvUoaw4x1vGjq9eDlrNS9RumhP/CaXyJ+lvPcp5Itx63ydlRv70f65bVeTdQc9L9esmfuyVqxResVheU8l+UcNTvPtXBzEId1nn95s/b5yoJsva6QUZME7Tw3qktUTi9reZ6R23UznscLM37ZqtcKvXoTfZ6h5qDo/iv1Mxo7baw5PVv2ZEYs4jnr55EGjUZpH4moBdHznIRHtIAArHq4h59HtD62zL9oan3oPLewlp8zzTmon6HfE7Bbv0D0eNTlGZ9b6uF0ROVhb90ZP1P/75md5xA9mevaEwXmVB4=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="383.965" y="511.303" width="31.6667" height="16"/>
+  <object id="49" template="../../obj/entry_down.tx" x="513.654" y="304.89">
+   <properties>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
+    <property name="teleportObjectId" value="79"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="391.848" y="282.871">
+   <properties>
+    <property name="enemy" value="Corrupted Red Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="383.166" y="385.704">
+   <properties>
+    <property name="enemy" value="Corrupted Blue Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,63,64,63"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/gold.tx" x="275.167" y="296.667"/>
+  <object id="60" template="../../obj/enemy.tx" x="515.083" y="355.083">
+   <properties>
+    <property name="enemy" value="Corrupted Red Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/manashards.tx" x="328" y="234"/>
+  <object id="62" template="../../obj/waypoint.tx" x="474" y="380.667"/>
+  <object id="63" template="../../obj/waypoint.tx" x="267.667" y="381"/>
+  <object id="64" template="../../obj/waypoint.tx" x="271.333" y="319.333"/>
+ </objectgroup>
+</map>

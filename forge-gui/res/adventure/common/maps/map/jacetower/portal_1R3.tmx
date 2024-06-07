@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlGEOgyAMhf1vOQHhYnIWsnPp5G6zGY2lgw4NYy9pxEj68VqLN9Pkj9jgfGrBVfq+mDwPvi/mc4+Dd+Dep8h7RyvkHFyTaG0Z03VgaudA0TlsR58tbIyV1XmEOHuHkzuCz9nxWD/mcb5R5DdCmavNkKZvs0f99cz3lXwtM14S/59rnnsrzHmdW7g9/CLTgt7fX8glLvW1pb9XVPPuhN8RnkOaV35vROjvWTL3xNyExxo73DiLrLNlzH/GCx/NcaY=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyL5GRgiMSDIwjI0wLv4mBg+DoA9pKDw4B4JwdlZnwjU1/4APl5IOwFpQkL7oGPb1rjPRwQv5Kq7yIzKn87hWmSXBw2QOE2EPZ+hsbXQPh3FFOOqVXHXGGmv52UYgD2f8mi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlV9KAzEQxkOr0uzuDYpH8c8V9KHig+IVfFPUegFFoQieQa0oVUurIEqP0Vdfbes/BBGcj82Q2TSbFuzAB9tsZn75Jpt0UFBqYPRKWtdWH/T7qGh1SnJDvvepJ+r7BOYxzeuULHdD2/pLhWEm4ntavIuUepmx44haYA1gnhgvPzrLzeMNhWD6AnVqgs1Mro91wjNqfAm/vH5fPJr5LOS1Sv65zH7L8fNOub86O7ag/XMRHcFu0/NnYG7f7OmoQC+q1MeuDrBH9FnW6gf2bi8mFsswWWDLvq9p6xU9qsZZ7cfZ2uB2c9ZfTpS6Il0Y3SSWuxsN15Zy82YTWxfrZa6vf+BekrbiVOei1iidibyGw5V+oZ3IjuP7dLnX9Hw7puoBLu8vmIvOfj0Y7p2pAWaT1B5Tbh5z4eeJ1CylTOlVRtt4bph694l/noxWEsiL7Dk7oHO0WvDfS2WR7+5RKHx58Fohj8/mbOPOYrZ7J3F+fUqpzTHOeTCi1OcycQ6L9o6ukOZoHfPi254UF17BXHGYrO3Ink/J/W+f8V+Tx2TxuZokF+Ey/wCab833
+  </data>
+ </layer>
+ <layer id="9" name="Mountains" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYECAj0youJ8ZFaODaVjEsJkDwrgAuh0gPAGHuYTAFCQzCNlLS/AeyV6YG97RwS2TmSFh8B4p3D/RMQwmI9lNT3tBoA9qdw+ZaYdSQEpak+Whrr0Dkc4H0l5sZRGtQDjQvl5oeULPtPWByPKTVvaCAL3jF5u9kTR2A7Kd6OFNS7tx2UsPu0EAABKwPKk=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytlV0KwjAMx0dFRTbw3ekhPIoIGzuDZ9i8wPwADzPmkRTm1Ad9tGUra0uTpcMflEGb5p82yep5OqeRPlx5MPc9FJbI2nfseRcg1idrho1b0O/bBTUOTFflHtjn1zPcTmhRePXEAOn3sTBiMeOVujJOcx0jJNiUwHzO7z/h2hsGny3zm7H3Yf9yb0qwEYhcS20BdgapnyG+Q2JeZJ2dgfovJjQ/lL1qn1Ss6fUP63I8tJZcEHVVIedVWRHiodxzzbp6Toy6KgPdB0XTpm3bJ3SjNr9qHxd0CRBb/ck81q1WRLxnk/eUbnvlI+Y6B0NHaG+Nf8hQUt/e80fkzcjbNaimd3P9C82pyPfGPKtKpGj/i9jyBvwAwXJE8g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../obj/treasure.tx" x="360.02" y="195.254"/>
+  <object id="52" template="../../obj/gold.tx" x="238.5" y="183.902"/>
+  <object id="57" template="../../obj/enemy.tx" x="360.667" y="229.501">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gold.tx" x="136.867" y="257.909"/>
+  <object id="63" template="../../obj/door_down.tx" x="210.691" y="15.1909">
+   <properties>
+    <property name="teleport" value="maps/map/portal_1R2.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/treasure.tx" x="259.492" y="185.519"/>
+  <object id="65" template="../../obj/gold.tx" x="376.218" y="174.852"/>
+  <object id="66" template="../../obj/enemy.tx" x="164" y="230.5">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="326.5" y="153.167">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="166" y="155.167">
+   <properties>
+    <property name="enemy" value="Minotaur"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

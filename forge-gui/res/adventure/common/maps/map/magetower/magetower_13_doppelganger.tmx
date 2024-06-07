@@ -52,11 +52,11 @@
   <object id="75" template="../../obj/enemy.tx" x="106.034" y="305.243">
    <properties>
     <property name="defeatDialog">[
-  {
-    &quot;text&quot;:&quot;The doppelganger reforms, mysteriously.&quot;,
-    &quot;loctext&quot;:&quot;&quot;,
-    &quot;options&quot;:[ { &quot;name&quot;:&quot;Leave it.&quot; } ]
-  }
+   {
+   &quot;action&quot;: [
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
 ]</property>
     <property name="effect">{
  &quot;lifeModifier&quot;: 15,

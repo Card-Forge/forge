@@ -1,6 +1,7 @@
 Name:Second Head of the Hydra
 ManaCost:no cost
 Types:Creature Hydra
+Colors:green,blue
 PT:1/4
 K:Defender
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game and your opponents can't win the game.
