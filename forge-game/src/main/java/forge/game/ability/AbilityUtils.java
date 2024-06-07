@@ -725,9 +725,11 @@ public class AbilityUtils {
                     list = Iterables.filter((Iterable<?>) root.getTriggeringObjects().getOrDefault(
                             (AbilityKey.fromString(calcX[0].substring(14))), new CardCollection()), Card.class);
                 }
-                else if (calcX[0].startsWith("Triggered")) {
+                // CardTriggered<AbilityKey> used to bypass AbilityKeys that could also be Player above
+                else if (calcX[0].startsWith("Triggered") || (calcX[0].startsWith("CardTriggered"))) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9))));
+                    final int s = calcX[0].startsWith("Triggered") ? 9 : 13;
+                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s))));
                 }
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -2311,6 +2313,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("TotalDamageReceivedThisTurn")) {
             return doXMath(c.getAssignedDamage(), expr, c, ctb);
+        }
+        if (sq[0].equals("ExcessDamageReceivedThisTurn")) {
+            return doXMath(c.getExcessDamageThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("MaxOppDamageThisTurn")) {

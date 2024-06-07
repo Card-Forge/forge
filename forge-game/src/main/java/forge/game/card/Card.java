@@ -269,6 +269,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
     private boolean hasBeenDealtExcessDamageThisTurn;
+    private int excessDamageThisTurnAmount = 0;
 
     // regeneration
     private int shieldCount = 0;
@@ -6081,6 +6082,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setHasBeenDealtExcessDamageThisTurn(final boolean bool) {
         this.hasBeenDealtExcessDamageThisTurn = bool;
     }
+    public final void logExcessDamage(final int n) {
+        excessDamageThisTurnAmount += n;
+    }
+    public final int getExcessDamageThisTurn() {
+        return excessDamageThisTurnAmount;
+    }
+    public final void setExcessDamageReceivedThisTurn(final int n) {
+        excessDamageThisTurnAmount = n;
+    }
+    private final void resetExcessDamage() {
+        hasBeenDealtExcessDamageThisTurn = false;
+        excessDamageThisTurnAmount = 0;
+    }
 
     public final Map<Card, Integer> getAssignedDamageMap() {
         return assignedDamageMap;
@@ -7075,7 +7089,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDamage(0);
         }
         setHasBeenDealtDeathtouchDamage(false);
-        setHasBeenDealtExcessDamageThisTurn(false);
+        resetExcessDamage();
         setRegeneratedThisTurn(0);
         resetShieldCount();
         setBecameTargetThisTurn(false);

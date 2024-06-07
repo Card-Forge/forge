@@ -307,6 +307,7 @@ public class CardCopyService {
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
+        newCopy.setExcessDamageReceivedThisTurn(copyFrom.getExcessDamageThisTurn());
 
         // these are LKI already
         newCopy.getBlockedThisTurn().addAll(copyFrom.getBlockedThisTurn());
