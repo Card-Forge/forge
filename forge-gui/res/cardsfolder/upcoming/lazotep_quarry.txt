@@ -1,0 +1,12 @@
+Name:Lazotep Quarry
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T Sac<1/Creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ ChangeZone | Cost$ X 2 T Sac<1/Desert> | RememberLKI$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouOwn+cmcEQX | ChangeNum$ 1 | SubAbility$ DBCopy | AILogic$ TheScarabGod | SorcerySpeed$ True | SpellDescription$ Exile target creature card with mana value X from your graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie. Activate only as a sorcery.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | SetColor$ Black | SetCreatureTypes$ Zombie | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Mana.Colorless|Sacrifice|Token & Type$Zombie & Color$Black
+DeckHints:Color$Colorless & Keyword$Devoid & Type$Desert
+Oracle:{T}: Add {C}.\n{T}, Sacrifice a creature: Add one mana of any color.\n{X}{2}, {T}, Sacrifice a Desert: Exile target creature card with mana value X from your graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie. Activate only as a sorcery.

@@ -1,0 +1,8 @@
+Name:Horizon of Progress
+ManaCost:no cost
+Types:Land
+A:AB$ ManaReflected | Cost$ T PayLife<1> | ColorOrType$ Type | Valid$ Land.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any type that a land you control could produce.
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 1 | Optional$ True | SpellDescription$ You may put a land card from your hand onto the battlefield tapped.
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Pay 1 life: Add one mana of any type that a land you control could produce.\n{3}, {T}: You may put a land card from your hand onto the battlefield tapped.\n{1}, {T}: Sacrifice Horizon of Progress: Draw a card.

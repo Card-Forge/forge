@@ -1,0 +1,16 @@
+Name:Unstable Amulet
+ManaCost:1 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a spell from anywhere other than your hand, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
+A:AB$ ChangeZone | Cost$ T PayEnergy<2> | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBCleanup | StackDescription$ None | SpellDescription$ Exile the top card of your library.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | SubAbility$ DBExile 
+SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT
+#AILogic tag not quite right?
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | Duration$ Permanent | ForgetOnMoved$ Exile | ImprintOnHost$ True | StackDescription$ SpellDescription | SpellDescription$ You may play it until you exile another card with CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup2
+SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card until you exile another card with EFFECTSOURCE.
+Oracle:When Unstable Amulet enters the battlefield, you get {E}{E} (two energy counters).\nWhenever you cast a spell from anywhere other than your hand, Unstable Amulet deals 1 damage to each opponent.\n{T}, Pay {E}{E}: Exile the top card of your library. You may play it until you exile another card with Unstable Amulet.

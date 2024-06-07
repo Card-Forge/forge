@@ -1,0 +1,8 @@
+Name:Inversion Behemoth
+ManaCost:2 C C
+Types:Creature Eldrazi
+PT:2/9
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, switch the power and toughness of each of any number of target creatures until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select any number of target creatures | KW$ HIDDEN CARDNAME's power and toughness are switched
+SVar:X:Count$Valid Creature
+Oracle:At the beginning of combat on your turn, switch the power and toughness of each of any number of target creatures until end of turn.
