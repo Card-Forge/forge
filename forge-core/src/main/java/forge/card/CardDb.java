@@ -888,14 +888,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public int getArtCount(String cardName, String setCode) {
+        return getArtCount(cardName, setCode, null);
+    }
+    public int getArtCount(String cardName, String setCode, String functionalVariantName) {
         if (cardName == null || setCode == null)
             return 0;
-        Collection<PaperCard> cardsInSet = getAllCards(cardName, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return card.getEdition().equalsIgnoreCase(setCode);
-            }
-        });
+        Predicate<PaperCard> predicate = card -> card.getEdition().equalsIgnoreCase(setCode);
+        if(functionalVariantName != null && !functionalVariantName.equals(IPaperCard.NO_FUNCTIONAL_VARIANT)) {
+            predicate = Predicates.and(predicate, card -> functionalVariantName.equals(card.getFunctionalVariant()));
+        }
+        Collection<PaperCard> cardsInSet = getAllCards(cardName, predicate);
         return cardsInSet.size();
     }
 
@@ -1159,7 +1161,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (!hasBadSetInfo) {
-            int artCount = getArtCount(card.getName(), card.getEdition());
+            int artCount = getArtCount(card.getName(), card.getEdition(), card.getFunctionalVariant());
             sb.append(CardDb.NameSetSeparator).append(card.getEdition());
             if (artCount >= IPaperCard.DEFAULT_ART_INDEX) {
                 sb.append(CardDb.NameSetSeparator).append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
