@@ -31,6 +31,7 @@ import java.util.stream.IntStream;
 import forge.GameCommand;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostPart;
+import forge.game.cost.CostPartMana;
 import forge.game.event.GameEventCardForetold;
 import forge.util.Localizer;
 
@@ -60,6 +61,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
+import forge.game.cost.CostCollectEvidence;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -2622,7 +2624,7 @@ public class CardFactoryUtil {
 
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
-                desc += ". This ability costs {1} less to activate for each instant and sorcery card in your graveyard.";
+                desc += ". This ability costs {1} less to activate for each " + k[4] + ".";
             }
             effect += "| SpellDescription$ " + desc + " (" + inst.getReminderText() + ")";
 
@@ -2682,8 +2684,29 @@ public class CardFactoryUtil {
             sbAttach.append(" | Bestow$ True | ValidTgts$ Creature");
 
             final SpellAbility sa = AbilityFactory.getAbility(sbAttach.toString(), card);
-            sa.setDescription("Bestow " + ManaCostParser.parse(cost) +
-                    " (" + inst.getReminderText() + ")");
+            final StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Bestow");
+            final Cost bCost = new Cost(cost, false);
+            final boolean onlyMana = bCost.isOnlyManaCost();
+            String remTxt = inst.getReminderText();
+            if (!onlyMana) {
+                final StringBuilder sbRem = new StringBuilder();
+                sbRem.append("To pay this bestow cost, ");
+                int i = 0;
+                for (CostPart part : bCost.getCostParts()) {
+                    if (part instanceof CostPartMana) sbRem.append("pay ").append(part);
+                    else if (part instanceof CostCollectEvidence) {
+                        sbRem.append("exile cards with total mana value ").append(part.getAmount());
+                        sbRem.append(" or greater from your graveyard");
+                    } else sbRem.append(part);
+                    sbRem.append(i + 1 == bCost.getCostParts().size() ? "." : " and ");
+                    i++;
+                }
+                remTxt = sbRem.toString();   
+            }
+            sbDesc.append(onlyMana ? " " : "—").append(bCost.toSimpleString()).append(!onlyMana ? "." : "");
+            sbDesc.append(" (").append(remTxt).append(")");
+            sa.setDescription(sbDesc.toString());
             sa.setStackDescription("Bestow - " + card.getName());
             sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
@@ -3446,11 +3469,12 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
+            final String extra = k.length > 2 ? "| " + k[2] : "";
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
                     "| SorcerySpeed$ True | Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
-                    "| SpellDescription$ (" + inst.getReminderText() + ")";
+                    "| SpellDescription$ (" + inst.getReminderText() + ")" + extra;
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
 

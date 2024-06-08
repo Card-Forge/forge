@@ -350,7 +350,10 @@ public enum DeckFormat {
                 return TextUtil.concatWithSpace("contains a Custom Card:", cp.getKey(), "\nPlease Enable Custom Cards in Forge Preferences to use this deck.");
             // Might cause issues since it ignores "Special" Cards
             if (simpleCard == null) {
-                return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
+                simpleCard = StaticData.instance().getVariantCards().getCard(cp.getKey());
+                if (simpleCard == null) {
+                    return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());
+                }
             }
 
             if (canHaveAnyNumberOf(simpleCard)) {

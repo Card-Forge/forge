@@ -1,0 +1,8 @@
+Name:Wonderscape Sage
+ManaCost:1 U
+Types:Creature Moonfolk Wizard
+PT:1/3
+K:Flying
+A:AB$ Draw | Cost$ T Return<1/Land> | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card. Then discard a card unless that land had a nonbasic land type.
+SVar:DBDiscard:DB$ Discard | ConditionDefined$ Returned | ConditionPresent$ Land.hasANonBasicLandType | ConditionCompare$ EQ0 | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Flying\n{T}, Return a land you control to its owner's hand: Draw a card. Then discard a card unless that land had a nonbasic land type.

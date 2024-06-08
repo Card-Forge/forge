@@ -151,7 +151,7 @@ ScryfallCode=BRC
 145 U Liquimetal Torque @Brian Snõddy
 146 M Lithoform Engine @Colin Boyer
 147 R Metalwork Colossus @Jaime Jones
-148 C Mind Stone @Adam Rex
+148 U Mind Stone @Adam Rex
 149 R Mirrorworks @John Avon
 150 C Mycosynth Wellspring @David Rapoza
 151 R Myr Battlesphere @Franz Vohwinkel

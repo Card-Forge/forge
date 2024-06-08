@@ -1,0 +1,7 @@
+Name:Eldrazi Angel Token
+ManaCost:no cost
+Types:Creature Eldrazi Angel
+PT:4/4
+K:Flying
+K:Vigilance
+Oracle:Flying\nVigilance

@@ -631,14 +631,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
             resolvePerType(sa, placer, counterType, counterAmount, table, true);
         }
 
-        int totalAdded = table.totalValues();
+        table.replaceCounterEffect(game, sa, true);
 
+        int totalAdded = table.totalValues();
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
             card.addRemembered(Integer.valueOf(totalAdded));
         }
-
-        table.replaceCounterEffect(game, sa, true);
 
         if (sa.hasParam("RemovePhase")) {
             for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {

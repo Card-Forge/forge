@@ -19,9 +19,11 @@ package forge.card;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.mana.IParserManaCost;
@@ -388,6 +390,12 @@ public final class CardRules implements ICardCharacteristics {
     private int deltaHand;
     private int deltaLife;
 
+    private List<String> tokens;
+
+    public List<String> getTokens() {
+        return tokens;
+    }
+
     public int getHand() { return deltaHand; }
     public int getLife() { return deltaLife; }
     public void setVanguardProperties(String pt) {
@@ -432,6 +440,8 @@ public final class CardRules implements ICardCharacteristics {
         private String normalizedName = "";
         private Set<String> supportedFunctionalVariants = null;
 
+        private List<String> tokens = Lists.newArrayList();
+
         // fields to build CardAiHints
         private boolean removedFromAIDecks = false;
         private boolean removedFromRandomDecks = false;
@@ -466,6 +476,7 @@ public final class CardRules implements ICardCharacteristics {
             this.partnerWith = "";
             this.normalizedName = "";
             this.supportedFunctionalVariants = null;
+            this.tokens = Lists.newArrayList();
         }
 
         /**
@@ -487,6 +498,7 @@ public final class CardRules implements ICardCharacteristics {
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
+            result.tokens = tokens.isEmpty() ? Collections.emptyList() : tokens;
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
             result.supportedFunctionalVariants = this.supportedFunctionalVariants;
@@ -522,6 +534,18 @@ public final class CardRules implements ICardCharacteristics {
             int colonPos = line.indexOf(':');
             String key = colonPos > 0 ? line.substring(0, colonPos) : line;
             String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
+
+            if (value != null) {
+                int tokIdx = value.indexOf("TokenScript$");
+                if (tokIdx > 0) {
+                    String tokenParam = value.substring(tokIdx + 12).trim();
+                    int endIdx = tokenParam.indexOf("|");
+                    if (endIdx > 0) {
+                        tokenParam = tokenParam.substring(0, endIdx).trim();
+                    }
+                    this.tokens.addAll(Arrays.asList(tokenParam.split(",")));
+                }
+            }
 
             switch (key.charAt(0)) {
                 case 'A':

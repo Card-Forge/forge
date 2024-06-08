@@ -1,0 +1,10 @@
+Name:Wumpus Aberration
+ManaCost:3 G
+Types:Creature Eldrazi Beast
+PT:6/6
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ CastSA>Count$Adamant_1.Colorless.0.1 | Execute$ TrigChangeZone | TriggerDescription$ When you cast this spell, if {C} wasn't spent to cast it, target opponent may put a creature card from their hand onto the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Creature | ChangeNum$ 1 | Optional$ True
+K:Trample
+DeckHints:Ability$Mana.Colorless
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell, if {C} wasn't spent to cast it, target opponent may put a creature card from their hand onto the battlefield.\nTrample

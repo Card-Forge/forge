@@ -382,6 +382,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public boolean hasABasicLandType() {
         return Iterables.any(this.subtypes, Predicates.IS_BASIC_LAND_TYPE);
     }
+    @Override
+    public boolean hasANonBasicLandType() {
+        return !Collections.disjoint(this.subtypes, getNonBasicTypes());
+    }
 
     @Override
     public boolean isPermanent() {
