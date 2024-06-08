@@ -1,0 +1,8 @@
+Name:Exterminator Magmarch
+ManaCost:2 B R
+Types:Artifact Creature Phyrexian Construct
+PT:5/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigCopy | ValidActivatingPlayer$ You | IsSingleTarget$ True | TriggerZones$ Battlefield | TargetsValid$ Permanent.nonLand+OppCtrl+inZoneBattlefield | CanTargetOtherCondition$ Permanent.nonLand+OppCtrl+!ControlledBy TargetedController | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets only a single nonland permanent an opponent controls, if another opponent controls one or more nonland permanents that spell could target, choose one of those permanents. Copy that spell. The copy targets the chosen permanent.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ You | CopyForEachCanTarget$ Permanent.nonLand+OppCtrl+!ControlledBy TriggeredSpellAbilityTargetsOrController | ChooseOnlyOne$ True
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+Oracle:Whenever you cast an instant or sorcery spell that targets only a single nonland permanent an opponent controls, if another opponent controls one or more nonland permanents that spell could target, choose one of those permanents. Copy that spell. The copy targets the chosen permanent.\n{1}{B}: Regenerate Exterminator Magmarch.
