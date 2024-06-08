@@ -2649,6 +2649,10 @@ public class AbilityUtils {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
         }
 
+        if (sq[0].startsWith("AttractionsYouVisitedThisTurn")) {
+            return doXMath(player.getAttractionsVisitedThisTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("AllTypes")) {
             List<Card> cards = getDefinedCards(c, sq[1], ctb);
 

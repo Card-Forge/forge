@@ -346,9 +346,9 @@ public class CardFactory {
             card.setColor(combinedColor);
             card.setType(new CardType(rules.getType()));
 
-            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
-            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
-            //card.setText(combinedText);
+            // Combined text based on Oracle text -  might not be necessary
+            String combinedText = String.format("(%s) %s\r\n\r\n(%s) %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            card.getState(CardStateName.Original).setOracleText(combinedText);
         }
         return card;
     }
@@ -377,7 +377,7 @@ public class CardFactory {
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
         c.getCurrentState().setBaseDefense(face.getDefense());
 
-        c.setOracleText(face.getOracleText());
+        c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -454,7 +454,7 @@ public class CardFactory {
             c.getCurrentState().setBaseDefense(variant.getDefense());
 
         if (variant.getOracleText() != null)
-            c.setOracleText(variant.getOracleText());
+            c.getCurrentState().setOracleText(variant.getOracleText());
 
         if (variant.getType() != null) {
             for(String type : variant.getType())

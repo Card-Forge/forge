@@ -1298,8 +1298,8 @@ public class CardView extends GameEntityView {
         public String getOracleText() {
             return get(TrackableProperty.OracleText);
         }
-        void updateOracleText(Card c) {
-            set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n\r\n").trim());
+        void setOracleText(String oracleText) {
+            set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
         }
 
         public String getRulesText() {

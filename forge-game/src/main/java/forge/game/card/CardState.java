@@ -58,6 +58,7 @@ public class CardState extends GameObject implements IHasSVars {
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
+    private String oracleText = "";
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -193,6 +194,15 @@ public class CardState extends GameObject implements IHasSVars {
         this.color = color;
         view.updateColors(card);
     }
+
+    public String getOracleText() {
+        return oracleText;
+    }
+    public void setOracleText(final String oracleText) {
+        this.oracleText = oracleText;
+        view.setOracleText(oracleText);
+    }
+
 
     public final int getBasePower() {
         return basePower;
@@ -595,6 +605,7 @@ public class CardState extends GameObject implements IHasSVars {
         setType(source.type);
         setManaCost(source.getManaCost());
         setColor(source.getColor());
+        setOracleText(source.getOracleText());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         setBaseLoyalty(source.getBaseLoyalty());

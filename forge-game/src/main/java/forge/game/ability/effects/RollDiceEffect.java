@@ -221,6 +221,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> rolls = new ArrayList<>();
         int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
 
+        if (sa.hasParam("UseHighestRoll")) {
+            total = Collections.max(rolls);
+        } else if (sa.hasParam("UseDifferenceBetweenRolls")) {
+            total = Collections.max(rolls) - Collections.min(rolls);
+        }
+
         if (sa.hasParam("StoreResults")) {
             host.addStoredRolls(rolls);
         }
@@ -242,9 +248,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 }
                 sa.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
             }
-        }
-        if (sa.hasParam("UseHighestRoll")) {
-            total = Collections.max(rolls);
         }
 
         if (sa.hasParam("SubsForEach")) {

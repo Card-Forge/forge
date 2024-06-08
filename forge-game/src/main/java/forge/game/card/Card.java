@@ -277,8 +277,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Table<Long, Long, Pair<Integer,Integer>> newPT = TreeBasedTable.create(); // Layer 7b
     private Table<Long, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create(); // Layer 7c
 
-    private String oracleText = "";
-
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
     private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
@@ -2506,7 +2504,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -3498,7 +3496,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCopiedPermanent(final Card c) {
         if (copiedPermanent == c) { return; }
         copiedPermanent = c;
-        currentState.getView().updateOracleText(this);
+        currentState.setOracleText(c.getOracleText());
     }
 
     public final boolean isCopiedSpell() {
@@ -7244,7 +7242,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setRules(CardRules r) {
         cardRules = r;
         currentState.getView().updateRulesText(r, getType());
-        currentState.getView().updateOracleText(this);
     }
 
     public boolean isCommander() {
@@ -7573,15 +7570,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public String getOracleText() {
-        CardRules rules = cardRules;
-        if (copiedPermanent != null) { //return oracle text of copied permanent if applicable
-            rules = copiedPermanent.getRules();
-        }
-        return rules != null ? rules.getOracleText() : oracleText;
+        return currentState.getOracleText();
     }
-    public void setOracleText(final String oracleText0) {
-        oracleText = oracleText0;
-        currentState.getView().updateOracleText(this);
+    public void setOracleText(final String oracleText) {
+        currentState.setOracleText(oracleText);
     }
 
     @Override
