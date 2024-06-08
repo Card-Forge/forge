@@ -92,6 +92,7 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
         partnerWith = newRules.partnerWith;
+        tokens = newRules.tokens;
     }
 
     private static byte calculateColorIdentity(final ICardFace face) {
@@ -386,7 +387,7 @@ public final class CardRules implements ICardCharacteristics {
     private int deltaHand;
     private int deltaLife;
 
-    private List<String> tokens;
+    private List<String> tokens = Collections.emptyList();
 
     public List<String> getTokens() {
         return tokens;
@@ -484,7 +485,9 @@ public final class CardRules implements ICardCharacteristics {
             result.setNormalizedName(this.normalizedName);
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
-            result.tokens = tokens.isEmpty() ? Collections.emptyList() : tokens;
+            if (!tokens.isEmpty()) {
+                result.tokens = tokens;
+            }
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
             return result;
@@ -742,7 +745,10 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean hasStartOfKeyword(final String k) {
-        for (final String inst : mainPart.getKeywords()) {
+        return hasStartOfKeyword(k, mainPart);
+    }
+    public boolean hasStartOfKeyword(final String k, ICardFace cf) {
+        for (final String inst : cf.getKeywords()) {
             final String[] parts = inst.split(":");
             if (parts[0].equals(k)) {
                 return true;
