@@ -3484,7 +3484,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCopiedPermanent(final Card c) {
         if (copiedPermanent == c) { return; }
         copiedPermanent = c;
-        currentState.setOracleText(c.getOracleText());
+        if(c != null)
+            currentState.setOracleText(c.getOracleText());
+        //Could fetch the card rules oracle text in an "else" clause here,
+        //but CardRules isn't aware of the card's state. May be better to
+        //just stash the original oracle text if this comes up.
     }
 
     public final boolean isCopiedSpell() {
