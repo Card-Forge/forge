@@ -1,6 +1,6 @@
 Name:Immolation Shaman
 ManaCost:1 R
-Types:Creature Viashino Shaman
+Types:Creature Lizard Shaman
 PT:1/3
 T:Mode$ AbilityCast | ValidActivatingPlayer$ Opponent | ValidCard$ Artifact.inZoneBattlefield,Creature.inZoneBattlefield,Land.inZoneBattlefield | ValidSA$ SpellAbility.nonManaAbility | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, CARDNAME deals 1 damage to that player.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator

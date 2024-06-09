@@ -1,5 +1,5 @@
 Name:Harrier Naga
 ManaCost:2 G
-Types:Creature Naga Warrior
+Types:Creature Snake Warrior
 PT:3/3
 Oracle:

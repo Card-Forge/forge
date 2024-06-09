@@ -1,6 +1,6 @@
 Name:Sidisi, Brood Tyrant
 ManaCost:1 B G U
-Types:Legendary Creature Naga Shaman
+Types:Legendary Creature Snake Shaman
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill three cards.

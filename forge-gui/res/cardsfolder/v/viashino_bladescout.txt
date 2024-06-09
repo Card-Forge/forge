@@ -1,6 +1,6 @@
 Name:Viashino Bladescout
 ManaCost:1 R R
-Types:Creature Viashino Scout
+Types:Creature Lizard Scout
 PT:2/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gains first strike until end of turn.

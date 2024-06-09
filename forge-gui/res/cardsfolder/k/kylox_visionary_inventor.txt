@@ -1,6 +1,6 @@
 Name:Kylox, Visionary Inventor
 ManaCost:5 U R
-Types:Legendary Creature Viashino Artificer
+Types:Legendary Creature Lizard Artificer
 PT:4/4
 K:Menace
 K:Ward:2

@@ -1,6 +1,6 @@
 Name:Thunder-Thrash Elder
 ManaCost:2 R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:1/1
 K:Devour:3
 Oracle:Devour 3 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with three times that many +1/+1 counters on it.)

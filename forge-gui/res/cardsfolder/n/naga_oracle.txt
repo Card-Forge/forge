@@ -1,6 +1,6 @@
 Name:Naga Oracle
 ManaCost:3 U
-Types:Creature Naga Cleric
+Types:Creature Snake Cleric
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:TrigSurveil:DB$ Surveil | Amount$ 3

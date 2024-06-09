@@ -1,6 +1,6 @@
 Name:Sidisi, Undead Vizier
 ManaCost:3 B B
-Types:Legendary Creature Zombie Naga
+Types:Legendary Creature Zombie Snake
 PT:4/6
 K:Deathtouch
 K:Exploit

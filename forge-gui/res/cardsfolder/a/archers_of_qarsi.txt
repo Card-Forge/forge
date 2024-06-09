@@ -1,6 +1,6 @@
 Name:Archers of Qarsi
 ManaCost:3 G
-Types:Creature Naga Archer
+Types:Creature Snake Archer
 PT:5/2
 K:Defender
 K:Reach

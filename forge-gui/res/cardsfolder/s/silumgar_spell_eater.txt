@@ -1,6 +1,6 @@
 Name:Silumgar Spell-Eater
 ManaCost:2 U
-Types:Creature Naga Wizard
+Types:Creature Snake Wizard
 PT:2/3
 K:Megamorph:4 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target spell unless its controller pays {3}.
