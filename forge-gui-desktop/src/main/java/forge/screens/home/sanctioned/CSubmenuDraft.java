@@ -196,7 +196,7 @@ public enum CSubmenuDraft implements ICDoc {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
 
-                aiMap.put(i, aiDeck);
+                aiMap.put(i + 1, aiDeck);
             }
         }
 
