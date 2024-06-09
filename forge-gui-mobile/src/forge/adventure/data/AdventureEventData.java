@@ -426,7 +426,7 @@ public class AdventureEventData implements Serializable {
         if (eventStatus == AdventureEventController.EventStatus.Ready) {
             currentRound = 1;
             eventStatus = AdventureEventController.EventStatus.Started;
-        } 
+        }
     }
 
     public void generateParticipants(int numberOfOpponents) {
