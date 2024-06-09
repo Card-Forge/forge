@@ -1,6 +1,6 @@
 Name:Atraxa, Grand Unifier
 ManaCost:3 G W U B
-Types:Legendary Creature Phyrexian Angel Horror
+Types:Legendary Creature Phyrexian Angel
 PT:7/7
 K:Flying
 K:Vigilance
