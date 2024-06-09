@@ -184,7 +184,7 @@ public enum CSubmenuDraft implements ICDoc {
             }
 
             List<Integer> aiIndices = Lists.newArrayList();
-            for(int i = 1; i <= maxDecks; i++) {
+            for(int i = 0; i < maxDecks; i++) {
                 aiIndices.add(i);
             }
             Collections.shuffle(aiIndices);

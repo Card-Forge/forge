@@ -101,4 +101,9 @@ public class BoosterDraftTest implements IBoosterDraft {
     public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {
         return null;
     }
+
+    @Override
+    public LimitedPlayer getPlayer(int i) {
+        return null;
+    }
 }

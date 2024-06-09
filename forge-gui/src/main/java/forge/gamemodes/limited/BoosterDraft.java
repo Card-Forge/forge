@@ -417,6 +417,15 @@ public class BoosterDraft implements IBoosterDraft {
         return this.localPlayer;
     }
 
+    @Override
+    public LimitedPlayer getPlayer(int i) {
+        if (i == 0) {
+            return this.localPlayer;
+        }
+
+        return this.players.get(i - 1);
+    }
+
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
