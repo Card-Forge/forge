@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7Ae8y+tmupjJJBeUlVVVVVV1UcHQxwgzA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzdmGtuwjAQhPMzlnqtpoiT9Gak0FvRpjlGY4kRw7B2/AjUqqWVIG3sbx+etRlc1w3/0I591325q332f8/E9rYYj3NjjNNiH33bjBrDw8I2N8ClMfRc44XN1+Wpf14cj7TWUdb137/dNa/4/qxc8/on+ow9CxY/9svnneR7/+B48no+h7wf/Pcfd312Fl59tnU8OVeIxSQ8fj34oPwhH7bSSkvfNKavF2bPMLt7zdm7232kz7fiw3waUytn4AXzYDDW8jEHa5rGNHctvF9Ti1bdhXKOHKfOzTHMeY/N0gjNnWpyie+lOWYfQ/1qcmV9TPdWaf0hj7k+rmkx+55bgzjPnSgHlo9ggI6h52lvw1zKUBpDq/bZR3CpvqDnae/g/+Ez7E7eZx/eX9brNjR/6O85I+QH6ijEp3s2Z2gPwzPtdbH35xU+X7dj5pxjf9sjMAc0h7UoNriGPF+IMYXz0N/3rRS9subEXLkaqjpg5aHEdM4a/bP2y9ZnjpoerL5ude/RfVjDCF9DbKznqWtYdVPao3x+Y3FTnU1ljZ0/cnMQendNz2OcXIM5dRPqX3q3tNgsPbY4Y2fLlNqAHvFaere02FiPVZOtu3GJjq7VcWiE7iDKaN0XaozX4B5r9VsrT5PkouS8nZpz7rHWXSl2r9U5nmV+n+u+aOn3NcRSObfog4/ibC2GytlqDGGIYet8NWc7tV8ehEju
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1+EKgjAQB/D7Umrga/XBDz5R9DLVNOitAhN6iRYtGCJ46u424f+DoYzdPLfpGBHAdlXu+o6aBWjbKz6ryYleBdE957U/l7L5+Iwtlc3taEtX/Op6RlwmmZTnO3a9yy9FT5vXgzmv2sbmqPbuT4rrDMK6CPa9E+wb4lvz7+bG3kbqNPZc465Ta5j7Hma6yWJ+DqG3kES3JGoC93cI3B9AClL9fv+uK2KzGfHDcdA6d2xdGzsBgAHJMwtADB9FdxHc
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="61" template="../../obj/door_up.tx" x="319.688" y="637.409">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B1.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/treasure.tx" x="335" y="107"/>
+  <object id="63" template="../../obj/gold.tx" x="341.5" y="187.5"/>
+  <object id="64" template="../../obj/treasure.tx" x="242" y="44.5"/>
+  <object id="65" template="../../obj/treasure.tx" x="277.5" y="44"/>
+  <object id="66" template="../../obj/gold.tx" x="261.5" y="41"/>
+  <object id="67" template="../../obj/gold.tx" x="217" y="248.5"/>
+  <object id="68" template="../../obj/enemy.tx" x="160" y="138">
+   <properties>
+    <property name="enemy" value="Werewolf"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="233.5" y="137">
+   <properties>
+    <property name="enemy" value="Werewolf"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="296" y="153">
+   <properties>
+    <property name="enemy" value="Werewolf"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="377.5" y="152.5">
+   <properties>
+    <property name="enemy" value="Werewolf"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

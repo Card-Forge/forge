@@ -1,7 +1,5 @@
 [metadata]
 Name=plant
-[Avatar]
-
 [Main]
 1 Avenger of Zendikar|C18|1
 2 Carnivorous Plant|MED|1
@@ -24,12 +22,4 @@ Name=plant
 4 Wall of Blossoms|JMP|1
 2 Wall of Brambles|30A|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

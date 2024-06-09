@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Cuthbert's Ka-tet 2
-Title=Cuthbert Allgood of Roland's Ka-tet
-Difficulty=medium
-Description=WGR flicker and direct damage theme deck
-Icon=Cuthbert Allgood 2.jpg
-Deck Type=constructed
 [Main]
 2 Acidic Slime
 2 Ajani's Welcome

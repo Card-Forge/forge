@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztWFFuwyAMzd/gYGujXrTZslu1a3KMBW3WjGNjg0m/GsmqCsQ8Pz/A4RSH4fSyp9hnGIZ5s68g99+j3H80tu/tNz03BoPUr8XUy85/c8OTMGCuRqEfYz4KJ+bmbdjjmJn+69a2bG3T9vsR9rh7Yn3E3znSnFPI57yGPYbUthLuuXc5nXj4w/7GmOPA+X9n4luJL8ynByP2h/HgOSnHa8FfGrfEnP/S+BZs3DjQ4KXCrwcb5FDKWW0MMBbWtBcbzll6JF5wDJqWShptNfAp4cMxaJxALD24q9EJxKBxYh1Xy53mDzjU8msdZzXIh8UfjLVyaFnnltxa9WLBh316c2zZW2q5rlnrUny0HrGuNdBWKR48xopxDv8GZyyui2p0AtoqzUsxarnRHmse6Llfims0jksGNRqtkfBj4RDPedQ+Tblv1V8pHsxzyx7ziHn9Y90HtO8TTgOePca633L8SZxz3ygt50hrDrQ9kGp0aqwTWvZRy/o9N/htzZXGDfcO9vts/VlrT+8ZR2O1+rDkjmqgVt9crC37n/QOvYPo8e1Wcy+haYLi8+iPalm6E8JtWu3J3eF46mi6n14INnqnQDWL8XPa8+qP43AOef0ltd8iX6/10h/FCPdR0r2QdE/E1UWes0PCiO9dsO/0f4n7/7iN6s77bdTbIKYp5Lhfdrz9AFKOVls=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2EEOgCAMBEAuivr/HyjGZ3ryqEToWtvuXE2alUCppkRkx155Pn6SwodBOwBYFqyFWKsVUJNiYt+zadIOEMiiHUCIlT2zaQcAan037zMX0eUA1ZWc69/4e9/lDNiv9n/Bgmh3DKIfFMFad9/5LfPo3BNEyFOf8XB+KI4T2uUGRA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../obj/door_right.tx" x="0.16667" y="336.333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23C9.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/enemy.tx" x="184.25" y="569">
+   <properties>
+    <property name="enemy" value="Red Beast"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="309.5" y="570.5">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="396.5" y="570.25">
+   <properties>
+    <property name="enemy" value="Beholder"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="168" y="120.25">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="273.75" y="105.5">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="456.75" y="105.5">
+   <properties>
+    <property name="enemy" value="Troll"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="503.25" y="317"/>
+  <object id="69" template="../../obj/treasure.tx" x="503.25" y="343.5"/>
+  <object id="70" template="../../obj/gold.tx" x="504" y="328"/>
+  <object id="71" template="../../obj/gold.tx" x="343.818" y="326.545"/>
+  <object id="72" template="../../obj/treasure.tx" x="343.455" y="344.364"/>
+  <object id="73" template="../../obj/treasure.tx" x="248" y="541.25"/>
+  <object id="74" template="../../obj/gold.tx" x="233.25" y="138"/>
+ </objectgroup>
+</map>

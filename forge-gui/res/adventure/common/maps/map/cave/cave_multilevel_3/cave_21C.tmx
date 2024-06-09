@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="85">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../../tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEOgCAQRUEqEy9mye29jwUNscDuozjFtPt2Sah7KRUGzq1J92Z3k/10t5+fvnfUXvW9n/qzun/41/d2stu3010AAAC+7XjBDgCs7QKLZ34b
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzlmF1Ow0AMhPOEshIILtVS9YFzcDNK+bkUZeEYrBVGGHc3TRR7kMpKVpqH6MvY3qk369R16xmxKSFrNfO5pQHulsjc9133/s19K9fnnsuU9VDuP8+QKZFLPPY/XFaOJW6VXmZfWa5ofupjddv6snRvGkxw90G6kWPp449Kj0kuInTnNPCwd2r6o3t8rNZR7BbzusRNYJ9nVVup9a4f7l/K/Wtwnwt7p3wStde9Fr2/Wrlg9NkYmzkbaD9lcrVm9iwENrPGNt9MtvUXVr6tf7O4qO9f9LXW/F88RGtm+bXtacYcaLViec/7og1a5PchHc8HEUx9VmPNu3aer+VWz4SRdYzK7RSuZl5cDeHJzel4tpKlfSKCW5ttGefjWl8xvMlyz+37A/xIvKl2Fo/yXz03MfoJHtzyQU8mWGO82n717Jmx5aV1ChPnUC/PrzHvGv0D/1vigXh+7P8Fa2ueYXEjZsM5er1iag97+9KpmcWyD078nOrfSFjap9S4pX1Jf0P3XO2r5DfTyDvAl3Btvcs2+ezpU/mw74FaR3ERNa/RmqO5WWlmzHRaF/a+cO8vf0ft2S+8tDTb
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFEKwjAQRKOgqYIn6lHEm3gXhap4Rr/sYBbWQslPO1OSPihNILDtNDu7aQgrS+ShfoAK2LQhbFt+3Fsf8y6Ia7zI8Ro3Zmn+HszVmoO9KG6TXzIZ8K2YxrXmF4j5JbOhqh1sX/Eo9V4pF+yrmn2MzU79AGTg1UrfZINeROHVc/Zel/7q3JzlF590Nz1ZfnEOPz2VNVeRM0dyPFWuANVZRYFpXIMPM8+CwJ9FSu7RWe/m85K5X1XfDnGfxHiHdGfnSRyMu7GFE3E9/c+X8r+Zqbvv06y2M/Z5rk9j1l7zEOQYU/uSa0FJfAFOwBvn
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../obj/door_up.tx" x="303" y="958">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../obj/door_down.tx" x="207.333" y="18.3333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21D.tmx"/>
+    <property name="teleportObjectId" value="83"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../obj/enemy.tx" x="142" y="762">
+   <properties>
+    <property name="enemy" value="Gorgon 2"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../obj/enemy.tx" x="324" y="266">
+   <properties>
+    <property name="enemy" value="Gorgon 2"/>
+    <property name="speedModifier" type="float" value="12"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../obj/manashards.tx" x="206" y="239"/>
+  <object id="78" template="../../../obj/manashards.tx" x="282" y="510"/>
+  <object id="79" template="../../../obj/booster.tx" x="352" y="296">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MM3&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM3&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MM3&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

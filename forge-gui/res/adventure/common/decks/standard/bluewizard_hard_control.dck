@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Kojak 3
-Title=Kojak
-Difficulty=hard
-Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
-Icon=Kojak.jpg
-Deck Type=constructed
 [main]
 21 Island|M10
 1 Mox Sapphire

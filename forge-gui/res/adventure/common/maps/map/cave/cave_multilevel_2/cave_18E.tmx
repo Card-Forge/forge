@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
+  </data>
+ </layer>
+ <layer id="7" name="Background 2" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjY2BgYBvFJGGGQeAGWvplsPqPFHeR44fB4m9K3YFLP6nmDpbwGAxhisusoRBG9HAjre0YCuE8lOITAED6C48=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNVEEOwjAM67F5GBPaRweDX00rewZULMIEpw0niGRt6uY6TdwMktLwp5hzStcc//cCiPIYt8Yi/T3m/V8bEX2P29NG3vR4v8kTGC3to3zyMcYOr3I2WC9BbcZHLtPVs1pNdpZv+apta105q/ianq71T41Dh78Ab5V2/TVn7bfmxsLTtb2K9N3DKb9g98D7pLXF3CvOuV3jCGwPy75v6zxFfM3ovGG+0lwidbTzpvYevdC7QyPJhc0MptMKb+4wv3q8OaAT9R/z65Tfn5qT3ln0GHK8dc8L1q8beId9Y9zo+i9wByt+ygw=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6OApJ4RmJUFtJJT/mJN8e0D0bxL0wQBI30oOBgZVEuz/jsQG6SUFoIcLTD8pfifWbpBfl5BuLIp+EMAWl/jspoadhADMDmLSGSGAbAY+tyP72Y0I9cQAUtIPNf2My+6fVDIbH8AWx6TmI2oBYtMbCMTQyc7HWMQOM2DGex0vfnOwhSlMjFB4g+TvEWkmqYDSPDPQAADQtSGH
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../obj/door_right.tx" x="0.350854" y="145.147">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_2/cave_18C.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="61" template="../../../obj/gold.tx" x="444.333" y="224.667"/>
+  <object id="62" template="../../../obj/gold.tx" x="425" y="124.667"/>
+  <object id="63" template="../../../obj/manashards.tx" x="155" y="51"/>
+ </objectgroup>
+</map>

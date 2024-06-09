@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Tezzeret's Reinforged 1
-Title=Tezzeret, Master Artificer
-Difficulty=easy
-Description=Mono-blue artifact and equipment theme deck
-Icon=Tezzeret, Master Artificer 1.jpg
-Deck Type=constructed
 [Main]
 2 Acquisition Octopus
 2 Armguard Familiar

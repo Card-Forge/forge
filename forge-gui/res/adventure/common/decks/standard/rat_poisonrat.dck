@@ -1,7 +1,5 @@
 [metadata]
 Name=rat_poisonrat
-[Avatar]
-
 [Main]
 4 Blightbelly Rat|ONE|1
 1 Drainpipe Vermin|JMP|1
@@ -17,12 +15,4 @@ Name=rat_poisonrat
 4 Typhoid Rats|J21|1
 2 Vat Emergence|ONE|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-
