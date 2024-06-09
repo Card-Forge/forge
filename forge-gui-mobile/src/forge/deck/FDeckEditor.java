@@ -346,7 +346,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }
         } else {
             if (editorType == EditorType.Draft || editorType == EditorType.QuestDraft) {
-                tabPages[0].hideTab(); //hide Draft Pack page if editing existing draft deck
+                tabPages.get(0).hideTab(); //hide Draft Pack page if editing existing draft deck
             }
             editorType.getController().load(editDeckPath, editDeckName);
         }

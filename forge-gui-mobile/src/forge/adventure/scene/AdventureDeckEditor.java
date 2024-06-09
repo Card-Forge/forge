@@ -1405,7 +1405,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             selected++;
             if (selected > 2)
                 selected = 0;
-            setSelectedPage(tabPages[selected]);
+            setSelectedPage(tabPages.get(selected));
             if (getSelectedPage() instanceof CatalogPage) {
                 ((CatalogPage) getSelectedPage()).cardManager.getConfig().setPileBy(null);
                 ((CatalogPage) getSelectedPage()).cardManager.setHideFilters(true);

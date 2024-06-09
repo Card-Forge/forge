@@ -60,7 +60,7 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
                 return !fromHomeScreen; //don't show back button if launched from home screen
             }
         });
-        settingsPage = (SettingsPage) tabPages[0];
+        settingsPage = (SettingsPage) tabPages.get(0);
     }
 
     public FScreen getLandscapeBackdropScreen() {
