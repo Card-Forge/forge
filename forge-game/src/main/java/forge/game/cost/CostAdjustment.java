@@ -387,7 +387,7 @@ public class CostAdjustment {
                 CardPredicates.restriction(validStr, p, sa.getHostCard(), sa),
                 CardPredicates.canBeSacrificedBy(sa, false));
 
-        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, validStr);
+        final CardCollectionView toSacList = p.getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, validStr);
 
         if (toSacList.isEmpty()) {
             return;
