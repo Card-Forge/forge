@@ -156,9 +156,9 @@ public class StartScene extends UIScene {
         try {
             File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file();
             File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-            ZipUtil.zip(source, target);
+            ZipUtil.zip(source, target, ZipUtil.backupAdvFile);
             zipDialog = createGenericDialog("",
-                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupFile,
+                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupAdvFile,
                     Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
         } catch (IOException e) {
             zipDialog = createGenericDialog("",
@@ -170,7 +170,7 @@ public class StartScene extends UIScene {
         return true;
     }
     public boolean restoreBackup() {
-        File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupFile).file();
+        File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupAdvFile).file();
         File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file().getParentFile();
         if (unzipDialog == null) {
             unzipDialog = createGenericDialog("",

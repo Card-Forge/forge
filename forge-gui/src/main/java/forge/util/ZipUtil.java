@@ -1,7 +1,6 @@
 package forge.util;
 
 import java.io.*;
-//import java.time.Instant;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -10,13 +9,10 @@ import java.util.zip.ZipOutputStream;
 *  https://www.baeldung.com/java-compress-and-uncompress
 */
 public class ZipUtil {
-    public static String backupFile = "forge.adv";
-    public static void zip(File source, File dest) throws IOException {
-        //String now = Instant.now().toString() + "-";
-        FileOutputStream fos = new FileOutputStream(dest.getAbsolutePath() + File.separator /*+ now*/ + backupFile);
+    public static String backupAdvFile = "forge.adv";
+    public static void zip(File source, File dest, String name) throws IOException {
+        FileOutputStream fos = new FileOutputStream(dest.getAbsolutePath() + File.separator + name);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
-
-        //File fileToZip = new File(sourceFile);
         zipFile(source, source.getName(), zipOut);
         zipOut.close();
         fos.close();
