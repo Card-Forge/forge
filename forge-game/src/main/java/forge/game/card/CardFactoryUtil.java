@@ -3875,7 +3875,8 @@ public class CardFactoryUtil {
                 final String[] k = keyword.split(":");
 
                 sbDesc.append(" from ").append(k[2]);
-                sbValid.append("| ValidSource$ ").append(k[1]);
+                final String param = k[2].contains("abilities") ? "ValidSA$ " : "ValidSource$ ";
+                sbValid.append("| ").append(param).append(k[1]);
             }
 
             String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"
