@@ -273,6 +273,7 @@ public class PlayerStatisticScene extends UIScene {
                 if (g != null) //skip variants
                     continue;
             }
+            a.updateTrophyImage();
             TextureRegion textureRegion = new TextureRegion(((FBufferedImage) a.getImage()).getTexture());
             textureRegion.flip(false, true);
             Image image = new Image(textureRegion);

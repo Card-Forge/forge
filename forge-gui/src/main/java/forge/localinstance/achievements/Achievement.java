@@ -128,7 +128,7 @@ public abstract class Achievement {
         return earnedSpecial() || earnedMythic() || earnedRare() || earnedUncommon() || earnedCommon();
     }
 
-    private void updateTrophyImage() {
+    public void updateTrophyImage() {
         FSkinProp background;
         float opacity = 1;
         if (earnedSpecial()) {
