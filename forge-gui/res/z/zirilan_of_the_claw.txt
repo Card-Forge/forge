@@ -1,0 +1,9 @@
+Name:Zirilan of the Claw
+ManaCost:3 R R
+Types:Legendary Creature Lizard Shaman
+PT:3/4
+A:AB$ ChangeZone | Cost$ 1 R R T | Origin$ Library | Destination$ Battlefield | ChangeType$ Dragon | ChangeNum$ 1 | Shuffle$ True | SubAbility$ DBPump | RememberChanged$ True | AILogic$ BeforeCombat | SpellDescription$ Search your library for a Dragon permanent card, put that card onto the battlefield, then shuffle. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Dragon
+Oracle:{1}{R}{R}, {T}: Search your library for a Dragon permanent card, put that card onto the battlefield, then shuffle. That Dragon gains haste until end of turn. Exile it at the beginning of the next end step.

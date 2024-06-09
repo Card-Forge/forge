@@ -1,0 +1,7 @@
+Name:Weaver of Currents
+ManaCost:1 G U
+Types:Creature Snake Druid
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+DeckHas:Ability$Mana.Colorless
+Oracle:{T}: Add {C}{C}.

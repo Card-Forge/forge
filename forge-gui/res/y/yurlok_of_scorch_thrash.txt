@@ -1,0 +1,9 @@
+Name:Yurlok of Scorch Thrash
+ManaCost:1 B R G
+Types:Legendary Creature Lizard Shaman
+PT:4/4
+K:Vigilance
+S:Mode$ ManaBurn | Description$ A player losing unspent mana causes that player to lose that much life.
+A:AB$ Mana | Cost$ 1 T | Produced$ B R G | Defined$ Player | SpellDescription$ Each player adds {B}{R}{G}.
+AI:RemoveDeck:All
+Oracle:Vigilance\nA player losing unspent mana causes that player to lose that much life.\n{1}, {T}: Each player adds {B}{R}{G}.

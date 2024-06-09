@@ -1,0 +1,14 @@
+Name:Ziatora's Envoy
+ManaCost:1 B R G
+Types:Creature Lizard Warrior
+PT:5/4
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top card of your library. You may play a land from the top of your library or cast a spell with mana value less than or equal to the damage dealt from the top of your library without paying its mana cost. If you don't, put that card into your hand.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Optional$ True | Defined$ Remembered | ValidSA$ SpellAbility.Land,Spell.cmcLEX | WithoutManaCost$ True | ForgetPlayed$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+K:Blitz:2 B R G
+DeckHas:Ability$Sacrifice
+Oracle:Trample\nWhenever Ziatora's Envoy deals combat damage to a player, look at the top card of your library. You may play a land from the top of your library or cast a spell with mana value less than or equal to the damage dealt from the top of your library without paying its mana cost. If you don't, put that card into your hand.\nBlitz {2}{B}{R}{G}
