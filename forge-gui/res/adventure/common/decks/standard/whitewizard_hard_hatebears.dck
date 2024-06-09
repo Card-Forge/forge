@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Odysseus 3
-Title=Odysseus
-Difficulty=hard
-Description=Mono W Hate Bear deck
-Icon=Odysseus.jpg
-Deck Type=constructed
 [main]
 21 Plains
 1 Karakas

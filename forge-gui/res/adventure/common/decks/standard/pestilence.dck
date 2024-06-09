@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Micheal Myers's Blades of All Hallow's 3
-Title=Micheal Myers
-Difficulty=hard
-Description=BR equipment and artifact token theme deck
-Icon=Micheal Myers 3.jpg
-Deck Type=constructed
 [Main]
 2 All Hallow's Eve
 1 Armix, Filigree Thrasher

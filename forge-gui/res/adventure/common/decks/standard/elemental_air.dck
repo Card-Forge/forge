@@ -1,7 +1,5 @@
 [metadata]
 Name=elemental_air
-[Avatar]
-
 [Main]
 2 Air Elemental|W17|1
 2 Air Servant|MM2|1
@@ -21,12 +19,4 @@ Name=elemental_air
 2 Void Stalker|M13|1
 3 Wind Zendikon|WWK|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Ajani's Enchanted Ascension 1
-Title=Ajani Goldmane
-Difficulty=easy
-Description=Mono-white life gain, enchantments, and Ajani planeswalkers theme deck
-Icon=Ajani Goldmane 1.jpg
-Deck Type=constructed
 [Main]
 1 Ajani Goldmane
 1 Ajani Steadfast

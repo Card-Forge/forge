@@ -1,7 +1,5 @@
 [metadata]
 Name=Juggernaut
-[Avatar]
-
 [Main]
 2 Arcbound Crusher|HOP|1
 4 Automated Artificer|NEO|1
@@ -19,12 +17,4 @@ Name=Juggernaut
 4 Wasteland|OLGC|2
 18 Wastes|SLD|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

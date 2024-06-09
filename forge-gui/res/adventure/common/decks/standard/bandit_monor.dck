@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Carnage 2
-Title=Carnage
-Difficulty=medium
-Description=Mono R Grand Melee deck with Circle of Flame
-Icon=Carnage.jpg
-Deck Type=constructed
 [main]
 23 Mountain
 4 Grand Melee
@@ -32,4 +26,3 @@ Deck Type=constructed
 1 Thran War Machine
 1 Ulamog's Crusher
 1 Utvara Scalper
-[sideboard]

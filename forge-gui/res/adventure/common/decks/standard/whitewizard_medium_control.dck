@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Colossus 2
-Title=Colossus
-Difficulty=medium
-Description=Mono W control
-Icon=Colossus.jpg
-Deck Type=constructed
 [main]
 21 Plains|ISD
 1 Kjeldoran Outpost

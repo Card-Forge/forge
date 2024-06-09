@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Surtr 3
-Title=Surtr
-Difficulty=hard
-Description=Mono W Armageddon deck
-Icon=Surtr.jpg
-Deck Type=constructed
 [main]
 5 Plains
 4 Flagstones of Trokair

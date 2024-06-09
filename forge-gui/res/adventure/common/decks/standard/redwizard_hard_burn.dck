@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Jaya's Conflagration 3
-Title=Jaya Ballard
-Difficulty=hard
-Description=Mono-red elemental and burn themed deck
-Icon=Jaya Ballard 3.jpg
-Deck Type=constructed
 [Main]
 3 Browbeat
 2 Chandra's Incinerator

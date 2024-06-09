@@ -1,7 +1,5 @@
 [metadata]
 Name=peasantrole
-[Avatar]
-
 [Main]
 2 Ambitious Farmhand|MID|1
 1 Ellivere of the Wild Court|WOC|1
@@ -32,12 +30,4 @@ Name=peasantrole
 1 Syr Armont, the Redeemer|WOE|1
 1 Well Rested|PIP|2
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

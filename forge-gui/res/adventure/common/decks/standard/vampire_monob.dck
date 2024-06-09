@@ -1,7 +1,5 @@
 [metadata]
 Name=vampire_monob
-[Avatar]
-
 [Main]
 1 Baron Sengir|PRM|1
 2 Bloodletter of Aclazotz|LCI|2
@@ -35,12 +33,4 @@ Name=vampire_monob
 4 Vicious Conquistador|XLN|1
 1 Yahenni, Undying Partisan|KLR|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

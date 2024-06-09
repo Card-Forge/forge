@@ -6,6 +6,4 @@ SVar:GiveSuspend:DB$ Pump | Defined$ Remembered | KW$ Suspend | PumpZone$ Exile 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Vampire.YouCtrl | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ YourLife | SVarCompare$ LT10 | AddKeyword$ Lifelink | Description$ As long as your life total is lower than 10, Vampires you control have +1/+1  and have lifelink. 
 SVar:YourLife:Count$YourLifeTotal
-Oracle:
-{B}{B},{M}{M}{M}{M},Pay 4 life:Conjure a Sorin planeswalker into exile with three time counters, it gains suspend. Activate this ability only if your library contains 20 or more vampires and only once each game.  
-As long as your life total is lower than 10, Vampires you control have +1/+1  and have lifelink. 
+Oracle:{B}{B},{M}{M}{M}{M},Pay 4 life: Conjure a Sorin planeswalker into exile with three time counters, it gains suspend. Activate this ability only if your library contains 20 or more vampires and only once each game.  \nAs long as your life total is lower than 10, Vampires you control have +1/+1 and have lifelink. 

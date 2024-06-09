@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Abraham Lincoln 2
-Title=Abraham Lincoln
-Difficulty=medium
-Description=WUR flying creatures deck with Flamebreak and Earthquake
-Icon=Abraham Lincoln.jpg
-Deck Type=constructed
 [main]
 1 Plateau
 1 Flooded Strand

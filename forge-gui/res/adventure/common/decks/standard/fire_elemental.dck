@@ -1,7 +1,5 @@
 [metadata]
 Name=fire_elemental
-[Avatar]
-
 [Main]
 1 Ashmouth Hound|JMP|1
 1 Bogardan Firefiend|HOP|1
@@ -45,12 +43,4 @@ Name=fire_elemental
 1 Sunflare Shaman|MOR|1
 1 Underworld Rage-Hound|THB|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-
