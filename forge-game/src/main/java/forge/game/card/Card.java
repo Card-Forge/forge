@@ -2259,7 +2259,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
                     sbLong.append("Madness ").append(this.getManaCost()).append(" (").append(inst.getReminderText());
                     sbLong.append(")").append("\r\n");
-                } else if (keyword.startsWith("Emerge") || keyword.startsWith("Reflect")) {
+                } else if (keyword.startsWith("Reflect")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
@@ -2326,6 +2326,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         }
                     }
                     sbLong.append("\r\n");
+                } else if (keyword.startsWith("Emerge")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[0]);
+                    if (k.length > 2) {
+                        sbLong.append(" from ").append(k[2].toLowerCase());
+                    }
+                    sbLong.append(" ").append(ManaCostParser.parse(k[1]));
+                    sbLong.append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append("\r\n");
+
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
