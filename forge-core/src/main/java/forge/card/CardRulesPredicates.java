@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.util.CardTranslation;
 import forge.util.ComparableOp;
@@ -186,7 +187,7 @@ public final class CardRulesPredicates {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
-                return card.hasStartOfKeyword(keyword);
+                return Iterables.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
             }
         };
     }
