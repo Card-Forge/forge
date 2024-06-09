@@ -38,10 +38,6 @@ public class LimitedPlayer {
     private static final int WhispergearBoosterPeek = 1 << 10;
     private static final int IllusionaryInformantPeek = 1 << 11;
 
-    private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
-                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive
-                                    | GrinderRemoveFromPool;
-
     private int playerFlags = 0;
 
     private final List<PaperCard> faceUp = Lists.newArrayList();
