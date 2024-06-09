@@ -127,7 +127,7 @@ public class NewGameScene extends MenuScene {
             modeNames[i] = modes.get(i).getName();
         mode.setTextList(modeNames);
 
-        gender.setTextList(new String[]{Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale")});
+        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale")});
         gender.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -217,7 +217,7 @@ public class NewGameScene extends MenuScene {
             }
             Forge.switchScene(GameScene.instance());
         };
-        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
+        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, Forge.getLocalizer().getMessage("lblGeneratingWorld")));
         return true;
     }
 

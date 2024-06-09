@@ -64,6 +64,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     final Rectangle tempBoundingRect = new Rectangle();
     final Vector2 enemyMoveVector = new Vector2();
 
+    boolean collided = false;
     @Override
     protected void onActing(float delta) {
         if (isPaused() || MapStage.getInstance().isDialogOnlyInput())
@@ -110,6 +111,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
 
                 if (player.collideWith(mob)) {
+                    if (collided)
+                        return;
+                    collided = true;
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -126,6 +130,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         DuelScene duelScene = DuelScene.instance();
                         FThreads.invokeInEdtNowOrLater(() -> {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
+                                collided = false;
                                 duelScene.initDuels(player, mob);
                                 Forge.switchScene(duelScene);
                             }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.getName()));

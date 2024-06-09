@@ -426,7 +426,7 @@ public class AdventureEventData implements Serializable {
         if (eventStatus == AdventureEventController.EventStatus.Ready) {
             currentRound = 1;
             eventStatus = AdventureEventController.EventStatus.Started;
-        }
+        } 
     }
 
     public void generateParticipants(int numberOfOpponents) {
@@ -599,7 +599,7 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += String.format("Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n");
+            description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
             description += "Finishing event will award an unsellable copy of each card in your Jumpstart deck.";
         }
         return description;

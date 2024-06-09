@@ -1106,10 +1106,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             if (canOnlyBePartnerCommander(card)) {
                 return; //don't auto-change commander unexpectedly
             }
+            DeckSectionPage main = getMainDeckPage();
+            if (main == null)
+                return;
             if (!cardManager.isInfinite()) {
                 removeCard(card);
             }
-            getMainDeckPage().addCard(card);
+            main.addCard(card);
         }
 
         @Override
