@@ -1,0 +1,7 @@
+Name:Conversion Apparatus
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ PutCounter | Cost$ 3 T | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | AILogic$ AtOppEOT | SpellDescription$ You get {E}{E}{E} (three energy counters).
+A:AB$ Mana | Cost$ T PayEnergy<3> | Produced$ Combo Any | Amount$ 3 | SpellDescription$ Add three mana in any combination of colors.
+Oracle:{T}: Add {C}.\n{3}, {T}: You get {E}{E}{E} (three energy counters).\n{T}, Pay {E}{E}{E}: Add three mana in any combination of colors.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="104">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="104">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,14 +33,14 @@
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYCAOpEgicLIkKp+WgEkKgRmlUPm0Bv9V8fOpDfKAYZkPxAlAnAjESTQOWxjgAYYlLxD/A9r3H2QnlrBtEae+vcoSmHgwAhMm2pp/Gc18MwrtI1b/zgEKb1rYS4v0SQhcIxDO+Nw0jZGB4TqN09VIAaXMELqEmfZ2TWdEpdHFhwoAADvQFp0=
   </data>
  </layer>
  <layer id="8" name="AboveClutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFgw0ckhgYexfwYIq9FaO/O2gBjhlC8Eixl80IgpHBcTq4A5u97EbY1dIa0MO/2ACyf38B8e+BccagALTy+wlDCIaBOBrZgw44jCB4qAMAghcPXA==
   </data>

@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Black Abott 3
-Title=Black Abott
-Difficulty=hard
-Description=Mono B Sacrifice deck with Reassembling Skeleton and Vampiric Rites
-Icon=Black Abott.jpg
-Deck Type=constructed
 [main]
 23 Swamp|ONS
 1 Mox Jet
@@ -26,4 +20,3 @@ Deck Type=constructed
 2 Go for the Throat
 1 Geth's Verdict
 1 Hymn to Tourach
-[sideboard]

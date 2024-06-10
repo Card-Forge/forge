@@ -1,15 +1,10 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
+import forge.card.mana.ManaCost;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.mana.ManaCost;
+import java.util.*;
+import java.util.Map.Entry;
 
 //
 // DO NOT AUTOFORMAT / CHECKSTYLE THIS FILE

@@ -38,7 +38,6 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-
         if ("Never".equals(aiLogic)) {
             return false;
         }

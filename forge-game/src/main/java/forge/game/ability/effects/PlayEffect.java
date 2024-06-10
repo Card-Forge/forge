@@ -163,9 +163,7 @@ public class PlayEffect extends SpellAbilityEffect {
             String name = source.getNamedCard();
             if (name.trim().isEmpty()) {
                 name = controller.getNamedCard();
-                if(name.trim().isEmpty()) {
-                    return;
-                }
+                if (name.trim().isEmpty()) return;
             }
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack

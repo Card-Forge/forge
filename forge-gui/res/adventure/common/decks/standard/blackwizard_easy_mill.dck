@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Agent K 1
-Title=Agent K
-Difficulty=easy
-Description=Mono B mill deck
-Icon=Agent K.jpg
-Deck Type=constructed
 [main]
 23 Swamp
 1 Bojuka Bog

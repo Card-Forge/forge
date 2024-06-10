@@ -1,24 +1,33 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
+import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
+import forge.util.ZipUtil;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * First scene after the splash screen
  */
 public class StartScene extends UIScene {
-
     private static StartScene object;
-    Dialog exitDialog;
+    Dialog exitDialog, backupDialog, zipDialog, unzipDialog;
     TextraButton saveButton, resumeButton, continueButton;
+    TypingLabel version = Controls.newTypingLabel("{GRADIENT}[%80]" + Forge.CURRENT_VERSION + "{ENDGRADIENT}");
 
 
     public StartScene() {
@@ -30,6 +39,7 @@ public class StartScene extends UIScene {
         ui.onButtonPress("Resume", StartScene.this::Resume);
         ui.onButtonPress("Continue", StartScene.this::Continue);
         ui.onButtonPress("Settings", StartScene.this::settings);
+        ui.onButtonPress("Backup", StartScene.this::backup);
         ui.onButtonPress("Exit", StartScene.this::Exit);
         ui.onButtonPress("Switch", StartScene.this::switchToClassic);
 
@@ -40,6 +50,9 @@ public class StartScene extends UIScene {
 
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
+        version.setHeight(5);
+        version.skipToTheEnd();
+        ui.addActor(version);
     }
 
     public static StartScene instance() {
@@ -55,7 +68,7 @@ public class StartScene extends UIScene {
 
     public boolean Save() {
         if (TileMapScene.instance().currentMap().isInMap()) {
-            Dialog noSave = createGenericDialog("", "!!GAME NOT SAVED!!\nManual saving is only available on the world map","OK",null, null, null);
+            Dialog noSave = createGenericDialog("", Forge.getLocalizer().getMessage("lblGameNotSaved"), Forge.getLocalizer().getMessage("lblOK"),null, null, null);
             showDialog(noSave);
         } else {
             SaveLoadScene.instance().setMode(SaveLoadScene.Modes.Save);
@@ -79,20 +92,27 @@ public class StartScene extends UIScene {
         return true;
     }
 
+    boolean loaded = false;
+
     public boolean Continue() {
         final String lastActiveSave = Config.instance().getSettingData().lastActiveSave;
 
         if (WorldSave.isSafeFile(lastActiveSave)) {
+            if (loaded)
+                return true;
+            loaded = true;
             try {
                 Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    loaded = false;
                     if (WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
                         SoundSystem.instance.changeBackgroundTrack();
                         Forge.switchScene(GameScene.instance());
                     } else {
                         Forge.clearTransitionScreen();
                     }
-                }, null, false, true, "Loading World..."));
+                }, null, false, true, Forge.getLocalizer().getMessage("lblLoadingWorld")));
             } catch (Exception e) {
+                loaded = false;
                 Forge.clearTransitionScreen();
             }
         }
@@ -102,6 +122,86 @@ public class StartScene extends UIScene {
 
     public boolean settings() {
         Forge.switchScene(SettingsScene.instance());
+        return true;
+    }
+
+    public boolean backup() {
+        if (backupDialog == null) {
+            backupDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblData"),
+                    null, Forge.getLocalizer().getMessage("lblBackup"),
+                    Forge.getLocalizer().getMessage("lblRestore"),
+                    () -> {
+                        removeDialog();
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                generateBackup();
+                            }
+                        }, 0.2f);
+                    },
+                    () -> {
+                        removeDialog();
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                restoreBackup();
+                            }
+                        }, 0.2f);
+                    }, true, Forge.getLocalizer().getMessage("lblCancel"));
+        }
+        showDialog(backupDialog);
+        return true;
+    }
+    public boolean generateBackup() {
+        try {
+            File source = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file();
+            File target = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+            ZipUtil.zip(source, target, ZipUtil.backupAdvFile);
+            zipDialog = createGenericDialog("",
+                    Forge.getLocalizer().getMessage("lblSaveLocation") + "\n" + target.getAbsolutePath() + File.separator + ZipUtil.backupAdvFile,
+                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+        } catch (IOException e) {
+            zipDialog = createGenericDialog("",
+                    Forge.getLocalizer().getMessage("lblErrorSavingFile") + "\n\n" + e.getMessage(),
+                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null);
+        } finally {
+            showDialog(zipDialog);
+        }
+        return true;
+    }
+    public boolean restoreBackup() {
+        File source = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir() + ZipUtil.backupAdvFile).file();
+        File target = new FileHandle(ForgeProfileProperties.getUserDir() + "/adventure/Shandalar").file().getParentFile();
+        if (unzipDialog == null) {
+            unzipDialog = createGenericDialog("",
+                    Forge.getLocalizer().getMessage("lblDoYouWantToRestoreBackup"),
+                    Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"),
+                    () -> {
+                        removeDialog();
+                        Timer.schedule(new Timer.Task() {
+                            @Override
+                            public void run() {
+                                extract(source, target);
+                            }
+                        }, 0.2f);
+                    }, this::removeDialog);
+        }
+        showDialog(unzipDialog);
+        return true;
+    }
+    public boolean extract(File source, File target) {
+        String title = "", val = "";
+        try {
+            val = Forge.getLocalizer().getMessage("lblFiles") + ":\n" + ZipUtil.unzip(source, target);
+        } catch (IOException e) {
+            title = Forge.getLocalizer().getMessage("lblError");
+            val = e.getMessage();
+        } finally {
+            Config.instance().getSettingData().lastActiveSave = null;
+            Config.instance().saveSettings();
+            showDialog(createGenericDialog(title, val,
+                    Forge.getLocalizer().getMessage("lblOK"), null, this::removeDialog, null));
+        }
         return true;
     }
 
@@ -123,16 +223,7 @@ public class StartScene extends UIScene {
         Forge.switchToClassic();
     }
 
-    @Override
-    public void enter() {
-        boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
-        if (hasSaveButton) {
-            TileMapScene scene = TileMapScene.instance();
-            hasSaveButton = !scene.currentMap().isInMap() || scene.isAutoHealLocation();
-        }
-        saveButton.setVisible(hasSaveButton);
-        saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
-
+    public void updateResumeContinue() {
         boolean hasResumeButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         resumeButton.setVisible(hasResumeButton);
 
@@ -146,7 +237,18 @@ public class StartScene extends UIScene {
         } else {
             continueButton.setVisible(false);
         }
+    }
 
+    @Override
+    public void enter() {
+        boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
+        if (hasSaveButton) {
+            TileMapScene scene = TileMapScene.instance();
+            hasSaveButton = !scene.currentMap().isInMap() || scene.isAutoHealLocation();
+        }
+        saveButton.setVisible(hasSaveButton);
+        saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
+        updateResumeContinue();
 
         if (Forge.createNewAdventureMap) {
             this.NewGame();

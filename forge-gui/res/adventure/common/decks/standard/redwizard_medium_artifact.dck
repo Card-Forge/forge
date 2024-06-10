@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Iron Man 2
-Title=Iron Man
-Difficulty=medium
-Description=Mono R Artifact deck
-Icon=Iron Man.jpg
-Deck Type=constructed
 [main]
 12 Mountain
 4 Great Furnace

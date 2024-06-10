@@ -1,0 +1,10 @@
+Name:Planar Genesis
+ManaCost:G U
+Types:Instant
+A:SP$ PeekAndReveal | Defined$ You | PeekAmount$ 4 | NoReveal$ True | RememberPeeked$ True | SubAbility$ PickOne | StackDescription$ SpellDescription | SpellDescription$ Look at the top four cards of your library. You may put a land card from among them onto the battlefield tapped. If you don't, put a card from among them into your hand. Put the rest on the bottom of your library in a random order.
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a card to put into hand. If it's a land, you may put it onto the battlefield tapped instead. | Choices$ Card.IsRemembered | Mandatory$ True | ChoiceZone$ Library | Reveal$ False | SubAbility$ DBChangeZoneBattlefield
+SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Defined$ ChosenCard | ConditionDefined$ Remembered | ConditionPresent$ Card.Land+ChosenCard | ConditionCompare$ EQ1 | Tapped$ True | Optional$ True | SubAbility$ DBChangeZoneHand | StackDescription$ None
+SVar:DBChangeZoneHand:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.ChosenCard+inZoneBattlefield | ConditionCompare$ EQ0 | SubAbility$ DBRestRandomOrder | StackDescription$ None
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:Look at the top four cards of your library. You may put a land card from among them onto the battlefield tapped. If you don't, put a card from among them into your hand. Put the rest on the bottom of your library in a random order.

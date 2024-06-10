@@ -1,0 +1,8 @@
+Name:Fetid Gargantua
+ManaCost:4 B
+Types:Creature Horror
+PT:4/4
+K:Adapt:2:2 B
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigLoseLife | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, you may draw two cards. If you do, lose 2 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ Draw<2/You> | LifeAmount$ 2
+Oracle:{2}{B}: Adapt 2. (If this creature has no +1/+1 counters on it, put two +1/+1 counters on it.)\nWhenever one or more +1/+1 counters are put on Fetid Gargantua, you may draw two cards. If you do, lose 2 life.

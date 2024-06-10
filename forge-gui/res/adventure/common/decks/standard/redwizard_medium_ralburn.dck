@@ -1,12 +1,5 @@
-[duel]
 [metadata]
 Name=Rambo 2
-Title=Rambo
-Difficulty=medium
-Description=Mono R Aggro deck
-Icon=Rambo.jpg
-Deck Type=constructed
-Profile=Reckless
 [main]
 21 Mountain
 4 Vexing Devil

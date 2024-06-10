@@ -1,0 +1,9 @@
+Name:Tempt with Mayhem
+ManaCost:1 R R
+Types:Instant
+A:SP$ RepeatEach | ValidTgts$ Instant,Sorcery | TgtZone$ Stack | TgtPrompt$ Select target instant or sorcery spell | RepeatSubAbility$ DBCopy | RepeatPlayers$ Player.Opponent | SubAbility$ DBCopySelf | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to copy the targeted spell? | SpellDescription$ Tempting offer — Choose target instant or sorcery spell. Each opponent may copy that spell and may choose new targets for the copy they control. You copy that spell once plus an additional time for each opponent who copied the spell this way. You may choose new targets for the copies you control.
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Targeted | Controller$ Remembered | Amount$ 1 | MayChooseTarget$ True | RememberCopies$ True
+SVar:DBCopySelf:DB$ CopySpellAbility | Defined$ Targeted | Amount$ X | MayChooseTarget$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountRememberedController$Amount/Plus.1
+Oracle:Tempting offer — Choose target instant or sorcery spell. Each opponent may copy that spell and may choose new targets for the copy they control. You copy that spell once plus an additional time for each opponent who copied the spell this way. You may choose new targets for the copies you control.

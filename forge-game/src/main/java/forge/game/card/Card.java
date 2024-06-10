@@ -20,22 +20,13 @@ package forge.game.card;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
-
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.CardDb.CardArtPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.CardTraitBase;
-import forge.game.Direction;
-import forge.game.EvenOdd;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameStage;
-import forge.game.IHasSVars;
+import forge.game.*;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -48,12 +39,7 @@ import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.keyword.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
-import forge.game.replacement.ReplaceMoved;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
-import forge.game.replacement.ReplacementLayer;
-import forge.game.replacement.ReplacementResult;
-import forge.game.replacement.ReplacementType;
+import forge.game.replacement.*;
 import forge.game.spellability.*;
 import forge.game.staticability.*;
 import forge.game.trigger.Trigger;
@@ -126,7 +112,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private GameEntity entityAttachedTo;
 
-    private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
+    private Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects
 
@@ -190,6 +176,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final CardChangedWords changedTextTypes = new CardChangedWords();
 
     private final Set<Object> rememberedObjects = Sets.newLinkedHashSet();
+    private final List<String> draftActions = Lists.newArrayList();
     private Map<Player, String> flipResult;
     private List<Integer> storedRolls;
 
@@ -409,6 +396,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChangedTypes(this);
         view.updateSickness(this);
         view.updateClassLevel(this);
+        view.updateDraftAction(this);
     }
 
     public boolean changeToState(final CardStateName state) {
@@ -1657,7 +1645,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         long timestamp = game.getNextTimestamp();
         counterTypeTimestamps.put(counterType, timestamp);
-        addChangedCardKeywords(ImmutableList.of(counterType.toString()), null, false, timestamp, 0, updateView);
+
+        int num = 1;
+        if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
+            num = getCounters(counterType);
+        }
+        addChangedCardKeywords(Collections.nCopies(num, counterType.toString()), null, false, timestamp, 0, updateView);
         return true;
     }
 
@@ -2311,7 +2304,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             k[2] = k[1].substring(5).toLowerCase();
                         }
                         sbLong.append(k[2]);
-                        if (!k[2].contains(" and ")) { // skip reminder text for more complicated Hexproofs
+                        // skip reminder text for more complicated Hexproofs
+                        if (!k[2].contains(" and ") && !k[2].contains("each")) {
                             sbLong.append(" (").append(inst.getReminderText().replace("chosen", k[2]));
                             sbLong.append(")");
                         }
@@ -3790,6 +3784,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.mayPlay.remove(sta);
         this.updateMayPlay();
     }
+    public final Map<StaticAbility, CardPlayOption> getMayPlay() {
+        return Maps.newHashMap(mayPlay);
+    }
+    public final Map<StaticAbility, CardPlayOption> setMayPlay(Map<StaticAbility, CardPlayOption> mp) {
+        return mayPlay = mp;
+    }
 
     public void resetMayPlayTurn() {
         for (StaticAbility sta : getStaticAbilities()) {
@@ -5186,6 +5186,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public List<String> getDraftActions() {
+        return draftActions;
+    }
+
+    public void addDraftAction(String s) {
+        draftActions.add(s);
+    }
+
     /**
      * Replace all instances of one color word in this card's text by another.
      * @param originalWord the original color word.
@@ -5962,6 +5970,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean hasABasicLandType() {
         return getType().hasABasicLandType();
+    }
+    public final boolean hasANonBasicLandType() {
+        return getType().hasANonBasicLandType();
     }
 
     public final boolean isUsedToPay() {

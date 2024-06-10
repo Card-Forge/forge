@@ -1,7 +1,5 @@
 [metadata]
 Name=Adventure - Corrupted Blue Mage
-[Avatar]
-
 [Main]
 3 Charcoal Diamond|VOC|1
 4 Consider|MID|1
@@ -27,12 +25,4 @@ Name=Adventure - Corrupted Blue Mage
 2 Vodalian Hypnotist|INV|1
 1 Watery Grave|GRN|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

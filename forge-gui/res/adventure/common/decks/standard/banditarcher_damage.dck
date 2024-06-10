@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Hellboy 2
-Title=Hellboy
-Difficulty=medium
-Description=BR direct damage deck
-Icon=Hellboy.jpg
-Deck Type=constructed
 [main]
 5 Swamp
 7 Mountain 

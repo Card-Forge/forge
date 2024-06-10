@@ -1,11 +1,4 @@
-[duel]
 [metadata]
-Name=Freddy's Nightmares 2
-Title=Freddy Krueger
-Difficulty=medium
-Description=RB nightmare creature theme with mutate abilities, life drain, and some burn
-Icon=Freddy Krueger 2.jpg
-Deck Type=constructed
 [Main]
 2 Banefire
 3 Blood Crypt

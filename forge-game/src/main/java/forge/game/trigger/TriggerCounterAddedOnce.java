@@ -52,7 +52,8 @@ public class TriggerCounterAddedOnce extends Trigger {
     }
 
     /** {@inheritDoc}
-     * @param runParams*/
+     * @param runParams
+    */
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (hasParam("CounterType")) {

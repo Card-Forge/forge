@@ -17,9 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.HashSet;
-import java.util.Map.Entry;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -42,6 +39,9 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+
+import java.util.HashSet;
+import java.util.Map.Entry;
 
 /**
  * Updates the deck editor UI as necessary draft selection mode.
@@ -97,6 +97,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
     public final void showGui(final IBoosterDraft inBoosterDraft) {
         this.boosterDraft = inBoosterDraft;
         this.boosterDraft.setLogEntry(this);
+        VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
 
         this.addLogEntry("Drafting process started.");
     }
@@ -132,6 +133,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             this.showChoices(pool);
         }
         else {
+            // TODO Deal Broker
+            // Offer trades before saving
+
             this.saveDraft();
         }
     }
@@ -182,7 +186,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         deck.getOrCreate(DeckSection.Sideboard).addAll(this.getDeckManager().getPool());
 
         return deck;
-    } // getPlayersDeck()
+        // Why don't we just do?
+        // return player.getDeck()
+    }
 
     /**
      * <p>
@@ -233,7 +239,22 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         final DeckGroup finishedDraft = new DeckGroup(s);
         final LimitedPlayer player = this.boosterDraft.getHumanPlayer();
 
+        // Why is human deck just imported from LimitedPlayer?
+        //Deck humanDeck = player.getDeck().copyTo(s);
+        // If we do the above, we shouldn't need remove from card pool below
         Deck humanDeck = (Deck) this.getPlayersDeck().copyTo(s);
+
+        for(PaperCard card : player.getRemovedFromCardPool()) {
+            // This is awkward. We are duplicating the deck construction logic
+            // So we need to remove from the deck twice
+            // This may be problematic for trading cards from your card pool
+            humanDeck.get(DeckSection.Sideboard).remove(card);
+
+            // These cards need to be added to a quest deck if there is an associated quest
+            // Although quest Drafting process happened in #CEditorQuestDraftingProcess
+            // Probably need to make these files closer to each other
+        }
+
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
         finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);

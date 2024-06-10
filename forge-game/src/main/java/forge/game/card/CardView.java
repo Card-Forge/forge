@@ -1,29 +1,11 @@
 package forge.game.card;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.SpellAbility;
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.EvenOdd;
@@ -33,13 +15,19 @@ import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
@@ -513,6 +501,11 @@ public class CardView extends GameEntityView {
     }
     void updateSector(Card c) {
         set(TrackableProperty.Sector, c.getSector());
+    }
+
+    public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
+    void updateDraftAction(Card c) {
+        set(TrackableProperty.DraftAction, c.getDraftActions());
     }
 
     public List<String> getNamedCard() {
@@ -1468,6 +1461,8 @@ public class CardView extends GameEntityView {
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
         public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
         public boolean hasHorsemanship() { return get(TrackableProperty.HasHorsemanship); }
+        public boolean hasWard() { return get(TrackableProperty.HasWard); }
+        public boolean hasWither() { return get(TrackableProperty.HasWither); }
         public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
         public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
         public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
@@ -1542,6 +1537,8 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
             set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
+            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state));
+            set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
             set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));

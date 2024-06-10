@@ -31,6 +31,8 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
 
         this.root = xml.parse(tmxFile);
         parameter.generateMipMaps=true;
+        parameter.textureMinFilter = Texture.TextureFilter.Nearest;
+        parameter.textureMagFilter = Texture.TextureFilter.Nearest;
         final Array<FileHandle> textureFiles = getDependencyFileHandles(tmxFile);
         for (FileHandle textureFile : textureFiles) {
             Texture texture = new Texture(textureFile, parameter.generateMipMaps);

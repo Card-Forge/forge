@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Baltrice's Burning Light 3
-Title=Baltrice
-Difficulty=hard
-Description=RW burn and lifegain themed deck with Spitemare and Boros Reckoner
-Icon=Baltrice 3.jpg
-Deck Type=constructed
 [Main]
 2 Akroma's Memorial
 2 Archaeomancer's Map

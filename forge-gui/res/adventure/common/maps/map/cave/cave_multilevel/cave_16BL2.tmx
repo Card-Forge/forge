@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="78">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFVFsKwkAMzN9u8RiexSJeVGq9VdH2GCa0gyG2ZR8aA8PCkuwkM2nbhqhNxJkhccmo+Qb+wXuLRA8+A/MOfN6jD++T0cV53uPBd2bo7K21nhlai/69wpb+Nq/EY4Rww3N9Z/ltnUQqX69qA33GNb61sHqgN8kZmxm5vlpOvDUtPozGC/QqeVOBr/o9y7fWZ0jIK9mrvX1Gn7V8a/vh+e+Az9DQ6xvWOpfsSa3OMu/JiTNnr37pcS3vC0ZetsQ=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="75" template="../../../obj/door_left.tx" x="461.491" y="112.962">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BL1.tmx"/>
+    <property name="teleportObjectId" value="72"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../obj/door_down.tx" x="192.173" y="17.9086">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BL2U.tmx"/>
+    <property name="teleportObjectId" value="71"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../obj/door_up.tx" x="207.327" y="270.696">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BL2D.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

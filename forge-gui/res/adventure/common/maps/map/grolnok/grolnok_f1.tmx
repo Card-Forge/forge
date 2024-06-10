@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="189">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="210">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
- <layer id="17" name="Collision" width="30" height="30">
+ <tileset firstgid="22017" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="26113" source="../../tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="42497" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="17" name="Collision" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJxjYEAAN04EJgeQqg/ZPhM+0jCyXmIxue6kBIzaS397QeljIOwdSuFMrv7B4F96AmrZ+4ECe4dSuqK2G0gBHxgGLpznkVH3UcNeUgHMLkrqeWrYC8PzOFHl0QGx4cooysDABMW46n1sZuOzFxdG9xc57SZCbZhpBNoy6PqJBejpDpd+XHLk+pdYe4nRTwogNZ9h8y817QXFm6YEgg2Tp4e92Nj42snk2kusemqUQfjSKDY+tco9XOUZsX0QagJq2gsAMiw9tA==
+   eJztksENwjAMRQO3XLghsQL3zpCtGIAFODIjI1QVRI2Cbbk0KUK8J30pqeP/G7chAAD8B49vvwAAAAAAAAAAbEq89PO+R7127Zj7q6T4VJ5bUuZnzbVkdwxh/5LmJXlbuZqkeyTDS2I4vPeWuhm1SXW/l/Ks1a/VPr2vN9fTv4Q6d2lO69zpu51P8zrXt8iV1tK/tTbXe35NXu1jPSv3LTKzT+nnVQ9a5o7Dkyi+
   </data>
  </layer>
- <layer id="13" name="Background" width="30" height="30">
+ <layer id="13" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJzF190OwTAUB/CGi3JtEzc+Etlj4Ea8BS48FjGewhXhRuJtvAE72U52VrSnXTcn+cd0bX9rLdkIUaxG6D+2de/4Sd1eVS53nE+XO9amqthDG7dsHxf3H8VxLzI/Psvf/bi1bAkxSOa5GqKW6bypIsmzR2TuIeO6OC7Xfoo0nP3gumivNH5VruqroW5f5u0u9c39FXTBWjt6Lm4ki+PqdDfBf1zTPvjyuddmW4u22cXzuus8Wr7fgAt5Bfn7ET3GjOfF72qfpqMbh/nxNkzvH3xe0LVD+z7rD5/4fHRdL8xzyBJrXGgD7zb/dHEu/O247qmXhroQdMHB4HrR9ulSR02dLu4xZKfcd7OuuwvzPjrF+Wlo4X1ErTLuXePSdztf7iTZp6kS3X8gdV9d3arHvgH1Jev1
+   eJztmE1OwzAQhaN2EVi3qQCJnw3HACRU9RaAENyKqqWnYAWCTSVuwwmAjJJRBmN7Zuw4ESJPeqprx/M5E8dxkmWD+tJ2wlval9O60HGlcUO4PqXidiUt9yVvys+5+zgNF/Sa+22Ka+d0Wvc5YrgnJPaxYFwSLvhqh2d/ZJUl+ZBykX3t4afimnzTlHuYN/UhsnFdRi6wbgJ5IVwwrh+0HLKmabl30364XB66XPsGDRo06D9rXO7Dbqf2tmVhr9cI91k2ubg2xTwXzDFouL7xa9U1F3OWmuvqI+XiHkAqbi70ydXk+q9xF5f9cM16F3NTr1f3+9WvOd62x0PbwaMDWbxPMv6Y+9y1X5bE1M59KZeLCe3zWXtc+g7BcWPO18VMyXXF0nBtfVz12JaC63sP5bgStfUeGiptvmO5i12ei+2+cW6Uezzggr/K6zYqKtMyGkT/m8eMA7nw3RDLD0XzHYOeGwjqV/Xx8ItrR+j5QpzH2msPF+qA9zb/zcVYeO2k3Ke9ypSL327AwEHj+SK7TS7lmO6SizkGL415dzEL50Lc98nP+NRUOI8oK4a79XDpc68t7lmZp3PD5j3sy2soN3Xfb1qa9ls=
   </data>
  </layer>
- <layer id="18" name="Foreground" width="30" height="30">
+ <layer id="18" name="Foreground" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztmM1qU0EUx0clXAu2kMSkd5NQbJLatZKNphV0UfUdBPFJBL8QdOnGmvRura/gZzG+hAh1kZ20b6DzZ+7hnpzM3K9MJIse+MPMZOb8Zs583clGoNSgqdSFhlIHC9Q5rV3NmVSMjrU2FsyWTOhjMM3e0Trf8CvJRD8wRmJfCWa1V5lPk8osE/2g+ILdDqbrfAnm04ky4j4jzbq+ZiTZ8/Ik9+iaUg8vG3EuNGqY8rzs27rvDy4aZXG/BtncNytGaWwwYVQXdscyL2W4k9i3zeCH6pE+B+Y3H1wX+zguP40F+83q0lrKy+X9T+PSmIlLY/XJpbakvFyuMnGmtnLNSK6c11t9o6Jc2znCxbm7/YQjhb37KSeXDGzao1I7/aTeQKd/OYR68Mm5MMklkfEyWzm34Uoiuc/ycl08bra+yD5IP5JLdyAJ5zXvf1nh/uF+cRfx+ZUWeeJGjm+B/80Faxm5A/G9k2fO5VzSfBbh2uYkKwauuSwyv2fcM65vrm0/0J7AXoLZuPuOdrb3j40bpfhO+21kicfjdXscJDcrnkW5rvhzbp55LMql+Nm4o0Y2txskMfPJta1bsDi36Hj5einClUzf85vFtc2vjb1sXOmfuDxP73F+947rSXrocbyS+aNuhDaXWkqtaq21kvVs8422N3Tbn+ycQn+RH6ZwJZP0XvMOtT60TN7FTVtvrv+KYGA+ryr1MtaLqmmz11bqrta9dnku4mRjow2YnZpSV2Nt1gybjx0xudksznXtY+S3GJO0XcvHTOPK+6Yo17VW07jfQqOtcHHccX227ETH51TrTzN5G3HuKAcXfvl45NjgU74BX+n19Fqr4xgvuF3NeFZNmE91ulcz9WkdY13KMwP23bLO+Tua3qGcS+ckfIM9jgXmaisRvR/oO0daJMqJL9+g/M6XbxLyf9ialfTv4nLj/8tyrk2RRy6M/Lq4ZPvMz1/2jscZbLN3Ms4inzZG23c0Wbdj9Ij1Aen7PaMsK8s96hhJbl4ryy3D8sndDmfTT9btdctw3zrW52Y4nc47/nnHyw1Mkk+ujF8vNJJ531yftizcf5xYPLk=
+  </data>
+ </layer>
+ <layer id="19" name="Above" width="30" height="60">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzdlsFKw0AQhrdK2fbipbbmpmAteO9VPNhDwWdQEV/FZ/CiVPogVkX6IAp6rW/QZtgOGaebZDodovjDBxsy3W92syXp7zjX/yVqbee2KmK7nXkf0/H1rg5JaP1Y6c2br6gPifeuGdj3zg3rNhx4ufczrX/xmzFzgdd/4D1L7182AlV5wQnBWsggUq/15gXmwTrk2Yd7Ft5Zjvd92dP3EsgH6RN+91WXe2n/RV5cM3pxrZZejtRL0ewzws8M98aeK655He+Tz/4nMa4amfeioA6YCL3rZtpaPd+cMq8m4IWMmhlVeGNBP39fUe9JJ/5+tgqd97RT/A0yNvRCyr55MA/EO1fs/4j1LfXyHHUDN6QHGJ/3AmXRet+6Ae6VRuvVuCy9x8nq+HbPznufc54Pk59j6fo3XS8NOBFLL9+/XhLg19Zey/wV7wK0wx76
+   eJxjYKAvyGZmYHjEOjB27mMfvnbmMUMwyM6DdPQnMqBn+A6kncSCvQPotv0DZPeovcPb3uEIFogODnsbxWlrH8z8gfIvMgC5ARmPRHspjW9i9A8m/2IDuPxAbtgMdv+O2ksfe38OgJ3WYgwMzATCwj0SgcmxNw6IwwQZGMKBOEIQIvYdSr/axsDweht2s9ojERish0h7sYFYKD1ViLAf0P3rgcffuOwMEUTlGwtj11/Hi2Cj+7eDDHvJAaT6Fx2A4uUXEKuyQzCIj+wvXIBY/+LyK8wuGI0vfSADYv1L7XIC2b+vGUj3L3oeAoFIQUx16IAU/1IDwMoxUuKX2iBFEoLxAWLsLVYhzV4mKQim1F58AF+ZSU9ATB6HgYUk+Pk36U6hir3UBKTaS0pYjiTwVoz+diZLYmJSAKzMILXsoAYg1k5y/TYKRsEoGAWDGQAAh9KEDQ==
+  </data>
+ </layer>
+ <layer id="20" name="AboveSprites" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJACAQBMFvQuuxVxs1Ej41UHmYKeDY6CIAAAAAuGW23wVnqvXCNnqtXch8L/DaAtyPAtU=
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9">
-  <object id="140" template="../../obj/treasure.tx" x="308.807" y="387.623">
+  <object id="140" template="../../obj/treasure.tx" x="308.807" y="867.623">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -41,8 +54,8 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="166" template="../../obj/manashards.tx" x="328.662" y="387.554"/>
-  <object id="167" template="../../obj/booster.tx" x="302.266" y="347.927">
+  <object id="166" template="../../obj/manashards.tx" x="328.662" y="867.554"/>
+  <object id="167" template="../../obj/booster.tx" x="308.266" y="840.594">
    <properties>
     <property name="reward">[
   {
@@ -67,7 +80,7 @@
 </property>
    </properties>
   </object>
-  <object id="168" template="../../obj/gate.tx" gid="3221229597" x="287.943" y="363.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
+  <object id="168" template="../../obj/gate.tx" gid="3221229597" x="287.943" y="843.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -83,13 +96,13 @@
 }]</property>
    </properties>
   </object>
-  <object id="170" template="../../obj/door_down.tx" x="112.057" y="415.107" width="34.2466" height="35.0741" rotation="0.284412">
+  <object id="170" template="../../obj/door_down.tx" x="112.057" y="895.107" width="34.2466" height="35.0741" rotation="0.284412">
    <properties>
     <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/grolnok/grolnok.tmx"/>
    </properties>
   </object>
-  <object id="177" template="../../obj/booster.tx" x="326.782" y="347.092">
+  <object id="177" template="../../obj/booster.tx" x="334.782" y="845.759">
    <properties>
     <property name="reward">[
   {
@@ -114,13 +127,13 @@
 </property>
    </properties>
   </object>
-  <object id="181" template="../../obj/enemy.tx" x="221.421" y="353.28" width="16" height="17.6724">
+  <object id="181" template="../../obj/enemy.tx" x="212.087" y="889.947" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Wild Rat"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="182" template="../../obj/enemy.tx" x="247.038" y="149.581" width="16" height="17.6724">
+  <object id="182" template="../../obj/enemy.tx" x="231.038" y="148.247" width="16" height="17.6724">
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Grolnok's Boss Effect&quot;]
 }</property>
@@ -137,7 +150,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="223.022" y="333.553" width="15.7579" height="22.3749" rotation="0">
+  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="226.355" y="816.886" width="15.7579" height="22.3749" rotation="0">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
@@ -153,5 +166,118 @@
 }]</property>
    </properties>
   </object>
+  <object id="189" template="../../obj/enemy.tx" x="346" y="745.831" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="190" template="../../obj/enemy.tx" x="242" y="407.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Froghemoth"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="191" template="../../obj/enemy.tx" x="134" y="678.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="209,208"/>
+   </properties>
+  </object>
+  <object id="192" template="../../obj/enemy.tx" x="142" y="790.497" width="16" height="21.0057">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="193" template="../../obj/enemy.tx" x="68" y="720.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="194" template="../../obj/manashards.tx" x="370.667" y="479.333"/>
+  <object id="195" template="../../obj/manashards.tx" x="161.333" y="480"/>
+  <object id="196" template="../../obj/manashards.tx" x="138" y="332"/>
+  <object id="197" template="../../obj/manashards.tx" x="429.333" y="102"/>
+  <object id="198" template="../../obj/booster.tx" x="97.3333" y="494">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="199" template="../../obj/booster.tx" x="50.6667" y="131.333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AFR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="200" template="../../obj/gold.tx" x="394.667" y="762.667"/>
+  <object id="201" template="../../obj/gold.tx" x="431.333" y="122"/>
+  <object id="202" template="../../obj/gold.tx" x="84" y="626"/>
+  <object id="203" template="../../obj/enemy.tx" x="144" y="535.164" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="204" template="../../obj/enemy.tx" x="372.667" y="688.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Witch"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="205" template="../../obj/enemy.tx" x="246" y="580.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Flying Witch"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="207,206"/>
+   </properties>
+  </object>
+  <object id="206" template="../../obj/waypoint.tx" x="247.333" y="438"/>
+  <object id="207" template="../../obj/waypoint.tx" x="244.667" y="780"/>
+  <object id="208" template="../../obj/waypoint.tx" x="132" y="739.333"/>
+  <object id="209" template="../../obj/waypoint.tx" x="141.333" y="629.333"/>
  </objectgroup>
 </map>

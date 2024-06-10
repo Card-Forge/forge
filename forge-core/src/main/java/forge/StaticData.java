@@ -139,7 +139,7 @@ public class StaticData {
             variantCards.initialize(false, false, enableUnknownCards);
         }
 
-        if (this.tokenReader != null){
+        if (this.tokenReader != null) {
             final Map<String, CardRules> tokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (CardRules card : this.tokenReader.loadCards()) {

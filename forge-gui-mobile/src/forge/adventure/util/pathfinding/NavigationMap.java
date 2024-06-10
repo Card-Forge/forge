@@ -23,13 +23,10 @@ public class NavigationMap {
         this.half = spriteSize / 2;
     }
 
-    RayCastCallback callback = new RayCastCallback() {
-        @Override
-        public float reportRayFixture(Fixture fixture, Vector2 vector2, Vector2 vector21, float v) {
-            if (v < 1.0)
-                rayCollided = true;
-            return 0;
-        }
+    RayCastCallback callback = (fixture, vector2, vector21, v) -> {
+        if (v < 1.0)
+            rayCollided = true;
+        return 0;
     };
 
 //    public void initializeOverworldGeometryGraph() {

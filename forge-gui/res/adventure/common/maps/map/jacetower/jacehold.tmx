@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="39" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="102">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="39" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFls0NhCAQRodNXKUcsz8lWM5WYjGe7Mybh9WQLw4oKOrAS140cJhPIIxENsPTOPPTMioySoPviKHVi1tj7tzVemB8GGcavVaRXZs/pbPtwbOFcvmynakXA2p35Xp86/1usK8+kI3rzueEr5+bLSWozTP41iw1oWx3c/b+RBbsZehc9YWtdLYYXhXRe/Iz+a2Ei2UgVX+MQTkepS4WAf4xJHvSFXLl8vVMiR6agj83KkMx
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="39" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytlrFOwzAQhk2gNVY7AOIRqITExMIMb8FeqQNDH6MDQ+nUsVJ3Bk9FbCy8Ac/QiQGEujHg09nK5XpOcym/9Ctx7Pg+3yVONl1jNsxc76x9FTxyVUv3PMSxVDwWeGaNWXXkPomNx5YMYyXOJvftwwZaOL1/C3SuP8Uozo3xFo/A9nyiY9MKmLi+iF/7eO07xPgkfOl8F9d9ZJu0R6zoOvCuQ73eAsP4EP0Uzh8t9vt47ol/hBzRvM1daanNtXU9tgcW++AIXsfnanK6PUdim1oc8+FKJz7QIsOQ4yp6+f7ElQy6PMM6gjnbUHhnKFsuP1S3fVxDYpOcW+MFqxmtqcTGawric0ux6tYh5XPs8JmTuOr2mibxNGz83YU2Zctx1bFpRNloXilX2vfAo8j20tHt0fuyUUlsd0ft2HKCvrnTsdM8JUYaV8N2c1wfS5tTysQ1PAh7cuBaFoS1W1qbt6Y1b/IdhO/nLL4L/F9Gyhto1au6jXbxe8LFWXI1/S9Jc6VrdL/wQt64/wAAbfTL
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="39" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAbSDO40TF+IA2fmkMkIVD/DYzA8N2VsL6kd2FyyxS7CWkvpqFeLfB3LeLh3T8hwk7GxnL8EDseM/GwPAJinm5EG4j5EeQ21TZSccg96CzkQFMDhvAFm5XGVExJW7D5s5nrJg4mA27++yYIfgzVP4rGyouYSLPbbO10fjMmGqmQc3VBdrbjyP8QCAUzW2vWVDdhhwHhLAsD3559DQHsoePH7u7JuJwMznhBgovfG5DD08QBtmDK9xwuQ0EhJhR3YYeftjCk1C4oWN8QJ8DtxysbKM0L+DDJ5Hsq2JBYHR3TWZHYHLdRkm4vScQjtjCDQRo4TZyAXpdCsPWXJD8b8uFWw0pmFRgxoHfvJPslLspDYqpFWYwnMlBnDpdoB/62VBxFgeiHAW5bRu0fmJmoo7biMW4whfmNpC7BpPbVBgQ6YwUtwEAsGSvSg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="39" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytVktLHEEQ7pHdeTirx1x8nASzjrAqGHKLf0IN5J7Dnj2Yg4+TJCAsJisIQq7Zm4FoxM0lCybkkP8Q8wcSoiQgeLCK6rJrerrXUVLw0dvd1dVff9Vds0opVU3VjTV1uzKknIbzmeVrz9s2mxTHDgOljgAfAzM2CTir5P12YqVex8SnB/1daNeB70aqCubjXMZnLc3HnbDmuT/6wIw14FwziYk5UoN5wFjNvQeOZ0EeuKYL+Ak407/R72tiIOMGjrj22HeHD+/zycPNZSPa92qA8CsiDmnF4ERwljwWI2pPBb8vgOWQ9MIWwftsec6F8OnGvBDnmtuTwSJ8+bAN+TwN6Z7hPQ4HaJ9O3QBN9jH2znD+7Da3ca37M+GDay9VuZxOaD7/gNtfrRlz6wqgdWvlwL7yPrBOW6J/APu917C58Zt4A9q3I+LYE9x+1PupTXEWSuYGuXzWdQRbV075vqC56pBycKvrYpZleXC8/8EN41SVO6c9MbYXldftPsbceH3ggMvmof4+iokb18gpj26+OG8d3wDWiWuv751yLjMdIwHfQV2n5xKat2uk700h9jM6w3ZsgCb7zMVV03t2YLAlyN0UBH8HcTtp3ufEenubmvt4ybd6G+QbxnrL31v7DbzULebyQ0iw9ZnWwnHLmjV1KzVi3Tjub9BgGtAKDR4mBo8rBGk8Jtf0A1pZP+lr5w6/kS3g2oippn6ztLK143VzSXHMV2tYu3ZM7UVU9GkKX+7/AT7HVeKFeCX+66wCXgj4+N6Vq48XG57heUKaoV2IbxEa3jn+T8f/664BGEipAg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="318.665" y="268.262" width="21.5" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/gold.tx" x="282.663" y="66.101"/>
+  <object id="56" template="../../obj/gold.tx" x="400" y="95.75">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/treasure.tx" x="423.522" y="190.333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/treasure.tx" x="152.522" y="49.333">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="20.652" y="97.522">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 40,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/enemy.tx" gid="11419" x="323.191" y="127.645">
+   <properties>
+    <property name="enemy" value="Golem"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="84,85"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" gid="11419" x="323.079" y="72.763">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Jace Boss Effect&quot; ]
+}</property>
+    <property name="enemy" value="Jace"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="509.579" y="231.263">
+   <properties>
+    <property name="enemy" value="Werewolf"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="70.184" y="72.579">
+   <properties>
+    <property name="enemy" value="Symbiote"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/treasure.tx" x="36.5" y="16.5">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;probability&quot;: 1,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;probability&quot;: 1,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythicrare&quot; ],
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 1,
+  &quot;addMaxCount&quot;: 2
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gold.tx" x="337.5" y="192.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/gold.tx" x="607.5" y="38.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/gold.tx" x="600.5" y="239.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 110,
+    &quot;addMaxCount&quot;: 50
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="155" y="65.5">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="89,88"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/enemy.tx" x="247" y="160.5" width="22" height="13.5">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="84,85"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="338.5" y="164">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="86,87"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="160.5" y="193.5">
+   <properties>
+    <property name="enemy" value="Illusionist"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/manashards.tx" x="2" y="141.5"/>
+  <object id="75" template="../../obj/manashards.tx" x="116.5" y="123"/>
+  <object id="76" template="../../obj/manashards.tx" x="220.5" y="17.5"/>
+  <object id="77" template="../../obj/enemy.tx" x="56" y="240">
+   <properties>
+    <property name="enemy" value="Adept Blue Wizard"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="92,80,81,80"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="593" y="48">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="354" y="28.5">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="95,96"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/waypoint.tx" x="112" y="239.5"/>
+  <object id="81" template="../../obj/waypoint.tx" x="349.5" y="235.5"/>
+  <object id="82" template="../../obj/waypoint.tx" x="412" y="221"/>
+  <object id="83" template="../../obj/waypoint.tx" x="551.5" y="231"/>
+  <object id="84" template="../../obj/waypoint.tx" x="371.5" y="125"/>
+  <object id="85" template="../../obj/waypoint.tx" x="282" y="128"/>
+  <object id="86" template="../../obj/waypoint.tx" x="289" y="168"/>
+  <object id="87" template="../../obj/waypoint.tx" x="380.5" y="167.5"/>
+  <object id="88" template="../../obj/waypoint.tx" x="135" y="63.5"/>
+  <object id="89" template="../../obj/waypoint.tx" x="191" y="66.5"/>
+  <object id="92" template="../../obj/waypoint.tx" x="2" y="238"/>
+  <object id="93" template="../../obj/waypoint.tx" x="236.5" y="188"/>
+  <object id="94" template="../../obj/waypoint.tx" x="228" y="149"/>
+  <object id="95" template="../../obj/waypoint.tx" x="308" y="31.5"/>
+  <object id="96" template="../../obj/waypoint.tx" x="416" y="31"/>
+  <object id="97" template="../../obj/booster.tx" x="456.5" y="16">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;M10&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="98" template="../../obj/collision.tx" x="0.5" y="271" width="623.5" height="16"/>
+  <object id="99" template="../../obj/collision.tx" x="-2.75" y="-16" width="623.5" height="16"/>
+  <object id="100" template="../../obj/collision.tx" x="-39.5" y="-15.3335" width="38" height="287.167"/>
+  <object id="101" template="../../obj/collision.tx" x="624.5" y="-14.8335" width="38" height="286.167"/>
+ </objectgroup>
+</map>

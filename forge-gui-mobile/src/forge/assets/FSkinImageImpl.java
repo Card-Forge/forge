@@ -47,7 +47,7 @@ public class FSkinImageImpl implements FSkinImageInterface {
             }
         }
         if (texture != null) {
-            if (!(type == FSkinProp.PropType.IMAGE || type == FSkinProp.PropType.ICON || type == FSkinProp.PropType.MANAICONS)) { //just return region for preferred file if not icons file
+            if (!(type == FSkinProp.PropType.ABILITY || type == FSkinProp.PropType.IMAGE || type == FSkinProp.PropType.ICON || type == FSkinProp.PropType.MANAICONS)) { //just return region for preferred file if not icons file
                 textureRegion = new TextureRegion(texture, x, y, w, h);
                 return;
             }

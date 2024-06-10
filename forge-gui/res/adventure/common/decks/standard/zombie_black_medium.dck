@@ -1,7 +1,5 @@
 [metadata]
 Name=zombie_black_medium
-[Avatar]
-
 [Main]
 1 Army of the Damned|SCD|1
 1 Balthor the Defiled|SLD|1
@@ -26,12 +24,4 @@ Name=zombie_black_medium
 1 Zombie Apocalypse|MIC|1
 2 Zombie Master|30A|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

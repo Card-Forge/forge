@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Mephisto, Lord of Hatred 3
-Title=Mephisto, Lord of Hatred
-Difficulty=hard
-Description=BR Undying hatred/hell reanimation theme
-Icon=Mephisto 3.jpg
-Deck Type=constructed
 [Main]
 2 Artisan of Kozilek
 2 Bedevil
