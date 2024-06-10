@@ -1,0 +1,12 @@
+Name:The Spear of Leonidas
+ManaCost:2 R
+Types:Legendary Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigChoose | TriggerDescription$ Whenever equipped creature attacks, ABILITY
+SVar:TrigChoose:DB$ Charm | Choices$ DBPump,DBToken,DBLoot | CharmNum$ 1
+SVar:DBPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Double Strike | SpellDescription$ Bull Rush — It gains double strike until end of turn.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ phobos | TokenOwner$ You | SpellDescription$ Summon — Create Phobos, a legendary 3/2 red Horse creature token.
+SVar:DBLoot:DB$ Discard | Mode$ TgtChoose | NumCards$ 2 | SubAbility$ DBDraw | SpellDescription$ Revelation — Discard two cards, then draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+K:Equip:2
+DeckHas:Ability$Discard
+Oracle:Whenever equipped creature attacks, choose one —\n• Bull Rush — It gains double strike until end of turn.\n• Summon — Create Phobos, a legendary 3/2 red Horse creature token.\n• Revelation — Discard two cards, then draw two cards.\nEquip {2}
