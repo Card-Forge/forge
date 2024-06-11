@@ -32,3 +32,5 @@ ScryfallCode=PWCS
 20233 M Liliana of the Veil @Yuichi Murakami
 20234 R Braids, Arisen Nightmare @Daisuke Tatsuma
 20235 U Phyrexian Rager @Brock Grossman
+20241 M Realm-Scorcher Hellkite @Susumu Kuroi
+20242 R Ruby, Daring Tracker @M.Matsumoto
