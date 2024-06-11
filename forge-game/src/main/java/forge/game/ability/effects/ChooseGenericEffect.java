@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
 
 import com.google.common.collect.ImmutableMap;
@@ -57,8 +55,6 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final StringBuilder record = new StringBuilder();
         final boolean changeZoneTable = sa.hasParam("ChangeZoneTable");
         final boolean damageMap = sa.hasParam("DamageMap");
-        final boolean resolveAfter = sa.hasParam("ResolveAfterChoosing");
-        Map<Player, SpellAbility> pChoices = new HashMap<Player, SpellAbility>();
 
         if (damageMap) {
             sa.setDamageMap(new CardDamageMap());
@@ -132,8 +128,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue,
                             sa.hasParam("ShowChoice"), random));
                     
-                    if (resolveAfter) pChoices.put(p, chosenSA);
-                    else AbilityUtils.resolve(chosenSA);
+                    AbilityUtils.resolve(chosenSA);
                 }
             } else {
                 // no choices are valid, e.g. maybe all Unless costs are unpayable
@@ -152,16 +147,6 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         }
         if (secretly) {
             game.getAction().notifyOfValue(sa, host, record.toString(), null);
-        }
-        if (resolveAfter) {
-            List<Object> oldRem = Lists.newArrayList(Iterables.filter(host.getRemembered(), Player.class));
-            host.removeRemembered(oldRem);
-            for (Map.Entry<Player, SpellAbility> e : pChoices.entrySet()) {
-                host.addRemembered(e.getKey());
-                AbilityUtils.resolve(e.getValue());
-                host.removeRemembered(e.getKey());
-            }
-            host.addRemembered(oldRem);
         }
         if (damageMap) game.getAction().dealDamage(false, sa.getDamageMap(), sa.getPreventMap(), 
                     sa.getCounterTable(), sa);
