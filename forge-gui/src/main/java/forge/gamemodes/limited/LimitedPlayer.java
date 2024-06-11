@@ -271,7 +271,10 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        this.draft.getDraftLog().addLogEntry(message);
+        if (this.draft.getDraftLog() != null) {
+            this.draft.getDraftLog().addLogEntry(message);
+        }
+        // Mobile doesnt have a draft log yet
     }
 
     public List<PaperCard> nextChoice() {
