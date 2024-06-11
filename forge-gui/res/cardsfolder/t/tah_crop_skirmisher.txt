@@ -1,7 +1,7 @@
 Name:Tah-Crop Skirmisher
 ManaCost:1 U
-Types:Creature Naga Warrior
+Types:Creature Snake Warrior
 PT:2/1
 K:Embalm:3 U
 DeckHas:Ability$Token
-Oracle:Embalm {3}{U} ({3}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Naga Warrior with no mana cost. Embalm only as a sorcery.)
+Oracle:Embalm {3}{U} ({3}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Snake Warrior with no mana cost. Embalm only as a sorcery.)

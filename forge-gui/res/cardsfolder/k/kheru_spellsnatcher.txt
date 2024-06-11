@@ -1,6 +1,6 @@
 Name:Kheru Spellsnatcher
 ManaCost:3 U
-Types:Creature Naga Wizard
+Types:Creature Snake Wizard
 PT:3/3
 K:Morph:4 U U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may cast that card without paying its mana cost as long as it remains exiled.

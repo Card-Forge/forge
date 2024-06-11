@@ -1,6 +1,6 @@
 Name:Sultai Skullkeeper
 ManaCost:1 U
-Types:Creature Naga Shaman
+Types:Creature Snake Shaman
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You

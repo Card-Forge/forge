@@ -1,6 +1,6 @@
 Name:Viashino Lashclaw
 ManaCost:1 R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:2/2
 A:AB$ PumpAll | Cost$ T Discard<1/Card> | AILogic$ Never | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
 DeckHas:Ability$Discard

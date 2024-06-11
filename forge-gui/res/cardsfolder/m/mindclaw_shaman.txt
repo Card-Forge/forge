@@ -1,6 +1,6 @@
 Name:Mindclaw Shaman
 ManaCost:4 R
-Types:Creature Viashino Shaman
+Types:Creature Lizard Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You may cast an instant or sorcery spell from among those cards without paying its mana cost.
 SVar:TrigReveal:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ TrigPlay
