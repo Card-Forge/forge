@@ -2,7 +2,13 @@ Name:Borderland Explorer
 ManaCost:1 G
 Types:Creature Elf Scout
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExploration | TriggerDescription$ When CARDNAME enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
-SVar:TrigExploration:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscardToFetch
-SVar:DBDiscardToFetch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | DefinedPlayer$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
+SVar:TrigChoose:DB$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ Discard,No | SubAbility$ DBDiscard
+SVar:Discard:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ Discard | SpellDescription$ Discard a card.
+SVar:No:DB$ Pump | SpellDescription$ Do not discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ Player.NotedForDiscard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBSearch
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | DefinedPlayer$ RememberedOwner | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
+SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Discard
+DeckHas:Ability$Discard
 Oracle:When Borderland Explorer enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle.

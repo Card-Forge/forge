@@ -1,0 +1,18 @@
+Name:Wheel of Potential
+ManaCost:2 R
+Types:Sorcery
+A:SP$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ ChooseX | StackDescription$ REP You get_{p:You} gets & you_ | SpellDescription$ You get {E}{E}{E} (three energy counters), then you may pay X {E}.,,,,,,
+SVar:ChooseX:DB$ ChooseNumber | Max$ Count$YourCountersEnergy | ListTitle$ Choose amount for X | SubAbility$ Pay | StackDescription$ None
+SVar:Pay:DB$ Pump | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ Choose | StackDescription$ None
+SVar:Choose:DB$ GenericChoice | TempRemember$ Chooser | ShowChoice$ ExceptSelf | Defined$ Player | Choices$ ExileDraw,No | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Each player may exile their hand and draw X cards.
+SVar:ExileDraw:DB$ Pump | Defined$ Remembered | NoteCards$ Self | NoteCardsFor$ ExileDraw | SpellDescription$ Exile your hand and draw X cards.
+SVar:No:DB$ Pump | SpellDescription$ Keep your hand.
+SVar:ExileDraw:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ChangeType$ Card.OwnedBy Player.NotedForExile | RememberChanged$ True | SubAbility$ Draw | StackDescription$ None
+SVar:Draw:DB$ Draw | Defined$ Player.NotedForExile | NumCards$ X | SubAbility$ Effect | StackDescription$ None
+SVar:Effect:DB$ Effect | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | RememberObjects$ Remembered.YouOwn | StaticAbilities$ Play | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ If X is 7 or more, you may play cards you own exiled this way until the end of your next turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.YouOwn+IsRemembered | AffectedZone$ Exile | Description$ You may play cards you own exiled this way until the end of your next turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBClearNotes
+SVar:DBClearNotes:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Exile
+SVar:X:Count$ChosenNumber
+AI:RemoveDeck:All
+Oracle:You get {E}{E}{E} (three energy counters), then you may pay X {E}.\nEach player may exile their hand and draw X cards. If X is 7 or more, you may play cards you own exiled this way until the end of your next turn.

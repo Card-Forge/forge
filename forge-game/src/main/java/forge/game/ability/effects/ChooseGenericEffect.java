@@ -26,9 +26,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-
-        sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
-        sb.append("chooses from a list.");
+        final List<Player> players = getDefinedPlayersOrTargeted(sa); 
+        
+        sb.append(Lang.joinHomogenous(players));
+        sb.append(players.size() == 1 ? " chooses" : " choose").append(" from a list.");
 
         return sb.toString();
     }
