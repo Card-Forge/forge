@@ -248,7 +248,7 @@ public final class GameActionUtil {
                             // do only non intrinsic
                             if (iSa.isSpell() && !iSa.isIntrinsic()) {
                                 alternatives.add(iSa);
-                                alternatives.addAll(getMayPlaySpellOptions(iSa, source, activator, altCostOnly));
+                                alternatives.addAll(getMayPlaySpellOptions(iSa, stackCopy, activator, altCostOnly));
                                 // currently only AltCost get added this way
                             }
                         }
