@@ -32,6 +32,7 @@ import forge.item.PaperCard;
  */
 public interface IBoosterDraft {
 
+    int getRound();
     CardPool nextChoice();
     void setChoice(PaperCard c);
     boolean hasNextChoice();
@@ -47,4 +48,5 @@ public interface IBoosterDraft {
     void setLogEntry(IDraftLog draftingProcess);
     IDraftLog getDraftLog();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
+    LimitedPlayer getPlayer(int i);
 }
