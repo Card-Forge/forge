@@ -446,10 +446,7 @@ public class FSkin {
             int crackCount = 0;
             for (int j = 0; j < 4; j++) {
                 int x = j * 200;
-                for(int i = 0; i < 4; i++) {
-                    int y = i * 279;
-                    Forge.getAssets().cracks().put(crackCount++, new TextureRegion(Forge.getAssets().getTexture(f17), x, y, 200, 279));
-                }
+                Forge.getAssets().cracks().put(crackCount++, new TextureRegion(Forge.getAssets().getTexture(f17), x, 0, 200, 279));
             }
 
             //borders
