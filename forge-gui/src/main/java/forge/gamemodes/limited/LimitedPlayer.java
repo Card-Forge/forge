@@ -19,6 +19,7 @@ public class LimitedPlayer {
     protected int currentPack;
     protected int draftedThisRound;
     protected Deck deck;
+    protected PaperCard lastPick;
 
     protected Queue<List<PaperCard>> packQueue;
     protected Queue<List<PaperCard>> unopenedPacks;
@@ -33,17 +34,16 @@ public class LimitedPlayer {
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
     private static final int GrinderRemoveFromPool = 1 << 8;
-
-    private static final int MAXFLAGS = CantDraftThisRound | ReceiveLastCard | CanRemoveAfterDraft | SpyNextCardDrafted
-                                    | CanTradeAfterDraft | AnimusRemoveFromPool | NobleBanneretActive | PalianoVanguardActive
-                                    | GrinderRemoveFromPool;
+    private static final int SearcherNoteNext = 1 << 9;
+    private static final int WhispergearBoosterPeek = 1 << 10;
+    private static final int IllusionaryInformantPeek = 1 << 11;
 
     private int playerFlags = 0;
 
     private final List<PaperCard> faceUp = Lists.newArrayList();
     private final List<PaperCard> revealed = Lists.newArrayList();
     private final Map<String, List<String>> noted = new HashMap<>();
-    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder");
+    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder", "Aether Searcher");
 
     IBoosterDraft draft;
 
@@ -67,6 +67,10 @@ public class LimitedPlayer {
                     semicolonDelimiter.contains(entry.getKey()) ? ";" : ","));
         }
         return serialized;
+    }
+
+    public PaperCard getLastPick() {
+        return lastPick;
     }
 
     public Deck getDeck() {
@@ -101,6 +105,7 @@ public class LimitedPlayer {
         boolean alreadyRevealed = false;
 
         chooseFrom.remove(bestPick);
+        lastPick = lastPick;
 
         draftedThisRound++;
 
@@ -127,6 +132,41 @@ public class LimitedPlayer {
             }
 
             recordRemoveFromDraft(bestPick, choice);
+        }
+
+        LimitedPlayer fromPlayer = receivedFrom();
+        // If the previous player has an active Cogwork Spy, show them this card
+        if ((fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {
+            if (fromPlayer instanceof LimitedPlayerAI) {
+                // I'm honestly not sure what the AI would do by learning this information
+                // But just log that a reveal "happened"
+                addLog(this.name() + " revealed a card to " + fromPlayer.name() + " via Cogwork Spy.");
+            } else {
+                addLog(this.name() + " revealed " + bestPick.getName() + " to you with Cogwork Spy.");
+            }
+
+            fromPlayer.playerFlags &= ~SpyNextCardDrafted;
+        }
+
+        if ((playerFlags & SearcherNoteNext) == SearcherNoteNext) {
+            addLog(name() + " revealed " + bestPick.getName() + " for Aether Searcher.");
+            playerFlags &= ~SearcherNoteNext;
+            List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
+            note.add(String.valueOf(bestPick.getName()));
+        }
+
+        if ((playerFlags & WhispergearBoosterPeek) == WhispergearBoosterPeek) {
+            if (handleWhispergearSneak()) {
+                addLog(name() + " peeked at a booster pack with Whispergear Sneak and turned it face down.");
+                playerFlags &= ~WhispergearBoosterPeek;
+            }
+        }
+
+        if ((playerFlags & IllusionaryInformantPeek) == IllusionaryInformantPeek) {
+            if (handleIllusionaryInformant()) {
+                addLog(name() + " peeked at " + fromPlayer.name() + "'s next pick with Illusionary Informant and turned it face down.");
+                playerFlags &= ~IllusionaryInformantPeek;
+            }
         }
 
         if (removedFromPool) {
@@ -182,7 +222,21 @@ public class LimitedPlayer {
                 addLog(name() + " revealed " + bestPick.getName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
             }
             else {
-                addLog(name() + " revealed " + bestPick.getName() + " as they drafted it.");
+                if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
+                    // Cogwork Spy
+                    playerFlags |= SpyNextCardDrafted;
+                }
+
+                if (Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
+                    // Note who passed it to you.
+                    // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
+                    List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
+                    note.add(String.valueOf(fromPlayer.order));
+                } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
+                    playerFlags |= SearcherNoteNext;
+                }
+
+                addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
             }
         }
         if (Iterables.contains(draftActions, "Draft CARDNAME face up.")) {
@@ -202,17 +256,13 @@ public class LimitedPlayer {
                 playerFlags |= NobleBanneretActive;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
                 playerFlags |= PalianoVanguardActive;
+            } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.")) {
+                playerFlags |= WhispergearBoosterPeek;
+                // Do we need to ask to use the Sneak immediately?
+            } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at the next card drafted by a player of your choice.")) {
+                playerFlags |= IllusionaryInformantPeek;
             }
         }
-
-        // Note who passed it to you. (Either player before you in draft passing order except if you receive the last card
-        // TODO Cogwork Tracker
-
-        // Note next card on this card
-        // TODO Aether Searcher (for the next card)
-
-        // Peek at next card from this pack
-        // TODO Cogwork Spy
 
         // TODO Lore Seeker
         // This adds a pack and MIGHT screw up all of our assumptions about pack passing. Do this last probably
@@ -221,11 +271,18 @@ public class LimitedPlayer {
     }
 
     public void addLog(String message) {
-        this.draft.getDraftLog().addLogEntry(message);
+        if (this.draft.getDraftLog() != null) {
+            this.draft.getDraftLog().addLogEntry(message);
+        }
+        // Mobile doesnt have a draft log yet
     }
 
     public List<PaperCard> nextChoice() {
         return packQueue.peek();
+    }
+
+    public LimitedPlayer receivedFrom() {
+        return draft.getNeighbor(this, draft.getRound() % 2 == 0);
     }
 
     public void newPack() {
@@ -430,10 +487,65 @@ public class LimitedPlayer {
         return alreadyRevealed;
     }
 
+    public boolean handleWhispergearSneak() {
+        if (Objects.equals(SGuiChoose.oneOrNone("Peek at a booster pack with Whispergear Sneak?", Lists.newArrayList("Yes", "No")), "No")) {
+            return false;
+        }
+
+        int round = 3;
+        if (draft.getRound() != 3) {
+            round = SGuiChoose.getInteger("Which round would you like to peek at?", draft.getRound(), 3);
+        }
+
+        int playerId = SGuiChoose.getInteger("Which player would you like to peek at?", 0, draft.getOpposingPlayers().length);
+        SGuiChoose.reveal("Peeked booster", peekAtBoosterPack(round, playerId));
+        // This reveal popup doesn't update the card detail panel in draft
+        // How do we get to do that?
+        return true;
+    }
+
+    protected List<PaperCard> peekAtBoosterPack(int round, int playerNumber) {
+        if (draft.getRound() > round) {
+            // There aren't any unopened packs from earlier rounds
+            return null;
+        }
+
+        int relativeRound = round - draft.getRound();
+        LimitedPlayer player;
+        if (playerNumber == 0) {
+            player = this.draft.getHumanPlayer();
+        } else {
+            player = this.draft.getOpposingPlayers()[playerNumber - 1];
+        }
+        if (relativeRound == 0) {
+            // I want to see a pack from the current round
+            return player.packQueue.peek();
+        } else {
+            return player.unopenedPacks.peek();
+        }
+    }
+
+    public boolean handleIllusionaryInformant() {
+        Integer player = SGuiChoose.getInteger("Peek at another player's last pick?", 0, draft.getOpposingPlayers().length);
+        if (Objects.equals(player, null)) {
+            return false;
+        }
+
+        LimitedPlayer peekAt = draft.getPlayer(player);
+        if (peekAt == null) {
+            return false;
+        }
+
+        SGuiChoose.reveal("Player " + player + " lastPicked: ",  Lists.newArrayList(peekAt.getLastPick()));
+
+        return true;
+    }
+
     /*
     public void addSingleBoosterPack(boolean random) {
         // TODO Lore Seeker
         // Generate booster pack then, insert it "before" the pack we're currently drafting from
     }
+
     */
 }

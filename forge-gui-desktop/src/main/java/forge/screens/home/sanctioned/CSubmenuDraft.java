@@ -1,17 +1,7 @@
 package forge.screens.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.SwingUtilities;
-
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -37,6 +27,14 @@ import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controls the draft submenu in the home UI.
@@ -142,6 +140,12 @@ public enum CSubmenuDraft implements ICDoc {
 
         FModel.getGauntletMini().resetGauntletDraft();
         String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
+
+        if (duelType == null) {
+            FOptionPane.showErrorDialog("Please select duel types for the draft match.", "Missing opponent items");
+            return;
+        }
+
         final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
@@ -161,7 +165,7 @@ public enum CSubmenuDraft implements ICDoc {
             }
         });
 
-        List<Deck> aiDecks = Lists.newArrayList();
+        Map<Integer, Deck> aiMap = Maps.newHashMap();
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
             // Restore Zero Indexing
             final int aiIndex = Integer.parseInt(duelType)-1;
@@ -169,28 +173,43 @@ public enum CSubmenuDraft implements ICDoc {
             if (aiDeck == null) {
                 throw new IllegalStateException("Draft: Computer deck is null!");
             }
-            aiDecks.add(aiDeck);
+
+            aiMap.put(aiIndex, aiDeck);
         } else {
             final int numOpponents = Integer.parseInt(duelType);
 
-            List<Deck> randomOpponents = Lists.newArrayList(opponentDecks.getAiDecks());
-            Collections.shuffle(randomOpponents);
-            aiDecks = randomOpponents.subList(0, numOpponents);
-            for(Deck d : aiDecks) {
-                if (d == null) {
+            int maxDecks = opponentDecks.getAiDecks().size();
+            if (numOpponents > maxDecks) {
+                throw new IllegalStateException("Draft: Not enough decks for the number of opponents!");
+            }
+
+            List<Integer> aiIndices = Lists.newArrayList();
+            for(int i = 0; i < maxDecks; i++) {
+                aiIndices.add(i);
+            }
+            Collections.shuffle(aiIndices);
+            aiIndices = aiIndices.subList(0, numOpponents);
+
+            for(int i : aiIndices) {
+                final Deck aiDeck = opponentDecks.getAiDecks().get(i);
+                if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
+
+                aiMap.put(i + 1, aiDeck);
             }
         }
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
+        // Human is 0
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
-        for(Deck aiDeck : aiDecks) {
-            starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-        }
-        for (final RegisteredPlayer pl : starter) {
-            pl.assignConspiracies();
+        human.setId(0);
+        for(Map.Entry<Integer, Deck> aiDeck : aiMap.entrySet()) {
+            RegisteredPlayer aiPlayer = new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
+            aiPlayer.setId(aiDeck.getKey());
+            starter.add(aiPlayer);
+            aiPlayer.assignConspiracies();
         }
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
