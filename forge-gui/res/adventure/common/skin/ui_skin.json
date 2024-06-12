@@ -133,6 +133,26 @@
 		"playMode": 2,
 		"crushMode": 0
 	},
+	"unpressedSB-hover10patch": {
+		"region": "unpressedselectbox-hover",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 11, 12 ],
+		"tiling": true,
+		"minWidth": 22,
+		"minHeight": 16,
+		"rightWidth": 10,
+		"leftWidth": 5,
+		"bottomHeight": 8,
+		"topHeight": 5,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
 	"unpressed-disable10Patch": {
 		"region": "unpressed-disable",
 		"horizontalStretchAreas": [ 3, 10 ],
@@ -281,6 +301,26 @@
 		"minWidth": 14,
 		"minHeight": 16,
 		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 8,
+		"topHeight": 5,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
+	},
+	"unpressedSB10patch": {
+		"region": "unpressedselectbox",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 11, 12 ],
+		"tiling": true,
+		"minWidth": 22,
+		"minHeight": 16,
+		"rightWidth": 10,
 		"leftWidth": 5,
 		"bottomHeight": 8,
 		"topHeight": 5,
@@ -487,10 +527,11 @@
 		"fontColor": "RGBA_255_255_255_255",
 		"overFontColor": "RGBA_0_216_255_255",
 		"disabledFontColor": "RGBA_255_255_255_255",
-		"background": "unpressed10patch",
+		"background": "unpressedSB10patch",
 		"scrollStyle": "default",
 		"listStyle": "default",
-		"backgroundOver": "unpressed-hover10patch"
+		"backgroundOver": "unpressedSB-hover10patch",
+		"backgroundOpen": "unpressedSB-hover10patch"
 	}
 },
 "SliderStyle": {
