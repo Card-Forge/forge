@@ -99,7 +99,6 @@ public class SaveLoadScene extends UIScene {
         ui.onButtonPress("return", SaveLoadScene.this::back);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
-        difficulty.getStyle().fontColor = Color.GOLD;
         difficulty.setX(scrollPane.getWidth() - difficulty.getWidth() + 5);
         difficulty.setY(scrollPane.getTop() - difficulty.getHeight() - 5);
     }

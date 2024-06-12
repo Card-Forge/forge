@@ -530,7 +530,8 @@
 		"background": "unpressedSB10patch",
 		"scrollStyle": "default",
 		"listStyle": "default",
-		"backgroundOver": "unpressedSB-hover10patch"
+		"backgroundOver": "unpressedSB-hover10patch",
+		"backgroundOpen": "unpressedSB-hover10patch"
 	}
 },
 "SliderStyle": {
