@@ -303,6 +303,20 @@ unpressed-hover
   orig: 14, 16
   offset: 0, 0
   index: -1
+unpressedselectbox
+  rotate: false
+  xy: 359, 417
+  size: 22, 16
+  orig: 22, 16
+  offset: 0, 0
+  index: -1
+unpressedselectbox-hover
+  rotate: false
+  xy: 383, 417
+  size: 22, 16
+  orig: 22, 16
+  offset: 0, 0
+  index: -1
 unpressedFocus
   rotate: false
   xy: 165, 197
