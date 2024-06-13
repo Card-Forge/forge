@@ -1,6 +1,6 @@
 Name:Cephalid Broker
 ManaCost:3 U
-Types:Creature Cephalid
+Types:Creature Octopus
 PT:2/2
 A:AB$ Draw | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws two cards, then discards two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose

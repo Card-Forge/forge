@@ -1,6 +1,6 @@
 Name:Obscura Interceptor
 ManaCost:1 W U B
-Types:Creature Cephalid Wizard
+Types:Creature Octopus Wizard
 PT:3/1
 K:Flash
 K:Lifelink

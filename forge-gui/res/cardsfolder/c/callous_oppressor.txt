@@ -1,6 +1,6 @@
 Name:Callous Oppressor
 ManaCost:1 U U
-Types:Creature Cephalid
+Types:Creature Octopus
 PT:1/2
 K:You may choose not to untap CARDNAME during your untap step.
 K:ETBReplacement:Other:DBChooseOpp
