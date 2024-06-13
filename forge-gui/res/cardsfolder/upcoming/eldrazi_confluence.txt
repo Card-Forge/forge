@@ -1,6 +1,6 @@
 Name:Eldrazi Confluence
 ManaCost:2 C C
-Types:Sorcery
+Types:Instant
 A:SP$ Charm | Choices$ DBSpatialContortion,DBEldraziDisplacer,DBEldraziScion | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBSpatialContortion:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
 SVar:DBEldraziDisplacer:DB$ ChangeZone | TargetMin$ 1 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberTargets$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile target nonland permanent, then return it to the battlefield under its owner's control.
