@@ -50,6 +50,7 @@ import java.util.*;
  */
 public class BoosterDraft implements IBoosterDraft {
 
+    private static int nextId = 0;
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
@@ -371,9 +372,11 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
+
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < N_PLAYERS; i++) {
-                this.players.get(i).receiveUnopenedPack(boosterRound.get());
+                DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
+                this.players.get(i).receiveUnopenedPack(pack);
             }
         }
         startRound();
@@ -438,7 +441,7 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         for (int i = 0; i < N_PLAYERS; i++) {
-            List<PaperCard> passingPack = this.players.get(i).passPack();
+            DraftPack passingPack = this.players.get(i).passPack();
 
             if (passingPack == null)
                 continue;
@@ -496,8 +499,8 @@ public class BoosterDraft implements IBoosterDraft {
         recordDraftPick(thisBooster, c);
 
         // TODO Agent of Acquisitions activation to loop the entire pack?
-
         this.localPlayer.draftCard(c);
+
         this.currentBoosterPick++;
         this.passPacks();
     }

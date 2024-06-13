@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static forge.gamemodes.limited.CardRanker.getOrderedRawScores;
+import static forge.gamemodes.limited.CardRanker.rankCardsInPack;
+
 public class LimitedPlayerAI extends LimitedPlayer {
     protected DeckColors deckCols;
 
@@ -26,7 +29,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
             return null;
         }
 
-        List<PaperCard> chooseFrom = packQueue.peek();
+        DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom.isEmpty()) {
             return null;
         }
@@ -38,11 +41,10 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         // TODO Archdemon of Paliano random draft while active
 
-
         final ColorSet chosenColors = deckCols.getChosenColors();
         final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
-        List<PaperCard> rankedCards = CardRanker.rankCardsInPack(chooseFrom, pool.toFlatList(), chosenColors, canAddMoreColors);
+        List<PaperCard> rankedCards = rankCardsInPack(chooseFrom, pool.toFlatList(), chosenColors, canAddMoreColors);
         PaperCard bestPick = rankedCards.get(0);
 
         if (canAddMoreColors) {
@@ -176,5 +178,15 @@ public class LimitedPlayerAI extends LimitedPlayer {
         // Not really sure what the AI does with this information. But its' known now.
         //peekAt.getLastPick();
         return true;
+    }
+
+    @Override
+    public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {
+        if (chooseFrom.isEmpty()) {
+            return null;
+        }
+
+        // Choose the card with the highest rank left
+        return getOrderedRawScores(chooseFrom).get(0);
     }
 }

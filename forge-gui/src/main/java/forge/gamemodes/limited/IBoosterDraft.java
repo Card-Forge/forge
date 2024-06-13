@@ -49,4 +49,6 @@ public interface IBoosterDraft {
     IDraftLog getDraftLog();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);
+
+
 }

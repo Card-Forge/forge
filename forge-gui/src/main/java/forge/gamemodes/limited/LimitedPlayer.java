@@ -21,15 +21,15 @@ public class LimitedPlayer {
     protected Deck deck;
     protected PaperCard lastPick;
 
-    protected Queue<List<PaperCard>> packQueue;
-    protected Queue<List<PaperCard>> unopenedPacks;
+    protected Queue<DraftPack> packQueue;
+    protected Queue<DraftPack> unopenedPacks;
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
 
-    private static final int CantDraftThisRound = 1;
+    private static final int AgentAcquisitionsCantDraft = 1;
     private static final int SpyNextCardDrafted = 1 << 1;
-    private static final int ReceiveLastCard = 1 << 2;
-    private static final int CanRemoveAfterDraft = 1 << 3;
-    private static final int CanTradeAfterDraft = 1 << 4;
+    private static final int CanalDredgerReceiveLastCard = 1 << 2;
+    private static final int DealBrokerTradeAfter = 1 << 3;
+    private static final int SpirePhantasmGuessNext = 1 << 4;
     private static final int AnimusRemoveFromPool = 1 << 5;
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
@@ -98,7 +98,7 @@ public class LimitedPlayer {
             return false;
         }
 
-        List<PaperCard> chooseFrom = packQueue.peek();
+        DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom == null) {
             return false;
         }
@@ -107,7 +107,7 @@ public class LimitedPlayer {
         boolean alreadyRevealed = false;
 
         chooseFrom.remove(bestPick);
-        lastPick = lastPick;
+        lastPick = bestPick;
 
         draftedThisRound++;
 
@@ -136,7 +136,7 @@ public class LimitedPlayer {
             recordRemoveFromDraft(bestPick, choice);
         }
 
-        LimitedPlayer fromPlayer = receivedFrom();
+        LimitedPlayer fromPlayer = chooseFrom.getPassedFrom();
         // If the previous player has an active Cogwork Spy, show them this card
         if ((fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {
             if (fromPlayer instanceof LimitedPlayerAI) {
@@ -169,6 +169,10 @@ public class LimitedPlayer {
                 addLog(name() + " peeked at " + fromPlayer.name() + "'s next pick with Illusionary Informant and turned it face down.");
                 playerFlags &= ~IllusionaryInformantPeek;
             }
+        }
+
+        if (chooseFrom.getAwaitingGuess() != null) {
+            comparePhantasmGuess(chooseFrom, bestPick);
         }
 
         if (removedFromPool) {
@@ -227,15 +231,15 @@ public class LimitedPlayer {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
                     // Cogwork Spy
                     playerFlags |= SpyNextCardDrafted;
-                }
-
-                if (Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
+                } else if (Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
                     // Note who passed it to you.
                     // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
+                } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
+                    chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
                 }
 
                 addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
@@ -279,12 +283,8 @@ public class LimitedPlayer {
         // Mobile doesnt have a draft log yet
     }
 
-    public List<PaperCard> nextChoice() {
+    public DraftPack nextChoice() {
         return packQueue.peek();
-    }
-
-    public LimitedPlayer receivedFrom() {
-        return draft.getNeighbor(this, draft.getRound() % 2 == 0);
     }
 
     public void newPack() {
@@ -296,15 +296,19 @@ public class LimitedPlayer {
         currentPack = (currentPack + adjust + numPacks) % numPacks;
     }
 
-    public List<PaperCard> passPack() {
-        return packQueue.poll();
+    public DraftPack passPack() {
+        DraftPack pack = packQueue.poll();
+        if (pack != null) {
+            pack.setPassedFrom(this);
+        }
+        return pack;
     }
 
-    public void receiveUnopenedPack(List<PaperCard> pack) {
+    public void receiveUnopenedPack(DraftPack pack) {
         unopenedPacks.add(pack);
     }
 
-    public void receiveOpenedPack(List<PaperCard> pack) {
+    public void receiveOpenedPack(DraftPack pack) {
         packQueue.add(pack);
     }
 
@@ -506,7 +510,7 @@ public class LimitedPlayer {
         return true;
     }
 
-    protected List<PaperCard> peekAtBoosterPack(int round, int playerNumber) {
+    protected DraftPack peekAtBoosterPack(int round, int playerNumber) {
         if (draft.getRound() > round) {
             // There aren't any unopened packs from earlier rounds
             return null;
@@ -542,6 +546,30 @@ public class LimitedPlayer {
 
         return true;
     }
+
+    public PaperCard handleSpirePhantasm(DraftPack chooseFrom) {
+        if (chooseFrom.isEmpty()) {
+            return null;
+        }
+
+        return SGuiChoose.one("Guess the next card drafted from this pack", chooseFrom);
+    }
+
+    public void comparePhantasmGuess(DraftPack pack, PaperCard drafted) {
+        LimitedPlayer guesser = pack.getAwaitingGuess().getKey();
+        PaperCard guess = pack.getAwaitingGuess().getValue();
+
+        addLog(name() + " reveals " + drafted.getName() + " from " + guesser.name() + "'s guess of " + guess.getName() + " with Spire Phantasm.");
+        if (guess.equals(drafted)) {
+            addLog(guesser.name() + " correctly guessed " + guess.getName() + " with Spire Phantasm.");
+            guesser.getDraftNotes().computeIfAbsent("Spire Phantasm", k -> Lists.newArrayList()).add(guess.getName());
+        } else {
+            addLog(guesser.name() + " incorrectly guessed " + guess.getName() + " with Spire Phantasm.");
+        }
+
+        pack.resetAwaitingGuess();
+    }
+
 
     /*
     public void addSingleBoosterPack(boolean random) {
