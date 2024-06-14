@@ -94,10 +94,12 @@ public class CardFaceSymbols {
         //ability icons
         MANA_IMAGES.put("commander", FSkin.getImage(FSkinProp.IMG_ABILITY_COMMANDER));
         MANA_IMAGES.put("ringbearer", FSkin.getImage(FSkinProp.IMG_ABILITY_RINGBEARER));
+        MANA_IMAGES.put("annihilator", FSkin.getImage(FSkinProp.IMG_ABILITY_ANNIHILATOR));
         MANA_IMAGES.put("toxic", FSkin.getImage(FSkinProp.IMG_ABILITY_TOXIC));
         MANA_IMAGES.put("deathtouch", FSkin.getImage(FSkinProp.IMG_ABILITY_DEATHTOUCH));
         MANA_IMAGES.put("defender", FSkin.getImage(FSkinProp.IMG_ABILITY_DEFENDER));
         MANA_IMAGES.put("doublestrike", FSkin.getImage(FSkinProp.IMG_ABILITY_DOUBLE_STRIKE));
+        MANA_IMAGES.put("exalted", FSkin.getImage(FSkinProp.IMG_ABILITY_EXALTED));
         MANA_IMAGES.put("firststrike", FSkin.getImage(FSkinProp.IMG_ABILITY_FIRST_STRIKE));
         MANA_IMAGES.put("fear", FSkin.getImage(FSkinProp.IMG_ABILITY_FEAR));
         MANA_IMAGES.put("flash", FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH));
