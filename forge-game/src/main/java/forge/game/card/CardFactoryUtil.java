@@ -676,7 +676,7 @@ public class CardFactoryUtil {
                 validSource = "Green" + (damage ? "Source" : "");
             } else if (protectType.equals("colorless")) {
                 validSource = "Colorless" + (damage ? "Source" : "");
-            } else if (protectType.equals("all colors")) {
+            } else if (protectType.equals("each color")) {
                 validSource = "nonColorless" + (damage ? "Source" : "");
             } else if (protectType.equals("everything")) {
                 return "";

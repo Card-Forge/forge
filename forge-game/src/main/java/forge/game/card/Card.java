@@ -6735,7 +6735,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     pW = true;
                     protectKey += "W";
                 }
-            } else if (kw.contains("all colors")) {
+            } else if (kw.contains("each color")) {
                 protectKey += "allcolors:";
             } else if (kw.equals("Protection from everything")) {
                 protectKey += "everything:";
