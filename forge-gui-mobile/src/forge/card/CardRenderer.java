@@ -915,6 +915,15 @@ public class CardRenderer {
             abiY += abiSpace;
             abiCount += 1;
         }
+        if (card.getCurrentState().hasExalted()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("exalted", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
         if (card.getCurrentState().hasDeathtouch()) {
             if (abiCount > 5) {
                 abiY = cy + (abiSpace * (abiCount - 6));

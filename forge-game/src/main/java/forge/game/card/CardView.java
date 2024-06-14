@@ -1477,6 +1477,7 @@ public class CardView extends GameEntityView {
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
+        public boolean hasExalted() { return get(TrackableProperty.HasExalted); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
@@ -1554,6 +1555,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
                     "you choose among defending player and/or any number of creatures they control."));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
+            set(TrackableProperty.HasExalted, c.hasKeyword(Keyword.EXALTED, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
             set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));

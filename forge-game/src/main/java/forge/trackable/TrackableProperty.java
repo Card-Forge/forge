@@ -151,6 +151,7 @@ public enum TrackableProperty {
     HasDivideDamage(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),
     HasDoubleTeam(TrackableTypes.BooleanType),
+    HasExalted(TrackableTypes.BooleanType),
     HasFirstStrike(TrackableTypes.BooleanType),
     HasFlying(TrackableTypes.BooleanType),
     HasFear(TrackableTypes.BooleanType),

@@ -80,6 +80,7 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         Forge.getAssets().manaImages().put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
         Forge.getAssets().manaImages().put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
+        Forge.getAssets().manaImages().put("exalted", FSkinImage.IMG_ABILITY_EXALTED);
         Forge.getAssets().manaImages().put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
         Forge.getAssets().manaImages().put("fear", FSkinImage.IMG_ABILITY_FEAR);
         Forge.getAssets().manaImages().put("flash", FSkinImage.IMG_ABILITY_FLASH);
