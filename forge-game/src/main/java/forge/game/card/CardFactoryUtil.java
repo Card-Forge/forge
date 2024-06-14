@@ -2805,16 +2805,22 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Emerge")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
-            final SpellAbility sa = card.getFirstSpellAbility();
+            String validStr = kw.length > 2 ? kw[2] : "Creature";
+            String desc = "(Emerge";
+            if (kw.length > 2) {
+                desc += " from " + kw[2].toLowerCase();
+            }
+            desc += ")";
 
+            final SpellAbility sa = card.getFirstSpellAbility();
             final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
-            newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
+            newSA.getRestrictions().setIsPresent(validStr + ".YouCtrl+CanBeSacrificedBy");
             newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Emerge);
 
-            newSA.setDescription(sa.getDescription() + " (Emerge)");
-            newSA.putParam("AfterDescription", "(Emerge)");
+            newSA.setDescription(sa.getDescription() + " " + desc);
+            newSA.putParam("AfterDescription", desc);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Embalm")) {
