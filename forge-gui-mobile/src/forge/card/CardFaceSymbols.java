@@ -75,6 +75,7 @@ public class CardFaceSymbols {
 
         Forge.getAssets().manaImages().put("commander", FSkinImage.IMG_ABILITY_COMMANDER);
         Forge.getAssets().manaImages().put("ringbearer", FSkinImage.IMG_ABILITY_RINGBEARER);
+        Forge.getAssets().manaImages().put("annihilator", FSkinImage.IMG_ABILITY_ANNIHILATOR);
         Forge.getAssets().manaImages().put("toxic", FSkinImage.IMG_ABILITY_TOXIC);
         Forge.getAssets().manaImages().put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         Forge.getAssets().manaImages().put("defender", FSkinImage.IMG_ABILITY_DEFENDER);

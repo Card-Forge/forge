@@ -143,6 +143,7 @@ public enum TrackableProperty {
     CountBasicLandTypes(TrackableTypes.IntegerType),
 
     KeywordKey(TrackableTypes.StringType),
+    HasAnnihilator(TrackableTypes.BooleanType),
     HasDeathtouch(TrackableTypes.BooleanType),
     HasToxic(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
