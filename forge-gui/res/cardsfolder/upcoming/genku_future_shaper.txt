@@ -8,5 +8,5 @@ SVar:DBToken1:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_fox_vigilance | To
 SVar:DBToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_2_moonfolk_flying | TokenOwner$ You | SpellDescription$ 1/2 blue Moonfolk with flying.
 SVar:DBToken3:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_rat_lifelink | TokenOwner$ You | SpellDescription$ 1/1 black Rat with lifelink.
 A:AB$ PutCounterAll | Cost$ 3 W U | ValidCards$ Creature.YouCtrl | ValidCardsDesc$ creature you control | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
-DeckHas:Ability$Counters|Token
+DeckHas:Ability$Counters|Token|LifeGain
 Oracle:Whenever another nontoken permanent you control leaves the battlefield, choose one that hasn't been chosen this turn. Create a creature token with those characteristics.\n• 2/2 white Fox with vigilance.\n• 1/2 blue Moonfolk with flying.\n• 1/1 black Rat with lifelink.\n{3}{W}{U}: Put a +1/+1 counter on each creature you control.
