@@ -11,17 +11,17 @@
  <tileset firstgid="42497" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="17" name="Collision" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJztksENwjAMRQO3XLghsQL3zpCtGIAFODIjI1QVRI2Cbbk0KUK8J30pqeP/G7chAAD8B49vvwAAAAAAAAAAbEq89PO+R7127Zj7q6T4VJ5bUuZnzbVkdwxh/5LmJXlbuZqkeyTDS2I4vPeWuhm1SXW/l/Ks1a/VPr2vN9fTv4Q6d2lO69zpu51P8zrXt8iV1tK/tTbXe35NXu1jPSv3LTKzT+nnVQ9a5o7Dkyi+
+   eJzt0tEJwjAQxvHoW158EcEV+u4M2coBXMJxnKcjiNRgiHfH1SYV8f+Dg7Rp7mvShgAA/2H89gsAAAAAAIBVxXO/3teoz1065v6qFKfK55aU87POtbQ5hLB9ltZL6m3laiXtIxm9JKfd+9qybnt7vl7vVT5rrdfmPt2vN9ezfo46d25O69zHdxuOr3GeXyNXGkv/1tJc7/NL8uo+1r3yukVm7lP281YPLXPvxsgo+A==
   </data>
  </layer>
  <layer id="13" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJztmE1OwzAQhaN2EVi3qQCJnw3HACRU9RaAENyKqqWnYAWCTSVuwwmAjJJRBmN7Zuw4ESJPeqprx/M5E8dxkmWD+tJ2wlval9O60HGlcUO4PqXidiUt9yVvys+5+zgNF/Sa+22Ka+d0Wvc5YrgnJPaxYFwSLvhqh2d/ZJUl+ZBykX3t4afimnzTlHuYN/UhsnFdRi6wbgJ5IVwwrh+0HLKmabl30364XB66XPsGDRo06D9rXO7Dbqf2tmVhr9cI91k2ubg2xTwXzDFouL7xa9U1F3OWmuvqI+XiHkAqbi70ydXk+q9xF5f9cM16F3NTr1f3+9WvOd62x0PbwaMDWbxPMv6Y+9y1X5bE1M59KZeLCe3zWXtc+g7BcWPO18VMyXXF0nBtfVz12JaC63sP5bgStfUeGiptvmO5i12ei+2+cW6Uezzggr/K6zYqKtMyGkT/m8eMA7nw3RDLD0XzHYOeGwjqV/Xx8ItrR+j5QpzH2msPF+qA9zb/zcVYeO2k3Ke9ypSL327AwEHj+SK7TS7lmO6SizkGL415dzEL50Lc98nP+NRUOI8oK4a79XDpc68t7lmZp3PD5j3sy2soN3Xfb1qa9ls=
+   eJztmEtOwzAQhqt2EVi3qQCJx4ZjABKqcgtACI7EjorSU7ACwaYSt+EEQEbJKMNge8aTlxD5pV917Xg+Z+I4TkajQX1pM5Wt7StplcZxtXEt3JDa4nalWO5LUpWfE/9xMVzQaxI2l9Qu6bjscyBwj0jsQ8W4NFzwxZbM/hgV1uRDy0X2ZYDfFpfzuSl3P6nqLXJxfUYusK6MPAsXjOsHLVvWtFjuzawfrpSHLte+QYMGDfrPmuT7sOuZu22ZuutjhPssl3xcl+o8F/gYYrih8ceqay7mrG2ur4+Wi3sAraS50Cc3Jtd/jZud98Pl9T7mulyvbneLXz7epsdD28HjPV28TzL+Ove5b7+siRk797VcKSa0L+bNcek7hMStc74+ppV7l4X7udotXFcfXz22tcENvYdKXI2aeg+1KjbfdbnZtszF9tA415F7POCCv/LrNk4L0zIaRP/zYyZGLnw3xPJ9Wn3HoOcGgvqH8nj4xbXDer4Q57H0KsCFOuC9LX5zMRZeOy33aacw5eK3GzBw0Hi+yG6SSzncXXIxx+Alm3dnczsX4r5Pf8anpsJ5RFl1uJsAlz73muKe5Hk6Zeb3cCivVm7bfb8BwWL4Dw==
   </data>
  </layer>
  <layer id="18" name="Foreground" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="19" name="Above" width="30" height="60">
@@ -34,7 +34,7 @@
  </layer>
  <layer id="20" name="AboveSprites" width="30" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJACAQBMFvQuuxVxs1Ej41UHmYKeDY6CIAAAAAuGW23wVnqvXCNnqtXch8L/DaAtyPAtU=
+   eJzt0rENwCAQA8BfAhZgkRTZlEnYjJYmBYleUZS71pLlwhEAAAAAZOnl7QV7vraX/xjns/yuo+b0wqol/RfgygTemwQ4
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9">
@@ -150,7 +150,7 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="226.355" y="816.886" width="15.7579" height="22.3749" rotation="0">
+  <object id="183" template="../../obj/gate.tx" gid="3221229597" x="226.355" y="821.63" width="15.7579" height="22.3749" rotation="0">
    <properties>
     <property name="dialog">[{
     &quot;text&quot;:&quot;This door is locked&quot;,
