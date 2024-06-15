@@ -762,6 +762,9 @@ public class DeckRecognizer {
         // is not supported, but other possibilities exist (e.g. Commander card in Constructed
         // could potentially go in Main)
         DeckSection matchedSection = DeckSection.matchingSection(card);
+        // If it's a commander candidate, put it there.
+        if (matchedSection == DeckSection.Main && this.isAllowed(DeckSection.Commander) && DeckSection.Commander.validate(card))
+            return DeckSection.Commander;
         if (this.isAllowed(matchedSection))
             return matchedSection;
         // if matched section is not allowed, try to match the card to main.

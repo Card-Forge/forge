@@ -41,8 +41,6 @@ public enum DeckSection {
             return Avatar;
         if (DeckSection.Planes.validate(card))
             return Planes;
-        if (DeckSection.Commander.validate(card))
-            return Commander;
         if (DeckSection.Dungeon.validate(card))
             return Dungeon;
         if (DeckSection.Attractions.validate(card))
