@@ -537,6 +537,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return allCards;
     }
 
+    /**
+     * Counts the number of cards with the given name across all deck sections.
+     */
+    public int countByName(String cardName) {
+        int sum = 0;
+        for (Entry<DeckSection, CardPool> section : this) {
+            sum += section.getValue().countByName(cardName);
+        }
+        return sum;
+    }
+
     public void setAiHints(String aiHintsInfo) {
         if (aiHintsInfo == null || aiHintsInfo.trim().equals("")) {
             return;

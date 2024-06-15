@@ -155,12 +155,12 @@ public class CardPool extends ItemPool<PaperCard> {
         return null;
     }
 
-    public int countByName(String cardName, boolean isCommonCard) {
-        PaperCard pc = isCommonCard
-                ? StaticData.instance().getCommonCards().getCard(cardName)
-                : StaticData.instance().getVariantCards().getCard(cardName);
+    public int countByName(String cardName) {
+        return this.countAll((c) -> c.getName().equals(cardName));
+    }
 
-        return this.count(pc);
+    public int countByName(PaperCard card) {
+        return this.countAll((c) -> c.getName().equals(card.getName()));
     }
 
     /**

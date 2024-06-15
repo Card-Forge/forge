@@ -217,8 +217,8 @@ public enum DeckFormat {
         // Adjust minimum base on number of Advantageous Proclamation or similar cards
         CardPool conspiracies = deck.get(DeckSection.Conspiracy);
         if (conspiracies != null) {
-            min -= (5 * conspiracies.countByName(ADVPROCLAMATION, false));
-            noBasicLands = conspiracies.countByName(SOVREALM, false) > 0;
+            min -= (5 * conspiracies.countByName(ADVPROCLAMATION));
+            noBasicLands = conspiracies.countByName(SOVREALM) > 0;
         }
 
         if (hasCommander()) {
@@ -361,7 +361,7 @@ public enum DeckFormat {
             }
 
             Integer cardCopies = canHaveSpecificNumberInDeck(simpleCard);
-            if (cardCopies != null && deck.getMain().countByName(cp.getKey(), true) > cardCopies) {
+            if (cardCopies != null && deck.getMain().countByName(cp.getKey()) > cardCopies) {
                 return TextUtil.concatWithSpace("must not contain more than", String.valueOf(cardCopies), "copies of the card", cp.getKey());
             }
 
@@ -388,7 +388,7 @@ public enum DeckFormat {
             return "must contain at least 10 attractions, or none at all";
         for (Entry<PaperCard, Integer> cp : attractionDeck) {
             //Constructed Attraction deck must be singleton
-            if (attractionDeck.countByName(cp.getKey().getName(), false) > 1)
+            if (attractionDeck.countByName(cp.getKey()) > 1)
                 return TextUtil.concatWithSpace("contains more than 1 copy of the attraction", cp.getKey().getName());
         }
         return null;
