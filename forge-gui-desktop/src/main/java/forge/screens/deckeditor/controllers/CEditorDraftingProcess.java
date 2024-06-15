@@ -120,7 +120,13 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getDeckManager().addItem(card, 1);
 
         // get next booster pack
-        this.boosterDraft.setChoice(card);
+        boolean passPack = this.boosterDraft.setChoice(card);
+
+        if (!passPack) {
+            // For some reason we want to pick again. Don't rotate the pack yet
+            // This is for cards that let you draft multiple times from the same pack
+            return;
+        }
 
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;

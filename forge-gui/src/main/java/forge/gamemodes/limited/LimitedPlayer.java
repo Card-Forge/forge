@@ -25,11 +25,11 @@ public class LimitedPlayer {
     protected Queue<DraftPack> unopenedPacks;
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
 
-    private static final int AgentAcquisitionsCantDraft = 1;
-    private static final int SpyNextCardDrafted = 1 << 1;
-    private static final int CanalDredgerReceiveLastCard = 1 << 2;
-    private static final int DealBrokerTradeAfter = 1 << 3;
-    private static final int SpirePhantasmGuessNext = 1 << 4;
+    private static final int AgentAcquisitionsCanDraftAll = 1;
+    private static final int AgentAcquisitionsIsDraftingAll = 1 << 1;
+    private static final int AgentAcquisitionsSkipDraftRound = 1 << 2;
+    private static final int CogworkLibrarianReturnLibrarian = 1 << 3;
+    private static final int CogworkLibrarianExtraDraft = 1 << 4;
     private static final int AnimusRemoveFromPool = 1 << 5;
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
@@ -37,8 +37,9 @@ public class LimitedPlayer {
     private static final int SearcherNoteNext = 1 << 9;
     private static final int WhispergearBoosterPeek = 1 << 10;
     private static final int IllusionaryInformantPeek = 1 << 11;
-    private static final int SearcherNoteNext = 1 << 9;
-    private static final int WhispergearBoosterPeek = 1 << 10;
+    private static final int LeovoldsOperativeExtraDraft = 1 << 12;
+    private static final int LeovoldsOperativeSkipNext = 1 << 13;
+    private static final int SpyNextCardDrafted = 1 << 14;
 
     private int playerFlags = 0;
 
@@ -90,21 +91,22 @@ public class LimitedPlayer {
         return null;
     }
 
-    public boolean draftCard(PaperCard bestPick) {
+    public Boolean draftCard(PaperCard bestPick) {
         return draftCard(bestPick, DeckSection.Sideboard);
     }
-    public boolean draftCard(PaperCard bestPick, DeckSection section) {
+    public Boolean draftCard(PaperCard bestPick, DeckSection section) {
         if (bestPick == null) {
-            return false;
+            return null;
         }
 
         DraftPack chooseFrom = packQueue.peek();
         if (chooseFrom == null) {
-            return false;
+            return null;
         }
 
         boolean removedFromPool = false;
         boolean alreadyRevealed = false;
+        boolean passPack = true;
 
         chooseFrom.remove(bestPick);
         lastPick = bestPick;
@@ -136,9 +138,10 @@ public class LimitedPlayer {
             recordRemoveFromDraft(bestPick, choice);
         }
 
+
         LimitedPlayer fromPlayer = chooseFrom.getPassedFrom();
         // If the previous player has an active Cogwork Spy, show them this card
-        if ((fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {
+        if (fromPlayer != null && (fromPlayer.playerFlags & SpyNextCardDrafted) == SpyNextCardDrafted) {
             if (fromPlayer instanceof LimitedPlayerAI) {
                 // I'm honestly not sure what the AI would do by learning this information
                 // But just log that a reveal "happened"
@@ -171,13 +174,62 @@ public class LimitedPlayer {
             }
         }
 
+        if ((playerFlags & AgentAcquisitionsCanDraftAll) == AgentAcquisitionsCanDraftAll) {
+            if (handleLeovoldsOperative(chooseFrom, bestPick)) {
+                addLog(name() + " drafted the rest of the pack with Agent of Acquisitions");
+                playerFlags &= ~AgentAcquisitionsCanDraftAll;
+                playerFlags |= AgentAcquisitionsIsDraftingAll;
+            }
+        }
+
+        if ((playerFlags & AgentAcquisitionsIsDraftingAll) == AgentAcquisitionsIsDraftingAll) {
+            if (chooseFrom.isEmpty()) {
+                playerFlags &= ~AgentAcquisitionsIsDraftingAll;
+                playerFlags |= AgentAcquisitionsSkipDraftRound;
+            } else {
+                passPack = false;
+            }
+        }
+
+        if ((playerFlags & LeovoldsOperativeExtraDraft) == LeovoldsOperativeExtraDraft) {
+            if (handleLeovoldsOperative(chooseFrom, bestPick)) {
+                addLog(name() + " skipped " + fromPlayer.name() + "'s next pick with Leovold's Operative.");
+                playerFlags &= ~LeovoldsOperativeExtraDraft;
+                playerFlags |= LeovoldsOperativeSkipNext;
+                passPack = false;
+            }
+        }
+
+        if ((playerFlags & CogworkLibrarianReturnLibrarian) == CogworkLibrarianReturnLibrarian) {
+            addLog(name() + " returned Cogwork Librarian to the pack.");
+
+            PaperCard librarian = deck.removeCardName("Cogwork Librarian");
+            // We shouldn't get here unless we've drafted librarian so we should be able to find one in Deck
+            // If somehow we don't wellll.. we should remove the bitflag anyway
+            playerFlags &= ~CogworkLibrarianReturnLibrarian;
+            if (librarian != null) {
+                chooseFrom.add(librarian);
+            } else {
+                System.out.println("This shouldn't happen. We drafted a libarian but didn't remove it properly.");
+            }
+        }
+
+        if ((playerFlags & CogworkLibrarianExtraDraft) == CogworkLibrarianExtraDraft) {
+            if (handleCogworkLibrarian(chooseFrom, bestPick)) {
+                addLog(name() + " drafted an extra card with Cogwork Librarian.");
+                playerFlags &= ~CogworkLibrarianExtraDraft;
+                playerFlags |= CogworkLibrarianReturnLibrarian;
+                passPack = false;
+            }
+        }
+
         if (chooseFrom.getAwaitingGuess() != null) {
             comparePhantasmGuess(chooseFrom, bestPick);
         }
 
         if (removedFromPool) {
             // Can we hide this from UI?
-            return true;
+            return passPack;
         }
 
         CardPool pool = deck.getOrCreate(section);
@@ -188,7 +240,7 @@ public class LimitedPlayer {
 
         Iterable<String> draftActions = bestPick.getRules().getMainPart().getDraftActions();
         if (draftActions == null || !draftActions.iterator().hasNext()) {
-            return true;
+            return passPack;
         }
 
         // Draft Actions
@@ -231,7 +283,7 @@ public class LimitedPlayer {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
                     // Cogwork Spy
                     playerFlags |= SpyNextCardDrafted;
-                } else if (Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
+                } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
                     // Note who passed it to you.
                     // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
@@ -267,6 +319,14 @@ public class LimitedPlayer {
                 // Do we need to ask to use the Sneak immediately?
             } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at the next card drafted by a player of your choice.")) {
                 playerFlags |= IllusionaryInformantPeek;
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)") &&
+                    bestPick.getName().equals("Leovold's Operative")) {
+                playerFlags |= LeovoldsOperativeExtraDraft;
+            } else if (Iterables.contains(draftActions, "As you draft CARDNAME, you may draft an additional card from this booster pack. If you do, put CARDNAME into that booster pack.") &&
+                    bestPick.getName().equals("Cogwork Librarian")) {
+                playerFlags |= CogworkLibrarianExtraDraft;
+            } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
+                playerFlags |= AgentAcquisitionsCanDraftAll;
             }
         }
 
@@ -291,8 +351,10 @@ public class LimitedPlayer {
         currentPack = order;
         draftedThisRound = 0;
         packQueue.add(unopenedPacks.poll());
+        playerFlags &= ~AgentAcquisitionsSkipDraftRound;
     }
     public void adjustPackNumber(int adjust, int numPacks) {
+        // I shouldn't need this since DraftPack has this info
         currentPack = (currentPack + adjust + numPacks) % numPacks;
     }
 
@@ -302,6 +364,16 @@ public class LimitedPlayer {
             pack.setPassedFrom(this);
         }
         return pack;
+    }
+
+    public boolean shouldSkipThisPick() {
+        boolean skipping = (playerFlags & AgentAcquisitionsSkipDraftRound) == AgentAcquisitionsSkipDraftRound || (playerFlags & LeovoldsOperativeSkipNext) == LeovoldsOperativeSkipNext;
+
+        if (skipping && (playerFlags & LeovoldsOperativeSkipNext) == LeovoldsOperativeSkipNext) {
+            playerFlags &= ~LeovoldsOperativeSkipNext;
+        }
+
+        return skipping;
     }
 
     public void receiveUnopenedPack(DraftPack pack) {
@@ -553,6 +625,23 @@ public class LimitedPlayer {
         }
 
         return SGuiChoose.one("Guess the next card drafted from this pack", chooseFrom);
+    }
+
+    public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+        if (Objects.equals(SGuiChoose.one("Draft an extra pick with Leovold's Operative?", Lists.newArrayList("Yes", "No")), "No")) {
+            return false;
+        }
+
+        playerFlags |= LeovoldsOperativeExtraDraft;
+        return true;
+    }
+
+    public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+        return !Objects.equals(SGuiChoose.one("Draft an extra pick with Cogwork Librarian?", Lists.newArrayList("Yes", "No")), "No");
+    }
+
+    public boolean handleAgentOfAcquisitions(DraftPack pack, PaperCard drafted) {
+        return !Objects.equals(SGuiChoose.one("Draft the rest of the pack with Agent of Acquisitions?", Lists.newArrayList("Yes", "No")), "No");
     }
 
     public void comparePhantasmGuess(DraftPack pack, PaperCard drafted) {

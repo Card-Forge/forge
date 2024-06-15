@@ -163,4 +163,8 @@ public class DraftPack implements List<PaperCard> {
     public List<PaperCard> subList(int fromIndex, int toIndex) {
         return cards.subList(fromIndex, toIndex);
     }
+
+    public String toString() {
+        return cards.toString();
+    }
 }

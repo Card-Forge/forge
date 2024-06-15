@@ -189,4 +189,25 @@ public class LimitedPlayerAI extends LimitedPlayer {
         // Choose the card with the highest rank left
         return getOrderedRawScores(chooseFrom).get(0);
     }
+
+    @Override
+    public boolean handleLeovoldsOperative(DraftPack pack, PaperCard drafted) {
+        // Whats the score of the thing I just drafted?
+        // Whats the next card I would draft?
+        if (currentPack == 3) {
+            return true;
+        }
+
+        return draftedThisRound < 3;
+    }
+
+    @Override
+    public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
+        if (currentPack == 3) {
+            return true;
+        }
+
+        return draftedThisRound < 3;
+    }
+
 }

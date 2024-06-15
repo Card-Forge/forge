@@ -1,0 +1,7 @@
+Name:Leovold's Operative
+ManaCost:2 G
+Types:Creature Elf Rogue
+PT:3/2
+Draft:Draft CARDNAME face up.
+Draft:As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)
+Oracle:Draft Leovold’s Operative face up.\n\nAs you draft a card, you may draft an additional card from that booster pack. If you do, turn Leovold’s Operative face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)

@@ -174,6 +174,21 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return cp != null && !cp.isEmpty();
     }
 
+    public PaperCard removeCardName(String name) {
+        PaperCard paperCard;
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getName().equalsIgnoreCase(name)) {
+                    paperCard = pc.getKey();
+                    pool.remove(paperCard);
+                    return paperCard;
+                }
+            }
+        }
+        return null;
+    }
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
