@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
+import forge.gui.GuiBase;
 import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.itemmanager.AdvancedSearch;
@@ -69,6 +70,34 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     public void reset() {
         model.reset();
         editScreen = null;
+    }
+
+    public void setFilterParts(final String[] items, boolean joinAnd) {
+        //This could be made more robust, processing "and"s, "or"s, and parentheses to fully configure the filter,
+        //but that'll have to wait until there's a use case for it.
+        //This could also probably be moved up to the interface and shared with the desktop version,
+        //but again, can't think of a use case at the moment.
+        this.reset();
+        editScreen = new EditScreen();
+        EditScreen.Filter currFilter = this.editScreen.getNewestFilter();
+        for (int i = 0; i < items.length; i++) {
+            String filterText = items[i];
+            AdvancedSearch.Filter<T> filter = AdvancedSearch.getFilter(itemManager.getGenericType(), filterText);
+            if(filter == null)
+                continue;
+            currFilter.setFilter(filter);
+            currFilter.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
+            if(i < items.length - 1) {
+                if (joinAnd)
+                    currFilter.btnAnd.setSelected(true);
+                else
+                    currFilter.btnOr.setSelected(true);
+                this.editScreen.addNewFilter(currFilter);
+                currFilter = this.editScreen.getNewestFilter();
+            }
+        }
+
+        onFilterChange.run();
     }
 
     @Override
@@ -201,6 +230,11 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
         @Override
         protected void doLayout(float startY, float width, float height) {
             scroller.setBounds(0, startY, width, height - startY);
+        }
+
+        @SuppressWarnings("unchecked") //Nothing except Filters are ever added to this FScrollPane.
+        private Filter getNewestFilter() {
+            return (Filter) scroller.getChildAt(scroller.getChildCount() - 1);
         }
 
         private void addNewFilter(Filter fromFilter) {

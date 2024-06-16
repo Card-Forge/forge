@@ -749,6 +749,33 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
+    public void applyAdvancedSearchFilter(String filterString) {
+        applyAdvancedSearchFilter(new String[]{filterString}, false);
+    }
+
+    /**
+     * Programmatically method to set this ItemManager's advanced search filter value.
+     * Other filters will be cleared.
+     */
+    public void applyAdvancedSearchFilter(String[] filterStrings, boolean joinAnd) {
+        if(advancedSearchFilter == null) {
+            advancedSearchFilter = createAdvancedSearchFilter();
+            ItemManager.this.add(advancedSearchFilter.getWidget());
+        }
+        lockFiltering = true;
+        for (final ItemFilter<? extends T> filter : filters) {
+            filter.reset();
+        }
+        searchFilter.reset();
+        advancedSearchFilter.reset();
+        advancedSearchFilter.setFilterParts(filterStrings, joinAnd);
+        lockFiltering = false;
+
+        applyFilters();
+        advancedSearchFilter.refreshWidget();
+        revalidate();
+    }
+
     //Refresh displayed items
     public void refresh() {
         updateView(true, getSelectedItems());

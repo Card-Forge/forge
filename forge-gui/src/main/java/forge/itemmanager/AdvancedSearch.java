@@ -11,11 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -1095,8 +1097,7 @@ public class AdvancedSearch {
 
     private static abstract class FilterEvaluator<T extends InventoryItem, V> {
         @SuppressWarnings("unchecked")
-        public final Filter<T> createFilter(FilterOption option, FilterOperator operator) {
-            final List<V> values = getValues(option, operator);
+        public final Filter<T> createFilter(FilterOption option, FilterOperator operator, List<V> values) {
             if (values == null || values.isEmpty()) {
                 return null;
             }
@@ -1127,7 +1128,26 @@ public class AdvancedSearch {
             return new Filter<>(option, operator, caption, predicate);
         }
 
+        public final Filter<T> createFilter(FilterOption option, FilterOperator operator) {
+            final List<V> values = getValues(option, operator);
+            return createFilter(option, operator, values);
+        }
+
+
+        public final Filter<T> createFilter(FilterOption option, FilterOperator operator, String initialValueText) {
+            final List<V> values;
+            try {
+                values = getValuesFromString(initialValueText, option, operator);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+            return createFilter(option, operator, values);
+        }
+
         protected abstract List<V> getValues(FilterOption option, FilterOperator operator);
+        protected abstract List<V> getValuesFromString(String valueText, FilterOption option, FilterOperator operator);
         protected abstract String getCaption(List<V> values, FilterOption option, FilterOperator operator);
         protected abstract V getItemValue(T input);
 
@@ -1145,6 +1165,11 @@ public class AdvancedSearch {
             List<Boolean> values = new ArrayList<>();
             values.add(operator == FilterOperator.IS_TRUE); //just always add a single boolean value so other logic works
             return values;
+        }
+
+        @Override
+        protected List<Boolean> getValuesFromString(String valueText, FilterOption option, FilterOperator operator) {
+            return getValues(option, operator);
         }
 
         @Override
@@ -1191,6 +1216,11 @@ public class AdvancedSearch {
         }
 
         @Override
+        protected List<Integer> getValuesFromString(String valueText, FilterOption option, FilterOperator operator) {
+            return Arrays.stream(valueText.split(";")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
+        }
+
+        @Override
         protected String getCaption(List<Integer> values, FilterOption option, FilterOperator operator) {
             if (operator.valueCount == FilterValueCount.TWO) {
                 return String.format(operator.formatStr, option.name, values.get(0), values.get(1));
@@ -1216,6 +1246,11 @@ public class AdvancedSearch {
             List<String> values = new ArrayList<>();
             values.add(value);
             return values;
+        }
+
+        @Override
+        protected List<String> getValuesFromString(String valueText, FilterOption option, FilterOperator operator) {
+            return Lists.newArrayList(valueText);
         }
 
         @Override
@@ -1245,6 +1280,20 @@ public class AdvancedSearch {
             int max = choices.size();
             String message = option.name + " " + operator.caption + " ?";
             return SGuiChoose.getChoices(message, 0, max, choices, null, toLongString);
+        }
+
+        @Override
+        protected List<V> getValuesFromString(String valueText, FilterOption option, FilterOperator operator) {
+            String[] values = valueText.split(";");
+            return choices.stream().filter((choice) -> Arrays.stream(values).anyMatch((name) -> eitherStringMatches(choice, name))).collect(Collectors.toList());
+        }
+
+        private boolean eitherStringMatches(V choice, String name) {
+            if(toLongString != null && name.equals(toLongString.apply(choice)))
+                return true;
+            if(toShortString != null)
+                return name.equals(toShortString.apply(choice));
+            return name.equals(choice.toString());
         }
 
         @Override
@@ -1331,6 +1380,26 @@ public class AdvancedSearch {
         }
 
         @Override
+        protected List<Map<String, Integer>> getValuesFromString(String valueText, FilterOption option, FilterOperator operator) {
+            int amount = -1;
+            String cardName;
+            if(operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) {
+                //Take the format "2 Mountain"
+                String[] split = valueText.split(" ", 2);
+                amount = Integer.parseInt(split[0]);
+                cardName = split[1];
+            }
+            else
+                cardName = valueText;
+            Map<String, Integer> map = new HashMap<>();
+            map.put(cardName, amount);
+
+            List<Map<String, Integer>> values = new ArrayList<>();
+            values.add(map);
+            return values;
+        }
+
+        @Override
         protected String getCaption(List<Map<String, Integer>> values, FilterOption option, FilterOperator operator) {
             Entry<String, Integer> entry = values.get(0).entrySet().iterator().next();
             if (operator == FilterOperator.CONTAINS_X_COPIES_OF_CARD) {
@@ -1379,6 +1448,40 @@ public class AdvancedSearch {
             filter = editFilter;
         }
         return filter;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends InventoryItem> Filter<T> getFilter(Class<? super T> type, String filterText) {
+        String[] words = filterText.split(" ", 3);
+        if(words.length < 2)
+        {
+            System.out.printf("Unable to generate filter from expression '%s'%n", filterText);
+            return null;
+        }
+        String filterValue = words.length > 2 ? words[2] : "";
+
+        FilterOption option;
+        try {
+            option = FilterOption.valueOf(words[0]);
+        } catch (IllegalArgumentException e) {
+            System.out.printf("Unable to generate filter from FilterOption '%s'%n", words[0]);
+            return null;
+        }
+        if(option.type != type)
+        {
+            System.out.printf("Unable to generate filter from FilterOption '%s' - filter type '%s' != option type '%s' %n", words[0], type, option.type);
+            return null;
+        }
+
+        FilterOperator operator;
+        try {
+            operator = FilterOperator.valueOf(words[1]);
+        } catch (IllegalArgumentException e) {
+            System.out.printf("Unable to generate filter from FilterOption '%s' - no matching operator '%s'%n", words[0], words[1]);
+            return null;
+        }
+
+        return (Filter<T>) option.evaluator.createFilter(option, operator, filterValue);
     }
 
     public static class Filter<T extends InventoryItem> {
