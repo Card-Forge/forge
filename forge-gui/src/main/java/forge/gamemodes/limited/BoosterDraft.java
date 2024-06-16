@@ -440,6 +440,8 @@ public class BoosterDraft implements IBoosterDraft {
             adjust = 0;
         }
 
+        // Do any players have a Canal Dredger?
+
         for (int i = 0; i < N_PLAYERS; i++) {
             DraftPack passingPack = this.players.get(i).passPack();
 
@@ -502,7 +504,7 @@ public class BoosterDraft implements IBoosterDraft {
      */
     @Override
     public boolean setChoice(final PaperCard c) {
-        final List<PaperCard> thisBooster = this.localPlayer.nextChoice();
+        final DraftPack thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
@@ -511,13 +513,12 @@ public class BoosterDraft implements IBoosterDraft {
 
         recordDraftPick(thisBooster, c);
 
-        // TODO Agent of Acquisitions activation to loop the entire pack?
         boolean passPack = this.localPlayer.draftCard(c);
         if (passPack) {
             // Leovolds Operative and Cogwork Librarian get to draft an extra card.. How do we do that?
-            this.currentBoosterPick++;
             this.passPacks();
         }
+        this.currentBoosterPick++;
 
         return passPack;
     }

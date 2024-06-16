@@ -175,7 +175,7 @@ public class LimitedPlayer {
         }
 
         if ((playerFlags & AgentAcquisitionsCanDraftAll) == AgentAcquisitionsCanDraftAll) {
-            if (handleLeovoldsOperative(chooseFrom, bestPick)) {
+            if (handleAgentOfAcquisitions(chooseFrom, bestPick)) {
                 addLog(name() + " drafted the rest of the pack with Agent of Acquisitions");
                 playerFlags &= ~AgentAcquisitionsCanDraftAll;
                 playerFlags |= AgentAcquisitionsIsDraftingAll;
@@ -281,7 +281,6 @@ public class LimitedPlayer {
             }
             else {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
-                    // Cogwork Spy
                     playerFlags |= SpyNextCardDrafted;
                 } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
                     // Note who passed it to you.
@@ -292,6 +291,12 @@ public class LimitedPlayer {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
+                } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, put CARDNAME into that booster pack.")) {
+                    playerFlags |= CogworkLibrarianExtraDraft;
+                } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)")) {
+                    playerFlags |= LeovoldsOperativeExtraDraft;
+                } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
+                    playerFlags |= AgentAcquisitionsCanDraftAll;
                 }
 
                 addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
