@@ -1,6 +1,6 @@
 Name:Cephalid Looter
 ManaCost:2 U
-Types:Creature Cephalid Rogue
+Types:Creature Octopus Rogue
 PT:2/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card, then discards a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
