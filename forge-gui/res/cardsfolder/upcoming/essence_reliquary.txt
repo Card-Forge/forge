@@ -1,0 +1,5 @@
+Name:Essence Reliquary
+ManaCost:2 W
+Types:Artifact
+A:AB$ ChangeZoneAll | Cost$ T | Origin$ Battlefield | ValidTgts$ Permanent.YouCtrl+Other | TgtPrompt$ Select another target permanent you control | ChangeType$ TargetedCard.Self,Aura.YouCtrl+AttachedTo Targeted | UseAllOriginZones$ True | StackDescription$ Return {c:Targeted} and all Auras attached to it to their owners' hands | Destination$ Hand | PlayerTurn$ True | SpellDescription$ Return another target permanent you control and all Auras you control attached to it to their owner's hand. Activate only during your turn.
+Oracle:{T}: Return another target permanent you control and all Auras you control attached to it to their owner's hand. Activate only during your turn.

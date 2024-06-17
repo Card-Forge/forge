@@ -223,7 +223,15 @@ public class CostAdjustment {
         // Reduce cost
         int sumGeneric = 0;
         if (sa.hasParam("ReduceCost")) {
-            sumGeneric += AbilityUtils.calculateAmount(originalCard, sa.getParam("ReduceCost"), sa);
+            String cst = sa.getParam("ReduceCost");
+            String amt = sa.getParamOrDefault("ReduceAmount", cst);
+            int num = AbilityUtils.calculateAmount(originalCard, amt, sa);
+
+            if (sa.hasParam("ReduceAmount") && num > 0) {
+                cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
+            } else {
+                sumGeneric += num;
+            }
         }
 
         while (!reduceAbilities.isEmpty()) {
@@ -379,9 +387,15 @@ public class CostAdjustment {
     }
 
     private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
-        CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa, false));
+        String kw = sa.getKeyword().getOriginal();
+        String k[] = kw.split(":");
+        String validStr = k.length > 2 ? k[2] : "Creature";
+        Player p = sa.getActivatingPlayer();
+        CardCollectionView canEmerge = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
+                CardPredicates.restriction(validStr, p, sa.getHostCard(), sa),
+                CardPredicates.canBeSacrificedBy(sa, false));
 
-        final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
+        final CardCollectionView toSacList = p.getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, validStr);
 
         if (toSacList.isEmpty()) {
             return;

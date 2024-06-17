@@ -1,0 +1,8 @@
+Name:Invert Polarity
+ManaCost:U U R
+Types:Instant
+A:SP$ FlipACoin | TargetType$ Spell | TgtZone$ Stack | WinSubAbility$ GainControl | LoseSubAbility$ CounterIt | ValidTgts$ Card | StackDescription$ SpellDescription | SpellDescription$ Choose target spell, then flip a coin. If you win the flip, gain control of that spell and you may choose new targets for it. If you lose the flip, counter that spell.
+SVar:GainControl:DB$ ControlSpell | Defined$ Targeted | Mode$ Gain | SubAbility$ DBChooseTargets
+SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ Targeted | Optional$ True
+SVar:CounterIt:DB$ Counter | Defined$ Targeted
+Oracle:Choose target spell, then flip a coin. If you win the flip, gain control of that spell and you may choose new targets for it. If you lose the flip, counter that spell.

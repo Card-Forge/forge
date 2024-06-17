@@ -1,0 +1,10 @@
+Name:Spawnbed Protector
+ManaCost:7
+Types:Creature Eldrazi
+PT:6/8
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return up to one target Eldrazi creature card from your graveyard to your hand. Create two 1/1 colorless Eldrazi Scion creature tokens with "Sacrifice this creature: Add {C}."
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Eldrazi+YouOwn | SubAbility$ DBToken | TgtPrompt$ Select target Eldrazi creature card in your graveyard
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
+DeckHas:Ability$Mana.Colorless|Graveyard|Token
+DeckHints:Ability$Mill & Type$Eldrazi
+Oracle:At the beginning of your end step, return up to one target Eldrazi creature card from your graveyard to your hand. Create two 1/1 colorless Eldrazi Scion creature tokens with "Sacrifice this creature: Add {C}."

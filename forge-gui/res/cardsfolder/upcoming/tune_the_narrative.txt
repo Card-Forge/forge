@@ -1,0 +1,6 @@
+Name:Tune the Narrative
+ManaCost:U
+Types:Instant
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBEnergy | StackDescription$ SpellDescription | SpellDescription$ Draw a card. You get {E}{E} (two energy counters).
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+Oracle:Draw a card. You get {E}{E} (two energy counters).

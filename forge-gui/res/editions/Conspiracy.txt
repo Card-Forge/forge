@@ -222,7 +222,7 @@ ScryfallCode=CNS
 
 [Draft Matters]
 #1 Advantageous Proclamation|CNS
-1 AEther Searcher|CNS
+1 Aether Searcher|CNS
 #1 Agent of Acquisitions|CNS
 #1 Backup Plan|CNS
 1 Brago's Favor|CNS
