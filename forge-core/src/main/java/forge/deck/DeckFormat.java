@@ -549,16 +549,14 @@ public enum DeckFormat {
 
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
         byte cmdCI = 0;
-        boolean hasPartner = false;
         for (final PaperCard p : commanders) {
             cmdCI |= p.getRules().getColorIdentity().getColor();
-            if (p.getRules().canBePartnerCommander()) {
-                hasPartner = true;
-            }
         }
         Predicate<CardRules> predicate = CardRulesPredicates.hasColorIdentity(cmdCI);
-        if (hasPartner) { //also show available partners a commander can have a partner
-            predicate = Predicates.or(predicate, CardRulesPredicates.Presets.CAN_BE_PARTNER_COMMANDER);
+        if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) { //also show available partners a commander can have a partner
+            //702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
+            //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
+            predicate = Predicates.or(predicate, CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
         return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
     }

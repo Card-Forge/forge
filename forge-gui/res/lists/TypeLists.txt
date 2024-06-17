@@ -336,6 +336,7 @@ Saga
 Shrine
 Shard
 [ArtifactTypes]
+Attraction
 Blood
 Bobblehead:Bobbleheads
 Clue:Clues

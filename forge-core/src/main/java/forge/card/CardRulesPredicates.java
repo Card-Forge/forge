@@ -355,6 +355,10 @@ public final class CardRulesPredicates {
         };
     }
 
+    public static Predicate<CardRules> canBePartnerCommanderWith(final CardRules commander) {
+        return (rules) -> rules.canBePartnerCommanders(commander);
+    }
+
     private static class LeafString extends PredicateString<CardRules> {
         public enum CardField {
             ORACLE_TEXT, NAME, SUBTYPE, JOINED_TYPE, COST

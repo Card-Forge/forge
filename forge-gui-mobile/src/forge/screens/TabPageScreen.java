@@ -85,6 +85,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         tabPage.parentScreen = (T) this;
         add(tabPage);
         tabPage.setVisible(false);
+        this.revalidate();
     }
 
     public TabPage<T> getSelectedPage() {
@@ -227,6 +228,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public void addTab(TabPage<T> tabPage) {
             this.tabPages.add(tabPage);
             this.scroller.add(tabPage.tab);
+            this.scroller.revalidate();
         }
 
         protected boolean showBackButtonInLandscapeMode() {
