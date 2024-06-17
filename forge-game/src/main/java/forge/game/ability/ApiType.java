@@ -50,6 +50,7 @@ public enum ApiType {
     ChooseSector (ChooseSectorEffect.class),
     ChooseSource (ChooseSourceEffect.class),
     ChooseType (ChooseTypeEffect.class),
+    ClaimThePrize (ClaimThePrizeEffect.class),
     Clash (ClashEffect.class),
     ClassLevelUp (ClassLevelUpEffect.class),
     Cleanup (CleanUpEffect.class),

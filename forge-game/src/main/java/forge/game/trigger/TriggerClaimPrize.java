@@ -7,10 +7,8 @@ import forge.util.Localizer;
 
 import java.util.Map;
 
-
-public class TriggerVisitAttraction extends Trigger {
-
-    public TriggerVisitAttraction(Map<String, String> params, Card host, boolean intrinsic) {
+public class TriggerClaimPrize extends Trigger{
+    public TriggerClaimPrize(Map<String, String> params, Card host, boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
@@ -27,7 +25,6 @@ public class TriggerVisitAttraction extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        //TODO: Attraction roll value? Person who caused the attraction roll?
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.Card);
     }
 
