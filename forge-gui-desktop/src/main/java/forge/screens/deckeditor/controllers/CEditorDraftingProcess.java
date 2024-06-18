@@ -116,18 +116,22 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
 
-        // Verify if card is in the activate pack?
-        this.getDeckManager().addItem(card, 1);
-
-        // get next booster pack
-        boolean passPack = this.boosterDraft.setChoice(card);
-
-        if (!passPack) {
-            // For some reason we want to pick again. Don't rotate the pack yet
-            // This is for cards that let you draft multiple times from the same pack
+        if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
+            System.out.println(card + " not drafted because we're skipping this pick");
+            passPack();
             return;
         }
 
+        // Verify if card is in the activate pack?
+        this.getDeckManager().addItem(card, 1);
+
+        // get next booster pack if we aren't picking again from this pack
+        if (this.boosterDraft.setChoice(card)) {
+            passPack();
+        }
+    }
+
+    protected void passPack() {
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;
         if (nextChoice) {

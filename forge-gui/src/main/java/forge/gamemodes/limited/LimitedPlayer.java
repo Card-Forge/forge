@@ -28,8 +28,8 @@ public class LimitedPlayer {
     private static final int AgentAcquisitionsCanDraftAll = 1;
     private static final int AgentAcquisitionsIsDraftingAll = 1 << 1;
     private static final int AgentAcquisitionsSkipDraftRound = 1 << 2;
-    private static final int CogworkLibrarianReturnLibrarian = 1 << 3;
-    private static final int CogworkLibrarianExtraDraft = 1 << 4;
+    private static final int CogworkLibrarianExtraDraft = 1 << 3;
+    private static final int CogworkLibrarianReturnLibrarian = 1 << 4;
     private static final int AnimusRemoveFromPool = 1 << 5;
     private static final int NobleBanneretActive = 1 << 6;
     private static final int PalianoVanguardActive = 1 << 7;
@@ -37,9 +37,10 @@ public class LimitedPlayer {
     private static final int SearcherNoteNext = 1 << 9;
     private static final int WhispergearBoosterPeek = 1 << 10;
     private static final int IllusionaryInformantPeek = 1 << 11;
-    private static final int LeovoldsOperativeExtraDraft = 1 << 12;
-    private static final int LeovoldsOperativeSkipNext = 1 << 13;
-    private static final int SpyNextCardDrafted = 1 << 14;
+    private static final int LeovoldsOperativeCanExtraDraft = 1 << 12;
+    private static final int LeovoldsOperativeExtraDraft = 1 << 13;
+    private static final int LeovoldsOperativeSkipNext = 1 << 14;
+    private static final int SpyNextCardDrafted = 1 << 15;
 
     private int playerFlags = 0;
 
@@ -193,9 +194,18 @@ public class LimitedPlayer {
 
         if ((playerFlags & LeovoldsOperativeExtraDraft) == LeovoldsOperativeExtraDraft) {
             if (handleLeovoldsOperative(chooseFrom, bestPick)) {
-                addLog(name() + " skipped " + fromPlayer.name() + "'s next pick with Leovold's Operative.");
+                addLog(name() + " skipped their next pick with Leovold's Operative.");
                 playerFlags &= ~LeovoldsOperativeExtraDraft;
                 playerFlags |= LeovoldsOperativeSkipNext;
+                passPack = false;
+            }
+        }
+
+        if ((playerFlags & LeovoldsOperativeCanExtraDraft) == LeovoldsOperativeCanExtraDraft) {
+            if (handleLeovoldsOperative(chooseFrom, bestPick)) {
+                addLog(name() + " picking again with Leovold's Operative.");
+                playerFlags &= ~LeovoldsOperativeCanExtraDraft;
+                playerFlags |= LeovoldsOperativeExtraDraft;
                 passPack = false;
             }
         }
@@ -291,12 +301,6 @@ public class LimitedPlayer {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
-                } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, put CARDNAME into that booster pack.")) {
-                    playerFlags |= CogworkLibrarianExtraDraft;
-                } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)")) {
-                    playerFlags |= LeovoldsOperativeExtraDraft;
-                } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
-                    playerFlags |= AgentAcquisitionsCanDraftAll;
                 }
 
                 addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
@@ -324,12 +328,10 @@ public class LimitedPlayer {
                 // Do we need to ask to use the Sneak immediately?
             } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at the next card drafted by a player of your choice.")) {
                 playerFlags |= IllusionaryInformantPeek;
-            } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)") &&
-                    bestPick.getName().equals("Leovold's Operative")) {
-                playerFlags |= LeovoldsOperativeExtraDraft;
-            } else if (Iterables.contains(draftActions, "As you draft CARDNAME, you may draft an additional card from this booster pack. If you do, put CARDNAME into that booster pack.") &&
-                    bestPick.getName().equals("Cogwork Librarian")) {
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, put CARDNAME into that booster pack.")) {
                 playerFlags |= CogworkLibrarianExtraDraft;
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)")) {
+                playerFlags |= LeovoldsOperativeExtraDraft;
             } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
             }
