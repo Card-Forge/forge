@@ -764,9 +764,28 @@ public class DeckgenUtil {
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
-            Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
+            Iterable<PaperCard> baseList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
+                    format.isLegalCardPredicate());
+            ColorSet colorIdentity = commander.getRules().getColorIdentity();
+            if (!(format == DeckFormat.Brawl || format == DeckFormat.Oathbreaker)) {
+                if (commander.getRules().canBePartnerCommander()) {
+                    //check for partner commanders
+                    List<PaperCard> partners = new ArrayList<>();
+                    for (PaperCard c : baseList) {
+                        if (c.getRules().canBePartnerCommanders(commander.getRules())) {
+                            partners.add(c);
+                        }
+                    }
+
+                    if (partners.size() > 0) {
+                        selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
+                        colorIdentity = ColorSet.fromMask(colorIdentity.getColor() | selectedPartner.getRules().getColorIdentity().getColor());
+                    }
+                }
+            }
+            Iterable<PaperCard> colorList = Iterables.filter(baseList,
                     Predicates.and(format.isLegalCardPredicate(),Predicates.compose(Predicates.or(
-                            new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
+                            new CardThemedDeckBuilder.MatchColorIdentity(colorIdentity),
                             DeckGeneratorBase.COLORLESS_CARDS), PaperCard.FN_GET_RULES)));
             switch (format) {
             case Brawl: //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
@@ -786,19 +805,6 @@ public class DeckgenUtil {
                 }
                 break;
             default:
-                if (commander.getRules().canBePartnerCommander()) {
-                    //check for partner commanders
-                    List<PaperCard> partners = new ArrayList<>();
-                    for (PaperCard c : colorList) {
-                        if (c.getRules().canBePartnerCommanders(commander.getRules())) {
-                            partners.add(c);
-                        }
-                    }
-
-                    if (partners.size() > 0) {
-                        selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                    }
-                }
                 break;
             }
             List<PaperCard> cardList = Lists.newArrayList(colorList);
