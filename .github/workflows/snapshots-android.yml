@@ -8,6 +8,11 @@ on:
           description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
           required: false
           default: false
+        upload_package:
+          type: boolean
+          description: 'Upload the completed Android package'
+          required: false
+          default: true
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '00 19 * * *'
@@ -116,6 +121,7 @@ jobs:
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        if: ${{ inputs.upload_package }}
         with:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
