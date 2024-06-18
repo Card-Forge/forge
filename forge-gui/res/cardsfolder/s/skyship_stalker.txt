@@ -1,6 +1,6 @@
 Name:Skyship Stalker
 ManaCost:2 R R
-Types:Creature Dragon
+Types:Creature Cat Dragon
 PT:3/3
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

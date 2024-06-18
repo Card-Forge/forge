@@ -1,6 +1,6 @@
 Name:Cephalid Facetaker
 ManaCost:2 U
-Types:Creature Cephalid Rogue
+Types:Creature Octopus Rogue
 PT:1/4
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigClone | TriggerDescription$ At the beginning of combat on your turn, you may have CARDNAME become a copy of another target creature until end of turn, except it's 1/4 and has "This creature can't be blocked."
