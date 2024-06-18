@@ -1,6 +1,6 @@
 Name:Shield Broker
 ManaCost:3 U U
-Types:Creature Cephalid Advisor
+Types:Creature Octopus Advisor
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a shield counter on target noncommander creature you don't control. You gain control of that creature for as long as it has a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.IsNotCommander+YouDontCtrl | TgtPrompt$ Select target noncommander creature you don't control | CounterType$ SHIELD | SubAbility$ DBEffect
