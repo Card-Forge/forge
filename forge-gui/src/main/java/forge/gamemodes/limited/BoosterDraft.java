@@ -520,6 +520,8 @@ public class BoosterDraft implements IBoosterDraft {
         }
         this.currentBoosterPick++;
 
+        // Return whether or not we passed, but that the UI always needs to refresh
+        // But returning might be useful for testing or other things?
         return passPack;
     }
 

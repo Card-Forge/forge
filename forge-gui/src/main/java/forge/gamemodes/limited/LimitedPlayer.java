@@ -214,6 +214,8 @@ public class LimitedPlayer {
             addLog(name() + " returned Cogwork Librarian to the pack.");
 
             PaperCard librarian = deck.removeCardName("Cogwork Librarian");
+            // TODO The librarian needs to be removed from the UI
+
             // We shouldn't get here unless we've drafted librarian so we should be able to find one in Deck
             // If somehow we don't wellll.. we should remove the bitflag anyway
             playerFlags &= ~CogworkLibrarianReturnLibrarian;
@@ -297,6 +299,7 @@ public class LimitedPlayer {
                     // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
+                    addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {

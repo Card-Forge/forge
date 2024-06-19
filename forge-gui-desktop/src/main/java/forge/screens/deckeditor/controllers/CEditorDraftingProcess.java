@@ -118,7 +118,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
 
         if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
             System.out.println(card + " not drafted because we're skipping this pick");
-            passPack();
+            showPackToDraft();
             return;
         }
 
@@ -126,12 +126,11 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         this.getDeckManager().addItem(card, 1);
 
         // get next booster pack if we aren't picking again from this pack
-        if (this.boosterDraft.setChoice(card)) {
-            passPack();
-        }
+        this.boosterDraft.setChoice(card);
+        showPackToDraft();
     }
 
-    protected void passPack() {
+    protected void showPackToDraft() {
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;
         if (nextChoice) {
