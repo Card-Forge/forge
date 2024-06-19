@@ -75,7 +75,6 @@ ScryfallCode=ACR
 116 R Waterlogged Grove @Alexander Gering
 117 M The Capitoline Triad @John Stanko
 118 M Leonardo da Vinci @Miklós Ligeti
-118z M Leonardo da Vinci @Miklós Ligeti
 119 M Cleopatra, Exiled Pharaoh @Néstor Ossandon Leal
 120 R Mary Read and Anne Bonny @Wangjie Li
 121 R Sokrates, Athenian Teacher @JB Casacop
