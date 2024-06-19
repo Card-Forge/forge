@@ -6,43 +6,179 @@ Type=Draft
 ScryfallCode=ACR
 
 [cards]
+1 M The Capitoline Triad @Syd Mills
+2 R Caduceus, Staff of Hermes @Evan Shipard
+3 U Distract the Guards @Torgeir Fjereide
+5 U Haystack @Xabi Gaztelua
+6 U Hookblade @Thanh Tuấn
+7 R Layla Hassan @Michael MacRae
+8 R Senu, Keen-Eyed Protector @Michael MacRae
+10 U Templar Knight @Daniel Correia
+14 U Become Anonymous @Alice Xia Zhang
+15 R Crystal Skull, Isu Spyglass @Thanh Tuấn
+17 U Eagle Vision @Kim Sokol
+19 R Evie Frye @Lie Setiawan
 20 M Leonardo da Vinci @Wangjie Li
+23 U Chain Assassination @Filipe Pagliuso
+24 R Desmond Miles @Julia Vasilyeva
 25 M Ezio Auditore da Firenze @Fajareka Setiawan
+28 U Petty Larceny @Fajareka Setiawan
+30 U Restart Sequence @Lie Setiawan
+31 U The Revelations of Ezio @Lixin Yin
+32 U Roshan, Hidden Magister @Marta Nael
+36 U Origin of the Hidden Ones @Kim Sokol
 38 R The Spear of Leonidas @Narendra Bintara Adi
+41 U Hunter's Bow @Miklós Ligeti
+43 U Viewpoint Synchronization @Daniel Correia
+44 U Adéwalé, Breaker of Chains @Justyna Dura
 45 M Altaïr Ibn-La'Ahad @Axel Sauerwald
+48 R Aya of Alexandria @JB Casacop
+49 R Basim Ibn Ishaq @JB Casacop
+50 R Bayek of Siwa @JB Casacop
+51 U Bleeding Effect @Néstor Ossandón Leal
 52 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
+53 M Edward Kenway @Borja Pindado
+54 M Eivor, Wolf-Kissed @Justyna Dura
+55 U Ezio, Brash Novice @Elizabeth Peiró
+57 R Haytham Kenway @Vilhelmas Banys
+58 R Jackdaw @Evan Shipard
 59 M Kassandra, Eagle Bearer @Anna Steinbauer
-69 R The Animus @Nestor Ossandon Leal
+60 U Lydia Frye @Mandy Jurgens
+61 R Mary Read and Anne Bonny @Wangjie Li
+62 R Ratonhnhaké:ton @Greg Staples
+64 R Shaun & Rebecca, Agents @Gintas Galvanauskas
+65 U Shay Cormac @Axel Sauerwald
+66 R Sigurd, Jarl of Ravensthorpe @Alexander Gering
+67 R Sokrates, Athenian Teacher @Alice Xia Zhang
+69 R The Animus @Néstor Ossandón Leal
+70 M Apple of Eden, Isu Relic @L J Koh
 73 U Hidden Blade @L J Koh
+74 R Mjölnir, Storm Hammer @L J Koh
+79 R Abstergo Entertainment @Alexander Gering
+80 U Brotherhood Headquarters @Narendra Bintara Adi
+83 R Rest in Peace @Rimas Valeikis
+84 U Coastal Piracy @Wei Guan
 86 M Temporal Trespass @Borja Pindado
 88 R Conspiracy @Allen Morris
 89 R Cover of Darkness @Paulius Daščioras
+92 C Murder @Lixin Yin
+93 R Royal Assassin @Vilhelmas Banys
+94 U Cathartic Reunion @Syd Mills
+97 U Reconstruct History @Néstor Ossandón Leal
 99 M Sword of Feast and Famine @Thanh Tuấn
+100 M Sword of Light and Shadow @Borja Pindado
+111 R Sunbaked Canyon @Alexander Gering
+112 R Fiery Islet @Alexander Gering
 113 M Ezio Auditore da Firenze @Alexander Gering
+114 R Nurturing Peatland @Alexander Gering
+115 R Silent Clearing @Alexander Gering
+116 R Waterlogged Grove @Alexander Gering
+117 M The Capitoline Triad @John Stanko
 118 M Leonardo da Vinci @Miklós Ligeti
-119 M Cleopatra, Exiled Pharaoh @Nestor Ossandon Leal
+119 M Cleopatra, Exiled Pharaoh @Néstor Ossandon Leal
+120 R Mary Read and Anne Bonny @Wangjie Li
+121 R Sokrates, Athenian Teacher @JB Casacop
+122 M Apple of Eden, Isu Relic @Thanh Tuấn
 124 M Sword of Feast and Famine @Bruce Brenneise
+125 M Sword of Light and Shadow @Bruce Brenneise
+127 R Layla Hassan @Luisa J. Preissler
+128 R Senu, Keen-Eyed Protector @Andreia Ugrai
+129 R Evie Frye @Bastien L. Deharme
+130 R Desmond Miles @Alex Negrea
 131 M Ezio Auditore da Firenze @Luisa J. Preissler
+133 U Roshan, Hidden Magister @Astri Lohne
+136 U Adéwalé, Breaker of Chains @Miguel Mercado
 137 M Altaïr Ibn-La'Ahad @Alex Negrea
+140 R Aya of Alexandria @Chase Stone
+141 R Basim Ibn Ishaq @Astri Lohne
+142 R Bayek of Siwa @Miguel Mercado
+143 M Edward Kenway @Alex Negrea
+144 M Eivor, Wolf-Kissed @Jessie Lam
+145 U Ezio, Brash Novice @Luisa J. Preissler
+147 R Haytham Kenway @Andreia Ugrai
+148 M Kassandra, Eagle Bearer @Jessie Lam
+149 U Lydia Frye @Bastien L. Deharme
+150 R Ratonhnhaké:ton @Andreia Ugrai
+152 R Shaun & Rebecca, Agents @John Stanko
+153 U Shay Cormac @Alex Negrea
+154 R Sigurd, Jarl of Ravensthorpe @Jessie Lam
+155 R Caduceus, Staff of Hermes @Evan Shipard
+156 R Rest in Peace @Rimas Valeikis
 160 M Temporal Trespass @Borja Pindado
 162 R Conspiracy @Allen Morris
 163 R Cover of Darkness @Paulius Daščioras
+164 R Royal Assassin @Vilhelmas Banys
 165 R The Spear of Leonidas @Narendra Bintara Adi
-168 R The Animus @Nestor Ossandon Leal
+166 R Assassin's Trophy @Erikas Perl
+167 R Jackdaw @Evan Shipard
+168 R The Animus @Néstor Ossandon Leal
+170 R Mjölnir, Storm Hammer @L J Koh
+171 R Abstergo Entertainment @Alexander Gering
+172 M The Capitoline Triad @Syd Mills
+173 R Caduceus, Staff of Hermes @Evan Shipard
+174 U Distract the Guards @Torgeir Fjereide
 175 U Haystack @Xabi Gaztelua
+176 U Hookblade @Thanh Tuấn
+177 R Layla Hassan @Michael MacRae
+181 R Senu, Keen-Eyed Protector @Michael MacRae
+183 U Templar Knight @Daniel Correia
+186 U Become Anonymous @Alice Xia Zhang
+190 U Eagle Vision @Kim Sokol
+192 R Evie Frye @Lie Setiawan
 193 M Leonardo da Vinci @Wangjie Li
 196 M Temporal Trespass @Borja Pindado
 200 R Conspiracy @Allen Morris
 201 R Cover of Darkness @Paulius Daščioras
+202 R Desmond Miles @Julia Vasilyeva
 203 M Ezio Auditore da Firenze @Fajareka Setiawan
+208 C Murder @Lixin Yin
+209 U Petty Larceny @Fajareka Setiawan
+211 U Restart Sequence @Lie Setiawan
+212 U Roshan, Hidden Magister @Marta Nael
+213 R Royal Assassin @Vilhelmas Banys
 219 R The Spear of Leonidas @Narendra Bintara Adi
+221 U Hunter's Bow @Miklós Ligeti
+223 U Viewpoint Synchronization @Daniel Correia
+224 U Adéwalé, Breaker of Chains @Justyna Dura
 225 M Altaïr Ibn-La'Ahad @Axel Sauerwald
+228 R Assassin's Trophy @Erikas Perl
+231 R Bayek of Siwa @JB Casacop
+232 U Bleeding Effect @Néstor Ossandón Leal
 233 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
+234 M Edward Kenway @Borja Pindado
+235 M Eivor, Wolf-Kissed @Justyna Dura
+236 U Ezio, Brash Novice @Elizabeth Peiró
+238 R Haytham Kenway @Vilhelmas Banys
+239 R Jackdaw @Evan Shipard
 240 M Kassandra, Eagle Bearer @Anna Steinbauer
-253 R The Animus @Nestor Ossandon Leal
+241 U Lydia Frye @Mandy Jurgens
+242 R Mary Read and Anne Bonny @Wangjie Li
+244 R Ratonhnhaké:ton @Greg Staples
+247 R Shaun & Rebecca, Agents @Gintas Galvanauskas
+249 R Sigurd, Jarl of Ravensthorpe @Alexander Gering
+250 R Sokrates, Athenian Teacher @Alice Xia Zhang
+253 R The Animus @Néstor Ossandón Leal
+254 M Apple of Eden, Isu Relic @L J Koh
+257 U Hidden Blade @L J Koh
+258 R Mjölnir, Storm Hammer @L J Koh
+261 M Sword of Feast and Famine @Thanh Tuấn
+262 M Sword of Light and Shadow @Borja Pindado
+265 R Abstergo Entertainment @Alexander Gering
+266 U Brotherhood Headquarters @Narendra Bintara Adi
 267 M Ezio Auditore da Firenze @Luisa J. Preissler
 268 M Altaïr Ibn-La'Ahad @Alex Negrea
+269 M Edward Kenway @Alex Negrea
+270 M Eivor, Wolf-Kissed @Jessie Lam
 271 M Kassandra, Eagle Bearer @Jessie Lam
+272 M Cleopatra, Exiled Pharaoh @Néstor Ossandón Leal
+273 R Sokrates, Athenian Teacher @JB Casacop
 274 M Eivor, Battle-Ready @Fajareka Setiawan
 275 M Ezio, Blade of Vengeance @Jake Murray
+278 R Escarpment Fortress @Vaigintas Pakenis
+293 R Surtr, Fiery Jötun @Evan Shipard
+294 R Achilles Davenport @Josu Solano
+295 R Auditore Ambush @Julia Vasilyeva
+297 R Raven Clan War-Axe @Kim Sokol
+298 R Rooftop Bypass @Pablo Mendoza
+306 C Royal Assassin @Wei Guan
 307 U Hidden Blade @Evyn Fong
