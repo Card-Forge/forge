@@ -95,6 +95,7 @@ public enum Keyword {
     FOR_MIRRODIN("For Mirrodin", SimpleKeyword.class, false, "When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it."),
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
+    FREERUNNING("Freerunning", KeywordWithCost.class, false, "You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
     FRIENDS_FOREVER("Friends forever", Partner.class, true, "You can have two commanders if both have friends forever."),
     FUSE("Fuse", SimpleKeyword.class, true, "You may cast one or both halves of this card from your hand."),
