@@ -3,7 +3,7 @@ Types:Legendary Creature Human Assassin
 PT:1/3
 K:Menace
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSurveil | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSurveil | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, surveil X, where X is the amount of damage it dealt to that player.
 SVar:TrigSurveil:DB$ Surveil | Amount$ Z
 SVar:X:Count$Valid Assassin.YouCtrl+Other/Plus.Y
 SVar:Y:Count$ValidGraveyard Assassin.YouCtrl
