@@ -10,5 +10,5 @@ SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Dest
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$Mill
-DeckNeeds:Type$Saga
+DeckHints:Type$Saga
 Oracle:Trample, haste\nWhenever Eivor, Wolf-Kissed deals combat damage to a player, you mill that many cards. You may put a Saga card and/or a land card from among them onto the battlefield.
