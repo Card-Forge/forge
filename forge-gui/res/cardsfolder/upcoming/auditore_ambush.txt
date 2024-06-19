@@ -1,0 +1,7 @@
+Name:Auditore Ambush
+ManaCost:2 U B
+Types:Sorcery
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBUnsummon,DBSearch
+SVar:DBUnsummon:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature to return to owner's hand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+SVar:DBSearch:DB$ ChangeZone | ValidTgts$ Player | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.namedEzio; Blade of Vengeance | Optional$ True | ChangeNum$ 1 | Chooser$ Targeted | SpellDescription$ Target player searches their library and/or graveyard for a card named Ezio, Blade of Vengeance, reveals it, and puts it into their hand. If they search their library this way, they shuffle.
+Oracle:Choose one or both —\n• Return target creature to its owner's hand.\n• Target player searches their library and/or graveyard for a card named Ezio, Blade of Vengeance, reveals it, and puts it into their hand. If they search their library this way, they shuffle.

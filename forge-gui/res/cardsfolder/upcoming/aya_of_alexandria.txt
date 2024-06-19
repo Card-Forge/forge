@@ -1,0 +1,10 @@
+Name:Aya of Alexandria
+ManaCost:2 R W
+Types:Legendary Creature Human Assassin
+PT:4/3
+K:Menace
+K:Lifelink
+T:Mode$ DamageDone | ValidSource$ Creature.Historic+YouCtrl | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever a historic creature you control deals combat damage to a player, create a 1/1 black Assassin creature token with menace. (Artifacts, legendaries, and Sagas are historic.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_assassin_menace
+DeckHas:Ability$Token
+Oracle:Menace, lifelink\nWhenever a historic creature you control deals combat damage to a player, create a 1/1 black Assassin creature token with menace. (Artifacts, legendaries, and Sagas are historic.)

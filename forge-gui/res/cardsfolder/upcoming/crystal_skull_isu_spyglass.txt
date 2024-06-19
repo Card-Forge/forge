@@ -1,0 +1,7 @@
+Name:Crystal Skull, Isu Spyglass
+ManaCost:2 U U
+Types:Legendary Artifact
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.Historic+TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play historic lands and cast historic spells from the top of your library. (Artifacts, legendaries, and Sagas are historic.)
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:You may look at the top card of your library any time.\nYou may play historic lands and cast historic spells from the top of your library. (Artifacts, legendaries, and Sagas are historic.)\n{T}: Add {U}.
