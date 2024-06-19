@@ -1,0 +1,9 @@
+Name:Brotherhood Headquarters
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Assassin,Spell.withFreerunning,Activated.Assassin | SpellDescription$ Add one mana of any color. Spend this mana only to cast an Assassin spell or a spell that has freerunning, or to activate an ability of an Assassin source.
+AI:RemoveDeck:Random
+DeckHas:Ability$Mana.Colorless
+DeckHints:Type$Assassin
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast an Assassin spell or a spell that has freerunning, or to activate an ability of an Assassin source.

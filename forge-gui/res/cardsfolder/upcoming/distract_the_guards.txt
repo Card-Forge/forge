@@ -1,0 +1,6 @@
+Name:Distract the Guards
+ManaCost:1 W W
+Types:Sorcery
+K:Freerunning:1 W
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_human_rogue | TokenOwner$ You | SpellDescription$ Create three 1/1 white Human Rogue creature tokens.
+Oracle:Freerunning {1}{W} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nCreate three 1/1 white Human Rogue creature tokens.

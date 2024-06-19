@@ -1,0 +1,6 @@
+Name:Eagle Vision
+ManaCost:4 U
+Types:Sorcery
+K:Freerunning:1 U
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
+Oracle:Freerunning {1}{U} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nDraw three cards.

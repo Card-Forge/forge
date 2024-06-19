@@ -1,0 +1,10 @@
+Name:Escarpment Fortress
+ManaCost:4 W
+Types:Creature Wall
+PT:3/5
+K:Defender
+K:Reach
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control get +1/+0.
+T:Mode$ AttackersDeclared | Execute$ TrigDraw | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+Oracle:Defender (This creature can't attack.)\nReach (This creature can block creatures with flying.)\nOther creatures you control get +1/+0.\nWhenever you attack with two or more creatures, draw a card.
