@@ -444,6 +444,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+        if (sa.isFreerunning()) {
+            if (!activator.hasFreerunning()) {
+                return false;
+            }
+        }
         if (this.getIsPresent() != null) {
             FCollection<GameObject> list;
             if (getPresentDefined() != null) {
