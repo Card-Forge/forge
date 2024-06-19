@@ -2141,7 +2141,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasFreerunning() {
-        return !game.getDamageDoneThisTurn(true, true, "Card.Assassin+YouCtrl,Card.IsCommander", "Player", null, this, null).isEmpty();
+        return !game.getDamageDoneThisTurn(true, true, "Card.Assassin+YouCtrl,Card.IsCommander+YouCtrl", "Player", null, this, null).isEmpty();
     }
 
     public final void setLibrarySearched(final int l) {
