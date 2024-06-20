@@ -1,0 +1,8 @@
+Name:Bureau Headmaster
+ManaCost:R W
+Types:Creature Human Assassin
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Equipment | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Equipment spells you cast cost {1} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Description$ Equip abilities you activate cost {1} less to activate.
+DeckHints:Type$Equipment
+Oracle:Equipment spells you cast cost {1} less to cast.\nEquip abilities you activate cost {1} less to activate.

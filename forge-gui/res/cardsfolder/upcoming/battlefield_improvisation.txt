@@ -1,0 +1,6 @@
+Name:Battlefield Improvisation
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBAttach | SpellDescription$ Target creature gets +2/+2 until end of turn. If that creature is attacking, you may attach any number of Equipment you control to it.
+SVar:DBAttach:DB$ Attach | Defined$ ParentTarget.attacking | Object$ Valid Equipment.YouCtrl | Optional$ True
+Oracle:Target creature gets +2/+2 until end of turn. If that creature is attacking, you may attach any number of Equipment you control to it.
