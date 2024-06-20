@@ -1,12 +1,15 @@
 package forge.gamemodes.limited;
 
+import com.google.common.collect.ForwardingList;
 import forge.item.PaperCard;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.List;
+import java.util.Map;
 
-public class DraftPack implements List<PaperCard> {
-    private List<PaperCard> cards;
-    private int id;
+public class DraftPack extends ForwardingList<PaperCard> {
+    private final List<PaperCard> cards;
+    private final int id;
     private LimitedPlayer passedFrom;
     private Map.Entry<LimitedPlayer, PaperCard> awaitingGuess;
 
@@ -40,131 +43,7 @@ public class DraftPack implements List<PaperCard> {
     }
 
     @Override
-    public int size() {
-        return cards.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return cards.isEmpty();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return cards.contains(o);
-    }
-
-    @Override
-    public Iterator<PaperCard> iterator() {
-        return cards.iterator();
-    }
-
-    @Override
-    public Object[] toArray() {
-        return cards.toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return cards.toArray(a);
-    }
-
-    @Override
-    public boolean add(PaperCard paperCard) {
-        return cards.add(paperCard);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return cards.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return new HashSet<>(cards).containsAll(c);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends PaperCard> c) {
-        return cards.addAll(c);
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends PaperCard> c) {
-        return cards.addAll(index, c);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return cards.removeAll(c);
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return cards.retainAll(c);
-    }
-
-    @Override
-    public void clear() {
-        cards.clear();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return cards.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return cards.hashCode();
-    }
-
-    @Override
-    public PaperCard get(int index) {
-        return cards.get(index);
-    }
-
-    @Override
-    public PaperCard set(int index, PaperCard element) {
-        return cards.set(index, element);
-    }
-
-    @Override
-    public void add(int index, PaperCard element) {
-        cards.add(index, element);
-    }
-
-    @Override
-    public PaperCard remove(int index) {
-        return cards.remove(index);
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return cards.indexOf(o);
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return cards.lastIndexOf(o);
-    }
-
-    @Override
-    public ListIterator<PaperCard> listIterator() {
-        return cards.listIterator();
-    }
-
-    @Override
-    public ListIterator<PaperCard> listIterator(int index) {
-        return cards.listIterator(index);
-    }
-
-    @Override
-    public List<PaperCard> subList(int fromIndex, int toIndex) {
-        return cards.subList(fromIndex, toIndex);
-    }
-
-    public String toString() {
-        return cards.toString();
+    protected List<PaperCard> delegate() {
+        return cards;
     }
 }
