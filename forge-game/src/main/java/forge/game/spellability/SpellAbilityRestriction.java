@@ -440,7 +440,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (sa.isProwl()) {
-            if (!activator.hasProwl(c.getType().getCreatureTypes())) {
+            if (!activator.hasProwl(sa)) {
                 return false;
             }
         }
