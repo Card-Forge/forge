@@ -202,6 +202,18 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
+    public boolean handleAgentOfAcquisitions(DraftPack pack, PaperCard drafted) {
+        // Whats the score of the thing I just drafted?
+        // Whats the total score of the rest of the pack?
+        // How many of these cards would actually make my deck?
+        if (currentPack == 3) {
+            return true;
+        }
+
+        return draftedThisRound > 2 && draftedThisRound < 6;
+    }
+
+    @Override
     public boolean handleCogworkLibrarian(DraftPack pack, PaperCard drafted) {
         if (currentPack == 3) {
             return true;
