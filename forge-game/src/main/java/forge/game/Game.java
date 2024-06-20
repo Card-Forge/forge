@@ -885,6 +885,11 @@ public class Game {
                         cc.removeAttachedTo(c);
                         cc.removeAttachedCard(c);
                     }
+
+                    // TODO skip effect cards by default
+                    // (might be nice to only keep those that will still affect the game, but could be tricky to automate)
+                    // will also require other changes because currently only zones of ingame players are checked
+
                     triggerList.put(c.getZone().getZoneType(), null, c);
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
