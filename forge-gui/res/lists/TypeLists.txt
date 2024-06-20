@@ -59,7 +59,6 @@ Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
 Centaur:Centaurs
-Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
 Clamfolk:Clamfolk
@@ -189,7 +188,6 @@ Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
-Naga:Nagas
 Nautilus:Nautili
 Necron:Necrons
 Nephilim:Nephilims
@@ -299,7 +297,6 @@ Unicorn:Unicorns
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
-Viashino:Viashinos
 Volver:Volvers
 Wall:Walls
 Warlock:Warlocks

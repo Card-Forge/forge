@@ -1,0 +1,9 @@
+Name:Cogwork Tracker
+ManaCost:4
+Types:Artifact Creature Hound Construct
+PT:4/4
+Draft:Reveal CARDNAME as you draft it.
+Draft:Note the player who passed CARDNAME to you.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidPlayer$ Opponent.NotedDefender | ValidCreature$ Card.Self | Description$ CARDNAME attacks a player you noted for cards named Cogwork Tracker each combat if able.
+Oracle:Reveal Cogwork Tracker as you draft it and note the player who passed it to you.\nCogwork Tracker attacks each combat if able.\nCogwork Tracker attacks a player you noted for cards named Cogwork Tracker each combat if able.

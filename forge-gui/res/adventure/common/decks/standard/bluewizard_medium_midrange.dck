@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Tinkerbell 2
-Title=Tinkerbell
-Difficulty=medium
-Description=Mono U Faeries midrange deck with flying creatures
-Icon=Tinkerbell.jpg
-Deck Type=constructed
 [main]
 2 Curiosity
 4 Faerie Conclave

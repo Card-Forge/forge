@@ -1,6 +1,6 @@
 Name:Viashino Sandstalker
 ManaCost:1 R R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:4/2
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.

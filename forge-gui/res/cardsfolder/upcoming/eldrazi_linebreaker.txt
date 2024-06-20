@@ -1,0 +1,11 @@
+Name:Eldrazi Linebreaker
+ManaCost:1 C R
+Types:Creature Eldrazi
+PT:3/3
+K:Devoid
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains haste and gets +X/+0 until end of turn, where X is the number of Eldrazi you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Haste
+SVar:X:Count$Valid Eldrazi.YouCtrl
+DeckHints:Type$Eldrazi
+Oracle:Devoid (This card has no color.)\nTrample\nAt the beginning of combat on your turn, target creature you control gains haste and gets +X/+0 until end of turn, where X is the number of Eldrazi you control.

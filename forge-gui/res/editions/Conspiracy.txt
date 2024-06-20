@@ -222,15 +222,15 @@ ScryfallCode=CNS
 
 [Draft Matters]
 #1 Advantageous Proclamation|CNS
-#1 AEther Searcher|CNS
+1 Aether Searcher|CNS
 #1 Agent of Acquisitions|CNS
 #1 Backup Plan|CNS
 1 Brago's Favor|CNS
 #1 Canal Dredger|CNS
 1 Cogwork Grinder|CNS
 #1 Cogwork Librarian|CNS
-#1 Cogwork Spy|CNS
-#1 Cogwork Tracker|CNS
+1 Cogwork Spy|CNS
+1 Cogwork Tracker|CNS
 #1 Deal Broker|CNS
 #1 Double Stroke|CNS
 1 Immediate Action|CNS
@@ -244,7 +244,7 @@ ScryfallCode=CNS
 1 Secrets of Paradise|CNS
 #1 Sentinel Dispatch|CNS
 #1 Unexpected Potential|CNS
-#1 Whispergear Sneak|CNS
+1 Whispergear Sneak|CNS
 #1 Worldknit|CNS
 
 [tokens]

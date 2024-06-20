@@ -1,6 +1,6 @@
 Name:Rivaz of the Claw
 ManaCost:1 B R
-Types:Legendary Creature Viashino Warlock
+Types:Legendary Creature Lizard Warlock
 PT:3/3
 K:Menace
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Creature+Dragon | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.

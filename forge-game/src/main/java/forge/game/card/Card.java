@@ -2258,7 +2258,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     // If no colon exists in Madness keyword, it must have been granted and assumed the cost from host
                     sbLong.append("Madness ").append(this.getManaCost()).append(" (").append(inst.getReminderText());
                     sbLong.append(")").append("\r\n");
-                } else if (keyword.startsWith("Emerge") || keyword.startsWith("Reflect")) {
+                } else if (keyword.startsWith("Reflect")) {
                     final String[] k = keyword.split(":");
                     sbLong.append(k[0]).append(" ").append(ManaCostParser.parse(k[1]));
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
@@ -2325,6 +2325,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         }
                     }
                     sbLong.append("\r\n");
+                } else if (keyword.startsWith("Emerge")) {
+                    final String[] k = keyword.split(":");
+                    sbLong.append(k[0]);
+                    if (k.length > 2) {
+                        sbLong.append(" from ").append(k[2].toLowerCase());
+                    }
+                    sbLong.append(" ").append(ManaCostParser.parse(k[1]));
+                    sbLong.append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append("\r\n");
+
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
@@ -2484,7 +2494,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
                         || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
-                        || keyword.startsWith("Champion") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
+                        || keyword.startsWith("Champion") || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Chapter")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
@@ -3002,7 +3012,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbAfter.append(TextUtil.fastReplace(keyword, ":", " ")).append("\r\n");
                 } else if (keyword.startsWith("Escalate") || keyword.startsWith("Buyback")
-                        || keyword.startsWith("Prowl")) {
+                        || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl")) {
                     final String[] k = keyword.split(":");
                     final String manacost = k[1];
                     final Cost cost = new Cost(manacost, false);
@@ -6757,7 +6767,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     pW = true;
                     protectKey += "W";
                 }
-            } else if (kw.contains("all colors")) {
+            } else if (kw.contains("each color")) {
                 protectKey += "allcolors:";
             } else if (kw.equals("Protection from everything")) {
                 protectKey += "everything:";

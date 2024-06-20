@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Da Vinci 1
-Title=Da Vinci
-Difficulty=easy
-Description=Mono B deck with Ashenmoor Cohort, Bad Moon and Crowd of Cinders
-Icon=Da Vinci.jpg
-Deck Type=constructed
 [main]
 22 Swamp|M12
 4 Ashenmoor Cohort
@@ -39,4 +33,3 @@ Deck Type=constructed
 1 Fog of Gnats
 1 Foul Imp
 1 Ring of Xathrid
-[sideboard]

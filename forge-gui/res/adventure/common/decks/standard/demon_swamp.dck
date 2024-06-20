@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Tibalt's Grave Trickery 3
-Title=Tibalt, the Fiend-Blooded
-Difficulty=hard
-Description=RB reanimator deck with some burn and planeswalkers
-Icon=Tibalt, the Fiend-Blooded 3.jpg
-Deck Type=constructed
 [Main]
 3 Avatar of Discord
 2 Beacon of Unrest

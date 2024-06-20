@@ -1,6 +1,6 @@
 Name:Spellweaver Eternal
 ManaCost:1 U
-Types:Creature Zombie Naga Wizard
+Types:Creature Zombie Snake Wizard
 PT:2/1
 K:Prowess
 K:Afflict:2

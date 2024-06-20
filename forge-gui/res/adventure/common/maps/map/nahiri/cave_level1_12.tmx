@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="61">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmFsOwiAQRfmEhVmNG22t7spqWYYQJU4QmgIzDIncZNKmH+3pnQe0gxJi6NGjx1/GLIVYzPEq33GT/Ewwjiag7qoNRufbw+NrgdGyhbh8xoWBcw8bl5epbLUZTxlsNRlL+KzODeaW2sP5M3dL2agYnyYuEocNMmLNHoy8xnQo5IqtD1jKyXUNLqiUnqbMZUijeZ5O4PP3IpRcq0pjc726EvSrz5bKVdNHjDWEkq9kplDOZCuM3FL2MYZ3lDMGo/ZK91Bbarn2rLD2LqWMtg8m+XsPrP7InTGOS4P3tPN+ylwvsD3EqC9KRo7v8tR+5vJwBPXuzkN9QPmNtsWo1bfeNbjme8z97yXGD33k8HBPOB9b58PskRfJzZbE
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1t0KgCAMBWBv7O/93yCyHjMCg12YGuh2Jvtukhh5HKI5Z4wxZlSLdIDBzNIBiDXxDinfl0M6QKShV1qh9zbE5yYwt3f5/uxcQRp61zM1+EZtzTPO3W/oe5DLKR2gI6T/G0/GSHsvlYU7X+2dz53r73yhXNId3fNXoZarnxrvLDRIZ0YKej6tfLnEZCCcyUafG7ODBpg=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../obj/door_up.tx" x="320.672" y="637.409">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23D7.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -1,6 +1,6 @@
 Name:Yurlok of Scorch Thrash
 ManaCost:1 B R G
-Types:Legendary Creature Viashino Shaman
+Types:Legendary Creature Lizard Shaman
 PT:4/4
 K:Vigilance
 S:Mode$ ManaBurn | Description$ A player losing unspent mana causes that player to lose that much life.

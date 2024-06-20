@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Hagrid 2
-Title=Hagrid
-Difficulty=medium
-Description=Mono R Giants deck
-Icon=Hagrid.jpg
-Deck Type=constructed
 [main]
 4 Pyroclasm|M11
 20 Mountain|MBS
@@ -24,5 +18,3 @@ Deck Type=constructed
 1 Borderland Behemoth|MOR
 1 Inferno Titan|M11
 [sideboard]
-
-

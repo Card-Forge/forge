@@ -1,38 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="72" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="62">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="85">
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
- <tileset firstgid="28289" source="../../tileset/main-nocollide.tsx"/>
- <layer id="1" name="Background" width="72" height="66">
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/main-nocollide.tsx"/>
+ <layer id="10" name="Collision" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt20tOw0AMBuBuEGLBCnGOgggSJ+AiXXEHDsMVAIkj9C7cAlkowh0m87Ab2xO70r9K04y/TiavyfFmtzsq5/nKbrRtwqeei8tyPPrMtffYefFptUnX8eBDsdmST20sodiM4lOrkVN/67at+kDb7vbLDmvaaBr12uQ8JGy0jKg+uK25ZRJGON/XuvsXGEg79ATatoZR7//mzYjSt60bQV1zf+d6Udtg2QgHfDhG1O1a70fp/0k14mx3RKNc1vLZQmpG2u2zkNL5E+c3R9m3WvL0kDcKm9O6UqOwOa0NPpzzZ6nrUK207l/p9d9I54SUftNz/PLQT0o2c+05ny2PL7lArXjMwctgrPZsg+tesvNu0+oXNmFDSdiET/iET/jYTPgsB+4Jhc//4Gux9ymMlmzCqG7j3QjGmJqNVyOwSe+n1nI/6bdbMr3PU0s+W7nHCv0GQnnevOTzNf2Gsw9aeR7JmX8G9efmFoLNVsYp7vw8qP8TBduUHEeJ1PzFUfuR5PzO8AkfTqTHoHNsb625wOHTn73C3HCujUeflveGpG0szWOAdnw8ytXOseG+6zW6UYvN/D1v/ajVRstH06jHRtNHw6jXRtsHAj5SRr02kJdXXR+I1PEcH5MOyXnF0jrgU8vb7V9avo9jyYcSXPu502pk1WdNmx4jzz6zUek4YM1HyqW1H1ny0bDBRpT332r5AUrMn2E=
+   eJzt0bEJACAMRcEM4AjuP6eVYCGIjZJwV1n68yIA4F5vv3/wVuW9c9u6cfeufIPKTv30zU3f2vQFAAAAAIAcBsbMAvk=
   </data>
  </layer>
- <layer id="7" name="Foilage" width="72" height="66">
+ <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2sEJgDAQRUHBEsQ6REzs3Basy7sgORjdEGYKCJ/HHjMMAAAAAAD8ac3RC9p1aPMo79ELAPo3ztEL6MGSohe0SxsA6M+6RS9on0ZlGpVpVKYRX0mb+3qSKnQ5p/dvtOB+IzXaAADQP/+kAAAAqOUCtSwITg==
+   eJztmTuOAzEIhtNukSoptsgeMNXeJmeIcpA9V+QCLULg4WWYkVL8isfyYD6DGaQ8vk6nR0C/t9j7marwBfa4fsdE7d6vOlXwjn0ibNH3LeeWpVX+7pEb2x05xO2H58eYkxTvSPyrYku5KRO+Wxwz9y6Vxp8KXsnv88+/pDWz85N4YczZ7Li7wPhEOgvS1gKObQ+8L8K5JWzv72K7q128sO/4tbBGeavqFVebuByu4KW+VPCOOSunlleqcyvji+uj9B3x8mJbnfnM1X+OF8YVvJpYe3toGk887uCd9SceXvpdl3qclfkcrVVa3i02rs/h9q/g3VpfwQvPXJ2GPTCfJW+s/JW8Wv8yeaW9s1i9fkVydC+89LdDlDczn7uYrLxRdTNRzXzSxFeKMzfXzao5Cw8vnrOc755EWTz9Vnb+rWKE56z6fJQYc8ySuv2sYu/2ySucd9k9pTafZ2tX3ROpRknfHG09A9uz/7O6Y67J55k8HNaziMbYypTJWi0pTy25i3m7eSy81juaXbs99rJ7gKxcx/bwHfXUfev5em0fRbN+UVp/dN6j+v7RWr0B+I7fGg==
   </data>
  </layer>
- <layer id="2" name="Floor" width="72" height="66">
-  <data encoding="base64" compression="zlib">
-   eJzt2+FugjAUQGGeaG2xmL31ygLvt175bQuM3duO8yVNjNFQj0pRdBiAvqWP9yOM1rNrH40AALieY32tWqP1DNpHozoa1dGojkZ1sq6Fh/UsgP8ncswIAAAAAACAziVnPQMAALDX5x+f8+39nHJQOK7puZFGn9d2Om2k1ee1rQ4bafZJ9CmiT5lT/ozrL9gefcroU77/HfvEx/Z91p6hxcVhmBvZPy95Hs+GflNbajPl653Pz7XXndM8ttFo7+smKfcR1o2OvKcs+girRkf3N1Z9hHajM/tiyz5Cs9GZdfx7un4eR0WlPmf+j+JDfRy9fchjzd3nne2XBtYzC9Jo2tEoNvAatiKN1srjX27cR9Qa+Zv3EaVG9NlIny+/rZkyxnx5ziP9ss8PUJZQsg==
-  </data>
- </layer>
- <layer id="3" name="Clutter" width="72" height="66">
+ <layer id="3" name="Clutter" width="60" height="40">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztm+tNxDAMgFsYAV2XQT1GRV2GGYBpkIWiM8VxHk1iJ/En9c/BqfbXPJ3eshhGn6y3ZXkKXM836ShlADdvW/j/9m0+T7FuMMckfnLcAKP4CY0pOW6AHvysgTEzt23EAOOQ5jEI507FWtONQ6sjKnccaws31H214IsJPr9v7dzg+2pbJ2l8bhgN8WmIgUNDfBpi4Dj3PYlYtTvCSMVqjvTeNwdqzqvd/1que2pR8xn3sCeKoYajEdoOpqSj0dw4Sjga1Q1wNbdR3bi6TUpuVJ1rVDepeY3aTiioOXgVqgFq5Dwmu/ylaoAacS7O+R+Et1nZiTqf8zO7Gx8H0aaMB+BnlD1UDcwPj/nhMT885ofH/PwH5vM7Ovc0Pw985+iLOWLXgbM7ilkjz+ooZf/Q03lWCew9SD813oPk6mo9cWVP7vPD1dV640ofiakr9u7o6hhyPsun2mLPjlqNsb06ajkH9TjfmR8e7X4+XvKvErmZn/Ixt7yXpJ/W5zVa/OC6Fne1dJP7LGr40bbW4Nzg30FdcZHav7Q4Crlxfzsa+wGkHcW6AST8AFKOUtwAUn6A1o5S3QCSfoCWjt4z3jdzuUj5wTHUZs9YT7jvfHmu7+1v7p8R65fXLe13Ez3uD0sQ23dm9QPEOJrZDxByNLsfgHNkfn7JmT9i+AGrpRQk
+   eJzt1s0KgkAQB/DtJCt06B3qHHmXPBV0L4LoRfrw2Kv1CCFIBD1E0CmXVtyNTaPS2ZX/D4ZVdw8zzCgyBlCf44g6g2Z5AXUGzbv1qDMA+E304bmJxe/3umRvNtTvQ8OZaaCvwiEo37dBIteQMxb7jO1ljLm+3yZ5rSkvYqfUbFLVP9v6q/btwvVa8zjLel/n23VV9Zq41l/hJFdTvVEWW580vb9SZ1TM9sbXQ9Ra9q1ysb+565vniRI2WmWx9J7Xd9JM6hd3i+uFR5dHXQYd6gy+13c093kL5wgAAADsgv8NAAAAALDZA1x4NEE=
   </data>
  </layer>
- <objectgroup id="4" name="Objects" visible="0">
-  <object id="48" template="../../obj/treasure.tx" x="112.333" y="520.333"/>
-  <object id="50" template="../../obj/enemy.tx" x="112.902" y="544.559">
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl20OwiAMhvm7jJ1g8zoeQs8yvdZ0eBMPo0abGELlY1A+LMn7Z6HAQ1P2dpFCLI1p3+HKfbZaeI+DEFdZlg5DOt7dU6WNMWF+gXfuhTghOvf2OTEE+1DwvvaYELnMiaHvfah4TfW8fuZcftQbFutar7l4Q+p5S6wpnnmZt2ZeeBfWgnjv3VspeE3rtcw7Z/z/cv3WxYt5APDkrfFiZxilmfcm/X2vssTa/LfawAv51PPnypvaF8f2z3oM3Ll+xwrhDfHANv/s6r9j8Pp8z12/kBsVwKvfJXbHa0G8k5YLH17KM8fi1d8eF17f9xXqWvewOXgp/caWUWO/oHtYSl7Tei37Se4XmJd54/Cm6Bdc43Pw5hQlL+blKUX5/y1ppOQNrbmU8umPWhLzMm9LYt7/5X0A8YLXig==
+  </data>
+ </layer>
+ <layer id="9" name="Tilelaag 4" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0kENwCAURMHVABqK1VYggnrFAPktmVHwkt0EAIC/m9UBG90teVp1xV7rfldPRi9L+YyTPw0AAAAAAJzlBbBOBCE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../obj/door_up.tx" x="798.41" y="304.238">
    <properties>
-    <property name="enemy" value="High Vampire"/>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4C.tmx"/>
+    <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
+  <object id="67" template="../../obj/door_down.tx" x="48.9816" y="304.041">
+   <properties>
+    <property name="teleport" value="../common/maps/map/vampirecastle/vampirecastle_4.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="517.558" y="531.191">
+   <properties>
+    <property name="enemy" value="High Vampire"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="74,76,77,78,77,76,74"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="640.989" y="193.444">
+   <properties>
+    <property name="enemy" value="Undead Roamer"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/treasure.tx" x="390.083" y="317.167"/>
+  <object id="71" template="../../obj/booster.tx" x="730.462" y="324.215">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Infernal Grasp&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Crippling Fear&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Deadly Dispute&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Village Rites&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Tragic Slip&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;cardName&quot;: &quot;Defile&quot;
+	},
+	{
+		&quot;type&quot;: &quot;card&quot;,
+		&quot;probability&quot;: 0.5,
+		&quot;count&quot;: 1,
+		&quot;itemName&quot;: &quot;Murder&quot;
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="394.545" y="387.141">
+   <properties>
+    <property name="enemy" value="Unraveling Crawler"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="635.147" y="383.441">
+   <properties>
+    <property name="enemy" value="Unholy Skull"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="80,81"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/waypoint.tx" x="793.388" y="528.726"/>
+  <object id="75" template="../../obj/waypoint.tx" x="799.866" y="368.634"/>
+  <object id="76" template="../../obj/waypoint.tx" x="245.557" y="531.503"/>
+  <object id="77" template="../../obj/waypoint.tx" x="240.005" y="71.5836"/>
+  <object id="78" template="../../obj/waypoint.tx" x="472.278" y="66.9566"/>
+  <object id="79" template="../../obj/gold.tx" x="142.839" y="273.319"/>
+  <object id="80" template="../../obj/waypoint.tx" x="638.848" y="237.228"/>
+  <object id="81" template="../../obj/waypoint.tx" x="636.072" y="463.023"/>
+  <object id="82" template="../../obj/enemy.tx" x="390.843" y="149.316">
+   <properties>
+    <property name="enemy" value="Harpy"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/manashards.tx" x="736.014" y="125.256"/>
+  <object id="84" template="../../obj/manashards.tx" x="731.387" y="472.278"/>
  </objectgroup>
 </map>

@@ -239,6 +239,9 @@ public class UIScene extends Scene {
     }
 
     public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo) {
+        return createGenericDialog(title, label, stringYes, stringNo, runnableYes, runnableNo, false, "");
+    }
+    public Dialog createGenericDialog(String title, String label, String stringYes, String stringNo, Runnable runnableYes, Runnable runnableNo, boolean cancelButton, String stringCancel) {
         Dialog dialog = new Dialog(title == null ? "" : title, Controls.getSkin());
         if (label != null)
             dialog.text(label);
@@ -247,6 +250,10 @@ public class UIScene extends Scene {
         if (stringNo != null) {
             TextraButton no = Controls.newTextButton(stringNo, runnableNo);
             dialog.button(no);
+        }
+        if (cancelButton) {
+            TextraButton cancel = Controls.newTextButton(stringCancel, this::removeDialog);
+            dialog.button(cancel);
         }
         return dialog;
     }

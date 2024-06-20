@@ -1,7 +1,5 @@
 [metadata]
 Name=humanbard
-[Avatar]
-
 [Main]
 4 Bard Class|AFR|1
 2 Cadric, Soul Kindler|DMC|1
@@ -35,12 +33,4 @@ Name=humanbard
 1 Torsten, Founder of Benalia|DMC|1
 2 Urza's Ruinous Blast|DOM|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

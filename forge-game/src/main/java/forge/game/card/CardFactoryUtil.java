@@ -676,7 +676,7 @@ public class CardFactoryUtil {
                 validSource = "Green" + (damage ? "Source" : "");
             } else if (protectType.equals("colorless")) {
                 validSource = "Colorless" + (damage ? "Source" : "");
-            } else if (protectType.equals("all colors")) {
+            } else if (protectType.equals("each color")) {
                 validSource = "nonColorless" + (damage ? "Source" : "");
             } else if (protectType.equals("everything")) {
                 return "";
@@ -2830,16 +2830,22 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Emerge")) {
             final String[] kw = keyword.split(":");
             String costStr = kw[1];
-            final SpellAbility sa = card.getFirstSpellAbility();
+            String validStr = kw.length > 2 ? kw[2] : "Creature";
+            String desc = "(Emerge";
+            if (kw.length > 2) {
+                desc += " from " + kw[2].toLowerCase();
+            }
+            desc += ")";
 
+            final SpellAbility sa = card.getFirstSpellAbility();
             final SpellAbility newSA = sa.copyWithDefinedCost(new Cost(costStr, false));
 
-            newSA.getRestrictions().setIsPresent("Creature.YouCtrl+CanBeSacrificedBy");
+            newSA.getRestrictions().setIsPresent(validStr + ".YouCtrl+CanBeSacrificedBy");
             newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Emerge);
 
-            newSA.setDescription(sa.getDescription() + " (Emerge)");
-            newSA.putParam("AfterDescription", "(Emerge)");
+            newSA.setDescription(sa.getDescription() + " " + desc);
+            newSA.putParam("AfterDescription", desc);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Embalm")) {
@@ -3105,6 +3111,27 @@ public class CardFactoryUtil {
             // instantiate attach ability
             final SpellAbility sa = AbilityFactory.getAbility(abilityStr.toString(), card);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Freerunning")) {
+            final String[] k = keyword.split(":");
+            final Cost freerunningCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(freerunningCost);
+
+            if (host.isInstant() || host.isSorcery()) {
+                newSA.putParam("Secondary", "True");
+            }
+            newSA.putParam("PrecostDesc", "Freerunning");
+            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription());
+            sb.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Freerunning);
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Fuse") && card.getStateName().equals(CardStateName.Original)) {
             final SpellAbility sa = AbilityFactory.buildFusedAbility(card.getCard());
             card.addSpellAbility(sa);
@@ -3900,7 +3927,8 @@ public class CardFactoryUtil {
                 final String[] k = keyword.split(":");
 
                 sbDesc.append(" from ").append(k[2]);
-                sbValid.append("| ValidSource$ ").append(k[1]);
+                final String param = k[2].contains("abilities") ? "ValidSA$ " : "ValidSource$ ";
+                sbValid.append("| ").append(param).append(k[1]);
             }
 
             String effect = "Mode$ CantTarget | ValidCard$ Card.Self | Secondary$ True"

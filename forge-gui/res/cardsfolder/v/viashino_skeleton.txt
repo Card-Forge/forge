@@ -1,6 +1,6 @@
 Name:Viashino Skeleton
 ManaCost:3 R
-Types:Creature Viashino Skeleton
+Types:Creature Lizard Skeleton
 PT:2/1
 A:AB$ Regenerate | Cost$ 1 B Discard<1/Card> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:All

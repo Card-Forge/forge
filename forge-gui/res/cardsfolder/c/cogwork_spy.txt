@@ -1,0 +1,8 @@
+Name:Cogwork Spy
+ManaCost:3
+Types:Artifact Creature Bird Construct
+PT:2/1
+K:Flying
+Draft:Reveal CARDNAME as you draft it.
+Draft:You may look at the next card drafted from this booster pack.
+Oracle:Reveal Cogwork Spy as you draft it. You may look at the next card drafted from this booster pack.\nFlying

@@ -1,6 +1,6 @@
 Name:Cephalid Retainer
 ManaCost:2 U U
-Types:Creature Cephalid
+Types:Creature Octopus
 PT:2/3
 A:AB$ Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
 Oracle:{U}{U}: Tap target creature without flying.

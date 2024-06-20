@@ -286,8 +286,13 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     @Override
+    public int getRound() {
+        return nextBoosterGroup;
+    }
+
+    @Override
     public LimitedPlayer getNeighbor(LimitedPlayer player, boolean left) {
-        return players.get((player.order + (left ? -1 : 1) + N_PLAYERS) % N_PLAYERS);
+        return players.get((player.order + (left ? 1 : -1) + N_PLAYERS) % N_PLAYERS);
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
@@ -412,6 +417,15 @@ public class BoosterDraft implements IBoosterDraft {
         return this.localPlayer;
     }
 
+    @Override
+    public LimitedPlayer getPlayer(int i) {
+        if (i == 0) {
+            return this.localPlayer;
+        }
+
+        return this.players.get(i - 1);
+    }
+
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
@@ -419,6 +433,7 @@ public class BoosterDraft implements IBoosterDraft {
             adjust = 0;
         } else if (currentBoosterPick % 2 == 1 && "Always".equals(this.doublePickDuringDraft)) {
             // This may not work with Conspiracy cards that mess with the draft
+            // But it probably doesn't matter since Conspiracy doesn't have double pick?
             adjust = 0;
         }
 

@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Nox 3
-Title=Nox
-Difficulty=hard
-Description=Mono Blue Artifacts deck with Mirror Gallery, Tezzeret, Artifice Master, Tezzeret, Cruel Machinist, and Karn, Scion of Urza.
-Deck Type=constructed
-Icon=Nox.jpg
 [main]
 1 Ancestral Recall|LEA
 1 Ancestral Vision|TSP

@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Sarkhan Vol 3
-Title=Sarkhan Vol
-Difficulty=hard
-Description=Mono-red dragons with Sarkhan planeswalkers, mana ramp, and Dragonstorm
-Icon=Sarkhan Vol 3.jpg
-Deck Type=constructed
 [Main]
 1 Balefire Dragon
 4 Castle Embereth

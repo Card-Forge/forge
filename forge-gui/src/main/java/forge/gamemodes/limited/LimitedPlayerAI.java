@@ -6,6 +6,7 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
+import forge.util.MyRandom;
 
 import java.util.Collections;
 import java.util.List;
@@ -140,5 +141,40 @@ public class LimitedPlayerAI extends LimitedPlayer {
         }
 
         return types.containsAll(notedTypes);
+    }
+
+    @Override
+    public boolean handleWhispergearSneak() {
+        // Always choose the next pack I will open
+        // What do I do with this information? Great question. I have no idea.
+        List<PaperCard> cards;
+        if (draft.getRound() == 3) {
+            // Take a peek at the pack you are about to get if its the last round
+            cards = peekAtBoosterPack(this.order, 1);
+        } else {
+            cards = peekAtBoosterPack(this.order, draft.getRound() + 1);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean handleIllusionaryInformant() {
+        // Always choose the next pack I will open
+        // What do I do with this information? Great question. I have no idea.
+        int player;
+        do {
+            player = MyRandom.getRandom().nextInt(draft.getOpposingPlayers().length + 1);
+        } while(player == this.order);
+
+
+        LimitedPlayer peekAt = draft.getPlayer(player);
+        if (peekAt == null) {
+            return false;
+        }
+
+        // Not really sure what the AI does with this information. But its' known now.
+        //peekAt.getLastPick();
+        return true;
     }
 }

@@ -2150,6 +2150,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !game.getDamageDoneThisTurn(true, true, sb.toString(), "Player", null, this, null).isEmpty();
     }
 
+    public final boolean hasFreerunning() {
+        return !game.getDamageDoneThisTurn(true, true, "Card.Assassin+YouCtrl,Card.IsCommander+YouCtrl", "Player", null, this, null).isEmpty();
+    }
+
     public final void setLibrarySearched(final int l) {
         numLibrarySearchedOwn = l;
     }

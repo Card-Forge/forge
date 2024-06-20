@@ -1,7 +1,5 @@
 [metadata]
 Name=kobold_trapmaster
-[Avatar]
-
 [Main]
 4 Goblin Trapfinder|HBG|1
 4 Inferno Trap|DDN|1
@@ -15,12 +13,4 @@ Name=kobold_trapmaster
 4 Springjaw Trap|IKO|1
 4 Taunting Kobold|CLB|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

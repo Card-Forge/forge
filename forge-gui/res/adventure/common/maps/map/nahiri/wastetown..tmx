@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7Ae8y+tmupjJJBeUlVVVVVV1UcHQxwgzA==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlWG1OwzAM7c+Wm3AH/m6MnYZbdeu4Fd3oMWhErT6e7NhpOwHCUrStS+wX5/kj3TdVtf9Ho6ur6q3+eRwWtuv4+d7cH2OpHwSbSMJ4GZ/1d8CKfkg2ZOTsHCZs7TjnNI6P8fe5nrH2ja8jOpIty45l43laM8CzG6wV7MNKbOK7Y8bO0VizU/Th2i14Kb7jfaKdnYJNw42+3cJ/XvwJRuQlx0Ra19VzbFwC+Et8J6KdFc/RJGG8GnPW4sMzRF3d5It+ss2xk34jP3PY1/JPuKKdYTth4hgdYJ3Ms3Bv4cOTojfH7Y72MADuQxPTsSROovtGXvAZRji9BJtwLJK7NP9FsC/lH9qI6Lfiijm9Bf+SLtaBtdXij2Dw8GGOLPWlVtsQH8Z0T3Yw7iUXiX30r8yx6iEPsYW5LVfbUMSOlZOtOsO+zOFjsfjh1Y2l4vHxVM9DaiueHdfQiETrSQRfjscWppb2xP9xPbF0cC3yxq3RbWr2LW7u6Lnmy7V1xIoHS6+Vf27NXOty/e1WGK18IGeZyxdaDlyCi3spFK8/ztndqk/gPIL80fBxL6HdTaw+u9Rvogf7T+yRNL05bnHfgD1taS+DfmMfIAYtP2r3ct4rnmfiA+qJ+M7ShfjxrHP5EcW7c0b8yPXf6qG4H7bk6eFraGfBGCNcxP14seXVBRbNPvMikg9z/ZsVq1HRYub1MeYPzd/aGTO2tv7+bsbz4UWJpSQlcYzc4ndX1h3T4qP2fkmbU5KnPe5bvStisO7IVn9bkqeTHulf8PxyeQf39tL4NZBlyZ1Tcgl/99bk+jncu+Xn3zC8ffy18QkPLlsG
+  </data>
+ </layer>
+ <layer id="7" name="Clutter" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="61" template="../../obj/door_right.tx" x="2.95097" y="319.688">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23A9.tmx"/>
+    <property name="teleportObjectId" value="60"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/treasure.tx" x="464.667" y="619.333"/>
+  <object id="63" template="../../obj/treasure.tx" x="503.333" y="594.667"/>
+  <object id="64" template="../../obj/gold.tx" x="484.667" y="603.667"/>
+  <object id="65" template="../../obj/gold.tx" x="435" y="604.667"/>
+  <object id="66" template="../../obj/enemy.tx" x="410.333" y="558.333">
+   <properties>
+    <property name="enemy" value="Gorgon"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="503.667" y="498.667">
+   <properties>
+    <property name="enemy" value="Gorgon"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="461" y="441.667">
+   <properties>
+    <property name="enemy" value="Snake"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="390.333" y="547.333">
+   <properties>
+    <property name="enemy" value="Gorgon"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="378.333" y="457.333">
+   <properties>
+    <property name="enemy" value="Gargoyle"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="404.333" y="444.667">
+   <properties>
+    <property name="enemy" value="Gargoyle"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="304.667" y="601">
+   <properties>
+    <property name="enemy" value="Gargoyle"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

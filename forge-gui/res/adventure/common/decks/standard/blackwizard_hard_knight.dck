@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Silas's Faithful 3
-Title=Silas Kane, Witch Knight of the Death-Hand
-Difficulty=hard
-Description=Mono-black knight theme deck with reanimation
-Icon=Silas Kane 3.jpg
-Deck Type=constructed
 [Main]
 1 Archetype of Finality
 1 Beacon of Unrest

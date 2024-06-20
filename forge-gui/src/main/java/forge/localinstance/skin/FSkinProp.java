@@ -504,12 +504,15 @@ public enum FSkinProp {
     //COMMANDER
     IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_RINGBEARER (new int[] {410, 822, 80, 80}, PropType.MANAICONS),
+    //ANNIHILATOR
+    IMG_ABILITY_ANNIHILATOR(new int[] {166, 658, 80, 80}, PropType.ABILITY),
     //TOXIC
-    IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
+    IMG_ABILITY_TOXIC      (new int[] {248, 658, 80, 80}, PropType.ABILITY),
     //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_EXALTED        (new int[] {330, 658, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),

@@ -326,8 +326,28 @@ public class CardView extends GameEntityView {
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //update CrackOverlay (currently 16 overlays)
-        set(TrackableProperty.CrackOverlay, c.getDamage() > 0 ? MyRandom.getRandom().nextInt(16) : 0);
+        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
+        int randCrackLevel = 0;
+        if (c.getDamage() > 0) {
+            switch (c.getDamage()) {
+                case 1:
+                case 2:
+                    randCrackLevel = 0;
+                    break;
+                case 3:
+                case 4:
+                    randCrackLevel = 1;
+                    break;
+                case 5:
+                case 6:
+                    randCrackLevel = 2;
+                    break;
+                default:
+                    randCrackLevel = 3;
+                    break;
+            }
+        }
+        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {
@@ -1466,6 +1486,7 @@ public class CardView extends GameEntityView {
         public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
+        public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
         public boolean hasToxic() { return get(TrackableProperty.HasToxic); }
         public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
@@ -1473,6 +1494,7 @@ public class CardView extends GameEntityView {
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
+        public boolean hasExalted() { return get(TrackableProperty.HasExalted); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
@@ -1542,6 +1564,7 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
+            set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state));
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
             set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
@@ -1549,6 +1572,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
                     "you choose among defending player and/or any number of creatures they control."));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
+            set(TrackableProperty.HasExalted, c.hasKeyword(Keyword.EXALTED, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
             set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));

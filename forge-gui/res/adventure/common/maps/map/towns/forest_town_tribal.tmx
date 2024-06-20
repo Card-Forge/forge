@@ -42,7 +42,7 @@
   <object id="42" template="../../obj/shop.tx" x="304" y="114">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
@@ -50,7 +50,7 @@
   <object id="43" template="../../obj/shop.tx" x="352" y="162">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
@@ -58,7 +58,7 @@
   <object id="44" template="../../obj/shop.tx" x="177" y="81">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
@@ -66,7 +66,7 @@
   <object id="45" template="../../obj/shop.tx" x="240" y="129">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
@@ -74,7 +74,7 @@
   <object id="46" template="../../obj/shop.tx" x="368" y="226">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>
@@ -103,7 +103,7 @@
   <object id="54" template="../../obj/shop.tx" x="208" y="50">
    <properties>
     <property name="commonShopList" value="Elf,Wolf,Druid,Squirrel,Sliver2Green,Wolf4Green"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4Green,Hydra"/>
     <property name="rareShopList" value="Simic,Golgari,Gruul,Selesnya,Creature6Green,Multicolor,Land4Green,PhyrexianGreen"/>
     <property name="uncommonShopList" value="Creature2Green,Creature,Green"/>
    </properties>

@@ -1,0 +1,7 @@
+Name:Perilous Landscape
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Island+Basic,Land.Mountain+Basic,Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Island, Mountain, or Plains card, put it onto the battlefield tapped, then shuffle.
+K:Cycling:U R W
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Perilous Landscape: Search your library for a basic Island, Mountain, or Plains card, put it onto the battlefield tapped, then shuffle.\nCycling {U}{R}{W} ({U}{R}{W}, Discard this card: Draw a card.)

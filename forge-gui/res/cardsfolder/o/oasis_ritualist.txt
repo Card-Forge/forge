@@ -1,6 +1,6 @@
 Name:Oasis Ritualist
 ManaCost:3 G
-Types:Creature Naga Druid
+Types:Creature Snake Druid
 PT:2/4
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ Mana | Cost$ T Exert<1/CARDNAME> | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color. (An exerted creature won't untap during your next untap step.)

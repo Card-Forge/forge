@@ -1,6 +1,6 @@
 Name:Omarthis, Ghostfire Initiate
 ManaCost:X X
-Types:Legendary Creature Spirit Naga
+Types:Legendary Creature Spirit Snake
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid

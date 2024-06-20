@@ -1,0 +1,8 @@
+Name:Malevolent Rumble
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Dig | DigNum$ 4 | Reveal$ True | ChangeValid$ Permanent | DestinationZone2$ Graveyard | Optional$ True | SubAbility$ DBToken | SpellDescription$ Reveal the top four cards of your library. You may put a permanent card from among them into your hand. Put the rest into your graveyard. Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+DeckHas:Type$Eldrazi
+DeckHints:Ability$Graveyard|Mana.Colorless|Token
+Oracle:Reveal the top four cards of your library. You may put a permanent card from among them into your hand. Put the rest into your graveyard. Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."

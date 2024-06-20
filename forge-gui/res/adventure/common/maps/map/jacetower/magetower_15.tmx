@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybx8nAMG8Uj+JRPIpH8SgexSMCAwBydkzC
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzV1G0OgjAMBuD9H5wA5GB6FsRj8eXdHCGLr0s73k5DYpOGBCgPha1j5dx4QrZJMjW32rm50vNa/86N1zdzCcdcTIRt6ZcxWZt1U7NTvvHDczbjSqbW90TajHshTc1uCvuNbkOYaGPdt64l/t1N/1sucB2Uus+Qg/+0h4yPZh/uWwvdVrC19SWZ0nMtcxJtdHBuMKZ1Tko27u0YR6bVRfvu94xu79/njswSN63BvWJ9f8wX9L/jXg==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAVPOYbGHv/D5C99ADEhim1wx5bmD7iIU7dKKAMjOajUTBYAQCaAAjn
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="207.632" y="272.303"/>
+  <object id="49" template="../../obj/entry_down.tx" x="208.488" y="144.557">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_7B.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

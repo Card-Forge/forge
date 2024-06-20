@@ -1,6 +1,6 @@
 Name:Riveteers Provocateur
 ManaCost:B R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:3/1
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.

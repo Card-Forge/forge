@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=The Wanderer's Entourage 1
-Title=The Wanderer
-Difficulty=easy
-Description=Mono-white counters and proliferate theme deck with Wanderer planeswalkers
-Icon=The Wanderer 1.jpg
-Deck Type=constructed
 [Main]
 3 Armored Ascension
 3 Blighted Steppe

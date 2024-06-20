@@ -27,7 +27,7 @@ public class RewardSprite extends CharacterSprite {
         if (data != null) {
             rewards = JSONStringLoader.parse(RewardData[].class, data, default_reward);
         } else { //Shouldn't happen, but make sure it doesn't fly by.
-            System.err.printf("Reward data is null. Using a default reward.");
+            System.err.print("Reward data is null. Using a default reward.");
             rewards = JSONStringLoader.parse(RewardData[].class, default_reward, default_reward);
         }
     }

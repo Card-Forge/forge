@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -99,7 +98,6 @@ public class SaveLoadScene extends UIScene {
         ui.onButtonPress("return", SaveLoadScene.this::back);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
-        difficulty.getStyle().fontColor = Color.GOLD;
         difficulty.setX(scrollPane.getWidth() - difficulty.getWidth() + 5);
         difficulty.setY(scrollPane.getTop() - difficulty.getHeight() - 5);
     }
@@ -196,14 +194,19 @@ public class SaveLoadScene extends UIScene {
         return true;
     }
 
+    boolean loaded = false;
+
     public void loadSave() {
+        if (loaded)
+            return;
+        loaded = true;
         switch (mode) {
             case Save:
                 if (TileMapScene.instance().currentMap().isInMap()) {
                     //Access to screen should be disabled, but stop the process just in case.
                     //Saving needs to be disabled inside maps until we can capture and load exact map state
                     //Otherwise location based events for quests can be skipped by saving and then loading outside the map
-                    Dialog noSave = createGenericDialog("", "!!GAME NOT SAVED!!\nManual saving is only available on the world map","OK",null, null, null);
+                    Dialog noSave = createGenericDialog("", Forge.getLocalizer().getMessage("lblGameNotSaved"), Forge.getLocalizer().getMessage("lblOK"),null, null, null);
                     showDialog(noSave);
                     return;
                 }
@@ -226,17 +229,19 @@ public class SaveLoadScene extends UIScene {
                     showDialog(saveDialog);
                     stage.setKeyboardFocus(textInput);
                 }
+                loaded = false;
                 break;
             case Load:
                 try {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        loaded = false;
                         if (WorldSave.load(currentSlot)) {
                             SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {
                             Forge.clearTransitionScreen();
                         }
-                    }, null, false, true, "Loading World..."));
+                    }, null, false, true, Forge.getLocalizer().getMessage("lblLoadingWorld")));
                 } catch (Exception e) {
                     Forge.clearTransitionScreen();
                 }
@@ -244,6 +249,7 @@ public class SaveLoadScene extends UIScene {
             case NewGamePlus:
                 try {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        loaded = false;
                         if (WorldSave.load(currentSlot)) {
                             WorldSave.getCurrentSave().clearChanges();
                             WorldSave.getCurrentSave().getWorld().generateNew(0);
@@ -261,8 +267,9 @@ public class SaveLoadScene extends UIScene {
                         } else {
                             Forge.clearTransitionScreen();
                         }
-                    }, null, false, true, "Generating World..."));
+                    }, null, false, true, Forge.getLocalizer().getMessage("lblGeneratingWorld")));
                 } catch (Exception e) {
+                    loaded = false;
                     Forge.clearTransitionScreen();
                 }
                 break;

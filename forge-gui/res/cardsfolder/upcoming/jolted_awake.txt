@@ -1,0 +1,9 @@
+Name:Jolted Awake
+ManaCost:W
+Types:Sorcery
+A:SP$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | ValidTgts$ Artifact.YouOwn,Creature.YouOwn | TgtPrompt$ Select up to one target artifact or creature from your graveyard | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | SubAbility$ DBChange | SpellDescription$ Choose up to one target artifact or creature card in your graveyard. You get {E}{E} (two energy counters). Then you may pay an amount of {E} equal to that card's mana value. If you do, return it from your graveyard to the battlefield.
+SVar:DBChange:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Battlefield | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True
+SVar:X:Targeted$CardManaCost
+K:Cycling:2
+DeckHas:Ability$Discard|Graveyard
+Oracle:Choose up to one target artifact or creature card in your graveyard. You get {E}{E} (two energy counters). Then you may pay an amount of {E} equal to that card's mana value. If you do, return it from your graveyard to the battlefield.\nCycling {2} ({2}, Discard this card: Draw a card.)

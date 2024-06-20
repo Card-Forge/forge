@@ -1,6 +1,6 @@
 Name:Pyrotechnic Performer
 ManaCost:1 R
-Types:Creature Viashino Assassin
+Types:Creature Lizard Assassin
 PT:3/2
 K:Disguise:R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control is turned face up, that creature deals damage equal to its power to each opponent.

@@ -1,0 +1,7 @@
+Name:Whispergear Sneak
+ManaCost:1
+Types:Artifact Creature Construct
+PT:1/1
+Draft:Draft CARDNAME face up.
+Draft:During the draft, you may turn CARDNAME face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.
+Oracle:Draft Whispergear Sneak face up.\nDuring the draft, you may turn Whispergear Sneak face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.

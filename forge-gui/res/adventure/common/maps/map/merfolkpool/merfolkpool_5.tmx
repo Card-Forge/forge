@@ -39,7 +39,7 @@
   </object>
   <object id="56" template="../../obj/enemy.tx" x="418.842" y="127.051">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="70,69,68"/>
    </properties>
@@ -92,9 +92,10 @@
   <object id="68" template="../../obj/waypoint.tx" x="434.19" y="118.146"/>
   <object id="69" template="../../obj/waypoint.tx" x="374.508" y="90.3398"/>
   <object id="70" template="../../obj/waypoint.tx" x="456.571" y="84.236"/>
-  <object id="71" template="../../obj/enemy.tx" x="225.981" y="121.537">
+  <object id="71" template="../../obj/enemy.tx" x="218.305" y="132.653">
    <properties>
-    <property name="enemy" value="Merfolk warrior"/>
+    <property name="enemy" value="Cephalid"/>
+    <property name="speedModifier" type="float" value="15"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
