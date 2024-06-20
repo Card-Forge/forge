@@ -41,6 +41,7 @@ public class LimitedPlayer {
     private static final int LeovoldsOperativeExtraDraft = 1 << 13;
     private static final int LeovoldsOperativeSkipNext = 1 << 14;
     private static final int SpyNextCardDrafted = 1 << 15;
+    private static final int CanalDredgerLastPick = 1 << 16;
 
     private int playerFlags = 0;
 
@@ -295,8 +296,6 @@ public class LimitedPlayer {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
                     playerFlags |= SpyNextCardDrafted;
                 } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
-                    // Note who passed it to you.
-                    // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
                     addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
@@ -337,6 +336,8 @@ public class LimitedPlayer {
                 playerFlags |= LeovoldsOperativeExtraDraft;
             } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
+            } else if (Iterables.contains(draftActions, "Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.")) {
+                playerFlags |= CanalDredgerLastPick;
             }
         }
 
@@ -354,7 +355,12 @@ public class LimitedPlayer {
     }
 
     public DraftPack nextChoice() {
-        return packQueue.peek();
+        DraftPack pack = packQueue.peek();
+        if (pack != null) {
+            adjustPackNumber(pack);
+        }
+
+        return pack;
     }
 
     public void newPack() {
@@ -363,9 +369,9 @@ public class LimitedPlayer {
         packQueue.add(unopenedPacks.poll());
         playerFlags &= ~AgentAcquisitionsSkipDraftRound;
     }
-    public void adjustPackNumber(int adjust, int numPacks) {
-        // I shouldn't need this since DraftPack has this info
-        currentPack = (currentPack + adjust + numPacks) % numPacks;
+
+    public void adjustPackNumber(DraftPack pack) {
+        currentPack = pack.getId();
     }
 
     public DraftPack passPack() {
@@ -384,6 +390,10 @@ public class LimitedPlayer {
         }
 
         return skipping;
+    }
+
+    public boolean hasCanalDredger() {
+        return (playerFlags & CanalDredgerLastPick) != CanalDredgerLastPick;
     }
 
     public void receiveUnopenedPack(DraftPack pack) {
