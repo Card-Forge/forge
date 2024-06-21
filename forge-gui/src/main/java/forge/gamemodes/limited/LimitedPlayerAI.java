@@ -40,16 +40,19 @@ public class LimitedPlayerAI extends LimitedPlayer {
             System.out.println("Player[" + order + "] pack: " + chooseFrom);
         }
 
-        // TODO Archdemon of Paliano random draft while active
+        PaperCard bestPick;
+        if (hasArchdemonCurse()) {
+            bestPick = pickFromArchdemonCurse(chooseFrom);
+        } else {
+            final ColorSet chosenColors = deckCols.getChosenColors();
+            final boolean canAddMoreColors = deckCols.canChoseMoreColors();
 
-        final ColorSet chosenColors = deckCols.getChosenColors();
-        final boolean canAddMoreColors = deckCols.canChoseMoreColors();
+            List<PaperCard> rankedCards = rankCardsInPack(chooseFrom, pool.toFlatList(), chosenColors, canAddMoreColors);
+            bestPick = rankedCards.get(0);
 
-        List<PaperCard> rankedCards = rankCardsInPack(chooseFrom, pool.toFlatList(), chosenColors, canAddMoreColors);
-        PaperCard bestPick = rankedCards.get(0);
-
-        if (canAddMoreColors) {
-            deckCols.addColorsOf(bestPick);
+            if (canAddMoreColors) {
+                deckCols.addColorsOf(bestPick);
+            }
         }
 
         if (ForgePreferences.DEV_MODE) {

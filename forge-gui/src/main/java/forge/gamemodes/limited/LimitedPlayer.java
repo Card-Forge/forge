@@ -27,6 +27,8 @@ public class LimitedPlayer {
     protected Queue<DraftPack> unopenedPacks;
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
 
+    protected List<Integer> archdemonFavors;
+
     private static final int AgentAcquisitionsCanDraftAll = 1;
     private static final int AgentAcquisitionsIsDraftingAll = 1 << 1;
     private static final int AgentAcquisitionsSkipDraftRound = 1 << 2;
@@ -44,6 +46,7 @@ public class LimitedPlayer {
     private static final int LeovoldsOperativeSkipNext = 1 << 14;
     private static final int SpyNextCardDrafted = 1 << 15;
     private static final int CanalDredgerLastPick = 1 << 16;
+    private static final int ArchdemonOfPalianoCurse = 1 << 17;
 
     private int playerFlags = 0;
 
@@ -60,6 +63,7 @@ public class LimitedPlayer {
 
         packQueue = new LinkedList<>();
         unopenedPacks = new LinkedList<>();
+        archdemonFavors = new ArrayList<>();
         this.draft = draft;
     }
 
@@ -90,8 +94,6 @@ public class LimitedPlayer {
 
     public PaperCard chooseCard() {
         // A non-AI LimitedPlayer chooses cards via the UI instead of this function
-        // TODO Archdemon of Paliano random draft while active
-
         return null;
     }
 
@@ -342,6 +344,9 @@ public class LimitedPlayer {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
             } else if (Iterables.contains(draftActions, "Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.")) {
                 playerFlags |= CanalDredgerLastPick;
+            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
+                playerFlags |= ArchdemonOfPalianoCurse;
+                archdemonFavors.add(3);
             }
         }
 
@@ -680,17 +685,41 @@ public class LimitedPlayer {
         pack.resetAwaitingGuess();
     }
 
+    public boolean hasArchdemonCurse() {
+        return (playerFlags & ArchdemonOfPalianoCurse) == ArchdemonOfPalianoCurse;
+    }
+
+    public void reduceArchdemonOfPalianoCurse() {
+        if (hasArchdemonCurse()) {
+            archdemonFavors.replaceAll(integer -> integer - 1);
+            archdemonFavors.removeIf(integer -> integer <= 0);
+            if (archdemonFavors.isEmpty()) {
+                playerFlags &= ~ArchdemonOfPalianoCurse;
+            }
+        }
+    }
+
+    public PaperCard pickFromArchdemonCurse(DraftPack chooseFrom) {
+        Collections.shuffle(chooseFrom);
+        reduceArchdemonOfPalianoCurse();
+        return chooseFrom.get(0);
+    }
+
     public void addSingleBoosterPack() {
         // if this is just a normal draft, allow picking a pack from any set
         // If this is adventure or quest or whatever then we should limit it to something
         List<CardEdition> possibleEditions = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getEditions(), CardEdition.Predicates.CAN_MAKE_BOOSTER));
         CardEdition edition = chooseEdition(possibleEditions);
+        if (edition == null) {
+            addLog(name() + " chose not to add a booster pack to the draft.");
+            return;
+        }
 
         packQueue.add(draft.addBooster(edition));
         addLog(name() + " added " + edition.getName() + " to be drafted this round");
     }
 
     protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
-        return SGuiChoose.one("Choose a booster pack to add to the draft", possibleEditions);
+        return SGuiChoose.oneOrNone("Choose a booster pack to add to the draft", possibleEditions);
     }
 }

@@ -50,7 +50,7 @@ import java.util.*;
  */
 public class BoosterDraft implements IBoosterDraft {
 
-    private static int nextId = 0;
+    private int nextId = 0;
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();

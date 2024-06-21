@@ -122,6 +122,10 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             return;
         }
 
+        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+            card = boosterDraft.getHumanPlayer().pickFromArchdemonCurse(boosterDraft.getHumanPlayer().nextChoice());
+        }
+
         // Verify if card is in the activate pack?
         this.getDeckManager().addItem(card, 1);
 
@@ -178,8 +182,24 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
         this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
-        this.getCatalogManager().setPool(list);
+
+        int count = list.countAll();
+
+        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+            // Only show facedown cards with no information
+            this.getCatalogManager().setPool(generateFakePaperCards(count));
+        } else {
+            this.getCatalogManager().setPool(list);
+        }
     } // showChoices()
+
+    private ItemPool<PaperCard> generateFakePaperCards(int count) {
+        ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
+        for (int i = 0; i < count; i++) {
+            pool.add(PaperCard.FAKE_CARD);
+        }
+        return pool;
+    }
 
     /**
      * <p>

@@ -1,8 +1,10 @@
 package forge;
 
+import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
+import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
@@ -77,6 +79,11 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public boolean isRoundOver() {
         return hasNextChoice();
+    }
+
+    @Override
+    public DraftPack addBooster(CardEdition edition) {
+        return null;
     }
 
     public List<Card> getChosenCards() {

@@ -1,0 +1,8 @@
+Name:Archdemon of Paliano
+ManaCost:2 B B
+Types:Creature Demon
+PT:5/4
+Draft:Draft CARDNAME face up.
+Draft:As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)
+K:Flying
+Oracle:Draft Archdemon of Paliano face up.\n\nAs long as Archdemon of Paliano is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn Archdemon of Paliano face down. (You may look at cards as you draft them.)\nFlying
