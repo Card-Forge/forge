@@ -1,6 +1,6 @@
 Name:Llawan, Cephalid Empress
 ManaCost:3 U
-Types:Legendary Creature Cephalid Noble
+Types:Legendary Creature Octopus Noble
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return all blue creatures your opponents control to their owners' hands.
 SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.Blue+OppCtrl | Origin$ Battlefield | Destination$ Hand

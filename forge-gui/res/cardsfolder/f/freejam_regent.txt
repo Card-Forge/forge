@@ -1,6 +1,6 @@
 Name:Freejam Regent
 ManaCost:4 R R
-Types:Creature Dragon
+Types:Creature Cat Dragon
 PT:4/4
 K:Improvise
 K:Flying

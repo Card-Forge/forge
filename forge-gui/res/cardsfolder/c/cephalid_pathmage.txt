@@ -1,6 +1,6 @@
 Name:Cephalid Pathmage
 ManaCost:2 U
-Types:Creature Cephalid Wizard
+Types:Creature Octopus Wizard
 PT:1/2
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 A:AB$ Effect | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ STUnblockable | SpellDescription$ Target creature can't be blocked this turn.

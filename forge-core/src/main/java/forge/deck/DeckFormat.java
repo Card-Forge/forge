@@ -25,6 +25,7 @@ import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.deck.generation.DeckGenPool;
 import forge.deck.generation.DeckGeneratorBase.FilterCMC;
@@ -118,7 +119,7 @@ public enum DeckFormat {
     private final Predicate<CardRules> cardPoolFilter;
     private final Predicate<PaperCard> paperCardPoolFilter;
     private final static String ADVPROCLAMATION = "Advantageous Proclamation";
-    private final static String SOVREALM = "Sovereign's Realm";
+    // private final static String SOVREALM = "Sovereign's Realm";
 
     DeckFormat(Range<Integer> mainRange0, Range<Integer> sideRange0, int maxCardCopies0, Predicate<CardRules> cardPoolFilter0, Predicate<PaperCard> paperCardPoolFilter0) {
         mainRange = mainRange0;
@@ -204,17 +205,19 @@ public enum DeckFormat {
 
         int min = getMainRange().getMinimum();
         int max = getMainRange().getMaximum();
-        boolean noBasicLands = false;
+        // boolean noBasicLands = false;
 
         // Adjust minimum base on number of Advantageous Proclamation or similar cards
         CardPool conspiracies = deck.get(DeckSection.Conspiracy);
         if (conspiracies != null) {
             min -= (5 * conspiracies.countByName(ADVPROCLAMATION, false));
-            noBasicLands = conspiracies.countByName(SOVREALM, false) > 0;
+            // Commented out to remove warnings from the code.
+            // noBasicLands = conspiracies.countByName(SOVREALM, false) > 0;
         }
 
         if (hasCommander()) {
             byte cmdCI = 0;
+            int wildColors = 0;
             if (equals(DeckFormat.Oathbreaker)) { // 1 Oathbreaker and 1 Signature Spell
                 PaperCard oathbreaker = deck.getOathbreaker();
                 if (oathbreaker == null) {
@@ -227,8 +230,7 @@ public enum DeckFormat {
                     return "has too many commanders";
                 }
                 cmdCI = oathbreaker.getRules().getColorIdentity().getColor();
-            }
-            else { // 1 Commander or 2 Partner Commanders
+            } else { // 1 Commander or 2 Partner Commanders
                 final List<PaperCard> commanders = deck.getCommanders();
 
                 if (commanders.isEmpty()) {
@@ -244,6 +246,7 @@ public enum DeckFormat {
                         return "has an illegal commander";
                     }
                     cmdCI |= pc.getRules().getColorIdentity().getColor();
+                    wildColors += pc.getRules().getAddsWildCardColor() ? 1 : 0;
                 }
 
                 // special check for Partner
@@ -272,8 +275,14 @@ public enum DeckFormat {
                         continue;
                     }
                 }
-                if (!cp.getKey().getRules().getColorIdentity().hasNoColorsExcept(cmdCI)) {
-                    erroneousCI.add(cp.getKey());
+                ColorSet missingColors = cp.getKey().getRules().getColorIdentity().getMissingColors(cmdCI);
+                if (missingColors.countColors() > 0) {
+                    if (missingColors.countColors() <= wildColors) {
+                        wildColors -= missingColors.countColors();
+                        cmdCI |= missingColors.getColor();
+                    } else {
+                        erroneousCI.add(cp.getKey());
+                    }
                 }
             }
             if (deck.has(DeckSection.Sideboard)) {

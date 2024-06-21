@@ -59,7 +59,6 @@ Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
 Centaur:Centaurs
-Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
 Clamfolk:Clamfolk

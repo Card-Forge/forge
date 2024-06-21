@@ -29,7 +29,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -38,7 +37,7 @@ import java.io.Serializable;
  *
  * @author Forge
  */
-public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard, Serializable {
+public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard {
     private static final long serialVersionUID = 2942081982620691205L;
 
     // Reference to rules
