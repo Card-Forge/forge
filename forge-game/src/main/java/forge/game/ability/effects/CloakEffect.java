@@ -21,6 +21,9 @@ public class CloakEffect extends ManifestBaseEffect {
         if (rem != null && sa.hasParam("RememberCloaked") && rem.isCloaked()) {
             source.addRemembered(rem);
         }
+        if (sa.hasParam("Tapped")) {
+            c.setTapped(true);
+        }
         return rem;
     }
 }
