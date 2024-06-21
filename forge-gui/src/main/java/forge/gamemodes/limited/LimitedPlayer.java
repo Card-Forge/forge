@@ -3,12 +3,14 @@ package forge.gamemodes.limited;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.card.CardEdition;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -303,6 +305,8 @@ public class LimitedPlayer {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
+                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it’s drafted this draft round.)")) {
+                    addSingleBoosterPack();
                 }
 
                 addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
@@ -340,9 +344,6 @@ public class LimitedPlayer {
                 playerFlags |= CanalDredgerLastPick;
             }
         }
-
-        // TODO Lore Seeker
-        // This adds a pack and MIGHT screw up all of our assumptions about pack passing. Do this last probably
 
         return true;
     }
@@ -679,11 +680,17 @@ public class LimitedPlayer {
         pack.resetAwaitingGuess();
     }
 
+    public void addSingleBoosterPack() {
+        // if this is just a normal draft, allow picking a pack from any set
+        // If this is adventure or quest or whatever then we should limit it to something
+        List<CardEdition> possibleEditions = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getEditions(), CardEdition.Predicates.CAN_MAKE_BOOSTER));
+        CardEdition edition = chooseEdition(possibleEditions);
 
-    /*
-    public void addSingleBoosterPack(boolean random) {
-        // TODO Lore Seeker
-        // Generate booster pack then, insert it "before" the pack we're currently drafting from
+        packQueue.add(draft.addBooster(edition));
+        addLog(name() + " added " + edition.getName() + " to be drafted this round");
     }
-    */
+
+    protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
+        return SGuiChoose.one("Choose a booster pack to add to the draft", possibleEditions);
+    }
 }

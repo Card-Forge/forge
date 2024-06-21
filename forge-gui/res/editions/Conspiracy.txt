@@ -235,7 +235,7 @@ ScryfallCode=CNS
 1 Double Stroke|CNS
 1 Immediate Action|CNS
 1 Iterative Analysis|CNS
-#1 Lore Seeker|CNS
+1 Lore Seeker|CNS
 1 Lurking Automaton|CNS
 1 Muzzio's Preparations|CNS
 1 Paliano, the High City|CNS

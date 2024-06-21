@@ -1,5 +1,6 @@
 package forge.gamemodes.limited;
 
+import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -210,4 +211,9 @@ public class LimitedPlayerAI extends LimitedPlayer {
         return draftedThisRound < 3;
     }
 
+    @Override
+    protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
+        Collections.shuffle(possibleEditions);
+        return possibleEditions.get(0);
+    }
 }

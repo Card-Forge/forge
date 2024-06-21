@@ -31,12 +31,12 @@ import forge.item.PaperCard;
  * @version $Id$
  */
 public interface IBoosterDraft {
-
     int getRound();
     CardPool nextChoice();
     boolean setChoice(PaperCard c);
     boolean hasNextChoice();
     boolean isRoundOver();
+    DraftPack addBooster(CardEdition edition);
     Deck[] getDecks(); // size 7, all the computers decks
     LimitedPlayer[] getOpposingPlayers(); // size 7, all the computers
     LimitedPlayer getHumanPlayer();
@@ -49,6 +49,4 @@ public interface IBoosterDraft {
     IDraftLog getDraftLog();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);
-
-
 }

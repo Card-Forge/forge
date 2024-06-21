@@ -271,6 +271,11 @@ public class BoosterDraft implements IBoosterDraft {
         }
     }
 
+    public DraftPack addBooster(CardEdition edition) {
+        final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(edition.getCode()));
+        return new DraftPack(product.get(), nextId++);
+    }
+
     @Override
     public boolean isPileDraft() {
         return false;
