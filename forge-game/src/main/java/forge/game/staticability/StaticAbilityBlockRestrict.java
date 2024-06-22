@@ -1,40 +1,20 @@
 package forge.game.staticability;
 
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class StaticAbilityBlockRestrict {
     static String MODE = "BlockRestrict";
 
-    static public int globalBlockRestrict(Game game) {
-        int max = Integer.MAX_VALUE;
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
-                        || stAb.hasParam("ValidDefender")) {
-                    continue;
-                }
-                int stMax = AbilityUtils.calculateAmount(stAb.getHostCard(),
-                        stAb.getParamOrDefault("MaxBlockers", "1"), stAb);
-                if (stMax < max) {
-                    max = stMax;
-                }
-            }
-        }
-        return max;
-    }
-    
-
-    static public int blockRestrictNum(GameEntity defender) {
+    static public int blockRestrictNum(Player defender) {
         final Game game = defender.getGame();
         int num = Integer.MAX_VALUE;
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)
-                        || !stAb.hasParam("ValidDefender")) {
+                if (!stAb.checkConditions(MODE)) {
                     continue;
                 }
                 if (blockRestrict(stAb, defender)) {
@@ -50,7 +30,7 @@ public class StaticAbilityBlockRestrict {
         return num;
     }
 
-    static public boolean blockRestrict(StaticAbility stAb, GameEntity defender) {
+    static public boolean blockRestrict(StaticAbility stAb, Player defender) {
         if (!stAb.matchesValidParam("ValidDefender", defender)) {
             return false;
         }

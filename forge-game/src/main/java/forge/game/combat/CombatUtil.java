@@ -460,10 +460,6 @@ public class CombatUtil {
         final Game game = blocker.getGame();
         final int blockers = combat.getAllBlockers().size();
 
-        if (blockers >= StaticAbilityBlockRestrict.globalBlockRestrict(game)) {
-            return false;
-        }
-
         CardCollection allOtherBlockers = combat.getAllBlockers();
         allOtherBlockers.remove(blocker);
         final int blockersFromOnePlayer = CardLists.count(allOtherBlockers, CardPredicates.isController(blocker.getController()));
