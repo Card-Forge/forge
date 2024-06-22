@@ -1,0 +1,6 @@
+Name:Brotherhood Ambushers
+ManaCost:4 B
+Types:Creature Human Assassin
+PT:6/3
+K:Freerunning:3 B
+Oracle:Freerunning {3}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)
