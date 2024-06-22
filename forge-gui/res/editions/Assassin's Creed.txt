@@ -17,6 +17,7 @@ ScryfallCode=ACR
 9 U Tax Collector @Miklós Ligeti
 10 U Templar Knight @Daniel Correia
 11 R What Must Be Done @Syd Mills
+12 U Assassin Gauntlet @Paulius Daščioras
 13 U Ballad of the Black Flag @Miklós Ligeti
 14 U Become Anonymous @Alice Xia Zhang
 15 R Crystal Skull, Isu Spyglass @Thanh Tuấn
@@ -30,13 +31,17 @@ ScryfallCode=ACR
 24 R Desmond Miles @Julia Vasilyeva
 25 M Ezio Auditore da Firenze @Fajareka Setiawan
 26 U Hemlock Vial @Daniel Correia
+27 R Jacob Frye @Lie Setiawan
 28 U Petty Larceny @Fajareka Setiawan
 29 U Phantom Blade @Craig J Spearing
 30 U Restart Sequence @Lie Setiawan
 31 U The Revelations of Ezio @Lixin Yin
 32 U Roshan, Hidden Magister @Marta Nael
+33 U Alexios, Deimos of Kosmos @Bartek Fedyczak
 34 U Hidden Footblade @Néstor Ossandón Leal
+35 U Monastery Raid @Alexandre Honoré
 36 U Origin of the Hidden Ones @Kim Sokol
+37 U Overpowering Attack @Kim Sokol
 38 R The Spear of Leonidas @Narendra Bintara Adi
 39 U The Aesir Escape Valhalla @Allen Morris
 40 R Aveline de Grandpré @Aurore Folny
@@ -46,6 +51,7 @@ ScryfallCode=ACR
 44 U Adéwalé, Breaker of Chains @Justyna Dura
 45 M Altaïr Ibn-La'Ahad @Axel Sauerwald
 46 U Arbaaz Mir @Wangjie Li
+47 U Arno Dorian @Narendra Bintara Adi
 48 R Aya of Alexandria @JB Casacop
 49 R Basim Ibn Ishaq @JB Casacop
 50 R Bayek of Siwa @JB Casacop
@@ -76,6 +82,7 @@ ScryfallCode=ACR
 75 U Smoke Bomb @Borja Pindado
 76 M Staff of Eden, Vault's Key @L J Koh
 77 U Towering Viewpoint @Lixin Yin
+78 M Yggdrasil, Rebirth Engine @Rytis Sabaliauskas
 79 R Abstergo Entertainment @Alexander Gering
 80 U Brotherhood Headquarters @Narendra Bintara Adi
 81 U Path to Exile @Kim Sokol
@@ -92,6 +99,7 @@ ScryfallCode=ACR
 92 U Murder @Lixin Yin
 93 R Royal Assassin @Vilhelmas Banys
 94 U Cathartic Reunion @Syd Mills
+95 R Assassin's Trophy @Erikas Perl
 96 U Mortify @Wangjie Li
 97 U Reconstruct History @Néstor Ossandón Leal
 98 U Terminate @Fajareka Setiawan
@@ -112,16 +120,20 @@ ScryfallCode=ACR
 123 M Staff of Eden, Vault's Key @Narendra Bintara Adi
 124 M Sword of Feast and Famine @Bruce Brenneise
 125 M Sword of Light and Shadow @Bruce Brenneise
+126 M Yggdrasil, Rebirth Engine @Josu Solano
 127 R Layla Hassan @Luisa J. Preissler
 128 R Senu, Keen-Eyed Protector @Andreia Ugrai
 129 R Evie Frye @Bastien L. Deharme
 130 R Desmond Miles @Alex Negrea
 131 M Ezio Auditore da Firenze @Luisa J. Preissler
+132 R Jacob Frye @Bastien L. Deharme
 133 U Roshan, Hidden Magister @Astri Lohne
+134 U Alexios, Deimos of Kosmos @Jessie Lam
 135 R Aveline de Grandpré @Luisa J. Preissler
 136 U Adéwalé, Breaker of Chains @Miguel Mercado
 137 M Altaïr Ibn-La'Ahad @Alex Negrea
 138 U Arbaaz Mir @Bastien L. Deharme
+139 U Arno Dorian @Andreia Ugrai
 140 R Aya of Alexandria @Chase Stone
 141 R Basim Ibn Ishaq @Astri Lohne
 142 R Bayek of Siwa @Miguel Mercado
@@ -140,6 +152,7 @@ ScryfallCode=ACR
 155 R Caduceus, Staff of Hermes @Evan Shipard
 156 R Rest in Peace @Rimas Valeikis
 157 R What Must Be Done @Syd Mills
+158 R Crystal Skull, Isu Spyglass @Thanh Tuấn
 159 R Desynchronization @Lie Setiawan
 160 M Temporal Trespass @Borja Pindado
 161 R Black Market Connections @Filipe Pagliuso
@@ -150,6 +163,7 @@ ScryfallCode=ACR
 166 R Assassin's Trophy @Erikas Perl
 167 R Jackdaw @Evan Shipard
 168 R The Animus @Néstor Ossandón Leal
+169 R Excalibur, Sword of Eden @Thanh Tuấn
 170 R Mjölnir, Storm Hammer @L J Koh
 171 R Abstergo Entertainment @Alexander Gering
 172 M The Capitoline Triad @Syd Mills
@@ -160,9 +174,14 @@ ScryfallCode=ACR
 177 R Layla Hassan @Michael MacRae
 178 U Path to Exile @Kim Sokol
 179 U Reconnaissance @Mandy Jurgens
+180 R Rest in Peace @Rimas Valeikis
 181 R Senu, Keen-Eyed Protector @Michael MacRae
+182 U Tax Collector @Miklós Ligeti
 183 U Templar Knight @Daniel Correia
+184 R What Must Be Done @Syd Mills
+185 U Assassin Gauntlet @Paulius Daščioras
 186 U Become Anonymous @Alice Xia Zhang
+187 U Coastal Piracy @Wei Guan
 189 R Desynchronization @Lie Setiawan
 190 U Eagle Vision @Kim Sokol
 191 U Escape Detection @Justyna Dura
@@ -170,32 +189,45 @@ ScryfallCode=ACR
 193 M Leonardo da Vinci @Wangjie Li
 195 U Propaganda @Erikas Perl
 196 M Temporal Trespass @Borja Pindado
+197 U Assassin Initiate @Mandy Jurgens
+198 R Black Market Connections @Filipe Pagliuso
 200 R Conspiracy @Allen Morris
 201 R Cover of Darkness @Paulius Daščioras
 202 R Desmond Miles @Julia Vasilyeva
 203 M Ezio Auditore da Firenze @Fajareka Setiawan
 205 U Go for the Throat @Torgeir Fjereide
 206 U Hemlock Vial @Daniel Correia
+207 R Jacob Frye @Lie Setiawan
 208 U Murder @Lixin Yin
 209 U Petty Larceny @Fajareka Setiawan
 210 U Phantom Blade @Craig J Spearing
 211 U Restart Sequence @Lie Setiawan
 212 U Roshan, Hidden Magister @Marta Nael
 213 R Royal Assassin @Vilhelmas Banys
+214 U Alexios, Deimos of Kosmos @Bartek Fedyczak
+215 U Cathartic Reunion @Syd Mills
 216 U Hidden Footblade @Néstor Ossandón Leal
+217 U Monastery Raid @Alexandre Honoré
+218 U Overpowering Attack @Kim Sokol
 219 R The Spear of Leonidas @Narendra Bintara Adi
 220 R Aveline de Grandpré @Aurore Folny
 221 U Hunter's Bow @Miklós Ligeti
+222 U Palazzo Archers @Miklós Ligeti
 223 U Viewpoint Synchronization @Daniel Correia
 224 U Adéwalé, Breaker of Chains @Justyna Dura
 225 M Altaïr Ibn-La'Ahad @Axel Sauerwald
+226 U Arbaaz Mir @Wangjie Li
+227 U Arno Dorian @Narendra Bintara Adi
 228 R Assassin's Trophy @Erikas Perl
+229 R Aya of Alexandria @JB Casacop
+230 R Basim Ibn Ishaq @JB Casacop
 231 R Bayek of Siwa @JB Casacop
 232 U Bleeding Effect @Néstor Ossandón Leal
 233 M Cleopatra, Exiled Pharaoh @Mandy Jurgens
 234 M Edward Kenway @Borja Pindado
 235 M Eivor, Wolf-Kissed @Justyna Dura
 236 U Ezio, Brash Novice @Elizabeth Peiró
+237 R Havi, the All-Father @Daniel Correia
 238 R Haytham Kenway @Vilhelmas Banys
 239 R Jackdaw @Evan Shipard
 240 M Kassandra, Eagle Bearer @Anna Steinbauer
@@ -203,7 +235,10 @@ ScryfallCode=ACR
 242 R Mary Read and Anne Bonny @Wangjie Li
 243 U Mortify @Wangjie Li
 244 R Ratonhnhaké:ton @Greg Staples
+245 U Reconstruct History @Néstor Ossandón Leal
+246 U Shao Jun @Stephen Stark
 247 R Shaun & Rebecca, Agents @Gintas Galvanauskas
+248 U Shay Cormac @Axel Sauerwald
 249 R Sigurd, Jarl of Ravensthorpe @Alexander Gering
 250 R Sokrates, Athenian Teacher @Alice Xia Zhang
 251 U Terminate @Fajareka Setiawan
@@ -211,11 +246,15 @@ ScryfallCode=ACR
 253 R The Animus @Néstor Ossandón Leal
 254 M Apple of Eden, Isu Relic @L J Koh
 255 U Brotherhood Regalia @Xabi Gaztelua
+256 R Excalibur, Sword of Eden @Thanh Tuấn
 257 U Hidden Blade @L J Koh
 258 R Mjölnir, Storm Hammer @L J Koh
+259 U Smoke Bomb @Borja Pindado
+260 M Staff of Eden, Vault's Key @L J Koh
 261 M Sword of Feast and Famine @Thanh Tuấn
 262 M Sword of Light and Shadow @Borja Pindado
 263 U Towering Viewpoint @Lixin Yin
+264 M Yggdrasil, Rebirth Engine @Rytis Sabaliauskas
 265 R Abstergo Entertainment @Alexander Gering
 266 U Brotherhood Headquarters @Narendra Bintara Adi
 267 M Ezio Auditore da Firenze @Luisa J. Preissler
