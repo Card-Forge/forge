@@ -3,7 +3,6 @@ package forge.gamemodes.limited;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
@@ -112,6 +111,22 @@ public class CardRanker {
         }
 
         return cardScores;
+    }
+
+    public static List<PaperCard> getOrderedRawScores(List<PaperCard> cards) {
+        List<Pair<Double, PaperCard>> cardScores = Lists.newArrayList();
+        for(PaperCard card : cards) {
+            cardScores.add(Pair.of(getRawScore(card), card));
+        }
+
+        cardScores.sort(Collections.reverseOrder(new CardRankingComparator()));
+
+        List<PaperCard> rankedCards = new ArrayList<>(cardScores.size());
+        for (Pair<Double, PaperCard> pair : cardScores) {
+            rankedCards.add(pair.getValue());
+        }
+
+        return rankedCards;
     }
 
     public static double getRawScore(PaperCard card) {
