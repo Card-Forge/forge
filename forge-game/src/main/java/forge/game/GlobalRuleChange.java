@@ -22,8 +22,7 @@ package forge.game;
  */
 public enum GlobalRuleChange {
 
-    attackerChoosesBlockers ("The attacking player chooses how each creature blocks each combat."),
-    onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature.");
+    attackerChoosesBlockers ("The attacking player chooses how each creature blocks each combat.");
 
     private final String ruleText;
 
