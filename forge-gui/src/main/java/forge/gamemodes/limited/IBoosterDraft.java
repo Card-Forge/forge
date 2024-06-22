@@ -34,7 +34,7 @@ public interface IBoosterDraft {
 
     int getRound();
     CardPool nextChoice();
-    void setChoice(PaperCard c);
+    boolean setChoice(PaperCard c);
     boolean hasNextChoice();
     boolean isRoundOver();
     Deck[] getDecks(); // size 7, all the computers decks
@@ -49,4 +49,6 @@ public interface IBoosterDraft {
     IDraftLog getDraftLog();
     LimitedPlayer getNeighbor(LimitedPlayer p, boolean left);
     LimitedPlayer getPlayer(int i);
+
+
 }

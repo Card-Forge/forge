@@ -1,0 +1,8 @@
+Name:Achilles Davenport
+ManaCost:2 U B
+Types:Legendary Creature Human Assassin
+PT:3/3
+K:Freerunning:U B
+K:Menace
+S:Mode$ Continuous | Affected$ Assassin.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Assassins you control get +1/+1.
+Oracle:Freerunning {U}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nMenace\nOther Assassins you control get +1/+1.
