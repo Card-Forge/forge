@@ -66,7 +66,7 @@ public class CardRanker {
         return sortAndCreateList(cardScores);
     }
 
-    private static List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
+    public static List<Pair<Double, PaperCard>> getScores(Iterable<PaperCard> cards) {
         List<Pair<Double, PaperCard>> cardScores = new ArrayList<>();
 
         List<PaperCard> cache = Lists.newArrayList(cards);
