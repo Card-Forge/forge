@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.cost.Cost;
@@ -36,6 +35,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
@@ -460,18 +460,14 @@ public class CombatUtil {
         final Game game = blocker.getGame();
         final int blockers = combat.getAllBlockers().size();
 
-        if (blockers > 1 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyTwoBlockers)) {
-            return false;
-        }
-
-        if (blockers > 0 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlocker)) {
+        if (blockers >= StaticAbilityBlockRestrict.globalBlockRestrict(game)) {
             return false;
         }
 
         CardCollection allOtherBlockers = combat.getAllBlockers();
         allOtherBlockers.remove(blocker);
         final int blockersFromOnePlayer = CardLists.count(allOtherBlockers, CardPredicates.isController(blocker.getController()));
-        if (blockersFromOnePlayer > 0 && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlockerPerOpponent)) {
+        if (blockersFromOnePlayer >= StaticAbilityBlockRestrict.blockRestrictNum(blocker.getController())) {
             return false;
         }
 
