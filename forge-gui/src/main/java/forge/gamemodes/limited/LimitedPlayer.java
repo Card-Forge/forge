@@ -28,6 +28,7 @@ public class LimitedPlayer {
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
 
     protected List<Integer> archdemonFavors;
+    protected int dealBrokers = 0;
 
     private static final int AgentAcquisitionsCanDraftAll = 1;
     private static final int AgentAcquisitionsIsDraftingAll = 1 << 1;
@@ -347,6 +348,8 @@ public class LimitedPlayer {
             } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
                 playerFlags |= ArchdemonOfPalianoCurse;
                 archdemonFavors.add(3);
+            } else if (Iterables.contains(draftActions, "Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.")) {
+                dealBrokers++;
             }
         }
 
@@ -689,6 +692,10 @@ public class LimitedPlayer {
         return (playerFlags & ArchdemonOfPalianoCurse) == ArchdemonOfPalianoCurse;
     }
 
+    public boolean hasBrokers() {
+        return dealBrokers > 0;
+    }
+
     public void reduceArchdemonOfPalianoCurse() {
         if (hasArchdemonCurse()) {
             archdemonFavors.replaceAll(integer -> integer - 1);
@@ -721,5 +728,70 @@ public class LimitedPlayer {
 
     protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
         return SGuiChoose.oneOrNone("Choose a booster pack to add to the draft", possibleEditions);
+    }
+
+    public void activateBrokers(List<LimitedPlayer> players) {
+        while(dealBrokers > 0) {
+            dealBrokers--;
+            addLog(name() + " activated Deal Broker.");
+
+            PaperCard exchangeCard = chooseExchangeCard(null);
+            Map<PaperCard, LimitedPlayer> offers = new HashMap<>();
+            for(LimitedPlayer player : players) {
+                if (player == this) {
+                    continue;
+                }
+
+                PaperCard offer = player.chooseExchangeCard(exchangeCard);
+                if (offer == null) {
+                    continue;
+                }
+
+                addLog(player.name() + " offered " + offer.getName() + " to " + name() + " for " + exchangeCard.getName());
+                offers.put(offer, player);
+            }
+
+            PaperCard exchangeOffer = chooseCardToExchange(exchangeCard, offers);
+            if (exchangeOffer == null) {
+                addLog(name() + " chose not to accept any offers.");
+                continue;
+            }
+            exchangeAcceptedOffer(exchangeCard, offers.get(exchangeOffer), exchangeOffer);
+        }
+    }
+
+    protected PaperCard chooseExchangeCard(PaperCard offer) {
+        // Choose a card in your deck to trade for offer
+        List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+
+        if (offer == null) {
+            return SGuiChoose.oneOrNone("Choose a card to offer for trade: ", deckCards);
+        }
+
+        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getName() + ": ", deckCards);
+    }
+
+    protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
+        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet());
+    }
+
+    protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
+        addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".");
+
+        player.getDeck().removeCardName(offer.getName());
+        player.getDeck().get(DeckSection.Sideboard).add(exchangeCard);
+        deck.removeCardName(exchangeCard.getName());
+        deck.get(DeckSection.Sideboard).add(offer);
+
+        // Exchange noted information
+        player.getDraftNotes().getOrDefault(offer.getName(), Lists.newArrayList()).forEach(note -> {
+            List<String> noteList = noted.computeIfAbsent(offer.getName(), k -> Lists.newArrayList());
+            noteList.add(note);
+        });
+
+        this.getDraftNotes().getOrDefault(exchangeCard.getName(), Lists.newArrayList()).forEach(note -> {
+            List<String> noteList = player.getDraftNotes().computeIfAbsent(exchangeCard.getName(), k -> Lists.newArrayList());
+            noteList.add(note);
+        });
     }
 }

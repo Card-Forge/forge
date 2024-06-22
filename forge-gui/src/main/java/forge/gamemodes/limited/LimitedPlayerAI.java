@@ -1,16 +1,21 @@
 package forge.gamemodes.limited;
 
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static forge.gamemodes.limited.CardRanker.getOrderedRawScores;
@@ -218,5 +223,61 @@ public class LimitedPlayerAI extends LimitedPlayer {
     protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
         Collections.shuffle(possibleEditions);
         return possibleEditions.get(0);
+    }
+
+    @Override
+    protected PaperCard chooseExchangeCard(PaperCard offer) {
+        final ColorSet colors = deckCols.getChosenColors();
+        List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+
+        DeckGeneratorBase.MatchColorIdentity hasColor = new DeckGeneratorBase.MatchColorIdentity(colors);
+        Iterable<PaperCard> colorList = Iterables.filter(deckCards,
+                Predicates.not(Predicates.compose(hasColor, PaperCard.FN_GET_RULES)));
+
+        PaperCard exchangeCard = null;
+
+        if (offer == null) {
+            // Choose the highest rated card outside your colors
+            List<PaperCard> rankedColorList = CardRanker.rankCardsInDeck(colorList);
+            return rankedColorList.get(0);
+        }
+
+        // Choose a card in my deck outside my colors with similar value
+        List<Pair<Double, PaperCard>> rankedColorList = CardRanker.getScores(colorList);
+        double score = CardRanker.getRawScore(offer);
+        double closestScore = Double.POSITIVE_INFINITY;
+
+        for (Pair<Double, PaperCard> pair : rankedColorList) {
+            double diff = Math.abs(pair.getLeft() - score);
+            if (diff < closestScore) {
+                closestScore = diff;
+                exchangeCard = pair.getRight();
+            }
+        }
+
+        return exchangeCard;
+    }
+
+    protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
+        double score = CardRanker.getRawScore(exchangeCard);
+        List<Pair<Double, PaperCard>> rankedColorList = CardRanker.getScores(offers.keySet());
+        final ColorSet colors = deckCols.getChosenColors();
+        for(Pair<Double, PaperCard> pair : rankedColorList) {
+            ColorSet cardColors = pair.getRight().getRules().getColorIdentity();
+            if (!cardColors.hasNoColorsExcept(colors)) {
+                continue;
+            }
+
+            if (score < pair.getLeft()) {
+                return pair.getRight();
+            }
+
+            double threshold = Math.abs(pair.getLeft() - score) / pair.getLeft();
+            if (threshold < 0.1) {
+                return pair.getRight();
+            }
+        }
+
+        return null;
     }
 }

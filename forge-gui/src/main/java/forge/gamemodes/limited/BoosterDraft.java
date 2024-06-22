@@ -499,8 +499,6 @@ public class BoosterDraft implements IBoosterDraft {
         // Loop through players 1-7 to draft their current pack
         for (int i = 1; i < N_PLAYERS; i++) {
             LimitedPlayer pl = this.players.get(i);
-            // TODO Agent of Acquisitions activation to loop the entire pack?
-
             if (pl.shouldSkipThisPick()) {
                 continue;
             }
@@ -556,6 +554,22 @@ public class BoosterDraft implements IBoosterDraft {
         // But returning might be useful for testing or other things?
         return passPack;
     }
+
+    public void postDraftActions() {
+        List<LimitedPlayer> brokers = new ArrayList<>();
+        for (LimitedPlayer pl : this.players) {
+            if (pl.hasBrokers()) {
+                brokers.add(pl);
+            }
+        }
+
+        Collections.shuffle(brokers);
+        for(LimitedPlayer pl : brokers) {
+            pl.activateBrokers(this.players);
+        }
+
+    }
+
 
     private static String choosePackByPack(final List<String> setz, int packs) {
         StringBuilder sb = new StringBuilder();

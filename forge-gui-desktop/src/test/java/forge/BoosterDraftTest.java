@@ -118,4 +118,7 @@ public class BoosterDraftTest implements IBoosterDraft {
     public LimitedPlayer getPlayer(int i) {
         return null;
     }
+
+    @Override
+    public void postDraftActions() {}
 }

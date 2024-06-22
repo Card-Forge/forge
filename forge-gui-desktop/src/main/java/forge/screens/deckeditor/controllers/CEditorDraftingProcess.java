@@ -148,6 +148,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         else {
             // TODO Deal Broker
             // Offer trades before saving
+            boosterDraft.postDraftActions();
 
             this.saveDraft();
         }
