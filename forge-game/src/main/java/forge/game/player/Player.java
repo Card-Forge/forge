@@ -194,6 +194,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
     private Map<Long, Integer> additionalVillainousChoices = Maps.newHashMap();
 
+    private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
+    private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
+
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
 
@@ -904,7 +907,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setCounters(counterName, newValue, null, true);
 
         getGame().addCounterRemovedThisTurn(counterName, this, delta);
-        
+
         /* TODO Run triggers when something cares
         int curCounters = oldValue;
         for (int i = 0; i < delta && curCounters != 0; i++) {
@@ -2301,7 +2304,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
         spellsCastSinceBeginningOfLastTurn.addAll(spells);
     }
-    
+
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
@@ -3815,17 +3818,29 @@ public class Player extends GameEntity implements Comparable<Player> {
         committedCrimeThisTurn = v;
     }
 
-    public void addDeclaresAttackers(long ts) {
-        getGame().addDeclaresAttackers(this, ts);
-    }
-    public void addDeclaresBlockers(long ts) {
-        getGame().addDeclaresBlockers(this, ts);
+    public void addDeclaresAttackers(long ts, Player p) {
+        this.declaresAttackers.put(ts, p);
     }
 
     public void removeDeclaresAttackers(long ts) {
-        getGame().removeDeclaresAttackers(ts);
+        this.declaresAttackers.remove(ts);
     }
+
+    public Player getDeclaresAttackers() {
+        Map.Entry<Long, Player> e = declaresAttackers.lastEntry();
+        return e == null ? null : e.getValue();
+    }
+
+    public void addDeclaresBlockers(long ts, Player p) {
+        this.declaresBlockers.put(ts, p);
+    }
+
     public void removeDeclaresBlockers(long ts) {
-        getGame().removeDeclaresBlockers(ts);
+        this.declaresBlockers.remove(ts);
+    }
+
+    public Player getDeclaresBlockers() {
+        Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
+        return e == null ? null : e.getValue();
     }
 }

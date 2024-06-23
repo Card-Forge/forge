@@ -7,7 +7,7 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
 A:AB$ Effect | Cost$ 3 RW RW | StaticAbilities$ STBlock,DeclareCombatants | SpellDescription$ Creatures your opponents control block this turn if able, and you choose how those creatures block.
 SVar:STBlock:Mode$ MustBlock | ValidCreature$ Creature.OppCtrl | Description$ Creatures your opponents control block this turn if able, and you choose how those creatures block.
-SVar:DeclareCombatants:Mode$ Continuous | Affected$ Player.You | DeclaresBlockers$ True | Description$ You choose how those creatures block.
+SVar:DeclareCombatants:Mode$ Continuous | Affected$ Player.Opponent | DeclaresBlockers$ You | Description$ You choose how those creatures block.
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
 Oracle:Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.\n{3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.

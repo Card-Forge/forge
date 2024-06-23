@@ -109,10 +109,6 @@ public class Game {
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
-    private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
-    private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
-
-
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
@@ -1353,26 +1349,5 @@ public class Game {
         }
         if (!isNeitherDayNorNight())
             fireEvent(new GameEventDayTimeChanged(isDay()));
-    }
-
-    public void addDeclaresAttackers(Player p, long ts) {
-        this.declaresAttackers.put(ts, p);
-    }
-    public void removeDeclaresAttackers(long ts) {
-        this.declaresAttackers.remove(ts);
-    }
-    public Player getDeclaresAttackers() {
-        Map.Entry<Long, Player> e = this.declaresAttackers.lastEntry();
-        return e == null ? null : e.getValue();
-    }
-    public void addDeclaresBlockers(Player p, long ts) {
-        this.declaresBlockers.put(ts, p);
-    }
-    public void removeDeclaresBlockers(long ts) {
-        this.declaresBlockers.remove(ts);
-    }
-    public Player getDeclaresBlockers() {
-        Map.Entry<Long, Player> e = this.declaresBlockers.lastEntry();
-        return e == null ? null : e.getValue();
     }
 }

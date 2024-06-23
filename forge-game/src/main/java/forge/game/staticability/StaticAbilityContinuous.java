@@ -595,10 +595,14 @@ public final class StaticAbilityContinuous {
                 }
 
                 if (params.containsKey("DeclaresAttackers")) {
-                    p.addDeclaresAttackers(se.getTimestamp());
+                    PlayerCollection players = AbilityUtils.getDefinedPlayers(hostCard, params.get("DeclaresAttackers"), stAb);
+                    if (!players.isEmpty())
+                        p.addDeclaresAttackers(se.getTimestamp(), players.getFirst());
                 }
                 if (params.containsKey("DeclaresBlockers")) {
-                    p.addDeclaresBlockers(se.getTimestamp());
+                    PlayerCollection players = AbilityUtils.getDefinedPlayers(hostCard, params.get("DeclaresBlockers"), stAb);
+                    if (!players.isEmpty())
+                        p.addDeclaresBlockers(se.getTimestamp(), players.getFirst());
                 }
             }
         }
