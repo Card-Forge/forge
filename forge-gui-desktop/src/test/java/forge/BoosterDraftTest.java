@@ -58,10 +58,15 @@ public class BoosterDraftTest implements IBoosterDraft {
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
-    public void setChoice(final PaperCard c) {
+    public boolean setChoice(final PaperCard c) {
         System.out.println(c.getName());
+        return false;
     }
 
     @Override
