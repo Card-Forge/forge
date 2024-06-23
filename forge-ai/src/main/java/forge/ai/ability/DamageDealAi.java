@@ -485,7 +485,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        return damageChoosingTargets(ai, saMe, tgt, dmg, false, immediately);
+        return damageChoosingTargets(ai, saMe, tgt, dmg, saMe.isMandatory(), immediately);
     }
 
     /**
