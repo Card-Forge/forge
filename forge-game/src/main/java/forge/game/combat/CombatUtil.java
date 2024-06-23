@@ -457,8 +457,6 @@ public class CombatUtil {
         if (!canBlockMoreCreatures(blocker, combat.getAttackersBlockedBy(blocker))) {
             return false;
         }
-        final Game game = blocker.getGame();
-        final int blockers = combat.getAllBlockers().size();
 
         CardCollection allOtherBlockers = combat.getAllBlockers();
         allOtherBlockers.remove(blocker);
