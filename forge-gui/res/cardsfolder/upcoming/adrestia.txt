@@ -3,8 +3,8 @@ ManaCost:3
 Types:Legendary Artifact Vehicle
 PT:4/3
 K:Islandwalk
-T:Mode$ Attacks | ValidCard$ Card.Self | IsPresent$ Assassin.CrewedThisTurn | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, if an Assassin crewed it this turn, draw a card. CARDNAME becomes an Assassin in addition to its other types until end of turn.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBAnimate
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, if an Assassin crewed it this turn, draw a card. CARDNAME becomes an Assassin in addition to its other types until end of turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Crewed | ConditionPresent$ Assassin | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Assassin
 K:Crew:1
 SVar:HasAttackEffect:TRUE
