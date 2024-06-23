@@ -179,7 +179,7 @@ ScryfallCode=M3C
 191 U Propaganda @Clint Cearley
 192 R Replication Technique @Viko Menezes
 193 R Summary Dismissal @Igor Kieryluk
-194 R Tezzeret's Gambit @Karl Kopinski
+194 U Tezzeret's Gambit @Karl Kopinski
 195 C Treasure Cruise @Cynthia Sheppard
 196 R Ugin's Insight @Tyler Jacobson
 197 M Archon of Cruelty @Andrew Mar
@@ -224,7 +224,7 @@ ScryfallCode=M3C
 236 R Magus of the Candelabra @Jason A. Engle
 237 R Mana Reflection @Chris Seaman
 238 C Poison Dart Frog @Julia Metzger
-239 R Rampaging Baloths @Steve Prescott
+239 M Rampaging Baloths @Steve Prescott
 240 C Rampant Growth @Steven Belledin
 241 R Ramunap Excavator @Mark Behm
 242 R Return of the Wildspeaker @Chris Rallis
@@ -251,7 +251,7 @@ ScryfallCode=M3C
 263 C Grisly Salvage @Dave Kendall
 264 M Grist, the Hunger Tide @Yongjae Choi
 265 C Growth Spiral @Seb McKinnon
-266 M Hydroid Krasis @Jason Felix
+266 R Hydroid Krasis @Jason Felix
 267 R Izoni, Thousand-Eyed @Eric Deschamps
 268 R Kolaghan's Command @Daarken
 269 R Maelstrom Pulse @Anthony Francisco
@@ -282,7 +282,7 @@ ScryfallCode=M3C
 294 M Gonti's Aether Heart @Vincent Proce
 295 U Hedron Archive @Craig J Spearing
 296 U Herald's Horn @Jason Felix
-297 R Idol of Oblivion @Piotr Dura
+297 U Idol of Oblivion @Piotr Dura
 298 U Lightning Greaves @Michael Komarck
 299 R Maskwood Nexus @Jason A. Engle
 300 R Mirage Mirror @Craig J Spearing
@@ -303,7 +303,7 @@ ScryfallCode=M3C
 315 C Wayfarer's Bauble @Darrell Riche
 316 R Adarkar Wastes @Piotr Dura
 317 U Aether Hub @Sam Burley
-318 U Ash Barrens @Jonas De Ro
+318 C Ash Barrens @Jonas De Ro
 319 U Azorius Chancery @John Avon
 320 C Basilisk Gate @Jorge Jacinto
 321 R Battlefield Forge @Thomas Stoop
@@ -324,7 +324,7 @@ ScryfallCode=M3C
 336 C Desert of the Indomitable @James Paick
 337 C Desert of the Mindful @Christine Choi
 338 R Dreamroot Cascade @Sam Burley
-339 U Eldrazi Temple @Jorge Jacinto
+339 R Eldrazi Temple @Jorge Jacinto
 340 C Evolving Wilds @Alayna Danner
 341 R Exotic Orchard @Steven Belledin
 342 R Flooded Grove @Dave Kendall

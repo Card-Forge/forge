@@ -1,0 +1,9 @@
+Name:Caduceus, Staff of Hermes
+ManaCost:2 W
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Lifelink | Description$ Equipped creature has lifelink.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | CheckSVar$ X | SVarCompare$ GE30 | AddPower$ 5 | AddToughness$ 5 | AddKeyword$ Indestructible & Prevent all damage that would be dealt to CARDNAME. | Description$ As long as you have 30 or more life, equipped creature gets +5/+5 and has indestructible and "Prevent all damage that would be dealt to this creature."
+K:Equip:W W
+SVar:X:Count$YourLifeTotal
+DeckHas:Keyword$Lifelink & Ability$LifeGain
+Oracle:Equipped creature has lifelink.\nAs long as you have 30 or more life, equipped creature gets +5/+5 and has indestructible and "Prevent all damage that would be dealt to this creature."\nEquip {W}{W}

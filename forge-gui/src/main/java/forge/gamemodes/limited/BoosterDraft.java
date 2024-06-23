@@ -50,6 +50,7 @@ import java.util.*;
  */
 public class BoosterDraft implements IBoosterDraft {
 
+    private static int nextId = 0;
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
@@ -371,9 +372,11 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
+
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < N_PLAYERS; i++) {
-                this.players.get(i).receiveUnopenedPack(boosterRound.get());
+                DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
+                this.players.get(i).receiveUnopenedPack(pack);
             }
         }
         startRound();
@@ -437,8 +440,10 @@ public class BoosterDraft implements IBoosterDraft {
             adjust = 0;
         }
 
+        // Do any players have a Canal Dredger?
+
         for (int i = 0; i < N_PLAYERS; i++) {
-            List<PaperCard> passingPack = this.players.get(i).passPack();
+            DraftPack passingPack = this.players.get(i).passPack();
 
             if (passingPack == null)
                 continue;
@@ -463,7 +468,17 @@ public class BoosterDraft implements IBoosterDraft {
         for (int i = 1; i < N_PLAYERS; i++) {
             LimitedPlayer pl = this.players.get(i);
             // TODO Agent of Acquisitions activation to loop the entire pack?
-            pl.draftCard(pl.chooseCard());
+
+            if (pl.shouldSkipThisPick()) {
+                continue;
+            }
+
+            // Computer player has an empty pack or is passing the pack
+            Boolean passPack;
+            do {
+                // THe player holding onto the pack to draft an extra card... Do it now.
+                passPack = pl.draftCard(pl.chooseCard());
+            } while (passPack != null && !passPack);
         }
     }
 
@@ -473,6 +488,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public boolean isRoundOver() {
+        // Really should check if all packs are empty, but this is a good enough approximation
         return packsInDraft == 0;
     }
 
@@ -483,10 +499,12 @@ public class BoosterDraft implements IBoosterDraft {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void setChoice(final PaperCard c) {
-        final List<PaperCard> thisBooster = this.localPlayer.nextChoice();
+    public boolean setChoice(final PaperCard c) {
+        final DraftPack thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
@@ -495,11 +513,16 @@ public class BoosterDraft implements IBoosterDraft {
 
         recordDraftPick(thisBooster, c);
 
-        // TODO Agent of Acquisitions activation to loop the entire pack?
-
-        this.localPlayer.draftCard(c);
+        boolean passPack = this.localPlayer.draftCard(c);
+        if (passPack) {
+            // Leovolds Operative and Cogwork Librarian get to draft an extra card.. How do we do that?
+            this.passPacks();
+        }
         this.currentBoosterPick++;
-        this.passPacks();
+
+        // Return whether or not we passed, but that the UI always needs to refresh
+        // But returning might be useful for testing or other things?
+        return passPack;
     }
 
     private static String choosePackByPack(final List<String> setz, int packs) {
