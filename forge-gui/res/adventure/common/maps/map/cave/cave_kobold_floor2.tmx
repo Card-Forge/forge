@@ -32,7 +32,7 @@
  <objectgroup id="4" name="Objects">
   <object id="66" template="../../obj/door_up.tx" x="543" y="638">
    <properties>
-    <property name="teleport" value="maps/map/cave/cave_kobold.tmx"/>
+    <property name="teleport" value="../common/maps/map/cave/cave_kobold.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
