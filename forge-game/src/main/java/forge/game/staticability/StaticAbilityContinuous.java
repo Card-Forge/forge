@@ -593,6 +593,13 @@ public final class StaticAbilityContinuous {
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalVillainousChoices(se.getTimestamp(), add);
                 }
+
+                if (params.containsKey("DeclaresAttackers")) {
+                    p.addDeclaresAttackers(se.getTimestamp());
+                }
+                if (params.containsKey("DeclaresBlockers")) {
+                    p.addDeclaresBlockers(se.getTimestamp());
+                }
             }
         }
 

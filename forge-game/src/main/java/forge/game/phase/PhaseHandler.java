@@ -45,6 +45,8 @@ import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
@@ -83,9 +85,6 @@ public class PhaseHandler implements java.io.Serializable {
     private transient Player pFirstPriority = null;
     private transient Combat combat = null;
     private boolean bRepeatCleanup = false;
-
-    private transient Player playerDeclaresBlockers = null;
-    private transient Player playerDeclaresAttackers = null;
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
@@ -523,9 +522,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private void declareAttackersTurnBasedAction() {
-        final Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost()
-                ? playerTurn
-                : playerDeclaresAttackers;
+        final Player whoDeclares = ObjectUtils.firstNonNull(game.getDeclaresAttackers(), playerTurn);
 
         if (CombatUtil.canAttack(playerTurn)) {
             boolean success = false;
@@ -653,24 +650,14 @@ public class PhaseHandler implements java.io.Serializable {
         do {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
-            Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
+            Player whoDeclaresBlockers = ObjectUtils.firstNonNull(game.getDeclaresBlockers(), p);
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
                     final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(p);
                     repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
-                    boolean declareBlockers = true;
-                    switch (game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams)) {
-                    case NotReplaced:
-                        break;
-                    case Updated:
-                        whoDeclaresBlockers = (Player) repRunParams.get(AbilityKey.Player);
-                        break;
-                    default:
-                        declareBlockers = false;
-                        break;
-                    }
-                    if (declareBlockers) {
+                    ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
+                    if (repres == ReplacementResult.NotReplaced) {
                         // If not replaced, run normal declare blockers
                         whoDeclaresBlockers.getController().declareBlockers(p, combat);
                     }
@@ -1240,14 +1227,6 @@ public class PhaseHandler implements java.io.Serializable {
     // just to avoid exposing variable to outer classes
     public void onStackResolved() {
         givePriorityToPlayer = true;
-    }
-
-    public final void setPlayerDeclaresAttackers(Player player) {
-        playerDeclaresAttackers = player;
-    }
-
-    public final void setPlayerDeclaresBlockers(Player player) {
-        playerDeclaresBlockers = player;
     }
 
     public void endCombat() {

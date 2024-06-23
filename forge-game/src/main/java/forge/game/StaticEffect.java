@@ -198,6 +198,9 @@ public class StaticEffect {
             p.removeAdditionalVote(getTimestamp());
             p.removeAdditionalOptionalVote(getTimestamp());
             p.removeAdditionalVillainousChoices(getTimestamp());
+
+            p.removeDeclaresAttackers(getTimestamp());
+            p.removeDeclaresBlockers(getTimestamp());
         }
 
         // modify the affected card

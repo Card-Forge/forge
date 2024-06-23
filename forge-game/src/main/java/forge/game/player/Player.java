@@ -3814,4 +3814,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
     }
+
+    public void addDeclaresAttackers(long ts) {
+        getGame().addDeclaresAttackers(this, ts);
+    }
+    public void addDeclaresBlockers(long ts) {
+        getGame().addDeclaresBlockers(this, ts);
+    }
+
+    public void removeDeclaresAttackers(long ts) {
+        getGame().removeDeclaresAttackers(ts);
+    }
+    public void removeDeclaresBlockers(long ts) {
+        getGame().removeDeclaresBlockers(ts);
+    }
 }

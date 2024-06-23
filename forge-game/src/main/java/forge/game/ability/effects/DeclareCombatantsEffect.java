@@ -3,8 +3,9 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.GameCommand;
+import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.phase.PhaseHandler;
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -31,6 +32,8 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         final boolean attackers = sa.hasParam("DeclareAttackers");
@@ -39,18 +42,19 @@ public class DeclareCombatantsEffect extends SpellAbilityEffect {
         String until = sa.getParam("Until");
         boolean untilEoT = "EndOfTurn".equals(until);
 
+        long ts = game.getNextTimestamp();
+
         for (Player p : tgtPlayers) { // Obviously the last player will be applied
-            final PhaseHandler ph = p.getGame().getPhaseHandler();
-            if (attackers) ph.setPlayerDeclaresAttackers(p);
-            if (blockers) ph.setPlayerDeclaresBlockers(p);
+            if (attackers) game.addDeclaresAttackers(p, ts);
+            if (blockers) game.addDeclaresBlockers(p, ts);
 
             GameCommand removeOverrides = new GameCommand() {
                 private static final long serialVersionUID = -8064627517852651016L;
 
                 @Override
                 public void run() {
-                    if (attackers) ph.setPlayerDeclaresAttackers(null);
-                    if (blockers) ph.setPlayerDeclaresBlockers(null);
+                    game.removeDeclaresAttackers(ts);
+                    game.removeDeclaresBlockers(ts);
                 }
             };
 
