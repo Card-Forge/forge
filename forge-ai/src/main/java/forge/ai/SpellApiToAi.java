@@ -69,7 +69,6 @@ public enum SpellApiToAi {
             .put(ApiType.DayTime, DayTimeAi.class)
             .put(ApiType.DealDamage, DamageDealAi.class)
             .put(ApiType.Debuff, DebuffAi.class)
-            .put(ApiType.DeclareCombatants, CannotPlayAi.class)
             .put(ApiType.DelayedTrigger, DelayedTriggerAi.class)
             .put(ApiType.Destroy, DestroyAi.class)
             .put(ApiType.DestroyAll, DestroyAllAi.class)
