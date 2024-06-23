@@ -26,6 +26,7 @@ ScryfallCode=ACR
 18 U Escape Detection @Justyna Dura
 19 R Evie Frye @Lie Setiawan
 20 M Leonardo da Vinci @Wangjie Li
+21 U Loyal Inventor @Gintas Galvanauskas
 22 U Assassin Initiate @Mandy Jurgens
 23 U Chain Assassination @Filipe Pagliuso
 24 R Desmond Miles @Julia Vasilyeva
@@ -105,6 +106,16 @@ ScryfallCode=ACR
 98 U Terminate @Fajareka Setiawan
 99 M Sword of Feast and Famine @Thanh Tuấn
 100 M Sword of Light and Shadow @Borja Pindado
+101 L Plains @Bruce Brenneise
+102 L Plains @Borja Pindado
+103 L Island @Alexandre Honoré
+104 L Island @Filipe Pagliuso
+105 L Swamp @Wei Guan
+106 L Swamp @Wangjie Li
+107 L Mountain @Wei Guan
+108 L Mountain @Jeremy Paillotin
+109 L Forest @Daniel Correia
+110 L Forest @Miklós Ligeti
 111 R Sunbaked Canyon @Alexander Gering
 112 R Fiery Islet @Alexander Gering
 113 M Ezio Auditore da Firenze @Alexander Gering
@@ -182,19 +193,23 @@ ScryfallCode=ACR
 185 U Assassin Gauntlet @Paulius Daščioras
 186 U Become Anonymous @Alice Xia Zhang
 187 U Coastal Piracy @Wei Guan
+188 R Crystal Skull, Isu Spyglass @Thanh Tuấn
 189 R Desynchronization @Lie Setiawan
 190 U Eagle Vision @Kim Sokol
 191 U Escape Detection @Justyna Dura
 192 R Evie Frye @Lie Setiawan
 193 M Leonardo da Vinci @Wangjie Li
+194 U Loyal Inventor @Gintas Galvanauskas
 195 U Propaganda @Erikas Perl
 196 M Temporal Trespass @Borja Pindado
 197 U Assassin Initiate @Mandy Jurgens
 198 R Black Market Connections @Filipe Pagliuso
+199 U Chain Assassination @Filipe Pagliuso
 200 R Conspiracy @Allen Morris
 201 R Cover of Darkness @Paulius Daščioras
 202 R Desmond Miles @Julia Vasilyeva
 203 M Ezio Auditore da Firenze @Fajareka Setiawan
+204 U Fatal Push @Lie Setiawan
 205 U Go for the Throat @Torgeir Fjereide
 206 U Hemlock Vial @Daniel Correia
 207 R Jacob Frye @Lie Setiawan
@@ -276,6 +291,7 @@ ScryfallCode=ACR
 283 C Hookblade Veteran @Borja Pindado
 284 C Tranquilize @Thanh Tuấn
 285 U Brotherhood Ambushers @Alexandre Honoré
+286 C Brotherhood Patriarch @Néstor Ossandón Leal
 287 C Merciless Harlequin @Lixin Yin
 288 U Poison-Blade Mentor @Xabi Gaztelua
 289 C Headsplitter @L J Koh
@@ -291,5 +307,9 @@ ScryfallCode=ACR
 299 C Hired Blade @Elizabeth Peiró
 300 U Stone Quarry @Piotr Dura
 301 U Submerged Boneyard @Alexandre Honoré
+302 L Plains @Borja Pindado
+303 L Island @Alexandre Honoré
+304 L Swamp @Wangjie Li
+305 L Mountain @Jeremy Paillotin
 306 R Royal Assassin @Wei Guan
 307 U Hidden Blade @Evyn Fong
