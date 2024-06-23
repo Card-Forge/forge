@@ -654,16 +654,23 @@ public class PhaseHandler implements java.io.Serializable {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
             Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
-            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.attackerChoosesBlockers)) {
-                whoDeclaresBlockers = combat.getAttackingPlayer();
-            }
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
                     final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(p);
                     repRunParams.put(AbilityKey.Player, whoDeclaresBlockers);
-                    ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams);
-                    if (repres == ReplacementResult.NotReplaced) {
+                    boolean declareBlockers = true;
+                    switch (game.getReplacementHandler().run(ReplacementType.DeclareBlocker, repRunParams)) {
+                    case NotReplaced:
+                        break;
+                    case Updated:
+                        whoDeclaresBlockers = (Player) repRunParams.get(AbilityKey.Player);
+                        break;
+                    default:
+                        declareBlockers = false;
+                        break;
+                    }
+                    if (declareBlockers) {
                         // If not replaced, run normal declare blockers
                         whoDeclaresBlockers.getController().declareBlockers(p, combat);
                     }

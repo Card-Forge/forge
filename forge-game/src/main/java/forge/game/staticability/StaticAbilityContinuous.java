@@ -26,7 +26,6 @@ import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
 import forge.game.ability.AbilityUtils;
@@ -141,11 +140,6 @@ public final class StaticAbilityContinuous {
         String mayPlayAltManaCost = null;
         boolean mayPlayGrantZonePermissions = true;
         Integer mayPlayLimit = null;
-
-        //Global rules changes
-        if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
-            effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
-        }
 
         if (layer == StaticAbilityLayer.SETPT || layer == StaticAbilityLayer.CHARACTERISTIC) {
             if (params.containsKey("SetPower")) {
